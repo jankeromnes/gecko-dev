@@ -3412,6 +3412,11 @@ nsEventStateManager::PostHandleEvent(nsPresContext* aPresContext,
 
       WidgetWheelEvent* wheelEvent = aEvent->AsWheelEvent();
       switch (WheelPrefs::GetInstance()->ComputeActionFor(wheelEvent)) {
+        case WheelPrefs::ACTION_HSCROLL: {
+          double deltaX = wheelEvent->deltaX;
+          wheelEvent->deltaX = wheelEvent->deltaY;
+          wheelEvent->deltaY = deltaX;
+        }
         case WheelPrefs::ACTION_SCROLL: {
           // For scrolling of default action, we should honor the mouse wheel
           // transaction.
