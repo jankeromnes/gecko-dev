@@ -657,6 +657,10 @@ let settingsToObserve = {
     prefName: 'nglayout.debug.paint_flashing',
     defaultValue: false
   },
+  'debug.show-touches.enabled': {
+    prefName: 'dom.w3c_touch_events.debug',
+    defaultValue: false
+  },
   'devtools.eventlooplag.threshold': 100,
   'layers.draw-borders': false,
   'layers.draw-tile-borders': false,
