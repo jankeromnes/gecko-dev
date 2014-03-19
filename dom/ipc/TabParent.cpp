@@ -40,6 +40,9 @@
 #include "nsIDOMWindow.h"
 #include "nsIDOMWindowUtils.h"
 #include "nsIInterfaceRequestorUtils.h"
+#include "nsIObserverService.h"
+#include "nsIPrefBranch.h"
+#include "nsIPrefService.h"
 #include "nsIPromptFactory.h"
 #include "nsIURI.h"
 #include "nsIWebBrowserChrome.h"
@@ -75,6 +78,8 @@ using namespace mozilla::jsipc;
 // The flags passed by the webProgress notifications are 16 bits shifted
 // from the ones registered by webProgressListeners.
 #define NOTIFY_FLAG_SHIFT 16
+
+#define DEBUG_TOUCH_EVENTS "dom.w3c_touch_events.debug"
 
 class OpenFileAndSendFDRunnable : public nsRunnable
 {
@@ -199,7 +204,7 @@ TabParent* sEventCapturer;
 
 TabParent *TabParent::mIMETabParent = nullptr;
 
-NS_IMPL_ISUPPORTS(TabParent, nsITabParent, nsIAuthPromptProvider, nsISecureBrowserUI)
+NS_IMPL_ISUPPORTS(TabParent, nsITabParent, nsIAuthPromptProvider, nsISecureBrowserUI, nsIObserver)
 
 TabParent::TabParent(ContentParent* aManager, const TabContext& aContext, uint32_t aChromeFlags)
   : TabContext(aContext)
@@ -225,10 +230,21 @@ TabParent::TabParent(ContentParent* aManager, const TabContext& aContext, uint32
   , mAppPackageFileDescriptorSent(false)
   , mChromeFlags(aChromeFlags)
 {
+  mDebugTouchEvents =
+    Preferences::GetBool(DEBUG_TOUCH_EVENTS, false);
+
+  nsCOMPtr<nsIPrefBranch> prefs = do_GetService(NS_PREFSERVICE_CONTRACTID);
+  if (prefs) {
+     prefs->AddObserver(DEBUG_TOUCH_EVENTS, this, false);
+  }
 }
 
 TabParent::~TabParent()
 {
+  nsCOMPtr<nsIPrefBranch> prefs = do_GetService(NS_PREFSERVICE_CONTRACTID);
+  if (prefs) {
+     prefs->RemoveObserver(DEBUG_TOUCH_EVENTS, this);
+  }
 }
 
 void
@@ -944,7 +960,7 @@ TabParent::TryCapture(const WidgetGUIEvent& aEvent)
   }
 
   SendRealTouchEvent(event);
-  return true;
+  return !mDebugTouchEvents;
 }
 
 bool
@@ -1960,6 +1976,22 @@ TabParent::GetLoadContext()
     mLoadContext = loadContext;
   }
   return loadContext.forget();
+}
+
+nsresult
+TabParent::Observe(nsISupports* aSubject, const char* aTopic, const char16_t* aData)
+{
+  if (!strcmp(aTopic, NS_PREFBRANCH_PREFCHANGE_TOPIC_ID)) {
+    nsCOMPtr<nsIPrefBranch> prefs (do_QueryInterface(aSubject));
+    NS_ASSERTION(prefs, "Bad observer call!");
+
+    NS_ConvertUTF16toUTF8 pref(aData);
+    if (pref.EqualsLiteral(DEBUG_TOUCH_EVENTS)) {
+      return prefs->GetBoolPref(DEBUG_TOUCH_EVENTS, &mDebugTouchEvents);
+    }
+  }
+
+  return NS_OK;
 }
 
 /* Be careful if you call this method while proceding a real touch event. For

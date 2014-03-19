@@ -19,6 +19,7 @@
 #include "nsIXULBrowserWindow.h"
 #include "Units.h"
 #include "js/TypeDecls.h"
+#include "nsIObserver.h"
 
 class nsFrameLoader;
 class nsIContent;
@@ -46,11 +47,12 @@ class ContentParent;
 class Element;
 struct StructuredCloneData;
 
-class TabParent : public PBrowserParent 
-                , public nsITabParent 
+class TabParent : public PBrowserParent
+                , public nsITabParent
                 , public nsIAuthPromptProvider
                 , public nsISecureBrowserUI
                 , public TabContext
+                , public nsIObserver
 {
     typedef mozilla::dom::ClonedMessageData ClonedMessageData;
     typedef mozilla::layout::ScrollingBehavior ScrollingBehavior;
@@ -278,6 +280,7 @@ public:
     NS_DECL_ISUPPORTS
     NS_DECL_NSIAUTHPROMPTPROVIDER
     NS_DECL_NSISECUREBROWSERUI
+    NS_DECL_NSIOBSERVER
 
     static TabParent *GetIMETabParent() { return mIMETabParent; }
     bool HandleQueryContentEvent(mozilla::WidgetQueryContentEvent& aEvent);
@@ -399,6 +402,8 @@ private:
     uint32_t mChromeFlags;
 
     nsCOMPtr<nsILoadContext> mLoadContext;
+
+    bool mDebugTouchEvents;
 };
 
 } // namespace dom
