@@ -39,7 +39,6 @@ Cu.import("resource://gre/modules/reflect.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 let wantLogging = Services.prefs.getBoolPref("devtools.debugger.log");
 
-Cu.import("resource://gre/modules/commonjs/sdk/core/promise.js");
 Cu.import("resource://gre/modules/jsdebugger.jsm");
 addDebuggerToGlobal(this);
 
@@ -535,7 +534,7 @@ var DebuggerServer = {
   },
 
   connectToChild: function(aConnection, aMessageManager, aOnDisconnect) {
-    let deferred = Promise.defer();
+    let deferred = defer();
 
     let mm = aMessageManager;
     mm.loadFrameScript("resource://gre/modules/devtools/server/child.js", false);
