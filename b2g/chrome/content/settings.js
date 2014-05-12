@@ -394,6 +394,16 @@ setUpdateTrackingId();
   });
 })();
 
+// =================== Geolocation  ======================
+SettingsListener.observe('geolocation.spoof', null, function(active) {
+  dump('GEOLOCATION spoof ' + active + '\n');
+  if (active) {
+    Services.obs.notifyObservers(null, 'geolocation-spoof', '{"latitude":37.78937,"longitude":-122.38912}');
+  } else {
+    Services.obs.notifyObservers(null, 'geolocation-unspoof', null);
+  }
+});
+
 // =================== Various simple mapping  ======================
 let settingsToObserve = {
   'app.update.channel': {
