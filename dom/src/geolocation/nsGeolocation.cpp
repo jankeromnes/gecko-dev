@@ -717,6 +717,9 @@ nsresult nsGeolocationService::Init()
     }
   }
 
+  // FIXME Don't care about anything, replace anyway!
+  mProvider = do_CreateInstance("@mozilla.org/geolocation/fake-provider;1");
+
   return NS_OK;
 }
 
@@ -816,6 +819,8 @@ nsGeolocationService::Observe(nsISupports* aSubject,
     Update(nullptr);
     return NS_OK;
   }
+
+  // TODO if "devtools-overwrite", swap mProvider, Update()
 
   return NS_ERROR_FAILURE;
 }
