@@ -671,6 +671,8 @@ nsresult nsGeolocationService::Init()
 
   obs->AddObserver(this, "quit-application", false);
   obs->AddObserver(this, "mozsettings-changed", false);
+  obs->AddObserver(this, "geolocation-spoof", false);
+  obs->AddObserver(this, "geolocation-unspoof", false);
 
 #ifdef MOZ_ENABLE_QT5GEOPOSITION
   mProvider = new QTMLocationProvider();
@@ -813,6 +815,18 @@ nsGeolocationService::Observe(nsISupports* aSubject,
     return NS_OK;
   }
 
+  if (!strcmp("geolocation-spoof", aTopic)) {
+    SpoofCoords(aData);
+    Update(GetCachedPosition().position); // Update locators with spoofed position
+    return NS_OK;
+  }
+
+  if (!strcmp("geolocation-unspoof", aTopic)) {
+    mSpoofedCoords = nullptr;
+    Update(GetCachedPosition().position); // Update locators with real position
+    return NS_OK;
+  }
+
   return NS_ERROR_FAILURE;
 }
 
@@ -820,6 +834,7 @@ NS_IMETHODIMP
 nsGeolocationService::Update(nsIDOMGeoPosition *aSomewhere)
 {
   SetCachedPosition(aSomewhere);
+  aSomewhere = GetCachedPosition().position; // allow spoofing
 
   for (uint32_t i = 0; i< mGeolocators.Length(); i++) {
     mGeolocators[i]->Update(aSomewhere);
@@ -857,7 +872,39 @@ nsGeolocationService::SetCachedPosition(nsIDOMGeoPosition* aPosition)
 CachedPositionAndAccuracy
 nsGeolocationService::GetCachedPosition()
 {
+  if (mSpoofedCoords) {
+    CachedPositionAndAccuracy spoofed = mLastPosition;
+    spoofed.position = new nsGeoPosition(mSpoofedCoords.get(),
+      static_cast<long long int>(PR_Now()));
+    return spoofed;
+  }
   return mLastPosition;
+}
+
+void
+nsGeolocationService::SpoofCoords(const char16_t* aData)
+{
+  AutoSafeJSContext cx;
+
+  nsDependentString dataStr(aData);
+  JS::Rooted<JS::Value> val(cx);
+  if (!JS_ParseJSON(cx, dataStr.get(), dataStr.Length(), &val) || !val.isObject()) {
+    return;
+  }
+
+  JS::Rooted<JSObject*> obj(cx, &val.toObject());
+  const char* keys[] = { "latitude", "longitude", "altitude", "accuracy",
+                         "altitudeAccuracy", "heading", "speed" };
+  double values[] = { 0, 0, 0, 1, 0, 0, 0 };
+
+  for (int i = 0; i < 7; i++) {
+    if (JS_GetProperty(cx, obj, keys[i], &val) && val.isDouble()) {
+      values[i] = val.toDouble();
+    }
+  }
+
+  mSpoofedCoords = new nsGeoPositionCoords(values[0], values[1], values[2],
+    values[3], values[4], values[5], values[6]);
 }
 
 nsresult

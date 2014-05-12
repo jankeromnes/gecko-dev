@@ -80,6 +80,9 @@ public:
   void SetCachedPosition(nsIDOMGeoPosition* aPosition);
   CachedPositionAndAccuracy GetCachedPosition();
 
+  // Spoof geo position coordinates from given values
+  void SpoofCoords(const char16_t* aData);
+
   // Find and startup a geolocation device (gps, nmea, etc.)
   nsresult StartDevice(nsIPrincipal* aPrincipal);
 
@@ -112,6 +115,9 @@ private:
 
   // This is the last geo position that we have seen.
   CachedPositionAndAccuracy mLastPosition;
+
+  // Geo position coordinates to use when spoofing the geo position.
+  nsCOMPtr<nsIDOMGeoPositionCoords> mSpoofedCoords;
 
   // Current state of requests for higher accuracy
   bool mHigherAccuracy;
