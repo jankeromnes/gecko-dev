@@ -39,6 +39,8 @@ UNIFIED_SOURCES += [
 ]
 
 EXTRA_COMPONENTS += [
+    'FakeGeolocationProvider.js',
+    'FakeGeolocationProvider.manifest',
     'NetworkGeolocationProvider.js',
     'NetworkGeolocationProvider.manifest',
 ]
