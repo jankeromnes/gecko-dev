@@ -26,7 +26,7 @@ function promiseDone(err) {
  * takes a protocol representation and returns a js representation.
  *
  * The read and write methods are also passed a context object that
- * represent the actor or front requesting the translation.
+ * represents the actor or front requesting the translation.
  *
  * Types are referred to with a typestring.  Basic types are
  * registered by name using addType, and more complex types can
@@ -816,7 +816,7 @@ let Actor = Class({
     if (this._actorSpec && this._actorSpec.events) {
       for (let key of this._actorSpec.events.keys()) {
         let name = key;
-        let sendEvent = this._sendEvent.bind(this, name)
+        let sendEvent = this._sendEvent.bind(this, name);
         this.on(name, (...args) => {
           sendEvent.apply(null, args);
         });
