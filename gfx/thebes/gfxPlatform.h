@@ -22,6 +22,16 @@
 
 #include "mozilla/layers/CompositorTypes.h"
 
+// Determine whether desktop platforms should support "bundled" fonts
+// (i.e. load fonts found in a 'fonts' folder within the GRE directory).
+// We want this for Mulet / B2G simulator builds, but not for standard
+// desktop Firefox builds.
+#ifdef MOZ_B2G
+# define MOZ_SUPPORT_BUNDLED_FONTS
+#else
+# undef MOZ_SUPPORT_BUNDLED_FONTS
+#endif
+
 class gfxASurface;
 class gfxImageSurface;
 class gfxFont;
