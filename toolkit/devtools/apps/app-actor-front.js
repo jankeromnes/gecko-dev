@@ -18,9 +18,10 @@ const PR_TRUNCATE = 0x20;
 const CHUNK_SIZE = 10000;
 
 const appTargets = new Map();
+const fronts = new Map();
 
-const AppActorFront = exports;
-EventEmitter.decorate(AppActorFront);
+const EmitterThing = exports;
+EventEmitter.decorate(EmitterThing);
 
 function addDirToZip(writer, dir, basePath) {
   let files = dir.directoryEntries;
@@ -270,7 +271,7 @@ exports.installPackaged = installPackaged;
  *  * totalBytes: The total number of bytes to send
  */
 function emitInstallProgress(progress) {
-  AppActorFront.emit("install-progress", progress);
+  EmitterThing.emit("install-progress", progress);
 }
 
 function installHosted(client, webappsActor, appId, metadata, manifest) {
@@ -294,6 +295,25 @@ function installHosted(client, webappsActor, appId, metadata, manifest) {
   return deferred.promise;
 }
 exports.installHosted = installHosted;
+
+function getAppActor(client, webappsActor, manifestURL) {
+  let deferred = promise.defer();
+  let request = {
+    to: webappsActor,
+    type: "getAppActor",
+    manifestURL: manifestURL,
+  }
+
+  client.request(request, (res) => {
+    if (res.error) {
+      deferred.reject(res.error);
+    } else {
+      deferred.resolve(res.actor);
+    }
+  });
+
+  return deferred.promise;
+}
 
 function getTargetForApp(client, webappsActor, manifestURL) {
   // Ensure always returning the exact same JS object for a target
@@ -392,3 +412,289 @@ function closeApp(client, webappsActor, manifestURL) {
   return deferred.promise;
 }
 exports.closeApp = closeApp;
+
+function getAppInfo(actorID, manifestURL) {
+  let deferred = promise.defer();
+  let request = {
+    to: actorID,
+    type: "getApp",
+    manifestURL: manifestURL
+  };
+  this.client.request(request, (res) => {
+    if (res.error) {
+      deferred.reject(res.error);
+    } else {
+      deferred.resolve(res.app);
+    }
+  });
+  return deferred.promise;
+}
+
+// Resolves to an array with all manifest URLs of each running apps
+function listRunningApps(client, actorID) {
+  let deferred = promise.defer();
+
+  let request = {
+    to: actorID,
+    type: "listRunningApps"
+  };
+
+  client.request(request, (res) => {
+    if (res.error) {
+      deferred.reject(res.error);
+    } else {
+      deferred.resolve(res.apps);
+    }
+  });
+
+  return deferred.promise;
+}
+
+// Resolves to an array of JSON object being the manifest of each installed apps
+function listInstalledApps(client, actorID) {
+  let deferred = promise.defer();
+
+  let request = {
+    to: actorID,
+    type: "getAll"
+  };
+
+  client.request(request, (res) => {
+    if (res.error) {
+      deferred.reject(res.error);
+    } else {
+      deferred.resolve(res.apps);
+    }
+  });
+
+  return deferred.promise;
+}
+
+function getTarget(client, form) {
+  let deferred = promise.defer();
+  let options = {
+    form: form,
+    client: client,
+    chrome: false
+  };
+
+  devtools.TargetFactory.forRemoteTab(options).then((target) => {
+    target.isApp = true;
+    deferred.resolve(target)
+  }, (error) => {
+    deferred.reject(error);
+  });
+  return deferred.promise;
+}
+
+function App(client, webappsActor, manifest) {
+  this.client = client;
+  this.webappsActor = webappsActor;
+  this.manifest = manifest;
+  this.running = false;
+}
+
+App.prototype = {
+  getForm: function () {
+    if (this._form) {
+      return promise.resolve(this._form);
+    }
+    return getAppActor(this.client, this.webappsActor, this.manifest.manifestURL).
+      then((form) => {
+        return this._form = form;
+      });
+  },
+
+  getTarget: function () {
+    if (this._target) {
+      return promise.resolve(this._target);
+    }
+    return getActor().
+      then((form) => getTarget(this.client, form)).
+      then((target) => {
+        target.on("close", () => {
+          delete this._form;
+          delete this._target;
+        });
+        return this._target = target;
+      });
+  }
+};
+
+function AppActorFront(client, form) {
+  if (fronts.has(form.webappsActor)) {
+    return fronts.get(form.webappsActor);
+  }
+  fronts.set(form.webappsActor, this);
+  this.client = client;
+  this.actorID = form.webappsActor;
+
+  this._clientListener = this._clientListener.bind(this);
+
+  this._listeners = [];
+}
+
+AppActorFront.prototype = {
+  get runningApps() {
+    if (!this._apps) {
+      throw new Error("Can't get running apps before calling watchApps.");
+    }
+    let r = new Map();
+    for (let [manifestURL, app] of this._apps) {
+      if (app.running) {
+        r.set(manifestURL, app);
+      }
+    }
+    return r;
+  },
+
+  get apps() {
+    if (!this._apps) {
+      throw new Error("Can't get apps before calling watchApps.");
+    }
+    return this._apps;
+  },
+
+  // Returns a `App` object instance for the given manifest URL
+  // (and cache it per AppActorFront object)
+  _getApp: function (manifestURL) {
+    let app = this._apps.get(manifestURL);
+    if (app) {
+      return promise.resolve(app);
+    } else {
+      return getAppInfo(this.actorID, manifestURL).then((info) => {
+        let app = new App(this.client, this.actorID, info);
+        this._apps.set(manifestURL, app);
+        return app;
+      }, (e) => {
+        console.error("Unable to retrieve app", manifestURL, e);
+      });
+    }
+  },
+
+  watchApps: function (listener) {
+    this._listeners.push(listener);
+
+    // Only call watchApps for the first listener being register,
+    // for all next ones, just send fake appOpen events for already
+    // opened apps
+    if (this._listeners.length > 1) {
+      this.runningApps.forEach((app, manifestURL) => {
+        listener("appOpen", app);
+      });
+      return promise.resolve();
+    }
+
+    let client = this.client;
+    let f = this._clientListener;
+    client.addListener("appOpen", f);
+    client.addListener("appClose", f);
+    client.addListener("appInstall", f);
+    client.addListener("appUninstall", f);
+
+    function watch() {
+      let request = {
+        to: this.actorID,
+        type: "watchApps"
+      };
+      this.client.request(request, (res) => {
+        if (res.error) {
+          console.error(res.error);
+        }
+      });
+    }
+
+    // First retrieve all installed apps and create
+    // related `App` object for each
+    return listInstalledApps(this.client, this.actorID)
+      .then((apps) => {
+        this._apps = new Map();
+        for (let a of apps) {
+          let app = new App(this.client, this.actorID, a);
+          this._apps.set(a.manifestURL, app);
+        }
+      })
+      // Then retrieve all running apps in order to flag them as running
+      .then(() => listRunningApps(this.client, this.actorID))
+      .then(apps => {
+        let promises = [];
+        for (let manifestURL of apps) {
+          let p = this._getApp(manifestURL)
+                      .then(app => {
+                        app.running = true;
+                        // Fake appOpen event for all already opened
+                        this._notifyListeners("appOpen", app);
+                      });
+          promises.push(p);
+        }
+        return promise.all(promises);
+      })
+      // Finally ask to receive all app events
+      .then(watch.bind(this));
+  },
+
+  _clientListener: function (type, message) {
+    let { manifestURL } = message;
+    this._getApp(manifestURL).then((app) => {
+      switch(type) {
+        case "appOpen":
+          app.running = true;
+          break;
+        case "appClose":
+          app.running = false;
+        case "appInstall":
+          // The call to _getApp is going to create App object
+          break;
+        case "appUninstall":
+          // Fake a appClose event if we didn't got one before uninstall
+          if (app.running) {
+            app.running = false;
+            this._notifyListeners("appClose", app);
+          }
+          this._apps.delete(manifestURL);
+          break;
+        default:
+          return;
+      }
+      this._notifyListeners(type, app);
+    });
+  },
+
+  _notifyListeners: function (type, app) {
+    this._listeners.forEach(f => {
+      f(type, app);
+    });
+  },
+
+  unwatchApps: function (listener) {
+    let idx = this._listeners.indexOf(listener);
+    if (idx != -1) {
+      this._listeners.splice(idx, 1);
+    }
+
+    // Until we released all listener, we don't ask to stop sending events
+    if (this._listeners.length != 0) {
+      return;
+    }
+
+    let request = {
+      to: this.actorID,
+      type: "unwatchApps"
+    };
+    this.client.request(request, (res) => {
+      if (res.error) {
+        return console.error(res.error);
+      }
+    });
+
+    let client = this.client;
+    let f = this._clientListener;
+    client.removeListener("appOpen", f);
+    client.removeListener("appClose", f);
+    client.removeListener("appInstall", f);
+    client.removeListener("appUninstall", f);
+  }
+}
+
+exports.AppActorFront = AppActorFront;
+
