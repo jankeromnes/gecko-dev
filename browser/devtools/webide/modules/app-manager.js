@@ -21,6 +21,7 @@ const {getDeviceFront} = require("devtools/server/actors/device");
 const {setTimeout} = require("sdk/timers");
 const {Task} = Cu.import("resource://gre/modules/Task.jsm", {});
 const {USBRuntime, SimulatorRuntime, gLocalRuntime, gRemoteRuntime} = require("devtools/webide/runtimes");
+const {getMonitorFront} = require("devtools/server/actors/monitor");
 
 const Strings = Services.strings.createBundle("chrome://webide/content/webide.properties");
 
@@ -297,6 +298,13 @@ exports.AppManager = AppManager = {
       return null;
     }
     return getDeviceFront(this.connection.client, this._listTabsResponse);
+  },
+
+  get monitorFront() {
+    if (!this._listTabsResponse) {
+      return null;
+    }
+    return getMonitorFront(this.connection.client, this._listTabsResponse);
   },
 
   disconnectRuntime: function() {

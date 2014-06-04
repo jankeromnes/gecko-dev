@@ -360,6 +360,7 @@ var DebuggerServer = {
 
     this.addActors("resource://gre/modules/devtools/server/actors/webapps.js");
     this.registerModule("devtools/server/actors/device");
+    this.registerModule("devtools/server/actors/monitor");
   },
 
   /**
@@ -402,6 +403,7 @@ var DebuggerServer = {
     this.registerModule("devtools/server/actors/eventlooplag");
     this.registerModule("devtools/server/actors/layout");
     this.registerModule("devtools/server/actors/csscoverage");
+    this.registerModule("devtools/server/actors/monitor");
     if ("nsIProfiler" in Ci) {
       this.addActors("resource://gre/modules/devtools/server/actors/profiler.js");
     }
