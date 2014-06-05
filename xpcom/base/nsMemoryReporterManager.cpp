@@ -1828,6 +1828,15 @@ nsMemoryReporterManager::SizeOfTab(nsIDOMWindow* aTopWindow,
   return NS_OK;
 }
 
+#ifdef XP_LINUX
+NS_IMETHODIMP
+nsMemoryReporterManager::GetResidentUnique(int64_t* aAmount)
+{
+  *aAmount = ResidentUnique();
+  return NS_OK;
+}
+#endif
+
 namespace mozilla {
 
 nsresult
