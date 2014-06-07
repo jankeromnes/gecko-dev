@@ -27,6 +27,10 @@ XPCOMUtils.defineLazyGetter(this, 'MemoryFront', function() {
   return devtools.require('devtools/server/actors/memory').MemoryFront;
 });
 
+XPCOMUtils.defineLazyGetter(this, 'Services', function() {
+  return devtools.require('Services');
+});
+
 
 /**
  * The Developer HUD is an on-device developer tool that displays widgets,
@@ -280,6 +284,15 @@ Target.prototype = {
     }
 
     shell.sendEvent(frame, 'developer-hud-update', Cu.cloneInto(data, frame));
+    let plot = {
+      graphID: data.metric.name,
+      curveID: data.manifest,
+      values: [{
+        value: data.metric.value,
+        time: Date.now()
+      }]
+    };
+    Services.obs.notifyObservers(null, 'devtools-monitor-update', plot);
   }
 
 };
