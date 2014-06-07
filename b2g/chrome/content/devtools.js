@@ -27,6 +27,10 @@ XPCOMUtils.defineLazyGetter(this, 'MemoryFront', function() {
   return devtools.require('devtools/server/actors/memory').MemoryFront;
 });
 
+XPCOMUtils.defineLazyGetter(this, 'Services', function() {
+  return devtools.require('Services');
+});
+
 Cu.import('resource://gre/modules/AppFrames.jsm');
 
 /**
@@ -241,8 +245,15 @@ Target.prototype = {
     if (this.frame === systemapp) {
       frame = getContentWindow();
     }
-
     shell.sendEvent(frame, 'developer-hud-update', Cu.cloneInto(data, frame));
+
+    let plot = {
+      graph: data.metric.name,
+      curve: data.manifest,
+      value: data.metric.value,
+      time: Date.now()
+    };
+    Services.obs.notifyObservers(null, 'devtools-monitor-update', JSON.stringify(plot));
   }
 
 };
