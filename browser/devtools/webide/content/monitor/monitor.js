@@ -7,31 +7,29 @@ Cu.import('resource:///modules/devtools/gDevTools.jsm');
 const {require} = Cu.import('resource://gre/modules/devtools/Loader.jsm', {}).devtools;
 const {AppManager} = require('devtools/webide/app-manager');
 
-console.log('AppManager', AppManager);
-
-let front = AppManager.monitorFront;
-
 window.addEventListener('load', function() {
-  if (front) {
-    front.on('update', update);
-    front.start();
+  let client = AppManager.connection.client;
+  for (let manifest in AppManager._runningApps.keys()) {
+    AppManager.getTargetForManifest(manifest).then(target => {
+    });
   }
+  client.addListener('monitorUpdate', update);
 
+  // TODO listen for websocket
+
+  // DEBUG 50Hz
   setInterval(function() {
-    update([{curveID: 'homescreen', values: [{time: Date.now(), value: Math.ceil(Math.random()*100)}]}]);
-  }, 1000);
+    update('monitorUpdate', [{curveID: 'homescreen', values: [{time: Date.now(), value: Math.ceil(Math.random()*100)}]}]);
+  }, 25);
 });
 
 window.addEventListener('unload', function() {
-  if (front) {
-    front.off('update', update);
-    front.stop();
-  }
+  AppManager.connection.client.removeListener('monitorUpdate', update);
 });
 
 let graphs = new Map();
 
-function update(message) {
+function update(type, message) {
   let dirty = new Set();
 
   for (let data of message) {

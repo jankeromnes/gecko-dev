@@ -173,7 +173,10 @@ exports.AppManager = AppManager = {
   },
 
   getTarget: function() {
-    let manifest = this.getProjectManifestURL(this.selectedProject);
+    return this.getTargetForManifest(this.getProjectManifestURL(this.selectedProject));
+  },
+
+  getTargetForManifest: function(manifest) {
     if (!manifest) {
       console.error("Can't find manifestURL for selected project");
       return promise.reject();
