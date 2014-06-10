@@ -302,6 +302,8 @@ let UI = {
 
     // Nothing to show
 
+    this.hideMonitor();
+
     if (!project) {
       detailsIframe.setAttribute("hidden", "true");
       projecteditorIframe.setAttribute("hidden", "true");
@@ -344,6 +346,19 @@ let UI = {
     if (project.location) {
       Services.prefs.setCharPref("devtools.webide.lastprojectlocation", project.location);
     }
+  },
+
+  showMonitor: function() {
+    AppManager.selectedProject = null;
+    let monitor = document.querySelector("#monitor");
+    monitor.removeAttribute("hidden");
+    monitor.setAttribute("src", "chrome://webide/content/monitor/monitor.xhtml");
+  },
+
+  hideMonitor: function() {
+    let monitor = document.querySelector("#monitor");
+    monitor.setAttribute("src", "about:blank");
+    monitor.setAttribute("hidden", "true");
   },
 
   /********** COMMANDS **********/
@@ -786,6 +801,10 @@ let Cmds = {
       UI.openInBrowser(url);
     }), "showing runtime details");
 
+  },
+
+  showRuntimeMonitor: function() {
+    UI.showMonitor();
   },
 
   play: function() {
