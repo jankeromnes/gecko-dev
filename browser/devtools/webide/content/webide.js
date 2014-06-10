@@ -820,6 +820,10 @@ let Cmds = {
     UI.selectDeckPanel("runtimedetails");
   },
 
+  showRuntimeMonitor: function() {
+    UI.selectDeckPanel("monitor");
+  },
+
   play: function() {
     switch(AppManager.selectedProject.type) {
       case "packaged":
