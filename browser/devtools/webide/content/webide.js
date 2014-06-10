@@ -74,6 +74,13 @@ let UI = {
       }, console.error);
     }
     Services.prefs.setBoolPref("devtools.webide.autoinstallADBHelper", false);
+
+    if (Services.prefs.getBoolPref("devtools.webide.enableMonitor")) {
+      let cmd = document.querySelector("#cmd_showMonitor");
+      cmd.removeAttribute("disabled");
+      cmd.removeAttribute("hidden");
+      document.querySelector("#deck-panel-monitor").setAttribute("src", "monitor.xhtml");
+    }
   },
 
   openLastProject: function() {
@@ -859,6 +866,10 @@ let Cmds = {
 
   showRuntimeDetails: function() {
     UI.selectDeckPanel("runtimedetails");
+  },
+
+  showMonitor: function() {
+    UI.selectDeckPanel("monitor");
   },
 
   play: function() {
