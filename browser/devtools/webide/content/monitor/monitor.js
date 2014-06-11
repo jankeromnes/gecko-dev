@@ -11,6 +11,7 @@ let Monitor = {
 
   graphs: new Map(),
   front: null,
+  socket: null,
 
   update: function(data) {
     if (Array.isArray(data)) {
@@ -36,9 +37,29 @@ let Monitor = {
     setInterval(function() {
       Monitor.update({graph: 'test', curve: 'homescreen', values: [{time: Date.now(), value: Math.ceil(Math.random()*100)}]});
     }, 250);
+
+    Monitor.connectToWebSocket();
   },
 
   unload: function() {
+    Monitor.disconnectFromWebSocket();
+  },
+
+  connectToWebSocket: function() {
+    Monitor.socket = new WebSocket('ws://localhost:9000');
+    Monitor.socket.onmessage = function(event) {
+      Monitor.update(JSON.parse(event.data));
+    };
+    Monitor.socket.onclose = function() {
+      setTimeout(Monitor.websocket, 1000);
+    };
+  },
+
+  disconnectFromWebSocket: function() {
+    if (Monitor.socket) {
+      Monitor.socket.onclose = function(){};
+      Monitor.socket.close();
+    }
   }
 };
 
