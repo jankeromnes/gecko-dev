@@ -6,6 +6,7 @@ const Cu = Components.utils;
 Cu.import('resource:///modules/devtools/gDevTools.jsm');
 const {require} = Cu.import('resource://gre/modules/devtools/Loader.jsm', {}).devtools;
 const {AppManager} = require('devtools/webide/app-manager');
+const {AppActorFront} = require('devtools/app-actor-front');
 
 let Monitor = {
 
@@ -38,11 +39,35 @@ let Monitor = {
       Monitor.update({graph: 'test', curve: 'homescreen', values: [{time: Date.now(), value: Math.ceil(Math.random()*100)}]});
     }, 250);
 
+    AppManager.on('list-tabs-response', Monitor.connectToRuntime);
+    Monitor.connectToRuntime();
+
     Monitor.connectToWebSocket();
   },
 
   unload: function() {
+    Monitor.disconnectFromRuntime();
     Monitor.disconnectFromWebSocket();
+  },
+
+  connectToRuntime: function() {
+    let client = AppManager.connection.client;
+    let resp = AppManager._listTabsResponse;
+    if (resp && !Monitor.front) {
+      Monitor.front = new AppActorFront(client, resp);
+      Monitor.front.watchApps(Monitor.onRuntimeAppEvent);
+    }
+    client.addListener('monitorUpdate', Monitor.onRuntimeUpdate);
+  },
+
+  disconnectFromRuntime: function() {
+    if (Monitor.front) {
+      Monitor.front.unwatchApps(Monitor.onRuntimeAppEvent);
+      Monitor.front = null;
+    }
+    if (AppManager.connection) {
+      AppManager.connection.client.removeListener('monitorUpdate', Monitor.onRuntimeUpdate);
+    }
   },
 
   connectToWebSocket: function() {
@@ -60,7 +85,25 @@ let Monitor = {
       Monitor.socket.onclose = function(){};
       Monitor.socket.close();
     }
+  },
+
+  onRuntimeAppEvent: function(type, app) {
+    if (['appOpen','appClose'].indexOf(type) < 0) {
+      return;
+    }
+
+    app.getForm().then(form => {
+      AppManager.connection.client.request({
+        to: form.monitorActor,
+        type: (type === 'appOpen' ? 'start' : 'stop')
+      });
+    });
+  },
+
+  onRuntimeUpdate: function(type, packet) {
+    Monitor.update(packet.data);
   }
+
 };
 
 window.addEventListener('load', Monitor.load);
