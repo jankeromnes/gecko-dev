@@ -96,6 +96,13 @@ endif
 GARBAGE += $(MOZ_PKG_MANIFEST)
 endif
 
+ifdef FXOS_FONTS
+	@#TODO download https://git.mozilla.org/b2g/moztt.git to ${SOMEWHERE}
+	@#TODO include ${SOMEWHERE}/fonts.mk
+	@mkdir ${BINPATH}/fonts
+	@for line in ${PRODUCT_COPY_FILES} ; do $(echo "cp ${SOMEWHERE}/${line}" | sed "s_:system_ ${BINPATH}_") ; done
+endif
+
 ifdef FXOS_SIMULATOR
 .PHONY: simulator
 simulator: make-package

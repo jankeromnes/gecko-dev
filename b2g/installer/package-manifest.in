@@ -849,3 +849,7 @@ bin/components/@DLL_PREFIX@nkgnomevfs@DLL_SUFFIX@
 @BINPATH@/gaia/*
 @BINPATH@/b2g-bin@BIN_SUFFIX@
 #endif
+
+#ifdef FXOS_FONTS
+@BINPATH@/fonts/*
+#endif
