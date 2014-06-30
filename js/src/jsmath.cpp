@@ -56,6 +56,7 @@ static const JSConstDoubleSpec math_constants[] = {
     {M_LN2,     "LN2",          0, {0,0,0}},
     {M_LN10,    "LN10",         0, {0,0,0}},
     {M_PI,      "PI",           0, {0,0,0}},
+    {M_TAU,     "TAU",          0, {0,0,0}},
     {M_SQRT2,   "SQRT2",        0, {0,0,0}},
     {M_SQRT1_2, "SQRT1_2",      0, {0,0,0}},
     {0,0,0,{0,0,0}}
