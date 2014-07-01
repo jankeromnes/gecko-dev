@@ -42,7 +42,26 @@ let Monitor = {
   },
 
   load: function() {
+
+    // DEBUG
+    setInterval(function() {
+      let start = Date.now();
+      Monitor.update({
+        graph: 'test',
+        time: Date.now(),
+        homescreen: Math.ceil(Math.random()*100),
+        settings: Math.ceil(Math.random()*100)
+      });
+      let stop = Date.now();
+      Monitor.update({graph:'performance',time:stop,update2x:stop-start});
+    }, 30);
+
+    setInterval(function() {
+      Monitor.update({graph:'performance', event:'second', time:Date.now()});
+    }, 1000);
+
     AppManager.on('app-manager-update', Monitor.onAppManagerUpdate);
+
     Monitor.connectToWebSocket();
   },
 
@@ -346,6 +365,8 @@ Graph.prototype = {
   },
 
   render: function() {
+    let start = Date.now();
+
     let self = this,
         getid = d => { return d.id; },
         gettime = d => { return d.time.getTime(); },
@@ -414,6 +435,9 @@ Graph.prototype = {
     newlegend.append('span').text(getid);
 
     legends.exit().remove();
+
+    let stop = Date.now();
+    if (this.name !== 'performance') Monitor.update({graph:'performance',time:stop,render:stop-start});
   }
 
 };
