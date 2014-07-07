@@ -45,6 +45,9 @@ using namespace mozilla;
 
 #if defined(XP_LINUX)
 
+#include <cstring>
+#include <cstdlib>
+
 static nsresult
 GetProcSelfStatmField(int aField, int64_t* aN)
 {
@@ -81,17 +84,46 @@ GetProcSelfSmapsPrivate(int64_t* aN)
   }
 
   int64_t amount = 0;
-  char line[256];
-  while (fgets(line, sizeof(line), f)) {
-    long long val = 0;
-    if (sscanf(line, "Private_Dirty: %lld kB", &val) == 1 ||
-        sscanf(line, "Private_Clean: %lld kB", &val) == 1) {
-      amount += val * 1024; // convert from kB to bytes
+
+  static const uint32_t priv = *(uint32_t*)"Priv";
+  static const uint32_t riva = *(uint32_t*)"riva";
+  static const uint32_t ivat = *(uint32_t*)"ivat";
+  static const uint32_t vate = *(uint32_t*)"vate";
+  static const uint32_t page = sysconf(_SC_PAGESIZE);
+  static const uint32_t len = 32;
+
+  char buffer[len + page];
+  for (int i = 0; i < len; i++) {
+    buffer[i] = ' ';
+  }
+
+  for (;;) {
+    size_t bytes = fread(buffer + len, sizeof(*buffer), page, f);
+    char* end = buffer + bytes;
+    for (char* ptr = buffer; ptr < end; ptr += 4) {
+      uint32_t word = *(uint32_t*)ptr;
+      uint32_t offset;
+      if (word == priv) {
+        offset = sizeof("Private_xxxxx:");
+      } else if (word == riva) {
+        offset = sizeof("rivate_xxxxx:");
+      } else if (word == ivat) {
+        offset = sizeof("ivate_xxxxx:");
+      } else if (word == vate) {
+        offset = sizeof("vate_xxxxx:");
+      } else {
+        continue;
+      }
+      amount += atoi(ptr + offset);
     }
+    if (bytes < page) {
+      break;
+    }
+    memcpy(buffer, end, len);
   }
 
   fclose(f);
-  *aN = amount;
+  *aN = amount * 1024;  // convert from kB to bytes
   return NS_OK;
 }
 
