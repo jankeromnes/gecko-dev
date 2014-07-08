@@ -107,6 +107,9 @@ private:
 
   // This is the last geo position that we have seen.
   nsCOMPtr<nsIDOMGeoPosition> mLastPosition;
+  
+  // Geo position coordinates to use when spoofing the geo position.
+  nsCOMPtr<nsIDOMGeoPositionCoords> mSpoofedCoords;
 
   // Current state of requests for higher accuracy
   bool mHigherAccuracy;
