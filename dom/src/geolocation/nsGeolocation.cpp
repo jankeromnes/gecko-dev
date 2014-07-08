@@ -717,9 +717,6 @@ nsresult nsGeolocationService::Init()
     }
   }
 
-  // FIXME Don't care about anything, replace anyway!
-  mProvider = do_CreateInstance("@mozilla.org/geolocation/fake-provider;1");
-
   return NS_OK;
 }
 
@@ -820,7 +817,16 @@ nsGeolocationService::Observe(nsISupports* aSubject,
     return NS_OK;
   }
 
-  // TODO if "devtools-overwrite", swap mProvider, Update()
+  if (!strcmp("spoof-geolocation", aTopic)) {
+    mSpoofedCoords = nsGeoPositionCoords(aData); // TODO
+    Update(GetCachedPosition()); // Update locators with spoofed position
+    return NS_OK;
+  }
+
+  if (!strcmp("spoof-geolocation", aTopic)) {
+    mSpoofedCoords = nullptr;
+    return NS_OK;
+  }
 
   return NS_ERROR_FAILURE;
 }
@@ -829,6 +835,7 @@ NS_IMETHODIMP
 nsGeolocationService::Update(nsIDOMGeoPosition *aSomewhere)
 {
   SetCachedPosition(aSomewhere);
+  aSomewhere = GetCachedPosition(); // allow spoofing
 
   for (uint32_t i = 0; i< mGeolocators.Length(); i++) {
     mGeolocators[i]->Update(aSomewhere);
@@ -865,6 +872,9 @@ nsGeolocationService::SetCachedPosition(nsIDOMGeoPosition* aPosition)
 nsIDOMGeoPosition*
 nsGeolocationService::GetCachedPosition()
 {
+  if (mSpoofedCoords) {
+    return new nsGeoPosition(mSpoofedCoords, PR_Now());
+  }
   return mLastPosition;
 }
 
