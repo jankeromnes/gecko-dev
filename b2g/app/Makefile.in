@@ -95,3 +95,12 @@ else ifneq (gonk,$(MOZ_WIDGET_TOOLKIT))
 endif
 
 endif
+
+# Copy the Firefox OS fonts if available
+ifdef MOZTTDIR
+include $(MOZTTDIR)/fonts.mk
+
+libs::
+	@mkdir $(DIST)/bin/fonts
+	@for line in $(PRODUCT_COPY_FILES) ; do `echo "$$line" | sed "s_external/moztt_cp $(MOZTTDIR)_" | sed "s :system \ $(abspath $(DIST))/bin "` ; done
+endif
