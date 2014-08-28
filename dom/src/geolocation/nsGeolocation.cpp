@@ -413,6 +413,7 @@ nsGeolocationRequest::Cancel()
 NS_IMETHODIMP
 nsGeolocationRequest::Allow(JS::HandleValue aChoices)
 {
+  printf("Geo Request::Allow\n");
   MOZ_ASSERT(aChoices.isUndefined());
 
   // Kick off the geo device, if it isn't already running
@@ -428,6 +429,7 @@ nsGeolocationRequest::Allow(JS::HandleValue aChoices)
   bool canUseCache = false;
   CachedPositionAndAccuracy lastPosition = gs->GetCachedPosition();
   if (lastPosition.position) {
+    printf("GEO had lastPosition.position\n");
     DOMTimeStamp cachedPositionTime_ms;
     lastPosition.position->GetTimestamp(&cachedPositionTime_ms);
     // check to see if we can use a cached value
@@ -439,6 +441,8 @@ nsGeolocationRequest::Allow(JS::HandleValue aChoices)
         DOMTimeStamp(PR_Now() / PR_USEC_PER_MSEC - maximumAge_ms) <= cachedPositionTime_ms;
       canUseCache = isCachedWithinRequestedAccuracy && isCachedWithinRequestedTime;
     }
+  } else {
+    printf("GEO no lastPosition.position\n");
   }
 
   gs->UpdateAccuracy(WantsHighAccuracy());
@@ -796,12 +800,14 @@ nsGeolocationService::Observe(nsISupports* aSubject,
   }
 
   if (!strcmp("geolocation-spoof", aTopic)) {
+    printf("GEO spoof\n");
     SpoofPosition(aData);
     Update(GetCachedPosition().position); // Update locators with spoofed position
     return NS_OK;
   }
 
   if (!strcmp("geolocation-unspoof", aTopic)) {
+    printf("GEO unspoof\n");
     mSpoofedPosition.position = nullptr;
     Update(GetCachedPosition().position); // Update locators with real position
     return NS_OK;
@@ -813,6 +819,17 @@ nsGeolocationService::Observe(nsISupports* aSubject,
 NS_IMETHODIMP
 nsGeolocationService::Update(nsIDOMGeoPosition *aSomewhere)
 {
+  if (aSomewhere != nullptr) {
+    nsIDOMGeoPositionCoords* coords;
+    double lat, lon;
+    aSomewhere->GetCoords(&coords);
+    coords->GetLatitude(&lat);
+    coords->GetLongitude(&lon);
+    printf("GEO Service::Update %f:%f\n", lat, lon);
+  } else {
+    printf("GEO Service::Update null\n");
+  }
+
   SetCachedPosition(aSomewhere);
   aSomewhere = GetCachedPosition().position; // allow spoofing
 
@@ -861,6 +878,8 @@ nsGeolocationService::GetCachedPosition()
 void
 nsGeolocationService::SpoofPosition(const char16_t* aData)
 {
+  printf("GEO Service::SpoofPosition\n");
+
   AutoSafeJSContext cx;
 
   nsDependentString dataStr(aData);
@@ -888,6 +907,8 @@ nsGeolocationService::SpoofPosition(const char16_t* aData)
     static_cast<long long int>(PR_Now()));
 
   mSpoofedPosition.isHighAccuracy = mHigherAccuracy;
+
+  printf("GEO created mSpoofedPosition\n");
 }
 
 nsresult
