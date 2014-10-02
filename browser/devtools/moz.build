@@ -9,6 +9,7 @@ DIRS += [
     'canvasdebugger',
     'commandline',
     'debugger',
+    'device',
     'eyedropper',
     'fontinspector',
     'framework',
