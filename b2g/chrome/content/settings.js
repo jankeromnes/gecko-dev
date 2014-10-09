@@ -464,6 +464,9 @@ let settingsToObserve = {
   'app.update.url': {
     resetToPref: true
   },
+  'app.update.url.override': {
+    resetToPref: true
+  },
   'apz.force-enable': {
     prefName: 'dom.browser_frames.useAsyncPanZoom',
     defaultValue: false
