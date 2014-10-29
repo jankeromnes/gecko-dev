@@ -1236,4 +1236,8 @@ let Cmds = {
   showPrefs: function() {
     UI.selectDeckPanel("prefs");
   },
+
+  addSimulator: function() {
+    UI.selectDeckPanel("simulator");
+  },
 };

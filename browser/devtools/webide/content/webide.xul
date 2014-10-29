@@ -50,6 +50,7 @@
       <command id="cmd_play" oncommand="Cmds.play()"/>
       <command id="cmd_stop" oncommand="Cmds.stop()" label="&projectMenu_stop_label;"/>
       <command id="cmd_toggleToolbox" oncommand="Cmds.toggleToolbox()"/>
+      <command id="cmd_addSimulator" oncommand="Cmds.addSimulator()"/>
     </commandset>
   </commandset>
 
@@ -159,7 +160,7 @@
         <vbox id="runtime-panel-wifi"></vbox>
         <label class="panel-header">&runtimePanel_simulator;</label>
         <vbox id="runtime-panel-simulator"></vbox>
-        <toolbarbutton class="panel-item" label="&runtimePanel_installsimulator;" id="runtime-panel-installsimulator" command="cmd_showAddons"/>
+        <toolbarbutton class="panel-item" label="&runtimePanel_addsimulator;" id="runtime-panel-addsimulator" command="cmd_addSimulator"/>
         <label class="panel-header">&runtimePanel_other;</label>
         <vbox id="runtime-panel-other"></vbox>
         <vbox flex="1" id="runtime-actions">
@@ -182,6 +183,7 @@
       <iframe id="deck-panel-permissionstable" flex="1" src="permissionstable.xhtml"/>
       <iframe id="deck-panel-runtimedetails" flex="1" src="runtimedetails.xhtml"/>
       <iframe id="deck-panel-monitor" flex="1" lazysrc="monitor.xhtml"/>
+      <iframe id="deck-panel-simulator" flex="1" src="simulator.xhtml"/>
     </deck>
     <splitter hidden="true" class="devtools-horizontal-splitter" orient="vertical"/>
     <!-- toolbox iframe will be inserted here -->

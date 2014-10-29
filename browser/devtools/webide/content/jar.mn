@@ -20,3 +20,5 @@ webide.jar:
     content/prefs.xhtml               (prefs.xhtml)
     content/monitor.xhtml             (monitor.xhtml)
     content/monitor.js                (monitor.js)
+    content/simulator.js              (simulator.js)
+    content/simulator.xhtml           (simulator.xhtml)

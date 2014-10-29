@@ -188,15 +188,14 @@ let SimulatorScanner = {
   _runtimes: [],
 
   enable() {
-    this._updateRuntimes = this._updateRuntimes.bind(this);
-    Simulator.on("register", this._updateRuntimes);
-    Simulator.on("unregister", this._updateRuntimes);
+    this._registerSimulatorAddon = this._registerSimulatorAddon.bind(this);
+    Simulator.on("register", this._registerSimulatorAddon);
+    // TODO on "Add simulator" save, update or create
     this._updateRuntimes();
   },
 
   disable() {
-    Simulator.off("register", this._updateRuntimes);
-    Simulator.off("unregister", this._updateRuntimes);
+    Simulator.off("register", this._registerSimulatorAddon);
   },
 
   _emitUpdated() {
@@ -205,9 +204,20 @@ let SimulatorScanner = {
 
   _updateRuntimes() {
     this._runtimes = [];
-    for (let version of Simulator.availableVersions()) {
-      this._runtimes.push(new SimulatorRuntime(version));
+    // TODO Load saved profiles and add them.
+    Simulator.availableVersions().forEach(this._registerSimulatorAddon);
+  },
+
+  _registerSimulatorAddon(version) {
+    for (let profile of this._runtimes) {
+      if (profile.version == version) {
+        // There is already a profile for that version.
+        return;
+      }
     }
+
+    // TODO Create default profile for that version.
+    this._runtimes.push(new SimulatorRuntime(version));
     this._emitUpdated();
   },
 
