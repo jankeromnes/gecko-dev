@@ -12,6 +12,7 @@ const { AddonManager } = Cu.import("resource://gre/modules/AddonManager.jsm", {}
 
 let process;
 
+// TODO launch arguments (gaia profile, screen size, sd folder)
 function launch({ port }) {
   // Close already opened simulation
   if (process) {

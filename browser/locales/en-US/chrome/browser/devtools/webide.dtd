@@ -80,7 +80,7 @@
 <!ENTITY runtimePanel_wifi "Wi-Fi Devices">
 <!ENTITY runtimePanel_simulator "Simulators">
 <!ENTITY runtimePanel_other "Other">
-<!ENTITY runtimePanel_installsimulator "Install Simulator">
+<!ENTITY runtimePanel_addsimulator "New Simulator">
 <!ENTITY runtimePanel_noadbhelper "Install ADB Helper">
 <!ENTITY runtimePanel_nousbdevice "Can't see your device?">
 
@@ -159,3 +159,14 @@
 <!-- Monitor -->
 <!ENTITY monitor_title "Monitor">
 <!ENTITY monitor_help "Help">
+
+<!-- Simulator options -->
+<!ENTITY simulator_title "Simulator options">
+<!ENTITY simulator_save "Save">
+<!ENTITY simulator_version "Version:">
+<!ENTITY simulator_b2g "B2G binary:">
+<!ENTITY simulator_gaia "Gaia profile:">
+<!ENTITY simulator_customRuntime "use custom simulator build">
+<!ENTITY simulator_name "Name:">
+<!ENTITY simulator_device "Device:">
+<!ENTITY simulator_screenSize "Screen size:">

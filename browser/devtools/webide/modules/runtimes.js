@@ -188,15 +188,15 @@ let SimulatorScanner = {
   _runtimes: [],
 
   enable() {
-    this._updateRuntimes = this._updateRuntimes.bind(this);
-    Simulator.on("register", this._updateRuntimes);
-    Simulator.on("unregister", this._updateRuntimes);
+    this._registerSimulator = this._registerSimulator.bind(this);
+    Simulator.on("register", this._registerSimulator);
+    Simulator.on("unregister", this._unregisterSimulator);
     this._updateRuntimes();
   },
 
   disable() {
-    Simulator.off("register", this._updateRuntimes);
-    Simulator.off("unregister", this._updateRuntimes);
+    Simulator.off("register", this._registerSimulator);
+    Simulator.off("unregister", this._unregisterSimulator);
   },
 
   _emitUpdated() {
@@ -205,9 +205,24 @@ let SimulatorScanner = {
 
   _updateRuntimes() {
     this._runtimes = [];
-    for (let name of Simulator.availableNames()) {
-      this._runtimes.push(new SimulatorRuntime(name));
+    Simulator.availableNames().forEach(this._registerSimulator);
+  },
+
+  _registerSimulator(name) {
+    for (let runtime of this._runtimes) {
+      if (runtime.name === name) {
+        // We already know about that runtime.
+        return;
+      }
     }
+
+    let simulator = Simulator.getByName(name);
+    this._runtimes.push(new SimulatorRuntime(simulator));
+    this._emitUpdated();
+  },
+
+  _unregisterSimulator(name) {
+    delete this._runtimes[name];
     this._emitUpdated();
   },
 
@@ -463,18 +478,38 @@ WiFiRuntime.prototype = {
 // For testing use only
 exports._WiFiRuntime = WiFiRuntime;
 
-function SimulatorRuntime(name) {
-  this.name = name;
+function SimulatorRuntime(simulator) {
+  this.name = simulator.name || "Unknown";
+  if (this.b2g) {
+    // Custom B2G runtime.
+    this.b2g = simulator.b2g;
+  } else {
+    // Addon runtime.
+    this.launch = simulator.launch;
+    this.close = simulator.close;
+  }
+  this.gaia = simulator.gaia;
+
+  this.device = simulator.device || {};
+  // TODO complete this.device with defaults.
 }
 
 SimulatorRuntime.prototype = {
   type: RuntimeTypes.SIMULATOR,
   connect: function(connection) {
-    let port = ConnectionManager.getFreeTCPPort();
     let simulator = Simulator.getByName(this.name);
-    if (!simulator || !simulator.launch) {
+    if (!simulator) {
       return promise.reject("Can't find simulator: " + this.name);
     }
+    if (this.b2g) {
+      // TODO launch custom runtime with this.b2g and this.gaia.
+      // Maybe look at simulator-process.js
+      return;
+    }
+    if (!simulator.launch) {
+      return promise.reject("Can't find simulator: " + this.name);
+    }
+    let port = ConnectionManager.getFreeTCPPort();
     return simulator.launch({port: port}).then(() => {
       connection.host = "localhost";
       connection.port = port;

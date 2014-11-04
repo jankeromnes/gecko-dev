@@ -11,6 +11,7 @@ EXTRA_JS_MODULES.devtools += [
     'AppCacheUtils.jsm',
     'Curl.jsm',
     'DeveloperToolbar.jsm',
+    'DeviceProfiles.jsm',
     'DOMHelpers.jsm',
     'FloatingScrollbars.jsm',
     'Jsbeautify.jsm',

@@ -61,6 +61,7 @@
     locale/browser/devtools/inspector.dtd          (%chrome/browser/devtools/inspector.dtd)
     locale/browser/devtools/timeline.dtd           (%chrome/browser/devtools/timeline.dtd)
     locale/browser/devtools/timeline.properties    (%chrome/browser/devtools/timeline.properties)
+    locale/browser/devtools/device.properties      (%chrome/browser/devtools/device.properties)
     locale/browser/devtools/projecteditor.properties     (%chrome/browser/devtools/projecteditor.properties)
     locale/browser/devtools/eyedropper.properties     (%chrome/browser/devtools/eyedropper.properties)
     locale/browser/devtools/connection-screen.dtd  (%chrome/browser/devtools/connection-screen.dtd)

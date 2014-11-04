@@ -16,3 +16,4 @@ webide.jar:
   skin/permissionstable.css    (permissionstable.css)
   skin/monitor.css             (monitor.css)
   skin/devicepreferences.css   (devicepreferences.css)
+  skin/simulator.css           (simulator.css)
