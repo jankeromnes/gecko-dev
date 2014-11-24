@@ -20,6 +20,25 @@
 
   <hbox flex="1">
 
+    <vbox flex="1">
+      <label>Model</label>
+      <menulist>
+        <menupopup>
+          <menuitem label="Firefox OS Flame" value="flame"/>
+          <menuitem label="Google Nexus 4" value="nexus4"/>
+        </menupopup>
+      </menulist>
+      <label>User Agent</label>
+      <checkbox label="Fake User Agent" tooltiptext="Fake"/>
+    </vbox>
+
+    <vbox flex="1">
+      <label>GPS</label>
+      <vbox>
+        <checkbox label="Spoof GPS coordinates" tooltiptext="Spoof"/>
+      </vbox>
+    </vbox>
+
   </hbox>
 
 </window>
