@@ -5,21 +5,29 @@
 
 const { Cc, Ci, Cu } = require("chrome");
 
-const { SimulatorProcess } = require("./simulator-process");
 const { Promise: promise } = Cu.import("resource://gre/modules/Promise.jsm", {});
-const { Simulator } = Cu.import("resource://gre/modules/devtools/Simulator.jsm");
+const { Simulator, SimulatorProcess } = Cu.import("resource://gre/modules/devtools/Simulator.jsm", {});
 const { AddonManager } = Cu.import("resource://gre/modules/AddonManager.jsm", {});
+
+const ROOT_URI = require("addon").uri;
+const PROFILE_URL = ROOT_URI + "profile/";
+const BIN_URL = ROOT_URI + "b2g/";
 
 let process;
 
-function launch({ port }) {
-  // Close already opened simulation
+function launch(params) {
+  // Close already opened simulator.
   if (process) {
-    return close().then(launch.bind(null, { port: port }));
+    return close().then(launch.bind(null, params));
   }
 
-  process = SimulatorProcess();
-  process.remoteDebuggerPort = port;
+  params.addon = {
+    id: require("addon").id,
+    binURL: BIN_URL,
+    profileURL: PROFILE_URL
+  };
+
+  process = new SimulatorProcess(params);
   process.run();
 
   return promise.resolve();
