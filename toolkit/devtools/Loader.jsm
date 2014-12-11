@@ -77,6 +77,7 @@ BuiltinProvider.prototype = {
         "devtools/server": "resource://gre/modules/devtools/server",
         "devtools/toolkit/webconsole": "resource://gre/modules/devtools/toolkit/webconsole",
         "devtools/app-actor-front": "resource://gre/modules/devtools/app-actor-front.js",
+        "devtools/simulator-process": "resource://gre/modules/devtools/simulator-process.js",
         "devtools/styleinspector/css-logic": "resource://gre/modules/devtools/styleinspector/css-logic",
         "devtools/css-color": "resource://gre/modules/devtools/css-color",
         "devtools/output-parser": "resource://gre/modules/devtools/output-parser",
@@ -133,6 +134,7 @@ SrcdirProvider.prototype = {
     let serverURI = this.fileURI(OS.Path.join(toolkitDir, "server"));
     let webconsoleURI = this.fileURI(OS.Path.join(toolkitDir, "webconsole"));
     let appActorURI = this.fileURI(OS.Path.join(toolkitDir, "apps", "app-actor-front.js"));
+    let simulatorProcessURI = this.fileURI(OS.Path.join(toolkitDir, "apps", "simulator-process.js"));
     let cssLogicURI = this.fileURI(OS.Path.join(toolkitDir, "styleinspector", "css-logic"));
     let cssColorURI = this.fileURI(OS.Path.join(toolkitDir, "css-color"));
     let outputParserURI = this.fileURI(OS.Path.join(toolkitDir, "output-parser"));
@@ -159,6 +161,7 @@ SrcdirProvider.prototype = {
         "devtools/server": serverURI,
         "devtools/toolkit/webconsole": webconsoleURI,
         "devtools/app-actor-front": appActorURI,
+        "devtools/simulator-process": simulatorProcessURI,
         "devtools/styleinspector/css-logic": cssLogicURI,
         "devtools/css-color": cssColorURI,
         "devtools/output-parser": outputParserURI,

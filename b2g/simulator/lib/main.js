@@ -9,7 +9,7 @@ const { AddonManager } = Cu.import("resource://gre/modules/AddonManager.jsm", {}
 const { Promise: promise } = Cu.import("resource://gre/modules/Promise.jsm", {});
 const { Services } = Cu.import("resource://gre/modules/Services.jsm", {});
 const { Simulator } = Cu.import("resource://gre/modules/devtools/Simulator.jsm");
-const { SimulatorProcess } = require("./simulator-process");
+const { SimulatorProcess } = require("devtools/simulator-process");
 const Runtime = require("sdk/system/runtime");
 const URL = require("sdk/url");
 
