@@ -5,15 +5,18 @@
 
 'use strict';
 
-const { Cc, Ci, Cu, ChromeWorker } = require("chrome");
+const { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
 Cu.import("resource://gre/modules/Services.jsm");
 
+const { EventEmitter } = Cu.import("resource://gre/modules/devtools/event-emitter.js", {});
+const { Promise: promise } = Cu.import("resource://gre/modules/Promise.jsm", {});
+const { require } = Cu.import("resource://gre/modules/devtools/Loader.jsm", {}).devtools;
 const Environment = require("sdk/system/environment").env;
 const Runtime = require("sdk/system/runtime");
 const Subprocess = require("sdk/system/child_process/subprocess");
-const { Promise: promise } = Cu.import("resource://gre/modules/Promise.jsm", {});
-const { EventEmitter } = Cu.import("resource://gre/modules/devtools/event-emitter.js", {});
+
+const EXPORTED_SYMBOLS = ["SimulatorProcess"];
 
 
 // Log subprocess error and debug messages to the console.  This logs messages
@@ -21,18 +24,18 @@ const { EventEmitter } = Cu.import("resource://gre/modules/devtools/event-emitte
 // have trailing newlines.  And note that registerLogHandler actually registers
 // an error handler, despite its name.
 Subprocess.registerLogHandler(
-  function(s) console.error("subprocess: " + s.trim())
+  function(s) dump("subprocess: " + s.trim() + "\n")
 );
 Subprocess.registerDebugHandler(
-  function(s) console.debug("subprocess: " + s.trim())
+  function(s) dump("subprocess: " + s.trim() + "\n")
 );
 
 function SimulatorProcess(options) {
   this.options = options;
 
   EventEmitter.decorate(this);
-  this.on("stdout", data => { console.log(data.trim()) });
-  this.on("stderr", data => { console.error(data.trim()) });
+  this.on("stdout", data => { dump(data.trim() + "\n") });
+  this.on("stderr", data => { dump(data.trim() + "\n") });
 }
 
 SimulatorProcess.prototype = {
@@ -57,8 +60,8 @@ SimulatorProcess.prototype = {
 
     this.once("stdout", function () {
       if (Runtime.OS == "Darwin") {
-          console.debug("WORKAROUND run osascript to show b2g-desktop window"+
-                        " on Runtime.OS=='Darwin'");
+          dump("WORKAROUND run osascript to show b2g-desktop window on " +
+               "Runtime.OS=='Darwin'\n");
         // Escape double quotes and escape characters for use in AppleScript.
         let path = b2gExecutable.path
           .replace(/\\/g, "\\\\").replace(/\"/g, '\\"');
@@ -97,7 +100,7 @@ SimulatorProcess.prototype = {
       // on b2g instance exit, reset tracked process, remote debugger port and
       // shuttingDown flag, then finally emit an exit event
       done: (function(result) {
-        console.log("B2G terminated with " + result.exitCode);
+        dump("B2G terminated with " + result.exitCode + "\n");
         this.process = null;
         this.emit("exit", result.exitCode);
       }).bind(this)
@@ -148,7 +151,7 @@ SimulatorProcess.prototype = {
 
     let profile = this.options.profilePath;
     args.push("-profile", profile);
-    console.log("profile", profile);
+    dump("profile " + profile + "\n");
 
     // NOTE: push dbgport option on the b2g-desktop commandline
     args.push("-start-debugger-server", "" + this.options.port);
@@ -159,5 +162,3 @@ SimulatorProcess.prototype = {
     return args;
   },
 };
-
-exports.SimulatorProcess = SimulatorProcess;
