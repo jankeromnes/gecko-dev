@@ -5,6 +5,7 @@
 
 TEST_DIRS += ['tests']
 
+# TODO don't include those in Fennec
 EXTRA_JS_MODULES.devtools += [
     'app-actor-front.js',
     'Devices.jsm',
