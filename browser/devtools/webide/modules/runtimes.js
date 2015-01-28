@@ -3,14 +3,18 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 const {Cu} = require("chrome");
+const {AddonManager} = Cu.import("resource://gre/modules/AddonManager.jsm");
 const {Devices} = Cu.import("resource://gre/modules/devtools/Devices.jsm");
 const {Services} = Cu.import("resource://gre/modules/Services.jsm");
-const {Simulator} = Cu.import("resource://gre/modules/devtools/Simulator.jsm");
 const {ConnectionManager, Connection} = require("devtools/client/connection-manager");
 const {DebuggerServer} = require("resource://gre/modules/devtools/dbg-server.jsm");
+const {GetAvailableAddons} = require("devtools/webide/addons");
+const {SimulatorProcess} = require("devtools/webide/simulator-process");
 const discovery = require("devtools/toolkit/discovery/discovery");
 const EventEmitter = require("devtools/toolkit/event-emitter");
 const promise = require("promise");
+const Runtime = require("sdk/system/runtime");
+const URL = require("sdk/url");
 
 const Strings = Services.strings.createBundle("chrome://browser/locale/devtools/webide.properties");
 
@@ -183,20 +187,24 @@ exports.RuntimeScanners = RuntimeScanners;
 
 /* SCANNERS */
 
-let SimulatorScanner = {
+let SimulatorAddonScanner = {
 
   _runtimes: [],
 
   enable() {
-    this._updateRuntimes = this._updateRuntimes.bind(this);
-    Simulator.on("register", this._updateRuntimes);
-    Simulator.on("unregister", this._updateRuntimes);
-    this._updateRuntimes();
+    let update = this._updateRuntimes.bind(this);
+    this._addonListener = {
+      onEnabled: update,
+      onDisabled: update,
+      onInstalled: update,
+      onUninstalled: update
+    };
+    AddonManager.addAddonListener(this._addonListener);
+    update();
   },
 
   disable() {
-    Simulator.off("register", this._updateRuntimes);
-    Simulator.off("unregister", this._updateRuntimes);
+    AddonManager.removeAddonListener(this._addonListener);
   },
 
   _emitUpdated() {
@@ -204,11 +212,15 @@ let SimulatorScanner = {
   },
 
   _updateRuntimes() {
-    this._runtimes = [];
-    for (let name of Simulator.availableNames()) {
-      this._runtimes.push(new SimulatorRuntime(name));
-    }
-    this._emitUpdated();
+    GetAvailableAddons().then(addons => {
+      this._runtimes = [];
+      addons.simulators.forEach(simulator => {
+        if (simulator.status == "installed") {
+          this._runtimes.push(new SimulatorAddonRuntime(simulator.addonID));
+        }
+      });
+      this._emitUpdated();
+    });
   },
 
   scan() {
@@ -221,8 +233,8 @@ let SimulatorScanner = {
 
 };
 
-EventEmitter.decorate(SimulatorScanner);
-RuntimeScanners.add(SimulatorScanner);
+EventEmitter.decorate(SimulatorAddonScanner);
+RuntimeScanners.add(SimulatorAddonScanner);
 
 /**
  * TODO: Remove this comaptibility layer in the future (bug 1085393)
@@ -463,33 +475,67 @@ WiFiRuntime.prototype = {
 // For testing use only
 exports._WiFiRuntime = WiFiRuntime;
 
-function SimulatorRuntime(name) {
-  this.name = name;
+function SimulatorAddonRuntime(addonID) {
+  AddonManager.getAddonByID(addonID, addon => {
+    this.addon = addon;
+  });
 }
 
-SimulatorRuntime.prototype = {
+SimulatorAddonRuntime.prototype = {
   type: RuntimeTypes.SIMULATOR,
   connect: function(connection) {
-    let port = ConnectionManager.getFreeTCPPort();
-    let simulator = Simulator.getByName(this.name);
-    if (!simulator || !simulator.launch) {
-      return promise.reject(new Error("Can't find simulator: " + this.name));
+    // return promise.reject(new Error("Can't find simulator: " + this.name));
+
+    let options = {
+      port: ConnectionManager.getFreeTCPPort()
+    };
+
+    // Compute addon runtime path.
+    try {
+      let pref = "extensions." + this.addon.id + ".customRuntime";
+      options.runtimePath = Services.prefs.getComplexValue(pref, Ci.nsIFile);
+    } catch(e) {}
+    if (!options.runtimePath) {
+      let executables = {
+        WINNT: "b2g-bin.exe",
+        Darwin: "B2G.app/Contents/MacOS/b2g-bin",
+        Linux: "b2g-bin",
+      };
+      options.runtimePath = URL.toFilename(addon.getResourceURI() + "b2g/") +
+        (Runtime.OS == "WINNT" ? "\\" : "/") + executables[Runtime.OS];
     }
-    return simulator.launch({port: port}).then(() => {
+    console.log("simulator path:", options.runtimePath);
+
+    // Compute Gaia profile path.
+    try {
+      let pref = "extensions." + this.addon.id + ".gaiaProfile";
+      options.profilePath = Services.prefs.getComplexValue(pref, Ci.nsIFile).path;
+    } catch(e) {}
+    if (!options.profilePath) {
+      options.profilePath = URL.toFilename(addon.getResourceURI() + "profile/");
+    }
+
+    let process = new SimulatorProcess(options);
+    process.run();
+
+    return promise.resolve().then(() => {
       connection.host = "localhost";
-      connection.port = port;
+      connection.port = options.port;
       connection.keepConnecting = true;
-      connection.once(Connection.Events.DISCONNECTED, simulator.close);
+      connection.once(Connection.Events.DISCONNECTED, process.kill());
       connection.connect();
     });
   },
   get id() {
-    return this.name;
+    return this.addon.id;
+  },
+  get name() {
+    return this.addon.name.replace(" Simulator", "");
   },
 };
 
 // For testing use only
-exports._SimulatorRuntime = SimulatorRuntime;
+exports._SimulatorAddonRuntime = SimulatorAddonRuntime;
 
 let gLocalRuntime = {
   type: RuntimeTypes.LOCAL,
