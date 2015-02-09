@@ -12,6 +12,5 @@ XPCSHELL_TESTS_MANIFESTS += ['tests/unit/xpcshell.ini']
 
 EXTRA_JS_MODULES.devtools += [
     'app-actor-front.js',
-    'Devices.jsm',
-    'Simulator.jsm'
+    'Devices.jsm'
 ]
