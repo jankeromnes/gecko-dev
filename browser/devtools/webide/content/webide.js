@@ -387,18 +387,39 @@ let UI = {
         parent.firstChild.remove();
       }
       for (let runtime of runtimeList[type]) {
-        let panelItemNode = document.createElement("toolbarbutton");
-        panelItemNode.className = "panel-item runtime-panel-item-" + type;
-        panelItemNode.setAttribute("label", runtime.name);
-        parent.appendChild(panelItemNode);
         let r = runtime;
-        panelItemNode.addEventListener("click", () => {
+        let panelItemNode = document.createElement("hbox");
+        panelItemNode.className = "panel-item-complex";
+
+        let connectButton = document.createElement("toolbarbutton");
+        connectButton.className = "panel-item runtime-panel-item-" + type;
+        connectButton.setAttribute("label", runtime.name);
+        connectButton.setAttribute("flex", "1");
+        connectButton.addEventListener("click", () => {
           this.hidePanels();
           this.dismissErrorNotification();
           this.connectToRuntime(r);
         }, true);
+        panelItemNode.appendChild(connectButton);
+
+        if (type == "simulator") {
+          let configButton = document.createElement("toolbarbutton");
+          configButton.className = "configure-button";
+          configButton.addEventListener("click", () => {
+            this.hidePanels();
+            this.configureRuntime(r);
+          }, true);
+          panelItemNode.appendChild(configButton);
+        }
+
+        parent.appendChild(panelItemNode);
       }
     }
+  },
+
+  configureRuntime: function(runtime) {
+    UI.selectDeckPanel("simulator");
+    // FIXME emit simulator
   },
 
   get lastConnectedRuntime() {
