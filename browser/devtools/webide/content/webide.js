@@ -1367,4 +1367,8 @@ let Cmds = {
     UI.contentViewer.fullZoom = 1;
     Services.prefs.setCharPref("devtools.webide.zoom", 1);
   },
+
+  configureSimulator: function() {
+    UI.selectDeckPanel("simulator");
+  },
 };
