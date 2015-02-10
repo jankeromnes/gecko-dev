@@ -181,7 +181,7 @@
           <toolbarbutton class="panel-item" id="runtime-details" command="cmd_showRuntimeDetails"/>
           <toolbarbutton class="panel-item" id="runtime-permissions" command="cmd_showPermissionsTable"/>
           <toolbarbutton class="panel-item" id="runtime-preferences" command="cmd_showDevicePrefs"/>
-          <toolbarbutton class="panel-item" id="runtime-preferences" command="cmd_showSettings"/>
+          <toolbarbutton class="panel-item" id="runtime-settings" command="cmd_showSettings"/>
           <toolbarbutton class="panel-item" id="runtime-screenshot"  command="cmd_takeScreenshot"/>
           <toolbarbutton class="panel-item" id="runtime-disconnect"  command="cmd_disconnectRuntime"/>
         </vbox>
@@ -202,10 +202,10 @@
       <iframe id="deck-panel-devicepreferences" flex="1" lazysrc="devicepreferences.xhtml"/>
       <iframe id="deck-panel-devicesettings" flex="1" lazysrc="devicesettings.xhtml"/>
       <iframe id="deck-panel-logs" flex="1" src="logs.xhtml"/>
+      <iframe id="deck-panel-simulator" flex="1" lazysrc="simulator.xhtml"/>
     </deck>
     <splitter hidden="true" class="devtools-horizontal-splitter" orient="vertical"/>
     <!-- toolbox iframe will be inserted here -->
   </notificationbox>
-
 
 </window>

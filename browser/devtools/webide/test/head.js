@@ -14,12 +14,13 @@ const {require} = devtools;
 const promise = require("promise");
 const {AppProjects} = require("devtools/app-manager/app-projects");
 
-let TEST_BASE;
+let TEST_ROOT;
 if (window.location === "chrome://browser/content/browser.xul") {
-  TEST_BASE = "chrome://mochitests/content/browser/browser/devtools/webide/test/";
+  TEST_ROOT = "chrome://mochitests/content/browser/";
 } else {
-  TEST_BASE = "chrome://mochitests/content/chrome/browser/devtools/webide/test/";
+  TEST_ROOT = "chrome://mochitests/content/chrome/";
 }
+let TEST_BASE = TEST_ROOT + "browser/devtools/webide/test/";
 
 Services.prefs.setBoolPref("devtools.webide.enabled", true);
 Services.prefs.setBoolPref("devtools.webide.enableLocalRuntime", true);
@@ -29,6 +30,7 @@ Services.prefs.setCharPref("devtools.webide.simulatorAddonsURL", TEST_BASE + "ad
 Services.prefs.setCharPref("devtools.webide.adbAddonURL", TEST_BASE + "addons/adbhelper-#OS#.xpi");
 Services.prefs.setCharPref("devtools.webide.adaptersAddonURL", TEST_BASE + "addons/fxdt-adapters-#OS#.xpi");
 Services.prefs.setCharPref("devtools.webide.templatesURL", TEST_BASE + "templates.json");
+Services.prefs.setCharPref("devtools.webide.devicesURL", TEST_ROOT + "browser/devtools/shared/test/browser_devices.json");
 
 
 SimpleTest.registerCleanupFunction(() => {

@@ -126,6 +126,10 @@ SimulatorProcess.prototype = {
 
     args.push("-start-debugger-server", "" + this.options.port);
 
+    if (this.options.width && this.options.height) {
+      args.push("-screen", this.options.width + "x" + this.options.height);
+    }
+
     // Ignore eventual zombie instances of b2g that are left over.
     args.push("-no-remote");
 

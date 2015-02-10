@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="utf8">
+    <title></title>
+
+    <script type="application/javascript" src="chrome://mochikit/content/tests/SimpleTest/SimpleTest.js"></script>
+    <script type="application/javascript" src="chrome://mochikit/content/chrome-harness.js"></script>
+    <script type="application/javascript;version=1.8" src="head.js"></script>
+    <link rel="stylesheet" type="text/css" href="chrome://mochikit/content/tests/SimpleTest/test.css">
+  </head>
+
+  <body>
+
+    <script type="application/javascript;version=1.8">
+      window.onload = function() {
+        SimpleTest.waitForExplicitFinish();
+
+        const { GetAvailableAddons } = require("devtools/webide/addons");
+        const { GetDevices } = require("devtools/shared/devices");
+        const { Simulators } = require("devtools/webide/simulators");
+
+        function addonInstalled(addon) {
+          if (addon.status == "installed") {
+            return promise.resolve();
+          }
+          let deferred = promise.defer();
+          addon.on("update", function onUpdate() {
+            if (addon.status == "installed") {
+              addon.off("update", onUpdate);
+              deferred.resolve();
+            }
+          });
+          return deferred.promise;
+        }
+
+        Task.spawn(function* () {
+
+          let win = yield openWebIDE(true);
+
+          let find = win.document.querySelector.bind(win.document);
+          let findAll = win.document.querySelectorAll.bind(win.document);
+
+          let simulatorList = find("#runtime-panel-simulator");
+          let simulatorPanel = find("#deck-panel-simulator");
+
+          // Install "Firefox OS 1.0" simulator addon.
+
+          let addons = yield GetAvailableAddons();
+
+          let sim10 = addons.simulators.filter(a => a.version == "1.0")[0];
+
+          sim10.install();
+
+          yield addonInstalled(sim10);
+
+          is(findAll(".runtime-panel-item-simulator").length, 1, "One simulator in runtime panel");
+
+          // Install "Firefox OS 2.0" simulator addon.
+
+          let sim20 = addons.simulators.filter(a => a.version == "2.0")[0];
+
+          sim20.install();
+
+          yield addonInstalled(sim20);
+
+          is(findAll(".runtime-panel-item-simulator").length, 2, "Two simulators in runtime panel");
+
+          // TODO Start simulator and verify binary path / CLI args are default.
+
+          // Configure the 1.0 simulator.
+
+          simulatorList.querySelectorAll(".configure-button")[0].click();
+
+          is(find("#deck").selectedPanel, simulatorPanel, "Simulator deck panel is selected");
+
+          yield lazyIframeIsLoaded(simulatorPanel);
+
+          yield nextTick();
+
+          let doc = simulatorPanel.contentWindow.document;
+          let form = doc.querySelector("#simulator-editor");
+
+          let change = doc.createEvent("HTMLEvents");
+          change.initEvent("change", true, true);
+
+          // Test `name`.
+
+          is(form.name.value, findAll(".runtime-panel-item-simulator")[0].label, "Original simulator name");
+
+          form.name.value = "CustomFox 1.0";
+          form.name.dispatchEvent(change);
+          yield nextTick();
+
+          is(findAll(".runtime-panel-item-simulator")[0].label, form.name.value, "Updated simulator name");
+
+          // Test `version`.
+
+          is(form.version.value, sim10.addonID, "Original simulator version");
+          ok(!form.version.classList.contains("custom"), "Version selector not custom");
+
+          form.version.value = sim20.addonID;
+          form.version.dispatchEvent(change);
+          yield nextTick();
+
+          ok(!form.version.classList.contains("custom"), "Version selector not custom after change");
+
+          // TODO:
+          //   pick custom path (abort, still previous addon, still not ".custom")
+          //   pick custom path (success, verify value = "custom" and textContent = custom path, is now ".custom")
+          //   back to addon (still ".custom")
+          //   custom again
+
+          // Test `profile`.
+
+          is(form.profile.value, "default", "Original simulator profile");
+
+          // TODO:
+          //   pick profile (abort, same as above)
+          //   pick profile (success)
+          //   back to default
+          //   back to custom
+
+          // TODO Test `device`.
+
+          // TODO Configure the 2.0 simulator.
+
+          // TODO Reset 2.0 simulator to defaults.
+
+          // TODO Uninstall 2.0 addon.
+
+          // TODO Remove 1.0 simulator.
+
+          // TODO Start a fake simulator addon to spy on binary path / CLI args.
+
+          yield closeWebIDE(win);
+
+          SimpleTest.finish();
+
+        });
+      }
+
+    </script>
+  </body>
+</html>

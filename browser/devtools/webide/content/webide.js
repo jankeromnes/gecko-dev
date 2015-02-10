@@ -19,11 +19,12 @@ const {Promise: promise} = Cu.import("resource://gre/modules/Promise.jsm", {});
 const ProjectEditor = require("projecteditor/projecteditor");
 const {Devices} = Cu.import("resource://gre/modules/devtools/Devices.jsm");
 const {GetAvailableAddons} = require("devtools/webide/addons");
-const {GetTemplatesJSON} = require("devtools/webide/remote-resources");
+const {GetTemplatesJSON, GetDevicesJSON} = require("devtools/webide/remote-resources");
 const utils = require("devtools/webide/utils");
 const Telemetry = require("devtools/shared/telemetry");
 const {RuntimeScanners, WiFiScanner} = require("devtools/webide/runtimes");
 const {showDoorhanger} = require("devtools/shared/doorhanger");
+const {Simulators} = require("devtools/webide/simulators");
 
 const Strings = Services.strings.createBundle("chrome://browser/locale/devtools/webide.properties");
 
@@ -33,8 +34,9 @@ const HELP_URL = "https://developer.mozilla.org/docs/Tools/WebIDE/Troubleshootin
 const MAX_ZOOM = 1.4;
 const MIN_ZOOM = 0.6;
 
-// download template index early
+// Download remote resources early
 GetTemplatesJSON(true);
+GetDevicesJSON(true);
 
 // See bug 989619
 console.log = console.log.bind(console);
@@ -109,6 +111,11 @@ let UI = {
     this.contentViewer.fullZoom = Services.prefs.getCharPref("devtools.webide.zoom");
 
     gDevToolsBrowser.isWebIDEInitialized.resolve();
+
+    Simulators.on("configure", (e, simulator) => {
+      this.hidePanels();
+      UI.selectDeckPanel("simulator");
+    });
   },
 
   uninit: function() {
@@ -389,16 +396,29 @@ let UI = {
         parent.firstChild.remove();
       }
       for (let runtime of runtimeList[type]) {
-        let panelItemNode = document.createElement("toolbarbutton");
-        panelItemNode.className = "panel-item runtime-panel-item-" + type;
-        panelItemNode.setAttribute("label", runtime.name);
-        parent.appendChild(panelItemNode);
         let r = runtime;
-        panelItemNode.addEventListener("click", () => {
+        let panelItemNode = document.createElement("hbox");
+        panelItemNode.className = "panel-item-complex";
+
+        let connectButton = document.createElement("toolbarbutton");
+        connectButton.className = "panel-item runtime-panel-item-" + type;
+        connectButton.setAttribute("label", r.name);
+        connectButton.setAttribute("flex", "1");
+        connectButton.addEventListener("click", () => {
           this.hidePanels();
           this.dismissErrorNotification();
           this.connectToRuntime(r);
         }, true);
+        panelItemNode.appendChild(connectButton);
+
+        if (r.configure) {
+          let configButton = document.createElement("toolbarbutton");
+          configButton.className = "configure-button";
+          configButton.addEventListener("click", r.configure.bind(r), true);
+          panelItemNode.appendChild(configButton);
+        }
+
+        parent.appendChild(panelItemNode);
       }
     }
   },
