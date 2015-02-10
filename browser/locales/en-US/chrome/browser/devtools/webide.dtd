@@ -191,3 +191,13 @@
 <!-- LOCALIZATION NOTE (wifi_auth_token_request): Instructions requesting the
      user to transfer authentication info by transferring a token. -->
 <!ENTITY wifi_auth_token_request "If your other device asks for a token instead of scanning a QR code, please copy the value below to the other device:">
+
+<!-- Simulator configuration -->
+<!ENTITY simulator_title "Simulator configuration">
+<!ENTITY simulator_name "Name">
+<!ENTITY simulator_software "Software">
+<!ENTITY simulator_version "Version">
+<!ENTITY simulator_profile "Profile">
+<!ENTITY simulator_hardware "Hardware">
+<!ENTITY simulator_device "Device">
+<!ENTITY simulator_screenSize "Screen">

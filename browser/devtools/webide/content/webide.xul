@@ -55,6 +55,7 @@
       <command id="cmd_zoomin" label="&viewMenu_zoomin_label;" oncommand="Cmds.zoomIn()"/>
       <command id="cmd_zoomout" label="&viewMenu_zoomout_label;" oncommand="Cmds.zoomOut()"/>
       <command id="cmd_resetzoom" label="&viewMenu_resetzoom_label;" oncommand="Cmds.resetZoom()"/>
+      <command id="cmd_configureSimulator" label="&runtimePanel_installsimulator;" oncommand="Cmds.configureSimulator()"/>
     </commandset>
   </commandset>
 
@@ -175,6 +176,7 @@
         <label class="panel-header">&runtimePanel_simulator;</label>
         <vbox id="runtime-panel-simulator"></vbox>
         <toolbarbutton class="panel-item" label="&runtimePanel_installsimulator;" id="runtime-panel-installsimulator" command="cmd_showAddons"/>
+        <toolbarbutton class="panel-item" label="&runtimePanel_installsimulator;" id="runtime-panel-installsimulator" command="cmd_configureSimulator"/>
         <label class="panel-header">&runtimePanel_other;</label>
         <vbox id="runtime-panel-other"></vbox>
         <vbox flex="1" id="runtime-actions">
@@ -201,6 +203,7 @@
       <iframe id="deck-panel-monitor" flex="1" lazysrc="monitor.xhtml"/>
       <iframe id="deck-panel-devicepreferences" flex="1" lazysrc="devicepreferences.xhtml"/>
       <iframe id="deck-panel-devicesettings" flex="1" lazysrc="devicesettings.xhtml"/>
+      <iframe id="deck-panel-simulator" flex="1" lazysrc="simulator.xhtml"/>
     </deck>
     <splitter hidden="true" class="devtools-horizontal-splitter" orient="vertical"/>
     <!-- toolbox iframe will be inserted here -->

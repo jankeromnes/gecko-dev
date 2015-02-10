@@ -6,49 +6,72 @@ const { Cu } = require("chrome");
 const { AddonManager } = Cu.import("resource://gre/modules/AddonManager.jsm");
 const { EventEmitter } = Cu.import("resource://gre/modules/devtools/event-emitter.js");
 const { ConnectionManager } = require("devtools/client/connection-manager");
-const { AddonSimulatorProcess, OldAddonSimulatorProcess } = require("devtools/webide/simulator-process");
+const { AddonSimulatorProcess,
+        OldAddonSimulatorProcess,
+        CustomSimulatorProcess } = require("devtools/webide/simulator-process");
 const promise = require("promise");
 
 const SimulatorRegExp = new RegExp(Services.prefs.getCharPref("devtools.webide.simulatorAddonRegExp"));
 
 let Simulators = {
-  // TODO (Bug 1090949) Don't generate this list from installed simulator
-  // addons, but instead implement a persistent list of user-configured
-  // simulators.
+  _simulators: null,
+
   getAll() {
+    if (this._simulators) {
+      return promise.resolve(this._simulators);
+    }
     let deferred = promise.defer();
-    AddonManager.getAllAddons(addons => {
-      let simulators = [];
-      for (let addon of addons) {
-        if (SimulatorRegExp.exec(addon.id)) {
-          simulators.push(new Simulator(addon));
-        }
-      }
-      // Sort simulators alphabetically by name.
-      simulators.sort((a, b) => {
-        return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    this.getSimulatorAddons().then(addons => {
+      this._simulators = addons.map(addon => {
+        let name = addon.name.replace(" Simulator", "");
+        return new Simulator(addon, {name});
       });
-      deferred.resolve(simulators);
+      deferred.resolve(this._simulators);
     });
     return deferred.promise;
   },
-}
+
+  getSimulatorAddons() {
+    let deferred = promise.defer();
+    AddonManager.getAllAddons(all => {
+      let addons = [];
+      for (let addon of all) {
+        if (SimulatorRegExp.exec(addon.id)) {
+          addons.push(addon);
+        }
+      }
+      // Sort simulator addons by name.
+      addons.sort((a, b) => {
+        return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+      });
+      deferred.resolve(addons);
+    });
+    return deferred.promise;
+  },
+
+  // FIXME
+  onEnabled(addon) {
+    this.emit("updated");
+  },
+  onDisabled(addon) {
+    this.emit("updated");
+  },
+  onInstalled(addon) {
+    this.emit("updated");
+  },
+  onUninstalled(addon) {
+    this.emit("updated");
+  },
+};
 EventEmitter.decorate(Simulators);
+AddonManager.addAddonListener(Simulators);
 exports.Simulators = Simulators;
 
-function update() {
-  Simulators.emit("updated");
-}
-AddonManager.addAddonListener({
-  onEnabled: update,
-  onDisabled: update,
-  onInstalled: update,
-  onUninstalled: update
-});
 
-
-function Simulator(addon) {
+function Simulator(addon, options) {
   this.addon = addon;
+  this.options = options || {};
+  // TODO fill this.options with defaults.
 }
 
 Simulator.prototype = {
@@ -58,19 +81,22 @@ Simulator.prototype = {
       return this.kill().then(this.launch.bind(this));
     }
 
-    let options = {
-      port: ConnectionManager.getFreeTCPPort()
-    };
+    this.options.port = ConnectionManager.getFreeTCPPort();
 
-    if (this.version <= "1.3") {
-      // Support older simulator addons.
-      this.process = new OldAddonSimulatorProcess(this.addon, options);
+    // Choose simulator process type.
+    if (this.addon == null) {
+      // Custom binary.
+      this.process = new CustomSimulatorProcess(this.options);
+    } else if (this.version > "1.3") {
+      // Recent simulator addon.
+      this.process = new AddonSimulatorProcess(this.addon, this.options);
     } else {
-      this.process = new AddonSimulatorProcess(this.addon, options);
+      // Old simulator addon.
+      this.process = new OldAddonSimulatorProcess(this.addon, this.options);
     }
     this.process.run();
 
-    return promise.resolve(options.port);
+    return promise.resolve(this.options.port);
   },
 
   kill() {
@@ -83,14 +109,15 @@ Simulator.prototype = {
   },
 
   get id() {
-    return this.addon.id;
+    return this.name;
   },
 
   get name() {
-    return this.addon.name.replace(" Simulator", "");
+    return this.options.name || "Unknown";
   },
 
   get version() {
-    return this.name.match(/\d+\.\d+/)[0];
+    return this.addon ? this.addon.name.match(/\d+\.\d+/)[0] : "Unknown";
   },
 };
+exports.Simulator = Simulator;
