@@ -21,6 +21,7 @@ pref("devtools.webide.adaptersAddonID", "fxdevtools-adapters@mozilla.org");
 pref("devtools.webide.monitorWebSocketURL", "ws://localhost:9000");
 pref("devtools.webide.lastConnectedRuntime", "");
 pref("devtools.webide.lastSelectedProject", "");
+pref("devtools.webide.logSimulatorOutput", false);
 pref("devtools.webide.widget.autoinstall", true);
 #ifdef MOZ_DEV_EDITION
 pref("devtools.webide.widget.enabled", true);

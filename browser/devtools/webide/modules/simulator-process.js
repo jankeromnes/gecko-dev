@@ -55,6 +55,9 @@ SimulatorProcess.prototype = {
       }
     });
 
+    this.on("stdout", (e, data) => this.log(e, data.trim()));
+    this.on("stderr", (e, data) => this.log(e, data.trim()));
+
     let environment;
     if (OS.indexOf("linux") > -1) {
       environment = ["TMPDIR=" + Services.dirsvc.get("TmpD", Ci.nsIFile).path];
@@ -97,6 +100,18 @@ SimulatorProcess.prototype = {
     } else {
       return promise.resolve(undefined);
     }
+  },
+
+  // Maybe log output messages.
+  log(level, message) {
+    if (!Services.prefs.getBoolPref("devtools.webide.logSimulatorOutput")) {
+      return;
+    }
+    if (level === "stderr" || level === "error") {
+      console.error(message);
+      return;
+    }
+    console.log(message);
   },
 
   // Compute B2G CLI arguments.
@@ -151,9 +166,6 @@ exports.CustomSimulatorProcess = CustomSimulatorProcess;
 function AddonSimulatorProcess(addon, options) {
   this.addon = addon;
   this.options = options;
-
-  this.on("stdout", (e, data) => { console.log(data.trim()) });
-  this.on("stderr", (e, data) => { console.error(data.trim()) });
 }
 
 let ASPp = AddonSimulatorProcess.prototype = Object.create(SimulatorProcess.prototype);
@@ -205,9 +217,6 @@ exports.AddonSimulatorProcess = AddonSimulatorProcess;
 function OldAddonSimulatorProcess(addon, options) {
   this.addon = addon;
   this.options = options;
-
-  this.on("stdout", (e, data) => { console.log(data.trim()) });
-  this.on("stderr", (e, data) => { console.error(data.trim()) });
 }
 
 let OASPp = OldAddonSimulatorProcess.prototype = Object.create(AddonSimulatorProcess.prototype);
