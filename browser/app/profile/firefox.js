@@ -1477,6 +1477,9 @@ pref("devtools.netmonitor.panes-network-details-height", 450);
 pref("devtools.netmonitor.statistics", true);
 pref("devtools.netmonitor.filters", "[\"all\"]");
 
+// Enable the Device Emulation panel
+pref("devtools.device.enabled", true);
+
 // Enable the Tilt inspector
 pref("devtools.tilt.enabled", true);
 pref("devtools.tilt.intro_transition", true);
