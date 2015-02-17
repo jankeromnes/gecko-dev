@@ -36,6 +36,7 @@ loader.lazyGetter(this, "TimelinePanel", () => require("devtools/timeline/panel"
 loader.lazyGetter(this, "NetMonitorPanel", () => require("devtools/netmonitor/panel").NetMonitorPanel);
 loader.lazyGetter(this, "StoragePanel", () => require("devtools/storage/panel").StoragePanel);
 loader.lazyGetter(this, "ScratchpadPanel", () => require("devtools/scratchpad/scratchpad-panel").ScratchpadPanel);
+loader.lazyGetter(this, "DevicePanel", () => require("devtools/device/panel").DevicePanel);
 
 // Strings
 const toolboxProps = "chrome://browser/locale/devtools/toolbox.properties";
@@ -51,6 +52,7 @@ const timelineProps = "chrome://browser/locale/devtools/timeline.properties";
 const netMonitorProps = "chrome://browser/locale/devtools/netmonitor.properties";
 const storageProps = "chrome://browser/locale/devtools/storage.properties";
 const scratchpadProps = "chrome://browser/locale/devtools/scratchpad.properties";
+const deviceProps = "chrome://browser/locale/devtools/device.properties";
 
 loader.lazyGetter(this, "toolboxStrings", () => Services.strings.createBundle(toolboxProps));
 loader.lazyGetter(this, "profilerStrings",() => Services.strings.createBundle(profilerProps));
@@ -65,6 +67,7 @@ loader.lazyGetter(this, "timelineStrings", () => Services.strings.createBundle(t
 loader.lazyGetter(this, "netMonitorStrings", () => Services.strings.createBundle(netMonitorProps));
 loader.lazyGetter(this, "storageStrings", () => Services.strings.createBundle(storageProps));
 loader.lazyGetter(this, "scratchpadStrings", () => Services.strings.createBundle(scratchpadProps));
+loader.lazyGetter(this, "deviceStrings", () => Services.strings.createBundle(deviceProps));
 
 let Tools = {};
 exports.Tools = Tools;
@@ -391,9 +394,30 @@ Tools.webAudioEditor = {
   }
 };
 
+Tools.device = {
+  id: "device",
+  ordinal: 12,
+  visibilityswitch: "devtools.device.enabled",
+  icon: "chrome://browser/skin/devtools/tool-webaudio.svg",
+  invertIconForLightTheme: true,
+  url: "chrome://browser/content/devtools/device/device.xul",
+  label: l10n("device.label", deviceStrings),
+  panelLabel: l10n("device.panelLabel", deviceStrings),
+  tooltip: l10n("device.tooltip", deviceStrings),
+
+  isTargetSupported: function(target) {
+    return !target.isAddon;
+  },
+
+  build: function (iframeWindow, toolbox) {
+    let panel = new DevicePanel(iframeWindow, toolbox);
+    return panel.open();
+  }
+};
+
 Tools.scratchpad = {
   id: "scratchpad",
-  ordinal: 12,
+  ordinal: 13,
   visibilityswitch: "devtools.scratchpad.enabled",
   icon: "chrome://browser/skin/devtools/tool-scratchpad.svg",
   invertIconForLightTheme: true,
@@ -424,6 +448,7 @@ let defaultTools = [
   Tools.webAudioEditor,
   Tools.jsprofiler,
   Tools.timeline,
+  Tools.device,
   Tools.netMonitor,
   Tools.storage,
   Tools.scratchpad
