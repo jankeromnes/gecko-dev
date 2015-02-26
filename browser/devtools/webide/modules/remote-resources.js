@@ -52,3 +52,7 @@ exports.GetTemplatesJSON = function(bypassCache) {
 exports.GetAddonsJSON = function(bypassCache) {
   return getJSON(bypassCache, "devtools.webide.addonsURL");
 }
+
+exports.GetDevicesJSON = function(bypassCache) {
+  return getJSON(bypassCache, "devtools.webide.devicesURL");
+}

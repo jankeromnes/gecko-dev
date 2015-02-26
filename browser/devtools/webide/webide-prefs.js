@@ -18,6 +18,7 @@ pref("devtools.webide.adbAddonURL", "https://ftp.mozilla.org/pub/mozilla.org/lab
 pref("devtools.webide.adbAddonID", "adbhelper@mozilla.org");
 pref("devtools.webide.adaptersAddonURL", "https://ftp.mozilla.org/pub/mozilla.org/labs/fxdt-adapters/#OS#/fxdt-adapters-#OS#-latest.xpi");
 pref("devtools.webide.adaptersAddonID", "fxdevtools-adapters@mozilla.org");
+pref("devtools.webide.devicesURL", "https://raw.githubusercontent.com/jankeromnes/devices.json/master/devices.json"); // FIXME Use Mozilla's CDN instead.
 pref("devtools.webide.monitorWebSocketURL", "ws://localhost:9000");
 pref("devtools.webide.lastConnectedRuntime", "");
 pref("devtools.webide.lastSelectedProject", "");
