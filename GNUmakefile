@@ -3,7 +3,7 @@
 #
 # This file and all of its targets should not be used by anything important.
 
-all: build
+all: build run
 
 build:
 	./mach build
@@ -11,4 +11,10 @@ build:
 clean:
 	./mach clobber
 
-.PHONY: all build clean
+run:
+	./mach run -P dev
+
+update:
+	git fetch moz && git rebase moz/master
+
+.PHONY: all build clean run update
