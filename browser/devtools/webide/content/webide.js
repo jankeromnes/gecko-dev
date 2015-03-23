@@ -25,6 +25,7 @@ const Telemetry = require("devtools/shared/telemetry");
 const {RuntimeScanners, WiFiScanner} = require("devtools/webide/runtimes");
 const {showDoorhanger} = require("devtools/shared/doorhanger");
 const ProjectList = require("devtools/webide/project-list");
+const {Simulators} = require("devtools/webide/simulators");
 
 const Strings = Services.strings.createBundle("chrome://browser/locale/devtools/webide.properties");
 
@@ -37,6 +38,7 @@ const MIN_ZOOM = 0.6;
 // Download remote resources early
 getJSON("devtools.webide.addonsURL", true);
 getJSON("devtools.webide.templatesURL", true);
+getJSON("devtools.devices.url", true);
 
 // See bug 989619
 console.log = console.log.bind(console);
@@ -117,6 +119,10 @@ let UI = {
     this.contentViewer.fullZoom = Services.prefs.getCharPref("devtools.webide.zoom");
 
     gDevToolsBrowser.isWebIDEInitialized.resolve();
+
+    Simulators.on("configure", (e, simulator) => {
+      UI.selectDeckPanel("simulator");
+    });
   },
 
   destroy: function() {
