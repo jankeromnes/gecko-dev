@@ -567,6 +567,14 @@ RequestsMenuView.prototype = Heritage.extend(WidgetMethods, {
   },
 
   /**
+   * Copy the request url query string from the currently selected item.
+   */
+  copyUrlParams: function() {
+    let selected = this.selectedItem.attachment;
+    clipboardHelper.copyString(nsIURL(selected.url).query, document);
+  },
+
+  /**
    * Copy a cURL command from the currently selected item.
    */
   copyAsCurl: function() {
@@ -1829,6 +1837,9 @@ RequestsMenuView.prototype = Heritage.extend(WidgetMethods, {
 
     let copyUrlElement = $("#request-menu-context-copy-url");
     copyUrlElement.hidden = !selectedItem;
+
+    let copyUrlParamsElement = $("#request-menu-context-copy-url-params");
+    copyUrlParamsElement.hidden = !selectedItem || !nsIURL(selectedItem.attachment.url).query;
 
     let copyAsCurlElement = $("#request-menu-context-copy-as-curl");
     copyAsCurlElement.hidden = !selectedItem || !selectedItem.attachment.responseContent;
