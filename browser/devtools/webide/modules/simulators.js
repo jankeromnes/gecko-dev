@@ -8,6 +8,7 @@ loader.lazyRequireGetter(this, "ConnectionManager", "devtools/client/connection-
 loader.lazyRequireGetter(this, "AddonSimulatorProcess", "devtools/webide/simulator-process", true);
 loader.lazyRequireGetter(this, "OldAddonSimulatorProcess", "devtools/webide/simulator-process", true);
 loader.lazyRequireGetter(this, "CustomSimulatorProcess", "devtools/webide/simulator-process", true);
+const asyncStorage = require("devtools/toolkit/shared/async-storage");
 const EventEmitter = require("devtools/toolkit/event-emitter");
 const promise = require("promise");
 
@@ -21,17 +22,48 @@ let Simulators = {
   // The list of simulator configurations.
   _simulators: [],
 
+  // Load a previously saved list of configurations.
+  _load() {
+    return asyncStorage.getItem("simulators").then(value => {
+      this._loaded = true;
+
+      if (Array.isArray(value)) {
+        value.forEach(options => {
+          let addon = null;
+          let simulator = new Simulator(options);
+          this.add(simulator);
+
+          // If the simulator had a reference to an addon, fix it afterwards.
+          if (options.addonID) {
+            AddonManager.getAddonByID(options.addonID, addon => {
+              simulator.addon = addon;
+              delete simulator.options.addonID;
+            });
+          }
+        });
+      }
+      return promise.resolve(this._simulators);
+    });
+  },
+
+  // Save the current list of configurations.
+  _save() {
+    return asyncStorage.setItem("simulators", this._simulators.map(simulator => {
+      let options = JSON.parse(JSON.stringify(simulator.options));
+      if (simulator.addon != null) {
+        options.addonID = simulator.addon.id;
+      }
+      return options;
+    }));
+  },
+
   // List all available simulators.
   findSimulators() {
     if (this._loaded) {
       return promise.resolve(this._simulators);
     }
-
-    // TODO (Bug 1146519) Load a persistent list of configured simulators first.
-
-    // Add default simulators to the list for each new (unused) addon.
-    return this.findSimulatorAddons().then(addons => {
-      this._loaded = true;
+    return this._load().then(this.findSimulatorAddons).then(addons => {
+      // Add default simulators to the list for each new (unused) addon.
       addons.forEach(this.addIfUnusedAddon.bind(this));
       return this._simulators;
     });
@@ -43,7 +75,7 @@ let Simulators = {
     AddonManager.getAllAddons(all => {
       let addons = [];
       for (let addon of all) {
-        if (this.isSimulatorAddon(addon)) {
+        if (Simulators.isSimulatorAddon(addon)) {
           addons.push(addon);
         }
       }
@@ -54,25 +86,25 @@ let Simulators = {
     return deferred.promise;
   },
 
-  // Detect simulator addons, including "unofficial" ones
-  isSimulatorAddon(addon) {
-    return SimulatorRegExp.exec(addon.id);
+  // Add a new simulator for `addon` if no other simulator uses it.
+  addIfUnusedAddon(addon) {
+    let simulators = this._simulators;
+    let matching = simulators.filter(s => s.addon && s.addon.id == addon.id);
+    if (matching.length > 0) {
+      return promise.resolve();
+    }
+    let name = addon.name.replace(" Simulator", "");
+    return this.add(new Simulator({name}, addon));
   },
 
-  // Get a unique name for a simulator (may add a suffix, e.g. "MyName (1)").
-  uniqueName(name) {
+  // TODO (Bug 1146521) Maybe find a better way to deal with removed addons?
+  removeIfUsingAddon(addon) {
     let simulators = this._simulators;
-
-    let names = {};
-    simulators.forEach(simulator => names[simulator.name] = true);
-
-    // Strip any previous suffix, add a new suffix if necessary.
-    let stripped = name.replace(/ \(\d+\)$/, "");
-    let unique = stripped;
-    for (let i = 1; names[unique]; i++) {
-      unique = stripped + " (" + i + ")";
+    let remaining = simulators.filter(s => !s.addon || s.addon.id != addon.id);
+    this._simulators = remaining;
+    if (remaining.length !== simulators.length) {
+      this.emitUpdated();
     }
-    return unique;
   },
 
   // Add a new simulator to the list. Caution: `simulator.name` may be modified.
@@ -95,29 +127,30 @@ let Simulators = {
     }
   },
 
-  // Add a new default simulator for `addon` if no other simulator uses it.
-  addIfUnusedAddon(addon) {
+  // Get a unique name for a simulator (may add a suffix, e.g. "MyName (1)").
+  uniqueName(name) {
     let simulators = this._simulators;
-    let matching = simulators.filter(s => s.addon && s.addon.id == addon.id);
-    if (matching.length > 0) {
-      return promise.resolve();
+
+    let names = {};
+    simulators.forEach(simulator => names[simulator.name] = true);
+
+    // Strip any previous suffix, add a new suffix if necessary.
+    let stripped = name.replace(/ \(\d+\)$/, "");
+    let unique = stripped;
+    for (let i = 1; names[unique]; i++) {
+      unique = stripped + " (" + i + ")";
     }
-    let name = addon.name.replace(" Simulator", "");
-    return this.add(new Simulator({name}, addon));
+    return unique;
   },
 
-  // TODO (Bug 1146521) Maybe find a better way to deal with removed addons?
-  removeIfUsingAddon(addon) {
-    let simulators = this._simulators;
-    let remaining = simulators.filter(s => !s.addon || s.addon.id != addon.id);
-    this._simulators = remaining;
-    if (remaining.length !== simulators.length) {
-      this.emitUpdated();
-    }
+  // Detect simulator addons, including "unofficial" ones.
+  isSimulatorAddon(addon) {
+    return SimulatorRegExp.exec(addon.id);
   },
 
   emitUpdated() {
     this._simulators.sort(LocaleCompare);
+    this._save();
     this.emit("updated");
   },
 
