@@ -147,8 +147,16 @@ SimulatorProcess.prototype = {
     // Screen size.
     let width = parseInt(this.options.width);
     let height = parseInt(this.options.height);
+    let pixelRatio = parseFloat(this.options.pixelRatio);
+    if (!this.options.b2gBinary && this.addon.name.match(/\d+\.\d+/)[0] < "2.2") {
+      // Convert to DPI for simulators prior to 2.2.
+      // TODO
+      pixelRatio = 285;
+    }
     if (width && height) {
-      args.push("-screen", width + "x" + height);
+      let ratio = pixelRatio ? "@" + pixelRatio : "";
+      args.push("-screen", width + "x" + height + ratio);
+      dump("SCREEN YO " + width + "x" + height + ratio + "\n");
     }
 
     // Ignore eventual zombie instances of b2g that are left over.
