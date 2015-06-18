@@ -463,6 +463,7 @@ let UI = {
     let screenshotCmd = document.querySelector("#cmd_takeScreenshot");
     let permissionsCmd = document.querySelector("#cmd_showPermissionsTable");
     let detailsCmd = document.querySelector("#cmd_showRuntimeDetails");
+    let developerCmd = document.querySelector("#cmd_showDeveloperMode");
     let disconnectCmd = document.querySelector("#cmd_disconnectRuntime");
     let devicePrefsCmd = document.querySelector("#cmd_showDevicePrefs");
     let settingsCmd = document.querySelector("#cmd_showSettings");
@@ -471,6 +472,7 @@ let UI = {
       if (AppManager.deviceFront) {
         monitorCmd.removeAttribute("disabled");
         detailsCmd.removeAttribute("disabled");
+        developerCmd.removeAttribute("disabled");
         permissionsCmd.removeAttribute("disabled");
         screenshotCmd.removeAttribute("disabled");
       }
@@ -484,6 +486,7 @@ let UI = {
     } else {
       monitorCmd.setAttribute("disabled", "true");
       detailsCmd.setAttribute("disabled", "true");
+      developerCmd.setAttribute("disabled", "true");
       permissionsCmd.setAttribute("disabled", "true");
       screenshotCmd.setAttribute("disabled", "true");
       disconnectCmd.setAttribute("disabled", "true");
@@ -1137,6 +1140,10 @@ let Cmds = {
 
   showRuntimeDetails: function() {
     UI.selectDeckPanel("runtimedetails");
+  },
+
+  showDeveloperMode: function() {
+    UI.selectDeckPanel("developermode");
   },
 
   showDevicePrefs: function() {

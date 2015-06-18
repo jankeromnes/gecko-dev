@@ -255,6 +255,7 @@ panel > .panel-arrowcontainer > .panel-arrowcontent {
 }
 
 #runtime-details,
+#runtime-developer,
 #runtime-screenshot,
 #runtime-permissions,
 #runtime-preferences,
@@ -272,6 +273,7 @@ panel > .panel-arrowcontainer > .panel-arrowcontent {
 }
 
 #runtime-details                { -moz-image-region: rect(156px,438px,182px,412px) }
+#runtime-developer              { -moz-image-region: rect(156px,438px,182px,412px) }
 #runtime-screenshot             { -moz-image-region: rect(130px,438px,156px,412px) }
 #runtime-permissions            { -moz-image-region: rect(104px,438px,130px,412px) }
 #runtime-preferences, #runtime-settings {
