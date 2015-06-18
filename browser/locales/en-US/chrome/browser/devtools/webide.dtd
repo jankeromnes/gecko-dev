@@ -37,6 +37,8 @@
 <!ENTITY runtimeMenu_takeScreenshot_accesskey "S">
 <!ENTITY runtimeMenu_showDetails_label "Runtime Info">
 <!ENTITY runtimeMenu_showDetails_accesskey "E">
+<!ENTITY runtimeMenu_showDeveloper_label "Developer Mode">
+<!ENTITY runtimeMenu_showDeveloper_accesskey "V">
 <!ENTITY runtimeMenu_showMonitor_label "Monitor">
 <!ENTITY runtimeMenu_showMonitor_accesskey "M">
 <!ENTITY runtimeMenu_showDevicePrefs_label "Device Preferences">
@@ -149,6 +151,9 @@
 <!ENTITY runtimedetails_unrestrictedPrivileges "Unrestricted DevTools privileges: ">
 <!ENTITY runtimedetails_requestPrivileges "request higher privileges">
 <!ENTITY runtimedetails_privilegesWarning "(Will reboot device. Requires root access.)">
+
+<!-- Developer Mode -->
+<!ENTITY developermode_title "Developer Mode">
 
 <!-- Device Preferences and Settings -->
 <!ENTITY device_typeboolean "Boolean">

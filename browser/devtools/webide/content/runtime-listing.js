@@ -36,6 +36,10 @@ function ShowRuntimeDetails() {
   runtimeList.showRuntimeDetails();
 }
 
+function ShowDeveloperMode() {
+  runtimeList.showDeveloperMode();
+}
+
 function ShowPermissionsTable() {
   runtimeList.showPermissionsTable();
 }

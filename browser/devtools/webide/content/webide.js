@@ -1106,6 +1106,10 @@ let Cmds = {
     UI.selectDeckPanel("runtimedetails");
   },
 
+  showDeveloperMode: function() {
+    UI.selectDeckPanel("developermode");
+  },
+
   showDevicePrefs: function() {
     UI.selectDeckPanel("devicepreferences");
   },

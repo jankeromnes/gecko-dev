@@ -83,6 +83,10 @@ RuntimeList.prototype = {
     this._Cmds.showRuntimeDetails();
   },
 
+  showDeveloperMode: function() {
+    this._Cmds.showDeveloperMode();
+  },
+
   showPermissionsTable: function() {
     this._Cmds.showPermissionsTable();
   },
@@ -110,6 +114,7 @@ RuntimeList.prototype = {
     let screenshotCmd = doc.querySelector("#runtime-screenshot");
     let permissionsCmd = doc.querySelector("#runtime-permissions");
     let detailsCmd = doc.querySelector("#runtime-details");
+    let developerCmd = doc.querySelector("#runtime-developer");
     let disconnectCmd = doc.querySelector("#runtime-disconnect");
     let devicePrefsCmd = doc.querySelector("#runtime-preferences");
     let settingsCmd = doc.querySelector("#runtime-settings");
@@ -117,6 +122,7 @@ RuntimeList.prototype = {
     if (AppManager.connected) {
       if (AppManager.deviceFront) {
         detailsCmd.removeAttribute("disabled");
+        developerCmd.removeAttribute("disabled");
         permissionsCmd.removeAttribute("disabled");
         screenshotCmd.removeAttribute("disabled");
       }
@@ -129,6 +135,7 @@ RuntimeList.prototype = {
       disconnectCmd.removeAttribute("disabled");
     } else {
       detailsCmd.setAttribute("disabled", "true");
+      developerCmd.setAttribute("disabled", "true");
       permissionsCmd.setAttribute("disabled", "true");
       screenshotCmd.setAttribute("disabled", "true");
       disconnectCmd.setAttribute("disabled", "true");
