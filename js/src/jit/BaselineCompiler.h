@@ -263,6 +263,7 @@ class BaselineCompiler : public BaselineCompilerSpecific
     void emitIsDebuggeeCheck();
     bool emitDebugPrologue();
     bool emitDebugTrap();
+    bool emitDebugCoverage(jsbytecode* pc);
     bool emitTraceLoggerEnter();
     bool emitTraceLoggerExit();
 
