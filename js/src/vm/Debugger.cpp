@@ -5344,6 +5344,81 @@ DebuggerScript_isInCatchScope(JSContext* cx, unsigned argc, Value* vp)
 }
 
 static bool
+DebuggerScript_getOffsetsCoverage(JSContext* cx, unsigned argc, Value* vp)
+{
+    THIS_DEBUGSCRIPT_SCRIPT(cx, argc, vp, "getOffsetsCoverage", args, obj, script);
+
+    // If the script has no coverage information, then skip this and return null
+    // instead.
+    if (!script->hasScriptCounts()) {
+        args.rval().setNull();
+        return true;
+    }
+
+    // First pass: determine which offsets in this script are jump targets and
+    // which line numbers jump to them.
+    FlowGraphSummary flowData(cx);
+    if (!flowData.populate(cx, script))
+        return false;
+
+    // Second pass: build the result array.
+    RootedObject result(cx, NewDenseEmptyArray(cx));
+    if (!result)
+        return false;
+    for (BytecodeRangeWithPosition r(cx, script); !r.empty(); r.popFront()) {
+        size_t offset = r.frontOffset();
+        size_t lineno = r.frontLineNumber();
+
+        // Make a note, if the current instruction is an entry point for the
+        // current line.
+        if (!flowData[offset].hasNoEdges() && flowData[offset].lineno() != lineno) {
+            // Get the offsets array for this line.
+            RootedObject offsets(cx);
+            RootedValue offsetsv(cx);
+
+            RootedId id(cx, INT_TO_JSID(lineno));
+
+            bool found;
+            if (!HasOwnProperty(cx, result, id, &found))
+                return false;
+            if (found && !GetProperty(cx, result, result, id, &offsetsv))
+                return false;
+
+            if (offsetsv.isObject()) {
+                offsets = &offsetsv.toObject();
+            } else {
+                MOZ_ASSERT(offsetsv.isUndefined());
+
+                // Create an empty offsets array for this line.
+                // Store it in the result array.
+                RootedId id(cx);
+                RootedValue v(cx, NumberValue(lineno));
+                offsets = NewDenseEmptyArray(cx);
+                if (!offsets ||
+                    !ValueToId<CanGC>(cx, v, &id))
+                {
+                    return false;
+                }
+
+                RootedValue value(cx, ObjectValue(*offsets));
+                if (!DefineProperty(cx, result, id, value))
+                    return false;
+            }
+
+            jsbytecode* pc = script->offsetToPC(offset);
+            double coverage = script->getPCCounts(pc).get(PCCounts::BASE_INTERP);
+
+            // Append the current offset to the offsets array.
+            if (!NewbornArrayPush(cx, offsets, NumberValue(coverage)))
+                return false;
+        }
+    }
+
+    args.rval().setObject(*result);
+    return true;
+}
+
+static bool
 DebuggerScript_construct(JSContext* cx, unsigned argc, Value* vp)
 {
     JS_ReportErrorNumber(cx, GetErrorMessage, nullptr, JSMSG_NO_CONSTRUCTOR,
@@ -5375,6 +5450,7 @@ static const JSFunctionSpec DebuggerScript_methods[] = {
     JS_FN("clearBreakpoint", DebuggerScript_clearBreakpoint, 1, 0),
     JS_FN("clearAllBreakpoints", DebuggerScript_clearAllBreakpoints, 0, 0),
     JS_FN("isInCatchScope", DebuggerScript_isInCatchScope, 1, 0),
+    JS_FN("getOffsetsCoverage", DebuggerScript_getOffsetsCoverage, 0, 0),
     JS_FS_END
 };
 
