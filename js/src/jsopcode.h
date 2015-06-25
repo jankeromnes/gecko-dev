@@ -789,22 +789,7 @@ class PCCounts
     };
 
     enum AccessCounts {
-        ACCESS_MONOMORPHIC = BASE_LIMIT,
-        ACCESS_DIMORPHIC,
-        ACCESS_POLYMORPHIC,
-
-        ACCESS_BARRIER,
-        ACCESS_NOBARRIER,
-
-        ACCESS_UNDEFINED,
-        ACCESS_NULL,
-        ACCESS_BOOLEAN,
-        ACCESS_INT32,
-        ACCESS_DOUBLE,
-        ACCESS_STRING,
-        ACCESS_OBJECT,
-
-        ACCESS_LIMIT
+        ACCESS_LIMIT = BASE_LIMIT
     };
 
     static bool accessOp(JSOp op) {
@@ -820,17 +805,7 @@ class PCCounts
     }
 
     enum ElementCounts {
-        ELEM_ID_INT = ACCESS_LIMIT,
-        ELEM_ID_DOUBLE,
-        ELEM_ID_OTHER,
-        ELEM_ID_UNKNOWN,
-
-        ELEM_OBJECT_TYPED,
-        ELEM_OBJECT_PACKED,
-        ELEM_OBJECT_DENSE,
-        ELEM_OBJECT_OTHER,
-
-        ELEM_LIMIT
+        ELEM_LIMIT = BASE_LIMIT
     };
 
     static bool elementOp(JSOp op) {
@@ -838,11 +813,7 @@ class PCCounts
     }
 
     enum PropertyCounts {
-        PROP_STATIC = ACCESS_LIMIT,
-        PROP_DEFINITE,
-        PROP_OTHER,
-
-        PROP_LIMIT
+        PROP_LIMIT = BASE_LIMIT
     };
 
     static bool propertyOp(JSOp op) {
@@ -850,12 +821,7 @@ class PCCounts
     }
 
     enum ArithCounts {
-        ARITH_INT = BASE_LIMIT,
-        ARITH_DOUBLE,
-        ARITH_OTHER,
-        ARITH_UNKNOWN,
-
-        ARITH_LIMIT
+        ARITH_LIMIT = BASE_LIMIT
     };
 
     static bool arithOp(JSOp op) {
