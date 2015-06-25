@@ -143,7 +143,7 @@ static const char * const countBaseNames[] = {
 };
 
 JS_STATIC_ASSERT(JS_ARRAY_LENGTH(countBaseNames) == PCCounts::BASE_LIMIT);
-
+/*
 static const char * const countAccessNames[] = {
     "infer_mono",
     "infer_di",
@@ -196,6 +196,7 @@ static const char * const countArithNames[] = {
 
 JS_STATIC_ASSERT(JS_ARRAY_LENGTH(countBaseNames) +
                  JS_ARRAY_LENGTH(countArithNames) == PCCounts::ARITH_LIMIT);
+*/
 
 /* static */ const char*
 PCCounts::countName(JSOp op, size_t which)
@@ -204,7 +205,7 @@ PCCounts::countName(JSOp op, size_t which)
 
     if (which < BASE_LIMIT)
         return countBaseNames[which];
-
+/*
     if (accessOp(op)) {
         if (which < ACCESS_LIMIT)
             return countAccessNames[which - BASE_LIMIT];
@@ -217,7 +218,7 @@ PCCounts::countName(JSOp op, size_t which)
 
     if (arithOp(op))
         return countArithNames[which - BASE_LIMIT];
-
+*/
     MOZ_CRASH("bad op");
 }
 
@@ -1847,10 +1848,12 @@ js::GetPCCountScriptSummary(JSContext* cx, size_t index)
     }
 
     double baseTotals[PCCounts::BASE_LIMIT] = {0.0};
+    /*
     double accessTotals[PCCounts::ACCESS_LIMIT - PCCounts::BASE_LIMIT] = {0.0};
     double elementTotals[PCCounts::ELEM_LIMIT - PCCounts::ACCESS_LIMIT] = {0.0};
     double propertyTotals[PCCounts::PROP_LIMIT - PCCounts::ACCESS_LIMIT] = {0.0};
     double arithTotals[PCCounts::ARITH_LIMIT - PCCounts::BASE_LIMIT] = {0.0};
+    */
 
     for (unsigned i = 0; i < script->length(); i++) {
         PCCounts& counts = sac.getPCCounts(script->offsetToPC(i));
@@ -1865,6 +1868,7 @@ js::GetPCCountScriptSummary(JSContext* cx, size_t index)
             if (j < PCCounts::BASE_LIMIT) {
                 baseTotals[j] += value;
             } else if (PCCounts::accessOp(op)) {
+                /*
                 if (j < PCCounts::ACCESS_LIMIT)
                     accessTotals[j - PCCounts::BASE_LIMIT] += value;
                 else if (PCCounts::elementOp(op))
@@ -1873,8 +1877,11 @@ js::GetPCCountScriptSummary(JSContext* cx, size_t index)
                     propertyTotals[j - PCCounts::ACCESS_LIMIT] += value;
                 else
                     MOZ_CRASH("Bad opcode");
+                */
             } else if (PCCounts::arithOp(op)) {
+                /*
                 arithTotals[j - PCCounts::BASE_LIMIT] += value;
+                */
             } else {
                 MOZ_CRASH("Bad opcode");
             }
@@ -1888,6 +1895,7 @@ js::GetPCCountScriptSummary(JSContext* cx, size_t index)
 
     AppendArrayJSONProperties(cx, buf, baseTotals, countBaseNames,
                               JS_ARRAY_LENGTH(baseTotals), comma);
+    /*
     AppendArrayJSONProperties(cx, buf, accessTotals, countAccessNames,
                               JS_ARRAY_LENGTH(accessTotals), comma);
     AppendArrayJSONProperties(cx, buf, elementTotals, countElementNames,
@@ -1896,6 +1904,7 @@ js::GetPCCountScriptSummary(JSContext* cx, size_t index)
                               JS_ARRAY_LENGTH(propertyTotals), comma);
     AppendArrayJSONProperties(cx, buf, arithTotals, countArithNames,
                               JS_ARRAY_LENGTH(arithTotals), comma);
+    */
 
     uint64_t ionActivity = 0;
     jit::IonScriptCounts* ionCounts = sac.getIonCounts();
