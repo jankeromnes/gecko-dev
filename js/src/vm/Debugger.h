@@ -294,6 +294,7 @@ class Debugger : private mozilla::LinkedListElement<Debugger>
     typedef mozilla::LinkedList<AllocationSite> AllocationSiteList;
 
     bool allowUnobservedAsmJS;
+    bool collectCoverageInfo;
     bool trackingAllocationSites;
     double allocationSamplingProbability;
     AllocationSiteList allocationsLog;
@@ -482,6 +483,8 @@ class Debugger : private mozilla::LinkedListElement<Debugger>
     static bool setUncaughtExceptionHook(JSContext* cx, unsigned argc, Value* vp);
     static bool getAllowUnobservedAsmJS(JSContext* cx, unsigned argc, Value* vp);
     static bool setAllowUnobservedAsmJS(JSContext* cx, unsigned argc, Value* vp);
+    static bool getCollectCoverageInfo(JSContext* cx, unsigned argc, Value* vp);
+    static bool setCollectCoverageInfo(JSContext* cx, unsigned argc, Value* vp);
     static bool getMemory(JSContext* cx, unsigned argc, Value* vp);
     static bool getOnIonCompilation(JSContext* cx, unsigned argc, Value* vp);
     static bool setOnIonCompilation(JSContext* cx, unsigned argc, Value* vp);
@@ -530,6 +533,10 @@ class Debugger : private mozilla::LinkedListElement<Debugger>
     // Whether the Debugger instance needs to observe AOT-compiled asm.js
     // execution of its debuggees.
     IsObserving observesAsmJS() const;
+
+    // Whether the Debugger instance needs to observe coverage of any JavaScript
+    // execution.
+    IsObserving observesCoverage() const;
 
   private:
     static bool ensureExecutionObservabilityOfFrame(JSContext* cx, AbstractFramePtr frame);

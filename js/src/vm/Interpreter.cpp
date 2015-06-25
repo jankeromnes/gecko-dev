@@ -1870,6 +1870,9 @@ Interpret(JSContext* cx, RunState& state)
     if (cx->runtime()->profilingScripts)
         activation.enableInterruptsUnconditionally();
 
+    if (cx->compartment()->debuggerCollectCoverageInfo())
+        activation.enableInterruptsUnconditionally();
+
     // Enter the interpreter loop starting at the current pc.
     ADVANCE_AND_DISPATCH(0);
 
@@ -1880,7 +1883,9 @@ CASE(EnableInterruptsPseudoOpcode)
     bool moreInterrupts = false;
     jsbytecode op = *REGS.pc;
 
-    if (cx->runtime()->profilingScripts) {
+    if (cx->runtime()->profilingScripts ||
+        cx->compartment()->debuggerCollectCoverageInfo())
+    {
         if (!script->hasScriptCounts())
             script->initScriptCounts(cx);
         moreInterrupts = true;

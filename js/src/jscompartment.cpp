@@ -839,6 +839,7 @@ JSCompartment::updateDebuggerObservesFlag(unsigned flag)
 {
     MOZ_ASSERT(isDebuggee());
     MOZ_ASSERT(flag == DebuggerObservesAllExecution ||
+               flag == DebuggerCollectCoverageInfo ||
                flag == DebuggerObservesAsmJS);
 
     const GlobalObject::DebuggerVector* v = maybeGlobal()->getDebuggers();
