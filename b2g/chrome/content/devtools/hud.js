@@ -51,11 +51,11 @@ let developerHUD = {
    * observed metrics with `target.register(metric)`, and keep them up-to-date
    * with `target.update(metric, message)` when necessary.
    */
-  registerWatcher: function dwp_registerWatcher(watcher) {
+  registerWatcher(watcher) {
     this._watchers.unshift(watcher);
   },
 
-  init: function dwp_init() {
+  init() {
     if (this._client) {
       return;
     }
@@ -92,7 +92,7 @@ let developerHUD = {
     });
   },
 
-  uninit: function dwp_uninit() {
+  uninit() {
     if (!this._client) {
       return;
     }
@@ -111,7 +111,7 @@ let developerHUD = {
    * This method will ask all registered watchers to track and update metrics
    * on an app frame.
    */
-  trackFrame: function dwp_trackFrame(frame) {
+  trackFrame(frame) {
     if (this._targets.has(frame)) {
       return;
     }
@@ -126,7 +126,7 @@ let developerHUD = {
     });
   },
 
-  untrackFrame: function dwp_untrackFrame(frame) {
+  untrackFrame(frame) {
     let target = this._targets.get(frame);
     if (target) {
       for (let w of this._watchers) {
@@ -154,7 +154,7 @@ let developerHUD = {
     this.untrackFrame(frame);
   },
 
-  log: function dwp_log(message) {
+  log(message) {
     if (this._logging) {
       dump(DEVELOPER_HUD_LOG_PREFIX + ': ' + message + '\n');
     }
@@ -179,7 +179,7 @@ Target.prototype = {
   /**
    * Register a metric that can later be updated. Does not update the front-end.
    */
-  register: function target_register(metric) {
+  register(metric) {
     this.metrics.set(metric, 0);
   },
 
@@ -187,7 +187,7 @@ Target.prototype = {
    * Modify one of a target's metrics, and send out an event to notify relevant
    * parties (e.g. the developer HUD, automated tests, etc).
    */
-  update: function target_update(metric, message) {
+  update(metric, message) {
     if (!metric.name) {
       throw new Error('Missing metric.name');
     }
@@ -225,7 +225,7 @@ Target.prototype = {
    * Nicer way to call update() when the metric value is a number that needs
    * to be incremented.
    */
-  bump: function target_bump(metric, message) {
+  bump(metric, message) {
     metric.value = (this.metrics.get(metric.name) || 0) + 1;
     this.update(metric, message);
   },
@@ -234,7 +234,7 @@ Target.prototype = {
    * Void a metric value and make sure it isn't displayed on the front-end
    * anymore.
    */
-  clear: function target_clear(metric) {
+  clear(metric) {
     metric.value = 0;
     this.update(metric);
   },
@@ -243,12 +243,12 @@ Target.prototype = {
    * Tear everything down, including the front-end by sending a message without
    * widgets.
    */
-  destroy: function target_destroy() {
+  destroy() {
     delete this.metrics;
     this._send({});
   },
 
-  _send: function target_send(data) {
+  _send(data) {
     let frame = this.frame;
 
     let systemapp = document.querySelector('#systemapp');
@@ -287,7 +287,7 @@ let consoleWatcher = {
     'CORS'
   ],
 
-  init: function cw_init(client) {
+  init(client) {
     this._client = client;
     this.consoleListener = this.consoleListener.bind(this);
 
@@ -314,7 +314,7 @@ let consoleWatcher = {
     client.addListener('reflowActivity', this.consoleListener);
   },
 
-  trackTarget: function cw_trackTarget(target) {
+  trackTarget(target) {
     target.register('reflows');
     target.register('warnings');
     target.register('errors');
@@ -329,7 +329,7 @@ let consoleWatcher = {
     });
   },
 
-  untrackTarget: function cw_untrackTarget(target) {
+  untrackTarget(target) {
     this._client.request({
       to: target.actor.consoleActor,
       type: 'stopListeners',
@@ -339,7 +339,7 @@ let consoleWatcher = {
     this._targets.delete(target.actor.consoleActor);
   },
 
-  consoleListener: function cw_consoleListener(type, packet) {
+  consoleListener(type, packet) {
     let target = this._targets.get(packet.from);
     let metric = {};
     let output = '';
@@ -407,7 +407,7 @@ let consoleWatcher = {
     target.bump(metric, output);
   },
 
-  formatSourceURL: function cw_formatSourceURL(packet) {
+  formatSourceURL(packet) {
     // Abbreviate source URL
     let source = WebConsoleUtils.abbreviateSourceURL(packet.sourceURL);
 
@@ -498,7 +498,7 @@ let memoryWatcher = {
   },
   _active: false,
 
-  init: function mw_init(client) {
+  init(client) {
     this._client = client;
     let watching = this._watching;
 
@@ -511,7 +511,7 @@ let memoryWatcher = {
     }
   },
 
-  update: function mw_update() {
+  update() {
     let watching = this._watching;
     let active = watching.appmemory || watching.uss;
 
@@ -529,7 +529,7 @@ let memoryWatcher = {
     this._active = active;
   },
 
-  measure: function mw_measure(target) {
+  measure(target) {
     let watch = this._watching;
     let front = this._fronts.get(target);
     let format = this.formatMemory;
@@ -576,7 +576,7 @@ let memoryWatcher = {
     this._timers.set(target, timer);
   },
 
-  formatMemory: function mw_formatMemory(bytes) {
+  formatMemory(bytes) {
     var prefix = ['','K','M','G','T','P','E','Z','Y'];
     var i = 0;
     for (; bytes > 1024 && i < prefix.length; ++i) {
@@ -585,7 +585,7 @@ let memoryWatcher = {
     return (Math.round(bytes * 100) / 100) + ' ' + prefix[i] + 'B';
   },
 
-  trackTarget: function mw_trackTarget(target) {
+  trackTarget(target) {
     target.register('uss');
     target.register('memory');
     this._fronts.set(target, MemoryFront(this._client, target.actor));
@@ -594,7 +594,7 @@ let memoryWatcher = {
     }
   },
 
-  untrackTarget: function mw_untrackTarget(target) {
+  untrackTarget(target) {
     let front = this._fronts.get(target);
     if (front) {
       front.destroy();
