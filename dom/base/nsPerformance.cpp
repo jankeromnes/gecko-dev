@@ -883,6 +883,8 @@ PerformanceBase::Mark(const nsAString& aName, ErrorResult& aRv)
     return;
   }
 
+  // TODO Send User Timing events to Developer HUD.
+
   nsRefPtr<PerformanceMark> performanceMark =
     new PerformanceMark(GetAsISupports(), aName, Now());
   InsertUserEntry(performanceMark);

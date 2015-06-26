@@ -605,3 +605,15 @@ let memoryWatcher = {
   }
 };
 developerHUD.registerWatcher(memoryWatcher);
+
+let userTimingWatcher = {
+
+  // TODO listen for "appLaunch@<manifest>" from homescreen, and diff it with "visuallyLoaded" / "fullyLoaded" from apps.
+
+  trackTarget(target) {
+  },
+
+  untrackTarget(target) {
+  }
+}
+// TODO developerHUD.registerWatcher(userTimingWatcher);
