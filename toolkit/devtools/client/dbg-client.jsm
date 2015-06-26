@@ -2694,6 +2694,15 @@ SourceClient.prototype = {
   },
 
   /**
+   * Get the code coverage hitcounts for each line of this source.
+   */
+  getHitcounts: DebuggerClient.requester({
+    type: "hitcounts"
+  }, {
+    telemetry: "SOURCES"
+  }),
+
+  /**
    * Pretty print this source's text.
    */
   prettyPrint: function (aIndent, aCallback) {
@@ -2828,7 +2837,7 @@ SourceClient.prototype = {
 
       doSetBreakpoint(cleanUp);
     })
-  }
+  },
 };
 
 /**

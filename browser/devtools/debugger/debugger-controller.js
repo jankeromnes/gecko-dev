@@ -1480,6 +1480,7 @@ SourceScripts.prototype = {
     }
 
     // Get the source text from the active thread.
+    // thread client, .source gets a source client
     this.activeThread.source(aSource).source(({ error, source: text, contentType }) => {
       if (aOnTimeout) {
         window.clearTimeout(fetchTimeout);
@@ -1489,6 +1490,10 @@ SourceScripts.prototype = {
       } else {
         deferred.resolve([aSource, text, contentType]);
       }
+    });
+
+    this.activeThread.source(aSource).getHitcounts(({ error, hitcounts }) => {
+      dump("got hitcounts! [" + hitcounts.map(e => e ? e : 0).join(",") + "]\n");
     });
 
     return deferred.promise;

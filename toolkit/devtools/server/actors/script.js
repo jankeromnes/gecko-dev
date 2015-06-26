@@ -457,6 +457,7 @@ ThreadActor.prototype = {
       this._dbg.on("newGlobal", this.onNewGlobal);
       // Keep the debugger disabled until a client attaches.
       this._dbg.enabled = this._state != "detached";
+      this._dbg.collectCoverageInfo = true;
     }
     return this._dbg;
   },
@@ -628,6 +629,7 @@ ThreadActor.prototype = {
 
     this.dbg.addDebuggees();
     this.dbg.enabled = true;
+    this.dbg.collectCoverageInfo = true;
     try {
       // Put ourselves in the paused state.
       let packet = this._paused();
@@ -2141,6 +2143,7 @@ function SourceActor({ source, thread, originalUrl, generatedSource,
   this._isInlineSource = isInlineSource;
 
   this.onSource = this.onSource.bind(this);
+  this.onHitcounts = this.onHitcounts.bind(this);
   this._invertSourceMap = this._invertSourceMap.bind(this);
   this._encodeAndSetSourceMapURL = this._encodeAndSetSourceMapURL.bind(this);
   this._getSourceText = this._getSourceText.bind(this);
@@ -2376,6 +2379,26 @@ SourceActor.prototype = {
     }
 
     return offsets;
+  },
+
+  /**
+   * Get hitcounts for all lines in a script.
+   */
+  onHitcounts: function () {
+    dump("this is SourceActor? " + (this instanceof SourceActor) + "\n")
+    dump("SourceActor.onHitcounts():\n- this.url = " + this.url + "\n- this.source = " + this.source + "\n- this.generatedSource = " + this.generatedSource + "\n");
+    let source = this.source || this.generatedSource;
+    let hitcounts = [];
+    if (source) {
+      this.threadActor.scripts.getScriptsBySource(source).forEach(script => {
+        let coverage = script.getOffsetsCoverage();
+        if (!coverage) return;
+        coverage.forEach((counts, i) => {
+          hitcounts[script.startLine + i] = counts ? counts.reduce((a, b) => a + b) : 0
+        });
+      });
+    }
+    return { hitcounts };
   },
 
   /**
@@ -2979,7 +3002,8 @@ SourceActor.prototype.requestTypes = {
   "prettyPrint": SourceActor.prototype.onPrettyPrint,
   "disablePrettyPrint": SourceActor.prototype.onDisablePrettyPrint,
   "getExecutableLines": SourceActor.prototype.getExecutableLines,
-  "setBreakpoint": SourceActor.prototype.onSetBreakpoint
+  "setBreakpoint": SourceActor.prototype.onSetBreakpoint,
+  "hitcounts": SourceActor.prototype.onHitcounts
 };
 
 exports.SourceActor = SourceActor;
