@@ -400,6 +400,7 @@ let DebuggerView = {
     this._setEditorText(L10N.getStr("loadingText"));
     this._editorSource = { actor: aSource.actor, promise: deferred.promise };
 
+    // getText calls RDP request, need to add a new RDP request
     DebuggerController.SourceScripts.getText(aSource).then(([, aText, aContentType]) => {
       // Avoid setting an unexpected source. This may happen when switching
       // very fast between sources that haven't been fetched yet.

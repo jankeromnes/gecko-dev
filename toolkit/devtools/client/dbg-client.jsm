@@ -1929,6 +1929,13 @@ ThreadClient.prototype = {
     telemetry: "SOURCES"
   }),
 
+  getHitcounts: DebuggerClient.requester({
+    type: "hitcounts",
+    source: args(0)
+  }, {
+    telemetry: "SOURCES"
+  }),
+
   /**
    * Clear the thread's source script cache. A scriptscleared event
    * will be sent.
@@ -2579,6 +2586,7 @@ LongStringClient.prototype = {
  * @param aForm Object
  *        The form sent across the remote debugging protocol.
  */
+ // TODO add method here
 function SourceClient(aClient, aForm) {
   this._form = aForm;
   this._isBlackBoxed = aForm.isBlackBoxed;

@@ -1465,6 +1465,7 @@ SourceScripts.prototype = {
    *         A promise that is resolved after the source text has been fetched.
    */
   getText: function(aSource, aOnTimeout, aDelay = FETCH_SOURCE_RESPONSE_DELAY) {
+    dump("getText!\n");
     // Fetch the source text only once.
     let textPromise = this._cache.get(aSource.actor);
     if (textPromise) {
@@ -1480,6 +1481,7 @@ SourceScripts.prototype = {
     }
 
     // Get the source text from the active thread.
+    // thread client, .source gets a source client
     this.activeThread.source(aSource).source(({ error, source: text, contentType }) => {
       if (aOnTimeout) {
         window.clearTimeout(fetchTimeout);
@@ -1488,8 +1490,14 @@ SourceScripts.prototype = {
         deferred.reject([aSource, error]);
       } else {
         deferred.resolve([aSource, text, contentType]);
+        dump("RESOLVED!\n");
+
       }
     });
+
+        this.activeThread.getHitcounts(aSource, aResponse => {
+          dump("got hitcounts! " + JSON.stringify(aResponse.hitcounts) + "\n");
+        });
 
     return deferred.promise;
   },

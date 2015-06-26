@@ -457,6 +457,7 @@ ThreadActor.prototype = {
       this._dbg.on("newGlobal", this.onNewGlobal);
       // Keep the debugger disabled until a client attaches.
       this._dbg.enabled = this._state != "detached";
+      this._dbg.collectCoverageInfo = true;
     }
     return this._dbg;
   },
@@ -628,6 +629,7 @@ ThreadActor.prototype = {
 
     this.dbg.addDebuggees();
     this.dbg.enabled = true;
+    this.dbg.collectCoverageInfo = true;
     try {
       // Put ourselves in the paused state.
       let packet = this._paused();
@@ -1183,6 +1185,26 @@ ThreadActor.prototype = {
   },
 
   /**
+   * Get hitcounts for all lines in a script.
+   */
+  _getHitcountsForSource: function(aForm) {
+    dump("getHitcountsForSource ( " + JSON.stringify(aForm) + " )\n");
+    let sourceActor = this.sources.getSourceActor(aForm);
+    dump("- sourceActor.url = " + sourceActor.url + "\n- sourceActor.source = " + sourceActor.source + "\n- sourceActor.generatedSource = " + sourceActor.generatedSource + "\n");
+    let source = sourceActor.source || sourceActor.generatedSource; // WTF null || undefined ??
+    let hitcounts = [];
+    debugger;
+    this.scripts.getScriptsBySource(source).forEach(script => {
+      let coverage = script.getOffsetsCoverage();
+      if (!coverage) return;
+      coverage.forEach((counts, i) => {
+        hitcounts[script.startLine + i] = counts ? counts.reduce((a, b) => a + b) : 0
+      });
+    });
+    return hitcounts;
+  },
+
+  /**
    * Helper method that returns the next frame when stepping.
    */
   _getNextStepFrame: function (aFrame) {
@@ -1322,6 +1344,12 @@ ThreadActor.prototype = {
         sources: this.sources.iter().map(s => s.form())
       };
     });
+  },
+
+  onHitcounts: function (aRequest) {
+    return {
+      hitcounts: this._getHitcountsForSource(aRequest.source)
+    };
   },
 
   /**
@@ -1984,6 +2012,7 @@ ThreadActor.prototype.requestTypes = {
   "eventListeners": ThreadActor.prototype.onEventListeners,
   "releaseMany": ThreadActor.prototype.onReleaseMany,
   "sources": ThreadActor.prototype.onSources,
+  "hitcounts": ThreadActor.prototype.onHitcounts,
   "threadGrips": ThreadActor.prototype.onThreadGrips,
   "prototypesAndProperties": ThreadActor.prototype.onPrototypesAndProperties
 };

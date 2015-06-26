@@ -212,7 +212,8 @@ TabSources.prototype = {
     if (source.url in this._sourceMappedSourceActors) {
       return this._sourceMappedSourceActors[source.url];
     }
-
+    
+    dump("sourceActors:\n" + this._sourceActors.values().map(a => a.url).join("\n") + "\n");
     if (this._sourceActors.has(source)) {
       return this._sourceActors.get(source);
     }
