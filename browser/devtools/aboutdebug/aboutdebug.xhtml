@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+
+<!DOCTYPE html [
+<!ENTITY % htmlDTD PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd"> %htmlDTD;
+<!ENTITY % aboutdebugDTD SYSTEM "chrome://browser/locale/devtools/aboutdebug.dtd"> %aboutdebugDTD;
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>&aboutDebug.title;</title>
+    <link rel="stylesheet" href="chrome://global/skin/global.css" type="text/css"/>
+    <link rel="stylesheet" href="chrome://global/skin/in-content/common.css" type="text/css"/>
+    <link rel="stylesheet" href="chrome://browser/content/devtools/aboutdebug/aboutdebug.css"  type="text/css"/>
+    <script type="application/javascript" src="chrome://browser/content/devtools/react.js"></script>
+    <script type="application/javascript;version=1.8" src="chrome://browser/content/devtools/aboutdebug/aboutdebug.js"></script>
+  </head>
+  <body id="body">
+    <div id="categories">
+      <div class="category" value="devices" selected="true">
+        <img class="category-icon" src="chrome://browser/skin/preferences/in-content/icons.svg#applications"/>
+        <div class="category-name">Devices</div>
+      </div>
+      <div class="category" value="addons">
+        <img class="category-icon" src="chrome://mozapps/skin/extensions/category-extensions.png"/>
+        <div class="category-name">Add-ons</div>
+      </div>
+      <div class="category" value="workers">
+        <img class="category-icon" src="chrome://browser/skin/preferences/in-content/icons.svg#applications"/>
+        <div class="category-name">Workers</div>
+      </div>
+    </div>
+    <div class="main-content">
+      <div id="tab-devices" class="tab active">
+        <div class="header">
+          <h1 class="header-name">Devices</h1>
+        </div>
+        <div id="usb"></div>
+        <div id="wifi"></div>
+        <div id="simulators"></div>
+      </div>
+      <div id="tab-addons" class="tab">
+        <div class="header">
+          <h1 class="header-name">Add-ons</h1>
+        </div>
+        <input id="enable-addon-debugging" type="checkbox" checked="true"/>
+        <label for="enable-addon-debugging">Enable add-on debugging</label>
+        <div id="extensions"></div>
+      </div>
+      <div id="tab-workers" class="tab">
+        <div class="header">
+          <h1 class="header-name">Workers</h1>
+        </div>
+        <input id="enable-worker-debugging" type="checkbox" checked="true"/>
+        <label for="enable-worker-debugging">Enable worker debugging (in development)</label>
+        <div id="serviceworkers"></div>
+        <div id="sharedworkers"></div>
+        <div id="otherworkers"></div>
+      </div>
+    </div>
+  </body>
+</html>
