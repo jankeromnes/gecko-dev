@@ -154,3 +154,4 @@ browser.jar:
     content/browser/devtools/eyedropper.xul                            (eyedropper/eyedropper.xul)
     content/browser/devtools/eyedropper/crosshairs.css                 (eyedropper/crosshairs.css)
     content/browser/devtools/eyedropper/nocursor.css                   (eyedropper/nocursor.css)
+    content/browser/devtools/react.js                                  (shared/content/react.js)

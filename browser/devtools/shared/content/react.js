@@ -8111,7 +8111,7 @@ ReactDOMComponent.Mixin = {
   mountComponent: function(rootID, transaction, context) {
     this._rootNodeID = rootID;
     assertValidProps(this._currentElement.props);
-    var closeTag = omittedCloseTags[this._tag] ? '' : '</' + this._tag + '>';
+    var closeTag = /* omittedCloseTags[this._tag] ? '' : */ '</' + this._tag + '>';
     return (
       this._createOpenTagMarkupAndPutListeners(transaction) +
       this._createContentMarkup(transaction, context) +
