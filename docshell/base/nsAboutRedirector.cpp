@@ -52,6 +52,10 @@ static RedirEntry kRedirMap[] = {
     nsIAboutModule::URI_SAFE_FOR_UNTRUSTED_CONTENT
   },
   {
+    "debug", "chrome://browser/content/devtools/aboutdebug/aboutdebug.xhtml",
+    nsIAboutModule::ALLOW_SCRIPT
+  },
+  {
     "license", "chrome://global/content/license.html",
     nsIAboutModule::URI_SAFE_FOR_UNTRUSTED_CONTENT
   },
