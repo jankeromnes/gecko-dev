@@ -314,10 +314,15 @@ setUpdateTrackingId();
   let defaultBranch = Services.prefs.getDefaultBranch(null);
 
   function syncPrefDefault(prefName) {
+
+    dump('[UPDATE] syncing update pref ' + prefName + '\n');
+
     // The pref value at boot-time will serve as default for the setting.
     let defaultValue = defaultBranch.getCharPref(prefName);
     let defaultSetting = {};
     defaultSetting[prefName] = defaultValue;
+
+    dump('[UPDATE] default pref ' + prefName + ' = ' + defaultValue + '\n');
 
     // We back up that value in order to detect pref changes across reboots.
     // Such a change can happen e.g. when the user installs an OTA update that
@@ -329,32 +334,40 @@ setUpdateTrackingId();
       // that changes app.update.url or app.update.channel, we overwrite any
       // existing setting with the new pref value.
       let backupValue = Services.prefs.getCharPref(backupName);
+      dump('[UPDATE] backup pref ' + prefName + ' = ' + backupValue + '\n');
       if (defaultValue === backupValue) {
         // The pref has not changed since our last backup, no need to overwrite
         // the setting below.
+        dump('[UPDATE] default and backup ' + prefName + ' are the same, so dont overwrite the setting\n');
         prefHasChanged = false;
       }
     } catch(e) {
       // There was no backup: Create one below, and consider the pref is new.
+      dump('[UPDATE] exception: there was no backup ' + prefName + ', or something went wrong (' + e + ')\n');
     }
 
     // If the underlying pref has changed, overwrite the setting with the new
     // pref value.
     if (prefHasChanged) {
+      dump('[UPDATE] pref ' + prefName + ' has changed! overwriting the setting...\n');
       navigator.mozSettings.createLock().set(defaultSetting);
+      dump('[UPDATE] ... setting ' + prefName + ' successfully overwritten!\n');
     }
 
     // Now initialize or update the backup value.
     Services.prefs.setCharPref(backupName, defaultValue);
+    dump('[UPDATE] backup ' + prefName + ' now set to ' + defaultValue + '\n');
 
     // Propagate setting changes to the pref.
     SettingsListener.observe(prefName, defaultValue, value => {
       if (!value) {
+        dump('[UPDATE] setting ' + prefName + ' was not initialized, setting to default: ' + defaultValue + '\n');
         // If the setting value is invalid, reset it to its default.
         navigator.mozSettings.createLock().set(defaultSetting);
         return;
       }
       // Here we will overwrite the pref with the setting value.
+      dump('[UPDATE] overwriting pref ' + prefName + ' with setting value: ' + value + '\n');
       defaultBranch.setCharPref(prefName, value);
     });
   }
