@@ -26,6 +26,26 @@ const Strings = Services.strings.createBundle(
 exports.TargetComponent = React.createClass({
   displayName: "TargetComponent",
 
+  render() {
+    let target = this.props.target;
+    let isServiceWorker = (target.type === "serviceworker");
+    let isRunning = (!isServiceWorker || target.workerActor);
+    return React.createElement("div", { className: "target" },
+      React.createElement("img", {
+        className: "target-icon",
+        src: target.icon }),
+      React.createElement("div", { className: "target-details" },
+        React.createElement("div", { className: "target-name" }, target.name)
+      ),
+      (isRunning ?
+        React.createElement("button",
+          { className: "target-button-debug", onClick: this.debug },
+          Strings.GetStringFromName("debug")) :
+        null
+      )
+    );
+  },
+
   debug() {
     let client = this.props.client;
     let target = this.props.target;
@@ -34,36 +54,30 @@ exports.TargetComponent = React.createClass({
         BrowserToolboxProcess.init({ addonID: target.addonID });
         break;
       case "serviceworker":
-        // Fall through.
+        if (target.workerActor) {
+          this.openWorkerToolbox(target.workerActor);
+        }
+        break;
       case "sharedworker":
-        // Fall through.
+        this.openWorkerToolbox(target.workerActor);
+        break;
       case "worker":
-        let workerActor = this.props.target.actorID;
-        client.attachWorker(workerActor, (response, workerClient) => {
-          gDevTools.showToolbox(TargetFactory.forWorker(workerClient),
-            "jsdebugger", Toolbox.HostType.WINDOW)
-            .then(toolbox => {
-              toolbox.once("destroy", () => workerClient.detach());
-            });
-        });
+        this.openWorkerToolbox(target.workerActor);
         break;
       default:
         alert("Not implemented yet!");
+        break;
     }
   },
 
-  render() {
-    let target = this.props.target;
-    return React.createElement("div", { className: "target" },
-      React.createElement("img", {
-        className: "target-icon",
-        src: target.icon }),
-      React.createElement("div", { className: "target-details" },
-        React.createElement("div", { className: "target-name" }, target.name),
-        React.createElement("div", { className: "target-url" }, target.url)
-      ),
-      React.createElement("button", { onClick: this.debug },
-        Strings.GetStringFromName("debug"))
-    );
+  openWorkerToolbox(workerActor) {
+    let client = this.props.client;
+    client.attachWorker(workerActor, (response, workerClient) => {
+      gDevTools.showToolbox(TargetFactory.forWorker(workerClient),
+        "jsdebugger", Toolbox.HostType.WINDOW)
+        .then(toolbox => {
+          toolbox.once("destroy", () => workerClient.detach());
+        });
+    });
   },
 });

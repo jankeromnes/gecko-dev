@@ -11,21 +11,20 @@ const TAB_URL = HTTP_ROOT + "service-workers/empty-sw.html";
 
 const SW_TIMEOUT = 1000;
 
-function waitForWorkersUpdate(document) {
+function waitForDOMMutation(element) {
   return new Promise(done => {
     var observer = new MutationObserver(function(mutations) {
       observer.disconnect();
       done();
     });
-    var target = document.getElementById("service-workers");
-    observer.observe(target, { childList: true });
+    observer.observe(element, { childList: true });
   });
 }
 
-function assertHasWorker(expected, document, type, name) {
-  let names = [...document.querySelectorAll("#" + type + " .target-name")];
+function assertHasRegistration(expected, document, name) {
+  let names = [...document.querySelectorAll("#service-workers .target-name")];
   names = names.map(element => element.textContent);
-  is(names.includes(name), expected, "The " + type + " url appears in the list: " + names);
+  is(names.includes(name), expected, "The service worker registration url appears in the list: " + names);
 }
 
 add_task(function *() {
@@ -45,9 +44,9 @@ add_task(function *() {
 
   let swTab = yield addTab(TAB_URL);
 
-  yield waitForWorkersUpdate(document);
+  yield waitForDOMMutation(document.querySelector("#service-workers"));
 
-  assertHasWorker(true, document, "service-workers", SERVICE_WORKER);
+  assertHasRegistration(true, document, SERVICE_WORKER);
 
   // Ensure that the registration resolved before trying to connect to the sw
   let frameScript = function () {
@@ -72,8 +71,9 @@ add_task(function *() {
   let names = [...document.querySelectorAll("#service-workers .target-name")];
   let name = names.filter(element => element.textContent === SERVICE_WORKER)[0];
   ok(name, "Found the service worker in the list");
-  let debugBtn = name.parentNode.parentNode.querySelector("button");
+  let debugBtn = name.parentNode.parentNode.querySelector(".target-button-debug");
   ok(debugBtn, "Found its debug button");
+  let workerBtns = debugBtn.parentNode;
 
   // Click on it and wait for the toolbox to be ready
   let onToolboxReady = new Promise(done => {
@@ -92,17 +92,17 @@ add_task(function *() {
     setTimeout(done, SW_TIMEOUT * 2);
   });
 
-  assertHasWorker(true, document, "service-workers", SERVICE_WORKER);
+  assertHasRegistration(true, document, SERVICE_WORKER);
+  ok(workerBtns.querySelector(".target-button-debug"), "Still has a debug button");
 
   yield toolbox.destroy();
   toolbox = null;
 
   // Now ensure that the worker is correctly destroyed
   // after we destroy the toolbox.
-  // The list should update once it get destroyed.
-  yield waitForWorkersUpdate(document);
+  yield waitForDOMMutation(workerBtns);
 
-  assertHasWorker(false, document, "service-workers", SERVICE_WORKER);
+  ok(!workerBtns.querySelector(".target-button-debug"), "Debug button successfully removed after worker was killed");
 
   // Finally, unregister the service worker itself
   // Use message manager to work with e10s
@@ -128,6 +128,12 @@ add_task(function *() {
     });
   });
   ok(true, "Service worker registration unregistered");
+
+  // Now ensure that the worker registration is correctly removed.
+  // The list should update once the registration is destroyed.
+  yield waitForDOMMutation(document.querySelector("#service-workers"));
+
+  assertHasRegistration(false, document, SERVICE_WORKER);
 
   yield removeTab(swTab);
   yield closeAboutDebugging(tab);
