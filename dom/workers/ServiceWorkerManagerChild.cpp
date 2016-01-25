@@ -19,6 +19,7 @@ bool
 ServiceWorkerManagerChild::RecvNotifyRegister(
                                      const ServiceWorkerRegistrationData& aData)
 {
+  printf("SWMChild: RecvNotifyRegister\n");
   if (mShuttingDown) {
     return true;
   }
@@ -50,6 +51,7 @@ bool
 ServiceWorkerManagerChild::RecvNotifyUnregister(const PrincipalInfo& aPrincipalInfo,
                                                 const nsString& aScope)
 {
+  printf("SWMChild: RecvNotifyUnregister\n");
   if (mShuttingDown) {
     return true;
   }

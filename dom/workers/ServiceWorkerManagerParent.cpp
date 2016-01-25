@@ -176,6 +176,7 @@ bool
 ServiceWorkerManagerParent::RecvRegister(
                                      const ServiceWorkerRegistrationData& aData)
 {
+  printf("SWMParent: RecvRegister\n");
   AssertIsInMainProcess();
   AssertIsOnBackgroundThread();
 
@@ -211,6 +212,7 @@ bool
 ServiceWorkerManagerParent::RecvUnregister(const PrincipalInfo& aPrincipalInfo,
                                            const nsString& aScope)
 {
+  printf("SWMParent: RecvUnregister\n");
   AssertIsInMainProcess();
   AssertIsOnBackgroundThread();
 

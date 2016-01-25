@@ -388,10 +388,12 @@ ServiceWorkerRegistrationActorList.prototype = {
   },
 
   onRegister: function (registration) {
+    dump("ON REGISTER!\n");
     this._notifyListChanged();
   },
 
   onUnregister: function (registration) {
+    dump("ON UNREGISTER!\n");
     this._notifyListChanged();
   }
 };

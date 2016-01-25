@@ -68,11 +68,13 @@ exports.WorkersComponent = React.createClass({
   },
 
   update() {
+    dump("WORKER UPDATE!\n");
     let workers = this.getInitialState().workers;
 
     this.getWorkerForms().then(forms => {
 
       forms.registrations.forEach(form => {
+        dump("REGISTRATION: " + form.scope + "\n");
         workers.service.push({
           type: "serviceworker",
           icon: WorkerIcon,
@@ -84,6 +86,7 @@ exports.WorkersComponent = React.createClass({
       });
 
       forms.workers.forEach(form => {
+        //dump("WORKER: " + form.url + "\n");
         let worker = {
           type: "worker",
           icon: WorkerIcon,

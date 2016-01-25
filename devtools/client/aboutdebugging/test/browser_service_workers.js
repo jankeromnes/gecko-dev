@@ -56,10 +56,13 @@ add_task(function *() {
     });
   };
   let mm = swTab.linkedBrowser.messageManager;
+  ok(true, "loading framescript to unregister sw...");
   mm.loadFrameScript("data:,(" + encodeURIComponent(frameScript) + ")()", true);
 
   yield new Promise(done => {
+    ok(true, "listening for sw-unregistered...");
     mm.addMessageListener("sw-unregistered", function listener() {
+      ok(true, "received sw-unregistered!");
       mm.removeMessageListener("sw-unregistered", listener);
       done();
     });
