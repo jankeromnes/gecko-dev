@@ -234,6 +234,8 @@ var SimulatorScanner = {
 EventEmitter.decorate(SimulatorScanner);
 RuntimeScanners.add(SimulatorScanner);
 
+exports.SimulatorScanner = SimulatorScanner;
+
 /**
  * TODO: Remove this comaptibility layer in the future (bug 1085393)
  * This runtime exists to support the ADB Helper add-on below version 0.7.0.
@@ -320,6 +322,8 @@ var LazyAdbScanner = {
 
 EventEmitter.decorate(LazyAdbScanner);
 RuntimeScanners.add(LazyAdbScanner);
+
+exports.LazyAdbScanner = LazyAdbScanner;
 
 var WiFiScanner = {
 

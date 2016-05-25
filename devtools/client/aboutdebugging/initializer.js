@@ -24,13 +24,20 @@ const { require } = BrowserLoader({
   window
 });
 
+const { ConnectionManager } = require("devtools/shared/client/connection-manager");
 const { createFactory, render, unmountComponentAtNode } =
   require("devtools/client/shared/vendor/react");
+const Services = require("Services");
 
 const AboutDebuggingApp = createFactory(require("./components/aboutdebugging"));
 
 var AboutDebugging = {
   init() {
+    let port = Services.prefs.getIntPref("devtools.debugger.remote-port");
+    let connection = ConnectionManager.createConnection("localhost", port);
+
+
+
     if (!DebuggerServer.initialized) {
       DebuggerServer.init();
       DebuggerServer.addBrowserActors();
