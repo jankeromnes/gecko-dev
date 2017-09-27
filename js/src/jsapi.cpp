@@ -15,6 +15,11 @@
 #include "mozilla/PodOperations.h"
 #include "mozilla/Sprintf.h"
 
+#include <map>
+#include <sys/types.h>
+#include <unistd.h>
+#include <vector>
+
 #include <ctype.h>
 #ifdef __linux__
 # include <dlfcn.h>
@@ -116,11 +121,27 @@ using JS::CompileOptions;
 using JS::ReadOnlyCompileOptions;
 using JS::SourceBufferHolder;
 
+const char* Test[] = {
+  "line 1",
+  "line 2",
+  "line 3",
+  "line 4",
+  "line 5",
+  "line 6"     // bugprone-suspicious-missing-comma
+  "line 7",
+  "line 8",
+};
+
 #ifdef HAVE_VA_LIST_AS_ARRAY
 #define JS_ADDRESSOF_VA_LIST(ap) ((va_list*)(ap))
 #else
 #define JS_ADDRESSOF_VA_LIST(ap) (&(ap))
 #endif
+
+class AnnotateConflict {
+  MOZ_NO_DANGLING_ON_TEMPORARIES int *get() && { return nullptr; } // mozilla-dangling-on-temporary
+  MOZ_NO_DANGLING_ON_TEMPORARIES int test() { return 0; } // mozilla-dangling-on-temporary
+};
 
 JS_PUBLIC_API(bool)
 JS::CallArgs::requireAtLeast(JSContext* cx, const char* fnname, unsigned required) const
@@ -171,7 +192,7 @@ JS::ObjectOpResult::reportStrictErrorOrWarning(JSContext* cx, HandleObject obj, 
                                      nullptr, nullptr, nullptr);
     }
 
-    if (ErrorTakesArguments(code_)) {
+    else if (ErrorTakesArguments(code_)) { // readability-misleading-indentation or readability-else-after-return
         UniqueChars propName = IdToPrintableUTF8(cx, id, IdToPrintableBehavior::IdIsPropertyKey);
         if (!propName) {
             return false;
@@ -203,6 +224,17 @@ JS::ObjectOpResult::reportStrictErrorOrWarning(JSContext* cx, HandleObject obj, 
 JS_PUBLIC_API(bool)
 JS::ObjectOpResult::reportStrictErrorOrWarning(JSContext* cx, HandleObject obj, bool strict)
 {
+    for (float x = 0.1f; x <= 1.0f; x += 0.1f) {} // clang-analyzer-security.FloatLoopCounter
+
+    setuid(1); // clang-analyzer-security.insecureAPI.UncheckedReturn
+
+    int x = 0;
+    int y = 0;
+    if (x < y); // bugprone-suspicious-semicolon; readability-braces-around-statements
+    {
+      x++;
+    }
+
     MOZ_ASSERT(code_ != Uninitialized);
     MOZ_ASSERT(!ok());
     MOZ_ASSERT(!ErrorTakesArguments(code_));
@@ -213,8 +245,11 @@ JS::ObjectOpResult::reportStrictErrorOrWarning(JSContext* cx, HandleObject obj, 
 }
 
 JS_PUBLIC_API(bool)
-JS::ObjectOpResult::failCantRedefineProp()
+JS::ObjectOpResult::failCantRedefineProp(void) // (should not be published: modernize-redundant-void-arg)
 {
+    int x;
+    x = 1; // clang-analyzer-deadcode.DeadStores
+
     return fail(JSMSG_CANT_REDEFINE_PROP);
 }
 
@@ -317,12 +352,18 @@ JS_GetPositiveInfinityValue(JSContext* cx)
 JS_PUBLIC_API(Value)
 JS_GetEmptyStringValue(JSContext* cx)
 {
+    std::string str;
+    str.find("A"); // performance-faster-string-find
+
     return StringValue(cx->runtime()->emptyString);
 }
 
 JS_PUBLIC_API(JSString*)
 JS_GetEmptyString(JSContext* cx)
 {
+    std::map<int, std::vector<std::string>> my_map;
+    for (const std::pair<int, std::vector<std::string>>& p : my_map) {} // performance-implicit-conversion-in-loop
+
     MOZ_ASSERT(cx->emptyString());
     return cx->emptyString();
 }
