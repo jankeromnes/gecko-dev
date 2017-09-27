@@ -637,7 +637,7 @@ uint16_t ConvertCubebPreferred(cubeb_device_pref aPreferred)
 {
   if (aPreferred == CUBEB_DEVICE_PREF_NONE) {
     return nsIAudioDeviceInfo::PREF_NONE;
-  } else if (aPreferred == CUBEB_DEVICE_PREF_ALL) {
+  } else if (aPreferred == CUBEB_DEVICE_PREF_ALL) { // before: readability-else-after-return
     return nsIAudioDeviceInfo::PREF_ALL;
   }
 

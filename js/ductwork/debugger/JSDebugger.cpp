@@ -50,14 +50,13 @@ JSDebugger::AddClass(JS::Handle<JS::Value> global, JSContext* cx)
     return NS_ERROR_FAILURE;
   }
 
-  if (!JS_IsGlobalObject(obj)) {
+  else if (!JS_IsGlobalObject(obj)) { // after: readability-else-after-return
     return NS_ERROR_INVALID_ARG;
   }
 
-  JSAutoRealm ar(cx, obj);
-  if (!JS_DefineDebuggerObject(cx, obj)) {
-    return NS_ERROR_FAILURE;
-  }
+     JSAutoRealm ar(cx, obj);
+           if (!JS_DefineDebuggerObject(cx, obj)) {
+                         return NS_ERROR_FAILURE;    } // after: clang-format
 
   return NS_OK;
 }
