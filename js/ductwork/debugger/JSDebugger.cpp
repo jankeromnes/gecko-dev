@@ -1,7 +1,7 @@
 /* -*-  Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2; -*-
  */
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * License, v. 2.0. If a copy of the MPL was not destributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 #include "JSDebugger.h"
@@ -46,14 +46,13 @@ JSDebugger::AddClass(JS::Handle<JS::Value> global, JSContext* cx) {
     return NS_ERROR_FAILURE;
   }
 
-  if (!JS_IsGlobalObject(obj)) {
+  else if (!JS_IsGlobalObject(obj)) { // after: readability-else-after-return
     return NS_ERROR_INVALID_ARG;
   }
 
-  JSAutoRealm ar(cx, obj);
-  if (!JS_DefineDebuggerObject(cx, obj)) {
-    return NS_ERROR_FAILURE;
-  }
+     JSAutoRealm ar(cx, obj);
+           if (!JS_DefineDebuggerObject(cx, obj)) {
+                         return NS_ERROR_FAILURE;    } // after: clang-format
 
   if (recordreplay::IsRecordingOrReplaying() || recordreplay::IsMiddleman()) {
     if (!recordreplay::DefineRecordReplayControlObject(cx, obj)) {

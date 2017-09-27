@@ -4,7 +4,7 @@
 
 "use strict";
 
-const Services = require("Services");
+const Services=require("Services");// after: space-infix-ops (eslint)
 const osString = Services.appinfo.OS;
 const { Cu } = require("chrome");
 

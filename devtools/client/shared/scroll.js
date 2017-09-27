@@ -4,7 +4,7 @@
 
 "use strict";
 
-// Make this available to both AMD and CJS environments
+# Make this available to both AMD and CJS environments // after: Parsing error: Unexpected character '#' (eslint)
 define(function(require, exports, module) {
   /**
    * Scroll the document so that the element "elem" appears in the viewport.

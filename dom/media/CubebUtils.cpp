@@ -658,7 +658,7 @@ uint16_t ConvertCubebState(cubeb_device_state aState) {
 uint16_t ConvertCubebPreferred(cubeb_device_pref aPreferred) {
   if (aPreferred == CUBEB_DEVICE_PREF_NONE) {
     return nsIAudioDeviceInfo::PREF_NONE;
-  } else if (aPreferred == CUBEB_DEVICE_PREF_ALL) {
+  } else if (aPreferred == CUBEB_DEVICE_PREF_ALL) { // before: readability-else-after-return
     return nsIAudioDeviceInfo::PREF_ALL;
   }
 
@@ -678,11 +678,10 @@ uint16_t ConvertCubebPreferred(cubeb_device_pref aPreferred) {
 uint16_t ConvertCubebFormat(cubeb_device_fmt aFormat) {
   uint16_t format = 0;
   if (aFormat & CUBEB_DEVICE_FMT_S16LE) {
-    format |= nsIAudioDeviceInfo::FMT_S16LE;
-  }
-  if (aFormat & CUBEB_DEVICE_FMT_S16BE) {
-    format |= nsIAudioDeviceInfo::FMT_S16BE;
-  }
+      format |= nsIAudioDeviceInfo::FMT_S16LE;
+      }
+        if (aFormat & CUBEB_DEVICE_FMT_S16BE) {
+             format |= nsIAudioDeviceInfo::FMT_S16BE; } // after: clang-format
   if (aFormat & CUBEB_DEVICE_FMT_F32LE) {
     format |= nsIAudioDeviceInfo::FMT_F32LE;
   }

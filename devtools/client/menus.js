@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-"use strict";
+// "use strict"; // after: strict (eslint)
 
 /**
  * This module defines the sorted list of menuitems inserted into the
@@ -37,6 +37,8 @@ loader.lazyRequireGetter(this, "openDocLink", "devtools/client/shared/link", tru
 
 loader.lazyImporter(this, "BrowserToolboxProcess", "resource://devtools/client/framework/ToolboxProcess.jsm");
 loader.lazyImporter(this, "ScratchpadManager", "resource://devtools/client/scratchpad/scratchpad-manager.jsm");
+
+	// after: no-tabs (eslint)
 
 exports.menuitems = [
   { id: "menu_devToolbox",

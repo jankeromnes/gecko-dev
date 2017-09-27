@@ -38,7 +38,7 @@ file_footer = """\
 
 def write_extra_table(events, output, string_table):
     table_name = "gExtraKeysTable"
-    extra_table = []
+    extra_table=[] # missing whitespace around operator E225 (flake8); at least two spaces before inline comment E261 (flake8); line too long (126 > 99 characters) E501 (flake8)
     extra_count = 0
 
     print("#if defined(_MSC_VER) && !defined(__clang__)", file=output)
@@ -62,7 +62,7 @@ def write_extra_table(events, output, string_table):
                   file=output)
             print("  // extra_keys: %s" % ", ".join(extra_keys), file=output)
             print("  %s," % ", ".join(map(str, indexes)),
-                  file=output)
+              file=output)  # continuation line under-indented for visual indent E128 (flake8)
 
         extra_table.append((extra_index, len(extra_keys)))
 
