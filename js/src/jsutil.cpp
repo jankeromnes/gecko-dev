@@ -13,7 +13,7 @@
 #include "mozilla/Maybe.h"
 #include "mozilla/ThreadLocal.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #include "jstypes.h"
 
@@ -23,7 +23,6 @@
 
 using namespace js;
 
-using mozilla::Maybe;
 
 #if defined(DEBUG) || defined(JS_OOM_BREAKPOINT)
 /* For OOM testing functionality in Utility.h. */
@@ -103,7 +102,7 @@ JS_PUBLIC_API void JS_Assert(const char* s, const char* file, int ln) {
 #ifdef __linux__
 
 #include <malloc.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 namespace js {
 

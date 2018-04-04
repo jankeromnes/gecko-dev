@@ -1,0 +1,2379 @@
+defaults: &firefox-git
+  docker:
+    - image: janitortechnology/firefox:latest
+  working_directory: /home/user/firefox
+
+defaults: &clang-tidy
+  steps:
+    - run:
+        no_output_timeout: 90m
+        command: |
+          git config --global user.name "Jan Keromnes"
+          git config --global user.email "janx@linux.com"
+          git remote add autofix `echo $CIRCLE_REPOSITORY_URL | sed 's_git@github\.com:_https://github.com/_'`
+          git fetch autofix
+          git checkout -b $CIRCLE_JOB autofix/$CIRCLE_BRANCH
+          ./mach configure --enable-clang-plugin
+          ./mach build-backend --backend=CompileDB
+          export TERM=xterm-256color
+          run-clang-tidy-6.0.py -p obj-x86_64-pc-linux-gnu/ -fix -checks=-*,$CIRCLE_JOB js 2>&1 | grep -v header-filter | grep -v Suppressed | grep -v "generated\."
+          if [ ! -z "$(git status --porcelain)" ]; then
+            git commit -am "Autofix (clang-tidy: $CIRCLE_JOB)"
+            git show
+            git branch "clang-tidy-$CIRCLE_JOB"
+          fi
+
+version: 2.0
+jobs:
+  mozlint:
+    <<: *firefox-git
+    steps:
+      - run:
+          no_output_timeout: 90m
+          command: |
+            git config --global user.name "Jan Keromnes"
+            git config --global user.email "janx@linux.com"
+            git remote add autofix `echo $CIRCLE_REPOSITORY_URL | sed 's_git@github\.com:_https://github.com/_'`
+            git fetch autofix
+            git checkout -b $CIRCLE_JOB autofix/$CIRCLE_BRANCH
+            sudo apt-get update -q && sudo apt-get install -qy codespell shellcheck
+            export TERM=xterm-256color
+            for linter in $(./mach lint --list | sed "s_.*\['\(.*\)'\]_\1_" | sed "s_', '_\n_g") ; do
+              git reset --hard autofix/$CIRCLE_BRANCH
+              ./mach lint --linter $linter --fix 2>&1
+              if [ ! -z "$(git status --porcelain)" ]; then
+                git commit -am "Autofix (mozlint: $linter)"
+                git show
+                git branch "mozlint-$linter"
+              fi ;
+            done
+
+  android-cloexec-accept:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-accept4:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-creat:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-dup:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-epoll-create:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-epoll-create1:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-fopen:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-inotify-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-inotify-init1:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-memfd-create:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-open:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  android-cloexec-socket:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  boost-use-to-string:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-argument-comment:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-assert-side-effect:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-bool-pointer-implicit-conversion:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-copy-constructor-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-dangling-handle:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-fold-init-type:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-forward-declaration-namespace:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-inaccurate-erase:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-integer-division:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-misplaced-operator-in-strlen-in-alloc:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-move-forwarding-reference:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-multiple-statement-macro:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-string-constructor:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-suspicious-memset-usage:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-undefined-memory-manipulation:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-use-after-move:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  bugprone-virtual-near-miss:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-dcl03-c:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-dcl21-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-dcl50-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-dcl54-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-dcl58-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-dcl59-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-env33-c:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-err09-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-err34-c:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-err52-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-err58-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-err60-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-err61-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-fio38-c:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-flp30-c:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-msc30-c:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-msc50-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cert-oop11-cpp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-apiModeling.google.GTest:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.CallAndMessage:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.DivideZero:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.DynamicTypePropagation:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.NonNullParamChecker:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.NonnilStringConstants:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.NullDereference:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.StackAddressEscape:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.UndefinedBinaryOperatorResult:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.VLASize:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.builtin.BuiltinFunctions:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.builtin.NoReturnFunctions:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.uninitialized.ArraySubscript:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.uninitialized.Assign:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.uninitialized.Branch:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.uninitialized.CapturedBlockVariable:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-core.uninitialized.UndefReturn:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-cplusplus.NewDelete:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-cplusplus.NewDeleteLeaks:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-cplusplus.SelfAssignment:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-deadcode.DeadStores:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-llvm.Conventions:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-nullability.NullPassedToNonnull:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-nullability.NullReturnedFromNonnull:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-nullability.NullableDereferenced:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-nullability.NullablePassedToNonnull:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-nullability.NullableReturnedFromNonnull:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-optin.cplusplus.VirtualCall:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-optin.mpi.MPI-Checker:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-optin.osx.cocoa.localizability.EmptyLocalizationContextChecker:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-optin.osx.cocoa.localizability.NonLocalizedStringChecker:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-optin.performance.Padding:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-optin.portability.UnixAPI:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.API:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.NumberObjectConversion:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.ObjCProperty:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.SecKeychainAPI:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.AtSync:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.ClassRelease:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.Dealloc:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.IncompatibleMethodTypes:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.Loops:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.MissingSuperCall:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.NSAutoreleasePool:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.NSError:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.NilArg:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.NonNilReturnValue:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.ObjCGenerics:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.RetainCount:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.SelfInit:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.SuperDealloc:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.UnusedIvars:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.cocoa.VariadicMethodTypes:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.coreFoundation.CFError:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.coreFoundation.CFNumber:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.coreFoundation.CFRetainRelease:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.coreFoundation.containers.OutOfBounds:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-osx.coreFoundation.containers.PointerSizedValues:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.FloatLoopCounter:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.insecureAPI.UncheckedReturn:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.insecureAPI.getpw:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.insecureAPI.gets:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.insecureAPI.mkstemp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.insecureAPI.mktemp:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.insecureAPI.rand:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.insecureAPI.strcpy:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-security.insecureAPI.vfork:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-unix.API:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-unix.Malloc:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-unix.MallocSizeof:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-unix.MismatchedDeallocator:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-unix.StdCLibraryFunctions:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-unix.Vfork:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-unix.cstring.BadSizeArg:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-unix.cstring.NullArg:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-valist.CopyToSelf:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-valist.Uninitialized:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  clang-analyzer-valist.Unterminated:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-c-copy-assignment-signature:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-interfaces-global-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-no-malloc:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-owning-memory:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-bounds-array-to-pointer-decay:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-bounds-constant-array-index:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-bounds-pointer-arithmetic:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-type-const-cast:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-type-cstyle-cast:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-type-member-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-type-reinterpret-cast:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-type-static-cast-downcast:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-type-union-access:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-pro-type-vararg:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-slicing:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  cppcoreguidelines-special-member-functions:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  fuchsia-default-arguments:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  fuchsia-overloaded-operator:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  fuchsia-virtual-inheritance:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-build-explicit-make-pair:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-build-namespaces:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-build-using-namespace:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-default-arguments:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-explicit-constructor:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-global-names-in-headers:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-objc-avoid-throwing-exception:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-objc-global-variable-declaration:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-readability-braces-around-statements:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-readability-casting:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-readability-function-size:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-readability-namespace-comments:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-readability-redundant-smartptr-get:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-readability-todo:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-runtime-int:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-runtime-member-string-references:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-runtime-operator:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  google-runtime-references:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-braces-around-statements:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-deprecated-headers:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-exception-baseclass:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-explicit-conversions:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-function-size:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-invalid-access-moved:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-member-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-move-const-arg:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-named-parameter:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-new-delete-operators:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-no-array-decay:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-no-assembler:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-no-malloc:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-noexcept-move:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-signed-bitwise:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-special-member-functions:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-static-assert:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-undelegated-constructor:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-use-auto:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-use-emplace:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-use-equals-default:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-use-equals-delete:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-use-noexcept:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-use-nullptr:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-use-override:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  hicpp-vararg:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  llvm-header-guard:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  llvm-include-order:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  llvm-namespace-comment:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  llvm-twine-local:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-definitions-in-headers:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-forwarding-reference-overload:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-incorrect-roundings:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-lambda-function-name:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-macro-parentheses:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-macro-repeated-side-effects:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-misplaced-const:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-misplaced-widening-cast:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-new-delete-overloads:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-non-copyable-objects:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-redundant-expression:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-sizeof-container:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-sizeof-expression:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-static-assert:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-string-compare:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-string-integer-assignment:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-string-literal-with-embedded-nul:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-suspicious-enum-usage:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-suspicious-missing-comma:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-suspicious-semicolon:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-suspicious-string-compare:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-swapped-arguments:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-throw-by-value-catch-by-reference:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-unconventional-assign-operator:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-undelegated-constructor:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-uniqueptr-reset-release:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-unused-alias-decls:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-unused-parameters:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-unused-raii:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  misc-unused-using-decls:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-avoid-bind:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-deprecated-headers:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-loop-convert:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-make-shared:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-make-unique:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-pass-by-value:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-raw-string-literal:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-redundant-void-arg:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-replace-auto-ptr:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-replace-random-shuffle:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-return-braced-init-list:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-shrink-to-fit:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-unary-static-assert:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-auto:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-bool-literals:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-default-member-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-emplace:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-equals-default:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-equals-delete:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-noexcept:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-nullptr:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-override:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-transparent-functors:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  modernize-use-using:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  mpi-buffer-deref:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  mpi-type-mismatch:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  objc-avoid-nserror-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  objc-avoid-spinlock:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  objc-forbidden-subclassing:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  objc-property-declaration:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-faster-string-find:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-for-range-copy:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-implicit-conversion-in-loop:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-inefficient-algorithm:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-inefficient-string-concatenation:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-inefficient-vector-operation:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-move-const-arg:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-move-constructor-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-noexcept-move-constructor:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-type-promotion-in-math-fn:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-unnecessary-copy-initialization:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  performance-unnecessary-value-param:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-avoid-const-params-in-decls:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-braces-around-statements:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-container-size-empty:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-delete-null-pointer:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-deleted-default:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-else-after-return:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-function-size:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-identifier-naming:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-implicit-bool-conversion:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-inconsistent-declaration-parameter-name:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-misleading-indentation:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-misplaced-array-index:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-named-parameter:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-non-const-parameter:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-redundant-control-flow:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-redundant-declaration:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-redundant-function-ptr-dereference:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-redundant-member-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-redundant-smartptr-get:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-redundant-string-cstr:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-redundant-string-init:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-simplify-boolean-expr:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-static-accessed-through-instance:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-static-definition-in-anonymous-namespace:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+  readability-uniqueptr-delete-release:
+    <<: *firefox-git
+    <<: *clang-tidy
+
+
+workflows:
+  version: 2
+  autofix:
+    jobs:
+      - mozlint:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-accept:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-accept4:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-creat:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-dup:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-epoll-create:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-epoll-create1:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-fopen:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-inotify-init:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-inotify-init1:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-memfd-create:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-open:
+          filters:
+            branches:
+              only: master
+      - android-cloexec-socket:
+          filters:
+            branches:
+              only: master
+      - boost-use-to-string:
+          filters:
+            branches:
+              only: master
+      - bugprone-argument-comment:
+          filters:
+            branches:
+              only: master
+      - bugprone-assert-side-effect:
+          filters:
+            branches:
+              only: master
+      - bugprone-bool-pointer-implicit-conversion:
+          filters:
+            branches:
+              only: master
+      - bugprone-copy-constructor-init:
+          filters:
+            branches:
+              only: master
+      - bugprone-dangling-handle:
+          filters:
+            branches:
+              only: master
+      - bugprone-fold-init-type:
+          filters:
+            branches:
+              only: master
+      - bugprone-forward-declaration-namespace:
+          filters:
+            branches:
+              only: master
+      - bugprone-inaccurate-erase:
+          filters:
+            branches:
+              only: master
+      - bugprone-integer-division:
+          filters:
+            branches:
+              only: master
+      - bugprone-misplaced-operator-in-strlen-in-alloc:
+          filters:
+            branches:
+              only: master
+      - bugprone-move-forwarding-reference:
+          filters:
+            branches:
+              only: master
+      - bugprone-multiple-statement-macro:
+          filters:
+            branches:
+              only: master
+      - bugprone-string-constructor:
+          filters:
+            branches:
+              only: master
+      - bugprone-suspicious-memset-usage:
+          filters:
+            branches:
+              only: master
+      - bugprone-undefined-memory-manipulation:
+          filters:
+            branches:
+              only: master
+      - bugprone-use-after-move:
+          filters:
+            branches:
+              only: master
+      - bugprone-virtual-near-miss:
+          filters:
+            branches:
+              only: master
+      - cert-dcl03-c:
+          filters:
+            branches:
+              only: master
+      - cert-dcl21-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-dcl50-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-dcl54-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-dcl58-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-dcl59-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-env33-c:
+          filters:
+            branches:
+              only: master
+      - cert-err09-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-err34-c:
+          filters:
+            branches:
+              only: master
+      - cert-err52-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-err58-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-err60-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-err61-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-fio38-c:
+          filters:
+            branches:
+              only: master
+      - cert-flp30-c:
+          filters:
+            branches:
+              only: master
+      - cert-msc30-c:
+          filters:
+            branches:
+              only: master
+      - cert-msc50-cpp:
+          filters:
+            branches:
+              only: master
+      - cert-oop11-cpp:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-apiModeling.google.GTest:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.CallAndMessage:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.DivideZero:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.DynamicTypePropagation:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.NonNullParamChecker:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.NonnilStringConstants:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.NullDereference:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.StackAddressEscape:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.UndefinedBinaryOperatorResult:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.VLASize:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.builtin.BuiltinFunctions:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.builtin.NoReturnFunctions:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.uninitialized.ArraySubscript:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.uninitialized.Assign:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.uninitialized.Branch:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.uninitialized.CapturedBlockVariable:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-core.uninitialized.UndefReturn:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-cplusplus.NewDelete:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-cplusplus.NewDeleteLeaks:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-cplusplus.SelfAssignment:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-deadcode.DeadStores:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-llvm.Conventions:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-nullability.NullPassedToNonnull:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-nullability.NullReturnedFromNonnull:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-nullability.NullableDereferenced:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-nullability.NullablePassedToNonnull:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-nullability.NullableReturnedFromNonnull:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-optin.cplusplus.VirtualCall:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-optin.mpi.MPI-Checker:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-optin.osx.cocoa.localizability.EmptyLocalizationContextChecker:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-optin.osx.cocoa.localizability.NonLocalizedStringChecker:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-optin.performance.Padding:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-optin.portability.UnixAPI:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.API:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.NumberObjectConversion:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.ObjCProperty:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.SecKeychainAPI:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.AtSync:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.ClassRelease:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.Dealloc:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.IncompatibleMethodTypes:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.Loops:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.MissingSuperCall:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.NSAutoreleasePool:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.NSError:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.NilArg:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.NonNilReturnValue:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.ObjCGenerics:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.RetainCount:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.SelfInit:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.SuperDealloc:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.UnusedIvars:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.cocoa.VariadicMethodTypes:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.coreFoundation.CFError:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.coreFoundation.CFNumber:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.coreFoundation.CFRetainRelease:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.coreFoundation.containers.OutOfBounds:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-osx.coreFoundation.containers.PointerSizedValues:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.FloatLoopCounter:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.insecureAPI.UncheckedReturn:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.insecureAPI.getpw:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.insecureAPI.gets:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.insecureAPI.mkstemp:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.insecureAPI.mktemp:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.insecureAPI.rand:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.insecureAPI.strcpy:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-security.insecureAPI.vfork:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-unix.API:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-unix.Malloc:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-unix.MallocSizeof:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-unix.MismatchedDeallocator:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-unix.StdCLibraryFunctions:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-unix.Vfork:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-unix.cstring.BadSizeArg:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-unix.cstring.NullArg:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-valist.CopyToSelf:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-valist.Uninitialized:
+          filters:
+            branches:
+              only: master
+      - clang-analyzer-valist.Unterminated:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-c-copy-assignment-signature:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-interfaces-global-init:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-no-malloc:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-owning-memory:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-bounds-array-to-pointer-decay:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-bounds-constant-array-index:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-bounds-pointer-arithmetic:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-type-const-cast:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-type-cstyle-cast:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-type-member-init:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-type-reinterpret-cast:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-type-static-cast-downcast:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-type-union-access:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-pro-type-vararg:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-slicing:
+          filters:
+            branches:
+              only: master
+      - cppcoreguidelines-special-member-functions:
+          filters:
+            branches:
+              only: master
+      - fuchsia-default-arguments:
+          filters:
+            branches:
+              only: master
+      - fuchsia-overloaded-operator:
+          filters:
+            branches:
+              only: master
+      - fuchsia-virtual-inheritance:
+          filters:
+            branches:
+              only: master
+      - google-build-explicit-make-pair:
+          filters:
+            branches:
+              only: master
+      - google-build-namespaces:
+          filters:
+            branches:
+              only: master
+      - google-build-using-namespace:
+          filters:
+            branches:
+              only: master
+      - google-default-arguments:
+          filters:
+            branches:
+              only: master
+      - google-explicit-constructor:
+          filters:
+            branches:
+              only: master
+      - google-global-names-in-headers:
+          filters:
+            branches:
+              only: master
+      - google-objc-avoid-throwing-exception:
+          filters:
+            branches:
+              only: master
+      - google-objc-global-variable-declaration:
+          filters:
+            branches:
+              only: master
+      - google-readability-braces-around-statements:
+          filters:
+            branches:
+              only: master
+      - google-readability-casting:
+          filters:
+            branches:
+              only: master
+      - google-readability-function-size:
+          filters:
+            branches:
+              only: master
+      - google-readability-namespace-comments:
+          filters:
+            branches:
+              only: master
+      - google-readability-redundant-smartptr-get:
+          filters:
+            branches:
+              only: master
+      - google-readability-todo:
+          filters:
+            branches:
+              only: master
+      - google-runtime-int:
+          filters:
+            branches:
+              only: master
+      - google-runtime-member-string-references:
+          filters:
+            branches:
+              only: master
+      - google-runtime-operator:
+          filters:
+            branches:
+              only: master
+      - google-runtime-references:
+          filters:
+            branches:
+              only: master
+      - hicpp-braces-around-statements:
+          filters:
+            branches:
+              only: master
+      - hicpp-deprecated-headers:
+          filters:
+            branches:
+              only: master
+      - hicpp-exception-baseclass:
+          filters:
+            branches:
+              only: master
+      - hicpp-explicit-conversions:
+          filters:
+            branches:
+              only: master
+      - hicpp-function-size:
+          filters:
+            branches:
+              only: master
+      - hicpp-invalid-access-moved:
+          filters:
+            branches:
+              only: master
+      - hicpp-member-init:
+          filters:
+            branches:
+              only: master
+      - hicpp-move-const-arg:
+          filters:
+            branches:
+              only: master
+      - hicpp-named-parameter:
+          filters:
+            branches:
+              only: master
+      - hicpp-new-delete-operators:
+          filters:
+            branches:
+              only: master
+      - hicpp-no-array-decay:
+          filters:
+            branches:
+              only: master
+      - hicpp-no-assembler:
+          filters:
+            branches:
+              only: master
+      - hicpp-no-malloc:
+          filters:
+            branches:
+              only: master
+      - hicpp-noexcept-move:
+          filters:
+            branches:
+              only: master
+      - hicpp-signed-bitwise:
+          filters:
+            branches:
+              only: master
+      - hicpp-special-member-functions:
+          filters:
+            branches:
+              only: master
+      - hicpp-static-assert:
+          filters:
+            branches:
+              only: master
+      - hicpp-undelegated-constructor:
+          filters:
+            branches:
+              only: master
+      - hicpp-use-auto:
+          filters:
+            branches:
+              only: master
+      - hicpp-use-emplace:
+          filters:
+            branches:
+              only: master
+      - hicpp-use-equals-default:
+          filters:
+            branches:
+              only: master
+      - hicpp-use-equals-delete:
+          filters:
+            branches:
+              only: master
+      - hicpp-use-noexcept:
+          filters:
+            branches:
+              only: master
+      - hicpp-use-nullptr:
+          filters:
+            branches:
+              only: master
+      - hicpp-use-override:
+          filters:
+            branches:
+              only: master
+      - hicpp-vararg:
+          filters:
+            branches:
+              only: master
+      - llvm-header-guard:
+          filters:
+            branches:
+              only: master
+      - llvm-include-order:
+          filters:
+            branches:
+              only: master
+      - llvm-namespace-comment:
+          filters:
+            branches:
+              only: master
+      - llvm-twine-local:
+          filters:
+            branches:
+              only: master
+      - misc-definitions-in-headers:
+          filters:
+            branches:
+              only: master
+      - misc-forwarding-reference-overload:
+          filters:
+            branches:
+              only: master
+      - misc-incorrect-roundings:
+          filters:
+            branches:
+              only: master
+      - misc-lambda-function-name:
+          filters:
+            branches:
+              only: master
+      - misc-macro-parentheses:
+          filters:
+            branches:
+              only: master
+      - misc-macro-repeated-side-effects:
+          filters:
+            branches:
+              only: master
+      - misc-misplaced-const:
+          filters:
+            branches:
+              only: master
+      - misc-misplaced-widening-cast:
+          filters:
+            branches:
+              only: master
+      - misc-new-delete-overloads:
+          filters:
+            branches:
+              only: master
+      - misc-non-copyable-objects:
+          filters:
+            branches:
+              only: master
+      - misc-redundant-expression:
+          filters:
+            branches:
+              only: master
+      - misc-sizeof-container:
+          filters:
+            branches:
+              only: master
+      - misc-sizeof-expression:
+          filters:
+            branches:
+              only: master
+      - misc-static-assert:
+          filters:
+            branches:
+              only: master
+      - misc-string-compare:
+          filters:
+            branches:
+              only: master
+      - misc-string-integer-assignment:
+          filters:
+            branches:
+              only: master
+      - misc-string-literal-with-embedded-nul:
+          filters:
+            branches:
+              only: master
+      - misc-suspicious-enum-usage:
+          filters:
+            branches:
+              only: master
+      - misc-suspicious-missing-comma:
+          filters:
+            branches:
+              only: master
+      - misc-suspicious-semicolon:
+          filters:
+            branches:
+              only: master
+      - misc-suspicious-string-compare:
+          filters:
+            branches:
+              only: master
+      - misc-swapped-arguments:
+          filters:
+            branches:
+              only: master
+      - misc-throw-by-value-catch-by-reference:
+          filters:
+            branches:
+              only: master
+      - misc-unconventional-assign-operator:
+          filters:
+            branches:
+              only: master
+      - misc-undelegated-constructor:
+          filters:
+            branches:
+              only: master
+      - misc-uniqueptr-reset-release:
+          filters:
+            branches:
+              only: master
+      - misc-unused-alias-decls:
+          filters:
+            branches:
+              only: master
+      - misc-unused-parameters:
+          filters:
+            branches:
+              only: master
+      - misc-unused-raii:
+          filters:
+            branches:
+              only: master
+      - misc-unused-using-decls:
+          filters:
+            branches:
+              only: master
+      - modernize-avoid-bind:
+          filters:
+            branches:
+              only: master
+      - modernize-deprecated-headers:
+          filters:
+            branches:
+              only: master
+      - modernize-loop-convert:
+          filters:
+            branches:
+              only: master
+      - modernize-make-shared:
+          filters:
+            branches:
+              only: master
+      - modernize-make-unique:
+          filters:
+            branches:
+              only: master
+      - modernize-pass-by-value:
+          filters:
+            branches:
+              only: master
+      - modernize-raw-string-literal:
+          filters:
+            branches:
+              only: master
+      - modernize-redundant-void-arg:
+          filters:
+            branches:
+              only: master
+      - modernize-replace-auto-ptr:
+          filters:
+            branches:
+              only: master
+      - modernize-replace-random-shuffle:
+          filters:
+            branches:
+              only: master
+      - modernize-return-braced-init-list:
+          filters:
+            branches:
+              only: master
+      - modernize-shrink-to-fit:
+          filters:
+            branches:
+              only: master
+      - modernize-unary-static-assert:
+          filters:
+            branches:
+              only: master
+      - modernize-use-auto:
+          filters:
+            branches:
+              only: master
+      - modernize-use-bool-literals:
+          filters:
+            branches:
+              only: master
+      - modernize-use-default-member-init:
+          filters:
+            branches:
+              only: master
+      - modernize-use-emplace:
+          filters:
+            branches:
+              only: master
+      - modernize-use-equals-default:
+          filters:
+            branches:
+              only: master
+      - modernize-use-equals-delete:
+          filters:
+            branches:
+              only: master
+      - modernize-use-noexcept:
+          filters:
+            branches:
+              only: master
+      - modernize-use-nullptr:
+          filters:
+            branches:
+              only: master
+      - modernize-use-override:
+          filters:
+            branches:
+              only: master
+      - modernize-use-transparent-functors:
+          filters:
+            branches:
+              only: master
+      - modernize-use-using:
+          filters:
+            branches:
+              only: master
+      - mpi-buffer-deref:
+          filters:
+            branches:
+              only: master
+      - mpi-type-mismatch:
+          filters:
+            branches:
+              only: master
+      - objc-avoid-nserror-init:
+          filters:
+            branches:
+              only: master
+      - objc-avoid-spinlock:
+          filters:
+            branches:
+              only: master
+      - objc-forbidden-subclassing:
+          filters:
+            branches:
+              only: master
+      - objc-property-declaration:
+          filters:
+            branches:
+              only: master
+      - performance-faster-string-find:
+          filters:
+            branches:
+              only: master
+      - performance-for-range-copy:
+          filters:
+            branches:
+              only: master
+      - performance-implicit-conversion-in-loop:
+          filters:
+            branches:
+              only: master
+      - performance-inefficient-algorithm:
+          filters:
+            branches:
+              only: master
+      - performance-inefficient-string-concatenation:
+          filters:
+            branches:
+              only: master
+      - performance-inefficient-vector-operation:
+          filters:
+            branches:
+              only: master
+      - performance-move-const-arg:
+          filters:
+            branches:
+              only: master
+      - performance-move-constructor-init:
+          filters:
+            branches:
+              only: master
+      - performance-noexcept-move-constructor:
+          filters:
+            branches:
+              only: master
+      - performance-type-promotion-in-math-fn:
+          filters:
+            branches:
+              only: master
+      - performance-unnecessary-copy-initialization:
+          filters:
+            branches:
+              only: master
+      - performance-unnecessary-value-param:
+          filters:
+            branches:
+              only: master
+      - readability-avoid-const-params-in-decls:
+          filters:
+            branches:
+              only: master
+      - readability-braces-around-statements:
+          filters:
+            branches:
+              only: master
+      - readability-container-size-empty:
+          filters:
+            branches:
+              only: master
+      - readability-delete-null-pointer:
+          filters:
+            branches:
+              only: master
+      - readability-deleted-default:
+          filters:
+            branches:
+              only: master
+      - readability-else-after-return:
+          filters:
+            branches:
+              only: master
+      - readability-function-size:
+          filters:
+            branches:
+              only: master
+      - readability-identifier-naming:
+          filters:
+            branches:
+              only: master
+      - readability-implicit-bool-conversion:
+          filters:
+            branches:
+              only: master
+      - readability-inconsistent-declaration-parameter-name:
+          filters:
+            branches:
+              only: master
+      - readability-misleading-indentation:
+          filters:
+            branches:
+              only: master
+      - readability-misplaced-array-index:
+          filters:
+            branches:
+              only: master
+      - readability-named-parameter:
+          filters:
+            branches:
+              only: master
+      - readability-non-const-parameter:
+          filters:
+            branches:
+              only: master
+      - readability-redundant-control-flow:
+          filters:
+            branches:
+              only: master
+      - readability-redundant-declaration:
+          filters:
+            branches:
+              only: master
+      - readability-redundant-function-ptr-dereference:
+          filters:
+            branches:
+              only: master
+      - readability-redundant-member-init:
+          filters:
+            branches:
+              only: master
+      - readability-redundant-smartptr-get:
+          filters:
+            branches:
+              only: master
+      - readability-redundant-string-cstr:
+          filters:
+            branches:
+              only: master
+      - readability-redundant-string-init:
+          filters:
+            branches:
+              only: master
+      - readability-simplify-boolean-expr:
+          filters:
+            branches:
+              only: master
+      - readability-static-accessed-through-instance:
+          filters:
+            branches:
+              only: master
+      - readability-static-definition-in-anonymous-namespace:
+          filters:
+            branches:
+              only: master
+      - readability-uniqueptr-delete-release:
+          filters:
+            branches:
+              only: master
