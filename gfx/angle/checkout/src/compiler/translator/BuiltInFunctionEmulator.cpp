@@ -16,7 +16,7 @@ namespace sh
 class BuiltInFunctionEmulator::BuiltInFunctionEmulationMarker : public TIntermTraverser
 {
   public:
-    BuiltInFunctionEmulationMarker(BuiltInFunctionEmulator &emulator)
+    explicit BuiltInFunctionEmulationMarker(BuiltInFunctionEmulator &emulator)
         : TIntermTraverser(true, false, false), mEmulator(emulator)
     {
     }

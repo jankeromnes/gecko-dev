@@ -127,7 +127,7 @@ private:
 
 class CairoLockedFTFace {
 public:
-    CairoLockedFTFace(cairo_scaled_font_t* scaledFont)
+    explicit CairoLockedFTFace(cairo_scaled_font_t* scaledFont)
         : fScaledFont(scaledFont)
         , fFace(cairo_ft_scaled_font_lock_face(scaledFont))
     {}

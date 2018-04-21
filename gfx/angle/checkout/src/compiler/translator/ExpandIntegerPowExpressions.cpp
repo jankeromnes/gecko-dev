@@ -26,7 +26,7 @@ class Traverser : public TIntermTraverser
     static void Apply(TIntermNode *root, TSymbolTable *symbolTable);
 
   private:
-    Traverser(TSymbolTable *symbolTable);
+    explicit Traverser(TSymbolTable *symbolTable);
     bool visitAggregate(Visit visit, TIntermAggregate *node) override;
     void nextIteration();
 

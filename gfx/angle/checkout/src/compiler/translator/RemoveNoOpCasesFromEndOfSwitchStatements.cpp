@@ -88,7 +88,7 @@ void RemoveNoOpCasesFromEndOfStatementList(TIntermBlock *statementList, TSymbolT
 class RemoveNoOpCasesFromEndOfSwitchTraverser : public TIntermTraverser
 {
   public:
-    RemoveNoOpCasesFromEndOfSwitchTraverser(TSymbolTable *symbolTable)
+    explicit RemoveNoOpCasesFromEndOfSwitchTraverser(TSymbolTable *symbolTable)
         : TIntermTraverser(true, false, false, symbolTable)
     {
     }

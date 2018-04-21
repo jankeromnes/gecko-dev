@@ -46,7 +46,7 @@ namespace
 class DoWhileRewriter : public TIntermTraverser
 {
   public:
-    DoWhileRewriter(TSymbolTable *symbolTable) : TIntermTraverser(true, false, false, symbolTable)
+    explicit DoWhileRewriter(TSymbolTable *symbolTable) : TIntermTraverser(true, false, false, symbolTable)
     {
     }
 

@@ -1865,7 +1865,7 @@ gfxFontUtils::GetVariationInstances(gfxFontEntry* aFontEntry,
             }
         }
 
-        operator hb_blob_t* () { return mBlob; }
+        explicit operator hb_blob_t* () { return mBlob; }
 
     private:
         hb_blob_t* const mBlob;

@@ -38,7 +38,7 @@ class ArrayReturnValueToOutParameterTraverser : private TIntermTraverser
     static void apply(TIntermNode *root, TSymbolTable *symbolTable);
 
   private:
-    ArrayReturnValueToOutParameterTraverser(TSymbolTable *symbolTable);
+    explicit ArrayReturnValueToOutParameterTraverser(TSymbolTable *symbolTable);
 
     bool visitFunctionPrototype(Visit visit, TIntermFunctionPrototype *node) override;
     bool visitFunctionDefinition(Visit visit, TIntermFunctionDefinition *node) override;

@@ -92,7 +92,7 @@ FixedSortKeyByteSink::Resize(int32_t /*appendCapacity*/, int32_t /*length*/) {
 // Not in an anonymous namespace, so that it can be a friend of CollationKey.
 class CollationKeyByteSink : public SortKeyByteSink {
 public:
-    CollationKeyByteSink(CollationKey &key)
+    explicit CollationKeyByteSink(CollationKey &key)
             : SortKeyByteSink(reinterpret_cast<char *>(key.getBytes()), key.getCapacity()),
               key_(key) {}
     virtual ~CollationKeyByteSink();
@@ -909,7 +909,7 @@ private:
 
 class UIterNFDIterator : public NFDIterator {
 public:
-    UIterNFDIterator(UCharIterator &it) : iter(it) {}
+    explicit UIterNFDIterator(UCharIterator &it) : iter(it) {}
 protected:
     virtual UChar32 nextRawCodePoint() {
         return uiter_next32(&iter);
@@ -1393,7 +1393,7 @@ namespace {
  */
 class PartLevelCallback : public CollationKeys::LevelCallback {
 public:
-    PartLevelCallback(const SortKeyByteSink &s)
+    explicit PartLevelCallback(const SortKeyByteSink &s)
             : sink(s), level(Collation::PRIMARY_LEVEL) {
         levelCapacity = sink.GetRemainingCapacity();
     }

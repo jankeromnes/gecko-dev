@@ -25,7 +25,7 @@ class TokenLexer : public Lexer
   public:
     typedef std::vector<Token> TokenVector;
 
-    TokenLexer(TokenVector *tokens)
+    explicit TokenLexer(TokenVector *tokens)
     {
         tokens->swap(mTokens);
         mIter = mTokens.begin();
@@ -54,7 +54,7 @@ class TokenLexer : public Lexer
 class MacroExpander::ScopedMacroReenabler final : angle::NonCopyable
 {
   public:
-    ScopedMacroReenabler(MacroExpander *expander);
+    explicit ScopedMacroReenabler(MacroExpander *expander);
     ~ScopedMacroReenabler();
 
   private:

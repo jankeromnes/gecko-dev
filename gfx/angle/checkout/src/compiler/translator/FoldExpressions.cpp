@@ -25,7 +25,7 @@ namespace
 class FoldExpressionsTraverser : public TIntermTraverser
 {
   public:
-    FoldExpressionsTraverser(TDiagnostics *diagnostics)
+    explicit FoldExpressionsTraverser(TDiagnostics *diagnostics)
         : TIntermTraverser(true, false, false), mDiagnostics(diagnostics), mDidReplace(false)
     {
     }

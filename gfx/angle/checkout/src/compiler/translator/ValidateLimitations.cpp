@@ -40,7 +40,7 @@ int GetLoopSymbolId(TIntermLoop *loop)
 class ValidateConstIndexExpr : public TIntermTraverser
 {
   public:
-    ValidateConstIndexExpr(const std::vector<int> &loopSymbols)
+    explicit ValidateConstIndexExpr(const std::vector<int> &loopSymbols)
         : TIntermTraverser(true, false, false), mValid(true), mLoopSymbolIds(loopSymbols)
     {
     }

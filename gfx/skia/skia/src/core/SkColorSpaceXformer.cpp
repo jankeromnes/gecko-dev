@@ -54,7 +54,7 @@ std::unique_ptr<SkColorSpaceXformer> SkColorSpaceXformer::Make(sk_sp<SkColorSpac
 
 class SkColorSpaceXformer::AutoCachePurge {
 public:
-    AutoCachePurge(SkColorSpaceXformer* xformer)
+    explicit AutoCachePurge(SkColorSpaceXformer* xformer)
         : fXformer(xformer) {
         fXformer->fReentryCount++;
     }

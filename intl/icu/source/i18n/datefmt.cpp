@@ -50,7 +50,7 @@ class U_I18N_API DateFmtBestPattern : public SharedObject {
 public:
     UnicodeString fPattern;
 
-    DateFmtBestPattern(const UnicodeString &pattern)
+    explicit DateFmtBestPattern(const UnicodeString &pattern)
             : fPattern(pattern) { }
     ~DateFmtBestPattern();
 };

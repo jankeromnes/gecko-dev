@@ -51,7 +51,7 @@ private:
 
 class GLCoverageSetOpXP : public GrGLSLXferProcessor {
 public:
-    GLCoverageSetOpXP(const GrProcessor&) {}
+    explicit GLCoverageSetOpXP(const GrProcessor&) {}
 
     ~GLCoverageSetOpXP() override {}
 

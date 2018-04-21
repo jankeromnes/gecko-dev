@@ -399,7 +399,7 @@ struct LocaleDisplayNamesImpl::CapitalizationContextSink : public ResourceSink {
     UBool hasCapitalizationUsage;
     LocaleDisplayNamesImpl& parent;
 
-    CapitalizationContextSink(LocaleDisplayNamesImpl& _parent)
+    explicit CapitalizationContextSink(LocaleDisplayNamesImpl& _parent)
       : hasCapitalizationUsage(FALSE), parent(_parent) {}
     virtual ~CapitalizationContextSink();
 

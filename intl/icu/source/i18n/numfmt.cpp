@@ -878,7 +878,7 @@ private:
     Hashtable* _ids;
 
 public:
-    NFFactory(NumberFormatFactory* delegate)
+    explicit NFFactory(NumberFormatFactory* delegate)
         : LocaleKeyFactory(delegate->visible() ? VISIBLE : INVISIBLE)
         , _delegate(delegate)
         , _ids(NULL)

@@ -299,7 +299,7 @@ struct RelDateTimeFmtDataSink : public ResourceSink {
     RelativeDateTimeCacheData &outputData;
 
     // Constructor
-    RelDateTimeFmtDataSink(RelativeDateTimeCacheData& cacheData)
+    explicit RelDateTimeFmtDataSink(RelativeDateTimeCacheData& cacheData)
         : outputData(cacheData) {
         // Clear cacheData.fallBackCache
         cacheData.fallBackCache[UDAT_STYLE_LONG] = -1;

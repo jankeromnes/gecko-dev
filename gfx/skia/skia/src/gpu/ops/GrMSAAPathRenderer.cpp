@@ -128,7 +128,7 @@ public:
 
     class GLSLProcessor : public GrGLSLGeometryProcessor {
     public:
-        GLSLProcessor(const GrGeometryProcessor& qpr) {}
+        explicit GLSLProcessor(const GrGeometryProcessor& qpr) {}
 
         void onEmitCode(EmitArgs& args, GrGPArgs* gpArgs) override {
             const MSAAQuadProcessor& qp = args.fGP.cast<MSAAQuadProcessor>();
@@ -196,7 +196,7 @@ public:
     }
 
 private:
-    MSAAQuadProcessor(const SkMatrix& viewMatrix)
+    explicit MSAAQuadProcessor(const SkMatrix& viewMatrix)
         : INHERITED(kMSAAQuadProcessor_ClassID)
         , fViewMatrix(viewMatrix) {
         fInPosition = &this->addVertexAttrib("inPosition", kFloat2_GrVertexAttribType);

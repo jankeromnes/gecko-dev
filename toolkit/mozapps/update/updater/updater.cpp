@@ -188,7 +188,7 @@ public:
     return *this;
   }
 
-  operator FILE*() {
+  explicit operator FILE*() {
     return mFile;
   }
 

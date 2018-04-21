@@ -22,7 +22,7 @@ namespace sh
 class CallDAG::CallDAGCreator : public TIntermTraverser
 {
   public:
-    CallDAGCreator(TDiagnostics *diagnostics)
+    explicit CallDAGCreator(TDiagnostics *diagnostics)
         : TIntermTraverser(true, false, false),
           mDiagnostics(diagnostics),
           mCurrentFunction(nullptr),

@@ -113,7 +113,7 @@ private:
 
 class GLCustomXP : public GrGLSLXferProcessor {
 public:
-    GLCustomXP(const GrXferProcessor&) {}
+    explicit GLCustomXP(const GrXferProcessor&) {}
     ~GLCustomXP() override {}
 
     static void GenKey(const GrXferProcessor& p, const GrShaderCaps& caps,
@@ -210,7 +210,7 @@ void CustomXP::onGetBlendInfo(BlendInfo* blendInfo) const {
 #endif
 class CustomXPFactory : public GrXPFactory {
 public:
-    constexpr CustomXPFactory(SkBlendMode mode)
+    constexpr explicit CustomXPFactory(SkBlendMode mode)
             : fMode(mode), fHWBlendEquation(hw_blend_equation(mode)) {}
 
 private:

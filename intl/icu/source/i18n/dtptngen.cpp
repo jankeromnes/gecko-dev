@@ -797,7 +797,7 @@ struct DateTimePatternGenerator::AppendItemFormatsSink : public ResourceSink {
     // Destination for data, modified via setters.
     DateTimePatternGenerator& dtpg;
 
-    AppendItemFormatsSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
+    explicit AppendItemFormatsSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
     virtual ~AppendItemFormatsSink();
 
     virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
@@ -830,7 +830,7 @@ struct DateTimePatternGenerator::AppendItemNamesSink : public ResourceSink {
     // Destination for data, modified via setters.
     DateTimePatternGenerator& dtpg;
 
-    AppendItemNamesSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
+    explicit AppendItemNamesSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
     virtual ~AppendItemNamesSink();
 
     virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
@@ -889,7 +889,7 @@ struct DateTimePatternGenerator::AvailableFormatsSink : public ResourceSink {
     // Temporary variable, required for calling addPatternWithSkeleton.
     UnicodeString conflictingPattern;
 
-    AvailableFormatsSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
+    explicit AvailableFormatsSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
     virtual ~AvailableFormatsSink();
 
     virtual void put(const char *key, ResourceValue &value, UBool isRoot,

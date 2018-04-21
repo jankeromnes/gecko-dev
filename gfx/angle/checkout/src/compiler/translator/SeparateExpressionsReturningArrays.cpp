@@ -25,7 +25,7 @@ namespace
 class SeparateExpressionsTraverser : public TIntermTraverser
 {
   public:
-    SeparateExpressionsTraverser(TSymbolTable *symbolTable);
+    explicit SeparateExpressionsTraverser(TSymbolTable *symbolTable);
 
     bool visitBinary(Visit visit, TIntermBinary *node) override;
     bool visitAggregate(Visit visit, TIntermAggregate *node) override;

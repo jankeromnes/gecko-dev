@@ -43,7 +43,7 @@ class PruneNoOpsTraverser : private TIntermTraverser
     static void apply(TIntermBlock *root, TSymbolTable *symbolTable);
 
   private:
-    PruneNoOpsTraverser(TSymbolTable *symbolTable);
+    explicit PruneNoOpsTraverser(TSymbolTable *symbolTable);
     bool visitDeclaration(Visit, TIntermDeclaration *node) override;
     bool visitBlock(Visit visit, TIntermBlock *node) override;
     bool visitLoop(Visit visit, TIntermLoop *loop) override;

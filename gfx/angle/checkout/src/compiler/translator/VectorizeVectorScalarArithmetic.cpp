@@ -26,7 +26,7 @@ namespace
 class VectorizeVectorScalarArithmeticTraverser : public TIntermTraverser
 {
   public:
-    VectorizeVectorScalarArithmeticTraverser(TSymbolTable *symbolTable)
+    explicit VectorizeVectorScalarArithmeticTraverser(TSymbolTable *symbolTable)
         : TIntermTraverser(true, false, false, symbolTable), mReplaced(false)
     {
     }

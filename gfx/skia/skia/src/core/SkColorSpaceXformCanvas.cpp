@@ -25,7 +25,7 @@ namespace {
        MaybePaint(const SkPaint* p, SkColorSpaceXformer* xformer) {
            if (p) { fPaint = fStorage.set(xformer->apply(*p)); }
        }
-       operator const SkPaint*() const { return fPaint; }
+       explicit operator const SkPaint*() const { return fPaint; }
     };
 };
 

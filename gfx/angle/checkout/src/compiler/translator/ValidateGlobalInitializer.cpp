@@ -17,7 +17,7 @@ namespace
 class ValidateGlobalInitializerTraverser : public TIntermTraverser
 {
   public:
-    ValidateGlobalInitializerTraverser(int shaderVersion);
+    explicit ValidateGlobalInitializerTraverser(int shaderVersion);
 
     void visitSymbol(TIntermSymbol *node) override;
     void visitConstantUnion(TIntermConstantUnion *node) override;

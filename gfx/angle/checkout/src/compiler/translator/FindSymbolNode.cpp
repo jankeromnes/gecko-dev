@@ -21,7 +21,7 @@ namespace
 class SymbolFinder : public TIntermTraverser
 {
   public:
-    SymbolFinder(const ImmutableString &symbolName)
+    explicit SymbolFinder(const ImmutableString &symbolName)
         : TIntermTraverser(true, false, false), mSymbolName(symbolName), mNodeFound(nullptr)
     {
     }

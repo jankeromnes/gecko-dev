@@ -231,7 +231,7 @@ struct UnitDataSink : public ResourceSink {
     const char *type;
     int32_t unitIndex;
 
-    UnitDataSink(MeasureFormatCacheData &outputData)
+    explicit UnitDataSink(MeasureFormatCacheData &outputData)
             : cacheData(outputData),
               width(UMEASFMT_WIDTH_COUNT), type(NULL), unitIndex(0) {}
     ~UnitDataSink();

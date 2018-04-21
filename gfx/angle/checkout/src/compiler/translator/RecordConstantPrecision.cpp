@@ -29,7 +29,7 @@ namespace
 class RecordConstantPrecisionTraverser : public TIntermTraverser
 {
   public:
-    RecordConstantPrecisionTraverser(TSymbolTable *symbolTable);
+    explicit RecordConstantPrecisionTraverser(TSymbolTable *symbolTable);
 
     void visitConstantUnion(TIntermConstantUnion *node) override;
 

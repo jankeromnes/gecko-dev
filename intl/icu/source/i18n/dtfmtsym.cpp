@@ -1516,7 +1516,7 @@ struct CalendarDataSink : public ResourceSink {
     UnicodeString aliasRelativePath;
 
     // Initializes CalendarDataSink with default values
-    CalendarDataSink(UErrorCode& status)
+    explicit CalendarDataSink(UErrorCode& status)
     :   arrays(FALSE, status), arraySizes(FALSE, status), maps(FALSE, status),
         mapRefs(deleteHashtable, NULL, 10, status),
         aliasPathPairs(uprv_deleteUObject, uhash_compareUnicodeString, status),

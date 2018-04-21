@@ -618,7 +618,7 @@ namespace {
 
 struct KeywordsSink : public ResourceSink {
 public:
-    KeywordsSink(UErrorCode &errorCode) :
+    explicit KeywordsSink(UErrorCode &errorCode) :
             values(ulist_createEmptyList(&errorCode)), hasDefault(FALSE) {}
     virtual ~KeywordsSink();
 

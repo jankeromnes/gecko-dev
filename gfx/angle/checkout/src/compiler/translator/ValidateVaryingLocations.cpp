@@ -100,7 +100,7 @@ void ValidateShaderInterface(TDiagnostics *diagnostics,
 class ValidateVaryingLocationsTraverser : public TIntermTraverser
 {
   public:
-    ValidateVaryingLocationsTraverser(GLenum shaderType);
+    explicit ValidateVaryingLocationsTraverser(GLenum shaderType);
     void validate(TDiagnostics *diagnostics);
 
   private:

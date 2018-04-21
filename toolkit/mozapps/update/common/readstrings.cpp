@@ -23,7 +23,7 @@ class AutoFILE {
 public:
   explicit AutoFILE(FILE *fp) : fp_(fp) {}
   ~AutoFILE() { if (fp_) fclose(fp_); }
-  operator FILE *() { return fp_; }
+  explicit operator FILE *() { return fp_; }
 private:
   FILE *fp_;
 };
@@ -32,7 +32,7 @@ class AutoCharArray {
 public:
   explicit AutoCharArray(size_t len) { ptr_ = new char[len]; }
   ~AutoCharArray() { delete[] ptr_; }
-  operator char *() { return ptr_; }
+  explicit operator char *() { return ptr_; }
 private:
   char *ptr_;
 };

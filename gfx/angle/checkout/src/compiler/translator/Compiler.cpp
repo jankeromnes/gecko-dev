@@ -173,7 +173,7 @@ namespace
 class TScopedPoolAllocator
 {
   public:
-    TScopedPoolAllocator(TPoolAllocator *allocator) : mAllocator(allocator)
+    explicit TScopedPoolAllocator(TPoolAllocator *allocator) : mAllocator(allocator)
     {
         mAllocator->push();
         SetGlobalPoolAllocator(mAllocator);
@@ -191,7 +191,7 @@ class TScopedPoolAllocator
 class TScopedSymbolTableLevel
 {
   public:
-    TScopedSymbolTableLevel(TSymbolTable *table) : mTable(table)
+    explicit TScopedSymbolTableLevel(TSymbolTable *table) : mTable(table)
     {
         ASSERT(mTable->atBuiltInLevel());
         mTable->push();

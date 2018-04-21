@@ -17,7 +17,7 @@
 
 class GrGLConicEffect : public GrGLSLGeometryProcessor {
 public:
-    GrGLConicEffect(const GrGeometryProcessor&);
+    explicit GrGLConicEffect(const GrGeometryProcessor&);
 
     void onEmitCode(EmitArgs&, GrGPArgs*) override;
 
@@ -269,7 +269,7 @@ sk_sp<GrGeometryProcessor> GrConicEffect::TestCreate(GrProcessorTestData* d) {
 
 class GrGLQuadEffect : public GrGLSLGeometryProcessor {
 public:
-    GrGLQuadEffect(const GrGeometryProcessor&);
+    explicit GrGLQuadEffect(const GrGeometryProcessor&);
 
     void onEmitCode(EmitArgs&, GrGPArgs*) override;
 
@@ -469,7 +469,7 @@ sk_sp<GrGeometryProcessor> GrQuadEffect::TestCreate(GrProcessorTestData* d) {
 
 class GrGLCubicEffect : public GrGLSLGeometryProcessor {
 public:
-    GrGLCubicEffect(const GrGeometryProcessor&);
+    explicit GrGLCubicEffect(const GrGeometryProcessor&);
 
     void onEmitCode(EmitArgs&, GrGPArgs*) override;
 

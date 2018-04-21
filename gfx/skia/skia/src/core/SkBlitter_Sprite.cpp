@@ -72,7 +72,7 @@ public:
         return SkBlendMode::kSrc == mode || (SkBlendMode::kSrcOver == mode && src.isOpaque());
     }
 
-    SkSpriteBlitter_Memcpy(const SkPixmap& src)
+    explicit SkSpriteBlitter_Memcpy(const SkPixmap& src)
         : INHERITED(src) {}
 
     void blitRect(int x, int y, int width, int height) override {

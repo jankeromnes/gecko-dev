@@ -50,7 +50,7 @@ class PendingSTUNRequest {
       net_addr_(netaddr),
       is_id_set_(true) {}
 
-  MOZ_IMPLICIT PendingSTUNRequest(const mozilla::net::NetAddr& netaddr)
+  MOZ_IMPLICIT explicit PendingSTUNRequest(const mozilla::net::NetAddr& netaddr)
     : id_(),
       net_addr_(netaddr),
       is_id_set_(false) {}

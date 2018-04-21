@@ -1966,12 +1966,12 @@ namespace {
 class ReturnAbortOnError
 {
 public:
-  MOZ_IMPLICIT ReturnAbortOnError(nsresult aRv)
+  MOZ_IMPLICIT explicit ReturnAbortOnError(nsresult aRv)
   {
     mRv = ConvertRv(aRv);
   }
 
-  operator nsresult()
+  explicit operator nsresult()
   {
     return mRv;
   }

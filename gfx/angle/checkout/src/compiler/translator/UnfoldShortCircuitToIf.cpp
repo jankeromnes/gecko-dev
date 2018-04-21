@@ -26,7 +26,7 @@ namespace
 class UnfoldShortCircuitTraverser : public TIntermTraverser
 {
   public:
-    UnfoldShortCircuitTraverser(TSymbolTable *symbolTable);
+    explicit UnfoldShortCircuitTraverser(TSymbolTable *symbolTable);
 
     bool visitBinary(Visit visit, TIntermBinary *node) override;
     bool visitTernary(Visit visit, TIntermTernary *node) override;

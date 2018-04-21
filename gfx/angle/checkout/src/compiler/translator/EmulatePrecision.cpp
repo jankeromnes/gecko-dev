@@ -36,7 +36,7 @@ class RoundingHelperWriter : angle::NonCopyable
     virtual ~RoundingHelperWriter() {}
 
   protected:
-    RoundingHelperWriter(const ShShaderOutput outputLanguage) : mOutputLanguage(outputLanguage) {}
+    explicit RoundingHelperWriter(const ShShaderOutput outputLanguage) : mOutputLanguage(outputLanguage) {}
     RoundingHelperWriter() = delete;
 
     const ShShaderOutput mOutputLanguage;
@@ -54,7 +54,7 @@ class RoundingHelperWriter : angle::NonCopyable
 class RoundingHelperWriterGLSL : public RoundingHelperWriter
 {
   public:
-    RoundingHelperWriterGLSL(const ShShaderOutput outputLanguage)
+    explicit RoundingHelperWriterGLSL(const ShShaderOutput outputLanguage)
         : RoundingHelperWriter(outputLanguage)
     {
     }
@@ -72,7 +72,7 @@ class RoundingHelperWriterGLSL : public RoundingHelperWriter
 class RoundingHelperWriterESSL : public RoundingHelperWriterGLSL
 {
   public:
-    RoundingHelperWriterESSL(const ShShaderOutput outputLanguage)
+    explicit RoundingHelperWriterESSL(const ShShaderOutput outputLanguage)
         : RoundingHelperWriterGLSL(outputLanguage)
     {
     }
@@ -84,7 +84,7 @@ class RoundingHelperWriterESSL : public RoundingHelperWriterGLSL
 class RoundingHelperWriterHLSL : public RoundingHelperWriter
 {
   public:
-    RoundingHelperWriterHLSL(const ShShaderOutput outputLanguage)
+    explicit RoundingHelperWriterHLSL(const ShShaderOutput outputLanguage)
         : RoundingHelperWriter(outputLanguage)
     {
     }

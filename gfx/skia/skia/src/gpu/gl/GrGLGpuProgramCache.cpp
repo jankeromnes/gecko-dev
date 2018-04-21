@@ -23,7 +23,7 @@ static const bool c_DisplayCache{false};
 typedef GrGLSLProgramDataManager::UniformHandle UniformHandle;
 
 struct GrGLGpu::ProgramCache::Entry {
-    Entry(sk_sp<GrGLProgram> program)
+    explicit Entry(sk_sp<GrGLProgram> program)
     : fProgram(std::move(program)) {}
 
     sk_sp<GrGLProgram> fProgram;

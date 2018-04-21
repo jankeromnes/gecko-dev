@@ -849,8 +849,8 @@ ZNames::ZNamesLoader::~ZNamesLoader() {}
 class MetaZoneIDsEnumeration : public StringEnumeration {
 public:
     MetaZoneIDsEnumeration();
-    MetaZoneIDsEnumeration(const UVector& mzIDs);
-    MetaZoneIDsEnumeration(UVector* mzIDs);
+    explicit MetaZoneIDsEnumeration(const UVector& mzIDs);
+    explicit MetaZoneIDsEnumeration(UVector* mzIDs);
     virtual ~MetaZoneIDsEnumeration();
     static UClassID U_EXPORT2 getStaticClassID(void);
     virtual UClassID getDynamicClassID(void) const;
@@ -913,7 +913,7 @@ MetaZoneIDsEnumeration::~MetaZoneIDsEnumeration() {
 // ---------------------------------------------------
 class ZNameSearchHandler : public TextTrieMapSearchResultHandler {
 public:
-    ZNameSearchHandler(uint32_t types);
+    explicit ZNameSearchHandler(uint32_t types);
     virtual ~ZNameSearchHandler();
 
     UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status);

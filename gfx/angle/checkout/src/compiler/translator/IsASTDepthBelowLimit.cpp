@@ -18,7 +18,7 @@ namespace
 class MaxDepthTraverser : public TIntermTraverser
 {
   public:
-    MaxDepthTraverser(int depthLimit) : TIntermTraverser(true, true, false), mDepthLimit(depthLimit)
+    explicit MaxDepthTraverser(int depthLimit) : TIntermTraverser(true, true, false), mDepthLimit(depthLimit)
     {
     }
 

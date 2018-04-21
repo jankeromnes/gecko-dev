@@ -555,7 +555,7 @@ struct CmptDecDataSink : public ResourceSink {
    *          one{"0 thousand"}   <-- plural variant and template
    */
 
-  CmptDecDataSink(CDFLocaleData& _dataBundle)
+  explicit CmptDecDataSink(CDFLocaleData& _dataBundle)
     : dataBundle(_dataBundle), isLatin(FALSE), isFallback(FALSE) {}
   virtual ~CmptDecDataSink();
 

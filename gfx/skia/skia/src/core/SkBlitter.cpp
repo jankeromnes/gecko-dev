@@ -692,7 +692,7 @@ SkBlitter* SkBlitterClipper::apply(SkBlitter* blitter, const SkRegion* clip,
 
 class Sk3DShader : public SkShaderBase {
 public:
-    Sk3DShader(sk_sp<SkShader> proxy) : fProxy(std::move(proxy)) {}
+    explicit Sk3DShader(sk_sp<SkShader> proxy) : fProxy(std::move(proxy)) {}
 
     Context* onMakeContext(const ContextRec& rec, SkArenaAlloc* alloc) const override {
         SkShaderBase::Context* proxyContext = nullptr;

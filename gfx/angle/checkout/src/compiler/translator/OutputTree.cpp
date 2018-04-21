@@ -31,7 +31,7 @@ void OutputFunction(TInfoSinkBase &out, const char *str, const TFunction *func)
 class TOutputTraverser : public TIntermTraverser
 {
   public:
-    TOutputTraverser(TInfoSinkBase &out) : TIntermTraverser(true, false, false), mOut(out) {}
+    explicit TOutputTraverser(TInfoSinkBase &out) : TIntermTraverser(true, false, false), mOut(out) {}
 
   protected:
     void visitSymbol(TIntermSymbol *) override;

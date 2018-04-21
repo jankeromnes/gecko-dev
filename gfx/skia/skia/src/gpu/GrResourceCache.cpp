@@ -55,7 +55,7 @@ uint32_t GrResourceKeyHash(const uint32_t* data, size_t size) {
 
 class GrResourceCache::AutoValidate : ::SkNoncopyable {
 public:
-    AutoValidate(GrResourceCache* cache) : fCache(cache) { cache->validate(); }
+    explicit AutoValidate(GrResourceCache* cache) : fCache(cache) { cache->validate(); }
     ~AutoValidate() { fCache->validate(); }
 private:
     GrResourceCache* fCache;
@@ -227,7 +227,7 @@ void GrResourceCache::releaseAll() {
 
 class GrResourceCache::AvailableForScratchUse {
 public:
-    AvailableForScratchUse(bool rejectPendingIO) : fRejectPendingIO(rejectPendingIO) { }
+    explicit AvailableForScratchUse(bool rejectPendingIO) : fRejectPendingIO(rejectPendingIO) { }
 
     bool operator()(const GrGpuResource* resource) const {
         SkASSERT(!resource->getUniqueKey().isValid() &&

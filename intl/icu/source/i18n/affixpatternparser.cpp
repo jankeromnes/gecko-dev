@@ -397,7 +397,7 @@ AffixPattern::toUserString(UnicodeString &appendTo) const {
 
 class AffixPatternAppender : public UMemory {
 public:
-    AffixPatternAppender(AffixPattern &dest) : fDest(&dest), fIdx(0) { }
+    explicit AffixPatternAppender(AffixPattern &dest) : fDest(&dest), fIdx(0) { }
 
     inline void append(UChar x) {
         if (fIdx == UPRV_LENGTHOF(fBuffer)) {

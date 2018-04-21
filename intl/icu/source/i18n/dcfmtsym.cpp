@@ -224,7 +224,7 @@ struct DecFmtSymDataSink : public ResourceSink {
     UBool seenSymbol[DecimalFormatSymbols::kFormatSymbolCount];
 
     // Constructor/Destructor
-    DecFmtSymDataSink(DecimalFormatSymbols& _dfs) : dfs(_dfs) {
+    explicit DecFmtSymDataSink(DecimalFormatSymbols& _dfs) : dfs(_dfs) {
         uprv_memset(seenSymbol, FALSE, sizeof(seenSymbol));
     }
     virtual ~DecFmtSymDataSink();
@@ -280,7 +280,7 @@ struct CurrencySpacingSink : public ResourceSink {
     UBool hasBeforeCurrency;
     UBool hasAfterCurrency;
 
-    CurrencySpacingSink(DecimalFormatSymbols& _dfs)
+    explicit CurrencySpacingSink(DecimalFormatSymbols& _dfs)
         : dfs(_dfs), hasBeforeCurrency(FALSE), hasAfterCurrency(FALSE) {}
     virtual ~CurrencySpacingSink();
 

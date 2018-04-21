@@ -29,7 +29,7 @@
 
 class SkProcCoeffXfermode : public SkXfermode {
 public:
-    SkProcCoeffXfermode(SkBlendMode mode) : fMode(mode) {}
+    explicit SkProcCoeffXfermode(SkBlendMode mode) : fMode(mode) {}
 
     void xfer32(SkPMColor dst[], const SkPMColor src[], int count,
                 const SkAlpha aa[]) const override {

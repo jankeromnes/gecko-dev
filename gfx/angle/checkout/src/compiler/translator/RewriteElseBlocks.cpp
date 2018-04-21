@@ -23,7 +23,7 @@ namespace
 class ElseBlockRewriter : public TIntermTraverser
 {
   public:
-    ElseBlockRewriter(TSymbolTable *symbolTable);
+    explicit ElseBlockRewriter(TSymbolTable *symbolTable);
 
   protected:
     bool visitFunctionDefinition(Visit visit, TIntermFunctionDefinition *aggregate) override;

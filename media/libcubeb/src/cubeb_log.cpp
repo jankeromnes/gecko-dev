@@ -38,7 +38,7 @@ public:
   {
     *storage = '\0';
   }
-  cubeb_log_message(char const str[CUBEB_LOG_MESSAGE_MAX_SIZE])
+  explicit cubeb_log_message(char const str[CUBEB_LOG_MESSAGE_MAX_SIZE])
   {
     size_t length = strlen(str);
     /* paranoia against malformed message */
