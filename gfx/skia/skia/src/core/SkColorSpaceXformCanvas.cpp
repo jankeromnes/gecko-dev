@@ -27,7 +27,7 @@ namespace {
        }
        operator const SkPaint*() const { return fPaint; }
     };
-};
+} // namespace;
 
 class SkColorSpaceXformCanvas : public SkNoDrawCanvas {
 public:

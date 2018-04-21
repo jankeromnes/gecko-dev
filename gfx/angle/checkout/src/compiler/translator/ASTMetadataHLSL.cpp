@@ -388,7 +388,7 @@ class PushDiscontinuousLoops : public TIntermTraverser
 
     int mNestedDiscont;
 };
-}
+} // namespace
 
 bool ASTMetadataHLSL::hasGradientInCallGraph(TIntermLoop *node)
 {

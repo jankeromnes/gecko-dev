@@ -223,7 +223,7 @@ static const uint32_t kSenderSsrc = 0x11111111;
 static const uint32_t kRemoteSsrc = 0x22222222;
 static const uint32_t kStartRtpTimestamp = 0x34567;
 static const uint32_t kRtpTimestamp = 0x45678;
-}
+} // namespace
 
 class RtcpSenderTest : public ::testing::Test {
  protected:

@@ -230,4 +230,4 @@ void TransportLayerIce::IcePacketReceived(NrIceMediaStream *stream, int componen
   SignalPacketReceived(this, data, len);
 }
 
-}  // close namespace
+} // namespace mozilla

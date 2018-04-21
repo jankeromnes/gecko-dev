@@ -33,7 +33,7 @@ const char *get_error_string(uint32_t err) {
     }
     return "Unknown";
 }
-}
+} // namespace
 
 void GrGLCheckErr(const GrGLInterface* gl,
                   const char* location,

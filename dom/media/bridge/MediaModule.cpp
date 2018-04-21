@@ -27,7 +27,7 @@ namespace mozilla
 {
 // Factory defined in mozilla::, defines mozilla::PeerConnectionImplConstructor
 NS_GENERIC_FACTORY_CONSTRUCTOR(PeerConnectionImpl)
-}
+} // namespace mozilla
 
 // Defines kPEERCONNECTION_CID
 NS_DEFINE_NAMED_CID(PEERCONNECTION_CID);

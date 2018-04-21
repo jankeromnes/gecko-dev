@@ -2116,7 +2116,7 @@ void NrTcpSocketIpc::maybe_post_socket_ready() {
 }
 #endif
 
-}  // close namespace
+} // namespace mozilla
 
 
 using namespace mozilla;

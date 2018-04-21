@@ -2201,5 +2201,5 @@ float float16ToFloat32(unsigned short h)
     unsigned i32 = g_mantissa[g_offset[h >> 10] + (h & 0x3ff)] + g_exponent[h >> 10];
     return bitCast<float>(i32);
 }
-}
+} // namespace gl
 

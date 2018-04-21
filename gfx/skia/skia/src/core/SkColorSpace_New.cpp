@@ -60,7 +60,7 @@ namespace {
         }
     };
 
-}
+} // namespace
 
 sk_sp<SkColorSpace_New::TransferFn> SkColorSpace_New::TransferFn::MakeLinear() {
     return sk_make_sp<LinearTransferFn>();

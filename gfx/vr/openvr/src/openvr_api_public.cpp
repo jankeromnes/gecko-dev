@@ -280,5 +280,5 @@ const char *VR_GetStringForHmdError( EVRInitError error )
 	return VR_GetVRInitErrorAsEnglishDescription( error );
 }
 
-}
+} // namespace vr
 

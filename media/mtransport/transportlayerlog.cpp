@@ -50,4 +50,4 @@ void TransportLayerLogging::PacketReceived(TransportLayer* layer,
 
 
 
-}  // close namespace
+} // namespace mozilla

@@ -614,7 +614,7 @@ private:
     const SkGlyphID fFirst;
     const SkGlyphID fLast;
 };
-}
+} // namespace
 
 static void add_type3_font_info(SkPDFCanon* canon,
                                 SkPDFDict* font,

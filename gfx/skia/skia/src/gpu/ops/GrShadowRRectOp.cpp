@@ -671,7 +671,7 @@ std::unique_ptr<GrDrawOp> Make(GrColor color,
                                                                scaledInsetWidth,
                                                                blurClamp));
 }
-}
+} // namespace GrShadowRRectOp
 
 ///////////////////////////////////////////////////////////////////////////////
 

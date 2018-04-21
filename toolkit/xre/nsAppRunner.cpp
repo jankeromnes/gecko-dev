@@ -3910,8 +3910,8 @@ namespace startup {
     MOZ_TRY(crashFile->Append(FILE_STARTUP_INCOMPLETE));
     return Move(crashFile);
   }
-}
-}
+} // namespace startup
+} // namespace mozilla
 
 // Check whether the last startup attempt resulted in a crash within the
 // last 6 hours.

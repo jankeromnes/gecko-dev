@@ -133,4 +133,4 @@ NS_IMETHODIMP TransportLayerLoopback::Deliverer::GetName(nsACString& aName) {
   return NS_OK;
 }
 
-}  // close namespace
+} // namespace mozilla

@@ -25,7 +25,7 @@ addPaddingHelper(UChar32 paddingCp, int32_t requiredPadding, NumberStringBuilder
     return U16_LENGTH(paddingCp) * requiredPadding;
 }
 
-}
+} // namespace
 
 Padder::Padder(UChar32 cp, int32_t width, UNumberFormatPadPosition position) : fWidth(width) {
     fUnion.padding.fCp = cp;

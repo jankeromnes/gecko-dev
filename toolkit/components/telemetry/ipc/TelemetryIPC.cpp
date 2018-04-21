@@ -63,4 +63,4 @@ TelemetryIPC::RecordDiscardedData(Telemetry::ProcessID aProcessType,
 {
   TelemetryScalar::RecordDiscardedData(aProcessType, aDiscardedData);
 }
-}
+} // namespace mozilla

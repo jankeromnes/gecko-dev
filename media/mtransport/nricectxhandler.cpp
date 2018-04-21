@@ -185,4 +185,4 @@ NrIceCtxHandler::~NrIceCtxHandler()
   Destroy();
 }
 
-} // close namespace
+} // namespace mozilla

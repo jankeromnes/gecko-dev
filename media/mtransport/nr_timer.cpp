@@ -156,7 +156,7 @@ class nrappkitScheduledCallback : public nrappkitCallback {
   ~nrappkitScheduledCallback() {}
 };
 
-}  // close namespace
+} // namespace mozilla
 
 
 using namespace mozilla;

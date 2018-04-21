@@ -49,4 +49,4 @@ void TransportLayer::SetState(State state, const char *file, unsigned line) {
   }
 }
 
-}  // close namespace
+} // namespace mozilla

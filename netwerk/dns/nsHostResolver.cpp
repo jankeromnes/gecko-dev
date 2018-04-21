@@ -78,8 +78,8 @@ namespace net {
 LazyLogModule gHostResolverLog("nsHostResolver");
 #define LOG(args) MOZ_LOG(mozilla::net::gHostResolverLog, mozilla::LogLevel::Debug, args)
 #define LOG_ENABLED() MOZ_LOG_TEST(mozilla::net::gHostResolverLog, mozilla::LogLevel::Debug)
-}
-}
+} // namespace net
+} // namespace mozilla
 
 #define LOG_HOST(host, interface) host,                                        \
                  (interface && interface[0] != '\0') ? " on interface " : "",  \

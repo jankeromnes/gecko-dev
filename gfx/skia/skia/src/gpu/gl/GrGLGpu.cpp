@@ -1518,7 +1518,7 @@ void inline get_stencil_rb_sizes(const GrGLInterface* gl,
         }
     }
 }
-}
+} // namespace
 
 int GrGLGpu::getCompatibleStencilIndex(GrPixelConfig config) {
     static const int kSize = 16;
@@ -2788,7 +2788,7 @@ void set_gl_stencil(const GrGLInterface* gl,
         GR_GL_CALL(gl, StencilOpSeparate(glFace, glFailOp, GR_GL_KEEP, glPassOp));
     }
 }
-}
+} // namespace
 
 void GrGLGpu::flushStencil(const GrStencilSettings& stencilSettings) {
     if (stencilSettings.isDisabled()) {

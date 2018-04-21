@@ -43,7 +43,7 @@ int32_t getDisplayMagnitudeSignificant(const DecimalQuantity &value, int minSig)
     return magnitude - minSig + 1;
 }
 
-}
+} // namespace
 
 
 Rounder Rounder::unlimited() {

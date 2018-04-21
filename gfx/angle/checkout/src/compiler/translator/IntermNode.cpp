@@ -175,7 +175,7 @@ bool CanFoldAggregateBuiltInOp(TOperator op)
     }
 }
 
-}  // namespace anonymous
+} // namespace
 
 ////////////////////////////////////////////////////////////////
 //

@@ -417,7 +417,7 @@ createSystemTimeZone(const UnicodeString& id) {
     return createSystemTimeZone(id, ec);
 }
 
-}
+} // namespace
 
 TimeZone* U_EXPORT2
 TimeZone::createTimeZone(const UnicodeString& ID)

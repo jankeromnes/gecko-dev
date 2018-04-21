@@ -155,7 +155,7 @@ ConvertTexttoAsterisks(nsAString& aString)
   }
 }
 
-}
+} // namespace DOMtoATK
 
 } // namespace a11y
 } // namespace mozilla

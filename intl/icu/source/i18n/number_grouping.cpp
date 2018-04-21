@@ -32,7 +32,7 @@ int16_t getMinGroupingForLocale(const Locale& locale) {
     return result[0] - u'0';
 }
 
-}
+} // namespace
 
 Grouper Grouper::forStrategy(UGroupingStrategy grouping) {
     switch (grouping) {

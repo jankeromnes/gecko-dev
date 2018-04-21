@@ -60,5 +60,5 @@ NativeFontResourceFontconfig::CreateUnscaledFont(uint32_t aIndex,
   return unscaledFont.forget();
 }
 
-} // gfx
-} // mozilla
+} // namespace gfx
+} // namespace mozilla

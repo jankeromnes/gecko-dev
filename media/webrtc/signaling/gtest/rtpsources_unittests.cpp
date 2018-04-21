@@ -349,4 +349,4 @@ TEST_F(RtpSourcesTest, TestObserveTwoCsrcs) { TestObserveTwoCsrcs(); }
 TEST_F(RtpSourcesTest, TestObserveCsrcWithAudioLevel) {
   TestObserveCsrcWithAudioLevel();
 }
-}
+} // namespace test

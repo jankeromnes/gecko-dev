@@ -1849,7 +1849,7 @@ struct CalendarDataSink : public ResourceSink {
 CalendarDataSink::~CalendarDataSink() {
     arrays.setValueDeleter(deleteUnicodeStringArray);
 }
-}
+} // namespace
 
 //------------------------------------------------------
 

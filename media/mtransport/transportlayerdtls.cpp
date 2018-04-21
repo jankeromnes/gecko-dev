@@ -1329,4 +1329,4 @@ TransportLayerDtls::RecordHandshakeCompletionTelemetry(
   }
 }
 
-}  // close namespace
+} // namespace mozilla

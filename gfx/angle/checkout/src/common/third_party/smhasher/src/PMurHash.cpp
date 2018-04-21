@@ -315,6 +315,6 @@ void PMurHash32_test(const void *key, int len, uint32_t seed, void *out)
   h1 = PMurHash32_Result(h1, carry, len);
   *(uint32_t*)out = h1;
 }
-}
+} // namespace angle
 
 /*---------------------------------------------------------------------------*/
