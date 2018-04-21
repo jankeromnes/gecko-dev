@@ -62,8 +62,8 @@ public:
     virtual UChar tokenChar() const { return (UChar)0x003d; } // '='
 
 public:
-    static UClassID getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    static UClassID getStaticClassID();
+    virtual UClassID getDynamicClassID() const;
 };
 
 SameValueSubstitution::~SameValueSubstitution() {}
@@ -116,8 +116,8 @@ public:
     virtual UChar tokenChar() const { return (UChar)0x003c; } // '<'
 
 public:
-    static UClassID getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    static UClassID getStaticClassID();
+    virtual UClassID getDynamicClassID() const;
 };
 
 MultiplierSubstitution::~MultiplierSubstitution() {}
@@ -171,8 +171,8 @@ public:
 	virtual void toString(UnicodeString& result) const;
 
 public:
-    static UClassID getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    static UClassID getStaticClassID();
+    virtual UClassID getDynamicClassID() const;
 };
 
 ModulusSubstitution::~ModulusSubstitution() {}
@@ -193,8 +193,8 @@ public:
     virtual UChar tokenChar() const { return (UChar)0x003c; } // '<'
 
 public:
-    static UClassID getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    static UClassID getStaticClassID();
+    virtual UClassID getDynamicClassID() const;
 };
 
 IntegralPartSubstitution::~IntegralPartSubstitution() {}
@@ -230,8 +230,8 @@ public:
     virtual UChar tokenChar() const { return (UChar)0x003e; } // '>'
 
 public:
-    static UClassID getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    static UClassID getStaticClassID();
+    virtual UClassID getDynamicClassID() const;
 };
 
 FractionalPartSubstitution::~FractionalPartSubstitution() {}
@@ -252,8 +252,8 @@ public:
     virtual UChar tokenChar() const { return (UChar)0x003e; } // '>'
 
 public:
-    static UClassID getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    static UClassID getStaticClassID();
+    virtual UClassID getDynamicClassID() const;
 };
 
 AbsoluteValueSubstitution::~AbsoluteValueSubstitution() {}
@@ -304,8 +304,8 @@ private:
     static const UChar LTLT[2];
 
 public:
-    static UClassID getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    static UClassID getStaticClassID();
+    virtual UClassID getDynamicClassID() const;
 };
 
 NumeratorSubstitution::~NumeratorSubstitution() {}

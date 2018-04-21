@@ -177,7 +177,7 @@ nsXRemoteService::HandleNewProperty(XID aWindowId, Display* aDisplay,
 }
 
 void
-nsXRemoteService::EnsureAtoms(void)
+nsXRemoteService::EnsureAtoms()
 {
   if (sMozVersionAtom)
     return;

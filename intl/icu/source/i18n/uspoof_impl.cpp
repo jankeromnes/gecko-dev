@@ -528,7 +528,7 @@ static UInitOnce gSpoofInitDefaultOnce = U_INITONCE_INITIALIZER;
 static SpoofData* gDefaultSpoofData;
 
 static UBool U_CALLCONV
-uspoof_cleanupDefaultData(void) {
+uspoof_cleanupDefaultData() {
     if (gDefaultSpoofData) {
         // Will delete, assuming all user-level spoof checkers were closed.
         gDefaultSpoofData->removeReference();

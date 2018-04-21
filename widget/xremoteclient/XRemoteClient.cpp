@@ -126,7 +126,7 @@ XRemoteClient::Init()
 }
 
 void
-XRemoteClient::Shutdown (void)
+XRemoteClient::Shutdown ()
 {
   MOZ_LOG(sRemoteLm, LogLevel::Debug, ("XRemoteClient::Shutdown"));
 

@@ -100,7 +100,7 @@ nsNotifyAddrListener::GetLinkType(uint32_t *aLinkType)
 // address of that IP in the ARP table before it hashes that string (to avoid
 // information leakage).
 //
-void nsNotifyAddrListener::calculateNetworkId(void)
+void nsNotifyAddrListener::calculateNetworkId()
 {
     const char *kProcRoute = "/proc/net/route"; /* IPv4 routes */
     const char *kProcArp = "/proc/net/arp";
@@ -202,7 +202,7 @@ void nsNotifyAddrListener::calculateNetworkId(void)
 //
 // Check if there's a network interface available to do networking on.
 //
-void nsNotifyAddrListener::checkLink(void)
+void nsNotifyAddrListener::checkLink()
 {
     struct ifaddrs *list;
     struct ifaddrs *ifa;
@@ -440,7 +440,7 @@ nsNotifyAddrListener::Observe(nsISupports *subject,
 }
 
 nsresult
-nsNotifyAddrListener::Init(void)
+nsNotifyAddrListener::Init()
 {
     nsCOMPtr<nsIObserverService> observerService =
         mozilla::services::GetObserverService();
@@ -465,7 +465,7 @@ nsNotifyAddrListener::Init(void)
 }
 
 nsresult
-nsNotifyAddrListener::Shutdown(void)
+nsNotifyAddrListener::Shutdown()
 {
     // remove xpcom shutdown observer
     nsCOMPtr<nsIObserverService> observerService =

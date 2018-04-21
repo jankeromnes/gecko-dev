@@ -45,7 +45,7 @@ struct MaiAtkHyperlinkClass
     AtkHyperlinkClass parent_class;
 };
 
-GType mai_atk_hyperlink_get_type(void);
+GType mai_atk_hyperlink_get_type();
 
 G_BEGIN_DECLS
 /* callbacks for AtkHyperlink */
@@ -75,7 +75,7 @@ GetMaiHyperlink(AtkHyperlink *aHyperlink)
 }
 
 GType
-mai_atk_hyperlink_get_type(void)
+mai_atk_hyperlink_get_type()
 {
     static GType type = 0;
 

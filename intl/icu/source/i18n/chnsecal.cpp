@@ -85,7 +85,7 @@ static const int32_t SYNODIC_GAP = 25;
 
 
 U_CDECL_BEGIN
-static UBool calendar_chinese_cleanup(void) {
+static UBool calendar_chinese_cleanup() {
     if (gChineseCalendarAstro) {
         delete gChineseCalendarAstro;
         gChineseCalendarAstro = NULL;
@@ -160,7 +160,7 @@ static void U_CALLCONV initChineseCalZoneAstroCalc() {
     ucln_i18n_registerCleanup(UCLN_I18N_CHINESE_CALENDAR, calendar_chinese_cleanup);
 }
 
-const TimeZone* ChineseCalendar::getChineseCalZoneAstroCalc(void) const {
+const TimeZone* ChineseCalendar::getChineseCalZoneAstroCalc() const {
     umtx_initOnce(gChineseCalendarZoneAstroCalcInitOnce, &initChineseCalZoneAstroCalc);
     return gChineseCalendarZoneAstroCalc;
 }

@@ -245,7 +245,7 @@ nsDeviceContext::GetMetricsFor(const nsFont& aFont,
 }
 
 nsresult
-nsDeviceContext::FlushFontCache(void)
+nsDeviceContext::FlushFontCache()
 {
     if (mFontCache)
         mFontCache->Flush();
@@ -538,7 +538,7 @@ nsDeviceContext::BeginDocument(const nsAString& aTitle,
 
 
 nsresult
-nsDeviceContext::EndDocument(void)
+nsDeviceContext::EndDocument()
 {
     MOZ_ASSERT(mIsCurrentlyPrintingDoc,
                "Mismatched BeginDocument/EndDocument calls");
@@ -562,7 +562,7 @@ nsDeviceContext::EndDocument(void)
 
 
 nsresult
-nsDeviceContext::AbortDocument(void)
+nsDeviceContext::AbortDocument()
 {
     MOZ_ASSERT(mIsCurrentlyPrintingDoc,
                "Mismatched BeginDocument/EndDocument calls");
@@ -581,7 +581,7 @@ nsDeviceContext::AbortDocument(void)
 
 
 nsresult
-nsDeviceContext::BeginPage(void)
+nsDeviceContext::BeginPage()
 {
     nsresult rv = NS_OK;
 
@@ -594,7 +594,7 @@ nsDeviceContext::BeginPage(void)
 }
 
 nsresult
-nsDeviceContext::EndPage(void)
+nsDeviceContext::EndPage()
 {
     nsresult rv = mPrintTarget->EndPage();
 

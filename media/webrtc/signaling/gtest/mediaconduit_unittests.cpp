@@ -26,7 +26,7 @@ const uint32_t SSRC = 1;
 //MWC RNG of George Marsaglia
 //taken from xiph.org
 static int32_t Rz, Rw;
-static inline int32_t fast_rand(void)
+static inline int32_t fast_rand()
 {
   Rz=36969*(Rz&65535)+(Rz>>16);
   Rw=18000*(Rw&65535)+(Rw>>16);

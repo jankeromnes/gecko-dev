@@ -5059,7 +5059,7 @@ XREMain::XRE_main(int argc, char* argv[], const BootstrapConfig& aConfig)
 }
 
 void
-XRE_StopLateWriteChecks(void) {
+XRE_StopLateWriteChecks() {
   mozilla::StopLateWriteChecks();
 }
 

@@ -59,7 +59,7 @@ static icu::CalendarCache *gMonthCache = NULL;
 static icu::CalendarAstronomer *gIslamicCalendarAstro = NULL;
 
 U_CDECL_BEGIN
-static UBool calendar_islamic_cleanup(void) {
+static UBool calendar_islamic_cleanup() {
     if (gMonthCache) {
         delete gMonthCache;
         gMonthCache = NULL;

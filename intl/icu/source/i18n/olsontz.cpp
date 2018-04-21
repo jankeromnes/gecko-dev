@@ -652,7 +652,7 @@ OlsonTimeZone::hasSameRules(const TimeZone &other) const {
 }
 
 void
-OlsonTimeZone::clearTransitionRules(void) {
+OlsonTimeZone::clearTransitionRules() {
     initialRule = NULL;
     firstTZTransition = NULL;
     firstFinalTZTransition = NULL;
@@ -664,7 +664,7 @@ OlsonTimeZone::clearTransitionRules(void) {
 }
 
 void
-OlsonTimeZone::deleteTransitionRules(void) {
+OlsonTimeZone::deleteTransitionRules() {
     if (initialRule != NULL) {
         delete initialRule;
     }

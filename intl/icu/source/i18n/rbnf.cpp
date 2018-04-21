@@ -85,12 +85,12 @@ protected:
 public:
     LocalizationInfo() : refcount(0) {}
     
-    LocalizationInfo* ref(void) {
+    LocalizationInfo* ref() {
         ++refcount;
         return this;
     }
     
-    LocalizationInfo* unref(void) {
+    LocalizationInfo* unref() {
         if (refcount && --refcount == 0) {
             delete this;
         }
@@ -100,9 +100,9 @@ public:
     virtual UBool operator==(const LocalizationInfo* rhs) const;
     inline  UBool operator!=(const LocalizationInfo* rhs) const { return !operator==(rhs); }
     
-    virtual int32_t getNumberOfRuleSets(void) const = 0;
+    virtual int32_t getNumberOfRuleSets() const = 0;
     virtual const UChar* getRuleSetName(int32_t index) const = 0;
-    virtual int32_t getNumberOfDisplayLocales(void) const = 0;
+    virtual int32_t getNumberOfDisplayLocales() const = 0;
     virtual const UChar* getLocaleName(int32_t index) const = 0;
     virtual const UChar* getDisplayName(int32_t localeIndex, int32_t ruleIndex) const = 0;
     
@@ -241,7 +241,7 @@ public:
         }
     }
     
-    void** release(void) {
+    void** release() {
         void** result = buf;
         buf = NULL;
         cap = 0;
@@ -269,9 +269,9 @@ public:
     static StringLocalizationInfo* create(const UnicodeString& info, UParseError& perror, UErrorCode& status);
     
     virtual ~StringLocalizationInfo();
-    virtual int32_t getNumberOfRuleSets(void) const { return numRuleSets; }
+    virtual int32_t getNumberOfRuleSets() const { return numRuleSets; }
     virtual const UChar* getRuleSetName(int32_t index) const;
-    virtual int32_t getNumberOfDisplayLocales(void) const { return numLocales; }
+    virtual int32_t getNumberOfDisplayLocales() const { return numLocales; }
     virtual const UChar* getLocaleName(int32_t index) const;
     virtual const UChar* getDisplayName(int32_t localeIndex, int32_t ruleIndex) const;
     
@@ -316,7 +316,7 @@ public:
     
 private:
     
-    inline void inc(void) {
+    inline void inc() {
         ++p;
         ch = 0xffff;
     }
@@ -330,7 +330,7 @@ private:
     inline UBool check(UChar c) {
         return p < e && (ch == c || *p == c);
     }
-    inline void skipWhitespace(void) {
+    inline void skipWhitespace() {
         while (p < e && PatternProps::isWhiteSpace(ch != 0xffff ? ch : *p)) {
             inc();
         }
@@ -346,10 +346,10 @@ private:
     }
     void parseError(const char* msg);
     
-    StringLocalizationInfo* doParse(void);
+    StringLocalizationInfo* doParse();
         
     UChar** nextArray(int32_t& requiredLength);
-    UChar*  nextString(void);
+    UChar*  nextString();
 };
 
 #ifdef RBNF_DEBUG
@@ -411,7 +411,7 @@ LocDataParser::parse(UChar* _data, int32_t len) {
 
 
 StringLocalizationInfo*
-LocDataParser::doParse(void) {
+LocDataParser::doParse() {
     skipWhitespace();
     if (!checkInc(OPEN_ANGLE)) {
         ERROR("Missing open angle");
@@ -923,7 +923,7 @@ RuleBasedNumberFormat::~RuleBasedNumberFormat()
 }
 
 Format*
-RuleBasedNumberFormat::clone(void) const
+RuleBasedNumberFormat::clone() const
 {
     return new RuleBasedNumberFormat(*this);
 }
@@ -1019,7 +1019,7 @@ RuleBasedNumberFormat::getNumberOfRuleSetNames() const
 }
 
 int32_t 
-RuleBasedNumberFormat::getNumberOfRuleSetDisplayNameLocales(void) const {
+RuleBasedNumberFormat::getNumberOfRuleSetDisplayNameLocales() const {
     if (localizations) {
         return localizations->getNumberOfDisplayLocales();
     }

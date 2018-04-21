@@ -216,7 +216,7 @@ isAcceptable(void * /*context*/,
         pInfo->formatVersion[0]==3);
 }
 
-static UBool U_CALLCONV ucnv_io_cleanup(void)
+static UBool U_CALLCONV ucnv_io_cleanup()
 {
     if (gAliasData) {
         udata_close(gAliasData);

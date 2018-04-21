@@ -228,7 +228,7 @@ static const char * GetUniqueMaiAtkTypeName(uint16_t interfacesBits);
 static gpointer parent_class = nullptr;
 
 GType
-mai_atk_object_get_type(void)
+mai_atk_object_get_type()
 {
     static GType type = 0;
 
@@ -314,7 +314,7 @@ AccessibleWrap::GetNativeInterface(void** aOutAccessible)
 }
 
 AtkObject *
-AccessibleWrap::GetAtkObject(void)
+AccessibleWrap::GetAtkObject()
 {
     void *atkObj = nullptr;
     GetNativeInterface(&atkObj);
@@ -333,7 +333,7 @@ AccessibleWrap::GetAtkObject(Accessible* acc)
 
 /* private */
 uint16_t
-AccessibleWrap::CreateMaiInterfaces(void)
+AccessibleWrap::CreateMaiInterfaces()
 {
   uint16_t interfacesBits = 0;
 

@@ -175,7 +175,7 @@ deleteNumberingSystem(void *obj) {
     delete (icu::NumberingSystem *)obj;
 }
 
-static UBool U_CALLCONV numfmt_cleanup(void) {
+static UBool U_CALLCONV numfmt_cleanup() {
 #if !UCONFIG_NO_SERVICE
     gServiceInitOnce.reset();
     if (gService) {
@@ -213,7 +213,7 @@ SimpleNumberFormatFactory::SimpleNumberFormatFactory(const Locale& locale, UBool
 
 SimpleNumberFormatFactory::~SimpleNumberFormatFactory() {}
 
-UBool SimpleNumberFormatFactory::visible(void) const {
+UBool SimpleNumberFormatFactory::visible() const {
     return _visible;
 }
 
@@ -484,23 +484,23 @@ class ArgExtractor {
   ArgExtractor(const NumberFormat& nf, const Formattable& obj, UErrorCode& status);
   ~ArgExtractor();
 
-  const Formattable* number(void) const;
-  const UChar *iso(void) const;
-  UBool wasCurrency(void) const;
+  const Formattable* number() const;
+  const UChar *iso() const;
+  UBool wasCurrency() const;
 };
 
 inline const Formattable*
-ArgExtractor::number(void) const {
+ArgExtractor::number() const {
   return num;
 }
 
 inline UBool
-ArgExtractor::wasCurrency(void) const {
+ArgExtractor::wasCurrency() const {
   return fWasCurrency;
 }
 
 inline const UChar *
-ArgExtractor::iso(void) const {
+ArgExtractor::iso() const {
   return save;
 }
 
@@ -974,7 +974,7 @@ static void U_CALLCONV initNumberFormatService() {
 }
 
 static ICULocaleService*
-getNumberFormatService(void)
+getNumberFormatService()
 {
     umtx_initOnce(gServiceInitOnce, &initNumberFormatService);
     return gService;
@@ -1018,7 +1018,7 @@ NumberFormat::unregister(URegistryKey key, UErrorCode& status)
 
 // -------------------------------------
 StringEnumeration* U_EXPORT2
-NumberFormat::getAvailableLocales(void)
+NumberFormat::getAvailableLocales()
 {
   ICULocaleService *service = getNumberFormatService();
   if (service) {

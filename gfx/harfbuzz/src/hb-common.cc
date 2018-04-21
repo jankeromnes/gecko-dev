@@ -42,7 +42,7 @@
 hb_options_union_t _hb_options;
 
 void
-_hb_options_init (void)
+_hb_options_init ()
 {
   hb_options_union_t u;
   u.i = 0;
@@ -240,7 +240,7 @@ struct hb_language_item_t {
     return *this;
   }
 
-  void finish (void) { free ((void *) lang); }
+  void finish () { free ((void *) lang); }
 };
 
 

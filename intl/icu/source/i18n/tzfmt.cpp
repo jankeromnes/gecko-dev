@@ -153,7 +153,7 @@ U_CDECL_BEGIN
 /**
  * Cleanup callback func
  */
-static UBool U_CALLCONV tzfmt_cleanup(void)
+static UBool U_CALLCONV tzfmt_cleanup()
 {
     if (gZoneIdTrie != NULL) {
         delete gZoneIdTrie;
@@ -195,7 +195,7 @@ public:
 
     FieldType getType() const;
     uint8_t getWidth() const;
-    const UChar* getPatternText(void) const;
+    const UChar* getPatternText() const;
 
 private:
     UChar* fText;
@@ -295,7 +295,7 @@ GMTOffsetField::getWidth() const {
 }
  
 inline const UChar*
-GMTOffsetField::getPatternText(void) const {
+GMTOffsetField::getPatternText() const {
     return fText;
 }
 
@@ -544,7 +544,7 @@ TimeZoneFormat::setDefaultParseOptions(uint32_t flags) {
 }
 
 uint32_t
-TimeZoneFormat::getDefaultParseOptions(void) const {
+TimeZoneFormat::getDefaultParseOptions() const {
     return fDefParseOptionFlags;
 }
 

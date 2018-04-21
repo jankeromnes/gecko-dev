@@ -326,7 +326,7 @@ void RuleBasedBreakIterator::init(UErrorCode &status) {
 //
 //-----------------------------------------------------------------------------
 BreakIterator*
-RuleBasedBreakIterator::clone(void) const {
+RuleBasedBreakIterator::clone() const {
     return new RuleBasedBreakIterator(*this);
 }
 
@@ -375,7 +375,7 @@ RuleBasedBreakIterator::operator==(const BreakIterator& that) const {
  * @return A hash code
  */
 int32_t
-RuleBasedBreakIterator::hashCode(void) const {
+RuleBasedBreakIterator::hashCode() const {
     int32_t   hash = 0;
     if (fData != NULL) {
         hash = fData->hashCode();
@@ -519,7 +519,7 @@ RuleBasedBreakIterator &RuleBasedBreakIterator::refreshInputText(UText *input, U
  * Sets the current iteration position to the beginning of the text, position zero.
  * @return The new iterator position, which is zero.
  */
-int32_t RuleBasedBreakIterator::first(void) {
+int32_t RuleBasedBreakIterator::first() {
     UErrorCode status = U_ZERO_ERROR;
     if (!fBreakCache->seek(0)) {
         fBreakCache->populateNear(0, status);
@@ -533,7 +533,7 @@ int32_t RuleBasedBreakIterator::first(void) {
  * Sets the current iteration position to the end of the text.
  * @return The text's past-the-end offset.
  */
-int32_t RuleBasedBreakIterator::last(void) {
+int32_t RuleBasedBreakIterator::last() {
     int32_t endPos = (int32_t)utext_nativeLength(&fText);
     UBool endShouldBeBoundary = isBoundary(endPos);      // Has side effect of setting iterator position.
     (void)endShouldBeBoundary;
@@ -571,7 +571,7 @@ int32_t RuleBasedBreakIterator::next(int32_t n) {
  * Advances the iterator to the next boundary position.
  * @return The position of the first boundary after this one.
  */
-int32_t RuleBasedBreakIterator::next(void) {
+int32_t RuleBasedBreakIterator::next() {
     fBreakCache->next();
     return fDone ? UBRK_DONE : fPosition;
 }
@@ -584,7 +584,7 @@ int32_t RuleBasedBreakIterator::next(void) {
  *
  * @return The position of the boundary position immediately preceding the starting position.
  */
-int32_t RuleBasedBreakIterator::previous(void) {
+int32_t RuleBasedBreakIterator::previous() {
     UErrorCode status = U_ZERO_ERROR;
     fBreakCache->previous(status);
     return fDone ? UBRK_DONE : fPosition;
@@ -681,7 +681,7 @@ UBool RuleBasedBreakIterator::isBoundary(int32_t offset) {
  * Returns the current iteration position.
  * @return The current iteration position.
  */
-int32_t RuleBasedBreakIterator::current(void) const {
+int32_t RuleBasedBreakIterator::current() const {
     return fPosition;
 }
 
@@ -1195,7 +1195,7 @@ static icu::UInitOnce gRBBIInitOnce = U_INITONCE_INITIALIZER;
  * Release all static memory held by breakiterator.
  */
 U_CDECL_BEGIN
-static UBool U_CALLCONV rbbi_cleanup(void) {
+static UBool U_CALLCONV rbbi_cleanup() {
     delete gLanguageBreakFactories;
     gLanguageBreakFactories = nullptr;
     delete gEmptyString;

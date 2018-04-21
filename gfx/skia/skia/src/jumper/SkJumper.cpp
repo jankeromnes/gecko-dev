@@ -63,7 +63,7 @@ static const int kNumStages = SK_RASTER_PIPELINE_STAGES(M);
 
 // We can't express the real types of most stage functions portably, so we use a stand-in.
 // We'll only ever call start_pipeline(), which then chains into the rest.
-using StageFn         = void(void);
+using StageFn         = void();
 using StartPipelineFn = void(size_t,size_t,size_t,size_t, void**);
 
 // Some platforms expect C "name" maps to asm "_name", others to "name".

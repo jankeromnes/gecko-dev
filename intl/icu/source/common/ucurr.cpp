@@ -249,7 +249,7 @@ static const icu::Hashtable* getCurrSymbolsEquiv();
  * Cleanup callback func
  */
 static UBool U_CALLCONV 
-isoCodes_cleanup(void)
+isoCodes_cleanup()
 {
     if (gIsoCodes != NULL) {
         uhash_close(const_cast<UHashtable *>(gIsoCodes));
@@ -263,7 +263,7 @@ isoCodes_cleanup(void)
  * Cleanup callback func
  */
 static UBool U_CALLCONV 
-currSymbolsEquiv_cleanup(void)
+currSymbolsEquiv_cleanup()
 {
     delete const_cast<icu::Hashtable *>(gCurrSymbolsEquiv);
     gCurrSymbolsEquiv = NULL;
@@ -399,7 +399,7 @@ idForLocale(const char* locale, char* countryAndVariant, int capacity, UErrorCod
 // don't use ICUService since we don't need fallback
 
 U_CDECL_BEGIN
-static UBool U_CALLCONV currency_cleanup(void);
+static UBool U_CALLCONV currency_cleanup();
 U_CDECL_END
 
 #if !UCONFIG_NO_SERVICE
@@ -484,7 +484,7 @@ struct CReg : public icu::UMemory {
     }
 
     /* This doesn't need to be thread safe. It's for u_cleanup only. */
-    static void cleanup(void) {
+    static void cleanup() {
         while (gCRegHead) {
             CReg* n = gCRegHead;
             gCRegHead = gCRegHead->next;
@@ -527,10 +527,10 @@ ucurr_unregister(UCurrRegistryKey key, UErrorCode* status)
  * can call this function.
  */
 static UBool U_CALLCONV
-currency_cache_cleanup(void);
+currency_cache_cleanup();
 
 U_CDECL_BEGIN
-static UBool U_CALLCONV currency_cleanup(void) {
+static UBool U_CALLCONV currency_cleanup() {
 #if !UCONFIG_NO_SERVICE
     CReg::cleanup();
 #endif
@@ -1411,7 +1411,7 @@ deleteCacheEntry(CurrencyNameCacheEntry* entry) {
 
 // Cache clean up
 static UBool U_CALLCONV
-currency_cache_cleanup(void) {
+currency_cache_cleanup() {
     for (int32_t i = 0; i < CURRENCY_NAME_CACHE_NUM; ++i) {
         if (currCache[i]) {
             deleteCacheEntry(currCache[i]);

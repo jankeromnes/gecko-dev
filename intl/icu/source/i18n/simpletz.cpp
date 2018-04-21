@@ -1038,7 +1038,7 @@ SimpleTimeZone::getPreviousTransition(UDate base, UBool inclusive, TimeZoneTrans
 }
 
 void
-SimpleTimeZone::clearTransitionRules(void) {
+SimpleTimeZone::clearTransitionRules() {
     initialRule = NULL;
     firstTransition = NULL;
     stdRule = NULL;
@@ -1047,7 +1047,7 @@ SimpleTimeZone::clearTransitionRules(void) {
 }
 
 void
-SimpleTimeZone::deleteTransitionRules(void) {
+SimpleTimeZone::deleteTransitionRules() {
     if (initialRule != NULL) {
         delete initialRule;
     }

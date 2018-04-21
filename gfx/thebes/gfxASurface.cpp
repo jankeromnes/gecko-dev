@@ -70,7 +70,7 @@ gfxASurface::~gfxASurface()
 // Surfaces use refcounting that's tied to the cairo surface refcnt, to avoid
 // refcount mismatch issues.
 nsrefcnt
-gfxASurface::AddRef(void)
+gfxASurface::AddRef()
 {
     if (mSurfaceValid) {
         if (mFloatingRefs) {
@@ -88,7 +88,7 @@ gfxASurface::AddRef(void)
 }
 
 nsrefcnt
-gfxASurface::Release(void)
+gfxASurface::Release()
 {
     if (mSurfaceValid) {
         NS_ASSERTION(mFloatingRefs == 0, "gfxASurface::Release with floating refs still hanging around!");

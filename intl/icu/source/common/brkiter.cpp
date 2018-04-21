@@ -286,7 +286,7 @@ static icu::ICULocaleService* gService = NULL;
  * Release all static memory held by breakiterator.
  */
 U_CDECL_BEGIN
-static UBool U_CALLCONV breakiterator_cleanup(void) {
+static UBool U_CALLCONV breakiterator_cleanup() {
 #if !UCONFIG_NO_SERVICE
     if (gService) {
         delete gService;
@@ -300,13 +300,13 @@ U_CDECL_END
 U_NAMESPACE_BEGIN
 
 static void U_CALLCONV 
-initService(void) {
+initService() {
     gService = new ICUBreakIteratorService();
     ucln_common_registerCleanup(UCLN_COMMON_BREAKITERATOR, breakiterator_cleanup);
 }
 
 static ICULocaleService*
-getService(void)
+getService()
 {
     umtx_initOnce(gInitOnceBrkiter, &initService);
     return gService;
@@ -316,7 +316,7 @@ getService(void)
 // -------------------------------------
 
 static inline UBool
-hasService(void)
+hasService()
 {
     return !gInitOnceBrkiter.isReset() && getService() != NULL;
 }
@@ -351,7 +351,7 @@ BreakIterator::unregister(URegistryKey key, UErrorCode& status)
 // -------------------------------------
 
 StringEnumeration* U_EXPORT2
-BreakIterator::getAvailableLocales(void)
+BreakIterator::getAvailableLocales()
 {
     ICULocaleService *service = getService();
     if (service == NULL) {

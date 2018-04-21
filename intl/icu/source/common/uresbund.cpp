@@ -257,7 +257,7 @@ U_CAPI UBool U_EXPORT2 ures_dumpCacheContents(void) {
 
 #endif
 
-static UBool U_CALLCONV ures_cleanup(void)
+static UBool U_CALLCONV ures_cleanup()
 {
     if (cache != NULL) {
         ures_flushCache();

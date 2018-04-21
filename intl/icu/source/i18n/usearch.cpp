@@ -97,7 +97,7 @@ inline int hashFromCE32(uint32_t ce)
 
 U_CDECL_BEGIN
 static UBool U_CALLCONV
-usearch_cleanup(void) {
+usearch_cleanup() {
     g_nfcImpl = NULL;
     return TRUE;
 }

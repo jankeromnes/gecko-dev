@@ -33,7 +33,7 @@ static icu::UInitOnce gDangiCalendarInitOnce = U_INITONCE_INITIALIZER;
 static const int32_t DANGI_EPOCH_YEAR = -2332; // Gregorian year
 
 U_CDECL_BEGIN
-static UBool calendar_dangi_cleanup(void) {
+static UBool calendar_dangi_cleanup() {
     if (gDangiCalendarZoneAstroCalc) {
         delete gDangiCalendarZoneAstroCalc;
         gDangiCalendarZoneAstroCalc = NULL;
@@ -103,7 +103,7 @@ const char *DangiCalendar::getType() const {
  * 1898-1911: GMT+8 
  * 1912-    : GMT+9 
  */
-static void U_CALLCONV initDangiCalZoneAstroCalc(void) {
+static void U_CALLCONV initDangiCalZoneAstroCalc() {
     U_ASSERT(gDangiCalendarZoneAstroCalc == NULL);
     const UDate millis1897[] = { (UDate)((1897 - 1970) * 365 * kOneDay) }; // some days of error is not a problem here
     const UDate millis1898[] = { (UDate)((1898 - 1970) * 365 * kOneDay) }; // some days of error is not a problem here
@@ -127,7 +127,7 @@ static void U_CALLCONV initDangiCalZoneAstroCalc(void) {
     ucln_i18n_registerCleanup(UCLN_I18N_DANGI_CALENDAR, calendar_dangi_cleanup);
 }
 
-const TimeZone* DangiCalendar::getDangiCalZoneAstroCalc(void) const {
+const TimeZone* DangiCalendar::getDangiCalZoneAstroCalc() const {
     umtx_initOnce(gDangiCalendarInitOnce, &initDangiCalZoneAstroCalc);
     return gDangiCalendarZoneAstroCalc;
 }

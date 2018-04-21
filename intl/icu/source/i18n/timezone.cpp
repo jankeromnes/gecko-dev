@@ -138,7 +138,7 @@ static icu::UInitOnce gCanonicalZonesInitOnce = U_INITONCE_INITIALIZER;
 static icu::UInitOnce gCanonicalLocationZonesInitOnce = U_INITONCE_INITIALIZER;
 
 U_CDECL_BEGIN
-static UBool U_CALLCONV timeZone_cleanup(void)
+static UBool U_CALLCONV timeZone_cleanup()
 {
     U_NAMESPACE_USE
     delete DEFAULT_ZONE;
@@ -321,7 +321,7 @@ TimeZone::getUnknown()
 }
 
 const TimeZone* U_EXPORT2
-TimeZone::getGMT(void)
+TimeZone::getGMT()
 {
     umtx_initOnce(gStaticZonesInitOnce, &initStaticTimeZones);
     return _GMT;
@@ -955,8 +955,8 @@ public:
     }
 
 public:
-    static UClassID U_EXPORT2 getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    static UClassID U_EXPORT2 getStaticClassID();
+    virtual UClassID getDynamicClassID() const;
 };
 
 TZEnumeration::~TZEnumeration() {

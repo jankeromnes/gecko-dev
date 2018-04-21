@@ -23,12 +23,12 @@ UOBJECT_DEFINE_RTTI_IMPLEMENTATION(EventListener)
 
 static UMutex notifyLock = U_MUTEX_INITIALIZER;
 
-ICUNotifier::ICUNotifier(void) 
+ICUNotifier::ICUNotifier() 
 : listeners(NULL) 
 {
 }
 
-ICUNotifier::~ICUNotifier(void) {
+ICUNotifier::~ICUNotifier() {
     {
         Mutex lmx(&notifyLock);
         delete listeners;
@@ -100,7 +100,7 @@ ICUNotifier::removeListener(const EventListener *l, UErrorCode& status)
 }
 
 void 
-ICUNotifier::notifyChanged(void) 
+ICUNotifier::notifyChanged() 
 {
     if (listeners != NULL) {
         Mutex lmx(&notifyLock);

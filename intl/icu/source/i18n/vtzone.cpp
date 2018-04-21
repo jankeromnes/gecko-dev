@@ -928,7 +928,7 @@ public:
     VTZReader(const UnicodeString& input);
     ~VTZReader();
 
-    UChar read(void);
+    UChar read();
 private:
     const UnicodeString* in;
     int32_t index;
@@ -943,7 +943,7 @@ VTZReader::~VTZReader() {
 }
 
 UChar
-VTZReader::read(void) {
+VTZReader::read() {
     UChar ch = 0xFFFF;
     if (index < in->length()) {
         ch = in->charAt(index);
@@ -1178,7 +1178,7 @@ VTimeZone::writeSimple(UDate time, UnicodeString& result, UErrorCode& status) co
 }
 
 TimeZone*
-VTimeZone::clone(void) const {
+VTimeZone::clone() const {
     return new VTimeZone(*this);
 }
 
@@ -1207,12 +1207,12 @@ VTimeZone::setRawOffset(int32_t offsetMillis) {
 }
 
 int32_t
-VTimeZone::getRawOffset(void) const {
+VTimeZone::getRawOffset() const {
     return tz->getRawOffset();
 }
 
 UBool
-VTimeZone::useDaylightTime(void) const {
+VTimeZone::useDaylightTime() const {
     return tz->useDaylightTime();
 }
 

@@ -173,8 +173,8 @@ public:
     status = U_SAFECLONE_ALLOCATED_WARNING;
     return clone();
   }
-  virtual BreakIterator* clone(void) const { return new SimpleFilteredSentenceBreakIterator(*this); }
-  virtual UClassID getDynamicClassID(void) const { return NULL; }
+  virtual BreakIterator* clone() const { return new SimpleFilteredSentenceBreakIterator(*this); }
+  virtual UClassID getDynamicClassID() const { return NULL; }
   virtual UBool operator==(const BreakIterator& o) const { if(this==&o) return true; return false; }
 
   /* -- text modifying -- */
@@ -185,20 +185,20 @@ public:
 
   /* -- other functions that are just delegated -- */
   virtual UText *getUText(UText *fillIn, UErrorCode &status) const { return fDelegate->getUText(fillIn,status); }
-  virtual CharacterIterator& getText(void) const { return fDelegate->getText(); }
+  virtual CharacterIterator& getText() const { return fDelegate->getText(); }
 
   /* -- ITERATION -- */
-  virtual int32_t first(void);
+  virtual int32_t first();
   virtual int32_t preceding(int32_t offset);
-  virtual int32_t previous(void);
+  virtual int32_t previous();
   virtual UBool isBoundary(int32_t offset);
-  virtual int32_t current(void) const { return fDelegate->current(); } // we keep the delegate current, so this should be correct.
+  virtual int32_t current() const { return fDelegate->current(); } // we keep the delegate current, so this should be correct.
 
-  virtual int32_t next(void);
+  virtual int32_t next();
 
   virtual int32_t next(int32_t n);
   virtual int32_t following(int32_t offset);
-  virtual int32_t last(void);
+  virtual int32_t last();
 
 private:
     /**
@@ -402,7 +402,7 @@ SimpleFilteredSentenceBreakIterator::next() {
 }
 
 int32_t
-SimpleFilteredSentenceBreakIterator::first(void) {
+SimpleFilteredSentenceBreakIterator::first() {
   // Don't suppress a break opportunity at the beginning of text.
   return fDelegate->first();
 }
@@ -413,7 +413,7 @@ SimpleFilteredSentenceBreakIterator::preceding(int32_t offset) {
 }
 
 int32_t
-SimpleFilteredSentenceBreakIterator::previous(void) {
+SimpleFilteredSentenceBreakIterator::previous() {
   return internalPrev(fDelegate->previous());
 }
 
@@ -447,7 +447,7 @@ SimpleFilteredSentenceBreakIterator::following(int32_t offset) {
 }
 
 int32_t
-SimpleFilteredSentenceBreakIterator::last(void) {
+SimpleFilteredSentenceBreakIterator::last() {
   // Don't suppress a break opportunity at the end of text.
   return fDelegate->last();
 }

@@ -2340,7 +2340,7 @@ DecimalFormat::setDecimalFormatSymbols(const DecimalFormatSymbols& symbols)
 
 
 const CurrencyPluralInfo*
-DecimalFormat::getCurrencyPluralInfo(void) const
+DecimalFormat::getCurrencyPluralInfo() const
 {
     return fCurrencyPluralInfo;
 }
@@ -2792,7 +2792,7 @@ DecimalFormat::setDecimalSeparatorAlwaysShown(UBool newValue)
 //------------------------------------------------------------------------------
 // Checks if decimal point pattern match is required
 UBool 
-DecimalFormat::isDecimalPatternMatchRequired(void) const
+DecimalFormat::isDecimalPatternMatchRequired() const
 {
     return static_cast<UBool>(fBoolFlags.contains(UNUM_PARSE_DECIMAL_MARK_REQUIRED));
 }

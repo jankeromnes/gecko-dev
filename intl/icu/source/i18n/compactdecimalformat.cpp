@@ -132,7 +132,7 @@ U_NAMESPACE_END
 
 U_CDECL_BEGIN
 
-static UBool U_CALLCONV cdf_cleanup(void) {
+static UBool U_CALLCONV cdf_cleanup() {
   if (gCompactDecimalData != NULL) {
     uhash_close(gCompactDecimalData);
     gCompactDecimalData = NULL;
@@ -228,7 +228,7 @@ CompactDecimalFormat::~CompactDecimalFormat() {
 
 
 Format*
-CompactDecimalFormat::clone(void) const {
+CompactDecimalFormat::clone() const {
   return new CompactDecimalFormat(*this);
 }
 

@@ -941,7 +941,7 @@ static UBool compareBinaryFiles(const char* defaultTZFileName, const char* TZFil
 /* dirent also lists two entries: "." and ".." that we can safely ignore. */
 #define SKIP1 "."
 #define SKIP2 ".."
-static UBool U_CALLCONV putil_cleanup(void);
+static UBool U_CALLCONV putil_cleanup();
 static CharString *gSearchTZFileResult = NULL;
 
 /*
@@ -1239,7 +1239,7 @@ static CharString *gTimeZoneFilesDirectory = NULL;
  static bool gCorrectedPOSIXLocaleHeapAllocated = false;
 #endif
 
-static UBool U_CALLCONV putil_cleanup(void)
+static UBool U_CALLCONV putil_cleanup()
 {
     if (gDataDirectory && *gDataDirectory) {
         uprv_free(gDataDirectory);
@@ -1568,7 +1568,7 @@ static const char *uprv_getPOSIXIDForCategory(int category)
 /* Return just the POSIX id for the default locale, whatever happens to be in
  * it. It gets the value from LC_MESSAGES and indirectly from LC_ALL and LANG.
  */
-static const char *uprv_getPOSIXIDForDefaultLocale(void)
+static const char *uprv_getPOSIXIDForDefaultLocale()
 {
     static const char* posixID = NULL;
     if (posixID == 0) {

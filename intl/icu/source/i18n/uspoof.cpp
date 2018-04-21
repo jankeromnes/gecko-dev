@@ -44,7 +44,7 @@ static const Normalizer2 *gNfdNormalizer = NULL;
 static UInitOnce gSpoofInitStaticsOnce = U_INITONCE_INITIALIZER;
 
 static UBool U_CALLCONV
-uspoof_cleanup(void) {
+uspoof_cleanup() {
     delete gInclusionSet;
     gInclusionSet = NULL;
     delete gRecommendedSet;

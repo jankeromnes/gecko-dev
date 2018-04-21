@@ -226,7 +226,7 @@ void StringSearch::setOffset(int32_t position, UErrorCode &status)
     usearch_setOffset(m_strsrch_, position, &status);
 }
 
-int32_t StringSearch::getOffset(void) const
+int32_t StringSearch::getOffset() const
 {
     return usearch_getOffset(m_strsrch_);
 }
@@ -282,7 +282,7 @@ void StringSearch::reset()
     usearch_reset(m_strsrch_);
 }
 
-SearchIterator * StringSearch::safeClone(void) const
+SearchIterator * StringSearch::safeClone() const
 {
     UErrorCode status = U_ZERO_ERROR;
     StringSearch *result = new StringSearch(m_pattern_, m_text_,

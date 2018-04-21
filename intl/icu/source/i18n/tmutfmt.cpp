@@ -137,7 +137,7 @@ TimeUnitFormat::~TimeUnitFormat() {
 
 
 Format*
-TimeUnitFormat::clone(void) const {
+TimeUnitFormat::clone() const {
     return new TimeUnitFormat(*this);
 }
 

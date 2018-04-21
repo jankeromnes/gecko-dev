@@ -3855,7 +3855,7 @@ SimpleDateFormat::setDateFormatSymbols(const DateFormatSymbols& newFormatSymbols
 
 //----------------------------------------------------------------------
 const TimeZoneFormat*
-SimpleDateFormat::getTimeZoneFormat(void) const {
+SimpleDateFormat::getTimeZoneFormat() const {
     return (const TimeZoneFormat*)tzFormat();
 }
 
@@ -3974,7 +3974,7 @@ SimpleDateFormat::isFieldUnitIgnored(const UnicodeString& pattern,
 //----------------------------------------------------------------------
 
 const Locale&
-SimpleDateFormat::getSmpFmtLocale(void) const {
+SimpleDateFormat::getSmpFmtLocale() const {
     return fLocale;
 }
 

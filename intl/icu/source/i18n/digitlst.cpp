@@ -504,7 +504,7 @@ static icu::UInitOnce gCLocaleInitOnce = U_INITONCE_INITIALIZER;
 
 U_CDECL_BEGIN
 // Cleanup callback func
-static UBool U_CALLCONV digitList_cleanup(void)
+static UBool U_CALLCONV digitList_cleanup()
 {
 #if U_USE_STRTOD_L
     if (gCLocale != (locale_t)0) {
@@ -514,7 +514,7 @@ static UBool U_CALLCONV digitList_cleanup(void)
     return TRUE;
 }
 // C Locale initialization func
-static void U_CALLCONV initCLocale(void) {
+static void U_CALLCONV initCLocale() {
     ucln_i18n_registerCleanup(UCLN_I18N_DIGITLIST, digitList_cleanup);
 #if U_USE_STRTOD_L
 # if U_PLATFORM_USES_ONLY_WIN32_API

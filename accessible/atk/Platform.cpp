@@ -31,9 +31,9 @@ int atkMajorVersion = 1, atkMinorVersion = 12, atkMicroVersion = 0;
 GType (*gAtkTableCellGetTypeFunc)();
 
 extern "C" {
-typedef GType (* AtkGetTypeType) (void);
-typedef void (*GnomeAccessibilityInit) (void);
-typedef void (*GnomeAccessibilityShutdown) (void);
+typedef GType (* AtkGetTypeType) ();
+typedef void (*GnomeAccessibilityInit) ();
+typedef void (*GnomeAccessibilityShutdown) ();
 }
 
 static PRLibrary* sATKLib = nullptr;

@@ -118,7 +118,7 @@ static UDataFileAccess  gDataFileAccess = UDATA_NO_FILES;        // Windows UWP 
 #endif
 
 static UBool U_CALLCONV
-udata_cleanup(void)
+udata_cleanup()
 {
     int32_t i;
 

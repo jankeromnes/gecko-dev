@@ -251,7 +251,7 @@ UBool UVector::removeElement(void* obj) {
     return FALSE;
 }
 
-void UVector::removeAllElements(void) {
+void UVector::removeAllElements() {
     if (deleter != 0) {
         for (int32_t i=0; i<count; ++i) {
             if (elements[i].pointer != 0) {

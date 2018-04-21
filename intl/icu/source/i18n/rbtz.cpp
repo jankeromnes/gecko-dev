@@ -357,7 +357,7 @@ cleanup:
 }
 
 TimeZone*
-RuleBasedTimeZone::clone(void) const {
+RuleBasedTimeZone::clone() const {
     return new RuleBasedTimeZone(*this);
 }
 
@@ -478,7 +478,7 @@ RuleBasedTimeZone::setRawOffset(int32_t /*offsetMillis*/) {
 }
 
 int32_t
-RuleBasedTimeZone::getRawOffset(void) const {
+RuleBasedTimeZone::getRawOffset() const {
     // Note: This implementation returns standard GMT offset
     // as of current time.
     UErrorCode status = U_ZERO_ERROR;
@@ -489,7 +489,7 @@ RuleBasedTimeZone::getRawOffset(void) const {
 }
 
 UBool
-RuleBasedTimeZone::useDaylightTime(void) const {
+RuleBasedTimeZone::useDaylightTime() const {
     // Note: This implementation returns true when
     // daylight saving time is used as of now or
     // after the next transition.
@@ -625,7 +625,7 @@ RuleBasedTimeZone::getTimeZoneRules(const InitialTimeZoneRule*& initial,
 }
 
 void
-RuleBasedTimeZone::deleteRules(void) {
+RuleBasedTimeZone::deleteRules() {
     delete fInitialRule;
     fInitialRule = NULL;
     if (fHistoricRules != NULL) {
@@ -645,7 +645,7 @@ RuleBasedTimeZone::deleteRules(void) {
 }
 
 void
-RuleBasedTimeZone::deleteTransitions(void) {
+RuleBasedTimeZone::deleteTransitions() {
     if (fHistoricTransitions != NULL) {
         while (!fHistoricTransitions->isEmpty()) {
             Transition *trs = (Transition*)fHistoricTransitions->orphanElementAt(0);

@@ -131,7 +131,7 @@ _set_addString(USet *set, const UChar *str, int32_t length) {
 /**
  * Cleanup function for UnicodeSet
  */
-static UBool U_CALLCONV uset_cleanup(void) {
+static UBool U_CALLCONV uset_cleanup() {
     for(int32_t i = UPROPS_SRC_NONE; i < UPROPS_SRC_COUNT; ++i) {
         Inclusion &in = gInclusions[i];
         delete in.fSet;

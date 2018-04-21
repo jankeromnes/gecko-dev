@@ -197,7 +197,7 @@ static icu::UInitOnce gStaticSetsInitOnce = U_INITONCE_INITIALIZER;
 //------------------------------------------------------------------------------
 U_CDECL_BEGIN
 static UBool U_CALLCONV
-decimfmt_cleanup(void)
+decimfmt_cleanup()
 {
     delete gStaticSets;
     gStaticSets = NULL;

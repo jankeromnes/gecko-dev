@@ -191,7 +191,7 @@ usprep_flushCache(){
 }
 */
 
-static UBool U_CALLCONV usprep_cleanup(void){
+static UBool U_CALLCONV usprep_cleanup(){
     if (SHARED_DATA_HASHTABLE != NULL) {
         usprep_internal_flushCache(TRUE);
         if (SHARED_DATA_HASHTABLE != NULL && uhash_count(SHARED_DATA_HASHTABLE) == 0) {
