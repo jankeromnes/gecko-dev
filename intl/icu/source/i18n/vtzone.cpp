@@ -987,12 +987,12 @@ VTimeZone::VTimeZone(const VTimeZone& source)
 }
 
 VTimeZone::~VTimeZone() {
-    if (tz != NULL) {
+    
         delete tz;
-    }
-    if (vtzlines != NULL) {
+    
+    
         delete vtzlines;
-    }
+    
 }
 
 VTimeZone&
@@ -1009,9 +1009,9 @@ VTimeZone::operator=(const VTimeZone& right) {
         if (right.tz != NULL) {
             tz = (BasicTimeZone*)right.tz->clone();
         }
-        if (vtzlines != NULL) {
+        
             delete vtzlines;
-        }
+        
         if (right.vtzlines != NULL) {
             UErrorCode status = U_ZERO_ERROR;
             int32_t size = right.vtzlines->size();
@@ -1711,15 +1711,15 @@ cleanupParse:
         }
         delete rules;
     }
-    if (dates != NULL) {
+    
         delete dates;
-    }
-    if (initialRule != NULL) {
+    
+    
         delete initialRule;
-    }
-    if (rbtz != NULL) {
+    
+    
         delete rbtz;
-    }
+    
     return;
 }
 
@@ -1813,9 +1813,9 @@ VTimeZone::write(UDate start, VTZWriter& writer, UErrorCode& status) const {
     return;
 
 cleanupWritePartial:
-    if (initial != NULL) {
+    
         delete initial;
-    }
+    
     if (transitionRules != NULL) {
         while (!transitionRules->isEmpty()) {
             TimeZoneRule *tr = (TimeZoneRule*)transitionRules->orphanElementAt(0);
@@ -1869,15 +1869,15 @@ VTimeZone::writeSimple(UDate time, VTZWriter& writer, UErrorCode& status) const 
     return;
 
 cleanupWriteSimple:
-    if (initial != NULL) {
+    
         delete initial;
-    }
-    if (std != NULL) {
+    
+    
         delete std;
-    }
-    if (dst != NULL) {
+    
+    
         delete dst;
-    }
+    
 }
 
 void
@@ -2163,12 +2163,12 @@ VTimeZone::writeZone(VTZWriter& w, BasicTimeZone& basictz,
 
 cleanupWriteZone:
 
-    if (finalStdRule != NULL) {
+    
         delete finalStdRule;
-    }
-    if (finalDstRule != NULL) {
+    
+    
         delete finalDstRule;
-    }
+    
 }
 
 void

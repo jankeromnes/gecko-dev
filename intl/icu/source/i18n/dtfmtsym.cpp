@@ -873,9 +873,9 @@ DateFormatSymbols::setYearNames(const UnicodeString* yearNames, int32_t count,
                                 DtContextType context, DtWidthType width)
 {
     if (context == FORMAT && width == ABBREVIATED) {
-        if (fShortYearNames) {
+        
             delete[] fShortYearNames;
-        }
+        
         fShortYearNames = newUnicodeStringArray(count);
         uprv_arrayCopy(yearNames, fShortYearNames, count);
         fShortYearNamesCount = count;
@@ -895,9 +895,9 @@ DateFormatSymbols::setZodiacNames(const UnicodeString* zodiacNames, int32_t coun
                                 DtContextType context, DtWidthType width)
 {
     if (context == FORMAT && width == ABBREVIATED) {
-        if (fShortZodiacNames) {
+        
             delete[] fShortZodiacNames;
-        }
+        
         fShortZodiacNames = newUnicodeStringArray(count);
         uprv_arrayCopy(zodiacNames, fShortZodiacNames, count);
         fShortZodiacNamesCount = count;
@@ -910,7 +910,7 @@ void
 DateFormatSymbols::setEras(const UnicodeString* erasArray, int32_t count)
 {
     // delete the old list if we own it
-    if (fEras)
+    
         delete[] fEras;
 
     // we always own the new list, which we create here (we duplicate rather
@@ -924,7 +924,7 @@ void
 DateFormatSymbols::setEraNames(const UnicodeString* eraNamesArray, int32_t count)
 {
     // delete the old list if we own it
-    if (fEraNames)
+    
         delete[] fEraNames;
 
     // we always own the new list, which we create here (we duplicate rather
@@ -938,7 +938,7 @@ void
 DateFormatSymbols::setNarrowEras(const UnicodeString* narrowErasArray, int32_t count)
 {
     // delete the old list if we own it
-    if (fNarrowEras)
+    
         delete[] fNarrowEras;
 
     // we always own the new list, which we create here (we duplicate rather
@@ -952,7 +952,7 @@ void
 DateFormatSymbols::setMonths(const UnicodeString* monthsArray, int32_t count)
 {
     // delete the old list if we own it
-    if (fMonths)
+    
         delete[] fMonths;
 
     // we always own the new list, which we create here (we duplicate rather
@@ -966,7 +966,7 @@ void
 DateFormatSymbols::setShortMonths(const UnicodeString* shortMonthsArray, int32_t count)
 {
     // delete the old list if we own it
-    if (fShortMonths)
+    
         delete[] fShortMonths;
 
     // we always own the new list, which we create here (we duplicate rather
@@ -987,21 +987,21 @@ DateFormatSymbols::setMonths(const UnicodeString* monthsArray, int32_t count, Dt
     case FORMAT :
         switch (width) {
         case WIDE :
-            if (fMonths)
+            
                 delete[] fMonths;
             fMonths = newUnicodeStringArray(count);
             uprv_arrayCopy( monthsArray,fMonths,count);
             fMonthsCount = count;
             break;
         case ABBREVIATED :
-            if (fShortMonths)
+            
                 delete[] fShortMonths;
             fShortMonths = newUnicodeStringArray(count);
             uprv_arrayCopy( monthsArray,fShortMonths,count);
             fShortMonthsCount = count;
             break;
         case NARROW :
-            if (fNarrowMonths)
+            
                 delete[] fNarrowMonths;
             fNarrowMonths = newUnicodeStringArray(count);
             uprv_arrayCopy( monthsArray,fNarrowMonths,count);
@@ -1014,21 +1014,21 @@ DateFormatSymbols::setMonths(const UnicodeString* monthsArray, int32_t count, Dt
     case STANDALONE :
         switch (width) {
         case WIDE :
-            if (fStandaloneMonths)
+            
                 delete[] fStandaloneMonths;
             fStandaloneMonths = newUnicodeStringArray(count);
             uprv_arrayCopy( monthsArray,fStandaloneMonths,count);
             fStandaloneMonthsCount = count;
             break;
         case ABBREVIATED :
-            if (fStandaloneShortMonths)
+            
                 delete[] fStandaloneShortMonths;
             fStandaloneShortMonths = newUnicodeStringArray(count);
             uprv_arrayCopy( monthsArray,fStandaloneShortMonths,count);
             fStandaloneShortMonthsCount = count;
             break;
         case NARROW :
-           if (fStandaloneNarrowMonths)
+           
                 delete[] fStandaloneNarrowMonths;
             fStandaloneNarrowMonths = newUnicodeStringArray(count);
             uprv_arrayCopy( monthsArray,fStandaloneNarrowMonths,count);
@@ -1046,7 +1046,7 @@ DateFormatSymbols::setMonths(const UnicodeString* monthsArray, int32_t count, Dt
 void DateFormatSymbols::setWeekdays(const UnicodeString* weekdaysArray, int32_t count)
 {
     // delete the old list if we own it
-    if (fWeekdays)
+    
         delete[] fWeekdays;
 
     // we always own the new list, which we create here (we duplicate rather
@@ -1060,7 +1060,7 @@ void
 DateFormatSymbols::setShortWeekdays(const UnicodeString* shortWeekdaysArray, int32_t count)
 {
     // delete the old list if we own it
-    if (fShortWeekdays)
+    
         delete[] fShortWeekdays;
 
     // we always own the new list, which we create here (we duplicate rather
@@ -1081,28 +1081,28 @@ DateFormatSymbols::setWeekdays(const UnicodeString* weekdaysArray, int32_t count
     case FORMAT :
         switch (width) {
         case WIDE :
-            if (fWeekdays)
+            
                 delete[] fWeekdays;
             fWeekdays = newUnicodeStringArray(count);
             uprv_arrayCopy(weekdaysArray, fWeekdays, count);
             fWeekdaysCount = count;
             break;
         case ABBREVIATED :
-            if (fShortWeekdays)
+            
                 delete[] fShortWeekdays;
             fShortWeekdays = newUnicodeStringArray(count);
             uprv_arrayCopy(weekdaysArray, fShortWeekdays, count);
             fShortWeekdaysCount = count;
             break;
         case SHORT :
-            if (fShorterWeekdays)
+            
                 delete[] fShorterWeekdays;
             fShorterWeekdays = newUnicodeStringArray(count);
             uprv_arrayCopy(weekdaysArray, fShorterWeekdays, count);
             fShorterWeekdaysCount = count;
             break;
         case NARROW :
-            if (fNarrowWeekdays)
+            
                 delete[] fNarrowWeekdays;
             fNarrowWeekdays = newUnicodeStringArray(count);
             uprv_arrayCopy(weekdaysArray, fNarrowWeekdays, count);
@@ -1115,28 +1115,28 @@ DateFormatSymbols::setWeekdays(const UnicodeString* weekdaysArray, int32_t count
     case STANDALONE :
         switch (width) {
         case WIDE :
-            if (fStandaloneWeekdays)
+            
                 delete[] fStandaloneWeekdays;
             fStandaloneWeekdays = newUnicodeStringArray(count);
             uprv_arrayCopy(weekdaysArray, fStandaloneWeekdays, count);
             fStandaloneWeekdaysCount = count;
             break;
         case ABBREVIATED :
-            if (fStandaloneShortWeekdays)
+            
                 delete[] fStandaloneShortWeekdays;
             fStandaloneShortWeekdays = newUnicodeStringArray(count);
             uprv_arrayCopy(weekdaysArray, fStandaloneShortWeekdays, count);
             fStandaloneShortWeekdaysCount = count;
             break;
         case SHORT :
-            if (fStandaloneShorterWeekdays)
+            
                 delete[] fStandaloneShorterWeekdays;
             fStandaloneShorterWeekdays = newUnicodeStringArray(count);
             uprv_arrayCopy(weekdaysArray, fStandaloneShorterWeekdays, count);
             fStandaloneShorterWeekdaysCount = count;
             break;
         case NARROW :
-            if (fStandaloneNarrowWeekdays)
+            
                 delete[] fStandaloneNarrowWeekdays;
             fStandaloneNarrowWeekdays = newUnicodeStringArray(count);
             uprv_arrayCopy(weekdaysArray, fStandaloneNarrowWeekdays, count);
@@ -1162,14 +1162,14 @@ DateFormatSymbols::setQuarters(const UnicodeString* quartersArray, int32_t count
     case FORMAT :
         switch (width) {
         case WIDE :
-            if (fQuarters)
+            
                 delete[] fQuarters;
             fQuarters = newUnicodeStringArray(count);
             uprv_arrayCopy( quartersArray,fQuarters,count);
             fQuartersCount = count;
             break;
         case ABBREVIATED :
-            if (fShortQuarters)
+            
                 delete[] fShortQuarters;
             fShortQuarters = newUnicodeStringArray(count);
             uprv_arrayCopy( quartersArray,fShortQuarters,count);
@@ -1191,14 +1191,14 @@ DateFormatSymbols::setQuarters(const UnicodeString* quartersArray, int32_t count
     case STANDALONE :
         switch (width) {
         case WIDE :
-            if (fStandaloneQuarters)
+            
                 delete[] fStandaloneQuarters;
             fStandaloneQuarters = newUnicodeStringArray(count);
             uprv_arrayCopy( quartersArray,fStandaloneQuarters,count);
             fStandaloneQuartersCount = count;
             break;
         case ABBREVIATED :
-            if (fStandaloneShortQuarters)
+            
                 delete[] fStandaloneShortQuarters;
             fStandaloneShortQuarters = newUnicodeStringArray(count);
             uprv_arrayCopy( quartersArray,fStandaloneShortQuarters,count);
@@ -1226,7 +1226,7 @@ void
 DateFormatSymbols::setAmPmStrings(const UnicodeString* amPmsArray, int32_t count)
 {
     // delete the old list if we own it
-    if (fAmPms) delete[] fAmPms;
+    delete[] fAmPms;
 
     // we always own the new list, which we create here (we duplicate rather
     // than adopting the list passed in)
@@ -1341,12 +1341,12 @@ DateFormatSymbols::initZoneStringsArray(void) {
         }
     }
 
-    if (tzNames) {
+    
         delete tzNames;
-    }
-    if (tzids) {
+    
+    
         delete tzids;
-    }
+    
 
     fLocaleZoneStrings = zarray;
     fZoneStringsRowCount = rows;

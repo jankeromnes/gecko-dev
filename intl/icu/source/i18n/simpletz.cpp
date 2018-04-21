@@ -1048,18 +1048,18 @@ SimpleTimeZone::clearTransitionRules(void) {
 
 void
 SimpleTimeZone::deleteTransitionRules(void) {
-    if (initialRule != NULL) {
+    
         delete initialRule;
-    }
-    if (firstTransition != NULL) {
+    
+    
         delete firstTransition;
-    }
-    if (stdRule != NULL) {
+    
+    
         delete stdRule;
-    }
-    if (dstRule != NULL) {
+    
+    
         delete dstRule;
-    }
+    
     clearTransitionRules();
  }
 

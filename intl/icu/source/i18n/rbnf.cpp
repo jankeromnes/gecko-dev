@@ -1941,9 +1941,9 @@ RuleBasedNumberFormat::adoptDecimalFormatSymbols(DecimalFormatSymbols* symbolsTo
         return; // do not allow caller to set decimalFormatSymbols to NULL
     }
 
-    if (decimalFormatSymbols != NULL) {
+    
         delete decimalFormatSymbols;
-    }
+    
 
     decimalFormatSymbols = symbolsToAdopt;
 

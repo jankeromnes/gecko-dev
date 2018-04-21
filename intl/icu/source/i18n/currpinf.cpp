@@ -190,9 +190,9 @@ void
 CurrencyPluralInfo::setPluralRules(const UnicodeString& ruleDescription,
                                    UErrorCode& status) {
     if (U_SUCCESS(status)) {
-        if (fPluralRules) {
+        
             delete fPluralRules;
-        }
+        
         fPluralRules = PluralRules::createRules(ruleDescription, status);
     }
 }
@@ -221,9 +221,9 @@ CurrencyPluralInfo::initialize(const Locale& loc, UErrorCode& status) {
     }
     delete fLocale;
     fLocale = loc.clone();
-    if (fPluralRules) {
+    
         delete fPluralRules;
-    }
+    
     fPluralRules = PluralRules::forLocale(loc, status);
     setupCurrencyPluralPattern(loc, status);
 }

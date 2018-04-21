@@ -142,9 +142,9 @@ TimeZoneGenericNameMatchInfo::TimeZoneGenericNameMatchInfo(UVector* matches)
 }
 
 TimeZoneGenericNameMatchInfo::~TimeZoneGenericNameMatchInfo() {
-    if (fMatches != NULL) {
+    
         delete fMatches;
-    }
+    
 }
 
 int32_t
@@ -206,9 +206,9 @@ GNameSearchHandler::GNameSearchHandler(uint32_t types)
 }
 
 GNameSearchHandler::~GNameSearchHandler() {
-    if (fResults != NULL) {
+    
         delete fResults;
-    }
+    
 }
 
 UBool
@@ -436,12 +436,12 @@ TZGNCore::initialize(const Locale& locale, UErrorCode& status) {
 
 void
 TZGNCore::cleanup() {
-    if (fLocaleDisplayNames != NULL) {
+    
         delete fLocaleDisplayNames;
-    }
-    if (fTimeZoneNames != NULL) {
+    
+    
         delete fTimeZoneNames;
-    }
+    
 
     uhash_close(fLocationNamesMap);
     uhash_close(fPartialLocationNamesMap);
@@ -875,9 +875,9 @@ TZGNCore::loadStrings(const UnicodeString& tzCanonicalID) {
             }
         }
     }
-    if (mzIDs != NULL) {
+    
         delete mzIDs;
-    }
+    
 }
 
 int32_t
@@ -1032,9 +1032,9 @@ TZGNCore::findLocal(const UnicodeString& text, int32_t start, uint32_t types, UE
         return gmatchInfo;
     }
 
-    if (results != NULL) {
+    
         delete results;
-    }
+    
 
     // All names are not yet loaded into the local trie.
     // Load all available names into the trie. This could be very heavy.
@@ -1051,9 +1051,9 @@ TZGNCore::findLocal(const UnicodeString& text, int32_t start, uint32_t types, UE
                     nonConstThis->loadStrings(*tzID);
                 }
             }
-            if (tzIDs != NULL) {
+            
                 delete tzIDs;
-            }
+            
 
             if (U_SUCCESS(status)) {
                 nonConstThis->fGNamesTrieFullyLoaded = TRUE;
@@ -1248,9 +1248,9 @@ TimeZoneGenericNames::createInstance(const Locale& locale, UErrorCode& status) {
                 }
             }
             if (U_FAILURE(status)) {
-                if (tzgnCore != NULL) {
+                
                     delete tzgnCore;
-                }
+                
                 if (newKey != NULL) {
                     uprv_free(newKey);
                 }

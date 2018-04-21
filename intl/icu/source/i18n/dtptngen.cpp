@@ -431,15 +431,15 @@ DateTimePatternGenerator::operator!=(const DateTimePatternGenerator& other) cons
 }
 
 DateTimePatternGenerator::~DateTimePatternGenerator() {
-    if (fAvailableFormatKeyHash!=NULL) {
+    
         delete fAvailableFormatKeyHash;
-    }
+    
 
-    if (fp != NULL) delete fp;
-    if (dtMatcher != NULL) delete dtMatcher;
-    if (distanceInfo != NULL) delete distanceInfo;
-    if (patternMap != NULL) delete patternMap;
-    if (skipMatcher != NULL) delete skipMatcher;
+    delete fp;
+    delete dtMatcher;
+    delete distanceInfo;
+    delete patternMap;
+    delete skipMatcher;
 }
 
 namespace {
@@ -2477,9 +2477,9 @@ next(NULL)
 
 PtnElem::~PtnElem() {
 
-    if (next!=NULL) {
+    
         delete next;
-    }
+    
     delete skeleton;
 }
 

@@ -111,9 +111,9 @@ ICULanguageBreakFactory::ICULanguageBreakFactory(UErrorCode &/*status*/) {
 }
 
 ICULanguageBreakFactory::~ICULanguageBreakFactory() {
-    if (fEngines != 0) {
+    
         delete fEngines;
-    }
+    
 }
 
 U_NAMESPACE_END

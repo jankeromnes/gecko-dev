@@ -861,12 +861,12 @@ class TransportTest : public MtransportTest {
   }
 
   void Reset() {
-    if (p1_) {
+    
       delete p1_;
-    }
-    if (p2_) {
+    
+    
       delete p2_;
-    }
+    
     p1_ = new TransportTestPeer(target_, "P1", test_utils_);
     p2_ = new TransportTestPeer(target_, "P2", test_utils_);
   }

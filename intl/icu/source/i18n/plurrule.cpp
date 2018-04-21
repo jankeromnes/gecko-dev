@@ -776,9 +776,9 @@ AndConstraint::AndConstraint(const AndConstraint& other) {
 
 AndConstraint::~AndConstraint() {
     delete rangeList;
-    if (next!=NULL) {
+    
         delete next;
-    }
+    
 }
 
 
@@ -852,12 +852,12 @@ OrConstraint::OrConstraint(const OrConstraint& other) {
 }
 
 OrConstraint::~OrConstraint() {
-    if (childNode!=NULL) {
+    
         delete childNode;
-    }
-    if (next!=NULL) {
+    
+    
         delete next;
-    }
+    
 }
 
 AndConstraint*

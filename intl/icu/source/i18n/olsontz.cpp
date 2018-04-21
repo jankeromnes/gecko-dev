@@ -665,18 +665,18 @@ OlsonTimeZone::clearTransitionRules(void) {
 
 void
 OlsonTimeZone::deleteTransitionRules(void) {
-    if (initialRule != NULL) {
+    
         delete initialRule;
-    }
-    if (firstTZTransition != NULL) {
+    
+    
         delete firstTZTransition;
-    }
-    if (firstFinalTZTransition != NULL) {
+    
+    
         delete firstFinalTZTransition;
-    }
-    if (finalZoneWithStartYear != NULL) {
+    
+    
         delete finalZoneWithStartYear;
-    }
+    
     if (historicRules != NULL) {
         for (int i = 0; i < historicRuleCount; i++) {
             if (historicRules[i] != NULL) {

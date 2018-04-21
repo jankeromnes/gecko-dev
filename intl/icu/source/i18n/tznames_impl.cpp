@@ -902,9 +902,9 @@ MetaZoneIDsEnumeration::count(UErrorCode& /*status*/) const {
 }
 
 MetaZoneIDsEnumeration::~MetaZoneIDsEnumeration() {
-    if (fLocalVector) {
+    
         delete fLocalVector;
-    }
+    
 }
 
 
@@ -930,9 +930,9 @@ ZNameSearchHandler::ZNameSearchHandler(uint32_t types)
 }
 
 ZNameSearchHandler::~ZNameSearchHandler() {
-    if (fResults != NULL) {
+    
         delete fResults;
-    }
+    
 }
 
 UBool
@@ -1668,9 +1668,9 @@ void TimeZoneNamesImpl::internalLoadAllDisplayNames(UErrorCode& status) {
                 }
             }
         }
-        if (tzIDs != NULL) {
+        
             delete tzIDs;
-        }
+        
     }
 }
 
@@ -1902,9 +1902,9 @@ TZDBNameSearchHandler::TZDBNameSearchHandler(uint32_t types, const char* region)
 }
 
 TZDBNameSearchHandler::~TZDBNameSearchHandler() {
-    if (fResults != NULL) {
+    
         delete fResults;
-    }
+    
 }
 
 UBool

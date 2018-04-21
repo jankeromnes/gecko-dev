@@ -424,12 +424,12 @@ Region::Region ()
 }
 
 Region::~Region () {
-        if (containedRegions) {
+        
             delete containedRegions;
-        }
-        if (preferredValues) {
+        
+        
             delete preferredValues;
-        }
+        
 }
 
 /**
