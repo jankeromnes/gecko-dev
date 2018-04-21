@@ -16,12 +16,13 @@
 
 // Recenters a non-negative literal v around a reference r
 static uint16_t recenter_nonneg(uint16_t r, uint16_t v) {
-  if (v > (r << 1))
+  if (v > (r << 1)) {
     return v;
-  else if (v >= r)
+  } else if (v >= r) {
     return ((v - r) << 1);
-  else
+  } else {
     return ((r - v) << 1) - 1;
+}
 }
 
 // Recenters a non-negative literal v in [0, n-1] around a
@@ -58,7 +59,8 @@ int aom_count_primitive_symmetric(int16_t v, unsigned int abs_bits) {
 
 // Encodes a value v in [0, n-1] quasi-uniformly
 void aom_write_primitive_quniform(aom_writer *w, uint16_t n, uint16_t v) {
-  if (n <= 1) return;
+  if (n <= 1) { return;
+}
   const int l = get_msb(n - 1) + 1;
   const int m = (1 << l) - n;
   if (v < m) {
@@ -71,7 +73,8 @@ void aom_write_primitive_quniform(aom_writer *w, uint16_t n, uint16_t v) {
 
 static void aom_wb_write_primitive_quniform(struct aom_write_bit_buffer *wb,
                                             uint16_t n, uint16_t v) {
-  if (n <= 1) return;
+  if (n <= 1) { return;
+}
   const int l = get_msb(n - 1) + 1;
   const int m = (1 << l) - n;
   if (v < m) {
@@ -83,7 +86,8 @@ static void aom_wb_write_primitive_quniform(struct aom_write_bit_buffer *wb,
 }
 
 int aom_count_primitive_quniform(uint16_t n, uint16_t v) {
-  if (n <= 1) return 0;
+  if (n <= 1) { return 0;
+}
   const int l = get_msb(n - 1) + 1;
   const int m = (1 << l) - n;
   return v < m ? l - 1 : l;
@@ -94,7 +98,8 @@ int aom_count_primitive_quniform(uint16_t n, uint16_t v) {
 // short code while the remaining n-p values are coded with a longer code.
 void aom_write_primitive_refbilevel(aom_writer *w, uint16_t n, uint16_t p,
                                     uint16_t ref, uint16_t v) {
-  if (n <= 1) return;
+  if (n <= 1) { return;
+}
   assert(p > 0 && p <= n);
   assert(ref < n);
   int lolimit = ref - p / 2;
@@ -112,14 +117,16 @@ void aom_write_primitive_refbilevel(aom_writer *w, uint16_t n, uint16_t p,
     aom_write_primitive_quniform(w, p, v);
   } else {
     aom_write_bit(w, 0);
-    if (v > hilimit) v -= p;
+    if (v > hilimit) { v -= p;
+}
     aom_write_primitive_quniform(w, n - p, v);
   }
 }
 
 int aom_count_primitive_refbilevel(uint16_t n, uint16_t p, uint16_t ref,
                                    uint16_t v) {
-  if (n <= 1) return 0;
+  if (n <= 1) { return 0;
+}
   assert(p > 0 && p <= n);
   assert(ref < n);
   int lolimit = ref - p / 2;
@@ -138,7 +145,8 @@ int aom_count_primitive_refbilevel(uint16_t n, uint16_t p, uint16_t ref,
     count += aom_count_primitive_quniform(p, v);
   } else {
     count++;
-    if (v > hilimit) v -= p;
+    if (v > hilimit) { v -= p;
+}
     count += aom_count_primitive_quniform(n - p, v);
   }
   return count;

@@ -97,7 +97,8 @@ static UDateFormatOpener gOpener = NULL;
 U_INTERNAL void U_EXPORT2
 udat_registerOpener(UDateFormatOpener opener, UErrorCode *status)
 {
-  if(U_FAILURE(*status)) return;
+  if(U_FAILURE(*status)) { return;
+}
   umtx_lock(NULL);
   if(gOpener==NULL) {
     gOpener = opener;
@@ -110,7 +111,8 @@ udat_registerOpener(UDateFormatOpener opener, UErrorCode *status)
 U_INTERNAL UDateFormatOpener U_EXPORT2
 udat_unregisterOpener(UDateFormatOpener opener, UErrorCode *status)
 {
-  if(U_FAILURE(*status)) return NULL;
+  if(U_FAILURE(*status)) { return NULL;
+}
   UDateFormatOpener oldOpener = NULL;
   umtx_lock(NULL);
   if(gOpener==NULL || gOpener!=opener) {
@@ -196,7 +198,8 @@ U_CAPI UDateFormat* U_EXPORT2
 udat_clone(const UDateFormat *fmt,
        UErrorCode *status)
 {
-    if(U_FAILURE(*status)) return 0;
+    if(U_FAILURE(*status)) { return 0;
+}
 
     Format *res = ((DateFormat*)fmt)->clone();
 
@@ -233,8 +236,9 @@ udat_format(    const    UDateFormat*    format,
 
     FieldPosition fp;
 
-    if(position != 0)
+    if(position != 0) {
         fp.setField(position->field);
+}
 
     ((DateFormat*)format)->format(dateToFormat, res, fp);
 
@@ -271,8 +275,9 @@ udat_formatCalendar(const UDateFormat*  format,
 
     FieldPosition fp;
 
-    if(position != 0)
+    if(position != 0) {
         fp.setField(position->field);
+}
 
     ((DateFormat*)format)->format(*(Calendar*)calendar, res, fp);
 
@@ -347,7 +352,8 @@ udat_parse(    const    UDateFormat*        format,
         int32_t         *parsePos,
         UErrorCode      *status)
 {
-    if(U_FAILURE(*status)) return (UDate)0;
+    if(U_FAILURE(*status)) { return (UDate)0;
+}
 
     const UnicodeString src((UBool)(textLength == -1), text, textLength);
     ParsePosition pp;
@@ -362,9 +368,9 @@ udat_parse(    const    UDateFormat*        format,
 
     res = ((DateFormat*)format)->parse(src, pp);
 
-    if(pp.getErrorIndex() == -1)
+    if(pp.getErrorIndex() == -1) {
         *parsePos = pp.getIndex();
-    else {
+    } else {
         *parsePos = pp.getErrorIndex();
         *status = U_PARSE_ERROR;
     }
@@ -380,7 +386,8 @@ udat_parseCalendar(const    UDateFormat*    format,
                             int32_t         *parsePos,
                             UErrorCode      *status)
 {
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
 
     const UnicodeString src((UBool)(textLength == -1), text, textLength);
     ParsePosition pp;
@@ -394,9 +401,9 @@ udat_parseCalendar(const    UDateFormat*    format,
 
     ((DateFormat*)format)->parse(src, *(Calendar*)calendar, pp);
 
-    if(pp.getErrorIndex() == -1)
+    if(pp.getErrorIndex() == -1) {
         *parsePos = pp.getIndex();
-    else {
+    } else {
         *parsePos = pp.getErrorIndex();
         *status = U_PARSE_ERROR;
     }
@@ -420,7 +427,8 @@ udat_getBooleanAttribute(const UDateFormat* fmt,
                          UDateFormatBooleanAttribute attr, 
                          UErrorCode* status)
 {
-    if(U_FAILURE(*status)) return FALSE;
+    if(U_FAILURE(*status)) { return FALSE;
+}
     return ((DateFormat*)fmt)->getBooleanAttribute(attr, *status);
     //return FALSE;
 }
@@ -431,7 +439,8 @@ udat_setBooleanAttribute(UDateFormat *fmt,
                          UBool newValue, 
                          UErrorCode* status)
 {
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
     ((DateFormat*)fmt)->setBooleanAttribute(attr, newValue, *status);
 }
 
@@ -453,7 +462,8 @@ udat_getNumberFormatForField(const UDateFormat* fmt, UChar field)
 {
     UErrorCode status = U_ZERO_ERROR;
     verifyIsSimpleDateFormat(fmt, &status);
-    if (U_FAILURE(status)) return (const UNumberFormat*) ((DateFormat*)fmt)->getNumberFormat();
+    if (U_FAILURE(status)) { return (const UNumberFormat*) ((DateFormat*)fmt)->getNumberFormat();
+}
     return (const UNumberFormat*) ((SimpleDateFormat*)fmt)->getNumberFormatForField(field);
 }
 
@@ -470,7 +480,8 @@ udat_adoptNumberFormatForFields(           UDateFormat*    fmt,
                                            UErrorCode*     status)
 {
     verifyIsSimpleDateFormat(fmt, status);
-    if (U_FAILURE(*status)) return;
+    if (U_FAILURE(*status)) { return;
+}
     
     if (fields!=NULL) {
         UnicodeString overrideFields(fields);
@@ -509,7 +520,8 @@ udat_get2DigitYearStart(    const   UDateFormat     *fmt,
                         UErrorCode      *status)
 {
     verifyIsSimpleDateFormat(fmt, status);
-    if(U_FAILURE(*status)) return (UDate)0;
+    if(U_FAILURE(*status)) { return (UDate)0;
+}
     return ((SimpleDateFormat*)fmt)->get2DigitYearStart(*status);
 }
 
@@ -519,7 +531,8 @@ udat_set2DigitYearStart(    UDateFormat     *fmt,
                         UErrorCode      *status)
 {
     verifyIsSimpleDateFormat(fmt, status);
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
     ((SimpleDateFormat*)fmt)->set2DigitYearStart(d, *status);
 }
 
@@ -549,10 +562,11 @@ udat_toPattern(    const   UDateFormat     *fmt,
     const SimpleDateFormat *sdtfmt=dynamic_cast<const SimpleDateFormat *>(df);
     const RelativeDateFormat *reldtfmt;
     if (sdtfmt!=NULL) {
-        if(localized)
+        if(localized) {
             sdtfmt->toLocalizedPattern(res, *status);
-        else
+        } else {
             sdtfmt->toPattern(res);
+}
     } else if (!localized && (reldtfmt=dynamic_cast<const RelativeDateFormat *>(df))!=NULL) {
         reldtfmt->toPattern(res, *status);
     } else {
@@ -579,10 +593,11 @@ udat_applyPattern(  UDateFormat     *format,
         return;
     }
     
-    if(localized)
+    if(localized) {
         ((SimpleDateFormat*)format)->applyLocalizedPattern(pat, status);
-    else
+    } else {
         ((SimpleDateFormat*)format)->applyPattern(pat);
+}
 }
 
 U_CAPI int32_t U_EXPORT2
@@ -1093,7 +1108,8 @@ udat_setSymbols(    UDateFormat             *format,
             UErrorCode              *status)
 {
     verifyIsSimpleDateFormat(format, status);
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
 
     DateFormatSymbols *syms = (DateFormatSymbols *)((SimpleDateFormat *)format)->getDateFormatSymbols();
 
@@ -1307,7 +1323,8 @@ udat_applyPatternRelative(UDateFormat *format,
                           UErrorCode  *status)
 {
     verifyIsRelativeDateFormat(format, status);
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
     const UnicodeString datePat((UBool)(datePatternLength == -1), datePattern, datePatternLength);
     const UnicodeString timePat((UBool)(timePatternLength == -1), timePattern, timePatternLength);
     ((RelativeDateFormat*)format)->applyPatterns(datePat, timePat, *status);

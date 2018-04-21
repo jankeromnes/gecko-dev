@@ -102,28 +102,33 @@ static INLINE void fwd_txfm2d_c(const int16_t *input, int32_t *output,
   // Columns
   for (c = 0; c < txfm_size_col; ++c) {
     if (cfg->ud_flip == 0) {
-      for (r = 0; r < txfm_size_row; ++r) temp_in[r] = input[r * stride + c];
+      for (r = 0; r < txfm_size_row; ++r) { temp_in[r] = input[r * stride + c];
+}
     } else {
-      for (r = 0; r < txfm_size_row; ++r)
+      for (r = 0; r < txfm_size_row; ++r) {
         // flip upside down
         temp_in[r] = input[(txfm_size_row - r - 1) * stride + c];
+}
     }
     round_shift_array(temp_in, txfm_size_row, -shift[0]);
     // Multiply everything by Sqrt2 on the larger dimension if the
     // transform is rectangular
     if (txfm_size_col > txfm_size_row) {
-      for (r = 0; r < txfm_size_row; ++r)
+      for (r = 0; r < txfm_size_row; ++r) {
         temp_in[r] = (int32_t)fdct_round_shift(temp_in[r] * Sqrt2);
+}
     }
     txfm_func_col(temp_in, temp_out, cos_bit_col, stage_range_col);
     round_shift_array(temp_out, txfm_size_row, -shift[1]);
     if (cfg->lr_flip == 0) {
-      for (r = 0; r < txfm_size_row; ++r)
+      for (r = 0; r < txfm_size_row; ++r) {
         buf[r * txfm_size_col + c] = temp_out[r];
+}
     } else {
-      for (r = 0; r < txfm_size_row; ++r)
+      for (r = 0; r < txfm_size_row; ++r) {
         // flip from left to right
         buf[r * txfm_size_col + (txfm_size_col - c - 1)] = temp_out[r];
+}
     }
   }
 
@@ -132,9 +137,10 @@ static INLINE void fwd_txfm2d_c(const int16_t *input, int32_t *output,
     // Multiply everything by Sqrt2 on the larger dimension if the
     // transform is rectangular
     if (txfm_size_row > txfm_size_col) {
-      for (c = 0; c < txfm_size_col; ++c)
+      for (c = 0; c < txfm_size_col; ++c) {
         buf[r * txfm_size_col + c] =
             (int32_t)fdct_round_shift(buf[r * txfm_size_col + c] * Sqrt2);
+}
     }
     txfm_func_row(buf + r * txfm_size_col, output + r * txfm_size_col,
                   cos_bit_row, stage_range_row);

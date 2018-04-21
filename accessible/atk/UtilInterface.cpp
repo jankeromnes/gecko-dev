@@ -296,14 +296,16 @@ static AtkObject*
 mai_util_get_root()
 {
   ApplicationAccessible* app = ApplicationAcc();
-  if (app)
+  if (app) {
     return app->GetAtkObject();
+}
 
   // We've shutdown, try to use gail instead
   // (to avoid assert in spi_atk_tidy_windows())
   // XXX tbsaunde then why didn't we replace the gail atk_util impl?
-  if (gail_get_root)
+  if (gail_get_root) {
     return gail_get_root();
+}
 
   return nullptr;
 }
@@ -331,8 +333,9 @@ window_added (AtkObject *atk_obj,
               guint     index,
               AtkObject *child)
 {
-  if (!IS_MAI_OBJECT(child))
+  if (!IS_MAI_OBJECT(child)) {
       return;
+}
 
   static guint id =  g_signal_lookup ("create", MAI_TYPE_ATK_OBJECT);
   g_signal_emit (child, id, 0);
@@ -343,8 +346,9 @@ window_removed (AtkObject *atk_obj,
                 guint     index,
                 AtkObject *child)
 {
-  if (!IS_MAI_OBJECT(child))
+  if (!IS_MAI_OBJECT(child)) {
       return;
+}
 
   static guint id =  g_signal_lookup ("destroy", MAI_TYPE_ATK_OBJECT);
   g_signal_emit (child, id, 0);

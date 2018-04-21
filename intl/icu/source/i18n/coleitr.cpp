@@ -300,8 +300,9 @@ void CollationElementIterator::setText(const UnicodeString& source,
 void CollationElementIterator::setText(CharacterIterator& source, 
                                        UErrorCode& status)
 {
-    if (U_FAILURE(status)) 
+    if (U_FAILURE(status)) { 
         return;
+}
 
     source.getText(string_);
     setText(string_, status);

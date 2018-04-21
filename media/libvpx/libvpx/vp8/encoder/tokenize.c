@@ -346,10 +346,12 @@ static int mb_is_skippable(MACROBLOCKD *x, int has_y2_block) {
   int i = 0;
 
   if (has_y2_block) {
-    for (i = 0; i < 16; ++i) skip &= (x->eobs[i] < 2);
+    for (i = 0; i < 16; ++i) { skip &= (x->eobs[i] < 2);
+}
   }
 
-  for (; i < 24 + has_y2_block; ++i) skip &= (!x->eobs[i]);
+  for (; i < 24 + has_y2_block; ++i) { skip &= (!x->eobs[i]);
+}
 
   return skip;
 }

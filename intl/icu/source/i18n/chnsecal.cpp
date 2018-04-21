@@ -347,8 +347,9 @@ int32_t ChineseCalendar::handleComputeMonthStart(int32_t eyear, int32_t month, U
 
     UErrorCode status = U_ZERO_ERROR;
     nonConstThis->computeGregorianFields(julianDay, status);
-    if (U_FAILURE(status))
+    if (U_FAILURE(status)) {
         return 0;
+}
     
     // This will modify the MONTH and IS_LEAP_MONTH fields (only)
     nonConstThis->computeChineseFields(newMoon, getGregorianYear(),
@@ -376,9 +377,11 @@ void ChineseCalendar::add(UCalendarDateFields field, int32_t amount, UErrorCode&
     case UCAL_MONTH:
         if (amount != 0) {
             int32_t dom = get(UCAL_DAY_OF_MONTH, status);
-            if (U_FAILURE(status)) break;
+            if (U_FAILURE(status)) { break;
+}
             int32_t day = get(UCAL_JULIAN_DAY, status) - kEpochStartAsJulianDay; // Get local day
-            if (U_FAILURE(status)) break;
+            if (U_FAILURE(status)) { break;
+}
             int32_t moon = day - dom + 1; // New moon 
             offsetMonth(moon, dom, amount);
         }
@@ -406,9 +409,11 @@ void ChineseCalendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode
     case UCAL_MONTH:
         if (amount != 0) {
             int32_t dom = get(UCAL_DAY_OF_MONTH, status);
-            if (U_FAILURE(status)) break;
+            if (U_FAILURE(status)) { break;
+}
             int32_t day = get(UCAL_JULIAN_DAY, status) - kEpochStartAsJulianDay; // Get local day
-            if (U_FAILURE(status)) break;
+            if (U_FAILURE(status)) { break;
+}
             int32_t moon = day - dom + 1; // New moon (start of this month)
 
             // Note throughout the following:  Months 12 and 1 are never
@@ -418,7 +423,8 @@ void ChineseCalendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode
             // value from 0..11 in a non-leap year, and from 0..12 in a
             // leap year.
             int32_t m = get(UCAL_MONTH, status); // 0-based month
-            if (U_FAILURE(status)) break;
+            if (U_FAILURE(status)) { break;
+}
             if (isLeapYear) { // (member variable)
                 if (get(UCAL_IS_LEAP_MONTH, status) == 1) {
                     ++m;
@@ -437,7 +443,8 @@ void ChineseCalendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode
                         ++m;
                     }
                 }
-                if (U_FAILURE(status)) break;
+                if (U_FAILURE(status)) { break;
+}
             }
 
             // Now do the standard roll computation on m, with the
@@ -815,9 +822,11 @@ void ChineseCalendar::offsetMonth(int32_t newMoon, int32_t dom, int32_t delta) {
         // this method, in ChineseCalendar, or in
         // Calendar.getActualMaximum().  I suspect the last.
         complete(status);
-        if (U_FAILURE(status)) return;
+        if (U_FAILURE(status)) { return;
+}
         if (getActualMaximum(UCAL_DAY_OF_MONTH, status) >= dom) {
-            if (U_FAILURE(status)) return;
+            if (U_FAILURE(status)) { return;
+}
             set(UCAL_JULIAN_DAY, jd);
         }
     } else {
@@ -830,8 +839,9 @@ UBool
 ChineseCalendar::inDaylightTime(UErrorCode& status) const
 {
     // copied from GregorianCalendar
-    if (U_FAILURE(status) || !getTimeZone().useDaylightTime()) 
+    if (U_FAILURE(status) || !getTimeZone().useDaylightTime()) { 
         return FALSE;
+}
 
     // Force an update of the state of the Calendar.
     ((ChineseCalendar*)this)->complete(status); // cast away const

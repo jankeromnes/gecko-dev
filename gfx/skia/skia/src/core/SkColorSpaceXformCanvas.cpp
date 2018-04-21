@@ -335,8 +335,9 @@ private:
             // before applying the transform. This way, we can get cache hits
             // in the texture cache and the transform gets applied on the GPU.
             sk_sp<SkImage> textureImage = image->makeTextureImage(gr, nullptr);
-            if (textureImage)
+            if (textureImage) {
                 return fXformer->apply(textureImage.get());
+}
         }
         // TODO: Extract a sub image corresponding to the src rect in order
         // to xform only the useful part of the image. Sub image could be reduced

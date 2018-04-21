@@ -128,8 +128,9 @@ _cairo_pdf_operators_flush (cairo_pdf_operators_t	 *pdf_operators)
 {
     cairo_status_t status = CAIRO_STATUS_SUCCESS;
 
-    if (pdf_operators->in_text_object)
+    if (pdf_operators->in_text_object) {
 	status = _cairo_pdf_operators_end_text (pdf_operators);
+}
 
     return status;
 }
@@ -200,14 +201,16 @@ _count_hexstring_up_to (const unsigned char *s, int length, int columns)
     int word = 0;
 
     while (length--) {
-	if (*s++ != '>')
+	if (*s++ != '>') {
 	    word++;
-	else
+	} else {
 	    return word;
+}
 
 	columns--;
-	if (columns < 0 && word > 1)
+	if (columns < 0 && word > 1) {
 	    return word;
+}
     }
 
     return word;
@@ -250,8 +253,9 @@ _word_wrap_stream_write (cairo_output_stream_t  *base,
 	    if (newline) {
 		stream->column = 0;
 	    }
-	    else
+	    else {
 		stream->column++;
+}
 	    stream->last_write_was_space = TRUE;
 	} else {
 	    if (stream->in_hexstring) {
@@ -275,8 +279,9 @@ _word_wrap_stream_write (cairo_output_stream_t  *base,
 	    length -= word;
 	    stream->column += word;
 	    stream->last_write_was_space = FALSE;
-	    if (stream->in_hexstring)
+	    if (stream->in_hexstring) {
 		stream->empty_hexstring = FALSE;
+}
 	}
     }
 
@@ -296,8 +301,9 @@ _word_wrap_stream_create (cairo_output_stream_t *output, int max_column)
 {
     word_wrap_stream_t *stream;
 
-    if (output->status)
+    if (output->status) {
 	return _cairo_output_stream_create_in_error (output->status);
+}
 
     stream = malloc (sizeof (word_wrap_stream_t));
     if (unlikely (stream == NULL)) {
@@ -448,8 +454,9 @@ _cairo_pdf_operators_emit_path (cairo_pdf_operators_t	*pdf_operators,
 
     word_wrap = _word_wrap_stream_create (pdf_operators->stream, 72);
     status = _cairo_output_stream_get_status (word_wrap);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return _cairo_output_stream_destroy (word_wrap);
+}
 
     info.output = word_wrap;
     info.path_transform = path_transform;
@@ -467,8 +474,9 @@ _cairo_pdf_operators_emit_path (cairo_pdf_operators_t	*pdf_operators,
     }
 
     status2 = _cairo_output_stream_destroy (word_wrap);
-    if (status == CAIRO_STATUS_SUCCESS)
+    if (status == CAIRO_STATUS_SUCCESS) {
 	status = status2;
+}
 
     return status;
 }
@@ -483,8 +491,9 @@ _cairo_pdf_operators_clip (cairo_pdf_operators_t	*pdf_operators,
 
     if (pdf_operators->in_text_object) {
 	status = _cairo_pdf_operators_end_text (pdf_operators);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
     }
 
     if (! path->has_current_point) {
@@ -495,8 +504,9 @@ _cairo_pdf_operators_clip (cairo_pdf_operators_t	*pdf_operators,
 						 path,
 						 &pdf_operators->cairo_to_pdf,
 						 CAIRO_LINE_CAP_ROUND);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
     }
 
     switch (fill_rule) {
@@ -576,8 +586,9 @@ _cairo_pdf_operators_emit_stroke_style (cairo_pdf_operators_t		*pdf_operators,
 	 */
 	if (num_dashes % 2) {
 	    dash = _cairo_malloc_abc (num_dashes, 2, sizeof (double));
-	    if (unlikely (dash == NULL))
+	    if (unlikely (dash == NULL)) {
 		return _cairo_error (CAIRO_STATUS_NO_MEMORY);
+}
 
 	    memcpy (dash, style->dash, num_dashes * sizeof (double));
 	    memcpy (dash + num_dashes, style->dash, num_dashes * sizeof (double));
@@ -592,8 +603,9 @@ _cairo_pdf_operators_emit_stroke_style (cairo_pdf_operators_t		*pdf_operators,
 		 */
 		if (dash == style->dash) {
 		    dash = _cairo_malloc_ab (num_dashes, sizeof (double));
-		    if (unlikely (dash == NULL))
+		    if (unlikely (dash == NULL)) {
 			return _cairo_error (CAIRO_STATUS_NO_MEMORY);
+}
 		    memcpy (dash, style->dash, num_dashes * sizeof (double));
 		}
 
@@ -626,8 +638,9 @@ _cairo_pdf_operators_emit_stroke_style (cairo_pdf_operators_t		*pdf_operators,
 		/* If we might have just rotated, it's possible that
 		 * we rotated a 0.0 value to the front of the list.
 		 * Set i to -2 so it will get incremented to 0. */
-		if (i == 2)
+		if (i == 2) {
 		    i = -2;
+}
 	    }
 	}
     }
@@ -657,8 +670,9 @@ _cairo_pdf_operators_emit_stroke_style (cairo_pdf_operators_t		*pdf_operators,
 	int d;
 
 	_cairo_output_stream_printf (pdf_operators->stream, "[");
-	for (d = 0; d < num_dashes; d++)
+	for (d = 0; d < num_dashes; d++) {
 	    _cairo_output_stream_printf (pdf_operators->stream, " %f", dash[d] * scale);
+}
 	_cairo_output_stream_printf (pdf_operators->stream, "] %f d\n",
 				     dash_offset * scale);
 	pdf_operators->has_dashes = TRUE;
@@ -666,8 +680,9 @@ _cairo_pdf_operators_emit_stroke_style (cairo_pdf_operators_t		*pdf_operators,
 	_cairo_output_stream_printf (pdf_operators->stream, "[] 0.0 d\n");
 	pdf_operators->has_dashes = FALSE;
     }
-    if (dash != style->dash)
+    if (dash != style->dash) {
         free (dash);
+}
 
     if (!pdf_operators->has_line_style || pdf_operators->miter_limit != style->miter_limit) {
 	_cairo_output_stream_printf (pdf_operators->stream,
@@ -695,12 +710,15 @@ _cairo_matrix_factor_out_scale (cairo_matrix_t *m, double *scale)
     double s;
 
     s = fabs (m->xx);
-    if (fabs (m->xy) > s)
+    if (fabs (m->xy) > s) {
 	s = fabs (m->xy);
-    if (fabs (m->yx) > s)
+}
+    if (fabs (m->yx) > s) {
 	s = fabs (m->yx);
-    if (fabs (m->yy) > s)
+}
+    if (fabs (m->yy) > s) {
 	s = fabs (m->yy);
+}
     *scale = s;
     s = 1.0/s;
     cairo_matrix_scale (m, s, s);
@@ -721,8 +739,9 @@ _cairo_pdf_operators_emit_stroke (cairo_pdf_operators_t		*pdf_operators,
 
     if (pdf_operators->in_text_object) {
 	status = _cairo_pdf_operators_end_text (pdf_operators);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
     }
 
     /* Optimize away the stroke ctm when it does not affect the
@@ -760,17 +779,20 @@ _cairo_pdf_operators_emit_stroke (cairo_pdf_operators_t		*pdf_operators,
 	_cairo_matrix_factor_out_scale (&m, &scale);
 	path_transform = m;
 	status = cairo_matrix_invert (&path_transform);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	cairo_matrix_multiply (&m, &m, &pdf_operators->cairo_to_pdf);
     }
 
     status = _cairo_pdf_operators_emit_stroke_style (pdf_operators, style, scale);
-    if (status == CAIRO_INT_STATUS_NOTHING_TO_DO)
+    if (status == CAIRO_INT_STATUS_NOTHING_TO_DO) {
 	return CAIRO_STATUS_SUCCESS;
-    if (unlikely (status))
+}
+    if (unlikely (status)) {
 	return status;
+}
 
     if (has_ctm) {
 	_cairo_output_stream_printf (pdf_operators->stream,
@@ -785,12 +807,14 @@ _cairo_pdf_operators_emit_stroke (cairo_pdf_operators_t		*pdf_operators,
 					     path,
 					     &path_transform,
 					     style->line_cap);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     _cairo_output_stream_printf (pdf_operators->stream, "%s", pdf_operator);
-    if (has_ctm)
+    if (has_ctm) {
 	_cairo_output_stream_printf (pdf_operators->stream, " Q");
+}
 
     _cairo_output_stream_printf (pdf_operators->stream, "\n");
 
@@ -822,16 +846,18 @@ _cairo_pdf_operators_fill (cairo_pdf_operators_t	*pdf_operators,
 
     if (pdf_operators->in_text_object) {
 	status = _cairo_pdf_operators_end_text (pdf_operators);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
     }
 
     status = _cairo_pdf_operators_emit_path (pdf_operators,
 					     path,
 					     &pdf_operators->cairo_to_pdf,
 					     CAIRO_LINE_CAP_ROUND);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     switch (fill_rule) {
     default:
@@ -966,19 +992,22 @@ _cairo_pdf_operators_flush_glyphs (cairo_pdf_operators_t    *pdf_operators)
     int i;
     double x;
 
-    if (pdf_operators->num_glyphs == 0)
+    if (pdf_operators->num_glyphs == 0) {
 	return CAIRO_STATUS_SUCCESS;
+}
 
     word_wrap_stream = _word_wrap_stream_create (pdf_operators->stream, 72);
     status = _cairo_output_stream_get_status (word_wrap_stream);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return _cairo_output_stream_destroy (word_wrap_stream);
+}
 
     /* Check if glyph advance used to position every glyph */
     x = pdf_operators->cur_x;
     for (i = 0; i < pdf_operators->num_glyphs; i++) {
-	if (fabs(pdf_operators->glyphs[i].x_position - x) > GLYPH_POSITION_TOLERANCE)
+	if (fabs(pdf_operators->glyphs[i].x_position - x) > GLYPH_POSITION_TOLERANCE) {
 	    break;
+}
 	x += pdf_operators->glyphs[i].x_advance;
     }
     if (i == pdf_operators->num_glyphs) {
@@ -992,8 +1021,9 @@ _cairo_pdf_operators_flush_glyphs (cairo_pdf_operators_t    *pdf_operators)
     pdf_operators->num_glyphs = 0;
     pdf_operators->glyph_buf_x_pos = pdf_operators->cur_x;
     status2 = _cairo_output_stream_destroy (word_wrap_stream);
-    if (status == CAIRO_STATUS_SUCCESS)
+    if (status == CAIRO_STATUS_SUCCESS) {
 	status = status2;
+}
 
     return status;
 }
@@ -1007,16 +1037,18 @@ _cairo_pdf_operators_add_glyph (cairo_pdf_operators_t             *pdf_operators
 
     x = glyph->x_advance;
     y = glyph->y_advance;
-    if (glyph->is_scaled)
+    if (glyph->is_scaled) {
 	cairo_matrix_transform_distance (&pdf_operators->font_matrix_inverse, &x, &y);
+}
 
     pdf_operators->glyphs[pdf_operators->num_glyphs].x_position = x_position;
     pdf_operators->glyphs[pdf_operators->num_glyphs].glyph_index = glyph->subset_glyph_index;
     pdf_operators->glyphs[pdf_operators->num_glyphs].x_advance = x;
     pdf_operators->glyph_buf_x_pos += x;
     pdf_operators->num_glyphs++;
-    if (pdf_operators->num_glyphs == PDF_GLYPH_BUFFER_SIZE)
+    if (pdf_operators->num_glyphs == PDF_GLYPH_BUFFER_SIZE) {
 	return _cairo_pdf_operators_flush_glyphs (pdf_operators);
+}
 
     return CAIRO_STATUS_SUCCESS;
 }
@@ -1032,8 +1064,9 @@ _cairo_pdf_operators_set_text_matrix (cairo_pdf_operators_t  *pdf_operators,
     /* We require the matrix to be invertable. */
     inverse = *matrix;
     status = cairo_matrix_invert (&inverse);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     pdf_operators->text_matrix = *matrix;
     pdf_operators->cur_x = 0;
@@ -1084,10 +1117,12 @@ _cairo_pdf_operators_set_text_position (cairo_pdf_operators_t  *pdf_operators,
     pdf_operators->text_matrix.x0 = x;
     pdf_operators->text_matrix.y0 = y;
     cairo_matrix_multiply (&translate, &pdf_operators->text_matrix, &inverse);
-    if (fabs(translate.x0) < TEXT_MATRIX_TOLERANCE)
+    if (fabs(translate.x0) < TEXT_MATRIX_TOLERANCE) {
 	translate.x0 = 0.0;
-    if (fabs(translate.y0) < TEXT_MATRIX_TOLERANCE)
+}
+    if (fabs(translate.y0) < TEXT_MATRIX_TOLERANCE) {
 	translate.y0 = 0.0;
+}
     _cairo_output_stream_printf (pdf_operators->stream,
 				 "%f %f Td\n",
 				 translate.x0,
@@ -1123,16 +1158,18 @@ _cairo_pdf_operators_set_font_subset (cairo_pdf_operators_t             *pdf_ope
 	status = pdf_operators->use_font_subset (subset_glyph->font_id,
 						 subset_glyph->subset_id,
 						 pdf_operators->use_font_subset_closure);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
     }
     pdf_operators->font_id = subset_glyph->font_id;
     pdf_operators->subset_id = subset_glyph->subset_id;
 
-    if (subset_glyph->is_composite)
+    if (subset_glyph->is_composite) {
 	pdf_operators->hex_width = 4;
-    else
+    } else {
 	pdf_operators->hex_width = 2;
+}
 
     return CAIRO_STATUS_SUCCESS;
 }
@@ -1155,8 +1192,9 @@ _cairo_pdf_operators_end_text (cairo_pdf_operators_t    *pdf_operators)
     cairo_status_t status;
 
     status = _cairo_pdf_operators_flush_glyphs (pdf_operators);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     _cairo_output_stream_printf (pdf_operators->stream, "ET\n");
 
@@ -1189,8 +1227,9 @@ _cairo_pdf_operators_begin_actualtext (cairo_pdf_operators_t *pdf_operators,
     _cairo_output_stream_printf (pdf_operators->stream, "/Span << /ActualText <feff");
     if (utf8_len) {
 	status = _cairo_utf8_to_utf16 (utf8, utf8_len, &utf16, &utf16_len);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	for (i = 0; i < utf16_len; i++) {
 	    _cairo_output_stream_printf (pdf_operators->stream,
@@ -1224,12 +1263,14 @@ _cairo_pdf_operators_emit_glyph (cairo_pdf_operators_t             *pdf_operator
 	pdf_operators->subset_id != subset_glyph->subset_id)
     {
 	status = _cairo_pdf_operators_flush_glyphs (pdf_operators);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	status = _cairo_pdf_operators_set_font_subset (pdf_operators, subset_glyph);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	pdf_operators->is_new_text_object = FALSE;
     }
@@ -1253,15 +1294,17 @@ _cairo_pdf_operators_emit_glyph (cairo_pdf_operators_t             *pdf_operator
 	fabs(y - pdf_operators->cur_y) > GLYPH_POSITION_TOLERANCE)
     {
 	status = _cairo_pdf_operators_flush_glyphs (pdf_operators);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	x = glyph->x;
 	y = glyph->y;
 	cairo_matrix_transform_point (&pdf_operators->cairo_to_pdf, &x, &y);
 	status = _cairo_pdf_operators_set_text_position (pdf_operators, x, y);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	x = 0.0;
 	y = 0.0;
@@ -1308,15 +1351,17 @@ _cairo_pdf_operators_emit_cluster (cairo_pdf_operators_t      *pdf_operators,
 						       utf8,
 						       utf8_len,
 						       &subset_glyph);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	if (subset_glyph.utf8_is_mapped || utf8_len < 0) {
 	    status = _cairo_pdf_operators_emit_glyph (pdf_operators,
 						      glyphs,
 						      &subset_glyph);
-	    if (unlikely (status))
+	    if (unlikely (status)) {
 		return status;
+}
 
 	    return CAIRO_STATUS_SUCCESS;
 	}
@@ -1325,12 +1370,14 @@ _cairo_pdf_operators_emit_cluster (cairo_pdf_operators_t      *pdf_operators,
     /* Fallback to using ActualText to map zero or more glyphs to a
      * unicode string. */
     status = _cairo_pdf_operators_flush_glyphs (pdf_operators);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     status = _cairo_pdf_operators_begin_actualtext (pdf_operators, utf8, utf8_len);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     cur_glyph = glyphs;
     /* XXX
@@ -1341,23 +1388,27 @@ _cairo_pdf_operators_emit_cluster (cairo_pdf_operators_t      *pdf_operators,
 						       cur_glyph->index,
 						       NULL, -1,
 						       &subset_glyph);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	status = _cairo_pdf_operators_emit_glyph (pdf_operators,
 						  cur_glyph,
 						  &subset_glyph);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
-	if ((cluster_flags & CAIRO_TEXT_CLUSTER_FLAG_BACKWARD))
+	if ((cluster_flags & CAIRO_TEXT_CLUSTER_FLAG_BACKWARD)) {
 	    cur_glyph--;
-	else
+	} else {
 	    cur_glyph++;
+}
     }
     status = _cairo_pdf_operators_flush_glyphs (pdf_operators);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     status = _cairo_pdf_operators_end_actualtext (pdf_operators);
 
@@ -1384,15 +1435,17 @@ _cairo_pdf_operators_show_text_glyphs (cairo_pdf_operators_t	  *pdf_operators,
 
     pdf_operators->font_matrix_inverse = scaled_font->font_matrix;
     status = cairo_matrix_invert (&pdf_operators->font_matrix_inverse);
-    if (status == CAIRO_STATUS_INVALID_MATRIX)
+    if (status == CAIRO_STATUS_INVALID_MATRIX) {
 	return CAIRO_STATUS_SUCCESS;
+}
     assert (status == CAIRO_STATUS_SUCCESS);
 
     pdf_operators->is_new_text_object = FALSE;
     if (pdf_operators->in_text_object == FALSE) {
 	status = _cairo_pdf_operators_begin_text (pdf_operators);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	/* Force Tm and Tf to be emitted when starting a new text
 	 * object.*/
@@ -1412,8 +1465,9 @@ _cairo_pdf_operators_show_text_glyphs (cairo_pdf_operators_t	  *pdf_operators,
 	! _cairo_matrix_scale_equal (&pdf_operators->text_matrix, &text_matrix))
     {
 	status = _cairo_pdf_operators_flush_glyphs (pdf_operators);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
 
 	x = glyphs[0].x;
 	y = glyphs[0].y;
@@ -1421,21 +1475,25 @@ _cairo_pdf_operators_show_text_glyphs (cairo_pdf_operators_t	  *pdf_operators,
 	text_matrix.x0 = x;
 	text_matrix.y0 = y;
 	status = _cairo_pdf_operators_set_text_matrix (pdf_operators, &text_matrix);
-	if (status == CAIRO_STATUS_INVALID_MATRIX)
+	if (status == CAIRO_STATUS_INVALID_MATRIX) {
 	    return CAIRO_STATUS_SUCCESS;
-	if (unlikely (status))
+}
+	if (unlikely (status)) {
 	    return status;
+}
     }
 
     if (num_clusters > 0) {
 	cur_text = utf8;
-	if ((cluster_flags & CAIRO_TEXT_CLUSTER_FLAG_BACKWARD))
+	if ((cluster_flags & CAIRO_TEXT_CLUSTER_FLAG_BACKWARD)) {
 	    cur_glyph = glyphs + num_glyphs;
-	else
+	} else {
 	    cur_glyph = glyphs;
+}
 	for (i = 0; i < num_clusters; i++) {
-	    if ((cluster_flags & CAIRO_TEXT_CLUSTER_FLAG_BACKWARD))
+	    if ((cluster_flags & CAIRO_TEXT_CLUSTER_FLAG_BACKWARD)) {
 		cur_glyph -= clusters[i].num_glyphs;
+}
 	    status = _cairo_pdf_operators_emit_cluster (pdf_operators,
 							cur_text,
 							clusters[i].num_bytes,
@@ -1443,12 +1501,14 @@ _cairo_pdf_operators_show_text_glyphs (cairo_pdf_operators_t	  *pdf_operators,
 							clusters[i].num_glyphs,
 							cluster_flags,
 							scaled_font);
-	    if (unlikely (status))
+	    if (unlikely (status)) {
 		return status;
+}
 
 	    cur_text += clusters[i].num_bytes;
-	    if (!(cluster_flags & CAIRO_TEXT_CLUSTER_FLAG_BACKWARD))
+	    if (!(cluster_flags & CAIRO_TEXT_CLUSTER_FLAG_BACKWARD)) {
 		cur_glyph += clusters[i].num_glyphs;
+}
 	}
     } else {
 	for (i = 0; i < num_glyphs; i++) {
@@ -1459,8 +1519,9 @@ _cairo_pdf_operators_show_text_glyphs (cairo_pdf_operators_t	  *pdf_operators,
 							1,
 							FALSE,
 							scaled_font);
-	    if (unlikely (status))
+	    if (unlikely (status)) {
 		return status;
+}
 	}
     }
 

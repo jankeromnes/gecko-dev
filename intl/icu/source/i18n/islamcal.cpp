@@ -195,10 +195,11 @@ static const int UMALQURA_MONTHLENGTH[] = {
 
 int32_t getUmalqura_MonthLength(int32_t y, int32_t m) {
     int32_t mask = (int32_t) (0x01 << (11 - m));    // set mask for bit corresponding to month
-    if((UMALQURA_MONTHLENGTH[y] & mask) == 0 )
+    if((UMALQURA_MONTHLENGTH[y] & mask) == 0 ) {
         return 29;
-    else
+    } else {
         return 30;
+}
 
 }
 
@@ -697,8 +698,9 @@ UBool
 IslamicCalendar::inDaylightTime(UErrorCode& status) const
 {
     // copied from GregorianCalendar
-    if (U_FAILURE(status) || !getTimeZone().useDaylightTime()) 
+    if (U_FAILURE(status) || !getTimeZone().useDaylightTime()) { 
         return FALSE;
+}
 
     // Force an update of the state of the Calendar.
     ((IslamicCalendar*)this)->complete(status); // cast away const

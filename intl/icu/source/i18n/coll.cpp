@@ -431,8 +431,9 @@ Collator* U_EXPORT2 Collator::createInstance(UErrorCode& success)
 Collator* U_EXPORT2 Collator::createInstance(const Locale& desiredLocale,
                                    UErrorCode& status)
 {
-    if (U_FAILURE(status)) 
+    if (U_FAILURE(status)) { 
         return 0;
+}
     if (desiredLocale.isBogus()) {
         // Locale constructed from malformed locale ID or language tag.
         status = U_ILLEGAL_ARGUMENT_ERROR;

@@ -67,7 +67,8 @@ PR_IMPLEMENT( PRSharedMemory * )
         PRIntn      mode
 )
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
     return( _PR_MD_OPEN_SHARED_MEMORY( name, size, flags, mode ));
 } /* end PR_OpenSharedMemory() */
 
@@ -118,7 +119,8 @@ PR_EXTERN( PRStatus )
         const char *name
 )
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
     return(_PR_MD_DELETE_SHARED_MEMORY( name ));
 } /* end PR_DestroySharedMemory() */
 /* end prshm.c */

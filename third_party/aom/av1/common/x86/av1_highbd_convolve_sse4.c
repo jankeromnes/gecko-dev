@@ -57,10 +57,11 @@ static void init_simd_filter(const int16_t *filter_ptr, int taps,
       for (j = 0; j < 4; ++j) {
         int r = i / 2;
         int c = j * 2 + (i % 2);
-        if (i - offset >= 0 && i - offset < taps)
+        if (i - offset >= 0 && i - offset < taps) {
           simd_filter[shift - 1][r][c] = filter_row[i - offset];
-        else
+        } else {
           simd_filter[shift - 1][r][c] = 0;
+}
       }
     }
   }
@@ -339,7 +340,8 @@ void av1_highbd_convolve_horiz_sse4_1(const uint16_t *src, int src_stride,
     blkHeight--;
   }
 
-  if (blkResidu == 0) return;
+  if (blkResidu == 0) { return;
+}
 
   for (col = 0; col < w; col += 4) {
     for (i = 0; i < 4; ++i) {

@@ -89,8 +89,9 @@ ConvertToAtkTextAttributeSet(nsTArray<Attribute>& aAttributes)
 static AtkAttributeSet*
 ConvertToAtkTextAttributeSet(nsIPersistentProperties* aAttributes)
 {
-  if (!aAttributes)
+  if (!aAttributes) {
     return nullptr;
+}
 
   AtkAttributeSet* objAttributeSet = nullptr;
   nsCOMPtr<nsISimpleEnumerator> propEnum;
@@ -144,8 +145,9 @@ getTextCB(AtkText *aText, gint aStartOffset, gint aEndOffset)
   nsAutoString autoStr;
   if (accWrap) {
     HyperTextAccessible* text = accWrap->AsHyperText();
-    if (!text || !text->IsTextRole() || text->IsDefunct())
+    if (!text || !text->IsTextRole() || text->IsDefunct()) {
       return nullptr;
+}
 
     return DOMtoATK::NewATKString(text, aStartOffset, aEndOffset,
          accWrap->IsPassword() ?
@@ -203,8 +205,9 @@ getTextAfterOffsetCB(AtkText *aText, gint aOffset,
   AccessibleWrap* accWrap = GetAccessibleWrap(ATK_OBJECT(aText));
   if (accWrap) {
     HyperTextAccessible* text = accWrap->AsHyperText();
-    if (!text || !text->IsTextRole())
+    if (!text || !text->IsTextRole()) {
       return nullptr;
+}
 
     text->TextAfterOffset(aOffset, aBoundaryType, &startOffset, &endOffset, autoStr);
     ConvertTexttoAsterisks(accWrap, autoStr);
@@ -234,8 +237,9 @@ getTextAtOffsetCB(AtkText *aText, gint aOffset,
   AccessibleWrap* accWrap = GetAccessibleWrap(ATK_OBJECT(aText));
   if (accWrap) {
     HyperTextAccessible* text = accWrap->AsHyperText();
-    if (!text || !text->IsTextRole())
+    if (!text || !text->IsTextRole()) {
       return nullptr;
+}
 
     text->TextAtOffset(aOffset, aBoundaryType, &startOffset, &endOffset, autoStr);
     ConvertTexttoAsterisks(accWrap, autoStr);
@@ -284,8 +288,9 @@ getTextBeforeOffsetCB(AtkText *aText, gint aOffset,
   AccessibleWrap* accWrap = GetAccessibleWrap(ATK_OBJECT(aText));
   if (accWrap) {
     HyperTextAccessible* text = accWrap->AsHyperText();
-    if (!text || !text->IsTextRole())
+    if (!text || !text->IsTextRole()) {
       return nullptr;
+}
 
     text->TextBeforeOffset(aOffset, aBoundaryType,
                            &startOffset, &endOffset, autoStr);
@@ -643,8 +648,9 @@ void
 textInterfaceInitCB(AtkTextIface* aIface)
 {
   NS_ASSERTION(aIface, "Invalid aIface");
-  if (MOZ_UNLIKELY(!aIface))
+  if (MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   aIface->get_text = getTextCB;
   aIface->get_text_after_offset = getTextAfterOffsetCB;
@@ -668,7 +674,8 @@ textInterfaceInitCB(AtkTextIface* aIface)
   aIface->set_caret_offset = setCaretOffsetCB;
 
   // Cache the string values of the atk text attribute names.
-  for (uint32_t i = 0; i < ArrayLength(sAtkTextAttrNames); i++)
+  for (uint32_t i = 0; i < ArrayLength(sAtkTextAttrNames); i++) {
     sAtkTextAttrNames[i] =
       atk_text_attribute_get_name(static_cast<AtkTextAttribute>(i));
+}
 }

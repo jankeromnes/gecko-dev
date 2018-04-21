@@ -21,10 +21,11 @@ std::string GetEnvironmentVariable( const char *pchVarName )
 		return rchValue;
 #elif defined(POSIX)
 	char *pchValue = getenv( pchVarName );
-	if( pchValue )
+	if( pchValue ) {
 		return pchValue;
-	else
+	} else {
 		return "";
+}
 #else
 #error "Unsupported Platform"
 #endif
@@ -36,10 +37,11 @@ bool SetEnvironmentVariable( const char *pchVarName, const char *pchVarValue )
 #if defined(_WIN32)
 	return 0 != SetEnvironmentVariableA( pchVarName, pchVarValue );
 #elif defined(POSIX)
-	if( pchVarValue == NULL )
+	if( pchVarValue == NULL ) {
 		return 0 == unsetenv( pchVarName );
-	else
+	} else {
 		return 0 == setenv( pchVarName, pchVarValue, 1 );
+}
 #else
 #error "Unsupported Platform"
 #endif

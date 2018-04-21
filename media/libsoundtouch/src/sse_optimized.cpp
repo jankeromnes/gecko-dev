@@ -93,7 +93,8 @@ double TDStretchSSE::calcCrossCorr(const float *pV1, const float *pV2, double &a
 
     #define _MM_LOAD    _mm_load_ps
 
-    if (((ulongptr)pV1) & 15) return -1e50;    // skip unaligned locations
+    if (((ulongptr)pV1) & 15) { return -1e50;    // skip unaligned locations
+}
 
 #else
     // No cheating allowed, use unaligned load & take the resulting
@@ -250,7 +251,8 @@ uint FIRFilterSSE::evaluateFilterStereo(float *dest, const float *source, uint n
 
     assert(count % 2 == 0);
 
-    if (count < 2) return 0;
+    if (count < 2) { return 0;
+}
 
     assert(source != NULL);
     assert(dest != NULL);

@@ -112,8 +112,9 @@ ulocdata_getExemplarSet(ULocaleData *uld, USet *fillIn,
     int32_t len = 0;
     UErrorCode localStatus = U_ZERO_ERROR;
 
-    if (U_FAILURE(*status))
+    if (U_FAILURE(*status)) {
         return NULL;
+}
 
     exemplarChars = ures_getStringByKey(uld->bundle, exemplarSetTypes[extype], &len, &localStatus);
     if ( (localStatus == U_USING_DEFAULT_WARNING) && uld->noSubstitute ) {
@@ -124,15 +125,17 @@ ulocdata_getExemplarSet(ULocaleData *uld, USet *fillIn,
         *status = localStatus;
     }
 
-    if (U_FAILURE(*status))
+    if (U_FAILURE(*status)) {
         return NULL;
+}
 
-    if(fillIn != NULL)
+    if(fillIn != NULL) {
         uset_applyPattern(fillIn, exemplarChars, len,
                           USET_IGNORE_SPACE | options, status);
-    else
+    } else {
         fillIn = uset_openPatternOptions(exemplarChars, len,
                                          USET_IGNORE_SPACE | options, status);
+}
 
     return fillIn;
 
@@ -154,8 +157,9 @@ ulocdata_getDelimiter(ULocaleData *uld, ULocaleDataDelimiterType type,
     const UChar *delimiter = NULL;
     UErrorCode localStatus = U_ZERO_ERROR;
 
-    if (U_FAILURE(*status))
+    if (U_FAILURE(*status)) {
         return 0;
+}
 
     delimiterBundle = ures_getByKey(uld->bundle, "delimiters", NULL, &localStatus);
 
@@ -282,8 +286,9 @@ ulocdata_getLocaleDisplayPattern(ULocaleData *uld,
     const UChar *pattern = NULL;
     UErrorCode localStatus = U_ZERO_ERROR;
 
-    if (U_FAILURE(*status))
+    if (U_FAILURE(*status)) {
         return 0;
+}
 
     patternBundle = ures_getByKey(uld->langBundle, "localeDisplayPattern", NULL, &localStatus);
 
@@ -334,8 +339,9 @@ ulocdata_getLocaleSeparator(ULocaleData *uld,
     static const UChar sub1[4] = { 0x007b, 0x0031, 0x007d , 0x0000 }; /* {1} */
     static const int32_t subLen = 3;
 
-    if (U_FAILURE(*status))
+    if (U_FAILURE(*status)) {
         return 0;
+}
 
     separatorBundle = ures_getByKey(uld->langBundle, "localeDisplayPattern", NULL, &localStatus);
 

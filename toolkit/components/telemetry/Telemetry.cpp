@@ -375,8 +375,9 @@ GetShutdownTimeFileName()
   if (!gRecordedShutdownTimeFileName) {
     nsCOMPtr<nsIFile> mozFile;
     NS_GetSpecialDirectory(NS_APP_USER_PROFILE_50_DIR, getter_AddRefs(mozFile));
-    if (!mozFile)
+    if (!mozFile) {
       return nullptr;
+}
 
     mozFile->AppendNative(NS_LITERAL_CSTRING("Telemetry.ShutdownTime.txt"));
 
@@ -520,8 +521,9 @@ TelemetryImpl::ReflectSQL(const SlowSQLEntryType *entry,
                           JSContext *cx,
                           JS::Handle<JSObject*> obj)
 {
-  if (stat->hitCount == 0)
+  if (stat->hitCount == 0) {
     return true;
+}
 
   const nsACString &sql = entry->GetKey();
 
@@ -554,8 +556,9 @@ TelemetryImpl::AddSQLInfo(JSContext *cx, JS::Handle<JSObject*> rootObj, bool mai
                           bool privateSQL)
 {
   JS::Rooted<JSObject*> statsObj(cx, JS_NewPlainObject(cx));
-  if (!statsObj)
+  if (!statsObj) {
     return false;
+}
 
   AutoHashtable<SlowSQLEntryType>& sqlMap = (privateSQL ? mPrivateSQL : mSanitizedSQL);
   AutoHashtable<SlowSQLEntryType>::ReflectEntryFunc reflectFunction =
@@ -609,17 +612,20 @@ bool
 TelemetryImpl::GetSQLStats(JSContext *cx, JS::MutableHandle<JS::Value> ret, bool includePrivateSql)
 {
   JS::Rooted<JSObject*> root_obj(cx, JS_NewPlainObject(cx));
-  if (!root_obj)
+  if (!root_obj) {
     return false;
+}
   ret.setObject(*root_obj);
 
   MutexAutoLock hashMutex(mHashMutex);
   // Add info about slow SQL queries on the main thread
-  if (!AddSQLInfo(cx, root_obj, true, includePrivateSql))
+  if (!AddSQLInfo(cx, root_obj, true, includePrivateSql)) {
     return false;
+}
   // Add info about slow SQL queries on other threads
-  if (!AddSQLInfo(cx, root_obj, false, includePrivateSql))
+  if (!AddSQLInfo(cx, root_obj, false, includePrivateSql)) {
     return false;
+}
 
   return true;
 }
@@ -627,8 +633,9 @@ TelemetryImpl::GetSQLStats(JSContext *cx, JS::MutableHandle<JS::Value> ret, bool
 NS_IMETHODIMP
 TelemetryImpl::GetSlowSQL(JSContext *cx, JS::MutableHandle<JS::Value> ret)
 {
-  if (GetSQLStats(cx, ret, false))
+  if (GetSQLStats(cx, ret, false)) {
     return NS_OK;
+}
   return NS_ERROR_FAILURE;
 }
 
@@ -637,16 +644,18 @@ TelemetryImpl::GetDebugSlowSQL(JSContext *cx, JS::MutableHandle<JS::Value> ret)
 {
   bool revealPrivateSql =
     Preferences::GetBool("toolkit.telemetry.debugSlowSql", false);
-  if (GetSQLStats(cx, ret, revealPrivateSql))
+  if (GetSQLStats(cx, ret, revealPrivateSql)) {
     return NS_OK;
+}
   return NS_ERROR_FAILURE;
 }
 
 NS_IMETHODIMP
 TelemetryImpl::GetWebrtcStats(JSContext *cx, JS::MutableHandle<JS::Value> ret)
 {
-  if (mWebrtcTelemetry.GetWebrtcStats(cx, ret))
+  if (mWebrtcTelemetry.GetWebrtcStats(cx, ret)) {
     return NS_OK;
+}
   return NS_ERROR_FAILURE;
 }
 
@@ -1307,18 +1316,20 @@ TelemetryImpl::StoreSlowSQL(const nsACString &sql, uint32_t delay,
                             SanitizedState state)
 {
   AutoHashtable<SlowSQLEntryType>* slowSQLMap = nullptr;
-  if (state == Sanitized)
+  if (state == Sanitized) {
     slowSQLMap = &(sTelemetry->mSanitizedSQL);
-  else
+  } else {
     slowSQLMap = &(sTelemetry->mPrivateSQL);
+}
 
   MutexAutoLock hashMutex(sTelemetry->mHashMutex);
 
   SlowSQLEntryType *entry = slowSQLMap->GetEntry(sql);
   if (!entry) {
     entry = slowSQLMap->PutEntry(sql);
-    if (MOZ_UNLIKELY(!entry))
+    if (MOZ_UNLIKELY(!entry)) {
       return;
+}
     entry->mData.mainThread.hitCount = 0;
     entry->mData.mainThread.totalTime = 0;
     entry->mData.otherThreads.hitCount = 0;
@@ -1448,8 +1459,9 @@ TelemetryImpl::SanitizeSQL(const nsACString &sql) {
     }
   }
 
-  if ((fragmentStart >= 0) && fragmentStart < length)
+  if ((fragmentStart >= 0) && fragmentStart < length) {
     output += nsDependentCSubstring(sql, fragmentStart, length - fragmentStart);
+}
 
   return output;
 }
@@ -1518,8 +1530,9 @@ TelemetryImpl::RecordSlowStatement(const nsACString &sql,
   MOZ_ASSERT(!sql.IsEmpty());
   MOZ_ASSERT(!dbName.IsEmpty());
 
-  if (!sTelemetry || !TelemetryHistogram::CanRecordExtended())
+  if (!sTelemetry || !TelemetryHistogram::CanRecordExtended()) {
     return;
+}
 
   bool recordStatement = false;
 
@@ -1571,8 +1584,9 @@ void
 TelemetryImpl::RecordIceCandidates(const uint32_t iceCandidateBitmask,
                                    const bool success)
 {
-  if (!sTelemetry || !TelemetryHistogram::CanRecordExtended())
+  if (!sTelemetry || !TelemetryHistogram::CanRecordExtended()) {
     return;
+}
 
   sTelemetry->mWebrtcTelemetry.RecordIceCandidateMask(iceCandidateBitmask, success);
 }
@@ -1585,8 +1599,9 @@ TelemetryImpl::RecordChromeHang(uint32_t aDuration,
                                 int32_t aFirefoxUptime,
                                 HangAnnotations&& aAnnotations)
 {
-  if (!sTelemetry || !TelemetryHistogram::CanRecordExtended())
+  if (!sTelemetry || !TelemetryHistogram::CanRecordExtended()) {
     return;
+}
 
   MutexAutoLock hangReportMutex(sTelemetry->mHangReportsMutex);
 
@@ -1913,8 +1928,9 @@ RecordShutdownStartTimeStamp() {
   recorded = true;
 #endif
 
-  if (!Telemetry::CanRecordExtended())
+  if (!Telemetry::CanRecordExtended()) {
     return;
+}
 
   gRecordedShutdownStartTime = TimeStamp::Now();
 
@@ -1923,8 +1939,9 @@ RecordShutdownStartTimeStamp() {
 
 void
 RecordShutdownEndTimeStamp() {
-  if (!gRecordedShutdownTimeFileName || gAlreadyFreedShutdownTimeFileName)
+  if (!gRecordedShutdownTimeFileName || gAlreadyFreedShutdownTimeFileName) {
     return;
+}
 
   PathString name(gRecordedShutdownTimeFileName);
   free(const_cast<PathChar*>(gRecordedShutdownTimeFileName));
@@ -1943,8 +1960,9 @@ RecordShutdownEndTimeStamp() {
   tmpName.AppendLiteral(".tmp");
   RefPtr<nsLocalFile> tmpFile = new nsLocalFile(tmpName);
   FILE *f;
-  if (NS_FAILED(tmpFile->OpenANSIFileDesc("w", &f)) || !f)
+  if (NS_FAILED(tmpFile->OpenANSIFileDesc("w", &f)) || !f) {
     return;
+}
   // On a normal release build this should be called just before
   // calling _exit, but on a debug build or when the user forces a full
   // shutdown this is called as late as possible, so we have to

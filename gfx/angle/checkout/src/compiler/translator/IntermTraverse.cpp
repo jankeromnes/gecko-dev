@@ -218,16 +218,18 @@ void TIntermTraverser::traverseSwizzle(TIntermSwizzle *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitSwizzle(PreVisit, node);
+}
 
     if (visit)
     {
         node->getOperand()->traverse(this);
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitSwizzle(PostVisit, node);
+}
 }
 
 //
@@ -242,30 +244,35 @@ void TIntermTraverser::traverseBinary(TIntermBinary *node)
     //
     // visit the node before children if pre-visiting.
     //
-    if (preVisit)
+    if (preVisit) {
         visit = visitBinary(PreVisit, node);
+}
 
     //
     // Visit the children, in the right order.
     //
     if (visit)
     {
-        if (node->getLeft())
+        if (node->getLeft()) {
             node->getLeft()->traverse(this);
+}
 
-        if (inVisit)
+        if (inVisit) {
             visit = visitBinary(InVisit, node);
+}
 
-        if (visit && node->getRight())
+        if (visit && node->getRight()) {
             node->getRight()->traverse(this);
+}
     }
 
     //
     // Visit the node after the children, if requested and the traversal
     // hasn't been cancelled yet.
     //
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitBinary(PostVisit, node);
+}
 }
 
 void TLValueTrackingTraverser::traverseBinary(TIntermBinary *node)
@@ -277,8 +284,9 @@ void TLValueTrackingTraverser::traverseBinary(TIntermBinary *node)
     //
     // visit the node before children if pre-visiting.
     //
-    if (preVisit)
+    if (preVisit) {
         visit = visitBinary(PreVisit, node);
+}
 
     //
     // Visit the children, in the right order.
@@ -295,14 +303,17 @@ void TLValueTrackingTraverser::traverseBinary(TIntermBinary *node)
             setOperatorRequiresLValue(true);
         }
 
-        if (node->getLeft())
+        if (node->getLeft()) {
             node->getLeft()->traverse(this);
+}
 
-        if (inVisit)
+        if (inVisit) {
             visit = visitBinary(InVisit, node);
+}
 
-        if (node->isAssignment())
+        if (node->isAssignment()) {
             setOperatorRequiresLValue(false);
+}
 
         // Index is not required to be an l-value even when the surrounding expression is required
         // to be an l-value.
@@ -314,8 +325,9 @@ void TLValueTrackingTraverser::traverseBinary(TIntermBinary *node)
             setInFunctionCallOutParameter(false);
         }
 
-        if (visit && node->getRight())
+        if (visit && node->getRight()) {
             node->getRight()->traverse(this);
+}
 
         setOperatorRequiresLValue(parentOperatorRequiresLValue);
         setInFunctionCallOutParameter(parentInFunctionCallOutParameter);
@@ -325,8 +337,9 @@ void TLValueTrackingTraverser::traverseBinary(TIntermBinary *node)
     // Visit the node after the children, if requested and the traversal
     // hasn't been cancelled yet.
     //
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitBinary(PostVisit, node);
+}
 }
 
 //
@@ -338,16 +351,18 @@ void TIntermTraverser::traverseUnary(TIntermUnary *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitUnary(PreVisit, node);
+}
 
     if (visit)
     {
         node->getOperand()->traverse(this);
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitUnary(PostVisit, node);
+}
 }
 
 void TLValueTrackingTraverser::traverseUnary(TIntermUnary *node)
@@ -356,8 +371,9 @@ void TLValueTrackingTraverser::traverseUnary(TIntermUnary *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitUnary(PreVisit, node);
+}
 
     if (visit)
     {
@@ -379,8 +395,9 @@ void TLValueTrackingTraverser::traverseUnary(TIntermUnary *node)
         setOperatorRequiresLValue(false);
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitUnary(PostVisit, node);
+}
 }
 
 // Traverse a function definition node.
@@ -390,23 +407,26 @@ void TIntermTraverser::traverseFunctionDefinition(TIntermFunctionDefinition *nod
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitFunctionDefinition(PreVisit, node);
+}
 
     if (visit)
     {
         mInGlobalScope = false;
 
         node->getFunctionPrototype()->traverse(this);
-        if (inVisit)
+        if (inVisit) {
             visit = visitFunctionDefinition(InVisit, node);
+}
         node->getBody()->traverse(this);
 
         mInGlobalScope = true;
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitFunctionDefinition(PostVisit, node);
+}
 }
 
 // Traverse a block node.
@@ -419,8 +439,9 @@ void TIntermTraverser::traverseBlock(TIntermBlock *node)
 
     TIntermSequence *sequence = node->getSequence();
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitBlock(PreVisit, node);
+}
 
     if (visit)
     {
@@ -429,16 +450,18 @@ void TIntermTraverser::traverseBlock(TIntermBlock *node)
             child->traverse(this);
             if (visit && inVisit)
             {
-                if (child != sequence->back())
+                if (child != sequence->back()) {
                     visit = visitBlock(InVisit, node);
+}
             }
 
             incrementParentBlockPos();
         }
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitBlock(PostVisit, node);
+}
 
     popParentBlock();
 }
@@ -473,8 +496,9 @@ void TIntermTraverser::traverseDeclaration(TIntermDeclaration *node)
 
     TIntermSequence *sequence = node->getSequence();
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitDeclaration(PreVisit, node);
+}
 
     if (visit)
     {
@@ -483,14 +507,16 @@ void TIntermTraverser::traverseDeclaration(TIntermDeclaration *node)
             child->traverse(this);
             if (visit && inVisit)
             {
-                if (child != sequence->back())
+                if (child != sequence->back()) {
                     visit = visitDeclaration(InVisit, node);
+}
             }
         }
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitDeclaration(PostVisit, node);
+}
 }
 
 void TIntermTraverser::traverseFunctionPrototype(TIntermFunctionPrototype *node)
@@ -501,8 +527,9 @@ void TIntermTraverser::traverseFunctionPrototype(TIntermFunctionPrototype *node)
 
     TIntermSequence *sequence = node->getSequence();
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitFunctionPrototype(PreVisit, node);
+}
 
     if (visit)
     {
@@ -511,14 +538,16 @@ void TIntermTraverser::traverseFunctionPrototype(TIntermFunctionPrototype *node)
             child->traverse(this);
             if (visit && inVisit)
             {
-                if (child != sequence->back())
+                if (child != sequence->back()) {
                     visit = visitFunctionPrototype(InVisit, node);
+}
             }
         }
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitFunctionPrototype(PostVisit, node);
+}
 }
 
 // Traverse an aggregate node.  Same comments in binary node apply here.
@@ -530,8 +559,9 @@ void TIntermTraverser::traverseAggregate(TIntermAggregate *node)
 
     TIntermSequence *sequence = node->getSequence();
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitAggregate(PreVisit, node);
+}
 
     if (visit)
     {
@@ -540,14 +570,16 @@ void TIntermTraverser::traverseAggregate(TIntermAggregate *node)
             child->traverse(this);
             if (visit && inVisit)
             {
-                if (child != sequence->back())
+                if (child != sequence->back()) {
                     visit = visitAggregate(InVisit, node);
+}
             }
         }
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitAggregate(PostVisit, node);
+}
 }
 
 bool TIntermTraverser::CompareInsertion(const NodeInsertMultipleEntry &a,
@@ -603,8 +635,9 @@ void TIntermTraverser::updateTree()
             for (size_t jj = ii + 1; jj < mReplacements.size(); ++jj)
             {
                 NodeUpdateEntry &replacement2 = mReplacements[jj];
-                if (replacement2.parent == replacement.original)
+                if (replacement2.parent == replacement.original) {
                     replacement2.parent = replacement.replacement;
+}
             }
         }
     }
@@ -660,8 +693,9 @@ void TLValueTrackingTraverser::traverseAggregate(TIntermAggregate *node)
 
     TIntermSequence *sequence = node->getSequence();
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitAggregate(PreVisit, node);
+}
 
     if (visit)
     {
@@ -685,15 +719,17 @@ void TLValueTrackingTraverser::traverseAggregate(TIntermAggregate *node)
             child->traverse(this);
             if (visit && inVisit)
             {
-                if (child != sequence->back())
+                if (child != sequence->back()) {
                     visit = visitAggregate(InVisit, node);
+}
             }
         }
         setInFunctionCallOutParameter(false);
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitAggregate(PostVisit, node);
+}
 }
 
 //
@@ -705,20 +741,24 @@ void TIntermTraverser::traverseTernary(TIntermTernary *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitTernary(PreVisit, node);
+}
 
     if (visit)
     {
         node->getCondition()->traverse(this);
-        if (node->getTrueExpression())
+        if (node->getTrueExpression()) {
             node->getTrueExpression()->traverse(this);
-        if (node->getFalseExpression())
+}
+        if (node->getFalseExpression()) {
             node->getFalseExpression()->traverse(this);
+}
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitTernary(PostVisit, node);
+}
 }
 
 // Traverse an if-else node.  Same comments in binary node apply here.
@@ -728,20 +768,24 @@ void TIntermTraverser::traverseIfElse(TIntermIfElse *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitIfElse(PreVisit, node);
+}
 
     if (visit)
     {
         node->getCondition()->traverse(this);
-        if (node->getTrueBlock())
+        if (node->getTrueBlock()) {
             node->getTrueBlock()->traverse(this);
-        if (node->getFalseBlock())
+}
+        if (node->getFalseBlock()) {
             node->getFalseBlock()->traverse(this);
+}
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitIfElse(PostVisit, node);
+}
 }
 
 //
@@ -753,20 +797,24 @@ void TIntermTraverser::traverseSwitch(TIntermSwitch *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitSwitch(PreVisit, node);
+}
 
     if (visit)
     {
         node->getInit()->traverse(this);
-        if (inVisit)
+        if (inVisit) {
             visit = visitSwitch(InVisit, node);
-        if (visit && node->getStatementList())
+}
+        if (visit && node->getStatementList()) {
             node->getStatementList()->traverse(this);
+}
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitSwitch(PostVisit, node);
+}
 }
 
 //
@@ -778,16 +826,18 @@ void TIntermTraverser::traverseCase(TIntermCase *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitCase(PreVisit, node);
+}
 
     if (visit && node->getCondition())
     {
         node->getCondition()->traverse(this);
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitCase(PostVisit, node);
+}
 }
 
 //
@@ -799,26 +849,32 @@ void TIntermTraverser::traverseLoop(TIntermLoop *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitLoop(PreVisit, node);
+}
 
     if (visit)
     {
-        if (node->getInit())
+        if (node->getInit()) {
             node->getInit()->traverse(this);
+}
 
-        if (node->getCondition())
+        if (node->getCondition()) {
             node->getCondition()->traverse(this);
+}
 
-        if (node->getBody())
+        if (node->getBody()) {
             node->getBody()->traverse(this);
+}
 
-        if (node->getExpression())
+        if (node->getExpression()) {
             node->getExpression()->traverse(this);
+}
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitLoop(PostVisit, node);
+}
 }
 
 //
@@ -830,16 +886,18 @@ void TIntermTraverser::traverseBranch(TIntermBranch *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitBranch(PreVisit, node);
+}
 
     if (visit && node->getExpression())
     {
         node->getExpression()->traverse(this);
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitBranch(PostVisit, node);
+}
 }
 
 void TIntermTraverser::traverseRaw(TIntermRaw *node)

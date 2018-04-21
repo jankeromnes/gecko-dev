@@ -59,8 +59,9 @@ Gets_s(char *buff, size_t size)
          */
         if (buff[len - 1] == '\n' || buff[len - 1] == '\r') {
             buff[len - 1] = '\0';
-            if (len > 1 && buff[len - 2] == '\r')
+            if (len > 1 && buff[len - 2] == '\r') {
                 buff[len - 2] = '\0';
+}
         }
     } else {
         buff[0] = '\0';
@@ -125,8 +126,9 @@ GetGeneralName(PLArenaPool *arena, CERTGeneralName *useExistingName, PRBool only
                 intValue = 0; /* force a break for anything else */
         }
 
-        if (intValue == 0)
+        if (intValue == 0) {
             break;
+}
 
         if (namesList == NULL) {
             if (useExistingName) {
@@ -203,8 +205,9 @@ GetGeneralName(PLArenaPool *arena, CERTGeneralName *useExistingName, PRBool only
                 break;
             }
         }
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
         current->l.next = &(namesList->l);
         current->l.prev = &(tail->l);
         tail->l.next = &(current->l);
@@ -346,8 +349,9 @@ AddKeyUsage(void *extHandle, const char *userSuppliedValue)
                 return SECFailure;
             }
             value = PORT_Atoi(buffer);
-            if (value < 0 || value > 6)
+            if (value < 0 || value > 6) {
                 break;
+}
             if (value == 0) {
                 /* Checking that zero value of variable 'value'
                  * corresponds to '0' input made by user */
@@ -366,8 +370,9 @@ AddKeyUsage(void *extHandle, const char *userSuppliedValue)
                 return SECFailure;
             }
             keyUsage |= (0x80 >> value);
-            if (!nextPos)
+            if (!nextPos) {
                 break;
+}
         }
     }
 
@@ -576,10 +581,12 @@ AddExtKeyUsage(void *extHandle, const char *userSuppliedValue)
                 goto endloop;
         }
 
-        if (userSuppliedValue && !nextPos)
+        if (userSuppliedValue && !nextPos) {
             break;
-        if (SECSuccess != rv)
+}
+        if (SECSuccess != rv) {
             goto loser;
+}
     }
 
 endloop:
@@ -634,8 +641,9 @@ AddNscpCertType(void *extHandle, const char *userSuppliedValue)
                 return SECFailure;
             }
             value = PORT_Atoi(buffer);
-            if (value < 0 || value > 7)
+            if (value < 0 || value > 7) {
                 break;
+}
             if (value == 0) {
                 /* Checking that zero value of variable 'value'
                  * corresponds to '0' input made by user */
@@ -654,8 +662,9 @@ AddNscpCertType(void *extHandle, const char *userSuppliedValue)
                 return SECFailure;
             }
             keyUsage |= (0x80 >> value);
-            if (!nextPos)
+            if (!nextPos) {
                 break;
+}
         }
     }
 
@@ -709,8 +718,9 @@ AddSubjectAltNames(PLArenaPool *arena, CERTGeneralName **existingListp,
     PRBool readTypeFromName = (PRBool)(type == 0);
     char *names = NULL;
 
-    if (constNames)
+    if (constNames) {
         names = PORT_Strdup(constNames);
+}
 
     if (names == NULL) {
         return SECFailure;
@@ -934,8 +944,9 @@ AddBasicConstraint(PLArenaPool *arena, void *extHandle)
                                      buffer, sizeof(buffer)) == SECFailure) {
             GEN_BREAK(SECFailure);
         }
-        if (PORT_Strlen(buffer) > 0)
+        if (PORT_Strlen(buffer) > 0) {
             basicConstraint.pathLenConstraint = PORT_Atoi(buffer);
+}
 
         yesNoAns = GetYesNo("Is this a critical extension [y/N]?");
 
@@ -1039,8 +1050,9 @@ AddNameConstraints(void *extHandle)
                                              yesNoAns, oidIdent,
                                              (EXTEN_EXT_VALUE_ENCODER)CERT_EncodeNameConstraintsExtension);
     }
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return (rv);
 }
 
@@ -1059,8 +1071,9 @@ AddAuthKeyID(void *extHandle)
             GEN_BREAK(SECFailure);
         }
 
-        if (GetYesNo("Enter value for the authKeyID extension [y/N]?") == 0)
+        if (GetYesNo("Enter value for the authKeyID extension [y/N]?") == 0) {
             break;
+}
 
         authKeyID = PORT_ArenaZNew(arena, CERTAuthKeyID);
         if (authKeyID == NULL) {
@@ -1070,15 +1083,17 @@ AddAuthKeyID(void *extHandle)
         rv = GetString(arena, "Enter value for the key identifier fields,"
                               "enter to omit:",
                        &authKeyID->keyID);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
 
         SECU_SECItemHexStringToBinary(&authKeyID->keyID);
 
         authKeyID->authCertIssuer = CreateGeneralName(arena);
         if (authKeyID->authCertIssuer == NULL &&
-            SECFailure == PORT_GetError())
+            SECFailure == PORT_GetError()) {
             break;
+}
 
         rv = GetString(arena, "Enter value for the authCertSerial field, "
                               "enter to omit:",
@@ -1089,12 +1104,14 @@ AddAuthKeyID(void *extHandle)
         rv = SECU_EncodeAndAddExtensionValue(arena, extHandle,
                                              authKeyID, yesNoAns, SEC_OID_X509_AUTH_KEY_ID,
                                              (EXTEN_EXT_VALUE_ENCODER)CERT_EncodeAuthKeyID);
-        if (rv)
+        if (rv) {
             break;
+}
 
     } while (0);
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return (rv);
 }
 
@@ -1117,8 +1134,9 @@ AddSubjKeyID(void *extHandle)
         rv = GetString(arena, "Enter value for the key identifier fields,"
                               "enter to omit:",
                        &keyID);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
 
         SECU_SECItemHexStringToBinary(&keyID);
 
@@ -1127,12 +1145,14 @@ AddSubjKeyID(void *extHandle)
         rv = SECU_EncodeAndAddExtensionValue(arena, extHandle,
                                              &keyID, yesNoAns, SEC_OID_X509_SUBJECT_KEY_ID,
                                              (EXTEN_EXT_VALUE_ENCODER)CERT_EncodeSubjectKeyID);
-        if (rv)
+        if (rv) {
             break;
+}
 
     } while (0);
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return (rv);
 }
 
@@ -1147,8 +1167,9 @@ AddCrlDistPoint(void *extHandle)
     char buffer[512];
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (!arena)
+    if (!arena) {
         return (SECFailure);
+}
 
     do {
         current = NULL;
@@ -1195,8 +1216,9 @@ AddCrlDistPoint(void *extHandle)
                 break;
             }
         }
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
 
         /* Get the reason flags */
         if (PrintChoicesAndGetAnswer(
@@ -1228,8 +1250,9 @@ AddCrlDistPoint(void *extHandle)
         }
         puts("Enter value for the CRL Issuer name:\n");
         current->crlIssuer = CreateGeneralName(arena);
-        if (current->crlIssuer == NULL && (rv = PORT_GetError()) == SECFailure)
+        if (current->crlIssuer == NULL && (rv = PORT_GetError()) == SECFailure) {
             break;
+}
 
         if (crlDistPoints == NULL) {
             crlDistPoints = PORT_ArenaZNew(arena, CERTCrlDistributionPoints);
@@ -1273,8 +1296,9 @@ AddCrlDistPoint(void *extHandle)
                                              crlDistPoints, yesNoAns, SEC_OID_X509_CRL_DIST_POINTS,
                                              (EXTEN_EXT_VALUE_ENCODER)CERT_EncodeCRLDistributionPoints);
     }
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return (rv);
 }
 
@@ -1493,8 +1517,9 @@ AddPolicyMappings(void *extHandle)
                                              yesNoAns, SEC_OID_X509_POLICY_MAPPINGS,
                                              (EXTEN_EXT_VALUE_ENCODER)CERT_EncodePolicyMappingExtension);
     }
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return (rv);
 }
 
@@ -1778,8 +1803,9 @@ AddCertPolicies(void *extHandle)
                                              yesNoAns, SEC_OID_X509_CERTIFICATE_POLICIES,
                                              (EXTEN_EXT_VALUE_ENCODER)CERT_EncodeCertPoliciesExtension);
     }
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return (rv);
 }
 
@@ -1917,8 +1943,9 @@ AddInfoAccess(void *extHandle, PRBool addSIAExt, PRBool isCACert)
                                              yesNoAns, oidIdent,
                                              (EXTEN_EXT_VALUE_ENCODER)CERT_EncodeInfoAccessExtension);
     }
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return (rv);
 }
 
@@ -1935,32 +1962,37 @@ parseNextGenericExt(const char *nextExtension, const char **oid, int *oidLen,
     const char *nextComma;
     const char *iter = nextExtension;
 
-    if (!iter || !*iter)
+    if (!iter || !*iter) {
         return SECFailure;
+}
 
     /* Require colons at earlier positions than nextComma (or end of string ) */
     nextComma = strchr(iter, ',');
 
     *oid = iter;
     nextColon = strchr(iter, ':');
-    if (!nextColon || (nextComma && nextColon > nextComma))
+    if (!nextColon || (nextComma && nextColon > nextComma)) {
         return SECFailure;
+}
     *oidLen = (nextColon - *oid);
 
-    if (!*oidLen)
+    if (!*oidLen) {
         return SECFailure;
+}
 
     iter = nextColon;
     ++iter;
 
     *crit = iter;
     nextColon = strchr(iter, ':');
-    if (!nextColon || (nextComma && nextColon > nextComma))
+    if (!nextColon || (nextComma && nextColon > nextComma)) {
         return SECFailure;
+}
     *critLen = (nextColon - *crit);
 
-    if (!*critLen)
+    if (!*critLen) {
         return SECFailure;
+}
 
     iter = nextColon;
     ++iter;
@@ -1976,8 +2008,9 @@ parseNextGenericExt(const char *nextExtension, const char **oid, int *oidLen,
         *next = NULL;
     }
 
-    if (!*filenameLen)
+    if (!*filenameLen) {
         return SECFailure;
+}
 
     return SECSuccess;
 }

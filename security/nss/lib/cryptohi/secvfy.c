@@ -201,10 +201,12 @@ decodeECorDSASignature(SECOidTag algid, const SECItem *sig, unsigned char *dsig,
         PORT_Memcpy(dsig, dsasig->data, dsasig->len);
     }
 
-    if (dsasig != NULL)
+    if (dsasig != NULL) {
         SECITEM_FreeItem(dsasig, PR_TRUE);
-    if (rv == SECFailure)
+}
+    if (rv == SECFailure) {
         PORT_SetError(SEC_ERROR_BAD_DER);
+}
     return rv;
 }
 
@@ -497,8 +499,9 @@ vfy_CreateContext(const SECKEYPublicKey *key, const SECItem *sig,
         }
     }
 
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
     /* check hash alg again, RSA may have changed it.*/
     if (HASH_GetHashTypeByOidTag(cx->hashAlg) == HASH_AlgNULL) {
@@ -591,12 +594,14 @@ VFY_Begin(VFYContext *cx)
     }
 
     cx->hashobj = HASH_GetHashObjectByOidTag(cx->hashAlg);
-    if (!cx->hashobj)
+    if (!cx->hashobj) {
         return SECFailure; /* error code is set */
+}
 
     cx->hashcx = (*cx->hashobj->create)();
-    if (cx->hashcx == NULL)
+    if (cx->hashcx == NULL) {
         return SECFailure;
+}
 
     (*cx->hashobj->begin)(cx->hashcx);
     return SECSuccess;
@@ -829,8 +834,9 @@ vfy_VerifyData(const unsigned char *buf, int len, const SECKEYPublicKey *key,
     VFYContext *cx;
 
     cx = vfy_CreateContext(key, sig, encAlg, hashAlg, hash, wincx);
-    if (cx == NULL)
+    if (cx == NULL) {
         return SECFailure;
+}
     if (params) {
         cx->params = SECITEM_DupItem(params);
     }
@@ -838,8 +844,9 @@ vfy_VerifyData(const unsigned char *buf, int len, const SECKEYPublicKey *key,
     rv = VFY_Begin(cx);
     if (rv == SECSuccess) {
         rv = VFY_Update(cx, (unsigned char *)buf, len);
-        if (rv == SECSuccess)
+        if (rv == SECSuccess) {
             rv = VFY_End(cx);
+}
     }
 
     VFY_DestroyContext(cx, PR_TRUE);

@@ -563,7 +563,8 @@ NumberFormat::format(const Formattable& obj,
                         FieldPosition& pos,
                         UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return appendTo;
+    if (U_FAILURE(status)) { return appendTo;
+}
 
     ArgExtractor arg(*this, obj, status);
     const Formattable *n = arg.number();
@@ -618,7 +619,8 @@ NumberFormat::format(const Formattable& obj,
                         FieldPositionIterator* posIter,
                         UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return appendTo;
+    if (U_FAILURE(status)) { return appendTo;
+}
 
     ArgExtractor arg(*this, obj, status);
     const Formattable *n = arg.number();
@@ -720,7 +722,8 @@ NumberFormat::parse(const UnicodeString& text,
                         Formattable& result,
                         UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
 
     ParsePosition parsePosition(0);
     parse(text, result, parsePosition);
@@ -1104,8 +1107,9 @@ void
 NumberFormat::setMaximumIntegerDigits(int32_t newValue)
 {
     fMaxIntegerDigits = uprv_max(0, uprv_min(newValue, gDefaultMaxIntegerDigits));
-    if(fMinIntegerDigits > fMaxIntegerDigits)
+    if(fMinIntegerDigits > fMaxIntegerDigits) {
         fMinIntegerDigits = fMaxIntegerDigits;
+}
 }
 
 // -------------------------------------
@@ -1126,8 +1130,9 @@ void
 NumberFormat::setMinimumIntegerDigits(int32_t newValue)
 {
     fMinIntegerDigits = uprv_max(0, uprv_min(newValue, gDefaultMinIntegerDigits));
-    if(fMinIntegerDigits > fMaxIntegerDigits)
+    if(fMinIntegerDigits > fMaxIntegerDigits) {
         fMaxIntegerDigits = fMinIntegerDigits;
+}
 }
 
 // -------------------------------------
@@ -1148,8 +1153,9 @@ void
 NumberFormat::setMaximumFractionDigits(int32_t newValue)
 {
     fMaxFractionDigits = uprv_max(0, uprv_min(newValue, gDefaultMaxIntegerDigits));
-    if(fMaxFractionDigits < fMinFractionDigits)
+    if(fMaxFractionDigits < fMinFractionDigits) {
         fMinFractionDigits = fMaxFractionDigits;
+}
 }
 
 // -------------------------------------
@@ -1170,8 +1176,9 @@ void
 NumberFormat::setMinimumFractionDigits(int32_t newValue)
 {
     fMinFractionDigits = uprv_max(0, uprv_min(newValue, gDefaultMinIntegerDigits));
-    if (fMaxFractionDigits < fMinFractionDigits)
+    if (fMaxFractionDigits < fMinFractionDigits) {
         fMaxFractionDigits = fMinFractionDigits;
+}
 }
 
 // -------------------------------------
@@ -1211,8 +1218,9 @@ void NumberFormat::getEffectiveCurrency(UChar* result, UErrorCode& ec) const {
 
 void NumberFormat::setContext(UDisplayContext value, UErrorCode& status)
 {
-    if (U_FAILURE(status))
+    if (U_FAILURE(status)) {
         return;
+}
     if ( (UDisplayContextType)((uint32_t)value >> 8) == UDISPCTX_TYPE_CAPITALIZATION ) {
         fCapitalizationContext = value;
     } else {
@@ -1223,8 +1231,9 @@ void NumberFormat::setContext(UDisplayContext value, UErrorCode& status)
 
 UDisplayContext NumberFormat::getContext(UDisplayContextType type, UErrorCode& status) const
 {
-    if (U_FAILURE(status))
+    if (U_FAILURE(status)) {
         return (UDisplayContext)0;
+}
     if (type != UDISPCTX_TYPE_CAPITALIZATION) {
         status = U_ILLEGAL_ARGUMENT_ERROR;
         return (UDisplayContext)0;
@@ -1303,7 +1312,8 @@ NumberFormat::makeInstance(const Locale& desiredLocale,
                            UNumberFormatStyle style,
                            UBool mustBeDecimalFormat,
                            UErrorCode& status) {
-    if (U_FAILURE(status)) return NULL;
+    if (U_FAILURE(status)) { return NULL;
+}
 
     if (style < 0 || style >= UNUM_FORMAT_STYLE_COUNT) {
         status = U_ILLEGAL_ARGUMENT_ERROR;

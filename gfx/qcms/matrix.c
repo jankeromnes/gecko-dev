@@ -80,8 +80,9 @@ struct matrix matrix_invert(struct matrix mat)
 
 			p = mat.m[ai][aj] * mat.m[bi][bj] -
 				mat.m[ai][bj] * mat.m[bi][aj];
-			if (((i + j) & 1) != 0)
+			if (((i + j) & 1) != 0) {
 				p = -p;
+}
 
 			dest_mat.m[j][i] = det * p;
 		}

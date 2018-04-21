@@ -383,12 +383,14 @@ void DecimalQuantity::_setToDoubleFast(double n) {
     if (fracLength >= 0) {
         int32_t i = fracLength;
         // 1e22 is the largest exact double.
-        for (; i >= 22; i -= 22) n *= 1e22;
+        for (; i >= 22; i -= 22) { n *= 1e22;
+}
         n *= DOUBLE_MULTIPLIERS[i];
     } else {
         int32_t i = fracLength;
         // 1e22 is the largest exact double.
-        for (; i <= -22; i += 22) n /= 1e22;
+        for (; i <= -22; i += 22) { n /= 1e22;
+}
         n /= DOUBLE_MULTIPLIERS[-i];
     }
     auto result = static_cast<int64_t>(std::round(n));
@@ -486,12 +488,14 @@ double DecimalQuantity::toDouble() const {
     if (_scale >= 0) {
         // 1e22 is the largest exact double.
         int32_t i = _scale;
-        for (; i >= 22; i -= 22) result *= 1e22;
+        for (; i >= 22; i -= 22) { result *= 1e22;
+}
         result *= DOUBLE_MULTIPLIERS[i];
     } else {
         // 1e22 is the largest exact double.
         int32_t i = _scale;
-        for (; i <= -22; i += 22) result /= 1e22;
+        for (; i <= -22; i += 22) { result /= 1e22;
+}
         result /= DOUBLE_MULTIPLIERS[-i];
     }
     if (isNegative()) { result = -result; }
@@ -503,11 +507,13 @@ double DecimalQuantity::toDoubleFromOriginal() const {
     int32_t delta = origDelta;
     if (delta >= 0) {
         // 1e22 is the largest exact double.
-        for (; delta >= 22; delta -= 22) result *= 1e22;
+        for (; delta >= 22; delta -= 22) { result *= 1e22;
+}
         result *= DOUBLE_MULTIPLIERS[delta];
     } else {
         // 1e22 is the largest exact double.
-        for (; delta <= -22; delta += 22) result /= 1e22;
+        for (; delta <= -22; delta += 22) { result /= 1e22;
+}
         result /= DOUBLE_MULTIPLIERS[-delta];
     }
     if (isNegative()) { result *= -1; }
@@ -859,7 +865,8 @@ void DecimalQuantity::readDoubleConversionToBcd(
 void DecimalQuantity::compact() {
     if (usingBytes) {
         int32_t delta = 0;
-        for (; delta < precision && fBCD.bcdBytes.ptr[delta] == 0; delta++);
+        for (; delta < precision && fBCD.bcdBytes.ptr[delta] == 0; delta++) {;
+}
         if (delta == precision) {
             // Number is zero
             setBcdToZero();
@@ -871,7 +878,8 @@ void DecimalQuantity::compact() {
 
         // Compute precision
         int32_t leading = precision - 1;
-        for (; leading >= 0 && fBCD.bcdBytes.ptr[leading] == 0; leading--);
+        for (; leading >= 0 && fBCD.bcdBytes.ptr[leading] == 0; leading--) {;
+}
         precision = leading + 1;
 
         // Switch storage mechanism if possible
@@ -889,13 +897,15 @@ void DecimalQuantity::compact() {
         // Compact the number (remove trailing zeros)
         // TODO: Use a more efficient algorithm here and below. There is a logarithmic one.
         int32_t delta = 0;
-        for (; delta < precision && getDigitPos(delta) == 0; delta++);
+        for (; delta < precision && getDigitPos(delta) == 0; delta++) {;
+}
         fBCD.bcdLong >>= delta * 4;
         scale += delta;
 
         // Compute precision
         int32_t leading = precision - 1;
-        for (; leading >= 0 && getDigitPos(leading) == 0; leading--);
+        for (; leading >= 0 && getDigitPos(leading) == 0; leading--) {;
+}
         precision = leading + 1;
     }
 }

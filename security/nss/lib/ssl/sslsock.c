@@ -301,8 +301,9 @@ ssl_DupSocket(sslSocket *os)
              cursor != &os->serverCerts;
              cursor = PR_NEXT_LINK(cursor)) {
             sslServerCert *sc = ssl_CopyServerCert((sslServerCert *)cursor);
-            if (!sc)
+            if (!sc) {
                 goto loser;
+}
             PR_APPEND_LINK(&sc->link, &ss->serverCerts);
         }
 
@@ -311,8 +312,9 @@ ssl_DupSocket(sslSocket *os)
              cursor = PR_NEXT_LINK(cursor)) {
             sslEphemeralKeyPair *okp = (sslEphemeralKeyPair *)cursor;
             sslEphemeralKeyPair *skp = ssl_CopyEphemeralKeyPair(okp);
-            if (!skp)
+            if (!skp) {
                 goto loser;
+}
             PR_APPEND_LINK(&skp->link, &ss->ephemeralKeyPairs);
         }
 
@@ -422,10 +424,12 @@ ssl_DestroySocketContents(sslSocket *ss)
     PORT_Free(ss->pendingBuf.buf);
     ssl3_DestroyGather(&ss->gs);
 
-    if (ss->peerID != NULL)
+    if (ss->peerID != NULL) {
         PORT_Free(ss->peerID);
-    if (ss->url != NULL)
+}
+    if (ss->url != NULL) {
         PORT_Free((void *)ss->url); /* CONST */
+}
 
     /* Clean up server certificates and sundries. */
     while (!PR_CLIST_IS_EMPTY(&ss->serverCerts)) {
@@ -721,8 +725,9 @@ SSL_OptionSet(PRFileDesc *fd, PRInt32 which, PRIntn val)
                 PORT_SetError(SEC_ERROR_INVALID_ARGS);
                 rv = SECFailure;
             }
-            if (val && ssl_force_locks)
+            if (val && ssl_force_locks) {
                 val = PR_FALSE; /* silent override */
+}
             ss->opt.noLocks = val;
             if (val) {
                 locksEverDisabled = PR_TRUE;
@@ -1184,8 +1189,9 @@ SSL_OptionSetDefault(PRInt32 which, PRIntn val)
                 PORT_SetError(SEC_ERROR_INVALID_ARGS);
                 return SECFailure;
             }
-            if (val && ssl_force_locks)
+            if (val && ssl_force_locks) {
                 val = PR_FALSE; /* silent override */
+}
             ssl_defaults.noLocks = val;
             if (val) {
                 locksEverDisabled = PR_TRUE;
@@ -1300,8 +1306,9 @@ ssl_IsRemovedCipherSuite(PRInt32 suite)
 SECStatus
 SSL_SetPolicy(long which, int policy)
 {
-    if (ssl_IsRemovedCipherSuite(which))
+    if (ssl_IsRemovedCipherSuite(which)) {
         return SECSuccess;
+}
     return SSL_CipherPolicySet(which, policy);
 }
 
@@ -1354,16 +1361,18 @@ SSL_CipherPolicyGet(PRInt32 which, PRInt32 *oPolicy)
 SECStatus
 SSL_EnableCipher(long which, PRBool enabled)
 {
-    if (ssl_IsRemovedCipherSuite(which))
+    if (ssl_IsRemovedCipherSuite(which)) {
         return SECSuccess;
+}
     return SSL_CipherPrefSetDefault(which, enabled);
 }
 
 SECStatus
 ssl_CipherPrefSetDefault(PRInt32 which, PRBool enabled)
 {
-    if (ssl_IsRemovedCipherSuite(which))
+    if (ssl_IsRemovedCipherSuite(which)) {
         return SECSuccess;
+}
     return ssl3_CipherPrefSetDefault((ssl3CipherSuite)which, enabled);
 }
 
@@ -1405,8 +1414,9 @@ SSL_CipherPrefSet(PRFileDesc *fd, PRInt32 which, PRBool enabled)
         SSL_DBG(("%d: SSL[%d]: bad socket in CipherPrefSet", SSL_GETPID(), fd));
         return SECFailure;
     }
-    if (ssl_IsRemovedCipherSuite(which))
+    if (ssl_IsRemovedCipherSuite(which)) {
         return SECSuccess;
+}
     return ssl3_CipherPrefSet(ss, (ssl3CipherSuite)which, enabled);
 }
 
@@ -1450,8 +1460,9 @@ NSS_SetDomesticPolicy(void)
 
     for (cipher = SSL_ImplementedCiphers; *cipher != 0; ++cipher) {
         status = SSL_SetPolicy(*cipher, SSL_ALLOWED);
-        if (status != SECSuccess)
+        if (status != SECSuccess) {
             break;
+}
     }
     return status;
 }
@@ -1688,8 +1699,9 @@ SSL_EnableWeakDHEPrimeGroup(PRFileDesc *fd, PRBool enabled)
         }
     }
 
-    if (!fd)
+    if (!fd) {
         return SECSuccess;
+}
 
     ss = ssl_FindSocket(fd);
     if (!ss) {
@@ -1804,10 +1816,12 @@ ssl_ValidateDHENamedGroup(sslSocket *ss,
             if (!SECITEM_ItemsAreEqual(&params->base, dh_g)) {
                 return SECFailure;
             }
-            if (groupDef)
+            if (groupDef) {
                 *groupDef = ss->namedGroupPreferences[i];
-            if (dhParams)
+}
+            if (dhParams) {
                 *dhParams = params;
+}
             return SECSuccess;
         }
     }
@@ -1877,8 +1891,9 @@ ssl_ImportFD(PRFileDesc *model, PRFileDesc *fd, SSLProtocolVariant variant)
         }
         ns = ssl_DupSocket(ss);
     }
-    if (ns == NULL)
+    if (ns == NULL) {
         return NULL;
+}
 
     rv = ssl_PushIOLayer(ns, fd, PR_TOP_IO_LAYER);
     if (rv != PR_SUCCESS) {
@@ -2065,8 +2080,9 @@ SSL_SetSRTPCiphers(PRFileDesc *fd,
         const PRUint16 *srtpCipher = srtpCiphers;
 
         while (*srtpCipher) {
-            if (ciphers[i] == *srtpCipher)
+            if (ciphers[i] == *srtpCipher) {
                 break;
+}
             srtpCipher++;
         }
         if (*srtpCipher) {
@@ -2158,8 +2174,9 @@ SSL_ReconfigFD(PRFileDesc *model, PRFileDesc *fd)
          cursor != &sm->serverCerts;
          cursor = PR_NEXT_LINK(cursor)) {
         sslServerCert *sc = ssl_CopyServerCert((sslServerCert *)cursor);
-        if (!sc)
+        if (!sc) {
             return NULL;
+}
         PR_APPEND_LINK(&sc->link, &ss->serverCerts);
     }
 
@@ -2169,8 +2186,9 @@ SSL_ReconfigFD(PRFileDesc *model, PRFileDesc *fd)
          cursor = PR_NEXT_LINK(cursor)) {
         sslEphemeralKeyPair *mkp = (sslEphemeralKeyPair *)cursor;
         sslEphemeralKeyPair *skp = ssl_CopyEphemeralKeyPair(mkp);
-        if (!skp)
+        if (!skp) {
             return NULL;
+}
         PR_APPEND_LINK(&skp->link, &ss->ephemeralKeyPairs);
     }
 
@@ -2208,18 +2226,24 @@ SSL_ReconfigFD(PRFileDesc *model, PRFileDesc *fd)
         }
     }
 
-    if (sm->authCertificate)
+    if (sm->authCertificate) {
         ss->authCertificate = sm->authCertificate;
-    if (sm->authCertificateArg)
+}
+    if (sm->authCertificateArg) {
         ss->authCertificateArg = sm->authCertificateArg;
-    if (sm->getClientAuthData)
+}
+    if (sm->getClientAuthData) {
         ss->getClientAuthData = sm->getClientAuthData;
-    if (sm->getClientAuthDataArg)
+}
+    if (sm->getClientAuthDataArg) {
         ss->getClientAuthDataArg = sm->getClientAuthDataArg;
-    if (sm->sniSocketConfig)
+}
+    if (sm->sniSocketConfig) {
         ss->sniSocketConfig = sm->sniSocketConfig;
-    if (sm->sniSocketConfigArg)
+}
+    if (sm->sniSocketConfigArg) {
         ss->sniSocketConfigArg = sm->sniSocketConfigArg;
+}
     if (sm->alertReceivedCallback) {
         ss->alertReceivedCallback = sm->alertReceivedCallback;
         ss->alertReceivedCallbackArg = sm->alertReceivedCallbackArg;
@@ -2228,16 +2252,21 @@ SSL_ReconfigFD(PRFileDesc *model, PRFileDesc *fd)
         ss->alertSentCallback = sm->alertSentCallback;
         ss->alertSentCallbackArg = sm->alertSentCallbackArg;
     }
-    if (sm->handleBadCert)
+    if (sm->handleBadCert) {
         ss->handleBadCert = sm->handleBadCert;
-    if (sm->badCertArg)
+}
+    if (sm->badCertArg) {
         ss->badCertArg = sm->badCertArg;
-    if (sm->handshakeCallback)
+}
+    if (sm->handshakeCallback) {
         ss->handshakeCallback = sm->handshakeCallback;
-    if (sm->handshakeCallbackData)
+}
+    if (sm->handshakeCallbackData) {
         ss->handshakeCallbackData = sm->handshakeCallbackData;
-    if (sm->pkcs11PinArg)
+}
+    if (sm->pkcs11PinArg) {
         ss->pkcs11PinArg = sm->pkcs11PinArg;
+}
     return fd;
 }
 
@@ -2514,8 +2543,9 @@ SSL_VersionRangeSetDefault(SSLProtocolVariant protocolVariant,
     constrainedRange = *vrange;
     rv = ssl3_CheckRangeValidAndConstrainByPolicy(protocolVariant,
                                                   &constrainedRange);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     *VERSIONS_DEFAULTS(protocolVariant) = constrainedRange;
     return SECSuccess;
@@ -2570,8 +2600,9 @@ SSL_VersionRangeSet(PRFileDesc *fd, const SSLVersionRange *vrange)
     constrainedRange = *vrange;
     rv = ssl3_CheckRangeValidAndConstrainByPolicy(ss->protocolVariant,
                                                   &constrainedRange);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     ssl_Get1stHandshakeLock(ss);
     ssl_GetSSL3HandshakeLock(ss);
@@ -2690,13 +2721,15 @@ ssl_Accept(PRFileDesc *fd, PRNetAddr *sockaddr, PRIntervalTime timeout)
     SSL_UNLOCK_WRITER(ss);
     SSL_UNLOCK_READER(ss); /* ss isn't used below here. */
 
-    if (ns == NULL)
+    if (ns == NULL) {
         goto loser;
+}
 
     /* push ssl module onto the new socket */
     status = ssl_PushIOLayer(ns, newfd, PR_TOP_IO_LAYER);
-    if (status != PR_SUCCESS)
+    if (status != PR_SUCCESS) {
         goto loser;
+}
 
     /* Now start server connection handshake with client.
     ** Don't need locks here because nobody else has a reference to ns yet.
@@ -2714,10 +2747,12 @@ ssl_Accept(PRFileDesc *fd, PRNetAddr *sockaddr, PRIntervalTime timeout)
     return newfd;
 
 loser:
-    if (ns != NULL)
+    if (ns != NULL) {
         ssl_FreeSocket(ns);
-    if (newfd != NULL)
+}
+    if (newfd != NULL) {
         PR_Close(newfd);
+}
     return NULL;
 }
 
@@ -2855,8 +2890,9 @@ ssl_Recv(PRFileDesc *fd, void *buf, PRInt32 len, PRIntn flags,
     }
     SSL_LOCK_READER(ss);
     ss->rTimeout = timeout;
-    if (!ss->opt.fdx)
+    if (!ss->opt.fdx) {
         ss->wTimeout = timeout;
+}
     rv = (*ss->ops->recv)(ss, (unsigned char *)buf, len, flags);
     SSL_UNLOCK_READER(ss);
     return rv;
@@ -2876,8 +2912,9 @@ ssl_Send(PRFileDesc *fd, const void *buf, PRInt32 len, PRIntn flags,
     }
     SSL_LOCK_WRITER(ss);
     ss->wTimeout = timeout;
-    if (!ss->opt.fdx)
+    if (!ss->opt.fdx) {
         ss->rTimeout = timeout;
+}
     rv = (*ss->ops->send)(ss, (const unsigned char *)buf, len, flags);
     SSL_UNLOCK_WRITER(ss);
     return rv;
@@ -2896,8 +2933,9 @@ ssl_Read(PRFileDesc *fd, void *buf, PRInt32 len)
     }
     SSL_LOCK_READER(ss);
     ss->rTimeout = PR_INTERVAL_NO_TIMEOUT;
-    if (!ss->opt.fdx)
+    if (!ss->opt.fdx) {
         ss->wTimeout = PR_INTERVAL_NO_TIMEOUT;
+}
     rv = (*ss->ops->read)(ss, (unsigned char *)buf, len);
     SSL_UNLOCK_READER(ss);
     return rv;
@@ -2916,8 +2954,9 @@ ssl_Write(PRFileDesc *fd, const void *buf, PRInt32 len)
     }
     SSL_LOCK_WRITER(ss);
     ss->wTimeout = PR_INTERVAL_NO_TIMEOUT;
-    if (!ss->opt.fdx)
+    if (!ss->opt.fdx) {
         ss->rTimeout = PR_INTERVAL_NO_TIMEOUT;
+}
     rv = (*ss->ops->write)(ss, (const unsigned char *)buf, len);
     SSL_UNLOCK_WRITER(ss);
     return rv;
@@ -2995,8 +3034,9 @@ SSL_SetSockPeerID(PRFileDesc *fd, const char *peerID)
         PORT_Free(ss->peerID);
         ss->peerID = NULL;
     }
-    if (peerID)
+    if (peerID) {
         ss->peerID = PORT_Strdup(peerID);
+}
     return (ss->peerID || !peerID) ? SECSuccess : SECFailure;
 }
 
@@ -3105,10 +3145,12 @@ ssl_Poll(PRFileDesc *fd, PRInt16 how_flags, PRInt16 *p_out_flags)
                                                    &lower_out_flags);
         if ((lower_new_flags & lower_out_flags) && (how_flags != new_flags)) {
             PRInt16 out_flags = lower_out_flags & ~PR_POLL_RW;
-            if (lower_out_flags & PR_POLL_READ)
+            if (lower_out_flags & PR_POLL_READ) {
                 out_flags |= PR_POLL_WRITE;
-            if (lower_out_flags & PR_POLL_WRITE)
+}
+            if (lower_out_flags & PR_POLL_WRITE) {
                 out_flags |= PR_POLL_READ;
+}
             *p_out_flags = out_flags;
             new_flags = how_flags;
         } else {
@@ -3147,8 +3189,9 @@ ssl_FdIsBlocking(PRFileDesc *fd)
     opt.option = PR_SockOpt_Nonblocking;
     opt.value.non_blocking = PR_FALSE;
     status = PR_GetSocketOption(fd, &opt);
-    if (status != PR_SUCCESS)
+    if (status != PR_SUCCESS) {
         return PR_FALSE;
+}
     return (PRBool)!opt.value.non_blocking;
 }
 
@@ -3228,8 +3271,9 @@ ssl_WriteV(PRFileDesc *fd, const PRIOVec *iov, PRInt32 vectors,
 
     /* Make sure the first write is at least 8 KB, if possible. */
     KILL_VECTORS
-    if (!vectors)
+    if (!vectors) {
         return ssl_Send(fd, 0, 0, 0, timeout);
+}
     GET_VECTOR;
     if (!vectors) {
         return ssl_Send(fd, myIov.iov_base, myIov.iov_len, 0, timeout);
@@ -3261,8 +3305,9 @@ ssl_WriteV(PRFileDesc *fd, const PRIOVec *iov, PRInt32 vectors,
             myIov.iov_base += K16;
             myIov.iov_len -= K16;
         }
-        if (!myIov.iov_len)
+        if (!myIov.iov_len) {
             continue;
+}
 
         if (!vectors || myIov.iov_len > limit) {
             addLen = 0;
@@ -3271,8 +3316,9 @@ ssl_WriteV(PRFileDesc *fd, const PRIOVec *iov, PRInt32 vectors,
         } else if (vectors > 1 &&
                    iov[1].iov_len % K16 + addLen + myIov.iov_len <= 2 * limit) {
             addLen = limit - myIov.iov_len;
-        } else
+        } else {
             addLen = 0;
+}
 
         if (!addLen) {
             SEND(myIov.iov_base, myIov.iov_len);
@@ -3298,8 +3344,9 @@ ssl_WriteV(PRFileDesc *fd, const PRIOVec *iov, PRInt32 vectors,
             } else if (vectors > 1 &&
                        iov[1].iov_len % K16 + addLen <= left + limit) {
                 addLen = left;
-            } else
+            } else {
                 addLen = 0;
+}
 
         } while (addLen);
         SEND(buf, bufLen);
@@ -3496,8 +3543,9 @@ ssl_PushIOLayer(sslSocket *ns, PRFileDesc *stack, PRDescIdentity id)
         goto loser;
     }
     layer = PR_CreateIOLayerStub(ssl_layer_id, &combined_methods);
-    if (layer == NULL)
+    if (layer == NULL) {
         goto loser;
+}
     layer->secret = (PRFilePrivate *)ns;
 
     /* Here, "stack" points to the PRFileDesc on the top of the stack.
@@ -3512,8 +3560,9 @@ ssl_PushIOLayer(sslSocket *ns, PRFileDesc *stack, PRDescIdentity id)
     ** they were before the call.
     */
     status = PR_PushIOLayer(stack, id, layer);
-    if (status != PR_SUCCESS)
+    if (status != PR_SUCCESS) {
         goto loser;
+}
 
     ns->fd = (id == PR_TOP_IO_LAYER) ? stack : layer;
     return PR_SUCCESS;
@@ -3530,28 +3579,35 @@ static SECStatus
 ssl_MakeLocks(sslSocket *ss)
 {
     ss->firstHandshakeLock = PZ_NewMonitor(nssILockSSL);
-    if (!ss->firstHandshakeLock)
+    if (!ss->firstHandshakeLock) {
         goto loser;
+}
     ss->ssl3HandshakeLock = PZ_NewMonitor(nssILockSSL);
-    if (!ss->ssl3HandshakeLock)
+    if (!ss->ssl3HandshakeLock) {
         goto loser;
+}
     ss->specLock = NSSRWLock_New(SSL_LOCK_RANK_SPEC, NULL);
-    if (!ss->specLock)
+    if (!ss->specLock) {
         goto loser;
+}
     ss->recvBufLock = PZ_NewMonitor(nssILockSSL);
-    if (!ss->recvBufLock)
+    if (!ss->recvBufLock) {
         goto loser;
+}
     ss->xmitBufLock = PZ_NewMonitor(nssILockSSL);
-    if (!ss->xmitBufLock)
+    if (!ss->xmitBufLock) {
         goto loser;
+}
     ss->writerThread = NULL;
     if (ssl_lock_readers) {
         ss->recvLock = PZ_NewLock(nssILockSSL);
-        if (!ss->recvLock)
+        if (!ss->recvLock) {
             goto loser;
+}
         ss->sendLock = PZ_NewLock(nssILockSSL);
-        if (!ss->sendLock)
+        if (!ss->sendLock) {
             goto loser;
+}
     }
     return SECSuccess;
 loser:
@@ -3625,14 +3681,15 @@ ssl_SetDefaultsFromEnvironment(void)
         }
         ev = PR_GetEnvSecure("NSS_SSL_ENABLE_RENEGOTIATION");
         if (ev) {
-            if (ev[0] == '1' || LOWER(ev[0]) == 'u')
+            if (ev[0] == '1' || LOWER(ev[0]) == 'u') {
                 ssl_defaults.enableRenegotiation = SSL_RENEGOTIATE_UNRESTRICTED;
-            else if (ev[0] == '0' || LOWER(ev[0]) == 'n')
+            } else if (ev[0] == '0' || LOWER(ev[0]) == 'n') {
                 ssl_defaults.enableRenegotiation = SSL_RENEGOTIATE_NEVER;
-            else if (ev[0] == '2' || LOWER(ev[0]) == 'r')
+            } else if (ev[0] == '2' || LOWER(ev[0]) == 'r') {
                 ssl_defaults.enableRenegotiation = SSL_RENEGOTIATE_REQUIRES_XTN;
-            else if (ev[0] == '3' || LOWER(ev[0]) == 't')
+            } else if (ev[0] == '3' || LOWER(ev[0]) == 't') {
                 ssl_defaults.enableRenegotiation = SSL_RENEGOTIATE_TRANSITIONAL;
+}
             SSL_TRACE(("SSL: enableRenegotiation set to %d",
                        ssl_defaults.enableRenegotiation));
         }
@@ -3696,8 +3753,9 @@ ssl_NewKeyPair(SECKEYPrivateKey *privKey, SECKEYPublicKey *pubKey)
         return NULL;
     }
     pair = PORT_ZNew(sslKeyPair);
-    if (!pair)
+    if (!pair) {
         return NULL; /* error code is set. */
+}
     pair->privKey = privKey;
     pair->pubKey = pubKey;
     pair->refCount = 1;
@@ -3819,8 +3877,9 @@ ssl_NewSocket(PRBool makeLocks, SSLProtocolVariant protocolVariant)
     int i;
     ssl_SetDefaultsFromEnvironment();
 
-    if (ssl_force_locks)
+    if (ssl_force_locks) {
         makeLocks = PR_TRUE;
+}
 
     /* Make a new socket and get it ready */
     ss = (sslSocket *)PORT_ZAlloc(sizeof(sslSocket));
@@ -3882,15 +3941,18 @@ ssl_NewSocket(PRBool makeLocks, SSLProtocolVariant protocolVariant)
 
     if (makeLocks) {
         rv = ssl_MakeLocks(ss);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
     rv = ssl_CreateSecurityInfo(ss);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
     rv = ssl3_InitGather(&ss->gs);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
     rv = ssl3_InitState(ss);
     if (rv != SECSuccess) {
         goto loser;

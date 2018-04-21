@@ -180,8 +180,9 @@ TransportLayer *TransportFlow::GetLayer(const std::string& id) const {
 
   for (std::deque<TransportLayer *>::const_iterator it = layers_->begin();
        it != layers_->end(); ++it) {
-    if ((*it)->id() == id)
+    if ((*it)->id() == id) {
       return *it;
+}
   }
 
   return nullptr;
@@ -220,8 +221,9 @@ void TransportFlow::EnsureSameThread(TransportLayer *layer)  {
   if (target_) {
     const nsCOMPtr<nsIEventTarget>& lthread = layer->GetThread();
 
-    if (lthread && (lthread != target_))
+    if (lthread && (lthread != target_)) {
       MOZ_CRASH();
+}
   }
   else {
     target_ = layer->GetThread();

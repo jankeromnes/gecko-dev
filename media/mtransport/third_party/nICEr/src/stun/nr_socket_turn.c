@@ -83,13 +83,15 @@ int nr_socket_turn_create(nr_socket *sock, nr_socket **sockp)
     int r,_status;
     nr_socket_turn *sturn=0;
 
-    if(!(sturn=RCALLOC(sizeof(nr_socket_turn))))
+    if(!(sturn=RCALLOC(sizeof(nr_socket_turn)))) {
       ABORT(R_NO_MEMORY);
+}
 
     sturn->magic_cookie = nr_socket_turn_magic_cookie;
 
-    if(r=nr_socket_create_int(sturn, &nr_socket_turn_vtbl, sockp))
+    if(r=nr_socket_create_int(sturn, &nr_socket_turn_vtbl, sockp)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -104,8 +106,9 @@ static int nr_socket_turn_destroy(void **objp)
     int _status;
     nr_socket_turn *sturn;
 
-    if(!objp || !*objp)
+    if(!objp || !*objp) {
       return(0);
+}
 
     sturn=*objp;
     *objp=0;
@@ -130,8 +133,9 @@ static int nr_socket_turn_sendto(void *obj,const void *msg, size_t len,
     assert(sturn->turn);
 
     if ((r = nr_turn_client_send_indication(sturn->turn, msg, len, flags,
-                                            addr)))
+                                            addr))) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -165,8 +169,9 @@ static int nr_socket_turn_getaddr(void *obj, nr_transport_addr *addrp)
     assert(sturn->turn);
 
     /* This returns the relayed address */
-    if ((r=nr_turn_client_get_relayed_address(sturn->turn, addrp)))
+    if ((r=nr_turn_client_get_relayed_address(sturn->turn, addrp))) {
       ABORT(r);
+}
 
     _status=0;
  abort:

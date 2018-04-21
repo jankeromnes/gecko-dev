@@ -156,8 +156,9 @@ bool
 js::math_abs_handle(JSContext* cx, js::HandleValue v, js::MutableHandleValue r)
 {
     double x;
-    if (!ToNumber(cx, v, &x))
+    if (!ToNumber(cx, v, &x)) {
         return false;
+}
 
     double z = Abs(x);
     r.setNumber(z);
@@ -203,12 +204,14 @@ js::math_acos(JSContext* cx, unsigned argc, Value* vp)
     }
 
     double x;
-    if (!ToNumber(cx, args[0], &x))
+    if (!ToNumber(cx, args[0], &x)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double z = math_acos_impl(mathCache, x);
     args.rval().setDouble(z);
@@ -240,12 +243,14 @@ js::math_asin(JSContext* cx, unsigned argc, Value* vp)
     }
 
     double x;
-    if (!ToNumber(cx, args[0], &x))
+    if (!ToNumber(cx, args[0], &x)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double z = math_asin_impl(mathCache, x);
     args.rval().setDouble(z);
@@ -277,12 +282,14 @@ js::math_atan(JSContext* cx, unsigned argc, Value* vp)
     }
 
     double x;
-    if (!ToNumber(cx, args[0], &x))
+    if (!ToNumber(cx, args[0], &x)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double z = math_atan_impl(mathCache, x);
     args.rval().setDouble(z);
@@ -300,12 +307,14 @@ bool
 js::math_atan2_handle(JSContext* cx, HandleValue y, HandleValue x, MutableHandleValue res)
 {
     double dy;
-    if (!ToNumber(cx, y, &dy))
+    if (!ToNumber(cx, y, &dy)) {
         return false;
+}
 
     double dx;
-    if (!ToNumber(cx, x, &dx))
+    if (!ToNumber(cx, x, &dx)) {
         return false;
+}
 
     double z = ecmaAtan2(dy, dx);
     res.setDouble(z);
@@ -331,8 +340,9 @@ bool
 js::math_ceil_handle(JSContext* cx, HandleValue v, MutableHandleValue res)
 {
     double d;
-    if(!ToNumber(cx, v, &d))
+    if(!ToNumber(cx, v, &d)) {
         return false;
+}
 
     double result = math_ceil_impl(d);
     res.setNumber(result);
@@ -363,8 +373,9 @@ js::math_clz32(JSContext* cx, unsigned argc, Value* vp)
     }
 
     uint32_t n;
-    if (!ToUint32(cx, args[0], &n))
+    if (!ToUint32(cx, args[0], &n)) {
         return false;
+}
 
     if (n == 0) {
         args.rval().setInt32(32);
@@ -400,12 +411,14 @@ js::math_cos(JSContext* cx, unsigned argc, Value* vp)
     }
 
     double x;
-    if (!ToNumber(cx, args[0], &x))
+    if (!ToNumber(cx, args[0], &x)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double z = math_cos_impl(mathCache, x);
     args.rval().setDouble(z);
@@ -437,12 +450,14 @@ js::math_exp(JSContext* cx, unsigned argc, Value* vp)
     }
 
     double x;
-    if (!ToNumber(cx, args[0], &x))
+    if (!ToNumber(cx, args[0], &x)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double z = math_exp_impl(mathCache, x);
     args.rval().setNumber(z);
@@ -460,8 +475,9 @@ bool
 js::math_floor_handle(JSContext* cx, HandleValue v, MutableHandleValue r)
 {
     double d;
-    if (!ToNumber(cx, v, &d))
+    if (!ToNumber(cx, v, &d)) {
         return false;
+}
 
     double z = math_floor_impl(d);
     r.setNumber(z);
@@ -486,10 +502,12 @@ bool
 js::math_imul_handle(JSContext* cx, HandleValue lhs, HandleValue rhs, MutableHandleValue res)
 {
     int32_t a = 0, b = 0;
-    if (!lhs.isUndefined() && !ToInt32(cx, lhs, &a))
+    if (!lhs.isUndefined() && !ToInt32(cx, lhs, &a)) {
         return false;
-    if (!rhs.isUndefined() && !ToInt32(cx, rhs, &b))
+}
+    if (!rhs.isUndefined() && !ToInt32(cx, rhs, &b)) {
         return false;
+}
 
     res.setInt32(WrappingMultiply(a, b));
     return true;
@@ -517,8 +535,9 @@ bool
 js::RoundFloat32(JSContext* cx, HandleValue arg, MutableHandleValue res)
 {
     float f;
-    if (!RoundFloat32(cx, arg, &f))
+    if (!RoundFloat32(cx, arg, &f)) {
         return false;
+}
 
     res.setDouble(static_cast<double>(f));
     return true;
@@ -555,12 +574,14 @@ bool
 js::math_log_handle(JSContext* cx, HandleValue val, MutableHandleValue res)
 {
     double in;
-    if (!ToNumber(cx, val, &in))
+    if (!ToNumber(cx, val, &in)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double out = math_log_impl(mathCache, in);
     res.setNumber(out);
@@ -586,8 +607,9 @@ js::math_max_impl(double x, double y)
     AutoUnsafeCallWithABI unsafe;
 
     // Math.max(num, NaN) => NaN, Math.max(-0, +0) => +0
-    if (x > y || IsNaN(x) || (x == y && IsNegative(y)))
+    if (x > y || IsNaN(x) || (x == y && IsNegative(y))) {
         return x;
+}
     return y;
 }
 
@@ -599,8 +621,9 @@ js::math_max(JSContext* cx, unsigned argc, Value* vp)
     double maxval = NegativeInfinity<double>();
     for (unsigned i = 0; i < args.length(); i++) {
         double x;
-        if (!ToNumber(cx, args[i], &x))
+        if (!ToNumber(cx, args[i], &x)) {
             return false;
+}
         maxval = math_max_impl(x, maxval);
     }
     args.rval().setNumber(maxval);
@@ -613,8 +636,9 @@ js::math_min_impl(double x, double y)
     AutoUnsafeCallWithABI unsafe;
 
     // Math.min(num, NaN) => NaN, Math.min(-0, +0) => -0
-    if (x < y || IsNaN(x) || (x == y && IsNegativeZero(x)))
+    if (x < y || IsNaN(x) || (x == y && IsNegativeZero(x))) {
         return x;
+}
     return y;
 }
 
@@ -626,8 +650,9 @@ js::math_min(JSContext* cx, unsigned argc, Value* vp)
     double minval = PositiveInfinity<double>();
     for (unsigned i = 0; i < args.length(); i++) {
         double x;
-        if (!ToNumber(cx, args[i], &x))
+        if (!ToNumber(cx, args[i], &x)) {
             return false;
+}
         minval = math_min_impl(x, minval);
     }
     args.rval().setNumber(minval);
@@ -639,15 +664,18 @@ js::minmax_impl(JSContext* cx, bool max, HandleValue a, HandleValue b, MutableHa
 {
     double x, y;
 
-    if (!ToNumber(cx, a, &x))
+    if (!ToNumber(cx, a, &x)) {
         return false;
-    if (!ToNumber(cx, b, &y))
+}
+    if (!ToNumber(cx, b, &y)) {
         return false;
+}
 
-    if (max)
+    if (max) {
         res.setNumber(math_max_impl(x, y));
-    else
+    } else {
         res.setNumber(math_min_impl(x, y));
+}
 
     return true;
 }
@@ -660,7 +688,8 @@ js::powi(double x, int32_t y)
     double m = x;
     double p = 1;
     while (true) {
-        if ((n & 1) != 0) p *= m;
+        if ((n & 1) != 0) { p *= m;
+}
         n >>= 1;
         if (n == 0) {
             if (y < 0) {
@@ -691,29 +720,34 @@ js::ecmaPow(double x, double y)
      * check for NaN since a comparison with NaN is always false.
      */
     int32_t yi;
-    if (NumberEqualsInt32(y, &yi))
+    if (NumberEqualsInt32(y, &yi)) {
         return powi(x, yi);
+}
 
     /*
      * Because C99 and ECMA specify different behavior for pow(),
      * we need to wrap the libm call to make it ECMA compliant.
      */
-    if (!IsFinite(y) && (x == 1.0 || x == -1.0))
+    if (!IsFinite(y) && (x == 1.0 || x == -1.0)) {
         return GenericNaN();
+}
 
     /* pow(x, +-0) is always 1, even for x = NaN (MSVC gets this wrong). */
-    if (y == 0)
+    if (y == 0) {
         return 1;
+}
 
     /*
      * Special case for square roots. Note that pow(x, 0.5) != sqrt(x)
      * when x = -0.0, so we have to guard for this.
      */
     if (IsFinite(x) && x != 0.0) {
-        if (y == 0.5)
+        if (y == 0.5) {
             return sqrt(x);
-        if (y == -0.5)
+}
+        if (y == -0.5) {
             return 1.0 / sqrt(x);
+}
     }
     return pow(x, y);
 }
@@ -722,12 +756,14 @@ bool
 js::math_pow_handle(JSContext* cx, HandleValue base, HandleValue power, MutableHandleValue result)
 {
     double x;
-    if (!ToNumber(cx, base, &x))
+    if (!ToNumber(cx, base, &x)) {
         return false;
+}
 
     double y;
-    if (!ToNumber(cx, power, &y))
+    if (!ToNumber(cx, power, &y)) {
         return false;
+}
 
     double z = ecmaPow(x, y);
     result.setNumber(z);
@@ -816,8 +852,9 @@ bool
 js::math_round_handle(JSContext* cx, HandleValue arg, MutableHandleValue res)
 {
     double d;
-    if (!ToNumber(cx, arg, &d))
+    if (!ToNumber(cx, arg, &d)) {
         return false;
+}
 
     d = math_round_impl(d);
     res.setNumber(d);
@@ -845,12 +882,14 @@ js::math_round_impl(double x)
     AutoUnsafeCallWithABI unsafe;
 
     int32_t ignored;
-    if (NumberIsInt32(x, &ignored))
+    if (NumberIsInt32(x, &ignored)) {
         return x;
+}
 
     /* Some numbers are so big that adding 0.5 would give the wrong number. */
-    if (ExponentComponent(x) >= int_fast16_t(FloatingPoint<double>::kExponentShift))
+    if (ExponentComponent(x) >= int_fast16_t(FloatingPoint<double>::kExponentShift)) {
         return x;
+}
 
     double add = (x >= 0) ? GetBiggestNumberLessThan(0.5) : 0.5;
     return std::copysign(fdlibm::floor(x + add), x);
@@ -862,12 +901,14 @@ js::math_roundf_impl(float x)
     AutoUnsafeCallWithABI unsafe;
 
     int32_t ignored;
-    if (NumberIsInt32(x, &ignored))
+    if (NumberIsInt32(x, &ignored)) {
         return x;
+}
 
     /* Some numbers are so big that adding 0.5 would give the wrong number. */
-    if (ExponentComponent(x) >= int_fast16_t(FloatingPoint<float>::kExponentShift))
+    if (ExponentComponent(x) >= int_fast16_t(FloatingPoint<float>::kExponentShift)) {
         return x;
+}
 
     float add = (x >= 0) ? GetBiggestNumberLessThan(0.5f) : 0.5f;
     return std::copysign(fdlibm::floorf(x + add), x);
@@ -904,12 +945,14 @@ bool
 js::math_sin_handle(JSContext* cx, HandleValue val, MutableHandleValue res)
 {
     double in;
-    if (!ToNumber(cx, val, &in))
+    if (!ToNumber(cx, val, &in)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double out = math_sin_impl(mathCache, in);
     res.setDouble(out);
@@ -958,23 +1001,27 @@ js::math_sincos_impl(MathCache* mathCache, double x, double *sin, double *cos)
         return;
     }
 
-    if (!hasSin)
+    if (!hasSin) {
         *sin = js::math_sin_impl(mathCache, x);
+}
 
-    if (!hasCos)
+    if (!hasCos) {
         *cos = js::math_cos_impl(mathCache, x);
+}
 }
 
 bool
 js::math_sqrt_handle(JSContext* cx, HandleValue number, MutableHandleValue result)
 {
     double x;
-    if (!ToNumber(cx, number, &x))
+    if (!ToNumber(cx, number, &x)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double z = mathCache->lookup(sqrt, x, MathCache::Sqrt);
     result.setDouble(z);
@@ -1019,12 +1066,14 @@ js::math_tan(JSContext* cx, unsigned argc, Value* vp)
     }
 
     double x;
-    if (!ToNumber(cx, args[0], &x))
+    if (!ToNumber(cx, args[0], &x)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
 
     double z = math_tan_impl(mathCache, x);
     args.rval().setDouble(z);
@@ -1043,12 +1092,14 @@ static bool math_function(JSContext* cx, unsigned argc, Value* vp)
     }
 
     double x;
-    if (!ToNumber(cx, args[0], &x))
+    if (!ToNumber(cx, args[0], &x)) {
         return false;
+}
 
     MathCache* mathCache = cx->caches().getMathCache(cx);
-    if (!mathCache)
+    if (!mathCache) {
         return false;
+}
     double z = F(mathCache, x);
     args.rval().setNumber(z);
 
@@ -1282,12 +1333,14 @@ js::hypot4(double x, double y, double z, double w)
 
     // Check for infinities or NaNs so that we can return immediately.
     if (mozilla::IsInfinite(x) || mozilla::IsInfinite(y) ||
-            mozilla::IsInfinite(z) || mozilla::IsInfinite(w))
+            mozilla::IsInfinite(z) || mozilla::IsInfinite(w)) {
         return mozilla::PositiveInfinity<double>();
+}
 
     if (mozilla::IsNaN(x) || mozilla::IsNaN(y) || mozilla::IsNaN(z) ||
-            mozilla::IsNaN(w))
+            mozilla::IsNaN(w)) {
         return GenericNaN();
+}
 
     double scale = 0;
     double sumsq = 1;
@@ -1321,10 +1374,12 @@ js::math_hypot_handle(JSContext* cx, HandleValueArray args, MutableHandleValue r
     // given. Do that here as well to get the same results.
     if (args.length() == 2) {
         double x, y;
-        if (!ToNumber(cx, args[0], &x))
+        if (!ToNumber(cx, args[0], &x)) {
             return false;
-        if (!ToNumber(cx, args[1], &y))
+}
+        if (!ToNumber(cx, args[1], &y)) {
             return false;
+}
 
         double result = ecmaHypot(x, y);
         res.setNumber(result);
@@ -1339,13 +1394,15 @@ js::math_hypot_handle(JSContext* cx, HandleValueArray args, MutableHandleValue r
 
     for (unsigned i = 0; i < args.length(); i++) {
         double x;
-        if (!ToNumber(cx, args[i], &x))
+        if (!ToNumber(cx, args[i], &x)) {
             return false;
+}
 
         isInfinite |= mozilla::IsInfinite(x);
         isNaN |= mozilla::IsNaN(x);
-        if (isInfinite || isNaN)
+        if (isInfinite || isNaN) {
             continue;
+}
 
         hypot_step(scale, sumsq, x);
     }
@@ -1379,8 +1436,9 @@ js::math_trunc(JSContext* cx, unsigned argc, Value* vp)
 
 static double sign(double x)
 {
-    if (mozilla::IsNaN(x))
+    if (mozilla::IsNaN(x)) {
         return GenericNaN();
+}
 
     return x == 0 ? x : x < 0 ? -1 : 1;
 }
@@ -1477,20 +1535,26 @@ JSObject*
 js::InitMathClass(JSContext* cx, Handle<GlobalObject*> global)
 {
     RootedObject proto(cx, GlobalObject::getOrCreateObjectPrototype(cx, global));
-    if (!proto)
+    if (!proto) {
         return nullptr;
+}
     RootedObject Math(cx, NewObjectWithGivenProto(cx, &MathClass, proto, SingletonObject));
-    if (!Math)
+    if (!Math) {
         return nullptr;
+}
 
-    if (!JS_DefineProperty(cx, global, js_Math_str, Math, JSPROP_RESOLVING))
+    if (!JS_DefineProperty(cx, global, js_Math_str, Math, JSPROP_RESOLVING)) {
         return nullptr;
-    if (!JS_DefineFunctions(cx, Math, math_static_methods))
+}
+    if (!JS_DefineFunctions(cx, Math, math_static_methods)) {
         return nullptr;
-    if (!JS_DefineConstDoubles(cx, Math, math_constants))
+}
+    if (!JS_DefineConstDoubles(cx, Math, math_constants)) {
         return nullptr;
-    if (!DefineToStringTag(cx, Math, cx->names().Math))
+}
+    if (!DefineToStringTag(cx, Math, cx->names().Math)) {
         return nullptr;
+}
 
     global->setConstructor(JSProto_Math, ObjectValue(*Math));
 

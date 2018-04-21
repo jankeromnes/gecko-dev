@@ -144,8 +144,9 @@ prolog0(PROLOG_STATE *state,
     if (!XmlNameMatchesAscii(enc,
                              ptr + 2 * MIN_BYTES_PER_CHAR(enc),
                              end,
-                             KW_DOCTYPE))
+                             KW_DOCTYPE)) {
       break;
+}
     state->handler = doctype0;
     return XML_ROLE_DOCTYPE_NONE;
   case XML_TOK_INSTANCE_START:
@@ -175,8 +176,9 @@ prolog1(PROLOG_STATE *state,
     if (!XmlNameMatchesAscii(enc,
                              ptr + 2 * MIN_BYTES_PER_CHAR(enc),
                              end,
-                             KW_DOCTYPE))
+                             KW_DOCTYPE)) {
       break;
+}
     state->handler = doctype0;
     return XML_ROLE_DOCTYPE_NONE;
   case XML_TOK_INSTANCE_START:
@@ -391,8 +393,9 @@ externalSubset0(PROLOG_STATE *state,
                 const ENCODING *enc)
 {
   state->handler = externalSubset1;
-  if (tok == XML_TOK_XML_DECL)
+  if (tok == XML_TOK_XML_DECL) {
     return XML_ROLE_TEXT_DECL;
+}
   return externalSubset1(state, tok, ptr, end, enc);
 }
 
@@ -408,8 +411,9 @@ externalSubset1(PROLOG_STATE *state,
     state->handler = condSect0;
     return XML_ROLE_NONE;
   case XML_TOK_COND_SECT_CLOSE:
-    if (state->includeLevel == 0)
+    if (state->includeLevel == 0) {
       break;
+}
     state->includeLevel -= 1;
     return XML_ROLE_NONE;
   case XML_TOK_PROLOG_S:
@@ -417,8 +421,9 @@ externalSubset1(PROLOG_STATE *state,
   case XML_TOK_CLOSE_BRACKET:
     break;
   case XML_TOK_NONE:
-    if (state->includeLevel)
+    if (state->includeLevel) {
       break;
+}
     return XML_ROLE_NONE;
   default:
     return internalSubset(state, tok, ptr, end, enc);
@@ -806,11 +811,12 @@ attlist2(PROLOG_STATE *state,
         KW_NMTOKENS,
       };
       int i;
-      for (i = 0; i < (int)(sizeof(types)/sizeof(types[0])); i++)
+      for (i = 0; i < (int)(sizeof(types)/sizeof(types[0])); i++) {
         if (XmlNameMatchesAscii(enc, ptr, end, types[i])) {
           state->handler = attlist8;
           return XML_ROLE_ATTRIBUTE_TYPE_CDATA + i;
         }
+}
     }
     if (XmlNameMatchesAscii(enc, ptr, end, KW_NOTATION)) {
       state->handler = attlist5;
@@ -1299,8 +1305,9 @@ static int FASTCALL
 common(PROLOG_STATE *state, int tok)
 {
 #ifdef XML_DTD
-  if (!state->documentEntity && tok == XML_TOK_PARAM_ENTITY_REF)
+  if (!state->documentEntity && tok == XML_TOK_PARAM_ENTITY_REF) {
     return XML_ROLE_INNER_PARAM_ENTITY_REF;
+}
 #endif
   state->handler = error;
   return XML_ROLE_ERROR;

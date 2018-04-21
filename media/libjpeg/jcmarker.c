@@ -117,8 +117,9 @@ emit_byte (j_compress_ptr cinfo, int val)
 
   *(dest->next_output_byte)++ = (JOCTET) val;
   if (--dest->free_in_buffer == 0) {
-    if (! (*dest->empty_output_buffer) (cinfo))
+    if (! (*dest->empty_output_buffer) (cinfo)) {
       ERREXIT(cinfo, JERR_CANT_SUSPEND);
+}
   }
 }
 
@@ -154,13 +155,15 @@ emit_dqt (j_compress_ptr cinfo, int index)
   int prec;
   int i;
 
-  if (qtbl == NULL)
+  if (qtbl == NULL) {
     ERREXIT1(cinfo, JERR_NO_QUANT_TABLE, index);
+}
 
   prec = 0;
   for (i = 0; i < DCTSIZE2; i++) {
-    if (qtbl->quantval[i] > 255)
+    if (qtbl->quantval[i] > 255) {
       prec = 1;
+}
   }
 
   if (! qtbl->sent_table) {
@@ -173,8 +176,9 @@ emit_dqt (j_compress_ptr cinfo, int index)
     for (i = 0; i < DCTSIZE2; i++) {
       /* The table entries must be emitted in zigzag order. */
       unsigned int qval = qtbl->quantval[jpeg_natural_order[i]];
-      if (prec)
+      if (prec) {
         emit_byte(cinfo, (int) (qval >> 8));
+}
       emit_byte(cinfo, (int) (qval & 0xFF));
     }
 
@@ -199,24 +203,28 @@ emit_dht (j_compress_ptr cinfo, int index, boolean is_ac)
     htbl = cinfo->dc_huff_tbl_ptrs[index];
   }
 
-  if (htbl == NULL)
+  if (htbl == NULL) {
     ERREXIT1(cinfo, JERR_NO_HUFF_TABLE, index);
+}
 
   if (! htbl->sent_table) {
     emit_marker(cinfo, M_DHT);
 
     length = 0;
-    for (i = 1; i <= 16; i++)
+    for (i = 1; i <= 16; i++) {
       length += htbl->bits[i];
+}
 
     emit_2bytes(cinfo, length + 2 + 1 + 16);
     emit_byte(cinfo, index);
 
-    for (i = 1; i <= 16; i++)
+    for (i = 1; i <= 16; i++) {
       emit_byte(cinfo, htbl->bits[i]);
+}
 
-    for (i = 0; i < length; i++)
+    for (i = 0; i < length; i++) {
       emit_byte(cinfo, htbl->huffval[i]);
+}
 
     htbl->sent_table = TRUE;
   }
@@ -297,8 +305,9 @@ emit_sof (j_compress_ptr cinfo, JPEG_MARKER code)
 
   /* Make sure image isn't bigger than SOF field can handle */
   if ((long) cinfo->_jpeg_height > 65535L ||
-      (long) cinfo->_jpeg_width > 65535L)
+      (long) cinfo->_jpeg_width > 65535L) {
     ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (unsigned int) 65535);
+}
 
   emit_byte(cinfo, cinfo->data_precision);
   emit_2bytes(cinfo, (int) cinfo->_jpeg_height);
@@ -443,8 +452,9 @@ METHODDEF(void)
 write_marker_header (j_compress_ptr cinfo, int marker, unsigned int datalen)
 /* Emit an arbitrary marker header */
 {
-  if (datalen > (unsigned int) 65533)           /* safety check */
+  if (datalen > (unsigned int) 65533) {           /* safety check */
     ERREXIT(cinfo, JERR_BAD_LENGTH);
+}
 
   emit_marker(cinfo, (JPEG_MARKER) marker);
 
@@ -480,10 +490,12 @@ write_file_header (j_compress_ptr cinfo)
   /* SOI is defined to reset restart interval to 0 */
   marker->last_restart_interval = 0;
 
-  if (cinfo->write_JFIF_header) /* next an optional JFIF APP0 */
+  if (cinfo->write_JFIF_header) { /* next an optional JFIF APP0 */
     emit_jfif_app0(cinfo);
-  if (cinfo->write_Adobe_marker) /* next an optional Adobe APP14 */
+}
+  if (cinfo->write_Adobe_marker) { /* next an optional Adobe APP14 */
     emit_adobe_app14(cinfo);
+}
 }
 
 
@@ -522,8 +534,9 @@ write_frame_header (j_compress_ptr cinfo)
     is_baseline = TRUE;
     for (ci = 0, compptr = cinfo->comp_info; ci < cinfo->num_components;
          ci++, compptr++) {
-      if (compptr->dc_tbl_no > 1 || compptr->ac_tbl_no > 1)
+      if (compptr->dc_tbl_no > 1 || compptr->ac_tbl_no > 1) {
         is_baseline = FALSE;
+}
     }
     if (prec && is_baseline) {
       is_baseline = FALSE;
@@ -534,17 +547,19 @@ write_frame_header (j_compress_ptr cinfo)
 
   /* Emit the proper SOF marker */
   if (cinfo->arith_code) {
-    if (cinfo->progressive_mode)
+    if (cinfo->progressive_mode) {
       emit_sof(cinfo, M_SOF10); /* SOF code for progressive arithmetic */
-    else
+    } else {
       emit_sof(cinfo, M_SOF9);  /* SOF code for sequential arithmetic */
+}
   } else {
-    if (cinfo->progressive_mode)
+    if (cinfo->progressive_mode) {
       emit_sof(cinfo, M_SOF2);  /* SOF code for progressive Huffman */
-    else if (is_baseline)
+    } else if (is_baseline) {
       emit_sof(cinfo, M_SOF0);  /* SOF code for baseline implementation */
-    else
+    } else {
       emit_sof(cinfo, M_SOF1);  /* SOF code for non-baseline Huffman file */
+}
   }
 }
 
@@ -575,11 +590,13 @@ write_scan_header (j_compress_ptr cinfo)
     for (i = 0; i < cinfo->comps_in_scan; i++) {
       compptr = cinfo->cur_comp_info[i];
       /* DC needs no table for refinement scan */
-      if (cinfo->Ss == 0 && cinfo->Ah == 0)
+      if (cinfo->Ss == 0 && cinfo->Ah == 0) {
         emit_dht(cinfo, compptr->dc_tbl_no, FALSE);
+}
       /* AC needs no table when not present */
-      if (cinfo->Se)
+      if (cinfo->Se) {
         emit_dht(cinfo, compptr->ac_tbl_no, TRUE);
+}
     }
   }
 
@@ -621,16 +638,19 @@ write_tables_only (j_compress_ptr cinfo)
   emit_marker(cinfo, M_SOI);
 
   for (i = 0; i < NUM_QUANT_TBLS; i++) {
-    if (cinfo->quant_tbl_ptrs[i] != NULL)
+    if (cinfo->quant_tbl_ptrs[i] != NULL) {
       (void) emit_dqt(cinfo, i);
+}
   }
 
   if (! cinfo->arith_code) {
     for (i = 0; i < NUM_HUFF_TBLS; i++) {
-      if (cinfo->dc_huff_tbl_ptrs[i] != NULL)
+      if (cinfo->dc_huff_tbl_ptrs[i] != NULL) {
         emit_dht(cinfo, i, FALSE);
-      if (cinfo->ac_huff_tbl_ptrs[i] != NULL)
+}
+      if (cinfo->ac_huff_tbl_ptrs[i] != NULL) {
         emit_dht(cinfo, i, TRUE);
+}
     }
   }
 

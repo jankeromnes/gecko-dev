@@ -222,36 +222,55 @@ SUBTRACT_FUN(128x32) { STACK_H(64, subtract_64x32); }
 
 static SubtractWxHFuncType getSubtractFunc(int rows, int cols) {
   if (rows == 4) {
-    if (cols == 4) return subtract_4x4;
-    if (cols == 8) return subtract_8x4;
-    if (cols == 16) return subtract_16x4;
+    if (cols == 4) { return subtract_4x4;
+}
+    if (cols == 8) { return subtract_8x4;
+}
+    if (cols == 16) { return subtract_16x4;
+}
   }
   if (rows == 8) {
-    if (cols == 4) return subtract_4x8;
-    if (cols == 8) return subtract_8x8;
-    if (cols == 16) return subtract_16x8;
-    if (cols == 32) return subtract_32x8;
+    if (cols == 4) { return subtract_4x8;
+}
+    if (cols == 8) { return subtract_8x8;
+}
+    if (cols == 16) { return subtract_16x8;
+}
+    if (cols == 32) { return subtract_32x8;
+}
   }
   if (rows == 16) {
-    if (cols == 4) return subtract_4x16;
-    if (cols == 8) return subtract_8x16;
-    if (cols == 16) return subtract_16x16;
-    if (cols == 32) return subtract_32x16;
-    if (cols == 64) return subtract_64x16;
+    if (cols == 4) { return subtract_4x16;
+}
+    if (cols == 8) { return subtract_8x16;
+}
+    if (cols == 16) { return subtract_16x16;
+}
+    if (cols == 32) { return subtract_32x16;
+}
+    if (cols == 64) { return subtract_64x16;
+}
   }
   if (rows == 32) {
-    if (cols == 8) return subtract_8x32;
-    if (cols == 16) return subtract_16x32;
-    if (cols == 32) return subtract_32x32;
-    if (cols == 64) return subtract_64x32;
+    if (cols == 8) { return subtract_8x32;
+}
+    if (cols == 16) { return subtract_16x32;
+}
+    if (cols == 32) { return subtract_32x32;
+}
+    if (cols == 64) { return subtract_64x32;
+}
 #if CONFIG_EXT_PARTITION
     if (cols == 128) return subtract_128x32;
 #endif  // CONFIG_EXT_PARTITION
   }
   if (rows == 64) {
-    if (cols == 16) return subtract_16x64;
-    if (cols == 32) return subtract_32x64;
-    if (cols == 64) return subtract_64x64;
+    if (cols == 16) { return subtract_16x64;
+}
+    if (cols == 32) { return subtract_32x64;
+}
+    if (cols == 64) { return subtract_64x64;
+}
 #if CONFIG_EXT_PARTITION
     if (cols == 128) return subtract_128x64;
 #endif  // CONFIG_EXT_PARTITION

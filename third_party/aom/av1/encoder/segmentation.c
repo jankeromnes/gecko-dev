@@ -94,23 +94,27 @@ static int cost_segmap(unsigned *segcounts, aom_prob *probs) {
   if (c0123 > 0) {
     cost += c01 * av1_cost_zero(probs[1]) + c23 * av1_cost_one(probs[1]);
 
-    if (c01 > 0)
+    if (c01 > 0) {
       cost += segcounts[0] * av1_cost_zero(probs[3]) +
               segcounts[1] * av1_cost_one(probs[3]);
-    if (c23 > 0)
+}
+    if (c23 > 0) {
       cost += segcounts[2] * av1_cost_zero(probs[4]) +
               segcounts[3] * av1_cost_one(probs[4]);
+}
   }
 
   if (c4567 > 0) {
     cost += c45 * av1_cost_zero(probs[2]) + c67 * av1_cost_one(probs[2]);
 
-    if (c45 > 0)
+    if (c45 > 0) {
       cost += segcounts[4] * av1_cost_zero(probs[5]) +
               segcounts[5] * av1_cost_one(probs[5]);
-    if (c67 > 0)
+}
+    if (c67 > 0) {
       cost += segcounts[6] * av1_cost_zero(probs[6]) +
               segcounts[7] * av1_cost_one(probs[6]);
+}
   }
 
   return cost;
@@ -124,7 +128,8 @@ static void count_segs(const AV1_COMMON *cm, MACROBLOCKD *xd,
                        int mi_row, int mi_col) {
   int segment_id;
 
-  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) return;
+  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) { return;
+}
 
   xd->mi = mi;
   segment_id = xd->mi[0]->mbmi.segment_id;
@@ -153,7 +158,8 @@ static void count_segs(const AV1_COMMON *cm, MACROBLOCKD *xd,
     temporal_predictor_count[pred_context][pred_flag]++;
 
     // Update the "unpredicted" segment count
-    if (!pred_flag) t_unpred_seg_counts[segment_id]++;
+    if (!pred_flag) { t_unpred_seg_counts[segment_id]++;
+}
   }
 }
 
@@ -174,7 +180,8 @@ static void count_segs_sb(const AV1_COMMON *cm, MACROBLOCKD *xd,
   int bw, bh;
 #endif  // CONFIG_EXT_PARTITION_TYPES
 
-  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) return;
+  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) { return;
+}
 
 #define CSEGS(cs_bw, cs_bh, cs_rowoff, cs_coloff)                              \
   count_segs(cm, xd, tile, mi + mis * (cs_rowoff) + (cs_coloff),               \

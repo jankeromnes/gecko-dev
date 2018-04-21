@@ -624,8 +624,9 @@ PK11_ExtractPublicKey(PK11SlotInfo *slot, KeyType keyType, CK_OBJECT_HANDLE id)
 
     /* now we need to create space for the public key */
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
     tmp_arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
     if (tmp_arena == NULL) {
         PORT_FreeArena(arena, PR_FALSE);
@@ -662,19 +663,22 @@ PK11_ExtractPublicKey(PK11SlotInfo *slot, KeyType keyType, CK_OBJECT_HANDLE id)
             templateCount = attrs - template;
             PR_ASSERT(templateCount <= sizeof(template) / sizeof(CK_ATTRIBUTE));
             crv = PK11_GetAttributes(tmp_arena, slot, id, template, templateCount);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
 
             if ((keyClass != CKO_PUBLIC_KEY) || (pk11KeyType != CKK_RSA)) {
                 crv = CKR_OBJECT_HANDLE_INVALID;
                 break;
             }
             crv = pk11_Attr2SecItem(arena, modulus, &pubKey->u.rsa.modulus);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = pk11_Attr2SecItem(arena, exponent, &pubKey->u.rsa.publicExponent);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             break;
         case dsaKey:
             prime = attrs;
@@ -692,25 +696,30 @@ PK11_ExtractPublicKey(PK11SlotInfo *slot, KeyType keyType, CK_OBJECT_HANDLE id)
             templateCount = attrs - template;
             PR_ASSERT(templateCount <= sizeof(template) / sizeof(CK_ATTRIBUTE));
             crv = PK11_GetAttributes(tmp_arena, slot, id, template, templateCount);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
 
             if ((keyClass != CKO_PUBLIC_KEY) || (pk11KeyType != CKK_DSA)) {
                 crv = CKR_OBJECT_HANDLE_INVALID;
                 break;
             }
             crv = pk11_Attr2SecItem(arena, prime, &pubKey->u.dsa.params.prime);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = pk11_Attr2SecItem(arena, subprime, &pubKey->u.dsa.params.subPrime);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = pk11_Attr2SecItem(arena, base, &pubKey->u.dsa.params.base);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = pk11_Attr2SecItem(arena, value, &pubKey->u.dsa.publicValue);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             break;
         case dhKey:
             prime = attrs;
@@ -725,22 +734,26 @@ PK11_ExtractPublicKey(PK11SlotInfo *slot, KeyType keyType, CK_OBJECT_HANDLE id)
             templateCount = attrs - template;
             PR_ASSERT(templateCount <= sizeof(template) / sizeof(CK_ATTRIBUTE));
             crv = PK11_GetAttributes(tmp_arena, slot, id, template, templateCount);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
 
             if ((keyClass != CKO_PUBLIC_KEY) || (pk11KeyType != CKK_DH)) {
                 crv = CKR_OBJECT_HANDLE_INVALID;
                 break;
             }
             crv = pk11_Attr2SecItem(arena, prime, &pubKey->u.dh.prime);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = pk11_Attr2SecItem(arena, base, &pubKey->u.dh.base);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = pk11_Attr2SecItem(arena, value, &pubKey->u.dh.publicValue);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             break;
         case ecKey:
             pubKey->u.ec.size = 0;
@@ -753,8 +766,9 @@ PK11_ExtractPublicKey(PK11SlotInfo *slot, KeyType keyType, CK_OBJECT_HANDLE id)
             templateCount = attrs - template;
             PR_ASSERT(templateCount <= sizeof(template) / sizeof(CK_ATTRIBUTE));
             crv = PK11_GetAttributes(arena, slot, id, template, templateCount);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
 
             if ((keyClass != CKO_PUBLIC_KEY) || (pk11KeyType != CKK_EC)) {
                 crv = CKR_OBJECT_HANDLE_INVALID;
@@ -763,8 +777,9 @@ PK11_ExtractPublicKey(PK11SlotInfo *slot, KeyType keyType, CK_OBJECT_HANDLE id)
 
             crv = pk11_Attr2SecItem(arena, ecparams,
                                     &pubKey->u.ec.DEREncodedParams);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             pubKey->u.ec.encoding = ECPoint_Undefined;
             crv = pk11_get_Decoded_ECPoint(arena,
                                            &pubKey->u.ec.DEREncodedParams, value,
@@ -821,8 +836,9 @@ PK11_MakePrivKey(PK11SlotInfo *slot, KeyType keyType,
                         SECOidTag tag;
 
                         tag = SECOID_GetAlgorithmTag(&spki->algorithm);
-                        if (tag == SEC_OID_PKCS1_RSA_PSS_SIGNATURE)
+                        if (tag == SEC_OID_PKCS1_RSA_PSS_SIGNATURE) {
                             keyType = rsaPssKey;
+}
                         SECKEY_DestroySubjectPublicKeyInfo(spki);
                     }
                     SECITEM_FreeItem(&info, PR_FALSE);
@@ -858,8 +874,9 @@ PK11_MakePrivKey(PK11SlotInfo *slot, KeyType keyType,
 
     /* now we need to create space for the private key */
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
 
     privKey = (SECKEYPrivateKey *)
         PORT_ArenaZAlloc(arena, sizeof(SECKEYPrivateKey));
@@ -921,8 +938,9 @@ PK11_GetPrivateModulusLen(SECKEYPrivateKey *key)
         default:
             break;
     }
-    if (theTemplate.pValue != NULL)
+    if (theTemplate.pValue != NULL) {
         PORT_Free(theTemplate.pValue);
+}
     PORT_SetError(SEC_ERROR_INVALID_KEY);
     return -1;
 }
@@ -1074,8 +1092,9 @@ pk11_loadPrivKeyWithFlags(PK11SlotInfo *slot, SECKEYPrivateKey *privKey,
     }
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
     /*
       * read out the old attributes.
       */
@@ -1430,8 +1449,9 @@ PK11_GenerateKeyPairWithOpFlags(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
     }
 
     /* now query the slot to find out how "good" a key we can generate */
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_GetMechanismInfo(slot->slotID,
                                                 test_mech.mechanism, &mechanism_info);
     /*
@@ -1456,8 +1476,9 @@ PK11_GenerateKeyPairWithOpFlags(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
             mechanism_info.flags |= mechanism_info2.flags;
         }
     }
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
     if ((crv != CKR_OK) || (mechanism_info.flags == 0)) {
         /* must be old module... guess what it should be... */
         switch (test_mech.mechanism) {
@@ -1533,8 +1554,9 @@ PK11_GenerateKeyPairWithOpFlags(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
         restore = PR_TRUE;
     } else {
         session_handle = slot->session;
-        if (session_handle != CK_INVALID_SESSION)
+        if (session_handle != CK_INVALID_SESSION) {
             PK11_EnterSlotMonitor(slot);
+}
         restore = PR_FALSE;
         haslock = PR_TRUE;
     }
@@ -1551,8 +1573,9 @@ PK11_GenerateKeyPairWithOpFlags(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
     if (crv != CKR_OK) {
         if (restore) {
             PK11_RestoreROSession(slot, session_handle);
-        } else
+        } else {
             PK11_ExitSlotMonitor(slot);
+}
         PORT_SetError(PK11_MapError(crv));
         return NULL;
     }
@@ -1576,8 +1599,9 @@ PK11_GenerateKeyPairWithOpFlags(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
         if (restore) {
             /* we may have to restore the mutex so it get's exited properly
              * in RestoreROSession */
-            if (haslock)
+            if (haslock) {
                 PK11_EnterSlotMonitor(slot);
+}
             PK11_RestoreROSession(slot, session_handle);
         }
         PK11_DestroyObject(slot, pubID);
@@ -1674,8 +1698,9 @@ PK11_MakeKEAPubKey(unsigned char *keyData, int length)
     pkData.type = siBuffer;
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
 
     pubk = (SECKEYPublicKey *)PORT_ArenaZAlloc(arena, sizeof(SECKEYPublicKey));
     if (pubk == NULL) {
@@ -1741,8 +1766,9 @@ PK11_ImportEncryptedPrivateKeyInfoAndReturnKey(PK11SlotInfo *slot,
     CK_ATTRIBUTE_TYPE dsaUsage[] = { CKA_SIGN };
     CK_ATTRIBUTE_TYPE dhUsage[] = { CKA_DERIVE };
     CK_ATTRIBUTE_TYPE ecUsage[] = { CKA_SIGN, CKA_DERIVE };
-    if ((epki == NULL) || (pwitem == NULL))
+    if ((epki == NULL) || (pwitem == NULL)) {
         return SECFailure;
+}
 
     pbeMechType = PK11_AlgtagToMechanism(SECOID_FindOIDTag(
         &epki->algorithm.algorithm));
@@ -1913,8 +1939,9 @@ PK11_ExportEncryptedPrivKeyInfo(
     }
 
     arena = PORT_NewArena(2048);
-    if (arena)
+    if (arena) {
         epki = PORT_ArenaZNew(arena, SECKEYEncryptedPrivateKeyInfo);
+}
     if (epki == NULL) {
         rv = SECFailure;
         goto loser;
@@ -2145,8 +2172,9 @@ PK11_CopyTokenPrivKeyToSessionPrivKey(PK11SlotInfo *destSlot,
                              NULL,      /* pubKey    */
                              PR_FALSE,  /* token     */
                              PR_FALSE); /* sensitive */
-        if (newKey)
+        if (newKey) {
             return newKey;
+}
     }
     destSlot = privKey->pkcs11Slot;
     PK11_Authenticate(destSlot, PR_TRUE, privKey->wincx);
@@ -2438,8 +2466,9 @@ PK11_ListPrivateKeysInSlot(PK11SlotInfo *slot)
     SECKEYPrivateKeyList *keys;
 
     keys = SECKEY_NewPrivateKeyList();
-    if (keys == NULL)
+    if (keys == NULL) {
         return NULL;
+}
 
     status = PK11_TraversePrivateKeysInSlot(slot, privateKeyListCallback,
                                             (void *)keys);

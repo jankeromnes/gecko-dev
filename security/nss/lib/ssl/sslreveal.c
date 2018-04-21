@@ -24,8 +24,9 @@ SSL_RevealCert(PRFileDesc *fd)
     /* CERT_DupCertificate increases reference count and returns pointer to
      * the same cert
      */
-    if (sslsocket && sslsocket->sec.peerCert)
+    if (sslsocket && sslsocket->sec.peerCert) {
         cert = CERT_DupCertificate(sslsocket->sec.peerCert);
+}
 
     return cert;
 }
@@ -41,8 +42,9 @@ SSL_RevealPinArg(PRFileDesc *fd)
     sslsocket = ssl_FindSocket(fd);
 
     /* is pkcs11PinArg part of the sslSocket or sslSecurityInfo ? */
-    if (sslsocket)
+    if (sslsocket) {
         PinArg = sslsocket->pkcs11PinArg;
+}
 
     return PinArg;
 }
@@ -58,8 +60,9 @@ SSL_RevealURL(PRFileDesc *fd)
 
     sslsocket = ssl_FindSocket(fd);
 
-    if (sslsocket && sslsocket->url)
+    if (sslsocket && sslsocket->url) {
         url = PL_strdup(sslsocket->url);
+}
 
     return url;
 }

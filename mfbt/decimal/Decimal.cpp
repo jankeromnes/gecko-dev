@@ -82,8 +82,9 @@ SpecialValueHandler::SpecialValueHandler(const Decimal& lhs, const Decimal& rhs)
 
 SpecialValueHandler::HandleResult SpecialValueHandler::handle()
 {
-    if (m_lhs.isFinite() && m_rhs.isFinite())
+    if (m_lhs.isFinite() && m_rhs.isFinite()) {
         return BothFinite;
+}
 
     const Decimal::EncodedData::FormatClass lhsClass = m_lhs.value().formatClass();
     const Decimal::EncodedData::FormatClass rhsClass = m_rhs.value().formatClass();
@@ -97,11 +98,13 @@ SpecialValueHandler::HandleResult SpecialValueHandler::handle()
         return EitherNaN;
     }
 
-    if (lhsClass == Decimal::EncodedData::ClassInfinity)
+    if (lhsClass == Decimal::EncodedData::ClassInfinity) {
         return rhsClass == Decimal::EncodedData::ClassInfinity ? BothInfinity : LHSIsInfinity;
+}
 
-    if (rhsClass == Decimal::EncodedData::ClassInfinity)
+    if (rhsClass == Decimal::EncodedData::ClassInfinity) {
         return RHSIsInfinity;
+}
 
     ASSERT_NOT_REACHED();
     return BothFinite;
@@ -190,8 +193,9 @@ static int countDigits(uint64_t x)
     int numberOfDigits = 0;
     for (uint64_t powerOfTen = 1; x >= powerOfTen; powerOfTen *= 10) {
         ++numberOfDigits;
-        if (powerOfTen >= std::numeric_limits<uint64_t>::max() / 10)
+        if (powerOfTen >= std::numeric_limits<uint64_t>::max() / 10) {
             break;
+}
     }
     return numberOfDigits;
 }
@@ -214,12 +218,14 @@ static uint64_t scaleUp(uint64_t x, int n)
     uint64_t y = 1;
     uint64_t z = 10;
     for (;;) {
-        if (n & 1)
+        if (n & 1) {
             y = y * z;
+}
 
         n >>= 1;
-        if (!n)
+        if (!n) {
             return x * y;
+}
 
         z = z * z;
     }
@@ -326,8 +332,9 @@ Decimal& Decimal::operator/=(const Decimal& other)
 
 Decimal Decimal::operator-() const
 {
-    if (isNaN())
+    if (isNaN()) {
         return *this;
+}
 
     Decimal result(*this);
     result.m_data.setSign(invertSign(m_data.sign()));
@@ -364,8 +371,9 @@ Decimal Decimal::operator+(const Decimal& rhs) const
         ? alignedOperands.lhsCoefficient + alignedOperands.rhsCoefficient
         : alignedOperands.lhsCoefficient - alignedOperands.rhsCoefficient;
 
-    if (lhsSign == Negative && rhsSign == Positive && !result)
+    if (lhsSign == Negative && rhsSign == Positive && !result) {
         return Decimal(Positive, alignedOperands.exponent, 0);
+}
 
     return static_cast<int64_t>(result) >= 0
         ? Decimal(lhsSign, alignedOperands.exponent, result)
@@ -402,8 +410,9 @@ Decimal Decimal::operator-(const Decimal& rhs) const
         ? alignedOperands.lhsCoefficient - alignedOperands.rhsCoefficient
         : alignedOperands.lhsCoefficient + alignedOperands.rhsCoefficient;
 
-    if (lhsSign == Negative && rhsSign == Negative && !result)
+    if (lhsSign == Negative && rhsSign == Negative && !result) {
         return Decimal(Positive, alignedOperands.exponent, 0);
+}
 
     return static_cast<int64_t>(result) >= 0
         ? Decimal(lhsSign, alignedOperands.exponent, result)
@@ -476,13 +485,15 @@ Decimal Decimal::operator/(const Decimal& rhs) const
     ASSERT(lhs.isFinite());
     ASSERT(rhs.isFinite());
 
-    if (rhs.isZero())
+    if (rhs.isZero()) {
         return lhs.isZero() ? nan() : infinity(resultSign);
+}
 
     int resultExponent = lhs.exponent() - rhs.exponent();
 
-    if (lhs.isZero())
+    if (lhs.isZero()) {
         return Decimal(resultSign, resultExponent, 0);
+}
 
     uint64_t remainder = lhs.m_data.coefficient();
     const uint64_t divisor = rhs.m_data.coefficient();
@@ -493,79 +504,95 @@ Decimal Decimal::operator/(const Decimal& rhs) const
             result *= 10;
             --resultExponent;
         }
-        if (remainder < divisor)
+        if (remainder < divisor) {
             break;
+}
         uint64_t quotient = remainder / divisor;
-        if (result > MaxCoefficient - quotient)
+        if (result > MaxCoefficient - quotient) {
             break;
+}
         result += quotient;
         remainder %= divisor;
-        if (!remainder)
+        if (!remainder) {
             break;
+}
     }
 
-    if (remainder > divisor / 2)
+    if (remainder > divisor / 2) {
         ++result;
+}
 
     return Decimal(resultSign, resultExponent, result);
 }
 
 bool Decimal::operator==(const Decimal& rhs) const
 {
-    if (isNaN() || rhs.isNaN())
+    if (isNaN() || rhs.isNaN()) {
         return false;
+}
     return m_data == rhs.m_data || compareTo(rhs).isZero();
 }
 
 bool Decimal::operator!=(const Decimal& rhs) const
 {
-    if (isNaN() || rhs.isNaN())
+    if (isNaN() || rhs.isNaN()) {
         return true;
-    if (m_data == rhs.m_data)
+}
+    if (m_data == rhs.m_data) {
         return false;
+}
     const Decimal result = compareTo(rhs);
-    if (result.isNaN())
+    if (result.isNaN()) {
         return false;
+}
     return !result.isZero();
 }
 
 bool Decimal::operator<(const Decimal& rhs) const
 {
     const Decimal result = compareTo(rhs);
-    if (result.isNaN())
+    if (result.isNaN()) {
         return false;
+}
     return !result.isZero() && result.isNegative();
 }
 
 bool Decimal::operator<=(const Decimal& rhs) const
 {
-    if (isNaN() || rhs.isNaN())
+    if (isNaN() || rhs.isNaN()) {
         return false;
-    if (m_data == rhs.m_data)
+}
+    if (m_data == rhs.m_data) {
         return true;
+}
     const Decimal result = compareTo(rhs);
-    if (result.isNaN())
+    if (result.isNaN()) {
         return false;
+}
     return result.isZero() || result.isNegative();
 }
 
 bool Decimal::operator>(const Decimal& rhs) const
 {
     const Decimal result = compareTo(rhs);
-    if (result.isNaN())
+    if (result.isNaN()) {
         return false;
+}
     return !result.isZero() && result.isPositive();
 }
 
 bool Decimal::operator>=(const Decimal& rhs) const
 {
-    if (isNaN() || rhs.isNaN())
+    if (isNaN() || rhs.isNaN()) {
         return false;
-    if (m_data == rhs.m_data)
+}
+    if (m_data == rhs.m_data) {
         return true;
+}
     const Decimal result = compareTo(rhs);
-    if (result.isNaN())
+    if (result.isNaN()) {
         return false;
+}
     return result.isZero() || !result.isNegative();
 }
 
@@ -631,21 +658,25 @@ static bool isMultiplePowersOfTen(uint64_t coefficient, int n)
 // Round toward positive infinity.
 Decimal Decimal::ceil() const
 {
-    if (isSpecial())
+    if (isSpecial()) {
         return *this;
+}
 
-    if (exponent() >= 0)
+    if (exponent() >= 0) {
         return *this;
+}
 
     uint64_t result = m_data.coefficient();
     const int numberOfDigits = countDigits(result);
     const int numberOfDropDigits = -exponent();
-    if (numberOfDigits <= numberOfDropDigits)
+    if (numberOfDigits <= numberOfDropDigits) {
         return isPositive() ? Decimal(1) : zero(Positive);
+}
 
     result = scaleDown(result, numberOfDropDigits);
-    if (isPositive() && !isMultiplePowersOfTen(m_data.coefficient(), numberOfDropDigits))
+    if (isPositive() && !isMultiplePowersOfTen(m_data.coefficient(), numberOfDropDigits)) {
         ++result;
+}
     return Decimal(sign(), 0, result);
 }
 
@@ -672,31 +703,37 @@ Decimal Decimal::compareTo(const Decimal& rhs) const
 // Round toward negative infinity.
 Decimal Decimal::floor() const
 {
-    if (isSpecial())
+    if (isSpecial()) {
         return *this;
+}
 
-    if (exponent() >= 0)
+    if (exponent() >= 0) {
         return *this;
+}
 
     uint64_t result = m_data.coefficient();
     const int numberOfDigits = countDigits(result);
     const int numberOfDropDigits = -exponent();
-    if (numberOfDigits < numberOfDropDigits)
+    if (numberOfDigits < numberOfDropDigits) {
         return isPositive() ? zero(Positive) : Decimal(-1);
+}
 
     result = scaleDown(result, numberOfDropDigits);
-    if (isNegative() && !isMultiplePowersOfTen(m_data.coefficient(), numberOfDropDigits))
+    if (isNegative() && !isMultiplePowersOfTen(m_data.coefficient(), numberOfDropDigits)) {
         ++result;
+}
     return Decimal(sign(), 0, result);
 }
 
 Decimal Decimal::fromDouble(double doubleValue)
 {
-    if (std::isfinite(doubleValue))
+    if (std::isfinite(doubleValue)) {
         return fromString(mozToString(doubleValue));
+}
 
-    if (std::isinf(doubleValue))
+    if (std::isinf(doubleValue)) {
         return infinity(doubleValue < 0 ? Negative : Positive);
+}
 
     return nan();
 }
@@ -796,8 +833,9 @@ Decimal Decimal::fromString(const String& str)
                 exponent *= 10;
                 exponent += ch - '0';
                 if (exponent > ExponentMax + Precision) {
-                    if (accumulator)
+                    if (accumulator) {
                         return exponentSign == Negative ? zero(Positive) : infinity(sign);
+}
                     return zero(sign);
                 }
                 state = StateEDigit;
@@ -851,8 +889,9 @@ Decimal Decimal::fromString(const String& str)
             return nan();
 
         case StateZero:
-            if (ch == '0')
+            if (ch == '0') {
                 break;
+}
 
             if (ch >= '1' && ch <= '9') {
                 accumulator = ch - '0';
@@ -871,18 +910,21 @@ Decimal Decimal::fromString(const String& str)
         }
     }
 
-    if (state == StateZero)
+    if (state == StateZero) {
         return zero(sign);
+}
 
     if (state == StateDigit || state == StateEDigit || state == StateDotDigit) {
         int resultExponent = exponent * (exponentSign == Negative ? -1 : 1) - numberOfDigitsAfterDot + numberOfExtraDigits;
-        if (resultExponent < ExponentMin)
+        if (resultExponent < ExponentMin) {
             return zero(Positive);
+}
 
         const int overflow = resultExponent - ExponentMax + 1;
         if (overflow > 0) {
-            if (overflow + numberOfDigits - numberOfDigitsAfterDot > Precision)
+            if (overflow + numberOfDigits - numberOfDigitsAfterDot > Precision) {
                 return infinity(sign);
+}
             accumulator = scaleUp(accumulator, overflow);
             resultExponent -= overflow;
         }
@@ -911,21 +953,25 @@ Decimal Decimal::remainder(const Decimal& rhs) const
 
 Decimal Decimal::round() const
 {
-    if (isSpecial())
+    if (isSpecial()) {
         return *this;
+}
 
-    if (exponent() >= 0)
+    if (exponent() >= 0) {
         return *this;
+}
 
     uint64_t result = m_data.coefficient();
     const int numberOfDigits = countDigits(result);
     const int numberOfDropDigits = -exponent();
-    if (numberOfDigits < numberOfDropDigits)
+    if (numberOfDigits < numberOfDropDigits) {
         return zero(Positive);
+}
 
     result = scaleDown(result, numberOfDropDigits - 1);
-    if (result % 10 >= 5)
+    if (result % 10 >= 5) {
         result += 10;
+}
     result /= 10;
     return Decimal(sign(), 0, result);
 }
@@ -938,8 +984,9 @@ double Decimal::toDouble() const
         return valid ? doubleValue : std::numeric_limits<double>::quiet_NaN();
     }
 
-    if (isInfinity())
+    if (isInfinity()) {
         return isNegative() ? -std::numeric_limits<double>::infinity() : std::numeric_limits<double>::infinity();
+}
 
     return std::numeric_limits<double>::quiet_NaN();
 }
@@ -963,8 +1010,9 @@ String Decimal::toString() const
     }
 
     StringBuilder builder;
-    if (sign())
+    if (sign()) {
         builder.append('-');
+}
 
     int originalExponent = exponent();
     uint64_t coefficient = m_data.coefficient();
@@ -978,8 +1026,9 @@ String Decimal::toString() const
             ++originalExponent;
         }
 
-        if (lastDigit >= 5)
+        if (lastDigit >= 5) {
             ++coefficient;
+}
 
         while (originalExponent < 0 && coefficient && !(coefficient % 10)) {
             coefficient /= 10;
@@ -999,26 +1048,30 @@ String Decimal::toString() const
         if (adjustedExponent >= 0) {
             for (int i = 0; i < coefficientLength; ++i) {
                 builder.append(digits[i]);
-                if (i == adjustedExponent)
+                if (i == adjustedExponent) {
                     builder.append('.');
+}
             }
             return builder.toString();
         }
 
         builder.appendLiteral("0.");
-        for (int i = adjustedExponent + 1; i < 0; ++i)
+        for (int i = adjustedExponent + 1; i < 0; ++i) {
             builder.append('0');
+}
 
         builder.append(digits);
 
     } else {
         builder.append(digits[0]);
-        while (coefficientLength >= 2 && digits[coefficientLength - 1] == '0')
+        while (coefficientLength >= 2 && digits[coefficientLength - 1] == '0') {
             --coefficientLength;
+}
         if (coefficientLength >= 2) {
             builder.append('.');
-            for (int i = 1; i < coefficientLength; ++i)
+            for (int i = 1; i < coefficientLength; ++i) {
                 builder.append(digits[i]);
+}
         }
 
         if (adjustedExponent) {

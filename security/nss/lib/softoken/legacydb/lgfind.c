@@ -146,8 +146,9 @@ isSecretKey(NSSLOWKEYPrivateKey *privKey)
 {
     if (privKey->keyType == NSSLOWKEYRSAKey &&
         privKey->u.rsa.publicExponent.len == 1 &&
-        privKey->u.rsa.publicExponent.data[0] == 0)
+        privKey->u.rsa.publicExponent.data[0] == 0) {
         return PR_TRUE;
+}
 
     return PR_FALSE;
 }
@@ -431,8 +432,9 @@ lg_searchCertsAndTrust(SDB *sdb, SECItem *derCert, SECItem *name,
     int i;
 
     certHandle = lg_getCertDB(sdb);
-    if (certHandle == NULL)
+    if (certHandle == NULL) {
         return;
+}
 
     certData.sdb = sdb;
     certData.max_cert_count = 0;
@@ -539,8 +541,9 @@ lg_searchCertsAndTrust(SDB *sdb, SECItem *derCert, SECItem *name,
         nsslowcert_DestroyCertificate(cert);
     }
 
-    if (certData.certs)
+    if (certData.certs) {
         PORT_Free(certData.certs);
+}
     return;
 }
 
@@ -569,8 +572,9 @@ lg_searchSMime(SDB *sdb, SECItem *email, SDBFind *handles,
     certDBEntrySMime *entry;
 
     certHandle = lg_getCertDB(sdb);
-    if (certHandle == NULL)
+    if (certHandle == NULL) {
         return;
+}
 
     if (email->data != NULL) {
         char *tmp_name = (char *)PORT_Alloc(email->len + 1);

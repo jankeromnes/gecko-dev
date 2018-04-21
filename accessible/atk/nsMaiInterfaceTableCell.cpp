@@ -203,8 +203,9 @@ void
 tableCellInterfaceInitCB(AtkTableCellIface* aIface)
 {
   NS_ASSERTION(aIface, "no interface!");
-  if (MOZ_UNLIKELY(!aIface))
+  if (MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   aIface->get_column_span = GetColumnSpanCB;
   aIface->get_column_header_cells = GetColumnHeaderCellsCB;

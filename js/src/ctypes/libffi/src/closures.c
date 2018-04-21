@@ -138,19 +138,23 @@ selinux_enabled_check (void)
   size_t len = 0;
 
   if (statfs ("/selinux", &sfs) >= 0
-      && (unsigned int) sfs.f_type == 0xf97cff8cU)
+      && (unsigned int) sfs.f_type == 0xf97cff8cU) {
     return 1;
+}
   f = fopen ("/proc/mounts", "r");
-  if (f == NULL)
+  if (f == NULL) {
     return 0;
+}
   while (getline (&buf, &len, f) >= 0)
     {
       char *p = strchr (buf, ' ');
-      if (p == NULL)
+      if (p == NULL) {
         break;
+}
       p = strchr (p + 1, ' ');
-      if (p == NULL)
+      if (p == NULL) {
         break;
+}
       if (strncmp (p + 1, "selinuxfs ", 10) == 0)
         {
           free (buf);
@@ -269,8 +273,9 @@ open_temp_exec_file_name (char *name)
 {
   int fd = mkstemp (name);
 
-  if (fd != -1)
+  if (fd != -1) {
     unlink (name);
+}
 
   return fd;
 }
@@ -283,8 +288,9 @@ open_temp_exec_file_dir (const char *dir)
   size_t lendir = strlen (dir);
   char *tempname = __builtin_alloca (lendir + sizeof (suffix));
 
-  if (!tempname)
+  if (!tempname) {
     return -1;
+}
 
   memcpy (tempname, dir, lendir);
   memcpy (tempname + lendir, suffix, sizeof (suffix));
@@ -299,8 +305,9 @@ open_temp_exec_file_env (const char *envvar)
 {
   const char *value = getenv (envvar);
 
-  if (!value)
+  if (!value) {
     return -1;
+}
 
   return open_temp_exec_file_dir (value);
 }
@@ -318,19 +325,22 @@ open_temp_exec_file_mnt (const char *mounts)
 
   if (mounts != last_mounts)
     {
-      if (last_mntent)
+      if (last_mntent) {
 	endmntent (last_mntent);
+}
 
       last_mounts = mounts;
 
-      if (mounts)
+      if (mounts) {
 	last_mntent = setmntent (mounts, "r");
-      else
+      } else {
 	last_mntent = NULL;
+}
     }
 
-  if (!last_mntent)
+  if (!last_mntent) {
     return -1;
+}
 
   for (;;)
     {
@@ -338,18 +348,21 @@ open_temp_exec_file_mnt (const char *mounts)
       struct mntent mnt;
       char buf[MAXPATHLEN * 3];
 
-      if (getmntent_r (last_mntent, &mnt, buf, sizeof (buf)) == NULL)
+      if (getmntent_r (last_mntent, &mnt, buf, sizeof (buf)) == NULL) {
 	return -1;
+}
 
       if (hasmntopt (&mnt, "ro")
 	  || hasmntopt (&mnt, "noexec")
-	  || access (mnt.mnt_dir, W_OK))
+	  || access (mnt.mnt_dir, W_OK)) {
 	continue;
+}
 
       fd = open_temp_exec_file_dir (mnt.mnt_dir);
 
-      if (fd != -1)
+      if (fd != -1) {
 	return fd;
+}
     }
 }
 #endif /* HAVE_MNTENT */
@@ -382,8 +395,9 @@ static int open_temp_exec_file_opts_idx = 0;
 static int
 open_temp_exec_file_opts_next (void)
 {
-  if (open_temp_exec_file_opts[open_temp_exec_file_opts_idx].repeat)
+  if (open_temp_exec_file_opts[open_temp_exec_file_opts_idx].repeat) {
     open_temp_exec_file_opts[open_temp_exec_file_opts_idx].func (NULL);
+}
 
   open_temp_exec_file_opts_idx++;
   if (open_temp_exec_file_opts_idx
@@ -412,8 +426,9 @@ open_temp_exec_file (void)
       if (!open_temp_exec_file_opts[open_temp_exec_file_opts_idx].repeat
 	  || fd == -1)
 	{
-	  if (open_temp_exec_file_opts_next ())
+	  if (open_temp_exec_file_opts_next ()) {
 	    break;
+}
 	}
     }
   while (fd == -1);
@@ -436,14 +451,16 @@ dlmmap_locked (void *start, size_t length, int prot, int flags, off_t offset)
       open_temp_exec_file_opts_idx = 0;
     retry_open:
       execfd = open_temp_exec_file ();
-      if (execfd == -1)
+      if (execfd == -1) {
 	return MFAIL;
+}
     }
 
   offset = execsize;
 
-  if (ftruncate (execfd, offset + length))
+  if (ftruncate (execfd, offset + length)) {
     return MFAIL;
+}
 
   flags &= ~(MAP_PRIVATE | MAP_ANONYMOUS);
   flags |= MAP_SHARED;
@@ -461,8 +478,9 @@ dlmmap_locked (void *start, size_t length, int prot, int flags, off_t offset)
       return MFAIL;
     }
   else if (!offset
-	   && open_temp_exec_file_opts[open_temp_exec_file_opts_idx].repeat)
+	   && open_temp_exec_file_opts[open_temp_exec_file_opts_idx].repeat) {
     open_temp_exec_file_opts_next ();
+}
 
   start = mmap (start, length, prot, flags, execfd, offset);
 
@@ -507,9 +525,10 @@ dlmmap (void *start, size_t length, int prot,
     {
       ptr = mmap (start, length, prot | PROT_EXEC, flags, fd, offset);
 
-      if (ptr != MFAIL || (errno != EPERM && errno != EACCES))
+      if (ptr != MFAIL || (errno != EPERM && errno != EACCES)) {
 	/* Cool, no need to mess with separate segments.  */
 	return ptr;
+}
 
       /* If MREMAP_DUP is ever introduced and implemented, try mmap
 	 with ((prot & ~PROT_WRITE) | PROT_EXEC) and mremap with
@@ -549,8 +568,9 @@ dlmunmap (void *start, size_t length)
   if (seg && (code = add_segment_exec_offset (start, seg)) != start)
     {
       int ret = munmap (code, length);
-      if (ret)
+      if (ret) {
 	return ret;
+}
     }
 
   return munmap (start, length);
@@ -582,8 +602,9 @@ ffi_closure_alloc (size_t size, void **code)
 {
   void *ptr;
 
-  if (!code)
+  if (!code) {
     return NULL;
+}
 
   ptr = dlmalloc (size);
 

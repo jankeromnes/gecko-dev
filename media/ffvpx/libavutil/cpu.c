@@ -51,14 +51,18 @@ static atomic_int cpu_flags = ATOMIC_VAR_INIT(-1);
 
 static int get_cpu_flags(void)
 {
-    if (ARCH_AARCH64)
+    if (ARCH_AARCH64) {
         return ff_get_cpu_flags_aarch64();
-    if (ARCH_ARM)
+}
+    if (ARCH_ARM) {
         return ff_get_cpu_flags_arm();
-    if (ARCH_PPC)
+}
+    if (ARCH_PPC) {
         return ff_get_cpu_flags_ppc();
-    if (ARCH_X86)
+}
+    if (ARCH_X86) {
         return ff_get_cpu_flags_x86();
+}
     return 0;
 }
 
@@ -179,8 +183,9 @@ int av_parse_cpu_flags(const char *s)
     int flags = 0, ret;
     const AVClass *pclass = &class;
 
-    if ((ret = av_opt_eval_flags(&pclass, &cpuflags_opts[0], s, &flags)) < 0)
+    if ((ret = av_opt_eval_flags(&pclass, &cpuflags_opts[0], s, &flags)) < 0) {
         return ret;
+}
 
     return flags & INT_MAX;
 }
@@ -304,14 +309,18 @@ int av_cpu_count(void)
 
 size_t av_cpu_max_align(void)
 {
-    if (ARCH_AARCH64)
+    if (ARCH_AARCH64) {
         return ff_get_cpu_max_align_aarch64();
-    if (ARCH_ARM)
+}
+    if (ARCH_ARM) {
         return ff_get_cpu_max_align_arm();
-    if (ARCH_PPC)
+}
+    if (ARCH_PPC) {
         return ff_get_cpu_max_align_ppc();
-    if (ARCH_X86)
+}
+    if (ARCH_X86) {
         return ff_get_cpu_max_align_x86();
+}
 
     return 8;
 }

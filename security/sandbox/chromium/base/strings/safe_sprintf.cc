@@ -332,8 +332,9 @@ bool Buffer::IToASCII(bool sign, bool upcase, int64_t i, int base,
       for (reverse_prefix = prefix; *reverse_prefix; ++reverse_prefix) {
       }
     }
-  } else
+  } else {
     prefix = NULL;
+}
   const size_t prefix_length = reverse_prefix - prefix;
 
   // Loop until we have converted the entire number. Output at least one

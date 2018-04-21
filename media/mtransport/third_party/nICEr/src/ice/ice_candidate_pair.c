@@ -75,16 +75,18 @@ int nr_ice_candidate_pair_create(nr_ice_peer_ctx *pctx, nr_ice_candidate *lcand,
     nr_ice_candidate tmpcand;
     UINT8 t_priority;
 
-    if(!(pair=RCALLOC(sizeof(nr_ice_cand_pair))))
+    if(!(pair=RCALLOC(sizeof(nr_ice_cand_pair)))) {
       ABORT(R_NO_MEMORY);
+}
 
     pair->pctx=pctx;
 
     nr_ice_candidate_pair_compute_codeword(pair,lcand,rcand);
 
     if(r=nr_concat_strings(&pair->as_string,pair->codeword,"|",lcand->addr.as_string,"|",
-        rcand->addr.as_string,"(",lcand->label,"|",rcand->label,")", NULL))
+        rcand->addr.as_string,"(",lcand->label,"|",rcand->label,")", NULL)) {
       ABORT(r);
+}
 
     nr_ice_candidate_pair_set_state(pctx,pair,NR_ICE_PAIR_STATE_FROZEN);
     pair->local=lcand;
@@ -101,8 +103,9 @@ int nr_ice_candidate_pair_create(nr_ice_peer_ctx *pctx, nr_ice_candidate *lcand,
 
     /* Foundation */
     if(r=nr_concat_strings(&pair->foundation,lcand->foundation,"|",
-      rcand->foundation,NULL))
+      rcand->foundation,NULL)) {
       ABORT(r);
+}
 
     /* Compute the RTO per S 16 */
     RTO = MAX(100, (pctx->ctx->Ta * pctx->waiting_pairs));
@@ -111,20 +114,24 @@ int nr_ice_candidate_pair_create(nr_ice_peer_ctx *pctx, nr_ice_candidate *lcand,
      * priority per S 7.1.1.1 */
     memcpy(&tmpcand, lcand, sizeof(tmpcand));
     tmpcand.type = PEER_REFLEXIVE;
-    if (r=nr_ice_candidate_compute_priority(&tmpcand))
+    if (r=nr_ice_candidate_compute_priority(&tmpcand)) {
       ABORT(r);
+}
     t_priority = tmpcand.priority;
 
     /* Our sending context */
     if(r=nr_stun_client_ctx_create(pair->as_string,
       lcand->osock,
-      &rcand->addr,RTO,&pair->stun_client))
+      &rcand->addr,RTO,&pair->stun_client)) {
       ABORT(r);
-    if(!(pair->stun_client->params.ice_binding_request.username=r_strdup(rcand->stream->l2r_user)))
+}
+    if(!(pair->stun_client->params.ice_binding_request.username=r_strdup(rcand->stream->l2r_user))) {
       ABORT(R_NO_MEMORY);
+}
     if(r=r_data_copy(&pair->stun_client->params.ice_binding_request.password,
-      &rcand->stream->l2r_pass))
+      &rcand->stream->l2r_pass)) {
       ABORT(r);
+}
     /* TODO(ekr@rtfm.com): Do we need to frob this when we change role. Bug 890667 */
     pair->stun_client->params.ice_binding_request.control = pctx->controlling?
       NR_ICE_CONTROLLING:NR_ICE_CONTROLLED;
@@ -146,8 +153,9 @@ int nr_ice_candidate_pair_destroy(nr_ice_cand_pair **pairp)
   {
     nr_ice_cand_pair *pair;
 
-    if(!pairp || !*pairp)
+    if(!pairp || !*pairp) {
       return(0);
+}
 
     pair=*pairp;
     *pairp=0;
@@ -204,8 +212,9 @@ static void nr_ice_candidate_pair_stun_cb(NR_SOCKET s, int how, void *cb_arg)
     /* This ordinarily shouldn't happen, but can if we're
        doing the second check to confirm nomination.
        Just bail out */
-    if(pair->state==NR_ICE_PAIR_STATE_SUCCEEDED)
+    if(pair->state==NR_ICE_PAIR_STATE_SUCCEEDED) {
       goto done;
+}
 
     switch(pair->stun_client->state){
       case NR_STUN_CLIENT_STATE_FAILED:
@@ -280,10 +289,12 @@ static void nr_ice_candidate_pair_stun_cb(NR_SOCKET s, int how, void *cb_arg)
             }
             if(r=nr_ice_candidate_create(pair->pctx->ctx,
               pair->local->component,pair->local->isock,pair->local->osock,
-              PEER_REFLEXIVE,pair->local->tcp_type,0,pair->local->component->component_id,&cand))
+              PEER_REFLEXIVE,pair->local->tcp_type,0,pair->local->component->component_id,&cand)) {
               ABORT(r);
-            if(r=nr_transport_addr_copy(&cand->addr,&pair->stun_client->results.ice_binding_response.mapped_addr))
+}
+            if(r=nr_transport_addr_copy(&cand->addr,&pair->stun_client->results.ice_binding_response.mapped_addr)) {
               ABORT(r);
+}
             cand->state=NR_ICE_CAND_STATE_INITIALIZED;
             TAILQ_INSERT_TAIL(&pair->local->component->candidates,cand,entry_comp);
           } else {
@@ -294,15 +305,18 @@ static void nr_ice_candidate_pair_stun_cb(NR_SOCKET s, int how, void *cb_arg)
           }
 
           if(!actual_pair) {
-            if(r=nr_ice_candidate_pair_create(pair->pctx,cand,pair->remote, &actual_pair))
+            if(r=nr_ice_candidate_pair_create(pair->pctx,cand,pair->remote, &actual_pair)) {
               ABORT(r);
+}
 
-            if(r=nr_ice_component_insert_pair(actual_pair->remote->component,actual_pair))
+            if(r=nr_ice_component_insert_pair(actual_pair->remote->component,actual_pair)) {
               ABORT(r);
+}
 
             /* If the original pair was nominated, make us nominated too. */
-            if(pair->peer_nominated)
+            if(pair->peer_nominated) {
               actual_pair->peer_nominated=1;
+}
 
             /* Now mark the orig pair failed */
             nr_ice_candidate_pair_set_state(pair->pctx,pair,NR_ICE_PAIR_STATE_FAILED);
@@ -316,12 +330,14 @@ static void nr_ice_candidate_pair_stun_cb(NR_SOCKET s, int how, void *cb_arg)
 
         /* Should we set nominated? */
         if(pair->pctx->controlling){
-          if(pair->pctx->ctx->flags & NR_ICE_CTX_FLAGS_AGGRESSIVE_NOMINATION)
+          if(pair->pctx->ctx->flags & NR_ICE_CTX_FLAGS_AGGRESSIVE_NOMINATION) {
             pair->nominated=1;
+}
         }
         else{
-          if(pair->peer_nominated)
+          if(pair->peer_nominated) {
             pair->nominated=1;
+}
         }
 
 
@@ -330,13 +346,15 @@ static void nr_ice_candidate_pair_stun_cb(NR_SOCKET s, int how, void *cb_arg)
         pair->remote->component->valid_pairs++;
 
         /* S 7.1.2.2: unfreeze other pairs with the same foundation*/
-        if(r=nr_ice_media_stream_unfreeze_pairs_foundation(pair->remote->stream,pair->foundation))
+        if(r=nr_ice_media_stream_unfreeze_pairs_foundation(pair->remote->stream,pair->foundation)) {
           ABORT(r);
+}
 
         /* Deal with this pair being nominated */
         if(pair->nominated){
-          if(r=nr_ice_component_nominated_pair(pair->remote->component, pair))
+          if(r=nr_ice_component_nominated_pair(pair->remote->component, pair)) {
             ABORT(r);
+}
         }
 
         break;
@@ -349,8 +367,9 @@ static void nr_ice_candidate_pair_stun_cb(NR_SOCKET s, int how, void *cb_arg)
     if(pair->pctx->controlling && !(pair->pctx->ctx->flags & NR_ICE_CTX_FLAGS_AGGRESSIVE_NOMINATION)){
 
       if(r=nr_ice_component_select_pair(pair->pctx,pair->remote->component)){
-        if(r!=R_NOT_FOUND)
+        if(r!=R_NOT_FOUND) {
           ABORT(r);
+}
       }
     }
 
@@ -368,15 +387,17 @@ static void nr_ice_candidate_pair_restart(nr_ice_peer_ctx *pctx, nr_ice_cand_pai
     nr_ice_candidate_pair_set_state(pctx,pair,NR_ICE_PAIR_STATE_IN_PROGRESS);
 
     /* Start STUN */
-    if(pair->pctx->controlling && (pair->pctx->ctx->flags & NR_ICE_CTX_FLAGS_AGGRESSIVE_NOMINATION))
+    if(pair->pctx->controlling && (pair->pctx->ctx->flags & NR_ICE_CTX_FLAGS_AGGRESSIVE_NOMINATION)) {
       mode=NR_ICE_CLIENT_MODE_USE_CANDIDATE;
-    else
+    } else {
       mode=NR_ICE_CLIENT_MODE_BINDING_REQUEST;
+}
 
     nr_stun_client_reset(pair->stun_client);
 
-    if(r=nr_stun_client_start(pair->stun_client,mode,nr_ice_candidate_pair_stun_cb,pair))
+    if(r=nr_stun_client_start(pair->stun_client,mode,nr_ice_candidate_pair_stun_cb,pair)) {
       ABORT(r);
+}
 
     if ((r=nr_ice_ctx_remember_id(pair->pctx->ctx, pair->stun_client->request))) {
       /* ignore if this fails (which it shouldn't) because it's only an
@@ -400,8 +421,9 @@ int nr_ice_candidate_pair_start(nr_ice_peer_ctx *pctx, nr_ice_cand_pair *pair)
     int r,_status;
 
     /* Register the stun ctx for when responses come in*/
-    if(r=nr_ice_socket_register_stun_client(pair->local->isock,pair->stun_client,&pair->stun_client_handle))
+    if(r=nr_ice_socket_register_stun_client(pair->local->isock,pair->stun_client,&pair->stun_client_handle)) {
       ABORT(r);
+}
 
     nr_ice_candidate_pair_restart(pctx, pair);
 
@@ -415,16 +437,18 @@ static int nr_ice_candidate_copy_for_triggered_check(nr_ice_cand_pair *pair)
     int r,_status;
     nr_ice_cand_pair *copy;
 
-    if(r=nr_ice_candidate_pair_create(pair->pctx, pair->local, pair->remote, &copy))
+    if(r=nr_ice_candidate_pair_create(pair->pctx, pair->local, pair->remote, &copy)) {
       ABORT(r);
+}
 
     /* Preserve nomination status */
     copy->peer_nominated= pair->peer_nominated;
     copy->nominated = pair->nominated;
 
     r_log(LOG_ICE,LOG_INFO,"CAND-PAIR(%s): Adding pair to check list and trigger check queue: %s",pair->codeword,pair->as_string);
-    if(r=nr_ice_candidate_pair_insert(&pair->remote->stream->check_list,copy))
+    if(r=nr_ice_candidate_pair_insert(&pair->remote->stream->check_list,copy)) {
       ABORT(r);
+}
     nr_ice_candidate_pair_trigger_check_append(&pair->remote->stream->trigger_check_queue,copy);
 
     copy->triggered = 1;
@@ -473,8 +497,9 @@ int nr_ice_candidate_pair_do_triggered_check(nr_ice_peer_ctx *pctx, nr_ice_cand_
            * create a second pair that is identical except that it has the
            * |triggered| bit set. We also cancel the original pair, but it can
            * still succeed on its own in the special waiting state. */
-          if(r=nr_ice_candidate_copy_for_triggered_check(pair))
+          if(r=nr_ice_candidate_copy_for_triggered_check(pair)) {
             ABORT(r);
+}
           nr_ice_candidate_pair_cancel(pair->pctx,pair,1);
           break;
         default:
@@ -486,8 +511,9 @@ int nr_ice_candidate_pair_do_triggered_check(nr_ice_peer_ctx *pctx, nr_ice_cand_
 
       /* Ensure that the timers are running to start checks on the topmost entry
        * of the triggered check queue. */
-      if(r=nr_ice_media_stream_start_checks(pair->pctx,pair->remote->stream))
+      if(r=nr_ice_media_stream_start_checks(pair->pctx,pair->remote->stream)) {
         ABORT(r);
+}
     }
 
     _status=0;
@@ -530,12 +556,14 @@ int nr_ice_candidate_pair_select(nr_ice_cand_pair *pair)
             event to avoid reentrancy issues. Only do this if it hasn't
             happened already (though this shouldn't happen.)
       */
-      if(!pair->restart_nominated_cb_timer)
+      if(!pair->restart_nominated_cb_timer) {
         NR_ASYNC_TIMER_SET(0,nr_ice_candidate_pair_restart_stun_nominated_cb,pair,&pair->restart_nominated_cb_timer);
+}
 
       /* 2. Tell ourselves this pair is ready */
-      if(r=nr_ice_component_nominated_pair(pair->remote->component, pair))
+      if(r=nr_ice_component_nominated_pair(pair->remote->component, pair)) {
         ABORT(r);
+}
     }
 
     _status=0;
@@ -564,12 +592,14 @@ int nr_ice_candidate_pair_set_state(nr_ice_peer_ctx *pctx, nr_ice_cand_pair *pai
        and make sure that in fact this was a typo.
     */
     if(pair->state!=NR_ICE_PAIR_STATE_WAITING){
-      if(state==NR_ICE_PAIR_STATE_WAITING)
+      if(state==NR_ICE_PAIR_STATE_WAITING) {
         pctx->waiting_pairs++;
+}
     }
     else{
-      if(state!=NR_ICE_PAIR_STATE_WAITING)
+      if(state!=NR_ICE_PAIR_STATE_WAITING) {
         pctx->waiting_pairs--;
+}
 
       assert(pctx->waiting_pairs>=0);
     }
@@ -578,8 +608,9 @@ int nr_ice_candidate_pair_set_state(nr_ice_peer_ctx *pctx, nr_ice_cand_pair *pai
 
     if(pair->state==NR_ICE_PAIR_STATE_FAILED ||
        pair->state==NR_ICE_PAIR_STATE_CANCELLED){
-      if(r=nr_ice_component_failed_pair(pair->remote->component, pair))
+      if(r=nr_ice_component_failed_pair(pair->remote->component, pair)) {
         ABORT(r);
+}
     }
 
     _status=0;
@@ -598,8 +629,9 @@ int nr_ice_candidate_pair_dump_state(nr_ice_cand_pair *pair, FILE *out)
 int nr_ice_candidate_pair_trigger_check_append(nr_ice_cand_pair_head *head,nr_ice_cand_pair *pair)
   {
     if(pair->triggered_check_queue_entry.tqe_next ||
-       pair->triggered_check_queue_entry.tqe_prev)
+       pair->triggered_check_queue_entry.tqe_prev) {
       return(0);
+}
 
     TAILQ_INSERT_TAIL(head,pair,triggered_check_queue_entry);
 
@@ -619,7 +651,8 @@ int nr_ice_candidate_pair_insert(nr_ice_cand_pair_head *head,nr_ice_cand_pair *p
 
       c1=TAILQ_NEXT(c1,check_queue_entry);
     }
-    if(!c1) TAILQ_INSERT_TAIL(head,pair,check_queue_entry);
+    if(!c1) { TAILQ_INSERT_TAIL(head,pair,check_queue_entry);
+}
 
     return(0);
   }
@@ -635,11 +668,13 @@ void nr_ice_candidate_pair_restart_stun_nominated_cb(NR_SOCKET s, int how, void 
 
     nr_stun_client_reset(pair->stun_client);
 
-    if(r=nr_stun_client_start(pair->stun_client,NR_ICE_CLIENT_MODE_USE_CANDIDATE,nr_ice_candidate_pair_stun_cb,pair))
+    if(r=nr_stun_client_start(pair->stun_client,NR_ICE_CLIENT_MODE_USE_CANDIDATE,nr_ice_candidate_pair_stun_cb,pair)) {
       ABORT(r);
+}
 
-    if(r=nr_ice_ctx_remember_id(pair->pctx->ctx, pair->stun_client->request))
+    if(r=nr_ice_ctx_remember_id(pair->pctx->ctx, pair->stun_client->request)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -666,8 +701,9 @@ void nr_ice_candidate_pair_role_change(nr_ice_cand_pair *pair)
       /* We could try only restarting in-progress pairs when they receive their
        * 487, but this ends up being simpler, because any extra 487 are dropped.
        */
-      if(!pair->restart_role_change_cb_timer)
+      if(!pair->restart_role_change_cb_timer) {
         NR_ASYNC_TIMER_SET(0,nr_ice_candidate_pair_restart_stun_role_change_cb,pair,&pair->restart_role_change_cb_timer);
+}
     }
   }
 

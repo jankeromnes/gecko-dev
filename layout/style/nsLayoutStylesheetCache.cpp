@@ -389,8 +389,9 @@ nsLayoutStylesheetCache::InitFromProfile()
   if (appInfo) {
     bool inSafeMode = false;
     appInfo->GetInSafeMode(&inSafeMode);
-    if (inSafeMode)
+    if (inSafeMode) {
       return;
+}
   }
   nsCOMPtr<nsIFile> contentFile;
   nsCOMPtr<nsIFile> chromeFile;
@@ -403,7 +404,8 @@ nsLayoutStylesheetCache::InitFromProfile()
   }
 
   contentFile->Clone(getter_AddRefs(chromeFile));
-  if (!chromeFile) return;
+  if (!chromeFile) { return;
+}
 
   contentFile->Append(NS_LITERAL_STRING("userContent.css"));
   chromeFile->Append(NS_LITERAL_STRING("userChrome.css"));
@@ -441,7 +443,8 @@ nsLayoutStylesheetCache::LoadSheetFile(nsIFile* aFile,
   bool exists = false;
   aFile->Exists(&exists);
 
-  if (!exists) return;
+  if (!exists) { return;
+}
 
   nsCOMPtr<nsIURI> uri;
   NS_NewFileURI(getter_AddRefs(uri), aFile);

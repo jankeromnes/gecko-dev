@@ -66,7 +66,8 @@ static void encode_mv_component(aom_writer *w, int comp, nmv_component *mvcomp,
     for (i = 0; i < n; ++i)
       aom_write_symbol(w, (d >> i) & 1, mvcomp->bits_cdf[(i + 1) / 2], 2);
 #else
-    for (i = 0; i < n; ++i) aom_write(w, (d >> i) & 1, mvcomp->bits[i]);
+    for (i = 0; i < n; ++i) { aom_write(w, (d >> i) & 1, mvcomp->bits[i]);
+}
 #endif
   }
 // Fractional bits
@@ -81,13 +82,14 @@ static void encode_mv_component(aom_writer *w, int comp, nmv_component *mvcomp,
   }
 
   // High precision bit
-  if (precision > MV_SUBPEL_LOW_PRECISION)
+  if (precision > MV_SUBPEL_LOW_PRECISION) {
 #if CONFIG_NEW_MULTISYMBOL
     aom_write_symbol(
         w, hp, mv_class == MV_CLASS_0 ? mvcomp->class0_hp_cdf : mvcomp->hp_cdf,
         2);
 #else
     aom_write(w, hp, mv_class == MV_CLASS_0 ? mvcomp->class0_hp : mvcomp->hp);
+}
 #endif
 }
 
@@ -109,8 +111,9 @@ static void build_nmv_component_cost_table(int *mvcost,
     bits_cost[i][1] = av1_cost_one(mvcomp->bits[i]);
   }
 
-  for (i = 0; i < CLASS0_SIZE; ++i)
+  for (i = 0; i < CLASS0_SIZE; ++i) {
     av1_cost_tokens(class0_fp_cost[i], mvcomp->class0_fp[i], av1_mv_fp_tree);
+}
   av1_cost_tokens(fp_cost, mvcomp->fp, av1_mv_fp_tree);
 
   if (precision > MV_SUBPEL_LOW_PRECISION) {
@@ -132,7 +135,8 @@ static void build_nmv_component_cost_table(int *mvcost,
       cost += class0_cost[d];
     } else {
       const int b = c + CLASS0_BITS - 1; /* number of bits */
-      for (i = 0; i < b; ++i) cost += bits_cost[i][((d >> i) & 1)];
+      for (i = 0; i < b; ++i) { cost += bits_cost[i][((d >> i) & 1)];
+}
     }
 #if CONFIG_INTRABC || CONFIG_AMVR
     if (precision > MV_SUBPEL_NONE)
@@ -200,11 +204,13 @@ void av1_encode_mv(AV1_COMP *cpi, aom_writer *w, const MV *mv, const MV *ref,
   }
 #endif
   aom_write_symbol(w, j, mvctx->joint_cdf, MV_JOINTS);
-  if (mv_joint_vertical(j))
+  if (mv_joint_vertical(j)) {
     encode_mv_component(w, diff.row, &mvctx->comps[0], usehp);
+}
 
-  if (mv_joint_horizontal(j))
+  if (mv_joint_horizontal(j)) {
     encode_mv_component(w, diff.col, &mvctx->comps[1], usehp);
+}
 
   // If auto_mv_step_size is enabled then keep track of the largest
   // motion vector component used.
@@ -402,24 +408,26 @@ void av1_update_mv_count(ThreadData *td) {
       for (idx = 0; idx < 2; idx += num_4x4_w) {
         const int i = idy * 2 + idx;
 
-        if (have_newmv_in_inter_mode(mi->bmi[i].as_mode))
+        if (have_newmv_in_inter_mode(mi->bmi[i].as_mode)) {
 
 #if CONFIG_AMVR
           inc_mvs_sub8x8(mi, i, mi->bmi[i].as_mv, mbmi_ext, td->counts->mv,
                          precision);
 #else
           inc_mvs_sub8x8(mi, i, mi->bmi[i].as_mv, mbmi_ext, td->counts->mv);
+}
 #endif
       }
     }
   } else {
-    if (have_newmv_in_inter_mode(mbmi->mode))
+    if (have_newmv_in_inter_mode(mbmi->mode)) {
 
 #if CONFIG_AMVR
       inc_mvs(mbmi, mbmi_ext, mbmi->mv, mbmi->pred_mv, td->counts->mv,
               precision);
 #else
       inc_mvs(mbmi, mbmi_ext, mbmi->mv, mbmi->pred_mv, td->counts->mv);
+}
 #endif
   }
 }

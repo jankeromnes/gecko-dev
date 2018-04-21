@@ -24,14 +24,16 @@ int aom_rb_read_bit(struct aom_read_bit_buffer *rb) {
     rb->bit_offset = off + 1;
     return bit;
   } else {
-    if (rb->error_handler) rb->error_handler(rb->error_handler_data);
+    if (rb->error_handler) { rb->error_handler(rb->error_handler_data);
+}
     return 0;
   }
 }
 
 int aom_rb_read_literal(struct aom_read_bit_buffer *rb, int bits) {
   int value = 0, bit;
-  for (bit = bits - 1; bit >= 0; bit--) value |= aom_rb_read_bit(rb) << bit;
+  for (bit = bits - 1; bit >= 0; bit--) { value |= aom_rb_read_bit(rb) << bit;
+}
   return value;
 }
 

@@ -2267,7 +2267,7 @@ STAGE(bilerp_clamp_8888, SkJumper_GatherCtx* ctx) {
     // We'll accumulate the color of all four samples into {r,g,b,a} directly.
     r = g = b = a = 0;
 
-    for (float dy = -0.5f; dy <= +0.5f; dy += 1.0f)
+    for (float dy = -0.5f; dy <= +0.5f; dy += 1.0f) {
     for (float dx = -0.5f; dx <= +0.5f; dx += 1.0f) {
         // (x,y) are the coordinates of this sample point.
         F x = cx + dx,
@@ -2293,4 +2293,5 @@ STAGE(bilerp_clamp_8888, SkJumper_GatherCtx* ctx) {
         b += sb * area;
         a += sa * area;
     }
+}
 }

@@ -96,28 +96,33 @@ initial_setup (j_compress_ptr cinfo, boolean transcode_only)
 
   /* Sanity check on image dimensions */
   if (cinfo->_jpeg_height <= 0 || cinfo->_jpeg_width <= 0
-      || cinfo->num_components <= 0 || cinfo->input_components <= 0)
+      || cinfo->num_components <= 0 || cinfo->input_components <= 0) {
     ERREXIT(cinfo, JERR_EMPTY_IMAGE);
+}
 
   /* Make sure image isn't bigger than I can handle */
   if ((long) cinfo->_jpeg_height > (long) JPEG_MAX_DIMENSION ||
-      (long) cinfo->_jpeg_width > (long) JPEG_MAX_DIMENSION)
+      (long) cinfo->_jpeg_width > (long) JPEG_MAX_DIMENSION) {
     ERREXIT1(cinfo, JERR_IMAGE_TOO_BIG, (unsigned int) JPEG_MAX_DIMENSION);
+}
 
   /* Width of an input scanline must be representable as JDIMENSION. */
   samplesperrow = (long) cinfo->image_width * (long) cinfo->input_components;
   jd_samplesperrow = (JDIMENSION) samplesperrow;
-  if ((long) jd_samplesperrow != samplesperrow)
+  if ((long) jd_samplesperrow != samplesperrow) {
     ERREXIT(cinfo, JERR_WIDTH_OVERFLOW);
+}
 
   /* For now, precision must match compiled-in value... */
-  if (cinfo->data_precision != BITS_IN_JSAMPLE)
+  if (cinfo->data_precision != BITS_IN_JSAMPLE) {
     ERREXIT1(cinfo, JERR_BAD_PRECISION, cinfo->data_precision);
+}
 
   /* Check that number of components won't exceed internal array sizes */
-  if (cinfo->num_components > MAX_COMPONENTS)
+  if (cinfo->num_components > MAX_COMPONENTS) {
     ERREXIT2(cinfo, JERR_COMPONENT_COUNT, cinfo->num_components,
              MAX_COMPONENTS);
+}
 
   /* Compute maximum sampling factors; check factor validity */
   cinfo->max_h_samp_factor = 1;
@@ -125,8 +130,9 @@ initial_setup (j_compress_ptr cinfo, boolean transcode_only)
   for (ci = 0, compptr = cinfo->comp_info; ci < cinfo->num_components;
        ci++, compptr++) {
     if (compptr->h_samp_factor<=0 || compptr->h_samp_factor>MAX_SAMP_FACTOR ||
-        compptr->v_samp_factor<=0 || compptr->v_samp_factor>MAX_SAMP_FACTOR)
+        compptr->v_samp_factor<=0 || compptr->v_samp_factor>MAX_SAMP_FACTOR) {
       ERREXIT(cinfo, JERR_BAD_SAMPLING);
+}
     cinfo->max_h_samp_factor = MAX(cinfo->max_h_samp_factor,
                                    compptr->h_samp_factor);
     cinfo->max_v_samp_factor = MAX(cinfo->max_v_samp_factor,
@@ -189,8 +195,9 @@ validate_script (j_compress_ptr cinfo)
   /* -1 until that coefficient has been seen; then last Al for it */
 #endif
 
-  if (cinfo->num_scans <= 0)
+  if (cinfo->num_scans <= 0) {
     ERREXIT1(cinfo, JERR_BAD_SCAN_SCRIPT, 0);
+}
 
   /* For sequential JPEG, all scans must have Ss=0, Se=DCTSIZE2-1;
    * for progressive JPEG, no scan can have this.
@@ -200,30 +207,35 @@ validate_script (j_compress_ptr cinfo)
 #ifdef C_PROGRESSIVE_SUPPORTED
     cinfo->progressive_mode = TRUE;
     last_bitpos_ptr = & last_bitpos[0][0];
-    for (ci = 0; ci < cinfo->num_components; ci++)
-      for (coefi = 0; coefi < DCTSIZE2; coefi++)
+    for (ci = 0; ci < cinfo->num_components; ci++) {
+      for (coefi = 0; coefi < DCTSIZE2; coefi++) {
         *last_bitpos_ptr++ = -1;
+}
 #else
     ERREXIT(cinfo, JERR_NOT_COMPILED);
 #endif
   } else {
     cinfo->progressive_mode = FALSE;
-    for (ci = 0; ci < cinfo->num_components; ci++)
+    for (ci = 0; ci < cinfo->num_components; ci++) {
       component_sent[ci] = FALSE;
+}
   }
 
   for (scanno = 1; scanno <= cinfo->num_scans; scanptr++, scanno++) {
     /* Validate component indexes */
     ncomps = scanptr->comps_in_scan;
-    if (ncomps <= 0 || ncomps > MAX_COMPS_IN_SCAN)
+    if (ncomps <= 0 || ncomps > MAX_COMPS_IN_SCAN) {
       ERREXIT2(cinfo, JERR_COMPONENT_COUNT, ncomps, MAX_COMPS_IN_SCAN);
+}
     for (ci = 0; ci < ncomps; ci++) {
       thisi = scanptr->component_index[ci];
-      if (thisi < 0 || thisi >= cinfo->num_components)
+      if (thisi < 0 || thisi >= cinfo->num_components) {
         ERREXIT1(cinfo, JERR_BAD_SCAN_SCRIPT, scanno);
+}
       /* Components must appear in SOF order within each scan */
-      if (ci > 0 && thisi <= scanptr->component_index[ci-1])
+      if (ci > 0 && thisi <= scanptr->component_index[ci-1]) {
         ERREXIT1(cinfo, JERR_BAD_SCAN_SCRIPT, scanno);
+}
     }
     /* Validate progression parameters */
     Ss = scanptr->Ss;
@@ -245,28 +257,34 @@ validate_script (j_compress_ptr cinfo)
 #define MAX_AH_AL 13
 #endif
       if (Ss < 0 || Ss >= DCTSIZE2 || Se < Ss || Se >= DCTSIZE2 ||
-          Ah < 0 || Ah > MAX_AH_AL || Al < 0 || Al > MAX_AH_AL)
+          Ah < 0 || Ah > MAX_AH_AL || Al < 0 || Al > MAX_AH_AL) {
         ERREXIT1(cinfo, JERR_BAD_PROG_SCRIPT, scanno);
+}
       if (Ss == 0) {
-        if (Se != 0)            /* DC and AC together not OK */
+        if (Se != 0) {            /* DC and AC together not OK */
           ERREXIT1(cinfo, JERR_BAD_PROG_SCRIPT, scanno);
+}
       } else {
-        if (ncomps != 1)        /* AC scans must be for only one component */
+        if (ncomps != 1) {        /* AC scans must be for only one component */
           ERREXIT1(cinfo, JERR_BAD_PROG_SCRIPT, scanno);
+}
       }
       for (ci = 0; ci < ncomps; ci++) {
         last_bitpos_ptr = & last_bitpos[scanptr->component_index[ci]][0];
-        if (Ss != 0 && last_bitpos_ptr[0] < 0) /* AC without prior DC scan */
+        if (Ss != 0 && last_bitpos_ptr[0] < 0) { /* AC without prior DC scan */
           ERREXIT1(cinfo, JERR_BAD_PROG_SCRIPT, scanno);
+}
         for (coefi = Ss; coefi <= Se; coefi++) {
           if (last_bitpos_ptr[coefi] < 0) {
             /* first scan of this coefficient */
-            if (Ah != 0)
+            if (Ah != 0) {
               ERREXIT1(cinfo, JERR_BAD_PROG_SCRIPT, scanno);
+}
           } else {
             /* not first scan */
-            if (Ah != last_bitpos_ptr[coefi] || Al != Ah-1)
+            if (Ah != last_bitpos_ptr[coefi] || Al != Ah-1) {
               ERREXIT1(cinfo, JERR_BAD_PROG_SCRIPT, scanno);
+}
           }
           last_bitpos_ptr[coefi] = Al;
         }
@@ -274,13 +292,15 @@ validate_script (j_compress_ptr cinfo)
 #endif
     } else {
       /* For sequential JPEG, all progression parameters must be these: */
-      if (Ss != 0 || Se != DCTSIZE2-1 || Ah != 0 || Al != 0)
+      if (Ss != 0 || Se != DCTSIZE2-1 || Ah != 0 || Al != 0) {
         ERREXIT1(cinfo, JERR_BAD_PROG_SCRIPT, scanno);
+}
       /* Make sure components are not sent twice */
       for (ci = 0; ci < ncomps; ci++) {
         thisi = scanptr->component_index[ci];
-        if (component_sent[thisi])
+        if (component_sent[thisi]) {
           ERREXIT1(cinfo, JERR_BAD_SCAN_SCRIPT, scanno);
+}
         component_sent[thisi] = TRUE;
       }
     }
@@ -295,14 +315,16 @@ validate_script (j_compress_ptr cinfo)
      * transmission of all coefficient bits??
      */
     for (ci = 0; ci < cinfo->num_components; ci++) {
-      if (last_bitpos[ci][0] < 0)
+      if (last_bitpos[ci][0] < 0) {
         ERREXIT(cinfo, JERR_MISSING_DATA);
+}
     }
 #endif
   } else {
     for (ci = 0; ci < cinfo->num_components; ci++) {
-      if (! component_sent[ci])
+      if (! component_sent[ci]) {
         ERREXIT(cinfo, JERR_MISSING_DATA);
+}
     }
   }
 }
@@ -336,9 +358,10 @@ select_scan_parameters (j_compress_ptr cinfo)
 #endif
   {
     /* Prepare for single sequential-JPEG scan containing all components */
-    if (cinfo->num_components > MAX_COMPS_IN_SCAN)
+    if (cinfo->num_components > MAX_COMPS_IN_SCAN) {
       ERREXIT2(cinfo, JERR_COMPONENT_COUNT, cinfo->num_components,
                MAX_COMPS_IN_SCAN);
+}
     cinfo->comps_in_scan = cinfo->num_components;
     for (ci = 0; ci < cinfo->num_components; ci++) {
       cinfo->cur_comp_info[ci] = &cinfo->comp_info[ci];
@@ -378,7 +401,8 @@ per_scan_setup (j_compress_ptr cinfo)
      * as the number of block rows present in the last iMCU row.
      */
     tmp = (int) (compptr->height_in_blocks % compptr->v_samp_factor);
-    if (tmp == 0) tmp = compptr->v_samp_factor;
+    if (tmp == 0) { tmp = compptr->v_samp_factor;
+}
     compptr->last_row_height = tmp;
 
     /* Prepare array describing MCU composition */
@@ -388,9 +412,10 @@ per_scan_setup (j_compress_ptr cinfo)
   } else {
 
     /* Interleaved (multi-component) scan */
-    if (cinfo->comps_in_scan <= 0 || cinfo->comps_in_scan > MAX_COMPS_IN_SCAN)
+    if (cinfo->comps_in_scan <= 0 || cinfo->comps_in_scan > MAX_COMPS_IN_SCAN) {
       ERREXIT2(cinfo, JERR_COMPONENT_COUNT, cinfo->comps_in_scan,
                MAX_COMPS_IN_SCAN);
+}
 
     /* Overall image size in MCUs */
     cinfo->MCUs_per_row = (JDIMENSION)
@@ -411,15 +436,18 @@ per_scan_setup (j_compress_ptr cinfo)
       compptr->MCU_sample_width = compptr->MCU_width * DCTSIZE;
       /* Figure number of non-dummy blocks in last MCU column & row */
       tmp = (int) (compptr->width_in_blocks % compptr->MCU_width);
-      if (tmp == 0) tmp = compptr->MCU_width;
+      if (tmp == 0) { tmp = compptr->MCU_width;
+}
       compptr->last_col_width = tmp;
       tmp = (int) (compptr->height_in_blocks % compptr->MCU_height);
-      if (tmp == 0) tmp = compptr->MCU_height;
+      if (tmp == 0) { tmp = compptr->MCU_height;
+}
       compptr->last_row_height = tmp;
       /* Prepare array describing MCU composition */
       mcublks = compptr->MCU_blocks;
-      if (cinfo->blocks_in_MCU + mcublks > C_MAX_BLOCKS_IN_MCU)
+      if (cinfo->blocks_in_MCU + mcublks > C_MAX_BLOCKS_IN_MCU) {
         ERREXIT(cinfo, JERR_BAD_MCU_SIZE);
+}
       while (mcublks-- > 0) {
         cinfo->MCU_membership[cinfo->blocks_in_MCU++] = ci;
       }
@@ -503,8 +531,9 @@ prepare_for_pass (j_compress_ptr cinfo)
     (*cinfo->entropy->start_pass) (cinfo, FALSE);
     (*cinfo->coef->start_pass) (cinfo, JBUF_CRANK_DEST);
     /* We emit frame/scan headers now */
-    if (master->scan_number == 0)
+    if (master->scan_number == 0) {
       (*cinfo->marker->write_frame_header) (cinfo);
+}
     (*cinfo->marker->write_scan_header) (cinfo);
     master->pub.call_pass_startup = FALSE;
     break;
@@ -563,8 +592,9 @@ finish_pass_master (j_compress_ptr cinfo)
      * or output of scan 1 (if no optimization).
      */
     master->pass_type = output_pass;
-    if (! cinfo->optimize_coding)
+    if (! cinfo->optimize_coding) {
       master->scan_number++;
+}
     break;
   case huff_opt_pass:
     /* next pass is always output of current scan */
@@ -572,8 +602,9 @@ finish_pass_master (j_compress_ptr cinfo)
     break;
   case output_pass:
     /* next pass is either optimization or output of next scan */
-    if (cinfo->optimize_coding)
+    if (cinfo->optimize_coding) {
       master->pass_type = huff_opt_pass;
+}
     master->scan_number++;
     break;
   }
@@ -614,26 +645,29 @@ jinit_c_master_control (j_compress_ptr cinfo, boolean transcode_only)
     cinfo->num_scans = 1;
   }
 
-  if (cinfo->progressive_mode && !cinfo->arith_code)  /*  TEMPORARY HACK ??? */
+  if (cinfo->progressive_mode && !cinfo->arith_code) {  /*  TEMPORARY HACK ??? */
     cinfo->optimize_coding = TRUE; /* assume default tables no good for progressive mode */
+}
 
   /* Initialize my private state */
   if (transcode_only) {
     /* no main pass in transcoding */
-    if (cinfo->optimize_coding)
+    if (cinfo->optimize_coding) {
       master->pass_type = huff_opt_pass;
-    else
+    } else {
       master->pass_type = output_pass;
+}
   } else {
     /* for normal compression, first pass is always this type: */
     master->pass_type = main_pass;
   }
   master->scan_number = 0;
   master->pass_number = 0;
-  if (cinfo->optimize_coding)
+  if (cinfo->optimize_coding) {
     master->total_passes = cinfo->num_scans * 2;
-  else
+  } else {
     master->total_passes = cinfo->num_scans;
+}
 
   master->jpeg_version = PACKAGE_NAME " version " VERSION " (build " BUILD ")";
 }

@@ -54,9 +54,11 @@ int vp8_alloc_frame_buffers(VP8_COMMON *oci, int width, int height) {
   vp8_de_alloc_frame_buffers(oci);
 
   /* our internal buffers are always multiples of 16 */
-  if ((width & 0xf) != 0) width += 16 - (width & 0xf);
+  if ((width & 0xf) != 0) { width += 16 - (width & 0xf);
+}
 
-  if ((height & 0xf) != 0) height += 16 - (height & 0xf);
+  if ((height & 0xf) != 0) { height += 16 - (height & 0xf);
+}
 
   for (i = 0; i < NUM_YV12_BUFFERS; ++i) {
     oci->fb_idx_ref_cnt[i] = 0;
@@ -89,7 +91,8 @@ int vp8_alloc_frame_buffers(VP8_COMMON *oci, int width, int height) {
   oci->mip =
       vpx_calloc((oci->mb_cols + 1) * (oci->mb_rows + 1), sizeof(MODE_INFO));
 
-  if (!oci->mip) goto allocation_fail;
+  if (!oci->mip) { goto allocation_fail;
+}
 
   oci->mi = oci->mip + oci->mode_info_stride + 1;
 
@@ -99,7 +102,8 @@ int vp8_alloc_frame_buffers(VP8_COMMON *oci, int width, int height) {
   oci->above_context =
       vpx_calloc(sizeof(ENTROPY_CONTEXT_PLANES) * oci->mb_cols, 1);
 
-  if (!oci->above_context) goto allocation_fail;
+  if (!oci->above_context) { goto allocation_fail;
+}
 
 #if CONFIG_POSTPROC
   if (vp8_yv12_alloc_frame_buffer(&oci->post_proc_buffer, width, height,
@@ -117,7 +121,8 @@ int vp8_alloc_frame_buffers(VP8_COMMON *oci, int width, int height) {
    * Note: Round up mb_cols to support SIMD reads
    */
   oci->pp_limits_buffer = vpx_memalign(16, 24 * ((oci->mb_cols + 1) & ~1));
-  if (!oci->pp_limits_buffer) goto allocation_fail;
+  if (!oci->pp_limits_buffer) { goto allocation_fail;
+}
 #endif
 
   return 0;

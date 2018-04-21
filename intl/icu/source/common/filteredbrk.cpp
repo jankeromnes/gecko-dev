@@ -100,7 +100,8 @@ class U_COMMON_API UStringSet : public UVector {
    * @return true if successfully adopted.
    */
   inline UBool add(const UnicodeString& str, UErrorCode &status) {
-    if(U_FAILURE(status)) return false;
+    if(U_FAILURE(status)) { return false;
+}
     UnicodeString *t = new UnicodeString(str);
     if(t==NULL) {
       status = U_MEMORY_ALLOCATION_ERROR; return false;
@@ -112,7 +113,8 @@ class U_COMMON_API UStringSet : public UVector {
    * @return true if successfully removed, false otherwise (error, or else it wasn't there)
    */
   inline UBool remove(const UnicodeString &s, UErrorCode &status) {
-    if(U_FAILURE(status)) return false;
+    if(U_FAILURE(status)) { return false;
+}
     return removeElement((void*) &s);
   }
 };
@@ -140,7 +142,8 @@ public:
   SimpleFilteredSentenceBreakData(UCharsTrie *forwards, UCharsTrie *backwards ) 
       : fForwardsPartialTrie(forwards), fBackwardsTrie(backwards), refcount(1) { }
   SimpleFilteredSentenceBreakData *incr() { refcount++;  return this; }
-  SimpleFilteredSentenceBreakData *decr() { if((--refcount) <= 0) delete this; return 0; }
+  SimpleFilteredSentenceBreakData *decr() { if((--refcount) <= 0) { delete this; 
+}return 0; }
   virtual ~SimpleFilteredSentenceBreakData();
 
   LocalPointer<UCharsTrie>    fForwardsPartialTrie; //  Has ".a" for "a.M."
@@ -175,7 +178,8 @@ public:
   }
   virtual BreakIterator* clone(void) const { return new SimpleFilteredSentenceBreakIterator(*this); }
   virtual UClassID getDynamicClassID(void) const { return NULL; }
-  virtual UBool operator==(const BreakIterator& o) const { if(this==&o) return true; return false; }
+  virtual UBool operator==(const BreakIterator& o) const { if(this==&o) { return true; 
+}return false; }
 
   /* -- text modifying -- */
   virtual void setText(UText *text, UErrorCode &status) { fDelegate->setText(text,status); }
@@ -346,7 +350,8 @@ SimpleFilteredSentenceBreakIterator::internalNext(int32_t n) {
   UErrorCode status = U_ZERO_ERROR;
   // refresh text
   resetState(status);
-  if(U_FAILURE(status)) return UBRK_DONE; // bail out
+  if(U_FAILURE(status)) { return UBRK_DONE; // bail out
+}
   int64_t utextLen = utext_nativeLength(fText.getAlias());
 
   //if(debug2) u_printf("str, native len=%d\n", utext_nativeLength(fText.getAlias()));
@@ -376,7 +381,8 @@ SimpleFilteredSentenceBreakIterator::internalPrev(int32_t n) {
   UErrorCode status = U_ZERO_ERROR;
   // refresh text
   resetState(status);
-  if(U_FAILURE(status)) return UBRK_DONE; // bail out
+  if(U_FAILURE(status)) { return UBRK_DONE; // bail out
+}
 
   //if(debug2) u_printf("str, native len=%d\n", utext_nativeLength(fText.getAlias()));
   while (n != UBRK_DONE && n != 0) { // outer loop runs once per underlying break (from fDelegate).
@@ -418,9 +424,11 @@ SimpleFilteredSentenceBreakIterator::previous(void) {
 }
 
 UBool SimpleFilteredSentenceBreakIterator::isBoundary(int32_t offset) {
-  if (!fDelegate->isBoundary(offset)) return false; // no break to suppress
+  if (!fDelegate->isBoundary(offset)) { return false; // no break to suppress
+}
 
-  if (fData->fBackwardsTrie.isNull()) return true; // no data = no suppressions
+  if (fData->fBackwardsTrie.isNull()) { return true; // no data = no suppressions
+}
 
   UErrorCode status = U_ZERO_ERROR;
   resetState(status);
@@ -608,7 +616,8 @@ SimpleFilteredBreakIteratorBuilder::build(BreakIterator* adoptBreakIterator, UEr
       // is it unique?
       int sameAs = -1;
       for(int j=0;j<subCount;j++) {
-        if(j==i) continue;
+        if(j==i) { continue;
+}
         if(ustrs[i].compare(0,nn+1,ustrs[j],0,nn+1)==0) {
           FB_TRACE("prefix",&ustrs[j],FALSE,nn+1);
           //UBool otherIsPartial = ((nn+1)!=ustrs[j].length());  // true if ustrs[j] doesn't end at nn
@@ -688,7 +697,8 @@ FilteredBreakIteratorBuilder::~FilteredBreakIteratorBuilder() {
 
 FilteredBreakIteratorBuilder *
 FilteredBreakIteratorBuilder::createInstance(const Locale& where, UErrorCode& status) {
-  if(U_FAILURE(status)) return NULL;
+  if(U_FAILURE(status)) { return NULL;
+}
   LocalPointer<FilteredBreakIteratorBuilder> ret(new SimpleFilteredBreakIteratorBuilder(where, status), status);
   return (U_SUCCESS(status))? ret.orphan(): NULL;
 }
@@ -700,7 +710,8 @@ FilteredBreakIteratorBuilder::createInstance(UErrorCode &status) {
 
 FilteredBreakIteratorBuilder *
 FilteredBreakIteratorBuilder::createEmptyInstance(UErrorCode& status) {
-  if(U_FAILURE(status)) return NULL;
+  if(U_FAILURE(status)) { return NULL;
+}
   LocalPointer<FilteredBreakIteratorBuilder> ret(new SimpleFilteredBreakIteratorBuilder(status), status);
   return (U_SUCCESS(status))? ret.orphan(): NULL;
 }

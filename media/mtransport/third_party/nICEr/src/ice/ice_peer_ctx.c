@@ -56,13 +56,15 @@ int nr_ice_peer_ctx_create(nr_ice_ctx *ctx, nr_ice_handler *handler,char *label,
     int r,_status;
     nr_ice_peer_ctx *pctx=0;
 
-    if(!(pctx=RCALLOC(sizeof(nr_ice_peer_ctx))))
+    if(!(pctx=RCALLOC(sizeof(nr_ice_peer_ctx)))) {
       ABORT(R_NO_MEMORY);
+}
 
     pctx->state = NR_ICE_PEER_STATE_UNPAIRED;
 
-    if(!(pctx->label=r_strdup(label)))
+    if(!(pctx->label=r_strdup(label))) {
       ABORT(R_NO_MEMORY);
+}
 
     pctx->ctx=ctx;
     pctx->handler=handler;
@@ -73,8 +75,9 @@ int nr_ice_peer_ctx_create(nr_ice_ctx *ctx, nr_ice_handler *handler,char *label,
     } else {
       pctx->controlling=1;
     }
-    if(r=nr_crypto_random_bytes((UCHAR *)&pctx->tiebreaker,8))
+    if(r=nr_crypto_random_bytes((UCHAR *)&pctx->tiebreaker,8)) {
       ABORT(r);
+}
 
     STAILQ_INIT(&pctx->peer_streams);
 
@@ -103,8 +106,9 @@ int nr_ice_peer_ctx_parse_stream_attributes(nr_ice_peer_ctx *pctx, nr_ice_media_
     /*
       Note: use component_ct from our own stream since components other
       than this offered by the other side are unusable */
-    if(r=nr_ice_media_stream_create(pctx->ctx,stream->label,stream->component_ct,&pstream))
+    if(r=nr_ice_media_stream_create(pctx->ctx,stream->label,stream->component_ct,&pstream)) {
       ABORT(r);
+}
 
     /* Match up the local and remote components */
     comp=STAILQ_FIRST(&stream->components);
@@ -119,8 +123,9 @@ int nr_ice_peer_ctx_parse_stream_attributes(nr_ice_peer_ctx *pctx, nr_ice_media_
     pstream->local_stream=stream;
     pstream->pctx=pctx;
 
-    if (r=nr_ice_peer_ctx_parse_stream_attributes_int(pctx,stream,pstream,attrs,attr_ct))
+    if (r=nr_ice_peer_ctx_parse_stream_attributes_int(pctx,stream,pstream,attrs,attr_ct)) {
       ABORT(r);
+}
 
     /* Now that we have the ufrag and password, compute all the username/password
        pairs */
@@ -130,17 +135,22 @@ int nr_ice_peer_ctx_parse_stream_attributes(nr_ice_peer_ctx *pctx, nr_ice_media_
     assert(lpwd);
     rufrag=pstream->ufrag?pstream->ufrag:pctx->peer_ufrag;
     rpwd=pstream->pwd?pstream->pwd:pctx->peer_pwd;
-    if (!rufrag || !rpwd)
+    if (!rufrag || !rpwd) {
       ABORT(R_BAD_DATA);
+}
 
-    if(r=nr_concat_strings(&pstream->r2l_user,lufrag,":",rufrag,NULL))
+    if(r=nr_concat_strings(&pstream->r2l_user,lufrag,":",rufrag,NULL)) {
       ABORT(r);
-    if(r=nr_concat_strings(&pstream->l2r_user,rufrag,":",lufrag,NULL))
+}
+    if(r=nr_concat_strings(&pstream->l2r_user,rufrag,":",lufrag,NULL)) {
       ABORT(r);
-    if(r=r_data_make(&pstream->r2l_pass, (UCHAR *)lpwd, strlen(lpwd)))
+}
+    if(r=r_data_make(&pstream->r2l_pass, (UCHAR *)lpwd, strlen(lpwd))) {
       ABORT(r);
-    if(r=r_data_make(&pstream->l2r_pass, (UCHAR *)rpwd, strlen(rpwd)))
+}
+    if(r=r_data_make(&pstream->l2r_pass, (UCHAR *)rpwd, strlen(rpwd))) {
       ABORT(r);
+}
 
     STAILQ_INSERT_TAIL(&pctx->peer_streams,pstream,entry);
 
@@ -183,8 +193,9 @@ static int nr_ice_ctx_parse_candidate(nr_ice_peer_ctx *pctx, nr_ice_media_stream
     int j;
     int r, _status;
 
-    if(r=nr_ice_peer_candidate_from_attribute(pctx->ctx,candidate,pstream,&cand))
+    if(r=nr_ice_peer_candidate_from_attribute(pctx->ctx,candidate,pstream,&cand)) {
       ABORT(r);
+}
     if(cand->component_id-1>=pstream->component_ct){
       r_log(LOG_ICE,LOG_ERR,"ICE(%s): peer (%s) specified too many components",pctx->ctx->label,pctx->label);
       ABORT(R_BAD_DATA);
@@ -196,8 +207,9 @@ static int nr_ice_ctx_parse_candidate(nr_ice_peer_ctx *pctx, nr_ice_media_stream
     /* Not the fastest way to find a component, but it's what we got */
     j=1;
     for(comp=STAILQ_FIRST(&pstream->components);comp;comp=STAILQ_NEXT(comp,entry)){
-      if(j==cand->component_id)
+      if(j==cand->component_id) {
         break;
+}
 
       j++;
     }
@@ -240,8 +252,9 @@ int nr_ice_peer_ctx_find_pstream(nr_ice_peer_ctx *pctx, nr_ice_media_stream *str
        peer streams to find one that matches us */
      pstream=STAILQ_FIRST(&pctx->peer_streams);
      while(pstream) {
-       if (pstream->local_stream == stream)
+       if (pstream->local_stream == stream) {
          break;
+}
 
        pstream = STAILQ_NEXT(pstream, entry);
      }
@@ -280,8 +293,9 @@ int nr_ice_peer_ctx_parse_trickle_candidate(nr_ice_peer_ctx *pctx, nr_ice_media_
 
     r_log(LOG_ICE,LOG_DEBUG,"ICE(%s): peer (%s) parsing trickle ICE candidate %s",pctx->ctx->label,pctx->label,candidate);
     r = nr_ice_peer_ctx_find_pstream(pctx, stream, &pstream);
-    if (r)
+    if (r) {
       ABORT(r);
+}
 
     switch(pstream->ice_state) {
       case NR_ICE_MEDIA_STREAM_UNPAIRED:
@@ -410,8 +424,9 @@ int nr_ice_peer_ctx_pair_candidates(nr_ice_peer_ctx *pctx)
     stream=STAILQ_FIRST(&pctx->peer_streams);
     while(stream){
       if(r=nr_ice_media_stream_pair_candidates(pctx, stream->local_stream,
-        stream))
+        stream)) {
         ABORT(r);
+}
 
       stream=STAILQ_NEXT(stream,entry);
     }
@@ -429,11 +444,13 @@ int nr_ice_peer_ctx_pair_new_trickle_candidate(nr_ice_ctx *ctx, nr_ice_peer_ctx 
     nr_ice_media_stream *pstream;
 
     r_log(LOG_ICE,LOG_ERR,"ICE(%s): peer (%s) pairing local trickle ICE candidate %s",pctx->ctx->label,pctx->label,cand->label);
-    if ((r = nr_ice_peer_ctx_find_pstream(pctx, cand->stream, &pstream)))
+    if ((r = nr_ice_peer_ctx_find_pstream(pctx, cand->stream, &pstream))) {
       ABORT(r);
+}
 
-    if ((r = nr_ice_media_stream_pair_new_trickle_candidate(pctx, pstream, cand)))
+    if ((r = nr_ice_media_stream_pair_new_trickle_candidate(pctx, pstream, cand))) {
       ABORT(r);
+}
 
     /* Start the remote trickle grace timeout if it hasn't been started
        already. */
@@ -452,16 +469,19 @@ int nr_ice_peer_ctx_disable_component(nr_ice_peer_ctx *pctx, nr_ice_media_stream
     nr_ice_media_stream *pstream;
     nr_ice_component *component;
 
-    if ((r=nr_ice_peer_ctx_find_pstream(pctx, lstream, &pstream)))
+    if ((r=nr_ice_peer_ctx_find_pstream(pctx, lstream, &pstream))) {
       ABORT(r);
+}
 
     /* We shouldn't be calling this after we have started pairing */
-    if (pstream->ice_state != NR_ICE_MEDIA_STREAM_UNPAIRED)
+    if (pstream->ice_state != NR_ICE_MEDIA_STREAM_UNPAIRED) {
       ABORT(R_FAILED);
+}
 
     if ((r=nr_ice_media_stream_find_component(pstream, component_id,
-                                              &component)))
+                                              &component))) {
       ABORT(r);
+}
 
     component->state = NR_ICE_COMPONENT_DISABLED;
 
@@ -485,8 +505,9 @@ static void nr_ice_peer_ctx_destroy_cb(NR_SOCKET s, int how, void *cb_arg)
       nr_ice_media_stream_destroy(&str1);
     }
     assert(pctx->ctx);
-    if (pctx->ctx)
+    if (pctx->ctx) {
       STAILQ_REMOVE(&pctx->ctx->peers, pctx, nr_ice_peer_ctx_, entry);
+}
 
     if(pctx->trickle_grace_period_timer) {
       NR_async_timer_cancel(pctx->trickle_grace_period_timer);
@@ -499,8 +520,9 @@ static void nr_ice_peer_ctx_destroy_cb(NR_SOCKET s, int how, void *cb_arg)
 int nr_ice_peer_ctx_destroy(nr_ice_peer_ctx **pctxp)
   {
 
-    if(!pctxp || !*pctxp)
+    if(!pctxp || !*pctxp) {
       return(0);
+}
 
     /* Stop calling the handler */
     (*pctxp)->handler = 0;
@@ -552,15 +574,17 @@ int nr_ice_peer_ctx_start_checks2(nr_ice_peer_ctx *pctx, int allow_non_first)
     }
 
     stream=STAILQ_FIRST(&pctx->peer_streams);
-    if(!stream)
+    if(!stream) {
       ABORT(R_FAILED);
+}
 
     while (stream) {
       assert(stream->ice_state != NR_ICE_MEDIA_STREAM_UNPAIRED);
 
       if (stream->ice_state == NR_ICE_MEDIA_STREAM_CHECKS_FROZEN) {
-        if(!TAILQ_EMPTY(&stream->check_list))
+        if(!TAILQ_EMPTY(&stream->check_list)) {
           break;
+}
 
         if(!allow_non_first){
           /* This test applies if:
@@ -589,18 +613,21 @@ int nr_ice_peer_ctx_start_checks2(nr_ice_peer_ctx *pctx, int allow_non_first)
       r_log(LOG_ICE,LOG_NOTICE,"ICE(%s): peer (%s) no streams with non-empty check lists",pctx->ctx->label,pctx->label);
     }
     else if (stream->ice_state == NR_ICE_MEDIA_STREAM_CHECKS_FROZEN) {
-      if(r=nr_ice_media_stream_unfreeze_pairs(pctx,stream))
+      if(r=nr_ice_media_stream_unfreeze_pairs(pctx,stream)) {
         ABORT(r);
-      if(r=nr_ice_media_stream_start_checks(pctx,stream))
+}
+      if(r=nr_ice_media_stream_start_checks(pctx,stream)) {
         ABORT(r);
+}
       ++started;
     }
 
     stream=STAILQ_FIRST(&pctx->peer_streams);
     while (stream) {
       int serviced = 0;
-      if (r=nr_ice_media_stream_service_pre_answer_requests(pctx, stream->local_stream, stream, &serviced))
+      if (r=nr_ice_media_stream_service_pre_answer_requests(pctx, stream->local_stream, stream, &serviced)) {
         ABORT(r);
+}
 
       if (serviced) {
         ++started;
@@ -745,8 +772,9 @@ int nr_ice_peer_ctx_check_if_connected(nr_ice_peer_ctx *pctx)
       str=STAILQ_NEXT(str,entry);
     }
 
-    if(str)
+    if(str) {
       goto done;  /* Something isn't done */
+}
 
     /* OK, we're finished, one way or another */
     r_log(LOG_ICE,LOG_INFO,"ICE-PEER(%s): all checks completed success=%d fail=%d",pctx->label,succeeded,failed);
@@ -775,16 +803,19 @@ int nr_ice_peer_ctx_find_component(nr_ice_peer_ctx *pctx, nr_ice_media_stream *s
 
     pstr=STAILQ_FIRST(&pctx->peer_streams);
     while(pstr){
-      if(pstr->local_stream==str)
+      if(pstr->local_stream==str) {
         break;
+}
 
       pstr=STAILQ_NEXT(pstr,entry);
     }
-    if(!pstr)
+    if(!pstr) {
       ABORT(R_BAD_ARGS);
+}
 
-    if(r=nr_ice_media_stream_find_component(pstr,component_id,compp))
+    if(r=nr_ice_media_stream_find_component(pstr,component_id,compp)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -810,21 +841,24 @@ int nr_ice_peer_ctx_deliver_packet_maybe(nr_ice_peer_ctx *pctx, nr_ice_component
     int r,_status;
 
     if(r=nr_ice_peer_ctx_find_component(pctx, comp->stream, comp->component_id,
-      &peer_comp))
+      &peer_comp)) {
       ABORT(r);
+}
 
     /* OK, we've found the component, now look for matches */
     cand=TAILQ_FIRST(&peer_comp->candidates);
     while(cand){
       if(!nr_transport_addr_cmp(source_addr,&cand->addr,
-        NR_TRANSPORT_ADDR_CMP_MODE_ALL))
+        NR_TRANSPORT_ADDR_CMP_MODE_ALL)) {
         break;
+}
 
       cand=TAILQ_NEXT(cand,entry_comp);
     }
 
-    if(!cand)
+    if(!cand) {
       ABORT(R_REJECTED);
+}
 
     // accumulate the received bytes for the active candidate pair
     if (peer_comp->active) {

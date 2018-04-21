@@ -101,8 +101,9 @@ int nr_verr_exit(char *fmt,...)
     va_start(ap,fmt);
     vfprintf(stderr,fmt,ap);
 
-    if (fmt[0] != '\0' && fmt[strlen(fmt)-1] != '\n')
+    if (fmt[0] != '\0' && fmt[strlen(fmt)-1] != '\n') {
         fprintf(stderr,"\n");
+}
 
     exit(1);
   }

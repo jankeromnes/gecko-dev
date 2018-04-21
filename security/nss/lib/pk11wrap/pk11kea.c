@@ -101,17 +101,21 @@ pk11_KeyExchange(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
                 }
             }
         }
-        if (privKey == NULL)
+        if (privKey == NULL) {
             goto rsa_failed;
-        if (pubKey == NULL)
+}
+        if (pubKey == NULL) {
             goto rsa_failed;
+}
 
         wrapData.len = SECKEY_PublicKeyStrength(pubKey);
-        if (!wrapData.len)
+        if (!wrapData.len) {
             goto rsa_failed;
+}
         wrapData.data = PORT_Alloc(wrapData.len);
-        if (wrapData.data == NULL)
+        if (wrapData.data == NULL) {
             goto rsa_failed;
+}
 
         /* now wrap the keys in and out */
         rv = PK11_PubWrapSymKey(CKM_RSA_PKCS, pubKey, symKey, &wrapData);
@@ -126,12 +130,15 @@ pk11_KeyExchange(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
             }
         }
     rsa_failed:
-        if (wrapData.data != NULL)
+        if (wrapData.data != NULL) {
             PORT_Free(wrapData.data);
-        if (privKey != NULL)
+}
+        if (privKey != NULL) {
             SECKEY_DestroyPrivateKey(privKey);
-        if (pubKey != NULL)
+}
+        if (pubKey != NULL) {
             SECKEY_DestroyPublicKey(pubKey);
+}
 
         return newSymKey;
     }

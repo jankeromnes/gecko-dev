@@ -75,11 +75,13 @@ nsStreamConverterService::BuildGraph() {
     nsresult rv;
 
     nsCOMPtr<nsICategoryManager> catmgr(do_GetService(NS_CATEGORYMANAGER_CONTRACTID, &rv));
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     nsCOMPtr<nsISimpleEnumerator> entries;
     rv = catmgr->EnumerateCategory(NS_ISTREAMCONVERTER_KEY, getter_AddRefs(entries));
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     // go through each entry to build the graph
     nsCOMPtr<nsISupports> supports;
@@ -91,7 +93,8 @@ nsStreamConverterService::BuildGraph() {
         // get the entry string
         nsAutoCString entryString;
         rv = entry->GetData(entryString);
-        if (NS_FAILED(rv)) return rv;
+        if (NS_FAILED(rv)) { return rv;
+}
 
         // cobble the entry string w/ the converter key to produce a full contractID.
         nsAutoCString contractID(NS_ISTREAMCONVERTER_KEY);
@@ -99,7 +102,8 @@ nsStreamConverterService::BuildGraph() {
 
         // now we've got the CONTRACTID, let's parse it up.
         rv = AddAdjacency(contractID.get());
-        if (NS_FAILED(rv)) return rv;
+        if (NS_FAILED(rv)) { return rv;
+}
 
         rv = entries->GetNext(getter_AddRefs(supports));
     }
@@ -119,7 +123,8 @@ nsStreamConverterService::AddAdjacency(const char *aContractID) {
 
     nsAutoCString fromStr, toStr;
     rv = ParseFromTo(aContractID, fromStr, toStr);
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     // Each MIME-type is a vertex in the graph, so first lets make sure
     // each MIME-type is represented as a key in our hashtable.
@@ -140,11 +145,13 @@ nsStreamConverterService::AddAdjacency(const char *aContractID) {
     // Let's "connect" the verticies, making an edge.
 
     RefPtr<nsAtom> vertex = NS_Atomize(toStr);
-    if (!vertex) return NS_ERROR_OUT_OF_MEMORY;
+    if (!vertex) { return NS_ERROR_OUT_OF_MEMORY;
+}
 
     NS_ASSERTION(fromEdges, "something wrong in adjacency list construction");
-    if (!fromEdges)
+    if (!fromEdges) {
         return NS_ERROR_FAILURE;
+}
 
     return fromEdges->AppendElement(vertex) ? NS_OK : NS_ERROR_FAILURE;
 }
@@ -156,7 +163,8 @@ nsStreamConverterService::ParseFromTo(const char *aContractID, nsCString &aFromR
 
     int32_t fromLoc = ContractIDStr.Find("from=");
     int32_t toLoc   = ContractIDStr.Find("to=");
-    if (-1 == fromLoc || -1 == toLoc ) return NS_ERROR_FAILURE;
+    if (-1 == fromLoc || -1 == toLoc ) { return NS_ERROR_FAILURE;
+}
 
     fromLoc = fromLoc + 5;
     toLoc = toLoc + 3;
@@ -193,13 +201,15 @@ public:
 nsresult
 nsStreamConverterService::FindConverter(const char *aContractID, nsTArray<nsCString> **aEdgeList) {
     nsresult rv;
-    if (!aEdgeList) return NS_ERROR_NULL_POINTER;
+    if (!aEdgeList) { return NS_ERROR_NULL_POINTER;
+}
     *aEdgeList = nullptr;
 
     // walk the graph in search of the appropriate converter.
 
     uint32_t vertexCount = mAdjacencyList.Count();
-    if (0 >= vertexCount) return NS_ERROR_FAILURE;
+    if (0 >= vertexCount) { return NS_ERROR_FAILURE;
+}
 
     // Create a corresponding color table for each vertex in the graph.
     BFSHashTable lBFSTable;
@@ -214,7 +224,8 @@ nsStreamConverterService::FindConverter(const char *aContractID, nsTArray<nsCStr
     // This is our source vertex; our starting point.
     nsAutoCString fromC, toC;
     rv = ParseFromTo(aContractID, fromC, toC);
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     BFSTableData *data = lBFSTable.Get(fromC);
     if (!data) {
@@ -232,12 +243,14 @@ nsStreamConverterService::FindConverter(const char *aContractID, nsTArray<nsCStr
     while (0 < grayQ.GetSize()) {
         nsCString *currentHead = (nsCString*)grayQ.PeekFront();
         nsTArray<RefPtr<nsAtom>>* data2 = mAdjacencyList.Get(*currentHead);
-        if (!data2) return NS_ERROR_FAILURE;
+        if (!data2) { return NS_ERROR_FAILURE;
+}
 
         // Get the state of the current head to calculate the distance of each
         // reachable vertex in the loop.
         BFSTableData *headVertexState = lBFSTable.Get(*currentHead);
-        if (!headVertexState) return NS_ERROR_FAILURE;
+        if (!headVertexState) { return NS_ERROR_FAILURE;
+}
 
         int32_t edgeCount = data2->Length();
 
@@ -275,7 +288,8 @@ nsStreamConverterService::FindConverter(const char *aContractID, nsTArray<nsCStr
 
     nsAutoCString fromStr, toMIMEType;
     rv = ParseFromTo(aContractID, fromStr, toMIMEType);
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     // get the root CONTRACTID
     nsAutoCString ContractIDPrefix(NS_ISTREAMCONVERTER_KEY);
@@ -298,10 +312,12 @@ nsStreamConverterService::FindConverter(const char *aContractID, nsTArray<nsCStr
 
         // reconstruct the CONTRACTID.
         // Get the predecessor.
-        if (!data->predecessor) break; // no predecessor
+        if (!data->predecessor) { break; // no predecessor
+}
         BFSTableData *predecessorData = lBFSTable.Get(*data->predecessor);
 
-        if (!predecessorData) break; // no predecessor, chain doesn't exist.
+        if (!predecessorData) { break; // no predecessor, chain doesn't exist.
+}
 
         // build out the CONTRACTID.
         nsAutoCString newContractID(ContractIDPrefix);
@@ -332,8 +348,9 @@ nsStreamConverterService::CanConvert(const char* aFromType,
                                      bool* _retval) {
     nsCOMPtr<nsIComponentRegistrar> reg;
     nsresult rv = NS_GetComponentRegistrar(getter_AddRefs(reg));
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     nsAutoCString contractID;
     contractID.AssignLiteral(NS_ISTREAMCONVERTER_KEY "?from=");
@@ -343,15 +360,18 @@ nsStreamConverterService::CanConvert(const char* aFromType,
 
     // See if we have a direct match
     rv = reg->IsContractIDRegistered(contractID.get(), _retval);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
-    if (*_retval)
+}
+    if (*_retval) {
         return NS_OK;
+}
 
     // Otherwise try the graph.
     rv = BuildGraph();
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     nsTArray<nsCString> *converterChain = nullptr;
     rv = FindConverter(contractID.get(), &converterChain);
@@ -367,7 +387,8 @@ nsStreamConverterService::Convert(nsIInputStream *aFromStream,
                                   const char *aToType,
                                   nsISupports *aContext,
                                   nsIInputStream **_retval) {
-    if (!aFromStream || !aFromType || !aToType || !_retval) return NS_ERROR_NULL_POINTER;
+    if (!aFromStream || !aFromType || !aToType || !_retval) { return NS_ERROR_NULL_POINTER;
+}
     nsresult rv;
 
     // first determine whether we can even handle this conversion
@@ -383,7 +404,8 @@ nsStreamConverterService::Convert(nsIInputStream *aFromStream,
     if (NS_FAILED(rv)) {
         // couldn't go direct, let's try walking the graph of converters.
         rv = BuildGraph();
-        if (NS_FAILED(rv)) return rv;
+        if (NS_FAILED(rv)) { return rv;
+}
 
         nsTArray<nsCString> *converterChain = nullptr;
 
@@ -445,7 +467,8 @@ nsStreamConverterService::AsyncConvertData(const char *aFromType,
                                            nsIStreamListener *aListener,
                                            nsISupports *aContext,
                                            nsIStreamListener **_retval) {
-    if (!aFromType || !aToType || !aListener || !_retval) return NS_ERROR_NULL_POINTER;
+    if (!aFromType || !aToType || !aListener || !_retval) { return NS_ERROR_NULL_POINTER;
+}
 
     nsresult rv;
 
@@ -462,7 +485,8 @@ nsStreamConverterService::AsyncConvertData(const char *aFromType,
     if (NS_FAILED(rv)) {
         // couldn't go direct, let's try walking the graph of converters.
         rv = BuildGraph();
-        if (NS_FAILED(rv)) return rv;
+        if (NS_FAILED(rv)) { return rv;
+}
 
         nsTArray<nsCString> *converterChain = nullptr;
 
@@ -534,7 +558,8 @@ nsresult
 NS_NewStreamConv(nsStreamConverterService** aStreamConv)
 {
     NS_PRECONDITION(aStreamConv != nullptr, "null ptr");
-    if (!aStreamConv) return NS_ERROR_NULL_POINTER;
+    if (!aStreamConv) { return NS_ERROR_NULL_POINTER;
+}
 
     *aStreamConv = new nsStreamConverterService();
     NS_ADDREF(*aStreamConv);

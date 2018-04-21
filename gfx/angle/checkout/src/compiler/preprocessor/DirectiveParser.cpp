@@ -54,35 +54,49 @@ DirectiveType getDirective(const pp::Token *token)
     const char kDirectiveVersion[]   = "version";
     const char kDirectiveLine[]      = "line";
 
-    if (token->type != pp::Token::IDENTIFIER)
+    if (token->type != pp::Token::IDENTIFIER) {
         return DIRECTIVE_NONE;
+}
 
-    if (token->text == kDirectiveDefine)
+    if (token->text == kDirectiveDefine) {
         return DIRECTIVE_DEFINE;
-    if (token->text == kDirectiveUndef)
+}
+    if (token->text == kDirectiveUndef) {
         return DIRECTIVE_UNDEF;
-    if (token->text == kDirectiveIf)
+}
+    if (token->text == kDirectiveIf) {
         return DIRECTIVE_IF;
-    if (token->text == kDirectiveIfdef)
+}
+    if (token->text == kDirectiveIfdef) {
         return DIRECTIVE_IFDEF;
-    if (token->text == kDirectiveIfndef)
+}
+    if (token->text == kDirectiveIfndef) {
         return DIRECTIVE_IFNDEF;
-    if (token->text == kDirectiveElse)
+}
+    if (token->text == kDirectiveElse) {
         return DIRECTIVE_ELSE;
-    if (token->text == kDirectiveElif)
+}
+    if (token->text == kDirectiveElif) {
         return DIRECTIVE_ELIF;
-    if (token->text == kDirectiveEndif)
+}
+    if (token->text == kDirectiveEndif) {
         return DIRECTIVE_ENDIF;
-    if (token->text == kDirectiveError)
+}
+    if (token->text == kDirectiveError) {
         return DIRECTIVE_ERROR;
-    if (token->text == kDirectivePragma)
+}
+    if (token->text == kDirectivePragma) {
         return DIRECTIVE_PRAGMA;
-    if (token->text == kDirectiveExtension)
+}
+    if (token->text == kDirectiveExtension) {
         return DIRECTIVE_EXTENSION;
-    if (token->text == kDirectiveVersion)
+}
+    if (token->text == kDirectiveVersion) {
         return DIRECTIVE_VERSION;
-    if (token->text == kDirectiveLine)
+}
+    if (token->text == kDirectiveLine) {
         return DIRECTIVE_LINE;
+}
 
     return DIRECTIVE_NONE;
 }
@@ -153,10 +167,12 @@ class DefinedParser : public Lexer
         const char kDefined[] = "defined";
 
         mLexer->lex(token);
-        if (token->type != Token::IDENTIFIER)
+        if (token->type != Token::IDENTIFIER) {
             return;
-        if (token->text != kDefined)
+}
+        if (token->text != kDefined) {
             return;
+}
 
         bool paren = false;
         mLexer->lex(token);
@@ -374,8 +390,9 @@ void DirectiveParser::parseDefine(Token *token)
         do
         {
             mTokenizer->lex(token);
-            if (token->type != Token::IDENTIFIER)
+            if (token->type != Token::IDENTIFIER) {
                 break;
+}
 
             if (std::find(macro->parameters.begin(), macro->parameters.end(), token->text) !=
                 macro->parameters.end())
@@ -689,8 +706,9 @@ void DirectiveParser::parseExtension(Token *token)
                                          token->text);
                     valid = false;
                 }
-                if (valid)
+                if (valid) {
                     name = token->text;
+}
                 break;
             case COLON:
                 if (valid && (token->type != ':'))
@@ -707,8 +725,9 @@ void DirectiveParser::parseExtension(Token *token)
                                          token->location, token->text);
                     valid = false;
                 }
-                if (valid)
+                if (valid) {
                     behavior = token->text;
+}
                 break;
             default:
                 if (valid)
@@ -741,8 +760,9 @@ void DirectiveParser::parseExtension(Token *token)
                                  token->location, token->text);
         }
     }
-    if (valid)
+    if (valid) {
         mDirectiveHandler->handleExtension(token->location, name, behavior);
+}
 }
 
 void DirectiveParser::parseVersion(Token *token)
@@ -889,15 +909,17 @@ void DirectiveParser::parseLine(Token *token)
     if (valid)
     {
         mTokenizer->setLineNumber(line);
-        if (parsedFileNumber)
+        if (parsedFileNumber) {
             mTokenizer->setFileNumber(file);
+}
     }
 }
 
 bool DirectiveParser::skipping() const
 {
-    if (mConditionalStack.empty())
+    if (mConditionalStack.empty()) {
         return false;
+}
 
     const ConditionalBlock &block = mConditionalStack.back();
     return block.skipBlock || block.skipGroup;

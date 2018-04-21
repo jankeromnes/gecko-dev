@@ -181,12 +181,15 @@ SECITEM_CompareItem(const SECItem *a, const SECItem *b)
     unsigned m;
     int rv;
 
-    if (a == b)
+    if (a == b) {
         return SECEqual;
-    if (!a || !a->len || !a->data)
+}
+    if (!a || !a->len || !a->data) {
         return (!b || !b->len || !b->data) ? SECEqual : SECLessThan;
-    if (!b || !b->len || !b->data)
+}
+    if (!b || !b->len || !b->data) {
         return SECGreaterThan;
+}
 
     m = ((a->len < b->len) ? a->len : b->len);
 
@@ -206,10 +209,12 @@ SECITEM_CompareItem(const SECItem *a, const SECItem *b)
 PRBool
 SECITEM_ItemsAreEqual(const SECItem *a, const SECItem *b)
 {
-    if (a->len != b->len)
+    if (a->len != b->len) {
         return PR_FALSE;
-    if (!a->len)
+}
+    if (!a->len) {
         return PR_TRUE;
+}
     if (!a->data || !b->data) {
         /* avoid null pointer crash. */
         return (PRBool)(a->data == b->data);
@@ -423,8 +428,9 @@ secitem_FreeArray(SECItemArray *array, PRBool zero_items, PRBool freeit)
 {
     unsigned int i;
 
-    if (!array || !array->len || !array->items)
+    if (!array || !array->len || !array->items) {
         return;
+}
 
     for (i = 0; i < array->len; ++i) {
         SECItem *item = &array->items[i];
@@ -441,8 +447,9 @@ secitem_FreeArray(SECItemArray *array, PRBool zero_items, PRBool freeit)
     array->items = NULL;
     array->len = 0;
 
-    if (freeit)
+    if (freeit) {
         PORT_Free(array);
+}
 }
 
 void
@@ -467,12 +474,14 @@ SECITEM_DupArray(PLArenaPool *arena, const SECItemArray *from)
      * Reject an inconsistent "from" array with NULL data and nonzero length.
      * However, allow a "from" array of zero length.
      */
-    if (!from || (!from->items && from->len))
+    if (!from || (!from->items && from->len)) {
         return NULL;
+}
 
     result = SECITEM_AllocArray(arena, NULL, from->len);
-    if (!result)
+    if (!result) {
         return NULL;
+}
 
     for (i = 0; i < from->len; ++i) {
         SECStatus rv = SECITEM_CopyItem(arena,

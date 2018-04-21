@@ -192,9 +192,10 @@ SECKEY_CreateDHPrivateKey(SECKEYDHParams *param, SECKEYPublicKey **pubk, void *c
 
     privk = PK11_GenerateKeyPair(slot, CKM_DH_PKCS_KEY_PAIR_GEN, param,
                                  pubk, PR_FALSE, PR_FALSE, cx);
-    if (!privk)
+    if (!privk) {
         privk = PK11_GenerateKeyPair(slot, CKM_DH_PKCS_KEY_PAIR_GEN, param,
                                      pubk, PR_FALSE, PR_TRUE, cx);
+}
 
     PK11_FreeSlot(slot);
     return (privk);
@@ -223,7 +224,7 @@ SECKEY_CreateECPrivateKey(SECKEYECParams *param, SECKEYPublicKey **pubk, void *c
                                                 PK11_ATTR_PUBLIC,
                                             CKF_DERIVE, CKF_DERIVE | CKF_SIGN,
                                             cx);
-    if (!privk)
+    if (!privk) {
         privk = PK11_GenerateKeyPairWithOpFlags(slot, CKM_EC_KEY_PAIR_GEN,
                                                 param, pubk,
                                                 PK11_ATTR_SESSION |
@@ -231,6 +232,7 @@ SECKEY_CreateECPrivateKey(SECKEYECParams *param, SECKEYPublicKey **pubk, void *c
                                                     PK11_ATTR_PRIVATE,
                                                 CKF_DERIVE, CKF_DERIVE | CKF_SIGN,
                                                 cx);
+}
 
     PK11_FreeSlot(slot);
     return (privk);
@@ -448,11 +450,13 @@ seckey_DSADecodePQG(PLArenaPool *arena, SECKEYPublicKey *pubk,
     SECStatus rv;
     SECItem newparams;
 
-    if (params == NULL)
+    if (params == NULL) {
         return SECFailure;
+}
 
-    if (params->data == NULL)
+    if (params->data == NULL) {
         return SECFailure;
+}
 
     PORT_Assert(arena);
 
@@ -572,8 +576,9 @@ seckey_ExtractPublicKey(const CERTSubjectPublicKeyInfo *spki)
     SECOidTag tag;
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
 
     pubk = (SECKEYPublicKey *)PORT_ArenaZAlloc(arena, sizeof(SECKEYPublicKey));
     if (pubk == NULL) {
@@ -594,7 +599,7 @@ seckey_ExtractPublicKey(const CERTSubjectPublicKeyInfo *spki)
     /* copy the DER into the arena, since Quick DER returns data that points
        into the DER input, which may get freed by the caller */
     rv = SECITEM_CopyItem(arena, &newOs, &os);
-    if (rv == SECSuccess)
+    if (rv == SECSuccess) {
         switch (tag) {
             case SEC_OID_X500_RSA_ENCRYPTION:
             case SEC_OID_PKCS1_RSA_ENCRYPTION:
@@ -602,41 +607,47 @@ seckey_ExtractPublicKey(const CERTSubjectPublicKeyInfo *spki)
                 pubk->keyType = rsaKey;
                 prepare_rsa_pub_key_for_asn1(pubk);
                 rv = SEC_QuickDERDecodeItem(arena, pubk, SECKEY_RSAPublicKeyTemplate, &newOs);
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
                 break;
             case SEC_OID_ANSIX9_DSA_SIGNATURE:
             case SEC_OID_SDN702_DSA_SIGNATURE:
                 pubk->keyType = dsaKey;
                 prepare_dsa_pub_key_for_asn1(pubk);
                 rv = SEC_QuickDERDecodeItem(arena, pubk, SECKEY_DSAPublicKeyTemplate, &newOs);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
 
                 rv = seckey_DSADecodePQG(arena, pubk,
                                          &spki->algorithm.parameters);
 
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
                 break;
             case SEC_OID_X942_DIFFIE_HELMAN_KEY:
                 pubk->keyType = dhKey;
                 prepare_dh_pub_key_for_asn1(pubk);
                 rv = SEC_QuickDERDecodeItem(arena, pubk, SECKEY_DHPublicKeyTemplate, &newOs);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
 
                 /* copy the DER into the arena, since Quick DER returns data that points
                    into the DER input, which may get freed by the caller */
                 rv = SECITEM_CopyItem(arena, &newParms, &spki->algorithm.parameters);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
 
                 rv = SEC_QuickDERDecodeItem(arena, pubk, SECKEY_DHParamKeyTemplate,
                                             &newParms);
 
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
                 break;
             case SEC_OID_ANSIX962_EC_PUBLIC_KEY:
                 pubk->keyType = ecKey;
@@ -665,6 +676,7 @@ seckey_ExtractPublicKey(const CERTSubjectPublicKeyInfo *spki)
                 PORT_SetError(SEC_ERROR_UNSUPPORTED_KEYALG);
                 break;
         }
+}
 
     SECKEY_DestroyPublicKey(pubk);
     return NULL;
@@ -694,8 +706,9 @@ SECKEY_ECParamsToKeySize(const SECItem *encodedParams)
      */
     oid.len = encodedParams->data[1];
     oid.data = encodedParams->data + 2;
-    if ((tag = SECOID_FindOIDTag(&oid)) == SEC_OID_UNKNOWN)
+    if ((tag = SECOID_FindOIDTag(&oid)) == SEC_OID_UNKNOWN) {
         return 0;
+}
 
     switch (tag) {
         case SEC_OID_SECG_EC_SECP112R1:
@@ -826,8 +839,9 @@ SECKEY_ECParamsToBasePointOrderLen(const SECItem *encodedParams)
      */
     oid.len = encodedParams->data[1];
     oid.data = encodedParams->data + 2;
-    if ((tag = SECOID_FindOIDTag(&oid)) == SEC_OID_UNKNOWN)
+    if ((tag = SECOID_FindOIDTag(&oid)) == SEC_OID_UNKNOWN) {
         return 0;
+}
 
     switch (tag) {
         case SEC_OID_SECG_EC_SECP112R1:
@@ -1092,8 +1106,9 @@ SECKEY_CopyPrivateKey(const SECKEYPrivateKey *privk)
         if (privk->pkcs11IsTemp) {
             copyk->pkcs11ID =
                 PK11_CopyKey(privk->pkcs11Slot, privk->pkcs11ID);
-            if (copyk->pkcs11ID == CK_INVALID_HANDLE)
+            if (copyk->pkcs11ID == CK_INVALID_HANDLE) {
                 goto fail;
+}
         } else {
             copyk->pkcs11ID = privk->pkcs11ID;
         }
@@ -1147,33 +1162,39 @@ SECKEY_CopyPublicKey(const SECKEYPublicKey *pubk)
             if (rv == SECSuccess) {
                 rv = SECITEM_CopyItem(arena, &copyk->u.rsa.publicExponent,
                                       &pubk->u.rsa.publicExponent);
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return copyk;
+}
             }
             break;
         case dsaKey:
             rv = SECITEM_CopyItem(arena, &copyk->u.dsa.publicValue,
                                   &pubk->u.dsa.publicValue);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(arena, &copyk->u.dsa.params.prime,
                                   &pubk->u.dsa.params.prime);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(arena, &copyk->u.dsa.params.subPrime,
                                   &pubk->u.dsa.params.subPrime);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(arena, &copyk->u.dsa.params.base,
                                   &pubk->u.dsa.params.base);
             break;
         case dhKey:
             rv = SECITEM_CopyItem(arena, &copyk->u.dh.prime, &pubk->u.dh.prime);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(arena, &copyk->u.dh.base, &pubk->u.dh.base);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(arena, &copyk->u.dh.publicValue,
                                   &pubk->u.dh.publicValue);
             break;
@@ -1199,8 +1220,9 @@ SECKEY_CopyPublicKey(const SECKEYPublicKey *pubk)
             rv = SECFailure;
             break;
     }
-    if (rv == SECSuccess)
+    if (rv == SECSuccess) {
         return copyk;
+}
 
     SECKEY_DestroyPublicKey(copyk);
     return NULL;
@@ -1251,12 +1273,14 @@ SECKEY_ConvertToPublicKey(SECKEYPrivateKey *privk)
         case rsaKey:
             rv = PK11_ReadAttribute(privk->pkcs11Slot, privk->pkcs11ID,
                                     CKA_MODULUS, arena, &pubk->u.rsa.modulus);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = PK11_ReadAttribute(privk->pkcs11Slot, privk->pkcs11ID,
                                     CKA_PUBLIC_EXPONENT, arena, &pubk->u.rsa.publicExponent);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             return pubk;
             break;
         case ecKey:
@@ -1358,14 +1382,16 @@ seckey_CreateSubjectPublicKeyInfo_helper(SECKEYPublicKey *pubk)
             case ecKey:
                 rv = SECITEM_CopyItem(arena, &params,
                                       &pubk->u.ec.DEREncodedParams);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
 
                 rv = SECOID_SetAlgorithmID(arena, &spki->algorithm,
                                            SEC_OID_ANSIX962_EC_PUBLIC_KEY,
                                            &params);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
 
                 rv = SECITEM_CopyItem(arena, &spki->subjectPublicKey,
                                       &pubk->u.ec.publicValue);
@@ -1472,8 +1498,9 @@ SECKEY_DecodeDERSubjectPublicKeyInfo(const SECItem *spkider)
             rv = SEC_QuickDERDecodeItem(arena, spki,
                                         CERT_SubjectPublicKeyInfoTemplate, &newSpkider);
         }
-        if (rv == SECSuccess)
+        if (rv == SECSuccess) {
             return spki;
+}
     } else {
         PORT_SetError(SEC_ERROR_NO_MEMORY);
     }
@@ -1493,8 +1520,9 @@ SECKEY_ConvertAndDecodeSubjectPublicKeyInfo(const char *spkistr)
     SECItem der;
 
     rv = ATOB_ConvertAsciiToItem(&der, spkistr);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return NULL;
+}
 
     spki = SECKEY_DecodeDERSubjectPublicKeyInfo(&der);
 
@@ -1964,12 +1992,14 @@ SECKEY_GetECCOid(const SECKEYECParams *params)
      * representing a named curve. Here, we strip away everything
      * before the actual OID and use the OID to look up a named curve.
      */
-    if (params->data[0] != SEC_ASN1_OBJECT_ID)
+    if (params->data[0] != SEC_ASN1_OBJECT_ID) {
         return 0;
+}
     oid.len = params->len - 2;
     oid.data = params->data + 2;
-    if ((oidData = SECOID_FindOID(&oid)) == NULL)
+    if ((oidData = SECOID_FindOID(&oid)) == NULL) {
         return 0;
+}
 
     return oidData->offset;
 }

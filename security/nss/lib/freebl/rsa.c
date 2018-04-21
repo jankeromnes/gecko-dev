@@ -209,13 +209,15 @@ generate_prime(mp_int *prime, int primeLen)
         pb[primeLen - 1] |= 0x01; /* set low-order bit       */
         CHECK_MPI_OK(mp_read_unsigned_octets(prime, pb, primeLen));
         err = mpp_make_prime(prime, primeLen * 8, PR_FALSE);
-        if (err != MP_NO)
+        if (err != MP_NO) {
             goto cleanup;
+}
         /* keep going while err == MP_NO */
     }
 cleanup:
-    if (pb)
+    if (pb) {
         PORT_ZFree(pb, primeLen);
+}
     if (err) {
         MP_TO_SEC_ERROR(err);
         rv = SECFailure;
@@ -344,8 +346,9 @@ RSA_NewKey(int keySizeInBits, SECItem *publicExponent)
          * implementation optimization that requires p > q. We can remove
          * this code in the future.
          */
-        if (mp_cmp(&p, &q) < 0)
+        if (mp_cmp(&p, &q) < 0) {
             mp_exch(&p, &q);
+}
         /* Attempt to use these primes to generate a key */
         rv = rsa_build_from_primes(&p, &q,
                                    &e, PR_FALSE, /* needPublicExponent=false */
@@ -863,8 +866,9 @@ RSA_PopulatePrivateKey(RSAPrivateKey *key)
       * implementation optimization that requires p > q. We can remove
       * this code in the future.
       */
-    if (mp_cmp(&p, &q) < 0)
+    if (mp_cmp(&p, &q) < 0) {
         mp_exch(&p, &q);
+}
 
     /* we now have our 2 primes and at least one exponent, we can fill
       * in the key */
@@ -958,8 +962,9 @@ RSA_PublicKeyOp(RSAPublicKey *key,
         CHECK_MPI_OK(mp_exptmod(&m, &e, &n, &c));
     /* 4.  result c is ciphertext */
     err = mp_to_fixlen_octets(&c, output, modLen);
-    if (err >= 0)
+    if (err >= 0) {
         err = MP_OKAY;
+}
 cleanup:
     mp_clear(&n);
     mp_clear(&e);
@@ -1147,8 +1152,9 @@ generate_blinding_params(RSAPrivateKey *key, mp_int *f, mp_int *g, mp_int *n,
     /* g = k**-1 mod n */
     CHECK_MPI_OK(mp_invmod(&k, n, g));
 cleanup:
-    if (kb)
+    if (kb) {
         PORT_ZFree(kb, modLen);
+}
     mp_clear(&k);
     mp_clear(&e);
     if (err) {
@@ -1425,8 +1431,9 @@ rsa_PrivateKeyOp(RSAPrivateKey *key,
         CHECK_MPI_OK(mp_mulmod(&m, &g, &n, &m));
     }
     err = mp_to_fixlen_octets(&m, output, modLen);
-    if (err >= 0)
+    if (err >= 0) {
         err = MP_OKAY;
+}
 cleanup:
     mp_clear(&n);
     mp_clear(&c);
@@ -1579,8 +1586,9 @@ void
 RSA_Cleanup(void)
 {
     blindingParams *bp = NULL;
-    if (!coBPInit.initialized)
+    if (!coBPInit.initialized) {
         return;
+}
 
     while (!PR_CLIST_IS_EMPTY(&blindingParamsList.head)) {
         RSABlindingParams *rsabp =

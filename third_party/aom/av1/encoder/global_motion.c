@@ -161,8 +161,10 @@ int64_t refine_integerized_param(WarpedMotionParams *wm,
     for (p = 0; p < n_params; ++p) {
       int step_dir = 0;
       // Skip searches for parameters that are forced to be 0
-      if (wmtype == HORTRAPEZOID && (p == 4 || p == 6)) continue;
-      if (wmtype == VERTRAPEZOID && (p == 3 || p == 7)) continue;
+      if (wmtype == HORTRAPEZOID && (p == 4 || p == 6)) { continue;
+}
+      if (wmtype == VERTRAPEZOID && (p == 3 || p == 7)) { continue;
+}
       param = param_mat + p;
       curr_param = *param;
       best_param = curr_param;
@@ -313,7 +315,8 @@ int compute_global_motion_feature_based(
 
   // Return true if any one of the motions has inliers.
   for (i = 0; i < num_motions; ++i) {
-    if (num_inliers_by_motion[i] > 0) return 1;
+    if (num_inliers_by_motion[i] > 0) { return 1;
+}
   }
   return 0;
 }

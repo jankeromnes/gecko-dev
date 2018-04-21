@@ -53,7 +53,8 @@ void *aom_malloc(size_t size) { return aom_memalign(DEFAULT_ALIGNMENT, size); }
 void *aom_calloc(size_t num, size_t size) {
   const size_t total_size = num * size;
   void *const x = aom_malloc(total_size);
-  if (x) memset(x, 0, total_size);
+  if (x) { memset(x, 0, total_size);
+}
   return x;
 }
 
@@ -68,7 +69,8 @@ void aom_free(void *memblk) {
 void *aom_memset16(void *dest, int val, size_t length) {
   size_t i;
   uint16_t *dest16 = (uint16_t *)dest;
-  for (i = 0; i < length; i++) *dest16++ = val;
+  for (i = 0; i < length; i++) { *dest16++ = val;
+}
   return dest;
 }
 #endif  // CONFIG_HIGHBITDEPTH

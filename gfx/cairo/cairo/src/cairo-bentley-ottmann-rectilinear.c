@@ -84,8 +84,9 @@ _cairo_point_compare (const cairo_point_t *a,
     int cmp;
 
     cmp = a->y - b->y;
-    if (likely (cmp))
+    if (likely (cmp)) {
 	return cmp;
+}
 
     return a->x - b->x;
 }
@@ -97,8 +98,9 @@ _cairo_bo_edge_compare (const cairo_bo_edge_t	*a,
     int cmp;
 
     cmp = a->edge.line.p1.x - b->edge.line.p1.x;
-    if (likely (cmp))
+    if (likely (cmp)) {
 	return cmp;
+}
 
     return b->edge.bottom - a->edge.bottom;
 }
@@ -110,12 +112,14 @@ cairo_bo_event_compare (const cairo_bo_event_t *a,
     int cmp;
 
     cmp = _cairo_point_compare (&a->point, &b->point);
-    if (likely (cmp))
+    if (likely (cmp)) {
 	return cmp;
+}
 
     cmp = a->type - b->type;
-    if (cmp)
+    if (cmp) {
 	return cmp;
+}
 
     return a - b;
 }
@@ -156,33 +160,38 @@ _cairo_bo_sweep_line_insert (cairo_bo_sweep_line_t	*sweep_line,
 	if (cmp < 0) {
 	    prev = sweep_line->current_edge;
 	    next = prev->next;
-	    while (next != NULL && _cairo_bo_edge_compare (next, edge) < 0)
+	    while (next != NULL && _cairo_bo_edge_compare (next, edge) < 0) {
 		prev = next, next = prev->next;
+}
 
 	    prev->next = edge;
 	    edge->prev = prev;
 	    edge->next = next;
-	    if (next != NULL)
+	    if (next != NULL) {
 		next->prev = edge;
+}
 	} else if (cmp > 0) {
 	    next = sweep_line->current_edge;
 	    prev = next->prev;
-	    while (prev != NULL && _cairo_bo_edge_compare (prev, edge) > 0)
+	    while (prev != NULL && _cairo_bo_edge_compare (prev, edge) > 0) {
 		next = prev, prev = next->prev;
+}
 
 	    next->prev = edge;
 	    edge->next = next;
 	    edge->prev = prev;
-	    if (prev != NULL)
+	    if (prev != NULL) {
 		prev->next = edge;
-	    else
+	    } else {
 		sweep_line->head = edge;
+}
 	} else {
 	    prev = sweep_line->current_edge;
 	    edge->prev = prev;
 	    edge->next = prev->next;
-	    if (prev->next != NULL)
+	    if (prev->next != NULL) {
 		prev->next->prev = edge;
+}
 	    prev->next = edge;
 	}
     } else {
@@ -196,16 +205,19 @@ static void
 _cairo_bo_sweep_line_delete (cairo_bo_sweep_line_t	*sweep_line,
 			     cairo_bo_edge_t	*edge)
 {
-    if (edge->prev != NULL)
+    if (edge->prev != NULL) {
 	edge->prev->next = edge->next;
-    else
+    } else {
 	sweep_line->head = edge->next;
+}
 
-    if (edge->next != NULL)
+    if (edge->next != NULL) {
 	edge->next->prev = edge->prev;
+}
 
-    if (sweep_line->current_edge == edge)
+    if (sweep_line->current_edge == edge) {
 	sweep_line->current_edge = edge->prev ? edge->prev : edge->next;
+}
 }
 
 static inline cairo_bool_t
@@ -260,8 +272,9 @@ _cairo_bo_edge_start_or_continue_trap (cairo_bo_edge_t	*left,
 {
     cairo_status_t status;
 
-    if (left->deferred_trap.right == right)
+    if (left->deferred_trap.right == right) {
 	return CAIRO_STATUS_SUCCESS;
+}
 
     if (left->deferred_trap.right != NULL) {
 	if (right != NULL && edges_collinear (left->deferred_trap.right, right))
@@ -272,8 +285,9 @@ _cairo_bo_edge_start_or_continue_trap (cairo_bo_edge_t	*left,
 	}
 
 	status = _cairo_bo_edge_end_trap (left, top, do_traps, container);
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    return status;
+}
     }
 
     if (right != NULL && ! edges_collinear (left, right)) {
@@ -306,8 +320,9 @@ _active_edges_to_traps (cairo_bo_edge_t		*left,
 	    /* Check if there is a co-linear edge with an existing trap */
 	    right = left->next;
 	    if (left->deferred_trap.right == NULL) {
-		while (right != NULL && right->deferred_trap.right == NULL)
+		while (right != NULL && right->deferred_trap.right == NULL) {
 		    right = right->next;
+}
 
 		if (right != NULL && edges_collinear (left, right)) {
 		    /* continuation on left */
@@ -321,8 +336,9 @@ _active_edges_to_traps (cairo_bo_edge_t		*left,
 	    while (right != NULL) {
 		if (right->deferred_trap.right != NULL) {
 		    status = _cairo_bo_edge_end_trap (right, top, do_traps, container);
-		    if (unlikely (status))
+		    if (unlikely (status)) {
 			return status;
+}
 		}
 
 		in_out += right->edge.dir;
@@ -340,12 +356,14 @@ _active_edges_to_traps (cairo_bo_edge_t		*left,
 
 	    status = _cairo_bo_edge_start_or_continue_trap (left, right, top,
 							    do_traps, container);
-	    if (unlikely (status))
+	    if (unlikely (status)) {
 		return status;
+}
 
 	    left = right;
-	    if (left != NULL)
+	    if (left != NULL) {
 		left = left->next;
+}
 	}
     } else {
 	while (left != NULL) {
@@ -355,8 +373,9 @@ _active_edges_to_traps (cairo_bo_edge_t		*left,
 	    while (right != NULL) {
 		if (right->deferred_trap.right != NULL) {
 		    status = _cairo_bo_edge_end_trap (right, top, do_traps, container);
-		    if (unlikely (status))
+		    if (unlikely (status)) {
 			return status;
+}
 		}
 
 		if ((in_out++ & 1) == 0) {
@@ -365,11 +384,13 @@ _active_edges_to_traps (cairo_bo_edge_t		*left,
 
 		    /* skip co-linear edges */
 		    next = right->next;
-		    if (next != NULL)
+		    if (next != NULL) {
 			skip = edges_collinear (right, next);
+}
 
-		    if (! skip)
+		    if (! skip) {
 			break;
+}
 		}
 
 		right = right->next;
@@ -377,12 +398,14 @@ _active_edges_to_traps (cairo_bo_edge_t		*left,
 
 	    status = _cairo_bo_edge_start_or_continue_trap (left, right, top,
 							    do_traps, container);
-	    if (unlikely (status))
+	    if (unlikely (status)) {
 		return status;
+}
 
 	    left = right;
-	    if (left != NULL)
+	    if (left != NULL) {
 		left = left->next;
+}
 	}
     }
 
@@ -407,8 +430,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear (cairo_bo_event_t   **start_events
 	    status = _active_edges_to_traps (sweep_line.head,
 					     sweep_line.current_y,
 					     fill_rule, do_traps, container);
-	    if (unlikely (status))
+	    if (unlikely (status)) {
 		return status;
+}
 
 	    sweep_line.current_y = event->point.y;
 	}
@@ -425,8 +449,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear (cairo_bo_event_t   **start_events
 		status = _cairo_bo_edge_end_trap (event->edge,
 						  sweep_line.current_y,
 						  do_traps, container);
-		if (unlikely (status))
+		if (unlikely (status)) {
 		    return status;
+}
 	    }
 
 	    break;
@@ -451,8 +476,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_polygon (cairo_traps_t	 *traps,
     int num_events;
     int i, j;
 
-    if (unlikely (polygon->num_edges == 0))
+    if (unlikely (polygon->num_edges == 0)) {
 	return CAIRO_STATUS_SUCCESS;
+}
 
     num_events = 2 * polygon->num_edges;
 
@@ -465,8 +491,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_polygon (cairo_traps_t	 *traps,
 					  sizeof (cairo_bo_edge_t) +
 					  sizeof (cairo_bo_event_t *),
 					  sizeof (cairo_bo_event_t *));
-	if (unlikely (events == NULL))
+	if (unlikely (events == NULL)) {
 	    return _cairo_error (CAIRO_STATUS_NO_MEMORY);
+}
 
 	event_ptrs = (cairo_bo_event_t **) (events + num_events);
 	edges = (cairo_bo_edge_t *) (event_ptrs + num_events + 1);
@@ -496,8 +523,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_polygon (cairo_traps_t	 *traps,
     status = _cairo_bentley_ottmann_tessellate_rectilinear (event_ptrs, j,
 							    fill_rule,
 							    TRUE, traps);
-    if (events != stack_events)
+    if (events != stack_events) {
 	free (events);
+}
 
     traps->is_rectilinear = TRUE;
 
@@ -519,8 +547,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_polygon_to_boxes (const cairo_poly
     int num_events;
     int i, j;
 
-    if (unlikely (polygon->num_edges == 0))
+    if (unlikely (polygon->num_edges == 0)) {
 	return CAIRO_STATUS_SUCCESS;
+}
 
     num_events = 2 * polygon->num_edges;
 
@@ -533,8 +562,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_polygon_to_boxes (const cairo_poly
 					  sizeof (cairo_bo_edge_t) +
 					  sizeof (cairo_bo_event_t *),
 					  sizeof (cairo_bo_event_t *));
-	if (unlikely (events == NULL))
+	if (unlikely (events == NULL)) {
 	    return _cairo_error (CAIRO_STATUS_NO_MEMORY);
+}
 
 	event_ptrs = (cairo_bo_event_t **) (events + num_events);
 	edges = (cairo_bo_edge_t *) (event_ptrs + num_events + 1);
@@ -564,8 +594,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_polygon_to_boxes (const cairo_poly
     status = _cairo_bentley_ottmann_tessellate_rectilinear (event_ptrs, j,
 							    fill_rule,
 							    FALSE, boxes);
-    if (events != stack_events)
+    if (events != stack_events) {
 	free (events);
+}
 
     return status;
 }
@@ -583,8 +614,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_traps (cairo_traps_t *traps,
     cairo_status_t status;
     int i, j, k;
 
-    if (unlikely (traps->num_traps == 0))
+    if (unlikely (traps->num_traps == 0)) {
 	return CAIRO_STATUS_SUCCESS;
+}
 
     assert (traps->is_rectilinear);
 
@@ -599,8 +631,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_traps (cairo_traps_t *traps,
 					  sizeof (cairo_bo_edge_t) +
 					  sizeof (cairo_bo_event_t *),
 					  sizeof (cairo_bo_event_t *));
-	if (unlikely (events == NULL))
+	if (unlikely (events == NULL)) {
 	    return _cairo_error (CAIRO_STATUS_NO_MEMORY);
+}
 
 	event_ptrs = (cairo_bo_event_t **) (events + i);
 	edges = (cairo_bo_edge_t *) (event_ptrs + i + 1);
@@ -660,8 +693,9 @@ _cairo_bentley_ottmann_tessellate_rectilinear_traps (cairo_traps_t *traps,
 							    TRUE, traps);
     traps->is_rectilinear = TRUE;
 
-    if (events != stack_events)
+    if (events != stack_events) {
 	free (events);
+}
 
     return status;
 }

@@ -59,11 +59,13 @@ ValidateOutputsTraverser::ValidateOutputsTraverser(const TExtensionBehavior &ext
 
 void ValidateOutputsTraverser::visitSymbol(TIntermSymbol *symbol)
 {
-    if (symbol->variable().symbolType() == SymbolType::Empty)
+    if (symbol->variable().symbolType() == SymbolType::Empty) {
         return;
+}
 
-    if (mVisitedSymbols.count(symbol->uniqueId().get()) == 1)
+    if (mVisitedSymbols.count(symbol->uniqueId().get()) == 1) {
         return;
+}
 
     mVisitedSymbols.insert(symbol->uniqueId().get());
 

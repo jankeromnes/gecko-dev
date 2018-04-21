@@ -25,11 +25,13 @@ static THREAD_FUNCTION thread_loopfilter(void *p_data) {
   VP8_COMMON *cm = &cpi->common;
 
   while (1) {
-    if (protected_read(&cpi->mt_mutex, &cpi->b_multi_threaded) == 0) break;
+    if (protected_read(&cpi->mt_mutex, &cpi->b_multi_threaded) == 0) { break;
+}
 
     if (sem_wait(&cpi->h_event_start_lpf) == 0) {
       /* we're shutting down */
-      if (protected_read(&cpi->mt_mutex, &cpi->b_multi_threaded) == 0) break;
+      if (protected_read(&cpi->mt_mutex, &cpi->b_multi_threaded) == 0) { break;
+}
 
       vp8_loopfilter_frame(cpi, cm);
 
@@ -47,7 +49,8 @@ static THREAD_FUNCTION thread_encoding_proc(void *p_data) {
   ENTROPY_CONTEXT_PLANES mb_row_left_context;
 
   while (1) {
-    if (protected_read(&cpi->mt_mutex, &cpi->b_multi_threaded) == 0) break;
+    if (protected_read(&cpi->mt_mutex, &cpi->b_multi_threaded) == 0) { break;
+}
 
     if (sem_wait(&cpi->h_event_start_encoding[ithread]) == 0) {
       const int nsync = cpi->mt_sync_range;
@@ -65,7 +68,8 @@ static THREAD_FUNCTION thread_encoding_proc(void *p_data) {
       int *totalrate = &mbri->totalrate;
 
       /* we're shutting down */
-      if (protected_read(&cpi->mt_mutex, &cpi->b_multi_threaded) == 0) break;
+      if (protected_read(&cpi->mt_mutex, &cpi->b_multi_threaded) == 0) { break;
+}
 
       xd->mode_info_context = cm->mi + cm->mode_info_stride * (ithread + 1);
       xd->mode_info_stride = cm->mode_info_stride;
@@ -150,7 +154,8 @@ static THREAD_FUNCTION thread_encoding_proc(void *p_data) {
           /* Copy current mb to a buffer */
           vp8_copy_mem16x16(x->src.y_buffer, x->src.y_stride, x->thismb, 16);
 
-          if (cpi->oxcf.tuning == VP8_TUNE_SSIM) vp8_activity_masking(cpi, x);
+          if (cpi->oxcf.tuning == VP8_TUNE_SSIM) { vp8_activity_masking(cpi, x);
+}
 
           /* Is segmentation enabled */
           /* MB level adjustment to quantizer */
@@ -417,8 +422,10 @@ static void setup_mbby_copy(MACROBLOCK *mbdst, MACROBLOCK *mbsrc) {
      * the quantizer code uses a passed in pointer to the dequant constants.
      * This will also require modifications to the x86 and neon assembly.
      * */
-    for (i = 0; i < 16; ++i) zd->block[i].dequant = zd->dequant_y1;
-    for (i = 16; i < 24; ++i) zd->block[i].dequant = zd->dequant_uv;
+    for (i = 0; i < 16; ++i) { zd->block[i].dequant = zd->dequant_y1;
+}
+    for (i = 16; i < 24; ++i) { zd->block[i].dequant = zd->dequant_uv;
+}
     zd->block[24].dequant = zd->dequant_y2;
 #endif
 
@@ -472,7 +479,8 @@ void vp8cx_init_mbrthread_data(VP8_COMP *cpi, MACROBLOCK *x,
     setup_mbby_copy(&mbr_ei[i].mb, x);
 
     mbd->fullpixel_mask = 0xffffffff;
-    if (cm->full_pixel) mbd->fullpixel_mask = 0xfffffff8;
+    if (cm->full_pixel) { mbd->fullpixel_mask = 0xfffffff8;
+}
 
     vp8_zero(mb->coef_counts);
     vp8_zero(x->ymode_count);
@@ -511,7 +519,8 @@ int vp8cx_create_encoder_threads(VP8_COMP *cpi) {
       th_count = (cm->mb_cols / cpi->mt_sync_range) - 1;
     }
 
-    if (th_count == 0) return 0;
+    if (th_count == 0) { return 0;
+}
 
     CHECK_MEM_ERROR(cpi->h_encoding_thread,
                     vpx_malloc(sizeof(pthread_t) * th_count));
@@ -549,7 +558,8 @@ int vp8cx_create_encoder_threads(VP8_COMP *cpi) {
 
       rc = pthread_create(&cpi->h_encoding_thread[ithread], 0,
                           thread_encoding_proc, ethd);
-      if (rc) break;
+      if (rc) { break;
+}
     }
 
     if (rc) {

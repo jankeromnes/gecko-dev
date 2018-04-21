@@ -33,8 +33,9 @@ sftk_TLSPRFHashUpdate(TLSPRFContext *cx, const unsigned char *data,
 {
     PRUint32 bytesUsed = cx->cxKeyLen + cx->cxDataLen;
 
-    if (cx->cxRv != SECSuccess) /* function has previously failed. */
+    if (cx->cxRv != SECSuccess) { /* function has previously failed. */
         return;
+}
     if (bytesUsed + data_len > cx->cxBufSize) {
         /* We don't use realloc here because
         ** (a) realloc doesn't zero out the old block, and
@@ -78,8 +79,9 @@ sftk_TLSPRFUpdate(TLSPRFContext *cx,
     SECItem seedItem;
     SECItem secretItem;
 
-    if (cx->cxRv != SECSuccess)
+    if (cx->cxRv != SECSuccess) {
         return cx->cxRv;
+}
 
     secretItem.data = cx->cxBufPtr;
     secretItem.len = cx->cxKeyLen;
@@ -103,8 +105,9 @@ sftk_TLSPRFUpdate(TLSPRFContext *cx,
     } else {
         rv = TLS_PRF(&secretItem, NULL, &seedItem, &sigItem, cx->cxIsFIPS);
     }
-    if (rv == SECSuccess && sigLen != NULL)
+    if (rv == SECSuccess && sigLen != NULL) {
         *sigLen = sigItem.len;
+}
     return rv;
 }
 
@@ -119,8 +122,9 @@ sftk_TLSPRFVerify(TLSPRFContext *cx,
     unsigned int tmpLen = sigLen;
     SECStatus rv;
 
-    if (!tmp)
+    if (!tmp) {
         return SECFailure;
+}
     if (hashLen) {
         /* hashLen is non-zero when the user does a one-step verify.
         ** In this case, none of the data has been input yet.
@@ -139,8 +143,9 @@ static void
 sftk_TLSPRFHashDestroy(TLSPRFContext *cx, PRBool freeit)
 {
     if (freeit) {
-        if (cx->cxBufPtr != cx->cxBuf)
+        if (cx->cxBufPtr != cx->cxBuf) {
             PORT_ZFree(cx->cxBufPtr, cx->cxBufSize);
+}
         PORT_ZFree(cx, cx->cxSize);
     }
 }
@@ -158,8 +163,9 @@ sftk_TLSPRFInit(SFTKSessionContext *context,
     PRUint32 keySize;
     PRUint32 blockSize;
 
-    if (key_type != CKK_GENERIC_SECRET)
+    if (key_type != CKK_GENERIC_SECRET) {
         return CKR_KEY_TYPE_INCONSISTENT; /* CKR_KEY_FUNCTION_NOT_PERMITTED */
+}
 
     context->multi = PR_TRUE;
 
@@ -167,8 +173,9 @@ sftk_TLSPRFInit(SFTKSessionContext *context,
     keySize = (!keyVal) ? 0 : keyVal->attrib.ulValueLen;
     blockSize = keySize + sizeof(TLSPRFContext);
     prf_cx = (TLSPRFContext *)PORT_Alloc(blockSize);
-    if (!prf_cx)
+    if (!prf_cx) {
         goto done;
+}
     prf_cx->cxSize = blockSize;
     prf_cx->cxKeyLen = keySize;
     prf_cx->cxDataLen = 0;
@@ -178,8 +185,9 @@ sftk_TLSPRFInit(SFTKSessionContext *context,
     prf_cx->cxBufPtr = prf_cx->cxBuf;
     prf_cx->cxHashAlg = hash_alg;
     prf_cx->cxOutLen = out_len;
-    if (keySize)
+    if (keySize) {
         PORT_Memcpy(prf_cx->cxBufPtr, keyVal->attrib.pValue, keySize);
+}
 
     context->hashInfo = (void *)prf_cx;
     context->cipherInfo = (void *)prf_cx;
@@ -192,7 +200,8 @@ sftk_TLSPRFInit(SFTKSessionContext *context,
     crv = CKR_OK;
 
 done:
-    if (keyVal)
+    if (keyVal) {
         sftk_FreeAttribute(keyVal);
+}
     return crv;
 }

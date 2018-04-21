@@ -852,8 +852,9 @@ sctp_close(struct socket *so)
 	uint32_t flags;
 
 	inp = (struct sctp_inpcb *)so->so_pcb;
-	if (inp == NULL)
+	if (inp == NULL) {
 		return;
+}
 
 	/* Inform all the lower layer assoc that we
 	 * are done.
@@ -1499,8 +1500,9 @@ sctp_fill_up_addresses_vrf(struct sctp_inpcb *inp,
 	struct sctp_vrf *vrf;
 
 	actual = 0;
-	if (limit <= 0)
+	if (limit <= 0) {
 		return (actual);
+}
 
 	if (stcb) {
 		/* Turn on all the appropriate scope */
@@ -1736,8 +1738,9 @@ sctp_fill_up_addresses_vrf(struct sctp_inpcb *inp,
 					continue;
 				}
 			}
-			if (sctp_fill_user_address(sas, &laddr->ifa->address.sa))
+			if (sctp_fill_user_address(sas, &laddr->ifa->address.sa)) {
 				continue;
+}
 			switch (laddr->ifa->address.sa.sa_family) {
 #ifdef INET
 			case AF_INET:
@@ -1996,8 +1999,9 @@ sctp_do_connect_x(struct socket *so, struct sctp_inpcb *inp, void *optval,
 		/* Already have or am bring up an association */
 		SCTP_ASOC_CREATE_UNLOCK(inp);
 		creat_lock_on = 0;
-		if (stcb)
+		if (stcb) {
 			SCTP_TCB_UNLOCK(stcb);
+}
 		if (bad_addresses == 0) {
 			SCTP_LTRACE_ERR_RET(inp, NULL, NULL, SCTP_FROM_SCTP_USRREQ, EALREADY);
 			error = EALREADY;
@@ -2199,10 +2203,11 @@ sctp_getopt(struct socket *so, int optname, void *optval, size_t *optsize,
 			val = sctp_is_feature_on(inp, SCTP_PCB_FLAGS_EXT_RCVINFO);
 			break;
 		case SCTP_AUTOCLOSE:
-			if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_AUTOCLOSE))
+			if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_AUTOCLOSE)) {
 				val = TICKS_TO_SEC(inp->sctp_ep.auto_close_time);
-			else
+			} else {
 				val = 0;
+}
 			break;
 
 		default:
@@ -2719,10 +2724,11 @@ sctp_getopt(struct socket *so, int optname, void *optval, size_t *optsize,
 				} else {
 					ovh = SCTP_MED_V4_OVERHEAD;
 				}
-				if (inp->sctp_frag_point >= SCTP_DEFAULT_MAXSEGMENT)
+				if (inp->sctp_frag_point >= SCTP_DEFAULT_MAXSEGMENT) {
 					av->assoc_value = 0;
-				else
+				} else {
 					av->assoc_value = inp->sctp_frag_point - ovh;
+}
 				SCTP_INP_RUNLOCK(inp);
 			} else {
 				SCTP_LTRACE_ERR_RET(inp, NULL, NULL, SCTP_FROM_SCTP_USRREQ, EINVAL);
@@ -2744,38 +2750,49 @@ sctp_getopt(struct socket *so, int optname, void *optval, size_t *optsize,
 		SCTP_CHECK_AND_CAST(events, optval, struct sctp_event_subscribe, *optsize);
 		memset(events, 0, sizeof(struct sctp_event_subscribe));
 		SCTP_INP_RLOCK(inp);
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVDATAIOEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVDATAIOEVNT)) {
 			events->sctp_data_io_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVASSOCEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVASSOCEVNT)) {
 			events->sctp_association_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVPADDREVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVPADDREVNT)) {
 			events->sctp_address_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVSENDFAILEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVSENDFAILEVNT)) {
 			events->sctp_send_failure_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVPEERERR))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVPEERERR)) {
 			events->sctp_peer_error_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVSHUTDOWNEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_RECVSHUTDOWNEVNT)) {
 			events->sctp_shutdown_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_PDAPIEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_PDAPIEVNT)) {
 			events->sctp_partial_delivery_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_ADAPTATIONEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_ADAPTATIONEVNT)) {
 			events->sctp_adaptation_layer_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_AUTHEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_AUTHEVNT)) {
 			events->sctp_authentication_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_DRYEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_DRYEVNT)) {
 			events->sctp_sender_dry_event = 1;
+}
 
-		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_STREAM_RESETEVNT))
+		if (sctp_is_feature_on(inp, SCTP_PCB_FLAGS_STREAM_RESETEVNT)) {
 			events->sctp_stream_reset_event = 1;
+}
 		SCTP_INP_RUNLOCK(inp);
 		*optsize = sizeof(struct sctp_event_subscribe);
 		break;
@@ -4492,8 +4509,9 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 		/* copy in the option value */
 		SCTP_CHECK_AND_CAST(mopt, optval, uint32_t, optsize);
 		set_opt = 0;
-		if (error)
+		if (error) {
 			break;
+}
 		switch (optname) {
 		case SCTP_DISABLE_FRAGMENTS:
 			set_opt = SCTP_PCB_FLAGS_NO_FRAGMENT;
@@ -4568,10 +4586,11 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 			error = EINVAL;
 			break;
 		}
-		if (optval)
+		if (optval) {
 			sctp_feature_on(inp, SCTP_PCB_FLAGS_PORTREUSE);
-		else
+		} else {
 			sctp_feature_off(inp, SCTP_PCB_FLAGS_PORTREUSE);
+}
 		break;
 	}
 	case SCTP_PARTIAL_DELIVERY_POINT:
@@ -5031,8 +5050,9 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 		SCTP_CHECK_AND_CAST(sack, optval, struct sctp_sack_info, optsize);
 		SCTP_FIND_STCB(inp, stcb, sack->sack_assoc_id);
 		if (sack->sack_delay) {
-			if (sack->sack_delay > SCTP_MAX_SACK_DELAY)
+			if (sack->sack_delay > SCTP_MAX_SACK_DELAY) {
 				sack->sack_delay = SCTP_MAX_SACK_DELAY;
+}
 			if (MSEC_TO_TICKS(sack->sack_delay) < 1) {
 				sack->sack_delay = TICKS_TO_MSEC(1);
 			}
@@ -5261,8 +5281,9 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 		}
 		/* set it on the endpoint */
 		SCTP_INP_WLOCK(inp);
-		if (inp->sctp_ep.local_hmacs)
+		if (inp->sctp_ep.local_hmacs) {
 			sctp_free_hmaclist(inp->sctp_ep.local_hmacs);
+}
 		inp->sctp_ep.local_hmacs = hmaclist;
 		SCTP_INP_WUNLOCK(inp);
 	sctp_set_hmac_done:
@@ -6103,15 +6124,17 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 		}
 		/* sanity checks */
 		if ((paddrp->spp_flags & SPP_HB_ENABLE) && (paddrp->spp_flags & SPP_HB_DISABLE)) {
-			if (stcb)
+			if (stcb) {
 				SCTP_TCB_UNLOCK(stcb);
+}
 			SCTP_LTRACE_ERR_RET(inp, NULL, NULL, SCTP_FROM_SCTP_USRREQ, EINVAL);
 			return (EINVAL);
 		}
 
 		if ((paddrp->spp_flags & SPP_PMTUD_ENABLE) && (paddrp->spp_flags & SPP_PMTUD_DISABLE)) {
-			if (stcb)
+			if (stcb) {
 				SCTP_TCB_UNLOCK(stcb);
+}
 			SCTP_LTRACE_ERR_RET(inp, NULL, NULL, SCTP_FROM_SCTP_USRREQ, EINVAL);
 			return (EINVAL);
 		}
@@ -6372,11 +6395,12 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 					inp->sctp_ep.def_net_failure = paddrp->spp_pathmaxrxt;
 				}
 
-				if (paddrp->spp_flags & SPP_HB_TIME_IS_ZERO)
+				if (paddrp->spp_flags & SPP_HB_TIME_IS_ZERO) {
 					inp->sctp_ep.sctp_timeoutticks[SCTP_TIMER_HEARTBEAT] = 0;
-				else if (paddrp->spp_hbinterval != 0) {
-					if (paddrp->spp_hbinterval > SCTP_MAX_HB_INTERVAL)
+				} else if (paddrp->spp_hbinterval != 0) {
+					if (paddrp->spp_hbinterval > SCTP_MAX_HB_INTERVAL) {
 						paddrp->spp_hbinterval= SCTP_MAX_HB_INTERVAL;
+}
 					inp->sctp_ep.sctp_timeoutticks[SCTP_TIMER_HEARTBEAT] = MSEC_TO_TICKS(paddrp->spp_hbinterval);
 				}
 
@@ -6428,18 +6452,21 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 		SCTP_FIND_STCB(inp, stcb, srto->srto_assoc_id);
 
 		if (stcb) {
-			if (srto->srto_initial)
+			if (srto->srto_initial) {
 				new_init = srto->srto_initial;
-			else
+			} else {
 				new_init = stcb->asoc.initial_rto;
-			if (srto->srto_max)
+}
+			if (srto->srto_max) {
 				new_max = srto->srto_max;
-			else
+			} else {
 				new_max = stcb->asoc.maxrto;
-			if (srto->srto_min)
+}
+			if (srto->srto_min) {
 				new_min = srto->srto_min;
-			else
+			} else {
 				new_min = stcb->asoc.minrto;
+}
 			if ((new_min <= new_init) && (new_init <= new_max)) {
 				stcb->asoc.initial_rto = new_init;
 				stcb->asoc.maxrto = new_max;
@@ -6454,18 +6481,21 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 			    (inp->sctp_flags & SCTP_PCB_FLAGS_IN_TCPPOOL) ||
 			    (srto->srto_assoc_id == SCTP_FUTURE_ASSOC)) {
 				SCTP_INP_WLOCK(inp);
-				if (srto->srto_initial)
+				if (srto->srto_initial) {
 					new_init = srto->srto_initial;
-				else
+				} else {
 					new_init = inp->sctp_ep.initial_rto;
-				if (srto->srto_max)
+}
+				if (srto->srto_max) {
 					new_max = srto->srto_max;
-				else
+				} else {
 					new_max = inp->sctp_ep.sctp_maxrto;
-				if (srto->srto_min)
+}
+				if (srto->srto_min) {
 					new_min = srto->srto_min;
-				else
+				} else {
 					new_min = inp->sctp_ep.sctp_minrto;
+}
 				if ((new_min <= new_init) && (new_init <= new_max)) {
 					inp->sctp_ep.initial_rto = new_init;
 					inp->sctp_ep.sctp_maxrto = new_max;
@@ -6490,15 +6520,17 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 		SCTP_FIND_STCB(inp, stcb, sasoc->sasoc_assoc_id);
 		if (sasoc->sasoc_cookie_life) {
 			/* boundary check the cookie life */
-			if (sasoc->sasoc_cookie_life < 1000)
+			if (sasoc->sasoc_cookie_life < 1000) {
 				sasoc->sasoc_cookie_life = 1000;
+}
 			if (sasoc->sasoc_cookie_life > SCTP_MAX_COOKIE_LIFE) {
 				sasoc->sasoc_cookie_life = SCTP_MAX_COOKIE_LIFE;
 			}
 		}
 		if (stcb) {
-			if (sasoc->sasoc_asocmaxrxt)
+			if (sasoc->sasoc_asocmaxrxt) {
 				stcb->asoc.max_send_times = sasoc->sasoc_asocmaxrxt;
+}
 			if (sasoc->sasoc_cookie_life) {
 				stcb->asoc.cookie_life = MSEC_TO_TICKS(sasoc->sasoc_cookie_life);
 			}
@@ -6508,8 +6540,9 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 			    (inp->sctp_flags & SCTP_PCB_FLAGS_IN_TCPPOOL) ||
 			    (sasoc->sasoc_assoc_id == SCTP_FUTURE_ASSOC)) {
 				SCTP_INP_WLOCK(inp);
-				if (sasoc->sasoc_asocmaxrxt)
+				if (sasoc->sasoc_asocmaxrxt) {
 					inp->sctp_ep.max_send_times = sasoc->sasoc_asocmaxrxt;
+}
 				if (sasoc->sasoc_cookie_life) {
 					inp->sctp_ep.def_cookie_life = MSEC_TO_TICKS(sasoc->sasoc_cookie_life);
 				}
@@ -6527,17 +6560,21 @@ sctp_setopt(struct socket *so, int optname, void *optval, size_t optsize,
 
 		SCTP_CHECK_AND_CAST(sinit, optval, struct sctp_initmsg, optsize);
 		SCTP_INP_WLOCK(inp);
-		if (sinit->sinit_num_ostreams)
+		if (sinit->sinit_num_ostreams) {
 			inp->sctp_ep.pre_open_stream_count = sinit->sinit_num_ostreams;
+}
 
-		if (sinit->sinit_max_instreams)
+		if (sinit->sinit_max_instreams) {
 			inp->sctp_ep.max_open_streams_intome = sinit->sinit_max_instreams;
+}
 
-		if (sinit->sinit_max_attempts)
+		if (sinit->sinit_max_attempts) {
 			inp->sctp_ep.max_init_times = sinit->sinit_max_attempts;
+}
 
-		if (sinit->sinit_max_init_timeo)
+		if (sinit->sinit_max_init_timeo) {
 			inp->sctp_ep.initial_init_rto_max = sinit->sinit_max_init_timeo;
+}
 		SCTP_INP_WUNLOCK(inp);
 		break;
 	}

@@ -75,8 +75,9 @@ sec_PKCS7CreateDecryptObject(PK11SymKey *key, SECAlgorithmID *algid)
 
     result = (struct sec_pkcs7_cipher_object *)
         PORT_ZAlloc(sizeof(struct sec_pkcs7_cipher_object));
-    if (result == NULL)
+    if (result == NULL) {
         return NULL;
+}
 
     ciphercx = NULL;
     algtag = SECOID_GetAlgorithmTag(algid);
@@ -153,8 +154,9 @@ sec_PKCS7CreateEncryptObject(PLArenaPool *poolp, PK11SymKey *key,
 
     result = (struct sec_pkcs7_cipher_object *)
         PORT_ZAlloc(sizeof(struct sec_pkcs7_cipher_object));
-    if (result == NULL)
+    if (result == NULL) {
         return NULL;
+}
 
     ciphercx = NULL;
     if (SEC_PKCS5IsAlgorithmPBEAlg(algid)) {
@@ -233,8 +235,9 @@ void
 sec_PKCS7DestroyDecryptObject(sec_PKCS7CipherObject *obj)
 {
     PORT_Assert(obj != NULL);
-    if (obj == NULL)
+    if (obj == NULL) {
         return;
+}
     PORT_Assert(!obj->encrypt);
     sec_pkcs7_destroy_cipher(obj);
 }
@@ -243,8 +246,9 @@ void
 sec_PKCS7DestroyEncryptObject(sec_PKCS7CipherObject *obj)
 {
     PORT_Assert(obj != NULL);
-    if (obj == NULL)
+    if (obj == NULL) {
         return;
+}
     PORT_Assert(obj->encrypt);
     sec_pkcs7_destroy_cipher(obj);
 }
@@ -284,8 +288,9 @@ sec_PKCS7DecryptLength(sec_PKCS7CipherObject *obj, unsigned int input_len,
      * If this is not a block cipher, then we always have the same
      * number of output bytes as we had input bytes.
      */
-    if (block_size == 0)
+    if (block_size == 0) {
         return input_len;
+}
 
     /*
      * On the final call, we will always use up all of the pending
@@ -295,8 +300,9 @@ sec_PKCS7DecryptLength(sec_PKCS7CipherObject *obj, unsigned int input_len,
      * to be at least 1 byte too long (because we know we will have
      * at least 1 byte of padding), but seemed clearer/better to me.
      */
-    if (final)
+    if (final) {
         return obj->pending_count + input_len;
+}
 
     /*
      * Okay, this amount is exactly what we will output on the
@@ -340,8 +346,9 @@ sec_PKCS7EncryptLength(sec_PKCS7CipherObject *obj, unsigned int input_len,
      * If this is not a block cipher, then we always have the same
      * number of output bytes as we had input bytes.
      */
-    if (block_size == 0)
+    if (block_size == 0) {
         return input_len;
+}
 
     /*
      * On the final call, we only send out what we need for
@@ -449,8 +456,9 @@ sec_PKCS7Decrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
          */
         if (input_len == 0 && !final) {
             obj->pending_count = pcount;
-            if (output_len_p)
+            if (output_len_p) {
                 *output_len_p = 0;
+}
             return SECSuccess;
         }
         /*
@@ -469,8 +477,9 @@ sec_PKCS7Decrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
          */
         rv = (*obj->doit)(obj->cx, output, &ofraglen, max_output_len,
                           pbuf, pcount);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         /*
          * For now anyway, all of our ciphers have the same number of
@@ -504,8 +513,9 @@ sec_PKCS7Decrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
         if (padsize) {
             blocks = input_len / padsize;
             ifraglen = blocks * padsize;
-        } else
+        } else {
             ifraglen = input_len;
+}
         PORT_Assert(ifraglen == input_len);
 
         if (ifraglen != input_len) {
@@ -525,8 +535,9 @@ sec_PKCS7Decrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
     if (ifraglen) {
         rv = (*obj->doit)(obj->cx, output, &ofraglen, max_output_len,
                           input, ifraglen);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         /*
          * For now anyway, all of our ciphers have the same number of
@@ -558,8 +569,9 @@ sec_PKCS7Decrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
     }
 
     PORT_Assert(output_len_p != NULL || output_len == 0);
-    if (output_len_p != NULL)
+    if (output_len_p != NULL) {
         *output_len_p = output_len;
+}
 
     return SECSuccess;
 }
@@ -645,8 +657,9 @@ sec_PKCS7Encrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
          */
         if (pcount < bsize && !final) {
             obj->pending_count = pcount;
-            if (output_len_p != NULL)
+            if (output_len_p != NULL) {
                 *output_len_p = 0;
+}
             return SECSuccess;
         }
         /*
@@ -655,8 +668,9 @@ sec_PKCS7Encrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
         if ((padsize == 0) || (pcount % padsize) == 0) {
             rv = (*obj->doit)(obj->cx, output, &ofraglen, max_output_len,
                               pbuf, pcount);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 return rv;
+}
 
             /*
              * For now anyway, all of our ciphers have the same number of
@@ -685,8 +699,9 @@ sec_PKCS7Encrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
         if (ifraglen) {
             rv = (*obj->doit)(obj->cx, output, &ofraglen, max_output_len,
                               input, ifraglen);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 return rv;
+}
 
             /*
              * For now anyway, all of our ciphers have the same number of
@@ -702,8 +717,9 @@ sec_PKCS7Encrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
 
         pcount = input_len - ifraglen;
         PORT_Assert(pcount < bsize);
-        if (pcount)
+        if (pcount) {
             PORT_Memcpy(pbuf, input + ifraglen, pcount);
+}
     }
 
     if (final) {
@@ -715,8 +731,9 @@ sec_PKCS7Encrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
         }
         rv = (*obj->doit)(obj->cx, output, &ofraglen, max_output_len,
                           pbuf, pcount + padlen);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         /*
          * For now anyway, all of our ciphers have the same number of
@@ -730,8 +747,9 @@ sec_PKCS7Encrypt(sec_PKCS7CipherObject *obj, unsigned char *output,
     }
 
     PORT_Assert(output_len_p != NULL || output_len == 0);
-    if (output_len_p != NULL)
+    if (output_len_p != NULL) {
         *output_len_p = output_len;
+}
 
     return SECSuccess;
 }
@@ -765,31 +783,38 @@ sec_PKCS7FindAttribute(SEC_PKCS7Attribute **attrs, SECOidTag oidtag,
     SECOidData *oid;
     SEC_PKCS7Attribute *attr1, *attr2;
 
-    if (attrs == NULL)
+    if (attrs == NULL) {
         return NULL;
+}
 
     oid = SECOID_FindOIDByTag(oidtag);
-    if (oid == NULL)
+    if (oid == NULL) {
         return NULL;
+}
 
     while ((attr1 = *attrs++) != NULL) {
-        if (attr1->type.len == oid->oid.len && PORT_Memcmp(attr1->type.data, oid->oid.data, oid->oid.len) == 0)
+        if (attr1->type.len == oid->oid.len && PORT_Memcmp(attr1->type.data, oid->oid.data, oid->oid.len) == 0) {
             break;
+}
     }
 
-    if (attr1 == NULL)
+    if (attr1 == NULL) {
         return NULL;
+}
 
-    if (!only)
+    if (!only) {
         return attr1;
+}
 
     while ((attr2 = *attrs++) != NULL) {
-        if (attr2->type.len == oid->oid.len && PORT_Memcmp(attr2->type.data, oid->oid.data, oid->oid.len) == 0)
+        if (attr2->type.len == oid->oid.len && PORT_Memcmp(attr2->type.data, oid->oid.data, oid->oid.len) == 0) {
             break;
+}
     }
 
-    if (attr2 != NULL)
+    if (attr2 != NULL) {
         return NULL;
+}
 
     return attr1;
 }
@@ -804,16 +829,19 @@ sec_PKCS7AttributeValue(SEC_PKCS7Attribute *attr)
 {
     SECItem *value;
 
-    if (attr == NULL)
+    if (attr == NULL) {
         return NULL;
+}
 
     value = attr->values[0];
 
-    if (value == NULL || value->data == NULL || value->len == 0)
+    if (value == NULL || value->data == NULL || value->len == 0) {
         return NULL;
+}
 
-    if (attr->values[1] != NULL)
+    if (attr->values[1] != NULL) {
         return NULL;
+}
 
     return value;
 }
@@ -828,13 +856,15 @@ sec_attr_choose_attr_value_template(void *src_or_dest, PRBool encoding)
     PRBool encoded;
 
     PORT_Assert(src_or_dest != NULL);
-    if (src_or_dest == NULL)
+    if (src_or_dest == NULL) {
         return NULL;
+}
 
     attribute = (SEC_PKCS7Attribute *)src_or_dest;
 
-    if (encoding && attribute->encoded)
+    if (encoding && attribute->encoded) {
         return SEC_ASN1_GET(SEC_AnyTemplate);
+}
 
     oiddata = attribute->typeTag;
     if (oiddata == NULL) {
@@ -942,15 +972,17 @@ sec_PKCS7ReorderAttributes(SEC_PKCS7Attribute **attrs)
      * call it a success anyway, because the order *is* okay.
      */
     PORT_Assert(attrs != NULL);
-    if (attrs == NULL)
+    if (attrs == NULL) {
         return SECSuccess;
+}
 
     /*
      * Count how many attributes we are dealing with here.
      */
     num_attrs = 0;
-    while (attrs[num_attrs] != NULL)
+    while (attrs[num_attrs] != NULL) {
         num_attrs++;
+}
 
     /*
      * Again, I think we should have some attributes here.
@@ -958,16 +990,18 @@ sec_PKCS7ReorderAttributes(SEC_PKCS7Attribute **attrs)
      * a success because it also already has a fine order.
      */
     PORT_Assert(num_attrs);
-    if (num_attrs == 0 || num_attrs == 1)
+    if (num_attrs == 0 || num_attrs == 1) {
         return SECSuccess;
+}
 
     /*
      * Allocate an arena for us to work with, so it is easy to
      * clean up all of the memory (fairly small pieces, really).
      */
     poolp = PORT_NewArena(1024); /* XXX what is right value? */
-    if (poolp == NULL)
+    if (poolp == NULL) {
         return SECFailure; /* no memory; nothing we can do... */
+}
 
     /*
      * Allocate arrays to hold the individual encodings which we will use
@@ -1004,8 +1038,9 @@ sec_PKCS7ReorderAttributes(SEC_PKCS7Attribute **attrs)
          * sorted into the other array, it is cleared from enc_attrs.)
          */
         for (i = 0; i < num_attrs; i++) {
-            if (enc_attrs[i] != NULL)
+            if (enc_attrs[i] != NULL) {
                 break;
+}
         }
         PORT_Assert(i < num_attrs);
         besti = i;
@@ -1022,12 +1057,14 @@ sec_PKCS7ReorderAttributes(SEC_PKCS7Attribute **attrs)
          * is found.
          */
         for (i = besti + 1; i < num_attrs; i++) {
-            if (enc_attrs[i] == NULL) /* slot already handled */
+            if (enc_attrs[i] == NULL) { /* slot already handled */
                 continue;
+}
 
             if (enc_attrs[i]->len != enc_attrs[besti]->len) {
-                if (enc_attrs[i]->len < enc_attrs[besti]->len)
+                if (enc_attrs[i]->len < enc_attrs[besti]->len) {
                     besti = i;
+}
                 continue;
             }
 
@@ -1059,8 +1096,9 @@ sec_PKCS7ReorderAttributes(SEC_PKCS7Attribute **attrs)
      * Now new_attrs has the attributes in the order we want;
      * copy them back into the attrs array we started with.
      */
-    for (i = 0; i < num_attrs; i++)
+    for (i = 0; i < num_attrs; i++) {
         attrs[i] = new_attrs[i];
+}
 
     PORT_FreeArena(poolp, PR_FALSE);
     return SECSuccess;
@@ -1273,8 +1311,9 @@ sec_pkcs7_choose_content_template(void *src_or_dest, PRBool encoding)
     SECOidTag kind;
 
     PORT_Assert(src_or_dest != NULL);
-    if (src_or_dest == NULL)
+    if (src_or_dest == NULL) {
         return NULL;
+}
 
     cinfo = (SEC_PKCS7ContentInfo *)src_or_dest;
     kind = SEC_PKCS7ContentType(cinfo);

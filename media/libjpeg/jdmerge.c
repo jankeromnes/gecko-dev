@@ -262,8 +262,9 @@ merged_2v_upsample (j_decompress_ptr cinfo,
   if (upsample->spare_full) {
     /* If we have a spare row saved from a previous cycle, just return it. */
     JDIMENSION size = upsample->out_row_width;
-    if (cinfo->out_color_space == JCS_RGB565)
+    if (cinfo->out_color_space == JCS_RGB565) {
       size = cinfo->output_width * 2;
+}
     jcopy_sample_rows(& upsample->spare_row, 0, output_buf + *out_row_ctr, 0,
                       1, size);
     num_rows = 1;
@@ -272,12 +273,14 @@ merged_2v_upsample (j_decompress_ptr cinfo,
     /* Figure number of rows to return to caller. */
     num_rows = 2;
     /* Not more than the distance to the end of the image. */
-    if (num_rows > upsample->rows_to_go)
+    if (num_rows > upsample->rows_to_go) {
       num_rows = upsample->rows_to_go;
+}
     /* And not more than what the client can accept: */
     out_rows_avail -= *out_row_ctr;
-    if (num_rows > out_rows_avail)
+    if (num_rows > out_rows_avail) {
       num_rows = out_rows_avail;
+}
     /* Create output pointer array for upsampler. */
     work_ptrs[0] = output_buf[*out_row_ctr];
     if (num_rows > 1) {
@@ -294,8 +297,9 @@ merged_2v_upsample (j_decompress_ptr cinfo,
   *out_row_ctr += num_rows;
   upsample->rows_to_go -= num_rows;
   /* When the buffer is emptied, declare this input row group consumed */
-  if (! upsample->spare_full)
+  if (! upsample->spare_full) {
     (*in_row_group_ctr)++;
+}
 }
 
 
@@ -503,8 +507,9 @@ static const JLONG dither_matrix[4] = {
 static INLINE boolean is_big_endian(void)
 {
   int test_value = 1;
-  if(*(char *)&test_value != 1)
+  if(*(char *)&test_value != 1) {
     return TRUE;
+}
   return FALSE;
 }
 
@@ -514,12 +519,13 @@ h2v1_merged_upsample_565 (j_decompress_ptr cinfo,
                           JSAMPIMAGE input_buf, JDIMENSION in_row_group_ctr,
                           JSAMPARRAY output_buf)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     h2v1_merged_upsample_565_be(cinfo, input_buf, in_row_group_ctr,
                                 output_buf);
-  else
+  } else {
     h2v1_merged_upsample_565_le(cinfo, input_buf, in_row_group_ctr,
                                 output_buf);
+}
  }
 
 
@@ -528,12 +534,13 @@ h2v1_merged_upsample_565D (j_decompress_ptr cinfo,
                            JSAMPIMAGE input_buf, JDIMENSION in_row_group_ctr,
                            JSAMPARRAY output_buf)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     h2v1_merged_upsample_565D_be(cinfo, input_buf, in_row_group_ctr,
                                  output_buf);
-  else
+  } else {
     h2v1_merged_upsample_565D_le(cinfo, input_buf, in_row_group_ctr,
                                  output_buf);
+}
 }
 
 
@@ -542,12 +549,13 @@ h2v2_merged_upsample_565 (j_decompress_ptr cinfo,
                           JSAMPIMAGE input_buf, JDIMENSION in_row_group_ctr,
                           JSAMPARRAY output_buf)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     h2v2_merged_upsample_565_be(cinfo, input_buf, in_row_group_ctr,
                                 output_buf);
-  else
+  } else {
     h2v2_merged_upsample_565_le(cinfo, input_buf, in_row_group_ctr,
                                 output_buf);
+}
 }
 
 
@@ -556,12 +564,13 @@ h2v2_merged_upsample_565D (j_decompress_ptr cinfo,
                            JSAMPIMAGE input_buf, JDIMENSION in_row_group_ctr,
                            JSAMPARRAY output_buf)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     h2v2_merged_upsample_565D_be(cinfo, input_buf, in_row_group_ctr,
                                  output_buf);
-  else
+  } else {
     h2v2_merged_upsample_565D_le(cinfo, input_buf, in_row_group_ctr,
                                  output_buf);
+}
 }
 
 
@@ -589,10 +598,11 @@ jinit_merged_upsampler (j_decompress_ptr cinfo)
 
   if (cinfo->max_v_samp_factor == 2) {
     upsample->pub.upsample = merged_2v_upsample;
-    if (jsimd_can_h2v2_merged_upsample())
+    if (jsimd_can_h2v2_merged_upsample()) {
       upsample->upmethod = jsimd_h2v2_merged_upsample;
-    else
+    } else {
       upsample->upmethod = h2v2_merged_upsample;
+}
     if (cinfo->out_color_space == JCS_RGB565) {
       if (cinfo->dither_mode != JDITHER_NONE) {
         upsample->upmethod = h2v2_merged_upsample_565D;
@@ -606,10 +616,11 @@ jinit_merged_upsampler (j_decompress_ptr cinfo)
                 (size_t) (upsample->out_row_width * sizeof(JSAMPLE)));
   } else {
     upsample->pub.upsample = merged_1v_upsample;
-    if (jsimd_can_h2v1_merged_upsample())
+    if (jsimd_can_h2v1_merged_upsample()) {
       upsample->upmethod = jsimd_h2v1_merged_upsample;
-    else
+    } else {
       upsample->upmethod = h2v1_merged_upsample;
+}
     if (cinfo->out_color_space == JCS_RGB565) {
       if (cinfo->dither_mode != JDITHER_NONE) {
         upsample->upmethod = h2v1_merged_upsample_565D;

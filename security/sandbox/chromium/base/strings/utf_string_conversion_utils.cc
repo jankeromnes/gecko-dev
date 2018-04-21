@@ -109,8 +109,9 @@ void PrepareForUTF8Output(const CHAR* src,
                           size_t src_len,
                           std::string* output) {
   output->clear();
-  if (src_len == 0)
+  if (src_len == 0) {
     return;
+}
   if (src[0] < 0x80) {
     // Assume that the entire input will be ASCII.
     output->reserve(src_len);
@@ -132,8 +133,9 @@ void PrepareForUTF16Or32Output(const char* src,
                                size_t src_len,
                                STRING* output) {
   output->clear();
-  if (src_len == 0)
+  if (src_len == 0) {
     return;
+}
   if (static_cast<unsigned char>(src[0]) < 0x80) {
     // Assume the input is all ASCII, which means 1:1 correspondence.
     output->reserve(src_len);

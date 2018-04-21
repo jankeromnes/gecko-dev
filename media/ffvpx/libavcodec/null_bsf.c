@@ -30,8 +30,9 @@ static int null_filter(AVBSFContext *ctx, AVPacket *out)
     int ret;
 
     ret = ff_bsf_get_packet(ctx, &in);
-    if (ret < 0)
+    if (ret < 0) {
         return ret;
+}
     av_packet_move_ref(out, in);
     av_packet_free(&in);
     return 0;

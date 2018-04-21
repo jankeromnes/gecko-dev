@@ -265,18 +265,22 @@ nsOSHelperAppService::CreateInputStream(const nsAString& aFilename,
   nsresult rv = NS_OK;
 
   nsCOMPtr<nsIFile> file(do_CreateInstance(NS_LOCAL_FILE_CONTRACTID, &rv));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
   rv = file->InitWithPath(aFilename);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   nsCOMPtr<nsIFileInputStream> fileStream(do_CreateInstance(NS_LOCALFILEINPUTSTREAM_CONTRACTID, &rv));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
   rv = fileStream->Init(file, -1, -1, false);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   nsCOMPtr<nsILineInputStream> lineStream(do_QueryInterface(fileStream, &rv));
 
@@ -623,8 +627,9 @@ nsOSHelperAppService::ParseNetscapeMIMETypesEntry(const nsAString& aEntry,
            nsCRT::IsAsciiSpace(*end_iter));
   // if we're pointing to a quote, don't advance -- we don't want to
   // include the quote....
-  if (*end_iter != '"')
+  if (*end_iter != '"') {
     ++end_iter;
+}
   match_start = start_iter;
   match_end = end_iter;
 
@@ -782,12 +787,14 @@ nsOSHelperAppService::ParseNormalMIMETypesEntry(const nsAString& aEntry,
   iter = start_iter;
 
   // get the major type
-  if (! FindCharInReadable('/', iter, end_iter))
+  if (! FindCharInReadable('/', iter, end_iter)) {
     return NS_ERROR_FAILURE;
+}
 
   nsAString::const_iterator equals_sign_iter(start_iter);
-  if (FindCharInReadable('=', equals_sign_iter, iter))
+  if (FindCharInReadable('=', equals_sign_iter, iter)) {
     return NS_ERROR_FAILURE; // see bug 136670
+}
 
   aMajorTypeStart = start_iter;
   aMajorTypeEnd = iter;
@@ -930,18 +937,22 @@ nsOSHelperAppService::GetHandlerAndDescriptionFromMailcapFile(const nsAString& a
   bool more = false;
 
   nsCOMPtr<nsIFile> file(do_CreateInstance(NS_LOCAL_FILE_CONTRACTID, &rv));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
   rv = file->InitWithPath(aFilename);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   nsCOMPtr<nsIFileInputStream> mailcapFile(do_CreateInstance(NS_LOCALFILEINPUTSTREAM_CONTRACTID, &rv));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
   rv = mailcapFile->Init(file, -1, -1, false);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   nsCOMPtr<nsILineInputStream> mailcap (do_QueryInterface(mailcapFile, &rv));
 
@@ -1064,29 +1075,36 @@ nsOSHelperAppService::GetHandlerAndDescriptionFromMailcapFile(const nsAString& a
                                        aMajorType,
                                        aMinorType,
                                        testCommand);
-                  if (NS_FAILED(rv))
+                  if (NS_FAILED(rv)) {
                     continue;
+}
                   nsCOMPtr<nsIProcess> process = do_CreateInstance(NS_PROCESS_CONTRACTID, &rv);
-                  if (NS_FAILED(rv))
+                  if (NS_FAILED(rv)) {
                     continue;
+}
                   nsCOMPtr<nsIFile> file(do_CreateInstance(NS_LOCAL_FILE_CONTRACTID, &rv));
-                  if (NS_FAILED(rv))
+                  if (NS_FAILED(rv)) {
                     continue;
+}
                   rv = file->InitWithNativePath(NS_LITERAL_CSTRING("/bin/sh"));
-                  if (NS_FAILED(rv))
+                  if (NS_FAILED(rv)) {
                     continue;
+}
                   rv = process->Init(file);
-                  if (NS_FAILED(rv))
+                  if (NS_FAILED(rv)) {
                     continue;
+}
                   const char *args[] = { "-c", testCommand.get() };
                   LOG(("Running Test: %s\n", testCommand.get()));
                   rv = process->Run(true, args, 2);
-                  if (NS_FAILED(rv))
+                  if (NS_FAILED(rv)) {
                     continue;
+}
                   int32_t exitValue;
                   rv = process->GetExitValue(&exitValue);
-                  if (NS_FAILED(rv))
+                  if (NS_FAILED(rv)) {
                     continue;
+}
                   LOG(("Exit code: %d\n", exitValue));
                   if (exitValue) {
                     match = false;
@@ -1169,20 +1187,23 @@ nsresult nsOSHelperAppService::GetFileTokenForPath(const char16_t * platformAppP
 
   // first check if the base class implementation finds anything
   nsresult rv = nsExternalHelperAppService::GetFileTokenForPath(platformAppPath, aFile);
-  if (NS_SUCCEEDED(rv))
+  if (NS_SUCCEEDED(rv)) {
     return rv;
+}
   // If the reason for failure was that the file doesn't exist, return too
   // (because it means the path was absolute, and so that we shouldn't search in
   // the path)
-  if (rv == NS_ERROR_FILE_NOT_FOUND)
+  if (rv == NS_ERROR_FILE_NOT_FOUND) {
     return rv;
+}
 
   // If we get here, we really should have a relative path.
   NS_ASSERTION(*platformAppPath != char16_t('/'), "Unexpected absolute path");
 
   nsCOMPtr<nsIFile> localFile (do_CreateInstance(NS_LOCAL_FILE_CONTRACTID));
 
-  if (!localFile) return NS_ERROR_NOT_INITIALIZED;
+  if (!localFile) { return NS_ERROR_NOT_INITIALIZED;
+}
 
   bool exists = false;
   // ugly hack.  Walk the PATH variable...
@@ -1228,8 +1249,9 @@ nsresult nsOSHelperAppService::GetFileTokenForPath(const char16_t * platformAppP
 already_AddRefed<nsMIMEInfoBase>
 nsOSHelperAppService::GetFromExtension(const nsCString& aFileExt) {
   // if the extension is empty, return immediately
-  if (aFileExt.IsEmpty())
+  if (aFileExt.IsEmpty()) {
     return nullptr;
+}
 
   LOG(("Here we do an extension lookup for '%s'\n", aFileExt.get()));
 
@@ -1262,8 +1284,9 @@ nsOSHelperAppService::GetFromExtension(const nsCString& aFileExt) {
                                   false);
   }
 
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return nullptr;
+}
 
   NS_LossyConvertUTF16toASCII asciiMajorType(majorType);
   NS_LossyConvertUTF16toASCII asciiMinorType(minorType);
@@ -1322,8 +1345,9 @@ nsOSHelperAppService::GetFromExtension(const nsCString& aFileExt) {
 already_AddRefed<nsMIMEInfoBase>
 nsOSHelperAppService::GetFromType(const nsCString& aMIMEType) {
   // if the type is empty, return immediately
-  if (aMIMEType.IsEmpty())
+  if (aMIMEType.IsEmpty()) {
     return nullptr;
+}
 
   LOG(("Here we do a mimetype lookup for '%s'\n", aMIMEType.get()));
 
@@ -1456,18 +1480,21 @@ nsOSHelperAppService::GetMIMEInfoFromOS(const nsACString& aType,
   *aFound = true;
   RefPtr<nsMIMEInfoBase> retval = GetFromType(PromiseFlatCString(aType));
   bool hasDefault = false;
-  if (retval)
+  if (retval) {
     retval->GetHasDefaultHandler(&hasDefault);
+}
   if (!retval || !hasDefault) {
     RefPtr<nsMIMEInfoBase> miByExt = GetFromExtension(PromiseFlatCString(aFileExt));
     // If we had no extension match, but a type match, use that
-    if (!miByExt && retval)
+    if (!miByExt && retval) {
       return retval.forget();
+}
     // If we had an extension match but no type match, set the mimetype and use
     // it
     if (!retval && miByExt) {
-      if (!aType.IsEmpty())
+      if (!aType.IsEmpty()) {
         miByExt->SetMIMEType(aType);
+}
       miByExt.swap(retval);
 
       return retval.forget();
@@ -1477,8 +1504,9 @@ nsOSHelperAppService::GetMIMEInfoFromOS(const nsACString& aType,
       *aFound = false;
       retval = new nsMIMEInfoUnix(aType);
       if (retval) {
-        if (!aFileExt.IsEmpty())
+        if (!aFileExt.IsEmpty()) {
           retval->AppendExtension(aFileExt);
+}
       }
 
       return retval.forget();
@@ -1506,8 +1534,9 @@ nsOSHelperAppService::GetProtocolHandlerInfoFromOS(const nsACString &aScheme,
 
   nsresult rv = OSProtocolHandlerExists(nsPromiseFlatCString(aScheme).get(),
                                         found);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   nsMIMEInfoUnix *handlerInfo =
     new nsMIMEInfoUnix(aScheme, nsMIMEInfoBase::eProtocolInfo);

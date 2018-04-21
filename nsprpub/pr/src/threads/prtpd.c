@@ -100,7 +100,8 @@ PR_IMPLEMENT(PRStatus) PR_NewThreadPrivateIndex(
     PRStatus rv;
     PRInt32 index;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     PR_ASSERT(NULL != newIndex);
     PR_ASSERT(NULL != _pr_tpd_destructors);

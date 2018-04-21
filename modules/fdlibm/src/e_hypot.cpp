@@ -71,9 +71,11 @@ __ieee754_hypot(double x, double y)
 	       /* Use original arg order iff result is NaN; quieten sNaNs. */
 	       w = fabs(x+0.0)-fabs(y+0.0);
 	       GET_LOW_WORD(low,a);
-	       if(((ha&0xfffff)|low)==0) w = a;
+	       if(((ha&0xfffff)|low)==0) { w = a;
+}
 	       GET_LOW_WORD(low,b);
-	       if(((hb^0x7ff00000)|low)==0) w = b;
+	       if(((hb^0x7ff00000)|low)==0) { w = b;
+}
 	       return w;
 	   }
 	   /* scale a and b by 2**-600 */
@@ -85,7 +87,8 @@ __ieee754_hypot(double x, double y)
 	    if(hb <= 0x000fffff) {	/* subnormal b or 0 */
 	        u_int32_t low;
 		GET_LOW_WORD(low,b);
-		if((hb|low)==0) return a;
+		if((hb|low)==0) { return a;
+}
 		t1=0;
 		SET_HIGH_WORD(t1,0x7fd00000);	/* t1=2^1022 */
 		b *= t1;
@@ -122,5 +125,6 @@ __ieee754_hypot(double x, double y)
 	    GET_HIGH_WORD(high,t1);
 	    SET_HIGH_WORD(t1,high+(k<<20));
 	    return t1*w;
-	} else return w;
+	} else { return w;
+}
 }

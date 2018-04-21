@@ -35,13 +35,15 @@ PseudoStack::ensureCapacitySlow()
 
     auto* newEntries =
         new (mozilla::fallible) js::ProfileEntry[newCapacity];
-    if (MOZ_UNLIKELY(!newEntries))
+    if (MOZ_UNLIKELY(!newEntries)) {
         return false;
+}
 
     // It's important that `entries` / `entryCapacity` / `stackPointer` remain consistent here at
     // all times.
-    for (auto i : mozilla::IntegerRange(entryCapacity))
+    for (auto i : mozilla::IntegerRange(entryCapacity)) {
         newEntries[i] = entries[i];
+}
 
     js::ProfileEntry* oldEntries = entries;
     entries = newEntries;

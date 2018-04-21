@@ -146,8 +146,9 @@ xt_event_polling_timer_callback(gpointer user_data)
      up to 20 Xt events right now and save the rest for later. This is a hack,
      but it oughta work. We *really* should have out of process plugins.
   */
-  while (eventsToProcess-- && XtAppPending(ac))
+  while (eventsToProcess-- && XtAppPending(ac)) {
     XtAppProcessEvent(ac, XtIMAll);
+}
   return TRUE;
 }
 
@@ -251,11 +252,13 @@ gtk_xtbin_new (GdkWindow *parent_window, String * f)
   assert(parent_window != NULL);
   xtbin = g_object_new (GTK_TYPE_XTBIN, NULL);
 
-  if (!xtbin)
+  if (!xtbin) {
     return (GtkWidget*)NULL;
+}
 
-  if (f)
+  if (f) {
     fallback = f;
+}
 
   /* Initialize the Xt toolkit */
   xtbin->parent_window = parent_window;
@@ -283,8 +286,9 @@ gtk_xtbin_new (GdkWindow *parent_window, String * f)
   xtbin->xtdisplay = xtbin->xtclient.xtdisplay;
   gtk_widget_set_parent_window(GTK_WIDGET(xtbin), parent_window);
   gdk_window_get_user_data(xtbin->parent_window, &user_data);
-  if (user_data)
+  if (user_data) {
     gtk_container_add(GTK_CONTAINER(user_data), GTK_WIDGET(xtbin));
+}
 
   /* This GtkSocket has a visible window, but the Xt plug will cover this
    * window.  Normally GtkSockets let the X server paint their background and
@@ -378,13 +382,15 @@ xt_client_init( XtClient * xtclient,
 #endif
     XtToolkitInitialize();
     app_context = XtCreateApplicationContext();
-    if (fallback)
+    if (fallback) {
       XtAppSetFallbackResources(app_context, fallback);
+}
 
     xtdisplay = XtOpenDisplay(app_context, gdk_get_display(), NULL, 
                             "Wrapper", NULL, 0, &mArgc, mArgv);
-    if (xtdisplay)
+    if (xtdisplay) {
       xt_is_initialized = TRUE;
+}
   }
   xtclient->xtdisplay  = xtdisplay;
   xtclient->xtvisual   = xtvisual;
@@ -770,8 +776,9 @@ xt_client_focus_listener( Widget w, XtPointer user_data, XEvent *event)
     case CreateNotify:
       if(event->xcreatewindow.parent == win) {
         Widget child=XtWindowToWidget( dpy, event->xcreatewindow.window);
-        if (child)
+        if (child) {
           xt_add_focus_listener_tree(child, user_data);
+}
       }
       break;
     case DestroyNotify:
@@ -781,8 +788,9 @@ xt_client_focus_listener( Widget w, XtPointer user_data, XEvent *event)
       if(event->xreparent.parent == win) {
         /* I am the new parent */
         Widget child=XtWindowToWidget(dpy, event->xreparent.window);
-        if (child)
+        if (child) {
           xt_add_focus_listener_tree( child, user_data);
+}
       }
       else if(event->xreparent.window == win) {
         /* I am the new child */
@@ -845,13 +853,15 @@ xt_add_focus_listener_tree ( Widget treeroot, XtPointer user_data)
     return;
   }
 
-  if(untrap_error()) 
+  if(untrap_error()) { 
     return;
+}
 
   for(i=0; i<nchildren; ++i) {
     Widget child = XtWindowToWidget(dpy, children[i]);
-    if (child) 
+    if (child) { 
       xt_add_focus_listener_tree( child, user_data);
+}
   }
   XFree((void*)children);
 }

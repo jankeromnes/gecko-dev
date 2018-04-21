@@ -425,8 +425,9 @@ nsHttpHandler::Init()
     MOZ_ASSERT(NS_IsMainThread());
 
     rv = nsHttp::CreateAtomTable();
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     nsCOMPtr<nsIIOService> service = do_GetService(NS_IOSERVICE_CONTRACTID, &rv);
     if (NS_FAILED(rv)) {
@@ -436,8 +437,9 @@ nsHttpHandler::Init()
     mIOService = new nsMainThreadPtrHolder<nsIIOService>(
       "nsHttpHandler::mIOService", service);
 
-    if (IsNeckoChild())
+    if (IsNeckoChild()) {
         NeckoChild::InitNeckoChild();
+}
 
     InitUserAgentComponents();
 
@@ -501,7 +503,8 @@ nsHttpHandler::Init()
     mHandlerActive = true;
 
     rv = InitConnectionMgr();
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     mRequestContextService =
         do_GetService("@mozilla.org/network/request-context-service;1");
@@ -569,8 +572,9 @@ nsHttpHandler::Init()
 
     MakeNewRequestTokenBucket();
     mWifiTickler = new Tickler();
-    if (NS_FAILED(mWifiTickler->Init()))
+    if (NS_FAILED(mWifiTickler->Init())) {
         mWifiTickler = nullptr;
+}
 
     nsCOMPtr<nsIParentalControlsService> pc = do_CreateInstance("@mozilla.org/parental-controls-service;1");
     if (pc) {
@@ -634,7 +638,8 @@ nsHttpHandler::AddStandardRequestHeaders(nsHttpRequestHead *request, bool isSecu
     // Add the "User-Agent" header
     rv = request->SetHeader(nsHttp::User_Agent, UserAgent(),
                             false, nsHttpHeaderArray::eVarietyRequestDefault);
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     // MIME based content negotiation lives!
     // Add the "Accept" header.  Note, this is set as an override because the
@@ -642,7 +647,8 @@ nsHttpHandler::AddStandardRequestHeaders(nsHttpRequestHead *request, bool isSecu
     // hidden from service worker interception.
     rv = request->SetHeader(nsHttp::Accept, mAccept,
                             false, nsHttpHeaderArray::eVarietyRequestOverride);
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     // Add the "Accept-Language" header.  This header is also exposed to the
     // service worker.
@@ -656,7 +662,8 @@ nsHttpHandler::AddStandardRequestHeaders(nsHttpRequestHead *request, bool isSecu
         rv = request->SetHeader(nsHttp::Accept_Language, mAcceptLanguages,
                                 false,
                                 nsHttpHeaderArray::eVarietyRequestOverride);
-        if (NS_FAILED(rv)) return rv;
+        if (NS_FAILED(rv)) { return rv;
+}
     }
 
     // Add the "Accept-Encoding" header
@@ -669,14 +676,16 @@ nsHttpHandler::AddStandardRequestHeaders(nsHttpRequestHead *request, bool isSecu
                                 false,
                                 nsHttpHeaderArray::eVarietyRequestDefault);
     }
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     // add the "Send Hint" header
     if (mSafeHintEnabled || mParentalControlEnabled) {
       rv = request->SetHeader(nsHttp::Prefer, NS_LITERAL_CSTRING("safe"),
                               false,
                               nsHttpHeaderArray::eVarietyRequestDefault);
-      if (NS_FAILED(rv)) return rv;
+      if (NS_FAILED(rv)) { return rv;
+}
     }
     return NS_OK;
 }
@@ -704,8 +713,9 @@ nsHttpHandler::AddConnectionHeader(nsHttpRequestHead *request,
 bool
 nsHttpHandler::IsAcceptableEncoding(const char *enc, bool isSecure)
 {
-    if (!enc)
+    if (!enc) {
         return false;
+}
 
     // we used to accept x-foo anytime foo was acceptable, but that's just
     // continuing bad behavior.. so limit it to known x-* patterns
@@ -763,8 +773,9 @@ nsHttpHandler::GetStreamConverterService(nsIStreamConverterService **result)
         nsresult rv;
         nsCOMPtr<nsIStreamConverterService> service =
             do_GetService(NS_STREAMCONVERTERSERVICE_CONTRACTID, &rv);
-        if (NS_FAILED(rv))
+        if (NS_FAILED(rv)) {
             return rv;
+}
         mStreamConvSvc = new nsMainThreadPtrHolder<nsIStreamConverterService>(
           "nsHttpHandler::mStreamConvSvc", service);
     }
@@ -831,8 +842,9 @@ nsHttpHandler::NotifyObservers(nsIHttpChannel *chan, const char *event)
 {
     LOG(("nsHttpHandler::NotifyObservers [chan=%p event=\"%s\"]\n", chan, event));
     nsCOMPtr<nsIObserverService> obsService = services::GetObserverService();
-    if (obsService)
+    if (obsService) {
         obsService->NotifyObservers(chan, event, nullptr);
+}
 }
 
 nsresult
@@ -1149,10 +1161,11 @@ nsHttpHandler::MaxSocketCount()
     // starve other users.
 
     uint32_t maxCount = nsSocketTransportService::gMaxCount;
-    if (maxCount <= 8)
+    if (maxCount <= 8) {
         maxCount = 1;
-    else
+    } else {
         maxCount -= 8;
+}
 
     return maxCount;
 }
@@ -1222,14 +1235,16 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
 
     if (PREF_CHANGED(HTTP_PREF("keep-alive.timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("keep-alive.timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mIdleTimeout = PR_SecondsToInterval(clamped(val, 1, 0xffff));
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("request.max-attempts"))) {
         rv = prefs->GetIntPref(HTTP_PREF("request.max-attempts"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mMaxRequestAttempts = (uint16_t) clamped(val, 1, 0xffff);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("request.max-start-delay"))) {
@@ -1249,14 +1264,16 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
 
     if (PREF_CHANGED(HTTP_PREF("response.timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("response.timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mResponseTimeout = PR_SecondsToInterval(clamped(val, 0, 0xffff));
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("network-changed.timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("network-changed.timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mNetworkChangedTimeout = clamped(val, 1, 600) * 1000;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("max-connections"))) {
@@ -1324,74 +1341,85 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
 
     if (PREF_CHANGED(HTTP_PREF("sendRefererHeader"))) {
         rv = prefs->GetIntPref(HTTP_PREF("sendRefererHeader"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mReferrerLevel = (uint8_t) clamped(val, 0, 0xff);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("referer.spoofSource"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("referer.spoofSource"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mSpoofReferrerSource = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("referer.hideOnionSource"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("referer.hideOnionSource"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mHideOnionReferrerSource = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("referer.trimmingPolicy"))) {
         rv = prefs->GetIntPref(HTTP_PREF("referer.trimmingPolicy"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mReferrerTrimmingPolicy = (uint8_t) clamped(val, 0, 2);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("referer.XOriginTrimmingPolicy"))) {
         rv = prefs->GetIntPref(HTTP_PREF("referer.XOriginTrimmingPolicy"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mReferrerXOriginTrimmingPolicy = (uint8_t) clamped(val, 0, 2);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("referer.XOriginPolicy"))) {
         rv = prefs->GetIntPref(HTTP_PREF("referer.XOriginPolicy"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mReferrerXOriginPolicy = (uint8_t) clamped(val, 0, 0xff);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("redirection-limit"))) {
         rv = prefs->GetIntPref(HTTP_PREF("redirection-limit"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mRedirectionLimit = (uint8_t) clamped(val, 0, 0xff);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("connection-retry-timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("connection-retry-timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mIdleSynTimeout = (uint16_t) clamped(val, 0, 3000);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("fast-fallback-to-IPv4"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("fast-fallback-to-IPv4"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mFastFallbackToIPv4 = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("fallback-connection-timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("fallback-connection-timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mFallbackSynTimeout = (uint16_t) clamped(val, 0, 10 * 60);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("version"))) {
         nsAutoCString httpVersion;
         prefs->GetCharPref(HTTP_PREF("version"), httpVersion);
         if (!httpVersion.IsVoid()) {
-            if (httpVersion.EqualsLiteral("1.1"))
+            if (httpVersion.EqualsLiteral("1.1")) {
                 mHttpVersion = NS_HTTP_VERSION_1_1;
-            else if (httpVersion.EqualsLiteral("0.9"))
+            } else if (httpVersion.EqualsLiteral("0.9")) {
                 mHttpVersion = NS_HTTP_VERSION_0_9;
-            else
+            } else {
                 mHttpVersion = NS_HTTP_VERSION_1_0;
+}
         }
     }
 
@@ -1399,18 +1427,20 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
         nsAutoCString httpVersion;
         prefs->GetCharPref(HTTP_PREF("proxy.version"), httpVersion);
         if (!httpVersion.IsVoid()) {
-            if (httpVersion.EqualsLiteral("1.1"))
+            if (httpVersion.EqualsLiteral("1.1")) {
                 mProxyHttpVersion = NS_HTTP_VERSION_1_1;
-            else
+            } else {
                 mProxyHttpVersion = NS_HTTP_VERSION_1_0;
+}
             // it does not make sense to issue a HTTP/0.9 request to a proxy server
         }
     }
 
     if (PREF_CHANGED(HTTP_PREF("qos"))) {
         rv = prefs->GetIntPref(HTTP_PREF("qos"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mQoSBits = (uint8_t) clamped(val, 0, 0xff);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("accept.default"))) {
@@ -1445,9 +1475,9 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
         nsAutoCString sval;
         rv = prefs->GetCharPref(HTTP_PREF("default-socket-type"), sval);
         if (NS_SUCCEEDED(rv)) {
-            if (sval.IsEmpty())
+            if (sval.IsEmpty()) {
                 mDefaultSocketType.SetIsVoid(true);
-            else {
+            } else {
                 // verify that this socket type is actually valid
                 nsCOMPtr<nsISocketProviderService> sps(
                         do_GetService(NS_SOCKETPROVIDERSERVICE_CONTRACTID));
@@ -1473,119 +1503,136 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
     if (PREF_CHANGED(HTTP_PREF("assoc-req.enforce"))) {
         cVar = false;
         rv = prefs->GetBoolPref(HTTP_PREF("assoc-req.enforce"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mEnforceAssocReq = cVar;
+}
     }
 
     // enable Persistent caching for HTTPS - bug#205921
     if (PREF_CHANGED(BROWSER_PREF("disk_cache_ssl"))) {
         cVar = false;
         rv = prefs->GetBoolPref(BROWSER_PREF("disk_cache_ssl"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mEnablePersistentHttpsCaching = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("phishy-userpass-length"))) {
         rv = prefs->GetIntPref(HTTP_PREF("phishy-userpass-length"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mPhishyUserPassLength = (uint8_t) clamped(val, 0, 0xff);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.enabled"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("spdy.enabled"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mEnableSpdy = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.enabled.http2"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("spdy.enabled.http2"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mHttp2Enabled = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.enabled.deps"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("spdy.enabled.deps"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mUseH2Deps = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.enforce-tls-profile"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("spdy.enforce-tls-profile"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mEnforceHttp2TlsProfile = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.coalesce-hostnames"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("spdy.coalesce-hostnames"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mCoalesceSpdy = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.persistent-settings"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("spdy.persistent-settings"),
                                 &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mSpdyPersistentSettings = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("spdy.timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mSpdyTimeout = PR_SecondsToInterval(clamped(val, 1, 0xffff));
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.chunk-size"))) {
         // keep this within http/2 ranges of 1 to 2^14-1
         rv = prefs->GetIntPref(HTTP_PREF("spdy.chunk-size"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mSpdySendingChunkSize = (uint32_t) clamped(val, 1, 0x3fff);
+}
     }
 
     // The amount of idle seconds on a spdy connection before initiating a
     // server ping. 0 will disable.
     if (PREF_CHANGED(HTTP_PREF("spdy.ping-threshold"))) {
         rv = prefs->GetIntPref(HTTP_PREF("spdy.ping-threshold"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mSpdyPingThreshold =
                 PR_SecondsToInterval((uint16_t) clamped(val, 0, 0x7fffffff));
+}
     }
 
     // The amount of seconds to wait for a spdy ping response before
     // closing the session.
     if (PREF_CHANGED(HTTP_PREF("spdy.ping-timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("spdy.ping-timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mSpdyPingTimeout =
                 PR_SecondsToInterval((uint16_t) clamped(val, 0, 0x7fffffff));
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.allow-push"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("spdy.allow-push"),
                                 &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mAllowPush = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("altsvc.enabled"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("altsvc.enabled"),
                                 &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mEnableAltSvc = cVar;
+}
     }
 
 
     if (PREF_CHANGED(HTTP_PREF("altsvc.oe"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("altsvc.oe"),
                                 &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mEnableAltSvcOE = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("originextension"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("originextension"),
                                 &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mEnableOriginExtension = cVar;
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("spdy.push-allowance"))) {
@@ -1617,41 +1664,46 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
     // closing the session.
     if (PREF_CHANGED(HTTP_PREF("spdy.send-buffer-size"))) {
         rv = prefs->GetIntPref(HTTP_PREF("spdy.send-buffer-size"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mSpdySendBufferSize = (uint32_t) clamped(val, 1500, 0x7fffffff);
+}
     }
 
     // The maximum amount of time to wait for socket transport to be
     // established
     if (PREF_CHANGED(HTTP_PREF("connection-timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("connection-timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             // the pref is in seconds, but the variable is in milliseconds
             mConnectTimeout = clamped(val, 1, 0xffff) * PR_MSEC_PER_SEC;
+}
     }
 
     // The maximum amount of time to wait for a tls handshake to finish.
     if (PREF_CHANGED(HTTP_PREF("tls-handshake-timeout"))) {
         rv = prefs->GetIntPref(HTTP_PREF("tls-handshake-timeout"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             // the pref is in seconds, but the variable is in milliseconds
             mTLSHandshakeTimeout = clamped(val, 1, 0xffff) * PR_MSEC_PER_SEC;
+}
     }
 
     // The maximum number of current global half open sockets allowable
     // for starting a new speculative connection.
     if (PREF_CHANGED(HTTP_PREF("speculative-parallel-limit"))) {
         rv = prefs->GetIntPref(HTTP_PREF("speculative-parallel-limit"), &val);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mParallelSpeculativeConnectLimit = (uint32_t) clamped(val, 0, 1024);
+}
     }
 
     // Whether or not to block requests for non head js/css items (e.g. media)
     // while those elements load.
     if (PREF_CHANGED(HTTP_PREF("rendering-critical-requests-prioritization"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("rendering-critical-requests-prioritization"), &cVar);
-        if (NS_SUCCEEDED(rv))
+        if (NS_SUCCEEDED(rv)) {
             mCriticalRequestPrioritization = cVar;
+}
     }
 
     // on transition of network.http.diagnostics to true print
@@ -1659,8 +1711,9 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
     if (pref && PREF_CHANGED(HTTP_PREF("diagnostics"))) {
         rv = prefs->GetBoolPref(HTTP_PREF("diagnostics"), &cVar);
         if (NS_SUCCEEDED(rv) && cVar) {
-            if (mConnMgr)
+            if (mConnMgr) {
                 mConnMgr->PrintDiagnostics();
+}
         }
     }
 
@@ -1898,16 +1951,18 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
     if (PREF_CHANGED(HTTP_PREF("tcp_keepalive.short_lived_time"))) {
         rv = prefs->GetIntPref(
             HTTP_PREF("tcp_keepalive.short_lived_time"), &val);
-        if (NS_SUCCEEDED(rv) && val > 0)
+        if (NS_SUCCEEDED(rv) && val > 0) {
             mTCPKeepaliveShortLivedTimeS = clamped(val, 1, 300); // Max 5 mins.
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("tcp_keepalive.short_lived_idle_time"))) {
         rv = prefs->GetIntPref(
             HTTP_PREF("tcp_keepalive.short_lived_idle_time"), &val);
-        if (NS_SUCCEEDED(rv) && val > 0)
+        if (NS_SUCCEEDED(rv) && val > 0) {
             mTCPKeepaliveShortLivedIdleTimeS = clamped(val,
                                                        1, kMaxTCPKeepIdle);
+}
     }
 
     // Keepalive values for Long-lived Connections.
@@ -1922,9 +1977,10 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
     if (PREF_CHANGED(HTTP_PREF("tcp_keepalive.long_lived_idle_time"))) {
         rv = prefs->GetIntPref(
             HTTP_PREF("tcp_keepalive.long_lived_idle_time"), &val);
-        if (NS_SUCCEEDED(rv) && val > 0)
+        if (NS_SUCCEEDED(rv) && val > 0) {
             mTCPKeepaliveLongLivedIdleTimeS = clamped(val,
                                                       1, kMaxTCPKeepIdle);
+}
     }
 
     if (PREF_CHANGED(HTTP_PREF("enforce-framing.http1")) ||
@@ -2020,8 +2076,9 @@ nsHttpHandler::PrefsChanged(nsIPrefBranch *prefs, const char *pref)
 static nsresult
 PrepareAcceptLanguages(const char *i_AcceptLanguages, nsACString &o_AcceptLanguages)
 {
-    if (!i_AcceptLanguages)
+    if (!i_AcceptLanguages) {
         return NS_OK;
+}
 
     const nsAutoCString ns_accept_languages(i_AcceptLanguages);
     return rust_prepare_accept_languages(&ns_accept_languages,
@@ -2127,10 +2184,12 @@ nsHttpHandler::NewChannel2(nsIURI* uri,
 
     // Verify that we have been given a valid scheme
     nsresult rv = uri->SchemeIs("http", &isHttp);
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
     if (!isHttp) {
         rv = uri->SchemeIs("https", &isHttps);
-        if (NS_FAILED(rv)) return rv;
+        if (NS_FAILED(rv)) { return rv;
+}
         if (!isHttps) {
             NS_WARNING("Invalid URI scheme");
             return NS_ERROR_UNEXPECTED;
@@ -2187,8 +2246,9 @@ nsHttpHandler::NewProxiedChannel2(nsIURI *uri,
 
     bool https;
     nsresult rv = uri->SchemeIs("https", &https);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     if (IsNeckoChild()) {
         httpChannel = new HttpChannelChild();
@@ -2213,8 +2273,9 @@ nsHttpHandler::NewProxiedChannel2(nsIURI *uri,
     NS_ENSURE_SUCCESS(rv, rv);
 
     rv = httpChannel->Init(uri, caps, proxyInfo, proxyResolveFlags, proxyURI, channelId);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     // set the loadInfo on the new channel
     rv = httpChannel->SetLoadInfo(aLoadInfo);
@@ -2301,8 +2362,9 @@ nsHttpHandler::Observe(nsISupports *subject,
     nsresult rv;
     if (!strcmp(topic, NS_PREFBRANCH_PREFCHANGE_TOPIC_ID)) {
         nsCOMPtr<nsIPrefBranch> prefBranch = do_QueryInterface(subject);
-        if (prefBranch)
+        if (prefBranch) {
             PrefsChanged(prefBranch, NS_ConvertUTF16toUTF8(data).get());
+}
     } else if (!strcmp(topic, "profile-change-net-teardown") ||
                !strcmp(topic, NS_XPCOM_SHUTDOWN_OBSERVER_ID) ) {
 
@@ -2311,8 +2373,9 @@ nsHttpHandler::Observe(nsISupports *subject,
         // clear cache of all authentication credentials.
         Unused << mAuthCache.ClearAll();
         Unused << mPrivateAuthCache.ClearAll();
-        if (mWifiTickler)
+        if (mWifiTickler) {
             mWifiTickler->Cancel();
+}
 
         // Inform nsIOService that network is tearing down.
         gIOService->SetHttpHandlerAlreadyShutingDown();
@@ -2500,8 +2563,9 @@ nsHttpHandler::SpeculativeConnectInternal(nsIURI *aURI,
         return NS_OK;
     }
 
-    if (!mHandlerActive)
+    if (!mHandlerActive) {
         return NS_OK;
+}
 
     MOZ_ASSERT(NS_IsMainThread());
     nsCOMPtr<nsIObserverService> obsService = services::GetObserverService();
@@ -2521,13 +2585,15 @@ nsHttpHandler::SpeculativeConnectInternal(nsIURI *aURI,
 
     nsISiteSecurityService* sss = gHttpHandler->GetSSService();
     bool isStsHost = false;
-    if (!sss)
+    if (!sss) {
         return NS_OK;
+}
 
     nsCOMPtr<nsILoadContext> loadContext = do_GetInterface(aCallbacks);
     uint32_t flags = 0;
-    if (loadContext && loadContext->UsePrivateBrowsing())
+    if (loadContext && loadContext->UsePrivateBrowsing()) {
         flags |= nsISocketProvider::NO_PERMANENT_STORAGE;
+}
 
     OriginAttributes originAttributes;
     // If the principal is given, we use the originAttributes from this
@@ -2554,8 +2620,9 @@ nsHttpHandler::SpeculativeConnectInternal(nsIURI *aURI,
 
     nsAutoCString scheme;
     nsresult rv = aURI->GetScheme(scheme);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     // If this is HTTPS, make sure PSM is initialized as the channel
     // creation path may have been bypassed
@@ -2566,14 +2633,16 @@ nsHttpHandler::SpeculativeConnectInternal(nsIURI *aURI,
         }
     }
     // Ensure that this is HTTP or HTTPS, otherwise we don't do preconnect here
-    else if (!scheme.EqualsLiteral("http"))
+    else if (!scheme.EqualsLiteral("http")) {
         return NS_ERROR_UNEXPECTED;
+}
 
     // Construct connection info object
     bool usingSSL = false;
     rv = aURI->SchemeIs("https", &usingSSL);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     static bool sCheckedIfSpeculativeEnabled = false;
     if (!sCheckedIfSpeculativeEnabled) {
@@ -2587,13 +2656,15 @@ nsHttpHandler::SpeculativeConnectInternal(nsIURI *aURI,
 
     nsAutoCString host;
     rv = aURI->GetAsciiHost(host);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     int32_t port = -1;
     rv = aURI->GetPort(&port);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     nsAutoCString username;
     aURI->GetUsername(username);
@@ -2639,38 +2710,45 @@ nsHttpHandler::SpeculativeAnonymousConnect2(nsIURI *aURI,
 void
 nsHttpHandler::TickleWifi(nsIInterfaceRequestor *cb)
 {
-    if (!cb || !mWifiTickler)
+    if (!cb || !mWifiTickler) {
         return;
+}
 
     // If B2G requires a similar mechanism nsINetworkManager, currently only avail
     // on B2G, contains the necessary information on wifi and gateway
 
     nsCOMPtr<nsIDOMWindow> domWindow = do_GetInterface(cb);
     nsCOMPtr<nsPIDOMWindowOuter> piWindow = do_QueryInterface(domWindow);
-    if (!piWindow)
+    if (!piWindow) {
         return;
+}
 
     RefPtr<dom::Navigator> navigator = piWindow->GetNavigator();
-    if (!navigator)
+    if (!navigator) {
         return;
+}
 
     nsCOMPtr<nsINetworkProperties> networkProperties =
         navigator->GetNetworkProperties();
-    if (!networkProperties)
+    if (!networkProperties) {
         return;
+}
 
     uint32_t gwAddress;
     bool isWifi;
     nsresult rv;
 
     rv = networkProperties->GetDhcpGateway(&gwAddress);
-    if (NS_SUCCEEDED(rv))
+    if (NS_SUCCEEDED(rv)) {
         rv = networkProperties->GetIsWifi(&isWifi);
-    if (NS_FAILED(rv))
+}
+    if (NS_FAILED(rv)) {
         return;
+}
 
-    if (!gwAddress || !isWifi)
+    if (!gwAddress || !isWifi) {
         return;
+}
 
     mWifiTickler->SetIPV4Address(gwAddress);
     mWifiTickler->Tickle();
@@ -2732,8 +2810,9 @@ nsHttpsHandler::NewChannel2(nsIURI* aURI,
                             nsIChannel** _retval)
 {
     MOZ_ASSERT(gHttpHandler);
-    if (!gHttpHandler)
+    if (!gHttpHandler) {
       return NS_ERROR_UNEXPECTED;
+}
     return gHttpHandler->NewChannel2(aURI, aLoadInfo, _retval);
 }
 

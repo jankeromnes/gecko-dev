@@ -38,12 +38,14 @@ static int parse_frame(AVCodecParserContext *ctx, const uint8_t *buf, int size)
     GetBitContext gb;
     int res, profile, keyframe, invisible;
 
-    if ((res = init_get_bits8(&gb, buf, size)) < 0)
+    if ((res = init_get_bits8(&gb, buf, size)) < 0) {
         return res;
+}
     get_bits(&gb, 2); // frame marker
     profile  = get_bits1(&gb);
     profile |= get_bits1(&gb) << 1;
-    if (profile == 3) profile += get_bits1(&gb);
+    if (profile == 3) { profile += get_bits1(&gb);
+}
 
     if (get_bits1(&gb)) {
         keyframe = 0;
@@ -62,8 +64,9 @@ static int parse_frame(AVCodecParserContext *ctx, const uint8_t *buf, int size)
     }
 
     if (!invisible) {
-        if (ctx->pts == AV_NOPTS_VALUE)
+        if (ctx->pts == AV_NOPTS_VALUE) {
             ctx->pts = s->pts;
+}
         s->pts = AV_NOPTS_VALUE;
     } else if (ctx->pts != AV_NOPTS_VALUE) {
         s->pts = ctx->pts;
@@ -93,8 +96,9 @@ static int parse(AVCodecParserContext *ctx,
         int i;
         int size_sum = 0;
 
-        for (i = 0; i < s->n_frames ;i++)
+        for (i = 0; i < s->n_frames ;i++) {
             size_sum += s->size[i];
+}
         size_sum += s->marker_size;
 
         if (size_sum != size) {

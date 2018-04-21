@@ -68,8 +68,9 @@ void vp8_cal_dissimilarity(VP8_COMP *cpi) {
 
     if (cm->frame_type != KEY_FRAME) {
       store_info->is_frame_dropped = 0;
-      for (i = 1; i < MAX_REF_FRAMES; ++i)
+      for (i = 1; i < MAX_REF_FRAMES; ++i) {
         store_info->low_res_ref_frames[i] = cpi->current_ref_frames[i];
+}
     }
 
     if (cm->frame_type != KEY_FRAME) {
@@ -161,14 +162,16 @@ void vp8_cal_dissimilarity(VP8_COMP *cpi) {
 
               if (cnt > 1) {
                 for (i = 1; i < cnt; ++i) {
-                  if (mvx[i] > max_mvx)
+                  if (mvx[i] > max_mvx) {
                     max_mvx = mvx[i];
-                  else if (mvx[i] < min_mvx)
+                  } else if (mvx[i] < min_mvx) {
                     min_mvx = mvx[i];
-                  if (mvy[i] > max_mvy)
+}
+                  if (mvy[i] > max_mvy) {
                     max_mvy = mvy[i];
-                  else if (mvy[i] < min_mvy)
+                  } else if (mvy[i] < min_mvy) {
                     min_mvy = mvy[i];
+}
                 }
               }
 

@@ -40,7 +40,7 @@ HB_SHAPER_IMPLEMENT (coretext_aat)
 #endif
 
 #ifdef HAVE_OT
-HB_SHAPER_IMPLEMENT (ot) /* <--- This is our main OpenType shaper. */
+} HB_SHAPER_IMPLEMENT (ot) /* <--- This is our main OpenType shaper. */
 #endif
 
 #ifdef HAVE_UNISCRIBE

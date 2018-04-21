@@ -187,7 +187,8 @@ float *build_input_gamma_table(struct curveType *TRC)
 {
 	float *gamma_table;
 
-	if (!TRC) return NULL;
+	if (!TRC) { return NULL;
+}
 	gamma_table = malloc(sizeof(float)*256);
 	if (gamma_table) {
 		if (TRC->type == PARAMETRIC_CURVE_TYPE) {
@@ -242,18 +243,21 @@ uint16_fract_t lut_inverse_interp16(uint16_t Value, uint16_t LutTable[], int len
         // First the zero and pole extents are computed, then value is compared.
 
         NumZeroes = 0;
-        while (LutTable[NumZeroes] == 0 && NumZeroes < length-1)
+        while (LutTable[NumZeroes] == 0 && NumZeroes < length-1) {
                         NumZeroes++;
+}
 
         // There are no zeros at the beginning and we are trying to find a zero, so
         // return anything. It seems zero would be the less destructive choice
 	/* I'm not sure that this makes sense, but oh well... */
-        if (NumZeroes == 0 && Value == 0)
+        if (NumZeroes == 0 && Value == 0) {
             return 0;
+}
 
         NumPoles = 0;
-        while (LutTable[length-1- NumPoles] == 0xFFFF && NumPoles < length-1)
+        while (LutTable[length-1- NumPoles] == 0xFFFF && NumPoles < length-1) {
                         NumPoles++;
+}
 
         // Does the curve belong to this case?
         if (NumZeroes > 1 || NumPoles > 1)
@@ -261,7 +265,8 @@ uint16_fract_t lut_inverse_interp16(uint16_t Value, uint16_t LutTable[], int len
                 int a, b;
 
                 // Identify if value fall downto 0 or FFFF zone
-                if (Value == 0) return 0;
+                if (Value == 0) { return 0;
+}
                 // if (Value == 0xFFFF) return 0xFFFF;
 
                 // else restrict to valid zone
@@ -296,8 +301,9 @@ uint16_fract_t lut_inverse_interp16(uint16_t Value, uint16_t LutTable[], int len
                     return (uint16_fract_t) (x - 1);
                 }
 
-                if (res > Value) r = x - 1;
-                else l = x + 1;
+                if (res > Value) { r = x - 1;
+                } else { l = x + 1;
+}
         }
 
         // Not found, should we interpolate?
@@ -311,7 +317,8 @@ uint16_fract_t lut_inverse_interp16(uint16_t Value, uint16_t LutTable[], int len
         cell0 = (int) floor(val2);
         cell1 = (int) ceil(val2);
            
-        if (cell0 == cell1) return (uint16_fract_t) x;
+        if (cell0 == cell1) { return (uint16_fract_t) x;
+}
 
         y0 = LutTable[cell0] ;
         x0 = (65535.0 * cell0) / (length-1); 
@@ -322,12 +329,15 @@ uint16_fract_t lut_inverse_interp16(uint16_t Value, uint16_t LutTable[], int len
         a = (y1 - y0) / (x1 - x0);
         b = y0 - a * x0;
 
-        if (fabs(a) < 0.01) return (uint16_fract_t) x;
+        if (fabs(a) < 0.01) { return (uint16_fract_t) x;
+}
 
         f = ((Value - b) / a);
 
-        if (f < 0.0) return (uint16_fract_t) 0;
-        if (f >= 65535.0) return (uint16_fract_t) 0xFFFF;
+        if (f < 0.0) { return (uint16_fract_t) 0;
+}
+        if (f >= 65535.0) { return (uint16_fract_t) 0xFFFF;
+}
 
         return (uint16_fract_t) floor(f + 0.5);                        
 
@@ -352,8 +362,9 @@ static uint16_t *invert_lut(uint16_t *table, int length, int out_length)
         /* for now we invert the lut by creating a lut of size out_length
          * and attempting to lookup a value for each entry using lut_inverse_interp16 */
         uint16_t *output = malloc(sizeof(uint16_t)*out_length);
-        if (!output)
+        if (!output) {
                 return NULL;
+}
 
         for (i = 0; i < out_length; i++) {
                 double x = ((double) i * 65535.) / (double) (out_length - 1);
@@ -408,12 +419,14 @@ qcms_bool compute_precache(struct curveType *trc, uint8_t *output)
                         //     measurement or data, howeve r it is what lcms uses.
                         //     the maximum number we would need is 65535 because that's the 
                         //     accuracy used for computing the pre cache table
-                        if (inverted_size < 256)
+                        if (inverted_size < 256) {
                                 inverted_size = 256;
+}
 
                         inverted = invert_lut(gamma_table_uint, 256, inverted_size);
-                        if (!inverted)
+                        if (!inverted) {
                                 return false;
+}
                         compute_precache_lut(output, inverted, inverted_size);
                         free(inverted);
         } else {
@@ -428,12 +441,14 @@ qcms_bool compute_precache(struct curveType *trc, uint8_t *output)
                         //     measurement or data, howeve r it is what lcms uses.
                         //     the maximum number we would need is 65535 because that's the 
                         //     accuracy used for computing the pre cache table
-                        if (inverted_size < 256)
+                        if (inverted_size < 256) {
                                 inverted_size = 256;
+}
 
                         inverted = invert_lut(trc->data, trc->count, inverted_size);
-                        if (!inverted)
+                        if (!inverted) {
                                 return false;
+}
                         compute_precache_lut(output, inverted, inverted_size);
                         free(inverted);
                 }
@@ -446,8 +461,9 @@ static uint16_t *build_linear_table(int length)
 {
         int i;
         uint16_t *output = malloc(sizeof(uint16_t)*length);
-        if (!output)
+        if (!output) {
                 return NULL;
+}
 
         for (i = 0; i < length; i++) {
                 double x = ((double) i * 65535.) / (double) (length - 1);
@@ -461,8 +477,9 @@ static uint16_t *build_pow_table(float gamma, int length)
 {
         int i;
         uint16_t *output = malloc(sizeof(uint16_t)*length);
-        if (!output)
+        if (!output) {
                 return NULL;
+}
 
         for (i = 0; i < length; i++) {
                 uint16_fract_t result;
@@ -505,8 +522,9 @@ void build_output_lut(struct curveType *trc,
                         //XXX: the choice of a minimum of 256 here is not backed by any theory, 
                         //     measurement or data, however it is what lcms uses.
                         *output_gamma_lut_length = trc->count;
-                        if (*output_gamma_lut_length < 256)
+                        if (*output_gamma_lut_length < 256) {
                                 *output_gamma_lut_length = 256;
+}
 
                         *output_gamma_lut = invert_lut(trc->data, trc->count, *output_gamma_lut_length);
                 }

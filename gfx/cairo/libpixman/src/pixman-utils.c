@@ -53,8 +53,9 @@ void *
 pixman_malloc_ab (unsigned int a,
                   unsigned int b)
 {
-    if (a >= INT32_MAX / b)
+    if (a >= INT32_MAX / b) {
 	return NULL;
+}
 
     return malloc (a * b);
 }
@@ -64,12 +65,13 @@ pixman_malloc_abc (unsigned int a,
                    unsigned int b,
                    unsigned int c)
 {
-    if (a >= INT32_MAX / b)
+    if (a >= INT32_MAX / b) {
 	return NULL;
-    else if (a * b >= INT32_MAX / c)
+    } else if (a * b >= INT32_MAX / c) {
 	return NULL;
-    else
+    } else {
 	return malloc (a * b * c);
+}
 }
 
 static force_inline uint16_t
@@ -77,10 +79,12 @@ float_to_unorm (float f, int n_bits)
 {
     uint32_t u;
 
-    if (f > 1.0)
+    if (f > 1.0) {
 	f = 1.0;
-    if (f < 0.0)
+}
+    if (f < 0.0) {
 	f = 0.0;
+}
 
     u = f * (1 << n_bits);
     u -= (u >> n_bits);
@@ -136,8 +140,9 @@ pixman_expand_to_float (argb_t               *dst,
     uint32_t a_mask, r_mask, g_mask, b_mask;
     int i;
 
-    if (!PIXMAN_FORMAT_VIS (format))
+    if (!PIXMAN_FORMAT_VIS (format)) {
 	format = PIXMAN_a8r8g8b8;
+}
 
     /*
      * Determine the sizes of each component and the masks and shifts
@@ -230,8 +235,9 @@ pixman_region16_copy_from_region32 (pixman_region16_t *dst,
 
     boxes16 = pixman_malloc_ab (n_boxes, sizeof (pixman_box16_t));
 
-    if (!boxes16)
+    if (!boxes16) {
 	return FALSE;
+}
 
     for (i = 0; i < n_boxes; ++i)
     {
@@ -259,13 +265,15 @@ pixman_region32_copy_from_region16 (pixman_region32_t *dst,
 
     boxes16 = pixman_region_rectangles (src, &n_boxes);
 
-    if (n_boxes > N_TMP_BOXES)
+    if (n_boxes > N_TMP_BOXES) {
 	boxes32 = pixman_malloc_ab (n_boxes, sizeof (pixman_box32_t));
-    else
+    } else {
 	boxes32 = tmp_boxes;
+}
 
-    if (!boxes32)
+    if (!boxes32) {
 	return FALSE;
+}
 
     for (i = 0; i < n_boxes; ++i)
     {
@@ -278,8 +286,9 @@ pixman_region32_copy_from_region16 (pixman_region32_t *dst,
     pixman_region32_fini (dst);
     retval = pixman_region32_init_rects (dst, boxes32, n_boxes);
 
-    if (boxes32 != tmp_boxes)
+    if (boxes32 != tmp_boxes) {
 	free (boxes32);
+}
 
     return retval;
 }

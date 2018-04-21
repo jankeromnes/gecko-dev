@@ -60,8 +60,9 @@ struct nsGConfDynamicFunction {
 
 nsGConfService::~nsGConfService()
 {
-  if (mClient)
+  if (mClient) {
     g_object_unref(mClient);
+}
 
   // We don't unload gconf here because liborbit uses atexit(). In addition to
   // this, it's not a good idea to unload any gobject based library, as it
@@ -83,8 +84,9 @@ nsGConfService::Init()
 
   if (!gconfLib) {
     gconfLib = PR_LoadLibrary("libgconf-2.so.4");
-    if (!gconfLib)
+    if (!gconfLib) {
       return NS_ERROR_FAILURE;
+}
   }
 
   for (auto GConfSymbol : kGConfSymbols) {
@@ -172,8 +174,9 @@ NS_IMETHODIMP
 nsGConfService::GetStringList(const nsACString &aKey, nsIArray** aResult)
 {
   nsCOMPtr<nsIMutableArray> items(do_CreateInstance(NS_ARRAY_CONTRACTID));
-  if (!items)
+  if (!items) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
 
   GError* error = nullptr;
   GSList* list = gconf_client_get_list(mClient, PromiseFlatCString(aKey).get(),

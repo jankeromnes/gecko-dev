@@ -128,8 +128,9 @@ static void inv_idtx_add_c(const tran_low_t *input, uint8_t *dest, int stride,
   const int shift = 3 - ((pels > 256) + (pels > 1024));
   if (tx_type == IDTX) {
     for (r = 0; r < bsy; ++r) {
-      for (c = 0; c < bsx; ++c)
+      for (c = 0; c < bsx; ++c) {
         dest[c] = clip_pixel_add(dest[c], input[c] >> shift);
+}
       dest += stride;
       input += bsx;
     }
@@ -881,8 +882,9 @@ void av1_iht4x8_32_add_c(const tran_low_t *input, uint8_t *dest, int stride,
     else
 #endif
       IHT_4x8[tx_type].rows(input, outtmp);
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       tmp[j][i] = (tran_low_t)dct_const_round_shift(outtmp[j] * Sqrt2);
+}
     input += n;
   }
 
@@ -963,8 +965,9 @@ void av1_iht8x4_32_add_c(const tran_low_t *input, uint8_t *dest, int stride,
     else
 #endif
       IHT_8x4[tx_type].rows(input, outtmp);
-    for (j = 0; j < n2; ++j)
+    for (j = 0; j < n2; ++j) {
       tmp[j][i] = (tran_low_t)dct_const_round_shift(outtmp[j] * Sqrt2);
+}
     input += n2;
   }
 
@@ -1042,7 +1045,8 @@ void av1_iht4x16_64_add_c(const tran_low_t *input, uint8_t *dest, int stride,
     else
 #endif
       IHT_4x16[tx_type].rows(input, outtmp);
-    for (j = 0; j < n; ++j) tmp[j][i] = outtmp[j];
+    for (j = 0; j < n; ++j) { tmp[j][i] = outtmp[j];
+}
     input += n;
   }
 
@@ -1111,7 +1115,8 @@ void av1_iht16x4_64_add_c(const tran_low_t *input, uint8_t *dest, int stride,
   // inverse transform row vectors and transpose
   for (i = 0; i < n; ++i) {
     IHT_16x4[tx_type].rows(input, outtmp);
-    for (j = 0; j < n4; ++j) tmp[j][i] = outtmp[j];
+    for (j = 0; j < n4; ++j) { tmp[j][i] = outtmp[j];
+}
     input += n4;
   }
 
@@ -1189,8 +1194,9 @@ void av1_iht8x16_128_add_c(const tran_low_t *input, uint8_t *dest, int stride,
     else
 #endif
       IHT_8x16[tx_type].rows(input, outtmp);
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       tmp[j][i] = (tran_low_t)dct_const_round_shift(outtmp[j] * Sqrt2);
+}
     input += n;
   }
 
@@ -1259,8 +1265,9 @@ void av1_iht16x8_128_add_c(const tran_low_t *input, uint8_t *dest, int stride,
   // inverse transform row vectors and transpose
   for (i = 0; i < n; ++i) {
     IHT_16x8[tx_type].rows(input, outtmp);
-    for (j = 0; j < n2; ++j)
+    for (j = 0; j < n2; ++j) {
       tmp[j][i] = (tran_low_t)dct_const_round_shift(outtmp[j] * Sqrt2);
+}
     input += n2;
   }
 
@@ -1338,7 +1345,8 @@ void av1_iht8x32_256_add_c(const tran_low_t *input, uint8_t *dest, int stride,
     else
 #endif
       IHT_8x32[tx_type].rows(input, outtmp);
-    for (j = 0; j < n; ++j) tmp[j][i] = outtmp[j];
+    for (j = 0; j < n; ++j) { tmp[j][i] = outtmp[j];
+}
     input += n;
   }
 
@@ -1407,7 +1415,8 @@ void av1_iht32x8_256_add_c(const tran_low_t *input, uint8_t *dest, int stride,
   // inverse transform row vectors and transpose
   for (i = 0; i < n; ++i) {
     IHT_32x8[tx_type].rows(input, outtmp);
-    for (j = 0; j < n4; ++j) tmp[j][i] = outtmp[j];
+    for (j = 0; j < n4; ++j) { tmp[j][i] = outtmp[j];
+}
     input += n4;
   }
 
@@ -1475,13 +1484,15 @@ void av1_iht16x32_512_add_c(const tran_low_t *input, uint8_t *dest, int stride,
   // inverse transform row vectors and transpose
   for (i = 0; i < n2; ++i) {
     IHT_16x32[tx_type].rows(input, outtmp);
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       tmp[j][i] = (tran_low_t)dct_const_round_shift(outtmp[j] * Sqrt2);
+}
     input += n;
   }
 
   // inverse transform column vectors
-  for (i = 0; i < n; ++i) IHT_16x32[tx_type].cols(tmp[i], out[i]);
+  for (i = 0; i < n; ++i) { IHT_16x32[tx_type].cols(tmp[i], out[i]);
+}
 
 #if CONFIG_EXT_TX
   maybe_flip_strides(&dest, &stride, &outp, &outstride, tx_type, n2, n);
@@ -1537,13 +1548,15 @@ void av1_iht32x16_512_add_c(const tran_low_t *input, uint8_t *dest, int stride,
   // inverse transform row vectors and transpose
   for (i = 0; i < n; ++i) {
     IHT_32x16[tx_type].rows(input, outtmp);
-    for (j = 0; j < n2; ++j)
+    for (j = 0; j < n2; ++j) {
       tmp[j][i] = (tran_low_t)dct_const_round_shift(outtmp[j] * Sqrt2);
+}
     input += n2;
   }
 
   // inverse transform column vectors
-  for (i = 0; i < n2; ++i) IHT_32x16[tx_type].cols(tmp[i], out[i]);
+  for (i = 0; i < n2; ++i) { IHT_32x16[tx_type].cols(tmp[i], out[i]);
+}
 
 #if CONFIG_EXT_TX
   maybe_flip_strides(&dest, &stride, &outp, &outstride, tx_type, n, n2);
@@ -1752,7 +1765,8 @@ void av1_iht16x16_256_add_c(const tran_low_t *input, uint8_t *dest, int stride,
   }
 
   // inverse transform column vectors
-  for (i = 0; i < 16; ++i) IHT_16[tx_type].cols(tmp[i], out[i]);
+  for (i = 0; i < 16; ++i) { IHT_16[tx_type].cols(tmp[i], out[i]);
+}
 
 #if CONFIG_EXT_TX
   maybe_flip_strides(&dest, &stride, &outp, &outstride, tx_type, 16, 16);
@@ -1851,7 +1865,8 @@ void av1_iht32x32_1024_add_c(const tran_low_t *input, uint8_t *dest, int stride,
   }
 
   // inverse transform column vectors
-  for (i = 0; i < 32; ++i) IHT_32[tx_type].cols(tmp[i], out[i]);
+  for (i = 0; i < 32; ++i) { IHT_32[tx_type].cols(tmp[i], out[i]);
+}
 
   maybe_flip_strides(&dest, &stride, &outp, &outstride, tx_type, 32, 32);
 
@@ -2100,19 +2115,21 @@ void av1_iht32x64_2048_add_c(const tran_low_t *input, uint8_t *dest, int stride,
 void av1_idct4x4_add(const tran_low_t *input, uint8_t *dest, int stride,
                      const TxfmParam *txfm_param) {
   const int eob = txfm_param->eob;
-  if (eob > 1)
+  if (eob > 1) {
     av1_iht4x4_16_add(input, dest, stride, txfm_param);
-  else
+  } else {
     aom_idct4x4_1_add(input, dest, stride);
+}
 }
 
 void av1_iwht4x4_add(const tran_low_t *input, uint8_t *dest, int stride,
                      const TxfmParam *txfm_param) {
   const int eob = txfm_param->eob;
-  if (eob > 1)
+  if (eob > 1) {
     aom_iwht4x4_16_add(input, dest, stride);
-  else
+  } else {
     aom_iwht4x4_1_add(input, dest, stride);
+}
 }
 
 #if !CONFIG_DAALA_DCT8
@@ -2132,13 +2149,14 @@ static void idct8x8_add(const tran_low_t *input, uint8_t *dest, int stride,
 #endif
 
   const int eob = txfm_param->eob;
-  if (eob == 1)
+  if (eob == 1) {
     // DC only DCT coefficient
     aom_idct8x8_1_add(input, dest, stride);
-  else if (eob <= half)
+  } else if (eob <= half) {
     aom_idct8x8_12_add(input, dest, stride);
-  else
+  } else {
     aom_idct8x8_64_add(input, dest, stride);
+}
 }
 #endif
 
@@ -2156,14 +2174,15 @@ static void idct16x16_add(const tran_low_t *input, uint8_t *dest, int stride,
 #endif
 
   const int eob = txfm_param->eob;
-  if (eob == 1) /* DC only DCT coefficient. */
+  if (eob == 1) { /* DC only DCT coefficient. */
     aom_idct16x16_1_add(input, dest, stride);
-  else if (eob <= quarter)
+  } else if (eob <= quarter) {
     aom_idct16x16_10_add(input, dest, stride);
-  else if (eob <= half)
+  } else if (eob <= half) {
     aom_idct16x16_38_add(input, dest, stride);
-  else
+  } else {
     aom_idct16x16_256_add(input, dest, stride);
+}
 }
 #endif
 
@@ -2220,16 +2239,17 @@ static void idct32x32_add(const tran_low_t *input, uint8_t *dest, int stride,
 #endif
 
   const int eob = txfm_param->eob;
-  if (eob == 1)
+  if (eob == 1) {
     aom_idct32x32_1_add(input, dest, stride);
-  else if (eob <= quarter)
+  } else if (eob <= quarter) {
     // non-zero coeff only in upper-left 8x8
     aom_idct32x32_34_add(input, dest, stride);
-  else if (eob <= half)
+  } else if (eob <= half) {
     // non-zero coeff only in upper-left 16x16
     aom_idct32x32_135_add(input, dest, stride);
-  else
+  } else {
     aom_idct32x32_1024_add(input, dest, stride);
+}
 }
 #endif
 
@@ -2588,10 +2608,11 @@ static void inv_txfm_add_64x64(const tran_low_t *input, uint8_t *dest,
 
 void av1_highbd_iwht4x4_add(const tran_low_t *input, uint8_t *dest, int stride,
                             int eob, int bd) {
-  if (eob > 1)
+  if (eob > 1) {
     aom_highbd_iwht4x4_16_add(input, dest, stride, bd);
-  else
+  } else {
     aom_highbd_iwht4x4_1_add(input, dest, stride, bd);
+}
 }
 
 #if CONFIG_CHROMA_2X2
@@ -2978,7 +2999,8 @@ void av1_inverse_transform_block(const MACROBLOCKD *xd,
 #endif  // CONFIG_MRC_TX && SIGNAL_ANY_MRC_MASK
                                  TX_TYPE tx_type, TX_SIZE tx_size, uint8_t *dst,
                                  int stride, int eob) {
-  if (!eob) return;
+  if (!eob) { return;
+}
 #if CONFIG_PVQ
   const BLOCK_SIZE tx_bsize = txsize_to_bsize[tx_size];
   const int txb_width = block_size_wide[tx_bsize];

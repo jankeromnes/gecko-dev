@@ -255,8 +255,9 @@ ssl_LookupSID(const PRIPv6Addr *addr, PRUint16 port, const char *peerID,
     sslSessionID *sid;
     PRUint32 now;
 
-    if (!urlSvrName)
+    if (!urlSvrName) {
         return NULL;
+}
     now = ssl_TimeSec();
     LOCK_CACHE;
     sidp = &cache;
@@ -323,16 +324,18 @@ CacheSID(sslSessionID *sid)
     }
 
     if (sid->u.ssl3.sessionIDLength == 0 &&
-        sid->u.ssl3.locked.sessionTicket.ticket.data == NULL)
+        sid->u.ssl3.locked.sessionTicket.ticket.data == NULL) {
         return;
+}
 
     /* Client generates the SessionID if this was a stateless resume. */
     if (sid->u.ssl3.sessionIDLength == 0) {
         SECStatus rv;
         rv = PK11_GenerateRandom(sid->u.ssl3.sessionID,
                                  SSL3_SESSIONID_BYTES);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return;
+}
         sid->u.ssl3.sessionIDLength = SSL3_SESSIONID_BYTES;
     }
     PRINT_BUF(8, (0, "sessionID:",
@@ -343,10 +346,12 @@ CacheSID(sslSessionID *sid)
         return;
     }
     PORT_Assert(sid->creationTime != 0 && sid->expirationTime != 0);
-    if (!sid->creationTime)
+    if (!sid->creationTime) {
         sid->lastAccessTime = sid->creationTime = ssl_TimeUsec();
-    if (!sid->expirationTime)
+}
+    if (!sid->expirationTime) {
         sid->expirationTime = sid->creationTime + ssl3_sid_timeout * PR_USEC_PER_SEC;
+}
 
     /*
      * Put sid into the cache.  Bump reference count to indicate that
@@ -1148,8 +1153,9 @@ void
 SSL_ClearSessionCache(void)
 {
     LOCK_CACHE;
-    while (cache != NULL)
+    while (cache != NULL) {
         UncacheSID(cache);
+}
     UNLOCK_CACHE;
 }
 

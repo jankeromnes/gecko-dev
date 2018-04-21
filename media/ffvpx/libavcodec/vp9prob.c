@@ -31,8 +31,9 @@ static av_always_inline void adapt_prob(uint8_t *p, unsigned ct0, unsigned ct1,
 {
     unsigned ct = ct0 + ct1, p2, p1;
 
-    if (!ct)
+    if (!ct) {
         return;
+}
 
     update_factor = FASTDIV(update_factor * FFMIN(ct, max_count), max_count);
     p1 = *p;
@@ -50,22 +51,24 @@ void ff_vp9_adapt_probs(VP9Context *s)
     int uf = (s->s.h.keyframe || s->s.h.intraonly || !s->last_keyframe) ? 112 : 128;
 
     // coefficients
-    for (i = 0; i < 4; i++)
-        for (j = 0; j < 2; j++)
-            for (k = 0; k < 2; k++)
-                for (l = 0; l < 6; l++)
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 2; j++) {
+            for (k = 0; k < 2; k++) {
+                for (l = 0; l < 6; l++) {
                     for (m = 0; m < 6; m++) {
                         uint8_t *pp = s->prob_ctx[s->s.h.framectxid].coef[i][j][k][l][m];
                         unsigned *e = s->td[0].counts.eob[i][j][k][l][m];
                         unsigned *c = s->td[0].counts.coef[i][j][k][l][m];
 
-                        if (l == 0 && m >= 3) // dc only has 3 pt
+                        if (l == 0 && m >= 3) { // dc only has 3 pt
                             break;
+}
 
                         adapt_prob(&pp[0], e[0], e[1], 24, uf);
                         adapt_prob(&pp[1], c[0], c[1] + c[2], 24, uf);
                         adapt_prob(&pp[2], c[1], c[2], 24, uf);
                     }
+}
 
     if (s->s.h.keyframe || s->s.h.intraonly) {
         memcpy(p->skip,  s->prob.p.skip,  sizeof(p->skip));
@@ -76,27 +79,31 @@ void ff_vp9_adapt_probs(VP9Context *s)
     }
 
     // skip flag
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++) {
         adapt_prob(&p->skip[i], s->td[0].counts.skip[i][0],
                    s->td[0].counts.skip[i][1], 20, 128);
+}
 
     // intra/inter flag
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         adapt_prob(&p->intra[i], s->td[0].counts.intra[i][0],
                    s->td[0].counts.intra[i][1], 20, 128);
+}
 
     // comppred flag
     if (s->s.h.comppredmode == PRED_SWITCHABLE) {
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < 5; i++) {
             adapt_prob(&p->comp[i], s->td[0].counts.comp[i][0],
                        s->td[0].counts.comp[i][1], 20, 128);
+}
     }
 
     // reference frames
     if (s->s.h.comppredmode != PRED_SINGLEREF) {
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < 5; i++) {
             adapt_prob(&p->comp_ref[i], s->td[0].counts.comp_ref[i][0],
                        s->td[0].counts.comp_ref[i][1], 20, 128);
+}
     }
 
     if (s->s.h.comppredmode != PRED_COMPREF) {
@@ -110,7 +117,7 @@ void ff_vp9_adapt_probs(VP9Context *s)
     }
 
     // block partitioning
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
             uint8_t *pp = p->partition[i][j];
             unsigned *c = s->td[0].counts.partition[i][j];
@@ -119,6 +126,7 @@ void ff_vp9_adapt_probs(VP9Context *s)
             adapt_prob(&pp[1], c[1], c[2] + c[3], 20, 128);
             adapt_prob(&pp[2], c[2], c[3], 20, 128);
         }
+}
 
     // tx size
     if (s->s.h.txfmmode == TX_SWITCHABLE) {
@@ -197,8 +205,9 @@ void ff_vp9_adapt_probs(VP9Context *s)
                    s->td[0].counts.mv_comp[i].class0[1], 20, 128);
         pp = p->mv_comp[i].bits;
         c2 = s->td[0].counts.mv_comp[i].bits;
-        for (j = 0; j < 10; j++)
+        for (j = 0; j < 10; j++) {
             adapt_prob(&pp[j], c2[j][0], c2[j][1], 20, 128);
+}
 
         for (j = 0; j < 2; j++) {
             pp = p->mv_comp[i].class0_fp[j];

@@ -267,8 +267,9 @@ static av_always_inline void filter_common(uint8_t *p, ptrdiff_t stride,
 
     a = 3 * (q0 - p0);
 
-    if (is4tap)
+    if (is4tap) {
         a += clip_int8(p1 - q1);
+}
 
     a = clip_int8(a);
 
@@ -276,10 +277,11 @@ static av_always_inline void filter_common(uint8_t *p, ptrdiff_t stride,
     // since that's what libvpx does.
     f1 = FFMIN(a + 4, 127) >> 3;
 
-    if (is_vp7)
+    if (is_vp7) {
         f2 = f1 - ((a & 7) == 4);
-    else
+    } else {
         f2 = FFMIN(a + 3, 127) >> 3;
+}
 
     // Despite what the spec says, we do need to clamp here to
     // be bitexact with libvpx.
@@ -673,12 +675,15 @@ av_cold void ff_vp78dsp_init(VP8DSPContext *dsp)
     VP78_BILINEAR_MC_FUNC(1, 8);
     VP78_BILINEAR_MC_FUNC(2, 4);
 
-    if (ARCH_ARM)
+    if (ARCH_ARM) {
         ff_vp78dsp_init_arm(dsp);
-    if (ARCH_PPC)
+}
+    if (ARCH_PPC) {
         ff_vp78dsp_init_ppc(dsp);
-    if (ARCH_X86)
+}
+    if (ARCH_X86) {
         ff_vp78dsp_init_x86(dsp);
+}
 }
 
 #if CONFIG_VP7_DECODER
@@ -733,11 +738,14 @@ av_cold void ff_vp8dsp_init(VP8DSPContext *dsp)
     dsp->vp8_v_loop_filter_simple = vp8_v_loop_filter_simple_c;
     dsp->vp8_h_loop_filter_simple = vp8_h_loop_filter_simple_c;
 
-    if (ARCH_ARM)
+    if (ARCH_ARM) {
         ff_vp8dsp_init_arm(dsp);
-    if (ARCH_X86)
+}
+    if (ARCH_X86) {
         ff_vp8dsp_init_x86(dsp);
-    if (ARCH_MIPS)
+}
+    if (ARCH_MIPS) {
         ff_vp8dsp_init_mips(dsp);
+}
 }
 #endif /* CONFIG_VP8_DECODER */

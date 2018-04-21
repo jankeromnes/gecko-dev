@@ -289,7 +289,8 @@ PluralRules::select(const VisibleDigitsWithExponent &number) const {
 
 StringEnumeration*
 PluralRules::getKeywords(UErrorCode& status) const {
-    if (U_FAILURE(status))  return NULL;
+    if (U_FAILURE(status)) {  return NULL;
+}
     StringEnumeration* nameEnumerator = new PluralKeywordEnumeration(mRules, status);
     if (U_FAILURE(status)) {
       delete nameEnumerator;

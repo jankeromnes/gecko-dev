@@ -3122,18 +3122,21 @@ const AVCodecDescriptor *avcodec_descriptor_get(enum AVCodecID id)
 {
     int i;
 
-    for (i = 0; i < FF_ARRAY_ELEMS(codec_descriptors); i++)
-        if (codec_descriptors[i].id == id)
+    for (i = 0; i < FF_ARRAY_ELEMS(codec_descriptors); i++) {
+        if (codec_descriptors[i].id == id) {
             return &codec_descriptors[i];
+}
     return NULL;
 }
 
 const AVCodecDescriptor *avcodec_descriptor_next(const AVCodecDescriptor *prev)
 {
-    if (!prev)
+    if (!prev) {
         return &codec_descriptors[0];
-    if (prev - codec_descriptors < FF_ARRAY_ELEMS(codec_descriptors) - 1)
+}
+    if (prev - codec_descriptors < FF_ARRAY_ELEMS(codec_descriptors) - 1) {
         return prev + 1;
+}
     return NULL;
 }
 
@@ -3141,9 +3144,10 @@ const AVCodecDescriptor *avcodec_descriptor_get_by_name(const char *name)
 {
     const AVCodecDescriptor *desc = NULL;
 
-    while ((desc = avcodec_descriptor_next(desc)))
-        if (!strcmp(desc->name, name))
+    while ((desc = avcodec_descriptor_next(desc))) {
+        if (!strcmp(desc->name, name)) {
             return desc;
+}
     return NULL;
 }
 

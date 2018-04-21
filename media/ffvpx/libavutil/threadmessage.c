@@ -45,10 +45,12 @@ int av_thread_message_queue_alloc(AVThreadMessageQueue **mq,
     AVThreadMessageQueue *rmq;
     int ret = 0;
 
-    if (nelem > INT_MAX / elsize)
+    if (nelem > INT_MAX / elsize) {
         return AVERROR(EINVAL);
-    if (!(rmq = av_mallocz(sizeof(*rmq))))
+}
+    if (!(rmq = av_mallocz(sizeof(*rmq)))) {
         return AVERROR(ENOMEM);
+}
     if ((ret = pthread_mutex_init(&rmq->lock, NULL))) {
         av_free(rmq);
         return AVERROR(ret);
@@ -109,12 +111,14 @@ static int av_thread_message_queue_send_locked(AVThreadMessageQueue *mq,
                                                unsigned flags)
 {
     while (!mq->err_send && av_fifo_space(mq->fifo) < mq->elsize) {
-        if ((flags & AV_THREAD_MESSAGE_NONBLOCK))
+        if ((flags & AV_THREAD_MESSAGE_NONBLOCK)) {
             return AVERROR(EAGAIN);
+}
         pthread_cond_wait(&mq->cond_send, &mq->lock);
     }
-    if (mq->err_send)
+    if (mq->err_send) {
         return mq->err_send;
+}
     av_fifo_generic_write(mq->fifo, msg, mq->elsize, NULL);
     /* one message is sent, signal one receiver */
     pthread_cond_signal(&mq->cond_recv);
@@ -126,12 +130,14 @@ static int av_thread_message_queue_recv_locked(AVThreadMessageQueue *mq,
                                                unsigned flags)
 {
     while (!mq->err_recv && av_fifo_size(mq->fifo) < mq->elsize) {
-        if ((flags & AV_THREAD_MESSAGE_NONBLOCK))
+        if ((flags & AV_THREAD_MESSAGE_NONBLOCK)) {
             return AVERROR(EAGAIN);
+}
         pthread_cond_wait(&mq->cond_recv, &mq->lock);
     }
-    if (av_fifo_size(mq->fifo) < mq->elsize)
+    if (av_fifo_size(mq->fifo) < mq->elsize) {
         return mq->err_recv;
+}
     av_fifo_generic_read(mq->fifo, msg, mq->elsize, NULL);
     /* one message space appeared, signal one sender */
     pthread_cond_signal(&mq->cond_send);
@@ -210,9 +216,10 @@ void av_thread_message_flush(AVThreadMessageQueue *mq)
 
     pthread_mutex_lock(&mq->lock);
     used = av_fifo_size(mq->fifo);
-    if (free_func)
-        for (off = 0; off < used; off += mq->elsize)
+    if (free_func) {
+        for (off = 0; off < used; off += mq->elsize) {
             av_fifo_generic_peek_at(mq->fifo, mq, off, mq->elsize, free_func_wrap);
+}
     av_fifo_drain(mq->fifo, used);
     /* only the senders need to be notified since the queue is empty and there
      * is nothing to read */

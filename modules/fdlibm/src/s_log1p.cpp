@@ -109,20 +109,23 @@ log1p(double x)
 	k = 1;
 	if (hx < 0x3FDA827A) {			/* 1+x < sqrt(2)+ */
 	    if(ax>=0x3ff00000) {		/* x <= -1.0 */
-		if(x==-1.0) return -two54/vzero; /* log1p(-1)=+inf */
-		else return (x-x)/(x-x);	/* log1p(x<-1)=NaN */
+		if(x==-1.0) { return -two54/vzero; /* log1p(-1)=+inf */
+		} else { return (x-x)/(x-x);	/* log1p(x<-1)=NaN */
+}
 	    }
 	    if(ax<0x3e200000) {			/* |x| < 2**-29 */
 		if(two54+x>zero			/* raise inexact */
-	            &&ax<0x3c900000) 		/* |x| < 2**-54 */
+	            &&ax<0x3c900000) { 		/* |x| < 2**-54 */
 		    return x;
-		else
+		} else {
 		    return x - x*x*0.5;
+}
 	    }
 	    if(hx>0||hx<=((int32_t)0xbfd2bec4)) {
 		k=0;f=x;hu=1;}		/* sqrt(2)/2- <= 1+x < sqrt(2)+ */
 	}
-	if (hx >= 0x7ff00000) return x+x;
+	if (hx >= 0x7ff00000) { return x+x;
+}
 	if(k!=0) {
 	    if(hx<0x43400000) {
 		STRICT_ASSIGN(double,u,1.0+x);
@@ -164,12 +167,14 @@ log1p(double x)
 		}
 	    }
 	    R = hfsq*(1.0-0.66666666666666666*f);
-	    if(k==0) return f-R; else
+	    if(k==0) { return f-R; } else {
 	    	     return k*ln2_hi-((R-(k*ln2_lo+c))-f);
+}
 	}
  	s = f/(2.0+f);
 	z = s*s;
 	R = z*(Lp1+z*(Lp2+z*(Lp3+z*(Lp4+z*(Lp5+z*(Lp6+z*Lp7))))));
-	if(k==0) return f-(hfsq-s*(hfsq+R)); else
+	if(k==0) { return f-(hfsq-s*(hfsq+R)); } else {
 		 return k*ln2_hi-((hfsq-(s*(hfsq+R)+(k*ln2_lo+c)))-f);
+}
 }

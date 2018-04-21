@@ -33,13 +33,15 @@ NSS_CMSDigestedData_Create(NSSCMSMessage *cmsg, SECAlgorithmID *digestalg)
     mark = PORT_ArenaMark(poolp);
 
     digd = (NSSCMSDigestedData *)PORT_ArenaZAlloc(poolp, sizeof(NSSCMSDigestedData));
-    if (digd == NULL)
+    if (digd == NULL) {
         goto loser;
+}
 
     digd->cmsg = cmsg;
 
-    if (SECOID_CopyAlgorithmID(poolp, &(digd->digestAlg), digestalg) != SECSuccess)
+    if (SECOID_CopyAlgorithmID(poolp, &(digd->digestAlg), digestalg) != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return digd;
@@ -84,8 +86,9 @@ NSS_CMSDigestedData_Encode_BeforeStart(NSSCMSDigestedData *digd)
 
     version = NSS_CMS_DIGESTED_DATA_VERSION_DATA;
     if (!NSS_CMSType_IsData(NSS_CMSContentInfo_GetContentTypeTag(
-            &(digd->contentInfo))))
+            &(digd->contentInfo)))) {
         version = NSS_CMS_DIGESTED_DATA_VERSION_ENCAP;
+}
 
     dummy = SEC_ASN1EncodeInteger(digd->cmsg->poolp, &(digd->version), version);
     return (dummy == NULL) ? SECFailure : SECSuccess;
@@ -110,8 +113,9 @@ NSS_CMSDigestedData_Encode_BeforeData(NSSCMSDigestedData *digd)
     if (digd->digestAlg.algorithm.len != 0 && digd->digest.len == 0) {
         /* if digest is already there, do nothing */
         digd->contentInfo.privateInfo->digcx = NSS_CMSDigestContext_StartSingle(&(digd->digestAlg));
-        if (digd->contentInfo.privateInfo->digcx == NULL)
+        if (digd->contentInfo.privateInfo->digcx == NULL) {
             return SECFailure;
+}
     }
     return SECSuccess;
 }
@@ -152,8 +156,9 @@ NSS_CMSDigestedData_Decode_BeforeData(NSSCMSDigestedData *digd)
     SECStatus rv;
 
     /* is there a digest algorithm yet? */
-    if (digd->digestAlg.algorithm.len == 0)
+    if (digd->digestAlg.algorithm.len == 0) {
         return SECFailure;
+}
 
     rv = NSS_CMSContentInfo_Private_Init(&digd->contentInfo);
     if (rv != SECSuccess) {
@@ -161,8 +166,9 @@ NSS_CMSDigestedData_Decode_BeforeData(NSSCMSDigestedData *digd)
     }
 
     digd->contentInfo.privateInfo->digcx = NSS_CMSDigestContext_StartSingle(&(digd->digestAlg));
-    if (digd->contentInfo.privateInfo->digcx == NULL)
+    if (digd->contentInfo.privateInfo->digcx == NULL) {
         return SECFailure;
+}
 
     return SECSuccess;
 }

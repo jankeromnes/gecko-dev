@@ -14,8 +14,9 @@ DominatorTree::GetRetainedSize(uint64_t aNodeId, ErrorResult& aRv)
 {
   JS::ubi::Node::Id id(aNodeId);
   auto node = mHeapSnapshot->getNodeById(id);
-  if (node.isNothing())
+  if (node.isNothing()) {
     return dom::Nullable<uint64_t>();
+}
 
   auto mallocSizeOf = GetCurrentThreadDebuggerMallocSizeOf();
   JS::ubi::Node::Size size = 0;
@@ -65,8 +66,9 @@ DominatorTree::GetImmediatelyDominated(uint64_t aNodeId,
 
   JS::ubi::Node::Id id(aNodeId);
   Maybe<JS::ubi::Node> node = mHeapSnapshot->getNodeById(id);
-  if (node.isNothing())
+  if (node.isNothing()) {
     return;
+}
 
   // Get all immediately dominated nodes and their retained sizes.
   MallocSizeOf mallocSizeOf = GetCurrentThreadDebuggerMallocSizeOf();
@@ -95,8 +97,9 @@ DominatorTree::GetImmediatelyDominated(uint64_t aNodeId,
   aOutResult.SetValue(nsTArray<uint64_t>(length));
   for (const NodeAndRetainedSize& entry : dominatedNodes) {
     // The root dominates itself, but we don't want to expose that to JS.
-    if (entry.mNode == root)
+    if (entry.mNode == root) {
       continue;
+}
 
     aOutResult.Value().AppendElement(entry.mNode.identifier());
   }
@@ -107,12 +110,14 @@ DominatorTree::GetImmediateDominator(uint64_t aNodeId) const
 {
   JS::ubi::Node::Id id(aNodeId);
   Maybe<JS::ubi::Node> node = mHeapSnapshot->getNodeById(id);
-  if (node.isNothing())
+  if (node.isNothing()) {
     return dom::Nullable<uint64_t>();
+}
 
   JS::ubi::Node dominator = mDominatorTree.getImmediateDominator(*node);
-  if (!dominator || dominator == *node)
+  if (!dominator || dominator == *node) {
     return dom::Nullable<uint64_t>();
+}
 
   return dom::Nullable<uint64_t>(dominator.identifier());
 }

@@ -53,8 +53,9 @@ int av_parse_ratio(AVRational *q, const char *str, int max,
         ret = av_expr_parse_and_eval(&d, str, NULL, NULL,
                                      NULL, NULL, NULL, NULL,
                                      NULL, log_offset, log_ctx);
-        if (ret < 0)
+        if (ret < 0) {
             return ret;
+}
         *q = av_d2q(d, max);
     } else {
         av_reduce(&q->num, &q->den, q->num, q->den, max);
@@ -161,16 +162,19 @@ int av_parse_video_size(int *width_ptr, int *height_ptr, const char *str)
     }
     if (i == n) {
         width = strtol(str, (void*)&p, 10);
-        if (*p)
+        if (*p) {
             p++;
+}
         height = strtol(p, (void*)&p, 10);
 
         /* trailing extraneous data detected, like in 123x345foobar */
-        if (*p)
+        if (*p) {
             return AVERROR(EINVAL);
+}
     }
-    if (width <= 0 || height <= 0)
+    if (width <= 0 || height <= 0) {
         return AVERROR(EINVAL);
+}
     *width_ptr  = width;
     *height_ptr = height;
     return 0;
@@ -182,17 +186,20 @@ int av_parse_video_rate(AVRational *rate, const char *arg)
     int n = FF_ARRAY_ELEMS(video_rate_abbrs);
 
     /* First, we check our abbreviation table */
-    for (i = 0; i < n; ++i)
+    for (i = 0; i < n; ++i) {
         if (!strcmp(video_rate_abbrs[i].abbr, arg)) {
             *rate = video_rate_abbrs[i].rate;
             return 0;
         }
+}
 
     /* Then, we try to parse it as fraction */
-    if ((ret = av_parse_ratio_quiet(rate, arg, 1001000)) < 0)
+    if ((ret = av_parse_ratio_quiet(rate, arg, 1001000)) < 0) {
         return ret;
-    if (rate->num <= 0 || rate->den <= 0)
+}
+    if (rate->num <= 0 || rate->den <= 0) {
         return AVERROR(EINVAL);
+}
     return 0;
 }
 
@@ -360,15 +367,18 @@ int av_parse_color(uint8_t *rgba_color, const char *color_string, int slen,
 
     if (color_string[0] == '#') {
         hex_offset = 1;
-    } else if (!strncmp(color_string, "0x", 2))
+    } else if (!strncmp(color_string, "0x", 2)) {
         hex_offset = 2;
+}
 
-    if (slen < 0)
+    if (slen < 0) {
         slen = strlen(color_string);
+}
     av_strlcpy(color_string2, color_string + hex_offset,
                FFMIN(slen-hex_offset+1, sizeof(color_string2)));
-    if ((tail = strchr(color_string2, ALPHA_SEP)))
+    if ((tail = strchr(color_string2, ALPHA_SEP))) {
         *tail++ = 0;
+}
     len = strlen(color_string2);
     rgba_color[3] = 255;
 
@@ -414,10 +424,11 @@ int av_parse_color(uint8_t *rgba_color, const char *color_string, int slen,
             alpha = strtoul(alpha_string, &tail, 16);
         } else {
             double norm_alpha = strtod(alpha_string, &tail);
-            if (norm_alpha < 0.0 || norm_alpha > 1.0)
+            if (norm_alpha < 0.0 || norm_alpha > 1.0) {
                 alpha = 256;
-            else
+            } else {
                 alpha = 255 * norm_alpha;
+}
         }
 
         if (tail == alpha_string || *tail || alpha > 255 || alpha < 0) {
@@ -435,12 +446,14 @@ const char *av_get_known_color_name(int color_idx, const uint8_t **rgbp)
 {
     const ColorEntry *color;
 
-    if ((unsigned)color_idx >= FF_ARRAY_ELEMS(color_table))
+    if ((unsigned)color_idx >= FF_ARRAY_ELEMS(color_table)) {
         return NULL;
+}
 
     color = &color_table[color_idx];
-    if (rgbp)
+    if (rgbp) {
         *rgbp = color->rgb_color;
+}
 
     return color->name;
 }
@@ -457,16 +470,19 @@ static int date_get_num(const char **pp,
     val = 0;
     for(i = 0; i < len_max; i++) {
         c = *p;
-        if (!av_isdigit(c))
+        if (!av_isdigit(c)) {
             break;
+}
         val = (val * 10) + c - '0';
         p++;
     }
     /* no number read ? */
-    if (p == *pp)
+    if (p == *pp) {
         return -1;
-    if (val < n_min || val > n_max)
+}
+    if (val < n_min || val > n_max) {
         return -1;
+}
     *pp = p;
     return val;
 }
@@ -478,8 +494,9 @@ static int date_get_month(const char **pp) {
             const char *mo_full = months[i] + 3;
             int len = strlen(mo_full);
             *pp += 3;
-            if (len > 0 && !av_strncasecmp(*pp, mo_full, len))
+            if (len > 0 && !av_strncasecmp(*pp, mo_full, len)) {
                 *pp += len;
+}
             return i;
         }
     }
@@ -492,11 +509,13 @@ char *av_small_strptime(const char *p, const char *fmt, struct tm *dt)
 
     while((c = *fmt++)) {
         if (c != '%') {
-            if (av_isspace(c))
-                for (; *p && av_isspace(*p); p++);
-            else if (*p != c)
+            if (av_isspace(c)) {
+                for (; *p && av_isspace(*p); p++) {;
+}
+            } else if (*p != c) {
                 return NULL;
-            else p++;
+            } else { p++;
+}
             continue;
         }
 
@@ -506,56 +525,65 @@ char *av_small_strptime(const char *p, const char *fmt, struct tm *dt)
         case 'J':
             val = date_get_num(&p, 0, c == 'H' ? 23 : INT_MAX, 2);
 
-            if (val == -1)
+            if (val == -1) {
                 return NULL;
+}
             dt->tm_hour = val;
             break;
         case 'M':
             val = date_get_num(&p, 0, 59, 2);
-            if (val == -1)
+            if (val == -1) {
                 return NULL;
+}
             dt->tm_min = val;
             break;
         case 'S':
             val = date_get_num(&p, 0, 59, 2);
-            if (val == -1)
+            if (val == -1) {
                 return NULL;
+}
             dt->tm_sec = val;
             break;
         case 'Y':
             val = date_get_num(&p, 0, 9999, 4);
-            if (val == -1)
+            if (val == -1) {
                 return NULL;
+}
             dt->tm_year = val - 1900;
             break;
         case 'm':
             val = date_get_num(&p, 1, 12, 2);
-            if (val == -1)
+            if (val == -1) {
                 return NULL;
+}
             dt->tm_mon = val - 1;
             break;
         case 'd':
             val = date_get_num(&p, 1, 31, 2);
-            if (val == -1)
+            if (val == -1) {
                 return NULL;
+}
             dt->tm_mday = val;
             break;
         case 'T':
             p = av_small_strptime(p, "%H:%M:%S", dt);
-            if (!p)
+            if (!p) {
                 return NULL;
+}
             break;
         case 'b':
         case 'B':
         case 'h':
             val = date_get_month(&p);
-            if (val == -1)
+            if (val == -1) {
                 return NULL;
+}
             dt->tm_mon = val;
             break;
         case '%':
-            if (*p++ != '%')
+            if (*p++ != '%') {
                 return NULL;
+}
             break;
         default:
             return NULL;
@@ -621,8 +649,9 @@ int av_parse_time(int64_t *timeval, const char *timestr, int duration)
         /* parse the year-month-day part */
         for (i = 0; i < FF_ARRAY_ELEMS(date_fmt); i++) {
             q = av_small_strptime(p, date_fmt[i], &dt);
-            if (q)
+            if (q) {
                 break;
+}
         }
 
         /* if the year-month-day part is missing, then take the
@@ -633,17 +662,19 @@ int av_parse_time(int64_t *timeval, const char *timestr, int duration)
         }
         p = q;
 
-        if (*p == 'T' || *p == 't')
+        if (*p == 'T' || *p == 't') {
             p++;
-        else
-            while (av_isspace(*p))
+        } else {
+            while (av_isspace(*p)) {
                 p++;
+}
 
         /* parse the hour-minute-second part */
         for (i = 0; i < FF_ARRAY_ELEMS(time_fmt); i++) {
             q = av_small_strptime(p, time_fmt[i], &dt);
-            if (q)
+            if (q) {
                 break;
+}
         }
     } else {
         /* parse timestr as a duration */
@@ -662,8 +693,9 @@ int av_parse_time(int64_t *timeval, const char *timestr, int duration)
             char *o;
             /* parse timestr as S+ */
             dt.tm_sec = strtol(p, &o, 10);
-            if (o == p) /* the parsing didn't succeed */
+            if (o == p) { /* the parsing didn't succeed */
                 return AVERROR(EINVAL);
+}
             dt.tm_min = 0;
             dt.tm_hour = 0;
             q = o;
@@ -671,20 +703,23 @@ int av_parse_time(int64_t *timeval, const char *timestr, int duration)
     }
 
     /* Now we have all the fields that we can get */
-    if (!q)
+    if (!q) {
         return AVERROR(EINVAL);
+}
 
     /* parse the .m... part */
     if (*q == '.') {
         int n;
         q++;
         for (n = 100000; n >= 1; n /= 10, q++) {
-            if (!av_isdigit(*q))
+            if (!av_isdigit(*q)) {
                 break;
+}
             microseconds += n * (*q - '0');
         }
-        while (av_isdigit(*q))
+        while (av_isdigit(*q)) {
             q++;
+}
     }
 
     if (duration) {
@@ -700,11 +735,13 @@ int av_parse_time(int64_t *timeval, const char *timestr, int duration)
             p = q;
             for (i = 0; i < FF_ARRAY_ELEMS(tz_fmt); i++) {
                 q = av_small_strptime(p, tz_fmt[i], &tz);
-                if (q)
+                if (q) {
                     break;
+}
             }
-            if (!q)
+            if (!q) {
                 return AVERROR(EINVAL);
+}
             tzoffset = sign * (tz.tm_hour * 60 + tz.tm_min) * 60;
             is_utc = 1;
         }
@@ -721,8 +758,9 @@ int av_parse_time(int64_t *timeval, const char *timestr, int duration)
     }
 
     /* Check that we are at the end of the string */
-    if (*q)
+    if (*q) {
         return AVERROR(EINVAL);
+}
 
     t *= 1000000;
     t += microseconds;
@@ -736,13 +774,15 @@ int av_find_info_tag(char *arg, int arg_size, const char *tag1, const char *info
     char tag[128], *q;
 
     p = info;
-    if (*p == '?')
+    if (*p == '?') {
         p++;
+}
     for(;;) {
         q = tag;
         while (*p != '\0' && *p != '=' && *p != '&') {
-            if ((q - tag) < sizeof(tag) - 1)
+            if ((q - tag) < sizeof(tag) - 1) {
                 *q++ = *p;
+}
             p++;
         }
         *q = '\0';
@@ -751,19 +791,22 @@ int av_find_info_tag(char *arg, int arg_size, const char *tag1, const char *info
             p++;
             while (*p != '&' && *p != '\0') {
                 if ((q - arg) < arg_size - 1) {
-                    if (*p == '+')
+                    if (*p == '+') {
                         *q++ = ' ';
-                    else
+                    } else {
                         *q++ = *p;
+}
                 }
                 p++;
             }
         }
         *q = '\0';
-        if (!strcmp(tag, tag1))
+        if (!strcmp(tag, tag1)) {
             return 1;
-        if (*p != '&')
+}
+        if (*p != '&') {
             break;
+}
         p++;
     }
     return 0;

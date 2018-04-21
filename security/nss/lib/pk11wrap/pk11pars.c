@@ -623,15 +623,17 @@ secmod_parseCryptoPolicy(const char *policyConfig)
     }
     disallow = NSSUTIL_ArgGetParamValue("disallow", policyConfig);
     rv = secmod_applyCryptoPolicy(disallow, PR_FALSE);
-    if (disallow)
+    if (disallow) {
         PORT_Free(disallow);
+}
     if (rv != SECSuccess) {
         return rv;
     }
     allow = NSSUTIL_ArgGetParamValue("allow", policyConfig);
     rv = secmod_applyCryptoPolicy(allow, PR_TRUE);
-    if (allow)
+    if (allow) {
         PORT_Free(allow);
+}
     return rv;
 }
 
@@ -657,8 +659,9 @@ SECMOD_CreateModuleEx(const char *library, const char *moduleName,
     }
 
     mod = secmod_NewModule();
-    if (mod == NULL)
+    if (mod == NULL) {
         return NULL;
+}
 
     mod->commonName = PORT_ArenaStrdup(mod->arena, moduleName ? moduleName : "");
     if (library) {
@@ -675,8 +678,9 @@ SECMOD_CreateModuleEx(const char *library, const char *moduleName,
     slotParams = NSSUTIL_ArgGetParamValue("slotParams", nssc);
     mod->slotInfo = NSSUTIL_ArgParseSlotInfo(mod->arena, slotParams,
                                              &mod->slotInfoCount);
-    if (slotParams)
+    if (slotParams) {
         PORT_Free(slotParams);
+}
     /* new field */
     mod->trustOrder = NSSUTIL_ArgReadLong("trustOrder", nssc,
                                           NSSUTIL_DEFAULT_TRUST_ORDER, NULL);
@@ -686,8 +690,9 @@ SECMOD_CreateModuleEx(const char *library, const char *moduleName,
     /* new field */
     mod->isModuleDB = NSSUTIL_ArgHasFlag("flags", "moduleDB", nssc);
     mod->moduleDBOnly = NSSUTIL_ArgHasFlag("flags", "moduleDBOnly", nssc);
-    if (mod->moduleDBOnly)
+    if (mod->moduleDBOnly) {
         mod->isModuleDB = PR_TRUE;
+}
 
     /* we need more bits, but we also want to preserve binary compatibility
      * so we overload the isModuleDB PRBool with additional flags.
@@ -718,8 +723,9 @@ SECMOD_CreateModuleEx(const char *library, const char *moduleName,
 
     ciphers = NSSUTIL_ArgGetParamValue("ciphers", nssc);
     NSSUTIL_ArgParseCipherFlags(&mod->ssl[0], ciphers);
-    if (ciphers)
+    if (ciphers) {
         PORT_Free(ciphers);
+}
 
     secmod_PrivateModuleCount++;
 
@@ -1055,8 +1061,9 @@ secmod_GetConfigList(PRBool isFIPS, char *spec, int *count)
         return NULL;
     }
 
-    for (childCount = 0; children && children[childCount]; childCount++)
+    for (childCount = 0; children && children[childCount]; childCount++) {
         ;
+}
     *count = childCount + 1; /* include strippedSpec */
     conflist = PORT_NewArray(SECMODConfigList, *count);
     if (conflist == NULL) {
@@ -1517,8 +1524,9 @@ secmod_mkModuleSpec(SECMODModule *module)
         for (i = 0, si = 0; i < module->slotCount; i++) {
             if (module->slots[i]->defaultFlags) {
                 PORT_Assert(si < slotCount);
-                if (si >= slotCount)
+                if (si >= slotCount) {
                     break;
+}
                 slotStrings[si] = NSSUTIL_MkSlotString(module->slots[i]->slotID,
                                                        module->slots[i]->defaultFlags,
                                                        module->slots[i]->timeout,
@@ -1572,8 +1580,9 @@ SECMOD_AddPermDB(SECMODModule *module)
     char *moduleSpec;
     char **retString;
 
-    if (module->parent == NULL)
+    if (module->parent == NULL) {
         return SECFailure;
+}
 
     func = (SECMODModuleDBFunc)module->parent->moduleDBFunc;
     if (func) {
@@ -1581,8 +1590,9 @@ SECMOD_AddPermDB(SECMODModule *module)
         retString = (*func)(SECMOD_MODULE_DB_FUNCTION_ADD,
                             module->parent->libraryParams, moduleSpec);
         PORT_Free(moduleSpec);
-        if (retString != NULL)
+        if (retString != NULL) {
             return SECSuccess;
+}
     }
     return SECFailure;
 }
@@ -1594,8 +1604,9 @@ SECMOD_DeletePermDB(SECMODModule *module)
     char *moduleSpec;
     char **retString;
 
-    if (module->parent == NULL)
+    if (module->parent == NULL) {
         return SECFailure;
+}
 
     func = (SECMODModuleDBFunc)module->parent->moduleDBFunc;
     if (func) {
@@ -1603,8 +1614,9 @@ SECMOD_DeletePermDB(SECMODModule *module)
         retString = (*func)(SECMOD_MODULE_DB_FUNCTION_DEL,
                             module->parent->libraryParams, moduleSpec);
         PORT_Free(moduleSpec);
-        if (retString != NULL)
+        if (retString != NULL) {
             return SECSuccess;
+}
     }
     return SECFailure;
 }
@@ -1617,8 +1629,9 @@ SECMOD_FreeModuleSpecList(SECMODModule *module, char **moduleSpecList)
     if (func) {
         retString = (*func)(SECMOD_MODULE_DB_FUNCTION_RELEASE,
                             module->libraryParams, moduleSpecList);
-        if (retString != NULL)
+        if (retString != NULL) {
             return SECSuccess;
+}
     }
     return SECFailure;
 }
@@ -1647,16 +1660,21 @@ SECMOD_LoadModule(char *modulespec, SECMODModule *parent, PRBool recurse)
     }
 
     module = SECMOD_CreateModuleEx(library, moduleName, parameters, nss, config);
-    if (library)
+    if (library) {
         PORT_Free(library);
-    if (moduleName)
+}
+    if (moduleName) {
         PORT_Free(moduleName);
-    if (parameters)
+}
+    if (parameters) {
         PORT_Free(parameters);
-    if (nss)
+}
+    if (nss) {
         PORT_Free(nss);
-    if (config)
+}
+    if (config) {
         PORT_Free(config);
+}
     if (!module) {
         goto loser;
     }
@@ -1704,12 +1722,14 @@ SECMOD_LoadModule(char *modulespec, SECMODModule *parent, PRBool recurse)
                     break;
                 }
                 child = SECMOD_LoadModule(*index, module, PR_TRUE);
-                if (!child)
+                if (!child) {
                     break;
+}
                 if (child->isCritical && !child->loaded) {
                     int err = PORT_GetError();
-                    if (!err)
+                    if (!err) {
                         err = SEC_ERROR_NO_MODULE;
+}
                     SECMOD_DestroyModule(child);
                     PORT_SetError(err);
                     rv = SECFailure;
@@ -1719,8 +1739,9 @@ SECMOD_LoadModule(char *modulespec, SECMODModule *parent, PRBool recurse)
             }
             SECMOD_FreeModuleSpecList(module, moduleSpecList);
         } else {
-            if (!PORT_GetError())
+            if (!PORT_GetError()) {
                 PORT_SetError(SEC_ERROR_NO_MODULE);
+}
             rv = SECFailure;
         }
     }

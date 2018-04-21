@@ -34,13 +34,15 @@ void _PR_InitClock(void)
 
 PR_IMPLEMENT(PRIntervalTime) PR_IntervalNow(void)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
     return _PR_MD_GET_INTERVAL();
 }  /* PR_IntervalNow */
 
 PR_EXTERN(PRUint32) PR_TicksPerSecond(void)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
     return _PR_MD_INTERVAL_PER_SEC();
 }  /* PR_TicksPerSecond */
 

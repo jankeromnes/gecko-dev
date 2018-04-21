@@ -43,8 +43,9 @@ crmf_add_new_control(CRMFCertRequest *inCertReq, SECOidTag inTag,
     }
     mark = PORT_ArenaMark(poolp);
     if (inCertReq->controls != NULL) {
-        while (inCertReq->controls[numControls] != NULL)
+        while (inCertReq->controls[numControls] != NULL) {
             numControls++;
+}
     }
     rv = crmf_modify_control_array(inCertReq, numControls);
     if (rv != SECSuccess) {

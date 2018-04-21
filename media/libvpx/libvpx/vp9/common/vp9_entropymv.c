@@ -106,7 +106,8 @@ MV_CLASS_TYPE vp9_get_mv_class(int z, int *offset) {
   const MV_CLASS_TYPE c = (z >= CLASS0_SIZE * 4096)
                               ? MV_CLASS_10
                               : (MV_CLASS_TYPE)log_in_base_2[z >> 3];
-  if (offset) *offset = z - mv_class_base(c);
+  if (offset) { *offset = z - mv_class_base(c);
+}
   return c;
 }
 
@@ -132,7 +133,8 @@ static void inc_mv_component(int v, nmv_component_counts *comp_counts, int incr,
   } else {
     int i;
     int b = c + CLASS0_BITS - 1;  // number of bits
-    for (i = 0; i < b; ++i) comp_counts->bits[i][((d >> i) & 1)] += incr;
+    for (i = 0; i < b; ++i) { comp_counts->bits[i][((d >> i) & 1)] += incr;
+}
     comp_counts->fp[f] += incr;
     comp_counts->hp[e] += usehp * incr;
   }
@@ -174,12 +176,14 @@ void vp9_adapt_mv_probs(VP9_COMMON *cm, int allow_hp) {
     vpx_tree_merge_probs(vp9_mv_class0_tree, pre_comp->class0, c->class0,
                          comp->class0);
 
-    for (j = 0; j < MV_OFFSET_BITS; ++j)
+    for (j = 0; j < MV_OFFSET_BITS; ++j) {
       comp->bits[j] = mode_mv_merge_probs(pre_comp->bits[j], c->bits[j]);
+}
 
-    for (j = 0; j < CLASS0_SIZE; ++j)
+    for (j = 0; j < CLASS0_SIZE; ++j) {
       vpx_tree_merge_probs(vp9_mv_fp_tree, pre_comp->class0_fp[j],
                            c->class0_fp[j], comp->class0_fp[j]);
+}
 
     vpx_tree_merge_probs(vp9_mv_fp_tree, pre_comp->fp, c->fp, comp->fp);
 

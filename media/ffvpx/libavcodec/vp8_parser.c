@@ -28,8 +28,9 @@ static int parse(AVCodecParserContext *s,
     unsigned int frame_type;
     unsigned int profile;
 
-    if (buf_size < 3)
+    if (buf_size < 3) {
         return buf_size;
+}
 
     frame_type = buf[0] & 1;
     profile    = (buf[0] >> 1) & 7;
@@ -49,8 +50,9 @@ static int parse(AVCodecParserContext *s,
         unsigned int sync_code;
         unsigned int width, height;
 
-        if (buf_size < 10)
+        if (buf_size < 10) {
             return buf_size;
+}
 
         sync_code = AV_RL24(buf + 3);
         if (sync_code != 0x2a019d) {

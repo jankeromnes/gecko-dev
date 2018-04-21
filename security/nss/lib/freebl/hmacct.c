@@ -166,8 +166,9 @@ MAC(unsigned char *mdOut,
         memset(hmacPad, 0, mdBlockSize);
         PORT_Assert(macSecretLen <= sizeof(hmacPad));
         memcpy(hmacPad, macSecret, macSecretLen);
-        for (i = 0; i < mdBlockSize; i++)
+        for (i = 0; i < mdBlockSize; i++) {
             hmacPad[i] ^= 0x36;
+}
         hashObj->update(mdState, hmacPad, mdBlockSize);
     }
 
@@ -271,16 +272,18 @@ MAC(unsigned char *mdOut,
 
     if (isSSLv3) {
         /* We repurpose |hmacPad| to contain the SSLv3 pad2 block. */
-        for (i = 0; i < sslv3PadLen; i++)
+        for (i = 0; i < sslv3PadLen; i++) {
             hmacPad[i] = 0x5c;
+}
 
         hashObj->update(mdState, macSecret, macSecretLen);
         hashObj->update(mdState, hmacPad, sslv3PadLen);
         hashObj->update(mdState, macOut, mdSize);
     } else {
         /* Complete the HMAC in the standard manner. */
-        for (i = 0; i < mdBlockSize; i++)
+        for (i = 0; i < mdBlockSize; i++) {
             hmacPad[i] ^= 0x6a;
+}
 
         hashObj->update(mdState, hmacPad, mdBlockSize);
         hashObj->update(mdState, macOut, mdSize);
@@ -306,8 +309,9 @@ HMAC_ConstantTime(
     unsigned int bodyLen,
     unsigned int bodyTotalLen)
 {
-    if (hashObj->end_raw == NULL)
+    if (hashObj->end_raw == NULL) {
         return SECFailure;
+}
     return MAC(result, resultLen, maxResultLen, hashObj, secret, secretLen,
                header, headerLen, body, bodyLen, bodyTotalLen,
                0 /* not SSLv3 */);
@@ -327,8 +331,9 @@ SSLv3_MAC_ConstantTime(
     unsigned int bodyLen,
     unsigned int bodyTotalLen)
 {
-    if (hashObj->end_raw == NULL)
+    if (hashObj->end_raw == NULL) {
         return SECFailure;
+}
     return MAC(result, resultLen, maxResultLen, hashObj, secret, secretLen,
                header, headerLen, body, bodyLen, bodyTotalLen,
                1 /* SSLv3 */);

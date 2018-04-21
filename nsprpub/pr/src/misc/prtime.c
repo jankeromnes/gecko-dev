@@ -277,8 +277,9 @@ PR_ImplodeTime(const PRExplodedTime *exploded)
 
 static int IsLeapYear(PRInt16 year)
 {
-    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
         return 1;
+}
     return 0;
 }
 
@@ -321,16 +322,18 @@ ApplySecOffset(PRExplodedTime *time, PRInt32 secOffset)
             if (time->tm_month < 0) {
                 time->tm_month = 11;
                 time->tm_year--;
-                if (IsLeapYear(time->tm_year))
+                if (IsLeapYear(time->tm_year)) {
                     time->tm_yday = 365;
-                else
+                } else {
                     time->tm_yday = 364;
+}
             }
             time->tm_mday = nDays[IsLeapYear(time->tm_year)][time->tm_month];
         }
         time->tm_wday--;
-        if (time->tm_wday < 0)
+        if (time->tm_wday < 0) {
             time->tm_wday = 6;
+}
     } else if (time->tm_hour > 23) {
         /* Increment mday, yday, and wday */
         time->tm_hour -= 24;
@@ -347,8 +350,9 @@ ApplySecOffset(PRExplodedTime *time, PRInt32 secOffset)
             }
         }
         time->tm_wday++;
-        if (time->tm_wday > 6)
+        if (time->tm_wday > 6) {
             time->tm_wday = 0;
+}
     }
 }
 
@@ -770,8 +774,9 @@ NthSunday(PRInt32 mday, PRInt32 wday, PRInt32 N, PRInt32 ndays)
 {
     PRInt32 firstSun = firstSunday(mday, wday);
 
-    if (N < 0) 
+    if (N < 0) { 
         N = (ndays - firstSun) / 7;
+}
     return firstSun + (7 * N);
 }
 
@@ -983,7 +988,8 @@ PR_ParseTimeStringToExplodedTime(
   int iterations = 0;
 
   PR_ASSERT(string && result);
-  if (!string || !result) return PR_FAILURE;
+  if (!string || !result) { return PR_FAILURE;
+}
 
   while (*rest)
         {
@@ -998,176 +1004,192 @@ PR_ParseTimeStringToExplodedTime(
                 case 'a': case 'A':
                   if (month == TT_UNKNOWN &&
                           (rest[1] == 'p' || rest[1] == 'P') &&
-                          (rest[2] == 'r' || rest[2] == 'R'))
+                          (rest[2] == 'r' || rest[2] == 'R')) {
                         month = TT_APR;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 's' || rest[1] == 'S') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_AST;
-                  else if (month == TT_UNKNOWN &&
+                  } else if (month == TT_UNKNOWN &&
                                    (rest[1] == 'u' || rest[1] == 'U') &&
-                                   (rest[2] == 'g' || rest[2] == 'G'))
+                                   (rest[2] == 'g' || rest[2] == 'G')) {
                         month = TT_AUG;
+}
                   break;
                 case 'b': case 'B':
                   if (zone == TT_UNKNOWN &&
                           (rest[1] == 's' || rest[1] == 'S') &&
-                          (rest[2] == 't' || rest[2] == 'T'))
+                          (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_BST;
+}
                   break;
                 case 'c': case 'C':
                   if (zone == TT_UNKNOWN &&
                           (rest[1] == 'd' || rest[1] == 'D') &&
-                          (rest[2] == 't' || rest[2] == 'T'))
+                          (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_CDT;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 's' || rest[1] == 'S') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_CST;
+}
                   break;
                 case 'd': case 'D':
                   if (month == TT_UNKNOWN &&
                           (rest[1] == 'e' || rest[1] == 'E') &&
-                          (rest[2] == 'c' || rest[2] == 'C'))
+                          (rest[2] == 'c' || rest[2] == 'C')) {
                         month = TT_DEC;
+}
                   break;
                 case 'e': case 'E':
                   if (zone == TT_UNKNOWN &&
                           (rest[1] == 'd' || rest[1] == 'D') &&
-                          (rest[2] == 't' || rest[2] == 'T'))
+                          (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_EDT;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 'e' || rest[1] == 'E') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_EET;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 's' || rest[1] == 'S') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_EST;
+}
                   break;
                 case 'f': case 'F':
                   if (month == TT_UNKNOWN &&
                           (rest[1] == 'e' || rest[1] == 'E') &&
-                          (rest[2] == 'b' || rest[2] == 'B'))
+                          (rest[2] == 'b' || rest[2] == 'B')) {
                         month = TT_FEB;
-                  else if (dotw == TT_UNKNOWN &&
+                  } else if (dotw == TT_UNKNOWN &&
                                    (rest[1] == 'r' || rest[1] == 'R') &&
-                                   (rest[2] == 'i' || rest[2] == 'I'))
+                                   (rest[2] == 'i' || rest[2] == 'I')) {
                         dotw = TT_FRI;
+}
                   break;
                 case 'g': case 'G':
                   if (zone == TT_UNKNOWN &&
                           (rest[1] == 'm' || rest[1] == 'M') &&
-                          (rest[2] == 't' || rest[2] == 'T'))
+                          (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_GMT;
+}
                   break;
                 case 'j': case 'J':
                   if (month == TT_UNKNOWN &&
                           (rest[1] == 'a' || rest[1] == 'A') &&
-                          (rest[2] == 'n' || rest[2] == 'N'))
+                          (rest[2] == 'n' || rest[2] == 'N')) {
                         month = TT_JAN;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 's' || rest[1] == 'S') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_JST;
-                  else if (month == TT_UNKNOWN &&
+                  } else if (month == TT_UNKNOWN &&
                                    (rest[1] == 'u' || rest[1] == 'U') &&
-                                   (rest[2] == 'l' || rest[2] == 'L'))
+                                   (rest[2] == 'l' || rest[2] == 'L')) {
                         month = TT_JUL;
-                  else if (month == TT_UNKNOWN &&
+                  } else if (month == TT_UNKNOWN &&
                                    (rest[1] == 'u' || rest[1] == 'U') &&
-                                   (rest[2] == 'n' || rest[2] == 'N'))
+                                   (rest[2] == 'n' || rest[2] == 'N')) {
                         month = TT_JUN;
+}
                   break;
                 case 'm': case 'M':
                   if (month == TT_UNKNOWN &&
                           (rest[1] == 'a' || rest[1] == 'A') &&
-                          (rest[2] == 'r' || rest[2] == 'R'))
+                          (rest[2] == 'r' || rest[2] == 'R')) {
                         month = TT_MAR;
-                  else if (month == TT_UNKNOWN &&
+                  } else if (month == TT_UNKNOWN &&
                                    (rest[1] == 'a' || rest[1] == 'A') &&
-                                   (rest[2] == 'y' || rest[2] == 'Y'))
+                                   (rest[2] == 'y' || rest[2] == 'Y')) {
                         month = TT_MAY;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 'd' || rest[1] == 'D') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_MDT;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 'e' || rest[1] == 'E') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_MET;
-                  else if (dotw == TT_UNKNOWN &&
+                  } else if (dotw == TT_UNKNOWN &&
                                    (rest[1] == 'o' || rest[1] == 'O') &&
-                                   (rest[2] == 'n' || rest[2] == 'N'))
+                                   (rest[2] == 'n' || rest[2] == 'N')) {
                         dotw = TT_MON;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 's' || rest[1] == 'S') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_MST;
+}
                   break;
                 case 'n': case 'N':
                   if (month == TT_UNKNOWN &&
                           (rest[1] == 'o' || rest[1] == 'O') &&
-                          (rest[2] == 'v' || rest[2] == 'V'))
+                          (rest[2] == 'v' || rest[2] == 'V')) {
                         month = TT_NOV;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 's' || rest[1] == 'S') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_NST;
+}
                   break;
                 case 'o': case 'O':
                   if (month == TT_UNKNOWN &&
                           (rest[1] == 'c' || rest[1] == 'C') &&
-                          (rest[2] == 't' || rest[2] == 'T'))
+                          (rest[2] == 't' || rest[2] == 'T')) {
                         month = TT_OCT;
+}
                   break;
                 case 'p': case 'P':
                   if (zone == TT_UNKNOWN &&
                           (rest[1] == 'd' || rest[1] == 'D') &&
-                          (rest[2] == 't' || rest[2] == 'T'))
+                          (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_PDT;
-                  else if (zone == TT_UNKNOWN &&
+                  } else if (zone == TT_UNKNOWN &&
                                    (rest[1] == 's' || rest[1] == 'S') &&
-                                   (rest[2] == 't' || rest[2] == 'T'))
+                                   (rest[2] == 't' || rest[2] == 'T')) {
                         zone = TT_PST;
+}
                   break;
                 case 's': case 'S':
                   if (dotw == TT_UNKNOWN &&
                           (rest[1] == 'a' || rest[1] == 'A') &&
-                          (rest[2] == 't' || rest[2] == 'T'))
+                          (rest[2] == 't' || rest[2] == 'T')) {
                         dotw = TT_SAT;
-                  else if (month == TT_UNKNOWN &&
+                  } else if (month == TT_UNKNOWN &&
                                    (rest[1] == 'e' || rest[1] == 'E') &&
-                                   (rest[2] == 'p' || rest[2] == 'P'))
+                                   (rest[2] == 'p' || rest[2] == 'P')) {
                         month = TT_SEP;
-                  else if (dotw == TT_UNKNOWN &&
+                  } else if (dotw == TT_UNKNOWN &&
                                    (rest[1] == 'u' || rest[1] == 'U') &&
-                                   (rest[2] == 'n' || rest[2] == 'N'))
+                                   (rest[2] == 'n' || rest[2] == 'N')) {
                         dotw = TT_SUN;
+}
                   break;
                 case 't': case 'T':
                   if (dotw == TT_UNKNOWN &&
                           (rest[1] == 'h' || rest[1] == 'H') &&
-                          (rest[2] == 'u' || rest[2] == 'U'))
+                          (rest[2] == 'u' || rest[2] == 'U')) {
                         dotw = TT_THU;
-                  else if (dotw == TT_UNKNOWN &&
+                  } else if (dotw == TT_UNKNOWN &&
                                    (rest[1] == 'u' || rest[1] == 'U') &&
-                                   (rest[2] == 'e' || rest[2] == 'E'))
+                                   (rest[2] == 'e' || rest[2] == 'E')) {
                         dotw = TT_TUE;
+}
                   break;
                 case 'u': case 'U':
                   if (zone == TT_UNKNOWN &&
                           (rest[1] == 't' || rest[1] == 'T') &&
                           !(rest[2] >= 'A' && rest[2] <= 'Z') &&
-                          !(rest[2] >= 'a' && rest[2] <= 'z'))
+                          !(rest[2] >= 'a' && rest[2] <= 'z')) {
                         /* UT is the same as GMT but UTx is not. */
                         zone = TT_GMT;
+}
                   break;
                 case 'w': case 'W':
                   if (dotw == TT_UNKNOWN &&
                           (rest[1] == 'e' || rest[1] == 'E') &&
-                          (rest[2] == 'd' || rest[2] == 'D'))
+                          (rest[2] == 'd' || rest[2] == 'D')) {
                         dotw = TT_WED;
+}
                   break;
 
                 case '+': case '-':
@@ -1190,24 +1212,27 @@ PR_ParseTimeStringToExplodedTime(
                         sign = ((*rest == '+') ? 1 : -1);
                         rest++; /* move over sign */
                         end = rest;
-                        while (*end >= '0' && *end <= '9')
+                        while (*end >= '0' && *end <= '9') {
                           end++;
-                        if (rest == end) /* no digits here */
+}
+                        if (rest == end) { /* no digits here */
                           break;
+}
 
-                        if ((end - rest) == 4)
+                        if ((end - rest) == 4) {
                           /* offset in HHMM */
                           zone_offset = (((((rest[0]-'0')*10) + (rest[1]-'0')) * 60) +
                                                          (((rest[2]-'0')*10) + (rest[3]-'0')));
-                        else if ((end - rest) == 2)
+                        } else if ((end - rest) == 2) {
                           /* offset in hours */
                           zone_offset = (((rest[0]-'0')*10) + (rest[1]-'0')) * 60;
-                        else if ((end - rest) == 1)
+                        } else if ((end - rest) == 1) {
                           /* offset in hours */
                           zone_offset = (rest[0]-'0') * 60;
-                        else
+                        } else {
                           /* 3 or >4 */
                           break;
+}
 
                         zone_offset *= sign;
                         zone = TT_GMT;
@@ -1221,63 +1246,75 @@ PR_ParseTimeStringToExplodedTime(
                         int tmp_min = -1;
                         int tmp_sec = -1;
                         const char *end = rest + 1;
-                        while (*end >= '0' && *end <= '9')
+                        while (*end >= '0' && *end <= '9') {
                           end++;
+}
 
                         /* end is now the first character after a range of digits. */
 
                         if (*end == ':')
                           {
-                                if (hour >= 0 && min >= 0) /* already got it */
+                                if (hour >= 0 && min >= 0) { /* already got it */
                                   break;
+}
 
                                 /* We have seen "[0-9]+:", so this is probably HH:MM[:SS] */
-                                if ((end - rest) > 2)
+                                if ((end - rest) > 2) {
                                   /* it is [0-9][0-9][0-9]+: */
                                   break;
-                                if ((end - rest) == 2)
+}
+                                if ((end - rest) == 2) {
                                   tmp_hour = ((rest[0]-'0')*10 +
                                                           (rest[1]-'0'));
-                                else
+                                } else {
                                   tmp_hour = (rest[0]-'0');
+}
 
                                 /* move over the colon, and parse minutes */
 
                                 rest = ++end;
-                                while (*end >= '0' && *end <= '9')
+                                while (*end >= '0' && *end <= '9') {
                                   end++;
+}
 
-                                if (end == rest)
+                                if (end == rest) {
                                   /* no digits after first colon? */
                                   break;
-                                if ((end - rest) > 2)
+}
+                                if ((end - rest) > 2) {
                                   /* it is [0-9][0-9][0-9]+: */
                                   break;
-                                if ((end - rest) == 2)
+}
+                                if ((end - rest) == 2) {
                                   tmp_min = ((rest[0]-'0')*10 +
                                              (rest[1]-'0'));
-                                else
+                                } else {
                                   tmp_min = (rest[0]-'0');
+}
 
                                 /* now go for seconds */
                                 rest = end;
-                                if (*rest == ':')
+                                if (*rest == ':') {
                                   rest++;
+}
                                 end = rest;
-                                while (*end >= '0' && *end <= '9')
+                                while (*end >= '0' && *end <= '9') {
                                   end++;
+}
 
-                                if (end == rest)
+                                if (end == rest) {
                                   /* no digits after second colon - that's ok. */
                                   ;
-                                else if ((end - rest) > 2)
+                                } else if ((end - rest) > 2) {
                                   /* it is [0-9][0-9][0-9]+: */
                                   break;
-                                if ((end - rest) == 2)
+}
+                                if ((end - rest) == 2) {
                                   tmp_sec = ((rest[0]-'0')*10 +
                                                          (rest[1]-'0'));
-                                else
+                                } else {
                                   tmp_sec = (rest[0]-'0');
+}
 
                                 /* If we made it here, we've parsed hour and min,
                                    and possibly sec, so it worked as a unit. */
@@ -1288,17 +1325,19 @@ PR_ParseTimeStringToExplodedTime(
                                 if (tmp_hour <= 12)
                                   {
                                         const char *s = end;
-                                        while (*s && (*s == ' ' || *s == '\t'))
+                                        while (*s && (*s == ' ' || *s == '\t')) {
                                           s++;
+}
                                         if ((s[0] == 'p' || s[0] == 'P') &&
-                                                (s[1] == 'm' || s[1] == 'M'))
+                                                (s[1] == 'm' || s[1] == 'M')) {
                                           /* 10:05pm == 22:05, and 12:05pm == 12:05 */
                                           tmp_hour = (tmp_hour == 12 ? 12 : tmp_hour + 12);
-                                        else if (tmp_hour == 12 &&
+                                        } else if (tmp_hour == 12 &&
                                                          (s[0] == 'a' || s[0] == 'A') &&
-                                                         (s[1] == 'm' || s[1] == 'M'))
+                                                         (s[1] == 'm' || s[1] == 'M')) {
                                           /* 12:05am == 00:05 */
                                           tmp_hour = 0;
+}
                                   }
 
                                 hour = tmp_hour;
@@ -1317,50 +1356,61 @@ PR_ParseTimeStringToExplodedTime(
                                 int n1, n2, n3;
                                 const char *s;
 
-                                if (month != TT_UNKNOWN)
+                                if (month != TT_UNKNOWN) {
                                   /* if we saw a month name, this can't be. */
                                   break;
+}
 
                                 s = rest;
 
                                 n1 = (*s++ - '0');                                /* first 1 or 2 digits */
-                                if (*s >= '0' && *s <= '9')
+                                if (*s >= '0' && *s <= '9') {
                                   n1 = n1*10 + (*s++ - '0');
+}
 
-                                if (*s != '/' && *s != '-')                /* slash */
+                                if (*s != '/' && *s != '-') {                /* slash */
                                   break;
+}
                                 s++;
 
-                                if (*s < '0' || *s > '9')                /* second 1 or 2 digits */
+                                if (*s < '0' || *s > '9') {                /* second 1 or 2 digits */
                                   break;
+}
                                 n2 = (*s++ - '0');
-                                if (*s >= '0' && *s <= '9')
+                                if (*s >= '0' && *s <= '9') {
                                   n2 = n2*10 + (*s++ - '0');
+}
 
-                                if (*s != '/' && *s != '-')                /* slash */
+                                if (*s != '/' && *s != '-') {                /* slash */
                                   break;
+}
                                 s++;
 
-                                if (*s < '0' || *s > '9')                /* third 1, 2, 4, or 5 digits */
+                                if (*s < '0' || *s > '9') {                /* third 1, 2, 4, or 5 digits */
                                   break;
+}
                                 n3 = (*s++ - '0');
-                                if (*s >= '0' && *s <= '9')
+                                if (*s >= '0' && *s <= '9') {
                                   n3 = n3*10 + (*s++ - '0');
+}
 
                                 if (*s >= '0' && *s <= '9')            /* optional digits 3, 4, and 5 */
                                   {
                                         n3 = n3*10 + (*s++ - '0');
-                                        if (*s < '0' || *s > '9')
+                                        if (*s < '0' || *s > '9') {
                                           break;
+}
                                         n3 = n3*10 + (*s++ - '0');
-                                        if (*s >= '0' && *s <= '9')
+                                        if (*s >= '0' && *s <= '9') {
                                           n3 = n3*10 + (*s++ - '0');
+}
                                   }
 
                                 if ((*s >= '0' && *s <= '9') ||        /* followed by non-alphanum */
                                         (*s >= 'A' && *s <= 'Z') ||
-                                        (*s >= 'a' && *s <= 'z'))
+                                        (*s >= 'a' && *s <= 'z')) {
                                   break;
+}
 
                                 /* Ok, we parsed three 1-2 digit numbers, with / or -
                                    between them.  Now decide what the hell they are
@@ -1369,13 +1419,16 @@ PR_ParseTimeStringToExplodedTime(
 
                                 if (n1 > 31 || n1 == 0)  /* must be YY/MM/DD */
                                   {
-                                        if (n2 > 12) break;
-                                        if (n3 > 31) break;
+                                        if (n2 > 12) { break;
+}
+                                        if (n3 > 31) { break;
+}
                                         year = n1;
-                                        if (year < 70)
+                                        if (year < 70) {
                                             year += 2000;
-                                        else if (year < 100)
+                                        } else if (year < 100) {
                                             year += 1900;
+}
                                         month = (TIME_TOKEN)(n2 + ((int)TT_JAN) - 1);
                                         date = n3;
                                         rest = s;
@@ -1388,10 +1441,11 @@ PR_ParseTimeStringToExplodedTime(
                                         break;
                                   }
 
-                                if (n3 < 70)
+                                if (n3 < 70) {
                                     n3 += 2000;
-                                else if (n3 < 100)
+                                } else if (n3 < 100) {
                                     n3 += 1900;
+}
 
                                 if (n1 > 12)  /* must be DD/MM/YY */
                                   {
@@ -1410,10 +1464,10 @@ PR_ParseTimeStringToExplodedTime(
                                 rest = s;
                           }
                         else if ((*end >= 'A' && *end <= 'Z') ||
-                                         (*end >= 'a' && *end <= 'z'))
+                                         (*end >= 'a' && *end <= 'z')) {
                           /* Digits followed by non-punctuation - what's that? */
                           ;
-                        else if ((end - rest) == 5)                /* five digits is a year */
+                        } else if ((end - rest) == 5) {                /* five digits is a year */
                           year = (year < 0
                                           ? ((rest[0]-'0')*10000L +
                                                  (rest[1]-'0')*1000L +
@@ -1421,14 +1475,14 @@ PR_ParseTimeStringToExplodedTime(
                                                  (rest[3]-'0')*10L +
                                                  (rest[4]-'0'))
                                           : year);
-                        else if ((end - rest) == 4)                /* four digits is a year */
+                        } else if ((end - rest) == 4) {                /* four digits is a year */
                           year = (year < 0
                                           ? ((rest[0]-'0')*1000L +
                                                  (rest[1]-'0')*100L +
                                                  (rest[2]-'0')*10L +
                                                  (rest[3]-'0'))
                                           : year);
-                        else if ((end - rest) == 2)                /* two digits - date or year */
+                        } else if ((end - rest) == 2)                /* two digits - date or year */
                           {
                                 int n = ((rest[0]-'0')*10 +
                                                  (rest[1]-'0'));
@@ -1442,21 +1496,23 @@ PR_ParseTimeStringToExplodedTime(
 
                                          The world will surely end soon.
                                    */
-                                if (date < 0 && n < 32)
+                                if (date < 0 && n < 32) {
                                   date = n;
-                                else if (year < 0)
+                                } else if (year < 0)
                                   {
-                                        if (n < 70)
+                                        if (n < 70) {
                                           year = 2000 + n;
-                                        else if (n < 100)
+                                        } else if (n < 100) {
                                           year = 1900 + n;
-                                        else
+                                        } else {
                                           year = n;
+}
                                   }
                                 /* else what the hell is this. */
                           }
-                        else if ((end - rest) == 1)                /* one digit - date */
+                        else if ((end - rest) == 1) {                /* one digit - date */
                           date = (date < 0 ? (rest[0]-'0') : date);
+}
                         /* else, three or more than five digits - what's that? */
 
                         break;
@@ -1472,15 +1528,17 @@ PR_ParseTimeStringToExplodedTime(
                          *rest != ',' && *rest != ';' &&
                          *rest != '-' && *rest != '+' &&
                          *rest != '/' &&
-                         *rest != '(' && *rest != ')' && *rest != '[' && *rest != ']')
+                         *rest != '(' && *rest != ')' && *rest != '[' && *rest != ']') {
                 rest++;
+}
           /* skip over uninteresting chars. */
         SKIP_MORE:
           while (*rest &&
                          (*rest == ' ' || *rest == '\t' ||
                           *rest == ',' || *rest == ';' || *rest == '/' ||
-                          *rest == '(' || *rest == ')' || *rest == '[' || *rest == ']'))
+                          *rest == '(' || *rest == ')' || *rest == '[' || *rest == ']')) {
                 rest++;
+}
 
           /* "-" is ignored at the beginning of a token if we have not yet
                  parsed a year (e.g., the second "-" in "30-AUG-1966"), or if
@@ -1524,24 +1582,32 @@ PR_ParseTimeStringToExplodedTime(
          possibly parse this, and in fact, mktime() will do something random
          (I'm seeing it return "Tue Feb  5 06:28:16 2036", which is no doubt
          a numerologically significant date... */
-  if (month == TT_UNKNOWN || date == -1 || year == -1 || year > PR_INT16_MAX)
+  if (month == TT_UNKNOWN || date == -1 || year == -1 || year > PR_INT16_MAX) {
       return PR_FAILURE;
+}
 
   memset(result, 0, sizeof(*result));
-  if (sec != -1)
+  if (sec != -1) {
         result->tm_sec = sec;
-  if (min != -1)
+}
+  if (min != -1) {
         result->tm_min = min;
-  if (hour != -1)
+}
+  if (hour != -1) {
         result->tm_hour = hour;
-  if (date != -1)
+}
+  if (date != -1) {
         result->tm_mday = date;
-  if (month != TT_UNKNOWN)
+}
+  if (month != TT_UNKNOWN) {
         result->tm_month = (((int)month) - ((int)TT_JAN));
-  if (year != -1)
+}
+  if (year != -1) {
         result->tm_year = year;
-  if (dotw != TT_UNKNOWN)
+}
+  if (dotw != TT_UNKNOWN) {
         result->tm_wday = (((int)dotw) - ((int)TT_SUN));
+}
   /*
    * Mainly to compute wday and yday, but normalized time is also required
    * by the check below that works around a Visual C++ 2005 mktime problem.
@@ -1666,8 +1732,9 @@ PR_ParseTimeString(
   rv = PR_ParseTimeStringToExplodedTime(string,
                                         default_to_gmt,
                                         &tm);
-  if (rv != PR_SUCCESS)
+  if (rv != PR_SUCCESS) {
         return rv;
+}
 
   *result = PR_ImplodeTime(&tm);
 
@@ -2011,8 +2078,9 @@ pr_WeekOfYear(const PRExplodedTime* time, unsigned int firstDayOfWeek)
    * first day of the week containing the given time.
    */
   dayOfWeek = time->tm_wday - firstDayOfWeek;
-  if (dayOfWeek < 0)
+  if (dayOfWeek < 0) {
     dayOfWeek += 7;
+}
 
   dayOfYear = time->tm_yday - dayOfWeek;
 

@@ -22,8 +22,9 @@ ECGroup_new()
     mp_err res = MP_OKAY;
     ECGroup *group;
     group = (ECGroup *)malloc(sizeof(ECGroup));
-    if (group == NULL)
+    if (group == NULL) {
         return NULL;
+}
     group->constructed = MP_YES;
     group->meth = NULL;
     group->text = NULL;
@@ -62,8 +63,9 @@ ECGroup_consGFp(const mp_int *irr, const mp_int *curvea,
     ECGroup *group = NULL;
 
     group = ECGroup_new();
-    if (group == NULL)
+    if (group == NULL) {
         return NULL;
+}
 
     group->meth = GFMethod_consGFp(irr);
     if (group->meth == NULL) {
@@ -103,8 +105,9 @@ ECGroup_consGFp_mont(const mp_int *irr, const mp_int *curvea,
     ECGroup *group = NULL;
 
     group = ECGroup_new();
-    if (group == NULL)
+    if (group == NULL) {
         return NULL;
+}
 
     group->meth = GFMethod_consGFp_mont(irr);
     if (group->meth == NULL) {
@@ -300,19 +303,23 @@ ECPoint_validate(const ECGroup *group, const mp_int *px, const mp_int *py)
 void
 ECGroup_free(ECGroup *group)
 {
-    if (group == NULL)
+    if (group == NULL) {
         return;
+}
     GFMethod_free(group->meth);
-    if (group->constructed == MP_NO)
+    if (group->constructed == MP_NO) {
         return;
+}
     mp_clear(&group->curvea);
     mp_clear(&group->curveb);
     mp_clear(&group->genx);
     mp_clear(&group->geny);
     mp_clear(&group->order);
-    if (group->text != NULL)
+    if (group->text != NULL) {
         free(group->text);
-    if (group->extra_free != NULL)
+}
+    if (group->extra_free != NULL) {
         group->extra_free(group);
+}
     free(group);
 }

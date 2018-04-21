@@ -89,21 +89,24 @@ LoadGtkModule(GnomeAccessibilityModule& aModule)
         int16_t subLen = 0;
         while (loc2 >= 0) {
             loc2 = libPath.FindChar(':', loc1);
-            if (loc2 < 0)
+            if (loc2 < 0) {
                 subLen = libPath.Length() - loc1;
-            else
+            } else {
                 subLen = loc2 - loc1;
+}
             nsAutoCString sub(Substring(libPath, loc1, subLen));
             sub.AppendLiteral("/gtk-3.0/modules/");
             sub.Append(aModule.libName);
             aModule.lib = PR_LoadLibrary(sub.get());
-            if (aModule.lib)
+            if (aModule.lib) {
                 break;
+}
 
             loc1 = loc2+1;
         }
-        if (!aModule.lib)
+        if (!aModule.lib) {
             return NS_ERROR_FAILURE;
+}
     }
 
     //we have loaded the library, try to get the function ptrs
@@ -123,17 +126,20 @@ LoadGtkModule(GnomeAccessibilityModule& aModule)
 void
 a11y::PlatformInit()
 {
-  if (!ShouldA11yBeEnabled())
+  if (!ShouldA11yBeEnabled()) {
     return;
+}
 
   sATKLib = PR_LoadLibrary(sATKLibName);
-  if (!sATKLib)
+  if (!sATKLib) {
     return;
+}
 
   AtkGetTypeType pfn_atk_hyperlink_impl_get_type =
     (AtkGetTypeType) PR_FindFunctionSymbol(sATKLib, sATKHyperlinkImplGetTypeSymbol);
-  if (pfn_atk_hyperlink_impl_get_type)
+  if (pfn_atk_hyperlink_impl_get_type) {
     g_atk_hyperlink_impl_type = pfn_atk_hyperlink_impl_get_type();
+}
 
   AtkGetTypeType pfn_atk_socket_get_type = (AtkGetTypeType)
     PR_FindFunctionSymbol(sATKLib, AtkSocketAccessible::sATKSocketGetTypeSymbol);
@@ -158,8 +164,9 @@ a11y::PlatformInit()
       atkMajorVersion = strtol(version, &endPtr, 10);
       if (atkMajorVersion != 0L) {
         atkMinorVersion = strtol(endPtr + 1, &endPtr, 10);
-        if (atkMinorVersion != 0L)
+        if (atkMinorVersion != 0L) {
           atkMicroVersion = strtol(endPtr + 1, &endPtr, 10);
+}
       }
     }
   }
@@ -233,8 +240,9 @@ a11y::PreInit()
 {
 #ifdef MOZ_ENABLE_DBUS
   static bool sChecked = FALSE;
-  if (sChecked)
+  if (sChecked) {
     return;
+}
 
   sChecked = TRUE;
 
@@ -242,12 +250,14 @@ a11y::PreInit()
   // also make sure that a session bus address is available to prevent dbus from
   // starting a new one.  Dbus confuses the test harness when it creates a new
   // process (see bug 693343)
-  if (PR_GetEnv(sAccEnv) || !PR_GetEnv("DBUS_SESSION_BUS_ADDRESS"))
+  if (PR_GetEnv(sAccEnv) || !PR_GetEnv("DBUS_SESSION_BUS_ADDRESS")) {
     return;
+}
 
   DBusConnection* bus = dbus_bus_get(DBUS_BUS_SESSION, nullptr);
-  if (!bus)
+  if (!bus) {
     return;
+}
 
   dbus_connection_set_exit_on_disconnect(bus, FALSE);
 
@@ -257,8 +267,9 @@ a11y::PreInit()
   message = dbus_message_new_method_call("org.a11y.Bus", "/org/a11y/bus",
                                          "org.freedesktop.DBus.Properties",
                                          "Get");
-  if (!message)
+  if (!message) {
     goto dbus_done;
+}
 
   dbus_message_append_args(message, DBUS_TYPE_STRING, &iface,
                            DBUS_TYPE_STRING, &member, DBUS_TYPE_INVALID);
@@ -274,26 +285,30 @@ bool
 a11y::ShouldA11yBeEnabled()
 {
   static bool sChecked = false, sShouldEnable = false;
-  if (sChecked)
+  if (sChecked) {
     return sShouldEnable;
+}
 
   sChecked = true;
 
   EPlatformDisabledState disabledState = PlatformDisabledState();
-  if (disabledState == ePlatformIsDisabled)
+  if (disabledState == ePlatformIsDisabled) {
     return sShouldEnable = false;
+}
 
   // check if accessibility enabled/disabled by environment variable
   const char* envValue = PR_GetEnv(sAccEnv);
-  if (envValue)
+  if (envValue) {
     return sShouldEnable = !!atoi(envValue);
+}
 
 #ifdef MOZ_ENABLE_DBUS
   PreInit();
   bool dbusSuccess = false;
   DBusMessage *reply = nullptr;
-  if (!sPendingCall)
+  if (!sPendingCall) {
     goto dbus_done;
+}
 
   dbus_pending_call_block(sPendingCall);
   reply = dbus_pending_call_steal_reply(sPendingCall);
@@ -301,8 +316,9 @@ a11y::ShouldA11yBeEnabled()
   sPendingCall = nullptr;
   if (!reply ||
       dbus_message_get_type(reply) != DBUS_MESSAGE_TYPE_METHOD_RETURN ||
-      strcmp(dbus_message_get_signature (reply), DBUS_TYPE_VARIANT_AS_STRING))
+      strcmp(dbus_message_get_signature (reply), DBUS_TYPE_VARIANT_AS_STRING)) {
     goto dbus_done;
+}
 
   DBusMessageIter iter, iter_variant, iter_struct;
   dbus_bool_t dResult;
@@ -329,11 +345,13 @@ a11y::ShouldA11yBeEnabled()
   }
 
 dbus_done:
-  if (reply)
+  if (reply) {
     dbus_message_unref(reply);
+}
 
-  if (dbusSuccess)
+  if (dbusSuccess) {
     return sShouldEnable;
+}
 #endif
 
   //check gconf-2 setting
@@ -341,8 +359,9 @@ dbus_done:
   nsresult rv = NS_OK;
   nsCOMPtr<nsIGConfService> gconf =
     do_GetService(NS_GCONFSERVICE_CONTRACTID, &rv);
-  if (NS_SUCCEEDED(rv) && gconf)
+  if (NS_SUCCEEDED(rv) && gconf) {
     gconf->GetBool(NS_LITERAL_CSTRING(GCONF_A11Y_KEY), &sShouldEnable);
+}
 
   return sShouldEnable;
 }

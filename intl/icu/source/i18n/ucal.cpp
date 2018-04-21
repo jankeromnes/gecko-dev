@@ -138,7 +138,8 @@ ucal_open(  const UChar*  zoneID,
             UErrorCode*   status)
 {
 
-  if(U_FAILURE(*status)) return 0;
+  if(U_FAILURE(*status)) { return 0;
+}
   
   TimeZone* zone = (zoneID==NULL) ? TimeZone::createDefault()
       : _createTimeZone(zoneID, len, status);
@@ -173,7 +174,8 @@ U_CAPI UCalendar* U_EXPORT2
 ucal_clone(const UCalendar* cal,
            UErrorCode*      status)
 {
-  if(U_FAILURE(*status)) return 0;
+  if(U_FAILURE(*status)) { return 0;
+}
   
   Calendar* res = ((Calendar*)cal)->clone();
 
@@ -192,8 +194,9 @@ ucal_setTimeZone(    UCalendar*      cal,
             UErrorCode *status)
 {
 
-  if(U_FAILURE(*status))
+  if(U_FAILURE(*status)) {
     return;
+}
 
   TimeZone* zone = (zoneID==NULL) ? TimeZone::createDefault()
       : _createTimeZone(zoneID, len, status);
@@ -227,7 +230,8 @@ ucal_getTimeZoneDisplayName(const     UCalendar*                 cal,
                     UErrorCode*             status)
 {
 
-    if(U_FAILURE(*status)) return -1;
+    if(U_FAILURE(*status)) { return -1;
+}
 
     const TimeZone& tz = ((Calendar*)cal)->getTimeZone();
     UnicodeString id;
@@ -263,7 +267,8 @@ ucal_inDaylightTime(    const    UCalendar*      cal,
                     UErrorCode*     status )
 {
 
-    if(U_FAILURE(*status)) return (UBool) -1;
+    if(U_FAILURE(*status)) { return (UBool) -1;
+}
     return ((Calendar*)cal)->inDaylightTime(*status);
 }
 
@@ -387,7 +392,8 @@ ucal_getMillis(    const    UCalendar*      cal,
                UErrorCode*     status)
 {
 
-    if(U_FAILURE(*status)) return (UDate) 0;
+    if(U_FAILURE(*status)) { return (UDate) 0;
+}
 
     return ((Calendar*)cal)->getTime(*status);
 }
@@ -397,7 +403,8 @@ ucal_setMillis(        UCalendar*      cal,
                UDate           dateTime,
                UErrorCode*     status )
 {
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
 
     ((Calendar*)cal)->setTime(dateTime, *status);
 }
@@ -411,7 +418,8 @@ ucal_setDate(        UCalendar*        cal,
              UErrorCode        *status)
 {
 
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
 
     ((Calendar*)cal)->set(year, month, date);
 }
@@ -427,7 +435,8 @@ ucal_setDateTime(    UCalendar*        cal,
                  int32_t            second,
                  UErrorCode        *status)
 {
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
 
     ((Calendar*)cal)->set(year, month, date, hour, minute, second);
 }
@@ -447,7 +456,8 @@ ucal_add(    UCalendar*                cal,
          UErrorCode*                status)
 {
 
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
 
     ((Calendar*)cal)->add(field, amount, *status);
 }
@@ -459,7 +469,8 @@ ucal_roll(        UCalendar*            cal,
           UErrorCode*            status)
 {
 
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
 
     ((Calendar*)cal)->roll(field, amount, *status);
 }
@@ -470,7 +481,8 @@ ucal_get(    const    UCalendar*                cal,
          UErrorCode*                status )
 {
 
-    if(U_FAILURE(*status)) return -1;
+    if(U_FAILURE(*status)) { return -1;
+}
 
     return ((Calendar*)cal)->get(field, *status);
 }

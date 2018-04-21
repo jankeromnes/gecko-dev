@@ -75,12 +75,14 @@ smime_mapi_by_cipher(unsigned long cipher)
     int i;
 
     for (i = 0; i < smime_symmetric_count; i++) {
-        if (smime_cipher_maps[i].cipher == cipher)
+        if (smime_cipher_maps[i].cipher == cipher) {
             break;
+}
     }
 
-    if (i == smime_symmetric_count)
+    if (i == smime_symmetric_count) {
         return -1;
+}
 
     return i;
 }
@@ -98,8 +100,9 @@ SECMIME_EnableCipher(long which, int on)
          * This is either the very first time, or we are starting over.
          */
         smime_newprefs = (unsigned long *)PORT_ZAlloc(smime_symmetric_count * sizeof(*smime_newprefs));
-        if (smime_newprefs == NULL)
+        if (smime_newprefs == NULL) {
             return SECFailure;
+}
         smime_current_pref_index = 0;
         smime_prefs_complete = PR_FALSE;
     }
@@ -113,10 +116,11 @@ SECMIME_EnableCipher(long which, int on)
          */
         if (smime_prefs != NULL) {
             if (PORT_Memcmp(smime_prefs, smime_newprefs,
-                            smime_symmetric_count * sizeof(*smime_prefs)) == 0)
+                            smime_symmetric_count * sizeof(*smime_prefs)) == 0) {
                 smime_prefs_changed = PR_FALSE;
-            else
+            } else {
                 smime_prefs_changed = PR_TRUE;
+}
             PORT_Free(smime_prefs);
         }
 
@@ -228,12 +232,14 @@ smime_cipher_allowed(unsigned long which)
 
     which &= ~CIPHER_FAMILYID_MASK;
     PORT_Assert(which < 32); /* bits per long (min) */
-    if (which >= 32)
+    if (which >= 32) {
         return PR_FALSE;
+}
 
     mask = 1UL << which;
-    if ((mask & smime_policy_bits) == 0)
+    if ((mask & smime_policy_bits) == 0) {
         return PR_FALSE;
+}
 
     return PR_TRUE;
 }
@@ -244,8 +250,9 @@ SECMIME_DecryptionAllowed(SECAlgorithmID *algid, PK11SymKey *key)
     long which;
 
     which = smime_policy_algorithm(algid, key);
-    if (which < 0)
+    if (which < 0) {
         return PR_FALSE;
+}
 
     return smime_cipher_allowed((unsigned long)which);
 }
@@ -271,8 +278,9 @@ SECMIME_DecryptionAllowed(SECAlgorithmID *algid, PK11SymKey *key)
 PRBool
 SECMIME_EncryptionPossible(void)
 {
-    if (smime_policy_bits != 0)
+    if (smime_policy_bits != 0) {
         return PR_TRUE;
+}
 
     return PR_FALSE;
 }
@@ -313,31 +321,36 @@ smime_fill_capability(smime_capability *cap)
     algtag = SECOID_FindOIDTag(&(cap->capabilityID));
 
     for (i = 0; i < smime_symmetric_count; i++) {
-        if (smime_cipher_maps[i].algtag != algtag)
+        if (smime_cipher_maps[i].algtag != algtag) {
             continue;
+}
         /*
          * XXX If SECITEM_CompareItem allowed NULLs as arguments (comparing
          * 2 NULLs as equal and NULL and non-NULL as not equal), we could
          * use that here instead of all of the following comparison code.
          */
         if (cap->parameters.data != NULL) {
-            if (smime_cipher_maps[i].parms == NULL)
+            if (smime_cipher_maps[i].parms == NULL) {
                 continue;
-            if (cap->parameters.len != smime_cipher_maps[i].parms->len)
+}
+            if (cap->parameters.len != smime_cipher_maps[i].parms->len) {
                 continue;
+}
             if (PORT_Memcmp(cap->parameters.data,
                             smime_cipher_maps[i].parms->data,
-                            cap->parameters.len) == 0)
+                            cap->parameters.len) == 0) {
                 break;
+}
         } else if (smime_cipher_maps[i].parms == NULL) {
             break;
         }
     }
 
-    if (i == smime_symmetric_count)
+    if (i == smime_symmetric_count) {
         cipher = 0;
-    else
+    } else {
         cipher = smime_cipher_maps[i].cipher;
+}
 
     cap->cipher = cipher;
     cap->capIDTag = algtag;
@@ -361,18 +374,21 @@ smime_choose_cipher(CERTCertificate *scert, CERTCertificate **rcerts)
     chosen_cipher = SMIME_RC2_CBC_40; /* the default, LCD */
 
     poolp = PORT_NewArena(1024); /* XXX what is right value? */
-    if (poolp == NULL)
+    if (poolp == NULL) {
         goto done;
+}
 
     cipher_abilities = (int *)PORT_ArenaZAlloc(poolp,
                                                smime_symmetric_count * sizeof(int));
-    if (cipher_abilities == NULL)
+    if (cipher_abilities == NULL) {
         goto done;
+}
 
     cipher_votes = (int *)PORT_ArenaZAlloc(poolp,
                                            smime_symmetric_count * sizeof(int));
-    if (cipher_votes == NULL)
+    if (cipher_votes == NULL) {
         goto done;
+}
 
     /*
      * XXX Should have a #define somewhere which specifies default
@@ -430,16 +446,19 @@ smime_choose_cipher(CERTCertificate *scert, CERTCertificate **rcerts)
                 }
             }
         }
-        if (profile != NULL)
+        if (profile != NULL) {
             SECITEM_FreeItem(profile, PR_TRUE);
+}
     }
 
     max = 0;
     for (mapi = 0; mapi < smime_symmetric_count; mapi++) {
-        if (cipher_abilities[mapi] != rcount)
+        if (cipher_abilities[mapi] != rcount) {
             continue;
-        if (!smime_cipher_allowed(smime_cipher_maps[mapi].cipher))
+}
+        if (!smime_cipher_allowed(smime_cipher_maps[mapi].cipher)) {
             continue;
+}
         if (cipher_votes[mapi] > max) {
             chosen_cipher = smime_cipher_maps[mapi].cipher;
             max = cipher_votes[mapi];
@@ -447,8 +466,9 @@ smime_choose_cipher(CERTCertificate *scert, CERTCertificate **rcerts)
     }
 
 done:
-    if (poolp != NULL)
+    if (poolp != NULL) {
         PORT_FreeArena(poolp, PR_FALSE);
+}
 
     return chosen_cipher;
 }
@@ -530,12 +550,14 @@ SECMIME_CreateEncrypted(CERTCertificate *scert,
     int mapi, rci;
 
     cipher = smime_choose_cipher(scert, rcerts);
-    if (cipher < 0)
+    if (cipher < 0) {
         return NULL;
+}
 
     mapi = smime_mapi_by_cipher(cipher);
-    if (mapi < 0)
+    if (mapi < 0) {
         return NULL;
+}
 
     /*
      * XXX This is stretching it -- CreateEnvelopedData should probably
@@ -547,18 +569,21 @@ SECMIME_CreateEncrypted(CERTCertificate *scert,
      */
     encalg = smime_cipher_maps[mapi].algtag;
     keysize = smime_keysize_by_cipher(cipher);
-    if (keysize < 0)
+    if (keysize < 0) {
         return NULL;
+}
 
     cinfo = SEC_PKCS7CreateEnvelopedData(scert, certUsageEmailRecipient,
                                          certdb, encalg, keysize,
                                          pwfn, pwfn_arg);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
     for (rci = 0; rcerts[rci] != NULL; rci++) {
-        if (rcerts[rci] == scert)
+        if (rcerts[rci] == scert) {
             continue;
+}
         if (SEC_PKCS7AddRecipient(cinfo, rcerts[rci], certUsageEmailRecipient,
                                   NULL) != SECSuccess) {
             SEC_PKCS7DestroyContentInfo(cinfo);
@@ -581,8 +606,9 @@ smime_init_caps(void)
     SECStatus rv;
     int i;
 
-    if (smime_encoded_caps != NULL && (!smime_prefs_changed))
+    if (smime_encoded_caps != NULL && (!smime_prefs_changed)) {
         return SECSuccess;
+}
 
     if (smime_encoded_caps != NULL) {
         SECITEM_FreeItem(smime_encoded_caps, PR_TRUE);
@@ -592,8 +618,9 @@ smime_init_caps(void)
     if (smime_capabilities == NULL) {
         smime_capabilities = (smime_capability **)PORT_ZAlloc(
             (smime_symmetric_count + 1) * sizeof(smime_capability *));
-        if (smime_capabilities == NULL)
+        if (smime_capabilities == NULL) {
             return SECFailure;
+}
     }
 
     rv = SECFailure;
@@ -620,8 +647,9 @@ smime_init_caps(void)
 
         /* Get the next cipher preference in smime_prefs. */
         mapi = smime_mapi_by_cipher(smime_prefs[i]);
-        if (mapi < 0)
+        if (mapi < 0) {
             break;
+}
 
         /* Find the corresponding entry in the cipher map. */
         PORT_Assert(mapi < smime_symmetric_count);
@@ -635,8 +663,9 @@ smime_init_caps(void)
         cap = smime_capabilities[i];
         if (cap == NULL) {
             cap = (smime_capability *)PORT_ZAlloc(sizeof(smime_capability));
-            if (cap == NULL)
+            if (cap == NULL) {
                 break;
+}
             smime_capabilities[i] = cap;
         } else if (cap->cipher == smime_prefs[i]) {
             continue; /* no change to this one */
@@ -644,8 +673,9 @@ smime_init_caps(void)
 
         cap->capIDTag = map->algtag;
         oiddata = SECOID_FindOIDByTag(map->algtag);
-        if (oiddata == NULL)
+        if (oiddata == NULL) {
             break;
+}
 
         if (cap->capabilityID.data != NULL) {
             SECITEM_FreeItem(&(cap->capabilityID), PR_FALSE);
@@ -654,8 +684,9 @@ smime_init_caps(void)
         }
 
         rv = SECITEM_CopyItem(NULL, &(cap->capabilityID), &(oiddata->oid));
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
 
         if (map->parms == NULL) {
             cap->parameters.data = NULL;
@@ -668,8 +699,9 @@ smime_init_caps(void)
         cap->cipher = smime_prefs[i];
     }
 
-    if (i != smime_current_pref_index)
+    if (i != smime_current_pref_index) {
         return rv;
+}
 
     while (i < smime_symmetric_count) {
         cap = smime_capabilities[i];
@@ -684,8 +716,9 @@ smime_init_caps(void)
 
     smime_encoded_caps = SEC_ASN1EncodeItem(NULL, NULL, &smime_capabilities,
                                             smime_capabilities_template);
-    if (smime_encoded_caps == NULL)
+    if (smime_encoded_caps == NULL) {
         return SECFailure;
+}
 
     return SECSuccess;
 }
@@ -694,8 +727,9 @@ static SECStatus
 smime_add_profile(CERTCertificate *cert, SEC_PKCS7ContentInfo *cinfo)
 {
     PORT_Assert(smime_prefs_complete);
-    if (!smime_prefs_complete)
+    if (!smime_prefs_complete) {
         return SECFailure;
+}
 
     /* For that matter, if capabilities haven't been initialized yet,
        do so now. */
@@ -703,8 +737,9 @@ smime_add_profile(CERTCertificate *cert, SEC_PKCS7ContentInfo *cinfo)
         SECStatus rv;
 
         rv = smime_init_caps();
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         PORT_Assert(smime_encoded_caps != NULL);
     }
@@ -761,8 +796,9 @@ SECMIME_CreateSigned(CERTCertificate *scert,
     cinfo = SEC_PKCS7CreateSignedData(scert, certUsageEmailSigner,
                                       certdb, digestalg, digest,
                                       pwfn, pwfn_arg);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
     if (SEC_PKCS7IncludeCertChain(cinfo, NULL) != SECSuccess) {
         SEC_PKCS7DestroyContentInfo(cinfo);

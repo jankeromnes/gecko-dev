@@ -41,8 +41,9 @@ NSS_CMSEncryptedData_Create(NSSCMSMessage *cmsg, SECOidTag algorithm,
     mark = PORT_ArenaMark(poolp);
 
     encd = PORT_ArenaZNew(poolp, NSSCMSEncryptedData);
-    if (encd == NULL)
+    if (encd == NULL) {
         goto loser;
+}
 
     encd->cmsg = cmsg;
 
@@ -69,8 +70,9 @@ NSS_CMSEncryptedData_Create(NSSCMSMessage *cmsg, SECOidTag algorithm,
             SECOID_DestroyAlgorithmID(pbe_algid, PR_TRUE);
         }
     }
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return encd;
@@ -116,21 +118,25 @@ NSS_CMSEncryptedData_Encode_BeforeStart(NSSCMSEncryptedData *encd)
     SECItem *dummy;
     NSSCMSContentInfo *cinfo = &(encd->contentInfo);
 
-    if (NSS_CMSArray_IsEmpty((void **)encd->unprotectedAttr))
+    if (NSS_CMSArray_IsEmpty((void **)encd->unprotectedAttr)) {
         version = NSS_CMS_ENCRYPTED_DATA_VERSION;
-    else
+    } else {
         version = NSS_CMS_ENCRYPTED_DATA_VERSION_UPATTR;
+}
 
     dummy = SEC_ASN1EncodeInteger(encd->cmsg->poolp, &(encd->version), version);
-    if (dummy == NULL)
+    if (dummy == NULL) {
         return SECFailure;
+}
 
     /* now get content encryption key (bulk key) by using our cmsg callback */
-    if (encd->cmsg->decrypt_key_cb)
+    if (encd->cmsg->decrypt_key_cb) {
         bulkkey = (*encd->cmsg->decrypt_key_cb)(encd->cmsg->decrypt_key_cb_arg,
                                                 NSS_CMSContentInfo_GetContentEncAlg(cinfo));
-    if (bulkkey == NULL)
+}
+    if (bulkkey == NULL) {
         return SECFailure;
+}
 
     /* store the bulk key in the contentInfo so that the encoder can find it */
     NSS_CMSContentInfo_SetBulkKey(cinfo, bulkkey);
@@ -154,11 +160,13 @@ NSS_CMSEncryptedData_Encode_BeforeData(NSSCMSEncryptedData *encd)
 
     /* find bulkkey and algorithm - must have been set by NSS_CMSEncryptedData_Encode_BeforeStart */
     bulkkey = NSS_CMSContentInfo_GetBulkKey(cinfo);
-    if (bulkkey == NULL)
+    if (bulkkey == NULL) {
         return SECFailure;
+}
     algid = NSS_CMSContentInfo_GetContentEncAlg(cinfo);
-    if (algid == NULL)
+    if (algid == NULL) {
         return SECFailure;
+}
 
     rv = NSS_CMSContentInfo_Private_Init(cinfo);
     if (rv != SECSuccess) {
@@ -170,8 +178,9 @@ NSS_CMSEncryptedData_Encode_BeforeData(NSSCMSEncryptedData *encd)
     cinfo->privateInfo->ciphcx = NSS_CMSCipherContext_StartEncrypt(encd->cmsg->poolp,
                                                                    bulkkey, algid);
     PK11_FreeSymKey(bulkkey);
-    if (cinfo->privateInfo->ciphcx == NULL)
+    if (cinfo->privateInfo->ciphcx == NULL) {
         return SECFailure;
+}
 
     return SECSuccess;
 }
@@ -206,13 +215,15 @@ NSS_CMSEncryptedData_Decode_BeforeData(NSSCMSEncryptedData *encd)
 
     bulkalg = NSS_CMSContentInfo_GetContentEncAlg(cinfo);
 
-    if (encd->cmsg->decrypt_key_cb == NULL) /* no callback? no key../ */
+    if (encd->cmsg->decrypt_key_cb == NULL) { /* no callback? no key../ */
         goto loser;
+}
 
     bulkkey = (*encd->cmsg->decrypt_key_cb)(encd->cmsg->decrypt_key_cb_arg, bulkalg);
-    if (bulkkey == NULL)
+    if (bulkkey == NULL) {
         /* no success finding a bulk key */
         goto loser;
+}
 
     NSS_CMSContentInfo_SetBulkKey(cinfo, bulkkey);
 
@@ -223,8 +234,9 @@ NSS_CMSEncryptedData_Decode_BeforeData(NSSCMSEncryptedData *encd)
     rv = SECFailure;
 
     cinfo->privateInfo->ciphcx = NSS_CMSCipherContext_StartDecrypt(bulkkey, bulkalg);
-    if (cinfo->privateInfo->ciphcx == NULL)
+    if (cinfo->privateInfo->ciphcx == NULL) {
         goto loser; /* error has been set by NSS_CMSCipherContext_StartDecrypt */
+}
 
     /* we are done with (this) bulkkey now. */
     PK11_FreeSymKey(bulkkey);

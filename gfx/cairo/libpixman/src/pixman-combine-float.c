@@ -203,59 +203,67 @@ get_factor (combine_factor_t factor, float sa, float da)
 	break;
 
     case SA_OVER_DA:
-	if (IS_ZERO (da))
+	if (IS_ZERO (da)) {
 	    f = 1.0f;
-	else
+	} else {
 	    f = CLAMP (sa / da);
+}
 	break;
 
     case DA_OVER_SA:
-	if (IS_ZERO (sa))
+	if (IS_ZERO (sa)) {
 	    f = 1.0f;
-	else
+	} else {
 	    f = CLAMP (da / sa);
+}
 	break;
 
     case INV_SA_OVER_DA:
-	if (IS_ZERO (da))
+	if (IS_ZERO (da)) {
 	    f = 1.0f;
-	else
+	} else {
 	    f = CLAMP ((1.0f - sa) / da);
+}
 	break;
 
     case INV_DA_OVER_SA:
-	if (IS_ZERO (sa))
+	if (IS_ZERO (sa)) {
 	    f = 1.0f;
-	else
+	} else {
 	    f = CLAMP ((1.0f - da) / sa);
+}
 	break;
 
     case ONE_MINUS_SA_OVER_DA:
-	if (IS_ZERO (da))
+	if (IS_ZERO (da)) {
 	    f = 0.0f;
-	else
+	} else {
 	    f = CLAMP (1.0f - sa / da);
+}
 	break;
 
     case ONE_MINUS_DA_OVER_SA:
-	if (IS_ZERO (sa))
+	if (IS_ZERO (sa)) {
 	    f = 0.0f;
-	else
+	} else {
 	    f = CLAMP (1.0f - da / sa);
+}
 	break;
 
     case ONE_MINUS_INV_DA_OVER_SA:
-	if (IS_ZERO (sa))
+	if (IS_ZERO (sa)) {
 	    f = 0.0f;
-	else
+	} else {
 	    f = CLAMP (1.0f - (1.0f - da) / sa);
+}
 	break;
 
     case ONE_MINUS_INV_SA_OVER_DA:
-	if (IS_ZERO (da))
+	if (IS_ZERO (da)) {
 	    f = 0.0f;
-	else
+	} else {
 	    f = CLAMP (1.0f - (1.0f - sa) / da);
+}
 	break;
     }
 
@@ -372,10 +380,11 @@ blend_screen (float sa, float s, float da, float d)
 static force_inline float
 blend_overlay (float sa, float s, float da, float d)
 {
-    if (2 * d < da)
+    if (2 * d < da) {
 	return 2 * s * d;
-    else
+    } else {
 	return sa * da - 2 * (da - d) * (sa - s);
+}
 }
 
 static force_inline float
@@ -384,10 +393,11 @@ blend_darken (float sa, float s, float da, float d)
     s = s * da;
     d = d * sa;
 
-    if (s > d)
+    if (s > d) {
 	return d;
-    else
+    } else {
 	return s;
+}
 }
 
 static force_inline float
@@ -396,45 +406,49 @@ blend_lighten (float sa, float s, float da, float d)
     s = s * da;
     d = d * sa;
 
-    if (s > d)
+    if (s > d) {
 	return s;
-    else
+    } else {
 	return d;
+}
 }
 
 static force_inline float
 blend_color_dodge (float sa, float s, float da, float d)
 {
-    if (IS_ZERO (d))
+    if (IS_ZERO (d)) {
 	return 0.0f;
-    else if (d * sa >= sa * da - s * da)
+    } else if (d * sa >= sa * da - s * da) {
 	return sa * da;
-    else if (IS_ZERO (sa - s))
+    } else if (IS_ZERO (sa - s)) {
 	return sa * da;
-    else
+    } else {
 	return sa * sa * d / (sa - s);
+}
 }
 
 static force_inline float
 blend_color_burn (float sa, float s, float da, float d)
 {
-    if (d >= da)
+    if (d >= da) {
 	return sa * da;
-    else if (sa * (da - d) >= s * da)
+    } else if (sa * (da - d) >= s * da) {
 	return 0.0f;
-    else if (IS_ZERO (s))
+    } else if (IS_ZERO (s)) {
 	return 0.0f;
-    else
+    } else {
 	return sa * (da - sa * (da - d) / s);
+}
 }
 
 static force_inline float
 blend_hard_light (float sa, float s, float da, float d)
 {
-    if (2 * s < sa)
+    if (2 * s < sa) {
 	return 2 * s * d;
-    else
+    } else {
 	return sa * da - 2 * (da - d) * (sa - s);
+}
 }
 
 static force_inline float
@@ -442,10 +456,11 @@ blend_soft_light (float sa, float s, float da, float d)
 {
     if (2 * s < sa)
     {
-	if (IS_ZERO (da))
+	if (IS_ZERO (da)) {
 	    return d * sa;
-	else
+	} else {
 	    return d * sa - d * (da - d) * (sa - 2 * s) / da;
+}
     }
     else
     {
@@ -455,10 +470,11 @@ blend_soft_light (float sa, float s, float da, float d)
 	}
 	else
 	{
-	    if (4 * d <= da)
+	    if (4 * d <= da) {
 		return d * sa + (2 * s - sa) * d * ((16 * d / da - 12) * d / da + 3);
-	    else
+	    } else {
 		return d * sa + (sqrtf (d * da) - d) * (2 * s - sa);
+}
 	}
     }
 }
@@ -469,10 +485,11 @@ blend_difference (float sa, float s, float da, float d)
     float dsa = d * sa;
     float sda = s * da;
 
-    if (sda < dsa)
+    if (sda < dsa) {
 	return dsa - sda;
-    else
+    } else {
 	return sda - dsa;
+}
 }
 
 static force_inline float

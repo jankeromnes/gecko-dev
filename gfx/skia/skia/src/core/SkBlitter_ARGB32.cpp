@@ -460,8 +460,9 @@ void SkARGB32_Shader_Blitter::blitAntiH(int x, int y, const SkAlpha antialias[],
             SkXfermode* xfer = fXfermode;
 
             int count = *runs;
-            if (count <= 0)
+            if (count <= 0) {
                 break;
+}
             int aa = *antialias;
             if (aa) {
                 shaderContext->shadeSpan(x, y, span, count);

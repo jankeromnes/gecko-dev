@@ -95,13 +95,16 @@ __ieee754_log(double x)
 
 	k=0;
 	if (hx < 0x00100000) {			/* x < 2**-1022  */
-	    if (((hx&0x7fffffff)|lx)==0) 
+	    if (((hx&0x7fffffff)|lx)==0) { 
 		return -two54/vzero;		/* log(+-0)=-inf */
-	    if (hx<0) return (x-x)/zero;	/* log(-#) = NaN */
+}
+	    if (hx<0) { return (x-x)/zero;	/* log(-#) = NaN */
+}
 	    k -= 54; x *= two54; /* subnormal number, scale up x */
 	    GET_HIGH_WORD(hx,x);
 	} 
-	if (hx >= 0x7ff00000) return x+x;
+	if (hx >= 0x7ff00000) { return x+x;
+}
 	k += (hx>>20)-1023;
 	hx &= 0x000fffff;
 	i = (hx+0x95f64)&0x100000;
@@ -118,7 +121,7 @@ __ieee754_log(double x)
 		}
 	    }
 	    R = f*f*(0.5-0.33333333333333333*f);
-	    if(k==0) return f-R; else {dk=(double)k;
+	    if(k==0) { return f-R; } else {dk=(double)k;
 	    	     return dk*ln2_hi-((R-dk*ln2_lo)-f);}
 	}
  	s = f/(2.0+f); 
@@ -133,10 +136,12 @@ __ieee754_log(double x)
 	R = t2+t1;
 	if(i>0) {
 	    hfsq=0.5*f*f;
-	    if(k==0) return f-(hfsq-s*(hfsq+R)); else
+	    if(k==0) { return f-(hfsq-s*(hfsq+R)); } else {
 		     return dk*ln2_hi-((hfsq-(s*(hfsq+R)+dk*ln2_lo))-f);
+}
 	} else {
-	    if(k==0) return f-s*(f-R); else
+	    if(k==0) { return f-s*(f-R); } else {
 		     return dk*ln2_hi-((s*(f-R)-dk*ln2_lo)-f);
+}
 	}
 }

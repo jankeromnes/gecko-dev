@@ -98,8 +98,9 @@ void ImageFunctionHLSL::OutputImageSizeFunctionBody(
         out << "    uint width; uint height;\n"
             << "    " << imageReference << ".GetDimensions(width, height);\n";
     }
-    else
+    else {
         UNREACHABLE();
+}
 
     if (strcmp(imageFunction.getReturnType(), "int3") == 0)
     {
@@ -126,8 +127,9 @@ void ImageFunctionHLSL::OutputImageLoadFunctionBody(
     {
         out << "    return " << imageReference << "[uint2(p.x, p.y)];\n";
     }
-    else
+    else {
         UNREACHABLE();
+}
 }
 
 // static
@@ -141,8 +143,9 @@ void ImageFunctionHLSL::OutputImageStoreFunctionBody(
     {
         out << "    " << imageReference << "[p] = data;\n";
     }
-    else
+    else {
         UNREACHABLE();
+}
 }
 
 TString ImageFunctionHLSL::ImageFunction::name() const
@@ -262,8 +265,9 @@ TString ImageFunctionHLSL::useImageFunction(const ImmutableString &name,
     {
         imageFunction.method = ImageFunction::Method::STORE;
     }
-    else
+    else {
         UNREACHABLE();
+}
 
     mUsesImage.insert(imageFunction);
     return imageFunction.name();

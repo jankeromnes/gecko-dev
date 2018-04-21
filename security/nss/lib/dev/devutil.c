@@ -92,8 +92,9 @@ nssPKCS11String_Length(CK_CHAR *pkcs11Str, PRUint32 bufLen)
 {
     PRInt32 i;
     for (i = bufLen - 1; i >= 0;) {
-        if (pkcs11Str[i] != ' ' && pkcs11Str[i] != '\0')
+        if (pkcs11Str[i] != ' ' && pkcs11Str[i] != '\0') {
             break;
+}
         --i;
     }
     return (PRUint32)(i + 1);
@@ -110,8 +111,9 @@ nssSlotArray_Clone(
     NSSSlot **rvSlots = NULL;
     NSSSlot **sp = slots;
     PRUint32 count = 0;
-    while (sp && *sp)
+    while (sp && *sp) {
         count++;
+}
     if (count > 0) {
         rvSlots = nss_ZNEWARRAY(NULL, NSSSlot *, count + 1);
         if (rvSlots) {
@@ -311,8 +313,9 @@ create_object_array(
         *status = PR_SUCCESS;
         return rvOandA;
     }
-    while (*objects++)
+    while (*objects++) {
         (*numObjects)++;
+}
     if (*numObjects >= MAX_LOCAL_CACHE_OBJECTS) {
         /* Hit the maximum allowed, so don't use a cache (there are
          * too many objects to make caching worthwhile, presumably, if
@@ -393,8 +396,9 @@ loser:
     if (slot) {
         nssSlot_Destroy(slot);
     }
-    if (arena)
+    if (arena) {
         nssArena_Destroy(arena);
+}
     return (nssCryptokiObjectAndAttributes *)NULL;
 }
 
@@ -638,8 +642,9 @@ find_objects_in_array(
     if (!matches) {
         goto loser;
     }
-    if (maximumOpt == 0)
+    if (maximumOpt == 0) {
         maximumOpt = ~0;
+}
     /* loop over the cached objects */
     for (; *objArray && numMatches < maximumOpt; objArray++) {
         nssCryptokiObjectAndAttributes *obj = *objArray;
@@ -947,8 +952,9 @@ nssTokenObjectCache_RemoveObject(
         for (oa = cache->objects[oType]; *oa; oa++) {
             if (nssCryptokiObject_Equal((*oa)->object, object)) {
                 swp = oa; /* the entry to remove */
-                while (oa[1])
+                while (oa[1]) {
                     oa++; /* go to the tail */
+}
                 (*swp)->object->token = NULL;
                 nssCryptokiObject_Destroy((*swp)->object);
                 nssArena_Destroy((*swp)->arena); /* destroy it */

@@ -41,17 +41,20 @@ EXPORT_XPCOM_API(nsresult)
 NS_GetXPTCallStub(REFNSIID aIID, nsIXPTCProxy* aOuter,
                   nsISomeInterface* *aResult)
 {
-    if (NS_WARN_IF(!aOuter) || NS_WARN_IF(!aResult))
+    if (NS_WARN_IF(!aOuter) || NS_WARN_IF(!aResult)) {
         return NS_ERROR_INVALID_ARG;
+}
 
     XPTInterfaceInfoManager *iim =
         XPTInterfaceInfoManager::GetSingleton();
-    if (NS_WARN_IF(!iim))
+    if (NS_WARN_IF(!iim)) {
         return NS_ERROR_NOT_INITIALIZED;
+}
 
     xptiInterfaceEntry *iie = iim->GetInterfaceEntryForIID(&aIID);
-    if (!iie || !iie->EnsureResolved() || iie->GetBuiltinClassFlag())
+    if (!iie || !iie->EnsureResolved() || iie->GetBuiltinClassFlag()) {
         return NS_ERROR_FAILURE;
+}
 
     if (iie->GetHasNotXPCOMFlag()) {
 #ifdef DEBUG

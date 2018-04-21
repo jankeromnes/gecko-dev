@@ -286,8 +286,9 @@ CERT_RegisterAlternateOCSPAIAInfoCallBack(
     old = OCSP_Global.alternateOCSPAIAFcn;
     OCSP_Global.alternateOCSPAIAFcn = newCallback;
     PR_ExitMonitor(OCSP_Global.monitor);
-    if (oldCallback)
+    if (oldCallback) {
         *oldCallback = old;
+}
     return SECSuccess;
 }
 
@@ -519,13 +520,15 @@ ocsp_FindCacheEntry(OCSPCacheData *cache, CERTOCSPCertID *certID)
     OCSP_TRACE(("OCSP ocsp_FindCacheEntry\n"));
     OCSP_TRACE_CERTID(certID);
     PR_EnterMonitor(OCSP_Global.monitor);
-    if (ocsp_IsCacheDisabled())
+    if (ocsp_IsCacheDisabled()) {
         goto loser;
+}
 
     found_ocsp_item = (OCSPCacheItem *)PL_HashTableLookup(
         cache->entries, certID);
-    if (!found_ocsp_item)
+    if (!found_ocsp_item) {
         goto loser;
+}
 
     OCSP_TRACE(("OCSP ocsp_FindCacheEntry FOUND!\n"));
     ocsp_MakeCacheEntryMostRecent(cache, found_ocsp_item);
@@ -789,8 +792,9 @@ ocsp_CreateOrUpdateCacheEntry(OCSPCacheData *cache,
     OCSPCacheItem *cacheItem;
     OCSP_TRACE(("OCSP ocsp_CreateOrUpdateCacheEntry\n"));
 
-    if (certIDWasConsumed)
+    if (certIDWasConsumed) {
         *certIDWasConsumed = PR_FALSE;
+}
 
     PR_EnterMonitor(OCSP_Global.monitor);
     PORT_Assert(OCSP_Global.maxCacheEntries >= 0);
@@ -937,8 +941,9 @@ OCSP_InitGlobal(void)
     if (OCSP_Global.monitor == NULL) {
         OCSP_Global.monitor = PR_NewMonitor();
     }
-    if (!OCSP_Global.monitor)
+    if (!OCSP_Global.monitor) {
         return SECFailure;
+}
 
     PR_EnterMonitor(OCSP_Global.monitor);
     if (!OCSP_Global.cache.entries) {
@@ -961,8 +966,9 @@ OCSP_InitGlobal(void)
         PORT_Assert(OCSP_Global.cache.numberOfEntries == 0);
         PORT_SetError(SEC_ERROR_LIBRARY_FAILURE);
     }
-    if (OCSP_Global.cache.entries)
+    if (OCSP_Global.cache.entries) {
         rv = SECSuccess;
+}
     PR_ExitMonitor(OCSP_Global.monitor);
     return rv;
 }
@@ -970,8 +976,9 @@ OCSP_InitGlobal(void)
 SECStatus
 OCSP_ShutdownGlobal(void)
 {
-    if (!OCSP_Global.monitor)
+    if (!OCSP_Global.monitor) {
         return SECSuccess;
+}
 
     PR_EnterMonitor(OCSP_Global.monitor);
     if (OCSP_Global.cache.entries) {
@@ -1489,8 +1496,9 @@ CERT_EncodeOCSPRequest(PLArenaPool *arena, CERTOCSPRequest *request,
     if (request->tbsRequest->extensionHandle != NULL) {
         rv = CERT_FinishExtensions(request->tbsRequest->extensionHandle);
         request->tbsRequest->extensionHandle = NULL;
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return NULL;
+}
     }
 
     /*
@@ -1546,8 +1554,9 @@ CERT_DecodeOCSPRequest(const SECItem *src)
 
     rv = SEC_QuickDERDecodeItem(arena, dest, ocsp_OCSPRequestTemplate, &newSrc);
     if (rv != SECSuccess) {
-        if (PORT_GetError() == SEC_ERROR_BAD_DER)
+        if (PORT_GetError() == SEC_ERROR_BAD_DER) {
             PORT_SetError(SEC_ERROR_OCSP_MALFORMED_REQUEST);
+}
         goto loser;
     }
 
@@ -1781,8 +1790,9 @@ CERT_CreateOCSPCertID(CERTCertificate *cert, PRTime time)
     PLArenaPool *arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
     CERTOCSPCertID *certID;
     PORT_Assert(arena != NULL);
-    if (!arena)
+    if (!arena) {
         return NULL;
+}
 
     certID = ocsp_CreateCertID(arena, cert, time);
     if (!certID) {
@@ -1805,12 +1815,14 @@ cert_DupOCSPCertID(const CERTOCSPCertID *src)
     }
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (!arena)
+    if (!arena) {
         goto loser;
+}
 
     dest = PORT_ArenaZNew(arena, CERTOCSPCertID);
-    if (!dest)
+    if (!dest) {
         goto loser;
+}
 
 #define DUPHELP(element)                                          \
     if (src->element.data &&                                      \
@@ -1835,8 +1847,9 @@ cert_DupOCSPCertID(const CERTOCSPCertID *src)
     return dest;
 
 loser:
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     PORT_SetError(PR_OUT_OF_MEMORY_ERROR);
     return NULL;
 }
@@ -1868,8 +1881,9 @@ ocsp_AddServiceLocatorExtension(ocspSingleRequest *singleRequest,
     SECStatus rv = SECFailure;
 
     serviceLocator = PORT_ZNew(ocspServiceLocator);
-    if (serviceLocator == NULL)
+    if (serviceLocator == NULL) {
         goto loser;
+}
 
     /*
      * Normally it would be a bad idea to do a direct reference like
@@ -1883,8 +1897,9 @@ ocsp_AddServiceLocatorExtension(ocspSingleRequest *singleRequest,
     rv = CERT_FindCertExtension(cert, SEC_OID_X509_AUTH_INFO_ACCESS,
                                 &serviceLocator->locator);
     if (rv != SECSuccess) {
-        if (PORT_GetError() != SEC_ERROR_EXTENSION_NOT_FOUND)
+        if (PORT_GetError() != SEC_ERROR_EXTENSION_NOT_FOUND) {
             goto loser;
+}
     }
 
     /* prepare for following loser gotos */
@@ -1893,8 +1908,9 @@ ocsp_AddServiceLocatorExtension(ocspSingleRequest *singleRequest,
 
     extensionHandle = cert_StartExtensions(singleRequest,
                                            singleRequest->arena, SetSingleReqExts);
-    if (extensionHandle == NULL)
+    if (extensionHandle == NULL) {
         goto loser;
+}
 
     rv = CERT_EncodeAndAddExtension(extensionHandle,
                                     SEC_OID_PKIX_OCSP_SERVICE_LOCATOR,
@@ -1908,16 +1924,18 @@ loser:
 	 * freed).  But careful not to override any already-set bad status.
 	 */
         SECStatus tmprv = CERT_FinishExtensions(extensionHandle);
-        if (rv == SECSuccess)
+        if (rv == SECSuccess) {
             rv = tmprv;
+}
     }
 
     /*
      * Finally, free the serviceLocator structure itself and we are done.
      */
     if (serviceLocator != NULL) {
-        if (serviceLocator->locator.data != NULL)
+        if (serviceLocator->locator.data != NULL) {
             SECITEM_FreeItem(&serviceLocator->locator, PR_FALSE);
+}
         PORT_Free(serviceLocator);
     }
 
@@ -1950,31 +1968,36 @@ ocsp_CreateSingleRequestList(PLArenaPool *arena, CERTCertList *certList,
         node = CERT_LIST_NEXT(node);
     }
 
-    if (count == 0)
+    if (count == 0) {
         goto loser;
+}
 
     requestList = PORT_ArenaNewArray(arena, ocspSingleRequest *, count + 1);
-    if (requestList == NULL)
+    if (requestList == NULL) {
         goto loser;
+}
 
     node = CERT_LIST_HEAD(certList);
     for (i = 0; !CERT_LIST_END(node, certList); i++) {
         requestList[i] = PORT_ArenaZNew(arena, ocspSingleRequest);
-        if (requestList[i] == NULL)
+        if (requestList[i] == NULL) {
             goto loser;
+}
 
         OCSP_TRACE(("OCSP CERT_CreateOCSPRequest %s\n", node->cert->subjectName));
         requestList[i]->arena = arena;
         requestList[i]->reqCert = ocsp_CreateCertID(arena, node->cert, time);
-        if (requestList[i]->reqCert == NULL)
+        if (requestList[i]->reqCert == NULL) {
             goto loser;
+}
 
         if (includeLocator == PR_TRUE) {
             SECStatus rv;
 
             rv = ocsp_AddServiceLocatorExtension(requestList[i], node->cert);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 goto loser;
+}
         }
 
         node = CERT_LIST_NEXT(node);
@@ -2004,11 +2027,13 @@ ocsp_CreateRequestFromCert(PLArenaPool *arena,
 
     /* meaning of value 2: one entry + one end marker */
     requestList = PORT_ArenaNewArray(arena, ocspSingleRequest *, 2);
-    if (requestList == NULL)
+    if (requestList == NULL) {
         goto loser;
+}
     requestList[0] = PORT_ArenaZNew(arena, ocspSingleRequest);
-    if (requestList[0] == NULL)
+    if (requestList[0] == NULL) {
         goto loser;
+}
     requestList[0]->arena = arena;
     /* certID will live longer than the request */
     requestList[0]->reqCert = certID;
@@ -2016,8 +2041,9 @@ ocsp_CreateRequestFromCert(PLArenaPool *arena,
     if (includeLocator == PR_TRUE) {
         SECStatus rv;
         rv = ocsp_AddServiceLocatorExtension(requestList[0], singleCert);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
 
     PORT_ArenaUnmark(arena, mark);
@@ -2080,8 +2106,9 @@ cert_CreateSingleCertOCSPRequest(CERTOCSPCertID *certID,
     }
 
     request = ocsp_prepareEmptyOCSPRequest();
-    if (!request)
+    if (!request) {
         return NULL;
+}
     /*
      * Version 1 is the default, so we need not fill in a version number.
      * Now create the list of single requests, one for each cert.
@@ -2153,8 +2180,9 @@ CERT_CreateOCSPRequest(CERTCertList *certList, PRTime time,
         return NULL;
     }
     request = ocsp_prepareEmptyOCSPRequest();
-    if (!request)
+    if (!request) {
         return NULL;
+}
     /*
      * Now create the list of single requests, one for each cert.
      */
@@ -2214,8 +2242,9 @@ CERT_AddOCSPAcceptableResponses(CERTOCSPRequest *request,
     extHandle = request->tbsRequest->extensionHandle;
     if (extHandle == NULL) {
         extHandle = cert_StartExtensions(request, request->arena, SetRequestExts);
-        if (extHandle == NULL)
+        if (extHandle == NULL) {
             goto loser;
+}
     }
 
     /* Count number of OIDS going into the extension value. */
@@ -2230,8 +2259,9 @@ CERT_AddOCSPAcceptableResponses(CERTOCSPRequest *request,
     }
 
     acceptableResponses = PORT_NewArray(SECItem *, count + 1);
-    if (acceptableResponses == NULL)
+    if (acceptableResponses == NULL) {
         goto loser;
+}
 
     i = 0;
     responseOid = SECOID_FindOIDByTag(responseType0);
@@ -2250,19 +2280,23 @@ CERT_AddOCSPAcceptableResponses(CERTOCSPRequest *request,
     rv = CERT_EncodeAndAddExtension(extHandle, SEC_OID_PKIX_OCSP_RESPONSE,
                                     &acceptableResponses, PR_FALSE,
                                     SEC_ASN1_GET(SEC_SequenceOfObjectIDTemplate));
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PORT_Free(acceptableResponses);
-    if (request->tbsRequest->extensionHandle == NULL)
+    if (request->tbsRequest->extensionHandle == NULL) {
         request->tbsRequest->extensionHandle = extHandle;
+}
     return SECSuccess;
 
 loser:
-    if (acceptableResponses != NULL)
+    if (acceptableResponses != NULL) {
         PORT_Free(acceptableResponses);
-    if (extHandle != NULL)
+}
+    if (extHandle != NULL) {
         (void)CERT_FinishExtensions(extHandle);
+}
     return rv;
 }
 #if defined(__GNUC__) && !defined(NSS_NO_GCC48)
@@ -2281,19 +2315,23 @@ loser:
 void
 CERT_DestroyOCSPRequest(CERTOCSPRequest *request)
 {
-    if (request == NULL)
+    if (request == NULL) {
         return;
+}
 
     if (request->tbsRequest != NULL) {
-        if (request->tbsRequest->requestorName != NULL)
+        if (request->tbsRequest->requestorName != NULL) {
             CERT_DestroyGeneralNameList(request->tbsRequest->requestorName);
-        if (request->tbsRequest->extensionHandle != NULL)
+}
+        if (request->tbsRequest->extensionHandle != NULL) {
             (void)CERT_FinishExtensions(request->tbsRequest->extensionHandle);
+}
     }
 
     if (request->optionalSignature != NULL) {
-        if (request->optionalSignature->cert != NULL)
+        if (request->optionalSignature->cert != NULL) {
             CERT_DestroyCertificate(request->optionalSignature->cert);
+}
 
         /*
 	 * XXX Need to free derCerts?  Or do they come out of arena?
@@ -2309,8 +2347,9 @@ CERT_DestroyOCSPRequest(CERTOCSPRequest *request)
      * much we can do about it...)
      */
     PORT_Assert(request->arena != NULL);
-    if (request->arena != NULL)
+    if (request->arena != NULL) {
         PORT_FreeArena(request->arena, PR_FALSE);
+}
 }
 
 /*
@@ -2422,8 +2461,9 @@ ocsp_FinishDecodingSingleResponses(PLArenaPool *reqArena,
         return SECFailure;
     }
 
-    if (responses == NULL) /* nothing to do */
+    if (responses == NULL) { /* nothing to do */
         return SECSuccess;
+}
 
     for (i = 0; responses[i] != NULL; i++) {
         SECItem *newStatus;
@@ -2448,8 +2488,9 @@ ocsp_FinishDecodingSingleResponses(PLArenaPool *reqArena,
         rv = SEC_QuickDERDecodeItem(reqArena, certStatus, certStatusTemplate,
                                     newStatus);
         if (rv != SECSuccess) {
-            if (PORT_GetError() == SEC_ERROR_BAD_DER)
+            if (PORT_GetError() == SEC_ERROR_BAD_DER) {
                 PORT_SetError(SEC_ERROR_OCSP_MALFORMED_RESPONSE);
+}
             goto loser;
         }
 
@@ -2520,8 +2561,9 @@ ocsp_DecodeBasicOCSPResponse(PLArenaPool *arena, SECItem *src)
     rv = SEC_QuickDERDecodeItem(arena, basicResponse,
                                 ocsp_BasicOCSPResponseTemplate, &newsrc);
     if (rv != SECSuccess) {
-        if (PORT_GetError() == SEC_ERROR_BAD_DER)
+        if (PORT_GetError() == SEC_ERROR_BAD_DER) {
             PORT_SetError(SEC_ERROR_OCSP_MALFORMED_RESPONSE);
+}
         goto loser;
     }
 
@@ -2550,8 +2592,9 @@ ocsp_DecodeBasicOCSPResponse(PLArenaPool *arena, SECItem *src)
     rv = SEC_QuickDERDecodeItem(arena, responderID, responderIDTemplate,
                                 &responseData->derResponderID);
     if (rv != SECSuccess) {
-        if (PORT_GetError() == SEC_ERROR_BAD_DER)
+        if (PORT_GetError() == SEC_ERROR_BAD_DER) {
             PORT_SetError(SEC_ERROR_OCSP_MALFORMED_RESPONSE);
+}
         goto loser;
     }
 
@@ -2594,8 +2637,9 @@ ocsp_DecodeResponseBytes(PLArenaPool *arena, ocspResponseBytes *rbytes)
 
             basicResponse = ocsp_DecodeBasicOCSPResponse(arena,
                                                          &rbytes->response);
-            if (basicResponse == NULL)
+            if (basicResponse == NULL) {
                 return SECFailure;
+}
 
             rbytes->decodedResponse.basic = basicResponse;
         } break;
@@ -2654,8 +2698,9 @@ CERT_DecodeOCSPResponse(const SECItem *src)
 
     rv = SEC_QuickDERDecodeItem(arena, response, ocsp_OCSPResponseTemplate, &newSrc);
     if (rv != SECSuccess) {
-        if (PORT_GetError() == SEC_ERROR_BAD_DER)
+        if (PORT_GetError() == SEC_ERROR_BAD_DER) {
             PORT_SetError(SEC_ERROR_OCSP_MALFORMED_RESPONSE);
+}
         goto loser;
     }
 
@@ -2782,8 +2827,9 @@ CERT_DestroyOCSPResponse(CERTOCSPResponse *response)
 {
     if (response != NULL) {
         ocspSignature *signature = ocsp_GetResponseSignature(response);
-        if (signature && signature->cert != NULL)
+        if (signature && signature->cert != NULL) {
             CERT_DestroyCertificate(signature->cert);
+}
 
         /*
 	 * We should actually never have a response without an arena,
@@ -2823,8 +2869,9 @@ ocsp_ParseURL(const char *url, char **pHostname, PRUint16 *pPort, char **pPath)
     char c;
     int len;
 
-    if (url == NULL)
+    if (url == NULL) {
         goto loser;
+}
 
     /*
      * Skip beginning whitespace.
@@ -2834,15 +2881,17 @@ ocsp_ParseURL(const char *url, char **pHostname, PRUint16 *pPort, char **pPath)
         url++;
         c = *url;
     }
-    if (c == '\0')
+    if (c == '\0') {
         goto loser;
+}
 
     /*
      * Confirm, then skip, protocol.  (Since we only know how to do http,
      * that is all we will accept).
      */
-    if (PORT_Strncasecmp(url, "http://", 7) != 0)
+    if (PORT_Strncasecmp(url, "http://", 7) != 0) {
         goto loser;
+}
     url += 7;
 
     /*
@@ -2865,8 +2914,9 @@ ocsp_ParseURL(const char *url, char **pHostname, PRUint16 *pPort, char **pPath)
     }
     len = url - save;
     hostname = PORT_Alloc(len + 1);
-    if (hostname == NULL)
+    if (hostname == NULL) {
         goto loser;
+}
     PORT_Memcpy(hostname, save, len);
     hostname[len] = '\0';
 
@@ -2879,8 +2929,9 @@ ocsp_ParseURL(const char *url, char **pHostname, PRUint16 *pPort, char **pPath)
         port = (unsigned short)PORT_Atoi(url);
         c = *url;
         while (c != '/' && c != '\0' && c != ' ' && c != '\t') {
-            if (c < '0' || c > '9')
+            if (c < '0' || c > '9') {
                 goto loser;
+}
             url++;
             c = *url;
         }
@@ -2898,14 +2949,16 @@ ocsp_ParseURL(const char *url, char **pHostname, PRUint16 *pPort, char **pPath)
         }
         len = url - save;
         path = PORT_Alloc(len + 1);
-        if (path == NULL)
+        if (path == NULL) {
             goto loser;
+}
         PORT_Memcpy(path, save, len);
         path[len] = '\0';
     } else {
         path = PORT_Strdup("/");
-        if (path == NULL)
+        if (path == NULL) {
             goto loser;
+}
     }
 
     *pHostname = hostname;
@@ -2914,8 +2967,9 @@ ocsp_ParseURL(const char *url, char **pHostname, PRUint16 *pPort, char **pPath)
     return SECSuccess;
 
 loser:
-    if (hostname != NULL)
+    if (hostname != NULL) {
         PORT_Free(hostname);
+}
     PORT_SetError(SEC_ERROR_CERT_BAD_ACCESS_LOCATION);
     return SECFailure;
 }
@@ -2933,8 +2987,9 @@ ocsp_ConnectToHost(const char *host, PRUint16 port)
     char *netdbbuf = NULL;
 
     sock = PR_NewTCPSocket();
-    if (sock == NULL)
+    if (sock == NULL) {
         goto loser;
+}
 
     /* XXX Some day need a way to set (and get?) the following value */
     timeout = PR_SecondsToInterval(30);
@@ -2952,18 +3007,21 @@ ocsp_ConnectToHost(const char *host, PRUint16 port)
         PRHostEnt hostEntry;
 
         netdbbuf = PORT_Alloc(PR_NETDB_BUF_SIZE);
-        if (netdbbuf == NULL)
+        if (netdbbuf == NULL) {
             goto loser;
+}
 
         if (PR_GetHostByName(host, netdbbuf, PR_NETDB_BUF_SIZE,
-                             &hostEntry) != PR_SUCCESS)
+                             &hostEntry) != PR_SUCCESS) {
             goto loser;
+}
 
         hostIndex = 0;
         do {
             hostIndex = PR_EnumerateHostEnt(hostIndex, &hostEntry, port, &addr);
-            if (hostIndex <= 0)
+            if (hostIndex <= 0) {
                 goto loser;
+}
         } while (PR_Connect(sock, &addr, timeout) != PR_SUCCESS);
 
         PORT_Free(netdbbuf);
@@ -2971,19 +3029,23 @@ ocsp_ConnectToHost(const char *host, PRUint16 port)
         /*
 	 * First put the port into the address, then connect.
 	 */
-        if (PR_InitializeNetAddr(PR_IpAddrNull, port, &addr) != PR_SUCCESS)
+        if (PR_InitializeNetAddr(PR_IpAddrNull, port, &addr) != PR_SUCCESS) {
             goto loser;
-        if (PR_Connect(sock, &addr, timeout) != PR_SUCCESS)
+}
+        if (PR_Connect(sock, &addr, timeout) != PR_SUCCESS) {
             goto loser;
+}
     }
 
     return sock;
 
 loser:
-    if (sock != NULL)
+    if (sock != NULL) {
         PR_Close(sock);
-    if (netdbbuf != NULL)
+}
+    if (netdbbuf != NULL) {
         PORT_Free(netdbbuf);
+}
     return NULL;
 }
 
@@ -3017,15 +3079,17 @@ ocsp_SendEncodedRequest(const char *location, const SECItem *encodedRequest)
      * Take apart the location, getting the hostname, port, and path.
      */
     rv = ocsp_ParseURL(location, &hostname, &port, &path);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PORT_Assert(hostname != NULL);
     PORT_Assert(path != NULL);
 
     sock = ocsp_ConnectToHost(hostname, port);
-    if (sock == NULL)
+    if (sock == NULL) {
         goto loser;
+}
 
     portstr[0] = '\0';
     if (port != 80) {
@@ -3036,48 +3100,57 @@ ocsp_SendEncodedRequest(const char *location, const SECItem *encodedRequest)
         header = PR_smprintf("GET %s HTTP/1.0\r\n"
                              "Host: %s%s\r\n\r\n",
                              path, hostname, portstr);
-        if (header == NULL)
+        if (header == NULL) {
             goto loser;
+}
 
         /*
          * The NSPR documentation promises that if it can, it will write the full
          * amount; this will not return a partial value expecting us to loop.
          */
-        if (PR_Write(sock, header, (PRInt32)PORT_Strlen(header)) < 0)
+        if (PR_Write(sock, header, (PRInt32)PORT_Strlen(header)) < 0) {
             goto loser;
+}
     } else {
         header = PR_smprintf("POST %s HTTP/1.0\r\n"
                              "Host: %s%s\r\n"
                              "Content-Type: application/ocsp-request\r\n"
                              "Content-Length: %u\r\n\r\n",
                              path, hostname, portstr, encodedRequest->len);
-        if (header == NULL)
+        if (header == NULL) {
             goto loser;
+}
 
         /*
          * The NSPR documentation promises that if it can, it will write the full
          * amount; this will not return a partial value expecting us to loop.
          */
-        if (PR_Write(sock, header, (PRInt32)PORT_Strlen(header)) < 0)
+        if (PR_Write(sock, header, (PRInt32)PORT_Strlen(header)) < 0) {
             goto loser;
+}
 
         if (PR_Write(sock, encodedRequest->data,
-                     (PRInt32)encodedRequest->len) < 0)
+                     (PRInt32)encodedRequest->len) < 0) {
             goto loser;
+}
     }
 
     returnSock = sock;
     sock = NULL;
 
 loser:
-    if (header != NULL)
+    if (header != NULL) {
         PORT_Free(header);
-    if (sock != NULL)
+}
+    if (sock != NULL) {
         PR_Close(sock);
-    if (path != NULL)
+}
+    if (path != NULL) {
         PORT_Free(path);
-    if (hostname != NULL)
+}
+    if (hostname != NULL) {
         PORT_Free(hostname);
+}
 
     return returnSock;
 }
@@ -3434,14 +3507,18 @@ fetchOcspHttpClientV1(PLArenaPool *arena,
     PORT_Memcpy(encodedResponse->data, myHttpResponseData, myHttpResponseDataLen);
 
 loser:
-    if (pRequestSession != NULL)
+    if (pRequestSession != NULL) {
         (*hcv1->freeFcn)(pRequestSession);
-    if (pServerSession != NULL)
+}
+    if (pServerSession != NULL) {
         (*hcv1->freeSessionFcn)(pServerSession);
-    if (path != NULL)
+}
+    if (path != NULL) {
         PORT_Free(path);
-    if (hostname != NULL)
+}
+    if (hostname != NULL) {
         PORT_Free(hostname);
+}
 
     return encodedResponse;
 }
@@ -3507,8 +3584,9 @@ CERT_GetEncodedOCSPResponseByMethod(PLArenaPool *arena, CERTCertList *certList,
     CERTOCSPRequest *request;
     request = CERT_CreateOCSPRequest(certList, time, addServiceLocator,
                                      signerCert);
-    if (!request)
+    if (!request) {
         return NULL;
+}
     return ocsp_GetEncodedOCSPResponseFromRequest(arena, request, location,
                                                   method, time, addServiceLocator,
                                                   pwArg, pRequest);
@@ -3554,8 +3632,9 @@ ocsp_UrlEncodeBase64Buf(const char *base64Buf, char *outputBuf)
 
     for (walkInput = base64Buf; *walkInput; ++walkInput) {
         char c = *walkInput;
-        if (isspace(c))
+        if (isspace(c)) {
             continue;
+}
         switch (c) {
             case '+':
                 if (outputBuf) {
@@ -3614,17 +3693,20 @@ ocsp_GetEncodedOCSPResponseFromRequest(PLArenaPool *arena,
     SECItem *encodedResponse = NULL;
     SECStatus rv;
 
-    if (!location || !*location) /* location should be at least one byte */
+    if (!location || !*location) { /* location should be at least one byte */
         goto loser;
+}
 
     rv = CERT_AddOCSPAcceptableResponses(request,
                                          SEC_OID_PKIX_OCSP_BASIC_RESPONSE);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     encodedRequest = CERT_EncodeOCSPRequest(NULL, request, pwArg);
-    if (encodedRequest == NULL)
+    if (encodedRequest == NULL) {
         goto loser;
+}
 
     if (!strcmp(method, "GET")) {
         encodedResponse = cert_GetOCSPResponse(arena, location, encodedRequest);
@@ -3640,10 +3722,12 @@ ocsp_GetEncodedOCSPResponseFromRequest(PLArenaPool *arena,
     }
 
 loser:
-    if (request != NULL)
+    if (request != NULL) {
         CERT_DestroyOCSPRequest(request);
-    if (encodedRequest != NULL)
+}
+    if (encodedRequest != NULL) {
         SECITEM_FreeItem(encodedRequest, PR_TRUE);
+}
     return encodedResponse;
 }
 
@@ -3765,8 +3849,9 @@ ocsp_GetEncodedOCSPResponseForSingleCert(PLArenaPool *arena,
     CERTOCSPRequest *request;
     request = cert_CreateSingleCertOCSPRequest(certID, singleCert, time,
                                                addServiceLocator, NULL);
-    if (!request)
+    if (!request) {
         return NULL;
+}
     return ocsp_GetEncodedOCSPResponseFromRequest(arena, request, location,
                                                   method, time, addServiceLocator,
                                                   pwArg, pRequest);
@@ -3927,8 +4012,9 @@ ocsp_GetSignerCertificate(CERTCertDBHandle *handle, ocspResponseData *tbsData,
         rv = CERT_ImportCerts(handle, certUsageStatusResponder, certCount,
                               signature->derCerts, &certs,
                               PR_FALSE, PR_FALSE, NULL);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto finish;
+}
     }
 
     /*
@@ -3947,8 +4033,9 @@ ocsp_GetSignerCertificate(CERTCertDBHandle *handle, ocspResponseData *tbsData,
                                         ocsp_ResponderIDDerNameTemplate,
                                         crIndex);
             if (rv != SECSuccess) {
-                if (PORT_GetError() == SEC_ERROR_BAD_DER)
+                if (PORT_GetError() == SEC_ERROR_BAD_DER) {
                     PORT_SetError(SEC_ERROR_OCSP_MALFORMED_RESPONSE);
+}
             } else {
                 signerCert = CERT_FindCertByName(handle, &encodedName);
             }
@@ -4087,8 +4174,9 @@ CERT_VerifyOCSPResponseSignature(CERTOCSPResponse *response,
      */
     if (signature->wasChecked) {
         if (signature->status == SECSuccess) {
-            if (pSignerCert != NULL)
+            if (pSignerCert != NULL) {
                 *pSignerCert = CERT_DupCertificate(signature->cert);
+}
         } else {
             PORT_SetError(signature->failureReason);
         }
@@ -4121,8 +4209,9 @@ CERT_VerifyOCSPResponseSignature(CERTOCSPResponse *response,
      * The value of "producedAt" is the signing time.
      */
     rv = DER_GeneralizedTimeToTime(&producedAt, &tbsData->producedAt);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto finish;
+}
 
     /*
      * Just because we have a cert does not mean it is any good; check
@@ -4149,13 +4238,15 @@ CERT_VerifyOCSPResponseSignature(CERTOCSPResponse *response,
                                       pwArg);
 
 finish:
-    if (signature->wasChecked)
+    if (signature->wasChecked) {
         signature->status = rv;
+}
 
     if (rv != SECSuccess) {
         signature->failureReason = PORT_GetError();
-        if (signerCert != NULL)
+        if (signerCert != NULL) {
             CERT_DestroyCertificate(signerCert);
+}
     } else {
         /*
     	 * Save signer's certificate in signature.
@@ -4266,8 +4357,9 @@ ocsp_GetSingleResponseForCertID(CERTOCSPSingleResponse **responses,
     CERTOCSPSingleResponse *single;
     int i;
 
-    if (responses == NULL)
+    if (responses == NULL) {
         return NULL;
+}
 
     for (i = 0; responses[i] != NULL; i++) {
         single = responses[i];
@@ -4307,8 +4399,9 @@ ocsp_GetCheckingContext(CERTCertDBHandle *handle)
         PORT_Assert(ocspcx != NULL);
     }
 
-    if (ocspcx == NULL)
+    if (ocspcx == NULL) {
         PORT_SetError(SEC_ERROR_OCSP_NOT_ENABLED);
+}
 
     return ocspcx;
 }
@@ -4323,8 +4416,9 @@ ocsp_CertGetDefaultResponder(CERTCertDBHandle *handle, CERTOCSPCertID *certID)
     ocspCheckingContext *ocspcx;
 
     ocspcx = ocsp_GetCheckingContext(handle);
-    if (ocspcx == NULL)
+    if (ocspcx == NULL) {
         goto loser;
+}
 
     /*
      * Right now we have only one default responder.  It applies to
@@ -4353,8 +4447,9 @@ ocsp_CertIsOCSPDefaultResponder(CERTCertDBHandle *handle, CERTCertificate *cert)
     ocspCheckingContext *ocspcx;
 
     ocspcx = ocsp_GetCheckingContext(handle);
-    if (ocspcx == NULL)
+    if (ocspcx == NULL) {
         return PR_FALSE;
+}
 
     /*
      * Right now we have only one default responder.  It applies to
@@ -4524,8 +4619,9 @@ ocsp_TimeIsRecent(PRTime checkTime)
     LL_MUL(lapse, lapse, tmp); /* allowable lapse in microseconds */
 
     LL_ADD(checkTime, checkTime, lapse);
-    if (LL_CMP(now, >, checkTime))
+    if (LL_CMP(now, >, checkTime)) {
         return PR_FALSE;
+}
 
     return PR_TRUE;
 }
@@ -4603,8 +4699,9 @@ ocsp_VerifySingleResponse(CERTOCSPSingleResponse *single,
      * not the status of the cert.
      */
     PORT_Assert(single->certStatus != NULL);
-    if (single->certStatus->certStatusType == ocspCertStatus_unknown)
+    if (single->certStatus->certStatusType == ocspCertStatus_unknown) {
         return SECSuccess;
+}
 
     /*
      * We need to extract "thisUpdate" for use below and to pass along
@@ -4612,15 +4709,17 @@ ocsp_VerifySingleResponse(CERTOCSPSingleResponse *single,
      * issuer look-up.
      */
     rv = DER_GeneralizedTimeToTime(&thisUpdate, &single->thisUpdate);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     /*
      * First confirm that signerCert is authorized to give this status.
      */
     if (ocsp_AuthorizedResponderForCertID(handle, signerCert, certID,
-                                          thisUpdate) != PR_TRUE)
+                                          thisUpdate) != PR_TRUE) {
         return SECFailure;
+}
 
     /*
      * Now check the time stuff, as described above.
@@ -4638,12 +4737,14 @@ ocsp_VerifySingleResponse(CERTOCSPSingleResponse *single,
     }
     if (single->nextUpdate != NULL) {
         rv = DER_GeneralizedTimeToTime(&nextUpdate, single->nextUpdate);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         LL_ADD(tmp, tmp, nextUpdate);
-        if (LL_CMP(tmp, <, now) || LL_CMP(producedAt, >, nextUpdate))
+        if (LL_CMP(tmp, <, now) || LL_CMP(producedAt, >, nextUpdate)) {
             return ocsp_HandleOldSingleResponse(single, now);
+}
     } else if (ocsp_TimeIsRecent(thisUpdate) != PR_TRUE) {
         return ocsp_HandleOldSingleResponse(single, now);
     }
@@ -4686,8 +4787,9 @@ CERT_GetOCSPAuthorityInfoAccessLocation(const CERTCertificate *cert)
      * and we can free the entire thing on our way out.
      */
     encodedAuthInfoAccess = SECITEM_AllocItem(NULL, NULL, 0);
-    if (encodedAuthInfoAccess == NULL)
+    if (encodedAuthInfoAccess == NULL) {
         goto loser;
+}
 
     rv = CERT_FindCertExtension(cert, SEC_OID_X509_AUTH_INFO_ACCESS,
                                 encodedAuthInfoAccess);
@@ -4703,17 +4805,20 @@ CERT_GetOCSPAuthorityInfoAccessLocation(const CERTCertificate *cert)
      * after we have copied the location string (url) itself (if found).
      */
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         goto loser;
+}
 
     authInfoAccess = CERT_DecodeAuthInfoAccessExtension(arena,
                                                         encodedAuthInfoAccess);
-    if (authInfoAccess == NULL)
+    if (authInfoAccess == NULL) {
         goto loser;
+}
 
     for (i = 0; authInfoAccess[i] != NULL; i++) {
-        if (SECOID_FindOIDTag(&authInfoAccess[i]->method) == SEC_OID_PKIX_OCSP)
+        if (SECOID_FindOIDTag(&authInfoAccess[i]->method) == SEC_OID_PKIX_OCSP) {
             locname = authInfoAccess[i]->location;
+}
     }
 
     /*
@@ -4759,11 +4864,13 @@ CERT_GetOCSPAuthorityInfoAccessLocation(const CERTCertificate *cert)
     locURI[location->len] = '\0';
 
 loser:
-    if (arena != NULL)
+    if (arena != NULL) {
         PORT_FreeArena(arena, PR_FALSE);
+}
 
-    if (encodedAuthInfoAccess != NULL)
+    if (encodedAuthInfoAccess != NULL) {
         SECITEM_FreeItem(encodedAuthInfoAccess, PR_TRUE);
+}
 
     return locURI;
 }
@@ -4817,8 +4924,9 @@ ocsp_GetResponderLocation(CERTCertDBHandle *handle, CERTCertificate *cert,
         PR_ExitMonitor(OCSP_Global.monitor);
         if (altFcn) {
             ocspUrl = (*altFcn)(cert);
-            if (ocspUrl)
+            if (ocspUrl) {
                 *isDefault = PR_TRUE;
+}
         }
     }
     return ocspUrl;
@@ -4835,16 +4943,18 @@ ocsp_CertRevokedAfter(ocspRevokedInfo *revokedInfo, PRTime time)
     SECStatus rv;
 
     rv = DER_GeneralizedTimeToTime(&revokedTime, &revokedInfo->revocationTime);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     /*
      * Set the error even if we will return success; someone might care.
      */
     PORT_SetError(SEC_ERROR_REVOKED_CERTIFICATE);
 
-    if (LL_CMP(revokedTime, >, time))
+    if (LL_CMP(revokedTime, >, time)) {
         return SECSuccess;
+}
 
     return SECFailure;
 }
@@ -5023,8 +5133,9 @@ CERT_CheckOCSPStatus(CERTCertDBHandle *handle, CERTCertificate *cert,
     OCSP_TRACE_TIME("## requested validity time:", time);
 
     certID = CERT_CreateOCSPCertID(cert, time);
-    if (!certID)
+    if (!certID) {
         return SECFailure;
+}
     rv = ocsp_GetCachedOCSPResponseStatus(
         certID, time, PR_FALSE, /* ignoreGlobalOcspFailureSetting */
         &rvOcsp, &cachedErrorCode, &cachedResponseFreshness);
@@ -5158,8 +5269,9 @@ CERT_CacheOCSPResponseFromSideChannel(CERTCertDBHandle *handle,
         return SECFailure;
     }
     certID = CERT_CreateOCSPCertID(cert, time);
-    if (!certID)
+    if (!certID) {
         return SECFailure;
+}
 
     /* We pass PR_TRUE for ignoreGlobalOcspFailureSetting so that a cached
      * error entry is not interpreted as being a 'Good' entry here.
@@ -5455,10 +5567,12 @@ ocsp_GetDecodedVerifiedSingleResponseForID(CERTCertDBHandle *handle,
     rv = ocsp_GetVerifiedSingleResponseForCertID(handle, *pDecodedResponse, certID,
                                                  signerCert, time, pSingle);
 loser:
-    if (issuerCert != NULL)
+    if (issuerCert != NULL) {
         CERT_DestroyCertificate(issuerCert);
-    if (signerCert != NULL)
+}
+    if (signerCert != NULL) {
         CERT_DestroyCertificate(signerCert);
+}
     return rv;
 }
 
@@ -5520,8 +5634,9 @@ ocsp_GetVerifiedSingleResponseForCertID(CERTCertDBHandle *handle,
      * single response.
      */
     rv = DER_GeneralizedTimeToTime(&producedAt, &responseData->producedAt);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     single = ocsp_GetSingleResponseForCertID(responseData->responses,
                                              handle, certID);
@@ -5531,8 +5646,9 @@ ocsp_GetVerifiedSingleResponseForCertID(CERTCertDBHandle *handle,
     }
 
     rv = ocsp_VerifySingleResponse(single, handle, signerCert, producedAt);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
     *pSingleResponse = single;
 
 loser:
@@ -5648,13 +5764,16 @@ ocsp_DestroyStatusChecking(CERTStatusConfig *statusConfig)
 
     statusContext = statusConfig->statusContext;
     PORT_Assert(statusContext != NULL);
-    if (statusContext == NULL)
+    if (statusContext == NULL) {
         return SECFailure;
+}
 
-    if (statusContext->defaultResponderURI != NULL)
+    if (statusContext->defaultResponderURI != NULL) {
         PORT_Free(statusContext->defaultResponderURI);
-    if (statusContext->defaultResponderNickname != NULL)
+}
+    if (statusContext->defaultResponderNickname != NULL) {
         PORT_Free(statusContext->defaultResponderNickname);
+}
 
     PORT_Free(statusContext);
     statusConfig->statusContext = NULL;
@@ -5692,8 +5811,9 @@ CERT_DisableOCSPChecking(CERTCertDBHandle *handle)
 
     statusConfig = CERT_GetStatusConfig(handle);
     statusContext = ocsp_GetCheckingContext(handle);
-    if (statusContext == NULL)
+    if (statusContext == NULL) {
         return SECFailure;
+}
 
     if (statusConfig->statusChecker != CERT_CheckOCSPStatus) {
         /*
@@ -5734,12 +5854,14 @@ ocsp_InitStatusChecking(CERTCertDBHandle *handle)
     }
 
     statusConfig = PORT_ZNew(CERTStatusConfig);
-    if (statusConfig == NULL)
+    if (statusConfig == NULL) {
         goto loser;
+}
 
     statusContext = PORT_ZNew(ocspCheckingContext);
-    if (statusContext == NULL)
+    if (statusContext == NULL) {
         goto loser;
+}
 
     statusConfig->statusDestroy = ocsp_DestroyStatusChecking;
     statusConfig->statusContext = statusContext;
@@ -5749,8 +5871,9 @@ ocsp_InitStatusChecking(CERTCertDBHandle *handle)
     return SECSuccess;
 
 loser:
-    if (statusConfig != NULL)
+    if (statusConfig != NULL) {
         PORT_Free(statusConfig);
+}
     return SECFailure;
 }
 
@@ -5779,8 +5902,9 @@ CERT_EnableOCSPChecking(CERTCertDBHandle *handle)
     statusConfig = CERT_GetStatusConfig(handle);
     if (statusConfig == NULL) {
         rv = ocsp_InitStatusChecking(handle);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         /* Get newly established value */
         statusConfig = CERT_GetStatusConfig(handle);
@@ -5853,8 +5977,9 @@ CERT_SetOCSPDefaultResponder(CERTCertDBHandle *handle,
          */
         cert = PK11_FindCertFromNickname((char *)name, NULL);
     }
-    if (cert == NULL)
+    if (cert == NULL) {
         return SECFailure;
+}
 
     /*
      * Make a copy of the url and nickname.
@@ -5873,8 +5998,9 @@ CERT_SetOCSPDefaultResponder(CERTCertDBHandle *handle,
      */
     if (statusContext == NULL) {
         rv = ocsp_InitStatusChecking(handle);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
 
         statusContext = ocsp_GetCheckingContext(handle);
         PORT_Assert(statusContext != NULL); /* extreme paranoia */
@@ -5889,10 +6015,12 @@ CERT_SetOCSPDefaultResponder(CERTCertDBHandle *handle,
     /*
      * Get rid of old url and name if there.
      */
-    if (statusContext->defaultResponderNickname != NULL)
+    if (statusContext->defaultResponderNickname != NULL) {
         PORT_Free(statusContext->defaultResponderNickname);
-    if (statusContext->defaultResponderURI != NULL)
+}
+    if (statusContext->defaultResponderURI != NULL) {
         PORT_Free(statusContext->defaultResponderURI);
+}
 
     /*
      * And replace them with the new ones.
@@ -5921,10 +6049,12 @@ CERT_SetOCSPDefaultResponder(CERTCertDBHandle *handle,
 
 loser:
     CERT_DestroyCertificate(cert);
-    if (url_copy != NULL)
+    if (url_copy != NULL) {
         PORT_Free(url_copy);
-    if (name_copy != NULL)
+}
+    if (name_copy != NULL) {
         PORT_Free(name_copy);
+}
     return rv;
 }
 
@@ -5993,8 +6123,9 @@ CERT_EnableOCSPDefaultResponder(CERTCertDBHandle *handle)
      * existence should have been proven by SetOCSPDefaultResponder.
      */
     PORT_Assert(cert != NULL);
-    if (cert == NULL)
+    if (cert == NULL) {
         return SECFailure;
+}
 
     /*
      * Supplied cert should at least have  a signing capability in order for us
@@ -6049,13 +6180,15 @@ CERT_DisableOCSPDefaultResponder(CERTCertDBHandle *handle)
     }
 
     statusConfig = CERT_GetStatusConfig(handle);
-    if (statusConfig == NULL)
+    if (statusConfig == NULL) {
         return SECSuccess;
+}
 
     statusContext = ocsp_GetCheckingContext(handle);
     PORT_Assert(statusContext != NULL);
-    if (statusContext == NULL)
+    if (statusContext == NULL) {
         return SECFailure;
+}
 
     tmpCert = statusContext->defaultResponderCert;
     if (tmpCert) {
@@ -6091,8 +6224,9 @@ SECStatus
 CERT_GetOCSPResponseStatus(CERTOCSPResponse *response)
 {
     PORT_Assert(response);
-    if (response->statusValue == ocspResponse_successful)
+    if (response->statusValue == ocspResponse_successful) {
         return SECSuccess;
+}
 
     switch (response->statusValue) {
         case ocspResponse_malformedRequest:

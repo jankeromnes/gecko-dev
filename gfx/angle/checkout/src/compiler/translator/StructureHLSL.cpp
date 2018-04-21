@@ -484,8 +484,9 @@ TString StructureHLSL::addBuiltInConstructor(const TType &type, const TIntermSeq
 
                     remainingComponents = 0;
                 }
-                else
+                else {
                     UNREACHABLE();
+}
             }
             else if (parameter.isMatrix())
             {

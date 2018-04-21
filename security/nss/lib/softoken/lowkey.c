@@ -279,15 +279,17 @@ nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk)
 
                 pubk->arena = arena;
                 pubk->keyType = privk->keyType;
-                if (privk->keyType == NSSLOWKEYNullKey)
+                if (privk->keyType == NSSLOWKEYNullKey) {
                     return pubk;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.rsa.modulus,
                                       &privk->u.rsa.modulus);
                 if (rv == SECSuccess) {
                     rv = SECITEM_CopyItem(arena, &pubk->u.rsa.publicExponent,
                                           &privk->u.rsa.publicExponent);
-                    if (rv == SECSuccess)
+                    if (rv == SECSuccess) {
                         return pubk;
+}
                 }
             } else {
                 PORT_SetError(SEC_ERROR_NO_MEMORY);
@@ -303,20 +305,24 @@ nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk)
                 pubk->keyType = privk->keyType;
                 rv = SECITEM_CopyItem(arena, &pubk->u.dsa.publicValue,
                                       &privk->u.dsa.publicValue);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dsa.params.prime,
                                       &privk->u.dsa.params.prime);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dsa.params.subPrime,
                                       &privk->u.dsa.params.subPrime);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dsa.params.base,
                                       &privk->u.dsa.params.base);
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
             }
             break;
         case NSSLOWKEYDHKey:
@@ -329,16 +335,19 @@ nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk)
                 pubk->keyType = privk->keyType;
                 rv = SECITEM_CopyItem(arena, &pubk->u.dh.publicValue,
                                       &privk->u.dh.publicValue);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dh.prime,
                                       &privk->u.dh.prime);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dh.base,
                                       &privk->u.dh.base);
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
             }
             break;
         case NSSLOWKEYECKey:
@@ -351,14 +360,16 @@ nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk)
                 pubk->keyType = privk->keyType;
                 rv = SECITEM_CopyItem(arena, &pubk->u.ec.publicValue,
                                       &privk->u.ec.publicValue);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 pubk->u.ec.ecParams.arena = arena;
                 /* Copy the rest of the params */
                 rv = EC_CopyParams(arena, &(pubk->u.ec.ecParams),
                                    &(privk->u.ec.ecParams));
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
             }
             break;
         /* No Fortezza in Low Key implementations (Fortezza keys aren't
@@ -400,102 +411,124 @@ nsslowkey_CopyPrivateKey(NSSLOWKEYPrivateKey *privKey)
         case NSSLOWKEYRSAKey:
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.modulus),
                                   &(privKey->u.rsa.modulus));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.version),
                                   &(privKey->u.rsa.version));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.publicExponent),
                                   &(privKey->u.rsa.publicExponent));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.privateExponent),
                                   &(privKey->u.rsa.privateExponent));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.prime1),
                                   &(privKey->u.rsa.prime1));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.prime2),
                                   &(privKey->u.rsa.prime2));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.exponent1),
                                   &(privKey->u.rsa.exponent1));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.exponent2),
                                   &(privKey->u.rsa.exponent2));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.rsa.coefficient),
                                   &(privKey->u.rsa.coefficient));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             break;
         case NSSLOWKEYDSAKey:
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dsa.publicValue),
                                   &(privKey->u.dsa.publicValue));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dsa.privateValue),
                                   &(privKey->u.dsa.privateValue));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             returnKey->u.dsa.params.arena = poolp;
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dsa.params.prime),
                                   &(privKey->u.dsa.params.prime));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dsa.params.subPrime),
                                   &(privKey->u.dsa.params.subPrime));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dsa.params.base),
                                   &(privKey->u.dsa.params.base));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             break;
         case NSSLOWKEYDHKey:
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dh.publicValue),
                                   &(privKey->u.dh.publicValue));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dh.privateValue),
                                   &(privKey->u.dh.privateValue));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             returnKey->u.dsa.params.arena = poolp;
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dh.prime),
                                   &(privKey->u.dh.prime));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.dh.base),
                                   &(privKey->u.dh.base));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             break;
         case NSSLOWKEYECKey:
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.ec.version),
                                   &(privKey->u.ec.version));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.ec.publicValue),
                                   &(privKey->u.ec.publicValue));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = SECITEM_CopyItem(poolp, &(returnKey->u.ec.privateValue),
                                   &(privKey->u.ec.privateValue));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             returnKey->u.ec.ecParams.arena = poolp;
             /* Copy the rest of the params */
             rv = EC_CopyParams(poolp, &(returnKey->u.ec.ecParams),
                                &(privKey->u.ec.ecParams));
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             break;
         default:
             rv = SECFailure;

@@ -2134,13 +2134,14 @@ void av1_coef_pareto_cdfs(FRAME_CONTEXT *fc) {
   /* Build the tail based on a Pareto distribution */
   TX_SIZE t;
   int i, j, k, l;
-  for (t = 0; t < TX_SIZES; ++t)
-    for (i = 0; i < PLANE_TYPES; ++i)
-      for (j = 0; j < REF_TYPES; ++j)
-        for (k = 0; k < COEF_BANDS; ++k)
-          for (l = 0; l < BAND_COEFF_CONTEXTS(k); ++l)
+  for (t = 0; t < TX_SIZES; ++t) {
+    for (i = 0; i < PLANE_TYPES; ++i) {
+      for (j = 0; j < REF_TYPES; ++j) {
+        for (k = 0; k < COEF_BANDS; ++k) {
+          for (l = 0; l < BAND_COEFF_CONTEXTS(k); ++l) {
             build_tail_cdfs(fc->coef_tail_cdfs[t][i][j][k][l],
                             fc->coef_head_cdfs[t][i][j][k][l], k == 0);
+}
 }
 
 void av1_default_coef_probs(AV1_COMMON *cm) {
@@ -2191,7 +2192,8 @@ static void av1_average_cdf(aom_cdf_prob *cdf_ptr[], aom_cdf_prob *fc_cdf_ptr,
       int sum = 0;
       int j;
       assert(i < cdf_size);
-      for (j = 0; j < num_tiles; ++j) sum += AOM_ICDF(cdf_ptr[j][i]);
+      for (j = 0; j < num_tiles; ++j) { sum += AOM_ICDF(cdf_ptr[j][i]);
+}
       fc_cdf_ptr[i] = AOM_ICDF(sum / num_tiles);
     } while (fc_cdf_ptr[i++] != AOM_ICDF(CDF_PROB_TOP));
     // Zero symbol counts for the next frame

@@ -45,12 +45,14 @@ int nr_socket_create_int(void *obj, nr_socket_vtbl *vtbl, nr_socket **sockp)
     int _status;
     nr_socket *sock=0;
 
-    if(!(sock=RCALLOC(sizeof(nr_socket))))
+    if(!(sock=RCALLOC(sizeof(nr_socket)))) {
       ABORT(R_NO_MEMORY);
+}
 
     assert(vtbl->version >= 1 && vtbl->version <= 2);
-    if (vtbl->version < 1 || vtbl->version > 2)
+    if (vtbl->version < 1 || vtbl->version > 2) {
        ABORT(R_INTERNAL);
+}
 
     sock->obj=obj;
     sock->vtbl=vtbl;
@@ -66,8 +68,9 @@ int nr_socket_destroy(nr_socket **sockp)
   {
     nr_socket *sock;
 
-    if(!sockp || !*sockp)
+    if(!sockp || !*sockp) {
       return(0);
+}
 
 
     sock=*sockp;
@@ -76,8 +79,9 @@ int nr_socket_destroy(nr_socket **sockp)
     CHECK_DEFINED(destroy);
 
     assert(sock->vtbl);
-    if (sock->vtbl)
+    if (sock->vtbl) {
       sock->vtbl->destroy(&sock->obj);
+}
 
     RFREE(sock);
 
@@ -157,8 +161,9 @@ int nr_socket_factory_create_int(void *obj,
     int _status;
     nr_socket_factory *factoryp=0;
 
-    if(!(factoryp=RCALLOC(sizeof(nr_socket_factory))))
+    if(!(factoryp=RCALLOC(sizeof(nr_socket_factory)))) {
       ABORT(R_NO_MEMORY);
+}
 
     factoryp->obj = obj;
     factoryp->vtbl = vtbl;
@@ -174,8 +179,9 @@ int nr_socket_factory_destroy(nr_socket_factory **factorypp)
   {
     nr_socket_factory *factoryp;
 
-    if (!factorypp || !*factorypp)
+    if (!factorypp || !*factorypp) {
       return (0);
+}
 
     factoryp = *factorypp;
     *factorypp = NULL;

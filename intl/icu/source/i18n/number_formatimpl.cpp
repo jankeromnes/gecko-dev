@@ -100,7 +100,8 @@ CurrencyFormatInfoResult getCurrencyFormatInfo(const Locale& locale, const char*
     // TODO: Load this data in a centralized location like ICU4J?
     // TODO: Parts of this same data are loaded in dcfmtsym.cpp; should clean up.
     CurrencyFormatInfoResult result = { false, nullptr, nullptr, nullptr };
-    if (U_FAILURE(status)) return result;
+    if (U_FAILURE(status)) { return result;
+}
     CharString key;
     key.append("Currencies/", status);
     key.append(isoCode, status);

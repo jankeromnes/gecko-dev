@@ -210,12 +210,14 @@ gfxXlibNativeRenderer::DrawCairo(cairo_t* cr, IntSize size,
         _get_rectangular_clip (cr, bounds, &needs_clip,
                                rectangles, max_rectangles, &rect_count);
     cairo_set_matrix (cr, &matrix);
-    if (!have_rectangular_clip)
+    if (!have_rectangular_clip) {
         return false;
+}
 
     /* Stop now if everything is clipped out */
-    if (needs_clip && rect_count == 0)
+    if (needs_clip && rect_count == 0) {
         return true;
+}
 
     /* Check that the screen is supported.
        Visuals belong to screens, so, if alternate visuals are not supported,
@@ -282,14 +284,16 @@ FormatConversionIsExact(Screen *screen, Visual *visual, XRenderPictFormat *forma
     if (!format ||
         visual->c_class != TrueColor ||
         format->type != PictTypeDirect ||
-        gfxXlibSurface::DepthOfVisual(screen, visual) != format->depth)
+        gfxXlibSurface::DepthOfVisual(screen, visual) != format->depth) {
         return false;
+}
 
     XRenderPictFormat *visualFormat =
         XRenderFindVisualFormat(DisplayOfScreen(screen), visual);
 
-    if (visualFormat->type != PictTypeDirect )
+    if (visualFormat->type != PictTypeDirect ) {
         return false;
+}
 
     const XRenderDirectFormat& a = visualFormat->direct;
     const XRenderDirectFormat& b = format->direct;

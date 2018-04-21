@@ -75,8 +75,9 @@ static INLINE int read_coeff(FRAME_COUNTS *counts, const aom_prob *probs, int n,
   (void)counts;
 #endif
   int i, val = 0;
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     val = (val << 1) | av1_read_record(counts, r, probs[i], ACCT_STR);
+}
   return val;
 }
 
@@ -176,7 +177,8 @@ static int decode_coefs(MACROBLOCKD *xd, PLANE_TYPE type, tran_low_t *dqcoeff,
                                 HEAD_TOKENS + first_pos, ACCT_STR) +
                                 !first_pos;
     if (first_pos) {
-      if (comb_token == 0) return 0;
+      if (comb_token == 0) { return 0;
+}
     }
     token = comb_token >> 1;
 
@@ -204,9 +206,10 @@ static int decode_coefs(MACROBLOCKD *xd, PLANE_TYPE type, tran_low_t *dqcoeff,
 
     more_data = comb_token & 1;
 
-    if (token > ONE_TOKEN)
+    if (token > ONE_TOKEN) {
       token += av1_read_record_symbol(xd->counts, r, coef_tail_cdfs[band][ctx],
                                       TAIL_TOKENS, ACCT_STR);
+}
 #if CONFIG_NEW_QUANT
     dqv_val = &dq_val[band][0];
 #endif  // CONFIG_NEW_QUANT
@@ -225,9 +228,10 @@ static int decode_coefs(MACROBLOCKD *xd, PLANE_TYPE type, tran_low_t *dqcoeff,
 #else
 #if CONFIG_AOM_QM
     // Apply quant matrix only for 2D transforms
-    if (IS_2D_TRANSFORM(tx_type) && iqmatrix != NULL)
+    if (IS_2D_TRANSFORM(tx_type) && iqmatrix != NULL) {
       dqv = ((iqmatrix[scan[c]] * (int)dqv) + (1 << (AOM_QM_BITS - 1))) >>
             AOM_QM_BITS;
+}
 #endif
     v = (val * dqv) >> dq_shift;
 #endif
@@ -239,7 +243,8 @@ static int decode_coefs(MACROBLOCKD *xd, PLANE_TYPE type, tran_low_t *dqcoeff,
 
     ++c;
     more_data &= (c < max_eob);
-    if (!more_data) break;
+    if (!more_data) { break;
+}
     dqv = dq[1];
     ctx = get_coef_context(nb, token_cache, c);
     band = *band_translate++;

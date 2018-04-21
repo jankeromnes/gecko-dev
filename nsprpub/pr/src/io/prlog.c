@@ -201,7 +201,8 @@ void _PR_InitLog(void)
             count = sscanf(&ev[pos], "%63[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-]%n:%d%n",
                            module, &delta, &level, &delta);
             pos += delta;
-            if (count == 0) break;
+            if (count == 0) { break;
+}
 
             /*
             ** If count == 2, then we got module and level. If count
@@ -223,8 +224,8 @@ void _PR_InitLog(void)
                     (0 == strcasecmp (module, "all")) ? PR_TRUE : PR_FALSE;
 
                 while (lm != NULL) {
-                    if (skip_modcheck) lm -> level = (PRLogModuleLevel)level;
-                    else if (strcasecmp(module, lm->name) == 0) {
+                    if (skip_modcheck) { lm -> level = (PRLogModuleLevel)level;
+                    } else if (strcasecmp(module, lm->name) == 0) {
                         lm->level = (PRLogModuleLevel)level;
                         break;
                     }
@@ -234,7 +235,8 @@ void _PR_InitLog(void)
             /*found:*/
             count = sscanf(&ev[pos], " , %n", &delta);
             pos += delta;
-            if (count == EOF) break;
+            if (count == EOF) { break;
+}
         }
         PR_SetLogBuffering(isSync ? 0 : bufSize);
 
@@ -318,7 +320,8 @@ static void _PR_SetLogModuleLevel( PRLogModuleInfo *lm )
             count = sscanf(&ev[pos], "%63[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-]%n:%d%n",
                            module, &delta, &level, &delta);
             pos += delta;
-            if (count == 0) break;
+            if (count == 0) { break;
+}
 
             /*
             ** If count == 2, then we got module and level. If count
@@ -334,7 +337,8 @@ static void _PR_SetLogModuleLevel( PRLogModuleInfo *lm )
             }
             count = sscanf(&ev[pos], " , %n", &delta);
             pos += delta;
-            if (count == EOF) break;
+            if (count == EOF) { break;
+}
         }
     }
 } /* end _PR_SetLogModuleLevel() */
@@ -343,7 +347,8 @@ PR_IMPLEMENT(PRLogModuleInfo*) PR_NewLogModule(const char *name)
 {
     PRLogModuleInfo *lm;
 
-        if (!_pr_initialized) _PR_ImplicitInitialization();
+        if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     lm = PR_NEWZAP(PRLogModuleInfo);
     if (lm) {
@@ -432,7 +437,8 @@ PR_IMPLEMENT(void) PR_LogPrint(const char *fmt, ...)
     PRThread *me;
     PRExplodedTime now;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     if (!logFile) {
         return;

@@ -16,8 +16,9 @@ combine_mask (const uint32_t src, const uint32_t mask)
 
     m = mask >> A_SHIFT;
 
-    if (!m)
+    if (!m) {
 	return 0;
+}
     s = src;
 
     UN8x4_MUL_UN8 (s, m);
@@ -35,9 +36,9 @@ combine_src_u (pixman_implementation_t *imp,
 {
     int i;
 
-    if (!mask)
+    if (!mask) {
 	memcpy (dest, src, width * sizeof (uint16_t));
-    else
+    } else
     {
 	uint16_t *d = (uint16_t*)dest;
 	uint16_t *src16 = (uint16_t*)src;
@@ -70,9 +71,9 @@ combine_over_u (pixman_implementation_t *imp,
 {
     int i;
 
-    if (!mask)
+    if (!mask) {
 	memcpy (dest, src, width * sizeof (uint16_t));
-    else
+    } else
     {
 	uint16_t *d = (uint16_t*)dest;
 	uint16_t *src16 = (uint16_t*)src;

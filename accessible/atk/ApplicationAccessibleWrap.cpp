@@ -37,15 +37,18 @@ toplevel_event_watcher(GSignalInvocationHint* ihint,
 {
   static GQuark sQuark_gecko_acc_obj = 0;
 
-  if (!sQuark_gecko_acc_obj)
+  if (!sQuark_gecko_acc_obj) {
     sQuark_gecko_acc_obj = g_quark_from_static_string("GeckoAccObj");
+}
 
-  if (nsAccessibilityService::IsShutdown())
+  if (nsAccessibilityService::IsShutdown()) {
     return TRUE;
+}
 
   GObject* object = reinterpret_cast<GObject*>(g_value_get_object(param_values));
-  if (!GTK_IS_WINDOW(object))
+  if (!GTK_IS_WINDOW(object)) {
     return TRUE;
+}
 
   AtkObject* child = gtk_widget_get_accessible(GTK_WIDGET(object));
 
@@ -96,8 +99,9 @@ ApplicationAccessibleWrap::GetNativeInterface(void** aOutAccessible)
   if (!mAtkObject) {
     mAtkObject =
       reinterpret_cast<AtkObject*>(g_object_new(MAI_TYPE_ATK_OBJECT, nullptr));
-    if (!mAtkObject)
+    if (!mAtkObject) {
       return;
+}
 
     atk_object_initialize(mAtkObject, this);
     mAtkObject->role = ATK_ROLE_INVALID;
@@ -128,8 +132,9 @@ gboolean fireRootAccessibleAddedCB(gpointer data)
 bool
 ApplicationAccessibleWrap::InsertChildAt(uint32_t aIdx, Accessible* aChild)
 {
-  if (!ApplicationAccessible::InsertChildAt(aIdx, aChild))
+  if (!ApplicationAccessible::InsertChildAt(aIdx, aChild)) {
     return false;
+}
 
   AtkObject* atkAccessible = AccessibleWrap::GetAtkObject(aChild);
   atk_object_set_parent(atkAccessible, mAtkObject);

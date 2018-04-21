@@ -191,8 +191,9 @@ SEC_PKCS5GetCryptoAlgorithm(SECAlgorithmID *algid)
     SECOidTag pbeAlg;
     SECOidTag cipherAlg;
 
-    if (algid == NULL)
+    if (algid == NULL) {
         return SEC_OID_UNKNOWN;
+}
 
     pbeAlg = SECOID_GetAlgorithmTag(algid);
     cipherAlg = sec_pkcs5GetCryptoFromAlgTag(pbeAlg);
@@ -363,8 +364,9 @@ sec_pkcs5v2_key_length(SECAlgorithmID *algid, SECAlgorithmID *cipherAlgId)
         goto loser;
     }
 
-    if (cipherAlgId)
+    if (cipherAlgId) {
         cipherAlg = SECOID_GetAlgorithmTag(cipherAlgId);
+}
 
     if (sec_pkcs5_is_algorithm_v2_aes_algorithm(cipherAlg)) {
         /* Previously, the PKCS#12 files created with the old NSS
@@ -412,8 +414,9 @@ SEC_PKCS5GetKeyLength(SECAlgorithmID *algid)
 
     SECOidTag algorithm;
 
-    if (algid == NULL)
+    if (algid == NULL) {
         return SEC_OID_UNKNOWN;
+}
 
     algorithm = SECOID_GetAlgorithmTag(algid);
 
@@ -500,8 +503,9 @@ sec_pkcs5_is_algorithm_v2_pkcs5_algorithm(SECOidTag algorithm)
 static void
 sec_pkcs5_destroy_pbe_param(SEC_PKCS5PBEParameter *pbe_param)
 {
-    if (pbe_param != NULL)
+    if (pbe_param != NULL) {
         PORT_FreeArena(pbe_param->poolp, PR_TRUE);
+}
 }
 
 /* creates a PBE parameter based on the PBE algorithm.  the only required
@@ -534,8 +538,9 @@ sec_pkcs5_create_pbe_parameter(SECOidTag algorithm,
     }
 
     poolp = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if (poolp == NULL)
+    if (poolp == NULL) {
         return NULL;
+}
 
     pbe_param = (SEC_PKCS5PBEParameter *)PORT_ArenaZAlloc(poolp,
                                                           sizeof(SEC_PKCS5PBEParameter));
@@ -1211,10 +1216,12 @@ static void
 pk11_destroy_ck_pbe_params(CK_PBE_PARAMS *pbe_params)
 {
     if (pbe_params) {
-        if (pbe_params->pPassword)
+        if (pbe_params->pPassword) {
             PORT_ZFree(pbe_params->pPassword, pbe_params->ulPasswordLen);
-        if (pbe_params->pSalt)
+}
+        if (pbe_params->pSalt) {
             PORT_ZFree(pbe_params->pSalt, pbe_params->ulSaltLen);
+}
         PORT_ZFree(pbe_params, sizeof(CK_PBE_PARAMS));
     }
 }
@@ -1257,10 +1264,12 @@ PK11_CreatePBEParams(SECItem *salt, SECItem *pwd, unsigned int iterations)
     return paramRV;
 
 loser:
-    if (pbe_params)
+    if (pbe_params) {
         pk11_destroy_ck_pbe_params(pbe_params);
-    if (paramRV)
+}
+    if (paramRV) {
         PORT_ZFree(paramRV, sizeof(SECItem));
+}
     return NULL;
 }
 
@@ -1272,8 +1281,9 @@ PK11_DestroyPBEParams(SECItem *pItem)
 {
     if (pItem) {
         CK_PBE_PARAMS *params = (CK_PBE_PARAMS *)(pItem->data);
-        if (params)
+        if (params) {
             pk11_destroy_ck_pbe_params(params);
+}
         PORT_ZFree(pItem, sizeof(SECItem));
     }
 }

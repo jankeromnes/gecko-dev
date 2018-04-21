@@ -111,12 +111,14 @@ GetAboutModuleName(nsIURI *aURI)
   aURI->GetPathQueryRef(path);
 
   int32_t f = path.FindChar('#');
-  if (f >= 0)
+  if (f >= 0) {
     path.SetLength(f);
+}
 
   f = path.FindChar('?');
-  if (f >= 0)
+  if (f >= 0) {
     path.SetLength(f);
+}
 
   ToLowerCase(path);
   return path;
@@ -217,8 +219,9 @@ nsresult
 AboutRedirector::Create(nsISupports *aOuter, REFNSIID aIID, void **result)
 {
   AboutRedirector* about = new AboutRedirector();
-  if (about == nullptr)
+  if (about == nullptr) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
   NS_ADDREF(about);
   nsresult rv = about->QueryInterface(aIID, result);
   NS_RELEASE(about);

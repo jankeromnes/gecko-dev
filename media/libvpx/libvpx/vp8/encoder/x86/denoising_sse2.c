@@ -116,7 +116,8 @@ int vp8_denoiser_filter_sse2(unsigned char *mc_running_avg_y,
     /* Compute the sum of all pixel differences of this MB. */
     unsigned int abs_sum_diff = abs_sum_diff_16x1(acc_diff);
     sum_diff_thresh = SUM_DIFF_THRESHOLD;
-    if (increase_denoising) sum_diff_thresh = SUM_DIFF_THRESHOLD_HIGH;
+    if (increase_denoising) { sum_diff_thresh = SUM_DIFF_THRESHOLD_HIGH;
+}
     if (abs_sum_diff > sum_diff_thresh) {
       // Before returning to copy the block (i.e., apply no denoising),
       // check if we can still apply some (weaker) temporal filtering to
@@ -294,7 +295,8 @@ int vp8_denoiser_filter_uv_sse2(unsigned char *mc_running_avg,
   {
     unsigned int abs_sum_diff = abs_sum_diff_16x1(acc_diff);
     sum_diff_thresh = SUM_DIFF_THRESHOLD_UV;
-    if (increase_denoising) sum_diff_thresh = SUM_DIFF_THRESHOLD_HIGH_UV;
+    if (increase_denoising) { sum_diff_thresh = SUM_DIFF_THRESHOLD_HIGH_UV;
+}
     if (abs_sum_diff > sum_diff_thresh) {
       // Before returning to copy the block (i.e., apply no denoising),
       // check if we can still apply some (weaker) temporal filtering to

@@ -79,21 +79,24 @@ static uint8_t add_ref_mv_candidate(
       if (candidate->ref_frame[ref] == rf[0]) {
         int_mv this_refmv;
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
-        if (is_global_mv_block(candidate_mi, block, gm_params[rf[0]].wmtype))
+        if (is_global_mv_block(candidate_mi, block, gm_params[rf[0]].wmtype)) {
           this_refmv = gm_mv_candidates[0];
-        else
+        } else {
 #endif  // CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
           this_refmv = get_sub_block_mv(candidate_mi, ref, col, block);
+}
 #if CONFIG_AMVR
         lower_mv_precision(&this_refmv.as_mv, use_hp, is_integer);
 #else
         lower_mv_precision(&this_refmv.as_mv, use_hp);
 #endif  // CONFIG_AMVR
 
-        for (index = 0; index < *refmv_count; ++index)
-          if (ref_mv_stack[index].this_mv.as_int == this_refmv.as_int) break;
+        for (index = 0; index < *refmv_count; ++index) {
+          if (ref_mv_stack[index].this_mv.as_int == this_refmv.as_int) { break;
+}
 
-        if (index < *refmv_count) ref_mv_stack[index].weight += weight * len;
+        if (index < *refmv_count) { ref_mv_stack[index].weight += weight * len;
+}
 
         // Add a new item to the list.
         if (index == *refmv_count) {
@@ -103,7 +106,8 @@ static uint8_t add_ref_mv_candidate(
           ref_mv_stack[index].weight = weight * len;
           ++(*refmv_count);
 
-          if (candidate->mode == NEWMV) ++newmv_count;
+          if (candidate->mode == NEWMV) { ++newmv_count;
+}
         }
 
         if (candidate_mi->mbmi.sb_type < BLOCK_8X8 && block >= 0 &&
@@ -115,10 +119,12 @@ static uint8_t add_ref_mv_candidate(
 #else
           lower_mv_precision(&this_refmv.as_mv, use_hp);
 #endif
-          for (index = 0; index < *refmv_count; ++index)
-            if (ref_mv_stack[index].this_mv.as_int == this_refmv.as_int) break;
+          for (index = 0; index < *refmv_count; ++index) {
+            if (ref_mv_stack[index].this_mv.as_int == this_refmv.as_int) { break;
+}
 
-          if (index < *refmv_count) ref_mv_stack[index].weight += len;
+          if (index < *refmv_count) { ref_mv_stack[index].weight += len;
+}
 
           // Add a new item to the list.
           if (index == *refmv_count) {
@@ -129,7 +135,8 @@ static uint8_t add_ref_mv_candidate(
             ref_mv_stack[index].weight = len;
             ++(*refmv_count);
 
-            if (candidate->mode == NEWMV) ++newmv_count;
+            if (candidate->mode == NEWMV) { ++newmv_count;
+}
           }
         }
       }
@@ -141,11 +148,12 @@ static uint8_t add_ref_mv_candidate(
 
       for (ref = 0; ref < 2; ++ref) {
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
-        if (is_global_mv_block(candidate_mi, block, gm_params[rf[ref]].wmtype))
+        if (is_global_mv_block(candidate_mi, block, gm_params[rf[ref]].wmtype)) {
           this_refmv[ref] = gm_mv_candidates[ref];
-        else
+        } else {
 #endif  // CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
           this_refmv[ref] = get_sub_block_mv(candidate_mi, ref, col, block);
+}
 #if CONFIG_AMVR
         lower_mv_precision(&this_refmv[ref].as_mv, use_hp, is_integer);
 #else
@@ -153,12 +161,14 @@ static uint8_t add_ref_mv_candidate(
 #endif
       }
 
-      for (index = 0; index < *refmv_count; ++index)
+      for (index = 0; index < *refmv_count; ++index) {
         if ((ref_mv_stack[index].this_mv.as_int == this_refmv[0].as_int) &&
-            (ref_mv_stack[index].comp_mv.as_int == this_refmv[1].as_int))
+            (ref_mv_stack[index].comp_mv.as_int == this_refmv[1].as_int)) {
           break;
+}
 
-      if (index < *refmv_count) ref_mv_stack[index].weight += weight * len;
+      if (index < *refmv_count) { ref_mv_stack[index].weight += weight * len;
+}
 
       // Add a new item to the list.
       if (index == *refmv_count) {
@@ -171,7 +181,8 @@ static uint8_t add_ref_mv_candidate(
         ref_mv_stack[index].weight = weight * len;
         ++(*refmv_count);
 
-        if (candidate->mode == NEW_NEWMV) ++newmv_count;
+        if (candidate->mode == NEW_NEWMV) { ++newmv_count;
+}
       }
 
       if (candidate_mi->mbmi.sb_type < BLOCK_8X8 && block >= 0 &&
@@ -187,12 +198,14 @@ static uint8_t add_ref_mv_candidate(
           lower_mv_precision(&this_refmv[ref].as_mv, use_hp);
 #endif
         }
-        for (index = 0; index < *refmv_count; ++index)
+        for (index = 0; index < *refmv_count; ++index) {
           if (ref_mv_stack[index].this_mv.as_int == this_refmv[0].as_int &&
-              ref_mv_stack[index].comp_mv.as_int == this_refmv[1].as_int)
+              ref_mv_stack[index].comp_mv.as_int == this_refmv[1].as_int) {
             break;
+}
 
-        if (index < *refmv_count) ref_mv_stack[index].weight += len;
+        if (index < *refmv_count) { ref_mv_stack[index].weight += len;
+}
 
         // Add a new item to the list.
         if (index == *refmv_count) {
@@ -207,7 +220,8 @@ static uint8_t add_ref_mv_candidate(
           ref_mv_stack[index].weight = len;
           ++(*refmv_count);
 
-          if (candidate->mode == NEW_NEWMV) ++newmv_count;
+          if (candidate->mode == NEW_NEWMV) { ++newmv_count;
+}
         }
       }
     }
@@ -234,7 +248,8 @@ static uint8_t scan_row_mbmi(const AV1_COMMON *cm, const MACROBLOCKD *xd,
   // TODO(jingning): Revisit this part after cb4x4 is stable.
   if (abs(row_offset) > 1) {
     col_offset = 1;
-    if (mi_col & 0x01 && xd->n8_w < n8_w_8) --col_offset;
+    if (mi_col & 0x01 && xd->n8_w < n8_w_8) { --col_offset;
+}
   }
   const int use_step_16 = (xd->n8_w >= 16);
 #else
@@ -249,10 +264,11 @@ static uint8_t scan_row_mbmi(const AV1_COMMON *cm, const MACROBLOCKD *xd,
     const int candidate_bsize = candidate->sb_type;
     const int n8_w = mi_size_wide[candidate_bsize];
     int len = AOMMIN(xd->n8_w, n8_w);
-    if (use_step_16)
+    if (use_step_16) {
       len = AOMMAX(n8_w_16, len);
-    else if (abs(row_offset) > 1)
+    } else if (abs(row_offset) > 1) {
       len = AOMMAX(len, n8_w_8);
+}
 
     int weight = 2;
     if (xd->n8_w >= n8_w_8 && xd->n8_w <= n8_w) {
@@ -306,7 +322,8 @@ static uint8_t scan_col_mbmi(const AV1_COMMON *cm, const MACROBLOCKD *xd,
   const int shift = 0;
   if (abs(col_offset) > 1) {
     row_offset = 1;
-    if (mi_row & 0x01 && xd->n8_h < n8_h_8) --row_offset;
+    if (mi_row & 0x01 && xd->n8_h < n8_h_8) { --row_offset;
+}
   }
   const int use_step_16 = (xd->n8_h >= 16);
 #else
@@ -321,10 +338,11 @@ static uint8_t scan_col_mbmi(const AV1_COMMON *cm, const MACROBLOCKD *xd,
     const int candidate_bsize = candidate->sb_type;
     const int n8_h = mi_size_high[candidate_bsize];
     int len = AOMMIN(xd->n8_h, n8_h);
-    if (use_step_16)
+    if (use_step_16) {
       len = AOMMAX(n8_h_16, len);
-    else if (abs(col_offset) > 1)
+    } else if (abs(col_offset) > 1) {
       len = AOMMAX(len, n8_h_8);
+}
 
     int weight = 2;
     if (xd->n8_h >= n8_h_8 && xd->n8_h <= n8_h) {
@@ -432,13 +450,15 @@ static int has_top_right(const AV1_COMMON *cm, const MACROBLOCKD *xd,
 
   // The left hand of two vertical rectangles always has a top right (as the
   // block above will have been decoded)
-  if (xd->n8_w < xd->n8_h)
-    if (!xd->is_sec_rect) has_tr = 1;
+  if (xd->n8_w < xd->n8_h) {
+    if (!xd->is_sec_rect) { has_tr = 1;
+}
 
   // The bottom of two horizontal rectangles never has a top right (as the block
   // to the right won't have been decoded)
-  if (xd->n8_w > xd->n8_h)
-    if (xd->is_sec_rect) has_tr = 0;
+  if (xd->n8_w > xd->n8_h) {
+    if (xd->is_sec_rect) { has_tr = 0;
+}
 
 #if CONFIG_EXT_PARTITION_TYPES && !CONFIG_EXT_PARTITION_TYPES_AB
   // The bottom left square of a Vertical A (in the old format) does
@@ -610,8 +630,9 @@ static int add_col_ref_mv(const AV1_COMMON *cm,
 #endif
 #endif  // CONFIG_TMV
 
-  if (!is_inside(&xd->tile, mi_col, mi_row, cm->mi_rows, cm, &mi_pos))
+  if (!is_inside(&xd->tile, mi_col, mi_row, cm->mi_rows, cm, &mi_pos)) {
     return coll_blk_count;
+}
   for (ref = 0; ref < 2; ++ref) {
     if (prev_frame_mvs->ref_frame[ref] == ref_frame) {
       int_mv this_refmv = prev_frame_mvs->mv[ref];
@@ -626,14 +647,17 @@ static int add_col_ref_mv(const AV1_COMMON *cm,
       if (blk_row == 0 && blk_col == 0)
 #endif
       {
-        if (abs(this_refmv.as_mv.row) >= 16 || abs(this_refmv.as_mv.col) >= 16)
+        if (abs(this_refmv.as_mv.row) >= 16 || abs(this_refmv.as_mv.col) >= 16) {
           mode_context[ref_frame] |= (1 << ZEROMV_OFFSET);
+}
       }
 
-      for (idx = 0; idx < *refmv_count; ++idx)
-        if (this_refmv.as_int == ref_mv_stack[idx].this_mv.as_int) break;
+      for (idx = 0; idx < *refmv_count; ++idx) {
+        if (this_refmv.as_int == ref_mv_stack[idx].this_mv.as_int) { break;
+}
 
-      if (idx < *refmv_count) ref_mv_stack[idx].weight += 2 * weight_unit;
+      if (idx < *refmv_count) { ref_mv_stack[idx].weight += 2 * weight_unit;
+}
 
       if (idx == *refmv_count && *refmv_count < MAX_REF_MV_STACK_SIZE) {
         ref_mv_stack[idx].this_mv.as_int = this_refmv.as_int;
@@ -730,34 +754,38 @@ static void setup_ref_mv_list(const AV1_COMMON *cm, const MACROBLOCKD *xd,
   }
 
   // Scan the first above row mode info. row_offset = -1;
-  if (abs(max_row_offset) >= 1)
+  if (abs(max_row_offset) >= 1) {
     newmv_count +=
         scan_row_mbmi(cm, xd, mi_col, block, rf, -1, ref_mv_stack, refmv_count,
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                       gm_mv_candidates,
 #endif  // CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                       max_row_offset, &processed_rows);
+}
   // Scan the first left column mode info. col_offset = -1;
-  if (abs(max_col_offset) >= 1)
+  if (abs(max_col_offset) >= 1) {
     newmv_count +=
         scan_col_mbmi(cm, xd, mi_row, block, rf, -1, ref_mv_stack, refmv_count,
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                       gm_mv_candidates,
 #endif  // CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                       max_col_offset, &processed_cols);
+}
   // Check top-right boundary
-  if (has_tr)
+  if (has_tr) {
     newmv_count += scan_blk_mbmi(cm, xd, mi_row, mi_col, block, rf, -1,
                                  xd->n8_w, ref_mv_stack,
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                                  gm_mv_candidates,
 #endif  // CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                                  refmv_count);
+}
 
   nearest_refmv_count = *refmv_count;
 
-  for (idx = 0; idx < nearest_refmv_count; ++idx)
+  for (idx = 0; idx < nearest_refmv_count; ++idx) {
     ref_mv_stack[idx].weight += REF_CAT_LEVEL;
+}
 
 #if CONFIG_MFMV
   int blk_row, blk_col;
@@ -862,7 +890,8 @@ static void setup_ref_mv_list(const AV1_COMMON *cm, const MACROBLOCKD *xd,
     }
 #endif
 
-    if (coll_blk_count == 0) mode_context[ref_frame] |= (1 << ZEROMV_OFFSET);
+    if (coll_blk_count == 0) { mode_context[ref_frame] |= (1 << ZEROMV_OFFSET);
+}
   } else {
     mode_context[ref_frame] |= (1 << ZEROMV_OFFSET);
   }
@@ -884,22 +913,24 @@ static void setup_ref_mv_list(const AV1_COMMON *cm, const MACROBLOCKD *xd,
 #endif
 
     if (abs(row_offset) <= abs(max_row_offset) &&
-        abs(row_offset) > processed_rows)
+        abs(row_offset) > processed_rows) {
       scan_row_mbmi(cm, xd, mi_col, block, rf, row_offset, ref_mv_stack,
                     refmv_count,
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                     gm_mv_candidates,
 #endif  // CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                     max_row_offset, &processed_rows);
+}
 
     if (abs(col_offset) <= abs(max_col_offset) &&
-        abs(col_offset) > processed_cols)
+        abs(col_offset) > processed_cols) {
       scan_col_mbmi(cm, xd, mi_row, block, rf, col_offset, ref_mv_stack,
                     refmv_count,
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                     gm_mv_candidates,
 #endif  // CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                     max_col_offset, &processed_cols);
+}
   }
 
 #if CONFIG_CB4X4
@@ -908,43 +939,48 @@ static void setup_ref_mv_list(const AV1_COMMON *cm, const MACROBLOCKD *xd,
   col_offset = -MVREF_COLS;
 #endif
   if (abs(col_offset) <= abs(max_col_offset) &&
-      abs(col_offset) > processed_cols)
+      abs(col_offset) > processed_cols) {
     scan_col_mbmi(cm, xd, mi_row, block, rf, col_offset, ref_mv_stack,
                   refmv_count,
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                   gm_mv_candidates,
 #endif  // CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
                   max_col_offset, &processed_cols);
+}
 
   switch (nearest_refmv_count) {
     case 0: mode_context[ref_frame] |= 0;
 #if !CONFIG_OPT_REF_MV
-      if (*refmv_count >= 1) mode_context[ref_frame] |= 1;
-      if (*refmv_count == 1)
+      if (*refmv_count >= 1) { mode_context[ref_frame] |= 1;
+}
+      if (*refmv_count == 1) {
         mode_context[ref_frame] |= (1 << REFMV_OFFSET);
-      else if (*refmv_count >= 2)
+      } else if (*refmv_count >= 2) {
         mode_context[ref_frame] |= (2 << REFMV_OFFSET);
+}
 #endif
       break;
     case 1: mode_context[ref_frame] |= (newmv_count > 0) ? 2 : 3;
 #if CONFIG_OPT_REF_MV
       mode_context[ref_frame] |= (3 << REFMV_OFFSET);
 #else
-      if (*refmv_count == 1)
+      if (*refmv_count == 1) {
         mode_context[ref_frame] |= (3 << REFMV_OFFSET);
-      else if (*refmv_count >= 2)
+      } else if (*refmv_count >= 2) {
         mode_context[ref_frame] |= (4 << REFMV_OFFSET);
+}
 #endif
       break;
 
     case 2:
     default:
-      if (newmv_count >= 2)
+      if (newmv_count >= 2) {
         mode_context[ref_frame] |= 4;
-      else if (newmv_count == 1)
+      } else if (newmv_count == 1) {
         mode_context[ref_frame] |= 5;
-      else
+      } else {
         mode_context[ref_frame] |= 6;
+}
 
       mode_context[ref_frame] |= (5 << REFMV_OFFSET);
       break;
@@ -1104,12 +1140,13 @@ static void find_mv_refs_idx(const AV1_COMMON *cm, const MACROBLOCKD *xd,
       context_counter += mode_2_counter[candidate->mode];
       different_ref_found = 1;
 
-      if (candidate->ref_frame[0] == ref_frame)
+      if (candidate->ref_frame[0] == ref_frame) {
         ADD_MV_REF_LIST(get_sub_block_mv(candidate_mi, 0, mv_ref->col, block),
                         refmv_count, mv_ref_list, bw, bh, xd, Done);
-      else if (candidate->ref_frame[1] == ref_frame)
+      } else if (candidate->ref_frame[1] == ref_frame) {
         ADD_MV_REF_LIST(get_sub_block_mv(candidate_mi, 1, mv_ref->col, block),
                         refmv_count, mv_ref_list, bw, bh, xd, Done);
+}
     }
   }
 
@@ -1123,18 +1160,21 @@ static void find_mv_refs_idx(const AV1_COMMON *cm, const MACROBLOCKD *xd,
           !xd->mi[mv_ref->col + mv_ref->row * xd->mi_stride]
               ? NULL
               : &xd->mi[mv_ref->col + mv_ref->row * xd->mi_stride]->mbmi;
-      if (candidate == NULL) continue;
+      if (candidate == NULL) { continue;
+}
       if ((mi_row & (sb_mi_size - 1)) + mv_ref->row >= sb_mi_size ||
-          (mi_col & (sb_mi_size - 1)) + mv_ref->col >= sb_mi_size)
+          (mi_col & (sb_mi_size - 1)) + mv_ref->col >= sb_mi_size) {
         continue;
+}
       different_ref_found = 1;
 
-      if (candidate->ref_frame[0] == ref_frame)
+      if (candidate->ref_frame[0] == ref_frame) {
         ADD_MV_REF_LIST(candidate->mv[0], refmv_count, mv_ref_list, bw, bh, xd,
                         Done);
-      else if (candidate->ref_frame[1] == ref_frame)
+      } else if (candidate->ref_frame[1] == ref_frame) {
         ADD_MV_REF_LIST(candidate->mv[1], refmv_count, mv_ref_list, bw, bh, xd,
                         Done);
+}
     }
   }
 
@@ -1175,10 +1215,12 @@ static void find_mv_refs_idx(const AV1_COMMON *cm, const MACROBLOCKD *xd,
             !xd->mi[mv_ref->col + mv_ref->row * xd->mi_stride]
                 ? NULL
                 : &xd->mi[mv_ref->col + mv_ref->row * xd->mi_stride]->mbmi;
-        if (candidate == NULL) continue;
+        if (candidate == NULL) { continue;
+}
         if ((mi_row & (sb_mi_size - 1)) + mv_ref->row >= sb_mi_size ||
-            (mi_col & (sb_mi_size - 1)) + mv_ref->col >= sb_mi_size)
+            (mi_col & (sb_mi_size - 1)) + mv_ref->col >= sb_mi_size) {
           continue;
+}
 
         // If the candidate is INTRA we don't want to consider its mv.
         IF_DIFF_REF_FRAME_ADD_MV(candidate, ref_frame, ref_sign_bias,
@@ -1213,10 +1255,12 @@ static void find_mv_refs_idx(const AV1_COMMON *cm, const MACROBLOCKD *xd,
   }
 
 Done:
-  if (mode_context)
+  if (mode_context) {
     mode_context[ref_frame] = counter_to_context[context_counter];
-  for (i = refmv_count; i < MAX_MV_REF_CANDIDATES; ++i)
+}
+  for (i = refmv_count; i < MAX_MV_REF_CANDIDATES; ++i) {
     mv_ref_list[i].as_int = zeromv.as_int;
+}
 }
 
 // This function keeps a mode count for a given MB/SB
@@ -1265,8 +1309,9 @@ void av1_update_mv_context(const AV1_COMMON *cm, const MACROBLOCKD *xd,
 
 Done:
 
-  if (mode_context)
+  if (mode_context) {
     mode_context[ref_frame] = counter_to_context[context_counter];
+}
 }
 
 void av1_find_mv_refs(const AV1_COMMON *cm, const MACROBLOCKD *xd,
@@ -1318,9 +1363,10 @@ void av1_find_mv_refs(const AV1_COMMON *cm, const MACROBLOCKD *xd,
   zeromv[0].as_int = zeromv[1].as_int = 0;
 #endif  // CONFIG_GLOBAL_MOTION
 
-  if (ref_frame <= ALTREF_FRAME)
+  if (ref_frame <= ALTREF_FRAME) {
     find_mv_refs_idx(cm, xd, mi, ref_frame, mv_ref_list, -1, mi_row, mi_col,
                      sync, data, mode_context, zeromv[0]);
+}
 
   setup_ref_mv_list(cm, xd, ref_frame, ref_mv_count, ref_mv_stack, mv_ref_list,
 #if CONFIG_GLOBAL_MOTION && USE_CUR_GM_REFMV
@@ -1343,17 +1389,21 @@ void av1_find_mv_refs(const AV1_COMMON *cm, const MACROBLOCKD *xd,
      * This leads to an encode/decode mismatch.
   */
   for (idx = 0; idx < AOMMIN(3, *ref_mv_count); ++idx) {
-    if (ref_mv_stack[idx].this_mv.as_int != zeromv[0].as_int) all_zero = 0;
-    if (ref_frame > ALTREF_FRAME)
-      if (ref_mv_stack[idx].comp_mv.as_int != zeromv[1].as_int) all_zero = 0;
+    if (ref_mv_stack[idx].this_mv.as_int != zeromv[0].as_int) { all_zero = 0;
+}
+    if (ref_frame > ALTREF_FRAME) {
+      if (ref_mv_stack[idx].comp_mv.as_int != zeromv[1].as_int) { all_zero = 0;
+}
   }
   if (*ref_mv_count < 2 && ref_frame <= ALTREF_FRAME) {
-    for (idx = 0; idx < MAX_MV_REF_CANDIDATES; ++idx)
-      if (mv_ref_list[idx].as_int != zeromv[0].as_int) all_zero = 0;
+    for (idx = 0; idx < MAX_MV_REF_CANDIDATES; ++idx) {
+      if (mv_ref_list[idx].as_int != zeromv[0].as_int) { all_zero = 0;
+}
   }
 
 #if !CONFIG_OPT_REF_MV
-  if (all_zero) mode_context[ref_frame] |= (1 << ALL_ZERO_FLAG_OFFSET);
+  if (all_zero) { mode_context[ref_frame] |= (1 << ALL_ZERO_FLAG_OFFSET);
+}
 #else
   (void)all_zero;
 #endif
@@ -1432,12 +1482,14 @@ void av1_append_sub8x8_mvs_for_idx(const AV1_COMMON *cm, MACROBLOCKD *xd,
     ref_mv_stack[above_count] = tmp_mv;
   }
 
-  for (idx = 0; idx < *ref_mv_count; ++idx)
+  for (idx = 0; idx < *ref_mv_count; ++idx) {
     clamp_mv_ref(&ref_mv_stack[idx].this_mv.as_mv, xd->n8_w << MI_SIZE_LOG2,
                  xd->n8_h << MI_SIZE_LOG2, xd);
+}
 
-  for (idx = 0; idx < AOMMIN(MAX_MV_REF_CANDIDATES, *ref_mv_count); ++idx)
+  for (idx = 0; idx < AOMMIN(MAX_MV_REF_CANDIDATES, *ref_mv_count); ++idx) {
     mv_list[idx].as_int = ref_mv_stack[idx].this_mv.as_int;
+}
 
   near_mv->as_int = 0;
   switch (block) {
@@ -1448,11 +1500,12 @@ void av1_append_sub8x8_mvs_for_idx(const AV1_COMMON *cm, MACROBLOCKD *xd,
     case 1:
     case 2:
       nearest_mv->as_int = bmi[0].as_mv[ref].as_int;
-      for (n = 0; n < MAX_MV_REF_CANDIDATES; ++n)
+      for (n = 0; n < MAX_MV_REF_CANDIDATES; ++n) {
         if (nearest_mv->as_int != mv_list[n].as_int) {
           near_mv->as_int = mv_list[n].as_int;
           break;
         }
+}
       break;
     case 3: {
       int_mv candidates[2 + MAX_MV_REF_CANDIDATES];
@@ -1462,11 +1515,12 @@ void av1_append_sub8x8_mvs_for_idx(const AV1_COMMON *cm, MACROBLOCKD *xd,
       candidates[3] = mv_list[1];
 
       nearest_mv->as_int = bmi[2].as_mv[ref].as_int;
-      for (n = 0; n < 2 + MAX_MV_REF_CANDIDATES; ++n)
+      for (n = 0; n < 2 + MAX_MV_REF_CANDIDATES; ++n) {
         if (nearest_mv->as_int != candidates[n].as_int) {
           near_mv->as_int = candidates[n].as_int;
           break;
         }
+}
       break;
     }
     default: assert(0 && "Invalid block index.");
@@ -2021,9 +2075,10 @@ int sortSamples(int *pts_mv, MV *mv, int *pts, int *pts_inref, int len) {
   int i, j, k;
   int ret = len;
 
-  for (i = 0; i < len; ++i)
+  for (i = 0; i < len; ++i) {
     pts_mvd[i] =
         abs(pts_mv[2 * i] - mv->col) + abs(pts_mv[2 * i + 1] - mv->row);
+}
 
   for (i = 1; i <= len - 1; ++i) {
     for (j = 0; j < i; ++j) {
@@ -2057,10 +2112,12 @@ int sortSamples(int *pts_mv, MV *mv, int *pts, int *pts_inref, int len) {
   for (i = len - 1; i >= 1; i--) {
     int low = (i == 1) ? 1 : AOMMAX((pts_mvd[i - 1] - pts_mvd[0]) / (i - 1), 1);
 
-    if ((pts_mvd[i] - pts_mvd[i - 1]) >= TRIM_THR * low) ret = i;
+    if ((pts_mvd[i] - pts_mvd[i - 1]) >= TRIM_THR * low) { ret = i;
+}
   }
 
-  if (ret > LEAST_SQUARES_SAMPLES_MAX) ret = LEAST_SQUARES_SAMPLES_MAX;
+  if (ret > LEAST_SQUARES_SAMPLES_MAX) { ret = LEAST_SQUARES_SAMPLES_MAX;
+}
   return ret;
 }
 
@@ -2090,8 +2147,10 @@ int findSamples(const AV1_COMMON *cm, MACROBLOCKD *xd, int mi_row, int mi_col,
       // Handle "current block width <= above block width" case.
       int col_offset = -mi_col % n8_w;
 
-      if (col_offset < 0) do_tl = 0;
-      if (col_offset + n8_w > xd->n8_w) do_tr = 0;
+      if (col_offset < 0) { do_tl = 0;
+}
+      if (col_offset + n8_w > xd->n8_w) { do_tr = 0;
+}
 
       if (mbmi->ref_frame[0] == ref_frame && mbmi->ref_frame[1] == NONE_FRAME) {
         record_samples(mbmi, pts, pts_inref, pts_mv, global_offset_r,
@@ -2136,7 +2195,8 @@ int findSamples(const AV1_COMMON *cm, MACROBLOCKD *xd, int mi_row, int mi_col,
       // Handle "current block height <= above block height" case.
       int row_offset = -mi_row % n8_h;
 
-      if (row_offset < 0) do_tl = 0;
+      if (row_offset < 0) { do_tl = 0;
+}
 
       if (mbmi->ref_frame[0] == ref_frame && mbmi->ref_frame[1] == NONE_FRAME) {
         record_samples(mbmi, pts, pts_inref, pts_mv, global_offset_r,

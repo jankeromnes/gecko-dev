@@ -652,7 +652,8 @@ struct CmptDecDataSink : public ResourceSink {
           int32_t log10Value = computeLog10(power10, FALSE);
 
           // Silently ignore divisors that are too big.
-          if (log10Value >= MAX_DIGITS) continue;
+          if (log10Value >= MAX_DIGITS) { continue;
+}
 
           // Iterate over the plural variants ("one", "other", etc)
           ResourceTable pluralVariantsTable = value.getTable(errorCode);
@@ -732,7 +733,8 @@ static void load(const Locale& inLocale, CDFLocaleData* result, UErrorCode& stat
   // Now load Latin.
   sink.isLatin = TRUE;
   ures_getAllItemsWithFallback(resource.getAlias(), gLatnPath, sink, status);
-  if (U_FAILURE(status)) return;
+  if (U_FAILURE(status)) { return;
+}
 
   // If longData is empty, default it to be equal to shortData
   if (result->longData.isEmpty()) {
@@ -743,12 +745,14 @@ static void load(const Locale& inLocale, CDFLocaleData* result, UErrorCode& stat
 
   if (!result->longData.isBogus()) {
     checkForOtherVariants(&result->longData, status);
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
     fillInMissing(&result->longData);
   }
 
   checkForOtherVariants(&result->shortData, status);
-  if (U_FAILURE(status)) return;
+  if (U_FAILURE(status)) { return;
+}
   fillInMissing(&result->shortData);
 
   // TODO: Enable this statement when currency support is added
@@ -888,7 +892,8 @@ static void checkForOtherVariants(CDFLocaleStyleData* result,
   const UHashElement* element;
   while ((element = uhash_nextElement(result->unitsByVariant, &pos)) != NULL) {
     CDFUnit* variantsByBase = (CDFUnit*) element->value.pointer;
-    if (variantsByBase == otherByBase) continue;
+    if (variantsByBase == otherByBase) { continue;
+}
     for (int32_t log10Value = 0; log10Value < MAX_DIGITS; ++log10Value) {
       if (variantsByBase[log10Value].isSet()
           && !otherByBase[log10Value].isSet()) {

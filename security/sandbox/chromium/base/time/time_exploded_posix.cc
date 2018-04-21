@@ -108,18 +108,20 @@ typedef time_t SysTime;
 
 SysTime SysTimeFromTimeStruct(struct tm* timestruct, bool is_local) {
   base::AutoLock locked(*GetSysTimeToTimeStructLock());
-  if (is_local)
+  if (is_local) {
     return mktime(timestruct);
-  else
+  } else {
     return timegm(timestruct);
+}
 }
 
 void SysTimeToTimeStruct(SysTime t, struct tm* timestruct, bool is_local) {
   base::AutoLock locked(*GetSysTimeToTimeStructLock());
-  if (is_local)
+  if (is_local) {
     localtime_r(&t, timestruct);
-  else
+  } else {
     gmtime_r(&t, timestruct);
+}
 }
 #endif  // OS_ANDROID
 
@@ -149,8 +151,9 @@ void Time::Explode(bool is_local, Exploded* exploded) const {
         (milliseconds - kMillisecondsPerSecond + 1) / kMillisecondsPerSecond;
     // Make this nonnegative (and between 0 and 999 inclusive).
     millisecond = milliseconds % kMillisecondsPerSecond;
-    if (millisecond < 0)
+    if (millisecond < 0) {
       millisecond += kMillisecondsPerSecond;
+}
   }
 
   struct tm timestruct;
@@ -217,12 +220,13 @@ bool Time::FromExploded(bool is_local, const Exploded& exploded, Time* time) {
 
     // seconds_isdst0 or seconds_isdst1 can be -1 for some timezones.
     // E.g. "CLST" (Chile Summer Time) returns -1 for 'tm_isdt == 1'.
-    if (seconds_isdst0 < 0)
+    if (seconds_isdst0 < 0) {
       seconds = seconds_isdst1;
-    else if (seconds_isdst1 < 0)
+    } else if (seconds_isdst1 < 0) {
       seconds = seconds_isdst0;
-    else
+    } else {
       seconds = std::min(seconds_isdst0, seconds_isdst1);
+}
   }
 
   // Handle overflow.  Clamping the range to what mktime and timegm might
@@ -285,10 +289,11 @@ bool Time::FromExploded(bool is_local, const Exploded& exploded, Time* time) {
   // return the first day of the next month. Thus round-trip the time and
   // compare the initial |exploded| with |utc_to_exploded| time.
   base::Time::Exploded to_exploded;
-  if (!is_local)
+  if (!is_local) {
     converted_time.UTCExplode(&to_exploded);
-  else
+  } else {
     converted_time.LocalExplode(&to_exploded);
+}
 
   if (ExplodedMostlyEquals(to_exploded, exploded)) {
     *time = converted_time;

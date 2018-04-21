@@ -57,14 +57,17 @@ jpeg_read_coefficients (j_decompress_ptr cinfo)
     for (;;) {
       int retcode;
       /* Call progress monitor hook if present */
-      if (cinfo->progress != NULL)
+      if (cinfo->progress != NULL) {
         (*cinfo->progress->progress_monitor) ((j_common_ptr) cinfo);
+}
       /* Absorb some more input */
       retcode = (*cinfo->inputctl->consume_input) (cinfo);
-      if (retcode == JPEG_SUSPENDED)
+      if (retcode == JPEG_SUSPENDED) {
         return NULL;
-      if (retcode == JPEG_REACHED_EOI)
+}
+      if (retcode == JPEG_REACHED_EOI) {
         break;
+}
       /* Advance progress counter if appropriate */
       if (cinfo->progress != NULL &&
           (retcode == JPEG_ROW_COMPLETED || retcode == JPEG_REACHED_SOS)) {
@@ -121,8 +124,9 @@ transdecode_master_selection (j_decompress_ptr cinfo)
 #else
       ERREXIT(cinfo, JERR_NOT_COMPILED);
 #endif
-    } else
+    } else {
       jinit_huff_decoder(cinfo);
+}
   }
 
   /* Always get a full-image coefficient buffer. */

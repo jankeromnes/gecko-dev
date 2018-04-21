@@ -547,8 +547,9 @@ jinit_color_converter (j_compress_ptr cinfo)
   /* Make sure input_components agrees with in_color_space */
   switch (cinfo->in_color_space) {
   case JCS_GRAYSCALE:
-    if (cinfo->input_components != 1)
+    if (cinfo->input_components != 1) {
       ERREXIT(cinfo, JERR_BAD_IN_COLORSPACE);
+}
     break;
 
   case JCS_RGB:
@@ -562,35 +563,40 @@ jinit_color_converter (j_compress_ptr cinfo)
   case JCS_EXT_BGRA:
   case JCS_EXT_ABGR:
   case JCS_EXT_ARGB:
-    if (cinfo->input_components != rgb_pixelsize[cinfo->in_color_space])
+    if (cinfo->input_components != rgb_pixelsize[cinfo->in_color_space]) {
       ERREXIT(cinfo, JERR_BAD_IN_COLORSPACE);
+}
     break;
 
   case JCS_YCbCr:
-    if (cinfo->input_components != 3)
+    if (cinfo->input_components != 3) {
       ERREXIT(cinfo, JERR_BAD_IN_COLORSPACE);
+}
     break;
 
   case JCS_CMYK:
   case JCS_YCCK:
-    if (cinfo->input_components != 4)
+    if (cinfo->input_components != 4) {
       ERREXIT(cinfo, JERR_BAD_IN_COLORSPACE);
+}
     break;
 
   default:                      /* JCS_UNKNOWN can be anything */
-    if (cinfo->input_components < 1)
+    if (cinfo->input_components < 1) {
       ERREXIT(cinfo, JERR_BAD_IN_COLORSPACE);
+}
     break;
   }
 
   /* Check num_components, set conversion method based on requested space */
   switch (cinfo->jpeg_color_space) {
   case JCS_GRAYSCALE:
-    if (cinfo->num_components != 1)
+    if (cinfo->num_components != 1) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
-    if (cinfo->in_color_space == JCS_GRAYSCALE)
+}
+    if (cinfo->in_color_space == JCS_GRAYSCALE) {
       cconvert->pub.color_convert = grayscale_convert;
-    else if (cinfo->in_color_space == JCS_RGB ||
+    } else if (cinfo->in_color_space == JCS_RGB ||
              cinfo->in_color_space == JCS_EXT_RGB ||
              cinfo->in_color_space == JCS_EXT_RGBX ||
              cinfo->in_color_space == JCS_EXT_BGR ||
@@ -601,21 +607,23 @@ jinit_color_converter (j_compress_ptr cinfo)
              cinfo->in_color_space == JCS_EXT_BGRA ||
              cinfo->in_color_space == JCS_EXT_ABGR ||
              cinfo->in_color_space == JCS_EXT_ARGB) {
-      if (jsimd_can_rgb_gray())
+      if (jsimd_can_rgb_gray()) {
         cconvert->pub.color_convert = jsimd_rgb_gray_convert;
-      else {
+      } else {
         cconvert->pub.start_pass = rgb_ycc_start;
         cconvert->pub.color_convert = rgb_gray_convert;
       }
-    } else if (cinfo->in_color_space == JCS_YCbCr)
+    } else if (cinfo->in_color_space == JCS_YCbCr) {
       cconvert->pub.color_convert = grayscale_convert;
-    else
+    } else {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
 
   case JCS_RGB:
-    if (cinfo->num_components != 3)
+    if (cinfo->num_components != 3) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
+}
     if (rgb_red[cinfo->in_color_space] == 0 &&
         rgb_green[cinfo->in_color_space] == 1 &&
         rgb_blue[cinfo->in_color_space] == 2 &&
@@ -636,15 +644,17 @@ jinit_color_converter (j_compress_ptr cinfo)
                cinfo->in_color_space == JCS_EXT_RGBA ||
                cinfo->in_color_space == JCS_EXT_BGRA ||
                cinfo->in_color_space == JCS_EXT_ABGR ||
-               cinfo->in_color_space == JCS_EXT_ARGB)
+               cinfo->in_color_space == JCS_EXT_ARGB) {
       cconvert->pub.color_convert = rgb_rgb_convert;
-    else
+    } else {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
 
   case JCS_YCbCr:
-    if (cinfo->num_components != 3)
+    if (cinfo->num_components != 3) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
+}
     if (cinfo->in_color_space == JCS_RGB ||
         cinfo->in_color_space == JCS_EXT_RGB ||
         cinfo->in_color_space == JCS_EXT_RGBX ||
@@ -656,9 +666,9 @@ jinit_color_converter (j_compress_ptr cinfo)
         cinfo->in_color_space == JCS_EXT_BGRA ||
         cinfo->in_color_space == JCS_EXT_ABGR ||
         cinfo->in_color_space == JCS_EXT_ARGB) {
-      if (jsimd_can_rgb_ycc())
+      if (jsimd_can_rgb_ycc()) {
         cconvert->pub.color_convert = jsimd_rgb_ycc_convert;
-      else {
+      } else {
         cconvert->pub.start_pass = rgb_ycc_start;
         cconvert->pub.color_convert = rgb_ycc_convert;
       }
@@ -669,13 +679,15 @@ jinit_color_converter (j_compress_ptr cinfo)
       else
 #endif
         cconvert->pub.color_convert = null_convert;
-    } else
+    } else {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
 
   case JCS_CMYK:
-    if (cinfo->num_components != 4)
+    if (cinfo->num_components != 4) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
+}
     if (cinfo->in_color_space == JCS_CMYK) {
 #if defined(__mips__)
       if (jsimd_c_can_null_convert())
@@ -683,13 +695,15 @@ jinit_color_converter (j_compress_ptr cinfo)
       else
 #endif
         cconvert->pub.color_convert = null_convert;
-    } else
+    } else {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
 
   case JCS_YCCK:
-    if (cinfo->num_components != 4)
+    if (cinfo->num_components != 4) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
+}
     if (cinfo->in_color_space == JCS_CMYK) {
       cconvert->pub.start_pass = rgb_ycc_start;
       cconvert->pub.color_convert = cmyk_ycck_convert;
@@ -700,14 +714,16 @@ jinit_color_converter (j_compress_ptr cinfo)
       else
 #endif
         cconvert->pub.color_convert = null_convert;
-    } else
+    } else {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
 
   default:                      /* allow null conversion of JCS_UNKNOWN */
     if (cinfo->jpeg_color_space != cinfo->in_color_space ||
-        cinfo->num_components != cinfo->input_components)
+        cinfo->num_components != cinfo->input_components) {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
 #if defined(__mips__)
     if (jsimd_c_can_null_convert())
       cconvert->pub.color_convert = jsimd_c_null_convert;

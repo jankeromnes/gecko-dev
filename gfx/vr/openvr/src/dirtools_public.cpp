@@ -26,8 +26,9 @@
 bool BCreateDirectoryRecursive( const char *pchPath )
 {
 	// Does it already exist?
-	if ( Path_IsDirectory( pchPath ) )
+	if ( Path_IsDirectory( pchPath ) ) {
 		return true;
+}
 
 	// copy the path into something we can munge
 	int len = (int)strlen( pchPath );
@@ -90,10 +91,12 @@ bool BCreateDirectory( const char *pchPath )
 	return false;
 #else
 	int i = mkdir( pchPath, S_IRWXU | S_IRWXG | S_IRWXO );
-	if ( i == 0 )
+	if ( i == 0 ) {
 		return true;
-	if ( errno == EEXIST )
+}
+	if ( errno == EEXIST ) {
 		return true;
+}
 
 	return false;
 #endif

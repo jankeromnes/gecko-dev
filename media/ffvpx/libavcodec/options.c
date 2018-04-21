@@ -40,17 +40,19 @@ FF_ENABLE_DEPRECATION_WARNINGS
 static const char* context_to_name(void* ptr) {
     AVCodecContext *avc= ptr;
 
-    if(avc && avc->codec && avc->codec->name)
+    if(avc && avc->codec && avc->codec->name) {
         return avc->codec->name;
-    else
+    } else {
         return "NULL";
+}
 }
 
 static void *codec_child_next(void *obj, void *prev)
 {
     AVCodecContext *s = obj;
-    if (!prev && s->codec && s->codec->priv_class && s->priv_data)
+    if (!prev && s->codec && s->codec->priv_class && s->priv_data) {
         return s->priv_data;
+}
     return NULL;
 }
 
@@ -59,22 +61,25 @@ static const AVClass *codec_child_class_next(const AVClass *prev)
     AVCodec *c = NULL;
 
     /* find the codec that corresponds to prev */
-    while (prev && (c = av_codec_next(c)))
-        if (c->priv_class == prev)
+    while (prev && (c = av_codec_next(c))) {
+        if (c->priv_class == prev) {
             break;
+}
 
     /* find next codec with priv options */
-    while (c = av_codec_next(c))
-        if (c->priv_class)
+    while (c = av_codec_next(c)) {
+        if (c->priv_class) {
             return c->priv_class;
+}
     return NULL;
 }
 
 static AVClassCategory get_category(void *ptr)
 {
     AVCodecContext* avctx = ptr;
-    if(avctx->codec && avctx->codec->decode) return AV_CLASS_CATEGORY_DECODER;
-    else                                     return AV_CLASS_CATEGORY_ENCODER;
+    if(avctx->codec && avctx->codec->decode) { return AV_CLASS_CATEGORY_DECODER;
+    } else {                                     return AV_CLASS_CATEGORY_ENCODER;
+}
 }
 
 static const AVClass av_codec_context_class = {
@@ -102,12 +107,13 @@ static int init_context_defaults(AVCodecContext *s, const AVCodec *codec)
         s->codec_id = codec->id;
     }
 
-    if(s->codec_type == AVMEDIA_TYPE_AUDIO)
+    if(s->codec_type == AVMEDIA_TYPE_AUDIO) {
         flags= AV_OPT_FLAG_AUDIO_PARAM;
-    else if(s->codec_type == AVMEDIA_TYPE_VIDEO)
+    } else if(s->codec_type == AVMEDIA_TYPE_VIDEO) {
         flags= AV_OPT_FLAG_VIDEO_PARAM;
-    else if(s->codec_type == AVMEDIA_TYPE_SUBTITLE)
+    } else if(s->codec_type == AVMEDIA_TYPE_SUBTITLE) {
         flags= AV_OPT_FLAG_SUBTITLE_PARAM;
+}
     av_opt_set_defaults2(s, flags, flags);
 
     s->time_base           = (AVRational){0,1};
@@ -158,8 +164,9 @@ AVCodecContext *avcodec_alloc_context3(const AVCodec *codec)
 {
     AVCodecContext *avctx= av_malloc(sizeof(AVCodecContext));
 
-    if (!avctx)
+    if (!avctx) {
         return NULL;
+}
 
     if (init_context_defaults(avctx, codec) < 0) {
         av_free(avctx);
@@ -173,8 +180,9 @@ void avcodec_free_context(AVCodecContext **pavctx)
 {
     AVCodecContext *avctx = *pavctx;
 
-    if (!avctx)
+    if (!avctx) {
         return;
+}
 
     avcodec_close(avctx);
 
@@ -205,8 +213,9 @@ FF_ENABLE_DEPRECATION_WARNINGS
     av_freep(&avctx->subtitle_header);
     av_buffer_unref(&avctx->hw_frames_ctx);
     av_buffer_unref(&avctx->hw_device_ctx);
-    for (i = 0; i < avctx->nb_coded_side_data; i++)
+    for (i = 0; i < avctx->nb_coded_side_data; i++) {
         av_freep(&avctx->coded_side_data[i].data);
+}
     av_freep(&avctx->coded_side_data);
     avctx->subtitle_header_size = 0;
     avctx->nb_coded_side_data = 0;
@@ -234,8 +243,9 @@ int avcodec_copy_context(AVCodecContext *dest, const AVCodecContext *src)
     dest->codec           = orig_codec;
 
     if (orig_priv_data && src->codec && src->codec->priv_class &&
-        dest->codec && dest->codec->priv_class)
+        dest->codec && dest->codec->priv_class) {
         av_opt_copy(orig_priv_data, src->priv_data);
+}
 
 
     /* set values specific to opened codecs back to their default state */
@@ -280,8 +290,9 @@ FF_ENABLE_DEPRECATION_WARNINGS
 
     if (src->hw_frames_ctx) {
         dest->hw_frames_ctx = av_buffer_ref(src->hw_frames_ctx);
-        if (!dest->hw_frames_ctx)
+        if (!dest->hw_frames_ctx) {
             goto fail;
+}
     }
 
     return 0;

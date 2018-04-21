@@ -15,9 +15,10 @@
 unsigned int vpx_avg_8x8_c(const uint8_t *s, int p) {
   int i, j;
   int sum = 0;
-  for (i = 0; i < 8; ++i, s += p)
+  for (i = 0; i < 8; ++i, s += p) {
     for (j = 0; j < 8; sum += s[j], ++j) {
     }
+}
 
   return (sum + 32) >> 6;
 }
@@ -25,9 +26,10 @@ unsigned int vpx_avg_8x8_c(const uint8_t *s, int p) {
 unsigned int vpx_avg_4x4_c(const uint8_t *s, int p) {
   int i, j;
   int sum = 0;
-  for (i = 0; i < 4; ++i, s += p)
+  for (i = 0; i < 4; ++i, s += p) {
     for (j = 0; j < 4; sum += s[j], ++j) {
     }
+}
 
   return (sum + 8) >> 4;
 }
@@ -125,7 +127,8 @@ void vpx_hadamard_16x16_c(const int16_t *src_diff, int src_stride,
 int vpx_satd_c(const int16_t *coeff, int length) {
   int i;
   int satd = 0;
-  for (i = 0; i < length; ++i) satd += abs(coeff[i]);
+  for (i = 0; i < length; ++i) { satd += abs(coeff[i]);
+}
 
   // satd: 26 bits, dynamic range [-32640 * 1024, 32640 * 1024]
   return satd;
@@ -141,7 +144,8 @@ void vpx_int_pro_row_c(int16_t hbuf[16], const uint8_t *ref,
     int i;
     hbuf[idx] = 0;
     // hbuf[idx]: 14 bit, dynamic range [0, 16320].
-    for (i = 0; i < height; ++i) hbuf[idx] += ref[i * ref_stride];
+    for (i = 0; i < height; ++i) { hbuf[idx] += ref[i * ref_stride];
+}
     // hbuf[idx]: 9 bit, dynamic range [0, 510].
     hbuf[idx] /= norm_factor;
     ++ref;
@@ -153,7 +157,8 @@ int16_t vpx_int_pro_col_c(const uint8_t *ref, const int width) {
   int idx;
   int16_t sum = 0;
   // sum: 14 bit, dynamic range [0, 16320]
-  for (idx = 0; idx < width; ++idx) sum += ref[idx];
+  for (idx = 0; idx < width; ++idx) { sum += ref[idx];
+}
   return sum;
 }
 

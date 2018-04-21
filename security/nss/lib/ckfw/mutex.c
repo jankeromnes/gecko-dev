@@ -182,8 +182,9 @@ nssCKFWMutex_Unlock(
     }
 #endif /* NSSDEBUG */
 
-    if (!mutex->lock)
+    if (!mutex->lock) {
         return CKR_OK;
+}
 
     nrv = PR_Unlock(mutex->lock);
 

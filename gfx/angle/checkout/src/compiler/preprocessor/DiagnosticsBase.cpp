@@ -22,11 +22,13 @@ void Diagnostics::report(ID id, const SourceLocation &loc, const std::string &te
 
 bool Diagnostics::isError(ID id)
 {
-    if ((id > PP_ERROR_BEGIN) && (id < PP_ERROR_END))
+    if ((id > PP_ERROR_BEGIN) && (id < PP_ERROR_END)) {
         return true;
+}
 
-    if ((id > PP_WARNING_BEGIN) && (id < PP_WARNING_END))
+    if ((id > PP_WARNING_BEGIN) && (id < PP_WARNING_END)) {
         return false;
+}
 
     UNREACHABLE();
     return true;

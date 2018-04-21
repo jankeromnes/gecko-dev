@@ -126,8 +126,9 @@ dtls_AllocQueuedMessage(ssl3CipherSpec *cwSpec, SSL3ContentType type,
     DTLSQueuedMessage *msg;
 
     msg = PORT_ZNew(DTLSQueuedMessage);
-    if (!msg)
+    if (!msg) {
         return NULL;
+}
 
     msg->data = PORT_Alloc(len);
     if (!msg->data) {
@@ -154,8 +155,9 @@ dtls_AllocQueuedMessage(ssl3CipherSpec *cwSpec, SSL3ContentType type,
 void
 dtls_FreeHandshakeMessage(DTLSQueuedMessage *msg)
 {
-    if (!msg)
+    if (!msg) {
         return;
+}
 
     /* Safe if we are < 1.3, since the refct is
      * already very high. */
@@ -396,13 +398,15 @@ dtls_HandleHandshake(sslSocket *ss, DTLSEpoch epoch, sslSequenceNumber seqNum,
                     PRUint32 map_length = OFFSET_BYTE(message_length) + 1;
 
                     rv = sslBuffer_Grow(&ss->ssl3.hs.msg_body, message_length);
-                    if (rv != SECSuccess)
+                    if (rv != SECSuccess) {
                         goto loser;
+}
                     /* Make room for the fragment map */
                     rv = sslBuffer_Grow(&ss->ssl3.hs.recvdFragments,
                                         map_length);
-                    if (rv != SECSuccess)
+                    if (rv != SECSuccess) {
                         goto loser;
+}
 
                     /* Reset the reassembly map */
                     ss->ssl3.hs.recvdHighWater = 0;
@@ -559,8 +563,9 @@ dtls_StageHandshakeMessage(sslSocket *ss)
 
     /* This function is sometimes called when no data is actually to
      * be staged, so just return SECSuccess. */
-    if (!ss->sec.ci.sendBuf.buf || !ss->sec.ci.sendBuf.len)
+    if (!ss->sec.ci.sendBuf.buf || !ss->sec.ci.sendBuf.len) {
         return rv;
+}
 
     rv = dtls_QueueMessage(ss, content_handshake,
                            ss->sec.ci.sendBuf.buf, ss->sec.ci.sendBuf.len);
@@ -585,8 +590,9 @@ dtls_FlushHandshakeMessages(sslSocket *ss, PRInt32 flags)
     PORT_Assert(ss->opt.noLocks || ssl_HaveXmitBufLock(ss));
 
     rv = dtls_StageHandshakeMessage(ss);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     if (!(flags & ssl_SEND_FLAG_FORCE_INTO_BUFFER)) {
         rv = dtls_TransmitMessageFlight(ss);
@@ -880,8 +886,9 @@ dtls_SendSavedWriteData(sslSocket *ss)
     PRInt32 sent;
 
     sent = ssl_SendSavedWriteData(ss);
-    if (sent < 0)
+    if (sent < 0) {
         return SECFailure;
+}
 
     /* We should always have complete writes b/c datagram sockets
      * don't really block */
@@ -892,8 +899,9 @@ dtls_SendSavedWriteData(sslSocket *ss)
 
     /* Update the largest message sent so we can adjust the MTU
      * estimate if necessary */
-    if (sent > ss->ssl3.hs.maxMessageSent)
+    if (sent > ss->ssl3.hs.maxMessageSent) {
         ss->ssl3.hs.maxMessageSent = sent;
+}
 
     return SECSuccess;
 }
@@ -1160,8 +1168,9 @@ dtls_HandleHelloVerifyRequest(sslSocket *ss, PRUint8 *b, PRUint32 length)
 
     ssl_ReleaseXmitBufLock(ss); /*******************************/
 
-    if (rv == SECSuccess)
+    if (rv == SECSuccess) {
         return rv;
+}
 
 alert_loser:
     (void)SSL3_SendAlert(ss, alert_fatal, desc);
@@ -1206,8 +1215,9 @@ dtls_RecordGetRecvd(const DTLSRecvdRecords *records, sslSequenceNumber seq)
     /* Out of range to the right; since we advance the window on
      * receipt, that means that this packet has not been received
      * yet */
-    if (seq > records->right)
+    if (seq > records->right) {
         return 0;
+}
 
     offset = seq % DTLS_RECVD_RECORDS_WINDOW;
 
@@ -1223,8 +1233,9 @@ dtls_RecordSetRecvd(DTLSRecvdRecords *records, sslSequenceNumber seq)
 {
     PRUint64 offset;
 
-    if (seq < records->left)
+    if (seq < records->left) {
         return;
+}
 
     if (seq > records->right) {
         sslSequenceNumber new_left;
@@ -1452,8 +1463,9 @@ dtls_IsRelevant(sslSocket *ss, const ssl3CipherSpec *spec,
 void
 dtls_ReceivedFirstMessageInFlight(sslSocket *ss)
 {
-    if (!IS_DTLS(ss))
+    if (!IS_DTLS(ss)) {
         return;
+}
 
     /* At this point we are advancing our state machine, so we can free our last
      * flight of messages. */

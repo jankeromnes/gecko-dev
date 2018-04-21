@@ -430,9 +430,12 @@ static int find_vertrapezoid(int np, double *pts1, double *pts2, double *mat) {
     }
   }
   H[1] = H[7] = 0;
-  for (i = 0; i < 1; i++) H[i] = V[i * 7 + mini];
-  for (; i < 6; i++) H[i + 1] = V[i * 7 + mini];
-  for (; i < 7; i++) H[i + 2] = V[i * 7 + mini];
+  for (i = 0; i < 1; i++) { H[i] = V[i * 7 + mini];
+}
+  for (; i < 6; i++) { H[i + 1] = V[i * 7 + mini];
+}
+  for (; i < 7; i++) { H[i + 2] = V[i * 7 + mini];
+}
 
   denormalize_homography_reorder(H, T1, T2);
   aom_free(a);
@@ -441,7 +444,8 @@ static int find_vertrapezoid(int np, double *pts1, double *pts2, double *mat) {
   } else {
     // normalize
     double f = 1.0 / H[8];
-    for (i = 0; i < 8; i++) mat[i] = f * H[i];
+    for (i = 0; i < 8; i++) { mat[i] = f * H[i];
+}
   }
   return 0;
 }
@@ -499,9 +503,12 @@ static int find_hortrapezoid(int np, double *pts1, double *pts2, double *mat) {
     }
   }
   H[3] = H[6] = 0;
-  for (i = 0; i < 3; i++) H[i] = V[i * 7 + mini];
-  for (; i < 5; i++) H[i + 1] = V[i * 7 + mini];
-  for (; i < 7; i++) H[i + 2] = V[i * 7 + mini];
+  for (i = 0; i < 3; i++) { H[i] = V[i * 7 + mini];
+}
+  for (; i < 5; i++) { H[i + 1] = V[i * 7 + mini];
+}
+  for (; i < 7; i++) { H[i + 2] = V[i * 7 + mini];
+}
 
   denormalize_homography_reorder(H, T1, T2);
   aom_free(a);
@@ -510,7 +517,8 @@ static int find_hortrapezoid(int np, double *pts1, double *pts2, double *mat) {
   } else {
     // normalize
     double f = 1.0 / H[8];
-    for (i = 0; i < 8; i++) mat[i] = f * H[i];
+    for (i = 0; i < 8; i++) { mat[i] = f * H[i];
+}
   }
   return 0;
 }
@@ -575,7 +583,8 @@ static int find_homography(int np, double *pts1, double *pts2, double *mat) {
     }
   }
 
-  for (i = 0; i < 9; i++) H[i] = V[i * 9 + mini];
+  for (i = 0; i < 9; i++) { H[i] = V[i * 9 + mini];
+}
   denormalize_homography_reorder(H, T1, T2);
   aom_free(a);
   if (H[8] == 0.0) {
@@ -583,7 +592,8 @@ static int find_homography(int np, double *pts1, double *pts2, double *mat) {
   } else {
     // normalize
     double f = 1.0 / H[8];
-    for (i = 0; i < 8; i++) mat[i] = f * H[i];
+    for (i = 0; i < 8; i++) { mat[i] = f * H[i];
+}
   }
   return 0;
 }
@@ -592,7 +602,8 @@ static int get_rand_indices(int npoints, int minpts, int *indices,
                             unsigned int *seed) {
   int i, j;
   int ptr = lcg_rand16(seed) % npoints;
-  if (minpts > npoints) return 0;
+  if (minpts > npoints) { return 0;
+}
   indices[0] = ptr;
   ptr = (ptr == npoints - 1 ? 0 : ptr + 1);
   i = 1;
@@ -601,9 +612,11 @@ static int get_rand_indices(int npoints, int minpts, int *indices,
     while (index) {
       ptr = (ptr == npoints - 1 ? 0 : ptr + 1);
       for (j = 0; j < i; ++j) {
-        if (indices[j] == ptr) break;
+        if (indices[j] == ptr) { break;
+}
       }
-      if (j == i) index--;
+      if (j == i) { index--;
+}
     }
     indices[i++] = ptr;
   }
@@ -621,10 +634,14 @@ static int compare_motions(const void *arg_a, const void *arg_b) {
   const RANSAC_MOTION *motion_a = (RANSAC_MOTION *)arg_a;
   const RANSAC_MOTION *motion_b = (RANSAC_MOTION *)arg_b;
 
-  if (motion_a->num_inliers > motion_b->num_inliers) return -1;
-  if (motion_a->num_inliers < motion_b->num_inliers) return 1;
-  if (motion_a->variance < motion_b->variance) return -1;
-  if (motion_a->variance > motion_b->variance) return 1;
+  if (motion_a->num_inliers > motion_b->num_inliers) { return -1;
+}
+  if (motion_a->num_inliers < motion_b->num_inliers) { return 1;
+}
+  if (motion_a->variance < motion_b->variance) { return -1;
+}
+  if (motion_a->variance > motion_b->variance) { return 1;
+}
   return 0;
 }
 

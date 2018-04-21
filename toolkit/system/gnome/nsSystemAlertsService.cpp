@@ -71,8 +71,9 @@ NS_IMETHODIMP nsSystemAlertsService::ShowAlert(nsIAlertNotification* aAlert,
 
   RefPtr<nsAlertsIconListener> alertListener =
     new nsAlertsIconListener(this, alertName);
-  if (!alertListener)
+  if (!alertListener) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
 
   AddListener(alertName, alertListener);
   return alertListener->InitAlertAsync(aAlert, aAlertListener);

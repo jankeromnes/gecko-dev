@@ -55,10 +55,11 @@ SECU_PrintErrMsg(FILE *out, int level, const char *progName, const char *msg,
     SECU_Indent(out, level);
     fprintf(out, "%s: ", progName);
     vfprintf(out, msg, args);
-    if (errString != NULL && PORT_Strlen(errString) > 0)
+    if (errString != NULL && PORT_Strlen(errString) > 0) {
         fprintf(out, ": %s\n", errString);
-    else
+    } else {
         fprintf(out, ": error %d\n", (int)err);
+}
 
     va_end(args);
 }
@@ -82,8 +83,9 @@ SECU_PrintError(const char *progName, const char *msg, ...)
         fprintf(stderr, ": error %d", (int)err);
     }
 
-    if (errString != NULL && PORT_Strlen(errString) > 0)
+    if (errString != NULL && PORT_Strlen(errString) > 0) {
         fprintf(stderr, ": %s\n", errString);
+}
 
     va_end(args);
 }
@@ -117,8 +119,9 @@ secu_StdinToItem(SECItem *dst)
             return SECFailure;
         }
 
-        if (numBytes == 0)
+        if (numBytes == 0) {
             break;
+}
 
         if (dst->data) {
             unsigned char *p = dst->data;
@@ -146,8 +149,9 @@ SECU_FileToItem(SECItem *dst, PRFileDesc *src)
     PRInt32 numBytes;
     PRStatus prStatus;
 
-    if (src == PR_STDIN)
+    if (src == PR_STDIN) {
         return secu_StdinToItem(dst);
+}
 
     prStatus = PR_GetOpenFileInfo(src, &info);
 
@@ -158,8 +162,9 @@ SECU_FileToItem(SECItem *dst, PRFileDesc *src)
 
     /* XXX workaround for 3.1, not all utils zero dst before sending */
     dst->data = 0;
-    if (!SECITEM_AllocItem(NULL, dst, info.size))
+    if (!SECITEM_AllocItem(NULL, dst, info.size)) {
         goto loser;
+}
 
     numBytes = PR_Read(src, dst->data, info.size);
     if (numBytes != info.size) {
@@ -182,8 +187,9 @@ SECU_TextFileToItem(SECItem *dst, PRFileDesc *src)
     PRStatus prStatus;
     unsigned char *buf;
 
-    if (src == PR_STDIN)
+    if (src == PR_STDIN) {
         return secu_StdinToItem(dst);
+}
 
     prStatus = PR_GetOpenFileInfo(src, &info);
 
@@ -193,8 +199,9 @@ SECU_TextFileToItem(SECItem *dst, PRFileDesc *src)
     }
 
     buf = (unsigned char *)PORT_Alloc(info.size);
-    if (!buf)
+    if (!buf) {
         return SECFailure;
+}
 
     numBytes = PR_Read(src, buf, info.size);
     if (numBytes != info.size) {
@@ -202,8 +209,9 @@ SECU_TextFileToItem(SECItem *dst, PRFileDesc *src)
         goto loser;
     }
 
-    if (buf[numBytes - 1] == '\n')
+    if (buf[numBytes - 1] == '\n') {
         numBytes--;
+}
 #ifdef _WINDOWS
     if (buf[numBytes - 1] == '\r')
         numBytes--;
@@ -211,8 +219,9 @@ SECU_TextFileToItem(SECItem *dst, PRFileDesc *src)
 
     /* XXX workaround for 3.1, not all utils zero dst before sending */
     dst->data = 0;
-    if (!SECITEM_AllocItem(NULL, dst, numBytes))
+    if (!SECITEM_AllocItem(NULL, dst, numBytes)) {
         goto loser;
+}
 
     memcpy(dst->data, buf, numBytes);
 
@@ -254,8 +263,9 @@ SECU_PrintAsHex(FILE *out, const SECItem *data, const char *m, int level)
         SECU_Indent(out, level);
         fprintf(out, "%s:", m);
         level++;
-        if (wrapEnabled)
+        if (wrapEnabled) {
             fprintf(out, "\n");
+}
     }
 
     if (wrapEnabled) {
@@ -497,24 +507,29 @@ SECU_ParseCommandLine(int argc, char **argv, char *progName,
     PR_ASSERT(HasNoDuplicates(cmd->options, cmd->numOptions));
 
     optstring = (char *)PORT_Alloc(cmd->numCommands + 2 * cmd->numOptions + 1);
-    if (optstring == NULL)
+    if (optstring == NULL) {
         return SECFailure;
+}
 
     j = 0;
     for (i = 0; i < cmd->numCommands; i++) {
-        if (cmd->commands[i].flag) /* single character option ? */
+        if (cmd->commands[i].flag) { /* single character option ? */
             optstring[j++] = cmd->commands[i].flag;
-        if (cmd->commands[i].longform)
+}
+        if (cmd->commands[i].longform) {
             lcmd++;
+}
     }
     for (i = 0; i < cmd->numOptions; i++) {
         if (cmd->options[i].flag) {
             optstring[j++] = cmd->options[i].flag;
-            if (cmd->options[i].needsArg)
+            if (cmd->options[i].needsArg) {
                 optstring[j++] = ':';
+}
         }
-        if (cmd->options[i].longform)
+        if (cmd->options[i].longform) {
             lopt++;
+}
     }
 
     optstring[j] = '\0';
@@ -559,13 +574,15 @@ SECU_ParseCommandLine(int argc, char **argv, char *progName,
         /*  positional parameter, single-char option or long opt? */
         if (optstate->longOptIndex == -1) {
             /* not a long opt */
-            if (option == '\0')
+            if (option == '\0') {
                 continue; /* it's a positional parameter */
+}
             optstatelong = "";
         } else {
             /* long opt */
-            if (option == '\0')
+            if (option == '\0') {
                 option = '\377'; /* force unequal with all flags */
+}
             optstatelong = longopts[optstate->longOptIndex].longOptName;
         }
 
@@ -583,8 +600,9 @@ SECU_ParseCommandLine(int argc, char **argv, char *progName,
             }
         }
 
-        if (found)
+        if (found) {
             continue;
+}
 
         for (i = 0; i < cmd->numOptions; i++) {
             if (cmd->options[i].flag == option ||
@@ -610,22 +628,26 @@ SECU_ParseCommandLine(int argc, char **argv, char *progName,
 loser:
     PL_DestroyOptState(optstate);
     PORT_Free(optstring);
-    if (longopts)
+    if (longopts) {
         PORT_Free(longopts);
-    if (status == PL_OPT_BAD)
+}
+    if (status == PL_OPT_BAD) {
         return SECFailure;
+}
     return SECSuccess;
 }
 
 char *
 SECU_GetOptionArg(const secuCommand *cmd, int optionNum)
 {
-    if (optionNum < 0 || optionNum >= cmd->numOptions)
+    if (optionNum < 0 || optionNum >= cmd->numOptions) {
         return NULL;
-    if (cmd->options[optionNum].activated)
+}
+    if (cmd->options[optionNum].activated) {
         return PL_strdup(cmd->options[optionNum].arg);
-    else
+    } else {
         return NULL;
+}
 }
 
 void

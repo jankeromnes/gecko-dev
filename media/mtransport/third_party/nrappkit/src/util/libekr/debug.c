@@ -121,8 +121,9 @@ int nr_xdump(name,data,len)
       }
       printf("%.2x ",data[i]&255);
     }
-    if(i%12)
+    if(i%12) {
       printf("\n");
+}
     return(0);
   }
 

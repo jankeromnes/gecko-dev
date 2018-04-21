@@ -104,8 +104,9 @@ expand_right_edge (JSAMPARRAY image_data, int num_rows,
     for (row = 0; row < num_rows; row++) {
       ptr = image_data[row] + input_cols;
       pixval = ptr[-1];         /* don't need GETJSAMPLE() here */
-      for (count = numcols; count > 0; count--)
+      for (count = numcols; count > 0; count--) {
         *ptr++ = pixval;
+}
     }
   }
 }
@@ -483,8 +484,9 @@ jinit_downsampler (j_compress_ptr cinfo)
   downsample->pub.downsample = sep_downsample;
   downsample->pub.need_context_rows = FALSE;
 
-  if (cinfo->CCIR601_sampling)
+  if (cinfo->CCIR601_sampling) {
     ERREXIT(cinfo, JERR_CCIR601_NOTIMPL);
+}
 
   /* Verify we can handle the sampling factors, and set up method pointers */
   for (ci = 0, compptr = cinfo->comp_info; ci < cinfo->num_components;
@@ -495,16 +497,18 @@ jinit_downsampler (j_compress_ptr cinfo)
       if (cinfo->smoothing_factor) {
         downsample->methods[ci] = fullsize_smooth_downsample;
         downsample->pub.need_context_rows = TRUE;
-      } else
+      } else {
 #endif
         downsample->methods[ci] = fullsize_downsample;
+}
     } else if (compptr->h_samp_factor * 2 == cinfo->max_h_samp_factor &&
                compptr->v_samp_factor == cinfo->max_v_samp_factor) {
       smoothok = FALSE;
-      if (jsimd_can_h2v1_downsample())
+      if (jsimd_can_h2v1_downsample()) {
         downsample->methods[ci] = jsimd_h2v1_downsample;
-      else
+      } else {
         downsample->methods[ci] = h2v1_downsample;
+}
     } else if (compptr->h_samp_factor * 2 == cinfo->max_h_samp_factor &&
                compptr->v_samp_factor * 2 == cinfo->max_v_samp_factor) {
 #ifdef INPUT_SMOOTHING_SUPPORTED
@@ -519,21 +523,24 @@ jinit_downsampler (j_compress_ptr cinfo)
       } else
 #endif
       {
-        if (jsimd_can_h2v2_downsample())
+        if (jsimd_can_h2v2_downsample()) {
           downsample->methods[ci] = jsimd_h2v2_downsample;
-        else
+        } else {
           downsample->methods[ci] = h2v2_downsample;
+}
       }
     } else if ((cinfo->max_h_samp_factor % compptr->h_samp_factor) == 0 &&
                (cinfo->max_v_samp_factor % compptr->v_samp_factor) == 0) {
       smoothok = FALSE;
       downsample->methods[ci] = int_downsample;
-    } else
+    } else {
       ERREXIT(cinfo, JERR_FRACT_SAMPLE_NOTIMPL);
+}
   }
 
 #ifdef INPUT_SMOOTHING_SUPPORTED
-  if (cinfo->smoothing_factor && !smoothok)
+  if (cinfo->smoothing_factor && !smoothok) {
     TRACEMS(cinfo, 0, JTRC_SMOOTH_NOTIMPL);
+}
 #endif
 }

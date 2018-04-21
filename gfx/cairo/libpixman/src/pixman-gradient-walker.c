@@ -63,8 +63,9 @@ gradient_walker_reset (pixman_gradient_walker_t *walker,
     else if (walker->repeat == PIXMAN_REPEAT_REFLECT)
     {
 	x = (int32_t)pos & 0xffff;
-	if ((int32_t)pos & 0x10000)
+	if ((int32_t)pos & 0x10000) {
 	    x = 0x10000 - x;
+}
     }
     else
     {
@@ -73,8 +74,9 @@ gradient_walker_reset (pixman_gradient_walker_t *walker,
     
     for (n = 0; n < count; n++)
     {
-	if (x < stops[n].x)
+	if (x < stops[n].x) {
 	    break;
+}
     }
     
     left_x =  stops[n - 1].x;
@@ -110,10 +112,11 @@ gradient_walker_reset (pixman_gradient_walker_t *walker,
     }
     else if (walker->repeat == PIXMAN_REPEAT_NONE)
     {
-	if (n == 0)
+	if (n == 0) {
 	    right_c = left_c;
-	else if (n == count)
+	} else if (n == count) {
 	    left_c = right_c;
+}
     }
 
     walker->left_x   = left_x;
@@ -145,8 +148,9 @@ _pixman_gradient_walker_pixel (pixman_gradient_walker_t *walker,
     int dist, idist;
     uint32_t t1, t2, a, color;
 
-    if (walker->need_reset || x < walker->left_x || x >= walker->right_x)
+    if (walker->need_reset || x < walker->left_x || x >= walker->right_x) {
 	gradient_walker_reset (walker, x);
+}
 
     dist  = ((int)(x - walker->left_x) * walker->stepper) >> 16;
     idist = 256 - dist;

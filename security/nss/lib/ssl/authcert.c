@@ -61,8 +61,9 @@ NSS_GetClientAuthData(void *arg,
                 cert = CERT_FindUserCertByUsage(CERT_GetDefaultCertDB(),
                                                 names->nicknames[i], certUsageSSLClient,
                                                 PR_FALSE, proto_win);
-                if (!cert)
+                if (!cert) {
                     continue;
+}
                 /* Only check unexpired certs */
                 if (CERT_CheckCertValidTimes(cert, ssl_TimeUsec(), PR_TRUE) !=
                     secCertTimeValid) {
@@ -73,8 +74,9 @@ NSS_GetClientAuthData(void *arg,
                 if (rv == SECSuccess) {
                     privkey =
                         PK11_FindKeyByAnyCert(cert, proto_win);
-                    if (privkey)
+                    if (privkey) {
                         break;
+}
                 }
                 rv = SECFailure;
                 CERT_DestroyCertificate(cert);

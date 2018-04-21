@@ -21,8 +21,9 @@ GetLSBRelease(nsACString& aDistributor,
               nsACString& aRelease,
               nsACString& aCodename)
 {
-  if (access(gLsbReleasePath, R_OK) != 0)
+  if (access(gLsbReleasePath, R_OK) != 0) {
     return false;
+}
 
   int pipefd[2];
   if (pipe(pipefd) == -1) {

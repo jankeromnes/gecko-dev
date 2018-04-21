@@ -39,8 +39,9 @@ public:
 
   static void TearDownTestCase()
   {
-    if (gThread)
+    if (gThread) {
       gThread->Shutdown();
+}
   }
 };
 

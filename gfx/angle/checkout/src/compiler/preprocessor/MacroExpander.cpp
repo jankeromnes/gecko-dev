@@ -108,15 +108,18 @@ void MacroExpander::lex(Token *token)
     {
         getToken(token);
 
-        if (token->type != Token::IDENTIFIER)
+        if (token->type != Token::IDENTIFIER) {
             break;
+}
 
-        if (token->expansionDisabled())
+        if (token->expansionDisabled()) {
             break;
+}
 
         MacroSet::const_iterator iter = mMacroSet->find(token->text);
-        if (iter == mMacroSet->end())
+        if (iter == mMacroSet->end()) {
             break;
+}
 
         std::shared_ptr<Macro> macro = iter->second;
         if (macro->disabled)
@@ -201,8 +204,9 @@ bool MacroExpander::pushMacro(std::shared_ptr<Macro> macro, const Token &identif
     ASSERT(identifier.text == macro->name);
 
     std::vector<Token> replacements;
-    if (!expandMacro(*macro, identifier, &replacements))
+    if (!expandMacro(*macro, identifier, &replacements)) {
         return false;
+}
 
     // Macro is disabled for expansion until it is popped off the stack.
     macro->disabled = true;
@@ -275,8 +279,9 @@ bool MacroExpander::expandMacro(const Macro &macro,
         ASSERT(macro.type == Macro::kTypeFunc);
         std::vector<MacroArg> args;
         args.reserve(macro.parameters.size());
-        if (!collectMacroArgs(macro, identifier, &args, &replacementLocation))
+        if (!collectMacroArgs(macro, identifier, &args, &replacementLocation)) {
             return false;
+}
 
         replaceMacroParams(macro, args, replacements);
     }
@@ -342,8 +347,9 @@ bool MacroExpander::collectMacroArgs(const Macro &macro,
                 // The individual arguments are separated by comma tokens, but
                 // the comma tokens between matching inner parentheses do not
                 // seperate arguments.
-                if (openParens == 1)
+                if (openParens == 1) {
                     args->push_back(MacroArg());
+}
                 isArg = openParens != 1;
                 break;
             default:
@@ -354,8 +360,9 @@ bool MacroExpander::collectMacroArgs(const Macro &macro,
         {
             MacroArg &arg = args->back();
             // Initial whitespace is not part of the argument.
-            if (arg.empty())
+            if (arg.empty()) {
                 token.setHasLeadingSpace(false);
+}
             arg.push_back(token);
         }
     }

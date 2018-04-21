@@ -2120,16 +2120,20 @@ void _vorbis_apply_window(float *d,int *winno,long *blocksizes,
 
     int i,p;
 
-    for(i=0;i<leftbegin;i++)
+    for(i=0;i<leftbegin;i++) {
       d[i]=0.f;
+}
 
-    for(p=0;i<leftend;i++,p++)
+    for(p=0;i<leftend;i++,p++) {
       d[i]*=windowLW[p];
+}
 
-    for(i=rightbegin,p=rn/2-1;i<rightend;i++,p--)
+    for(i=rightbegin,p=rn/2-1;i<rightend;i++,p--) {
       d[i]*=windowNW[p];
+}
 
-    for(;i<n;i++)
+    for(;i<n;i++) {
       d[i]=0.f;
+}
   }
 }

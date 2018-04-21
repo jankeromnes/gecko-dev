@@ -30,7 +30,8 @@ void vpx_quantize_dc(const tran_low_t *coeff_ptr, int n_coeffs, int skip_block,
     tmp = (tmp * quant) >> 16;
     qcoeff_ptr[rc] = (tmp ^ coeff_sign) - coeff_sign;
     dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant_ptr;
-    if (tmp) eob = 0;
+    if (tmp) { eob = 0;
+}
   }
   *eob_ptr = eob + 1;
 }
@@ -80,7 +81,8 @@ void vpx_quantize_dc_32x32(const tran_low_t *coeff_ptr, int skip_block,
     tmp = (tmp * quant) >> 15;
     qcoeff_ptr[rc] = (tmp ^ coeff_sign) - coeff_sign;
     dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant_ptr / 2;
-    if (tmp) eob = 0;
+    if (tmp) { eob = 0;
+}
   }
   *eob_ptr = eob + 1;
 }
@@ -133,10 +135,11 @@ void vpx_quantize_b_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
       const int rc = scan[i];
       const int coeff = coeff_ptr[rc];
 
-      if (coeff < zbins[rc != 0] && coeff > nzbins[rc != 0])
+      if (coeff < zbins[rc != 0] && coeff > nzbins[rc != 0]) {
         non_zero_count--;
-      else
+      } else {
         break;
+}
     }
 
     // Quantization pass: All coefficients with index >= zero_flag are
@@ -155,7 +158,8 @@ void vpx_quantize_b_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
         qcoeff_ptr[rc] = (tmp ^ coeff_sign) - coeff_sign;
         dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant_ptr[rc != 0];
 
-        if (tmp) eob = i;
+        if (tmp) { eob = i;
+}
       }
     }
   }
@@ -240,8 +244,9 @@ void vpx_quantize_b_32x32_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
 
       // If the coefficient is out of the base ZBIN range, keep it for
       // quantization.
-      if (coeff >= zbins[rc != 0] || coeff <= nzbins[rc != 0])
+      if (coeff >= zbins[rc != 0] || coeff <= nzbins[rc != 0]) {
         idx_arr[idx++] = i;
+}
     }
 
     // Quantization pass: only process the coefficients selected in
@@ -261,7 +266,8 @@ void vpx_quantize_b_32x32_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
       qcoeff_ptr[rc] = (tmp ^ coeff_sign) - coeff_sign;
       dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant_ptr[rc != 0] / 2;
 
-      if (tmp) eob = idx_arr[i];
+      if (tmp) { eob = idx_arr[i];
+}
     }
   }
   *eob_ptr = eob + 1;

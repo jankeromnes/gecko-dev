@@ -189,10 +189,11 @@ fast_composite_in_n_8_8 (pixman_implementation_t *imp,
 	    {
 		m = *mask++;
 
-		if (m == 0)
+		if (m == 0) {
 		    *dst = 0;
-		else if (m != 0xff)
+		} else if (m != 0xff) {
 		    *dst = MUL_UN8 (m, *dst, t);
+}
 
 		dst++;
 	    }
@@ -213,10 +214,11 @@ fast_composite_in_n_8_8 (pixman_implementation_t *imp,
 		m = *mask++;
 		m = MUL_UN8 (m, srca, t);
 
-		if (m == 0)
+		if (m == 0) {
 		    *dst = 0;
-		else if (m != 0xff)
+		} else if (m != 0xff) {
 		    *dst = MUL_UN8 (m, *dst, t);
+}
 
 		dst++;
 	    }
@@ -251,10 +253,11 @@ fast_composite_in_8_8 (pixman_implementation_t *imp,
 	{
 	    s = *src++;
 
-	    if (s == 0)
+	    if (s == 0) {
 		*dst = 0;
-	    else if (s != 0xff)
+	    } else if (s != 0xff) {
 		*dst = MUL_UN8 (s, *dst, t);
+}
 
 	    dst++;
 	}
@@ -275,8 +278,9 @@ fast_composite_over_n_8_8888 (pixman_implementation_t *imp,
     src = _pixman_image_get_solid (imp, src_image, dest_image->bits.format);
 
     srca = src >> 24;
-    if (src == 0)
+    if (src == 0) {
 	return;
+}
 
     PIXMAN_IMAGE_GET_LINE (dest_image, dest_x, dest_y, uint32_t, dst_stride, dst_line, 1);
     PIXMAN_IMAGE_GET_LINE (mask_image, mask_x, mask_y, uint8_t, mask_stride, mask_line, 1);
@@ -294,10 +298,11 @@ fast_composite_over_n_8_8888 (pixman_implementation_t *imp,
 	    m = *mask++;
 	    if (m == 0xff)
 	    {
-		if (srca == 0xff)
+		if (srca == 0xff) {
 		    *dst = src;
-		else
+		} else {
 		    *dst = over (src, *dst);
+}
 	    }
 	    else if (m)
 	    {
@@ -322,8 +327,9 @@ fast_composite_add_n_8888_8888_ca (pixman_implementation_t *imp,
 
     src = _pixman_image_get_solid (imp, src_image, dest_image->bits.format);
 
-    if (src == 0)
+    if (src == 0) {
 	return;
+}
 
     PIXMAN_IMAGE_GET_LINE (dest_image, dest_x, dest_y, uint32_t, dst_stride, dst_line, 1);
     PIXMAN_IMAGE_GET_LINE (mask_image, mask_x, mask_y, uint32_t, mask_stride, mask_line, 1);
@@ -369,8 +375,9 @@ fast_composite_over_n_8888_8888_ca (pixman_implementation_t *imp,
     src = _pixman_image_get_solid (imp, src_image, dest_image->bits.format);
 
     srca = src >> 24;
-    if (src == 0)
+    if (src == 0) {
 	return;
+}
 
     PIXMAN_IMAGE_GET_LINE (dest_image, dest_x, dest_y, uint32_t, dst_stride, dst_line, 1);
     PIXMAN_IMAGE_GET_LINE (mask_image, mask_x, mask_y, uint32_t, mask_stride, mask_line, 1);
@@ -388,10 +395,11 @@ fast_composite_over_n_8888_8888_ca (pixman_implementation_t *imp,
 	    ma = *mask++;
 	    if (ma == 0xffffffff)
 	    {
-		if (srca == 0xff)
+		if (srca == 0xff) {
 		    *dst = src;
-		else
+		} else {
 		    *dst = over (src, *dst);
+}
 	    }
 	    else if (ma)
 	    {
@@ -426,8 +434,9 @@ fast_composite_over_n_8_0888 (pixman_implementation_t *imp,
     src = _pixman_image_get_solid (imp, src_image, dest_image->bits.format);
 
     srca = src >> 24;
-    if (src == 0)
+    if (src == 0) {
 	return;
+}
 
     PIXMAN_IMAGE_GET_LINE (dest_image, dest_x, dest_y, uint8_t, dst_stride, dst_line, 3);
     PIXMAN_IMAGE_GET_LINE (mask_image, mask_x, mask_y, uint8_t, mask_stride, mask_line, 1);
@@ -481,8 +490,9 @@ fast_composite_over_n_8_0565 (pixman_implementation_t *imp,
     src = _pixman_image_get_solid (imp, src_image, dest_image->bits.format);
 
     srca = src >> 24;
-    if (src == 0)
+    if (src == 0) {
 	return;
+}
 
     PIXMAN_IMAGE_GET_LINE (dest_image, dest_x, dest_y, uint16_t, dst_stride, dst_line, 1);
     PIXMAN_IMAGE_GET_LINE (mask_image, mask_x, mask_y, uint8_t, mask_stride, mask_line, 1);
@@ -538,8 +548,9 @@ fast_composite_over_n_8888_0565_ca (pixman_implementation_t *imp,
     src = _pixman_image_get_solid (imp, src_image, dest_image->bits.format);
 
     srca = src >> 24;
-    if (src == 0)
+    if (src == 0) {
 	return;
+}
 
     src16 = convert_8888_to_0565 (src);
 
@@ -615,10 +626,11 @@ fast_composite_over_8888_8888 (pixman_implementation_t *imp,
 	{
 	    s = *src++;
 	    a = s >> 24;
-	    if (a == 0xff)
+	    if (a == 0xff) {
 		*dst = s;
-	    else if (s)
+	    } else if (s) {
 		*dst = over (s, *dst);
+}
 	    dst++;
 	}
     }
@@ -645,8 +657,9 @@ fast_composite_src_x888_8888 (pixman_implementation_t *imp,
 	src_line += src_stride;
 	w = width;
 
-	while (w--)
+	while (w--) {
 	    *dst++ = (*src++) | 0xff000000;
+}
     }
 }
 
@@ -851,8 +864,9 @@ fast_composite_add_8888_8888 (pixman_implementation_t *imp,
 		if (s != 0xffffffff)
 		{
 		    d = *dst;
-		    if (d)
+		    if (d) {
 			UN8x4_ADD_UN8x4 (s, d);
+}
 		}
 		*dst = s;
 	    }
@@ -964,13 +978,15 @@ fast_composite_over_n_1_8888 (pixman_implementation_t *imp,
     uint32_t     bitcache, bitmask;
     int32_t      w;
 
-    if (width <= 0)
+    if (width <= 0) {
 	return;
+}
 
     src = _pixman_image_get_solid (imp, src_image, dest_image->bits.format);
     srca = src >> 24;
-    if (src == 0)
+    if (src == 0) {
 	return;
+}
 
     PIXMAN_IMAGE_GET_LINE (dest_image, dest_x, dest_y, uint32_t,
                            dst_stride, dst_line, 1);
@@ -998,8 +1014,9 @@ fast_composite_over_n_1_8888 (pixman_implementation_t *imp,
 		    bitcache = *mask++;
 		    bitmask = CREATE_BITMASK (0);
 		}
-		if (bitcache & bitmask)
+		if (bitcache & bitmask) {
 		    *dst = src;
+}
 		bitmask = UPDATE_BITMASK (bitmask);
 		dst++;
 	    }
@@ -1025,8 +1042,9 @@ fast_composite_over_n_1_8888 (pixman_implementation_t *imp,
 		    bitcache = *mask++;
 		    bitmask = CREATE_BITMASK (0);
 		}
-		if (bitcache & bitmask)
+		if (bitcache & bitmask) {
 		    *dst = over (src, *dst);
+}
 		bitmask = UPDATE_BITMASK (bitmask);
 		dst++;
 	    }
@@ -1048,13 +1066,15 @@ fast_composite_over_n_1_0565 (pixman_implementation_t *imp,
     uint32_t     d;
     uint16_t     src565;
 
-    if (width <= 0)
+    if (width <= 0) {
 	return;
+}
 
     src = _pixman_image_get_solid (imp, src_image, dest_image->bits.format);
     srca = src >> 24;
-    if (src == 0)
+    if (src == 0) {
 	return;
+}
 
     PIXMAN_IMAGE_GET_LINE (dest_image, dest_x, dest_y, uint16_t,
                            dst_stride, dst_line, 1);
@@ -1083,8 +1103,9 @@ fast_composite_over_n_1_0565 (pixman_implementation_t *imp,
 		    bitcache = *mask++;
 		    bitmask = CREATE_BITMASK (0);
 		}
-		if (bitcache & bitmask)
+		if (bitcache & bitmask) {
 		    *dst = src565;
+}
 		bitmask = UPDATE_BITMASK (bitmask);
 		dst++;
 	    }
@@ -1480,8 +1501,9 @@ fast_composite_tiled_repeat (pixman_implementation_t *imp,
 	sx += width;
 	src_width = 0;
 
-	while (src_width < REPEAT_MIN_WIDTH && src_width <= sx)
+	while (src_width < REPEAT_MIN_WIDTH && src_width <= sx) {
 	    src_width += src_image->bits.width;
+}
 
 	src_stride = (src_width * (src_bpp >> 3) + 3) / (int) sizeof (uint32_t);
 
@@ -1516,8 +1538,9 @@ fast_composite_tiled_repeat (pixman_implementation_t *imp,
 
 		for (i = 0; i < src_width; )
 		{
-		    for (j = 0; j < src_image->bits.width; j++, i++)
+		    for (j = 0; j < src_image->bits.width; j++, i++) {
 			extended_src[i] = src_line[j];
+}
 		}
 	    }
 	    else if (src_bpp == 16)
@@ -1530,8 +1553,9 @@ fast_composite_tiled_repeat (pixman_implementation_t *imp,
 
 		for (i = 0; i < src_width; )
 		{
-		    for (j = 0; j < src_image->bits.width; j++, i++)
+		    for (j = 0; j < src_image->bits.width; j++, i++) {
 			((uint16_t*)extended_src)[i] = ((uint16_t*)src_line)[j];
+}
 		}
 	    }
 	    else if (src_bpp == 8)
@@ -1544,8 +1568,9 @@ fast_composite_tiled_repeat (pixman_implementation_t *imp,
 
 		for (i = 0; i < src_width; )
 		{
-		    for (j = 0; j < src_image->bits.width; j++, i++)
+		    for (j = 0; j < src_image->bits.width; j++, i++) {
 			((uint8_t*)extended_src)[i] = ((uint8_t*)src_line)[j];
+}
 		}
 	    }
 
@@ -1562,8 +1587,9 @@ fast_composite_tiled_repeat (pixman_implementation_t *imp,
 	{
 	    num_pixels = src_width - sx;
 
-	    if (num_pixels > width_remain)
+	    if (num_pixels > width_remain) {
 		num_pixels = width_remain;
+}
 
 	    info2.src_x = sx;
 	    info2.width = num_pixels;
@@ -1585,8 +1611,9 @@ fast_composite_tiled_repeat (pixman_implementation_t *imp,
 	info2.dest_y++;
     }
 
-    if (need_src_extension)
+    if (need_src_extension) {
 	_pixman_image_fini (&extended_src_image);
+}
 }
 
 /* Use more unrolling for src_0565_0565 because it is typically CPU bound */
@@ -1624,8 +1651,9 @@ scaled_nearest_scanline_565_565_SRC (uint16_t *       dst,
 	*dst++ = tmp1;
 	*dst++ = tmp2;
     }
-    if (w & 1)
+    if (w & 1) {
 	*dst = *(src + pixman_fixed_to_int (vx));
+}
 }
 
 FAST_NEAREST_MAINLOOP (565_565_cover_SRC,
@@ -1645,10 +1673,11 @@ fetch_nearest (pixman_repeat_t src_repeat,
 {
     if (repeat (src_repeat, &x, src_width))
     {
-	if (format == PIXMAN_x8r8g8b8 || format == PIXMAN_x8b8g8r8)
+	if (format == PIXMAN_x8r8g8b8 || format == PIXMAN_x8b8g8r8) {
 	    return *(src + x) | 0xff000000;
-	else
+	} else {
 	    return *(src + x);
+}
     }
     else
     {
@@ -1663,10 +1692,11 @@ combine_over (uint32_t s, uint32_t *dst)
     {
 	uint8_t ia = 0xff - (s >> 24);
 
-	if (ia)
+	if (ia) {
 	    UN8x4_MUL_UN8_ADD_UN8x4 (*dst, ia, s);
-	else
+	} else {
 	    *dst = s;
+}
     }
 }
 
@@ -1702,8 +1732,9 @@ fast_composite_scaled_nearest (pixman_implementation_t *imp,
     v.vector[1] = pixman_int_to_fixed (src_y) + pixman_fixed_1 / 2;
     v.vector[2] = pixman_fixed_1;
 
-    if (!pixman_transform_point_3d (src_image->common.transform, &v))
+    if (!pixman_transform_point_3d (src_image->common.transform, &v)) {
 	return;
+}
 
     unit_x = src_image->common.transform->matrix[0][0];
     unit_y = src_image->common.transform->matrix[1][1];
@@ -1732,8 +1763,9 @@ fast_composite_scaled_nearest (pixman_implementation_t *imp,
 
 	if (!repeat (src_repeat, &y, src_height))
 	{
-	    if (op == PIXMAN_OP_SRC)
+	    if (op == PIXMAN_OP_SRC) {
 		memset (dst, 0, sizeof (*dst) * width);
+}
 	}
 	else
 	{
@@ -1779,10 +1811,11 @@ fast_composite_scaled_nearest (pixman_implementation_t *imp,
 
 		s = fetch_nearest (src_repeat, src_format, src, x, src_width);
 
-		if (op == PIXMAN_OP_OVER)
+		if (op == PIXMAN_OP_OVER) {
 		    combine_over (s, dst++);
-		else
+		} else {
 		    combine_src (s, dst++);
+}
 	    }
 	}
     }
@@ -2214,35 +2247,39 @@ pixman_fill1_line (uint32_t *dst, int offs, int width, int v)
 	int leading_pixels = 32 - offs;
 	if (leading_pixels >= width)
 	{
-	    if (v)
+	    if (v) {
 		*dst |= A1_FILL_MASK (width, offs);
-	    else
+	    } else {
 		*dst &= ~A1_FILL_MASK (width, offs);
+}
 	    return;
 	}
 	else
 	{
-	    if (v)
+	    if (v) {
 		*dst++ |= A1_FILL_MASK (leading_pixels, offs);
-	    else
+	    } else {
 		*dst++ &= ~A1_FILL_MASK (leading_pixels, offs);
+}
 	    width -= leading_pixels;
 	}
     }
     while (width >= 32)
     {
-	if (v)
+	if (v) {
 	    *dst++ = 0xFFFFFFFF;
-	else
+	} else {
 	    *dst++ = 0;
+}
 	width -= 32;
     }
     if (width > 0)
     {
-	if (v)
+	if (v) {
 	    *dst |= A1_FILL_MASK (width, 0);
-	else
+	} else {
 	    *dst &= ~A1_FILL_MASK (width, 0);
+}
     }
 }
 
@@ -2294,8 +2331,9 @@ pixman_fill8 (uint32_t *bits,
 
     while (height--)
     {
-	for (i = 0; i < width; ++i)
+	for (i = 0; i < width; ++i) {
 	    dst[i] = v;
+}
 
 	dst += byte_stride;
     }
@@ -2320,8 +2358,9 @@ pixman_fill16 (uint32_t *bits,
 
     while (height--)
     {
-	for (i = 0; i < width; ++i)
+	for (i = 0; i < width; ++i) {
 	    dst[i] = v;
+}
 
 	dst += short_stride;
     }
@@ -2342,8 +2381,9 @@ pixman_fill32 (uint32_t *bits,
 
     while (height--)
     {
-	for (i = 0; i < width; ++i)
+	for (i = 0; i < width; ++i) {
 	    bits[i] = filler;
+}
 
 	bits += stride;
     }
@@ -2509,8 +2549,9 @@ fast_src_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
     (FAST_PATH_STANDARD_FLAGS | FAST_PATH_ID_TRANSFORM |		\
      FAST_PATH_BITS_IMAGE | FAST_PATH_SAMPLES_COVER_CLIP_NEAREST)
 
-    if (iter->iter_flags & ITER_16)
+    if (iter->iter_flags & ITER_16) {
 	    return FALSE;
+}
 
     if ((iter->iter_flags & ITER_NARROW)			&&
 	(iter->image_flags & FLAGS) == FLAGS)
@@ -2541,8 +2582,9 @@ fast_dest_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
 {
     pixman_image_t *image = iter->image;
 
-    if (iter->iter_flags & ITER_16)
+    if (iter->iter_flags & ITER_16) {
 	    return FALSE;
+}
 
     if ((iter->iter_flags & ITER_NARROW)		&&
 	(iter->image_flags & FAST_PATH_STD_DEST_FLAGS) == FAST_PATH_STD_DEST_FLAGS)

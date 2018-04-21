@@ -172,21 +172,25 @@ start_pass_huff (j_compress_ptr cinfo, boolean gather_statistics)
 #ifdef ENTROPY_OPT_SUPPORTED
       /* Check for invalid table indexes */
       /* (make_c_derived_tbl does this in the other path) */
-      if (dctbl < 0 || dctbl >= NUM_HUFF_TBLS)
+      if (dctbl < 0 || dctbl >= NUM_HUFF_TBLS) {
         ERREXIT1(cinfo, JERR_NO_HUFF_TABLE, dctbl);
-      if (actbl < 0 || actbl >= NUM_HUFF_TBLS)
+}
+      if (actbl < 0 || actbl >= NUM_HUFF_TBLS) {
         ERREXIT1(cinfo, JERR_NO_HUFF_TABLE, actbl);
+}
       /* Allocate and zero the statistics tables */
       /* Note that jpeg_gen_optimal_table expects 257 entries in each table! */
-      if (entropy->dc_count_ptrs[dctbl] == NULL)
+      if (entropy->dc_count_ptrs[dctbl] == NULL) {
         entropy->dc_count_ptrs[dctbl] = (long *)
           (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
                                       257 * sizeof(long));
+}
       MEMZERO(entropy->dc_count_ptrs[dctbl], 257 * sizeof(long));
-      if (entropy->ac_count_ptrs[actbl] == NULL)
+      if (entropy->ac_count_ptrs[actbl] == NULL) {
         entropy->ac_count_ptrs[actbl] = (long *)
           (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
                                       257 * sizeof(long));
+}
       MEMZERO(entropy->ac_count_ptrs[actbl], 257 * sizeof(long));
 #endif
     } else {
@@ -234,18 +238,21 @@ jpeg_make_c_derived_tbl (j_compress_ptr cinfo, boolean isDC, int tblno,
    */
 
   /* Find the input Huffman table */
-  if (tblno < 0 || tblno >= NUM_HUFF_TBLS)
+  if (tblno < 0 || tblno >= NUM_HUFF_TBLS) {
     ERREXIT1(cinfo, JERR_NO_HUFF_TABLE, tblno);
+}
   htbl =
     isDC ? cinfo->dc_huff_tbl_ptrs[tblno] : cinfo->ac_huff_tbl_ptrs[tblno];
-  if (htbl == NULL)
+  if (htbl == NULL) {
     ERREXIT1(cinfo, JERR_NO_HUFF_TABLE, tblno);
+}
 
   /* Allocate a workspace if we haven't already done so. */
-  if (*pdtbl == NULL)
+  if (*pdtbl == NULL) {
     *pdtbl = (c_derived_tbl *)
       (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
                                   sizeof(c_derived_tbl));
+}
   dtbl = *pdtbl;
 
   /* Figure C.1: make table of Huffman code length for each symbol */
@@ -253,10 +260,12 @@ jpeg_make_c_derived_tbl (j_compress_ptr cinfo, boolean isDC, int tblno,
   p = 0;
   for (l = 1; l <= 16; l++) {
     i = (int) htbl->bits[l];
-    if (i < 0 || p + i > 256)   /* protect against table overrun */
+    if (i < 0 || p + i > 256) {   /* protect against table overrun */
       ERREXIT(cinfo, JERR_BAD_HUFF_TABLE);
-    while (i--)
+}
+    while (i--) {
       huffsize[p++] = (char) l;
+}
   }
   huffsize[p] = 0;
   lastp = p;
@@ -275,8 +284,9 @@ jpeg_make_c_derived_tbl (j_compress_ptr cinfo, boolean isDC, int tblno,
     /* code is now 1 more than the last code used for codelength si; but
      * it must still fit in si bits, since no code is allowed to be all ones.
      */
-    if (((JLONG) code) >= (((JLONG) 1) << si))
+    if (((JLONG) code) >= (((JLONG) 1) << si)) {
       ERREXIT(cinfo, JERR_BAD_HUFF_TABLE);
+}
     code <<= 1;
     si++;
   }
@@ -299,8 +309,9 @@ jpeg_make_c_derived_tbl (j_compress_ptr cinfo, boolean isDC, int tblno,
 
   for (p = 0; p < lastp; p++) {
     i = htbl->huffval[p];
-    if (i < 0 || i > maxsymbol || dtbl->ehufsi[i])
+    if (i < 0 || i > maxsymbol || dtbl->ehufsi[i]) {
       ERREXIT(cinfo, JERR_BAD_HUFF_TABLE);
+}
     dtbl->ehufco[i] = huffcode[p];
     dtbl->ehufsi[i] = huffsize[p];
   }
@@ -323,8 +334,9 @@ dump_buffer (working_state *state)
 {
   struct jpeg_destination_mgr *dest = state->cinfo->dest;
 
-  if (! (*dest->empty_output_buffer) (state->cinfo))
+  if (! (*dest->empty_output_buffer) (state->cinfo)) {
     return FALSE;
+}
   /* After a successful buffer dump, must reset buffer pointers */
   state->next_output_byte = dest->next_output_byte;
   state->free_in_buffer = dest->free_in_buffer;
@@ -620,15 +632,17 @@ emit_restart (working_state *state, int restart_num)
 {
   int ci;
 
-  if (! flush_bits(state))
+  if (! flush_bits(state)) {
     return FALSE;
+}
 
   emit_byte(state, 0xFF, return FALSE);
   emit_byte(state, JPEG_RST0 + restart_num, return FALSE);
 
   /* Re-initialize DC predictions to 0 */
-  for (ci = 0; ci < state->cinfo->comps_in_scan; ci++)
+  for (ci = 0; ci < state->cinfo->comps_in_scan; ci++) {
     state->cur.last_dc_val[ci] = 0;
+}
 
   /* The restart counter is not updated until we successfully write the MCU. */
 
@@ -656,9 +670,10 @@ encode_mcu_huff (j_compress_ptr cinfo, JBLOCKROW *MCU_data)
 
   /* Emit restart marker if needed */
   if (cinfo->restart_interval) {
-    if (entropy->restarts_to_go == 0)
-      if (! emit_restart(&state, entropy->next_restart_num))
+    if (entropy->restarts_to_go == 0) {
+      if (! emit_restart(&state, entropy->next_restart_num)) {
         return FALSE;
+}
   }
 
   /* Encode the MCU data blocks */
@@ -669,8 +684,9 @@ encode_mcu_huff (j_compress_ptr cinfo, JBLOCKROW *MCU_data)
       if (! encode_one_block_simd(&state,
                                   MCU_data[blkn][0], state.cur.last_dc_val[ci],
                                   entropy->dc_derived_tbls[compptr->dc_tbl_no],
-                                  entropy->ac_derived_tbls[compptr->ac_tbl_no]))
+                                  entropy->ac_derived_tbls[compptr->ac_tbl_no])) {
         return FALSE;
+}
       /* Update last_dc_val */
       state.cur.last_dc_val[ci] = MCU_data[blkn][0][0];
     }
@@ -681,8 +697,9 @@ encode_mcu_huff (j_compress_ptr cinfo, JBLOCKROW *MCU_data)
       if (! encode_one_block(&state,
                              MCU_data[blkn][0], state.cur.last_dc_val[ci],
                              entropy->dc_derived_tbls[compptr->dc_tbl_no],
-                             entropy->ac_derived_tbls[compptr->ac_tbl_no]))
+                             entropy->ac_derived_tbls[compptr->ac_tbl_no])) {
         return FALSE;
+}
       /* Update last_dc_val */
       state.cur.last_dc_val[ci] = MCU_data[blkn][0][0];
     }
@@ -724,8 +741,9 @@ finish_pass_huff (j_compress_ptr cinfo)
   state.cinfo = cinfo;
 
   /* Flush out the last data */
-  if (! flush_bits(&state))
+  if (! flush_bits(&state)) {
     ERREXIT(cinfo, JERR_CANT_SUSPEND);
+}
 
   /* Update state */
   cinfo->dest->next_output_byte = state.next_output_byte;
@@ -761,8 +779,9 @@ htest_one_block (j_compress_ptr cinfo, JCOEFPTR block, int last_dc_val,
   /* Encode the DC coefficient difference per section F.1.2.1 */
 
   temp = block[0] - last_dc_val;
-  if (temp < 0)
+  if (temp < 0) {
     temp = -temp;
+}
 
   /* Find the number of bits needed for the magnitude of the coefficient */
   nbits = 0;
@@ -773,8 +792,9 @@ htest_one_block (j_compress_ptr cinfo, JCOEFPTR block, int last_dc_val,
   /* Check for out-of-range coefficient values.
    * Since we're encoding a difference, the range limit is twice as much.
    */
-  if (nbits > MAX_COEF_BITS+1)
+  if (nbits > MAX_COEF_BITS+1) {
     ERREXIT(cinfo, JERR_BAD_DCT_COEF);
+}
 
   /* Count the Huffman symbol for the number of bits */
   dc_counts[nbits]++;
@@ -794,16 +814,19 @@ htest_one_block (j_compress_ptr cinfo, JCOEFPTR block, int last_dc_val,
       }
 
       /* Find the number of bits needed for the magnitude of the coefficient */
-      if (temp < 0)
+      if (temp < 0) {
         temp = -temp;
+}
 
       /* Find the number of bits needed for the magnitude of the coefficient */
       nbits = 1;                /* there must be at least one 1 bit */
-      while ((temp >>= 1))
+      while ((temp >>= 1)) {
         nbits++;
+}
       /* Check for out-of-range coefficient values */
-      if (nbits > MAX_COEF_BITS)
+      if (nbits > MAX_COEF_BITS) {
         ERREXIT(cinfo, JERR_BAD_DCT_COEF);
+}
 
       /* Count Huffman symbol for run length / number of bits */
       ac_counts[(r << 4) + nbits]++;
@@ -813,8 +836,9 @@ htest_one_block (j_compress_ptr cinfo, JCOEFPTR block, int last_dc_val,
   }
 
   /* If the last coef(s) were zero, emit an end-of-block code */
-  if (r > 0)
+  if (r > 0) {
     ac_counts[0]++;
+}
 }
 
 
@@ -834,8 +858,9 @@ encode_mcu_gather (j_compress_ptr cinfo, JBLOCKROW *MCU_data)
   if (cinfo->restart_interval) {
     if (entropy->restarts_to_go == 0) {
       /* Re-initialize DC predictions to 0 */
-      for (ci = 0; ci < cinfo->comps_in_scan; ci++)
+      for (ci = 0; ci < cinfo->comps_in_scan; ci++) {
         entropy->saved.last_dc_val[ci] = 0;
+}
       /* Update restart state */
       entropy->restarts_to_go = cinfo->restart_interval;
     }
@@ -898,8 +923,9 @@ jpeg_gen_optimal_table (j_compress_ptr cinfo, JHUFF_TBL *htbl, long freq[])
 
   MEMZERO(bits, sizeof(bits));
   MEMZERO(codesize, sizeof(codesize));
-  for (i = 0; i < 257; i++)
+  for (i = 0; i < 257; i++) {
     others[i] = -1;             /* init links to empty */
+}
 
   freq[256] = 1;                /* make sure 256 has a nonzero count */
   /* Including the pseudo-symbol 256 in the Huffman procedure guarantees
@@ -933,8 +959,9 @@ jpeg_gen_optimal_table (j_compress_ptr cinfo, JHUFF_TBL *htbl, long freq[])
     }
 
     /* Done if we've merged everything into one frequency */
-    if (c2 < 0)
+    if (c2 < 0) {
       break;
+}
 
     /* Else merge the two counts/trees */
     freq[c1] += freq[c2];
@@ -962,8 +989,9 @@ jpeg_gen_optimal_table (j_compress_ptr cinfo, JHUFF_TBL *htbl, long freq[])
     if (codesize[i]) {
       /* The JPEG standard seems to think that this can't happen, */
       /* but I'm paranoid... */
-      if (codesize[i] > MAX_CLEN)
+      if (codesize[i] > MAX_CLEN) {
         ERREXIT(cinfo, JERR_HUFF_CLEN_OVERFLOW);
+}
 
       bits[codesize[i]]++;
     }
@@ -983,8 +1011,9 @@ jpeg_gen_optimal_table (j_compress_ptr cinfo, JHUFF_TBL *htbl, long freq[])
   for (i = MAX_CLEN; i > 16; i--) {
     while (bits[i] > 0) {
       j = i - 2;                /* find length of new prefix to be used */
-      while (bits[j] == 0)
+      while (bits[j] == 0) {
         j--;
+}
 
       bits[i] -= 2;             /* remove two symbols */
       bits[i-1]++;              /* one goes in this length */
@@ -994,8 +1023,9 @@ jpeg_gen_optimal_table (j_compress_ptr cinfo, JHUFF_TBL *htbl, long freq[])
   }
 
   /* Remove the count for the pseudo-symbol 256 from the largest codelength */
-  while (bits[i] == 0)          /* find largest codelength still in use */
+  while (bits[i] == 0) {          /* find largest codelength still in use */
     i--;
+}
   bits[i]--;
 
   /* Return final symbol counts (only for lengths 0..16) */
@@ -1046,15 +1076,17 @@ finish_pass_gather (j_compress_ptr cinfo)
     actbl = compptr->ac_tbl_no;
     if (! did_dc[dctbl]) {
       htblptr = & cinfo->dc_huff_tbl_ptrs[dctbl];
-      if (*htblptr == NULL)
+      if (*htblptr == NULL) {
         *htblptr = jpeg_alloc_huff_table((j_common_ptr) cinfo);
+}
       jpeg_gen_optimal_table(cinfo, *htblptr, entropy->dc_count_ptrs[dctbl]);
       did_dc[dctbl] = TRUE;
     }
     if (! did_ac[actbl]) {
       htblptr = & cinfo->ac_huff_tbl_ptrs[actbl];
-      if (*htblptr == NULL)
+      if (*htblptr == NULL) {
         *htblptr = jpeg_alloc_huff_table((j_common_ptr) cinfo);
+}
       jpeg_gen_optimal_table(cinfo, *htblptr, entropy->ac_count_ptrs[actbl]);
       did_ac[actbl] = TRUE;
     }

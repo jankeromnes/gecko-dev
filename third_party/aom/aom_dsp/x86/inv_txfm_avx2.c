@@ -350,7 +350,8 @@ static INLINE int calculate_dc(const tran_low_t *input) {
 void aom_idct16x16_1_add_avx2(const tran_low_t *input, uint8_t *dest,
                               int stride) {
   const int dc = calculate_dc(input);
-  if (dc == 0) return;
+  if (dc == 0) { return;
+}
 
   const __m256i dc_value = _mm256_set1_epi16(dc);
 
@@ -367,7 +368,8 @@ void aom_idct16x16_1_add_avx2(const tran_low_t *input, uint8_t *dest,
 void aom_idct32x32_1_add_avx2(const tran_low_t *input, uint8_t *dest,
                               int stride) {
   const int dc = calculate_dc(input);
-  if (dc == 0) return;
+  if (dc == 0) { return;
+}
 
   const __m256i dc_value = _mm256_set1_epi16(dc);
 

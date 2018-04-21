@@ -183,8 +183,9 @@ CERT_DecodeAltNameExtension(PLArenaPool *reqArena, SECItem *EncodedAltName)
     if (rv == SECFailure) {
         goto loser;
     }
-    if (encodedContext.encodedGenName && encodedContext.encodedGenName[0])
+    if (encodedContext.encodedGenName && encodedContext.encodedGenName[0]) {
         return cert_DecodeGeneralNames(reqArena, encodedContext.encodedGenName);
+}
     /* Extension contained an empty GeneralNames sequence */
     /* Treat as extension not found */
     PORT_SetError(SEC_ERROR_EXTENSION_NOT_FOUND);
@@ -257,9 +258,10 @@ CERT_EncodeInfoAccessExtension(PLArenaPool *arena, CERTAuthInfoAccess **info,
 
     for (i = 0; info[i] != NULL; i++) {
         if (CERT_EncodeGeneralName(info[i]->location, &(info[i]->derLocation),
-                                   arena) == NULL)
+                                   arena) == NULL) {
             /* Note that this may leave some of the locations filled in. */
             return SECFailure;
+}
     }
     dummy = SEC_ASN1EncodeItem(arena, dest, &info, CERTAuthInfoAccessTemplate);
     if (dummy == NULL) {

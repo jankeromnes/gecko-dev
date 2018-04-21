@@ -100,19 +100,22 @@ radial_compute_color (double                    a,
     {
 	double t;
 
-	if (b == 0)
+	if (b == 0) {
 	    return 0;
+}
 
 	t = pixman_fixed_1 / 2 * c / b;
 	if (repeat == PIXMAN_REPEAT_NONE)
 	{
-	    if (0 <= t && t <= pixman_fixed_1)
+	    if (0 <= t && t <= pixman_fixed_1) {
 		return _pixman_gradient_walker_pixel (walker, t);
+}
 	}
 	else
 	{
-	    if (t * dr >= mindr)
+	    if (t * dr >= mindr) {
 		return _pixman_gradient_walker_pixel (walker, t);
+}
 	}
 
 	return 0;
@@ -140,17 +143,19 @@ radial_compute_color (double                    a,
 	 */
 	if (repeat == PIXMAN_REPEAT_NONE)
 	{
-	    if (0 <= t0 && t0 <= pixman_fixed_1)
+	    if (0 <= t0 && t0 <= pixman_fixed_1) {
 		return _pixman_gradient_walker_pixel (walker, t0);
-	    else if (0 <= t1 && t1 <= pixman_fixed_1)
+	    } else if (0 <= t1 && t1 <= pixman_fixed_1) {
 		return _pixman_gradient_walker_pixel (walker, t1);
+}
 	}
 	else
 	{
-	    if (t0 * dr >= mindr)
+	    if (t0 * dr >= mindr) {
 		return _pixman_gradient_walker_pixel (walker, t0);
-	    else if (t1 * dr >= mindr)
+	    } else if (t1 * dr >= mindr) {
 		return _pixman_gradient_walker_pixel (walker, t1);
+}
 	}
     }
 
@@ -262,8 +267,9 @@ radial_get_scanline_narrow (pixman_iter_t *iter, const uint32_t *mask)
 
     if (image->common.transform)
     {
-	if (!pixman_transform_point_3d (image->common.transform, &v))
+	if (!pixman_transform_point_3d (image->common.transform, &v)) {
 	    return iter->buffer;
+}
 
 	unit.vector[0] = image->common.transform->matrix[0][0];
 	unit.vector[1] = image->common.transform->matrix[1][0];
@@ -508,8 +514,9 @@ radial_get_scanline_16 (pixman_iter_t *iter, const uint32_t *mask)
 
     if (image->common.transform)
     {
-	if (!pixman_transform_point_3d (image->common.transform, &v))
+	if (!pixman_transform_point_3d (image->common.transform, &v)) {
 	    return iter->buffer;
+}
 
 	unit.vector[0] = image->common.transform->matrix[0][0];
 	unit.vector[1] = image->common.transform->matrix[1][0];
@@ -667,12 +674,13 @@ radial_get_scanline_wide (pixman_iter_t *iter, const uint32_t *mask)
 void
 _pixman_radial_gradient_iter_init (pixman_image_t *image, pixman_iter_t *iter)
 {
-    if (iter->iter_flags & ITER_16)
+    if (iter->iter_flags & ITER_16) {
 	iter->get_scanline = radial_get_scanline_16;
-    else if (iter->iter_flags & ITER_NARROW)
+    } else if (iter->iter_flags & ITER_NARROW) {
 	iter->get_scanline = radial_get_scanline_narrow;
-    else
+    } else {
 	iter->get_scanline = radial_get_scanline_wide;
+}
 }
 
 
@@ -689,8 +697,9 @@ pixman_image_create_radial_gradient (const pixman_point_fixed_t *  inner,
 
     image = _pixman_image_allocate ();
 
-    if (!image)
+    if (!image) {
 	return NULL;
+}
 
     radial = &image->radial;
 
@@ -718,8 +727,9 @@ pixman_image_create_radial_gradient (const pixman_point_fixed_t *  inner,
        representation is correct (53 bits) */
     radial->a = dot (radial->delta.x, radial->delta.y, -radial->delta.radius,
 		     radial->delta.x, radial->delta.y, radial->delta.radius);
-    if (radial->a != 0)
+    if (radial->a != 0) {
 	radial->inva = 1. * pixman_fixed_1 / radial->a;
+}
 
     radial->mindr = -1. * pixman_fixed_1 * radial->c1.radius;
 

@@ -159,8 +159,9 @@ static av_always_inline void emulated_edge_mc(uint8_t *dst, const uint8_t *src,
 {
     x86_reg start_y, start_x, end_y, end_x, src_y_add = 0, p;
 
-    if (!w || !h)
+    if (!w || !h) {
         return;
+}
 
     av_assert2(block_w <= FFABS(dst_stride));
 

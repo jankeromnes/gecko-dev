@@ -94,8 +94,9 @@ DH_GenParam(int primeLen, DHParams **params)
     CHECK_SEC_OK(RNG_GenerateGlobalRandomBytes(ab, primeLen));
     CHECK_MPI_OK(mp_read_unsigned_octets(&a, ab, primeLen));
     /* force a < p (note that quot(a/p) <= 1) */
-    if (mp_cmp(&a, &p) > 0)
+    if (mp_cmp(&a, &p) > 0) {
         CHECK_MPI_OK(mp_sub(&a, &p, &a));
+}
     do {
         /* check that a is in the range [2..p-1] */
         if (mp_cmp_d(&a, 2) < 0 || mp_cmp(&a, &psub1) >= 0) {
@@ -104,8 +105,9 @@ DH_GenParam(int primeLen, DHParams **params)
         }
         /* if a**q mod p != 1 then a is a generator */
         CHECK_MPI_OK(mp_exptmod(&a, &q, &p, &test));
-        if (mp_cmp_d(&test, 1) != 0)
+        if (mp_cmp_d(&test, 1) != 0) {
             break;
+}
         /* increment the candidate and try again. */
         CHECK_MPI_OK(mp_add_d(&a, 1, &a));
     } while (PR_TRUE);
@@ -280,18 +282,20 @@ DH_Derive(SECItem *publicValue,
     }
     /* grab the derived secret */
     err = mp_to_unsigned_octets(&ZZ, secret, len);
-    if (err >= 0)
+    if (err >= 0) {
         err = MP_OKAY;
+}
     /*
     ** if outBytes is 0 take all of the bytes from the derived secret.
     ** if outBytes is not 0 take exactly outBytes from the derived secret, zero
     ** pad at the beginning if necessary, and truncate beginning bytes
     ** if necessary.
     */
-    if (outBytes > 0)
+    if (outBytes > 0) {
         nb = outBytes;
-    else
+    } else {
         nb = len;
+}
     if (SECITEM_AllocItem(NULL, derivedSecret, nb) == NULL) {
         err = MP_MEM;
         goto cleanup;
@@ -315,8 +319,9 @@ cleanup:
     }
     if (err) {
         MP_TO_SEC_ERROR(err);
-        if (derivedSecret->data)
+        if (derivedSecret->data) {
             PORT_ZFree(derivedSecret->data, derivedSecret->len);
+}
         return SECFailure;
     }
     return SECSuccess;
@@ -376,8 +381,9 @@ KEA_Derive(SECItem *prime,
     }
     /* grab the secret */
     err = mp_to_unsigned_octets(&w, secret, len);
-    if (err > 0)
+    if (err > 0) {
         err = MP_OKAY;
+}
     /* allocate output buffer */
     if (SECITEM_AllocItem(NULL, derivedSecret, KEA_DERIVED_SECRET_LEN) == NULL) {
         err = MP_MEM;
@@ -401,12 +407,14 @@ cleanup:
     mp_clear(&t);
     mp_clear(&u);
     mp_clear(&w);
-    if (secret)
+    if (secret) {
         PORT_ZFree(secret, len);
+}
     if (err) {
         MP_TO_SEC_ERROR(err);
-        if (derivedSecret->data)
+        if (derivedSecret->data) {
             PORT_ZFree(derivedSecret->data, derivedSecret->len);
+}
         return SECFailure;
     }
     return SECSuccess;

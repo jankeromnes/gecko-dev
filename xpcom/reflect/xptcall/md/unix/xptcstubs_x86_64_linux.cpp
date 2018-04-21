@@ -45,20 +45,23 @@ PrepareAndDispatch(nsXPTCStubBase * self, uint32_t methodIndex,
 
     self->mEntry->GetMethodInfo(uint16_t(methodIndex), &info);
     NS_ASSERTION(info,"no method info");
-    if (!info)
+    if (!info) {
         return NS_ERROR_UNEXPECTED;
+}
 
     paramCount = info->GetParamCount();
 
     // setup variant array pointer
-    if (paramCount > PARAM_BUFFER_COUNT)
+    if (paramCount > PARAM_BUFFER_COUNT) {
         dispatchParams = new nsXPTCMiniVariant[paramCount];
-    else
+    } else {
         dispatchParams = paramBuffer;
+}
 
     NS_ASSERTION(dispatchParams,"no place for params");
-    if (!dispatchParams)
+    if (!dispatchParams) {
         return NS_ERROR_OUT_OF_MEMORY;
+}
 
     uint64_t* ap = args;
     uint32_t nr_gpr = 1;    // skip one GPR register for 'that'
@@ -71,26 +74,29 @@ PrepareAndDispatch(nsXPTCStubBase * self, uint32_t methodIndex,
         nsXPTCMiniVariant* dp = &dispatchParams[i];
 
         if (!param.IsOut() && type == nsXPTType::T_DOUBLE) {
-            if (nr_fpr < FPR_COUNT)
+            if (nr_fpr < FPR_COUNT) {
                 dp->val.d = fpregs[nr_fpr++];
-            else
+            } else {
                 dp->val.d = *(double*)ap++;
+}
             continue;
         }
         if (!param.IsOut() && type == nsXPTType::T_FLOAT) {
-            if (nr_fpr < FPR_COUNT)
+            if (nr_fpr < FPR_COUNT) {
                 // The value in %xmm register is already prepared to
                 // be retrieved as a float. Therefore, we pass the
                 // value verbatim, as a double without conversion.
                 dp->val.d = fpregs[nr_fpr++];
-            else
+            } else {
                 dp->val.f = *(float*)ap++;
+}
             continue;
         }
-        if (nr_gpr < GPR_COUNT)
+        if (nr_gpr < GPR_COUNT) {
             value = gpregs[nr_gpr++];
-        else
+        } else {
             value = *ap++;
+}
 
         if (param.IsOut() || !type.IsArithmetic()) {
             dp->val.p = (void*) value;
@@ -119,8 +125,9 @@ PrepareAndDispatch(nsXPTCStubBase * self, uint32_t methodIndex,
 
     result = self->mOuter->CallMethod((uint16_t) methodIndex, info, dispatchParams);
 
-    if (dispatchParams != paramBuffer)
+    if (dispatchParams != paramBuffer) {
         delete [] dispatchParams;
+}
 
     return result;
 }

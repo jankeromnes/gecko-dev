@@ -120,16 +120,18 @@ gfxASurface::SurfaceDestroyFunc(void *data) {
 gfxASurface*
 gfxASurface::GetSurfaceWrapper(cairo_surface_t *csurf)
 {
-    if (!csurf)
+    if (!csurf) {
         return nullptr;
+}
     return (gfxASurface*) cairo_surface_get_user_data(csurf, &gfxasurface_pointer_key);
 }
 
 void
 gfxASurface::SetSurfaceWrapper(cairo_surface_t *csurf, gfxASurface *asurf)
 {
-    if (!csurf)
+    if (!csurf) {
         return;
+}
     cairo_surface_set_user_data(csurf, &gfxasurface_pointer_key, asurf, SurfaceDestroyFunc);
 }
 
@@ -203,8 +205,9 @@ gfxASurface::Init(cairo_surface_t* surface, bool existingSurface)
 gfxSurfaceType
 gfxASurface::GetType() const
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return (gfxSurfaceType)-1;
+}
 
     return (gfxSurfaceType)cairo_surface_get_type(mSurface);
 }
@@ -212,8 +215,9 @@ gfxASurface::GetType() const
 gfxContentType
 gfxASurface::GetContentType() const
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return (gfxContentType)-1;
+}
 
     return (gfxContentType)cairo_surface_get_content(mSurface);
 }
@@ -221,8 +225,9 @@ gfxASurface::GetContentType() const
 void
 gfxASurface::SetDeviceOffset(const gfxPoint& offset)
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return;
+}
     cairo_surface_set_device_offset(mSurface,
                                     offset.x, offset.y);
 }
@@ -230,8 +235,9 @@ gfxASurface::SetDeviceOffset(const gfxPoint& offset)
 gfxPoint
 gfxASurface::GetDeviceOffset() const
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return gfxPoint(0.0, 0.0);
+}
     gfxPoint pt;
     cairo_surface_get_device_offset(mSurface, &pt.x, &pt.y);
     return pt;
@@ -240,8 +246,9 @@ gfxASurface::GetDeviceOffset() const
 void
 gfxASurface::Flush() const
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return;
+}
     cairo_surface_flush(mSurface);
     gfxPlatform::ClearSourceSurfaceForSurface(const_cast<gfxASurface*>(this));
 }
@@ -249,8 +256,9 @@ gfxASurface::Flush() const
 void
 gfxASurface::MarkDirty()
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return;
+}
     cairo_surface_mark_dirty(mSurface);
     gfxPlatform::ClearSourceSurfaceForSurface(this);
 }
@@ -258,8 +266,9 @@ gfxASurface::MarkDirty()
 void
 gfxASurface::MarkDirty(const gfxRect& r)
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return;
+}
     cairo_surface_mark_dirty_rectangle(mSurface,
                                        (int) r.X(), (int) r.Y(),
                                        (int) r.Width(), (int) r.Height());
@@ -271,16 +280,18 @@ gfxASurface::SetData(const cairo_user_data_key_t *key,
                      void *user_data,
                      thebes_destroy_func_t destroy)
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return;
+}
     cairo_surface_set_user_data(mSurface, key, user_data, destroy);
 }
 
 void *
 gfxASurface::GetData(const cairo_user_data_key_t *key)
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return nullptr;
+}
     return cairo_surface_get_user_data(mSurface, key);
 }
 
@@ -334,8 +345,9 @@ gfxASurface::CopyToARGB32ImageSurface()
 int
 gfxASurface::CairoStatus()
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return -1;
+}
 
     return cairo_surface_status(mSurface);
 }

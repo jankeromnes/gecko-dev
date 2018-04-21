@@ -148,7 +148,8 @@ int vp8_denoiser_filter_c(unsigned char *mc_running_avg_y, int mc_avg_y_stride,
   }
 
   sum_diff_thresh = SUM_DIFF_THRESHOLD;
-  if (increase_denoising) sum_diff_thresh = SUM_DIFF_THRESHOLD_HIGH;
+  if (increase_denoising) { sum_diff_thresh = SUM_DIFF_THRESHOLD_HIGH;
+}
   if (abs(sum_diff) > sum_diff_thresh) {
     // Before returning to copy the block (i.e., apply no denoising), check
     // if we can still apply some (weaker) temporal filtering to this block,
@@ -169,7 +170,8 @@ int vp8_denoiser_filter_c(unsigned char *mc_running_avg_y, int mc_avg_y_stride,
         for (c = 0; c < 16; ++c) {
           int diff = mc_running_avg_y[c] - sig[c];
           int adjustment = abs(diff);
-          if (adjustment > delta) adjustment = delta;
+          if (adjustment > delta) { adjustment = delta;
+}
           if (diff > 0) {
             // Bring denoised signal down.
             if (running_avg_y[c] - adjustment < 0) {
@@ -203,7 +205,8 @@ int vp8_denoiser_filter_c(unsigned char *mc_running_avg_y, int mc_avg_y_stride,
         sum_diff += col_sum[c];
       }
 
-      if (abs(sum_diff) > sum_diff_thresh) return COPY_BLOCK;
+      if (abs(sum_diff) > sum_diff_thresh) { return COPY_BLOCK;
+}
     } else {
       return COPY_BLOCK;
     }
@@ -299,7 +302,8 @@ int vp8_denoiser_filter_uv_c(unsigned char *mc_running_avg_uv,
   }
 
   sum_diff_thresh = SUM_DIFF_THRESHOLD_UV;
-  if (increase_denoising) sum_diff_thresh = SUM_DIFF_THRESHOLD_HIGH_UV;
+  if (increase_denoising) { sum_diff_thresh = SUM_DIFF_THRESHOLD_HIGH_UV;
+}
   if (abs(sum_diff) > sum_diff_thresh) {
     // Before returning to copy the block (i.e., apply no denoising), check
     // if we can still apply some (weaker) temporal filtering to this block,
@@ -320,7 +324,8 @@ int vp8_denoiser_filter_uv_c(unsigned char *mc_running_avg_uv,
         for (c = 0; c < 8; ++c) {
           int diff = mc_running_avg_uv[c] - sig[c];
           int adjustment = abs(diff);
-          if (adjustment > delta) adjustment = delta;
+          if (adjustment > delta) { adjustment = delta;
+}
           if (diff > 0) {
             // Bring denoised signal down.
             if (running_avg_uv[c] - adjustment < 0) {
@@ -345,7 +350,8 @@ int vp8_denoiser_filter_uv_c(unsigned char *mc_running_avg_uv,
         mc_running_avg_uv += mc_avg_uv_stride;
         running_avg_uv += avg_uv_stride;
       }
-      if (abs(sum_diff) > sum_diff_thresh) return COPY_BLOCK;
+      if (abs(sum_diff) > sum_diff_thresh) { return COPY_BLOCK;
+}
     } else {
       return COPY_BLOCK;
     }

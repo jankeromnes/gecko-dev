@@ -108,27 +108,33 @@ static enum x86_64_reg_class
 merge_classes (enum x86_64_reg_class class1, enum x86_64_reg_class class2)
 {
   /* Rule #1: If both classes are equal, this is the resulting class.  */
-  if (class1 == class2)
+  if (class1 == class2) {
     return class1;
+}
 
   /* Rule #2: If one of the classes is NO_CLASS, the resulting class is
      the other class.  */
-  if (class1 == X86_64_NO_CLASS)
+  if (class1 == X86_64_NO_CLASS) {
     return class2;
-  if (class2 == X86_64_NO_CLASS)
+}
+  if (class2 == X86_64_NO_CLASS) {
     return class1;
+}
 
   /* Rule #3: If one of the classes is MEMORY, the result is MEMORY.  */
-  if (class1 == X86_64_MEMORY_CLASS || class2 == X86_64_MEMORY_CLASS)
+  if (class1 == X86_64_MEMORY_CLASS || class2 == X86_64_MEMORY_CLASS) {
     return X86_64_MEMORY_CLASS;
+}
 
   /* Rule #4: If one of the classes is INTEGER, the result is INTEGER.  */
   if ((class1 == X86_64_INTEGERSI_CLASS && class2 == X86_64_SSESF_CLASS)
-      || (class2 == X86_64_INTEGERSI_CLASS && class1 == X86_64_SSESF_CLASS))
+      || (class2 == X86_64_INTEGERSI_CLASS && class1 == X86_64_SSESF_CLASS)) {
     return X86_64_INTEGERSI_CLASS;
+}
   if (class1 == X86_64_INTEGER_CLASS || class1 == X86_64_INTEGERSI_CLASS
-      || class2 == X86_64_INTEGER_CLASS || class2 == X86_64_INTEGERSI_CLASS)
+      || class2 == X86_64_INTEGER_CLASS || class2 == X86_64_INTEGERSI_CLASS) {
     return X86_64_INTEGER_CLASS;
+}
 
   /* Rule #5: If one of the classes is X87, X87UP, or COMPLEX_X87 class,
      MEMORY is used.  */
@@ -137,8 +143,9 @@ merge_classes (enum x86_64_reg_class class1, enum x86_64_reg_class class2)
       || class1 == X86_64_COMPLEX_X87_CLASS
       || class2 == X86_64_X87_CLASS
       || class2 == X86_64_X87UP_CLASS
-      || class2 == X86_64_COMPLEX_X87_CLASS)
+      || class2 == X86_64_COMPLEX_X87_CLASS) {
     return X86_64_MEMORY_CLASS;
+}
 
   /* Rule #6: Otherwise class SSE is used.  */
   return X86_64_SSE_CLASS;
@@ -191,14 +198,16 @@ classify_argument (ffi_type *type, enum x86_64_reg_class classes[],
 	    classes[0] = classes[1] = X86_64_INTEGERSI_CLASS;
 	    return 2;
 	  }
-	else
+	else {
 	  FFI_ASSERT (0);
+}
       }
     case FFI_TYPE_FLOAT:
-      if (!(byte_offset % 8))
+      if (!(byte_offset % 8)) {
 	classes[0] = X86_64_SSESF_CLASS;
-      else
+      } else {
 	classes[0] = X86_64_SSE_CLASS;
+}
       return 1;
     case FFI_TYPE_DOUBLE:
       classes[0] = X86_64_SSEDF_CLASS;
@@ -218,11 +227,13 @@ classify_argument (ffi_type *type, enum x86_64_reg_class classes[],
 	enum x86_64_reg_class subclasses[MAX_CLASSES];
 
 	/* If the struct is larger than 32 bytes, pass it on the stack.  */
-	if (type->size > 32)
+	if (type->size > 32) {
 	  return 0;
+}
 
-	for (i = 0; i < words; i++)
+	for (i = 0; i < words; i++) {
 	  classes[i] = X86_64_NO_CLASS;
+}
 
 	/* Zero sized arrays or structures are NO_CLASS.  We return 0 to
 	   signalize memory class, so handle it as special case.  */
@@ -240,8 +251,9 @@ classify_argument (ffi_type *type, enum x86_64_reg_class classes[],
 	    byte_offset = ALIGN (byte_offset, (*ptr)->alignment);
 
 	    num = classify_argument (*ptr, subclasses, byte_offset % 8);
-	    if (num == 0)
+	    if (num == 0) {
 	      return 0;
+}
 	    for (i = 0; i < num; i++)
 	      {
 		size_t pos = byte_offset / 8;
@@ -258,12 +270,14 @@ classify_argument (ffi_type *type, enum x86_64_reg_class classes[],
 	       X86_64_SSE_CLASS or any other ones aren't
 	       X86_64_SSEUP_CLASS, everything should be passed in
 	       memory.  */
-	    if (classes[0] != X86_64_SSE_CLASS)
+	    if (classes[0] != X86_64_SSE_CLASS) {
 	      return 0;
+}
 
-	    for (i = 1; i < words; i++)
-	      if (classes[i] != X86_64_SSEUP_CLASS)
+	    for (i = 1; i < words; i++) {
+	      if (classes[i] != X86_64_SSEUP_CLASS) {
 		return 0;
+}
 	  }
 
 	/* Final merger cleanup.  */
@@ -271,8 +285,9 @@ classify_argument (ffi_type *type, enum x86_64_reg_class classes[],
 	  {
 	    /* If one class is MEMORY, everything should be passed in
 	       memory.  */
-	    if (classes[i] == X86_64_MEMORY_CLASS)
+	    if (classes[i] == X86_64_MEMORY_CLASS) {
 	      return 0;
+}
 
 	    /* The X86_64_SSEUP_CLASS should be always preceded by
 	       X86_64_SSE_CLASS or X86_64_SSEUP_CLASS.  */
@@ -316,11 +331,12 @@ examine_argument (ffi_type *type, enum x86_64_reg_class classes[MAX_CLASSES],
   int i, ngpr, nsse;
 
   n = classify_argument (type, classes, 0);
-  if (n == 0)
+  if (n == 0) {
     return 0;
+}
 
   ngpr = nsse = 0;
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     switch (classes[i])
       {
       case X86_64_INTEGER_CLASS:
@@ -342,6 +358,7 @@ examine_argument (ffi_type *type, enum x86_64_reg_class classes[MAX_CLASSES],
       default:
 	abort ();
       }
+}
 
   *pngpr = ngpr;
   *pnsse = nsse;
@@ -377,12 +394,13 @@ ffi_prep_cif_machdep (ffi_cif *cif)
 	  /* Mark which registers the result appears in.  */
 	  _Bool sse0 = SSE_CLASS_P (classes[0]);
 	  _Bool sse1 = n == 2 && SSE_CLASS_P (classes[1]);
-	  if (sse0 && !sse1)
+	  if (sse0 && !sse1) {
 	    flags |= 1 << 8;
-	  else if (!sse0 && sse1)
+	  } else if (!sse0 && sse1) {
 	    flags |= 1 << 9;
-	  else if (sse0 && sse1)
+	  } else if (sse0 && sse1) {
 	    flags |= 1 << 10;
+}
 	  /* Mark the true size of the structure.  */
 	  flags |= cif->rtype->size << 12;
 	}
@@ -399,8 +417,9 @@ ffi_prep_cif_machdep (ffi_cif *cif)
 	{
 	  long align = cif->arg_types[i]->alignment;
 
-	  if (align < 8)
+	  if (align < 8) {
 	    align = 8;
+}
 
 	  bytes = ALIGN (bytes, align);
 	  bytes += cif->arg_types[i]->size;
@@ -411,8 +430,9 @@ ffi_prep_cif_machdep (ffi_cif *cif)
 	  ssecount += nsse;
 	}
     }
-  if (ssecount)
+  if (ssecount) {
     flags |= 1 << 11;
+}
   cif->flags = flags;
   cif->bytes = (unsigned)ALIGN (bytes, 8);
 
@@ -447,8 +467,9 @@ ffi_call (ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
      VOID above in ffi_prep_cif_machdep.  */
   ret_in_memory = (cif->rtype->type == FFI_TYPE_STRUCT
 		   && (cif->flags & 0xff) == FFI_TYPE_VOID);
-  if (rvalue == NULL && ret_in_memory)
+  if (rvalue == NULL && ret_in_memory) {
     rvalue = alloca (cif->rtype->size);
+}
 
   /* Allocate the space for the arguments, plus 4 words of temp space.  */
   stack = alloca (sizeof (struct register_args) + cif->bytes + 4*8);
@@ -459,8 +480,9 @@ ffi_call (ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
 
   /* If the return value is passed in memory, add the pointer as the
      first integer argument.  */
-  if (ret_in_memory)
+  if (ret_in_memory) {
     reg_args->gpr[gprcount++] = (unsigned long) rvalue;
+}
 
   avn = cif->nargs;
   arg_types = cif->arg_types;
@@ -477,8 +499,9 @@ ffi_call (ffi_cif *cif, void (*fn)(void), void *rvalue, void **avalue)
 	  long align = arg_types[i]->alignment;
 
 	  /* Stack arguments are *always* at least 8 byte aligned.  */
-	  if (align < 8)
+	  if (align < 8) {
 	    align = 8;
+}
 
 	  /* Pass this argument in memory.  */
 	  argp = (void *) ALIGN (argp, align);
@@ -551,8 +574,9 @@ ffi_prep_closure_loc (ffi_closure* closure,
   /* Sanity check on the cif ABI.  */
   {
     int abi = cif->abi;
-    if (UNLIKELY (! (abi > FFI_FIRST_ABI && abi < FFI_LAST_ABI)))
+    if (UNLIKELY (! (abi > FFI_FIRST_ABI && abi < FFI_LAST_ABI))) {
       return FFI_BAD_ABI;
+}
   }
 
   tramp = (volatile unsigned short *) &closure->tramp[0];
@@ -610,10 +634,11 @@ ffi_closure_unix64_inner(ffi_closure *closure, void *rvalue,
 	  /* Mark which register the second word of the structure goes in.  */
 	  _Bool sse0 = SSE_CLASS_P (classes[0]);
 	  _Bool sse1 = SSE_CLASS_P (classes[1]);
-	  if (!sse0 && sse1)
+	  if (!sse0 && sse1) {
 	    ret |= 1 << 8;
-	  else if (sse0 && !sse1)
+	  } else if (sse0 && !sse1) {
 	    ret |= 1 << 9;
+}
 	}
     }
 
@@ -633,8 +658,9 @@ ffi_closure_unix64_inner(ffi_closure *closure, void *rvalue,
 	  long align = arg_types[i]->alignment;
 
 	  /* Stack arguments are *always* at least 8 byte aligned.  */
-	  if (align < 8)
+	  if (align < 8) {
 	    align = 8;
+}
 
 	  /* Pass this argument in memory.  */
 	  argp = (void *) ALIGN (argp, align);
@@ -668,10 +694,11 @@ ffi_closure_unix64_inner(ffi_closure *closure, void *rvalue,
 	  avalue[i] = a;
 	  for (j = 0; j < n; j++, a += 8)
 	    {
-	      if (SSE_CLASS_P (classes[j]))
+	      if (SSE_CLASS_P (classes[j])) {
 		memcpy (a, &reg_args->sse[ssecount++], 8);
-	      else
+	      } else {
 		memcpy (a, &reg_args->gpr[gprcount++], 8);
+}
 	    }
 	}
     }

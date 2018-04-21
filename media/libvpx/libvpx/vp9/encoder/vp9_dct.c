@@ -539,17 +539,22 @@ void vp9_fht4x4_c(const int16_t *input, tran_low_t *output, int stride,
 
     // Columns
     for (i = 0; i < 4; ++i) {
-      for (j = 0; j < 4; ++j) temp_in[j] = input[j * stride + i] * 16;
-      if (i == 0 && temp_in[0]) temp_in[0] += 1;
+      for (j = 0; j < 4; ++j) { temp_in[j] = input[j * stride + i] * 16;
+}
+      if (i == 0 && temp_in[0]) { temp_in[0] += 1;
+}
       ht.cols(temp_in, temp_out);
-      for (j = 0; j < 4; ++j) out[j * 4 + i] = temp_out[j];
+      for (j = 0; j < 4; ++j) { out[j * 4 + i] = temp_out[j];
+}
     }
 
     // Rows
     for (i = 0; i < 4; ++i) {
-      for (j = 0; j < 4; ++j) temp_in[j] = out[j + i * 4];
+      for (j = 0; j < 4; ++j) { temp_in[j] = out[j + i * 4];
+}
       ht.rows(temp_in, temp_out);
-      for (j = 0; j < 4; ++j) output[j + i * 4] = (temp_out[j] + 1) >> 2;
+      for (j = 0; j < 4; ++j) { output[j + i * 4] = (temp_out[j] + 1) >> 2;
+}
     }
   }
 }
@@ -629,7 +634,8 @@ void vp9_fdct8x8_quant_c(const int16_t *input, int stride,
   // Rows
   for (i = 0; i < 8; ++i) {
     fdct8(&intermediate[i * 8], &coeff_ptr[i * 8]);
-    for (j = 0; j < 8; ++j) coeff_ptr[j + i * 8] /= 2;
+    for (j = 0; j < 8; ++j) { coeff_ptr[j + i * 8] /= 2;
+}
   }
 
   // TODO(jingning) Decide the need of these arguments after the
@@ -656,7 +662,8 @@ void vp9_fdct8x8_quant_c(const int16_t *input, int stride,
       qcoeff_ptr[rc] = (tmp ^ coeff_sign) - coeff_sign;
       dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant_ptr[rc != 0];
 
-      if (tmp) eob = i;
+      if (tmp) { eob = i;
+}
     }
   }
   *eob_ptr = eob + 1;
@@ -674,17 +681,21 @@ void vp9_fht8x8_c(const int16_t *input, tran_low_t *output, int stride,
 
     // Columns
     for (i = 0; i < 8; ++i) {
-      for (j = 0; j < 8; ++j) temp_in[j] = input[j * stride + i] * 4;
+      for (j = 0; j < 8; ++j) { temp_in[j] = input[j * stride + i] * 4;
+}
       ht.cols(temp_in, temp_out);
-      for (j = 0; j < 8; ++j) out[j * 8 + i] = temp_out[j];
+      for (j = 0; j < 8; ++j) { out[j * 8 + i] = temp_out[j];
+}
     }
 
     // Rows
     for (i = 0; i < 8; ++i) {
-      for (j = 0; j < 8; ++j) temp_in[j] = out[j + i * 8];
+      for (j = 0; j < 8; ++j) { temp_in[j] = out[j + i * 8];
+}
       ht.rows(temp_in, temp_out);
-      for (j = 0; j < 8; ++j)
+      for (j = 0; j < 8; ++j) {
         output[j + i * 8] = (temp_out[j] + (temp_out[j] < 0)) >> 1;
+}
     }
   }
 }
@@ -757,17 +768,21 @@ void vp9_fht16x16_c(const int16_t *input, tran_low_t *output, int stride,
 
     // Columns
     for (i = 0; i < 16; ++i) {
-      for (j = 0; j < 16; ++j) temp_in[j] = input[j * stride + i] * 4;
+      for (j = 0; j < 16; ++j) { temp_in[j] = input[j * stride + i] * 4;
+}
       ht.cols(temp_in, temp_out);
-      for (j = 0; j < 16; ++j)
+      for (j = 0; j < 16; ++j) {
         out[j * 16 + i] = (temp_out[j] + 1 + (temp_out[j] < 0)) >> 2;
+}
     }
 
     // Rows
     for (i = 0; i < 16; ++i) {
-      for (j = 0; j < 16; ++j) temp_in[j] = out[j + i * 16];
+      for (j = 0; j < 16; ++j) { temp_in[j] = out[j + i * 16];
+}
       ht.rows(temp_in, temp_out);
-      for (j = 0; j < 16; ++j) output[j + i * 16] = temp_out[j];
+      for (j = 0; j < 16; ++j) { output[j + i * 16] = temp_out[j];
+}
     }
   }
 }

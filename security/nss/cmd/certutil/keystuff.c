@@ -110,10 +110,12 @@ UpdateRNG(void)
 
     FPS "\n\n");
     FPS "Finished.  Press enter to continue: ");
-    while ((c = getc(stdin)) != '\n' && c != EOF)
+    while ((c = getc(stdin)) != '\n' && c != EOF) {
         ;
-    if (c == EOF)
+}
+    if (c == EOF) {
         rv = -1;
+}
     FPS "\n");
 
 #undef FPS
@@ -234,27 +236,32 @@ decode_pqg_params(const char *str)
     SECStatus status;
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
 
     params = PORT_ArenaZAlloc(arena, sizeof(SECKEYPQGParams));
-    if (params == NULL)
+    if (params == NULL) {
         goto loser;
+}
     params->arena = arena;
 
     buf = (char *)ATOB_AsciiToData(str, &len);
-    if ((buf == NULL) || (len == 0))
+    if ((buf == NULL) || (len == 0)) {
         goto loser;
+}
 
     status = SEC_ASN1Decode(arena, params, SECKEY_PQGParamsTemplate, buf, len);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     return params;
 
 loser:
-    if (arena != NULL)
+    if (arena != NULL) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return NULL;
 }
 
@@ -317,10 +324,12 @@ getPQGString(const char *filename)
         return NULL;
     }
 
-    if (buf[numBytes - 1] == '\n')
+    if (buf[numBytes - 1] == '\n') {
         numBytes--;
-    if (buf[numBytes - 1] == '\r')
+}
+    if (buf[numBytes - 1] == '\r') {
         numBytes--;
+}
     buf[numBytes] = 0;
 
     return (char *)buf;
@@ -333,23 +342,27 @@ getpqgfromfile(int keyBits, const char *pqgFile)
     SECKEYPQGParams *params = NULL;
 
     str = pqgString = getPQGString(pqgFile);
-    if (!str)
+    if (!str) {
         return NULL;
+}
 
     do {
         end = PORT_Strchr(str, ',');
-        if (end)
+        if (end) {
             *end = '\0';
+}
         params = decode_pqg_params(str);
         if (params) {
             int primeBits = pqg_prime_bits(params);
-            if (keyBits == primeBits)
+            if (keyBits == primeBits) {
                 break;
+}
             CERTUTIL_DestroyParamsPQG(params);
             params = NULL;
         }
-        if (end)
+        if (end) {
             str = end + 1;
+}
     } while (end);
 
     PORT_Free(pqgString);
@@ -480,8 +493,9 @@ getECParams(const char *curve)
         numCurves = sizeof(nameTagPair) / sizeof(CurveNameTagPair);
         for (i = 0; ((i < numCurves) && (curveOidTag == SEC_OID_UNKNOWN));
              i++) {
-            if (PL_strcmp(curve, nameTagPair[i].curveName) == 0)
+            if (PL_strcmp(curve, nameTagPair[i].curveName) == 0) {
                 curveOidTag = nameTagPair[i].curveOidTag;
+}
         }
     }
 
@@ -519,11 +533,13 @@ CERTUTIL_GeneratePrivateKey(KeyType keytype, PK11SlotInfo *slot, int size,
     void *params;
     SECKEYPrivateKey *privKey = NULL;
 
-    if (slot == NULL)
+    if (slot == NULL) {
         return NULL;
+}
 
-    if (PK11_Authenticate(slot, PR_TRUE, pwdata) != SECSuccess)
+    if (PK11_Authenticate(slot, PR_TRUE, pwdata) != SECSuccess) {
         return NULL;
+}
 
     /*
      * Do some random-number initialization.
@@ -554,8 +570,9 @@ CERTUTIL_GeneratePrivateKey(KeyType keytype, PK11SlotInfo *slot, int size,
             mechanism = CKM_DSA_KEY_PAIR_GEN;
             if (pqgFile) {
                 dsaparams = getpqgfromfile(size, pqgFile);
-                if (dsaparams == NULL)
+                if (dsaparams == NULL) {
                     return NULL;
+}
                 params = dsaparams;
             } else {
                 /* cast away const, and don't set dsaparams */
@@ -565,8 +582,9 @@ CERTUTIL_GeneratePrivateKey(KeyType keytype, PK11SlotInfo *slot, int size,
         case ecKey:
             mechanism = CKM_EC_KEY_PAIR_GEN;
             /* For EC keys, PQGFile determines EC parameters */
-            if ((params = (void *)getECParams(pqgFile)) == NULL)
+            if ((params = (void *)getECParams(pqgFile)) == NULL) {
                 return NULL;
+}
             break;
         default:
             return NULL;
@@ -581,8 +599,9 @@ CERTUTIL_GeneratePrivateKey(KeyType keytype, PK11SlotInfo *slot, int size,
     /* free up the params */
     switch (keytype) {
         case dsaKey:
-            if (dsaparams)
+            if (dsaparams) {
                 CERTUTIL_DestroyParamsPQG(dsaparams);
+}
             break;
         case ecKey:
             SECITEM_FreeItem((SECItem *)params, PR_TRUE);

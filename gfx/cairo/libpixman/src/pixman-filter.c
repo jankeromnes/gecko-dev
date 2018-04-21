@@ -72,10 +72,11 @@ gaussian_kernel (double x)
 static double
 sinc (double x)
 {
-    if (x == 0.0)
+    if (x == 0.0) {
 	return 1.0;
-    else
+    } else {
 	return sin (M_PI * x) / (M_PI * x);
+}
 }
 
 static double
@@ -207,8 +208,9 @@ integral (pixman_kernel_t kernel1, double x1,
 
 	    s += 2 * SAMPLE (a1, a2);
 
-	    if (i >= 2 && i < N_SEGMENTS - 1)
+	    if (i >= 2 && i < N_SEGMENTS - 1) {
 		s += 4 * SAMPLE (a1, a2);
+}
 	}
 
 	s += SAMPLE (x1 + width, x2 + width);
@@ -233,8 +235,9 @@ create_1d_filter (int             *width,
     *width = ceil (size);
 
     p = params = malloc (*width * n_phases * sizeof (pixman_fixed_t));
-    if (!params)
+    if (!params) {
         return NULL;
+}
 
     step = 1.0 / n_phases;
 
@@ -290,8 +293,9 @@ create_1d_filter (int             *width,
 	    *p++ = t;
 	}
 
-	if (new_total != pixman_fixed_1)
+	if (new_total != pixman_fixed_1) {
 	    *(p - *width / 2) += (pixman_fixed_1 - new_total);
+}
     }
 
     return params;
@@ -323,14 +327,16 @@ pixman_filter_create_separable_convolution (int             *n_values,
     horz = create_1d_filter (&width, reconstruct_x, sample_x, sx, subsample_x);
     vert = create_1d_filter (&height, reconstruct_y, sample_y, sy, subsample_y);
 
-    if (!horz || !vert)
+    if (!horz || !vert) {
         goto out;
+}
     
     *n_values = 4 + width * subsample_x + height * subsample_y;
     
     params = malloc (*n_values * sizeof (pixman_fixed_t));
-    if (!params)
+    if (!params) {
         goto out;
+}
 
     params[0] = pixman_int_to_fixed (width);
     params[1] = pixman_int_to_fixed (height);

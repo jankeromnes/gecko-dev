@@ -19,8 +19,9 @@ WebrtcTelemetry::RecordIceCandidateMask(const uint32_t iceCandidateBitmask,
   WebrtcIceCandidateType *entry = mWebrtcIceCandidates.GetEntry(iceCandidateBitmask);
   if (!entry) {
     entry = mWebrtcIceCandidates.PutEntry(iceCandidateBitmask);
-    if (MOZ_UNLIKELY(!entry))
+    if (MOZ_UNLIKELY(!entry)) {
       return;
+}
   }
 
   if (success) {
@@ -35,14 +36,16 @@ ReflectIceEntry(const WebrtcTelemetry::WebrtcIceCandidateType *entry,
                 const WebrtcTelemetry::WebrtcIceCandidateStats *stat, JSContext *cx,
                 JS::Handle<JSObject*> obj)
 {
-  if ((stat->successCount == 0) && (stat->failureCount == 0))
+  if ((stat->successCount == 0) && (stat->failureCount == 0)) {
     return true;
+}
 
   const uint32_t &bitmask = entry->GetKey();
 
   JS::Rooted<JSObject*> statsObj(cx, JS_NewPlainObject(cx));
-  if (!statsObj)
+  if (!statsObj) {
     return false;
+}
   if (!JS_DefineProperty(cx, obj,
                          nsPrintfCString("%" PRIu32, bitmask).BeginReading(),
                          statsObj, JSPROP_ENUMERATE)) {
@@ -72,8 +75,9 @@ bool
 WebrtcTelemetry::AddIceInfo(JSContext *cx, JS::Handle<JSObject*> iceObj)
 {
   JS::Rooted<JSObject*> statsObj(cx, JS_NewPlainObject(cx));
-  if (!statsObj)
+  if (!statsObj) {
     return false;
+}
 
   if (!mWebrtcIceCandidates.ReflectIntoJS(ReflectIceWebrtc, cx, statsObj)) {
     return false;
@@ -87,18 +91,21 @@ bool
 WebrtcTelemetry::GetWebrtcStats(JSContext *cx, JS::MutableHandle<JS::Value> ret)
 {
   JS::Rooted<JSObject*> root_obj(cx, JS_NewPlainObject(cx));
-  if (!root_obj)
+  if (!root_obj) {
     return false;
+}
   ret.setObject(*root_obj);
 
   JS::Rooted<JSObject*> ice_obj(cx, JS_NewPlainObject(cx));
-  if (!ice_obj)
+  if (!ice_obj) {
     return false;
+}
   JS_DefineProperty(cx, root_obj, "IceCandidatesStats", ice_obj,
                     JSPROP_ENUMERATE);
 
-  if (!AddIceInfo(cx, ice_obj))
+  if (!AddIceInfo(cx, ice_obj)) {
     return false;
+}
 
   return true;
 }

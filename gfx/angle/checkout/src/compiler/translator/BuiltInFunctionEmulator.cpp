@@ -27,8 +27,9 @@ class BuiltInFunctionEmulator::BuiltInFunctionEmulationMarker : public TIntermTr
         {
             bool needToEmulate =
                 mEmulator.setFunctionCalled(node->getOp(), node->getOperand()->getType());
-            if (needToEmulate)
+            if (needToEmulate) {
                 node->setUseEmulatedFunction();
+}
         }
         return true;
     }
@@ -50,8 +51,9 @@ class BuiltInFunctionEmulator::BuiltInFunctionEmulationMarker : public TIntermTr
             {
                 TIntermTyped *param1 = sequence[0]->getAsTyped();
                 TIntermTyped *param2 = sequence[1]->getAsTyped();
-                if (!param1 || !param2)
+                if (!param1 || !param2) {
                     return true;
+}
                 needToEmulate = mEmulator.setFunctionCalled(node->getOp(), param1->getType(),
                                                             param2->getType());
             }
@@ -60,8 +62,9 @@ class BuiltInFunctionEmulator::BuiltInFunctionEmulationMarker : public TIntermTr
                 TIntermTyped *param1 = sequence[0]->getAsTyped();
                 TIntermTyped *param2 = sequence[1]->getAsTyped();
                 TIntermTyped *param3 = sequence[2]->getAsTyped();
-                if (!param1 || !param2 || !param3)
+                if (!param1 || !param2 || !param3) {
                     return true;
+}
                 needToEmulate = mEmulator.setFunctionCalled(node->getOp(), param1->getType(),
                                                             param2->getType(), param3->getType());
             }
@@ -71,8 +74,9 @@ class BuiltInFunctionEmulator::BuiltInFunctionEmulationMarker : public TIntermTr
                 TIntermTyped *param2 = sequence[1]->getAsTyped();
                 TIntermTyped *param3 = sequence[2]->getAsTyped();
                 TIntermTyped *param4 = sequence[3]->getAsTyped();
-                if (!param1 || !param2 || !param3 || !param4)
+                if (!param1 || !param2 || !param3 || !param4) {
                     return true;
+}
                 needToEmulate =
                     mEmulator.setFunctionCalled(node->getOp(), param1->getType(), param2->getType(),
                                                 param3->getType(), param4->getType());
@@ -82,8 +86,9 @@ class BuiltInFunctionEmulator::BuiltInFunctionEmulationMarker : public TIntermTr
                 return true;
             }
 
-            if (needToEmulate)
+            if (needToEmulate) {
                 node->setUseEmulatedFunction();
+}
         }
         return true;
     }
@@ -240,8 +245,9 @@ bool BuiltInFunctionEmulator::setFunctionCalled(const FunctionId &functionId)
 
     for (size_t i = 0; i < mFunctions.size(); ++i)
     {
-        if (mFunctions[i] == functionId)
+        if (mFunctions[i] == functionId) {
             return true;
+}
     }
     // If the function depends on another, mark the dependency as called.
     auto dependency = mFunctionDependencies.find(functionId);
@@ -259,8 +265,9 @@ void BuiltInFunctionEmulator::markBuiltInFunctionsForEmulation(TIntermNode *root
 {
     ASSERT(root);
 
-    if (mEmulatedFunctions.empty() && mQueryFunctions.empty())
+    if (mEmulatedFunctions.empty() && mQueryFunctions.empty()) {
         return;
+}
 
     BuiltInFunctionEmulationMarker marker(*this);
     root->traverse(&marker);
@@ -337,16 +344,21 @@ bool FunctionId::operator==(const FunctionId &other) const
 
 bool FunctionId::operator<(const FunctionId &other) const
 {
-    if (mOp != other.mOp)
+    if (mOp != other.mOp) {
         return mOp < other.mOp;
-    if (*mParam1 != *other.mParam1)
+}
+    if (*mParam1 != *other.mParam1) {
         return *mParam1 < *other.mParam1;
-    if (*mParam2 != *other.mParam2)
+}
+    if (*mParam2 != *other.mParam2) {
         return *mParam2 < *other.mParam2;
-    if (*mParam3 != *other.mParam3)
+}
+    if (*mParam3 != *other.mParam3) {
         return *mParam3 < *other.mParam3;
-    if (*mParam4 != *other.mParam4)
+}
+    if (*mParam4 != *other.mParam4) {
         return *mParam4 < *other.mParam4;
+}
     return false;  // all fields are equal
 }
 

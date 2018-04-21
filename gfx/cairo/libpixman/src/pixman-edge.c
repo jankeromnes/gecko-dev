@@ -121,8 +121,9 @@
 static force_inline uint8_t
 clip255 (int x)
 {
-    if (x > 255)
+    if (x > 255) {
 	return 255;
+}
 
     return x;
 }
@@ -177,8 +178,9 @@ rasterize_edges_8 (pixman_image_t *image,
 
         /* clip X */
         lx = l->x;
-        if (lx < 0)
+        if (lx < 0) {
 	    lx = 0;
+}
 
         rx = r->x;
 
@@ -376,10 +378,11 @@ pixman_rasterize_edges (pixman_image_t *image,
     return_if_fail (image->type == BITS);
     return_if_fail (PIXMAN_FORMAT_TYPE (image->bits.format) == PIXMAN_TYPE_A);
     
-    if (image->bits.read_func || image->bits.write_func)
+    if (image->bits.read_func || image->bits.write_func) {
 	pixman_rasterize_edges_accessors (image, l, r, t, b);
-    else
+    } else {
 	pixman_rasterize_edges_no_accessors (image, l, r, t, b);
+}
 }
 
 #endif

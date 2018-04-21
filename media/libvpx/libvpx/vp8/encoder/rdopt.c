@@ -204,7 +204,8 @@ void vp8_initialize_rd_consts(VP8_COMP *cpi, MACROBLOCK *x, int Qvalue) {
 
   q = (int)pow(Qvalue, 1.25);
 
-  if (q < 8) q = 8;
+  if (q < 8) { q = 8;
+}
 
   if (cpi->RDMULT > 1000) {
     cpi->RDDIV = 1;
@@ -307,7 +308,8 @@ void vp8_auto_select_speed(VP8_COMP *cpi) {
   } else {
     cpi->Speed += 4;
 
-    if (cpi->Speed > 16) cpi->Speed = 16;
+    if (cpi->Speed > 16) { cpi->Speed = 16;
+}
 
     cpi->avg_pick_mode_time = 0;
     cpi->avg_encode_time = 0;
@@ -629,10 +631,12 @@ static int rd_pick_intra4x4mby_modes(MACROBLOCK *mb, int *Rate, int *rate_y,
 
     mic->bmi[i].as_mode = best_mode;
 
-    if (total_rd >= (int64_t)best_rd) break;
+    if (total_rd >= (int64_t)best_rd) { break;
+}
   }
 
-  if (total_rd >= (int64_t)best_rd) return INT_MAX;
+  if (total_rd >= (int64_t)best_rd) { return INT_MAX;
+}
 
   *Rate = cost;
   *rate_y = tot_rate_y;
@@ -825,7 +829,8 @@ static int labels2mode(MACROBLOCK *x, int const *labelings, int which_label,
 
     B_PREDICTION_MODE m;
 
-    if (labelings[i] != which_label) continue;
+    if (labelings[i] != which_label) { continue;
+}
 
     if (col && labelings[i] == labelings[i - 1]) {
       m = LEFT4X4;
@@ -856,7 +861,8 @@ static int labels2mode(MACROBLOCK *x, int const *labelings, int which_label,
 
         left_mv.as_int = col ? d[-1].bmi.mv.as_int : left_block_mv(mic, i);
 
-        if (left_mv.as_int == this_mv->as_int) m = LEFT4X4;
+        if (left_mv.as_int == this_mv->as_int) { m = LEFT4X4;
+}
       }
 
       cost = x->inter_bmode_costs[m];
@@ -1027,7 +1033,8 @@ static void rd_check_segment(VP8_COMP *cpi, MACROBLOCK *x, BEST_SEG_INFO *bsi,
         /* Is the best so far sufficiently good that we cant justify
          * doing a new motion search.
          */
-        if (best_label_rd < label_mv_thresh) break;
+        if (best_label_rd < label_mv_thresh) { break;
+}
 
         if (cpi->compressor_speed) {
           if (segmentation == BLOCK_8X16 || segmentation == BLOCK_16X8) {
@@ -1165,7 +1172,8 @@ static void rd_check_segment(VP8_COMP *cpi, MACROBLOCK *x, BEST_SEG_INFO *bsi,
     segmentyrate += bestlabelyrate;
     this_segment_rd += best_label_rd;
 
-    if (this_segment_rd >= bsi->segment_rd) break;
+    if (this_segment_rd >= bsi->segment_rd) { break;
+}
 
   } /* for each label */
 
@@ -1194,7 +1202,8 @@ static void vp8_cal_step_param(int sr, int *sp) {
     sr = 1;
   }
 
-  while (sr >>= 1) step++;
+  while (sr >>= 1) { step++;
+}
 
   *sp = MAX_MVSEARCH_STEPS - 1 - step;
 }
@@ -1245,10 +1254,14 @@ static int vp8_rd_pick_best_mbsegmentation(VP8_COMP *cpi, MACROBLOCK *x,
 
       /* Get intersection of UMV window and valid MV window to reduce # of
        * checks in diamond search. */
-      if (x->mv_col_min < col_min) x->mv_col_min = col_min;
-      if (x->mv_col_max > col_max) x->mv_col_max = col_max;
-      if (x->mv_row_min < row_min) x->mv_row_min = row_min;
-      if (x->mv_row_max > row_max) x->mv_row_max = row_max;
+      if (x->mv_col_min < col_min) { x->mv_col_min = col_min;
+}
+      if (x->mv_col_max > col_max) { x->mv_col_max = col_max;
+}
+      if (x->mv_row_min < row_min) { x->mv_row_min = row_min;
+}
+      if (x->mv_row_max > row_max) { x->mv_row_max = row_max;
+}
 
       /* Get 8x8 result */
       bsi.sv_mvp[0].as_int = bsi.mvs[0].as_int;
@@ -1527,10 +1540,14 @@ void vp8_cal_sad(VP8_COMP *cpi, MACROBLOCKD *xd, MACROBLOCK *x,
         cpi->common.yv12_fb[cpi->common.lst_fb_idx].y_buffer + recon_yoffset;
     int pre_y_stride = cpi->common.yv12_fb[cpi->common.lst_fb_idx].y_stride;
 
-    if (xd->mb_to_top_edge == 0) near_sad[4] = INT_MAX;
-    if (xd->mb_to_left_edge == 0) near_sad[5] = INT_MAX;
-    if (xd->mb_to_right_edge == 0) near_sad[6] = INT_MAX;
-    if (xd->mb_to_bottom_edge == 0) near_sad[7] = INT_MAX;
+    if (xd->mb_to_top_edge == 0) { near_sad[4] = INT_MAX;
+}
+    if (xd->mb_to_left_edge == 0) { near_sad[5] = INT_MAX;
+}
+    if (xd->mb_to_right_edge == 0) { near_sad[6] = INT_MAX;
+}
+    if (xd->mb_to_bottom_edge == 0) { near_sad[7] = INT_MAX;
+}
 
     if (near_sad[4] != INT_MAX) {
       near_sad[4] = cpi->fn_ptr[BLOCK_16X16].sdf(
@@ -1602,7 +1619,8 @@ static int evaluate_inter_mode_rd(int mdcounts[4], RATE_DISTORTION *rd,
     unsigned int threshold =
         (xd->block[0].dequant[1] * xd->block[0].dequant[1] >> 4);
 
-    if (threshold < x->encode_breakout) threshold = x->encode_breakout;
+    if (threshold < x->encode_breakout) { threshold = x->encode_breakout;
+}
 
     var = vpx_variance16x16(*(b->base_src), b->src_stride, x->e_mbd.predictor,
                             16, &sse);
@@ -1677,12 +1695,15 @@ static int calculate_final_rd_costs(int this_rd, RATE_DISTORTION *rd,
       int has_y2_block = (this_mode != SPLITMV && this_mode != B_PRED);
 
       tteob = 0;
-      if (has_y2_block) tteob += x->e_mbd.eobs[24];
+      if (has_y2_block) { tteob += x->e_mbd.eobs[24];
+}
 
-      for (i = 0; i < 16; ++i) tteob += (x->e_mbd.eobs[i] > has_y2_block);
+      for (i = 0; i < 16; ++i) { tteob += (x->e_mbd.eobs[i] > has_y2_block);
+}
 
       if (x->e_mbd.mode_info_context->mbmi.ref_frame) {
-        for (i = 16; i < 24; ++i) tteob += x->e_mbd.eobs[i];
+        for (i = 16; i < 24; ++i) { tteob += x->e_mbd.eobs[i];
+}
       } else {
         tteob += uv_intra_tteob;
       }
@@ -1821,9 +1842,11 @@ void vp8_rd_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
     int this_ref_frame = ref_frame_map[vp8_ref_frame_order[mode_index]];
 
     /* Test best rd so far against threshold for trying this mode. */
-    if (best_mode.rd <= x->rd_threshes[mode_index]) continue;
+    if (best_mode.rd <= x->rd_threshes[mode_index]) { continue;
+}
 
-    if (this_ref_frame < 0) continue;
+    if (this_ref_frame < 0) { continue;
+}
 
     /* These variables hold are rolling total cost and distortion for
      * this mode
@@ -1924,7 +1947,8 @@ void vp8_rd_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
        * block's intra eobs will be overwritten when we check inter modes,
        * we need to save uv_intra_tteob here.
        */
-      for (i = 16; i < 24; ++i) uv_intra_tteob += x->e_mbd.eobs[i];
+      for (i = 16; i < 24; ++i) { uv_intra_tteob += x->e_mbd.eobs[i];
+}
 
       uv_intra_done = 1;
     }
@@ -2049,13 +2073,18 @@ void vp8_rd_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
         /* Get intersection of UMV window and valid MV window to
          * reduce # of checks in diamond search.
          */
-        if (x->mv_col_min < col_min) x->mv_col_min = col_min;
-        if (x->mv_col_max > col_max) x->mv_col_max = col_max;
-        if (x->mv_row_min < row_min) x->mv_row_min = row_min;
-        if (x->mv_row_max > row_max) x->mv_row_max = row_max;
+        if (x->mv_col_min < col_min) { x->mv_col_min = col_min;
+}
+        if (x->mv_col_max > col_max) { x->mv_col_max = col_max;
+}
+        if (x->mv_row_min < row_min) { x->mv_row_min = row_min;
+}
+        if (x->mv_row_max > row_max) { x->mv_row_max = row_max;
+}
 
         /* adjust search range according to sr from mv prediction */
-        if (sr > step_param) step_param = sr;
+        if (sr > step_param) { step_param = sr;
+}
 
         /* Initial step/diamond search */
         {
@@ -2072,7 +2101,8 @@ void vp8_rd_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
 
           /* If there won't be more n-step search, check to see if refining
            * search is needed. */
-          if (n > further_steps) do_refine = 0;
+          if (n > further_steps) { do_refine = 0;
+}
 
           while (n < further_steps) {
             n++;
@@ -2085,7 +2115,8 @@ void vp8_rd_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
                   &cpi->fn_ptr[BLOCK_16X16], x->mvcost, &best_ref_mv);
 
               /* check to see if refining search is needed. */
-              if (num00 > (further_steps - n)) do_refine = 0;
+              if (num00 > (further_steps - n)) { do_refine = 0;
+}
 
               if (thissme < bestsme) {
                 bestsme = thissme;
@@ -2188,7 +2219,8 @@ void vp8_rd_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
       vp8_get_inter_mbpred_error(x, &cpi->fn_ptr[BLOCK_16X16], &sse,
                                  mode_mv[this_mode]);
 
-      if (sse < best_rd_sse) best_rd_sse = sse;
+      if (sse < best_rd_sse) { best_rd_sse = sse;
+}
 
       /* Store for later use by denoiser. */
       if (this_mode == ZEROMV && sse < zero_mv_sse) {
@@ -2246,7 +2278,8 @@ void vp8_rd_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
     x->rd_threshes[mode_index] = (cpi->rd_baseline_thresh[mode_index] >> 7) *
                                  x->rd_thresh_mult[mode_index];
 
-    if (x->skip) break;
+    if (x->skip) { break;
+}
   }
 
   /* Reduce the activation RD thresholds for the best choice mode */

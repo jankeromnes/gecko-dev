@@ -33,7 +33,8 @@ nsGTKRemoteService::Startup(const char* aAppName, const char* aProfileName)
 {
   NS_ASSERTION(aAppName, "Don't pass a null appname!");
 
-  if (mServerWindow) return NS_ERROR_ALREADY_INITIALIZED;
+  if (mServerWindow) { return NS_ERROR_ALREADY_INITIALIZED;
+}
 
   XRemoteBaseStartup(aAppName, aProfileName);
 
@@ -86,8 +87,9 @@ nsGTKRemoteService::RegisterWindow(mozIDOMWindow* aWindow)
 NS_IMETHODIMP
 nsGTKRemoteService::Shutdown()
 {
-  if (!mServerWindow)
+  if (!mServerWindow) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   gtk_widget_destroy(mServerWindow);
   mServerWindow = nullptr;

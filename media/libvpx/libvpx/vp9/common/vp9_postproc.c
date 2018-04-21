@@ -104,7 +104,8 @@ void vp9_highbd_post_proc_down_and_across_c(const uint16_t *src_ptr,
 #endif  // CONFIG_VP9_HIGHBITDEPTH
 
 static int q2mbl(int x) {
-  if (x < 20) x = 20;
+  if (x < 20) { x = 20;
+}
 
   x = 50 + (x - 50) * 10 / 8;
   return x * x / 3;
@@ -299,7 +300,8 @@ int vp9_post_proc_frame(struct VP9Common *cm, YV12_BUFFER_CONFIG *dest,
   YV12_BUFFER_CONFIG *const ppbuf = &cm->post_proc_buffer;
   struct postproc_state *const ppstate = &cm->postproc_state;
 
-  if (!cm->frame_to_show) return -1;
+  if (!cm->frame_to_show) { return -1;
+}
 
   if (!flags) {
     *dest = *cm->frame_to_show;
@@ -352,9 +354,10 @@ int vp9_post_proc_frame(struct VP9Common *cm, YV12_BUFFER_CONFIG *dest,
                                cm->use_highbitdepth,
 #endif
                                VP9_DEC_BORDER_IN_PIXELS, cm->byte_alignment,
-                               NULL, NULL, NULL) < 0)
+                               NULL, NULL, NULL) < 0) {
     vpx_internal_error(&cm->error, VPX_CODEC_MEM_ERROR,
                        "Failed to allocate post-processing buffer");
+}
 
   if (flags & (VP9D_DEMACROBLOCK | VP9D_DEBLOCK)) {
     if (!cm->postproc_state.limits) {
@@ -367,7 +370,8 @@ int vp9_post_proc_frame(struct VP9Common *cm, YV12_BUFFER_CONFIG *dest,
     if (!cm->postproc_state.generated_noise) {
       cm->postproc_state.generated_noise = vpx_calloc(
           cm->width + 256, sizeof(*cm->postproc_state.generated_noise));
-      if (!cm->postproc_state.generated_noise) return 1;
+      if (!cm->postproc_state.generated_noise) { return 1;
+}
     }
   }
 
@@ -428,7 +432,8 @@ int vp9_post_proc_frame(struct VP9Common *cm, YV12_BUFFER_CONFIG *dest,
   dest->uv_width = dest->y_width >> cm->subsampling_x;
   dest->uv_height = dest->y_height >> cm->subsampling_y;
 
-  if (flags & VP9D_MFQE) swap_mi_and_prev_mi(cm);
+  if (flags & VP9D_MFQE) { swap_mi_and_prev_mi(cm);
+}
   return 0;
 }
 #endif  // CONFIG_VP9_POSTPROC

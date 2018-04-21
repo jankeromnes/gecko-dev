@@ -86,8 +86,9 @@ flss (UINT16 val)
 
   bit = 16;
 
-  if (!val)
+  if (!val) {
     return 0;
+}
 
   if (!(val & 0xff00)) {
     bit -= 8;
@@ -216,8 +217,9 @@ compute_reciprocal (UINT16 divisor, DCTELEM *dtbl)
 #endif
   dtbl[DCTSIZE2 * 3] = (DCTELEM) r - sizeof(DCTELEM)*8; /* shift */
 
-  if(r <= 16) return 0;
-  else return 1;
+  if(r <= 16) { return 0;
+  } else { return 1;
+}
 }
 
 #endif
@@ -246,8 +248,9 @@ start_pass_fdctmgr (j_compress_ptr cinfo)
     qtblno = compptr->quant_tbl_no;
     /* Make sure specified quantization table is present */
     if (qtblno < 0 || qtblno >= NUM_QUANT_TBLS ||
-        cinfo->quant_tbl_ptrs[qtblno] == NULL)
+        cinfo->quant_tbl_ptrs[qtblno] == NULL) {
       ERREXIT1(cinfo, JERR_NO_QUANT_TABLE, qtblno);
+}
     qtbl = cinfo->quant_tbl_ptrs[qtblno];
     /* Compute divisors for this quant table */
     /* We may do this more than once for same table, but it's not a big deal */
@@ -266,8 +269,9 @@ start_pass_fdctmgr (j_compress_ptr cinfo)
       for (i = 0; i < DCTSIZE2; i++) {
 #if BITS_IN_JSAMPLE == 8
         if (!compute_reciprocal(qtbl->quantval[i] << 3, &dtbl[i]) &&
-            fdct->quantize == jsimd_quantize)
+            fdct->quantize == jsimd_quantize) {
           fdct->quantize = quantize;
+}
 #else
         dtbl[i] = ((DCTELEM) qtbl->quantval[i]) << 3;
 #endif
@@ -309,8 +313,9 @@ start_pass_fdctmgr (j_compress_ptr cinfo)
                 DESCALE(MULTIPLY16V16((JLONG) qtbl->quantval[i],
                                       (JLONG) aanscales[i]),
                         CONST_BITS-3), &dtbl[i]) &&
-              fdct->quantize == jsimd_quantize)
+              fdct->quantize == jsimd_quantize) {
             fdct->quantize = quantize;
+}
 #else
            dtbl[i] = (DCTELEM)
              DESCALE(MULTIPLY16V16((JLONG) qtbl->quantval[i],
@@ -634,28 +639,31 @@ jinit_forward_dct (j_compress_ptr cinfo)
 #ifdef DCT_ISLOW_SUPPORTED
   case JDCT_ISLOW:
     fdct->pub.forward_DCT = forward_DCT;
-    if (jsimd_can_fdct_islow())
+    if (jsimd_can_fdct_islow()) {
       fdct->dct = jsimd_fdct_islow;
-    else
+    } else {
       fdct->dct = jpeg_fdct_islow;
+}
     break;
 #endif
 #ifdef DCT_IFAST_SUPPORTED
   case JDCT_IFAST:
     fdct->pub.forward_DCT = forward_DCT;
-    if (jsimd_can_fdct_ifast())
+    if (jsimd_can_fdct_ifast()) {
       fdct->dct = jsimd_fdct_ifast;
-    else
+    } else {
       fdct->dct = jpeg_fdct_ifast;
+}
     break;
 #endif
 #ifdef DCT_FLOAT_SUPPORTED
   case JDCT_FLOAT:
     fdct->pub.forward_DCT = forward_DCT_float;
-    if (jsimd_can_fdct_float())
+    if (jsimd_can_fdct_float()) {
       fdct->float_dct = jsimd_fdct_float;
-    else
+    } else {
       fdct->float_dct = jpeg_fdct_float;
+}
     break;
 #endif
   default:
@@ -672,26 +680,30 @@ jinit_forward_dct (j_compress_ptr cinfo)
   case JDCT_IFAST:
 #endif
 #if defined(DCT_ISLOW_SUPPORTED) || defined(DCT_IFAST_SUPPORTED)
-    if (jsimd_can_convsamp())
+    if (jsimd_can_convsamp()) {
       fdct->convsamp = jsimd_convsamp;
-    else
+    } else {
       fdct->convsamp = convsamp;
-    if (jsimd_can_quantize())
+}
+    if (jsimd_can_quantize()) {
       fdct->quantize = jsimd_quantize;
-    else
+    } else {
       fdct->quantize = quantize;
+}
     break;
 #endif
 #ifdef DCT_FLOAT_SUPPORTED
   case JDCT_FLOAT:
-    if (jsimd_can_convsamp_float())
+    if (jsimd_can_convsamp_float()) {
       fdct->float_convsamp = jsimd_convsamp_float;
-    else
+    } else {
       fdct->float_convsamp = convsamp_float;
-    if (jsimd_can_quantize_float())
+}
+    if (jsimd_can_quantize_float()) {
       fdct->float_quantize = jsimd_quantize_float;
-    else
+    } else {
       fdct->float_quantize = quantize_float;
+}
     break;
 #endif
   default:
@@ -701,15 +713,16 @@ jinit_forward_dct (j_compress_ptr cinfo)
 
   /* Allocate workspace memory */
 #ifdef DCT_FLOAT_SUPPORTED
-  if (cinfo->dct_method == JDCT_FLOAT)
+  if (cinfo->dct_method == JDCT_FLOAT) {
     fdct->float_workspace = (FAST_FLOAT *)
       (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
                                   sizeof(FAST_FLOAT) * DCTSIZE2);
-  else
+  } else {
 #endif
     fdct->workspace = (DCTELEM *)
       (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
                                   sizeof(DCTELEM) * DCTSIZE2);
+}
 
   /* Mark divisor tables unallocated */
   for (i = 0; i < NUM_QUANT_TBLS; i++) {

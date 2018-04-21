@@ -42,8 +42,9 @@ ec_point_at_infinity(SECItem *pointP)
     unsigned int i;
 
     for (i = 1; i < pointP->len; i++) {
-        if (pointP->data[i] != 0x00)
+        if (pointP->data[i] != 0x00) {
             return PR_FALSE;
+}
     }
 
     return PR_TRUE;
@@ -137,8 +138,9 @@ ec_points_mul(const ECParams *params, const mp_int *k1, const mp_int *k2,
         group = ECGroup_fromName(params->name);
     }
 
-    if (group == NULL)
+    if (group == NULL) {
         goto cleanup;
+}
 
     if ((k2 != NULL) && (pointP != NULL)) {
         CHECK_MPI_OK(ECPoints_mul(group, k1, k2, &Px, &Py, &Qx, &Qy));
@@ -209,8 +211,9 @@ ec_NewKey(ECParams *ecParams, ECPrivateKey **privKey,
     }
 
     /* Initialize an arena for the EC key. */
-    if (!(arena = PORT_NewArena(NSS_FREEBL_DEFAULT_CHUNKSIZE)))
+    if (!(arena = PORT_NewArena(NSS_FREEBL_DEFAULT_CHUNKSIZE))) {
         return SECFailure;
+}
 
     key = (ECPrivateKey *)PORT_ArenaZAlloc(arena, sizeof(ECPrivateKey));
     if (!key) {
@@ -354,8 +357,9 @@ ec_GenerateRandomPrivateKey(const unsigned char *order, int len)
      * (which implements Algorithm 1 of FIPS 186-2 Change Notice 1) then
      * reduces modulo the group order.
      */
-    if ((privKeyBytes = PORT_Alloc(2 * len)) == NULL)
+    if ((privKeyBytes = PORT_Alloc(2 * len)) == NULL) {
         goto cleanup;
+}
     CHECK_SEC_OK(RNG_GenerateGlobalRandomBytes(privKeyBytes, 2 * len));
     CHECK_MPI_OK(mp_read_unsigned_octets(&privKeyVal, privKeyBytes, 2 * len));
     CHECK_MPI_OK(mp_read_unsigned_octets(&order_1, order, len));
@@ -398,8 +402,9 @@ EC_NewKey(ECParams *ecParams, ECPrivateKey **privKey)
 
     len = ecParams->order.len;
     privKeyBytes = ec_GenerateRandomPrivateKey(ecParams->order.data, len);
-    if (privKeyBytes == NULL)
+    if (privKeyBytes == NULL) {
         goto cleanup;
+}
     /* generate public key */
     CHECK_SEC_OK(ec_NewKey(ecParams, privKey, privKeyBytes, len));
 
@@ -586,8 +591,9 @@ ECDH_Derive(SECItem *publicValue,
     memset(derivedSecret, 0, sizeof *derivedSecret);
     len = (ecParams->fieldID.size + 7) >> 3;
     pointQ.len = EC_GetPointSize(ecParams);
-    if ((pointQ.data = PORT_Alloc(pointQ.len)) == NULL)
+    if ((pointQ.data = PORT_Alloc(pointQ.len)) == NULL) {
         goto cleanup;
+}
 
     CHECK_MPI_OK(mp_init(&k));
     CHECK_MPI_OK(mp_read_unsigned_octets(&k, privateValue->data,
@@ -747,8 +753,9 @@ ECDSA_SignDigestWithSeed(ECPrivateKey *key, SECItem *signature,
     kGpoint.len = EC_GetPointSize(ecParams);
     kGpoint.data = PORT_Alloc(kGpoint.len);
     if ((kGpoint.data == NULL) ||
-        (ec_points_mul(ecParams, &k, NULL, NULL, &kGpoint) != SECSuccess))
+        (ec_points_mul(ecParams, &k, NULL, NULL, &kGpoint) != SECSuccess)) {
         goto cleanup;
+}
 
     /*
     ** ANSI X9.62, Section 5.3.3, Step 1
@@ -899,8 +906,9 @@ ECDSA_SignDigest(ECPrivateKey *key, SECItem *signature, const SECItem *digest)
     /* Generate random value k */
     len = key->ecParams.order.len;
     kBytes = ec_GenerateRandomPrivateKey(key->ecParams.order.data, len);
-    if (kBytes == NULL)
+    if (kBytes == NULL) {
         goto cleanup;
+}
 
     /* Generate ECDSA signature with the specified k value */
     rv = ECDSA_SignDigestWithSeed(key, signature, digest, kBytes, len);
@@ -1119,8 +1127,9 @@ cleanup:
     mp_clear(&v);
     mp_clear(&n);
 
-    if (pointC.data)
+    if (pointC.data) {
         SECITEM_ZfreeItem(&pointC, PR_FALSE);
+}
     if (err) {
         MP_TO_SEC_ERROR(err);
         rv = SECFailure;

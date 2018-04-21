@@ -118,12 +118,14 @@ static bool initialized = false;
 // Implement NSPR-based crypto algorithms
 static int nr_crypto_nss_random_bytes(UCHAR *buf, int len) {
   UniquePK11SlotInfo slot(PK11_GetInternalSlot());
-  if (!slot)
+  if (!slot) {
     return R_INTERNAL;
+}
 
   SECStatus rv = PK11_GenerateRandomOnSlot(slot.get(), buf, len);
-  if (rv != SECSuccess)
+  if (rv != SECSuccess) {
     return R_INTERNAL;
+}
 
   return 0;
 }
@@ -142,40 +144,49 @@ static int nr_crypto_nss_hmac(UCHAR *key, int keyl, UCHAR *buf, int bufl,
   int err = R_INTERNAL;
 
   slot = PK11_GetInternalKeySlot();
-  if (!slot)
+  if (!slot) {
     goto abort;
+}
 
   skey = PK11_ImportSymKey(slot, mech, PK11_OriginUnwrap,
                           CKA_SIGN, &keyi, nullptr);
-  if (!skey)
+  if (!skey) {
     goto abort;
+}
 
 
   hmac_ctx = PK11_CreateContextBySymKey(mech, CKA_SIGN,
                                         skey, &param);
-  if (!hmac_ctx)
+  if (!hmac_ctx) {
     goto abort;
+}
 
   status = PK11_DigestBegin(hmac_ctx);
-  if (status != SECSuccess)
+  if (status != SECSuccess) {
     goto abort;
+}
 
   status = PK11_DigestOp(hmac_ctx, buf, bufl);
-  if (status != SECSuccess)
+  if (status != SECSuccess) {
     goto abort;
+}
 
   status = PK11_DigestFinal(hmac_ctx, result, &hmac_len, 20);
-  if (status != SECSuccess)
+  if (status != SECSuccess) {
     goto abort;
+}
 
   MOZ_ASSERT(hmac_len == 20);
 
   err = 0;
 
  abort:
-  if(hmac_ctx) PK11_DestroyContext(hmac_ctx, PR_TRUE);
-  if (skey) PK11_FreeSymKey(skey);
-  if (slot) PK11_FreeSlot(slot);
+  if(hmac_ctx) { PK11_DestroyContext(hmac_ctx, PR_TRUE);
+}
+  if (skey) { PK11_FreeSymKey(skey);
+}
+  if (slot) { PK11_FreeSlot(slot);
+}
 
   return err;
 }
@@ -186,14 +197,16 @@ static int nr_crypto_nss_md5(UCHAR *buf, int bufl, UCHAR *result) {
 
   const SECHashObject *ho = HASH_GetHashObject(HASH_AlgMD5);
   MOZ_ASSERT(ho);
-  if (!ho)
+  if (!ho) {
     goto abort;
+}
 
   MOZ_ASSERT(ho->length == 16);
 
   rv = HASH_HashBuf(ho->type, result, buf, bufl);
-  if (rv != SECSuccess)
+  if (rv != SECSuccess) {
     goto abort;
+}
 
   err = 0;
 abort:
@@ -250,11 +263,13 @@ nsresult NrIceTurnServer::ToNicerTurnStruct(nr_ice_turn_server *server) const {
   memset(server, 0, sizeof(nr_ice_turn_server));
 
   nsresult rv = ToNicerStunStruct(&server->turn_server);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
-  if (!(server->username=r_strdup(username_.c_str())))
+  if (!(server->username=r_strdup(username_.c_str()))) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
 
   // TODO(ekr@rtfm.com): handle non-ASCII passwords somehow?
   // STUN requires they be SASLpreped, but we don't know if
@@ -400,8 +415,9 @@ void NrIceCtx::trickle_cb(void *arg, nr_ice_ctx *ice_ctx,
   int r = nr_ice_format_candidate_attribute(candidate, candidate_str,
                                             sizeof(candidate_str));
   MOZ_ASSERT(!r);
-  if (r)
+  if (r) {
     return;
+}
 
   MOZ_MTLOG(ML_INFO, "NrIceCtx(" << ctx->name_ << "): trickling candidate "
             << candidate_str);
@@ -700,8 +716,9 @@ NrIceCtx::Initialize(const std::string& ufrag,
 
   sts_target_ = do_GetService(NS_SOCKETTRANSPORTSERVICE_CONTRACTID, &rv);
 
-  if (!NS_SUCCEEDED(rv))
+  if (!NS_SUCCEEDED(rv)) {
     return false;
+}
 
   return true;
 }
@@ -841,8 +858,9 @@ nsresult NrIceCtx::SetPolicy(Policy policy) {
 
 nsresult NrIceCtx::SetStunServers(const std::vector<NrIceStunServer>&
                                   stun_servers) {
-  if (stun_servers.empty())
+  if (stun_servers.empty()) {
     return NS_OK;
+}
 
   auto servers = MakeUnique<nr_ice_stun_server[]>(stun_servers.size());
 
@@ -867,8 +885,9 @@ nsresult NrIceCtx::SetStunServers(const std::vector<NrIceStunServer>&
 // Could we do a template or something?
 nsresult NrIceCtx::SetTurnServers(const std::vector<NrIceTurnServer>&
                                   turn_servers) {
-  if (turn_servers.empty())
+  if (turn_servers.empty()) {
     return NS_OK;
+}
 
   auto servers = MakeUnique<nr_ice_turn_server[]>(turn_servers.size());
 
@@ -1116,8 +1135,9 @@ void NrIceCtx::UpdateNetworkState(bool online) {
 }
 
 void NrIceCtx::SetConnectionState(ConnectionState state) {
-  if (state == connection_state_)
+  if (state == connection_state_) {
     return;
+}
 
   if (!ice_start_time_.IsNull() && (state > ICE_CTX_CHECKING)) {
     TimeDuration time_delta = TimeStamp::Now() - ice_start_time_;
@@ -1178,8 +1198,9 @@ void NrIceCtx::SetConnectionState(ConnectionState state) {
 }
 
 void NrIceCtx::SetGatheringState(GatheringState state) {
-  if (state == gathering_state_)
+  if (state == gathering_state_) {
     return;
+}
 
   MOZ_MTLOG(ML_DEBUG, "NrIceCtx(" << name_ << "): gathering state " <<
             gathering_state_ << "->" << state);

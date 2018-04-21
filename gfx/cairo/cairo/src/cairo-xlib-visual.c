@@ -74,14 +74,17 @@ _cairo_xlib_visual_info_create (Display *dpy,
     unsigned short ramp_index_to_short[RAMP_SIZE];
     unsigned char  gray_to_pseudocolor[RAMP_SIZE];
 
-    for (i = 0; i < CUBE_SIZE; i++)
+    for (i = 0; i < CUBE_SIZE; i++) {
 	cube_index_to_short[i] = (0xffff * i + ((CUBE_SIZE-1)>>1)) / (CUBE_SIZE-1);
-    for (i = 0; i < RAMP_SIZE; i++)
+}
+    for (i = 0; i < RAMP_SIZE; i++) {
 	ramp_index_to_short[i] = (0xffff * i + ((RAMP_SIZE-1)>>1)) / (RAMP_SIZE-1);
+}
 
     info = malloc (sizeof (cairo_xlib_visual_info_t));
-    if (unlikely (info == NULL))
+    if (unlikely (info == NULL)) {
 	return _cairo_error (CAIRO_STATUS_NO_MEMORY);
+}
 
     info->visualid = visualid;
 
@@ -90,8 +93,9 @@ _cairo_xlib_visual_info_create (Display *dpy,
 
     for (gray = 0; gray < RAMP_SIZE; gray++) {
 	color.red = color.green = color.blue = ramp_index_to_short[gray];
-	if (! XAllocColor (dpy, colormap, &color))
+	if (! XAllocColor (dpy, colormap, &color)) {
 	    goto DONE_ALLOCATE;
+}
     }
 
     /* XXX: Could do this in a more clever order to have the best
@@ -106,15 +110,17 @@ _cairo_xlib_visual_info_create (Display *dpy,
 		color.pixel = 0;
 		color.flags = 0;
 		color.pad = 0;
-		if (! XAllocColor (dpy, colormap, &color))
+		if (! XAllocColor (dpy, colormap, &color)) {
 		    goto DONE_ALLOCATE;
+}
 	    }
 	}
     }
   DONE_ALLOCATE:
 
-    for (i = 0; i < ARRAY_LENGTH (colors); i++)
+    for (i = 0; i < ARRAY_LENGTH (colors); i++) {
 	colors[i].pixel = i;
+}
     XQueryColors (dpy, colormap, colors, ARRAY_LENGTH (colors));
 
     /* Search for nearest colors within allocated colormap. */
@@ -129,8 +135,9 @@ _cairo_xlib_visual_info_create (Display *dpy,
 	    if (i == 0 || distance < min_distance) {
 		gray_to_pseudocolor[gray] = colors[i].pixel;
 		min_distance = distance;
-		if (!min_distance)
+		if (!min_distance) {
 		    break;
+}
 	    }
 	}
     }
@@ -147,8 +154,9 @@ _cairo_xlib_visual_info_create (Display *dpy,
 		    if (i == 0 || distance < min_distance) {
 			info->cube_to_pseudocolor[red][green][blue] = colors[i].pixel;
 			min_distance = distance;
-			if (!min_distance)
+			if (!min_distance) {
 			    break;
+}
 		    }
 		}
 	    }
@@ -156,15 +164,17 @@ _cairo_xlib_visual_info_create (Display *dpy,
     }
 
     for (i = 0, j = 0; i < 256; i++) {
-	if (j < CUBE_SIZE - 1 && (((i<<8)+i) - (int)cube_index_to_short[j]) > ((int)cube_index_to_short[j+1] - ((i<<8)+i)))
+	if (j < CUBE_SIZE - 1 && (((i<<8)+i) - (int)cube_index_to_short[j]) > ((int)cube_index_to_short[j+1] - ((i<<8)+i))) {
 	    j++;
+}
 	info->field8_to_cube[i] = j;
 
 	info->dither8_to_cube[i] = ((int)i - 128) / (CUBE_SIZE - 1);
     }
     for (i = 0, j = 0; i < 256; i++) {
-	if (j < RAMP_SIZE - 1 && (((i<<8)+i) - (int)ramp_index_to_short[j]) > ((int)ramp_index_to_short[j+1] - ((i<<8)+i)))
+	if (j < RAMP_SIZE - 1 && (((i<<8)+i) - (int)ramp_index_to_short[j]) > ((int)ramp_index_to_short[j+1] - ((i<<8)+i))) {
 	    j++;
+}
 	info->gray8_to_pseudocolor[i] = gray_to_pseudocolor[j];
     }
 

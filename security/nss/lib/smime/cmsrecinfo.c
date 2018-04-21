@@ -74,8 +74,9 @@ nss_cmsrecipientinfo_create(NSSCMSMessage *cmsg,
     mark = PORT_ArenaMark(poolp);
 
     ri = (NSSCMSRecipientInfo *)PORT_ArenaZAlloc(poolp, sizeof(NSSCMSRecipientInfo));
-    if (ri == NULL)
+    if (ri == NULL) {
         goto loser;
+}
 
     ri->cmsg = cmsg;
 
@@ -83,18 +84,21 @@ nss_cmsrecipientinfo_create(NSSCMSMessage *cmsg,
         /* decode everything from DER */
         SECItem newinput;
         rv = SECITEM_CopyItem(poolp, &newinput, DERinput);
-        if (SECSuccess != rv)
+        if (SECSuccess != rv) {
             goto loser;
+}
         rv = SEC_QuickDERDecodeItem(poolp, ri, NSSCMSRecipientInfoTemplate, &newinput);
-        if (SECSuccess != rv)
+        if (SECSuccess != rv) {
             goto loser;
+}
     }
 
     switch (type) {
         case NSSCMSRecipientID_IssuerSN: {
             ri->cert = CERT_DupCertificate(cert);
-            if (NULL == ri->cert)
+            if (NULL == ri->cert) {
                 goto loser;
+}
             spki = &(cert->subjectPublicKeyInfo);
             break;
         }
@@ -208,39 +212,45 @@ nss_cmsrecipientinfo_create(NSSCMSMessage *cmsg,
             break;
     }
 
-    if (rv == SECFailure)
+    if (rv == SECFailure) {
         goto loser;
+}
 
     /* set version */
     switch (ri->recipientInfoType) {
         case NSSCMSRecipientInfoID_KeyTrans:
-            if (ri->ri.keyTransRecipientInfo.recipientIdentifier.identifierType == NSSCMSRecipientID_IssuerSN)
+            if (ri->ri.keyTransRecipientInfo.recipientIdentifier.identifierType == NSSCMSRecipientID_IssuerSN) {
                 version = NSS_CMS_KEYTRANS_RECIPIENT_INFO_VERSION_ISSUERSN;
-            else
+            } else {
                 version = NSS_CMS_KEYTRANS_RECIPIENT_INFO_VERSION_SUBJKEY;
+}
             dummy = SEC_ASN1EncodeInteger(poolp, &(ri->ri.keyTransRecipientInfo.version), version);
-            if (dummy == NULL)
+            if (dummy == NULL) {
                 goto loser;
+}
             break;
         case NSSCMSRecipientInfoID_KeyAgree:
             dummy = SEC_ASN1EncodeInteger(poolp, &(ri->ri.keyAgreeRecipientInfo.version),
                                           NSS_CMS_KEYAGREE_RECIPIENT_INFO_VERSION);
-            if (dummy == NULL)
+            if (dummy == NULL) {
                 goto loser;
+}
             break;
         case NSSCMSRecipientInfoID_KEK:
             /* NOTE: this cannot happen as long as we do not support any KEK algorithm */
             dummy = SEC_ASN1EncodeInteger(poolp, &(ri->ri.kekRecipientInfo.version),
                                           NSS_CMS_KEK_RECIPIENT_INFO_VERSION);
-            if (dummy == NULL)
+            if (dummy == NULL) {
                 goto loser;
+}
             break;
     }
 
 done:
     PORT_ArenaUnmark(poolp, mark);
-    if (freeSpki)
+    if (freeSpki) {
         SECKEY_DestroySubjectPublicKeyInfo(freeSpki);
+}
     return ri;
 
 loser:
@@ -315,11 +325,13 @@ NSS_CMSRecipientInfo_CreateWithSubjKeyIDFromCert(NSSCMSMessage *cmsg,
     }
     retVal = NSS_CMSRecipientInfo_CreateWithSubjKeyID(cmsg, &subjKeyID, pubKey);
 done:
-    if (pubKey)
+    if (pubKey) {
         SECKEY_DestroyPublicKey(pubKey);
+}
 
-    if (subjKeyID.data)
+    if (subjKeyID.data) {
         SECITEM_FreeItem(&subjKeyID, PR_FALSE);
+}
 
     return retVal;
 }
@@ -332,14 +344,16 @@ NSS_CMSRecipientInfo_Destroy(NSSCMSRecipientInfo *ri)
     }
     /* version was allocated on the pool, so no need to destroy it */
     /* issuerAndSN was allocated on the pool, so no need to destroy it */
-    if (ri->cert != NULL)
+    if (ri->cert != NULL) {
         CERT_DestroyCertificate(ri->cert);
+}
 
     if (nss_cmsrecipientinfo_usessubjectkeyid(ri)) {
         NSSCMSKeyTransRecipientInfoEx *extra;
         extra = &ri->ri.keyTransRecipientInfoEx;
-        if (extra->pubKey)
+        if (extra->pubKey) {
             SECKEY_DestroyPublicKey(extra->pubKey);
+}
     }
     if (ri->cmsg && ri->cmsg->contentInfo.contentTypeTag == &fakeContent) {
         NSS_CMSMessage_Destroy(ri->cmsg);
@@ -369,14 +383,16 @@ NSS_CMSRecipientInfo_GetVersion(NSSCMSRecipientInfo *ri)
     }
 
     PORT_Assert(versionitem);
-    if (versionitem == NULL)
+    if (versionitem == NULL) {
         return 0;
+}
 
     /* always take apart the SECItem */
-    if (SEC_ASN1DecodeInteger(versionitem, &version) != SECSuccess)
+    if (SEC_ASN1DecodeInteger(versionitem, &version) != SECSuccess) {
         return 0;
-    else
+    } else {
         return (int)version;
+}
 }
 
 SECItem *
@@ -462,14 +478,16 @@ NSS_CMSRecipientInfo_WrapBulkKey(NSSCMSRecipientInfo *ri, PK11SymKey *bulkkey,
             if (cert) {
                 rv = NSS_CMSUtil_EncryptSymKey_RSA(poolp, cert, bulkkey,
                                                    &ri->ri.keyTransRecipientInfo.encKey);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
             } else if (usesSubjKeyID) {
                 PORT_Assert(extra != NULL);
                 rv = NSS_CMSUtil_EncryptSymKey_RSAPubKey(poolp, extra->pubKey,
                                                          bulkkey, &ri->ri.keyTransRecipientInfo.encKey);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
             }
 
             rv = SECOID_SetAlgorithmID(poolp, &(ri->ri.keyTransRecipientInfo.keyEncAlg), certalgtag, NULL);
@@ -507,8 +525,9 @@ NSS_CMSRecipientInfo_WrapBulkKey(NSSCMSRecipientInfo *ri, PK11SymKey *bulkkey,
             PORT_SetError(SEC_ERROR_INVALID_ALGORITHM);
             rv = SECFailure;
     }
-    if (freeSpki)
+    if (freeSpki) {
         SECKEY_DestroySubjectPublicKeyInfo(freeSpki);
+}
 
     return rv;
 }
@@ -588,8 +607,9 @@ NSS_CMSRecipientInfo_GetCertAndKey(NSSCMSRecipientInfo *ri,
     SECStatus rv = SECSuccess;
     SECKEYPrivateKey *key = NULL;
 
-    if (!ri)
+    if (!ri) {
         return SECFailure;
+}
 
     if (!retcert && !retkey) {
         /* nothing requested, nothing found, success */

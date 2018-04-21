@@ -23,7 +23,8 @@ static INLINE unsigned int sad(const uint8_t *a, int a_stride, const uint8_t *b,
   unsigned int sad = 0;
 
   for (y = 0; y < height; y++) {
-    for (x = 0; x < width; x++) sad += abs(a[x] - b[x]);
+    for (x = 0; x < width; x++) { sad += abs(a[x] - b[x]);
+}
 
     a += a_stride;
     b += b_stride;

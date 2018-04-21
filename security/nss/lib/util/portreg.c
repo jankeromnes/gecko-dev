@@ -24,14 +24,18 @@ _valid_subexp(const char *exp, char stop1, char stop2)
     for (x = 0; exp[x] && (exp[x] != stop1) && (exp[x] != stop2); ++x) {
         switch (exp[x]) {
             case '~':
-                if (tld) /* at most one exclusion */
+                if (tld) { /* at most one exclusion */
                     return INVALID_SXP;
-                if (stop1) /* no exclusions within unions */
+}
+                if (stop1) { /* no exclusions within unions */
                     return INVALID_SXP;
-                if (!exp[x + 1]) /* exclusion cannot be last character */
+}
+                if (!exp[x + 1]) { /* exclusion cannot be last character */
                     return INVALID_SXP;
-                if (!x) /* exclusion cannot be first character */
+}
+                if (!x) { /* exclusion cannot be first character */
                     return INVALID_SXP;
+}
                 ++tld;
             /* fall through */
             case '*':
@@ -41,31 +45,38 @@ _valid_subexp(const char *exp, char stop1, char stop2)
                 break;
             case '[':
                 ++nsc;
-                if ((!exp[++x]) || (exp[x] == ']'))
+                if ((!exp[++x]) || (exp[x] == ']')) {
                     return INVALID_SXP;
+}
                 for (; exp[x] && (exp[x] != ']'); ++x) {
-                    if (exp[x] == '\\' && !exp[++x])
+                    if (exp[x] == '\\' && !exp[++x]) {
                         return INVALID_SXP;
+}
                 }
-                if (!exp[x])
+                if (!exp[x]) {
                     return INVALID_SXP;
+}
                 break;
             case '(':
                 ++nsc;
-                if (stop1) /* no nested unions */
+                if (stop1) { /* no nested unions */
                     return INVALID_SXP;
+}
                 np = -1;
                 do {
                     int t = _valid_subexp(&exp[++x], ')', '|');
-                    if (t == 0 || t == INVALID_SXP)
+                    if (t == 0 || t == INVALID_SXP) {
                         return INVALID_SXP;
+}
                     x += t;
-                    if (!exp[x])
+                    if (!exp[x]) {
                         return INVALID_SXP;
+}
                     ++np;
                 } while (exp[x] == '|');
-                if (np < 1) /* must be at least one pipe */
+                if (np < 1) { /* must be at least one pipe */
                     return INVALID_SXP;
+}
                 break;
             case ')':
             case '|':
@@ -73,15 +84,17 @@ _valid_subexp(const char *exp, char stop1, char stop2)
                 return INVALID_SXP;
             case '\\':
                 ++nsc;
-                if (!exp[++x])
+                if (!exp[++x]) {
                     return INVALID_SXP;
+}
                 break;
             default:
                 break;
         }
     }
-    if ((!stop1) && (!nsc)) /* must be at least one special character */
+    if ((!stop1) && (!nsc)) { /* must be at least one special character */
         return NON_SXP;
+}
     return ((exp[x] == stop1 || exp[x] == stop2) ? x : INVALID_SXP);
 }
 
@@ -120,15 +133,18 @@ _scan_and_copy(const char *exp, char stop1, char stop2, char *dest)
 
     for (sx = 0; (cc = exp[sx]) && cc != stop1 && cc != stop2; sx++) {
         if (cc == '\\') {
-            if (!exp[++sx])
+            if (!exp[++sx]) {
                 return ABORTED; /* should be impossible */
+}
         } else if (cc == '[') {
             while ((cc = exp[++sx]) && cc != ']') {
-                if (cc == '\\' && !exp[++sx])
+                if (cc == '\\' && !exp[++sx]) {
                     return ABORTED;
+}
             }
-            if (!cc)
+            if (!cc) {
                 return ABORTED; /* should be impossible */
+}
         }
     }
     if (dest && sx) {
@@ -159,12 +175,14 @@ _handle_union(const char *str, const char *exp, PRBool case_insensitive,
 
     /* Find the closing parenthesis that ends this union in the expression */
     cp = _scan_and_copy(exp, ')', '\0', NULL);
-    if (cp == ABORTED || cp < 4) /* must be at least "(a|b" before ')' */
+    if (cp == ABORTED || cp < 4) { /* must be at least "(a|b" before ')' */
         return ABORTED;
+}
     ++cp; /* now index of char after closing parenthesis */
     e2 = (char *)PORT_Alloc(1 + strlen(exp));
-    if (!e2)
+    if (!e2) {
         return ABORTED;
+}
     for (sx = 1;; ++sx) {
         /* Here, exp[sx] is one character past the preceding '(' or '|'. */
         /* Copy everything up to the next delimiter to e2 */
@@ -177,12 +195,14 @@ _handle_union(const char *str, const char *exp, PRBool case_insensitive,
         /* Append everything after closing parenthesis to e2. This is safe. */
         strcpy(e2 + count, exp + cp);
         ret = _shexp_match(str, e2, case_insensitive, level + 1);
-        if (ret != NOMATCH || !exp[sx] || exp[sx] == ')')
+        if (ret != NOMATCH || !exp[sx] || exp[sx] == ')') {
             break;
+}
     }
     PORT_Free(e2);
-    if (sx < 2)
+    if (sx < 2) {
         ret = ABORTED;
+}
     return ret;
 }
 
@@ -192,8 +212,9 @@ _is_char_in_range(int start, int end, int val)
 {
     char map[256];
     memset(map, 0, sizeof map);
-    while (start <= end)
+    while (start <= end) {
         map[tolower(start++)] = 1;
+}
     return map[tolower(val)];
 }
 
@@ -205,23 +226,26 @@ _shexp_match(const char *str, const char *exp, PRBool case_insensitive,
     register int y; /* expression index */
     int ret, neg;
 
-    if (level > 20) /* Don't let the stack get too deep. */
+    if (level > 20) { /* Don't let the stack get too deep. */
         return ABORTED;
+}
     for (x = 0, y = 0; exp[y]; ++y, ++x) {
         if ((!str[x]) && (exp[y] != '$') && (exp[y] != '*')) {
             return NOMATCH;
         }
         switch (exp[y]) {
             case '$':
-                if (str[x])
+                if (str[x]) {
                     return NOMATCH;
+}
                 --x; /* we don't want loop to increment x */
                 break;
             case '*':
                 while (exp[++y] == '*') {
                 }
-                if (!exp[y])
+                if (!exp[y]) {
                     return MATCH;
+}
                 while (str[x]) {
                     ret = _shexp_match(&str[x++], &exp[y], case_insensitive,
                                        level + 1);
@@ -234,23 +258,27 @@ _shexp_match(const char *str, const char *exp, PRBool case_insensitive,
                             return MATCH;
                     }
                 }
-                if ((exp[y] == '$') && (exp[y + 1] == '\0') && (!str[x]))
+                if ((exp[y] == '$') && (exp[y + 1] == '\0') && (!str[x])) {
                     return MATCH;
-                else
+                } else {
                     return NOMATCH;
+}
             case '[': {
                 int start, end = 0, i;
                 neg = ((exp[++y] == '^') && (exp[y + 1] != ']'));
-                if (neg)
+                if (neg) {
                     ++y;
+}
                 i = y;
                 start = (unsigned char)(exp[i++]);
-                if (start == '\\')
+                if (start == '\\') {
                     start = (unsigned char)(exp[i++]);
+}
                 if (isalnum(start) && exp[i++] == '-') {
                     end = (unsigned char)(exp[i++]);
-                    if (end == '\\')
+                    if (end == '\\') {
                         end = (unsigned char)(exp[i++]);
+}
                 }
                 if (isalnum(end) && exp[i] == ']') {
                     /* This is a range form: a-b */
@@ -262,8 +290,9 @@ _shexp_match(const char *str, const char *exp, PRBool case_insensitive,
                     }
                     if (case_insensitive && isalpha(val)) {
                         val = _is_char_in_range(start, end, val);
-                        if (neg == val)
+                        if (neg == val) {
                             return NOMATCH;
+}
                     } else if (neg != ((val < start) || (val > end))) {
                         return NOMATCH;
                     }
@@ -272,21 +301,24 @@ _shexp_match(const char *str, const char *exp, PRBool case_insensitive,
                     /* Not range form */
                     int matched = 0;
                     for (; exp[y] != ']'; y++) {
-                        if (exp[y] == '\\')
+                        if (exp[y] == '\\') {
                             ++y;
+}
                         if (case_insensitive) {
                             matched |= (toupper(str[x]) == toupper(exp[y]));
                         } else {
                             matched |= (str[x] == exp[y]);
                         }
                     }
-                    if (neg == matched)
+                    if (neg == matched) {
                         return NOMATCH;
+}
                 }
             } break;
             case '(':
-                if (!exp[y + 1])
+                if (!exp[y + 1]) {
                     return ABORTED;
+}
                 return _handle_union(&str[x], &exp[y], case_insensitive, level);
             case '?':
                 break;
@@ -299,11 +331,13 @@ _shexp_match(const char *str, const char *exp, PRBool case_insensitive,
             /* fall through */
             default:
                 if (case_insensitive) {
-                    if (toupper(str[x]) != toupper(exp[y]))
+                    if (toupper(str[x]) != toupper(exp[y])) {
                         return NOMATCH;
+}
                 } else {
-                    if (str[x] != exp[y])
+                    if (str[x] != exp[y]) {
                         return NOMATCH;
+}
                 }
                 break;
         }
@@ -317,12 +351,14 @@ port_RegExpMatch(const char *str, const char *xp, PRBool case_insensitive)
     char *exp = 0;
     int x, ret = MATCH;
 
-    if (!strchr(xp, '~'))
+    if (!strchr(xp, '~')) {
         return _shexp_match(str, xp, case_insensitive, 0);
+}
 
     exp = PORT_Strdup(xp);
-    if (!exp)
+    if (!exp) {
         return NOMATCH;
+}
 
     x = _scan_and_copy(exp, '~', '\0', NULL);
     if (x != ABORTED && exp[x] == '~') {
@@ -339,8 +375,9 @@ port_RegExpMatch(const char *str, const char *xp, PRBool case_insensitive)
                 break;
         }
     }
-    if (ret == MATCH)
+    if (ret == MATCH) {
         ret = _shexp_match(str, exp, case_insensitive, 0);
+}
 
     PORT_Free(exp);
     return ret;

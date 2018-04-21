@@ -222,8 +222,9 @@ void TransportLayerIce::IcePacketReceived(NrIceMediaStream *stream, int componen
   CheckThread();
   // We get packets for both components, so ignore the ones that aren't
   // for us.
-  if (component_ != component)
+  if (component_ != component) {
     return;
+}
 
   MOZ_MTLOG(ML_DEBUG, LAYER_INFO << "PacketReceived(" << stream->name() << ","
     << component << "," << len << ")");

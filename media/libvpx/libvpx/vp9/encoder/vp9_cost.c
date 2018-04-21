@@ -46,10 +46,11 @@ static void cost(int *costs, vpx_tree tree, const vpx_prob *probs, int i,
     const int cc = c + vp9_cost_bit(prob, b);
     const vpx_tree_index ii = tree[i + b];
 
-    if (ii <= 0)
+    if (ii <= 0) {
       costs[-ii] = cc;
-    else
+    } else {
       cost(costs, tree, probs, ii, cc);
+}
   }
 }
 

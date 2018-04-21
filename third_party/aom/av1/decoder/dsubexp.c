@@ -16,7 +16,8 @@
 #include "av1/decoder/dsubexp.h"
 
 static int inv_recenter_nonneg(int v, int m) {
-  if (v > 2 * m) return v;
+  if (v > 2 * m) { return v;
+}
 
   return (v & 1) ? m - ((v + 1) >> 1) : m + (v >> 1);
 }
@@ -65,12 +66,15 @@ static int inv_remap_prob(int v, int m) {
 }
 
 static int decode_term_subexp_(aom_reader *r ACCT_STR_PARAM) {
-  if (!aom_read_bit(r, ACCT_STR_NAME))
+  if (!aom_read_bit(r, ACCT_STR_NAME)) {
     return aom_read_literal(r, 4, ACCT_STR_NAME);
-  if (!aom_read_bit(r, ACCT_STR_NAME))
+}
+  if (!aom_read_bit(r, ACCT_STR_NAME)) {
     return aom_read_literal(r, 4, ACCT_STR_NAME) + 16;
-  if (!aom_read_bit(r, ACCT_STR_NAME))
+}
+  if (!aom_read_bit(r, ACCT_STR_NAME)) {
     return aom_read_literal(r, 5, ACCT_STR_NAME) + 32;
+}
   return decode_uniform(r, ACCT_STR_NAME) + 64;
 }
 

@@ -122,8 +122,9 @@ nsslowcert_dataStart(unsigned char *buf, unsigned int length,
         *data_length = length - used_length;
         return NULL;
     }
-    if (includeTag)
+    if (includeTag) {
         *data_length += used_length;
+}
 
     return (buf + (includeTag ? 0 : used_length));
 }
@@ -153,15 +154,17 @@ nsslowcert_GetValidityFields(unsigned char *buf, int buf_length,
     unsigned char tagtype;
     notBefore->data = nsslowcert_dataStart(buf, buf_length,
                                            &notBefore->len, PR_FALSE, &tagtype);
-    if (notBefore->data == NULL)
+    if (notBefore->data == NULL) {
         return SECFailure;
+}
     SetTimeType(notBefore, tagtype);
     buf_length -= (notBefore->data - buf) + notBefore->len;
     buf = notBefore->data + notBefore->len;
     notAfter->data = nsslowcert_dataStart(buf, buf_length,
                                           &notAfter->len, PR_FALSE, &tagtype);
-    if (notAfter->data == NULL)
+    if (notAfter->data == NULL) {
         return SECFailure;
+}
     SetTimeType(notAfter, tagtype);
     return SECSuccess;
 }
@@ -178,17 +181,20 @@ nsslowcert_GetCertFields(unsigned char *cert, int cert_length,
 
     /* get past the signature wrap */
     buf = nsslowcert_dataStart(cert, cert_length, &buf_length, PR_FALSE, NULL);
-    if (buf == NULL)
+    if (buf == NULL) {
         return SECFailure;
+}
     /* get into the raw cert data */
     buf = nsslowcert_dataStart(buf, buf_length, &buf_length, PR_FALSE, NULL);
-    if (buf == NULL)
+    if (buf == NULL) {
         return SECFailure;
+}
     /* skip past any optional version number */
     if ((buf[0] & 0xa0) == 0xa0) {
         dummy = nsslowcert_dataStart(buf, buf_length, &dummylen, PR_FALSE, NULL);
-        if (dummy == NULL)
+        if (dummy == NULL) {
             return SECFailure;
+}
         buf_length -= (dummy - buf) + dummylen;
         buf = dummy + dummylen;
     }
@@ -200,20 +206,23 @@ nsslowcert_GetCertFields(unsigned char *cert, int cert_length,
          * whether or not the tags are included in the returned buffer */
     }
     serial->data = nsslowcert_dataStart(buf, buf_length, &serial->len, PR_FALSE, NULL);
-    if (serial->data == NULL)
+    if (serial->data == NULL) {
         return SECFailure;
+}
     buf_length -= (serial->data - buf) + serial->len;
     buf = serial->data + serial->len;
     /* skip the OID */
     dummy = nsslowcert_dataStart(buf, buf_length, &dummylen, PR_FALSE, NULL);
-    if (dummy == NULL)
+    if (dummy == NULL) {
         return SECFailure;
+}
     buf_length -= (dummy - buf) + dummylen;
     buf = dummy + dummylen;
     /* issuer */
     issuer->data = nsslowcert_dataStart(buf, buf_length, &issuer->len, PR_TRUE, NULL);
-    if (issuer->data == NULL)
+    if (issuer->data == NULL) {
         return SECFailure;
+}
     buf_length -= (issuer->data - buf) + issuer->len;
     buf = issuer->data + issuer->len;
 
@@ -223,20 +232,23 @@ nsslowcert_GetCertFields(unsigned char *cert, int cert_length,
     }
     /* validity */
     valid->data = nsslowcert_dataStart(buf, buf_length, &valid->len, PR_FALSE, NULL);
-    if (valid->data == NULL)
+    if (valid->data == NULL) {
         return SECFailure;
+}
     buf_length -= (valid->data - buf) + valid->len;
     buf = valid->data + valid->len;
     /*subject */
     subject->data = nsslowcert_dataStart(buf, buf_length, &subject->len, PR_TRUE, NULL);
-    if (subject->data == NULL)
+    if (subject->data == NULL) {
         return SECFailure;
+}
     buf_length -= (subject->data - buf) + subject->len;
     buf = subject->data + subject->len;
     /* subject  key info */
     subjkey->data = nsslowcert_dataStart(buf, buf_length, &subjkey->len, PR_TRUE, NULL);
-    if (subjkey->data == NULL)
+    if (subjkey->data == NULL) {
         return SECFailure;
+}
     buf_length -= (subjkey->data - buf) + subjkey->len;
     buf = subjkey->data + subjkey->len;
 
@@ -250,22 +262,25 @@ nsslowcert_GetCertFields(unsigned char *cert, int cert_length,
             /* if the DER is bad, we should fail. Previously we accepted
              * bad DER here and treated the extension as missin */
             if (extensions->data == NULL ||
-                (extensions->data - buf) + extensions->len != buf_length)
+                (extensions->data - buf) + extensions->len != buf_length) {
                 return SECFailure;
+}
             buf = extensions->data;
             buf_length = extensions->len;
             /* now parse the SEQUENCE holding the extensions. */
             dummy = nsslowcert_dataStart(buf, buf_length, &dummylen, PR_FALSE, NULL);
             if (dummy == NULL ||
-                (dummy - buf) + dummylen != buf_length)
+                (dummy - buf) + dummylen != buf_length) {
                 return SECFailure;
+}
             buf_length -= (dummy - buf);
             buf = dummy;
             /* Now parse the extensions inside this sequence */
         }
         dummy = nsslowcert_dataStart(buf, buf_length, &dummylen, PR_FALSE, NULL);
-        if (dummy == NULL)
+        if (dummy == NULL) {
             return SECFailure;
+}
         buf_length -= (dummy - buf) + dummylen;
         buf = dummy + dummylen;
     }
@@ -423,8 +438,9 @@ nsslowcert_EmailName(SECItem *derDN, char *space, unsigned int len)
 
     /* unwrap outer sequence */
     buf = nsslowcert_dataStart(derDN->data, derDN->len, &buf_length, PR_FALSE, NULL);
-    if (buf == NULL)
+    if (buf == NULL) {
         return NULL;
+}
 
     /* Walk each RDN */
     while (buf_length > 0) {
@@ -452,8 +468,9 @@ nsslowcert_EmailName(SECItem *derDN, char *space, unsigned int len)
             /* unwrap the ava */
             ava = nsslowcert_dataStart(rdn, rdn_length, &ava_length, PR_FALSE,
                                        NULL);
-            if (ava == NULL)
+            if (ava == NULL) {
                 return NULL;
+}
             rdn_length -= (ava - rdn) + ava_length;
             rdn = ava + ava_length;
 
@@ -762,8 +779,9 @@ nsslowcert_ExtractPublicKey(NSSLOWCERTCertificate *cert)
     SECItem newDerSubjKeyInfo;
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
 
     pubk = (NSSLOWKEYPublicKey *)
         PORT_ArenaZAlloc(arena, sizeof(NSSLOWKEYPublicKey));
@@ -804,24 +822,27 @@ nsslowcert_ExtractPublicKey(NSSLOWCERTCertificate *cert)
             prepare_low_rsa_pub_key_for_asn1(pubk);
             rv = SEC_QuickDERDecodeItem(arena, pubk,
                                         nsslowcert_RSAPublicKeyTemplate, &os);
-            if (rv == SECSuccess)
+            if (rv == SECSuccess) {
                 return pubk;
+}
             break;
         case SEC_OID_ANSIX9_DSA_SIGNATURE:
             pubk->keyType = NSSLOWKEYDSAKey;
             prepare_low_dsa_pub_key_for_asn1(pubk);
             rv = SEC_QuickDERDecodeItem(arena, pubk,
                                         nsslowcert_DSAPublicKeyTemplate, &os);
-            if (rv == SECSuccess)
+            if (rv == SECSuccess) {
                 return pubk;
+}
             break;
         case SEC_OID_X942_DIFFIE_HELMAN_KEY:
             pubk->keyType = NSSLOWKEYDHKey;
             prepare_low_dh_pub_key_for_asn1(pubk);
             rv = SEC_QuickDERDecodeItem(arena, pubk,
                                         nsslowcert_DHPublicKeyTemplate, &os);
-            if (rv == SECSuccess)
+            if (rv == SECSuccess) {
                 return pubk;
+}
             break;
         case SEC_OID_ANSIX962_EC_PUBLIC_KEY:
             pubk->keyType = NSSLOWKEYECKey;
@@ -830,19 +851,22 @@ nsslowcert_ExtractPublicKey(NSSLOWCERTCertificate *cert)
              */
             rv = SECITEM_CopyItem(arena, &pubk->u.ec.ecParams.DEREncoding,
                                   &spki.algorithm.parameters);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
 
             /* Fill out the rest of the ecParams structure
              * based on the encoded params
              */
             if (LGEC_FillParams(arena, &pubk->u.ec.ecParams.DEREncoding,
-                                &pubk->u.ec.ecParams) != SECSuccess)
+                                &pubk->u.ec.ecParams) != SECSuccess) {
                 break;
+}
 
             rv = SECITEM_CopyItem(arena, &pubk->u.ec.publicValue, &os);
-            if (rv == SECSuccess)
+            if (rv == SECSuccess) {
                 return pubk;
+}
             break;
         default:
             rv = SECFailure;

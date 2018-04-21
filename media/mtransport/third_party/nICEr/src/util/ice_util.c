@@ -54,8 +54,9 @@ int nr_concat_strings(char **outp,...)
     va_end(ap);
 
 
-    if(!(out=RMALLOC(len+1)))
+    if(!(out=RMALLOC(len+1))) {
       ABORT(R_NO_MEMORY);
+}
 
     *outp=out;
 

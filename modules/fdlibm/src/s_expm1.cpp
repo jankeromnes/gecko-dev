@@ -145,15 +145,18 @@ expm1(double x)
                 if(hx>=0x7ff00000) {
 		    u_int32_t low;
 		    GET_LOW_WORD(low,x);
-		    if(((hx&0xfffff)|low)!=0)
+		    if(((hx&0xfffff)|low)!=0) {
 		         return x+x; 	 /* NaN */
-		    else return (xsb==0)? x:-1.0;/* exp(+-inf)={inf,-1} */
+		    } else { return (xsb==0)? x:-1.0;/* exp(+-inf)={inf,-1} */
+}
 	        }
-	        if(x > o_threshold) return huge*huge; /* overflow */
+	        if(x > o_threshold) { return huge*huge; /* overflow */
+}
 	    }
 	    if(xsb!=0) { /* x < -56*ln2, return -1.0 with inexact */
-		if(x+tiny<0.0)		/* raise inexact */
+		if(x+tiny<0.0) {		/* raise inexact */
 		return tiny-one;	/* return -1 */
+}
 	    }
 	}
 
@@ -177,7 +180,8 @@ expm1(double x)
 	    t = huge+x;	/* return x with inexact flags when x!=0 */
 	    return x - (t-(huge+x));
 	}
-	else k = 0;
+	else { k = 0;
+}
 
     /* x is now in primary range */
 	hfx = 0.5*x;
@@ -185,15 +189,17 @@ expm1(double x)
 	r1 = one+hxs*(Q1+hxs*(Q2+hxs*(Q3+hxs*(Q4+hxs*Q5))));
 	t  = 3.0-r1*hfx;
 	e  = hxs*((r1-t)/(6.0 - x*t));
-	if(k==0) return x - (x*e-hxs);		/* c is 0 */
-	else {
+	if(k==0) { return x - (x*e-hxs);		/* c is 0 */
+	} else {
 	    INSERT_WORDS(twopk,0x3ff00000+(k<<20),0);	/* 2^k */
 	    e  = (x*(e-c)-c);
 	    e -= hxs;
-	    if(k== -1) return 0.5*(x-e)-0.5;
+	    if(k== -1) { return 0.5*(x-e)-0.5;
+}
 	    if(k==1) {
-	       	if(x < -0.25) return -2.0*(e-(x+0.5));
-	       	else 	      return  one+2.0*(x-e);
+	       	if(x < -0.25) { return -2.0*(e-(x+0.5));
+	       	} else { 	      return  one+2.0*(x-e);
+}
 	    }
 	    if (k <= -2 || k>56) {   /* suffice to return exp(x)-1 */
 	        y = one-(e-x);
@@ -201,7 +207,8 @@ expm1(double x)
 		    double const_0x1p1023 = pow(2, 1023);
 		    y = y*2.0*const_0x1p1023;
 		}
-		else y = y*twopk;
+		else { y = y*twopk;
+}
 	        return y-one;
 	    }
 	    t = one;

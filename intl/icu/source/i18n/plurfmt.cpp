@@ -206,7 +206,8 @@ PluralFormat::format(const Formattable& obj,
                    FieldPosition& pos,
                    UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return appendTo;
+    if (U_FAILURE(status)) { return appendTo;
+}
 
     if (obj.isNumeric()) {
         return format(obj, obj.getDouble(), appendTo, pos, status);

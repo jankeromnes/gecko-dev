@@ -221,9 +221,10 @@ ReSampleContext *av_audio_resample_init(int output_channels, int input_channels,
         av_log(NULL, AV_LOG_ERROR, "Unsupported audio resampling. Allowed "
                "output channels for %d input channel%s", input_channels,
                input_channels > 1 ? "s:" : ":");
-        for (i = 0; i < MAX_CHANNELS; i++)
-            if (supported_resampling[input_channels-1] & (1<<i))
+        for (i = 0; i < MAX_CHANNELS; i++) {
+            if (supported_resampling[input_channels-1] & (1<<i)) {
                 av_log(NULL, AV_LOG_ERROR, " %d", i + 1);
+}
         av_log(NULL, AV_LOG_ERROR, "\n");
         return NULL;
     }
@@ -240,8 +241,9 @@ ReSampleContext *av_audio_resample_init(int output_channels, int input_channels,
     s->output_channels = output_channels;
 
     s->filter_channels = s->input_channels;
-    if (s->output_channels < s->filter_channels)
+    if (s->output_channels < s->filter_channels) {
         s->filter_channels = s->output_channels;
+}
 
     s->sample_fmt[0]  = sample_fmt_in;
     s->sample_fmt[1]  = sample_fmt_out;
@@ -426,8 +428,9 @@ void audio_resample_close(ReSampleContext *s)
 {
     int i;
     av_resample_close(s->resample_context);
-    for (i = 0; i < s->filter_channels; i++)
+    for (i = 0; i < s->filter_channels; i++) {
         av_freep(&s->temp[i]);
+}
     av_freep(&s->buffer[0]);
     av_freep(&s->buffer[1]);
     av_audio_convert_free(s->convert_ctx[0]);

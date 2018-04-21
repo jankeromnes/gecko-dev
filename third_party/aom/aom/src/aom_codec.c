@@ -57,8 +57,9 @@ const char *aom_codec_error(aom_codec_ctx_t *ctx) {
 }
 
 const char *aom_codec_error_detail(aom_codec_ctx_t *ctx) {
-  if (ctx && ctx->err)
+  if (ctx && ctx->err) {
     return ctx->priv ? ctx->priv->err_detail : ctx->err_detail;
+}
 
   return NULL;
 }
@@ -66,11 +67,11 @@ const char *aom_codec_error_detail(aom_codec_ctx_t *ctx) {
 aom_codec_err_t aom_codec_destroy(aom_codec_ctx_t *ctx) {
   aom_codec_err_t res;
 
-  if (!ctx)
+  if (!ctx) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv)
+  } else if (!ctx->iface || !ctx->priv) {
     res = AOM_CODEC_ERROR;
-  else {
+  } else {
     ctx->iface->destroy((aom_codec_alg_priv_t *)ctx->priv);
 
     ctx->iface = NULL;
@@ -89,11 +90,11 @@ aom_codec_caps_t aom_codec_get_caps(aom_codec_iface_t *iface) {
 aom_codec_err_t aom_codec_control_(aom_codec_ctx_t *ctx, int ctrl_id, ...) {
   aom_codec_err_t res;
 
-  if (!ctx || !ctrl_id)
+  if (!ctx || !ctrl_id) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv || !ctx->iface->ctrl_maps)
+  } else if (!ctx->iface || !ctx->priv || !ctx->iface->ctrl_maps) {
     res = AOM_CODEC_ERROR;
-  else {
+  } else {
     aom_codec_ctrl_fn_map_t *entry;
 
     res = AOM_CODEC_ERROR;
@@ -130,7 +131,8 @@ void aom_internal_error(struct aom_internal_error_info *info,
     info->detail[sz - 1] = '\0';
   }
 
-  if (info->setjmp) longjmp(info->jmp, info->error_code);
+  if (info->setjmp) { longjmp(info->jmp, info->error_code);
+}
 }
 
 void aom_merge_corrupted_flag(int *corrupted, int value) {

@@ -75,8 +75,9 @@ NSSRWLock_New(PRUint32 lock_rank, const char *lock_name)
     NSSRWLock *rwlock;
 
     rwlock = PR_NEWZAP(NSSRWLock);
-    if (rwlock == NULL)
+    if (rwlock == NULL) {
         return NULL;
+}
 
     rwlock->rw_lock = PZ_NewLock(nssILockRWLock);
     if (rwlock->rw_lock == NULL) {
@@ -125,14 +126,18 @@ NSSRWLock_Destroy(NSSRWLock *rwlock)
 
     /* XXX Shouldn't we lock the PZLock before destroying this?? */
 
-    if (rwlock->rw_name)
+    if (rwlock->rw_name) {
         PR_Free(rwlock->rw_name);
-    if (rwlock->rw_reader_waitq)
+}
+    if (rwlock->rw_reader_waitq) {
         PZ_DestroyCondVar(rwlock->rw_reader_waitq);
-    if (rwlock->rw_writer_waitq)
+}
+    if (rwlock->rw_writer_waitq) {
         PZ_DestroyCondVar(rwlock->rw_writer_waitq);
-    if (rwlock->rw_lock)
+}
+    if (rwlock->rw_lock) {
         PZ_DestroyLock(rwlock->rw_lock);
+}
     PR_DELETE(rwlock);
 }
 
@@ -275,8 +280,9 @@ NSSRWLock_UnlockWrite(NSSRWLock *rwlock)
 
         /* Give preference to waiting writers. */
         if (rwlock->rw_waiting_writers > 0) {
-            if (rwlock->rw_reader_locks == 0)
+            if (rwlock->rw_reader_locks == 0) {
                 PZ_NotifyCondVar(rwlock->rw_writer_waitq);
+}
         } else if (rwlock->rw_waiting_readers > 0) {
             PZ_NotifyAllCondVar(rwlock->rw_reader_waitq);
         }

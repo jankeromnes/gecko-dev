@@ -151,7 +151,8 @@ void av1_temporal_filter_apply_c(uint8_t *frame1, unsigned int stride,
       assert(index > 0);
 
       modifier = 0;
-      for (idx = 0; idx < 9; ++idx) modifier += diff_sse[idx];
+      for (idx = 0; idx < 9; ++idx) { modifier += diff_sse[idx];
+}
 
       modifier *= 3;
       modifier /= index;
@@ -161,7 +162,8 @@ void av1_temporal_filter_apply_c(uint8_t *frame1, unsigned int stride,
       modifier += rounding;
       modifier >>= strength;
 
-      if (modifier > 16) modifier = 16;
+      if (modifier > 16) { modifier = 16;
+}
 
       modifier = 16 - modifier;
       modifier *= filter_weight;
@@ -214,7 +216,8 @@ void av1_highbd_temporal_filter_apply_c(
       assert(index > 0);
 
       modifier = 0;
-      for (idx = 0; idx < 9; ++idx) modifier += diff_sse[idx];
+      for (idx = 0; idx < 9; ++idx) { modifier += diff_sse[idx];
+}
 
       modifier *= 3;
       modifier /= index;
@@ -224,7 +227,8 @@ void av1_highbd_temporal_filter_apply_c(
       modifier += rounding;
       modifier >>= strength;
 
-      if (modifier > 16) modifier = 16;
+      if (modifier > 16) { modifier = 16;
+}
 
       modifier = 16 - modifier;
       modifier *= filter_weight;
@@ -362,7 +366,8 @@ static void temporal_filter_iterate_c(AV1_COMP *cpi,
   }
 #endif
 
-  for (i = 0; i < MAX_MB_PLANE; i++) input_buffer[i] = mbd->plane[i].pre[0].buf;
+  for (i = 0; i < MAX_MB_PLANE; i++) { input_buffer[i] = mbd->plane[i].pre[0].buf;
+}
 
   for (mb_row = 0; mb_row < mb_rows; mb_row++) {
     // Source frames are extended to 16 pixels. This is different than
@@ -397,7 +402,8 @@ static void temporal_filter_iterate_c(AV1_COMP *cpi,
         const int thresh_low = 10000;
         const int thresh_high = 20000;
 
-        if (frames[frame] == NULL) continue;
+        if (frames[frame] == NULL) { continue;
+}
 
         mbd->mi[0]->bmi[0].as_mv[0].as_mv.row = 0;
         mbd->mi[0]->bmi[0].as_mv[0].as_mv.col = 0;
@@ -571,7 +577,8 @@ static void temporal_filter_iterate_c(AV1_COMP *cpi,
   }
 
   // Restore input state
-  for (i = 0; i < MAX_MB_PLANE; i++) mbd->plane[i].pre[0].buf = input_buffer[i];
+  for (i = 0; i < MAX_MB_PLANE; i++) { mbd->plane[i].pre[0].buf = input_buffer[i];
+}
 }
 
 // Apply buffer limits and context specific adjustments to arnr filter.
@@ -585,30 +592,35 @@ static void adjust_arnr_filter(AV1_COMP *cpi, int distance, int group_boost,
   int q, frames, strength;
 
   // Define the forward and backwards filter limits for this arnr group.
-  if (frames_fwd > frames_after_arf) frames_fwd = frames_after_arf;
-  if (frames_fwd > distance) frames_fwd = distance;
+  if (frames_fwd > frames_after_arf) { frames_fwd = frames_after_arf;
+}
+  if (frames_fwd > distance) { frames_fwd = distance;
+}
 
   frames_bwd = frames_fwd;
 
   // For even length filter there is one more frame backward
   // than forward: e.g. len=6 ==> bbbAff, len=7 ==> bbbAfff.
-  if (frames_bwd < distance) frames_bwd += (oxcf->arnr_max_frames + 1) & 0x1;
+  if (frames_bwd < distance) { frames_bwd += (oxcf->arnr_max_frames + 1) & 0x1;
+}
 
   // Set the baseline active filter size.
   frames = frames_bwd + 1 + frames_fwd;
 
   // Adjust the strength based on active max q.
-  if (cpi->common.current_video_frame > 1)
+  if (cpi->common.current_video_frame > 1) {
     q = ((int)av1_convert_qindex_to_q(cpi->rc.avg_frame_qindex[INTER_FRAME],
                                       cpi->common.bit_depth));
-  else
+  } else {
     q = ((int)av1_convert_qindex_to_q(cpi->rc.avg_frame_qindex[KEY_FRAME],
                                       cpi->common.bit_depth));
+}
   if (q > 16) {
     strength = oxcf->arnr_strength;
   } else {
     strength = oxcf->arnr_strength - ((16 - q) / 2);
-    if (strength < 0) strength = 0;
+    if (strength < 0) { strength = 0;
+}
   }
 
   // Adjust number of frames in filter and strength based on gf boost level.
@@ -681,10 +693,11 @@ void av1_temporal_filter(AV1_COMP *cpi,
 #endif  // USE_GF16_MULTI_LAYER
 
   // Set the temporal filtering status for the corresponding OVERLAY frame
-  if (strength == 0 && frames_to_blur == 1)
+  if (strength == 0 && frames_to_blur == 1) {
     cpi->is_arf_filter_off[which_arf] = 1;
-  else
+  } else {
     cpi->is_arf_filter_off[which_arf] = 0;
+}
 #endif  // CONFIG_EXT_REFS
 
   frames_to_blur_backward = (frames_to_blur / 2);

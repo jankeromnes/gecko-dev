@@ -255,37 +255,44 @@ der_TimeStringToTime(PRTime *dst, const char *string, int generalized,
     genTime.tm_year += century * 100;
 
     CAPTURE(genTime.tm_month, string, loser);
-    if ((genTime.tm_month == 0) || (genTime.tm_month > 12))
+    if ((genTime.tm_month == 0) || (genTime.tm_month > 12)) {
         goto loser;
+}
 
     /* NSPR month base is 0 */
     --genTime.tm_month;
 
     CAPTURE(genTime.tm_mday, string, loser);
-    if ((genTime.tm_mday == 0) || (genTime.tm_mday > 31))
+    if ((genTime.tm_mday == 0) || (genTime.tm_mday > 31)) {
         goto loser;
+}
 
     CAPTURE(genTime.tm_hour, string, loser);
-    if (genTime.tm_hour > 23)
+    if (genTime.tm_hour > 23) {
         goto loser;
+}
 
     CAPTURE(genTime.tm_min, string, loser);
-    if (genTime.tm_min > 59)
+    if (genTime.tm_min > 59) {
         goto loser;
+}
 
     if (ISDIGIT(string[0])) {
         CAPTURE(genTime.tm_sec, string, loser);
-        if (genTime.tm_sec > 59)
+        if (genTime.tm_sec > 59) {
             goto loser;
+}
     }
     signum = *string++;
     if (signum == '+' || signum == '-') {
         CAPTURE(hourOff, string, loser);
-        if (hourOff > 23)
+        if (hourOff > 23) {
             goto loser;
+}
         CAPTURE(minOff, string, loser);
-        if (minOff > 59)
+        if (minOff > 59) {
             goto loser;
+}
         if (signum == '-') {
             hourOff = -hourOff;
             minOff = -minOff;
@@ -294,8 +301,9 @@ der_TimeStringToTime(PRTime *dst, const char *string, int generalized,
         goto loser;
     }
 
-    if (endptr)
+    if (endptr) {
         *endptr = string;
+}
 
     /* Convert the GMT offset to seconds and save it in genTime
      * for the implode time call.

@@ -501,14 +501,17 @@ bool EmulatePrecision::visitBinary(Visit visit, TIntermBinary *node)
     TOperator op = node->getOp();
 
     // RHS of initialize is not being declared.
-    if (op == EOpInitialize && visit == InVisit)
+    if (op == EOpInitialize && visit == InVisit) {
         mDeclaringVariables = false;
+}
 
-    if ((op == EOpIndexDirectStruct) && visit == InVisit)
+    if ((op == EOpIndexDirectStruct) && visit == InVisit) {
         visitChildren = false;
+}
 
-    if (visit != PreVisit)
+    if (visit != PreVisit) {
         return visitChildren;
+}
 
     const TType &type = node->getType();
     bool roundFloat   = canRoundFloat(type);
@@ -625,8 +628,9 @@ bool EmulatePrecision::visitFunctionPrototype(Visit visit, TIntermFunctionProtot
 
 bool EmulatePrecision::visitAggregate(Visit visit, TIntermAggregate *node)
 {
-    if (visit != PreVisit)
+    if (visit != PreVisit) {
         return true;
+}
 
     // User-defined function return values are not rounded. The calculations that produced
     // the value inside the function definition should have been rounded.
@@ -681,14 +685,18 @@ void EmulatePrecision::writeEmulationHelpers(TInfoSinkBase &sink,
     roundingHelperWriter->writeCommonRoundingHelpers(sink, shaderVersion);
 
     EmulationSet::const_iterator it;
-    for (it = mEmulateCompoundAdd.begin(); it != mEmulateCompoundAdd.end(); it++)
+    for (it = mEmulateCompoundAdd.begin(); it != mEmulateCompoundAdd.end(); it++) {
         roundingHelperWriter->writeCompoundAssignmentHelper(sink, it->lType, it->rType, "+", "add");
-    for (it = mEmulateCompoundSub.begin(); it != mEmulateCompoundSub.end(); it++)
+}
+    for (it = mEmulateCompoundSub.begin(); it != mEmulateCompoundSub.end(); it++) {
         roundingHelperWriter->writeCompoundAssignmentHelper(sink, it->lType, it->rType, "-", "sub");
-    for (it = mEmulateCompoundDiv.begin(); it != mEmulateCompoundDiv.end(); it++)
+}
+    for (it = mEmulateCompoundDiv.begin(); it != mEmulateCompoundDiv.end(); it++) {
         roundingHelperWriter->writeCompoundAssignmentHelper(sink, it->lType, it->rType, "/", "div");
-    for (it = mEmulateCompoundMul.begin(); it != mEmulateCompoundMul.end(); it++)
+}
+    for (it = mEmulateCompoundMul.begin(); it != mEmulateCompoundMul.end(); it++) {
         roundingHelperWriter->writeCompoundAssignmentHelper(sink, it->lType, it->rType, "*", "mul");
+}
 }
 
 // static
@@ -730,8 +738,9 @@ const TFunction *EmulatePrecision::getInternalFunction(const ImmutableString &fu
 TIntermAggregate *EmulatePrecision::createRoundingFunctionCallNode(TIntermTyped *roundedChild)
 {
     const ImmutableString *roundFunctionName = &kAngleFrmString;
-    if (roundedChild->getPrecision() == EbpLow)
+    if (roundedChild->getPrecision() == EbpLow) {
         roundFunctionName = &kAngleFrlString;
+}
     TIntermSequence *arguments = new TIntermSequence();
     arguments->push_back(roundedChild);
 
@@ -752,10 +761,11 @@ TIntermAggregate *EmulatePrecision::createCompoundAssignmentFunctionCallNode(TIn
                                                                              const char *opNameStr)
 {
     std::stringstream strstr;
-    if (left->getPrecision() == EbpMedium)
+    if (left->getPrecision() == EbpMedium) {
         strstr << "angle_compound_" << opNameStr << "_frm";
-    else
+    } else {
         strstr << "angle_compound_" << opNameStr << "_frl";
+}
     ImmutableString functionName = ImmutableString(strstr.str());
     TIntermSequence *arguments = new TIntermSequence();
     arguments->push_back(left);

@@ -50,14 +50,17 @@ int nr_stun_server_ctx_create(char *label, nr_socket *sock, nr_stun_server_ctx *
     int r,_status;
     nr_stun_server_ctx *ctx=0;
 
-    if ((r=nr_stun_startup()))
+    if ((r=nr_stun_startup())) {
       ABORT(r);
+}
 
-    if(!(ctx=RCALLOC(sizeof(nr_stun_server_ctx))))
+    if(!(ctx=RCALLOC(sizeof(nr_stun_server_ctx)))) {
       ABORT(R_NO_MEMORY);
+}
 
-    if(!(ctx->label=r_strdup(label)))
+    if(!(ctx->label=r_strdup(label))) {
       ABORT(R_NO_MEMORY);
+}
     ctx->sock=sock;
     nr_socket_getaddr(sock,&ctx->my_addr);
 
@@ -75,8 +78,9 @@ int nr_stun_server_ctx_destroy(nr_stun_server_ctx **ctxp)
     nr_stun_server_ctx *ctx;
     nr_stun_server_client *clnt1,*clnt2;
 
-    if(!ctxp || !*ctxp)
+    if(!ctxp || !*ctxp) {
       return(0);
+}
 
     ctx=*ctxp;
 
@@ -97,17 +101,21 @@ static int nr_stun_server_client_create(nr_stun_server_ctx *ctx, char *client_la
     nr_stun_server_client *clnt=0;
     int r,_status;
 
-    if(!(clnt=RCALLOC(sizeof(nr_stun_server_client))))
+    if(!(clnt=RCALLOC(sizeof(nr_stun_server_client)))) {
       ABORT(R_NO_MEMORY);
+}
 
-    if(!(clnt->label=r_strdup(client_label)))
+    if(!(clnt->label=r_strdup(client_label))) {
       ABORT(R_NO_MEMORY);
+}
 
-    if(!(clnt->username=r_strdup(user)))
+    if(!(clnt->username=r_strdup(user))) {
       ABORT(R_NO_MEMORY);
+}
 
-    if(r=r_data_copy(&clnt->password,pass))
+    if(r=r_data_copy(&clnt->password,pass)) {
       ABORT(r);
+}
 
     r_log(NR_LOG_STUN,LOG_DEBUG,"STUN-SERVER(%s)/CLIENT(%s): Adding client for %s",ctx->label, client_label, user);
     clnt->stun_server_cb=cb;
@@ -127,8 +135,9 @@ int nr_stun_server_add_client(nr_stun_server_ctx *ctx, char *client_label, char 
    int r,_status;
    nr_stun_server_client *clnt;
 
-    if (r=nr_stun_server_client_create(ctx, client_label, user, pass, cb, cb_arg, &clnt))
+    if (r=nr_stun_server_client_create(ctx, client_label, user, pass, cb, cb_arg, &clnt)) {
       ABORT(r);
+}
 
     STAILQ_INSERT_TAIL(&ctx->clients,clnt,entry);
 
@@ -143,11 +152,13 @@ int nr_stun_server_add_default_client(nr_stun_server_ctx *ctx, char *ufrag, Data
     nr_stun_server_client *clnt;
 
     assert(!ctx->default_client);
-    if (ctx->default_client)
+    if (ctx->default_client) {
       ABORT(R_INTERNAL);
+}
 
-    if (r=nr_stun_server_client_create(ctx, "default_client", ufrag, pass, cb, cb_arg, &clnt))
+    if (r=nr_stun_server_client_create(ctx, "default_client", ufrag, pass, cb, cb_arg, &clnt)) {
       ABORT(r);
+}
 
     ctx->default_client = clnt;
 
@@ -169,8 +180,9 @@ int nr_stun_server_remove_client(nr_stun_server_ctx *ctx, void *cb_arg)
       }
     }
 
-    if (!found)
+    if (!found) {
       ERETURN(R_NOT_FOUND);
+}
 
     return 0;
   }
@@ -212,12 +224,14 @@ int nr_stun_server_process_request_auth_checks(nr_stun_server_ctx *ctx, nr_stun_
         /* favor long term credentials over short term, if both are supported */
 
         if (auth_rule & NR_STUN_AUTH_RULE_LONG_TERM) {
-            if ((r=nr_stun_receive_request_long_term_auth(req, ctx, res)))
+            if ((r=nr_stun_receive_request_long_term_auth(req, ctx, res))) {
                 ABORT(r);
+}
         }
         else if (auth_rule & NR_STUN_AUTH_RULE_SHORT_TERM) {
-            if ((r=nr_stun_receive_request_or_indication_short_term_auth(req, res)))
+            if ((r=nr_stun_receive_request_or_indication_short_term_auth(req, res))) {
                 ABORT(r);
+}
         }
     }
 
@@ -244,11 +258,13 @@ int nr_stun_server_process_request(nr_stun_server_ctx *ctx, nr_socket *sock, cha
 
     memset(&info,0,sizeof(info));
 
-    if ((r=nr_stun_message_create2(&req, (UCHAR*)msg, len)))
+    if ((r=nr_stun_message_create2(&req, (UCHAR*)msg, len))) {
         ABORT(r);
+}
 
-    if ((r=nr_stun_message_create(&res)))
+    if ((r=nr_stun_message_create(&res))) {
         ABORT(r);
+}
 
     if ((r=nr_stun_decode_message(req, nr_stun_server_get_password, ctx))) {
         /* RFC5389 S 7.3 says "If any errors are detected, the message is
@@ -290,16 +306,19 @@ int nr_stun_server_process_request(nr_stun_server_ctx *ctx, nr_socket *sock, cha
 
     /* "The STUN agent then does any checks that are required by a
      * authentication mechanism that the usage has specified" */
-    if ((r=nr_stun_server_process_request_auth_checks(ctx, req, auth_rule, res)))
+    if ((r=nr_stun_server_process_request_auth_checks(ctx, req, auth_rule, res))) {
         ABORT(r);
+}
 
     if (NR_STUN_GET_TYPE_CLASS(req->header.type) == NR_CLASS_INDICATION) {
-        if ((r=nr_stun_process_indication(req)))
+        if ((r=nr_stun_process_indication(req))) {
             ABORT(r);
+}
     }
     else {
-        if ((r=nr_stun_process_request(req, res)))
+        if ((r=nr_stun_process_request(req, res))) {
             ABORT(r);
+}
     }
 
     assert(res->header.type == 0);
@@ -307,12 +326,14 @@ int nr_stun_server_process_request(nr_stun_server_ctx *ctx, nr_socket *sock, cha
     clnt = 0;
     if (NR_STUN_GET_TYPE_CLASS(req->header.type) == NR_CLASS_REQUEST) {
         if ((nr_stun_get_message_client(ctx, req, &clnt))) {
-            if ((r=nr_stun_form_success_response(req, peer_addr, 0, res)))
+            if ((r=nr_stun_form_success_response(req, peer_addr, 0, res))) {
                 ABORT(r);
+}
         }
         else {
-            if ((r=nr_stun_form_success_response(req, peer_addr, &clnt->password, res)))
+            if ((r=nr_stun_form_success_response(req, peer_addr, &clnt->password, res))) {
                 ABORT(r);
+}
         }
     }
 
@@ -320,8 +341,9 @@ int nr_stun_server_process_request(nr_stun_server_ctx *ctx, nr_socket *sock, cha
         r_log(NR_LOG_STUN,LOG_DEBUG,"Entering STUN server callback");
 
         /* Set up the info */
-        if(r=nr_transport_addr_copy(&info.src_addr,peer_addr))
+        if(r=nr_transport_addr_copy(&info.src_addr,peer_addr)) {
             ABORT(r);
+}
 
         info.request = req;
         info.response = res;
@@ -329,8 +351,9 @@ int nr_stun_server_process_request(nr_stun_server_ctx *ctx, nr_socket *sock, cha
         error = 0;
         dont_free = 0;
         if (clnt->stun_server_cb(clnt->cb_arg,ctx,sock,&info,&dont_free,&error)) {
-            if (error == 0)
+            if (error == 0) {
                 error = 500;
+}
 
             nr_stun_form_error_response(req, res, error, "ICE Failure");
             ABORT(R_ALREADY);
@@ -339,16 +362,19 @@ int nr_stun_server_process_request(nr_stun_server_ctx *ctx, nr_socket *sock, cha
 
     _status=0;
   abort:
-    if (!res)
+    if (!res) {
         goto skip_response;
+}
 
-    if (NR_STUN_GET_TYPE_CLASS(req->header.type) == NR_CLASS_INDICATION)
+    if (NR_STUN_GET_TYPE_CLASS(req->header.type) == NR_CLASS_INDICATION) {
         goto skip_response;
+}
 
     /* Now respond */
 
-    if (_status != 0 && ! nr_stun_message_has_attribute(res, NR_STUN_ATTR_ERROR_CODE, 0))
+    if (_status != 0 && ! nr_stun_message_has_attribute(res, NR_STUN_ATTR_ERROR_CODE, 0)) {
          nr_stun_form_error_response(req, res, 500, "Failed to specify error");
+}
 
     if ((r=nr_stun_server_send_response(ctx, sock, peer_addr, res, clnt))) {
         r_log(NR_LOG_STUN,LOG_ERR,"STUN-SERVER(label=%s): Failed sending response (my_addr=%s,peer_addr=%s)",ctx->label,ctx->my_addr.as_string,peer_addr->as_string);
@@ -406,8 +432,9 @@ static int nr_stun_server_send_response(nr_stun_server_ctx *ctx, nr_socket *sock
         snprintf(string, sizeof(string)-1, "STUN(%s): Sending to %s ", ctx->label, peer_addr->as_string);
         r_dump(NR_LOG_STUN, LOG_DEBUG, string, (char*)res->buffer, res->length);
 
-        if(r=nr_socket_sendto(sock?sock:ctx->sock,res->buffer,res->length,0,peer_addr))
+        if(r=nr_socket_sendto(sock?sock:ctx->sock,res->buffer,res->length,0,peer_addr)) {
           ABORT(r);
+}
     }
 
     _status=0;
@@ -417,8 +444,9 @@ static int nr_stun_server_send_response(nr_stun_server_ctx *ctx, nr_socket *sock
 
 static int nr_stun_server_destroy_client(nr_stun_server_client *clnt)
   {
-    if (!clnt)
+    if (!clnt) {
       return 0;
+}
 
     RFREE(clnt->label);
     RFREE(clnt->username);
@@ -441,8 +469,9 @@ int nr_stun_get_message_client(nr_stun_server_ctx *ctx, nr_stun_message *req, nr
 
     STAILQ_FOREACH(clnt, &ctx->clients, entry) {
         if (!strncmp(clnt->username, attr->u.username,
-                     sizeof(attr->u.username)))
+                     sizeof(attr->u.username))) {
             break;
+}
     }
 
     if (!clnt && ctx->default_client) {

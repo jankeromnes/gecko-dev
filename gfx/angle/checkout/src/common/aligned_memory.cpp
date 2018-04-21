@@ -35,8 +35,9 @@ void *AlignedAlloc(size_t size, size_t alignment)
 #elif defined(ANGLE_PLATFORM_ANDROID)
     ptr = memalign(alignment, size);
 #else
-    if (posix_memalign(&ptr, alignment, size))
+    if (posix_memalign(&ptr, alignment, size)) {
         ptr = nullptr;
+}
 #endif
     // Since aligned allocations may fail for non-memory related reasons, force a
     // crash if we encounter a failed allocation.

@@ -63,8 +63,9 @@ bool Tmmbn::Parse(const CommonHeader& packet) {
   size_t number_of_items = items_size_bytes / TmmbItem::kLength;
   items_.resize(number_of_items);
   for (TmmbItem& item : items_) {
-    if (!item.Parse(next_item))
+    if (!item.Parse(next_item)) {
       return false;
+}
     next_item += TmmbItem::kLength;
   }
   return true;
@@ -79,8 +80,9 @@ bool Tmmbn::Create(uint8_t* packet,
                    size_t max_length,
                    RtcpPacket::PacketReadyCallback* callback) const {
   while (*index + BlockLength() > max_length) {
-    if (!OnBufferFull(packet, index, callback))
+    if (!OnBufferFull(packet, index, callback)) {
       return false;
+}
   }
   const size_t index_end = *index + BlockLength();
 

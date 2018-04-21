@@ -113,7 +113,8 @@ static void decode_macroblock(VP8D_COMP *pbi, MACROBLOCKD *xd,
 
   mode = xd->mode_info_context->mbmi.mode;
 
-  if (xd->segmentation_enabled) vp8_mb_init_dequantizer(pbi, xd);
+  if (xd->segmentation_enabled) { vp8_mb_init_dequantizer(pbi, xd);
+}
 
 #if CONFIG_ERROR_CONCEALMENT
 
@@ -159,7 +160,8 @@ static void decode_macroblock(VP8D_COMP *pbi, MACROBLOCKD *xd,
       int dst_stride = xd->dst.y_stride;
 
       /* clear out residual eob info */
-      if (xd->mode_info_context->mbmi.mb_skip_coeff) memset(xd->eobs, 0, 25);
+      if (xd->mode_info_context->mbmi.mb_skip_coeff) { memset(xd->eobs, 0, 25);
+}
 
       intra_prediction_down_copy(xd, xd->recon_above[0] + 16);
 
@@ -238,11 +240,13 @@ static int get_delta_q(vp8_reader *bc, int prev, int *q_update) {
   if (vp8_read_bit(bc)) {
     ret_val = vp8_read_literal(bc, 4);
 
-    if (vp8_read_bit(bc)) ret_val = -ret_val;
+    if (vp8_read_bit(bc)) { ret_val = -ret_val;
+}
   }
 
   /* Trigger a quantizer update if the delta-q value has changed */
-  if (ret_val != prev) *q_update = 1;
+  if (ret_val != prev) { *q_update = 1;
+}
 
   return ret_val;
 }
@@ -478,7 +482,8 @@ static void decode_mb_rows(VP8D_COMP *pbi) {
   xd->up_available = 0;
 
   /* Initialize the loop filter for this frame. */
-  if (pc->filter_level) vp8_loop_filter_frame_init(pc, xd, pc->filter_level);
+  if (pc->filter_level) { vp8_loop_filter_frame_init(pc, xd, pc->filter_level);
+}
 
   vp8_setup_intra_recon_top_line(yv12_fb_new);
 
@@ -488,7 +493,8 @@ static void decode_mb_rows(VP8D_COMP *pbi) {
       xd->current_bc = &pbi->mbc[ibc];
       ibc++;
 
-      if (ibc == num_part) ibc = 0;
+      if (ibc == num_part) { ibc = 0;
+}
     }
 
     recon_yoffset = mb_row * recon_y_stride * 16;
@@ -863,7 +869,8 @@ static void init_frame(VP8D_COMP *pbi) {
   xd->corrupted = 0; /* init without corruption */
 
   xd->fullpixel_mask = 0xffffffff;
-  if (pc->full_pixel) xd->fullpixel_mask = 0xfffffff8;
+  if (pc->full_pixel) { xd->fullpixel_mask = 0xfffffff8;
+}
 }
 
 int vp8_decode_frame(VP8D_COMP *pbi) {
@@ -1077,7 +1084,8 @@ int vp8_decode_frame(VP8D_COMP *pbi) {
     pc->uvdc_delta_q = get_delta_q(bc, pc->uvdc_delta_q, &q_update);
     pc->uvac_delta_q = get_delta_q(bc, pc->uvac_delta_q, &q_update);
 
-    if (q_update) vp8cx_init_de_quantizer(pbi);
+    if (q_update) { vp8cx_init_de_quantizer(pbi);
+}
 
     /* MB level dequantizer setup */
     vp8_mb_init_dequantizer(pbi, &pbi->mb);

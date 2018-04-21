@@ -400,8 +400,9 @@ gfxPlatformGtk::GetPlatformCMSOutputProfile(void *&mem, size_t &size)
 
 #ifdef MOZ_X11
     GdkDisplay *display = gdk_display_get_default();
-    if (!GDK_IS_X11_DISPLAY(display))
+    if (!GDK_IS_X11_DISPLAY(display)) {
         return;
+}
 
     const char EDID1_ATOM_NAME[] = "XFree86_DDC_EDID1_RAWDATA";
     const char ICC_PROFILE_ATOM_NAME[] = "_ICC_PROFILE";
@@ -411,8 +412,9 @@ gfxPlatformGtk::GetPlatformCMSOutputProfile(void *&mem, size_t &size)
     // In xpcshell tests, we never initialize X and hence don't have a Display.
     // In this case, there's no output colour management to be done, so we just
     // return with nullptr.
-    if (!dpy)
+    if (!dpy) {
         return;
+}
 
     Window root = gdk_x11_get_default_root_xwindow();
 
@@ -575,8 +577,9 @@ public:
     {
       MonitorAutoLock lock(mSetupLock);
       MOZ_ASSERT(NS_IsMainThread());
-      if (!mVsyncThread.Start())
+      if (!mVsyncThread.Start()) {
         return false;
+}
 
       RefPtr<Runnable> vsyncSetup =
         NewRunnableMethod("GLXVsyncSource::GLXDisplay::SetupGLContext",

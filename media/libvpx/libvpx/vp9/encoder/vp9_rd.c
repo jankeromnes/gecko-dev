@@ -69,10 +69,11 @@ static void fill_mode_costs(VP9_COMP *cpi) {
   const FRAME_CONTEXT *const fc = cpi->common.fc;
   int i, j;
 
-  for (i = 0; i < INTRA_MODES; ++i)
-    for (j = 0; j < INTRA_MODES; ++j)
+  for (i = 0; i < INTRA_MODES; ++i) {
+    for (j = 0; j < INTRA_MODES; ++j) {
       vp9_cost_tokens(cpi->y_mode_costs[i][j], vp9_kf_y_mode_prob[i][j],
                       vp9_intra_mode_tree);
+}
 
   vp9_cost_tokens(cpi->mbmode_cost, fc->y_mode_prob[1], vp9_intra_mode_tree);
   for (i = 0; i < INTRA_MODES; ++i) {
@@ -82,19 +83,20 @@ static void fill_mode_costs(VP9_COMP *cpi) {
                     fc->uv_mode_prob[i], vp9_intra_mode_tree);
   }
 
-  for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; ++i)
+  for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; ++i) {
     vp9_cost_tokens(cpi->switchable_interp_costs[i],
                     fc->switchable_interp_prob[i], vp9_switchable_interp_tree);
+}
 }
 
 static void fill_token_costs(vp9_coeff_cost *c,
                              vp9_coeff_probs_model (*p)[PLANE_TYPES]) {
   int i, j, k, l;
   TX_SIZE t;
-  for (t = TX_4X4; t <= TX_32X32; ++t)
-    for (i = 0; i < PLANE_TYPES; ++i)
-      for (j = 0; j < REF_TYPES; ++j)
-        for (k = 0; k < COEF_BANDS; ++k)
+  for (t = TX_4X4; t <= TX_32X32; ++t) {
+    for (i = 0; i < PLANE_TYPES; ++i) {
+      for (j = 0; j < REF_TYPES; ++j) {
+        for (k = 0; k < COEF_BANDS; ++k) {
           for (l = 0; l < BAND_COEFF_CONTEXTS(k); ++l) {
             vpx_prob probs[ENTROPY_NODES];
             vp9_model_to_full_probs(p[t][i][j][k][l], probs);
@@ -104,6 +106,7 @@ static void fill_token_costs(vp9_coeff_cost *c,
             assert(c[t][i][j][k][0][l][EOB_TOKEN] ==
                    c[t][i][j][k][1][l][EOB_TOKEN]);
           }
+}
 }
 
 // Values are now correlated to quantizer.
@@ -169,7 +172,8 @@ int vp9_compute_rd_mult(const VP9_COMP *cpi, int qindex) {
     rdmult = (rdmult * rd_frame_type_factor[frame_type]) >> 7;
     rdmult += ((rdmult * rd_boost_factor[boost_index]) >> 7);
   }
-  if (rdmult < 1) rdmult = 1;
+  if (rdmult < 1) { rdmult = 1;
+}
   return (int)rdmult;
 }
 
@@ -234,16 +238,18 @@ static void set_block_thresholds(const VP9_COMMON *cm, RD_OPT *rd) {
       const int thresh_max = INT_MAX / t;
 
       if (bsize >= BLOCK_8X8) {
-        for (i = 0; i < MAX_MODES; ++i)
+        for (i = 0; i < MAX_MODES; ++i) {
           rd->threshes[segment_id][bsize][i] = rd->thresh_mult[i] < thresh_max
                                                    ? rd->thresh_mult[i] * t / 4
                                                    : INT_MAX;
+}
       } else {
-        for (i = 0; i < MAX_REFS; ++i)
+        for (i = 0; i < MAX_REFS; ++i) {
           rd->threshes[segment_id][bsize][i] =
               rd->thresh_mult_sub8x8[i] < thresh_max
                   ? rd->thresh_mult_sub8x8[i] * t / 4
                   : INT_MAX;
+}
       }
     }
   }
@@ -272,20 +278,23 @@ void vp9_initialize_rd_consts(VP9_COMP *cpi) {
   set_partition_probs(cm, xd);
 
   if (cpi->oxcf.pass == 1) {
-    if (!frame_is_intra_only(cm))
+    if (!frame_is_intra_only(cm)) {
       vp9_build_nmv_cost_table(
           x->nmvjointcost,
           cm->allow_high_precision_mv ? x->nmvcost_hp : x->nmvcost,
           &cm->fc->nmvc, cm->allow_high_precision_mv);
+}
   } else {
-    if (!cpi->sf.use_nonrd_pick_mode || cm->frame_type == KEY_FRAME)
+    if (!cpi->sf.use_nonrd_pick_mode || cm->frame_type == KEY_FRAME) {
       fill_token_costs(x->token_costs, cm->fc->coef_probs);
+}
 
     if (cpi->sf.partition_search_type != VAR_BASED_PARTITION ||
         cm->frame_type == KEY_FRAME) {
-      for (i = 0; i < PARTITION_CONTEXTS; ++i)
+      for (i = 0; i < PARTITION_CONTEXTS; ++i) {
         vp9_cost_tokens(cpi->partition_cost[i], get_partition_probs(xd, i),
                         vp9_partition_tree);
+}
     }
 
     if (!cpi->sf.use_nonrd_pick_mode || (cm->current_video_frame & 0x07) == 1 ||
@@ -298,9 +307,10 @@ void vp9_initialize_rd_consts(VP9_COMP *cpi) {
             cm->allow_high_precision_mv ? x->nmvcost_hp : x->nmvcost,
             &cm->fc->nmvc, cm->allow_high_precision_mv);
 
-        for (i = 0; i < INTER_MODE_CONTEXTS; ++i)
+        for (i = 0; i < INTER_MODE_CONTEXTS; ++i) {
           vp9_cost_tokens((int *)cpi->inter_mode_cost[i],
                           cm->fc->inter_mode_probs[i], vp9_inter_mode_tree);
+}
       }
     }
   }
@@ -414,22 +424,28 @@ void vp9_get_entropy_contexts(BLOCK_SIZE bsize, TX_SIZE tx_size,
       memcpy(t_left, left, sizeof(ENTROPY_CONTEXT) * num_4x4_h);
       break;
     case TX_8X8:
-      for (i = 0; i < num_4x4_w; i += 2)
+      for (i = 0; i < num_4x4_w; i += 2) {
         t_above[i] = !!*(const uint16_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 2)
+}
+      for (i = 0; i < num_4x4_h; i += 2) {
         t_left[i] = !!*(const uint16_t *)&left[i];
+}
       break;
     case TX_16X16:
-      for (i = 0; i < num_4x4_w; i += 4)
+      for (i = 0; i < num_4x4_w; i += 4) {
         t_above[i] = !!*(const uint32_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 4)
+}
+      for (i = 0; i < num_4x4_h; i += 4) {
         t_left[i] = !!*(const uint32_t *)&left[i];
+}
       break;
     case TX_32X32:
-      for (i = 0; i < num_4x4_w; i += 8)
+      for (i = 0; i < num_4x4_w; i += 8) {
         t_above[i] = !!*(const uint64_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 8)
+}
+      for (i = 0; i < num_4x4_h; i += 8) {
         t_left[i] = !!*(const uint64_t *)&left[i];
+}
       break;
     default: assert(0 && "Invalid transform size."); break;
   }
@@ -463,12 +479,14 @@ void vp9_mv_pred(VP9_COMP *cpi, MACROBLOCK *x, uint8_t *ref_y_buffer,
     const MV *this_mv = &pred_mv[i];
     int fp_row, fp_col;
 
-    if (i == 1 && near_same_nearest) continue;
+    if (i == 1 && near_same_nearest) { continue;
+}
     fp_row = (this_mv->row + 3 + (this_mv->row >= 0)) >> 3;
     fp_col = (this_mv->col + 3 + (this_mv->col >= 0)) >> 3;
     max_mv = VPXMAX(max_mv, VPXMAX(abs(this_mv->row), abs(this_mv->col)) >> 3);
 
-    if (fp_row == 0 && fp_col == 0 && zero_seen) continue;
+    if (fp_row == 0 && fp_col == 0 && zero_seen) { continue;
+}
     zero_seen |= (fp_row == 0 && fp_col == 0);
 
     ref_y_ptr = &ref_y_buffer[ref_y_stride * fp_row + fp_col];
@@ -545,8 +563,9 @@ void vp9_set_rd_speed_thresholds(VP9_COMP *cpi) {
   SPEED_FEATURES *const sf = &cpi->sf;
 
   // Set baseline threshold values.
-  for (i = 0; i < MAX_MODES; ++i)
+  for (i = 0; i < MAX_MODES; ++i) {
     rd->thresh_mult[i] = cpi->oxcf.mode == BEST ? -500 : 0;
+}
 
   if (sf->adaptive_rd_thresh) {
     rd->thresh_mult[THR_NEARESTMV] = 300;

@@ -71,32 +71,37 @@ nss_makeFlags(PRBool readOnly, PRBool noCertDB,
         first = PR_FALSE;
     }
     if (noCertDB) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "noCertDB");
         first = PR_FALSE;
     }
     if (noModDB) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "noModDB");
         first = PR_FALSE;
     }
     if (forceOpen) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "forceOpen");
         first = PR_FALSE;
     }
     if (passwordRequired) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "passwordRequired");
         first = PR_FALSE;
     }
     if (optimizeSpace) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "optimizeSpace");
     }
     return flags;
@@ -115,24 +120,27 @@ nss_MkConfigString(const char *man, const char *libdesc, const char *tokdesc,
 
     /* make sure the internationalization was done correctly... */
     strings = PR_smprintf("");
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     if (man) {
         newStrings = PR_smprintf("%s manufacturerID='%s'", strings, man);
         PR_smprintf_free(strings);
         strings = newStrings;
     }
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     if (libdesc) {
         newStrings = PR_smprintf("%s libraryDescription='%s'", strings, libdesc);
         PR_smprintf_free(strings);
         strings = newStrings;
     }
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     if (tokdesc) {
         newStrings = PR_smprintf("%s cryptoTokenDescription='%s'", strings,
@@ -140,16 +148,18 @@ nss_MkConfigString(const char *man, const char *libdesc, const char *tokdesc,
         PR_smprintf_free(strings);
         strings = newStrings;
     }
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     if (ptokdesc) {
         newStrings = PR_smprintf("%s dbTokenDescription='%s'", strings, ptokdesc);
         PR_smprintf_free(strings);
         strings = newStrings;
     }
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     if (slotdesc) {
         newStrings = PR_smprintf("%s cryptoSlotDescription='%s'", strings,
@@ -157,16 +167,18 @@ nss_MkConfigString(const char *man, const char *libdesc, const char *tokdesc,
         PR_smprintf_free(strings);
         strings = newStrings;
     }
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     if (pslotdesc) {
         newStrings = PR_smprintf("%s dbSlotDescription='%s'", strings, pslotdesc);
         PR_smprintf_free(strings);
         strings = newStrings;
     }
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     if (fslotdesc) {
         newStrings = PR_smprintf("%s FIPSSlotDescription='%s'",
@@ -174,8 +186,9 @@ nss_MkConfigString(const char *man, const char *libdesc, const char *tokdesc,
         PR_smprintf_free(strings);
         strings = newStrings;
     }
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     if (fpslotdesc) {
         newStrings = PR_smprintf("%s FIPSTokenDescription='%s'",
@@ -183,8 +196,9 @@ nss_MkConfigString(const char *man, const char *libdesc, const char *tokdesc,
         PR_smprintf_free(strings);
         strings = newStrings;
     }
-    if (strings == NULL)
+    if (strings == NULL) {
         return NULL;
+}
 
     newStrings = PR_smprintf("%s minPS=%d", strings, minPwd);
     PR_smprintf_free(strings);
@@ -284,8 +298,9 @@ nss_FindExternalRootPaths(const char *dbpath,
     len = path_len + secmod_len + dll_len + 2; /* FILE_SEP + NULL */
 
     path = PORT_Alloc(len);
-    if (path == NULL)
+    if (path == NULL) {
         return;
+}
 
     /* back up to the top of the directory */
     PORT_Memcpy(path, dbpath, path_len);
@@ -384,8 +399,9 @@ nss_InitModules(const char *configdir, const char *certPrefix,
 
     flags = nss_makeFlags(readOnly, noCertDB, noModDB, forceOpen,
                           pwRequired, optimizeSpace);
-    if (flags == NULL)
+    if (flags == NULL) {
         return NULL;
+}
 
     /*
      * configdir is double nested, and Windows uses the same character
@@ -441,24 +457,33 @@ nss_InitModules(const char *configdir, const char *certPrefix,
 
 loser:
     PORT_Free(flags);
-    if (lconfigdir)
+    if (lconfigdir) {
         PORT_Free(lconfigdir);
-    if (lcertPrefix)
+}
+    if (lcertPrefix) {
         PORT_Free(lcertPrefix);
-    if (lkeyPrefix)
+}
+    if (lkeyPrefix) {
         PORT_Free(lkeyPrefix);
-    if (lsecmodName)
+}
+    if (lsecmodName) {
         PORT_Free(lsecmodName);
-    if (lupdateDir)
+}
+    if (lupdateDir) {
         PORT_Free(lupdateDir);
-    if (lupdCertPrefix)
+}
+    if (lupdCertPrefix) {
         PORT_Free(lupdCertPrefix);
-    if (lupdKeyPrefix)
+}
+    if (lupdKeyPrefix) {
         PORT_Free(lupdKeyPrefix);
-    if (lupdateID)
+}
+    if (lupdateID) {
         PORT_Free(lupdateID);
-    if (lupdateName)
+}
+    if (lupdateName) {
         PORT_Free(lupdateName);
+}
 
     if (moduleSpec) {
         module = SECMOD_LoadModule(moduleSpec, NULL, PR_TRUE);

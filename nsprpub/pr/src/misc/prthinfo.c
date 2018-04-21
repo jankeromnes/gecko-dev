@@ -32,8 +32,9 @@ PR_ThreadScanStackPointers(PRThread* t,
     */
     p0 = _MD_HomeGCRegisters(t, t == current, &n);
     status = scanFun(t, (void**)p0, n, scanClosure);
-    if (status != PR_SUCCESS)
+    if (status != PR_SUCCESS) {
         return status;
+}
 
     /* Scan the C stack for pointers into the GC heap */
 #if defined(XP_PC) && defined(WIN16)
@@ -102,8 +103,9 @@ PR_ThreadScanStackPointers(PRThread* t,
 #else
     if (sp < esp) {
         status = scanFun(t, (void**)sp, esp - sp, scanClosure);
-        if (status != PR_SUCCESS)
+        if (status != PR_SUCCESS) {
             return status;
+}
     }
 #endif
 
@@ -114,15 +116,17 @@ PR_ThreadScanStackPointers(PRThread* t,
     ** will be collected
     */
     status = scanFun(t, (void**)&t->environment, 1, scanClosure);
-    if (status != PR_SUCCESS)
+    if (status != PR_SUCCESS) {
         return status;
+}
 
     /* if thread is not allocated on stack, this is redundant. */
     ptd = t->privateData;
     for (index = 0; index < t->tpdLength; index++, ptd++) {
         status = scanFun(t, (void**)ptd, 1, scanClosure);
-        if (status != PR_SUCCESS)
+        if (status != PR_SUCCESS) {
             return status;
+}
     }
     
     return PR_SUCCESS;

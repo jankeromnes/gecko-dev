@@ -60,19 +60,22 @@ int vp9_skin_pixel(const uint8_t y, const uint8_t cb, const uint8_t cr,
     } else {
       int i = 0;
       // Exit on grey.
-      if (cb == 128 && cr == 128) return 0;
+      if (cb == 128 && cr == 128) { return 0;
+}
       // Exit on very strong cb.
-      if (cb > 150 && cr < 110) return 0;
+      if (cb > 150 && cr < 110) { return 0;
+}
       for (; i < 5; i++) {
         int skin_color_diff = evaluate_skin_color_difference(cb, cr, i);
         if (skin_color_diff < skin_threshold[i + 1]) {
-          if (y < 60 && skin_color_diff > 3 * (skin_threshold[i + 1] >> 2))
+          if (y < 60 && skin_color_diff > 3 * (skin_threshold[i + 1] >> 2)) {
             return 0;
-          else if (motion == 0 &&
-                   skin_color_diff > (skin_threshold[i + 1] >> 1))
+          } else if (motion == 0 &&
+                   skin_color_diff > (skin_threshold[i + 1] >> 1)) {
             return 0;
-          else
+          } else {
             return 1;
+}
         }
         // Exit if difference is much large than the threshold.
         if (skin_color_diff > (skin_threshold[i + 1] << 3)) {
@@ -100,7 +103,8 @@ int vp9_compute_skin_block(const uint8_t *y, const uint8_t *u, const uint8_t *v,
     const uint8_t ysource = y[y_height_shift * stride + y_width_shift];
     const uint8_t usource = u[uv_height_shift * strideuv + uv_width_shift];
     const uint8_t vsource = v[uv_height_shift * strideuv + uv_width_shift];
-    if (consec_zeromv > 25 && curr_motion_magn == 0) motion = 0;
+    if (consec_zeromv > 25 && curr_motion_magn == 0) { motion = 0;
+}
     return vp9_skin_pixel(ysource, usource, vsource, motion);
   }
 }

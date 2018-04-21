@@ -321,8 +321,9 @@ class SchedulableTrickleCandidate {
     }
 
     ~SchedulableTrickleCandidate() {
-      if (timer_handle_)
+      if (timer_handle_) {
         NR_async_timer_cancel(timer_handle_);
+}
     }
 
     void Schedule(unsigned int ms) {
@@ -1734,11 +1735,13 @@ class WebRtcIceConnectTest : public StunTest {
 
     if (waitTime) {
       EXPECT_TRUE_WAIT(caller->gathering_complete(), waitTime);
-      if (!caller->gathering_complete())
+      if (!caller->gathering_complete()) {
         return false;
+}
       EXPECT_TRUE_WAIT(callee->gathering_complete(), waitTime);
-      if (!callee->gathering_complete())
+      if (!callee->gathering_complete()) {
         return false;
+}
     }
     return true;
   }
@@ -2347,8 +2350,9 @@ TEST_F(WebRtcIceGatherTest, TestDefaultCandidate) {
 
 TEST_F(WebRtcIceGatherTest, TestGatherTurn) {
   EnsurePeer();
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
   peer_->SetTurnServer(turn_server_, kDefaultStunServerPort,
                        turn_user_, turn_password_, kNrIceTransportUdp);
   Gather();
@@ -2356,8 +2360,9 @@ TEST_F(WebRtcIceGatherTest, TestGatherTurn) {
 
 TEST_F(WebRtcIceGatherTest, TestGatherTurnTcp) {
   EnsurePeer();
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
   peer_->SetTurnServer(turn_server_, kDefaultStunServerPort,
                        turn_user_, turn_password_, kNrIceTransportTcp);
   Gather();
@@ -2903,8 +2908,9 @@ TEST_F(WebRtcIceConnectTest, TestGatherSymmetricNat) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectSymmetricNat) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   UseNat();
   SetFilteringType(TestNat::PORT_DEPENDENT);
@@ -2939,8 +2945,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectSymmetricNatAndNoNat) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestGatherNatBlocksUDP) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   UseNat();
   BlockUdp();
@@ -2960,8 +2967,9 @@ TEST_F(WebRtcIceConnectTest, TestGatherNatBlocksUDP) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectNatBlocksUDP) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   UseNat();
   BlockUdp();
@@ -3093,8 +3101,9 @@ void AddNonPairableCandidates(
     IceTestPeer *peer, size_t stream, int net_type,
     MtransportTestUtils* test_utils_) {
   for (int i=1; i<5; i++) {
-    if (net_type == i)
+    if (net_type == i) {
       continue;
+}
     switch (i) {
       case 1:
         candidates.push_back(new SchedulableTrickleCandidate(peer, stream,
@@ -3405,8 +3414,9 @@ TEST_F(WebRtcIceConnectTest, TestNetworkOnlineTriggersConsent) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectTurn) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3416,8 +3426,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectTurn) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectTurnWithDelay) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3432,8 +3443,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectTurnWithDelay) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectTurnWithNormalTrickleDelay) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3448,8 +3460,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectTurnWithNormalTrickleDelay) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectTurnWithNormalTrickleDelayOneSided) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3464,8 +3477,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectTurnWithNormalTrickleDelayOneSided) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectTurnWithLargeTrickleDelay) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3482,8 +3496,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectTurnWithLargeTrickleDelay) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectTurnTcp) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3493,8 +3508,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectTurnTcp) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectTurnOnly) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3507,8 +3523,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectTurnOnly) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestConnectTurnTcpOnly) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3522,8 +3539,9 @@ TEST_F(WebRtcIceConnectTest, TestConnectTurnTcpOnly) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestSendReceiveTurnOnly) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3537,8 +3555,9 @@ TEST_F(WebRtcIceConnectTest, TestSendReceiveTurnOnly) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestSendReceiveTurnTcpOnly) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   SetTurnServer(turn_server_, kDefaultStunServerPort,
@@ -3553,8 +3572,9 @@ TEST_F(WebRtcIceConnectTest, TestSendReceiveTurnTcpOnly) {
 }
 
 TEST_F(WebRtcIceConnectTest, TestSendReceiveTurnBothOnly) {
-  if (turn_server_.empty())
+  if (turn_server_.empty()) {
     return;
+}
 
   AddStream(1);
   std::vector<NrIceTurnServer> turn_servers;

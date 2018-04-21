@@ -88,8 +88,9 @@ StartSoundServer()
 static void
 ShutdownSoundServer()
 {
-  if (!sServerHandle)
+  if (!sServerHandle) {
     return;
+}
 
   audioipc_server_stop(sServerHandle);
   sServerHandle = nullptr;

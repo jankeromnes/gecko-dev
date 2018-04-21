@@ -124,34 +124,40 @@ iJIT_NotifyEvent(iJIT_JVM_EVENT event_type, void *EventSpecificData)
     /* initialization part - the collector has not been loaded yet. */
     if (!FUNC_NotifyEvent)
     {
-        if (iJIT_DLL_is_missing)
+        if (iJIT_DLL_is_missing) {
             return 0;
+}
 
-        if (!loadiJIT_Funcs())
+        if (!loadiJIT_Funcs()) {
             return 0;
+}
     }
 
     if (event_type == iJVM_EVENT_TYPE_METHOD_LOAD_FINISHED ||
         event_type == iJVM_EVENT_TYPE_METHOD_UPDATE)
     {
-        if (((piJIT_Method_Load)EventSpecificData)->method_id == 0)
+        if (((piJIT_Method_Load)EventSpecificData)->method_id == 0) {
             return 0;
+}
     }
     else if (event_type == iJVM_EVENT_TYPE_METHOD_LOAD_FINISHED_V2)
     {
-        if (((piJIT_Method_Load_V2)EventSpecificData)->method_id == 0)
+        if (((piJIT_Method_Load_V2)EventSpecificData)->method_id == 0) {
             return 0;
+}
     }
     else if (event_type == iJVM_EVENT_TYPE_METHOD_LOAD_FINISHED_V3)
     {
-        if (((piJIT_Method_Load_V3)EventSpecificData)->method_id == 0)
+        if (((piJIT_Method_Load_V3)EventSpecificData)->method_id == 0) {
             return 0;
+}
     }
     else if (event_type == iJVM_EVENT_TYPE_METHOD_INLINE_LOAD_FINISHED)
     {
         if (((piJIT_Method_Inline_Load)EventSpecificData)->method_id == 0 ||
-            ((piJIT_Method_Inline_Load)EventSpecificData)->parent_method_id == 0)
+            ((piJIT_Method_Inline_Load)EventSpecificData)->parent_method_id == 0) {
             return 0;
+}
     }
 
     ReturnValue = (int)FUNC_NotifyEvent(event_type, EventSpecificData);
@@ -242,8 +248,9 @@ int loadiJIT_Funcs()
     }
 #else  /* ITT_PLATFORM==ITT_PLATFORM_WIN */
     dllName = getenv(NEW_DLL_ENVIRONMENT_VAR);
-    if (!dllName)
+    if (!dllName) {
         dllName = getenv(DLL_ENVIRONMENT_VAR);
+}
 #if defined(__ANDROID__) || defined(ANDROID)
     if (!dllName)
         dllName = ANDROID_JIT_AGENT_PATH;
@@ -307,8 +314,9 @@ ITT_EXTERN_C unsigned int JITAPI iJIT_GetNewMethodID()
 {
     static unsigned int methodID = 1;
 
-    if (methodID == 0)
+    if (methodID == 0) {
         return 0;  /* ERROR : this is not a valid value */
+}
 
     return methodID++;
 }

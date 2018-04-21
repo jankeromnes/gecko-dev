@@ -90,14 +90,16 @@ CERT_EncodeCRLDistributionPoints(PLArenaPool *arena,
 
                     if (!point->derFullName ||
                         !SEC_ASN1EncodeItem(ourPool, &point->derDistPoint,
-                                            point, FullNameTemplate))
+                                            point, FullNameTemplate)) {
                         rv = SECFailure;
+}
                     break;
 
                 case relativeDistinguishedName:
                     if (!SEC_ASN1EncodeItem(ourPool, &point->derDistPoint,
-                                            point, RelativeNameTemplate))
+                                            point, RelativeNameTemplate)) {
                         rv = SECFailure;
+}
                     break;
 
                 default:
@@ -106,11 +108,13 @@ CERT_EncodeCRLDistributionPoints(PLArenaPool *arena,
                     break;
             }
 
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
 
-            if (point->reasons.data)
+            if (point->reasons.data) {
                 PrepareBitStringForEncoding(&point->bitsmap, &point->reasons);
+}
 
             if (point->crlIssuer) {
                 point->derCrlIssuer = cert_EncodeGeneralNames(ourPool, point->crlIssuer);
@@ -121,8 +125,9 @@ CERT_EncodeCRLDistributionPoints(PLArenaPool *arena,
             }
             ++pointList;
         }
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
         if (!SEC_ASN1EncodeItem(arena, derValue, value,
                                 CERTCRLDistributionPointsTemplate)) {
             rv = SECFailure;
@@ -152,13 +157,15 @@ CERT_DecodeCRLDistributionPoints(PLArenaPool *arena, SECItem *encodedValue)
         /* copy the DER into the arena, since Quick DER returns data that points
            into the DER input, which may get freed by the caller */
         rv = SECITEM_CopyItem(arena, &newEncodedValue, encodedValue);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
 
         rv = SEC_QuickDERDecodeItem(arena, &value->distPoints,
                                     CERTCRLDistributionPointsTemplate, &newEncodedValue);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
 
         pointList = value->distPoints;
         while (NULL != (point = *pointList)) {
@@ -167,8 +174,9 @@ CERT_DecodeCRLDistributionPoints(PLArenaPool *arena, SECItem *encodedValue)
             if (point->derDistPoint.data != NULL) {
                 rv = SEC_QuickDERDecodeItem(arena, point,
                                             DistributionPointNameTemplate, &(point->derDistPoint));
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
 
                 switch (point->distPointType) {
                     case generalName:
@@ -185,8 +193,9 @@ CERT_DecodeCRLDistributionPoints(PLArenaPool *arena, SECItem *encodedValue)
                         rv = SECFailure;
                         break;
                 } /* end switch */
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
             } /* end if */
 
             /* Get the reason code if it's not omitted in the encoding */
@@ -194,16 +203,18 @@ CERT_DecodeCRLDistributionPoints(PLArenaPool *arena, SECItem *encodedValue)
                 SECItem bitsmap = point->bitsmap;
                 DER_ConvertBitString(&bitsmap);
                 rv = SECITEM_CopyItem(arena, &point->reasons, &bitsmap);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
             }
 
             /* Get the crl issuer name if it's not omitted in the encoding */
             if (point->derCrlIssuer != NULL) {
                 point->crlIssuer = cert_DecodeGeneralNames(arena,
                                                            point->derCrlIssuer);
-                if (!point->crlIssuer)
+                if (!point->crlIssuer) {
                     break;
+}
             }
             ++pointList;
         } /* end while points remain */

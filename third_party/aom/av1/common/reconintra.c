@@ -528,7 +528,8 @@ static int has_top_right(const AV1_COMMON *cm, BLOCK_SIZE bsize, int mi_row,
                          PARTITION_TYPE partition,
 #endif  // CONFIG_EXT_PARTITION_TYPES && !CONFIG_EXT_PARTITION_TYPES_AB
                          TX_SIZE txsz, int row_off, int col_off, int ss_x) {
-  if (!top_available || !right_available) return 0;
+  if (!top_available || !right_available) { return 0;
+}
 
 #if !CONFIG_CB4X4
   // TODO(bshacklett, huisu): Currently the RD loop traverses 4X8 blocks in
@@ -558,7 +559,8 @@ static int has_top_right(const AV1_COMMON *cm, BLOCK_SIZE bsize, int mi_row,
     return col_off + top_right_count_unit < plane_bw_unit;
   } else {
     // All top-right pixels are in the block above, which is already available.
-    if (col_off + top_right_count_unit < plane_bw_unit) return 1;
+    if (col_off + top_right_count_unit < plane_bw_unit) { return 1;
+}
 
     const int bw_in_mi_log2 = mi_width_log2_lookup[bsize];
     const int bh_in_mi_log2 = mi_height_log2_lookup[bsize];
@@ -568,11 +570,13 @@ static int has_top_right(const AV1_COMMON *cm, BLOCK_SIZE bsize, int mi_row,
 
     // Top row of superblock: so top-right pixels are in the top and/or
     // top-right superblocks, both of which are already available.
-    if (blk_row_in_sb == 0) return 1;
+    if (blk_row_in_sb == 0) { return 1;
+}
 
     // Rightmost column of superblock (and not the top row): so top-right pixels
     // fall in the right superblock, which is not available yet.
-    if (((blk_col_in_sb + 1) << bw_in_mi_log2) >= sb_mi_size) return 0;
+    if (((blk_col_in_sb + 1) << bw_in_mi_log2) >= sb_mi_size) { return 0;
+}
 
     // General case (neither top row nor rightmost column): check if the
     // top-right block is coded before the current block.
@@ -596,7 +600,8 @@ static int has_top_right(const AV1_COMMON *cm, BLOCK_SIZE bsize, int mi_row,
 static int has_bottom_left(const AV1_COMMON *cm, BLOCK_SIZE bsize, int mi_row,
                            int mi_col, int bottom_available, int left_available,
                            TX_SIZE txsz, int row_off, int col_off, int ss_y) {
-  if (!bottom_available || !left_available) return 0;
+  if (!bottom_available || !left_available) { return 0;
+}
 
   if (col_off > 0) {
     // Bottom-left pixels are in the bottom-left block, which is not available.
@@ -612,7 +617,8 @@ static int has_bottom_left(const AV1_COMMON *cm, BLOCK_SIZE bsize, int mi_row,
 #endif
 
     // All bottom-left pixels are in the left block, which is already available.
-    if (row_off + bottom_left_count_unit < plane_bh_unit) return 1;
+    if (row_off + bottom_left_count_unit < plane_bh_unit) { return 1;
+}
 
     const int bw_in_mi_log2 = mi_width_log2_lookup[bsize];
     const int bh_in_mi_log2 = mi_height_log2_lookup[bsize];
@@ -636,7 +642,8 @@ static int has_bottom_left(const AV1_COMMON *cm, BLOCK_SIZE bsize, int mi_row,
 
     // Bottom row of superblock (and not the leftmost column): so bottom-left
     // pixels fall in the bottom superblock, which is not available yet.
-    if (((blk_row_in_sb + 1) << bh_in_mi_log2) >= sb_mi_size) return 0;
+    if (((blk_row_in_sb + 1) << bh_in_mi_log2) >= sb_mi_size) { return 0;
+}
 
     // General case (neither leftmost column nor bottom row): check if the
     // bottom-left block is coded before the current block.
@@ -943,7 +950,8 @@ static void dr_prediction_z3(uint8_t *dst, ptrdiff_t stride, int bw, int bh,
 #endif  // CONFIG_INTRA_INTERP
         dst[r * stride + c] = clip_pixel(val);
       } else {
-        for (; r < bh; ++r) dst[r * stride + c] = left[max_base_y];
+        for (; r < bh; ++r) { dst[r * stride + c] = left[max_base_y];
+}
         break;
       }
     }
@@ -1211,7 +1219,8 @@ static void highbd_dr_prediction_z3(uint16_t *dst, ptrdiff_t stride, int bw,
 #endif  // CONFIG_INTRA_INTERP
         dst[r * stride + c] = clip_pixel_highbd(val, bd);
       } else {
-        for (; r < bh; ++r) dst[r * stride + c] = left[max_base_y];
+        for (; r < bh; ++r) { dst[r * stride + c] = left[max_base_y];
+}
         break;
       }
     }
@@ -2220,7 +2229,8 @@ static int intra_edge_filter_strength(int bsz, int delta) {
 }
 
 void av1_filter_intra_edge_c(uint8_t *p, int sz, int strength) {
-  if (!strength) return;
+  if (!strength) { return;
+}
 
   const int kernel[INTRA_EDGE_FILT][INTRA_EDGE_TAPS] = {
     { 0, 4, 8, 4, 0 }, { 0, 5, 6, 5, 0 }, { 2, 4, 4, 4, 2 }
@@ -2244,7 +2254,8 @@ void av1_filter_intra_edge_c(uint8_t *p, int sz, int strength) {
 
 #if CONFIG_HIGHBITDEPTH
 void av1_filter_intra_edge_high_c(uint16_t *p, int sz, int strength) {
-  if (!strength) return;
+  if (!strength) { return;
+}
 
   const int kernel[INTRA_EDGE_FILT][INTRA_EDGE_TAPS] = {
     { 0, 4, 8, 4, 0 }, { 0, 5, 6, 5, 0 }, { 2, 4, 4, 4, 2 }
@@ -2369,12 +2380,13 @@ static void build_intra_predictors_high(
   if (is_dr_mode) {
     p_angle = mode_to_angle_map[mode] +
               xd->mi[0]->mbmi.angle_delta[plane != 0] * ANGLE_STEP;
-    if (p_angle <= 90)
+    if (p_angle <= 90) {
       need_above = 1, need_left = 0, need_above_left = 1;
-    else if (p_angle < 180)
+    } else if (p_angle < 180) {
       need_above = 1, need_left = 1, need_above_left = 1;
-    else
+    } else {
       need_above = 0, need_left = 1, need_above_left = 1;
+}
   }
 #endif  // CONFIG_EXT_INTRA
 #if CONFIG_FILTER_INTRA
@@ -2415,7 +2427,8 @@ static void build_intra_predictors_high(
       need_bottom = 0;
 #endif  // CONFIG_FILTER_INTRA
 #if CONFIG_EXT_INTRA
-    if (is_dr_mode) need_bottom = p_angle > 180;
+    if (is_dr_mode) { need_bottom = p_angle > 180;
+}
 #endif  // CONFIG_EXT_INTRA
 #else
     const int need_bottom = !!(extend_modes[mode] & NEED_BOTTOMLEFT);
@@ -2423,14 +2436,17 @@ static void build_intra_predictors_high(
     const int num_left_pixels_needed = txhpx + (need_bottom ? txwpx : 0);
     i = 0;
     if (n_left_px > 0) {
-      for (; i < n_left_px; i++) left_col[i] = ref[i * ref_stride - 1];
+      for (; i < n_left_px; i++) { left_col[i] = ref[i * ref_stride - 1];
+}
       if (need_bottom && n_bottomleft_px > 0) {
         assert(i == txhpx);
-        for (; i < txhpx + n_bottomleft_px; i++)
+        for (; i < txhpx + n_bottomleft_px; i++) {
           left_col[i] = ref[i * ref_stride - 1];
+}
       }
-      if (i < num_left_pixels_needed)
+      if (i < num_left_pixels_needed) {
         aom_memset16(&left_col[i], left_col[i - 1], num_left_pixels_needed - i);
+}
     } else {
 #if CONFIG_INTRA_EDGE
       if (n_top_px > 0) {
@@ -2453,7 +2469,8 @@ static void build_intra_predictors_high(
       need_right = 1;
 #endif  // CONFIG_FILTER_INTRA
 #if CONFIG_EXT_INTRA
-    if (is_dr_mode) need_right = p_angle < 90;
+    if (is_dr_mode) { need_right = p_angle < 90;
+}
 #endif  // CONFIG_EXT_INTRA
 #else
     const int need_right = !!(extend_modes[mode] & NEED_ABOVERIGHT);
@@ -2468,9 +2485,10 @@ static void build_intra_predictors_high(
                n_topright_px * sizeof(above_ref[0]));
         i += n_topright_px;
       }
-      if (i < num_top_pixels_needed)
+      if (i < num_top_pixels_needed) {
         aom_memset16(&above_row[i], above_row[i - 1],
                      num_top_pixels_needed - i);
+}
     } else {
 #if CONFIG_INTRA_EDGE
       if (n_left_px > 0) {
@@ -2613,12 +2631,13 @@ static void build_intra_predictors(const MACROBLOCKD *xd, const uint8_t *ref,
   if (is_dr_mode) {
     p_angle = mode_to_angle_map[mode] +
               xd->mi[0]->mbmi.angle_delta[plane != 0] * ANGLE_STEP;
-    if (p_angle <= 90)
+    if (p_angle <= 90) {
       need_above = 1, need_left = 0, need_above_left = 1;
-    else if (p_angle < 180)
+    } else if (p_angle < 180) {
       need_above = 1, need_left = 1, need_above_left = 1;
-    else
+    } else {
       need_above = 0, need_left = 1, need_above_left = 1;
+}
   }
 #endif  // CONFIG_EXT_INTRA
 #if CONFIG_FILTER_INTRA
@@ -2660,7 +2679,8 @@ static void build_intra_predictors(const MACROBLOCKD *xd, const uint8_t *ref,
       need_bottom = 0;
 #endif  // CONFIG_FILTER_INTRA
 #if CONFIG_EXT_INTRA
-    if (is_dr_mode) need_bottom = p_angle > 180;
+    if (is_dr_mode) { need_bottom = p_angle > 180;
+}
 #endif  // CONFIG_EXT_INTRA
 #else
     const int need_bottom = !!(extend_modes[mode] & NEED_BOTTOMLEFT);
@@ -2668,14 +2688,17 @@ static void build_intra_predictors(const MACROBLOCKD *xd, const uint8_t *ref,
     const int num_left_pixels_needed = txhpx + (need_bottom ? txwpx : 0);
     i = 0;
     if (n_left_px > 0) {
-      for (; i < n_left_px; i++) left_col[i] = ref[i * ref_stride - 1];
+      for (; i < n_left_px; i++) { left_col[i] = ref[i * ref_stride - 1];
+}
       if (need_bottom && n_bottomleft_px > 0) {
         assert(i == txhpx);
-        for (; i < txhpx + n_bottomleft_px; i++)
+        for (; i < txhpx + n_bottomleft_px; i++) {
           left_col[i] = ref[i * ref_stride - 1];
+}
       }
-      if (i < num_left_pixels_needed)
+      if (i < num_left_pixels_needed) {
         memset(&left_col[i], left_col[i - 1], num_left_pixels_needed - i);
+}
     } else {
 #if CONFIG_INTRA_EDGE
       if (n_top_px > 0) {
@@ -2698,7 +2721,8 @@ static void build_intra_predictors(const MACROBLOCKD *xd, const uint8_t *ref,
       need_right = 1;
 #endif  // CONFIG_FILTER_INTRA
 #if CONFIG_EXT_INTRA
-    if (is_dr_mode) need_right = p_angle < 90;
+    if (is_dr_mode) { need_right = p_angle < 90;
+}
 #endif  // CONFIG_EXT_INTRA
 #else
     const int need_right = !!(extend_modes[mode] & NEED_ABOVERIGHT);
@@ -2712,8 +2736,9 @@ static void build_intra_predictors(const MACROBLOCKD *xd, const uint8_t *ref,
         memcpy(above_row + txwpx, above_ref + txwpx, n_topright_px);
         i += n_topright_px;
       }
-      if (i < num_top_pixels_needed)
+      if (i < num_top_pixels_needed) {
         memset(&above_row[i], above_row[i - 1], num_top_pixels_needed - i);
+}
     } else {
 #if CONFIG_INTRA_EDGE
       if (n_left_px > 0) {
@@ -2970,7 +2995,8 @@ void av1_predict_intra_block_facade(const AV1_COMMON *cm, MACROBLOCKD *xd,
 static int overwrite_ref_row(int matching_strides, int buf_flags,
                              int block_width, const uint8_t *dst_row,
                              uint8_t *ref_row, uint8_t *tmp_row) {
-  if (ref_row == dst_row && matching_strides) return 0;
+  if (ref_row == dst_row && matching_strides) { return 0;
+}
 
   int row_bytes = block_width;
 
@@ -3010,7 +3036,8 @@ static int overwrite_ref_col(int buf_flags, int block_height,
                              const uint8_t *dst_row, int dst_stride,
                              uint8_t *ref_row, int ref_stride,
                              uint8_t *tmp_row) {
-  if (ref_row == dst_row && ref_stride == dst_stride) return 0;
+  if (ref_row == dst_row && ref_stride == dst_stride) { return 0;
+}
 
 #if CONFIG_HIGHBITDEPTH
   if (buf_flags & YV12_FLAG_HIGHBITDEPTH) {
@@ -3088,15 +3115,17 @@ void av1_predict_intra_block(const AV1_COMMON *cm, const MACROBLOCKD *xd,
 #endif  // !INTRA_USES_EXT_TRANSFORMS
 
   // If the block is square, we're done.
-  if (block_width == block_height) return;
+  if (block_width == block_height) { return;
+}
 
 #if INTRA_USES_EXT_TRANSFORMS
 // If we're using rectangular transforms, we might be done even
 // though the block isn't square.
 #if INTRA_USES_RECT_TRANSFORMS
   if (block_width == tx_size_wide[tx_size] &&
-      block_height == tx_size_high[tx_size])
+      block_height == tx_size_high[tx_size]) {
     return;
+}
 
   // A block should only fail to have a matching transform if it's
   // large and rectangular (such large transform sizes aren't
@@ -3148,8 +3177,9 @@ void av1_predict_intra_block(const AV1_COMMON *cm, const MACROBLOCKD *xd,
                                  ref_stride, next_dst_row, dst_stride, col_off,
                                  next_row_off, plane);
 
-      if (needs_restore)
+      if (needs_restore) {
         restore_ref_row(xd->cur_buf->flags, block_width, tmp, last_ref_row);
+}
 
       next_row_idx += tx_height;
       next_row_off += tx_height_off;
@@ -3185,9 +3215,10 @@ void av1_predict_intra_block(const AV1_COMMON *cm, const MACROBLOCKD *xd,
                                  ref_stride, next_dst_col, dst_stride,
                                  next_col_off, row_off, plane);
 
-      if (needs_restore)
+      if (needs_restore) {
         restore_ref_col(xd->cur_buf->flags, block_height, tmp, last_ref_col,
                         ref_stride);
+}
 
       next_col_idx += tx_width;
       next_col_off += tx_width_off;

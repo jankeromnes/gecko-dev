@@ -104,24 +104,28 @@ JAR_pass_archive(JAR *jar, jarArch format, char *filename, const char *url)
     JAR_FILE fp;
     int status = 0;
 
-    if (filename == NULL)
+    if (filename == NULL) {
         return JAR_ERR_GENERAL;
+}
 
     if ((fp = JAR_FOPEN(filename, "rb")) != NULL) {
-        if (format == jarArchGuess)
+        if (format == jarArchGuess) {
             format = (jarArch)jar_guess_jar(filename, fp);
+}
 
         jar->format = format;
         jar->url = url ? PORT_Strdup(url) : NULL;
         jar->filename = PORT_Strdup(filename);
 
         status = jar_gen_index(jar, format, fp);
-        if (status == 0)
+        if (status == 0) {
             status = jar_extract_manifests(jar, format, fp);
+}
 
         JAR_FCLOSE(fp);
-        if (status < 0)
+        if (status < 0) {
             return status;
+}
 
         /* people were expecting it this way */
         return jar->valid;
@@ -187,8 +191,9 @@ JAR_verified_extract(JAR *jar, char *path, char *outpath)
 {
     int status = JAR_extract(jar, path, outpath);
 
-    if (status >= 0)
+    if (status >= 0) {
         return jar_verify_extract(jar, path, outpath);
+}
     return status;
 }
 
@@ -221,8 +226,9 @@ JAR_extract(JAR *jar, char *path, char *outpath)
         }
 
 #if defined(XP_UNIX) || defined(XP_BEOS)
-        if (phy->mode)
+        if (phy->mode) {
             chmod(outpath, 0400 | (mode_t)phy->mode);
+}
 #endif
     } else {
         /* pathname not found in archive */
@@ -250,8 +256,9 @@ jar_physical_extraction(JAR_FILE fp, char *outpath, unsigned long offset,
     char *buffer = (char *)PORT_ZAlloc(CHUNK);
     int status = 0;
 
-    if (buffer == NULL)
+    if (buffer == NULL) {
         return JAR_ERR_MEMORY;
+}
 
     if ((out = JAR_FOPEN(outpath, "wb")) != NULL) {
         unsigned long at = 0;
@@ -301,8 +308,9 @@ jar_physical_inflate(JAR_FILE fp, char *outpath, unsigned long offset, unsigned 
     JAR_FILE out;
 
     /* Raw inflate in zlib 1.1.4 needs an extra dummy byte at the end */
-    if ((inbuf = (char *)PORT_ZAlloc(ICHUNK + 1)) == NULL)
+    if ((inbuf = (char *)PORT_ZAlloc(ICHUNK + 1)) == NULL) {
         return JAR_ERR_MEMORY;
+}
 
     if ((outbuf = (char *)PORT_ZAlloc(OCHUNK)) == NULL) {
         PORT_Free(inbuf);
@@ -361,8 +369,9 @@ jar_physical_inflate(JAR_FILE fp, char *outpath, unsigned long offset, unsigned 
                     status = JAR_ERR_DISK;
                     break;
                 }
-                if (status == Z_STREAM_END)
+                if (status == Z_STREAM_END) {
                     break;
+}
             }
         }
         JAR_FCLOSE(out);
@@ -393,8 +402,9 @@ jar_inflate_memory(unsigned int method, long *length, long expected_out_len,
     int status;
     z_stream zs;
 
-    if (outbuf == NULL)
+    if (outbuf == NULL) {
         return JAR_ERR_MEMORY;
+}
 
     PORT_Memset(&zs, 0, sizeof zs);
     status = inflateInit2(&zs, -MAX_WBITS);
@@ -442,8 +452,9 @@ jar_verify_extract(JAR *jar, char *path, char *physical_path)
 
     PORT_Memset(&dig, 0, sizeof dig);
     status = JAR_digest_file(physical_path, &dig);
-    if (!status)
+    if (!status) {
         status = JAR_verify_digest(jar, path, &dig);
+}
     return status;
 }
 
@@ -460,8 +471,9 @@ jar_get_physical(JAR *jar, char *pathname)
     ZZLink *link;
     ZZList *list = jar->phy;
 
-    if (ZZ_ListEmpty(list))
+    if (ZZ_ListEmpty(list)) {
         return NULL;
+}
 
     for (link = ZZ_ListHead(list);
          !ZZ_ListIterDone(list, link);
@@ -489,24 +501,32 @@ jar_extract_manifests(JAR *jar, jarArch format, JAR_FILE fp)
 {
     int status, signatures;
 
-    if (format != jarArchZip && format != jarArchTar)
+    if (format != jarArchZip && format != jarArchTar) {
         return JAR_ERR_CORRUPT;
+}
 
-    if ((status = jar_extract_mf(jar, format, fp, "mf")) < 0)
+    if ((status = jar_extract_mf(jar, format, fp, "mf")) < 0) {
         return status;
-    if (!status)
+}
+    if (!status) {
         return JAR_ERR_ORDER;
-    if ((status = jar_extract_mf(jar, format, fp, "sf")) < 0)
+}
+    if ((status = jar_extract_mf(jar, format, fp, "sf")) < 0) {
         return status;
-    if (!status)
+}
+    if (!status) {
         return JAR_ERR_ORDER;
-    if ((status = jar_extract_mf(jar, format, fp, "rsa")) < 0)
+}
+    if ((status = jar_extract_mf(jar, format, fp, "rsa")) < 0) {
         return status;
+}
     signatures = status;
-    if ((status = jar_extract_mf(jar, format, fp, "dsa")) < 0)
+    if ((status = jar_extract_mf(jar, format, fp, "dsa")) < 0) {
         return status;
-    if (!(signatures += status))
+}
+    if (!(signatures += status)) {
         return JAR_ERR_SIG;
+}
     return 0;
 }
 
@@ -525,8 +545,9 @@ jar_extract_mf(JAR *jar, jarArch format, JAR_FILE fp, char *ext)
     ZZList *list = jar->phy;
     int ret = 0;
 
-    if (ZZ_ListEmpty(list))
+    if (ZZ_ListEmpty(list)) {
         return JAR_ERR_PNF;
+}
 
     for (link = ZZ_ListHead(list);
          ret >= 0 && !ZZ_ListIterDone(list, link);
@@ -542,23 +563,27 @@ jar_extract_mf(JAR *jar, jarArch format, JAR_FILE fp, char *ext)
             long length;
             int num, status;
 
-            if (PORT_Strlen(it->pathname) < 8)
+            if (PORT_Strlen(it->pathname) < 8) {
                 continue;
+}
 
-            if (*fn == '/' || *fn == '\\')
+            if (*fn == '/' || *fn == '\\') {
                 fn++;
+}
             if (*fn == 0) {
                 /* just a directory entry */
                 continue;
             }
 
             /* skip to extension */
-            for (e = fn; *e && *e != '.'; e++)
+            for (e = fn; *e && *e != '.'; e++) {
                 /* yip */;
+}
 
             /* and skip dot */
-            if (*e == '.')
+            if (*e == '.') {
                 e++;
+}
             if (PORT_Strcasecmp(ext, e)) {
                 /* not the right extension */
                 continue;
@@ -572,8 +597,9 @@ jar_extract_mf(JAR *jar, jarArch format, JAR_FILE fp, char *ext)
             /* Read in the manifest and parse it */
             /* Raw inflate in zlib 1.1.4 needs an extra dummy byte at the end */
             manifest = (char *)PORT_ZAlloc(phy->length + 1);
-            if (!manifest)
+            if (!manifest) {
                 return JAR_ERR_MEMORY;
+}
 
             JAR_FSEEK(fp, phy->offset, (PRSeekWhence)0);
             num = JAR_FREAD(fp, manifest, phy->length);
@@ -599,16 +625,18 @@ jar_extract_mf(JAR *jar, jarArch format, JAR_FILE fp, char *ext)
                 /* unsupported compression method */
                 PORT_Free(manifest);
                 return JAR_ERR_CORRUPT;
-            } else
+            } else {
                 length = phy->length;
+}
 
             status = JAR_parse_manifest(jar, manifest, length,
                                         it->pathname, "url");
             PORT_Free(manifest);
-            if (status < 0)
+            if (status < 0) {
                 ret = status;
-            else
+            } else {
                 ++ret;
+}
         } else if (it->type == jarTypePhy) {
             /* ordinary file */
         }
@@ -800,14 +828,18 @@ jar_listzip(JAR *jar, JAR_FILE fp)
     }
 
 loser:
-    if (Local)
+    if (Local) {
         PORT_Free(Local);
-    if (phy && it == NULL)
+}
+    if (phy && it == NULL) {
         PORT_Free(phy);
-    if (Central)
+}
+    if (Central) {
         PORT_Free(Central);
-    if (End)
+}
+    if (End) {
         PORT_Free(End);
+}
     return err;
 }
 
@@ -830,24 +862,28 @@ jar_listtar(JAR *jar, JAR_FILE fp)
     while (1) {
         JAR_FSEEK(fp, pos, (PRSeekWhence)0);
 
-        if (JAR_FREAD(fp, &tarball, sizeof tarball) < sizeof tarball)
+        if (JAR_FREAD(fp, &tarball, sizeof tarball) < sizeof tarball) {
             break;
+}
 
-        if (!*tarball.val.filename)
+        if (!*tarball.val.filename) {
             break;
+}
 
         sz = octalToLong(tarball.val.size);
 
         /* Tag the end of filename */
         s = tarball.val.filename;
-        while (*s && *s != ' ')
+        while (*s && *s != ' ') {
             s++;
+}
         *s = 0;
 
         /* Add to our linked list */
         phy = PORT_ZNew(JAR_Physical);
-        if (phy == NULL)
+        if (phy == NULL) {
             return JAR_ERR_MEMORY;
+}
 
         phy->compression = 0;
         phy->offset = pos + sizeof tarball;
@@ -937,8 +973,9 @@ octalToLong(const char *s)
 {
     long num = 0L;
 
-    while (*s == ' ')
+    while (*s == ' ') {
         s++;
+}
     while (*s >= '0' && *s <= '7') {
         num <<= 3;
         num += *s++ - '0';
@@ -960,7 +997,8 @@ jar_guess_jar(const char *filename, JAR_FILE fp)
     PRInt32 len = PORT_Strlen(filename);
     const char *ext = filename + len - 4; /* 4 for ".tar" */
 
-    if (len >= 4 && !PL_strcasecmp(ext, ".tar"))
+    if (len >= 4 && !PL_strcasecmp(ext, ".tar")) {
         return jarArchTar;
+}
     return jarArchZip;
 }

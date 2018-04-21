@@ -100,8 +100,9 @@ start_pass_huff_decoder (j_decompress_ptr cinfo)
    * there are some baseline files out there with all zeroes in these bytes.
    */
   if (cinfo->Ss != 0 || cinfo->Se != DCTSIZE2-1 ||
-      cinfo->Ah != 0 || cinfo->Al != 0)
+      cinfo->Ah != 0 || cinfo->Al != 0) {
     WARNMS(cinfo, JWRN_NOT_SEQUENTIAL);
+}
 
   for (ci = 0; ci < cinfo->comps_in_scan; ci++) {
     compptr = cinfo->cur_comp_info[ci];
@@ -168,18 +169,21 @@ jpeg_make_d_derived_tbl (j_decompress_ptr cinfo, boolean isDC, int tblno,
    */
 
   /* Find the input Huffman table */
-  if (tblno < 0 || tblno >= NUM_HUFF_TBLS)
+  if (tblno < 0 || tblno >= NUM_HUFF_TBLS) {
     ERREXIT1(cinfo, JERR_NO_HUFF_TABLE, tblno);
+}
   htbl =
     isDC ? cinfo->dc_huff_tbl_ptrs[tblno] : cinfo->ac_huff_tbl_ptrs[tblno];
-  if (htbl == NULL)
+  if (htbl == NULL) {
     ERREXIT1(cinfo, JERR_NO_HUFF_TABLE, tblno);
+}
 
   /* Allocate a workspace if we haven't already done so. */
-  if (*pdtbl == NULL)
+  if (*pdtbl == NULL) {
     *pdtbl = (d_derived_tbl *)
       (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
                                   sizeof(d_derived_tbl));
+}
   dtbl = *pdtbl;
   dtbl->pub = htbl;             /* fill in back link */
 
@@ -188,10 +192,12 @@ jpeg_make_d_derived_tbl (j_decompress_ptr cinfo, boolean isDC, int tblno,
   p = 0;
   for (l = 1; l <= 16; l++) {
     i = (int) htbl->bits[l];
-    if (i < 0 || p + i > 256)   /* protect against table overrun */
+    if (i < 0 || p + i > 256) {   /* protect against table overrun */
       ERREXIT(cinfo, JERR_BAD_HUFF_TABLE);
-    while (i--)
+}
+    while (i--) {
       huffsize[p++] = (char) l;
+}
   }
   huffsize[p] = 0;
   numsymbols = p;
@@ -210,8 +216,9 @@ jpeg_make_d_derived_tbl (j_decompress_ptr cinfo, boolean isDC, int tblno,
     /* code is now 1 more than the last code used for codelength si; but
      * it must still fit in si bits, since no code is allowed to be all ones.
      */
-    if (((JLONG) code) >= (((JLONG) 1) << si))
+    if (((JLONG) code) >= (((JLONG) 1) << si)) {
       ERREXIT(cinfo, JERR_BAD_HUFF_TABLE);
+}
     code <<= 1;
     si++;
   }
@@ -241,8 +248,9 @@ jpeg_make_d_derived_tbl (j_decompress_ptr cinfo, boolean isDC, int tblno,
    * with that code.
    */
 
-   for (i = 0; i < (1 << HUFF_LOOKAHEAD); i++)
+   for (i = 0; i < (1 << HUFF_LOOKAHEAD); i++) {
      dtbl->lookup[i] = (HUFF_LOOKAHEAD + 1) << HUFF_LOOKAHEAD;
+}
 
   p = 0;
   for (l = 1; l <= HUFF_LOOKAHEAD; l++) {
@@ -266,8 +274,9 @@ jpeg_make_d_derived_tbl (j_decompress_ptr cinfo, boolean isDC, int tblno,
   if (isDC) {
     for (i = 0; i < numsymbols; i++) {
       int sym = htbl->huffval[i];
-      if (sym < 0 || sym > 15)
+      if (sym < 0 || sym > 15) {
         ERREXIT(cinfo, JERR_BAD_HUFF_TABLE);
+}
     }
   }
 }
@@ -316,8 +325,9 @@ jpeg_fill_bit_buffer (bitread_working_state *state,
 
       /* Attempt to read a byte */
       if (bytes_in_buffer == 0) {
-        if (! (*cinfo->src->fill_input_buffer) (cinfo))
+        if (! (*cinfo->src->fill_input_buffer) (cinfo)) {
           return FALSE;
+}
         next_input_byte = cinfo->src->next_input_byte;
         bytes_in_buffer = cinfo->src->bytes_in_buffer;
       }
@@ -333,8 +343,9 @@ jpeg_fill_bit_buffer (bitread_working_state *state,
          */
         do {
           if (bytes_in_buffer == 0) {
-            if (! (*cinfo->src->fill_input_buffer) (cinfo))
+            if (! (*cinfo->src->fill_input_buffer) (cinfo)) {
               return FALSE;
+}
             next_input_byte = cinfo->src->next_input_byte;
             bytes_in_buffer = cinfo->src->bytes_in_buffer;
           }
@@ -529,12 +540,14 @@ process_restart (j_decompress_ptr cinfo)
   entropy->bitstate.bits_left = 0;
 
   /* Advance past the RSTn marker */
-  if (! (*cinfo->marker->read_restart_marker) (cinfo))
+  if (! (*cinfo->marker->read_restart_marker) (cinfo)) {
     return FALSE;
+}
 
   /* Re-initialize DC predictions to 0 */
-  for (ci = 0; ci < cinfo->comps_in_scan; ci++)
+  for (ci = 0; ci < cinfo->comps_in_scan; ci++) {
     entropy->saved.last_dc_val[ci] = 0;
+}
 
   /* Reset restart counter */
   entropy->restarts_to_go = cinfo->restart_interval;
@@ -544,8 +557,9 @@ process_restart (j_decompress_ptr cinfo)
    * segment as empty, and we can avoid producing bogus output pixels by
    * leaving the flag set.
    */
-  if (cinfo->unread_marker == 0)
+  if (cinfo->unread_marker == 0) {
     entropy->pub.insufficient_data = FALSE;
+}
 
   return TRUE;
 }
@@ -612,8 +626,9 @@ decode_mcu_slow (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
            */
           (*block)[jpeg_natural_order[k]] = (JCOEF) s;
         } else {
-          if (r != 15)
+          if (r != 15) {
             break;
+}
           k += 15;
         }
       }
@@ -633,8 +648,9 @@ decode_mcu_slow (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
           CHECK_BIT_BUFFER(br_state, s, return FALSE);
           DROP_BITS(s);
         } else {
-          if (r != 15)
+          if (r != 15) {
             break;
+}
           k += 15;
         }
       }
@@ -680,8 +696,9 @@ decode_mcu_fast (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
       int ci = cinfo->MCU_membership[blkn];
       s += state.last_dc_val[ci];
       state.last_dc_val[ci] = s;
-      if (block)
+      if (block) {
         (*block)[0] = (JCOEF) s;
+}
     }
 
     if (entropy->ac_needed[blkn] && block) {
@@ -698,7 +715,8 @@ decode_mcu_fast (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
           s = HUFF_EXTEND(r, s);
           (*block)[jpeg_natural_order[k]] = (JCOEF) s;
         } else {
-          if (r != 15) break;
+          if (r != 15) { break;
+}
           k += 15;
         }
       }
@@ -715,7 +733,8 @@ decode_mcu_fast (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
           FILL_BIT_BUFFER_FAST
           DROP_BITS(s);
         } else {
-          if (r != 15) break;
+          if (r != 15) { break;
+}
           k += 15;
         }
       }
@@ -761,15 +780,17 @@ decode_mcu (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 
   /* Process restart marker if needed; may have to suspend */
   if (cinfo->restart_interval) {
-    if (entropy->restarts_to_go == 0)
-      if (! process_restart(cinfo))
+    if (entropy->restarts_to_go == 0) {
+      if (! process_restart(cinfo)) {
         return FALSE;
+}
     usefast = 0;
   }
 
   if (cinfo->src->bytes_in_buffer < BUFSIZE * (size_t)cinfo->blocks_in_MCU
-    || cinfo->unread_marker != 0)
+    || cinfo->unread_marker != 0) {
     usefast = 0;
+}
 
   /* If we've run out of data, just leave the MCU set to zeroes.
    * This way, we return uniform gray for the remainder of the segment.
@@ -777,11 +798,13 @@ decode_mcu (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
   if (! entropy->pub.insufficient_data) {
 
     if (usefast) {
-      if (!decode_mcu_fast(cinfo, MCU_data)) goto use_slow;
+      if (!decode_mcu_fast(cinfo, MCU_data)) { goto use_slow;
+}
     }
     else {
       use_slow:
-      if (!decode_mcu_slow(cinfo, MCU_data)) return FALSE;
+      if (!decode_mcu_slow(cinfo, MCU_data)) { return FALSE;
+}
     }
 
   }

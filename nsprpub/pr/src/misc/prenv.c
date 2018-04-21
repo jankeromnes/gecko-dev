@@ -62,7 +62,8 @@ PR_IMPLEMENT(char*) PR_GetEnv(const char *var)
 {
     char *ev;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     _PR_LOCK_ENV();
     ev = _PR_MD_GET_ENV(var);
@@ -102,9 +103,11 @@ PR_IMPLEMENT(PRStatus) PR_SetEnv(const char *string)
 {
     PRIntn result;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
-    if (!strchr(string, '=')) return(PR_FAILURE);
+    if (!strchr(string, '=')) { return(PR_FAILURE);
+}
 
     _PR_LOCK_ENV();
     result = _PR_MD_PUT_ENV((char*)string);
@@ -124,8 +127,9 @@ PR_IMPLEMENT(char **) PR_DuplicateEnvironment(void)
     the_environ = environ;
 #endif
 
-    for (end = the_environ; *end != NULL; end++)
+    for (end = the_environ; *end != NULL; end++) {
         /* empty loop body */;
+}
 
     result = (char **)PR_Malloc(sizeof(char *) * (end - the_environ + 1));
     if (result != NULL) {

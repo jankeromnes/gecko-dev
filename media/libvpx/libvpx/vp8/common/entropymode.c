@@ -21,13 +21,17 @@ int vp8_mv_cont(const int_mv *l, const int_mv *a) {
   int aez = (a->as_int == 0);
   int lea = (l->as_int == a->as_int);
 
-  if (lea && lez) return SUBMVREF_LEFT_ABOVE_ZED;
+  if (lea && lez) { return SUBMVREF_LEFT_ABOVE_ZED;
+}
 
-  if (lea) return SUBMVREF_LEFT_ABOVE_SAME;
+  if (lea) { return SUBMVREF_LEFT_ABOVE_SAME;
+}
 
-  if (aez) return SUBMVREF_ABOVE_ZED;
+  if (aez) { return SUBMVREF_ABOVE_ZED;
+}
 
-  if (lez) return SUBMVREF_LEFT_ZED;
+  if (lez) { return SUBMVREF_LEFT_ZED;
+}
 
   return SUBMVREF_NORMAL;
 }

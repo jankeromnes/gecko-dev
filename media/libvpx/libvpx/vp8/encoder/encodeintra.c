@@ -74,7 +74,8 @@ void vp8_encode_intra4x4mby(MACROBLOCK *mb) {
   MACROBLOCKD *xd = &mb->e_mbd;
   intra_prediction_down_copy(xd, xd->dst.y_buffer - xd->dst.y_stride + 16);
 
-  for (i = 0; i < 16; ++i) vp8_encode_intra4x4block(mb, i);
+  for (i = 0; i < 16; ++i) { vp8_encode_intra4x4block(mb, i);
+}
   return;
 }
 
@@ -93,7 +94,8 @@ void vp8_encode_intra16x16mby(MACROBLOCK *x) {
 
   vp8_quantize_mby(x);
 
-  if (x->optimize) vp8_optimize_mby(x);
+  if (x->optimize) { vp8_optimize_mby(x);
+}
 }
 
 void vp8_encode_intra16x16mbuv(MACROBLOCK *x) {
@@ -113,5 +115,6 @@ void vp8_encode_intra16x16mbuv(MACROBLOCK *x) {
 
   vp8_quantize_mbuv(x);
 
-  if (x->optimize) vp8_optimize_mbuv(x);
+  if (x->optimize) { vp8_optimize_mbuv(x);
+}
 }

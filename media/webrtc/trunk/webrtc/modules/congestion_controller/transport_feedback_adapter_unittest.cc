@@ -110,8 +110,9 @@ TEST_F(TransportFeedbackAdapterTest, AdaptsFeedbackAndPopulatesSendTimes) {
   packets.push_back(PacketInfo(130, 230, 3, 1500, 1));
   packets.push_back(PacketInfo(140, 240, 4, 1500, 1));
 
-  for (const PacketInfo& packet : packets)
+  for (const PacketInfo& packet : packets) {
     OnSentPacket(packet);
+}
 
   rtcp::TransportFeedback feedback;
   feedback.SetBase(packets[0].sequence_number,
@@ -140,8 +141,9 @@ TEST_F(TransportFeedbackAdapterTest, HandlesDroppedPackets) {
   const uint16_t kReceiveSideDropAfter = 3;
 
   for (const PacketInfo& packet : packets) {
-    if (packet.sequence_number >= kSendSideDropBefore)
+    if (packet.sequence_number >= kSendSideDropBefore) {
       OnSentPacket(packet);
+}
   }
 
   rtcp::TransportFeedback feedback;
@@ -178,8 +180,9 @@ TEST_F(TransportFeedbackAdapterTest, SendTimeWrapsBothWays) {
   packets.push_back(
       PacketInfo(kHighArrivalTimeMs, 220, 2, 1500, PacketInfo::kNotAProbe));
 
-  for (const PacketInfo& packet : packets)
+  for (const PacketInfo& packet : packets) {
     OnSentPacket(packet);
+}
 
   for (size_t i = 0; i < packets.size(); ++i) {
     std::unique_ptr<rtcp::TransportFeedback> feedback(
@@ -213,8 +216,9 @@ TEST_F(TransportFeedbackAdapterTest, HandlesReordering) {
   expected_packets.push_back(packets[1]);
   expected_packets.push_back(packets[0]);
 
-  for (const PacketInfo& packet : packets)
+  for (const PacketInfo& packet : packets) {
     OnSentPacket(packet);
+}
 
   rtcp::TransportFeedback feedback;
   feedback.SetBase(packets[0].sequence_number,
@@ -267,8 +271,9 @@ TEST_F(TransportFeedbackAdapterTest, TimestampDeltas) {
   ++info.sequence_number;
 
   // Packets will be added to send history.
-  for (const PacketInfo& packet : sent_packets)
+  for (const PacketInfo& packet : sent_packets) {
     OnSentPacket(packet);
+}
   OnSentPacket(info);
 
   // Create expected feedback and send into adapter.

@@ -46,8 +46,9 @@ sftk_NewAttribute(SFTKObject *object,
     index = so->nextAttr++;
     PZ_Unlock(so->attributeLock);
     PORT_Assert(index < MAX_OBJS_ATTRS);
-    if (index >= MAX_OBJS_ATTRS)
+    if (index >= MAX_OBJS_ATTRS) {
         return NULL;
+}
 
     attribute = &so->attrList[index];
     attribute->attrib.type = type;
@@ -298,8 +299,9 @@ sftk_AddAttribute(SFTKObject *object, SFTKAttribute *attribute)
 {
     SFTKSessionObject *sessObject = sftk_narrowToSessionObject(object);
 
-    if (sessObject == NULL)
+    if (sessObject == NULL) {
         return;
+}
     PZ_Lock(sessObject->attributeLock);
     sftkqueue_add(attribute, attribute->handle,
                   sessObject->head, sessObject->hashSize);
@@ -319,8 +321,9 @@ sftk_Attribute2SSecItem(PLArenaPool *arena, SECItem *item, SFTKObject *object,
     item->data = NULL;
 
     attribute = sftk_FindAttribute(object, type);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return CKR_TEMPLATE_INCOMPLETE;
+}
 
     (void)SECITEM_AllocItem(arena, item, attribute->attrib.ulValueLen);
     if (item->data == NULL) {
@@ -483,8 +486,9 @@ sftk_nullAttribute(SFTKObject *object, CK_ATTRIBUTE_TYPE type)
     SFTKAttribute *attribute;
 
     attribute = sftk_FindAttribute(object, type);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return;
+}
 
     if (attribute->attrib.pValue != NULL) {
         PORT_Memset(attribute->attrib.pValue, 0, attribute->attrib.ulValueLen);
@@ -546,8 +550,9 @@ sftk_forceAttribute(SFTKObject *object, CK_ATTRIBUTE_TYPE type,
         return sftk_forceTokenAttribute(object, type, value, len);
     }
     attribute = sftk_FindAttribute(object, type);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return sftk_AddAttributeType(object, type, value, len);
+}
 
     if (value) {
         if (len <= ATTR_SPACE) {
@@ -597,8 +602,9 @@ sftk_getString(SFTKObject *object, CK_ATTRIBUTE_TYPE type)
     char *label = NULL;
 
     attribute = sftk_FindAttribute(object, type);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return NULL;
+}
 
     if (attribute->attrib.pValue != NULL) {
         label = (char *)PORT_Alloc(attribute->attrib.ulValueLen + 1);
@@ -741,8 +747,9 @@ sftk_Attribute2SecItem(PLArenaPool *arena, SECItem *item, SFTKObject *object,
     SFTKAttribute *attribute;
 
     attribute = sftk_FindAttribute(object, type);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return CKR_TEMPLATE_INCOMPLETE;
+}
     len = attribute->attrib.ulValueLen;
 
     if (arena) {
@@ -767,8 +774,9 @@ sftk_GetULongAttribute(SFTKObject *object, CK_ATTRIBUTE_TYPE type,
     SFTKAttribute *attribute;
 
     attribute = sftk_FindAttribute(object, type);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return CKR_TEMPLATE_INCOMPLETE;
+}
 
     if (attribute->attrib.ulValueLen != sizeof(CK_ULONG)) {
         return CKR_ATTRIBUTE_VALUE_INVALID;
@@ -784,8 +792,9 @@ sftk_DeleteAttributeType(SFTKObject *object, CK_ATTRIBUTE_TYPE type)
 {
     SFTKAttribute *attribute;
     attribute = sftk_FindAttribute(object, type);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return;
+}
     sftk_DeleteAttribute(object, attribute);
     sftk_FreeAttribute(attribute);
 }
@@ -1008,14 +1017,16 @@ sftk_NewObject(SFTKSlot *slot)
     sessObject->sessionList.parent = object;
     sessObject->session = NULL;
     sessObject->wasDerived = PR_FALSE;
-    if (!hasLocks)
+    if (!hasLocks) {
         object->refLock = PZ_NewLock(nssILockRefLock);
+}
     if (object->refLock == NULL) {
         PORT_Free(object);
         return NULL;
     }
-    if (!hasLocks)
+    if (!hasLocks) {
         sessObject->attributeLock = PZ_NewLock(nssILockAttribute);
+}
     if (sessObject->attributeLock == NULL) {
         PZ_DestroyLock(object->refLock);
         PORT_Free(object);
@@ -1135,8 +1146,9 @@ sftk_FreeObject(SFTKObject *object)
     CK_RV crv;
 
     PZ_Lock(object->refLock);
-    if (object->refCount == 1)
+    if (object->refCount == 1) {
         destroy = PR_TRUE;
+}
     object->refCount--;
     PZ_Unlock(object->refLock);
 
@@ -1594,8 +1606,9 @@ AddToList(SFTKObjectListElement **list, SFTKObject *object)
     SFTKObjectListElement *newElem =
         (SFTKObjectListElement *)PORT_Alloc(sizeof(SFTKObjectListElement));
 
-    if (newElem == NULL)
+    if (newElem == NULL) {
         return CKR_HOST_MEMORY;
+}
 
     newElem->next = *list;
     newElem->object = object;
@@ -1646,8 +1659,9 @@ sftk_searchObjectList(SFTKSearchResults *search, SFTKObject **head,
         for (object = head[i]; object != NULL; object = object->next) {
             if (sftk_objectMatch(object, theTemplate, count)) {
                 /* don't return objects that aren't yet visible */
-                if ((!isLoggedIn) && sftk_isTrue(object, CKA_PRIVATE))
+                if ((!isLoggedIn) && sftk_isTrue(object, CKA_PRIVATE)) {
                     continue;
+}
                 sftk_addHandle(search, object->handle);
             }
         }
@@ -1764,12 +1778,14 @@ sftk_NewSession(CK_SLOT_ID slotID, CK_NOTIFY notify, CK_VOID_PTR pApplication,
     SFTKSession *session;
     SFTKSlot *slot = sftk_SlotFromID(slotID, PR_FALSE);
 
-    if (slot == NULL)
+    if (slot == NULL) {
         return NULL;
+}
 
     session = (SFTKSession *)PORT_Alloc(sizeof(SFTKSession));
-    if (session == NULL)
+    if (session == NULL) {
         return NULL;
+}
 
     session->next = session->prev = NULL;
     session->refCount = 1;
@@ -1838,14 +1854,16 @@ sftk_SessionFromHandle(CK_SESSION_HANDLE handle)
     SFTKSession *session;
     PZLock *lock;
 
-    if (!slot)
+    if (!slot) {
         return NULL;
+}
     lock = SFTK_SESSION_LOCK(slot, handle);
 
     PZ_Lock(lock);
     sftkqueue_find(session, handle, slot->head, slot->sessHashSize);
-    if (session)
+    if (session) {
         session->refCount++;
+}
     PZ_Unlock(lock);
 
     return (session);
@@ -1862,13 +1880,15 @@ sftk_FreeSession(SFTKSession *session)
     PZLock *lock = SFTK_SESSION_LOCK(slot, session->handle);
 
     PZ_Lock(lock);
-    if (session->refCount == 1)
+    if (session->refCount == 1) {
         destroy = PR_TRUE;
+}
     session->refCount--;
     PZ_Unlock(lock);
 
-    if (destroy)
+    if (destroy) {
         sftk_DestroySession(session);
+}
 }
 
 void

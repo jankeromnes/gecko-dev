@@ -66,8 +66,9 @@ padBlock(SECItem *data, int blockSize, SECItem *result)
     PORT_Memcpy(result->data, data->data, data->len);
 
     /* Add the pad values */
-    for (i = data->len; i < result->len; i++)
+    for (i = data->len; i < result->len; i++) {
         result->data[i] = (unsigned char)padLength;
+}
 
     return rv;
 }
@@ -185,8 +186,9 @@ PK11SDR_Encrypt(SECItem *keyid, SECItem *data, SECItem *result, void *cx)
      * won't find it.
      */
     rv = PK11_Authenticate(slot, PR_TRUE, cx);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* Find the key to use */
     pKeyID = keyid;
@@ -197,17 +199,20 @@ PK11SDR_Encrypt(SECItem *keyid, SECItem *data, SECItem *result, void *cx)
          * key and creating  one.
          */
 
-        if (pk11sdrLock)
+        if (pk11sdrLock) {
             PR_Lock(pk11sdrLock);
+}
 
         /* Try to find the key */
         key = PK11_FindFixedKey(slot, type, pKeyID, cx);
 
         /* If the default key doesn't exist yet, try to create it */
-        if (!key)
+        if (!key) {
             key = PK11_GenDES3TokenKey(slot, pKeyID, cx);
-        if (pk11sdrLock)
+}
+        if (pk11sdrLock) {
             PR_Unlock(pk11sdrLock);
+}
     } else {
         key = PK11_FindFixedKey(slot, type, pKeyID, cx);
     }
@@ -230,24 +235,27 @@ PK11SDR_Encrypt(SECItem *keyid, SECItem *data, SECItem *result, void *cx)
     }
 
     rv = padBlock(data, PK11_GetBlockSize(type, 0), &paddedData);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     sdrResult.data.len = paddedData.len;
     sdrResult.data.data = (unsigned char *)PORT_ArenaAlloc(arena, sdrResult.data.len);
 
     rv = PK11_CipherOp(ctx, sdrResult.data.data, (int *)&sdrResult.data.len, sdrResult.data.len,
                        paddedData.data, paddedData.len);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PK11_Finalize(ctx);
 
     sdrResult.keyid = *pKeyID;
 
     rv = PK11_ParamToAlgid(SEC_OID_DES_EDE3_CBC, params, arena, &sdrResult.alg);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     if (!SEC_ASN1EncodeItem(0, result, &sdrResult, template)) {
         rv = SECFailure;
@@ -256,16 +264,21 @@ PK11SDR_Encrypt(SECItem *keyid, SECItem *data, SECItem *result, void *cx)
 
 loser:
     SECITEM_ZfreeItem(&paddedData, PR_FALSE);
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_TRUE);
-    if (ctx)
+}
+    if (ctx) {
         PK11_DestroyContext(ctx, PR_TRUE);
-    if (params)
+}
+    if (params) {
         SECITEM_ZfreeItem(params, PR_TRUE);
-    if (key)
+}
+    if (key) {
         PK11_FreeSymKey(key);
-    if (slot)
+}
+    if (slot) {
         PK11_FreeSlot(slot);
+}
 
     return rv;
 }
@@ -295,19 +308,22 @@ pk11Decrypt(PK11SlotInfo *slot, PLArenaPool *arena,
     rv = PK11_CipherOp(ctx, paddedResult.data,
                        (int *)&paddedResult.len, paddedResult.len,
                        in->data, in->len);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PK11_Finalize(ctx);
 
     /* Remove the padding */
     rv = unpadBlock(&paddedResult, PK11_GetBlockSize(type, 0), result);
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
 loser:
-    if (ctx)
+    if (ctx) {
         PK11_DestroyContext(ctx, PR_TRUE);
+}
     return rv;
 }
 
@@ -337,8 +353,9 @@ PK11SDR_Decrypt(SECItem *data, SECItem *result, void *cx)
     /* Decode the incoming data */
     memset(&sdrResult, 0, sizeof sdrResult);
     rv = SEC_QuickDERDecodeItem(arena, &sdrResult, template, data);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser; /* Invalid format */
+}
 
     /* Find the slot and key for the given keyid */
     slot = PK11_GetInternalKeySlot();
@@ -348,8 +365,9 @@ PK11SDR_Decrypt(SECItem *data, SECItem *result, void *cx)
     }
 
     rv = PK11_Authenticate(slot, PR_TRUE, cx);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* Get the parameter values from the data */
     params = PK11_ParamFromAlgid(&sdrResult.alg);
@@ -422,16 +440,21 @@ PK11SDR_Decrypt(SECItem *data, SECItem *result, void *cx)
     }
 
 loser:
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_TRUE);
-    if (key)
+}
+    if (key) {
         PK11_FreeSymKey(key);
-    if (params)
+}
+    if (params) {
         SECITEM_ZfreeItem(params, PR_TRUE);
-    if (slot)
+}
+    if (slot) {
         PK11_FreeSlot(slot);
-    if (possibleResult.data)
+}
+    if (possibleResult.data) {
         SECITEM_ZfreeItem(&possibleResult, PR_FALSE);
+}
 
     return rv;
 }

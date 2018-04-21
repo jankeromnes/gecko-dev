@@ -308,8 +308,9 @@ ssse3_fetch_bilinear_cover (pixman_iter_t *iter, const uint32_t *mask)
     ux = iter->image->transform->matrix[0][0];
 
     y0 = pixman_fixed_to_int (info->y);
-    if (y0 < 0)
+    if (y0 < 0) {
         *(volatile char*)0 = 9;
+}
     y1 = y0 + 1;
 
     // clamping in y direction
@@ -468,12 +469,14 @@ ssse3_bilinear_cover_iter_init (pixman_iter_t *iter)
     v.vector[1] = pixman_int_to_fixed (iter->y) + pixman_fixed_1 / 2;
     v.vector[2] = pixman_fixed_1;
 
-    if (!pixman_transform_point_3d (iter->image->transform, &v))
+    if (!pixman_transform_point_3d (iter->image->transform, &v)) {
 	goto fail;
+}
 
     info = malloc (sizeof (*info) + (2 * width - 1) * sizeof (uint64_t) + 64);
-    if (!info)
+    if (!info) {
 	goto fail;
+}
 
     info->x = v.vector[0] - pixman_fixed_1 / 2;
     info->y = v.vector[1] - pixman_fixed_1 / 2;

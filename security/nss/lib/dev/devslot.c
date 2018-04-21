@@ -286,8 +286,9 @@ nssSlot_GetToken(
         /* Even if a token should be present, check `slot->token` too as it
          * might be gone already. This would happen mostly on shutdown. */
         nssSlot_EnterMonitor(slot);
-        if (slot->token)
+        if (slot->token) {
             rvToken = nssToken_AddRef(slot->token);
+}
         nssSlot_ExitMonitor(slot);
     }
 
@@ -298,8 +299,9 @@ NSS_IMPLEMENT PRStatus
 nssSession_EnterMonitor(
     nssSession *s)
 {
-    if (s->lock)
+    if (s->lock) {
         PZ_Lock(s->lock);
+}
     return PR_SUCCESS;
 }
 

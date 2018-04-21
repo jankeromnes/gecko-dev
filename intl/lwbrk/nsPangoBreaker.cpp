@@ -19,8 +19,9 @@ NS_GetComplexLineBreaks(const char16_t* aText, uint32_t aLength,
   memset(aBreakBefore, false, aLength * sizeof(uint8_t));
 
   AutoTArray<PangoLogAttr, 2000> attrBuffer;
-  if (!attrBuffer.AppendElements(aLength + 1))
+  if (!attrBuffer.AppendElements(aLength + 1)) {
     return;
+}
 
   NS_ConvertUTF16toUTF8 aUTF8(aText, aLength);
 
@@ -38,8 +39,9 @@ NS_GetComplexLineBreaks(const char16_t* aText, uint32_t aLength,
     while (p < end)
     {
       aBreakBefore[u16Offset] = attr->is_line_break;
-      if (NS_IS_LOW_SURROGATE(aText[u16Offset]))
+      if (NS_IS_LOW_SURROGATE(aText[u16Offset])) {
         aBreakBefore[++u16Offset] = false; // Skip high surrogate
+}
       ++u16Offset;
 
       bool err;

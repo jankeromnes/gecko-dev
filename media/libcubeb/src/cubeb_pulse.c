@@ -398,10 +398,12 @@ wait_until_context_ready(cubeb * ctx)
 {
   for (;;) {
     pa_context_state_t state = WRAP(pa_context_get_state)(ctx->context);
-    if (!PA_CONTEXT_IS_GOOD(state))
+    if (!PA_CONTEXT_IS_GOOD(state)) {
       return -1;
-    if (state == PA_CONTEXT_READY)
+}
+    if (state == PA_CONTEXT_READY) {
       break;
+}
     WRAP(pa_threaded_mainloop_wait)(ctx->mainloop);
   }
   return 0;
@@ -415,10 +417,12 @@ wait_until_io_stream_ready(pa_stream * stream, pa_threaded_mainloop * mainloop)
   }
   for (;;) {
     pa_stream_state_t state = WRAP(pa_stream_get_state)(stream);
-    if (!PA_STREAM_IS_GOOD(state))
+    if (!PA_STREAM_IS_GOOD(state)) {
       return -1;
-    if (state == PA_STREAM_READY)
+}
+    if (state == PA_STREAM_READY) {
       break;
+}
     WRAP(pa_threaded_mainloop_wait)(mainloop);
   }
   return 0;
@@ -692,8 +696,9 @@ pulse_get_max_channel_count(cubeb * ctx, uint32_t * max_channels)
   (void)ctx;
   assert(ctx && max_channels);
 
-  if (!ctx->default_sink_info)
+  if (!ctx->default_sink_info) {
     return CUBEB_ERROR;
+}
 
   *max_channels = ctx->default_sink_info->channel_map.channels;
 
@@ -706,8 +711,9 @@ pulse_get_preferred_sample_rate(cubeb * ctx, uint32_t * rate)
   assert(ctx && rate);
   (void)ctx;
 
-  if (!ctx->default_sink_info)
+  if (!ctx->default_sink_info) {
     return CUBEB_ERROR;
+}
 
   *rate = ctx->default_sink_info->sample_spec_rate;
 
@@ -801,8 +807,9 @@ create_pa_stream(cubeb_stream * stm,
   *pa_stm = NULL;
   pa_sample_spec ss;
   ss.format = to_pulse_format(stream_params->format);
-  if (ss.format == PA_SAMPLE_INVALID)
+  if (ss.format == PA_SAMPLE_INVALID) {
     return CUBEB_ERROR_INVALID_FORMAT;
+}
   ss.rate = stream_params->rate;
   ss.channels = stream_params->channels;
 
@@ -1234,11 +1241,12 @@ pulse_get_state_from_sink_port(pa_sink_port_info * info)
 {
   if (info != NULL) {
 #if PA_CHECK_VERSION(2, 0, 0)
-    if (has_pulse_v2 && info->available == PA_PORT_AVAILABLE_NO)
+    if (has_pulse_v2 && info->available == PA_PORT_AVAILABLE_NO) {
       return CUBEB_DEVICE_STATE_UNPLUGGED;
-    else /*if (info->available == PA_PORT_AVAILABLE_YES) + UNKNOWN */
+    } else { /*if (info->available == PA_PORT_AVAILABLE_YES) + UNKNOWN */
 #endif
       return CUBEB_DEVICE_STATE_ENABLED;
+}
   }
 
   return CUBEB_DEVICE_STATE_ENABLED;
@@ -1260,8 +1268,9 @@ pulse_sink_info_cb(pa_context * context, const pa_sink_info * info,
     return;
   }
 
-  if (info == NULL)
+  if (info == NULL) {
     return;
+}
 
   device_id = info->name;
   if (intern_device_id(list_data->context, &device_id) != CUBEB_OK) {
@@ -1277,11 +1286,13 @@ pulse_sink_info_cb(pa_context * context, const pa_sink_info * info,
   devinfo->devid = (cubeb_devid) devinfo->device_id;
   devinfo->friendly_name = strdup(info->description);
   prop = WRAP(pa_proplist_gets)(info->proplist, "sysfs.path");
-  if (prop)
+  if (prop) {
     devinfo->group_id = strdup(prop);
+}
   prop = WRAP(pa_proplist_gets)(info->proplist, "device.vendor.name");
-  if (prop)
+  if (prop) {
     devinfo->vendor_name = strdup(prop);
+}
 
   devinfo->type = CUBEB_DEVICE_TYPE_OUTPUT;
   devinfo->state = pulse_get_state_from_sink_port(info->active_port);
@@ -1306,11 +1317,12 @@ pulse_get_state_from_source_port(pa_source_port_info * info)
 {
   if (info != NULL) {
 #if PA_CHECK_VERSION(2, 0, 0)
-    if (has_pulse_v2 && info->available == PA_PORT_AVAILABLE_NO)
+    if (has_pulse_v2 && info->available == PA_PORT_AVAILABLE_NO) {
       return CUBEB_DEVICE_STATE_UNPLUGGED;
-    else /*if (info->available == PA_PORT_AVAILABLE_YES) + UNKNOWN */
+    } else { /*if (info->available == PA_PORT_AVAILABLE_YES) + UNKNOWN */
 #endif
       return CUBEB_DEVICE_STATE_ENABLED;
+}
   }
 
   return CUBEB_DEVICE_STATE_ENABLED;
@@ -1346,11 +1358,13 @@ pulse_source_info_cb(pa_context * context, const pa_source_info * info,
   devinfo->devid = (cubeb_devid) devinfo->device_id;
   devinfo->friendly_name = strdup(info->description);
   prop = WRAP(pa_proplist_gets)(info->proplist, "sysfs.path");
-  if (prop)
+  if (prop) {
     devinfo->group_id = strdup(prop);
+}
   prop = WRAP(pa_proplist_gets)(info->proplist, "device.vendor.name");
-  if (prop)
+  if (prop) {
     devinfo->vendor_name = strdup(prop);
+}
 
   devinfo->type = CUBEB_DEVICE_TYPE_INPUT;
   devinfo->state = pulse_get_state_from_source_port(info->active_port);
@@ -1451,8 +1465,9 @@ pulse_stream_get_current_device(cubeb_stream * stm, cubeb_device ** const device
 {
 #if PA_CHECK_VERSION(0, 9, 8)
   *device = calloc(1, sizeof(cubeb_device));
-  if (*device == NULL)
+  if (*device == NULL) {
     return CUBEB_ERROR;
+}
 
   if (stm->input_stream) {
     const char * name = WRAP(pa_stream_get_device_name)(stm->input_stream);
@@ -1545,12 +1560,13 @@ pulse_register_device_collection_changed(cubeb * context,
     mask = PA_SUBSCRIPTION_MASK_NULL;
   } else {
     WRAP(pa_context_set_subscribe_callback)(context->context, pulse_subscribe_callback, context);
-    if (devtype == CUBEB_DEVICE_TYPE_INPUT)
+    if (devtype == CUBEB_DEVICE_TYPE_INPUT) {
       mask = PA_SUBSCRIPTION_MASK_SOURCE;
-    else if (devtype == CUBEB_DEVICE_TYPE_OUTPUT)
+    } else if (devtype == CUBEB_DEVICE_TYPE_OUTPUT) {
       mask = PA_SUBSCRIPTION_MASK_SINK;
-    else
+    } else {
       mask = PA_SUBSCRIPTION_MASK_SINK | PA_SUBSCRIPTION_MASK_SOURCE;
+}
   }
 
   pa_operation * o;

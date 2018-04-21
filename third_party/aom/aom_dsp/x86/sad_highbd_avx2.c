@@ -207,7 +207,8 @@ static void sad32x4(const uint16_t *src_ptr, int src_stride,
     row_sections += 1;
     src_ptr += src_stride << 1;
     ref_ptr += ref_stride << 1;
-    if (sec_ptr) sec_ptr += 32 << 1;
+    if (sec_ptr) { sec_ptr += 32 << 1;
+}
   }
 }
 

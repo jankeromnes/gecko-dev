@@ -80,8 +80,9 @@ AESKeyWrap_CreateContext(const unsigned char *key, const unsigned char *iv,
 {
     SECStatus rv;
     AESKeyWrapContext *cx = AESKeyWrap_AllocateContext();
-    if (!cx)
+    if (!cx) {
         return NULL; /* error is already set */
+}
     rv = AESKeyWrap_InitContext(cx, key, keylen, iv, 0, encrypt, 0);
     if (rv != SECSuccess) {
         PORT_Free(cx->mem);
@@ -124,14 +125,15 @@ AESKeyWrap_DestroyContext(AESKeyWrapContext *cx, PRBool freeit)
 static void
 increment_and_xor(unsigned char *A, unsigned char *T)
 {
-    if (!++T[7])
-        if (!++T[6])
-            if (!++T[5])
-                if (!++T[4])
-                    if (!++T[3])
-                        if (!++T[2])
-                            if (!++T[1])
+    if (!++T[7]) {
+        if (!++T[6]) {
+            if (!++T[5]) {
+                if (!++T[4]) {
+                    if (!++T[3]) {
+                        if (!++T[2]) {
+                            if (!++T[1]) {
                                 ++T[0];
+}
 
     A[0] ^= T[0];
     A[1] ^= T[1];
@@ -161,14 +163,15 @@ xor_and_decrement(PRUint64 *A, PRUint64 *T)
          ((*A & mask << 8) ^ (*T & mask << 8)) |
          ((*A & mask) ^ (*T & mask));
 
-    if (!TP[7]--)
-        if (!TP[6]--)
-            if (!TP[5]--)
-                if (!TP[4]--)
-                    if (!TP[3]--)
-                        if (!TP[2]--)
-                            if (!TP[1]--)
+    if (!TP[7]--) {
+        if (!TP[6]--) {
+            if (!TP[5]--) {
+                if (!TP[4]--) {
+                    if (!TP[3]--) {
+                        if (!TP[2]--) {
+                            if (!TP[1]--) {
                                 TP[0]--;
+}
 }
 
 /* Given an unsigned long t (in host byte order), store this value as a
@@ -245,8 +248,9 @@ AESKeyWrap_Encrypt(AESKeyWrapContext *cx, unsigned char *output,
     }
     nBlocks = inputLen / AES_KEY_WRAP_BLOCK_SIZE;
     R = PORT_NewArray(PRUint64, nBlocks + 1);
-    if (!R)
+    if (!R) {
         return s; /* error is already set. */
+}
     /*
     ** 1) Initialize variables.
     */
@@ -265,8 +269,9 @@ AESKeyWrap_Encrypt(AESKeyWrapContext *cx, unsigned char *output,
             B[1] = R[i];
             s = AES_Encrypt(&cx->aescx, (unsigned char *)B, &aesLen,
                             sizeof B, (unsigned char *)B, sizeof B);
-            if (s != SECSuccess)
+            if (s != SECSuccess) {
                 break;
+}
             R[i] = B[1];
 /* here, increment t and XOR A with t (in big endian order); */
 #if BIG_ENDIAN_WITH_64_BIT_REGISTERS
@@ -282,8 +287,9 @@ AESKeyWrap_Encrypt(AESKeyWrapContext *cx, unsigned char *output,
     if (s == SECSuccess) {
         R[0] = A;
         memcpy(output, &R[0], outLen);
-        if (pOutputLen)
+        if (pOutputLen) {
             *pOutputLen = outLen;
+}
     } else if (pOutputLen) {
         *pOutputLen = 0;
     }
@@ -341,8 +347,9 @@ AESKeyWrap_Decrypt(AESKeyWrapContext *cx, unsigned char *output,
     }
     nBlocks = inputLen / AES_KEY_WRAP_BLOCK_SIZE;
     R = PORT_NewArray(PRUint64, nBlocks);
-    if (!R)
+    if (!R) {
         return s; /* error is already set. */
+}
     nBlocks--;
     /*
     ** 1) Initialize variables.
@@ -368,8 +375,9 @@ AESKeyWrap_Decrypt(AESKeyWrapContext *cx, unsigned char *output,
             B[1] = R[i];
             s = AES_Decrypt(&cx->aescx, (unsigned char *)B, &aesLen,
                             sizeof B, (unsigned char *)B, sizeof B);
-            if (s != SECSuccess)
+            if (s != SECSuccess) {
                 break;
+}
             R[i] = B[1];
         }
     }
@@ -380,13 +388,15 @@ AESKeyWrap_Decrypt(AESKeyWrapContext *cx, unsigned char *output,
         int bad = memcmp(&B[0], cx->iv, AES_KEY_WRAP_IV_BYTES);
         if (!bad) {
             memcpy(output, &R[1], outLen);
-            if (pOutputLen)
+            if (pOutputLen) {
                 *pOutputLen = outLen;
+}
         } else {
             s = SECFailure;
             PORT_SetError(SEC_ERROR_BAD_DATA);
-            if (pOutputLen)
+            if (pOutputLen) {
                 *pOutputLen = 0;
+}
         }
     } else if (pOutputLen) {
         *pOutputLen = 0;

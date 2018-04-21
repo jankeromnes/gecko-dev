@@ -462,8 +462,9 @@ nss_cms_choose_content_template(void *src_or_dest, PRBool encoding)
     SECOidTag type;
 
     PORT_Assert(src_or_dest != NULL);
-    if (src_or_dest == NULL)
+    if (src_or_dest == NULL) {
         return NULL;
+}
 
     cinfo = (NSSCMSContentInfo *)src_or_dest;
     type = NSS_CMSContentInfo_GetContentTypeTag(cinfo);

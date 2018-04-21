@@ -78,8 +78,9 @@ static void update_mode(vp8_writer *const w, int n, vp8_token tok[/* n */],
 
       vp8_write_literal(w, Pcur[j] = p ? p : 1, 8);
     } while (++j < n);
-  } else
+  } else {
     vp8_write_bit(w, 0);
+}
 }
 
 static void update_mbintra_mode_probs(VP8_COMP *cpi) {
@@ -403,14 +404,16 @@ void vp8_convert_rfct_to_prob(VP8_COMP *const cpi) {
 
   cpi->prob_last_coded = rf_inter ? (rfct[LAST_FRAME] * 255) / rf_inter : 128;
 
-  if (!cpi->prob_last_coded) cpi->prob_last_coded = 1;
+  if (!cpi->prob_last_coded) { cpi->prob_last_coded = 1;
+}
 
   cpi->prob_gf_coded = (rfct[GOLDEN_FRAME] + rfct[ALTREF_FRAME])
                            ? (rfct[GOLDEN_FRAME] * 255) /
                                  (rfct[GOLDEN_FRAME] + rfct[ALTREF_FRAME])
                            : 128;
 
-  if (!cpi->prob_gf_coded) cpi->prob_gf_coded = 1;
+  if (!cpi->prob_gf_coded) { cpi->prob_gf_coded = 1;
+}
 }
 
 static void pack_inter_mode_mvs(VP8_COMP *const cpi) {
@@ -437,9 +440,11 @@ static void pack_inter_mode_mvs(VP8_COMP *const cpi) {
 
     prob_skip_false = (total_mbs - cpi->mb.skip_true_count) * 256 / total_mbs;
 
-    if (prob_skip_false <= 1) prob_skip_false = 1;
+    if (prob_skip_false <= 1) { prob_skip_false = 1;
+}
 
-    if (prob_skip_false > 255) prob_skip_false = 255;
+    if (prob_skip_false > 255) { prob_skip_false = 255;
+}
 
     cpi->prob_skip_false = prob_skip_false;
     vp8_write_literal(w, prob_skip_false, 8);
@@ -507,9 +512,9 @@ static void pack_inter_mode_mvs(VP8_COMP *const cpi) {
 
         vp8_write(w, 1, cpi->prob_intra_coded);
 
-        if (rf == LAST_FRAME)
+        if (rf == LAST_FRAME) {
           vp8_write(w, 0, cpi->prob_last_coded);
-        else {
+        } else {
           vp8_write(w, 1, cpi->prob_last_coded);
           vp8_write(w, (rf == GOLDEN_FRAME) ? 0 : 1, cpi->prob_gf_coded);
         }
@@ -610,9 +615,11 @@ static void write_kfmodes(VP8_COMP *cpi) {
 
     prob_skip_false = (total_mbs - cpi->mb.skip_true_count) * 256 / total_mbs;
 
-    if (prob_skip_false <= 1) prob_skip_false = 1;
+    if (prob_skip_false <= 1) { prob_skip_false = 1;
+}
 
-    if (prob_skip_false >= 255) prob_skip_false = 255;
+    if (prob_skip_false >= 255) { prob_skip_false = 255;
+}
 
     cpi->prob_skip_false = prob_skip_false;
     vp8_write_literal(bc, prob_skip_false, 8);
@@ -701,7 +708,8 @@ static void sum_probs_over_prev_coef_context(
       const unsigned int tmp = out[i];
       out[i] += probs[j][i];
       /* check for wrap */
-      if (out[i] < tmp) out[i] = UINT_MAX;
+      if (out[i] < tmp) { out[i] = UINT_MAX;
+}
     }
   }
 }
@@ -847,7 +855,8 @@ int vp8_estimate_entropy_savings(VP8_COMP *cpi) {
   vpx_clear_system_state();
 
   if (cpi->common.frame_type != KEY_FRAME) {
-    if (!(new_intra = rf_intra * 255 / (rf_intra + rf_inter))) new_intra = 1;
+    if (!(new_intra = rf_intra * 255 / (rf_intra + rf_inter))) { new_intra = 1;
+}
 
     new_last = rf_inter ? (rfct[LAST_FRAME] * 255) / rf_inter : 128;
 
@@ -956,7 +965,8 @@ void vp8_update_coef_probs(VP8_COMP *cpi) {
                                     newp, upd);
           }
 
-          if (s > 0) u = 1;
+          if (s > 0) { u = 1;
+}
 
           /* Force updates on key frames if the new is different,
            * so that we can be sure we end up with equal probabilities
@@ -1048,12 +1058,14 @@ static void put_delta_q(vp8_writer *bc, int delta_q) {
     vp8_write_bit(bc, 1);
     vp8_write_literal(bc, abs(delta_q), 4);
 
-    if (delta_q < 0)
+    if (delta_q < 0) {
       vp8_write_bit(bc, 1);
-    else
+    } else {
       vp8_write_bit(bc, 0);
-  } else
+}
+  } else {
     vp8_write_bit(bc, 0);
+}
 }
 
 void vp8_pack_bitstream(VP8_COMP *cpi, unsigned char *dest,
@@ -1151,8 +1163,9 @@ void vp8_pack_bitstream(VP8_COMP *cpi, unsigned char *dest,
               vp8_write_literal(bc, Data, mb_feature_data_bits[i]);
               vp8_write_bit(bc, 0);
             }
-          } else
+          } else {
             vp8_write_bit(bc, 0);
+}
         }
       }
     }
@@ -1165,8 +1178,9 @@ void vp8_pack_bitstream(VP8_COMP *cpi, unsigned char *dest,
         if (Data != 255) {
           vp8_write_bit(bc, 1);
           vp8_write_literal(bc, Data, 8);
-        } else
+        } else {
           vp8_write_bit(bc, 0);
+}
       }
     }
   }
@@ -1207,8 +1221,9 @@ void vp8_pack_bitstream(VP8_COMP *cpi, unsigned char *dest,
             vp8_write_literal(bc, (Data & 0x3F), 6);
             vp8_write_bit(bc, 1); /* sign */
           }
-        } else
+        } else {
           vp8_write_bit(bc, 0);
+}
       }
 
       /* Send update */
@@ -1228,8 +1243,9 @@ void vp8_pack_bitstream(VP8_COMP *cpi, unsigned char *dest,
             vp8_write_literal(bc, (Data & 0x3F), 6);
             vp8_write_bit(bc, 1); /* sign */
           }
-        } else
+        } else {
           vp8_write_bit(bc, 0);
+}
       }
     }
   }
@@ -1260,11 +1276,13 @@ void vp8_pack_bitstream(VP8_COMP *cpi, unsigned char *dest,
     /* If not being updated from current frame should either GF or ARF
      * be updated from another buffer
      */
-    if (!pc->refresh_golden_frame)
+    if (!pc->refresh_golden_frame) {
       vp8_write_literal(bc, pc->copy_buffer_to_gf, 2);
+}
 
-    if (!pc->refresh_alt_ref_frame)
+    if (!pc->refresh_alt_ref_frame) {
       vp8_write_literal(bc, pc->copy_buffer_to_arf, 2);
+}
 
     /* Indicate reference frame sign bias for Golden and ARF frames
      * (always 0 for last frame buffer)
@@ -1285,7 +1303,8 @@ void vp8_pack_bitstream(VP8_COMP *cpi, unsigned char *dest,
 
   vp8_write_bit(bc, pc->refresh_entropy_probs);
 
-  if (pc->frame_type != KEY_FRAME) vp8_write_bit(bc, pc->refresh_last_frame);
+  if (pc->frame_type != KEY_FRAME) { vp8_write_bit(bc, pc->refresh_last_frame);
+}
 
 #ifdef VP8_ENTROPY_STATS
 

@@ -642,8 +642,9 @@ internal_FillRanges(JSContext *cx, JS::Handle<JSObject*> array, Histogram *h)
   JS::Rooted<JS::Value> range(cx);
   for (size_t i = 0; i < h->bucket_count(); i++) {
     range.setInt32(h->ranges(i));
-    if (!JS_DefineElement(cx, array, i, range, JSPROP_ENUMERATE))
+    if (!JS_DefineElement(cx, array, i, range, JSPROP_ENUMERATE)) {
       return false;
+}
   }
   return true;
 }
@@ -1750,8 +1751,9 @@ internal_WrapAndReturnKeyedHistogram(HistogramID id, JSContext *cx,
                                      JS::MutableHandle<JS::Value> ret)
 {
   JS::Rooted<JSObject*> obj(cx, JS_NewObject(cx, &sJSKeyedHistogramClass));
-  if (!obj)
+  if (!obj) {
     return NS_ERROR_FAILURE;
+}
   // The 6 functions that are wrapped up here are eventually called
   // by the same thread that runs this function.
   if (!(JS_DefineFunction(cx, obj, "add", internal_JSKeyedHistogram_Add, 2, 0)

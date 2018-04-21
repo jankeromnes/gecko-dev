@@ -235,7 +235,8 @@ void silk_NSQ_del_dec_sse4_1(
                     last_smple_idx = smpl_buf_idx + decisionDelay;
                     for( i = 0; i < decisionDelay; i++ ) {
                         last_smple_idx = ( last_smple_idx - 1 ) % DECISION_DELAY;
-                        if( last_smple_idx < 0 ) last_smple_idx += DECISION_DELAY;
+                        if( last_smple_idx < 0 ) { last_smple_idx += DECISION_DELAY;
+}
                         pulses[   i - decisionDelay ] = (opus_int8)silk_RSHIFT_ROUND( psDD->Q_Q10[ last_smple_idx ], 10 );
                         pxq[ i - decisionDelay ] = (opus_int16)silk_SAT16( silk_RSHIFT_ROUND(
                             silk_SMULWW( psDD->Xq_Q14[ last_smple_idx ], Gains_Q16[ 1 ] ), 14 ) );
@@ -287,7 +288,8 @@ void silk_NSQ_del_dec_sse4_1(
     Gain_Q10 = silk_RSHIFT32( Gains_Q16[ psEncC->nb_subfr - 1 ], 6 );
     for( i = 0; i < decisionDelay; i++ ) {
         last_smple_idx = ( last_smple_idx - 1 ) % DECISION_DELAY;
-        if( last_smple_idx < 0 ) last_smple_idx += DECISION_DELAY;
+        if( last_smple_idx < 0 ) { last_smple_idx += DECISION_DELAY;
+}
         pulses[   i - decisionDelay ] = (opus_int8)silk_RSHIFT_ROUND( psDD->Q_Q10[ last_smple_idx ], 10 );
         pxq[ i - decisionDelay ] = (opus_int16)silk_SAT16( silk_RSHIFT_ROUND(
             silk_SMULWW( psDD->Xq_Q14[ last_smple_idx ], Gain_Q10 ), 8 ) );
@@ -640,7 +642,8 @@ static OPUS_INLINE void silk_noise_shape_quantizer_del_dec_sse4_1(
             }
         }
         *smpl_buf_idx  = ( *smpl_buf_idx - 1 ) % DECISION_DELAY;
-        if( *smpl_buf_idx < 0 ) *smpl_buf_idx += DECISION_DELAY;
+        if( *smpl_buf_idx < 0 ) { *smpl_buf_idx += DECISION_DELAY;
+}
         last_smple_idx = ( *smpl_buf_idx + decisionDelay ) % DECISION_DELAY;
 
         /* Find winner */

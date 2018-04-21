@@ -13,8 +13,9 @@ namespace internal {
 
 int ThreadPriorityToNiceValue(ThreadPriority priority) {
   for (const auto& pair : kThreadPriorityToNiceValueMap) {
-    if (pair.priority == priority)
+    if (pair.priority == priority) {
       return pair.nice_value;
+}
   }
   NOTREACHED() << "Unknown ThreadPriority";
   return 0;
@@ -25,8 +26,9 @@ ThreadPriority NiceValueToThreadPriority(int nice_value) {
   // an exact match, this method returns the closest priority whose nice value
   // is higher (lower priority) than |nice_value|.
   for (const auto& pair : Reversed(kThreadPriorityToNiceValueMap)) {
-    if (pair.nice_value >= nice_value)
+    if (pair.nice_value >= nice_value) {
       return pair.priority;
+}
   }
 
   // Reaching here means |nice_value| is more than any of the defined

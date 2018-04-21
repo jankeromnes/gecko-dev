@@ -267,12 +267,14 @@ AccessibleWrap::~AccessibleWrap()
 void
 AccessibleWrap::ShutdownAtkObject()
 {
-  if (!mAtkObject)
+  if (!mAtkObject) {
     return;
+}
 
   NS_ASSERTION(IS_MAI_OBJECT(mAtkObject), "wrong type of atk object");
-  if (IS_MAI_OBJECT(mAtkObject))
+  if (IS_MAI_OBJECT(mAtkObject)) {
     MAI_ATK_OBJECT(mAtkObject)->Shutdown();
+}
 
   g_object_unref(mAtkObject);
   mAtkObject = nullptr;
@@ -298,12 +300,14 @@ AccessibleWrap::GetNativeInterface(void** aOutAccessible)
     }
 
     GType type = GetMaiAtkType(CreateMaiInterfaces());
-    if (!type)
+    if (!type) {
       return;
+}
 
     mAtkObject = reinterpret_cast<AtkObject*>(g_object_new(type, nullptr));
-    if (!mAtkObject)
+    if (!mAtkObject) {
       return;
+}
 
     atk_object_initialize(mAtkObject, this);
     mAtkObject->role = ATK_ROLE_INVALID;
@@ -341,40 +345,48 @@ AccessibleWrap::CreateMaiInterfaces(void)
   interfacesBits |= 1 << MAI_INTERFACE_COMPONENT;
 
   // Add Action interface if the action count is more than zero.
-  if (ActionCount() > 0)
+  if (ActionCount() > 0) {
     interfacesBits |= 1 << MAI_INTERFACE_ACTION;
+}
 
   // Text, Editabletext, and Hypertext interface.
   HyperTextAccessible* hyperText = AsHyperText();
   if (hyperText && hyperText->IsTextRole()) {
     interfacesBits |= 1 << MAI_INTERFACE_TEXT;
     interfacesBits |= 1 << MAI_INTERFACE_EDITABLE_TEXT;
-    if (!nsAccUtils::MustPrune(this))
+    if (!nsAccUtils::MustPrune(this)) {
       interfacesBits |= 1 << MAI_INTERFACE_HYPERTEXT;
+}
   }
 
   // Value interface.
-  if (HasNumericValue())
+  if (HasNumericValue()) {
     interfacesBits |= 1 << MAI_INTERFACE_VALUE;
+}
 
   // Document interface.
-  if (IsDoc())
+  if (IsDoc()) {
     interfacesBits |= 1 << MAI_INTERFACE_DOCUMENT;
+}
 
-  if (IsImage())
+  if (IsImage()) {
     interfacesBits |= 1 << MAI_INTERFACE_IMAGE;
+}
 
   // HyperLink interface.
-  if (IsLink())
+  if (IsLink()) {
     interfacesBits |= 1 << MAI_INTERFACE_HYPERLINK_IMPL;
+}
 
   if (!nsAccUtils::MustPrune(this)) {  // These interfaces require children
     // Table interface.
-    if (AsTable())
+    if (AsTable()) {
       interfacesBits |= 1 << MAI_INTERFACE_TABLE;
+}
 
-    if (AsTableCell())
+    if (AsTableCell()) {
       interfacesBits |= 1 << MAI_INTERFACE_TABLE_CELL;
+}
 
     // Selection interface.
     if (IsSelect()) {
@@ -563,16 +575,18 @@ initializeCB(AtkObject *aAtkObj, gpointer aData)
 {
     NS_ASSERTION((IS_MAI_OBJECT(aAtkObj)), "Invalid AtkObject");
     NS_ASSERTION(aData, "Invalid Data to init AtkObject");
-    if (!aAtkObj || !aData)
+    if (!aAtkObj || !aData) {
         return;
+}
 
     /* call parent init function */
     /* AtkObjectClass has not a "initialize" function now,
      * maybe it has later
      */
 
-    if (ATK_OBJECT_CLASS(parent_class)->initialize)
+    if (ATK_OBJECT_CLASS(parent_class)->initialize) {
         ATK_OBJECT_CLASS(parent_class)->initialize(aAtkObj, aData);
+}
 
   /* initialize object */
   MAI_ATK_OBJECT(aAtkObj)->accWrap.SetBits(reinterpret_cast<uintptr_t>(aData));
@@ -581,14 +595,16 @@ initializeCB(AtkObject *aAtkObj, gpointer aData)
 void
 finalizeCB(GObject *aObj)
 {
-    if (!IS_MAI_OBJECT(aObj))
+    if (!IS_MAI_OBJECT(aObj)) {
         return;
+}
     NS_ASSERTION(MAI_ATK_OBJECT(aObj)->accWrap.IsNull(), "AccWrap NOT null");
 
     // call parent finalize function
     // finalize of GObjectClass will unref the accessible parent if has
-    if (G_OBJECT_CLASS (parent_class)->finalize)
+    if (G_OBJECT_CLASS (parent_class)->finalize) {
         G_OBJECT_CLASS (parent_class)->finalize(aObj);
+}
 }
 
 const gchar*
@@ -596,12 +612,13 @@ getNameCB(AtkObject* aAtkObj)
 {
   nsAutoString name;
   AccessibleWrap* accWrap = GetAccessibleWrap(aAtkObj);
-  if (accWrap)
+  if (accWrap) {
     accWrap->Name(name);
-  else if (ProxyAccessible* proxy = GetProxy(aAtkObj))
+  } else if (ProxyAccessible* proxy = GetProxy(aAtkObj)) {
     proxy->Name(name);
-  else
+  } else {
     return nullptr;
+}
 
   // XXX Firing an event from here does not seem right
   MaybeFireNameChange(aAtkObj, name);
@@ -613,8 +630,9 @@ static void
 MaybeFireNameChange(AtkObject* aAtkObj, const nsString& aNewName)
 {
   NS_ConvertUTF16toUTF8 newNameUTF8(aNewName);
-  if (aAtkObj->name && !strcmp(aAtkObj->name, newNameUTF8.get()))
+  if (aAtkObj->name && !strcmp(aAtkObj->name, newNameUTF8.get())) {
     return;
+}
 
   // Below we duplicate the functionality of atk_object_set_name(),
   // but without calling atk_object_get_name(). Instead of
@@ -631,8 +649,9 @@ MaybeFireNameChange(AtkObject* aAtkObj, const nsString& aNewName)
   free(aAtkObj->name);
   aAtkObj->name = strdup(newNameUTF8.get());
 
-  if (notify)
+  if (notify) {
     g_object_notify(G_OBJECT(aAtkObj), "accessible-name");
+}
 }
 
 const gchar *
@@ -641,8 +660,9 @@ getDescriptionCB(AtkObject *aAtkObj)
   nsAutoString uniDesc;
   AccessibleWrap* accWrap = GetAccessibleWrap(aAtkObj);
   if (accWrap) {
-    if (accWrap->IsDefunct())
+    if (accWrap->IsDefunct()) {
       return nullptr;
+}
 
     accWrap->Description(uniDesc);
   } else if (ProxyAccessible* proxy = GetProxy(aAtkObj)) {
@@ -652,9 +672,10 @@ getDescriptionCB(AtkObject *aAtkObj)
   }
 
     NS_ConvertUTF8toUTF16 objDesc(aAtkObj->description);
-    if (!uniDesc.Equals(objDesc))
+    if (!uniDesc.Equals(objDesc)) {
         atk_object_set_description(aAtkObj,
                                    NS_ConvertUTF16toUTF8(uniDesc).get());
+}
 
     return aAtkObj->description;
 }
@@ -662,8 +683,9 @@ getDescriptionCB(AtkObject *aAtkObj)
 AtkRole
 getRoleCB(AtkObject *aAtkObj)
 {
-  if (aAtkObj->role != ATK_ROLE_INVALID)
+  if (aAtkObj->role != ATK_ROLE_INVALID) {
     return aAtkObj->role;
+}
 
   AccessibleOrProxy acc = GetInternalObj(aAtkObj);
   if (acc.IsNull()) {
@@ -691,23 +713,24 @@ getRoleCB(AtkObject *aAtkObj)
 
 #undef ROLE
 
-  if (aAtkObj->role == ATK_ROLE_LIST_BOX && !IsAtkVersionAtLeast(2, 1))
+  if (aAtkObj->role == ATK_ROLE_LIST_BOX && !IsAtkVersionAtLeast(2, 1)) {
     aAtkObj->role = ATK_ROLE_LIST;
-  else if (aAtkObj->role == ATK_ROLE_TABLE_ROW && !IsAtkVersionAtLeast(2, 1))
+  } else if (aAtkObj->role == ATK_ROLE_TABLE_ROW && !IsAtkVersionAtLeast(2, 1)) {
     aAtkObj->role = ATK_ROLE_LIST_ITEM;
-  else if (aAtkObj->role == ATK_ROLE_MATH && !IsAtkVersionAtLeast(2, 12))
+  } else if (aAtkObj->role == ATK_ROLE_MATH && !IsAtkVersionAtLeast(2, 12)) {
     aAtkObj->role = ATK_ROLE_SECTION;
-  else if (aAtkObj->role == ATK_ROLE_COMMENT && !IsAtkVersionAtLeast(2, 12))
+  } else if (aAtkObj->role == ATK_ROLE_COMMENT && !IsAtkVersionAtLeast(2, 12)) {
     aAtkObj->role = ATK_ROLE_SECTION;
-  else if (aAtkObj->role == ATK_ROLE_LANDMARK && !IsAtkVersionAtLeast(2, 12))
+  } else if (aAtkObj->role == ATK_ROLE_LANDMARK && !IsAtkVersionAtLeast(2, 12)) {
     aAtkObj->role = ATK_ROLE_SECTION;
-  else if (aAtkObj->role == ATK_ROLE_FOOTNOTE && !IsAtkVersionAtLeast(2, 25, 2))
+  } else if (aAtkObj->role == ATK_ROLE_FOOTNOTE && !IsAtkVersionAtLeast(2, 25, 2)) {
     aAtkObj->role = ATK_ROLE_SECTION;
-  else if (aAtkObj->role == ATK_ROLE_STATIC && !IsAtkVersionAtLeast(2, 16))
+  } else if (aAtkObj->role == ATK_ROLE_STATIC && !IsAtkVersionAtLeast(2, 16)) {
     aAtkObj->role = ATK_ROLE_TEXT;
-  else if ((aAtkObj->role == ATK_ROLE_MATH_FRACTION ||
-            aAtkObj->role == ATK_ROLE_MATH_ROOT) && !IsAtkVersionAtLeast(2, 16))
+  } else if ((aAtkObj->role == ATK_ROLE_MATH_FRACTION ||
+            aAtkObj->role == ATK_ROLE_MATH_ROOT) && !IsAtkVersionAtLeast(2, 16)) {
     aAtkObj->role = ATK_ROLE_SECTION;
+}
 
   return aAtkObj->role;
 }
@@ -715,8 +738,9 @@ getRoleCB(AtkObject *aAtkObj)
 static AtkAttributeSet*
 ConvertToAtkAttributeSet(nsIPersistentProperties* aAttributes)
 {
-    if (!aAttributes)
+    if (!aAttributes) {
         return nullptr;
+}
 
     AtkAttributeSet *objAttributeSet = nullptr;
     nsCOMPtr<nsISimpleEnumerator> propEnum;
@@ -754,8 +778,9 @@ AtkAttributeSet*
 GetAttributeSet(Accessible* aAccessible)
 {
   nsCOMPtr<nsIPersistentProperties> attributes = aAccessible->Attributes();
-  if (attributes)
+  if (attributes) {
     return ConvertToAtkAttributeSet(attributes);
+}
 
   return nullptr;
 }
@@ -764,17 +789,20 @@ AtkAttributeSet *
 getAttributesCB(AtkObject *aAtkObj)
 {
   AccessibleWrap* accWrap = GetAccessibleWrap(aAtkObj);
-  if (accWrap)
+  if (accWrap) {
     return GetAttributeSet(accWrap);
+}
 
   ProxyAccessible* proxy = GetProxy(aAtkObj);
-  if (!proxy)
+  if (!proxy) {
     return nullptr;
+}
 
   AutoTArray<Attribute, 10> attrs;
   proxy->Attributes(&attrs);
-  if (attrs.IsEmpty())
+  if (attrs.IsEmpty()) {
     return nullptr;
+}
 
   AtkAttributeSet* objAttributeSet = nullptr;
   for (uint32_t i = 0; i < attrs.Length(); i++) {
@@ -791,8 +819,9 @@ const gchar*
 GetLocaleCB(AtkObject* aAtkObj)
 {
   AccessibleWrap* accWrap = GetAccessibleWrap(aAtkObj);
-  if (!accWrap)
+  if (!accWrap) {
     return nullptr;
+}
 
   nsAutoString locale;
   accWrap->Language(locale);
@@ -802,8 +831,9 @@ GetLocaleCB(AtkObject* aAtkObj)
 AtkObject *
 getParentCB(AtkObject *aAtkObj)
 {
-  if (aAtkObj->accessible_parent)
+  if (aAtkObj->accessible_parent) {
     return aAtkObj->accessible_parent;
+}
 
   AccessibleOrProxy acc = GetInternalObj(aAtkObj);
   if (acc.IsNull()) {
@@ -812,8 +842,9 @@ getParentCB(AtkObject *aAtkObj)
 
   AccessibleOrProxy parent = acc.Parent();
   AtkObject* atkParent = !parent.IsNull() ? GetWrapperFor(parent) : nullptr;
-  if (atkParent)
+  if (atkParent) {
     atk_object_set_parent(aAtkObj, atkParent);
+}
 
   return aAtkObj->accessible_parent;
 }
@@ -867,29 +898,34 @@ refChildCB(AtkObject *aAtkObj, gint aChildIndex)
       OuterDocAccessible* docOwner = accWrap->AsOuterDoc();
       if (docOwner) {
         ProxyAccessible* proxyDoc = docOwner->RemoteChildDoc();
-        if (proxyDoc)
+        if (proxyDoc) {
           childAtkObj = GetWrapperFor(proxyDoc);
+}
       }
     }
   } else if (ProxyAccessible* proxy = GetProxy(aAtkObj)) {
-    if (proxy->MustPruneChildren())
+    if (proxy->MustPruneChildren()) {
       return nullptr;
+}
 
     ProxyAccessible* child = proxy->EmbeddedChildAt(aChildIndex);
-    if (child)
+    if (child) {
       childAtkObj = GetWrapperFor(child);
+}
   } else {
     return nullptr;
   }
 
   NS_ASSERTION(childAtkObj, "Fail to get AtkObj");
-  if (!childAtkObj)
+  if (!childAtkObj) {
     return nullptr;
+}
 
   g_object_ref(childAtkObj);
 
-  if (aAtkObj != childAtkObj->accessible_parent)
+  if (aAtkObj != childAtkObj->accessible_parent) {
     atk_object_set_parent(childAtkObj, aAtkObj);
+}
 
   return childAtkObj;
 }
@@ -900,11 +936,13 @@ getIndexInParentCB(AtkObject* aAtkObj)
   // We don't use Accessible::IndexInParent() because we don't include text
   // leaf nodes as children in ATK.
   if (ProxyAccessible* proxy = GetProxy(aAtkObj)) {
-    if (ProxyAccessible* parent = proxy->Parent())
+    if (ProxyAccessible* parent = proxy->Parent()) {
       return parent->IndexOfEmbeddedChild(proxy);
+}
 
-    if (proxy->OuterDocOfRemoteBrowser())
+    if (proxy->OuterDocOfRemoteBrowser()) {
       return 0;
+}
 
     return -1;
   }
@@ -915,8 +953,9 @@ getIndexInParentCB(AtkObject* aAtkObj)
     }
 
     Accessible* parent = accWrap->Parent();
-    if (!parent)
+    if (!parent) {
         return -1; // No parent
+}
 
     return parent->GetIndexOfEmbeddedChild(accWrap);
 }
@@ -926,8 +965,9 @@ TranslateStates(uint64_t aState, AtkStateSet* aStateSet)
 {
   // atk doesn't have a read only state so read only things shouldn't be
   // editable.
-  if (aState & states::READONLY)
+  if (aState & states::READONLY) {
     aState &= ~states::EDITABLE;
+}
 
   // Convert every state to an entry in AtkStateMap
   uint64_t bitMask = 1;
@@ -952,12 +992,13 @@ refStateSetCB(AtkObject *aAtkObj)
   state_set = ATK_OBJECT_CLASS(parent_class)->ref_state_set(aAtkObj);
 
   AccessibleWrap* accWrap = GetAccessibleWrap(aAtkObj);
-  if (accWrap)
+  if (accWrap) {
     TranslateStates(accWrap->State(), state_set);
-  else if (ProxyAccessible* proxy = GetProxy(aAtkObj))
+  } else if (ProxyAccessible* proxy = GetProxy(aAtkObj)) {
     TranslateStates(proxy->State(), state_set);
-  else
+  } else {
     TranslateStates(states::DEFUNCT, state_set);
+}
 
   return state_set;
 }
@@ -966,19 +1007,22 @@ static void
 UpdateAtkRelation(RelationType aType, Accessible* aAcc,
                   AtkRelationType aAtkType, AtkRelationSet* aAtkSet)
 {
-  if (aAtkType == ATK_RELATION_NULL)
+  if (aAtkType == ATK_RELATION_NULL) {
     return;
+}
 
   AtkRelation* atkRelation =
     atk_relation_set_get_relation_by_type(aAtkSet, aAtkType);
-  if (atkRelation)
+  if (atkRelation) {
     atk_relation_set_remove(aAtkSet, atkRelation);
+}
 
   Relation rel(aAcc->RelationByType(aType));
   nsTArray<AtkObject*> targets;
   Accessible* tempAcc = nullptr;
-  while ((tempAcc = rel.Next()))
+  while ((tempAcc = rel.Next())) {
     targets.AppendElement(AccessibleWrap::GetAtkObject(tempAcc));
+}
 
   if (aType == RelationType::EMBEDS && aAcc->IsRoot()) {
     if (ProxyAccessible* proxyDoc =
@@ -1014,19 +1058,22 @@ refRelationSetCB(AtkObject *aAtkObj)
 
     size_t relationCount = types.Length();
     for (size_t i = 0; i < relationCount; i++) {
-      if (typeMap[static_cast<uint32_t>(types[i])] == ATK_RELATION_NULL)
+      if (typeMap[static_cast<uint32_t>(types[i])] == ATK_RELATION_NULL) {
         continue;
+}
 
       size_t targetCount = targetSets[i].Length();
       AutoTArray<AtkObject*, 5> wrappers;
-      for (size_t j = 0; j < targetCount; j++)
+      for (size_t j = 0; j < targetCount; j++) {
         wrappers.AppendElement(GetWrapperFor(targetSets[i][j]));
+}
 
       AtkRelationType atkType = typeMap[static_cast<uint32_t>(types[i])];
       AtkRelation* atkRelation =
         atk_relation_set_get_relation_by_type(relation_set, atkType);
-      if (atkRelation)
+      if (atkRelation) {
         atk_relation_set_remove(relation_set, atkRelation);
+}
 
       atkRelation = atk_relation_new(wrappers.Elements(), wrappers.Length(),
                                      atkType);
@@ -1036,8 +1083,9 @@ refRelationSetCB(AtkObject *aAtkObj)
   }
 
   AccessibleWrap* accWrap = GetAccessibleWrap(aAtkObj);
-  if (!accWrap)
+  if (!accWrap) {
     return relation_set;
+}
 
 #define RELATIONTYPE(geckoType, geckoTypeName, atkType, msaaType, ia2Type) \
   UpdateAtkRelation(RelationType::geckoType, accWrap, atkType, relation_set);
@@ -1067,14 +1115,16 @@ GetAccessibleWrap(AtkObject* aAtkObj)
   }
 
   // Check if the accessible was deconstructed.
-  if (!accWrap)
+  if (!accWrap) {
     return nullptr;
+}
 
   NS_ENSURE_TRUE(accWrap->GetAtkObject() == aAtkObj, nullptr);
 
   AccessibleWrap* appAccWrap = ApplicationAcc();
-  if (appAccWrap != accWrap && !accWrap->IsValidObject())
+  if (appAccWrap != accWrap && !accWrap->IsValidObject()) {
     return nullptr;
+}
 
   return accWrap;
 }
@@ -1088,8 +1138,9 @@ GetProxy(AtkObject* aObj)
 AccessibleOrProxy
 GetInternalObj(AtkObject* aObj)
 {
-  if (!aObj || !IS_MAI_OBJECT(aObj))
+  if (!aObj || !IS_MAI_OBJECT(aObj)) {
     return nullptr;
+}
 
   return MAI_ATK_OBJECT(aObj)->accWrap;
 }
@@ -1114,27 +1165,34 @@ static uint16_t
 GetInterfacesForProxy(ProxyAccessible* aProxy, uint32_t aInterfaces)
 {
   uint16_t interfaces = 1 << MAI_INTERFACE_COMPONENT;
-  if (aInterfaces & Interfaces::HYPERTEXT)
+  if (aInterfaces & Interfaces::HYPERTEXT) {
     interfaces |= (1 << MAI_INTERFACE_HYPERTEXT) | (1 << MAI_INTERFACE_TEXT)
         | (1 << MAI_INTERFACE_EDITABLE_TEXT);
+}
 
-  if (aInterfaces & Interfaces::HYPERLINK)
+  if (aInterfaces & Interfaces::HYPERLINK) {
     interfaces |= 1 << MAI_INTERFACE_HYPERLINK_IMPL;
+}
 
-  if (aInterfaces & Interfaces::VALUE)
+  if (aInterfaces & Interfaces::VALUE) {
     interfaces |= 1 << MAI_INTERFACE_VALUE;
+}
 
-  if (aInterfaces & Interfaces::TABLE)
+  if (aInterfaces & Interfaces::TABLE) {
     interfaces |= 1 << MAI_INTERFACE_TABLE;
+}
 
-  if (aInterfaces & Interfaces::TABLECELL)
+  if (aInterfaces & Interfaces::TABLECELL) {
     interfaces |= 1 << MAI_INTERFACE_TABLE_CELL;
+}
 
-  if (aInterfaces & Interfaces::IMAGE)
+  if (aInterfaces & Interfaces::IMAGE) {
     interfaces |= 1 << MAI_INTERFACE_IMAGE;
+}
 
-  if (aInterfaces & Interfaces::DOCUMENT)
+  if (aInterfaces & Interfaces::DOCUMENT) {
     interfaces |= 1 << MAI_INTERFACE_DOCUMENT;
+}
 
   if (aInterfaces & Interfaces::SELECTION) {
     interfaces |= 1 << MAI_INTERFACE_SELECTION;
@@ -1156,8 +1214,9 @@ a11y::ProxyCreated(ProxyAccessible* aProxy, uint32_t aInterfaces)
   AtkObject* obj =
     reinterpret_cast<AtkObject *>
     (g_object_new(type, nullptr));
-  if (!obj)
+  if (!obj) {
     return;
+}
 
   uintptr_t inner = reinterpret_cast<uintptr_t>(aProxy) | IS_PROXY;
   atk_object_initialize(obj, reinterpret_cast<gpointer>(inner));
@@ -1194,8 +1253,9 @@ AccessibleWrap::HandleAccEvent(AccEvent* aEvent)
 
     // The accessible can become defunct if we have an xpcom event listener
     // which decides it would be fun to change the DOM and flush layout.
-    if (accessible->IsDefunct())
+    if (accessible->IsDefunct()) {
         return NS_OK;
+}
 
     uint32_t type = aEvent->GetEventType();
 
@@ -1299,8 +1359,9 @@ AccessibleWrap::HandleAccEvent(AccEvent* aEvent)
       {
         AccCaretMoveEvent* caretMoveEvent = downcast_accEvent(aEvent);
         NS_ASSERTION(caretMoveEvent, "Event needs event data");
-        if (!caretMoveEvent)
+        if (!caretMoveEvent) {
             break;
+}
 
         int32_t caretOffset = caretMoveEvent->GetCaretOffset();
         g_signal_emit_by_name(atkObj, "text_caret_moved", caretOffset);
@@ -1594,10 +1655,11 @@ MaiAtkObject::FireTextChangeEvent(const nsString& aStr, int32_t aStart,
                                   uint32_t aLen, bool aIsInsert,
                                   bool aFromUser)
 {
-  if (gAvailableAtkSignals == eUnknown)
+  if (gAvailableAtkSignals == eUnknown) {
     gAvailableAtkSignals =
       g_signal_lookup("text-insert", G_OBJECT_TYPE(this)) ?
         eHaveNewAtkTextSignals : eNoNewAtkSignals;
+}
 
   if (gAvailableAtkSignals == eNoNewAtkSignals) {
     // XXX remove this code and the gHaveNewTextSignals check when we can

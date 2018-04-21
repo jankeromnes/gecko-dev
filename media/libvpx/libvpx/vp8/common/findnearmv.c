@@ -90,7 +90,8 @@ void vp8_find_near_mvs(MACROBLOCKD *xd, const MODE_INFO *here, int_mv *nearest,
   /* If we have three distinct MV's ... */
   if (cnt[CNT_SPLITMV]) {
     /* See if above-left MV can be merged with NEAREST */
-    if (mv->as_int == near_mvs[CNT_NEAREST].as_int) cnt[CNT_NEAREST] += 1;
+    if (mv->as_int == near_mvs[CNT_NEAREST].as_int) { cnt[CNT_NEAREST] += 1;
+}
   }
 
   cnt[CNT_SPLITMV] =

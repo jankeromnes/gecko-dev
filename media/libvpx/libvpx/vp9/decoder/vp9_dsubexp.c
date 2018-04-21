@@ -15,7 +15,8 @@
 #include "vp9/decoder/vp9_dsubexp.h"
 
 static int inv_recenter_nonneg(int v, int m) {
-  if (v > 2 * m) return v;
+  if (v > 2 * m) { return v;
+}
 
   return (v & 1) ? m - ((v + 1) >> 1) : m + (v >> 1);
 }
@@ -58,9 +59,12 @@ static int inv_remap_prob(int v, int m) {
 }
 
 static int decode_term_subexp(vpx_reader *r) {
-  if (!vpx_read_bit(r)) return vpx_read_literal(r, 4);
-  if (!vpx_read_bit(r)) return vpx_read_literal(r, 4) + 16;
-  if (!vpx_read_bit(r)) return vpx_read_literal(r, 5) + 32;
+  if (!vpx_read_bit(r)) { return vpx_read_literal(r, 4);
+}
+  if (!vpx_read_bit(r)) { return vpx_read_literal(r, 4) + 16;
+}
+  if (!vpx_read_bit(r)) { return vpx_read_literal(r, 5) + 32;
+}
   return decode_uniform(r) + 64;
 }
 

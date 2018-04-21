@@ -32,13 +32,15 @@ bool
 Initialize()
 {
     VTuneMutex = js_new<Mutex>(mutexid::VTuneLock);
-    if (!VTuneMutex)
+    if (!VTuneMutex) {
         return false;
+}
 
     // Load the VTune shared library, if present.
     int loaded = loadiJIT_Funcs();
-    if (loaded == 1)
+    if (loaded == 1) {
         VTuneLoaded = true;
+}
 
     return true;
 }
@@ -80,8 +82,9 @@ SafeNotifyEvent(iJIT_JVM_EVENT event_type, void* data)
 void
 MarkStub(const js::jit::JitCode* code, const char* name)
 {
-    if (!IsProfilingActive())
+    if (!IsProfilingActive()) {
         return;
+}
 
     iJIT_Method_Load_V2 method = {0};
     method.method_id = GenerateUniqueMethodID();
@@ -91,38 +94,43 @@ MarkStub(const js::jit::JitCode* code, const char* name)
     method.module_name = const_cast<char*>("jitstubs");
 
     int ok = SafeNotifyEvent(iJVM_EVENT_TYPE_METHOD_LOAD_FINISHED_V2, (void*)&method);
-    if (ok != 1)
+    if (ok != 1) {
         printf("[!] VTune Integration: Failed to load method.\n");
+}
 }
 
 void
 MarkRegExp(const js::jit::JitCode* code, bool match_only)
 {
-    if (!IsProfilingActive())
+    if (!IsProfilingActive()) {
         return;
+}
 
     iJIT_Method_Load_V2 method = {0};
     method.method_id = GenerateUniqueMethodID();
     method.method_load_address = code->raw();
     method.method_size = code->instructionsSize();
 
-    if (match_only)
+    if (match_only) {
         method.method_name = const_cast<char*>("regexp (match-only)");
-    else
+    } else {
         method.method_name = const_cast<char*>("regexp (normal)");
+}
 
     method.module_name = const_cast<char*>("irregexp");
 
     int ok = SafeNotifyEvent(iJVM_EVENT_TYPE_METHOD_LOAD_FINISHED_V2, (void*)&method);
-    if (ok != 1)
+    if (ok != 1) {
         printf("[!] VTune Integration: Failed to load method.\n");
+}
 }
 
 void
 MarkScript(const js::jit::JitCode* code, const JSScript* script, const char* module)
 {
-    if (!IsProfilingActive())
+    if (!IsProfilingActive()) {
         return;
+}
 
     iJIT_Method_Load_V2 method = {0};
     method.method_id = script->vtuneMethodID();
@@ -139,15 +147,17 @@ MarkScript(const js::jit::JitCode* code, const JSScript* script, const char* mod
     method.method_name = &namebuf[0];
 
     int ok = SafeNotifyEvent(iJVM_EVENT_TYPE_METHOD_LOAD_FINISHED_V2, (void*)&method);
-    if (ok != 1)
+    if (ok != 1) {
         printf("[!] VTune Integration: Failed to load method.\n");
+}
 }
 
 void
 MarkWasm(unsigned methodId, const char* name, void* start, uintptr_t size)
 {
-    if (!IsProfilingActive())
+    if (!IsProfilingActive()) {
         return;
+}
 
     iJIT_Method_Load_V2 method = {0};
     method.method_id = methodId;
@@ -157,8 +167,9 @@ MarkWasm(unsigned methodId, const char* name, void* start, uintptr_t size)
     method.module_name = const_cast<char*>("wasm");
 
     int ok = SafeNotifyEvent(iJVM_EVENT_TYPE_METHOD_LOAD_FINISHED_V2, (void*)&method);
-    if (ok != 1)
+    if (ok != 1) {
         printf("[!] VTune Integration: Failed to load method.\n");
+}
 }
 
 void
@@ -170,8 +181,9 @@ UnmarkCode(const js::jit::JitCode* code)
 void
 UnmarkBytes(void* bytes, unsigned size)
 {
-    if (!IsProfilingActive())
+    if (!IsProfilingActive()) {
         return;
+}
 
     // It appears that the method_id is not required for unloading.
     iJIT_Method_Load method = {0};
@@ -185,8 +197,9 @@ UnmarkBytes(void* bytes, unsigned size)
     // Assertions aren't reported in VTune: instead, they immediately end profiling
     // with no warning that a crash occurred. This can generate misleading profiles.
     // So instead, print out a message to stdout (which VTune does not redirect).
-    if (ok != 1)
+    if (ok != 1) {
         printf("[!] VTune Integration: Failed to unload method.\n");
+}
 }
 
 } // namespace vtune

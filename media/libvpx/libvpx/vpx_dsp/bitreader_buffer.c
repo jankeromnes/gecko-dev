@@ -30,7 +30,8 @@ int vpx_rb_read_bit(struct vpx_read_bit_buffer *rb) {
 
 int vpx_rb_read_literal(struct vpx_read_bit_buffer *rb, int bits) {
   int value = 0, bit;
-  for (bit = bits - 1; bit >= 0; bit--) value |= vpx_rb_read_bit(rb) << bit;
+  for (bit = bits - 1; bit >= 0; bit--) { value |= vpx_rb_read_bit(rb) << bit;
+}
   return value;
 }
 

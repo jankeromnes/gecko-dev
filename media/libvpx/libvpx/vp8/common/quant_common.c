@@ -76,7 +76,8 @@ int vp8_dc_uv_quant(int QIndex, int Delta) {
 
   retval = dc_qlookup[QIndex];
 
-  if (retval > 132) retval = 132;
+  if (retval > 132) { retval = 132;
+}
 
   return retval;
 }
@@ -110,7 +111,8 @@ int vp8_ac2quant(int QIndex, int Delta) {
    * word size. */
   retval = (ac_qlookup[QIndex] * 101581) >> 16;
 
-  if (retval < 8) retval = 8;
+  if (retval < 8) { retval = 8;
+}
 
   return retval;
 }

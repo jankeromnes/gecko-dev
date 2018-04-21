@@ -98,8 +98,9 @@ static av_always_inline int check_intra_mode(VP9TileData *td, int mode, uint8_t 
         int n_px_need = 4 << tx, n_px_have = (((s->cols - col) << !ss_h) - x) * 4;
         int n_px_need_tr = 0;
 
-        if (tx == TX_4X4 && edges[mode].needs_topright && have_right)
+        if (tx == TX_4X4 && edges[mode].needs_topright && have_right) {
             n_px_need_tr = 4;
+}
 
         // if top of sb64-row, use s->intra_pred_data[] instead of
         // dst[-stride] for intra prediction (it contains pre- instead of
@@ -108,11 +109,12 @@ static av_always_inline int check_intra_mode(VP9TileData *td, int mode, uint8_t 
             top = !(row & 7) && !y ?
                 s->intra_pred_data[p] + (col * (8 >> ss_h) + x * 4) * bytesperpixel :
                 y == 0 ? &dst_edge[-stride_edge] : &dst_inner[-stride_inner];
-            if (have_left)
+            if (have_left) {
                 topleft = !(row & 7) && !y ?
                     s->intra_pred_data[p] + (col * (8 >> ss_h) + x * 4) * bytesperpixel :
                     y == 0 || x == 0 ? &dst_edge[-stride_edge] :
                     &dst_inner[-stride_inner];
+}
         }
 
         if (have_top &&
@@ -190,20 +192,24 @@ static av_always_inline int check_intra_mode(VP9TileData *td, int mode, uint8_t 
 
             if (edges[mode].invert_left) {
                 if (n_px_need <= n_px_have) {
-                    for (i = 0; i < n_px_need; i++)
+                    for (i = 0; i < n_px_need; i++) {
                         assign_bpp(l, i, &dst[i * stride], -1);
+}
                 } else {
-                    for (i = 0; i < n_px_have; i++)
+                    for (i = 0; i < n_px_have; i++) {
                         assign_bpp(l, i, &dst[i * stride], -1);
+}
                     memset_bpp(l, n_px_have, l, n_px_have - 1, n_px_need - n_px_have);
                 }
             } else {
                 if (n_px_need <= n_px_have) {
-                    for (i = 0; i < n_px_need; i++)
+                    for (i = 0; i < n_px_need; i++) {
                         assign_bpp(l, n_px_need - 1 - i, &dst[i * stride], -1);
+}
                 } else {
-                    for (i = 0; i < n_px_have; i++)
+                    for (i = 0; i < n_px_have; i++) {
                         assign_bpp(l, n_px_need - 1 - i, &dst[i * stride], -1);
+}
                     memset_bpp(l, 0, l, n_px_need - n_px_have, n_px_need - n_px_have);
                 }
             }
@@ -246,9 +252,10 @@ static av_always_inline void intra_recon(VP9TileData *td, ptrdiff_t y_off,
                                     ptr, td->y_stride, l,
                                     col, x, w4, row, y, b->tx, 0, 0, 0, bytesperpixel);
             s->dsp.intra_pred[b->tx][mode](ptr, td->y_stride, l, a);
-            if (eob)
+            if (eob) {
                 s->dsp.itxfm_add[tx][txtp](ptr, td->y_stride,
                                            td->block + 16 * n * bytesperpixel, eob);
+}
         }
         dst_r += 4 * step1d * s->s.frames[CUR_FRAME].tf.f->linesize[0];
         dst   += 4 * step1d * td->y_stride;
@@ -275,9 +282,10 @@ static av_always_inline void intra_recon(VP9TileData *td, ptrdiff_t y_off,
                                         ptr, td->uv_stride, l, col, x, w4, row, y,
                                         b->uvtx, p + 1, s->ss_h, s->ss_v, bytesperpixel);
                 s->dsp.intra_pred[b->uvtx][mode](ptr, td->uv_stride, l, a);
-                if (eob)
+                if (eob) {
                     s->dsp.itxfm_add[uvtx][DCT_DCT](ptr, td->uv_stride,
                                                     td->uvblock[p] + 16 * n * bytesperpixel, eob);
+}
             }
             dst_r += 4 * uvstep1d * s->s.frames[CUR_FRAME].tf.f->linesize[1];
             dst   += 4 * uvstep1d * td->uv_stride;
@@ -604,9 +612,10 @@ static av_always_inline void inter_recon(VP9TileData *td, int bytesperpixel)
                  ptr += 4 * step1d * bytesperpixel, n += step) {
                 int eob = b->tx > TX_8X8 ? AV_RN16A(&td->eob[n]) : td->eob[n];
 
-                if (eob)
+                if (eob) {
                     s->dsp.itxfm_add[tx][DCT_DCT](ptr, td->y_stride,
                                                   td->block + 16 * n * bytesperpixel, eob);
+}
             }
             dst += 4 * td->y_stride * step1d;
         }
@@ -623,9 +632,10 @@ static av_always_inline void inter_recon(VP9TileData *td, int bytesperpixel)
                      ptr += 4 * uvstep1d * bytesperpixel, n += step) {
                     int eob = b->uvtx > TX_8X8 ? AV_RN16A(&td->uveob[p][n]) : td->uveob[p][n];
 
-                    if (eob)
+                    if (eob) {
                         s->dsp.itxfm_add[uvtx][DCT_DCT](ptr, td->uv_stride,
                                                         td->uvblock[p] + 16 * n * bytesperpixel, eob);
+}
                 }
                 dst += 4 * uvstep1d * td->uv_stride;
             }

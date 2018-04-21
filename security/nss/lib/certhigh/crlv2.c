@@ -70,8 +70,9 @@ CERT_FindCRLNumberExten(PLArenaPool *arena, CERTCrl *crl,
 
     rv = cert_FindExtension(crl->extensions, SEC_OID_X509_CRL_NUMBER,
                             &encodedExtenValue);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return (rv);
+}
 
     mark = PORT_ArenaMark(arena);
 
@@ -146,14 +147,16 @@ CERT_FindInvalidDateExten(CERTCrl *crl, PRTime *value)
     encodedExtenValue.len = decodedExtenValue.len = 0;
 
     rv = cert_FindExtension(crl->extensions, SEC_OID_X509_INVALID_DATE, &encodedExtenValue);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return (rv);
+}
 
     rv = SEC_ASN1DecodeItem(NULL, &decodedExtenValue,
                             SEC_ASN1_GET(SEC_GeneralizedTimeTemplate),
                             &encodedExtenValue);
-    if (rv == SECSuccess)
+    if (rv == SECSuccess) {
         rv = DER_GeneralizedTimeToTime(value, &encodedExtenValue);
+}
     PORT_Free(decodedExtenValue.data);
     PORT_Free(encodedExtenValue.data);
     return (rv);

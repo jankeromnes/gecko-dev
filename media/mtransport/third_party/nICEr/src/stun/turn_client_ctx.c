@@ -106,8 +106,9 @@ static int nr_turn_stun_ctx_create(nr_turn_client_ctx *tctx, int mode,
   int r,_status;
   char label[256];
 
-  if (!(sctx=RCALLOC(sizeof(nr_turn_stun_ctx))))
+  if (!(sctx=RCALLOC(sizeof(nr_turn_stun_ctx)))) {
     ABORT(R_NO_MEMORY);
+}
 
   /* TODO(ekr@rtfm.com): label by phase */
   snprintf(label, sizeof(label), "%s:%s", tctx->label, ":TURN");
@@ -147,8 +148,9 @@ static int nr_turn_stun_ctx_destroy(nr_turn_stun_ctx **ctxp)
 {
   nr_turn_stun_ctx *ctx;
 
-  if (!ctxp || !*ctxp)
+  if (!ctxp || !*ctxp) {
     return 0;
+}
 
   ctx = *ctxp;
   *ctxp = 0;
@@ -171,23 +173,28 @@ static int nr_turn_stun_set_auth_params(nr_turn_stun_ctx *ctx,
   RFREE(ctx->nonce);
 
   assert(realm);
-  if (!realm)
+  if (!realm) {
     ABORT(R_BAD_ARGS);
+}
   ctx->realm=r_strdup(realm);
-  if (!ctx->realm)
+  if (!ctx->realm) {
     ABORT(R_NO_MEMORY);
+}
 
   assert(nonce);
-  if (!nonce)
+  if (!nonce) {
     ABORT(R_BAD_ARGS);
+}
   ctx->nonce=r_strdup(nonce);
-  if (!ctx->nonce)
+  if (!ctx->nonce) {
     ABORT(R_NO_MEMORY);
+}
 
   RFREE(ctx->stun->realm);
   ctx->stun->realm = r_strdup(ctx->realm);
-  if (!ctx->stun->realm)
+  if (!ctx->stun->realm) {
     ABORT(R_NO_MEMORY);
+}
 
   ctx->stun->auth_params.realm = ctx->realm;
   ctx->stun->auth_params.nonce = ctx->nonce;
@@ -234,15 +241,17 @@ static void nr_turn_stun_ctx_cb(NR_SOCKET s, int how, void *arg)
                                                            ctx->tctx->realm))) {
         RFREE(ctx->tctx->realm);
         ctx->tctx->realm = r_strdup(ctx->stun->realm);
-        if (!ctx->tctx->realm)
+        if (!ctx->tctx->realm) {
           ABORT(R_NO_MEMORY);
+}
       }
       if (ctx->stun->nonce && (!ctx->tctx->nonce || strcmp(ctx->stun->nonce,
                                                            ctx->tctx->nonce))) {
         RFREE(ctx->tctx->nonce);
         ctx->tctx->nonce = r_strdup(ctx->stun->nonce);
-        if (!ctx->tctx->nonce)
+        if (!ctx->tctx->nonce) {
           ABORT(R_NO_MEMORY);
+}
       }
 
       ctx->retry_ct=0;
@@ -280,8 +289,9 @@ static void nr_turn_stun_ctx_cb(NR_SOCKET s, int how, void *arg)
 
         /* Try to retry */
         if ((r=nr_turn_stun_set_auth_params(ctx, ctx->stun->realm,
-                                            ctx->stun->nonce)))
+                                            ctx->stun->nonce))) {
           ABORT(r);
+}
 
         ctx->stun->error_code = 0;  /* Reset to avoid inf-looping */
 
@@ -327,33 +337,40 @@ int nr_turn_client_ctx_create(const char *label, nr_socket *sock,
   nr_turn_client_ctx *ctx=0;
   int r,_status;
 
-  if ((r=r_log_register("turn", &NR_LOG_TURN)))
+  if ((r=r_log_register("turn", &NR_LOG_TURN))) {
     ABORT(r);
+}
 
-  if(!(ctx=RCALLOC(sizeof(nr_turn_client_ctx))))
+  if(!(ctx=RCALLOC(sizeof(nr_turn_client_ctx)))) {
     ABORT(R_NO_MEMORY);
+}
 
   STAILQ_INIT(&ctx->stun_ctxs);
   STAILQ_INIT(&ctx->permissions);
 
-  if(!(ctx->label=r_strdup(label)))
+  if(!(ctx->label=r_strdup(label))) {
     ABORT(R_NO_MEMORY);
+}
 
   ctx->sock=sock;
   ctx->username = r_strdup(username);
-  if (!ctx->username)
+  if (!ctx->username) {
     ABORT(R_NO_MEMORY);
+}
 
-  if ((r=r_data_create(&ctx->password, password->data, password->len)))
+  if ((r=r_data_create(&ctx->password, password->data, password->len))) {
     ABORT(r);
-  if ((r=nr_transport_addr_copy(&ctx->turn_server_addr, addr)))
+}
+  if ((r=nr_transport_addr_copy(&ctx->turn_server_addr, addr))) {
     ABORT(r);
+}
 
   ctx->state = NR_TURN_CLIENT_STATE_INITTED;
   if (addr->protocol == IPPROTO_TCP) {
     if ((r=nr_socket_connect(ctx->sock, &ctx->turn_server_addr))) {
-      if (r != R_WOULDBLOCK)
+      if (r != R_WOULDBLOCK) {
         ABORT(r);
+}
     }
   }
 
@@ -372,14 +389,16 @@ nr_turn_client_ctx_destroy(nr_turn_client_ctx **ctxp)
 {
   nr_turn_client_ctx *ctx;
 
-  if(!ctxp || !*ctxp)
+  if(!ctxp || !*ctxp) {
     return(0);
+}
 
   ctx=*ctxp;
   *ctxp = 0;
 
-  if (ctx->label)
+  if (ctx->label) {
     r_log(NR_LOG_TURN, LOG_DEBUG, "TURN(%s): destroy", ctx->label);
+}
 
   nr_turn_client_deallocate(ctx);
 
@@ -421,11 +440,13 @@ int nr_turn_client_cancel(nr_turn_client_ctx *ctx)
   nr_turn_stun_ctx *stun = 0;
 
   if (ctx->state == NR_TURN_CLIENT_STATE_CANCELLED ||
-      ctx->state == NR_TURN_CLIENT_STATE_FAILED)
+      ctx->state == NR_TURN_CLIENT_STATE_FAILED) {
     return(0);
+}
 
-  if (ctx->label)
+  if (ctx->label) {
     r_log(NR_LOG_TURN, LOG_INFO, "TURN(%s): cancelling", ctx->label);
+}
 
   /* Cancel the STUN client ctxs */
   stun = STAILQ_FIRST(&ctx->stun_ctxs);
@@ -449,8 +470,9 @@ int nr_turn_client_send_stun_request(nr_turn_client_ctx *ctx,
 {
   int r,_status;
 
-  if ((r=nr_stun_encode_message(req)))
+  if ((r=nr_stun_encode_message(req))) {
     ABORT(r);
+}
 
   if ((r=nr_socket_sendto(ctx->sock,
                           req->buffer, req->length, flags,
@@ -472,8 +494,9 @@ int nr_turn_client_deallocate(nr_turn_client_ctx *ctx)
   nr_stun_client_auth_params auth;
   nr_stun_client_refresh_request_params refresh;
 
-  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED)
+  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED) {
     return(0);
+}
 
   r_log(NR_LOG_TURN, LOG_INFO, "TURN(%s): deallocating", ctx->label);
 
@@ -487,14 +510,16 @@ int nr_turn_client_deallocate(nr_turn_client_ctx *ctx)
 
   auth.authenticate = 1;
 
-  if ((r=nr_stun_build_refresh_request(&auth, &refresh, &aloc)))
+  if ((r=nr_stun_build_refresh_request(&auth, &refresh, &aloc))) {
     ABORT(r);
+}
 
   // We are only sending a single request here because we are in the process of
   // shutting everything down. Theoretically we should probably start a seperate
   // STUN transaction which outlives the TURN context.
-  if ((r=nr_turn_client_send_stun_request(ctx, aloc, 0)))
+  if ((r=nr_turn_client_send_stun_request(ctx, aloc, 0))) {
     ABORT(r);
+}
 
   ctx->state = NR_TURN_CLIENT_STATE_DEALLOCATING;
 
@@ -516,8 +541,9 @@ static void nr_turn_client_fire_finished_cb(nr_turn_client_ctx *ctx)
 int nr_turn_client_failed(nr_turn_client_ctx *ctx)
 {
   if (ctx->state == NR_TURN_CLIENT_STATE_FAILED ||
-      ctx->state == NR_TURN_CLIENT_STATE_CANCELLED)
+      ctx->state == NR_TURN_CLIENT_STATE_CANCELLED) {
     return(0);
+}
 
   r_log(NR_LOG_TURN, LOG_WARNING, "TURN(%s) failed", ctx->label);
   nr_turn_client_cancel(ctx);
@@ -532,11 +558,13 @@ int nr_turn_client_get_relayed_address(nr_turn_client_ctx *ctx,
 {
   int r, _status;
 
-  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED)
+  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED) {
     ABORT(R_FAILED);
+}
 
-  if (r=nr_transport_addr_copy(relayed_address, &ctx->relay_addr))
+  if (r=nr_transport_addr_copy(relayed_address, &ctx->relay_addr)) {
     ABORT(r);
+}
 
   _status=0;
 abort:
@@ -548,11 +576,13 @@ int nr_turn_client_get_mapped_address(nr_turn_client_ctx *ctx,
 {
   int r, _status;
 
-  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED)
+  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED) {
     ABORT(R_FAILED);
+}
 
-  if (r=nr_transport_addr_copy(mapped_address, &ctx->mapped_addr))
+  if (r=nr_transport_addr_copy(mapped_address, &ctx->mapped_addr)) {
     ABORT(r);
+}
 
   _status=0;
 abort:
@@ -569,21 +599,25 @@ static void nr_turn_client_allocate_cb(NR_SOCKET s, int how, void *arg)
 
   if ((r=nr_transport_addr_copy(
           &ctx->tctx->relay_addr,
-          &ctx->stun->results.allocate_response.relay_addr)))
+          &ctx->stun->results.allocate_response.relay_addr))) {
     ABORT(r);
+}
 
   if ((r=nr_transport_addr_copy(
           &ctx->tctx->mapped_addr,
-          &ctx->stun->results.allocate_response.mapped_addr)))
+          &ctx->stun->results.allocate_response.mapped_addr))) {
     ABORT(r);
+}
 
-  if ((r=nr_turn_client_refresh_setup(ctx->tctx, &refresh_ctx)))
+  if ((r=nr_turn_client_refresh_setup(ctx->tctx, &refresh_ctx))) {
     ABORT(r);
+}
 
   if ((r=nr_turn_client_start_refresh_timer(
           ctx->tctx, refresh_ctx,
-          ctx->stun->results.allocate_response.lifetime_secs)))
+          ctx->stun->results.allocate_response.lifetime_secs))) {
     ABORT(r);
+}
 
   r_log(NR_LOG_TURN, LOG_INFO,
         "TURN(%s): Succesfully allocated addr %s lifetime=%u",
@@ -649,14 +683,16 @@ int nr_turn_client_allocate(nr_turn_client_ctx *ctx,
   if ((r=nr_turn_stun_ctx_create(ctx, NR_TURN_CLIENT_MODE_ALLOCATE_REQUEST,
                                  nr_turn_client_allocate_cb,
                                  nr_turn_client_error_cb,
-                                 &stun)))
+                                 &stun))) {
     ABORT(r);
+}
   stun->stun->params.allocate_request.lifetime_secs =
       TURN_LIFETIME_REQUEST_SECONDS;
 
   if (ctx->state == NR_TURN_CLIENT_STATE_INITTED) {
-      if ((r=nr_turn_stun_ctx_start(stun)))
+      if ((r=nr_turn_stun_ctx_start(stun))) {
         ABORT(r);
+}
       ctx->state = NR_TURN_CLIENT_STATE_ALLOCATING;
   } else {
       ABORT(R_ALREADY);
@@ -689,16 +725,20 @@ int nr_turn_client_process_response(nr_turn_client_ctx *ctx,
   sc1 = STAILQ_FIRST(&ctx->stun_ctxs);
   while (sc1) {
     r = nr_stun_client_process_response(sc1->stun, msg, len, turn_server_addr);
-    if (!r)
+    if (!r) {
       break;
-    if (r==R_RETRY)  /* Likely a 401 and we will retry */
+}
+    if (r==R_RETRY) {  /* Likely a 401 and we will retry */
       break;
-    if (r != R_REJECTED)
+}
+    if (r != R_REJECTED) {
       ABORT(r);
+}
     sc1 = STAILQ_NEXT(sc1, entry);
   }
-  if (!sc1)
+  if (!sc1) {
     ABORT(R_REJECTED);
+}
 
   _status=0;
 abort:
@@ -712,17 +752,20 @@ static int nr_turn_client_refresh_setup(nr_turn_client_ctx *ctx,
   int r,_status;
 
   assert(ctx->state == NR_TURN_CLIENT_STATE_ALLOCATED);
-  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED)
+  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED) {
     ABORT(R_NOT_PERMITTED);
+}
 
   if ((r=nr_turn_stun_ctx_create(ctx, NR_TURN_CLIENT_MODE_REFRESH_REQUEST,
                                  nr_turn_client_refresh_cb,
                                  nr_turn_client_error_cb,
-                                 &stun)))
+                                 &stun))) {
     ABORT(r);
+}
 
-  if ((r=nr_turn_stun_set_auth_params(stun, ctx->realm, ctx->nonce)))
+  if ((r=nr_turn_stun_set_auth_params(stun, ctx->realm, ctx->nonce))) {
     ABORT(r);
+}
 
   stun->stun->params.refresh_request.lifetime_secs =
       TURN_LIFETIME_REQUEST_SECONDS;
@@ -748,8 +791,9 @@ static int nr_turn_client_start_refresh_timer(nr_turn_client_ctx *tctx,
     ABORT(R_BAD_DATA);
   }
 
-  if (lifetime > 3600)
+  if (lifetime > 3600) {
     lifetime = 3600;
+}
 
   lifetime -= TURN_REFRESH_SLACK_SECONDS;
 
@@ -798,8 +842,9 @@ static void nr_turn_client_refresh_cb(NR_SOCKET s, int how, void *arg)
         ctx->tctx->label, lifetime);
 
   if ((r=nr_turn_client_start_refresh_timer(
-          ctx->tctx, ctx, lifetime)))
+          ctx->tctx, ctx, lifetime))) {
     ABORT(r);
+}
 
   _status=0;
 
@@ -819,26 +864,31 @@ int nr_turn_client_send_indication(nr_turn_client_ctx *ctx,
   nr_stun_client_send_indication_params params = { { 0 } };
   nr_stun_message *ind = 0;
 
-  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED)
+  if (ctx->state != NR_TURN_CLIENT_STATE_ALLOCATED) {
     ABORT(R_FAILED);
+}
 
   r_log(NR_LOG_TURN, LOG_DEBUG, "TURN(%s): Send indication len=%zu",
         ctx->label, len);
 
-  if ((r=nr_turn_client_ensure_perm(ctx, remote_addr)))
+  if ((r=nr_turn_client_ensure_perm(ctx, remote_addr))) {
     ABORT(r);
+}
 
-  if ((r=nr_transport_addr_copy(&params.remote_addr, remote_addr)))
+  if ((r=nr_transport_addr_copy(&params.remote_addr, remote_addr))) {
     ABORT(r);
+}
 
   params.data.data = (UCHAR*)msg;
   params.data.len = len;
 
-  if ((r=nr_stun_build_send_indication(&params, &ind)))
+  if ((r=nr_stun_build_send_indication(&params, &ind))) {
     ABORT(r);
+}
 
-  if ((r=nr_turn_client_send_stun_request(ctx, ind, flags)))
+  if ((r=nr_turn_client_send_stun_request(ctx, ind, flags))) {
     ABORT(r);
+}
 
   _status=0;
 abort:
@@ -866,16 +916,20 @@ int nr_turn_client_parse_data_indication(nr_turn_client_ctx *ctx,
     ABORT(R_REJECTED);
   }
 
-  if ((r=nr_stun_message_create2(&ind, msg, len)))
+  if ((r=nr_stun_message_create2(&ind, msg, len))) {
     ABORT(r);
-  if ((r=nr_stun_decode_message(ind, 0, 0)))
+}
+  if ((r=nr_stun_decode_message(ind, 0, 0))) {
     ABORT(r);
+}
 
-  if (ind->header.type != NR_STUN_MSG_DATA_INDICATION)
+  if (ind->header.type != NR_STUN_MSG_DATA_INDICATION) {
     ABORT(R_BAD_ARGS);
+}
 
-  if (!nr_stun_message_has_attribute(ind, NR_STUN_ATTR_XOR_PEER_ADDRESS, &attr))
+  if (!nr_stun_message_has_attribute(ind, NR_STUN_ATTR_XOR_PEER_ADDRESS, &attr)) {
     ABORT(R_BAD_ARGS);
+}
 
   if ((r=nr_turn_permission_find(ctx, &attr->u.xor_mapped_address.unmasked,
                                  &perm))) {
@@ -888,8 +942,9 @@ int nr_turn_client_parse_data_indication(nr_turn_client_ctx *ctx,
   }
 
   if ((r=nr_transport_addr_copy(remote_addr,
-                                &attr->u.xor_mapped_address.unmasked)))
+                                &attr->u.xor_mapped_address.unmasked))) {
     ABORT(r);
+}
 
 #if REFRESH_RESERVATION_ON_RECV
   if ((r=nr_turn_client_ensure_perm(ctx, remote_addr))) {
@@ -902,8 +957,9 @@ int nr_turn_client_parse_data_indication(nr_turn_client_ctx *ctx,
   }
 
   assert(newsize >= attr->u.data.length);
-  if (newsize < attr->u.data.length)
+  if (newsize < attr->u.data.length) {
     ABORT(R_BAD_ARGS);
+}
 
   memcpy(newmsg, attr->u.data.data, attr->u.data.length);
   *newlen = attr->u.data.length;
@@ -937,8 +993,9 @@ int nr_turn_client_ensure_perm(nr_turn_client_ctx *ctx, nr_transport_addr *addr)
 
   if ((r=nr_turn_permission_find(ctx, addr, &perm))) {
     if (r == R_NOT_FOUND) {
-      if ((r=nr_turn_permission_create(ctx, addr, &perm)))
+      if ((r=nr_turn_permission_create(ctx, addr, &perm))) {
         ABORT(r);
+}
     }
     else {
       ABORT(r);
@@ -954,8 +1011,9 @@ int nr_turn_client_ensure_perm(nr_turn_client_ctx *ctx, nr_transport_addr *addr)
     r_log(NR_LOG_TURN, LOG_DEBUG, "TURN(%s): Permission for %s requires refresh",
           ctx->label, perm->addr.as_string);
 
-    if ((r=nr_turn_stun_ctx_start(perm->stun)))
+    if ((r=nr_turn_stun_ctx_start(perm->stun))) {
       ABORT(r);
+}
 
     perm->last_used = now;  /* Update the time now so we don't retry on
                                next packet */
@@ -977,27 +1035,32 @@ static int nr_turn_permission_create(nr_turn_client_ctx *ctx, nr_transport_addr 
   r_log(NR_LOG_TURN, LOG_INFO, "TURN(%s): Creating permission for %s",
         ctx->label, addr->as_string);
 
-  if (!(perm = RCALLOC(sizeof(nr_turn_permission))))
+  if (!(perm = RCALLOC(sizeof(nr_turn_permission)))) {
     ABORT(R_NO_MEMORY);
+}
 
-  if ((r=nr_transport_addr_copy(&perm->addr, addr)))
+  if ((r=nr_transport_addr_copy(&perm->addr, addr))) {
     ABORT(r);
+}
 
   perm->last_used = 0;
 
   if ((r=nr_turn_stun_ctx_create(ctx, NR_TURN_CLIENT_MODE_PERMISSION_REQUEST,
                                  nr_turn_client_permissions_cb,
                                  nr_turn_client_permission_error_cb,
-                                 &perm->stun)))
+                                 &perm->stun))) {
     ABORT(r);
+}
 
   /* We want to authenticate on the first packet */
-  if ((r=nr_turn_stun_set_auth_params(perm->stun, ctx->realm, ctx->nonce)))
+  if ((r=nr_turn_stun_set_auth_params(perm->stun, ctx->realm, ctx->nonce))) {
     ABORT(r);
+}
 
   if ((r=nr_transport_addr_copy(
-          &perm->stun->stun->params.permission_request.remote_addr, addr)))
+          &perm->stun->stun->params.permission_request.remote_addr, addr))) {
     ABORT(r);
+}
   STAILQ_INSERT_TAIL(&ctx->permissions, perm, entry);
 
   *permp = perm;
@@ -1020,8 +1083,9 @@ static int nr_turn_permission_find(nr_turn_client_ctx *ctx, nr_transport_addr *a
   perm = STAILQ_FIRST(&ctx->permissions);
   while (perm) {
     if (!nr_transport_addr_cmp(&perm->addr, addr,
-                               NR_TRANSPORT_ADDR_CMP_MODE_ADDR))
+                               NR_TRANSPORT_ADDR_CMP_MODE_ADDR)) {
       break;
+}
 
     perm = STAILQ_NEXT(perm, entry);
   }
@@ -1052,8 +1116,9 @@ static int nr_turn_permission_destroy(nr_turn_permission **permp)
 {
   nr_turn_permission *perm;
 
-  if (!permp || !*permp)
+  if (!permp || !*permp) {
     return(0);
+}
 
   perm = *permp;
   *permp = 0;

@@ -125,8 +125,9 @@ void NrIceResolver::DestroyResolver() {
 }
 
 int NrIceResolver::destroy(void **objp) {
-  if (!objp || !*objp)
+  if (!objp || !*objp) {
     return 0;
+}
   NrIceResolver *resolver = static_cast<NrIceResolver *>(*objp);
   *objp = nullptr;
   resolver->DestroyResolver();

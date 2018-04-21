@@ -98,14 +98,16 @@ start_pass_dpost (j_decompress_ptr cinfo, J_BUF_MODE pass_mode)
 #ifdef QUANT_2PASS_SUPPORTED
   case JBUF_SAVE_AND_PASS:
     /* First pass of 2-pass quantization */
-    if (post->whole_image == NULL)
+    if (post->whole_image == NULL) {
       ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
     post->pub.post_process_data = post_process_prepass;
     break;
   case JBUF_CRANK_DEST:
     /* Second pass of 2-pass quantization */
-    if (post->whole_image == NULL)
+    if (post->whole_image == NULL) {
       ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
     post->pub.post_process_data = post_process_2pass;
     break;
 #endif /* QUANT_2PASS_SUPPORTED */
@@ -135,8 +137,9 @@ post_process_1pass (j_decompress_ptr cinfo,
   /* Fill the buffer, but not more than what we can dump out in one go. */
   /* Note we rely on the upsampler to detect bottom of image. */
   max_rows = out_rows_avail - *out_row_ctr;
-  if (max_rows > post->strip_height)
+  if (max_rows > post->strip_height) {
     max_rows = post->strip_height;
+}
   num_rows = 0;
   (*cinfo->upsample->upsample) (cinfo,
                 input_buf, in_row_group_ctr, in_row_groups_avail,
@@ -218,12 +221,14 @@ post_process_2pass (j_decompress_ptr cinfo,
   /* Determine number of rows to emit. */
   num_rows = post->strip_height - post->next_row; /* available in strip */
   max_rows = out_rows_avail - *out_row_ctr; /* available in output area */
-  if (num_rows > max_rows)
+  if (num_rows > max_rows) {
     num_rows = max_rows;
+}
   /* We have to check bottom of image here, can't depend on upsampler. */
   max_rows = cinfo->output_height - post->starting_row;
-  if (num_rows > max_rows)
+  if (num_rows > max_rows) {
     num_rows = max_rows;
+}
 
   /* Quantize and emit data. */
   (*cinfo->cquantize->color_quantize) (cinfo,

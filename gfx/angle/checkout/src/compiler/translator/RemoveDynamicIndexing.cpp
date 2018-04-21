@@ -81,8 +81,9 @@ TIntermConstantUnion *CreateIntConstantNode(int i)
 
 TIntermTyped *EnsureSignedInt(TIntermTyped *node)
 {
-    if (node->getBasicType() == EbtInt)
+    if (node->getBasicType() == EbtInt) {
         return node;
+}
 
     TIntermSequence *arguments = new TIntermSequence();
     arguments->push_back(node);
@@ -112,8 +113,9 @@ const TType *GetBaseType(const TType &type, bool write)
     // principle this code could be used with multiple backends.
     baseType->setPrecision(EbpHigh);
     baseType->setQualifier(EvqInOut);
-    if (!write)
+    if (!write) {
         baseType->setQualifier(EvqIn);
+}
     return baseType;
 }
 
@@ -361,8 +363,9 @@ TIntermAggregate *CreateIndexedWriteFunctionCall(TIntermBinary *node,
 
 bool RemoveDynamicIndexingTraverser::visitBinary(Visit visit, TIntermBinary *node)
 {
-    if (mUsedTreeInsertion)
+    if (mUsedTreeInsertion) {
         return false;
+}
 
     if (node->getOp() == EOpIndexIndirect)
     {

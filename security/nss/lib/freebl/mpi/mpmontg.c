@@ -90,8 +90,9 @@ s_mp_mul_mont(const mp_int *a, const mp_int *b, mp_int *c,
     MP_USED(c) = 1;
     MP_DIGIT(c, 0) = 0;
     ib = (MP_USED(&mmm->N) << 1) + 1;
-    if ((res = s_mp_pad(c, ib)) != MP_OKAY)
+    if ((res = s_mp_pad(c, ib)) != MP_OKAY) {
         goto CLEANUP;
+}
 
     useda = MP_USED(a);
     pb = MP_DIGITS(b);
@@ -106,8 +107,9 @@ s_mp_mul_mont(const mp_int *a, const mp_int *b, mp_int *c,
         mp_digit b_i = *pb++;
 
         /* Inner product:  Digits of a */
-        if (b_i)
+        if (b_i) {
             s_mpv_mul_d_add_prop(MP_DIGITS(a), useda, b_i, MP_DIGITS(c) + ib);
+}
         m_i = MP_DIGIT(c, ib) * mmm->n0prime;
         s_mp_mul_d_add_offset(&mmm->N, m_i, c, ib);
     }
@@ -1029,8 +1031,9 @@ mp_exptmod(const mp_int *inBase, const mp_int *exponent,
 #endif
 
     /* function for computing n0prime only works if n0 is odd */
-    if (!mp_isodd(modulus))
+    if (!mp_isodd(modulus)) {
         return s_mp_exptmod(inBase, exponent, modulus, result);
+}
 
     MP_DIGITS(&montBase) = 0;
     MP_DIGITS(&goodBase) = 0;
@@ -1058,30 +1061,32 @@ mp_exptmod(const mp_int *inBase, const mp_int *exponent,
     bits_in_exponent = mpl_significant_bits(exponent);
 #ifdef MP_USING_CACHE_SAFE_MOD_EXP
     if (mp_using_cache_safe_exp) {
-        if (bits_in_exponent > 780)
+        if (bits_in_exponent > 780) {
             window_bits = 6;
-        else if (bits_in_exponent > 256)
+        } else if (bits_in_exponent > 256) {
             window_bits = 5;
-        else if (bits_in_exponent > 20)
+        } else if (bits_in_exponent > 20) {
             window_bits = 4;
         /* RSA public key exponents are typically under 20 bits (common values
          * are: 3, 17, 65537) and a 4-bit window is inefficient
          */
-        else
+        } else {
             window_bits = 1;
+}
     } else
 #endif
-        if (bits_in_exponent > 480)
+        if (bits_in_exponent > 480) {
         window_bits = 6;
-    else if (bits_in_exponent > 160)
+    } else if (bits_in_exponent > 160) {
         window_bits = 5;
-    else if (bits_in_exponent > 20)
+    } else if (bits_in_exponent > 20) {
         window_bits = 4;
     /* RSA public key exponents are typically under 20 bits (common values
      * are: 3, 17, 65537) and a 4-bit window is inefficient
      */
-    else
+    } else {
         window_bits = 1;
+}
 
 #ifdef MP_USING_CACHE_SAFE_MOD_EXP
     /*
@@ -1100,8 +1105,9 @@ mp_exptmod(const mp_int *inBase, const mp_int *exponent,
             max_window_bits = 5;
         } else if (cache_size >= 16) {
             max_window_bits = 4;
-        } else
+        } else {
             max_window_bits = 1; /* should this be an assert? */
+}
     }
 
     /* clamp the window size down before we caclulate bits_in_exponent */
@@ -1129,10 +1135,11 @@ mp_exptmod(const mp_int *inBase, const mp_int *exponent,
         if (mp_using_cache_safe_exp) {
         res = mp_exptmod_safe_i(&montBase, exponent, modulus, result, &mmm, nLen,
                                 bits_in_exponent, window_bits, 1 << window_bits);
-    } else
+    } else {
 #endif
         res = mp_exptmod_i(&montBase, exponent, modulus, result, &mmm, nLen,
                            bits_in_exponent, window_bits, odd_ints);
+}
 
 CLEANUP:
     mp_clear(&montBase);

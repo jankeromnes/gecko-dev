@@ -37,16 +37,18 @@ template<typename T>
 static inline T*
 checkPtr(T* ptr)
 {
-  if (! ptr)
+  if (! ptr) {
     abort();
+}
   return ptr;
 }
 
 static void
 checkBool(bool success)
 {
-  if (! success)
+  if (! success) {
     abort();
+}
 }
 
 /* The warning reporter callback. */
@@ -73,7 +75,8 @@ GDBFragment* GDBFragment::allFragments = nullptr;
 int
 main(int argc, const char** argv)
 {
-    if (!JS_Init()) return 1;
+    if (!JS_Init()) { return 1;
+}
     JSContext* cx = checkPtr(JS_NewContext(1024 * 1024));
 
     JS_SetGCParameter(cx, JSGC_MAX_BYTES, 0xffffffff);

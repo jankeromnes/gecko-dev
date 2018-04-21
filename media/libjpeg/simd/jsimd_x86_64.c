@@ -43,18 +43,21 @@ init_simd (void)
 {
   char *env = NULL;
 
-  if (simd_support != ~0U)
+  if (simd_support != ~0U) {
     return;
+}
 
   simd_support = JSIMD_SSE2 | JSIMD_SSE;
 
   /* Force different settings through environment variables */
   env = getenv("JSIMD_FORCENONE");
-  if ((env != NULL) && (strcmp(env, "1") == 0))
+  if ((env != NULL) && (strcmp(env, "1") == 0)) {
     simd_support = 0;
+}
   env = getenv("JSIMD_NOHUFFENC");
-  if ((env != NULL) && (strcmp(env, "1") == 0))
+  if ((env != NULL) && (strcmp(env, "1") == 0)) {
     simd_huffman = 0;
+}
 }
 
 GLOBAL(int)
@@ -63,16 +66,20 @@ jsimd_can_rgb_ycc (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if ((RGB_PIXELSIZE != 3) && (RGB_PIXELSIZE != 4))
+}
+  if ((RGB_PIXELSIZE != 3) && (RGB_PIXELSIZE != 4)) {
     return 0;
+}
 
   if ((simd_support & JSIMD_SSE2) &&
-      IS_ALIGNED_SSE(jconst_rgb_ycc_convert_sse2))
+      IS_ALIGNED_SSE(jconst_rgb_ycc_convert_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -83,16 +90,20 @@ jsimd_can_rgb_gray (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if ((RGB_PIXELSIZE != 3) && (RGB_PIXELSIZE != 4))
+}
+  if ((RGB_PIXELSIZE != 3) && (RGB_PIXELSIZE != 4)) {
     return 0;
+}
 
   if ((simd_support & JSIMD_SSE2) &&
-      IS_ALIGNED_SSE(jconst_rgb_gray_convert_sse2))
+      IS_ALIGNED_SSE(jconst_rgb_gray_convert_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -103,16 +114,20 @@ jsimd_can_ycc_rgb (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if ((RGB_PIXELSIZE != 3) && (RGB_PIXELSIZE != 4))
+}
+  if ((RGB_PIXELSIZE != 3) && (RGB_PIXELSIZE != 4)) {
     return 0;
+}
 
   if ((simd_support & JSIMD_SSE2) &&
-      IS_ALIGNED_SSE(jconst_ycc_rgb_convert_sse2))
+      IS_ALIGNED_SSE(jconst_ycc_rgb_convert_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -250,13 +265,16 @@ jsimd_can_h2v2_downsample (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
+}
 
-  if (simd_support & JSIMD_SSE2)
+  if (simd_support & JSIMD_SSE2) {
     return 1;
+}
 
   return 0;
 }
@@ -267,13 +285,16 @@ jsimd_can_h2v1_downsample (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
+}
 
-  if (simd_support & JSIMD_SSE2)
+  if (simd_support & JSIMD_SSE2) {
     return 1;
+}
 
   return 0;
 }
@@ -302,13 +323,16 @@ jsimd_can_h2v2_upsample (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
+}
 
-  if (simd_support & JSIMD_SSE2)
+  if (simd_support & JSIMD_SSE2) {
     return 1;
+}
 
   return 0;
 }
@@ -319,13 +343,16 @@ jsimd_can_h2v1_upsample (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
+}
 
-  if (simd_support & JSIMD_SSE2)
+  if (simd_support & JSIMD_SSE2) {
     return 1;
+}
 
   return 0;
 }
@@ -356,14 +383,17 @@ jsimd_can_h2v2_fancy_upsample (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
+}
 
   if ((simd_support & JSIMD_SSE2) &&
-      IS_ALIGNED_SSE(jconst_fancy_upsample_sse2))
+      IS_ALIGNED_SSE(jconst_fancy_upsample_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -374,14 +404,17 @@ jsimd_can_h2v1_fancy_upsample (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
+}
 
   if ((simd_support & JSIMD_SSE2) &&
-      IS_ALIGNED_SSE(jconst_fancy_upsample_sse2))
+      IS_ALIGNED_SSE(jconst_fancy_upsample_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -414,14 +447,17 @@ jsimd_can_h2v2_merged_upsample (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
+}
 
   if ((simd_support & JSIMD_SSE2) &&
-      IS_ALIGNED_SSE(jconst_merged_upsample_sse2))
+      IS_ALIGNED_SSE(jconst_merged_upsample_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -432,14 +468,17 @@ jsimd_can_h2v1_merged_upsample (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (BITS_IN_JSAMPLE != 8)
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
+}
 
   if ((simd_support & JSIMD_SSE2) &&
-      IS_ALIGNED_SSE(jconst_merged_upsample_sse2))
+      IS_ALIGNED_SSE(jconst_merged_upsample_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -528,17 +567,22 @@ jsimd_can_convsamp (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (BITS_IN_JSAMPLE != 8)
+}
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if (sizeof(DCTELEM) != 2)
+}
+  if (sizeof(DCTELEM) != 2) {
     return 0;
+}
 
-  if (simd_support & JSIMD_SSE2)
+  if (simd_support & JSIMD_SSE2) {
     return 1;
+}
 
   return 0;
 }
@@ -549,17 +593,22 @@ jsimd_can_convsamp_float (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (BITS_IN_JSAMPLE != 8)
+}
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if (sizeof(FAST_FLOAT) != 4)
+}
+  if (sizeof(FAST_FLOAT) != 4) {
     return 0;
+}
 
-  if (simd_support & JSIMD_SSE2)
+  if (simd_support & JSIMD_SSE2) {
     return 1;
+}
 
   return 0;
 }
@@ -584,13 +633,16 @@ jsimd_can_fdct_islow (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(DCTELEM) != 2)
+}
+  if (sizeof(DCTELEM) != 2) {
     return 0;
+}
 
-  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_fdct_islow_sse2))
+  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_fdct_islow_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -601,13 +653,16 @@ jsimd_can_fdct_ifast (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(DCTELEM) != 2)
+}
+  if (sizeof(DCTELEM) != 2) {
     return 0;
+}
 
-  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_fdct_ifast_sse2))
+  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_fdct_ifast_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -618,13 +673,16 @@ jsimd_can_fdct_float (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(FAST_FLOAT) != 4)
+}
+  if (sizeof(FAST_FLOAT) != 4) {
     return 0;
+}
 
-  if ((simd_support & JSIMD_SSE) && IS_ALIGNED_SSE(jconst_fdct_float_sse))
+  if ((simd_support & JSIMD_SSE) && IS_ALIGNED_SSE(jconst_fdct_float_sse)) {
     return 1;
+}
 
   return 0;
 }
@@ -653,15 +711,19 @@ jsimd_can_quantize (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(JCOEF) != 2)
+}
+  if (sizeof(JCOEF) != 2) {
     return 0;
-  if (sizeof(DCTELEM) != 2)
+}
+  if (sizeof(DCTELEM) != 2) {
     return 0;
+}
 
-  if (simd_support & JSIMD_SSE2)
+  if (simd_support & JSIMD_SSE2) {
     return 1;
+}
 
   return 0;
 }
@@ -672,15 +734,19 @@ jsimd_can_quantize_float (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(JCOEF) != 2)
+}
+  if (sizeof(JCOEF) != 2) {
     return 0;
-  if (sizeof(FAST_FLOAT) != 4)
+}
+  if (sizeof(FAST_FLOAT) != 4) {
     return 0;
+}
 
-  if (simd_support & JSIMD_SSE2)
+  if (simd_support & JSIMD_SSE2) {
     return 1;
+}
 
   return 0;
 }
@@ -705,19 +771,25 @@ jsimd_can_idct_2x2 (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(JCOEF) != 2)
+}
+  if (sizeof(JCOEF) != 2) {
     return 0;
-  if (BITS_IN_JSAMPLE != 8)
+}
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if (sizeof(ISLOW_MULT_TYPE) != 2)
+}
+  if (sizeof(ISLOW_MULT_TYPE) != 2) {
     return 0;
+}
 
-  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_red_sse2))
+  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_red_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -728,19 +800,25 @@ jsimd_can_idct_4x4 (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(JCOEF) != 2)
+}
+  if (sizeof(JCOEF) != 2) {
     return 0;
-  if (BITS_IN_JSAMPLE != 8)
+}
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if (sizeof(ISLOW_MULT_TYPE) != 2)
+}
+  if (sizeof(ISLOW_MULT_TYPE) != 2) {
     return 0;
+}
 
-  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_red_sse2))
+  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_red_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -767,19 +845,25 @@ jsimd_can_idct_islow (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(JCOEF) != 2)
+}
+  if (sizeof(JCOEF) != 2) {
     return 0;
-  if (BITS_IN_JSAMPLE != 8)
+}
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if (sizeof(ISLOW_MULT_TYPE) != 2)
+}
+  if (sizeof(ISLOW_MULT_TYPE) != 2) {
     return 0;
+}
 
-  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_islow_sse2))
+  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_islow_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -790,21 +874,28 @@ jsimd_can_idct_ifast (void)
   init_simd();
 
   /* The code is optimised for these values only */
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(JCOEF) != 2)
+}
+  if (sizeof(JCOEF) != 2) {
     return 0;
-  if (BITS_IN_JSAMPLE != 8)
+}
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if (sizeof(IFAST_MULT_TYPE) != 2)
+}
+  if (sizeof(IFAST_MULT_TYPE) != 2) {
     return 0;
-  if (IFAST_SCALE_BITS != 2)
+}
+  if (IFAST_SCALE_BITS != 2) {
     return 0;
+}
 
-  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_ifast_sse2))
+  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_ifast_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -814,21 +905,28 @@ jsimd_can_idct_float (void)
 {
   init_simd();
 
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(JCOEF) != 2)
+}
+  if (sizeof(JCOEF) != 2) {
     return 0;
-  if (BITS_IN_JSAMPLE != 8)
+}
+  if (BITS_IN_JSAMPLE != 8) {
     return 0;
-  if (sizeof(JDIMENSION) != 4)
+}
+  if (sizeof(JDIMENSION) != 4) {
     return 0;
-  if (sizeof(FAST_FLOAT) != 4)
+}
+  if (sizeof(FAST_FLOAT) != 4) {
     return 0;
-  if (sizeof(FLOAT_MULT_TYPE) != 4)
+}
+  if (sizeof(FLOAT_MULT_TYPE) != 4) {
     return 0;
+}
 
-  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_float_sse2))
+  if ((simd_support & JSIMD_SSE2) && IS_ALIGNED_SSE(jconst_idct_float_sse2)) {
     return 1;
+}
 
   return 0;
 }
@@ -865,14 +963,17 @@ jsimd_can_huff_encode_one_block (void)
 {
   init_simd();
 
-  if (DCTSIZE != 8)
+  if (DCTSIZE != 8) {
     return 0;
-  if (sizeof(JCOEF) != 2)
+}
+  if (sizeof(JCOEF) != 2) {
     return 0;
+}
 
   if ((simd_support & JSIMD_SSE2) && simd_huffman &&
-      IS_ALIGNED_SSE(jconst_huff_encode_one_block))
+      IS_ALIGNED_SSE(jconst_huff_encode_one_block)) {
     return 1;
+}
 
   return 0;
 }

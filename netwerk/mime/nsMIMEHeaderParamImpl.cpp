@@ -83,8 +83,9 @@ nsMIMEHeaderParamImpl::DoGetParameter(const nsACString& aHeaderVal,
     rv = DoParameterInternal(PromiseFlatCString(aHeaderVal).get(), aParamName,
                              aDecoding, getter_Copies(charset), aLang,
                              getter_Copies(med));
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     // convert to UTF-8 after charset conversion and RFC 2047 decoding
     // if necessary.
@@ -118,8 +119,9 @@ nsMIMEHeaderParamImpl::DoGetParameter(const nsACString& aHeaderVal,
       return NS_OK;
     }
 
-    if (aTryLocaleCharset && !NS_IsNativeUTF8())
+    if (aTryLocaleCharset && !NS_IsNativeUTF8()) {
       return NS_CopyNativeToUnicode(str1, aResult);
+}
 
     CopyASCIItoUTF16(str1, aResult);
     return NS_OK;
@@ -202,8 +204,9 @@ class Continuation {
 char *combineContinuations(nsTArray<Continuation>& aArray)
 {
   // Sanity check
-  if (aArray.Length() == 0)
+  if (aArray.Length() == 0) {
     return nullptr;
+}
 
   // Get an upper bound for the length
   uint32_t length = 0;
@@ -220,7 +223,8 @@ char *combineContinuations(nsTArray<Continuation>& aArray)
 
     for (uint32_t i = 0; i < aArray.Length(); i++) {
       Continuation cont = aArray[i];
-      if (! cont.value) break;
+      if (! cont.value) { break;
+}
 
       char *c = result + strlen(result);
       strncat(result, cont.value, cont.length);
@@ -364,13 +368,16 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
                                            char **aResult)
 {
 
-  if (!aHeaderValue ||  !*aHeaderValue || !aResult)
+  if (!aHeaderValue ||  !*aHeaderValue || !aResult) {
     return NS_ERROR_INVALID_ARG;
+}
 
   *aResult = nullptr;
 
-  if (aCharset) *aCharset = nullptr;
-  if (aLang) *aLang = nullptr;
+  if (aCharset) { *aCharset = nullptr;
+}
+  if (aLang) { *aLang = nullptr;
+}
 
   nsAutoCString charset;
 
@@ -381,8 +388,9 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
   const char *str = aHeaderValue;
 
   // skip leading white space.
-  for (; *str &&  nsCRT::IsAsciiSpace(*str); ++str)
+  for (; *str &&  nsCRT::IsAsciiSpace(*str); ++str) {
     ;
+}
   const char *start = str;
 
   // aParamName is empty. return the first (possibly) _unnamed_ 'parameter'
@@ -390,10 +398,12 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
   // Content-Disposition: inline; filename=.....
   if (!aParamName || !*aParamName)
     {
-      for (; *str && *str != ';' && !nsCRT::IsAsciiSpace(*str); ++str)
+      for (; *str && *str != ';' && !nsCRT::IsAsciiSpace(*str); ++str) {
         ;
-      if (str == start)
+}
+      if (str == start) {
         return NS_ERROR_FIRST_HEADER_FIELD_COMPONENT_EMPTY;
+}
 
       *aResult = (char *) nsMemory::Clone(start, (str - start) + 1);
       NS_ENSURE_TRUE(*aResult, NS_ERROR_OUT_OF_MEMORY);
@@ -402,21 +412,25 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
     }
 
   /* Skip forward to first ';' */
-  for (; *str && *str != ';' && *str != ','; ++str)
+  for (; *str && *str != ';' && *str != ','; ++str) {
     ;
-  if (*str)
+}
+  if (*str) {
     str++;
+}
   /* Skip over following whitespace */
-  for (; *str && nsCRT::IsAsciiSpace(*str); ++str)
+  for (; *str && nsCRT::IsAsciiSpace(*str); ++str) {
     ;
+}
 
   // Some broken http servers just specify parameters
   // like 'filename' without specifying disposition
   // method. Rewind to the first non-white-space
   // character.
 
-  if (!*str)
+  if (!*str) {
     str = start;
+}
 
   // RFC2231 - The legitimate parm format can be:
   // A. title=ThisIsTitle
@@ -459,14 +473,16 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
     NS_ASSERTION(!nsCRT::IsAsciiSpace(*str), "should be after whitespace.");
 
     // Skip forward to the end of this token.
-    for (; *str && !nsCRT::IsAsciiSpace(*str) && *str != '=' && *str != ';'; str++)
+    for (; *str && !nsCRT::IsAsciiSpace(*str) && *str != '=' && *str != ';'; str++) {
       ;
+}
     nameEnd = str;
 
     int32_t nameLen = nameEnd - nameStart;
 
     // Skip over whitespace, '=', and whitespace
-    while (nsCRT::IsAsciiSpace(*str)) ++str;
+    while (nsCRT::IsAsciiSpace(*str)) { ++str;
+}
     if (!*str) {
       break;
     }
@@ -476,15 +492,17 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
     }
     // Skip over '=' only if it was actually there
     str++;
-    while (nsCRT::IsAsciiSpace(*str)) ++str;
+    while (nsCRT::IsAsciiSpace(*str)) { ++str;
+}
 
     if (*str != '"') {
       // The value is a token, not a quoted string.
       valueStart = str;
       for (valueEnd = str;
            *valueEnd && !nsCRT::IsAsciiSpace (*valueEnd) && *valueEnd != ';';
-           valueEnd++)
+           valueEnd++) {
         ;
+}
       str = valueEnd;
     } else {
       isQuotedString = true;
@@ -492,15 +510,17 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
       ++str;
       valueStart = str;
       for (valueEnd = str; *valueEnd; ++valueEnd) {
-        if (*valueEnd == '\\' && *(valueEnd + 1))
+        if (*valueEnd == '\\' && *(valueEnd + 1)) {
           ++valueEnd;
-        else if (*valueEnd == '"')
+        } else if (*valueEnd == '"') {
           break;
+}
       }
       str = valueEnd;
       // *valueEnd != null means that *valueEnd is quote character.
-      if (*valueEnd)
+      if (*valueEnd) {
         str++;
+}
     }
 
     // See if this is the simplest case (case A above),
@@ -521,8 +541,9 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
       char *res = ToNewCString(tempStr);
       NS_ENSURE_TRUE(res, NS_ERROR_OUT_OF_MEMORY);
 
-      if (isQuotedString)
+      if (isQuotedString) {
         RemoveQuotedStringEscapes(res);
+}
 
       caseAResult = res;
       // keep going, we may find a RFC 2231/5987 encoded alternative
@@ -658,7 +679,8 @@ nsMIMEHeaderParamImpl::DoParameterInternal(const char *aHeaderValue,
     // str now points after the end of the value.
     //   skip over whitespace, ';', whitespace.
 increment_str:
-    while (nsCRT::IsAsciiSpace(*str)) ++str;
+    while (nsCRT::IsAsciiSpace(*str)) { ++str;
+}
     if (*str == ';') {
       ++str;
     } else {
@@ -666,7 +688,8 @@ increment_str:
       // separator was missing
       break;
     }
-    while (nsCRT::IsAsciiSpace(*str)) ++str;
+    while (nsCRT::IsAsciiSpace(*str)) { ++str;
+}
   }
 
   caseCDResult = combineContinuations(segments);
@@ -674,15 +697,17 @@ increment_str:
   if (caseBResult && !charsetB.IsEmpty()) {
     // check that the 2231/5987 result decodes properly given the
     // specified character set
-    if (!IsValidOctetSequenceForCharset(charsetB, caseBResult))
+    if (!IsValidOctetSequenceForCharset(charsetB, caseBResult)) {
       caseBResult = nullptr;
+}
   }
 
   if (caseCDResult && !charsetCD.IsEmpty()) {
     // check that the 2231/5987 result decodes properly given the
     // specified character set
-    if (!IsValidOctetSequenceForCharset(charsetCD, caseCDResult))
+    if (!IsValidOctetSequenceForCharset(charsetCD, caseCDResult)) {
       caseCDResult = nullptr;
+}
   }
 
   if (caseBResult) {
@@ -735,10 +760,12 @@ internalDecodeRFC2047Header(const char* aHeaderVal, const char* aDefaultCharset,
                             nsACString& aResult)
 {
   aResult.Truncate();
-  if (!aHeaderVal)
+  if (!aHeaderVal) {
     return NS_ERROR_INVALID_ARG;
-  if (!*aHeaderVal)
+}
+  if (!*aHeaderVal) {
     return NS_OK;
+}
 
 
   // If aHeaderVal is RFC 2047 encoded or is not a UTF-8 string  but
@@ -909,9 +936,10 @@ internalDecodeParameter(const nsACString& aParamValue, const char* aCharset,
   if (aCharset && *aCharset)
   {
     nsCOMPtr<nsIUTF8ConverterService> cvtUTF8(do_GetService(NS_UTF8CONVERTERSERVICE_CONTRACTID));
-    if (cvtUTF8)
+    if (cvtUTF8) {
       return cvtUTF8->ConvertStringToUTF8(aParamValue, aCharset,
           true, true, 1, aResult);
+}
   }
 
   const nsCString& param = PromiseFlatCString(aParamValue);
@@ -944,8 +972,9 @@ internalDecodeParameter(const nsACString& aParamValue, const char* aCharset,
     rv = internalDecodeRFC2047Header(unQuoted.get(), aDefaultCharset,
                                      aOverrideCharset, true, decoded);
 
-    if (NS_SUCCEEDED(rv) && !decoded.IsEmpty())
+    if (NS_SUCCEEDED(rv) && !decoded.IsEmpty()) {
       aResult = decoded;
+}
   }
 
   return rv;
@@ -974,15 +1003,17 @@ char *DecodeQ(const char *in, uint32_t length)
   char *out, *dest = nullptr;
 
   out = dest = (char*) calloc(length + 1, sizeof(char));
-  if (dest == nullptr)
+  if (dest == nullptr) {
     return nullptr;
+}
   while (length > 0) {
     unsigned c = 0;
     switch (*in) {
     case '=':
       // check if |in| in the form of '=hh'  where h is [0-9a-fA-F].
-      if (length < 3 || !ISHEXCHAR(in[1]) || !ISHEXCHAR(in[2]))
+      if (length < 3 || !ISHEXCHAR(in[1]) || !ISHEXCHAR(in[2])) {
         goto badsyntax;
+}
       PR_sscanf(in + 1, "%2X", &c);
       *out++ = (char) c;
       in += 3;
@@ -996,7 +1027,8 @@ char *DecodeQ(const char *in, uint32_t length)
       break;
 
     default:
-      if (*in & 0x80) goto badsyntax;
+      if (*in & 0x80) { goto badsyntax;
+}
       *out++ = *in++;
       length--;
     }
@@ -1004,8 +1036,9 @@ char *DecodeQ(const char *in, uint32_t length)
   *out++ = '\0';
 
   for (out = dest; *out ; ++out) {
-    if (*out == '\t')
+    if (*out == '\t') {
       *out = ' ';
+}
   }
 
   return dest;
@@ -1033,8 +1066,10 @@ bool Is7bitNonAsciiString(const char *input, uint32_t len)
   while (len) {
     c = uint8_t(*input++);
     len--;
-    if (c & 0x80) return false;
-    if (c == 0x1B) return true;
+    if (c & 0x80) { return false;
+}
+    if (c == 0x1B) { return true;
+}
     if (c == '~') {
       switch (hz_state) {
       case hz_initial:
@@ -1052,7 +1087,8 @@ bool Is7bitNonAsciiString(const char *input, uint32_t len)
         break;
 
       case hz_escaped:
-        if (*input == '}') hz_state = hz_seen;
+        if (*input == '}') { hz_state = hz_seen;
+}
         break;
       default:
         break;
@@ -1111,10 +1147,11 @@ void CopyRawHeader(const char *aInput, uint32_t aLen,
   } else { // replace each octet with Unicode replacement char in UTF-8.
     for (uint32_t i = 0; i < aLen; i++) {
       c = uint8_t(*aInput++);
-      if (c & 0x80)
+      if (c & 0x80) {
         aOutput.Append(REPLACEMENT_CHAR);
-      else
+      } else {
         aOutput.Append(char(c));
+}
     }
   }
 }
@@ -1124,9 +1161,9 @@ nsresult DecodeQOrBase64Str(const char *aEncoded, size_t aLen, char aQOrBase64,
 {
   char *decodedText;
   NS_ASSERTION(aQOrBase64 == 'Q' || aQOrBase64 == 'B', "Should be 'Q' or 'B'");
-  if(aQOrBase64 == 'Q')
+  if(aQOrBase64 == 'Q') {
     decodedText = DecodeQ(aEncoded, aLen);
-  else if (aQOrBase64 == 'B') {
+  } else if (aQOrBase64 == 'B') {
     decodedText = PL_Base64Decode(aEncoded, aLen, nullptr);
   } else {
     return NS_ERROR_INVALID_ARG;
@@ -1190,7 +1227,8 @@ nsresult DecodeRFC2047Str(const char *aHeader, const char *aDefaultCharset,
     if (isLastEncodedWord) {
       // See if it's all whitespace.
       for (q = begin; q < p; ++q) {
-        if (!PL_strchr(" \t\r\n", *q)) break;
+        if (!PL_strchr(" \t\r\n", *q)) { break;
+}
       }
     }
 
@@ -1231,18 +1269,21 @@ nsresult DecodeRFC2047Str(const char *aHeader, const char *aDefaultCharset,
 
     q++;
     curEncoding = nsCRT::ToUpper(*q);
-    if (curEncoding != 'Q' && curEncoding != 'B')
+    if (curEncoding != 'Q' && curEncoding != 'B') {
       goto badsyntax;
+}
 
-    if (q[1] != '?')
+    if (q[1] != '?') {
       goto badsyntax;
+}
 
     // loop-wise, keep going until we hit "?=".  the inner check handles the
     //  nul terminator should the string terminate before we hit the right
     //  marker.  (And the r[1] will never reach beyond the end of the string
     //  because *r != '?' is true if r is the nul character.)
     for (r = q + 2; *r != '?' || r[1] != '='; r++) {
-      if (*r < ' ') goto badsyntax;
+      if (*r < ' ') { goto badsyntax;
+}
     }
     if (r == q + 2) {
         // it's empty, skip

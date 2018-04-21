@@ -36,10 +36,11 @@ TInfoSinkBase &TInfoSinkBase::operator<<(const ImmutableString &str)
 void TInfoSinkBase::location(int file, int line)
 {
     TPersistStringStream stream;
-    if (line)
+    if (line) {
         stream << file << ":" << line;
-    else
+    } else {
         stream << file << ":? ";
+}
     stream << ": ";
 
     sink.append(stream.str());

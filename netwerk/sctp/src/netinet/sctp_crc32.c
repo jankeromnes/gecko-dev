@@ -543,9 +543,10 @@ sctp_crc32c_sb8_64_bit(uint32_t crc,
 	running_length = ((length - init_bytes) / 8) * 8;
 	end_bytes = length - init_bytes - running_length;
 
-	for (li = 0; li < init_bytes; li++)
+	for (li = 0; li < init_bytes; li++) {
 		crc = sctp_crc_tableil8_o32[(crc ^ *p_buf++) & 0x000000FF] ^
 		    (crc >> 8);
+}
 	for (li = 0; li < running_length / 8; li++) {
 #if BYTE_ORDER == BIG_ENDIAN
 		crc ^= *p_buf++;
@@ -580,9 +581,10 @@ sctp_crc32c_sb8_64_bit(uint32_t crc,
 		p_buf += 4;
 #endif
 	}
-	for (li = 0; li < end_bytes; li++)
+	for (li = 0; li < end_bytes; li++) {
 		crc = sctp_crc_tableil8_o32[(crc ^ *p_buf++) & 0x000000FF] ^
 		    (crc >> 8);
+}
 	return (crc);
 }
 
@@ -781,10 +783,11 @@ sctp_calculate_cksum(struct mbuf *m, uint32_t offset)
 		}
 		if (offset) {
 			/* we only offset once into the first mbuf */
-			if (offset < (uint32_t) SCTP_BUF_LEN(at))
+			if (offset < (uint32_t) SCTP_BUF_LEN(at)) {
 				offset = 0;
-			else
+			} else {
 				offset -= SCTP_BUF_LEN(at);
+}
 		}
 		at = SCTP_BUF_NEXT(at);
 	}

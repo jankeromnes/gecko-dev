@@ -15,12 +15,13 @@
 
 // Inverse recenters a non-negative literal v around a reference r
 static uint16_t inv_recenter_nonneg(uint16_t r, uint16_t v) {
-  if (v > (r << 1))
+  if (v > (r << 1)) {
     return v;
-  else if ((v & 1) == 0)
+  } else if ((v & 1) == 0) {
     return (v >> 1) + r;
-  else
+  } else {
     return r - ((v + 1) >> 1);
+}
 }
 
 // Inverse recenters a non-negative literal v in [0, n-1] around a
@@ -46,7 +47,8 @@ int16_t aom_read_primitive_symmetric_(aom_reader *r,
 
 uint16_t aom_read_primitive_quniform_(aom_reader *r,
                                       uint16_t n ACCT_STR_PARAM) {
-  if (n <= 1) return 0;
+  if (n <= 1) { return 0;
+}
   const int l = get_msb(n - 1) + 1;
   const int m = (1 << l) - n;
   const int v = aom_read_literal(r, l - 1, ACCT_STR_NAME);
@@ -55,7 +57,8 @@ uint16_t aom_read_primitive_quniform_(aom_reader *r,
 
 static uint16_t aom_rb_read_primitive_quniform(struct aom_read_bit_buffer *rb,
                                                uint16_t n) {
-  if (n <= 1) return 0;
+  if (n <= 1) { return 0;
+}
   const int l = get_msb(n - 1) + 1;
   const int m = (1 << l) - n;
   const int v = aom_rb_read_literal(rb, l - 1);
@@ -64,7 +67,8 @@ static uint16_t aom_rb_read_primitive_quniform(struct aom_read_bit_buffer *rb,
 
 uint16_t aom_read_primitive_refbilevel_(aom_reader *r, uint16_t n, uint16_t p,
                                         uint16_t ref ACCT_STR_PARAM) {
-  if (n <= 1) return 0;
+  if (n <= 1) { return 0;
+}
   assert(p > 0 && p <= n);
   assert(ref < n);
   int lolimit = ref - p / 2;
@@ -79,7 +83,8 @@ uint16_t aom_read_primitive_refbilevel_(aom_reader *r, uint16_t n, uint16_t p,
     v = aom_read_primitive_quniform(r, p, ACCT_STR_NAME) + lolimit;
   } else {
     v = aom_read_primitive_quniform(r, n - p, ACCT_STR_NAME);
-    if (v >= lolimit) v += p;
+    if (v >= lolimit) { v += p;
+}
   }
   return v;
 }

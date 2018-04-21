@@ -99,8 +99,9 @@ nsPNGEncoder::StartImageEncode(uint32_t aWidth,
   // validate input format
   if (aInputFormat != INPUT_FORMAT_RGB &&
       aInputFormat != INPUT_FORMAT_RGBA &&
-      aInputFormat != INPUT_FORMAT_HOSTARGB)
+      aInputFormat != INPUT_FORMAT_HOSTARGB) {
     return NS_ERROR_INVALID_ARG;
+}
 
   // parse and check any provided output options
   nsresult rv = ParseOptions(aOutputOptions, &useTransparency, &skipFirstFrame,
@@ -158,10 +159,11 @@ nsPNGEncoder::StartImageEncode(uint32_t aWidth,
   int colorType;
   if ((aInputFormat == INPUT_FORMAT_HOSTARGB ||
        aInputFormat == INPUT_FORMAT_RGBA)  &&
-       useTransparency)
+       useTransparency) {
     colorType = PNG_COLOR_TYPE_RGB_ALPHA;
-  else
+  } else {
     colorType = PNG_COLOR_TYPE_RGB;
+}
 
   png_set_IHDR(mPNG, mPNGinfo, aWidth, aHeight, 8, colorType,
                PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT,
@@ -232,8 +234,9 @@ nsPNGEncoder::AddImageFrame(const uint8_t* aData,
   // validate input format
   if (aInputFormat != INPUT_FORMAT_RGB &&
       aInputFormat != INPUT_FORMAT_RGBA &&
-      aInputFormat != INPUT_FORMAT_HOSTARGB)
+      aInputFormat != INPUT_FORMAT_HOSTARGB) {
     return NS_ERROR_INVALID_ARG;
+}
 
   // libpng's error handler jumps back here upon an error.
   if (setjmp(png_jmpbuf(mPNG))) {
@@ -499,8 +502,9 @@ nsPNGEncoder::ParseOptions(const nsAString& aOptions,
       }
 
     // unknown token name
-    } else
+    } else {
       return NS_ERROR_INVALID_ARG;
+}
 
     if (value) {
       *equals = '='; // restore '=' so strtok doesn't get lost

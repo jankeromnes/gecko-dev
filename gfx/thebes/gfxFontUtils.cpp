@@ -88,7 +88,8 @@ gfxSparseBitSet::Dump(const char* aPrefix, eGfxLog aWhichLog) const
 
                 index += snprintf(&outStr[index], BUFSIZE - index, "%2.2x", flipped);
             }
-            if (i + 4 != 32) index += snprintf(&outStr[index], BUFSIZE - index, " ");
+            if (i + 4 != 32) { index += snprintf(&outStr[index], BUFSIZE - index, " ");
+}
         }
         index += snprintf(&outStr[index], BUFSIZE - index, "]");
         LOG(aWhichLog, ("%s", outStr));
@@ -271,8 +272,9 @@ gfxFontUtils::ReadCMAPTableFormat4(const uint8_t *aBuf, uint32_t aLength,
         } else {
             // const uint16_t idDelta = ReadShortAt16(idDeltas, i); // Unused: self-documenting.
             for (uint32_t c = startCount; c <= endCount; ++c) {
-                if (c == 0xFFFF)
+                if (c == 0xFFFF) {
                     break;
+}
 
                 const uint16_t *gdata = (idRangeOffset/2 
                                          + (c - startCount)
@@ -459,8 +461,9 @@ gfxFontUtils::FindPreferredSubtable(const uint8_t *aBuf, uint32_t aBufLength,
     const uint8_t *table = aBuf + SizeOfHeader;
     for (uint16_t i = 0; i < numTables; ++i, table += SizeOfTable) {
         const uint16_t platformID = ReadShortAt(table, TableOffsetPlatformID);
-        if (!acceptablePlatform(platformID))
+        if (!acceptablePlatform(platformID)) {
             continue;
+}
 
         const uint16_t encodingID = ReadShortAt(table, TableOffsetEncodingID);
         const uint32_t offset = ReadLongAt(table, TableOffsetOffset);
@@ -825,8 +828,9 @@ void gfxFontUtils::ParseFontList(const nsAString& aFamilyList,
 
      while (p < p_end) {
         const char16_t *nameStart = p;
-        while (++p != p_end && *p != kComma)
+        while (++p != p_end && *p != kComma) {
         /* nothing */ ;
+}
 
         // pull out a single name and clean out leading/trailing whitespace        
         fontname = Substring(nameStart, p);
@@ -881,14 +885,16 @@ nsresult gfxFontUtils::MakeUniqueUserFontName(nsAString& aName)
 
     char guidB64[MAX_B64_LEN] = {0};
 
-    if (!PL_Base64Encode(reinterpret_cast<char*>(&guid), sizeof(guid), guidB64))
+    if (!PL_Base64Encode(reinterpret_cast<char*>(&guid), sizeof(guid), guidB64)) {
         return NS_ERROR_FAILURE;
+}
 
     // all b64 characters except for '/' are allowed in Postscript names, so convert / ==> -
     char *p;
     for (p = guidB64; *p; p++) {
-        if (*p == '/')
+        if (*p == '/') {
             *p = '-';
+}
     }
 
     aName.AssignLiteral(u"uf");
@@ -1036,16 +1042,18 @@ gfxFontUtils::RenameFont(const nsAString& aName, const uint8_t *aFontData,
                               nameStrLength +
                               3) & ~3;
                               
-    if (dataLength + nameTableSize > UINT32_MAX)
+    if (dataLength + nameTableSize > UINT32_MAX) {
         return NS_ERROR_FAILURE;
+}
         
     // bug 505386 - need to handle unpadded font length
     uint32_t paddedFontDataSize = (aFontDataLength + 3) & ~3;
     uint32_t adjFontDataSize = paddedFontDataSize + nameTableSize;
 
     // create new buffer: old font data plus new name table
-    if (!aNewFont->AppendElements(adjFontDataSize, fallible))
+    if (!aNewFont->AppendElements(adjFontDataSize, fallible)) {
         return NS_ERROR_OUT_OF_MEMORY;
+}
 
     // copy the old font data
     uint8_t *newFontData = reinterpret_cast<uint8_t*>(aNewFont->Elements());
@@ -1106,8 +1114,9 @@ gfxFontUtils::RenameFont(const nsAString& aName, const uint8_t *aFontData,
     AutoSwap_PRUint32 *nameData = reinterpret_cast<AutoSwap_PRUint32*> (nameHeader);
     AutoSwap_PRUint32 *nameDataEnd = nameData + (nameTableSize >> 2);
     
-    while (nameData < nameDataEnd)
+    while (nameData < nameDataEnd) {
         checkSum = checkSum + *nameData++;
+}
     
     // adjust name table entry to point to new name table
     dirEntry->offset = paddedFontDataSize;
@@ -1582,8 +1591,9 @@ gfxFontUtils::ReadNames(const char *aNameData, uint32_t aDataLen,
             }
         }
 
-        if (!foundName)
+        if (!foundName) {
             aNames.AppendElement(name);
+}
 
     }
 

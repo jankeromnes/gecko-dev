@@ -39,11 +39,13 @@ coordinates_to_parameter (double x, double y, double angle)
 
     t = atan2 (y, x) + angle;
 
-    while (t < 0)
+    while (t < 0) {
 	t += 2 * M_PI;
+}
 
-    while (t >= 2 * M_PI)
+    while (t >= 2 * M_PI) {
 	t -= 2 * M_PI;
+}
 
     return 1 - t * (1 / (2 * M_PI)); /* Scale t to [0, 1] and
 				      * make rotation CCW
@@ -82,8 +84,9 @@ conical_get_scanline_narrow (pixman_iter_t *iter, const uint32_t *mask)
 	v.vector[1] = pixman_int_to_fixed (y) + pixman_fixed_1 / 2;
 	v.vector[2] = pixman_fixed_1;
 
-	if (!pixman_transform_point_3d (image->common.transform, &v))
+	if (!pixman_transform_point_3d (image->common.transform, &v)) {
 	    return iter->buffer;
+}
 
 	cx = image->common.transform->matrix[0][0] / 65536.;
 	cy = image->common.transform->matrix[1][0] / 65536.;
@@ -174,10 +177,11 @@ conical_get_scanline_wide (pixman_iter_t *iter, const uint32_t *mask)
 void
 _pixman_conical_gradient_iter_init (pixman_image_t *image, pixman_iter_t *iter)
 {
-    if (iter->iter_flags & ITER_NARROW)
+    if (iter->iter_flags & ITER_NARROW) {
 	iter->get_scanline = conical_get_scanline_narrow;
-    else
+    } else {
 	iter->get_scanline = conical_get_scanline_wide;
+}
 }
 
 PIXMAN_EXPORT pixman_image_t *
@@ -189,8 +193,9 @@ pixman_image_create_conical_gradient (const pixman_point_fixed_t *  center,
     pixman_image_t *image = _pixman_image_allocate ();
     conical_gradient_t *conical;
 
-    if (!image)
+    if (!image) {
 	return NULL;
+}
 
     conical = &image->conical;
 

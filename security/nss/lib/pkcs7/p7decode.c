@@ -96,8 +96,9 @@ sec_pkcs7_decoder_work_data(SEC_PKCS7DecoderContext *p7dcx,
         inlen = len;
         buflen = sec_PKCS7DecryptLength(worker->decryptobj, inlen, final);
         if (buflen == 0) {
-            if (inlen == 0) /* no input and no output */
+            if (inlen == 0) { /* no input and no output */
                 return;
+}
             /*
              * No output is expected, but the input data may be buffered
              * so we still have to call Decrypt.
@@ -132,8 +133,9 @@ sec_pkcs7_decoder_work_data(SEC_PKCS7DecoderContext *p7dcx,
                 buf = (unsigned char *)PORT_ArenaGrow(p7dcx->cinfo->poolp,
                                                       plain->data,
                                                       oldlen, oldlen + buflen);
-                if (buf != NULL)
+                if (buf != NULL) {
                     buf += oldlen;
+}
             }
             plain->data = buf;
         }
@@ -168,8 +170,9 @@ sec_pkcs7_decoder_work_data(SEC_PKCS7DecoderContext *p7dcx,
      * Pass back the contents bytes, and free the temporary buffer.
      */
     if (p7dcx->cb != NULL) {
-        if (len)
+        if (len) {
             (*p7dcx->cb)(p7dcx->cb_arg, (const char *)data, len);
+}
         if (worker->decryptobj != NULL) {
             PORT_Assert(buf != NULL);
             PORT_Free(buf);
@@ -191,16 +194,18 @@ sec_pkcs7_decoder_filter(void *arg, const char *data, unsigned long len,
      * handling nested types we would probably need to do something
      * smarter based on depth and data_kind.
      */
-    if (data_kind != SEC_ASN1_Contents)
+    if (data_kind != SEC_ASN1_Contents) {
         return;
+}
 
     /*
      * The ASN.1 decoder should not even call us with a length of 0.
      * Just being paranoid.
      */
     PORT_Assert(len);
-    if (len == 0)
+    if (len == 0) {
         return;
+}
 
     p7dcx = (SEC_PKCS7DecoderContext *)arg;
 
@@ -230,22 +235,25 @@ sec_pkcs7_decoder_start_digests(SEC_PKCS7DecoderContext *p7dcx, int depth,
 {
     int i, digcnt;
 
-    if (digestalgs == NULL)
+    if (digestalgs == NULL) {
         return SECSuccess;
+}
 
     /*
      * Count the algorithms.
      */
     digcnt = 0;
-    while (digestalgs[digcnt] != NULL)
+    while (digestalgs[digcnt] != NULL) {
         digcnt++;
+}
 
     /*
      * No algorithms means no work to do.
      * Just act as if there were no algorithms specified.
      */
-    if (digcnt == 0)
+    if (digcnt == 0) {
         return SECSuccess;
+}
 
     p7dcx->worker.digcxs = (void **)PORT_ArenaAlloc(p7dcx->tmp_poolp,
                                                     digcnt * sizeof(void *));
@@ -290,11 +298,12 @@ sec_pkcs7_decoder_start_digests(SEC_PKCS7DecoderContext *p7dcx, int depth,
         }
     }
 
-    if (p7dcx->worker.digcnt != 0)
+    if (p7dcx->worker.digcnt != 0) {
         SEC_ASN1DecoderSetFilterProc(p7dcx->dcx,
                                      sec_pkcs7_decoder_filter,
                                      p7dcx,
                                      (PRBool)(p7dcx->cb != NULL));
+}
     return SECSuccess;
 }
 
@@ -323,8 +332,9 @@ sec_pkcs7_decoder_finish_digests(SEC_PKCS7DecoderContext *p7dcx,
     /*
      * If no digests, then we have nothing to do.
      */
-    if (worker->digcnt == 0)
+    if (worker->digcnt == 0) {
         return SECSuccess;
+}
 
     /*
      * No matter what happens after this, we want to stop filtering.
@@ -443,10 +453,12 @@ sec_pkcs7_decoder_get_recipient_key(SEC_PKCS7DecoderContext *p7dcx,
     }
 
 no_key_found:
-    if (privkey != NULL)
+    if (privkey != NULL) {
         SECKEY_DestroyPrivateKey(privkey);
-    if (slot != NULL)
+}
+    if (slot != NULL) {
         PK11_FreeSlot(slot);
+}
 
     return bulkkey;
 }
@@ -492,8 +504,9 @@ sec_pkcs7_decoder_start_decrypt(SEC_PKCS7DecoderContext *p7dcx, int depth,
     } else {
         bulkkey = sec_pkcs7_decoder_get_recipient_key(p7dcx, recipientinfos,
                                                       enccinfo);
-        if (bulkkey == NULL)
+        if (bulkkey == NULL) {
             goto no_decryption;
+}
         enccinfo->keysize = PK11_GetKeyStrength(bulkkey,
                                                 &(enccinfo->contentEncAlg));
     }
@@ -527,8 +540,9 @@ sec_pkcs7_decoder_start_decrypt(SEC_PKCS7DecoderContext *p7dcx, int depth,
      * get it all over again later (and do another potentially expensive
      * RSA operation), copy it for later signature verification to use.
      */
-    if (copy_key_for_signature != NULL)
+    if (copy_key_for_signature != NULL) {
         *copy_key_for_signature = PK11_ReferenceSymKey(bulkkey);
+}
 
     /*
      * Now we have the bulk encryption key (in bulkkey) and the
@@ -571,10 +585,11 @@ no_decryption:
      * to know about it.  However, if no callback was specified, then
      * maybe it is not important that the decryption failed.
      */
-    if (p7dcx->cb != NULL)
+    if (p7dcx->cb != NULL) {
         return SECFailure;
-    else
+    } else {
         return SECSuccess; /* Let the decoding continue. */
+}
 }
 
 static SECStatus
@@ -594,8 +609,9 @@ sec_pkcs7_decoder_finish_decrypt(SEC_PKCS7DecoderContext *p7dcx,
     /*
      * If no decryption context, then we have nothing to do.
      */
-    if (worker->decryptobj == NULL)
+    if (worker->decryptobj == NULL) {
         return SECSuccess;
+}
 
     /*
      * No matter what happens after this, we want to stop filtering.
@@ -637,10 +653,11 @@ sec_pkcs7_decoder_notify(void *arg, PRBool before, void *dest, int depth)
      * (This used to be just the statement "after = !before", but that
      * causes a warning on the mac; to avoid that, we do it the long way.)
      */
-    if (before)
+    if (before) {
         after = PR_FALSE;
-    else
+    } else {
         after = PR_TRUE;
+}
 
     p7dcx = (SEC_PKCS7DecoderContext *)arg;
     if (!p7dcx) {
@@ -654,21 +671,24 @@ sec_pkcs7_decoder_notify(void *arg, PRBool before, void *dest, int depth)
     }
 
     if (cinfo->contentTypeTag == NULL) {
-        if (after && dest == &(cinfo->contentType))
+        if (after && dest == &(cinfo->contentType)) {
             cinfo->contentTypeTag = SECOID_FindOID(&(cinfo->contentType));
+}
         return;
     }
 
     switch (cinfo->contentTypeTag->offset) {
         case SEC_OID_PKCS7_SIGNED_DATA:
             sigd = cinfo->content.signedData;
-            if (sigd == NULL)
+            if (sigd == NULL) {
                 break;
+}
 
             if (sigd->contentInfo.contentTypeTag == NULL) {
-                if (after && dest == &(sigd->contentInfo.contentType))
+                if (after && dest == &(sigd->contentInfo.contentType)) {
                     sigd->contentInfo.contentTypeTag =
                         SECOID_FindOID(&(sigd->contentInfo.contentType));
+}
                 break;
             }
 
@@ -697,8 +717,9 @@ sec_pkcs7_decoder_notify(void *arg, PRBool before, void *dest, int depth)
             if (before && dest == &(sigd->contentInfo.content)) {
                 rv = sec_pkcs7_decoder_start_digests(p7dcx, depth,
                                                      sigd->digestAlgorithms);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     SEC_ASN1DecoderClearNotifyProc(p7dcx->dcx);
+}
 
                 break;
             }
@@ -734,13 +755,15 @@ sec_pkcs7_decoder_notify(void *arg, PRBool before, void *dest, int depth)
 
         case SEC_OID_PKCS7_ENVELOPED_DATA:
             envd = cinfo->content.envelopedData;
-            if (envd == NULL)
+            if (envd == NULL) {
                 break;
+}
 
             if (envd->encContentInfo.contentTypeTag == NULL) {
-                if (after && dest == &(envd->encContentInfo.contentType))
+                if (after && dest == &(envd->encContentInfo.contentType)) {
                     envd->encContentInfo.contentTypeTag =
                         SECOID_FindOID(&(envd->encContentInfo.contentType));
+}
                 break;
             }
 
@@ -754,8 +777,9 @@ sec_pkcs7_decoder_notify(void *arg, PRBool before, void *dest, int depth)
                                                      envd->recipientInfos,
                                                      &(envd->encContentInfo),
                                                      NULL);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     SEC_ASN1DecoderClearNotifyProc(p7dcx->dcx);
+}
 
                 break;
             }
@@ -786,13 +810,15 @@ sec_pkcs7_decoder_notify(void *arg, PRBool before, void *dest, int depth)
 
         case SEC_OID_PKCS7_SIGNED_ENVELOPED_DATA:
             saed = cinfo->content.signedAndEnvelopedData;
-            if (saed == NULL)
+            if (saed == NULL) {
                 break;
+}
 
             if (saed->encContentInfo.contentTypeTag == NULL) {
-                if (after && dest == &(saed->encContentInfo.contentType))
+                if (after && dest == &(saed->encContentInfo.contentType)) {
                     saed->encContentInfo.contentTypeTag =
                         SECOID_FindOID(&(saed->encContentInfo.contentType));
+}
                 break;
             }
 
@@ -806,11 +832,13 @@ sec_pkcs7_decoder_notify(void *arg, PRBool before, void *dest, int depth)
                                                      saed->recipientInfos,
                                                      &(saed->encContentInfo),
                                                      &(saed->sigKey));
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     rv = sec_pkcs7_decoder_start_digests(p7dcx, depth,
                                                          saed->digestAlgorithms);
-                if (rv != SECSuccess)
+}
+                if (rv != SECSuccess) {
                     SEC_ASN1DecoderClearNotifyProc(p7dcx->dcx);
+}
 
                 break;
             }
@@ -893,8 +921,9 @@ sec_pkcs7_decoder_notify(void *arg, PRBool before, void *dest, int depth)
                                                          NULL);
                 }
 
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     SEC_ASN1DecoderClearNotifyProc(p7dcx->dcx);
+}
 
                 break;
             }
@@ -967,8 +996,9 @@ SEC_PKCS7DecoderStart(SEC_PKCS7DecoderContentCallback cb, void *cb_arg,
     PLArenaPool *poolp;
 
     poolp = PORT_NewArena(1024); /* XXX what is right value? */
-    if (poolp == NULL)
+    if (poolp == NULL) {
         return NULL;
+}
 
     cinfo = (SEC_PKCS7ContentInfo *)PORT_ArenaZAlloc(poolp, sizeof(*cinfo));
     if (cinfo == NULL) {
@@ -1037,8 +1067,9 @@ SEC_PKCS7DecoderUpdate(SEC_PKCS7DecoderContext *p7dcx,
             if (SEC_ASN1DecoderUpdate(p7dcx->dcx, buf, len) != SECSuccess) {
                 p7dcx->error = PORT_GetError();
                 PORT_Assert(p7dcx->error);
-                if (p7dcx->error == 0)
+                if (p7dcx->error == 0) {
                     p7dcx->error = -1;
+}
             }
         }
     }
@@ -1141,12 +1172,13 @@ SEC_PKCS7ContainsCertsOrCrls(SEC_PKCS7ContentInfo *cinfo)
     /*
      * I know this could be collapsed, but I was in a mood to be explicit.
      */
-    if (certs != NULL && certs[0] != NULL)
+    if (certs != NULL && certs[0] != NULL) {
         return PR_TRUE;
-    else if (crls != NULL && crls[0] != NULL)
+    } else if (crls != NULL && crls[0] != NULL) {
         return PR_TRUE;
-    else
+    } else {
         return PR_FALSE;
+}
 }
 
 /* return the content length...could use GetContent, however we
@@ -1235,10 +1267,11 @@ SEC_PKCS7ContentIsSigned(SEC_PKCS7ContentInfo *cinfo)
      * I know this could be collapsed; but I kind of think it will get
      * more complicated before I am finished, so...
      */
-    if (signerinfos != NULL && signerinfos[0] != NULL)
+    if (signerinfos != NULL && signerinfos[0] != NULL) {
         return PR_TRUE;
-    else
+    } else {
         return PR_FALSE;
+}
 }
 
 /*
@@ -1419,8 +1452,9 @@ sec_pkcs7_verify_signature(SEC_PKCS7ContentInfo *cinfo,
      */
     encoded_stime = SEC_PKCS7GetSigningTime(cinfo);
     if (encoded_stime != NULL) {
-        if (DER_DecodeTimeChoice(&stime, encoded_stime) != SECSuccess)
+        if (DER_DecodeTimeChoice(&stime, encoded_stime) != SECSuccess) {
             encoded_stime = NULL; /* conversion failed, so pretend none */
+}
     }
 
     /*
@@ -1452,8 +1486,9 @@ sec_pkcs7_verify_signature(SEC_PKCS7ContentInfo *cinfo,
     }
 
     publickey = CERT_ExtractPublicKey(cert);
-    if (publickey == NULL)
+    if (publickey == NULL) {
         goto done;
+}
 
     /*
      * XXX No!  If digests is empty, see if we can create it now by
@@ -1465,8 +1500,9 @@ sec_pkcs7_verify_signature(SEC_PKCS7ContentInfo *cinfo,
      * stashed in the struct itself or passed in explicitly (as would
      * be done for detached contents).
      */
-    if ((digests == NULL || digests[0] == NULL) && (detached_digest == NULL || detached_digest->data == NULL))
+    if ((digests == NULL || digests[0] == NULL) && (detached_digest == NULL || detached_digest->data == NULL)) {
         goto done;
+}
 
     /*
      * Find and confirm digest algorithm.
@@ -1500,8 +1536,9 @@ sec_pkcs7_verify_signature(SEC_PKCS7ContentInfo *cinfo,
          * pick digest matching signerinfo->digestAlg from digests
          */
         for (i = 0; digestalgs[i] != NULL; i++) {
-            if (SECOID_FindOIDTag(&(digestalgs[i]->algorithm)) == digestTag)
+            if (SECOID_FindOIDTag(&(digestalgs[i]->algorithm)) == digestTag) {
                 break;
+}
         }
         if (digestalgs[i] == NULL) {
             PORT_SetError(SEC_ERROR_PKCS7_BAD_SIGNATURE);
@@ -1573,8 +1610,9 @@ sec_pkcs7_verify_signature(SEC_PKCS7ContentInfo *cinfo,
         encoded_attrs.data = NULL;
         encoded_attrs.len = 0;
         if (sec_PKCS7EncodeAttributes(NULL, &encoded_attrs,
-                                      &(signerinfo->authAttr)) == NULL)
+                                      &(signerinfo->authAttr)) == NULL) {
             goto done;
+}
 
         if (encoded_attrs.data == NULL || encoded_attrs.len == 0) {
             PORT_SetError(SEC_ERROR_PKCS7_BAD_SIGNATURE);
@@ -1612,8 +1650,9 @@ sec_pkcs7_verify_signature(SEC_PKCS7ContentInfo *cinfo,
              * encrypted digest (aka the signature).
              */
             decryptobj = sec_PKCS7CreateDecryptObject(sigkey, bulkid);
-            if (decryptobj == NULL)
+            if (decryptobj == NULL) {
                 goto done;
+}
 
             buflen = sec_PKCS7DecryptLength(decryptobj, sig->len, PR_TRUE);
             PORT_Assert(buflen);
@@ -1664,8 +1703,9 @@ sec_pkcs7_verify_signature(SEC_PKCS7ContentInfo *cinfo,
          * certificate signature check that failed during the cert
          * verification done above.  Our error handling is really a mess.
          */
-        if (PORT_GetError() == SEC_ERROR_BAD_SIGNATURE)
+        if (PORT_GetError() == SEC_ERROR_BAD_SIGNATURE) {
             PORT_SetError(SEC_ERROR_PKCS7_BAD_SIGNATURE);
+}
     }
 
 savecert:
@@ -1720,11 +1760,13 @@ done:
      * itself here.
      */
 
-    if (certs != NULL)
+    if (certs != NULL) {
         CERT_DestroyCertArray(certs, certcount);
+}
 
-    if (publickey != NULL)
+    if (publickey != NULL) {
         SECKEY_DestroyPublicKey(publickey);
+}
 
     return goodsig;
 }
@@ -1834,8 +1876,9 @@ sec_pkcs7_get_signer_cert_info(SEC_PKCS7ContentInfo *cinfo, int selector)
         } break;
     }
 
-    if (signerinfos == NULL || signerinfos[0] == NULL)
+    if (signerinfos == NULL || signerinfos[0] == NULL) {
         return NULL;
+}
 
     signercert = signerinfos[0]->cert;
 
@@ -1851,8 +1894,9 @@ sec_pkcs7_get_signer_cert_info(SEC_PKCS7ContentInfo *cinfo, int selector)
         (void)sec_pkcs7_verify_signature(cinfo, certUsageEmailSigner,
                                          NULL, HASH_AlgNULL, PR_FALSE, NULL);
         signercert = signerinfos[0]->cert;
-        if (signercert == NULL)
+        if (signercert == NULL) {
             return NULL;
+}
     }
 
     switch (selector) {
@@ -1896,16 +1940,18 @@ SEC_PKCS7GetSigningTime(SEC_PKCS7ContentInfo *cinfo)
     SEC_PKCS7SignerInfo **signerinfos;
     SEC_PKCS7Attribute *attr;
 
-    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_SIGNED_DATA)
+    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_SIGNED_DATA) {
         return NULL;
+}
 
     signerinfos = cinfo->content.signedData->signerInfos;
 
     /*
      * No signature, or more than one, means no deal.
      */
-    if (signerinfos == NULL || signerinfos[0] == NULL || signerinfos[1] != NULL)
+    if (signerinfos == NULL || signerinfos[0] == NULL || signerinfos[1] != NULL) {
         return NULL;
+}
 
     attr = sec_PKCS7FindAttribute(signerinfos[0]->authAttr,
                                   SEC_OID_PKCS9_SIGNING_TIME, PR_TRUE);

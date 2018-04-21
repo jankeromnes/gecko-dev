@@ -16,8 +16,9 @@
 uint32_t
 gfxFT2LockedFace::GetGlyph(uint32_t aCharCode)
 {
-    if (MOZ_UNLIKELY(!mFace))
+    if (MOZ_UNLIKELY(!mFace)) {
         return 0;
+}
 
 #ifdef HAVE_FONTCONFIG_FCFREETYPE_H
     // FcFreeTypeCharIndex will search starting from the most recently
@@ -46,13 +47,15 @@ gfxFT2LockedFace::GetUVSGlyph(uint32_t aCharCode, uint32_t aVariantSelector)
 {
     NS_PRECONDITION(aVariantSelector, "aVariantSelector should not be NULL");
 
-    if (MOZ_UNLIKELY(!mFace))
+    if (MOZ_UNLIKELY(!mFace)) {
         return 0;
+}
 
     // This function is available from FreeType 2.3.6 (June 2008).
     static CharVariantFunction sGetCharVariantPtr = FindCharVariantFunction();
-    if (!sGetCharVariantPtr)
+    if (!sGetCharVariantPtr) {
         return 0;
+}
 
 #ifdef HAVE_FONTCONFIG_FCFREETYPE_H
     // FcFreeTypeCharIndex may have changed the selected charmap.

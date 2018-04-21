@@ -111,12 +111,13 @@ static INLINE void flat_mask_internal(const __m128i *th, const __m128i *p,
   }
 
   __m128i ft;
-  if (bd == 8)
+  if (bd == 8) {
     ft = _mm_subs_epu16(max, *th);
-  else if (bd == 10)
+  } else if (bd == 10) {
     ft = _mm_subs_epu16(max, _mm_slli_epi16(*th, 2));
-  else  // bd == 12
+  } else {  // bd == 12
     ft = _mm_subs_epu16(max, _mm_slli_epi16(*th, 4));
+}
 
   const __m128i zero = _mm_setzero_si128();
   *flat = _mm_cmpeq_epi16(ft, zero);
@@ -141,12 +142,13 @@ static INLINE void highbd_filter4(__m128i *p, __m128i *q, const __m128i *mask,
                                   const __m128i *th, int bd, __m128i *ps,
                                   __m128i *qs) {
   __m128i t80;
-  if (bd == 8)
+  if (bd == 8) {
     t80 = _mm_set1_epi16(0x80);
-  else if (bd == 10)
+  } else if (bd == 10) {
     t80 = _mm_set1_epi16(0x200);
-  else  // bd == 12
+  } else {  // bd == 12
     t80 = _mm_set1_epi16(0x800);
+}
 
   __m128i ps0 = _mm_subs_epi16(p[0], t80);
   __m128i ps1 = _mm_subs_epi16(p[1], t80);
@@ -535,12 +537,13 @@ void aom_highbd_lpf_horizontal_8_sse2(uint16_t *s, int p,
   flat = _mm_max_epi16(abs_p1p0, flat);
   flat = _mm_max_epi16(abs_q1q0, flat);
 
-  if (bd == 8)
+  if (bd == 8) {
     flat = _mm_subs_epu16(flat, one);
-  else if (bd == 10)
+  } else if (bd == 10) {
     flat = _mm_subs_epu16(flat, _mm_slli_epi16(one, 2));
-  else  // bd == 12
+  } else {  // bd == 12
     flat = _mm_subs_epu16(flat, _mm_slli_epi16(one, 4));
+}
 
   flat = _mm_cmpeq_epi16(flat, zero);
   flat = _mm_and_si128(flat, mask);  // flat & mask

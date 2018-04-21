@@ -22,8 +22,9 @@ subtle::AtomicWord WaitForInstance(subtle::AtomicWord* instance) {
     // instance pointer must acquire visibility over the associated data.
     // The pairing Release_Store operation is in Singleton::get().
     value = subtle::Acquire_Load(instance);
-    if (value != kBeingCreatedMarker)
+    if (value != kBeingCreatedMarker) {
       break;
+}
     PlatformThread::YieldCurrentThread();
   }
   return value;

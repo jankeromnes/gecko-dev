@@ -92,8 +92,9 @@ SHA1_Update(SHA1Context *ctx, const unsigned char *dataIn, unsigned int len)
     register unsigned int lenB;
     register unsigned int togo;
 
-    if (!len)
+    if (!len) {
         return;
+}
 
     /* accumulate the byte count. */
     lenB = (unsigned int)(ctx->size) & 63U;
@@ -105,8 +106,9 @@ SHA1_Update(SHA1Context *ctx, const unsigned char *dataIn, unsigned int len)
    */
     if (lenB > 0) {
         togo = 64U - lenB;
-        if (len < togo)
+        if (len < togo) {
             togo = len;
+}
         memcpy(ctx->B + lenB, dataIn, togo);
         len -= togo;
         dataIn += togo;
@@ -188,8 +190,9 @@ SHA1_EndRaw(SHA1Context *ctx, unsigned char *hashout,
     PORT_Assert(maxDigestLen >= SHA1_LENGTH);
 
     SHA_STORE_RESULT;
-    if (pDigestLen)
+    if (pDigestLen) {
         *pDigestLen = SHA1_LENGTH;
+}
 }
 
 #undef B
@@ -525,8 +528,9 @@ SHA1Context *
 SHA1_Resurrect(unsigned char *space, void *arg)
 {
     SHA1Context *cx = SHA1_NewContext();
-    if (cx == NULL)
+    if (cx == NULL) {
         return NULL;
+}
 
     PORT_Memcpy(cx, space, sizeof(SHA1Context));
     return cx;

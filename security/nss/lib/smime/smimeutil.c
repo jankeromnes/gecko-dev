@@ -129,8 +129,9 @@ smime_mapi_by_cipher(unsigned long cipher)
     int i;
 
     for (i = 0; i < smime_cipher_map_count; i++) {
-        if (smime_cipher_map[i].cipher == cipher)
+        if (smime_cipher_map[i].cipher == cipher) {
             return i; /* bingo */
+}
     }
     return -1; /* should not happen if we're consistent, right? */
 }
@@ -147,14 +148,16 @@ NSS_SMIMEUtil_EnableCipher(unsigned long which, PRBool on)
     mask = which & CIPHER_FAMILYID_MASK;
 
     PORT_Assert(mask == CIPHER_FAMILYID_SMIME);
-    if (mask != CIPHER_FAMILYID_SMIME)
+    if (mask != CIPHER_FAMILYID_SMIME) {
         /* XXX set an error! */
         return SECFailure;
+}
 
     mapi = smime_mapi_by_cipher(which);
-    if (mapi < 0)
+    if (mapi < 0) {
         /* XXX set an error */
         return SECFailure;
+}
 
     /* do we try to turn on a forbidden cipher? */
     if (!smime_cipher_map[mapi].allowed && on) {
@@ -162,8 +165,9 @@ NSS_SMIMEUtil_EnableCipher(unsigned long which, PRBool on)
         return SECFailure;
     }
 
-    if (smime_cipher_map[mapi].enabled != on)
+    if (smime_cipher_map[mapi].enabled != on) {
         smime_cipher_map[mapi].enabled = on;
+}
 
     return SECSuccess;
 }
@@ -180,17 +184,20 @@ NSS_SMIMEUtil_AllowCipher(unsigned long which, PRBool on)
     mask = which & CIPHER_FAMILYID_MASK;
 
     PORT_Assert(mask == CIPHER_FAMILYID_SMIME);
-    if (mask != CIPHER_FAMILYID_SMIME)
+    if (mask != CIPHER_FAMILYID_SMIME) {
         /* XXX set an error! */
         return SECFailure;
+}
 
     mapi = smime_mapi_by_cipher(which);
-    if (mapi < 0)
+    if (mapi < 0) {
         /* XXX set an error */
         return SECFailure;
+}
 
-    if (smime_cipher_map[mapi].allowed != on)
+    if (smime_cipher_map[mapi].allowed != on) {
         smime_cipher_map[mapi].allowed = on;
+}
 
     return SECSuccess;
 }
@@ -253,8 +260,9 @@ nss_smime_cipher_allowed(unsigned long which)
     int mapi;
 
     mapi = smime_mapi_by_cipher(which);
-    if (mapi < 0)
+    if (mapi < 0) {
         return PR_FALSE;
+}
     return smime_cipher_map[mapi].allowed;
 }
 
@@ -263,8 +271,9 @@ NSS_SMIMEUtil_DecryptionAllowed(SECAlgorithmID *algid, PK11SymKey *key)
 {
     unsigned long which;
 
-    if (nss_smime_get_cipher_for_alg_and_key(algid, key, &which) != SECSuccess)
+    if (nss_smime_get_cipher_for_alg_and_key(algid, key, &which) != SECSuccess) {
         return PR_FALSE;
+}
 
     return nss_smime_cipher_allowed(which);
 }
@@ -293,8 +302,9 @@ NSS_SMIMEUtil_EncryptionPossible(void)
     int i;
 
     for (i = 0; i < smime_cipher_map_count; i++) {
-        if (smime_cipher_map[i].allowed)
+        if (smime_cipher_map[i].allowed) {
             return PR_TRUE;
+}
     }
     return PR_FALSE;
 }
@@ -310,20 +320,23 @@ nss_SMIME_FindCipherForSMIMECap(NSSSMIMECapability *cap)
 
     /* go over all the SMIME ciphers we know and see if we find a match */
     for (i = 0; i < smime_cipher_map_count; i++) {
-        if (smime_cipher_map[i].algtag != capIDTag)
+        if (smime_cipher_map[i].algtag != capIDTag) {
             continue;
+}
         /*
          * XXX If SECITEM_CompareItem allowed NULLs as arguments (comparing
          * 2 NULLs as equal and NULL and non-NULL as not equal), we could
          * use that here instead of all of the following comparison code.
          */
         if (!smime_cipher_map[i].parms) {
-            if (!cap->parameters.data || !cap->parameters.len)
+            if (!cap->parameters.data || !cap->parameters.len) {
                 break; /* both empty: bingo */
+}
             if (cap->parameters.len == 2 &&
                 cap->parameters.data[0] == SEC_ASN1_NULL &&
-                cap->parameters.data[1] == 0)
+                cap->parameters.data[1] == 0) {
                 break; /* DER NULL == NULL, bingo */
+}
         } else if (cap->parameters.data != NULL &&
                    cap->parameters.len == smime_cipher_map[i].parms->len &&
                    PORT_Memcmp(cap->parameters.data, smime_cipher_map[i].parms->data,
@@ -332,8 +345,9 @@ nss_SMIME_FindCipherForSMIMECap(NSSSMIMECapability *cap)
         }
     }
 
-    if (i == smime_cipher_map_count)
+    if (i == smime_cipher_map_count) {
         return 0;                      /* no match found */
+}
     return smime_cipher_map[i].cipher; /* match found, point to cipher */
 }
 
@@ -363,13 +377,15 @@ smime_choose_cipher(CERTCertificate *scert, CERTCertificate **rcerts)
     aes256_mapi = smime_mapi_by_cipher(SMIME_AES_CBC_256);
 
     poolp = PORT_NewArena(1024); /* XXX what is right value? */
-    if (poolp == NULL)
+    if (poolp == NULL) {
         goto done;
+}
 
     cipher_abilities = (int *)PORT_ArenaZAlloc(poolp, smime_cipher_map_count * sizeof(int));
     cipher_votes = (int *)PORT_ArenaZAlloc(poolp, smime_cipher_map_count * sizeof(int));
-    if (cipher_votes == NULL || cipher_abilities == NULL)
+    if (cipher_votes == NULL || cipher_abilities == NULL) {
         goto done;
+}
 
     /* Make triple-DES the strong cipher. */
     strong_mapi = smime_mapi_by_cipher(SMIME_DES_EDE3_168);
@@ -469,19 +485,22 @@ smime_choose_cipher(CERTCertificate *scert, CERTCertificate **rcerts)
                 cipher_votes[weak_mapi] += pref;
             }
         }
-        if (profile != NULL)
+        if (profile != NULL) {
             SECITEM_FreeItem(profile, PR_TRUE);
+}
     }
 
     /* find cipher that is agreeable by all recipients and that has the most votes */
     max = 0;
     for (mapi = 0; mapi < smime_cipher_map_count; mapi++) {
         /* if not all of the recipients can do this, forget it */
-        if (cipher_abilities[mapi] != rcount)
+        if (cipher_abilities[mapi] != rcount) {
             continue;
+}
         /* if cipher is not enabled or not allowed by policy, forget it */
-        if (!smime_cipher_map[mapi].enabled || !smime_cipher_map[mapi].allowed)
+        if (!smime_cipher_map[mapi].enabled || !smime_cipher_map[mapi].allowed) {
             continue;
+}
         /* now see if this one has more votes than the last best one */
         if (cipher_votes[mapi] >= max) {
             /* if equal number of votes, prefer the ones further down in the list */
@@ -493,8 +512,9 @@ smime_choose_cipher(CERTCertificate *scert, CERTCertificate **rcerts)
 /* if no common cipher was found, chosen_cipher stays at the default */
 
 done:
-    if (poolp != NULL)
+    if (poolp != NULL) {
         PORT_FreeArena(poolp, PR_FALSE);
+}
 
     return chosen_cipher;
 }
@@ -586,8 +606,9 @@ NSS_SMIMEUtil_CreateSMIMECapabilities(PLArenaPool *poolp, SECItem *dest)
     /* if we have an old NSSSMIMECapability array, we'll reuse it (has the right size) */
     /* smime_cipher_map_count + 1 is an upper bound - we might end up with less */
     smime_capabilities = (NSSSMIMECapability **)PORT_ZAlloc((smime_cipher_map_count + 1) * sizeof(NSSSMIMECapability *));
-    if (smime_capabilities == NULL)
+    if (smime_capabilities == NULL) {
         return SECFailure;
+}
 
     capIndex = 0;
 
@@ -598,18 +619,21 @@ NSS_SMIMEUtil_CreateSMIMECapabilities(PLArenaPool *poolp, SECItem *dest)
     for (i = smime_cipher_map_count - 1; i >= 0; i--) {
         /* Find the corresponding entry in the cipher map. */
         map = &(smime_cipher_map[i]);
-        if (!map->enabled)
+        if (!map->enabled) {
             continue;
+}
 
         /* get next SMIME capability */
         cap = (NSSSMIMECapability *)PORT_ZAlloc(sizeof(NSSSMIMECapability));
-        if (cap == NULL)
+        if (cap == NULL) {
             break;
+}
         smime_capabilities[capIndex++] = cap;
 
         oiddata = SECOID_FindOIDByTag(map->algtag);
-        if (oiddata == NULL)
+        if (oiddata == NULL) {
             break;
+}
 
         cap->capabilityID.data = oiddata->oid.data;
         cap->capabilityID.len = oiddata->oid.len;
@@ -626,8 +650,9 @@ NSS_SMIMEUtil_CreateSMIMECapabilities(PLArenaPool *poolp, SECItem *dest)
 
     /* now that we have the proper encoded SMIMECapabilities (or not),
      * free the work data */
-    for (i = 0; smime_capabilities[i] != NULL; i++)
+    for (i = 0; smime_capabilities[i] != NULL; i++) {
         PORT_Free(smime_capabilities[i]);
+}
     PORT_Free(smime_capabilities);
 
     return (dummy == NULL) ? SECFailure : SECSuccess;
@@ -648,24 +673,28 @@ NSS_SMIMEUtil_CreateSMIMEEncKeyPrefs(PLArenaPool *poolp, SECItem *dest, CERTCert
     SECItem *dummy = NULL;
     PLArenaPool *tmppoolp = NULL;
 
-    if (cert == NULL)
+    if (cert == NULL) {
         goto loser;
+}
 
     tmppoolp = PORT_NewArena(1024);
-    if (tmppoolp == NULL)
+    if (tmppoolp == NULL) {
         goto loser;
+}
 
     /* XXX hardcoded IssuerSN choice for now */
     ekp.selector = NSSSMIMEEncryptionKeyPref_IssuerSN;
     ekp.id.issuerAndSN = CERT_GetCertIssuerAndSN(tmppoolp, cert);
-    if (ekp.id.issuerAndSN == NULL)
+    if (ekp.id.issuerAndSN == NULL) {
         goto loser;
+}
 
     dummy = SEC_ASN1EncodeItem(poolp, dest, &ekp, smime_encryptionkeypref_template);
 
 loser:
-    if (tmppoolp)
+    if (tmppoolp) {
         PORT_FreeArena(tmppoolp, PR_FALSE);
+}
 
     return (dummy == NULL) ? SECFailure : SECSuccess;
 }
@@ -685,22 +714,26 @@ NSS_SMIMEUtil_CreateMSSMIMEEncKeyPrefs(PLArenaPool *poolp, SECItem *dest, CERTCe
     PLArenaPool *tmppoolp = NULL;
     CERTIssuerAndSN *isn;
 
-    if (cert == NULL)
+    if (cert == NULL) {
         goto loser;
+}
 
     tmppoolp = PORT_NewArena(1024);
-    if (tmppoolp == NULL)
+    if (tmppoolp == NULL) {
         goto loser;
+}
 
     isn = CERT_GetCertIssuerAndSN(tmppoolp, cert);
-    if (isn == NULL)
+    if (isn == NULL) {
         goto loser;
+}
 
     dummy = SEC_ASN1EncodeItem(poolp, dest, isn, SEC_ASN1_GET(CERT_IssuerAndSNTemplate));
 
 loser:
-    if (tmppoolp)
+    if (tmppoolp) {
         PORT_FreeArena(tmppoolp, PR_FALSE);
+}
 
     return (dummy == NULL) ? SECFailure : SECSuccess;
 }
@@ -723,13 +756,15 @@ NSS_SMIMEUtil_GetCertFromEncryptionKeyPreference(CERTCertDBHandle *certdb, SECIt
     NSSSMIMEEncryptionKeyPreference ekp;
 
     tmppoolp = PORT_NewArena(1024);
-    if (tmppoolp == NULL)
+    if (tmppoolp == NULL) {
         return NULL;
+}
 
     /* decode DERekp */
     if (SEC_QuickDERDecodeItem(tmppoolp, &ekp, smime_encryptionkeypref_template,
-                               DERekp) != SECSuccess)
+                               DERekp) != SECSuccess) {
         goto loser;
+}
 
     /* find cert */
     switch (ekp.selector) {
@@ -744,8 +779,9 @@ NSS_SMIMEUtil_GetCertFromEncryptionKeyPreference(CERTCertDBHandle *certdb, SECIt
             PORT_Assert(0);
     }
 loser:
-    if (tmppoolp)
+    if (tmppoolp) {
         PORT_FreeArena(tmppoolp, PR_FALSE);
+}
 
     return cert;
 }

@@ -395,23 +395,27 @@ SHA256_Update(SHA256Context *ctx, const unsigned char *input,
               unsigned int inputLen)
 {
     unsigned int inBuf = ctx->sizeLo & 0x3f;
-    if (!inputLen)
+    if (!inputLen) {
         return;
+}
 
     /* Add inputLen into the count of bytes processed, before processing */
-    if ((ctx->sizeLo += inputLen) < inputLen)
+    if ((ctx->sizeLo += inputLen) < inputLen) {
         ctx->sizeHi++;
+}
 
     /* if data already in buffer, attemp to fill rest of buffer */
     if (inBuf) {
         unsigned int todo = SHA256_BLOCK_LENGTH - inBuf;
-        if (inputLen < todo)
+        if (inputLen < todo) {
             todo = inputLen;
+}
         memcpy(B + inBuf, input, todo);
         input += todo;
         inputLen -= todo;
-        if (inBuf + todo == SHA256_BLOCK_LENGTH)
+        if (inBuf + todo == SHA256_BLOCK_LENGTH) {
             SHA256_Compress(ctx);
+}
     }
 
     /* if enough data to fill one or more whole buffers, process them. */
@@ -422,8 +426,9 @@ SHA256_Update(SHA256Context *ctx, const unsigned char *input,
         SHA256_Compress(ctx);
     }
     /* if data left over, fill it into buffer */
-    if (inputLen)
+    if (inputLen) {
         memcpy(B, input, inputLen);
+}
 }
 
 void
@@ -461,8 +466,9 @@ SHA256_End(SHA256Context *ctx, unsigned char *digest,
 #endif
     padLen = PR_MIN(SHA256_LENGTH, maxDigestLen);
     memcpy(digest, H, padLen);
-    if (digestLen)
+    if (digestLen) {
         *digestLen = padLen;
+}
 }
 
 void
@@ -487,8 +493,9 @@ SHA256_EndRaw(SHA256Context *ctx, unsigned char *digest,
 
     len = PR_MIN(SHA256_LENGTH, maxDigestLen);
     memcpy(digest, h, len);
-    if (digestLen)
+    if (digestLen) {
         *digestLen = len;
+}
 }
 
 SECStatus
@@ -534,8 +541,9 @@ SHA256Context *
 SHA256_Resurrect(unsigned char *space, void *arg)
 {
     SHA256Context *ctx = SHA256_NewContext();
-    if (ctx)
+    if (ctx) {
         PORT_Memcpy(ctx, space, sizeof *ctx);
+}
     return ctx;
 }
 
@@ -1181,8 +1189,9 @@ SHA512_Update(SHA512Context *ctx, const unsigned char *input,
               unsigned int inputLen)
 {
     unsigned int inBuf;
-    if (!inputLen)
+    if (!inputLen) {
         return;
+}
 
 #if defined(HAVE_LONG_LONG)
     inBuf = (unsigned int)ctx->sizeLo & 0x7f;
@@ -1198,13 +1207,15 @@ SHA512_Update(SHA512Context *ctx, const unsigned char *input,
     /* if data already in buffer, attemp to fill rest of buffer */
     if (inBuf) {
         unsigned int todo = SHA512_BLOCK_LENGTH - inBuf;
-        if (inputLen < todo)
+        if (inputLen < todo) {
             todo = inputLen;
+}
         memcpy(B + inBuf, input, todo);
         input += todo;
         inputLen -= todo;
-        if (inBuf + todo == SHA512_BLOCK_LENGTH)
+        if (inBuf + todo == SHA512_BLOCK_LENGTH) {
             SHA512_Compress(ctx);
+}
     }
 
     /* if enough data to fill one or more whole buffers, process them. */
@@ -1215,8 +1226,9 @@ SHA512_Update(SHA512Context *ctx, const unsigned char *input,
         SHA512_Compress(ctx);
     }
     /* if data left over, fill it into buffer */
-    if (inputLen)
+    if (inputLen) {
         memcpy(B, input, inputLen);
+}
 }
 
 void
@@ -1260,8 +1272,9 @@ SHA512_End(SHA512Context *ctx, unsigned char *digest,
 #endif
     padLen = PR_MIN(SHA512_LENGTH, maxDigestLen);
     memcpy(digest, H, padLen);
-    if (digestLen)
+    if (digestLen) {
         *digestLen = padLen;
+}
 }
 
 void
@@ -1285,8 +1298,9 @@ SHA512_EndRaw(SHA512Context *ctx, unsigned char *digest,
 #endif
     len = PR_MIN(SHA512_LENGTH, maxDigestLen);
     memcpy(digest, h, len);
-    if (digestLen)
+    if (digestLen) {
         *digestLen = len;
+}
 }
 
 SECStatus
@@ -1332,8 +1346,9 @@ SHA512Context *
 SHA512_Resurrect(unsigned char *space, void *arg)
 {
     SHA512Context *ctx = SHA512_NewContext();
-    if (ctx)
+    if (ctx) {
         PORT_Memcpy(ctx, space, sizeof *ctx);
+}
     return ctx;
 }
 

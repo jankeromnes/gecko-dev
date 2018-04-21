@@ -55,8 +55,9 @@ void WaitableEvent::Reset() {
 void WaitableEvent::Signal() {
   base::AutoLock locked(kernel_->lock_);
 
-  if (kernel_->signaled_)
+  if (kernel_->signaled_) {
     return;
+}
 
   if (kernel_->manual_reset_) {
     SignalAll();
@@ -64,8 +65,9 @@ void WaitableEvent::Signal() {
   } else {
     // In the case of auto reset, if no waiters were woken, we remain
     // signaled.
-    if (!SignalOne())
+    if (!SignalOne()) {
       kernel_->signaled_ = true;
+}
   }
 }
 
@@ -73,8 +75,9 @@ bool WaitableEvent::IsSignaled() {
   base::AutoLock locked(kernel_->lock_);
 
   const bool result = kernel_->signaled_;
-  if (result && !kernel_->manual_reset_)
+  if (result && !kernel_->manual_reset_) {
     kernel_->signaled_ = false;
+}
   return result;
 }
 
@@ -97,8 +100,9 @@ class SyncWaiter : public WaitableEvent::Waiter {
   bool Fire(WaitableEvent* signaling_event) override {
     base::AutoLock locked(lock_);
 
-    if (fired_)
+    if (fired_) {
       return false;
+}
 
     fired_ = true;
     signaling_event_ = signaling_event;
@@ -250,8 +254,9 @@ size_t WaitableEvent::WaitMany(WaitableEvent** raw_waitables,
   // map back to the original index values later.
   std::vector<std::pair<WaitableEvent*, size_t> > waitables;
   waitables.reserve(count);
-  for (size_t i = 0; i < count; ++i)
+  for (size_t i = 0; i < count; ++i) {
     waitables.push_back(std::make_pair(raw_waitables[i], i));
+}
 
   DCHECK_EQ(count, waitables.size());
 
@@ -282,8 +287,9 @@ size_t WaitableEvent::WaitMany(WaitableEvent** raw_waitables,
     }
 
     for (;;) {
-      if (sw.fired())
+      if (sw.fired()) {
         break;
+}
 
       sw.cv()->Wait();
     }
@@ -345,8 +351,9 @@ size_t WaitableEvent::EnqueueMany(std::pair<WaitableEvent*, size_t>* waitables,
   // No events signaled. All locks acquired. Enqueue the Waiter on all of them
   // and return.
   if (winner == count) {
-    for (size_t i = 0; i < count; ++i)
+    for (size_t i = 0; i < count; ++i) {
       waitables[i].first->Enqueue(waiter);
+}
     return count;
   }
 
@@ -355,8 +362,9 @@ size_t WaitableEvent::EnqueueMany(std::pair<WaitableEvent*, size_t>* waitables,
   for (auto* w = waitables + count - 1; w >= waitables; --w) {
     auto& kernel = w->first->kernel_;
     if (w->second == winner) {
-      if (!kernel->manual_reset_)
+      if (!kernel->manual_reset_) {
         kernel->signaled_ = false;
+}
     }
     kernel->lock_.Release();
   }
@@ -386,8 +394,9 @@ bool WaitableEvent::SignalAll() {
 
   for (std::list<Waiter*>::iterator
        i = kernel_->waiters_.begin(); i != kernel_->waiters_.end(); ++i) {
-    if ((*i)->Fire(this))
+    if ((*i)->Fire(this)) {
       signaled_at_least_one = true;
+}
   }
 
   kernel_->waiters_.clear();
@@ -400,13 +409,15 @@ bool WaitableEvent::SignalAll() {
 // ---------------------------------------------------------------------------
 bool WaitableEvent::SignalOne() {
   for (;;) {
-    if (kernel_->waiters_.empty())
+    if (kernel_->waiters_.empty()) {
       return false;
+}
 
     const bool r = (*kernel_->waiters_.begin())->Fire(this);
     kernel_->waiters_.pop_front();
-    if (r)
+    if (r) {
       return true;
+}
   }
 }
 

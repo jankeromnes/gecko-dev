@@ -33,14 +33,16 @@ TOutputESSL::TOutputESSL(TInfoSinkBase &objSink,
 
 bool TOutputESSL::writeVariablePrecision(TPrecision precision)
 {
-    if (precision == EbpUndefined)
+    if (precision == EbpUndefined) {
         return false;
+}
 
     TInfoSinkBase &out = objSink();
-    if (mForceHighp)
+    if (mForceHighp) {
         out << getPrecisionString(EbpHigh);
-    else
+    } else {
         out << getPrecisionString(precision);
+}
     return true;
 }
 

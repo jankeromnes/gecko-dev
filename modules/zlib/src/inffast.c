@@ -244,8 +244,9 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
                     }
                     if (len) {
                         *out++ = *from++;
-                        if (len > 1)
+                        if (len > 1) {
                             *out++ = *from++;
+}
                     }
                 }
                 else {
@@ -258,8 +259,9 @@ unsigned start;         /* inflate()'s starting value for strm->avail_out */
                     } while (len > 2);
                     if (len) {
                         *out++ = *from++;
-                        if (len > 1)
+                        if (len > 1) {
                             *out++ = *from++;
+}
                     }
                 }
             }

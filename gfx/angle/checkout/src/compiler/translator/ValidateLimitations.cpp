@@ -139,11 +139,13 @@ bool ValidateLimitationsTraverser::visitBinary(Visit, TIntermBinary *node)
 
 bool ValidateLimitationsTraverser::visitLoop(Visit, TIntermLoop *node)
 {
-    if (!validateLoopType(node))
+    if (!validateLoopType(node)) {
         return false;
+}
 
-    if (!validateForLoopHeader(node))
+    if (!validateForLoopHeader(node)) {
         return false;
+}
 
     TIntermNode *body = node->getBody();
     if (body != nullptr)
@@ -178,8 +180,9 @@ bool ValidateLimitationsTraverser::isLoopIndex(TIntermSymbol *symbol)
 bool ValidateLimitationsTraverser::validateLoopType(TIntermLoop *node)
 {
     TLoopType type = node->getType();
-    if (type == ELoopFor)
+    if (type == ELoopFor) {
         return true;
+}
 
     // Reject while and do-while loops.
     error(node->getLine(), "This type of loop is not allowed", type == ELoopWhile ? "while" : "do");
@@ -195,12 +198,15 @@ bool ValidateLimitationsTraverser::validateForLoopHeader(TIntermLoop *node)
     //    for ( init-declaration ; condition ; expression ) statement
     //
     int indexSymbolId = validateForLoopInit(node);
-    if (indexSymbolId < 0)
+    if (indexSymbolId < 0) {
         return false;
-    if (!validateForLoopCond(node, indexSymbolId))
+}
+    if (!validateForLoopCond(node, indexSymbolId)) {
         return false;
-    if (!validateForLoopExpr(node, indexSymbolId))
+}
+    if (!validateForLoopExpr(node, indexSymbolId)) {
         return false;
+}
 
     return true;
 }

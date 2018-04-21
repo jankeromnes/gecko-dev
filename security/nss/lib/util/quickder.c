@@ -366,7 +366,7 @@ DecodeSequence(void* dest,
     }
 
     /* process it */
-    if (SECSuccess == rv)
+    if (SECSuccess == rv) {
         do {
             sequenceEntry = &sequenceTemplate[seqindex++];
             if ((sequenceEntry && sequenceEntry->kind) &&
@@ -376,6 +376,7 @@ DecodeSequence(void* dest,
         } while ((SECSuccess == rv) &&
                  (sequenceEntry->kind &&
                   sequenceEntry->kind != SEC_ASN1_SKIP_REST));
+}
     /* we should have consumed all the bytes in the sequence by now
        unless the caller doesn't care about the rest of the sequence */
     if (SECSuccess == rv && sequence.len &&
@@ -541,7 +542,7 @@ DecodeGroup(void* dest,
         }
     }
 
-    if (SECSuccess == rv && totalEntries)
+    if (SECSuccess == rv && totalEntries) {
         do {
             if (!(entryIndex < totalEntries)) {
                 rv = SECFailure;
@@ -549,6 +550,7 @@ DecodeGroup(void* dest,
             }
             rv = DecodeItem(entries[entryIndex++], subTemplate, &group, arena, PR_TRUE);
         } while ((SECSuccess == rv) && (group.len));
+}
     /* we should be at the end of the set by now */
     /* save the entries where requested */
     memcpy(((char*)dest + templateEntry->offset), &entries, sizeof(void**));
@@ -738,7 +740,7 @@ DecodeItem(void* dest,
                     /* these types MUST have at least one content octet */
                     PORT_SetError(SEC_ERROR_BAD_DER);
                     rv = SECFailure;
-                } else
+                } else {
                     switch (tagnum) {
                         /* special cases of primitive types */
                         case SEC_ASN1_INTEGER: {
@@ -768,6 +770,7 @@ DecodeItem(void* dest,
                             break;
                         }
                     }
+}
             }
         }
     }

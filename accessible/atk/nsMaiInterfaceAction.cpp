@@ -94,8 +94,9 @@ void
 actionInterfaceInitCB(AtkActionIface* aIface)
 {
   NS_ASSERTION(aIface, "Invalid aIface");
-  if (MOZ_UNLIKELY(!aIface))
+  if (MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   aIface->do_action = doActionCB;
   aIface->get_n_actions = getActionCountCB;

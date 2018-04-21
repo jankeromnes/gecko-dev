@@ -187,8 +187,9 @@ udatpg_getFieldDisplayName(const UDateTimePatternGenerator *dtpg,
                            UDateTimePGDisplayWidth width,
                            UChar *fieldName, int32_t capacity,
                            UErrorCode *pErrorCode) {
-    if (U_FAILURE(*pErrorCode))
+    if (U_FAILURE(*pErrorCode)) {
         return -1;
+}
     if (fieldName == NULL ? capacity != 0 : capacity < 0) {
         *pErrorCode = U_ILLEGAL_ARGUMENT_ERROR;
         return -1;

@@ -228,8 +228,9 @@ nsImageLoadingContent::OnLoadComplete(imgIRequest* aRequest, nsresult aStatus)
   //       wasn't called when the first request was cancelled. For now, I choose
   //       to punt when the given request doesn't appear to have terminated in
   //       an expected state.
-  if (!(oldStatus & (imgIRequest::STATUS_ERROR | imgIRequest::STATUS_LOAD_COMPLETE)))
+  if (!(oldStatus & (imgIRequest::STATUS_ERROR | imgIRequest::STATUS_LOAD_COMPLETE))) {
     return NS_OK;
+}
 
   // Our state may change. Watch it.
   AutoStateChanger changer(this, true);
@@ -801,8 +802,9 @@ nsImageLoadingContent::LoadImageWithChannel(nsIChannel* aChannel,
   MOZ_ASSERT(!req, "Shouldn't have non-null request here");
   // If we don't have a current URI, we might as well store this URI so people
   // know what we tried (and failed) to load.
-  if (!mCurrentRequest)
+  if (!mCurrentRequest) {
     aChannel->GetURI(getter_AddRefs(mCurrentURI));
+}
 
   FireEvent(NS_LITERAL_STRING("error"));
   FireEvent(NS_LITERAL_STRING("loadend"));
@@ -1048,8 +1050,9 @@ nsImageLoadingContent::LoadImage(nsIURI* aNewURI,
     MOZ_ASSERT(!req, "Shouldn't have non-null request here");
     // If we don't have a current URI, we might as well store this URI so people
     // know what we tried (and failed) to load.
-    if (!mCurrentRequest)
+    if (!mCurrentRequest) {
       mCurrentURI = aNewURI;
+}
 
     FireEvent(NS_LITERAL_STRING("error"));
     FireEvent(NS_LITERAL_STRING("loadend"));
@@ -1482,8 +1485,9 @@ void
 nsImageLoadingContent::ClearPendingRequest(nsresult aReason,
                                            const Maybe<OnNonvisible>& aNonvisibleAction)
 {
-  if (!mPendingRequest)
+  if (!mPendingRequest) {
     return;
+}
 
   // Deregister this image from the refresh driver so it no longer receives
   // notifications.
@@ -1516,8 +1520,9 @@ nsImageLoadingContent::ResetAnimationIfNeeded()
       (mCurrentRequestFlags & REQUEST_NEEDS_ANIMATION_RESET)) {
     nsCOMPtr<imgIContainer> container;
     mCurrentRequest->GetImage(getter_AddRefs(container));
-    if (container)
+    if (container) {
       container->ResetAnimation();
+}
     mCurrentRequestFlags &= ~REQUEST_NEEDS_ANIMATION_RESET;
   }
 }
@@ -1526,8 +1531,9 @@ bool
 nsImageLoadingContent::HaveSize(imgIRequest *aImage)
 {
   // Handle the null case
-  if (!aImage)
+  if (!aImage) {
     return false;
+}
 
   // Query the image
   uint32_t status;
@@ -1542,8 +1548,9 @@ nsImageLoadingContent::BindToTree(nsIDocument* aDocument, nsIContent* aParent,
 {
   // We may be entering the document, so if our image should be tracked,
   // track it.
-  if (!aDocument)
+  if (!aDocument) {
     return;
+}
 
   TrackImage(mCurrentRequest);
   TrackImage(mPendingRequest);
@@ -1554,8 +1561,9 @@ nsImageLoadingContent::UnbindFromTree(bool aDeep, bool aNullParent)
 {
   // We may be leaving the document, so if our image is tracked, untrack it.
   nsCOMPtr<nsIDocument> doc = GetOurCurrentDoc();
-  if (!doc)
+  if (!doc) {
     return;
+}
 
   UntrackImage(mCurrentRequest);
   UntrackImage(mPendingRequest);
@@ -1586,8 +1594,9 @@ void
 nsImageLoadingContent::TrackImage(imgIRequest* aImage,
                                   nsIFrame* aFrame /*= nullptr */)
 {
-  if (!aImage)
+  if (!aImage) {
     return;
+}
 
   MOZ_ASSERT(aImage == mCurrentRequest || aImage == mPendingRequest,
              "Why haven't we heard of this request?");
@@ -1630,8 +1639,9 @@ nsImageLoadingContent::UntrackImage(imgIRequest* aImage,
                                     const Maybe<OnNonvisible>& aNonvisibleAction
                                       /* = Nothing() */)
 {
-  if (!aImage)
+  if (!aImage) {
     return;
+}
 
   MOZ_ASSERT(aImage == mCurrentRequest || aImage == mPendingRequest,
              "Why haven't we heard of this request?");

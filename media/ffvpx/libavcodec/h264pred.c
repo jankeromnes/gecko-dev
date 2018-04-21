@@ -337,8 +337,9 @@ static void pred8x8_left_dc_rv40_c(uint8_t *src, ptrdiff_t stride)
     unsigned dc0;
 
     dc0=0;
-    for(i=0;i<8; i++)
+    for(i=0;i<8; i++) {
         dc0+= src[-1+i*stride];
+}
     dc0= 0x01010101*((dc0 + 4)>>3);
 
     for(i=0; i<8; i++){
@@ -353,8 +354,9 @@ static void pred8x8_top_dc_rv40_c(uint8_t *src, ptrdiff_t stride)
     unsigned dc0;
 
     dc0=0;
-    for(i=0;i<8; i++)
+    for(i=0;i<8; i++) {
         dc0+= src[i-stride];
+}
     dc0= 0x01010101*((dc0 + 4)>>3);
 
     for(i=0; i<8; i++){
@@ -592,12 +594,16 @@ av_cold void ff_h264_pred_init(H264PredContext *h, int codec_id,
             break;
     }
 
-    if (ARCH_AARCH64)
+    if (ARCH_AARCH64) {
         ff_h264_pred_init_aarch64(h, codec_id, bit_depth, chroma_format_idc);
-    if (ARCH_ARM)
+}
+    if (ARCH_ARM) {
         ff_h264_pred_init_arm(h, codec_id, bit_depth, chroma_format_idc);
-    if (ARCH_X86)
+}
+    if (ARCH_X86) {
         ff_h264_pred_init_x86(h, codec_id, bit_depth, chroma_format_idc);
-    if (ARCH_MIPS)
+}
+    if (ARCH_MIPS) {
         ff_h264_pred_init_mips(h, codec_id, bit_depth, chroma_format_idc);
+}
 }

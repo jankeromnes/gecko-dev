@@ -200,17 +200,21 @@ int32_t WebRtcAecm_GetBufferFarendError(void *aecmInst, const int16_t *farend,
                                 size_t nrOfSamples) {
   AecMobile* aecm = static_cast<AecMobile*>(aecmInst);
 
-  if (aecm == NULL)
+  if (aecm == NULL) {
     return -1;
+}
 
-  if (farend == NULL)
+  if (farend == NULL) {
     return AECM_NULL_POINTER_ERROR;
+}
 
-  if (aecm->initFlag != kInitCheck)
+  if (aecm->initFlag != kInitCheck) {
     return AECM_UNINITIALIZED_ERROR;
+}
 
-  if (nrOfSamples != 80 && nrOfSamples != 160)
+  if (nrOfSamples != 80 && nrOfSamples != 160) {
     return AECM_BAD_PARAMETER_ERROR;
+}
 
   return 0;
 }
@@ -223,8 +227,9 @@ int32_t WebRtcAecm_BufferFarend(void *aecmInst, const int16_t *farend,
   const int32_t err =
       WebRtcAecm_GetBufferFarendError(aecmInst, farend, nrOfSamples);
 
-  if (err != 0)
+  if (err != 0) {
     return err;
+}
 
   // TODO(unknown): Is this really a good idea?
   if (!aecm->ECstartup)
@@ -420,8 +425,9 @@ int32_t WebRtcAecm_Process(void *aecmInst, const int16_t *nearendNoisy,
                                         (nearendClean
                                          ? &nearendClean[FRAME_LEN * i]
                                          : NULL),
-                                        &out[FRAME_LEN * i]) == -1)
+                                        &out[FRAME_LEN * i]) == -1) {
                 return -1;
+}
         }
     }
 

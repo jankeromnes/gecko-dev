@@ -70,8 +70,9 @@ static void worker_func(void *priv, int jobnr, int threadnr, int nb_jobs, int nb
 
     ret = c->func ? c->func(avctx, (char *)c->args + c->job_size * jobnr)
                   : c->func2(avctx, c->args, jobnr, threadnr);
-    if (c->rets)
+    if (c->rets) {
         c->rets[jobnr] = ret;
+}
 }
 
 void ff_slice_thread_free(AVCodecContext *avctx)
@@ -96,11 +97,13 @@ static int thread_execute(AVCodecContext *avctx, action_func* func, void *arg, i
 {
     SliceThreadContext *c = avctx->internal->thread_ctx;
 
-    if (!(avctx->active_thread_type&FF_THREAD_SLICE) || avctx->thread_count <= 1)
+    if (!(avctx->active_thread_type&FF_THREAD_SLICE) || avctx->thread_count <= 1) {
         return avcodec_default_execute(avctx, func, arg, ret, job_count, job_size);
+}
 
-    if (job_count <= 0)
+    if (job_count <= 0) {
         return 0;
+}
 
     c->job_size = job_size;
     c->args = arg;
@@ -139,18 +142,21 @@ int ff_slice_thread_init(AVCodecContext *avctx)
     // We cannot do this in the encoder init as the threads are created before
     if (av_codec_is_encoder(avctx->codec) &&
         avctx->codec_id == AV_CODEC_ID_MPEG1VIDEO &&
-        avctx->height > 2800)
+        avctx->height > 2800) {
         thread_count = avctx->thread_count = 1;
+}
 
     if (!thread_count) {
         int nb_cpus = av_cpu_count();
-        if  (avctx->height)
+        if  (avctx->height) {
             nb_cpus = FFMIN(nb_cpus, (avctx->height+15)/16);
+}
         // use number of cores + 1 as thread count if there is more than one
-        if (nb_cpus > 1)
+        if (nb_cpus > 1) {
             thread_count = avctx->thread_count = FFMIN(nb_cpus + 1, MAX_AUTO_THREADS);
-        else
+        } else {
             thread_count = avctx->thread_count = 1;
+}
     }
 
     if (thread_count <= 1) {
@@ -161,8 +167,9 @@ int ff_slice_thread_init(AVCodecContext *avctx)
     avctx->internal->thread_ctx = c = av_mallocz(sizeof(*c));
     mainfunc = avctx->codec->caps_internal & FF_CODEC_CAP_SLICE_THREAD_HAS_MF ? &main_function : NULL;
     if (!c || (thread_count = avpriv_slicethread_create(&c->thread, avctx, worker_func, mainfunc, thread_count)) <= 1) {
-        if (c)
+        if (c) {
             avpriv_slicethread_free(&c->thread);
+}
         av_freep(&avctx->internal->thread_ctx);
         avctx->thread_count = 1;
         avctx->active_thread_type = 0;
@@ -191,7 +198,8 @@ void ff_thread_await_progress2(AVCodecContext *avctx, int field, int thread, int
     SliceThreadContext *p  = avctx->internal->thread_ctx;
     int *entries      = p->entries;
 
-    if (!entries || !field) return;
+    if (!entries || !field) { return;
+}
 
     thread = thread ? thread - 1 : p->thread_count - 1;
 

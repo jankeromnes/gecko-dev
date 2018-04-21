@@ -88,12 +88,14 @@ sep_upsample (j_decompress_ptr cinfo,
   /* Not more than the distance to the end of the image.  Need this test
    * in case the image height is not a multiple of max_v_samp_factor:
    */
-  if (num_rows > upsample->rows_to_go)
+  if (num_rows > upsample->rows_to_go) {
     num_rows = upsample->rows_to_go;
+}
   /* And not more than what the client can accept: */
   out_rows_avail -= *out_row_ctr;
-  if (num_rows > out_rows_avail)
+  if (num_rows > out_rows_avail) {
     num_rows = out_rows_avail;
+}
 
   (*cinfo->cconvert->color_convert) (cinfo, upsample->color_buf,
                                      (JDIMENSION) upsample->next_row_out,
@@ -105,8 +107,9 @@ sep_upsample (j_decompress_ptr cinfo,
   upsample->rows_to_go -= num_rows;
   upsample->next_row_out += num_rows;
   /* When the buffer is emptied, declare this input row group consumed */
-  if (upsample->next_row_out >= cinfo->max_v_samp_factor)
+  if (upsample->next_row_out >= cinfo->max_v_samp_factor) {
     (*in_row_group_ctr)++;
+}
 }
 
 
@@ -329,10 +332,11 @@ h1v2_fancy_upsample (j_decompress_ptr cinfo, jpeg_component_info *compptr,
     for (v = 0; v < 2; v++) {
       /* inptr0 points to nearest input row, inptr1 points to next nearest */
       inptr0 = input_data[inrow];
-      if (v == 0)               /* next nearest is row above */
+      if (v == 0) {               /* next nearest is row above */
         inptr1 = input_data[inrow-1];
-      else                      /* next nearest is row below */
+      } else {                      /* next nearest is row below */
         inptr1 = input_data[inrow+1];
+}
       outptr = output_data[outrow++];
 
       for(colctr = 0; colctr < compptr->downsampled_width; colctr++) {
@@ -372,10 +376,11 @@ h2v2_fancy_upsample (j_decompress_ptr cinfo, jpeg_component_info *compptr,
     for (v = 0; v < 2; v++) {
       /* inptr0 points to nearest input row, inptr1 points to next nearest */
       inptr0 = input_data[inrow];
-      if (v == 0)               /* next nearest is row above */
+      if (v == 0) {               /* next nearest is row above */
         inptr1 = input_data[inrow-1];
-      else                      /* next nearest is row below */
+      } else {                      /* next nearest is row below */
         inptr1 = input_data[inrow+1];
+}
       outptr = output_data[outrow++];
 
       /* Special case for first column */
@@ -424,11 +429,13 @@ jinit_upsampler (j_decompress_ptr cinfo)
     upsample->pub.start_pass = start_pass_upsample;
     upsample->pub.upsample = sep_upsample;
     upsample->pub.need_context_rows = FALSE; /* until we find out differently */
-  } else
+  } else {
     upsample = (my_upsample_ptr) cinfo->upsample;
+}
 
-  if (cinfo->CCIR601_sampling)  /* this isn't supported */
+  if (cinfo->CCIR601_sampling) {  /* this isn't supported */
     ERREXIT(cinfo, JERR_CCIR601_NOTIMPL);
+}
 
   /* jdmainct.c doesn't support context rows when min_DCT_scaled_size = 1,
    * so don't ask for it.
@@ -463,15 +470,17 @@ jinit_upsampler (j_decompress_ptr cinfo)
                v_in_group == v_out_group) {
       /* Special cases for 2h1v upsampling */
       if (do_fancy && compptr->downsampled_width > 2) {
-        if (jsimd_can_h2v1_fancy_upsample())
+        if (jsimd_can_h2v1_fancy_upsample()) {
           upsample->methods[ci] = jsimd_h2v1_fancy_upsample;
-        else
+        } else {
           upsample->methods[ci] = h2v1_fancy_upsample;
+}
       } else {
-        if (jsimd_can_h2v1_upsample())
+        if (jsimd_can_h2v1_upsample()) {
           upsample->methods[ci] = jsimd_h2v1_upsample;
-        else
+        } else {
           upsample->methods[ci] = h2v1_upsample;
+}
       }
     } else if (h_in_group == h_out_group &&
                v_in_group * 2 == v_out_group && do_fancy) {
@@ -482,16 +491,18 @@ jinit_upsampler (j_decompress_ptr cinfo)
                v_in_group * 2 == v_out_group) {
       /* Special cases for 2h2v upsampling */
       if (do_fancy && compptr->downsampled_width > 2) {
-        if (jsimd_can_h2v2_fancy_upsample())
+        if (jsimd_can_h2v2_fancy_upsample()) {
           upsample->methods[ci] = jsimd_h2v2_fancy_upsample;
-        else
+        } else {
           upsample->methods[ci] = h2v2_fancy_upsample;
+}
         upsample->pub.need_context_rows = TRUE;
       } else {
-        if (jsimd_can_h2v2_upsample())
+        if (jsimd_can_h2v2_upsample()) {
           upsample->methods[ci] = jsimd_h2v2_upsample;
-        else
+        } else {
           upsample->methods[ci] = h2v2_upsample;
+}
       }
     } else if ((h_out_group % h_in_group) == 0 &&
                (v_out_group % v_in_group) == 0) {
@@ -504,8 +515,9 @@ jinit_upsampler (j_decompress_ptr cinfo)
         upsample->methods[ci] = int_upsample;
       upsample->h_expand[ci] = (UINT8) (h_out_group / h_in_group);
       upsample->v_expand[ci] = (UINT8) (v_out_group / v_in_group);
-    } else
+    } else {
       ERREXIT(cinfo, JERR_FRACT_SAMPLE_NOTIMPL);
+}
     if (need_buffer && !cinfo->master->jinit_upsampler_no_alloc) {
       upsample->color_buf[ci] = (*cinfo->mem->alloc_sarray)
         ((j_common_ptr) cinfo, JPOOL_IMAGE,

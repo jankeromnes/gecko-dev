@@ -668,8 +668,9 @@ int32_t destSize,uint32_t options) {
     if ((options&U_SHAPE_LETTERS_MASK) == U_SHAPE_LETTERS_UNSHAPE){
         if ( (options&U_SHAPE_LAMALEF_MASK) == U_SHAPE_LAMALEF_RESIZE){
             for(i=0;i<sourceLength;i++) {
-                if(isLamAlefChar(source[i]))
+                if(isLamAlefChar(source[i])) {
                 destSize++;
+}
             }
         }
     }
@@ -1218,8 +1219,9 @@ shapeUnicode(UChar *dest, int32_t sourceLength,
             UChar inputChar  = dest[i];
             if ( (inputChar >= 0xFB50) && (inputChar <= 0xFBFF)) {
                 UChar c = convertFBto06 [ (inputChar - 0xFB50) ];
-                if (c != 0)
+                if (c != 0) {
                     dest[i] = c;
+}
             } else if ( (inputChar >= 0xFE70) && (inputChar <= 0xFEFC)) {
                 dest[i] = convertFEto06 [ (inputChar - 0xFE70) ] ;
             } else {
@@ -1385,8 +1387,9 @@ deShapeUnicode(UChar *dest, int32_t sourceLength,
         UChar  inputChar = dest[i];
         if ( (inputChar >= 0xFB50) && (inputChar <= 0xFBFF)) { /* FBxx Arabic range */
             UChar c = convertFBto06 [ (inputChar - 0xFB50) ];
-            if (c != 0)
+            if (c != 0) {
                 dest[i] = c;
+}
         } else if( (yehHamzaComposeEnabled == 1) && ((inputChar == HAMZA06_CHAR) || (inputChar == HAMZAFE_CHAR))
                 && (i < (sourceLength - 1)) && isAlefMaksouraChar(dest[i+1] )) {
                  dest[i] = SPACE_CHAR;
@@ -1400,8 +1403,9 @@ deShapeUnicode(UChar *dest, int32_t sourceLength,
             dest[i] = inputChar ;
         }
 
-        if( isLamAlefChar(dest[i]) )
+        if( isLamAlefChar(dest[i]) ) {
             lamalef_found = 1;
+}
     }
 
    destSize = sourceLength;
@@ -1545,7 +1549,8 @@ u_shapeArabic(const UChar *source, int32_t sourceLength,
 
         if(outputSize>destCapacity) {
             *pErrorCode=U_BUFFER_OVERFLOW_ERROR;
-                if (tempsource != NULL) uprv_free(tempsource);
+                if (tempsource != NULL) { uprv_free(tempsource);
+}
             return outputSize;
         }
 
@@ -1567,7 +1572,8 @@ u_shapeArabic(const UChar *source, int32_t sourceLength,
             /*Test for NULL*/
             if(tempbuffer == NULL) {
                 *pErrorCode = U_MEMORY_ALLOCATION_ERROR;
-                if (tempsource != NULL) uprv_free(tempsource);
+                if (tempsource != NULL) { uprv_free(tempsource);
+}
                 return 0;
             }
         }

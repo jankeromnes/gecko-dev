@@ -118,8 +118,9 @@ TEST_F(BufferedStunSocketTest, TestSendFullThenDrain) {
                              kStunMessage,
                              kStunMessageLen,
                              0, &remote_addr_);
-    if (r == R_WOULDBLOCK)
+    if (r == R_WOULDBLOCK) {
       break;
+}
 
     ASSERT_EQ(0, r);
   }

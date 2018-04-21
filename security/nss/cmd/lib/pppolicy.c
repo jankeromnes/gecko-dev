@@ -127,8 +127,9 @@ itemToString(SECItem *item)
     char *string;
 
     string = PORT_ZAlloc(item->len + 1);
-    if (string == NULL)
+    if (string == NULL) {
         return NULL;
+}
     PORT_Memcpy(string, item->data, item->len);
     string[item->len] = 0;
     return string;
@@ -139,8 +140,9 @@ secu_PrintUserNoticeQualifier(FILE *out, SECItem *qualifierValue,
                               char *msg, int level)
 {
     CERTUserNotice *userNotice = NULL;
-    if (qualifierValue)
+    if (qualifierValue) {
         userNotice = CERT_DecodeUserNotice(qualifierValue);
+}
     if (userNotice) {
         if (userNotice->noticeReference.organization.len != 0) {
             char *string =
@@ -175,18 +177,20 @@ secu_PrintPolicyQualifier(FILE *out, CERTPolicyQualifier *policyQualifier,
     if (!qualifierValue->data) {
         SECU_Indent(out, level);
         fprintf(out, "Error: missing qualifier\n");
-    } else
+    } else {
         switch (policyQualifier->oid) {
             case SEC_OID_PKIX_USER_NOTICE_QUALIFIER:
                 rv = secu_PrintUserNoticeQualifier(out, qualifierValue, msg, level);
-                if (SECSuccess == rv)
+                if (SECSuccess == rv) {
                     break;
+}
             /* fall through on error */
             case SEC_OID_PKIX_CPS_POINTER_QUALIFIER:
             default:
                 SECU_PrintAny(out, qualifierValue, "Policy Qualifier Data", level);
                 break;
         }
+}
     return SECSuccess;
 }
 

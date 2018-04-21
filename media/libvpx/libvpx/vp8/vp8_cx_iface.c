@@ -141,7 +141,8 @@ static vpx_codec_err_t validate_config(vpx_codec_alg_priv_t *ctx,
 #if CONFIG_REALTIME_ONLY
   RANGE_CHECK_HI(cfg, g_lag_in_frames, 0);
 #elif CONFIG_MULTI_RES_ENCODING
-  if (ctx->base.enc.total_encoders > 1) RANGE_CHECK_HI(cfg, g_lag_in_frames, 0);
+  if (ctx->base.enc.total_encoders > 1) { RANGE_CHECK_HI(cfg, g_lag_in_frames, 0);
+}
 #else
   RANGE_CHECK_HI(cfg, g_lag_in_frames, 25);
 #endif
@@ -154,8 +155,9 @@ static vpx_codec_err_t validate_config(vpx_codec_alg_priv_t *ctx,
 /* TODO: add spatial re-sampling support and frame dropping in
  * multi-res-encoder.*/
 #if CONFIG_MULTI_RES_ENCODING
-  if (ctx->base.enc.total_encoders > 1)
+  if (ctx->base.enc.total_encoders > 1) {
     RANGE_CHECK_HI(cfg, rc_resize_allowed, 0);
+}
 #else
   RANGE_CHECK_BOOL(cfg, rc_resize_allowed);
 #endif
@@ -166,8 +168,9 @@ static vpx_codec_err_t validate_config(vpx_codec_alg_priv_t *ctx,
 #if CONFIG_REALTIME_ONLY
   RANGE_CHECK(cfg, g_pass, VPX_RC_ONE_PASS, VPX_RC_ONE_PASS);
 #elif CONFIG_MULTI_RES_ENCODING
-  if (ctx->base.enc.total_encoders > 1)
+  if (ctx->base.enc.total_encoders > 1) {
     RANGE_CHECK(cfg, g_pass, VPX_RC_ONE_PASS, VPX_RC_ONE_PASS);
+}
 #else
   RANGE_CHECK(cfg, g_pass, VPX_RC_ONE_PASS, VPX_RC_LAST_PASS);
 #endif
@@ -176,10 +179,11 @@ static vpx_codec_err_t validate_config(vpx_codec_alg_priv_t *ctx,
    * automatic keyframe placement mode.
    */
   if (cfg->kf_mode != VPX_KF_DISABLED && cfg->kf_min_dist != cfg->kf_max_dist &&
-      cfg->kf_min_dist > 0)
+      cfg->kf_min_dist > 0) {
     ERROR(
         "kf_min_dist not supported in auto mode, use 0 "
         "or kf_max_dist instead.");
+}
 
   RANGE_CHECK_BOOL(vp8_cfg, enable_auto_alt_ref);
   RANGE_CHECK(vp8_cfg, cpu_used, -16, 16);
@@ -198,9 +202,10 @@ static vpx_codec_err_t validate_config(vpx_codec_alg_priv_t *ctx,
   RANGE_CHECK(vp8_cfg, arnr_type, 1, 3);
   RANGE_CHECK(vp8_cfg, cq_level, 0, 63);
   RANGE_CHECK_HI(vp8_cfg, screen_content_mode, 2);
-  if (finalize && (cfg->rc_end_usage == VPX_CQ || cfg->rc_end_usage == VPX_Q))
+  if (finalize && (cfg->rc_end_usage == VPX_CQ || cfg->rc_end_usage == VPX_Q)) {
     RANGE_CHECK(vp8_cfg, cq_level, cfg->rc_min_quantizer,
                 cfg->rc_max_quantizer);
+}
 
 #if !(CONFIG_REALTIME_ONLY)
   if (cfg->g_pass == VPX_RC_LAST_PASS) {
@@ -208,20 +213,24 @@ static vpx_codec_err_t validate_config(vpx_codec_alg_priv_t *ctx,
     int n_packets = (int)(cfg->rc_twopass_stats_in.sz / packet_sz);
     FIRSTPASS_STATS *stats;
 
-    if (!cfg->rc_twopass_stats_in.buf)
+    if (!cfg->rc_twopass_stats_in.buf) {
       ERROR("rc_twopass_stats_in.buf not set.");
+}
 
-    if (cfg->rc_twopass_stats_in.sz % packet_sz)
+    if (cfg->rc_twopass_stats_in.sz % packet_sz) {
       ERROR("rc_twopass_stats_in.sz indicates truncated packet.");
+}
 
-    if (cfg->rc_twopass_stats_in.sz < 2 * packet_sz)
+    if (cfg->rc_twopass_stats_in.sz < 2 * packet_sz) {
       ERROR("rc_twopass_stats_in requires at least two packets.");
+}
 
     stats = (void *)((char *)cfg->rc_twopass_stats_in.buf +
                      (n_packets - 1) * packet_sz);
 
-    if ((int)(stats->count + 0.5) != n_packets - 1)
+    if ((int)(stats->count + 0.5) != n_packets - 1) {
       ERROR("rc_twopass_stats_in missing EOS stats packet");
+}
   }
 #endif
 
@@ -233,14 +242,16 @@ static vpx_codec_err_t validate_config(vpx_codec_alg_priv_t *ctx,
 
     for (i = 1; i < cfg->ts_number_layers; ++i) {
       if (cfg->ts_target_bitrate[i] <= cfg->ts_target_bitrate[i - 1] &&
-          cfg->rc_target_bitrate > 0)
+          cfg->rc_target_bitrate > 0) {
         ERROR("ts_target_bitrate entries are not strictly increasing");
+}
     }
 
     RANGE_CHECK(cfg, ts_rate_decimator[cfg->ts_number_layers - 1], 1, 1);
     for (i = cfg->ts_number_layers - 2; i > 0; i--) {
-      if (cfg->ts_rate_decimator[i - 1] != 2 * cfg->ts_rate_decimator[i])
+      if (cfg->ts_rate_decimator[i - 1] != 2 * cfg->ts_rate_decimator[i]) {
         ERROR("ts_rate_decimator factors are not powers of 2");
+}
     }
 
     RANGE_CHECK_HI(cfg, ts_layer_id[i], cfg->ts_number_layers - 1);
@@ -265,8 +276,9 @@ static vpx_codec_err_t validate_img(vpx_codec_alg_priv_t *ctx,
       ERROR("Invalid image format. Only YV12 and I420 images are supported");
   }
 
-  if ((img->d_w != ctx->cfg.g_w) || (img->d_h != ctx->cfg.g_h))
+  if ((img->d_w != ctx->cfg.g_w) || (img->d_h != ctx->cfg.g_h)) {
     ERROR("Image size must match encoder init configuration size");
+}
 
   return VPX_CODEC_OK;
 }
@@ -429,11 +441,13 @@ static vpx_codec_err_t vp8e_set_config(vpx_codec_alg_priv_t *ctx,
   vpx_codec_err_t res;
 
   if (cfg->g_w != ctx->cfg.g_w || cfg->g_h != ctx->cfg.g_h) {
-    if (cfg->g_lag_in_frames > 1 || cfg->g_pass != VPX_RC_ONE_PASS)
+    if (cfg->g_lag_in_frames > 1 || cfg->g_pass != VPX_RC_ONE_PASS) {
       ERROR("Cannot change width or height after initialization");
+}
     if ((ctx->cpi->initial_width && (int)cfg->g_w > ctx->cpi->initial_width) ||
-        (ctx->cpi->initial_height && (int)cfg->g_h > ctx->cpi->initial_height))
+        (ctx->cpi->initial_height && (int)cfg->g_h > ctx->cpi->initial_height)) {
       ERROR("Cannot increase width or height larger than their initial values");
+}
   }
 
   /* Prevent increasing lag_in_frames. This check is stricter than it needs
@@ -441,8 +455,9 @@ static vpx_codec_err_t vp8e_set_config(vpx_codec_alg_priv_t *ctx,
    * value, but we don't track the initial config, only the last successful
    * config.
    */
-  if ((cfg->g_lag_in_frames > ctx->cfg.g_lag_in_frames))
+  if ((cfg->g_lag_in_frames > ctx->cfg.g_lag_in_frames)) {
     ERROR("Cannot increase lag_in_frames");
+}
 
   res = validate_config(ctx, cfg, &ctx->vp8_cfg, 0);
 
@@ -457,7 +472,8 @@ static vpx_codec_err_t vp8e_set_config(vpx_codec_alg_priv_t *ctx,
 
 static vpx_codec_err_t get_quantizer(vpx_codec_alg_priv_t *ctx, va_list args) {
   int *const arg = va_arg(args, int *);
-  if (arg == NULL) return VPX_CODEC_INVALID_PARAM;
+  if (arg == NULL) { return VPX_CODEC_INVALID_PARAM;
+}
   *arg = vp8_get_quantizer(ctx->cpi);
   return VPX_CODEC_OK;
 }
@@ -465,7 +481,8 @@ static vpx_codec_err_t get_quantizer(vpx_codec_alg_priv_t *ctx, va_list args) {
 static vpx_codec_err_t get_quantizer64(vpx_codec_alg_priv_t *ctx,
                                        va_list args) {
   int *const arg = va_arg(args, int *);
-  if (arg == NULL) return VPX_CODEC_INVALID_PARAM;
+  if (arg == NULL) { return VPX_CODEC_INVALID_PARAM;
+}
   *arg = vp8_reverse_trans(vp8_get_quantizer(ctx->cpi));
   return VPX_CODEC_OK;
 }
@@ -636,7 +653,8 @@ static vpx_codec_err_t vp8e_init(vpx_codec_ctx_t *ctx,
 
     priv->cx_data_sz = priv->cfg.g_w * priv->cfg.g_h * 3 / 2 * 2;
 
-    if (priv->cx_data_sz < 32768) priv->cx_data_sz = 32768;
+    if (priv->cx_data_sz < 32768) { priv->cx_data_sz = 32768;
+}
 
     priv->cx_data = malloc(priv->cx_data_sz);
 
@@ -657,7 +675,8 @@ static vpx_codec_err_t vp8e_init(vpx_codec_ctx_t *ctx,
     if (!res) {
       set_vp8e_config(&priv->oxcf, priv->cfg, priv->vp8_cfg, mr_cfg);
       priv->cpi = vp8_create_compressor(&priv->oxcf);
-      if (!priv->cpi) res = VPX_CODEC_MEM_ERROR;
+      if (!priv->cpi) { res = VPX_CODEC_MEM_ERROR;
+}
     }
   }
 
@@ -765,11 +784,14 @@ static vpx_codec_err_t set_reference_and_update(vpx_codec_alg_priv_t *ctx,
       (VP8_EFLAG_NO_REF_LAST | VP8_EFLAG_NO_REF_GF | VP8_EFLAG_NO_REF_ARF)) {
     int ref = 7;
 
-    if (flags & VP8_EFLAG_NO_REF_LAST) ref ^= VP8_LAST_FRAME;
+    if (flags & VP8_EFLAG_NO_REF_LAST) { ref ^= VP8_LAST_FRAME;
+}
 
-    if (flags & VP8_EFLAG_NO_REF_GF) ref ^= VP8_GOLD_FRAME;
+    if (flags & VP8_EFLAG_NO_REF_GF) { ref ^= VP8_GOLD_FRAME;
+}
 
-    if (flags & VP8_EFLAG_NO_REF_ARF) ref ^= VP8_ALTR_FRAME;
+    if (flags & VP8_EFLAG_NO_REF_ARF) { ref ^= VP8_ALTR_FRAME;
+}
 
     vp8_use_as_reference(ctx->cpi, ref);
   }
@@ -779,11 +801,14 @@ static vpx_codec_err_t set_reference_and_update(vpx_codec_alg_priv_t *ctx,
        VP8_EFLAG_FORCE_GF | VP8_EFLAG_FORCE_ARF)) {
     int upd = 7;
 
-    if (flags & VP8_EFLAG_NO_UPD_LAST) upd ^= VP8_LAST_FRAME;
+    if (flags & VP8_EFLAG_NO_UPD_LAST) { upd ^= VP8_LAST_FRAME;
+}
 
-    if (flags & VP8_EFLAG_NO_UPD_GF) upd ^= VP8_GOLD_FRAME;
+    if (flags & VP8_EFLAG_NO_UPD_GF) { upd ^= VP8_GOLD_FRAME;
+}
 
-    if (flags & VP8_EFLAG_NO_UPD_ARF) upd ^= VP8_ALTR_FRAME;
+    if (flags & VP8_EFLAG_NO_UPD_ARF) { upd ^= VP8_ALTR_FRAME;
+}
 
     vp8_update_reference(ctx->cpi, upd);
   }
@@ -802,11 +827,14 @@ static vpx_codec_err_t vp8e_encode(vpx_codec_alg_priv_t *ctx,
                                    unsigned long deadline) {
   vpx_codec_err_t res = VPX_CODEC_OK;
 
-  if (!ctx->cfg.rc_target_bitrate) return res;
+  if (!ctx->cfg.rc_target_bitrate) { return res;
+}
 
-  if (img) res = validate_img(ctx, img);
+  if (img) { res = validate_img(ctx, img);
+}
 
-  if (!res) res = validate_config(ctx, &ctx->cfg, &ctx->vp8_cfg, 1);
+  if (!res) { res = validate_config(ctx, &ctx->cfg, &ctx->vp8_cfg, 1);
+}
 
   pick_quickcompress_mode(ctx, duration, deadline);
   vpx_codec_pkt_list_init(&ctx->pkt_list);
@@ -818,7 +846,8 @@ static vpx_codec_err_t vp8e_encode(vpx_codec_alg_priv_t *ctx,
   }
   ctx->control_frame_flags = 0;
 
-  if (!res) res = set_reference_and_update(ctx, flags);
+  if (!res) { res = set_reference_and_update(ctx, flags);
+}
 
   /* Handle fixed keyframe intervals */
   if (ctx->cfg.kf_mode == VPX_KF_AUTO &&
@@ -931,7 +960,8 @@ static vpx_codec_err_t vp8e_encode(vpx_codec_alg_priv_t *ctx,
           pkt.data.frame.duration = 0;
         }
 
-        if (cpi->droppable) pkt.data.frame.flags |= VPX_FRAME_IS_DROPPABLE;
+        if (cpi->droppable) { pkt.data.frame.flags |= VPX_FRAME_IS_DROPPABLE;
+}
 
         if (cpi->output_partition) {
           int i;

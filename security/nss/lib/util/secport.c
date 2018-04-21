@@ -336,8 +336,9 @@ PORT_ArenaZAlloc(PLArenaPool *arena, size_t size)
 {
     void *p;
 
-    if (size <= 0)
+    if (size <= 0) {
         size = 1;
+}
 
     p = PORT_ArenaAlloc(arena, size);
 
@@ -368,8 +369,9 @@ PORT_FreeArena(PLArenaPool *arena, PRBool zero)
     PRLock *lock = (PRLock *)0;
     size_t len = sizeof *arena;
 
-    if (!pool)
+    if (!pool) {
         return;
+}
     if (ARENAPOOL_MAGIC == pool->magic) {
         len = sizeof *pool;
         lock = pool->lock;

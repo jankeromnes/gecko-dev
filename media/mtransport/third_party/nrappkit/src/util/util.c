@@ -68,8 +68,9 @@ int nr_get_filename(base,name,namep)
     char *ret=0;
     int _status;
 
-    if(!(ret=(char *)RMALLOC(len)))
+    if(!(ret=(char *)RMALLOC(len))) {
       ABORT(R_NO_MEMORY);
+}
     if(base[strlen(base)-1]!='/'){
       sprintf(ret,"%s/%s",base,name);
     }
@@ -143,8 +144,9 @@ int nr_fwrite_all(FILE *fp,UCHAR *buf,int len)
 
     while(len){
       r=fwrite(buf,1,len,fp);
-      if(r==0)
+      if(r==0) {
         ABORT(R_IO_ERROR);
+}
 
       len-=r;
       buf+=r;
@@ -164,8 +166,9 @@ int nr_read_data(fd,buf,len)
 
     while(len){
       r=NR_SOCKET_READ(fd,buf,len);
-      if(r<=0)
+      if(r<=0) {
         ABORT(R_EOD);
+}
 
       buf+=r;
       len-=r;
@@ -228,18 +231,21 @@ int nr_hex_ascii_dump(Data *data)
       int i;
       int bytes=MIN(len,16);
 
-      for(i=0;i<bytes;i++)
+      for(i=0;i<bytes;i++) {
         printf("%.2x ",ptr[i]&255);
+}
       /* Fill */
-      for(i=0;i<(16-bytes);i++)
+      for(i=0;i<(16-bytes);i++) {
         printf("   ");
+}
       printf("   ");
 
       for(i=0;i<bytes;i++){
-        if(isprint(ptr[i]))
+        if(isprint(ptr[i])) {
           printf("%c",ptr[i]);
-        else
+        } else {
           printf(".");
+}
       }
       printf("\n");
 
@@ -353,8 +359,9 @@ int nr_write_pid_file(char *pid_filename)
     FILE *fp;
     int _status;
 
-    if(!pid_filename)
+    if(!pid_filename) {
       ABORT(R_BAD_ARGS);
+}
 
     unlink(pid_filename);
 
@@ -485,13 +492,15 @@ strlcat(dst, src, siz)
         size_t dlen;
 
         /* Find the end of dst and adjust bytes left but don't go past end */
-        while (n-- != 0 && *d != '\0')
+        while (n-- != 0 && *d != '\0') {
                 d++;
+}
         dlen = d - dst;
         n = siz - dlen;
 
-        if (n == 0)
+        if (n == 0) {
                 return(dlen + strlen(s));
+}
         while (*s != '\0') {
                 if (n != 1) {
                         *d++ = *s;

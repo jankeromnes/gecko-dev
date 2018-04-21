@@ -651,8 +651,9 @@ utext_setup(UText *ut, int32_t extraSpace, UErrorCode *status) {
         ut->privB               = 0;
         ut->privC               = 0;
         ut->privP               = NULL;
-        if (ut->pExtra!=NULL && ut->extraSize>0)
+        if (ut->pExtra!=NULL && ut->extraSize>0) {
             uprv_memset(ut->pExtra, 0, ut->extraSize);
+}
 
     }
     return ut;

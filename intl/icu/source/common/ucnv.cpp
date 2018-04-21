@@ -94,10 +94,12 @@ ucnv_openU (const UChar * name,
 {
     char asciiName[UCNV_MAX_CONVERTER_NAME_LENGTH];
 
-    if (err == NULL || U_FAILURE(*err))
+    if (err == NULL || U_FAILURE(*err)) {
         return NULL;
-    if (name == NULL)
+}
+    if (name == NULL) {
         return ucnv_open (NULL, err);
+}
     if (u_strlen(name) >= UCNV_MAX_CONVERTER_NAME_LENGTH)
     {
         *err = U_ILLEGAL_ARGUMENT_ERROR;
@@ -138,8 +140,9 @@ ucnv_openCCSID (int32_t codepage,
     char myName[UCNV_MAX_CONVERTER_NAME_LENGTH];
     int32_t myNameLen;
 
-    if (err == NULL || U_FAILURE (*err))
+    if (err == NULL || U_FAILURE (*err)) {
         return NULL;
+}
 
     /* ucnv_copyPlatformString could return "ibm-" or "cp" */
     myNameLen = ucnv_copyPlatformString(myName, platform);
@@ -421,8 +424,9 @@ ucnv_getSubstChars (const UConverter * converter,
                     int8_t * len,
                     UErrorCode * err)
 {
-    if (U_FAILURE (*err))
+    if (U_FAILURE (*err)) {
         return;
+}
 
     if (converter->subCharLen <= 0) {
         /* Unicode string or empty string from ucnv_setSubstString(). */
@@ -446,8 +450,9 @@ ucnv_setSubstChars (UConverter * converter,
                     int8_t len,
                     UErrorCode * err)
 {
-    if (U_FAILURE (*err))
+    if (U_FAILURE (*err)) {
         return;
+}
     
     /*Makes sure that the subChar is within the codepages char length boundaries */
     if ((len > converter->sharedData->staticData->maxBytesPerChar)
@@ -659,12 +664,14 @@ U_CAPI const char*   U_EXPORT2
 ucnv_getName (const UConverter * converter, UErrorCode * err)
      
 {
-    if (U_FAILURE (*err))
+    if (U_FAILURE (*err)) {
         return NULL;
+}
     if(converter->sharedData->impl->getName){
         const char* temp= converter->sharedData->impl->getName(converter);
-        if(temp)
+        if(temp) {
             return temp;
+}
     }
     return converter->sharedData->staticData->name;
 }
@@ -674,8 +681,9 @@ ucnv_getCCSID(const UConverter * converter,
               UErrorCode * err)
 {
     int32_t ccsid;
-    if (U_FAILURE (*err))
+    if (U_FAILURE (*err)) {
         return -1;
+}
 
     ccsid = converter->sharedData->staticData->codepage;
     if (ccsid == 0) {
@@ -697,8 +705,9 @@ U_CAPI UConverterPlatform   U_EXPORT2
 ucnv_getPlatform (const UConverter * converter,
                                       UErrorCode * err)
 {
-    if (U_FAILURE (*err))
+    if (U_FAILURE (*err)) {
         return UCNV_UNKNOWN;
+}
 
     return (UConverterPlatform)converter->sharedData->staticData->platform;
 }
@@ -729,11 +738,14 @@ ucnv_setToUCallBack (UConverter * converter,
                             const void** oldContext,
                             UErrorCode * err)
 {
-    if (U_FAILURE (*err))
+    if (U_FAILURE (*err)) {
         return;
-    if (oldAction) *oldAction = converter->fromCharErrorBehaviour;
+}
+    if (oldAction) { *oldAction = converter->fromCharErrorBehaviour;
+}
     converter->fromCharErrorBehaviour = newAction;
-    if (oldContext) *oldContext = converter->toUContext;
+    if (oldContext) { *oldContext = converter->toUContext;
+}
     converter->toUContext = newContext;
 }
 
@@ -745,11 +757,14 @@ ucnv_setFromUCallBack (UConverter * converter,
                             const void** oldContext,
                             UErrorCode * err)
 {
-    if (U_FAILURE (*err))
+    if (U_FAILURE (*err)) {
         return;
-    if (oldAction) *oldAction = converter->fromUCharErrorBehaviour;
+}
+    if (oldAction) { *oldAction = converter->fromUCharErrorBehaviour;
+}
     converter->fromUCharErrorBehaviour = newAction;
-    if (oldContext) *oldContext = converter->fromUContext;
+    if (oldContext) { *oldContext = converter->fromUContext;
+}
     converter->fromUContext = newContext;
 }
 

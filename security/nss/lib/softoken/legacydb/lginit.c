@@ -353,12 +353,14 @@ lg_OpenCertDB(const char *configdir, const char *prefix, PRBool readOnly,
     configdir = lg_EvaluateConfigDir(configdir, &appName);
 
     name = PR_smprintf("%s" PATH_SEPARATOR "%s", configdir, prefix);
-    if (name == NULL)
+    if (name == NULL) {
         goto loser;
+}
 
     certdb = (NSSLOWCERTCertDBHandle *)PORT_ZAlloc(sizeof(NSSLOWCERTCertDBHandle));
-    if (certdb == NULL)
+    if (certdb == NULL) {
         goto loser;
+}
 
     certdb->ref = 1;
     /* fix when we get the DB in */
@@ -370,12 +372,15 @@ lg_OpenCertDB(const char *configdir, const char *prefix, PRBool readOnly,
         certdb = NULL;
     }
 loser:
-    if (certdb)
+    if (certdb) {
         PR_Free(certdb);
-    if (name)
+}
+    if (name) {
         PR_smprintf_free(name);
-    if (appName)
+}
+    if (appName) {
         PORT_Free(appName);
+}
     return crv;
 }
 
@@ -393,15 +398,18 @@ lg_OpenKeyDB(const char *configdir, const char *prefix, PRBool readOnly,
     configdir = lg_EvaluateConfigDir(configdir, &appName);
 
     name = PR_smprintf("%s" PATH_SEPARATOR "%s", configdir, prefix);
-    if (name == NULL)
+    if (name == NULL) {
         return CKR_HOST_MEMORY;
+}
     keydb = nsslowkey_OpenKeyDB(readOnly, appName, prefix,
                                 lg_keydb_name_cb, (void *)name);
     PR_smprintf_free(name);
-    if (appName)
+    if (appName) {
         PORT_Free(appName);
-    if (keydb == NULL)
+}
+    if (keydb == NULL) {
         return CKR_NETSCAPE_KEYDB_FAILED;
+}
     *keydbPtr = keydb;
 
     return CKR_OK;
@@ -602,10 +610,12 @@ legacy_Open(const char *configdir, const char *certPrefix,
     }
     nsslowcert_InitLocks();
 
-    if (keyDB)
+    if (keyDB) {
         *keyDB = NULL;
-    if (certDB)
+}
+    if (certDB) {
         *certDB = NULL;
+}
 
     if (certDB) {
         NSSLOWCERTCertDBHandle *certdbPtr = NULL;

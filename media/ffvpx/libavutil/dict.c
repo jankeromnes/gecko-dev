@@ -42,26 +42,32 @@ AVDictionaryEntry *av_dict_get(const AVDictionary *m, const char *key,
 {
     unsigned int i, j;
 
-    if (!m)
+    if (!m) {
         return NULL;
+}
 
-    if (prev)
+    if (prev) {
         i = prev - m->elems + 1;
-    else
+    } else {
         i = 0;
+}
 
     for (; i < m->count; i++) {
         const char *s = m->elems[i].key;
-        if (flags & AV_DICT_MATCH_CASE)
-            for (j = 0; s[j] == key[j] && key[j]; j++)
+        if (flags & AV_DICT_MATCH_CASE) {
+            for (j = 0; s[j] == key[j] && key[j]; j++) {
                 ;
-        else
-            for (j = 0; av_toupper(s[j]) == av_toupper(key[j]) && key[j]; j++)
+}
+        } else {
+            for (j = 0; av_toupper(s[j]) == av_toupper(key[j]) && key[j]; j++) {
                 ;
-        if (key[j])
+}
+        if (key[j]) {
             continue;
-        if (s[j] && !(flags & AV_DICT_IGNORE_SUFFIX))
+}
+        if (s[j] && !(flags & AV_DICT_IGNORE_SUFFIX)) {
             continue;
+}
         return &m->elems[i];
     }
     return NULL;
@@ -77,18 +83,22 @@ int av_dict_set(AVDictionary **pm, const char *key, const char *value,
     if (!(flags & AV_DICT_MULTIKEY)) {
         tag = av_dict_get(m, key, NULL, flags);
     }
-    if (flags & AV_DICT_DONT_STRDUP_KEY)
+    if (flags & AV_DICT_DONT_STRDUP_KEY) {
         copy_key = (void *)key;
-    else
+    } else {
         copy_key = av_strdup(key);
-    if (flags & AV_DICT_DONT_STRDUP_VAL)
+}
+    if (flags & AV_DICT_DONT_STRDUP_VAL) {
         copy_value = (void *)value;
-    else if (copy_key)
+    } else if (copy_key) {
         copy_value = av_strdup(value);
-    if (!m)
+}
+    if (!m) {
         m = *pm = av_mallocz(sizeof(*m));
-    if (!m || (key && !copy_key) || (value && !copy_value))
+}
+    if (!m || (key && !copy_key) || (value && !copy_value)) {
         goto err_out;
+}
 
     if (tag) {
         if (flags & AV_DICT_DONT_OVERWRITE) {
@@ -96,17 +106,19 @@ int av_dict_set(AVDictionary **pm, const char *key, const char *value,
             av_free(copy_value);
             return 0;
         }
-        if (flags & AV_DICT_APPEND)
+        if (flags & AV_DICT_APPEND) {
             oldval = tag->value;
-        else
+        } else {
             av_free(tag->value);
+}
         av_free(tag->key);
         *tag = m->elems[--m->count];
     } else if (copy_value) {
         AVDictionaryEntry *tmp = av_realloc(m->elems,
                                             (m->count + 1) * sizeof(*m->elems));
-        if (!tmp)
+        if (!tmp) {
             goto err_out;
+}
         m->elems = tmp;
     }
     if (copy_value) {
@@ -115,8 +127,9 @@ int av_dict_set(AVDictionary **pm, const char *key, const char *value,
         if (oldval && flags & AV_DICT_APPEND) {
             size_t len = strlen(oldval) + strlen(copy_value) + 1;
             char *newval = av_mallocz(len);
-            if (!newval)
+            if (!newval) {
                 goto err_out;
+}
             av_strlcat(newval, oldval, len);
             av_freep(&oldval);
             av_strlcat(newval, copy_value, len);
@@ -166,10 +179,11 @@ static int parse_key_value_pair(AVDictionary **pm, const char **buf,
         val = av_get_token(buf, pairs_sep);
     }
 
-    if (key && *key && val && *val)
+    if (key && *key && val && *val) {
         ret = av_dict_set(pm, key, val, flags);
-    else
+    } else {
         ret = AVERROR(EINVAL);
+}
 
     av_freep(&key);
     av_freep(&val);
@@ -183,18 +197,21 @@ int av_dict_parse_string(AVDictionary **pm, const char *str,
 {
     int ret;
 
-    if (!str)
+    if (!str) {
         return 0;
+}
 
     /* ignore STRDUP flags */
     flags &= ~(AV_DICT_DONT_STRDUP_KEY | AV_DICT_DONT_STRDUP_VAL);
 
     while (*str) {
-        if ((ret = parse_key_value_pair(pm, &str, key_val_sep, pairs_sep, flags)) < 0)
+        if ((ret = parse_key_value_pair(pm, &str, key_val_sep, pairs_sep, flags)) < 0) {
             return ret;
+}
 
-        if (*str)
+        if (*str) {
             str++;
+}
     }
 
     return 0;
@@ -220,8 +237,9 @@ int av_dict_copy(AVDictionary **dst, const AVDictionary *src, int flags)
 
     while ((t = av_dict_get(src, "", t, AV_DICT_IGNORE_SUFFIX))) {
         int ret = av_dict_set(dst, t->key, t->value, flags);
-        if (ret < 0)
+        if (ret < 0) {
             return ret;
+}
     }
 
     return 0;
@@ -236,8 +254,9 @@ int av_dict_get_string(const AVDictionary *m, char **buffer,
     char special_chars[] = {pairs_sep, key_val_sep, '\0'};
 
     if (!buffer || pairs_sep == '\0' || key_val_sep == '\0' || pairs_sep == key_val_sep ||
-        pairs_sep == '\\' || key_val_sep == '\\')
+        pairs_sep == '\\' || key_val_sep == '\\') {
         return AVERROR(EINVAL);
+}
 
     if (!av_dict_count(m)) {
         *buffer = av_strdup("");
@@ -246,8 +265,9 @@ int av_dict_get_string(const AVDictionary *m, char **buffer,
 
     av_bprint_init(&bprint, 64, AV_BPRINT_SIZE_UNLIMITED);
     while ((t = av_dict_get(m, "", t, AV_DICT_IGNORE_SUFFIX))) {
-        if (cnt++)
+        if (cnt++) {
             av_bprint_append_data(&bprint, &pairs_sep, 1);
+}
         av_bprint_escape(&bprint, t->key, special_chars, AV_ESCAPE_MODE_BACKSLASH, 0);
         av_bprint_append_data(&bprint, &key_val_sep, 1);
         av_bprint_escape(&bprint, t->value, special_chars, AV_ESCAPE_MODE_BACKSLASH, 0);
@@ -262,8 +282,9 @@ int avpriv_dict_set_timestamp(AVDictionary **dict, const char *key, int64_t time
     ptm = gmtime_r(&seconds, &tmbuf);
     if (ptm) {
         char buf[32];
-        if (!strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%S", ptm))
+        if (!strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%S", ptm)) {
             return AVERROR_EXTERNAL;
+}
         av_strlcatf(buf, sizeof(buf), ".%06dZ", (int)(timestamp % 1000000));
         return av_dict_set(dict, key, buf, 0);
     } else {

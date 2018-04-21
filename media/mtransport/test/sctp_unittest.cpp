@@ -337,10 +337,12 @@ class SctpTransportTest : public MtransportTest {
   }
 
   void TearDown() override {
-    if (p1_)
+    if (p1_) {
       p1_->Disconnect();
-    if (p2_)
+}
+    if (p2_) {
       p2_->Disconnect();
+}
     delete p1_;
     delete p2_;
 
@@ -349,10 +351,12 @@ class SctpTransportTest : public MtransportTest {
 
 
   void ConnectSocket(int p1port = 0, int p2port = 0) {
-    if (!p1port)
+    if (!p1port) {
       p1port = port_number++;
-    if (!p2port)
+}
+    if (!p2port) {
       p2port = port_number++;
+}
 
     p1_ = new TransportTestPeer("P1", p1port, p2port, test_utils_);
     p2_ = new TransportTestPeer("P2", p2port, p1port, test_utils_);

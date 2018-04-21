@@ -108,14 +108,18 @@ nssCKFW_GetThreadSafeState(CK_C_INITIALIZE_ARGS_PTR pInitArgs,
         *pLocking_state = MultiThreaded;
         return CKR_OK;
     }
-    if ((CK_CREATEMUTEX)NULL != pInitArgs->CreateMutex)
+    if ((CK_CREATEMUTEX)NULL != pInitArgs->CreateMutex) {
         functionCount++;
-    if ((CK_DESTROYMUTEX)NULL != pInitArgs->DestroyMutex)
+}
+    if ((CK_DESTROYMUTEX)NULL != pInitArgs->DestroyMutex) {
         functionCount++;
-    if ((CK_LOCKMUTEX)NULL != pInitArgs->LockMutex)
+}
+    if ((CK_LOCKMUTEX)NULL != pInitArgs->LockMutex) {
         functionCount++;
-    if ((CK_UNLOCKMUTEX)NULL != pInitArgs->UnlockMutex)
+}
+    if ((CK_UNLOCKMUTEX)NULL != pInitArgs->UnlockMutex) {
         functionCount++;
+}
 
     /* CKF_OS_LOCKING_OK is not set, and not functions supplied,
      * explicit case 1 */
@@ -623,8 +627,9 @@ loser:
     switch (error) {
         case CKR_DEVICE_REMOVED:
         case CKR_TOKEN_NOT_PRESENT:
-            if (fwToken)
+            if (fwToken) {
                 nssCKFWToken_Destroy(fwToken);
+}
             break;
         case CKR_CRYPTOKI_NOT_INITIALIZED:
         case CKR_DEVICE_ERROR:
@@ -814,8 +819,9 @@ loser:
     switch (error) {
         case CKR_DEVICE_REMOVED:
         case CKR_TOKEN_NOT_PRESENT:
-            if (fwToken)
+            if (fwToken) {
                 nssCKFWToken_Destroy(fwToken);
+}
             break;
         case CKR_ARGUMENTS_BAD:
         case CKR_BUFFER_TOO_SMALL:
@@ -952,8 +958,9 @@ loser:
     switch (error) {
         case CKR_DEVICE_REMOVED:
         case CKR_TOKEN_NOT_PRESENT:
-            if (fwToken)
+            if (fwToken) {
                 nssCKFWToken_Destroy(fwToken);
+}
             break;
         case CKR_ARGUMENTS_BAD:
         case CKR_CRYPTOKI_NOT_INITIALIZED:
@@ -1042,8 +1049,9 @@ loser:
     switch (error) {
         case CKR_DEVICE_REMOVED:
         case CKR_TOKEN_NOT_PRESENT:
-            if (fwToken)
+            if (fwToken) {
                 nssCKFWToken_Destroy(fwToken);
+}
             break;
         case CKR_ARGUMENTS_BAD:
         case CKR_CRYPTOKI_NOT_INITIALIZED:

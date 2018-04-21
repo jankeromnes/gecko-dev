@@ -53,23 +53,27 @@ SEC_StringToOID(PLArenaPool *pool, SECItem *to, const char *from, PRUint32 len)
         while (len > 0 && isdigit(*from)) {
             PRUint32 addend = (*from++ - '0');
             --len;
-            if (decimal > max_decimal) /* overflow */
+            if (decimal > max_decimal) { /* overflow */
                 goto bad_data;
+}
             decimal = (decimal * 10) + addend;
-            if (decimal < addend) /* overflow */
+            if (decimal < addend) { /* overflow */
                 goto bad_data;
+}
         }
         if (len != 0 && *from != '.') {
             goto bad_data;
         }
         if (decimal_numbers == 0) {
-            if (decimal > 2)
+            if (decimal > 2) {
                 goto bad_data;
+}
             result[0] = decimal * 40;
             result_bytes = 1;
         } else if (decimal_numbers == 1) {
-            if (decimal > 40)
+            if (decimal > 40) {
                 goto bad_data;
+}
             result[0] += decimal;
         } else {
             /* encode the decimal number,  */
@@ -80,10 +84,12 @@ SEC_StringToOID(PLArenaPool *pool, SECItem *to, const char *from, PRUint32 len)
                 num_bytes++;
                 tmp >>= 7;
             }
-            if (!num_bytes)
+            if (!num_bytes) {
                 ++num_bytes; /* use one byte for a zero value */
-            if (num_bytes + result_bytes > sizeof result)
+}
+            if (num_bytes + result_bytes > sizeof result) {
                 goto bad_data;
+}
             tmp = num_bytes;
             rp = result + result_bytes - 1;
             rp[tmp] = (PRUint8)(decimal & 0x7f);

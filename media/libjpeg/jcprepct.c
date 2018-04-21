@@ -82,8 +82,9 @@ start_pass_prep (j_compress_ptr cinfo, J_BUF_MODE pass_mode)
 {
   my_prep_ptr prep = (my_prep_ptr) cinfo->prep;
 
-  if (pass_mode != JBUF_PASS_THRU)
+  if (pass_mode != JBUF_PASS_THRU) {
     ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
 
   /* Initialize total-height counter for detecting bottom of image */
   prep->rows_to_go = cinfo->image_height;
@@ -232,8 +233,9 @@ pre_process_context (j_compress_ptr cinfo,
       prep->rows_to_go -= numrows;
     } else {
       /* Return for more data, unless we are at the bottom of the image. */
-      if (prep->rows_to_go != 0)
+      if (prep->rows_to_go != 0) {
         break;
+}
       /* When at bottom of image, pad to fill the conversion buffer. */
       if (prep->next_buf_row < prep->next_buf_stop) {
         for (ci = 0; ci < cinfo->num_components; ci++) {
@@ -252,10 +254,12 @@ pre_process_context (j_compress_ptr cinfo,
       (*out_row_group_ctr)++;
       /* Advance pointers with wraparound as necessary. */
       prep->this_row_group += cinfo->max_v_samp_factor;
-      if (prep->this_row_group >= buf_height)
+      if (prep->this_row_group >= buf_height) {
         prep->this_row_group = 0;
-      if (prep->next_buf_row >= buf_height)
+}
+      if (prep->next_buf_row >= buf_height) {
         prep->next_buf_row = 0;
+}
       prep->next_buf_stop = prep->next_buf_row + cinfo->max_v_samp_factor;
     }
   }
@@ -321,8 +325,9 @@ jinit_c_prep_controller (j_compress_ptr cinfo, boolean need_full_buffer)
   int ci;
   jpeg_component_info *compptr;
 
-  if (need_full_buffer)         /* safety check */
+  if (need_full_buffer) {         /* safety check */
     ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
 
   prep = (my_prep_ptr)
     (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,

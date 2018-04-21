@@ -59,7 +59,8 @@ UBool UnicodeSetIterator::next() {
         return TRUE;
     }
 
-    if (nextString >= stringCount) return FALSE;
+    if (nextString >= stringCount) { return FALSE;
+}
     codepoint = (UChar32)IS_STRING; // signal that value is actually a string
     string = (const UnicodeString*) set->strings->elementAt(nextString++);
     return TRUE;
@@ -92,7 +93,8 @@ UBool UnicodeSetIterator::nextRange() {
         return TRUE;
     }
 
-    if (nextString >= stringCount) return FALSE;
+    if (nextString >= stringCount) { return FALSE;
+}
     codepoint = (UChar32)IS_STRING; // signal that value is actually a string
     string = (const UnicodeString*) set->strings->elementAt(nextString++);
     return TRUE;

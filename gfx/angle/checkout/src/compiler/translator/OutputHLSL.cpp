@@ -374,8 +374,9 @@ TString OutputHLSL::generateStructMapping(const std::vector<MappedStruct> &std14
                 const ImmutableString &instanceName =
                     mappedStruct.blockDeclarator->variable().name();
                 unsigned int instanceStringArrayIndex = GL_INVALID_INDEX;
-                if (isInstanceArray)
+                if (isInstanceArray) {
                     instanceStringArrayIndex = instanceArrayIndex;
+}
                 TString instanceString = mUniformHLSL->UniformBlockInstanceString(
                     instanceName, instanceStringArrayIndex);
                 originalName += instanceString;
@@ -1548,10 +1549,11 @@ bool OutputHLSL::visitUnary(Visit visit, TIntermUnary *node)
             outputTriplet(out, visit, "frac(", "", ")");
             break;
         case EOpIsnan:
-            if (node->getUseEmulatedFunction())
+            if (node->getUseEmulatedFunction()) {
                 writeEmulatedFunctionTriplet(out, visit, node->getOp());
-            else
+            } else {
                 outputTriplet(out, visit, "isnan(", "", ")");
+}
             mRequiresIEEEStrictCompiling = true;
             break;
         case EOpIsinf:
@@ -1783,8 +1785,9 @@ bool OutputHLSL::visitFunctionDefinition(Visit visit, TIntermFunctionDefinition 
                 out << ", ";
             }
         }
-        else
+        else {
             UNREACHABLE();
+}
     }
 
     out << ")\n";

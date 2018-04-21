@@ -29,8 +29,9 @@ FFTContext *av_fft_init(int nbits, int inverse)
 {
     FFTContext *s = av_malloc(sizeof(*s));
 
-    if (s && ff_fft_init(s, nbits, inverse))
+    if (s && ff_fft_init(s, nbits, inverse)) {
         av_freep(&s);
+}
 
     return s;
 }
@@ -96,8 +97,9 @@ RDFTContext *av_rdft_init(int nbits, enum RDFTransformType trans)
 {
     RDFTContext *s = av_malloc(sizeof(*s));
 
-    if (s && ff_rdft_init(s, nbits, trans))
+    if (s && ff_rdft_init(s, nbits, trans)) {
         av_freep(&s);
+}
 
     return s;
 }

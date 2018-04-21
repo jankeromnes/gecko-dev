@@ -435,11 +435,16 @@ DateTimePatternGenerator::~DateTimePatternGenerator() {
         delete fAvailableFormatKeyHash;
     }
 
-    if (fp != NULL) delete fp;
-    if (dtMatcher != NULL) delete dtMatcher;
-    if (distanceInfo != NULL) delete distanceInfo;
-    if (patternMap != NULL) delete patternMap;
-    if (skipMatcher != NULL) delete skipMatcher;
+    if (fp != NULL) { delete fp;
+}
+    if (dtMatcher != NULL) { delete dtMatcher;
+}
+    if (distanceInfo != NULL) { delete distanceInfo;
+}
+    if (patternMap != NULL) { delete patternMap;
+}
+    if (skipMatcher != NULL) { delete skipMatcher;
+}
 }
 
 namespace {
@@ -1459,8 +1464,9 @@ DateTimePatternGenerator::adjustFieldTypes(const UnicodeString& pattern,
 
                     UChar reqFieldChar = dtMatcher->skeleton.original.getFieldChar(typeValue);
                     int32_t reqFieldLen = dtMatcher->skeleton.original.getFieldLength(typeValue);
-                    if (reqFieldChar == CAP_E && reqFieldLen < 3)
+                    if (reqFieldChar == CAP_E && reqFieldLen < 3) {
                         reqFieldLen = 3; // 1-3 for E are equivalent to 3 for c,e
+}
                     int32_t adjFieldLen = reqFieldLen;
                     if ( (typeValue==UDATPG_HOUR_FIELD && (options & UDATPG_MATCH_HOUR_FIELD_LENGTH)==0) ||
                          (typeValue==UDATPG_MINUTE_FIELD && (options & UDATPG_MATCH_MINUTE_FIELD_LENGTH)==0) ||
@@ -1551,8 +1557,9 @@ DateTimePatternGenerator::getTopBitNumber(int32_t foundMask) {
     if (i-1 >UDATPG_ZONE_FIELD) {
         return UDATPG_ZONE_FIELD;
     }
-    else
+    else {
         return i-1;
+}
 }
 
 void
@@ -2574,7 +2581,8 @@ DTRedundantEnumeration::DTRedundantEnumeration() {
 
 void
 DTRedundantEnumeration::add(const UnicodeString& pattern, UErrorCode& status) {
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
     if (fPatterns == NULL)  {
         fPatterns = new UVector(status);
         if (U_FAILURE(status)) {

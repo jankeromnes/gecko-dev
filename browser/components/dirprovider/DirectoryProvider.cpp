@@ -64,22 +64,25 @@ AppendDistroSearchDirs(nsIProperties* aDirSvc, nsCOMArray<nsIFile> &array)
   nsresult rv = aDirSvc->Get(XRE_APP_DISTRIBUTION_DIR,
                              NS_GET_IID(nsIFile),
                              getter_AddRefs(searchPlugins));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return;
+}
   searchPlugins->AppendNative(NS_LITERAL_CSTRING("searchplugins"));
 
   bool exists;
   rv = searchPlugins->Exists(&exists);
-  if (NS_FAILED(rv) || !exists)
+  if (NS_FAILED(rv) || !exists) {
     return;
+}
 
   nsCOMPtr<nsIFile> commonPlugins;
   rv = searchPlugins->Clone(getter_AddRefs(commonPlugins));
   if (NS_SUCCEEDED(rv)) {
     commonPlugins->AppendNative(NS_LITERAL_CSTRING("common"));
     rv = commonPlugins->Exists(&exists);
-    if (NS_SUCCEEDED(rv) && exists)
+    if (NS_SUCCEEDED(rv) && exists) {
         array.AppendObject(commonPlugins);
+}
   }
 
   nsCOMPtr<nsIPrefBranch> prefs(do_GetService(NS_PREFSERVICE_CONTRACTID));
@@ -87,8 +90,9 @@ AppendDistroSearchDirs(nsIProperties* aDirSvc, nsCOMArray<nsIFile> &array)
 
     nsCOMPtr<nsIFile> localePlugins;
     rv = searchPlugins->Clone(getter_AddRefs(localePlugins));
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
       return;
+}
 
     localePlugins->AppendNative(NS_LITERAL_CSTRING("locale"));
 
@@ -134,8 +138,9 @@ DirectoryProvider::GetFiles(const char *aKey, nsISimpleEnumerator* *aResult)
   if (!strcmp(aKey, NS_APP_DISTRIBUTION_SEARCH_DIR_LIST)) {
     nsCOMPtr<nsIProperties> dirSvc
       (do_GetService(NS_DIRECTORY_SERVICE_CONTRACTID));
-    if (!dirSvc)
+    if (!dirSvc) {
       return NS_ERROR_FAILURE;
+}
 
     nsCOMArray<nsIFile> distroFiles;
     AppendDistroSearchDirs(dirSvc, distroFiles);
@@ -158,8 +163,9 @@ DirectoryProvider::AppendingEnumerator::HasMoreElements(bool *aResult)
 NS_IMETHODIMP
 DirectoryProvider::AppendingEnumerator::GetNext(nsISupports* *aResult)
 {
-  if (aResult)
+  if (aResult) {
     NS_ADDREF(*aResult = mNext);
+}
 
   mNext = nullptr;
 
@@ -173,12 +179,14 @@ DirectoryProvider::AppendingEnumerator::GetNext(nsISupports* *aResult)
     mBase->GetNext(getter_AddRefs(nextbasesupp));
 
     nsCOMPtr<nsIFile> nextbase(do_QueryInterface(nextbasesupp));
-    if (!nextbase)
+    if (!nextbase) {
       continue;
+}
 
     nextbase->Clone(getter_AddRefs(mNext));
-    if (!mNext)
+    if (!mNext) {
       continue;
+}
 
     char const *const * i = mAppendList;
     while (*i) {
@@ -188,8 +196,9 @@ DirectoryProvider::AppendingEnumerator::GetNext(nsISupports* *aResult)
 
     bool exists;
     rv = mNext->Exists(&exists);
-    if (NS_SUCCEEDED(rv) && exists)
+    if (NS_SUCCEEDED(rv) && exists) {
       break;
+}
 
     mNext = nullptr;
   }

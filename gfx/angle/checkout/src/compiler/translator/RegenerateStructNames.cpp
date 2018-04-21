@@ -22,8 +22,9 @@ void RegenerateStructNames::visitSymbol(TIntermSymbol *symbol)
     ASSERT(symbol);
     const TType &type          = symbol->getType();
     const TStructure *userType = type.getStruct();
-    if (!userType)
+    if (!userType) {
         return;
+}
 
     if (userType->symbolType() == SymbolType::BuiltIn ||
         userType->symbolType() == SymbolType::Empty)
@@ -53,8 +54,9 @@ void RegenerateStructNames::visitSymbol(TIntermSymbol *symbol)
         mDeclaredGlobalStructs.insert(uniqueId);
         return;
     }
-    if (mDeclaredGlobalStructs.count(uniqueId) > 0)
+    if (mDeclaredGlobalStructs.count(uniqueId) > 0) {
         return;
+}
     // Map {name} to _webgl_struct_{uniqueId}_{name}.
     if (userType->name().beginsWith(kPrefix))
     {

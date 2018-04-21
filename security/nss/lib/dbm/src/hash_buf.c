@@ -116,10 +116,12 @@ __get_buf(HTAB *hashp, uint32 addr, BUFHEAD *prev_bp, int newpage)
     is_disk_mask = 0;
     if (prev_bp) {
         bp = prev_bp->ovfl;
-        if (!bp || (bp->addr != addr))
+        if (!bp || (bp->addr != addr)) {
             bp = NULL;
-        if (!newpage)
+}
+        if (!newpage) {
             is_disk = BUF_DISK;
+}
     } else {
         /* Grab buffer out of directory */
         segment_ndx = addr & (hashp->SGSIZE - 1);
@@ -138,8 +140,9 @@ __get_buf(HTAB *hashp, uint32 addr, BUFHEAD *prev_bp, int newpage)
 
     if (!bp) {
         bp = newbuf(hashp, addr, prev_bp);
-        if (!bp)
+        if (!bp) {
             return (NULL);
+}
         if (__get_page(hashp, bp->page, addr, !prev_bp, is_disk, 0)) {
             /* free bp and its page */
             if (prev_bp) {
@@ -203,8 +206,9 @@ newbuf(HTAB *hashp, uint32 addr, BUFHEAD *prev_bp)
      */
     if (hashp->nbufs || (bp->flags & BUF_PIN)) {
         /* Allocate a new one */
-        if ((bp = (BUFHEAD *)malloc(sizeof(BUFHEAD))) == NULL)
+        if ((bp = (BUFHEAD *)malloc(sizeof(BUFHEAD))) == NULL) {
             return (NULL);
+}
 
         /* this memset is supposedly unnecessary but lets add
          * it anyways.
@@ -221,8 +225,9 @@ newbuf(HTAB *hashp, uint32 addr, BUFHEAD *prev_bp)
          */
         memset(bp->page, 0xff, (size_t)hashp->BSIZE);
 
-        if (hashp->nbufs)
+        if (hashp->nbufs) {
             hashp->nbufs--;
+}
     } else {
         /* Kick someone out */
         BUF_REMOVE(bp);
@@ -243,8 +248,9 @@ newbuf(HTAB *hashp, uint32 addr, BUFHEAD *prev_bp)
                 oaddr = shortp[shortp[0] - 1];
             }
             if ((bp->flags & BUF_MOD) && __put_page(hashp, bp->page,
-                                                    bp->addr, (int)IS_BUCKET(bp->flags), 0))
+                                                    bp->addr, (int)IS_BUCKET(bp->flags), 0)) {
                 return (NULL);
+}
             /*
              * Update the pointer to this page (i.e. invalidate it).
              *
@@ -262,10 +268,11 @@ newbuf(HTAB *hashp, uint32 addr, BUFHEAD *prev_bp)
 
                 if (hashp->new_file &&
                     ((bp->flags & BUF_MOD) ||
-                     ISDISK(segp[segment_ndx])))
+                     ISDISK(segp[segment_ndx]))) {
                     segp[segment_ndx] = (BUFHEAD *)BUF_DISK;
-                else
+                } else {
                     segp[segment_ndx] = NULL;
+}
             }
             /*
              * Since overflow pages can only be access by means of
@@ -285,22 +292,25 @@ newbuf(HTAB *hashp, uint32 addr, BUFHEAD *prev_bp)
 
                 /* Check that ovfl pointer is up date. */
                 if (IS_BUCKET(xbp->flags) ||
-                    (oaddr != xbp->addr))
+                    (oaddr != xbp->addr)) {
                     break;
+}
 
                 shortp = (uint16 *)xbp->page;
                 if (shortp[0]) {
                     /* LJM is the number of reported
                      * pages way too much?
                      */
-                    if (shortp[0] > hashp->BSIZE / sizeof(uint16))
+                    if (shortp[0] > hashp->BSIZE / sizeof(uint16)) {
                         return NULL;
+}
                     /* set before __put_page */
                     oaddr = shortp[shortp[0] - 1];
                 }
                 if ((xbp->flags & BUF_MOD) && __put_page(hashp,
-                                                         xbp->page, xbp->addr, 0, 0))
+                                                         xbp->page, xbp->addr, 0, 0)) {
                     return (NULL);
+}
                 xbp->addr = 0;
                 xbp->flags = 0;
                 BUF_REMOVE(xbp);
@@ -328,8 +338,9 @@ newbuf(HTAB *hashp, uint32 addr, BUFHEAD *prev_bp)
 #endif
         prev_bp->ovfl = bp;
         bp->flags = 0;
-    } else
+    } else {
         bp->flags = BUF_BUCKET;
+}
     MRU_INSERT(bp);
     return (bp);
 }
@@ -364,8 +375,9 @@ __buf_free(HTAB *hashp, int do_free, int to_disk)
     int status = -1;
 
     /* Need to make sure that buffer manager has been initialized */
-    if (!LRU)
+    if (!LRU) {
         return (0);
+}
     for (bp = LRU; bp != &hashp->bufhead;) {
         /* Check that the buffer is valid */
         if (bp->addr || IS_BUCKET(bp->flags)) {
@@ -374,8 +386,9 @@ __buf_free(HTAB *hashp, int do_free, int to_disk)
                                      bp->addr, IS_BUCKET(bp->flags), 0))) {
 
                 if (do_free) {
-                    if (bp->page)
+                    if (bp->page) {
                         free(bp->page);
+}
                     BUF_REMOVE(bp);
                     free(bp);
                 }
@@ -385,13 +398,15 @@ __buf_free(HTAB *hashp, int do_free, int to_disk)
         }
         /* Check if we are freeing stuff */
         if (do_free) {
-            if (bp->page)
+            if (bp->page) {
                 free(bp->page);
+}
             BUF_REMOVE(bp);
             free(bp);
             bp = LRU;
-        } else
+        } else {
             bp = bp->prev;
+}
     }
     return (0);
 }

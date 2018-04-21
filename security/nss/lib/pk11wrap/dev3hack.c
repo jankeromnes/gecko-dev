@@ -169,8 +169,9 @@ nssToken_CreateFromPK11SlotInfo(NSSTrustDomain *td, PK11SlotInfo *nss3slot)
     if (!PK11_IsInternal(nss3slot) && PK11_IsHW(nss3slot)) {
         rvToken->cache = nssTokenObjectCache_Create(rvToken,
                                                     PR_TRUE, PR_TRUE, PR_TRUE);
-        if (!rvToken->cache)
+        if (!rvToken->cache) {
             goto loser;
+}
     }
     rvToken->trustDomain = td;
     /* Grab the token name from the PKCS#11 fixed-length buffer */
@@ -180,8 +181,9 @@ nssToken_CreateFromPK11SlotInfo(NSSTrustDomain *td, PK11SlotInfo *nss3slot)
         goto loser;
     }
     rvToken->slot->token = rvToken;
-    if (rvToken->defaultSession)
+    if (rvToken->defaultSession) {
         rvToken->defaultSession->slot = rvToken->slot;
+}
     return rvToken;
 loser:
     PZ_DestroyLock(rvToken->base.lock);

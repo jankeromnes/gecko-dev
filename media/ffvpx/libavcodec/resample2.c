@@ -105,25 +105,29 @@ static int build_filter(FELEM *filter, double factor, int tap_count, int phase_c
     double *tab = av_malloc_array(tap_count, sizeof(*tab));
     const int center= (tap_count-1)/2;
 
-    if (!tab)
+    if (!tab) {
         return AVERROR(ENOMEM);
+}
 
     /* if upsampling, only need to interpolate, no filter */
-    if (factor > 1.0)
+    if (factor > 1.0) {
         factor = 1.0;
+}
 
     for(ph=0;ph<phase_count;ph++) {
         double norm = 0;
         for(i=0;i<tap_count;i++) {
             x = M_PI * ((double)(i - center) - (double)ph / phase_count) * factor;
-            if (x == 0) y = 1.0;
-            else        y = sin(x) / x;
+            if (x == 0) { y = 1.0;
+            } else {        y = sin(x) / x;
+}
             switch(type){
             case 0:{
                 const float d= -0.5; //first order derivative = -0.5
                 x = fabs(((double)(i - center) - (double)ph / phase_count) * factor);
-                if(x<1.0) y= 1 - 3*x*x + 2*x*x*x + d*(            -x*x + x*x*x);
-                else      y=                       d*(-4 + 8*x - 5*x*x + x*x*x);
+                if(x<1.0) { y= 1 - 3*x*x + 2*x*x*x + d*(            -x*x + x*x*x);
+                } else {      y=                       d*(-4 + 8*x - 5*x*x + x*x*x);
+}
                 break;}
             case 1:
                 w = 2.0*x / (factor*tap_count) + M_PI;
@@ -194,8 +198,9 @@ AVResampleContext *av_resample_init(int out_rate, int in_rate, int filter_size, 
     double factor= FFMIN(out_rate * cutoff / in_rate, 1.0);
     int phase_count= 1<<phase_shift;
 
-    if (!c)
+    if (!c) {
         return NULL;
+}
 
     c->phase_shift= phase_shift;
     c->phase_mask= phase_count-1;
@@ -203,15 +208,18 @@ AVResampleContext *av_resample_init(int out_rate, int in_rate, int filter_size, 
 
     c->filter_length= FFMAX((int)ceil(filter_size/factor), 1);
     c->filter_bank= av_mallocz_array(c->filter_length, (phase_count+1)*sizeof(FELEM));
-    if (!c->filter_bank)
+    if (!c->filter_bank) {
         goto error;
-    if (build_filter(c->filter_bank, factor, c->filter_length, phase_count, 1<<FILTER_SHIFT, WINDOW_TYPE))
+}
+    if (build_filter(c->filter_bank, factor, c->filter_length, phase_count, 1<<FILTER_SHIFT, WINDOW_TYPE)) {
         goto error;
+}
     memcpy(&c->filter_bank[c->filter_length*phase_count+1], c->filter_bank, (c->filter_length-1)*sizeof(FELEM));
     c->filter_bank[c->filter_length*phase_count]= c->filter_bank[c->filter_length - 1];
 
-    if(!av_reduce(&c->src_incr, &c->dst_incr, out_rate, in_rate * (int64_t)phase_count, INT32_MAX/2))
+    if(!av_reduce(&c->src_incr, &c->dst_incr, out_rate, in_rate * (int64_t)phase_count, INT32_MAX/2)) {
         goto error;
+}
     c->ideal_dst_incr= c->dst_incr;
 
     c->index= -phase_count*((c->filter_length-1)/2);
@@ -261,8 +269,9 @@ int av_resample(AVResampleContext *c, short *dst, short *src, int *consumed, int
         FELEM2 val=0;
 
         if(sample_index < 0){
-            for(i=0; i<c->filter_length; i++)
+            for(i=0; i<c->filter_length; i++) {
                 val += src[FFABS(sample_index + i) % src_size] * filter[i];
+}
         }else if(sample_index + c->filter_length > src_size){
             break;
         }else if(c->linear){
@@ -300,7 +309,8 @@ int av_resample(AVResampleContext *c, short *dst, short *src, int *consumed, int
     }
   }
     *consumed= FFMAX(index, 0) >> c->phase_shift;
-    if(index>=0) index &= c->phase_mask;
+    if(index>=0) { index &= c->phase_mask;
+}
 
     if(compensation_distance){
         compensation_distance -= dst_index;

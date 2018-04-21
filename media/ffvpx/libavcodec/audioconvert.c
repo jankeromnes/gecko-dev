@@ -44,11 +44,13 @@ AVAudioConvert *av_audio_convert_alloc(enum AVSampleFormat out_fmt, int out_chan
                                        const float *matrix, int flags)
 {
     AVAudioConvert *ctx;
-    if (in_channels!=out_channels)
+    if (in_channels!=out_channels) {
         return NULL;  /* FIXME: not supported */
+}
     ctx = av_malloc(sizeof(AVAudioConvert));
-    if (!ctx)
+    if (!ctx) {
         return NULL;
+}
     ctx->in_channels = in_channels;
     ctx->out_channels = out_channels;
     ctx->fmt_pair = out_fmt + AV_SAMPLE_FMT_NB*in_fmt;
@@ -74,8 +76,9 @@ int av_audio_convert(AVAudioConvert *ctx,
         const uint8_t *pi=  in[ch];
         uint8_t *po= out[ch];
         uint8_t *end= po + os*len;
-        if(!out[ch])
+        if(!out[ch]) {
             continue;
+}
 
 #define CONV(ofmt, otype, ifmt, expr)\
 if(ctx->fmt_pair == ofmt + AV_SAMPLE_FMT_NB*ifmt){\

@@ -67,8 +67,9 @@ GetExtents(AtkComponent* aComponent, gint* aX, gint* aY, gint* aWidth,
 {
   *aX = *aY = *aWidth = *aHeight = 0;
 
-  if (!MAI_IS_ATK_SOCKET(aComponent))
+  if (!MAI_IS_ATK_SOCKET(aComponent)) {
     return;
+}
 
   getExtentsHelper(ATK_OBJECT(MAI_ATK_SOCKET(aComponent)),
                    aX, aY, aWidth, aHeight, aCoordType);
@@ -79,8 +80,9 @@ void
 mai_atk_component_iface_init(AtkComponentIface* aIface)
 {
   NS_ASSERTION(aIface, "Invalid Interface");
-  if (MOZ_UNLIKELY(!aIface))
+  if (MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   aIface->ref_accessible_at_point = RefAccessibleAtPoint;
   aIface->get_extents = GetExtents;
@@ -92,8 +94,9 @@ AtkSocketAccessible::AtkSocketAccessible(nsIContent* aContent,
   AccessibleWrap(aContent, aDoc)
 {
   mAtkObject = mai_atk_socket_new(this);
-  if (!mAtkObject)
+  if (!mAtkObject) {
     return;
+}
 
   // Embeds the children of an AtkPlug, specified by plugId, as the children of
   // this socket.
@@ -117,8 +120,9 @@ void
 AtkSocketAccessible::Shutdown()
 {
   if (mAtkObject) {
-    if (MAI_IS_ATK_SOCKET(mAtkObject))
+    if (MAI_IS_ATK_SOCKET(mAtkObject)) {
       MAI_ATK_SOCKET(mAtkObject)->accWrap = nullptr;
+}
     g_object_unref(mAtkObject);
     mAtkObject = nullptr;
   }

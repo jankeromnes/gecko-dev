@@ -56,8 +56,9 @@ const char *vpx_codec_error(vpx_codec_ctx_t *ctx) {
 }
 
 const char *vpx_codec_error_detail(vpx_codec_ctx_t *ctx) {
-  if (ctx && ctx->err)
+  if (ctx && ctx->err) {
     return ctx->priv ? ctx->priv->err_detail : ctx->err_detail;
+}
 
   return NULL;
 }
@@ -65,11 +66,11 @@ const char *vpx_codec_error_detail(vpx_codec_ctx_t *ctx) {
 vpx_codec_err_t vpx_codec_destroy(vpx_codec_ctx_t *ctx) {
   vpx_codec_err_t res;
 
-  if (!ctx)
+  if (!ctx) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv)
+  } else if (!ctx->iface || !ctx->priv) {
     res = VPX_CODEC_ERROR;
-  else {
+  } else {
     ctx->iface->destroy((vpx_codec_alg_priv_t *)ctx->priv);
 
     ctx->iface = NULL;
@@ -88,11 +89,11 @@ vpx_codec_caps_t vpx_codec_get_caps(vpx_codec_iface_t *iface) {
 vpx_codec_err_t vpx_codec_control_(vpx_codec_ctx_t *ctx, int ctrl_id, ...) {
   vpx_codec_err_t res;
 
-  if (!ctx || !ctrl_id)
+  if (!ctx || !ctrl_id) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv || !ctx->iface->ctrl_maps)
+  } else if (!ctx->iface || !ctx->priv || !ctx->iface->ctrl_maps) {
     res = VPX_CODEC_ERROR;
-  else {
+  } else {
     vpx_codec_ctrl_fn_map_t *entry;
 
     res = VPX_CODEC_INCAPABLE;
@@ -129,5 +130,6 @@ void vpx_internal_error(struct vpx_internal_error_info *info,
     info->detail[sz - 1] = '\0';
   }
 
-  if (info->setjmp) longjmp(info->jmp, info->error_code);
+  if (info->setjmp) { longjmp(info->jmp, info->error_code);
+}
 }

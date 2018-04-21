@@ -155,8 +155,9 @@ ssl_CreateStaticECDHEKey(sslSocket *ss, const sslNamedGroupDef *ecGroup)
     }
 
     keyPair = ssl_CopyEphemeralKeyPair(keyPair);
-    if (!keyPair)
+    if (!keyPair) {
         return SECFailure;
+}
 
     PORT_Assert(PR_CLIST_IS_EMPTY(&ss->ephemeralKeyPairs));
     PR_APPEND_LINK(&keyPair->link, &ss->ephemeralKeyPairs);

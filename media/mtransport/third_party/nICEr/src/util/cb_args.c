@@ -45,8 +45,9 @@ void **nr_pack_cb_args(int ct,...)
     int i;
 
     va_start(ap,ct);
-    if(!(vlist=RCALLOC(sizeof(void *)*ct+1)))
+    if(!(vlist=RCALLOC(sizeof(void *)*ct+1))) {
       abort();
+}
 
     for(i=0;i<ct;i++){
       vlist[i]=va_arg(ap, void *);

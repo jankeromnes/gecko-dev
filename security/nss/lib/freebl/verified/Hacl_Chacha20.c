@@ -90,8 +90,9 @@ Hacl_Impl_Chacha20_double_round(uint32_t *st)
 inline static void
 Hacl_Impl_Chacha20_rounds(uint32_t *st)
 {
-    for (uint32_t i = (uint32_t)0U; i < (uint32_t)10U; i = i + (uint32_t)1U)
+    for (uint32_t i = (uint32_t)0U; i < (uint32_t)10U; i = i + (uint32_t)1U) {
         Hacl_Impl_Chacha20_double_round(st);
+}
 }
 
 inline static void
@@ -208,8 +209,9 @@ Hacl_Impl_Chacha20_chacha20_counter_mode(
     uint8_t *output__ = output + (uint32_t)64U * blocks_len;
     uint8_t *plain__ = plain + (uint32_t)64U * blocks_len;
     Hacl_Impl_Chacha20_chacha20_counter_mode_blocks(output_, plain_, blocks_len, st, ctr);
-    if (part_len > (uint32_t)0U)
+    if (part_len > (uint32_t)0U) {
         Hacl_Impl_Chacha20_update_last(output__, plain__, part_len, st, ctr + blocks_len);
+}
 }
 
 static void

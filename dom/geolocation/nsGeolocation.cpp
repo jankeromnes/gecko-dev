@@ -782,11 +782,12 @@ nsGeolocationService::Observe(nsISupports* aSubject,
 
   if (!strcmp("timer-callback", aTopic)) {
     // decide if we can close down the service.
-    for (uint32_t i = 0; i< mGeolocators.Length(); i++)
+    for (uint32_t i = 0; i< mGeolocators.Length(); i++) {
       if (mGeolocators[i]->HasActiveCallbacks()) {
         SetDisconnectTimer();
         return NS_OK;
       }
+}
 
     // okay to close up.
     StopDevice();
@@ -1382,8 +1383,9 @@ Geolocation::WatchPosition(GeoPositionCallback aCallback,
   }
 
   if (mOwner) {
-    if (!RegisterRequestWithPrompt(request))
+    if (!RegisterRequestWithPrompt(request)) {
       return NS_ERROR_NOT_AVAILABLE;
+}
 
     return NS_OK;
   }

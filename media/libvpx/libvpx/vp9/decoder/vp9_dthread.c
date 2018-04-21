@@ -62,12 +62,14 @@ void vp9_frameworker_signal_stats(VPxWorker *const worker) {
 void vp9_frameworker_wait(VPxWorker *const worker, RefCntBuffer *const ref_buf,
                           int row) {
 #if CONFIG_MULTITHREAD
-  if (!ref_buf) return;
+  if (!ref_buf) { return;
+}
 
 #ifndef BUILDING_WITH_TSAN
   // The following line of code will get harmless tsan error but it is the key
   // to get best performance.
-  if (ref_buf->row >= row && ref_buf->buf.corrupted != 1) return;
+  if (ref_buf->row >= row && ref_buf->buf.corrupted != 1) { return;
+}
 #endif
 
   {
@@ -171,8 +173,9 @@ void vp9_frameworker_copy_context(VPxWorker *const dst_worker,
   dst_cm->last_show_frame = !src_cm->show_existing_frame
                                 ? src_cm->show_frame
                                 : src_cm->last_show_frame;
-  for (i = 0; i < REF_FRAMES; ++i)
+  for (i = 0; i < REF_FRAMES; ++i) {
     dst_cm->ref_frame_map[i] = src_cm->next_ref_frame_map[i];
+}
 
   memcpy(dst_cm->lf_info.lfthr, src_cm->lf_info.lfthr,
          (MAX_LOOP_FILTER + 1) * sizeof(loop_filter_thresh));

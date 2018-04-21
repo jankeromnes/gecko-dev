@@ -209,8 +209,9 @@ felem_sum(felem out, const felem in, const felem in2)
         out[i] &= kBottom29Bits;
 
         i++;
-        if (i == NLIMBS)
+        if (i == NLIMBS) {
             break;
+}
 
         out[i] = in[i] + in2[i];
         out[i] += carry;
@@ -256,8 +257,9 @@ felem_diff(felem out, const felem in, const felem in2)
         out[i] &= kBottom29Bits;
 
         i++;
-        if (i == NLIMBS)
+        if (i == NLIMBS) {
             break;
+}
 
         out[i] = in[i] - in2[i];
         out[i] += zero31[i];
@@ -321,8 +323,9 @@ felem_reduce_degree(felem out, u64 tmp[17])
         tmp2[i] &= kBottom29Bits;
 
         i++;
-        if (i == 17)
+        if (i == 17) {
             break;
+}
         tmp2[i] = ((limb)(tmp[i - 2] >> 32)) >> 25;
         tmp2[i] += ((limb)(tmp[i - 1])) >> 29;
         tmp2[i] += (((limb)(tmp[i - 1] >> 32)) << 3) & kBottom28Bits;
@@ -418,8 +421,9 @@ felem_reduce_degree(felem out, u64 tmp[17])
         tmp2[i + 8] += (x << 28) & kBottom29Bits;
         tmp2[i + 9] += ((x >> 1) - 1) & xMask;
 
-        if (i + 1 == NLIMBS)
+        if (i + 1 == NLIMBS) {
             break;
+}
         tmp2[i + 2] += tmp2[i + 1] >> 28;
         x = tmp2[i + 1] & kBottom28Bits;
         xMask = NON_ZERO_TO_ALL_ONES(x);
@@ -731,8 +735,9 @@ felem_scalar_3(felem out)
         out[i] &= kBottom29Bits;
 
         i++;
-        if (i == NLIMBS)
+        if (i == NLIMBS) {
             break;
+}
 
         out[i] *= 3;
         out[i] += carry;
@@ -763,8 +768,9 @@ felem_scalar_4(felem out)
         out[i] &= kBottom29Bits;
 
         i++;
-        if (i == NLIMBS)
+        if (i == NLIMBS) {
             break;
+}
         next_carry = out[i] >> 26;
         out[i] <<= 2;
         out[i] &= kBottom28Bits;
@@ -796,8 +802,9 @@ felem_scalar_8(felem out)
         out[i] &= kBottom29Bits;
 
         i++;
-        if (i == NLIMBS)
+        if (i == NLIMBS) {
             break;
+}
         next_carry = out[i] >> 25;
         out[i] <<= 3;
         out[i] &= kBottom28Bits;
@@ -830,8 +837,9 @@ felem_is_zero_vartime(const felem in)
             tmp[i] &= kBottom29Bits;
 
             i++;
-            if (i == NLIMBS)
+            if (i == NLIMBS) {
                 break;
+}
 
             tmp[i] += carry;
             carry = tmp[i] >> 28;
@@ -1340,8 +1348,9 @@ to_montgomery(felem out, const mp_int *in, const ECGroup *group)
         MP_CHECKOK(mp_div_d(&in_shifted, kTwo29, &in_shifted, NULL));
 
         i++;
-        if (i == NLIMBS)
+        if (i == NLIMBS) {
             break;
+}
         out[i] = MP_DIGIT(&in_shifted, 0) & kBottom28Bits;
         MP_CHECKOK(mp_div_d(&in_shifted, kTwo28, &in_shifted, NULL));
     }

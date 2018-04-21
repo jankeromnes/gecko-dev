@@ -35,7 +35,8 @@ int aom_free_frame_buffer(YV12_BUFFER_CONFIG *ybf) {
     }
 
 #if CONFIG_HIGHBITDEPTH && CONFIG_GLOBAL_MOTION
-    if (ybf->y_buffer_8bit) aom_free(ybf->y_buffer_8bit);
+    if (ybf->y_buffer_8bit) { aom_free(ybf->y_buffer_8bit);
+}
 #endif
 
     /* buffer_alloc isn't accessed by most functions.  Rather y_buffer,
@@ -87,12 +88,15 @@ int aom_realloc_frame_buffer(YV12_BUFFER_CONFIG *ybf, int width, int height,
 
       assert(fb != NULL);
 
-      if (external_frame_size != (size_t)external_frame_size) return -1;
+      if (external_frame_size != (size_t)external_frame_size) { return -1;
+}
 
       // Allocation to hold larger frame, or first allocation.
-      if (cb(cb_priv, (size_t)external_frame_size, fb) < 0) return -1;
+      if (cb(cb_priv, (size_t)external_frame_size, fb) < 0) { return -1;
+}
 
-      if (fb->data == NULL || fb->size < external_frame_size) return -1;
+      if (fb->data == NULL || fb->size < external_frame_size) { return -1;
+}
 
       ybf->buffer_alloc = (uint8_t *)yv12_align_addr(fb->data, 32);
 
@@ -109,10 +113,12 @@ int aom_realloc_frame_buffer(YV12_BUFFER_CONFIG *ybf, int width, int height,
       aom_free(ybf->buffer_alloc);
       ybf->buffer_alloc = NULL;
 
-      if (frame_size != (size_t)frame_size) return -1;
+      if (frame_size != (size_t)frame_size) { return -1;
+}
 
       ybf->buffer_alloc = (uint8_t *)aom_memalign(32, (size_t)frame_size);
-      if (!ybf->buffer_alloc) return -1;
+      if (!ybf->buffer_alloc) { return -1;
+}
 
       ybf->buffer_alloc_sz = (size_t)frame_size;
 
@@ -127,7 +133,8 @@ int aom_realloc_frame_buffer(YV12_BUFFER_CONFIG *ybf, int width, int height,
      * the start of the chroma rows without introducing an arbitrary gap
      * between planes, which would break the semantics of things like
      * aom_img_set_rect(). */
-    if (border & 0x1f) return -3;
+    if (border & 0x1f) { return -3;
+}
 
     ybf->y_crop_width = width;
     ybf->y_crop_height = height;
@@ -169,9 +176,11 @@ int aom_realloc_frame_buffer(YV12_BUFFER_CONFIG *ybf, int width, int height,
 
 #if CONFIG_HIGHBITDEPTH && CONFIG_GLOBAL_MOTION
     if (use_highbitdepth) {
-      if (ybf->y_buffer_8bit) aom_free(ybf->y_buffer_8bit);
+      if (ybf->y_buffer_8bit) { aom_free(ybf->y_buffer_8bit);
+}
       ybf->y_buffer_8bit = (uint8_t *)aom_memalign(32, (size_t)yplane_size);
-      if (!ybf->y_buffer_8bit) return -1;
+      if (!ybf->y_buffer_8bit) { return -1;
+}
     } else {
       assert(!ybf->y_buffer_8bit);
     }

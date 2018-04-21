@@ -76,8 +76,9 @@ XRemoteClient::XRemoteClient()
 XRemoteClient::~XRemoteClient()
 {
   MOZ_LOG(sRemoteLm, LogLevel::Debug, ("XRemoteClient::~XRemoteClient"));
-  if (mInitialized)
+  if (mInitialized) {
     Shutdown();
+}
 }
 
 // Minimize the roundtrips to the X-server
@@ -98,13 +99,15 @@ XRemoteClient::Init()
 {
   MOZ_LOG(sRemoteLm, LogLevel::Debug, ("XRemoteClient::Init"));
 
-  if (mInitialized)
+  if (mInitialized) {
     return NS_OK;
+}
 
   // try to open the display
   mDisplay = XOpenDisplay(0);
-  if (!mDisplay)
+  if (!mDisplay) {
     return NS_ERROR_FAILURE;
+}
 
   // get our atoms
   XInternAtoms(mDisplay, const_cast<char**>(XAtomNames),
@@ -130,8 +133,9 @@ XRemoteClient::Shutdown (void)
 {
   MOZ_LOG(sRemoteLm, LogLevel::Debug, ("XRemoteClient::Shutdown"));
 
-  if (!mInitialized)
+  if (!mInitialized) {
     return;
+}
 
   // shut everything down
   XCloseDisplay(mDisplay);
@@ -199,8 +203,9 @@ XRemoteClient::SendCommandLine (const char *aProgram, const char *aUsername,
 
       // if the window was destroyed, don't bother trying to free the
       // lock.
-      if (!destroyed)
+      if (!destroyed) {
           FreeLock(w); // doesn't really matter what this returns
+}
 
     }
   }
@@ -234,8 +239,9 @@ XRemoteClient::CheckWindow(Window aWindow)
   // didn't find it here so check the children of this window
   innerWindow = CheckChildren(aWindow);
 
-  if (innerWindow)
+  if (innerWindow) {
     return innerWindow;
+}
 
   return aWindow;
 }
@@ -254,8 +260,9 @@ XRemoteClient::CheckChildren(Window aWindow)
   Window retval = None;
   
   if (!XQueryTree(mDisplay, aWindow, &root, &parent, &children,
-		  &nchildren))
+		  &nchildren)) {
     return None;
+}
   
   // scan the list first before recursing into the list of windows
   // which can get quite deep.
@@ -274,8 +281,9 @@ XRemoteClient::CheckChildren(Window aWindow)
     retval = CheckChildren(children[i]);
   }
 
-  if (children)
+  if (children) {
     XFree((char *)children);
+}
 
   return retval;
 }
@@ -304,12 +312,14 @@ XRemoteClient::GetLock(Window aWindow, bool *aDestroyed)
     // allocate enough space for the string plus the terminating
     // char
     mLockData = (char *)malloc(strlen(pidstr) + strlen(sysinfobuf) + 1);
-    if (!mLockData)
+    if (!mLockData) {
       return NS_ERROR_OUT_OF_MEMORY;
+}
 
     strcpy(mLockData, pidstr);
-    if (!strcat(mLockData, sysinfobuf))
+    if (!strcat(mLockData, sysinfobuf)) {
       return NS_ERROR_FAILURE;
+}
   }
 
   do {
@@ -397,8 +407,9 @@ XRemoteClient::GetLock(Window aWindow, bool *aDestroyed)
 	}
       }
     }
-    if (data)
+    if (data) {
       XFree(data);
+}
   } while (!locked && !NS_FAILED(rv));
 
   if (waited && locked) {
@@ -453,19 +464,22 @@ XRemoteClient::FindBestWindow(const char *aProgram, const char *aUsername,
                                     &type, &format, &nitems, &bytesafter,
                                     &data_return);
 
-    if (!data_return)
+    if (!data_return) {
       continue;
+}
 
     double version = PR_strtod((char*) data_return, nullptr);
     XFree(data_return);
 
-    if (!(version >= 5.1 && version < 6))
+    if (!(version >= 5.1 && version < 6)) {
       continue;
+}
 
     data_return = 0;
 
-    if (status != Success || type == None)
+    if (status != Success || type == None) {
       continue;
+}
 
     // If someone passed in a program name, check it against this one
     // unless it's "any" in which case, we don't care.  If someone did
@@ -556,8 +570,9 @@ XRemoteClient::FindBestWindow(const char *aProgram, const char *aUsername,
     break;
   }
 
-  if (kids)
+  if (kids) {
     XFree((char *) kids);
+}
 
   return bestWindow;
 }
@@ -598,8 +613,9 @@ XRemoteClient::FreeLock(Window aWindow)
       return NS_ERROR_FAILURE;
   }
 
-  if (data)
+  if (data) {
       XFree(data);
+}
   return NS_OK;
 }
 
@@ -618,8 +634,9 @@ XRemoteClient::DoSendCommandLine(Window aWindow, int32_t argc, char **argv,
                    commandLineLength);
   free(commandLine);
 
-  if (!WaitForResponse(aWindow, aResponse, aDestroyed, mMozCommandLineAtom))
+  if (!WaitForResponse(aWindow, aResponse, aDestroyed, mMozCommandLineAtom)) {
     return NS_ERROR_FAILURE;
+}
   
   return NS_OK;
 }
@@ -720,8 +737,9 @@ XRemoteClient::WaitForResponse(Window aWindow, char **aResponse,
         done = true;
       }
 
-      if (data)
+      if (data) {
         XFree(data);
+}
     }
 
     else if (event.xany.type == PropertyNotify &&

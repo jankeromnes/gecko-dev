@@ -62,10 +62,12 @@ static void av1_dec_setup_mi(AV1_COMMON *cm) {
 
 static int av1_dec_alloc_mi(AV1_COMMON *cm, int mi_size) {
   cm->mip = aom_calloc(mi_size, sizeof(*cm->mip));
-  if (!cm->mip) return 1;
+  if (!cm->mip) { return 1;
+}
   cm->mi_alloc_size = mi_size;
   cm->mi_grid_base = (MODE_INFO **)aom_calloc(mi_size, sizeof(MODE_INFO *));
-  if (!cm->mi_grid_base) return 1;
+  if (!cm->mi_grid_base) { return 1;
+}
   return 0;
 }
 
@@ -80,7 +82,8 @@ AV1Decoder *av1_decoder_create(BufferPool *const pool) {
   AV1Decoder *volatile const pbi = aom_memalign(32, sizeof(*pbi));
   AV1_COMMON *volatile const cm = pbi ? &pbi->common : NULL;
 
-  if (!cm) return NULL;
+  if (!cm) { return NULL;
+}
 
   av1_zero(*pbi);
 
@@ -145,7 +148,8 @@ AV1Decoder *av1_decoder_create(BufferPool *const pool) {
 void av1_decoder_remove(AV1Decoder *pbi) {
   int i;
 
-  if (!pbi) return;
+  if (!pbi) { return;
+}
 
   aom_get_worker_interface()->end(&pbi->lf_worker);
   aom_free(pbi->lf_worker.data1);
@@ -184,11 +188,12 @@ aom_codec_err_t av1_copy_reference_dec(AV1Decoder *pbi, int idx,
     aom_internal_error(&cm->error, AOM_CODEC_ERROR, "No reference frame");
     return AOM_CODEC_ERROR;
   }
-  if (!equal_dimensions(cfg, sd))
+  if (!equal_dimensions(cfg, sd)) {
     aom_internal_error(&cm->error, AOM_CODEC_ERROR,
                        "Incorrect buffer dimensions");
-  else
+  } else {
     aom_yv12_copy_frame(cfg, sd);
+}
 
   return cm->error.error_code;
 }
@@ -231,7 +236,8 @@ static void swap_frame_buffers(AV1Decoder *pbi) {
 
     // Release the reference frame holding in the reference map for the decoding
     // of the next frame.
-    if (mask & 1) decrease_ref_count(old_idx, frame_bufs, pool);
+    if (mask & 1) { decrease_ref_count(old_idx, frame_bufs, pool);
+}
     cm->ref_frame_map[ref_index] = cm->next_ref_frame_map[ref_index];
     ++ref_index;
   }
@@ -294,13 +300,15 @@ int av1_receive_compressed_data(AV1Decoder *pbi, size_t size,
   // Check if the previous frame was a frame without any references to it.
   // Release frame buffer if not decoding in frame parallel mode.
   if (!cm->frame_parallel_decode && cm->new_fb_idx >= 0 &&
-      frame_bufs[cm->new_fb_idx].ref_count == 0)
+      frame_bufs[cm->new_fb_idx].ref_count == 0) {
     pool->release_fb_cb(pool->cb_priv,
                         &frame_bufs[cm->new_fb_idx].raw_frame_buffer);
+}
 
   // Find a free frame buffer. Return error if can not find any.
   cm->new_fb_idx = get_free_fb(cm);
-  if (cm->new_fb_idx == INVALID_IDX) return AOM_CODEC_MEM_ERROR;
+  if (cm->new_fb_idx == INVALID_IDX) { return AOM_CODEC_MEM_ERROR;
+}
 
   // Assign a MV array to the frame buffer.
   cm->cur_frame = &pool->frame_bufs[cm->new_fb_idx];
@@ -344,7 +352,8 @@ int av1_receive_compressed_data(AV1Decoder *pbi, size_t size,
 
         // Release the reference frame holding in the reference map for the
         // decoding of the next frame.
-        if (mask & 1) decrease_ref_count(old_idx, frame_bufs, pool);
+        if (mask & 1) { decrease_ref_count(old_idx, frame_bufs, pool);
+}
         ++ref_index;
       }
 
@@ -395,12 +404,14 @@ int av1_receive_compressed_data(AV1Decoder *pbi, size_t size,
 
 #if CONFIG_EXT_REFS
     // NOTE: It is not supposed to ref to any frame not used as reference
-    if (cm->is_reference_frame)
+    if (cm->is_reference_frame) {
 #endif  // CONFIG_EXT_REFS
       cm->prev_frame = cm->cur_frame;
+}
 
-    if (cm->seg.enabled && !cm->frame_parallel_decode)
+    if (cm->seg.enabled && !cm->frame_parallel_decode) {
       av1_swap_current_and_last_seg_map(cm);
+}
   }
 
   // Update progress in frame parallel decode.
@@ -435,12 +446,14 @@ int av1_receive_compressed_data(AV1Decoder *pbi, size_t size,
 int av1_get_raw_frame(AV1Decoder *pbi, YV12_BUFFER_CONFIG *sd) {
   AV1_COMMON *const cm = &pbi->common;
   int ret = -1;
-  if (pbi->ready_for_new_data == 1) return ret;
+  if (pbi->ready_for_new_data == 1) { return ret;
+}
 
   pbi->ready_for_new_data = 1;
 
   /* no raw frame to show!!! */
-  if (!cm->show_frame) return ret;
+  if (!cm->show_frame) { return ret;
+}
 
   *sd = *cm->frame_to_show;
   ret = 0;
@@ -451,7 +464,8 @@ int av1_get_raw_frame(AV1Decoder *pbi, YV12_BUFFER_CONFIG *sd) {
 int av1_get_frame_to_show(AV1Decoder *pbi, YV12_BUFFER_CONFIG *frame) {
   AV1_COMMON *const cm = &pbi->common;
 
-  if (!cm->show_frame || !cm->frame_to_show) return -1;
+  if (!cm->show_frame || !cm->frame_to_show) { return -1;
+}
 
   *frame = *cm->frame_to_show;
   return 0;
@@ -483,7 +497,8 @@ aom_codec_err_t av1_parse_superframe_index(const uint8_t *data, size_t data_sz,
 
     // This chunk is marked as having a superframe index but doesn't have
     // enough data for it, thus it's an invalid superframe index.
-    if (data_sz < index_sz) return AOM_CODEC_CORRUPT_FRAME;
+    if (data_sz < index_sz) { return AOM_CODEC_CORRUPT_FRAME;
+}
 
     {
       const uint8_t marker2 =
@@ -492,7 +507,8 @@ aom_codec_err_t av1_parse_superframe_index(const uint8_t *data, size_t data_sz,
       // This chunk is marked as having a superframe index but doesn't have
       // the matching marker byte at the front of the index therefore it's an
       // invalid chunk.
-      if (marker != marker2) return AOM_CODEC_CORRUPT_FRAME;
+      if (marker != marker2) { return AOM_CODEC_CORRUPT_FRAME;
+}
     }
 
     {
@@ -511,7 +527,8 @@ aom_codec_err_t av1_parse_superframe_index(const uint8_t *data, size_t data_sz,
       for (i = 0; i < frames - 1; ++i) {
         uint32_t this_sz = 0;
 
-        for (j = 0; j < mag; ++j) this_sz |= (*x++) << (j * 8);
+        for (j = 0; j < mag; ++j) { this_sz |= (*x++) << (j * 8);
+}
         this_sz += 1;
         sizes[i] = this_sz;
         frame_sz_sum += this_sz;

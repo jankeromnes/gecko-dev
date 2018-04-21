@@ -176,8 +176,9 @@ GLXLibrary::EnsureInitialized()
         (GLLibraryLoader::PlatformLookupFunction)mSymbols.fGetProcAddress;
 
     const auto fnLoadSymbols = [&](const GLLibraryLoader::SymLoadStruct* symbols) {
-        if (GLLibraryLoader::LoadSymbols(mOGLLibrary, symbols, lookupFunction))
+        if (GLLibraryLoader::LoadSymbols(mOGLLibrary, symbols, lookupFunction)) {
             return true;
+}
 
         GLLibraryLoader::ClearSymbols(symbols);
         return false;
@@ -546,8 +547,9 @@ GLContextGLX::CreateGLContext(CreateContextFlags flags, const SurfaceCaps& caps,
         if (context) {
             glContext = new GLContextGLX(flags, caps, isOffscreen, display, drawable,
                                          context, deleteDrawable, db, pixmap);
-            if (!glContext->Init())
+            if (!glContext->Init()) {
                 error = true;
+}
         } else {
             error = true;
         }
@@ -600,8 +602,9 @@ GLContextGLX::Init()
 
     // EXT_framebuffer_object is not supported on Core contexts
     // so we'll also check for ARB_framebuffer_object
-    if (!IsExtensionSupported(EXT_framebuffer_object) && !IsSupported(GLFeature::framebuffer_object))
+    if (!IsExtensionSupported(EXT_framebuffer_object) && !IsSupported(GLFeature::framebuffer_object)) {
         return false;
+}
 
     return true;
 }
@@ -650,8 +653,9 @@ GLContextGLX::IsDoubleBuffered() const
 bool
 GLContextGLX::SwapBuffers()
 {
-    if (!mDoubleBuffered)
+    if (!mDoubleBuffered) {
         return false;
+}
     mGLX->fSwapBuffers(mDisplay, mDrawable);
     return true;
 }
@@ -680,8 +684,9 @@ GLContextGLX::GetWSIInfo(nsCString* const out) const
 bool
 GLContextGLX::OverrideDrawable(GLXDrawable drawable)
 {
-    if (Screen())
+    if (Screen()) {
         Screen()->AssureBlitted();
+}
     Bool result = mGLX->fMakeCurrent(mDisplay, drawable, mContext);
     return result;
 }
@@ -834,8 +839,9 @@ ChooseConfig(GLXLibrary* glx, Display* display, int screen, const SurfaceCaps& m
 {
     ScopedXFree<GLXFBConfig>& scopedConfigArr = *out_scopedConfigArr;
 
-    if (minCaps.antialias)
+    if (minCaps.antialias) {
         return false;
+}
 
     int attribs[] = {
         LOCAL_GLX_DRAWABLE_TYPE, LOCAL_GLX_PIXMAP_BIT,
@@ -851,8 +857,9 @@ ChooseConfig(GLXLibrary* glx, Display* display, int screen, const SurfaceCaps& m
 
     int numConfigs = 0;
     scopedConfigArr = glx->fChooseFBConfig(display, screen, attribs, &numConfigs);
-    if (!scopedConfigArr || !numConfigs)
+    if (!scopedConfigArr || !numConfigs) {
         return false;
+}
 
     // Issues with glxChooseFBConfig selection and sorting:
     // * ALPHA_SIZE is sorted as 'largest total RGBA bits first'. If we don't request
@@ -873,8 +880,9 @@ ChooseConfig(GLXLibrary* glx, Display* display, int screen, const SurfaceCaps& m
             continue;
         }
 
-        if (!visid)
+        if (!visid) {
             continue;
+}
 
         *out_config = curConfig;
         *out_visid = visid;
@@ -990,8 +998,9 @@ CreateOffscreenPixmapContext(CreateContextFlags flags, const IntSize& size,
                              const SurfaceCaps& minCaps, nsACString* const out_failureId)
 {
     GLXLibrary* glx = &sGLXLibrary;
-    if (!glx->EnsureInitialized())
+    if (!glx->EnsureInitialized()) {
         return nullptr;
+}
 
     Display* display = DefaultXDisplay();
     int screen = DefaultScreen(display);
@@ -1030,8 +1039,9 @@ CreateOffscreenPixmapContext(CreateContextFlags flags, const IntSize& size,
     }
 
     bool serverError = xErrorHandler.SyncAndGetError(display);
-    if (error || serverError)
+    if (error || serverError) {
         return nullptr;
+}
 
     return GLContextGLX::CreateGLContext(flags, minCaps, true, display, pixmap, config,
                                          true, surface);
@@ -1061,8 +1071,9 @@ GLContextProviderGLX::CreateOffscreen(const IntSize& size,
 
     RefPtr<GLContext> gl;
     gl = CreateOffscreenPixmapContext(flags, size, minBackbufferCaps, out_failureId);
-    if (!gl)
+    if (!gl) {
         return nullptr;
+}
 
     if (!gl->InitOffscreen(size, minCaps)) {
         *out_failureId = NS_LITERAL_CSTRING("FEATURE_FAILURE_GLX_INIT");

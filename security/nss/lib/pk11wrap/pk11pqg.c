@@ -102,13 +102,15 @@ PK11_PQG_ParamGenV2(unsigned int L, unsigned int N,
     if (primeBits > 1024) {
         CK_MECHANISM_INFO mechanism_info;
 
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_EnterSlotMonitor(slot);
+}
         crv = PK11_GETTAB(slot)->C_GetMechanismInfo(slot->slotID,
                                                     CKM_DSA_PARAMETER_GEN,
                                                     &mechanism_info);
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
         /* a bug in the old softoken left CKM_DSA_PARAMETER_GEN off of the
          * mechanism List. If we get a failure asking for this value, we know
          * it can't handle DSA2 */
@@ -348,8 +350,9 @@ PK11_PQG_VerifyParams(const PQGParams *params, const PQGVerify *vfy,
 extern void
 PK11_PQG_DestroyParams(PQGParams *params)
 {
-    if (params == NULL)
+    if (params == NULL) {
         return;
+}
     if (params->arena != NULL) {
         PORT_FreeArena(params->arena, PR_FALSE); /* don't zero it */
     } else {
@@ -366,8 +369,9 @@ PK11_PQG_DestroyParams(PQGParams *params)
 extern void
 PK11_PQG_DestroyVerify(PQGVerify *vfy)
 {
-    if (vfy == NULL)
+    if (vfy == NULL) {
         return;
+}
     if (vfy->arena != NULL) {
         PORT_FreeArena(vfy->arena, PR_FALSE); /* don't zero it */
     } else {
@@ -393,32 +397,38 @@ PK11_PQG_NewParams(const SECItem *prime, const SECItem *subPrime,
     SECStatus status;
 
     arena = PORT_NewArena(PQG_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         goto loser;
+}
 
     dest = (PQGParams *)PORT_ArenaZAlloc(arena, sizeof(PQGParams));
-    if (dest == NULL)
+    if (dest == NULL) {
         goto loser;
+}
 
     dest->arena = arena;
 
     status = SECITEM_CopyItem(arena, &dest->prime, prime);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     status = SECITEM_CopyItem(arena, &dest->subPrime, subPrime);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     status = SECITEM_CopyItem(arena, &dest->base, base);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     return dest;
 
 loser:
-    if (arena != NULL)
+    if (arena != NULL) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return NULL;
 }
 
@@ -466,29 +476,34 @@ PK11_PQG_NewVerify(unsigned int counter, const SECItem *seed,
     SECStatus status;
 
     arena = PORT_NewArena(PQG_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         goto loser;
+}
 
     dest = (PQGVerify *)PORT_ArenaZAlloc(arena, sizeof(PQGVerify));
-    if (dest == NULL)
+    if (dest == NULL) {
         goto loser;
+}
 
     dest->arena = arena;
     dest->counter = counter;
 
     status = SECITEM_CopyItem(arena, &dest->seed, seed);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     status = SECITEM_CopyItem(arena, &dest->h, h);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     return dest;
 
 loser:
-    if (arena != NULL)
+    if (arena != NULL) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return NULL;
 }
 

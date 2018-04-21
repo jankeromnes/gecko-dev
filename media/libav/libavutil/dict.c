@@ -40,26 +40,32 @@ AVDictionaryEntry *av_dict_get(const AVDictionary *m, const char *key,
 {
     unsigned int i, j;
 
-    if (!m)
+    if (!m) {
         return NULL;
+}
 
-    if (prev)
+    if (prev) {
         i = prev - m->elems + 1;
-    else
+    } else {
         i = 0;
+}
 
     for (; i < m->count; i++) {
         const char *s = m->elems[i].key;
-        if (flags & AV_DICT_MATCH_CASE)
-            for (j = 0; s[j] == key[j] && key[j]; j++)
+        if (flags & AV_DICT_MATCH_CASE) {
+            for (j = 0; s[j] == key[j] && key[j]; j++) {
                 ;
-        else
-            for (j = 0; av_toupper(s[j]) == av_toupper(key[j]) && key[j]; j++)
+}
+        } else {
+            for (j = 0; av_toupper(s[j]) == av_toupper(key[j]) && key[j]; j++) {
                 ;
-        if (key[j])
+}
+        if (key[j]) {
             continue;
-        if (s[j] && !(flags & AV_DICT_IGNORE_SUFFIX))
+}
+        if (s[j] && !(flags & AV_DICT_IGNORE_SUFFIX)) {
             continue;
+}
         return &m->elems[i];
     }
     return NULL;
@@ -72,44 +78,52 @@ int av_dict_set(AVDictionary **pm, const char *key, const char *value,
     AVDictionaryEntry *tag = av_dict_get(m, key, NULL, flags);
     char *oldval = NULL;
 
-    if (!m)
+    if (!m) {
         m = *pm = av_mallocz(sizeof(*m));
+}
 
     if (tag) {
         if (flags & AV_DICT_DONT_OVERWRITE) {
-            if (flags & AV_DICT_DONT_STRDUP_KEY) av_free(key);
-            if (flags & AV_DICT_DONT_STRDUP_VAL) av_free(value);
+            if (flags & AV_DICT_DONT_STRDUP_KEY) { av_free(key);
+}
+            if (flags & AV_DICT_DONT_STRDUP_VAL) { av_free(value);
+}
             return 0;
         }
-        if (flags & AV_DICT_APPEND)
+        if (flags & AV_DICT_APPEND) {
             oldval = tag->value;
-        else
+        } else {
             av_free(tag->value);
+}
         av_free(tag->key);
         *tag = m->elems[--m->count];
     } else {
         AVDictionaryEntry *tmp = av_realloc(m->elems,
                                             (m->count + 1) * sizeof(*m->elems));
-        if (tmp)
+        if (tmp) {
             m->elems = tmp;
-        else
+        } else {
             return AVERROR(ENOMEM);
+}
     }
     if (value) {
-        if (flags & AV_DICT_DONT_STRDUP_KEY)
+        if (flags & AV_DICT_DONT_STRDUP_KEY) {
             m->elems[m->count].key = key;
-        else
+        } else {
             m->elems[m->count].key = av_strdup(key);
+}
         if (flags & AV_DICT_DONT_STRDUP_VAL) {
             m->elems[m->count].value = value;
         } else if (oldval && flags & AV_DICT_APPEND) {
             int len = strlen(oldval) + strlen(value) + 1;
-            if (!(oldval = av_realloc(oldval, len)))
+            if (!(oldval = av_realloc(oldval, len))) {
                 return AVERROR(ENOMEM);
+}
             av_strlcat(oldval, value, len);
             m->elems[m->count].value = oldval;
-        } else
+        } else {
             m->elems[m->count].value = av_strdup(value);
+}
         m->count++;
     }
     if (!m->count) {
@@ -133,10 +147,11 @@ static int parse_key_value_pair(AVDictionary **pm, const char **buf,
         val = av_get_token(buf, pairs_sep);
     }
 
-    if (key && *key && val && *val)
+    if (key && *key && val && *val) {
         ret = av_dict_set(pm, key, val, flags);
-    else
+    } else {
         ret = AVERROR(EINVAL);
+}
 
     av_freep(&key);
     av_freep(&val);
@@ -150,18 +165,21 @@ int av_dict_parse_string(AVDictionary **pm, const char *str,
 {
     int ret;
 
-    if (!str)
+    if (!str) {
         return 0;
+}
 
     /* ignore STRDUP flags */
     flags &= ~(AV_DICT_DONT_STRDUP_KEY | AV_DICT_DONT_STRDUP_VAL);
 
     while (*str) {
-        if ((ret = parse_key_value_pair(pm, &str, key_val_sep, pairs_sep, flags)) < 0)
+        if ((ret = parse_key_value_pair(pm, &str, key_val_sep, pairs_sep, flags)) < 0) {
             return ret;
+}
 
-        if (*str)
+        if (*str) {
             str++;
+}
     }
 
     return 0;
@@ -185,6 +203,7 @@ void av_dict_copy(AVDictionary **dst, const AVDictionary *src, int flags)
 {
     AVDictionaryEntry *t = NULL;
 
-    while ((t = av_dict_get(src, "", t, AV_DICT_IGNORE_SUFFIX)))
+    while ((t = av_dict_get(src, "", t, AV_DICT_IGNORE_SUFFIX))) {
         av_dict_set(dst, t->key, t->value, flags);
+}
 }

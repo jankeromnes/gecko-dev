@@ -41,10 +41,12 @@ class SocketTransportServiceTest : public MtransportTest {
   }
 
   ~SocketTransportServiceTest() {
-    if (readpipe_)
+    if (readpipe_) {
       PR_Close(readpipe_);
-    if (writepipe_)
+}
+    if (writepipe_) {
       PR_Close(writepipe_);
+}
   }
 
   void SetUp();

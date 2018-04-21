@@ -195,10 +195,11 @@ int ff_flac_is_extradata_valid(AVCodecContext *avctx,
 
 void ff_flac_set_channel_layout(AVCodecContext *avctx)
 {
-    if (avctx->channels <= FF_ARRAY_ELEMS(flac_channel_layouts))
+    if (avctx->channels <= FF_ARRAY_ELEMS(flac_channel_layouts)) {
         avctx->channel_layout = flac_channel_layouts[avctx->channels - 1];
-    else
+    } else {
         avctx->channel_layout = 0;
+}
 }
 
 int ff_flac_parse_streaminfo(AVCodecContext *avctx, struct FLACStreaminfo *s,
@@ -234,8 +235,9 @@ int ff_flac_parse_streaminfo(AVCodecContext *avctx, struct FLACStreaminfo *s,
     avctx->bits_per_raw_sample = s->bps;
 
     if (!avctx->channel_layout ||
-        av_get_channel_layout_nb_channels(avctx->channel_layout) != avctx->channels)
+        av_get_channel_layout_nb_channels(avctx->channel_layout) != avctx->channels) {
         ff_flac_set_channel_layout(avctx);
+}
 
     s->samples = get_bits64(&gb, 36);
 

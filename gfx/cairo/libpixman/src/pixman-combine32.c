@@ -77,8 +77,9 @@ combine_mask_value_ca (uint32_t *src, const uint32_t *mask)
 	return;
     }
 
-    if (a == ~0)
+    if (a == ~0) {
 	return;
+}
 
     x = *(src);
     UN8x4_MUL_UN8x4 (x, a);
@@ -91,12 +92,14 @@ combine_mask_alpha_ca (const uint32_t *src, uint32_t *mask)
     uint32_t a = *(mask);
     uint32_t x;
 
-    if (!a)
+    if (!a) {
 	return;
+}
 
     x = *(src) >> A_SHIFT;
-    if (x == MASK)
+    if (x == MASK) {
 	return;
+}
 
     if (a == ~0)
     {
@@ -127,14 +130,16 @@ combine_mask (const uint32_t *src, const uint32_t *mask, int i)
     {
 	m = *(mask + i) >> A_SHIFT;
 
-	if (!m)
+	if (!m) {
 	    return 0;
+}
     }
 
     s = *(src + i);
 
-    if (mask)
+    if (mask) {
 	UN8x4_MUL_UN8 (s, m);
+}
 
     return s;
 }
@@ -631,10 +636,11 @@ blend_overlay (uint32_t dca, uint32_t da, uint32_t sca, uint32_t sa)
 {
     uint32_t rca;
 
-    if (2 * dca < da)
+    if (2 * dca < da) {
 	rca = 2 * sca * dca;
-    else
+    } else {
 	rca = sa * da - 2 * (da - dca) * (sa - sca);
+}
     return DIV_ONE_UN8 (rca);
 }
 
@@ -735,10 +741,11 @@ PDF_SEPARABLE_BLEND_MODE (color_burn)
 static inline uint32_t
 blend_hard_light (uint32_t dca, uint32_t da, uint32_t sca, uint32_t sa)
 {
-    if (2 * sca < sa)
+    if (2 * sca < sa) {
 	return DIV_ONE_UN8 (2 * sca * dca);
-    else
+    } else {
 	return DIV_ONE_UN8 (sa * da - 2 * (da - dca) * (sa - sca));
+}
 }
 
 PDF_SEPARABLE_BLEND_MODE (hard_light)
@@ -767,10 +774,11 @@ blend_soft_light (uint32_t dca_org,
 
     if (2 * sca < sa)
     {
-	if (da == 0)
+	if (da == 0) {
 	    rca = dca * sa;
-	else
+	} else {
 	    rca = dca * sa - dca * (da - dca) * (sa - 2 * sca) / da;
+}
     }
     else if (da == 0)
     {
@@ -800,10 +808,11 @@ blend_difference (uint32_t dca, uint32_t da, uint32_t sca, uint32_t sa)
     uint32_t dcasa = dca * sa;
     uint32_t scada = sca * da;
 
-    if (scada < dcasa)
+    if (scada < dcasa) {
 	return DIV_ONE_UN8 (dcasa - scada);
-    else
+    } else {
 	return DIV_ONE_UN8 (scada - dcasa);
+}
 }
 
 PDF_SEPARABLE_BLEND_MODE (difference)
@@ -1235,8 +1244,9 @@ combine_disjoint_out_part (uint8_t a, uint8_t b)
     /* min (1, (1-b) / a) */
 
     b = ~b;                 /* 1 - b */
-    if (b >= a)             /* 1 - b >= a -> (1-b)/a >= 1 */
+    if (b >= a) {             /* 1 - b >= a -> (1-b)/a >= 1 */
 	return MASK;        /* 1 */
+}
     return DIV_UN8 (b, a);     /* (1-b) / a */
 }
 
@@ -1249,8 +1259,9 @@ combine_disjoint_in_part (uint8_t a, uint8_t b)
     /*  = 1 - min (1, (1-b)/a) */
 
     b = ~b;                 /* 1 - b */
-    if (b >= a)             /* 1 - b >= a -> (1-b)/a >= 1 */
+    if (b >= a) {             /* 1 - b >= a -> (1-b)/a >= 1 */
 	return 0;           /* 1 - 1 */
+}
     return ~DIV_UN8(b, a);    /* 1 - (1-b) / a */
 }
 
@@ -1263,8 +1274,9 @@ combine_conjoint_out_part (uint8_t a, uint8_t b)
 
     /* min (1, (1-b) / a) */
 
-    if (b >= a)             /* b >= a -> b/a >= 1 */
+    if (b >= a) {             /* b >= a -> b/a >= 1 */
 	return 0x00;        /* 0 */
+}
     return ~DIV_UN8(b, a);    /* 1 - b/a */
 }
 
@@ -1274,8 +1286,9 @@ combine_conjoint_in_part (uint8_t a, uint8_t b)
 {
     /* min (1,b/a) */
 
-    if (b >= a)             /* b >= a -> b/a >= 1 */
+    if (b >= a) {             /* b >= a -> b/a >= 1 */
 	return MASK;        /* 1 */
+}
     return DIV_UN8 (b, a);     /* b/a */
 }
 
@@ -1740,8 +1753,9 @@ combine_in_ca (pixman_implementation_t *imp,
 	    s = *(src + i);
 	    combine_mask_value_ca (&s, &m);
 
-	    if (a != MASK)
+	    if (a != MASK) {
 		UN8x4_MUL_UN8 (s, a);
+}
 	}
 
 	*(dest + i) = s;
@@ -1805,8 +1819,9 @@ combine_out_ca (pixman_implementation_t *imp,
 	    s = *(src + i);
 	    combine_mask_value_ca (&s, &m);
 
-	    if (a != MASK)
+	    if (a != MASK) {
 		UN8x4_MUL_UN8 (s, a);
+}
 	}
 
 	*(dest + i) = s;
@@ -1984,25 +1999,29 @@ combine_saturate_ca (pixman_implementation_t *imp,
 	sb =  m             & MASK;
 	da = ~d >> A_SHIFT;
 
-	if (sb <= da)
+	if (sb <= da) {
 	    m = ADD (s, d, 0, t);
-	else
+	} else {
 	    m = GENERIC (s, d, 0, (da << G_SHIFT) / sb, MASK, t, u, v);
+}
 
-	if (sg <= da)
+	if (sg <= da) {
 	    n = ADD (s, d, G_SHIFT, t);
-	else
+	} else {
 	    n = GENERIC (s, d, G_SHIFT, (da << G_SHIFT) / sg, MASK, t, u, v);
+}
 
-	if (sr <= da)
+	if (sr <= da) {
 	    o = ADD (s, d, R_SHIFT, t);
-	else
+	} else {
 	    o = GENERIC (s, d, R_SHIFT, (da << G_SHIFT) / sr, MASK, t, u, v);
+}
 
-	if (sa <= da)
+	if (sa <= da) {
 	    p = ADD (s, d, A_SHIFT, t);
-	else
+	} else {
 	    p = GENERIC (s, d, A_SHIFT, (da << G_SHIFT) / sa, MASK, t, u, v);
+}
 
 	*(dest + i) = m | n | o | p;
     }

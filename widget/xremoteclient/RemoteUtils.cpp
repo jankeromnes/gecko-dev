@@ -34,8 +34,9 @@
 static char*
 estrcpy(const char* s, char* d)
 {
-  while (*s)
+  while (*s) {
     *d++ = *s++;
+}
 
   *d++ = '\0';
   return d;
@@ -50,8 +51,9 @@ ConstructCommandLine(int32_t argc, char **argv,
                      int *aCommandLineLength)
 {
   char cwdbuf[MAX_PATH];
-  if (!getcwd(cwdbuf, MAX_PATH))
+  if (!getcwd(cwdbuf, MAX_PATH)) {
     return nullptr;
+}
 
   // the commandline property is constructed as an array of int32_t
   // followed by a series of null-terminated strings:
@@ -72,8 +74,9 @@ ConstructCommandLine(int32_t argc, char **argv,
 
   auto* buffer = (int32_t*) malloc(argvlen + argc + 1 +
                                    sizeof(int32_t) * (argc + 1));
-  if (!buffer)
+  if (!buffer) {
     return nullptr;
+}
 
   buffer[0] = TO_LITTLE_ENDIAN32(argc);
 

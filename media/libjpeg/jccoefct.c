@@ -81,10 +81,11 @@ start_iMCU_row (j_compress_ptr cinfo)
   if (cinfo->comps_in_scan > 1) {
     coef->MCU_rows_per_iMCU_row = 1;
   } else {
-    if (coef->iMCU_row_num < (cinfo->total_iMCU_rows-1))
+    if (coef->iMCU_row_num < (cinfo->total_iMCU_rows-1)) {
       coef->MCU_rows_per_iMCU_row = cinfo->cur_comp_info[0]->v_samp_factor;
-    else
+    } else {
       coef->MCU_rows_per_iMCU_row = cinfo->cur_comp_info[0]->last_row_height;
+}
   }
 
   coef->mcu_ctr = 0;
@@ -106,19 +107,22 @@ start_pass_coef (j_compress_ptr cinfo, J_BUF_MODE pass_mode)
 
   switch (pass_mode) {
   case JBUF_PASS_THRU:
-    if (coef->whole_image[0] != NULL)
+    if (coef->whole_image[0] != NULL) {
       ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
     coef->pub.compress_data = compress_data;
     break;
 #ifdef FULL_COEF_BUFFER_SUPPORTED
   case JBUF_SAVE_AND_PASS:
-    if (coef->whole_image[0] == NULL)
+    if (coef->whole_image[0] == NULL) {
       ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
     coef->pub.compress_data = compress_first_pass;
     break;
   case JBUF_CRANK_DEST:
-    if (coef->whole_image[0] == NULL)
+    if (coef->whole_image[0] == NULL) {
       ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
     coef->pub.compress_data = compress_output;
     break;
 #endif
@@ -261,19 +265,21 @@ compress_first_pass (j_compress_ptr cinfo, JSAMPIMAGE input_buf)
        coef->iMCU_row_num * compptr->v_samp_factor,
        (JDIMENSION) compptr->v_samp_factor, TRUE);
     /* Count non-dummy DCT block rows in this iMCU row. */
-    if (coef->iMCU_row_num < last_iMCU_row)
+    if (coef->iMCU_row_num < last_iMCU_row) {
       block_rows = compptr->v_samp_factor;
-    else {
+    } else {
       /* NB: can't use last_row_height here, since may not be set! */
       block_rows = (int) (compptr->height_in_blocks % compptr->v_samp_factor);
-      if (block_rows == 0) block_rows = compptr->v_samp_factor;
+      if (block_rows == 0) { block_rows = compptr->v_samp_factor;
+}
     }
     blocks_across = compptr->width_in_blocks;
     h_samp_factor = compptr->h_samp_factor;
     /* Count number of dummy blocks to be added at the right margin. */
     ndummy = (int) (blocks_across % h_samp_factor);
-    if (ndummy > 0)
+    if (ndummy > 0) {
       ndummy = h_samp_factor - ndummy;
+}
     /* Perform DCT for all non-dummy blocks in this iMCU row.  Each call
      * on forward_DCT processes a complete horizontal row of DCT blocks.
      */

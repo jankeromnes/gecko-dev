@@ -48,15 +48,19 @@ __ieee754_log2(double x)
 
 	k=0;
 	if (hx < 0x00100000) {			/* x < 2**-1022  */
-	    if (((hx&0x7fffffff)|lx)==0)
+	    if (((hx&0x7fffffff)|lx)==0) {
 		return -two54/vzero;		/* log(+-0)=-inf */
-	    if (hx<0) return (x-x)/zero;	/* log(-#) = NaN */
+}
+	    if (hx<0) { return (x-x)/zero;	/* log(-#) = NaN */
+}
 	    k -= 54; x *= two54; /* subnormal number, scale up x */
 	    GET_HIGH_WORD(hx,x);
 	}
-	if (hx >= 0x7ff00000) return x+x;
-	if (hx == 0x3ff00000 && lx == 0)
+	if (hx >= 0x7ff00000) { return x+x;
+}
+	if (hx == 0x3ff00000 && lx == 0) {
 	    return zero;			/* log(1) = +0 */
+}
 	k += (hx>>20)-1023;
 	hx &= 0x000fffff;
 	i = (hx+0x95f64)&0x100000;

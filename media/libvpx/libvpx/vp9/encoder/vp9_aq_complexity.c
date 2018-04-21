@@ -81,7 +81,8 @@ void vp9_setup_in_frame_q_adj(VP9_COMP *cpi) {
     for (segment = 0; segment < AQ_C_SEGMENTS; ++segment) {
       int qindex_delta;
 
-      if (segment == DEFAULT_AQ2_SEG) continue;
+      if (segment == DEFAULT_AQ2_SEG) { continue;
+}
 
       qindex_delta = vp9_compute_qdelta_by_rate(
           &cpi->rc, cm->frame_type, cm->base_qindex,

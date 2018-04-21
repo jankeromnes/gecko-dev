@@ -42,8 +42,9 @@ uint32_t VR_InitInternal( EVRInitError *peError, vr::EVRApplicationType eApplica
 		g_pHmdSystem = NULL;
 		g_pVRModule = NULL;
 
-		if (peError)
+		if (peError) {
 			*peError = err;
+}
 
 		return 0;
 	}
@@ -55,14 +56,16 @@ uint32_t VR_InitInternal( EVRInitError *peError, vr::EVRApplicationType eApplica
 		g_pHmdSystem = NULL;
 		g_pVRModule = NULL;
 
-		if (peError)
+		if (peError) {
 			*peError = err;
+}
 
 		return 0;
 	}
 
-	if (peError)
+	if (peError) {
 		*peError = VRInitError_None;
+}
 
 	return ++g_nVRToken;
 }
@@ -154,8 +157,9 @@ void *VR_GetGenericInterface(const char *pchInterfaceVersion, EVRInitError *peEr
 {
 	if (!g_pHmdSystem)
 	{
-		if (peError)
+		if (peError) {
 			*peError = vr::VRInitError_Init_NotInitialized;
+}
 		return NULL;
 	}
 
@@ -183,8 +187,9 @@ bool VR_IsHmdPresent()
 	{
 		// otherwise we need to do a bit more work
 		EVRInitError err = VR_LoadHmdSystemInternal();
-		if( err != VRInitError_None )
+		if( err != VRInitError_None ) {
 			return false;
+}
 
 		bool bHasHmd = g_pHmdSystem->BIsHmdPresent();
 
@@ -255,20 +260,22 @@ const char *VR_RuntimePath()
 /** Returns the symbol version of an HMD error. */
 const char *VR_GetVRInitErrorAsSymbol( EVRInitError error )
 {
-	if( g_pHmdSystem )
+	if( g_pHmdSystem ) {
 		return g_pHmdSystem->GetIDForVRInitError( error );
-	else
+	} else {
 		return GetIDForVRInitError( error );
+}
 }
 
 
 /** Returns the english string version of an HMD error. */
 const char *VR_GetVRInitErrorAsEnglishDescription( EVRInitError error )
 {
-	if ( g_pHmdSystem )
+	if ( g_pHmdSystem ) {
 		return g_pHmdSystem->GetEnglishStringForHmdError( error );
-	else
+	} else {
 		return GetEnglishStringForHmdError( error );
+}
 }
 
 

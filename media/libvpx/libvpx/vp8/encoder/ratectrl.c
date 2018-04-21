@@ -343,7 +343,8 @@ static void calc_iframe_target_size(VP8_COMP *cpi) {
     }
 
     /* Minimal target size is |2* per_frame_bandwidth|. */
-    if (kf_boost < 16) kf_boost = 16;
+    if (kf_boost < 16) { kf_boost = 16;
+}
 
     target = ((16 + kf_boost) * cpi->per_frame_bandwidth) >> 4;
   }
@@ -352,7 +353,8 @@ static void calc_iframe_target_size(VP8_COMP *cpi) {
     unsigned int max_rate =
         cpi->per_frame_bandwidth * cpi->oxcf.rc_max_intra_bitrate_pct / 100;
 
-    if (target > max_rate) target = max_rate;
+    if (target > max_rate) { target = max_rate;
+}
   }
 
   cpi->this_frame_target = (int)target;
@@ -360,7 +362,8 @@ static void calc_iframe_target_size(VP8_COMP *cpi) {
   /* TODO: if we separate rate targeting from Q targetting, move this.
    * Reset the active worst quality to the baseline value for key frames.
    */
-  if (cpi->pass != 2) cpi->active_worst_quality = cpi->worst_quality;
+  if (cpi->pass != 2) { cpi->active_worst_quality = cpi->worst_quality;
+}
 
 #if 0
     {
@@ -398,7 +401,8 @@ static void calc_gf_params(VP8_COMP *cpi) {
                       100 / tot_mbs;
   }
 
-  if (pct_gf_active > gf_frame_useage) gf_frame_useage = pct_gf_active;
+  if (pct_gf_active > gf_frame_useage) { gf_frame_useage = pct_gf_active;
+}
 
   /* Not two pass */
   if (cpi->pass != 2) {
@@ -478,7 +482,8 @@ static void calc_gf_params(VP8_COMP *cpi) {
      * safe by keeping numbers down.
      */
     if (!cpi->sf.recode_loop) {
-      if (cpi->compressor_speed == 2) Boost = Boost / 2;
+      if (cpi->compressor_speed == 2) { Boost = Boost / 2;
+}
     }
 
     /* Apply an upper limit based on Q for 1 pass encodes */
@@ -505,13 +510,17 @@ static void calc_gf_params(VP8_COMP *cpi) {
     {
       cpi->frames_till_gf_update_due = cpi->baseline_gf_interval;
 
-      if (cpi->last_boost > 750) cpi->frames_till_gf_update_due++;
+      if (cpi->last_boost > 750) { cpi->frames_till_gf_update_due++;
+}
 
-      if (cpi->last_boost > 1000) cpi->frames_till_gf_update_due++;
+      if (cpi->last_boost > 1000) { cpi->frames_till_gf_update_due++;
+}
 
-      if (cpi->last_boost > 1250) cpi->frames_till_gf_update_due++;
+      if (cpi->last_boost > 1250) { cpi->frames_till_gf_update_due++;
+}
 
-      if (cpi->last_boost >= 1500) cpi->frames_till_gf_update_due++;
+      if (cpi->last_boost >= 1500) { cpi->frames_till_gf_update_due++;
+}
 
       if (gf_interval_table[gf_frame_useage] > cpi->frames_till_gf_update_due) {
         cpi->frames_till_gf_update_due = gf_interval_table[gf_frame_useage];
@@ -818,7 +827,8 @@ static void calc_pframe_target_size(VP8_COMP *cpi) {
         cpi->active_worst_quality = cpi->active_best_quality + 1;
       }
 
-      if (cpi->active_worst_quality > 127) cpi->active_worst_quality = 127;
+      if (cpi->active_worst_quality > 127) { cpi->active_worst_quality = 127;
+}
     }
     /* Unbuffered mode (eg. video conferencing) */
     else {
@@ -904,7 +914,8 @@ static void calc_pframe_target_size(VP8_COMP *cpi) {
                           100 / tot_mbs;
       }
 
-      if (pct_gf_active > gf_frame_useage) gf_frame_useage = pct_gf_active;
+      if (pct_gf_active > gf_frame_useage) { gf_frame_useage = pct_gf_active;
+}
 
       /* Is a fixed manual GF frequency being used */
       if (cpi->auto_gold) {
@@ -1071,7 +1082,8 @@ void vp8_update_rate_correction_factors(VP8_COMP *cpi, int damp_var) {
       projected_size_based_on_q = (int)(Factor * projected_size_based_on_q);
       Factor += factor_adjustment;
 
-      if (Factor >= 0.999) Factor = 0.999;
+      if (Factor >= 0.999) { Factor = 0.999;
+}
     }
   }
 
@@ -1259,10 +1271,12 @@ int vp8_regulate_q(VP8_COMP *cpi, int target_bits_per_frame) {
         bits_per_mb_at_this_q = (int)(Factor * bits_per_mb_at_this_q);
         Factor += factor_adjustment;
 
-        if (Factor >= 0.999) Factor = 0.999;
+        if (Factor >= 0.999) { Factor = 0.999;
+}
 
         /* Break out if we get down to the target rate */
-        if (bits_per_mb_at_this_q <= target_bits_per_mb) break;
+        if (bits_per_mb_at_this_q <= target_bits_per_mb) { break;
+}
       }
     }
   }
@@ -1316,7 +1330,8 @@ static int estimate_keyframe_frequency(VP8_COMP *cpi) {
   }
   // TODO (marpan): Given the checks above, |av_key_frame_frequency|
   // should always be above 0. But for now we keep the sanity check in.
-  if (av_key_frame_frequency == 0) av_key_frame_frequency = 1;
+  if (av_key_frame_frequency == 0) { av_key_frame_frequency = 1;
+}
   return av_key_frame_frequency;
 }
 
@@ -1418,7 +1433,8 @@ void vp8_compute_frame_size_bounds(VP8_COMP *cpi, int *frame_under_shoot_limit,
      */
     *frame_over_shoot_limit += 200;
     *frame_under_shoot_limit -= 200;
-    if (*frame_under_shoot_limit < 0) *frame_under_shoot_limit = 0;
+    if (*frame_under_shoot_limit < 0) { *frame_under_shoot_limit = 0;
+}
   }
 }
 

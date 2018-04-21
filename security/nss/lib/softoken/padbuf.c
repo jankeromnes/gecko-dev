@@ -41,8 +41,9 @@ CBC_PadBuffer(PLArenaPool *arena, unsigned char *inbuf, unsigned int inlen,
     }
 
     des_pad_len = des_len - inlen;
-    for (i = inlen; i < des_len; i++)
+    for (i = inlen; i < des_len; i++) {
         outbuf[i] = des_pad_len;
+}
 
     *outlen = des_len;
     return outbuf;

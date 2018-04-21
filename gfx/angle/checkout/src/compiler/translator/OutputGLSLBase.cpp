@@ -124,12 +124,13 @@ void TOutputGLSLBase::writeTriplet(Visit visit,
                                    const char *postStr)
 {
     TInfoSinkBase &out = objSink();
-    if (visit == PreVisit && preStr)
+    if (visit == PreVisit && preStr) {
         out << preStr;
-    else if (visit == InVisit && inStr)
+    } else if (visit == InVisit && inStr) {
         out << inStr;
-    else if (visit == PostVisit && postStr)
+    } else if (visit == PostVisit && postStr) {
         out << postStr;
+}
 }
 
 void TOutputGLSLBase::writeBuiltInFunctionTriplet(Visit visit,
@@ -322,8 +323,9 @@ void TOutputGLSLBase::writeVariableType(const TType &type)
     }
     else
     {
-        if (writeVariablePrecision(type.getPrecision()))
+        if (writeVariablePrecision(type.getPrecision())) {
             out << " ";
+}
         out << getTypeName(type);
     }
 }
@@ -339,14 +341,17 @@ void TOutputGLSLBase::writeFunctionParameters(const TIntermSequence &args)
         const TType &type = arg->getType();
         writeVariableType(type);
 
-        if (arg->variable().symbolType() != SymbolType::Empty)
+        if (arg->variable().symbolType() != SymbolType::Empty) {
             out << " " << hashName(&arg->variable());
-        if (type.isArray())
+}
+        if (type.isArray()) {
             out << ArrayString(type);
+}
 
         // Put a comma if this is not the last argument.
-        if (iter != args.end() - 1)
+        if (iter != args.end() - 1) {
             out << ", ";
+}
     }
 }
 
@@ -366,8 +371,9 @@ const TConstantUnion *TOutputGLSLBase::writeConstantUnion(const TType &type,
             const TType *fieldType = fields[i]->type();
             ASSERT(fieldType != nullptr);
             pConstUnion = writeConstantUnion(*fieldType, pConstUnion);
-            if (i != fields.size() - 1)
+            if (i != fields.size() - 1) {
                 out << ", ";
+}
         }
         out << ")";
     }
@@ -375,8 +381,9 @@ const TConstantUnion *TOutputGLSLBase::writeConstantUnion(const TType &type,
     {
         size_t size    = type.getObjectSize();
         bool writeType = size > 1;
-        if (writeType)
+        if (writeType) {
             out << getTypeName(type) << "(";
+}
         for (size_t i = 0; i < size; ++i, ++pConstUnion)
         {
             switch (pConstUnion->getType())
@@ -399,11 +406,13 @@ const TConstantUnion *TOutputGLSLBase::writeConstantUnion(const TType &type,
                 default:
                     UNREACHABLE();
             }
-            if (i != size - 1)
+            if (i != size - 1) {
                 out << ", ";
+}
         }
-        if (writeType)
+        if (writeType) {
             out << ")";
+}
     }
     return pConstUnion;
 }
@@ -435,8 +444,9 @@ void TOutputGLSLBase::visitSymbol(TIntermSymbol *node)
     TInfoSinkBase &out = objSink();
     out << hashName(&node->variable());
 
-    if (mDeclaringVariable && node->getType().isArray())
+    if (mDeclaringVariable && node->getType().isArray()) {
         out << ArrayString(node->getType());
+}
 }
 
 void TOutputGLSLBase::visitConstantUnion(TIntermConstantUnion *node)
@@ -519,20 +529,22 @@ bool TOutputGLSLBase::visitBinary(Visit visit, TIntermBinary *node)
             {
                 if (visit == InVisit)
                 {
-                    if (mClampingStrategy == SH_CLAMP_WITH_CLAMP_INTRINSIC)
+                    if (mClampingStrategy == SH_CLAMP_WITH_CLAMP_INTRINSIC) {
                         out << "[int(clamp(float(";
-                    else
+                    } else {
                         out << "[webgl_int_clamp(";
+}
                 }
                 else if (visit == PostVisit)
                 {
                     TIntermTyped *left = node->getLeft();
                     TType leftType     = left->getType();
 
-                    if (mClampingStrategy == SH_CLAMP_WITH_CLAMP_INTRINSIC)
+                    if (mClampingStrategy == SH_CLAMP_WITH_CLAMP_INTRINSIC) {
                         out << "), 0.0, float(";
-                    else
+                    } else {
                         out << ", 0, ";
+}
 
                     if (leftType.isUnsizedArray())
                     {
@@ -558,10 +570,11 @@ bool TOutputGLSLBase::visitBinary(Visit visit, TIntermBinary *node)
                         }
                         out << maxSize;
                     }
-                    if (mClampingStrategy == SH_CLAMP_WITH_CLAMP_INTRINSIC)
+                    if (mClampingStrategy == SH_CLAMP_WITH_CLAMP_INTRINSIC) {
                         out << ")))]";
-                    else
+                    } else {
                         out << ")]";
+}
                 }
             }
             else
@@ -859,8 +872,9 @@ bool TOutputGLSLBase::visitBlock(Visit visit, TIntermBlock *node)
         ASSERT(curNode != nullptr);
         curNode->traverse(this);
 
-        if (isSingleStatement(curNode))
+        if (isSingleStatement(curNode)) {
             out << ";\n";
+}
     }
 
     // Scope the blocks except when at the global scope.
@@ -897,8 +911,9 @@ bool TOutputGLSLBase::visitFunctionPrototype(Visit visit, TIntermFunctionPrototy
 
     const TType &type = node->getType();
     writeVariableType(type);
-    if (type.isArray())
+    if (type.isArray()) {
         out << ArrayString(type);
+}
 
     out << " " << hashFunctionNameIfNeeded(node->getFunction());
 
@@ -931,10 +946,11 @@ bool TOutputGLSLBase::visitAggregate(Visit visit, TIntermAggregate *node)
                 }
                 out << "(";
             }
-            else if (visit == InVisit)
+            else if (visit == InVisit) {
                 out << ", ";
-            else
+            } else {
                 out << ")";
+}
             break;
         case EOpConstruct:
             writeConstructorTriplet(visit, node->getType());
@@ -1027,16 +1043,19 @@ bool TOutputGLSLBase::visitLoop(Visit visit, TIntermLoop *node)
     if (loopType == ELoopFor)  // for loop
     {
         out << "for (";
-        if (node->getInit())
+        if (node->getInit()) {
             node->getInit()->traverse(this);
+}
         out << "; ";
 
-        if (node->getCondition())
+        if (node->getCondition()) {
             node->getCondition()->traverse(this);
+}
         out << "; ";
 
-        if (node->getExpression())
+        if (node->getExpression()) {
             node->getExpression()->traverse(this);
+}
         out << ")\n";
 
         visitCodeBlock(node->getBody());
@@ -1099,8 +1118,9 @@ void TOutputGLSLBase::visitCodeBlock(TIntermBlock *node)
         node->traverse(this);
         // Single statements not part of a sequence need to be terminated
         // with semi-colon.
-        if (isSingleStatement(node))
+        if (isSingleStatement(node)) {
             out << ";\n";
+}
     }
     else
     {
@@ -1170,11 +1190,13 @@ void TOutputGLSLBase::declareStruct(const TStructure *structure)
     for (size_t i = 0; i < fields.size(); ++i)
     {
         const TField *field = fields[i];
-        if (writeVariablePrecision(field->type()->getPrecision()))
+        if (writeVariablePrecision(field->type()->getPrecision())) {
             out << " ";
+}
         out << getTypeName(*field->type()) << " " << hashFieldName(structure, field->name());
-        if (field->type()->isArray())
+        if (field->type()->isArray()) {
             out << ArrayString(*field->type());
+}
         out << ";\n";
     }
     out << "}";
@@ -1250,11 +1272,13 @@ void TOutputGLSLBase::declareInterfaceBlock(const TInterfaceBlock *interfaceBloc
             out << ") ";
         }
 
-        if (writeVariablePrecision(field->type()->getPrecision()))
+        if (writeVariablePrecision(field->type()->getPrecision())) {
             out << " ";
+}
         out << getTypeName(*field->type()) << " " << hashFieldName(interfaceBlock, field->name());
-        if (field->type()->isArray())
+        if (field->type()->isArray()) {
             out << ArrayString(*field->type());
+}
         out << ";\n";
     }
     out << "}";

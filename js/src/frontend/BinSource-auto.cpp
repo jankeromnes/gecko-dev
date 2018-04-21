@@ -84,12 +84,14 @@ template<size_t N>
 JS::Result<Ok, JS::Error&>
 BinASTParser::checkFields(const BinKind kind, const BinFields& actual, const BinField (&expected)[N])
 {
-    if (actual.length() != N)
+    if (actual.length() != N) {
         return raiseInvalidNumberOfFields(kind, N, actual.length());
+}
 
     for (size_t i = 0; i < N; ++i) {
-        if (actual[i] != expected[i])
+        if (actual[i] != expected[i]) {
             return raiseInvalidField(describeBinKind(kind), actual[i]);
+}
     }
 
     return Ok();
@@ -99,8 +101,9 @@ BinASTParser::checkFields(const BinKind kind, const BinFields& actual, const Bin
 JS::Result<Ok, JS::Error&>
 BinASTParser::checkFields0(const BinKind kind, const BinFields& actual)
 {
-    if (actual.length() != 0)
+    if (actual.length() != 0) {
         return raiseInvalidNumberOfFields(kind, 0, actual.length());
+}
 
     return Ok();
 }
@@ -2646,8 +2649,9 @@ BinASTParser::parseInterfaceAssignmentTargetIdentifier(const size_t start, const
     MOZ_TRY(readString(&name));
 
 
-    if (!IsIdentifier(name))
+    if (!IsIdentifier(name)) {
         return raiseError("Invalid identifier");
+}
     TRY_DECL(result, factory_.newName(name->asPropertyName(), tokenizer_->pos(start), cx_));return result;
 }
 
@@ -2943,8 +2947,9 @@ BinASTParser::parseInterfaceBindingIdentifier(const size_t start, const BinKind 
     MOZ_TRY(readString(&name));
 
 
-    if (!IsIdentifier(name))
+    if (!IsIdentifier(name)) {
         return raiseError("Invalid identifier");
+}
     TRY_DECL(result, factory_.newName(name->asPropertyName(), tokenizer_->pos(start), cx_));return result;
 }
 
@@ -3115,8 +3120,9 @@ BinASTParser::parseInterfaceBreakStatement(const size_t start, const BinKind kin
     RootedAtom label(cx_);
     MOZ_TRY(readMaybeString(&label));
 
-    if (label && !IsIdentifier(label))
+    if (label && !IsIdentifier(label)) {
         return raiseError("Invalid identifier");
+}
 
     if (label) {
         auto validity = parseContext_->checkBreakStatement(label->asPropertyName());
@@ -3180,8 +3186,9 @@ BinASTParser::parseInterfaceCallExpression(const size_t start, const BinKind kin
         if (!parseContext_->varScope().lookupDeclaredNameForAdd(callee->name())
          && !parseContext_->innermostScope()->lookupDeclaredNameForAdd(callee->name())) {
             // This is a direct call to `eval`.
-            if (!parseContext_->sc()->hasDirectEval())
+            if (!parseContext_->sc()->hasDirectEval()) {
                 return raiseMissingDirectEvalInAssertedScope();
+}
 
             op = parseContext_->sc()->strict() ? JSOP_STRICTEVAL : JSOP_EVAL;
         }
@@ -3622,8 +3629,9 @@ BinASTParser::parseInterfaceContinueStatement(const size_t start, const BinKind 
     RootedAtom label(cx_);
     MOZ_TRY(readMaybeString(&label));
 
-    if (label && !IsIdentifier(label))
+    if (label && !IsIdentifier(label)) {
         return raiseError("ContinueStatement - Label MUST be an identifier");
+}
 
     if (label) {
         auto validity = parseContext_->checkContinueStatement(label ? label->asPropertyName() : nullptr);
@@ -3681,8 +3689,9 @@ BinASTParser::parseInterfaceDataProperty(const size_t start, const BinKind kind,
     MOZ_TRY_DECL(expression, parseExpression());
 
 
-    if (!factory_.isUsableAsObjectPropertyName(name))
+    if (!factory_.isUsableAsObjectPropertyName(name)) {
         return raiseError("DataProperty key kind");
+}
 
     TRY_DECL(result, factory_.newObjectMethodOrPropertyDefinition(name, expression, AccessorType::None));return result;
 }
@@ -4613,8 +4622,9 @@ BinASTParser::parseInterfaceIdentifierExpression(const size_t start, const BinKi
     MOZ_TRY(readString(&name));
 
 
-    if (!IsIdentifier(name))
+    if (!IsIdentifier(name)) {
         return raiseError("Invalid identifier");
+}
     TRY_DECL(result, factory_.newName(name->asPropertyName(), tokenizer_->pos(start), cx_));return result;
 }
 
@@ -4791,8 +4801,9 @@ BinASTParser::parseInterfaceLabelledStatement(const size_t start, const BinKind 
 
     RootedAtom label(cx_);
     MOZ_TRY(readString(&label));
-    if (!IsIdentifier(label))
+    if (!IsIdentifier(label)) {
         return raiseError("Invalid identifier");
+}
     ParseContext::LabelStatement stmt(parseContext_, label);
 
 
@@ -4975,10 +4986,11 @@ BinASTParser::parseInterfaceLiteralPropertyName(const size_t start, const BinKin
 
     ParseNode* result;
     uint32_t index;
-    if (value->isIndex(&index))
+    if (value->isIndex(&index)) {
         TRY_VAR(result, factory_.newNumber(index, NoDecimal, TokenPos(start, tokenizer_->offset())));
-    else
-        TRY_VAR(result, factory_.newObjectLiteralPropertyName(value, tokenizer_->pos(start)));return result;
+    } else {
+        TRY_VAR(result, factory_.newObjectLiteralPropertyName(value, tokenizer_->pos(start)));
+}return result;
 }
 
 
@@ -5020,18 +5032,19 @@ BinASTParser::parseInterfaceLiteralRegExpExpression(const size_t start, const Bi
 
     RegExpFlag reflags = NoFlags;
     for (auto c : flags) {
-        if (c == 'g' && !(reflags & GlobalFlag))
+        if (c == 'g' && !(reflags & GlobalFlag)) {
             reflags = RegExpFlag(reflags | GlobalFlag);
-        else if (c == 'i' && !(reflags & IgnoreCaseFlag))
+        } else if (c == 'i' && !(reflags & IgnoreCaseFlag)) {
             reflags = RegExpFlag(reflags | IgnoreCaseFlag);
-        else if (c == 'm' && !(reflags & MultilineFlag))
+        } else if (c == 'm' && !(reflags & MultilineFlag)) {
             reflags = RegExpFlag(reflags | MultilineFlag);
-        else if (c == 'y' && !(reflags & StickyFlag))
+        } else if (c == 'y' && !(reflags & StickyFlag)) {
             reflags = RegExpFlag(reflags | StickyFlag);
-        else if (c == 'u' && !(reflags & UnicodeFlag))
+        } else if (c == 'u' && !(reflags & UnicodeFlag)) {
             reflags = RegExpFlag(reflags | UnicodeFlag);
-        else
+        } else {
             return raiseInvalidEnum("RegExpLiteral", flags);
+}
     }
 
 
@@ -5574,8 +5587,9 @@ BinASTParser::parseInterfaceShorthandProperty(const size_t start, const BinKind 
     MOZ_TRY_DECL(name, parseIdentifierExpression());
 
 
-    if (!factory_.isUsableAsObjectPropertyName(name))
+    if (!factory_.isUsableAsObjectPropertyName(name)) {
         TRY_VAR(name, factory_.newObjectLiteralPropertyName(name->name(), tokenizer_->pos(start)));
+}
 
     TRY_DECL(result, factory_.newObjectMethodOrPropertyDefinition(name, name, AccessorType::None));return result;
 }
@@ -6002,13 +6016,15 @@ BinASTParser::parseInterfaceThisExpression(const size_t start, const BinKind kin
 
     MOZ_TRY(checkFields0(kind, fields));
 
-    if (parseContext_->isFunctionBox())
+    if (parseContext_->isFunctionBox()) {
         parseContext_->functionBox()->usesThis = true;
+}
 
     TokenPos pos = tokenizer_->pos(start);
     ParseNode* thisName(nullptr);
-    if (parseContext_->sc()->thisBinding() == ThisBinding::Function)
+    if (parseContext_->sc()->thisBinding() == ThisBinding::Function) {
         TRY_VAR(thisName, factory_.newName(cx_->names().dotThis, pos, cx_));
+}
 
     TRY_DECL(result, factory_.newThisLiteral(pos, thisName));return result;
 }
@@ -6213,10 +6229,11 @@ BinASTParser::parseInterfaceUnaryExpression(const size_t start, const BinKind ki
         pnk = ParseNodeKind::BitNot;
         break;
       case UnaryOperator::Typeof: {
-        if (operand->isKind(ParseNodeKind::Name))
+        if (operand->isKind(ParseNodeKind::Name)) {
             pnk = ParseNodeKind::TypeOfName;
-        else
+        } else {
             pnk = ParseNodeKind::TypeOfExpr;
+}
         break;
       }
       case UnaryOperator::Void:
@@ -6347,8 +6364,9 @@ BinASTParser::parseInterfaceVariableDeclaration(const size_t start, const BinKin
 
 
     // By specification, the list may not be empty.
-    if (declarators->pn_count == 0)
+    if (declarators->pn_count == 0) {
         return raiseEmpty("VariableDeclaration");
+}
 
     ParseNodeKind pnk;
     switch (kind_) {
@@ -6413,8 +6431,9 @@ BinASTParser::parseInterfaceVariableDeclarator(const size_t start, const BinKind
         MOZ_TRY(checkBinding(binding->pn_atom->asPropertyName()));
 
         TRY_VAR(result, factory_.newName(binding->pn_atom->asPropertyName(), tokenizer_->pos(start), cx_));
-        if (init)
+        if (init) {
             result->pn_expr = init;
+}
     } else {
         // `var pattern = bar`
         if (!init) {
@@ -6637,56 +6656,81 @@ BinASTParser::parseBinaryOperator()
     Chars chars(cx_);
     MOZ_TRY(readString(chars));
 
-    if (chars == ",")
+    if (chars == ",") {
         return BinaryOperator::Comma;
-    if (chars == "||")
+}
+    if (chars == "||") {
         return BinaryOperator::LogicalOr;
-    if (chars == "&&")
+}
+    if (chars == "&&") {
         return BinaryOperator::LogicalAnd;
-    if (chars == "|")
+}
+    if (chars == "|") {
         return BinaryOperator::BitOr;
-    if (chars == "^")
+}
+    if (chars == "^") {
         return BinaryOperator::BitXor;
-    if (chars == "&")
+}
+    if (chars == "&") {
         return BinaryOperator::BitAnd;
-    if (chars == "==")
+}
+    if (chars == "==") {
         return BinaryOperator::Eq;
-    if (chars == "!=")
+}
+    if (chars == "!=") {
         return BinaryOperator::Neq;
-    if (chars == "===")
+}
+    if (chars == "===") {
         return BinaryOperator::StrictEq;
-    if (chars == "!==")
+}
+    if (chars == "!==") {
         return BinaryOperator::StrictNeq;
-    if (chars == "<")
+}
+    if (chars == "<") {
         return BinaryOperator::LessThan;
-    if (chars == "<=")
+}
+    if (chars == "<=") {
         return BinaryOperator::LeqThan;
-    if (chars == ">")
+}
+    if (chars == ">") {
         return BinaryOperator::GreaterThan;
-    if (chars == ">=")
+}
+    if (chars == ">=") {
         return BinaryOperator::GeqThan;
-    if (chars == "in")
+}
+    if (chars == "in") {
         return BinaryOperator::In;
-    if (chars == "instanceof")
+}
+    if (chars == "instanceof") {
         return BinaryOperator::Instanceof;
-    if (chars == "<<")
+}
+    if (chars == "<<") {
         return BinaryOperator::Lsh;
-    if (chars == ">>")
+}
+    if (chars == ">>") {
         return BinaryOperator::Rsh;
-    if (chars == ">>>")
+}
+    if (chars == ">>>") {
         return BinaryOperator::Ursh;
-    if (chars == "+")
+}
+    if (chars == "+") {
         return BinaryOperator::Plus;
-    if (chars == "-")
+}
+    if (chars == "-") {
         return BinaryOperator::Minus;
-    if (chars == "*")
+}
+    if (chars == "*") {
         return BinaryOperator::Mul;
-    if (chars == "/")
+}
+    if (chars == "/") {
         return BinaryOperator::Div;
-    if (chars == "%")
+}
+    if (chars == "%") {
         return BinaryOperator::Mod;
-    if (chars == "**")
+}
+    if (chars == "**") {
         return BinaryOperator::Pow;
+}
 
     return raiseInvalidEnum("BinaryOperator", chars);
 }
@@ -6714,30 +6758,42 @@ BinASTParser::parseCompoundAssignmentOperator()
     Chars chars(cx_);
     MOZ_TRY(readString(chars));
 
-    if (chars == "+=")
+    if (chars == "+=") {
         return CompoundAssignmentOperator::PlusAssign;
-    if (chars == "-=")
+}
+    if (chars == "-=") {
         return CompoundAssignmentOperator::MinusAssign;
-    if (chars == "*=")
+}
+    if (chars == "*=") {
         return CompoundAssignmentOperator::MulAssign;
-    if (chars == "/=")
+}
+    if (chars == "/=") {
         return CompoundAssignmentOperator::DivAssign;
-    if (chars == "%=")
+}
+    if (chars == "%=") {
         return CompoundAssignmentOperator::ModAssign;
-    if (chars == "**=")
+}
+    if (chars == "**=") {
         return CompoundAssignmentOperator::PowAssign;
-    if (chars == "<<=")
+}
+    if (chars == "<<=") {
         return CompoundAssignmentOperator::LshAssign;
-    if (chars == ">>=")
+}
+    if (chars == ">>=") {
         return CompoundAssignmentOperator::RshAssign;
-    if (chars == ">>>=")
+}
+    if (chars == ">>>=") {
         return CompoundAssignmentOperator::UrshAssign;
-    if (chars == "|=")
+}
+    if (chars == "|=") {
         return CompoundAssignmentOperator::BitOrAssign;
-    if (chars == "^=")
+}
+    if (chars == "^=") {
         return CompoundAssignmentOperator::BitXorAssign;
-    if (chars == "&=")
+}
+    if (chars == "&=") {
         return CompoundAssignmentOperator::BitAndAssign;
+}
 
     return raiseInvalidEnum("CompoundAssignmentOperator", chars);
 }
@@ -6760,20 +6816,27 @@ BinASTParser::parseUnaryOperator()
     Chars chars(cx_);
     MOZ_TRY(readString(chars));
 
-    if (chars == "+")
+    if (chars == "+") {
         return UnaryOperator::Plus;
-    if (chars == "-")
+}
+    if (chars == "-") {
         return UnaryOperator::Minus;
-    if (chars == "!")
+}
+    if (chars == "!") {
         return UnaryOperator::Not;
-    if (chars == "~")
+}
+    if (chars == "~") {
         return UnaryOperator::BitNot;
-    if (chars == "typeof")
+}
+    if (chars == "typeof") {
         return UnaryOperator::Typeof;
-    if (chars == "void")
+}
+    if (chars == "void") {
         return UnaryOperator::Void;
-    if (chars == "delete")
+}
+    if (chars == "delete") {
         return UnaryOperator::Delete;
+}
 
     return raiseInvalidEnum("UnaryOperator", chars);
 }
@@ -6791,10 +6854,12 @@ BinASTParser::parseUpdateOperator()
     Chars chars(cx_);
     MOZ_TRY(readString(chars));
 
-    if (chars == "++")
+    if (chars == "++") {
         return UpdateOperator::Incr;
-    if (chars == "--")
+}
+    if (chars == "--") {
         return UpdateOperator::Decr;
+}
 
     return raiseInvalidEnum("UpdateOperator", chars);
 }
@@ -6813,12 +6878,15 @@ BinASTParser::parseVariableDeclarationKind()
     Chars chars(cx_);
     MOZ_TRY(readString(chars));
 
-    if (chars == "var")
+    if (chars == "var") {
         return VariableDeclarationKind::Var;
-    if (chars == "let")
+}
+    if (chars == "let") {
         return VariableDeclarationKind::Let;
-    if (chars == "const")
+}
+    if (chars == "const") {
         return VariableDeclarationKind::Const;
+}
 
     return raiseInvalidEnum("VariableDeclarationKind", chars);
 }
@@ -6962,10 +7030,11 @@ BinASTParser::parseListOfOptionalSpreadElementOrExpression()
 
     for (uint32_t i = 0; i < length; ++i) {
         MOZ_TRY_DECL(item, parseOptionalSpreadElementOrExpression());
-        if (item)
+        if (item) {
             factory_.addArrayElement(result, item); // Infallible.
-        else
+        } else {
             TRY(factory_.addElision(result, tokenizer_->pos(start)));
+}
     }
 
     TRY(guard.done());

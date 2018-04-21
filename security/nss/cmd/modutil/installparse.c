@@ -230,11 +230,13 @@ yyparse()
     *yyssp = yystate = 0;
 
 yyloop:
-    if ((yyn = yydefred[yystate]) != 0)
+    if ((yyn = yydefred[yystate]) != 0) {
         goto yyreduce;
+}
     if (yychar < 0) {
-        if ((yychar = yylex()) < 0)
+        if ((yychar = yylex()) < 0) {
             yychar = 0;
+}
 #if YYDEBUG
         if (yydebug) {
             yys = 0;
@@ -260,8 +262,9 @@ yyloop:
         *++yyssp = yystate = yytable[yyn];
         *++yyvsp = yylval;
         yychar = (-1);
-        if (yyerrflag > 0)
+        if (yyerrflag > 0) {
             --yyerrflag;
+}
         goto yyloop;
     }
     if ((yyn = yyrindex[yystate]) && (yyn += yychar) >= 0 &&
@@ -269,8 +272,9 @@ yyloop:
         yyn = yytable[yyn];
         goto yyreduce;
     }
-    if (yyerrflag)
+    if (yyerrflag) {
         goto yyinrecovery;
+}
 #ifdef lint
     goto yynewerror;
 yynewerror:
@@ -305,15 +309,17 @@ yyinrecovery:
                     printf("yydebug: error recovery discarding state %d\n",
                            *yyssp);
 #endif
-                if (yyssp <= yyss)
+                if (yyssp <= yyss) {
                     goto yyabort;
+}
                 --yyssp;
                 --yyvsp;
             }
         }
     } else {
-        if (yychar == 0)
+        if (yychar == 0) {
             goto yyabort;
+}
 #if YYDEBUG
         if (yydebug) {
             yys = 0;
@@ -381,17 +387,19 @@ yyreduce:
     yym = yylhs[yyn];
     if (yystate == 0 && yym == 0) {
 #ifdef YYDEBUG
-        if (yydebug)
+        if (yydebug) {
             printf("yydebug: after reduction, shifting from state 0 to\
  state %d\n",
                    YYFINAL);
+}
 #endif
         yystate = YYFINAL;
         *++yyssp = YYFINAL;
         *++yyvsp = yyval;
         if (yychar < 0) {
-            if ((yychar = yylex()) < 0)
+            if ((yychar = yylex()) < 0) {
                 yychar = 0;
+}
 #if YYDEBUG
             if (yydebug) {
                 yys = 0;
@@ -404,20 +412,23 @@ yyreduce:
             }
 #endif
         }
-        if (yychar == 0)
+        if (yychar == 0) {
             goto yyaccept;
+}
         goto yyloop;
     }
     if ((yyn = yygindex[yym]) && (yyn += yystate) >= 0 &&
-        yyn <= YYTABLESIZE && yycheck[yyn] == yystate)
+        yyn <= YYTABLESIZE && yycheck[yyn] == yystate) {
         yystate = yytable[yyn];
-    else
+    } else {
         yystate = yydgoto[yym];
+}
 #ifdef YYDEBUG
-    if (yydebug)
+    if (yydebug) {
         printf("yydebug: after reduction, shifting from state %d \
 to state %d\n",
                *yyssp, yystate);
+}
 #endif
     if (yyssp >= yyss + yystacksize - 1) {
         goto yyoverflow;

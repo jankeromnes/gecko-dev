@@ -33,8 +33,9 @@ CERT_Hexify(SECItem *i, int do_colon)
     }
 
     rv = o = (char *)PORT_Alloc(i->len * 3);
-    if (!rv)
+    if (!rv) {
         return rv;
+}
 
     cp = i->data;
     end = cp + i->len;

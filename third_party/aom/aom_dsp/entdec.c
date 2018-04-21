@@ -117,7 +117,8 @@ static int od_ec_dec_normalize(od_ec_dec *dec, od_ec_window dif, unsigned rng,
   /*This is equivalent to shifting in 1's instead of 0's.*/
   dec->dif = ((dif + 1) << d) - 1;
   dec->rng = rng << d;
-  if (dec->cnt < 0) od_ec_dec_refill(dec);
+  if (dec->cnt < 0) { od_ec_dec_refill(dec);
+}
   return ret;
 }
 

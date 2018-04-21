@@ -122,8 +122,9 @@ void
 editableTextInterfaceInitCB(AtkEditableTextIface* aIface)
 {
   NS_ASSERTION(aIface, "Invalid aIface");
-  if (MOZ_UNLIKELY(!aIface))
+  if (MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   aIface->set_text_contents = setTextContentsCB;
   aIface->insert_text = insertTextCB;

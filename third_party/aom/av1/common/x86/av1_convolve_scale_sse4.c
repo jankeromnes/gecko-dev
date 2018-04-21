@@ -315,12 +315,14 @@ static void vfilter(const int32_t *src, int src_stride, int32_t *dst,
     for (; x < w; ++x) {
       const int32_t *src_x = src_y + x * src_stride;
       CONV_BUF_TYPE sum = 1 << offset_bits;
-      for (int k = 0; k < ntaps; ++k) sum += filter[k] * src_x[k];
+      for (int k = 0; k < ntaps; ++k) { sum += filter[k] * src_x[k];
+}
       CONV_BUF_TYPE res = ROUND_POWER_OF_TWO(sum, conv_params->round_1) - sub32;
-      if (conv_params->do_average)
+      if (conv_params->do_average) {
         dst[y * dst_stride + x] += res;
-      else
+      } else {
         dst[y * dst_stride + x] = res;
+}
     }
   }
 }
@@ -394,12 +396,14 @@ static void vfilter8(const int32_t *src, int src_stride, int32_t *dst,
     for (; x < w; ++x) {
       const int32_t *src_x = src_y + x * src_stride;
       CONV_BUF_TYPE sum = 1 << offset_bits;
-      for (int k = 0; k < ntaps; ++k) sum += filter[k] * src_x[k];
+      for (int k = 0; k < ntaps; ++k) { sum += filter[k] * src_x[k];
+}
       CONV_BUF_TYPE res = ROUND_POWER_OF_TWO(sum, conv_params->round_1) - sub32;
-      if (conv_params->do_average)
+      if (conv_params->do_average) {
         dst[y * dst_stride + x] += res;
-      else
+      } else {
         dst[y * dst_stride + x] = res;
+}
     }
   }
 }
@@ -421,20 +425,22 @@ void av1_convolve_2d_scale_sse4_1(const uint8_t *src, int src_stride,
   const int fo_vert = ytaps / 2 - 1;
 
   // horizontal filter
-  if (xtaps == 8)
+  if (xtaps == 8) {
     hfilter8(src - fo_vert * src_stride, src_stride, tmp, w, im_h, subpel_x_qn,
              x_step_qn, filter_params_x, conv_params->round_0);
-  else
+  } else {
     hfilter(src - fo_vert * src_stride, src_stride, tmp, w, im_h, subpel_x_qn,
             x_step_qn, filter_params_x, conv_params->round_0);
+}
 
   // vertical filter (input is transposed)
-  if (ytaps == 8)
+  if (ytaps == 8) {
     vfilter8(tmp, im_h, dst, dst_stride, w, h, subpel_y_qn, y_step_qn,
              filter_params_y, conv_params, 8);
-  else
+  } else {
     vfilter(tmp, im_h, dst, dst_stride, w, h, subpel_y_qn, y_step_qn,
             filter_params_y, conv_params, 8);
+}
 }
 
 #if CONFIG_HIGHBITDEPTH
@@ -625,21 +631,23 @@ void av1_highbd_convolve_2d_scale_sse4_1(
   const int fo_vert = ytaps / 2 - 1;
 
   // horizontal filter
-  if (xtaps == 8)
+  if (xtaps == 8) {
     highbd_hfilter8(src - fo_vert * src_stride, src_stride, tmp, w, im_h,
                     subpel_x_qn, x_step_qn, filter_params_x,
                     conv_params->round_0, bd);
-  else
+  } else {
     highbd_hfilter(src - fo_vert * src_stride, src_stride, tmp, w, im_h,
                    subpel_x_qn, x_step_qn, filter_params_x,
                    conv_params->round_0, bd);
+}
 
   // vertical filter (input is transposed)
-  if (ytaps == 8)
+  if (ytaps == 8) {
     vfilter8(tmp, im_h, dst, dst_stride, w, h, subpel_y_qn, y_step_qn,
              filter_params_y, conv_params, bd);
-  else
+  } else {
     vfilter(tmp, im_h, dst, dst_stride, w, h, subpel_y_qn, y_step_qn,
             filter_params_y, conv_params, bd);
+}
 }
 #endif  // CONFIG_HIGHBITDEPTH

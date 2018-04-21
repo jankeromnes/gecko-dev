@@ -1623,8 +1623,9 @@ camellia_encryptCBC(CamelliaContext *cx, unsigned char *output,
     unsigned char inblock[CAMELLIA_BLOCK_SIZE];
     CamelliaBlockFunc *encryptor;
 
-    if (!inputLen)
+    if (!inputLen) {
         return SECSuccess;
+}
     lastblock = cx->iv;
 
     encryptor = (cx->keysize == 16)
@@ -1633,8 +1634,9 @@ camellia_encryptCBC(CamelliaContext *cx, unsigned char *output,
 
     while (inputLen > 0) {
         /* XOR with the last block (IV if first block) */
-        for (j = 0; j < CAMELLIA_BLOCK_SIZE; ++j)
+        for (j = 0; j < CAMELLIA_BLOCK_SIZE; ++j) {
             inblock[j] = input[j] ^ lastblock[j];
+}
         /* encrypt */
         (*encryptor)(cx->expandedKey, output, inblock);
 
@@ -1681,8 +1683,9 @@ camellia_decryptCBC(CamelliaContext *cx, unsigned char *output,
     unsigned char newIV[CAMELLIA_BLOCK_SIZE];
     CamelliaBlockFunc *decryptor;
 
-    if (!inputLen)
+    if (!inputLen) {
         return SECSuccess;
+}
 
     PORT_Assert(output - input >= 0 || input - output >= (int)inputLen);
 
@@ -1697,8 +1700,9 @@ camellia_decryptCBC(CamelliaContext *cx, unsigned char *output,
     while (inputLen > CAMELLIA_BLOCK_SIZE) {
         (*decryptor)(cx->expandedKey, out, in);
 
-        for (j = 0; j < CAMELLIA_BLOCK_SIZE; ++j)
+        for (j = 0; j < CAMELLIA_BLOCK_SIZE; ++j) {
             out[j] ^= in[(int)(j - CAMELLIA_BLOCK_SIZE)];
+}
 
         out -= CAMELLIA_BLOCK_SIZE;
         in -= CAMELLIA_BLOCK_SIZE;
@@ -1707,8 +1711,9 @@ camellia_decryptCBC(CamelliaContext *cx, unsigned char *output,
     if (in == input) {
         (*decryptor)(cx->expandedKey, out, in);
 
-        for (j = 0; j < CAMELLIA_BLOCK_SIZE; ++j)
+        for (j = 0; j < CAMELLIA_BLOCK_SIZE; ++j) {
             out[j] ^= cx->iv[j];
+}
     }
     memcpy(cx->iv, newIV, CAMELLIA_BLOCK_SIZE);
     return SECSuccess;
@@ -1757,8 +1762,9 @@ Camellia_InitContext(CamelliaContext *cx, const unsigned char *key,
     }
 
     /* Generate expanded key */
-    if (camellia_key_expansion(cx, key, keysize) != SECSuccess)
+    if (camellia_key_expansion(cx, key, keysize) != SECSuccess) {
         goto cleanup;
+}
 
     return SECSuccess;
 cleanup:
@@ -1807,8 +1813,9 @@ Camellia_CreateContext(const unsigned char *key, const unsigned char *iv,
     cx->keysize = keysize;
 
     /* Generate expanded key */
-    if (camellia_key_expansion(cx, key, keysize) != SECSuccess)
+    if (camellia_key_expansion(cx, key, keysize) != SECSuccess) {
         goto cleanup;
+}
 
     return cx;
 cleanup:
@@ -1825,10 +1832,12 @@ cleanup:
 void
 Camellia_DestroyContext(CamelliaContext *cx, PRBool freeit)
 {
-    if (cx)
+    if (cx) {
         memset(cx, 0, sizeof *cx);
-    if (freeit)
+}
+    if (freeit) {
         PORT_Free(cx);
+}
 }
 
 /*

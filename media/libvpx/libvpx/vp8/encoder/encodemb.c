@@ -94,7 +94,8 @@ static void transform_mb(MACROBLOCK *x) {
   }
 
   /* build dc block from 16 y dc values */
-  if (x->e_mbd.mode_info_context->mbmi.mode != SPLITMV) build_dcblock(x);
+  if (x->e_mbd.mode_info_context->mbmi.mode != SPLITMV) { build_dcblock(x);
+}
 
   for (i = 16; i < 24; i += 2) {
     x->short_fdct8x4(&x->block[i].src_diff[0], &x->block[i].coeff[0], 16);
@@ -343,7 +344,8 @@ static void optimize_b(MACROBLOCK *mb, int ib, int type, ENTROPY_CONTEXT *a,
   final_eob = i0 - 1;
   for (i = next; i < eob; i = next) {
     x = tokens[i][best].qc;
-    if (x) final_eob = i;
+    if (x) { final_eob = i;
+}
     rc = vp8_default_zig_zag1d[i];
     qcoeff_ptr[rc] = x;
     dqcoeff_ptr[rc] = x * dequant_ptr[rc];
@@ -361,12 +363,14 @@ static void check_reset_2nd_coeffs(MACROBLOCKD *x, int type, ENTROPY_CONTEXT *a,
   int i;
   BLOCKD *bd = &x->block[24];
 
-  if (bd->dequant[0] >= 35 && bd->dequant[1] >= 35) return;
+  if (bd->dequant[0] >= 35 && bd->dequant[1] >= 35) { return;
+}
 
   for (i = 0; i < (*bd->eob); ++i) {
     int coef = bd->dqcoeff[vp8_default_zig_zag1d[i]];
     sum += (coef >= 0) ? coef : -coef;
-    if (sum >= 35) return;
+    if (sum >= 35) { return;
+}
   }
   /**************************************************************************
   our inverse hadamard transform effectively is weighted sum of all 16 inputs
@@ -433,9 +437,11 @@ void vp8_optimize_mby(MACROBLOCK *x) {
   ENTROPY_CONTEXT *ta;
   ENTROPY_CONTEXT *tl;
 
-  if (!x->e_mbd.above_context) return;
+  if (!x->e_mbd.above_context) { return;
+}
 
-  if (!x->e_mbd.left_context) return;
+  if (!x->e_mbd.left_context) { return;
+}
 
   memcpy(&t_above, x->e_mbd.above_context, sizeof(ENTROPY_CONTEXT_PLANES));
   memcpy(&t_left, x->e_mbd.left_context, sizeof(ENTROPY_CONTEXT_PLANES));
@@ -466,9 +472,11 @@ void vp8_optimize_mbuv(MACROBLOCK *x) {
   ENTROPY_CONTEXT *ta;
   ENTROPY_CONTEXT *tl;
 
-  if (!x->e_mbd.above_context) return;
+  if (!x->e_mbd.above_context) { return;
+}
 
-  if (!x->e_mbd.left_context) return;
+  if (!x->e_mbd.left_context) { return;
+}
 
   memcpy(&t_above, x->e_mbd.above_context, sizeof(ENTROPY_CONTEXT_PLANES));
   memcpy(&t_left, x->e_mbd.left_context, sizeof(ENTROPY_CONTEXT_PLANES));
@@ -491,7 +499,8 @@ void vp8_encode_inter16x16(MACROBLOCK *x) {
 
   vp8_quantize_mb(x);
 
-  if (x->optimize) optimize_mb(x);
+  if (x->optimize) { optimize_mb(x);
+}
 }
 
 /* this funciton is used by first pass only */

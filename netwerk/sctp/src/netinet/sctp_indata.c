@@ -331,10 +331,12 @@ sctp_mark_non_revokable(struct sctp_association *asoc, uint32_t tsn)
 		sctp_print_mapping_array(asoc);
 #endif
 	}
-	if (in_nr == 0)
+	if (in_nr == 0) {
 		SCTP_SET_TSN_PRESENT(asoc->nr_mapping_array, gap);
-	if (in_r)
+}
+	if (in_r) {
 		SCTP_UNSET_TSN_PRESENT(asoc->mapping_array, gap);
+}
 	if (SCTP_TSN_GT(tsn, asoc->highest_tsn_inside_nr_map)) {
 		asoc->highest_tsn_inside_nr_map = tsn;
 	}
@@ -482,8 +484,9 @@ sctp_clean_up_control(struct sctp_tcb *stcb, struct sctp_queued_to_read *control
 	struct sctp_tmit_chunk *chk, *nchk;
 	TAILQ_FOREACH_SAFE(chk, &control->reasm, sctp_next, nchk) {
 		TAILQ_REMOVE(&control->reasm, chk, sctp_next);
-		if (chk->data)
+		if (chk->data) {
 			sctp_m_freem(chk->data);
+}
 		chk->data = NULL;
 		sctp_free_a_chunk(stcb, chk, SCTP_SO_NOT_LOCKED);
 	}
@@ -2773,8 +2776,9 @@ sctp_process_data(struct mbuf **mm, int iphlen, int *offset, int length,
 						      last_chunk, ch->chunk_type)) {
 				num_chunks++;
 			}
-			if (abort_flag)
+			if (abort_flag) {
 				return (2);
+}
 
 			if (break_flag) {
 				/*
@@ -2942,8 +2946,9 @@ sctp_process_segment_range(struct sctp_tcb *stcb, struct sctp_tmit_chunk **p_tp1
 	for (j = frag_strt; j <= frag_end; j++) {
 		theTSN = j + last_tsn;
 		while (tp1) {
-			if (tp1->rec.data.doing_fast_retransmit)
+			if (tp1->rec.data.doing_fast_retransmit) {
 				(*num_frs) += 1;
+}
 
 			/*-
 			 * CMT: CUCv2 algorithm. For each TSN being
@@ -2990,8 +2995,9 @@ sctp_process_segment_range(struct sctp_tcb *stcb, struct sctp_tmit_chunk **p_tp1
 						 * this_sack_highest_newack if
 						 * appropriate.
 						 */
-						if (tp1->rec.data.chunk_was_revoked == 0)
+						if (tp1->rec.data.chunk_was_revoked == 0) {
 							tp1->whoTo->saw_newack = 1;
+}
 
 						if (SCTP_TSN_GT(tp1->rec.data.tsn,
 						                tp1->whoTo->this_sack_highest_newack)) {
@@ -3216,10 +3222,11 @@ sctp_handle_segments(struct mbuf *m, int *offset, struct sctp_tcb *stcb, struct 
 		prev_frag_end = frag_end;
 	}
 	if (SCTP_BASE_SYSCTL(sctp_logging_level) & SCTP_FR_LOGGING_ENABLE) {
-		if (num_frs)
+		if (num_frs) {
 			sctp_log_fr(*biggest_tsn_acked,
 			            *biggest_newly_acked_tsn,
 			            last_tsn, SCTP_FR_LOG_BIGGEST_TSNS);
+}
 	}
 	return (chunk_freed);
 }
@@ -3275,8 +3282,9 @@ sctp_check_for_revoked(struct sctp_tcb *stcb,
 				tp1->sent = SCTP_DATAGRAM_ACKED;
 			}
 		}
-		if (tp1->sent == SCTP_DATAGRAM_UNSENT)
+		if (tp1->sent == SCTP_DATAGRAM_UNSENT) {
 			break;
+}
 	}
 }
 
@@ -3308,8 +3316,9 @@ sctp_strike_gap_ack_chunks(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if ((asoc->sctp_cmt_on_off > 0) &&
 	    SCTP_BASE_SYSCTL(sctp_cmt_use_dac)) {
 		TAILQ_FOREACH(net, &asoc->nets, sctp_next) {
-			if (net->saw_newack)
+			if (net->saw_newack) {
 				num_dests_sacked++;
+}
 		}
 	}
 	if (stcb->asoc.prsctp_supported) {
@@ -3322,11 +3331,12 @@ sctp_strike_gap_ack_chunks(struct sctp_tcb *stcb, struct sctp_association *asoc,
 			continue;
 		}
 		if (SCTP_BASE_SYSCTL(sctp_logging_level) & SCTP_FR_LOGGING_ENABLE) {
-			if (tp1->sent < SCTP_DATAGRAM_RESEND)
+			if (tp1->sent < SCTP_DATAGRAM_RESEND) {
 				sctp_log_fr(biggest_tsn_newly_acked,
 					    tp1->rec.data.tsn,
 					    tp1->sent,
 					    SCTP_FR_LOG_CHECK_STRIKE);
+}
 		}
 		if (SCTP_TSN_GT(tp1->rec.data.tsn, biggest_tsn_acked) ||
 		    tp1->sent == SCTP_DATAGRAM_UNSENT) {
@@ -3818,8 +3828,9 @@ sctp_fs_audit(struct sctp_association *asoc)
 	entry_flight = asoc->total_flight;
 	entry_cnt = asoc->total_flight_count;
 #endif
-	if (asoc->pr_sctp_cnt >= asoc->sent_queue_cnt)
+	if (asoc->pr_sctp_cnt >= asoc->sent_queue_cnt) {
 		return (0);
+}
 
 	TAILQ_FOREACH(chk, &asoc->sent_queue, sctp_next) {
 		if (chk->sent < SCTP_DATAGRAM_RESEND) {
@@ -4763,10 +4774,11 @@ sctp_handle_sack(struct mbuf *m, int offset_seg, int offset_dup,
 	/*******************************************/
 	if (asoc->sctp_cmt_on_off > 0) {
 		TAILQ_FOREACH(net, &asoc->nets, sctp_next) {
-			if (net->new_pseudo_cumack)
+			if (net->new_pseudo_cumack) {
 				sctp_timer_stop(SCTP_TIMER_TYPE_SEND, stcb->sctp_ep,
 				                stcb, net,
 				                SCTP_FROM_SCTP_INDATA + SCTP_LOC_27);
+}
 
 		}
 	} else {
@@ -4802,8 +4814,9 @@ sctp_handle_sack(struct mbuf *m, int offset_seg, int offset_dup,
 		}
 		TAILQ_REMOVE(&asoc->sent_queue, tp1, sctp_next);
 		if (PR_SCTP_ENABLED(tp1->flags)) {
-			if (asoc->pr_sctp_cnt != 0)
+			if (asoc->pr_sctp_cnt != 0) {
 				asoc->pr_sctp_cnt--;
+}
 		}
 		asoc->sent_queue_cnt--;
 		if (tp1->data) {
@@ -4945,10 +4958,11 @@ sctp_handle_sack(struct mbuf *m, int offset_seg, int offset_dup,
 		}
 		asoc->saw_sack_with_frags = 0;
 	}
-	if (num_nr_seg > 0)
+	if (num_nr_seg > 0) {
 		asoc->saw_sack_with_nr_frags = 1;
-	else
+	} else {
 		asoc->saw_sack_with_nr_frags = 0;
+}
 
 	/* JRS - Use the congestion control given in the CC module */
 	if (ecne_seen == 0) {

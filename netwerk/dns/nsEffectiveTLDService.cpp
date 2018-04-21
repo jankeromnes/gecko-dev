@@ -48,7 +48,8 @@ nsEffectiveTLDService::Init()
 {
   nsresult rv;
   mIDNService = do_GetService(NS_IDNSERVICE_CONTRACTID, &rv);
-  if (NS_FAILED(rv)) return rv;
+  if (NS_FAILED(rv)) { return rv;
+}
 
   MOZ_ASSERT(!gService);
   gService = this;
@@ -107,7 +108,8 @@ nsEffectiveTLDService::GetPublicSuffix(nsIURI     *aURI,
 
   nsAutoCString host;
   nsresult rv = innerURI->GetAsciiHost(host);
-  if (NS_FAILED(rv)) return rv;
+  if (NS_FAILED(rv)) { return rv;
+}
 
   return GetBaseDomainInternal(host, 0, aPublicSuffix);
 }
@@ -128,7 +130,8 @@ nsEffectiveTLDService::GetBaseDomain(nsIURI     *aURI,
 
   nsAutoCString host;
   nsresult rv = innerURI->GetAsciiHost(host);
-  if (NS_FAILED(rv)) return rv;
+  if (NS_FAILED(rv)) { return rv;
+}
 
   return GetBaseDomainInternal(host, aAdditionalParts + 1, aBaseDomain);
 }
@@ -143,7 +146,8 @@ nsEffectiveTLDService::GetPublicSuffixFromHost(const nsACString &aHostname,
   // This will fail if the hostname includes invalid characters.
   nsAutoCString normHostname(aHostname);
   nsresult rv = NormalizeHostname(normHostname);
-  if (NS_FAILED(rv)) return rv;
+  if (NS_FAILED(rv)) { return rv;
+}
 
   return GetBaseDomainInternal(normHostname, 0, aPublicSuffix);
 }
@@ -162,7 +166,8 @@ nsEffectiveTLDService::GetBaseDomainFromHost(const nsACString &aHostname,
   // This will fail if the hostname includes invalid characters.
   nsAutoCString normHostname(aHostname);
   nsresult rv = NormalizeHostname(normHostname);
-  if (NS_FAILED(rv)) return rv;
+  if (NS_FAILED(rv)) { return rv;
+}
 
   return GetBaseDomainInternal(normHostname, aAdditionalParts + 1, aBaseDomain);
 }
@@ -193,24 +198,28 @@ nsEffectiveTLDService::GetBaseDomainInternal(nsCString  &aHostname,
   const int kExceptionRule = 1;
   const int kWildcardRule = 2;
 
-  if (aHostname.IsEmpty())
+  if (aHostname.IsEmpty()) {
     return NS_ERROR_INSUFFICIENT_DOMAIN_LEVELS;
+}
 
   // chomp any trailing dot, and keep track of it for later
   bool trailingDot = aHostname.Last() == '.';
-  if (trailingDot)
+  if (trailingDot) {
     aHostname.Truncate(aHostname.Length() - 1);
+}
 
   // check the edge cases of the host being '.' or having a second trailing '.',
   // since subsequent checks won't catch it.
-  if (aHostname.IsEmpty() || aHostname.Last() == '.')
+  if (aHostname.IsEmpty() || aHostname.Last() == '.') {
     return NS_ERROR_INVALID_ARG;
+}
 
   // Check if we're dealing with an IPv4/IPv6 hostname, and return
   PRNetAddr addr;
   PRStatus result = PR_StringToNetAddr(aHostname.get(), &addr);
-  if (result == PR_SUCCESS)
+  if (result == PR_SUCCESS) {
     return NS_ERROR_HOST_IS_IP_ADDRESS;
+}
 
   // Lookup in the cache if this is a normal query. This is restricted to
   // main thread-only as the cache is not thread-safe.
@@ -240,8 +249,9 @@ nsEffectiveTLDService::GetBaseDomainInternal(nsCString  &aHostname,
     // sanity check the string we're about to look up: it should not begin with
     // a '.'; this would mean the hostname began with a '.' or had an
     // embedded '..' sequence.
-    if (*currDomain == '.')
+    if (*currDomain == '.') {
       return NS_ERROR_INVALID_ARG;
+}
 
     // Perform the lookup.
     const int result = mGraph.Lookup(Substring(currDomain, end));
@@ -278,7 +288,8 @@ nsEffectiveTLDService::GetBaseDomainInternal(nsCString  &aHostname,
     NS_ASSERTION(aAdditionalParts == -1,
                  "aAdditionalParts can't be negative and different from -1");
 
-    for (iter = aHostname.get(); iter != eTLD && *iter != '.'; iter++);
+    for (iter = aHostname.get(); iter != eTLD && *iter != '.'; iter++) {;
+}
 
     if (iter != eTLD) {
       iter++;
@@ -292,8 +303,9 @@ nsEffectiveTLDService::GetBaseDomainInternal(nsCString  &aHostname,
     iter = eTLD;
 
     while (true) {
-      if (iter == begin)
+      if (iter == begin) {
         break;
+}
 
       if (*(--iter) == '.' && aAdditionalParts-- == 0) {
         ++iter;
@@ -303,8 +315,9 @@ nsEffectiveTLDService::GetBaseDomainInternal(nsCString  &aHostname,
     }
   }
 
-  if (aAdditionalParts != 0)
+  if (aAdditionalParts != 0) {
     return NS_ERROR_INSUFFICIENT_DOMAIN_LEVELS;
+}
 
   aBaseDomain = Substring(iter, end);
 
@@ -315,8 +328,9 @@ nsEffectiveTLDService::GetBaseDomainInternal(nsCString  &aHostname,
   }
 
   // add on the trailing dot, if applicable
-  if (trailingDot)
+  if (trailingDot) {
     aBaseDomain.Append('.');
+}
 
   return NS_OK;
 }
@@ -329,8 +343,9 @@ nsEffectiveTLDService::NormalizeHostname(nsCString &aHostname)
 {
   if (!IsASCII(aHostname)) {
     nsresult rv = mIDNService->ConvertUTF8toACE(aHostname, aHostname);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
       return rv;
+}
   }
 
   ToLowerCase(aHostname);

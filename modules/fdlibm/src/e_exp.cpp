@@ -116,12 +116,15 @@ __ieee754_exp(double x)	/* default IEEE double exp */
             if(hx>=0x7ff00000) {
 	        u_int32_t lx;
 		GET_LOW_WORD(lx,x);
-		if(((hx&0xfffff)|lx)!=0)
+		if(((hx&0xfffff)|lx)!=0) {
 		     return x+x; 		/* NaN */
-		else return (xsb==0)? x:0.0;	/* exp(+-inf)={inf,0} */
+		} else { return (xsb==0)? x:0.0;	/* exp(+-inf)={inf,0} */
+}
 	    }
-	    if(x > o_threshold) return huge*huge; /* overflow */
-	    if(x < u_threshold) return twom1000*twom1000; /* underflow */
+	    if(x > o_threshold) { return huge*huge; /* overflow */
+}
+	    if(x < u_threshold) { return twom1000*twom1000; /* underflow */
+}
 	}
 
     /* argument reduction */
@@ -137,19 +140,23 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 	    STRICT_ASSIGN(double, x, hi - lo);
 	} 
 	else if(hx < 0x3e300000)  {	/* when |x|<2**-28 */
-	    if(huge+x>one) return one+x;/* trigger inexact */
+	    if(huge+x>one) { return one+x;/* trigger inexact */
+}
 	}
-	else k = 0;
+	else { k = 0;
+}
 
     /* x is now in primary range */
 	t  = x*x;
-	if(k >= -1021)
+	if(k >= -1021) {
 	    INSERT_WORDS(twopk,0x3ff00000+(k<<20), 0);
-	else
+	} else {
 	    INSERT_WORDS(twopk,0x3ff00000+((k+1000)<<20), 0);
+}
 	c  = x - t*(P1+t*(P2+t*(P3+t*(P4+t*P5))));
-	if(k==0) 	return one-((x*c)/(c-2.0)-x); 
-	else 		y = one-((lo-(x*c)/(2.0-c))-hi);
+	if(k==0) { 	return one-((x*c)/(c-2.0)-x); 
+	} else { 		y = one-((lo-(x*c)/(2.0-c))-hi);
+}
 	if(k >= -1021) {
 	    if (k==1024) {
 	        double const_0x1p1023 = pow(2, 1023);

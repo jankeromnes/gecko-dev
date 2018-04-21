@@ -391,10 +391,11 @@ sec_pkcs12_decoder_safe_bag_notify(void *arg, PRBool before,
     p12dcx = safeContentsCtx->p12dcx;
 
     /* to make things more readable */
-    if (before)
+    if (before) {
         after = PR_FALSE;
-    else
+    } else {
         after = PR_TRUE;
+}
 
     /* have we determined the safeBagType yet? */
     bag = safeContentsCtx->currentSafeBag;
@@ -1334,8 +1335,9 @@ sec_pkcs12_decoder_verify_mac(SEC_PKCS12DecoderContext *p12dcx)
         return SECFailure;
     }
     buf = (unsigned char *)PORT_Alloc(IN_BUF_LEN + FUDGE);
-    if (!buf)
+    if (!buf) {
         return SECFailure; /* error code has been set. */
+}
 
 #ifdef DEBUG
     memcpy(buf + IN_BUF_LEN, bufferEnd, sizeof bufferEnd);
@@ -1381,8 +1383,9 @@ sec_pkcs12_decoder_verify_mac(SEC_PKCS12DecoderContext *p12dcx)
     symKey = PK11_KeyGen(NULL, integrityMech, params, 0, NULL);
     PK11_DestroyPBEParams(params);
     params = NULL;
-    if (!symKey)
+    if (!symKey) {
         goto loser;
+}
     /* init hmac */
     pk11cx = PK11_CreateContextBySymKey(sec_pkcs12_algtag_to_mech(algtag),
                                         CKA_SIGN, symKey, &ignore);
@@ -1630,8 +1633,9 @@ sec_pkcs12_decoder_set_attribute_value(sec_PKCS12SafeBag *bag,
         bag->attribs =
             PORT_ArenaZNewArray(bag->arena, sec_PKCS12Attribute *, 2);
     } else {
-        while (bag->attribs[i])
+        while (bag->attribs[i]) {
             i++;
+}
         bag->attribs = PORT_ArenaGrowArray(bag->arena, bag->attribs,
                                            sec_PKCS12Attribute *, i + 1, i + 2);
     }
@@ -2408,8 +2412,9 @@ sec_pkcs12_add_cert(sec_PKCS12SafeBag *cert, PRBool keyExists, void *wincx)
         newCert = CERT_NewTempCertificate(CERT_GetDefaultCertDB(),
                                           derCert, NULL, PR_FALSE, PR_FALSE);
         if (!newCert) {
-            if (nickName)
+            if (nickName) {
                 SECITEM_ZfreeItem(nickName, PR_TRUE);
+}
             cert->error = PORT_GetError();
             cert->problem = PR_TRUE;
             return SECFailure;
@@ -2436,8 +2441,9 @@ sec_pkcs12_add_cert(sec_PKCS12SafeBag *cert, PRBool keyExists, void *wincx)
         cert->error = PORT_GetError();
     }
     cert->installed = PR_TRUE;
-    if (nickName)
+    if (nickName) {
         SECITEM_ZfreeItem(nickName, PR_TRUE);
+}
     return rv;
 }
 
@@ -2563,8 +2569,9 @@ sec_pkcs12_add_item_to_bag_list(sec_PKCS12SafeBag ***bagList,
     if (!(*bagList)) {
         newBagList = PORT_ArenaZNewArray(bag->arena, sec_PKCS12SafeBag *, 2);
     } else {
-        while ((*bagList)[i])
+        while ((*bagList)[i]) {
             i++;
+}
         newBagList = PORT_ArenaGrowArray(bag->arena, *bagList,
                                          sec_PKCS12SafeBag *, i + 1, i + 2);
     }
@@ -2644,8 +2651,9 @@ SEC_PKCS12DecoderGetCerts(SEC_PKCS12DecoderContext *p12dcx)
             SECItem *derCert = sec_pkcs12_get_der_cert(safeBags[i]);
             CERTCertificate *tempCert = NULL;
 
-            if (derCert == NULL)
+            if (derCert == NULL) {
                 continue;
+}
             tempCert = CERT_NewTempCertificate(CERT_GetDefaultCertDB(),
                                                derCert, NULL,
                                                PR_FALSE, PR_TRUE);
@@ -2806,8 +2814,9 @@ SEC_PKCS12DecoderValidateBags(SEC_PKCS12DecoderContext *p12dcx,
     i = 0;
     while (p12dcx->safeBags[i]) {
         bagCnt++;
-        if (p12dcx->safeBags[i]->noInstall)
+        if (p12dcx->safeBags[i]->noInstall) {
             noInstallCnt++;
+}
         if (p12dcx->safeBags[i]->problem) {
             probCnt++;
             errorVal = p12dcx->safeBags[i]->error;
@@ -3031,8 +3040,9 @@ sec_pkcs12_install_bags(sec_PKCS12SafeBag **safeBags, PRBool forceUnicode,
                     sec_PKCS12SafeBag *cert = certList[j];
                     SECStatus certRv;
 
-                    if (!cert)
+                    if (!cert) {
                         continue;
+}
                     if (rv != SECSuccess) {
                         cert->problem = key->problem;
                         cert->error = key->error;
@@ -3051,8 +3061,9 @@ sec_pkcs12_install_bags(sec_PKCS12SafeBag **safeBags, PRBool forceUnicode,
             }
         }
     }
-    if (failedKeys)
+    if (failedKeys) {
         return SECFailure;
+}
 
     /* Now take a second pass over the safebags and install any certs
      * that were neither installed nor disqualified by the first pass.
@@ -3457,8 +3468,9 @@ sec_pkcs12_decoder_convert_old_cert(SEC_PKCS12DecoderContext *p12dcx,
     }
 
     i = 0;
-    while (derCertList[i])
+    while (derCertList[i]) {
         i++;
+}
 
     certList = PORT_ArenaZNewArray(p12dcx->arena, sec_PKCS12SafeBag *, (i + 1));
     if (!certList) {

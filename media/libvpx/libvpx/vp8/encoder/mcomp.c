@@ -313,7 +313,8 @@ int vp8_find_best_sub_pixel_step_iteratively(MACROBLOCK *x, BLOCK *b, BLOCKD *d,
     }
 
     /* no reason to check the same one again. */
-    if (tr == br && tc == bc) break;
+    if (tr == br && tc == bc) { break;
+}
 
     tr = br;
     tc = bc;
@@ -340,7 +341,8 @@ int vp8_find_best_sub_pixel_step_iteratively(MACROBLOCK *x, BLOCK *b, BLOCKD *d,
     }
 
     /* no reason to check the same one again. */
-    if (tr == br && tc == bc) break;
+    if (tr == br && tc == bc) { break;
+}
 
     tr = br;
     tc = bc;
@@ -503,9 +505,11 @@ int vp8_find_best_sub_pixel_step(MACROBLOCK *x, BLOCK *b, BLOCKD *d,
   }
 
   /* time to check quarter pels. */
-  if (bestmv->as_mv.row < startmv.as_mv.row) y -= y_stride;
+  if (bestmv->as_mv.row < startmv.as_mv.row) { y -= y_stride;
+}
 
-  if (bestmv->as_mv.col < startmv.as_mv.col) y--;
+  if (bestmv->as_mv.col < startmv.as_mv.col) { y--;
+}
 
   startmv = *bestmv;
 
@@ -886,18 +890,19 @@ int vp8_hex_search(MACROBLOCK *x, BLOCK *b, BLOCKD *d, int_mv *ref_mv,
 
 #if CONFIG_MULTI_RES_ENCODING
   /* Lower search range based on prediction info */
-  if (search_param >= 6)
+  if (search_param >= 6) {
     goto cal_neighbors;
-  else if (search_param >= 5)
+  } else if (search_param >= 5) {
     hex_range = 4;
-  else if (search_param >= 4)
+  } else if (search_param >= 4) {
     hex_range = 6;
-  else if (search_param >= 3)
+  } else if (search_param >= 3) {
     hex_range = 15;
-  else if (search_param >= 2)
+  } else if (search_param >= 2) {
     hex_range = 31;
-  else if (search_param >= 1)
+  } else if (search_param >= 1) {
     hex_range = 63;
+}
 
   dia_range = 8;
 #else
@@ -1330,13 +1335,17 @@ int vp8_full_search_sad_c(MACROBLOCK *x, BLOCK *b, BLOCKD *d, int_mv *ref_mv,
   /* Apply further limits to prevent us looking using vectors that
    * stretch beyiond the UMV border
    */
-  if (col_min < x->mv_col_min) col_min = x->mv_col_min;
+  if (col_min < x->mv_col_min) { col_min = x->mv_col_min;
+}
 
-  if (col_max > x->mv_col_max) col_max = x->mv_col_max;
+  if (col_max > x->mv_col_max) { col_max = x->mv_col_max;
+}
 
-  if (row_min < x->mv_row_min) row_min = x->mv_row_min;
+  if (row_min < x->mv_row_min) { row_min = x->mv_row_min;
+}
 
-  if (row_max > x->mv_row_max) row_max = x->mv_row_max;
+  if (row_max > x->mv_row_max) { row_max = x->mv_row_max;
+}
 
   for (r = row_min; r < row_max; ++r) {
     this_mv.as_mv.row = r;
@@ -1418,13 +1427,17 @@ int vp8_full_search_sadx3(MACROBLOCK *x, BLOCK *b, BLOCKD *d, int_mv *ref_mv,
   /* Apply further limits to prevent us looking using vectors that stretch
    * beyond the UMV border
    */
-  if (col_min < x->mv_col_min) col_min = x->mv_col_min;
+  if (col_min < x->mv_col_min) { col_min = x->mv_col_min;
+}
 
-  if (col_max > x->mv_col_max) col_max = x->mv_col_max;
+  if (col_max > x->mv_col_max) { col_max = x->mv_col_max;
+}
 
-  if (row_min < x->mv_row_min) row_min = x->mv_row_min;
+  if (row_min < x->mv_row_min) { row_min = x->mv_row_min;
+}
 
-  if (row_max > x->mv_row_max) row_max = x->mv_row_max;
+  if (row_max > x->mv_row_max) { row_max = x->mv_row_max;
+}
 
   for (r = row_min; r < row_max; ++r) {
     this_mv.as_mv.row = r;
@@ -1538,13 +1551,17 @@ int vp8_full_search_sadx8(MACROBLOCK *x, BLOCK *b, BLOCKD *d, int_mv *ref_mv,
   /* Apply further limits to prevent us looking using vectors that stretch
    * beyond the UMV border
    */
-  if (col_min < x->mv_col_min) col_min = x->mv_col_min;
+  if (col_min < x->mv_col_min) { col_min = x->mv_col_min;
+}
 
-  if (col_max > x->mv_col_max) col_max = x->mv_col_max;
+  if (col_max > x->mv_col_max) { col_max = x->mv_col_max;
+}
 
-  if (row_min < x->mv_row_min) row_min = x->mv_row_min;
+  if (row_min < x->mv_row_min) { row_min = x->mv_row_min;
+}
 
-  if (row_max > x->mv_row_max) row_max = x->mv_row_max;
+  if (row_max > x->mv_row_max) { row_max = x->mv_row_max;
+}
 
   for (r = row_min; r < row_max; ++r) {
     this_mv.as_mv.row = r;

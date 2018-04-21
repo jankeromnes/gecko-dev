@@ -284,8 +284,9 @@ arrayContainsExtension(const PRUint16 *array, PRUint32 len, PRUint16 ex_type)
 {
     unsigned int i;
     for (i = 0; i < len; i++) {
-        if (ex_type == array[i])
+        if (ex_type == array[i]) {
             return PR_TRUE;
+}
     }
     return PR_FALSE;
 }
@@ -552,12 +553,14 @@ ssl3_HandleExtensions(sslSocket *ss,
     SECStatus rv;
 
     rv = ssl3_ParseExtensions(ss, b, length);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     rv = ssl3_HandleParsedExtensions(ss, handshakeMessage);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     ssl3_DestroyRemoteExtensions(&ss->ssl3.hs.remoteExtensions);
     return SECSuccess;

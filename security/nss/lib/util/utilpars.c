@@ -69,8 +69,9 @@ NSSUTIL_ArgIsQuote(char c)
 const char *
 NSSUTIL_ArgStrip(const char *c)
 {
-    while (*c && NSSUTIL_ArgIsBlank(*c))
+    while (*c && NSSUTIL_ArgIsBlank(*c)) {
         c++;
+}
     return c;
 }
 
@@ -98,8 +99,9 @@ NSSUTIL_ArgFindEnd(const char *string)
             lastEscape = PR_TRUE;
             continue;
         }
-        if ((endChar == ' ') && NSSUTIL_ArgIsBlank(*string))
+        if ((endChar == ' ') && NSSUTIL_ArgIsBlank(*string)) {
             break;
+}
         if (*string == endChar) {
             break;
         }
@@ -128,14 +130,17 @@ NSSUTIL_ArgFetchValue(const char *string, int *pcount)
 
     copyString = retString = (char *)PORT_Alloc(len + 1);
 
-    if (*end)
+    if (*end) {
         len++;
+}
     *pcount = len;
-    if (retString == NULL)
+    if (retString == NULL) {
         return NULL;
+}
 
-    if (NSSUTIL_ArgIsQuote(*string))
+    if (NSSUTIL_ArgIsQuote(*string)) {
         string++;
+}
     for (; string < end; string++) {
         if (NSSUTIL_ArgIsEscape(*string) && !lastEscape) {
             lastEscape = PR_TRUE;
@@ -161,13 +166,15 @@ NSSUTIL_ArgSkipParameter(const char *string)
             string++;
             break;
         }
-        if (NSSUTIL_ArgIsBlank(*string))
+        if (NSSUTIL_ArgIsBlank(*string)) {
             return (string);
+}
     }
 
     end = NSSUTIL_ArgFindEnd(string);
-    if (*end)
+    if (*end) {
         end++;
+}
     return end;
 }
 
@@ -182,8 +189,9 @@ NSSUTIL_ArgGetParamValue(const char *paramName, const char *parameters)
     char *returnValue = NULL;
     int next;
 
-    if ((parameters == NULL) || (*parameters == 0))
+    if ((parameters == NULL) || (*parameters == 0)) {
         return NULL;
+}
 
     PORT_Assert(paramLen + 2 < sizeof(searchValue));
 
@@ -229,8 +237,9 @@ NSSUTIL_ArgHasFlag(const char *label, const char *flag, const char *parameters)
     PRBool found = PR_FALSE;
 
     flags = NSSUTIL_ArgGetParamValue(label, parameters);
-    if (flags == NULL)
+    if (flags == NULL) {
         return PR_FALSE;
+}
 
     for (index = flags; *index; index = NSSUTIL_ArgNextFlag(index)) {
         if (PORT_Strncasecmp(index, flag, len) == 0) {
@@ -254,8 +263,9 @@ NSSUTIL_ArgDecodeNumber(const char *num)
     int sign = 1;
     int digit;
 
-    if (num == NULL)
+    if (num == NULL) {
         return retValue;
+}
 
     num = NSSUTIL_ArgStrip(num);
 
@@ -283,8 +293,9 @@ NSSUTIL_ArgDecodeNumber(const char *num)
         } else {
             break;
         }
-        if (digit >= radix)
+        if (digit >= radix) {
             break;
+}
         value = value * radix + digit;
     }
 
@@ -308,15 +319,17 @@ NSSUTIL_ArgGetLabel(const char *inString, int *next)
         if (*string == '=') {
             break;
         }
-        if (NSSUTIL_ArgIsBlank(*string))
+        if (NSSUTIL_ArgIsBlank(*string)) {
             break;
+}
     }
 
     len = string - inString;
 
     *next = len;
-    if (*string == '=')
+    if (*string == '=') {
         (*next) += 1;
+}
     if (len > 0) {
         name = PORT_Alloc(len + 1);
         PORT_Strncpy(name, inString, len);
@@ -334,18 +347,21 @@ NSSUTIL_ArgReadLong(const char *label, const char *params,
 {
     char *value;
     long retValue;
-    if (isdefault)
+    if (isdefault) {
         *isdefault = PR_FALSE;
+}
 
     value = NSSUTIL_ArgGetParamValue(label, params);
     if (value == NULL) {
-        if (isdefault)
+        if (isdefault) {
             *isdefault = PR_TRUE;
+}
         return defValue;
     }
     retValue = NSSUTIL_ArgDecodeNumber(value);
-    if (value)
+    if (value) {
         PORT_Free(value);
+}
 
     return retValue;
 }
@@ -362,8 +378,9 @@ nssutil_escapeQuotesSize(const char *string, char quote, PRBool addquotes)
 
     size = addquotes ? 2 : 0;
     for (src = string; *src; src++) {
-        if ((*src == quote) || (*src == '\\'))
+        if ((*src == quote) || (*src == '\\')) {
             escapes++;
+}
         size++;
     }
     return size + escapes + 1;
@@ -384,16 +401,18 @@ nssutil_escapeQuotes(const char *string, char quote, PRBool addquotes)
         return NULL;
     }
 
-    if (addquotes)
+    if (addquotes) {
         *dest++ = quote;
+}
     for (src = string; *src; src++, dest++) {
         if ((*src == '\\') || (*src == quote)) {
             *dest++ = '\\';
         }
         *dest = *src;
     }
-    if (addquotes)
+    if (addquotes) {
         *dest = quote;
+}
 
     return newString;
 }
@@ -428,12 +447,15 @@ NSSUTIL_DoubleEscapeSize(const char *string, char quote1, char quote2)
     int escapes = 0, size = 0;
     const char *src;
     for (src = string; *src; src++) {
-        if (*src == '\\')
+        if (*src == '\\') {
             escapes += 3; /* \\\\ */
-        if (*src == quote1)
+}
+        if (*src == quote1) {
             escapes += 2; /* \\quote1 */
-        if (*src == quote2)
+}
+        if (*src == quote2) {
             escapes++; /* \quote2 */
+}
         size++;
     }
 
@@ -477,8 +499,9 @@ nssutil_formatValue(PLArenaPool *arena, char *value, char quote)
     int size = 0, escapes = 0;
 
     for (vp = value; *vp; vp++) {
-        if ((*vp == quote) || (*vp == NSSUTIL_ARG_ESCAPE))
+        if ((*vp == quote) || (*vp == NSSUTIL_ARG_ESCAPE)) {
             escapes++;
+}
         size++;
     }
     if (arena) {
@@ -486,12 +509,14 @@ nssutil_formatValue(PLArenaPool *arena, char *value, char quote)
     } else {
         retval = PORT_ZAlloc(size + escapes + 1);
     }
-    if (retval == NULL)
+    if (retval == NULL) {
         return NULL;
+}
     vp2 = retval;
     for (vp = value; *vp; vp++) {
-        if ((*vp == quote) || (*vp == NSSUTIL_ARG_ESCAPE))
+        if ((*vp == quote) || (*vp == NSSUTIL_ARG_ESCAPE)) {
             *vp2++ = NSSUTIL_ARG_ESCAPE;
+}
         *vp2++ = *vp;
     }
     return retval;
@@ -501,8 +526,9 @@ static PRBool
 nssutil_argHasChar(char *v, char c)
 {
     for (; *v; v++) {
-        if (*v == c)
+        if (*v == c) {
             return PR_TRUE;
+}
     }
     return PR_FALSE;
 }
@@ -511,8 +537,9 @@ static PRBool
 nssutil_argHasBlanks(char *v)
 {
     for (; *v; v++) {
-        if (NSSUTIL_ArgIsBlank(*v))
+        if (NSSUTIL_ArgIsBlank(*v)) {
             return PR_TRUE;
+}
     }
     return PR_FALSE;
 }
@@ -526,27 +553,32 @@ nssutil_formatPair(char *name, char *value, char quote)
     char *returnValue;
     PRBool need_quote = PR_FALSE;
 
-    if (!value || (*value == 0))
+    if (!value || (*value == 0)) {
         return nssutil_nullString;
+}
 
-    if (nssutil_argHasBlanks(value) || NSSUTIL_ArgIsQuote(value[0]))
+    if (nssutil_argHasBlanks(value) || NSSUTIL_ArgIsQuote(value[0])) {
         need_quote = PR_TRUE;
+}
 
     if ((need_quote && nssutil_argHasChar(value, closeQuote)) || nssutil_argHasChar(value, NSSUTIL_ARG_ESCAPE)) {
         value = newValue = nssutil_formatValue(NULL, value, quote);
-        if (newValue == NULL)
+        if (newValue == NULL) {
             return nssutil_nullString;
+}
     }
     if (need_quote) {
         returnValue = PR_smprintf("%s=%c%s%c", name, openQuote, value, closeQuote);
     } else {
         returnValue = PR_smprintf("%s=%s", name, value);
     }
-    if (returnValue == NULL)
+    if (returnValue == NULL) {
         returnValue = nssutil_nullString;
+}
 
-    if (newValue)
+    if (newValue) {
         PORT_Free(newValue);
+}
 
     return returnValue;
 }
@@ -557,8 +589,9 @@ nssutil_formatIntPair(char *name, unsigned long value,
 {
     char *returnValue;
 
-    if (value == def)
+    if (value == def) {
         return nssutil_nullString;
+}
 
     returnValue = PR_smprintf("%s=%d", name, value);
 
@@ -626,11 +659,13 @@ NSSUTIL_ArgParseSlotFlags(const char *label, const char *params)
     PRBool all = PR_FALSE;
 
     flags = NSSUTIL_ArgGetParamValue(label, params);
-    if (flags == NULL)
+    if (flags == NULL) {
         return 0;
+}
 
-    if (PORT_Strcasecmp(flags, "all") == 0)
+    if (PORT_Strcasecmp(flags, "all") == 0) {
         all = PR_TRUE;
+}
 
     for (index = flags; *index; index = NSSUTIL_ArgNextFlag(index)) {
         for (i = 0; i < nssutil_argSlotFlagTableSize; i++) {
@@ -684,8 +719,9 @@ NSSUTIL_ArgParseSlotInfo(PLArenaPool *arena, const char *slotParams,
     int i = 0, count = 0, next;
 
     *retCount = 0;
-    if ((slotParams == NULL) || (*slotParams == 0))
+    if ((slotParams == NULL) || (*slotParams == 0)) {
         return NULL;
+}
 
     /* first count the number of slots */
     for (slotIndex = NSSUTIL_ArgStrip(slotParams); *slotIndex;
@@ -700,8 +736,9 @@ NSSUTIL_ArgParseSlotInfo(PLArenaPool *arena, const char *slotParams,
     } else {
         slotInfo = PORT_ZNewArray(struct NSSUTILPreSlotInfoStr, count);
     }
-    if (slotInfo == NULL)
+    if (slotInfo == NULL) {
         return NULL;
+}
 
     for (slotIndex = NSSUTIL_ArgStrip(slotParams), i = 0;
          *slotIndex && i < count;) {
@@ -718,8 +755,9 @@ NSSUTIL_ArgParseSlotInfo(PLArenaPool *arena, const char *slotParams,
                 PORT_Free(args);
             }
         }
-        if (name)
+        if (name) {
             PORT_Free(name);
+}
         slotIndex = NSSUTIL_ArgStrip(slotIndex);
     }
     *retCount = i;
@@ -777,8 +815,9 @@ nssutil_mkRootFlags(PRBool hasRootCerts, PRBool hasRootTrust)
         first = PR_FALSE;
     }
     if (hasRootTrust) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "hasRootTrust");
     }
     return flags;
@@ -808,10 +847,12 @@ NSSUTIL_MkSlotString(unsigned long slotID, unsigned long defaultFlags,
     rootFlags = nssutil_mkRootFlags(hasRootCerts, hasRootTrust);
     flagPair = nssutil_formatPair("slotFlags", flags, '\'');
     rootFlagsPair = nssutil_formatPair("rootFlags", rootFlags, '\'');
-    if (flags)
+    if (flags) {
         PR_smprintf_free(flags);
-    if (rootFlags)
+}
+    if (rootFlags) {
         PORT_Free(rootFlags);
+}
     if (defaultFlags & PK11_OWN_PW_DEFAULTS) {
         slotString = PR_smprintf("0x%08lx=[%s askpw=%s timeout=%d %s]",
                                  (PRUint32)slotID, flagPair, askpw, timeout,
@@ -921,8 +962,9 @@ void
 NSSUTIL_ArgParseCipherFlags(unsigned long *newCiphers, const char *cipherList)
 {
     newCiphers[0] = newCiphers[1] = 0;
-    if ((cipherList == NULL) || (*cipherList == 0))
+    if ((cipherList == NULL) || (*cipherList == 0)) {
         return;
+}
 
     for (; *cipherList; cipherList = NSSUTIL_ArgNextFlag(cipherList)) {
         if (PORT_Strncasecmp(cipherList, NSSUTIL_ARG_FORTEZZA_FLAG,
@@ -961,26 +1003,30 @@ nssutil_mkNSSFlags(PRBool internal, PRBool isFIPS,
         first = PR_FALSE;
     }
     if (isFIPS) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "FIPS");
         first = PR_FALSE;
     }
     if (isModuleDB) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "moduleDB");
         first = PR_FALSE;
     }
     if (isModuleDBOnly) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "moduleDBOnly");
         first = PR_FALSE;
     }
     if (isCritical) {
-        if (!first)
+        if (!first) {
             PORT_Strcat(flags, ",");
+}
         PORT_Strcat(flags, "critical");
     }
     return flags;
@@ -1071,14 +1117,17 @@ NSSUTIL_MkNSSString(char **slotStrings, int slotCount, PRBool internal,
     cipherOrderPair = nssutil_formatIntPair("cipherOrder", cipherOrder,
                                             NSSUTIL_DEFAULT_CIPHER_ORDER);
     slotPair = nssutil_formatPair("slotParams", slotParams, '{'); /* } */
-    if (slotParams)
+    if (slotParams) {
         PORT_Free(slotParams);
+}
     cipherPair = nssutil_formatPair("ciphers", ciphers, '\'');
-    if (ciphers)
+    if (ciphers) {
         PR_smprintf_free(ciphers);
+}
     flagPair = nssutil_formatPair("Flags", nssFlags, '\'');
-    if (nssFlags)
+    if (nssFlags) {
         PORT_Free(nssFlags);
+}
     nss = PR_smprintf("%s %s %s %s %s", trustOrderPair,
                       cipherOrderPair, slotPair, cipherPair, flagPair);
     nssutil_freePair(trustOrderPair);
@@ -1190,8 +1239,9 @@ _NSSUTIL_GetSecmodName(const char *param, NSSDBType *dbType, char **appName,
     }
 
     if (!secmodName || *secmodName == '\0') {
-        if (secmodName)
+        if (secmodName) {
             PORT_Free(secmodName);
+}
         secmodName = PORT_Strdup(SECMOD_DB);
     }
 
@@ -1222,7 +1272,8 @@ _NSSUTIL_GetSecmodName(const char *param, NSSDBType *dbType, char **appName,
     } else {
         value = PR_smprintf("%s", secmodName);
     }
-    if (configdir)
+    if (configdir) {
         PORT_Free(configdir);
+}
     return value;
 }

@@ -46,7 +46,8 @@ extern void vp8_blit_line(int x0, int x1, int y0, int y1, unsigned char *image,
  */
 #if CONFIG_POSTPROC
 static int q2mbl(int x) {
-  if (x < 20) x = 20;
+  if (x < 20) { x = 20;
+}
 
   x = 50 + (x - 50) * 10 / 8;
   return x * x / 3;
@@ -277,9 +278,11 @@ int vp8_post_proc_frame(VP8_COMMON *oci, YV12_BUFFER_CONFIG *dest,
   int deblock_level = ppflags->deblocking_level;
   int noise_level = ppflags->noise_level;
 
-  if (!oci->frame_to_show) return -1;
+  if (!oci->frame_to_show) { return -1;
+}
 
-  if (q > 63) q = 63;
+  if (q > 63) { q = 63;
+}
 
   if (!flags) {
     *dest = *oci->frame_to_show;
@@ -296,7 +299,8 @@ int vp8_post_proc_frame(VP8_COMMON *oci, YV12_BUFFER_CONFIG *dest,
     if (!oci->postproc_state.generated_noise) {
       oci->postproc_state.generated_noise = vpx_calloc(
           oci->Width + 256, sizeof(*oci->postproc_state.generated_noise));
-      if (!oci->postproc_state.generated_noise) return 1;
+      if (!oci->postproc_state.generated_noise) { return 1;
+}
     }
   }
 

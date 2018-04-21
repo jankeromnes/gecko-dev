@@ -110,9 +110,10 @@ void av1_fill_mode_rates(AV1_COMMON *const cm, MACROBLOCK *x,
   int i, j;
 
   if (cm->frame_type == KEY_FRAME) {
-    for (i = 0; i < PARTITION_CONTEXTS_PRIMARY; ++i)
+    for (i = 0; i < PARTITION_CONTEXTS_PRIMARY; ++i) {
       av1_cost_tokens_from_cdf(x->partition_cost[i], fc->partition_cdf[i],
                                NULL);
+}
 #if CONFIG_UNPOISON_PARTITION_CTX
     for (; i < PARTITION_CONTEXTS_PRIMARY + PARTITION_BLOCK_SIZES; ++i) {
       aom_prob p = fc->partition_prob[i][PARTITION_VERT];
@@ -142,20 +143,24 @@ void av1_fill_mode_rates(AV1_COMMON *const cm, MACROBLOCK *x,
     for (j = 0; j < KF_MODE_CONTEXTS; ++j)
       av1_cost_tokens_from_cdf(x->y_mode_costs[i][j], fc->kf_y_cdf[i][j], NULL);
 #else
-  for (i = 0; i < INTRA_MODES; ++i)
-    for (j = 0; j < INTRA_MODES; ++j)
+  for (i = 0; i < INTRA_MODES; ++i) {
+    for (j = 0; j < INTRA_MODES; ++j) {
       av1_cost_tokens_from_cdf(x->y_mode_costs[i][j], fc->kf_y_cdf[i][j], NULL);
+}
 #endif
 
-  for (i = 0; i < BLOCK_SIZE_GROUPS; ++i)
+  for (i = 0; i < BLOCK_SIZE_GROUPS; ++i) {
     av1_cost_tokens_from_cdf(x->mbmode_cost[i], fc->y_mode_cdf[i], NULL);
-  for (i = 0; i < INTRA_MODES; ++i)
+}
+  for (i = 0; i < INTRA_MODES; ++i) {
     av1_cost_tokens_from_cdf(x->intra_uv_mode_cost[i], fc->uv_mode_cdf[i],
                              NULL);
+}
 
-  for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; ++i)
+  for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; ++i) {
     av1_cost_tokens_from_cdf(x->switchable_interp_costs[i],
                              fc->switchable_interp_cdf[i], NULL);
+}
 
   for (i = 0; i < PALETTE_BLOCK_SIZES; ++i) {
     av1_cost_tokens_from_cdf(x->palette_y_size_cost[i],
@@ -204,10 +209,11 @@ void av1_fill_mode_rates(AV1_COMMON *const cm, MACROBLOCK *x,
   }
 #endif  // CONFIG_CFL
 
-  for (i = 0; i < MAX_TX_DEPTH; ++i)
-    for (j = 0; j < TX_SIZE_CONTEXTS; ++j)
+  for (i = 0; i < MAX_TX_DEPTH; ++i) {
+    for (j = 0; j < TX_SIZE_CONTEXTS; ++j) {
       av1_cost_tokens_from_cdf(x->tx_size_cost[i][j], fc->tx_size_cdf[i][j],
                                NULL);
+}
 
 #if CONFIG_EXT_TX
 #if CONFIG_LGT_FROM_PRED
@@ -307,13 +313,15 @@ void av1_fill_mode_rates(AV1_COMMON *const cm, MACROBLOCK *x,
       x->drl_mode_cost0[i][1] = av1_cost_bit(fc->drl_prob[i], 1);
 #endif
     }
-    for (i = 0; i < INTER_MODE_CONTEXTS; ++i)
+    for (i = 0; i < INTER_MODE_CONTEXTS; ++i) {
       av1_cost_tokens_from_cdf(x->inter_compound_mode_cost[i],
                                fc->inter_compound_mode_cdf[i], NULL);
+}
 #if CONFIG_WEDGE || CONFIG_COMPOUND_SEGMENT
-    for (i = 0; i < BLOCK_SIZES_ALL; ++i)
+    for (i = 0; i < BLOCK_SIZES_ALL; ++i) {
       av1_cost_tokens_from_cdf(x->compound_type_cost[i],
                                fc->compound_type_cdf[i], NULL);
+}
 #endif  // CONFIG_WEDGE || CONFIG_COMPOUND_SEGMENT
 #if CONFIG_COMPOUND_SINGLEREF
     for (i = 0; i < INTER_MODE_CONTEXTS; ++i)
@@ -321,9 +329,10 @@ void av1_fill_mode_rates(AV1_COMMON *const cm, MACROBLOCK *x,
                                fc->inter_singleref_comp_mode_cdf[i], NULL);
 #endif  // CONFIG_COMPOUND_SINGLEREF
 #if CONFIG_INTERINTRA
-    for (i = 0; i < BLOCK_SIZE_GROUPS; ++i)
+    for (i = 0; i < BLOCK_SIZE_GROUPS; ++i) {
       av1_cost_tokens_from_cdf(x->interintra_mode_cost[i],
                                fc->interintra_mode_cdf[i], NULL);
+}
 #endif  // CONFIG_INTERINTRA
 #if CONFIG_MOTION_VAR || CONFIG_WARPED_MOTION
     for (i = BLOCK_8X8; i < BLOCK_SIZES_ALL; i++) {
@@ -426,7 +435,8 @@ int av1_compute_rd_mult(const AV1_COMP *cpi, int qindex) {
     rdmult = (rdmult * rd_frame_type_factor[frame_type]) >> 7;
     rdmult += ((rdmult * rd_boost_factor[boost_index]) >> 7);
   }
-  if (rdmult < 1) rdmult = 1;
+  if (rdmult < 1) { rdmult = 1;
+}
   return (int)rdmult;
 }
 
@@ -491,10 +501,11 @@ static void set_block_thresholds(const AV1_COMMON *cm, RD_OPT *rd) {
       const int thresh_max = INT_MAX / t;
 
 #if CONFIG_CB4X4
-      for (i = 0; i < MAX_MODES; ++i)
+      for (i = 0; i < MAX_MODES; ++i) {
         rd->threshes[segment_id][bsize][i] = rd->thresh_mult[i] < thresh_max
                                                  ? rd->thresh_mult[i] * t / 4
                                                  : INT_MAX;
+}
 #else
       if (bsize >= BLOCK_8X8) {
         for (i = 0; i < MAX_MODES; ++i)
@@ -734,7 +745,7 @@ void av1_initialize_rd_consts(AV1_COMP *cpi) {
 
 #if CONFIG_GLOBAL_MOTION
   if (cpi->oxcf.pass != 1) {
-    for (int i = 0; i < TRANS_TYPES; ++i)
+    for (int i = 0; i < TRANS_TYPES; ++i) {
 #if GLOBAL_TRANS_TYPES > 4
       cpi->gmtype_cost[i] = (1 + (i > 0 ? GLOBAL_TYPE_BITS : 0))
                             << AV1_PROB_COST_SHIFT;
@@ -745,6 +756,7 @@ void av1_initialize_rd_consts(AV1_COMP *cpi) {
       // AFFINE: 3 bits
       cpi->gmtype_cost[i] = (1 + (i > 0 ? (i == ROTZOOM ? 1 : 2) : 0))
                             << AV1_PROB_COST_SHIFT;
+}
 #endif  // GLOBAL_TRANS_TYPES > 4
   }
 #endif  // CONFIG_GLOBAL_MOTION
@@ -1001,22 +1013,28 @@ static void get_entropy_contexts_plane(
       memcpy(t_left, left, sizeof(ENTROPY_CONTEXT) * num_4x4_h);
       break;
     case TX_8X8:
-      for (i = 0; i < num_4x4_w; i += 2)
+      for (i = 0; i < num_4x4_w; i += 2) {
         t_above[i] = !!*(const uint16_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 2)
+}
+      for (i = 0; i < num_4x4_h; i += 2) {
         t_left[i] = !!*(const uint16_t *)&left[i];
+}
       break;
     case TX_16X16:
-      for (i = 0; i < num_4x4_w; i += 4)
+      for (i = 0; i < num_4x4_w; i += 4) {
         t_above[i] = !!*(const uint32_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 4)
+}
+      for (i = 0; i < num_4x4_h; i += 4) {
         t_left[i] = !!*(const uint32_t *)&left[i];
+}
       break;
     case TX_32X32:
-      for (i = 0; i < num_4x4_w; i += 8)
+      for (i = 0; i < num_4x4_w; i += 8) {
         t_above[i] = !!*(const uint64_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 8)
+}
+      for (i = 0; i < num_4x4_h; i += 8) {
         t_left[i] = !!*(const uint64_t *)&left[i];
+}
       break;
 #if CONFIG_TX64X64
     case TX_32X64:
@@ -1044,37 +1062,47 @@ static void get_entropy_contexts_plane(
 #endif  // CONFIG_TX64X64
     case TX_4X8:
       memcpy(t_above, above, sizeof(ENTROPY_CONTEXT) * num_4x4_w);
-      for (i = 0; i < num_4x4_h; i += 2)
+      for (i = 0; i < num_4x4_h; i += 2) {
         t_left[i] = !!*(const uint16_t *)&left[i];
+}
       break;
     case TX_8X4:
-      for (i = 0; i < num_4x4_w; i += 2)
+      for (i = 0; i < num_4x4_w; i += 2) {
         t_above[i] = !!*(const uint16_t *)&above[i];
+}
       memcpy(t_left, left, sizeof(ENTROPY_CONTEXT) * num_4x4_h);
       break;
     case TX_8X16:
-      for (i = 0; i < num_4x4_w; i += 2)
+      for (i = 0; i < num_4x4_w; i += 2) {
         t_above[i] = !!*(const uint16_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 4)
+}
+      for (i = 0; i < num_4x4_h; i += 4) {
         t_left[i] = !!*(const uint32_t *)&left[i];
+}
       break;
     case TX_16X8:
-      for (i = 0; i < num_4x4_w; i += 4)
+      for (i = 0; i < num_4x4_w; i += 4) {
         t_above[i] = !!*(const uint32_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 2)
+}
+      for (i = 0; i < num_4x4_h; i += 2) {
         t_left[i] = !!*(const uint16_t *)&left[i];
+}
       break;
     case TX_16X32:
-      for (i = 0; i < num_4x4_w; i += 4)
+      for (i = 0; i < num_4x4_w; i += 4) {
         t_above[i] = !!*(const uint32_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 8)
+}
+      for (i = 0; i < num_4x4_h; i += 8) {
         t_left[i] = !!*(const uint64_t *)&left[i];
+}
       break;
     case TX_32X16:
-      for (i = 0; i < num_4x4_w; i += 8)
+      for (i = 0; i < num_4x4_w; i += 8) {
         t_above[i] = !!*(const uint64_t *)&above[i];
-      for (i = 0; i < num_4x4_h; i += 4)
+}
+      for (i = 0; i < num_4x4_h; i += 4) {
         t_left[i] = !!*(const uint32_t *)&left[i];
+}
       break;
 #if CONFIG_RECT_TX_EXT && (CONFIG_EXT_TX || CONFIG_VAR_TX)
     case TX_4X16:
@@ -1135,8 +1163,9 @@ void av1_mv_pred(const AV1_COMP *cpi, MACROBLOCK *x, uint8_t *ref_y_buffer,
       x->mbmi_ext->ref_mvs[ref_frame][1].as_int) {
     pred_mv[num_mv_refs++] = x->mbmi_ext->ref_mvs[ref_frame][1].as_mv;
   }
-  if (cpi->sf.adaptive_motion_search && block_size < x->max_partition_size)
+  if (cpi->sf.adaptive_motion_search && block_size < x->max_partition_size) {
     pred_mv[num_mv_refs++] = x->pred_mv[ref_frame];
+}
 
   assert(num_mv_refs <= (int)(sizeof(pred_mv) / sizeof(pred_mv[0])));
 
@@ -1148,7 +1177,8 @@ void av1_mv_pred(const AV1_COMP *cpi, MACROBLOCK *x, uint8_t *ref_y_buffer,
     fp_col = (this_mv->col + 3 + (this_mv->col >= 0)) >> 3;
     max_mv = AOMMAX(max_mv, AOMMAX(abs(this_mv->row), abs(this_mv->col)) >> 3);
 
-    if (fp_row == 0 && fp_col == 0 && zero_seen) continue;
+    if (fp_row == 0 && fp_col == 0 && zero_seen) { continue;
+}
     zero_seen |= (fp_row == 0 && fp_col == 0);
 
     ref_y_ptr = &ref_y_buffer[ref_y_stride * fp_row + fp_col];
@@ -1258,7 +1288,8 @@ void av1_set_rd_speed_thresholds(AV1_COMP *cpi) {
   SPEED_FEATURES *const sf = &cpi->sf;
 
   // Set baseline threshold values.
-  for (i = 0; i < MAX_MODES; ++i) rd->thresh_mult[i] = cpi->oxcf.mode == 0;
+  for (i = 0; i < MAX_MODES; ++i) { rd->thresh_mult[i] = cpi->oxcf.mode == 0;
+}
 
   if (sf->adaptive_rd_thresh) {
     rd->thresh_mult[THR_NEARESTMV] = 300;

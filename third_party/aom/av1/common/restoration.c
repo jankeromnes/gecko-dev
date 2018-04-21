@@ -90,12 +90,13 @@ int sgrproj_mtable[MAX_EPS][MAX_NELEM];
 
 static void GenSgrprojVtable() {
   int e, n;
-  for (e = 1; e <= MAX_EPS; ++e)
+  for (e = 1; e <= MAX_EPS; ++e) {
     for (n = 1; n <= MAX_NELEM; ++n) {
       const int n2e = n * n * e;
       sgrproj_mtable[e - 1][n - 1] =
           (((1 << SGRPROJ_MTABLE_BITS) + n2e / 2) / n2e);
     }
+}
 }
 
 void av1_loop_restoration_precal() { GenSgrprojVtable(); }
@@ -240,9 +241,10 @@ static void loop_copy_tile(uint8_t *data, int tile_idx, int width, int height,
 #else
                                tile_height, width, height);
 #endif
-  for (int i = limits.v_start; i < limits.v_end; ++i)
+  for (int i = limits.v_start; i < limits.v_end; ++i) {
     memcpy(dst + i * dst_stride + limits.h_start,
            data + i * stride + limits.h_start, limits.h_end - limits.h_start);
+}
 }
 
 static void stepdown_wiener_kernel(const InterpKernel orig, InterpKernel vert,
@@ -640,61 +642,73 @@ static void boxsumr(int32_t *src, int width, int height, int src_stride, int r,
   int tmp_stride = width;
   int i, j;
   if (sqr) {
-    for (j = 0; j < width; ++j) tmp[j] = src[j] * src[j];
-    for (j = 0; j < width; ++j)
-      for (i = 1; i < height; ++i)
+    for (j = 0; j < width; ++j) { tmp[j] = src[j] * src[j];
+}
+    for (j = 0; j < width; ++j) {
+      for (i = 1; i < height; ++i) {
         tmp[i * tmp_stride + j] =
             tmp[(i - 1) * tmp_stride + j] +
             src[i * src_stride + j] * src[i * src_stride + j];
+}
   } else {
     memcpy(tmp, src, sizeof(*tmp) * width);
-    for (j = 0; j < width; ++j)
-      for (i = 1; i < height; ++i)
+    for (j = 0; j < width; ++j) {
+      for (i = 1; i < height; ++i) {
         tmp[i * tmp_stride + j] =
             tmp[(i - 1) * tmp_stride + j] + src[i * src_stride + j];
+}
   }
-  for (i = 0; i <= r; ++i)
+  for (i = 0; i <= r; ++i) {
     memcpy(&dst[i * dst_stride], &tmp[(i + r) * tmp_stride],
            sizeof(*tmp) * width);
-  for (i = r + 1; i < height - r; ++i)
-    for (j = 0; j < width; ++j)
+}
+  for (i = r + 1; i < height - r; ++i) {
+    for (j = 0; j < width; ++j) {
       dst[i * dst_stride + j] =
           tmp[(i + r) * tmp_stride + j] - tmp[(i - r - 1) * tmp_stride + j];
-  for (i = height - r; i < height; ++i)
-    for (j = 0; j < width; ++j)
+}
+  for (i = height - r; i < height; ++i) {
+    for (j = 0; j < width; ++j) {
       dst[i * dst_stride + j] = tmp[(height - 1) * tmp_stride + j] -
                                 tmp[(i - r - 1) * tmp_stride + j];
+}
 
-  for (i = 0; i < height; ++i) tmp[i * tmp_stride] = dst[i * dst_stride];
-  for (i = 0; i < height; ++i)
-    for (j = 1; j < width; ++j)
+  for (i = 0; i < height; ++i) { tmp[i * tmp_stride] = dst[i * dst_stride];
+}
+  for (i = 0; i < height; ++i) {
+    for (j = 1; j < width; ++j) {
       tmp[i * tmp_stride + j] =
           tmp[i * tmp_stride + j - 1] + dst[i * src_stride + j];
+}
 
-  for (j = 0; j <= r; ++j)
-    for (i = 0; i < height; ++i)
+  for (j = 0; j <= r; ++j) {
+    for (i = 0; i < height; ++i) {
       dst[i * dst_stride + j] = tmp[i * tmp_stride + j + r];
-  for (j = r + 1; j < width - r; ++j)
-    for (i = 0; i < height; ++i)
+}
+  for (j = r + 1; j < width - r; ++j) {
+    for (i = 0; i < height; ++i) {
       dst[i * dst_stride + j] =
           tmp[i * tmp_stride + j + r] - tmp[i * tmp_stride + j - r - 1];
-  for (j = width - r; j < width; ++j)
-    for (i = 0; i < height; ++i)
+}
+  for (j = width - r; j < width; ++j) {
+    for (i = 0; i < height; ++i) {
       dst[i * dst_stride + j] =
           tmp[i * tmp_stride + width - 1] - tmp[i * tmp_stride + j - r - 1];
+}
   aom_free(tmp);
 }
 
 static void boxsum(int32_t *src, int width, int height, int src_stride, int r,
                    int sqr, int32_t *dst, int dst_stride) {
-  if (r == 1)
+  if (r == 1) {
     boxsum1(src, width, height, src_stride, sqr, dst, dst_stride);
-  else if (r == 2)
+  } else if (r == 2) {
     boxsum2(src, width, height, src_stride, sqr, dst, dst_stride);
-  else if (r == 3)
+  } else if (r == 3) {
     boxsum3(src, width, height, src_stride, sqr, dst, dst_stride);
-  else
+  } else {
     boxsumr(src, width, height, src_stride, r, sqr, dst, dst_stride);
+}
 }
 
 static void boxnum(int width, int height, int r, int8_t *num, int num_stride) {
@@ -785,7 +799,8 @@ static void av1_selfguided_restoration_internal(int32_t *dgd, int width,
   int i, j;
 
   // Don't filter tiles with dimensions < 5 on any axis
-  if ((width < 5) || (height < 5)) return;
+  if ((width < 5) || (height < 5)) { return;
+}
 
   boxsum(dgd - dgd_stride * SGRPROJ_BORDER_VERT - SGRPROJ_BORDER_HORZ,
          width_ext, height_ext, dgd_stride, r, 0, B, buf_stride);
@@ -1188,8 +1203,10 @@ void extend_frame_highbd(uint16_t *data, int width, int height, int stride,
   int i, j;
   for (i = 0; i < height; ++i) {
     data_p = data + i * stride;
-    for (j = -border_horz; j < 0; ++j) data_p[j] = data_p[0];
-    for (j = width; j < width + border_horz; ++j) data_p[j] = data_p[width - 1];
+    for (j = -border_horz; j < 0; ++j) { data_p[j] = data_p[0];
+}
+    for (j = width; j < width + border_horz; ++j) { data_p[j] = data_p[width - 1];
+}
   }
   data_p = data - border_horz;
   for (i = -border_vert; i < 0; ++i) {
@@ -1215,10 +1232,11 @@ static void loop_copy_tile_highbd(uint16_t *data, int tile_idx, int width,
 #else
                                tile_height, width, height);
 #endif
-  for (int i = limits.v_start; i < limits.v_end; ++i)
+  for (int i = limits.v_start; i < limits.v_end; ++i) {
     memcpy(dst + i * dst_stride + limits.h_start,
            data + i * stride + limits.h_start,
            (limits.h_end - limits.h_start) * sizeof(*dst));
+}
 }
 
 static void loop_wiener_filter_tile_highbd(uint16_t *data, int tile_idx,
@@ -1609,19 +1627,22 @@ static void loop_restoration_rows(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
   if (components_pattern == (1 << AOM_PLANE_Y)) {
     // Only y
     if (rsi[0].frame_restoration_type == RESTORE_NONE) {
-      if (dst) aom_yv12_copy_y(frame, dst);
+      if (dst) { aom_yv12_copy_y(frame, dst);
+}
       return;
     }
   } else if (components_pattern == (1 << AOM_PLANE_U)) {
     // Only U
     if (rsi[1].frame_restoration_type == RESTORE_NONE) {
-      if (dst) aom_yv12_copy_u(frame, dst);
+      if (dst) { aom_yv12_copy_u(frame, dst);
+}
       return;
     }
   } else if (components_pattern == (1 << AOM_PLANE_V)) {
     // Only V
     if (rsi[2].frame_restoration_type == RESTORE_NONE) {
-      if (dst) aom_yv12_copy_v(frame, dst);
+      if (dst) { aom_yv12_copy_v(frame, dst);
+}
       return;
     }
   } else if (components_pattern ==
@@ -1630,7 +1651,8 @@ static void loop_restoration_rows(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
     if (rsi[0].frame_restoration_type == RESTORE_NONE &&
         rsi[1].frame_restoration_type == RESTORE_NONE &&
         rsi[2].frame_restoration_type == RESTORE_NONE) {
-      if (dst) aom_yv12_copy_frame(frame, dst);
+      if (dst) { aom_yv12_copy_frame(frame, dst);
+}
       return;
     }
   }
@@ -1643,9 +1665,10 @@ static void loop_restoration_rows(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
 #if CONFIG_HIGHBITDEPTH
             cm->use_highbitdepth,
 #endif
-            AOM_BORDER_IN_PIXELS, cm->byte_alignment, NULL, NULL, NULL) < 0)
+            AOM_BORDER_IN_PIXELS, cm->byte_alignment, NULL, NULL, NULL) < 0) {
       aom_internal_error(&cm->error, AOM_CODEC_MEM_ERROR,
                          "Failed to allocate restoration dst buffer");
+}
   }
 
   if ((components_pattern >> AOM_PLANE_Y) & 1) {
@@ -1664,16 +1687,17 @@ static void loop_restoration_rows(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
 #if CONFIG_HIGHBITDEPTH
       restore_func_highbd =
           restore_funcs_highbd[cm->rst_internal.rsi->frame_restoration_type];
-      if (cm->use_highbitdepth)
+      if (cm->use_highbitdepth) {
         restore_func_highbd(
             frame->y_buffer + ystart * ystride, ywidth, yend - ystart, ystride,
             &cm->rst_internal, cm->bit_depth,
             dst->y_buffer + ystart * dst->y_stride, dst->y_stride);
-      else
+      } else {
 #endif  // CONFIG_HIGHBITDEPTH
         restore_func(frame->y_buffer + ystart * ystride, ywidth, yend - ystart,
                      ystride, &cm->rst_internal,
                      dst->y_buffer + ystart * dst->y_stride, dst->y_stride);
+}
     } else {
       aom_yv12_copy_y(frame, dst);
     }
@@ -1695,16 +1719,17 @@ static void loop_restoration_rows(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
 #if CONFIG_HIGHBITDEPTH
       restore_func_highbd =
           restore_funcs_highbd[cm->rst_internal.rsi->frame_restoration_type];
-      if (cm->use_highbitdepth)
+      if (cm->use_highbitdepth) {
         restore_func_highbd(
             frame->u_buffer + uvstart * uvstride, uvwidth, uvend - uvstart,
             uvstride, &cm->rst_internal, cm->bit_depth,
             dst->u_buffer + uvstart * dst->uv_stride, dst->uv_stride);
-      else
+      } else {
 #endif  // CONFIG_HIGHBITDEPTH
         restore_func(frame->u_buffer + uvstart * uvstride, uvwidth,
                      uvend - uvstart, uvstride, &cm->rst_internal,
                      dst->u_buffer + uvstart * dst->uv_stride, dst->uv_stride);
+}
     } else {
       aom_yv12_copy_u(frame, dst);
     }
@@ -1726,25 +1751,29 @@ static void loop_restoration_rows(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
 #if CONFIG_HIGHBITDEPTH
       restore_func_highbd =
           restore_funcs_highbd[cm->rst_internal.rsi->frame_restoration_type];
-      if (cm->use_highbitdepth)
+      if (cm->use_highbitdepth) {
         restore_func_highbd(
             frame->v_buffer + uvstart * uvstride, uvwidth, uvend - uvstart,
             uvstride, &cm->rst_internal, cm->bit_depth,
             dst->v_buffer + uvstart * dst->uv_stride, dst->uv_stride);
-      else
+      } else {
 #endif  // CONFIG_HIGHBITDEPTH
         restore_func(frame->v_buffer + uvstart * uvstride, uvwidth,
                      uvend - uvstart, uvstride, &cm->rst_internal,
                      dst->v_buffer + uvstart * dst->uv_stride, dst->uv_stride);
+}
     } else {
       aom_yv12_copy_v(frame, dst);
     }
   }
 
   if (dst == &dst_) {
-    if ((components_pattern >> AOM_PLANE_Y) & 1) aom_yv12_copy_y(dst, frame);
-    if ((components_pattern >> AOM_PLANE_U) & 1) aom_yv12_copy_u(dst, frame);
-    if ((components_pattern >> AOM_PLANE_V) & 1) aom_yv12_copy_v(dst, frame);
+    if ((components_pattern >> AOM_PLANE_Y) & 1) { aom_yv12_copy_y(dst, frame);
+}
+    if ((components_pattern >> AOM_PLANE_U) & 1) { aom_yv12_copy_u(dst, frame);
+}
+    if ((components_pattern >> AOM_PLANE_V) & 1) { aom_yv12_copy_v(dst, frame);
+}
     aom_free_frame_buffer(dst);
   }
 }
@@ -1777,7 +1806,8 @@ int av1_loop_restoration_corners_in_sb(const struct AV1Common *cm, int plane,
                                        int *rrow1, int *nhtiles) {
   assert(rcol0 && rcol1 && rrow0 && rrow1 && nhtiles);
 
-  if (bsize != cm->sb_size) return 0;
+  if (bsize != cm->sb_size) { return 0;
+}
 
 #if CONFIG_FRAME_SUPERRES
   const int frame_w = cm->superres_upscaled_width;
@@ -1825,15 +1855,17 @@ int av1_loop_restoration_corners_in_sb(const struct AV1Common *cm, int plane,
   const int mi_row1 = mi_row + mi_size_high[bsize];
   const int mi_col1 = mi_col + mi_size_wide[bsize];
 
-  if (mi_col1 >= cm->mi_cols)
+  if (mi_col1 >= cm->mi_cols) {
     *rcol1 = *nhtiles;
-  else
+  } else {
     *rcol1 = AOMMIN(*nhtiles, (mi_col1 * mi_to_px + rnd_w) / (rtile_w * denom));
+}
 
-  if (mi_row1 >= cm->mi_rows)
+  if (mi_row1 >= cm->mi_rows) {
     *rrow1 = nvtiles;
-  else
+  } else {
     *rrow1 = AOMMIN(nvtiles, (mi_row1 * mi_to_px + rnd_h) / (rtile_h * denom));
+}
 
   return *rcol0 < *rcol1 && *rrow0 < *rrow1;
 }

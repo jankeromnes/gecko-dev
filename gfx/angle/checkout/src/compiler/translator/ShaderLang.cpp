@@ -105,8 +105,9 @@ const std::vector<VarT> *GetShaderVariables(const ShHandle handle)
 #ifdef ANGLE_ENABLE_HLSL
 TranslatorHLSL *GetTranslatorHLSLFromHandle(ShHandle handle)
 {
-    if (!handle)
+    if (!handle) {
         return nullptr;
+}
     TShHandleBase *base = static_cast<TShHandleBase *>(handle);
     return base->getAsTranslatorHLSL();
 }
@@ -318,13 +319,15 @@ ShHandle ConstructCompiler(sh::GLenum type,
 
 void Destruct(ShHandle handle)
 {
-    if (handle == 0)
+    if (handle == 0) {
         return;
+}
 
     TShHandleBase *base = static_cast<TShHandleBase *>(handle);
 
-    if (base->getAsCompiler())
+    if (base->getAsCompiler()) {
         DeleteCompiler(base->getAsCompiler());
+}
 }
 
 const std::string &GetBuiltInResourcesString(const ShHandle handle)

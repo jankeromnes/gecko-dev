@@ -159,8 +159,9 @@ nr_stun_process_request(nr_stun_message *req, nr_stun_message *res)
                 /* unrecognized attribute */
 
                 /* should never happen, but truncate if it ever were to occur */
-                if (unknown_attributes.num_attributes > NR_STUN_MAX_UNKNOWN_ATTRIBUTES)
+                if (unknown_attributes.num_attributes > NR_STUN_MAX_UNKNOWN_ATTRIBUTES) {
                     break;
+}
 
                 unknown_attributes.attribute[unknown_attributes.num_attributes++] = attr->type;
             }
@@ -168,8 +169,9 @@ nr_stun_process_request(nr_stun_message *req, nr_stun_message *res)
 
         assert(req->comprehension_required_unknown_attributes + req->comprehension_optional_unknown_attributes == unknown_attributes.num_attributes);
 
-        if ((r=nr_stun_message_add_unknown_attributes_attribute(res, &unknown_attributes)))
+        if ((r=nr_stun_message_add_unknown_attributes_attribute(res, &unknown_attributes))) {
             ABORT(R_ALREADY);
+}
 
         ABORT(R_ALREADY);
     }
@@ -281,8 +283,9 @@ nr_stun_process_error_response(nr_stun_message *res, UINT2 *error_code)
          * transaction failed; in the case of 420 (Unknown Attribute), the
          * response should contain a UNKNOWN-ATTRIBUTES attribute that gives
          * additional information. */
-        if (attr->u.error_code.number == 420)
+        if (attr->u.error_code.number == 420) {
             ABORT(R_REJECTED);
+}
 
         /* it may be possible to restart given the info that was received in
          * this response, so retry */
@@ -402,22 +405,27 @@ nr_stun_add_realm_and_nonce(int new_nonce, nr_stun_server_client *clnt, nr_stun_
     char *nonce;
     UINT2 size;
 
-    if ((r=NR_reg_alloc_string(NR_STUN_REG_PREF_SERVER_REALM, &realm)))
+    if ((r=NR_reg_alloc_string(NR_STUN_REG_PREF_SERVER_REALM, &realm))) {
         ABORT(r);
+}
 
-    if ((r=nr_stun_message_add_realm_attribute(res, realm)))
+    if ((r=nr_stun_message_add_realm_attribute(res, realm))) {
         ABORT(r);
+}
 
     if (clnt) {
-        if (strlen(clnt->nonce) < 1)
+        if (strlen(clnt->nonce) < 1) {
             new_nonce = 1;
+}
 
         if (new_nonce) {
-            if (NR_reg_get_uint2(NR_STUN_REG_PREF_SERVER_NONCE_SIZE, &size))
+            if (NR_reg_get_uint2(NR_STUN_REG_PREF_SERVER_NONCE_SIZE, &size)) {
                 size = 48;
+}
 
-            if (size > (sizeof(clnt->nonce) - 1))
+            if (size > (sizeof(clnt->nonce) - 1)) {
                 size = sizeof(clnt->nonce) - 1;
+}
 
             nr_random_alphanum(clnt->nonce, size);
             clnt->nonce[size] = '\0';
@@ -433,8 +441,9 @@ nr_stun_add_realm_and_nonce(int new_nonce, nr_stun_server_client *clnt, nr_stun_
         nonce = "STALE";
     }
 
-    if ((r=nr_stun_message_add_nonce_attribute(res, nonce)))
+    if ((r=nr_stun_message_add_nonce_attribute(res, nonce))) {
         ABORT(r);
+}
 
     _status=0;
  abort:
@@ -532,8 +541,9 @@ nr_stun_receive_response_long_term_auth(nr_stun_message *res, nr_stun_client_ctx
         if (nr_stun_message_has_attribute(res, NR_STUN_ATTR_REALM, &attr)) {
             RFREE(ctx->realm);
             ctx->realm = r_strdup(attr->u.realm);
-            if (!ctx->realm)
+            if (!ctx->realm) {
                 ABORT(R_NO_MEMORY);
+}
         }
         else {
             r_log(NR_LOG_STUN, LOG_WARNING, "Missing REALM");
@@ -543,8 +553,9 @@ nr_stun_receive_response_long_term_auth(nr_stun_message *res, nr_stun_client_ctx
         if (nr_stun_message_has_attribute(res, NR_STUN_ATTR_NONCE, &attr)) {
             RFREE(ctx->nonce);
             ctx->nonce = r_strdup(attr->u.nonce);
-            if (!ctx->nonce)
+            if (!ctx->nonce) {
                 ABORT(R_NO_MEMORY);
+}
         }
         else {
             r_log(NR_LOG_STUN, LOG_WARNING, "Missing NONCE");

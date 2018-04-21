@@ -140,8 +140,9 @@ static struct matrix build_RGB_to_XYZ_transfer_matrix(qcms_CIE_xyY white, qcms_C
 	xn = white.x;
 	yn = white.y;
 
-	if (yn == 0.0)
+	if (yn == 0.0) {
 		return matrix_invalid();
+}
 
 	xr = primrs.red.x;
 	yr = primrs.red.y;
@@ -272,8 +273,9 @@ static struct matrix adapt_matrix_to_D50(struct matrix r, qcms_CIE_xyY source_wh
 	struct CIE_XYZ Dn;
 	struct matrix Bradford;
 
-	if (source_white_pt.y == 0.0)
+	if (source_white_pt.y == 0.0) {
 		return matrix_invalid();
+}
 
 	Dn = xyY2XYZ(source_white_pt);
 
@@ -287,8 +289,9 @@ qcms_bool set_rgb_colorants(qcms_profile *profile, qcms_CIE_xyY white_point, qcm
 	colorants = build_RGB_to_XYZ_transfer_matrix(white_point, primaries);
 	colorants = adapt_matrix_to_D50(colorants, white_point);
 
-	if (colorants.invalid)
+	if (colorants.invalid) {
 		return false;
+}
 
 	/* note: there's a transpose type of operation going on here */
 	profile->redColorant.X = double_to_s15Fixed16Number(colorants.m[0][0]);
@@ -911,8 +914,9 @@ static struct precache_output *precache_reference(struct precache_output *p)
 static struct precache_output *precache_create()
 {
 	struct precache_output *p = malloc(sizeof(struct precache_output));
-	if (p)
+	if (p) {
 		p->ref_count = 1;
+}
 	return p;
 }
 
@@ -975,19 +979,24 @@ void qcms_transform_release(qcms_transform *t)
 	/* ensure we only free the gamma tables once even if there are
 	 * multiple references to the same data */
 
-	if (t->output_table_r)
+	if (t->output_table_r) {
 		precache_release(t->output_table_r);
-	if (t->output_table_g)
+}
+	if (t->output_table_g) {
 		precache_release(t->output_table_g);
-	if (t->output_table_b)
+}
+	if (t->output_table_b) {
 		precache_release(t->output_table_b);
+}
 
 	free(t->input_gamma_table_r);
-	if (t->input_gamma_table_g != t->input_gamma_table_r)
+	if (t->input_gamma_table_g != t->input_gamma_table_r) {
 		free(t->input_gamma_table_g);
+}
 	if (t->input_gamma_table_g != t->input_gamma_table_r &&
-	    t->input_gamma_table_g != t->input_gamma_table_b)
+	    t->input_gamma_table_g != t->input_gamma_table_b) {
 		free(t->input_gamma_table_b);
+}
 
 	free(t->input_gamma_table_gray);
 
@@ -996,8 +1005,9 @@ void qcms_transform_release(qcms_transform *t)
 	free(t->output_gamma_lut_b);
 
 	/* r_clut points to beginning of buffer allocated in qcms_transform_precacheLUT_float */
-	if (t->r_clut)
+	if (t->r_clut) {
 		free(t->r_clut);
+}
 
 	transform_free(t);
 }
@@ -1108,22 +1118,26 @@ struct matrix compute_whitepoint_adaption(float X, float Y, float Z) {
 void qcms_profile_precache_output_transform(qcms_profile *profile)
 {
 	/* we only support precaching on rgb profiles */
-	if (profile->color_space != RGB_SIGNATURE)
+	if (profile->color_space != RGB_SIGNATURE) {
 		return;
+}
 
 	if (qcms_supports_iccv4) {
 		/* don't precache since we will use the B2A LUT */
-		if (profile->B2A0)
+		if (profile->B2A0) {
 			return;
+}
 
 		/* don't precache since we will use the mBA LUT */
-		if (profile->mBA)
+		if (profile->mBA) {
 			return;
+}
 	}
 
 	/* don't precache if we do not have the TRC curves */
-	if (!profile->redTRC || !profile->greenTRC || !profile->blueTRC)
+	if (!profile->redTRC || !profile->greenTRC || !profile->blueTRC) {
 		return;
+}
 
 	if (!profile->output_table_r) {
 		profile->output_table_r = precache_create();
@@ -1284,20 +1298,22 @@ qcms_transform* qcms_transform_create(
 		if (precache) {
 #ifdef X86
 		    if (sse_version_available() >= 2) {
-			    if (in_type == QCMS_DATA_RGB_8)
+			    if (in_type == QCMS_DATA_RGB_8) {
 				    transform->transform_fn = qcms_transform_data_rgb_out_lut_sse2;
-			    else
+			    } else {
 				    transform->transform_fn = qcms_transform_data_rgba_out_lut_sse2;
+}
 
 #if !(defined(_MSC_VER) && defined(_M_AMD64))
                     /* Microsoft Compiler for x64 doesn't support MMX.
                      * SSE code uses MMX so that we disable on x64 */
 		    } else
 		    if (sse_version_available() >= 1) {
-			    if (in_type == QCMS_DATA_RGB_8)
+			    if (in_type == QCMS_DATA_RGB_8) {
 				    transform->transform_fn = qcms_transform_data_rgb_out_lut_sse1;
-			    else
+			    } else {
 				    transform->transform_fn = qcms_transform_data_rgba_out_lut_sse1;
+}
 #endif
 		    } else
 #endif
@@ -1310,16 +1326,18 @@ qcms_transform* qcms_transform_create(
 		    } else
 #endif
 			{
-				if (in_type == QCMS_DATA_RGB_8)
+				if (in_type == QCMS_DATA_RGB_8) {
 					transform->transform_fn = qcms_transform_data_rgb_out_lut_precache;
-				else
+				} else {
 					transform->transform_fn = qcms_transform_data_rgba_out_lut_precache;
+}
 			}
 		} else {
-			if (in_type == QCMS_DATA_RGB_8)
+			if (in_type == QCMS_DATA_RGB_8) {
 				transform->transform_fn = qcms_transform_data_rgb_out_lut;
-			else
+			} else {
 				transform->transform_fn = qcms_transform_data_rgba_out_lut;
+}
 		}
 
 		//XXX: avoid duplicating tables if we can

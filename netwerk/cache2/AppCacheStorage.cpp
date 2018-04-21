@@ -38,8 +38,9 @@ NS_IMETHODIMP AppCacheStorage::AsyncOpenURI(nsIURI *aURI,
                                             uint32_t aFlags,
                                             nsICacheEntryOpenCallback *aCallback)
 {
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   NS_ENSURE_ARG(aURI);
   NS_ENSURE_ARG(aCallback);
@@ -104,8 +105,9 @@ NS_IMETHODIMP AppCacheStorage::Exists(nsIURI *aURI, const nsACString & aIdExtens
 NS_IMETHODIMP AppCacheStorage::AsyncDoomURI(nsIURI *aURI, const nsACString & aIdExtension,
                                             nsICacheEntryDoomCallback* aCallback)
 {
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   if (!mAppCache) {
     return NS_ERROR_NOT_AVAILABLE;
@@ -118,8 +120,9 @@ NS_IMETHODIMP AppCacheStorage::AsyncDoomURI(nsIURI *aURI, const nsACString & aId
 
 NS_IMETHODIMP AppCacheStorage::AsyncEvictStorage(nsICacheEntryDoomCallback* aCallback)
 {
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   nsresult rv;
 
@@ -141,8 +144,9 @@ NS_IMETHODIMP AppCacheStorage::AsyncEvictStorage(nsICacheEntryDoomCallback* aCal
     return NS_OK;
   }
 
-  if (aCallback)
+  if (aCallback) {
     aCallback->OnCacheEntryDoomed(NS_OK);
+}
 
   return NS_OK;
 }
@@ -150,8 +154,9 @@ NS_IMETHODIMP AppCacheStorage::AsyncEvictStorage(nsICacheEntryDoomCallback* aCal
 NS_IMETHODIMP AppCacheStorage::AsyncVisitStorage(nsICacheStorageVisitor* aVisitor,
                                                  bool aVisitEntries)
 {
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   LOG(("AppCacheStorage::AsyncVisitStorage [this=%p, cb=%p]", this, aVisitor));
 

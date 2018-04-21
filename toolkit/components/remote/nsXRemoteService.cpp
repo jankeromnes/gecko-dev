@@ -142,12 +142,14 @@ nsXRemoteService::HandleNewProperty(XID aWindowId, Display* aDisplay,
                                                               about the first ) */
 
     // Failed to get property off the window?
-    if (result != Success)
+    if (result != Success) {
       return false;
+}
 
     // Failed to get the data off the window or it was the wrong type?
-    if (!data || !TO_LITTLE_ENDIAN32(*reinterpret_cast<int32_t*>(data)))
+    if (!data || !TO_LITTLE_ENDIAN32(*reinterpret_cast<int32_t*>(data))) {
       return false;
+}
 
     // cool, we got the property data.
     const char *response =
@@ -179,8 +181,9 @@ nsXRemoteService::HandleNewProperty(XID aWindowId, Display* aDisplay,
 void
 nsXRemoteService::EnsureAtoms(void)
 {
-  if (sMozVersionAtom)
+  if (sMozVersionAtom) {
     return;
+}
 
   XInternAtoms(mozilla::DefaultXDisplay(), const_cast<char**>(XAtomNames),
                ArrayLength(XAtomNames), False, XAtoms);

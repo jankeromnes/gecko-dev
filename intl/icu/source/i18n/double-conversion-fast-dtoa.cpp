@@ -205,11 +205,13 @@ static bool RoundWeedCounted(Vector<char> buffer,
   // If the unit is too big, then we don't know which way to round. For example
   // a unit of 50 means that the real number lies within rest +/- 50. If
   // 10^kappa == 40 then there is no way to tell which way to round.
-  if (unit >= ten_kappa) return false;
+  if (unit >= ten_kappa) { return false;
+}
   // Even if unit is just half the size of 10^kappa we are already completely
   // lost. (And after the previous test we know that the expression will not
   // over/underflow.)
-  if (ten_kappa - unit <= unit) return false;
+  if (ten_kappa - unit <= unit) { return false;
+}
   // If 2 * (rest + unit) <= 10^kappa we can safely round down.
   if ((ten_kappa - rest > rest) && (ten_kappa - 2 * rest >= 2 * unit)) {
     return true;
@@ -219,7 +221,8 @@ static bool RoundWeedCounted(Vector<char> buffer,
     // Increment the last digit recursively until we find a non '9' digit.
     buffer[length - 1]++;
     for (int i = length - 1; i > 0; --i) {
-      if (buffer[i] != '0' + 10) break;
+      if (buffer[i] != '0' + 10) { break;
+}
       buffer[i] = '0';
       buffer[i - 1]++;
     }
@@ -480,7 +483,8 @@ static bool DigitGenCounted(DiyFp w,
     (*kappa)--;
     // Note that kappa now equals the exponent of the divisor and that the
     // invariant thus holds again.
-    if (requested_digits == 0) break;
+    if (requested_digits == 0) { break;
+}
     divisor /= 10;
   }
 
@@ -513,7 +517,8 @@ static bool DigitGenCounted(DiyFp w,
     fractionals &= one.f() - 1;  // Modulo by one.
     (*kappa)--;
   }
-  if (requested_digits != 0) return false;
+  if (requested_digits != 0) { return false;
+}
   return RoundWeedCounted(buffer, *length, fractionals, one.f(), w_error,
                           kappa);
 }

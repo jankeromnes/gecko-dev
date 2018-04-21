@@ -105,8 +105,9 @@ PK11_NewSlotList(void)
     PK11SlotList *list;
 
     list = (PK11SlotList *)PORT_Alloc(sizeof(PK11SlotList));
-    if (list == NULL)
+    if (list == NULL) {
         return NULL;
+}
     list->head = NULL;
     list->tail = NULL;
     list->lock = PZ_NewLock(nssILockList);
@@ -147,8 +148,9 @@ static void
 pk11_FreeSlotListStatic(PK11SlotList *list)
 {
     PK11SlotListElement *le, *next;
-    if (list == NULL)
+    if (list == NULL) {
         return;
+}
 
     for (le = list->head; le; le = next) {
         next = le->next;
@@ -186,8 +188,9 @@ PK11_AddSlotToList(PK11SlotList *list, PK11SlotInfo *slot, PRBool sorted)
     PK11SlotListElement *element;
 
     le = (PK11SlotListElement *)PORT_Alloc(sizeof(PK11SlotListElement));
-    if (le == NULL)
+    if (le == NULL) {
         return SECFailure;
+}
 
     le->slot = PK11_ReferenceSlot(slot);
     le->prev = NULL;
@@ -208,10 +211,12 @@ PK11_AddSlotToList(PK11SlotList *list, PK11SlotInfo *slot, PRBool sorted)
         le->next = NULL;
         list->tail = le;
     }
-    if (le->prev)
+    if (le->prev) {
         le->prev->next = le;
-    if (list->head == element)
+}
+    if (list->head == element) {
         list->head = le;
+}
     PZ_Unlock(list->lock);
 
     return SECSuccess;
@@ -224,14 +229,16 @@ SECStatus
 PK11_DeleteSlotFromList(PK11SlotList *list, PK11SlotListElement *le)
 {
     PZ_Lock(list->lock);
-    if (le->prev)
+    if (le->prev) {
         le->prev->next = le->next;
-    else
+    } else {
         list->head = le->next;
-    if (le->next)
+}
+    if (le->next) {
         le->next->prev = le->prev;
-    else
+    } else {
         list->tail = le->prev;
+}
     le->next = le->prev = NULL;
     PZ_Unlock(list->lock);
     PK11_FreeSlotListElement(list, le);
@@ -246,8 +253,9 @@ PK11_DeleteSlotFromList(PK11SlotList *list, PK11SlotListElement *le)
 SECStatus
 pk11_MoveListToList(PK11SlotList *target, PK11SlotList *src)
 {
-    if (src->head == NULL)
+    if (src->head == NULL) {
         return SECSuccess;
+}
 
     if (target->tail == NULL) {
         target->head = src->head;
@@ -269,8 +277,9 @@ PK11_GetFirstRef(PK11SlotList *list)
     PK11SlotListElement *le;
 
     le = list->head;
-    if (le != NULL)
+    if (le != NULL) {
         (le)->refCount++;
+}
     return le;
 }
 
@@ -282,8 +291,9 @@ PK11_GetNextRef(PK11SlotList *list, PK11SlotListElement *le, PRBool restart)
 {
     PK11SlotListElement *new_le;
     new_le = le->next;
-    if (new_le)
+    if (new_le) {
         new_le->refCount++;
+}
     PK11_FreeSlotListElement(list, le);
     return new_le;
 }
@@ -299,8 +309,9 @@ PK11_GetFirstSafe(PK11SlotList *list)
 
     PZ_Lock(list->lock);
     le = list->head;
-    if (le != NULL)
+    if (le != NULL) {
         (le)->refCount++;
+}
     PZ_Unlock(list->lock);
     return le;
 }
@@ -324,8 +335,9 @@ PK11_GetNextSafe(PK11SlotList *list, PK11SlotListElement *le, PRBool restart)
             new_le = list->head;
         }
     }
-    if (new_le)
+    if (new_le) {
         new_le->refCount++;
+}
     PZ_Unlock(list->lock);
     PK11_FreeSlotListElement(list, le);
     return new_le;
@@ -341,8 +353,9 @@ PK11_FindSlotElement(PK11SlotList *list, PK11SlotInfo *slot)
 
     for (le = PK11_GetFirstSafe(list); le;
          le = PK11_GetNextSafe(list, le, PR_TRUE)) {
-        if (le->slot == slot)
+        if (le->slot == slot) {
             return le;
+}
     }
     return NULL;
 }
@@ -359,8 +372,9 @@ PK11_NewSlotInfo(SECMODModule *mod)
     PK11SlotInfo *slot;
 
     slot = (PK11SlotInfo *)PORT_Alloc(sizeof(PK11SlotInfo));
-    if (slot == NULL)
+    if (slot == NULL) {
         return slot;
+}
 
     slot->sessionLock = mod->isThreadSafe ? PZ_NewLock(nssILockSession) : mod->refLock;
     if (slot->sessionLock == NULL) {
@@ -515,8 +529,9 @@ SECMOD_HasRootCerts(void)
                 }
             }
         }
-        if (found)
+        if (found) {
             break;
+}
     }
     SECMOD_ReleaseReadLock(moduleLock);
 
@@ -637,8 +652,9 @@ PK11_FindSlotByName(const char *name)
                 }
             }
         }
-        if (slot != NULL)
+        if (slot != NULL) {
             break;
+}
     }
     SECMOD_ReleaseReadLock(moduleLock);
 
@@ -676,8 +692,9 @@ PK11_FindSlotBySerial(char *serial)
                 }
             }
         }
-        if (slot != NULL)
+        if (slot != NULL) {
             break;
+}
     }
     SECMOD_ReleaseReadLock(moduleLock);
 
@@ -719,8 +736,9 @@ PK11_GetRWSession(PK11SlotInfo *slot)
     }
     if (slot->defRWSession) {
         PORT_Assert(slot->session != CK_INVALID_SESSION);
-        if (slot->session != CK_INVALID_SESSION)
+        if (slot->session != CK_INVALID_SESSION) {
             return slot->session;
+}
     }
 
     crv = PK11_GETTAB(slot)->C_OpenSession(slot->slotID,
@@ -728,10 +746,12 @@ PK11_GetRWSession(PK11SlotInfo *slot)
                                            slot, pk11_notify, &rwsession);
     PORT_Assert(rwsession != CK_INVALID_SESSION || crv != CKR_OK);
     if (crv != CKR_OK || rwsession == CK_INVALID_SESSION) {
-        if (crv == CKR_OK)
+        if (crv == CKR_OK) {
             crv = CKR_DEVICE_ERROR;
-        if (haveMonitor)
+}
+        if (haveMonitor) {
             PK11_ExitSlotMonitor(slot);
+}
         PORT_SetError(PK11_MapError(crv));
         return CK_INVALID_SESSION;
     }
@@ -771,11 +791,13 @@ PK11_RestoreROSession(PK11SlotInfo *slot, CK_SESSION_HANDLE rwsession)
     PORT_Assert(rwsession != CK_INVALID_SESSION);
     if (rwsession != CK_INVALID_SESSION) {
         PRBool doExit = PK11_RWSessionHasLock(slot, rwsession);
-        if (!pk11_RWSessionIsDefault(slot, rwsession))
+        if (!pk11_RWSessionIsDefault(slot, rwsession)) {
             PK11_GETTAB(slot)
                 ->C_CloseSession(rwsession);
-        if (doExit)
+}
+        if (doExit) {
             PK11_ExitSlotMonitor(slot);
+}
     }
 }
 
@@ -935,12 +957,14 @@ PK11_LoadSlotList(PK11SlotInfo *slot, PK11PreSlotInfo *psi, int count)
     int i;
 
     for (i = 0; i < count; i++) {
-        if (psi[i].slotID == slot->slotID)
+        if (psi[i].slotID == slot->slotID) {
             break;
+}
     }
 
-    if (i == count)
+    if (i == count) {
         return;
+}
 
     slot->defaultFlags = psi[i].defaultFlags;
     slot->askpw = psi[i].askpw;
@@ -950,8 +974,9 @@ PK11_LoadSlotList(PK11SlotInfo *slot, PK11PreSlotInfo *psi, int count)
     /* if the slot is already disabled, don't load them into the
      * default slot lists. We get here so we can save the default
      * list value. */
-    if (slot->disabled)
+    if (slot->disabled) {
         return;
+}
 
     /* if the user has disabled us, don't load us in */
     if (slot->defaultFlags & PK11_DISABLE_FLAG) {
@@ -966,8 +991,9 @@ PK11_LoadSlotList(PK11SlotInfo *slot, PK11PreSlotInfo *psi, int count)
             CK_MECHANISM_TYPE mechanism = PK11_DefaultArray[i].mechanism;
             PK11SlotList *slotList = PK11_GetSlotList(mechanism);
 
-            if (slotList)
+            if (slotList) {
                 PK11_AddSlotToList(slotList, slot, PR_FALSE);
+}
         }
     }
 
@@ -993,8 +1019,9 @@ PK11_UpdateSlotAttribute(PK11SlotInfo *slot,
         slot->defaultFlags |= entry->flag;
 
         /* add this slot to the list */
-        if (slotList != NULL)
+        if (slotList != NULL) {
             result = PK11_AddSlotToList(slotList, slot, PR_FALSE);
+}
 
     } else { /* trying to turn off */
 
@@ -1006,8 +1033,9 @@ PK11_UpdateSlotAttribute(PK11SlotInfo *slot,
             PK11SlotListElement *le = PK11_FindSlotElement(slotList, slot);
 
             /* remove the slot from the list */
-            if (le)
+            if (le) {
                 result = PK11_DeleteSlotFromList(slotList, le);
+}
         }
     }
     return result;
@@ -1021,10 +1049,12 @@ PK11_ClearSlotList(PK11SlotInfo *slot)
 {
     int i;
 
-    if (slot->disabled)
+    if (slot->disabled) {
         return;
-    if (slot->defaultFlags == 0)
+}
+    if (slot->defaultFlags == 0) {
         return;
+}
 
     for (i = 0; i < num_pk11_default_mechanisms; i++) {
         if (slot->defaultFlags & PK11_DefaultArray[i].flag) {
@@ -1032,8 +1062,9 @@ PK11_ClearSlotList(PK11SlotInfo *slot)
             PK11SlotList *slotList = PK11_GetSlotList(mechanism);
             PK11SlotListElement *le = NULL;
 
-            if (slotList)
+            if (slotList) {
                 le = PK11_FindSlotElement(slotList, slot);
+}
 
             if (le) {
                 PK11_DeleteSlotFromList(slotList, le);
@@ -1056,8 +1087,9 @@ PK11_MakeString(PLArenaPool *arena, char *space,
     int i;
     char *newString;
     for (i = (stringLen - 1); i >= 0; i--) {
-        if (staticString[i] != ' ')
+        if (staticString[i] != ' ') {
             break;
+}
     }
     /* move i to point to the last space */
     i++;
@@ -1068,11 +1100,13 @@ PK11_MakeString(PLArenaPool *arena, char *space,
     } else {
         newString = (char *)PORT_Alloc(i + 1 /* space for NULL */);
     }
-    if (newString == NULL)
+    if (newString == NULL) {
         return NULL;
+}
 
-    if (i)
+    if (i) {
         PORT_Memcpy(newString, staticString, i);
+}
     newString[i] = 0;
 
     return newString;
@@ -1088,8 +1122,9 @@ pk11_MatchString(const char *string,
     int i;
 
     for (i = (staticStringLen - 1); i >= 0; i--) {
-        if (staticString[i] != ' ')
+        if (staticString[i] != ' ') {
             break;
+}
     }
     /* move i to point to the last space */
     i++;
@@ -1117,12 +1152,14 @@ PK11_ReadMechanismList(PK11SlotInfo *slot)
     }
     slot->mechanismCount = 0;
 
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_GetMechanismList(slot->slotID, NULL, &count);
     if (crv != CKR_OK) {
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
     }
@@ -1130,14 +1167,16 @@ PK11_ReadMechanismList(PK11SlotInfo *slot)
     slot->mechanismList = (CK_MECHANISM_TYPE *)
         PORT_Alloc(count * sizeof(CK_MECHANISM_TYPE));
     if (slot->mechanismList == NULL) {
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
         return SECFailure;
     }
     crv = PK11_GETTAB(slot)->C_GetMechanismList(slot->slotID,
                                                 slot->mechanismList, &count);
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
     if (crv != CKR_OK) {
         PORT_Free(slot->mechanismList);
         slot->mechanismList = NULL;
@@ -1170,11 +1209,13 @@ PK11_InitToken(PK11SlotInfo *slot, PRBool loadCerts)
     PRStatus status;
 
     /* set the slot flags to the current token values */
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_GetTokenInfo(slot->slotID, &slot->tokenInfo);
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -1210,8 +1251,9 @@ PK11_InitToken(PK11SlotInfo *slot, PRBool loadCerts)
     slot->defRWSession = (PRBool)((!slot->readOnly) &&
                                   (slot->tokenInfo.ulMaxSessionCount == 1));
     rv = PK11_ReadMechanismList(slot);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     slot->hasRSAInfo = PR_FALSE;
     slot->RSAInfoFlags = 0;
@@ -1232,13 +1274,15 @@ PK11_InitToken(PK11SlotInfo *slot, PRBool loadCerts)
         CK_SESSION_HANDLE session;
 
         /* session should be Readonly, serial */
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_EnterSlotMonitor(slot);
+}
         crv = PK11_GETTAB(slot)->C_OpenSession(slot->slotID,
                                                (slot->defRWSession ? CKF_RW_SESSION : 0) | CKF_SERIAL_SESSION,
                                                slot, pk11_notify, &session);
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
         if (crv != CKR_OK) {
             PORT_SetError(PK11_MapError(crv));
             return SECFailure;
@@ -1249,8 +1293,9 @@ PK11_InitToken(PK11SlotInfo *slot, PRBool loadCerts)
          * has been removed   */
         CK_SESSION_INFO sessionInfo;
 
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_EnterSlotMonitor(slot);
+}
         crv = PK11_GETTAB(slot)->C_GetSessionInfo(slot->session, &sessionInfo);
         if (crv == CKR_DEVICE_ERROR) {
             PK11_GETTAB(slot)
@@ -1264,18 +1309,21 @@ PK11_InitToken(PK11SlotInfo *slot, PRBool loadCerts)
             if (crv != CKR_OK) {
                 PORT_SetError(PK11_MapError(crv));
                 slot->session = CK_INVALID_SESSION;
-                if (!slot->isThreadSafe)
+                if (!slot->isThreadSafe) {
                     PK11_ExitSlotMonitor(slot);
+}
                 return SECFailure;
             }
         }
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
     }
 
     status = nssToken_Refresh(slot->nssToken);
-    if (status != PR_SUCCESS)
+    if (status != PR_SUCCESS) {
         return SECFailure;
+}
 
     if (!(slot->isInternal) && (slot->hasRandom)) {
         /* if this slot has a random number generater, use it to add entropy
@@ -1358,11 +1406,13 @@ PK11_TokenRefresh(PK11SlotInfo *slot)
     CK_RV crv;
 
     /* set the slot flags to the current token values */
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_GetTokenInfo(slot->slotID, &slot->tokenInfo);
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -1507,11 +1557,13 @@ pk11_IsPresentCertLoad(PK11SlotInfo *slot, PRBool loadCerts)
     }
 
     /* removable slots have a flag that says they are present */
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     if (PK11_GETTAB(slot)->C_GetSlotInfo(slot->slotID, &slotInfo) != CKR_OK) {
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
         return PR_FALSE;
     }
     if ((slotInfo.flags & CKF_TOKEN_PRESENT) == 0) {
@@ -1521,31 +1573,36 @@ pk11_IsPresentCertLoad(PK11SlotInfo *slot, PRBool loadCerts)
                 ->C_CloseSession(slot->session);
             slot->session = CK_INVALID_SESSION;
         }
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
         return PR_FALSE;
     }
 
     /* use the session Info to determine if the card has been removed and then
      * re-inserted */
     if (slot->session != CK_INVALID_SESSION) {
-        if (slot->isThreadSafe)
+        if (slot->isThreadSafe) {
             PK11_EnterSlotMonitor(slot);
+}
         crv = PK11_GETTAB(slot)->C_GetSessionInfo(slot->session, &sessionInfo);
         if (crv != CKR_OK) {
             PK11_GETTAB(slot)
                 ->C_CloseSession(slot->session);
             slot->session = CK_INVALID_SESSION;
         }
-        if (slot->isThreadSafe)
+        if (slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
     }
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
 
     /* card has not been removed, current token info is correct */
-    if (slot->session != CK_INVALID_SESSION)
+    if (slot->session != CK_INVALID_SESSION) {
         return PR_TRUE;
+}
 
     /* initialize the token info state */
     if (PK11_InitToken(slot, loadCerts) != SECSuccess) {
@@ -1801,8 +1858,9 @@ PK11_GetSlotInfo(PK11SlotInfo *slot, CK_SLOT_INFO *info)
 {
     CK_RV crv;
 
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     /*
      * some buggy drivers do not fill the buffer completely,
      * erase the buffer first
@@ -1814,8 +1872,9 @@ PK11_GetSlotInfo(PK11SlotInfo *slot, CK_SLOT_INFO *info)
                                      sizeof(info->slotDescription));
     pk11_zeroTerminatedToBlankPadded(info->manufacturerID,
                                      sizeof(info->manufacturerID));
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -1828,8 +1887,9 @@ SECStatus
 PK11_GetTokenInfo(PK11SlotInfo *slot, CK_TOKEN_INFO *info)
 {
     CK_RV crv;
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     /*
      * some buggy drivers do not fill the buffer completely,
      * erase the buffer first
@@ -1845,8 +1905,9 @@ PK11_GetTokenInfo(PK11SlotInfo *slot, CK_TOKEN_INFO *info)
     pk11_zeroTerminatedToBlankPadded(info->model, sizeof(info->model));
     pk11_zeroTerminatedToBlankPadded(info->serialNumber,
                                      sizeof(info->serialNumber));
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -2012,8 +2073,9 @@ PK11_DoesMechanism(PK11SlotInfo *slot, CK_MECHANISM_TYPE type)
     }
 
     for (i = 0; i < (int)slot->mechanismCount; i++) {
-        if (slot->mechanismList[i] == type)
+        if (slot->mechanismList[i] == type) {
             return PR_TRUE;
+}
     }
     return PR_FALSE;
 }
@@ -2045,8 +2107,9 @@ PK11_TokenExists(CK_MECHANISM_TYPE type)
         found = PK11_DoesMechanism(slot, type);
         PK11_FreeSlot(slot);
     }
-    if (found)
+    if (found) {
         return PR_TRUE; /* bypass getting module locks */
+}
 
     SECMOD_GetReadLock(moduleLock);
     modules = SECMOD_GetDefaultModuleList();
@@ -2097,12 +2160,15 @@ PK11_GetAllTokens(CK_MECHANISM_TYPE type, PRBool needRW, PRBool loadCerts,
     loginList = PK11_NewSlotList();
     friendlyList = PK11_NewSlotList();
     if ((list == NULL) || (loginList == NULL) || (friendlyList == NULL)) {
-        if (list)
+        if (list) {
             PK11_FreeSlotList(list);
-        if (loginList)
+}
+        if (loginList) {
             PK11_FreeSlotList(loginList);
-        if (friendlyList)
+}
+        if (friendlyList) {
             PK11_FreeSlotList(friendlyList);
+}
         return NULL;
     }
 
@@ -2126,8 +2192,9 @@ PK11_GetAllTokens(CK_MECHANISM_TYPE type, PRBool needRW, PRBool loadCerts,
             PK11SlotInfo *slot = mlp->module->slots[i];
 
             if (pk11_IsPresentCertLoad(slot, loadCerts)) {
-                if (needRW && slot->readOnly)
+                if (needRW && slot->readOnly) {
                     continue;
+}
                 if ((type == CKM_INVALID_MECHANISM) || PK11_DoesMechanism(slot, type)) {
                     if (pk11_LoginStillRequired(slot, wincx)) {
                         if (PK11_IsFriendly(slot)) {
@@ -2163,8 +2230,9 @@ PK11_GetPrivateKeyTokens(CK_MECHANISM_TYPE type, PRBool needRW, void *wincx)
     PK11SlotListElement *le, *next;
     SECStatus rv;
 
-    if (list == NULL)
+    if (list == NULL) {
         return list;
+}
 
     for (le = list->head; le; le = next) {
         next = le->next; /* save the pointer here in case we have to
@@ -2193,12 +2261,14 @@ pk11_filterSlot(PK11SlotInfo *slot, CK_MECHANISM_TYPE mechanism,
     if ((keySize == 0) && (mechanism == CKM_RSA_PKCS) && (slot->hasRSAInfo)) {
         mechanism_info.flags = slot->RSAInfoFlags;
     } else {
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_EnterSlotMonitor(slot);
+}
         crv = PK11_GETTAB(slot)->C_GetMechanismInfo(slot->slotID, mechanism,
                                                     &mechanism_info);
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
         /* if we were getting the RSA flags, save them */
         if ((crv == CKR_OK) && (mechanism == CKM_RSA_PKCS) && (!slot->hasRSAInfo)) {
             slot->RSAInfoFlags = mechanism_info.flags;
@@ -2294,13 +2364,15 @@ PK11_GetBestSlotMultipleWithAttributes(CK_MECHANISM_TYPE *type,
                 }
             }
 
-            if (doExit)
+            if (doExit) {
                 continue;
+}
 
             if (listNeedLogin && le->slot->needLogin) {
                 rv = PK11_Authenticate(le->slot, PR_TRUE, wincx);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     continue;
+}
             }
             slot = le->slot;
             PK11_ReferenceSlot(slot);
@@ -2349,17 +2421,21 @@ PK11_GetBestKeyLength(PK11SlotInfo *slot, CK_MECHANISM_TYPE mechanism)
     CK_MECHANISM_INFO mechanism_info;
     CK_RV crv;
 
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_GetMechanismInfo(slot->slotID,
                                                 mechanism, &mechanism_info);
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
-    if (crv != CKR_OK)
+}
+    if (crv != CKR_OK) {
         return 0;
+}
 
-    if (mechanism_info.ulMinKeySize == mechanism_info.ulMaxKeySize)
+    if (mechanism_info.ulMinKeySize == mechanism_info.ulMaxKeySize) {
         return 0;
+}
     return mechanism_info.ulMaxKeySize;
 }
 
@@ -2402,12 +2478,14 @@ PK11_GetMaxKeyLength(CK_MECHANISM_TYPE mechanism)
         PK11SlotInfo *slot = le->slot;
         CK_RV crv;
         if (PK11_IsPresent(slot)) {
-            if (!slot->isThreadSafe)
+            if (!slot->isThreadSafe) {
                 PK11_EnterSlotMonitor(slot);
+}
             crv = PK11_GETTAB(slot)->C_GetMechanismInfo(slot->slotID,
                                                         mechanism, &mechanism_info);
-            if (!slot->isThreadSafe)
+            if (!slot->isThreadSafe) {
                 PK11_ExitSlotMonitor(slot);
+}
             if ((crv == CKR_OK) && (mechanism_info.ulMaxKeySize != 0) && (mechanism_info.ulMaxKeySize != 0xffffffff)) {
                 keyLength = mechanism_info.ulMaxKeySize;
                 break;
@@ -2422,10 +2500,12 @@ PK11_GetMaxKeyLength(CK_MECHANISM_TYPE mechanism)
         keyLength = pk11_GetPredefinedKeyLength(keyType);
     }
 
-    if (le)
+    if (le) {
         PK11_FreeSlotListElement(list, le);
-    if (freeit)
+}
+    if (freeit) {
         PK11_FreeSlotList(list);
+}
     return keyLength;
 }
 
@@ -2449,12 +2529,14 @@ PK11_GenerateRandomOnSlot(PK11SlotInfo *slot, unsigned char *data, int len)
 {
     CK_RV crv;
 
-    if (!slot->isInternal)
+    if (!slot->isInternal) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_GenerateRandom(slot->session, data,
                                               (CK_ULONG)len);
-    if (!slot->isInternal)
+    if (!slot->isInternal) {
         PK11_ExitSlotMonitor(slot);
+}
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -2477,8 +2559,9 @@ PK11_RandomUpdate(void *data, size_t bytes)
     slot = PK11_GetBestSlot(CKM_FAKE_RANDOM, NULL);
     if (slot == NULL) {
         slot = PK11_GetInternalSlot();
-        if (!slot)
+        if (!slot) {
             return SECFailure;
+}
     }
 
     bestIsInternal = PK11_IsInternal(slot);
@@ -2505,8 +2588,9 @@ PK11_GenerateRandom(unsigned char *data, int len)
     SECStatus rv;
 
     slot = PK11_GetBestSlot(CKM_FAKE_RANDOM, NULL);
-    if (slot == NULL)
+    if (slot == NULL) {
         return SECFailure;
+}
 
     rv = PK11_GenerateRandomOnSlot(slot, data, len);
     PK11_FreeSlot(slot);

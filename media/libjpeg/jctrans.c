@@ -41,8 +41,9 @@ LOCAL(void) transencode_coef_controller
 GLOBAL(void)
 jpeg_write_coefficients (j_compress_ptr cinfo, jvirt_barray_ptr *coef_arrays)
 {
-  if (cinfo->global_state != CSTATE_START)
+  if (cinfo->global_state != CSTATE_START) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
   /* Mark all tables to be written */
   jpeg_suppress_tables(cinfo, FALSE);
   /* (Re)initialize error mgr and destination modules */
@@ -73,8 +74,9 @@ jpeg_copy_critical_parameters (j_decompress_ptr srcinfo,
   int tblno, ci, coefi;
 
   /* Safety check to ensure start_compress not called yet. */
-  if (dstinfo->global_state != CSTATE_START)
+  if (dstinfo->global_state != CSTATE_START) {
     ERREXIT1(dstinfo, JERR_BAD_STATE, dstinfo->global_state);
+}
   /* Copy fundamental image dimensions */
   dstinfo->image_width = srcinfo->image_width;
   dstinfo->image_height = srcinfo->image_height;
@@ -98,8 +100,9 @@ jpeg_copy_critical_parameters (j_decompress_ptr srcinfo,
   for (tblno = 0; tblno < NUM_QUANT_TBLS; tblno++) {
     if (srcinfo->quant_tbl_ptrs[tblno] != NULL) {
       qtblptr = & dstinfo->quant_tbl_ptrs[tblno];
-      if (*qtblptr == NULL)
+      if (*qtblptr == NULL) {
         *qtblptr = jpeg_alloc_quant_table((j_common_ptr) dstinfo);
+}
       MEMCOPY((*qtblptr)->quantval,
               srcinfo->quant_tbl_ptrs[tblno]->quantval,
               sizeof((*qtblptr)->quantval));
@@ -110,9 +113,10 @@ jpeg_copy_critical_parameters (j_decompress_ptr srcinfo,
    * Note we assume jpeg_set_defaults has allocated the dest comp_info array.
    */
   dstinfo->num_components = srcinfo->num_components;
-  if (dstinfo->num_components < 1 || dstinfo->num_components > MAX_COMPONENTS)
+  if (dstinfo->num_components < 1 || dstinfo->num_components > MAX_COMPONENTS) {
     ERREXIT2(dstinfo, JERR_COMPONENT_COUNT, dstinfo->num_components,
              MAX_COMPONENTS);
+}
   for (ci = 0, incomp = srcinfo->comp_info, outcomp = dstinfo->comp_info;
        ci < dstinfo->num_components; ci++, incomp++, outcomp++) {
     outcomp->component_id = incomp->component_id;
@@ -125,14 +129,16 @@ jpeg_copy_critical_parameters (j_decompress_ptr srcinfo,
      */
     tblno = outcomp->quant_tbl_no;
     if (tblno < 0 || tblno >= NUM_QUANT_TBLS ||
-        srcinfo->quant_tbl_ptrs[tblno] == NULL)
+        srcinfo->quant_tbl_ptrs[tblno] == NULL) {
       ERREXIT1(dstinfo, JERR_NO_QUANT_TABLE, tblno);
+}
     slot_quant = srcinfo->quant_tbl_ptrs[tblno];
     c_quant = incomp->quant_table;
     if (c_quant != NULL) {
       for (coefi = 0; coefi < DCTSIZE2; coefi++) {
-        if (c_quant->quantval[coefi] != slot_quant->quantval[coefi])
+        if (c_quant->quantval[coefi] != slot_quant->quantval[coefi]) {
           ERREXIT1(dstinfo, JERR_MISMATCHED_QUANT_TABLE, tblno);
+}
       }
     }
     /* Note: we do not copy the source's Huffman table assignments;
@@ -189,8 +195,9 @@ transencode_master_selection (j_compress_ptr cinfo,
 #else
       ERREXIT(cinfo, JERR_NOT_COMPILED);
 #endif
-    } else
+    } else {
       jinit_huff_encoder(cinfo);
+}
   }
 
   /* We need a special coefficient buffer controller. */
@@ -250,10 +257,11 @@ start_iMCU_row (j_compress_ptr cinfo)
   if (cinfo->comps_in_scan > 1) {
     coef->MCU_rows_per_iMCU_row = 1;
   } else {
-    if (coef->iMCU_row_num < (cinfo->total_iMCU_rows-1))
+    if (coef->iMCU_row_num < (cinfo->total_iMCU_rows-1)) {
       coef->MCU_rows_per_iMCU_row = cinfo->cur_comp_info[0]->v_samp_factor;
-    else
+    } else {
       coef->MCU_rows_per_iMCU_row = cinfo->cur_comp_info[0]->last_row_height;
+}
   }
 
   coef->mcu_ctr = 0;
@@ -270,8 +278,9 @@ start_pass_coef (j_compress_ptr cinfo, J_BUF_MODE pass_mode)
 {
   my_coef_ptr coef = (my_coef_ptr) cinfo->coef;
 
-  if (pass_mode != JBUF_CRANK_DEST)
+  if (pass_mode != JBUF_CRANK_DEST) {
     ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
 
   coef->iMCU_row_num = 0;
   start_iMCU_row(cinfo);
@@ -328,8 +337,9 @@ compress_output (j_compress_ptr cinfo, JSAMPIMAGE input_buf)
               yindex+yoffset < compptr->last_row_height) {
             /* Fill in pointers to real blocks in this row */
             buffer_ptr = buffer[ci][yindex+yoffset] + start_col;
-            for (xindex = 0; xindex < blockcnt; xindex++)
+            for (xindex = 0; xindex < blockcnt; xindex++) {
               MCU_buffer[blkn++] = buffer_ptr++;
+}
           } else {
             /* At bottom of image, need a whole row of dummy blocks */
             xindex = 0;

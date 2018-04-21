@@ -269,7 +269,8 @@ void av1_setup_pc_tree(AV1_COMMON *cm, ThreadData *td) {
       alloc_tree_contexts(cm, tree, 4 << (2 * square_index));
 #endif
       tree->block_size = square[square_index];
-      for (j = 0; j < 4; j++) tree->split[j] = this_pc++;
+      for (j = 0; j < 4; j++) { tree->split[j] = this_pc++;
+}
       ++pc_tree_index;
     }
     ++square_index;
@@ -303,7 +304,8 @@ void av1_free_pc_tree(ThreadData *td) {
   const int tree_nodes = tree_nodes_inc + 64 + 16 + 4 + 1;
 #endif  // CONFIG_EXT_PARTITION
   int i;
-  for (i = 0; i < tree_nodes; ++i) free_tree_contexts(&td->pc_tree[i]);
+  for (i = 0; i < tree_nodes; ++i) { free_tree_contexts(&td->pc_tree[i]);
+}
   aom_free(td->pc_tree);
   td->pc_tree = NULL;
 #if !CONFIG_CB4X4

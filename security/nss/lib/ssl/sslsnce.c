@@ -280,10 +280,12 @@ static PRUint32
 LockSidCacheLock(sidCacheLock *lock, PRUint32 now)
 {
     SECStatus rv = sslMutex_Lock(&lock->mutex);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return 0;
-    if (!now)
+}
+    if (!now) {
         now = ssl_TimeSec();
+}
     lock->timeStamp = now;
     lock->pid = myPid;
     return now;
@@ -516,8 +518,9 @@ ConvertToSID(sidCacheEntry *from,
 
         to->peerCert = CERT_NewTempCertificate(dbHandle, &derCert, NULL,
                                                PR_FALSE, PR_TRUE);
-        if (to->peerCert == NULL)
+        if (to->peerCert == NULL) {
             goto loser;
+}
     }
     if (from->authType == ssl_auth_ecdsa ||
         from->authType == ssl_auth_ecdh_rsa ||
@@ -561,8 +564,9 @@ SIDindex(cacheDesc *cache, const PRIPv6Addr *addr, PRUint8 *s, unsigned nl)
     PRUint32 x[8];
 
     memset(x, 0, sizeof x);
-    if (nl > sizeof x)
+    if (nl > sizeof x) {
         nl = sizeof x;
+}
     memcpy(x, s, nl);
 
     rv = (addr->pr_s6_addr32[0] ^ addr->pr_s6_addr32[1] ^
@@ -594,8 +598,9 @@ FindSID(cacheDesc *cache, PRUint32 setNum, PRUint32 now,
         ndx = (ndx - 1) % SID_CACHE_ENTRIES_PER_SET;
         sce = set + ndx;
 
-        if (!sce->valid)
+        if (!sce->valid) {
             continue;
+}
 
         if (now > sce->expirationTime) {
             /* SessionID has timed out. Invalidate the entry. */
@@ -651,8 +656,9 @@ ServerSessionIDLookup(const PRIPv6Addr *addr,
 
     set = SIDindex(cache, addr, sessionID, sessionIDLength);
     now = LockSet(cache, set, 0);
-    if (!now)
+    if (!now) {
         return NULL;
+}
 
     psce = FindSID(cache, set, now, addr, sessionID, sessionIDLength);
     if (psce) {
@@ -747,8 +753,9 @@ ssl_ServerCacheSessionID(sslSessionID *sid)
         SECItem *name;
 
         PORT_Assert(sid->creationTime != 0);
-        if (!sid->creationTime)
+        if (!sid->creationTime) {
             sid->lastAccessTime = sid->creationTime = ssl_TimeUsec();
+}
         /* override caller's expiration time, which uses client timeout
          * duration, not server timeout duration.
          */
@@ -807,8 +814,9 @@ ssl_ServerUncacheSessionID(sslSessionID *sid)
     PRUint32 now;
     sidCacheEntry *psce;
 
-    if (sid == NULL)
+    if (sid == NULL) {
         return;
+}
 
     /* Uncaching a SID should never change the error code.
     ** So save it here and restore it before exiting.
@@ -968,8 +976,9 @@ InitCache(cacheDesc *cache, int maxCacheEntries, int maxCertCacheEntries,
     if (cache->numCertCacheEntries < MIN_CERT_CACHE_ENTRIES) {
         /* This is really a poor way to computer this! */
         cache->numCertCacheEntries = cache->sidCacheSize / sizeof(certCacheEntry);
-        if (cache->numCertCacheEntries < MIN_CERT_CACHE_ENTRIES)
+        if (cache->numCertCacheEntries < MIN_CERT_CACHE_ENTRIES) {
             cache->numCertCacheEntries = MIN_CERT_CACHE_ENTRIES;
+}
     }
     ptr = (ptrdiff_t)(cache->certCacheData + cache->numCertCacheEntries);
     ptr = SID_ROUNDUP(ptr, SID_ALIGNMENT);
@@ -1239,8 +1248,9 @@ ssl_ConfigMPServerSIDCacheWithOpt(PRUint32 ssl3_timeout,
     result = ssl_ConfigServerSessionIDCacheInstanceWithOpt(cache,
                                                            ssl3_timeout, directory, PR_TRUE,
                                                            maxCacheEntries, maxCacheEntries, maxSrvNameCacheEntries);
-    if (result != SECSuccess)
+    if (result != SECSuccess) {
         return result;
+}
 
     prStatus = PR_ExportFileMapAsString(cache->cacheMemMap,
                                         sizeof fmString, fmString);
@@ -1359,11 +1369,13 @@ SSL_InheritMPServerSIDCacheInstance(cacheDesc *cache, const char *envString)
         }
     }
     myEnvString = PORT_Strdup(envString);
-    if (!myEnvString)
+    if (!myEnvString) {
         return SECFailure;
+}
     fmString = strchr(myEnvString, ',');
-    if (!fmString)
+    if (!fmString) {
         goto loser;
+}
     *fmString++ = 0;
 
     decoString = ATOB_AsciiToData(myEnvString, &decoLen);
@@ -1482,8 +1494,9 @@ SSL_InheritMPServerSIDCacheInstance(cacheDesc *cache, const char *envString)
 
 loser:
     PORT_Free(myEnvString);
-    if (decoString)
+    if (decoString) {
         PORT_Free(decoString);
+}
     CloseCache(cache);
     PORT_SetError(SEC_ERROR_LIBRARY_FAILURE);
     return SECFailure;
@@ -1515,8 +1528,9 @@ LockPoller(void *arg)
     timeout = PR_SecondsToInterval(expiration);
     while (!sharedCache->stopPolling) {
         PR_Sleep(timeout);
-        if (sharedCache->stopPolling)
+        if (sharedCache->stopPolling) {
             break;
+}
 
         now = ssl_TimeSec();
         then = now - expiration;
@@ -1559,10 +1573,12 @@ LaunchLockPoller(cacheDesc *cache)
     timeoutString = PR_GetEnvSecure("NSS_SSL_SERVER_CACHE_MUTEX_TIMEOUT");
     if (timeoutString) {
         long newTime = strtol(timeoutString, 0, 0);
-        if (newTime == 0)
+        if (newTime == 0) {
             return SECSuccess; /* application doesn't want poller thread */
-        if (newTime > 0)
+}
+        if (newTime > 0) {
             cache->mutexTimeout = (PRUint32)newTime;
+}
         /* if error (newTime < 0) ignore it and use default */
     }
 
@@ -1886,8 +1902,9 @@ WrapSelfEncryptKey(SECKEYPublicKey *svrPubKey, PK11SymKey *symKey,
 
     wrappedKey.len = SECKEY_PublicKeyStrength(svrPubKey);
     PORT_Assert(wrappedKey.len <= sizeof(cacheEntry->bytes));
-    if (wrappedKey.len > sizeof(cacheEntry->bytes))
+    if (wrappedKey.len > sizeof(cacheEntry->bytes)) {
         return PR_FALSE;
+}
     wrappedKey.data = cacheEntry->bytes;
 
     if (PK11_PubWrapSymKey(CKM_RSA_PKCS, svrPubKey, symKey, &wrappedKey) !=
@@ -1950,10 +1967,12 @@ GenerateSelfEncryptKeys(void *pwArg, PRUint8 *keyName, PK11SymKey **aesKey,
     return SECSuccess;
 
 loser:
-    if (aesKeyTmp)
+    if (aesKeyTmp) {
         PK11_FreeSymKey(aesKeyTmp);
-    if (macKeyTmp)
+}
+    if (macKeyTmp) {
         PK11_FreeSymKey(macKeyTmp);
+}
     return SECFailure;
 }
 
@@ -2029,10 +2048,12 @@ UnwrapCachedSelfEncryptKeys(SECKEYPrivateKey *svrPrivKey, PRUint8 *keyName,
     return SECSuccess;
 
 loser:
-    if (aesKeyTmp)
+    if (aesKeyTmp) {
         PK11_FreeSymKey(aesKeyTmp);
-    if (macKeyTmp)
+}
+    if (macKeyTmp) {
         PK11_FreeSymKey(macKeyTmp);
+}
     return SECFailure;
 }
 
@@ -2054,8 +2075,9 @@ ssl_GenerateSelfEncryptKeys(void *pwArg, PRUint8 *keyName,
     }
 
     now = LockSidCacheLock(cache->keyCacheLock, 0);
-    if (!now)
+    if (!now) {
         return SECFailure;
+}
 
     if (*(cache->ticketKeysValid)) {
         rv = UnwrapCachedSelfEncryptKeys(svrPrivKey, keyName, encKey, macKey);

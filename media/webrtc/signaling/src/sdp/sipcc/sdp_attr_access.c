@@ -2166,8 +2166,9 @@ sdp_attr_fmtp_valid(sdp_t *sdp_p, uint16_t level, uint8_t cap_num,
     fmtp_p = &(attr_p->attr.fmtp);
 
     /* Do quick test. If application max value is lower than fmtp's then error */
-    if (fmtp_p->maxval > appl_maxval)
+    if (fmtp_p->maxval > appl_maxval) {
       return FALSE;
+}
 
     /* Ok, events are within range. Now check that only
      * allowed events have been received

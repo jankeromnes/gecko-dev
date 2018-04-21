@@ -37,8 +37,9 @@ DER_StoreHeader(unsigned char *buf, unsigned int code, PRUint32 len)
     b[1] = (unsigned char)(len >> 16);
     b[2] = (unsigned char)(len >> 8);
     b[3] = (unsigned char)len;
-    if ((code & DER_TAGNUM_MASK) == DER_SET || (code & DER_TAGNUM_MASK) == DER_SEQUENCE)
+    if ((code & DER_TAGNUM_MASK) == DER_SET || (code & DER_TAGNUM_MASK) == DER_SEQUENCE) {
         code |= DER_CONSTRUCTED;
+}
     *buf++ = code;
     if (len > 127) {
         if (len > 255) {

@@ -32,20 +32,20 @@ vpx_codec_err_t vpx_codec_enc_init_ver(vpx_codec_ctx_t *ctx,
                                        vpx_codec_flags_t flags, int ver) {
   vpx_codec_err_t res;
 
-  if (ver != VPX_ENCODER_ABI_VERSION)
+  if (ver != VPX_ENCODER_ABI_VERSION) {
     res = VPX_CODEC_ABI_MISMATCH;
-  else if (!ctx || !iface || !cfg)
+  } else if (!ctx || !iface || !cfg) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (iface->abi_version != VPX_CODEC_INTERNAL_ABI_VERSION)
+  } else if (iface->abi_version != VPX_CODEC_INTERNAL_ABI_VERSION) {
     res = VPX_CODEC_ABI_MISMATCH;
-  else if (!(iface->caps & VPX_CODEC_CAP_ENCODER))
+  } else if (!(iface->caps & VPX_CODEC_CAP_ENCODER)) {
     res = VPX_CODEC_INCAPABLE;
-  else if ((flags & VPX_CODEC_USE_PSNR) && !(iface->caps & VPX_CODEC_CAP_PSNR))
+  } else if ((flags & VPX_CODEC_USE_PSNR) && !(iface->caps & VPX_CODEC_CAP_PSNR)) {
     res = VPX_CODEC_INCAPABLE;
-  else if ((flags & VPX_CODEC_USE_OUTPUT_PARTITION) &&
-           !(iface->caps & VPX_CODEC_CAP_OUTPUT_PARTITION))
+  } else if ((flags & VPX_CODEC_USE_OUTPUT_PARTITION) &&
+           !(iface->caps & VPX_CODEC_CAP_OUTPUT_PARTITION)) {
     res = VPX_CODEC_INCAPABLE;
-  else {
+  } else {
     ctx->iface = iface;
     ctx->name = iface->name;
     ctx->priv = NULL;
@@ -67,24 +67,25 @@ vpx_codec_err_t vpx_codec_enc_init_multi_ver(
     int num_enc, vpx_codec_flags_t flags, vpx_rational_t *dsf, int ver) {
   vpx_codec_err_t res = VPX_CODEC_OK;
 
-  if (ver != VPX_ENCODER_ABI_VERSION)
+  if (ver != VPX_ENCODER_ABI_VERSION) {
     res = VPX_CODEC_ABI_MISMATCH;
-  else if (!ctx || !iface || !cfg || (num_enc > 16 || num_enc < 1))
+  } else if (!ctx || !iface || !cfg || (num_enc > 16 || num_enc < 1)) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (iface->abi_version != VPX_CODEC_INTERNAL_ABI_VERSION)
+  } else if (iface->abi_version != VPX_CODEC_INTERNAL_ABI_VERSION) {
     res = VPX_CODEC_ABI_MISMATCH;
-  else if (!(iface->caps & VPX_CODEC_CAP_ENCODER))
+  } else if (!(iface->caps & VPX_CODEC_CAP_ENCODER)) {
     res = VPX_CODEC_INCAPABLE;
-  else if ((flags & VPX_CODEC_USE_PSNR) && !(iface->caps & VPX_CODEC_CAP_PSNR))
+  } else if ((flags & VPX_CODEC_USE_PSNR) && !(iface->caps & VPX_CODEC_CAP_PSNR)) {
     res = VPX_CODEC_INCAPABLE;
-  else if ((flags & VPX_CODEC_USE_OUTPUT_PARTITION) &&
-           !(iface->caps & VPX_CODEC_CAP_OUTPUT_PARTITION))
+  } else if ((flags & VPX_CODEC_USE_OUTPUT_PARTITION) &&
+           !(iface->caps & VPX_CODEC_CAP_OUTPUT_PARTITION)) {
     res = VPX_CODEC_INCAPABLE;
-  else {
+  } else {
     int i;
     void *mem_loc = NULL;
 
-    if (iface->enc.mr_get_mem_loc == NULL) return VPX_CODEC_INCAPABLE;
+    if (iface->enc.mr_get_mem_loc == NULL) { return VPX_CODEC_INCAPABLE;
+}
 
     if (!(res = iface->enc.mr_get_mem_loc(cfg, &mem_loc))) {
       for (i = 0; i < num_enc; i++) {
@@ -105,7 +106,8 @@ vpx_codec_err_t vpx_codec_enc_init_multi_ver(
            * resolution always use the same frame_type chosen by the
            * lowest-resolution encoder.
            */
-          if (mr_cfg.mr_encoder_id) cfg->kf_mode = VPX_KF_DISABLED;
+          if (mr_cfg.mr_encoder_id) { cfg->kf_mode = VPX_KF_DISABLED;
+}
 
           ctx->iface = iface;
           ctx->name = iface->name;
@@ -154,11 +156,11 @@ vpx_codec_err_t vpx_codec_enc_config_default(vpx_codec_iface_t *iface,
   vpx_codec_enc_cfg_map_t *map;
   int i;
 
-  if (!iface || !cfg || usage > INT_MAX)
+  if (!iface || !cfg || usage > INT_MAX) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!(iface->caps & VPX_CODEC_CAP_ENCODER))
+  } else if (!(iface->caps & VPX_CODEC_CAP_ENCODER)) {
     res = VPX_CODEC_INCAPABLE;
-  else {
+  } else {
     res = VPX_CODEC_INVALID_PARAM;
 
     for (i = 0; i < iface->enc.cfg_map_count; ++i) {
@@ -199,13 +201,13 @@ vpx_codec_err_t vpx_codec_encode(vpx_codec_ctx_t *ctx, const vpx_image_t *img,
                                  unsigned long deadline) {
   vpx_codec_err_t res = VPX_CODEC_OK;
 
-  if (!ctx || (img && !duration))
+  if (!ctx || (img && !duration)) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv)
+  } else if (!ctx->iface || !ctx->priv) {
     res = VPX_CODEC_ERROR;
-  else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER))
+  } else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER)) {
     res = VPX_CODEC_INCAPABLE;
-  else {
+  } else {
     unsigned int num_enc = ctx->priv->enc.total_encoders;
 
     /* Execute in a normalized floating point environment, if the platform
@@ -213,10 +215,10 @@ vpx_codec_err_t vpx_codec_encode(vpx_codec_ctx_t *ctx, const vpx_image_t *img,
      */
     FLOATING_POINT_INIT();
 
-    if (num_enc == 1)
+    if (num_enc == 1) {
       res = ctx->iface->enc.encode(get_alg_priv(ctx), img, pts, duration, flags,
                                    deadline);
-    else {
+    } else {
       /* Multi-resolution encoding:
        * Encode multi-levels in reverse order. For example,
        * if mr_total_resolutions = 3, first encode level 2,
@@ -225,15 +227,18 @@ vpx_codec_err_t vpx_codec_encode(vpx_codec_ctx_t *ctx, const vpx_image_t *img,
       int i;
 
       ctx += num_enc - 1;
-      if (img) img += num_enc - 1;
+      if (img) { img += num_enc - 1;
+}
 
       for (i = num_enc - 1; i >= 0; i--) {
         if ((res = ctx->iface->enc.encode(get_alg_priv(ctx), img, pts, duration,
-                                          flags, deadline)))
+                                          flags, deadline))) {
           break;
+}
 
         ctx--;
-        if (img) img--;
+        if (img) { img--;
+}
       }
       ctx++;
     }
@@ -249,14 +254,15 @@ const vpx_codec_cx_pkt_t *vpx_codec_get_cx_data(vpx_codec_ctx_t *ctx,
   const vpx_codec_cx_pkt_t *pkt = NULL;
 
   if (ctx) {
-    if (!iter)
+    if (!iter) {
       ctx->err = VPX_CODEC_INVALID_PARAM;
-    else if (!ctx->iface || !ctx->priv)
+    } else if (!ctx->iface || !ctx->priv) {
       ctx->err = VPX_CODEC_ERROR;
-    else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER))
+    } else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER)) {
       ctx->err = VPX_CODEC_INCAPABLE;
-    else
+    } else {
       pkt = ctx->iface->enc.get_cx_data(get_alg_priv(ctx), iter);
+}
   }
 
   if (pkt && pkt->kind == VPX_CODEC_CX_FRAME_PKT) {
@@ -294,7 +300,8 @@ vpx_codec_err_t vpx_codec_set_cx_data_buf(vpx_codec_ctx_t *ctx,
                                           const vpx_fixed_buf_t *buf,
                                           unsigned int pad_before,
                                           unsigned int pad_after) {
-  if (!ctx || !ctx->priv) return VPX_CODEC_INVALID_PARAM;
+  if (!ctx || !ctx->priv) { return VPX_CODEC_INVALID_PARAM;
+}
 
   if (buf) {
     ctx->priv->enc.cx_data_dst_buf = *buf;
@@ -314,14 +321,15 @@ const vpx_image_t *vpx_codec_get_preview_frame(vpx_codec_ctx_t *ctx) {
   vpx_image_t *img = NULL;
 
   if (ctx) {
-    if (!ctx->iface || !ctx->priv)
+    if (!ctx->iface || !ctx->priv) {
       ctx->err = VPX_CODEC_ERROR;
-    else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER))
+    } else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER)) {
       ctx->err = VPX_CODEC_INCAPABLE;
-    else if (!ctx->iface->enc.get_preview)
+    } else if (!ctx->iface->enc.get_preview) {
       ctx->err = VPX_CODEC_INCAPABLE;
-    else
+    } else {
       img = ctx->iface->enc.get_preview(get_alg_priv(ctx));
+}
   }
 
   return img;
@@ -331,14 +339,15 @@ vpx_fixed_buf_t *vpx_codec_get_global_headers(vpx_codec_ctx_t *ctx) {
   vpx_fixed_buf_t *buf = NULL;
 
   if (ctx) {
-    if (!ctx->iface || !ctx->priv)
+    if (!ctx->iface || !ctx->priv) {
       ctx->err = VPX_CODEC_ERROR;
-    else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER))
+    } else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER)) {
       ctx->err = VPX_CODEC_INCAPABLE;
-    else if (!ctx->iface->enc.get_glob_hdrs)
+    } else if (!ctx->iface->enc.get_glob_hdrs) {
       ctx->err = VPX_CODEC_INCAPABLE;
-    else
+    } else {
       buf = ctx->iface->enc.get_glob_hdrs(get_alg_priv(ctx));
+}
   }
 
   return buf;
@@ -348,12 +357,13 @@ vpx_codec_err_t vpx_codec_enc_config_set(vpx_codec_ctx_t *ctx,
                                          const vpx_codec_enc_cfg_t *cfg) {
   vpx_codec_err_t res;
 
-  if (!ctx || !ctx->iface || !ctx->priv || !cfg)
+  if (!ctx || !ctx->iface || !ctx->priv || !cfg) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER))
+  } else if (!(ctx->iface->caps & VPX_CODEC_CAP_ENCODER)) {
     res = VPX_CODEC_INCAPABLE;
-  else
+  } else {
     res = ctx->iface->enc.cfg_set(get_alg_priv(ctx), cfg);
+}
 
   return SAVE_STATUS(ctx, res);
 }
@@ -378,10 +388,11 @@ const vpx_codec_cx_pkt_t *vpx_codec_pkt_list_get(
 
   pkt = (const vpx_codec_cx_pkt_t *)*iter;
 
-  if ((size_t)(pkt - list->pkts) < list->cnt)
+  if ((size_t)(pkt - list->pkts) < list->cnt) {
     *iter = pkt + 1;
-  else
+  } else {
     pkt = NULL;
+}
 
   return pkt;
 }

@@ -107,22 +107,26 @@ namespace time_internal {
 int64_t SaturatedAdd(TimeDelta delta, int64_t value) {
   CheckedNumeric<int64_t> rv(delta.delta_);
   rv += value;
-  if (rv.IsValid())
+  if (rv.IsValid()) {
     return rv.ValueOrDie();
+}
   // Positive RHS overflows. Negative RHS underflows.
-  if (value < 0)
+  if (value < 0) {
     return std::numeric_limits<int64_t>::min();
+}
   return std::numeric_limits<int64_t>::max();
 }
 
 int64_t SaturatedSub(TimeDelta delta, int64_t value) {
   CheckedNumeric<int64_t> rv(delta.delta_);
   rv -= value;
-  if (rv.IsValid())
+  if (rv.IsValid()) {
     return rv.ValueOrDie();
+}
   // Negative RHS overflows. Positive RHS underflows.
-  if (value < 0)
+  if (value < 0) {
     return std::numeric_limits<int64_t>::max();
+}
   return std::numeric_limits<int64_t>::min();
 }
 
@@ -136,16 +140,19 @@ std::ostream& operator<<(std::ostream& os, TimeDelta time_delta) {
 
 // static
 Time Time::FromTimeT(time_t tt) {
-  if (tt == 0)
+  if (tt == 0) {
     return Time();  // Preserve 0 so we can tell it doesn't exist.
-  if (tt == std::numeric_limits<time_t>::max())
+}
+  if (tt == std::numeric_limits<time_t>::max()) {
     return Max();
+}
   return Time(kTimeTToMicrosecondsOffset) + TimeDelta::FromSeconds(tt);
 }
 
 time_t Time::ToTimeT() const {
-  if (is_null())
+  if (is_null()) {
     return 0;  // Preserve 0 so we can tell it doesn't exist.
+}
   if (is_max()) {
     // Preserve max without offset to prevent overflow.
     return std::numeric_limits<time_t>::max();
@@ -160,14 +167,16 @@ time_t Time::ToTimeT() const {
 
 // static
 Time Time::FromDoubleT(double dt) {
-  if (dt == 0 || std::isnan(dt))
+  if (dt == 0 || std::isnan(dt)) {
     return Time();  // Preserve 0 so we can tell it doesn't exist.
+}
   return Time(kTimeTToMicrosecondsOffset) + TimeDelta::FromSecondsD(dt);
 }
 
 double Time::ToDoubleT() const {
-  if (is_null())
+  if (is_null()) {
     return 0;  // Preserve 0 so we can tell it doesn't exist.
+}
   if (is_max()) {
     // Preserve max without offset to prevent overflow.
     return std::numeric_limits<double>::infinity();
@@ -239,8 +248,9 @@ Time Time::LocalMidnight() const {
   exploded.second = 0;
   exploded.millisecond = 0;
   Time out_time;
-  if (FromLocalExploded(exploded, &out_time))
+  if (FromLocalExploded(exploded, &out_time)) {
     return out_time;
+}
   // This function must not fail.
   NOTREACHED();
   return Time();
@@ -322,8 +332,9 @@ TimeTicks TimeTicks::SnappedToNextTick(TimeTicks tick_phase,
   // If |this| is exactly on the interval (i.e. offset==0), don't adjust.
   // Otherwise, if |tick_phase| was in the past, adjust forward to the next
   // tick after |this|.
-  if (!interval_offset.is_zero() && tick_phase < *this)
+  if (!interval_offset.is_zero() && tick_phase < *this) {
     interval_offset += tick_interval;
+}
   return *this + interval_offset;
 }
 

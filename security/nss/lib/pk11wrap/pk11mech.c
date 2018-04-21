@@ -122,13 +122,16 @@ PK11_AddMechanismEntry(CK_MECHANISM_TYPE type, CK_KEY_TYPE key,
         int oldTableSize = tableSize;
         tableSize += 10;
         newt = PORT_NewArray(pk11MechanismData, tableSize);
-        if (newt == NULL)
+        if (newt == NULL) {
             return;
+}
 
-        if (old)
+        if (old) {
             PORT_Memcpy(newt, old, oldTableSize * sizeof(*newt));
-    } else
+}
+    } else {
         old = NULL;
+}
 
     newt[entry].type = type;
     newt[entry].keyType = key;
@@ -140,8 +143,9 @@ PK11_AddMechanismEntry(CK_MECHANISM_TYPE type, CK_KEY_TYPE key,
     pk11_MechanismTable = newt;
     pk11_MechTableSize = tableSize;
     pk11_MechEntrySize = size;
-    if (old)
+    if (old) {
         PORT_Free(old);
+}
 }
 
 /*
@@ -836,8 +840,9 @@ pk11_ParamFromIVWithLen(CK_MECHANISM_TYPE type, SECItem *iv, int keyLen)
     SECItem *param;
 
     param = (SECItem *)PORT_Alloc(sizeof(SECItem));
-    if (param == NULL)
+    if (param == NULL) {
         return NULL;
+}
     param->data = NULL;
     param->len = 0;
     param->type = 0;
@@ -859,8 +864,9 @@ pk11_ParamFromIVWithLen(CK_MECHANISM_TYPE type, SECItem *iv, int keyLen)
             break;
         case CKM_RC2_ECB:
             rc2_ecb_params = (CK_RC2_PARAMS *)PORT_Alloc(sizeof(CK_RC2_PARAMS));
-            if (rc2_ecb_params == NULL)
+            if (rc2_ecb_params == NULL) {
                 break;
+}
             /*  Maybe we should pass the key size in too to get this value? */
             *rc2_ecb_params = keyLen ? keyLen * 8 : 128;
             param->data = (unsigned char *)rc2_ecb_params;
@@ -869,12 +875,14 @@ pk11_ParamFromIVWithLen(CK_MECHANISM_TYPE type, SECItem *iv, int keyLen)
         case CKM_RC2_CBC:
         case CKM_RC2_CBC_PAD:
             rc2_params = (CK_RC2_CBC_PARAMS *)PORT_Alloc(sizeof(CK_RC2_CBC_PARAMS));
-            if (rc2_params == NULL)
+            if (rc2_params == NULL) {
                 break;
+}
             /* Maybe we should pass the key size in too to get this value? */
             rc2_params->ulEffectiveBits = keyLen ? keyLen * 8 : 128;
-            if (iv && iv->data)
+            if (iv && iv->data) {
                 PORT_Memcpy(rc2_params->iv, iv->data, sizeof(rc2_params->iv));
+}
             param->data = (unsigned char *)rc2_params;
             param->len = sizeof(CK_RC2_CBC_PARAMS);
             break;
@@ -882,8 +890,9 @@ pk11_ParamFromIVWithLen(CK_MECHANISM_TYPE type, SECItem *iv, int keyLen)
         case CKM_RC5_CBC_PAD:
             rc5_cbc_params = (CK_RC5_CBC_PARAMS *)
                 PORT_Alloc(sizeof(CK_RC5_CBC_PARAMS) + ((iv) ? iv->len : 0));
-            if (rc5_cbc_params == NULL)
+            if (rc5_cbc_params == NULL) {
                 break;
+}
             if (iv && iv->data && iv->len) {
                 rc5_cbc_params->pIv = ((CK_BYTE_PTR)rc5_cbc_params) + sizeof(CK_RC5_CBC_PARAMS);
                 PORT_Memcpy(rc5_cbc_params->pIv, iv->data, iv->len);
@@ -900,8 +909,9 @@ pk11_ParamFromIVWithLen(CK_MECHANISM_TYPE type, SECItem *iv, int keyLen)
             break;
         case CKM_RC5_ECB:
             rc5_params = (CK_RC5_PARAMS *)PORT_Alloc(sizeof(CK_RC5_PARAMS));
-            if (rc5_params == NULL)
+            if (rc5_params == NULL) {
                 break;
+}
             if (iv && iv->data && iv->len) {
                 rc5_params->ulWordsize = iv->len / 2;
             } else {
@@ -947,8 +957,9 @@ pk11_ParamFromIVWithLen(CK_MECHANISM_TYPE type, SECItem *iv, int keyLen)
         case CKM_JUNIPER_CBC128:
         case CKM_JUNIPER_COUNTER:
         case CKM_JUNIPER_SHUFFLE:
-            if ((iv == NULL) || (iv->data == NULL))
+            if ((iv == NULL) || (iv->data == NULL)) {
                 break;
+}
             param->data = (unsigned char *)PORT_Alloc(iv->len);
             if (param->data != NULL) {
                 PORT_Memcpy(param->data, iv->data, iv->len);
@@ -1355,8 +1366,9 @@ PK11_ParamFromAlgid(SECAlgorithmID *algid)
     return mech;
 
 loser:
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     SECITEM_FreeItem(mech, PR_TRUE);
     return NULL;
 }
@@ -1406,8 +1418,9 @@ pk11_GenerateNewParamWithKeyLen(CK_MECHANISM_TYPE type, int keyLen)
     SECStatus rv;
 
     mech = (SECItem *)PORT_Alloc(sizeof(SECItem));
-    if (mech == NULL)
+    if (mech == NULL) {
         return NULL;
+}
 
     rv = SECSuccess;
     mech->type = siBuffer;
@@ -1453,8 +1466,9 @@ pk11_GenerateNewParamWithKeyLen(CK_MECHANISM_TYPE type, int keyLen)
             /* NOTE PK11_GetKeyLength can return -1 if the key isn't and RC2, RC5,
              *   or RC4 key. Of course that wouldn't happen here doing RC2:).*/
             rc2_params->ulEffectiveBits = keyLen ? keyLen * 8 : 128;
-            if (iv.data)
+            if (iv.data) {
                 PORT_Memcpy(rc2_params->iv, iv.data, sizeof(rc2_params->iv));
+}
             mech->data = (unsigned char *)rc2_params;
             mech->len = sizeof(CK_RC2_CBC_PARAMS);
             PORT_Free(iv.data);
@@ -1575,15 +1589,17 @@ PK11_ParamToAlgid(SECOidTag algTag, SECItem *param,
             rc2_params = (CK_RC2_CBC_PARAMS *)param->data;
             rc2version = rc2_unmap(rc2_params->ulEffectiveBits);
             if (SEC_ASN1EncodeUnsignedInteger(NULL, &(rc2.rc2ParameterVersion),
-                                              rc2version) == NULL)
+                                              rc2version) == NULL) {
                 break;
+}
             rc2.iv.data = rc2_params->iv;
             rc2.iv.len = sizeof(rc2_params->iv);
             newParams = SEC_ASN1EncodeItem(NULL, NULL, &rc2,
                                            sec_rc2cbc_parameter_template);
             PORT_Free(rc2.rc2ParameterVersion.data);
-            if (newParams == NULL)
+            if (newParams == NULL) {
                 break;
+}
             rv = SECSuccess;
             break;
 
@@ -1592,8 +1608,9 @@ PK11_ParamToAlgid(SECOidTag algTag, SECItem *param,
         case CKM_RC5_CBC:
         case CKM_RC5_CBC_PAD:
             rc5_params = (CK_RC5_CBC_PARAMS *)param->data;
-            if (SEC_ASN1EncodeUnsignedInteger(NULL, &rc5.version, RC5_V10) == NULL)
+            if (SEC_ASN1EncodeUnsignedInteger(NULL, &rc5.version, RC5_V10) == NULL) {
                 break;
+}
             if (SEC_ASN1EncodeUnsignedInteger(NULL, &rc5.blockSizeInBits,
                                               rc5_params->ulWordsize * 8) == NULL) {
                 PORT_Free(rc5.version.data);
@@ -1612,8 +1629,9 @@ PK11_ParamToAlgid(SECOidTag algTag, SECItem *param,
             PORT_Free(rc5.version.data);
             PORT_Free(rc5.blockSizeInBits.data);
             PORT_Free(rc5.rounds.data);
-            if (newParams == NULL)
+            if (newParams == NULL) {
                 break;
+}
             rv = SECSuccess;
             break;
         case CKM_PBE_MD2_DES_CBC:
@@ -1673,15 +1691,17 @@ PK11_ParamToAlgid(SECOidTag algTag, SECItem *param,
         case CKM_JUNIPER_SHUFFLE:
             newParams = SEC_ASN1EncodeItem(NULL, NULL, param,
                                            SEC_ASN1_GET(SEC_OctetStringTemplate));
-            if (newParams == NULL)
+            if (newParams == NULL) {
                 break;
+}
             rv = SECSuccess;
             break;
     }
 
     if (rv != SECSuccess) {
-        if (newParams)
+        if (newParams) {
             SECITEM_FreeItem(newParams, PR_TRUE);
+}
         return rv;
     }
 
@@ -1698,8 +1718,9 @@ PK11_AlgtagToMechanism(SECOidTag algTag)
 {
     SECOidData *oid = SECOID_FindOIDByTag(algTag);
 
-    if (oid)
+    if (oid) {
         return (CK_MECHANISM_TYPE)oid->mechanism;
+}
     return CKM_INVALID_MECHANISM;
 }
 
@@ -1709,8 +1730,9 @@ PK11_MechanismToAlgtag(CK_MECHANISM_TYPE type)
 {
     SECOidData *oid = SECOID_FindOIDByMechanism((unsigned long)type);
 
-    if (oid)
+    if (oid) {
         return oid->offset;
+}
     return SEC_OID_UNKNOWN;
 }
 

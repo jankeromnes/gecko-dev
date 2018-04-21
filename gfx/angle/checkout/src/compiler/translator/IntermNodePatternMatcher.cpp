@@ -24,8 +24,9 @@ bool ContainsMatrixNode(const TIntermSequence &sequence)
     for (size_t ii = 0; ii < sequence.size(); ++ii)
     {
         TIntermTyped *node = sequence[ii]->getAsTyped();
-        if (node && node->isMatrix())
+        if (node && node->isMatrix()) {
             return true;
+}
     }
     return false;
 }
@@ -35,8 +36,9 @@ bool ContainsVectorNode(const TIntermSequence &sequence)
     for (size_t ii = 0; ii < sequence.size(); ++ii)
     {
         TIntermTyped *node = sequence[ii]->getAsTyped();
-        if (node && node->isVector())
+        if (node && node->isVector()) {
             return true;
+}
     }
     return false;
 }

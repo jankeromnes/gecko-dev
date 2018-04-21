@@ -92,8 +92,9 @@ MD2_NewContext(void)
 void
 MD2_DestroyContext(MD2Context *cx, PRBool freeit)
 {
-    if (freeit)
+    if (freeit) {
         PORT_ZFree(cx, sizeof(*cx));
+}
 }
 
 void
@@ -201,8 +202,9 @@ MD2_Update(MD2Context *cx, const unsigned char *input, unsigned int inputLen)
         bytesToConsume = PR_MIN(inputLen, cx->unusedBuffer);
         memcpy(&cx->X[MD2_INPUT + (MD2_BUFSIZE - cx->unusedBuffer)],
                input, bytesToConsume);
-        if (cx->unusedBuffer + bytesToConsume >= MD2_BUFSIZE)
+        if (cx->unusedBuffer + bytesToConsume >= MD2_BUFSIZE) {
             md2_compress(cx);
+}
         inputLen -= bytesToConsume;
         input += bytesToConsume;
     }
@@ -216,8 +218,9 @@ MD2_Update(MD2Context *cx, const unsigned char *input, unsigned int inputLen)
     }
 
     /* Copy any input that remains into the buffer. */
-    if (inputLen)
+    if (inputLen) {
         memcpy(&cx->X[MD2_INPUT], input, inputLen);
+}
     cx->unusedBuffer = MD2_BUFSIZE - inputLen;
 }
 
@@ -257,8 +260,9 @@ MD2Context *
 MD2_Resurrect(unsigned char *space, void *arg)
 {
     MD2Context *cx = MD2_NewContext();
-    if (cx)
+    if (cx) {
         memcpy(cx, space, sizeof(*cx));
+}
     return cx;
 }
 

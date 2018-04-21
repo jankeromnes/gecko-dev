@@ -86,12 +86,14 @@ setNonBlocking(int fd, int nonBlocking)
     int err;
 
     flags = fcntl(fd, F_GETFL, 0);
-    if (0 > flags)
+    if (0 > flags) {
         return flags;
-    if (nonBlocking)
+}
+    if (nonBlocking) {
         flags |= FNONBLOCK;
-    else
+    } else {
         flags &= ~FNONBLOCK;
+}
     err = fcntl(fd, F_SETFL, flags);
     return err;
 }
@@ -118,8 +120,9 @@ sslMutex_Init(sslMutex* pMutex, int shared)
     }
 #if NONBLOCKING_POSTS
     err = setNonBlocking(pMutex->u.pipeStr.mPipes[1], 1);
-    if (err)
+    if (err) {
         goto loser;
+}
 #endif
 
     pMutex->u.pipeStr.mPipes[2] = SSL_MUTEX_MAGIC;
@@ -261,10 +264,11 @@ sslMutex_Unlock(sslMutex* pMutex)
         cc = write(pMutex->u.pipeStr.mPipes[1], &c, 1);
     } while (cc < 0 && (errno == EINTR || errno == EAGAIN));
     if (cc != 1) {
-        if (cc < 0)
+        if (cc < 0) {
             nss_MD_unix_map_default_error(errno);
-        else
+        } else {
             PORT_SetError(PR_UNKNOWN_ERROR);
+}
         return SECFailure;
     }
 
@@ -290,10 +294,11 @@ sslMutex_Lock(sslMutex* pMutex)
         cc = read(pMutex->u.pipeStr.mPipes[0], &c, 1);
     } while (cc < 0 && errno == EINTR);
     if (cc != 1) {
-        if (cc < 0)
+        if (cc < 0) {
             nss_MD_unix_map_default_error(errno);
-        else
+        } else {
             PORT_SetError(PR_UNKNOWN_ERROR);
+}
         return SECFailure;
     }
 

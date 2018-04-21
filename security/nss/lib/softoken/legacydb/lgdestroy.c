@@ -73,8 +73,9 @@ lg_DestroyObject(SDB *sdb, CK_OBJECT_HANDLE object_id)
             }
             isKrl = (PRBool)(object_id == LG_TOKEN_KRL_HANDLE);
             rv = nsslowcert_DeletePermCRL(certHandle, dbKey, isKrl);
-            if (rv == SECFailure)
+            if (rv == SECFailure) {
                 crv = CKR_DEVICE_ERROR;
+}
             break;
         case LG_TOKEN_TYPE_TRUST:
             certHandle = lg_getCertDB(sdb);
@@ -95,8 +96,9 @@ lg_DestroyObject(SDB *sdb, CK_OBJECT_HANDLE object_id)
             tmptrust.emailFlags |= CERTDB_TRUSTED_UNKNOWN;
             tmptrust.objectSigningFlags |= CERTDB_TRUSTED_UNKNOWN;
             rv = nsslowcert_ChangeCertTrust(certHandle, cert, &tmptrust);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 crv = CKR_DEVICE_ERROR;
+}
             nsslowcert_DestroyCertificate(cert);
             break;
         default:

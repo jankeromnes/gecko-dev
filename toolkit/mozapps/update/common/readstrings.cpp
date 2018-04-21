@@ -22,7 +22,8 @@
 class AutoFILE {
 public:
   explicit AutoFILE(FILE *fp) : fp_(fp) {}
-  ~AutoFILE() { if (fp_) fclose(fp_); }
+  ~AutoFILE() { if (fp_) { fclose(fp_); 
+}}
   operator FILE *() { return fp_; }
 private:
   FILE *fp_;
@@ -61,8 +62,9 @@ NS_strspnp(const char *delims, const char *str)
 static char*
 NS_strtok(const char *delims, char **str)
 {
-  if (!*str)
+  if (!*str) {
     return nullptr;
+}
 
   char *ret = (char*) NS_strspnp(delims, *str);
 
@@ -94,15 +96,17 @@ NS_strtok(const char *delims, char **str)
 static int
 find_key(const char *keyList, char* key)
 {
-  if (!keyList)
+  if (!keyList) {
     return -1;
+}
 
   int index = 0;
   const char *p = keyList;
   while (*p)
   {
-    if (strcmp(key, p) == 0)
+    if (strcmp(key, p) == 0) {
       return index;
+}
 
     p += strlen(p) + 1;
     index++;
@@ -131,29 +135,35 @@ ReadStrings(const NS_tchar *path,
 {
   AutoFILE fp(NS_tfopen(path, OPEN_MODE));
 
-  if (!fp)
+  if (!fp) {
     return READ_ERROR;
+}
 
   /* get file size */
-  if (fseek(fp, 0, SEEK_END) != 0)
+  if (fseek(fp, 0, SEEK_END) != 0) {
     return READ_ERROR;
+}
 
   long len = ftell(fp);
-  if (len <= 0)
+  if (len <= 0) {
     return READ_ERROR;
+}
 
   size_t flen = size_t(len);
   AutoCharArray fileContents(flen + 1);
-  if (!fileContents)
+  if (!fileContents) {
     return READ_STRINGS_MEM_ERROR;
+}
 
   /* read the file in one swoop */
-  if (fseek(fp, 0, SEEK_SET) != 0)
+  if (fseek(fp, 0, SEEK_SET) != 0) {
     return READ_ERROR;
+}
 
   size_t rd = fread(fileContents, sizeof(char), flen, fp);
-  if (rd != flen)
+  if (rd != flen) {
     return READ_ERROR;
+}
 
   fileContents[flen] = '\0';
 
@@ -163,12 +173,14 @@ ReadStrings(const NS_tchar *path,
   unsigned int read = 0;
 
   while (char *token = NS_strtok(kNL, &buffer)) {
-    if (token[0] == '#' || token[0] == ';') // it's a comment
+    if (token[0] == '#' || token[0] == ';') { // it's a comment
       continue;
+}
 
     token = (char*) NS_strspnp(kWhitespace, token);
-    if (!*token) // empty line
+    if (!*token) { // empty line
       continue;
+}
 
     if (token[0] == '[') { // section header!
       ++token;
@@ -183,10 +195,11 @@ ReadStrings(const NS_tchar *path,
         inStringsSection = false;
       }
       else {
-        if (section)
+        if (section) {
           inStringsSection = strcmp(currSection, section) == 0;
-        else
+        } else {
           inStringsSection = strcmp(currSection, "Strings") == 0;
+}
       }
 
       continue;
@@ -201,8 +214,9 @@ ReadStrings(const NS_tchar *path,
 
     char *key = token;
     char *e = NS_strtok(kEquals, &token);
-    if (!e)
+    if (!e) {
       continue;
+}
 
     int keyIndex = find_key(keyList, key);
     if (keyIndex >= 0 && (unsigned int)keyIndex < numStrings)

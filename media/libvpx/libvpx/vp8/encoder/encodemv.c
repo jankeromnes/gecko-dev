@@ -30,26 +30,28 @@ static void encode_mvcomponent(vp8_writer *const w, const int v,
     vp8_write(w, 0, p[mvpis_short]);
     vp8_treed_write(w, vp8_small_mvtree, p + MVPshort, x, 3);
 
-    if (!x) return; /* no sign bit */
+    if (!x) { return; /* no sign bit */
+}
   } else            /* Large */
   {
     int i = 0;
 
     vp8_write(w, 1, p[mvpis_short]);
 
-    do
+    do {
       vp8_write(w, (x >> i) & 1, p[MVPbits + i]);
 
-    while (++i < 3);
+    } while (++i < 3);
 
     i = mvlong_width - 1; /* Skip bit 3, which is sometimes implicit */
 
-    do
+    do {
       vp8_write(w, (x >> i) & 1, p[MVPbits + i]);
 
-    while (--i > 3);
+    } while (--i > 3);
 
-    if (x & 0xFFF0) vp8_write(w, (x >> 3) & 1, p[MVPbits + 3]);
+    if (x & 0xFFF0) { vp8_write(w, (x >> 3) & 1, p[MVPbits + 3]);
+}
   }
 
   vp8_write(w, v < 0, p[MVPsign]);
@@ -98,7 +100,8 @@ static unsigned int cost_mvcomponent(const int v,
     cost = vp8_cost_zero(p[mvpis_short]) +
            vp8_treed_cost(vp8_small_mvtree, p + MVPshort, x, 3);
 
-    if (!x) return cost;
+    if (!x) { return cost;
+}
   } else {
     int i = 0;
     cost = vp8_cost_one(p[mvpis_short]);
@@ -115,7 +118,8 @@ static unsigned int cost_mvcomponent(const int v,
 
     } while (--i > 3);
 
-    if (x & 0xFFF0) cost += vp8_cost_bit(p[MVPbits + 3], (x >> 3) & 1);
+    if (x & 0xFFF0) { cost += vp8_cost_bit(p[MVPbits + 3], (x >> 3) & 1);
+}
   }
 
   return cost; /* + vp8_cost_bit( p [MVPsign], v < 0); */
@@ -186,8 +190,9 @@ static void update(vp8_writer *const w, const unsigned int ct[2],
     vp8_write_literal(w, new_p >> 1, 7);
     *updated = 1;
 
-  } else
+  } else {
     vp8_write(w, 0, update_p);
+}
 }
 
 static void write_component_probs(vp8_writer *const w,

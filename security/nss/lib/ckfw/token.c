@@ -1202,31 +1202,40 @@ nssCKFWToken_GetUTCTime(
         m = ((utcTime[10] - '0') * 10) + (utcTime[11] - '0');
         s = ((utcTime[12] - '0') * 10) + (utcTime[13] - '0');
 
-        if ((Y < 1990) || (Y > 3000))
+        if ((Y < 1990) || (Y > 3000)) {
             goto badtime; /* Y3K problem.  heh heh heh */
-        if ((M < 1) || (M > 12))
+}
+        if ((M < 1) || (M > 12)) {
             goto badtime;
-        if ((D < 1) || (D > 31))
+}
+        if ((D < 1) || (D > 31)) {
             goto badtime;
+}
 
-        if (D > dims[M - 1])
+        if (D > dims[M - 1]) {
             goto badtime; /* per-month check */
+}
         if ((2 == M) && (((Y % 4) || !(Y % 100)) &&
                          (Y % 400)) &&
-            (D > 28))
+            (D > 28)) {
             goto badtime; /* leap years */
+}
 
-        if ((h < 0) || (h > 23))
+        if ((h < 0) || (h > 23)) {
             goto badtime;
-        if ((m < 0) || (m > 60))
+}
+        if ((m < 0) || (m > 60)) {
             goto badtime;
-        if ((s < 0) || (s > 61))
+}
+        if ((s < 0) || (s > 61)) {
             goto badtime;
+}
 
         /* 60m and 60 or 61s is only allowed for leap seconds. */
         if ((60 == m) || (s >= 60)) {
-            if ((23 != h) || (60 != m) || (s < 60))
+            if ((23 != h) || (60 != m) || (s < 60)) {
                 goto badtime;
+}
             /* leap seconds can only happen on June 30 or Dec 31.. I think */
             /* if( ((6 != M) || (30 != D)) && ((12 != M) || (31 != D)) ) goto badtime; */
         }

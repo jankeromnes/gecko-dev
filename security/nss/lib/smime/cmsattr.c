@@ -44,22 +44,27 @@ NSS_CMSAttribute_Create(PLArenaPool *poolp, SECOidTag oidtag, SECItem *value,
     mark = PORT_ArenaMark(poolp);
 
     attr = (NSSCMSAttribute *)PORT_ArenaZAlloc(poolp, sizeof(NSSCMSAttribute));
-    if (attr == NULL)
+    if (attr == NULL) {
         goto loser;
+}
 
     attr->typeTag = SECOID_FindOIDByTag(oidtag);
-    if (attr->typeTag == NULL)
+    if (attr->typeTag == NULL) {
         goto loser;
+}
 
-    if (SECITEM_CopyItem(poolp, &(attr->type), &(attr->typeTag->oid)) != SECSuccess)
+    if (SECITEM_CopyItem(poolp, &(attr->type), &(attr->typeTag->oid)) != SECSuccess) {
         goto loser;
+}
 
     if (value != NULL) {
-        if ((copiedvalue = SECITEM_ArenaDupItem(poolp, value)) == NULL)
+        if ((copiedvalue = SECITEM_ArenaDupItem(poolp, value)) == NULL) {
             goto loser;
+}
 
-        if (NSS_CMSArray_Add(poolp, (void ***)&(attr->values), (void *)copiedvalue) != SECSuccess)
+        if (NSS_CMSArray_Add(poolp, (void ***)&(attr->values), (void *)copiedvalue) != SECSuccess) {
             goto loser;
+}
     }
 
     attr->encoded = encoded;
@@ -92,11 +97,13 @@ NSS_CMSAttribute_AddValue(PLArenaPool *poolp, NSSCMSAttribute *attr, SECItem *va
         goto loser;
     }
 
-    if ((copiedvalue = SECITEM_ArenaDupItem(poolp, value)) == NULL)
+    if ((copiedvalue = SECITEM_ArenaDupItem(poolp, value)) == NULL) {
         goto loser;
+}
 
-    if (NSS_CMSArray_Add(poolp, (void ***)&(attr->values), (void *)copiedvalue) != SECSuccess)
+    if (NSS_CMSArray_Add(poolp, (void ***)&(attr->values), (void *)copiedvalue) != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return SECSuccess;
@@ -116,8 +123,9 @@ NSS_CMSAttribute_GetType(NSSCMSAttribute *attr)
     SECOidData *typetag;
 
     typetag = SECOID_FindOID(&(attr->type));
-    if (typetag == NULL)
+    if (typetag == NULL) {
         return SEC_OID_UNKNOWN;
+}
 
     return typetag->offset;
 }
@@ -134,16 +142,19 @@ NSS_CMSAttribute_GetValue(NSSCMSAttribute *attr)
 {
     SECItem *value;
 
-    if (attr == NULL)
+    if (attr == NULL) {
         return NULL;
+}
 
     value = attr->values[0];
 
-    if (value == NULL || value->data == NULL || value->len == 0)
+    if (value == NULL || value->data == NULL || value->len == 0) {
         return NULL;
+}
 
-    if (attr->values[1] != NULL)
+    if (attr->values[1] != NULL) {
         return NULL;
+}
 
     return value;
 }
@@ -156,8 +167,9 @@ NSS_CMSAttribute_CompareValue(NSSCMSAttribute *attr, SECItem *av)
 {
     SECItem *value;
 
-    if (attr == NULL)
+    if (attr == NULL) {
         return PR_FALSE;
+}
 
     value = NSS_CMSAttribute_GetValue(attr);
 
@@ -183,8 +195,9 @@ cms_attr_choose_attr_value_template(void *src_or_dest, PRBool encoding)
     PRBool encoded;
 
     PORT_Assert(src_or_dest != NULL);
-    if (src_or_dest == NULL)
+    if (src_or_dest == NULL) {
         return NULL;
+}
 
     attribute = (NSSCMSAttribute *)src_or_dest;
 
@@ -321,33 +334,40 @@ NSS_CMSAttributeArray_FindAttrByOidTag(NSSCMSAttribute **attrs, SECOidTag oidtag
     SECOidData *oid;
     NSSCMSAttribute *attr1, *attr2;
 
-    if (attrs == NULL)
+    if (attrs == NULL) {
         return NULL;
+}
 
     oid = SECOID_FindOIDByTag(oidtag);
-    if (oid == NULL)
+    if (oid == NULL) {
         return NULL;
+}
 
     while ((attr1 = *attrs++) != NULL) {
         if (attr1->type.len == oid->oid.len &&
-            PORT_Memcmp(attr1->type.data, oid->oid.data, oid->oid.len) == 0)
+            PORT_Memcmp(attr1->type.data, oid->oid.data, oid->oid.len) == 0) {
             break;
+}
     }
 
-    if (attr1 == NULL)
+    if (attr1 == NULL) {
         return NULL;
+}
 
-    if (!only)
+    if (!only) {
         return attr1;
+}
 
     while ((attr2 = *attrs++) != NULL) {
         if (attr2->type.len == oid->oid.len &&
-            PORT_Memcmp(attr2->type.data, oid->oid.data, oid->oid.len) == 0)
+            PORT_Memcmp(attr2->type.data, oid->oid.data, oid->oid.len) == 0) {
             break;
+}
     }
 
-    if (attr2 != NULL)
+    if (attr2 != NULL) {
         return NULL;
+}
 
     return attr1;
 }
@@ -372,12 +392,14 @@ NSS_CMSAttributeArray_AddAttr(PLArenaPool *poolp, NSSCMSAttribute ***attrs,
     /* see if we have one already */
     oattr = NSS_CMSAttributeArray_FindAttrByOidTag(*attrs, type, PR_FALSE);
     PORT_Assert(oattr == NULL);
-    if (oattr != NULL)
+    if (oattr != NULL) {
         goto loser; /* XXX or would it be better to replace it? */
+}
 
     /* no, shove it in */
-    if (NSS_CMSArray_Add(poolp, (void ***)attrs, (void *)attr) != SECSuccess)
+    if (NSS_CMSArray_Add(poolp, (void ***)attrs, (void *)attr) != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return SECSuccess;
@@ -404,11 +426,13 @@ NSS_CMSAttributeArray_SetAttr(PLArenaPool *poolp, NSSCMSAttribute ***attrs,
     if (attr == NULL) {
         /* not found? create one! */
         attr = NSS_CMSAttribute_Create(poolp, type, value, encoded);
-        if (attr == NULL)
+        if (attr == NULL) {
             goto loser;
+}
         /* and add it to the list */
-        if (NSS_CMSArray_Add(poolp, (void ***)attrs, (void *)attr) != SECSuccess)
+        if (NSS_CMSArray_Add(poolp, (void ***)attrs, (void *)attr) != SECSuccess) {
             goto loser;
+}
     } else {
         /* found, shove it in */
         /* XXX we need a decent memory model @#$#$!#!!! */

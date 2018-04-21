@@ -235,8 +235,9 @@ bool TConstantUnion::operator==(const TYuvCscStandardEXT s) const
 
 bool TConstantUnion::operator==(const TConstantUnion &constant) const
 {
-    if (constant.type != type)
+    if (constant.type != type) {
         return false;
+}
 
     switch (type)
     {

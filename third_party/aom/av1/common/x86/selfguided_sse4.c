@@ -680,7 +680,8 @@ void av1_selfguided_restoration_sse4_1(uint8_t *dgd, int width, int height,
   int buf_stride = ((width_ext + 3) & ~3) + 16;
 
   // Don't filter tiles with dimensions < 5 on any axis
-  if ((width < 5) || (height < 5)) return;
+  if ((width < 5) || (height < 5)) { return;
+}
 
   uint8_t *dgd0 = dgd - dgd_stride * SGRPROJ_BORDER_VERT - SGRPROJ_BORDER_HORZ;
   if (r == 1) {
@@ -1388,7 +1389,8 @@ void av1_selfguided_restoration_highbd_sse4_1(uint16_t *dgd, int width,
   int buf_stride = ((width_ext + 3) & ~3) + 16;
 
   // Don't filter tiles with dimensions < 5 on any axis
-  if ((width < 5) || (height < 5)) return;
+  if ((width < 5) || (height < 5)) { return;
+}
 
   uint16_t *dgd0 = dgd - dgd_stride * SGRPROJ_BORDER_VERT - SGRPROJ_BORDER_HORZ;
   if (r == 1) {

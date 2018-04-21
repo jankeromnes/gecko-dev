@@ -33,8 +33,9 @@ static inline int to_upper(int c) {
 
 static const char* skip_ws(const char str[]) {
     SkASSERT(str);
-    while (is_ws(*str))
+    while (is_ws(*str)) {
         str++;
+}
     return str;
 }
 
@@ -42,8 +43,9 @@ static const char* skip_sep(const char str[]) {
     if (!str) {
         return nullptr;
     }
-    while (is_sep(*str))
+    while (is_sep(*str)) {
         str++;
+}
     return str;
 }
 

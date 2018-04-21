@@ -41,16 +41,19 @@ mpp_divis(mp_int *a, mp_int *b)
     mp_err res;
     mp_int rem;
 
-    if ((res = mp_init(&rem)) != MP_OKAY)
+    if ((res = mp_init(&rem)) != MP_OKAY) {
         return res;
+}
 
-    if ((res = mp_mod(a, b, &rem)) != MP_OKAY)
+    if ((res = mp_mod(a, b, &rem)) != MP_OKAY) {
         goto CLEANUP;
+}
 
-    if (mp_cmp_z(&rem) == 0)
+    if (mp_cmp_z(&rem) == 0) {
         res = MP_YES;
-    else
+    } else {
         res = MP_NO;
+}
 
 CLEANUP:
     mp_clear(&rem);
@@ -76,16 +79,19 @@ mpp_divis_d(mp_int *a, mp_digit d)
 
     ARGCHK(a != NULL, MP_BADARG);
 
-    if (d == 0)
+    if (d == 0) {
         return MP_NO;
+}
 
-    if ((res = mp_mod_d(a, d, &rem)) != MP_OKAY)
+    if ((res = mp_mod_d(a, d, &rem)) != MP_OKAY) {
         return res;
+}
 
-    if (rem == 0)
+    if (rem == 0) {
         return MP_YES;
-    else
+    } else {
         return MP_NO;
+}
 
 } /* end mpp_divis_d() */
 
@@ -135,8 +141,9 @@ mpp_random_size(mp_int *a, mp_size prec)
 
     ARGCHK(a != NULL && prec > 0, MP_BADARG);
 
-    if ((res = s_mp_pad(a, prec)) != MP_OKAY)
+    if ((res = s_mp_pad(a, prec)) != MP_OKAY) {
         return res;
+}
 
     return mpp_random(a);
 
@@ -183,12 +190,14 @@ mpp_divis_primes(mp_int *a, mp_digit *np)
     ARGCHK(a != NULL && np != NULL, MP_BADARG);
 
     size = (int)*np;
-    if (size > prime_tab_size)
+    if (size > prime_tab_size) {
         size = prime_tab_size;
+}
 
     res = mpp_divis_vector(a, prime_tab, size, &which);
-    if (res == MP_YES)
+    if (res == MP_YES) {
         *np = prime_tab[which];
+}
 
     return res;
 
@@ -211,22 +220,26 @@ mpp_fermat(mp_int *a, mp_digit w)
     mp_int base, test;
     mp_err res;
 
-    if ((res = mp_init(&base)) != MP_OKAY)
+    if ((res = mp_init(&base)) != MP_OKAY) {
         return res;
+}
 
     mp_set(&base, w);
 
-    if ((res = mp_init(&test)) != MP_OKAY)
+    if ((res = mp_init(&test)) != MP_OKAY) {
         goto TEST;
+}
 
     /* Compute test = base^a (mod a) */
-    if ((res = mp_exptmod(&base, a, a, &test)) != MP_OKAY)
+    if ((res = mp_exptmod(&base, a, a, &test)) != MP_OKAY) {
         goto CLEANUP;
+}
 
-    if (mp_cmp(&base, &test) == 0)
+    if (mp_cmp(&base, &test) == 0) {
         res = MP_YES;
-    else
+    } else {
         res = MP_NO;
+}
 
 CLEANUP:
     mp_clear(&test);
@@ -340,8 +353,9 @@ mpp_pprime(mp_int *a, int nt)
            test means the candidate is definitely NOT prime, so we will
            immediately break out of this loop
          */
-        if (res == MP_NO)
+        if (res == MP_NO) {
             break;
+}
 
     } /* end iterations loop */
 
@@ -380,8 +394,9 @@ mpp_sieve(mp_int *trial, const mp_digit *primes, mp_size nPrimes,
     for (ix = 0; ix < nPrimes; ix++) {
         mp_digit prime = primes[ix];
         mp_size i;
-        if ((res = mp_mod_d(trial, prime, &rem)) != MP_OKAY)
+        if ((res = mp_mod_d(trial, prime, &rem)) != MP_OKAY) {
             return res;
+}
 
         if (rem == 0) {
             offset = 0;
@@ -448,11 +463,13 @@ mpp_make_prime(mp_int *start, mp_size nBits, mp_size strong)
     } else if (nBits >= 100) {
         num_tests = 38; /* funny anomaly in the FIPS tables, for aux primes, the
                          * required more iterations for larger aux primes */
-    } else
+    } else {
         num_tests = 50;
+}
 
-    if (strong)
+    if (strong) {
         --nBits;
+}
     MP_CHECKOK(mpl_set_bit(start, nBits - 1, 1));
     MP_CHECKOK(mpl_set_bit(start, 0, 1));
     for (i = mpl_significant_bits(start) - 1; i >= nBits; --i) {
@@ -476,15 +493,17 @@ mpp_make_prime(mp_int *start, mp_size nBits, mp_size strong)
 
     res = MP_NO;
     for (i = 0; i < SIEVE_SIZE; ++i) {
-        if (sieve[i]) /* this number is composite */
+        if (sieve[i]) { /* this number is composite */
             continue;
+}
         MP_CHECKOK(mp_add_d(start, 2 * i, &trial));
         FPUTC('.', stderr);
         /* run a Fermat test */
         res = mpp_fermat(&trial, 2);
         if (res != MP_OKAY) {
-            if (res == MP_NO)
+            if (res == MP_NO) {
                 continue; /* was composite */
+}
             goto CLEANUP;
         }
 
@@ -492,14 +511,16 @@ mpp_make_prime(mp_int *start, mp_size nBits, mp_size strong)
         /* If that passed, run some Miller-Rabin tests  */
         res = mpp_pprime(&trial, num_tests);
         if (res != MP_OKAY) {
-            if (res == MP_NO)
+            if (res == MP_NO) {
                 continue; /* was composite */
+}
             goto CLEANUP;
         }
         FPUTC('!', stderr);
 
-        if (!strong)
+        if (!strong) {
             break; /* success !! */
+}
 
         /* At this point, we have strong evidence that our candidate
            is itself prime.  If we want a strong prime, we need now
@@ -515,15 +536,17 @@ mpp_make_prime(mp_int *start, mp_size nBits, mp_size strong)
             mp_clear(&q);
             continue;
         }
-        if (res != MP_NO)
+        if (res != MP_NO) {
             goto CLEANUP;
+}
 
         /* And test with Fermat, as with its parent ... */
         res = mpp_fermat(&q, 2);
         if (res != MP_YES) {
             mp_clear(&q);
-            if (res == MP_NO)
+            if (res == MP_NO) {
                 continue; /* was composite */
+}
             goto CLEANUP;
         }
 
@@ -531,8 +554,9 @@ mpp_make_prime(mp_int *start, mp_size nBits, mp_size strong)
         res = mpp_pprime(&q, num_tests);
         if (res != MP_YES) {
             mp_clear(&q);
-            if (res == MP_NO)
+            if (res == MP_NO) {
                 continue; /* was composite */
+}
             goto CLEANUP;
         }
 
@@ -542,8 +566,9 @@ mpp_make_prime(mp_int *start, mp_size nBits, mp_size strong)
         break;
 
     } /* end of loop through sieved values */
-    if (res == MP_YES)
+    if (res == MP_YES) {
         mp_exch(&trial, start);
+}
 CLEANUP:
     mp_clear(&trial);
     mp_clear(&q);
@@ -576,12 +601,14 @@ s_mpp_divp(mp_int *a, const mp_digit *vec, int size, int *which)
     int ix;
 
     for (ix = 0; ix < size; ix++) {
-        if ((res = mp_mod_d(a, vec[ix], &rem)) != MP_OKAY)
+        if ((res = mp_mod_d(a, vec[ix], &rem)) != MP_OKAY) {
             return res;
+}
 
         if (rem == 0) {
-            if (which)
+            if (which) {
                 *which = ix;
+}
             return MP_YES;
         }
     }

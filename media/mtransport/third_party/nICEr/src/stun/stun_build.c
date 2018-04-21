@@ -66,8 +66,9 @@ nr_stun_form_request_or_indication(int mode, int msg_type, nr_stun_message **msg
 
    *msg = 0;
 
-   if ((r=nr_stun_message_create(&req)))
+   if ((r=nr_stun_message_create(&req))) {
        ABORT(r);
+}
 
    req->header.type = msg_type;
 
@@ -75,8 +76,9 @@ nr_stun_form_request_or_indication(int mode, int msg_type, nr_stun_message **msg
 
    switch (mode) {
    default:
-       if ((r=nr_stun_message_add_fingerprint_attribute(req)))
+       if ((r=nr_stun_message_add_fingerprint_attribute(req))) {
            ABORT(r);
+}
        /* fall through */
    case NR_STUN_MODE_STUN_NO_AUTH:
        req->header.magic_cookie = NR_STUN_MAGIC_COOKIE;
@@ -98,7 +100,8 @@ nr_stun_form_request_or_indication(int mode, int msg_type, nr_stun_message **msg
 
    _status=0;
  abort:
-   if (_status) RFREE(req);
+   if (_status) { RFREE(req);
+}
    return _status;
 }
 
@@ -108,28 +111,34 @@ nr_stun_build_req_lt_auth(nr_stun_client_stun_binding_request_params *params, nr
    int r,_status;
    nr_stun_message *req = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_REQUEST, &req)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_REQUEST, &req))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_username_attribute(req, params->username)))
+   if ((r=nr_stun_message_add_username_attribute(req, params->username))) {
        ABORT(r);
+}
 
    if (params->realm && params->nonce) {
-       if ((r=nr_stun_message_add_realm_attribute(req, params->realm)))
+       if ((r=nr_stun_message_add_realm_attribute(req, params->realm))) {
            ABORT(r);
+}
 
-       if ((r=nr_stun_message_add_nonce_attribute(req, params->nonce)))
+       if ((r=nr_stun_message_add_nonce_attribute(req, params->nonce))) {
            ABORT(r);
+}
 
-       if ((r=nr_stun_message_add_message_integrity_attribute(req, params->password)))
+       if ((r=nr_stun_message_add_message_integrity_attribute(req, params->password))) {
            ABORT(r);
+}
    }
 
    *msg = req;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 
@@ -139,22 +148,26 @@ nr_stun_build_req_st_auth(nr_stun_client_stun_binding_request_params *params, nr
    int r,_status;
    nr_stun_message *req = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_REQUEST, &req)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_REQUEST, &req))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_username_attribute(req, params->username)))
+   if ((r=nr_stun_message_add_username_attribute(req, params->username))) {
        ABORT(r);
+}
 
    if (params->password) {
-       if ((r=nr_stun_message_add_message_integrity_attribute(req, params->password)))
+       if ((r=nr_stun_message_add_message_integrity_attribute(req, params->password))) {
            ABORT(r);
+}
    }
 
    *msg = req;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 
@@ -164,14 +177,16 @@ nr_stun_build_req_no_auth(nr_stun_client_stun_binding_request_params *params, nr
    int r,_status;
    nr_stun_message *req = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN_NO_AUTH, NR_STUN_MSG_BINDING_REQUEST, &req)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN_NO_AUTH, NR_STUN_MSG_BINDING_REQUEST, &req))) {
        ABORT(r);
+}
 
    *msg = req;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 
@@ -181,14 +196,16 @@ nr_stun_build_keepalive(nr_stun_client_stun_keepalive_params *params, nr_stun_me
    int r,_status;
    nr_stun_message *ind = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_INDICATION, &ind)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_INDICATION, &ind))) {
        ABORT(r);
+}
 
    *msg = ind;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&ind);
+   if (_status) { nr_stun_message_destroy(&ind);
+}
    return _status;
 }
 
@@ -199,11 +216,13 @@ nr_stun_build_req_stund_0_96(nr_stun_client_stun_binding_request_stund_0_96_para
     int r,_status;
     nr_stun_message *req = 0;
 
-    if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUND_0_96, NR_STUN_MSG_BINDING_REQUEST, &req)))
+    if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUND_0_96, NR_STUN_MSG_BINDING_REQUEST, &req))) {
         ABORT(r);
+}
 
-    if ((r=nr_stun_message_add_change_request_attribute(req, 0)))
+    if ((r=nr_stun_message_add_change_request_attribute(req, 0))) {
         ABORT(r);
+}
 
     assert(! nr_stun_message_has_attribute(req, NR_STUN_ATTR_USERNAME, 0));
     assert(! nr_stun_message_has_attribute(req, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0));
@@ -212,7 +231,8 @@ nr_stun_build_req_stund_0_96(nr_stun_client_stun_binding_request_stund_0_96_para
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 #endif /* USE_STUND_0_96 */
@@ -224,29 +244,36 @@ nr_stun_build_use_candidate(nr_stun_client_ice_binding_request_params *params, n
    int r,_status;
    nr_stun_message *req = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_REQUEST, &req)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_REQUEST, &req))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_username_attribute(req, params->username)))
+   if ((r=nr_stun_message_add_username_attribute(req, params->username))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_message_integrity_attribute(req, &params->password)))
+   if ((r=nr_stun_message_add_message_integrity_attribute(req, &params->password))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_use_candidate_attribute(req)))
+   if ((r=nr_stun_message_add_use_candidate_attribute(req))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_priority_attribute(req, params->priority)))
+   if ((r=nr_stun_message_add_priority_attribute(req, params->priority))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_ice_controlling_attribute(req, params->tiebreaker)))
+   if ((r=nr_stun_message_add_ice_controlling_attribute(req, params->tiebreaker))) {
      ABORT(r);
+}
 
    *msg = req;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 
@@ -256,26 +283,32 @@ nr_stun_build_req_ice(nr_stun_client_ice_binding_request_params *params, nr_stun
    int r,_status;
    nr_stun_message *req = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_REQUEST, &req)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_BINDING_REQUEST, &req))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_username_attribute(req, params->username)))
+   if ((r=nr_stun_message_add_username_attribute(req, params->username))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_message_integrity_attribute(req, &params->password)))
+   if ((r=nr_stun_message_add_message_integrity_attribute(req, &params->password))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_priority_attribute(req, params->priority)))
+   if ((r=nr_stun_message_add_priority_attribute(req, params->priority))) {
        ABORT(r);
+}
 
    switch (params->control) {
    case NR_ICE_CONTROLLING:
-       if ((r=nr_stun_message_add_ice_controlling_attribute(req, params->tiebreaker)))
+       if ((r=nr_stun_message_add_ice_controlling_attribute(req, params->tiebreaker))) {
            ABORT(r);
+}
        break;
    case NR_ICE_CONTROLLED:
-       if ((r=nr_stun_message_add_ice_controlled_attribute(req, params->tiebreaker)))
+       if ((r=nr_stun_message_add_ice_controlled_attribute(req, params->tiebreaker))) {
            ABORT(r);
+}
        break;
    default:
        assert(0);
@@ -286,7 +319,8 @@ nr_stun_build_req_ice(nr_stun_client_ice_binding_request_params *params, nr_stun
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 #endif /* USE_ICE */
@@ -317,23 +351,27 @@ nr_stun_compute_lt_message_integrity_password(const char *username, const char *
      TODO(ekr@rtfm.com): Add SASLprep for password.
  */
   for (i=0; i<password->len; i++) {
-    if (!__isascii(password->data[i]))
+    if (!__isascii(password->data[i])) {
       ABORT(R_BAD_DATA);
+}
   }
 
-  if (hmac_key->len < 16)
+  if (hmac_key->len < 16) {
     ABORT(R_BAD_ARGS);
+}
 
   snprintf(digest_input, sizeof(digest_input), "%s:%s:", username, realm);
-  if ((sizeof(digest_input) - strlen(digest_input)) < password->len)
+  if ((sizeof(digest_input) - strlen(digest_input)) < password->len) {
     ABORT(R_BAD_DATA);
+}
 
   len = strlen(digest_input);
   memcpy(digest_input + len, password->data, password->len);
 
 
-  if (r=nr_crypto_md5((UCHAR *)digest_input, len + password->len, hmac_key->data))
+  if (r=nr_crypto_md5((UCHAR *)digest_input, len + password->len, hmac_key->data)) {
     ABORT(r);
+}
   hmac_key->len=16;
 
   _status=0;
@@ -350,8 +388,9 @@ nr_stun_build_auth_params(nr_stun_client_auth_params *auth, nr_stun_message *req
 
   ATTACH_DATA(hmac_key, hmac_key_d);
 
-  if (!auth->authenticate)
+  if (!auth->authenticate) {
     goto done;
+}
 
   assert(auth->username);
   assert(auth->password.len);
@@ -361,8 +400,9 @@ nr_stun_build_auth_params(nr_stun_client_auth_params *auth, nr_stun_message *req
   if (r=nr_stun_compute_lt_message_integrity_password(auth->username,
                                                       auth->realm,
                                                       &auth->password,
-                                                      &hmac_key))
+                                                      &hmac_key)) {
     ABORT(r);
+}
 
   if (!auth->username) {
     r_log(NR_LOG_STUN, LOG_WARNING, "STUN authentication requested but no username provided");
@@ -384,17 +424,21 @@ nr_stun_build_auth_params(nr_stun_client_auth_params *auth, nr_stun_message *req
     ABORT(R_INTERNAL);
   }
 
-  if ((r=nr_stun_message_add_username_attribute(req, auth->username)))
+  if ((r=nr_stun_message_add_username_attribute(req, auth->username))) {
     ABORT(r);
+}
 
-  if ((r=nr_stun_message_add_realm_attribute(req, auth->realm)))
+  if ((r=nr_stun_message_add_realm_attribute(req, auth->realm))) {
     ABORT(r);
+}
 
-  if ((r=nr_stun_message_add_nonce_attribute(req, auth->nonce)))
+  if ((r=nr_stun_message_add_nonce_attribute(req, auth->nonce))) {
     ABORT(r);
+}
 
-  if ((r=nr_stun_message_add_message_integrity_attribute(req, &hmac_key)))
+  if ((r=nr_stun_message_add_message_integrity_attribute(req, &hmac_key))) {
     ABORT(r);
+}
 
 done:
   _status=0;
@@ -408,25 +452,30 @@ nr_stun_build_allocate_request(nr_stun_client_auth_params *auth, nr_stun_client_
    int r,_status;
    nr_stun_message *req = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_ALLOCATE_REQUEST, &req)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_ALLOCATE_REQUEST, &req))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_requested_transport_attribute(req, NR_STUN_ATTR_REQUESTED_TRANSPORT_UDP)))
+   if ((r=nr_stun_message_add_requested_transport_attribute(req, NR_STUN_ATTR_REQUESTED_TRANSPORT_UDP))) {
        ABORT(r);
+}
 
-  if ((r=nr_stun_message_add_lifetime_attribute(req, params->lifetime_secs)))
+  if ((r=nr_stun_message_add_lifetime_attribute(req, params->lifetime_secs))) {
        ABORT(r);
+}
 
   /* TODO(ekr@rtfm.com): Add the SOFTWARE attribute (Firefox bug 857666) */
 
-  if ((r=nr_stun_build_auth_params(auth, req)))
+  if ((r=nr_stun_build_auth_params(auth, req))) {
        ABORT(r);
+}
 
    *msg = req;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 
@@ -436,23 +485,27 @@ int nr_stun_build_refresh_request(nr_stun_client_auth_params *auth, nr_stun_clie
    int r,_status;
    nr_stun_message *req = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_REFRESH_REQUEST, &req)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_REFRESH_REQUEST, &req))) {
        ABORT(r);
+}
 
-  if ((r=nr_stun_message_add_lifetime_attribute(req, params->lifetime_secs)))
+  if ((r=nr_stun_message_add_lifetime_attribute(req, params->lifetime_secs))) {
        ABORT(r);
+}
 
 
   /* TODO(ekr@rtfm.com): Add the SOFTWARE attribute (Firefox bug 857666) */
 
-  if ((r=nr_stun_build_auth_params(auth, req)))
+  if ((r=nr_stun_build_auth_params(auth, req))) {
        ABORT(r);
+}
 
   *msg = req;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 
@@ -462,20 +515,24 @@ int nr_stun_build_permission_request(nr_stun_client_auth_params *auth, nr_stun_c
    int r,_status;
    nr_stun_message *req = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_PERMISSION_REQUEST, &req)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_PERMISSION_REQUEST, &req))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_xor_peer_address_attribute(req, &params->remote_addr)))
+   if ((r=nr_stun_message_add_xor_peer_address_attribute(req, &params->remote_addr))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_build_auth_params(auth, req)))
+   if ((r=nr_stun_build_auth_params(auth, req))) {
        ABORT(r);
+}
 
    *msg = req;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&req);
+   if (_status) { nr_stun_message_destroy(&req);
+}
    return _status;
 }
 
@@ -485,20 +542,24 @@ nr_stun_build_send_indication(nr_stun_client_send_indication_params *params, nr_
    int r,_status;
    nr_stun_message *ind = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_SEND_INDICATION, &ind)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_SEND_INDICATION, &ind))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_xor_peer_address_attribute(ind, &params->remote_addr)))
+   if ((r=nr_stun_message_add_xor_peer_address_attribute(ind, &params->remote_addr))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_data_attribute(ind, params->data.data, params->data.len)))
+   if ((r=nr_stun_message_add_data_attribute(ind, params->data.data, params->data.len))) {
        ABORT(r);
+}
 
    *msg = ind;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&ind);
+   if (_status) { nr_stun_message_destroy(&ind);
+}
    return _status;
 }
 
@@ -508,20 +569,24 @@ nr_stun_build_data_indication(nr_stun_client_data_indication_params *params, nr_
    int r,_status;
    nr_stun_message *ind = 0;
 
-   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_DATA_INDICATION, &ind)))
+   if ((r=nr_stun_form_request_or_indication(NR_STUN_MODE_STUN, NR_STUN_MSG_DATA_INDICATION, &ind))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_xor_peer_address_attribute(ind, &params->remote_addr)))
+   if ((r=nr_stun_message_add_xor_peer_address_attribute(ind, &params->remote_addr))) {
        ABORT(r);
+}
 
-   if ((r=nr_stun_message_add_data_attribute(ind, params->data.data, params->data.len)))
+   if ((r=nr_stun_message_add_data_attribute(ind, params->data.data, params->data.len))) {
        ABORT(r);
+}
 
    *msg = ind;
 
    _status=0;
  abort:
-   if (_status) nr_stun_message_destroy(&ind);
+   if (_status) { nr_stun_message_destroy(&ind);
+}
    return _status;
 }
 
@@ -544,22 +609,26 @@ nr_stun_form_success_response(nr_stun_message *req, nr_transport_addr *from, Dat
 
     r_log(NR_LOG_STUN, LOG_DEBUG, "Mapped Address = %s", from->as_string);
 
-    if ((r=nr_stun_message_add_xor_mapped_address_attribute(res, from)))
+    if ((r=nr_stun_message_add_xor_mapped_address_attribute(res, from))) {
         ABORT(r);
+}
 
     if (!NR_reg_get_string(NR_STUN_REG_PREF_SERVER_NAME, server_name, sizeof(server_name))) {
-        if ((r=nr_stun_message_add_server_attribute(res, server_name)))
+        if ((r=nr_stun_message_add_server_attribute(res, server_name))) {
             ABORT(r);
+}
     }
 
     if (res->header.magic_cookie == NR_STUN_MAGIC_COOKIE) {
         if (password != 0) {
-            if ((r=nr_stun_message_add_message_integrity_attribute(res, password)))
+            if ((r=nr_stun_message_add_message_integrity_attribute(res, password))) {
                 ABORT(r);
+}
         }
 
-        if ((r=nr_stun_message_add_fingerprint_attribute(res)))
+        if ((r=nr_stun_message_add_fingerprint_attribute(res))) {
             ABORT(r);
+}
     }
 
     _status=0;
@@ -575,8 +644,9 @@ nr_stun_form_error_response(nr_stun_message *req, nr_stun_message* res, int numb
     int request_method;
     char server_name[NR_STUN_MAX_SERVER_BYTES+1]; /* +1 for \0 */
 
-    if (number < 300 || number > 699)
+    if (number < 300 || number > 699) {
         number = 500;
+}
 
     r_log(NR_LOG_STUN, LOG_INFO, "Responding with error %d: %s", number, msg);
 

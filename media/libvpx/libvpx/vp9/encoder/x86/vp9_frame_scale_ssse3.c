@@ -34,7 +34,8 @@ static void downsample_2_to_1_ssse3(const uint8_t *src, ptrdiff_t src_stride,
       const __m128i c = _mm_packus_epi16(a_and, b_and);
       _mm_storeu_si128((__m128i *)(dst + x), c);
     }
-    for (; x < w; ++x) dst[x] = src[x * 2];
+    for (; x < w; ++x) { dst[x] = src[x * 2];
+}
     src += src_stride * 2;
     dst += dst_stride;
   }

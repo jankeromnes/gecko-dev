@@ -77,13 +77,15 @@ int nr_transport_addr_fmt_addr_string(nr_transport_addr *addr)
 
     switch(addr->ip_version){
       case NR_IPV4:
-        if (!inet_ntop(AF_INET, &addr->u.addr4.sin_addr,buffer,sizeof(buffer)))
+        if (!inet_ntop(AF_INET, &addr->u.addr4.sin_addr,buffer,sizeof(buffer))) {
           strcpy(buffer, "[error]");
+}
         snprintf(addr->as_string,sizeof(addr->as_string),"IP4:%s:%d/%s",buffer,(int)ntohs(addr->u.addr4.sin_port),protocol);
         break;
       case NR_IPV6:
-        if (!inet_ntop(AF_INET6, &addr->u.addr6.sin6_addr,buffer,sizeof(buffer)))
+        if (!inet_ntop(AF_INET6, &addr->u.addr6.sin6_addr,buffer,sizeof(buffer))) {
           strcpy(buffer, "[error]");
+}
         snprintf(addr->as_string,sizeof(addr->as_string),"IP6:[%s]:%d/%s",buffer,(int)ntohs(addr->u.addr6.sin6_port),protocol);
         break;
       default:
@@ -129,7 +131,8 @@ int nr_sockaddr_to_transport_addr(struct sockaddr *saddr, int protocol, int keep
   {
     int r,_status;
 
-    if(!keep) memset(addr,0,sizeof(nr_transport_addr));
+    if(!keep) { memset(addr,0,sizeof(nr_transport_addr));
+}
 
     switch(protocol){
       case IPPROTO_TCP:
@@ -155,11 +158,13 @@ int nr_sockaddr_to_transport_addr(struct sockaddr *saddr, int protocol, int keep
       addr->addr=(struct sockaddr *)&addr->u.addr6;
       addr->addr_len=sizeof(struct sockaddr_in6);
     }
-    else
+    else {
       ABORT(R_BAD_ARGS);
+}
 
-    if(r=nr_transport_addr_fmt_addr_string(addr))
+    if(r=nr_transport_addr_fmt_addr_string(addr)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -199,13 +204,15 @@ int nr_transport_addr_copy_keep_ifname(nr_transport_addr *to, nr_transport_addr 
     strncpy(save_ifname, to->ifname, MAXIFNAME);
     save_ifname[MAXIFNAME-1]=0;  /* Ensure null termination */
 
-    if (r=nr_transport_addr_copy(to, from))
+    if (r=nr_transport_addr_copy(to, from)) {
       ABORT(r);
+}
 
     strncpy(to->ifname, save_ifname, MAXIFNAME);
 
-    if (r=nr_transport_addr_fmt_addr_string(to))
+    if (r=nr_transport_addr_fmt_addr_string(to)) {
       ABORT(r);
+}
 
     _status=0;
  abort:
@@ -230,8 +237,9 @@ int nr_ip4_port_to_transport_addr(UINT4 ip4, UINT2 port, int protocol, nr_transp
     addr->addr=(struct sockaddr *)&addr->u.addr4;
     addr->addr_len=sizeof(struct sockaddr_in);
 
-    if(r=nr_transport_addr_fmt_addr_string(addr))
+    if(r=nr_transport_addr_fmt_addr_string(addr)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -245,11 +253,13 @@ int nr_str_port_to_transport_addr(const char *ip, UINT2 port, int protocol, nr_t
     struct in6_addr addr6;
 
     if (inet_pton(AF_INET, ip, &addr) == 1) {
-      if(r=nr_ip4_port_to_transport_addr(ntohl(addr.s_addr),port,protocol,addr_out))
+      if(r=nr_ip4_port_to_transport_addr(ntohl(addr.s_addr),port,protocol,addr_out)) {
         ABORT(r);
+}
     } else if (inet_pton(AF_INET6, ip, &addr6) == 1) {
-      if(r=nr_ip6_port_to_transport_addr(&addr6,port,protocol,addr_out))
+      if(r=nr_ip6_port_to_transport_addr(&addr6,port,protocol,addr_out)) {
         ABORT(r);
+}
     } else {
       ABORT(R_BAD_DATA);
     }
@@ -273,8 +283,9 @@ int nr_ip6_port_to_transport_addr(struct in6_addr* addr6, UINT2 port, int protoc
     addr->addr=(struct sockaddr *)&addr->u.addr6;
     addr->addr_len=sizeof(struct sockaddr_in6);
 
-    if(r=nr_transport_addr_fmt_addr_string(addr))
+    if(r=nr_transport_addr_fmt_addr_string(addr)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -355,35 +366,45 @@ int nr_transport_addr_cmp(nr_transport_addr *addr1,nr_transport_addr *addr2,int 
   {
     assert(mode);
 
-    if(addr1->ip_version != addr2->ip_version)
+    if(addr1->ip_version != addr2->ip_version) {
       return(1);
+}
 
-    if(mode < NR_TRANSPORT_ADDR_CMP_MODE_PROTOCOL)
+    if(mode < NR_TRANSPORT_ADDR_CMP_MODE_PROTOCOL) {
       return(0);
+}
 
-    if(addr1->protocol != addr2->protocol)
+    if(addr1->protocol != addr2->protocol) {
       return(1);
+}
 
-    if(mode < NR_TRANSPORT_ADDR_CMP_MODE_ADDR)
+    if(mode < NR_TRANSPORT_ADDR_CMP_MODE_ADDR) {
       return(0);
+}
 
     assert(addr1->addr_len == addr2->addr_len);
     switch(addr1->ip_version){
       case NR_IPV4:
-        if(addr1->u.addr4.sin_addr.s_addr != addr2->u.addr4.sin_addr.s_addr)
+        if(addr1->u.addr4.sin_addr.s_addr != addr2->u.addr4.sin_addr.s_addr) {
           return(1);
-        if(mode < NR_TRANSPORT_ADDR_CMP_MODE_ALL)
+}
+        if(mode < NR_TRANSPORT_ADDR_CMP_MODE_ALL) {
           return(0);
-        if(addr1->u.addr4.sin_port != addr2->u.addr4.sin_port)
+}
+        if(addr1->u.addr4.sin_port != addr2->u.addr4.sin_port) {
           return(1);
+}
         break;
       case NR_IPV6:
-        if(memcmp(addr1->u.addr6.sin6_addr.s6_addr,addr2->u.addr6.sin6_addr.s6_addr,sizeof(struct in6_addr)))
+        if(memcmp(addr1->u.addr6.sin6_addr.s6_addr,addr2->u.addr6.sin6_addr.s6_addr,sizeof(struct in6_addr))) {
           return(1);
-        if(mode < NR_TRANSPORT_ADDR_CMP_MODE_ALL)
+}
+        if(mode < NR_TRANSPORT_ADDR_CMP_MODE_ALL) {
           return(0);
-        if(addr1->u.addr6.sin6_port != addr2->u.addr6.sin6_port)
+}
+        if(addr1->u.addr6.sin6_port != addr2->u.addr6.sin6_port) {
           return(1);
+}
         break;
       default:
         abort();
@@ -398,8 +419,9 @@ int nr_transport_addr_is_loopback(nr_transport_addr *addr)
       case NR_IPV4:
         switch(addr->u.addr4.sin_family){
           case AF_INET:
-            if (((ntohl(addr->u.addr4.sin_addr.s_addr)>>24)&0xff)==0x7f)
+            if (((ntohl(addr->u.addr4.sin_addr.s_addr)>>24)&0xff)==0x7f) {
               return 1;
+}
             break;
           default:
             UNIMPLEMENTED;
@@ -408,8 +430,9 @@ int nr_transport_addr_is_loopback(nr_transport_addr *addr)
         break;
 
       case NR_IPV6:
-        if(!memcmp(addr->u.addr6.sin6_addr.s6_addr,in6addr_loopback.s6_addr,sizeof(struct in6_addr)))
+        if(!memcmp(addr->u.addr6.sin6_addr.s6_addr,in6addr_loopback.s6_addr,sizeof(struct in6_addr))) {
           return(1);
+}
         break;
       default:
         UNIMPLEMENTED;
@@ -423,14 +446,16 @@ int nr_transport_addr_is_link_local(nr_transport_addr *addr)
     switch(addr->ip_version){
       case NR_IPV4:
         /* RFC3927: 169.254/16 */
-        if ((ntohl(addr->u.addr4.sin_addr.s_addr) & 0xFFFF0000) == 0xA9FE0000)
+        if ((ntohl(addr->u.addr4.sin_addr.s_addr) & 0xFFFF0000) == 0xA9FE0000) {
           return(1);
+}
         break;
       case NR_IPV6:
         {
           UINT4* addrTop = (UINT4*)(addr->u.addr6.sin6_addr.s6_addr);
-          if ((*addrTop & htonl(0xFFC00000)) == htonl(0xFE800000))
+          if ((*addrTop & htonl(0xFFC00000)) == htonl(0xFE800000)) {
             return(2);
+}
         }
         break;
       default:
@@ -472,8 +497,9 @@ int nr_transport_addr_is_teredo(nr_transport_addr *addr)
       case NR_IPV6:
         {
           UINT4* addrTop = (UINT4*)(addr->u.addr6.sin6_addr.s6_addr);
-          if ((*addrTop & htonl(0xFFFF0000)) == htonl(0x20010000))
+          if ((*addrTop & htonl(0xFFFF0000)) == htonl(0x20010000)) {
             return(1);
+}
         }
         break;
       default:
@@ -502,16 +528,20 @@ int nr_transport_addr_is_wildcard(nr_transport_addr *addr)
   {
     switch(addr->ip_version){
       case NR_IPV4:
-        if(addr->u.addr4.sin_addr.s_addr==INADDR_ANY)
+        if(addr->u.addr4.sin_addr.s_addr==INADDR_ANY) {
           return(1);
-        if(addr->u.addr4.sin_port==0)
+}
+        if(addr->u.addr4.sin_port==0) {
           return(1);
+}
         break;
       case NR_IPV6:
-        if(!memcmp(addr->u.addr6.sin6_addr.s6_addr,in6addr_any.s6_addr,sizeof(struct in6_addr)))
+        if(!memcmp(addr->u.addr6.sin6_addr.s6_addr,in6addr_any.s6_addr,sizeof(struct in6_addr))) {
           return(1);
-        if(addr->u.addr6.sin6_port==0)
+}
+        if(addr->u.addr6.sin6_port==0) {
           return(1);
+}
         break;
       default:
         UNIMPLEMENTED;
@@ -538,8 +568,9 @@ int nr_transport_addr_get_private_addr_range(nr_transport_addr *addr)
         {
           UINT4 ip = ntohl(addr->u.addr4.sin_addr.s_addr);
           for (int i=0; i<(sizeof(nr_private_ipv4_addrs)/sizeof(nr_transport_addr_mask)); i++) {
-            if ((ip & nr_private_ipv4_addrs[i].mask) == nr_private_ipv4_addrs[i].addr)
+            if ((ip & nr_private_ipv4_addrs[i].mask) == nr_private_ipv4_addrs[i].addr) {
               return i + 1;
+}
           }
         }
         break;

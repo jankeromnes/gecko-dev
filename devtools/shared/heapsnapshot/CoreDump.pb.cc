@@ -195,7 +195,8 @@ bool Metadata::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional uint64 timeStamp = 1;
       case 1: {
@@ -287,7 +288,8 @@ void Metadata::MergeFrom(const Metadata& from) {
 
 void Metadata::CopyFrom(const Metadata& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.devtools.protobuf.Metadata)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -297,7 +299,8 @@ bool Metadata::IsInitialized() const {
 }
 
 void Metadata::Swap(Metadata* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void Metadata::InternalSwap(Metadata* other) {
@@ -424,7 +427,8 @@ StackFrame_Data::~StackFrame_Data() {
 }
 
 void StackFrame_Data::SharedDtor() {
-  if (this != internal_default_instance()) delete parent_;
+  if (this != internal_default_instance()) { delete parent_;
+}
   if (has_SourceOrRef()) {
     clear_SourceOrRef();
   }
@@ -524,7 +528,8 @@ bool StackFrame_Data::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional uint64 id = 1;
       case 1: {
@@ -900,7 +905,8 @@ void StackFrame_Data::MergeFrom(const StackFrame_Data& from) {
 
 void StackFrame_Data::CopyFrom(const StackFrame_Data& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.devtools.protobuf.StackFrame.Data)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -910,7 +916,8 @@ bool StackFrame_Data::IsInitialized() const {
 }
 
 void StackFrame_Data::Swap(StackFrame_Data* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void StackFrame_Data::InternalSwap(StackFrame_Data* other) {
@@ -1487,7 +1494,8 @@ bool StackFrame::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional .mozilla.devtools.protobuf.StackFrame.Data data = 1;
       case 1: {
@@ -1618,7 +1626,8 @@ void StackFrame::MergeFrom(const StackFrame& from) {
 
 void StackFrame::CopyFrom(const StackFrame& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.devtools.protobuf.StackFrame)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -1628,7 +1637,8 @@ bool StackFrame::IsInitialized() const {
 }
 
 void StackFrame::Swap(StackFrame* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void StackFrame::InternalSwap(StackFrame* other) {
@@ -1835,7 +1845,8 @@ Node::~Node() {
 }
 
 void Node::SharedDtor() {
-  if (this != internal_default_instance()) delete allocationstack_;
+  if (this != internal_default_instance()) { delete allocationstack_;
+}
   if (has_TypeNameOrRef()) {
     clear_TypeNameOrRef();
   }
@@ -1958,7 +1969,8 @@ bool Node::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional uint64 id = 1;
       case 1: {
@@ -2380,7 +2392,8 @@ void Node::MergeFrom(const Node& from) {
 
 void Node::CopyFrom(const Node& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.devtools.protobuf.Node)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -2390,7 +2403,8 @@ bool Node::IsInitialized() const {
 }
 
 void Node::Swap(Node* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void Node::InternalSwap(Node* other) {
@@ -3087,7 +3101,8 @@ bool Edge::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional uint64 referent = 1;
       case 1: {
@@ -3248,7 +3263,8 @@ void Edge::MergeFrom(const Edge& from) {
 
 void Edge::CopyFrom(const Edge& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.devtools.protobuf.Edge)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -3258,7 +3274,8 @@ bool Edge::IsInitialized() const {
 }
 
 void Edge::Swap(Edge* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void Edge::InternalSwap(Edge* other) {

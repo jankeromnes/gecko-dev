@@ -42,12 +42,14 @@ kiss_fftr_cfg kiss_fftr_alloc(int nfft,int inverse_fft,void * mem,size_t * lenme
     if (lenmem == NULL) {
         st = (kiss_fftr_cfg) KISS_FFT_MALLOC (memneeded);
     } else {
-        if (*lenmem >= memneeded)
+        if (*lenmem >= memneeded) {
             st = (kiss_fftr_cfg) mem;
+}
         *lenmem = memneeded;
     }
-    if (!st)
+    if (!st) {
         return NULL;
+}
 
     st->substate = (kiss_fft_cfg) (st + 1); /*just beyond kiss_fftr_state struct */
     st->tmpbuf = (kiss_fft_cpx *) (((char *) st->substate) + subsize);
@@ -57,8 +59,9 @@ kiss_fftr_cfg kiss_fftr_alloc(int nfft,int inverse_fft,void * mem,size_t * lenme
     for (i = 0; i < nfft/2; ++i) {
         double phase =
             -3.14159265358979323846264338327 * ((double) (i+1) / nfft + .5);
-        if (inverse_fft)
+        if (inverse_fft) {
             phase *= -1;
+}
         kf_cexp (st->super_twiddles+i,phase);
     }
     return st;

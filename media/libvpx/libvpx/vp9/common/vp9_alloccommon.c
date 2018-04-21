@@ -53,7 +53,8 @@ static int alloc_seg_map(VP9_COMMON *cm, int seg_map_size) {
 
   for (i = 0; i < NUM_PING_PONG_BUFFERS; ++i) {
     cm->seg_map_array[i] = (uint8_t *)vpx_calloc(seg_map_size, 1);
-    if (cm->seg_map_array[i] == NULL) return 1;
+    if (cm->seg_map_array[i] == NULL) { return 1;
+}
   }
   cm->seg_map_alloc_size = seg_map_size;
 
@@ -62,8 +63,9 @@ static int alloc_seg_map(VP9_COMMON *cm, int seg_map_size) {
   cm->prev_seg_map_idx = 1;
 
   cm->current_frame_seg_map = cm->seg_map_array[cm->seg_map_idx];
-  if (!cm->frame_parallel_decode)
+  if (!cm->frame_parallel_decode) {
     cm->last_frame_seg_map = cm->seg_map_array[cm->prev_seg_map_idx];
+}
 
   return 0;
 }
@@ -130,7 +132,8 @@ int vp9_alloc_loop_filter(VP9_COMMON *cm) {
   cm->lf.lfm = (LOOP_FILTER_MASK *)vpx_calloc(
       ((cm->mi_rows + (MI_BLOCK_SIZE - 1)) >> 3) * cm->lf.lfm_stride,
       sizeof(*cm->lf.lfm));
-  if (!cm->lf.lfm) return 1;
+  if (!cm->lf.lfm) { return 1;
+}
   return 0;
 }
 
@@ -141,13 +144,15 @@ int vp9_alloc_context_buffers(VP9_COMMON *cm, int width, int height) {
   new_mi_size = cm->mi_stride * calc_mi_size(cm->mi_rows);
   if (cm->mi_alloc_size < new_mi_size) {
     cm->free_mi(cm);
-    if (cm->alloc_mi(cm, new_mi_size)) goto fail;
+    if (cm->alloc_mi(cm, new_mi_size)) { goto fail;
+}
   }
 
   if (cm->seg_map_alloc_size < cm->mi_rows * cm->mi_cols) {
     // Create the segmentation map structure and set to 0.
     free_seg_map(cm);
-    if (alloc_seg_map(cm, cm->mi_rows * cm->mi_cols)) goto fail;
+    if (alloc_seg_map(cm, cm->mi_rows * cm->mi_cols)) { goto fail;
+}
   }
 
   if (cm->above_context_alloc_cols < cm->mi_cols) {
@@ -155,16 +160,19 @@ int vp9_alloc_context_buffers(VP9_COMMON *cm, int width, int height) {
     cm->above_context = (ENTROPY_CONTEXT *)vpx_calloc(
         2 * mi_cols_aligned_to_sb(cm->mi_cols) * MAX_MB_PLANE,
         sizeof(*cm->above_context));
-    if (!cm->above_context) goto fail;
+    if (!cm->above_context) { goto fail;
+}
 
     vpx_free(cm->above_seg_context);
     cm->above_seg_context = (PARTITION_CONTEXT *)vpx_calloc(
         mi_cols_aligned_to_sb(cm->mi_cols), sizeof(*cm->above_seg_context));
-    if (!cm->above_seg_context) goto fail;
+    if (!cm->above_seg_context) { goto fail;
+}
     cm->above_context_alloc_cols = cm->mi_cols;
   }
 
-  if (vp9_alloc_loop_filter(cm)) goto fail;
+  if (vp9_alloc_loop_filter(cm)) { goto fail;
+}
 
   return 0;
 
@@ -186,8 +194,9 @@ void vp9_remove_common(VP9_COMMON *cm) {
 
 void vp9_init_context_buffers(VP9_COMMON *cm) {
   cm->setup_mi(cm);
-  if (cm->last_frame_seg_map && !cm->frame_parallel_decode)
+  if (cm->last_frame_seg_map && !cm->frame_parallel_decode) {
     memset(cm->last_frame_seg_map, 0, cm->mi_rows * cm->mi_cols);
+}
 }
 
 void vp9_swap_current_and_last_seg_map(VP9_COMMON *cm) {

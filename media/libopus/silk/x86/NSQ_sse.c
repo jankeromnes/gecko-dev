@@ -488,7 +488,8 @@ static OPUS_INLINE void silk_noise_shape_quantizer_10_16_sse4_1(
 
         /* Flip sign depending on dither */
         tmp2 = -r_Q10;
-        if ( NSQ->rand_seed < 0 ) r_Q10 = tmp2;
+        if ( NSQ->rand_seed < 0 ) { r_Q10 = tmp2;
+}
 
         r_Q10 = silk_LIMIT_32( r_Q10, -(31 << 10), 30 << 10 );
 
@@ -510,7 +511,8 @@ static OPUS_INLINE void silk_noise_shape_quantizer_10_16_sse4_1(
         exc_Q14 = silk_LSHIFT( q1_Q10, 4 );
 
         tmp2 = -exc_Q14;
-        if ( NSQ->rand_seed < 0 ) exc_Q14 = tmp2;
+        if ( NSQ->rand_seed < 0 ) { exc_Q14 = tmp2;
+}
 
         /* Add predictions */
         LPC_exc_Q14 = silk_ADD_LSHIFT32( exc_Q14, LTP_pred_Q13, 1 );

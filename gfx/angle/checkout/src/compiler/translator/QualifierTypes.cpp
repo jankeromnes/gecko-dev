@@ -31,8 +31,9 @@ bool IsScopeQualifier(TQualifier qualifier)
 
 bool IsScopeQualifierWrapper(const TQualifierWrapperBase *qualifier)
 {
-    if (qualifier->getType() != QtStorage)
+    if (qualifier->getType() != QtStorage) {
         return false;
+}
     const TStorageQualifierWrapper *storageQualifier =
         static_cast<const TStorageQualifierWrapper *>(qualifier);
     TQualifier q = storageQualifier->getQualifier();

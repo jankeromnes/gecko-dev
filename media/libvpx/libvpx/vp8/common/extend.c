@@ -101,10 +101,14 @@ void vp8_copy_and_extend_frame_with_rect(YV12_BUFFER_CONFIG *src,
   int dst_uv_offset = ((srcy * dst->uv_stride) >> 1) + (srcx >> 1);
 
   /* If the side is not touching the bounder then don't extend. */
-  if (srcy) et = 0;
-  if (srcx) el = 0;
-  if (srcy + srch != src->y_height) eb = 0;
-  if (srcx + srcw != src->y_width) er = 0;
+  if (srcy) { et = 0;
+}
+  if (srcx) { el = 0;
+}
+  if (srcy + srch != src->y_height) { eb = 0;
+}
+  if (srcx + srcw != src->y_width) { er = 0;
+}
 
   copy_and_extend_plane(src->y_buffer + src_y_offset, src->y_stride,
                         dst->y_buffer + dst_y_offset, dst->y_stride, srch, srcw,

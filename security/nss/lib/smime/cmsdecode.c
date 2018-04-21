@@ -127,8 +127,9 @@ nss_cms_decoder_notify(void *arg, PRBool before, void *dest, int depth)
     } else if (NSS_CMSType_IsWrapper(p7dcx->type)) {
         if (!before || dest != &(rootcinfo->content)) {
 
-            if (p7dcx->content.pointer == NULL)
+            if (p7dcx->content.pointer == NULL) {
                 p7dcx->content = rootcinfo->content;
+}
 
             /* get this data type's inner contentInfo */
             cinfo = NSS_CMSContent_GetContentInfo(p7dcx->content.pointer,
@@ -174,8 +175,9 @@ nss_cms_decoder_notify(void *arg, PRBool before, void *dest, int depth)
             }
             if (after && dest == &(cinfo->rawContent)) {
                 /* we're right after of the data */
-                if (nss_cms_after_data(p7dcx) != SECSuccess)
+                if (nss_cms_after_data(p7dcx) != SECSuccess) {
                     p7dcx->error = PORT_GetError();
+}
 
                 /* we don't need to see the contents anymore */
                 SEC_ASN1DecoderClearFilterProc(p7dcx->dcx);
@@ -226,8 +228,9 @@ nss_cms_before_data(NSSCMSDecoderContext *p7dcx)
             rv = NSS_CMSGenericWrapperData_Decode_BeforeData(p7dcx->type,
                                                              p7dcx->content.genericData);
     }
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
 
     /* ok, now we have a pointer to cinfo */
     /* find out what kind of data is encapsulated */
@@ -237,9 +240,10 @@ nss_cms_before_data(NSSCMSDecoderContext *p7dcx)
 
     if (NSS_CMSType_IsData(childtype)) {
         cinfo->content.pointer = (void *)nss_cms_create_decoder_data(poolp);
-        if (cinfo->content.pointer == NULL)
+        if (cinfo->content.pointer == NULL) {
             /* set memory error */
             return SECFailure;
+}
 
         p7dcx->childp7dcx = NULL;
         return SECSuccess;
@@ -247,20 +251,23 @@ nss_cms_before_data(NSSCMSDecoderContext *p7dcx)
 
     /* set up inner decoder */
 
-    if ((template = NSS_CMSUtil_GetTemplateByTypeTag(childtype)) == NULL)
+    if ((template = NSS_CMSUtil_GetTemplateByTypeTag(childtype)) == NULL) {
         return SECFailure;
+}
 
     childp7dcx = PORT_ZNew(NSSCMSDecoderContext);
-    if (childp7dcx == NULL)
+    if (childp7dcx == NULL) {
         return SECFailure;
+}
 
     mark = PORT_ArenaMark(poolp);
 
     /* allocate space for the stuff we're creating */
     size = NSS_CMSUtil_GetSizeByTypeTag(childtype);
     childp7dcx->content.pointer = (void *)PORT_ArenaZAlloc(poolp, size);
-    if (childp7dcx->content.pointer == NULL)
+    if (childp7dcx->content.pointer == NULL) {
         goto loser;
+}
 
     /* give the parent a copy of the pointer so that it doesn't get lost */
     cinfo->content.pointer = childp7dcx->content.pointer;
@@ -268,8 +275,9 @@ nss_cms_before_data(NSSCMSDecoderContext *p7dcx)
     /* start the child decoder */
     childp7dcx->dcx = SEC_ASN1DecoderStart(poolp, childp7dcx->content.pointer,
                                            template);
-    if (childp7dcx->dcx == NULL)
+    if (childp7dcx->dcx == NULL) {
         goto loser;
+}
 
     /* the new decoder needs to notify, too */
     SEC_ASN1DecoderSetNotifyProc(childp7dcx->dcx, nss_cms_decoder_notify,
@@ -302,8 +310,9 @@ nss_cms_before_data(NSSCMSDecoderContext *p7dcx)
     return SECSuccess;
 
 loser:
-    if (mark)
+    if (mark) {
         PORT_ArenaRelease(poolp, mark);
+}
     PORT_Free(childp7dcx);
     p7dcx->childp7dcx = NULL;
     return SECFailure;
@@ -336,8 +345,9 @@ nss_cms_after_data(NSSCMSDecoderContext *p7dcx)
             } else {
                 rv = nss_cms_after_end(childp7dcx);
             }
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 goto done;
+}
         }
         PORT_Free(p7dcx->childp7dcx);
         p7dcx->childp7dcx = NULL;
@@ -379,23 +389,27 @@ nss_cms_after_end(NSSCMSDecoderContext *p7dcx)
 
     switch (p7dcx->type) {
         case SEC_OID_PKCS7_SIGNED_DATA:
-            if (p7dcx->content.signedData)
+            if (p7dcx->content.signedData) {
                 rv = NSS_CMSSignedData_Decode_AfterEnd(p7dcx->content.signedData);
+}
             break;
         case SEC_OID_PKCS7_ENVELOPED_DATA:
-            if (p7dcx->content.envelopedData)
+            if (p7dcx->content.envelopedData) {
                 rv = NSS_CMSEnvelopedData_Decode_AfterEnd(
                     p7dcx->content.envelopedData);
+}
             break;
         case SEC_OID_PKCS7_DIGESTED_DATA:
-            if (p7dcx->content.digestedData)
+            if (p7dcx->content.digestedData) {
                 rv = NSS_CMSDigestedData_Decode_AfterEnd(
                     p7dcx->content.digestedData);
+}
             break;
         case SEC_OID_PKCS7_ENCRYPTED_DATA:
-            if (p7dcx->content.encryptedData)
+            if (p7dcx->content.encryptedData) {
                 rv = NSS_CMSEncryptedData_Decode_AfterEnd(
                     p7dcx->content.encryptedData);
+}
             break;
         case SEC_OID_PKCS7_DATA:
             break;
@@ -462,8 +476,9 @@ nss_cms_decoder_work_data(NSSCMSDecoderContext *p7dcx,
          */
 
         /* no output available, AND no input? */
-        if (buflen == 0 && len == 0)
+        if (buflen == 0 && len == 0) {
             goto loser; /* bail out */
+}
 
         /*
          * have inner decoder: pass the data on (means inner content type is NOT data)
@@ -499,14 +514,16 @@ nss_cms_decoder_work_data(NSSCMSDecoderContext *p7dcx,
         len = outlen;
     }
 
-    if (len == 0)
+    if (len == 0) {
         goto done; /* nothing more to do */
+}
 
     /*
      * Update the running digests with plaintext bytes (if we need to).
      */
-    if (cinfo->privateInfo && cinfo->privateInfo->digcx)
+    if (cinfo->privateInfo && cinfo->privateInfo->digcx) {
         NSS_CMSDigestContext_Update(cinfo->privateInfo->digcx, data, len);
+}
 
     /* at this point, we have the plain decoded & decrypted data
     ** which is either more encoded DER (which we need to hand to the child
@@ -552,8 +569,9 @@ nss_cms_decoder_work_data(NSSCMSDecoderContext *p7dcx,
 
 done:
 loser:
-    if (buf)
+    if (buf) {
         PORT_Free(buf);
+}
 }
 
 /*
@@ -571,17 +589,19 @@ nss_cms_decoder_update_filter(void *arg, const char *data, unsigned long len,
     NSSCMSDecoderContext *p7dcx;
 
     PORT_Assert(len); /* paranoia */
-    if (len == 0)
+    if (len == 0) {
         return;
+}
 
     p7dcx = (NSSCMSDecoderContext *)arg;
 
     p7dcx->saw_contents = PR_TRUE;
 
     /* pass on the content bytes only */
-    if (data_kind == SEC_ASN1_Contents)
+    if (data_kind == SEC_ASN1_Contents) {
         nss_cms_decoder_work_data(p7dcx, (const unsigned char *)data, len,
                                   PR_FALSE);
+}
 }
 
 /*
@@ -603,8 +623,9 @@ NSS_CMSDecoder_Start(PLArenaPool *poolp,
     NSSCMSMessage *cmsg;
 
     cmsg = NSS_CMSMessage_Create(poolp);
-    if (cmsg == NULL)
+    if (cmsg == NULL) {
         return NULL;
+}
 
     NSS_CMSMessage_SetEncodingParams(cmsg, pwfn, pwfn_arg, decrypt_key_cb,
                                      decrypt_key_cb_arg, NULL, NULL);
@@ -668,12 +689,14 @@ loser:
     if (rv != SECSuccess) {
         p7dcx->error = PORT_GetError();
         PORT_Assert(p7dcx->error);
-        if (p7dcx->error == 0)
+        if (p7dcx->error == 0) {
             p7dcx->error = -1;
+}
     }
 
-    if (p7dcx->error == 0)
+    if (p7dcx->error == 0) {
         return SECSuccess;
+}
 
     /* there has been a problem, let's finish the decoder */
     if (p7dcx->dcx != NULL) {
@@ -691,8 +714,9 @@ loser:
 void
 NSS_CMSDecoder_Cancel(NSSCMSDecoderContext *p7dcx)
 {
-    if (p7dcx->dcx != NULL)
+    if (p7dcx->dcx != NULL) {
         (void)SEC_ASN1DecoderFinish(p7dcx->dcx);
+}
     NSS_CMSMessage_Destroy(p7dcx->cmsg);
     PORT_Free(p7dcx);
 }
@@ -730,8 +754,9 @@ NSS_CMSMessage_CreateFromDER(SECItem *DERmessage,
     /* first arg(poolp) == NULL => create our own pool */
     p7dcx = NSS_CMSDecoder_Start(NULL, cb, cb_arg, pwfn, pwfn_arg,
                                  decrypt_key_cb, decrypt_key_cb_arg);
-    if (p7dcx == NULL)
+    if (p7dcx == NULL) {
         return NULL;
+}
     NSS_CMSDecoder_Update(p7dcx, (char *)DERmessage->data, DERmessage->len);
     return NSS_CMSDecoder_Finish(p7dcx);
 }

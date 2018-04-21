@@ -99,9 +99,9 @@ opus_val16 op_pvq_search_sse2(celt_norm *_X, int *iy, int K, int N, int arch)
       if (!(sum > EPSILON && sum < 64))
       {
          X[0] = QCONST16(1.f,14);
-         j=1; do
+         j=1; do {
             X[j]=0;
-         while (++j<N);
+         } while (++j<N);
          sums = _mm_set_ps1(1.f);
       }
       /* Using K+e with e < 1 guarantees we cannot get more than K pulses. */

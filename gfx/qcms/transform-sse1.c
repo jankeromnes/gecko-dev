@@ -51,8 +51,9 @@ void qcms_transform_data_rgb_out_lut_sse1(qcms_transform *transform,
     __m128 vec_r, vec_g, vec_b, result;
 
     /* CYA */
-    if (!length)
+    if (!length) {
         return;
+}
 
     /* one pixel is handled outside of the loop */
     length--;
@@ -169,8 +170,9 @@ void qcms_transform_data_rgba_out_lut_sse1(qcms_transform *transform,
     unsigned char alpha;
 
     /* CYA */
-    if (!length)
+    if (!length) {
         return;
+}
 
     /* one pixel is handled outside of the loop */
     length--;

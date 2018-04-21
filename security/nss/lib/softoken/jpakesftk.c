@@ -12,8 +12,9 @@ static CK_RV
 jpake_mapStatus(SECStatus rv, CK_RV invalidArgsMapping)
 {
     int err;
-    if (rv == SECSuccess)
+    if (rv == SECSuccess) {
         return CKR_OK;
+}
     err = PORT_GetError();
     switch (err) {
         /* XXX: SEC_ERROR_INVALID_ARGS might be caused by invalid template
@@ -114,8 +115,9 @@ jpake_MultipleSecItem2Attribute(SFTKObject *key, const SFTKItemTemplate *attrs,
     for (i = 0; i < attrsCount; ++i) {
         CK_RV crv = sftk_forceAttribute(key, attrs[i].type, attrs[i].item->data,
                                         attrs[i].item->len);
-        if (crv != CKR_OK)
+        if (crv != CKR_OK) {
             return crv;
+}
     }
     return CKR_OK;
 }
@@ -146,14 +148,16 @@ jpake_Round1(HASH_HashType hashType, CK_NSS_JPAKERound1Params *params,
     PORT_Assert(key != NULL);
 
     arena = PORT_NewArena(NSS_SOFTOKEN_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         crv = CKR_HOST_MEMORY;
+}
 
     crv = sftk_MultipleAttribute2SecItem(arena, key, templateAttrs,
                                          NUM_ELEM(templateAttrs));
 
-    if (crv == CKR_OK && (signerID.data == NULL || signerID.len == 0))
+    if (crv == CKR_OK && (signerID.data == NULL || signerID.len == 0)) {
         crv = CKR_TEMPLATE_INCOMPLETE;
+}
 
     /* generate x1, g^x1 and the proof of knowledge of x1 */
     if (crv == CKR_OK) {
@@ -161,8 +165,9 @@ jpake_Round1(HASH_HashType hashType, CK_NSS_JPAKERound1Params *params,
         crv = jpake_mapStatus(DSA_NewRandom(arena, &pqg.subPrime, &x1),
                               CKR_TEMPLATE_INCONSISTENT);
     }
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = jpake_Sign(arena, &pqg, hashType, &signerID, &x1, &params->gx1);
+}
 
     /* generate x2, g^x2 and the proof of knowledge of x2 */
     if (crv == CKR_OK) {
@@ -170,8 +175,9 @@ jpake_Round1(HASH_HashType hashType, CK_NSS_JPAKERound1Params *params,
         crv = jpake_mapStatus(DSA_NewRandom(arena, &pqg.subPrime, &x2),
                               CKR_TEMPLATE_INCONSISTENT);
     }
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = jpake_Sign(arena, &pqg, hashType, &signerID, &x2, &params->gx2);
+}
 
     /* Save the values needed for round 2 into CKA_VALUE */
     if (crv == CKR_OK) {
@@ -223,8 +229,9 @@ jpake_Round2(HASH_HashType hashType, CK_NSS_JPAKERound2Params *params,
     PORT_Assert(key != NULL);
 
     arena = PORT_NewArena(NSS_SOFTOKEN_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         crv = CKR_HOST_MEMORY;
+}
 
     /* TODO: check CKK_NSS_JPAKE_ROUND1 */
 
@@ -232,21 +239,26 @@ jpake_Round2(HASH_HashType hashType, CK_NSS_JPAKERound2Params *params,
                                          NUM_ELEM(sourceAttrs));
 
     /* Get the peer's ID out of the template and sanity-check it. */
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = sftk_Attribute2SecItem(arena, &peerID, key,
                                      CKA_NSS_JPAKE_PEERID);
-    if (crv == CKR_OK && (peerID.data == NULL || peerID.len == 0))
+}
+    if (crv == CKR_OK && (peerID.data == NULL || peerID.len == 0)) {
         crv = CKR_TEMPLATE_INCOMPLETE;
-    if (crv == CKR_OK && SECITEM_CompareItem(&signerID, &peerID) == SECEqual)
+}
+    if (crv == CKR_OK && SECITEM_CompareItem(&signerID, &peerID) == SECEqual) {
         crv = CKR_TEMPLATE_INCONSISTENT;
+}
 
     /* Verify zero-knowledge proofs for g^x3 and g^x4 */
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = jpake_Verify(arena, &pqg, hashType, &signerID,
                            peerID.data, peerID.len, &params->gx3);
-    if (crv == CKR_OK)
+}
+    if (crv == CKR_OK) {
         crv = jpake_Verify(arena, &pqg, hashType, &signerID,
                            peerID.data, peerID.len, &params->gx4);
+}
 
     /* Calculate the base and x2s for A=base^x2s */
     if (crv == CKR_OK) {
@@ -266,24 +278,28 @@ jpake_Round2(HASH_HashType hashType, CK_NSS_JPAKERound2Params *params,
     }
 
     /* Generate A=base^x2s and its zero-knowledge proof. */
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = jpake_Sign(arena, &pqg, hashType, &signerID, &x2s, &params->A);
+}
 
     /* Copy P and Q from the ROUND1 key to the ROUND2 key and save the values
        needed for the final key material derivation into CKA_VALUE. */
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = sftk_forceAttribute(key, CKA_PRIME, pqg.prime.data,
                                   pqg.prime.len);
-    if (crv == CKR_OK)
+}
+    if (crv == CKR_OK) {
         crv = sftk_forceAttribute(key, CKA_SUBPRIME, pqg.subPrime.data,
                                   pqg.subPrime.len);
+}
     if (crv == CKR_OK) {
         crv = jpake_MultipleSecItem2Attribute(key, copiedAndGeneratedAttrs,
                                               NUM_ELEM(copiedAndGeneratedAttrs));
     }
 
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = jpake_enforceKeyType(key, CKK_NSS_JPAKE_ROUND2);
+}
 
     PORT_FreeArena(arena, PR_TRUE);
     return crv;
@@ -316,8 +332,9 @@ jpake_Final(HASH_HashType hashType, const CK_NSS_JPAKEFinalParams *param,
     PORT_Assert(key != NULL);
 
     arena = PORT_NewArena(NSS_SOFTOKEN_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         crv = CKR_HOST_MEMORY;
+}
 
     /* TODO: verify key type CKK_NSS_JPAKE_ROUND2 */
 
@@ -334,9 +351,10 @@ jpake_Final(HASH_HashType hashType, const CK_NSS_JPAKEFinalParams *param,
     }
 
     /* Verify zero-knowledge proof for B */
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = jpake_Verify(arena, &pqg, hashType, &signerID,
                            peerID.data, peerID.len, &param->B);
+}
     if (crv == CKR_OK) {
         SECItem B;
         B.data = param->B.pGX;
@@ -348,11 +366,13 @@ jpake_Final(HASH_HashType hashType, const CK_NSS_JPAKEFinalParams *param,
     }
 
     /* Save key material into CKA_VALUE. */
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = sftk_forceAttribute(key, CKA_VALUE, K.data, K.len);
+}
 
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = jpake_enforceKeyType(key, CKK_GENERIC_SECRET);
+}
 
     PORT_FreeArena(arena, PR_TRUE);
     return crv;

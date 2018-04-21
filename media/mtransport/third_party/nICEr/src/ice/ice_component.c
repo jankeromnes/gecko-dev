@@ -63,18 +63,22 @@ static int nr_ice_pre_answer_request_create(nr_transport_addr *dst, nr_stun_serv
     nr_ice_pre_answer_request *par = 0;
     nr_stun_message_attribute *attr;
 
-    if (!(par = RCALLOC(sizeof(nr_ice_pre_answer_request))))
+    if (!(par = RCALLOC(sizeof(nr_ice_pre_answer_request)))) {
       ABORT(R_NO_MEMORY);
+}
 
     par->req = *req; /* Struct assignment */
     memset(req, 0, sizeof(*req)); /* Zero contents to avoid confusion */
 
-    if (r=nr_transport_addr_copy(&par->local_addr, dst))
+    if (r=nr_transport_addr_copy(&par->local_addr, dst)) {
       ABORT(r);
-    if (!nr_stun_message_has_attribute(par->req.request, NR_STUN_ATTR_USERNAME, &attr))
+}
+    if (!nr_stun_message_has_attribute(par->req.request, NR_STUN_ATTR_USERNAME, &attr)) {
       ABORT(R_INTERNAL);
-    if (!(par->username = r_strdup(attr->u.username)))
+}
+    if (!(par->username = r_strdup(attr->u.username))) {
       ABORT(R_NO_MEMORY);
+}
 
     *parp=par;
     _status=0;
@@ -92,8 +96,9 @@ static int nr_ice_pre_answer_request_destroy(nr_ice_pre_answer_request **parp)
   {
     nr_ice_pre_answer_request *par;
 
-    if (!parp || !*parp)
+    if (!parp || !*parp) {
       return(0);
+}
 
     par = *parp;
     *parp = 0;
@@ -112,8 +117,9 @@ int nr_ice_component_create(nr_ice_media_stream *stream, int component_id, nr_ic
     int _status;
     nr_ice_component *comp=0;
 
-    if(!(comp=RCALLOC(sizeof(nr_ice_component))))
+    if(!(comp=RCALLOC(sizeof(nr_ice_component)))) {
       ABORT(R_NO_MEMORY);
+}
 
     comp->state=NR_ICE_COMPONENT_UNPAIRED;
     comp->component_id=component_id;
@@ -138,8 +144,9 @@ int nr_ice_component_destroy(nr_ice_component **componentp)
     nr_ice_candidate *c1,*c2;
     nr_ice_pre_answer_request *r1,*r2;
 
-    if(!componentp || !*componentp)
+    if(!componentp || !*componentp) {
       return(0);
+}
 
     component=*componentp;
     *componentp=0;
@@ -183,15 +190,18 @@ static int nr_ice_component_create_stun_server_ctx(nr_ice_component *component, 
 
     /* Create a STUN server context for this socket */
     snprintf(label, sizeof(label), "server(%s)", addr->as_string);
-    if(r=nr_stun_server_ctx_create(label,sock,&isock->stun_server))
+    if(r=nr_stun_server_ctx_create(label,sock,&isock->stun_server)) {
       ABORT(r);
-    if(r=nr_ice_socket_register_stun_server(isock,isock->stun_server,&isock->stun_server_handle))
+}
+    if(r=nr_ice_socket_register_stun_server(isock,isock->stun_server,&isock->stun_server_handle)) {
       ABORT(r);
+}
 
    /* Add the default STUN credentials so that we can respond before
       we hear about the peer.*/
-    if(r=nr_stun_server_add_default_client(isock->stun_server, lufrag, pwd, nr_ice_component_stun_server_default_cb, component))
+    if(r=nr_stun_server_add_default_client(isock->stun_server, lufrag, pwd, nr_ice_component_stun_server_default_cb, component)) {
       ABORT(r);
+}
 
     _status = 0;
  abort:
@@ -217,12 +227,14 @@ static int nr_ice_component_initialize_udp(struct nr_ice_ctx_ *ctx,nr_ice_compon
       char suppress;
 
       if(r=NR_reg_get2_char(NR_ICE_REG_SUPPRESS_INTERFACE_PRFX,addrs[i].addr.ifname,&suppress)){
-        if(r!=R_NOT_FOUND)
+        if(r!=R_NOT_FOUND) {
           ABORT(r);
+}
       }
       else{
-        if(suppress)
+        if(suppress) {
           continue;
+}
       }
       r_log(LOG_ICE,LOG_DEBUG,"ICE(%s): host address %s",ctx->label,addrs[i].addr.as_string);
       if((r=nr_socket_factory_create_socket(ctx->socket_factory,&addrs[i].addr,&sock))){
@@ -230,14 +242,16 @@ static int nr_ice_component_initialize_udp(struct nr_ice_ctx_ *ctx,nr_ice_compon
         continue;
       }
 
-      if(r=nr_ice_socket_create(ctx,component,sock,NR_ICE_SOCKET_TYPE_DGRAM,&isock))
+      if(r=nr_ice_socket_create(ctx,component,sock,NR_ICE_SOCKET_TYPE_DGRAM,&isock)) {
         ABORT(r);
+}
 
       if (!(ctx->flags & NR_ICE_CTX_FLAGS_RELAY_ONLY)) {
         /* Create one host candidate */
         if(r=nr_ice_candidate_create(ctx,component,isock,sock,HOST,0,0,
-          component->component_id,&cand))
+          component->component_id,&cand)) {
           ABORT(r);
+}
 
         TAILQ_INSERT_TAIL(&component->candidates,cand,entry_comp);
         component->candidate_ct++;
@@ -246,8 +260,9 @@ static int nr_ice_component_initialize_udp(struct nr_ice_ctx_ *ctx,nr_ice_compon
         /* And a srvrflx candidate for each STUN server */
         for(j=0;j<ctx->stun_server_ct;j++){
           /* Skip non-UDP */
-          if(ctx->stun_servers[j].transport!=IPPROTO_UDP)
+          if(ctx->stun_servers[j].transport!=IPPROTO_UDP) {
             continue;
+}
 
           if (ctx->stun_servers[j].type == NR_ICE_STUN_SERVER_TYPE_ADDR) {
             if (nr_transport_addr_check_compatibility(
@@ -262,8 +277,9 @@ static int nr_ice_component_initialize_udp(struct nr_ice_ctx_ *ctx,nr_ice_compon
           ctx->stun_servers[j].id = j;
           if(r=nr_ice_candidate_create(ctx,component,
             isock,sock,SERVER_REFLEXIVE,0,
-            &ctx->stun_servers[j],component->component_id,&cand))
+            &ctx->stun_servers[j],component->component_id,&cand)) {
             ABORT(r);
+}
           TAILQ_INSERT_TAIL(&component->candidates,cand,entry_comp);
           component->candidate_ct++;
           cand=0;
@@ -285,8 +301,9 @@ static int nr_ice_component_initialize_udp(struct nr_ice_ctx_ *ctx,nr_ice_compon
         nr_ice_candidate *srvflx_cand=0;
 
         /* Skip non-UDP */
-        if (ctx->turn_servers[j].turn_server.transport != IPPROTO_UDP)
+        if (ctx->turn_servers[j].turn_server.transport != IPPROTO_UDP) {
           continue;
+}
 
         if (ctx->turn_servers[j].turn_server.type == NR_ICE_STUN_SERVER_TYPE_ADDR) {
           if (nr_transport_addr_check_compatibility(
@@ -303,8 +320,9 @@ static int nr_ice_component_initialize_udp(struct nr_ice_ctx_ *ctx,nr_ice_compon
           /* srvrflx */
           if(r=nr_ice_candidate_create(ctx,component,
             isock,sock,SERVER_REFLEXIVE,0,
-            &ctx->turn_servers[j].turn_server,component->component_id,&cand))
+            &ctx->turn_servers[j].turn_server,component->component_id,&cand)) {
             ABORT(r);
+}
           cand->state=NR_ICE_CAND_STATE_INITIALIZING; /* Don't start */
           cand->done_cb=nr_ice_gather_finished_cb;
           cand->cb_arg=cand;
@@ -315,12 +333,14 @@ static int nr_ice_component_initialize_udp(struct nr_ice_ctx_ *ctx,nr_ice_compon
           cand=0;
         }
         /* relayed*/
-        if(r=nr_socket_turn_create(sock, &turn_sock))
+        if(r=nr_socket_turn_create(sock, &turn_sock)) {
           ABORT(r);
+}
         if(r=nr_ice_candidate_create(ctx,component,
           isock,turn_sock,RELAYED,0,
-          &ctx->turn_servers[j].turn_server,component->component_id,&cand))
+          &ctx->turn_servers[j].turn_server,component->component_id,&cand)) {
            ABORT(r);
+}
         if (srvflx_cand) {
           cand->u.relayed.srvflx_candidate=srvflx_cand;
           srvflx_cand->u.srvrflx.relay_candidate=cand;
@@ -334,8 +354,9 @@ static int nr_ice_component_initialize_udp(struct nr_ice_ctx_ *ctx,nr_ice_compon
 #endif /* USE_TURN */
 
       /* Create a STUN server context for this socket */
-      if ((r=nr_ice_component_create_stun_server_ctx(component,isock,sock,&addrs[i].addr,lufrag,pwd)))
+      if ((r=nr_ice_component_create_stun_server_ctx(component,isock,sock,&addrs[i].addr,lufrag,pwd))) {
         ABORT(r);
+}
 
       STAILQ_INSERT_TAIL(&component->sockets,isock,entry);
     }
@@ -349,8 +370,9 @@ static int nr_ice_component_get_port_from_ephemeral_range(uint16_t *port)
   {
     int _status, r;
     void *buf = port;
-    if(r=nr_crypto_random_bytes(buf, 2))
+    if(r=nr_crypto_random_bytes(buf, 2)) {
       ABORT(r);
+}
     *port|=49152; /* make it fit into IANA ephemeral port range >= 49152 */
     _status=0;
 abort:
@@ -369,22 +391,27 @@ static int nr_ice_component_create_tcp_host_candidate(struct nr_ice_ctx_ *ctx,
     nr_transport_addr addr;
     uint16_t local_port;
 
-    if ((r=nr_transport_addr_copy(&addr,interface_addr)))
+    if ((r=nr_transport_addr_copy(&addr,interface_addr))) {
       ABORT(r);
+}
     addr.protocol=IPPROTO_TCP;
 
     do{
-      if (!tries--)
+      if (!tries--) {
         ABORT(r);
+}
 
-      if((r=nr_ice_component_get_port_from_ephemeral_range(&local_port)))
+      if((r=nr_ice_component_get_port_from_ephemeral_range(&local_port))) {
         ABORT(r);
+}
 
-      if ((r=nr_transport_addr_set_port(&addr, local_port)))
+      if ((r=nr_transport_addr_set_port(&addr, local_port))) {
         ABORT(r);
+}
 
-      if((r=nr_transport_addr_fmt_addr_string(&addr)))
+      if((r=nr_transport_addr_fmt_addr_string(&addr))) {
         ABORT(r);
+}
 
       /* It would be better to stop trying if there is error other than
          port already used, but it'd require significant work to support this. */
@@ -392,25 +419,30 @@ static int nr_ice_component_create_tcp_host_candidate(struct nr_ice_ctx_ *ctx,
 
     } while(r);
 
-    if((tcp_type == TCP_TYPE_PASSIVE) && (r=nr_socket_listen(nrsock,backlog)))
+    if((tcp_type == TCP_TYPE_PASSIVE) && (r=nr_socket_listen(nrsock,backlog))) {
       ABORT(r);
+}
 
-    if((r=nr_ice_socket_create(ctx,component,nrsock,NR_ICE_SOCKET_TYPE_STREAM_TCP,&isock_tmp)))
+    if((r=nr_ice_socket_create(ctx,component,nrsock,NR_ICE_SOCKET_TYPE_STREAM_TCP,&isock_tmp))) {
       ABORT(r);
+}
 
     /* nr_ice_socket took ownership of nrsock */
     nrsock=NULL;
 
     /* Create a STUN server context for this socket */
-    if ((r=nr_ice_component_create_stun_server_ctx(component,isock_tmp,isock_tmp->sock,&addr,lufrag,pwd)))
+    if ((r=nr_ice_component_create_stun_server_ctx(component,isock_tmp,isock_tmp->sock,&addr,lufrag,pwd))) {
       ABORT(r);
+}
 
     if((r=nr_ice_candidate_create(ctx,component,isock_tmp,isock_tmp->sock,HOST,tcp_type,0,
-      component->component_id,&cand)))
+      component->component_id,&cand))) {
       ABORT(r);
+}
 
-    if (isock)
+    if (isock) {
       *isock=isock_tmp;
+}
 
     TAILQ_INSERT_TAIL(&component->candidates,cand,entry_comp);
     component->candidate_ct++;
@@ -439,18 +471,21 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
     r_log(LOG_ICE,LOG_DEBUG,"nr_ice_component_initialize_tcp");
 
     if(r=NR_reg_get_int4(NR_ICE_REG_ICE_TCP_SO_SOCK_COUNT,&so_sock_ct)){
-      if(r!=R_NOT_FOUND)
+      if(r!=R_NOT_FOUND) {
         ABORT(r);
+}
     }
 
     if(r=NR_reg_get_int4(NR_ICE_REG_ICE_TCP_LISTEN_BACKLOG,&backlog)){
-      if(r!=R_NOT_FOUND)
+      if(r!=R_NOT_FOUND) {
         ABORT(r);
+}
     }
 
     if ((r=NR_reg_get_char(NR_ICE_REG_ICE_TCP_DISABLE, &ice_tcp_disabled))) {
-      if (r != R_NOT_FOUND)
+      if (r != R_NOT_FOUND) {
         ABORT(r);
+}
     }
     if ((ctx->flags & NR_ICE_CTX_FLAGS_RELAY_ONLY) ||
         (ctx->flags & NR_ICE_CTX_FLAGS_ONLY_PROXY)) {
@@ -464,8 +499,9 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
       nr_ice_socket *isock_so=0;
 
       if(r=NR_reg_get2_char(NR_ICE_REG_SUPPRESS_INTERFACE_PRFX,addrs[i].addr.ifname,&suppress)){
-        if(r!=R_NOT_FOUND)
+        if(r!=R_NOT_FOUND) {
           ABORT(r);
+}
       }
       else if(suppress) {
           continue;
@@ -494,14 +530,16 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
 
         /* And srvrflx candidates for each STUN server */
         for(j=0;j<ctx->stun_server_ct;j++){
-          if (ctx->stun_servers[j].transport!=IPPROTO_TCP)
+          if (ctx->stun_servers[j].transport!=IPPROTO_TCP) {
             continue;
+}
 
           if (isock_psv) {
             if(r=nr_ice_candidate_create(ctx,component,
               isock_psv,isock_psv->sock,SERVER_REFLEXIVE,TCP_TYPE_PASSIVE,
-              &ctx->stun_servers[j],component->component_id,&cand))
+              &ctx->stun_servers[j],component->component_id,&cand)) {
               ABORT(r);
+}
             TAILQ_INSERT_TAIL(&component->candidates,cand,entry_comp);
             component->candidate_ct++;
             cand=0;
@@ -510,8 +548,9 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
           if (isock_so) {
             if(r=nr_ice_candidate_create(ctx,component,
               isock_so,isock_so->sock,SERVER_REFLEXIVE,TCP_TYPE_SO,
-              &ctx->stun_servers[j],component->component_id,&cand))
+              &ctx->stun_servers[j],component->component_id,&cand)) {
               ABORT(r);
+}
             TAILQ_INSERT_TAIL(&component->candidates,cand,entry_comp);
             component->candidate_ct++;
             cand=0;
@@ -529,12 +568,14 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
         nr_ice_socket *turn_isock;
 
         /* Skip non-TCP */
-        if (ctx->turn_servers[j].turn_server.transport != IPPROTO_TCP)
+        if (ctx->turn_servers[j].turn_server.transport != IPPROTO_TCP) {
           continue;
+}
 
         /* Create relay candidate */
-        if ((r=nr_transport_addr_copy(&addr, &addrs[i].addr)))
+        if ((r=nr_transport_addr_copy(&addr, &addrs[i].addr))) {
           ABORT(r);
+}
         addr.protocol = IPPROTO_TCP;
 
         if (ctx->turn_servers[j].turn_server.type == NR_ICE_STUN_SERVER_TYPE_ADDR) {
@@ -551,8 +592,9 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
           if (isock_psv) {
             if(r=nr_ice_candidate_create(ctx,component,
               isock_psv,isock_psv->sock,SERVER_REFLEXIVE,TCP_TYPE_PASSIVE,
-              &ctx->turn_servers[j].turn_server,component->component_id,&cand))
+              &ctx->turn_servers[j].turn_server,component->component_id,&cand)) {
               ABORT(r);
+}
             TAILQ_INSERT_TAIL(&component->candidates,cand,entry_comp);
             component->candidate_ct++;
             cand=0;
@@ -561,8 +603,9 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
           if (isock_so) {
             if(r=nr_ice_candidate_create(ctx,component,
               isock_so,isock_so->sock,SERVER_REFLEXIVE,TCP_TYPE_SO,
-              &ctx->turn_servers[j].turn_server,component->component_id,&cand))
+              &ctx->turn_servers[j].turn_server,component->component_id,&cand)) {
               ABORT(r);
+}
             TAILQ_INSERT_TAIL(&component->candidates,cand,entry_comp);
             component->candidate_ct++;
             cand=0;
@@ -576,8 +619,9 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
                   sizeof(addr.tls_host) - 1);
         }
 
-        if ((r=nr_transport_addr_fmt_addr_string(&addr)))
+        if ((r=nr_transport_addr_fmt_addr_string(&addr))) {
           ABORT(r);
+}
         /* Create a local socket */
         if((r=nr_socket_factory_create_socket(ctx->socket_factory,&addr,&local_sock))){
           r_log(LOG_ICE,LOG_DEBUG,"ICE(%s): couldn't create socket for address %s",ctx->label,addr.as_string);
@@ -588,27 +632,32 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
 
         if (ctx->turn_tcp_socket_wrapper) {
           /* The HTTP proxy socket */
-          if((r=nr_socket_wrapper_factory_wrap(ctx->turn_tcp_socket_wrapper, local_sock, &local_sock)))
+          if((r=nr_socket_wrapper_factory_wrap(ctx->turn_tcp_socket_wrapper, local_sock, &local_sock))) {
             ABORT(r);
+}
         }
 
         /* The TCP buffered socket */
-        if((r=nr_socket_buffered_stun_create(local_sock, NR_STUN_MAX_MESSAGE_SIZE, TURN_TCP_FRAMING, &buffered_sock)))
+        if((r=nr_socket_buffered_stun_create(local_sock, NR_STUN_MAX_MESSAGE_SIZE, TURN_TCP_FRAMING, &buffered_sock))) {
           ABORT(r);
+}
 
         /* The TURN socket */
-        if(r=nr_socket_turn_create(buffered_sock, &turn_sock))
+        if(r=nr_socket_turn_create(buffered_sock, &turn_sock)) {
           ABORT(r);
+}
 
         /* Create an ICE socket */
-        if((r=nr_ice_socket_create(ctx, component, buffered_sock, NR_ICE_SOCKET_TYPE_STREAM_TURN, &turn_isock)))
+        if((r=nr_ice_socket_create(ctx, component, buffered_sock, NR_ICE_SOCKET_TYPE_STREAM_TURN, &turn_isock))) {
           ABORT(r);
+}
 
         /* Attach ourselves to it */
         if(r=nr_ice_candidate_create(ctx,component,
           turn_isock,turn_sock,RELAYED,TCP_TYPE_NONE,
-          &ctx->turn_servers[j].turn_server,component->component_id,&cand))
+          &ctx->turn_servers[j].turn_server,component->component_id,&cand)) {
           ABORT(r);
+}
         cand->u.relayed.srvflx_candidate=NULL;
         cand->u.relayed.server=&ctx->turn_servers[j];
         TAILQ_INSERT_TAIL(&component->candidates,cand,entry_comp);
@@ -616,8 +665,9 @@ static int nr_ice_component_initialize_tcp(struct nr_ice_ctx_ *ctx,nr_ice_compon
         cand=0;
 
         /* Create a STUN server context for this socket */
-        if ((r=nr_ice_component_create_stun_server_ctx(component,turn_isock,local_sock,&addr,lufrag,pwd)))
+        if ((r=nr_ice_component_create_stun_server_ctx(component,turn_isock,local_sock,&addr,lufrag,pwd))) {
           ABORT(r);
+}
 
         STAILQ_INSERT_TAIL(&component->sockets,turn_isock,entry);
       }
@@ -657,20 +707,24 @@ int nr_ice_component_initialize(struct nr_ice_ctx_ *ctx,nr_ice_component *compon
        we have not yet computed the values in the peer media stream.*/
     lufrag=component->stream->ufrag ? component->stream->ufrag : ctx->ufrag;
     assert(lufrag);
-    if (!lufrag)
+    if (!lufrag) {
       ABORT(R_INTERNAL);
+}
     lpwd=component->stream->pwd ? component->stream->pwd :ctx->pwd;
     assert(lpwd);
-    if (!lpwd)
+    if (!lpwd) {
       ABORT(R_INTERNAL);
+}
     INIT_DATA(pwd, (UCHAR *)lpwd, strlen(lpwd));
 
     /* Initialize the UDP candidates */
-    if (r=nr_ice_component_initialize_udp(ctx, component, addrs, addr_ct, lufrag, &pwd))
+    if (r=nr_ice_component_initialize_udp(ctx, component, addrs, addr_ct, lufrag, &pwd)) {
       r_log(LOG_ICE,LOG_INFO,"ICE(%s): failed to create UDP candidates with error %d",ctx->label,r);
+}
     /* And the TCP candidates */
-    if (r=nr_ice_component_initialize_tcp(ctx, component, addrs, addr_ct, lufrag, &pwd))
+    if (r=nr_ice_component_initialize_tcp(ctx, component, addrs, addr_ct, lufrag, &pwd)) {
       r_log(LOG_ICE,LOG_INFO,"ICE(%s): failed to create TCP candidates with error %d",ctx->label,r);
+}
 
     /* count the candidates that will be initialized */
     cand=TAILQ_FIRST(&component->candidates);
@@ -767,14 +821,17 @@ int nr_ice_component_maybe_prune_candidate(nr_ice_ctx *ctx, nr_ice_component *co
 
 static int nr_ice_component_pair_matches_check(nr_ice_component *comp, nr_ice_cand_pair *pair, nr_transport_addr *local_addr, nr_stun_server_request *req)
   {
-    if(pair->remote->component->component_id!=comp->component_id)
+    if(pair->remote->component->component_id!=comp->component_id) {
       return(0);
+}
 
-    if(nr_transport_addr_cmp(&pair->local->base,local_addr,NR_TRANSPORT_ADDR_CMP_MODE_ALL))
+    if(nr_transport_addr_cmp(&pair->local->base,local_addr,NR_TRANSPORT_ADDR_CMP_MODE_ALL)) {
       return(0);
+}
 
-    if(nr_transport_addr_cmp(&pair->remote->addr,&req->src_addr,NR_TRANSPORT_ADDR_CMP_MODE_ALL))
+    if(nr_transport_addr_cmp(&pair->remote->addr,&req->src_addr,NR_TRANSPORT_ADDR_CMP_MODE_ALL)) {
       return(0);
+}
 
     return(1);
   }
@@ -828,8 +885,9 @@ static int nr_ice_component_process_incoming_check(nr_ice_component *comp, nr_tr
 
     r_log(LOG_ICE,LOG_DEBUG,"ICE-PEER(%s)/STREAM(%s)/COMP(%d): received request from %s",comp->stream->pctx->label,comp->stream->label,comp->component_id,req->src_addr.as_string);
 
-    if (comp->state == NR_ICE_COMPONENT_DISABLED)
+    if (comp->state == NR_ICE_COMPONENT_DISABLED) {
       ABORT(R_REJECTED);
+}
 
     /* Check for role conficts (7.2.1.1) */
     if(comp->stream->pctx->controlling){
@@ -879,8 +937,9 @@ static int nr_ice_component_process_incoming_check(nr_ice_component *comp, nr_tr
        * we are willing to handle multiple matches here. */
       if(nr_ice_component_pair_matches_check(comp, pair, local_addr, req)){
         r_log(LOG_ICE,LOG_DEBUG,"ICE-PEER(%s)/CAND_PAIR(%s): Found a matching pair for received check: %s",comp->stream->pctx->label,pair->codeword,pair->as_string);
-        if(r=nr_ice_component_handle_triggered_check(comp, pair, req, error))
+        if(r=nr_ice_component_handle_triggered_check(comp, pair, req, error)) {
           ABORT(r);
+}
         ++found_valid;
       }
       pair=TAILQ_NEXT(pair,check_queue_entry);
@@ -902,8 +961,9 @@ static int nr_ice_component_process_incoming_check(nr_ice_component *comp, nr_tr
       r_log(LOG_ICE,LOG_DEBUG,"ICE-PEER(%s): no matching pair",comp->stream->pctx->label);
       cand=TAILQ_FIRST(&comp->local_component->candidates);
       while(cand){
-        if(!nr_transport_addr_cmp(&cand->addr,local_addr,NR_TRANSPORT_ADDR_CMP_MODE_ALL))
+        if(!nr_transport_addr_cmp(&cand->addr,local_addr,NR_TRANSPORT_ADDR_CMP_MODE_ALL)) {
           break;
+}
 
         cand=TAILQ_NEXT(cand,entry_comp);
       }
@@ -945,8 +1005,9 @@ static int nr_ice_component_process_incoming_check(nr_ice_component *comp, nr_tr
       pcand=0;
 
       /* Finally start the trigger check if needed */
-      if(r=nr_ice_component_handle_triggered_check(comp, pair, req, error))
+      if(r=nr_ice_component_handle_triggered_check(comp, pair, req, error)) {
         ABORT(r);
+}
     }
 
     _status=0;
@@ -954,7 +1015,8 @@ static int nr_ice_component_process_incoming_check(nr_ice_component *comp, nr_tr
     if(_status){
       nr_ice_candidate_destroy(&pcand);
       assert(*error != 0);
-      if(r!=R_NO_MEMORY) assert(*error != 500);
+      if(r!=R_NO_MEMORY) { assert(*error != 500);
+}
     }
     return(_status);
   }
@@ -976,8 +1038,9 @@ static int nr_ice_component_stun_server_cb(void *cb_arg,nr_stun_server_ctx *stun
       ABORT(r);
     }
 
-    if (r=nr_ice_component_process_incoming_check(comp, &local_addr, req, error))
+    if (r=nr_ice_component_process_incoming_check(comp, &local_addr, req, error)) {
       ABORT(r);
+}
 
     _status=0;
  abort:
@@ -990,8 +1053,9 @@ int nr_ice_component_service_pre_answer_requests(nr_ice_peer_ctx *pctx, nr_ice_c
     nr_ice_component *comp = pcomp->local_component;
     int r,_status;
 
-    if (serviced)
+    if (serviced) {
       *serviced = 0;
+}
 
     r_log(LOG_ICE,LOG_DEBUG,"ICE-PEER(%s)/STREAM(%s)/COMP(%d): looking for pre-answer requests",pctx->label,comp->stream->label,comp->component_id);
 
@@ -1016,16 +1080,21 @@ int nr_ice_component_service_pre_answer_requests(nr_ice_peer_ctx *pctx, nr_ice_c
 
 int nr_ice_component_can_candidate_tcptype_pair(nr_socket_tcp_type left, nr_socket_tcp_type right)
   {
-    if (left && !right)
+    if (left && !right) {
       return(0);
-    if (!left && right)
+}
+    if (!left && right) {
       return(0);
-    if (left == TCP_TYPE_ACTIVE && right != TCP_TYPE_PASSIVE)
+}
+    if (left == TCP_TYPE_ACTIVE && right != TCP_TYPE_PASSIVE) {
       return(0);
-    if (left == TCP_TYPE_SO && right != TCP_TYPE_SO)
+}
+    if (left == TCP_TYPE_SO && right != TCP_TYPE_SO) {
       return(0);
-    if (left == TCP_TYPE_PASSIVE)
+}
+    if (left == TCP_TYPE_PASSIVE) {
       return(0);
+}
 
     return(1);
   }
@@ -1033,16 +1102,19 @@ int nr_ice_component_can_candidate_tcptype_pair(nr_socket_tcp_type left, nr_sock
 /* filter out pairings which won't work. */
 int nr_ice_component_can_candidate_addr_pair(nr_transport_addr *local, nr_transport_addr *remote)
   {
-    if(local->ip_version != remote->ip_version)
+    if(local->ip_version != remote->ip_version) {
       return(0);
+}
     if(nr_transport_addr_is_link_local(local) !=
-       nr_transport_addr_is_link_local(remote))
+       nr_transport_addr_is_link_local(remote)) {
       return(0);
+}
     /* This prevents our ice_unittest (or broken clients) from pairing a
      * loopback with a host candidate. */
     if(nr_transport_addr_is_loopback(local) !=
-       nr_transport_addr_is_loopback(remote))
+       nr_transport_addr_is_loopback(remote)) {
       return(0);
+}
 
     return(1);
   }
@@ -1074,10 +1146,12 @@ int nr_ice_component_pair_candidate(nr_ice_peer_ctx *pctx, nr_ice_component *pco
     }
 
     TAILQ_FOREACH(pcand, &pcomp->candidates, entry_comp){
-      if(!nr_ice_component_can_candidate_addr_pair(&lcand->addr, &pcand->addr))
+      if(!nr_ice_component_can_candidate_addr_pair(&lcand->addr, &pcand->addr)) {
         continue;
-      if(!nr_ice_component_can_candidate_tcptype_pair(lcand->tcp_type, pcand->tcp_type))
+}
+      if(!nr_ice_component_can_candidate_tcptype_pair(lcand->tcp_type, pcand->tcp_type)) {
         continue;
+}
 
       /*
         Two modes, depending on |pair_all_remote|
@@ -1098,11 +1172,13 @@ int nr_ice_component_pair_candidate(nr_ice_peer_ctx *pctx, nr_ice_component *pco
         nr_ice_compute_codeword(pcand->label,strlen(pcand->label),codeword);
         r_log(LOG_ICE,LOG_DEBUG,"ICE-PEER(%s)/CAND(%s): Pairing with peer candidate %s", pctx->label, codeword, pcand->label);
 
-        if(r=nr_ice_candidate_pair_create(pctx,lcand,pcand,&pair))
+        if(r=nr_ice_candidate_pair_create(pctx,lcand,pcand,&pair)) {
           ABORT(r);
+}
 
-        if(r=nr_ice_component_insert_pair(pcomp, pair))
+        if(r=nr_ice_component_insert_pair(pcomp, pair)) {
           ABORT(r);
+}
       }
     }
 
@@ -1130,8 +1206,9 @@ int nr_ice_component_pair_candidates(nr_ice_peer_ctx *pctx, nr_ice_component *lc
 
     while(lcand){
       if (lcand->state == NR_ICE_CAND_STATE_INITIALIZED) {
-        if ((r = nr_ice_component_pair_candidate(pctx, pcomp, lcand, 0)))
+        if ((r = nr_ice_component_pair_candidate(pctx, pcomp, lcand, 0))) {
           ABORT(r);
+}
       }
 
       lcand=TAILQ_NEXT(lcand,entry_comp);
@@ -1176,8 +1253,9 @@ int nr_ice_pre_answer_enqueue(nr_ice_component *comp, nr_socket *sock, nr_stun_s
     nr_transport_addr dst_addr;
     nr_ice_pre_answer_request *par = 0;
 
-    if (r=nr_socket_getaddr(sock, &dst_addr))
+    if (r=nr_socket_getaddr(sock, &dst_addr)) {
       ABORT(r);
+}
 
     STAILQ_FOREACH_SAFE(r1, &comp->pre_answer_reqs, entry, r2) {
       if (!nr_transport_addr_cmp(&r1->local_addr, &dst_addr,
@@ -1188,8 +1266,9 @@ int nr_ice_pre_answer_enqueue(nr_ice_component *comp, nr_socket *sock, nr_stun_s
       }
     }
 
-    if (r=nr_ice_pre_answer_request_create(&dst_addr, req, &par))
+    if (r=nr_ice_pre_answer_request_create(&dst_addr, req, &par)) {
       ABORT(r);
+}
 
     r_log(LOG_ICE,LOG_DEBUG, "ICE(%s)/STREAM(%s)/COMP(%d): Enqueuing STUN request pre-answer from %s",
           comp->ctx->label, comp->stream->label, comp->component_id,
@@ -1252,9 +1331,10 @@ static void nr_ice_component_consent_failed(nr_ice_component *comp)
     }
     /* We are turning the consent failure into a ICE component failure to
      * alert the browser via ICE connection state change about this event. */
-    if (nr_ice_media_stream_component_failed(comp->stream, comp))
+    if (nr_ice_media_stream_component_failed(comp->stream, comp)) {
       r_log(LOG_ICE,LOG_ERR,"ICE(%s)/STREAM(%s)/COMP(%d): failed to mark component as failed",
         comp->ctx->label, comp->stream->label, comp->component_id);
+}
   }
 
 static void nr_ice_component_consent_timeout_cb(NR_SOCKET s, int how, void *cb_arg)
@@ -1304,12 +1384,14 @@ static void nr_ice_component_consent_refreshed(nr_ice_component *comp)
 
     nr_ice_media_stream_check_if_connected(comp->stream);
 
-    if (comp->consent_timeout)
+    if (comp->consent_timeout) {
       NR_async_timer_cancel(comp->consent_timeout);
+}
 
     tval = NR_ICE_CONSENT_TIMEOUT_DEFAULT;
-    if (comp->ctx->test_timer_divider)
+    if (comp->ctx->test_timer_divider) {
       tval = tval / comp->ctx->test_timer_divider;
+}
 
     NR_ASYNC_TIMER_SET(tval, nr_ice_component_consent_timeout_cb, comp,
                        &comp->consent_timeout);
@@ -1348,8 +1430,9 @@ int nr_ice_component_refresh_consent(nr_stun_client_ctx *ctx, NR_async_cb finish
 
     nr_stun_client_reset(ctx);
 
-    if (r=nr_stun_client_start(ctx, NR_ICE_CLIENT_MODE_BINDING_REQUEST, finished_cb, cb_arg))
+    if (r=nr_stun_client_start(ctx, NR_ICE_CLIENT_MODE_BINDING_REQUEST, finished_cb, cb_arg)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -1362,11 +1445,13 @@ void nr_ice_component_consent_calc_consent_timer(nr_ice_component *comp)
 
     trange = NR_ICE_CONSENT_TIMER_DEFAULT * 20 / 100;
     tval = NR_ICE_CONSENT_TIMER_DEFAULT - trange;
-    if (!nr_crypto_random_bytes((UCHAR*)&trand, sizeof(trand)))
+    if (!nr_crypto_random_bytes((UCHAR*)&trand, sizeof(trand))) {
       tval += (trand % (trange * 2));
+}
 
-    if (comp->ctx->test_timer_divider)
+    if (comp->ctx->test_timer_divider) {
       tval = tval / comp->ctx->test_timer_divider;
+}
 
     /* The timeout of the transaction is the maximum time until we send the
      * next consent request. */
@@ -1460,14 +1545,16 @@ int nr_ice_component_setup_consent(nr_ice_component *comp)
 
     if (r=nr_stun_client_ctx_create("consent", comp->active->local->osock,
                                     &comp->active->remote->addr, 0,
-                                    &comp->consent_ctx))
+                                    &comp->consent_ctx)) {
       ABORT(r);
+}
     /* Consent request get send only once. */
     comp->consent_ctx->maximum_transmits = 1;
 
     if (r=nr_ice_socket_register_stun_client(comp->active->local->isock,
-            comp->consent_ctx, &comp->consent_handle))
+            comp->consent_ctx, &comp->consent_handle)) {
       ABORT(r);
+}
 
     comp->can_send = 1;
     comp->disconnected = 0;
@@ -1488,8 +1575,9 @@ int nr_ice_component_nominated_pair(nr_ice_component *comp, nr_ice_cand_pair *pa
 
     /* Are we changing what the nominated pair is? */
     if(comp->nominated){
-      if(comp->nominated->priority >= pair->priority)
+      if(comp->nominated->priority >= pair->priority) {
         return(0);
+}
       r_log(LOG_ICE,LOG_INFO,"ICE-PEER(%s)/STREAM(%s)/COMP(%d)/CAND-PAIR(%s): replacing pair %s with CAND-PAIR(%s)",comp->stream->pctx->label,comp->stream->label,comp->component_id,comp->nominated->codeword,comp->nominated->as_string,pair->codeword);
       /* As consent doesn't hold a reference to its isock this needs to happen
        * before making the new pair the active one. */
@@ -1513,8 +1601,9 @@ int nr_ice_component_nominated_pair(nr_ice_component *comp, nr_ice_cand_pair *pa
                p2->state == NR_ICE_PAIR_STATE_CANCELLED);
         r_log(LOG_ICE,LOG_INFO,"ICE-PEER(%s)/STREAM(%s)/COMP(%d)/CAND-PAIR(%s): cancelling FROZEN/WAITING pair %s in trigger check queue because CAND-PAIR(%s) was nominated.",comp->stream->pctx->label,comp->stream->label,comp->component_id,p2->codeword,p2->as_string,pair->codeword);
 
-        if(r=nr_ice_candidate_pair_cancel(pair->pctx,p2,0))
+        if(r=nr_ice_candidate_pair_cancel(pair->pctx,p2,0)) {
           ABORT(r);
+}
       }
 
       p2=TAILQ_NEXT(p2,triggered_check_queue_entry);
@@ -1527,19 +1616,22 @@ int nr_ice_component_nominated_pair(nr_ice_component *comp, nr_ice_cand_pair *pa
           (p2->state == NR_ICE_PAIR_STATE_WAITING))) {
         r_log(LOG_ICE,LOG_INFO,"ICE-PEER(%s)/STREAM(%s)/COMP(%d)/CAND-PAIR(%s): cancelling FROZEN/WAITING pair %s because CAND-PAIR(%s) was nominated.",comp->stream->pctx->label,comp->stream->label,comp->component_id,p2->codeword,p2->as_string,pair->codeword);
 
-        if(r=nr_ice_candidate_pair_cancel(pair->pctx,p2,0))
+        if(r=nr_ice_candidate_pair_cancel(pair->pctx,p2,0)) {
           ABORT(r);
+}
       }
 
       p2=TAILQ_NEXT(p2,check_queue_entry);
     }
     r_log(LOG_ICE,LOG_DEBUG,"ICE-PEER(%s)/STREAM(%s)/COMP(%d): cancelling done",comp->stream->pctx->label,comp->stream->label,comp->component_id);
 
-    if(r=nr_ice_component_setup_consent(comp))
+    if(r=nr_ice_component_setup_consent(comp)) {
       ABORT(r);
+}
 
-    if(r=nr_ice_media_stream_component_nominated(comp->stream,comp))
+    if(r=nr_ice_media_stream_component_nominated(comp->stream,comp)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -1606,29 +1698,33 @@ int nr_ice_component_select_pair(nr_ice_peer_ctx *pctx, nr_ice_component *comp)
     /* Size the array */
     pair=TAILQ_FIRST(&comp->stream->check_list);
     while(pair){
-      if (comp->component_id == pair->local->component_id)
+      if (comp->component_id == pair->local->component_id) {
           ct++;
+}
 
       pair=TAILQ_NEXT(pair,check_queue_entry);
     }
 
     /* Make and fill the array */
-    if(!(pairs=RCALLOC(sizeof(nr_ice_cand_pair *)*ct)))
+    if(!(pairs=RCALLOC(sizeof(nr_ice_cand_pair *)*ct))) {
       ABORT(R_NO_MEMORY);
+}
 
     ct=0;
     pair=TAILQ_FIRST(&comp->stream->check_list);
     while(pair){
-      if (comp->component_id == pair->local->component_id)
+      if (comp->component_id == pair->local->component_id) {
           pairs[ct++]=pair;
+}
 
       pair=TAILQ_NEXT(pair,check_queue_entry);
     }
 
     if (pctx->handler) {
       if(r=pctx->handler->vtbl->select_pair(pctx->handler->obj,
-        comp->stream,comp->component_id,pairs,ct))
+        comp->stream,comp->component_id,pairs,ct)) {
         ABORT(r);
+}
     }
 
     _status=0;
@@ -1671,8 +1767,9 @@ int nr_ice_component_insert_pair(nr_ice_component *pcomp, nr_ice_cand_pair *pair
       ABORT(R_BAD_ARGS);
     }
 
-    if(r=nr_ice_candidate_pair_insert(&pair->remote->stream->check_list,pair))
+    if(r=nr_ice_candidate_pair_insert(&pair->remote->stream->check_list,pair)) {
       ABORT(r);
+}
 
     /* Make sure the check timer is running, if the stream was previously
      * started. We will not start streams just because a pair was created,
@@ -1723,8 +1820,9 @@ int nr_ice_component_get_default_candidate(nr_ice_component *comp, nr_ice_candid
     }
 
     /* No candidates */
-    if (!best_cand)
+    if (!best_cand) {
       ABORT(R_NOT_FOUND);
+}
 
     *candp = best_cand;
 

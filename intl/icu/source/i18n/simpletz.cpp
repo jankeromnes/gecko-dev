@@ -443,7 +443,8 @@ SimpleTimeZone::getOffset(uint8_t era, int32_t year, int32_t month, int32_t day,
                           int32_t monthLength, int32_t prevMonthLength,
                           UErrorCode& status) const
 {
-    if(U_FAILURE(status)) return 0;
+    if(U_FAILURE(status)) { return 0;
+}
 
     if ((era != GregorianCalendar::AD && era != GregorianCalendar::BC)
         || month < UCAL_JANUARY
@@ -465,8 +466,9 @@ SimpleTimeZone::getOffset(uint8_t era, int32_t year, int32_t month, int32_t day,
     int32_t result = rawOffset;
 
     // Bail out if we are before the onset of daylight savings time
-    if(!useDaylight || year < startYear || era != GregorianCalendar::AD) 
+    if(!useDaylight || year < startYear || era != GregorianCalendar::AD) { 
         return result;
+}
 
     // Check for southern hemisphere.  We assume that the start and end
     // month are different.
@@ -501,8 +503,9 @@ SimpleTimeZone::getOffset(uint8_t era, int32_t year, int32_t month, int32_t day,
     // end rule within the calendar year, and vice versa for the southern
     // hemisphere.
     if ((!southern && (startCompare >= 0 && endCompare < 0)) ||
-        (southern && (startCompare >= 0 || endCompare < 0)))
+        (southern && (startCompare >= 0 || endCompare < 0))) {
         result += dstSavings;
+}
 
     return result;
 }
@@ -601,8 +604,9 @@ SimpleTimeZone::compareToRule(int8_t month, int8_t monthLen, int8_t prevMonthLen
 
     // first compare months.  If they're different, we don't have to worry about days
     // and times
-    if (month < ruleMonth) return -1;
-    else if (month > ruleMonth) return 1;
+    if (month < ruleMonth) { return -1;
+    } else if (month > ruleMonth) { return 1;
+}
 
     // calculate the actual day of month for the rule
     int32_t ruleDayOfMonth = 0;
@@ -625,13 +629,13 @@ SimpleTimeZone::compareToRule(int8_t month, int8_t monthLen, int8_t prevMonthLen
         // the dayOfWeek and dayOfMonth parameters to figure out the day-of-week
         // of the first day of the month, so it's trusting that they're really
         // consistent with each other)
-        if (ruleDay > 0)
+        if (ruleDay > 0) {
             ruleDayOfMonth = 1 + (ruleDay - 1) * 7 +
                 (7 + ruleDayOfWeek - (dayOfWeek - dayOfMonth + 1)) % 7;
         
         // if ruleDay is negative (we assume it's not zero here), we have to do
         // the same calculation figuring backward from the last day of the month.
-        else
+        } else
         {
             // (again, this code is trusting that dayOfWeek and dayOfMonth are
             // consistent with each other here, since we're using them to figure
@@ -655,13 +659,15 @@ SimpleTimeZone::compareToRule(int8_t month, int8_t monthLen, int8_t prevMonthLen
     }
 
     // now that we have a real day-in-month for the rule, we can compare days...
-    if (dayOfMonth < ruleDayOfMonth) return -1;
-    else if (dayOfMonth > ruleDayOfMonth) return 1;
+    if (dayOfMonth < ruleDayOfMonth) { return -1;
+    } else if (dayOfMonth > ruleDayOfMonth) { return 1;
+}
 
     // ...and if they're equal, we compare times
-    if (millis < ruleMillis) return -1;
-    else if (millis > ruleMillis) return 1;
-    else return 0;
+    if (millis < ruleMillis) { return -1;
+    } else if (millis > ruleMillis) { return 1;
+    } else { return 0;
+}
 }
 
 // -------------------------------------
@@ -722,7 +728,8 @@ UBool SimpleTimeZone::inDaylightTime(UDate date, UErrorCode& status) const
     // This method is wasteful since it creates a new GregorianCalendar and
     // deletes it each time it is called.  However, this is a deprecated method
     // and provided only for Java compatibility as of 8/6/97 [LIU].
-    if (U_FAILURE(status)) return FALSE;
+    if (U_FAILURE(status)) { return FALSE;
+}
     GregorianCalendar *gc = new GregorianCalendar(*this, status);
     /* test for NULL */
     if (gc == 0) {
@@ -745,8 +752,10 @@ UBool SimpleTimeZone::inDaylightTime(UDate date, UErrorCode& status) const
 UBool 
 SimpleTimeZone::hasSameRules(const TimeZone& other) const
 {
-    if (this == &other) return TRUE;
-    if (typeid(*this) != typeid(other)) return FALSE;
+    if (this == &other) { return TRUE;
+}
+    if (typeid(*this) != typeid(other)) { return FALSE;
+}
     SimpleTimeZone *that = (SimpleTimeZone*)&other;
     return rawOffset     == that->rawOffset &&
         useDaylight     == that->useDaylight &&
@@ -867,7 +876,8 @@ SimpleTimeZone::decodeRules(UErrorCode& status)
 void 
 SimpleTimeZone::decodeStartRule(UErrorCode& status) 
 {
-    if(U_FAILURE(status)) return;
+    if(U_FAILURE(status)) { return;
+}
 
     useDaylight = (UBool)((startDay != 0) && (endDay != 0) ? TRUE : FALSE);
     if (useDaylight && dstSavings == 0) {
@@ -922,7 +932,8 @@ SimpleTimeZone::decodeStartRule(UErrorCode& status)
 void 
 SimpleTimeZone::decodeEndRule(UErrorCode& status) 
 {
-    if(U_FAILURE(status)) return;
+    if(U_FAILURE(status)) { return;
+}
 
     useDaylight = (UBool)((startDay != 0) && (endDay != 0) ? TRUE : FALSE);
     if (useDaylight && dstSavings == 0) {

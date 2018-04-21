@@ -162,9 +162,10 @@ struct would_substitute_feature_t
 				unsigned int          glyphs_count,
 				hb_face_t            *face) const
   {
-    for (unsigned int i = 0; i < count; i++)
-      if (hb_ot_layout_lookup_would_substitute_fast (face, lookups[i].index, glyphs, glyphs_count, zero_context))
+    for (unsigned int i = 0; i < count; i++) {
+      if (hb_ot_layout_lookup_would_substitute_fast (face, lookups[i].index, glyphs, glyphs_count, zero_context)) {
 	return true;
+}
     return false;
   }
 
@@ -183,8 +184,9 @@ struct khmer_shape_plan_t
     hb_codepoint_t glyph = virama_glyph;
     if (unlikely (virama_glyph == (hb_codepoint_t) -1))
     {
-      if (!font->get_nominal_glyph (0x17D2u, &glyph))
+      if (!font->get_nominal_glyph (0x17D2u, &glyph)) {
 	glyph = 0;
+}
       /* Technically speaking, the spec says we should apply 'locl' to virama too.
        * Maybe one day... */
 
@@ -208,16 +210,18 @@ static void *
 data_create_khmer (const hb_ot_shape_plan_t *plan)
 {
   khmer_shape_plan_t *khmer_plan = (khmer_shape_plan_t *) calloc (1, sizeof (khmer_shape_plan_t));
-  if (unlikely (!khmer_plan))
+  if (unlikely (!khmer_plan)) {
     return nullptr;
+}
 
   khmer_plan->virama_glyph = (hb_codepoint_t) -1;
 
   khmer_plan->pref.init (&plan->map, HB_TAG('p','r','e','f'), true);
 
-  for (unsigned int i = 0; i < ARRAY_LENGTH (khmer_plan->mask_array); i++)
+  for (unsigned int i = 0; i < ARRAY_LENGTH (khmer_plan->mask_array); i++) {
     khmer_plan->mask_array[i] = (khmer_features[i].flags & F_GLOBAL) ?
 				 0 : plan->map.get_1_mask (khmer_features[i].tag);
+}
 
   return khmer_plan;
 }
@@ -250,8 +254,9 @@ setup_masks_khmer (const hb_ot_shape_plan_t *plan HB_UNUSED,
 
   unsigned int count = buffer->len;
   hb_glyph_info_t *info = buffer->info;
-  for (unsigned int i = 0; i < count; i++)
+  for (unsigned int i = 0; i < count; i++) {
     set_khmer_properties (info[i]);
+}
 }
 
 static void
@@ -293,21 +298,24 @@ initial_reordering_consonant_syllable (const hb_ot_shape_plan_t *plan,
   info[base].khmer_position() = POS_BASE_C;
 
   /* Mark all subsequent consonants as below. */
-  for (unsigned int i = base + 1; i < end; i++)
-    if (is_consonant_or_vowel (info[i]))
+  for (unsigned int i = base + 1; i < end; i++) {
+    if (is_consonant_or_vowel (info[i])) {
       info[i].khmer_position() = POS_BELOW_C;
+}
 
   /* Mark final consonants.  A final consonant is one appearing after a matra,
    * like in Khmer. */
-  for (unsigned int i = base + 1; i < end; i++)
+  for (unsigned int i = base + 1; i < end; i++) {
     if (info[i].khmer_category() == OT_M) {
-      for (unsigned int j = i + 1; j < end; j++)
+      for (unsigned int j = i + 1; j < end; j++) {
         if (is_consonant_or_vowel (info[j])) {
 	  info[j].khmer_position() = POS_FINAL_C;
 	  break;
 	}
+}
       break;
     }
+}
 
   /* Attach misc marks to previous char to move with them. */
   {
@@ -329,11 +337,12 @@ initial_reordering_consonant_syllable (const hb_ot_shape_plan_t *plan,
 	   * We don't want to move the virama with the left matra.
 	   * TEST: U+0D9A,U+0DDA
 	   */
-	  for (unsigned int j = i; j > start; j--)
+	  for (unsigned int j = i; j > start; j--) {
 	    if (info[j - 1].khmer_position() != POS_PRE_M) {
 	      info[i].khmer_position() = info[j - 1].khmer_position();
 	      break;
 	    }
+}
 	}
       } else if (info[i].khmer_position() != POS_SMVD) {
         last_pos = (khmer_position_t) info[i].khmer_position();
@@ -344,36 +353,40 @@ initial_reordering_consonant_syllable (const hb_ot_shape_plan_t *plan,
    * since the last consonant or matra. */
   {
     unsigned int last = base;
-    for (unsigned int i = base + 1; i < end; i++)
+    for (unsigned int i = base + 1; i < end; i++) {
       if (is_consonant_or_vowel (info[i]))
       {
-	for (unsigned int j = last + 1; j < i; j++)
-	  if (info[j].khmer_position() < POS_SMVD)
+	for (unsigned int j = last + 1; j < i; j++) {
+	  if (info[j].khmer_position() < POS_SMVD) {
 	    info[j].khmer_position() = info[i].khmer_position();
+}
 	last = i;
-      } else if (info[i].khmer_category() == OT_M)
+      } else if (info[i].khmer_category() == OT_M) {
         last = i;
+}
   }
 
   {
     /* Use syllable() for sort accounting temporarily. */
     unsigned int syllable = info[start].syllable();
-    for (unsigned int i = start; i < end; i++)
+    for (unsigned int i = start; i < end; i++) {
       info[i].syllable() = i - start;
+}
 
     /* Sit tight, rock 'n roll! */
     hb_stable_sort (info + start, end - start, compare_khmer_order);
     /* Find base again */
     base = end;
-    for (unsigned int i = start; i < end; i++)
+    for (unsigned int i = start; i < end; i++) {
       if (info[i].khmer_position() == POS_BASE_C)
       {
 	base = i;
 	break;
       }
+}
 
     /* Note!  syllable() is a one-byte field. */
-    for (unsigned int i = base; i < end; i++)
+    for (unsigned int i = base; i < end; i++) {
       if (info[i].syllable() != 255)
       {
 	unsigned int max = i;
@@ -385,13 +398,16 @@ initial_reordering_consonant_syllable (const hb_ot_shape_plan_t *plan,
 	  info[j].syllable() = 255; /* So we don't process j later again. */
 	  j = next;
 	}
-	if (i != max)
+	if (i != max) {
 	  buffer->merge_clusters (i, max + 1);
+}
       }
+}
 
     /* Put syllable back in. */
-    for (unsigned int i = start; i < end; i++)
+    for (unsigned int i = start; i < end; i++) {
       info[i].syllable() = syllable;
+}
   }
 
   /* Setup masks now */
@@ -401,8 +417,9 @@ initial_reordering_consonant_syllable (const hb_ot_shape_plan_t *plan,
 
     /* Post-base */
     mask = khmer_plan->mask_array[BLWF] | khmer_plan->mask_array[ABVF] | khmer_plan->mask_array[PSTF];
-    for (unsigned int i = base + 1; i < end; i++)
+    for (unsigned int i = base + 1; i < end; i++) {
       info[i].mask  |= mask;
+}
   }
 
   unsigned int pref_len = 2;
@@ -411,12 +428,14 @@ initial_reordering_consonant_syllable (const hb_ot_shape_plan_t *plan,
     /* Find a Halant,Ra sequence and mark it for pre-base-reordering processing. */
     for (unsigned int i = base + 1; i + pref_len - 1 < end; i++) {
       hb_codepoint_t glyphs[2];
-      for (unsigned int j = 0; j < pref_len; j++)
+      for (unsigned int j = 0; j < pref_len; j++) {
         glyphs[j] = info[i + j].codepoint;
+}
       if (khmer_plan->pref.would_substitute (glyphs, pref_len, face))
       {
-	for (unsigned int j = 0; j < pref_len; j++)
+	for (unsigned int j = 0; j < pref_len; j++) {
 	  info[i++].mask |= khmer_plan->mask_array[PREF];
+}
 
 	/* Mark the subsequent stuff with 'cfar'.  Used in Khmer.
 	 * Read the feature spec.
@@ -424,9 +443,10 @@ initial_reordering_consonant_syllable (const hb_ot_shape_plan_t *plan,
 	 * U+1784,U+17D2,U+179A,U+17D2,U+1782
 	 * U+1784,U+17D2,U+1782,U+17D2,U+179A
 	 */
-	if (khmer_plan->mask_array[CFAR])
-	  for (; i < end; i++)
+	if (khmer_plan->mask_array[CFAR]) {
+	  for (; i < end; i++) {
 	    info[i].mask |= khmer_plan->mask_array[CFAR];
+}
 
 	break;
       }
@@ -462,19 +482,22 @@ insert_dotted_circles (const hb_ot_shape_plan_t *plan HB_UNUSED,
   bool has_broken_syllables = false;
   unsigned int count = buffer->len;
   hb_glyph_info_t *info = buffer->info;
-  for (unsigned int i = 0; i < count; i++)
+  for (unsigned int i = 0; i < count; i++) {
     if ((info[i].syllable() & 0x0F) == broken_cluster)
     {
       has_broken_syllables = true;
       break;
     }
-  if (likely (!has_broken_syllables))
+}
+  if (likely (!has_broken_syllables)) {
     return;
+}
 
 
   hb_codepoint_t dottedcircle_glyph;
-  if (!font->get_nominal_glyph (0x25CCu, &dottedcircle_glyph))
+  if (!font->get_nominal_glyph (0x25CCu, &dottedcircle_glyph)) {
     return;
+}
 
   hb_glyph_info_t dottedcircle = {0};
   dottedcircle.codepoint = 0x25CCu;
@@ -502,13 +525,15 @@ insert_dotted_circles (const hb_ot_shape_plan_t *plan HB_UNUSED,
       /* Insert dottedcircle after possible Repha. */
       while (buffer->idx < buffer->len && !buffer->in_error &&
 	     last_syllable == buffer->cur().syllable() &&
-	     buffer->cur().khmer_category() == OT_Repha)
+	     buffer->cur().khmer_category() == OT_Repha) {
         buffer->next_glyph ();
+}
 
       buffer->output_info (ginfo);
     }
-    else
+    else {
       buffer->next_glyph ();
+}
   }
 
   buffer->swap_buffers ();
@@ -542,7 +567,7 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
   if (khmer_plan->virama_glyph)
   {
     unsigned int virama_glyph = khmer_plan->virama_glyph;
-    for (unsigned int i = start; i < end; i++)
+    for (unsigned int i = start; i < end; i++) {
       if (info[i].codepoint == virama_glyph &&
 	  _hb_glyph_info_ligated (&info[i]) &&
 	  _hb_glyph_info_multiplied (&info[i]))
@@ -551,6 +576,7 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
 	info[i].khmer_category() = OT_H;
 	_hb_glyph_info_clear_ligated_and_multiplied (&info[i]);
       }
+}
   }
 
 
@@ -566,12 +592,12 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
 
   /* Find base again */
   unsigned int base;
-  for (base = start; base < end; base++)
+  for (base = start; base < end; base++) {
     if (info[base].khmer_position() >= POS_BASE_C)
     {
       if (try_pref && base + 1 < end)
       {
-	for (unsigned int i = base + 1; i < end; i++)
+	for (unsigned int i = base + 1; i < end; i++) {
 	  if ((info[i].mask & khmer_plan->mask_array[PREF]) != 0)
 	  {
 	    if (!(_hb_glyph_info_substituted (&info[i]) &&
@@ -580,27 +606,33 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
 	      /* Ok, this was a 'pref' candidate but didn't form any.
 	       * Base is around here... */
 	      base = i;
-	      while (base < end && is_coeng (info[base]))
+	      while (base < end && is_coeng (info[base])) {
 		base++;
+}
 	      info[base].khmer_position() = POS_BASE_C;
 
 	      try_pref = false;
 	    }
 	    break;
 	  }
+}
       }
 
-      if (start < base && info[base].khmer_position() > POS_BASE_C)
+      if (start < base && info[base].khmer_position() > POS_BASE_C) {
         base--;
+}
       break;
     }
+}
   if (base == end && start < base &&
-      is_one_of (info[base - 1], FLAG (OT_ZWJ)))
+      is_one_of (info[base - 1], FLAG (OT_ZWJ))) {
     base--;
-  if (base < end)
+}
+  if (base < end) {
     while (start < base &&
-	   is_one_of (info[base], (FLAG (OT_N) | FLAG (OT_Coeng))))
+	   is_one_of (info[base], (FLAG (OT_N) | FLAG (OT_Coeng)))) {
       base--;
+}
 
 
   /*   o Reorder matras:
@@ -619,8 +651,9 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
     unsigned int new_pos = base == end ? base - 2 : base - 1;
 
     while (new_pos > start &&
-	   !(is_one_of (info[new_pos], (FLAG (OT_M) | FLAG (OT_Coeng)))))
+	   !(is_one_of (info[new_pos], (FLAG (OT_M) | FLAG (OT_Coeng))))) {
       new_pos--;
+}
 
     /* If we found no Halant we are done.
      * Otherwise only proceed if the Halant does
@@ -629,21 +662,24 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
 	info[new_pos].khmer_position() != POS_PRE_M)
     {
       /* -> If ZWJ or ZWNJ follow this halant, position is moved after it. */
-      if (new_pos + 1 < end && is_joiner (info[new_pos + 1]))
+      if (new_pos + 1 < end && is_joiner (info[new_pos + 1])) {
 	new_pos++;
+}
     }
-    else
+    else {
       new_pos = start; /* No move. */
+}
 
     if (start < new_pos && info[new_pos].khmer_position () != POS_PRE_M)
     {
       /* Now go see if there's actually any matras... */
-      for (unsigned int i = new_pos; i > start; i--)
+      for (unsigned int i = new_pos; i > start; i--) {
 	if (info[i - 1].khmer_position () == POS_PRE_M)
 	{
 	  unsigned int old_pos = i - 1;
-	  if (old_pos < base && base <= new_pos) /* Shouldn't actually happen. */
+	  if (old_pos < base && base <= new_pos) { /* Shouldn't actually happen. */
 	    base--;
+}
 
 	  hb_glyph_info_t tmp = info[old_pos];
 	  memmove (&info[old_pos], &info[old_pos + 1], (new_pos - old_pos) * sizeof (info[0]));
@@ -655,12 +691,14 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
 
 	  new_pos--;
 	}
+}
     } else {
-      for (unsigned int i = start; i < base; i++)
+      for (unsigned int i = start; i < base; i++) {
 	if (info[i].khmer_position () == POS_PRE_M) {
 	  buffer->merge_clusters (i, MIN (end, base + 1));
 	  break;
 	}
+}
     }
   }
 
@@ -673,7 +711,7 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
 
   if (try_pref && base + 1 < end) /* Otherwise there can't be any pre-base-reordering Ra. */
   {
-    for (unsigned int i = base + 1; i < end; i++)
+    for (unsigned int i = base + 1; i < end; i++) {
       if ((info[i].mask & khmer_plan->mask_array[PREF]) != 0)
       {
 	/*       1. Only reorder a glyph produced by substitution during application
@@ -696,27 +734,30 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
 
 	  unsigned int new_pos = base;
 	  while (new_pos > start &&
-		 !(is_one_of (info[new_pos - 1], FLAG(OT_M) | FLAG (OT_Coeng))))
+		 !(is_one_of (info[new_pos - 1], FLAG(OT_M) | FLAG (OT_Coeng)))) {
 	    new_pos--;
+}
 
 	  /* In Khmer coeng model, a H,Ra can go *after* matras.  If it goes after a
 	   * split matra, it should be reordered to *before* the left part of such matra. */
 	  if (new_pos > start && info[new_pos - 1].khmer_category() == OT_M)
 	  {
 	    unsigned int old_pos = i;
-	    for (unsigned int j = base + 1; j < old_pos; j++)
+	    for (unsigned int j = base + 1; j < old_pos; j++) {
 	      if (info[j].khmer_category() == OT_M)
 	      {
 		new_pos--;
 		break;
 	      }
+}
 	  }
 
 	  if (new_pos > start && is_coeng (info[new_pos - 1]))
 	  {
 	    /* -> If ZWJ or ZWNJ follow this halant, position is moved after it. */
-	    if (new_pos < end && is_joiner (info[new_pos]))
+	    if (new_pos < end && is_joiner (info[new_pos])) {
 	      new_pos++;
+}
 	  }
 
 	  {
@@ -727,13 +768,15 @@ final_reordering_syllable (const hb_ot_shape_plan_t *plan,
 	    memmove (&info[new_pos + 1], &info[new_pos], (old_pos - new_pos) * sizeof (info[0]));
 	    info[new_pos] = tmp;
 
-	    if (new_pos <= base && base < old_pos)
+	    if (new_pos <= base && base < old_pos) {
 	      base++;
+}
 	  }
 	}
 
         break;
       }
+}
   }
 
 
@@ -757,7 +800,8 @@ final_reordering (const hb_ot_shape_plan_t *plan,
 		  hb_buffer_t *buffer)
 {
   unsigned int count = buffer->len;
-  if (unlikely (!count)) return;
+  if (unlikely (!count)) { return;
+}
 
   foreach_syllable (buffer, start, end)
     final_reordering_syllable (plan, buffer, start, end);
@@ -774,8 +818,9 @@ clear_syllables (const hb_ot_shape_plan_t *plan HB_UNUSED,
 {
   hb_glyph_info_t *info = buffer->info;
   unsigned int count = buffer->len;
-  for (unsigned int i = 0; i < count; i++)
+  for (unsigned int i = 0; i < count; i++) {
     info[i].syllable() = 0;
+}
 }
 
 
@@ -809,8 +854,9 @@ compose_khmer (const hb_ot_shape_normalize_context_t *c,
 	       hb_codepoint_t *ab)
 {
   /* Avoid recomposing split matras. */
-  if (HB_UNICODE_GENERAL_CATEGORY_IS_MARK (c->unicode->general_category (a)))
+  if (HB_UNICODE_GENERAL_CATEGORY_IS_MARK (c->unicode->general_category (a))) {
     return false;
+}
 
   return (bool) c->unicode->compose (a, b, ab);
 }

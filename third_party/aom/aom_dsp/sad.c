@@ -25,7 +25,8 @@ static INLINE unsigned int sad(const uint8_t *a, int a_stride, const uint8_t *b,
   unsigned int sad = 0;
 
   for (y = 0; y < height; y++) {
-    for (x = 0; x < width; x++) sad += abs(a[x] - b[x]);
+    for (x = 0; x < width; x++) { sad += abs(a[x] - b[x]);
+}
 
     a += a_stride;
     b += b_stride;
@@ -183,7 +184,8 @@ sadMxNx4D(128, 32)
   const uint16_t *a = CONVERT_TO_SHORTPTR(a8);
   const uint16_t *b = CONVERT_TO_SHORTPTR(b8);
   for (y = 0; y < height; y++) {
-    for (x = 0; x < width; x++) sad += abs(a[x] - b[x]);
+    for (x = 0; x < width; x++) { sad += abs(a[x] - b[x]);
+}
 
     a += a_stride;
     b += b_stride;
@@ -198,7 +200,8 @@ static INLINE unsigned int highbd_sadb(const uint8_t *a8, int a_stride,
   unsigned int sad = 0;
   const uint16_t *a = CONVERT_TO_SHORTPTR(a8);
   for (y = 0; y < height; y++) {
-    for (x = 0; x < width; x++) sad += abs(a[x] - b[x]);
+    for (x = 0; x < width; x++) { sad += abs(a[x] - b[x]);
+}
 
     a += a_stride;
     b += b_stride;
@@ -503,8 +506,9 @@ static INLINE unsigned int obmc_sad(const uint8_t *pre, int pre_stride,
   unsigned int sad = 0;
 
   for (y = 0; y < height; y++) {
-    for (x = 0; x < width; x++)
+    for (x = 0; x < width; x++) {
       sad += ROUND_POWER_OF_TWO(abs(wsrc[x] - pre[x] * mask[x]), 12);
+}
 
     pre += pre_stride;
     wsrc += width;
@@ -563,8 +567,9 @@ OBMCSADMxN(128, 32)
   const uint16_t *pre = CONVERT_TO_SHORTPTR(pre8);
 
   for (y = 0; y < height; y++) {
-    for (x = 0; x < width; x++)
+    for (x = 0; x < width; x++) {
       sad += ROUND_POWER_OF_TWO(abs(wsrc[x] - pre[x] * mask[x]), 12);
+}
 
     pre += pre_stride;
     wsrc += width;

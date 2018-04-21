@@ -51,10 +51,11 @@ void aom_highbd_quantize_b_sse2(const tran_low_t *coeff_ptr, intptr_t count,
       cmp2 = _mm_cmpgt_epi32(coeffs, nzbins[i != 0]);
       cmp1 = _mm_and_si128(cmp1, cmp2);
       test = _mm_movemask_epi8(cmp1);
-      if (test == 0xffff)
+      if (test == 0xffff) {
         non_zero_regs--;
-      else
+      } else {
         break;
+}
     }
 
     // Quantization pass:
@@ -83,7 +84,8 @@ void aom_highbd_quantize_b_sse2(const tran_low_t *coeff_ptr, intptr_t count,
               (uint32_t)((tmp4 * quant_shift_ptr[k != 0]) >> 16);
           qcoeff_ptr[k] = (int)(abs_qcoeff ^ coeff_sign[j]) - coeff_sign[j];
           dqcoeff_ptr[k] = qcoeff_ptr[k] * dequant_ptr[k != 0];
-          if (abs_qcoeff) eob_i = iscan[k] > eob_i ? iscan[k] : eob_i;
+          if (abs_qcoeff) { eob_i = iscan[k] > eob_i ? iscan[k] : eob_i;
+}
         }
       }
     }
@@ -126,10 +128,14 @@ void aom_highbd_quantize_b_32x32_sse2(
       cmp2 = _mm_cmpgt_epi32(coeffs, nzbins[i != 0]);
       cmp1 = _mm_and_si128(cmp1, cmp2);
       test = _mm_movemask_epi8(cmp1);
-      if (!(test & 0xf)) idx_arr[idx++] = i * 4;
-      if (!(test & 0xf0)) idx_arr[idx++] = i * 4 + 1;
-      if (!(test & 0xf00)) idx_arr[idx++] = i * 4 + 2;
-      if (!(test & 0xf000)) idx_arr[idx++] = i * 4 + 3;
+      if (!(test & 0xf)) { idx_arr[idx++] = i * 4;
+}
+      if (!(test & 0xf0)) { idx_arr[idx++] = i * 4 + 1;
+}
+      if (!(test & 0xf00)) { idx_arr[idx++] = i * 4 + 2;
+}
+      if (!(test & 0xf000)) { idx_arr[idx++] = i * 4 + 3;
+}
     }
 
     // Quantization pass: only process the coefficients selected in
@@ -146,7 +152,8 @@ void aom_highbd_quantize_b_32x32_sse2(
           (uint32_t)((tmp2 * quant_shift_ptr[rc != 0]) >> 15);
       qcoeff_ptr[rc] = (int)(abs_qcoeff ^ coeff_sign) - coeff_sign;
       dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant_ptr[rc != 0] / 2;
-      if (abs_qcoeff) eob = iscan[idx_arr[i]] > eob ? iscan[idx_arr[i]] : eob;
+      if (abs_qcoeff) { eob = iscan[idx_arr[i]] > eob ? iscan[idx_arr[i]] : eob;
+}
     }
   }
   *eob_ptr = eob + 1;

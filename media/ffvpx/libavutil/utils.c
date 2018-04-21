@@ -38,8 +38,9 @@ const char *av_version_info(void)
 unsigned avutil_version(void)
 {
     static int checks_done;
-    if (checks_done)
+    if (checks_done) {
         return LIBAVUTIL_VERSION_INT;
+}
 
 #if FF_API_VDPAU
     av_assert0(AV_PIX_FMT_VDA_VLD == 81); //check if the pix fmt enum has not had anything inserted or removed by mistake
@@ -107,8 +108,9 @@ unsigned av_int_list_length_for_size(unsigned elsize,
 {
     unsigned i;
 
-    if (!list)
+    if (!list) {
         return 0;
+}
 #define LIST_LENGTH(type) \
     { type t = term, *l = (type *)list; for (i = 0; l[i] != t; i++); }
     switch (elsize) {
@@ -134,8 +136,9 @@ char *av_fourcc_make_string(char *buf, uint32_t fourcc)
                               (c >= 'A' && c <= 'Z') ||
                               (c && strchr(". -_", c));
         const int len = snprintf(buf, buf_size, print_chr ? "%c" : "[%d]", c);
-        if (len < 0)
+        if (len < 0) {
             break;
+}
         buf += len;
         buf_size = buf_size > len ? buf_size - len : 0;
         fourcc >>= 8;

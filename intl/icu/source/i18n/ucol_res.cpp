@@ -526,7 +526,8 @@ ucol_getDisplayName(    const    char        *objLoc,
                     int32_t         resultLength,
                     UErrorCode        *status)
 {
-    if(U_FAILURE(*status)) return -1;
+    if(U_FAILURE(*status)) { return -1;
+}
     UnicodeString dst;
     if(!(result==NULL && resultLength==0)) {
         // NULL destination for pure preflighting: empty dummy string

@@ -31,8 +31,9 @@ getCurrentValueCB(AtkValue *obj, GValue *value)
 
   memset (value,  0, sizeof (GValue));
   double accValue = accWrap ? accWrap->CurValue() : proxy->CurValue();
-  if (IsNaN(accValue))
+  if (IsNaN(accValue)) {
     return;
+}
 
   g_value_init (value, G_TYPE_DOUBLE);
   g_value_set_double (value, accValue);
@@ -52,8 +53,9 @@ getMaximumValueCB(AtkValue *obj, GValue *value)
 
   memset(value,  0, sizeof (GValue));
   double accValue = accWrap ? accWrap->MaxValue() : proxy->MaxValue();
-  if (IsNaN(accValue))
+  if (IsNaN(accValue)) {
     return;
+}
 
   g_value_init(value, G_TYPE_DOUBLE);
   g_value_set_double(value, accValue);
@@ -73,8 +75,9 @@ getMinimumValueCB(AtkValue *obj, GValue *value)
 
   memset(value,  0, sizeof (GValue));
   double accValue = accWrap ? accWrap->MinValue() : proxy->MinValue();
-  if (IsNaN(accValue))
+  if (IsNaN(accValue)) {
     return;
+}
 
   g_value_init(value, G_TYPE_DOUBLE);
   g_value_set_double(value, accValue);
@@ -94,8 +97,9 @@ getMinimumIncrementCB(AtkValue *obj, GValue *minimumIncrement)
 
   memset(minimumIncrement,  0, sizeof (GValue));
   double accValue = accWrap ? accWrap->Step() : proxy->Step();
-  if (IsNaN(accValue))
+  if (IsNaN(accValue)) {
     accValue = 0; // zero if the minimum increment is undefined
+}
 
   g_value_init(minimumIncrement, G_TYPE_DOUBLE);
   g_value_set_double(minimumIncrement, accValue);
@@ -122,8 +126,9 @@ void
 valueInterfaceInitCB(AtkValueIface* aIface)
 {
   NS_ASSERTION(aIface, "Invalid aIface");
-  if (MOZ_UNLIKELY(!aIface))
+  if (MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   aIface->get_current_value = getCurrentValueCB;
   aIface->get_maximum_value = getMaximumValueCB;

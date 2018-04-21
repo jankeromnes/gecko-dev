@@ -570,12 +570,15 @@ int cubeb_enumerate_devices(cubeb * context,
                             cubeb_device_collection * collection)
 {
   int rv;
-  if ((devtype & (CUBEB_DEVICE_TYPE_INPUT | CUBEB_DEVICE_TYPE_OUTPUT)) == 0)
+  if ((devtype & (CUBEB_DEVICE_TYPE_INPUT | CUBEB_DEVICE_TYPE_OUTPUT)) == 0) {
     return CUBEB_ERROR_INVALID_PARAMETER;
-  if (collection == NULL)
+}
+  if (collection == NULL) {
     return CUBEB_ERROR_INVALID_PARAMETER;
-  if (!context->ops->enumerate_devices)
+}
+  if (!context->ops->enumerate_devices) {
     return CUBEB_ERROR_NOT_SUPPORTED;
+}
 
   rv = context->ops->enumerate_devices(context, devtype, collection);
 
@@ -593,14 +596,17 @@ int cubeb_device_collection_destroy(cubeb * context,
 {
   int r;
 
-  if (context == NULL || collection == NULL)
+  if (context == NULL || collection == NULL) {
     return CUBEB_ERROR_INVALID_PARAMETER;
+}
 
-  if (!context->ops->device_collection_destroy)
+  if (!context->ops->device_collection_destroy) {
     return CUBEB_ERROR_NOT_SUPPORTED;
+}
 
-  if (!collection->device)
+  if (!collection->device) {
     return CUBEB_OK;
+}
 
   r = context->ops->device_collection_destroy(context, collection);
   if (r == CUBEB_OK) {
@@ -616,8 +622,9 @@ int cubeb_register_device_collection_changed(cubeb * context,
                                              cubeb_device_collection_changed_callback callback,
                                              void * user_ptr)
 {
-  if (context == NULL || (devtype & (CUBEB_DEVICE_TYPE_INPUT | CUBEB_DEVICE_TYPE_OUTPUT)) == 0)
+  if (context == NULL || (devtype & (CUBEB_DEVICE_TYPE_INPUT | CUBEB_DEVICE_TYPE_OUTPUT)) == 0) {
     return CUBEB_ERROR_INVALID_PARAMETER;
+}
 
   if (!context->ops->register_device_collection_changed) {
     return CUBEB_ERROR_NOT_SUPPORTED;

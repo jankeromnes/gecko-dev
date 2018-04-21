@@ -34,12 +34,13 @@ static const uint8_t update_bits[255] = {
 #define MIN_DELP_BITS 5
 
 static int recenter_nonneg(int v, int m) {
-  if (v > (m << 1))
+  if (v > (m << 1)) {
     return v;
-  else if (v >= m)
+  } else if (v >= m) {
     return ((v - m) << 1);
-  else
+  } else {
     return ((m - v) << 1) - 1;
+}
 }
 
 static int remap_prob(int v, int m) {
@@ -67,10 +68,11 @@ static int remap_prob(int v, int m) {
   };
   v--;
   m--;
-  if ((m << 1) <= MAX_PROB)
+  if ((m << 1) <= MAX_PROB) {
     i = recenter_nonneg(v, m) - 1;
-  else
+  } else {
     i = recenter_nonneg(MAX_PROB - 1 - v, MAX_PROB - 1 - m) - 1;
+}
 
   i = map_table[i];
   return i;

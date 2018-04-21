@@ -148,8 +148,9 @@ U_CAPI UNumberFormat* U_EXPORT2
 unum_clone(const UNumberFormat *fmt,
        UErrorCode *status)
 {
-    if(U_FAILURE(*status))
+    if(U_FAILURE(*status)) {
         return 0;
+}
     
     Format *res = 0;
     const NumberFormat* nf = reinterpret_cast<const NumberFormat*>(fmt);
@@ -189,8 +190,9 @@ unum_formatInt64(const UNumberFormat* fmt,
         UFieldPosition *pos,
         UErrorCode*     status)
 {
-    if(U_FAILURE(*status))
+    if(U_FAILURE(*status)) {
         return -1;
+}
     
     UnicodeString res;
     if(!(result==NULL && resultLength==0)) {
@@ -201,8 +203,9 @@ unum_formatInt64(const UNumberFormat* fmt,
     
     FieldPosition fp;
     
-    if(pos != 0)
+    if(pos != 0) {
         fp.setField(pos->field);
+}
     
     ((const NumberFormat*)fmt)->format(number, res, fp, *status);
 
@@ -223,7 +226,8 @@ unum_formatDouble(    const    UNumberFormat*  fmt,
             UErrorCode*     status)
 {
  
-  if(U_FAILURE(*status)) return -1;
+  if(U_FAILURE(*status)) { return -1;
+}
 
   UnicodeString res;
   if(!(result==NULL && resultLength==0)) {
@@ -234,8 +238,9 @@ unum_formatDouble(    const    UNumberFormat*  fmt,
 
   FieldPosition fp;
   
-  if(pos != 0)
+  if(pos != 0) {
     fp.setField(pos->field);
+}
   
   ((const NumberFormat*)fmt)->format(number, res, fp, *status);
   
@@ -255,8 +260,9 @@ unum_formatDoubleForFields(const UNumberFormat* format,
                            UFieldPositionIterator* fpositer,
                            UErrorCode* status)
 {
-    if (U_FAILURE(*status))
+    if (U_FAILURE(*status)) {
         return -1;
+}
 
     if (result == NULL ? resultLength != 0 : resultLength < 0) {
         *status = U_ILLEGAL_ARGUMENT_ERROR;
@@ -327,7 +333,8 @@ unum_formatDoubleCurrency(const UNumberFormat* fmt,
                           int32_t resultLength,
                           UFieldPosition* pos, /* ignored if 0 */
                           UErrorCode* status) {
-    if (U_FAILURE(*status)) return -1;
+    if (U_FAILURE(*status)) { return -1;
+}
 
     UnicodeString res;
     if (!(result==NULL && resultLength==0)) {
@@ -365,14 +372,16 @@ parseRes(Formattable& res,
          int32_t         *parsePos /* 0 = start */,
          UErrorCode      *status)
 {
-    if(U_FAILURE(*status))
+    if(U_FAILURE(*status)) {
         return;
+}
     
     const UnicodeString src((UBool)(textLength == -1), text, textLength);
     ParsePosition pp;
     
-    if(parsePos != 0)
+    if(parsePos != 0) {
         pp.setIndex(*parsePos);
+}
     
     ((const NumberFormat*)fmt)->parse(src, res, pp);
     
@@ -621,8 +630,9 @@ unum_getTextAttribute(const UNumberFormat*  fmt,
             int32_t                         resultLength,
             UErrorCode*                     status)
 {
-    if(U_FAILURE(*status))
+    if(U_FAILURE(*status)) {
         return -1;
+}
 
     UnicodeString res;
     if(!(result==NULL && resultLength==0)) {
@@ -690,8 +700,9 @@ unum_setTextAttribute(    UNumberFormat*                    fmt,
             int32_t                            newValueLength,
             UErrorCode                        *status)
 {
-    if(U_FAILURE(*status))
+    if(U_FAILURE(*status)) {
         return;
+}
 
     UnicodeString val(newValue, newValueLength);
     NumberFormat* nf = reinterpret_cast<NumberFormat*>(fmt);
@@ -744,8 +755,9 @@ unum_toPattern(    const    UNumberFormat*          fmt,
         int32_t                 resultLength,
         UErrorCode*             status)
 {
-    if(U_FAILURE(*status))
+    if(U_FAILURE(*status)) {
         return -1;
+}
     
     UnicodeString pat;
     if(!(result==NULL && resultLength==0)) {
@@ -757,10 +769,11 @@ unum_toPattern(    const    UNumberFormat*          fmt,
     const NumberFormat* nf = reinterpret_cast<const NumberFormat*>(fmt);
     const DecimalFormat* df = dynamic_cast<const DecimalFormat*>(nf);
     if (df != NULL) {
-      if(isPatternLocalized)
+      if(isPatternLocalized) {
         df->toLocalizedPattern(pat);
-      else
+      } else {
         df->toPattern(pat);
+}
     } else {
       const RuleBasedNumberFormat* rbnf = dynamic_cast<const RuleBasedNumberFormat*>(nf);
       U_ASSERT(rbnf != NULL);
@@ -901,7 +914,8 @@ unum_parseToUFormattable(const UNumberFormat* fmt,
                          int32_t* parsePos, /* 0 = start */
                          UErrorCode* status) {
   UFormattable *newFormattable = NULL;
-  if (U_FAILURE(*status)) return result;
+  if (U_FAILURE(*status)) { return result;
+}
   if (fmt == NULL || (text==NULL && textLength!=0)) {
     *status = U_ILLEGAL_ARGUMENT_ERROR;
     return result;
@@ -936,8 +950,9 @@ unum_formatUFormattable(const UNumberFormat* fmt,
 
     FieldPosition fp;
 
-    if(pos != 0)
+    if(pos != 0) {
         fp.setField(pos->field);
+}
 
     ((const NumberFormat*)fmt)->format(*(Formattable::fromUFormattable(number)), res, fp, *status);
 

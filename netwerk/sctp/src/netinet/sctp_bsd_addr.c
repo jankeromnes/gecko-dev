@@ -658,9 +658,10 @@ sctp_init_ifns_for_vrf(int vrfid)
 void
 sctp_init_vrf_list(int vrfid)
 {
-	if (vrfid > SCTP_MAX_VRF_ID)
+	if (vrfid > SCTP_MAX_VRF_ID) {
 		/* can't do that */
 		return;
+}
 
 	/* Don't care about return here */
 	(void)sctp_allocate_vrf(vrfid);
@@ -823,10 +824,11 @@ sctp_get_mbuf_for_msg(unsigned int space_needed, int want_header,
 	if (m == NULL) {
 		return (NULL);
 	}
-	if (allonebuf == 0)
+	if (allonebuf == 0) {
 		mbuf_threshold = SCTP_BASE_SYSCTL(sctp_mbuf_threshold_count);
-	else
+	} else {
 		mbuf_threshold = 1;
+}
 
 
 	if ((int)space_needed > (((mbuf_threshold - 1) * MLEN) + MHLEN)) {

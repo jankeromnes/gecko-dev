@@ -43,9 +43,10 @@ int sb_all_skip(const AV1_COMMON *const cm, int mi_row, int mi_col) {
 static int is_8x8_block_skip(MODE_INFO **grid, int mi_row, int mi_col,
                              int mi_stride) {
   int is_skip = 1;
-  for (int r = 0; r < mi_size_high[BLOCK_8X8]; ++r)
-    for (int c = 0; c < mi_size_wide[BLOCK_8X8]; ++c)
+  for (int r = 0; r < mi_size_high[BLOCK_8X8]; ++r) {
+    for (int c = 0; c < mi_size_wide[BLOCK_8X8]; ++c) {
       is_skip &= grid[(mi_row + r) * mi_stride + (mi_col + c)]->mbmi.skip;
+}
 
   return is_skip;
 }
@@ -189,7 +190,8 @@ void av1_cdef_frame(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
     ydec[pli] = xd->plane[pli].subsampling_y;
     mi_wide_l2[pli] = MI_SIZE_LOG2 - xd->plane[pli].subsampling_x;
     mi_high_l2[pli] = MI_SIZE_LOG2 - xd->plane[pli].subsampling_y;
-    if (xdec[pli] != ydec[pli]) nplanes = 1;
+    if (xdec[pli] != ydec[pli]) { nplanes = 1;
+}
   }
   stride = (cm->mi_cols << MI_SIZE_LOG2) + 2 * CDEF_HBORDER;
   for (pli = 0; pli < nplanes; pli++) {
@@ -221,7 +223,8 @@ void av1_cdef_frame(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
         cdef_left = 0;
         continue;
       }
-      if (!cdef_left) cstart = -CDEF_HBORDER;
+      if (!cdef_left) { cstart = -CDEF_HBORDER;
+}
       nhb = AOMMIN(MI_SIZE_64X64, cm->mi_cols - MI_SIZE_64X64 * fbc);
       nvb = AOMMIN(MI_SIZE_64X64, cm->mi_rows - MI_SIZE_64X64 * fbr);
       int tile_top, tile_left, tile_bottom, tile_right;
@@ -232,18 +235,20 @@ void av1_cdef_frame(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
       tile_left = boundary_tl & TILE_LEFT_BOUNDARY;
 
       if (fbr != nvfb - 1 &&
-          (&cm->mi[mi_idx + (MI_SIZE_64X64 - 1) * cm->mi_stride]))
+          (&cm->mi[mi_idx + (MI_SIZE_64X64 - 1) * cm->mi_stride])) {
         tile_bottom = cm->mi[mi_idx + (MI_SIZE_64X64 - 1) * cm->mi_stride]
                           .mbmi.boundary_info &
                       TILE_BOTTOM_BOUNDARY;
-      else
+      } else {
         tile_bottom = 1;
+}
 
-      if (fbc != nhfb - 1 && (&cm->mi[mi_idx + MI_SIZE_64X64 - 1]))
+      if (fbc != nhfb - 1 && (&cm->mi[mi_idx + MI_SIZE_64X64 - 1])) {
         tile_right = cm->mi[mi_idx + MI_SIZE_64X64 - 1].mbmi.boundary_info &
                      TILE_RIGHT_BOUNDARY;
-      else
+      } else {
         tile_right = 1;
+}
 
       const int mbmi_cdef_strength =
           cm->mi_grid_visible[MI_SIZE_64X64 * fbr * cm->mi_stride +
@@ -284,22 +289,25 @@ void av1_cdef_frame(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
         int vsize = nvb << mi_high_l2[pli];
 
         if (pli) {
-          if (chroma_cdef)
+          if (chroma_cdef) {
             level = uv_level;
-          else
+          } else {
             level = 0;
+}
           sec_strength = uv_sec_strength;
         }
 
-        if (fbc == nhfb - 1)
+        if (fbc == nhfb - 1) {
           cend = hsize;
-        else
+        } else {
           cend = hsize + CDEF_HBORDER;
+}
 
-        if (fbr == nvfb - 1)
+        if (fbr == nvfb - 1) {
           rend = vsize;
-        else
+        } else {
           rend = vsize + CDEF_VBORDER;
+}
 
         coffset = fbc * MI_SIZE_64X64 << mi_wide_l2[pli];
         if (fbc == nhfb - 1) {

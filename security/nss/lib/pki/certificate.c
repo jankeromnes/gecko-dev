@@ -64,12 +64,14 @@ nssCertificate_Create(
         !rvCert->issuer.size ||
         !rvCert->serial.data ||
         !rvCert->serial.size) {
-        if (mark)
+        if (mark) {
             nssArena_Release(arena, mark);
+}
         return (NSSCertificate *)NULL;
     }
-    if (mark)
+    if (mark) {
         nssArena_Unmark(arena, mark);
+}
     return rvCert;
 }
 
@@ -363,10 +365,12 @@ find_cert_issuer(
     NSSCertificate **tdIssuers = NULL;
     NSSCertificate *issuer = NULL;
 
-    if (!cc)
+    if (!cc) {
         cc = c->object.cryptoContext;
-    if (!td)
+}
+    if (!td) {
         td = NSSCertificate_GetTrustDomain(c);
+}
     arena = nssArena_Create();
     if (!arena) {
         return (NSSCertificate *)NULL;
@@ -378,12 +382,13 @@ find_cert_issuer(
                                                                0,
                                                                arena);
     }
-    if (td)
+    if (td) {
         tdIssuers = nssTrustDomain_FindCertificatesBySubject(td,
                                                              &c->issuer,
                                                              NULL,
                                                              0,
                                                              arena);
+}
     certs = nssCertificateArray_Join(ccIssuers, tdIssuers);
     if (certs) {
         nssDecodedCert *dc = NULL;
@@ -440,11 +445,13 @@ nssCertificate_BuildChain(
     /* bump the usage up to CA level */
     issuerUsage.nss3lookingForCA = PR_TRUE;
     collection = nssCertificateCollection_Create(td, NULL);
-    if (!collection)
+    if (!collection) {
         goto loser;
+}
     st = nssPKIObjectCollection_AddObject(collection, (nssPKIObject *)c);
-    if (st != PR_SUCCESS)
+    if (st != PR_SUCCESS) {
         goto loser;
+}
     for (rvCount = 1; (!rvLimit || rvCount < rvLimit); ++rvCount) {
         CERTCertificate *cCert = STAN_GetCERTCertificate(c);
         if (cCert->isRoot) {
@@ -460,8 +467,9 @@ nssCertificate_BuildChain(
         }
         st = nssPKIObjectCollection_AddObject(collection, (nssPKIObject *)c);
         nssCertificate_Destroy(c); /* collection has it */
-        if (st != PR_SUCCESS)
+        if (st != PR_SUCCESS) {
             goto loser;
+}
     }
     rvChain = nssPKIObjectCollection_GetCertificates(collection,
                                                      rvOpt,
@@ -469,18 +477,22 @@ nssCertificate_BuildChain(
                                                      arenaOpt);
     if (rvChain) {
         nssPKIObjectCollection_Destroy(collection);
-        if (statusOpt)
+        if (statusOpt) {
             *statusOpt = ret;
-        if (ret != PR_SUCCESS)
+}
+        if (ret != PR_SUCCESS) {
             nss_SetError(NSS_ERROR_CERTIFICATE_ISSUER_NOT_FOUND);
+}
         return rvChain;
     }
 
 loser:
-    if (collection)
+    if (collection) {
         nssPKIObjectCollection_Destroy(collection);
-    if (statusOpt)
+}
+    if (statusOpt) {
         *statusOpt = PR_FAILURE;
+}
     nss_SetError(NSS_ERROR_CERTIFICATE_ISSUER_NOT_FOUND);
     return rvChain;
 }
@@ -829,10 +841,11 @@ nssSMIMEProfile_Create(
     }
     return rvProfile;
 loser:
-    if (object)
+    if (object) {
         nssPKIObject_Destroy(object);
-    else if (arena)
+    } else if (arena) {
         nssArena_Destroy(arena);
+}
     return (nssSMIMEProfile *)NULL;
 }
 

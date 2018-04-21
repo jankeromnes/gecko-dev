@@ -167,8 +167,9 @@ uloc_getAvailable(int32_t offset)
     
     _load_installedLocales();
     
-    if (offset > _installedLocalesCount)
+    if (offset > _installedLocalesCount) {
         return NULL;
+}
     return _installedLocales[offset];
 }
 

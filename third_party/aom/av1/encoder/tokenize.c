@@ -323,8 +323,9 @@ static INLINE void add_token(TOKENEXTRA **t,
       const int symb = 2 * AOMMIN(token, TWO_TOKEN) - eob_val + first_val;
       update_cdf(*head_cdf, symb, HEAD_TOKENS + first_val);
     }
-    if (token > ONE_TOKEN)
+    if (token > ONE_TOKEN) {
       update_cdf(*tail_cdf, token - TWO_TOKEN, TAIL_TOKENS);
+}
   }
 }
 #endif  // !CONFIG_PVQ || CONFIG_VAR_TX
@@ -363,7 +364,8 @@ static int cost_and_tokenize_map(Av1ColorMapParam *param, TOKENEXTRA **t,
       }
     }
   }
-  if (calc_rate) return this_rate;
+  if (calc_rate) { return this_rate;
+}
   return 0;
 }
 
@@ -544,9 +546,10 @@ static void tokenize_b(int plane, int block, int blk_row, int blk_col,
     av1_tokenize_color_map(x, plane, block, &t, plane_bsize, tx_size, MRC_MAP);
 #endif  // CONFIG_MRC_TX && SIGNAL_ANY_MRC_MASK
 
-  if (eob == 0)
+  if (eob == 0) {
     add_token(&t, &coef_tail_cdfs[band[c]][pt], &coef_head_cdfs[band[c]][pt], 1,
               1, 0, BLOCK_Z_TOKEN);
+}
 
   while (c < eob) {
     int v = qcoeff[scan[c]];
@@ -630,7 +633,8 @@ void tokenize_vartx(ThreadData *td, TOKENEXTRA **t, RUN_TYPE dry_run,
   const int max_blocks_wide = max_block_wide(xd, plane_bsize, plane);
   TX_SIZE plane_tx_size;
 
-  if (blk_row >= max_blocks_high || blk_col >= max_blocks_wide) return;
+  if (blk_row >= max_blocks_high || blk_col >= max_blocks_wide) { return;
+}
 
   plane_tx_size =
       plane ? uv_txsize_lookup[bsize][mbmi->inter_tx_size[tx_row][tx_col]][0][0]
@@ -650,13 +654,14 @@ void tokenize_vartx(ThreadData *td, TOKENEXTRA **t, RUN_TYPE dry_run,
       assert(0);
     }
 #else
-    if (!dry_run)
+    if (!dry_run) {
       tokenize_b(plane, block, blk_row, blk_col, plane_bsize, tx_size, arg);
-    else if (dry_run == DRY_RUN_NORMAL)
+    } else if (dry_run == DRY_RUN_NORMAL) {
       set_entropy_context_b(plane, block, blk_row, blk_col, plane_bsize,
                             tx_size, arg);
-    else if (dry_run == DRY_RUN_COSTCOEFFS)
+    } else if (dry_run == DRY_RUN_COSTCOEFFS) {
       cost_coeffs_b(plane, block, blk_row, blk_col, plane_bsize, tx_size, arg);
+}
 #endif
   } else {
 #if CONFIG_RECT_TX_EXT
@@ -687,7 +692,8 @@ void tokenize_vartx(ThreadData *td, TOKENEXTRA **t, RUN_TYPE dry_run,
 
       int step = tx_size_wide_unit[sub_txs] * tx_size_high_unit[sub_txs];
 
-      if (offsetr >= max_blocks_high || offsetc >= max_blocks_wide) continue;
+      if (offsetr >= max_blocks_high || offsetc >= max_blocks_wide) { continue;
+}
 
       tokenize_vartx(td, t, dry_run, sub_txs, plane_bsize, offsetr, offsetc,
                      block, plane, arg);
@@ -713,21 +719,25 @@ void av1_tokenize_sb_vartx(const AV1_COMP *cpi, ThreadData *td, TOKENEXTRA **t,
       !segfeature_active(&cm->seg, mbmi->segment_id, SEG_LVL_SKIP);
   struct tokenize_b_args arg = { cpi, td, t, 0 };
   int plane;
-  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) return;
+  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) { return;
+}
 
   if (mbmi->skip) {
-    if (!dry_run) td->counts->skip[ctx][1] += skip_inc;
+    if (!dry_run) { td->counts->skip[ctx][1] += skip_inc;
+}
     av1_reset_skip_context(xd, mi_row, mi_col, bsize);
 #if !CONFIG_LV_MAP
-    if (dry_run) *t = t_backup;
+    if (dry_run) { *t = t_backup;
+}
 #endif
     return;
   }
 
-  if (!dry_run) td->counts->skip[ctx][0] += skip_inc;
+  if (!dry_run) { td->counts->skip[ctx][0] += skip_inc;
 #if !CONFIG_LV_MAP
-  else
+  } else {
     *t = t_backup;
+}
 #endif
 
   for (plane = 0; plane < MAX_MB_PLANE; ++plane) {
@@ -792,7 +802,8 @@ void av1_tokenize_sb_vartx(const AV1_COMP *cpi, ThreadData *td, TOKENEXTRA **t,
     }
 #endif
   }
-  if (rate) *rate += arg.this_rate;
+  if (rate) { *rate += arg.this_rate;
+}
 }
 #endif  // CONFIG_VAR_TX
 
@@ -808,7 +819,8 @@ void av1_tokenize_sb(const AV1_COMP *cpi, ThreadData *td, TOKENEXTRA **t,
       !segfeature_active(&cm->seg, mbmi->segment_id, SEG_LVL_SKIP);
   struct tokenize_b_args arg = { cpi, td, t, 0 };
   if (mbmi->skip) {
-    if (!dry_run) td->counts->skip[ctx][1] += skip_inc;
+    if (!dry_run) { td->counts->skip[ctx][1] += skip_inc;
+}
     av1_reset_skip_context(xd, mi_row, mi_col, bsize);
     return;
   }
@@ -852,8 +864,9 @@ void av1_tokenize_sb(const AV1_COMP *cpi, ThreadData *td, TOKENEXTRA **t,
 #if CONFIG_CB4X4
       if (!is_chroma_reference(mi_row, mi_col, bsize,
                                xd->plane[plane].subsampling_x,
-                               xd->plane[plane].subsampling_y))
+                               xd->plane[plane].subsampling_y)) {
         continue;
+}
 #else
       (void)mi_row;
       (void)mi_col;
@@ -867,8 +880,9 @@ void av1_tokenize_sb(const AV1_COMP *cpi, ThreadData *td, TOKENEXTRA **t,
 #if CONFIG_CB4X4
       if (!is_chroma_reference(mi_row, mi_col, bsize,
                                xd->plane[plane].subsampling_x,
-                               xd->plane[plane].subsampling_y))
+                               xd->plane[plane].subsampling_y)) {
         continue;
+}
 #else
       (void)mi_row;
       (void)mi_col;
@@ -879,7 +893,8 @@ void av1_tokenize_sb(const AV1_COMP *cpi, ThreadData *td, TOKENEXTRA **t,
   }
 #endif  // !CONFIG_PVQ
 
-  if (rate) *rate += arg.this_rate;
+  if (rate) { *rate += arg.this_rate;
+}
 }
 
 #if CONFIG_SUPERTX

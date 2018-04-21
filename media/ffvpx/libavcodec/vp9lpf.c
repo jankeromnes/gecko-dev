@@ -70,8 +70,9 @@ static av_always_inline void filter_plane_cols(VP9Context *s, int col, int ss_h,
                 }
             }
             if (ss_h) {
-                if (x & 0xAA)
+                if (x & 0xAA) {
                     l += 2;
+}
             } else {
                 if (hm13 & x) {
                     int L = *l, H = L >> 4;
@@ -167,8 +168,9 @@ static av_always_inline void filter_plane_rows(VP9Context *s, int row, int ss_h,
             }
         }
         if (ss_v) {
-            if (y & 1)
+            if (y & 1) {
                 lvl += 16;
+}
         } else {
             lvl += 8;
         }

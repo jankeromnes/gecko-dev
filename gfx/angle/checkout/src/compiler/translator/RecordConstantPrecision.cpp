@@ -122,18 +122,21 @@ bool RecordConstantPrecisionTraverser::operandAffectsParentOperationPrecision(TI
 
 void RecordConstantPrecisionTraverser::visitConstantUnion(TIntermConstantUnion *node)
 {
-    if (mFoundHigherPrecisionConstant)
+    if (mFoundHigherPrecisionConstant) {
         return;
+}
 
     // If the constant has lowp or undefined precision, it can't increase the precision of consuming
     // operations.
-    if (node->getPrecision() < EbpMedium)
+    if (node->getPrecision() < EbpMedium) {
         return;
+}
 
     // It's possible the node has no effect on the precision of the consuming expression, depending
     // on the consuming expression, and the precision of the other parameters of the expression.
-    if (!operandAffectsParentOperationPrecision(node))
+    if (!operandAffectsParentOperationPrecision(node)) {
         return;
+}
 
     // Make the constant a precision-qualified named variable to make sure it affects the precision
     // of the consuming expression.
@@ -159,8 +162,9 @@ void RecordConstantPrecision(TIntermNode *root, TSymbolTable *symbolTable)
     {
         traverser.nextIteration();
         root->traverse(&traverser);
-        if (traverser.foundHigherPrecisionConstant())
+        if (traverser.foundHigherPrecisionConstant()) {
             traverser.updateTree();
+}
     } while (traverser.foundHigherPrecisionConstant());
 }
 

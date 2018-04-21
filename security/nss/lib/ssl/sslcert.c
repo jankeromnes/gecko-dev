@@ -120,11 +120,13 @@ ssl_CopyServerCert(const sslServerCert *oc)
 
     if (oc->serverCert && oc->serverCertChain) {
         sc->serverCert = CERT_DupCertificate(oc->serverCert);
-        if (!sc->serverCert)
+        if (!sc->serverCert) {
             goto loser;
+}
         sc->serverCertChain = CERT_DupCertList(oc->serverCertChain);
-        if (!sc->serverCertChain)
+        if (!sc->serverCertChain) {
             goto loser;
+}
     } else {
         sc->serverCert = NULL;
         sc->serverCertChain = NULL;
@@ -132,8 +134,9 @@ ssl_CopyServerCert(const sslServerCert *oc)
 
     if (oc->serverKeyPair) {
         sc->serverKeyPair = ssl_GetKeyPairRef(oc->serverKeyPair);
-        if (!sc->serverKeyPair)
+        if (!sc->serverKeyPair) {
             goto loser;
+}
     } else {
         sc->serverKeyPair = NULL;
     }
@@ -141,15 +144,17 @@ ssl_CopyServerCert(const sslServerCert *oc)
 
     if (oc->certStatusArray) {
         sc->certStatusArray = SECITEM_DupArray(NULL, oc->certStatusArray);
-        if (!sc->certStatusArray)
+        if (!sc->certStatusArray) {
             goto loser;
+}
     } else {
         sc->certStatusArray = NULL;
     }
 
     if (SECITEM_CopyItem(NULL, &sc->signedCertTimestamps,
-                         &oc->signedCertTimestamps) != SECSuccess)
+                         &oc->signedCertTimestamps) != SECSuccess) {
         goto loser;
+}
     return sc;
 loser:
     ssl_FreeServerCert(sc);
@@ -896,8 +901,9 @@ NSS_FindCertKEAType(CERTCertificate *cert)
 {
     int tag;
 
-    if (!cert)
+    if (!cert) {
         return ssl_kea_null;
+}
 
     tag = SECOID_GetAlgorithmTag(&(cert->subjectPublicKeyInfo.algorithm));
     switch (tag) {

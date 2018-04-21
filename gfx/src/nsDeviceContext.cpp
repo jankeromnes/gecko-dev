@@ -84,8 +84,9 @@ nsFontCache::Init(nsDeviceContext* aContext)
     // register as a memory-pressure observer to free font resources
     // in low-memory situations.
     nsCOMPtr<nsIObserverService> obs = GetObserverService();
-    if (obs)
+    if (obs) {
         obs->AddObserver(this, "memory-pressure", false);
+}
 
     mLocaleLanguage = nsLanguageAtomService::GetService()->GetLocaleLanguage();
     if (!mLocaleLanguage) {
@@ -97,16 +98,18 @@ void
 nsFontCache::Destroy()
 {
     nsCOMPtr<nsIObserverService> obs = GetObserverService();
-    if (obs)
+    if (obs) {
         obs->RemoveObserver(this, "memory-pressure");
+}
     Flush();
 }
 
 NS_IMETHODIMP
 nsFontCache::Observe(nsISupports*, const char* aTopic, const char16_t*)
 {
-    if (!nsCRT::strcmp(aTopic, "memory-pressure"))
+    if (!nsCRT::strcmp(aTopic, "memory-pressure")) {
         Compact();
+}
     return NS_OK;
 }
 
@@ -247,8 +250,9 @@ nsDeviceContext::GetMetricsFor(const nsFont& aFont,
 nsresult
 nsDeviceContext::FlushFontCache(void)
 {
-    if (mFontCache)
+    if (mFontCache) {
         mFontCache->Flush();
+}
     return NS_OK;
 }
 
@@ -349,14 +353,16 @@ nsDeviceContext::Init(nsIWidget *aWidget)
 #endif
 
     nsresult rv = NS_OK;
-    if (mScreenManager && mWidget == aWidget)
+    if (mScreenManager && mWidget == aWidget) {
         return rv;
+}
 
     mWidget = aWidget;
     SetDPI();
 
-    if (mScreenManager)
+    if (mScreenManager) {
         return rv;
+}
 
     mScreenManager = do_GetService("@mozilla.org/gfx/screenmanager;1", &rv);
 
@@ -465,8 +471,9 @@ nsDeviceContext::GetRect(nsRect &aRect)
 {
     if (IsPrinterContext()) {
         aRect.SetRect(0, 0, mWidth, mHeight);
-    } else
+    } else {
         ComputeFullAreaUsingScreen ( &aRect );
+}
 
     return NS_OK;
 }
@@ -477,8 +484,9 @@ nsDeviceContext::GetClientRect(nsRect &aRect)
     if (IsPrinterContext()) {
         aRect.SetRect(0, 0, mWidth, mHeight);
     }
-    else
+    else {
         ComputeClientRectUsingScreen(&aRect);
+}
 
     return NS_OK;
 }
@@ -552,8 +560,9 @@ nsDeviceContext::EndDocument(void)
         mPrintTarget->Finish();
     }
 
-    if (mDeviceContextSpec)
+    if (mDeviceContextSpec) {
         mDeviceContextSpec->EndDocument();
+}
 
     mPrintTarget = nullptr;
 
@@ -571,8 +580,9 @@ nsDeviceContext::AbortDocument(void)
 
     mIsCurrentlyPrintingDoc = false;
 
-    if (mDeviceContextSpec)
+    if (mDeviceContextSpec) {
         mDeviceContextSpec->EndDocument();
+}
 
     mPrintTarget = nullptr;
 
@@ -585,10 +595,12 @@ nsDeviceContext::BeginPage(void)
 {
     nsresult rv = NS_OK;
 
-    if (mDeviceContextSpec)
+    if (mDeviceContextSpec) {
         rv = mDeviceContextSpec->BeginPage();
+}
 
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     return mPrintTarget->BeginPage();
 }
@@ -598,8 +610,9 @@ nsDeviceContext::EndPage(void)
 {
     nsresult rv = mPrintTarget->EndPage();
 
-    if (mDeviceContextSpec)
+    if (mDeviceContextSpec) {
         mDeviceContextSpec->EndPage();
+}
 
     return rv;
 }

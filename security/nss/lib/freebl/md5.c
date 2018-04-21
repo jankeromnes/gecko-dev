@@ -469,8 +469,9 @@ MD5_Update(MD5Context *cx, const unsigned char *input, unsigned int inputLen)
     }
 
     /* Tail of message (message bytes mod 64). */
-    if (inputLen)
+    if (inputLen) {
         memcpy(cx->inBuf, input, inputLen);
+}
 }
 
 static const unsigned char padbytes[] = {
@@ -526,8 +527,9 @@ MD5_End(MD5Context *cx, unsigned char *digest,
     md5_compress(cx, cx->u.w);
 
     /* Copy the resulting values out of the chain variables into return buf. */
-    if (digestLen)
+    if (digestLen) {
         *digestLen = MD5_HASH_LEN;
+}
 #ifndef IS_LITTLE_ENDIAN
     cx->cv[0] = lendian(cx->cv[0]);
     cx->cv[1] = lendian(cx->cv[1]);
@@ -559,8 +561,9 @@ MD5_EndRaw(MD5Context *cx, unsigned char *digest,
     cv[3] = lendian(cv[3]);
 #endif
     memcpy(digest, cv, MD5_HASH_LEN);
-    if (digestLen)
+    if (digestLen) {
         *digestLen = MD5_HASH_LEN;
+}
 }
 
 unsigned int
@@ -580,8 +583,9 @@ MD5Context *
 MD5_Resurrect(unsigned char *space, void *arg)
 {
     MD5Context *cx = MD5_NewContext();
-    if (cx)
+    if (cx) {
         memcpy(cx, space, sizeof(*cx));
+}
     return cx;
 }
 

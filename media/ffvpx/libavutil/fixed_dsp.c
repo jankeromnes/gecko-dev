@@ -128,8 +128,9 @@ static int scalarproduct_fixed_c(const int *v1, const int *v2, int len)
     int64_t p = 0x40000000;
     int i;
 
-    for (i = 0; i < len; i++)
+    for (i = 0; i < len; i++) {
         p += (int64_t)v1[i] * v2[i];
+}
 
     return (int)(p >> 31);
 }
@@ -149,8 +150,9 @@ AVFixedDSPContext * avpriv_alloc_fixed_dsp(int bit_exact)
 {
     AVFixedDSPContext * fdsp = av_malloc(sizeof(AVFixedDSPContext));
 
-    if (!fdsp)
+    if (!fdsp) {
         return NULL;
+}
 
     fdsp->vector_fmul_window_scaled = vector_fmul_window_scaled_c;
     fdsp->vector_fmul_window = vector_fmul_window_c;
@@ -160,8 +162,9 @@ AVFixedDSPContext * avpriv_alloc_fixed_dsp(int bit_exact)
     fdsp->butterflies_fixed = butterflies_fixed_c;
     fdsp->scalarproduct_fixed = scalarproduct_fixed_c;
 
-    if (ARCH_X86)
+    if (ARCH_X86) {
         ff_fixed_dsp_init_x86(fdsp);
+}
 
     return fdsp;
 }

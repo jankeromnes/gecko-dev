@@ -199,7 +199,8 @@ DateFormat::format(const Formattable& obj,
                    FieldPosition& fieldPosition,
                    UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return appendTo;
+    if (U_FAILURE(status)) { return appendTo;
+}
 
     // if the type of the Formattable is double or long, treat it as if it were a Date
     UDate date = 0;
@@ -234,7 +235,8 @@ DateFormat::format(const Formattable& obj,
                    FieldPositionIterator* posIter,
                    UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return appendTo;
+    if (U_FAILURE(status)) { return appendTo;
+}
 
     // if the type of the Formattable is double or long, treat it as if it were a Date
     UDate date = 0;
@@ -360,7 +362,8 @@ UDate
 DateFormat::parse(const UnicodeString& text,
                   UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return 0;
+    if (U_FAILURE(status)) { return 0;
+}
 
     ParsePosition pos(0);
     UDate result = parse(text, pos);
@@ -517,21 +520,24 @@ DateFormat::create(EStyle timeStyle, EStyle dateStyle, const Locale& locale)
     // is it relative?
     if(/*((timeStyle!=UDAT_NONE)&&(timeStyle & UDAT_RELATIVE)) || */((dateStyle!=kNone)&&((dateStyle-kDateOffset) & UDAT_RELATIVE))) {
         RelativeDateFormat *r = new RelativeDateFormat((UDateFormatStyle)timeStyle, (UDateFormatStyle)(dateStyle-kDateOffset), locale, status);
-        if(U_SUCCESS(status)) return r;
+        if(U_SUCCESS(status)) { return r;
+}
         delete r;
         status = U_ZERO_ERROR;
     }
 
     // Try to create a SimpleDateFormat of the desired style.
     SimpleDateFormat *f = new SimpleDateFormat(timeStyle, dateStyle, locale, status);
-    if (U_SUCCESS(status)) return f;
+    if (U_SUCCESS(status)) { return f;
+}
     delete f;
 
     // If that fails, try to create a format using the default pattern and
     // the DateFormatSymbols for this locale.
     status = U_ZERO_ERROR;
     f = new SimpleDateFormat(locale, status);
-    if (U_SUCCESS(status)) return f;
+    if (U_SUCCESS(status)) { return f;
+}
     delete f;
 
     // This should never really happen, because the preceding constructor
@@ -693,8 +699,9 @@ DateFormat::isCalendarLenient() const
 
 void DateFormat::setContext(UDisplayContext value, UErrorCode& status)
 {
-    if (U_FAILURE(status))
+    if (U_FAILURE(status)) {
         return;
+}
     if ( (UDisplayContextType)((uint32_t)value >> 8) == UDISPCTX_TYPE_CAPITALIZATION ) {
         fCapitalizationContext = value;
     } else {
@@ -708,8 +715,9 @@ void DateFormat::setContext(UDisplayContext value, UErrorCode& status)
 
 UDisplayContext DateFormat::getContext(UDisplayContextType type, UErrorCode& status) const
 {
-    if (U_FAILURE(status))
+    if (U_FAILURE(status)) {
         return (UDisplayContext)0;
+}
     if (type != UDISPCTX_TYPE_CAPITALIZATION) {
         status = U_ILLEGAL_ARGUMENT_ERROR;
         return (UDisplayContext)0;

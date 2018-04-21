@@ -314,8 +314,9 @@ generate_h_candidate(SECItem *hit, mp_int *H)
 #else
     rv = RNG_GenerateGlobalRandomBytes(hit->data, hit->len);
 #endif
-    if (rv)
+    if (rv) {
         return SECFailure;
+}
     err = mp_read_unsigned_octets(H, hit->data, hit->len);
     if (err) {
         MP_TO_SEC_ERROR(err);
@@ -386,8 +387,9 @@ addToSeedThenHash(HASH_HashType hashtype,
         return rv;
     }
     rv = HASH_HashBuf(hashtype, hashOutBuf, str.data, str.len); /* hash result */
-    if (str.data)
+    if (str.data) {
         SECITEM_ZfreeItem(&str, PR_FALSE);
+}
     return rv;
 }
 
@@ -413,8 +415,9 @@ makeQfromSeed(
     **/
     CHECK_SEC_OK(SHA1_HashBuf(sha1, seed->data, seed->len));
     CHECK_SEC_OK(addToSeedThenHash(HASH_AlgSHA1, seed, 1, g, sha2));
-    for (i = 0; i < SHA1_LENGTH; ++i)
+    for (i = 0; i < SHA1_LENGTH; ++i) {
         U[i] = sha1[i] ^ sha2[i];
+}
     /* ******************************************************************
     ** Step 3.
     ** "Form Q from U by setting the most signficant bit (the 2**159 bit)
@@ -1100,8 +1103,9 @@ makeGfromH(const mp_int *P, /* input.  */
     CHECK_MPI_OK(mp_init(&exp));
     CHECK_MPI_OK(mp_init(&pm1));
     CHECK_MPI_OK(mp_sub_d(P, 1, &pm1));   /* P - 1            */
-    if (mp_cmp(H, &pm1) >= 0)             /* H >= P-1         */
+    if (mp_cmp(H, &pm1) >= 0) {             /* H >= P-1         */
         CHECK_MPI_OK(mp_sub(H, &pm1, H)); /* H = H mod (P-1)  */
+}
     /* Let b = 2**n (smallest power of 2 greater than P).
     ** Since P-1 >= b/2, and H < b, quotient(H/(P-1)) = 0 or 1
     ** so the above operation safely computes H mod (P-1)
@@ -1418,8 +1422,9 @@ step_5:
     /* ******************************************************************
     ** Step 9. (Step 5 in 186-1) "If q is not prime, goto step 5 (1 in 186-1)."
     */
-    if (passed != SECSuccess)
+    if (passed != SECSuccess) {
         goto step_5;
+}
     /* ******************************************************************
     ** Step 10.
     **      offset = 1;
@@ -1459,8 +1464,9 @@ step_5:
     ** "if p < 2**(L-1), then goto step 11.9. (step 13 in 186-1)"
     */
         CHECK_MPI_OK(mpl_set_bit(&l, (mp_size)(L - 1), 1)); /* l = 2**(L-1) */
-        if (mp_cmp(&P, &l) < 0)
+        if (mp_cmp(&P, &l) < 0) {
             goto step_11_9;
+}
         /************************************************************
     ** Step 11.7 (step 11 in 186-1)
     ** "Perform a robust primality test on p."
@@ -1472,8 +1478,9 @@ step_5:
     ** Step 11.8. "If p is determined to be primed return VALID
         ** values of p, q, seed and counter."
     */
-        if (passed == SECSuccess)
+        if (passed == SECSuccess) {
             break;
+}
     step_11_9:
         /* ******************************************************************
     ** Step 11.9.  "offset = offset + n + 1."
@@ -1486,8 +1493,9 @@ step_5:
     ** NOTE: if counter <= maxCount, then we exited the loop at Step 11.8
     ** and now need to return p,q, seed, and counter.
     */
-    if (counter > maxCount)
+    if (counter > maxCount) {
         goto step_5;
+}
 
 generate_G:
     /* ******************************************************************
@@ -1498,8 +1506,9 @@ generate_G:
      * in FIPA186-3 Appedix A.2.1. For compatibility we maintain
      * this version of the code */
         SECITEM_AllocItem(NULL, &hit, L / 8); /* h is no longer than p */
-        if (!hit.data)
+        if (!hit.data) {
             goto cleanup;
+}
         do {
             /* loop generate h until 1<h<p-1 and (h**[(p-1)/q])mod p > 1 */
             CHECK_SEC_OK(generate_h_candidate(&hit, &H));
@@ -1776,8 +1785,9 @@ PQG_VerifyParams(const PQGParams *params,
     }
 
     /* now check G, skip if don't have a g */
-    if (params->base.len == 0)
+    if (params->base.len == 0) {
         goto cleanup;
+}
 
     /* first Always check that G is OK  FIPS186-3 A.2.2  & A.2.4*/
     /* 1. 2 < G < P-1 */
@@ -1847,8 +1857,9 @@ cleanup:
 void
 PQG_DestroyParams(PQGParams *params)
 {
-    if (params == NULL)
+    if (params == NULL) {
         return;
+}
     if (params->arena != NULL) {
         PORT_FreeArena(params->arena, PR_FALSE); /* don't zero it */
     } else {
@@ -1866,8 +1877,9 @@ PQG_DestroyParams(PQGParams *params)
 void
 PQG_DestroyVerify(PQGVerify *vfy)
 {
-    if (vfy == NULL)
+    if (vfy == NULL) {
         return;
+}
     if (vfy->arena != NULL) {
         PORT_FreeArena(vfy->arena, PR_FALSE); /* don't zero it */
     } else {

@@ -61,8 +61,9 @@ VarT *FindVariable(const ImmutableString &name, std::vector<VarT> *infoList)
     // TODO(zmo): optimize this function.
     for (size_t ii = 0; ii < infoList->size(); ++ii)
     {
-        if (name == (*infoList)[ii].name)
+        if (name == (*infoList)[ii].name) {
             return &((*infoList)[ii]);
+}
     }
 
     return nullptr;

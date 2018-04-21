@@ -1521,30 +1521,34 @@ void av1_fadst32_new(const int32_t *input, int32_t *output,
 void av1_fidentity4_c(const int32_t *input, int32_t *output,
                       const int8_t *cos_bit, const int8_t *stage_range) {
   (void)cos_bit;
-  for (int i = 0; i < 4; ++i)
+  for (int i = 0; i < 4; ++i) {
     output[i] = (int32_t)dct_const_round_shift(input[i] * Sqrt2);
+}
   range_check(0, input, output, 4, stage_range[0]);
 }
 
 void av1_fidentity8_c(const int32_t *input, int32_t *output,
                       const int8_t *cos_bit, const int8_t *stage_range) {
   (void)cos_bit;
-  for (int i = 0; i < 8; ++i) output[i] = input[i] * 2;
+  for (int i = 0; i < 8; ++i) { output[i] = input[i] * 2;
+}
   range_check(0, input, output, 8, stage_range[0]);
 }
 
 void av1_fidentity16_c(const int32_t *input, int32_t *output,
                        const int8_t *cos_bit, const int8_t *stage_range) {
   (void)cos_bit;
-  for (int i = 0; i < 16; ++i)
+  for (int i = 0; i < 16; ++i) {
     output[i] = (int32_t)dct_const_round_shift(input[i] * 2 * Sqrt2);
+}
   range_check(0, input, output, 16, stage_range[0]);
 }
 
 void av1_fidentity32_c(const int32_t *input, int32_t *output,
                        const int8_t *cos_bit, const int8_t *stage_range) {
   (void)cos_bit;
-  for (int i = 0; i < 32; ++i) output[i] = input[i] * 4;
+  for (int i = 0; i < 32; ++i) { output[i] = input[i] * 4;
+}
   range_check(0, input, output, 32, stage_range[0]);
 }
 

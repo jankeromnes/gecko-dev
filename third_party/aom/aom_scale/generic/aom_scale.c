@@ -341,7 +341,8 @@ static void Scale2D(
     }
 
     if (interpolation) {
-      if (source < source_base) source = source_base;
+      if (source < source_base) { source = source_base;
+}
 
       horiz_line_scale(source, source_width, temp_area, dest_width);
     }
@@ -354,7 +355,8 @@ static void Scale2D(
 
         line_src = source + i * source_pitch;
 
-        if (line_src < source_base) line_src = source_base;
+        if (line_src < source_base) { line_src = source_base;
+}
 
         horiz_line_scale(line_src, source_width,
                          temp_area + (i + 1) * dest_pitch, dest_width);
@@ -364,9 +366,10 @@ static void Scale2D(
       vert_band_scale(temp_area + dest_pitch, dest_pitch, dest, dest_pitch,
                       dest_width);
 
-      if (interpolation)
+      if (interpolation) {
         memcpy(temp_area, temp_area + source_band_height * dest_pitch,
                dest_width);
+}
 
       /* Next band... */
       source += (unsigned long)source_band_height * source_pitch;
@@ -376,13 +379,15 @@ static void Scale2D(
     return;
   }
 
-  if (hscale == 2 && hratio == 1) Scale1Dh = scale1d_2t1_ps;
+  if (hscale == 2 && hratio == 1) { Scale1Dh = scale1d_2t1_ps;
+}
 
   if (vscale == 2 && vratio == 1) {
-    if (interlaced)
+    if (interlaced) {
       Scale1Dv = scale1d_2t1_ps;
-    else
+    } else {
       Scale1Dv = scale1d_2t1_i;
+}
   }
 
   if (source_height == dest_height) {
@@ -490,16 +495,18 @@ void aom_scale_frame(YV12_BUFFER_CONFIG *src, YV12_BUFFER_CONFIG *dst,
             plane_dh, temp_area, temp_height, hscale, hratio, vscale, vratio,
             interlaced);
 
-    if (plane_dw < dst->widths[is_uv])
-      for (int i = 0; i < plane_dh; ++i)
+    if (plane_dw < dst->widths[is_uv]) {
+      for (int i = 0; i < plane_dh; ++i) {
         memset(dst->buffers[plane] + i * dst->strides[is_uv] + plane_dw - 1,
                dst->buffers[plane][i * dst->strides[is_uv] + plane_dw - 2],
                dst->widths[is_uv] - plane_dw + 1);
+}
 
-    if (plane_dh < dst->heights[is_uv])
-      for (int i = plane_dh - 1; i < dst->heights[is_uv]; ++i)
+    if (plane_dh < dst->heights[is_uv]) {
+      for (int i = plane_dh - 1; i < dst->heights[is_uv]; ++i) {
         memcpy(dst->buffers[plane] + i * dst->strides[is_uv],
                dst->buffers[plane] + (plane_dh - 2) * dst->strides[is_uv],
                dst->widths[is_uv] + 1);
+}
   }
 }

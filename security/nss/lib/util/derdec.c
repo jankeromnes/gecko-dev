@@ -28,8 +28,9 @@ der_indefinite_length(unsigned char *buf, unsigned char *end)
 
         if (lenCode == 0x80) {                     /* indefinite length */
             ret = der_indefinite_length(buf, end); /* recurse to find length */
-            if (ret == 0)
+            if (ret == 0) {
                 return 0;
+}
             len += ret;
             buf += ret;
         } else { /* definite length */
@@ -83,8 +84,9 @@ der_capture(unsigned char *buf, unsigned char *end,
     if ((buf + 2) > end) {
         *header_len_p = 0;
         *contents_len_p = 0;
-        if (buf == end)
+        if (buf == end) {
             return SECSuccess;
+}
         return SECFailure;
     }
 
@@ -160,8 +162,9 @@ der_capture(unsigned char *buf, unsigned char *end,
 
             case 0:
                 contents_len = der_indefinite_length(bp, end);
-                if (contents_len)
+                if (contents_len) {
                     break;
+}
             /* fallthru */
             default:
                 PORT_SetError(SEC_ERROR_BAD_DER);

@@ -45,8 +45,9 @@ NSS_CMSArray_Add(PLArenaPool *poolp, void ***array, void *obj)
     void **dest;
 
     PORT_Assert(array != NULL);
-    if (array == NULL)
+    if (array == NULL) {
         return SECFailure;
+}
 
     if (*array == NULL) {
         dest = (void **)PORT_ArenaAlloc(poolp, 2 * sizeof(void *));
@@ -54,16 +55,18 @@ NSS_CMSArray_Add(PLArenaPool *poolp, void ***array, void *obj)
     } else {
         n = 0;
         p = *array;
-        while (*p++)
+        while (*p++) {
             n++;
+}
         dest = (void **)PORT_ArenaGrow(poolp,
                                        *array,
                                        (n + 1) * sizeof(void *),
                                        (n + 2) * sizeof(void *));
     }
 
-    if (dest == NULL)
+    if (dest == NULL) {
         return SECFailure;
+}
 
     dest[n] = obj;
     dest[n + 1] = NULL;
@@ -88,11 +91,13 @@ NSS_CMSArray_Count(void **array)
 {
     int n = 0;
 
-    if (array == NULL)
+    if (array == NULL) {
         return 0;
+}
 
-    while (*array++ != NULL)
+    while (*array++ != NULL) {
         n++;
+}
 
     return n;
 }
@@ -120,8 +125,9 @@ NSS_CMSArray_Sort(void **primary, int (*compare)(void *, void *), void **seconda
     PORT_Assert(secondary == NULL || NSS_CMSArray_Count(secondary) == n);
     PORT_Assert(tertiary == NULL || NSS_CMSArray_Count(tertiary) == n);
 
-    if (n <= 1) /* ordering is fine */
+    if (n <= 1) { /* ordering is fine */
         return;
+}
 
     /* yes, ladies and gentlemen, it's BUBBLE SORT TIME! */
     limit = n - 1;
@@ -146,8 +152,9 @@ NSS_CMSArray_Sort(void **primary, int (*compare)(void *, void *), void **seconda
                 lastxchg = i + 1; /* index of the last element bubbled up */
             }
         }
-        if (lastxchg == 0) /* no exchanges, so array is sorted */
+        if (lastxchg == 0) { /* no exchanges, so array is sorted */
             break;         /* we're done */
+}
         limit = lastxchg;  /* array is sorted up to [limit] */
     }
 }

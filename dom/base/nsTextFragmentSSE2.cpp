@@ -38,8 +38,9 @@ FirstNon8Bit(const char16_t *str, const char16_t *end)
   int32_t alignLen =
     std::min(len, int32_t(((-NS_PTR_TO_INT32(str)) & 0xf) / sizeof(char16_t)));
   for (; i < alignLen; i++) {
-    if (str[i] > 255)
+    if (str[i] > 255) {
       return i;
+}
   }
 
   // Check one XMM register (16 bytes) at a time.
@@ -48,16 +49,18 @@ FirstNon8Bit(const char16_t *str, const char16_t *end)
   __m128i vectmask = _mm_set1_epi16(static_cast<int16_t>(shortMask));
   for(; i < vectWalkEnd; i += numUnicharsPerVector) {
     const __m128i vect = *reinterpret_cast<const __m128i*>(str + i);
-    if (!is_zero(_mm_and_si128(vect, vectmask)))
+    if (!is_zero(_mm_and_si128(vect, vectmask))) {
       return i;
+}
   }
 
   // Check one word at a time.
   const int32_t wordWalkEnd = ((len - i) / numUnicharsPerWord) * numUnicharsPerWord;
   for(; i < wordWalkEnd; i += numUnicharsPerWord) {
     const size_t word = *reinterpret_cast<const size_t*>(str + i);
-    if (word & mask)
+    if (word & mask) {
       return i;
+}
   }
 
   // Take care of the remainder one character at a time.

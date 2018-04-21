@@ -164,10 +164,12 @@ getFIPSMode(void)
 
     size = fread(&d, 1, 1, f);
     fclose(f);
-    if (size != 1)
+    if (size != 1) {
         return PR_FALSE;
-    if (d != '1')
+}
+    if (d != '1') {
         return PR_FALSE;
+}
     return PR_TRUE;
 }
 

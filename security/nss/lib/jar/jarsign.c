@@ -131,8 +131,9 @@ JAR_digest_file(char *filename, JAR_Digest *dig)
     PK11_DigestBegin(sha1);
 
     while (1) {
-        if ((num = JAR_FREAD(fp, buf, FILECHUNQ)) == 0)
+        if ((num = JAR_FREAD(fp, buf, FILECHUNQ)) == 0) {
             break;
+}
 
         PK11_DigestOp(md5, buf, num);
         PK11_DigestOp(sha1, buf, num);
@@ -194,15 +195,17 @@ jar_create_pk7(CERTCertDBHandle *certdb, void *keydb, CERTCertificate *cert,
     unsigned char digestdata[32];
     unsigned char buffer[4096];
 
-    if (outfp == NULL || infp == NULL || cert == NULL)
+    if (outfp == NULL || infp == NULL || cert == NULL) {
         return JAR_ERR_GENERAL;
+}
 
     /* we sign with SHA */
     hashObj = HASH_GetHashObject(HASH_AlgSHA1);
 
     hashcx = (*hashObj->create)();
-    if (hashcx == NULL)
+    if (hashcx == NULL) {
         return JAR_ERR_GENERAL;
+}
 
     (*hashObj->begin)(hashcx);
     while (1) {
@@ -223,8 +226,9 @@ jar_create_pk7(CERTCertDBHandle *certdb, void *keydb, CERTCertificate *cert,
     PORT_SetError(0);
     cinfo = SEC_PKCS7CreateSignedData(cert, certUsageObjectSigner, NULL,
                                       SEC_OID_SHA1, &digest, NULL, mw);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return JAR_ERR_PK7;
+}
 
     rv = SEC_PKCS7IncludeCertChain(cinfo, NULL);
     if (rv != SECSuccess) {
@@ -240,8 +244,9 @@ jar_create_pk7(CERTCertDBHandle *certdb, void *keydb, CERTCertificate *cert,
 
     /* if calling from mozilla thread*/
     rv = SEC_PKCS7Encode(cinfo, jar_pk7_out, outfp, NULL, NULL, mw);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         status = PORT_GetError();
+}
     SEC_PKCS7DestroyContentInfo(cinfo);
     if (rv != SECSuccess) {
         return ((status < 0) ? status : JAR_ERR_GENERAL);

@@ -108,16 +108,19 @@ header_length(DERTemplate *dtemplate, PRUint32 contents_len)
     }
 
     /* This is only used in decoding; it plays no part in encoding.  */
-    if (under_kind & DER_DERPTR)
+    if (under_kind & DER_DERPTR) {
         return 0;
+}
 
     /* No header at all for an "empty" optional.  */
-    if ((contents_len == 0) && optional)
+    if ((contents_len == 0) && optional) {
         return 0;
+}
 
     /* And no header for a full DER_ANY.  */
-    if (encode_kind & DER_ANY)
+    if (encode_kind & DER_ANY) {
         return 0;
+}
 
     /*
      * The common case: one octet for identifier and as many octets
@@ -195,15 +198,17 @@ contents_length(DERTemplate *dtemplate, void *src)
     PORT_Assert((under_kind & (DER_EXPLICIT | DER_INLINE | DER_OPTIONAL | DER_POINTER | DER_SKIP)) == 0);
 
     /* This is only used in decoding; it plays no part in encoding.  */
-    if (under_kind & DER_DERPTR)
+    if (under_kind & DER_DERPTR) {
         return 0;
+}
 
     if (under_kind & DER_INDEFINITE) {
         PRUint32 sub_len;
         void **indp = *(void ***)src;
 
-        if (indp == NULL)
+        if (indp == NULL) {
             return 0;
+}
 
         len = 0;
         under_kind &= ~DER_INDEFINITE;
@@ -228,11 +233,13 @@ contents_length(DERTemplate *dtemplate, void *src)
                 if (under_kind == DER_BIT_STRING) {
                     sub_len = (sub_len + 7) >> 3;
                     /* bit string contents involve an extra octet */
-                    if (sub_len)
+                    if (sub_len) {
                         sub_len++;
+}
                 }
-                if (under_kind != DER_ANY)
+                if (under_kind != DER_ANY) {
                     len += 1 + DER_LengthLength(sub_len);
+}
             }
         }
 
@@ -257,8 +264,9 @@ contents_length(DERTemplate *dtemplate, void *src)
         case DER_BIT_STRING:
             len = (((SECItem *)src)->len + 7) >> 3;
             /* bit string contents involve an extra octet */
-            if (len)
+            if (len) {
                 len++;
+}
             break;
 
         default:
@@ -290,8 +298,9 @@ der_encode(unsigned char *buf, DERTemplate *dtemplate, void *src)
      * header and the contents have a length of zero, then we
      * are not doing any encoding for this element.
      */
-    if (header_len == 0 && contents_len == 0)
+    if (header_len == 0 && contents_len == 0) {
         return buf;
+}
 
     encode_kind = dtemplate->kind;
 
@@ -342,8 +351,9 @@ der_encode(unsigned char *buf, DERTemplate *dtemplate, void *src)
     }
 
     /* If no real contents to encode, then we are done.  */
-    if (contents_len == 0)
+    if (contents_len == 0) {
         return buf;
+}
 
     if (under_kind & DER_INDEFINITE) {
         void **indp;

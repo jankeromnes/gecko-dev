@@ -89,13 +89,15 @@ static unsigned int int_sqrt(unsigned int x) {
   unsigned int y = x;
   unsigned int guess;
   int p = 1;
-  while (y >>= 1) p++;
+  while (y >>= 1) { p++;
+}
   p >>= 1;
 
   guess = 0;
   while (p >= 0) {
     guess |= (1 << p);
-    if (x < guess * guess) guess -= (1 << p);
+    if (x < guess * guess) { guess -= (1 << p);
+}
     p--;
   }
   /* choose between guess or guess+1 */
@@ -158,8 +160,10 @@ static void multiframe_quality_enhance_block(
 
   /* thr = qdiff/16 + log2(act) + log4(qprev) */
   thr = (qdiff >> 4);
-  while (actd >>= 1) thr++;
-  while (qprev >>= 2) thr++;
+  while (actd >>= 1) { thr++;
+}
+  while (qprev >>= 2) { thr++;
+}
 
 #ifdef USE_SSD
   thrsq = thr * thr;

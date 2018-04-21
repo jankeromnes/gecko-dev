@@ -5866,34 +5866,40 @@ void av1_adapt_inter_frame_probs(AV1_COMMON *cm) {
   const FRAME_CONTEXT *pre_fc = cm->pre_fc;
   const FRAME_COUNTS *counts = &cm->counts;
 
-  for (i = 0; i < INTRA_INTER_CONTEXTS; i++)
+  for (i = 0; i < INTRA_INTER_CONTEXTS; i++) {
     fc->intra_inter_prob[i] = av1_mode_mv_merge_probs(
         pre_fc->intra_inter_prob[i], counts->intra_inter[i]);
+}
 
-  for (i = 0; i < COMP_INTER_CONTEXTS; i++)
+  for (i = 0; i < COMP_INTER_CONTEXTS; i++) {
     fc->comp_inter_prob[i] = av1_mode_mv_merge_probs(pre_fc->comp_inter_prob[i],
                                                      counts->comp_inter[i]);
+}
 
 #if CONFIG_EXT_COMP_REFS
-  for (i = 0; i < COMP_REF_TYPE_CONTEXTS; i++)
+  for (i = 0; i < COMP_REF_TYPE_CONTEXTS; i++) {
     fc->comp_ref_type_prob[i] = av1_mode_mv_merge_probs(
         pre_fc->comp_ref_type_prob[i], counts->comp_ref_type[i]);
+}
 
-  for (i = 0; i < UNI_COMP_REF_CONTEXTS; i++)
-    for (j = 0; j < (UNIDIR_COMP_REFS - 1); j++)
+  for (i = 0; i < UNI_COMP_REF_CONTEXTS; i++) {
+    for (j = 0; j < (UNIDIR_COMP_REFS - 1); j++) {
       fc->uni_comp_ref_prob[i][j] = av1_mode_mv_merge_probs(
           pre_fc->uni_comp_ref_prob[i][j], counts->uni_comp_ref[i][j]);
+}
 #endif  // CONFIG_EXT_COMP_REFS
 
 #if CONFIG_EXT_REFS
-  for (i = 0; i < REF_CONTEXTS; i++)
-    for (j = 0; j < (FWD_REFS - 1); j++)
+  for (i = 0; i < REF_CONTEXTS; i++) {
+    for (j = 0; j < (FWD_REFS - 1); j++) {
       fc->comp_ref_prob[i][j] = mode_mv_merge_probs(pre_fc->comp_ref_prob[i][j],
                                                     counts->comp_ref[i][j]);
-  for (i = 0; i < REF_CONTEXTS; i++)
-    for (j = 0; j < (BWD_REFS - 1); j++)
+}
+  for (i = 0; i < REF_CONTEXTS; i++) {
+    for (j = 0; j < (BWD_REFS - 1); j++) {
       fc->comp_bwdref_prob[i][j] = mode_mv_merge_probs(
           pre_fc->comp_bwdref_prob[i][j], counts->comp_bwdref[i][j]);
+}
 #else
   for (i = 0; i < REF_CONTEXTS; i++)
     for (j = 0; j < (COMP_REFS - 1); j++)
@@ -5901,10 +5907,11 @@ void av1_adapt_inter_frame_probs(AV1_COMMON *cm) {
                                                     counts->comp_ref[i][j]);
 #endif  // CONFIG_EXT_REFS
 
-  for (i = 0; i < REF_CONTEXTS; i++)
-    for (j = 0; j < (SINGLE_REFS - 1); j++)
+  for (i = 0; i < REF_CONTEXTS; i++) {
+    for (j = 0; j < (SINGLE_REFS - 1); j++) {
       fc->single_ref_prob[i][j] = av1_mode_mv_merge_probs(
           pre_fc->single_ref_prob[i][j], counts->single_ref[i][j]);
+}
 
 #if CONFIG_COMPOUND_SINGLEREF
   for (i = 0; i < COMP_INTER_MODE_CONTEXTS; i++)
@@ -5913,24 +5920,29 @@ void av1_adapt_inter_frame_probs(AV1_COMMON *cm) {
 
 #endif  // CONFIG_COMPOUND_SINGLEREF
 
-  for (i = 0; i < NEWMV_MODE_CONTEXTS; ++i)
+  for (i = 0; i < NEWMV_MODE_CONTEXTS; ++i) {
     fc->newmv_prob[i] =
         av1_mode_mv_merge_probs(pre_fc->newmv_prob[i], counts->newmv_mode[i]);
-  for (i = 0; i < ZEROMV_MODE_CONTEXTS; ++i)
+}
+  for (i = 0; i < ZEROMV_MODE_CONTEXTS; ++i) {
     fc->zeromv_prob[i] =
         av1_mode_mv_merge_probs(pre_fc->zeromv_prob[i], counts->zeromv_mode[i]);
-  for (i = 0; i < REFMV_MODE_CONTEXTS; ++i)
+}
+  for (i = 0; i < REFMV_MODE_CONTEXTS; ++i) {
     fc->refmv_prob[i] =
         av1_mode_mv_merge_probs(pre_fc->refmv_prob[i], counts->refmv_mode[i]);
+}
 
-  for (i = 0; i < DRL_MODE_CONTEXTS; ++i)
+  for (i = 0; i < DRL_MODE_CONTEXTS; ++i) {
     fc->drl_prob[i] =
         av1_mode_mv_merge_probs(pre_fc->drl_prob[i], counts->drl_mode[i]);
+}
 
 #if CONFIG_MOTION_VAR || CONFIG_WARPED_MOTION
-  for (i = BLOCK_8X8; i < BLOCK_SIZES_ALL; ++i)
+  for (i = BLOCK_8X8; i < BLOCK_SIZES_ALL; ++i) {
     aom_tree_merge_probs(av1_motion_mode_tree, pre_fc->motion_mode_prob[i],
                          counts->motion_mode[i], fc->motion_mode_prob[i]);
+}
 #if CONFIG_NCOBMC_ADAPT_WEIGHT
   for (i = 0; i < ADAPT_OVERLAP_BLOCKS; ++i)
     aom_tree_merge_probs(av1_ncobmc_mode_tree, pre_fc->ncobmc_mode_prob[i],
@@ -5942,9 +5954,10 @@ void av1_adapt_inter_frame_probs(AV1_COMMON *cm) {
 #endif
 #endif  // CONFIG_NCOBMC_ADAPT_WEIGHT
 #if CONFIG_MOTION_VAR && CONFIG_WARPED_MOTION
-  for (i = BLOCK_8X8; i < BLOCK_SIZES_ALL; ++i)
+  for (i = BLOCK_8X8; i < BLOCK_SIZES_ALL; ++i) {
     fc->obmc_prob[i] =
         av1_mode_mv_merge_probs(pre_fc->obmc_prob[i], counts->obmc[i]);
+}
 #endif  // CONFIG_MOTION_VAR && CONFIG_WARPED_MOTION
 #endif  // CONFIG_MOTION_VAR || CONFIG_WARPED_MOTION
 
@@ -5957,10 +5970,11 @@ void av1_adapt_inter_frame_probs(AV1_COMMON *cm) {
   }
 #endif  // CONFIG_SUPERTX
 
-  for (i = 0; i < INTER_MODE_CONTEXTS; i++)
+  for (i = 0; i < INTER_MODE_CONTEXTS; i++) {
     aom_tree_merge_probs(
         av1_inter_compound_mode_tree, pre_fc->inter_compound_mode_probs[i],
         counts->inter_compound_mode[i], fc->inter_compound_mode_probs[i]);
+}
 #if CONFIG_COMPOUND_SINGLEREF
   for (i = 0; i < INTER_MODE_CONTEXTS; i++)
     aom_tree_merge_probs(av1_inter_singleref_comp_mode_tree,
@@ -5971,9 +5985,10 @@ void av1_adapt_inter_frame_probs(AV1_COMMON *cm) {
 #if CONFIG_INTERINTRA
   if (cm->allow_interintra_compound) {
     for (i = 0; i < BLOCK_SIZE_GROUPS; ++i) {
-      if (is_interintra_allowed_bsize_group(i))
+      if (is_interintra_allowed_bsize_group(i)) {
         fc->interintra_prob[i] = av1_mode_mv_merge_probs(
             pre_fc->interintra_prob[i], counts->interintra[i]);
+}
     }
     for (i = 0; i < BLOCK_SIZE_GROUPS; i++) {
       aom_tree_merge_probs(
@@ -5982,9 +5997,10 @@ void av1_adapt_inter_frame_probs(AV1_COMMON *cm) {
     }
 #if CONFIG_WEDGE
     for (i = 0; i < BLOCK_SIZES_ALL; ++i) {
-      if (is_interintra_allowed_bsize(i) && is_interintra_wedge_used(i))
+      if (is_interintra_allowed_bsize(i) && is_interintra_wedge_used(i)) {
         fc->wedge_interintra_prob[i] = av1_mode_mv_merge_probs(
             pre_fc->wedge_interintra_prob[i], counts->wedge_interintra[i]);
+}
     }
 #endif  // CONFIG_WEDGE
   }
@@ -6016,15 +6032,17 @@ void av1_adapt_intra_frame_probs(AV1_COMMON *cm) {
 
 #if CONFIG_VAR_TX
   if (cm->tx_mode == TX_MODE_SELECT) {
-    for (i = 0; i < TXFM_PARTITION_CONTEXTS; ++i)
+    for (i = 0; i < TXFM_PARTITION_CONTEXTS; ++i) {
       fc->txfm_partition_prob[i] = av1_mode_mv_merge_probs(
           pre_fc->txfm_partition_prob[i], counts->txfm_partition[i]);
+}
   }
 #endif
 
-  for (i = 0; i < SKIP_CONTEXTS; ++i)
+  for (i = 0; i < SKIP_CONTEXTS; ++i) {
     fc->skip_probs[i] =
         av1_mode_mv_merge_probs(pre_fc->skip_probs[i], counts->skip[i]);
+}
 
 #if CONFIG_LGT_FROM_PRED
   int j;
@@ -6044,9 +6062,10 @@ void av1_adapt_intra_frame_probs(AV1_COMMON *cm) {
 #endif  // CONFIG_LGT_FROM_PRED
 
   if (cm->seg.temporal_update) {
-    for (i = 0; i < PREDICTION_PROBS; i++)
+    for (i = 0; i < PREDICTION_PROBS; i++) {
       fc->seg.pred_probs[i] = av1_mode_mv_merge_probs(pre_fc->seg.pred_probs[i],
                                                       counts->seg.pred[i]);
+}
 
     aom_tree_merge_probs(av1_segment_tree, pre_fc->seg.tree_probs,
                          counts->seg.tree_mispred, fc->seg.tree_probs);
@@ -6092,9 +6111,10 @@ void av1_adapt_intra_frame_probs(AV1_COMMON *cm) {
         av1_mode_mv_merge_probs(pre_fc->partition_prob[i][PARTITION_HORZ], ct);
   }
 #endif
-  for (i = 0; i < DELTA_Q_PROBS; ++i)
+  for (i = 0; i < DELTA_Q_PROBS; ++i) {
     fc->delta_q_prob[i] =
         mode_mv_merge_probs(pre_fc->delta_q_prob[i], counts->delta_q[i]);
+}
 #if CONFIG_EXT_DELTA_Q
 #if CONFIG_LOOPFILTER_LEVEL
   for (i = 0; i < FRAME_LF_COUNT; ++i)
@@ -6102,9 +6122,10 @@ void av1_adapt_intra_frame_probs(AV1_COMMON *cm) {
       fc->delta_lf_multi_prob[i][j] = mode_mv_merge_probs(
           pre_fc->delta_lf_multi_prob[i][j], counts->delta_lf_multi[i][j]);
 #endif  // CONFIG_LOOPFILTER_LEVEL
-  for (i = 0; i < DELTA_LF_PROBS; ++i)
+  for (i = 0; i < DELTA_LF_PROBS; ++i) {
     fc->delta_lf_prob[i] =
         mode_mv_merge_probs(pre_fc->delta_lf_prob[i], counts->delta_lf[i]);
+}
 #endif  // CONFIG_EXT_DELTA_Q
 #if CONFIG_EXT_INTRA
 #if CONFIG_INTRA_INTERP
@@ -6155,11 +6176,13 @@ void av1_setup_past_independence(AV1_COMMON *cm) {
   av1_clearall_segfeatures(&cm->seg);
   cm->seg.abs_delta = SEGMENT_DELTADATA;
 
-  if (cm->last_frame_seg_map && !cm->frame_parallel_decode)
+  if (cm->last_frame_seg_map && !cm->frame_parallel_decode) {
     memset(cm->last_frame_seg_map, 0, (cm->mi_rows * cm->mi_cols));
+}
 
-  if (cm->current_frame_seg_map)
+  if (cm->current_frame_seg_map) {
     memset(cm->current_frame_seg_map, 0, (cm->mi_rows * cm->mi_cols));
+}
 
   // Reset the mode ref deltas for loop filter
   av1_zero(lf->last_ref_deltas);
@@ -6193,7 +6216,8 @@ void av1_setup_past_independence(AV1_COMMON *cm) {
   if (cm->frame_type == KEY_FRAME || cm->error_resilient_mode ||
       cm->reset_frame_context == RESET_FRAME_CONTEXT_ALL) {
     // Reset all frame contexts.
-    for (i = 0; i < FRAME_CONTEXTS; ++i) cm->frame_contexts[i] = *cm->fc;
+    for (i = 0; i < FRAME_CONTEXTS; ++i) { cm->frame_contexts[i] = *cm->fc;
+}
   } else if (cm->reset_frame_context == RESET_FRAME_CONTEXT_CURRENT) {
 #if CONFIG_NO_FRAME_CONTEXT_SIGNALING
     // Reset the frame context of the first specified ref frame.
@@ -6208,9 +6232,10 @@ void av1_setup_past_independence(AV1_COMMON *cm) {
 #endif  // CONFIG_NO_FRAME_CONTEXT_SIGNALING
 
   // prev_mip will only be allocated in encoder.
-  if (frame_is_intra_only(cm) && cm->prev_mip && !cm->frame_parallel_decode)
+  if (frame_is_intra_only(cm) && cm->prev_mip && !cm->frame_parallel_decode) {
     memset(cm->prev_mip, 0,
            cm->mi_stride * (cm->mi_rows + 1) * sizeof(*cm->prev_mip));
+}
 #if !CONFIG_NO_FRAME_CONTEXT_SIGNALING
   cm->frame_context_idx = 0;
 #endif  // !CONFIG_NO_FRAME_CONTEXT_SIGNALING

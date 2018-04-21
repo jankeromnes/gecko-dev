@@ -81,8 +81,9 @@ _cairo_xlib_call_close_display_hooks (cairo_xlib_display_t *display)
 
     while (TRUE) {
 	hook = display->close_display_hooks;
-	if (hook == NULL)
+	if (hook == NULL) {
 	    break;
+}
 
 	_cairo_xlib_remove_close_display_hook_internal (display, hook);
 
@@ -109,8 +110,9 @@ _cairo_xlib_display_destroy (void *abstract_display)
 	cairo_xlib_job_t *job = display->workqueue;
 	display->workqueue = job->next;
 
-	if (job->type == WORK && job->func.work.destroy != NULL)
+	if (job->type == WORK && job->func.work.destroy != NULL) {
 	    job->func.work.destroy (job->func.work.data);
+}
 
 	_cairo_freelist_free (&display->wq_freelist, job);
     }
@@ -141,8 +143,9 @@ _cairo_xlib_display_notify (cairo_xlib_display_t *display)
     /* Optimistic atomic pointer read -- don't care if it is wrong due to
      * contention as we will check again very shortly.
      */
-    if (display->workqueue == NULL)
+    if (display->workqueue == NULL) {
 	return;
+}
 
     jobs = display->workqueue;
     while (jobs != NULL) {
@@ -165,8 +168,9 @@ _cairo_xlib_display_notify (cairo_xlib_display_t *display)
 	    switch (job->type){
 	    case WORK:
 		job->func.work.notify (dpy, job->func.work.data);
-		if (job->func.work.destroy != NULL)
+		if (job->func.work.destroy != NULL) {
 		    job->func.work.destroy (job->func.work.data);
+}
 		break;
 
 	    case RESOURCE:
@@ -192,12 +196,14 @@ _cairo_xlib_close_display (Display *dpy, XExtCodes *codes)
     cairo_xlib_error_func_t old_handler;
 
     CAIRO_MUTEX_LOCK (_cairo_xlib_display_mutex);
-    for (display = _cairo_xlib_display_list; display; display = display->next)
-	if (display->display == dpy)
+    for (display = _cairo_xlib_display_list; display; display = display->next) {
+	if (display->display == dpy) {
 	    break;
+}
     CAIRO_MUTEX_UNLOCK (_cairo_xlib_display_mutex);
-    if (display == NULL)
+    if (display == NULL) {
 	return 0;
+}
 
     if (! cairo_device_acquire (&display->base)) {
       /* protect the notifies from triggering XErrors */
@@ -226,8 +232,9 @@ _cairo_xlib_close_display (Display *dpy, XExtCodes *codes)
 	if (display->display == dpy) {
 	    *prev = next;
 	    break;
-	} else
+	} else {
 	    prev = &display->next;
+}
     }
     CAIRO_MUTEX_UNLOCK (_cairo_xlib_display_mutex);
 
@@ -317,8 +324,9 @@ _cairo_xlib_device_create (Display *dpy)
 	int max_render_major, max_render_minor;
 
 	env += sizeof ("xrender-version=") - 1;
-	if (sscanf (env, "%d.%d", &max_render_major, &max_render_minor) != 2)
+	if (sscanf (env, "%d.%d", &max_render_major, &max_render_minor) != 2) {
 	    max_render_major = max_render_minor = -1;
+}
 
 	if (max_render_major < display->render_major ||
 	    (max_render_major == display->render_major &&
@@ -409,26 +417,31 @@ _cairo_xlib_device_create (Display *dpy)
      */
     if (strstr (ServerVendor (dpy), "X.Org") != NULL) {
 	if (VendorRelease (dpy) >= 60700000) {
-	    if (VendorRelease (dpy) < 70000000)
+	    if (VendorRelease (dpy) < 70000000) {
 		display->buggy_repeat = TRUE;
+}
 
 	    /* We know that gradients simply do not work in early Xorg servers */
-	    if (VendorRelease (dpy) < 70200000)
+	    if (VendorRelease (dpy) < 70200000) {
 		display->buggy_gradients = TRUE;
+}
 
 	    /* And the extended repeat modes were not fixed until much later */
 	    display->buggy_pad_reflect = TRUE;
 	} else {
-	    if (VendorRelease (dpy) < 10400000)
+	    if (VendorRelease (dpy) < 10400000) {
 		display->buggy_repeat = TRUE;
+}
 
 	    /* Too many bugs in the early drivers */
-	    if (VendorRelease (dpy) < 10699000)
+	    if (VendorRelease (dpy) < 10699000) {
 		display->buggy_pad_reflect = TRUE;
+}
 	}
     } else if (strstr (ServerVendor (dpy), "XFree86") != NULL) {
-	if (VendorRelease (dpy) <= 40500000)
+	if (VendorRelease (dpy) <= 40500000) {
 	    display->buggy_repeat = TRUE;
+}
 
 	display->buggy_gradients = TRUE;
 	display->buggy_pad_reflect = TRUE;
@@ -449,14 +462,16 @@ _cairo_xlib_device_create (Display *dpy)
 
         buggy_repeat_force = -2;
 
-        if (flag && flag[0] == '0')
+        if (flag && flag[0] == '0') {
             buggy_repeat_force = 0;
-        else if (flag && flag[0] == '1')
+        } else if (flag && flag[0] == '1') {
             buggy_repeat_force = 1;
+}
     }
 
-    if (buggy_repeat_force != -2)
+    if (buggy_repeat_force != -2) {
         display->buggy_repeat = (buggy_repeat_force == 1);
+}
 
     display->next = _cairo_xlib_display_list;
     _cairo_xlib_display_list = display;
@@ -474,8 +489,9 @@ _cairo_xlib_add_close_display_hook (cairo_xlib_display_t	*display,
 {
     hook->prev = NULL;
     hook->next = display->close_display_hooks;
-    if (hook->next != NULL)
+    if (hook->next != NULL) {
 	hook->next->prev = hook;
+}
     display->close_display_hooks = hook;
 }
 
@@ -483,13 +499,15 @@ static void
 _cairo_xlib_remove_close_display_hook_internal (cairo_xlib_display_t *display,
 						cairo_xlib_hook_t *hook)
 {
-    if (display->close_display_hooks == hook)
+    if (display->close_display_hooks == hook) {
 	display->close_display_hooks = hook->next;
-    else if (hook->prev != NULL)
+    } else if (hook->prev != NULL) {
 	hook->prev->next = hook->next;
+}
 
-    if (hook->next != NULL)
+    if (hook->next != NULL) {
 	hook->next->prev = hook->prev;
+}
 
     hook->prev = NULL;
     hook->next = NULL;
@@ -560,8 +578,9 @@ _cairo_xlib_display_acquire (cairo_device_t *device, cairo_xlib_display_t **disp
     cairo_status_t status;
 
     status = cairo_device_acquire (device);
-    if (status)
+    if (status) {
         return status;
+}
 
     *display = (cairo_xlib_display_t *) device;
     _cairo_xlib_display_notify (*display);
@@ -576,8 +595,9 @@ _cairo_xlib_display_get_xrender_format (cairo_xlib_display_t	*display,
 
 #if ! ATOMIC_OP_NEEDS_MEMORY_BARRIER
     xrender_format = display->cached_xrender_formats[format];
-    if (likely (xrender_format != NULL))
+    if (likely (xrender_format != NULL)) {
 	return xrender_format;
+}
 #endif
 
     xrender_format = display->cached_xrender_formats[format];
@@ -600,13 +620,15 @@ _cairo_xlib_display_get_xrender_format (cairo_xlib_display_t	*display,
 	        if (d->depth == 16 && d->nvisuals && &d->visuals[0]) {
 	            if (d->visuals[0].red_mask   == 0xf800 &&
 	                d->visuals[0].green_mask == 0x7e0 &&
-	                d->visuals[0].blue_mask  == 0x1f)
+	                d->visuals[0].blue_mask  == 0x1f) {
 	                visual = &d->visuals[0];
+}
 	            break;
 	        }
 	    }
-	    if (!visual)
+	    if (!visual) {
 	        return NULL;
+}
 	    xrender_format = XRenderFindVisualFormat(display->display, visual);
 	    break;
 	}
@@ -616,9 +638,10 @@ _cairo_xlib_display_get_xrender_format (cairo_xlib_display_t	*display,
 	case CAIRO_FORMAT_ARGB32:
 	    pict_format = PictStandardARGB32; break;
 	}
-	if (!xrender_format)
+	if (!xrender_format) {
 	    xrender_format = XRenderFindStandardFormat (display->display,
 		                                        pict_format);
+}
 	display->cached_xrender_formats[format] = xrender_format;
     }
 
@@ -633,8 +656,9 @@ _cairo_xlib_display_get_screen (cairo_xlib_display_t *display,
 
     cairo_list_foreach_entry (info, cairo_xlib_screen_t, &display->screens, link) {
 	if (info->screen == screen) {
-            if (display->screens.next != &info->link)
+            if (display->screens.next != &info->link) {
                 cairo_list_move (&info->link, &display->screens);
+}
             return info;
         }
     }

@@ -83,8 +83,9 @@ static const SEC_ASN1Template PointerToDegenerateSignedDataTemplate[] = {
 static SECOidTag
 GetContentTypeTag(ContentInfo *cinfo)
 {
-    if (cinfo->contentTypeTag == SEC_OID_UNKNOWN)
+    if (cinfo->contentTypeTag == SEC_OID_UNKNOWN) {
         cinfo->contentTypeTag = SECOID_FindOIDTag(&cinfo->contentType);
+}
     return cinfo->contentTypeTag;
 }
 
@@ -96,8 +97,9 @@ choose_content_template(void *src_or_dest, PRBool encoding)
     SECOidTag kind;
 
     PORT_Assert(src_or_dest != NULL);
-    if (src_or_dest == NULL)
+    if (src_or_dest == NULL) {
         return NULL;
+}
 
     cinfo = (ContentInfo *)src_or_dest;
     kind = GetContentTypeTag(cinfo);
@@ -223,8 +225,9 @@ CERT_ConvertAndDecodeCertificate(char *certstr)
     SECItem der;
 
     rv = ATOB_ConvertAsciiToItem(&der, certstr);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return NULL;
+}
 
     cert = CERT_NewTempCertificate(CERT_GetDefaultCertDB(),
                                    &der, NULL, PR_FALSE, PR_TRUE);
@@ -319,10 +322,11 @@ CERT_DecodeCertPackage(char *certbuf,
         /* check entire length if definite length */
         if (seqLen || seqLenLen) {
             if (certlen != (seqLen + seqLenLen + 2L)) {
-                if (certlen > (seqLen + seqLenLen + 2L))
+                if (certlen > (seqLen + seqLenLen + 2L)) {
                     PORT_SetError(SEC_ERROR_EXTRA_INPUT);
-                else
+                } else {
                     PORT_SetError(SEC_ERROR_INPUT_LEN);
+}
                 goto notder;
             }
         }

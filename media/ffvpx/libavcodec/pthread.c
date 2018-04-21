@@ -61,28 +61,31 @@ static void validate_thread_parameters(AVCodecContext *avctx)
         avctx->active_thread_type = 0;
     }
 
-    if (avctx->thread_count > MAX_AUTO_THREADS)
+    if (avctx->thread_count > MAX_AUTO_THREADS) {
         av_log(avctx, AV_LOG_WARNING,
                "Application has requested %d threads. Using a thread count greater than %d is not recommended.\n",
                avctx->thread_count, MAX_AUTO_THREADS);
+}
 }
 
 int ff_thread_init(AVCodecContext *avctx)
 {
     validate_thread_parameters(avctx);
 
-    if (avctx->active_thread_type&FF_THREAD_SLICE)
+    if (avctx->active_thread_type&FF_THREAD_SLICE) {
         return ff_slice_thread_init(avctx);
-    else if (avctx->active_thread_type&FF_THREAD_FRAME)
+    } else if (avctx->active_thread_type&FF_THREAD_FRAME) {
         return ff_frame_thread_init(avctx);
+}
 
     return 0;
 }
 
 void ff_thread_free(AVCodecContext *avctx)
 {
-    if (avctx->active_thread_type&FF_THREAD_FRAME)
+    if (avctx->active_thread_type&FF_THREAD_FRAME) {
         ff_frame_thread_free(avctx, avctx->thread_count);
-    else
+    } else {
         ff_slice_thread_free(avctx);
+}
 }

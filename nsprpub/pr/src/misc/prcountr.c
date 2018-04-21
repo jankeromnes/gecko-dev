@@ -123,8 +123,9 @@ PR_IMPLEMENT(PRCounterHandle)
     PRBool  matchQname = PR_FALSE;
 
     /* Self initialize, if necessary */
-    if ( counterLock == NULL )
+    if ( counterLock == NULL ) {
         _PR_CounterInitialize();
+}
 
     /* Validate input arguments */
     PR_ASSERT( strlen(qName) <= PRCOUNTER_NAME_MAX );
@@ -429,14 +430,15 @@ PR_IMPLEMENT(PRCounterHandle)
 {
     QName *qnp = (QName *)handle;
 
-    if ( PR_CLIST_IS_EMPTY( &qNameList ))
+    if ( PR_CLIST_IS_EMPTY( &qNameList )) {
             qnp = NULL;
-    else if ( qnp == NULL )
+    } else if ( qnp == NULL ) {
         qnp = (QName *)PR_LIST_HEAD( &qNameList );
-    else if ( PR_NEXT_LINK( &qnp->link ) ==  &qNameList )
+    } else if ( PR_NEXT_LINK( &qnp->link ) ==  &qNameList ) {
         qnp = NULL;
-    else  
+    } else {  
         qnp = (QName *)PR_NEXT_LINK( &qnp->link );
+}
 
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: FindNextQname: Handle: %p, Returns: %p", 
         handle, qnp ));
@@ -458,14 +460,15 @@ PR_IMPLEMENT(PRCounterHandle)
     QName *qnp = (QName *)qhandle;
 
 
-    if ( PR_CLIST_IS_EMPTY( &qnp->rNameList ))
+    if ( PR_CLIST_IS_EMPTY( &qnp->rNameList )) {
         rnp = NULL;
-    else if ( rnp == NULL )
+    } else if ( rnp == NULL ) {
         rnp = (RName *)PR_LIST_HEAD( &qnp->rNameList );
-    else if ( PR_NEXT_LINK( &rnp->link ) ==  &qnp->rNameList )
+    } else if ( PR_NEXT_LINK( &rnp->link ) ==  &qnp->rNameList ) {
         rnp = NULL;
-    else
+    } else {
         rnp = (RName *)PR_NEXT_LINK( &rnp->link );
+}
 
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: FindNextRname: Rhandle: %p, QHandle: %p, Returns: %p", 
         rhandle, qhandle, rnp ));

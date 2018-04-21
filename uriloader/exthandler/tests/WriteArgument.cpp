@@ -3,17 +3,20 @@
 
 int main(int argc, char* argv[])
 {
-  if (argc != 2)
+  if (argc != 2) {
     return 1;
+}
 
   const char* value = PR_GetEnv("WRITE_ARGUMENT_FILE");
 
-  if (!value)
+  if (!value) {
     return 2;
+}
 
   FILE* outfile = fopen(value, "w");
-  if (!outfile)
+  if (!outfile) {
     return 3;
+}
 
   // We only need to write out the first argument (no newline).
   fputs(argv[argc -1], outfile);

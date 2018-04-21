@@ -294,31 +294,36 @@ bool ParseTime(const string& value, int64* seconds, int32* nanos) {
     return false;
   }
   // Expect '-'
-  if (*data++ != '-') return false;
+  if (*data++ != '-') { return false;
+}
   // Parse month
   if ((data = ParseInt(data, 2, 1, 12, &time.month)) == NULL) {
     return false;
   }
   // Expect '-'
-  if (*data++ != '-') return false;
+  if (*data++ != '-') { return false;
+}
   // Parse day
   if ((data = ParseInt(data, 2, 1, 31, &time.day)) == NULL) {
     return false;
   }
   // Expect 'T'
-  if (*data++ != 'T') return false;
+  if (*data++ != 'T') { return false;
+}
   // Parse hour
   if ((data = ParseInt(data, 2, 0, 23, &time.hour)) == NULL) {
     return false;
   }
   // Expect ':'
-  if (*data++ != ':') return false;
+  if (*data++ != ':') { return false;
+}
   // Parse minute
   if ((data = ParseInt(data, 2, 0, 59, &time.minute)) == NULL) {
     return false;
   }
   // Expect ':'
-  if (*data++ != ':') return false;
+  if (*data++ != ':') { return false;
+}
   // Parse second
   if ((data = ParseInt(data, 2, 0, 59, &time.second)) == NULL) {
     return false;

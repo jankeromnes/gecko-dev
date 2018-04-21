@@ -492,29 +492,44 @@ static void qcms_modular_transform_release(struct qcms_modular_transform *transf
 		// clut may use a single block of memory.
 		// Perhaps we should remove this to simply the code.
 		if (transform->input_clut_table_r + transform->input_clut_table_length == transform->input_clut_table_g && transform->input_clut_table_g + transform->input_clut_table_length == transform->input_clut_table_b) {
-			if (transform->input_clut_table_r) free(transform->input_clut_table_r);
+			if (transform->input_clut_table_r) { free(transform->input_clut_table_r);
+}
 		} else {
-			if (transform->input_clut_table_r) free(transform->input_clut_table_r);
-			if (transform->input_clut_table_g) free(transform->input_clut_table_g);
-			if (transform->input_clut_table_b) free(transform->input_clut_table_b);
+			if (transform->input_clut_table_r) { free(transform->input_clut_table_r);
+}
+			if (transform->input_clut_table_g) { free(transform->input_clut_table_g);
+}
+			if (transform->input_clut_table_b) { free(transform->input_clut_table_b);
+}
 		}
 		if (transform->r_clut + 1 == transform->g_clut && transform->g_clut + 1 == transform->b_clut) {
-			if (transform->r_clut) free(transform->r_clut);
+			if (transform->r_clut) { free(transform->r_clut);
+}
 		} else {
-			if (transform->r_clut) free(transform->r_clut);
-			if (transform->g_clut) free(transform->g_clut);
-			if (transform->b_clut) free(transform->b_clut);
+			if (transform->r_clut) { free(transform->r_clut);
+}
+			if (transform->g_clut) { free(transform->g_clut);
+}
+			if (transform->b_clut) { free(transform->b_clut);
+}
 		}
 		if (transform->output_clut_table_r + transform->output_clut_table_length == transform->output_clut_table_g && transform->output_clut_table_g+ transform->output_clut_table_length == transform->output_clut_table_b) {
-			if (transform->output_clut_table_r) free(transform->output_clut_table_r);
+			if (transform->output_clut_table_r) { free(transform->output_clut_table_r);
+}
 		} else {
-			if (transform->output_clut_table_r) free(transform->output_clut_table_r);
-			if (transform->output_clut_table_g) free(transform->output_clut_table_g);
-			if (transform->output_clut_table_b) free(transform->output_clut_table_b);
+			if (transform->output_clut_table_r) { free(transform->output_clut_table_r);
+}
+			if (transform->output_clut_table_g) { free(transform->output_clut_table_g);
+}
+			if (transform->output_clut_table_b) { free(transform->output_clut_table_b);
+}
 		}
-		if (transform->output_gamma_lut_r) free(transform->output_gamma_lut_r);
-		if (transform->output_gamma_lut_g) free(transform->output_gamma_lut_g);
-		if (transform->output_gamma_lut_b) free(transform->output_gamma_lut_b);
+		if (transform->output_gamma_lut_r) { free(transform->output_gamma_lut_r);
+}
+		if (transform->output_gamma_lut_g) { free(transform->output_gamma_lut_g);
+}
+		if (transform->output_gamma_lut_b) { free(transform->output_gamma_lut_b);
+}
 		free(transform);
 		transform = next_transform;
 	}
@@ -557,13 +572,15 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 
 		// If the A curve is present this also implies the 
 		// presence of a CLUT.
-		if (!lut->clut_table) 
+		if (!lut->clut_table) { 
 			goto fail;
+}
 
 		// Prepare A curve.
 		transform = qcms_modular_transform_alloc();
-		if (!transform)
+		if (!transform) {
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->input_clut_table_r = build_input_gamma_table(lut->a_curves[0]);
 		transform->input_clut_table_g = build_input_gamma_table(lut->a_curves[1]);
@@ -577,13 +594,15 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 
 		// Prepare CLUT
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform) { 
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		clut_length = sizeof(float)*pow(lut->num_grid_points[0], 3)*3;
 		clut = malloc(clut_length);
-		if (!clut)
+		if (!clut) {
 			goto fail;
+}
 		memcpy(clut, lut->clut_table, clut_length);
 		transform->r_clut = clut + 0;
 		transform->g_clut = clut + 1;
@@ -596,8 +615,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 
 		// Prepare M curve
 		transform = qcms_modular_transform_alloc();
-		if (!transform)
+		if (!transform) {
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->input_clut_table_r = build_input_gamma_table(lut->m_curves[0]);
 		transform->input_clut_table_g = build_input_gamma_table(lut->m_curves[1]);
@@ -606,12 +626,14 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 
 		// Prepare Matrix
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform) { 
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->matrix = build_mAB_matrix(lut);
-		if (transform->matrix.invalid)
+		if (transform->matrix.invalid) {
 			goto fail;
+}
 		transform->tx = s15Fixed16Number_to_float(lut->e03);
 		transform->ty = s15Fixed16Number_to_float(lut->e13);
 		transform->tz = s15Fixed16Number_to_float(lut->e23);
@@ -620,8 +642,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create_mAB(struct l
 	if (lut->b_curves[0] != NULL) {
 		// Prepare B curve
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform) { 
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->input_clut_table_r = build_input_gamma_table(lut->b_curves[0]);
 		transform->input_clut_table_g = build_input_gamma_table(lut->b_curves[1]);
@@ -655,23 +678,27 @@ static struct qcms_modular_transform* qcms_modular_transform_create_lut(struct l
 
 	// Prepare Matrix
 	transform = qcms_modular_transform_alloc();
-	if (!transform) 
+	if (!transform) { 
 		goto fail;
+}
 	append_transform(transform, &next_transform);
 	transform->matrix = build_lut_matrix(lut);
-	if (transform->matrix.invalid)
+	if (transform->matrix.invalid) {
 		goto fail;
+}
 	transform->transform_module_fn = qcms_transform_module_matrix;
 
 	// Prepare input curves
 	transform = qcms_modular_transform_alloc();
-	if (!transform) 
+	if (!transform) { 
 		goto fail;
+}
 	append_transform(transform, &next_transform);
 	in_curve_len = sizeof(float)*lut->num_input_table_entries * 3;
 	in_curves = malloc(in_curve_len);
-	if (!in_curves) 
+	if (!in_curves) { 
 		goto fail;
+}
 	memcpy(in_curves, lut->input_table, in_curve_len);
 	transform->input_clut_table_r = in_curves + lut->num_input_table_entries * 0;
 	transform->input_clut_table_g = in_curves + lut->num_input_table_entries * 1;
@@ -681,8 +708,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create_lut(struct l
 	// Prepare table
 	clut_length = sizeof(float)*pow(lut->num_clut_grid_points, 3)*3;
 	clut = malloc(clut_length);
-	if (!clut) 
+	if (!clut) { 
 		goto fail;
+}
 	memcpy(clut, lut->clut_table, clut_length);
 	transform->r_clut = clut + 0;
 	transform->g_clut = clut + 1;
@@ -692,8 +720,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create_lut(struct l
 	// Prepare output curves
 	out_curve_len = sizeof(float) * lut->num_output_table_entries * 3;
 	out_curves = malloc(out_curve_len);
-	if (!out_curves) 
+	if (!out_curves) { 
 		goto fail;
+}
 	memcpy(out_curves, lut->output_table, out_curve_len);
 	transform->output_clut_table_r = out_curves + lut->num_output_table_entries * 0;
 	transform->output_clut_table_g = out_curves + lut->num_output_table_entries * 1;
@@ -715,22 +744,25 @@ struct qcms_modular_transform* qcms_modular_transform_create_input(qcms_profile 
 	if (in->A2B0) {
 		struct qcms_modular_transform *lut_transform;
 		lut_transform = qcms_modular_transform_create_lut(in->A2B0);
-		if (!lut_transform)
+		if (!lut_transform) {
 			goto fail;
+}
 		append_transform(lut_transform, &next_transform);
 	} else if (in->mAB && in->mAB->num_in_channels == 3 && in->mAB->num_out_channels == 3) {
 		struct qcms_modular_transform *mAB_transform;
 		mAB_transform = qcms_modular_transform_create_mAB(in->mAB);
-		if (!mAB_transform)
+		if (!mAB_transform) {
 			goto fail;
+}
 		append_transform(mAB_transform, &next_transform);
 
 	} else {
 		struct qcms_modular_transform *transform;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform)
+		if (!transform) {
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->input_clut_table_r = build_input_gamma_table(in->redTRC);
 		transform->input_clut_table_g = build_input_gamma_table(in->greenTRC);
@@ -742,8 +774,9 @@ struct qcms_modular_transform* qcms_modular_transform_create_input(qcms_profile 
 		}
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform) { 
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->matrix.m[0][0] = 1/1.999969482421875f;
 		transform->matrix.m[0][1] = 0.f;
@@ -758,8 +791,9 @@ struct qcms_modular_transform* qcms_modular_transform_create_input(qcms_profile 
 		transform->transform_module_fn = qcms_transform_module_matrix;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform) { 
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->matrix = build_colorant_matrix(in);
 		transform->transform_module_fn = qcms_transform_module_matrix;
@@ -778,28 +812,32 @@ static struct qcms_modular_transform* qcms_modular_transform_create_output(qcms_
 	if (out->B2A0) {
 		struct qcms_modular_transform *lut_transform;
 		lut_transform = qcms_modular_transform_create_lut(out->B2A0);
-		if (!lut_transform) 
+		if (!lut_transform) { 
 			goto fail;
+}
 		append_transform(lut_transform, &next_transform);
 	} else if (out->mBA && out->mBA->num_in_channels == 3 && out->mBA->num_out_channels == 3) {
 		struct qcms_modular_transform *lut_transform;
 		lut_transform = qcms_modular_transform_create_mAB(out->mBA);
-		if (!lut_transform) 
+		if (!lut_transform) { 
 			goto fail;
+}
 		append_transform(lut_transform, &next_transform);
 	} else if (out->redTRC && out->greenTRC && out->blueTRC) {
 		struct qcms_modular_transform *transform;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform) { 
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->matrix = matrix_invert(build_colorant_matrix(out));
 		transform->transform_module_fn = qcms_transform_module_matrix;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform) { 
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		transform->matrix.m[0][0] = 1.999969482421875f;
 		transform->matrix.m[0][1] = 0.f;
@@ -814,8 +852,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create_output(qcms_
 		transform->transform_module_fn = qcms_transform_module_matrix;
 
 		transform = qcms_modular_transform_alloc();
-		if (!transform) 
+		if (!transform) { 
 			goto fail;
+}
 		append_transform(transform, &next_transform);
 		build_output_lut(out->redTRC, &transform->output_gamma_lut_r,
 			&transform->output_gamma_lut_r_length);
@@ -900,8 +939,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
 	if (in->color_space == RGB_SIGNATURE) {
 		struct qcms_modular_transform* rgb_to_pcs;
 		rgb_to_pcs = qcms_modular_transform_create_input(in);
-		if (!rgb_to_pcs) 
+		if (!rgb_to_pcs) { 
 			goto fail;
+}
 		append_transform(rgb_to_pcs, &next_transform);
 	} else {
 		assert(0 && "input color space not supported");
@@ -911,8 +951,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
 	if (in->pcs == LAB_SIGNATURE && out->pcs == XYZ_SIGNATURE) {
 		struct qcms_modular_transform* lab_to_pcs;
 		lab_to_pcs = qcms_modular_transform_alloc();
-		if (!lab_to_pcs) 
+		if (!lab_to_pcs) { 
 			goto fail;
+}
 		append_transform(lab_to_pcs, &next_transform);
 		lab_to_pcs->transform_module_fn = qcms_transform_module_LAB_to_XYZ;
 	}
@@ -931,8 +972,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
         if (in->pcs == XYZ_SIGNATURE && out->pcs == LAB_SIGNATURE) {
 		struct qcms_modular_transform* pcs_to_lab;
 		pcs_to_lab = qcms_modular_transform_alloc();
-		if (!pcs_to_lab) 
+		if (!pcs_to_lab) { 
 			goto fail;
+}
 		append_transform(pcs_to_lab, &next_transform);
 		pcs_to_lab->transform_module_fn = qcms_transform_module_XYZ_to_LAB;
 	}
@@ -940,8 +982,9 @@ static struct qcms_modular_transform* qcms_modular_transform_create(qcms_profile
 	if (out->color_space == RGB_SIGNATURE) {
 		struct qcms_modular_transform* pcs_to_rgb;
 		pcs_to_rgb = qcms_modular_transform_create_output(out);
-		if (!pcs_to_rgb) 
+		if (!pcs_to_rgb) { 
 			goto fail;
+}
 		append_transform(pcs_to_rgb, &next_transform);
 	} else {
 		assert(0 && "output color space not supported");

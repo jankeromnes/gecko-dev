@@ -601,8 +601,9 @@ GetSwitchObserverList(SwitchDevice aDevice) {
 static void
 ReleaseObserversIfNeeded() {
   for (int i = 0; i < NUM_SWITCH_DEVICE; i++) {
-    if (sSwitchObserverLists[i].Length() != 0)
+    if (sSwitchObserverLists[i].Length() != 0) {
       return;
+}
   }
 
   //The length of every list is 0, no observer in the list.
@@ -644,8 +645,9 @@ NotifySwitchChange(const SwitchEvent& aEvent)
 {
   // When callback this notification, main thread may call unregister function
   // first. We should check if this pointer is valid.
-  if (!sSwitchObserverLists)
+  if (!sSwitchObserverLists) {
     return;
+}
 
   SwitchObserverList& observer = GetSwitchObserverList(aEvent.device());
   observer.Broadcast(aEvent);

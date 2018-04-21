@@ -453,8 +453,9 @@ void oc_idct8x8_sse2(ogg_int16_t _y[64],ogg_int16_t _x[64],int _last_zzi){
      gets.
     Needless to say we inherited this approach from VP3.*/
   /*Then perform the iDCT.*/
-  if(_last_zzi<=10)oc_idct8x8_10_sse2(_y,_x);
-  else oc_idct8x8_slow_sse2(_y,_x);
+  if(_last_zzi<=10) {oc_idct8x8_10_sse2(_y,_x);
+  } else { oc_idct8x8_slow_sse2(_y,_x);
+}
 }
 
 #endif

@@ -1278,8 +1278,9 @@ uprv_convertToLCID(const char *langID, const char* posixID, UErrorCode* status)
 
         mid = (high+low) >> 1; /*Finds median*/
 
-        if (mid == oldmid) 
+        if (mid == oldmid) { 
             break;
+}
 
         compVal = uprv_strcmp(langID, gPosixIDmap[mid].regionMaps->posixID);
         if (compVal < 0){

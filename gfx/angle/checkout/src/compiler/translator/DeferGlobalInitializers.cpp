@@ -85,8 +85,9 @@ void GetDeferredInitializers(TIntermDeclaration *declaration,
 
         // Ignore ANGLE internal variables and nameless declarations.
         if (symbolNode->variable().symbolType() == SymbolType::AngleInternal ||
-            symbolNode->variable().symbolType() == SymbolType::Empty)
+            symbolNode->variable().symbolType() == SymbolType::Empty) {
             return;
+}
 
         if (symbolNode->getQualifier() == EvqGlobal)
         {

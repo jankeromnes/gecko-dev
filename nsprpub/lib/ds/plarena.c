@@ -39,13 +39,15 @@ PR_IMPLEMENT(void) PL_InitArenaPool(
          0, 1, 3, 3, 7, 7, 7, 7,15,15,15,15,15,15,15,15,  /*  1 ... 16 */
         31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31}; /* 17 ... 32 */
 
-    if (align == 0)
+    if (align == 0) {
         align = PL_ARENA_DEFAULT_ALIGN;
+}
 
-    if (align < sizeof(pmasks)/sizeof(pmasks[0]))
+    if (align < sizeof(pmasks)/sizeof(pmasks[0])) {
         pool->mask = pmasks[align];
-    else
+    } else {
         pool->mask = PR_BITMASK(PR_CeilingLog2(align));
+}
 
     pool->first.next = NULL;
     /* Set all three addresses in pool->first to the same dummy value.
@@ -59,10 +61,11 @@ PR_IMPLEMENT(void) PL_InitArenaPool(
      * sizeof(PLArena) + pool->mask is the header and alignment slop
      * that PL_ArenaAllocate adds to the net size.
      */
-    if (size > sizeof(PLArena) + pool->mask)
+    if (size > sizeof(PLArena) + pool->mask) {
         pool->arenasize = size - (sizeof(PLArena) + pool->mask);
-    else
+    } else {
         pool->arenasize = size;
+}
 #ifdef PL_ARENAMETER
     memset(&pool->stats, 0, sizeof pool->stats);
     pool->stats.name = strdup(name);
@@ -101,8 +104,9 @@ PR_IMPLEMENT(void *) PL_ArenaAllocate(PLArenaPool *pool, PRUint32 nb)
     
     nbOld = nb;
     nb = (PRUword)PL_ARENA_ALIGN(pool, nb); /* force alignment */
-    if (nb < nbOld)
+    if (nb < nbOld) {
         return NULL;
+}
 
     /* attempt to allocate from arenas at pool->current */
     {
@@ -138,8 +142,9 @@ PR_IMPLEMENT(void *) PL_ArenaAllocate(PLArenaPool *pool, PRUint32 nb)
             a->next = pool->current->next;
             pool->current->next = a;
             pool->current = a;
-            if ( NULL == pool->first.next )
+            if ( NULL == pool->first.next ) {
                 pool->first.next = a;
+}
             PL_COUNT_ARENA(pool,++);
             COUNT(pool, nmallocs);
             return(rp);
@@ -155,11 +160,13 @@ PR_IMPLEMENT(void *) PL_ArenaGrow(
 {
     void *newp;
 
-    if (PR_UINT32_MAX - size < incr)
+    if (PR_UINT32_MAX - size < incr) {
         return NULL;
+}
     PL_ARENA_ALLOCATE(newp, pool, size + incr);
-    if (newp)
+    if (newp) {
         memcpy(newp, p, size);
+}
     return newp;
 }
 
@@ -182,8 +189,9 @@ PR_IMPLEMENT(void) PL_ClearArenaPool(PLArenaPool *pool, PRInt32 pattern)
 static void FreeArenaList(PLArenaPool *pool, PLArena *head)
 {
     PLArena *a = head->next;
-    if (!a)
+    if (!a) {
         return;
+}
 
     head->next = NULL;
 

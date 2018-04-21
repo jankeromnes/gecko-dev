@@ -113,8 +113,9 @@ GetStackAndModules(const std::vector<uintptr_t>& aPCs)
     bool moduleReferenced = false;
     for (;stackIndex < stackSize; ++stackIndex) {
       uintptr_t pc = rawStack[stackIndex].mPC;
-      if (pc >= moduleEnd)
+      if (pc >= moduleEnd) {
         break;
+}
 
       if (pc >= moduleStart) {
         // If the current PC is within the current module, mark

@@ -23,36 +23,41 @@ TestProportions()
                                         698079309544035222ULL,
                                         6012389156611637584ULL);
 
-  for (size_t i = 0; i < 100; i++)
+  for (size_t i = 0; i < 100; i++) {
     MOZ_RELEASE_ASSERT(bernoulli.trial());
+}
 
   {
     bernoulli.setProbability(0.5);
     size_t count = 0;
-    for (size_t i = 0; i < 1000; i++)
+    for (size_t i = 0; i < 1000; i++) {
       count += bernoulli.trial();
+}
     MOZ_RELEASE_ASSERT(count == 496);
   }
 
   {
     bernoulli.setProbability(0.001);
     size_t count = 0;
-    for (size_t i = 0; i < 1000; i++)
+    for (size_t i = 0; i < 1000; i++) {
       count += bernoulli.trial();
+}
     MOZ_RELEASE_ASSERT(count == 2);
   }
 
   {
     bernoulli.setProbability(0.85);
     size_t count = 0;
-    for (size_t i = 0; i < 1000; i++)
+    for (size_t i = 0; i < 1000; i++) {
       count += bernoulli.trial();
+}
     MOZ_RELEASE_ASSERT(count == 852);
   }
 
   bernoulli.setProbability(0.0);
-  for (size_t i = 0; i < 100; i++)
+  for (size_t i = 0; i < 100; i++) {
     MOZ_RELEASE_ASSERT(!bernoulli.trial());
+}
 }
 
 static void
@@ -64,8 +69,9 @@ TestHarmonics()
 
   const size_t n = 100000;
   bool trials[n];
-  for (size_t i = 0; i < n; i++)
+  for (size_t i = 0; i < n; i++) {
     trials[i] = bernoulli.trial();
+}
 
   // For each harmonic and phase, check that the proportion sampled is
   // within acceptable bounds.
@@ -76,8 +82,9 @@ TestHarmonics()
 
     for (size_t phase = 0; phase < harmonic; phase++) {
       size_t count = 0;
-      for (size_t i = phase; i < n; i += harmonic)
+      for (size_t i = phase; i < n; i += harmonic) {
         count += trials[i];
+}
 
       MOZ_RELEASE_ASSERT(low_expected <= count && count <= high_expected);
     }
@@ -93,8 +100,9 @@ TestTrialN()
 
   {
     size_t count = 0;
-    for (size_t i = 0; i < 10000; i++)
+    for (size_t i = 0; i < 10000; i++) {
       count += bernoulli.trial(1);
+}
 
     // Expected value: 0.01 * 10000 == 100
     MOZ_RELEASE_ASSERT(count == 97);
@@ -102,8 +110,9 @@ TestTrialN()
 
   {
     size_t count = 0;
-    for (size_t i = 0; i < 10000; i++)
+    for (size_t i = 0; i < 10000; i++) {
       count += bernoulli.trial(3);
+}
 
     // Expected value: (1 - (1 - 0.01) ** 3) == 0.0297,
     // 0.0297 * 10000 == 297
@@ -112,8 +121,9 @@ TestTrialN()
 
   {
     size_t count = 0;
-    for (size_t i = 0; i < 10000; i++)
+    for (size_t i = 0; i < 10000; i++) {
       count += bernoulli.trial(10);
+}
 
     // Expected value: (1 - (1 - 0.01) ** 10) == 0.0956,
     // 0.0956 * 10000 == 956
@@ -122,8 +132,9 @@ TestTrialN()
 
   {
     size_t count = 0;
-    for (size_t i = 0; i < 10000; i++)
+    for (size_t i = 0; i < 10000; i++) {
       count += bernoulli.trial(100);
+}
 
     // Expected value: (1 - (1 - 0.01) ** 100) == 0.6339
     // 0.6339 * 10000 == 6339
@@ -132,8 +143,9 @@ TestTrialN()
 
   {
     size_t count = 0;
-    for (size_t i = 0; i < 10000; i++)
+    for (size_t i = 0; i < 10000; i++) {
       count += bernoulli.trial(1000);
+}
 
     // Expected value: (1 - (1 - 0.01) ** 1000) == 0.9999
     // 0.9999 * 10000 == 9999
@@ -176,24 +188,27 @@ TestCuspProbabilities()
                                         0x67ff17e25d855942ULL,
                                         0x74f298193fe1c5b1ULL);
 
-  for (size_t i = 0; i < 1000; i++)
+  for (size_t i = 0; i < 1000; i++) {
     MOZ_RELEASE_ASSERT(bernoulli.trial());
+}
 
   /*
    * This should not be perceptibly different from 0; for 64-bit doubles,
    * the FastBernoulliTrial will actually treat this as exactly zero.
    */
   bernoulli.setProbability(nextafter(0, 1));
-  for (size_t i = 0; i < 1000; i++)
+  for (size_t i = 0; i < 1000; i++) {
     MOZ_RELEASE_ASSERT(!bernoulli.trial());
+}
 
   /*
    * This should be a vanishingly low probability which FastBernoulliTrial does
    * *not* treat as exactly zero.
    */
   bernoulli.setProbability(1 - nextafter(1, 0));
-  for (size_t i = 0; i < 1000; i++)
+  for (size_t i = 0; i < 1000; i++) {
     MOZ_RELEASE_ASSERT(!bernoulli.trial());
+}
 }
 
 int

@@ -1153,15 +1153,17 @@ lg_FindTrustAttribute(LGObjectCache *obj, CK_ATTRIBUTE_TYPE type,
     switch (type) {
         case CKA_ISSUER:
             cert = lg_getCert(obj, certHandle);
-            if (cert == NULL)
+            if (cert == NULL) {
                 break;
+}
             crv = lg_CopyAttribute(attribute, type, cert->derIssuer.data,
                                    cert->derIssuer.len);
             break;
         case CKA_SERIAL_NUMBER:
             cert = lg_getCert(obj, certHandle);
-            if (cert == NULL)
+            if (cert == NULL) {
                 break;
+}
             crv = lg_CopyAttribute(attribute, type, cert->derSN.data,
                                    cert->derSN.len);
             break;
@@ -1269,8 +1271,9 @@ lg_FindCertAttribute(LGObjectCache *obj, CK_ATTRIBUTE_TYPE type,
                 return LG_CLONE_ATTR(attribute, type, lg_StaticNullAttr);
             }
             pubKey = nsslowcert_ExtractPublicKey(cert);
-            if (pubKey == NULL)
+            if (pubKey == NULL) {
                 break;
+}
             item = lg_GetPubItem(pubKey);
             if (item == NULL) {
                 lg_nsslowkey_DestroyPublicKey(pubKey);
@@ -1364,8 +1367,9 @@ lg_GetAttributeValue(SDB *sdb, CK_OBJECT_HANDLE handle, CK_ATTRIBUTE *templ,
 
     for (i = 0; i < count; i++) {
         crv = lg_GetSingleAttribute(obj, &templ[i]);
-        if (crvCollect == CKR_OK)
+        if (crvCollect == CKR_OK) {
             crvCollect = crv;
+}
     }
 
     lg_DestroyObjectCache(obj);
@@ -1756,8 +1760,9 @@ lg_SetAttributeValue(SDB *sdb, CK_OBJECT_HANDLE handle,
 
     for (i = 0; i < count; i++) {
         crv = lg_SetSingleAttribute(obj, &templ[i], &writePrivate);
-        if (crvCollect == CKR_OK)
+        if (crvCollect == CKR_OK) {
             crvCollect = crv;
+}
     }
 
     /* Write any collected changes out for private and secret keys.

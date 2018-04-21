@@ -94,11 +94,13 @@ tls13_EncodeKeyShareEntry(sslBuffer *buf, const sslEphemeralKeyPair *keyPair)
     unsigned int size = tls13_SizeOfKeyShareEntry(pubKey);
 
     rv = sslBuffer_AppendNumber(buf, keyPair->group->name, 2);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
     rv = sslBuffer_AppendNumber(buf, size - 4, 2);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     switch (pubKey->keyType) {
         case ecKey:
@@ -184,20 +186,23 @@ tls13_HandleKeyShareEntry(const sslSocket *ss, TLSExtensionData *xtnData, SECIte
     }
 
     ks = PORT_ZNew(TLS13KeyShareEntry);
-    if (!ks)
+    if (!ks) {
         goto loser;
+}
     ks->group = groupDef;
 
     rv = SECITEM_CopyItem(NULL, &ks->key_exchange, &share);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PR_APPEND_LINK(&ks->link, &xtnData->remoteKeyShares);
     return SECSuccess;
 
 loser:
-    if (ks)
+    if (ks) {
         tls13_DestroyKeyShareEntry(ks);
+}
     return SECFailure;
 }
 /* Handle an incoming KeyShare extension at the client and copy to
@@ -307,8 +312,9 @@ tls13_ServerHandleKeyShareXtn(const sslSocket *ss, TLSExtensionData *xtnData,
      * the entire extension.) */
     rv = ssl3_ExtConsumeHandshakeNumber(ss, &length, 2, &data->data,
                                         &data->len);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
     if (length != data->len) {
         /* Check for consistency */
         PORT_SetError(SSL_ERROR_RX_MALFORMED_KEY_SHARE);
@@ -317,8 +323,9 @@ tls13_ServerHandleKeyShareXtn(const sslSocket *ss, TLSExtensionData *xtnData,
 
     while (data->len) {
         rv = tls13_HandleKeyShareEntry(ss, xtnData, data);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
 
     return SECSuccess;
@@ -403,30 +410,35 @@ tls13_ClientSendPreSharedKeyXtn(const sslSocket *ss, TLSExtensionData *xtnData,
                                          session_ticket->ticket.len + /* ticket */
                                          4 /* obfuscated_ticket_age */,
                                 2);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
     rv = sslBuffer_AppendVariable(buf, session_ticket->ticket.data,
                                   session_ticket->ticket.len, 2);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* Obfuscated age. */
     age = ssl_TimeUsec() - session_ticket->received_timestamp;
     age /= PR_USEC_PER_MSEC;
     age += session_ticket->ticket_age_add;
     rv = sslBuffer_AppendNumber(buf, age, 4);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* Write out the binder list length. */
     binderLen = tls13_GetHashSize(ss);
     rv = sslBuffer_AppendNumber(buf, binderLen + 1, 2);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
     /* Write zeroes for the binder for the moment. */
     rv = sslBuffer_AppendVariable(buf, binder, binderLen, 1);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PRINT_BUF(50, (ss, "Sending PreSharedKey value",
                    session_ticket->ticket.data,
@@ -484,16 +496,18 @@ tls13_ServerHandlePreSharedKeyXtn(const sslSocket *ss, TLSExtensionData *xtnData
 
         rv = ssl3_ExtConsumeHandshakeVariable(ss, &label, 2,
                                               &inner.data, &inner.len);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
         if (!label.len) {
             goto alert_loser;
         }
 
         rv = ssl3_ExtConsumeHandshakeNumber(ss, &obfuscatedAge, 4,
                                             &inner.data, &inner.len);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         if (!numIdentities) {
             PRINT_BUF(50, (ss, "Handling PreSharedKey value",
@@ -503,8 +517,9 @@ tls13_ServerHandlePreSharedKeyXtn(const sslSocket *ss, TLSExtensionData *xtnData
             /* This only happens if we have an internal error, not
              * a malformed ticket. Bogus tickets just don't resume
              * and return SECSuccess. */
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 return SECFailure;
+}
 
             if (ss->sec.ci.sid) {
                 /* xtnData->ticketAge contains the baseline we use for
@@ -526,8 +541,9 @@ tls13_ServerHandlePreSharedKeyXtn(const sslSocket *ss, TLSExtensionData *xtnData
     /* Parse the binders list. */
     rv = ssl3_ExtConsumeHandshakeVariable(ss,
                                           &inner, 2, &data->data, &data->len);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
     if (data->len) {
         goto alert_loser;
     }
@@ -536,8 +552,9 @@ tls13_ServerHandlePreSharedKeyXtn(const sslSocket *ss, TLSExtensionData *xtnData
         SECItem binder;
         rv = ssl3_ExtConsumeHandshakeVariable(ss, &binder, 1,
                                               &inner.data, &inner.len);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
         if (binder.len < 32) {
             goto alert_loser;
         }
@@ -548,8 +565,9 @@ tls13_ServerHandlePreSharedKeyXtn(const sslSocket *ss, TLSExtensionData *xtnData
         ++numBinders;
     }
 
-    if (numBinders != numIdentities)
+    if (numBinders != numIdentities) {
         goto alert_loser;
+}
 
     /* Keep track of negotiated extensions. Note that this does not
      * mean we are resuming. */
@@ -599,8 +617,9 @@ tls13_ClientHandlePreSharedKeyXtn(const sslSocket *ss, TLSExtensionData *xtnData
     }
 
     rv = ssl3_ExtConsumeHandshakeNumber(ss, &index, 2, &data->data, &data->len);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
 
     /* This should be the end of the extension. */
     if (data->len) {
@@ -925,8 +944,9 @@ tls13_ServerHandlePskModesXtn(const sslSocket *ss, TLSExtensionData *xtnData,
     rv = ssl3_ExtConsumeHandshakeVariable(ss,
                                           &xtnData->psk_ke_modes, 1,
                                           &data->data, &data->len);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
     if (!xtnData->psk_ke_modes.len || data->len) {
         PORT_SetError(SSL_ERROR_MALFORMED_PSK_KEY_EXCHANGE_MODES);
         return SECFailure;

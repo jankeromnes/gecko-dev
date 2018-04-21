@@ -321,8 +321,9 @@ UBool GregorianCalendar::isEquivalentTo(const Calendar& other) const
 void
 GregorianCalendar::setGregorianChange(UDate date, UErrorCode& status)
 {
-    if (U_FAILURE(status)) 
+    if (U_FAILURE(status)) { 
         return;
+}
 
     fGregorianCutover = date;
 
@@ -354,12 +355,14 @@ GregorianCalendar::setGregorianChange(UDate date, UErrorCode& status)
         status = U_MEMORY_ALLOCATION_ERROR;
         return;
     }
-    if(U_FAILURE(status))
+    if(U_FAILURE(status)) {
         return;
+}
     cal->setTime(date, status);
     fGregorianCutoverYear = cal->get(UCAL_YEAR, status);
-    if (cal->get(UCAL_ERA, status) == BC) 
+    if (cal->get(UCAL_ERA, status) == BC) { 
         fGregorianCutoverYear = 1 - fGregorianCutoverYear;
+}
     fCutoverJulianDay = cutoverDay;
     delete cal;
 }
@@ -635,8 +638,9 @@ GregorianCalendar::pinDayOfMonth()
 {
     int32_t monthLen = monthLength(internalGet(UCAL_MONTH));
     int32_t dom = internalGet(UCAL_DATE);
-    if(dom > monthLen) 
+    if(dom > monthLen) { 
         set(UCAL_DATE, monthLen);
+}
 }
 
 // -------------------------------------
@@ -650,8 +654,9 @@ GregorianCalendar::validateFields() const
         if (field != UCAL_DATE &&
             field != UCAL_DAY_OF_YEAR &&
             isSet((UCalendarDateFields)field) &&
-            ! boundsCheck(internalGet((UCalendarDateFields)field), (UCalendarDateFields)field))
+            ! boundsCheck(internalGet((UCalendarDateFields)field), (UCalendarDateFields)field)) {
             return FALSE;
+}
     }
 
     // Values differ in Least-Maximum and Maximum should be handled
@@ -893,8 +898,10 @@ GregorianCalendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& s
             int32_t lastDoy = handleGetYearLength(isoYear);
             int32_t lastRelDow = (lastDoy - isoDoy + internalGet(UCAL_DAY_OF_WEEK) -
                 getFirstDayOfWeek()) % 7;
-            if (lastRelDow < 0) lastRelDow += 7;
-            if ((6 - lastRelDow) >= getMinimalDaysInFirstWeek()) lastDoy -= 7;
+            if (lastRelDow < 0) { lastRelDow += 7;
+}
+            if ((6 - lastRelDow) >= getMinimalDaysInFirstWeek()) { lastDoy -= 7;
+}
             int32_t lastWoy = weekNumber(lastDoy, lastRelDow + 1);
             woy = ((woy + lastWoy - 1) % lastWoy) + 1;
         }
@@ -974,8 +981,9 @@ GregorianCalendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& s
             // Normalize the DAY_OF_WEEK so that 0 is the first day of the week
             // in this locale.  We have dow in 0..6.
             int32_t dow = internalGet(UCAL_DAY_OF_WEEK) - getFirstDayOfWeek();
-            if (dow < 0) 
+            if (dow < 0) { 
                 dow += 7;
+}
 
             // Find the day of month, compensating for cutover discontinuity.
             int32_t dom = cDayOfMonth;
@@ -983,18 +991,20 @@ GregorianCalendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& s
             // Find the day of the week (normalized for locale) for the first
             // of the month.
             int32_t fdm = (dow - dom + 1) % 7;
-            if (fdm < 0) 
+            if (fdm < 0) { 
                 fdm += 7;
+}
 
             // Get the first day of the first full week of the month,
             // including phantom days, if any.  Figure out if the first week
             // counts or not; if it counts, then fill in phantom days.  If
             // not, advance to the first real full week (skip the partial week).
             int32_t start;
-            if ((7 - fdm) < getMinimalDaysInFirstWeek())
+            if ((7 - fdm) < getMinimalDaysInFirstWeek()) {
                 start = 8 - fdm; // Skip the first partial week
-            else
+            } else {
                 start = 1 - fdm; // This may be zero or negative
+}
 
             // Get the day of the week (normalized for locale) for the last
             // day of the month.
@@ -1011,15 +1021,18 @@ GregorianCalendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& s
             // Now roll between start and (limit - 1).
             int32_t gap = limit - start;
             int32_t newDom = (dom + amount*7 - start) % gap;
-            if (newDom < 0) 
+            if (newDom < 0) { 
                 newDom += gap;
+}
             newDom += start;
 
             // Finally, pin to the real start and end of the month.
-            if (newDom < 1) 
+            if (newDom < 1) { 
                 newDom = 1;
-            if (newDom > monthLen) 
+}
+            if (newDom > monthLen) { 
                 newDom = monthLen;
+}
 
             // Set the DAY_OF_MONTH.  We rely on the fact that this field
             // takes precedence over everything else (since all other fields
@@ -1138,7 +1151,8 @@ int32_t GregorianCalendar::getActualMaximum(UCalendarDateFields field, UErrorCod
         * Feb 29 must be allowed to shift to Mar 1 when setting the year.
         */
         {
-            if(U_FAILURE(status)) return 0;
+            if(U_FAILURE(status)) { return 0;
+}
             Calendar *cal = clone();
             if(!cal) {
                 status = U_MEMORY_ALLOCATION_ERROR;
@@ -1185,10 +1199,12 @@ int32_t GregorianCalendar::handleGetExtendedYear() {
 
     // There are three separate fields which could be used to
     // derive the proper year.  Use the one most recently set.
-    if (fStamp[yearField] < fStamp[UCAL_YEAR])
+    if (fStamp[yearField] < fStamp[UCAL_YEAR]) {
         yearField = UCAL_YEAR;
-    if (fStamp[yearField] < fStamp[UCAL_YEAR_WOY])
+}
+    if (fStamp[yearField] < fStamp[UCAL_YEAR_WOY]) {
         yearField = UCAL_YEAR_WOY;
+}
 
     // based on the "best" year field, get the year
     switch(yearField) {
@@ -1240,8 +1256,9 @@ int32_t GregorianCalendar::handleGetExtendedYearFromWeekFields(int32_t yearWoy, 
 UBool
 GregorianCalendar::inDaylightTime(UErrorCode& status) const
 {
-    if (U_FAILURE(status) || !getTimeZone().useDaylightTime()) 
+    if (U_FAILURE(status) || !getTimeZone().useDaylightTime()) { 
         return FALSE;
+}
 
     // Force an update of the state of the Calendar.
     ((GregorianCalendar*)this)->complete(status); // cast away const

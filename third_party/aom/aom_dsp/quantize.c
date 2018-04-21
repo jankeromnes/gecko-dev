@@ -37,10 +37,11 @@ void quantize_b_helper_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
       const int coeff = coeff_ptr[rc] * wt;
 
       if (coeff < (zbins[rc != 0] * (1 << AOM_QM_BITS)) &&
-          coeff > (nzbins[rc != 0] * (1 << AOM_QM_BITS)))
+          coeff > (nzbins[rc != 0] * (1 << AOM_QM_BITS))) {
         non_zero_count--;
-      else
+      } else {
         break;
+}
     }
 
     // Quantization pass: All coefficients with index >= zero_flag are
@@ -68,7 +69,8 @@ void quantize_b_helper_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
             AOM_QM_BITS;
         dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant / (1 << log_scale);
 
-        if (tmp32) eob = i;
+        if (tmp32) { eob = i;
+}
       }
     }
   }
@@ -108,8 +110,9 @@ void highbd_quantize_b_helper_c(
       // If the coefficient is out of the base ZBIN range, keep it for
       // quantization.
       if (coeff >= (zbins[rc != 0] * (1 << AOM_QM_BITS)) ||
-          coeff <= (nzbins[rc != 0] * (1 << AOM_QM_BITS)))
+          coeff <= (nzbins[rc != 0] * (1 << AOM_QM_BITS))) {
         idx_arr[idx++] = i;
+}
     }
 
     // Quantization pass: only process the coefficients selected in
@@ -131,7 +134,8 @@ void highbd_quantize_b_helper_c(
       dequant = (dequant_ptr[rc != 0] * iwt + (1 << (AOM_QM_BITS - 1))) >>
                 AOM_QM_BITS;
       dqcoeff_ptr[rc] = (qcoeff_ptr[rc] * dequant) / (1 << log_scale);
-      if (abs_qcoeff) eob = idx_arr[i];
+      if (abs_qcoeff) { eob = idx_arr[i];
+}
     }
   }
   *eob_ptr = eob + 1;
@@ -164,7 +168,8 @@ void quantize_dc_helper(const tran_low_t *coeff_ptr, int n_coeffs,
     qcoeff_ptr[rc] = (tmp32 ^ coeff_sign) - coeff_sign;
     dequant = (dequant_ptr * iwt + (1 << (AOM_QM_BITS - 1))) >> AOM_QM_BITS;
     dqcoeff_ptr[rc] = (qcoeff_ptr[rc] * dequant) / (1 << log_scale);
-    if (tmp32) eob = 0;
+    if (tmp32) { eob = 0;
+}
   }
   *eob_ptr = eob + 1;
 }

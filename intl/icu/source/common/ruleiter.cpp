@@ -36,7 +36,8 @@ UBool RuleCharacterIterator::atEnd() const {
 }
 
 UChar32 RuleCharacterIterator::next(int32_t options, UBool& isEscaped, UErrorCode& ec) {
-    if (U_FAILURE(ec)) return DONE;
+    if (U_FAILURE(ec)) { return DONE;
+}
 
     UChar32 c = DONE;
     isEscaped = FALSE;
@@ -104,7 +105,8 @@ void RuleCharacterIterator::skipIgnored(int32_t options) {
     if ((options & SKIP_WHITESPACE) != 0) {
         for (;;) {
             UChar32 a = _current();
-            if (!PatternProps::isWhiteSpace(a)) break;
+            if (!PatternProps::isWhiteSpace(a)) { break;
+}
             _advance(U16_LENGTH(a));
         }
     }

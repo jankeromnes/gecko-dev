@@ -559,9 +559,9 @@ Balloc
 	ACQUIRE_DTOA_LOCK(0);
 	/* The k > Kmax case does not need ACQUIRE_DTOA_LOCK(0), */
 	/* but this case seems very unlikely. */
-	if (k <= Kmax && (rv = freelist[k]))
+	if (k <= Kmax && (rv = freelist[k])) {
 		freelist[k] = rv->next;
-	else {
+	} else {
 		x = 1 << k;
 #ifdef Omit_Private_Memory
 		rv = (Bigint *)MALLOC(sizeof(Bigint) + (x-1)*sizeof(ULong));
@@ -572,8 +572,9 @@ Balloc
 			rv = (Bigint*)pmem_next;
 			pmem_next += len;
 			}
-		else
+		else {
 			rv = (Bigint*)MALLOC(len*sizeof(double));
+}
 #endif
 		rv->k = k;
 		rv->maxwds = x;
@@ -592,13 +593,13 @@ Bfree
 #endif
 {
 	if (v) {
-		if (v->k > Kmax)
+		if (v->k > Kmax) {
 #ifdef FREE
 			FREE((void*)v);
 #else
 			free((void*)v);
 #endif
-		else {
+		} else {
 			ACQUIRE_DTOA_LOCK(0);
 			v->next = freelist[v->k];
 			freelist[v->k] = v;
@@ -680,7 +681,8 @@ s2b
 	Long x, y;
 
 	x = (nd + 8) / 9;
-	for(k = 0, y = 1; x > y; y <<= 1, k++) ;
+	for(k = 0, y = 1; x > y; y <<= 1, k++) { ;
+}
 #ifdef Pack_32
 	b = Balloc(k);
 	b->x[0] = y9;
@@ -694,14 +696,16 @@ s2b
 	i = 9;
 	if (9 < nd0) {
 		s += 9;
-		do b = multadd(b, 10, *s++ - '0');
-			while(++i < nd0);
+		do { b = multadd(b, 10, *s++ - '0');
+			} while(++i < nd0);
 		s++;
 		}
-	else
+	else {
 		s += 10;
-	for(; i < nd; i++)
+}
+	for(; i < nd; i++) {
 		b = multadd(b, 10, *s++ - '0');
+}
 	return b;
 	}
 
@@ -755,10 +759,11 @@ lo0bits
 	int k;
 	ULong x = *y;
 
-	if (x>1)
+	if (x>1) {
 		*y = ( x >> (k = pr_bitscan_ctz32(x)) );
-	else
+	} else {
 		k = ((x ^ 1) << 5);
+}
 #else
 	register int k;
 	register ULong x = *y;
@@ -847,11 +852,13 @@ mult
 	wa = a->wds;
 	wb = b->wds;
 	wc = wa + wb;
-	if (wc > a->maxwds)
+	if (wc > a->maxwds) {
 		k++;
+}
 	c = Balloc(k);
-	for(x = c->x, xa = x + wc; x < xa; x++)
+	for(x = c->x, xa = x + wc; x < xa; x++) {
 		*x = 0;
+}
 	xa = a->x;
 	xae = xa + wa;
 	xb = b->x;
@@ -922,7 +929,8 @@ mult
 		}
 #endif
 #endif
-	for(xc0 = c->x, xc = xc0 + wc; wc > 0 && !*--xc; --wc) ;
+	for(xc0 = c->x, xc = xc0 + wc; wc > 0 && !*--xc; --wc) { ;
+}
 	c->wds = wc;
 	return c;
 	}
@@ -941,11 +949,13 @@ pow5mult
 	int i;
 	static int p05[3] = { 5, 25, 125 };
 
-	if (i = k & 3)
+	if (i = k & 3) {
 		b = multadd(b, p05[i-1], 0);
+}
 
-	if (!(k >>= 2))
+	if (!(k >>= 2)) {
 		return b;
+}
 	if (!(p5 = p5s)) {
 		/* first time */
 #ifdef MULTIPLE_THREADS
@@ -966,8 +976,9 @@ pow5mult
 			Bfree(b);
 			b = b1;
 			}
-		if (!(k >>= 1))
+		if (!(k >>= 1)) {
 			break;
+}
 		if (!(p51 = p5->next)) {
 #ifdef MULTIPLE_THREADS
 			ACQUIRE_DTOA_LOCK(1);
@@ -1005,12 +1016,14 @@ lshift
 #endif
 	k1 = b->k;
 	n1 = n + b->wds + 1;
-	for(i = b->maxwds; n1 > i; i <<= 1)
+	for(i = b->maxwds; n1 > i; i <<= 1) {
 		k1++;
+}
 	b1 = Balloc(k1);
 	x1 = b1->x;
-	for(i = 0; i < n; i++)
+	for(i = 0; i < n; i++) {
 		*x1++ = 0;
+}
 	x = b->x;
 	xe = x + b->wds;
 #ifdef Pack_32
@@ -1022,8 +1035,9 @@ lshift
 			z = *x++ >> k1;
 			}
 			while(x < xe);
-		if (*x1 = z)
+		if (*x1 = z) {
 			++n1;
+}
 		}
 #else
 	if (k &= 0xf) {
@@ -1038,9 +1052,10 @@ lshift
 			++n1;
 		}
 #endif
-	else do
+	else { do {
 		*x1++ = *x++;
-		while(x < xe);
+		} while(x < xe);
+}
 	b1->wds = n1 - 1;
 	Bfree(b);
 	return b1;
@@ -1065,17 +1080,20 @@ cmp
 	if (j > 1 && !b->x[j-1])
 		Bug("cmp called with b->x[b->wds-1] == 0");
 #endif
-	if (i -= j)
+	if (i -= j) {
 		return i;
+}
 	xa0 = a->x;
 	xa = xa0 + j;
 	xb0 = b->x;
 	xb = xb0 + j;
 	for(;;) {
-		if (*--xa != *--xb)
+		if (*--xa != *--xb) {
 			return *xa < *xb ? -1 : 1;
-		if (xa <= xa0)
+}
+		if (xa <= xa0) {
 			break;
+}
 		}
 	return 0;
 	}
@@ -1113,8 +1131,9 @@ diff
 		b = c;
 		i = 1;
 		}
-	else
+	else {
 		i = 0;
+}
 	c = Balloc(a->k);
 	c->sign = i;
 	wa = a->wds;
@@ -1168,8 +1187,9 @@ diff
 		}
 #endif
 #endif
-	while(!*--xc)
+	while(!*--xc) {
 		wa--;
+}
 	c->wds = wa;
 	return c;
 	}
@@ -1330,8 +1350,9 @@ d2b
 	z |= Exp_msk11;
 #endif
 #else
-	if (de = (int)(d0 >> Exp_shift))
+	if (de = (int)(d0 >> Exp_shift)) {
 		z |= Exp_msk1;
+}
 #endif
 #ifdef Pack_32
 	if (y = d1) {
@@ -1339,8 +1360,9 @@ d2b
 			x[0] = y | z << 32 - k;
 			z >>= k;
 			}
-		else
+		else {
 			x[0] = y;
+}
 #ifndef Sudden_Underflow
 		i =
 #endif
@@ -1457,9 +1479,9 @@ ratio
 			dval(db) *= 1 << k;
 		}
 #else
-	if (k > 0)
+	if (k > 0) {
 		word0(da) += k*Exp_msk1;
-	else {
+	} else {
 		k = -k;
 		word0(db) += k*Exp_msk1;
 		}
@@ -1623,17 +1645,19 @@ PR_strtod
 	CONST char *s2;
 #endif
 
-	if (!_pr_initialized) _PR_ImplicitInitialization();
+	if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
 	sign = nz0 = nz = 0;
 	dval(rv) = 0.;
-	for(s = s00;;s++) switch(*s) {
+	for(s = s00;;s++) { switch(*s) {
 		case '-':
 			sign = 1;
 			/* no break */
 		case '+':
-			if (*++s)
+			if (*++s) {
 				goto break2;
+}
 			/* no break */
 		case 0:
 			goto ret0;
@@ -1647,20 +1671,24 @@ PR_strtod
 		default:
 			goto break2;
 		}
+}
  break2:
 	if (*s == '0') {
 		nz0 = 1;
-		while(*++s == '0') ;
-		if (!*s)
+		while(*++s == '0') { ;
+}
+		if (!*s) {
 			goto ret;
+}
 		}
 	s0 = s;
 	y = z = 0;
-	for(nd = nf = 0; (c = *s) >= '0' && c <= '9'; nd++, s++)
-		if (nd < 9)
+	for(nd = nf = 0; (c = *s) >= '0' && c <= '9'; nd++, s++) {
+		if (nd < 9) {
 			y = 10*y + c - '0';
-		else if (nd < 16)
+		} else if (nd < 16) {
 			z = 10*z + c - '0';
+}
 	nd0 = nd;
 #ifdef USE_LOCALE
 	s1 = localeconv()->decimal_point;
@@ -1684,8 +1712,9 @@ PR_strtod
 	if (c == '.') {
 		c = *++s;
 		if (!nd) {
-			for(; c == '0'; c = *++s)
+			for(; c == '0'; c = *++s) {
 				nz++;
+}
 			if (c > '0' && c <= '9') {
 				s0 = s;
 				nf += nz;
@@ -1699,22 +1728,25 @@ PR_strtod
 			nz++;
 			if (c -= '0') {
 				nf += nz;
-				for(i = 1; i < nz; i++)
-					if (nd++ < 9)
+				for(i = 1; i < nz; i++) {
+					if (nd++ < 9) {
 						y *= 10;
-					else if (nd <= DBL_DIG + 1)
+					} else if (nd <= DBL_DIG + 1) {
 						z *= 10;
-				if (nd++ < 9)
+}
+				if (nd++ < 9) {
 					y = 10*y + c;
-				else if (nd <= DBL_DIG + 1)
+				} else if (nd <= DBL_DIG + 1) {
 					z = 10*z + c;
+}
 				nz = 0;
 				}
 			}
 		}
  dig_done:
-	if (nd > 64 * 1024)
+	if (nd > 64 * 1024) {
 		goto ret0;
+}
 	e = 0;
 	if (c == 'e' || c == 'E') {
 		if (!nd && !nz && !nz0) {
@@ -1729,28 +1761,34 @@ PR_strtod
 				c = *++s;
 			}
 		if (c >= '0' && c <= '9') {
-			while(c == '0')
+			while(c == '0') {
 				c = *++s;
+}
 			if (c > '0' && c <= '9') {
 				L = c - '0';
 				s1 = s;
-				while((c = *++s) >= '0' && c <= '9')
+				while((c = *++s) >= '0' && c <= '9') {
 					L = 10*L + c - '0';
-				if (s - s1 > 8 || L > 19999)
+}
+				if (s - s1 > 8 || L > 19999) {
 					/* Avoid confusion from exponents
 					 * so large that e might overflow.
 					 */
 					e = 19999; /* safe for 16 bit ints */
-				else
+				} else {
 					e = (int)L;
-				if (esign)
+}
+				if (esign) {
 					e = -e;
+}
 				}
-			else
+			else {
 				e = 0;
+}
 			}
-		else
+		else {
 			s = s00;
+}
 		}
 	if (!nd) {
 		if (!nz && !nz0) {
@@ -1794,8 +1832,9 @@ PR_strtod
 	 * after is the integer represented by those digits times
 	 * 10**e */
 
-	if (!nd0)
+	if (!nd0) {
 		nd0 = nd;
+}
 	k = nd < DBL_DIG + 1 ? nd : DBL_DIG + 1;
 	dval(rv) = y;
 	if (k > 9) {
@@ -1813,8 +1852,9 @@ PR_strtod
 #endif
 #endif
 			) {
-		if (!e)
+		if (!e) {
 			goto ret;
+}
 		if (e > 0) {
 			if (e <= Ten_pmax) {
 #ifdef VAX
@@ -1901,8 +1941,9 @@ PR_strtod
 	/* Get starting approximation = rv * 10**e1 */
 
 	if (e1 > 0) {
-		if (i = e1 & 15)
+		if (i = e1 & 15) {
 			dval(rv) *= tens[i];
+}
 		if (e1 &= ~15) {
 			if (e1 > DBL_MAX_10_EXP) {
  ovfl:
@@ -1935,55 +1976,65 @@ PR_strtod
 				word0(rv) = Big0;
 				word1(rv) = Big1;
 #endif /*IEEE_Arith*/
-				if (bd0)
+				if (bd0) {
 					goto retfree;
+}
 				goto ret;
 				}
 			e1 >>= 4;
-			for(j = 0; e1 > 1; j++, e1 >>= 1)
-				if (e1 & 1)
+			for(j = 0; e1 > 1; j++, e1 >>= 1) {
+				if (e1 & 1) {
 					dval(rv) *= bigtens[j];
+}
 		/* The last multiplication could overflow. */
 			word0(rv) -= P*Exp_msk1;
 			dval(rv) *= bigtens[j];
 			if ((z = word0(rv) & Exp_mask)
-			 > Exp_msk1*(DBL_MAX_EXP+Bias-P))
+			 > Exp_msk1*(DBL_MAX_EXP+Bias-P)) {
 				goto ovfl;
+}
 			if (z > Exp_msk1*(DBL_MAX_EXP+Bias-1-P)) {
 				/* set to largest number */
 				/* (Can't trust DBL_MAX) */
 				word0(rv) = Big0;
 				word1(rv) = Big1;
 				}
-			else
+			else {
 				word0(rv) += P*Exp_msk1;
+}
 			}
 		}
 	else if (e1 < 0) {
 		e1 = -e1;
-		if (i = e1 & 15)
+		if (i = e1 & 15) {
 			dval(rv) /= tens[i];
+}
 		if (e1 >>= 4) {
-			if (e1 >= 1 << n_bigtens)
+			if (e1 >= 1 << n_bigtens) {
 				goto undfl;
+}
 #ifdef Avoid_Underflow
-			if (e1 & Scale_Bit)
+			if (e1 & Scale_Bit) {
 				scale = 2*P;
-			for(j = 0; e1 > 0; j++, e1 >>= 1)
-				if (e1 & 1)
+}
+			for(j = 0; e1 > 0; j++, e1 >>= 1) {
+				if (e1 & 1) {
 					dval(rv) *= tinytens[j];
+}
 			if (scale && (j = 2*P + 1 - ((word0(rv) & Exp_mask)
 						>> Exp_shift)) > 0) {
 				/* scaled rv is denormal; zap j low bits */
 				if (j >= 32) {
 					word1(rv) = 0;
-					if (j >= 53)
+					if (j >= 53) {
 					 word0(rv) = (P+2)*Exp_msk1;
-					else
+					} else {
 					 word0(rv) &= 0xffffffff << j-32;
+}
 					}
-				else
+				else {
 					word1(rv) &= 0xffffffff << j;
+}
 				}
 #else
 			for(j = 0; e1 > 1; j++, e1 >>= 1)
@@ -2002,8 +2053,9 @@ PR_strtod
 #ifndef NO_ERRNO
 					PR_SetError(PR_RANGE_ERROR, 0);
 #endif
-					if (bd0)
+					if (bd0) {
 						goto retfree;
+}
 					goto ret;
 					}
 #ifndef Avoid_Underflow
@@ -2037,10 +2089,11 @@ PR_strtod
 			bb2 = bb5 = -e;
 			bd2 = bd5 = 0;
 			}
-		if (bbe >= 0)
+		if (bbe >= 0) {
 			bb2 += bbe;
-		else
+		} else {
 			bd2 -= bbe;
+}
 		bs2 = bb2;
 #ifdef Honor_FLT_ROUNDS
 		if (rounding != 1)
@@ -2049,10 +2102,11 @@ PR_strtod
 #ifdef Avoid_Underflow
 		j = bbe - scale;
 		i = j + bbbits - 1;	/* logb(rv) */
-		if (i < Emin)	/* denormal */
+		if (i < Emin) {	/* denormal */
 			j += P - Emin;
-		else
+		} else {
 			j = P + 1 - bbbits;
+}
 #else /*Avoid_Underflow*/
 #ifdef Sudden_Underflow
 #ifdef IBM
@@ -2075,8 +2129,9 @@ PR_strtod
 		bd2 += scale;
 #endif
 		i = bb2 < bd2 ? bb2 : bd2;
-		if (i > bs2)
+		if (i > bs2) {
 			i = bs2;
+}
 		if (i > 0) {
 			bb2 -= i;
 			bd2 -= i;
@@ -2088,14 +2143,18 @@ PR_strtod
 			Bfree(bb);
 			bb = bb1;
 			}
-		if (bb2 > 0)
+		if (bb2 > 0) {
 			bb = lshift(bb, bb2);
-		if (bd5 > 0)
+}
+		if (bd5 > 0) {
 			bd = pow5mult(bd, bd5);
-		if (bd2 > 0)
+}
+		if (bd2 > 0) {
 			bd = lshift(bd, bd2);
-		if (bs2 > 0)
+}
+		if (bs2 > 0) {
 			bs = lshift(bs, bs2);
+}
 		delta = diff(bb, bd);
 		dsign = delta->sign;
 		delta->sign = 0;
@@ -2218,8 +2277,9 @@ PR_strtod
 				break;
 				}
 			delta = lshift(delta,Log2P);
-			if (cmp(delta, bs) > 0)
+			if (cmp(delta, bs) > 0) {
 				goto drop_down;
+}
 			break;
 			}
 		if (i == 0) {
@@ -2267,10 +2327,11 @@ PR_strtod
 				if (scale) {
 					L = word0(rv) & Exp_mask;
 					if (L <= (2*P+1)*Exp_msk1) {
-						if (L > (P+2)*Exp_msk1)
+						if (L > (P+2)*Exp_msk1) {
 							/* round even ==> */
 							/* accept rv */
 							break;
+}
 						/* rv = smallest denormal */
 						goto undfl;
 						}
@@ -2287,17 +2348,19 @@ PR_strtod
 #endif
 				}
 #ifndef ROUND_BIASED
-			if (!(word1(rv) & LSB))
+			if (!(word1(rv) & LSB)) {
 				break;
+}
 #endif
-			if (dsign)
+			if (dsign) {
 				dval(rv) += ulp(dval(rv));
 #ifndef ROUND_BIASED
-			else {
+			} else {
 				dval(rv) -= ulp(dval(rv));
 #ifndef Sudden_Underflow
-				if (!dval(rv))
+				if (!dval(rv)) {
 					goto undfl;
+}
 #endif
 				}
 #ifdef Avoid_Underflow
@@ -2307,12 +2370,13 @@ PR_strtod
 			break;
 			}
 		if ((aadj = ratio(delta, bs)) <= 2.) {
-			if (dsign)
+			if (dsign) {
 				aadj = aadj1 = 1.;
-			else if (word1(rv) || word0(rv) & Bndry_mask) {
+			} else if (word1(rv) || word0(rv) & Bndry_mask) {
 #ifndef Sudden_Underflow
-				if (word1(rv) == Tiny1 && !word0(rv))
+				if (word1(rv) == Tiny1 && !word0(rv)) {
 					goto undfl;
+}
 #endif
 				aadj = 1.;
 				aadj1 = -1.;
@@ -2321,10 +2385,11 @@ PR_strtod
 				/* special case -- power of FLT_RADIX to be */
 				/* rounded down... */
 
-				if (aadj < 2./FLT_RADIX)
+				if (aadj < 2./FLT_RADIX) {
 					aadj = 1./FLT_RADIX;
-				else
+				} else {
 					aadj *= 0.5;
+}
 				aadj1 = -aadj;
 				}
 			}
@@ -2341,8 +2406,9 @@ PR_strtod
 					aadj1 += 0.5;
 				}
 #else
-			if (Flt_Rounds == 0)
+			if (Flt_Rounds == 0) {
 				aadj1 += 0.5;
+}
 #endif /*Check_FLT_ROUNDS*/
 			}
 		y = word0(rv) & Exp_mask;
@@ -2356,21 +2422,24 @@ PR_strtod
 			dval(rv) += adj;
 			if ((word0(rv) & Exp_mask) >=
 					Exp_msk1*(DBL_MAX_EXP+Bias-P)) {
-				if (word0(rv0) == Big0 && word1(rv0) == Big1)
+				if (word0(rv0) == Big0 && word1(rv0) == Big1) {
 					goto ovfl;
+}
 				word0(rv) = Big0;
 				word1(rv) = Big1;
 				goto cont;
 				}
-			else
+			else {
 				word0(rv) += P*Exp_msk1;
+}
 			}
 		else {
 #ifdef Avoid_Underflow
 			if (scale && y <= 2*P*Exp_msk1) {
 				if (aadj <= 0x7fffffff) {
-					if ((z = aadj) <= 0)
+					if ((z = aadj) <= 0) {
 						z = 1;
+}
 					aadj = z;
 					aadj1 = dsign ? aadj : -aadj;
 					}
@@ -2428,7 +2497,7 @@ PR_strtod
 		z = word0(rv) & Exp_mask;
 #ifndef SET_INEXACT
 #ifdef Avoid_Underflow
-		if (!scale)
+		if (!scale) {
 #endif
 		if (y == z) {
 			/* Can we stop now? */
@@ -2436,12 +2505,15 @@ PR_strtod
 			aadj -= L;
 			/* The tolerances below are conservative. */
 			if (dsign || word1(rv) || word0(rv) & Bndry_mask) {
-				if (aadj < .4999999 || aadj > .5000001)
+				if (aadj < .4999999 || aadj > .5000001) {
 					break;
+}
 				}
-			else if (aadj < .4999999/FLT_RADIX)
+			else if (aadj < .4999999/FLT_RADIX) {
 				break;
+}
 			}
+}
 #endif
  cont:
 		Bfree(bb);
@@ -2467,8 +2539,9 @@ PR_strtod
 		dval(rv) *= dval(rv0);
 #ifndef NO_ERRNO
 		/* try to avoid the bug of testing an 8087 register value */
-		if (word0(rv) == 0 && word1(rv) == 0)
+		if (word0(rv) == 0 && word1(rv) == 0) {
 			PR_SetError(PR_RANGE_ERROR, 0);
+}
 #endif
 		}
 #endif /* Avoid_Underflow */
@@ -2486,8 +2559,9 @@ PR_strtod
 	Bfree(bd0);
 	Bfree(delta);
  ret:
-	if (se)
+	if (se) {
 		*se = (char *)s;
+}
 	return sign ? -dval(rv) : dval(rv);
 	}
 
@@ -2515,8 +2589,9 @@ quorem
 	/*debug*/ if (b->wds > n)
 	/*debug*/	Bug("oversize b in quorem");
 #endif
-	if (b->wds < n)
+	if (b->wds < n) {
 		return 0;
+}
 	sx = S->x;
 	sxe = sx + --n;
 	bx = b->x;
@@ -2559,8 +2634,9 @@ quorem
 			while(sx <= sxe);
 		if (!*bxe) {
 			bx = b->x;
-			while(--bxe > bx && !*bxe)
+			while(--bxe > bx && !*bxe) {
 				--n;
+}
 			b->wds = n;
 			}
 		}
@@ -2601,8 +2677,9 @@ quorem
 		bx = b->x;
 		bxe = bx + n;
 		if (!*bxe) {
-			while(--bxe > bx && !*bxe)
+			while(--bxe > bx && !*bxe) {
 				--n;
+}
 			b->wds = n;
 			}
 		}
@@ -2625,8 +2702,9 @@ rv_alloc(int i)
 	j = sizeof(ULong);
 	for(k = 0;
 		sizeof(Bigint) - sizeof(ULong) - sizeof(int) + j <= i;
-		j <<= 1)
+		j <<= 1) {
 			k++;
+}
 	r = (int*)Balloc(k);
 	*r = k;
 	return
@@ -2646,9 +2724,11 @@ nrv_alloc(char *s, char **rve, int n)
 	char *rv, *t;
 
 	t = rv = rv_alloc(n);
-	while(*t = *s++) t++;
-	if (rve)
+	while(*t = *s++) { t++;
+}
+	if (rve) {
 		*rve = t;
+}
 	return rv;
 	}
 
@@ -2783,8 +2863,9 @@ dtoa
 		*sign = 1;
 		word0(d) &= ~Sign_bit;	/* clear sign bit */
 		}
-	else
+	else {
 		*sign = 0;
+}
 
 #if defined(IEEE_Arith) + defined(VAX)
 #ifdef IEEE_Arith
@@ -2796,8 +2877,9 @@ dtoa
 		/* Infinity or NaN */
 		*decpt = 9999;
 #ifdef IEEE_Arith
-		if (!word1(d) && !(word0(d) & 0xfffff))
+		if (!word1(d) && !(word0(d) & 0xfffff)) {
 			return nrv_alloc("Infinity", rve, 8);
+}
 #endif
 		return nrv_alloc("NaN", rve, 3);
 		}
@@ -2882,12 +2964,14 @@ dtoa
 #endif
 	ds = (dval(d2)-1.5)*0.289529654602168 + 0.1760912590558 + i*0.301029995663981;
 	k = (int)ds;
-	if (ds < 0. && ds != k)
+	if (ds < 0. && ds != k) {
 		k--;	/* want k = floor(ds) */
+}
 	k_check = 1;
 	if (k >= 0 && k <= Ten_pmax) {
-		if (dval(d) < tens[k])
+		if (dval(d) < tens[k]) {
 			k--;
+}
 		k_check = 0;
 		}
 	j = bbits - i - 1;
@@ -2909,8 +2993,9 @@ dtoa
 		b5 = -k;
 		s5 = 0;
 		}
-	if (mode < 0 || mode > 9)
+	if (mode < 0 || mode > 9) {
 		mode = 0;
+}
 
 #ifndef SET_INEXACT
 #ifdef Check_FLT_ROUNDS
@@ -2936,8 +3021,9 @@ dtoa
 			leftright = 0;
 			/* no break */
 		case 4:
-			if (ndigits <= 0)
+			if (ndigits <= 0) {
 				ndigits = 1;
+}
 			ilim = ilim1 = i = ndigits;
 			break;
 		case 3:
@@ -2947,8 +3033,9 @@ dtoa
 			i = ndigits + k + 1;
 			ilim = i;
 			ilim1 = i - 1;
-			if (i <= 0)
+			if (i <= 0) {
 				i = 1;
+}
 		}
 	s = s0 = rv_alloc(i);
 
@@ -2975,24 +3062,27 @@ dtoa
 				dval(d) /= bigtens[n_bigtens-1];
 				ieps++;
 				}
-			for(; j; j >>= 1, i++)
+			for(; j; j >>= 1, i++) {
 				if (j & 1) {
 					ieps++;
 					ds *= bigtens[i];
 					}
+}
 			dval(d) /= ds;
 			}
 		else if (j1 = -k) {
 			dval(d) *= tens[j1 & 0xf];
-			for(j = j1 >> 4; j; j >>= 1, i++)
+			for(j = j1 >> 4; j; j >>= 1, i++) {
 				if (j & 1) {
 					ieps++;
 					dval(d) *= bigtens[i];
 					}
+}
 			}
 		if (k_check && dval(d) < 1. && ilim > 0) {
-			if (ilim1 <= 0)
+			if (ilim1 <= 0) {
 				goto fast_failed;
+}
 			ilim = ilim1;
 			k--;
 			dval(d) *= 10.;
@@ -3003,10 +3093,12 @@ dtoa
 		if (ilim == 0) {
 			S = mhi = 0;
 			dval(d) -= 5.;
-			if (dval(d) > dval(eps))
+			if (dval(d) > dval(eps)) {
 				goto one_digit;
-			if (dval(d) < -dval(eps))
+}
+			if (dval(d) < -dval(eps)) {
 				goto no_digits;
+}
 			goto fast_failed;
 			}
 #ifndef No_leftright
@@ -3019,12 +3111,15 @@ dtoa
 				L = dval(d);
 				dval(d) -= L;
 				*s++ = '0' + (int)L;
-				if (dval(d) < dval(eps))
+				if (dval(d) < dval(eps)) {
 					goto ret1;
-				if (1. - dval(d) < dval(eps))
+}
+				if (1. - dval(d) < dval(eps)) {
 					goto bump_up;
-				if (++i >= ilim)
+}
+				if (++i >= ilim) {
 					break;
+}
 				dval(eps) *= 10.;
 				dval(d) *= 10.;
 				}
@@ -3035,14 +3130,16 @@ dtoa
 			dval(eps) *= tens[ilim-1];
 			for(i = 1;; i++, dval(d) *= 10.) {
 				L = (Long)(dval(d));
-				if (!(dval(d) -= L))
+				if (!(dval(d) -= L)) {
 					ilim = i;
+}
 				*s++ = '0' + (int)L;
 				if (i == ilim) {
-					if (dval(d) > 0.5 + dval(eps))
+					if (dval(d) > 0.5 + dval(eps)) {
 						goto bump_up;
-					else if (dval(d) < 0.5 - dval(eps)) {
-						while(*--s == '0');
+					} else if (dval(d) < 0.5 - dval(eps)) {
+						while(*--s == '0') {;
+}
 						s++;
 						goto ret1;
 						}
@@ -3066,8 +3163,9 @@ dtoa
 		ds = tens[k];
 		if (ndigits < 0 && ilim <= 0) {
 			S = mhi = 0;
-			if (ilim < 0 || dval(d) <= 5*ds)
+			if (ilim < 0 || dval(d) <= 5*ds) {
 				goto no_digits;
+}
 			goto one_digit;
 			}
 		for(i = 1; i <= k+1; i++, dval(d) *= 10.) {
@@ -3098,12 +3196,13 @@ dtoa
 				dval(d) += dval(d);
 				if (dval(d) > ds || dval(d) == ds && L & 1) {
  bump_up:
-					while(*--s == '9')
+					while(*--s == '9') {
 						if (s == s0) {
 							k++;
 							*s = '0';
 							break;
 							}
+}
 					++*s++;
 					}
 				break;
@@ -3143,15 +3242,18 @@ dtoa
 				Bfree(b);
 				b = b1;
 				}
-			if (j = b5 - m5)
+			if (j = b5 - m5) {
 				b = pow5mult(b, j);
+}
 			}
-		else
+		else {
 			b = pow5mult(b, b5);
+}
 		}
 	S = i2b(1);
-	if (s5 > 0)
+	if (s5 > 0) {
 		S = pow5mult(S, s5);
+}
 
 	/* Check for special case that d is a normalized power of 2. */
 
@@ -3181,8 +3283,9 @@ dtoa
 	 * can do shifts and ors to compute the numerator for q.
 	 */
 #ifdef Pack_32
-	if (i = ((s5 ? 32 - hi0bits(S->x[S->wds-1]) : 1) + s2) & 0x1f)
+	if (i = ((s5 ? 32 - hi0bits(S->x[S->wds-1]) : 1) + s2) & 0x1f) {
 		i = 32 - i;
+}
 #else
 	if (i = ((s5 ? 32 - hi0bits(S->x[S->wds-1]) : 1) + s2) & 0xf)
 		i = 16 - i;
@@ -3199,16 +3302,19 @@ dtoa
 		m2 += i;
 		s2 += i;
 		}
-	if (b2 > 0)
+	if (b2 > 0) {
 		b = lshift(b, b2);
-	if (s2 > 0)
+}
+	if (s2 > 0) {
 		S = lshift(S, s2);
+}
 	if (k_check) {
 		if (cmp(b,S) < 0) {
 			k--;
 			b = multadd(b, 10, 0);	/* we botched the k estimate */
-			if (leftright)
+			if (leftright) {
 				mhi = multadd(mhi, 10, 0);
+}
 			ilim = ilim1;
 			}
 		}
@@ -3225,8 +3331,9 @@ dtoa
 		goto ret;
 		}
 	if (leftright) {
-		if (m2 > 0)
+		if (m2 > 0) {
 			mhi = lshift(mhi, m2);
+}
 
 		/* Compute mlo -- check for special case
 		 * that d is a normalized power of 2.
@@ -3254,10 +3361,12 @@ dtoa
 				&& rounding >= 1
 #endif
 								   ) {
-				if (dig == '9')
+				if (dig == '9') {
 					goto round_9_up;
-				if (j > 0)
+}
+				if (j > 0) {
 					dig++;
+}
 #ifdef SET_INEXACT
 				else if (!b->x[0] && b->wds <= 1)
 					inexact = 0;
@@ -3288,8 +3397,9 @@ dtoa
 					b = lshift(b, 1);
 					j1 = cmp(b, S);
 					if ((j1 > 0 || j1 == 0 && dig & 1)
-					&& dig++ == '9')
+					&& dig++ == '9') {
 						goto round_9_up;
+}
 					}
  accept_dig:
 				*s++ = dig;
@@ -3312,18 +3422,19 @@ dtoa
  keep_dig:
 #endif
 			*s++ = dig;
-			if (i == ilim)
+			if (i == ilim) {
 				break;
+}
 			b = multadd(b, 10, 0);
-			if (mlo == mhi)
+			if (mlo == mhi) {
 				mlo = mhi = multadd(mhi, 10, 0);
-			else {
+			} else {
 				mlo = multadd(mlo, 10, 0);
 				mhi = multadd(mhi, 10, 0);
 				}
 			}
 		}
-	else
+	else {
 		for(i = 1;; i++) {
 			*s++ = dig = quorem(b,S) + '0';
 			if (!b->x[0] && b->wds <= 1) {
@@ -3332,10 +3443,12 @@ dtoa
 #endif
 				goto ret;
 				}
-			if (i >= ilim)
+			if (i >= ilim) {
 				break;
+}
 			b = multadd(b, 10, 0);
 			}
+}
 
 	/* Round off last digit */
 
@@ -3349,26 +3462,29 @@ dtoa
 	j = cmp(b, S);
 	if (j > 0 || j == 0 && dig & 1) {
  roundoff:
-		while(*--s == '9')
+		while(*--s == '9') {
 			if (s == s0) {
 				k++;
 				*s++ = '1';
 				goto ret;
 				}
+}
 		++*s++;
 		}
 	else {
 #ifdef Honor_FLT_ROUNDS
  trimzeros:
 #endif
-		while(*--s == '0');
+		while(*--s == '0') {;
+}
 		s++;
 		}
  ret:
 	Bfree(S);
 	if (mhi) {
-		if (mlo && mlo != mhi)
+		if (mlo && mlo != mhi) {
 			Bfree(mlo);
+}
 		Bfree(mhi);
 		}
  ret1:
@@ -3386,8 +3502,9 @@ dtoa
 	Bfree(b);
 	*s = 0;
 	*decpt = k + 1;
-	if (rve)
+	if (rve) {
 		*rve = s;
+}
 	return s0;
 	}
 #ifdef __cplusplus
@@ -3402,7 +3519,8 @@ PR_dtoa(PRFloat64 d, PRIntn mode, PRIntn ndigits,
     PRSize resultlen;
     PRStatus rv = PR_FAILURE;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     if (mode < 0 || mode > 3) {
         PR_SetError(PR_INVALID_ARGUMENT_ERROR, 0);

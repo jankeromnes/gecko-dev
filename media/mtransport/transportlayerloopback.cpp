@@ -32,18 +32,21 @@ nsresult TransportLayerLoopback::Init() {
   nsresult rv;
   target_ = do_GetService(NS_SOCKETTRANSPORTSERVICE_CONTRACTID, &rv);
   MOZ_ASSERT(NS_SUCCEEDED(rv));
-  if (!NS_SUCCEEDED(rv))
+  if (!NS_SUCCEEDED(rv)) {
     return rv;
+}
 
   timer_ = NS_NewTimer(target_);
   MOZ_ASSERT(timer_);
-  if (!timer_)
+  if (!timer_) {
     return NS_ERROR_FAILURE;
+}
 
   packets_lock_ = PR_NewLock();
   MOZ_ASSERT(packets_lock_);
-  if (!packets_lock_)
+  if (!packets_lock_) {
     return NS_ERROR_FAILURE;
+}
 
   deliverer_ = new Deliverer(this);
 
@@ -69,8 +72,9 @@ TransportLayerLoopback::SendPacket(const unsigned char *data, size_t len) {
   }
 
   nsresult res = peer_->QueuePacket(data, len);
-  if (!NS_SUCCEEDED(res))
+  if (!NS_SUCCEEDED(res)) {
     return TE_ERROR;
+}
 
   return static_cast<TransportResult>(len);
 }
@@ -97,8 +101,9 @@ nsresult TransportLayerLoopback::QueuePacket(const unsigned char *data,
 
   PRStatus r = PR_Unlock(packets_lock_);
   MOZ_ASSERT(r == PR_SUCCESS);
-  if (r != PR_SUCCESS)
+  if (r != PR_SUCCESS) {
     return NS_ERROR_FAILURE;
+}
 
   return NS_OK;
 }
@@ -120,8 +125,9 @@ void TransportLayerLoopback::DeliverPackets() {
 NS_IMPL_ISUPPORTS(TransportLayerLoopback::Deliverer, nsITimerCallback, nsINamed)
 
 NS_IMETHODIMP TransportLayerLoopback::Deliverer::Notify(nsITimer *timer) {
-  if (!layer_)
+  if (!layer_) {
     return NS_OK;
+}
 
   layer_->DeliverPackets();
 

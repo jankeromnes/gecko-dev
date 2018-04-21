@@ -58,16 +58,19 @@ int nr_stun_client_ctx_create(char *label, nr_socket *sock, nr_transport_addr *p
     char allow_loopback;
     int r,_status;
 
-    if ((r=nr_stun_startup()))
+    if ((r=nr_stun_startup())) {
       ABORT(r);
+}
 
-    if(!(ctx=RCALLOC(sizeof(nr_stun_client_ctx))))
+    if(!(ctx=RCALLOC(sizeof(nr_stun_client_ctx)))) {
       ABORT(R_NO_MEMORY);
+}
 
     ctx->state=NR_STUN_CLIENT_STATE_INITTED;
 
-    if(!(ctx->label=r_strdup(label)))
+    if(!(ctx->label=r_strdup(label))) {
       ABORT(R_NO_MEMORY);
+}
 
     ctx->sock=sock;
 
@@ -80,14 +83,17 @@ int nr_stun_client_ctx_create(char *label, nr_socket *sock, nr_transport_addr *p
       ctx->rto_ms = 100;
     }
 
-    if (NR_reg_get_double(NR_STUN_REG_PREF_CLNT_RETRANSMIT_BACKOFF, &ctx->retransmission_backoff_factor))
+    if (NR_reg_get_double(NR_STUN_REG_PREF_CLNT_RETRANSMIT_BACKOFF, &ctx->retransmission_backoff_factor)) {
       ctx->retransmission_backoff_factor = 2.0;
+}
 
-    if (NR_reg_get_uint4(NR_STUN_REG_PREF_CLNT_MAXIMUM_TRANSMITS, &ctx->maximum_transmits))
+    if (NR_reg_get_uint4(NR_STUN_REG_PREF_CLNT_MAXIMUM_TRANSMITS, &ctx->maximum_transmits)) {
       ctx->maximum_transmits = 7;
+}
 
-    if (NR_reg_get_uint4(NR_STUN_REG_PREF_CLNT_FINAL_RETRANSMIT_BACKOFF, &ctx->maximum_transmits_timeout_ms))
+    if (NR_reg_get_uint4(NR_STUN_REG_PREF_CLNT_FINAL_RETRANSMIT_BACKOFF, &ctx->maximum_transmits_timeout_ms)) {
       ctx->maximum_transmits_timeout_ms = 16 * ctx->rto_ms;
+}
 
     ctx->mapped_addr_check_mask = NR_STUN_TRANSPORT_ADDR_CHECK_WILDCARD;
     if (NR_reg_get_char(NR_STUN_REG_PREF_ALLOW_LOOPBACK_ADDRS, &allow_loopback) ||
@@ -131,8 +137,9 @@ int nr_stun_client_start(nr_stun_client_ctx *ctx, int mode, NR_async_cb finished
   {
     int r,_status;
 
-    if (ctx->state != NR_STUN_CLIENT_STATE_INITTED)
+    if (ctx->state != NR_STUN_CLIENT_STATE_INITTED) {
         ABORT(R_NOT_PERMITTED);
+}
 
     ctx->mode=mode;
 
@@ -141,8 +148,9 @@ int nr_stun_client_start(nr_stun_client_ctx *ctx, int mode, NR_async_cb finished
     ctx->cb_arg=cb_arg;
 
     if(mode!=NR_STUN_CLIENT_MODE_KEEPALIVE){
-      if(r=nr_stun_client_send_request(ctx))
+      if(r=nr_stun_client_send_request(ctx)) {
         ABORT(r);
+}
     }
 
     _status=0;
@@ -163,12 +171,14 @@ int nr_stun_client_restart(nr_stun_client_ctx *ctx)
     nr_stun_message_attribute *ec;
     nr_stun_message_attribute *as;
 
-    if (ctx->state != NR_STUN_CLIENT_STATE_RUNNING)
+    if (ctx->state != NR_STUN_CLIENT_STATE_RUNNING) {
         ABORT(R_NOT_PERMITTED);
+}
 
     assert(ctx->retry_ct <= 2);
-    if (ctx->retry_ct > 2)
+    if (ctx->retry_ct > 2) {
         ABORT(R_NOT_PERMITTED);
+}
 
     ++ctx->retry_ct;
 
@@ -185,8 +195,9 @@ int nr_stun_client_restart(nr_stun_client_ctx *ctx)
 
     nr_stun_client_reset(ctx);
 
-    if (r=nr_stun_client_start(ctx, mode, finished_cb, cb_arg))
+    if (r=nr_stun_client_start(ctx, mode, finished_cb, cb_arg)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -232,8 +243,9 @@ static void nr_stun_client_timer_expired_cb(NR_SOCKET s, int b, void *cb_arg)
     ctx->timer_handle=0;
 
     /* Shouldn't happen */
-    if(ctx->state==NR_STUN_CLIENT_STATE_CANCELLED)
+    if(ctx->state==NR_STUN_CLIENT_STATE_CANCELLED) {
       ABORT(R_REJECTED);
+}
 
     gettimeofday(&now, 0);
     if (r_timeval_diff_ms(&now, &ctx->timer_set, &ms_waited)) {
@@ -249,8 +261,9 @@ static void nr_stun_client_timer_expired_cb(NR_SOCKET s, int b, void *cb_arg)
         ABORT(R_FAILED);
     }
 
-    if (ctx->state != NR_STUN_CLIENT_STATE_RUNNING)
+    if (ctx->state != NR_STUN_CLIENT_STATE_RUNNING) {
         ABORT(R_NOT_PERMITTED);
+}
 
     // track retransmits for ice telemetry
     nr_ice_accumulate_count(&(ctx->retransmit_ct), 1);
@@ -276,8 +289,9 @@ int nr_stun_client_force_retransmit(nr_stun_client_ctx *ctx)
   {
     int r,_status;
 
-    if (ctx->state != NR_STUN_CLIENT_STATE_RUNNING)
+    if (ctx->state != NR_STUN_CLIENT_STATE_RUNNING) {
         ABORT(R_NOT_PERMITTED);
+}
 
     if (ctx->request_ct > ctx->maximum_transmits) {
         r_log(NR_LOG_STUN,LOG_INFO,"STUN-CLIENT(%s): Too many retransmit attempts",ctx->label);
@@ -290,8 +304,9 @@ int nr_stun_client_force_retransmit(nr_stun_client_ctx *ctx)
         NR_async_timer_cancel(ctx->timer_handle);
         ctx->timer_handle=0;
 
-        if (r=nr_stun_client_send_request(ctx))
+        if (r=nr_stun_client_send_request(ctx)) {
             ABORT(r);
+}
     }
 
     _status=0;
@@ -305,8 +320,9 @@ static int nr_stun_client_send_request(nr_stun_client_ctx *ctx)
     int r,_status;
     char string[256];
 
-    if (ctx->state != NR_STUN_CLIENT_STATE_RUNNING)
+    if (ctx->state != NR_STUN_CLIENT_STATE_RUNNING) {
         ABORT(R_NOT_PERMITTED);
+}
 
     r_log(NR_LOG_STUN,LOG_DEBUG,"STUN-CLIENT(%s): Sending check request (my_addr=%s,peer_addr=%s)",ctx->label,ctx->my_addr.as_string,ctx->peer_addr.as_string);
 
@@ -319,55 +335,66 @@ static int nr_stun_client_send_request(nr_stun_client_ctx *ctx)
             ABORT(R_INTERNAL);
             /* TODO(ekr@rtfm.com): Need to implement long-term auth for binding
                requests */
-            if ((r=nr_stun_build_req_lt_auth(&ctx->params.stun_binding_request, &ctx->request)))
+            if ((r=nr_stun_build_req_lt_auth(&ctx->params.stun_binding_request, &ctx->request))) {
                 ABORT(r);
+}
             break;
         case NR_STUN_CLIENT_MODE_BINDING_REQUEST_SHORT_TERM_AUTH:
-            if ((r=nr_stun_build_req_st_auth(&ctx->params.stun_binding_request, &ctx->request)))
+            if ((r=nr_stun_build_req_st_auth(&ctx->params.stun_binding_request, &ctx->request))) {
                 ABORT(r);
+}
             break;
         case NR_STUN_CLIENT_MODE_BINDING_REQUEST_NO_AUTH:
-            if ((r=nr_stun_build_req_no_auth(&ctx->params.stun_binding_request, &ctx->request)))
+            if ((r=nr_stun_build_req_no_auth(&ctx->params.stun_binding_request, &ctx->request))) {
                 ABORT(r);
+}
             break;
         case NR_STUN_CLIENT_MODE_KEEPALIVE:
-            if ((r=nr_stun_build_keepalive(&ctx->params.stun_keepalive, &ctx->request)))
+            if ((r=nr_stun_build_keepalive(&ctx->params.stun_keepalive, &ctx->request))) {
                 ABORT(r);
+}
             break;
 #ifdef USE_STUND_0_96
         case NR_STUN_CLIENT_MODE_BINDING_REQUEST_STUND_0_96:
-            if ((r=nr_stun_build_req_stund_0_96(&ctx->params.stun_binding_request_stund_0_96, &ctx->request)))
+            if ((r=nr_stun_build_req_stund_0_96(&ctx->params.stun_binding_request_stund_0_96, &ctx->request))) {
                 ABORT(r);
+}
             break;
 #endif /* USE_STUND_0_96 */
 
 #ifdef USE_ICE
         case NR_ICE_CLIENT_MODE_USE_CANDIDATE:
-            if ((r=nr_stun_build_use_candidate(&ctx->params.ice_binding_request, &ctx->request)))
+            if ((r=nr_stun_build_use_candidate(&ctx->params.ice_binding_request, &ctx->request))) {
                 ABORT(r);
+}
             break;
         case NR_ICE_CLIENT_MODE_BINDING_REQUEST:
-            if ((r=nr_stun_build_req_ice(&ctx->params.ice_binding_request, &ctx->request)))
+            if ((r=nr_stun_build_req_ice(&ctx->params.ice_binding_request, &ctx->request))) {
                 ABORT(r);
+}
             break;
 #endif /* USE_ICE */
 
 #ifdef USE_TURN
         case NR_TURN_CLIENT_MODE_ALLOCATE_REQUEST:
-            if ((r=nr_stun_build_allocate_request(&ctx->auth_params, &ctx->params.allocate_request, &ctx->request)))
+            if ((r=nr_stun_build_allocate_request(&ctx->auth_params, &ctx->params.allocate_request, &ctx->request))) {
                 ABORT(r);
+}
             break;
         case NR_TURN_CLIENT_MODE_REFRESH_REQUEST:
-            if ((r=nr_stun_build_refresh_request(&ctx->auth_params, &ctx->params.refresh_request, &ctx->request)))
+            if ((r=nr_stun_build_refresh_request(&ctx->auth_params, &ctx->params.refresh_request, &ctx->request))) {
                 ABORT(r);
+}
             break;
         case NR_TURN_CLIENT_MODE_PERMISSION_REQUEST:
-            if ((r=nr_stun_build_permission_request(&ctx->auth_params, &ctx->params.permission_request, &ctx->request)))
+            if ((r=nr_stun_build_permission_request(&ctx->auth_params, &ctx->params.permission_request, &ctx->request))) {
                 ABORT(r);
+}
             break;
         case NR_TURN_CLIENT_MODE_SEND_INDICATION:
-            if ((r=nr_stun_build_send_indication(&ctx->params.send_indication, &ctx->request)))
+            if ((r=nr_stun_build_send_indication(&ctx->params.send_indication, &ctx->request))) {
                 ABORT(r);
+}
             break;
 #endif /* USE_TURN */
 
@@ -379,8 +406,9 @@ static int nr_stun_client_send_request(nr_stun_client_ctx *ctx)
     }
 
     if (ctx->request->length == 0) {
-        if ((r=nr_stun_encode_message(ctx->request)))
+        if ((r=nr_stun_encode_message(ctx->request))) {
             ABORT(r);
+}
     }
 
     snprintf(string, sizeof(string)-1, "STUN-CLIENT(%s): Sending to %s ", ctx->label, ctx->peer_addr.as_string);
@@ -435,18 +463,21 @@ static int nr_stun_client_send_request(nr_stun_client_ctx *ctx)
 static int nr_stun_client_get_password(void *arg, nr_stun_message *msg, Data **password)
 {
     *password = (Data*)arg;
-    if (!arg)
+    if (!arg) {
         return(R_NOT_FOUND);
+}
     return(0);
 }
 
 int nr_stun_transport_addr_check(nr_transport_addr* addr, UINT4 check)
   {
-    if((check & NR_STUN_TRANSPORT_ADDR_CHECK_WILDCARD) && nr_transport_addr_is_wildcard(addr))
+    if((check & NR_STUN_TRANSPORT_ADDR_CHECK_WILDCARD) && nr_transport_addr_is_wildcard(addr)) {
       return(R_BAD_DATA);
+}
 
-    if ((check & NR_STUN_TRANSPORT_ADDR_CHECK_LOOPBACK) && nr_transport_addr_is_loopback(addr))
+    if ((check & NR_STUN_TRANSPORT_ADDR_CHECK_LOOPBACK) && nr_transport_addr_is_loopback(addr)) {
       return(R_BAD_DATA);
+}
 
     return(0);
   }
@@ -469,8 +500,9 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
     ATTACH_DATA(hmac_key, hmac_key_d);
 
     if ((ctx->state != NR_STUN_CLIENT_STATE_RUNNING) &&
-        (ctx->state != NR_STUN_CLIENT_STATE_WAITING))
+        (ctx->state != NR_STUN_CLIENT_STATE_WAITING)) {
       ABORT(R_REJECTED);
+}
 
     r_log(NR_LOG_STUN,LOG_DEBUG,"STUN-CLIENT(%s): Inspecting STUN response (my_addr=%s, peer_addr=%s)",ctx->label,ctx->my_addr.as_string,peer_addr->as_string);
 
@@ -540,13 +572,15 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
       if (!ctx->realm || !username) {
         r_log(NR_LOG_STUN, LOG_DEBUG, "Long-term auth required but no realm/username specified. Randomizing key");
         /* Fill the key with random bytes to guarantee non-match */
-        if (r=nr_crypto_random_bytes(hmac_key_d, sizeof(hmac_key_d)))
+        if (r=nr_crypto_random_bytes(hmac_key_d, sizeof(hmac_key_d))) {
           ABORT(r);
+}
       }
       else {
         if (r=nr_stun_compute_lt_message_integrity_password(username, ctx->realm,
-                                                            password, &hmac_key))
+                                                            password, &hmac_key)) {
           ABORT(r);
+}
       }
       password = &hmac_key;
     }
@@ -556,8 +590,9 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
     }
 
     /* TODO(bcampen@mozilla.com): Bug 1023619, refactor this. */
-    if ((r=nr_stun_message_create2(&ctx->response, msg, len)))
+    if ((r=nr_stun_message_create2(&ctx->response, msg, len))) {
         ABORT(r);
+}
 
     if ((r=nr_stun_decode_message(ctx->response, nr_stun_client_get_password, password))) {
         r_log(NR_LOG_STUN,LOG_WARNING,"STUN-CLIENT(%s): error decoding response",ctx->label);
@@ -580,18 +615,21 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
  * TODO: !nn! usage (ctx->mode?) */
     if (password) {
         if (nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_NONCE, 0)) {
-            if ((r=nr_stun_receive_response_long_term_auth(ctx->response, ctx)))
+            if ((r=nr_stun_receive_response_long_term_auth(ctx->response, ctx))) {
                 ABORT(r);
+}
         }
         else {
-            if ((r=nr_stun_receive_response_short_term_auth(ctx->response)))
+            if ((r=nr_stun_receive_response_short_term_auth(ctx->response))) {
                 ABORT(r);
+}
         }
     }
 
     if (NR_STUN_GET_TYPE_CLASS(ctx->response->header.type) == NR_CLASS_RESPONSE) {
-        if ((r=nr_stun_process_success_response(ctx->response)))
+        if ((r=nr_stun_process_success_response(ctx->response))) {
             ABORT(r);
+}
     }
     else {
       if (fail_on_error) {
@@ -618,10 +656,12 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
     switch (ctx->mode) {
     case NR_STUN_CLIENT_MODE_BINDING_REQUEST_LONG_TERM_AUTH:
     case NR_STUN_CLIENT_MODE_BINDING_REQUEST_SHORT_TERM_AUTH:
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0))
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0)) {
             ABORT(R_BAD_DATA);
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0))
+}
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0)) {
             ABORT(R_BAD_DATA);
+}
 
         mapped_addr = &ctx->results.stun_binding_response.mapped_addr;
         break;
@@ -641,26 +681,31 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
         break;
 
     case NR_STUN_CLIENT_MODE_BINDING_REQUEST_STUND_0_96:
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MAPPED_ADDRESS, 0) && ! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0))
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MAPPED_ADDRESS, 0) && ! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0)) {
             ABORT(R_BAD_DATA);
+}
 
         mapped_addr = &ctx->results.stun_binding_response_stund_0_96.mapped_addr;
         break;
 
 #ifdef USE_ICE
     case NR_ICE_CLIENT_MODE_BINDING_REQUEST:
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0))
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0)) {
             ABORT(R_BAD_DATA);
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0))
+}
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0)) {
             ABORT(R_BAD_DATA);
+}
 
         mapped_addr = &ctx->results.stun_binding_response.mapped_addr;
         break;
     case NR_ICE_CLIENT_MODE_USE_CANDIDATE:
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0))
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0)) {
             ABORT(R_BAD_DATA);
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0))
+}
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0)) {
             ABORT(R_BAD_DATA);
+}
 
         mapped_addr = &ctx->results.stun_binding_response.mapped_addr;
         break;
@@ -668,25 +713,31 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
 
 #ifdef USE_TURN
     case NR_TURN_CLIENT_MODE_ALLOCATE_REQUEST:
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0))
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, 0)) {
             ABORT(R_BAD_DATA);
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0))
+}
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0)) {
             ABORT(R_BAD_DATA);
+}
 
-        if (!nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_RELAY_ADDRESS, &attr))
+        if (!nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_RELAY_ADDRESS, &attr)) {
           ABORT(R_BAD_DATA);
+}
 
         if ((r=nr_stun_transport_addr_check(&attr->u.relay_address.unmasked,
-                                            ctx->mapped_addr_check_mask)))
+                                            ctx->mapped_addr_check_mask))) {
           ABORT(r);
+}
 
         if ((r=nr_transport_addr_copy(
                 &ctx->results.allocate_response.relay_addr,
-                &attr->u.relay_address.unmasked)))
+                &attr->u.relay_address.unmasked))) {
           ABORT(r);
+}
 
-        if (!nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_LIFETIME, &attr))
+        if (!nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_LIFETIME, &attr)) {
           ABORT(R_BAD_DATA);
+}
         ctx->results.allocate_response.lifetime_secs=attr->u.lifetime_secs;
 
         r_log(NR_LOG_STUN,LOG_DEBUG,"STUN-CLIENT(%s): Received relay address: %s", ctx->label, ctx->results.allocate_response.relay_addr.as_string);
@@ -695,15 +746,18 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
 
         break;
     case NR_TURN_CLIENT_MODE_REFRESH_REQUEST:
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0))
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0)) {
             ABORT(R_BAD_DATA);
-        if (!nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_LIFETIME, &attr))
+}
+        if (!nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_LIFETIME, &attr)) {
           ABORT(R_BAD_DATA);
+}
         ctx->results.refresh_response.lifetime_secs=attr->u.lifetime_secs;
         break;
     case NR_TURN_CLIENT_MODE_PERMISSION_REQUEST:
-        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0))
+        if (! nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MESSAGE_INTEGRITY, 0)) {
             ABORT(R_BAD_DATA);
+}
         break;
 #endif /* USE_TURN */
 
@@ -722,22 +776,27 @@ int nr_stun_client_process_response(nr_stun_client_ctx *ctx, UCHAR *msg, int len
     if (mapped_addr) {
         if (nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_XOR_MAPPED_ADDRESS, &attr)) {
             if ((r=nr_stun_transport_addr_check(&attr->u.xor_mapped_address.unmasked,
-                                                ctx->mapped_addr_check_mask)))
+                                                ctx->mapped_addr_check_mask))) {
                 ABORT(r);
+}
 
-            if ((r=nr_transport_addr_copy(mapped_addr, &attr->u.xor_mapped_address.unmasked)))
+            if ((r=nr_transport_addr_copy(mapped_addr, &attr->u.xor_mapped_address.unmasked))) {
                 ABORT(r);
+}
         }
         else if (nr_stun_message_has_attribute(ctx->response, NR_STUN_ATTR_MAPPED_ADDRESS, &attr)) {
             if ((r=nr_stun_transport_addr_check(&attr->u.mapped_address,
-                                                ctx->mapped_addr_check_mask)))
+                                                ctx->mapped_addr_check_mask))) {
                 ABORT(r);
+}
 
-            if ((r=nr_transport_addr_copy(mapped_addr, &attr->u.mapped_address)))
+            if ((r=nr_transport_addr_copy(mapped_addr, &attr->u.mapped_address))) {
                 ABORT(r);
+}
         }
-        else
+        else {
             ABORT(R_BAD_DATA);
+}
 
         // STUN doesn't distinguish protocol in mapped address, therefore
         // assign used protocol from peer_addr
@@ -775,8 +834,9 @@ int nr_stun_client_ctx_destroy(nr_stun_client_ctx **ctxp)
   {
     nr_stun_client_ctx *ctx;
 
-    if(!ctxp || !*ctxp)
+    if(!ctxp || !*ctxp) {
       return(0);
+}
 
     ctx=*ctxp;
     *ctxp=0;

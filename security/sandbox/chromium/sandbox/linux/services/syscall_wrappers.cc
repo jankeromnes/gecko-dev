@@ -52,8 +52,10 @@ long sys_clone(unsigned long flags,
     RAW_LOG(FATAL, "Invalid usage of sys_clone");
   }
 
-  if (ptid) MSAN_UNPOISON(ptid, sizeof(*ptid));
-  if (ctid) MSAN_UNPOISON(ctid, sizeof(*ctid));
+  if (ptid) { MSAN_UNPOISON(ptid, sizeof(*ptid));
+}
+  if (ctid) { MSAN_UNPOISON(ctid, sizeof(*ctid));
+}
   // See kernel/fork.c in Linux. There is different ordering of sys_clone
   // parameters depending on CONFIG_CLONE_BACKWARDS* configuration options.
 #if defined(ARCH_CPU_X86_64)
@@ -84,15 +86,18 @@ int sys_prlimit64(pid_t pid,
                   const struct rlimit64* new_limit,
                   struct rlimit64* old_limit) {
   int res = syscall(__NR_prlimit64, pid, resource, new_limit, old_limit);
-  if (res == 0 && old_limit) MSAN_UNPOISON(old_limit, sizeof(*old_limit));
+  if (res == 0 && old_limit) { MSAN_UNPOISON(old_limit, sizeof(*old_limit));
+}
   return res;
 }
 
 int sys_capget(cap_hdr* hdrp, cap_data* datap) {
   int res = syscall(__NR_capget, hdrp, datap);
   if (res == 0) {
-    if (hdrp) MSAN_UNPOISON(hdrp, sizeof(*hdrp));
-    if (datap) MSAN_UNPOISON(datap, sizeof(*datap));
+    if (hdrp) { MSAN_UNPOISON(hdrp, sizeof(*hdrp));
+}
+    if (datap) { MSAN_UNPOISON(datap, sizeof(*datap));
+}
   }
   return res;
 }
@@ -111,9 +116,12 @@ int sys_getresuid(uid_t* ruid, uid_t* euid, uid_t* suid) {
   res = syscall(__NR_getresuid, ruid, euid, suid);
 #endif
   if (res == 0) {
-    if (ruid) MSAN_UNPOISON(ruid, sizeof(*ruid));
-    if (euid) MSAN_UNPOISON(euid, sizeof(*euid));
-    if (suid) MSAN_UNPOISON(suid, sizeof(*suid));
+    if (ruid) { MSAN_UNPOISON(ruid, sizeof(*ruid));
+}
+    if (euid) { MSAN_UNPOISON(euid, sizeof(*euid));
+}
+    if (suid) { MSAN_UNPOISON(suid, sizeof(*suid));
+}
   }
   return res;
 }
@@ -128,9 +136,12 @@ int sys_getresgid(gid_t* rgid, gid_t* egid, gid_t* sgid) {
   res = syscall(__NR_getresgid, rgid, egid, sgid);
 #endif
   if (res == 0) {
-    if (rgid) MSAN_UNPOISON(rgid, sizeof(*rgid));
-    if (egid) MSAN_UNPOISON(egid, sizeof(*egid));
-    if (sgid) MSAN_UNPOISON(sgid, sizeof(*sgid));
+    if (rgid) { MSAN_UNPOISON(rgid, sizeof(*rgid));
+}
+    if (egid) { MSAN_UNPOISON(egid, sizeof(*egid));
+}
+    if (sgid) { MSAN_UNPOISON(sgid, sizeof(*sgid));
+}
   }
   return res;
 }

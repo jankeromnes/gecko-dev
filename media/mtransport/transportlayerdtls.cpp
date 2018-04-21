@@ -427,8 +427,9 @@ nsresult TransportLayerDtls::SetAlpn(
 
 nsresult TransportLayerDtls::SetVerificationAllowAll() {
   // Defensive programming
-  if (verification_mode_ != VERIFY_UNSET)
+  if (verification_mode_ != VERIFY_UNSET) {
     return NS_ERROR_ALREADY_INITIALIZED;
+}
 
   verification_mode_ = VERIFY_ALLOW_ALL;
 
@@ -448,8 +449,9 @@ TransportLayerDtls::SetVerificationDigest(const std::string digest_algorithm,
   // Note that we do not sanity check these values for length.
   // We merely ensure they will fit into the buffer.
   // TODO: is there a Data construct we could use?
-  if (digest_len > kMaxDigestLength)
+  if (digest_len > kMaxDigestLength) {
     return NS_ERROR_INVALID_ARG;
+}
 
   digests_.push_back(new VerificationDigest(
       digest_algorithm, digest_value, digest_len));
@@ -498,8 +500,9 @@ bool TransportLayerDtls::Setup() {
   UniquePRFileDesc pr_fd(PR_CreateIOLayerStub(transport_layer_identity,
                                               &TransportLayerMethods));
   MOZ_ASSERT(pr_fd != nullptr);
-  if (!pr_fd)
+  if (!pr_fd) {
     return false;
+}
   pr_fd->secret = reinterpret_cast<PRFilePrivate *>(nspr_io_adapter_.get());
 
   UniquePRFileDesc ssl_fd(DTLS_ImportFD(nullptr, pr_fd.get()));

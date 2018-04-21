@@ -146,8 +146,9 @@ static bool IsArg(const char* arg, const char* s)
 {
   if (*arg == '-')
   {
-    if (*++arg == '-')
+    if (*++arg == '-') {
       ++arg;
+}
     return !strcasecmp(arg, s);
   }
 

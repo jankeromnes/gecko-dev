@@ -68,8 +68,9 @@ CERT_EncodeAuthKeyID(PLArenaPool *arena, CERTAuthKeyID *value,
         }
 
         if (SEC_ASN1EncodeItem(arena, encodedValue, value,
-                               CERTAuthKeyIDTemplate) == NULL)
+                               CERTAuthKeyIDTemplate) == NULL) {
             break;
+}
         rv = SECSuccess;
 
     } while (0);
@@ -89,8 +90,9 @@ CERT_DecodeAuthKeyID(PLArenaPool *arena, const SECItem *encodedValue)
     do {
         mark = PORT_ArenaMark(arena);
         value = (CERTAuthKeyID *)PORT_ArenaZAlloc(arena, sizeof(*value));
-        if (value == NULL)
+        if (value == NULL) {
             break;
+}
         value->DERAuthCertIssuer = NULL;
         /* copy the DER into the arena, since Quick DER returns data that points
            into the DER input, which may get freed by the caller */
@@ -101,13 +103,15 @@ CERT_DecodeAuthKeyID(PLArenaPool *arena, const SECItem *encodedValue)
 
         rv = SEC_QuickDERDecodeItem(arena, value, CERTAuthKeyIDTemplate,
                                     &newEncodedValue);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
 
         value->authCertIssuer =
             cert_DecodeGeneralNames(arena, value->DERAuthCertIssuer);
-        if (value->authCertIssuer == NULL)
+        if (value->authCertIssuer == NULL) {
             break;
+}
 
         /* what if the general name contains other format but not URI ?
            hl

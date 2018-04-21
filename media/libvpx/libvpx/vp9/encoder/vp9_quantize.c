@@ -52,7 +52,8 @@ void vp9_quantize_fp_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
       qcoeff_ptr[rc] = (tmp ^ coeff_sign) - coeff_sign;
       dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant_ptr[rc != 0];
 
-      if (tmp) eob = i;
+      if (tmp) { eob = i;
+}
     }
   }
   *eob_ptr = eob + 1;
@@ -130,7 +131,8 @@ void vp9_quantize_fp_32x32_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
         dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant_ptr[rc != 0] / 2;
       }
 
-      if (tmp) eob = i;
+      if (tmp) { eob = i;
+}
     }
   }
   *eob_ptr = eob + 1;
@@ -201,7 +203,8 @@ static void invert_quant(int16_t *quant, int16_t *shift, int d) {
   unsigned t;
   int l, m;
   t = d;
-  for (l = 0; t > 1; l++) t >>= 1;
+  for (l = 0; t > 1; l++) { t >>= 1;
+}
   m = 1 + (1 << (16 + l)) / d;
   *quant = (int16_t)(m - (1 << 16));
   *shift = 1 << (16 - l);
@@ -235,7 +238,8 @@ void vp9_init_quantizer(VP9_COMP *cpi) {
 
     for (i = 0; i < 2; ++i) {
       int qrounding_factor_fp = i == 0 ? 48 : 42;
-      if (q == 0) qrounding_factor_fp = 64;
+      if (q == 0) { qrounding_factor_fp = 64;
+}
 
       // y
       quant = i == 0 ? vp9_dc_quant(q, cm->y_dc_delta_q, cm->bit_depth)
@@ -352,8 +356,9 @@ int vp9_quantizer_to_qindex(int quantizer) {
 int vp9_qindex_to_quantizer(int qindex) {
   int quantizer;
 
-  for (quantizer = 0; quantizer < 64; ++quantizer)
-    if (quantizer_to_qindex[quantizer] >= qindex) return quantizer;
+  for (quantizer = 0; quantizer < 64; ++quantizer) {
+    if (quantizer_to_qindex[quantizer] >= qindex) { return quantizer;
+}
 
   return 63;
 }

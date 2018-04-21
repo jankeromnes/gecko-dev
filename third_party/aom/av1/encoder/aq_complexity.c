@@ -84,7 +84,8 @@ void av1_setup_in_frame_q_adj(AV1_COMP *cpi) {
     for (segment = 0; segment < AQ_C_SEGMENTS; ++segment) {
       int qindex_delta;
 
-      if (segment == DEFAULT_AQ2_SEG) continue;
+      if (segment == DEFAULT_AQ2_SEG) { continue;
+}
 
       qindex_delta = av1_compute_qdelta_by_rate(
           &cpi->rc, cm->frame_type, cm->base_qindex,

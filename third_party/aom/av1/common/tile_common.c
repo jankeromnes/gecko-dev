@@ -164,13 +164,15 @@ void av1_tile_set_col(TileInfo *tile, const AV1_COMMON *cm, int col) {
 
 static int get_min_log2_tile_cols(int max_sb_cols) {
   int min_log2 = 0;
-  while ((MAX_TILE_WIDTH_MAX_SB << min_log2) < max_sb_cols) ++min_log2;
+  while ((MAX_TILE_WIDTH_MAX_SB << min_log2) < max_sb_cols) { ++min_log2;
+}
   return min_log2;
 }
 
 static int get_max_log2_tile_cols(int max_sb_cols) {
   int max_log2 = 1;
-  while ((max_sb_cols >> max_log2) >= MIN_TILE_WIDTH_MAX_SB) ++max_log2;
+  while ((max_sb_cols >> max_log2) >= MIN_TILE_WIDTH_MAX_SB) { ++max_log2;
+}
   return max_log2 - 1;
 }
 

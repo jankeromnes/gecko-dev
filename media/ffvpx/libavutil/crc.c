@@ -312,29 +312,34 @@ int av_crc_init(AVCRC *ctx, int le, int bits, uint32_t poly, int ctx_size)
     unsigned i, j;
     uint32_t c;
 
-    if (bits < 8 || bits > 32 || poly >= (1LL << bits))
+    if (bits < 8 || bits > 32 || poly >= (1LL << bits)) {
         return AVERROR(EINVAL);
-    if (ctx_size != sizeof(AVCRC) * 257 && ctx_size != sizeof(AVCRC) * 1024)
+}
+    if (ctx_size != sizeof(AVCRC) * 257 && ctx_size != sizeof(AVCRC) * 1024) {
         return AVERROR(EINVAL);
+}
 
     for (i = 0; i < 256; i++) {
         if (le) {
-            for (c = i, j = 0; j < 8; j++)
+            for (c = i, j = 0; j < 8; j++) {
                 c = (c >> 1) ^ (poly & (-(c & 1)));
+}
             ctx[i] = c;
         } else {
-            for (c = i << 24, j = 0; j < 8; j++)
+            for (c = i << 24, j = 0; j < 8; j++) {
                 c = (c << 1) ^ ((poly << (32 - bits)) & (((int32_t) c) >> 31));
+}
             ctx[i] = av_bswap32(c);
         }
     }
     ctx[256] = 1;
 #if !CONFIG_SMALL
-    if (ctx_size >= sizeof(AVCRC) * 1024)
-        for (i = 0; i < 256; i++)
-            for (j = 0; j < 3; j++)
+    if (ctx_size >= sizeof(AVCRC) * 1024) {
+        for (i = 0; i < 256; i++) {
+            for (j = 0; j < 3; j++) {
                 ctx[256 * (j + 1) + i] =
                     (ctx[256 * j + i] >> 8) ^ ctx[ctx[256 * j + i] & 0xFF];
+}
 #endif
 
     return 0;
@@ -343,13 +348,14 @@ int av_crc_init(AVCRC *ctx, int le, int bits, uint32_t poly, int ctx_size)
 const AVCRC *av_crc_get_table(AVCRCId crc_id)
 {
 #if !CONFIG_HARDCODED_TABLES
-    if (!av_crc_table[crc_id][FF_ARRAY_ELEMS(av_crc_table[crc_id]) - 1])
+    if (!av_crc_table[crc_id][FF_ARRAY_ELEMS(av_crc_table[crc_id]) - 1]) {
         if (av_crc_init(av_crc_table[crc_id],
                         av_crc_table_params[crc_id].le,
                         av_crc_table_params[crc_id].bits,
                         av_crc_table_params[crc_id].poly,
-                        sizeof(av_crc_table[crc_id])) < 0)
+                        sizeof(av_crc_table[crc_id])) < 0) {
             return NULL;
+}
 #endif
     return av_crc_table[crc_id];
 }
@@ -361,8 +367,9 @@ uint32_t av_crc(const AVCRC *ctx, uint32_t crc,
 
 #if !CONFIG_SMALL
     if (!ctx[256]) {
-        while (((intptr_t) buffer & 3) && buffer < end)
+        while (((intptr_t) buffer & 3) && buffer < end) {
             crc = ctx[((uint8_t) crc) ^ *buffer++] ^ (crc >> 8);
+}
 
         while (buffer < end - 3) {
             crc ^= av_le2ne32(*(const uint32_t *) buffer); buffer += 4;
@@ -373,8 +380,9 @@ uint32_t av_crc(const AVCRC *ctx, uint32_t crc,
         }
     }
 #endif
-    while (buffer < end)
+    while (buffer < end) {
         crc = ctx[((uint8_t) crc) ^ *buffer++] ^ (crc >> 8);
+}
 
     return crc;
 }

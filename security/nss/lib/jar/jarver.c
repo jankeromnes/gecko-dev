@@ -92,8 +92,9 @@ JAR_parse_manifest(JAR *jar, char *raw_manifest, long length,
 
     if (jar->filename == NULL && path) {
         jar->filename = PORT_Strdup(path);
-        if (jar->filename == NULL)
+        if (jar->filename == NULL) {
             return JAR_ERR_MEMORY;
+}
         filename_free = 1;
     }
 
@@ -144,8 +145,9 @@ jar_parse_sig(JAR *jar, const char *path, char *raw_manifest,
 
     /* make sure that MF and SF have already been processed */
 
-    if (jar->globalmeta == NULL)
+    if (jar->globalmeta == NULL) {
         return JAR_ERR_ORDER;
+}
 
     /* Determine whether or not this RSA file has
        has an associated SF file */
@@ -154,16 +156,19 @@ jar_parse_sig(JAR *jar, const char *path, char *raw_manifest,
         char *owner;
         owner = jar_basename(path);
 
-        if (owner == NULL)
+        if (owner == NULL) {
             return JAR_ERR_MEMORY;
+}
 
         signer = jar_get_signer(jar, owner);
         PORT_Free(owner);
-    } else
+    } else {
         signer = jar_get_signer(jar, "*");
+}
 
-    if (signer == NULL)
+    if (signer == NULL) {
         return JAR_ERR_ORDER;
+}
 
     /* Do not pass a huge pointer to this function,
        since the underlying security code is unaware. We will
@@ -198,8 +203,9 @@ jar_parse_mf(JAR *jar, char *raw_manifest, long length,
 
     /* remember a digest for the global section */
     jar->globalmeta = jar_digest_section(raw_manifest, length);
-    if (jar->globalmeta == NULL)
+    if (jar->globalmeta == NULL) {
         return JAR_ERR_MEMORY;
+}
     return jar_parse_any(jar, jarTypeMF, NULL, raw_manifest, length,
                          path, url);
 }
@@ -224,13 +230,15 @@ jar_parse_sf(JAR *jar, char *raw_manifest, long length,
     }
 
     signer = JAR_new_signer();
-    if (signer == NULL)
+    if (signer == NULL) {
         goto loser;
+}
 
     if (path) {
         signer->owner = jar_basename(path);
-        if (signer->owner == NULL)
+        if (signer->owner == NULL) {
             goto loser;
+}
     }
 
     /* check for priors. When someone doctors a jar file
@@ -244,8 +252,9 @@ jar_parse_sf(JAR *jar, char *raw_manifest, long length,
 
     /* remember its digest */
     signer->digest = JAR_calculate_digest(raw_manifest, length);
-    if (signer->digest == NULL)
+    if (signer->digest == NULL) {
         goto loser;
+}
 
     /* Add this signer to the jar */
     ADDITEM(jar->signers, jarTypeOwner, signer->owner, signer,
@@ -255,8 +264,9 @@ jar_parse_sf(JAR *jar, char *raw_manifest, long length,
                          path, url);
 
 loser:
-    if (signer)
+    if (signer) {
         JAR_destroy_signer(signer);
+}
     return status;
 }
 
@@ -300,12 +310,14 @@ jar_parse_any(JAR *jar, int type, JAR_Signer *signer,
         JAR_Metainfo *met;
 
         raw_manifest = jar_eat_line(1, PR_TRUE, raw_manifest, &raw_len);
-        if (raw_len <= 0 || !*raw_manifest)
+        if (raw_len <= 0 || !*raw_manifest) {
             break;
+}
 
         met = PORT_ZNew(JAR_Metainfo);
-        if (met == NULL)
+        if (met == NULL) {
             return JAR_ERR_MEMORY;
+}
 
         /* Parse out the header & info */
         if (PORT_Strlen(raw_manifest) >= SZ) {
@@ -317,14 +329,17 @@ jar_parse_any(JAR *jar, int type, JAR_Signer *signer,
         PORT_Strcpy(line, raw_manifest);
         x_info = line;
 
-        while (*x_info && *x_info != ' ' && *x_info != '\t' && *x_info != ':')
+        while (*x_info && *x_info != ' ' && *x_info != '\t' && *x_info != ':') {
             x_info++;
+}
 
-        if (*x_info)
+        if (*x_info) {
             *x_info++ = 0;
+}
 
-        while (*x_info == ' ' || *x_info == '\t')
+        while (*x_info == ' ' || *x_info == '\t') {
             x_info++;
+}
 
         /* metainfo (name, value) pair is now (line, x_info) */
         met->header = PORT_Strdup(line);
@@ -374,8 +389,9 @@ jar_parse_any(JAR *jar, int type, JAR_Signer *signer,
             PORT_Assert(md5_length == MD5_LENGTH);
             PORT_Free(sf_md5);
 
-            if (md5_length != MD5_LENGTH)
+            if (md5_length != MD5_LENGTH) {
                 return JAR_ERR_CORRUPT;
+}
 
             match = PORT_Memcmp(md5_digest, glob->md5, MD5_LENGTH);
             PORT_Free(md5_digest);
@@ -389,8 +405,9 @@ jar_parse_any(JAR *jar, int type, JAR_Signer *signer,
             PORT_Assert(sha1_length == SHA1_LENGTH);
             PORT_Free(sf_sha1);
 
-            if (sha1_length != SHA1_LENGTH)
+            if (sha1_length != SHA1_LENGTH) {
                 return JAR_ERR_CORRUPT;
+}
 
             match = PORT_Memcmp(sha1_digest, glob->sha1, SHA1_LENGTH);
             PORT_Free(sha1_digest);
@@ -419,21 +436,24 @@ jar_parse_any(JAR *jar, int type, JAR_Signer *signer,
             if (!*raw_manifest || *raw_manifest == '\n') {
                 /* skip the blank line */
                 sec = jar_eat_line(1, PR_FALSE, raw_manifest, &sec_len);
-            } else
+            } else {
                 sec = raw_manifest;
+}
 
             if (sec_len > 0 && !PORT_Strncasecmp(sec, "Name:", 5)) {
-                if (type == jarTypeMF)
+                if (type == jarTypeMF) {
                     mfdig = jar_digest_section(sec, sec_len);
-                else
+                } else {
                     mfdig = NULL;
+}
             }
         }
 
         while (raw_len > 0) {
             raw_manifest = jar_eat_line(1, PR_TRUE, raw_manifest, &raw_len);
-            if (raw_len <= 0 || !*raw_manifest)
+            if (raw_len <= 0 || !*raw_manifest) {
                 break; /* blank line, done with this entry */
+}
 
             if (PORT_Strlen(raw_manifest) >= SZ) {
                 /* almost certainly nonsense */
@@ -445,38 +465,42 @@ jar_parse_any(JAR *jar, int type, JAR_Signer *signer,
             x_info = line;
 
             while (*x_info && *x_info != ' ' && *x_info != '\t' &&
-                   *x_info != ':')
+                   *x_info != ':') {
                 x_info++;
+}
 
-            if (*x_info)
+            if (*x_info) {
                 *x_info++ = 0;
+}
 
-            while (*x_info == ' ' || *x_info == '\t')
+            while (*x_info == ' ' || *x_info == '\t') {
                 x_info++;
+}
 
-            if (!PORT_Strcasecmp(line, "Name"))
+            if (!PORT_Strcasecmp(line, "Name")) {
                 PORT_Strcpy(x_name, x_info);
-            else if (!PORT_Strcasecmp(line, "MD5-Digest"))
+            } else if (!PORT_Strcasecmp(line, "MD5-Digest")) {
                 PORT_Strcpy(x_md5, x_info);
-            else if (!PORT_Strcasecmp(line, "SHA1-Digest") ||
-                     !PORT_Strcasecmp(line, "SHA-Digest"))
+            } else if (!PORT_Strcasecmp(line, "SHA1-Digest") ||
+                     !PORT_Strcasecmp(line, "SHA-Digest")) {
                 PORT_Strcpy(x_sha, x_info);
 
             /* Algorithm list is meta info we don't care about; keeping it out
                of metadata saves significant space for large jar files */
-            else if (!PORT_Strcasecmp(line, "Digest-Algorithms") ||
-                     !PORT_Strcasecmp(line, "Hash-Algorithms"))
+            } else if (!PORT_Strcasecmp(line, "Digest-Algorithms") ||
+                     !PORT_Strcasecmp(line, "Hash-Algorithms")) {
                 continue;
 
             /* Meta info is only collected for the manifest.mf file,
                since the JAR_get_metainfo call does not support identity */
-            else if (type == jarTypeMF) {
+            } else if (type == jarTypeMF) {
                 JAR_Metainfo *met;
 
                 /* this is meta-data */
                 met = PORT_ZNew(JAR_Metainfo);
-                if (met == NULL)
+                if (met == NULL) {
                     return JAR_ERR_MEMORY;
+}
 
                 /* metainfo (name, value) pair is now (line, x_info) */
                 if ((met->header = PORT_Strdup(line)) == NULL) {
@@ -502,8 +526,9 @@ jar_parse_any(JAR *jar, int type, JAR_Signer *signer,
         }
 
         dig = PORT_ZNew(JAR_Digest);
-        if (dig == NULL)
+        if (dig == NULL) {
             return JAR_ERR_MEMORY;
+}
 
         if (*x_md5) {
             unsigned int binary_length;
@@ -558,8 +583,9 @@ jar_parse_any(JAR *jar, int type, JAR_Signer *signer,
            the SF file with the one we remembered from parsing the MF file */
 
         if (type == jarTypeSF) {
-            if ((status = jar_internal_digest(jar, path, x_name, dig)) < 0)
+            if ((status = jar_internal_digest(jar, path, x_name, dig)) < 0) {
                 return status;
+}
         }
     }
 
@@ -578,8 +604,9 @@ jar_internal_digest(JAR *jar, const char *path, char *x_name, JAR_Digest *dig)
     if (savdig == NULL) {
         /* no .mf digest for this pathname */
         status = jar_signal(JAR_ERR_ENTRY, jar, path, x_name);
-        if (status < 0)
+        if (status < 0) {
             return 0; /* was continue; */
+}
         return status;
     }
 
@@ -594,8 +621,9 @@ jar_internal_digest(JAR *jar, const char *path, char *x_name, JAR_Digest *dig)
             dig->md5_status = jarHashBad;
             savdig->md5_status = jarHashBad;
 
-            if (status < 0)
+            if (status < 0) {
                 return 0; /* was continue; */
+}
             return status;
         }
     }
@@ -611,8 +639,9 @@ jar_internal_digest(JAR *jar, const char *path, char *x_name, JAR_Digest *dig)
             dig->sha1_status = jarHashBad;
             savdig->sha1_status = jarHashBad;
 
-            if (status < 0)
+            if (status < 0) {
                 return 0; /* was continue; */
+}
             return status;
         }
     }
@@ -674,20 +703,23 @@ jar_add_cert(JAR *jar, JAR_Signer *signer, int type, CERTCertificate *cert)
     JAR_Cert *fing;
     unsigned char *keyData;
 
-    if (cert == NULL)
+    if (cert == NULL) {
         return JAR_ERR_ORDER;
+}
 
     fing = PORT_ZNew(JAR_Cert);
-    if (fing == NULL)
+    if (fing == NULL) {
         goto loser;
+}
 
     fing->cert = CERT_DupCertificate(cert);
 
     /* get the certkey */
     fing->length = cert->derIssuer.len + 2 + cert->serialNumber.len;
     fing->key = keyData = (unsigned char *)PORT_ZAlloc(fing->length);
-    if (fing->key == NULL)
+    if (fing->key == NULL) {
         goto loser;
+}
     keyData[0] = ((cert->derIssuer.len) >> 8) & 0xff;
     keyData[1] = ((cert->derIssuer.len) & 0xff);
     PORT_Memcpy(&keyData[2], cert->derIssuer.data, cert->derIssuer.len);
@@ -699,8 +731,9 @@ jar_add_cert(JAR *jar, JAR_Signer *signer, int type, CERTCertificate *cert)
 
 loser:
     if (fing) {
-        if (fing->cert)
+        if (fing->cert) {
             CERT_DestroyCertificate(fing->cert);
+}
         PORT_Free(fing);
     }
     return JAR_ERR_MEMORY;
@@ -733,44 +766,52 @@ jar_eat_line(int lines, int eating, char *data, long *len)
     char *start = data;
     long maxLen = *len;
 
-    if (maxLen <= 0)
+    if (maxLen <= 0) {
         return start;
+}
 
 #define GO_ON ((data - start) < maxLen)
 
     /* Eat the requisite number of lines, if any;
        prior to terminating the current line with a 0. */
     for (/* yip */; lines > 0; lines--) {
-        while (GO_ON && *data && *data != '\r' && *data != '\n')
+        while (GO_ON && *data && *data != '\r' && *data != '\n') {
             data++;
+}
 
         /* Eat any leading CR */
-        if (GO_ON && *data == '\r')
+        if (GO_ON && *data == '\r') {
             data++;
+}
 
         /* After the CR, ok to eat one LF */
-        if (GO_ON && *data == '\n')
+        if (GO_ON && *data == '\n') {
             data++;
+}
 
         /* If there are NULs, this function probably put them there */
-        while (GO_ON && !*data)
+        while (GO_ON && !*data) {
             data++;
+}
     }
     maxLen -= data - start; /* we have this many characters left. */
     *len = maxLen;
     start = data; /* now start again here.            */
     if (maxLen > 0 && eating) {
         /* Terminate this line with a 0 */
-        while (GO_ON && *data && *data != '\n' && *data != '\r')
+        while (GO_ON && *data && *data != '\n' && *data != '\r') {
             data++;
+}
 
         /* If not past the end, we are allowed to eat one CR */
-        if (GO_ON && *data == '\r')
+        if (GO_ON && *data == '\r') {
             *data++ = 0;
+}
 
         /* After the CR (if any), if not past the end, ok to eat one LF */
-        if (GO_ON && *data == '\n')
+        if (GO_ON && *data == '\n') {
             *data++ = 0;
+}
     }
     return start;
 }
@@ -794,8 +835,9 @@ jar_digest_section(char *manifest, long length)
 
     while (global_len > 0) {
         global_end = jar_eat_line(1, PR_FALSE, global_end, &global_len);
-        if (global_len > 0 && (*global_end == 0 || *global_end == '\n'))
+        if (global_len > 0 && (*global_end == 0 || *global_end == '\n')) {
             break;
+}
     }
     return JAR_calculate_digest(manifest, global_end - manifest);
 }
@@ -834,13 +876,15 @@ JAR_verify_digest(JAR *jar, const char *name, JAR_Digest *dig)
             it->pathname && !PORT_Strcmp(it->pathname, name)) {
             shindig = (JAR_Digest *)it->data;
             if (shindig->md5_status) {
-                if (shindig->md5_status == jarHashBad)
+                if (shindig->md5_status == jarHashBad) {
                     return JAR_ERR_HASH;
+}
                 result1 = memcmp(dig->md5, shindig->md5, MD5_LENGTH);
             }
             if (shindig->sha1_status) {
-                if (shindig->sha1_status == jarHashBad)
+                if (shindig->sha1_status == jarHashBad) {
                     return JAR_ERR_HASH;
+}
                 result2 = memcmp(dig->sha1, shindig->sha1, SHA1_LENGTH);
             }
             return (result1 == 0 && result2 == 0) ? 0 : JAR_ERR_HASH;
@@ -893,8 +937,9 @@ jar_get_mf_digest(JAR *jar, char *pathname)
     ZZLink *link;
     ZZList *list = jar->manifest;
 
-    if (ZZ_ListEmpty(list))
+    if (ZZ_ListEmpty(list)) {
         return NULL;
+}
 
     for (link = ZZ_ListHead(list);
          !ZZ_ListIterDone(list, link);
@@ -921,22 +966,26 @@ jar_basename(const char *path)
 {
     char *pith, *e, *basename, *ext;
 
-    if (path == NULL)
+    if (path == NULL) {
         return PORT_Strdup("");
+}
 
     pith = PORT_Strdup(path);
     basename = pith;
     while (1) {
-        for (e = basename; *e && *e != '/' && *e != '\\'; e++)
+        for (e = basename; *e && *e != '/' && *e != '\\'; e++) {
             /* yip */;
-        if (*e)
+}
+        if (*e) {
             basename = ++e;
-        else
+        } else {
             break;
+}
     }
 
-    if ((ext = PORT_Strrchr(basename, '.')) != NULL)
+    if ((ext = PORT_Strrchr(basename, '.')) != NULL) {
         *ext = 0;
+}
 
     /* We already have the space allocated */
     PORT_Strcpy(pith, basename);
@@ -988,8 +1037,9 @@ jar_validate_pkcs7(JAR *jar, JAR_Signer *signer, char *data, long length)
 
     PORT_Assert(jar != NULL && signer != NULL);
 
-    if (jar == NULL || signer == NULL)
+    if (jar == NULL || signer == NULL) {
         return JAR_ERR_ORDER;
+}
 
     signer->valid = JAR_ERR_SIG;
 
@@ -1033,8 +1083,9 @@ jar_validate_pkcs7(JAR *jar, JAR_Signer *signer, char *data, long length)
     } else {
         status = PORT_GetError();
         PORT_Assert(status < 0);
-        if (status >= 0)
+        if (status >= 0) {
             status = JAR_ERR_SIG;
+}
         jar->valid = status;
         signer->valid = status;
     }
@@ -1060,23 +1111,27 @@ jar_gather_signers(JAR *jar, JAR_Signer *signer, SEC_PKCS7ContentInfo *cinfo)
     SEC_PKCS7SignedData *sdp = cinfo->content.signedData;
     SEC_PKCS7SignerInfo **pksigners, *pksigner;
 
-    if (sdp == NULL)
+    if (sdp == NULL) {
         return JAR_ERR_PK7;
+}
 
     pksigners = sdp->signerInfos;
     /* permit exactly one signer */
-    if (pksigners == NULL || pksigners[0] == NULL || pksigners[1] != NULL)
+    if (pksigners == NULL || pksigners[0] == NULL || pksigners[1] != NULL) {
         return JAR_ERR_PK7;
+}
 
     pksigner = *pksigners;
     cert = pksigner->cert;
 
-    if (cert == NULL)
+    if (cert == NULL) {
         return JAR_ERR_PK7;
+}
 
     certdb = JAR_open_database();
-    if (certdb == NULL)
+    if (certdb == NULL) {
         return JAR_ERR_GENERAL;
+}
 
     result = jar_add_cert(jar, signer, jarTypeSign, cert);
     JAR_close_database(certdb);
@@ -1139,13 +1194,15 @@ jar_append(ZZList *list, int type, char *pathname, void *data, size_t size)
     JAR_Item *it = PORT_ZNew(JAR_Item);
     ZZLink *entity;
 
-    if (it == NULL)
+    if (it == NULL) {
         goto loser;
+}
 
     if (pathname) {
         it->pathname = PORT_Strdup(pathname);
-        if (it->pathname == NULL)
+        if (it->pathname == NULL) {
             goto loser;
+}
     }
 
     it->type = (jarType)type;
@@ -1159,8 +1216,9 @@ jar_append(ZZList *list, int type, char *pathname, void *data, size_t size)
 
 loser:
     if (it) {
-        if (it->pathname)
+        if (it->pathname) {
             PORT_Free(it->pathname);
+}
         PORT_Free(it);
     }
     return JAR_ERR_MEMORY;

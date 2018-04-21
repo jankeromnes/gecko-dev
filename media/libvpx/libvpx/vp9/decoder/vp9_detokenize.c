@@ -66,8 +66,9 @@ static INLINE int read_bool(vpx_reader *r, int prob, BD_VALUE *value,
 static INLINE int read_coeff(vpx_reader *r, const vpx_prob *probs, int n,
                              BD_VALUE *value, int *count, unsigned int *range) {
   int i, val = 0;
-  for (i = 0; i < n; ++i)
+  for (i = 0; i < n; ++i) {
     val = (val << 1) | read_bool(r, probs[i], value, count, range);
+}
   return val;
 }
 
@@ -117,7 +118,8 @@ static int decode_coefs(const MACROBLOCKD *xd, PLANE_TYPE type,
     int val = -1;
     band = *band_translate++;
     prob = coef_probs[band][ctx];
-    if (counts) ++eob_branch_count[band][ctx];
+    if (counts) { ++eob_branch_count[band][ctx];
+}
     if (!read_bool(r, prob[EOB_CONTEXT_NODE], &value, &count, &range)) {
       INCREMENT_COUNT(EOB_MODEL_TOKEN);
       break;
@@ -220,12 +222,14 @@ static int decode_coefs(const MACROBLOCKD *xd, PLANE_TYPE type,
 static void get_ctx_shift(MACROBLOCKD *xd, int *ctx_shift_a, int *ctx_shift_l,
                           int x, int y, unsigned int tx_size_in_blocks) {
   if (xd->max_blocks_wide) {
-    if (tx_size_in_blocks + x > xd->max_blocks_wide)
+    if (tx_size_in_blocks + x > xd->max_blocks_wide) {
       *ctx_shift_a = (tx_size_in_blocks - (xd->max_blocks_wide - x)) * 8;
+}
   }
   if (xd->max_blocks_high) {
-    if (tx_size_in_blocks + y > xd->max_blocks_high)
+    if (tx_size_in_blocks + y > xd->max_blocks_high) {
       *ctx_shift_l = (tx_size_in_blocks - (xd->max_blocks_high - y)) * 8;
+}
   }
 }
 

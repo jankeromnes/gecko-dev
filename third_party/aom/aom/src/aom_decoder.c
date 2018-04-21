@@ -28,21 +28,21 @@ aom_codec_err_t aom_codec_dec_init_ver(aom_codec_ctx_t *ctx,
                                        aom_codec_flags_t flags, int ver) {
   aom_codec_err_t res;
 
-  if (ver != AOM_DECODER_ABI_VERSION)
+  if (ver != AOM_DECODER_ABI_VERSION) {
     res = AOM_CODEC_ABI_MISMATCH;
-  else if (!ctx || !iface)
+  } else if (!ctx || !iface) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (iface->abi_version != AOM_CODEC_INTERNAL_ABI_VERSION)
+  } else if (iface->abi_version != AOM_CODEC_INTERNAL_ABI_VERSION) {
     res = AOM_CODEC_ABI_MISMATCH;
-  else if ((flags & AOM_CODEC_USE_POSTPROC) &&
-           !(iface->caps & AOM_CODEC_CAP_POSTPROC))
+  } else if ((flags & AOM_CODEC_USE_POSTPROC) &&
+           !(iface->caps & AOM_CODEC_CAP_POSTPROC)) {
     res = AOM_CODEC_INCAPABLE;
-  else if ((flags & AOM_CODEC_USE_INPUT_FRAGMENTS) &&
-           !(iface->caps & AOM_CODEC_CAP_INPUT_FRAGMENTS))
+  } else if ((flags & AOM_CODEC_USE_INPUT_FRAGMENTS) &&
+           !(iface->caps & AOM_CODEC_CAP_INPUT_FRAGMENTS)) {
     res = AOM_CODEC_INCAPABLE;
-  else if (!(iface->caps & AOM_CODEC_CAP_DECODER))
+  } else if (!(iface->caps & AOM_CODEC_CAP_DECODER)) {
     res = AOM_CODEC_INCAPABLE;
-  else {
+  } else {
     memset(ctx, 0, sizeof(*ctx));
     ctx->iface = iface;
     ctx->name = iface->name;
@@ -105,11 +105,11 @@ aom_codec_err_t aom_codec_decode(aom_codec_ctx_t *ctx, const uint8_t *data,
 
   /* Sanity checks */
   /* NULL data ptr allowed if data_sz is 0 too */
-  if (!ctx || (!data && data_sz) || (data && !data_sz))
+  if (!ctx || (!data && data_sz) || (data && !data_sz)) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv)
+  } else if (!ctx->iface || !ctx->priv) {
     res = AOM_CODEC_ERROR;
-  else {
+  } else {
     res = ctx->iface->dec.decode(get_alg_priv(ctx), data, data_sz, user_priv,
                                  deadline);
   }
@@ -120,10 +120,11 @@ aom_codec_err_t aom_codec_decode(aom_codec_ctx_t *ctx, const uint8_t *data,
 aom_image_t *aom_codec_get_frame(aom_codec_ctx_t *ctx, aom_codec_iter_t *iter) {
   aom_image_t *img;
 
-  if (!ctx || !iter || !ctx->iface || !ctx->priv)
+  if (!ctx || !iter || !ctx->iface || !ctx->priv) {
     img = NULL;
-  else
+  } else {
     img = ctx->iface->dec.get_frame(get_alg_priv(ctx), iter);
+}
 
   return img;
 }
@@ -133,12 +134,12 @@ aom_codec_err_t aom_codec_register_put_frame_cb(aom_codec_ctx_t *ctx,
                                                 void *user_priv) {
   aom_codec_err_t res;
 
-  if (!ctx || !cb)
+  if (!ctx || !cb) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv ||
-           !(ctx->iface->caps & AOM_CODEC_CAP_PUT_FRAME))
+  } else if (!ctx->iface || !ctx->priv ||
+           !(ctx->iface->caps & AOM_CODEC_CAP_PUT_FRAME)) {
     res = AOM_CODEC_ERROR;
-  else {
+  } else {
     ctx->priv->dec.put_frame_cb.u.put_frame = cb;
     ctx->priv->dec.put_frame_cb.user_priv = user_priv;
     res = AOM_CODEC_OK;
@@ -152,12 +153,12 @@ aom_codec_err_t aom_codec_register_put_slice_cb(aom_codec_ctx_t *ctx,
                                                 void *user_priv) {
   aom_codec_err_t res;
 
-  if (!ctx || !cb)
+  if (!ctx || !cb) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv ||
-           !(ctx->iface->caps & AOM_CODEC_CAP_PUT_SLICE))
+  } else if (!ctx->iface || !ctx->priv ||
+           !(ctx->iface->caps & AOM_CODEC_CAP_PUT_SLICE)) {
     res = AOM_CODEC_ERROR;
-  else {
+  } else {
     ctx->priv->dec.put_slice_cb.u.put_slice = cb;
     ctx->priv->dec.put_slice_cb.user_priv = user_priv;
     res = AOM_CODEC_OK;

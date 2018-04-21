@@ -467,8 +467,9 @@ static void do_anti_hairline(SkFDot6 x0, SkFDot6 y0, SkFDot6 x1, SkFDot6 y1,
             }
 
             SkASSERT(istart <= istop);
-            if (istart == istop)
+            if (istart == istop) {
                 return;
+}
 
             // now test if our X values are completely inside the clip
             int left, right;

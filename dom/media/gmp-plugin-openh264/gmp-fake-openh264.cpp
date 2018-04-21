@@ -267,8 +267,9 @@ class FakeVideoEncoder : public GMPVideoEncoder {
     SelfDestruct<GMPVideoi420Frame> ifd (inputImage);
 
     if (frame_type  == kGMPKeyFrame) {
-      if (!inputImage)
+      if (!inputImage) {
         return;
+}
     }
     if (!inputImage) {
       GMPLOG (GL_ERROR, "no input image");

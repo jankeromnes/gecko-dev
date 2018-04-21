@@ -53,7 +53,8 @@ static INLINE unsigned int obmc_sad_w4(const uint8_t *pre, const int pre_stride,
 
     n += 4;
 
-    if (n % 4 == 0) pre += pre_step;
+    if (n % 4 == 0) { pre += pre_step;
+}
   } while (n < 4 * height);
 
   return xx_hsum_epi32_si32(v_sad_d);
@@ -102,7 +103,8 @@ static INLINE unsigned int obmc_sad_w8n(const uint8_t *pre,
 
     n += 8;
 
-    if (n % width == 0) pre += pre_step;
+    if (n % width == 0) { pre += pre_step;
+}
   } while (n < width * height);
 
   return xx_hsum_epi32_si32(v_sad_d);
@@ -183,7 +185,8 @@ static INLINE unsigned int hbd_obmc_sad_w4(const uint8_t *pre8,
 
     n += 4;
 
-    if (n % 4 == 0) pre += pre_step;
+    if (n % 4 == 0) { pre += pre_step;
+}
   } while (n < 4 * height);
 
   return xx_hsum_epi32_si32(v_sad_d);
@@ -233,7 +236,8 @@ static INLINE unsigned int hbd_obmc_sad_w8n(const uint8_t *pre8,
 
     n += 8;
 
-    if (n % width == 0) pre += pre_step;
+    if (n % width == 0) { pre += pre_step;
+}
   } while (n < width * height);
 
   return xx_hsum_epi32_si32(v_sad_d);

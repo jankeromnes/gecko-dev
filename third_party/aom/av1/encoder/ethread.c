@@ -15,13 +15,15 @@
 #include "aom_dsp/aom_dsp_common.h"
 
 static void accumulate_rd_opt(ThreadData *td, ThreadData *td_t) {
-  for (int i = 0; i < REFERENCE_MODES; i++)
+  for (int i = 0; i < REFERENCE_MODES; i++) {
     td->rd_counts.comp_pred_diff[i] += td_t->rd_counts.comp_pred_diff[i];
+}
 
 #if CONFIG_GLOBAL_MOTION
-  for (int i = 0; i < TOTAL_REFS_PER_FRAME; i++)
+  for (int i = 0; i < TOTAL_REFS_PER_FRAME; i++) {
     td->rd_counts.global_motion_used[i] +=
         td_t->rd_counts.global_motion_used[i];
+}
 #endif  // CONFIG_GLOBAL_MOTION
 
   td->rd_counts.compound_ref_used_flag |=
@@ -123,9 +125,10 @@ void av1_encode_tiles_mt(AV1_COMP *cpi) {
             aom_memalign(16, sizeof(*thread_data->td->palette_buffer)));
 
         // Create threads
-        if (!winterface->reset(worker))
+        if (!winterface->reset(worker)) {
           aom_internal_error(&cm->error, AOM_CODEC_ERROR,
                              "Tile encoder thread creation failed");
+}
       } else {
         // Main thread acts as a worker and uses the thread data in cpi.
         thread_data->td = &cpi->td;
@@ -160,8 +163,9 @@ void av1_encode_tiles_mt(AV1_COMP *cpi) {
              sizeof(cpi->common.counts));
     }
 
-    if (i < num_workers - 1)
+    if (i < num_workers - 1) {
       thread_data->td->mb.palette_buffer = thread_data->td->palette_buffer;
+}
   }
 
   // Encode a frame
@@ -172,10 +176,11 @@ void av1_encode_tiles_mt(AV1_COMP *cpi) {
     // Set the starting tile for each thread.
     thread_data->start = i;
 
-    if (i == cpi->num_workers - 1)
+    if (i == cpi->num_workers - 1) {
       winterface->execute(worker);
-    else
+    } else {
       winterface->launch(worker);
+}
   }
 
   // Encoding ends.

@@ -37,8 +37,9 @@ bool LaunchApp(const std::vector<std::string>& argv,
   EnvironmentArray envp = BuildEnvironmentArray(options.env_map);
 
   pid_t pid = options.fork_delegate ? options.fork_delegate->Fork() : fork();
-  if (pid < 0)
+  if (pid < 0) {
     return false;
+}
 
   if (pid == 0) {
     // In the child:
@@ -47,13 +48,15 @@ bool LaunchApp(const std::vector<std::string>& argv,
       fd_shuffle2.push_back(InjectionArc(fd_map.first, fd_map.second, false));
     }
 
-    if (!ShuffleFileDescriptors(&fd_shuffle1))
+    if (!ShuffleFileDescriptors(&fd_shuffle1)) {
       _exit(127);
+}
 
     CloseSuperfluousFds(fd_shuffle2);
 
-    for (size_t i = 0; i < argv.size(); i++)
+    for (size_t i = 0; i < argv.size(); i++) {
       argv_cstr[i] = const_cast<char*>(argv[i].c_str());
+}
     argv_cstr[argv.size()] = NULL;
 
     execve(argv_cstr[0], argv_cstr.get(), envp.get());
@@ -67,11 +70,13 @@ bool LaunchApp(const std::vector<std::string>& argv,
   // In the parent:
   gProcessLog.print("==> process %d launched child process %d\n",
                     GetCurrentProcId(), pid);
-  if (options.wait)
+  if (options.wait) {
     HANDLE_EINTR(waitpid(pid, 0, 0));
+}
 
-  if (process_handle)
+  if (process_handle) {
     *process_handle = pid;
+}
 
   return true;
 }

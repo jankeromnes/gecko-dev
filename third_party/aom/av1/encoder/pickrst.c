@@ -248,12 +248,14 @@ static int64_t finer_search_pixel_proj_error(
             err = err2;
             skip = 1;
             // At the highest step size continue moving in the same direction
-            if (s == start_step) continue;
+            if (s == start_step) { continue;
+}
           }
         }
         break;
       } while (1);
-      if (skip) break;
+      if (skip) { break;
+}
       do {
         if (xqd[p] + s <= tap_max[p]) {
           xqd[p] += s;
@@ -265,7 +267,8 @@ static int64_t finer_search_pixel_proj_error(
           } else {
             err = err2;
             // At the highest step size continue moving in the same direction
-            if (s == start_step) continue;
+            if (s == start_step) { continue;
+}
           }
         }
         break;
@@ -335,7 +338,8 @@ static void get_proj_subspace(const uint8_t *src8, int width, int height,
   C[0] /= size;
   C[1] /= size;
   Det = (H[0][0] * H[1][1] - H[0][1] * H[1][0]);
-  if (Det < 1e-8) return;  // ill-posed, return default values
+  if (Det < 1e-8) { return;  // ill-posed, return default values
+}
   x[0] = (H[1][1] * C[0] - H[0][1] * C[1]) / Det;
   x[1] = (H[0][0] * C[1] - H[1][0] * C[0]) / Det;
   xq[0] = (int)rint(x[0] * (1 << SGRPROJ_PRJ_BITS));
@@ -375,7 +379,7 @@ static void search_selfguided_restoration(uint8_t *dat8, int width, int height,
 #if CONFIG_HIGHBITDEPTH
     if (use_highbitdepth) {
       uint16_t *dat = CONVERT_TO_SHORTPTR(dat8);
-      for (int i = 0; i < height; i += pu_height)
+      for (int i = 0; i < height; i += pu_height) {
         for (int j = 0; j < width; j += pu_width) {
           const int w = AOMMIN(pu_width, width - j);
           const int h = AOMMIN(pu_height, height - i);
@@ -395,9 +399,10 @@ static void search_selfguided_restoration(uint8_t *dat8, int width, int height,
               dat_p, w, h, dat_stride, flt2_p, flt2_stride, bit_depth,
               sgr_params[ep].r2, sgr_params[ep].e2);
         }
+}
     } else {
 #endif
-      for (int i = 0; i < height; i += pu_height)
+      for (int i = 0; i < height; i += pu_height) {
         for (int j = 0; j < width; j += pu_width) {
           const int w = AOMMIN(pu_width, width - j);
           const int h = AOMMIN(pu_height, height - i);
@@ -415,6 +420,7 @@ static void search_selfguided_restoration(uint8_t *dat8, int width, int height,
                                      flt2_stride, sgr_params[ep].r2,
                                      sgr_params[ep].e2);
         }
+}
 #if CONFIG_HIGHBITDEPTH
     }
 #endif
@@ -660,14 +666,15 @@ static double search_sgrproj(const YV12_BUFFER_CONFIG *src, AV1_COMP *cpi,
   // tile at a time.
   const AV1_COMMON *const cm = &cpi->common;
 #if CONFIG_HIGHBITDEPTH
-  if (cm->use_highbitdepth)
+  if (cm->use_highbitdepth) {
     extend_frame_highbd(CONVERT_TO_SHORTPTR(ctxt.dgd_buffer), ctxt.plane_width,
                         ctxt.plane_height, ctxt.dgd_stride, SGRPROJ_BORDER_HORZ,
                         SGRPROJ_BORDER_VERT);
-  else
+  } else {
 #endif
     extend_frame(ctxt.dgd_buffer, ctxt.plane_width, ctxt.plane_height,
                  ctxt.dgd_stride, SGRPROJ_BORDER_HORZ, SGRPROJ_BORDER_VERT);
+}
 
   for (int tile_row = 0; tile_row < cm->tile_rows; ++tile_row) {
     for (int tile_col = 0; tile_col < cm->tile_cols; ++tile_col) {
@@ -709,8 +716,9 @@ static double find_average(const uint8_t *src, int h_start, int h_end,
   double avg = 0;
   int i, j;
   aom_clear_system_state();
-  for (i = v_start; i < v_end; i++)
-    for (j = h_start; j < h_end; j++) sum += src[i * stride + j];
+  for (i = v_start; i < v_end; i++) {
+    for (j = h_start; j < h_end; j++) { sum += src[i * stride + j];
+}
   avg = (double)sum / ((v_end - v_start) * (h_end - h_start));
   return avg;
 }
@@ -765,8 +773,9 @@ static double find_average_highbd(const uint16_t *src, int h_start, int h_end,
   double avg = 0;
   int i, j;
   aom_clear_system_state();
-  for (i = v_start; i < v_end; i++)
-    for (j = h_start; j < h_end; j++) sum += src[i * stride + j];
+  for (i = v_start; i < v_end; i++) {
+    for (j = h_start; j < h_end; j++) { sum += src[i * stride + j];
+}
   avg = (double)sum / ((v_end - v_start) * (h_end - h_start));
   return avg;
 }
@@ -841,28 +850,31 @@ static void update_a_sep_sym(int wiener_win, double **Mc, double **Hc,
   for (i = 0; i < wiener_win; i++) {
     for (j = 0; j < wiener_win; j++) {
       int k, l;
-      for (k = 0; k < wiener_win; ++k)
+      for (k = 0; k < wiener_win; ++k) {
         for (l = 0; l < wiener_win; ++l) {
           const int kk = wrap_index(k, wiener_win);
           const int ll = wrap_index(l, wiener_win);
           B[ll * wiener_halfwin1 + kk] +=
               Hc[j * wiener_win + i][k * wiener_win2 + l] * b[i] * b[j];
         }
+}
     }
   }
   // Normalization enforcement in the system of equations itself
-  for (i = 0; i < wiener_halfwin1 - 1; ++i)
+  for (i = 0; i < wiener_halfwin1 - 1; ++i) {
     A[i] -=
         A[wiener_halfwin1 - 1] * 2 +
         B[i * wiener_halfwin1 + wiener_halfwin1 - 1] -
         2 * B[(wiener_halfwin1 - 1) * wiener_halfwin1 + (wiener_halfwin1 - 1)];
-  for (i = 0; i < wiener_halfwin1 - 1; ++i)
-    for (j = 0; j < wiener_halfwin1 - 1; ++j)
+}
+  for (i = 0; i < wiener_halfwin1 - 1; ++i) {
+    for (j = 0; j < wiener_halfwin1 - 1; ++j) {
       B[i * wiener_halfwin1 + j] -=
           2 * (B[i * wiener_halfwin1 + (wiener_halfwin1 - 1)] +
                B[(wiener_halfwin1 - 1) * wiener_halfwin1 + j] -
                2 * B[(wiener_halfwin1 - 1) * wiener_halfwin1 +
                      (wiener_halfwin1 - 1)]);
+}
   if (linsolve(wiener_halfwin1 - 1, B, wiener_halfwin1, A, S)) {
     S[wiener_halfwin1 - 1] = 1.0;
     for (i = wiener_halfwin1; i < wiener_win; ++i) {
@@ -885,7 +897,8 @@ static void update_b_sep_sym(int wiener_win, double **Mc, double **Hc,
   memset(B, 0, sizeof(B));
   for (i = 0; i < wiener_win; i++) {
     const int ii = wrap_index(i, wiener_win);
-    for (j = 0; j < wiener_win; j++) A[ii] += Mc[i][j] * a[j];
+    for (j = 0; j < wiener_win; j++) { A[ii] += Mc[i][j] * a[j];
+}
   }
 
   for (i = 0; i < wiener_win; i++) {
@@ -893,25 +906,28 @@ static void update_b_sep_sym(int wiener_win, double **Mc, double **Hc,
       const int ii = wrap_index(i, wiener_win);
       const int jj = wrap_index(j, wiener_win);
       int k, l;
-      for (k = 0; k < wiener_win; ++k)
-        for (l = 0; l < wiener_win; ++l)
+      for (k = 0; k < wiener_win; ++k) {
+        for (l = 0; l < wiener_win; ++l) {
           B[jj * wiener_halfwin1 + ii] +=
               Hc[i * wiener_win + j][k * wiener_win2 + l] * a[k] * a[l];
+}
     }
   }
   // Normalization enforcement in the system of equations itself
-  for (i = 0; i < wiener_halfwin1 - 1; ++i)
+  for (i = 0; i < wiener_halfwin1 - 1; ++i) {
     A[i] -=
         A[wiener_halfwin1 - 1] * 2 +
         B[i * wiener_halfwin1 + wiener_halfwin1 - 1] -
         2 * B[(wiener_halfwin1 - 1) * wiener_halfwin1 + (wiener_halfwin1 - 1)];
-  for (i = 0; i < wiener_halfwin1 - 1; ++i)
-    for (j = 0; j < wiener_halfwin1 - 1; ++j)
+}
+  for (i = 0; i < wiener_halfwin1 - 1; ++i) {
+    for (j = 0; j < wiener_halfwin1 - 1; ++j) {
       B[i * wiener_halfwin1 + j] -=
           2 * (B[i * wiener_halfwin1 + (wiener_halfwin1 - 1)] +
                B[(wiener_halfwin1 - 1) * wiener_halfwin1 + j] -
                2 * B[(wiener_halfwin1 - 1) * wiener_halfwin1 +
                      (wiener_halfwin1 - 1)]);
+}
   if (linsolve(wiener_halfwin1 - 1, B, wiener_halfwin1, A, S)) {
     S[wiener_halfwin1 - 1] = 1.0;
     for (i = wiener_halfwin1; i < wiener_win; ++i) {
@@ -979,13 +995,15 @@ static double compute_score(int wiener_win, double *M, double *H,
   }
   memset(ab, 0, sizeof(ab));
   for (k = 0; k < wiener_win; ++k) {
-    for (l = 0; l < wiener_win; ++l)
+    for (l = 0; l < wiener_win; ++l) {
       ab[k * wiener_win + l] = a[l + plane_off] * b[k + plane_off];
+}
   }
   for (k = 0; k < wiener_win2; ++k) {
     P += ab[k] * M[k];
-    for (l = 0; l < wiener_win2; ++l)
+    for (l = 0; l < wiener_win2; ++l) {
       Q += ab[k] * H[k * wiener_win2 + l] * ab[l];
+}
   }
   Score = Q - 2 * P;
 
@@ -1023,12 +1041,13 @@ static void quantize_sym_filter(int wiener_win, double *f, InterpKernel fi) {
 static int count_wiener_bits(int wiener_win, WienerInfo *wiener_info,
                              WienerInfo *ref_wiener_info) {
   int bits = 0;
-  if (wiener_win == WIENER_WIN)
+  if (wiener_win == WIENER_WIN) {
     bits += aom_count_primitive_refsubexpfin(
         WIENER_FILT_TAP0_MAXV - WIENER_FILT_TAP0_MINV + 1,
         WIENER_FILT_TAP0_SUBEXP_K,
         ref_wiener_info->vfilter[0] - WIENER_FILT_TAP0_MINV,
         wiener_info->vfilter[0] - WIENER_FILT_TAP0_MINV);
+}
   bits += aom_count_primitive_refsubexpfin(
       WIENER_FILT_TAP1_MAXV - WIENER_FILT_TAP1_MINV + 1,
       WIENER_FILT_TAP1_SUBEXP_K,
@@ -1039,12 +1058,13 @@ static int count_wiener_bits(int wiener_win, WienerInfo *wiener_info,
       WIENER_FILT_TAP2_SUBEXP_K,
       ref_wiener_info->vfilter[2] - WIENER_FILT_TAP2_MINV,
       wiener_info->vfilter[2] - WIENER_FILT_TAP2_MINV);
-  if (wiener_win == WIENER_WIN)
+  if (wiener_win == WIENER_WIN) {
     bits += aom_count_primitive_refsubexpfin(
         WIENER_FILT_TAP0_MAXV - WIENER_FILT_TAP0_MINV + 1,
         WIENER_FILT_TAP0_SUBEXP_K,
         ref_wiener_info->hfilter[0] - WIENER_FILT_TAP0_MINV,
         wiener_info->hfilter[0] - WIENER_FILT_TAP0_MINV);
+}
   bits += aom_count_primitive_refsubexpfin(
       WIENER_FILT_TAP1_MAXV - WIENER_FILT_TAP1_MINV + 1,
       WIENER_FILT_TAP1_SUBEXP_K,
@@ -1094,12 +1114,14 @@ static int64_t finer_tile_search_wiener(const YV12_BUFFER_CONFIG *src,
             err = err2;
             skip = 1;
             // At the highest step size continue moving in the same direction
-            if (s == start_step) continue;
+            if (s == start_step) { continue;
+}
           }
         }
         break;
       } while (1);
-      if (skip) break;
+      if (skip) { break;
+}
       do {
         if (rsi[plane].wiener_info[tile_idx].hfilter[p] + s <= tap_max[p]) {
           rsi[plane].wiener_info[tile_idx].hfilter[p] += s;
@@ -1114,7 +1136,8 @@ static int64_t finer_tile_search_wiener(const YV12_BUFFER_CONFIG *src,
           } else {
             err = err2;
             // At the highest step size continue moving in the same direction
-            if (s == start_step) continue;
+            if (s == start_step) { continue;
+}
           }
         }
         break;
@@ -1137,12 +1160,14 @@ static int64_t finer_tile_search_wiener(const YV12_BUFFER_CONFIG *src,
             err = err2;
             skip = 1;
             // At the highest step size continue moving in the same direction
-            if (s == start_step) continue;
+            if (s == start_step) { continue;
+}
           }
         }
         break;
       } while (1);
-      if (skip) break;
+      if (skip) { break;
+}
       do {
         if (rsi[plane].wiener_info[tile_idx].vfilter[p] + s <= tap_max[p]) {
           rsi[plane].wiener_info[tile_idx].vfilter[p] += s;
@@ -1157,7 +1182,8 @@ static int64_t finer_tile_search_wiener(const YV12_BUFFER_CONFIG *src,
           } else {
             err = err2;
             // At the highest step size continue moving in the same direction
-            if (s == start_step) continue;
+            if (s == start_step) { continue;
+}
           }
         }
         break;
@@ -1196,16 +1222,17 @@ static void search_wiener_for_rtile(const struct rest_search_ctxt *ctxt,
   ctxt->best_tile_cost[rtile_idx] = INT64_MAX;
 
 #if CONFIG_HIGHBITDEPTH
-  if (cm->use_highbitdepth)
+  if (cm->use_highbitdepth) {
     compute_stats_highbd(wiener_win, ctxt->dgd_buffer, ctxt->src_buffer,
                          limits->h_start, limits->h_end, limits->v_start,
                          limits->v_end, ctxt->dgd_stride, ctxt->src_stride, M,
                          H);
-  else
+  } else {
 #endif  // CONFIG_HIGHBITDEPTH
     compute_stats(wiener_win, ctxt->dgd_buffer, ctxt->src_buffer,
                   limits->h_start, limits->h_end, limits->v_start,
                   limits->v_end, ctxt->dgd_stride, ctxt->src_stride, M, H);
+}
 
   ctxt->type[rtile_idx] = RESTORE_WIENER;
 
@@ -1274,14 +1301,15 @@ static double search_wiener(const YV12_BUFFER_CONFIG *src, AV1_COMP *cpi,
 // Note use this border to gather stats even though the actual filter
 // may use less border on the top/bottom of a processing unit.
 #if CONFIG_HIGHBITDEPTH
-  if (cm->use_highbitdepth)
+  if (cm->use_highbitdepth) {
     extend_frame_highbd(CONVERT_TO_SHORTPTR(ctxt.dgd_buffer), ctxt.plane_width,
                         ctxt.plane_height, ctxt.dgd_stride, WIENER_HALFWIN,
                         WIENER_HALFWIN);
-  else
+  } else {
 #endif
     extend_frame(ctxt.dgd_buffer, ctxt.plane_width, ctxt.plane_height,
                  ctxt.dgd_stride, WIENER_HALFWIN, WIENER_HALFWIN);
+}
 
   // Compute best Wiener filters for each rtile, one (encoder/decoder)
   // tile at a time.
@@ -1396,17 +1424,20 @@ static void search_switchable_for_rtile(const struct rest_search_ctxt *ctxt,
                  swctxt->tile_cost[RESTORE_NONE][rtile_idx]);
   rsi->restoration_type[rtile_idx] = RESTORE_NONE;
   for (RestorationType r = 1; r < RESTORE_SWITCHABLE_TYPES; r++) {
-    if (force_restore_type != RESTORE_TYPES)
-      if (r != force_restore_type) continue;
+    if (force_restore_type != RESTORE_TYPES) {
+      if (r != force_restore_type) { continue;
+}
     int tilebits = 0;
-    if (swctxt->restore_types[r][rtile_idx] != r) continue;
-    if (r == RESTORE_WIENER)
+    if (swctxt->restore_types[r][rtile_idx] != r) { continue;
+}
+    if (r == RESTORE_WIENER) {
       tilebits += count_wiener_bits(
           (ctxt->plane == AOM_PLANE_Y ? WIENER_WIN : WIENER_WIN - 2),
           &rsi->wiener_info[rtile_idx], &swctxt->wiener_info);
-    else if (r == RESTORE_SGRPROJ)
+    } else if (r == RESTORE_SGRPROJ) {
       tilebits += count_sgrproj_bits(&rsi->sgrproj_info[rtile_idx],
                                      &swctxt->sgrproj_info);
+}
     tilebits <<= AV1_PROB_COST_SHIFT;
     tilebits += x->switchable_restore_cost[r];
     double cost =
@@ -1417,13 +1448,15 @@ static void search_switchable_for_rtile(const struct rest_search_ctxt *ctxt,
       best_cost = cost;
     }
   }
-  if (rsi->restoration_type[rtile_idx] == RESTORE_WIENER)
+  if (rsi->restoration_type[rtile_idx] == RESTORE_WIENER) {
     swctxt->wiener_info = rsi->wiener_info[rtile_idx];
-  else if (rsi->restoration_type[rtile_idx] == RESTORE_SGRPROJ)
+  } else if (rsi->restoration_type[rtile_idx] == RESTORE_SGRPROJ) {
     swctxt->sgrproj_info = rsi->sgrproj_info[rtile_idx];
-  if (force_restore_type != RESTORE_TYPES)
+}
+  if (force_restore_type != RESTORE_TYPES) {
     assert(rsi->restoration_type[rtile_idx] == force_restore_type ||
            rsi->restoration_type[rtile_idx] == RESTORE_NONE);
+}
   swctxt->cost_switchable += best_cost;
 }
 
@@ -1489,33 +1522,37 @@ void av1_pick_filter_restoration(const YV12_BUFFER_CONFIG *src, AV1_COMP *cpi,
   for (int plane = AOM_PLANE_Y; plane <= AOM_PLANE_V; ++plane) {
     for (r = 0; r < RESTORE_SWITCHABLE_TYPES; ++r) {
       cost_restore[r] = DBL_MAX;
-      if (force_restore_type != RESTORE_TYPES)
-        if (r != RESTORE_NONE && r != force_restore_type) continue;
+      if (force_restore_type != RESTORE_TYPES) {
+        if (r != RESTORE_NONE && r != force_restore_type) { continue;
+}
       cost_restore[r] =
           search_restore_fun[r](src, cpi, method == LPF_PICK_FROM_SUBIMAGE,
                                 plane, &cm->rst_info[plane], restore_types[r],
                                 tile_cost[r], &cpi->trial_frame_rst);
     }
-    if (plane == AOM_PLANE_Y)
+    if (plane == AOM_PLANE_Y) {
       cost_restore[RESTORE_SWITCHABLE] = search_switchable_restoration(
           src, cpi, method == LPF_PICK_FROM_SUBIMAGE, plane, restore_types,
           tile_cost, &cm->rst_info[plane]);
-    else
+    } else {
       cost_restore[RESTORE_SWITCHABLE] = DBL_MAX;
+}
     best_cost_restore = DBL_MAX;
     best_restore = 0;
     for (r = 0; r < RESTORE_TYPES; ++r) {
-      if (force_restore_type != RESTORE_TYPES)
-        if (r != RESTORE_NONE && r != force_restore_type) continue;
+      if (force_restore_type != RESTORE_TYPES) {
+        if (r != RESTORE_NONE && r != force_restore_type) { continue;
+}
       if (cost_restore[r] < best_cost_restore) {
         best_restore = r;
         best_cost_restore = cost_restore[r];
       }
     }
     cm->rst_info[plane].frame_restoration_type = best_restore;
-    if (force_restore_type != RESTORE_TYPES)
+    if (force_restore_type != RESTORE_TYPES) {
       assert(best_restore == force_restore_type ||
              best_restore == RESTORE_NONE);
+}
     if (best_restore != RESTORE_SWITCHABLE) {
       const int nt = (plane == AOM_PLANE_Y ? ntiles_y : ntiles_uv);
       memcpy(cm->rst_info[plane].restoration_type, restore_types[best_restore],

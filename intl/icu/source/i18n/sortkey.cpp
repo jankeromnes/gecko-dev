@@ -186,8 +186,9 @@ CollationKey::compareTo(const CollationKey& target, UErrorCode &status) const
     const uint8_t *tgt = target.getBytes();
 
     // are we comparing the same string
-    if (src == tgt)
+    if (src == tgt) {
         return  UCOL_EQUAL;
+}
 
     UCollationResult result;
 

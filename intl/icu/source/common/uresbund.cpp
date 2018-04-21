@@ -2327,7 +2327,8 @@ ures_countArrayItems(const UResourceBundle* resourceBundle,
 U_INTERNAL const char* U_EXPORT2 
 ures_getVersionNumberInternal(const UResourceBundle *resourceBundle)
 {
-    if (!resourceBundle) return NULL;
+    if (!resourceBundle) { return NULL;
+}
 
     if(resourceBundle->fVersion == NULL) {
 
@@ -2375,7 +2376,8 @@ ures_getVersionNumber(const UResourceBundle*   resourceBundle)
 }
 
 U_CAPI void U_EXPORT2 ures_getVersion(const UResourceBundle* resB, UVersionInfo versionInfo) {
-    if (!resB) return;
+    if (!resB) { return;
+}
 
     u_versionFromString(versionInfo, ures_getVersionNumberInternal(resB));
 }
@@ -2522,7 +2524,8 @@ ures_getFunctionalEquivalent(char *result, int32_t resultCapacity,
     UResourceBundle *res = NULL;
     UErrorCode subStatus = U_ZERO_ERROR;
     int32_t length = 0;
-    if(U_FAILURE(*status)) return 0;
+    if(U_FAILURE(*status)) { return 0;
+}
     uloc_getKeywordValue(locid, keyword, kwVal, 1024-1,&subStatus);
     if(!uprv_strcmp(kwVal, DEFAULT_TAG)) {
         kwVal[0]=0;

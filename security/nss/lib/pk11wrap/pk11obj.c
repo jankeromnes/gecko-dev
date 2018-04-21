@@ -26,12 +26,14 @@ PK11_BlockData(SECItem *data, unsigned long size)
 {
     SECItem *newData;
 
-    if (size == 0u)
+    if (size == 0u) {
         return NULL;
+}
 
     newData = (SECItem *)PORT_Alloc(sizeof(SECItem));
-    if (newData == NULL)
+    if (newData == NULL) {
         return NULL;
+}
 
     newData->len = (data->len + (size - 1)) / size;
     newData->len *= size;
@@ -119,8 +121,9 @@ PK11_ReadAttribute(PK11SlotInfo *slot, CK_OBJECT_HANDLE id,
     PK11_ExitSlotMonitor(slot);
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
-        if (!arena)
+        if (!arena) {
             PORT_Free(attr.pValue);
+}
         return SECFailure;
     }
 
@@ -167,12 +170,14 @@ pk11_HasAttributeSet_Lock(PK11SlotInfo *slot, CK_OBJECT_HANDLE id,
     PK11_SETATTRS(&theTemplate, type, &ckvalue, sizeof(CK_BBOOL));
 
     /* Retrieve attribute value. */
-    if (!haslock)
+    if (!haslock) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_GetAttributeValue(slot->session, id,
                                                  &theTemplate, 1);
-    if (!haslock)
+    if (!haslock) {
         PK11_ExitSlotMonitor(slot);
+}
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
         return CK_FALSE;
@@ -201,8 +206,9 @@ PK11_GetAttributes(PLArenaPool *arena, PK11SlotInfo *slot,
     /* make pedantic happy... note that it's only used arena != NULL */
     void *mark = NULL;
     CK_RV crv;
-    if (slot->session == CK_INVALID_SESSION)
+    if (slot->session == CK_INVALID_SESSION) {
         return CKR_SESSION_HANDLE_INVALID;
+}
 
     /*
      * first get all the lengths of the parameters.
@@ -216,16 +222,18 @@ PK11_GetAttributes(PLArenaPool *arena, PK11SlotInfo *slot,
 
     if (arena) {
         mark = PORT_ArenaMark(arena);
-        if (mark == NULL)
+        if (mark == NULL) {
             return CKR_HOST_MEMORY;
+}
     }
 
     /*
      * now allocate space to store the results.
      */
     for (i = 0; i < count; i++) {
-        if (attr[i].ulValueLen == 0)
+        if (attr[i].ulValueLen == 0) {
             continue;
+}
         if (arena) {
             attr[i].pValue = PORT_ArenaAlloc(arena, attr[i].ulValueLen);
             if (attr[i].pValue == NULL) {
@@ -355,15 +363,17 @@ pk11_GetNewSession(PK11SlotInfo *slot, PRBool *owner)
 {
     CK_SESSION_HANDLE session;
     *owner = PR_TRUE;
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     if (PK11_GETTAB(slot)->C_OpenSession(slot->slotID, CKF_SERIAL_SESSION,
                                          slot, pk11_notify, &session) != CKR_OK) {
         *owner = PR_FALSE;
         session = slot->session;
     }
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
 
     return session;
 }
@@ -371,13 +381,16 @@ pk11_GetNewSession(PK11SlotInfo *slot, PRBool *owner)
 void
 pk11_CloseSession(PK11SlotInfo *slot, CK_SESSION_HANDLE session, PRBool owner)
 {
-    if (!owner)
+    if (!owner) {
         return;
-    if (!slot->isThreadSafe)
+}
+    if (!slot->isThreadSafe) {
         PK11_EnterSlotMonitor(slot);
+}
     (void)PK11_GETTAB(slot)->C_CloseSession(session);
-    if (!slot->isThreadSafe)
+    if (!slot->isThreadSafe) {
         PK11_ExitSlotMonitor(slot);
+}
 }
 
 SECStatus
@@ -394,8 +407,9 @@ PK11_CreateNewObject(PK11SlotInfo *slot, CK_SESSION_HANDLE session,
         rwsession = PK11_GetRWSession(slot);
     } else if (rwsession == CK_INVALID_SESSION) {
         rwsession = slot->session;
-        if (rwsession != CK_INVALID_SESSION)
+        if (rwsession != CK_INVALID_SESSION) {
             PK11_EnterSlotMonitor(slot);
+}
     }
     if (rwsession == CK_INVALID_SESSION) {
         PORT_SetError(SEC_ERROR_BAD_DATA);
@@ -512,12 +526,14 @@ pk11_backupGetSignLength(SECKEYPrivateKey *key)
     mech.mechanism = PK11_MapSignKeyType(key->keyType);
 
     session = pk11_GetNewSession(slot, &owner);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_SignInit(session, &mech, key->pkcs11ID);
     if (crv != CKR_OK) {
-        if (!owner || !(slot->isThreadSafe))
+        if (!owner || !(slot->isThreadSafe)) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(PK11_MapError(crv));
         return -1;
@@ -528,8 +544,9 @@ pk11_backupGetSignLength(SECKEYPrivateKey *key)
     /* now call C_Sign with too small a buffer to clear the session state */
     (void)PK11_GETTAB(slot)->C_Sign(session, h_data, sizeof(h_data), buf, &smallLen);
 
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
@@ -605,8 +622,9 @@ PK11_CopyKey(PK11SlotInfo *slot, CK_OBJECT_HANDLE srcObject)
     crv = PK11_GETTAB(slot)->C_CopyObject(slot->session, srcObject, NULL, 0,
                                           &destObject);
     PK11_ExitSlotMonitor(slot);
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         return destObject;
+}
     PORT_SetError(PK11_MapError(crv));
     return CK_INVALID_HANDLE;
 }
@@ -616,8 +634,9 @@ pk11_FindAttrInTemplate(CK_ATTRIBUTE *attr, unsigned int numAttrs,
                         CK_ATTRIBUTE_TYPE target)
 {
     for (; numAttrs > 0; ++attr, --numAttrs) {
-        if (attr->type == target)
+        if (attr->type == target) {
             return PR_TRUE;
+}
     }
     return PR_FALSE;
 }
@@ -659,12 +678,14 @@ PK11_VerifyRecover(SECKEYPublicKey *key, const SECItem *sig,
     }
 
     session = pk11_GetNewSession(slot, &owner);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_VerifyRecoverInit(session, &mech, id);
     if (crv != CKR_OK) {
-        if (!owner || !(slot->isThreadSafe))
+        if (!owner || !(slot->isThreadSafe)) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(PK11_MapError(crv));
         PK11_FreeSlot(slot);
@@ -673,8 +694,9 @@ PK11_VerifyRecover(SECKEYPublicKey *key, const SECItem *sig,
     len = dsig->len;
     crv = PK11_GETTAB(slot)->C_VerifyRecover(session, sig->data,
                                              sig->len, dsig->data, &len);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     dsig->len = len;
     if (crv != CKR_OK) {
@@ -753,12 +775,14 @@ PK11_VerifyWithMechanism(SECKEYPublicKey *key, CK_MECHANISM_TYPE mechanism,
     }
 
     session = pk11_GetNewSession(slot, &owner);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_VerifyInit(session, &mech, id);
     if (crv != CKR_OK) {
-        if (!owner || !(slot->isThreadSafe))
+        if (!owner || !(slot->isThreadSafe)) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PK11_FreeSlot(slot);
         PORT_SetError(PK11_MapError(crv));
@@ -766,8 +790,9 @@ PK11_VerifyWithMechanism(SECKEYPublicKey *key, CK_MECHANISM_TYPE mechanism,
     }
     crv = PK11_GETTAB(slot)->C_Verify(session, hash->data,
                                       hash->len, sig->data, sig->len);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     PK11_FreeSlot(slot);
     if (crv != CKR_OK) {
@@ -814,12 +839,14 @@ PK11_SignWithMechanism(SECKEYPrivateKey *key, CK_MECHANISM_TYPE mechanism,
 
     session = pk11_GetNewSession(slot, &owner);
     haslock = (!owner || !(slot->isThreadSafe));
-    if (haslock)
+    if (haslock) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_SignInit(session, &mech, key->pkcs11ID);
     if (crv != CKR_OK) {
-        if (haslock)
+        if (haslock) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -835,8 +862,9 @@ PK11_SignWithMechanism(SECKEYPrivateKey *key, CK_MECHANISM_TYPE mechanism,
     len = sig->len;
     crv = PK11_GETTAB(slot)->C_Sign(session, hash->data,
                                     hash->len, sig->data, &len);
-    if (haslock)
+    if (haslock) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     sig->len = len;
     if (crv != CKR_OK) {
@@ -869,12 +897,14 @@ PK11_SignWithSymKey(PK11SymKey *symKey, CK_MECHANISM_TYPE mechanism,
 
     session = pk11_GetNewSession(slot, &owner);
     haslock = (!owner || !(slot->isThreadSafe));
-    if (haslock)
+    if (haslock) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_SignInit(session, &mech, symKey->objectID);
     if (crv != CKR_OK) {
-        if (haslock)
+        if (haslock) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -883,8 +913,9 @@ PK11_SignWithSymKey(PK11SymKey *symKey, CK_MECHANISM_TYPE mechanism,
     len = sig->len;
     crv = PK11_GETTAB(slot)->C_Sign(session, data->data,
                                     data->len, sig->data, &len);
-    if (haslock)
+    if (haslock) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     sig->len = len;
     if (crv != CKR_OK) {
@@ -917,12 +948,14 @@ PK11_Decrypt(PK11SymKey *symKey,
 
     session = pk11_GetNewSession(slot, &owner);
     haslock = (!owner || !slot->isThreadSafe);
-    if (haslock)
+    if (haslock) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_DecryptInit(session, &mech, symKey->objectID);
     if (crv != CKR_OK) {
-        if (haslock)
+        if (haslock) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -930,8 +963,9 @@ PK11_Decrypt(PK11SymKey *symKey,
 
     crv = PK11_GETTAB(slot)->C_Decrypt(session, (unsigned char *)enc, encLen,
                                        out, &len);
-    if (haslock)
+    if (haslock) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     *outLen = len;
     if (crv != CKR_OK) {
@@ -964,20 +998,23 @@ PK11_Encrypt(PK11SymKey *symKey,
 
     session = pk11_GetNewSession(slot, &owner);
     haslock = (!owner || !slot->isThreadSafe);
-    if (haslock)
+    if (haslock) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_EncryptInit(session, &mech, symKey->objectID);
     if (crv != CKR_OK) {
-        if (haslock)
+        if (haslock) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
     }
     crv = PK11_GETTAB(slot)->C_Encrypt(session, (unsigned char *)data,
                                        dataLen, out, &len);
-    if (haslock)
+    if (haslock) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     *outLen = len;
     if (crv != CKR_OK) {
@@ -1014,12 +1051,14 @@ pk11_PrivDecryptRaw(SECKEYPrivateKey *key,
     }
     session = pk11_GetNewSession(slot, &owner);
     haslock = (!owner || !(slot->isThreadSafe));
-    if (haslock)
+    if (haslock) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_DecryptInit(session, mech, key->pkcs11ID);
     if (crv != CKR_OK) {
-        if (haslock)
+        if (haslock) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -1035,8 +1074,9 @@ pk11_PrivDecryptRaw(SECKEYPrivateKey *key,
 
     crv = PK11_GETTAB(slot)->C_Decrypt(session, (unsigned char *)enc, encLen,
                                        data, &out);
-    if (haslock)
+    if (haslock) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     *outLen = out;
     if (crv != CKR_OK) {
@@ -1093,12 +1133,14 @@ pk11_PubEncryptRaw(SECKEYPublicKey *key,
     }
 
     session = pk11_GetNewSession(slot, &owner);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_EncryptInit(session, mech, id);
     if (crv != CKR_OK) {
-        if (!owner || !(slot->isThreadSafe))
+        if (!owner || !(slot->isThreadSafe)) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PK11_FreeSlot(slot);
         PORT_SetError(PK11_MapError(crv));
@@ -1106,8 +1148,9 @@ pk11_PubEncryptRaw(SECKEYPublicKey *key,
     }
     crv = PK11_GETTAB(slot)->C_Encrypt(session, (unsigned char *)data, dataLen,
                                        out, &len);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     PK11_FreeSlot(slot);
     *outLen = len;
@@ -1250,8 +1293,9 @@ PK11_UnwrapPrivKey(PK11SlotInfo *slot, PK11SymKey *wrappingKey,
     PR_ASSERT(templateCount <= (sizeof(keyTemplate) / sizeof(CK_ATTRIBUTE)));
 
     mechanism.mechanism = wrapType;
-    if (!param)
+    if (!param) {
         param = param_free = PK11_ParamFromIV(wrapType, NULL);
+}
     if (param) {
         mechanism.pParameter = param->data;
         mechanism.ulParameterLen = param->len;
@@ -1273,8 +1317,9 @@ PK11_UnwrapPrivKey(PK11SlotInfo *slot, PK11SymKey *wrappingKey,
             rwsession = PK11_GetRWSession(slot);
         } else {
             rwsession = slot->session;
-            if (rwsession != CK_INVALID_SESSION)
+            if (rwsession != CK_INVALID_SESSION) {
                 PK11_EnterSlotMonitor(slot);
+}
         }
         /* This is a lot a work to deal with fussy PKCS #11 modules
          * that can't bother to return BAD_DATA when presented with an
@@ -1321,8 +1366,9 @@ PK11_UnwrapPrivKey(PK11SlotInfo *slot, PK11SymKey *wrappingKey,
                 return newPrivKey;
             }
         }
-        if (int_slot)
+        if (int_slot) {
             PK11_FreeSlot(int_slot);
+}
         PORT_SetError(PK11_MapError(crv));
         return NULL;
     }
@@ -1857,8 +1903,9 @@ pk11_FindObjectsByTemplate(PK11SlotInfo *slot, CK_ATTRIBUTE *findTemplate,
         }
 
         if (objID == NULL) {
-            if (oldObjID)
+            if (oldObjID) {
                 PORT_Free(oldObjID);
+}
             break;
         }
         crv = PK11_GETTAB(slot)->C_FindObjects(slot->session,
@@ -1879,8 +1926,9 @@ pk11_FindObjectsByTemplate(PK11SlotInfo *slot, CK_ATTRIBUTE *findTemplate,
         PORT_Free(objID);
         return NULL;
     }
-    if (objID == NULL)
+    if (objID == NULL) {
         *object_count = -1;
+}
     return objID;
 }
 /*
@@ -1915,10 +1963,11 @@ PK11_MatchItem(PK11SlotInfo *slot, CK_OBJECT_HANDLE searchID,
 
     if ((theTemplate[0].ulValueLen == 0) || (theTemplate[0].ulValueLen == -1)) {
         PORT_DestroyCheapArena(&tmpArena);
-        if (matchclass == CKO_CERTIFICATE)
+        if (matchclass == CKO_CERTIFICATE) {
             PORT_SetError(SEC_ERROR_BAD_KEY);
-        else
+        } else {
             PORT_SetError(SEC_ERROR_NO_KEY);
+}
         return CK_INVALID_HANDLE;
     }
 
@@ -2018,8 +2067,9 @@ pk11_TraverseAllSlots(SECStatus (*callback)(PK11SlotInfo *, void *),
 
     /* get them all! */
     list = PK11_GetAllTokens(CKM_INVALID_MECHANISM, PR_FALSE, PR_FALSE, wincx);
-    if (list == NULL)
+    if (list == NULL) {
         return SECFailure;
+}
 
     /* look at each slot and authenticate as necessary */
     for (le = list->head; le; le = le->next) {

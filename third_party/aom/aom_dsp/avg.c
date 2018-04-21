@@ -106,7 +106,8 @@ void aom_hadamard_16x16_c(const int16_t *src_diff, int src_stride,
 int aom_satd_c(const int16_t *coeff, int length) {
   int i;
   int satd = 0;
-  for (i = 0; i < length; ++i) satd += abs(coeff[i]);
+  for (i = 0; i < length; ++i) { satd += abs(coeff[i]);
+}
 
   // satd: 26 bits, dynamic range [-32640 * 1024, 32640 * 1024]
   return satd;
@@ -122,7 +123,8 @@ void aom_int_pro_row_c(int16_t hbuf[16], const uint8_t *ref, int ref_stride,
     int i;
     hbuf[idx] = 0;
     // hbuf[idx]: 14 bit, dynamic range [0, 16320].
-    for (i = 0; i < height; ++i) hbuf[idx] += ref[i * ref_stride];
+    for (i = 0; i < height; ++i) { hbuf[idx] += ref[i * ref_stride];
+}
     // hbuf[idx]: 9 bit, dynamic range [0, 510].
     hbuf[idx] /= norm_factor;
     ++ref;
@@ -134,7 +136,8 @@ int16_t aom_int_pro_col_c(const uint8_t *ref, int width) {
   int idx;
   int16_t sum = 0;
   // sum: 14 bit, dynamic range [0, 16320]
-  for (idx = 0; idx < width; ++idx) sum += ref[idx];
+  for (idx = 0; idx < width; ++idx) { sum += ref[idx];
+}
   return sum;
 }
 

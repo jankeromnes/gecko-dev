@@ -67,10 +67,12 @@ cairo_deflate_stream_deflate (cairo_deflate_stream_t *stream, cairo_bool_t flush
         }
 
         finished = TRUE;
-        if (stream->zlib_stream.avail_in != 0)
+        if (stream->zlib_stream.avail_in != 0) {
             finished = FALSE;
-        if (flush && ret != Z_STREAM_END)
+}
+        if (flush && ret != Z_STREAM_END) {
             finished = FALSE;
+}
 
     } while (!finished);
 
@@ -88,15 +90,17 @@ _cairo_deflate_stream_write (cairo_output_stream_t *base,
 
     while (length) {
         count = length;
-        if (count > BUFFER_SIZE - stream->zlib_stream.avail_in)
+        if (count > BUFFER_SIZE - stream->zlib_stream.avail_in) {
             count = BUFFER_SIZE - stream->zlib_stream.avail_in;
+}
         memcpy (stream->input_buf + stream->zlib_stream.avail_in, p, count);
         p += count;
         stream->zlib_stream.avail_in += count;
         length -= count;
 
-        if (stream->zlib_stream.avail_in == BUFFER_SIZE)
+        if (stream->zlib_stream.avail_in == BUFFER_SIZE) {
             cairo_deflate_stream_deflate (stream, FALSE);
+}
     }
 
     return _cairo_output_stream_get_status (stream->output);
@@ -118,8 +122,9 @@ _cairo_deflate_stream_create (cairo_output_stream_t *output)
 {
     cairo_deflate_stream_t *stream;
 
-    if (output->status)
+    if (output->status) {
 	return _cairo_output_stream_create_in_error (output->status);
+}
 
     stream = malloc (sizeof (cairo_deflate_stream_t));
     if (unlikely (stream == NULL)) {

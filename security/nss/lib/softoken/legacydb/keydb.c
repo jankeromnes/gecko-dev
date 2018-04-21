@@ -977,14 +977,16 @@ nsslowkey_OpenKeyDB(PRBool readOnly, const char *appName, const char *prefix,
     }
 
     handle->global_salt = GetKeyDBGlobalSalt(handle);
-    if (dbname)
+    if (dbname) {
         PORT_Free(dbname);
+}
     return handle;
 
 loser:
 
-    if (dbname)
+    if (dbname) {
         PORT_Free(dbname);
+}
     PORT_SetError(SEC_ERROR_BAD_DATABASE);
     nsslowkey_CloseKeyDB(handle);
     return NULL;
@@ -1003,10 +1005,12 @@ nsslowkey_CloseKeyDB(NSSLOWKEYDBHandle *handle)
         if (handle->updatedb) {
             handle->updatedb->close(handle->updatedb);
         }
-        if (handle->dbname)
+        if (handle->dbname) {
             PORT_Free(handle->dbname);
-        if (handle->appname)
+}
+        if (handle->appname) {
             PORT_Free(handle->appname);
+}
         if (handle->global_salt) {
             SECITEM_FreeItem(handle->global_salt, PR_TRUE);
         }
@@ -1471,21 +1475,24 @@ seckey_encrypt_private_key(PLArenaPool *permarena, NSSLOWKEYPrivateKey *pk,
     int savelen;
 
     temparena = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if (temparena == NULL)
+    if (temparena == NULL) {
         goto loser;
+}
 
     /* allocate structures */
     pki = (NSSLOWKEYPrivateKeyInfo *)PORT_ArenaZAlloc(temparena,
                                                       sizeof(NSSLOWKEYPrivateKeyInfo));
     der_item = (SECItem *)PORT_ArenaZAlloc(temparena, sizeof(SECItem));
-    if ((pki == NULL) || (der_item == NULL))
+    if ((pki == NULL) || (der_item == NULL)) {
         goto loser;
+}
 
     /* setup private key info */
     dummy = SEC_ASN1EncodeInteger(temparena, &(pki->version),
                                   NSSLOWKEY_PRIVATE_KEY_INFO_VERSION);
-    if (dummy == NULL)
+    if (dummy == NULL) {
         goto loser;
+}
 
     /* Encode the key, and set the algorithm (with params) */
     switch (pk->keyType) {
@@ -1611,8 +1618,9 @@ seckey_encrypt_private_key(PLArenaPool *permarena, NSSLOWKEYPrivateKey *pk,
 
 loser:
 
-    if (temparena != NULL)
+    if (temparena != NULL) {
         PORT_FreeArena(temparena, PR_TRUE);
+}
 
     return rv;
 }
@@ -1626,29 +1634,34 @@ seckey_put_private_key(NSSLOWKEYDBHandle *keydb, DBT *index, SDB *sdbpw,
     SECStatus rv = SECFailure;
 
     if ((keydb == NULL) || (index == NULL) || (sdbpw == NULL) ||
-        (pk == NULL))
+        (pk == NULL)) {
         return SECFailure;
+}
 
     arena = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return SECFailure;
+}
 
     dbkey = (NSSLOWKEYDBKey *)PORT_ArenaZAlloc(arena, sizeof(NSSLOWKEYDBKey));
-    if (dbkey == NULL)
+    if (dbkey == NULL) {
         goto loser;
+}
     dbkey->arena = arena;
     dbkey->nickname = nickname;
 
     rv = seckey_encrypt_private_key(arena, pk, sdbpw, &dbkey->derPK);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = put_dbkey(keydb, index, dbkey, update);
 
 /* let success fall through */
 loser:
-    if (arena != NULL)
+    if (arena != NULL) {
         PORT_FreeArena(arena, PR_TRUE);
+}
 
     return rv;
 }
@@ -1697,13 +1710,15 @@ seckey_decrypt_private_key(SECItem *epki,
     SECItem *fordebug = NULL;
 #endif
 
-    if ((epki == NULL) || (sdbpw == NULL))
+    if ((epki == NULL) || (sdbpw == NULL)) {
         goto loser;
+}
 
     temparena = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
     permarena = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if ((temparena == NULL) || (permarena == NULL))
+    if ((temparena == NULL) || (permarena == NULL)) {
         goto loser;
+}
 
     /* allocate temporary items */
     pki = (NSSLOWKEYPrivateKeyInfo *)PORT_ArenaZAlloc(temparena,
@@ -1713,8 +1728,9 @@ seckey_decrypt_private_key(SECItem *epki,
     pk = (NSSLOWKEYPrivateKey *)PORT_ArenaZAlloc(permarena,
                                                  sizeof(NSSLOWKEYPrivateKey));
 
-    if ((pk == NULL) || (pki == NULL))
+    if ((pk == NULL) || (pki == NULL)) {
         goto loser;
+}
 
     pk->arena = permarena;
 
@@ -1739,8 +1755,9 @@ seckey_decrypt_private_key(SECItem *epki,
                     pk->keyType = NSSLOWKEYRSAKey;
                     lg_prepare_low_rsa_priv_key_for_asn1(pk);
                     if (SECSuccess != SECITEM_CopyItem(permarena, &newPrivateKey,
-                                                       &pki->privateKey))
+                                                       &pki->privateKey)) {
                         break;
+}
                     rv = SEC_QuickDERDecodeItem(permarena, pk,
                                                 lg_nsslowkey_RSAPrivateKeyTemplate,
                                                 &newPrivateKey);
@@ -1778,17 +1795,20 @@ seckey_decrypt_private_key(SECItem *epki,
                     pk->keyType = NSSLOWKEYDSAKey;
                     lg_prepare_low_dsa_priv_key_for_asn1(pk);
                     if (SECSuccess != SECITEM_CopyItem(permarena, &newPrivateKey,
-                                                       &pki->privateKey))
+                                                       &pki->privateKey)) {
                         break;
+}
                     rv = SEC_QuickDERDecodeItem(permarena, pk,
                                                 lg_nsslowkey_DSAPrivateKeyTemplate,
                                                 &newPrivateKey);
-                    if (rv != SECSuccess)
+                    if (rv != SECSuccess) {
                         goto loser;
+}
                     lg_prepare_low_pqg_params_for_asn1(&pk->u.dsa.params);
                     if (SECSuccess != SECITEM_CopyItem(permarena, &newAlgParms,
-                                                       &pki->algorithm.parameters))
+                                                       &pki->algorithm.parameters)) {
                         break;
+}
                     rv = SEC_QuickDERDecodeItem(permarena, &pk->u.dsa.params,
                                                 lg_nsslowkey_PQGParamsTemplate,
                                                 &newAlgParms);
@@ -1797,8 +1817,9 @@ seckey_decrypt_private_key(SECItem *epki,
                     pk->keyType = NSSLOWKEYDHKey;
                     lg_prepare_low_dh_priv_key_for_asn1(pk);
                     if (SECSuccess != SECITEM_CopyItem(permarena, &newPrivateKey,
-                                                       &pki->privateKey))
+                                                       &pki->privateKey)) {
                         break;
+}
                     rv = SEC_QuickDERDecodeItem(permarena, pk,
                                                 lg_nsslowkey_DHPrivateKeyTemplate,
                                                 &newPrivateKey);
@@ -1813,13 +1834,15 @@ seckey_decrypt_private_key(SECItem *epki,
                               pk->keyType, fordebug);
 #endif
                     if (SECSuccess != SECITEM_CopyItem(permarena, &newPrivateKey,
-                                                       &pki->privateKey))
+                                                       &pki->privateKey)) {
                         break;
+}
                     rv = SEC_QuickDERDecodeItem(permarena, pk,
                                                 lg_nsslowkey_ECPrivateKeyTemplate,
                                                 &newPrivateKey);
-                    if (rv != SECSuccess)
+                    if (rv != SECSuccess) {
                         goto loser;
+}
 
                     lg_prepare_low_ecparams_for_asn1(&pk->u.ec.ecParams);
 
@@ -1827,15 +1850,17 @@ seckey_decrypt_private_key(SECItem *epki,
                                           &pk->u.ec.ecParams.DEREncoding,
                                           &pki->algorithm.parameters);
 
-                    if (rv != SECSuccess)
+                    if (rv != SECSuccess) {
                         goto loser;
+}
 
                     /* Fill out the rest of EC params */
                     rv = LGEC_FillParams(permarena, &pk->u.ec.ecParams.DEREncoding,
                                          &pk->u.ec.ecParams);
 
-                    if (rv != SECSuccess)
+                    if (rv != SECSuccess) {
                         goto loser;
+}
 
                     if (pk->u.ec.publicValue.len != 0) {
                         pk->u.ec.publicValue.len >>= 3;
@@ -1854,14 +1879,17 @@ seckey_decrypt_private_key(SECItem *epki,
 
 /* let success fall through */
 loser:
-    if (temparena != NULL)
+    if (temparena != NULL) {
         PORT_FreeArena(temparena, PR_TRUE);
-    if (dest != NULL)
+}
+    if (dest != NULL) {
         SECITEM_ZfreeItem(dest, PR_TRUE);
+}
 
     if (rv != SECSuccess) {
-        if (permarena != NULL)
+        if (permarena != NULL) {
             PORT_FreeArena(permarena, PR_TRUE);
+}
         pk = NULL;
     }
 

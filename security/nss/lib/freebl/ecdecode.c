@@ -72,8 +72,9 @@ gf_populate_params_bytes(ECCurveName name, ECFieldType field_type, ECParams *par
     SECStatus rv = SECFailure;
     const ECCurveBytes *curveParams;
 
-    if ((name < ECCurve_noName) || (name > ECCurve_pastLastCurve))
+    if ((name < ECCurve_noName) || (name > ECCurve_pastLastCurve)) {
         goto cleanup;
+}
     params->name = name;
     curveParams = ecCurve_map[params->name];
     CHECK_OK(curveParams);
@@ -141,8 +142,9 @@ EC_FillParams(PLArenaPool *arena, const SECItem *encodedParams,
     /* Fill out curveOID */
     params->curveOID.len = oid.len;
     params->curveOID.data = (unsigned char *)PORT_ArenaAlloc(arena, oid.len);
-    if (params->curveOID.data == NULL)
+    if (params->curveOID.data == NULL) {
         goto cleanup;
+}
     memcpy(params->curveOID.data, oid.data, oid.len);
 
 #if EC_DEBUG
@@ -203,8 +205,9 @@ EC_DecodeParams(const SECItem *encodedParams, ECParams **ecparams)
     SECStatus rv = SECFailure;
 
     /* Initialize an arena for the ECParams structure */
-    if (!(arena = PORT_NewArena(NSS_FREEBL_DEFAULT_CHUNKSIZE)))
+    if (!(arena = PORT_NewArena(NSS_FREEBL_DEFAULT_CHUNKSIZE))) {
         return SECFailure;
+}
 
     params = (ECParams *)PORT_ArenaZAlloc(arena, sizeof(ECParams));
     if (!params) {

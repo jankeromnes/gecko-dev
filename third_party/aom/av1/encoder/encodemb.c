@@ -115,10 +115,11 @@ void av1_subtract_plane(MACROBLOCK *x, BLOCK_SIZE bsize, int plane) {
 // This also avoids ubsan warnings.
 // In practise, this gets inlined by the optimizer to a single instruction.
 static INLINE int signed_shift_right(int x, int shift) {
-  if (x >= 0)
+  if (x >= 0) {
     return x >> shift;
-  else
+  } else {
     return -((-x) >> shift);
+}
 }
 
 #if !CONFIG_LV_MAP
@@ -326,10 +327,11 @@ static int optimize_b_greedy(const AV1_COMMON *cm, MACROBLOCK *mb, int plane,
           dqc_a = shift ? ROUND_POWER_OF_TWO(dqc_a, shift) : dqc_a;
           if (sz) dqc_a = -dqc_a;
 #else
-          if (x_a < 0)
+          if (x_a < 0) {
             dqc_a = -((-x_a * dqv) >> shift);
-          else
+          } else {
             dqc_a = (x_a * dqv) >> shift;
+}
 #endif  // CONFIG_NEW_QUANT
         } else {
           dqc_a = 0;
@@ -397,8 +399,10 @@ int av1_optimize_b(const AV1_COMMON *cm, MACROBLOCK *mb, int plane, int blk_row,
   struct macroblock_plane *const p = &mb->plane[plane];
   const int eob = p->eobs[block];
   assert((mb->qindex == 0) ^ (xd->lossless[xd->mi[0]->mbmi.segment_id] == 0));
-  if (eob == 0) return eob;
-  if (xd->lossless[xd->mi[0]->mbmi.segment_id]) return eob;
+  if (eob == 0) { return eob;
+}
+  if (xd->lossless[xd->mi[0]->mbmi.segment_id]) { return eob;
+}
 
 #if CONFIG_PVQ
   (void)cm;
@@ -578,15 +582,17 @@ void av1_xform_quant(const AV1_COMMON *cm, MACROBLOCK *x, int plane, int block,
 // in order to use existing VP10 transform functions
 #if CONFIG_HIGHBITDEPTH
     if (xd->cur_buf->flags & YV12_FLAG_HIGHBITDEPTH) {
-      for (j = 0; j < txh; j++)
-        for (i = 0; i < txw; i++)
+      for (j = 0; j < txh; j++) {
+        for (i = 0; i < txw; i++) {
           pred[diff_stride * j + i] =
               CONVERT_TO_SHORTPTR(dst)[dst_stride * j + i];
+}
     } else {
 #endif  // CONFIG_HIGHBITDEPTH
-      for (j = 0; j < txh; j++)
-        for (i = 0; i < txw; i++)
+      for (j = 0; j < txh; j++) {
+        for (i = 0; i < txw; i++) {
           pred[diff_stride * j + i] = dst[dst_stride * j + i];
+}
 #if CONFIG_HIGHBITDEPTH
     }
 #endif  // CONFIG_HIGHBITDEPTH
@@ -734,7 +740,8 @@ static void encode_block(int plane, int block, int blk_row, int blk_col,
 
   av1_set_txb_context(x, plane, block, tx_size, a, l);
 
-  if (p->eobs[block]) *(args->skip) = 0;
+  if (p->eobs[block]) { *(args->skip) = 0;
+}
 
   if (p->eobs[block] != 0)
 #else
@@ -777,7 +784,8 @@ static void encode_block_inter(int plane, int block, int blk_row, int blk_col,
   const int max_blocks_high = max_block_high(xd, plane_bsize, plane);
   const int max_blocks_wide = max_block_wide(xd, plane_bsize, plane);
 
-  if (blk_row >= max_blocks_high || blk_col >= max_blocks_wide) return;
+  if (blk_row >= max_blocks_high || blk_col >= max_blocks_wide) { return;
+}
 
   plane_tx_size =
       plane ? uv_txsize_lookup[bsize][mbmi->inter_tx_size[tx_row][tx_col]][0][0]
@@ -816,7 +824,8 @@ static void encode_block_inter(int plane, int block, int blk_row, int blk_col,
 #endif
       int step = tx_size_wide_unit[sub_txs] * tx_size_high_unit[sub_txs];
 
-      if (offsetr >= max_blocks_high || offsetc >= max_blocks_wide) continue;
+      if (offsetr >= max_blocks_high || offsetc >= max_blocks_wide) { continue;
+}
 
       encode_block_inter(plane, block, offsetr, offsetc, plane_bsize, sub_txs,
                          arg);
@@ -914,7 +923,8 @@ void av1_encode_sb(AV1_COMMON *cm, MACROBLOCK *x, BLOCK_SIZE bsize, int mi_row,
 
   mbmi->skip = 1;
 
-  if (x->skip) return;
+  if (x->skip) { return;
+}
 
   for (plane = 0; plane < MAX_MB_PLANE; ++plane) {
 #if CONFIG_CB4X4 && !CONFIG_CHROMA_2X2
@@ -922,8 +932,9 @@ void av1_encode_sb(AV1_COMMON *cm, MACROBLOCK *x, BLOCK_SIZE bsize, int mi_row,
     const int subsampling_y = xd->plane[plane].subsampling_y;
 
     if (!is_chroma_reference(mi_row, mi_col, bsize, subsampling_x,
-                             subsampling_y))
+                             subsampling_y)) {
       continue;
+}
 
     bsize = scale_chroma_bsize(bsize, subsampling_x, subsampling_y);
 #else
@@ -1031,9 +1042,11 @@ void av1_set_txb_context(MACROBLOCK *x, int plane, int block, TX_SIZE tx_size,
 
 #if CONFIG_VAR_TX || CONFIG_LV_MAP
   int i;
-  for (i = 0; i < tx_size_wide_unit[tx_size]; ++i) a[i] = a[0];
+  for (i = 0; i < tx_size_wide_unit[tx_size]; ++i) { a[i] = a[0];
+}
 
-  for (i = 0; i < tx_size_high_unit[tx_size]; ++i) l[i] = l[0];
+  for (i = 0; i < tx_size_high_unit[tx_size]; ++i) { l[i] = l[0];
+}
 #endif
 }
 #endif
@@ -1107,7 +1120,8 @@ void av1_encode_block_intra(int plane, int block, int blk_row, int blk_col,
 #endif  // CONFIG_MRC_TX && SIGNAL_ANY_MRC_MASK
                               tx_type, tx_size, dst, dst_stride, *eob);
 #if !CONFIG_PVQ
-  if (*eob) *(args->skip) = 0;
+  if (*eob) { *(args->skip) = 0;
+}
 #else
 // Note : *(args->skip) == mbmi->skip
 #endif
@@ -1133,8 +1147,9 @@ void av1_encode_intra_block_plane(AV1_COMMON *cm, MACROBLOCK *x,
 #if CONFIG_CB4X4
   if (!is_chroma_reference(mi_row, mi_col, bsize,
                            xd->plane[plane].subsampling_x,
-                           xd->plane[plane].subsampling_y))
+                           xd->plane[plane].subsampling_y)) {
     return;
+}
 #else
   (void)mi_row;
   (void)mi_col;

@@ -90,8 +90,9 @@ bool ShaderVariable::operator==(const ShaderVariable &other) const
     }
     for (size_t ii = 0; ii < fields.size(); ++ii)
     {
-        if (fields[ii] != other.fields[ii])
+        if (fields[ii] != other.fields[ii]) {
             return false;
+}
     }
     return true;
 }
@@ -153,8 +154,9 @@ bool ShaderVariable::findInfoByMappedName(const std::string &mappedFullName,
     if (pos == std::string::npos)
     {
         // Case 3.
-        if (mappedFullName != this->mappedName)
+        if (mappedFullName != this->mappedName) {
             return false;
+}
         *originalFullName = this->name;
         *leafVar          = this;
         return true;
@@ -162,16 +164,18 @@ bool ShaderVariable::findInfoByMappedName(const std::string &mappedFullName,
     else
     {
         std::string topName = mappedFullName.substr(0, pos);
-        if (topName != this->mappedName)
+        if (topName != this->mappedName) {
             return false;
+}
         std::string originalName = this->name;
         std::string remaining;
         if (mappedFullName[pos] == '[')
         {
             // Case 2.
             size_t closePos = mappedFullName.find_first_of(']');
-            if (closePos < pos || closePos == std::string::npos)
+            if (closePos < pos || closePos == std::string::npos) {
                 return false;
+}
             // Append '[index]'.
             originalName += mappedFullName.substr(pos, closePos - pos + 1);
             if (closePos + 1 == mappedFullName.size())
@@ -183,8 +187,9 @@ bool ShaderVariable::findInfoByMappedName(const std::string &mappedFullName,
             else
             {
                 // In the form of 'a[0].b', so after ']', '.' is expected.
-                if (mappedFullName[closePos + 1] != '.')
+                if (mappedFullName[closePos + 1] != '.') {
                     return false;
+}
                 remaining = mappedFullName.substr(closePos + 2);  // Skip "]."
             }
         }
@@ -218,17 +223,22 @@ bool ShaderVariable::isSameVariableAtLinkTime(const ShaderVariable &other,
                                               bool matchPrecision,
                                               bool matchName) const
 {
-    if (type != other.type)
+    if (type != other.type) {
         return false;
-    if (matchPrecision && precision != other.precision)
+}
+    if (matchPrecision && precision != other.precision) {
         return false;
-    if (matchName && name != other.name)
+}
+    if (matchName && name != other.name) {
         return false;
+}
     ASSERT(!matchName || mappedName == other.mappedName);
-    if (arraySizes != other.arraySizes)
+    if (arraySizes != other.arraySizes) {
         return false;
-    if (fields.size() != other.fields.size())
+}
+    if (fields.size() != other.fields.size()) {
         return false;
+}
 
     // [OpenGL ES 3.1 SPEC Chapter 7.4.1]
     // Variables declared as structures are considered to match in type if and only if structure
@@ -240,8 +250,9 @@ bool ShaderVariable::isSameVariableAtLinkTime(const ShaderVariable &other,
             return false;
         }
     }
-    if (structName != other.structName)
+    if (structName != other.structName) {
         return false;
+}
     return true;
 }
 

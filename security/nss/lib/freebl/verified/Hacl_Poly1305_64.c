@@ -129,8 +129,9 @@ Hacl_Bignum_Fmul_fmul(uint64_t *output, uint64_t *input, uint64_t *input2)
     memcpy(tmp, input, (uint32_t)3U * sizeof input[0U]);
     KRML_CHECK_SIZE(FStar_UInt128_uint64_to_uint128((uint64_t)0U), (uint32_t)3U);
     FStar_UInt128_t t[3U];
-    for (uint32_t _i = 0U; _i < (uint32_t)3U; ++_i)
+    for (uint32_t _i = 0U; _i < (uint32_t)3U; ++_i) {
         t[_i] = FStar_UInt128_uint64_to_uint128((uint64_t)0U);
+}
     Hacl_Bignum_Fmul_mul_shift_reduce_(t, tmp, input2);
     Hacl_Bignum_Fproduct_carry_wide_(t);
     Hacl_Bignum_Modulo_carry_top_wide(t);
@@ -214,8 +215,9 @@ Hacl_Impl_Poly1305_64_poly1305_process_last_block(
     uint8_t zero1 = (uint8_t)0U;
     KRML_CHECK_SIZE(zero1, (uint32_t)16U);
     uint8_t block[16U];
-    for (uint32_t _i = 0U; _i < (uint32_t)16U; ++_i)
+    for (uint32_t _i = 0U; _i < (uint32_t)16U; ++_i) {
         block[_i] = zero1;
+}
     uint32_t i0 = (uint32_t)rem_;
     uint32_t i = (uint32_t)rem_;
     memcpy(block, m, i * sizeof m[0U]);
@@ -330,8 +332,9 @@ Hacl_Standalone_Poly1305_64_poly1305_complete(
     uint8_t *part_input = m;
     uint8_t *last_block = m + (uint32_t)((uint64_t)16U * len16);
     Hacl_Standalone_Poly1305_64_poly1305_partial(st, part_input, len16, kr);
-    if (!(rem16 == (uint64_t)0U))
+    if (!(rem16 == (uint64_t)0U)) {
         Hacl_Impl_Poly1305_64_poly1305_process_last_block(st, last_block, rem16);
+}
     Hacl_Impl_Poly1305_64_State_poly1305_state scrut = st;
     uint64_t *h = scrut.h;
     uint64_t *acc = h;
@@ -442,8 +445,9 @@ Hacl_Poly1305_64_update_last(
     uint8_t *m,
     uint32_t len1)
 {
-    if (!((uint64_t)len1 == (uint64_t)0U))
+    if (!((uint64_t)len1 == (uint64_t)0U)) {
         Hacl_Impl_Poly1305_64_poly1305_process_last_block(st, m, (uint64_t)len1);
+}
     Hacl_Impl_Poly1305_64_State_poly1305_state scrut = st;
     uint64_t *h = scrut.h;
     uint64_t *acc = h;

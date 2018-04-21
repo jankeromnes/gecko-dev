@@ -100,8 +100,9 @@ hb_blob_create (const char        *data,
   if (!length ||
       length >= 1u << 31 ||
       !(blob = hb_object_create<hb_blob_t> ())) {
-    if (destroy)
+    if (destroy) {
       destroy (user_data);
+}
     return hb_blob_get_empty ();
   }
 
@@ -156,8 +157,9 @@ hb_blob_create_sub_blob (hb_blob_t    *parent,
 {
   hb_blob_t *blob;
 
-  if (!length || offset >= parent->length)
+  if (!length || offset >= parent->length) {
     return hb_blob_get_empty ();
+}
 
   hb_blob_make_immutable (parent);
 
@@ -189,8 +191,9 @@ hb_blob_copy_writable_or_fail (hb_blob_t *blob)
 			 nullptr,
 			 nullptr);
 
-  if (unlikely (blob == hb_blob_get_empty ()))
+  if (unlikely (blob == hb_blob_get_empty ())) {
     blob = nullptr;
+}
 
   return blob;
 }
@@ -258,7 +261,8 @@ hb_blob_reference (hb_blob_t *blob)
 void
 hb_blob_destroy (hb_blob_t *blob)
 {
-  if (!hb_object_destroy (blob)) return;
+  if (!hb_object_destroy (blob)) { return;
+}
 
   _hb_blob_destroy_user_data (blob);
 
@@ -317,8 +321,9 @@ hb_blob_get_user_data (hb_blob_t          *blob,
 void
 hb_blob_make_immutable (hb_blob_t *blob)
 {
-  if (hb_object_is_inert (blob))
+  if (hb_object_is_inert (blob)) {
     return;
+}
 
   blob->immutable = true;
 }
@@ -370,8 +375,9 @@ hb_blob_get_length (hb_blob_t *blob)
 const char *
 hb_blob_get_data (hb_blob_t *blob, unsigned int *length)
 {
-  if (length)
+  if (length) {
     *length = blob->length;
+}
 
   return blob->data;
 }
@@ -396,14 +402,16 @@ char *
 hb_blob_get_data_writable (hb_blob_t *blob, unsigned int *length)
 {
   if (!_try_writable (blob)) {
-    if (length)
+    if (length) {
       *length = 0;
+}
 
     return nullptr;
   }
 
-  if (length)
+  if (length) {
     *length = blob->length;
+}
 
   return const_cast<char *> (blob->data);
 }
@@ -457,8 +465,9 @@ _try_writable_inplace (hb_blob_t *blob)
 {
   DEBUG_MSG_FUNC (BLOB, blob, "making writable inplace\n");
 
-  if (_try_make_writable_inplace_unix (blob))
+  if (_try_make_writable_inplace_unix (blob)) {
     return true;
+}
 
   DEBUG_MSG_FUNC (BLOB, blob, "making writable -> FAILED\n");
 
@@ -470,17 +479,21 @@ _try_writable_inplace (hb_blob_t *blob)
 static bool
 _try_writable (hb_blob_t *blob)
 {
-  if (blob->immutable)
+  if (blob->immutable) {
     return false;
+}
 
-  if (blob->mode == HB_MEMORY_MODE_WRITABLE)
+  if (blob->mode == HB_MEMORY_MODE_WRITABLE) {
     return true;
+}
 
-  if (blob->mode == HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE && _try_writable_inplace (blob))
+  if (blob->mode == HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE && _try_writable_inplace (blob)) {
     return true;
+}
 
-  if (blob->mode == HB_MEMORY_MODE_WRITABLE)
+  if (blob->mode == HB_MEMORY_MODE_WRITABLE) {
     return true;
+}
 
 
   DEBUG_MSG_FUNC (BLOB, blob, "current data is -> %p\n", blob->data);
@@ -488,8 +501,9 @@ _try_writable (hb_blob_t *blob)
   char *new_data;
 
   new_data = (char *) malloc (blob->length);
-  if (unlikely (!new_data))
+  if (unlikely (!new_data)) {
     return false;
+}
 
   DEBUG_MSG_FUNC (BLOB, blob, "dupped successfully -> %p\n", blob->data);
 

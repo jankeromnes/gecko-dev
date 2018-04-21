@@ -54,12 +54,14 @@ _expand_four_tuple_to_five (unsigned char four_tuple[4],
     int digit, i;
 
     value = four_tuple[0] << 24 | four_tuple[1] << 16 | four_tuple[2] << 8 | four_tuple[3];
-    if (all_zero)
+    if (all_zero) {
 	*all_zero = TRUE;
+}
     for (i = 0; i < 5; i++) {
 	digit = value % 85;
-	if (digit != 0 && all_zero)
+	if (digit != 0 && all_zero) {
 	    *all_zero = FALSE;
+}
 	five_tuple[4-i] = digit + 33;
 	value = value / 85;
     }
@@ -80,10 +82,11 @@ _cairo_base85_stream_write (cairo_output_stream_t *base,
 	length--;
 	if (stream->pending == 4) {
 	    _expand_four_tuple_to_five (stream->four_tuple, five_tuple, &is_zero);
-	    if (is_zero)
+	    if (is_zero) {
 		_cairo_output_stream_write (stream->output, "z", 1);
-	    else
+	    } else {
 		_cairo_output_stream_write (stream->output, five_tuple, 5);
+}
 	    stream->pending = 0;
 	}
     }
@@ -111,8 +114,9 @@ _cairo_base85_stream_create (cairo_output_stream_t *output)
 {
     cairo_base85_stream_t *stream;
 
-    if (output->status)
+    if (output->status) {
 	return _cairo_output_stream_create_in_error (output->status);
+}
 
     stream = malloc (sizeof (cairo_base85_stream_t));
     if (unlikely (stream == NULL)) {

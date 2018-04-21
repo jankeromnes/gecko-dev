@@ -29,8 +29,9 @@ lgdb_MakeKey(DBT *key, char *module)
     if (commonName == NULL) {
         commonName = NSSUTIL_ArgGetParamValue("library", module);
     }
-    if (commonName == NULL)
+    if (commonName == NULL) {
         return SECFailure;
+}
     len = PORT_Strlen(commonName);
     key->data = commonName;
     key->size = len;
@@ -121,8 +122,9 @@ lgdb_EncodeData(DBT *data, char *module)
     SECStatus rv = SECFailure;
 
     rv = NSSUTIL_ArgParseModuleSpec(module, &dllName, &commonName, &param, &nss);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
     rv = SECFailure;
 
     if (commonName == NULL) {
@@ -140,8 +142,9 @@ lgdb_EncodeData(DBT *data, char *module)
 
     slotParams = NSSUTIL_ArgGetParamValue("slotParams", nss);
     slotInfo = NSSUTIL_ArgParseSlotInfo(NULL, slotParams, &count);
-    if (slotParams)
+    if (slotParams) {
         PORT_Free(slotParams);
+}
 
     if (count && slotInfo == NULL) {
         /* set error */
@@ -180,8 +183,9 @@ lgdb_EncodeData(DBT *data, char *module)
     NSSUTIL_ArgParseCipherFlags(&ssl[0], ciphers);
     LGDB_PUTLONG(encoded->ssl, ssl[0]);
     LGDB_PUTLONG(&encoded->ssl[4], ssl[1]);
-    if (ciphers)
+    if (ciphers) {
         PORT_Free(ciphers);
+}
 
     offset = (unsigned short)offsetof(lgdbData, names);
     LGDB_PUTSHORT(encoded->nameStart, offset);
@@ -225,16 +229,21 @@ lgdb_EncodeData(DBT *data, char *module)
     rv = SECSuccess;
 
 loser:
-    if (commonName)
+    if (commonName) {
         PORT_Free(commonName);
-    if (dllName)
+}
+    if (dllName) {
         PORT_Free(dllName);
-    if (param)
+}
+    if (param) {
         PORT_Free(param);
-    if (slotInfo)
+}
+    if (slotInfo) {
         PORT_Free(slotInfo);
-    if (nss)
+}
+    if (nss) {
         PORT_Free(nss);
+}
     return rv;
 }
 
@@ -297,8 +306,9 @@ lgdb_DecodeData(char *defParams, DBT *data, PRBool *retInternal)
     int i;
 
     arena = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
 
 #define CHECK_SIZE(x)                                 \
     if ((unsigned int)data->size < (unsigned int)(x)) \
@@ -316,12 +326,14 @@ lgdb_DecodeData(char *defParams, DBT *data, PRBool *retInternal)
     internal = (encoded->internal != 0) ? PR_TRUE : PR_FALSE;
     isFIPS = (encoded->fips != 0) ? PR_TRUE : PR_FALSE;
 
-    if (retInternal)
+    if (retInternal) {
         *retInternal = internal;
+}
     if (internal) {
         parameters = PORT_ArenaStrdup(arena, defParams);
-        if (parameters == NULL)
+        if (parameters == NULL) {
             goto loser;
+}
     }
     if (internal && (encoded->major == LGDB_DB_NOUI_VERSION_MAJOR) &&
         (encoded->minor <= LGDB_DB_NOUI_VERSION_MINOR)) {
@@ -369,8 +381,9 @@ lgdb_DecodeData(char *defParams, DBT *data, PRBool *retInternal)
 
     CHECK_SIZE(namesRunningOffset + 2 + len);
     commonName = (char *)PORT_ArenaAlloc(arena, len + 1);
-    if (commonName == NULL)
+    if (commonName == NULL) {
         goto loser;
+}
     PORT_Memcpy(commonName, names + namesRunningOffset + 2, len);
     commonName[len] = 0;
     namesRunningOffset += len + 2;
@@ -381,8 +394,9 @@ lgdb_DecodeData(char *defParams, DBT *data, PRBool *retInternal)
     if (len) {
         CHECK_SIZE(namesRunningOffset + 2 + len);
         dllName = (char *)PORT_ArenaAlloc(arena, len + 1);
-        if (dllName == NULL)
+        if (dllName == NULL) {
             goto loser;
+}
         PORT_Memcpy(dllName, names + namesRunningOffset + 2, len);
         dllName[len] = 0;
     }
@@ -395,8 +409,9 @@ lgdb_DecodeData(char *defParams, DBT *data, PRBool *retInternal)
         if (len) {
             CHECK_SIZE(namesRunningOffset + 2 + len);
             parameters = (char *)PORT_ArenaAlloc(arena, len + 1);
-            if (parameters == NULL)
+            if (parameters == NULL) {
                 goto loser;
+}
             PORT_Memcpy(parameters, names + namesRunningOffset + 2, len);
             parameters[len] = 0;
         }
@@ -446,8 +461,9 @@ lgdb_DecodeData(char *defParams, DBT *data, PRBool *retInternal)
 
     /*  slotCount; */
     slotStrings = (char **)PORT_ArenaZAlloc(arena, slotCount * sizeof(char *));
-    if (slotStrings == NULL)
+    if (slotStrings == NULL) {
         goto loser;
+}
     for (i = 0; i < (int)slotCount; i++, slots++) {
         PRBool hasRootCerts = PR_FALSE;
         PRBool hasRootTrust = PR_FALSE;
@@ -539,12 +555,14 @@ lgdb_OpenDB(const char *appName, const char *filename, const char *dbName,
 
     /* didn't exist? create it */
     if (pkcs11db == NULL) {
-        if (readOnly)
+        if (readOnly) {
             return NULL;
+}
 
         pkcs11db = dbopen(dbName, NO_CREATE, 0600, DB_HASH, 0);
-        if (pkcs11db)
+        if (pkcs11db) {
             (*pkcs11db->sync)(pkcs11db, 0);
+}
     }
     return pkcs11db;
 }
@@ -574,17 +592,20 @@ legacy_ReadSecmodDB(const char *appName, const char *filename,
     int useCount = LGDB_STEP;
 
     moduleList = (char **)PORT_ZAlloc(useCount * sizeof(char **));
-    if (moduleList == NULL)
+    if (moduleList == NULL) {
         return NULL;
+}
 
     pkcs11db = lgdb_OpenDB(appName, filename, dbname, PR_TRUE, rw);
-    if (pkcs11db == NULL)
+    if (pkcs11db == NULL) {
         goto done;
+}
 
     /* read and parse the file or data base */
     ret = (*pkcs11db->seq)(pkcs11db, &key, &data, R_FIRST);
-    if (ret)
+    if (ret) {
         goto done;
+}
 
     do {
         char *moduleString;
@@ -593,8 +614,9 @@ legacy_ReadSecmodDB(const char *appName, const char *filename,
             useCount += LGDB_STEP;
             newModuleList =
                 (char **)PORT_Realloc(moduleList, useCount * sizeof(char *));
-            if (newModuleList == NULL)
+            if (newModuleList == NULL) {
                 goto done;
+}
             moduleList = newModuleList;
             PORT_Memset(&moduleList[moduleCount + 1], 0,
                         sizeof(char *) * LGDB_STEP);
@@ -658,8 +680,9 @@ legacy_DeleteSecmodDB(const char *appName, const char *filename,
     DB *pkcs11db = NULL;
     int ret;
 
-    if (!rw)
+    if (!rw) {
         return SECFailure;
+}
 
     /* make sure we have a db handle */
     pkcs11db = lgdb_OpenDB(appName, filename, dbname, PR_FALSE, PR_FALSE);
@@ -668,17 +691,20 @@ legacy_DeleteSecmodDB(const char *appName, const char *filename,
     }
 
     rv = lgdb_MakeKey(&key, args);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto done;
+}
     rv = SECFailure;
     ret = (*pkcs11db->del)(pkcs11db, &key, 0);
     lgdb_FreeKey(&key);
-    if (ret != 0)
+    if (ret != 0) {
         goto done;
+}
 
     ret = (*pkcs11db->sync)(pkcs11db, 0);
-    if (ret == 0)
+    if (ret == 0) {
         rv = SECSuccess;
+}
 
 done:
     lgdb_CloseDB(pkcs11db);
@@ -697,8 +723,9 @@ legacy_AddSecmodDB(const char *appName, const char *filename,
     DB *pkcs11db = NULL;
     int ret;
 
-    if (!rw)
+    if (!rw) {
         return SECFailure;
+}
 
     /* make sure we have a db handle */
     pkcs11db = lgdb_OpenDB(appName, filename, dbname, PR_FALSE, PR_FALSE);
@@ -707,8 +734,9 @@ legacy_AddSecmodDB(const char *appName, const char *filename,
     }
 
     rv = lgdb_MakeKey(&key, module);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto done;
+}
     rv = lgdb_EncodeData(&data, module);
     if (rv != SECSuccess) {
         lgdb_FreeKey(&key);
@@ -718,12 +746,14 @@ legacy_AddSecmodDB(const char *appName, const char *filename,
     ret = (*pkcs11db->put)(pkcs11db, &key, &data, 0);
     lgdb_FreeKey(&key);
     lgdb_FreeData(&data);
-    if (ret != 0)
+    if (ret != 0) {
         goto done;
+}
 
     ret = (*pkcs11db->sync)(pkcs11db, 0);
-    if (ret == 0)
+    if (ret == 0) {
         rv = SECSuccess;
+}
 
 done:
     lgdb_CloseDB(pkcs11db);

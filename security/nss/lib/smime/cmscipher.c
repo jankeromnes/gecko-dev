@@ -62,8 +62,9 @@ NSS_CMSCipherContext_StartDecrypt(PK11SymKey *key, SECAlgorithmID *algid)
         SECItem *pwitem;
 
         pwitem = PK11_GetSymKeyUserData(key);
-        if (!pwitem)
+        if (!pwitem) {
             return NULL;
+}
 
         cryptoMechType = PK11_GetPBECryptoMechanism(algid, &param, pwitem);
         if (cryptoMechType == CKM_INVALID_MECHANISM) {
@@ -73,8 +74,9 @@ NSS_CMSCipherContext_StartDecrypt(PK11SymKey *key, SECAlgorithmID *algid)
 
     } else {
         cryptoMechType = PK11_AlgtagToMechanism(algtag);
-        if ((param = PK11_ParamFromAlgid(algid)) == NULL)
+        if ((param = PK11_ParamFromAlgid(algid)) == NULL) {
             return NULL;
+}
     }
 
     cc = (NSSCMSCipherContext *)PORT_ZAlloc(sizeof(NSSCMSCipherContext));
@@ -133,8 +135,9 @@ NSS_CMSCipherContext_StartEncrypt(PLArenaPool *poolp, PK11SymKey *key, SECAlgori
         SECItem *pwitem;
 
         pwitem = PK11_GetSymKeyUserData(key);
-        if (!pwitem)
+        if (!pwitem) {
             return NULL;
+}
 
         cryptoMechType = PK11_GetPBECryptoMechanism(algid, &param, pwitem);
         if (cryptoMechType == CKM_INVALID_MECHANISM) {
@@ -143,8 +146,9 @@ NSS_CMSCipherContext_StartEncrypt(PLArenaPool *poolp, PK11SymKey *key, SECAlgori
         }
     } else {
         cryptoMechType = PK11_AlgtagToMechanism(algtag);
-        if ((param = PK11_GenerateNewParam(cryptoMechType, key)) == NULL)
+        if ((param = PK11_GenerateNewParam(cryptoMechType, key)) == NULL) {
             return NULL;
+}
         needToEncodeAlgid = PR_TRUE;
     }
 
@@ -205,8 +209,9 @@ void
 NSS_CMSCipherContext_Destroy(NSSCMSCipherContext *cc)
 {
     PORT_Assert(cc != NULL);
-    if (cc == NULL)
+    if (cc == NULL) {
         return;
+}
     (*cc->destroy)(cc->cx, PR_TRUE);
     PORT_Free(cc);
 }
@@ -245,8 +250,9 @@ NSS_CMSCipherContext_DecryptLength(NSSCMSCipherContext *cc, unsigned int input_l
      * If this is not a block cipher, then we always have the same
      * number of output bytes as we had input bytes.
      */
-    if (block_size == 0)
+    if (block_size == 0) {
         return input_len;
+}
 
     /*
      * On the final call, we will always use up all of the pending
@@ -256,8 +262,9 @@ NSS_CMSCipherContext_DecryptLength(NSSCMSCipherContext *cc, unsigned int input_l
      * to be at least 1 byte too long (because we know we will have
      * at least 1 byte of padding), but seemed clearer/better to me.
      */
-    if (final)
+    if (final) {
         return cc->pending_count + input_len;
+}
 
     /*
      * Okay, this amount is exactly what we will output on the
@@ -305,8 +312,9 @@ NSS_CMSCipherContext_EncryptLength(NSSCMSCipherContext *cc, unsigned int input_l
      * If this is not a block cipher, then we always have the same
      * number of output bytes as we had input bytes.
      */
-    if (block_size == 0)
+    if (block_size == 0) {
         return input_len;
+}
 
     /*
      * On the final call, we only send out what we need for
@@ -424,8 +432,9 @@ NSS_CMSCipherContext_Decrypt(NSSCMSCipherContext *cc, unsigned char *output,
          */
         if (input_len == 0 && !final) {
             cc->pending_count = pcount;
-            if (output_len_p)
+            if (output_len_p) {
                 *output_len_p = 0;
+}
             return SECSuccess;
         }
         /*
@@ -443,8 +452,9 @@ NSS_CMSCipherContext_Decrypt(NSSCMSCipherContext *cc, unsigned char *output,
          */
         rv = (*cc->doit)(cc->cx, output, &ofraglen, max_output_len,
                          pbuf, pcount);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         /*
          * For now anyway, all of our ciphers have the same number of
@@ -478,8 +488,9 @@ NSS_CMSCipherContext_Decrypt(NSSCMSCipherContext *cc, unsigned char *output,
         if (padsize) {
             blocks = input_len / padsize;
             ifraglen = blocks * padsize;
-        } else
+        } else {
             ifraglen = input_len;
+}
         PORT_Assert(ifraglen == input_len);
 
         if (ifraglen != input_len) {
@@ -499,8 +510,9 @@ NSS_CMSCipherContext_Decrypt(NSSCMSCipherContext *cc, unsigned char *output,
     if (ifraglen) {
         rv = (*cc->doit)(cc->cx, output, &ofraglen, max_output_len,
                          input, ifraglen);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         /*
          * For now anyway, all of our ciphers have the same number of
@@ -533,8 +545,9 @@ NSS_CMSCipherContext_Decrypt(NSSCMSCipherContext *cc, unsigned char *output,
     }
 
     PORT_Assert(output_len_p != NULL || output_len == 0);
-    if (output_len_p != NULL)
+    if (output_len_p != NULL) {
         *output_len_p = output_len;
+}
 
     return SECSuccess;
 }
@@ -630,8 +643,9 @@ NSS_CMSCipherContext_Encrypt(NSSCMSCipherContext *cc, unsigned char *output,
          */
         if (pcount < bsize && !final) {
             cc->pending_count = pcount;
-            if (output_len_p != NULL)
+            if (output_len_p != NULL) {
                 *output_len_p = 0;
+}
             return SECSuccess;
         }
         /*
@@ -640,8 +654,9 @@ NSS_CMSCipherContext_Encrypt(NSSCMSCipherContext *cc, unsigned char *output,
         if ((padsize == 0) || (pcount % padsize) == 0) {
             rv = (*cc->doit)(cc->cx, output, &ofraglen, max_output_len,
                              pbuf, pcount);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 return rv;
+}
 
             /*
              * For now anyway, all of our ciphers have the same number of
@@ -670,8 +685,9 @@ NSS_CMSCipherContext_Encrypt(NSSCMSCipherContext *cc, unsigned char *output,
         if (ifraglen) {
             rv = (*cc->doit)(cc->cx, output, &ofraglen, max_output_len,
                              input, ifraglen);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 return rv;
+}
 
             /*
              * For now anyway, all of our ciphers have the same number of
@@ -687,8 +703,9 @@ NSS_CMSCipherContext_Encrypt(NSSCMSCipherContext *cc, unsigned char *output,
 
         pcount = input_len - ifraglen;
         PORT_Assert(pcount < bsize);
-        if (pcount)
+        if (pcount) {
             PORT_Memcpy(pbuf, input + ifraglen, pcount);
+}
     }
 
     if (final) {
@@ -700,8 +717,9 @@ NSS_CMSCipherContext_Encrypt(NSSCMSCipherContext *cc, unsigned char *output,
         }
         rv = (*cc->doit)(cc->cx, output, &ofraglen, max_output_len,
                          pbuf, pcount + padlen);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         /*
          * For now anyway, all of our ciphers have the same number of
@@ -715,8 +733,9 @@ NSS_CMSCipherContext_Encrypt(NSSCMSCipherContext *cc, unsigned char *output,
     }
 
     PORT_Assert(output_len_p != NULL || output_len == 0);
-    if (output_len_p != NULL)
+    if (output_len_p != NULL) {
         *output_len_p = output_len;
+}
 
     return SECSuccess;
 }

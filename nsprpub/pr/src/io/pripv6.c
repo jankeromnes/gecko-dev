@@ -149,16 +149,18 @@ static PRFileDesc* PR_CALLBACK Ipv6ToIpv4SocketAccept (
     }
     *newstack = *fd;  /* make a copy of the accepting layer */
 
-    if (addr)
+    if (addr) {
         addrlower = &tmp_ipv4addr;
+}
     newfd = (fd->lower->methods->accept)(fd->lower, addrlower, timeout);
     if (NULL == newfd)
     {
         PR_DELETE(newstack);
         return NULL;
     }
-    if (addr)
+    if (addr) {
         _PR_ConvertToIpv6NetAddr(&tmp_ipv4addr, addr);
+}
 
     rv = PR_PushIOLayer(newfd, PR_TOP_IO_LAYER, newstack);
     PR_ASSERT(PR_SUCCESS == rv);
@@ -282,8 +284,9 @@ static PRStatus PR_CALLBACK _pr_init_ipv6(void)
 
 #if defined(_PR_INET6_PROBE)
     ipv6_is_present = _pr_probe_ipv6_presence();
-    if (ipv6_is_present)
+    if (ipv6_is_present) {
         return PR_SUCCESS;
+}
 #endif
 
     _pr_ipv6_to_ipv4_id = PR_GetUniqueIdentity("Ipv6_to_Ipv4 layer");
@@ -321,8 +324,9 @@ static PRStatus PR_CALLBACK _pr_init_ipv6(void)
 #if defined(_PR_INET6_PROBE)
 PRBool _pr_ipv6_is_present(void)
 {
-    if (PR_CallOnce(&_pr_init_ipv6_once, _pr_init_ipv6) != PR_SUCCESS)
+    if (PR_CallOnce(&_pr_init_ipv6_once, _pr_init_ipv6) != PR_SUCCESS) {
         return PR_FALSE;
+}
     return ipv6_is_present;
 }
 #endif
@@ -331,19 +335,21 @@ PR_IMPLEMENT(PRStatus) _pr_push_ipv6toipv4_layer(PRFileDesc *fd)
 {
 	PRFileDesc *ipv6_fd = NULL;
 
-	if (PR_CallOnce(&_pr_init_ipv6_once, _pr_init_ipv6) != PR_SUCCESS)
+	if (PR_CallOnce(&_pr_init_ipv6_once, _pr_init_ipv6) != PR_SUCCESS) {
 		return PR_FAILURE;
+}
 
 	/*
 	 * For platforms with no support for IPv6 
 	 * create layered socket for IPv4-mapped IPv6 addresses
 	 */
-	if (fd->methods->file_type == PR_DESC_SOCKET_TCP)
+	if (fd->methods->file_type == PR_DESC_SOCKET_TCP) {
 		ipv6_fd = PR_CreateIOLayerStub(_pr_ipv6_to_ipv4_id,
 									&ipv6_to_v4_tcpMethods);
-	else
+	} else {
 		ipv6_fd = PR_CreateIOLayerStub(_pr_ipv6_to_ipv4_id,
 									&ipv6_to_v4_udpMethods);
+}
 	if (NULL == ipv6_fd) {
 		goto errorExit;
 	} 
@@ -356,8 +362,9 @@ PR_IMPLEMENT(PRStatus) _pr_push_ipv6toipv4_layer(PRFileDesc *fd)
 	return PR_SUCCESS;
 errorExit:
 
-	if (ipv6_fd)
+	if (ipv6_fd) {
 		ipv6_fd->dtor(ipv6_fd);
+}
 	return PR_FAILURE;
 }
 

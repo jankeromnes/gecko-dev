@@ -197,10 +197,12 @@ static void test_int_tileprocs() {
 #endif
 
 static SkBitmapProcState::IntTileProc choose_int_tile_proc(unsigned tm) {
-    if (SkShader::kClamp_TileMode == tm)
+    if (SkShader::kClamp_TileMode == tm) {
         return int_clamp;
-    if (SkShader::kRepeat_TileMode == tm)
+}
+    if (SkShader::kRepeat_TileMode == tm) {
         return int_repeat;
+}
     SkASSERT(SkShader::kMirror_TileMode == tm);
     return int_mirror;
 }

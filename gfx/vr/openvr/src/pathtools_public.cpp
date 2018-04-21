@@ -100,27 +100,31 @@ bool Path_SetWorkingDirectory( const std::string & sPath )
 /** Returns the specified path without its filename */
 std::string Path_StripFilename( const std::string & sPath, char slash )
 {
-	if( slash == 0 )
+	if( slash == 0 ) {
 		slash = Path_GetSlash();
+}
 
 	std::string::size_type n = sPath.find_last_of( slash );
-	if( n == std::string::npos )
+	if( n == std::string::npos ) {
 		return sPath;
-	else
+	} else {
 		return std::string( sPath.begin(), sPath.begin() + n );
+}
 }
 
 /** returns just the filename from the provided full or relative path. */
 std::string Path_StripDirectory( const std::string & sPath, char slash )
 {
-	if( slash == 0 )
+	if( slash == 0 ) {
 		slash = Path_GetSlash();
+}
 
 	std::string::size_type n = sPath.find_last_of( slash );
-	if( n == std::string::npos )
+	if( n == std::string::npos ) {
 		return sPath;
-	else
+	} else {
 		return std::string( sPath.begin() + n + 1, sPath.end() );
+}
 }
 
 /** returns just the filename with no extension of the provided filename. 
@@ -135,8 +139,9 @@ std::string Path_StripExtension( const std::string & sPath )
 		}
 
 		// if we find a slash there is no extension
-		if( *i == '\\' || *i == '/' )
+		if( *i == '\\' || *i == '/' ) {
 			break;
+}
 	}
 
 	// we didn't find an extension
@@ -154,8 +159,9 @@ std::string Path_GetExtension( const std::string & sPath )
 		}
 
 		// if we find a slash there is no extension
-		if ( *i == '\\' || *i == '/' )
+		if ( *i == '\\' || *i == '/' ) {
 			break;
+}
 	}
 
 	// we didn't find an extension
@@ -164,8 +170,9 @@ std::string Path_GetExtension( const std::string & sPath )
 
 bool Path_IsAbsolute( const std::string & sPath )
 {
-	if( sPath.empty() )
+	if( sPath.empty() ) {
 		return false;
+}
 
 #if defined( WIN32 )
 	if ( sPath.size() < 3 ) // must be c:\x or \\x at least
@@ -179,8 +186,9 @@ bool Path_IsAbsolute( const std::string & sPath )
 	else if ( sPath[0] == '\\' && sPath[1] == '\\' ) // UNC path
 		return true;
 #else
-	if( sPath[0] == '\\' || sPath[0] == '/' ) // any leading slash
+	if( sPath[0] == '\\' || sPath[0] == '/' ) { // any leading slash
 		return true;
+}
 #endif
 
 	return false;
@@ -190,21 +198,24 @@ bool Path_IsAbsolute( const std::string & sPath )
 /** Makes an absolute path from a relative path and a base path */
 std::string Path_MakeAbsolute( const std::string & sRelativePath, const std::string & sBasePath, char slash )
 {
-	if( slash == 0 )
+	if( slash == 0 ) {
 		slash = Path_GetSlash();
+}
 
-	if( Path_IsAbsolute( sRelativePath ) )
+	if( Path_IsAbsolute( sRelativePath ) ) {
 		return sRelativePath;
-	else
+	} else
 	{
-		if( !Path_IsAbsolute( sBasePath ) )
+		if( !Path_IsAbsolute( sBasePath ) ) {
 			return "";
+}
 
 		std::string sCompacted = Path_Compact( Path_Join( sBasePath, sRelativePath, slash ), slash );
-		if( Path_IsAbsolute( sCompacted ) )
+		if( Path_IsAbsolute( sCompacted ) ) {
 			return sCompacted;
-		else
+		} else {
 			return "";
+}
 	}
 }
 
@@ -212,14 +223,16 @@ std::string Path_MakeAbsolute( const std::string & sRelativePath, const std::str
 /** Fixes the directory separators for the current platform */
 std::string Path_FixSlashes( const std::string & sPath, char slash )
 {
-	if( slash == 0 )
+	if( slash == 0 ) {
 		slash = Path_GetSlash();
+}
 
 	std::string sFixed = sPath;
 	for( std::string::iterator i = sFixed.begin(); i != sFixed.end(); i++ )
 	{
-		if( *i == '/' || *i == '\\' )
+		if( *i == '/' || *i == '\\' ) {
 			*i = slash;
+}
 	}
 
 	return sFixed;
@@ -238,20 +251,23 @@ char Path_GetSlash()
 /** Jams two paths together with the right kind of slash */
 std::string Path_Join( const std::string & first, const std::string & second, char slash )
 {
-	if( slash == 0 )
+	if( slash == 0 ) {
 		slash = Path_GetSlash();
+}
 
 	// only insert a slash if we don't already have one
 	std::string::size_type nLen = first.length();
-	if( !nLen )
+	if( !nLen ) {
 		return second;
+}
 #if defined(_WIN32)
 	if( first.back() == '\\' || first.back() == '/' )
 	    nLen--;
 #else
 	char last_char = first[first.length()-1];
-	if (last_char == '\\' || last_char == '/')
+	if (last_char == '\\' || last_char == '/') {
 	    nLen--;
+}
 #endif
 
 	return first.substr( 0, nLen ) + std::string( 1, slash ) + second;
@@ -282,13 +298,15 @@ std::string Path_Join(
 
 std::string Path_RemoveTrailingSlash( const std::string & sRawPath, char slash )
 {
-	if ( slash == 0 )
+	if ( slash == 0 ) {
 		slash = Path_GetSlash();
+}
 
 	std::string sPath = sRawPath;
 	std::string::size_type nCurrent = sRawPath.length();
-	if ( nCurrent == 0 )
+	if ( nCurrent == 0 ) {
 		return sPath;
+}
 
 	int nLastFound = -1;
 	nCurrent--;
@@ -318,8 +336,9 @@ std::string Path_RemoveTrailingSlash( const std::string & sRawPath, char slash )
 * specified path has a broken number of directories for its number of ..s */
 std::string Path_Compact( const std::string & sRawPath, char slash )
 {
-	if( slash == 0 )
+	if( slash == 0 ) {
 		slash = Path_GetSlash();
+}
 
 	std::string sPath = Path_FixSlashes( sRawPath, slash );
 	std::string sSlashString( 1, slash );
@@ -370,13 +389,15 @@ std::string Path_Compact( const std::string & sRawPath, char slash )
 			&& sPath[ i-1 ] == slash )
 		{
 			// check if we've hit the start of the string and have a bogus path
-			if( i == 1 )
+			if( i == 1 ) {
 				return "";
+}
 			
 			// find the separator before i-1
 			std::string::size_type iDirStart = i-2;
-			while( iDirStart > 0 && sPath[ iDirStart - 1 ] != slash )
+			while( iDirStart > 0 && sPath[ iDirStart - 1 ] != slash ) {
 				--iDirStart;
+}
 
 			// remove everything from iDirStart to i+2
 			sPath.replace( iDirStart, (i - iDirStart) + 3, "" );
@@ -427,11 +448,13 @@ std::string Path_GetThisModulePath()
 bool Path_IsDirectory( const std::string & sPath )
 {
 	std::string sFixedPath = Path_FixSlashes( sPath );
-	if( sFixedPath.empty() )
+	if( sFixedPath.empty() ) {
 		return false;
+}
 	char cLast = sFixedPath[ sFixedPath.length() - 1 ];
-	if( cLast == '/' || cLast == '\\' )
+	if( cLast == '/' || cLast == '\\' ) {
 		sFixedPath.erase( sFixedPath.end() - 1, sFixedPath.end() );
+}
 
 	// see if the specified path actually exists.
 
@@ -479,8 +502,9 @@ bool Path_IsAppBundle( const std::string & sPath )
 bool Path_Exists( const std::string & sPath )
 {
 	std::string sFixedPath = Path_FixSlashes( sPath );
-	if( sFixedPath.empty() )
+	if( sFixedPath.empty() ) {
 		return false;
+}
 
 #if defined( WIN32 )
 	struct	_stat	buf;
@@ -508,21 +532,24 @@ std::string Path_FindParentDirectoryRecursively( const std::string &strStartDire
 {
 	std::string strFoundPath = "";
 	std::string strCurrentPath = Path_FixSlashes( strStartDirectory );
-	if ( strCurrentPath.length() == 0 )
+	if ( strCurrentPath.length() == 0 ) {
 		return "";
+}
 
 	bool bExists = Path_Exists( strCurrentPath );
 	std::string strCurrentDirectoryName = Path_StripDirectory( strCurrentPath );
-	if ( bExists && stricmp( strCurrentDirectoryName.c_str(), strDirectoryName.c_str() ) == 0 )
+	if ( bExists && stricmp( strCurrentDirectoryName.c_str(), strDirectoryName.c_str() ) == 0 ) {
 		return strCurrentPath;
+}
 
 	while( bExists && strCurrentPath.length() != 0 )
 	{
 		strCurrentPath = Path_StripFilename( strCurrentPath );
 		strCurrentDirectoryName = Path_StripDirectory( strCurrentPath );
 		bExists = Path_Exists( strCurrentPath );
-		if ( bExists && stricmp( strCurrentDirectoryName.c_str(), strDirectoryName.c_str() ) == 0 )
+		if ( bExists && stricmp( strCurrentDirectoryName.c_str(), strDirectoryName.c_str() ) == 0 ) {
 			return strCurrentPath;
+}
 	}
 
 	return "";
@@ -536,8 +563,9 @@ std::string Path_FindParentSubDirectoryRecursively( const std::string &strStartD
 {
 	std::string strFoundPath = "";
 	std::string strCurrentPath = Path_FixSlashes( strStartDirectory );
-	if ( strCurrentPath.length() == 0 )
+	if ( strCurrentPath.length() == 0 ) {
 		return "";
+}
 
 	bool bExists = Path_Exists( strCurrentPath );
 	while( bExists && strCurrentPath.length() != 0 )
@@ -580,8 +608,9 @@ unsigned char * Path_ReadBinaryFile( const std::string &strFilename, int *pSize 
 		buf = new unsigned char[size];
 		if (buf && fread(buf, size, 1, f) == 1)
 		{
-			if (pSize)
+			if (pSize) {
 				*pSize = size;
+}
 		}
 		else
 		{
@@ -665,17 +694,19 @@ std::string Path_ReadTextFile( const std::string &strFilename )
 	// that isn't worse...
 	int size;
 	unsigned char* buf = Path_ReadBinaryFile( strFilename, &size );
-	if (!buf)
+	if (!buf) {
 		return "";
+}
 
 	// convert CRLF -> LF
 	size_t outsize = 1;
 	for (int i=1; i < size; i++)
 	{
-		if (buf[i] == '\n' && buf[i-1] == '\r') // CRLF
+		if (buf[i] == '\n' && buf[i-1] == '\r') { // CRLF
 			buf[outsize-1] = '\n'; // ->LF
-		else
+		} else {
 			buf[outsize++] = buf[i]; // just copy
+}
 	}
 
 	std::string ret((char *)buf, outsize);
@@ -713,8 +744,9 @@ bool Path_WriteStringToTextFileAtomic( const std::string &strFilename, const cha
 {
 	std::string strTmpFilename = strFilename + ".tmp";
 
-	if ( !Path_WriteStringToTextFile( strTmpFilename, pchData ) )
+	if ( !Path_WriteStringToTextFile( strTmpFilename, pchData ) ) {
 		return false;
+}
 
 	// Platform specific atomic file replacement
 #if defined( _WIN32 )
@@ -727,8 +759,9 @@ bool Path_WriteStringToTextFileAtomic( const std::string &strFilename, const cha
 			return false;
 	}
 #elif defined( POSIX )
-	if ( rename( strTmpFilename.c_str(), strFilename.c_str() ) == -1 )
+	if ( rename( strTmpFilename.c_str(), strFilename.c_str() ) == -1 ) {
 		return false;
+}
 #else
 #error Do not know how to write atomic file
 #endif
@@ -757,8 +790,9 @@ std::string Path_FilePathToUrl( const std::string & sRelativePath, const std::st
 	else
 	{
 		std::string sAbsolute = Path_MakeAbsolute( sRelativePath, sBasePath );
-		if ( sAbsolute.empty() )
+		if ( sAbsolute.empty() ) {
 			return sAbsolute;
+}
 		return std::string( FILE_URL_PREFIX ) + sAbsolute;
 	}
 }

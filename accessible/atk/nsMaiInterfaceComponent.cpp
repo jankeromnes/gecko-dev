@@ -113,8 +113,9 @@ getExtentsHelper(AtkObject* aAtkObj,
     }
 
     nsIntRect screenRect = accWrap->Bounds();
-    if (screenRect.IsEmpty())
+    if (screenRect.IsEmpty()) {
       return;
+}
 
     if (aCoordType == ATK_XY_WINDOW) {
       nsIntPoint winCoords =
@@ -139,8 +140,9 @@ void
 componentInterfaceInitCB(AtkComponentIface* aIface)
 {
   NS_ASSERTION(aIface, "Invalid Interface");
-  if(MOZ_UNLIKELY(!aIface))
+  if(MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   /*
    * Use default implementation in atk for contains, get_position,

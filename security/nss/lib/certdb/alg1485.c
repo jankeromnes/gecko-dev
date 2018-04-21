@@ -304,8 +304,9 @@ scanVal(const char** pbp, const char* endptr, char* valBuf, int valBufSize)
     if (!isQuoted) {
         while (valBufp > valBuf) {
             char c = valBufp[-1];
-            if (!OPTIONAL_SPACE(c))
+            if (!OPTIONAL_SPACE(c)) {
                 break;
+}
             --valBufp;
         }
         vallen = valBufp - valBuf;
@@ -355,8 +356,9 @@ hexToBin(PLArenaPool* pool, SECItem* destItem, const char* src, int len)
     }
     return SECSuccess;
 loser:
-    if (!pool)
+    if (!pool) {
         SECITEM_FreeItem(destItem, PR_FALSE);
+}
     return SECFailure;
 }
 
@@ -412,35 +414,41 @@ ParseRFC1485AVA(PLArenaPool* arena, const char** pbp, const char* endptr)
                 kind = n2k->kind;
                 vt = n2k->valueType;
                 oidrec = SECOID_FindOIDByTag(kind);
-                if (oidrec == NULL)
+                if (oidrec == NULL) {
                     goto loser;
+}
                 derOid = oidrec->oid;
                 break;
             }
         }
     }
-    if (kind == SEC_OID_UNKNOWN && rv != SECSuccess)
+    if (kind == SEC_OID_UNKNOWN && rv != SECSuccess) {
         goto loser;
+}
 
     /* Is this a hex encoding of a DER attribute value ? */
     if ('#' == valBuf[0]) {
         /* convert attribute value from hex to binary */
         rv = hexToBin(arena, &derVal, valBuf + 1, valLen - 1);
-        if (rv)
+        if (rv) {
             goto loser;
+}
         a = CERT_CreateAVAFromRaw(arena, &derOid, &derVal);
     } else {
-        if (kind == SEC_OID_AVA_COUNTRY_NAME && valLen != 2)
+        if (kind == SEC_OID_AVA_COUNTRY_NAME && valLen != 2) {
             goto loser;
+}
         if (vt == SEC_ASN1_PRINTABLE_STRING &&
-            !IsPrintable((unsigned char*)valBuf, valLen))
+            !IsPrintable((unsigned char*)valBuf, valLen)) {
             goto loser;
+}
         if (vt == SEC_ASN1_DS) {
             /* RFC 4630: choose PrintableString or UTF8String */
-            if (IsPrintable((unsigned char*)valBuf, valLen))
+            if (IsPrintable((unsigned char*)valBuf, valLen)) {
                 vt = SEC_ASN1_PRINTABLE_STRING;
-            else
+            } else {
                 vt = SEC_ASN1_UTF8_STRING;
+}
         }
 
         derVal.data = (unsigned char*)valBuf;
@@ -477,20 +485,24 @@ ParseRFC1485Name(const char* buf, int len)
     bp = buf;
     while (bp < e) {
         ava = ParseRFC1485AVA(name->arena, &bp, e);
-        if (ava == 0)
+        if (ava == 0) {
             goto loser;
+}
         if (!rdn) {
             rdn = CERT_CreateRDN(name->arena, ava, (CERTAVA*)0);
-            if (rdn == 0)
+            if (rdn == 0) {
                 goto loser;
+}
             rv = CERT_AddRDN(name, rdn);
         } else {
             rv = CERT_AddAVA(name->arena, rdn, ava);
         }
-        if (rv)
+        if (rv) {
             goto loser;
-        if (bp[-1] != '+')
+}
+        if (bp[-1] != '+') {
             rdn = NULL; /* done with this RDN */
+}
         skipSpace(&bp, e);
     }
 
@@ -510,8 +522,9 @@ ParseRFC1485Name(const char* buf, int len)
 
         /* find last one */
         lastRdn = name->rdns;
-        while (*lastRdn)
+        while (*lastRdn) {
             lastRdn++;
+}
         lastRdn--;
 
         /* reverse list */
@@ -579,8 +592,9 @@ AppendStr(stringBuf* bufp, char* str)
 
     /* Concatenate str onto buf */
     buf = buf + bufLen;
-    if (bufLen)
+    if (bufLen) {
         buf--;                      /* stomp on old '\0' */
+}
     PORT_Memcpy(buf, str, len + 1); /* put in new null */
     return SECSuccess;
 }
@@ -617,13 +631,15 @@ cert_RFC1485_GetRequiredLen(const char* src, int srclen, EQMode* pEQMode)
         } else if (NEEDS_ESCAPE(c)) { /* c -> \c   */
             reqLen++;
         } else if (SPECIAL_CHAR(c)) {
-            if (mode == minimalEscapeAndQuote) /* quoting is allowed */
+            if (mode == minimalEscapeAndQuote) { /* quoting is allowed */
                 needsQuoting = PR_TRUE;        /* entirety will need quoting */
-            else if (mode == fullEscape)
+            } else if (mode == fullEscape) {
                 reqLen++; /* MAY escape this character */
+}
         } else if (OPTIONAL_SPACE(c) && OPTIONAL_SPACE(lastC)) {
-            if (mode == minimalEscapeAndQuote) /* quoting is allowed */
+            if (mode == minimalEscapeAndQuote) { /* quoting is allowed */
                 needsQuoting = PR_TRUE;        /* entirety will need quoting */
+}
         }
         lastC = c;
     }
@@ -633,10 +649,12 @@ cert_RFC1485_GetRequiredLen(const char* src, int srclen, EQMode* pEQMode)
         needsQuoting = PR_TRUE;
     }
 
-    if (needsQuoting)
+    if (needsQuoting) {
         reqLen += 2;
-    if (pEQMode && mode == minimalEscapeAndQuote && !needsQuoting)
+}
+    if (pEQMode && mode == minimalEscapeAndQuote && !needsQuoting) {
         *pEQMode = minimalEscape;
+}
     return reqLen;
 }
 
@@ -655,8 +673,9 @@ escapeAndQuote(char* dst, int dstlen, char* src, int srclen, EQMode* pEQMode)
         return SECFailure;
     }
 
-    if (mode == minimalEscapeAndQuote)
+    if (mode == minimalEscapeAndQuote) {
         *dst++ = C_DOUBLE_QUOTE;
+}
     for (i = 0; i < srclen; i++) {
         char c = src[i];
         if (NEEDS_HEX_ESCAPE(c)) {
@@ -670,11 +689,13 @@ escapeAndQuote(char* dst, int dstlen, char* src, int srclen, EQMode* pEQMode)
             *dst++ = c;
         }
     }
-    if (mode == minimalEscapeAndQuote)
+    if (mode == minimalEscapeAndQuote) {
         *dst++ = C_DOUBLE_QUOTE;
+}
     *dst++ = 0;
-    if (pEQMode)
+    if (pEQMode) {
         *pEQMode = mode;
+}
     return SECSuccess;
 }
 
@@ -791,8 +812,9 @@ CERT_GetOidString(const SECItem* oid)
                 CGET(0, 0x7f);
                 break;
             }
-            if (last[0] & 0x80)
+            if (last[0] & 0x80) {
                 goto unsupported;
+}
 
             if (!rvString) {
                 /* This is the first number.. decompose it */
@@ -807,9 +829,9 @@ CERT_GetOidString(const SECItem* oid)
         } else {
         /* More than a 64-bit number, or not minimal encoding. */
         unsupported:
-            if (!rvString)
+            if (!rvString) {
                 rvString = PR_smprintf("OID.UNSUPPORTED");
-            else {
+            } else {
                 prefix = rvString;
                 rvString = PR_smprintf("%s.UNSUPPORTED", prefix);
             }
@@ -966,16 +988,18 @@ AppendAVA(stringBuf* bufp, CERTAVA* ava, CertStrictnessLevel strict)
         /* handle unknown attribute types per RFC 2253 */
         tagName = unknownTag = CERT_GetOidString(&ava->type);
         if (!tagName) {
-            if (avaValue)
+            if (avaValue) {
                 SECITEM_FreeItem(avaValue, PR_TRUE);
+}
             return SECFailure;
         }
     }
     if (useHex) {
         avaValue = get_hex_string(&ava->value);
         if (!avaValue) {
-            if (unknownTag)
+            if (unknownTag) {
                 PR_smprintf_free(unknownTag);
+}
             return SECFailure;
         }
     }
@@ -994,8 +1018,9 @@ AppendAVA(stringBuf* bufp, CERTAVA* ava, CertStrictnessLevel strict)
         encodedAVA = PORT_Alloc(len);
         if (!encodedAVA) {
             SECITEM_FreeItem(avaValue, PR_TRUE);
-            if (unknownTag)
+            if (unknownTag) {
                 PR_smprintf_free(unknownTag);
+}
             return SECFailure;
         }
     } else {
@@ -1031,11 +1056,13 @@ AppendAVA(stringBuf* bufp, CERTAVA* ava, CertStrictnessLevel strict)
         encodedAVA[nameLen - 3] = '.';
     }
     encodedAVA[nameLen++] = '=';
-    if (unknownTag)
+    if (unknownTag) {
         PR_smprintf_free(unknownTag);
+}
 
-    if (strict == CERT_N2A_READABLE && maxValue > maxBytes)
+    if (strict == CERT_N2A_READABLE && maxValue > maxBytes) {
         maxValue = maxBytes;
+}
     if (valueLen > maxValue) {
         valueLen = maxValue;
         truncateValue = PR_TRUE;
@@ -1070,18 +1097,21 @@ AppendAVA(stringBuf* bufp, CERTAVA* ava, CertStrictnessLevel strict)
         bigTmpBuf[++valueLen] = '.';
         bigTmpBuf[++valueLen] = '.';
         bigTmpBuf[++valueLen] = '.';
-        if (bigTmpBuf[0] == '"')
+        if (bigTmpBuf[0] == '"') {
             bigTmpBuf[++valueLen] = '"';
+}
         bigTmpBuf[++valueLen] = '\0';
         PORT_Assert(nameLen + valueLen <= (sizeof tmpBuf) - 1);
         memcpy(encodedAVA + nameLen, bigTmpBuf, valueLen + 1);
     }
 
     SECITEM_FreeItem(avaValue, PR_TRUE);
-    if (rv == SECSuccess)
+    if (rv == SECSuccess) {
         rv = AppendStr(bufp, encodedAVA);
-    if (encodedAVA != tmpBuf)
+}
+    if (encodedAVA != tmpBuf) {
         PORT_Free(encodedAVA);
+}
     return rv;
 }
 
@@ -1106,8 +1136,9 @@ CERT_NameToAsciiInvertible(CERTName* name, CertStrictnessLevel strict)
 
     /* find last RDN */
     lastRdn = rdns;
-    while (*lastRdn)
+    while (*lastRdn) {
         lastRdn++;
+}
     lastRdn--;
 
     /*
@@ -1127,16 +1158,18 @@ CERT_NameToAsciiInvertible(CERTName* name, CertStrictnessLevel strict)
             if (!first) {
                 /* Use of spaces is deprecated in RFC 2253. */
                 rv = AppendStr(&strBuf, newRDN ? "," : "+");
-                if (rv)
+                if (rv) {
                     goto loser;
+}
             } else {
                 first = PR_FALSE;
             }
 
             /* Add in tag type plus value into strBuf */
             rv = AppendAVA(&strBuf, ava, strict);
-            if (rv)
+            if (rv) {
                 goto loser;
+}
             newRDN = PR_FALSE;
         }
     }
@@ -1210,8 +1243,9 @@ avaToString(PLArenaPool* arena, CERTAVA* ava)
         SECStatus rv =
             escapeAndQuote(buf, valueLen, (char*)avaValue->data, avaValue->len, NULL);
         if (rv != SECSuccess) {
-            if (!arena)
+            if (!arena) {
                 PORT_Free(buf);
+}
             buf = NULL;
         }
     }
@@ -1357,8 +1391,9 @@ appendStringToBuf(char* dest, char* src, PRUint32* pRemaining)
     PRUint32 len;
     if (dest && src && src[0] && *pRemaining > (len = PL_strlen(src))) {
         PRUint32 i;
-        for (i = 0; i < len; ++i)
+        for (i = 0; i < len; ++i) {
             dest[i] = tolower(src[i]);
+}
         dest[len] = 0;
         dest += len + 1;
         *pRemaining -= len + 1;
@@ -1378,8 +1413,9 @@ appendItemToBuf(char* dest, SECItem* src, PRUint32* pRemaining)
         PRUint32 reqLen = len + 1;
         /* are there any embedded control characters ? */
         for (i = 0; i < len; i++) {
-            if (NEEDS_HEX_ESCAPE(src->data[i]))
+            if (NEEDS_HEX_ESCAPE(src->data[i])) {
                 reqLen += 2;
+}
         }
         if (*pRemaining > reqLen) {
             for (i = 0; i < len; ++i) {
@@ -1424,12 +1460,14 @@ cert_GetCertificateEmailAddresses(CERTCertificate* cert)
     subAltName.data = NULL;
     maxLen = cert->derCert.len;
     PORT_Assert(maxLen);
-    if (!maxLen)
+    if (!maxLen) {
         maxLen = 2000; /* a guess, should never happen */
+}
 
     pBuf = addrBuf = (char*)PORT_ArenaZAlloc(&tmpArena.arena, maxLen + 1);
-    if (!addrBuf)
+    if (!addrBuf) {
         goto loser;
+}
 
     rawEmailAddr = CERT_GetNameElement(&tmpArena.arena, &cert->subject,
                                        SEC_OID_PKCS9_EMAIL_ADDRESS);
@@ -1492,8 +1530,9 @@ loser:
 const char* /* const so caller won't muck with it. */
     CERT_GetFirstEmailAddress(CERTCertificate* cert)
 {
-    if (cert && cert->emailAddr && cert->emailAddr[0])
+    if (cert && cert->emailAddr && cert->emailAddr[0]) {
         return (const char*)cert->emailAddr;
+}
     return NULL;
 }
 
@@ -1507,8 +1546,9 @@ const char* /* const so caller won't muck with it. */
     if (cert && prev && prev[0]) {
         PRUint32 len = PL_strlen(prev);
         prev += len + 1;
-        if (prev && prev[0])
+        if (prev && prev[0]) {
             return prev;
+}
     }
     return NULL;
 }

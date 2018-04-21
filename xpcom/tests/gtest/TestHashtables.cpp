@@ -209,15 +209,16 @@ IFoo::QueryInterface( const nsIID& aIID, void** aResult )
     nsISupports* rawPtr = 0;
     nsresult status = NS_OK;
 
-    if ( aIID.Equals(NS_GET_IID(IFoo)) )
+    if ( aIID.Equals(NS_GET_IID(IFoo)) ) {
       rawPtr = this;
-    else
+    } else
       {
         nsID iid_of_ISupports = NS_ISUPPORTS_IID;
-        if ( aIID.Equals(iid_of_ISupports) )
+        if ( aIID.Equals(iid_of_ISupports) ) {
           rawPtr = static_cast<nsISupports*>(this);
-        else
+        } else {
           status = NS_ERROR_NO_INTERFACE;
+}
       }
 
     NS_IF_ADDREF(rawPtr);

@@ -87,8 +87,9 @@ sctp_set_initial_cc_param(struct sctp_tcb *stcb, struct sctp_nets *net)
 		 * We take the minimum of the burst limit and the
 		 * initial congestion window.
 		 */
-		if ((assoc->max_burst > 0) && (cwnd_in_mtu > assoc->max_burst))
+		if ((assoc->max_burst > 0) && (cwnd_in_mtu > assoc->max_burst)) {
 			cwnd_in_mtu = assoc->max_burst;
+}
 		net->cwnd = (net->mtu - sizeof(struct sctphdr)) * cwnd_in_mtu;
 	}
 	if ((stcb->asoc.sctp_cmt_on_off == SCTP_CMT_RPV1) ||
@@ -286,10 +287,11 @@ cc_bw_same(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net, uint64_t nb
 			  probepoint);
 #endif
 		if ((net->cc_mod.rtcc.steady_step) && (inst_ind != SCTP_INST_LOOSING)) {
-			if (net->cc_mod.rtcc.last_step_state == 5)
+			if (net->cc_mod.rtcc.last_step_state == 5) {
 				net->cc_mod.rtcc.step_cnt++;
-			else
+			} else {
 				net->cc_mod.rtcc.step_cnt = 1;
+}
 			net->cc_mod.rtcc.last_step_state = 5;
 			if ((net->cc_mod.rtcc.step_cnt == net->cc_mod.rtcc.steady_step) ||
 			    ((net->cc_mod.rtcc.step_cnt > net->cc_mod.rtcc.steady_step) &&
@@ -361,12 +363,13 @@ cc_bw_same(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net, uint64_t nb
 		net->cc_mod.rtcc.lbw = nbw;
 		net->cc_mod.rtcc.lbw_rtt = net->rtt;
 		net->cc_mod.rtcc.cwnd_at_bw_set = net->cwnd;
-		if (inst_ind == SCTP_INST_GAINING)
+		if (inst_ind == SCTP_INST_GAINING) {
 			return (1);
-		else if (inst_ind == SCTP_INST_NEUTRAL)
+		} else if (inst_ind == SCTP_INST_NEUTRAL) {
 			return (1);
-		else
+		} else {
 			return (0);
+}
 	}
 	/* Ok bw and rtt remained the same .. no update to any
 	 */
@@ -381,10 +384,11 @@ cc_bw_same(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net, uint64_t nb
 		  probepoint);
 #endif
 	if ((net->cc_mod.rtcc.steady_step) && (inst_ind != SCTP_INST_LOOSING)) {
-		if (net->cc_mod.rtcc.last_step_state == 5)
+		if (net->cc_mod.rtcc.last_step_state == 5) {
 			net->cc_mod.rtcc.step_cnt++;
-		else
+		} else {
 			net->cc_mod.rtcc.step_cnt = 1;
+}
 		net->cc_mod.rtcc.last_step_state = 5;
 		if ((net->cc_mod.rtcc.step_cnt == net->cc_mod.rtcc.steady_step) ||
 		    ((net->cc_mod.rtcc.step_cnt > net->cc_mod.rtcc.steady_step) &&
@@ -399,12 +403,13 @@ cc_bw_same(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net, uint64_t nb
 			}
 		}
 	}
-	if (inst_ind == SCTP_INST_GAINING)
+	if (inst_ind == SCTP_INST_GAINING) {
 		return (1);
-	else if (inst_ind == SCTP_INST_NEUTRAL)
+	} else if (inst_ind == SCTP_INST_NEUTRAL) {
 		return (1);
-	else
+	} else {
 		return ((int)net->cc_mod.rtcc.ret_from_eq);
+}
 }
 
 #if defined(__FreeBSD__) && __FreeBSD_version >= 803000
@@ -688,12 +693,13 @@ cc_bw_limit(struct sctp_tcb *stcb, struct sctp_nets *net, uint64_t nbw)
 			if (div) {
 				inst_bw = bytes_for_this_rtt / div;
 				inst_off = inst_bw >> bw_shift;
-				if (inst_bw > nbw)
+				if (inst_bw > nbw) {
 					inst_ind = SCTP_INST_GAINING;
-				else if ((inst_bw+inst_off) < nbw)
+				} else if ((inst_bw+inst_off) < nbw) {
 					inst_ind = SCTP_INST_LOOSING;
-				else
+				} else {
 					inst_ind = SCTP_INST_NEUTRAL;
+}
 #if defined(__FreeBSD__) && __FreeBSD_version >= 803000
 				probepoint |=  ((0xb << 16) | inst_ind);
 #endif
@@ -1300,10 +1306,11 @@ sctp_cwnd_update_after_packet_dropped(struct sctp_tcb *stcb,
 			int diff_adj;
 
 			diff_adj = net->cwnd - net->flight_size;
-			if (diff_adj > my_portion)
+			if (diff_adj > my_portion) {
 				my_portion = 0;
-			else
+			} else {
 				my_portion -= diff_adj;
+}
 		}
 		/*
 		 * back down to the previous cwnd (assume we have
@@ -1361,8 +1368,9 @@ sctp_cwnd_update_after_output(struct sctp_tcb *stcb,
 {
 	int old_cwnd = net->cwnd;
 
-	if (net->ssthresh < net->cwnd)
+	if (net->ssthresh < net->cwnd) {
 		net->ssthresh = net->cwnd;
+}
 	if (burst_limit) {
 		net->cwnd = (net->flight_size + (burst_limit * net->mtu));
 		sctp_enforce_cwnd_limit(&stcb->asoc, net);
@@ -1478,8 +1486,9 @@ sctp_cwnd_new_rtcc_transmission_begins(struct sctp_tcb *stcb,
 				 * We take the minimum of the burst limit and the
 				 * initial congestion window.
 				 */
-				if ((stcb->asoc.max_burst > 0) && (cwnd_in_mtu > stcb->asoc.max_burst))
+				if ((stcb->asoc.max_burst > 0) && (cwnd_in_mtu > stcb->asoc.max_burst)) {
 					cwnd_in_mtu = stcb->asoc.max_burst;
+}
 				cwnd = (net->mtu - sizeof(struct sctphdr)) * cwnd_in_mtu;
 			}
 			if (net->cwnd > cwnd) {
@@ -1993,15 +2002,18 @@ measure_rtt(struct sctp_nets *net)
 	uint32_t srtt = net->lastsa>>SCTP_RTT_SHIFT;
 
 	/* keep track of minimum RTT seen so far, minRTT is zero at first */
-	if (net->cc_mod.htcp_ca.minRTT > srtt || !net->cc_mod.htcp_ca.minRTT)
+	if (net->cc_mod.htcp_ca.minRTT > srtt || !net->cc_mod.htcp_ca.minRTT) {
 		net->cc_mod.htcp_ca.minRTT = srtt;
+}
 
 	/* max RTT */
 	if (net->fast_retran_ip == 0 && net->ssthresh < 0xFFFF && htcp_ccount(&net->cc_mod.htcp_ca) > 3) {
-		if (net->cc_mod.htcp_ca.maxRTT < net->cc_mod.htcp_ca.minRTT)
+		if (net->cc_mod.htcp_ca.maxRTT < net->cc_mod.htcp_ca.minRTT) {
 			net->cc_mod.htcp_ca.maxRTT = net->cc_mod.htcp_ca.minRTT;
-		if (net->cc_mod.htcp_ca.maxRTT < srtt && srtt <= net->cc_mod.htcp_ca.maxRTT+MSEC_TO_TICKS(20))
+}
+		if (net->cc_mod.htcp_ca.maxRTT < srtt && srtt <= net->cc_mod.htcp_ca.maxRTT+MSEC_TO_TICKS(20)) {
 			net->cc_mod.htcp_ca.maxRTT = srtt;
+}
 	}
 }
 
@@ -2010,11 +2022,13 @@ measure_achieved_throughput(struct sctp_nets *net)
 {
 	uint32_t now = sctp_get_tick_count();
 
-	if (net->fast_retran_ip == 0)
+	if (net->fast_retran_ip == 0) {
 		net->cc_mod.htcp_ca.bytes_acked = net->net_ack;
+}
 
-	if (!use_bandwidth_switch)
+	if (!use_bandwidth_switch) {
 		return;
+}
 
 	/* achieved throughput calculations */
 	/* JRS - not 100% sure of this statement */
@@ -2035,10 +2049,12 @@ measure_achieved_throughput(struct sctp_nets *net)
 			net->cc_mod.htcp_ca.minB = net->cc_mod.htcp_ca.maxB = net->cc_mod.htcp_ca.Bi = cur_Bi;
 		} else {
 			net->cc_mod.htcp_ca.Bi = (3*net->cc_mod.htcp_ca.Bi + cur_Bi)/4;
-			if (net->cc_mod.htcp_ca.Bi > net->cc_mod.htcp_ca.maxB)
+			if (net->cc_mod.htcp_ca.Bi > net->cc_mod.htcp_ca.maxB) {
 				net->cc_mod.htcp_ca.maxB = net->cc_mod.htcp_ca.Bi;
-			if (net->cc_mod.htcp_ca.minB > net->cc_mod.htcp_ca.maxB)
+}
+			if (net->cc_mod.htcp_ca.minB > net->cc_mod.htcp_ca.maxB) {
 				net->cc_mod.htcp_ca.minB = net->cc_mod.htcp_ca.maxB;
+}
 		}
 		net->cc_mod.htcp_ca.bytecount = 0;
 		net->cc_mod.htcp_ca.lasttime = now;
@@ -2062,10 +2078,11 @@ htcp_beta_update(struct htcp *ca, uint32_t minRTT, uint32_t maxRTT)
 
 	if (ca->modeswitch && minRTT > (uint32_t)MSEC_TO_TICKS(10) && maxRTT) {
 		ca->beta = (minRTT<<7)/maxRTT;
-		if (ca->beta < BETA_MIN)
+		if (ca->beta < BETA_MIN) {
 			ca->beta = BETA_MIN;
-		else if (ca->beta > BETA_MAX)
+		} else if (ca->beta > BETA_MAX) {
 			ca->beta = BETA_MAX;
+}
 	} else {
 		ca->beta = BETA_MIN;
 		ca->modeswitch = 1;
@@ -2088,13 +2105,15 @@ htcp_alpha_update(struct htcp *ca)
 		uint32_t scale = (hz<<3)/(10*minRTT);
 		scale = min(max(scale, 1U<<2), 10U<<3); /* clamping ratio to interval [0.5,10]<<3 */
 		factor = (factor<<3)/scale;
-		if (!factor)
+		if (!factor) {
 			factor = 1;
+}
 	}
 
 	ca->alpha = 2*factor*((1<<7)-ca->beta);
-	if (!ca->alpha)
+	if (!ca->alpha) {
 		ca->alpha = ALPHA_BASE;
+}
 }
 
 /* After we have the rtt data to calculate beta, we'd still prefer to wait one
@@ -2115,8 +2134,9 @@ htcp_param_update(struct sctp_nets *net)
 	htcp_alpha_update(&net->cc_mod.htcp_ca);
 
 	/* add slowly fading memory for maxRTT to accommodate routing changes etc */
-	if (minRTT > 0 && maxRTT > minRTT)
+	if (minRTT > 0 && maxRTT > minRTT) {
 		net->cc_mod.htcp_ca.maxRTT = minRTT + ((maxRTT-minRTT)*95)/100;
+}
 }
 
 static uint32_t

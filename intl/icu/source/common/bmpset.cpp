@@ -267,12 +267,14 @@ int32_t BMPSet::findCodePoint(UChar32 c, int32_t lo, int32_t hi) const {
 
     // Return the smallest i such that c < list[i].  Assume
     // list[len - 1] == HIGH and that c is legal (0..HIGH-1).
-    if (c < list[lo])
+    if (c < list[lo]) {
         return lo;
+}
     // High runner test.  c is often after the last range, so an
     // initial check for this condition pays off.
-    if (lo >= hi || c >= list[hi-1])
+    if (lo >= hi || c >= list[hi-1]) {
         return hi;
+}
     // invariant: c >= list[lo]
     // invariant: c < list[hi]
     for (;;) {

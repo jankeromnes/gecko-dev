@@ -60,8 +60,9 @@ nsFeedSniffer::ConvertEncodedData(nsIRequest* request,
 
  mDecodedData = "";
  nsCOMPtr<nsIHttpChannel> httpChannel(do_QueryInterface(request));
-  if (!httpChannel)
+  if (!httpChannel) {
     return NS_ERROR_NO_INTERFACE;
+}
 
   nsAutoCString contentEncoding;
   mozilla::Unused << httpChannel->GetResponseHeader(NS_LITERAL_CSTRING("Content-Encoding"),
@@ -81,8 +82,9 @@ nsFeedSniffer::ConvertEncodedData(nsIRequest* request,
 
       nsCOMPtr<nsIStringInputStream> rawStream =
         do_CreateInstance(NS_STRINGINPUTSTREAM_CONTRACTID);
-      if (!rawStream)
+      if (!rawStream) {
         return NS_ERROR_FAILURE;
+}
 
       rv = rawStream->SetData((const char*)data, length);
       NS_ENSURE_SUCCESS(rv, rv);
@@ -107,14 +109,16 @@ StringBeginsWithLowercaseLiteral(nsAString& aString,
 bool
 HasAttachmentDisposition(nsIHttpChannel* httpChannel)
 {
-  if (!httpChannel)
+  if (!httpChannel) {
     return false;
+}
 
   uint32_t disp;
   nsresult rv = httpChannel->GetContentDisposition(&disp);
 
-  if (NS_SUCCEEDED(rv) && disp == nsIChannel::DISPOSITION_ATTACHMENT)
+  if (NS_SUCCEEDED(rv) && disp == nsIChannel::DISPOSITION_ATTACHMENT) {
     return true;
+}
 
   return false;
 }
@@ -127,8 +131,9 @@ static const char*
 FindChar(char c, const char *begin, const char *end)
 {
   for (; begin < end; ++begin) {
-    if (*begin == c)
+    if (*begin == c) {
       return begin;
+}
   }
   return nullptr;
 }
@@ -158,21 +163,24 @@ IsDocumentElement(const char *start, const char* end)
   // comment, our desired substring or something invalid.
   while ( (start = FindChar('<', start, end)) ) {
     ++start;
-    if (start >= end)
+    if (start >= end) {
       return false;
+}
 
     // Check to see if the character following the '<' is either '?' or '!'
     // (processing instruction or doctype or comment)... these are valid nodes
     // to have in the prologue.
-    if (*start != '?' && *start != '!')
+    if (*start != '?' && *start != '!') {
       return false;
+}
 
     // Now advance the iterator until the '>' (We do this because we don't want
     // to sniff indicator substrings that are embedded within other nodes, e.g.
     // comments: <!-- <rdf:RDF .. > -->
     start = FindChar('>', start, end);
-    if (!start)
+    if (!start) {
       return false;
+}
 
     ++start;
   }
@@ -215,8 +223,9 @@ nsFeedSniffer::GetMIMETypeFromContent(nsIRequest* request,
                                       nsACString& sniffedType)
 {
   nsCOMPtr<nsIHttpChannel> channel(do_QueryInterface(request));
-  if (!channel)
+  if (!channel) {
     return NS_ERROR_NO_INTERFACE;
+}
 
   // Check that this is a GET request, since you can't subscribe to a POST...
   nsAutoCString method;
@@ -306,8 +315,9 @@ nsFeedSniffer::GetMIMETypeFromContent(nsIRequest* request,
   // Now we need to potentially decompress data served with
   // Content-Encoding: gzip
   nsresult rv = ConvertEncodedData(request, data, length);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   // We cap the number of bytes to scan at MAX_BYTES to prevent picking up
   // false positives by accidentally reading document content, e.g. a "how to
@@ -334,8 +344,9 @@ nsFeedSniffer::GetMIMETypeFromContent(nsIRequest* request,
   isFeed = ContainsTopLevelSubstring(dataString, "<rss");
 
   // Atom 1.0
-  if (!isFeed)
+  if (!isFeed) {
     isFeed = ContainsTopLevelSubstring(dataString, "<feed");
+}
 
   // RSS 1.0
   if (!isFeed) {
@@ -346,10 +357,11 @@ nsFeedSniffer::GetMIMETypeFromContent(nsIRequest* request,
   }
 
   // If we sniffed a feed, coerce our internal type
-  if (isFeed && !HasAttachmentDisposition(channel))
+  if (isFeed && !HasAttachmentDisposition(channel)) {
     sniffedType.AssignLiteral(TYPE_MAYBE_FEED);
-  else
+  } else {
     sniffedType.Truncate();
+}
   return NS_OK;
 }
 

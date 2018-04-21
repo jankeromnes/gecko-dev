@@ -259,8 +259,9 @@ bool OpenTypeGDEF::Parse(const uint8_t *data, size_t length) {
   }
 
   unsigned gdef_header_end = 4 + 4 * 2;
-  if (version_2)
+  if (version_2) {
     gdef_header_end += 2;
+}
 
   // Parse subtables
   if (offset_glyph_class_def) {

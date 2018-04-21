@@ -329,10 +329,11 @@ rijndael_key_expansion7(AESContext *cx, const unsigned char *key, unsigned int N
     pW = W + i - 1;
     for (; i < cx->Nb * (cx->Nr + 1); ++i) {
         tmp = *pW++;
-        if (i % Nk == 0)
+        if (i % Nk == 0) {
             tmp = SUBBYTE(ROTBYTE(tmp)) ^ Rcon[i / Nk - 1];
-        else if (i % Nk == 4)
+        } else if (i % Nk == 4) {
             tmp = SUBBYTE(tmp);
+}
         *pW = W[i - Nk] ^ tmp;
     }
 }
@@ -369,8 +370,9 @@ rijndael_key_expansion(AESContext *cx, const unsigned char *key, unsigned int Nk
         *pW = W[i++ - Nk] ^ tmp;
         tmp = *pW++;
         *pW = W[i++ - Nk] ^ tmp;
-        if (Nk == 4)
+        if (Nk == 4) {
             continue;
+}
         switch (Nk) {
             case 8:
                 tmp = *pW++;
@@ -406,8 +408,9 @@ rijndael_key_expansion(AESContext *cx, const unsigned char *key, unsigned int Nk
          */
         for (; i < round_key_words; ++i) {
             tmp = *pW++;
-            if (i % Nk == 4)
+            if (i % Nk == 4) {
                 tmp = SUBBYTE(tmp);
+}
             *pW = W[i - Nk] ^ tmp;
         }
     }
@@ -447,8 +450,9 @@ rijndael_invkey_expansion(AESContext *cx, const unsigned char *key, unsigned int
         *roundkeyw++ = IMXC0(b[0]) ^ IMXC1(b[1]) ^ IMXC2(b[2]) ^ IMXC3(b[3]);
         b = (PRUint8 *)roundkeyw;
         *roundkeyw++ = IMXC0(b[0]) ^ IMXC1(b[1]) ^ IMXC2(b[2]) ^ IMXC3(b[3]);
-        if (Nb <= 4)
+        if (Nb <= 4) {
             continue;
+}
         switch (Nb) {
             case 8:
                 b = (PRUint8 *)roundkeyw;
@@ -724,8 +728,9 @@ rijndael_encryptCBC(AESContext *cx, unsigned char *output,
     unsigned char *lastblock;
     unsigned char inblock[AES_BLOCK_SIZE * 8];
 
-    if (!inputLen)
+    if (!inputLen) {
         return SECSuccess;
+}
     lastblock = cx->iv;
     while (inputLen > 0) {
         /* XOR with the last block (IV if first block) */
@@ -770,8 +775,9 @@ rijndael_decryptCBC(AESContext *cx, unsigned char *output,
     unsigned int j;
     unsigned char newIV[AES_BLOCK_SIZE];
 
-    if (!inputLen)
+    if (!inputLen) {
         return SECSuccess;
+}
     PORT_Assert(output - input >= 0 || input - output >= (int)inputLen);
     in = input + (inputLen - AES_BLOCK_SIZE);
     memcpy(newIV, in, AES_BLOCK_SIZE);
@@ -780,8 +786,9 @@ rijndael_decryptCBC(AESContext *cx, unsigned char *output,
         if (rijndael_decryptBlock128(cx, out, in) != SECSuccess) {
             return SECFailure;
         }
-        for (j = 0; j < AES_BLOCK_SIZE; ++j)
+        for (j = 0; j < AES_BLOCK_SIZE; ++j) {
             out[j] ^= in[(int)(j - AES_BLOCK_SIZE)];
+}
         out -= AES_BLOCK_SIZE;
         in -= AES_BLOCK_SIZE;
         inputLen -= AES_BLOCK_SIZE;
@@ -790,8 +797,9 @@ rijndael_decryptCBC(AESContext *cx, unsigned char *output,
         if (rijndael_decryptBlock128(cx, out, in) != SECSuccess) {
             return SECFailure;
         }
-        for (j = 0; j < AES_BLOCK_SIZE; ++j)
+        for (j = 0; j < AES_BLOCK_SIZE; ++j) {
             out[j] ^= cx->iv[j];
+}
     }
     memcpy(cx->iv, newIV, AES_BLOCK_SIZE);
     return SECSuccess;

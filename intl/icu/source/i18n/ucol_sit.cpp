@@ -432,7 +432,8 @@ ucol_prepareShortStringOpen( const char *definition,
                           UParseError *parseError,
                           UErrorCode *status)
 {
-    if(U_FAILURE(*status)) return;
+    if(U_FAILURE(*status)) { return;
+}
 
     UParseError internalParseError;
 
@@ -502,7 +503,8 @@ ucol_openFromShortString( const char *definition,
     UTRACE_ENTRY_OC(UTRACE_UCOL_OPEN_FROM_SHORT_STRING);
     UTRACE_DATA1(UTRACE_INFO, "short string = \"%s\"", definition);
 
-    if(U_FAILURE(*status)) return 0;
+    if(U_FAILURE(*status)) { return 0;
+}
 
     UParseError internalParseError;
 
@@ -573,7 +575,8 @@ ucol_getShortDefinitionString(const UCollator *coll,
                               int32_t capacity,
                               UErrorCode *status)
 {
-    if(U_FAILURE(*status)) return 0;
+    if(U_FAILURE(*status)) { return 0;
+}
     if(coll == NULL) {
         *status = U_ILLEGAL_ARGUMENT_ERROR;
         return 0;

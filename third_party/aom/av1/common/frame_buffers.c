@@ -43,14 +43,17 @@ int av1_get_frame_buffer(void *cb_priv, size_t min_size,
   int i;
   InternalFrameBufferList *const int_fb_list =
       (InternalFrameBufferList *)cb_priv;
-  if (int_fb_list == NULL) return -1;
+  if (int_fb_list == NULL) { return -1;
+}
 
   // Find a free frame buffer.
   for (i = 0; i < int_fb_list->num_internal_frame_buffers; ++i) {
-    if (!int_fb_list->int_fb[i].in_use) break;
+    if (!int_fb_list->int_fb[i].in_use) { break;
+}
   }
 
-  if (i == int_fb_list->num_internal_frame_buffers) return -1;
+  if (i == int_fb_list->num_internal_frame_buffers) { return -1;
+}
 
   if (int_fb_list->int_fb[i].size < min_size) {
     aom_free(int_fb_list->int_fb[i].data);
@@ -58,7 +61,8 @@ int av1_get_frame_buffer(void *cb_priv, size_t min_size,
     // due to access uninitialized memory in frame border. It could be
     // skipped if border were totally removed.
     int_fb_list->int_fb[i].data = (uint8_t *)aom_calloc(1, min_size);
-    if (!int_fb_list->int_fb[i].data) return -1;
+    if (!int_fb_list->int_fb[i].data) { return -1;
+}
     int_fb_list->int_fb[i].size = min_size;
   }
 
@@ -74,6 +78,7 @@ int av1_get_frame_buffer(void *cb_priv, size_t min_size,
 int av1_release_frame_buffer(void *cb_priv, aom_codec_frame_buffer_t *fb) {
   InternalFrameBuffer *const int_fb = (InternalFrameBuffer *)fb->priv;
   (void)cb_priv;
-  if (int_fb) int_fb->in_use = 0;
+  if (int_fb) { int_fb->in_use = 0;
+}
   return 0;
 }

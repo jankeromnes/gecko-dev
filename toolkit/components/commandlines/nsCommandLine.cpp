@@ -291,7 +291,8 @@ nsCommandLine::ResolveFile(const nsAString& aArgument, nsIFile* *aResult)
   if (aArgument.First() == '/') {
     // absolute path
     rv = lf->InitWithPath(aArgument);
-    if (NS_FAILED(rv)) return rv;
+    if (NS_FAILED(rv)) { return rv;
+}
 
     NS_ADDREF(*aResult = lf);
     return NS_OK;
@@ -307,10 +308,12 @@ nsCommandLine::ResolveFile(const nsAString& aArgument, nsIFile* *aResult)
   newpath.Append(nativeArg);
 
   rv = lf->InitWithNativePath(newpath);
-  if (NS_FAILED(rv)) return rv;
+  if (NS_FAILED(rv)) { return rv;
+}
 
   rv = lf->Normalize();
-  if (NS_FAILED(rv)) return rv;
+  if (NS_FAILED(rv)) { return rv;
+}
 
   lf.forget(aResult);
   return NS_OK;
@@ -408,13 +411,15 @@ nsCommandLine::resolveShortcutURL(nsIFile* aFile, nsACString& outURL)
 {
   nsCOMPtr<nsIFileProtocolHandler> fph;
   nsresult rv = NS_GetFileProtocolHandler(getter_AddRefs(fph));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   nsCOMPtr<nsIURI> uri;
   rv = fph->ReadURLFile(aFile, getter_AddRefs(uri));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   return uri->GetSpec(outURL);
 }
@@ -455,10 +460,12 @@ nsCommandLine::Init(int32_t argc, const char* const* argv, nsIFile* aWorkingDir,
     }
 #endif
     if (*curarg == '-') {
-      if (*(curarg+1) == '-') ++curarg;
+      if (*(curarg+1) == '-') { ++curarg;
+}
 
       char* dup = PL_strdup(curarg);
-      if (!dup) return NS_ERROR_OUT_OF_MEMORY;
+      if (!dup) { return NS_ERROR_OUT_OF_MEMORY;
+}
 
       char* eq = PL_strchr(dup, '=');
       if (eq) {
@@ -488,8 +495,9 @@ LogConsoleMessage(const char16_t* fmt, T... args)
   nsTextFormatter::ssprintf(msg, fmt, args...);
 
   nsCOMPtr<nsIConsoleService> cs = do_GetService("@mozilla.org/consoleservice;1");
-  if (cs)
+  if (cs) {
     cs->LogStringMessage(msg.get());
+}
 }
 
 nsresult
@@ -518,8 +526,9 @@ nsCommandLine::EnumerateHandlers(EnumerateHandlersCallback aCallback, void *aClo
     rv = catman->GetCategoryEntry("command-line-handler",
 				  entry.get(),
 				  getter_Copies(contractID));
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
       continue;
+}
 
     nsCOMPtr<nsICommandLineHandler> clh(do_GetService(contractID.get()));
     if (!clh) {
@@ -529,8 +538,9 @@ nsCommandLine::EnumerateHandlers(EnumerateHandlersCallback aCallback, void *aClo
     }
 
     rv = (aCallback)(clh, this, aClosure);
-    if (rv == NS_ERROR_ABORT)
+    if (rv == NS_ERROR_ABORT) {
       break;
+}
 
     rv = NS_OK;
   }
@@ -564,16 +574,19 @@ nsCommandLine::EnumerateValidators(EnumerateValidatorsCallback aCallback, void *
     rv = catman->GetCategoryEntry("command-line-validator",
 				  entry.get(),
 				  getter_Copies(contractID));
-    if (contractID.IsVoid())
+    if (contractID.IsVoid()) {
       continue;
+}
 
     nsCOMPtr<nsICommandLineValidator> clv(do_GetService(contractID.get()));
-    if (!clv)
+    if (!clv) {
       continue;
+}
 
     rv = (aCallback)(clv, this, aClosure);
-    if (rv == NS_ERROR_ABORT)
+    if (rv == NS_ERROR_ABORT) {
       break;
+}
 
     rv = NS_OK;
   }
@@ -599,12 +612,14 @@ nsCommandLine::Run()
   nsresult rv;
 
   rv = EnumerateValidators(EnumValidate, nullptr);
-  if (rv == NS_ERROR_ABORT)
+  if (rv == NS_ERROR_ABORT) {
     return rv;
+}
 
   rv = EnumerateHandlers(EnumRun, nullptr);
-  if (rv == NS_ERROR_ABORT)
+  if (rv == NS_ERROR_ABORT) {
     return rv;
+}
 
   return NS_OK;
 }

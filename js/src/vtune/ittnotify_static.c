@@ -376,20 +376,23 @@ static __itt_domain* ITTAPI ITT_VERSIONIZE(ITT_JOIN(_N_(domain_create),_init))(c
 #else
         if (ITTNOTIFY_NAME(domain_create) && ITTNOTIFY_NAME(domain_create) != ITT_VERSIONIZE(ITT_JOIN(_N_(domain_create),_init)))
         {
-            if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+            if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
             return ITTNOTIFY_NAME(domain_create)(name);
         }
 #endif
     }
     for (h_tail = NULL, h = _N_(_ittapi_global).domain_list; h != NULL; h_tail = h, h = h->next)
     {
-        if (h->nameA != NULL && !__itt_fstrcmp(h->nameA, name)) break;
+        if (h->nameA != NULL && !__itt_fstrcmp(h->nameA, name)) { break;
+}
     }
     if (h == NULL)
     {
         NEW_DOMAIN_A(&_N_(_ittapi_global),h,h_tail,name);
     }
-    if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+    if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
     return h;
 }
 
@@ -448,20 +451,23 @@ static __itt_string_handle* ITTAPI ITT_VERSIONIZE(ITT_JOIN(_N_(string_handle_cre
 #else
         if (ITTNOTIFY_NAME(string_handle_create) && ITTNOTIFY_NAME(string_handle_create) != ITT_VERSIONIZE(ITT_JOIN(_N_(string_handle_create),_init)))
         {
-            if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+            if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
             return ITTNOTIFY_NAME(string_handle_create)(name);
         }
 #endif
     }
     for (h_tail = NULL, h = _N_(_ittapi_global).string_list; h != NULL; h_tail = h, h = h->next)
     {
-        if (h->strA != NULL && !__itt_fstrcmp(h->strA, name)) break;
+        if (h->strA != NULL && !__itt_fstrcmp(h->strA, name)) { break;
+}
     }
     if (h == NULL)
     {
         NEW_STRING_HANDLE_A(&_N_(_ittapi_global),h,h_tail,name);
     }
-    if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+    if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
     return h;
 }
 
@@ -524,7 +530,8 @@ static __itt_counter ITTAPI ITT_VERSIONIZE(ITT_JOIN(_N_(counter_create),_init))(
 #else
         if (ITTNOTIFY_NAME(counter_create) && ITTNOTIFY_NAME(counter_create) != ITT_VERSIONIZE(ITT_JOIN(_N_(counter_create),_init)))
         {
-            if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+            if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
             return ITTNOTIFY_NAME(counter_create)(name, domain);
         }
 #endif
@@ -532,13 +539,15 @@ static __itt_counter ITTAPI ITT_VERSIONIZE(ITT_JOIN(_N_(counter_create),_init))(
     for (h_tail = NULL, h = _N_(_ittapi_global).counter_list; h != NULL; h_tail = h, h = h->next)
     {
         if (h->nameA != NULL  && h->type == type && !__itt_fstrcmp(h->nameA, name) && ((h->domainA == NULL && domain == NULL) || 
-            (h->domainA != NULL && domain != NULL && !__itt_fstrcmp(h->domainA, domain)))) break;
+            (h->domainA != NULL && domain != NULL && !__itt_fstrcmp(h->domainA, domain)))) { break;
+}
     }
     if (h == NULL)
     {
        NEW_COUNTER_A(&_N_(_ittapi_global),h,h_tail,name,domain,type);
     }
-    if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+    if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
     return (__itt_counter)h;
 }
 
@@ -599,7 +608,8 @@ static __itt_counter ITTAPI ITT_VERSIONIZE(ITT_JOIN(_N_(counter_create_typed),_i
 #else
         if (ITTNOTIFY_NAME(counter_create_typed) && ITTNOTIFY_NAME(counter_create_typed) != ITT_VERSIONIZE(ITT_JOIN(_N_(counter_create_typed),_init)))
         {
-            if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+            if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
             return ITTNOTIFY_NAME(counter_create_typed)(name, domain, type);
         }
 #endif
@@ -607,13 +617,15 @@ static __itt_counter ITTAPI ITT_VERSIONIZE(ITT_JOIN(_N_(counter_create_typed),_i
     for (h_tail = NULL, h = _N_(_ittapi_global).counter_list; h != NULL; h_tail = h, h = h->next)
     {
         if (h->nameA != NULL  && h->type == type && !__itt_fstrcmp(h->nameA, name) && ((h->domainA == NULL && domain == NULL) || 
-            (h->domainA != NULL && domain != NULL && !__itt_fstrcmp(h->domainA, domain)))) break;
+            (h->domainA != NULL && domain != NULL && !__itt_fstrcmp(h->domainA, domain)))) { break;
+}
     }
     if (h == NULL)
     {
        NEW_COUNTER_A(&_N_(_ittapi_global),h,h_tail,name,domain,type);
     }
-    if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+    if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
     return (__itt_counter)h;
 }
 
@@ -744,24 +756,28 @@ static const char* __itt_fsplit(const char* s, const char* sep, const char** out
     int i;
     int j;
 
-    if (!s || !sep || !out || !len)
+    if (!s || !sep || !out || !len) {
         return NULL;
+}
 
     for (i = 0; s[i]; i++)
     {
         int b = 0;
-        for (j = 0; sep[j]; j++)
+        for (j = 0; sep[j]; j++) {
             if (s[i] == sep[j])
             {
                 b = 1;
                 break;
             }
-        if (!b)
+}
+        if (!b) {
             break;
+}
     }
 
-    if (!s[i])
+    if (!s[i]) {
         return NULL;
+}
 
     *len = 0;
     *out = &s[i];
@@ -769,27 +785,31 @@ static const char* __itt_fsplit(const char* s, const char* sep, const char** out
     for (; s[i]; i++, (*len)++)
     {
         int b = 0;
-        for (j = 0; sep[j]; j++)
+        for (j = 0; sep[j]; j++) {
             if (s[i] == sep[j])
             {
                 b = 1;
                 break;
             }
-        if (b)
+}
+        if (b) {
             break;
+}
     }
 
     for (; s[i]; i++)
     {
         int b = 0;
-        for (j = 0; sep[j]; j++)
+        for (j = 0; sep[j]; j++) {
             if (s[i] == sep[j])
             {
                 b = 1;
                 break;
             }
-        if (!b)
+}
+        if (!b) {
             break;
+}
     }
 
     return &s[i];
@@ -843,8 +863,9 @@ static const char* __itt_get_env_var(const char* name)
                 __itt_fstrcpyn(env_value, max_len, env, len + 1);
                 env_value += len + 1;
                 return ret;
-            } else
+            } else {
                 __itt_report_error(__itt_error_env_too_long, name, (size_t)len, (size_t)(max_len - 1));
+}
         }
 #endif /* ITT_PLATFORM==ITT_PLATFORM_WIN */
     }
@@ -1004,18 +1025,20 @@ static __itt_group_id __itt_get_groups(void)
         /* TODO: !!! Workaround for bug with warning for unknown group !!!
          * Should be fixed in new initialization scheme.
          * Now the following groups should be set always. */
-        for (i = 0; group_list[i].id != __itt_group_none; i++)
+        for (i = 0; group_list[i].id != __itt_group_none; i++) {
             if (group_list[i].id != __itt_group_all &&
                 group_list[i].id > __itt_group_splitter_min &&
-                group_list[i].id < __itt_group_splitter_max)
+                group_list[i].id < __itt_group_splitter_max) {
                 res = (__itt_group_id)(res | group_list[i].id);
+}
         return res;
     }
     else
     {
-        for (i = 0; group_alias[i].env_var != NULL; i++)
-            if (__itt_get_env_var(group_alias[i].env_var) != NULL)
+        for (i = 0; group_alias[i].env_var != NULL; i++) {
+            if (__itt_get_env_var(group_alias[i].env_var) != NULL) {
                 return group_alias[i].groups;
+}
     }
 
     return res;
@@ -1025,12 +1048,15 @@ static __itt_group_id __itt_get_groups(void)
 
 static int __itt_lib_version(lib_t lib)
 {
-    if (lib == NULL)
+    if (lib == NULL) {
         return 0;
-    if (__itt_get_proc(lib, "__itt_api_init"))
+}
+    if (__itt_get_proc(lib, "__itt_api_init")) {
         return 2;
-    if (__itt_get_proc(lib, "__itt_api_version"))
+}
+    if (__itt_get_proc(lib, "__itt_api_version")) {
         return 1;
+}
     return 0;
 }
 
@@ -1048,8 +1074,9 @@ static void __itt_nullify_all_pointers(void)
 {
     register int i;
     /* Nulify all pointers except domain_create, string_handle_create  and counter_create */
-    for (i = 0; _N_(_ittapi_global).api_list_ptr[i].name != NULL; i++)
+    for (i = 0; _N_(_ittapi_global).api_list_ptr[i].name != NULL; i++) {
         *_N_(_ittapi_global).api_list_ptr[i].func_ptr = _N_(_ittapi_global).api_list_ptr[i].null_func;
+}
 }
 
 #if ITT_PLATFORM==ITT_PLATFORM_WIN
@@ -1070,7 +1097,8 @@ ITT_EXTERN_C void _N_(fini_ittlib)(void)
         {
             if (current_thread == 0)
             {
-                if (PTHREAD_SYMBOLS) current_thread = __itt_thread_id();
+                if (PTHREAD_SYMBOLS) { current_thread = __itt_thread_id();
+}
                 if (_N_(_ittapi_global).lib != NULL)
                 {
                     __itt_api_fini_ptr = (__itt_api_fini_t*)(size_t)__itt_get_proc(_N_(_ittapi_global).lib, "__itt_api_fini");
@@ -1091,7 +1119,8 @@ ITT_EXTERN_C void _N_(fini_ittlib)(void)
                 current_thread = 0;
             }
         }
-        if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+        if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
     }
 }
 
@@ -1114,7 +1143,8 @@ ITT_EXTERN_C int _N_(init_ittlib)(const char* lib_name, __itt_group_id init_grou
         {
             if (current_thread == 0)
             {
-                if (PTHREAD_SYMBOLS) current_thread = __itt_thread_id();
+                if (PTHREAD_SYMBOLS) { current_thread = __itt_thread_id();
+}
                 if (lib_name == NULL)
                 {
                     lib_name = __itt_get_lib_name();
@@ -1149,8 +1179,9 @@ ITT_EXTERN_C int _N_(init_ittlib)(const char* lib_name, __itt_group_id init_grou
 #endif /* ITT_COMPLETE_GROUP */
                                     }
                                 }
-                                else
+                                else {
                                     *_N_(_ittapi_global).api_list_ptr[i].func_ptr = _N_(_ittapi_global).api_list_ptr[i].null_func;
+}
                             }
 
                             if (groups == __itt_group_legacy)
@@ -1177,8 +1208,9 @@ ITT_EXTERN_C int _N_(init_ittlib)(const char* lib_name, __itt_group_id init_grou
                             break;
                         case 2:
                             __itt_api_init_ptr = (__itt_api_init_t*)(size_t)__itt_get_proc(_N_(_ittapi_global).lib, "__itt_api_init");
-                            if (__itt_api_init_ptr)
+                            if (__itt_api_init_ptr) {
                                 __itt_api_init_ptr(&_N_(_ittapi_global), init_groups);
+}
                             break;
                         }
                     }
@@ -1202,12 +1234,14 @@ ITT_EXTERN_C int _N_(init_ittlib)(const char* lib_name, __itt_group_id init_grou
                 _N_(_ittapi_global).api_initialized = 1;
                 current_thread = 0;
                 /* !!! Just to avoid unused code elimination !!! */
-                if (__itt_fini_ittlib_ptr == _N_(fini_ittlib)) current_thread = 0;
+                if (__itt_fini_ittlib_ptr == _N_(fini_ittlib)) { current_thread = 0;
+}
             }
         }
 
 #ifndef ITT_SIMPLE_INIT
-        if (PTHREAD_SYMBOLS) __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+        if (PTHREAD_SYMBOLS) { __itt_mutex_unlock(&_N_(_ittapi_global).mutex);
+}
 #endif /* ITT_SIMPLE_INIT */
     }
 

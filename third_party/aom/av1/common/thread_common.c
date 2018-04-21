@@ -29,7 +29,8 @@ static INLINE void mutex_lock(pthread_mutex_t *const mutex) {
     }
   }
 
-  if (!locked) pthread_mutex_lock(mutex);
+  if (!locked) { pthread_mutex_lock(mutex);
+}
 }
 #endif  // CONFIG_MULTITHREAD
 
@@ -63,7 +64,8 @@ static INLINE void sync_write(AV1LfSync *const lf_sync, int r, int c,
 
   if (c < sb_cols - 1) {
     cur = c;
-    if (c % nsync) sig = 0;
+    if (c % nsync) { sig = 0;
+}
   } else {
     cur = sb_cols + nsync;
   }
@@ -87,14 +89,15 @@ static INLINE void sync_write(AV1LfSync *const lf_sync, int r, int c,
 #if !CONFIG_EXT_PARTITION_TYPES
 static INLINE enum lf_path get_loop_filter_path(
     int y_only, struct macroblockd_plane *planes) {
-  if (y_only)
+  if (y_only) {
     return LF_PATH_444;
-  else if (planes[1].subsampling_y == 1 && planes[1].subsampling_x == 1)
+  } else if (planes[1].subsampling_y == 1 && planes[1].subsampling_x == 1) {
     return LF_PATH_420;
-  else if (planes[1].subsampling_y == 0 && planes[1].subsampling_x == 0)
+  } else if (planes[1].subsampling_y == 0 && planes[1].subsampling_x == 0) {
     return LF_PATH_444;
-  else
+  } else {
     return LF_PATH_SLOW;
+}
 }
 
 static INLINE void loop_filter_block_plane_ver(
@@ -171,9 +174,10 @@ static int loop_filter_ver_row_worker(AV1LfSync *const lf_sync,
                                           mi + mi_col, mi_row, mi_col, plane);
 #else
 
-      for (plane = 0; plane < num_planes; ++plane)
+      for (plane = 0; plane < num_planes; ++plane) {
         loop_filter_block_plane_ver(lf_data->cm, lf_data->planes, plane,
                                     mi + mi_col, mi_row, mi_col, path, &lfm);
+}
 #endif
     }
   }
@@ -215,9 +219,10 @@ static int loop_filter_hor_row_worker(AV1LfSync *const lf_sync,
         av1_filter_block_plane_non420_hor(lf_data->cm, &lf_data->planes[plane],
                                           mi + mi_col, mi_row, mi_col, plane);
 #else
-      for (plane = 0; plane < num_planes; ++plane)
+      for (plane = 0; plane < num_planes; ++plane) {
         loop_filter_block_plane_hor(lf_data->cm, lf_data->planes, plane,
                                     mi + mi_col, mi_row, mi_col, path, &lfm);
+}
 #endif
       sync_write(lf_sync, r, c, sb_cols);
     }
@@ -423,7 +428,8 @@ void av1_loop_filter_frame_mt(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
                               int num_workers, AV1LfSync *lf_sync) {
   int start_mi_row, end_mi_row, mi_rows_to_filter;
 
-  if (!frame_filter_level) return;
+  if (!frame_filter_level) { return;
+}
 
   start_mi_row = 0;
   mi_rows_to_filter = cm->mi_rows;
@@ -447,14 +453,15 @@ void av1_loop_filter_frame_mt(YV12_BUFFER_CONFIG *frame, AV1_COMMON *cm,
 static INLINE int get_sync_range(int width) {
   // nsync numbers are picked by testing. For example, for 4k
   // video, using 4 gives best performance.
-  if (width < 640)
+  if (width < 640) {
     return 1;
-  else if (width <= 1280)
+  } else if (width <= 1280) {
     return 2;
-  else if (width <= 4096)
+  } else if (width <= 4096) {
     return 4;
-  else
+  } else {
     return 8;
+}
 }
 
 // Allocate memory for lf row synchronization
@@ -531,5 +538,6 @@ void av1_accumulate_frame_counts(FRAME_COUNTS *acc_counts,
   const unsigned int n_counts = sizeof(FRAME_COUNTS) / sizeof(unsigned int);
   unsigned int i;
 
-  for (i = 0; i < n_counts; i++) acc[i] += cnt[i];
+  for (i = 0; i < n_counts; i++) { acc[i] += cnt[i];
+}
 }

@@ -258,8 +258,9 @@ static void set_good_speed_features_framesize_independent(AV1_COMP *cpi,
     sf->mv.search_method = BIGDIA;
     sf->mv.subpel_search_method = SUBPEL_TREE_PRUNED_MORE;
     sf->adaptive_rd_thresh = 4;
-    if (cm->frame_type != KEY_FRAME)
+    if (cm->frame_type != KEY_FRAME) {
       sf->mode_search_skip_flags |= FLAG_EARLY_TERMINATE;
+}
     sf->disable_filter_search_var_thresh = 200;
     sf->use_fast_coef_updates = ONE_LOOP_REDUCED;
     sf->use_fast_coef_costing = 1;
@@ -365,10 +366,11 @@ void av1_set_speed_features_framesize_dependent(AV1_COMP *cpi) {
   }
 
   // This is only used in motion vector unit test.
-  if (cpi->oxcf.motion_vector_unit_test == 1)
+  if (cpi->oxcf.motion_vector_unit_test == 1) {
     cpi->find_fractional_mv_step = av1_return_max_sub_pixel_mv;
-  else if (cpi->oxcf.motion_vector_unit_test == 2)
+  } else if (cpi->oxcf.motion_vector_unit_test == 2) {
     cpi->find_fractional_mv_step = av1_return_min_sub_pixel_mv;
+}
 }
 
 void av1_set_speed_features_framesize_independent(AV1_COMP *cpi) {
@@ -438,7 +440,8 @@ void av1_set_speed_features_framesize_independent(AV1_COMP *cpi) {
   sf->use_fast_coef_costing = 0;
   sf->mode_skip_start = MAX_MODES;  // Mode index at which mode skip mask set
   sf->schedule_mode_search = 0;
-  for (i = 0; i < BLOCK_SIZES_ALL; ++i) sf->inter_mode_mask[i] = INTER_ALL;
+  for (i = 0; i < BLOCK_SIZES_ALL; ++i) { sf->inter_mode_mask[i] = INTER_ALL;
+}
   sf->max_intra_bsize = BLOCK_LARGEST;
   sf->reuse_inter_pred_sby = 0;
   // This setting only takes effect when partition_search_type is set
@@ -477,13 +480,15 @@ void av1_set_speed_features_framesize_independent(AV1_COMP *cpi) {
 
   sf->allow_exhaustive_searches = 1;
   int speed = (oxcf->speed > MAX_MESH_SPEED) ? MAX_MESH_SPEED : oxcf->speed;
-  if (cpi->twopass.fr_content_type == FC_GRAPHICS_ANIMATION)
+  if (cpi->twopass.fr_content_type == FC_GRAPHICS_ANIMATION) {
     sf->exhaustive_searches_thresh = (1 << 24);
-  else
+  } else {
     sf->exhaustive_searches_thresh = (1 << 25);
+}
   sf->max_exaustive_pct = good_quality_max_mesh_pct[speed];
-  if (speed > 0)
+  if (speed > 0) {
     sf->exhaustive_searches_thresh = sf->exhaustive_searches_thresh << 1;
+}
 
   for (i = 0; i < MAX_MESH_STEP; ++i) {
     sf->mesh_patterns[i].range = good_quality_mesh_patterns[speed][i].range;
@@ -505,7 +510,8 @@ void av1_set_speed_features_framesize_independent(AV1_COMP *cpi) {
 #if !CONFIG_XIPHRC
   // Slow quant, dct and trellis not worthwhile for first pass
   // so make sure they are always turned off.
-  if (oxcf->pass == 1) sf->optimize_coefficients = 0;
+  if (oxcf->pass == 1) { sf->optimize_coefficients = 0;
+}
 #endif
 
   // No recode for 1 pass.
@@ -539,8 +545,9 @@ void av1_set_speed_features_framesize_independent(AV1_COMP *cpi) {
   }
 
   // This is only used in motion vector unit test.
-  if (cpi->oxcf.motion_vector_unit_test == 1)
+  if (cpi->oxcf.motion_vector_unit_test == 1) {
     cpi->find_fractional_mv_step = av1_return_max_sub_pixel_mv;
-  else if (cpi->oxcf.motion_vector_unit_test == 2)
+  } else if (cpi->oxcf.motion_vector_unit_test == 2) {
     cpi->find_fractional_mv_step = av1_return_min_sub_pixel_mv;
+}
 }

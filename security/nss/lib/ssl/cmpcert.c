@@ -36,8 +36,9 @@ NSS_CmpCertChainWCANames(CERTCertificate *cert, CERTDistNames *caNames)
     SECItem compatIssuerName;
 
     if (!cert || !caNames || !caNames->nnames || !caNames->names ||
-        !caNames->names->data)
+        !caNames->names->data) {
         return SECFailure;
+}
     depth = 0;
     curcert = CERT_DupCertificate(cert);
 

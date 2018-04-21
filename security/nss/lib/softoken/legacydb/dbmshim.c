@@ -99,8 +99,9 @@ static void
 dbs_replaceSlash(char *cp, int len)
 {
     while (len--) {
-        if (*cp == '/')
+        if (*cp == '/') {
             *cp = '-';
+}
         cp++;
     }
 }
@@ -455,8 +456,9 @@ dbs_mkBlobDirName(const char *dbname)
      */
     for (cp = &dbname[dbname_len];
          (cp > dbname) && (*cp != '.') && (*cp != *PATH_SEPARATOR);
-         cp--)
+         cp--) {
         /* Empty */;
+}
     if (*cp == '.') {
         dbname_end = cp - dbname;
         if (PORT_Strcmp(cp, DIRSUFFIX) == 0) {

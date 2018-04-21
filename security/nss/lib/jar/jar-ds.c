@@ -18,8 +18,9 @@ ZZLink *
 ZZ_NewLink(JAR_Item *thing)
 {
     ZZLink *link = (ZZLink *)PORT_ZAlloc(sizeof(ZZLink));
-    if (link)
+    if (link) {
         link->thing = thing;
+}
     return link;
 }
 

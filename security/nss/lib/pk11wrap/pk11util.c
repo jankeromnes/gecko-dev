@@ -35,8 +35,9 @@ void
 SECMOD_Init()
 {
     /* don't initialize twice */
-    if (moduleLock)
+    if (moduleLock) {
         return;
+}
 
     moduleLock = SECMOD_NewListLock();
     PK11_InitSlotLists();
@@ -332,8 +333,9 @@ SECMOD_LookupSlot(SECMODModuleID moduleID, CK_SLOT_ID slotID)
     PK11SlotInfo *slot;
 
     module = SECMOD_FindModuleByID(moduleID);
-    if (module == NULL)
+    if (module == NULL) {
         return NULL;
+}
 
     slot = SECMOD_FindSlotByID(module, slotID);
     SECMOD_DestroyModule(module);
@@ -587,8 +589,9 @@ PK11_GetModInfo(SECMODModule *mod, CK_INFO *info)
 {
     CK_RV crv;
 
-    if (mod->functionList == NULL)
+    if (mod->functionList == NULL) {
         return SECFailure;
+}
     crv = PK11_GETTAB(mod)->C_GetInfo(info);
     if (crv != CKR_OK) {
         PORT_SetError(PK11_MapError(crv));
@@ -912,8 +915,9 @@ SECMOD_SlotDestroyModule(SECMODModule *module, PRBool fromSlot)
         }
         PORT_Assert(willfree || (module->slotCount > 0));
         PZ_Unlock(module->refLock);
-        if (!willfree)
+        if (!willfree) {
             return;
+}
     }
 
     if (module == pendingModule) {
@@ -953,8 +957,9 @@ SECMOD_DestroyModuleList(SECMODModuleList *list)
 {
     SECMODModuleList *lp;
 
-    for (lp = list; lp != NULL; lp = SECMOD_DestroyModuleListElement(lp))
+    for (lp = list; lp != NULL; lp = SECMOD_DestroyModuleListElement(lp)) {
         ;
+}
 }
 
 PRBool

@@ -574,7 +574,8 @@ sdp_result_e sdp_get_fmtp_tok_val(sdp_t *sdp_p,
   char* strtoul_end;
 
   result1 = sdp_get_fmtp_tok(sdp_p, fmtp_ptr, fmtp_name, buf, buf_size, tok);
-  if (result1 != SDP_SUCCESS) return result1;
+  if (result1 != SDP_SUCCESS) { return result1;
+}
 
   errno = 0;
   value = strtoul(*tok, &strtoul_end, 10);
@@ -798,12 +799,15 @@ sdp_result_e sdp_parse_attr_fmtp (sdp_t *sdp_p, sdp_attr_t *attr_p,
                     break;
                 }
 
-                if (iter == 1)
+                if (iter == 1) {
                     custom_x = (uint16_t) strtoul_result;
-                if (iter == 2)
+}
+                if (iter == 2) {
                     custom_y = (uint16_t) strtoul_result;
-                if (iter == 3)
+}
+                if (iter == 3) {
                     custom_mpi = (uint16_t) strtoul_result;
+}
 
                 temp=PL_strtok_r(NULL, ",", &strtok_state);
                 iter++;
@@ -840,10 +844,11 @@ sdp_result_e sdp_parse_attr_fmtp (sdp_t *sdp_p, sdp_attr_t *attr_p,
                     break;
                 }
 
-                if (iter == 1)
+                if (iter == 1) {
                     par_width = (uint16_t) strtoul_result;
-                else
+                } else {
                     par_height = (uint16_t) strtoul_result;
+}
 
                 temp=PL_strtok_r(NULL, ",", &strtok_state);
                 iter++;
@@ -1181,10 +1186,11 @@ sdp_result_e sdp_parse_attr_fmtp (sdp_t *sdp_p, sdp_attr_t *attr_p,
                         break;
                     }
 
-                    if (iter == 1)
+                    if (iter == 1) {
                         fmtp_p->annex_p_val_picture_resize = (uint16_t) strtoul_result;
-                    else if (iter == 2)
+                    } else if (iter == 2) {
                         fmtp_p->annex_p_val_warp = (uint16_t) strtoul_result;
+}
 
                     temp = PL_strtok_r(NULL, ",", &strtok_state);
                     iter++;

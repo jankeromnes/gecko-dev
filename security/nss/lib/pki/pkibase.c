@@ -302,8 +302,9 @@ nssPKIObject_GetTokens(
         }
     }
     nssPKIObject_Unlock(object);
-    if (statusOpt)
+    if (statusOpt) {
         *statusOpt = PR_SUCCESS; /* until more logic here */
+}
     return tokens;
 }
 
@@ -385,12 +386,14 @@ nssCertificateArray_Join(
         PRUint32 count = 0;
         PRUint32 count1 = 0;
         cp = certs1;
-        while (*cp++)
+        while (*cp++) {
             count1++;
+}
         count = count1;
         cp = certs2;
-        while (*cp++)
+        while (*cp++) {
             count++;
+}
         certs = nss_ZREALLOCARRAY(certs1, NSSCertificate *, count + 1);
         if (!certs) {
             nss_ZFreeIf(certs1);
@@ -437,8 +440,9 @@ nssCertificateArray_FindBestCertificate(
         nssDecodedCert *dc;
         NSSCertificate *c = *certs;
         dc = nssCertificate_GetDecoding(c);
-        if (!dc)
+        if (!dc) {
             continue;
+}
         thisCertMatches = dc->matchUsage(dc, usage);
         if (!bestCert) {
             /* always take the first cert, but remember whether or not

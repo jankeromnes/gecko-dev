@@ -75,22 +75,26 @@ static INLINE void d117_predictor(uint8_t *dst, ptrdiff_t stride, int bw,
   int r, c;
 
   // first row
-  for (c = 0; c < bw; c++) dst[c] = AVG2(above[c - 1], above[c]);
+  for (c = 0; c < bw; c++) { dst[c] = AVG2(above[c - 1], above[c]);
+}
   dst += stride;
 
   // second row
   dst[0] = AVG3(left[0], above[-1], above[0]);
-  for (c = 1; c < bw; c++) dst[c] = AVG3(above[c - 2], above[c - 1], above[c]);
+  for (c = 1; c < bw; c++) { dst[c] = AVG3(above[c - 2], above[c - 1], above[c]);
+}
   dst += stride;
 
   // the rest of first col
   dst[0] = AVG3(above[-1], left[0], left[1]);
-  for (r = 3; r < bh; ++r)
+  for (r = 3; r < bh; ++r) {
     dst[(r - 2) * stride] = AVG3(left[r - 3], left[r - 2], left[r - 1]);
+}
 
   // the rest of the block
   for (r = 2; r < bh; ++r) {
-    for (c = 1; c < bw; c++) dst[c] = dst[-2 * stride + c - 1];
+    for (c = 1; c < bw; c++) { dst[c] = dst[-2 * stride + c - 1];
+}
     dst += stride;
   }
 }
@@ -139,21 +143,25 @@ static INLINE void d153_predictor(uint8_t *dst, ptrdiff_t stride, int bw,
                                   const uint8_t *left) {
   int r, c;
   dst[0] = AVG2(above[-1], left[0]);
-  for (r = 1; r < bh; r++) dst[r * stride] = AVG2(left[r - 1], left[r]);
+  for (r = 1; r < bh; r++) { dst[r * stride] = AVG2(left[r - 1], left[r]);
+}
   dst++;
 
   dst[0] = AVG3(left[0], above[-1], above[0]);
   dst[stride] = AVG3(above[-1], left[0], left[1]);
-  for (r = 2; r < bh; r++)
+  for (r = 2; r < bh; r++) {
     dst[r * stride] = AVG3(left[r - 2], left[r - 1], left[r]);
+}
   dst++;
 
-  for (c = 0; c < bw - 2; c++)
+  for (c = 0; c < bw - 2; c++) {
     dst[c] = AVG3(above[c - 1], above[c], above[c + 1]);
+}
   dst += stride;
 
   for (r = 1; r < bh; ++r) {
-    for (c = 0; c < bw - 2; c++) dst[c] = dst[-stride + c - 2];
+    for (c = 0; c < bw - 2; c++) { dst[c] = dst[-stride + c - 2];
+}
     dst += stride;
   }
 }
@@ -202,8 +210,9 @@ static INLINE void paeth_predictor(uint8_t *dst, ptrdiff_t stride, int bw,
   const uint8_t ytop_left = above[-1];
 
   for (r = 0; r < bh; r++) {
-    for (c = 0; c < bw; c++)
+    for (c = 0; c < bw; c++) {
       dst[c] = (uint8_t)paeth_predictor_single(left[r], above[c], ytop_left);
+}
     dst += stride;
   }
 }
@@ -329,7 +338,8 @@ static INLINE void dc_left_predictor(uint8_t *dst, ptrdiff_t stride, int bw,
   int i, r, expected_dc, sum = 0;
   (void)above;
 
-  for (i = 0; i < bh; i++) sum += left[i];
+  for (i = 0; i < bh; i++) { sum += left[i];
+}
   expected_dc = (sum + (bh >> 1)) / bh;
 
   for (r = 0; r < bh; r++) {
@@ -344,7 +354,8 @@ static INLINE void dc_top_predictor(uint8_t *dst, ptrdiff_t stride, int bw,
   int i, r, expected_dc, sum = 0;
   (void)left;
 
-  for (i = 0; i < bw; i++) sum += above[i];
+  for (i = 0; i < bw; i++) { sum += above[i];
+}
   expected_dc = (sum + (bw >> 1)) / bw;
 
   for (r = 0; r < bh; r++) {
@@ -570,22 +581,26 @@ static INLINE void highbd_d117_predictor(uint16_t *dst, ptrdiff_t stride,
   (void)bd;
 
   // first row
-  for (c = 0; c < bw; c++) dst[c] = AVG2(above[c - 1], above[c]);
+  for (c = 0; c < bw; c++) { dst[c] = AVG2(above[c - 1], above[c]);
+}
   dst += stride;
 
   // second row
   dst[0] = AVG3(left[0], above[-1], above[0]);
-  for (c = 1; c < bw; c++) dst[c] = AVG3(above[c - 2], above[c - 1], above[c]);
+  for (c = 1; c < bw; c++) { dst[c] = AVG3(above[c - 2], above[c - 1], above[c]);
+}
   dst += stride;
 
   // the rest of first col
   dst[0] = AVG3(above[-1], left[0], left[1]);
-  for (r = 3; r < bh; ++r)
+  for (r = 3; r < bh; ++r) {
     dst[(r - 2) * stride] = AVG3(left[r - 3], left[r - 2], left[r - 1]);
+}
 
   // the rest of the block
   for (r = 2; r < bh; ++r) {
-    for (c = 1; c < bw; c++) dst[c] = dst[-2 * stride + c - 1];
+    for (c = 1; c < bw; c++) { dst[c] = dst[-2 * stride + c - 1];
+}
     dst += stride;
   }
 }
@@ -596,15 +611,18 @@ static INLINE void highbd_d135_predictor(uint16_t *dst, ptrdiff_t stride,
   int r, c;
   (void)bd;
   dst[0] = AVG3(left[0], above[-1], above[0]);
-  for (c = 1; c < bw; c++) dst[c] = AVG3(above[c - 2], above[c - 1], above[c]);
+  for (c = 1; c < bw; c++) { dst[c] = AVG3(above[c - 2], above[c - 1], above[c]);
+}
 
   dst[stride] = AVG3(above[-1], left[0], left[1]);
-  for (r = 2; r < bh; ++r)
+  for (r = 2; r < bh; ++r) {
     dst[r * stride] = AVG3(left[r - 2], left[r - 1], left[r]);
+}
 
   dst += stride;
   for (r = 1; r < bh; ++r) {
-    for (c = 1; c < bw; c++) dst[c] = dst[-stride + c - 1];
+    for (c = 1; c < bw; c++) { dst[c] = dst[-stride + c - 1];
+}
     dst += stride;
   }
 }
@@ -615,21 +633,25 @@ static INLINE void highbd_d153_predictor(uint16_t *dst, ptrdiff_t stride,
   int r, c;
   (void)bd;
   dst[0] = AVG2(above[-1], left[0]);
-  for (r = 1; r < bh; r++) dst[r * stride] = AVG2(left[r - 1], left[r]);
+  for (r = 1; r < bh; r++) { dst[r * stride] = AVG2(left[r - 1], left[r]);
+}
   dst++;
 
   dst[0] = AVG3(left[0], above[-1], above[0]);
   dst[stride] = AVG3(above[-1], left[0], left[1]);
-  for (r = 2; r < bh; r++)
+  for (r = 2; r < bh; r++) {
     dst[r * stride] = AVG3(left[r - 2], left[r - 1], left[r]);
+}
   dst++;
 
-  for (c = 0; c < bw - 2; c++)
+  for (c = 0; c < bw - 2; c++) {
     dst[c] = AVG3(above[c - 1], above[c], above[c + 1]);
+}
   dst += stride;
 
   for (r = 1; r < bh; ++r) {
-    for (c = 0; c < bw - 2; c++) dst[c] = dst[-stride + c - 2];
+    for (c = 0; c < bw - 2; c++) { dst[c] = dst[-stride + c - 2];
+}
     dst += stride;
   }
 }
@@ -753,8 +775,9 @@ static INLINE void highbd_paeth_predictor(uint16_t *dst, ptrdiff_t stride,
   (void)bd;
 
   for (r = 0; r < bh; r++) {
-    for (c = 0; c < bw; c++)
+    for (c = 0; c < bw; c++) {
       dst[c] = paeth_predictor_single(left[r], above[c], ytop_left);
+}
     dst += stride;
   }
 }
@@ -875,7 +898,8 @@ static INLINE void highbd_dc_left_predictor(uint16_t *dst, ptrdiff_t stride,
   (void)above;
   (void)bd;
 
-  for (i = 0; i < bh; i++) sum += left[i];
+  for (i = 0; i < bh; i++) { sum += left[i];
+}
   expected_dc = (sum + (bh >> 1)) / bh;
 
   for (r = 0; r < bh; r++) {
@@ -892,7 +916,8 @@ static INLINE void highbd_dc_top_predictor(uint16_t *dst, ptrdiff_t stride,
   (void)left;
   (void)bd;
 
-  for (i = 0; i < bw; i++) sum += above[i];
+  for (i = 0; i < bw; i++) { sum += above[i];
+}
   expected_dc = (sum + (bw >> 1)) / bw;
 
   for (r = 0; r < bh; r++) {

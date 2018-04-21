@@ -906,7 +906,8 @@ void SkMatrix44::map2(const double src2[], int count, double dst4[]) const {
 bool SkMatrix44::preserves2dAxisAlignment (SkMScalar epsilon) const {
 
     // Can't check (mask & kPerspective_Mask) because Z isn't relevant here.
-    if (0 != perspX() || 0 != perspY()) return false;
+    if (0 != perspX() || 0 != perspY()) { return false;
+}
 
     // A matrix with two non-zeroish values in any of the upper right
     // rows or columns will skew.  If only one value in each row or

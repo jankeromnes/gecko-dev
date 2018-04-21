@@ -315,8 +315,9 @@ PRStack *stack;
 			return NULL;
 		}
 		strcpy(stack->prstk_name, stack_name);
-	} else
+	} else {
 		stack->prstk_name = NULL;
+}
 
 #ifndef _PR_HAVE_ATOMIC_CAS
     stack->prstk_lock = PR_NewLock();
@@ -340,8 +341,9 @@ PR_DestroyStack(PRStack *stack)
 		return PR_FAILURE;
 	}
 
-	if (stack->prstk_name)
+	if (stack->prstk_name) {
 		PR_Free(stack->prstk_name);
+}
 #ifndef _PR_HAVE_ATOMIC_CAS
 	PR_DestroyLock(stack->prstk_lock);
 #endif /* !_PR_HAVE_ATOMIC_CAS */

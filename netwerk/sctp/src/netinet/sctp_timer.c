@@ -129,8 +129,9 @@ sctp_threshold_management(struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 			}
 		}
 	}
-	if (stcb == NULL)
+	if (stcb == NULL) {
 		return (0);
+}
 
 	if (net) {
 		if ((net->dest_state & SCTP_ADDR_UNCONFIRMED) == 0) {
@@ -446,8 +447,9 @@ sctp_recover_sent_list(struct sctp_tcb *stcb)
 			}
 			TAILQ_REMOVE(&asoc->sent_queue, chk, sctp_next);
 			if (PR_SCTP_ENABLED(chk->flags)) {
-				if (asoc->pr_sctp_cnt != 0)
+				if (asoc->pr_sctp_cnt != 0) {
 					asoc->pr_sctp_cnt--;
+}
 			}
 			if (chk->data) {
 				/*sa_ignore NO_NULL_CHK*/
@@ -1344,8 +1346,9 @@ sctp_audit_stream_queues_for_size(struct sctp_inpcb *inp,
 	/*
 	 * This function is ONLY called when the send/sent queues are empty.
 	 */
-	if ((stcb == NULL) || (inp == NULL))
+	if ((stcb == NULL) || (inp == NULL)) {
 		return;
+}
 
 	if (stcb->asoc.sent_queue_retran_cnt) {
 		SCTP_PRINTF("Hmm, sent_queue_retran_cnt is non-zero %d\n",
@@ -1367,8 +1370,9 @@ sctp_audit_stream_queues_for_size(struct sctp_inpcb *inp,
 	for (i = 0; i < stcb->asoc.streamoutcnt; i++) {
 		if (!TAILQ_EMPTY(&stcb->asoc.strmout[i].outqueue)) {
 			TAILQ_FOREACH(sp, &stcb->asoc.strmout[i].outqueue, next) {
-				if (sp->msg_is_complete)
+				if (sp->msg_is_complete) {
 					being_filled++;
+}
 				chks_in_queue++;
 			}
 		}
@@ -1516,8 +1520,9 @@ sctp_pathmtu_timer(struct sctp_inpcb *inp,
 				}
 #endif	/* INET6 */
 			}
-			if (net->ro._s_addr)
+			if (net->ro._s_addr) {
 				net->src_addr_selected = 1;
+}
 		}
 		if (net->ro._s_addr) {
 			mtu = SCTP_GATHER_MTU_FROM_ROUTE(net->ro._s_addr, &net->ro._s_addr.sa, net->ro.ro_rt);

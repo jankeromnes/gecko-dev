@@ -4111,141 +4111,172 @@ void daala_fdct4(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[4];
   od_coeff y[4];
-  for (i = 0; i < 4; i++) x[i] = (od_coeff)input[i];
+  for (i = 0; i < 4; i++) { x[i] = (od_coeff)input[i];
+}
   od_bin_fdct4(y, x, 1);
-  for (i = 0; i < 4; i++) output[i] = (tran_low_t)y[i];
+  for (i = 0; i < 4; i++) { output[i] = (tran_low_t)y[i];
+}
 }
 
 void daala_idct4(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[4];
   od_coeff y[4];
-  for (i = 0; i < 4; i++) y[i] = input[i];
+  for (i = 0; i < 4; i++) { y[i] = input[i];
+}
   od_bin_idct4(x, 1, y);
-  for (i = 0; i < 4; i++) output[i] = (tran_low_t)x[i];
+  for (i = 0; i < 4; i++) { output[i] = (tran_low_t)x[i];
+}
 }
 
 void daala_fdst4(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[4];
   od_coeff y[4];
-  for (i = 0; i < 4; i++) x[i] = (od_coeff)input[i];
+  for (i = 0; i < 4; i++) { x[i] = (od_coeff)input[i];
+}
   od_bin_fdst4(y, x, 1);
-  for (i = 0; i < 4; i++) output[i] = (tran_low_t)y[i];
+  for (i = 0; i < 4; i++) { output[i] = (tran_low_t)y[i];
+}
 }
 
 void daala_idst4(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[4];
   od_coeff y[4];
-  for (i = 0; i < 4; i++) y[i] = input[i];
+  for (i = 0; i < 4; i++) { y[i] = input[i];
+}
   od_bin_idst4(x, 1, y);
-  for (i = 0; i < 4; i++) output[i] = (tran_low_t)x[i];
+  for (i = 0; i < 4; i++) { output[i] = (tran_low_t)x[i];
+}
 }
 
 void daala_idtx4(const tran_low_t *input, tran_low_t *output) {
   int i;
-  for (i = 0; i < 4; i++) output[i] = input[i];
+  for (i = 0; i < 4; i++) { output[i] = input[i];
+}
 }
 
 void daala_fdct8(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[8];
   od_coeff y[8];
-  for (i = 0; i < 8; i++) x[i] = (od_coeff)input[i];
+  for (i = 0; i < 8; i++) { x[i] = (od_coeff)input[i];
+}
   od_bin_fdct8(y, x, 1);
-  for (i = 0; i < 8; i++) output[i] = (tran_low_t)y[i];
+  for (i = 0; i < 8; i++) { output[i] = (tran_low_t)y[i];
+}
 }
 
 void daala_idct8(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[8];
   od_coeff y[8];
-  for (i = 0; i < 8; i++) y[i] = (od_coeff)input[i];
+  for (i = 0; i < 8; i++) { y[i] = (od_coeff)input[i];
+}
   od_bin_idct8(x, 1, y);
-  for (i = 0; i < 8; i++) output[i] = (tran_low_t)x[i];
+  for (i = 0; i < 8; i++) { output[i] = (tran_low_t)x[i];
+}
 }
 
 void daala_fdst8(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[8];
   od_coeff y[8];
-  for (i = 0; i < 8; i++) x[i] = (od_coeff)input[i];
+  for (i = 0; i < 8; i++) { x[i] = (od_coeff)input[i];
+}
   od_bin_fdst8(y, x, 1);
-  for (i = 0; i < 8; i++) output[i] = (tran_low_t)y[i];
+  for (i = 0; i < 8; i++) { output[i] = (tran_low_t)y[i];
+}
 }
 
 void daala_idst8(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[8];
   od_coeff y[8];
-  for (i = 0; i < 8; i++) y[i] = (od_coeff)input[i];
+  for (i = 0; i < 8; i++) { y[i] = (od_coeff)input[i];
+}
   od_bin_idst8(x, 1, y);
-  for (i = 0; i < 8; i++) output[i] = (tran_low_t)x[i];
+  for (i = 0; i < 8; i++) { output[i] = (tran_low_t)x[i];
+}
 }
 
 void daala_idtx8(const tran_low_t *input, tran_low_t *output) {
   int i;
-  for (i = 0; i < 8; i++) output[i] = input[i];
+  for (i = 0; i < 8; i++) { output[i] = input[i];
+}
 }
 
 void daala_fdct16(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[16];
   od_coeff y[16];
-  for (i = 0; i < 16; i++) x[i] = (od_coeff)input[i];
+  for (i = 0; i < 16; i++) { x[i] = (od_coeff)input[i];
+}
   od_bin_fdct16(y, x, 1);
-  for (i = 0; i < 16; i++) output[i] = (tran_low_t)y[i];
+  for (i = 0; i < 16; i++) { output[i] = (tran_low_t)y[i];
+}
 }
 
 void daala_idct16(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[16];
   od_coeff y[16];
-  for (i = 0; i < 16; i++) y[i] = (od_coeff)input[i];
+  for (i = 0; i < 16; i++) { y[i] = (od_coeff)input[i];
+}
   od_bin_idct16(x, 1, y);
-  for (i = 0; i < 16; i++) output[i] = (tran_low_t)x[i];
+  for (i = 0; i < 16; i++) { output[i] = (tran_low_t)x[i];
+}
 }
 
 void daala_fdst16(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[16];
   od_coeff y[16];
-  for (i = 0; i < 16; i++) x[i] = (od_coeff)input[i];
+  for (i = 0; i < 16; i++) { x[i] = (od_coeff)input[i];
+}
   od_bin_fdst16(y, x, 1);
-  for (i = 0; i < 16; i++) output[i] = (tran_low_t)y[i];
+  for (i = 0; i < 16; i++) { output[i] = (tran_low_t)y[i];
+}
 }
 
 void daala_idst16(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[16];
   od_coeff y[16];
-  for (i = 0; i < 16; i++) y[i] = (od_coeff)input[i];
+  for (i = 0; i < 16; i++) { y[i] = (od_coeff)input[i];
+}
   od_bin_idst16(x, 1, y);
-  for (i = 0; i < 16; i++) output[i] = (tran_low_t)x[i];
+  for (i = 0; i < 16; i++) { output[i] = (tran_low_t)x[i];
+}
 }
 
 void daala_idtx16(const tran_low_t *input, tran_low_t *output) {
   int i;
-  for (i = 0; i < 16; i++) output[i] = input[i];
+  for (i = 0; i < 16; i++) { output[i] = input[i];
+}
 }
 
 void daala_fdct32(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[32];
   od_coeff y[32];
-  for (i = 0; i < 32; i++) x[i] = (od_coeff)input[i];
+  for (i = 0; i < 32; i++) { x[i] = (od_coeff)input[i];
+}
   od_bin_fdct32(y, x, 1);
-  for (i = 0; i < 32; i++) output[i] = (tran_low_t)y[i];
+  for (i = 0; i < 32; i++) { output[i] = (tran_low_t)y[i];
+}
 }
 
 void daala_idct32(const tran_low_t *input, tran_low_t *output) {
   int i;
   od_coeff x[32];
   od_coeff y[32];
-  for (i = 0; i < 32; i++) y[i] = (od_coeff)input[i];
+  for (i = 0; i < 32; i++) { y[i] = (od_coeff)input[i];
+}
   od_bin_idct32(x, 1, y);
-  for (i = 0; i < 32; i++) output[i] = (tran_low_t)x[i];
+  for (i = 0; i < 32; i++) { output[i] = (tran_low_t)x[i];
+}
 }
 
 /* Preserve the "half-right" transform behavior. */
@@ -4276,7 +4307,8 @@ void daala_idst32(const tran_low_t *input, tran_low_t *output) {
 
 void daala_idtx32(const tran_low_t *input, tran_low_t *output) {
   int i;
-  for (i = 0; i < 32; i++) output[i] = input[i];
+  for (i = 0; i < 32; i++) { output[i] = input[i];
+}
 }
 
 #if CONFIG_TX64X64

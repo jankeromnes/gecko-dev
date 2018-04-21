@@ -23,15 +23,17 @@ static ECPointEncoding pk11_ECGetPubkeyEncoding(const SECKEYPublicKey *pubKey);
 static void
 pk11_EnterKeyMonitor(PK11SymKey *symKey)
 {
-    if (!symKey->sessionOwner || !(symKey->slot->isThreadSafe))
+    if (!symKey->sessionOwner || !(symKey->slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(symKey->slot);
+}
 }
 
 static void
 pk11_ExitKeyMonitor(PK11SymKey *symKey)
 {
-    if (!symKey->sessionOwner || !(symKey->slot->isThreadSafe))
+    if (!symKey->sessionOwner || !(symKey->slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(symKey->slot);
+}
 }
 
 /*
@@ -77,8 +79,9 @@ pk11_getKeyFromList(PK11SlotInfo *slot, PRBool needSession)
             symKey->session = pk11_GetNewSession(slot, &symKey->sessionOwner);
         }
         PORT_Assert(symKey->session != CK_INVALID_SESSION);
-        if (symKey->session != CK_INVALID_SESSION)
+        if (symKey->session != CK_INVALID_SESSION) {
             return symKey;
+}
         PK11_FreeSymKey(symKey);
         /* if we are here, we need a session, but couldn't get one, it's
          * unlikely we pk11_GetNewSession will succeed if we call it a second
@@ -365,12 +368,15 @@ PK11_GetWrapKey(PK11SlotInfo *slot, int wrap, CK_MECHANISM_TYPE type,
 {
     PK11SymKey *symKey = NULL;
 
-    if (slot->series != series)
+    if (slot->series != series) {
         return NULL;
-    if (slot->refKeys[wrap] == CK_INVALID_HANDLE)
+}
+    if (slot->refKeys[wrap] == CK_INVALID_HANDLE) {
         return NULL;
-    if (type == CKM_INVALID_MECHANISM)
+}
+    if (type == CKM_INVALID_MECHANISM) {
         type = slot->wrapMechanism;
+}
 
     symKey = PK11_SymKeyFromHandle(slot, NULL, PK11_OriginDerive,
                                    slot->wrapMechanism, slot->refKeys[wrap], PR_FALSE, wincx);
@@ -700,8 +706,9 @@ PK11_GetKeyLength(PK11SymKey *key)
 {
     CK_KEY_TYPE keyType;
 
-    if (key->size != 0)
+    if (key->size != 0) {
         return key->size;
+}
 
     /* First try to figure out the key length from its type */
     keyType = PK11_ReadULongAttribute(key->slot, key->objectID, CKA_KEY_TYPE);
@@ -711,8 +718,9 @@ PK11_GetKeyLength(PK11SymKey *key)
         key->size = 48;
     }
 
-    if (key->size != 0)
+    if (key->size != 0) {
         return key->size;
+}
 
     if (key->data.data == NULL) {
         PK11_ExtractKeyValue(key);
@@ -1109,8 +1117,9 @@ PK11_KeyGenWithTemplate(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
     } else {
         symKey = pk11_CreateSymKey(slot, type, !isToken, PR_TRUE, wincx);
     }
-    if (symKey == NULL)
+    if (symKey == NULL) {
         return NULL;
+}
 
     symKey->size = keySize;
     symKey->origin = PK11_OriginGenerated;
@@ -1132,8 +1141,9 @@ PK11_KeyGenWithTemplate(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
         symKey->owner = PR_FALSE;
     } else {
         session = symKey->session;
-        if (session != CK_INVALID_SESSION)
+        if (session != CK_INVALID_SESSION) {
             pk11_EnterKeyMonitor(symKey);
+}
     }
     if (session == CK_INVALID_SESSION) {
         PK11_FreeSymKey(symKey);
@@ -1246,12 +1256,14 @@ PK11_PubWrapSymKey(CK_MECHANISM_TYPE type, SECKEYPublicKey *pubKey,
     }
 
     session = pk11_GetNewSession(slot, &owner);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_WrapKey(session, &mechanism,
                                        id, symKey->objectID, wrappedKey->data, &len);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     if (newKey) {
         PK11_FreeSymKey(newKey);
@@ -1292,13 +1304,15 @@ pk11_HandWrap(PK11SymKey *wrappingKey, SECItem *param, CK_MECHANISM_TYPE type,
         mech.ulParameterLen = 0;
     }
     session = pk11_GetNewSession(slot, &owner);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_EncryptInit(session, &mech,
                                            wrappingKey->objectID);
     if (crv != CKR_OK) {
-        if (!owner || !(slot->isThreadSafe))
+        if (!owner || !(slot->isThreadSafe)) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(PK11_MapError(crv));
         return SECFailure;
@@ -1308,8 +1322,9 @@ pk11_HandWrap(PK11SymKey *wrappingKey, SECItem *param, CK_MECHANISM_TYPE type,
      * we've gone above and beyond anyway... */
     data = PK11_BlockData(inKey, PK11_GetBlockSize(type, param));
     if (data == NULL) {
-        if (!owner || !(slot->isThreadSafe))
+        if (!owner || !(slot->isThreadSafe)) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_SetError(SEC_ERROR_NO_MEMORY);
         return SECFailure;
@@ -1317,8 +1332,9 @@ pk11_HandWrap(PK11SymKey *wrappingKey, SECItem *param, CK_MECHANISM_TYPE type,
     len = outKey->len;
     crv = PK11_GETTAB(slot)->C_Encrypt(session, data->data, data->len,
                                        outKey->data, &len);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     SECITEM_FreeItem(data, PR_TRUE);
     outKey->len = len;
@@ -1374,8 +1390,9 @@ PK11_WrapSymKey(CK_MECHANISM_TYPE type, SECItem *param,
                 }
                 rv = pk11_HandWrap(wrappingKey, param, type,
                                    &symKey->data, wrappedKey);
-                if (param_save)
+                if (param_save) {
                     SECITEM_FreeItem(param_save, PR_TRUE);
+}
                 return rv;
             }
             /* we successfully moved the sym Key */
@@ -1404,13 +1421,15 @@ PK11_WrapSymKey(CK_MECHANISM_TYPE type, SECItem *param,
     len = wrappedKey->len;
 
     session = pk11_GetNewSession(slot, &owner);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_WrapKey(session, &mechanism,
                                        wrappingKey->objectID, symKey->objectID,
                                        wrappedKey->data, &len);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     rv = SECSuccess;
     if (crv != CKR_OK) {
@@ -1418,8 +1437,9 @@ PK11_WrapSymKey(CK_MECHANISM_TYPE type, SECItem *param,
         do {
             if (symKey->data.data == NULL) {
                 rv = PK11_ExtractKeyValue(symKey);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
             }
             rv = pk11_HandWrap(wrappingKey, param, type, &symKey->data,
                                wrappedKey);
@@ -1427,10 +1447,12 @@ PK11_WrapSymKey(CK_MECHANISM_TYPE type, SECItem *param,
     } else {
         wrappedKey->len = len;
     }
-    if (newKey)
+    if (newKey) {
         PK11_FreeSymKey(newKey);
-    if (param_save)
+}
+    if (param_save) {
         SECITEM_FreeItem(param_save, PR_TRUE);
+}
     return rv;
 }
 
@@ -1545,14 +1567,16 @@ PK11_DeriveWithTemplate(PK11SymKey *baseKey, CK_MECHANISM_TYPE derive,
         /* get a new base key & slot */
         PK11SlotInfo *newSlot = PK11_GetBestSlot(derive, baseKey->cx);
 
-        if (newSlot == NULL)
+        if (newSlot == NULL) {
             return NULL;
+}
 
         newBaseKey = pk11_CopyToSlot(newSlot, derive, CKA_DERIVE,
                                      baseKey);
         PK11_FreeSlot(newSlot);
-        if (newBaseKey == NULL)
+        if (newBaseKey == NULL) {
             return NULL;
+}
         baseKey = newBaseKey;
         slot = baseKey->slot;
     }
@@ -1582,8 +1606,9 @@ PK11_DeriveWithTemplate(PK11SymKey *baseKey, CK_MECHANISM_TYPE derive,
         session = symKey->session;
     }
     if (session == CK_INVALID_SESSION) {
-        if (!isPerm)
+        if (!isPerm) {
             pk11_ExitKeyMonitor(symKey);
+}
         crv = CKR_SESSION_HANDLE_INVALID;
     } else {
         crv = PK11_GETTAB(slot)->C_DeriveKey(session, &mechanism,
@@ -1594,8 +1619,9 @@ PK11_DeriveWithTemplate(PK11SymKey *baseKey, CK_MECHANISM_TYPE derive,
             pk11_ExitKeyMonitor(symKey);
         }
     }
-    if (newBaseKey)
+    if (newBaseKey) {
         PK11_FreeSymKey(newBaseKey);
+}
     if (crv != CKR_OK) {
         PK11_FreeSymKey(symKey);
         return NULL;
@@ -1725,13 +1751,15 @@ pk11_ANSIX963Derive(PK11SymKey *sharedSecret,
     }
 
     maxCounter = derivedKeySize / HashLen;
-    if (derivedKeySize > maxCounter * HashLen)
+    if (derivedKeySize > maxCounter * HashLen) {
         maxCounter++;
+}
 
-    if ((sharedData == NULL) || (sharedData->data == NULL))
+    if ((sharedData == NULL) || (sharedData->data == NULL)) {
         SharedInfoLen = 0;
-    else
+    } else {
         SharedInfoLen = sharedData->len;
+}
 
     bufferLen = SharedInfoLen + 4;
 
@@ -1826,16 +1854,19 @@ pk11_ANSIX963Derive(PK11SymKey *sharedSecret,
     }
 
     PORT_ZFree(buffer, bufferLen);
-    if (newSharedSecret != NULL)
+    if (newSharedSecret != NULL) {
         PK11_FreeSymKey(newSharedSecret);
+}
     return intermediateResult;
 
 loser:
     PORT_ZFree(buffer, bufferLen);
-    if (newSharedSecret != NULL)
+    if (newSharedSecret != NULL) {
         PK11_FreeSymKey(newSharedSecret);
-    if (intermediateResult != NULL)
+}
+    if (intermediateResult != NULL) {
         PK11_FreeSymKey(intermediateResult);
+}
     return NULL;
 }
 
@@ -1880,8 +1911,9 @@ PK11_PubDerive(SECKEYPrivateKey *privKey, SECKEYPublicKey *pubKey,
             param.pRandomA = randomA->data;
             param.pRandomB = rb_email;
             param.pRandomB[127] = 1;
-            if (randomB)
+            if (randomB) {
                 param.pRandomB = randomB->data;
+}
             if (pubKey->keyType == fortezzaKey) {
                 param.ulPublicDataLen = pubKey->u.fortezza.KEAKey.len;
                 param.pPublicData = pubKey->u.fortezza.KEAKey.data;
@@ -1902,8 +1934,9 @@ PK11_PubDerive(SECKEYPrivateKey *privKey, SECKEYPublicKey *pubKey,
                                                  privKey->pkcs11ID, NULL, 0,
                                                  &symKey->objectID);
             pk11_ExitKeyMonitor(symKey);
-            if (crv == CKR_OK)
+            if (crv == CKR_OK) {
                 return symKey;
+}
             PORT_SetError(PK11_MapError(crv));
         } break;
         case dhKey: {
@@ -1934,8 +1967,9 @@ PK11_PubDerive(SECKEYPrivateKey *privKey, SECKEYPublicKey *pubKey,
             keyType = PK11_GetKeyType(target, keySize);
             key_size = keySize;
             symKey->size = keySize;
-            if (key_size == 0)
+            if (key_size == 0) {
                 templateCount--;
+}
 
             mechanism.mechanism = derive;
 
@@ -1949,8 +1983,9 @@ PK11_PubDerive(SECKEYPrivateKey *privKey, SECKEYPublicKey *pubKey,
                                                  privKey->pkcs11ID, keyTemplate,
                                                  templateCount, &symKey->objectID);
             pk11_ExitKeyMonitor(symKey);
-            if (crv == CKR_OK)
+            if (crv == CKR_OK) {
                 return symKey;
+}
             PORT_SetError(PK11_MapError(crv));
         } break;
         case ecKey: {
@@ -2033,8 +2068,9 @@ PK11_PubDerive(SECKEYPrivateKey *privKey, SECKEYPublicKey *pubKey,
 
             PORT_ZFree(mechParams, sizeof(CK_ECDH1_DERIVE_PARAMS));
 
-            if (crv == CKR_OK)
+            if (crv == CKR_OK) {
                 return symKey;
+}
             PORT_SetError(PK11_MapError(crv));
         }
     }
@@ -2363,37 +2399,43 @@ pk11_HandUnwrap(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
     outKey.data = (unsigned char *)PORT_Alloc(inKey->len);
     if (outKey.data == NULL) {
         PORT_SetError(SEC_ERROR_NO_MEMORY);
-        if (crvp)
+        if (crvp) {
             *crvp = CKR_HOST_MEMORY;
+}
         return NULL;
     }
     len = inKey->len;
 
     /* use NULL IV's for wrapping */
     session = pk11_GetNewSession(slot, &owner);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_EnterSlotMonitor(slot);
+}
     crv = PK11_GETTAB(slot)->C_DecryptInit(session, mech, wrappingKey);
     if (crv != CKR_OK) {
-        if (!owner || !(slot->isThreadSafe))
+        if (!owner || !(slot->isThreadSafe)) {
             PK11_ExitSlotMonitor(slot);
+}
         pk11_CloseSession(slot, session, owner);
         PORT_Free(outKey.data);
         PORT_SetError(PK11_MapError(crv));
-        if (crvp)
+        if (crvp) {
             *crvp = crv;
+}
         return NULL;
     }
     crv = PK11_GETTAB(slot)->C_Decrypt(session, inKey->data, inKey->len,
                                        outKey.data, &len);
-    if (!owner || !(slot->isThreadSafe))
+    if (!owner || !(slot->isThreadSafe)) {
         PK11_ExitSlotMonitor(slot);
+}
     pk11_CloseSession(slot, session, owner);
     if (crv != CKR_OK) {
         PORT_Free(outKey.data);
         PORT_SetError(PK11_MapError(crv));
-        if (crvp)
+        if (crvp) {
             *crvp = crv;
+}
         return NULL;
     }
 
@@ -2409,8 +2451,9 @@ pk11_HandUnwrap(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
         if (slot == NULL) {
             PORT_SetError(SEC_ERROR_NO_MODULE);
             PORT_Free(outKey.data);
-            if (crvp)
+            if (crvp) {
                 *crvp = CKR_DEVICE_ERROR;
+}
             return NULL;
         }
         symKey = pk11_ImportSymKeyWithTempl(slot, target, PK11_OriginUnwrap,
@@ -2420,8 +2463,9 @@ pk11_HandUnwrap(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
     }
     PORT_Free(outKey.data);
 
-    if (crvp)
+    if (crvp) {
         *crvp = symKey ? CKR_OK : CKR_DEVICE_ERROR;
+}
     return symKey;
 }
 
@@ -2498,12 +2542,14 @@ pk11_AnyUnwrapKey(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
     if ((wrapType == CKM_RSA_PKCS) && (slot->hasRSAInfo)) {
         mechanism_info.flags = slot->RSAInfoFlags;
     } else {
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_EnterSlotMonitor(slot);
+}
         crv = PK11_GETTAB(slot)->C_GetMechanismInfo(slot->slotID, wrapType,
                                                     &mechanism_info);
-        if (!slot->isThreadSafe)
+        if (!slot->isThreadSafe) {
             PK11_ExitSlotMonitor(slot);
+}
         if (crv != CKR_OK) {
             mechanism_info.flags = 0;
         }
@@ -2516,8 +2562,9 @@ pk11_AnyUnwrapKey(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
     /* initialize the mechanism structure */
     mechanism.mechanism = wrapType;
     /* use NULL IV's for wrapping */
-    if (param == NULL)
+    if (param == NULL) {
         param = param_free = PK11_ParamFromIV(wrapType, NULL);
+}
     if (param) {
         mechanism.pParameter = param->data;
         mechanism.ulParameterLen = param->len;
@@ -2531,8 +2578,9 @@ pk11_AnyUnwrapKey(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
                                  target, keyTemplate, templateCount, keySize,
                                  wincx, &crv, isPerm);
         if (symKey) {
-            if (param_free)
+            if (param_free) {
                 SECITEM_FreeItem(param_free, PR_TRUE);
+}
             return symKey;
         }
         /*
@@ -2540,8 +2588,9 @@ pk11_AnyUnwrapKey(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
          * with this module.
          */
         if (crv == CKR_DEVICE_ERROR) {
-            if (param_free)
+            if (param_free) {
                 SECITEM_FreeItem(param_free, PR_TRUE);
+}
             return NULL;
         }
         /* fall through, maybe they incorrectly set CKF_DECRYPT */
@@ -2550,8 +2599,9 @@ pk11_AnyUnwrapKey(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
     /* get our key Structure */
     symKey = pk11_CreateSymKey(slot, target, !isPerm, PR_TRUE, wincx);
     if (symKey == NULL) {
-        if (param_free)
+        if (param_free) {
             SECITEM_FreeItem(param_free, PR_TRUE);
+}
         return NULL;
     }
 
@@ -2565,21 +2615,24 @@ pk11_AnyUnwrapKey(PK11SlotInfo *slot, CK_OBJECT_HANDLE wrappingKey,
         rwsession = symKey->session;
     }
     PORT_Assert(rwsession != CK_INVALID_SESSION);
-    if (rwsession == CK_INVALID_SESSION)
+    if (rwsession == CK_INVALID_SESSION) {
         crv = CKR_SESSION_HANDLE_INVALID;
-    else
+    } else {
         crv = PK11_GETTAB(slot)->C_UnwrapKey(rwsession, &mechanism, wrappingKey,
                                              wrappedKey->data, wrappedKey->len,
                                              keyTemplate, templateCount,
                                              &symKey->objectID);
+}
     if (isPerm) {
-        if (rwsession != CK_INVALID_SESSION)
+        if (rwsession != CK_INVALID_SESSION) {
             PK11_RestoreROSession(slot, rwsession);
+}
     } else {
         pk11_ExitKeyMonitor(symKey);
     }
-    if (param_free)
+    if (param_free) {
         SECITEM_FreeItem(param_free, PR_TRUE);
+}
     if (crv != CKR_OK) {
         PK11_FreeSymKey(symKey);
         symKey = NULL;

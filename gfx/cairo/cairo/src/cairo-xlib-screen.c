@@ -68,17 +68,21 @@ parse_boolean (const char *v)
     char c0, c1;
 
     c0 = *v;
-    if (c0 == 't' || c0 == 'T' || c0 == 'y' || c0 == 'Y' || c0 == '1')
+    if (c0 == 't' || c0 == 'T' || c0 == 'y' || c0 == 'Y' || c0 == '1') {
 	return 1;
-    if (c0 == 'f' || c0 == 'F' || c0 == 'n' || c0 == 'N' || c0 == '0')
+}
+    if (c0 == 'f' || c0 == 'F' || c0 == 'n' || c0 == 'N' || c0 == '0') {
 	return 0;
+}
     if (c0 == 'o')
     {
 	c1 = v[1];
-	if (c1 == 'n' || c1 == 'N')
+	if (c1 == 'n' || c1 == 'N') {
 	    return 1;
-	if (c1 == 'f' || c1 == 'F')
+}
+	if (c1 == 'f' || c1 == 'F') {
 	    return 0;
+}
     }
 
     return -1;
@@ -114,13 +118,15 @@ get_integer_default (Display    *dpy,
     v = XGetDefault (dpy, "Xft", option);
     if (v) {
 #if CAIRO_HAS_FC_FONT
-	if (FcNameConstant ((FcChar8 *) v, value))
+	if (FcNameConstant ((FcChar8 *) v, value)) {
 	    return TRUE;
+}
 #endif
 
 	*value = strtol (v, &e, 0);
-	if (e != v)
+	if (e != v) {
 	    return TRUE;
+}
     }
 
     return FALSE;
@@ -140,8 +146,9 @@ _cairo_xlib_init_screen_font_options (Display *dpy,
     cairo_lcd_filter_t lcd_filter;
     cairo_hint_style_t hint_style;
 
-    if (!get_boolean_default (dpy, "antialias", &xft_antialias))
+    if (!get_boolean_default (dpy, "antialias", &xft_antialias)) {
 	xft_antialias = TRUE;
+}
 
     if (!get_integer_default (dpy, "lcdfilter", &xft_lcdfilter)) {
 	/* -1 is an non-existant Fontconfig constant used to differentiate
@@ -150,11 +157,13 @@ _cairo_xlib_init_screen_font_options (Display *dpy,
 	xft_lcdfilter = -1;
     }
 
-    if (!get_boolean_default (dpy, "hinting", &xft_hinting))
+    if (!get_boolean_default (dpy, "hinting", &xft_hinting)) {
 	xft_hinting = TRUE;
+}
 
-    if (!get_integer_default (dpy, "hintstyle", &xft_hintstyle))
+    if (!get_integer_default (dpy, "hintstyle", &xft_hintstyle)) {
 	xft_hintstyle = FC_HINT_FULL;
+}
 
     if (!get_integer_default (dpy, "rgba", &xft_rgba))
     {
@@ -251,10 +260,11 @@ _cairo_xlib_init_screen_font_options (Display *dpy,
     }
 
     if (xft_antialias) {
-	if (subpixel_order == CAIRO_SUBPIXEL_ORDER_DEFAULT)
+	if (subpixel_order == CAIRO_SUBPIXEL_ORDER_DEFAULT) {
 	    antialias = CAIRO_ANTIALIAS_GRAY;
-	else
+	} else {
 	    antialias = CAIRO_ANTIALIAS_SUBPIXEL;
+}
     } else {
 	antialias = CAIRO_ANTIALIAS_NONE;
     }
@@ -276,8 +286,9 @@ _cairo_xlib_screen_close_display (cairo_xlib_display_t *display,
     dpy = display->display;
 
     for (i = 0; i < ARRAY_LENGTH (info->gc); i++) {
-	if ((info->gc_depths >> (8*i)) & 0xff)
+	if ((info->gc_depths >> (8*i)) & 0xff) {
 	    XFreeGC (dpy, info->gc[i]);
+}
     }
     info->gc_depths = 0;
 }
@@ -308,12 +319,14 @@ _cairo_xlib_screen_get (Display *dpy,
 
     device = _cairo_xlib_device_create (dpy);
     status = device->status;
-    if (unlikely (status))
+    if (unlikely (status)) {
         goto CLEANUP_DEVICE;
+}
 
     status =  _cairo_xlib_display_acquire (device, &display);
-    if (unlikely (status))
+    if (unlikely (status)) {
         goto CLEANUP_DEVICE;
+}
 
     info = _cairo_xlib_display_get_screen (display, screen);
     if (info != NULL) {
@@ -385,8 +398,9 @@ _cairo_xlib_screen_put_gc (cairo_xlib_display_t *display,
     int i;
 
     for (i = 0; i < ARRAY_LENGTH (info->gc); i++) {
-	if (((info->gc_depths >> (8*i)) & 0xff) == 0)
+	if (((info->gc_depths >> (8*i)) & 0xff) == 0) {
 	    break;
+}
     }
 
     if (i == ARRAY_LENGTH (info->gc)) {
@@ -434,8 +448,9 @@ _cairo_xlib_screen_get_visual_info (cairo_xlib_display_t *display,
 					     XScreenNumberOfScreen (info->screen),
 					     v->visualid,
 					     &visual);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     cairo_list_add (&visual->link, &info->visuals);
     *out = visual;

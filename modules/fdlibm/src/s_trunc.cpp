@@ -43,19 +43,23 @@ trunc(double x)
 		}
 	    } else {
 		i = (0x000fffff)>>j0;
-		if(((i0&i)|i1)==0) return x; /* x is integral */
+		if(((i0&i)|i1)==0) { return x; /* x is integral */
+}
 		if(huge+x>0.0) {	/* raise inexact flag */
 		    i0 &= (~i); i1=0;
 		}
 	    }
 	} else if (j0>51) {
-	    if(j0==0x400) return x+x;	/* inf or NaN */
-	    else return x;		/* x is integral */
+	    if(j0==0x400) { return x+x;	/* inf or NaN */
+	    } else { return x;		/* x is integral */
+}
 	} else {
 	    i = ((u_int32_t)(0xffffffff))>>(j0-20);
-	    if((i1&i)==0) return x;	/* x is integral */
-	    if(huge+x>0.0)		/* raise inexact flag */
+	    if((i1&i)==0) { return x;	/* x is integral */
+}
+	    if(huge+x>0.0) {		/* raise inexact flag */
 		i1 &= (~i);
+}
 	}
 	INSERT_WORDS(x,i0,i1);
 	return x;

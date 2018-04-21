@@ -197,8 +197,9 @@ PR_IMPLEMENT(PRTraceHandle)
     PRBool  matchQname = PR_FALSE;
 
     /* Self initialize, if necessary */
-    if ( traceLock == NULL )
+    if ( traceLock == NULL ) {
         _PR_InitializeTrace();
+}
 
     /* Validate input arguments */
     PR_ASSERT( strlen(qName) <= PRTRACE_NAME_MAX );
@@ -342,8 +343,9 @@ PR_IMPLEMENT(void)
     PRInt32         mark;
 
     if ( (traceState == Suspended ) 
-        || ( ((RName *)handle)->state == Suspended )) 
+        || ( ((RName *)handle)->state == Suspended )) { 
         return;
+}
 
     /*
     ** Get the next trace entry slot w/ minimum delay
@@ -351,10 +353,12 @@ PR_IMPLEMENT(void)
     PR_Lock( traceLock );
 
     tep = &tBuf[next++]; 
-    if ( next > last )
+    if ( next > last ) {
         next = 0;
-    if ( fetchLostData == PR_FALSE && next == fetchLastSeen )
+}
+    if ( fetchLostData == PR_FALSE && next == fetchLastSeen ) {
         fetchLostData = PR_TRUE;
+}
     
     mark = next;
         
@@ -458,8 +462,9 @@ PR_IMPLEMENT(void)
         case PRTraceResumeRecording :
             PR_LOG( lm, PR_LOG_DEBUG,
                 ("PRSetTraceOption: PRTraceResumeRecording"));
-            if ( logState != LogSuspend )
+            if ( logState != LogSuspend ) {
                 break;
+}
             PR_Lock( logLock );
             logOrder = LogResume;
             PR_NotifyCondVar( logCVar );
@@ -596,14 +601,15 @@ PR_IMPLEMENT(PRTraceHandle)
 {
     QName *qnp = (QName *)handle;
 
-    if ( PR_CLIST_IS_EMPTY( &qNameList ))
+    if ( PR_CLIST_IS_EMPTY( &qNameList )) {
             qnp = NULL;
-    else if ( qnp == NULL )
+    } else if ( qnp == NULL ) {
         qnp = (QName *)PR_LIST_HEAD( &qNameList );
-    else if ( PR_NEXT_LINK( &qnp->link ) ==  &qNameList )
+    } else if ( PR_NEXT_LINK( &qnp->link ) ==  &qNameList ) {
         qnp = NULL;
-    else  
+    } else {  
         qnp = (QName *)PR_NEXT_LINK( &qnp->link );
+}
 
     PR_LOG( lm, PR_LOG_DEBUG, ("PRTrace: FindNextQname: Handle: %p, Returns: %p", 
         handle, qnp ));
@@ -624,14 +630,15 @@ PR_IMPLEMENT(PRTraceHandle)
     QName *qnp = (QName *)qhandle;
 
 
-    if ( PR_CLIST_IS_EMPTY( &qnp->rNameList ))
+    if ( PR_CLIST_IS_EMPTY( &qnp->rNameList )) {
         rnp = NULL;
-    else if ( rnp == NULL )
+    } else if ( rnp == NULL ) {
         rnp = (RName *)PR_LIST_HEAD( &qnp->rNameList );
-    else if ( PR_NEXT_LINK( &rnp->link ) ==  &qnp->rNameList )
+    } else if ( PR_NEXT_LINK( &rnp->link ) ==  &qnp->rNameList ) {
         rnp = NULL;
-    else
+    } else {
         rnp = (RName *)PR_NEXT_LINK( &rnp->link );
+}
 
     PR_LOG( lm, PR_LOG_DEBUG, ("PRTrace: FindNextRname: Rhandle: %p, QHandle: %p, Returns: %p", 
         rhandle, qhandle, rnp ));
@@ -648,8 +655,9 @@ static PRFileDesc * InitializeRecording( void )
     PRFileDesc  *logFile;
 
     /* Self initialize, if necessary */
-    if ( traceLock == NULL )
+    if ( traceLock == NULL ) {
         _PR_InitializeTrace();
+}
 
     PR_LOG( lm, PR_LOG_DEBUG,
         ("PR_RecordTraceEntries: begins"));
@@ -729,15 +737,16 @@ static void WriteTraceSegment( PRFileDesc *logFile, void *buf, PRInt32 amount )
     PR_LOG( lm, PR_LOG_ERROR,
         ("WriteTraceSegment: Buffer: %p, Amount: %ld", buf, amount));
     rc = PR_Write( logFile, buf , amount );
-    if ( rc == -1 )
+    if ( rc == -1 ) {
         PR_LOG( lm, PR_LOG_ERROR,
             ("RecordTraceEntries: PR_Write() failed. Error: %ld", PR_GetError() ));
-    else if ( rc != amount )
+    } else if ( rc != amount ) {
         PR_LOG( lm, PR_LOG_ERROR,
             ("RecordTraceEntries: PR_Write() Tried to write: %ld, Wrote: %ld", amount, rc));
-    else 
+    } else { 
         PR_LOG( lm, PR_LOG_DEBUG,
             ("RecordTraceEntries: PR_Write(): Buffer: %p, bytes: %ld", buf, amount));
+}
 
     return;
 } /* end WriteTraceSegment() */
@@ -770,12 +779,14 @@ PR_IMPLEMENT(void)
 
         PR_Lock( logLock );
 
-        while ( (logCount == 0) && ( logOrder == logState ) )
+        while ( (logCount == 0) && ( logOrder == logState ) ) {
             PR_WaitCondVar( logCVar, PR_INTERVAL_NO_TIMEOUT );
+}
 
         /* Handle state transitions */
-        if ( logOrder != logState )
+        if ( logOrder != logState ) {
             ProcessOrders();
+}
 
         /* recalculate local controls */
         if ( logCount )
@@ -795,22 +806,25 @@ PR_IMPLEMENT(void)
             }
 
             buf = tBuf + ( logEntriesPerSegment * currentSegment );
-            if (++currentSegment >= logSegments )
+            if (++currentSegment >= logSegments ) {
                 currentSegment = 0;
+}
             doWrite = PR_TRUE;
         }
-        else
+        else {
             doWrite = PR_FALSE;
+}
 
         PR_Unlock( logLock );
 
         if ( doWrite == PR_TRUE )
         {
-            if ( localState != LogSuspend )
+            if ( localState != LogSuspend ) {
                 WriteTraceSegment( logFile, buf, logSegSize );
-            else
+            } else {
                 PR_LOG( lm, PR_LOG_DEBUG,
                     ("RecordTraceEntries: PR_Write(): is suspended" ));
+}
         }
 
     } /* end while(logState...) */

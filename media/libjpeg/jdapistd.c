@@ -59,14 +59,17 @@ jpeg_start_decompress (j_decompress_ptr cinfo)
       for (;;) {
         int retcode;
         /* Call progress monitor hook if present */
-        if (cinfo->progress != NULL)
+        if (cinfo->progress != NULL) {
           (*cinfo->progress->progress_monitor) ((j_common_ptr) cinfo);
+}
         /* Absorb some more input */
         retcode = (*cinfo->inputctl->consume_input) (cinfo);
-        if (retcode == JPEG_SUSPENDED)
+        if (retcode == JPEG_SUSPENDED) {
           return FALSE;
-        if (retcode == JPEG_REACHED_EOI)
+}
+        if (retcode == JPEG_REACHED_EOI) {
           break;
+}
         /* Advance progress counter if appropriate */
         if (cinfo->progress != NULL &&
             (retcode == JPEG_ROW_COMPLETED || retcode == JPEG_REACHED_SOS)) {
@@ -81,8 +84,9 @@ jpeg_start_decompress (j_decompress_ptr cinfo)
 #endif /* D_MULTISCAN_FILES_SUPPORTED */
     }
     cinfo->output_scan_number = cinfo->input_scan_number;
-  } else if (cinfo->global_state != DSTATE_PRESCAN)
+  } else if (cinfo->global_state != DSTATE_PRESCAN) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
   /* Perform any dummy output passes, and set up for the final pass */
   return output_pass_setup(cinfo);
 }
@@ -121,8 +125,9 @@ output_pass_setup (j_decompress_ptr cinfo)
       last_scanline = cinfo->output_scanline;
       (*cinfo->main->process_data) (cinfo, (JSAMPARRAY) NULL,
                                     &cinfo->output_scanline, (JDIMENSION) 0);
-      if (cinfo->output_scanline == last_scanline)
+      if (cinfo->output_scanline == last_scanline) {
         return FALSE;           /* No progress made, must suspend */
+}
     }
     /* Finish up dummy pass, and set up for another one */
     (*cinfo->master->finish_output_pass) (cinfo);
@@ -158,19 +163,23 @@ jpeg_crop_scanline (j_decompress_ptr cinfo, JDIMENSION *xoffset,
   boolean reinit_upsampler = FALSE;
   jpeg_component_info *compptr;
 
-  if (cinfo->global_state != DSTATE_SCANNING || cinfo->output_scanline != 0)
+  if (cinfo->global_state != DSTATE_SCANNING || cinfo->output_scanline != 0) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
-  if (!xoffset || !width)
+  if (!xoffset || !width) {
     ERREXIT(cinfo, JERR_BAD_CROP_SPEC);
+}
 
   /* xoffset and width must fall within the output image dimensions. */
-  if (*width == 0 || *xoffset + *width > cinfo->output_width)
+  if (*width == 0 || *xoffset + *width > cinfo->output_width) {
     ERREXIT(cinfo, JERR_WIDTH_OVERFLOW);
+}
 
   /* No need to do anything if the caller wants the entire width. */
-  if (*width == cinfo->output_width)
+  if (*width == cinfo->output_width) {
     return;
+}
 
   /* Ensuring the proper alignment of xoffset is tricky.  At minimum, it
    * must align with an MCU boundary, because:
@@ -221,8 +230,9 @@ jpeg_crop_scanline (j_decompress_ptr cinfo, JDIMENSION *xoffset,
       (JDIMENSION) jdiv_round_up((long) (cinfo->output_width *
                                          compptr->h_samp_factor),
                                  (long) cinfo->max_h_samp_factor);
-    if (compptr->downsampled_width < 2 && orig_downsampled_width >= 2)
+    if (compptr->downsampled_width < 2 && orig_downsampled_width >= 2) {
       reinit_upsampler = TRUE;
+}
 
     /* Set the first and last iMCU columns that we must decompress.  These
      * values will be used in multi-scan decompressions.
@@ -263,8 +273,9 @@ jpeg_read_scanlines (j_decompress_ptr cinfo, JSAMPARRAY scanlines,
 {
   JDIMENSION row_ctr;
 
-  if (cinfo->global_state != DSTATE_SCANNING)
+  if (cinfo->global_state != DSTATE_SCANNING) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
   if (cinfo->output_scanline >= cinfo->output_height) {
     WARNMS(cinfo, JWRN_TOO_MUCH_DATA);
     return 0;
@@ -312,8 +323,9 @@ read_and_discard_scanlines (j_decompress_ptr cinfo, JDIMENSION num_lines)
   color_convert = cinfo->cconvert->color_convert;
   cinfo->cconvert->color_convert = noop_convert;
 
-  for (n = 0; n < num_lines; n++)
+  for (n = 0; n < num_lines; n++) {
     jpeg_read_scanlines(cinfo, NULL, 1);
+}
 
   cinfo->cconvert->color_convert = color_convert;
 }
@@ -364,8 +376,9 @@ jpeg_skip_scanlines (j_decompress_ptr cinfo, JDIMENSION num_lines)
   JDIMENSION lines_per_iMCU_row, lines_left_in_iMCU_row, lines_after_iMCU_row;
   JDIMENSION lines_to_skip, lines_to_read;
 
-  if (cinfo->global_state != DSTATE_SCANNING)
+  if (cinfo->global_state != DSTATE_SCANNING) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
   /* Do not skip past the bottom of the image. */
   if (cinfo->output_scanline + num_lines >= cinfo->output_height) {
@@ -373,8 +386,9 @@ jpeg_skip_scanlines (j_decompress_ptr cinfo, JDIMENSION num_lines)
     return cinfo->output_height - cinfo->output_scanline;
   }
 
-  if (num_lines == 0)
+  if (num_lines == 0) {
     return 0;
+}
 
   lines_per_iMCU_row = cinfo->_min_DCT_scaled_size * cinfo->max_v_samp_factor;
   lines_left_in_iMCU_row =
@@ -414,8 +428,9 @@ jpeg_skip_scanlines (j_decompress_ptr cinfo, JDIMENSION num_lines)
 
     /* If we have just completed the first block, adjust the buffer pointers */
     if (main_ptr->iMCU_row_ctr == 0 ||
-        (main_ptr->iMCU_row_ctr == 1 && lines_left_in_iMCU_row > 2))
+        (main_ptr->iMCU_row_ctr == 1 && lines_left_in_iMCU_row > 2)) {
       set_wraparound_pointers(cinfo);
+}
     main_ptr->buffer_full = FALSE;
     main_ptr->rowgroup_ctr = 0;
     main_ptr->context_state = CTX_PREPARE_FOR_IMCU;
@@ -438,12 +453,13 @@ jpeg_skip_scanlines (j_decompress_ptr cinfo, JDIMENSION num_lines)
   }
 
   /* Calculate how many full iMCU rows we can skip. */
-  if (cinfo->upsample->need_context_rows)
+  if (cinfo->upsample->need_context_rows) {
     lines_to_skip = ((lines_after_iMCU_row - 1) / lines_per_iMCU_row) *
                     lines_per_iMCU_row;
-  else
+  } else {
     lines_to_skip = (lines_after_iMCU_row / lines_per_iMCU_row) *
                     lines_per_iMCU_row;
+}
   /* Calculate the number of lines that remain to be skipped after skipping all
    * of the full iMCU rows that we can.  We will not read these lines unless we
    * have to.
@@ -485,10 +501,11 @@ jpeg_skip_scanlines (j_decompress_ptr cinfo, JDIMENSION num_lines)
     }
     cinfo->input_iMCU_row++;
     cinfo->output_iMCU_row++;
-    if (cinfo->input_iMCU_row < cinfo->total_iMCU_rows)
+    if (cinfo->input_iMCU_row < cinfo->total_iMCU_rows) {
       start_iMCU_row(cinfo);
-    else
+    } else {
       (*cinfo->inputctl->finish_input_pass) (cinfo);
+}
   }
   cinfo->output_scanline += lines_to_skip;
 
@@ -526,8 +543,9 @@ jpeg_read_raw_data (j_decompress_ptr cinfo, JSAMPIMAGE data,
 {
   JDIMENSION lines_per_iMCU_row;
 
-  if (cinfo->global_state != DSTATE_RAW_OK)
+  if (cinfo->global_state != DSTATE_RAW_OK) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
   if (cinfo->output_scanline >= cinfo->output_height) {
     WARNMS(cinfo, JWRN_TOO_MUCH_DATA);
     return 0;
@@ -542,12 +560,14 @@ jpeg_read_raw_data (j_decompress_ptr cinfo, JSAMPIMAGE data,
 
   /* Verify that at least one iMCU row can be returned. */
   lines_per_iMCU_row = cinfo->max_v_samp_factor * cinfo->_min_DCT_scaled_size;
-  if (max_lines < lines_per_iMCU_row)
+  if (max_lines < lines_per_iMCU_row) {
     ERREXIT(cinfo, JERR_BUFFER_SIZE);
+}
 
   /* Decompress directly into user's buffer. */
-  if (! (*cinfo->coef->decompress_data) (cinfo, data))
+  if (! (*cinfo->coef->decompress_data) (cinfo, data)) {
     return 0;                   /* suspension forced, can do nothing more */
+}
 
   /* OK, we processed one iMCU row. */
   cinfo->output_scanline += lines_per_iMCU_row;
@@ -567,14 +587,17 @@ GLOBAL(boolean)
 jpeg_start_output (j_decompress_ptr cinfo, int scan_number)
 {
   if (cinfo->global_state != DSTATE_BUFIMAGE &&
-      cinfo->global_state != DSTATE_PRESCAN)
+      cinfo->global_state != DSTATE_PRESCAN) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
   /* Limit scan number to valid range */
-  if (scan_number <= 0)
+  if (scan_number <= 0) {
     scan_number = 1;
+}
   if (cinfo->inputctl->eoi_reached &&
-      scan_number > cinfo->input_scan_number)
+      scan_number > cinfo->input_scan_number) {
     scan_number = cinfo->input_scan_number;
+}
   cinfo->output_scan_number = scan_number;
   /* Perform any dummy output passes, and set up for the real pass */
   return output_pass_setup(cinfo);
@@ -604,8 +627,9 @@ jpeg_finish_output (j_decompress_ptr cinfo)
   /* Read markers looking for SOS or EOI */
   while (cinfo->input_scan_number <= cinfo->output_scan_number &&
          ! cinfo->inputctl->eoi_reached) {
-    if ((*cinfo->inputctl->consume_input) (cinfo) == JPEG_SUSPENDED)
+    if ((*cinfo->inputctl->consume_input) (cinfo) == JPEG_SUSPENDED) {
       return FALSE;             /* Suspend, come back later */
+}
   }
   cinfo->global_state = DSTATE_BUFIMAGE;
   return TRUE;

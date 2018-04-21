@@ -36,20 +36,20 @@ aom_codec_err_t aom_codec_enc_init_ver(aom_codec_ctx_t *ctx,
                                        aom_codec_flags_t flags, int ver) {
   aom_codec_err_t res;
 
-  if (ver != AOM_ENCODER_ABI_VERSION)
+  if (ver != AOM_ENCODER_ABI_VERSION) {
     res = AOM_CODEC_ABI_MISMATCH;
-  else if (!ctx || !iface || !cfg)
+  } else if (!ctx || !iface || !cfg) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (iface->abi_version != AOM_CODEC_INTERNAL_ABI_VERSION)
+  } else if (iface->abi_version != AOM_CODEC_INTERNAL_ABI_VERSION) {
     res = AOM_CODEC_ABI_MISMATCH;
-  else if (!(iface->caps & AOM_CODEC_CAP_ENCODER))
+  } else if (!(iface->caps & AOM_CODEC_CAP_ENCODER)) {
     res = AOM_CODEC_INCAPABLE;
-  else if ((flags & AOM_CODEC_USE_PSNR) && !(iface->caps & AOM_CODEC_CAP_PSNR))
+  } else if ((flags & AOM_CODEC_USE_PSNR) && !(iface->caps & AOM_CODEC_CAP_PSNR)) {
     res = AOM_CODEC_INCAPABLE;
-  else if ((flags & AOM_CODEC_USE_OUTPUT_PARTITION) &&
-           !(iface->caps & AOM_CODEC_CAP_OUTPUT_PARTITION))
+  } else if ((flags & AOM_CODEC_USE_OUTPUT_PARTITION) &&
+           !(iface->caps & AOM_CODEC_CAP_OUTPUT_PARTITION)) {
     res = AOM_CODEC_INCAPABLE;
-  else {
+  } else {
     ctx->iface = iface;
     ctx->name = iface->name;
     ctx->priv = NULL;
@@ -71,20 +71,20 @@ aom_codec_err_t aom_codec_enc_init_multi_ver(
     int num_enc, aom_codec_flags_t flags, aom_rational_t *dsf, int ver) {
   aom_codec_err_t res = AOM_CODEC_OK;
 
-  if (ver != AOM_ENCODER_ABI_VERSION)
+  if (ver != AOM_ENCODER_ABI_VERSION) {
     res = AOM_CODEC_ABI_MISMATCH;
-  else if (!ctx || !iface || !cfg || (num_enc > 16 || num_enc < 1))
+  } else if (!ctx || !iface || !cfg || (num_enc > 16 || num_enc < 1)) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (iface->abi_version != AOM_CODEC_INTERNAL_ABI_VERSION)
+  } else if (iface->abi_version != AOM_CODEC_INTERNAL_ABI_VERSION) {
     res = AOM_CODEC_ABI_MISMATCH;
-  else if (!(iface->caps & AOM_CODEC_CAP_ENCODER))
+  } else if (!(iface->caps & AOM_CODEC_CAP_ENCODER)) {
     res = AOM_CODEC_INCAPABLE;
-  else if ((flags & AOM_CODEC_USE_PSNR) && !(iface->caps & AOM_CODEC_CAP_PSNR))
+  } else if ((flags & AOM_CODEC_USE_PSNR) && !(iface->caps & AOM_CODEC_CAP_PSNR)) {
     res = AOM_CODEC_INCAPABLE;
-  else if ((flags & AOM_CODEC_USE_OUTPUT_PARTITION) &&
-           !(iface->caps & AOM_CODEC_CAP_OUTPUT_PARTITION))
+  } else if ((flags & AOM_CODEC_USE_OUTPUT_PARTITION) &&
+           !(iface->caps & AOM_CODEC_CAP_OUTPUT_PARTITION)) {
     res = AOM_CODEC_INCAPABLE;
-  else {
+  } else {
     int i;
     void *mem_loc = NULL;
 
@@ -109,7 +109,8 @@ aom_codec_err_t aom_codec_enc_init_multi_ver(
          * resolution always use the same frame_type chosen by the
          * lowest-resolution encoder.
          */
-        if (mr_cfg.mr_encoder_id) cfg->kf_mode = AOM_KF_DISABLED;
+        if (mr_cfg.mr_encoder_id) { cfg->kf_mode = AOM_KF_DISABLED;
+}
 
         ctx->iface = iface;
         ctx->name = iface->name;
@@ -133,7 +134,8 @@ aom_codec_err_t aom_codec_enc_init_multi_ver(
           }
         }
 
-        if (res) break;
+        if (res) { break;
+}
 
         ctx++;
         cfg++;
@@ -153,11 +155,11 @@ aom_codec_err_t aom_codec_enc_config_default(aom_codec_iface_t *iface,
   aom_codec_enc_cfg_map_t *map;
   int i;
 
-  if (!iface || !cfg || usage > INT_MAX)
+  if (!iface || !cfg || usage > INT_MAX) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (!(iface->caps & AOM_CODEC_CAP_ENCODER))
+  } else if (!(iface->caps & AOM_CODEC_CAP_ENCODER)) {
     res = AOM_CODEC_INCAPABLE;
-  else {
+  } else {
     res = AOM_CODEC_INVALID_PARAM;
 
     for (i = 0; i < iface->enc.cfg_map_count; ++i) {
@@ -217,13 +219,13 @@ aom_codec_err_t aom_codec_encode(aom_codec_ctx_t *ctx, const aom_image_t *img,
                                  unsigned long deadline) {
   aom_codec_err_t res = AOM_CODEC_OK;
 
-  if (!ctx || (img && !duration))
+  if (!ctx || (img && !duration)) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv)
+  } else if (!ctx->iface || !ctx->priv) {
     res = AOM_CODEC_ERROR;
-  else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER))
+  } else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER)) {
     res = AOM_CODEC_INCAPABLE;
-  else {
+  } else {
     unsigned int num_enc = ctx->priv->enc.total_encoders;
 
     /* Execute in a normalized floating point environment, if the platform
@@ -231,10 +233,10 @@ aom_codec_err_t aom_codec_encode(aom_codec_ctx_t *ctx, const aom_image_t *img,
      */
     FLOATING_POINT_INIT
 
-    if (num_enc == 1)
+    if (num_enc == 1) {
       res = ctx->iface->enc.encode(get_alg_priv(ctx), img, pts, duration, flags,
                                    deadline);
-    else {
+    } else {
       /* Multi-resolution encoding:
        * Encode multi-levels in reverse order. For example,
        * if mr_total_resolutions = 3, first encode level 2,
@@ -243,15 +245,18 @@ aom_codec_err_t aom_codec_encode(aom_codec_ctx_t *ctx, const aom_image_t *img,
       int i;
 
       ctx += num_enc - 1;
-      if (img) img += num_enc - 1;
+      if (img) { img += num_enc - 1;
+}
 
       for (i = num_enc - 1; i >= 0; i--) {
         if ((res = ctx->iface->enc.encode(get_alg_priv(ctx), img, pts, duration,
-                                          flags, deadline)))
+                                          flags, deadline))) {
           break;
+}
 
         ctx--;
-        if (img) img--;
+        if (img) { img--;
+}
       }
       ctx++;
     }
@@ -267,14 +272,15 @@ const aom_codec_cx_pkt_t *aom_codec_get_cx_data(aom_codec_ctx_t *ctx,
   const aom_codec_cx_pkt_t *pkt = NULL;
 
   if (ctx) {
-    if (!iter)
+    if (!iter) {
       ctx->err = AOM_CODEC_INVALID_PARAM;
-    else if (!ctx->iface || !ctx->priv)
+    } else if (!ctx->iface || !ctx->priv) {
       ctx->err = AOM_CODEC_ERROR;
-    else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER))
+    } else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER)) {
       ctx->err = AOM_CODEC_INCAPABLE;
-    else
+    } else {
       pkt = ctx->iface->enc.get_cx_data(get_alg_priv(ctx), iter);
+}
   }
 
   if (pkt && pkt->kind == AOM_CODEC_CX_FRAME_PKT) {
@@ -312,7 +318,8 @@ aom_codec_err_t aom_codec_set_cx_data_buf(aom_codec_ctx_t *ctx,
                                           const aom_fixed_buf_t *buf,
                                           unsigned int pad_before,
                                           unsigned int pad_after) {
-  if (!ctx || !ctx->priv) return AOM_CODEC_INVALID_PARAM;
+  if (!ctx || !ctx->priv) { return AOM_CODEC_INVALID_PARAM;
+}
 
   if (buf) {
     ctx->priv->enc.cx_data_dst_buf = *buf;
@@ -332,14 +339,15 @@ const aom_image_t *aom_codec_get_preview_frame(aom_codec_ctx_t *ctx) {
   aom_image_t *img = NULL;
 
   if (ctx) {
-    if (!ctx->iface || !ctx->priv)
+    if (!ctx->iface || !ctx->priv) {
       ctx->err = AOM_CODEC_ERROR;
-    else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER))
+    } else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER)) {
       ctx->err = AOM_CODEC_INCAPABLE;
-    else if (!ctx->iface->enc.get_preview)
+    } else if (!ctx->iface->enc.get_preview) {
       ctx->err = AOM_CODEC_INCAPABLE;
-    else
+    } else {
       img = ctx->iface->enc.get_preview(get_alg_priv(ctx));
+}
   }
 
   return img;
@@ -349,14 +357,15 @@ aom_fixed_buf_t *aom_codec_get_global_headers(aom_codec_ctx_t *ctx) {
   aom_fixed_buf_t *buf = NULL;
 
   if (ctx) {
-    if (!ctx->iface || !ctx->priv)
+    if (!ctx->iface || !ctx->priv) {
       ctx->err = AOM_CODEC_ERROR;
-    else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER))
+    } else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER)) {
       ctx->err = AOM_CODEC_INCAPABLE;
-    else if (!ctx->iface->enc.get_glob_hdrs)
+    } else if (!ctx->iface->enc.get_glob_hdrs) {
       ctx->err = AOM_CODEC_INCAPABLE;
-    else
+    } else {
       buf = ctx->iface->enc.get_glob_hdrs(get_alg_priv(ctx));
+}
   }
 
   return buf;
@@ -366,12 +375,13 @@ aom_codec_err_t aom_codec_enc_config_set(aom_codec_ctx_t *ctx,
                                          const aom_codec_enc_cfg_t *cfg) {
   aom_codec_err_t res;
 
-  if (!ctx || !ctx->iface || !ctx->priv || !cfg)
+  if (!ctx || !ctx->iface || !ctx->priv || !cfg) {
     res = AOM_CODEC_INVALID_PARAM;
-  else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER))
+  } else if (!(ctx->iface->caps & AOM_CODEC_CAP_ENCODER)) {
     res = AOM_CODEC_INCAPABLE;
-  else
+  } else {
     res = ctx->iface->enc.cfg_set(get_alg_priv(ctx), cfg);
+}
 
   return SAVE_STATUS(ctx, res);
 }
@@ -396,10 +406,11 @@ const aom_codec_cx_pkt_t *aom_codec_pkt_list_get(
 
   pkt = (const aom_codec_cx_pkt_t *)*iter;
 
-  if ((size_t)(pkt - list->pkts) < list->cnt)
+  if ((size_t)(pkt - list->pkts) < list->cnt) {
     *iter = pkt + 1;
-  else
+  } else {
     pkt = NULL;
+}
 
   return pkt;
 }

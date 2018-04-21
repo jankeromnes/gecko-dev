@@ -203,8 +203,9 @@ bool DelayBasedBweTest::GenerateAndProcessFrame(uint32_t ssrc,
   std::vector<PacketInfo> packets;
   int64_t next_time_us =
       stream_generator_->GenerateFrame(&packets, clock_.TimeInMicroseconds());
-  if (packets.empty())
+  if (packets.empty()) {
     return false;
+}
 
   bool overuse = false;
   bitrate_observer_.Reset();
@@ -220,8 +221,9 @@ bool DelayBasedBweTest::GenerateAndProcessFrame(uint32_t ssrc,
   if (result.updated) {
     bitrate_observer_.OnReceiveBitrateChanged({kDummySsrc},
                                               result.target_bitrate_bps);
-    if (!first_update_ && result.target_bitrate_bps < bitrate_bps)
+    if (!first_update_ && result.target_bitrate_bps < bitrate_bps) {
       overuse = true;
+}
     first_update_ = false;
   }
 
@@ -424,8 +426,9 @@ void DelayBasedBweTest::CapacityDropTestHelper(
         bitrate_observer_.latest_bitrate() <= kReducedCapacityBps) {
       bitrate_drop_time = clock_.TimeInMilliseconds();
     }
-    if (bitrate_observer_.updated())
+    if (bitrate_observer_.updated()) {
       bitrate_bps = bitrate_observer_.latest_bitrate();
+}
   }
 
   EXPECT_NEAR(expected_bitrate_drop_delta,

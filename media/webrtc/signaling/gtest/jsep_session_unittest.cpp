@@ -300,8 +300,9 @@ protected:
         MOZ_CRASH();
       }
 
-      if (comma == std::string::npos)
+      if (comma == std::string::npos) {
         break;
+}
       ptr = comma + 1;
     }
 
@@ -1324,7 +1325,8 @@ protected:
                const char* searchStr,
                const char* replaceStr) const
   {
-    if (searchStr[0] == '\0') return;
+    if (searchStr[0] == '\0') { return;
+}
     size_t pos;
     while ((pos = sdp->find(searchStr)) != std::string::npos) {
       sdp->replace(pos, strlen(searchStr), replaceStr);
@@ -5476,8 +5478,9 @@ TEST_F(JsepSessionTest, RtcpFbInOffer)
   size_t found = 0;
   for(;;) {
     found = offer.find('\n', found + 1);
-    if (found == std::string::npos)
+    if (found == std::string::npos) {
       break;
+}
 
     std::string line = offer.substr(prev, (found - prev));
 

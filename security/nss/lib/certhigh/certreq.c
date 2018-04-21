@@ -75,28 +75,34 @@ CERT_CreateCertificate(unsigned long serialNumber,
      * If extensions are added, it will get changed as appropriate.
      */
     rv = DER_SetUInteger(arena, &c->version, SEC_CERTIFICATE_VERSION_1);
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
     rv = DER_SetUInteger(arena, &c->serialNumber, serialNumber);
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
     rv = CERT_CopyName(arena, &c->issuer, issuer);
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
     rv = CERT_CopyValidity(arena, &c->validity, validity);
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
     rv = CERT_CopyName(arena, &c->subject, &req->subject);
-    if (rv)
+    if (rv) {
         goto loser;
+}
     rv = SECKEY_CopySubjectPublicKeyInfo(arena, &c->subjectPublicKeyInfo,
                                          &req->subjectPublicKeyInfo);
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
     return c;
 
@@ -152,22 +158,26 @@ CERT_CreateCertificateRequest(CERTName *subject,
 
     rv = DER_SetUInteger(arena, &certreq->version,
                          SEC_CERTIFICATE_REQUEST_VERSION);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = CERT_CopyName(arena, &certreq->subject, subject);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = SECKEY_CopySubjectPublicKeyInfo(arena,
                                          &certreq->subjectPublicKeyInfo,
                                          spki);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     certreq->attributes = PORT_ArenaZNewArray(arena, CERTAttribute *, 2);
-    if (!certreq->attributes)
+    if (!certreq->attributes) {
         goto loser;
+}
 
     /* Copy over attribute information */
     if (!attributes || !attributes[0]) {
@@ -186,22 +196,27 @@ CERT_CreateCertificateRequest(CERTName *subject,
 
     /* allocate space for attributes */
     attribute = PORT_ArenaZNew(arena, CERTAttribute);
-    if (!attribute)
+    if (!attribute) {
         goto loser;
+}
 
     oidData = SECOID_FindOIDByTag(SEC_OID_PKCS9_EXTENSION_REQUEST);
     PORT_Assert(oidData);
-    if (!oidData)
+    if (!oidData) {
         goto loser;
+}
     rv = SECITEM_CopyItem(arena, &attribute->attrType, &oidData->oid);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
-    for (i = 0; attributes[i] != NULL; i++)
+    for (i = 0; attributes[i] != NULL; i++) {
         ;
+}
     attribute->attrValue = PORT_ArenaZNewArray(arena, SECItem *, i + 1);
-    if (!attribute->attrValue)
+    if (!attribute->attrValue) {
         goto loser;
+}
 
     /* copy attributes */
     for (i = 0; attributes[i]; i++) {
@@ -213,8 +228,9 @@ CERT_CreateCertificateRequest(CERTName *subject,
 	** example in the PKCS 7 code.
 	*/
         attribute->attrValue[i] = SECITEM_ArenaDupItem(arena, attributes[i]);
-        if (!attribute->attrValue[i])
+        if (!attribute->attrValue[i]) {
             goto loser;
+}
     }
 
     certreq->attributes[0] = attribute;
@@ -272,17 +288,20 @@ CERT_FinishCertificateRequestAttributes(CERTCertificateRequest *req)
         PORT_SetError(SEC_ERROR_INVALID_ARGS);
         return SECFailure;
     }
-    if (req->attributes == NULL || req->attributes[0] == NULL)
+    if (req->attributes == NULL || req->attributes[0] == NULL) {
         return SECSuccess;
+}
 
     extlist = SEC_ASN1EncodeItem(req->arena, NULL, &req->attributes,
                                  SEC_ASN1_GET(CERT_SequenceOfCertExtensionTemplate));
-    if (extlist == NULL)
+    if (extlist == NULL) {
         return (SECFailure);
+}
 
     oidrec = SECOID_FindOIDByTag(SEC_OID_PKCS9_EXTENSION_REQUEST);
-    if (oidrec == NULL)
+    if (oidrec == NULL) {
         return SECFailure;
+}
 
     /* now change the list of cert extensions into a list of attributes
      */
@@ -297,8 +316,9 @@ CERT_FinishCertificateRequestAttributes(CERTCertificateRequest *req)
     }
     attribute->attrValue = PORT_ArenaZNewArray(req->arena, SECItem *, 2);
 
-    if (attribute->attrValue == NULL)
+    if (attribute->attrValue == NULL) {
         return SECFailure;
+}
 
     attribute->attrValue[0] = extlist;
     attribute->attrValue[1] = NULL;
@@ -317,8 +337,9 @@ CERT_GetCertificateRequestExtensions(CERTCertificateRequest *req,
         return SECFailure;
     }
 
-    if (req->attributes == NULL || *req->attributes == NULL)
+    if (req->attributes == NULL || *req->attributes == NULL) {
         return SECSuccess;
+}
 
     if ((*req->attributes)->attrValue == NULL) {
         PORT_SetError(SEC_ERROR_INVALID_ARGS);

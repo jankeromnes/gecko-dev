@@ -123,26 +123,30 @@ Impl::~Impl()
     // happens if you close the group leader out from under a group).
     for (const auto& slot : kSlots) {
         int fd = this->*(slot.fd);
-        if (fd != -1 && fd != group_leader)
+        if (fd != -1 && fd != group_leader) {
             close(fd);
+}
     }
 
-    if (group_leader != -1)
+    if (group_leader != -1) {
         close(group_leader);
+}
 }
 
 EventMask
 Impl::init(EventMask toMeasure)
 {
     MOZ_ASSERT(group_leader == -1);
-    if (!toMeasure)
+    if (!toMeasure) {
         return EventMask(0);
+}
 
     EventMask measured = EventMask(0);
     struct perf_event_attr attr;
     for (const auto& slot : kSlots) {
-        if (!(toMeasure & slot.bit))
+        if (!(toMeasure & slot.bit)) {
             continue;
+}
 
         memset(&attr, 0, sizeof(attr));
         attr.size = sizeof(attr);
@@ -156,8 +160,9 @@ Impl::init(EventMask toMeasure)
         // If this will be the group leader it should start off
         // disabled.  Otherwise it should start off enabled (but blocked
         // on the group leader).
-        if (group_leader == -1)
+        if (group_leader == -1) {
             attr.disabled = 1;
+}
 
         // The rest of the bit fields are really poorly documented.
         // For instance, I have *no idea* whether we should be setting
@@ -172,13 +177,15 @@ Impl::init(EventMask toMeasure)
                                      -1 /* on any cpu */,
                                      group_leader,
                                      0 /* no flags presently defined */);
-        if (fd == -1)
+        if (fd == -1) {
             continue;
+}
 
         measured = EventMask(measured | slot.bit);
         this->*(slot.fd) = fd;
-        if (group_leader == -1)
+        if (group_leader == -1) {
             group_leader = fd;
+}
     }
     return measured;
 }
@@ -186,8 +193,9 @@ Impl::init(EventMask toMeasure)
 void
 Impl::start()
 {
-    if (running || group_leader == -1)
+    if (running || group_leader == -1) {
         return;
+}
 
     running = true;
     ioctl(group_leader, PERF_EVENT_IOC_ENABLE, 0);
@@ -200,8 +208,9 @@ Impl::stop(PerfMeasurement* counters)
     // available data, even if that's more than we expect.
     unsigned char buf[1024];
 
-    if (!running || group_leader == -1)
+    if (!running || group_leader == -1) {
         return;
+}
 
     ioctl(group_leader, PERF_EVENT_IOC_DISABLE, 0);
     running = false;
@@ -209,8 +218,9 @@ Impl::stop(PerfMeasurement* counters)
     // read out and reset all the counter values
     for (const auto& slot : kSlots) {
         int fd = this->*(slot.fd);
-        if (fd == -1)
+        if (fd == -1) {
             continue;
+}
 
         if (read(fd, buf, sizeof(buf)) == sizeof(uint64_t)) {
             uint64_t cur;
@@ -259,25 +269,28 @@ PerfMeasurement::~PerfMeasurement()
 void
 PerfMeasurement::start()
 {
-    if (impl)
+    if (impl) {
         static_cast<Impl*>(impl)->start();
+}
 }
 
 void
 PerfMeasurement::stop()
 {
-    if (impl)
+    if (impl) {
         static_cast<Impl*>(impl)->stop(this);
+}
 }
 
 void
 PerfMeasurement::reset()
 {
     for (const auto& slot : kSlots) {
-        if (eventsMeasured & slot.bit)
+        if (eventsMeasured & slot.bit) {
             this->*(slot.counter) = 0;
-        else
+        } else {
             this->*(slot.counter) = -1;
+}
     }
 }
 

@@ -113,8 +113,9 @@ _pixman_init_gradient (gradient_t *                  gradient,
      */
     gradient->stops =
 	pixman_malloc_ab (n_stops + 2, sizeof (pixman_gradient_stop_t));
-    if (!gradient->stops)
+    if (!gradient->stops) {
 	return FALSE;
+}
 
     gradient->stops += 1;
     memcpy (gradient->stops, stops, n_stops * sizeof (pixman_gradient_stop_t));
@@ -159,16 +160,18 @@ _pixman_image_fini (pixman_image_t *image)
 
     if (common->ref_count == 0)
     {
-	if (image->common.destroy_func)
+	if (image->common.destroy_func) {
 	    image->common.destroy_func (image, image->common.destroy_data);
+}
 
 	pixman_region32_fini (&common->clip_region);
 
 	free_memory (&common->transform);
 	free_memory (&common->filter_params);
 
-	if (common->alpha_map)
+	if (common->alpha_map) {
 	    pixman_image_unref ((pixman_image_t *)common->alpha_map);
+}
 
 	if (image->type == LINEAR ||
 	    image->type == RADIAL ||
@@ -206,8 +209,9 @@ _pixman_image_allocate (void)
 {
     pixman_image_t *image = malloc (sizeof (pixman_image_t));
 
-    if (image)
+    if (image) {
 	_pixman_image_init (image);
+}
 
     return image;
 }
@@ -324,18 +328,21 @@ compute_image_info (pixman_image_t *image)
 		pixman_fixed_t m01 = image->common.transform->matrix[0][1];
 		pixman_fixed_t m10 = image->common.transform->matrix[1][0];
 
-		if (m01 == -pixman_fixed_1 && m10 == pixman_fixed_1)
+		if (m01 == -pixman_fixed_1 && m10 == pixman_fixed_1) {
 		    flags |= FAST_PATH_ROTATE_90_TRANSFORM;
-		else if (m01 == pixman_fixed_1 && m10 == -pixman_fixed_1)
+		} else if (m01 == pixman_fixed_1 && m10 == -pixman_fixed_1) {
 		    flags |= FAST_PATH_ROTATE_270_TRANSFORM;
+}
 	    }
 	}
 
-	if (image->common.transform->matrix[0][0] > 0)
+	if (image->common.transform->matrix[0][0] > 0) {
 	    flags |= FAST_PATH_X_UNIT_POSITIVE;
+}
 
-	if (image->common.transform->matrix[1][0] == 0)
+	if (image->common.transform->matrix[1][0] == 0) {
 	    flags |= FAST_PATH_Y_UNIT_ZERO;
+}
     }
 
     /* Filter */
@@ -438,10 +445,11 @@ compute_image_info (pixman_image_t *image)
     }
 
     /* Component alpha */
-    if (image->common.component_alpha)
+    if (image->common.component_alpha) {
 	flags |= FAST_PATH_COMPONENT_ALPHA;
-    else
+    } else {
 	flags |= FAST_PATH_UNIFIED_ALPHA;
+}
 
     flags |= (FAST_PATH_NO_ACCESSORS | FAST_PATH_NARROW_FORMAT);
 
@@ -451,8 +459,9 @@ compute_image_info (pixman_image_t *image)
     case SOLID:
 	code = PIXMAN_solid;
 
-	if (image->solid.color.alpha == 0xffff)
+	if (image->solid.color.alpha == 0xffff) {
 	    flags |= FAST_PATH_IS_OPAQUE;
+}
 	break;
 
     case BITS:
@@ -474,18 +483,22 @@ compute_image_info (pixman_image_t *image)
 	{
 	    flags |= FAST_PATH_SAMPLES_OPAQUE;
 
-	    if (image->common.repeat != PIXMAN_REPEAT_NONE)
+	    if (image->common.repeat != PIXMAN_REPEAT_NONE) {
 		flags |= FAST_PATH_IS_OPAQUE;
+}
 	}
 
-	if (image->bits.read_func || image->bits.write_func)
+	if (image->bits.read_func || image->bits.write_func) {
 	    flags &= ~FAST_PATH_NO_ACCESSORS;
+}
 
-	if (PIXMAN_FORMAT_IS_WIDE (image->bits.format))
+	if (PIXMAN_FORMAT_IS_WIDE (image->bits.format)) {
 	    flags &= ~FAST_PATH_NARROW_FORMAT;
+}
 
-	if (image->bits.format == PIXMAN_r5g6b5)
+	if (image->bits.format == PIXMAN_r5g6b5) {
 	    flags |= FAST_PATH_16_FORMAT;
+}
 
 	break;
 
@@ -499,8 +512,9 @@ compute_image_info (pixman_image_t *image)
 	 * circles contains the other one).
 	 */
 
-        if (image->radial.a >= 0)
+        if (image->radial.a >= 0) {
 	    break;
+}
 
 	/* Fall through */
 
@@ -536,8 +550,9 @@ compute_image_info (pixman_image_t *image)
     }
     else
     {
-	if (PIXMAN_FORMAT_IS_WIDE (image->common.alpha_map->format))
+	if (PIXMAN_FORMAT_IS_WIDE (image->common.alpha_map->format)) {
 	    flags &= ~FAST_PATH_NARROW_FORMAT;
+}
     }
 
     /* Both alpha maps and convolution filters can introduce
@@ -570,14 +585,16 @@ _pixman_image_validate (pixman_image_t *image)
 	 * property_changed() can make use of the flags
 	 * to set up accessors etc.
 	 */
-	if (image->common.property_changed)
+	if (image->common.property_changed) {
 	    image->common.property_changed (image);
+}
 
 	image->common.dirty = FALSE;
     }
 
-    if (image->common.alpha_map)
+    if (image->common.alpha_map) {
 	_pixman_image_validate ((pixman_image_t *)image->common.alpha_map);
+}
 }
 
 PIXMAN_EXPORT pixman_bool_t
@@ -589,8 +606,9 @@ pixman_image_set_clip_region32 (pixman_image_t *   image,
 
     if (region)
     {
-	if ((result = pixman_region32_copy (&common->clip_region, region)))
+	if ((result = pixman_region32_copy (&common->clip_region, region))) {
 	    image->common.have_clip_region = TRUE;
+}
     }
     else
     {
@@ -613,8 +631,9 @@ pixman_image_set_clip_region (pixman_image_t *   image,
 
     if (region)
     {
-	if ((result = pixman_region32_copy_from_region16 (&common->clip_region, region)))
+	if ((result = pixman_region32_copy_from_region16 (&common->clip_region, region))) {
 	    image->common.have_clip_region = TRUE;
+}
     }
     else
     {
@@ -649,8 +668,9 @@ pixman_image_set_transform (pixman_image_t *          image,
     image_common_t *common = (image_common_t *)image;
     pixman_bool_t result;
 
-    if (common->transform == transform)
+    if (common->transform == transform) {
 	return TRUE;
+}
 
     if (!transform || memcmp (&id, transform, sizeof (pixman_transform_t)) == 0)
     {
@@ -667,8 +687,9 @@ pixman_image_set_transform (pixman_image_t *          image,
 	return TRUE;
     }
 
-    if (common->transform == NULL)
+    if (common->transform == NULL) {
 	common->transform = malloc (sizeof (pixman_transform_t));
+}
 
     if (common->transform == NULL)
     {
@@ -691,8 +712,9 @@ PIXMAN_EXPORT void
 pixman_image_set_repeat (pixman_image_t *image,
                          pixman_repeat_t repeat)
 {
-    if (image->common.repeat == repeat)
+    if (image->common.repeat == repeat) {
 	return;
+}
 
     image->common.repeat = repeat;
 
@@ -708,8 +730,9 @@ pixman_image_set_filter (pixman_image_t *      image,
     image_common_t *common = (image_common_t *)image;
     pixman_fixed_t *new_params;
 
-    if (params == common->filter_params && filter == common->filter)
+    if (params == common->filter_params && filter == common->filter) {
 	return TRUE;
+}
 
     if (filter == PIXMAN_FILTER_SEPARABLE_CONVOLUTION)
     {
@@ -728,8 +751,9 @@ pixman_image_set_filter (pixman_image_t *      image,
     if (params)
     {
 	new_params = pixman_malloc_ab (n_params, sizeof (pixman_fixed_t));
-	if (!new_params)
+	if (!new_params) {
 	    return FALSE;
+}
 
 	memcpy (new_params,
 	        params, n_params * sizeof (pixman_fixed_t));
@@ -737,8 +761,9 @@ pixman_image_set_filter (pixman_image_t *      image,
 
     common->filter = filter;
 
-    if (common->filter_params)
+    if (common->filter_params) {
 	free (common->filter_params);
+}
 
     common->filter_params = new_params;
     common->n_filter_params = n_params;
@@ -751,8 +776,9 @@ PIXMAN_EXPORT void
 pixman_image_set_source_clipping (pixman_image_t *image,
                                   pixman_bool_t   clip_sources)
 {
-    if (image->common.clip_sources == clip_sources)
+    if (image->common.clip_sources == clip_sources) {
 	return;
+}
 
     image->common.clip_sources = clip_sources;
 
@@ -769,8 +795,9 @@ pixman_image_set_indexed (pixman_image_t *        image,
 {
     bits_image_t *bits = (bits_image_t *)image;
 
-    if (bits->indexed == indexed)
+    if (bits->indexed == indexed) {
 	return;
+}
 
     bits->indexed = indexed;
 
@@ -834,8 +861,9 @@ PIXMAN_EXPORT void
 pixman_image_set_component_alpha   (pixman_image_t *image,
                                     pixman_bool_t   component_alpha)
 {
-    if (image->common.component_alpha == component_alpha)
+    if (image->common.component_alpha == component_alpha) {
 	return;
+}
 
     image->common.component_alpha = component_alpha;
 
@@ -867,8 +895,9 @@ pixman_image_set_accessors (pixman_image_t *           image,
 PIXMAN_EXPORT uint32_t *
 pixman_image_get_data (pixman_image_t *image)
 {
-    if (image->type == BITS)
+    if (image->type == BITS) {
 	return image->bits.bits;
+}
 
     return NULL;
 }
@@ -876,8 +905,9 @@ pixman_image_get_data (pixman_image_t *image)
 PIXMAN_EXPORT int
 pixman_image_get_width (pixman_image_t *image)
 {
-    if (image->type == BITS)
+    if (image->type == BITS) {
 	return image->bits.width;
+}
 
     return 0;
 }
@@ -885,8 +915,9 @@ pixman_image_get_width (pixman_image_t *image)
 PIXMAN_EXPORT int
 pixman_image_get_height (pixman_image_t *image)
 {
-    if (image->type == BITS)
+    if (image->type == BITS) {
 	return image->bits.height;
+}
 
     return 0;
 }
@@ -894,8 +925,9 @@ pixman_image_get_height (pixman_image_t *image)
 PIXMAN_EXPORT int
 pixman_image_get_stride (pixman_image_t *image)
 {
-    if (image->type == BITS)
+    if (image->type == BITS) {
 	return image->bits.rowstride * (int) sizeof (uint32_t);
+}
 
     return 0;
 }
@@ -903,8 +935,9 @@ pixman_image_get_stride (pixman_image_t *image)
 PIXMAN_EXPORT int
 pixman_image_get_depth (pixman_image_t *image)
 {
-    if (image->type == BITS)
+    if (image->type == BITS) {
 	return PIXMAN_FORMAT_DEPTH (image->bits.format);
+}
 
     return 0;
 }
@@ -912,8 +945,9 @@ pixman_image_get_depth (pixman_image_t *image)
 PIXMAN_EXPORT pixman_format_code_t
 pixman_image_get_format (pixman_image_t *image)
 {
-    if (image->type == BITS)
+    if (image->type == BITS) {
 	return image->bits.format;
+}
 
     return PIXMAN_null;
 }
@@ -931,14 +965,15 @@ _pixman_image_get_solid (pixman_implementation_t *imp,
     }
     else if (image->type == BITS)
     {
-	if (image->bits.format == PIXMAN_a8r8g8b8)
+	if (image->bits.format == PIXMAN_a8r8g8b8) {
 	    result = image->bits.bits[0];
-	else if (image->bits.format == PIXMAN_x8r8g8b8)
+	} else if (image->bits.format == PIXMAN_x8r8g8b8) {
 	    result = image->bits.bits[0] | 0xff000000;
-	else if (image->bits.format == PIXMAN_a8)
+	} else if (image->bits.format == PIXMAN_a8) {
 	    result = (*(uint8_t *)image->bits.bits) << 24;
-	else
+	} else {
 	    goto otherwise;
+}
     }
     else
     {

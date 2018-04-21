@@ -170,7 +170,8 @@ udict_swap(const UDataSwapper *ds, const void *inData, int32_t length,
     int32_t i, offset, size;
 
     headerSize = udata_swapDataHeader(ds, inData, length, outData, pErrorCode);
-    if (pErrorCode == NULL || U_FAILURE(*pErrorCode)) return 0;
+    if (pErrorCode == NULL || U_FAILURE(*pErrorCode)) { return 0;
+}
     pInfo = (const UDataInfo *)((const char *)inData + 4);
     if (!(pInfo->dataFormat[0] == 0x44 && 
           pInfo->dataFormat[1] == 0x69 && 

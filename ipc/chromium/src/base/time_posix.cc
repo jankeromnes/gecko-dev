@@ -76,10 +76,11 @@ Time Time::FromExploded(bool is_local, const Exploded& exploded) {
 #ifdef ANDROID
     seconds = mktime(&timestruct);
 #else
-  if (is_local)
+  if (is_local) {
     seconds = mktime(&timestruct);
-  else
+  } else {
     seconds = timegm(&timestruct);
+}
 #endif
 
   int64_t milliseconds;
@@ -131,10 +132,11 @@ void Time::Explode(bool is_local, Exploded* exploded) const {
   time_t seconds = milliseconds / kMillisecondsPerSecond;
 
   struct tm timestruct;
-  if (is_local)
+  if (is_local) {
     localtime_r(&seconds, &timestruct);
-  else
+  } else {
     gmtime_r(&seconds, &timestruct);
+}
 
   exploded->year         = timestruct.tm_year + 1900;
   exploded->month        = timestruct.tm_mon + 1;

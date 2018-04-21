@@ -268,10 +268,11 @@ void av1_warp_affine_ssse3(const int32_t *mat, const uint8_t *ref, int width,
       if (ix4 <= -7) {
         for (k = -7; k < AOMMIN(8, p_height - i); ++k) {
           int iy = iy4 + k;
-          if (iy < 0)
+          if (iy < 0) {
             iy = 0;
-          else if (iy > height - 1)
+          } else if (iy > height - 1) {
             iy = height - 1;
+}
           tmp[k + 7] = _mm_set1_epi16(
               (1 << (bd + WARPEDPIXEL_FILTER_BITS - HORSHEAR_REDUCE_PREC_BITS -
                      1)) +
@@ -281,10 +282,11 @@ void av1_warp_affine_ssse3(const int32_t *mat, const uint8_t *ref, int width,
       } else if (ix4 >= width + 6) {
         for (k = -7; k < AOMMIN(8, p_height - i); ++k) {
           int iy = iy4 + k;
-          if (iy < 0)
+          if (iy < 0) {
             iy = 0;
-          else if (iy > height - 1)
+          } else if (iy > height - 1) {
             iy = height - 1;
+}
           tmp[k + 7] = _mm_set1_epi16(
               (1 << (bd + WARPEDPIXEL_FILTER_BITS - HORSHEAR_REDUCE_PREC_BITS -
                      1)) +
@@ -294,10 +296,11 @@ void av1_warp_affine_ssse3(const int32_t *mat, const uint8_t *ref, int width,
       } else {
         for (k = -7; k < AOMMIN(8, p_height - i); ++k) {
           int iy = iy4 + k;
-          if (iy < 0)
+          if (iy < 0) {
             iy = 0;
-          else if (iy > height - 1)
+          } else if (iy > height - 1) {
             iy = height - 1;
+}
           int sx = sx4 + beta * (k + 4);
 
           // Load source pixels
@@ -485,14 +488,16 @@ void av1_warp_affine_ssse3(const int32_t *mat, const uint8_t *ref, int width,
           res_lo = _mm_add_epi32(res_lo, round_const);
           res_lo =
               _mm_srl_epi16(res_lo, _mm_cvtsi32_si128(conv_params->round_1));
-          if (comp_avg) res_lo = _mm_add_epi32(_mm_loadu_si128(p), res_lo);
+          if (comp_avg) { res_lo = _mm_add_epi32(_mm_loadu_si128(p), res_lo);
+}
           _mm_storeu_si128(p, res_lo);
           if (p_width > 4) {
             res_hi = _mm_add_epi32(res_hi, round_const);
             res_hi =
                 _mm_srl_epi16(res_hi, _mm_cvtsi32_si128(conv_params->round_1));
-            if (comp_avg)
+            if (comp_avg) {
               res_hi = _mm_add_epi32(_mm_loadu_si128(p + 1), res_hi);
+}
             _mm_storeu_si128(p + 1, res_hi);
           }
         } else {
@@ -525,7 +530,8 @@ void av1_warp_affine_ssse3(const int32_t *mat, const uint8_t *ref, int width,
             }
             *(uint32_t *)p = _mm_cvtsi128_si32(res_8bit);
           } else {
-            if (comp_avg) res_8bit = _mm_avg_epu8(res_8bit, _mm_loadl_epi64(p));
+            if (comp_avg) { res_8bit = _mm_avg_epu8(res_8bit, _mm_loadl_epi64(p));
+}
             _mm_storel_epi64(p, res_8bit);
           }
         }

@@ -39,8 +39,9 @@ static bool
 SealObjectAndPrototype(JSContext* cx, JS::Handle<JSObject *> parent, const char* name)
 {
   JS::Rooted<JS::Value> prop(cx);
-  if (!JS_GetProperty(cx, parent, name, &prop))
+  if (!JS_GetProperty(cx, parent, name, &prop)) {
     return false;
+}
 
   if (prop.isUndefined()) {
     // Pretend we sealed the object.
@@ -48,8 +49,9 @@ SealObjectAndPrototype(JSContext* cx, JS::Handle<JSObject *> parent, const char*
   }
 
   JS::Rooted<JSObject*> obj(cx, prop.toObjectOrNull());
-  if (!JS_GetProperty(cx, obj, "prototype", &prop))
+  if (!JS_GetProperty(cx, obj, "prototype", &prop)) {
     return false;
+}
 
   JS::Rooted<JSObject*> prototype(cx, prop.toObjectOrNull());
   return JS_FreezeObject(cx, obj) && JS_FreezeObject(cx, prototype);
@@ -59,15 +61,17 @@ static bool
 InitAndSealPerfMeasurementClass(JSContext* cx, JS::Handle<JSObject*> global)
 {
   // Init the PerfMeasurement class
-  if (!JS::RegisterPerfMeasurement(cx, global))
+  if (!JS::RegisterPerfMeasurement(cx, global)) {
     return false;
+}
 
   // Seal up Object, Function, and Array and their prototypes.  (This single
   // object instance is shared amongst everyone who imports the jsperf module.)
   if (!SealObjectAndPrototype(cx, global, "Object") ||
       !SealObjectAndPrototype(cx, global, "Function") ||
-      !SealObjectAndPrototype(cx, global, "Array"))
+      !SealObjectAndPrototype(cx, global, "Array")) {
     return false;
+}
 
   // Finally, seal the global object, for good measure. (But not recursively;
   // this breaks things.)

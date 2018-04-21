@@ -527,17 +527,21 @@ CK_RVtoStr(CK_RV errNum)
     while (low + 1 < high) {
         i = low + (high - low) / 2;
         num = errStrings[i].errNum;
-        if (errNum == num)
+        if (errNum == num) {
             return errStrings[i].errString;
-        if (errNum < num)
+}
+        if (errNum < num) {
             high = i;
-        else
+        } else {
             low = i;
+}
     }
-    if (errNum == errStrings[low].errNum)
+    if (errNum == errStrings[low].errNum) {
         return errStrings[low].errString;
-    if (errNum == errStrings[high].errNum)
+}
+    if (errNum == errStrings[high].errNum) {
         return errStrings[high].errString;
+}
     return "unknown error";
 }
 
@@ -619,8 +623,9 @@ filePasswd(char *pwFile)
     PRInt32 nb;
     int i;
 
-    if (!pwFile)
+    if (!pwFile) {
         return 0;
+}
 
     fd = PR_Open(pwFile, PR_RDONLY, 0);
     if (!fd) {
@@ -633,8 +638,9 @@ filePasswd(char *pwFile)
     PR_Close(fd);
     /* handle the Windows EOL case */
     i = 0;
-    while (phrase[i] != '\r' && phrase[i] != '\n' && i < nb)
+    while (phrase[i] != '\r' && phrase[i] != '\n' && i < nb) {
         i++;
+}
     phrase[i] = '\0';
     if (nb == 0) {
         PR_fprintf(PR_STDERR, "password file contains no data\n");
@@ -660,8 +666,9 @@ checkPath(char *string)
     }
     dest--;
     /* if the last char is a / set it to 0 */
-    if (*dest == '/')
+    if (*dest == '/') {
         *dest = 0;
+}
 }
 
 static CK_SLOT_ID *
@@ -694,8 +701,9 @@ getSlotList(CK_FUNCTION_LIST_PTR pFunctionList,
                                        pSlotList, &slotCount);
     if (crv != CKR_OK) {
         pk11error("C_GetSlotList failed", crv);
-        if (pSlotList)
+        if (pSlotList) {
             PR_Free(pSlotList);
+}
         return NULL;
     }
     return pSlotList;
@@ -811,8 +819,9 @@ main(int argc, char **argv)
                     usage(program_name);
                 }
                 pwd = filePasswd((char *)optstate->value);
-                if (!pwd)
+                if (!pwd) {
                     usage(program_name);
+}
                 break;
 
             case 'F':
@@ -1253,27 +1262,32 @@ main(int argc, char **argv)
     /* CKA_PRIME */
     rv = writeItem(fd, dsaPubKeyTemplate[0].pValue,
                    dsaPubKeyTemplate[0].ulValueLen, output_file);
-    if (rv != PR_SUCCESS)
+    if (rv != PR_SUCCESS) {
         goto cleanup;
+}
     /* CKA_SUBPRIME */
     rv = writeItem(fd, dsaPubKeyTemplate[1].pValue,
                    dsaPubKeyTemplate[1].ulValueLen, output_file);
-    if (rv != PR_SUCCESS)
+    if (rv != PR_SUCCESS) {
         goto cleanup;
+}
     /* CKA_BASE */
     rv = writeItem(fd, dsaPubKeyTemplate[2].pValue,
                    dsaPubKeyTemplate[2].ulValueLen, output_file);
-    if (rv != PR_SUCCESS)
+    if (rv != PR_SUCCESS) {
         goto cleanup;
+}
     /* DSA Public Key value */
     rv = writeItem(fd, dsaPubKeyValue.pValue,
                    dsaPubKeyValue.ulValueLen, output_file);
-    if (rv != PR_SUCCESS)
+    if (rv != PR_SUCCESS) {
         goto cleanup;
+}
     /* DSA SIGNATURE */
     rv = writeItem(fd, &sign, signLen, output_file);
-    if (rv != PR_SUCCESS)
+    if (rv != PR_SUCCESS) {
         goto cleanup;
+}
     PR_Close(fd);
 
 #ifdef USES_LINKS
@@ -1325,8 +1339,9 @@ cleanup:
     }
     PR_Cleanup();
 
-    if (crv != CKR_OK)
+    if (crv != CKR_OK) {
         return crv;
+}
 
     return (successful) ? 0 : 1;
 }

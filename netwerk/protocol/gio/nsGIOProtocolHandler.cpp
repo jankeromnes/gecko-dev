@@ -91,8 +91,9 @@ MapGIOResult(gint code)
 static nsresult
 MapGIOResult(GError *result)
 {
-  if (!result)
+  if (!result) {
     return NS_OK;
+}
   return MapGIOResult(result->code);
 }
 /** Return values for mount operation.
@@ -118,11 +119,13 @@ FileInfoComparator(gconstpointer a, gconstpointer b)
   GFileInfo *ia = ( GFileInfo *) a;
   GFileInfo *ib = ( GFileInfo *) b;
   if (g_file_info_get_file_type(ia) == G_FILE_TYPE_DIRECTORY
-      && g_file_info_get_file_type(ib) != G_FILE_TYPE_DIRECTORY)
+      && g_file_info_get_file_type(ib) != G_FILE_TYPE_DIRECTORY) {
     return -1;
+}
   if (g_file_info_get_file_type(ib) == G_FILE_TYPE_DIRECTORY
-      && g_file_info_get_file_type(ia) != G_FILE_TYPE_DIRECTORY)
+      && g_file_info_get_file_type(ia) != G_FILE_TYPE_DIRECTORY) {
     return 1;
+}
 
   return strcasecmp(g_file_info_get_name(ia), g_file_info_get_name(ib));
 }
@@ -236,8 +239,9 @@ nsGIOInputStream::MountVolume() {
                                 this);
   mozilla::MonitorAutoLock mon(mMonitorMountInProgress);
   /* Waiting for finish of mount operation thread */
-  while (mMountRes == MOUNT_OPERATION_IN_PROGRESS)
+  while (mMountRes == MOUNT_OPERATION_IN_PROGRESS) {
     mon.Wait();
+}
 
   g_object_unref(mount_op);
 
@@ -290,8 +294,9 @@ nsGIOInputStream::DoOpenDirectory()
   // Write base URL (make sure it ends with a '/')
   mDirBuf.AppendLiteral("300: ");
   mDirBuf.Append(mSpec);
-  if (mSpec.get()[mSpec.Length() - 1] != '/')
+  if (mSpec.get()[mSpec.Length() - 1] != '/') {
     mDirBuf.Append('/');
+}
   mDirBuf.Append('\n');
 
   // Write column names
@@ -368,8 +373,9 @@ nsGIOInputStream::DoOpen()
     if (error->domain == G_IO_ERROR && error->code == G_IO_ERROR_NOT_MOUNTED) {
       // location is not yet mounted, try to mount
       g_error_free(error);
-      if (NS_IsMainThread())
+      if (NS_IsMainThread()) {
         return NS_ERROR_NOT_CONNECTED;
+}
       error = nullptr;
       rv = MountVolume();
       if (rv != NS_OK) {
@@ -407,8 +413,9 @@ nsGIOInputStream::DoOpen()
     g_warning("Unable to get file type.");
     rv = NS_ERROR_FILE_NOT_FOUND;
   }
-  if (info)
+  if (info) {
     g_object_unref(info);
+}
   return rv;
 }
 
@@ -624,8 +631,9 @@ nsGIOInputStream::Close()
   mSpec.Truncate(); // free memory
 
   // Prevent future reads from re-opening the handle.
-  if (NS_SUCCEEDED(mStatus))
+  if (NS_SUCCEEDED(mStatus)) {
     mStatus = NS_BASE_STREAM_CLOSED;
+}
 
   return NS_OK;
 }
@@ -637,8 +645,9 @@ nsGIOInputStream::Close()
 NS_IMETHODIMP
 nsGIOInputStream::Available(uint64_t *aResult)
 {
-  if (NS_FAILED(mStatus))
+  if (NS_FAILED(mStatus)) {
     return mStatus;
+}
 
   *aResult = mBytesRemaining;
 
@@ -667,8 +676,9 @@ nsGIOInputStream::Read(char     *aBuf,
 
   mStatus = DoRead(aBuf, aCount, aCountRead);
   // Check if all data has been read
-  if (mStatus == NS_BASE_STREAM_CLOSED)
+  if (mStatus == NS_BASE_STREAM_CLOSED) {
     return NS_OK;
+}
 
   // Check whenever any error appears while reading
   return mStatus;
@@ -946,8 +956,9 @@ nsGIOProtocolHandler::IsSupportedProtocol(const nsCString &aSpec)
 {
   const char *specString = aSpec.get();
   const char *colon = strchr(specString, ':');
-  if (!colon)
+  if (!colon) {
     return false;
+}
 
   uint32_t length = colon - specString + 1;
 
@@ -955,11 +966,13 @@ nsGIOProtocolHandler::IsSupportedProtocol(const nsCString &aSpec)
   nsCString scheme(specString, length);
 
   char *found = PL_strcasestr(mSupportedProtocols.get(), scheme.get());
-  if (!found)
+  if (!found) {
     return false;
+}
 
-  if (found[length] != ',' && found[length] != '\0')
+  if (found[length] != ',' && found[length] != '\0') {
     return false;
+}
 
   return true;
 }
@@ -998,12 +1011,14 @@ nsGIOProtocolHandler::NewURI(const nsACString &aSpec,
   if (!aBaseURI)
   {
     // XXX Is it good to support all GIO protocols?
-    if (!IsSupportedProtocol(flatSpec))
+    if (!IsSupportedProtocol(flatSpec)) {
       return NS_ERROR_UNKNOWN_PROTOCOL;
+}
 
     int32_t colon_location = flatSpec.FindChar(':');
-    if (colon_location <= 0)
+    if (colon_location <= 0) {
       return NS_ERROR_UNKNOWN_PROTOCOL;
+}
 
     // Verify that GIO supports this URI scheme.
     bool uri_scheme_supported = false;
@@ -1050,8 +1065,9 @@ nsGIOProtocolHandler::NewChannel2(nsIURI* aURI,
 
   nsAutoCString spec;
   rv = aURI->GetSpec(spec);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   RefPtr<nsGIOInputStream> stream = new nsGIOInputStream(spec);
   if (!stream) {

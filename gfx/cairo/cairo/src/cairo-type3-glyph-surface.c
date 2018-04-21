@@ -77,12 +77,14 @@ _cairo_type3_glyph_surface_create (cairo_scaled_font_t			 *scaled_font,
     cairo_type3_glyph_surface_t *surface;
     cairo_matrix_t invert_y_axis;
 
-    if (unlikely (stream != NULL && stream->status))
+    if (unlikely (stream != NULL && stream->status)) {
 	return _cairo_surface_create_in_error (stream->status);
+}
 
     surface = malloc (sizeof (cairo_type3_glyph_surface_t));
-    if (unlikely (surface == NULL))
+    if (unlikely (surface == NULL)) {
 	return _cairo_surface_create_in_error (_cairo_error (CAIRO_STATUS_NO_MEMORY));
+}
 
     _cairo_surface_init (&surface->base,
 			 &cairo_type3_glyph_surface_backend,
@@ -122,8 +124,9 @@ _cairo_type3_glyph_surface_emit_image (cairo_type3_glyph_surface_t *surface,
     /* The only image type supported by Type 3 fonts are 1-bit masks */
     image = _cairo_image_surface_coerce_to_format (image, CAIRO_FORMAT_A1);
     status = image->base.status;
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     _cairo_output_stream_printf (surface->stream,
 				 "q %f %f %f %f %f %f cm\n",
@@ -151,8 +154,9 @@ _cairo_type3_glyph_surface_emit_image_pattern (cairo_type3_glyph_surface_t *surf
     cairo_matrix_t mat, upside_down;
     cairo_status_t status;
 
-    if (image->width == 0 || image->height == 0)
+    if (image->width == 0 || image->height == 0) {
 	return CAIRO_STATUS_SUCCESS;
+}
 
     mat = *pattern_matrix;
 
@@ -195,18 +199,21 @@ _cairo_type3_glyph_surface_paint (void			*abstract_surface,
     void *image_extra;
     cairo_status_t status;
 
-    if (source->type != CAIRO_PATTERN_TYPE_SURFACE)
+    if (source->type != CAIRO_PATTERN_TYPE_SURFACE) {
 	return CAIRO_INT_STATUS_IMAGE_FALLBACK;
+}
 
     status = _cairo_surface_clipper_set_clip (&surface->clipper, clip);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     pattern = (const cairo_surface_pattern_t *) source;
     status = _cairo_surface_acquire_source_image (pattern->surface,
 						  &image, &image_extra);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	goto fail;
+}
 
     status = _cairo_type3_glyph_surface_emit_image_pattern (surface,
 							    image,
@@ -246,8 +253,9 @@ _cairo_type3_glyph_surface_stroke (void			*abstract_surface,
     cairo_int_status_t status;
 
     status = _cairo_surface_clipper_set_clip (&surface->clipper, clip);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     return _cairo_pdf_operators_stroke (&surface->pdf_operators,
 					path,
@@ -270,8 +278,9 @@ _cairo_type3_glyph_surface_fill (void			*abstract_surface,
     cairo_int_status_t status;
 
     status = _cairo_surface_clipper_set_clip (&surface->clipper, clip);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     return _cairo_pdf_operators_fill (&surface->pdf_operators,
 				      path,
@@ -294,8 +303,9 @@ _cairo_type3_glyph_surface_show_glyphs (void		     *abstract_surface,
     cairo_matrix_t new_ctm, invert_y_axis;
 
     status = _cairo_surface_clipper_set_clip (&surface->clipper, clip);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     cairo_matrix_init_scale (&invert_y_axis, 1, -1);
     cairo_matrix_multiply (&new_ctm, &invert_y_axis, &scaled_font->ctm);
@@ -304,8 +314,9 @@ _cairo_type3_glyph_surface_show_glyphs (void		     *abstract_surface,
 				     &scaled_font->font_matrix,
 				     &new_ctm,
 				     &scaled_font->options);
-    if (unlikely (font->status))
+    if (unlikely (font->status)) {
 	return font->status;
+}
 
     status = _cairo_pdf_operators_show_text_glyphs (&surface->pdf_operators,
 						    NULL, 0,
@@ -373,12 +384,14 @@ _cairo_type3_glyph_surface_emit_fallback_image (cairo_type3_glyph_surface_t *sur
 					 CAIRO_SCALED_GLYPH_INFO_METRICS |
 					 CAIRO_SCALED_GLYPH_INFO_SURFACE,
 					 &scaled_glyph);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	return status;
+}
 
     image = scaled_glyph->surface;
-    if (image->width == 0 || image->height == 0)
+    if (image->width == 0 || image->height == 0) {
 	return CAIRO_STATUS_SUCCESS;
+}
 
     x = _cairo_fixed_to_double (scaled_glyph->bbox.p1.x);
     y = _cairo_fixed_to_double (scaled_glyph->bbox.p2.y);
@@ -401,8 +414,9 @@ _cairo_type3_glyph_surface_set_font_subsets_callback (void		     		    *abstract
 {
     cairo_type3_glyph_surface_t *surface = abstract_surface;
 
-    if (unlikely (surface->base.status))
+    if (unlikely (surface->base.status)) {
 	return;
+}
 
     _cairo_pdf_operators_set_font_subsets_callback (&surface->pdf_operators,
 						    use_font_subset,
@@ -418,12 +432,14 @@ _cairo_type3_glyph_surface_analyze_glyph (void		     *abstract_surface,
     cairo_status_t status, status2;
     cairo_output_stream_t *null_stream;
 
-    if (unlikely (surface->base.status))
+    if (unlikely (surface->base.status)) {
 	return surface->base.status;
+}
 
     null_stream = _cairo_null_stream_create ();
-    if (unlikely (null_stream->status))
+    if (unlikely (null_stream->status)) {
 	return null_stream->status;
+}
 
     _cairo_type3_glyph_surface_set_stream (surface, null_stream);
 
@@ -433,8 +449,9 @@ _cairo_type3_glyph_surface_analyze_glyph (void		     *abstract_surface,
 					 CAIRO_SCALED_GLYPH_INFO_RECORDING_SURFACE,
 					 &scaled_glyph);
 
-    if (_cairo_status_is_error (status))
+    if (_cairo_status_is_error (status)) {
 	goto cleanup;
+}
 
     if (status == CAIRO_INT_STATUS_UNSUPPORTED) {
 	status = CAIRO_STATUS_SUCCESS;
@@ -443,19 +460,22 @@ _cairo_type3_glyph_surface_analyze_glyph (void		     *abstract_surface,
 
     status = _cairo_recording_surface_replay (scaled_glyph->recording_surface,
 					      &surface->base);
-    if (unlikely (status))
+    if (unlikely (status)) {
 	goto cleanup;
+}
 
     status = _cairo_pdf_operators_flush (&surface->pdf_operators);
-    if (status == CAIRO_INT_STATUS_IMAGE_FALLBACK)
+    if (status == CAIRO_INT_STATUS_IMAGE_FALLBACK) {
 	status = CAIRO_STATUS_SUCCESS;
+}
 
 cleanup:
     _cairo_scaled_font_thaw_cache (surface->scaled_font);
 
     status2 = _cairo_output_stream_destroy (null_stream);
-    if (status == CAIRO_STATUS_SUCCESS)
+    if (status == CAIRO_STATUS_SUCCESS) {
 	status = status2;
+}
 
     return status;
 }
@@ -473,8 +493,9 @@ _cairo_type3_glyph_surface_emit_glyph (void		     *abstract_surface,
     double x_advance, y_advance;
     cairo_matrix_t font_matrix_inverse;
 
-    if (unlikely (surface->base.status))
+    if (unlikely (surface->base.status)) {
 	return surface->base.status;
+}
 
     _cairo_type3_glyph_surface_set_stream (surface, stream);
 
@@ -489,8 +510,9 @@ _cairo_type3_glyph_surface_emit_glyph (void		     *abstract_surface,
 					     glyph_index,
 					     CAIRO_SCALED_GLYPH_INFO_METRICS,
 					     &scaled_glyph);
-	if (status == CAIRO_STATUS_SUCCESS)
+	if (status == CAIRO_STATUS_SUCCESS) {
 	    status = CAIRO_INT_STATUS_IMAGE_FALLBACK;
+}
     }
     if (_cairo_status_is_error (status)) {
 	_cairo_scaled_font_thaw_cache (surface->scaled_font);
@@ -527,8 +549,9 @@ _cairo_type3_glyph_surface_emit_glyph (void		     *abstract_surface,
 
 	mem_stream = _cairo_memory_stream_create ();
 	status = mem_stream->status;
-	if (unlikely (status))
+	if (unlikely (status)) {
 	    goto FAIL;
+}
 
 	_cairo_type3_glyph_surface_set_stream (surface, mem_stream);
 
@@ -537,22 +560,26 @@ _cairo_type3_glyph_surface_emit_glyph (void		     *abstract_surface,
 						  &surface->base);
 
 	status2 = _cairo_pdf_operators_flush (&surface->pdf_operators);
-	if (status == CAIRO_STATUS_SUCCESS)
+	if (status == CAIRO_STATUS_SUCCESS) {
 	    status = status2;
+}
 
 	_cairo_output_stream_printf (surface->stream, "Q\n");
 
 	_cairo_type3_glyph_surface_set_stream (surface, stream);
-	if (status == CAIRO_STATUS_SUCCESS)
+	if (status == CAIRO_STATUS_SUCCESS) {
 	    _cairo_memory_stream_copy (mem_stream, stream);
+}
 
 	status2 = _cairo_output_stream_destroy (mem_stream);
-	if (status == CAIRO_STATUS_SUCCESS)
+	if (status == CAIRO_STATUS_SUCCESS) {
 	    status = status2;
+}
     }
 
-    if (status == CAIRO_INT_STATUS_IMAGE_FALLBACK)
+    if (status == CAIRO_INT_STATUS_IMAGE_FALLBACK) {
 	status = _cairo_type3_glyph_surface_emit_fallback_image (surface, glyph_index);
+}
 
   FAIL:
     _cairo_scaled_font_thaw_cache (surface->scaled_font);

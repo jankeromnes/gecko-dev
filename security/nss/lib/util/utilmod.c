@@ -383,8 +383,9 @@ nssutil_ReadSecmodDB(const char *appName,
     PRBool failed = PR_TRUE;
 
     moduleList = (char **)PORT_ZAlloc(useCount * sizeof(char *));
-    if (moduleList == NULL)
+    if (moduleList == NULL) {
         return NULL;
+}
 
     if (dbname == NULL) {
         goto return_default;
@@ -392,8 +393,9 @@ nssutil_ReadSecmodDB(const char *appName,
 
     /* do we really want to use streams here */
     fd = os_fopen(dbname, "r");
-    if (fd == NULL)
+    if (fd == NULL) {
         goto done;
+}
 
     /*
      * the following loop takes line separated config lines and collapses
@@ -433,22 +435,26 @@ nssutil_ReadSecmodDB(const char *appName,
             if (value == NULL || value[1] == 0) {
                 if (moduleString) {
                     moduleString = nssutil_DupnCat(moduleString, " ", 1);
-                    if (moduleString == NULL)
+                    if (moduleString == NULL) {
                         goto loser;
+}
                 }
                 moduleString = nssutil_DupCat(moduleString, line);
-                if (moduleString == NULL)
+                if (moduleString == NULL) {
                     goto loser;
+}
                 /* value is already quoted, just write it out */
             } else if (value[1] == '"') {
                 if (moduleString) {
                     moduleString = nssutil_DupnCat(moduleString, " ", 1);
-                    if (moduleString == NULL)
+                    if (moduleString == NULL) {
                         goto loser;
+}
                 }
                 moduleString = nssutil_DupCat(moduleString, line);
-                if (moduleString == NULL)
+                if (moduleString == NULL) {
                     goto loser;
+}
                 /* we have an override parameter section, remember that
                  * we found this (see following comment about why this
                  * is necessary). */
@@ -479,27 +485,32 @@ nssutil_ReadSecmodDB(const char *appName,
                     continue;
                 }
                 paramsValue = NSSUTIL_Quote(&value[1], '"');
-                if (paramsValue == NULL)
+                if (paramsValue == NULL) {
                     goto loser;
+}
                 continue;
             } else {
                 /* may need to quote */
                 char *newLine;
                 if (moduleString) {
                     moduleString = nssutil_DupnCat(moduleString, " ", 1);
-                    if (moduleString == NULL)
+                    if (moduleString == NULL) {
                         goto loser;
+}
                 }
                 moduleString = nssutil_DupnCat(moduleString, line, value - line + 1);
-                if (moduleString == NULL)
+                if (moduleString == NULL) {
                     goto loser;
+}
                 newLine = NSSUTIL_Quote(&value[1], '"');
-                if (newLine == NULL)
+                if (newLine == NULL) {
                     goto loser;
+}
                 moduleString = nssutil_DupCat(moduleString, newLine);
                 PORT_Free(newLine);
-                if (moduleString == NULL)
+                if (moduleString == NULL) {
                     goto loser;
+}
             }
 
             /* check to see if it's internal? */
@@ -530,11 +541,13 @@ nssutil_ReadSecmodDB(const char *appName,
             /* we had an override */
             if (!skipParams) {
                 moduleString = nssutil_DupnCat(moduleString, " parameters=", 12);
-                if (moduleString == NULL)
+                if (moduleString == NULL) {
                     goto loser;
+}
                 moduleString = nssutil_DupCat(moduleString, paramsValue);
-                if (moduleString == NULL)
+                if (moduleString == NULL) {
                     goto loser;
+}
             }
             PORT_Free(paramsValue);
             paramsValue = NULL;
@@ -595,24 +608,29 @@ return_default:
         char *newParams;
         moduleString = PORT_Strdup(NSSUTIL_DEFAULT_INTERNAL_INIT1);
         newParams = NSSUTIL_Quote(params, '"');
-        if (newParams == NULL)
+        if (newParams == NULL) {
             goto loser;
+}
         moduleString = nssutil_DupCat(moduleString, newParams);
         PORT_Free(newParams);
-        if (moduleString == NULL)
+        if (moduleString == NULL) {
             goto loser;
+}
         moduleString = nssutil_DupCat(moduleString,
                                       NSSUTIL_DEFAULT_INTERNAL_INIT2);
-        if (moduleString == NULL)
+        if (moduleString == NULL) {
             goto loser;
+}
         moduleString = nssutil_DupCat(moduleString,
                                       NSSUTIL_DEFAULT_SFTKN_FLAGS);
-        if (moduleString == NULL)
+        if (moduleString == NULL) {
             goto loser;
+}
         moduleString = nssutil_DupCat(moduleString,
                                       NSSUTIL_DEFAULT_INTERNAL_INIT3);
-        if (moduleString == NULL)
+        if (moduleString == NULL) {
             goto loser;
+}
         moduleList[0] = moduleString;
         moduleString = NULL;
     }
@@ -692,8 +710,9 @@ nssutil_DeleteSecmodDBEntry(const char *appName,
     }
 
     dbname2 = PORT_Strdup(dbname);
-    if (dbname2 == NULL)
+    if (dbname2 == NULL) {
         goto loser;
+}
     dbname2[strlen(dbname) - 1]++;
 
     /* get the permissions of the existing file, or use the default */
@@ -705,13 +724,15 @@ nssutil_DeleteSecmodDBEntry(const char *appName,
 
     /* do we really want to use streams here */
     fd = os_fopen(dbname, "r");
-    if (fd == NULL)
+    if (fd == NULL) {
         goto loser;
+}
 
     fd2 = lfopen(dbname2, lfopen_truncate, file_mode);
 
-    if (fd2 == NULL)
+    if (fd2 == NULL) {
         goto loser;
+}
 
     name = NSSUTIL_ArgGetParamValue("name", args);
     if (name) {
@@ -933,11 +954,14 @@ NSSUTIL_DoModuleDBFunction(unsigned long function, char *parameters, void *args)
             break;
     }
 done:
-    if (secmod)
+    if (secmod) {
         PR_smprintf_free(secmod);
-    if (appName)
+}
+    if (appName) {
         PORT_Free(appName);
-    if (filename)
+}
+    if (filename) {
         PORT_Free(filename);
+}
     return rvstr;
 }

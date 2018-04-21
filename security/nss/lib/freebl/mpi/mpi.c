@@ -77,10 +77,11 @@ mp_get_prec(void)
 void
 mp_set_prec(mp_size prec)
 {
-    if (prec == 0)
+    if (prec == 0) {
         s_mp_defprec = MP_DEFPREC;
-    else
+    } else {
         s_mp_defprec = prec;
+}
 
 } /* end mp_set_prec() */
 
@@ -141,8 +142,9 @@ mp_init_size(mp_int *mp, mp_size prec)
     ARGCHK(mp != NULL && prec > 0, MP_BADARG);
 
     prec = MP_ROUNDUP(prec, s_mp_defprec);
-    if ((DIGITS(mp) = s_mp_alloc(prec, sizeof(mp_digit))) == NULL)
+    if ((DIGITS(mp) = s_mp_alloc(prec, sizeof(mp_digit))) == NULL) {
         return MP_MEM;
+}
 
     SIGN(mp) = ZPOS;
     USED(mp) = 1;
@@ -169,11 +171,13 @@ mp_init_copy(mp_int *mp, const mp_int *from)
 {
     ARGCHK(mp != NULL && from != NULL, MP_BADARG);
 
-    if (mp == from)
+    if (mp == from) {
         return MP_OKAY;
+}
 
-    if ((DIGITS(mp) = s_mp_alloc(ALLOC(from), sizeof(mp_digit))) == NULL)
+    if ((DIGITS(mp) = s_mp_alloc(ALLOC(from), sizeof(mp_digit))) == NULL) {
         return MP_MEM;
+}
 
     s_mp_copy(DIGITS(from), DIGITS(mp), USED(from));
     USED(mp) = USED(from);
@@ -201,8 +205,9 @@ mp_copy(const mp_int *from, mp_int *to)
 {
     ARGCHK(from != NULL && to != NULL, MP_BADARG);
 
-    if (from == to)
+    if (from == to) {
         return MP_OKAY;
+}
 
     { /* copy */
         mp_digit *tmp;
@@ -219,8 +224,9 @@ mp_copy(const mp_int *from, mp_int *to)
             s_mp_copy(DIGITS(from), DIGITS(to), USED(from));
 
         } else {
-            if ((tmp = s_mp_alloc(ALLOC(from), sizeof(mp_digit))) == NULL)
+            if ((tmp = s_mp_alloc(ALLOC(from), sizeof(mp_digit))) == NULL) {
                 return MP_MEM;
+}
 
             s_mp_copy(DIGITS(from), tmp, USED(from));
 
@@ -260,8 +266,9 @@ mp_exch(mp_int *mp1, mp_int *mp2)
 #if MP_ARGCHK == 2
     assert(mp1 != NULL && mp2 != NULL);
 #else
-    if (mp1 == NULL || mp2 == NULL)
+    if (mp1 == NULL || mp2 == NULL) {
         return;
+}
 #endif
 
     s_mp_exch(mp1, mp2);
@@ -283,8 +290,9 @@ mp_exch(mp_int *mp1, mp_int *mp2)
 void
 mp_clear(mp_int *mp)
 {
-    if (mp == NULL)
+    if (mp == NULL) {
         return;
+}
 
     if (DIGITS(mp) != NULL) {
         s_mp_setz(DIGITS(mp), ALLOC(mp));
@@ -310,8 +318,9 @@ mp_clear(mp_int *mp)
 void
 mp_zero(mp_int *mp)
 {
-    if (mp == NULL)
+    if (mp == NULL) {
         return;
+}
 
     s_mp_setz(DIGITS(mp), ALLOC(mp));
     USED(mp) = 1;
@@ -326,8 +335,9 @@ mp_zero(mp_int *mp)
 void
 mp_set(mp_int *mp, mp_digit d)
 {
-    if (mp == NULL)
+    if (mp == NULL) {
         return;
+}
 
     mp_zero(mp);
     DIGIT(mp, 0) = d;
@@ -348,23 +358,27 @@ mp_set_int(mp_int *mp, long z)
     ARGCHK(mp != NULL, MP_BADARG);
 
     mp_zero(mp);
-    if (z == 0)
+    if (z == 0) {
         return MP_OKAY; /* shortcut for zero */
+}
 
     if (sizeof v <= sizeof(mp_digit)) {
         DIGIT(mp, 0) = v;
     } else {
         for (ix = sizeof(long) - 1; ix >= 0; ix--) {
-            if ((res = s_mp_mul_d(mp, (UCHAR_MAX + 1))) != MP_OKAY)
+            if ((res = s_mp_mul_d(mp, (UCHAR_MAX + 1))) != MP_OKAY) {
                 return res;
+}
 
             res = s_mp_add_d(mp, (mp_digit)((v >> (ix * CHAR_BIT)) & UCHAR_MAX));
-            if (res != MP_OKAY)
+            if (res != MP_OKAY) {
                 return res;
+}
         }
     }
-    if (z < 0)
+    if (z < 0) {
         SIGN(mp) = NEG;
+}
 
     return MP_OKAY;
 
@@ -383,19 +397,22 @@ mp_set_ulong(mp_int *mp, unsigned long z)
     ARGCHK(mp != NULL, MP_BADARG);
 
     mp_zero(mp);
-    if (z == 0)
+    if (z == 0) {
         return MP_OKAY; /* shortcut for zero */
+}
 
     if (sizeof z <= sizeof(mp_digit)) {
         DIGIT(mp, 0) = z;
     } else {
         for (ix = sizeof(long) - 1; ix >= 0; ix--) {
-            if ((res = s_mp_mul_d(mp, (UCHAR_MAX + 1))) != MP_OKAY)
+            if ((res = s_mp_mul_d(mp, (UCHAR_MAX + 1))) != MP_OKAY) {
                 return res;
+}
 
             res = s_mp_add_d(mp, (mp_digit)((z >> (ix * CHAR_BIT)) & UCHAR_MAX));
-            if (res != MP_OKAY)
+            if (res != MP_OKAY) {
                 return res;
+}
         }
     }
     return MP_OKAY;
@@ -423,23 +440,27 @@ mp_add_d(const mp_int *a, mp_digit d, mp_int *b)
 
     ARGCHK(a != NULL && b != NULL, MP_BADARG);
 
-    if ((res = mp_init_copy(&tmp, a)) != MP_OKAY)
+    if ((res = mp_init_copy(&tmp, a)) != MP_OKAY) {
         return res;
+}
 
     if (SIGN(&tmp) == ZPOS) {
-        if ((res = s_mp_add_d(&tmp, d)) != MP_OKAY)
+        if ((res = s_mp_add_d(&tmp, d)) != MP_OKAY) {
             goto CLEANUP;
+}
     } else if (s_mp_cmp_d(&tmp, d) >= 0) {
-        if ((res = s_mp_sub_d(&tmp, d)) != MP_OKAY)
+        if ((res = s_mp_sub_d(&tmp, d)) != MP_OKAY) {
             goto CLEANUP;
+}
     } else {
         mp_neg(&tmp, &tmp);
 
         DIGIT(&tmp, 0) = d - DIGIT(&tmp, 0);
     }
 
-    if (s_mp_cmp_d(&tmp, 0) == 0)
+    if (s_mp_cmp_d(&tmp, 0) == 0) {
         SIGN(&tmp) = ZPOS;
+}
 
     s_mp_exch(&tmp, b);
 
@@ -468,15 +489,18 @@ mp_sub_d(const mp_int *a, mp_digit d, mp_int *b)
 
     ARGCHK(a != NULL && b != NULL, MP_BADARG);
 
-    if ((res = mp_init_copy(&tmp, a)) != MP_OKAY)
+    if ((res = mp_init_copy(&tmp, a)) != MP_OKAY) {
         return res;
+}
 
     if (SIGN(&tmp) == NEG) {
-        if ((res = s_mp_add_d(&tmp, d)) != MP_OKAY)
+        if ((res = s_mp_add_d(&tmp, d)) != MP_OKAY) {
             goto CLEANUP;
+}
     } else if (s_mp_cmp_d(&tmp, d) >= 0) {
-        if ((res = s_mp_sub_d(&tmp, d)) != MP_OKAY)
+        if ((res = s_mp_sub_d(&tmp, d)) != MP_OKAY) {
             goto CLEANUP;
+}
     } else {
         mp_neg(&tmp, &tmp);
 
@@ -484,8 +508,9 @@ mp_sub_d(const mp_int *a, mp_digit d, mp_int *b)
         SIGN(&tmp) = NEG;
     }
 
-    if (s_mp_cmp_d(&tmp, 0) == 0)
+    if (s_mp_cmp_d(&tmp, 0) == 0) {
         SIGN(&tmp) = ZPOS;
+}
 
     s_mp_exch(&tmp, b);
 
@@ -518,8 +543,9 @@ mp_mul_d(const mp_int *a, mp_digit d, mp_int *b)
         return MP_OKAY;
     }
 
-    if ((res = mp_copy(a, b)) != MP_OKAY)
+    if ((res = mp_copy(a, b)) != MP_OKAY) {
         return res;
+}
 
     res = s_mp_mul_d(b, d);
 
@@ -538,8 +564,9 @@ mp_mul_2(const mp_int *a, mp_int *c)
 
     ARGCHK(a != NULL && c != NULL, MP_BADARG);
 
-    if ((res = mp_copy(a, c)) != MP_OKAY)
+    if ((res = mp_copy(a, c)) != MP_OKAY) {
         return res;
+}
 
     return s_mp_mul_2(c);
 
@@ -567,8 +594,9 @@ mp_div_d(const mp_int *a, mp_digit d, mp_int *q, mp_digit *r)
 
     ARGCHK(a != NULL, MP_BADARG);
 
-    if (d == 0)
+    if (d == 0) {
         return MP_RANGE;
+}
 
     /* Shortcut for powers of two ... */
     if ((pow = s_mp_ispow2d(d)) >= 0) {
@@ -584,26 +612,30 @@ mp_div_d(const mp_int *a, mp_digit d, mp_int *q, mp_digit *r)
             s_mp_div_2d(q, pow);
         }
 
-        if (r)
+        if (r) {
             *r = rem;
+}
 
         return MP_OKAY;
     }
 
-    if ((res = mp_init_copy(&qp, a)) != MP_OKAY)
+    if ((res = mp_init_copy(&qp, a)) != MP_OKAY) {
         return res;
+}
 
     res = s_mp_div_d(&qp, d, &rem);
 
-    if (s_mp_cmp_d(&qp, 0) == 0)
+    if (s_mp_cmp_d(&qp, 0) == 0) {
         SIGN(q) = ZPOS;
+}
 
     if (r) {
         *r = rem;
     }
 
-    if (q)
+    if (q) {
         s_mp_exch(&qp, q);
+}
 
     mp_clear(&qp);
     return res;
@@ -627,8 +659,9 @@ mp_div_2(const mp_int *a, mp_int *c)
 
     ARGCHK(a != NULL && c != NULL, MP_BADARG);
 
-    if ((res = mp_copy(a, c)) != MP_OKAY)
+    if ((res = mp_copy(a, c)) != MP_OKAY) {
         return res;
+}
 
     s_mp_div_2(c);
 
@@ -648,23 +681,27 @@ mp_expt_d(const mp_int *a, mp_digit d, mp_int *c)
 
     ARGCHK(a != NULL && c != NULL, MP_BADARG);
 
-    if ((res = mp_init(&s)) != MP_OKAY)
+    if ((res = mp_init(&s)) != MP_OKAY) {
         return res;
-    if ((res = mp_init_copy(&x, a)) != MP_OKAY)
+}
+    if ((res = mp_init_copy(&x, a)) != MP_OKAY) {
         goto X;
+}
 
     DIGIT(&s, 0) = 1;
 
     while (d != 0) {
         if (d & 1) {
-            if ((res = s_mp_mul(&s, &x)) != MP_OKAY)
+            if ((res = s_mp_mul(&s, &x)) != MP_OKAY) {
                 goto CLEANUP;
+}
         }
 
         d /= 2;
 
-        if ((res = s_mp_sqr(&x)) != MP_OKAY)
+        if ((res = s_mp_sqr(&x)) != MP_OKAY) {
             goto CLEANUP;
+}
     }
 
     s_mp_exch(&s, c);
@@ -700,8 +737,9 @@ mp_abs(const mp_int *a, mp_int *b)
 
     ARGCHK(a != NULL && b != NULL, MP_BADARG);
 
-    if ((res = mp_copy(a, b)) != MP_OKAY)
+    if ((res = mp_copy(a, b)) != MP_OKAY) {
         return res;
+}
 
     SIGN(b) = ZPOS;
 
@@ -726,13 +764,15 @@ mp_neg(const mp_int *a, mp_int *b)
 
     ARGCHK(a != NULL && b != NULL, MP_BADARG);
 
-    if ((res = mp_copy(a, b)) != MP_OKAY)
+    if ((res = mp_copy(a, b)) != MP_OKAY) {
         return res;
+}
 
-    if (s_mp_cmp_d(b, 0) == MP_EQ)
+    if (s_mp_cmp_d(b, 0) == MP_EQ) {
         SIGN(b) = ZPOS;
-    else
+    } else {
         SIGN(b) = (SIGN(b) == NEG) ? ZPOS : NEG;
+}
 
     return MP_OKAY;
 
@@ -763,8 +803,9 @@ mp_add(const mp_int *a, const mp_int *b, mp_int *c)
         MP_CHECKOK(s_mp_sub_3arg(b, a, c));
     }
 
-    if (s_mp_cmp_d(c, 0) == MP_EQ)
+    if (s_mp_cmp_d(c, 0) == MP_EQ) {
         SIGN(c) = ZPOS;
+}
 
 CLEANUP:
     return res;
@@ -806,8 +847,9 @@ mp_sub(const mp_int *a, const mp_int *b, mp_int *c)
         MP_SIGN(c) = !MP_SIGN(a);
     }
 
-    if (s_mp_cmp_d(c, 0) == MP_EQ)
+    if (s_mp_cmp_d(c, 0) == MP_EQ) {
         MP_SIGN(c) = MP_ZPOS;
+}
 
 CLEANUP:
     return res;
@@ -835,14 +877,17 @@ mp_mul(const mp_int *a, const mp_int *b, mp_int *c)
     ARGCHK(a != NULL && b != NULL && c != NULL, MP_BADARG);
 
     if (a == c) {
-        if ((res = mp_init_copy(&tmp, a)) != MP_OKAY)
+        if ((res = mp_init_copy(&tmp, a)) != MP_OKAY) {
             return res;
-        if (a == b)
+}
+        if (a == b) {
             b = &tmp;
+}
         a = &tmp;
     } else if (b == c) {
-        if ((res = mp_init_copy(&tmp, b)) != MP_OKAY)
+        if ((res = mp_init_copy(&tmp, b)) != MP_OKAY) {
             return res;
+}
         b = &tmp;
     } else {
         MP_DIGITS(&tmp) = 0;
@@ -856,8 +901,9 @@ mp_mul(const mp_int *a, const mp_int *b, mp_int *c)
 
     MP_USED(c) = 1;
     MP_DIGIT(c, 0) = 0;
-    if ((res = s_mp_pad(c, USED(a) + USED(b))) != MP_OKAY)
+    if ((res = s_mp_pad(c, USED(a) + USED(b))) != MP_OKAY) {
         goto CLEANUP;
+}
 
 #ifdef NSS_USE_COMBA
     if ((MP_USED(a) == MP_USED(b)) && IS_POWER_OF_2(MP_USED(b))) {
@@ -890,18 +936,20 @@ mp_mul(const mp_int *a, const mp_int *b, mp_int *c)
         mp_digit b_i = *pb++;
 
         /* Inner product:  Digits of a */
-        if (b_i)
+        if (b_i) {
             s_mpv_mul_d_add(MP_DIGITS(a), useda, b_i, MP_DIGITS(c) + ib);
-        else
+        } else {
             MP_DIGIT(c, ib + useda) = b_i;
+}
     }
 
     s_mp_clamp(c);
 
-    if (SIGN(a) == SIGN(b) || s_mp_cmp_d(c, 0) == MP_EQ)
+    if (SIGN(a) == SIGN(b) || s_mp_cmp_d(c, 0) == MP_EQ) {
         SIGN(c) = ZPOS;
-    else
+    } else {
         SIGN(c) = NEG;
+}
 
 CLEANUP:
     mp_clear(&tmp);
@@ -935,8 +983,9 @@ mp_sqr(const mp_int *a, mp_int *sqr)
     ARGCHK(a != NULL && sqr != NULL, MP_BADARG);
 
     if (a == sqr) {
-        if ((res = mp_init_copy(&tmp, a)) != MP_OKAY)
+        if ((res = mp_init_copy(&tmp, a)) != MP_OKAY) {
             return res;
+}
         a = &tmp;
     } else {
         DIGITS(&tmp) = 0;
@@ -1028,8 +1077,9 @@ mp_div(const mp_int *a, const mp_int *b, mp_int *q, mp_int *r)
     signA = MP_SIGN(a);
     signB = MP_SIGN(b);
 
-    if (mp_cmp_z(b) == MP_EQ)
+    if (mp_cmp_z(b) == MP_EQ) {
         return MP_RANGE;
+}
 
     DIGITS(&qtmp) = 0;
     DIGITS(&rtmp) = 0;
@@ -1075,17 +1125,21 @@ mp_div(const mp_int *a, const mp_int *b, mp_int *q, mp_int *r)
     /* Sq = ZPOS if Sa == Sb */ /* Sq = NEG if Sa != Sb */
     MP_SIGN(pQ) = (signA == signB) ? ZPOS : NEG;
 
-    if (s_mp_cmp_d(pQ, 0) == MP_EQ)
+    if (s_mp_cmp_d(pQ, 0) == MP_EQ) {
         SIGN(pQ) = ZPOS;
-    if (s_mp_cmp_d(pR, 0) == MP_EQ)
+}
+    if (s_mp_cmp_d(pR, 0) == MP_EQ) {
         SIGN(pR) = ZPOS;
+}
 
     /* Copy output, if it is needed      */
-    if (q && q != pQ)
+    if (q && q != pQ) {
         s_mp_exch(pQ, q);
+}
 
-    if (r && r != pR)
+    if (r && r != pR) {
         s_mp_exch(pR, r);
+}
 
 CLEANUP:
     mp_clear(&btmp);
@@ -1108,12 +1162,14 @@ mp_div_2d(const mp_int *a, mp_digit d, mp_int *q, mp_int *r)
     ARGCHK(a != NULL, MP_BADARG);
 
     if (q) {
-        if ((res = mp_copy(a, q)) != MP_OKAY)
+        if ((res = mp_copy(a, q)) != MP_OKAY) {
             return res;
+}
     }
     if (r) {
-        if ((res = mp_copy(a, r)) != MP_OKAY)
+        if ((res = mp_copy(a, r)) != MP_OKAY) {
             return res;
+}
     }
     if (q) {
         s_mp_div_2d(q, d);
@@ -1147,16 +1203,19 @@ mp_expt(mp_int *a, mp_int *b, mp_int *c)
 
     ARGCHK(a != NULL && b != NULL && c != NULL, MP_BADARG);
 
-    if (mp_cmp_z(b) < 0)
+    if (mp_cmp_z(b) < 0) {
         return MP_RANGE;
+}
 
-    if ((res = mp_init(&s)) != MP_OKAY)
+    if ((res = mp_init(&s)) != MP_OKAY) {
         return res;
+}
 
     mp_set(&s, 1);
 
-    if ((res = mp_init_copy(&x, a)) != MP_OKAY)
+    if ((res = mp_init_copy(&x, a)) != MP_OKAY) {
         goto X;
+}
 
     /* Loop over low-order digits in ascending order */
     for (dig = 0; dig < (USED(b) - 1); dig++) {
@@ -1165,14 +1224,16 @@ mp_expt(mp_int *a, mp_int *b, mp_int *c)
         /* Loop over bits of each non-maximal digit */
         for (bit = 0; bit < DIGIT_BIT; bit++) {
             if (d & 1) {
-                if ((res = s_mp_mul(&s, &x)) != MP_OKAY)
+                if ((res = s_mp_mul(&s, &x)) != MP_OKAY) {
                     goto CLEANUP;
+}
             }
 
             d >>= 1;
 
-            if ((res = s_mp_sqr(&x)) != MP_OKAY)
+            if ((res = s_mp_sqr(&x)) != MP_OKAY) {
                 goto CLEANUP;
+}
         }
     }
 
@@ -1181,18 +1242,21 @@ mp_expt(mp_int *a, mp_int *b, mp_int *c)
 
     while (d) {
         if (d & 1) {
-            if ((res = s_mp_mul(&s, &x)) != MP_OKAY)
+            if ((res = s_mp_mul(&s, &x)) != MP_OKAY) {
                 goto CLEANUP;
+}
         }
 
         d >>= 1;
 
-        if ((res = s_mp_sqr(&x)) != MP_OKAY)
+        if ((res = s_mp_sqr(&x)) != MP_OKAY) {
             goto CLEANUP;
+}
     }
 
-    if (mp_iseven(b))
+    if (mp_iseven(b)) {
         SIGN(&s) = SIGN(a);
+}
 
     res = mp_copy(&s, c);
 
@@ -1238,8 +1302,9 @@ mp_mod(const mp_int *a, const mp_int *m, mp_int *c)
 
     ARGCHK(a != NULL && m != NULL && c != NULL, MP_BADARG);
 
-    if (SIGN(m) == NEG)
+    if (SIGN(m) == NEG) {
         return MP_RANGE;
+}
 
     /*
      If |a| > m, we need to divide to get the remainder and take the
@@ -1255,21 +1320,25 @@ mp_mod(const mp_int *a, const mp_int *m, mp_int *c)
      that |a| != m, so we do those first.
      */
     if ((mag = s_mp_cmp(a, m)) > 0) {
-        if ((res = mp_div(a, m, NULL, c)) != MP_OKAY)
+        if ((res = mp_div(a, m, NULL, c)) != MP_OKAY) {
             return res;
+}
 
         if (SIGN(c) == NEG) {
-            if ((res = mp_add(c, m, c)) != MP_OKAY)
+            if ((res = mp_add(c, m, c)) != MP_OKAY) {
                 return res;
+}
         }
 
     } else if (mag < 0) {
-        if ((res = mp_copy(a, c)) != MP_OKAY)
+        if ((res = mp_copy(a, c)) != MP_OKAY) {
             return res;
+}
 
         if (mp_cmp_z(a) < 0) {
-            if ((res = mp_add(c, m, c)) != MP_OKAY)
+            if ((res = mp_add(c, m, c)) != MP_OKAY) {
                 return res;
+}
         }
 
     } else {
@@ -1298,18 +1367,21 @@ mp_mod_d(const mp_int *a, mp_digit d, mp_digit *c)
     ARGCHK(a != NULL && c != NULL, MP_BADARG);
 
     if (s_mp_cmp_d(a, d) > 0) {
-        if ((res = mp_div_d(a, d, NULL, &rem)) != MP_OKAY)
+        if ((res = mp_div_d(a, d, NULL, &rem)) != MP_OKAY) {
             return res;
+}
 
     } else {
-        if (SIGN(a) == NEG)
+        if (SIGN(a) == NEG) {
             rem = d - DIGIT(a, 0);
-        else
+        } else {
             rem = DIGIT(a, 0);
+}
     }
 
-    if (c)
+    if (c) {
         *c = rem;
+}
 
     return MP_OKAY;
 
@@ -1338,10 +1410,12 @@ mp_addmod(const mp_int *a, const mp_int *b, const mp_int *m, mp_int *c)
 
     ARGCHK(a != NULL && b != NULL && m != NULL && c != NULL, MP_BADARG);
 
-    if ((res = mp_add(a, b, c)) != MP_OKAY)
+    if ((res = mp_add(a, b, c)) != MP_OKAY) {
         return res;
-    if ((res = mp_mod(c, m, c)) != MP_OKAY)
+}
+    if ((res = mp_mod(c, m, c)) != MP_OKAY) {
         return res;
+}
 
     return MP_OKAY;
 }
@@ -1363,10 +1437,12 @@ mp_submod(const mp_int *a, const mp_int *b, const mp_int *m, mp_int *c)
 
     ARGCHK(a != NULL && b != NULL && m != NULL && c != NULL, MP_BADARG);
 
-    if ((res = mp_sub(a, b, c)) != MP_OKAY)
+    if ((res = mp_sub(a, b, c)) != MP_OKAY) {
         return res;
-    if ((res = mp_mod(c, m, c)) != MP_OKAY)
+}
+    if ((res = mp_mod(c, m, c)) != MP_OKAY) {
         return res;
+}
 
     return MP_OKAY;
 }
@@ -1388,10 +1464,12 @@ mp_mulmod(const mp_int *a, const mp_int *b, const mp_int *m, mp_int *c)
 
     ARGCHK(a != NULL && b != NULL && m != NULL && c != NULL, MP_BADARG);
 
-    if ((res = mp_mul(a, b, c)) != MP_OKAY)
+    if ((res = mp_mul(a, b, c)) != MP_OKAY) {
         return res;
-    if ((res = mp_mod(c, m, c)) != MP_OKAY)
+}
+    if ((res = mp_mod(c, m, c)) != MP_OKAY) {
         return res;
+}
 
     return MP_OKAY;
 }
@@ -1408,10 +1486,12 @@ mp_sqrmod(const mp_int *a, const mp_int *m, mp_int *c)
 
     ARGCHK(a != NULL && m != NULL && c != NULL, MP_BADARG);
 
-    if ((res = mp_sqr(a, c)) != MP_OKAY)
+    if ((res = mp_sqr(a, c)) != MP_OKAY) {
         return res;
-    if ((res = mp_mod(c, m, c)) != MP_OKAY)
+}
+    if ((res = mp_mod(c, m, c)) != MP_OKAY) {
         return res;
+}
 
     return MP_OKAY;
 
@@ -1443,26 +1523,33 @@ s_mp_exptmod(const mp_int *a, const mp_int *b, const mp_int *m, mp_int *c)
 
     ARGCHK(a != NULL && b != NULL && c != NULL, MP_BADARG);
 
-    if (mp_cmp_z(b) < 0 || mp_cmp_z(m) <= 0)
+    if (mp_cmp_z(b) < 0 || mp_cmp_z(m) <= 0) {
         return MP_RANGE;
+}
 
-    if ((res = mp_init(&s)) != MP_OKAY)
+    if ((res = mp_init(&s)) != MP_OKAY) {
         return res;
+}
     if ((res = mp_init_copy(&x, a)) != MP_OKAY ||
-        (res = mp_mod(&x, m, &x)) != MP_OKAY)
+        (res = mp_mod(&x, m, &x)) != MP_OKAY) {
         goto X;
-    if ((res = mp_init(&mu)) != MP_OKAY)
+}
+    if ((res = mp_init(&mu)) != MP_OKAY) {
         goto MU;
+}
 
     mp_set(&s, 1);
 
     /* mu = b^2k / m */
-    if ((res = s_mp_add_d(&mu, 1)) != MP_OKAY)
+    if ((res = s_mp_add_d(&mu, 1)) != MP_OKAY) {
         goto CLEANUP;
-    if ((res = s_mp_lshd(&mu, 2 * USED(m))) != MP_OKAY)
+}
+    if ((res = s_mp_lshd(&mu, 2 * USED(m))) != MP_OKAY) {
         goto CLEANUP;
-    if ((res = mp_div(&mu, m, &mu, NULL)) != MP_OKAY)
+}
+    if ((res = mp_div(&mu, m, &mu, NULL)) != MP_OKAY) {
         goto CLEANUP;
+}
 
     /* Loop over digits of b in ascending order, except highest order */
     for (dig = 0; dig < (USED(b) - 1); dig++) {
@@ -1471,18 +1558,22 @@ s_mp_exptmod(const mp_int *a, const mp_int *b, const mp_int *m, mp_int *c)
         /* Loop over the bits of the lower-order digits */
         for (bit = 0; bit < DIGIT_BIT; bit++) {
             if (d & 1) {
-                if ((res = s_mp_mul(&s, &x)) != MP_OKAY)
+                if ((res = s_mp_mul(&s, &x)) != MP_OKAY) {
                     goto CLEANUP;
-                if ((res = s_mp_reduce(&s, m, &mu)) != MP_OKAY)
+}
+                if ((res = s_mp_reduce(&s, m, &mu)) != MP_OKAY) {
                     goto CLEANUP;
+}
             }
 
             d >>= 1;
 
-            if ((res = s_mp_sqr(&x)) != MP_OKAY)
+            if ((res = s_mp_sqr(&x)) != MP_OKAY) {
                 goto CLEANUP;
-            if ((res = s_mp_reduce(&x, m, &mu)) != MP_OKAY)
+}
+            if ((res = s_mp_reduce(&x, m, &mu)) != MP_OKAY) {
                 goto CLEANUP;
+}
         }
     }
 
@@ -1491,18 +1582,22 @@ s_mp_exptmod(const mp_int *a, const mp_int *b, const mp_int *m, mp_int *c)
 
     while (d) {
         if (d & 1) {
-            if ((res = s_mp_mul(&s, &x)) != MP_OKAY)
+            if ((res = s_mp_mul(&s, &x)) != MP_OKAY) {
                 goto CLEANUP;
-            if ((res = s_mp_reduce(&s, m, &mu)) != MP_OKAY)
+}
+            if ((res = s_mp_reduce(&s, m, &mu)) != MP_OKAY) {
                 goto CLEANUP;
+}
         }
 
         d >>= 1;
 
-        if ((res = s_mp_sqr(&x)) != MP_OKAY)
+        if ((res = s_mp_sqr(&x)) != MP_OKAY) {
             goto CLEANUP;
-        if ((res = s_mp_reduce(&x, m, &mu)) != MP_OKAY)
+}
+        if ((res = s_mp_reduce(&x, m, &mu)) != MP_OKAY) {
             goto CLEANUP;
+}
     }
 
     s_mp_exch(&s, c);
@@ -1530,25 +1625,29 @@ mp_exptmod_d(const mp_int *a, mp_digit d, const mp_int *m, mp_int *c)
 
     ARGCHK(a != NULL && c != NULL, MP_BADARG);
 
-    if ((res = mp_init(&s)) != MP_OKAY)
+    if ((res = mp_init(&s)) != MP_OKAY) {
         return res;
-    if ((res = mp_init_copy(&x, a)) != MP_OKAY)
+}
+    if ((res = mp_init_copy(&x, a)) != MP_OKAY) {
         goto X;
+}
 
     mp_set(&s, 1);
 
     while (d != 0) {
         if (d & 1) {
             if ((res = s_mp_mul(&s, &x)) != MP_OKAY ||
-                (res = mp_mod(&s, m, &s)) != MP_OKAY)
+                (res = mp_mod(&s, m, &s)) != MP_OKAY) {
                 goto CLEANUP;
+}
         }
 
         d /= 2;
 
         if ((res = s_mp_sqr(&x)) != MP_OKAY ||
-            (res = mp_mod(&x, m, &x)) != MP_OKAY)
+            (res = mp_mod(&x, m, &x)) != MP_OKAY) {
             goto CLEANUP;
+}
     }
 
     s_mp_exch(&s, c);
@@ -1581,12 +1680,13 @@ X:
 int
 mp_cmp_z(const mp_int *a)
 {
-    if (SIGN(a) == NEG)
+    if (SIGN(a) == NEG) {
         return MP_LT;
-    else if (USED(a) == 1 && DIGIT(a, 0) == 0)
+    } else if (USED(a) == 1 && DIGIT(a, 0) == 0) {
         return MP_EQ;
-    else
+    } else {
         return MP_GT;
+}
 
 } /* end mp_cmp_z() */
 
@@ -1605,8 +1705,9 @@ mp_cmp_d(const mp_int *a, mp_digit d)
 {
     ARGCHK(a != NULL, MP_EQ);
 
-    if (SIGN(a) == NEG)
+    if (SIGN(a) == NEG) {
         return MP_LT;
+}
 
     return s_mp_cmp_d(a, d);
 
@@ -1624,13 +1725,15 @@ mp_cmp(const mp_int *a, const mp_int *b)
     if (SIGN(a) == SIGN(b)) {
         int mag;
 
-        if ((mag = s_mp_cmp(a, b)) == MP_EQ)
+        if ((mag = s_mp_cmp(a, b)) == MP_EQ) {
             return MP_EQ;
+}
 
-        if (SIGN(a) == ZPOS)
+        if (SIGN(a) == ZPOS) {
             return mag;
-        else
+        } else {
             return -mag;
+}
 
     } else if (SIGN(a) == ZPOS) {
         return MP_GT;
@@ -1710,20 +1813,24 @@ mp_gcd(mp_int *a, mp_int *b, mp_int *c)
 
     ARGCHK(a != NULL && b != NULL && c != NULL, MP_BADARG);
 
-    if (mp_cmp_z(a) == MP_EQ && mp_cmp_z(b) == MP_EQ)
+    if (mp_cmp_z(a) == MP_EQ && mp_cmp_z(b) == MP_EQ) {
         return MP_RANGE;
+}
     if (mp_cmp_z(a) == MP_EQ) {
         return mp_copy(b, c);
     } else if (mp_cmp_z(b) == MP_EQ) {
         return mp_copy(a, c);
     }
 
-    if ((res = mp_init(&t)) != MP_OKAY)
+    if ((res = mp_init(&t)) != MP_OKAY) {
         return res;
-    if ((res = mp_init_copy(&u, a)) != MP_OKAY)
+}
+    if ((res = mp_init_copy(&u, a)) != MP_OKAY) {
         goto U;
-    if ((res = mp_init_copy(&v, b)) != MP_OKAY)
+}
+    if ((res = mp_init_copy(&v, b)) != MP_OKAY) {
         goto V;
+}
 
     SIGN(&u) = ZPOS;
     SIGN(&v) = ZPOS;
@@ -1737,18 +1844,21 @@ mp_gcd(mp_int *a, mp_int *b, mp_int *c)
 
     /* Initialize t */
     if (mp_isodd(&u)) {
-        if ((res = mp_copy(&v, &t)) != MP_OKAY)
+        if ((res = mp_copy(&v, &t)) != MP_OKAY) {
             goto CLEANUP;
+}
 
         /* t = -v */
-        if (SIGN(&v) == ZPOS)
+        if (SIGN(&v) == ZPOS) {
             SIGN(&t) = NEG;
-        else
+        } else {
             SIGN(&t) = ZPOS;
+}
 
     } else {
-        if ((res = mp_copy(&u, &t)) != MP_OKAY)
+        if ((res = mp_copy(&u, &t)) != MP_OKAY) {
             goto CLEANUP;
+}
     }
 
     for (;;) {
@@ -1757,25 +1867,30 @@ mp_gcd(mp_int *a, mp_int *b, mp_int *c)
         }
 
         if (mp_cmp_z(&t) == MP_GT) {
-            if ((res = mp_copy(&t, &u)) != MP_OKAY)
+            if ((res = mp_copy(&t, &u)) != MP_OKAY) {
                 goto CLEANUP;
+}
 
         } else {
-            if ((res = mp_copy(&t, &v)) != MP_OKAY)
+            if ((res = mp_copy(&t, &v)) != MP_OKAY) {
                 goto CLEANUP;
+}
 
             /* v = -t */
-            if (SIGN(&t) == ZPOS)
+            if (SIGN(&t) == ZPOS) {
                 SIGN(&v) = NEG;
-            else
+            } else {
                 SIGN(&v) = ZPOS;
+}
         }
 
-        if ((res = mp_sub(&u, &v, &t)) != MP_OKAY)
+        if ((res = mp_sub(&u, &v, &t)) != MP_OKAY) {
             goto CLEANUP;
+}
 
-        if (s_mp_cmp_d(&t, 0) == MP_EQ)
+        if (s_mp_cmp_d(&t, 0) == MP_EQ) {
             break;
+}
     }
 
     s_mp_2expt(&v, k);       /* v = 2^k   */
@@ -1812,15 +1927,19 @@ mp_lcm(mp_int *a, mp_int *b, mp_int *c)
     ARGCHK(a != NULL && b != NULL && c != NULL, MP_BADARG);
 
     /* Set up temporaries */
-    if ((res = mp_init(&gcd)) != MP_OKAY)
+    if ((res = mp_init(&gcd)) != MP_OKAY) {
         return res;
-    if ((res = mp_init(&prod)) != MP_OKAY)
+}
+    if ((res = mp_init(&prod)) != MP_OKAY) {
         goto GCD;
+}
 
-    if ((res = mp_mul(a, b, &prod)) != MP_OKAY)
+    if ((res = mp_mul(a, b, &prod)) != MP_OKAY) {
         goto CLEANUP;
-    if ((res = mp_gcd(a, b, &gcd)) != MP_OKAY)
+}
+    if ((res = mp_gcd(a, b, &gcd)) != MP_OKAY) {
         goto CLEANUP;
+}
 
     res = mp_div(&prod, &gcd, c, NULL);
 
@@ -1854,8 +1973,9 @@ mp_xgcd(const mp_int *a, const mp_int *b, mp_int *g, mp_int *x, mp_int *y)
     mp_err res;
     int last = -1;
 
-    if (mp_cmp_z(b) == 0)
+    if (mp_cmp_z(b) == 0) {
         return MP_RANGE;
+}
 
     /* Initialize all these variables we need */
     MP_CHECKOK(mp_init(&u));
@@ -1938,18 +2058,22 @@ mp_xgcd(const mp_int *a, const mp_int *b, mp_int *g, mp_int *x, mp_int *y)
     } while (mp_cmp_z(&u) != 0);
 
     /* copy results to output */
-    if (x)
+    if (x) {
         MP_CHECKOK(mp_copy(&C, x));
+}
 
-    if (y)
+    if (y) {
         MP_CHECKOK(mp_copy(&D, y));
+}
 
-    if (g)
+    if (g) {
         MP_CHECKOK(mp_mul(&gx, &v, g));
+}
 
 CLEANUP:
-    while (last >= 0)
+    while (last >= 0) {
         mp_clear(clean[last--]);
+}
 
     return res;
 
@@ -1964,13 +2088,16 @@ mp_trailing_zeros(const mp_int *mp)
     mp_size n = 0;
     unsigned int ix;
 
-    if (!mp || !MP_DIGITS(mp) || !mp_cmp_z(mp))
+    if (!mp || !MP_DIGITS(mp) || !mp_cmp_z(mp)) {
         return n;
+}
 
-    for (ix = 0; !(d = MP_DIGIT(mp, ix)) && (ix < MP_USED(mp)); ++ix)
+    for (ix = 0; !(d = MP_DIGIT(mp, ix)) && (ix < MP_USED(mp)); ++ix) {
         n += MP_DIGIT_BIT;
-    if (!d)
+}
+    if (!d) {
         return 0; /* shouldn't happen, but ... */
+}
 #if !defined(MP_USE_UINT_DIGIT)
     if (!(d & 0xffffffffU)) {
         d >>= 32;
@@ -2029,7 +2156,7 @@ s_mp_almost_inverse(const mp_int *a, const mp_int *p, mp_int *c)
 
     if (mp_cmp_z(&f) == 0) {
         res = MP_UNDEF;
-    } else
+    } else {
         for (;;) {
             int diff_sign;
             while (mp_iseven(&f)) {
@@ -2062,6 +2189,7 @@ s_mp_almost_inverse(const mp_int *a, const mp_int *p, mp_int *c)
                 MP_CHECKOK(mp_add(c, &d, c));   /* c = c + d */
             }
         }
+}
     if (res >= 0) {
         while (MP_SIGN(c) != MP_ZPOS) {
             MP_CHECKOK(mp_add(c, p, c));
@@ -2148,22 +2276,27 @@ s_mp_invmod_odd_m(const mp_int *a, const mp_int *m, mp_int *c)
 
     ARGCHK(a && m && c, MP_BADARG);
 
-    if (mp_cmp_z(a) == 0 || mp_cmp_z(m) == 0)
+    if (mp_cmp_z(a) == 0 || mp_cmp_z(m) == 0) {
         return MP_RANGE;
-    if (mp_iseven(m))
+}
+    if (mp_iseven(m)) {
         return MP_UNDEF;
+}
 
     MP_DIGITS(&x) = 0;
 
     if (a == c) {
-        if ((res = mp_init_copy(&x, a)) != MP_OKAY)
+        if ((res = mp_init_copy(&x, a)) != MP_OKAY) {
             return res;
-        if (a == m)
+}
+        if (a == m) {
             m = &x;
+}
         a = &x;
     } else if (m == c) {
-        if ((res = mp_init_copy(&x, m)) != MP_OKAY)
+        if ((res = mp_init_copy(&x, m)) != MP_OKAY) {
             return res;
+}
         m = &x;
     } else {
         MP_DIGITS(&x) = 0;
@@ -2186,8 +2319,9 @@ mp_invmod_xgcd(const mp_int *a, const mp_int *m, mp_int *c)
 
     ARGCHK(a && m && c, MP_BADARG);
 
-    if (mp_cmp_z(a) == 0 || mp_cmp_z(m) == 0)
+    if (mp_cmp_z(a) == 0 || mp_cmp_z(m) == 0) {
         return MP_RANGE;
+}
 
     MP_DIGITS(&g) = 0;
     MP_DIGITS(&x) = 0;
@@ -2223,12 +2357,14 @@ s_mp_invmod_2d(const mp_int *a, mp_size k, mp_int *c)
     static const mp_digit d2 = 2;
     static const mp_int two = { MP_ZPOS, 1, 1, (mp_digit *)&d2 };
 
-    if (mp_iseven(a))
+    if (mp_iseven(a)) {
         return MP_UNDEF;
+}
     if (k <= MP_DIGIT_BIT) {
         mp_digit i = s_mp_invmod_radix(MP_DIGIT(a, 0));
-        if (k < MP_DIGIT_BIT)
+        if (k < MP_DIGIT_BIT) {
             i &= ((mp_digit)1 << k) - (mp_digit)1;
+}
         mp_set(c, i);
         return MP_OKAY;
     }
@@ -2252,8 +2388,9 @@ s_mp_invmod_2d(const mp_int *a, mp_size k, mp_int *c)
         while (MP_SIGN(&t1) != MP_ZPOS) {
             MP_CHECKOK(mp_add(&t1, &two2k, &t1));
         }
-        if (mp_cmp(&t1, &t0) == MP_EQ)
+        if (mp_cmp(&t1, &t0) == MP_EQ) {
             break;
+}
         MP_CHECKOK(mp_copy(&t1, &t0));
     } while (--ix > 0);
     if (!ix) {
@@ -2361,14 +2498,16 @@ mp_invmod(const mp_int *a, const mp_int *m, mp_int *c)
 
     ARGCHK(a && m && c, MP_BADARG);
 
-    if (mp_cmp_z(a) == 0 || mp_cmp_z(m) == 0)
+    if (mp_cmp_z(a) == 0 || mp_cmp_z(m) == 0) {
         return MP_RANGE;
+}
 
     if (mp_isodd(m)) {
         return s_mp_invmod_odd_m(a, m, c);
     }
-    if (mp_iseven(a))
+    if (mp_iseven(a)) {
         return MP_UNDEF; /* not invertable */
+}
 
     return s_mp_invmod_even_m(a, m, c);
 
@@ -2432,17 +2571,20 @@ mp_read_raw(mp_int *mp, char *str, int len)
     mp_zero(mp);
 
     /* Get sign from first byte */
-    if (ustr[0])
+    if (ustr[0]) {
         SIGN(mp) = NEG;
-    else
+    } else {
         SIGN(mp) = ZPOS;
+}
 
     /* Read the rest of the digits */
     for (ix = 1; ix < len; ix++) {
-        if ((res = mp_mul_d(mp, 256, mp)) != MP_OKAY)
+        if ((res = mp_mul_d(mp, 256, mp)) != MP_OKAY) {
             return res;
-        if ((res = mp_add_d(mp, ustr[ix], mp)) != MP_OKAY)
+}
+        if ((res = mp_add_d(mp, ustr[ix], mp)) != MP_OKAY) {
             return res;
+}
     }
 
     return MP_OKAY;
@@ -2531,17 +2673,20 @@ mp_read_radix(mp_int *mp, const char *str, int radix)
     }
 
     while ((val = s_mp_tovalue(str[ix], radix)) >= 0) {
-        if ((res = s_mp_mul_d(mp, radix)) != MP_OKAY)
+        if ((res = s_mp_mul_d(mp, radix)) != MP_OKAY) {
             return res;
-        if ((res = s_mp_add_d(mp, val)) != MP_OKAY)
+}
+        if ((res = s_mp_add_d(mp, val)) != MP_OKAY) {
             return res;
+}
         ++ix;
     }
 
-    if (s_mp_cmp_d(mp, 0) == MP_EQ)
+    if (s_mp_cmp_d(mp, 0) == MP_EQ) {
         SIGN(mp) = ZPOS;
-    else
+    } else {
         SIGN(mp) = sig;
+}
 
     return MP_OKAY;
 
@@ -2596,8 +2741,9 @@ mp_radix_size(mp_int *mp, int radix)
 {
     int bits;
 
-    if (!mp || radix < 2 || radix > MAX_RADIX)
+    if (!mp || radix < 2 || radix > MAX_RADIX) {
         return 0;
+}
 
     bits = USED(mp) * DIGIT_BIT - 1;
 
@@ -2627,8 +2773,9 @@ mp_toradix(mp_int *mp, char *str, int radix)
         mp_digit rem, rdx = (mp_digit)radix;
         char ch;
 
-        if ((res = mp_init_copy(&tmp, mp)) != MP_OKAY)
+        if ((res = mp_init_copy(&tmp, mp)) != MP_OKAY) {
             return res;
+}
 
         /* Save sign for later, and take absolute value */
         sgn = SIGN(&tmp);
@@ -2648,8 +2795,9 @@ mp_toradix(mp_int *mp, char *str, int radix)
         }
 
         /* Add - sign if original value was negative */
-        if (sgn == NEG)
+        if (sgn == NEG) {
             str[pos++] = '-';
+}
 
         /* Add trailing NUL to end the string        */
         str[pos--] = '\0';
@@ -2732,8 +2880,9 @@ s_mp_grow(mp_int *mp, mp_size min)
         /* Set min to next nearest default precision block size */
         min = MP_ROUNDUP(min, s_mp_defprec);
 
-        if ((tmp = s_mp_alloc(min, sizeof(mp_digit))) == NULL)
+        if ((tmp = s_mp_alloc(min, sizeof(mp_digit))) == NULL) {
             return MP_MEM;
+}
 
         s_mp_copy(DIGITS(mp), tmp, USED(mp));
 
@@ -2760,8 +2909,9 @@ s_mp_pad(mp_int *mp, mp_size min)
 
         /* Make sure there is room to increase precision  */
         if (min > ALLOC(mp)) {
-            if ((res = s_mp_grow(mp, min)) != MP_OKAY)
+            if ((res = s_mp_grow(mp, min)) != MP_OKAY) {
                 return res;
+}
         } else {
             s_mp_setz(DIGITS(mp) + USED(mp), min - USED(mp));
         }
@@ -2830,8 +2980,9 @@ void
 s_mp_clamp(mp_int *mp)
 {
     mp_size used = MP_USED(mp);
-    while (used > 1 && DIGIT(mp, used - 1) == 0)
+    while (used > 1 && DIGIT(mp, used - 1) == 0) {
         --used;
+}
     MP_USED(mp) = used;
 } /* end s_mp_clamp() */
 
@@ -2874,14 +3025,17 @@ s_mp_lshd(mp_int *mp, mp_size p)
     mp_err res;
     unsigned int ix;
 
-    if (p == 0)
+    if (p == 0) {
         return MP_OKAY;
+}
 
-    if (MP_USED(mp) == 1 && MP_DIGIT(mp, 0) == 0)
+    if (MP_USED(mp) == 1 && MP_DIGIT(mp, 0) == 0) {
         return MP_OKAY;
+}
 
-    if ((res = s_mp_pad(mp, USED(mp) + p)) != MP_OKAY)
+    if ((res = s_mp_pad(mp, USED(mp) + p)) != MP_OKAY) {
         return res;
+}
 
     /* Shift all the significant figures over as needed */
     for (ix = USED(mp) - p; ix-- > 0;) {
@@ -2889,8 +3043,9 @@ s_mp_lshd(mp_int *mp, mp_size p)
     }
 
     /* Fill the bottom digits with zeroes */
-    for (ix = 0; (mp_size)ix < p; ix++)
+    for (ix = 0; (mp_size)ix < p; ix++) {
         DIGIT(mp, ix) = 0;
+}
 
     return MP_OKAY;
 
@@ -2923,11 +3078,13 @@ s_mp_mul_2d(mp_int *mp, mp_digit d)
         mask = 0;
     }
 
-    if (MP_OKAY != (res = s_mp_pad(mp, MP_USED(mp) + dshift + (mask != 0))))
+    if (MP_OKAY != (res = s_mp_pad(mp, MP_USED(mp) + dshift + (mask != 0)))) {
         return res;
+}
 
-    if (dshift && MP_OKAY != (res = s_mp_lshd(mp, dshift)))
+    if (dshift && MP_OKAY != (res = s_mp_lshd(mp, dshift))) {
         return res;
+}
 
     if (bshift) {
         mp_digit *pa = MP_DIGITS(mp);
@@ -2959,8 +3116,9 @@ s_mp_rshd(mp_int *mp, mp_size p)
     mp_size ix;
     mp_digit *src, *dst;
 
-    if (p == 0)
+    if (p == 0) {
         return;
+}
 
     /* Shortcut when all digits are to be shifted off */
     if (p >= USED(mp)) {
@@ -2973,13 +3131,15 @@ s_mp_rshd(mp_int *mp, mp_size p)
     /* Shift all the significant figures over as needed */
     dst = MP_DIGITS(mp);
     src = dst + p;
-    for (ix = USED(mp) - p; ix > 0; ix--)
+    for (ix = USED(mp) - p; ix > 0; ix--) {
         *dst++ = *src++;
+}
 
     MP_USED(mp) -= p;
     /* Fill the top digits with zeroes */
-    while (p-- > 0)
+    while (p-- > 0) {
         *dst++ = 0;
+}
 
 } /* end s_mp_rshd() */
 
@@ -3019,8 +3179,9 @@ s_mp_mul_2(mp_int *mp)
     if (kin) {
         if (ix >= ALLOC(mp)) {
             mp_err res;
-            if ((res = s_mp_grow(mp, ALLOC(mp) + 1)) != MP_OKAY)
+            if ((res = s_mp_grow(mp, ALLOC(mp) + 1)) != MP_OKAY) {
                 return res;
+}
         }
 
         DIGIT(mp, ix) = kin;
@@ -3047,16 +3208,18 @@ s_mp_mod_2d(mp_int *mp, mp_digit d)
     mp_size ix;
     mp_digit dmask;
 
-    if (ndig >= USED(mp))
+    if (ndig >= USED(mp)) {
         return;
+}
 
     /* Flush all the bits above 2^d in its digit */
     dmask = ((mp_digit)1 << nbit) - 1;
     DIGIT(mp, ndig) &= dmask;
 
     /* Flush all digits above the one with 2^d in it */
-    for (ix = ndig + 1; ix < USED(mp); ix++)
+    for (ix = ndig + 1; ix < USED(mp); ix++) {
         DIGIT(mp, ix) = 0;
+}
 
     s_mp_clamp(mp);
 
@@ -3261,8 +3424,9 @@ s_mp_mul_d(mp_int *a, mp_digit d)
         mp_zero(a);
         return MP_OKAY;
     }
-    if (d == 1)
+    if (d == 1) {
         return MP_OKAY;
+}
     if (0 <= (pow = s_mp_ispow2d(d))) {
         return s_mp_mul_2d(a, (mp_digit)pow);
     }
@@ -3303,11 +3467,13 @@ s_mp_div_d(mp_int *mp, mp_digit d, mp_digit *r)
     mp_int quot;
     mp_int rem;
 
-    if (d == 0)
+    if (d == 0) {
         return MP_RANGE;
+}
     if (d == 1) {
-        if (r)
+        if (r) {
             *r = 0;
+}
         return MP_OKAY;
     }
     /* could check for power of 2 here, but mp_div_d does that. */
@@ -3355,8 +3521,9 @@ s_mp_div_d(mp_int *mp, mp_digit d, mp_digit *r)
 #if !defined(MP_ASSEMBLY_DIV_2DX1D)
         MP_DIGIT(&quot, 0) = d;
         MP_CHECKOK(s_mp_norm(&rem, &quot, &norm));
-        if (norm)
+        if (norm) {
             d <<= norm;
+}
         MP_DIGIT(&quot, 0) = 0;
 #endif
 
@@ -3378,8 +3545,9 @@ s_mp_div_d(mp_int *mp, mp_digit d, mp_digit *r)
             p = w;
         }
 #if !defined(MP_ASSEMBLY_DIV_2DX1D)
-        if (norm)
+        if (norm) {
             w >>= norm;
+}
 #endif
     }
 #endif
@@ -3420,8 +3588,9 @@ mp_err s_mp_add(mp_int *a, const mp_int *b) /* magnitude addition      */
     mp_err res;
 
     /* Make sure a has enough precision for the output value */
-    if ((USED(b) > USED(a)) && (res = s_mp_pad(a, USED(b))) != MP_OKAY)
+    if ((USED(b) > USED(a)) && (res = s_mp_pad(a, USED(b))) != MP_OKAY) {
         return res;
+}
 
     /*
       Add up all digits up to the precision of b.  If b had initially
@@ -3480,8 +3649,9 @@ mp_err s_mp_add(mp_int *a, const mp_int *b) /* magnitude addition      */
     }
 #else
     if (carry) {
-        if ((res = s_mp_pad(a, used + 1)) != MP_OKAY)
+        if ((res = s_mp_pad(a, used + 1)) != MP_OKAY) {
             return res;
+}
 
         DIGIT(a, used) = carry;
     }
@@ -3514,8 +3684,9 @@ s_mp_add_3arg(const mp_int *a, const mp_int *b, mp_int *c)
     }
 
     /* Make sure a has enough precision for the output value */
-    if (MP_OKAY != (res = s_mp_pad(c, MP_USED(a))))
+    if (MP_OKAY != (res = s_mp_pad(c, MP_USED(a)))) {
         return res;
+}
 
     /*
      Add up all digits up to the precision of b.  If b had initially
@@ -3570,8 +3741,9 @@ s_mp_add_3arg(const mp_int *a, const mp_int *b, mp_int *c)
     }
 #else
     if (carry) {
-        if ((res = s_mp_pad(c, used + 1)) != MP_OKAY)
+        if ((res = s_mp_pad(c, used + 1)) != MP_OKAY) {
             return res;
+}
 
         DIGIT(c, used) = carry;
         ++used;
@@ -3598,8 +3770,9 @@ s_mp_add_offset(mp_int *a, mp_int *b, mp_size offset)
 
     /* Make sure a has enough precision for the output value */
     lim = MP_USED(b) + offset;
-    if ((lim > USED(a)) && (res = s_mp_pad(a, lim)) != MP_OKAY)
+    if ((lim > USED(a)) && (res = s_mp_pad(a, lim)) != MP_OKAY) {
         return res;
+}
 
     /*
     Add up all digits up to the precision of b.  If b had initially
@@ -3653,8 +3826,9 @@ s_mp_add_offset(mp_int *a, mp_int *b, mp_size offset)
     }
 #else
     if (carry) {
-        if ((res = s_mp_pad(a, lim + 1)) != MP_OKAY)
+        if ((res = s_mp_pad(a, lim + 1)) != MP_OKAY) {
             return res;
+}
 
         DIGIT(a, lim) = carry;
     }
@@ -3697,8 +3871,9 @@ mp_err s_mp_sub(mp_int *a, const mp_int *b) /* magnitude subtract      */
         d = *pa;
         diff = d - *pb++;
         d = (diff > d); /* detect borrow */
-        if (borrow && --diff == MP_DIGIT_MAX)
+        if (borrow && --diff == MP_DIGIT_MAX) {
             ++d;
+}
         *pa++ = diff;
         borrow = d;
 #endif
@@ -3751,8 +3926,9 @@ s_mp_sub_3arg(const mp_int *a, const mp_int *b, mp_int *c)
     MP_SIGN(c) = MP_SIGN(a);
 
     /* Make sure a has enough precision for the output value */
-    if (MP_OKAY != (res = s_mp_pad(c, MP_USED(a))))
+    if (MP_OKAY != (res = s_mp_pad(c, MP_USED(a)))) {
         return res;
+}
 
     /*
     Subtract and propagate borrow.  Up to the precision of b, this
@@ -3773,8 +3949,9 @@ s_mp_sub_3arg(const mp_int *a, const mp_int *b, mp_int *c)
         d = *pa++;
         diff = d - *pb++;
         d = (diff > d);
-        if (borrow && --diff == MP_DIGIT_MAX)
+        if (borrow && --diff == MP_DIGIT_MAX) {
             ++d;
+}
         *pc++ = diff;
         borrow = d;
 #endif
@@ -4053,13 +4230,15 @@ s_mpv_sqr_add_prop(const mp_digit *pa, mp_size a_len, mp_digit *ps)
 
         /* here a1a1 and a0a0 constitute a_i ** 2 */
         a0a0 += carry;
-        if (a0a0 < carry)
+        if (a0a0 < carry) {
             ++a1a1;
+}
 
         /* now add to ps */
         a0a0 += a_i = *ps;
-        if (a0a0 < a_i)
+        if (a0a0 < a_i) {
             ++a1a1;
+}
         *ps++ = a0a0;
         a1a1 += a_i = *ps;
         carry = (a1a1 < a_i);
@@ -4110,10 +4289,12 @@ s_mpv_div_2dx1d(mp_digit Nhi, mp_digit Nlo, mp_digit divisor,
             q0--, r0 += divisor;
         }
     }
-    if (qp)
+    if (qp) {
         *qp = (q1 << MP_HALF_DIGIT_BIT) | q0;
-    if (rp)
+}
+    if (rp) {
         *rp = r0 - m;
+}
     return MP_OKAY;
 }
 #endif
@@ -4127,8 +4308,9 @@ s_mp_sqr(mp_int *a)
     mp_err res;
     mp_int tmp;
 
-    if ((res = mp_init_size(&tmp, 2 * USED(a))) != MP_OKAY)
+    if ((res = mp_init_size(&tmp, 2 * USED(a))) != MP_OKAY) {
         return res;
+}
     res = mp_sqr(a, &tmp);
     if (res == MP_OKAY) {
         s_mp_exch(&tmp, a);
@@ -4159,8 +4341,9 @@ mp_err s_mp_div(mp_int *rem,  /* i: dividend, o: remainder */
     mp_digit div_msd;
     int ix;
 
-    if (mp_cmp_z(div) == 0)
+    if (mp_cmp_z(div) == 0) {
         return MP_RANGE;
+}
 
     DIGITS(&t) = 0;
     /* Shortcut if divisor is power of two */
@@ -4232,8 +4415,9 @@ mp_err s_mp_div(mp_int *rem,  /* i: dividend, o: remainder */
 #if MP_ARGCHK == 2
         assert(q_msd > 0); /* This case should never occur any more. */
 #endif
-        if (q_msd <= 0)
+        if (q_msd <= 0) {
             break;
+}
 
         /* See what that multiplies out to                   */
         mp_copy(div, &t);
@@ -4295,8 +4479,9 @@ s_mp_2expt(mp_int *a, mp_digit k)
     bit = k % DIGIT_BIT;
 
     mp_zero(a);
-    if ((res = s_mp_pad(a, dig + 1)) != MP_OKAY)
+    if ((res = s_mp_pad(a, dig + 1)) != MP_OKAY) {
         return res;
+}
 
     DIGIT(a, dig) |= ((mp_digit)1 << bit);
 
@@ -4327,8 +4512,9 @@ s_mp_reduce(mp_int *x, const mp_int *m, const mp_int *mu)
     mp_int q;
     mp_err res;
 
-    if ((res = mp_init_copy(&q, x)) != MP_OKAY)
+    if ((res = mp_init_copy(&q, x)) != MP_OKAY) {
         return res;
+}
 
     s_mp_rshd(&q, USED(m) - 1); /* q1 = x / b^(k-1)  */
     s_mp_mul(&q, mu);           /* q2 = q1 * mu      */
@@ -4342,22 +4528,26 @@ s_mp_reduce(mp_int *x, const mp_int *m, const mp_int *mu)
     s_mp_mod_2d(&q, DIGIT_BIT * (USED(m) + 1));
 
     /* x = x - q */
-    if ((res = mp_sub(x, &q, x)) != MP_OKAY)
+    if ((res = mp_sub(x, &q, x)) != MP_OKAY) {
         goto CLEANUP;
+}
 
     /* If x < 0, add b^(k+1) to it */
     if (mp_cmp_z(x) < 0) {
         mp_set(&q, 1);
-        if ((res = s_mp_lshd(&q, USED(m) + 1)) != MP_OKAY)
+        if ((res = s_mp_lshd(&q, USED(m) + 1)) != MP_OKAY) {
             goto CLEANUP;
-        if ((res = mp_add(x, &q, x)) != MP_OKAY)
+}
+        if ((res = mp_add(x, &q, x)) != MP_OKAY) {
             goto CLEANUP;
+}
     }
 
     /* Back off if it's too big */
     while (mp_cmp(x, m) >= 0) {
-        if ((res = s_mp_sub(x, m)) != MP_OKAY)
+        if ((res = s_mp_sub(x, m)) != MP_OKAY) {
             break;
+}
     }
 
 CLEANUP:
@@ -4383,10 +4573,12 @@ s_mp_cmp(const mp_int *a, const mp_int *b)
     {
         mp_size used_b = MP_USED(b);
 
-        if (used_a > used_b)
+        if (used_a > used_b) {
             goto IS_GT;
-        if (used_a < used_b)
+}
+        if (used_a < used_b) {
             goto IS_LT;
+}
     }
     {
         mp_digit *pa, *pb;
@@ -4407,13 +4599,16 @@ s_mp_cmp(const mp_int *a, const mp_int *b)
             CMP_AB(1);
             CMP_AB(0);
         }
-        while (used_a-- > 0 && ((da = *--pa) == (db = *--pb)))
+        while (used_a-- > 0 && ((da = *--pa) == (db = *--pb))) {
             /* do nothing */;
+}
     done:
-        if (da > db)
+        if (da > db) {
             goto IS_GT;
-        if (da < db)
+}
+        if (da < db) {
             goto IS_LT;
+}
     }
     return MP_EQ;
 IS_LT:
@@ -4430,15 +4625,17 @@ IS_GT:
 int
 s_mp_cmp_d(const mp_int *a, mp_digit d)
 {
-    if (USED(a) > 1)
+    if (USED(a) > 1) {
         return MP_GT;
+}
 
-    if (DIGIT(a, 0) < d)
+    if (DIGIT(a, 0) < d) {
         return MP_LT;
-    else if (DIGIT(a, 0) > d)
+    } else if (DIGIT(a, 0) > d) {
         return MP_GT;
-    else
+    } else {
         return MP_EQ;
+}
 
 } /* end s_mp_cmp_d() */
 
@@ -4460,12 +4657,14 @@ s_mp_ispow2(const mp_int *v)
     d = MP_DIGIT(v, ix); /* most significant digit of v */
 
     extra = s_mp_ispow2d(d);
-    if (extra < 0 || ix == 0)
+    if (extra < 0 || ix == 0) {
         return extra;
+}
 
     while (--ix >= 0) {
-        if (DIGIT(v, ix) != 0)
+        if (DIGIT(v, ix) != 0) {
             return -1; /* not a power of two */
+}
         extra += MP_DIGIT_BIT;
     }
 
@@ -4507,18 +4706,24 @@ s_mp_ispow2d(mp_digit d)
         if (d & 0xaaaaaaaaaaaaaaaaULL)
             pow += 1;
 #elif defined(MP_USE_LONG_DIGIT)
-        if (d & 0xffffffff00000000UL)
+        if (d & 0xffffffff00000000UL) {
             pow += 32;
-        if (d & 0xffff0000ffff0000UL)
+}
+        if (d & 0xffff0000ffff0000UL) {
             pow += 16;
-        if (d & 0xff00ff00ff00ff00UL)
+}
+        if (d & 0xff00ff00ff00ff00UL) {
             pow += 8;
-        if (d & 0xf0f0f0f0f0f0f0f0UL)
+}
+        if (d & 0xf0f0f0f0f0f0f0f0UL) {
             pow += 4;
-        if (d & 0xccccccccccccccccUL)
+}
+        if (d & 0xccccccccccccccccUL) {
             pow += 2;
-        if (d & 0xaaaaaaaaaaaaaaaaUL)
+}
+        if (d & 0xaaaaaaaaaaaaaaaaUL) {
             pow += 1;
+}
 #else
 #error "unknown type for mp_digit"
 #endif
@@ -4549,26 +4754,29 @@ s_mp_tovalue(char ch, int r)
 {
     int val, xch;
 
-    if (r > 36)
+    if (r > 36) {
         xch = ch;
-    else
+    } else {
         xch = toupper(ch);
+}
 
-    if (isdigit(xch))
+    if (isdigit(xch)) {
         val = xch - '0';
-    else if (isupper(xch))
+    } else if (isupper(xch)) {
         val = xch - 'A' + 10;
-    else if (islower(xch))
+    } else if (islower(xch)) {
         val = xch - 'a' + 36;
-    else if (xch == '+')
+    } else if (xch == '+') {
         val = 62;
-    else if (xch == '/')
+    } else if (xch == '/') {
         val = 63;
-    else
+    } else {
         return -1;
+}
 
-    if (val < 0 || val >= r)
+    if (val < 0 || val >= r) {
         return -1;
+}
 
     return val;
 
@@ -4592,13 +4800,15 @@ s_mp_todigit(mp_digit val, int r, int low)
 {
     char ch;
 
-    if (val >= r)
+    if (val >= r) {
         return 0;
+}
 
     ch = s_dmap_1[val];
 
-    if (r <= 36 && low)
+    if (r <= 36 && low) {
         ch = tolower(ch);
+}
 
     return ch;
 
@@ -4655,11 +4865,13 @@ mp_read_unsigned_octets(mp_int *mp, const unsigned char *str, mp_size len)
             d = (d << 8) | *str++;
         }
         if (MP_EQ == mp_cmp_z(mp)) {
-            if (!d)
+            if (!d) {
                 continue;
+}
         } else {
-            if ((res = s_mp_lshd(mp, 1)) != MP_OKAY)
+            if ((res = s_mp_lshd(mp, 1)) != MP_OKAY) {
                 return res;
+}
         }
         MP_DIGIT(mp, 0) = d;
     }
@@ -4684,18 +4896,21 @@ mp_unsigned_octet_size(const mp_int *mp)
     /* Iterate over each digit... */
     for (ix = USED(mp) - 1; ix >= 0; ix--) {
         d = DIGIT(mp, ix);
-        if (d)
+        if (d) {
             break;
+}
         bytes -= sizeof(d);
     }
-    if (!bytes)
+    if (!bytes) {
         return 1;
+}
 
     /* Have MSD, check digit bytes, high order first */
     for (ix = sizeof(mp_digit) - 1; ix >= 0; ix--) {
         unsigned char x = (unsigned char)(d >> (ix * CHAR_BIT));
-        if (x)
+        if (x) {
             break;
+}
         --bytes;
     }
     return bytes;
@@ -4723,13 +4938,15 @@ mp_to_unsigned_octets(const mp_int *mp, unsigned char *str, mp_size maxlen)
         /* Unpack digit bytes, high order first */
         for (jx = sizeof(mp_digit) - 1; jx >= 0; jx--) {
             unsigned char x = (unsigned char)(d >> (jx * CHAR_BIT));
-            if (!pos && !x) /* suppress leading zeros */
+            if (!pos && !x) { /* suppress leading zeros */
                 continue;
+}
             str[pos++] = x;
         }
     }
-    if (!pos)
+    if (!pos) {
         str[pos++] = 0;
+}
     return pos;
 } /* end mp_to_unsigned_octets() */
 /* }}} */
@@ -4756,20 +4973,23 @@ mp_to_signed_octets(const mp_int *mp, unsigned char *str, mp_size maxlen)
         for (jx = sizeof(mp_digit) - 1; jx >= 0; jx--) {
             unsigned char x = (unsigned char)(d >> (jx * CHAR_BIT));
             if (!pos) {
-                if (!x) /* suppress leading zeros */
+                if (!x) { /* suppress leading zeros */
                     continue;
+}
                 if (x & 0x80) { /* add one leading zero to make output positive.  */
                     ARGCHK(bytes + 1 <= maxlen, MP_BADARG);
-                    if (bytes + 1 > maxlen)
+                    if (bytes + 1 > maxlen) {
                         return MP_BADARG;
+}
                     str[pos++] = 0;
                 }
             }
             str[pos++] = x;
         }
     }
-    if (!pos)
+    if (!pos) {
         str[pos++] = 0;
+}
     return pos;
 } /* end mp_to_signed_octets() */
 /* }}} */
@@ -4800,13 +5020,15 @@ mp_to_fixlen_octets(const mp_int *mp, unsigned char *str, mp_size length)
         /* Unpack digit bytes, high order first */
         for (jx = sizeof(mp_digit) - 1; jx >= 0; jx--) {
             unsigned char x = (unsigned char)(d >> (jx * CHAR_BIT));
-            if (!pos && !x) /* suppress leading zeros */
+            if (!pos && !x) { /* suppress leading zeros */
                 continue;
+}
             str[pos++] = x;
         }
     }
-    if (!pos)
+    if (!pos) {
         str[pos++] = 0;
+}
     return MP_OKAY;
 } /* end mp_to_fixlen_octets() */
 /* }}} */

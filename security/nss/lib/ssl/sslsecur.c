@@ -160,8 +160,9 @@ SSL_ResetHandshake(PRFileDesc *s, PRBool asServer)
     }
 
     /* Don't waste my time */
-    if (!ss->opt.useSecurity)
+    if (!ss->opt.useSecurity) {
         return SECSuccess;
+}
 
     SSL_LOCK_READER(ss);
     SSL_LOCK_WRITER(ss);
@@ -182,8 +183,9 @@ SSL_ResetHandshake(PRFileDesc *s, PRBool asServer)
     ssl_GetRecvBufLock(ss);
     status = ssl3_InitGather(&ss->gs);
     ssl_ReleaseRecvBufLock(ss);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     ssl_GetSSL3HandshakeLock(ss);
     ss->ssl3.hs.canFalseStart = PR_FALSE;
@@ -203,8 +205,9 @@ SSL_ResetHandshake(PRFileDesc *s, PRBool asServer)
     ssl3_DestroyRemoteExtensions(&ss->ssl3.hs.remoteExtensions);
     ssl3_ResetExtensionData(&ss->xtnData, ss);
 
-    if (!ss->TCPconnected)
+    if (!ss->TCPconnected) {
         ss->TCPconnected = (PR_SUCCESS == ssl_DefGetpeername(ss, &addr));
+}
 
 loser:
     SSL_UNLOCK_WRITER(ss);
@@ -230,8 +233,9 @@ SSL_ReHandshake(PRFileDesc *fd, PRBool flushCache)
         return SECFailure;
     }
 
-    if (!ss->opt.useSecurity)
+    if (!ss->opt.useSecurity) {
         return SECSuccess;
+}
 
     ssl_Get1stHandshakeLock(ss);
 
@@ -375,8 +379,9 @@ SSL_ForceHandshake(PRFileDesc *fd)
     }
 
     /* Don't waste my time */
-    if (!ss->opt.useSecurity)
+    if (!ss->opt.useSecurity) {
         return SECSuccess;
+}
 
     if (!ssl_SocketIsBlocking(ss)) {
         ssl_GetXmitBufLock(ss);
@@ -596,8 +601,9 @@ ssl_CopySecurityInfo(sslSocket *ss, sslSocket *os)
     ss->sec.isServer = os->sec.isServer;
 
     ss->sec.peerCert = CERT_DupCertificate(os->sec.peerCert);
-    if (os->sec.peerCert && !ss->sec.peerCert)
+    if (os->sec.peerCert && !ss->sec.peerCert) {
         goto loser;
+}
 
     return SECSuccess;
 
@@ -861,8 +867,9 @@ ssl_SecureRecv(sslSocket *ss, unsigned char *buf, int len, int flags)
         return rv;
     }
 
-    if (len == 0)
+    if (len == 0) {
         return 0;
+}
 
     rv = DoRecv(ss, (unsigned char *)buf, len, flags);
     SSL_TRC(2, ("%d: SSL[%d]: recving %d bytes securely (errno=%d)",
@@ -912,8 +919,9 @@ ssl_SecureSend(sslSocket *ss, const unsigned char *buf, int len, int flags)
         goto done;
     }
 
-    if (len > 0)
+    if (len > 0) {
         ss->writerThread = PR_GetCurrentThread();
+}
 
     /* Check to see if we can write even though we're not finished.
      *
@@ -1199,8 +1207,9 @@ SSL_CertDBHandleSet(PRFileDesc *fd, CERTCertDBHandle *dbHandle)
     sslSocket *ss;
 
     ss = ssl_FindSocket(fd);
-    if (!ss)
+    if (!ss) {
         return SECFailure;
+}
     if (!dbHandle) {
         PORT_SetError(SEC_ERROR_INVALID_ARGS);
         return SECFailure;

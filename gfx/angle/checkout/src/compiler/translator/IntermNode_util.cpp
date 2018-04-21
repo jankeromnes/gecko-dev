@@ -222,11 +222,13 @@ TVariable *DeclareTempVariable(TSymbolTable *symbolTable,
 
 TIntermBlock *EnsureBlock(TIntermNode *node)
 {
-    if (node == nullptr)
+    if (node == nullptr) {
         return nullptr;
+}
     TIntermBlock *blockNode = node->getAsBlock();
-    if (blockNode != nullptr)
+    if (blockNode != nullptr) {
         return blockNode;
+}
 
     blockNode = new TIntermBlock();
     blockNode->setLine(node->getLine());

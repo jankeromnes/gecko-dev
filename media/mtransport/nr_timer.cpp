@@ -190,8 +190,9 @@ static int nr_async_timer_set_zero(NR_async_cb cb, void *arg,
       nsAutoPtr<nrappkitScheduledCallback>(callback),
       &nrappkitScheduledCallback::Run),
                         NS_DISPATCH_NORMAL);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return R_FAILED;
+}
 
   *handle = callback;
 
@@ -239,11 +240,13 @@ int NR_async_timer_set(int timeout, NR_async_cb cb, void *arg,
     r = nr_async_timer_set_nonzero(timeout, cb, arg, func, l, &callback);
   }
 
-  if (r)
+  if (r) {
     return r;
+}
 
-  if (handle)
+  if (handle) {
     *handle = callback;
+}
 
   return 0;
 }
@@ -258,8 +261,9 @@ int NR_async_timer_cancel(void *handle) {
   // Check for the handle being nonzero because sometimes we get
   // no-op cancels that aren't on the STS thread. This can be
   // non-racy as long as the upper-level code is careful.
-  if (!handle)
+  if (!handle) {
     return 0;
+}
 
   CheckSTSThread();
 

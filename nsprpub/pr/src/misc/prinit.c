@@ -138,7 +138,8 @@ static void _pr_SetNativeThreadsOnlyMode(void)
 static void _PR_InitStuff(void)
 {
 
-    if (_pr_initialized) return;
+    if (_pr_initialized) { return;
+}
     _pr_initialized = PR_TRUE;
 #ifdef _PR_ZONE_ALLOCATOR
     _PR_InitZones();
@@ -771,7 +772,8 @@ PR_IMPLEMENT(PRStatus) PR_CallOnce(
     PRCallOnceType *once,
     PRCallOnceFN    func)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     if (!once->initialized) {
 	if (PR_ATOMIC_SET(&once->inProgress, 1) == 0) {
@@ -800,7 +802,8 @@ PR_IMPLEMENT(PRStatus) PR_CallOnceWithArg(
     PRCallOnceWithArgFN  func,
     void                *arg)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     if (!once->initialized) {
 	if (PR_ATOMIC_SET(&once->inProgress, 1) == 0) {

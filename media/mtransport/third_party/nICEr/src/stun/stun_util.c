@@ -62,8 +62,9 @@ nr_stun_startup(void)
 {
    int r,_status;
 
-    if ((r=r_log_register("stun", &NR_LOG_STUN)))
+    if ((r=r_log_register("stun", &NR_LOG_STUN))) {
       ABORT(r);
+}
 
    _status=0;
  abort:
@@ -164,8 +165,9 @@ nr_stun_find_local_addresses(nr_local_addr addrs[], int maxaddrs, int *count)
 #endif
 
     if (*count == 0) {
-        if ((r=nr_stun_get_addrs(addrs, maxaddrs, count)))
+        if ((r=nr_stun_get_addrs(addrs, maxaddrs, count))) {
             ABORT(r);
+}
 
         goto done;
     }
@@ -214,8 +216,9 @@ nr_stun_different_transaction(UCHAR *msg, int len, nr_stun_message *req)
     char msgid[44];
     int len2;
 
-    if (sizeof(header) > len)
+    if (sizeof(header) > len) {
         ABORT(R_FAILED);
+}
 
     assert(sizeof(header.id) == sizeof(UINT12));
 
@@ -334,8 +337,9 @@ nr_random_alphanum(char *alphanum, int size)
     nr_crypto_random_bytes((UCHAR*)alphanum, size);
 
     /* now convert from binary to alphanumeric */
-    for (i = 0; i < size; ++i)
+    for (i = 0; i < size; ++i) {
         alphanum[i] = alphanums[(UCHAR)alphanum[i]];
+}
 
     return 0;
 }

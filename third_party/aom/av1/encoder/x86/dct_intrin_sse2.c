@@ -2930,10 +2930,11 @@ static INLINE void fhalfright32_16col(__m128i *tl, __m128i *tr, __m128i *bl,
   // Generate the top half of the output
   scale_sqrt2_8x16(tl);
   scale_sqrt2_8x16(tr);
-  if (t == transpose)
+  if (t == transpose) {
     fdct16t_sse2(tl, tr);
-  else
+  } else {
     fdct16_sse2(tl, tr);
+}
 }
 
 // Note on data layout, for both this and the 32x16 transforms:

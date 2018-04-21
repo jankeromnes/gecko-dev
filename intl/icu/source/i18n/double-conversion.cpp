@@ -422,7 +422,8 @@ void DoubleToStringConverter::DoubleToAscii(double v,
       fast_worked = false;
       UNREACHABLE();
   }
-  if (fast_worked) return;
+  if (fast_worked) { return;
+}
 
   // If the fast dtoa didn't succeed use the slower bignum version.
   BignumDtoaMode bignum_mode = DtoaToBignumDtoaMode(mode);

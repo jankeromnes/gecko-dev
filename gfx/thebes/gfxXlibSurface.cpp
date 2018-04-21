@@ -97,8 +97,9 @@ static Drawable
 CreatePixmap(Screen *screen, const gfx::IntSize& size, unsigned int depth,
              Drawable relatedDrawable)
 {
-    if (!Factory::CheckSurfaceSize(size, XLIB_IMAGE_SIDE_SIZE_LIMIT))
+    if (!Factory::CheckSurfaceSize(size, XLIB_IMAGE_SIDE_SIZE_LIMIT)) {
         return X11None;
+}
 
     if (relatedDrawable == X11None) {
         relatedDrawable = RootWindowOfScreen(screen);
@@ -168,8 +169,9 @@ gfxXlibSurface::CreateCairoSurface(Screen *screen, Visual *visual,
     Drawable drawable =
         CreatePixmap(screen, size, DepthOfVisual(screen, visual),
                      relatedDrawable);
-    if (!drawable)
+    if (!drawable) {
         return nullptr;
+}
 
     cairo_surface_t* surface =
         cairo_xlib_surface_create(DisplayOfScreen(screen), drawable, visual,
@@ -194,15 +196,17 @@ gfxXlibSurface::Create(Screen *screen, Visual *visual,
     Drawable drawable =
         CreatePixmap(screen, size, DepthOfVisual(screen, visual),
                      relatedDrawable);
-    if (!drawable)
+    if (!drawable) {
         return nullptr;
+}
 
     RefPtr<gfxXlibSurface> result =
         new gfxXlibSurface(DisplayOfScreen(screen), drawable, visual, size);
     result->TakePixmap();
 
-    if (result->CairoStatus() != 0)
+    if (result->CairoStatus() != 0) {
         return nullptr;
+}
 
     return result.forget();
 }
@@ -214,15 +218,17 @@ gfxXlibSurface::Create(Screen *screen, XRenderPictFormat *format,
 {
     Drawable drawable =
         CreatePixmap(screen, size, format->depth, relatedDrawable);
-    if (!drawable)
+    if (!drawable) {
         return nullptr;
+}
 
     RefPtr<gfxXlibSurface> result =
         new gfxXlibSurface(screen, drawable, format, size);
     result->TakePixmap();
 
-    if (result->CairoStatus() != 0)
+    if (result->CairoStatus() != 0) {
         return nullptr;
+}
 
     return result.forget();
 }
@@ -259,9 +265,10 @@ gfxXlibSurface::CreateSimilarSurface(gfxContentType aContent,
                 RefPtr<gfxXlibSurface> depth24reference =
                     gfxXlibSurface::Create(screen, format,
                                            gfx::IntSize(1, 1), mDrawable);
-                if (depth24reference)
+                if (depth24reference) {
                     return depth24reference->
                         gfxASurface::CreateSimilarSurface(aContent, aSize);
+}
             }
         }
     }
@@ -284,8 +291,9 @@ gfxXlibSurface::Finish()
 const gfx::IntSize
 gfxXlibSurface::GetSize() const
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return gfx::IntSize(0,0);
+}
 
     return gfx::IntSize(cairo_xlib_surface_get_width(mSurface),
                       cairo_xlib_surface_get_height(mSurface));
@@ -393,8 +401,9 @@ DisplayTable::GetColormapAndVisual(Screen* aScreen, XRenderPictFormat* aFormat,
     }
 
     // Only supporting TrueColor non-default visuals
-    if (!aVisual || aVisual->c_class != TrueColor)
+    if (!aVisual || aVisual->c_class != TrueColor) {
         return false;
+}
 
     if (!sDisplayTable) {
         sDisplayTable = new DisplayTable();
@@ -408,8 +417,9 @@ DisplayTable::GetColormapAndVisual(Screen* aScreen, XRenderPictFormat* aFormat,
         // Register for notification of display closing, when this info
         // becomes invalid.
         XExtCodes *codes = XAddExtension(display);
-        if (!codes)
+        if (!codes) {
             return false;
+}
 
         XESetCloseDisplay(display, codes->extension, DisplayClosing);
         // Add a new DisplayInfo.
@@ -478,8 +488,9 @@ gfxXlibSurface::GetColormapAndVisual(cairo_surface_t* aXlibSurface,
 bool
 gfxXlibSurface::GetColormapAndVisual(Colormap* aColormap, Visual** aVisual)
 {
-    if (!mSurfaceValid)
+    if (!mSurfaceValid) {
         return false;
+}
 
     return GetColormapAndVisual(CairoSurface(), aColormap, aVisual);
 }
@@ -491,8 +502,9 @@ gfxXlibSurface::DepthOfVisual(const Screen* screen, const Visual* visual)
     for (int d = 0; d < screen->ndepths; d++) {
         const Depth& d_info = screen->depths[d];
         if (visual >= &d_info.visuals[0]
-            && visual < &d_info.visuals[d_info.nvisuals])
+            && visual < &d_info.visuals[d_info.nvisuals]) {
             return d_info.depth;
+}
     }
 
     NS_ERROR("Visual not on Screen.");
@@ -531,8 +543,9 @@ gfxXlibSurface::FindVisual(Screen *screen, gfxImageFormat format)
 
     for (int d = 0; d < screen->ndepths; d++) {
         const Depth& d_info = screen->depths[d];
-        if (d_info.depth != depth)
+        if (d_info.depth != depth) {
             continue;
+}
 
         for (int v = 0; v < d_info.nvisuals; v++) {
             Visual* visual = &d_info.visuals[v];
@@ -540,8 +553,9 @@ gfxXlibSurface::FindVisual(Screen *screen, gfxImageFormat format)
             if (visual->c_class == TrueColor &&
                 visual->red_mask == red_mask &&
                 visual->green_mask == green_mask &&
-                visual->blue_mask == blue_mask)
+                visual->blue_mask == blue_mask) {
                 return visual;
+}
         }
     }
 
@@ -562,8 +576,9 @@ gfxXlibSurface::FindRenderFormat(Display *dpy, gfxImageFormat format)
             // we should try to find related visual
             // and find xrender format by visual
             Visual *visual = FindVisual(DefaultScreenOfDisplay(dpy), format);
-            if (!visual)
+            if (!visual) {
                 return nullptr;
+}
             return XRenderFindVisualFormat(dpy, visual);
         }
         case gfx::SurfaceFormat::A8:

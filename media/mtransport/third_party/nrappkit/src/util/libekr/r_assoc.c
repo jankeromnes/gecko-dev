@@ -129,15 +129,17 @@ int r_assoc_create(assocp,hash_func,bits)
     r_assoc *assoc=0;
     int _status;
 
-    if(!(assoc=(r_assoc *)RCALLOC(sizeof(r_assoc))))
+    if(!(assoc=(r_assoc *)RCALLOC(sizeof(r_assoc)))) {
       ABORT(R_NO_MEMORY);
+}
     assoc->size=(1<<bits);
     assoc->bits=bits;
     assoc->hash_func=hash_func;
 
     if(!(assoc->chains=(r_assoc_el **)RCALLOC(sizeof(r_assoc_el *)*
-      assoc->size)))
+      assoc->size))) {
       ABORT(R_NO_MEMORY);
+}
 
     *assocp=assoc;
 
@@ -155,12 +157,14 @@ int r_assoc_destroy(assocp)
     r_assoc *assoc;
     int i;
 
-    if(!assocp || !*assocp)
+    if(!assocp || !*assocp) {
       return(0);
+}
 
     assoc=*assocp;
-    for(i=0;i<assoc->size;i++)
+    for(i=0;i<assoc->size;i++) {
       destroy_assoc_chain(assoc->chains[i]);
+}
 
     RFREE(assoc->chains);
     RFREE(*assocp);
@@ -176,8 +180,9 @@ static int destroy_assoc_chain(chain)
     while(chain){
       nxt=chain->next;
 
-      if(chain->destroy)
+      if(chain->destroy) {
 	chain->destroy(chain->data);
+}
 
       RFREE(chain->key);
 
@@ -202,8 +207,9 @@ static int copy_assoc_chain(knewp,old)
       return(0);
     }
     for(;old;old=old->next){
-      if(!(tmp=(r_assoc_el *)RCALLOC(sizeof(r_assoc_el))))
+      if(!(tmp=(r_assoc_el *)RCALLOC(sizeof(r_assoc_el)))) {
 	ABORT(R_NO_MEMORY);
+}
 
       if(!knew){
 	knew=tmp;
@@ -219,14 +225,17 @@ static int copy_assoc_chain(knewp,old)
       ptr->copy=old->copy;
 
       if(old->copy){
-	if(r=old->copy(&ptr->data,old->data))
+	if(r=old->copy(&ptr->data,old->data)) {
 	  ABORT(r);
+}
       }
-      else
+      else {
 	ptr->data=old->data;
+}
 
-      if(!(ptr->key=(char *)RMALLOC(old->key_len)))
+      if(!(ptr->key=(char *)RMALLOC(old->key_len))) {
 	ABORT(R_NO_MEMORY);
+}
       memcpy(ptr->key,old->key,ptr->key_len=old->key_len);
     }
 
@@ -271,8 +280,9 @@ int r_assoc_fetch(assoc,key,len,datap)
     int r;
 
     if(r=r_assoc_fetch_bucket(assoc,key,len,&bucket)){
-      if(r!=R_NOT_FOUND)
+      if(r!=R_NOT_FOUND) {
 	ERETURN(r);
+}
       return(r);
     }
 
@@ -296,30 +306,36 @@ int r_assoc_insert(assoc,key,len,data,copy,destroy,how)
       /*Note that we compute the hash value twice*/
       UINT4 hash_value;
 
-      if(r!=R_NOT_FOUND)
+      if(r!=R_NOT_FOUND) {
 	ABORT(r);
+}
       hash_value=assoc->hash_func(key,len,assoc->bits);
 
-      if(!(new_bucket=(r_assoc_el *)RCALLOC(sizeof(r_assoc_el))))
+      if(!(new_bucket=(r_assoc_el *)RCALLOC(sizeof(r_assoc_el)))) {
 	ABORT(R_NO_MEMORY);
-      if(!(new_bucket->key=(char *)RMALLOC(len)))
+}
+      if(!(new_bucket->key=(char *)RMALLOC(len))) {
 	ABORT(R_NO_MEMORY);
+}
       memcpy(new_bucket->key,key,len);
       new_bucket->key_len=len;
 
       /*Insert at the list head. Is FIFO a good algorithm?*/
-      if(assoc->chains[hash_value])
+      if(assoc->chains[hash_value]) {
         assoc->chains[hash_value]->prev=new_bucket;
+}
       new_bucket->next=assoc->chains[hash_value];
       assoc->chains[hash_value]=new_bucket;
       bucket=new_bucket;
     }
     else{
-      if(!(how&R_ASSOC_REPLACE))
+      if(!(how&R_ASSOC_REPLACE)) {
 	ABORT(R_ALREADY);
+}
 
-      if(bucket->destroy)
+      if(bucket->destroy) {
 	bucket->destroy(bucket->data);
+}
     }
 
     bucket->data=data;
@@ -346,8 +362,9 @@ int r_assoc_delete(assoc,key,len)
     UINT4 hash_value;
 
     if(r=r_assoc_fetch_bucket(assoc,key,len,&bucket)){
-      if(r!=R_NOT_FOUND)
+      if(r!=R_NOT_FOUND) {
 	ERETURN(r);
+}
       return(r);
     }
 
@@ -360,12 +377,14 @@ int r_assoc_delete(assoc,key,len)
       assoc->chains[hash_value]=bucket->next;
     }
 
-    if(bucket->next)
+    if(bucket->next) {
       bucket->next->prev=bucket->prev;
+}
 
     /* Remove the data */
-    if(bucket->destroy)
+    if(bucket->destroy) {
       bucket->destroy(bucket->data);
+}
 
     RFREE(bucket->key);
     RFREE(bucket);
@@ -381,17 +400,20 @@ int r_assoc_copy(knewp,old)
     int r,_status,i;
     r_assoc *knew;
 
-    if(!(knew=(r_assoc *)RCALLOC(sizeof(r_assoc))))
+    if(!(knew=(r_assoc *)RCALLOC(sizeof(r_assoc)))) {
       ABORT(R_NO_MEMORY);
+}
     knew->size=old->size;
     knew->bits=old->bits;
     knew->hash_func=old->hash_func;
 
-    if(!(knew->chains=(r_assoc_el **)RCALLOC(sizeof(r_assoc_el)*old->size)))
+    if(!(knew->chains=(r_assoc_el **)RCALLOC(sizeof(r_assoc_el)*old->size))) {
       ABORT(R_NO_MEMORY);
+}
     for(i=0;i<knew->size;i++){
-      if(r=copy_assoc_chain(knew->chains+i,old->chains[i]))
+      if(r=copy_assoc_chain(knew->chains+i,old->chains[i])) {
 	ABORT(r);
+}
     }
     knew->num_elements=old->num_elements;
 
@@ -445,8 +467,9 @@ int r_assoc_iter(iter,key,keyl,val)
     int i;
     r_assoc_el *ret;
 
-    if(!iter->next)
+    if(!iter->next) {
       return(R_EOD);
+}
     ret=iter->next;
 
     *key=ret->key;
@@ -494,8 +517,9 @@ int r_assoc_iter_delete(iter)
       iter->prev->next->prev=iter->prev->prev;
     }
 
-    if (iter->prev->destroy)
+    if (iter->prev->destroy) {
       iter->prev->destroy(iter->prev->data);
+}
 
     iter->assoc->num_elements--;
     RFREE(iter->prev->key);
@@ -532,8 +556,9 @@ int r_assoc_crc32_hash_compute(data,len,bits)
     UINT4 mask;
 
     /* First compute the CRC value */
-    if(r_crc32(data,len,&res))
+    if(r_crc32(data,len,&res)) {
       ERETURN(R_INTERNAL);
+}
 
     mask=~(0xffffffff<<bits);
 

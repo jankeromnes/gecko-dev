@@ -133,14 +133,16 @@ emit_message (j_common_ptr cinfo, int msg_level)
      * the policy implemented here is to show only the first warning,
      * unless trace_level >= 3.
      */
-    if (err->num_warnings == 0 || err->trace_level >= 3)
+    if (err->num_warnings == 0 || err->trace_level >= 3) {
       (*err->output_message) (cinfo);
+}
     /* Always count warnings in num_warnings. */
     err->num_warnings++;
   } else {
     /* It's a trace message.  Show it if trace_level >= msg_level. */
-    if (err->trace_level >= msg_level)
+    if (err->trace_level >= msg_level) {
       (*err->output_message) (cinfo);
+}
   }
 }
 
@@ -182,20 +184,22 @@ format_message (j_common_ptr cinfo, char *buffer)
   msgptr = msgtext;
   while ((ch = *msgptr++) != '\0') {
     if (ch == '%') {
-      if (*msgptr == 's') isstring = TRUE;
+      if (*msgptr == 's') { isstring = TRUE;
+}
       break;
     }
   }
 
   /* Format the message into the passed buffer */
-  if (isstring)
+  if (isstring) {
     sprintf(buffer, msgtext, err->msg_parm.s);
-  else
+  } else {
     sprintf(buffer, msgtext,
             err->msg_parm.i[0], err->msg_parm.i[1],
             err->msg_parm.i[2], err->msg_parm.i[3],
             err->msg_parm.i[4], err->msg_parm.i[5],
             err->msg_parm.i[6], err->msg_parm.i[7]);
+}
 }
 
 

@@ -45,13 +45,16 @@
 const AVOption *av_opt_next(const void *obj, const AVOption *last)
 {
     const AVClass *class;
-    if (!obj)
+    if (!obj) {
         return NULL;
+}
     class = *(const AVClass**)obj;
-    if (!last && class && class->option && class->option[0].name)
+    if (!last && class && class->option && class->option[0].name) {
         return class->option;
-    if (last && last[1].name)
+}
+    if (last && last[1].name) {
         return ++last;
+}
     return NULL;
 }
 
@@ -131,8 +134,9 @@ static int write_number(void *obj, const AVOption *o, void *dst, double num, int
         double d = num / den;
         if (intnum == 1 && d == (double)INT64_MAX) {
             *(int64_t *)dst = INT64_MAX;
-        } else
+        } else {
             *(int64_t *)dst = llrint(d) * intnum;
+}
         break;}
     case AV_OPT_TYPE_UINT64:{
         double d = num / den;
@@ -156,10 +160,11 @@ static int write_number(void *obj, const AVOption *o, void *dst, double num, int
         break;
     case AV_OPT_TYPE_RATIONAL:
     case AV_OPT_TYPE_VIDEO_RATE:
-        if ((int) num == num)
+        if ((int) num == num) {
             *(AVRational *)dst = (AVRational) { num *intnum, den };
-        else
+        } else {
             *(AVRational *)dst = av_d2q(num * intnum / den, 1 << 24);
+}
         break;
     default:
         return AVERROR(EINVAL);
@@ -168,12 +173,15 @@ static int write_number(void *obj, const AVOption *o, void *dst, double num, int
 }
 
 static int hexchar2int(char c) {
-    if (c >= '0' && c <= '9')
+    if (c >= '0' && c <= '9') {
         return c - '0';
-    if (c >= 'a' && c <= 'f')
+}
+    if (c >= 'a' && c <= 'f') {
         return c - 'a' + 10;
-    if (c >= 'A' && c <= 'F')
+}
+    if (c >= 'A' && c <= 'F') {
         return c - 'A' + 10;
+}
     return -1;
 }
 
@@ -186,16 +194,19 @@ static int set_string_binary(void *obj, const AVOption *o, const char *val, uint
     av_freep(dst);
     *lendst = 0;
 
-    if (!val || !(len = strlen(val)))
+    if (!val || !(len = strlen(val))) {
         return 0;
+}
 
-    if (len & 1)
+    if (len & 1) {
         return AVERROR(EINVAL);
+}
     len /= 2;
 
     ptr = bin = av_malloc(len);
-    if (!ptr)
+    if (!ptr) {
         return AVERROR(ENOMEM);
+}
     while (*val) {
         int a = hexchar2int(*val++);
         int b = hexchar2int(*val++);
@@ -233,8 +244,9 @@ static int set_string_number(void *obj, void *target_obj, const AVOption *o, con
     char c;
 
     if (sscanf(val, "%d%*1[:/]%d%c", &num, &den, &c) == 2) {
-        if ((ret = write_number(obj, o, dst, 1, den, num)) >= 0)
+        if ((ret = write_number(obj, o, dst, 1, den, num)) >= 0) {
             return ret;
+}
         ret = 0;
     }
 
@@ -246,10 +258,12 @@ static int set_string_number(void *obj, void *target_obj, const AVOption *o, con
         int64_t intnum = 1;
 
         if (o->type == AV_OPT_TYPE_FLAGS) {
-            if (*val == '+' || *val == '-')
+            if (*val == '+' || *val == '-') {
                 cmd = *(val++);
-            for (; i < sizeof(buf) - 1 && val[i] && val[i] != '+' && val[i] != '-'; i++)
+}
+            for (; i < sizeof(buf) - 1 && val[i] && val[i] != '+' && val[i] != '-'; i++) {
                 buf[i] = val[i];
+}
             buf[i] = 0;
         }
 
@@ -259,9 +273,9 @@ static int set_string_number(void *obj, void *target_obj, const AVOption *o, con
             int ci = 0;
             double const_values[64];
             const char * const_names[64];
-            if (o_named && o_named->type == AV_OPT_TYPE_CONST)
+            if (o_named && o_named->type == AV_OPT_TYPE_CONST) {
                 d = DEFAULT_NUMVAL(o_named);
-            else {
+            } else {
                 if (o->unit) {
                     for (o_named = NULL; o_named = av_opt_next(target_obj, o_named); ) {
                         if (o_named->type == AV_OPT_TYPE_CONST &&
@@ -299,17 +313,20 @@ static int set_string_number(void *obj, void *target_obj, const AVOption *o, con
         }
         if (o->type == AV_OPT_TYPE_FLAGS) {
             read_number(o, dst, NULL, NULL, &intnum);
-            if (cmd == '+')
+            if (cmd == '+') {
                 d = intnum | (int64_t)d;
-            else if (cmd == '-')
+            } else if (cmd == '-') {
                 d = intnum &~(int64_t)d;
+}
         }
 
-        if ((ret = write_number(obj, o, dst, d, 1, 1)) < 0)
+        if ((ret = write_number(obj, o, dst, d, 1, 1)) < 0) {
             return ret;
+}
         val += i;
-        if (!i || !*val)
+        if (!i || !*val) {
             return 0;
+}
     }
 }
 
@@ -323,8 +340,9 @@ static int set_string_image_size(void *obj, const AVOption *o, const char *val, 
         return 0;
     }
     ret = av_parse_video_size(dst, dst + 1, val);
-    if (ret < 0)
+    if (ret < 0) {
         av_log(obj, AV_LOG_ERROR, "Unable to parse option value \"%s\" as image size\n", val);
+}
     return ret;
 }
 
@@ -336,8 +354,9 @@ static int set_string_video_rate(void *obj, const AVOption *o, const char *val, 
     } else {
         ret = av_parse_video_rate(dst, val);
     }
-    if (ret < 0)
+    if (ret < 0) {
         av_log(obj, AV_LOG_ERROR, "Unable to parse option value \"%s\" as video rate\n", val);
+}
     return ret;
 }
 
@@ -349,8 +368,9 @@ static int set_string_color(void *obj, const AVOption *o, const char *val, uint8
         return 0;
     } else {
         ret = av_parse_color(dst, val, -1, obj);
-        if (ret < 0)
+        if (ret < 0) {
             av_log(obj, AV_LOG_ERROR, "Unable to parse option value \"%s\" as color\n", val);
+}
         return ret;
     }
     return 0;
@@ -358,8 +378,9 @@ static int set_string_color(void *obj, const AVOption *o, const char *val, uint8
 
 static const char *get_bool_name(int val)
 {
-    if (val < 0)
+    if (val < 0) {
         return "auto";
+}
     return val ? "true" : "false";
 }
 
@@ -367,8 +388,9 @@ static int set_string_bool(void *obj, const AVOption *o, const char *val, int *d
 {
     int n;
 
-    if (!val)
+    if (!val) {
         return 0;
+}
 
     if (!strcmp(val, "auto")) {
         n = -1;
@@ -379,12 +401,14 @@ static int set_string_bool(void *obj, const AVOption *o, const char *val, int *d
     } else {
         char *end = NULL;
         n = strtol(val, &end, 10);
-        if (val + strlen(val) != end)
+        if (val + strlen(val) != end) {
             goto fail;
+}
     }
 
-    if (n < o->min || n > o->max)
+    if (n < o->min || n > o->max) {
         goto fail;
+}
 
     *dst = n;
     return 0;
@@ -451,17 +475,20 @@ int av_opt_set(void *obj, const char *name, const char *val, int search_flags)
     int ret = 0;
     void *dst, *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     if (!val && (o->type != AV_OPT_TYPE_STRING &&
                  o->type != AV_OPT_TYPE_PIXEL_FMT && o->type != AV_OPT_TYPE_SAMPLE_FMT &&
                  o->type != AV_OPT_TYPE_IMAGE_SIZE && o->type != AV_OPT_TYPE_VIDEO_RATE &&
                  o->type != AV_OPT_TYPE_DURATION && o->type != AV_OPT_TYPE_COLOR &&
-                 o->type != AV_OPT_TYPE_CHANNEL_LAYOUT && o->type != AV_OPT_TYPE_BOOL))
+                 o->type != AV_OPT_TYPE_CHANNEL_LAYOUT && o->type != AV_OPT_TYPE_BOOL)) {
         return AVERROR(EINVAL);
+}
 
-    if (o->flags & AV_OPT_FLAG_READONLY)
+    if (o->flags & AV_OPT_FLAG_READONLY) {
         return AVERROR(EINVAL);
+}
 
     dst = ((uint8_t *)target_obj) + o->offset;
     switch (o->type) {
@@ -484,8 +511,9 @@ int av_opt_set(void *obj, const char *name, const char *val, int search_flags)
     case AV_OPT_TYPE_VIDEO_RATE: {
         AVRational tmp;
         ret = set_string_video_rate(obj, o, val, &tmp);
-        if (ret < 0)
+        if (ret < 0) {
             return ret;
+}
         return write_number(obj, o, dst, 1, tmp.den, tmp.num);
     }
     case AV_OPT_TYPE_PIXEL_FMT:
@@ -497,8 +525,9 @@ int av_opt_set(void *obj, const char *name, const char *val, int search_flags)
             *(int64_t *)dst = 0;
             return 0;
         } else {
-            if ((ret = av_parse_time(dst, val, 1)) < 0)
+            if ((ret = av_parse_time(dst, val, 1)) < 0) {
                 av_log(obj, AV_LOG_ERROR, "Unable to parse option value \"%s\" as duration\n", val);
+}
             return ret;
         }
         break;
@@ -545,11 +574,13 @@ static int set_number(void *obj, const char *name, double num, int den, int64_t 
     void *dst, *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
 
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
 
-    if (o->flags & AV_OPT_FLAG_READONLY)
+    if (o->flags & AV_OPT_FLAG_READONLY) {
         return AVERROR(EINVAL);
+}
 
     dst = ((uint8_t *)target_obj) + o->offset;
     return write_number(obj, o, dst, num, den, intnum);
@@ -578,15 +609,18 @@ int av_opt_set_bin(void *obj, const char *name, const uint8_t *val, int len, int
     uint8_t **dst;
     int *lendst;
 
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
 
-    if (o->type != AV_OPT_TYPE_BINARY || o->flags & AV_OPT_FLAG_READONLY)
+    if (o->type != AV_OPT_TYPE_BINARY || o->flags & AV_OPT_FLAG_READONLY) {
         return AVERROR(EINVAL);
+}
 
     ptr = len ? av_malloc(len) : NULL;
-    if (len && !ptr)
+    if (len && !ptr) {
         return AVERROR(ENOMEM);
+}
 
     dst    = (uint8_t **)(((uint8_t *)target_obj) + o->offset);
     lendst = (int *)(dst + 1);
@@ -594,8 +628,9 @@ int av_opt_set_bin(void *obj, const char *name, const uint8_t *val, int len, int
     av_free(*dst);
     *dst    = ptr;
     *lendst = len;
-    if (len)
+    if (len) {
         memcpy(ptr, val, len);
+}
 
     return 0;
 }
@@ -605,8 +640,9 @@ int av_opt_set_image_size(void *obj, const char *name, int w, int h, int search_
     void *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
 
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     if (o->type != AV_OPT_TYPE_IMAGE_SIZE) {
         av_log(obj, AV_LOG_ERROR,
                "The value set by option '%s' is not an image size.\n", o->name);
@@ -627,15 +663,17 @@ int av_opt_set_video_rate(void *obj, const char *name, AVRational val, int searc
     void *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
 
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     if (o->type != AV_OPT_TYPE_VIDEO_RATE) {
         av_log(obj, AV_LOG_ERROR,
                "The value set by option '%s' is not a video rate.\n", o->name);
         return AVERROR(EINVAL);
     }
-    if (val.num <= 0 || val.den <= 0)
+    if (val.num <= 0 || val.den <= 0) {
         return AVERROR(EINVAL);
+}
     return set_number(obj, name, val.num, val.den, 1, search_flags);
 }
 
@@ -647,8 +685,9 @@ static int set_format(void *obj, const char *name, int fmt, int search_flags,
                                      search_flags, &target_obj);
     int min, max;
 
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     if (o->type != type) {
         av_log(obj, AV_LOG_ERROR,
                "The value set by option '%s' is not a %s format", name, desc);
@@ -683,8 +722,9 @@ int av_opt_set_channel_layout(void *obj, const char *name, int64_t cl, int searc
     void *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
 
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     if (o->type != AV_OPT_TYPE_CHANNEL_LAYOUT) {
         av_log(obj, AV_LOG_ERROR,
                "The value set by option '%s' is not a channel layout.\n", o->name);
@@ -701,10 +741,12 @@ int av_opt_set_dict_val(void *obj, const char *name, const AVDictionary *val,
     AVDictionary **dst;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
 
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
-    if (o->flags & AV_OPT_FLAG_READONLY)
+}
+    if (o->flags & AV_OPT_FLAG_READONLY) {
         return AVERROR(EINVAL);
+}
 
     dst = (AVDictionary **)(((uint8_t *)target_obj) + o->offset);
     av_dict_free(dst);
@@ -723,29 +765,32 @@ static void format_duration(char *buf, size_t size, int64_t d)
         size--;
         d = -d;
     }
-    if (d == INT64_MAX)
+    if (d == INT64_MAX) {
         snprintf(buf, size, "INT64_MAX");
-    else if (d == INT64_MIN)
+    } else if (d == INT64_MIN) {
         snprintf(buf, size, "INT64_MIN");
-    else if (d > (int64_t)3600*1000000)
+    } else if (d > (int64_t)3600*1000000) {
         snprintf(buf, size, "%"PRId64":%02d:%02d.%06d", d / 3600000000,
                  (int)((d / 60000000) % 60),
                  (int)((d / 1000000) % 60),
                  (int)(d % 1000000));
-    else if (d > 60*1000000)
+    } else if (d > 60*1000000) {
         snprintf(buf, size, "%d:%02d.%06d",
                  (int)(d / 60000000),
                  (int)((d / 1000000) % 60),
                  (int)(d % 1000000));
-    else
+    } else {
         snprintf(buf, size, "%d.%06d",
                  (int)(d / 1000000),
                  (int)(d % 1000000));
+}
     e = buf + strlen(buf);
-    while (e > buf && e[-1] == '0')
+    while (e > buf && e[-1] == '0') {
         *(--e) = 0;
-    if (e > buf && e[-1] == '.')
+}
+    if (e > buf && e[-1] == '.') {
         *(--e) = 0;
+}
 }
 
 int av_opt_get(void *obj, const char *name, int search_flags, uint8_t **out_val)
@@ -756,8 +801,9 @@ int av_opt_get(void *obj, const char *name, int search_flags, uint8_t **out_val)
     int len, i, ret;
     int64_t i64;
 
-    if (!o || !target_obj || (o->offset<=0 && o->type != AV_OPT_TYPE_CONST))
+    if (!o || !target_obj || (o->offset<=0 && o->type != AV_OPT_TYPE_CONST)) {
         return AVERROR_OPTION_NOT_FOUND;
+}
 
     dst = (uint8_t *)target_obj + o->offset;
 
@@ -807,17 +853,20 @@ int av_opt_get(void *obj, const char *name, int search_flags, uint8_t **out_val)
             return 0;
         }
         len = *(int *)(((uint8_t *)dst) + sizeof(uint8_t *));
-        if ((uint64_t)len * 2 + 1 > INT_MAX)
+        if ((uint64_t)len * 2 + 1 > INT_MAX) {
             return AVERROR(EINVAL);
-        if (!(*out_val = av_malloc(len * 2 + 1)))
+}
+        if (!(*out_val = av_malloc(len * 2 + 1))) {
             return AVERROR(ENOMEM);
+}
         if (!len) {
             *out_val[0] = '\0';
             return 0;
         }
         bin = *(uint8_t **)dst;
-        for (i = 0; i < len; i++)
+        for (i = 0; i < len; i++) {
             snprintf(*out_val + i * 2, 3, "%02X", bin[i]);
+}
         return 0;
     case AV_OPT_TYPE_IMAGE_SIZE:
         ret = snprintf(buf, sizeof(buf), "%dx%d", ((int *)dst)[0], ((int *)dst)[1]);
@@ -846,8 +895,9 @@ int av_opt_get(void *obj, const char *name, int search_flags, uint8_t **out_val)
         return AVERROR(EINVAL);
     }
 
-    if (ret >= sizeof(buf))
+    if (ret >= sizeof(buf)) {
         return AVERROR(EINVAL);
+}
     *out_val = av_strdup(buf);
     return *out_val ? 0 : AVERROR(ENOMEM);
 }
@@ -857,12 +907,14 @@ static int get_number(void *obj, const char *name, const AVOption **o_out, doubl
 {
     void *dst, *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         goto error;
+}
 
     dst = ((uint8_t *)target_obj) + o->offset;
 
-    if (o_out) *o_out= o;
+    if (o_out) { *o_out= o;
+}
 
     return read_number(o, dst, num, den, intnum);
 
@@ -878,8 +930,9 @@ int av_opt_get_int(void *obj, const char *name, int search_flags, int64_t *out_v
     double num = 1;
     int ret, den = 1;
 
-    if ((ret = get_number(obj, name, NULL, &num, &den, &intnum, search_flags)) < 0)
+    if ((ret = get_number(obj, name, NULL, &num, &den, &intnum, search_flags)) < 0) {
         return ret;
+}
     *out_val = num * intnum / den;
     return 0;
 }
@@ -890,8 +943,9 @@ int av_opt_get_double(void *obj, const char *name, int search_flags, double *out
     double num = 1;
     int ret, den = 1;
 
-    if ((ret = get_number(obj, name, NULL, &num, &den, &intnum, search_flags)) < 0)
+    if ((ret = get_number(obj, name, NULL, &num, &den, &intnum, search_flags)) < 0) {
         return ret;
+}
     *out_val = num * intnum / den;
     return 0;
 }
@@ -902,13 +956,15 @@ int av_opt_get_q(void *obj, const char *name, int search_flags, AVRational *out_
     double num = 1;
     int ret, den = 1;
 
-    if ((ret = get_number(obj, name, NULL, &num, &den, &intnum, search_flags)) < 0)
+    if ((ret = get_number(obj, name, NULL, &num, &den, &intnum, search_flags)) < 0) {
         return ret;
+}
 
-    if (num == 1.0 && (int)intnum == intnum)
+    if (num == 1.0 && (int)intnum == intnum) {
         *out_val = (AVRational){intnum, den};
-    else
+    } else {
         *out_val = av_d2q(num*intnum/den, 1<<24);
+}
     return 0;
 }
 
@@ -916,8 +972,9 @@ int av_opt_get_image_size(void *obj, const char *name, int search_flags, int *w_
 {
     void *dst, *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     if (o->type != AV_OPT_TYPE_IMAGE_SIZE) {
         av_log(obj, AV_LOG_ERROR,
                "The value for option '%s' is not an image size.\n", name);
@@ -925,8 +982,10 @@ int av_opt_get_image_size(void *obj, const char *name, int search_flags, int *w_
     }
 
     dst = ((uint8_t*)target_obj) + o->offset;
-    if (w_out) *w_out = *(int *)dst;
-    if (h_out) *h_out = *((int *)dst+1);
+    if (w_out) { *w_out = *(int *)dst;
+}
+    if (h_out) { *h_out = *((int *)dst+1);
+}
     return 0;
 }
 
@@ -936,13 +995,15 @@ int av_opt_get_video_rate(void *obj, const char *name, int search_flags, AVRatio
     double     num = 1;
     int   ret, den = 1;
 
-    if ((ret = get_number(obj, name, NULL, &num, &den, &intnum, search_flags)) < 0)
+    if ((ret = get_number(obj, name, NULL, &num, &den, &intnum, search_flags)) < 0) {
         return ret;
+}
 
-    if (num == 1.0 && (int)intnum == intnum)
+    if (num == 1.0 && (int)intnum == intnum) {
         *out_val = (AVRational) { intnum, den };
-    else
+    } else {
         *out_val = av_d2q(num * intnum / den, 1 << 24);
+}
     return 0;
 }
 
@@ -951,8 +1012,9 @@ static int get_format(void *obj, const char *name, int search_flags, int *out_fm
 {
     void *dst, *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     if (o->type != type) {
         av_log(obj, AV_LOG_ERROR,
                "The value for option '%s' is not a %s format.\n", desc, name);
@@ -978,8 +1040,9 @@ int av_opt_get_channel_layout(void *obj, const char *name, int search_flags, int
 {
     void *dst, *target_obj;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     if (o->type != AV_OPT_TYPE_CHANNEL_LAYOUT) {
         av_log(obj, AV_LOG_ERROR,
                "The value for option '%s' is not a channel layout.\n", name);
@@ -997,10 +1060,12 @@ int av_opt_get_dict_val(void *obj, const char *name, int search_flags, AVDiction
     AVDictionary *src;
     const AVOption *o = av_opt_find2(obj, name, NULL, 0, search_flags, &target_obj);
 
-    if (!o || !target_obj)
+    if (!o || !target_obj) {
         return AVERROR_OPTION_NOT_FOUND;
-    if (o->type != AV_OPT_TYPE_DICT)
+}
+    if (o->type != AV_OPT_TYPE_DICT) {
         return AVERROR(EINVAL);
+}
 
     src = *(AVDictionary **)(((uint8_t *)target_obj) + o->offset);
     av_dict_copy(out_val, src, 0);
@@ -1016,8 +1081,9 @@ int av_opt_flag_is_set(void *obj, const char *field_name, const char *flag_name)
     int64_t res;
 
     if (!field || !flag || flag->type != AV_OPT_TYPE_CONST ||
-        av_opt_get_int(obj, field_name, 0, &res) < 0)
+        av_opt_get_int(obj, field_name, 0, &res) < 0) {
         return 0;
+}
     return res & flag->default_val.i64;
 }
 
@@ -1058,12 +1124,14 @@ static const char *get_opt_const_name(void *obj, const char *unit, int64_t value
 {
     const AVOption *opt = NULL;
 
-    if (!unit)
+    if (!unit) {
         return NULL;
-    while ((opt = av_opt_next(obj, opt)))
+}
+    while ((opt = av_opt_next(obj, opt))) {
         if (opt->type == AV_OPT_TYPE_CONST && !strcmp(opt->unit, unit) &&
-            opt->default_val.i64 == value)
+            opt->default_val.i64 == value) {
             return opt->name;
+}
     return NULL;
 }
 
@@ -1073,18 +1141,21 @@ static char *get_opt_flags_string(void *obj, const char *unit, int64_t value)
     char flags[512];
 
     flags[0] = 0;
-    if (!unit)
+    if (!unit) {
         return NULL;
+}
     while ((opt = av_opt_next(obj, opt))) {
         if (opt->type == AV_OPT_TYPE_CONST && !strcmp(opt->unit, unit) &&
             opt->default_val.i64 & value) {
-            if (flags[0])
+            if (flags[0]) {
                 av_strlcatf(flags, sizeof(flags), "+");
+}
             av_strlcatf(flags, sizeof(flags), "%s", opt->name);
         }
     }
-    if (flags[0])
+    if (flags[0]) {
         return av_strdup(flags);
+}
     return NULL;
 }
 
@@ -1096,25 +1167,27 @@ static void opt_list(void *obj, void *av_log_obj, const char *unit,
     int i;
 
     while ((opt = av_opt_next(obj, opt))) {
-        if (!(opt->flags & req_flags) || (opt->flags & rej_flags))
+        if (!(opt->flags & req_flags) || (opt->flags & rej_flags)) {
             continue;
+}
 
         /* Don't print CONST's on level one.
          * Don't print anything but CONST's on level two.
          * Only print items from the requested unit.
          */
-        if (!unit && opt->type == AV_OPT_TYPE_CONST)
+        if (!unit && opt->type == AV_OPT_TYPE_CONST) {
             continue;
-        else if (unit && opt->type != AV_OPT_TYPE_CONST)
+        } else if (unit && opt->type != AV_OPT_TYPE_CONST) {
             continue;
-        else if (unit && opt->type == AV_OPT_TYPE_CONST && strcmp(unit, opt->unit))
+        } else if (unit && opt->type == AV_OPT_TYPE_CONST && strcmp(unit, opt->unit)) {
             continue;
-        else if (unit && opt->type == AV_OPT_TYPE_CONST)
+        } else if (unit && opt->type == AV_OPT_TYPE_CONST) {
             av_log(av_log_obj, AV_LOG_INFO, "     %-15s ", opt->name);
-        else
+        } else {
             av_log(av_log_obj, AV_LOG_INFO, "  %s%-17s ",
                    (opt->flags & AV_OPT_FLAG_FILTERING_PARAM) ? "" : "-",
                    opt->name);
+}
 
         switch (opt->type) {
             case AV_OPT_TYPE_FLAGS:
@@ -1182,8 +1255,9 @@ static void opt_list(void *obj, void *av_log_obj, const char *unit,
         av_log(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_EXPORT)         ? 'X' : '.');
         av_log(av_log_obj, AV_LOG_INFO, "%c", (opt->flags & AV_OPT_FLAG_READONLY)       ? 'R' : '.');
 
-        if (opt->help)
+        if (opt->help) {
             av_log(av_log_obj, AV_LOG_INFO, " %s", opt->help);
+}
 
         if (av_opt_query_ranges(&r, obj, opt->name, AV_OPT_SEARCH_FAKE_OBJ) >= 0) {
             switch (opt->type) {
@@ -1237,10 +1311,11 @@ static void opt_list(void *obj, void *av_log_obj, const char *unit,
             case AV_OPT_TYPE_UINT64:
             case AV_OPT_TYPE_INT64: {
                 const char *def_const = get_opt_const_name(obj, opt->unit, opt->default_val.i64);
-                if (def_const)
+                if (def_const) {
                     av_log(av_log_obj, AV_LOG_INFO, "%s", def_const);
-                else
+                } else {
                     log_value(av_log_obj, AV_LOG_INFO, opt->default_val.i64);
+}
                 break;
             }
             case AV_OPT_TYPE_DOUBLE:
@@ -1271,15 +1346,17 @@ static void opt_list(void *obj, void *av_log_obj, const char *unit,
         }
 
         av_log(av_log_obj, AV_LOG_INFO, "\n");
-        if (opt->unit && opt->type != AV_OPT_TYPE_CONST)
+        if (opt->unit && opt->type != AV_OPT_TYPE_CONST) {
             opt_list(obj, av_log_obj, opt->unit, req_flags, rej_flags);
+}
     }
 }
 
 int av_opt_show2(void *obj, void *av_log_obj, int req_flags, int rej_flags)
 {
-    if (!obj)
+    if (!obj) {
         return -1;
+}
 
     av_log(av_log_obj, AV_LOG_INFO, "%s AVOptions:\n", (*(AVClass **)obj)->class_name);
 
@@ -1299,11 +1376,13 @@ void av_opt_set_defaults2(void *s, int mask, int flags)
     while ((opt = av_opt_next(s, opt))) {
         void *dst = ((uint8_t*)s) + opt->offset;
 
-        if ((opt->flags & mask) != flags)
+        if ((opt->flags & mask) != flags) {
             continue;
+}
 
-        if (opt->flags & AV_OPT_FLAG_READONLY)
+        if (opt->flags & AV_OPT_FLAG_READONLY) {
             continue;
+}
 
         switch (opt->type) {
             case AV_OPT_TYPE_CONST:
@@ -1382,8 +1461,9 @@ static int parse_key_value_pair(void *ctx, const char **buf,
     char *val;
     int ret;
 
-    if (!key)
+    if (!key) {
         return AVERROR(ENOMEM);
+}
 
     if (*key && strspn(*buf, key_val_sep)) {
         (*buf)++;
@@ -1401,8 +1481,9 @@ static int parse_key_value_pair(void *ctx, const char **buf,
     av_log(ctx, AV_LOG_DEBUG, "Setting entry with key '%s' to value '%s'\n", key, val);
 
     ret = av_opt_set(ctx, key, val, AV_OPT_SEARCH_CHILDREN);
-    if (ret == AVERROR_OPTION_NOT_FOUND)
+    if (ret == AVERROR_OPTION_NOT_FOUND) {
         av_log(ctx, AV_LOG_ERROR, "Key '%s' not found.\n", key);
+}
 
     av_free(key);
     av_free(val);
@@ -1414,16 +1495,19 @@ int av_set_options_string(void *ctx, const char *opts,
 {
     int ret, count = 0;
 
-    if (!opts)
+    if (!opts) {
         return 0;
+}
 
     while (*opts) {
-        if ((ret = parse_key_value_pair(ctx, &opts, key_val_sep, pairs_sep)) < 0)
+        if ((ret = parse_key_value_pair(ctx, &opts, key_val_sep, pairs_sep)) < 0) {
             return ret;
+}
         count++;
 
-        if (*opts)
+        if (*opts) {
             opts++;
+}
     }
 
     return count;
@@ -1452,15 +1536,18 @@ static int get_key(const char **ropts, const char *delim, char **rkey)
     const char *key_start, *key_end;
 
     key_start = opts += strspn(opts, WHITESPACES);
-    while (is_key_char(*opts))
+    while (is_key_char(*opts)) {
         opts++;
+}
     key_end = opts;
     opts += strspn(opts, WHITESPACES);
-    if (!*opts || !strchr(delim, *opts))
+    if (!*opts || !strchr(delim, *opts)) {
         return AVERROR(EINVAL);
+}
     opts++;
-    if (!(*rkey = av_malloc(key_end - key_start + 1)))
+    if (!(*rkey = av_malloc(key_end - key_start + 1))) {
         return AVERROR(ENOMEM);
+}
     memcpy(*rkey, key_start, key_end - key_start);
     (*rkey)[key_end - key_start] = 0;
     *ropts = opts;
@@ -1477,8 +1564,9 @@ int av_opt_get_key_value(const char **ropts,
     const char *opts = *ropts;
 
     if ((ret = get_key(&opts, key_val_sep, &key)) < 0 &&
-        !(flags & AV_OPT_FLAG_IMPLICIT_KEY))
+        !(flags & AV_OPT_FLAG_IMPLICIT_KEY)) {
         return AVERROR(EINVAL);
+}
     if (!(val = av_get_token(&opts, pairs_sep))) {
         av_free(key);
         return AVERROR(ENOMEM);
@@ -1498,37 +1586,43 @@ int av_opt_set_from_string(void *ctx, const char *opts,
     char *av_uninit(parsed_key), *av_uninit(value);
     const char *key;
 
-    if (!opts)
+    if (!opts) {
         return 0;
-    if (!shorthand)
+}
+    if (!shorthand) {
         shorthand = &dummy_shorthand;
+}
 
     while (*opts) {
         ret = av_opt_get_key_value(&opts, key_val_sep, pairs_sep,
                                    *shorthand ? AV_OPT_FLAG_IMPLICIT_KEY : 0,
                                    &parsed_key, &value);
         if (ret < 0) {
-            if (ret == AVERROR(EINVAL))
+            if (ret == AVERROR(EINVAL)) {
                 av_log(ctx, AV_LOG_ERROR, "No option name near '%s'\n", opts);
-            else
+            } else {
                 av_log(ctx, AV_LOG_ERROR, "Unable to parse '%s': %s\n", opts,
                        av_err2str(ret));
+}
             return ret;
         }
-        if (*opts)
+        if (*opts) {
             opts++;
+}
         if (parsed_key) {
             key = parsed_key;
-            while (*shorthand) /* discard all remaining shorthand */
+            while (*shorthand) { /* discard all remaining shorthand */
                 shorthand++;
+}
         } else {
             key = *(shorthand++);
         }
 
         av_log(ctx, AV_LOG_DEBUG, "Setting '%s' to value '%s'\n", key, value);
         if ((ret = av_opt_set(ctx, key, value, 0)) < 0) {
-            if (ret == AVERROR_OPTION_NOT_FOUND)
+            if (ret == AVERROR_OPTION_NOT_FOUND) {
                 av_log(ctx, AV_LOG_ERROR, "Option '%s' not found\n", key);
+}
             av_free(value);
             av_free(parsed_key);
             return ret;
@@ -1567,13 +1661,15 @@ int av_opt_set_dict2(void *obj, AVDictionary **options, int search_flags)
     AVDictionary    *tmp = NULL;
     int ret = 0;
 
-    if (!options)
+    if (!options) {
         return 0;
+}
 
     while ((t = av_dict_get(*options, "", t, AV_DICT_IGNORE_SUFFIX))) {
         ret = av_opt_set(obj, t->key, t->value, search_flags);
-        if (ret == AVERROR_OPTION_NOT_FOUND)
+        if (ret == AVERROR_OPTION_NOT_FOUND) {
             ret = av_dict_set(&tmp, t->key, t->value, 0);
+}
         if (ret < 0) {
             av_log(obj, AV_LOG_ERROR, "Error setting option %s to value %s.\n", t->key, t->value);
             av_dict_free(&tmp);
@@ -1603,25 +1699,29 @@ const AVOption *av_opt_find2(void *obj, const char *name, const char *unit,
     const AVClass  *c;
     const AVOption *o = NULL;
 
-    if(!obj)
+    if(!obj) {
         return NULL;
+}
 
     c= *(AVClass**)obj;
 
-    if (!c)
+    if (!c) {
         return NULL;
+}
 
     if (search_flags & AV_OPT_SEARCH_CHILDREN) {
         if (search_flags & AV_OPT_SEARCH_FAKE_OBJ) {
             const AVClass *child = NULL;
-            while (child = av_opt_child_class_next(c, child))
-                if (o = av_opt_find2(&child, name, unit, opt_flags, search_flags, NULL))
+            while (child = av_opt_child_class_next(c, child)) {
+                if (o = av_opt_find2(&child, name, unit, opt_flags, search_flags, NULL)) {
                     return o;
+}
         } else {
             void *child = NULL;
-            while (child = av_opt_child_next(obj, child))
-                if (o = av_opt_find2(child, name, unit, opt_flags, search_flags, target_obj))
+            while (child = av_opt_child_next(obj, child)) {
+                if (o = av_opt_find2(child, name, unit, opt_flags, search_flags, target_obj)) {
                     return o;
+}
         }
     }
 
@@ -1630,10 +1730,11 @@ const AVOption *av_opt_find2(void *obj, const char *name, const char *unit,
             ((!unit && o->type != AV_OPT_TYPE_CONST) ||
              (unit  && o->type == AV_OPT_TYPE_CONST && o->unit && !strcmp(o->unit, unit)))) {
             if (target_obj) {
-                if (!(search_flags & AV_OPT_SEARCH_FAKE_OBJ))
+                if (!(search_flags & AV_OPT_SEARCH_FAKE_OBJ)) {
                     *target_obj = obj;
-                else
+                } else {
                     *target_obj = NULL;
+}
             }
             return o;
         }
@@ -1644,23 +1745,26 @@ const AVOption *av_opt_find2(void *obj, const char *name, const char *unit,
 void *av_opt_child_next(void *obj, void *prev)
 {
     const AVClass *c = *(AVClass **)obj;
-    if (c->child_next)
+    if (c->child_next) {
         return c->child_next(obj, prev);
+}
     return NULL;
 }
 
 const AVClass *av_opt_child_class_next(const AVClass *parent, const AVClass *prev)
 {
-    if (parent->child_class_next)
+    if (parent->child_class_next) {
         return parent->child_class_next(prev);
+}
     return NULL;
 }
 
 void *av_opt_ptr(const AVClass *class, void *obj, const char *name)
 {
     const AVOption *opt= av_opt_find2(&class, name, NULL, 0, AV_OPT_SEARCH_FAKE_OBJ, NULL);
-    if(!opt)
+    if(!opt) {
         return NULL;
+}
     return (uint8_t*)obj + opt->offset;
 }
 
@@ -1705,12 +1809,14 @@ int av_opt_copy(void *dst, const void *src)
     const AVClass *c;
     int ret = 0;
 
-    if (!src)
+    if (!src) {
         return AVERROR(EINVAL);
+}
 
     c = *(AVClass **)src;
-    if (!c || c != *(AVClass **)dst)
+    if (!c || c != *(AVClass **)dst) {
         return AVERROR(EINVAL);
+}
 
     while ((o = av_opt_next(src, o))) {
         void *field_dst = (uint8_t *)dst + o->offset;
@@ -1719,15 +1825,18 @@ int av_opt_copy(void *dst, const void *src)
         uint8_t **field_src8 = (uint8_t **)field_src;
 
         if (o->type == AV_OPT_TYPE_STRING) {
-            if (*field_dst8 != *field_src8)
+            if (*field_dst8 != *field_src8) {
                 av_freep(field_dst8);
+}
             *field_dst8 = av_strdup(*field_src8);
-            if (*field_src8 && !*field_dst8)
+            if (*field_src8 && !*field_dst8) {
                 ret = AVERROR(ENOMEM);
+}
         } else if (o->type == AV_OPT_TYPE_BINARY) {
             int len = *(int *)(field_src8 + 1);
-            if (*field_dst8 != *field_src8)
+            if (*field_dst8 != *field_src8) {
                 av_freep(field_dst8);
+}
             *field_dst8 = av_memdup(*field_src8, len);
             if (len && !*field_dst8) {
                 ret = AVERROR(ENOMEM);
@@ -1739,18 +1848,21 @@ int av_opt_copy(void *dst, const void *src)
         } else if (o->type == AV_OPT_TYPE_DICT) {
             AVDictionary **sdict = (AVDictionary **) field_src;
             AVDictionary **ddict = (AVDictionary **) field_dst;
-            if (*sdict != *ddict)
+            if (*sdict != *ddict) {
                 av_dict_free(ddict);
+}
             *ddict = NULL;
             av_dict_copy(ddict, *sdict, 0);
-            if (av_dict_count(*sdict) != av_dict_count(*ddict))
+            if (av_dict_count(*sdict) != av_dict_count(*ddict)) {
                 ret = AVERROR(ENOMEM);
+}
         } else {
             int size = opt_size(o->type);
-            if (size < 0)
+            if (size < 0) {
                 ret = size;
-            else
+            } else {
                 memcpy(field_dst, field_src, size);
+}
         }
     }
     return ret;
@@ -1762,16 +1874,19 @@ int av_opt_query_ranges(AVOptionRanges **ranges_arg, void *obj, const char *key,
     const AVClass *c = *(AVClass**)obj;
     int (*callback)(AVOptionRanges **, void *obj, const char *key, int flags) = NULL;
 
-    if (c->version > (52 << 16 | 11 << 8))
+    if (c->version > (52 << 16 | 11 << 8)) {
         callback = c->query_ranges;
+}
 
-    if (!callback)
+    if (!callback) {
         callback = av_opt_query_ranges_default;
+}
 
     ret = callback(ranges_arg, obj, key, flags);
     if (ret >= 0) {
-        if (!(flags & AV_OPT_MULTI_COMPONENT_RANGE))
+        if (!(flags & AV_OPT_MULTI_COMPONENT_RANGE)) {
             ret = 1;
+}
         (*ranges_arg)->nb_components = ret;
     }
     return ret;
@@ -1854,8 +1969,9 @@ void av_opt_freep_ranges(AVOptionRanges **rangesp)
     int i;
     AVOptionRanges *ranges = *rangesp;
 
-    if (!ranges)
+    if (!ranges) {
         return;
+}
 
     for (i = 0; i < ranges->nb_ranges * ranges->nb_components; i++) {
         AVOptionRange *range = ranges->range[i];
@@ -1878,8 +1994,9 @@ int av_opt_is_set_to_default(void *obj, const AVOption *o)
     char *str;
     void *dst;
 
-    if (!o || !obj)
+    if (!o || !obj) {
         return AVERROR(EINVAL);
+}
 
     dst = ((uint8_t*)obj) + o->offset;
 
@@ -1899,10 +2016,12 @@ int av_opt_is_set_to_default(void *obj, const AVOption *o)
         return o->default_val.i64 == i64;
     case AV_OPT_TYPE_STRING:
         str = *(char **)dst;
-        if (str == o->default_val.str) //2 NULLs
+        if (str == o->default_val.str) { //2 NULLs
             return 1;
-        if (!str || !o->default_val.str) //1 NULL
+}
+        if (!str || !o->default_val.str) { //1 NULL
             return 0;
+}
         return !strcmp(str, o->default_val.str);
     case AV_OPT_TYPE_DOUBLE:
         read_number(o, dst, &d, NULL, NULL);
@@ -1922,15 +2041,19 @@ int av_opt_is_set_to_default(void *obj, const AVOption *o)
         } tmp = {0};
         int opt_size = *(int *)((void **)dst + 1);
         void *opt_ptr = *(void **)dst;
-        if (!opt_size && (!o->default_val.str || !strlen(o->default_val.str)))
+        if (!opt_size && (!o->default_val.str || !strlen(o->default_val.str))) {
             return 1;
-        if (!opt_size ||  !o->default_val.str || !strlen(o->default_val.str ))
+}
+        if (!opt_size ||  !o->default_val.str || !strlen(o->default_val.str )) {
             return 0;
-        if (opt_size != strlen(o->default_val.str) / 2)
+}
+        if (opt_size != strlen(o->default_val.str) / 2) {
             return 0;
+}
         ret = set_string_binary(NULL, NULL, o->default_val.str, &tmp.data);
-        if (!ret)
+        if (!ret) {
             ret = !memcmp(opt_ptr, tmp.data, tmp.size);
+}
         av_free(tmp.data);
         return ret;
     }
@@ -1938,23 +2061,26 @@ int av_opt_is_set_to_default(void *obj, const AVOption *o)
         /* Binary and dict have not default support yet. Any pointer is not default. */
         return !!(*(void **)dst);
     case AV_OPT_TYPE_IMAGE_SIZE:
-        if (!o->default_val.str || !strcmp(o->default_val.str, "none"))
+        if (!o->default_val.str || !strcmp(o->default_val.str, "none")) {
             w = h = 0;
-        else if ((ret = av_parse_video_size(&w, &h, o->default_val.str)) < 0)
+        } else if ((ret = av_parse_video_size(&w, &h, o->default_val.str)) < 0) {
             return ret;
+}
         return (w == *(int *)dst) && (h == *((int *)dst+1));
     case AV_OPT_TYPE_VIDEO_RATE:
         q = (AVRational){0, 0};
         if (o->default_val.str) {
-            if ((ret = av_parse_video_rate(&q, o->default_val.str)) < 0)
+            if ((ret = av_parse_video_rate(&q, o->default_val.str)) < 0) {
                 return ret;
+}
         }
         return !av_cmp_q(*(AVRational*)dst, q);
     case AV_OPT_TYPE_COLOR: {
         uint8_t color[4] = {0, 0, 0, 0};
         if (o->default_val.str) {
-            if ((ret = av_parse_color(color, o->default_val.str, -1, NULL)) < 0)
+            if ((ret = av_parse_color(color, o->default_val.str, -1, NULL)) < 0) {
                 return ret;
+}
         }
         return !memcmp(color, dst, sizeof(color));
     }
@@ -1969,11 +2095,13 @@ int av_opt_is_set_to_default_by_name(void *obj, const char *name, int search_fla
 {
     const AVOption *o;
     void *target;
-    if (!obj)
+    if (!obj) {
         return AVERROR(EINVAL);
+}
     o = av_opt_find2(obj, name, NULL, 0, search_flags, &target);
-    if (!o)
+    if (!o) {
         return AVERROR_OPTION_NOT_FOUND;
+}
     return av_opt_is_set_to_default(target, o);
 }
 
@@ -1992,28 +2120,33 @@ int av_opt_serialize(void *obj, int opt_flags, int flags, char **buffer,
         return AVERROR(EINVAL);
     }
 
-    if (!obj || !buffer)
+    if (!obj || !buffer) {
         return AVERROR(EINVAL);
+}
 
     *buffer = NULL;
     av_bprint_init(&bprint, 64, AV_BPRINT_SIZE_UNLIMITED);
 
     while (o = av_opt_next(obj, o)) {
-        if (o->type == AV_OPT_TYPE_CONST)
+        if (o->type == AV_OPT_TYPE_CONST) {
             continue;
-        if ((flags & AV_OPT_SERIALIZE_OPT_FLAGS_EXACT) && o->flags != opt_flags)
+}
+        if ((flags & AV_OPT_SERIALIZE_OPT_FLAGS_EXACT) && o->flags != opt_flags) {
             continue;
-        else if (((o->flags & opt_flags) != opt_flags))
+        } else if (((o->flags & opt_flags) != opt_flags)) {
             continue;
-        if (flags & AV_OPT_SERIALIZE_SKIP_DEFAULTS && av_opt_is_set_to_default(obj, o) > 0)
+}
+        if (flags & AV_OPT_SERIALIZE_SKIP_DEFAULTS && av_opt_is_set_to_default(obj, o) > 0) {
             continue;
+}
         if ((ret = av_opt_get(obj, o->name, 0, &buf)) < 0) {
             av_bprint_finalize(&bprint, NULL);
             return ret;
         }
         if (buf) {
-            if (cnt++)
+            if (cnt++) {
                 av_bprint_append_data(&bprint, &pairs_sep, 1);
+}
             av_bprint_escape(&bprint, o->name, special_chars, AV_ESCAPE_MODE_BACKSLASH, 0);
             av_bprint_append_data(&bprint, &key_val_sep, 1);
             av_bprint_escape(&bprint, buf, special_chars, AV_ESCAPE_MODE_BACKSLASH, 0);

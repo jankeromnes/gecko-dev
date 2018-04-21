@@ -56,8 +56,9 @@ int nr_p_buf_ctx_create(size,ctxp)
     int _status;
     nr_p_buf_ctx *ctx=0;
 
-    if(!(ctx=(nr_p_buf_ctx *)RCALLOC(sizeof(nr_p_buf_ctx))))
+    if(!(ctx=(nr_p_buf_ctx *)RCALLOC(sizeof(nr_p_buf_ctx)))) {
       ABORT(R_NO_MEMORY);
+}
 
     ctx->buf_size=size;
     STAILQ_INIT(&ctx->free_list);
@@ -76,8 +77,9 @@ int nr_p_buf_ctx_destroy(ctxp)
   {
     nr_p_buf_ctx *ctx;
 
-    if(!ctxp || !*ctxp)
+    if(!ctxp || !*ctxp) {
       return(0);
+}
 
     ctx=*ctxp;
 
@@ -102,10 +104,12 @@ int nr_p_buf_alloc(ctx,bufp)
       goto ok;
     }
     else {
-      if(!(buf=(nr_p_buf *)RCALLOC(sizeof(nr_p_buf))))
+      if(!(buf=(nr_p_buf *)RCALLOC(sizeof(nr_p_buf)))) {
         ABORT(R_NO_MEMORY);
-      if(!(buf->data=(UCHAR *)RMALLOC(ctx->buf_size)))
+}
+      if(!(buf->data=(UCHAR *)RMALLOC(ctx->buf_size))) {
         ABORT(R_NO_MEMORY);
+}
       buf->size=ctx->buf_size;
     }
 
@@ -164,8 +168,9 @@ int nr_p_buf_write_to_chain(ctx,chain,data,len)
       int towrite;
 
       if(!buf){
-        if(r=nr_p_buf_alloc(ctx,&buf))
+        if(r=nr_p_buf_alloc(ctx,&buf)) {
           ABORT(r);
+}
         STAILQ_INSERT_TAIL(chain,buf,entry);
       }
 
@@ -205,8 +210,9 @@ static int nr_p_buf_destroy_chain(head)
 static int nr_p_buf_destroy(buf)
   nr_p_buf *buf;
   {
-    if(!buf)
+    if(!buf) {
       return(0);
+}
 
     RFREE(buf->data);
     RFREE(buf);

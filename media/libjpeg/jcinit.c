@@ -55,8 +55,9 @@ jinit_compress_master (j_compress_ptr cinfo)
 #else
       ERREXIT(cinfo, JERR_NOT_COMPILED);
 #endif
-    } else
+    } else {
       jinit_huff_encoder(cinfo);
+}
   }
 
   /* Need a full-image coefficient buffer in any multi-pass mode. */

@@ -33,8 +33,9 @@ NSS_CMSUtil_EncryptSymKey_RSA(PLArenaPool *poolp, CERTCertificate *cert,
     SECKEYPublicKey *publickey;
 
     publickey = CERT_ExtractPublicKey(cert);
-    if (publickey == NULL)
+    if (publickey == NULL) {
         return SECFailure;
+}
 
     rv = NSS_CMSUtil_EncryptSymKey_RSAPubKey(poolp, publickey, bulkkey, encKey);
     SECKEY_DestroyPublicKey(publickey);
@@ -52,8 +53,9 @@ NSS_CMSUtil_EncryptSymKey_RSAPubKey(PLArenaPool *poolp,
     void *mark = NULL;
 
     mark = PORT_ArenaMark(poolp);
-    if (!mark)
+    if (!mark) {
         goto loser;
+}
 
     /* sanity check */
     keyType = SECKEY_GetPublicKeyType(publickey);
@@ -65,15 +67,17 @@ NSS_CMSUtil_EncryptSymKey_RSAPubKey(PLArenaPool *poolp,
     data_len = SECKEY_PublicKeyStrength(publickey); /* block size (assumed to be > keylen) */
     encKey->data = (unsigned char *)PORT_ArenaAlloc(poolp, data_len);
     encKey->len = data_len;
-    if (encKey->data == NULL)
+    if (encKey->data == NULL) {
         goto loser;
+}
 
     /* encrypt the key now */
     rv = PK11_PubWrapSymKey(PK11_AlgtagToMechanism(SEC_OID_PKCS1_RSA_ENCRYPTION),
                             publickey, bulkkey, encKey);
 
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return SECSuccess;

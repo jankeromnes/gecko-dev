@@ -268,8 +268,9 @@ PK11_ImportDERPrivateKeyInfoAndReturnKey(PK11SlotInfo *slot, SECItem *derPKI,
     SECStatus rv = SECFailure;
 
     temparena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (!temparena)
+    if (!temparena) {
         return rv;
+}
     pki = PORT_ArenaZNew(temparena, SECKEYPrivateKeyInfo);
     if (!pki) {
         PORT_FreeArena(temparena, PR_FALSE);

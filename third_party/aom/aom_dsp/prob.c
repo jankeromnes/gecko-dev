@@ -81,7 +81,8 @@ static aom_cdf_prob tree_node_compute_probs(tree_node *tree, int n,
   if (tree[n].l == 0) {
     /* This prevents probability computations in Q15 that underflow from
         producing a symbol that has zero probability. */
-    if (pdf == 0) pdf = 1;
+    if (pdf == 0) { pdf = 1;
+}
     tree[n].pdf = pdf;
     return pdf;
   } else {
@@ -109,9 +110,12 @@ static int tree_node_extract(tree_node *tree, int n, int symb,
                              int *path, int *len) {
   if (tree[n].l == 0) {
     pdf[symb] = tree[n].pdf;
-    if (index != NULL) index[symb] = tree[n].index;
-    if (path != NULL) path[symb] = tree[n].path;
-    if (len != NULL) len[symb] = tree[n].len;
+    if (index != NULL) { index[symb] = tree[n].index;
+}
+    if (path != NULL) { path[symb] = tree[n].path;
+}
+    if (len != NULL) { len[symb] = tree[n].len;
+}
     return symb + 1;
   } else {
     symb = tree_node_extract(tree, tree[n].l, symb, pdf, index, path, len);
@@ -145,7 +149,8 @@ int tree_to_cdf(const aom_tree_index *tree, const aom_prob *probs,
     m = 0;
     /* Find the internal node with the largest probability. */
     for (i = 1; i < size; i++) {
-      if (tree_node_cmp(symb[next[i]], symb[next[m]]) > 0) m = i;
+      if (tree_node_cmp(symb[next[i]], symb[next[m]]) > 0) { m = i;
+}
     }
     i = next[m];
     memmove(&next[m], &next[m + 1], sizeof(*next) * (size - (m + 1)));

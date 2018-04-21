@@ -175,8 +175,9 @@ NS_IMETHODIMP
 nsGIOMimeApp::GetCommand(nsACString& aCommand)
 {
   const char *cmd = g_app_info_get_commandline(mApp);
-  if (!cmd)
+  if (!cmd) {
     return NS_ERROR_FAILURE;
+}
   aCommand.Assign(cmd);
   return NS_OK;
 }
@@ -203,8 +204,9 @@ nsGIOMimeApp::SetDetailedDescription(const nsAString& aDetailedDescription)
 NS_IMETHODIMP
 nsGIOMimeApp::Equals(nsIHandlerApp* aHandlerApp, bool* _retval)
 {
-  if (!aHandlerApp)
+  if (!aHandlerApp) {
     return NS_ERROR_FAILURE;
+}
 
   // Compare with nsILocalHandlerApp instance by name
   nsCOMPtr<nsILocalHandlerApp> localHandlerApp = do_QueryInterface(aHandlerApp);
@@ -292,8 +294,9 @@ GIOUTF8StringEnumerator::HasMore(bool* aResult)
 NS_IMETHODIMP
 GIOUTF8StringEnumerator::GetNext(nsACString& aResult)
 {
-  if (mIndex >= mStrings.Length())
+  if (mIndex >= mStrings.Length()) {
     return NS_ERROR_UNEXPECTED;
+}
 
   aResult.Assign(mStrings[mIndex]);
   ++mIndex;
@@ -333,8 +336,9 @@ nsGIOMimeApp::SetAsDefaultForMimeType(nsACString const& aMimeType)
 {
   char *content_type =
     g_content_type_from_mime_type(PromiseFlatCString(aMimeType).get());
-  if (!content_type)
+  if (!content_type) {
     return NS_ERROR_FAILURE;
+}
   GError *error = nullptr;
   g_app_info_set_as_default_for_type(mApp,
                                      content_type,
@@ -429,8 +433,9 @@ nsGIOService::GetMimeTypeFromExtension(const nsACString& aExtension,
                                             nullptr,
                                             0,
                                             &result_uncertain);
-  if (!content_type)
+  if (!content_type) {
     return NS_ERROR_FAILURE;
+}
 
   char *mime_type = g_content_type_get_mime_type(content_type);
   if (!mime_type) {
@@ -523,8 +528,9 @@ nsGIOService::GetAppForMimeType(const nsACString& aMimeType,
 
   char *content_type =
     g_content_type_from_mime_type(PromiseFlatCString(aMimeType).get());
-  if (!content_type)
+  if (!content_type) {
     return NS_ERROR_FAILURE;
+}
 
   GAppInfo *app_info = g_app_info_get_default_for_type(content_type, false);
   if (app_info) {
@@ -545,8 +551,9 @@ nsGIOService::GetDescriptionForMimeType(const nsACString& aMimeType,
 {
   char *content_type =
     g_content_type_from_mime_type(PromiseFlatCString(aMimeType).get());
-  if (!content_type)
+  if (!content_type) {
     return NS_ERROR_FAILURE;
+}
 
   char *desc = g_content_type_get_description(content_type);
   if (!desc) {

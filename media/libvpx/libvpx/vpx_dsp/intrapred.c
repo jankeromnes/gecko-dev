@@ -23,23 +23,27 @@ static INLINE void d207_predictor(uint8_t *dst, ptrdiff_t stride, int bs,
   int r, c;
   (void)above;
   // first column
-  for (r = 0; r < bs - 1; ++r) dst[r * stride] = AVG2(left[r], left[r + 1]);
+  for (r = 0; r < bs - 1; ++r) { dst[r * stride] = AVG2(left[r], left[r + 1]);
+}
   dst[(bs - 1) * stride] = left[bs - 1];
   dst++;
 
   // second column
-  for (r = 0; r < bs - 2; ++r)
+  for (r = 0; r < bs - 2; ++r) {
     dst[r * stride] = AVG3(left[r], left[r + 1], left[r + 2]);
+}
   dst[(bs - 2) * stride] = AVG3(left[bs - 2], left[bs - 1], left[bs - 1]);
   dst[(bs - 1) * stride] = left[bs - 1];
   dst++;
 
   // rest of last row
-  for (c = 0; c < bs - 2; ++c) dst[(bs - 1) * stride + c] = left[bs - 1];
+  for (c = 0; c < bs - 2; ++c) { dst[(bs - 1) * stride + c] = left[bs - 1];
+}
 
-  for (r = bs - 2; r >= 0; --r)
-    for (c = 0; c < bs - 2; ++c)
+  for (r = bs - 2; r >= 0; --r) {
+    for (c = 0; c < bs - 2; ++c) {
       dst[r * stride + c] = dst[(r + 1) * stride + c - 2];
+}
 }
 
 #if CONFIG_MISC_FIXES
@@ -131,22 +135,26 @@ static INLINE void d117_predictor(uint8_t *dst, ptrdiff_t stride, int bs,
   int r, c;
 
   // first row
-  for (c = 0; c < bs; c++) dst[c] = AVG2(above[c - 1], above[c]);
+  for (c = 0; c < bs; c++) { dst[c] = AVG2(above[c - 1], above[c]);
+}
   dst += stride;
 
   // second row
   dst[0] = AVG3(left[0], above[-1], above[0]);
-  for (c = 1; c < bs; c++) dst[c] = AVG3(above[c - 2], above[c - 1], above[c]);
+  for (c = 1; c < bs; c++) { dst[c] = AVG3(above[c - 2], above[c - 1], above[c]);
+}
   dst += stride;
 
   // the rest of first col
   dst[0] = AVG3(above[-1], left[0], left[1]);
-  for (r = 3; r < bs; ++r)
+  for (r = 3; r < bs; ++r) {
     dst[(r - 2) * stride] = AVG3(left[r - 3], left[r - 2], left[r - 1]);
+}
 
   // the rest of the block
   for (r = 2; r < bs; ++r) {
-    for (c = 1; c < bs; c++) dst[c] = dst[-2 * stride + c - 1];
+    for (c = 1; c < bs; c++) { dst[c] = dst[-2 * stride + c - 1];
+}
     dst += stride;
   }
 }
@@ -183,21 +191,25 @@ static INLINE void d153_predictor(uint8_t *dst, ptrdiff_t stride, int bs,
                                   const uint8_t *above, const uint8_t *left) {
   int r, c;
   dst[0] = AVG2(above[-1], left[0]);
-  for (r = 1; r < bs; r++) dst[r * stride] = AVG2(left[r - 1], left[r]);
+  for (r = 1; r < bs; r++) { dst[r * stride] = AVG2(left[r - 1], left[r]);
+}
   dst++;
 
   dst[0] = AVG3(left[0], above[-1], above[0]);
   dst[stride] = AVG3(above[-1], left[0], left[1]);
-  for (r = 2; r < bs; r++)
+  for (r = 2; r < bs; r++) {
     dst[r * stride] = AVG3(left[r - 2], left[r - 1], left[r]);
+}
   dst++;
 
-  for (c = 0; c < bs - 2; c++)
+  for (c = 0; c < bs - 2; c++) {
     dst[c] = AVG3(above[c - 1], above[c], above[c + 1]);
+}
   dst += stride;
 
   for (r = 1; r < bs; ++r) {
-    for (c = 0; c < bs - 2; c++) dst[c] = dst[-stride + c - 2];
+    for (c = 0; c < bs - 2; c++) { dst[c] = dst[-stride + c - 2];
+}
     dst += stride;
   }
 }
@@ -230,8 +242,9 @@ static INLINE void tm_predictor(uint8_t *dst, ptrdiff_t stride, int bs,
   int ytop_left = above[-1];
 
   for (r = 0; r < bs; r++) {
-    for (c = 0; c < bs; c++)
+    for (c = 0; c < bs; c++) {
       dst[c] = clip_pixel(left[r] + above[c] - ytop_left);
+}
     dst += stride;
   }
 }
@@ -254,7 +267,8 @@ static INLINE void dc_left_predictor(uint8_t *dst, ptrdiff_t stride, int bs,
   int i, r, expected_dc, sum = 0;
   (void)above;
 
-  for (i = 0; i < bs; i++) sum += left[i];
+  for (i = 0; i < bs; i++) { sum += left[i];
+}
   expected_dc = (sum + (bs >> 1)) / bs;
 
   for (r = 0; r < bs; r++) {
@@ -268,7 +282,8 @@ static INLINE void dc_top_predictor(uint8_t *dst, ptrdiff_t stride, int bs,
   int i, r, expected_dc, sum = 0;
   (void)left;
 
-  for (i = 0; i < bs; i++) sum += above[i];
+  for (i = 0; i < bs; i++) { sum += above[i];
+}
   expected_dc = (sum + (bs >> 1)) / bs;
 
   for (r = 0; r < bs; r++) {

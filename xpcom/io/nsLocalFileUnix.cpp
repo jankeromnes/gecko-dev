@@ -1408,8 +1408,9 @@ nsLocalFile::GetDiskSpaceAvailable(int64_t* aDiskSpaceAvailable)
       && dq.dqb_bhardlimit) {
     int64_t QuotaSpaceAvailable = 0;
     // dqb_bhardlimit is count of BLOCK_SIZE blocks, dqb_curspace is bytes
-    if ((BLOCK_SIZE * dq.dqb_bhardlimit) > dq.dqb_curspace)
+    if ((BLOCK_SIZE * dq.dqb_bhardlimit) > dq.dqb_curspace) {
       QuotaSpaceAvailable = int64_t(BLOCK_SIZE * dq.dqb_bhardlimit - dq.dqb_curspace);
+}
     if (QuotaSpaceAvailable < *aDiskSpaceAvailable) {
       *aDiskSpaceAvailable = QuotaSpaceAvailable;
     }

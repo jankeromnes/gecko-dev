@@ -2043,8 +2043,9 @@ SECOID_Init(void)
     xOids[SEC_OID_APPLY_SSL_POLICY].notPolicyFlags = NSS_USE_POLICY_IN_SSL;
 
     envVal = PR_GetEnvSecure("NSS_HASH_ALG_SUPPORT");
-    if (envVal)
+    if (envVal) {
         handleHashAlgSupport(envVal);
+}
 
     if (secoid_InitDynOidData() != SECSuccess) {
         PORT_SetError(SEC_ERROR_LIBRARY_FAILURE);
@@ -2130,8 +2131,9 @@ SECOID_FindOIDTag(const SECItem *oid)
     SECOidData *oiddata;
 
     oiddata = SECOID_FindOID(oid);
-    if (oiddata == NULL)
+    if (oiddata == NULL) {
         return SEC_OID_UNKNOWN;
+}
 
     return oiddata->offset;
 }
@@ -2154,8 +2156,9 @@ SECOID_KnownCertExtenOID(SECItem *extenOid)
     SECOidData *oidData;
 
     oidData = SECOID_FindOID(extenOid);
-    if (oidData == (SECOidData *)NULL)
+    if (oidData == (SECOidData *)NULL) {
         return (PR_FALSE);
+}
     return ((oidData->supportedExtension == SUPPORTED_CERT_EXTENSION) ? PR_TRUE : PR_FALSE);
 }
 
@@ -2193,8 +2196,9 @@ SECStatus
 NSS_GetAlgorithmPolicy(SECOidTag tag, PRUint32 *pValue)
 {
     privXOid *pxo = secoid_FindXOidByTag(tag);
-    if (!pxo)
+    if (!pxo) {
         return SECFailure;
+}
     if (!pValue) {
         PORT_SetError(SEC_ERROR_INVALID_ARGS);
         return SECFailure;
@@ -2212,8 +2216,9 @@ NSS_SetAlgorithmPolicy(SECOidTag tag, PRUint32 setBits, PRUint32 clearBits)
 {
     privXOid *pxo = secoid_FindXOidByTag(tag);
     PRUint32 policyFlags;
-    if (!pxo)
+    if (!pxo) {
         return SECFailure;
+}
     /* The stored policy flags are the ones complement of the flags as
      * seen by the user.  This is not atomic, but these changes should
      * be done rarely, e.g. at initialization time.

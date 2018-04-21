@@ -20,8 +20,9 @@ hashSECItem(HASHContext *hash, const SECItem *it)
 {
     unsigned char length[2];
 
-    if (it->len > 0xffff)
+    if (it->len > 0xffff) {
         return MP_BADARG;
+}
 
     length[0] = (unsigned char)(it->len >> 8);
     length[1] = (unsigned char)(it->len);

@@ -107,8 +107,9 @@ sec_port_read_utf8(unsigned int *index, unsigned char *inBuf, unsigned int inBuf
     }
 
     while (bytes_left--) {
-        if (i >= inBufLen || (inBuf[i] & 0xC0) != 0x80)
+        if (i >= inBufLen || (inBuf[i] & 0xC0) != 0x80) {
             return BAD_UTF8;
+}
         result = (result << 6) | (inBuf[i++] & 0x3F);
     }
 
@@ -136,16 +137,17 @@ sec_port_ucs4_utf8_conversion_function(
         unsigned int i, len = 0;
 
         for (i = 0; i < inBufLen;) {
-            if ((inBuf[i] & 0x80) == 0x00)
+            if ((inBuf[i] & 0x80) == 0x00) {
                 i += 1;
-            else if ((inBuf[i] & 0xE0) == 0xC0)
+            } else if ((inBuf[i] & 0xE0) == 0xC0) {
                 i += 2;
-            else if ((inBuf[i] & 0xF0) == 0xE0)
+            } else if ((inBuf[i] & 0xF0) == 0xE0) {
                 i += 3;
-            else if ((inBuf[i] & 0xF8) == 0xF0)
+            } else if ((inBuf[i] & 0xF8) == 0xF0) {
                 i += 4;
-            else
+            } else {
                 return PR_FALSE;
+}
 
             len += 4;
         }
@@ -160,8 +162,9 @@ sec_port_ucs4_utf8_conversion_function(
         for (i = 0; i < inBufLen;) {
             PRUint32 ucs4 = sec_port_read_utf8(&i, inBuf, inBufLen);
 
-            if (ucs4 == BAD_UTF8)
+            if (ucs4 == BAD_UTF8) {
                 return PR_FALSE;
+}
 
             outBuf[len + L_0] = 0x00;
             outBuf[len + L_1] = (unsigned char)(ucs4 >> 16);
@@ -185,14 +188,15 @@ sec_port_ucs4_utf8_conversion_function(
             if ((inBuf[i + L_0] > 0x00) || (inBuf[i + L_1] > 0x10)) {
                 *outBufLen = 0;
                 return PR_FALSE;
-            } else if (inBuf[i + L_1] >= 0x01)
+            } else if (inBuf[i + L_1] >= 0x01) {
                 len += 4;
-            else if (inBuf[i + L_2] >= 0x08)
+            } else if (inBuf[i + L_2] >= 0x08) {
                 len += 3;
-            else if ((inBuf[i + L_2] > 0x00) || (inBuf[i + L_3] >= 0x80))
+            } else if ((inBuf[i + L_2] > 0x00) || (inBuf[i + L_3] >= 0x80)) {
                 len += 2;
-            else
+            } else {
                 len += 1;
+}
         }
 
         if (len > maxOutBufLen) {
@@ -276,8 +280,9 @@ sec_port_ucs2_utf8_conversion_function(
             } else if ((inBuf[i] & 0xF8) == 0xF0) {
                 i += 4;
                 len += 4;
-            } else
+            } else {
                 return PR_FALSE;
+}
         }
 
         if (len > maxOutBufLen) {
@@ -290,8 +295,9 @@ sec_port_ucs2_utf8_conversion_function(
         for (i = 0; i < inBufLen;) {
             PRUint32 ucs4 = sec_port_read_utf8(&i, inBuf, inBufLen);
 
-            if (ucs4 == BAD_UTF8)
+            if (ucs4 == BAD_UTF8) {
                 return PR_FALSE;
+}
 
             if (ucs4 < 0x10000) {
                 outBuf[len + H_0] = (unsigned char)(ucs4 >> 8);
@@ -318,11 +324,11 @@ sec_port_ucs2_utf8_conversion_function(
         }
 
         for (i = 0; i < inBufLen; i += 2) {
-            if ((inBuf[i + H_0] == 0x00) && ((inBuf[i + H_1] & 0x80) == 0x00))
+            if ((inBuf[i + H_0] == 0x00) && ((inBuf[i + H_1] & 0x80) == 0x00)) {
                 len += 1;
-            else if (inBuf[i + H_0] < 0x08)
+            } else if (inBuf[i + H_0] < 0x08) {
                 len += 2;
-            else if (((inBuf[i + H_0] & 0xFC) == 0xD8)) {
+            } else if (((inBuf[i + H_0] & 0xFC) == 0xD8)) {
                 if (((inBufLen - i) > 2) && ((inBuf[i + 2 + H_0] & 0xFC) == 0xDC)) {
                     i += 2;
                     len += 4;
@@ -409,10 +415,11 @@ sec_port_iso88591_utf8_conversion_function(
     PORT_Assert((unsigned int *)NULL != outBufLen);
 
     for (i = 0; i < inBufLen; i++) {
-        if ((inBuf[i] & 0x80) == 0x00)
+        if ((inBuf[i] & 0x80) == 0x00) {
             len += 1;
-        else
+        } else {
             len += 2;
+}
     }
 
     if (len > maxOutBufLen) {

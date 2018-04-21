@@ -214,7 +214,8 @@ _uhash_allocate(UHashtable *hash,
     UHashElement *p, *limit;
     UHashTok emptytok;
 
-    if (U_FAILURE(*status)) return;
+    if (U_FAILURE(*status)) { return;
+}
 
     U_ASSERT(primeIndex >= 0 && primeIndex < PRIMES_LENGTH);
 
@@ -253,7 +254,8 @@ _uhash_init(UHashtable *result,
               int32_t primeIndex,
               UErrorCode *status)
 {
-    if (U_FAILURE(*status)) return NULL;
+    if (U_FAILURE(*status)) { return NULL;
+}
     U_ASSERT(keyHash != NULL);
     U_ASSERT(keyComp != NULL);
 
@@ -282,7 +284,8 @@ _uhash_create(UHashFunction *keyHash,
               UErrorCode *status) {
     UHashtable *result;
 
-    if (U_FAILURE(*status)) return NULL;
+    if (U_FAILURE(*status)) { return NULL;
+}
 
     result = (UHashtable*) uprv_malloc(sizeof(UHashtable));
     if (result == NULL) {

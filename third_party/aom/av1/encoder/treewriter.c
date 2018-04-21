@@ -37,15 +37,17 @@ static unsigned int convert_distribution(unsigned int i, aom_tree tree,
                                          const unsigned int num_events[]) {
   unsigned int left, right;
 
-  if (tree[i] <= 0)
+  if (tree[i] <= 0) {
     left = num_events[-tree[i]];
-  else
+  } else {
     left = convert_distribution(tree[i], tree, branch_ct, num_events);
+}
 
-  if (tree[i + 1] <= 0)
+  if (tree[i + 1] <= 0) {
     right = num_events[-tree[i + 1]];
-  else
+  } else {
     right = convert_distribution(tree[i + 1], tree, branch_ct, num_events);
+}
 
   branch_ct[i >> 1][0] = left;
   branch_ct[i >> 1][1] = right;

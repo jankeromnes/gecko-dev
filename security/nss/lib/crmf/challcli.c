@@ -135,8 +135,9 @@ CMMF_POPODecKeyChallContDecryptChallenge(CMMFPOPODecKeyChallContent *inChalCont,
     /* Verify the hashes in the challenge */
     tag = SECOID_FindOIDTag(&owf->algorithm);
     hashItem.len = HASH_ResultLenByOidTag(tag);
-    if (!hashItem.len)
+    if (!hashItem.len) {
         goto loser; /* error code has been set */
+}
 
     rv = PK11_HashBuf(tag, hash, randStr.integer.data, randStr.integer.len);
     if (rv != SECSuccess) {

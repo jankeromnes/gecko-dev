@@ -463,12 +463,14 @@ sonewconn(struct socket *head, int connstatus)
 #ifdef REGRESSION
 	if (regression_sonewconn_earlytest && over)
 #else
-	if (over)
+	if (over) {
 #endif
 		return (NULL);
+}
 	so = soalloc();
-	if (so == NULL)
+	if (so == NULL) {
 		return (NULL);
+}
 	so->so_head = head;
 	so->so_type = head->so_type;
 	so->so_options = head->so_options &~ SCTP_SO_ACCEPTCONN;
@@ -615,8 +617,9 @@ copyiniov(struct iovec *iovp, u_int iovcnt, struct iovec **iov, int error)
 	u_int iovlen;
 
 	*iov = NULL;
-	if (iovcnt > UIO_MAXIOV)
+	if (iovcnt > UIO_MAXIOV) {
 		return (error);
+}
 	iovlen = iovcnt * sizeof (struct iovec);
 	*iov = malloc(iovlen); /*, M_IOV, M_WAITOK); */
 	error = copyin(iovp, *iov, iovlen);
@@ -648,25 +651,29 @@ uiomove(void *cp, int n, struct uio *uio)
 			uio->uio_iovcnt--;
 			continue;
 		}
-		if (cnt > (size_t)n)
+		if (cnt > (size_t)n) {
 			cnt = n;
+}
 
 		switch (uio->uio_segflg) {
 
 		case UIO_USERSPACE:
-			if (uio->uio_rw == UIO_READ)
+			if (uio->uio_rw == UIO_READ) {
 				error = copyout(cp, iov->iov_base, cnt);
-			else
+			} else {
 				error = copyin(iov->iov_base, cp, cnt);
-			if (error)
+}
+			if (error) {
 				goto out;
+}
 			break;
 
 		case UIO_SYSSPACE:
-			if (uio->uio_rw == UIO_READ)
+			if (uio->uio_rw == UIO_READ) {
 				memcpy(iov->iov_base, cp, cnt);
-			else
+			} else {
 				memcpy(cp, iov->iov_base, cnt);
+}
 			break;
 		}
 		iov->iov_base = (char *)iov->iov_base + cnt;
@@ -691,10 +698,12 @@ getsockaddr(namp, uaddr, len)
 	struct sockaddr *sa;
 	int error;
 
-	if (len > SOCK_MAXADDRLEN)
+	if (len > SOCK_MAXADDRLEN) {
 		return (ENAMETOOLONG);
-	if (len < offsetof(struct sockaddr, sa_data))
+}
+	if (len < offsetof(struct sockaddr, sa_data)) {
 		return (EINVAL);
+}
 	MALLOC(sa, struct sockaddr *, len, M_SONAME, M_WAITOK);
 	error = copyin(uaddr, sa, len);
 	if (error) {
@@ -990,9 +999,9 @@ userspace_sctp_sendmbuf(struct socket *so,
                               uflags, sinfo);
 sendmsg_return:
     /* TODO: Needs a condition for non-blocking when error is EWOULDBLOCK */
-    if (0 == error)
+    if (0 == error) {
         retval = len;
-    else if (error == EWOULDBLOCK) {
+    } else if (error == EWOULDBLOCK) {
         errno = EWOULDBLOCK;
         retval = -1;
     } else {
@@ -1462,8 +1471,9 @@ sbreserve_locked(struct sockbuf *sb, u_long cc, struct socket *so)
 	SOCKBUF_LOCK_ASSERT(sb);
 	sb->sb_mbmax = (u_int)min(cc * sb_efficiency, sb_max);
 	sb->sb_hiwat = (u_int)cc;
-	if (sb->sb_lowat > (int)sb->sb_hiwat)
+	if (sb->sb_lowat > (int)sb->sb_hiwat) {
 		sb->sb_lowat = (int)sb->sb_hiwat;
+}
 	return (1);
 }
 
@@ -1493,12 +1503,15 @@ soreserve(struct socket *so, u_long sndcc, u_long rcvcc)
 	if (sbreserve_locked(&so->so_rcv, rcvcc, so) == 0) {
 		goto bad;
 	}
-	if (so->so_rcv.sb_lowat == 0)
+	if (so->so_rcv.sb_lowat == 0) {
 		so->so_rcv.sb_lowat = 1;
-	if (so->so_snd.sb_lowat == 0)
+}
+	if (so->so_snd.sb_lowat == 0) {
 		so->so_snd.sb_lowat = MCLBYTES;
-	if (so->so_snd.sb_lowat > (int)so->so_snd.sb_hiwat)
+}
+	if (so->so_snd.sb_lowat > (int)so->so_snd.sb_hiwat) {
 		so->so_snd.sb_lowat = (int)so->so_snd.sb_hiwat;
+}
 	SOCKBUF_UNLOCK(&so->so_rcv);
 	SOCKBUF_UNLOCK(&so->so_snd);
 	return (0);
@@ -1641,8 +1654,9 @@ usrsctp_bind(struct socket *so, struct sockaddr *name, int namelen)
 		errno = EBADF;
 		return (-1);
 	}
-	if ((errno = getsockaddr(&sa, (caddr_t)name, namelen)) != 0)
+	if ((errno = getsockaddr(&sa, (caddr_t)name, namelen)) != 0) {
 		return (-1);
+}
 
 	errno = sobind(so, sa);
 	FREE(sa, M_SONAME);
@@ -1681,8 +1695,9 @@ solisten_proto_check(struct socket *so)
 	SOCK_LOCK_ASSERT(so);
 
 	if (so->so_state & (SS_ISCONNECTED | SS_ISCONNECTING |
-	    SS_ISDISCONNECTING))
+	    SS_ISDISCONNECTING)) {
 		return (EINVAL);
+}
 	return (0);
 }
 
@@ -1694,8 +1709,9 @@ solisten_proto(struct socket *so, int backlog)
 
 	SOCK_LOCK_ASSERT(so);
 
-	if (backlog < 0 || backlog > somaxconn)
+	if (backlog < 0 || backlog > somaxconn) {
 		backlog = somaxconn;
+}
 	so->so_qlimit = backlog;
 	so->so_options |= SCTP_SO_ACCEPTCONN;
 }
@@ -1825,13 +1841,15 @@ user_accept(struct socket *head,  struct sockaddr **name, socklen_t *namelen, st
 		 * return a namelen of zero for older code which might
 		 * ignore the return value from accept.
 		 */
-		if (name)
+		if (name) {
 			*namelen = 0;
+}
 		goto noconnection;
 	}
 	if (sa == NULL) {
-		if (name)
+		if (name) {
 			*namelen = 0;
+}
 		goto done;
 	}
 	if (name) {
@@ -1901,8 +1919,9 @@ accept1(struct socket *so, struct sockaddr *aname, socklen_t *anamelen, struct s
 	}
 
 	error = copyin(anamelen, &namelen, sizeof (namelen));
-	if (error)
+	if (error) {
 		return (error);
+}
 
 	error = user_accept(so, &name, &namelen, ptr_accept_ret_sock);
 
@@ -1982,10 +2001,12 @@ sodisconnect(struct socket *so)
 {
 	int error;
 
-	if ((so->so_state & SS_ISCONNECTED) == 0)
+	if ((so->so_state & SS_ISCONNECTED) == 0) {
 		return (ENOTCONN);
-	if (so->so_state & SS_ISDISCONNECTING)
+}
+	if (so->so_state & SS_ISDISCONNECTING) {
 		return (EALREADY);
+}
 	error = sctp_disconnect(so);
 	return (error);
 }
@@ -2031,8 +2052,9 @@ soconnect(struct socket *so, struct sockaddr *nam)
 {
 	int error;
 
-	if (so->so_options & SCTP_SO_ACCEPTCONN)
+	if (so->so_options & SCTP_SO_ACCEPTCONN) {
 		return (EOPNOTSUPP);
+}
 	/*
 	 * If protocol is connection-based, can only connect once.
 	 * Otherwise, if connected, try to disconnect first.  This allows
@@ -2138,8 +2160,9 @@ int usrsctp_connect(struct socket *so, struct sockaddr *name, int namelen)
 	struct sockaddr *sa;
 
 	errno = getsockaddr(&sa, (caddr_t)name, namelen);
-	if (errno)
+	if (errno) {
 		return (-1);
+}
 
 	errno = user_connect(so, sa);
 	FREE(sa, M_SONAME);
@@ -2199,8 +2222,9 @@ usrsctp_shutdown(struct socket *so, int how)
 		return (-1);
 	}
 	sctp_flush(so, how);
-	if (how != SHUT_WR)
+	if (how != SHUT_WR) {
 		 socantrcvmore(so);
+}
 	if (how != SHUT_RD) {
 		errno = sctp_shutdown(so);
 		if (errno) {

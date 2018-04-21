@@ -299,8 +299,9 @@ unsigned int avcodec_pix_fmt_to_codec_tag(enum AVPixelFormat fmt)
 {
     const PixelFormatTag *tags = ff_raw_pix_fmt_tags;
     while (tags->pix_fmt >= 0) {
-        if (tags->pix_fmt == fmt)
+        if (tags->pix_fmt == fmt) {
             return tags->fourcc;
+}
         tags++;
     }
     return 0;

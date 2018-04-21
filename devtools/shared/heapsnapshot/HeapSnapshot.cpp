@@ -148,8 +148,9 @@ struct GetOrInternStringMatcher
     auto tempString = reinterpret_cast<const CharT*>(str->data());
 
     UniqueFreePtr<CharT[]> owned(NS_strndup(tempString, length));
-    if (!owned || !internedStrings.append(Move(owned)))
+    if (!owned || !internedStrings.append(Move(owned))) {
       return nullptr;
+}
 
     return internedStrings.back().get();
   }
@@ -177,8 +178,9 @@ HeapSnapshot::getOrInternString(InternedStringSet& internedStrings,
 {
   // Incomplete message: has neither a string nor a reference to an already
   // interned string.
-  if (MOZ_UNLIKELY(maybeStrOrRef.isNothing()))
+  if (MOZ_UNLIKELY(maybeStrOrRef.isNothing())) {
     return nullptr;
+}
 
   GetOrInternStringMatcher<CharT, InternedStringSet> m(internedStrings);
   return maybeStrOrRef->match(m);
@@ -207,53 +209,63 @@ HeapSnapshot::saveNode(const protobuf::Node& node, NodeIdSet& edgeReferents)
   // `CoreDumpWriter::writeNode` or else indices in references to already
   // serialized strings will be off.
 
-  if (NS_WARN_IF(!node.has_id()))
+  if (NS_WARN_IF(!node.has_id())) {
     return false;
+}
   NodeId id = node.id();
 
   // NodeIds are derived from pointers (at most 48 bits) and we rely on them
   // fitting into JS numbers (IEEE 754 doubles, can precisely store 53 bit
   // integers) despite storing them on disk as 64 bit integers.
-  if (NS_WARN_IF(!JS::Value::isNumberRepresentable(id)))
+  if (NS_WARN_IF(!JS::Value::isNumberRepresentable(id))) {
     return false;
+}
 
   // Should only deserialize each node once.
-  if (NS_WARN_IF(nodes.has(id)))
+  if (NS_WARN_IF(nodes.has(id))) {
     return false;
+}
 
-  if (NS_WARN_IF(!JS::ubi::Uint32IsValidCoarseType(node.coarsetype())))
+  if (NS_WARN_IF(!JS::ubi::Uint32IsValidCoarseType(node.coarsetype()))) {
     return false;
+}
   auto coarseType = JS::ubi::Uint32ToCoarseType(node.coarsetype());
 
   Maybe<StringOrRef> typeNameOrRef = GET_STRING_OR_REF_WITH_PROP_NAMES(node, typename_, typenameref);
   auto typeName = getOrInternString<char16_t>(internedTwoByteStrings, typeNameOrRef);
-  if (NS_WARN_IF(!typeName))
+  if (NS_WARN_IF(!typeName)) {
     return false;
+}
 
-  if (NS_WARN_IF(!node.has_size()))
+  if (NS_WARN_IF(!node.has_size())) {
     return false;
+}
   uint64_t size = node.size();
 
   auto edgesLength = node.edges_size();
   DeserializedNode::EdgeVector edges;
-  if (NS_WARN_IF(!edges.reserve(edgesLength)))
+  if (NS_WARN_IF(!edges.reserve(edgesLength))) {
     return false;
+}
   for (decltype(edgesLength) i = 0; i < edgesLength; i++) {
     auto& protoEdge = node.edges(i);
 
-    if (NS_WARN_IF(!protoEdge.has_referent()))
+    if (NS_WARN_IF(!protoEdge.has_referent())) {
       return false;
+}
     NodeId referent = protoEdge.referent();
 
-    if (NS_WARN_IF(!edgeReferents.put(referent)))
+    if (NS_WARN_IF(!edgeReferents.put(referent))) {
       return false;
+}
 
     const char16_t* edgeName = nullptr;
     if (protoEdge.EdgeNameOrRef_case() != protobuf::Edge::EDGENAMEORREF_NOT_SET) {
       Maybe<StringOrRef> edgeNameOrRef = GET_STRING_OR_REF(protoEdge, name);
       edgeName = getOrInternString<char16_t>(internedTwoByteStrings, edgeNameOrRef);
-      if (NS_WARN_IF(!edgeName))
+      if (NS_WARN_IF(!edgeName)) {
         return false;
+}
     }
 
     edges.infallibleAppend(DeserializedEdge(referent, edgeName));
@@ -262,8 +274,9 @@ HeapSnapshot::saveNode(const protobuf::Node& node, NodeIdSet& edgeReferents)
   Maybe<StackFrameId> allocationStack;
   if (node.has_allocationstack()) {
     StackFrameId id = 0;
-    if (NS_WARN_IF(!saveStackFrame(node.allocationstack(), id)))
+    if (NS_WARN_IF(!saveStackFrame(node.allocationstack(), id))) {
       return false;
+}
     allocationStack.emplace(id);
   }
   MOZ_ASSERT(allocationStack.isSome() == node.has_allocationstack());
@@ -272,16 +285,18 @@ HeapSnapshot::saveNode(const protobuf::Node& node, NodeIdSet& edgeReferents)
   if (node.JSObjectClassNameOrRef_case() != protobuf::Node::JSOBJECTCLASSNAMEORREF_NOT_SET) {
     Maybe<StringOrRef> clsNameOrRef = GET_STRING_OR_REF(node, jsobjectclassname);
     jsObjectClassName = getOrInternString<char>(internedOneByteStrings, clsNameOrRef);
-    if (NS_WARN_IF(!jsObjectClassName))
+    if (NS_WARN_IF(!jsObjectClassName)) {
       return false;
+}
   }
 
   const char* scriptFilename = nullptr;
   if (node.ScriptFilenameOrRef_case() != protobuf::Node::SCRIPTFILENAMEORREF_NOT_SET) {
     Maybe<StringOrRef> scriptFilenameOrRef = GET_STRING_OR_REF(node, scriptfilename);
     scriptFilename = getOrInternString<char>(internedOneByteStrings, scriptFilenameOrRef);
-    if (NS_WARN_IF(!scriptFilename))
+    if (NS_WARN_IF(!scriptFilename)) {
       return false;
+}
   }
 
   if (NS_WARN_IF(!nodes.putNew(id, DeserializedNode(id, coarseType, typeName,
@@ -307,47 +322,56 @@ HeapSnapshot::saveStackFrame(const protobuf::StackFrame& frame,
   if (frame.has_ref()) {
     // We should only get a reference to the previous frame if we have already
     // seen the previous frame.
-    if (!frames.has(frame.ref()))
+    if (!frames.has(frame.ref())) {
       return false;
+}
 
     outFrameId = frame.ref();
     return true;
   }
 
   // Incomplete message.
-  if (!frame.has_data())
+  if (!frame.has_data()) {
     return false;
+}
 
   auto data = frame.data();
 
-  if (!data.has_id())
+  if (!data.has_id()) {
     return false;
+}
   StackFrameId id = data.id();
 
   // This should be the first and only time we see this frame.
-  if (frames.has(id))
+  if (frames.has(id)) {
     return false;
+}
 
-  if (!data.has_line())
+  if (!data.has_line()) {
     return false;
+}
   uint32_t line = data.line();
 
-  if (!data.has_column())
+  if (!data.has_column()) {
     return false;
+}
   uint32_t column = data.column();
 
-  if (!data.has_issystem())
+  if (!data.has_issystem()) {
     return false;
+}
   bool isSystem = data.issystem();
 
-  if (!data.has_isselfhosted())
+  if (!data.has_isselfhosted()) {
     return false;
+}
   bool isSelfHosted = data.isselfhosted();
 
   Maybe<StringOrRef> sourceOrRef = GET_STRING_OR_REF(data, source);
   auto source = getOrInternString<char16_t>(internedTwoByteStrings, sourceOrRef);
-  if (!source)
+  if (!source) {
     return false;
+}
 
   const char16_t* functionDisplayName = nullptr;
   if (data.FunctionDisplayNameOrRef_case() !=
@@ -355,15 +379,17 @@ HeapSnapshot::saveStackFrame(const protobuf::StackFrame& frame,
   {
     Maybe<StringOrRef> nameOrRef = GET_STRING_OR_REF(data, functiondisplayname);
     functionDisplayName = getOrInternString<char16_t>(internedTwoByteStrings, nameOrRef);
-    if (!functionDisplayName)
+    if (!functionDisplayName) {
       return false;
+}
   }
 
   Maybe<StackFrameId> parent;
   if (data.has_parent()) {
     StackFrameId parentId = 0;
-    if (!saveStackFrame(data.parent(), parentId))
+    if (!saveStackFrame(data.parent(), parentId)) {
       return false;
+}
     parent = Some(parentId);
   }
 
@@ -396,8 +422,9 @@ readSizeOfNextMessage(ZeroCopyInputStream& stream, uint32_t* sizep)
 bool
 HeapSnapshot::init(JSContext* cx, const uint8_t* buffer, uint32_t size)
 {
-  if (!nodes.init() || !frames.init())
+  if (!nodes.init() || !frames.init()) {
     return false;
+}
 
   ArrayInputStream stream(buffer, size);
   GzipInputStream gzipStream(&stream);
@@ -406,34 +433,42 @@ HeapSnapshot::init(JSContext* cx, const uint8_t* buffer, uint32_t size)
   // First is the metadata.
 
   protobuf::Metadata metadata;
-  if (NS_WARN_IF(!readSizeOfNextMessage(gzipStream, &sizeOfMessage)))
+  if (NS_WARN_IF(!readSizeOfNextMessage(gzipStream, &sizeOfMessage))) {
     return false;
-  if (!parseMessage(gzipStream, sizeOfMessage, metadata))
+}
+  if (!parseMessage(gzipStream, sizeOfMessage, metadata)) {
     return false;
-  if (metadata.has_timestamp())
+}
+  if (metadata.has_timestamp()) {
     timestamp.emplace(metadata.timestamp());
+}
 
   // Next is the root node.
 
   protobuf::Node root;
-  if (NS_WARN_IF(!readSizeOfNextMessage(gzipStream, &sizeOfMessage)))
+  if (NS_WARN_IF(!readSizeOfNextMessage(gzipStream, &sizeOfMessage))) {
     return false;
-  if (!parseMessage(gzipStream, sizeOfMessage, root))
+}
+  if (!parseMessage(gzipStream, sizeOfMessage, root)) {
     return false;
+}
 
   // Although the id is optional in the protobuf format for future proofing, we
   // can't currently do anything without it.
-  if (NS_WARN_IF(!root.has_id()))
+  if (NS_WARN_IF(!root.has_id())) {
     return false;
+}
   rootId = root.id();
 
   // The set of all node ids we've found edges pointing to.
   NodeIdSet edgeReferents(cx);
-  if (NS_WARN_IF(!edgeReferents.init()))
+  if (NS_WARN_IF(!edgeReferents.init())) {
     return false;
+}
 
-  if (NS_WARN_IF(!saveNode(root, edgeReferents)))
+  if (NS_WARN_IF(!saveNode(root, edgeReferents))) {
     return false;
+}
 
   // Finally, the rest of the nodes in the core dump.
 
@@ -443,18 +478,21 @@ HeapSnapshot::init(JSContext* cx, const uint8_t* buffer, uint32_t size)
   // extrapolate guestimations from the result of that operation.
   while (readSizeOfNextMessage(gzipStream, &sizeOfMessage)) {
     protobuf::Node node;
-    if (!parseMessage(gzipStream, sizeOfMessage, node))
+    if (!parseMessage(gzipStream, sizeOfMessage, node)) {
       return false;
-    if (NS_WARN_IF(!saveNode(node, edgeReferents)))
+}
+    if (NS_WARN_IF(!saveNode(node, edgeReferents))) {
       return false;
+}
   }
 
   // Check the set of node ids referred to by edges we found and ensure that we
   // have the node corresponding to each id. If we don't have all of them, it is
   // unsafe to perform analyses of this heap snapshot.
   for (auto range = edgeReferents.all(); !range.empty(); range.popFront()) {
-    if (NS_WARN_IF(!nodes.has(range.front())))
+    if (NS_WARN_IF(!nodes.has(range.front()))) {
       return false;
+}
   }
 
   return true;
@@ -712,13 +750,15 @@ HeapSnapshot::ComputeShortestPaths(JSContext*cx, uint64_t start,
 static bool
 PopulateCompartmentsWithGlobals(CompartmentSet& compartments, AutoObjectVector& globals)
 {
-  if (!compartments.init())
+  if (!compartments.init()) {
     return false;
+}
 
   unsigned length = globals.length();
   for (unsigned i = 0; i < length; i++) {
-    if (!compartments.put(GetObjectCompartment(globals[i])))
+    if (!compartments.put(GetObjectCompartment(globals[i]))) {
       return false;
+}
   }
 
   return true;
@@ -1005,17 +1045,19 @@ struct TwoByteString::HashPolicy {
       MOZ_ASSERT(chars);
 
       const char16_t* rhsChars = nullptr;
-      if (rhs.is<const char16_t*>())
+      if (rhs.is<const char16_t*>()) {
         rhsChars = rhs.as<const char16_t*>();
-      else if (rhs.is<JS::ubi::EdgeName>())
+      } else if (rhs.is<JS::ubi::EdgeName>()) {
         rhsChars = rhs.as<JS::ubi::EdgeName>().get();
-      else
+      } else {
         return false;
+}
       MOZ_ASSERT(rhsChars);
 
       auto length = NS_strlen(chars);
-      if (NS_strlen(rhsChars) != length)
+      if (NS_strlen(rhsChars) != length) {
         return false;
+}
 
       return memcmp(chars, rhsChars, length * sizeof(char16_t)) == 0;
     }
@@ -1130,15 +1172,17 @@ class MOZ_STACK_CLASS StreamWriter : public CoreDumpWriter
 
     auto length = string.length();
     auto stringData = MakeUnique<std::string>(length * sizeof(char16_t), '\0');
-    if (!stringData)
+    if (!stringData) {
       return false;
+}
 
     auto buf = const_cast<char16_t*>(reinterpret_cast<const char16_t*>(stringData->data()));
     string.copyToBuffer(RangedPtr<char16_t>(buf, length), length);
 
     uint64_t ref = twoByteStringsAlreadySerialized.count();
-    if (!twoByteStringsAlreadySerialized.add(ptr, Move(string), ref))
+    if (!twoByteStringsAlreadySerialized.add(ptr, Move(string), ref)) {
       return false;
+}
 
     setString(stringData.release());
     return true;
@@ -1158,12 +1202,14 @@ class MOZ_STACK_CLASS StreamWriter : public CoreDumpWriter
 
     auto length = strlen(string);
     auto stringData = MakeUnique<std::string>(string, length);
-    if (!stringData)
+    if (!stringData) {
       return false;
+}
 
     uint64_t ref = oneByteStringsAlreadySerialized.count();
-    if (!oneByteStringsAlreadySerialized.add(ptr, string, ref))
+    if (!oneByteStringsAlreadySerialized.add(ptr, string, ref)) {
       return false;
+}
 
     setString(stringData.release());
     return true;
@@ -1181,8 +1227,9 @@ class MOZ_STACK_CLASS StreamWriter : public CoreDumpWriter
 
     auto id = frame.identifier();
     auto protobufStackFrame = MakeUnique<protobuf::StackFrame>();
-    if (!protobufStackFrame)
+    if (!protobufStackFrame) {
       return nullptr;
+}
 
     if (framesAlreadySerialized.has(id)) {
       protobufStackFrame->set_ref(id);
@@ -1190,8 +1237,9 @@ class MOZ_STACK_CLASS StreamWriter : public CoreDumpWriter
     }
 
     auto data = MakeUnique<protobuf::StackFrame_Data>();
-    if (!data)
+    if (!data) {
       return nullptr;
+}
 
     data->set_id(id);
     data->set_line(frame.line());
@@ -1220,15 +1268,17 @@ class MOZ_STACK_CLASS StreamWriter : public CoreDumpWriter
     auto parent = frame.parent();
     if (parent && depth < HeapSnapshot::MAX_STACK_DEPTH) {
       auto protobufParent = getProtobufStackFrame(parent, depth + 1);
-      if (!protobufParent)
+      if (!protobufParent) {
         return nullptr;
+}
       data->set_allocated_parent(protobufParent);
     }
 
     protobufStackFrame->set_allocated_data(data.release());
 
-    if (!framesAlreadySerialized.put(id))
+    if (!framesAlreadySerialized.put(id)) {
       return nullptr;
+}
 
     return protobufStackFrame.release();
   }
@@ -1286,8 +1336,9 @@ public:
 
     if (includeEdges) {
       auto edges = ubiNode.edges(cx, wantNames);
-      if (NS_WARN_IF(!edges))
+      if (NS_WARN_IF(!edges)) {
         return false;
+}
 
       for ( ; !edges->empty(); edges->popFront()) {
         ubi::Edge& ubiEdge = edges->front();
@@ -1317,8 +1368,9 @@ public:
     if (ubiNode.hasAllocationStack()) {
       auto ubiStackFrame = ubiNode.allocationStack();
       auto protoStackFrame = getProtobufStackFrame(ubiStackFrame);
-      if (NS_WARN_IF(!protoStackFrame))
+      if (NS_WARN_IF(!protoStackFrame)) {
         return false;
+}
       protobufNode.set_allocated_allocationstack(protoStackFrame);
     }
 
@@ -1380,17 +1432,20 @@ public:
     // serialized into the core dump. Serializing a node also serializes each of
     // its edges, and if we are traversing a given edge, we must have already
     // visited and serialized the origin node and its edges.
-    if (!first)
+    if (!first) {
       return true;
+}
 
     CoreDumpWriter::EdgePolicy policy;
-    if (!ShouldIncludeEdge(compartments, origin, edge, &policy))
+    if (!ShouldIncludeEdge(compartments, origin, edge, &policy)) {
       return true;
+}
 
     nodeCount++;
 
-    if (policy == CoreDumpWriter::EXCLUDE_EDGES)
+    if (policy == CoreDumpWriter::EXCLUDE_EDGES) {
       traversal.abandonReferent();
+}
 
     return writer.writeNode(edge.referent, policy);
   }
@@ -1418,8 +1473,9 @@ WriteHeapGraph(JSContext* cx,
 
   HeapSnapshotHandler handler(writer, compartments);
   HeapSnapshotHandler::Traversal traversal(cx, handler, noGC);
-  if (!traversal.init())
+  if (!traversal.init()) {
     return false;
+}
   traversal.wantNames = wantNames;
 
   bool ok = traversal.addStartVisited(node) &&
@@ -1448,26 +1504,31 @@ HeapSnapshot::CreateUniqueCoreDumpFile(ErrorResult& rv,
 {
   nsCOMPtr<nsIFile> file;
   rv = NS_GetSpecialDirectory(NS_OS_TEMP_DIR, getter_AddRefs(file));
-  if (NS_WARN_IF(rv.Failed()))
+  if (NS_WARN_IF(rv.Failed())) {
     return nullptr;
+}
 
   nsAutoString tempPath;
   rv = file->GetPath(tempPath);
-  if (NS_WARN_IF(rv.Failed()))
+  if (NS_WARN_IF(rv.Failed())) {
     return nullptr;
+}
 
   auto ms = msSinceProcessCreation(now);
   rv = file->AppendNative(nsPrintfCString("%lu.fxsnapshot", ms));
-  if (NS_WARN_IF(rv.Failed()))
+  if (NS_WARN_IF(rv.Failed())) {
     return nullptr;
+}
 
   rv = file->CreateUnique(nsIFile::NORMAL_FILE_TYPE, 0666);
-  if (NS_WARN_IF(rv.Failed()))
+  if (NS_WARN_IF(rv.Failed())) {
     return nullptr;
+}
 
   rv = file->GetPath(outFilePath);
-  if (NS_WARN_IF(rv.Failed()))
+  if (NS_WARN_IF(rv.Failed())) {
       return nullptr;
+}
 
   // The snapshot ID must be computed in the process that created the
   // temp file, because TmpD may not be the same in all processes.
@@ -1511,14 +1572,16 @@ getCoreDumpOutputStream(ErrorResult& rv,
                                                                     start,
                                                                     outFilePath,
                                                                     outSnapshotId);
-    if (NS_WARN_IF(rv.Failed()))
+    if (NS_WARN_IF(rv.Failed())) {
       return nullptr;
+}
 
     nsCOMPtr<nsIOutputStream> outputStream;
     rv = NS_NewLocalFileOutputStream(getter_AddRefs(outputStream), file,
                                      PR_WRONLY, -1, 0);
-    if (NS_WARN_IF(rv.Failed()))
+    if (NS_WARN_IF(rv.Failed())) {
       return nullptr;
+}
 
     return outputStream.forget();
   }
@@ -1584,8 +1647,9 @@ ChromeUtils::SaveHeapSnapshotShared(GlobalObject& global,
   nsCOMPtr<nsIOutputStream> outputStream = getCoreDumpOutputStream(rv, start,
                                                                    outFilePath,
                                                                    outSnapshotId);
-  if (NS_WARN_IF(rv.Failed()))
+  if (NS_WARN_IF(rv.Failed())) {
     return;
+}
 
   ZeroCopyNSIOutputStream zeroCopyStream(outputStream);
   ::google::protobuf::io::GzipOutputStream gzipStream(&zeroCopyStream);
@@ -1595,8 +1659,9 @@ ChromeUtils::SaveHeapSnapshotShared(GlobalObject& global,
   {
     Maybe<AutoCheckCannotGC> maybeNoGC;
     ubi::RootList rootList(cx, maybeNoGC, wantNames);
-    if (!EstablishBoundaries(cx, rv, boundaries, rootList, compartments))
+    if (!EstablishBoundaries(cx, rv, boundaries, rootList, compartments)) {
       return;
+}
 
     StreamWriter writer(cx, gzipStream, wantNames,
                         compartments.initialized() ? &compartments : nullptr);
@@ -1671,16 +1736,18 @@ ChromeUtils::ReadHeapSnapshot(GlobalObject& global,
 
   AutoMemMap mm;
   rv = mm.init(path.get());
-  if (rv.Failed())
+  if (rv.Failed()) {
     return nullptr;
+}
 
   RefPtr<HeapSnapshot> snapshot = HeapSnapshot::Create(
       global.Context(), global, reinterpret_cast<const uint8_t*>(mm.address()),
       mm.size(), rv);
 
-  if (!rv.Failed())
+  if (!rv.Failed()) {
     Telemetry::AccumulateTimeDelta(Telemetry::DEVTOOLS_READ_HEAP_SNAPSHOT_MS,
                                    start);
+}
 
   return snapshot.forget();
 }

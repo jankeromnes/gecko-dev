@@ -418,8 +418,9 @@ CERT_NewTempCertificate(CERTCertDBHandle *handle, SECItem *derCert,
         */
         SECItem derSerial = { 0 };
         CERT_SerialNumberFromDERCert(&cc->derCert, &derSerial);
-        if (!derSerial.data)
+        if (!derSerial.data) {
             goto loser;
+}
         nssItem_Create(c->object.arena, &c->serial, derSerial.len,
                        derSerial.data);
         PORT_Free(derSerial.data);
@@ -552,8 +553,9 @@ CERT_FindCertByKeyID(CERTCertDBHandle *handle, SECItem *name, SECItem *keyID)
     CERTCertListNode *node;
 
     list = CERT_CreateSubjectCertList(NULL, handle, name, 0, PR_FALSE);
-    if (list == NULL)
+    if (list == NULL) {
         return NULL;
+}
 
     node = CERT_LIST_HEAD(list);
     while (!CERT_LIST_END(node, list)) {
@@ -608,8 +610,9 @@ CERT_FindCertByDERCert(CERTCertDBHandle *handle, SECItem *derCert)
     if (!c) {
         c = NSSTrustDomain_FindCertificateByEncodedCertificate(handle,
                                                                &encoding);
-        if (!c)
+        if (!c) {
             return NULL;
+}
     }
     return STAN_GetCERTCertificateOrRelease(c);
 }
@@ -762,8 +765,9 @@ CERT_CreateSubjectCertList(CERTCertList *certList, CERTCertDBHandle *handle,
     if (certList == NULL) {
         certList = CERT_NewCertList();
         myList = PR_TRUE;
-        if (!certList)
+        if (!certList) {
             goto loser;
+}
     }
     /* Iterate over the matching temp certs.  Add them to the list */
     ci = tSubjectCerts;
@@ -847,8 +851,9 @@ certdb_SaveSingleProfile(CERTCertificate *cert, const char *emailAddr,
     PRBool freeOldProfile = PR_FALSE;
 
     c = STAN_GetNSSCertificate(cert);
-    if (!c)
+    if (!c) {
         return SECFailure;
+}
     cc = c->object.cryptoContext;
     if (cc != NULL) {
         stanProfile = nssCryptoContext_FindSMIMEProfileForCertificate(cc, c);
@@ -921,8 +926,9 @@ certdb_SaveSingleProfile(CERTCertificate *cert, const char *emailAddr,
                 NSSITEM_FROM_SECITEM(&profTime, profileTime);
                 NSSITEM_FROM_SECITEM(&profData, emailProfile);
                 stanProfile = nssSMIMEProfile_Create(c, &profTime, &profData);
-                if (!stanProfile)
+                if (!stanProfile) {
                     goto loser;
+}
                 nssrv = nssCryptoContext_ImportSMIMEProfile(cc, stanProfile);
                 rv = (nssrv == PR_SUCCESS) ? SECSuccess : SECFailure;
             }
@@ -1020,8 +1026,9 @@ CERT_FindSMimeProfile(CERTCertificate *cert)
         return NULL;
     }
     c = STAN_GetNSSCertificate(cert);
-    if (!c)
+    if (!c) {
         return NULL;
+}
     cc = c->object.cryptoContext;
     if (cc != NULL) {
         nssSMIMEProfile *stanProfile;

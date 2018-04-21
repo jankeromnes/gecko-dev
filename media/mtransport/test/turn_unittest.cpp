@@ -372,23 +372,26 @@ class TurnClient : public MtransportTest {
 };
 
 TEST_F(TurnClient, Allocate) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   Allocate();
 }
 
 TEST_F(TurnClient, AllocateTcp) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   SetTcp();
   Allocate();
 }
 
 TEST_F(TurnClient, AllocateAndHold) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   Allocate();
   PR_Sleep(20000);
@@ -396,8 +399,9 @@ TEST_F(TurnClient, AllocateAndHold) {
 }
 
 TEST_F(TurnClient, SendToSelf) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   Allocate();
   SendTo(relay_addr_);
@@ -408,8 +412,9 @@ TEST_F(TurnClient, SendToSelf) {
 
 
 TEST_F(TurnClient, SendToSelfTcp) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   SetTcp();
   Allocate();
@@ -420,8 +425,9 @@ TEST_F(TurnClient, SendToSelfTcp) {
 }
 
 TEST_F(TurnClient, PermissionDenied) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   Allocate();
   RequestPermission(relay_addr_);
@@ -446,8 +452,9 @@ TEST_F(TurnClient, PermissionDenied) {
 }
 
 TEST_F(TurnClient, DeallocateReceiveFailure) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   Allocate();
   SendTo(relay_addr_);
@@ -460,8 +467,9 @@ TEST_F(TurnClient, DeallocateReceiveFailure) {
 }
 
 TEST_F(TurnClient, DeallocateReceiveFailureTcp) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   SetTcp();
   Allocate();
@@ -479,8 +487,9 @@ TEST_F(TurnClient, DeallocateReceiveFailureTcp) {
 }
 
 TEST_F(TurnClient, AllocateDummyServer) {
-  if (WarnIfTurnNotConfigured())
+  if (WarnIfTurnNotConfigured()) {
     return;
+}
 
   turn_server_ = kDummyTurnServer;
   Allocate(false);

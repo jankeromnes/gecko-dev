@@ -79,23 +79,27 @@ static int cost_segmap(int *segcounts, vpx_prob *probs) {
   if (c0123 > 0) {
     cost += c01 * vp9_cost_zero(probs[1]) + c23 * vp9_cost_one(probs[1]);
 
-    if (c01 > 0)
+    if (c01 > 0) {
       cost += segcounts[0] * vp9_cost_zero(probs[3]) +
               segcounts[1] * vp9_cost_one(probs[3]);
-    if (c23 > 0)
+}
+    if (c23 > 0) {
       cost += segcounts[2] * vp9_cost_zero(probs[4]) +
               segcounts[3] * vp9_cost_one(probs[4]);
+}
   }
 
   if (c4567 > 0) {
     cost += c45 * vp9_cost_zero(probs[2]) + c67 * vp9_cost_one(probs[2]);
 
-    if (c45 > 0)
+    if (c45 > 0) {
       cost += segcounts[4] * vp9_cost_zero(probs[5]) +
               segcounts[5] * vp9_cost_one(probs[5]);
-    if (c67 > 0)
+}
+    if (c67 > 0) {
       cost += segcounts[6] * vp9_cost_zero(probs[6]) +
               segcounts[7] * vp9_cost_one(probs[6]);
+}
   }
 
   return cost;
@@ -109,7 +113,8 @@ static void count_segs(const VP9_COMMON *cm, MACROBLOCKD *xd,
                        int mi_col) {
   int segment_id;
 
-  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) return;
+  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) { return;
+}
 
   xd->mi = mi;
   segment_id = xd->mi[0]->segment_id;
@@ -134,7 +139,8 @@ static void count_segs(const VP9_COMMON *cm, MACROBLOCKD *xd,
     temporal_predictor_count[pred_context][pred_flag]++;
 
     // Update the "unpredicted" segment count
-    if (!pred_flag) t_unpred_seg_counts[segment_id]++;
+    if (!pred_flag) { t_unpred_seg_counts[segment_id]++;
+}
   }
 }
 
@@ -148,7 +154,8 @@ static void count_segs_sb(const VP9_COMMON *cm, MACROBLOCKD *xd,
   int bw, bh;
   const int bs = num_8x8_blocks_wide_lookup[bsize], hbs = bs / 2;
 
-  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) return;
+  if (mi_row >= cm->mi_rows || mi_col >= cm->mi_cols) { return;
+}
 
   bw = num_8x8_blocks_wide_lookup[mi[0]->sb_type];
   bh = num_8x8_blocks_high_lookup[mi[0]->sb_type];
@@ -218,10 +225,11 @@ void vp9_choose_segmap_coding_method(VP9_COMMON *cm, MACROBLOCKD *xd) {
          mi_row += 8, mi_ptr += 8 * cm->mi_stride) {
       MODE_INFO **mi = mi_ptr;
       for (mi_col = tile.mi_col_start; mi_col < tile.mi_col_end;
-           mi_col += 8, mi += 8)
+           mi_col += 8, mi += 8) {
         count_segs_sb(cm, xd, &tile, mi, no_pred_segcounts,
                       temporal_predictor_count, t_unpred_seg_counts, mi_row,
                       mi_col, BLOCK_64X64);
+}
     }
   }
 

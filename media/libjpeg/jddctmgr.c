@@ -113,10 +113,11 @@ start_pass (j_decompress_ptr cinfo)
       method = JDCT_ISLOW;      /* jidctred uses islow-style table */
       break;
     case 2:
-      if (jsimd_can_idct_2x2())
+      if (jsimd_can_idct_2x2()) {
         method_ptr = jsimd_idct_2x2;
-      else
+      } else {
         method_ptr = jpeg_idct_2x2;
+}
       method = JDCT_ISLOW;      /* jidctred uses islow-style table */
       break;
     case 3:
@@ -124,10 +125,11 @@ start_pass (j_decompress_ptr cinfo)
       method = JDCT_ISLOW;      /* jidctint uses islow-style table */
       break;
     case 4:
-      if (jsimd_can_idct_4x4())
+      if (jsimd_can_idct_4x4()) {
         method_ptr = jsimd_idct_4x4;
-      else
+      } else {
         method_ptr = jpeg_idct_4x4;
+}
       method = JDCT_ISLOW;      /* jidctred uses islow-style table */
       break;
     case 5:
@@ -152,28 +154,31 @@ start_pass (j_decompress_ptr cinfo)
       switch (cinfo->dct_method) {
 #ifdef DCT_ISLOW_SUPPORTED
       case JDCT_ISLOW:
-        if (jsimd_can_idct_islow())
+        if (jsimd_can_idct_islow()) {
           method_ptr = jsimd_idct_islow;
-        else
+        } else {
           method_ptr = jpeg_idct_islow;
+}
         method = JDCT_ISLOW;
         break;
 #endif
 #ifdef DCT_IFAST_SUPPORTED
       case JDCT_IFAST:
-        if (jsimd_can_idct_ifast())
+        if (jsimd_can_idct_ifast()) {
           method_ptr = jsimd_idct_ifast;
-        else
+        } else {
           method_ptr = jpeg_idct_ifast;
+}
         method = JDCT_IFAST;
         break;
 #endif
 #ifdef DCT_FLOAT_SUPPORTED
       case JDCT_FLOAT:
-        if (jsimd_can_idct_float())
+        if (jsimd_can_idct_float()) {
           method_ptr = jsimd_idct_float;
-        else
+        } else {
           method_ptr = jpeg_idct_float;
+}
         method = JDCT_FLOAT;
         break;
 #endif
@@ -233,11 +238,13 @@ start_pass (j_decompress_ptr cinfo)
      * multiplier table all-zero; we'll be reading zeroes from the
      * coefficient controller's buffer anyway.
      */
-    if (! compptr->component_needed || idct->cur_method[ci] == method)
+    if (! compptr->component_needed || idct->cur_method[ci] == method) {
       continue;
+}
     qtbl = compptr->quant_table;
-    if (qtbl == NULL)           /* happens if no data yet for component */
+    if (qtbl == NULL) {           /* happens if no data yet for component */
       continue;
+}
     idct->cur_method[ci] = method;
     switch (method) {
 #ifdef PROVIDE_ISLOW_TABLES

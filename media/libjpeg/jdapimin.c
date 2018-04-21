@@ -37,11 +37,13 @@ jpeg_CreateDecompress (j_decompress_ptr cinfo, int version, size_t structsize)
 
   /* Guard against version mismatches between library and caller. */
   cinfo->mem = NULL;            /* so jpeg_destroy knows mem mgr not called */
-  if (version != JPEG_LIB_VERSION)
+  if (version != JPEG_LIB_VERSION) {
     ERREXIT2(cinfo, JERR_BAD_LIB_VERSION, JPEG_LIB_VERSION, version);
-  if (structsize != sizeof(struct jpeg_decompress_struct))
+}
+  if (structsize != sizeof(struct jpeg_decompress_struct)) {
     ERREXIT2(cinfo, JERR_BAD_STRUCT_SIZE,
              (int) sizeof(struct jpeg_decompress_struct), (int) structsize);
+}
 
   /* For debugging purposes, we zero the whole master structure.
    * But the application has already set the err pointer, and may have set
@@ -65,8 +67,9 @@ jpeg_CreateDecompress (j_decompress_ptr cinfo, int version, size_t structsize)
   cinfo->progress = NULL;
   cinfo->src = NULL;
 
-  for (i = 0; i < NUM_QUANT_TBLS; i++)
+  for (i = 0; i < NUM_QUANT_TBLS; i++) {
     cinfo->quant_tbl_ptrs[i] = NULL;
+}
 
   for (i = 0; i < NUM_HUFF_TBLS; i++) {
     cinfo->dc_huff_tbl_ptrs[i] = NULL;
@@ -156,11 +159,11 @@ default_decompress_parms (j_decompress_ptr cinfo)
       int cid1 = cinfo->comp_info[1].component_id;
       int cid2 = cinfo->comp_info[2].component_id;
 
-      if (cid0 == 1 && cid1 == 2 && cid2 == 3)
+      if (cid0 == 1 && cid1 == 2 && cid2 == 3) {
         cinfo->jpeg_color_space = JCS_YCbCr; /* assume JFIF w/out marker */
-      else if (cid0 == 82 && cid1 == 71 && cid2 == 66)
+      } else if (cid0 == 82 && cid1 == 71 && cid2 == 66) {
         cinfo->jpeg_color_space = JCS_RGB; /* ASCII 'R', 'G', 'B' */
-      else {
+      } else {
         TRACEMS3(cinfo, 1, JTRC_UNKNOWN_IDS, cid0, cid1, cid2);
         cinfo->jpeg_color_space = JCS_YCbCr; /* assume it's YCbCr */
       }
@@ -255,8 +258,9 @@ jpeg_read_header (j_decompress_ptr cinfo, boolean require_image)
   int retcode;
 
   if (cinfo->global_state != DSTATE_START &&
-      cinfo->global_state != DSTATE_INHEADER)
+      cinfo->global_state != DSTATE_INHEADER) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
   retcode = jpeg_consume_input(cinfo);
 
@@ -265,8 +269,9 @@ jpeg_read_header (j_decompress_ptr cinfo, boolean require_image)
     retcode = JPEG_HEADER_OK;
     break;
   case JPEG_REACHED_EOI:
-    if (require_image)          /* Complain if application wanted an image */
+    if (require_image) {          /* Complain if application wanted an image */
       ERREXIT(cinfo, JERR_NO_IMAGE);
+}
     /* Reset to start state; it would be safer to require the application to
      * call jpeg_abort, but we can't change it now for compatibility reasons.
      * A side effect is to free any temporary memory (there shouldn't be any).
@@ -347,8 +352,9 @@ jpeg_input_complete (j_decompress_ptr cinfo)
 {
   /* Check for valid jpeg object */
   if (cinfo->global_state < DSTATE_START ||
-      cinfo->global_state > DSTATE_STOPPING)
+      cinfo->global_state > DSTATE_STOPPING) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
   return cinfo->inputctl->eoi_reached;
 }
 
@@ -362,8 +368,9 @@ jpeg_has_multiple_scans (j_decompress_ptr cinfo)
 {
   /* Only valid after jpeg_read_header completes */
   if (cinfo->global_state < DSTATE_READY ||
-      cinfo->global_state > DSTATE_STOPPING)
+      cinfo->global_state > DSTATE_STOPPING) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
   return cinfo->inputctl->has_multiple_scans;
 }
 
@@ -383,8 +390,9 @@ jpeg_finish_decompress (j_decompress_ptr cinfo)
   if ((cinfo->global_state == DSTATE_SCANNING ||
        cinfo->global_state == DSTATE_RAW_OK) && ! cinfo->buffered_image) {
     /* Terminate final pass of non-buffered mode */
-    if (cinfo->output_scanline < cinfo->output_height)
+    if (cinfo->output_scanline < cinfo->output_height) {
       ERREXIT(cinfo, JERR_TOO_LITTLE_DATA);
+}
     (*cinfo->master->finish_output_pass) (cinfo);
     cinfo->global_state = DSTATE_STOPPING;
   } else if (cinfo->global_state == DSTATE_BUFIMAGE) {
@@ -396,8 +404,9 @@ jpeg_finish_decompress (j_decompress_ptr cinfo)
   }
   /* Read until EOI */
   while (! cinfo->inputctl->eoi_reached) {
-    if ((*cinfo->inputctl->consume_input) (cinfo) == JPEG_SUSPENDED)
+    if ((*cinfo->inputctl->consume_input) (cinfo) == JPEG_SUSPENDED) {
       return FALSE;             /* Suspend, come back later */
+}
   }
   /* Do final cleanup */
   (*cinfo->src->term_source) (cinfo);

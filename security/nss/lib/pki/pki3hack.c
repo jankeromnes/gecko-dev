@@ -590,8 +590,9 @@ cert_trust_from_stan_trust(NSSTrust *t, PLArenaPool *arena)
         return NULL;
     }
     rvTrust = PORT_ArenaAlloc(arena, sizeof(CERTCertTrust));
-    if (!rvTrust)
+    if (!rvTrust) {
         return NULL;
+}
     rvTrust->sslFlags = get_nss3trust_from_nss4trust(t->serverAuth);
     client = get_nss3trust_from_nss4trust(t->clientAuth);
     if (client & (CERTDB_TRUSTED_CA | CERTDB_NS_TRUSTED_CA)) {
@@ -716,8 +717,9 @@ STAN_GetCERTCertificateName(PLArenaPool *arenaOpt, NSSCertificate *c)
     nssCryptokiInstance *instance = get_cert_instance(c);
     /* It's OK to call this function, even if instance is NULL */
     result = STAN_GetCERTCertificateNameForInstance(arenaOpt, c, instance);
-    if (instance)
+    if (instance) {
         nssCryptokiObject_Destroy(instance);
+}
     return result;
 }
 
@@ -1121,8 +1123,9 @@ STAN_ChangeCertTrust(CERTCertificate *cc, CERTCertTrust *trust)
     CERT_UnlockCertTrust(cc);
     /* Set the NSSCerticate's trust */
     arena = nssArena_Create();
-    if (!arena)
+    if (!arena) {
         return PR_FAILURE;
+}
     nssTrust = nss_ZNEW(arena, NSSTrust);
     if (!nssTrust) {
         nssArena_Destroy(arena);
@@ -1167,8 +1170,9 @@ STAN_ChangeCertTrust(CERTCertificate *cc, CERTCertTrust *trust)
         for (tok = (NSSToken *)nssListIterator_Start(tokens);
              tok != (NSSToken *)NULL;
              tok = (NSSToken *)nssListIterator_Next(tokens)) {
-            if (!PK11_IsReadOnly(tok->pk11slot))
+            if (!PK11_IsReadOnly(tok->pk11slot)) {
                 break;
+}
         }
         nssListIterator_Finish(tokens);
         nssListIterator_Destroy(tokens);
@@ -1345,8 +1349,9 @@ STAN_DeleteCertTrustMatchingSlot(NSSCertificate *c)
         nssCryptokiObject *cInstance = cobject->instances[i];
         if (cInstance && !PK11_IsReadOnly(cInstance->token->pk11slot)) {
             PRStatus status;
-            if (!tobject->numInstances || !tobject->instances)
+            if (!tobject->numInstances || !tobject->instances) {
                 continue;
+}
             status = DeleteCertTrustMatchingSlot(cInstance->token->pk11slot, tobject);
             if (status == PR_FAILURE) {
                 /* set the outer one but keep going */
@@ -1383,8 +1388,9 @@ nssTrustDomain_TraverseCertificatesBySubject(
     if (subjectCerts) {
         for (i = 0, c = subjectCerts[i]; c; i++) {
             nssrv = callback(c, arg);
-            if (nssrv != PR_SUCCESS)
+            if (nssrv != PR_SUCCESS) {
                 break;
+}
         }
     }
     nssArena_Destroy(tmpArena);
@@ -1413,8 +1419,9 @@ nssTrustDomain_TraverseCertificatesByNickname(
     if (nickCerts) {
         for (i = 0, c = nickCerts[i]; c; i++) {
             nssrv = callback(c, arg);
-            if (nssrv != PR_SUCCESS)
+            if (nssrv != PR_SUCCESS) {
                 break;
+}
         }
     }
     nssArena_Destroy(tmpArena);

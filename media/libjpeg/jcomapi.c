@@ -34,8 +34,9 @@ jpeg_abort (j_common_ptr cinfo)
   int pool;
 
   /* Do nothing if called on a not-initialized or destroyed JPEG object. */
-  if (cinfo->mem == NULL)
+  if (cinfo->mem == NULL) {
     return;
+}
 
   /* Releasing pools in reverse order might help avoid fragmentation
    * with some (brain-damaged) malloc libraries.
@@ -73,8 +74,9 @@ jpeg_destroy (j_common_ptr cinfo)
 {
   /* We need only tell the memory manager to release everything. */
   /* NB: mem pointer is NULL if memory mgr failed to initialize. */
-  if (cinfo->mem != NULL)
+  if (cinfo->mem != NULL) {
     (*cinfo->mem->self_destruct) (cinfo);
+}
   cinfo->mem = NULL;            /* be safe if jpeg_destroy is called twice */
   cinfo->global_state = 0;      /* mark it destroyed */
 }

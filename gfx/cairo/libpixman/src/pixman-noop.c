@@ -86,13 +86,15 @@ noop_src_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
 	    uint32_t *end = buffer + iter->width;
 	    uint32_t color;
 
-	    if (image->type == SOLID)
+	    if (image->type == SOLID) {
 		color = image->solid.color_32;
-	    else
+	    } else {
 		color = image->bits.fetch_pixel_32 (&image->bits, 0, 0);
+}
 
-	    while (buffer < end)
+	    while (buffer < end) {
 		*(buffer++) = color;
+}
 	}
 	else
 	{
@@ -100,13 +102,15 @@ noop_src_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
 	    argb_t *end = buffer + iter->width;
 	    argb_t color;
 
-	    if (image->type == SOLID)
+	    if (image->type == SOLID) {
 		color = image->solid.color_float;
-	    else
+	    } else {
 		color = image->bits.fetch_pixel_float (&image->bits, 0, 0);
+}
 
-	    while (buffer < end)
+	    while (buffer < end) {
 		*(buffer++) = color;
+}
 	}
 
 	iter->get_scanline = _pixman_iter_get_scanline_noop;

@@ -60,8 +60,9 @@ SEC_ASN1GetSubtemplate(const SEC_ASN1Template *theTemplate, void *thing,
 
             chooserp = *(SEC_ASN1TemplateChooserPtr *)theTemplate->sub;
             if (chooserp) {
-                if (thing != NULL)
+                if (thing != NULL) {
                     thing = (char *)thing - theTemplate->offset;
+}
                 subt = (*chooserp)(thing, encoding);
             }
         } else {

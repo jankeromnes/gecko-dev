@@ -29,13 +29,15 @@ NSS_CMSMessage_Create(PLArenaPool *poolp)
 
     if (poolp == NULL) {
         poolp = PORT_NewArena(1024); /* XXX what is right value? */
-        if (poolp == NULL)
+        if (poolp == NULL) {
             return NULL;
+}
         poolp_is_ours = PR_TRUE;
     }
 
-    if (!poolp_is_ours)
+    if (!poolp_is_ours) {
         mark = PORT_ArenaMark(poolp);
+}
 
     cmsg = (NSSCMSMessage *)PORT_ArenaZAlloc(poolp, sizeof(NSSCMSMessage));
     if (cmsg == NULL ||
@@ -44,8 +46,9 @@ NSS_CMSMessage_Create(PLArenaPool *poolp)
             if (mark) {
                 PORT_ArenaRelease(poolp, mark);
             }
-        } else
+        } else {
             PORT_FreeArena(poolp, PR_FALSE);
+}
         return NULL;
     }
 
@@ -53,8 +56,9 @@ NSS_CMSMessage_Create(PLArenaPool *poolp)
     cmsg->poolp_is_ours = poolp_is_ours;
     cmsg->refCount = 1;
 
-    if (mark)
+    if (mark) {
         PORT_ArenaUnmark(poolp, mark);
+}
 
     return cmsg;
 }
@@ -73,8 +77,9 @@ NSS_CMSMessage_SetEncodingParams(NSSCMSMessage *cmsg,
                                  NSSCMSGetDecryptKeyCallback decrypt_key_cb, void *decrypt_key_cb_arg,
                                  SECAlgorithmID **detached_digestalgs, SECItem **detached_digests)
 {
-    if (pwfn)
+    if (pwfn) {
         PK11_SetPasswordFunc(pwfn);
+}
     cmsg->pwfn_arg = pwfn_arg;
     cmsg->decrypt_key_cb = decrypt_key_cb;
     cmsg->decrypt_key_cb_arg = decrypt_key_cb_arg;
@@ -89,18 +94,21 @@ void
 NSS_CMSMessage_Destroy(NSSCMSMessage *cmsg)
 {
     PORT_Assert(cmsg->refCount > 0);
-    if (cmsg->refCount <= 0) /* oops */
+    if (cmsg->refCount <= 0) { /* oops */
         return;
+}
 
     cmsg->refCount--; /* thread safety? */
-    if (cmsg->refCount > 0)
+    if (cmsg->refCount > 0) {
         return;
+}
 
     NSS_CMSContentInfo_Destroy(&(cmsg->contentInfo));
 
     /* if poolp is not NULL, cmsg is the owner of its arena */
-    if (cmsg->poolp_is_ours)
+    if (cmsg->poolp_is_ours) {
         PORT_FreeArena(cmsg->poolp, PR_FALSE); /* XXX clear it? */
+}
 }
 
 /*
@@ -112,8 +120,9 @@ NSS_CMSMessage_Destroy(NSSCMSMessage *cmsg)
 NSSCMSMessage *
 NSS_CMSMessage_Copy(NSSCMSMessage *cmsg)
 {
-    if (cmsg == NULL)
+    if (cmsg == NULL) {
         return NULL;
+}
 
     PORT_Assert(cmsg->refCount > 0);
 
@@ -203,11 +212,13 @@ NSS_CMSMessage_ContainsCertsOrCrls(NSSCMSMessage *cmsg)
     /* descend into CMS message */
     for (cinfo = &(cmsg->contentInfo); cinfo != NULL;
          cinfo = NSS_CMSContentInfo_GetChildContentInfo(cinfo)) {
-        if (!NSS_CMSType_IsData(NSS_CMSContentInfo_GetContentTypeTag(cinfo)))
+        if (!NSS_CMSType_IsData(NSS_CMSContentInfo_GetContentTypeTag(cinfo))) {
             continue; /* next level */
+}
 
-        if (NSS_CMSSignedData_ContainsCertsOrCrls(cinfo->content.signedData))
+        if (NSS_CMSSignedData_ContainsCertsOrCrls(cinfo->content.signedData)) {
             return PR_TRUE;
+}
         /* callback here for generic wrappers? */
     }
     return PR_FALSE;
@@ -256,8 +267,9 @@ NSS_CMSMessage_IsSigned(NSSCMSMessage *cmsg)
          cinfo = NSS_CMSContentInfo_GetChildContentInfo(cinfo)) {
         switch (NSS_CMSContentInfo_GetContentTypeTag(cinfo)) {
             case SEC_OID_PKCS7_SIGNED_DATA:
-                if (!NSS_CMSArray_IsEmpty((void **)cinfo->content.signedData->signerInfos))
+                if (!NSS_CMSArray_IsEmpty((void **)cinfo->content.signedData->signerInfos)) {
                     return PR_TRUE;
+}
                 break;
             default:
                 /* callback here for generic wrappers? */
@@ -278,8 +290,9 @@ NSS_CMSMessage_IsContentEmpty(NSSCMSMessage *cmsg, unsigned int minLen)
 {
     SECItem *item = NULL;
 
-    if (cmsg == NULL)
+    if (cmsg == NULL) {
         return PR_TRUE;
+}
 
     item = NSS_CMSContentInfo_GetContent(NSS_CMSMessage_GetContentInfo(cmsg));
 

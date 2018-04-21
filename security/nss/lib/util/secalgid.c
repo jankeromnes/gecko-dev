@@ -11,8 +11,9 @@
 SECOidTag
 SECOID_GetAlgorithmTag(const SECAlgorithmID *id)
 {
-    if (id == NULL || id->algorithm.data == NULL)
+    if (id == NULL || id->algorithm.data == NULL) {
         return SEC_OID_UNKNOWN;
+}
 
     return SECOID_FindOIDTag(&(id->algorithm));
 }
@@ -30,8 +31,9 @@ SECOID_SetAlgorithmID(PLArenaPool *arena, SECAlgorithmID *id, SECOidTag which,
         return SECFailure;
     }
 
-    if (SECITEM_CopyItem(arena, &id->algorithm, &oiddata->oid))
+    if (SECITEM_CopyItem(arena, &id->algorithm, &oiddata->oid)) {
         return SECFailure;
+}
 
     switch (which) {
         case SEC_OID_MD2:
@@ -101,8 +103,9 @@ SECOID_CopyAlgorithmID(PLArenaPool *arena, SECAlgorithmID *to,
     SECStatus rv;
 
     rv = SECITEM_CopyItem(arena, &to->algorithm, &from->algorithm);
-    if (rv)
+    if (rv) {
         return rv;
+}
     rv = SECITEM_CopyItem(arena, &to->parameters, &from->parameters);
     return rv;
 }
@@ -112,8 +115,9 @@ SECOID_DestroyAlgorithmID(SECAlgorithmID *algid, PRBool freeit)
 {
     SECITEM_FreeItem(&algid->parameters, PR_FALSE);
     SECITEM_FreeItem(&algid->algorithm, PR_FALSE);
-    if (freeit == PR_TRUE)
+    if (freeit == PR_TRUE) {
         PORT_Free(algid);
+}
 }
 
 SECComparison
@@ -122,8 +126,9 @@ SECOID_CompareAlgorithmID(SECAlgorithmID *a, SECAlgorithmID *b)
     SECComparison rv;
 
     rv = SECITEM_CompareItem(&a->algorithm, &b->algorithm);
-    if (rv)
+    if (rv) {
         return rv;
+}
     rv = SECITEM_CompareItem(&a->parameters, &b->parameters);
     return rv;
 }

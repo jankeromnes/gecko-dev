@@ -80,8 +80,9 @@ bool ContainsSampler(const TStructure *structType)
 {
     for (const auto &field : structType->fields())
     {
-        if (ContainsSampler(*field->type()))
+        if (ContainsSampler(*field->type())) {
             return true;
+}
     }
     return false;
 }
@@ -439,8 +440,9 @@ void TParseContext::checkPrecisionSpecified(const TSourceLoc &line,
                                             TPrecision precision,
                                             TBasicType type)
 {
-    if (!mChecksPrecisionErrors)
+    if (!mChecksPrecisionErrors) {
         return;
+}
 
     if (precision != EbpUndefined && !SupportsPrecision(type))
     {
@@ -618,8 +620,9 @@ bool TParseContext::checkCanBeLValue(const TSourceLoc &line, const char *op, TIn
     //
     // Everything else is okay, no error.
     //
-    if (message.empty())
+    if (message.empty()) {
         return true;
+}
 
     //
     // If we get here, we have an error and a message.
@@ -1166,8 +1169,9 @@ bool TParseContext::declareVariable(const TSourceLoc &line,
         }
     }
 
-    if (needsReservedCheck && !checkIsNotReserved(line, identifier))
+    if (needsReservedCheck && !checkIsNotReserved(line, identifier)) {
         return false;
+}
 
     if (!symbolTable.declareVariable(*variable))
     {
@@ -1175,8 +1179,9 @@ bool TParseContext::declareVariable(const TSourceLoc &line,
         return false;
     }
 
-    if (!checkIsNonVoid(line, identifier, type->getBasicType()))
+    if (!checkIsNonVoid(line, identifier, type->getBasicType())) {
         return false;
+}
 
     return true;
 }
@@ -1730,8 +1735,9 @@ void TParseContext::checkInvariantVariableQualifier(bool invariant,
                                                     const TQualifier qualifier,
                                                     const TSourceLoc &invariantLocation)
 {
-    if (!invariant)
+    if (!invariant) {
         return;
+}
 
     if (mShaderVersion < 300)
     {
@@ -5220,16 +5226,18 @@ bool TParseContext::binaryOpCommonCheck(TOperator op,
             {
                 // If the nominal sizes of operands do not match:
                 // One of them must be a scalar.
-                if (!left->isScalar() && !right->isScalar())
+                if (!left->isScalar() && !right->isScalar()) {
                     return false;
+}
 
                 // In the case of compound assignment other than multiply-assign,
                 // the right side needs to be a scalar. Otherwise a vector/matrix
                 // would be assigned to a scalar. A scalar can't be shifted by a
                 // vector either.
                 if (!right->isScalar() &&
-                    (IsAssignment(op) || op == EOpBitShiftLeft || op == EOpBitShiftRight))
+                    (IsAssignment(op) || op == EOpBitShiftLeft || op == EOpBitShiftRight)) {
                     return false;
+}
             }
             break;
         default:
@@ -5287,8 +5295,9 @@ TIntermTyped *TParseContext::addBinaryMathInternal(TOperator op,
                                                    TIntermTyped *right,
                                                    const TSourceLoc &loc)
 {
-    if (!binaryOpCommonCheck(op, left, right, loc))
+    if (!binaryOpCommonCheck(op, left, right, loc)) {
         return nullptr;
+}
 
     switch (op)
     {
@@ -5969,15 +5978,18 @@ int PaParseStrings(size_t count,
                    const int length[],
                    TParseContext *context)
 {
-    if ((count == 0) || (string == nullptr))
+    if ((count == 0) || (string == nullptr)) {
         return 1;
+}
 
-    if (glslang_initialize(context))
+    if (glslang_initialize(context)) {
         return 1;
+}
 
     int error = glslang_scan(count, string, length, context);
-    if (!error)
+    if (!error) {
         error = glslang_parse(context);
+}
 
     glslang_finalize(context);
 

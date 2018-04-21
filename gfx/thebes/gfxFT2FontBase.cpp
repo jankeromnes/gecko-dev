@@ -52,8 +52,9 @@ gfxFT2FontBase::GetGlyph(uint32_t aCharCode)
     cairo_font_face_t *face =
         cairo_scaled_font_get_font_face(GetCairoScaledFont());
 
-    if (cairo_font_face_status(face) != CAIRO_STATUS_SUCCESS)
+    if (cairo_font_face_status(face) != CAIRO_STATUS_SUCCESS) {
         return 0;
+}
 
     // This cache algorithm and size is based on what is done in
     // cairo_scaled_font_text_to_glyphs and pango_fc_font_real_get_glyph.  I
@@ -78,8 +79,9 @@ gfxFT2FontBase::GetGlyph(uint32_t aCharCode)
         // modules have not been shutdown.
         slots = static_cast<CmapCacheSlot*>
             (calloc(kNumSlots, sizeof(CmapCacheSlot)));
-        if (!slots)
+        if (!slots) {
             return 0;
+}
 
         cairo_status_t status =
             cairo_font_face_set_user_data(face, &sCmapCacheKey, slots, free);

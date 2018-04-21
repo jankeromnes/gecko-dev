@@ -47,8 +47,9 @@ static inline void* dtoa_malloc(size_t size)
 {
     AutoEnterOOMUnsafeRegion oomUnsafe;
     void* p = js_malloc(size);
-    if (!p)
+    if (!p) {
         oomUnsafe.crash("dtoa_malloc");
+}
 
     return p;
 }
@@ -98,8 +99,9 @@ js_dtostr(DtoaState* state, char* buffer, size_t bufferSize, JSDToStrMode mode, 
      * Change mode here rather than below because the buffer may not be large
      * enough to hold a large integer.
      */
-    if (mode == DTOSTR_FIXED && (dinput >= 1e21 || dinput <= -1e21))
+    if (mode == DTOSTR_FIXED && (dinput >= 1e21 || dinput <= -1e21)) {
         mode = DTOSTR_STANDARD;
+}
 
     dval(d) = dinput;
     numBegin = dtoa(PASS_STATE d, dtoaModes[mode], precision, &decPt, &sign, &numEnd);
@@ -128,17 +130,19 @@ js_dtostr(DtoaState* state, char* buffer, size_t bufferSize, JSDToStrMode mode, 
 
         switch (mode) {
             case DTOSTR_STANDARD:
-                if (decPt < -5 || decPt > 21)
+                if (decPt < -5 || decPt > 21) {
                     exponentialNotation = true;
-                else
+                } else {
                     minNDigits = decPt;
+}
                 break;
 
             case DTOSTR_FIXED:
-                if (precision >= 0)
+                if (precision >= 0) {
                     minNDigits = decPt + precision;
-                else
+                } else {
                     minNDigits = decPt;
+}
                 break;
 
             case DTOSTR_EXPONENTIAL:
@@ -152,8 +156,9 @@ js_dtostr(DtoaState* state, char* buffer, size_t bufferSize, JSDToStrMode mode, 
             case DTOSTR_PRECISION:
                 MOZ_ASSERT(precision > 0);
                 minNDigits = precision;
-                if (decPt < -5 || decPt > precision)
+                if (decPt < -5 || decPt > precision) {
                     exponentialNotation = true;
+}
                 break;
         }
 
@@ -193,10 +198,12 @@ js_dtostr(DtoaState* state, char* buffer, size_t bufferSize, JSDToStrMode mode, 
                 q = numEnd;
                 MOZ_ASSERT(numEnd < buffer + bufferSize);
                 *numEnd = '\0';
-                while (p != numBegin)
+                while (p != numBegin) {
                     *--q = *--p;
-                for (p = numBegin + 1; p != q; p++)
+}
+                for (p = numBegin + 1; p != q; p++) {
                     *p = '0';
+}
                 *numBegin = '.';
                 *--numBegin = '0';
             }
@@ -227,8 +234,9 @@ divrem(Bigint* b, uint32_t divisor)
 
     MOZ_ASSERT(divisor > 0 && divisor <= 65536);
 
-    if (!n)
+    if (!n) {
         return 0; /* b is zero */
+}
     bx = b->x;
     bp = bx + n;
     do {
@@ -246,8 +254,9 @@ divrem(Bigint* b, uint32_t divisor)
         *bp = quotientHi << 16 | quotientLo;
     } while (bp != bx);
     /* Decrease the size of the number if its most significant word is now zero. */
-    if (bx[n-1] == 0)
+    if (bx[n-1] == 0) {
         b->wds--;
+}
     return remainder;
 }
 
@@ -264,8 +273,9 @@ static uint32_t quorem2(Bigint* b, int32_t k)
     mask = (ULong(1)<<k) - 1;
 
     w = b->wds - n;
-    if (w <= 0)
+    if (w <= 0) {
         return 0;
+}
     MOZ_ASSERT(w <= 2);
     bx = b->x;
     bxe = bx + n;
@@ -273,8 +283,9 @@ static uint32_t quorem2(Bigint* b, int32_t k)
     *bxe &= mask;
     if (w == 2) {
         MOZ_ASSERT(!(bxe[1] & ~mask));
-        if (k)
+        if (k) {
             result |= bxe[1] << (32 - k);
+}
     }
     n++;
     while (!*bxe && bxe != bx) {
@@ -308,8 +319,9 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
 
     dval(d) = dinput;
     buffer = (char*) js_malloc(DTOBASESTR_BUFFER_SIZE);
-    if (!buffer)
+    if (!buffer) {
         return nullptr;
+}
     p = buffer;
 
     if (dval(d) < 0.0) {
@@ -328,7 +340,7 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
     dval(di) = floor(dval(d));
     if (dval(di) <= 4294967295.0) {
         uint32_t n = (uint32_t)dval(di);
-        if (n)
+        if (n) {
             do {
                 uint32_t m = n / base;
                 digit = n - m*base;
@@ -336,13 +348,15 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
                 MOZ_ASSERT(digit < (uint32_t)base);
                 *p++ = BASEDIGIT(digit);
             } while (n);
-        else *p++ = '0';
+        } else { *p++ = '0';
+}
     } else {
         int e;
         int bits;  /* Number of significant bits in di; not used. */
         Bigint* b = d2b(PASS_STATE di, &e, &bits);
-        if (!b)
+        if (!b) {
             goto nomem1;
+}
         b = lshift(PASS_STATE b, e);
         if (!b) {
           nomem1:
@@ -381,8 +395,9 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
           nomem2:
             Bfree(PASS_STATE b);
             Bfree(PASS_STATE s);
-            if (mlo != mhi)
+            if (mlo != mhi) {
                 Bfree(PASS_STATE mlo);
+}
             Bfree(PASS_STATE mhi);
             js_free(buffer);
             return nullptr;
@@ -392,15 +407,17 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
 
         s2 = -(int32_t)(word0(d) >> Exp_shift1 & Exp_mask>>Exp_shift1);
 #ifndef Sudden_Underflow
-        if (!s2)
+        if (!s2) {
             s2 = -1;
+}
 #endif
         s2 += Bias + P;
         /* 1/2^s2 = (nextDouble(d) - d)/2 */
         MOZ_ASSERT(-s2 < e);
         mlo = i2b(PASS_STATE 1);
-        if (!mlo)
+        if (!mlo) {
             goto nomem2;
+}
         mhi = mlo;
         if (!word1(d) && !(word0(d) & Bndry_mask)
 #ifndef Sudden_Underflow
@@ -411,18 +428,22 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
                significant digit instead of one half of it when the output string's value is less than d.  */
             s2 += Log2P;
             mhi = i2b(PASS_STATE 1<<Log2P);
-            if (!mhi)
+            if (!mhi) {
                 goto nomem2;
+}
         }
         b = lshift(PASS_STATE b, e + s2);
-        if (!b)
+        if (!b) {
             goto nomem2;
+}
         s = i2b(PASS_STATE 1);
-        if (!s)
+        if (!s) {
             goto nomem2;
+}
         s = lshift(PASS_STATE s, s2);
-        if (!s)
+        if (!s) {
             goto nomem2;
+}
         /* At this point we have the following:
          *   s = 2^s2;
          *   1 > df = b/2^s2 > 0;
@@ -435,37 +456,43 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
             Bigint* delta;
 
             b = multadd(PASS_STATE b, base, 0);
-            if (!b)
+            if (!b) {
                 goto nomem2;
+}
             digit = quorem2(b, s2);
             if (mlo == mhi) {
                 mlo = mhi = multadd(PASS_STATE mlo, base, 0);
-                if (!mhi)
+                if (!mhi) {
                     goto nomem2;
+}
             }
             else {
                 mlo = multadd(PASS_STATE mlo, base, 0);
-                if (!mlo)
+                if (!mlo) {
                     goto nomem2;
+}
                 mhi = multadd(PASS_STATE mhi, base, 0);
-                if (!mhi)
+                if (!mhi) {
                     goto nomem2;
+}
             }
 
             /* Do we yet have the shortest string that will round to d? */
             j = cmp(b, mlo);
             /* j is b/2^s2 compared with mlo/2^s2. */
             delta = diff(PASS_STATE s, mhi);
-            if (!delta)
+            if (!delta) {
                 goto nomem2;
+}
             j1 = delta->sign ? 1 : cmp(b, delta);
             Bfree(PASS_STATE delta);
             /* j1 is b/2^s2 compared with 1 - mhi/2^s2. */
 
 #ifndef ROUND_BIASED
             if (j1 == 0 && !(word1(d) & 1)) {
-                if (j > 0)
+                if (j > 0) {
                     digit++;
+}
                 done = true;
             } else
 #endif
@@ -478,12 +505,14 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
                     /* Either dig or dig+1 would work here as the least significant digit.
                        Use whichever would produce an output value closer to d. */
                     b = lshift(PASS_STATE b, 1);
-                    if (!b)
+                    if (!b) {
                         goto nomem2;
+}
                     j1 = cmp(b, s);
-                    if (j1 > 0) /* The even test (|| (j1 == 0 && (digit & 1))) is not here because it messes up odd base output
+                    if (j1 > 0) { /* The even test (|| (j1 == 0 && (digit & 1))) is not here because it messes up odd base output
                                  * such as 3.5 in base 3.  */
                         digit++;
+}
                 }
                 done = true;
             } else if (j1 > 0) {
@@ -495,8 +524,9 @@ js_dtobasestr(DtoaState* state, int base, double dinput)
         } while (!done);
         Bfree(PASS_STATE b);
         Bfree(PASS_STATE s);
-        if (mlo != mhi)
+        if (mlo != mhi) {
             Bfree(PASS_STATE mlo);
+}
         Bfree(PASS_STATE mhi);
     }
     MOZ_ASSERT(p < buffer + DTOBASESTR_BUFFER_SIZE);

@@ -138,17 +138,19 @@ static void find_ref_mvs(VP9TileData *td,
 
         if (row > 0) {
             VP9mvrefPair *mv = &s->s.frames[CUR_FRAME].mv[(row - 1) * s->sb_cols * 8 + col];
-            if (mv->ref[0] == ref)
+            if (mv->ref[0] == ref) {
                 RETURN_MV(s->above_mv_ctx[2 * col + (sb & 1)][0]);
-            else if (mv->ref[1] == ref)
+            } else if (mv->ref[1] == ref) {
                 RETURN_MV(s->above_mv_ctx[2 * col + (sb & 1)][1]);
+}
         }
         if (col > td->tile_col_start) {
             VP9mvrefPair *mv = &s->s.frames[CUR_FRAME].mv[row * s->sb_cols * 8 + col - 1];
-            if (mv->ref[0] == ref)
+            if (mv->ref[0] == ref) {
                 RETURN_MV(td->left_mv_ctx[2 * row7 + (sb >> 1)][0]);
-            else if (mv->ref[1] == ref)
+            } else if (mv->ref[1] == ref) {
                 RETURN_MV(td->left_mv_ctx[2 * row7 + (sb >> 1)][1]);
+}
         }
         i = 2;
     } else {
@@ -163,10 +165,11 @@ static void find_ref_mvs(VP9TileData *td,
             r >= 0 && r < s->rows) {
             VP9mvrefPair *mv = &s->s.frames[CUR_FRAME].mv[r * s->sb_cols * 8 + c];
 
-            if (mv->ref[0] == ref)
+            if (mv->ref[0] == ref) {
                 RETURN_MV(mv->mv[0]);
-            else if (mv->ref[1] == ref)
+            } else if (mv->ref[1] == ref) {
                 RETURN_MV(mv->mv[1]);
+}
         }
     }
 
@@ -174,12 +177,14 @@ static void find_ref_mvs(VP9TileData *td,
     if (s->s.h.use_last_frame_mvs) {
         VP9mvrefPair *mv = &s->s.frames[REF_FRAME_MVPAIR].mv[row * s->sb_cols * 8 + col];
 
-        if (!s->s.frames[REF_FRAME_MVPAIR].uses_2pass)
+        if (!s->s.frames[REF_FRAME_MVPAIR].uses_2pass) {
             ff_thread_await_progress(&s->s.frames[REF_FRAME_MVPAIR].tf, row >> 3, 0);
-        if (mv->ref[0] == ref)
+}
+        if (mv->ref[0] == ref) {
             RETURN_MV(mv->mv[0]);
-        else if (mv->ref[1] == ref)
+        } else if (mv->ref[1] == ref) {
             RETURN_MV(mv->mv[1]);
+}
     }
 
 #define RETURN_SCALE_MV(mv, scale)              \
@@ -199,9 +204,10 @@ static void find_ref_mvs(VP9TileData *td,
         if (c >= td->tile_col_start && c < s->cols && r >= 0 && r < s->rows) {
             VP9mvrefPair *mv = &s->s.frames[CUR_FRAME].mv[r * s->sb_cols * 8 + c];
 
-            if (mv->ref[0] != ref && mv->ref[0] >= 0)
+            if (mv->ref[0] != ref && mv->ref[0] >= 0) {
                 RETURN_SCALE_MV(mv->mv[0],
                                 s->s.h.signbias[mv->ref[0]] != s->s.h.signbias[ref]);
+}
             if (mv->ref[1] != ref && mv->ref[1] >= 0 &&
                 // BUG - libvpx has this condition regardless of whether
                 // we used the first ref MV and pre-scaling
@@ -216,8 +222,9 @@ static void find_ref_mvs(VP9TileData *td,
         VP9mvrefPair *mv = &s->s.frames[REF_FRAME_MVPAIR].mv[row * s->sb_cols * 8 + col];
 
         // no need to await_progress, because we already did that above
-        if (mv->ref[0] != ref && mv->ref[0] >= 0)
+        if (mv->ref[0] != ref && mv->ref[0] >= 0) {
             RETURN_SCALE_MV(mv->mv[0], s->s.h.signbias[mv->ref[0]] != s->s.h.signbias[ref]);
+}
         if (mv->ref[1] != ref && mv->ref[1] >= 0 &&
             // BUG - libvpx has this condition regardless of whether
             // we used the first ref MV and pre-scaling
@@ -306,16 +313,18 @@ void ff_vp9_fill_mv(VP9TileData *td, VP56mv *mv, int mode, int sb)
             !(hp = s->s.h.highprecisionmvs &&
               abs(mv[0].x) < 64 && abs(mv[0].y) < 64)) {
             if (mv[0].y & 1) {
-                if (mv[0].y < 0)
+                if (mv[0].y < 0) {
                     mv[0].y++;
-                else
+                } else {
                     mv[0].y--;
+}
             }
             if (mv[0].x & 1) {
-                if (mv[0].x < 0)
+                if (mv[0].x < 0) {
                     mv[0].x++;
-                else
+                } else {
                     mv[0].x--;
+}
             }
         }
         if (mode == NEWMV) {
@@ -323,10 +332,12 @@ void ff_vp9_fill_mv(VP9TileData *td, VP56mv *mv, int mode, int sb)
                                               s->prob.p.mv_joint);
 
             td->counts.mv_joint[j]++;
-            if (j >= MV_JOINT_V)
+            if (j >= MV_JOINT_V) {
                 mv[0].y += read_mv_component(td, 0, hp);
-            if (j & 1)
+}
+            if (j & 1) {
                 mv[0].x += read_mv_component(td, 1, hp);
+}
         }
 
         if (b->comp) {
@@ -337,16 +348,18 @@ void ff_vp9_fill_mv(VP9TileData *td, VP56mv *mv, int mode, int sb)
                 !(hp = s->s.h.highprecisionmvs &&
                   abs(mv[1].x) < 64 && abs(mv[1].y) < 64)) {
                 if (mv[1].y & 1) {
-                    if (mv[1].y < 0)
+                    if (mv[1].y < 0) {
                         mv[1].y++;
-                    else
+                    } else {
                         mv[1].y--;
+}
                 }
                 if (mv[1].x & 1) {
-                    if (mv[1].x < 0)
+                    if (mv[1].x < 0) {
                         mv[1].x++;
-                    else
+                    } else {
                         mv[1].x--;
+}
                 }
             }
             if (mode == NEWMV) {
@@ -354,10 +367,12 @@ void ff_vp9_fill_mv(VP9TileData *td, VP56mv *mv, int mode, int sb)
                                                   s->prob.p.mv_joint);
 
                 td->counts.mv_joint[j]++;
-                if (j >= MV_JOINT_V)
+                if (j >= MV_JOINT_V) {
                     mv[1].y += read_mv_component(td, 0, hp);
-                if (j & 1)
+}
+                if (j & 1) {
                     mv[1].x += read_mv_component(td, 1, hp);
+}
             }
         }
     }

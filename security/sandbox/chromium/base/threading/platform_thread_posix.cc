@@ -57,8 +57,9 @@ void* ThreadFunc(void* params) {
         static_cast<ThreadParams*>(params));
 
     delegate = thread_params->delegate;
-    if (!thread_params->joinable)
+    if (!thread_params->joinable) {
       base::ThreadRestrictions::SetSingletonAllowed(false);
+}
 
 #if !defined(OS_NACL)
     // Threads on linux/android may inherit their priority from the thread
@@ -95,15 +96,18 @@ bool CreateThread(size_t stack_size,
 
   // Pthreads are joinable by default, so only specify the detached
   // attribute if the thread should be non-joinable.
-  if (!joinable)
+  if (!joinable) {
     pthread_attr_setdetachstate(&attributes, PTHREAD_CREATE_DETACHED);
+}
 
   // Get a better default if available.
-  if (stack_size == 0)
+  if (stack_size == 0) {
     stack_size = base::GetDefaultThreadStackSize(attributes);
+}
 
-  if (stack_size > 0)
+  if (stack_size > 0) {
     pthread_attr_setstacksize(&attributes, stack_size);
+}
 
   std::unique_ptr<ThreadParams> params(new ThreadParams);
   params->delegate = delegate;
@@ -183,8 +187,9 @@ void PlatformThread::Sleep(TimeDelta duration) {
   duration -= TimeDelta::FromSeconds(sleep_time.tv_sec);
   sleep_time.tv_nsec = duration.InMicroseconds() * 1000;  // nanoseconds
 
-  while (nanosleep(&sleep_time, &remaining) == -1 && errno == EINTR)
+  while (nanosleep(&sleep_time, &remaining) == -1 && errno == EINTR) {
     sleep_time = remaining;
+}
 }
 
 // static
@@ -254,8 +259,9 @@ void PlatformThread::SetCurrentThreadPriority(ThreadPriority priority) {
 #if defined(OS_NACL)
   NOTIMPLEMENTED();
 #else
-  if (internal::SetCurrentThreadPriorityForPlatform(priority))
+  if (internal::SetCurrentThreadPriorityForPlatform(priority)) {
     return;
+}
 
   // setpriority(2) should change the whole thread group's (i.e. process)
   // priority. However, as stated in the bugs section of

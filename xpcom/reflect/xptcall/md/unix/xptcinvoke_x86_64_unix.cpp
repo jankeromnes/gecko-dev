@@ -25,9 +25,9 @@ InvokeCopyToStack(uint64_t * gpregs, double * fpregs,
     uint64_t value = 0u;
 
     for (uint32_t i = 0; i < paramCount; i++, s++) {
-        if (s->IsPtrData())
+        if (s->IsPtrData()) {
             value = (uint64_t) s->ptr;
-        else {
+        } else {
             switch (s->type) {
             case nsXPTType::T_FLOAT:                                break;
             case nsXPTType::T_DOUBLE:                               break;
@@ -47,29 +47,30 @@ InvokeCopyToStack(uint64_t * gpregs, double * fpregs,
         }
 
         if (!s->IsPtrData() && s->type == nsXPTType::T_DOUBLE) {
-            if (nr_fpr < FPR_COUNT)
+            if (nr_fpr < FPR_COUNT) {
                 fpregs[nr_fpr++] = s->val.d;
-            else {
+            } else {
                 *((double *)d) = s->val.d;
                 d++;
             }
         }
         else if (!s->IsPtrData() && s->type == nsXPTType::T_FLOAT) {
-            if (nr_fpr < FPR_COUNT)
+            if (nr_fpr < FPR_COUNT) {
                 // The value in %xmm register is already prepared to
                 // be retrieved as a float. Therefore, we pass the
                 // value verbatim, as a double without conversion.
                 fpregs[nr_fpr++] = s->val.d;
-            else {
+            } else {
                 *((float *)d) = s->val.f;
                 d++;
             }
         }
         else {
-            if (nr_gpr < GPR_COUNT)
+            if (nr_gpr < GPR_COUNT) {
                 gpregs[nr_gpr++] = value;
-            else
+            } else {
                 *d++ = value;
+}
         }
     }
 }

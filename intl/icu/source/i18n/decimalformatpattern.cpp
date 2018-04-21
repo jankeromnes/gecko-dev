@@ -494,8 +494,9 @@ DecimalFormatPatternParser::applyPatternWithoutExpandAffix(
             digitLeftCount > 0 && decimalPos >= 0) {
             // Handle "###.###" and "###." and ".###"
             int n = decimalPos;
-            if (n == 0)
+            if (n == 0) {
                 ++n; // Handle ".###"
+}
             digitRightCount = digitLeftCount - n;
             digitLeftCount = n - 1;
             zeroDigitCount = 1;

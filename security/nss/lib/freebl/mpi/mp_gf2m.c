@@ -347,8 +347,9 @@ mp_bmul(const mp_int *a, const mp_int *b, mp_int *c)
 
     if (a == c) {
         MP_CHECKOK(mp_init_copy(&tmp, a));
-        if (a == b)
+        if (a == b) {
             b = &tmp;
+}
         a = &tmp;
     } else if (b == c) {
         MP_CHECKOK(mp_init_copy(&tmp, b));
@@ -376,10 +377,11 @@ mp_bmul(const mp_int *a, const mp_int *b, mp_int *c)
         b_i = *pb++;
 
         /* Inner product:  Digits of a */
-        if (b_i)
+        if (b_i) {
             s_bmul_d_add(MP_DIGITS(a), a_used, b_i, MP_DIGITS(c) + ib);
-        else
+        } else {
             MP_DIGIT(c, ib + a_used) = b_i;
+}
     }
 
     s_mp_clamp(c);
@@ -438,8 +440,9 @@ mp_bmod(const mp_int *a, const unsigned int p[], mp_int *r)
             /*n /= MP_DIGIT_BITS; */
             n >>= MP_DIGIT_BITS_LOG_2;
             z[j - n] ^= (zz >> d0);
-            if (d0)
+            if (d0) {
                 z[j - n - 1] ^= (zz << d1);
+}
         }
 
         /* reducing component t^0 */
@@ -448,8 +451,9 @@ mp_bmod(const mp_int *a, const unsigned int p[], mp_int *r)
         d0 = p[0] & MP_DIGIT_BITS_MASK;
         d1 = MP_DIGIT_BITS - d0;
         z[j - n] ^= (zz >> d0);
-        if (d0)
+        if (d0) {
             z[j - n - 1] ^= (zz << d1);
+}
     }
 
     /* final round of reduction */
@@ -458,8 +462,9 @@ mp_bmod(const mp_int *a, const unsigned int p[], mp_int *r)
         /* d0 = p[0] % MP_DIGIT_BITS; */
         d0 = p[0] & MP_DIGIT_BITS_MASK;
         zz = z[dN] >> d0;
-        if (zz == 0)
+        if (zz == 0) {
             break;
+}
         d1 = MP_DIGIT_BITS - d0;
 
         /* clear up the top d1 bits */
@@ -479,8 +484,9 @@ mp_bmod(const mp_int *a, const unsigned int p[], mp_int *r)
             d1 = MP_DIGIT_BITS - d0;
             z[n] ^= (zz << d0);
             tmp = zz >> d1;
-            if (d0 && tmp)
+            if (d0 && tmp) {
                 z[n + 1] ^= tmp;
+}
         }
     }
 
@@ -497,10 +503,12 @@ mp_bmulmod(const mp_int *a, const mp_int *b, const unsigned int p[], mp_int *r)
 {
     mp_err res;
 
-    if (a == b)
+    if (a == b) {
         return mp_bsqrmod(a, p, r);
-    if ((res = mp_bmul(a, b, r)) != MP_OKAY)
+}
+    if ((res = mp_bmul(a, b, r)) != MP_OKAY) {
         return res;
+}
     return mp_bmod(r, p, r);
 }
 
@@ -600,9 +608,9 @@ mp_bdivmod(const mp_int *y, const mp_int *x, const mp_int *pp,
                 }
                 s_mp_div2(v);
             } while (!mp_isodd(b));
-        } else if ((MP_DIGIT(a, 0) == 1) && (MP_USED(a) == 1))
+        } else if ((MP_DIGIT(a, 0) == 1) && (MP_USED(a) == 1)) {
             break;
-        else {
+        } else {
             MP_CHECKOK(mp_badd(a, b, a));
             MP_CHECKOK(mp_badd(u, v, u));
             do {
@@ -638,16 +646,18 @@ mp_bpoly2arr(const mp_int *a, unsigned int p[], int max)
     top_bit = 1;
     top_bit <<= MP_DIGIT_BIT - 1;
 
-    for (k = 0; k < max; k++)
+    for (k = 0; k < max; k++) {
         p[k] = 0;
+}
     k = 0;
 
     for (i = MP_USED(a) - 1; i >= 0; i--) {
         mask = top_bit;
         for (j = MP_DIGIT_BIT - 1; j >= 0; j--) {
             if (MP_DIGITS(a)[i] & mask) {
-                if (k < max)
+                if (k < max) {
                     p[k] = MP_DIGIT_BIT * i + j;
+}
                 k++;
             }
             mask >>= 1;

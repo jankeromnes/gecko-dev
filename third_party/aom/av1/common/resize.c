@@ -302,16 +302,17 @@ static const int16_t av1_down2_symodd_half_filter[] = { 64, 35, 0, -3 };
 
 static const interp_kernel *choose_interp_filter(int inlength, int outlength) {
   int outlength16 = outlength * 16;
-  if (outlength16 >= inlength * 16)
+  if (outlength16 >= inlength * 16) {
     return filteredinterp_filters1000;
-  else if (outlength16 >= inlength * 13)
+  } else if (outlength16 >= inlength * 13) {
     return filteredinterp_filters875;
-  else if (outlength16 >= inlength * 11)
+  } else if (outlength16 >= inlength * 11) {
     return filteredinterp_filters750;
-  else if (outlength16 >= inlength * 9)
+  } else if (outlength16 >= inlength * 9) {
     return filteredinterp_filters625;
-  else
+  } else {
     return filteredinterp_filters500;
+}
 }
 
 static void interpolate_core(const uint8_t *const input, int inlength,
@@ -367,8 +368,9 @@ static void interpolate_core(const uint8_t *const input, int inlength,
       sub_pel = (y >> SUBPEL_INTERP_EXTRA_BITS) & SUBPEL_MASK_RS;
       const int16_t *filter = &interp_filters[sub_pel * interp_taps];
       sum = 0;
-      for (k = 0; k < interp_taps; ++k)
+      for (k = 0; k < interp_taps; ++k) {
         sum += filter[k] * input[AOMMAX(int_pel - interp_taps / 2 + 1 + k, 0)];
+}
       *optr++ = clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS));
     }
     // Middle part.
@@ -377,8 +379,9 @@ static void interpolate_core(const uint8_t *const input, int inlength,
       sub_pel = (y >> SUBPEL_INTERP_EXTRA_BITS) & SUBPEL_MASK_RS;
       const int16_t *filter = &interp_filters[sub_pel * interp_taps];
       sum = 0;
-      for (k = 0; k < interp_taps; ++k)
+      for (k = 0; k < interp_taps; ++k) {
         sum += filter[k] * input[int_pel - interp_taps / 2 + 1 + k];
+}
       *optr++ = clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS));
     }
     // End part.
@@ -387,9 +390,10 @@ static void interpolate_core(const uint8_t *const input, int inlength,
       sub_pel = (y >> SUBPEL_INTERP_EXTRA_BITS) & SUBPEL_MASK_RS;
       const int16_t *filter = &interp_filters[sub_pel * interp_taps];
       sum = 0;
-      for (k = 0; k < interp_taps; ++k)
+      for (k = 0; k < interp_taps; ++k) {
         sum += filter[k] *
                input[AOMMIN(int_pel - interp_taps / 2 + 1 + k, inlength - 1)];
+}
       *optr++ = clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS));
     }
   }
@@ -526,7 +530,8 @@ static void down2_symodd(const uint8_t *const input, int length,
 
 static int get_down2_length(int length, int steps) {
   int s;
-  for (s = 0; s < steps; ++s) length = (length + 1) >> 1;
+  for (s = 0; s < steps; ++s) { length = (length + 1) >> 1;
+}
   return length;
 }
 
@@ -557,14 +562,16 @@ static void resize_multistep(const uint8_t *const input, int length,
     for (int s = 0; s < steps; ++s) {
       const int proj_filteredlength = get_down2_length(filteredlength, 1);
       const uint8_t *const in = (s == 0 ? input : out);
-      if (s == steps - 1 && proj_filteredlength == olength)
+      if (s == steps - 1 && proj_filteredlength == olength) {
         out = output;
-      else
+      } else {
         out = (s & 1 ? otmp2 : otmp);
-      if (filteredlength & 1)
+}
+      if (filteredlength & 1) {
         down2_symodd(in, filteredlength, out);
-      else
+      } else {
         down2_symeven(in, filteredlength, out);
+}
       filteredlength = proj_filteredlength;
     }
     if (filteredlength != olength) {
@@ -602,15 +609,17 @@ static void resize_plane(const uint8_t *const input, int height, int width,
       (uint8_t *)aom_malloc(sizeof(uint8_t) * AOMMAX(width, height));
   uint8_t *arrbuf = (uint8_t *)aom_malloc(sizeof(uint8_t) * height);
   uint8_t *arrbuf2 = (uint8_t *)aom_malloc(sizeof(uint8_t) * height2);
-  if (intbuf == NULL || tmpbuf == NULL || arrbuf == NULL || arrbuf2 == NULL)
+  if (intbuf == NULL || tmpbuf == NULL || arrbuf == NULL || arrbuf2 == NULL) {
     goto Error;
+}
   assert(width > 0);
   assert(height > 0);
   assert(width2 > 0);
   assert(height2 > 0);
-  for (i = 0; i < height; ++i)
+  for (i = 0; i < height; ++i) {
     resize_multistep(input + in_stride * i, width, intbuf + width2 * i, width2,
                      tmpbuf);
+}
   for (i = 0; i < width2; ++i) {
     fill_col_to_arr(intbuf + i, width2, height, arrbuf);
     resize_multistep(arrbuf, height, arrbuf2, height2, tmpbuf);
@@ -717,8 +726,9 @@ static void highbd_interpolate_core(const uint16_t *const input, int inlength,
       sub_pel = (y >> SUBPEL_INTERP_EXTRA_BITS) & SUBPEL_MASK_RS;
       const int16_t *filter = &interp_filters[sub_pel * interp_taps];
       sum = 0;
-      for (k = 0; k < interp_taps; ++k)
+      for (k = 0; k < interp_taps; ++k) {
         sum += filter[k] * input[AOMMAX(int_pel - interp_taps / 2 + 1 + k, 0)];
+}
       *optr++ = clip_pixel_highbd(ROUND_POWER_OF_TWO(sum, FILTER_BITS), bd);
     }
     // Middle part.
@@ -727,8 +737,9 @@ static void highbd_interpolate_core(const uint16_t *const input, int inlength,
       sub_pel = (y >> SUBPEL_INTERP_EXTRA_BITS) & SUBPEL_MASK_RS;
       const int16_t *filter = &interp_filters[sub_pel * interp_taps];
       sum = 0;
-      for (k = 0; k < interp_taps; ++k)
+      for (k = 0; k < interp_taps; ++k) {
         sum += filter[k] * input[int_pel - interp_taps / 2 + 1 + k];
+}
       *optr++ = clip_pixel_highbd(ROUND_POWER_OF_TWO(sum, FILTER_BITS), bd);
     }
     // End part.
@@ -737,9 +748,10 @@ static void highbd_interpolate_core(const uint16_t *const input, int inlength,
       sub_pel = (y >> SUBPEL_INTERP_EXTRA_BITS) & SUBPEL_MASK_RS;
       const int16_t *filter = &interp_filters[sub_pel * interp_taps];
       sum = 0;
-      for (k = 0; k < interp_taps; ++k)
+      for (k = 0; k < interp_taps; ++k) {
         sum += filter[k] *
                input[AOMMIN(int_pel - interp_taps / 2 + 1 + k, inlength - 1)];
+}
       *optr++ = clip_pixel_highbd(ROUND_POWER_OF_TWO(sum, FILTER_BITS), bd);
     }
   }
@@ -890,14 +902,16 @@ static void highbd_resize_multistep(const uint16_t *const input, int length,
     for (int s = 0; s < steps; ++s) {
       const int proj_filteredlength = get_down2_length(filteredlength, 1);
       const uint16_t *const in = (s == 0 ? input : out);
-      if (s == steps - 1 && proj_filteredlength == olength)
+      if (s == steps - 1 && proj_filteredlength == olength) {
         out = output;
-      else
+      } else {
         out = (s & 1 ? otmp2 : otmp);
-      if (filteredlength & 1)
+}
+      if (filteredlength & 1) {
         highbd_down2_symodd(in, filteredlength, out, bd);
-      else
+      } else {
         highbd_down2_symeven(in, filteredlength, out, bd);
+}
       filteredlength = proj_filteredlength;
     }
     if (filteredlength != olength) {
@@ -938,8 +952,9 @@ static void highbd_resize_plane(const uint8_t *const input, int height,
       (uint16_t *)aom_malloc(sizeof(uint16_t) * AOMMAX(width, height));
   uint16_t *arrbuf = (uint16_t *)aom_malloc(sizeof(uint16_t) * height);
   uint16_t *arrbuf2 = (uint16_t *)aom_malloc(sizeof(uint16_t) * height2);
-  if (intbuf == NULL || tmpbuf == NULL || arrbuf == NULL || arrbuf2 == NULL)
+  if (intbuf == NULL || tmpbuf == NULL || arrbuf == NULL || arrbuf2 == NULL) {
     goto Error;
+}
   for (i = 0; i < height; ++i) {
     highbd_resize_multistep(CONVERT_TO_SHORTPTR(input + in_stride * i), width,
                             intbuf + width2 * i, width2, tmpbuf, bd);
@@ -1100,14 +1115,15 @@ void av1_resize_and_extend_frame(const YV12_BUFFER_CONFIG *src,
 
   for (i = 0; i < MAX_MB_PLANE; ++i) {
 #if CONFIG_HIGHBITDEPTH
-    if (src->flags & YV12_FLAG_HIGHBITDEPTH)
+    if (src->flags & YV12_FLAG_HIGHBITDEPTH) {
       highbd_resize_plane(srcs[i], src_heights[i], src_widths[i],
                           src_strides[i], dsts[i], dst_heights[i],
                           dst_widths[i], dst_strides[i], bd);
-    else
+    } else {
 #endif  // CONFIG_HIGHBITDEPTH
       resize_plane(srcs[i], src_heights[i], src_widths[i], src_strides[i],
                    dsts[i], dst_heights[i], dst_widths[i], dst_strides[i]);
+}
   }
   aom_extend_frame_borders(dst);
 }

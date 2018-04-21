@@ -1031,8 +1031,9 @@ static void extend_to_full_distribution(vpx_prob *probs, vpx_prob p) {
 }
 
 void vp9_model_to_full_probs(const vpx_prob *model, vpx_prob *full) {
-  if (full != model)
+  if (full != model) {
     memcpy(full, model, sizeof(vpx_prob) * UNCONSTRAINED_NODES);
+}
   extend_to_full_distribution(&full[UNCONSTRAINED_NODES], model[PIVOT_NODE]);
 }
 
@@ -1061,9 +1062,9 @@ static void adapt_coef_probs(VP9_COMMON *cm, TX_SIZE tx_size,
       cm->counts.eob_branch[tx_size];
   int i, j, k, l, m;
 
-  for (i = 0; i < PLANE_TYPES; ++i)
-    for (j = 0; j < REF_TYPES; ++j)
-      for (k = 0; k < COEF_BANDS; ++k)
+  for (i = 0; i < PLANE_TYPES; ++i) {
+    for (j = 0; j < REF_TYPES; ++j) {
+      for (k = 0; k < COEF_BANDS; ++k) {
         for (l = 0; l < BAND_COEFF_CONTEXTS(k); ++l) {
           const int n0 = counts[i][j][k][l][ZERO_TOKEN];
           const int n1 = counts[i][j][k][l][ONE_TOKEN];
@@ -1072,11 +1073,13 @@ static void adapt_coef_probs(VP9_COMMON *cm, TX_SIZE tx_size,
           const unsigned int branch_ct[UNCONSTRAINED_NODES][2] = {
             { neob, eob_counts[i][j][k][l] - neob }, { n0, n1 + n2 }, { n1, n2 }
           };
-          for (m = 0; m < UNCONSTRAINED_NODES; ++m)
+          for (m = 0; m < UNCONSTRAINED_NODES; ++m) {
             probs[i][j][k][l][m] =
                 merge_probs(pre_probs[i][j][k][l][m], branch_ct[m], count_sat,
                             update_factor);
+}
         }
+}
 }
 
 void vp9_adapt_coef_probs(VP9_COMMON *cm) {
@@ -1093,6 +1096,7 @@ void vp9_adapt_coef_probs(VP9_COMMON *cm) {
     update_factor = COEF_MAX_UPDATE_FACTOR;
     count_sat = COEF_COUNT_SAT;
   }
-  for (t = TX_4X4; t <= TX_32X32; t++)
+  for (t = TX_4X4; t <= TX_32X32; t++) {
     adapt_coef_probs(cm, t, count_sat, update_factor);
+}
 }

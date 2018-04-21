@@ -1627,8 +1627,9 @@ sec_pkcs12_encoder_start_context(SEC_PKCS12ExportContext *p12exp)
                 goto loser;
             }
             rv = PK11_DigestBegin(p12enc->hmacCx);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 goto loser;
+}
         }
     }
 
@@ -1642,8 +1643,9 @@ sec_pkcs12_encoder_start_context(SEC_PKCS12ExportContext *p12exp)
 
 loser:
     sec_pkcs12_encoder_destroy_context(p12enc);
-    if (p12exp->arena != NULL)
+    if (p12exp->arena != NULL) {
         PORT_ArenaRelease(p12exp->arena, mark);
+}
     if (salt) {
         SECITEM_ZfreeItem(salt, PR_TRUE);
     }
@@ -1680,8 +1682,9 @@ sec_P12A1OutputCB_HmacP7Update(void *arg, const char *buf,
 {
     sec_pkcs12OutputBuffer *bufcx = (sec_pkcs12OutputBuffer *)arg;
 
-    if (!buf || !len)
+    if (!buf || !len) {
         return;
+}
 
     if (bufcx->hmacCx) {
         PK11_DigestOp(bufcx->hmacCx, (unsigned char *)buf, len);
@@ -1693,8 +1696,9 @@ sec_P12A1OutputCB_HmacP7Update(void *arg, const char *buf,
         if (len + bufcx->numBytes <= bufcx->bufBytes) {
             memcpy(bufcx->buf + bufcx->numBytes, buf, len);
             bufcx->numBytes += len;
-            if (bufcx->numBytes < bufcx->bufBytes)
+            if (bufcx->numBytes < bufcx->bufBytes) {
                 return;
+}
             SEC_PKCS7EncoderUpdate(bufcx->p7eCx, bufcx->buf, bufcx->bufBytes);
             bufcx->numBytes = 0;
             return;
@@ -1734,8 +1738,9 @@ sec_P12P7OutputCB_CallA1Update(void *arg, const char *buf, unsigned long len)
 {
     SEC_ASN1EncoderContext *cx = (SEC_ASN1EncoderContext *)arg;
 
-    if (!buf || !len)
+    if (!buf || !len) {
         return;
+}
 
     SEC_ASN1EncoderUpdate(cx, buf, len);
 }

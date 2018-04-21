@@ -38,8 +38,9 @@ rtc::Optional<double> LinearFitSlope(
     numerator += (point.first - x_avg) * (point.second - y_avg);
     denominator += (point.first - x_avg) * (point.first - x_avg);
   }
-  if (denominator == 0)
+  if (denominator == 0) {
     return rtc::Optional<double>();
+}
   return rtc::Optional<double>(numerator / denominator);
 }
 }  // namespace
@@ -66,10 +67,12 @@ void TrendlineEstimator::Update(double recv_delta_ms,
                                 int64_t arrival_time_ms) {
   const double delta_ms = recv_delta_ms - send_delta_ms;
   ++num_of_deltas_;
-  if (num_of_deltas_ > kDeltaCounterMax)
+  if (num_of_deltas_ > kDeltaCounterMax) {
     num_of_deltas_ = kDeltaCounterMax;
-  if (first_arrival_time_ms == -1)
+}
+  if (first_arrival_time_ms == -1) {
     first_arrival_time_ms = arrival_time_ms;
+}
 
   // Exponential backoff filter.
   accumulated_delay_ += delta_ms;
@@ -84,8 +87,9 @@ void TrendlineEstimator::Update(double recv_delta_ms,
   delay_hist_.push_back(std::make_pair(
       static_cast<double>(arrival_time_ms - first_arrival_time_ms),
       smoothed_delay_));
-  if (delay_hist_.size() > window_size_)
+  if (delay_hist_.size() > window_size_) {
     delay_hist_.pop_front();
+}
   if (delay_hist_.size() == window_size_) {
     // Only update trendline_ if it is possible to fit a line to the data.
     trendline_ = LinearFitSlope(delay_hist_).value_or(trendline_);

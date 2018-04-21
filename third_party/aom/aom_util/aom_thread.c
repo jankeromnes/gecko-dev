@@ -57,7 +57,8 @@ static void change_state(AVxWorker *const worker, AVxWorkerStatus new_status) {
   // No-op when attempting to change state on a thread that didn't come up.
   // Checking status_ without acquiring the lock first would result in a data
   // race.
-  if (worker->impl_ == NULL) return;
+  if (worker->impl_ == NULL) { return;
+}
 
   pthread_mutex_lock(&worker->impl_->mutex_);
   if (worker->status_ >= OK) {
@@ -109,7 +110,8 @@ static int reset(AVxWorker *const worker) {
     }
     pthread_mutex_lock(&worker->impl_->mutex_);
     ok = !pthread_create(&worker->impl_->thread_, NULL, thread_loop, worker);
-    if (ok) worker->status_ = OK;
+    if (ok) { worker->status_ = OK;
+}
     pthread_mutex_unlock(&worker->impl_->mutex_);
     if (!ok) {
       pthread_mutex_destroy(&worker->impl_->mutex_);

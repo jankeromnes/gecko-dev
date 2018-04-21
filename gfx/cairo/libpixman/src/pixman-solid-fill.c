@@ -54,8 +54,9 @@ pixman_image_create_solid_fill (const pixman_color_t *color)
 {
     pixman_image_t *img = _pixman_image_allocate ();
 
-    if (!img)
+    if (!img) {
 	return NULL;
+}
 
     img->type = SOLID;
     img->solid.color = *color;

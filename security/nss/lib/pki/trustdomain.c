@@ -256,8 +256,9 @@ NSSTrustDomain_FindTokensByURI(
          tok = (NSSToken *)nssListIterator_Next(td->tokens)) {
         if (nssToken_IsPresent(tok)) {
             slotinfo = tok->pk11slot;
-            if (pk11_MatchUriTokenInfo(slotinfo, uri))
+            if (pk11_MatchUriTokenInfo(slotinfo, uri)) {
                 tokens[i++] = nssToken_AddRef(tok);
+}
         }
     }
     tokens[i] = NULL;
@@ -484,15 +485,17 @@ nssTrustDomain_FindCertificatesByNickname(
                 }
                 collectionCount = nssPKIObjectCollection_Count(collection);
                 if (maximumOpt > 0) {
-                    if (collectionCount >= maximumOpt)
+                    if (collectionCount >= maximumOpt) {
                         break;
+}
                     numRemaining = maximumOpt - collectionCount;
                 }
             }
         }
     }
-    if (!collectionCount && errors)
+    if (!collectionCount && errors) {
         goto loser;
+}
     /* Grab the certs collected in the search. */
     rvCerts = nssPKIObjectCollection_GetCertificates(collection,
                                                      rvOpt, maximumOpt,
@@ -633,15 +636,17 @@ nssTrustDomain_FindCertificatesBySubject(
                 }
                 collectionCount = nssPKIObjectCollection_Count(collection);
                 if (maximumOpt > 0) {
-                    if (collectionCount >= maximumOpt)
+                    if (collectionCount >= maximumOpt) {
                         break;
+}
                     numRemaining = maximumOpt - collectionCount;
                 }
             }
         }
     }
-    if (!collectionCount && errors)
+    if (!collectionCount && errors) {
         goto loser;
+}
     rvCerts = nssPKIObjectCollection_GetCertificates(collection,
                                                      rvOpt, maximumOpt,
                                                      arenaOpt);
@@ -767,8 +772,9 @@ nssTrustDomain_FindCertificateByIssuerAndSerialNumber(
             nssTokenSearchType tokenOnly = nssTokenSearchType_TokenOnly;
             PRStatus status = PR_FAILURE;
 
-            if (!token)
+            if (!token) {
                 continue;
+}
             session = nssTrustDomain_GetSessionForToken(td, token);
             if (session) {
                 instance = nssToken_FindCertificateByIssuerAndSerialNumber(
@@ -990,8 +996,9 @@ NSSTrustDomain_TraverseCertificates(
     nssList *certList;
 
     certList = nssList_Create(NULL, PR_FALSE);
-    if (!certList)
+    if (!certList) {
         return NULL;
+}
     (void)nssTrustDomain_GetCertsFromCache(td, certList);
     cached = get_certs_from_list(certList);
     collection = nssCertificateCollection_Create(td, cached);

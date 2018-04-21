@@ -24,7 +24,8 @@ void aom_subtract_block_c(int rows, int cols, int16_t *diff,
   int r, c;
 
   for (r = 0; r < rows; r++) {
-    for (c = 0; c < cols; c++) diff[c] = src[c] - pred[c];
+    for (c = 0; c < cols; c++) { diff[c] = src[c] - pred[c];
+}
 
     diff += diff_stride;
     pred += pred_stride;

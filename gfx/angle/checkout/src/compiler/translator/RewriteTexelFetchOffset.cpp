@@ -146,8 +146,9 @@ bool Traverser::visitAggregate(Visit visit, TIntermAggregate *node)
 void RewriteTexelFetchOffset(TIntermNode *root, const TSymbolTable &symbolTable, int shaderVersion)
 {
     // texelFetchOffset is only valid in GLSL 3.0 and later.
-    if (shaderVersion < 300)
+    if (shaderVersion < 300) {
         return;
+}
 
     Traverser::Apply(root, symbolTable, shaderVersion);
 }

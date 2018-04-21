@@ -46,34 +46,40 @@ ocsp_CreateCertStatus(PLArenaPool *arena,
     }
 
     cs = PORT_ArenaZNew(arena, ocspCertStatus);
-    if (!cs)
+    if (!cs) {
         return NULL;
+}
     cs->certStatusType = status;
     switch (status) {
         case ocspCertStatus_good:
             cs->certStatusInfo.goodInfo = SECITEM_AllocItem(arena, NULL, 0);
-            if (!cs->certStatusInfo.goodInfo)
+            if (!cs->certStatusInfo.goodInfo) {
                 return NULL;
+}
             break;
         case ocspCertStatus_unknown:
             cs->certStatusInfo.unknownInfo = SECITEM_AllocItem(arena, NULL, 0);
-            if (!cs->certStatusInfo.unknownInfo)
+            if (!cs->certStatusInfo.unknownInfo) {
                 return NULL;
+}
             break;
         case ocspCertStatus_revoked:
             cs->certStatusInfo.revokedInfo =
                 PORT_ArenaZNew(arena, ocspRevokedInfo);
-            if (!cs->certStatusInfo.revokedInfo)
+            if (!cs->certStatusInfo.revokedInfo) {
                 return NULL;
+}
             cs->certStatusInfo.revokedInfo->revocationReason =
                 SECITEM_AllocItem(arena, NULL, 0);
-            if (!cs->certStatusInfo.revokedInfo->revocationReason)
+            if (!cs->certStatusInfo.revokedInfo->revocationReason) {
                 return NULL;
+}
             if (DER_TimeToGeneralizedTimeArena(arena,
                                                &cs->certStatusInfo.revokedInfo->revocationTime,
                                                revocationTime) !=
-                SECSuccess)
+                SECSuccess) {
                 return NULL;
+}
             break;
         default:
             PORT_Assert(PR_FALSE);
@@ -268,33 +274,39 @@ ocsp_CreateSingleResponse(PLArenaPool *arena,
     }
 
     sr = PORT_ArenaZNew(arena, CERTOCSPSingleResponse);
-    if (!sr)
+    if (!sr) {
         return NULL;
+}
     sr->arena = arena;
     sr->certID = id;
     sr->certStatus = status;
     if (DER_TimeToGeneralizedTimeArena(arena, &sr->thisUpdate, thisUpdate) !=
-        SECSuccess)
+        SECSuccess) {
         return NULL;
+}
     sr->nextUpdate = NULL;
     if (nextUpdate) {
         sr->nextUpdate = SECITEM_AllocItem(arena, NULL, 0);
-        if (!sr->nextUpdate)
+        if (!sr->nextUpdate) {
             return NULL;
+}
         if (DER_TimeToGeneralizedTimeArena(arena, sr->nextUpdate, *nextUpdate) !=
-            SECSuccess)
+            SECSuccess) {
             return NULL;
+}
     }
 
     sr->singleExtensions = PORT_ArenaNewArray(arena, CERTCertExtension *, 1);
-    if (!sr->singleExtensions)
+    if (!sr->singleExtensions) {
         return NULL;
+}
 
     sr->singleExtensions[0] = NULL;
 
     if (!SEC_ASN1EncodeItem(arena, &sr->derCertStatus,
-                            status, ocsp_CertStatusTemplate))
+                            status, ocsp_CertStatusTemplate)) {
         return NULL;
+}
 
     return sr;
 }
@@ -311,8 +323,9 @@ CERT_CreateOCSPSingleResponseGood(PLArenaPool *arena,
         return NULL;
     }
     cs = ocsp_CreateCertStatus(arena, ocspCertStatus_good, 0);
-    if (!cs)
+    if (!cs) {
         return NULL;
+}
     return ocsp_CreateSingleResponse(arena, id, cs, thisUpdate, nextUpdate);
 }
 
@@ -328,8 +341,9 @@ CERT_CreateOCSPSingleResponseUnknown(PLArenaPool *arena,
         return NULL;
     }
     cs = ocsp_CreateCertStatus(arena, ocspCertStatus_unknown, 0);
-    if (!cs)
+    if (!cs) {
         return NULL;
+}
     return ocsp_CreateSingleResponse(arena, id, cs, thisUpdate, nextUpdate);
 }
 
@@ -349,8 +363,9 @@ CERT_CreateOCSPSingleResponseRevoked(
         return NULL;
     }
     cs = ocsp_CreateCertStatus(arena, ocspCertStatus_revoked, revocationTime);
-    if (!cs)
+    if (!cs) {
         return NULL;
+}
     return ocsp_CreateSingleResponse(arena, id, cs, thisUpdate, nextUpdate);
 }
 
@@ -389,32 +404,39 @@ CERT_CreateEncodedOCSPSuccessResponse(
     }
 
     tmpArena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (!tmpArena)
+    if (!tmpArena) {
         return NULL;
+}
 
     rd = PORT_ArenaZNew(tmpArena, ocspResponseData);
-    if (!rd)
+    if (!rd) {
         goto done;
+}
     rid = PORT_ArenaZNew(tmpArena, ocspResponderID);
-    if (!rid)
+    if (!rid) {
         goto done;
+}
     br = PORT_ArenaZNew(tmpArena, ocspBasicOCSPResponse);
-    if (!br)
+    if (!br) {
         goto done;
+}
     rb = PORT_ArenaZNew(tmpArena, ocspResponseBytes);
-    if (!rb)
+    if (!rb) {
         goto done;
+}
     response = PORT_ArenaZNew(tmpArena, CERTOCSPResponse);
-    if (!response)
+    if (!response) {
         goto done;
+}
 
     rd->version.data = NULL;
     rd->version.len = 0;
     rd->responseExtensions = NULL;
     rd->responses = responses;
     if (DER_TimeToGeneralizedTimeArena(tmpArena, &rd->producedAt, producedAt) !=
-        SECSuccess)
+        SECSuccess) {
         goto done;
+}
 
     if (!responderCert) {
         /* use invalid signature for testing purposes */
@@ -431,31 +453,37 @@ CERT_CreateEncodedOCSPSuccessResponse(
 
         rid->responderIDType = ocspResponderID_byKey;
         if (!ocsp_DigestValue(tmpArena, SEC_OID_SHA1, &rid->responderIDValue.keyHash,
-                              &dummy))
+                              &dummy)) {
             goto done;
+}
 
         if (!SEC_ASN1EncodeItem(tmpArena, &rd->derResponderID, rid,
-                                ocsp_ResponderIDByKeyTemplate))
+                                ocsp_ResponderIDByKeyTemplate)) {
             goto done;
+}
 
         br->tbsResponseData = rd;
 
         if (!SEC_ASN1EncodeItem(tmpArena, &br->tbsResponseDataDER, br->tbsResponseData,
-                                ocsp_myResponseDataTemplate))
+                                ocsp_myResponseDataTemplate)) {
             goto done;
+}
 
         br->responseSignature.derCerts = PORT_ArenaNewArray(tmpArena, SECItem *, 1);
-        if (!br->responseSignature.derCerts)
+        if (!br->responseSignature.derCerts) {
             goto done;
+}
         br->responseSignature.derCerts[0] = NULL;
 
         algID = SEC_GetSignatureAlgorithmOidTag(rsaKey, SEC_OID_SHA1);
-        if (algID == SEC_OID_UNKNOWN)
+        if (algID == SEC_OID_UNKNOWN) {
             goto done;
+}
 
         /* match the regular signature code, which doesn't use the arena */
-        if (!SECITEM_AllocItem(NULL, &br->responseSignature.signature, 1))
+        if (!SECITEM_AllocItem(NULL, &br->responseSignature.signature, 1)) {
             goto done;
+}
         PORT_Memcpy(br->responseSignature.signature.data, &dummyChar, 1);
 
         /* convert len-in-bytes to len-in-bits */
@@ -465,43 +493,51 @@ CERT_CreateEncodedOCSPSuccessResponse(
         if (responderIDType == ocspResponderID_byName) {
             responderIDTemplate = ocsp_ResponderIDByNameTemplate;
             if (CERT_CopyName(tmpArena, &rid->responderIDValue.name,
-                              &responderCert->subject) != SECSuccess)
+                              &responderCert->subject) != SECSuccess) {
                 goto done;
+}
         } else {
             responderIDTemplate = ocsp_ResponderIDByKeyTemplate;
             if (!CERT_GetSubjectPublicKeyDigest(tmpArena, responderCert,
-                                                SEC_OID_SHA1, &rid->responderIDValue.keyHash))
+                                                SEC_OID_SHA1, &rid->responderIDValue.keyHash)) {
                 goto done;
+}
         }
 
         if (!SEC_ASN1EncodeItem(tmpArena, &rd->derResponderID, rid,
-                                responderIDTemplate))
+                                responderIDTemplate)) {
             goto done;
+}
 
         br->tbsResponseData = rd;
 
         if (!SEC_ASN1EncodeItem(tmpArena, &br->tbsResponseDataDER, br->tbsResponseData,
-                                ocsp_myResponseDataTemplate))
+                                ocsp_myResponseDataTemplate)) {
             goto done;
+}
 
         br->responseSignature.derCerts = PORT_ArenaNewArray(tmpArena, SECItem *, 1);
-        if (!br->responseSignature.derCerts)
+        if (!br->responseSignature.derCerts) {
             goto done;
+}
         br->responseSignature.derCerts[0] = NULL;
 
         privKey = PK11_FindKeyByAnyCert(responderCert, wincx);
-        if (!privKey)
+        if (!privKey) {
             goto done;
+}
 
         algID = SEC_GetSignatureAlgorithmOidTag(privKey->keyType, SEC_OID_SHA1);
-        if (algID == SEC_OID_UNKNOWN)
+        if (algID == SEC_OID_UNKNOWN) {
             goto done;
+}
 
         if (SEC_SignData(&br->responseSignature.signature,
                          br->tbsResponseDataDER.data, br->tbsResponseDataDER.len,
                          privKey, algID) !=
-            SECSuccess)
+            SECSuccess) {
             goto done;
+}
 
         /* convert len-in-bytes to len-in-bits */
         br->responseSignature.signature.len = br->responseSignature.signature.len << 3;
@@ -511,18 +547,21 @@ CERT_CreateEncodedOCSPSuccessResponse(
     }
 
     if (SECOID_SetAlgorithmID(tmpArena, &br->responseSignature.signatureAlgorithm, algID, 0) !=
-        SECSuccess)
+        SECSuccess) {
         goto done;
+}
 
     if (!SEC_ASN1EncodeItem(tmpArena, &rb->response, br,
-                            ocsp_EncodeBasicOCSPResponseTemplate))
+                            ocsp_EncodeBasicOCSPResponseTemplate)) {
         goto done;
+}
 
     rb->responseTypeTag = SEC_OID_PKIX_OCSP_BASIC_RESPONSE;
 
     od = SECOID_FindOIDByTag(rb->responseTypeTag);
-    if (!od)
+    if (!od) {
         goto done;
+}
 
     rb->responseType = od->oid;
     rb->decodedResponse.basic = br;
@@ -532,16 +571,19 @@ CERT_CreateEncodedOCSPSuccessResponse(
     response->statusValue = ocspResponse_successful;
 
     if (!SEC_ASN1EncodeInteger(tmpArena, &response->responseStatus,
-                               response->statusValue))
+                               response->statusValue)) {
         goto done;
+}
 
     result = SEC_ASN1EncodeItem(arena, NULL, response, ocsp_OCSPResponseTemplate);
 
 done:
-    if (privKey)
+    if (privKey) {
         SECKEY_DestroyPrivateKey(privKey);
-    if (br && br->responseSignature.signature.data)
+}
+    if (br && br->responseSignature.signature.data) {
         SECITEM_FreeItem(&br->responseSignature.signature, PR_FALSE);
+}
     PORT_FreeArena(tmpArena, PR_FALSE);
 
     return result;
@@ -585,8 +627,9 @@ CERT_CreateEncodedOCSPErrorResponse(PLArenaPool *arena, int error)
     }
 
     if (!SEC_ASN1EncodeInteger(NULL, &response.responseStatus,
-                               response.statusValue))
+                               response.statusValue)) {
         return NULL;
+}
 
     result = SEC_ASN1EncodeItem(arena, NULL, &response,
                                 ocsp_OCSPErrorResponseTemplate);

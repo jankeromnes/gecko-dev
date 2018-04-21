@@ -289,8 +289,9 @@ ucnv_data_unFlattenClone(UConverterLoadArgs *pArgs, UDataMemory *pData, UErrorCo
     UConverterSharedData *data;
     UConverterType type = (UConverterType)source->conversionType;
 
-    if(U_FAILURE(*status))
+    if(U_FAILURE(*status)) {
         return NULL;
+}
 
     if( (uint16_t)type >= UCNV_NUMBER_OF_SUPPORTED_CONVERTER_TYPES ||
         converterData[type] == NULL ||
@@ -441,8 +442,9 @@ ucnv_shareConverterData(UConverterSharedData * data)
                             &err);
         ucln_common_registerCleanup(UCLN_COMMON_UCNV, ucnv_cleanup);
 
-        if (U_FAILURE(err))
+        if (U_FAILURE(err)) {
             return;
+}
     }
 
     /* ### check to see if the element is not already there! */

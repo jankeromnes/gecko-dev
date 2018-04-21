@@ -400,12 +400,15 @@ TString TType::getCompleteString() const
 {
     TStringStream stream;
 
-    if (invariant)
+    if (invariant) {
         stream << "invariant ";
-    if (qualifier != EvqTemporary && qualifier != EvqGlobal)
+}
+    if (qualifier != EvqTemporary && qualifier != EvqGlobal) {
         stream << getQualifierString() << " ";
-    if (precision != EbpUndefined)
+}
+    if (precision != EbpUndefined) {
         stream << getPrecisionString() << " ";
+}
     if (mArraySizes)
     {
         for (auto arraySizeIter = mArraySizes->rbegin(); arraySizeIter != mArraySizes->rend();
@@ -414,10 +417,11 @@ TString TType::getCompleteString() const
             stream << "array[" << (*arraySizeIter) << "] of ";
         }
     }
-    if (isMatrix())
+    if (isMatrix()) {
         stream << getCols() << "X" << getRows() << " matrix of ";
-    else if (isVector())
+    } else if (isVector()) {
         stream << getNominalSize() << "-component vector of ";
+}
 
     stream << getBasicString();
     return stream.str();
@@ -480,10 +484,11 @@ bool TType::canReplaceWithConstantUnion() const
 const char *TType::buildMangledName() const
 {
     TString mangledName;
-    if (isMatrix())
+    if (isMatrix()) {
         mangledName += 'm';
-    else if (isVector())
+    } else if (isVector()) {
         mangledName += 'v';
+}
 
     const char *basicMangledName = GetBasicMangledName(type);
     if (basicMangledName != nullptr)
@@ -547,22 +552,25 @@ size_t TType::getObjectSize() const
 {
     size_t totalSize;
 
-    if (getBasicType() == EbtStruct)
+    if (getBasicType() == EbtStruct) {
         totalSize = mStructure->objectSize();
-    else
+    } else {
         totalSize = primarySize * secondarySize;
+}
 
-    if (totalSize == 0)
+    if (totalSize == 0) {
         return 0;
+}
 
     if (mArraySizes)
     {
         for (size_t arraySize : *mArraySizes)
         {
-            if (arraySize > INT_MAX / totalSize)
+            if (arraySize > INT_MAX / totalSize) {
                 totalSize = INT_MAX;
-            else
+            } else {
                 totalSize *= arraySize;
+}
         }
     }
 
@@ -603,8 +611,9 @@ int TType::getLocationCount() const
 
 unsigned int TType::getArraySizeProduct() const
 {
-    if (!mArraySizes)
+    if (!mArraySizes) {
         return 1u;
+}
 
     unsigned int product = 1u;
 
@@ -617,8 +626,9 @@ unsigned int TType::getArraySizeProduct() const
 
 bool TType::isUnsizedArray() const
 {
-    if (!mArraySizes)
+    if (!mArraySizes) {
         return false;
+}
 
     for (unsigned int arraySize : *mArraySizes)
     {
@@ -718,8 +728,9 @@ void TType::setSecondarySize(unsigned char ss)
 
 void TType::makeArray(unsigned int s)
 {
-    if (!mArraySizes)
+    if (!mArraySizes) {
         mArraySizes = new TVector<unsigned int>();
+}
 
     mArraySizes->push_back(s);
     invalidateMangledName();
@@ -727,8 +738,9 @@ void TType::makeArray(unsigned int s)
 
 void TType::makeArrays(const TVector<unsigned int> &sizes)
 {
-    if (!mArraySizes)
+    if (!mArraySizes) {
         mArraySizes = new TVector<unsigned int>();
+}
 
     mArraySizes->insert(mArraySizes->end(), sizes.begin(), sizes.end());
     invalidateMangledName();
@@ -840,8 +852,9 @@ bool TFieldListCollection::containsArrays() const
     for (const auto *field : *mFields)
     {
         const TType *fieldType = field->type();
-        if (fieldType->isArray() || fieldType->isStructureContainingArrays())
+        if (fieldType->isArray() || fieldType->isStructureContainingArrays()) {
             return true;
+}
     }
     return false;
 }
@@ -851,8 +864,9 @@ bool TFieldListCollection::containsMatrices() const
     for (const auto *field : *mFields)
     {
         const TType *fieldType = field->type();
-        if (fieldType->isMatrix() || fieldType->isStructureContainingMatrices())
+        if (fieldType->isMatrix() || fieldType->isStructureContainingMatrices()) {
             return true;
+}
     }
     return false;
 }
@@ -862,8 +876,9 @@ bool TFieldListCollection::containsType(TBasicType type) const
     for (const auto *field : *mFields)
     {
         const TType *fieldType = field->type();
-        if (fieldType->getBasicType() == type || fieldType->isStructureContainingType(type))
+        if (fieldType->getBasicType() == type || fieldType->isStructureContainingType(type)) {
             return true;
+}
     }
     return false;
 }
@@ -873,8 +888,9 @@ bool TFieldListCollection::containsSamplers() const
     for (const auto *field : *mFields)
     {
         const TType *fieldType = field->type();
-        if (IsSampler(fieldType->getBasicType()) || fieldType->isStructureContainingSamplers())
+        if (IsSampler(fieldType->getBasicType()) || fieldType->isStructureContainingSamplers()) {
             return true;
+}
     }
     return false;
 }
@@ -896,18 +912,20 @@ size_t TFieldListCollection::calculateObjectSize() const
     for (const TField *field : *mFields)
     {
         size_t fieldSize = field->type()->getObjectSize();
-        if (fieldSize > INT_MAX - size)
+        if (fieldSize > INT_MAX - size) {
             size = INT_MAX;
-        else
+        } else {
             size += fieldSize;
+}
     }
     return size;
 }
 
 size_t TFieldListCollection::objectSize() const
 {
-    if (mObjectSize == 0)
+    if (mObjectSize == 0) {
         mObjectSize = calculateObjectSize();
+}
     return mObjectSize;
 }
 
@@ -931,23 +949,26 @@ int TFieldListCollection::getLocationCount() const
 
 int TFieldListCollection::deepestNesting() const
 {
-    if (mDeepestNesting == 0)
+    if (mDeepestNesting == 0) {
         mDeepestNesting = calculateDeepestNesting();
+}
     return mDeepestNesting;
 }
 
 const TString &TFieldListCollection::mangledFieldList() const
 {
-    if (mMangledFieldList.empty())
+    if (mMangledFieldList.empty()) {
         mMangledFieldList = buildMangledFieldList();
+}
     return mMangledFieldList;
 }
 
 int TFieldListCollection::calculateDeepestNesting() const
 {
     int maxNesting = 0;
-    for (size_t i = 0; i < mFields->size(); ++i)
+    for (size_t i = 0; i < mFields->size(); ++i) {
         maxNesting = std::max(maxNesting, (*mFields)[i]->type()->getDeepestStructNesting());
+}
     return 1 + maxNesting;
 }
 

@@ -186,7 +186,8 @@ void AudioSendAndReceive::GenerateMusic(short* buf, int len)
     v2=(c2+128)>>8;
     buf[i]=v1>32767?32767:(v1<-32768?-32768:v1);
     buf[i+1]=v2>32767?32767:(v2<-32768?-32768:v2);
-    if(i%6==0)j++;
+    if(i%6==0) {j++;
+}
   }
   cerr << "Generating Input Music Done " << endl;
 }

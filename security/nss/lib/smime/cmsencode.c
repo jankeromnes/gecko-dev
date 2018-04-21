@@ -83,9 +83,10 @@ nss_cms_encoder_out(void *arg, const char *buf, unsigned long len,
         fprintf(stderr, "\n");
 #endif
 
-    if (output->outputfn != NULL)
+    if (output->outputfn != NULL) {
         /* call output callback with DER data */
         output->outputfn(output->outputarg, buf, len);
+}
 
     if (output->dest != NULL) {
         /* store DER data in SECItem */
@@ -98,9 +99,10 @@ nss_cms_encoder_out(void *arg, const char *buf, unsigned long len,
                                                    output->dest->len,
                                                    output->dest->len + len);
         }
-        if (dest == NULL)
+        if (dest == NULL) {
             /* oops */
             return;
+}
 
         output->dest->data = dest;
         output->dest->len += len;
@@ -146,11 +148,12 @@ nss_cms_encoder_notify(void *arg, PRBool before, void *dest, int depth)
         cinfo = NSS_CMSContent_GetContentInfo(p7ecx->content.pointer, p7ecx->type);
         if (before && dest == &(cinfo->rawContent)) {
             /* just set up encoder to grab from user - no encryption or digesting */
-            if ((item = cinfo->content.data) != NULL)
+            if ((item = cinfo->content.data) != NULL) {
                 (void)nss_cms_encoder_work_data(p7ecx, NULL, item->data,
                                                 item->len, PR_TRUE, PR_TRUE);
-            else
+            } else {
                 SEC_ASN1EncoderSetTakeFromBuf(p7ecx->ecx);
+}
             SEC_ASN1EncoderClearNotifyProc(p7ecx->ecx); /* no need to get notified anymore */
         }
     } else if (NSS_CMSType_IsWrapper(p7ecx->type)) {
@@ -162,8 +165,9 @@ nss_cms_encoder_notify(void *arg, PRBool before, void *dest, int depth)
             /* we're right before encoding the data (if we have some or not) */
             /* (for encrypted data, we're right before the contentEncAlg which may change */
             /*  in nss_cms_before_data because of IV calculation when setting up encryption) */
-            if (nss_cms_before_data(p7ecx) != SECSuccess)
+            if (nss_cms_before_data(p7ecx) != SECSuccess) {
                 p7ecx->error = PORT_GetError();
+}
         }
         if (before && dest == &(cinfo->rawContent)) {
             if (p7ecx->childp7ecx == NULL) {
@@ -181,8 +185,9 @@ nss_cms_encoder_notify(void *arg, PRBool before, void *dest, int depth)
             }
         }
         if (after && dest == &(cinfo->rawContent)) {
-            if (nss_cms_after_data(p7ecx) != SECSuccess)
+            if (nss_cms_after_data(p7ecx) != SECSuccess) {
                 p7ecx->error = PORT_GetError();
+}
             SEC_ASN1EncoderClearNotifyProc(p7ecx->ecx); /* no need to get notified anymore */
         }
     } else {
@@ -232,8 +237,9 @@ nss_cms_before_data(NSSCMSEncoderContext *p7ecx)
                 rv = SECFailure;
             }
     }
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
 
     /* ok, now we have a pointer to cinfo */
     /* find out what kind of data is encapsulated */
@@ -245,8 +251,9 @@ nss_cms_before_data(NSSCMSEncoderContext *p7ecx)
         /* in these cases, we need to set up a child encoder! */
         /* create new encoder context */
         childp7ecx = PORT_ZAlloc(sizeof(NSSCMSEncoderContext));
-        if (childp7ecx == NULL)
+        if (childp7ecx == NULL) {
             return SECFailure;
+}
 
         /* the CHILD encoder needs to hand its encoded data to the CURRENT encoder
          * (which will encrypt and/or digest it)
@@ -264,8 +271,9 @@ nss_cms_before_data(NSSCMSEncoderContext *p7ecx)
         childp7ecx->childp7ecx = NULL;
 
         template = NSS_CMSUtil_GetTemplateByTypeTag(childtype);
-        if (template == NULL)
+        if (template == NULL) {
             goto loser; /* cannot happen */
+}
 
         /* now initialize the data for encoding the first third */
         switch (childp7ecx->type) {
@@ -286,23 +294,26 @@ nss_cms_before_data(NSSCMSEncoderContext *p7ecx)
                                                                   cinfo->content.genericData);
                 break;
         }
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
 
         /*
          * Initialize the BER encoder.
          */
         childp7ecx->ecx = SEC_ASN1EncoderStart(cinfo->content.pointer, template,
                                                nss_cms_encoder_out, &(childp7ecx->output));
-        if (childp7ecx->ecx == NULL)
+        if (childp7ecx->ecx == NULL) {
             goto loser;
+}
 
         /*
          * Indicate that we are streaming.  We will be streaming until we
          * get past the contents bytes.
          */
-        if (!cinfo->privateInfo || !cinfo->privateInfo->dontStream)
+        if (!cinfo->privateInfo || !cinfo->privateInfo->dontStream) {
             SEC_ASN1EncoderSetStreaming(childp7ecx->ecx);
+}
 
         /*
          * The notify function will watch for the contents field.
@@ -327,8 +338,9 @@ nss_cms_before_data(NSSCMSEncoderContext *p7ecx)
 
 loser:
     if (childp7ecx) {
-        if (childp7ecx->ecx)
+        if (childp7ecx->ecx) {
             SEC_ASN1EncoderFinish(childp7ecx->ecx);
+}
         PORT_Free(childp7ecx);
         p7ecx->childp7ecx = NULL;
     }
@@ -401,8 +413,9 @@ nss_cms_encoder_work_data(NSSCMSEncoderContext *p7ecx, SECItem *dest,
     }
 
     /* Update the running digest. */
-    if (len && cinfo->privateInfo && cinfo->privateInfo->digcx != NULL)
+    if (len && cinfo->privateInfo && cinfo->privateInfo->digcx != NULL) {
         NSS_CMSDigestContext_Update(cinfo->privateInfo->digcx, data, len);
+}
 
     /* Encrypt this chunk. */
     if (cinfo->privateInfo && cinfo->privateInfo->ciphcx != NULL) {
@@ -427,10 +440,11 @@ nss_cms_encoder_work_data(NSSCMSEncoderContext *p7ecx, SECItem *dest,
             return rv;
         }
 
-        if (dest != NULL)
+        if (dest != NULL) {
             buf = (unsigned char *)PORT_ArenaAlloc(p7ecx->cmsg->poolp, buflen);
-        else
+        } else {
             buf = (unsigned char *)PORT_Alloc(buflen);
+}
 
         if (buf == NULL) {
             rv = SECFailure;
@@ -441,9 +455,10 @@ nss_cms_encoder_work_data(NSSCMSEncoderContext *p7ecx, SECItem *dest,
             data = buf;
             len = outlen;
         }
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             /* encryption or malloc failed? */
             return rv;
+}
     }
 
     /*
@@ -452,8 +467,9 @@ nss_cms_encoder_work_data(NSSCMSEncoderContext *p7ecx, SECItem *dest,
      * We don't encode the data if we're innermost and we're told not to include the data
      */
     if (p7ecx->ecx != NULL && len &&
-        (!innermost || cinfo->rawContent != cinfo->content.pointer))
+        (!innermost || cinfo->rawContent != cinfo->content.pointer)) {
         rv = SEC_ASN1EncoderUpdate(p7ecx->ecx, (const char *)data, len);
+}
 
 done:
 
@@ -566,8 +582,9 @@ NSS_CMSEncoder_Start(NSSCMSMessage *cmsg,
      * Indicate that we are streaming.  We will be streaming until we
      * get past the contents bytes.
      */
-    if (!cinfo->privateInfo || !cinfo->privateInfo->dontStream)
+    if (!cinfo->privateInfo || !cinfo->privateInfo->dontStream) {
         SEC_ASN1EncoderSetStreaming(p7ecx->ecx);
+}
 
     /*
      * The notify function will watch for the contents field.
@@ -603,8 +620,9 @@ NSS_CMSEncoder_Update(NSSCMSEncoderContext *p7ecx, const char *data, unsigned lo
     NSSCMSContentInfo *cinfo;
     SECOidTag childtype;
 
-    if (p7ecx->error)
+    if (p7ecx->error) {
         return SECFailure;
+}
 
     /* hand data to the innermost decoder */
     if (p7ecx->childp7ecx) {
@@ -612,8 +630,9 @@ NSS_CMSEncoder_Update(NSSCMSEncoderContext *p7ecx, const char *data, unsigned lo
          * hasn't started yet */
         if (!p7ecx->childp7ecx->ecxupdated) {
             p7ecx->childp7ecx->ecxupdated = PR_TRUE;
-            if (SEC_ASN1EncoderUpdate(p7ecx->childp7ecx->ecx, NULL, 0) != SECSuccess)
+            if (SEC_ASN1EncoderUpdate(p7ecx->childp7ecx->ecx, NULL, 0) != SECSuccess) {
                 return SECFailure;
+}
         }
         /* recursion here */
         rv = NSS_CMSEncoder_Update(p7ecx->childp7ecx, data, len);
@@ -628,11 +647,13 @@ NSS_CMSEncoder_Update(NSSCMSEncoderContext *p7ecx, const char *data, unsigned lo
         }
 
         childtype = NSS_CMSContentInfo_GetContentTypeTag(cinfo);
-        if (!NSS_CMSType_IsData(childtype))
+        if (!NSS_CMSType_IsData(childtype)) {
             return SECFailure;
+}
         /* and we must not have preset data */
-        if (cinfo->content.data != NULL)
+        if (cinfo->content.data != NULL) {
             return SECFailure;
+}
 
         /*  hand it the data so it can encode it (let DER trickle up the chain) */
         rv = nss_cms_encoder_work_data(p7ecx, NULL, (const unsigned char *)data,
@@ -675,8 +696,9 @@ NSS_CMSEncoder_Cancel(NSSCMSEncoderContext *p7ecx)
      * Flush out any remaining data and/or finish digests.
      */
     rv = nss_cms_encoder_work_data(p7ecx, NULL, NULL, 0, PR_TRUE, (p7ecx->childp7ecx == NULL));
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     p7ecx->childp7ecx = NULL;
 
@@ -725,8 +747,9 @@ NSS_CMSEncoder_Finish(NSSCMSEncoderContext *p7ecx)
             }
         }
         rv = NSS_CMSEncoder_Finish(p7ecx->childp7ecx); /* frees p7ecx->childp7ecx */
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
 
     /*
@@ -735,8 +758,9 @@ NSS_CMSEncoder_Finish(NSSCMSEncoderContext *p7ecx)
      * Flush out any remaining data and/or finish digests.
      */
     rv = nss_cms_encoder_work_data(p7ecx, NULL, NULL, 0, PR_TRUE, (p7ecx->childp7ecx == NULL));
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     p7ecx->childp7ecx = NULL;
 
@@ -752,8 +776,9 @@ NSS_CMSEncoder_Finish(NSSCMSEncoderContext *p7ecx)
     /* now that TakeFromBuf is off, this will kick this encoder to finish encoding */
     rv = SEC_ASN1EncoderUpdate(p7ecx->ecx, NULL, 0);
 
-    if (p7ecx->error)
+    if (p7ecx->error) {
         rv = SECFailure;
+}
 
 loser:
     SEC_ASN1EncoderFinish(p7ecx->ecx);

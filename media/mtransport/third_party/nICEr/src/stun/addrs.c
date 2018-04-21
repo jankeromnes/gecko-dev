@@ -262,8 +262,9 @@ stun_getifaddrs(nr_local_addr addrs[], int maxaddrs, int *count)
 
   *count = 0;
 
-  if (maxaddrs <= 0)
+  if (maxaddrs <= 0) {
     ABORT(R_BAD_ARGS);
+}
 
   if (getifaddrs(&if_addrs_head) == -1) {
     r_log(NR_LOG_STUN, LOG_ERR, "getifaddrs error e = %d", errno);
@@ -358,8 +359,9 @@ nr_stun_is_duplicate_addr(nr_local_addr addrs[], int count, nr_local_addr *addr)
     for (i = 0; i < count; ++i) {
         different = nr_transport_addr_cmp(&addrs[i].addr, &(addr->addr),
           NR_TRANSPORT_ADDR_CMP_MODE_ALL);
-        if (!different)
+        if (!different) {
             return 1;  /* duplicate */
+}
     }
 
     return 0;
@@ -375,8 +377,9 @@ nr_stun_remove_duplicate_addrs(nr_local_addr addrs[], int remove_loopback, int r
     int contains_regular_ipv6 = 0;
 
     tmp = RMALLOC(*count * sizeof(*tmp));
-    if (!tmp)
+    if (!tmp) {
         ABORT(R_NO_MEMORY);
+}
 
     for (i = 0; i < *count; ++i) {
         if (nr_transport_addr_is_teredo(&addrs[i].addr)) {
@@ -410,8 +413,9 @@ nr_stun_remove_duplicate_addrs(nr_local_addr addrs[], int remove_loopback, int r
         }
         else {
             /* otherwise, copy it to the temporary array */
-            if ((r=nr_local_addr_copy(&tmp[n], &addrs[i])))
+            if ((r=nr_local_addr_copy(&tmp[n], &addrs[i]))) {
                 ABORT(r);
+}
             ++n;
         }
     }
@@ -421,8 +425,9 @@ nr_stun_remove_duplicate_addrs(nr_local_addr addrs[], int remove_loopback, int r
     memset(addrs, 0, *count * sizeof(*addrs));
     /* copy temporary array into passed in/out array */
     for (i = 0; i < *count; ++i) {
-        if ((r=nr_local_addr_copy(&addrs[i], &tmp[i])))
+        if ((r=nr_local_addr_copy(&addrs[i], &tmp[i]))) {
             ABORT(r);
+}
     }
 
     _status = 0;

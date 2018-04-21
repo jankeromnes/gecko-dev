@@ -163,7 +163,8 @@ void aom_idct4x4_1_add_sse2(const tran_low_t *input, uint8_t *dest,
   a = (int)dct_const_round_shift(a * cospi_16_64);
   a = ROUND_POWER_OF_TWO(a, 4);
 
-  if (a == 0) return;
+  if (a == 0) { return;
+}
 
   dc_value = _mm_set1_epi16(a);
 
@@ -466,7 +467,8 @@ void aom_idct8x8_1_add_sse2(const tran_low_t *input, uint8_t *dest,
   a = (int)dct_const_round_shift(a * cospi_16_64);
   a = ROUND_POWER_OF_TWO(a, 5);
 
-  if (a == 0) return;
+  if (a == 0) { return;
+}
 
   dc_value = _mm_set1_epi16(a);
 
@@ -1238,7 +1240,8 @@ void aom_idct16x16_1_add_sse2(const tran_low_t *input, uint8_t *dest,
   a = (int)dct_const_round_shift(a * cospi_16_64);
   a = ROUND_POWER_OF_TWO(a, 6);
 
-  if (a == 0) return;
+  if (a == 0) { return;
+}
 
   dc_value = _mm_set1_epi16(a);
 
@@ -3386,7 +3389,8 @@ void aom_idct32x32_1_add_sse2(const tran_low_t *input, uint8_t *dest,
   a = (int)dct_const_round_shift(a * cospi_16_64);
   a = ROUND_POWER_OF_TWO(a, 6);
 
-  if (a == 0) return;
+  if (a == 0) { return;
+}
 
   dc_value = _mm_set1_epi16(a);
 

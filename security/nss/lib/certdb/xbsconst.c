@@ -83,8 +83,9 @@ CERT_EncodeBasicConstraintValue(PLArenaPool *arena, CERTBasicConstraints *value,
             GEN_BREAK(SECFailure);
         }
     } while (0);
-    if (our_pool)
+    if (our_pool) {
         PORT_FreeArena(our_pool, PR_FALSE);
+}
     return (rv);
 }
 
@@ -108,8 +109,9 @@ CERT_DecodeBasicConstraintValue(CERTBasicConstraints *value,
 
         rv = SEC_QuickDERDecodeItem(&tmpArena.arena, &decodeContext,
                                     CERTBasicConstraintsTemplate, encodedValue);
-        if (rv == SECFailure)
+        if (rv == SECFailure) {
             break;
+}
 
         value->isCA = decodeContext.isCA.data
                           ? (PRBool)(decodeContext.isCA.data[0] != 0)
@@ -120,8 +122,9 @@ CERT_DecodeBasicConstraintValue(CERTBasicConstraints *value,
               number
               for unlimited certificate path.
              */
-            if (value->isCA)
+            if (value->isCA) {
                 value->pathLenConstraint = CERT_UNLIMITED_PATH_CONSTRAINT;
+}
         } else if (value->isCA) {
             long len = DER_GetInteger(&decodeContext.pathLenConstraint);
             if (len < 0 || len == LONG_MAX) {

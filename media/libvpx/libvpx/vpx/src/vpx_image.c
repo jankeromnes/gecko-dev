@@ -25,16 +25,20 @@ static vpx_image_t *img_alloc_helper(vpx_image_t *img, vpx_img_fmt_t fmt,
   int align;
 
   /* Treat align==0 like align==1 */
-  if (!buf_align) buf_align = 1;
+  if (!buf_align) { buf_align = 1;
+}
 
   /* Validate alignment (must be power of 2) */
-  if (buf_align & (buf_align - 1)) goto fail;
+  if (buf_align & (buf_align - 1)) { goto fail;
+}
 
   /* Treat align==0 like align==1 */
-  if (!stride_align) stride_align = 1;
+  if (!stride_align) { stride_align = 1;
+}
 
   /* Validate alignment (must be power of 2) */
-  if (stride_align & (stride_align - 1)) goto fail;
+  if (stride_align & (stride_align - 1)) { goto fail;
+}
 
   /* Get sample size for this format */
   switch (fmt) {
@@ -101,7 +105,8 @@ static vpx_image_t *img_alloc_helper(vpx_image_t *img, vpx_img_fmt_t fmt,
   if (!img) {
     img = (vpx_image_t *)calloc(1, sizeof(vpx_image_t));
 
-    if (!img) goto fail;
+    if (!img) { goto fail;
+}
 
     img->self_allocd = 1;
   } else {
@@ -115,13 +120,15 @@ static vpx_image_t *img_alloc_helper(vpx_image_t *img, vpx_img_fmt_t fmt,
                                     ? (uint64_t)h * s * bps / 8
                                     : (uint64_t)h * s;
 
-    if (alloc_size != (size_t)alloc_size) goto fail;
+    if (alloc_size != (size_t)alloc_size) { goto fail;
+}
 
     img->img_data = (uint8_t *)vpx_memalign(buf_align, (size_t)alloc_size);
     img->img_data_owner = 1;
   }
 
-  if (!img->img_data) goto fail;
+  if (!img->img_data) { goto fail;
+}
 
   img->fmt = fmt;
   img->bit_depth = (fmt & VPX_IMG_FMT_HIGHBITDEPTH) ? 16 : 8;
@@ -136,7 +143,8 @@ static vpx_image_t *img_alloc_helper(vpx_image_t *img, vpx_img_fmt_t fmt,
   img->stride[VPX_PLANE_U] = img->stride[VPX_PLANE_V] = stride_in_bytes >> xcs;
 
   /* Default viewport to entire image */
-  if (!vpx_img_set_rect(img, 0, 0, d_w, d_h)) return img;
+  if (!vpx_img_set_rect(img, 0, 0, d_w, d_h)) { return img;
+}
 
 fail:
   vpx_img_free(img);
@@ -232,8 +240,10 @@ void vpx_img_flip(vpx_image_t *img) {
 
 void vpx_img_free(vpx_image_t *img) {
   if (img) {
-    if (img->img_data && img->img_data_owner) vpx_free(img->img_data);
+    if (img->img_data && img->img_data_owner) { vpx_free(img->img_data);
+}
 
-    if (img->self_allocd) free(img);
+    if (img->self_allocd) { free(img);
+}
   }
 }

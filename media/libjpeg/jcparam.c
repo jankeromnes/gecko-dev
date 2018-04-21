@@ -39,24 +39,30 @@ jpeg_add_quant_table (j_compress_ptr cinfo, int which_tbl,
   long temp;
 
   /* Safety check to ensure start_compress not called yet. */
-  if (cinfo->global_state != CSTATE_START)
+  if (cinfo->global_state != CSTATE_START) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
-  if (which_tbl < 0 || which_tbl >= NUM_QUANT_TBLS)
+  if (which_tbl < 0 || which_tbl >= NUM_QUANT_TBLS) {
     ERREXIT1(cinfo, JERR_DQT_INDEX, which_tbl);
+}
 
   qtblptr = & cinfo->quant_tbl_ptrs[which_tbl];
 
-  if (*qtblptr == NULL)
+  if (*qtblptr == NULL) {
     *qtblptr = jpeg_alloc_quant_table((j_common_ptr) cinfo);
+}
 
   for (i = 0; i < DCTSIZE2; i++) {
     temp = ((long) basic_table[i] * scale_factor + 50L) / 100L;
     /* limit the values to the valid range */
-    if (temp <= 0L) temp = 1L;
-    if (temp > 32767L) temp = 32767L; /* max quantizer needed for 12 bits */
-    if (force_baseline && temp > 255L)
+    if (temp <= 0L) { temp = 1L;
+}
+    if (temp > 32767L) { temp = 32767L; /* max quantizer needed for 12 bits */
+}
+    if (force_baseline && temp > 255L) {
       temp = 255L;              /* limit to baseline range if requested */
+}
     (*qtblptr)->quantval[i] = (UINT16) temp;
   }
 
@@ -133,8 +139,10 @@ jpeg_quality_scaling (int quality)
  */
 {
   /* Safety limit on quality factor.  Convert 0 to 1 to avoid zero divide. */
-  if (quality <= 0) quality = 1;
-  if (quality > 100) quality = 100;
+  if (quality <= 0) { quality = 1;
+}
+  if (quality > 100) { quality = 100;
+}
 
   /* The basic table is used as-is (scaling 100) for a quality of 50.
    * Qualities 50..100 are converted to scaling percentage 200 - 2*Q;
@@ -142,10 +150,11 @@ jpeg_quality_scaling (int quality)
    * to make all the table entries 1 (hence, minimum quantization loss).
    * Qualities 1..50 are converted to scaling percentage 5000/Q.
    */
-  if (quality < 50)
+  if (quality < 50) {
     quality = 5000 / quality;
-  else
+  } else {
     quality = 200 - quality*2;
+}
 
   return quality;
 }
@@ -183,17 +192,19 @@ jpeg_set_defaults (j_compress_ptr cinfo)
   int i;
 
   /* Safety check to ensure start_compress not called yet. */
-  if (cinfo->global_state != CSTATE_START)
+  if (cinfo->global_state != CSTATE_START) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
   /* Allocate comp_info array large enough for maximum component count.
    * Array is made permanent in case application wants to compress
    * multiple images at same param settings.
    */
-  if (cinfo->comp_info == NULL)
+  if (cinfo->comp_info == NULL) {
     cinfo->comp_info = (jpeg_component_info *)
       (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_PERMANENT,
                                   MAX_COMPONENTS * sizeof(jpeg_component_info));
+}
 
   /* Initialize everything not dependent on the color space */
 
@@ -231,8 +242,9 @@ jpeg_set_defaults (j_compress_ptr cinfo)
    * tables will be computed.  This test can be removed if default tables
    * are supplied that are valid for the desired precision.
    */
-  if (cinfo->data_precision > 8)
+  if (cinfo->data_precision > 8) {
     cinfo->optimize_coding = TRUE;
+}
 
   /* By default, use the simpler non-cosited sampling alignment */
   cinfo->CCIR601_sampling = FALSE;
@@ -335,8 +347,9 @@ jpeg_set_colorspace (j_compress_ptr cinfo, J_COLOR_SPACE colorspace)
    compptr->ac_tbl_no = (actbl) )
 
   /* Safety check to ensure start_compress not called yet. */
-  if (cinfo->global_state != CSTATE_START)
+  if (cinfo->global_state != CSTATE_START) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
   /* For all colorspaces, we use Q and Huff tables 0 for luminance components,
    * tables 1 for chrominance components.
@@ -388,9 +401,10 @@ jpeg_set_colorspace (j_compress_ptr cinfo, J_COLOR_SPACE colorspace)
     break;
   case JCS_UNKNOWN:
     cinfo->num_components = cinfo->input_components;
-    if (cinfo->num_components < 1 || cinfo->num_components > MAX_COMPONENTS)
+    if (cinfo->num_components < 1 || cinfo->num_components > MAX_COMPONENTS) {
       ERREXIT2(cinfo, JERR_COMPONENT_COUNT, cinfo->num_components,
                MAX_COMPONENTS);
+}
     for (ci = 0; ci < cinfo->num_components; ci++) {
       SET_COMP(ci, ci, 1,1, 0, 0,0);
     }
@@ -446,8 +460,9 @@ fill_dc_scans (jpeg_scan_info *scanptr, int ncomps, int Ah, int Al)
   if (ncomps <= MAX_COMPS_IN_SCAN) {
     /* Single interleaved DC scan */
     scanptr->comps_in_scan = ncomps;
-    for (ci = 0; ci < ncomps; ci++)
+    for (ci = 0; ci < ncomps; ci++) {
       scanptr->component_index[ci] = ci;
+}
     scanptr->Ss = scanptr->Se = 0;
     scanptr->Ah = Ah;
     scanptr->Al = Al;
@@ -473,8 +488,9 @@ jpeg_simple_progression (j_compress_ptr cinfo)
   jpeg_scan_info *scanptr;
 
   /* Safety check to ensure start_compress not called yet. */
-  if (cinfo->global_state != CSTATE_START)
+  if (cinfo->global_state != CSTATE_START) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
   /* Figure space needed for script.  Calculation must match code below! */
   if (ncomps == 3 && cinfo->jpeg_color_space == JCS_YCbCr) {
@@ -482,10 +498,11 @@ jpeg_simple_progression (j_compress_ptr cinfo)
     nscans = 10;
   } else {
     /* All-purpose script for other color spaces. */
-    if (ncomps > MAX_COMPS_IN_SCAN)
+    if (ncomps > MAX_COMPS_IN_SCAN) {
       nscans = 6 * ncomps;      /* 2 DC + 4 AC scans per component */
-    else
+    } else {
       nscans = 2 + 4 * ncomps;  /* 2 DC scans; 4 AC scans per component */
+}
   }
 
   /* Allocate space for script.

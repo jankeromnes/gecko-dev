@@ -39,11 +39,12 @@ int ff_image_copy_plane_uc_from_x86(uint8_t       *dst, ptrdiff_t dst_linesize,
     ptrdiff_t bw_aligned = FFALIGN(bytewidth, 64);
 
     if (EXTERNAL_SSE4(cpu_flags) &&
-        bw_aligned <= dst_linesize && bw_aligned <= src_linesize)
+        bw_aligned <= dst_linesize && bw_aligned <= src_linesize) {
         ff_image_copy_plane_uc_from_sse4(dst, dst_linesize, src, src_linesize,
                                          bw_aligned, height);
-    else
+    } else {
         return AVERROR(ENOSYS);
+}
 
     return 0;
 }

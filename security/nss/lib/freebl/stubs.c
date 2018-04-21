@@ -350,12 +350,15 @@ PR_Open_stub(const char *name, PRIntn flags, PRIntn mode)
         lflags = O_RDONLY;
     }
 
-    if (flags & PR_EXCL)
+    if (flags & PR_EXCL) {
         lflags |= O_EXCL;
-    if (flags & PR_APPEND)
+}
+    if (flags & PR_APPEND) {
         lflags |= O_APPEND;
-    if (flags & PR_TRUNCATE)
+}
+    if (flags & PR_TRUNCATE) {
         lflags |= O_TRUNC;
+}
 
     fd = open(name, lflags, mode);
     if (fd >= 0) {

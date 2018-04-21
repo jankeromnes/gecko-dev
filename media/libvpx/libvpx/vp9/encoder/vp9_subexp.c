@@ -33,12 +33,13 @@ static const uint8_t update_bits[255] = {
 #define MIN_DELP_BITS 5
 
 static int recenter_nonneg(int v, int m) {
-  if (v > (m << 1))
+  if (v > (m << 1)) {
     return v;
-  else if (v >= m)
+  } else if (v >= m) {
     return ((v - m) << 1);
-  else
+  } else {
     return ((m - v) << 1) - 1;
+}
 }
 
 static int remap_prob(int v, int m) {
@@ -66,10 +67,11 @@ static int remap_prob(int v, int m) {
   };
   v--;
   m--;
-  if ((m << 1) <= MAX_PROB)
+  if ((m << 1) <= MAX_PROB) {
     i = recenter_nonneg(v, m) - 1;
-  else
+  } else {
     i = recenter_nonneg(MAX_PROB - 1 - v, MAX_PROB - 1 - m) - 1;
+}
 
   i = map_table[i];
   return i;
@@ -149,8 +151,9 @@ int vp9_prob_diff_update_savings_search_model(const unsigned int *ct,
   vpx_prob bestnewp;
   oldplist = vp9_pareto8_full[oldp - 1];
   old_b = cost_branch256(ct + 2 * PIVOT_NODE, oldp);
-  for (i = UNCONSTRAINED_NODES; i < ENTROPY_NODES; ++i)
+  for (i = UNCONSTRAINED_NODES; i < ENTROPY_NODES; ++i) {
     old_b += cost_branch256(ct + 2 * i, oldplist[i - UNCONSTRAINED_NODES]);
+}
 
   bestsavings = 0;
   bestnewp = oldp;
@@ -159,11 +162,13 @@ int vp9_prob_diff_update_savings_search_model(const unsigned int *ct,
 
   if (old_b > upd_cost + (MIN_DELP_BITS << VP9_PROB_COST_SHIFT)) {
     for (newp = *bestp; (newp - oldp) * step_sign < 0; newp += step) {
-      if (newp < 1 || newp > 255) continue;
+      if (newp < 1 || newp > 255) { continue;
+}
       newplist = vp9_pareto8_full[newp - 1];
       new_b = cost_branch256(ct + 2 * PIVOT_NODE, newp);
-      for (i = UNCONSTRAINED_NODES; i < ENTROPY_NODES; ++i)
+      for (i = UNCONSTRAINED_NODES; i < ENTROPY_NODES; ++i) {
         new_b += cost_branch256(ct + 2 * i, newplist[i - UNCONSTRAINED_NODES]);
+}
       update_b = prob_diff_update_cost(newp, oldp) + upd_cost;
       savings = old_b - new_b - update_b;
       if (savings > bestsavings) {

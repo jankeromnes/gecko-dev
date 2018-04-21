@@ -125,9 +125,9 @@ T_CString_toLowerCase(char* str)
     char* origPtr = str;
 
     if (str) {
-        do
+        do {
             *str = (char)uprv_tolower(*str);
-        while (*(str++));
+        } while (*(str++));
     }
 
     return origPtr;
@@ -139,9 +139,9 @@ T_CString_toUpperCase(char* str)
     char* origPtr = str;
 
     if (str) {
-        do
+        do {
             *str = (char)uprv_toupper(*str);
-        while (*(str++));
+        } while (*(str++));
     }
 
     return origPtr;

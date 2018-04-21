@@ -112,12 +112,14 @@ static void decode_mode(VP9TileData *td)
             int pred = 8, x;
             uint8_t *refsegmap = s->s.frames[REF_FRAME_SEGMAP].segmentation_map;
 
-            if (!s->s.frames[REF_FRAME_SEGMAP].uses_2pass)
+            if (!s->s.frames[REF_FRAME_SEGMAP].uses_2pass) {
                 ff_thread_await_progress(&s->s.frames[REF_FRAME_SEGMAP].tf, row >> 3, 0);
+}
             for (y = 0; y < h4; y++) {
                 int idx_base = (y + row) * 8 * s->sb_cols + col;
-                for (x = 0; x < w4; x++)
+                for (x = 0; x < w4; x++) {
                     pred = FFMIN(pred, refsegmap[idx_base + x]);
+}
             }
             av_assert1(pred < 8);
             b->seg_id = pred;
@@ -190,15 +192,17 @@ static void decode_mode(VP9TileData *td)
             b->tx = vp56_rac_get_prob(td->c, s->prob.p.tx32p[c][0]);
             if (b->tx) {
                 b->tx += vp56_rac_get_prob(td->c, s->prob.p.tx32p[c][1]);
-                if (b->tx == 2)
+                if (b->tx == 2) {
                     b->tx += vp56_rac_get_prob(td->c, s->prob.p.tx32p[c][2]);
+}
             }
             td->counts.tx32p[c][b->tx]++;
             break;
         case TX_16X16:
             b->tx = vp56_rac_get_prob(td->c, s->prob.p.tx16p[c][0]);
-            if (b->tx)
+            if (b->tx) {
                 b->tx += vp56_rac_get_prob(td->c, s->prob.p.tx16p[c][1]);
+}
             td->counts.tx16p[c][b->tx]++;
             break;
         case TX_8X8:
@@ -817,19 +821,22 @@ decode_coeffs_b_generic(VP56RangeCoder *c, int16_t *coef, int n_coeffs,
 
         val = vp56_rac_get_prob_branchy(c, tp[0]); // eob
         eob[band][nnz][val]++;
-        if (!val)
+        if (!val) {
             break;
+}
 
 skip_eob:
         if (!vp56_rac_get_prob_branchy(c, tp[1])) { // zero
             cnt[band][nnz][0]++;
-            if (!--band_left)
+            if (!--band_left) {
                 band_left = band_counts[++band];
+}
             cache[scan[i]] = 0;
             nnz            = (1 + cache[nb[i][0]] + cache[nb[i][1]]) >> 1;
             tp             = p[band][nnz];
-            if (++i == n_coeffs)
+            if (++i == n_coeffs) {
                 break;  //invalid input; blocks should end with EOB
+}
             goto skip_eob;
         }
 
@@ -908,12 +915,14 @@ skip_eob:
         AV_WN32A(&c[i * 2], v); \
     } \
 } while (0)
-        if (!--band_left)
+        if (!--band_left) {
             band_left = band_counts[++band];
-        if (is_tx32x32)
+}
+        if (is_tx32x32) {
             STORE_COEF(coef, rc, (int)((vp8_rac_get(c) ? -val : val) * (unsigned)qmul[!!i]) / 2);
-        else
+        } else {
             STORE_COEF(coef, rc, (vp8_rac_get(c) ? -val : val) * (unsigned)qmul[!!i]);
+}
         nnz = (1 + cache[nb[i][0]] + cache[nb[i][1]]) >> 1;
         tp = p[band][nnz];
     } while (++i < n_coeffs);
@@ -1158,16 +1167,20 @@ static av_always_inline void mask_edges(uint8_t (*mask)[8][4], int ss_h, int ss_
     // 16x16, ignore the odd portion of the block.
     if (tx == TX_4X4 && (ss_v | ss_h)) {
         if (h == ss_v) {
-            if (row_and_7 & 1)
+            if (row_and_7 & 1) {
                 return;
-            if (!row_end)
+}
+            if (!row_end) {
                 h += 1;
+}
         }
         if (w == ss_h) {
-            if (col_and_7 & 1)
+            if (col_and_7 & 1) {
                 return;
-            if (!col_end)
+}
+            if (!col_end) {
                 w += 1;
+}
         }
     }
 
@@ -1196,13 +1209,15 @@ static av_always_inline void mask_edges(uint8_t (*mask)[8][4], int ss_h, int ss_
             } else {
                 mask[1][y][col_mask_id] |= m_col;
             }
-            if (!ss_h)
+            if (!ss_h) {
                 mask[0][y][3] |= m_col;
+}
             if (!ss_v) {
-                if (ss_h && (col_end & 1))
+                if (ss_h && (col_end & 1)) {
                     mask[1][y][3] |= (t << (w - 1)) - t;
-                else
+                } else {
                     mask[1][y][3] |= m_col;
+}
             }
         }
     } else {
@@ -1225,20 +1240,24 @@ static av_always_inline void mask_edges(uint8_t (*mask)[8][4], int ss_h, int ss_
                     mask[0][y][1] |= m_row_8;
                 }
             } else {
-                for (y = row_and_7; y < h + row_and_7; y++)
+                for (y = row_and_7; y < h + row_and_7; y++) {
                     mask[0][y][mask_id] |= m_row;
+}
             }
 
             l2 = tx + ss_v - 1;
             step1d = 1 << l2;
             if (ss_v && tx > TX_8X8 && (h ^ (h - 1)) == 1) {
-                for (y = row_and_7; y < h + row_and_7 - 1; y += step1d)
+                for (y = row_and_7; y < h + row_and_7 - 1; y += step1d) {
                     mask[1][y][0] |= m_col;
-                if (y - row_and_7 == h - 1)
+}
+                if (y - row_and_7 == h - 1) {
                     mask[1][y][1] |= m_col;
+}
             } else {
-                for (y = row_and_7; y < h + row_and_7; y += step1d)
+                for (y = row_and_7; y < h + row_and_7; y += step1d) {
                     mask[1][y][mask_id] |= m_col;
+}
             }
         } else if (tx != TX_4X4) {
             int mask_id;
@@ -1246,8 +1265,9 @@ static av_always_inline void mask_edges(uint8_t (*mask)[8][4], int ss_h, int ss_
             mask_id = (tx == TX_8X8) || (h == ss_v);
             mask[1][row_and_7][mask_id] |= m_col;
             mask_id = (tx == TX_8X8) || (w == ss_h);
-            for (y = row_and_7; y < h + row_and_7; y++)
+            for (y = row_and_7; y < h + row_and_7; y++) {
                 mask[0][y][mask_id] |= t;
+}
         } else {
             int t8 = t & wide_filter_col_mask[ss_h], t4 = t - t8;
 
@@ -1430,11 +1450,12 @@ void ff_vp9_decode_block(VP9TileData *td, int row, int col,
 
         setctx_2d(&lflvl->level[row7 * 8 + col7], w4, h4, 8, lvl);
         mask_edges(lflvl->mask[0], 0, 0, row7, col7, x_end, y_end, 0, 0, b->tx, skip_inter);
-        if (s->ss_h || s->ss_v)
+        if (s->ss_h || s->ss_v) {
             mask_edges(lflvl->mask[1], s->ss_h, s->ss_v, row7, col7, x_end, y_end,
                        s->cols & 1 && col + w4 >= s->cols ? s->cols & 7 : 0,
                        s->rows & 1 && row + h4 >= s->rows ? s->rows & 7 : 0,
                        b->uvtx, skip_inter);
+}
     }
 
     if (s->pass == 2) {

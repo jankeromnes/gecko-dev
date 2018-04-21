@@ -494,7 +494,8 @@ bool FramePacket::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional uint64 value = 1;
       case 1: {
@@ -619,7 +620,8 @@ void FramePacket::MergeFrom(const FramePacket& from) {
 
 void FramePacket::CopyFrom(const FramePacket& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.FramePacket)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -629,7 +631,8 @@ bool FramePacket::IsInitialized() const {
 }
 
 void FramePacket::Swap(FramePacket* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void FramePacket::InternalSwap(FramePacket* other) {
@@ -790,7 +793,8 @@ bool ColorPacket::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required uint64 layerref = 1;
       case 1: {
@@ -974,18 +978,21 @@ void ColorPacket::MergeFrom(const ColorPacket& from) {
 
 void ColorPacket::CopyFrom(const ColorPacket& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.ColorPacket)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
 
 bool ColorPacket::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) { return false;
+}
   return true;
 }
 
 void ColorPacket::Swap(ColorPacket* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void ColorPacket::InternalSwap(ColorPacket* other) {
@@ -1196,7 +1203,8 @@ bool TexturePacket_Rect::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional float x = 1;
       case 1: {
@@ -1373,7 +1381,8 @@ void TexturePacket_Rect::MergeFrom(const TexturePacket_Rect& from) {
 
 void TexturePacket_Rect::CopyFrom(const TexturePacket_Rect& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.TexturePacket.Rect)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -1383,7 +1392,8 @@ bool TexturePacket_Rect::IsInitialized() const {
 }
 
 void TexturePacket_Rect::Swap(TexturePacket_Rect* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void TexturePacket_Rect::InternalSwap(TexturePacket_Rect* other) {
@@ -1592,7 +1602,8 @@ bool TexturePacket_Size::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 w = 1;
       case 1: {
@@ -1719,7 +1730,8 @@ void TexturePacket_Size::MergeFrom(const TexturePacket_Size& from) {
 
 void TexturePacket_Size::CopyFrom(const TexturePacket_Size& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.TexturePacket.Size)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -1729,7 +1741,8 @@ bool TexturePacket_Size::IsInitialized() const {
 }
 
 void TexturePacket_Size::Swap(TexturePacket_Size* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void TexturePacket_Size::InternalSwap(TexturePacket_Size* other) {
@@ -1891,7 +1904,8 @@ bool TexturePacket_Matrix::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional bool is2D = 1;
       case 1: {
@@ -2049,7 +2063,8 @@ void TexturePacket_Matrix::MergeFrom(const TexturePacket_Matrix& from) {
 
 void TexturePacket_Matrix::CopyFrom(const TexturePacket_Matrix& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.TexturePacket.Matrix)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -2059,7 +2074,8 @@ bool TexturePacket_Matrix::IsInitialized() const {
 }
 
 void TexturePacket_Matrix::Swap(TexturePacket_Matrix* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void TexturePacket_Matrix::InternalSwap(TexturePacket_Matrix* other) {
@@ -2208,8 +2224,10 @@ TexturePacket_EffectMask::~TexturePacket_EffectMask() {
 }
 
 void TexturePacket_EffectMask::SharedDtor() {
-  if (this != internal_default_instance()) delete msize_;
-  if (this != internal_default_instance()) delete mmasktransform_;
+  if (this != internal_default_instance()) { delete msize_;
+}
+  if (this != internal_default_instance()) { delete mmasktransform_;
+}
 }
 
 void TexturePacket_EffectMask::SetCachedSize(int size) const {
@@ -2266,7 +2284,8 @@ bool TexturePacket_EffectMask::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional bool mIs3D = 1;
       case 1: {
@@ -2418,7 +2437,8 @@ void TexturePacket_EffectMask::MergeFrom(const TexturePacket_EffectMask& from) {
 
 void TexturePacket_EffectMask::CopyFrom(const TexturePacket_EffectMask& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.TexturePacket.EffectMask)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -2428,7 +2448,8 @@ bool TexturePacket_EffectMask::IsInitialized() const {
 }
 
 void TexturePacket_EffectMask::Swap(TexturePacket_EffectMask* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void TexturePacket_EffectMask::InternalSwap(TexturePacket_EffectMask* other) {
@@ -2634,8 +2655,10 @@ TexturePacket::~TexturePacket() {
 
 void TexturePacket::SharedDtor() {
   data_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete mtexturecoords_;
-  if (this != internal_default_instance()) delete mask_;
+  if (this != internal_default_instance()) { delete mtexturecoords_;
+}
+  if (this != internal_default_instance()) { delete mask_;
+}
 }
 
 void TexturePacket::SetCachedSize(int size) const {
@@ -2705,7 +2728,8 @@ bool TexturePacket::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required uint64 layerref = 1;
       case 1: {
@@ -3187,18 +3211,21 @@ void TexturePacket::MergeFrom(const TexturePacket& from) {
 
 void TexturePacket::CopyFrom(const TexturePacket& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.TexturePacket)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
 
 bool TexturePacket::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000008) != 0x00000008) return false;
+  if ((_has_bits_[0] & 0x00000008) != 0x00000008) { return false;
+}
   return true;
 }
 
 void TexturePacket::Swap(TexturePacket* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void TexturePacket::InternalSwap(TexturePacket* other) {
@@ -3741,7 +3768,8 @@ bool LayersPacket_Layer_Size::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 w = 1;
       case 1: {
@@ -3868,7 +3896,8 @@ void LayersPacket_Layer_Size::MergeFrom(const LayersPacket_Layer_Size& from) {
 
 void LayersPacket_Layer_Size::CopyFrom(const LayersPacket_Layer_Size& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.LayersPacket.Layer.Size)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -3878,7 +3907,8 @@ bool LayersPacket_Layer_Size::IsInitialized() const {
 }
 
 void LayersPacket_Layer_Size::Swap(LayersPacket_Layer_Size* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void LayersPacket_Layer_Size::InternalSwap(LayersPacket_Layer_Size* other) {
@@ -4039,7 +4069,8 @@ bool LayersPacket_Layer_Rect::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional int32 x = 1;
       case 1: {
@@ -4224,7 +4255,8 @@ void LayersPacket_Layer_Rect::MergeFrom(const LayersPacket_Layer_Rect& from) {
 
 void LayersPacket_Layer_Rect::CopyFrom(const LayersPacket_Layer_Rect& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.LayersPacket.Layer.Rect)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -4234,7 +4266,8 @@ bool LayersPacket_Layer_Rect::IsInitialized() const {
 }
 
 void LayersPacket_Layer_Rect::Swap(LayersPacket_Layer_Rect* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void LayersPacket_Layer_Rect::InternalSwap(LayersPacket_Layer_Rect* other) {
@@ -4432,7 +4465,8 @@ bool LayersPacket_Layer_Region::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // repeated .mozilla.layers.layerscope.LayersPacket.Layer.Rect r = 1;
       case 1: {
@@ -4525,7 +4559,8 @@ void LayersPacket_Layer_Region::MergeFrom(const LayersPacket_Layer_Region& from)
 
 void LayersPacket_Layer_Region::CopyFrom(const LayersPacket_Layer_Region& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.LayersPacket.Layer.Region)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -4535,7 +4570,8 @@ bool LayersPacket_Layer_Region::IsInitialized() const {
 }
 
 void LayersPacket_Layer_Region::Swap(LayersPacket_Layer_Region* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void LayersPacket_Layer_Region::InternalSwap(LayersPacket_Layer_Region* other) {
@@ -4678,7 +4714,8 @@ bool LayersPacket_Layer_Matrix::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional bool is2D = 1;
       case 1: {
@@ -4836,7 +4873,8 @@ void LayersPacket_Layer_Matrix::MergeFrom(const LayersPacket_Layer_Matrix& from)
 
 void LayersPacket_Layer_Matrix::CopyFrom(const LayersPacket_Layer_Matrix& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.LayersPacket.Layer.Matrix)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -4846,7 +4884,8 @@ bool LayersPacket_Layer_Matrix::IsInitialized() const {
 }
 
 void LayersPacket_Layer_Matrix::Swap(LayersPacket_Layer_Matrix* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void LayersPacket_Layer_Matrix::InternalSwap(LayersPacket_Layer_Matrix* other) {
@@ -4999,9 +5038,12 @@ LayersPacket_Layer_Shadow::~LayersPacket_Layer_Shadow() {
 }
 
 void LayersPacket_Layer_Shadow::SharedDtor() {
-  if (this != internal_default_instance()) delete clip_;
-  if (this != internal_default_instance()) delete transform_;
-  if (this != internal_default_instance()) delete vregion_;
+  if (this != internal_default_instance()) { delete clip_;
+}
+  if (this != internal_default_instance()) { delete transform_;
+}
+  if (this != internal_default_instance()) { delete vregion_;
+}
 }
 
 void LayersPacket_Layer_Shadow::SetCachedSize(int size) const {
@@ -5061,7 +5103,8 @@ bool LayersPacket_Layer_Shadow::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional .mozilla.layers.layerscope.LayersPacket.Layer.Rect clip = 1;
       case 1: {
@@ -5213,7 +5256,8 @@ void LayersPacket_Layer_Shadow::MergeFrom(const LayersPacket_Layer_Shadow& from)
 
 void LayersPacket_Layer_Shadow::CopyFrom(const LayersPacket_Layer_Shadow& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.LayersPacket.Layer.Shadow)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -5223,7 +5267,8 @@ bool LayersPacket_Layer_Shadow::IsInitialized() const {
 }
 
 void LayersPacket_Layer_Shadow::Swap(LayersPacket_Layer_Shadow* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void LayersPacket_Layer_Shadow::InternalSwap(LayersPacket_Layer_Shadow* other) {
@@ -5508,17 +5553,28 @@ LayersPacket_Layer::~LayersPacket_Layer() {
 
 void LayersPacket_Layer::SharedDtor() {
   displaylistlog_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete clip_;
-  if (this != internal_default_instance()) delete transform_;
-  if (this != internal_default_instance()) delete vregion_;
-  if (this != internal_default_instance()) delete shadow_;
-  if (this != internal_default_instance()) delete hitregion_;
-  if (this != internal_default_instance()) delete dispatchregion_;
-  if (this != internal_default_instance()) delete noactionregion_;
-  if (this != internal_default_instance()) delete hpanregion_;
-  if (this != internal_default_instance()) delete vpanregion_;
-  if (this != internal_default_instance()) delete valid_;
-  if (this != internal_default_instance()) delete size_;
+  if (this != internal_default_instance()) { delete clip_;
+}
+  if (this != internal_default_instance()) { delete transform_;
+}
+  if (this != internal_default_instance()) { delete vregion_;
+}
+  if (this != internal_default_instance()) { delete shadow_;
+}
+  if (this != internal_default_instance()) { delete hitregion_;
+}
+  if (this != internal_default_instance()) { delete dispatchregion_;
+}
+  if (this != internal_default_instance()) { delete noactionregion_;
+}
+  if (this != internal_default_instance()) { delete hpanregion_;
+}
+  if (this != internal_default_instance()) { delete vpanregion_;
+}
+  if (this != internal_default_instance()) { delete valid_;
+}
+  if (this != internal_default_instance()) { delete size_;
+}
 }
 
 void LayersPacket_Layer::SetCachedSize(int size) const {
@@ -5627,7 +5683,8 @@ bool LayersPacket_Layer::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .mozilla.layers.layerscope.LayersPacket.Layer.LayerType type = 1;
       case 1: {
@@ -6458,18 +6515,21 @@ void LayersPacket_Layer::MergeFrom(const LayersPacket_Layer& from) {
 
 void LayersPacket_Layer::CopyFrom(const LayersPacket_Layer& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.LayersPacket.Layer)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
 
 bool LayersPacket_Layer::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00007000) != 0x00007000) return false;
+  if ((_has_bits_[0] & 0x00007000) != 0x00007000) { return false;
+}
   return true;
 }
 
 void LayersPacket_Layer::Swap(LayersPacket_Layer* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void LayersPacket_Layer::InternalSwap(LayersPacket_Layer* other) {
@@ -7476,7 +7536,8 @@ bool LayersPacket::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // repeated .mozilla.layers.layerscope.LayersPacket.Layer layer = 1;
       case 1: {
@@ -7569,18 +7630,21 @@ void LayersPacket::MergeFrom(const LayersPacket& from) {
 
 void LayersPacket::CopyFrom(const LayersPacket& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.LayersPacket)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
 
 bool LayersPacket::IsInitialized() const {
-  if (!::google::protobuf::internal::AllAreInitialized(this->layer())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->layer())) { return false;
+}
   return true;
 }
 
 void LayersPacket::Swap(LayersPacket* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void LayersPacket::InternalSwap(LayersPacket* other) {
@@ -7710,7 +7774,8 @@ bool MetaPacket::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // optional bool composedByHwc = 1;
       case 1: {
@@ -7800,7 +7865,8 @@ void MetaPacket::MergeFrom(const MetaPacket& from) {
 
 void MetaPacket::CopyFrom(const MetaPacket& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.MetaPacket)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
@@ -7810,7 +7876,8 @@ bool MetaPacket::IsInitialized() const {
 }
 
 void MetaPacket::Swap(MetaPacket* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void MetaPacket::InternalSwap(MetaPacket* other) {
@@ -7946,7 +8013,8 @@ bool DrawPacket_Rect::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float x = 1;
       case 1: {
@@ -8143,18 +8211,21 @@ void DrawPacket_Rect::MergeFrom(const DrawPacket_Rect& from) {
 
 void DrawPacket_Rect::CopyFrom(const DrawPacket_Rect& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.DrawPacket.Rect)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
 
 bool DrawPacket_Rect::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) { return false;
+}
   return true;
 }
 
 void DrawPacket_Rect::Swap(DrawPacket_Rect* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void DrawPacket_Rect::InternalSwap(DrawPacket_Rect* other) {
@@ -8377,7 +8448,8 @@ bool DrawPacket::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float offsetX = 1;
       case 1: {
@@ -8714,20 +8786,25 @@ void DrawPacket::MergeFrom(const DrawPacket& from) {
 
 void DrawPacket::CopyFrom(const DrawPacket& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.DrawPacket)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
 
 bool DrawPacket::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->layerrect())) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->texturerect())) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) { return false;
+}
+  if (!::google::protobuf::internal::AllAreInitialized(this->layerrect())) { return false;
+}
+  if (!::google::protobuf::internal::AllAreInitialized(this->texturerect())) { return false;
+}
   return true;
 }
 
 void DrawPacket::Swap(DrawPacket* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void DrawPacket::InternalSwap(DrawPacket* other) {
@@ -9044,12 +9121,18 @@ Packet::~Packet() {
 }
 
 void Packet::SharedDtor() {
-  if (this != internal_default_instance()) delete frame_;
-  if (this != internal_default_instance()) delete color_;
-  if (this != internal_default_instance()) delete texture_;
-  if (this != internal_default_instance()) delete layers_;
-  if (this != internal_default_instance()) delete meta_;
-  if (this != internal_default_instance()) delete draw_;
+  if (this != internal_default_instance()) { delete frame_;
+}
+  if (this != internal_default_instance()) { delete color_;
+}
+  if (this != internal_default_instance()) { delete texture_;
+}
+  if (this != internal_default_instance()) { delete layers_;
+}
+  if (this != internal_default_instance()) { delete meta_;
+}
+  if (this != internal_default_instance()) { delete draw_;
+}
 }
 
 void Packet::SetCachedSize(int size) const {
@@ -9122,7 +9205,8 @@ bool Packet::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .mozilla.layers.layerscope.Packet.DataType type = 1;
       case 1: {
@@ -9394,30 +9478,37 @@ void Packet::MergeFrom(const Packet& from) {
 
 void Packet::CopyFrom(const Packet& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.Packet)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
 
 bool Packet::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000040) != 0x00000040) return false;
+  if ((_has_bits_[0] & 0x00000040) != 0x00000040) { return false;
+}
   if (has_color()) {
-    if (!this->color_->IsInitialized()) return false;
+    if (!this->color_->IsInitialized()) { return false;
+}
   }
   if (has_texture()) {
-    if (!this->texture_->IsInitialized()) return false;
+    if (!this->texture_->IsInitialized()) { return false;
+}
   }
   if (has_layers()) {
-    if (!this->layers_->IsInitialized()) return false;
+    if (!this->layers_->IsInitialized()) { return false;
+}
   }
   if (has_draw()) {
-    if (!this->draw_->IsInitialized()) return false;
+    if (!this->draw_->IsInitialized()) { return false;
+}
   }
   return true;
 }
 
 void Packet::Swap(Packet* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void Packet::InternalSwap(Packet* other) {
@@ -9834,7 +9925,8 @@ bool CommandPacket::MergePartialFromCodedStream(
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
-    if (!p.second) goto handle_unusual;
+    if (!p.second) { goto handle_unusual;
+}
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .mozilla.layers.layerscope.CommandPacket.CmdType type = 1;
       case 1: {
@@ -9963,18 +10055,21 @@ void CommandPacket::MergeFrom(const CommandPacket& from) {
 
 void CommandPacket::CopyFrom(const CommandPacket& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:mozilla.layers.layerscope.CommandPacket)
-  if (&from == this) return;
+  if (&from == this) { return;
+}
   Clear();
   MergeFrom(from);
 }
 
 bool CommandPacket::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) { return false;
+}
   return true;
 }
 
 void CommandPacket::Swap(CommandPacket* other) {
-  if (other == this) return;
+  if (other == this) { return;
+}
   InternalSwap(other);
 }
 void CommandPacket::InternalSwap(CommandPacket* other) {

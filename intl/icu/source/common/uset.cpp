@@ -272,7 +272,8 @@ uset_getItem(const USet* uset, int32_t itemIndex,
              UChar32* start, UChar32* end,
              UChar* str, int32_t strCapacity,
              UErrorCode* ec) {
-    if (U_FAILURE(*ec)) return 0;
+    if (U_FAILURE(*ec)) { return 0;
+}
     const UnicodeSet& set = *(const UnicodeSet*)uset;
     int32_t rangeCount;
 

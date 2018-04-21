@@ -122,8 +122,9 @@ pl_base64_encode_buffer(PLBase64Encoder *data, const unsigned char *in,
     /* If this input buffer is too small, wait until next time. */
     if (size < (3 - i)) {
         data->in_buffer[i++] = in[0];
-        if (size > 1)
+        if (size > 1) {
             data->in_buffer[i++] = in[1];
+}
         PR_ASSERT(i < 3);
         data->in_buffer_count = i;
         return PR_SUCCESS;
@@ -132,8 +133,9 @@ pl_base64_encode_buffer(PLBase64Encoder *data, const unsigned char *in,
     /* If there are bytes that were put back last time, take them now. */
     if (i > 0) {
         n = data->in_buffer[0];
-        if (i > 1)
+        if (i > 1) {
             n = (n << 8) | data->in_buffer[1];
+}
         data->in_buffer_count = 0;
     }
 
@@ -142,8 +144,9 @@ pl_base64_encode_buffer(PLBase64Encoder *data, const unsigned char *in,
     if (off > 0) {
         size -= off;
         data->in_buffer[0] = in[size];
-        if (off > 1)
+        if (off > 1) {
             data->in_buffer[1] = in[size + 1];
+}
         data->in_buffer_count = off;
         end -= off;
     }
@@ -188,8 +191,9 @@ pl_base64_encode_buffer(PLBase64Encoder *data, const unsigned char *in,
                 output_result = data->output_fn(data->output_arg,
                                                 data->output_buffer,
                                                 (PRInt32)data->output_length);
-                if (output_result < 0)
+                if (output_result < 0) {
                     return PR_FAILURE;
+}
 
                 out = data->output_buffer;
                 data->output_length = 0;
@@ -216,8 +220,9 @@ pl_base64_encode_flush(PLBase64Encoder *data)
 {
     int i = data->in_buffer_count;
 
-    if (i == 0 && data->output_length == 0)
+    if (i == 0 && data->output_length == 0) {
         return PR_SUCCESS;
+}
 
     if (i > 0) {
         char *out = data->output_buffer + data->output_length;
@@ -225,8 +230,9 @@ pl_base64_encode_flush(PLBase64Encoder *data)
         int j, k;
 
         n = ((PRUint32)data->in_buffer[0]) << 16;
-        if (i > 1)
+        if (i > 1) {
             n |= ((PRUint32)data->in_buffer[1] << 8);
+}
 
         data->in_buffer_count = 0;
 
@@ -250,8 +256,9 @@ pl_base64_encode_flush(PLBase64Encoder *data)
         }
 
         /* Pad with equal-signs. */
-        if (i == 1)
+        if (i == 1) {
             out[-2] = B64_PAD;
+}
         out[-1] = B64_PAD;
 
         data->output_length += 4;
@@ -264,8 +271,9 @@ pl_base64_encode_flush(PLBase64Encoder *data)
                                         (PRInt32)data->output_length);
         data->output_length = 0;
 
-        if (output_result < 0)
+        if (output_result < 0) {
             return PR_FAILURE;
+}
     }
 
     return PR_SUCCESS;
@@ -326,21 +334,24 @@ pl_base64_create_encoder(PRUint32 line_length, char *output_buffer,
     PRUint32 line_tokens;
 
     data = PR_NEWZAP(PLBase64Encoder);
-    if (data == NULL)
+    if (data == NULL) {
         return NULL;
+}
 
-    if (line_length > 0 && line_length < 4) /* too small! */
+    if (line_length > 0 && line_length < 4) { /* too small! */
         line_length = 4;
+}
 
     line_tokens = line_length / 4;
     data->line_length = line_tokens * 4;
 
     if (output_buffer == NULL) {
         if (output_buflen == 0) {
-            if (data->line_length > 0) /* need to include room for CRLF */
+            if (data->line_length > 0) { /* need to include room for CRLF */
                 output_buflen = data->line_length + 2;
-            else
+            } else {
                 output_buflen = 64; /* XXX what is a good size? */
+}
         }
 
         output_buffer = (char *)PR_Malloc(output_buflen);
@@ -375,8 +386,9 @@ PL_CreateBase64Encoder(PRInt32 (*output_fn)(void *, const char *, PRInt32),
     }
 
     data = pl_base64_create_encoder(line_length, NULL, 0);
-    if (data == NULL)
+    if (data == NULL) {
         return NULL;
+}
 
     data->output_fn = output_fn;
     data->output_arg = output_arg;
@@ -418,11 +430,13 @@ PL_DestroyBase64Encoder(PLBase64Encoder *data, PRBool abort_p)
     }
 
     /* Flush out the last few buffered characters. */
-    if (!abort_p)
+    if (!abort_p) {
         status = pl_base64_encode_flush(data);
+}
 
-    if (data->output_buffer != NULL)
+    if (data->output_buffer != NULL) {
         PR_Free(data->output_buffer);
+}
     PR_Free(data);
 
     return status;
@@ -482,8 +496,9 @@ PL_Base64EncodeBuffer(const unsigned char *src, PRUint32 srclen,
     }
 
     data = pl_base64_create_encoder(line_length, dest, maxdestlen);
-    if (data == NULL)
+    if (data == NULL) {
         return NULL;
+}
 
     status = pl_base64_encode_buffer(data, src, srclen);
 
@@ -491,8 +506,9 @@ PL_Base64EncodeBuffer(const unsigned char *src, PRUint32 srclen,
      * We do not wait for Destroy to flush, because Destroy will also
      * get rid of our encoder context, which we need to look at first!
      */
-    if (status == PR_SUCCESS)
+    if (status == PR_SUCCESS) {
         status = pl_base64_encode_flush(data);
+}
 
     if (status != PR_SUCCESS) {
         (void)PL_DestroyBase64Encoder(data, PR_TRUE);
@@ -549,8 +565,9 @@ NSSBase64Encoder_Create(PRInt32 (*output_fn)(void *, const char *, PRInt32),
     NSSBase64Encoder *nss_data;
 
     nss_data = PORT_ZNew(NSSBase64Encoder);
-    if (nss_data == NULL)
+    if (nss_data == NULL) {
         return NULL;
+}
 
     pl_data = PL_CreateBase64Encoder(output_fn, output_arg, 64);
     if (pl_data == NULL) {
@@ -579,8 +596,9 @@ NSSBase64Encoder_Update(NSSBase64Encoder *data, const unsigned char *buffer,
     }
 
     pr_status = PL_UpdateBase64Encoder(data->pl_data, buffer, size);
-    if (pr_status == PR_FAILURE)
+    if (pr_status == PR_FAILURE) {
         return SECFailure;
+}
 
     return SECSuccess;
 }
@@ -605,8 +623,9 @@ NSSBase64Encoder_Destroy(NSSBase64Encoder *data, PRBool abort_p)
 
     PORT_Free(data);
 
-    if (pr_status == PR_FAILURE)
+    if (pr_status == PR_FAILURE) {
         return SECFailure;
+}
 
     return SECSuccess;
 }
@@ -649,18 +668,21 @@ NSSBase64_EncodeItem(PLArenaPool *arenaOpt, char *outStrOpt,
         return NULL;
     }
 
-    if (arenaOpt != NULL)
+    if (arenaOpt != NULL) {
         mark = PORT_ArenaMark(arenaOpt);
+}
 
     if (out_string == NULL) {
-        if (arenaOpt != NULL)
+        if (arenaOpt != NULL) {
             out_string = PORT_ArenaAlloc(arenaOpt, max_out_len + 1);
-        else
+        } else {
             out_string = PORT_Alloc(max_out_len + 1);
+}
 
         if (out_string == NULL) {
-            if (arenaOpt != NULL)
+            if (arenaOpt != NULL) {
                 PORT_ArenaRelease(arenaOpt, mark);
+}
             return NULL;
         }
     } else {
@@ -682,8 +704,9 @@ NSSBase64_EncodeItem(PLArenaPool *arenaOpt, char *outStrOpt,
         return NULL;
     }
 
-    if (arenaOpt != NULL)
+    if (arenaOpt != NULL) {
         PORT_ArenaUnmark(arenaOpt, mark);
+}
 
     out_string[out_len] = '\0';
     return out_string;

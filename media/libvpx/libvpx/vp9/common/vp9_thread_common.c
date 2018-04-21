@@ -29,7 +29,8 @@ static INLINE void mutex_lock(pthread_mutex_t *const mutex) {
     }
   }
 
-  if (!locked) pthread_mutex_lock(mutex);
+  if (!locked) { pthread_mutex_lock(mutex);
+}
 }
 #endif  // CONFIG_MULTITHREAD
 
@@ -63,7 +64,8 @@ static INLINE void sync_write(VP9LfSync *const lf_sync, int r, int c,
 
   if (c < sb_cols - 1) {
     cur = c;
-    if (c % nsync) sig = 0;
+    if (c % nsync) { sig = 0;
+}
   } else {
     cur = sb_cols + nsync;
   }
@@ -93,14 +95,15 @@ static INLINE void thread_loop_filter_rows(
   const int sb_cols = mi_cols_aligned_to_sb(cm->mi_cols) >> MI_BLOCK_SIZE_LOG2;
   int mi_row, mi_col;
   enum lf_path path;
-  if (y_only)
+  if (y_only) {
     path = LF_PATH_444;
-  else if (planes[1].subsampling_y == 1 && planes[1].subsampling_x == 1)
+  } else if (planes[1].subsampling_y == 1 && planes[1].subsampling_x == 1) {
     path = LF_PATH_420;
-  else if (planes[1].subsampling_y == 0 && planes[1].subsampling_x == 0)
+  } else if (planes[1].subsampling_y == 0 && planes[1].subsampling_x == 0) {
     path = LF_PATH_444;
-  else
+  } else {
     path = LF_PATH_SLOW;
+}
 
   for (mi_row = start; mi_row < stop;
        mi_row += lf_sync->num_workers * MI_BLOCK_SIZE) {
@@ -214,7 +217,8 @@ void vp9_loop_filter_frame_mt(YV12_BUFFER_CONFIG *frame, VP9_COMMON *cm,
                               int num_workers, VP9LfSync *lf_sync) {
   int start_mi_row, end_mi_row, mi_rows_to_filter;
 
-  if (!frame_filter_level) return;
+  if (!frame_filter_level) { return;
+}
 
   start_mi_row = 0;
   mi_rows_to_filter = cm->mi_rows;
@@ -234,14 +238,15 @@ void vp9_loop_filter_frame_mt(YV12_BUFFER_CONFIG *frame, VP9_COMMON *cm,
 static INLINE int get_sync_range(int width) {
   // nsync numbers are picked by testing. For example, for 4k
   // video, using 4 gives best performance.
-  if (width < 640)
+  if (width < 640) {
     return 1;
-  else if (width <= 1280)
+  } else if (width <= 1280) {
     return 2;
-  else if (width <= 4096)
+  } else if (width <= 4096) {
     return 4;
-  else
+  } else {
     return 8;
+}
 }
 
 // Allocate memory for lf row synchronization
@@ -313,38 +318,44 @@ void vp9_accumulate_frame_counts(FRAME_COUNTS *accum,
                                  const FRAME_COUNTS *counts, int is_dec) {
   int i, j, k, l, m;
 
-  for (i = 0; i < BLOCK_SIZE_GROUPS; i++)
-    for (j = 0; j < INTRA_MODES; j++)
+  for (i = 0; i < BLOCK_SIZE_GROUPS; i++) {
+    for (j = 0; j < INTRA_MODES; j++) {
       accum->y_mode[i][j] += counts->y_mode[i][j];
+}
 
-  for (i = 0; i < INTRA_MODES; i++)
-    for (j = 0; j < INTRA_MODES; j++)
+  for (i = 0; i < INTRA_MODES; i++) {
+    for (j = 0; j < INTRA_MODES; j++) {
       accum->uv_mode[i][j] += counts->uv_mode[i][j];
+}
 
-  for (i = 0; i < PARTITION_CONTEXTS; i++)
-    for (j = 0; j < PARTITION_TYPES; j++)
+  for (i = 0; i < PARTITION_CONTEXTS; i++) {
+    for (j = 0; j < PARTITION_TYPES; j++) {
       accum->partition[i][j] += counts->partition[i][j];
+}
 
   if (is_dec) {
     int n;
-    for (i = 0; i < TX_SIZES; i++)
-      for (j = 0; j < PLANE_TYPES; j++)
-        for (k = 0; k < REF_TYPES; k++)
-          for (l = 0; l < COEF_BANDS; l++)
+    for (i = 0; i < TX_SIZES; i++) {
+      for (j = 0; j < PLANE_TYPES; j++) {
+        for (k = 0; k < REF_TYPES; k++) {
+          for (l = 0; l < COEF_BANDS; l++) {
             for (m = 0; m < COEFF_CONTEXTS; m++) {
               accum->eob_branch[i][j][k][l][m] +=
                   counts->eob_branch[i][j][k][l][m];
-              for (n = 0; n < UNCONSTRAINED_NODES + 1; n++)
+              for (n = 0; n < UNCONSTRAINED_NODES + 1; n++) {
                 accum->coef[i][j][k][l][m][n] += counts->coef[i][j][k][l][m][n];
+}
             }
+}
   } else {
-    for (i = 0; i < TX_SIZES; i++)
-      for (j = 0; j < PLANE_TYPES; j++)
-        for (k = 0; k < REF_TYPES; k++)
-          for (l = 0; l < COEF_BANDS; l++)
-            for (m = 0; m < COEFF_CONTEXTS; m++)
+    for (i = 0; i < TX_SIZES; i++) {
+      for (j = 0; j < PLANE_TYPES; j++) {
+        for (k = 0; k < REF_TYPES; k++) {
+          for (l = 0; l < COEF_BANDS; l++) {
+            for (m = 0; m < COEFF_CONTEXTS; m++) {
               accum->eob_branch[i][j][k][l][m] +=
                   counts->eob_branch[i][j][k][l][m];
+}
     // In the encoder, coef is only updated at frame
     // level, so not need to accumulate it here.
     // for (n = 0; n < UNCONSTRAINED_NODES + 1; n++)
@@ -352,47 +363,59 @@ void vp9_accumulate_frame_counts(FRAME_COUNTS *accum,
     //       counts->coef[i][j][k][l][m][n];
   }
 
-  for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; i++)
-    for (j = 0; j < SWITCHABLE_FILTERS; j++)
+  for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; i++) {
+    for (j = 0; j < SWITCHABLE_FILTERS; j++) {
       accum->switchable_interp[i][j] += counts->switchable_interp[i][j];
+}
 
-  for (i = 0; i < INTER_MODE_CONTEXTS; i++)
-    for (j = 0; j < INTER_MODES; j++)
+  for (i = 0; i < INTER_MODE_CONTEXTS; i++) {
+    for (j = 0; j < INTER_MODES; j++) {
       accum->inter_mode[i][j] += counts->inter_mode[i][j];
+}
 
-  for (i = 0; i < INTRA_INTER_CONTEXTS; i++)
-    for (j = 0; j < 2; j++)
+  for (i = 0; i < INTRA_INTER_CONTEXTS; i++) {
+    for (j = 0; j < 2; j++) {
       accum->intra_inter[i][j] += counts->intra_inter[i][j];
+}
 
-  for (i = 0; i < COMP_INTER_CONTEXTS; i++)
-    for (j = 0; j < 2; j++) accum->comp_inter[i][j] += counts->comp_inter[i][j];
+  for (i = 0; i < COMP_INTER_CONTEXTS; i++) {
+    for (j = 0; j < 2; j++) { accum->comp_inter[i][j] += counts->comp_inter[i][j];
+}
 
-  for (i = 0; i < REF_CONTEXTS; i++)
-    for (j = 0; j < 2; j++)
-      for (k = 0; k < 2; k++)
+  for (i = 0; i < REF_CONTEXTS; i++) {
+    for (j = 0; j < 2; j++) {
+      for (k = 0; k < 2; k++) {
         accum->single_ref[i][j][k] += counts->single_ref[i][j][k];
+}
 
-  for (i = 0; i < REF_CONTEXTS; i++)
-    for (j = 0; j < 2; j++) accum->comp_ref[i][j] += counts->comp_ref[i][j];
+  for (i = 0; i < REF_CONTEXTS; i++) {
+    for (j = 0; j < 2; j++) { accum->comp_ref[i][j] += counts->comp_ref[i][j];
+}
 
   for (i = 0; i < TX_SIZE_CONTEXTS; i++) {
-    for (j = 0; j < TX_SIZES; j++)
+    for (j = 0; j < TX_SIZES; j++) {
       accum->tx.p32x32[i][j] += counts->tx.p32x32[i][j];
+}
 
-    for (j = 0; j < TX_SIZES - 1; j++)
+    for (j = 0; j < TX_SIZES - 1; j++) {
       accum->tx.p16x16[i][j] += counts->tx.p16x16[i][j];
+}
 
-    for (j = 0; j < TX_SIZES - 2; j++)
+    for (j = 0; j < TX_SIZES - 2; j++) {
       accum->tx.p8x8[i][j] += counts->tx.p8x8[i][j];
+}
   }
 
-  for (i = 0; i < TX_SIZES; i++)
+  for (i = 0; i < TX_SIZES; i++) {
     accum->tx.tx_totals[i] += counts->tx.tx_totals[i];
+}
 
-  for (i = 0; i < SKIP_CONTEXTS; i++)
-    for (j = 0; j < 2; j++) accum->skip[i][j] += counts->skip[i][j];
+  for (i = 0; i < SKIP_CONTEXTS; i++) {
+    for (j = 0; j < 2; j++) { accum->skip[i][j] += counts->skip[i][j];
+}
 
-  for (i = 0; i < MV_JOINTS; i++) accum->mv.joints[i] += counts->mv.joints[i];
+  for (i = 0; i < MV_JOINTS; i++) { accum->mv.joints[i] += counts->mv.joints[i];
+}
 
   for (k = 0; k < 2; k++) {
     nmv_component_counts *const comps = &accum->mv.comps[k];
@@ -404,17 +427,21 @@ void vp9_accumulate_frame_counts(FRAME_COUNTS *accum,
       comps->hp[i] += comps_t->hp[i];
     }
 
-    for (i = 0; i < MV_CLASSES; i++) comps->classes[i] += comps_t->classes[i];
+    for (i = 0; i < MV_CLASSES; i++) { comps->classes[i] += comps_t->classes[i];
+}
 
     for (i = 0; i < CLASS0_SIZE; i++) {
       comps->class0[i] += comps_t->class0[i];
-      for (j = 0; j < MV_FP_SIZE; j++)
+      for (j = 0; j < MV_FP_SIZE; j++) {
         comps->class0_fp[i][j] += comps_t->class0_fp[i][j];
+}
     }
 
-    for (i = 0; i < MV_OFFSET_BITS; i++)
-      for (j = 0; j < 2; j++) comps->bits[i][j] += comps_t->bits[i][j];
+    for (i = 0; i < MV_OFFSET_BITS; i++) {
+      for (j = 0; j < 2; j++) { comps->bits[i][j] += comps_t->bits[i][j];
+}
 
-    for (i = 0; i < MV_FP_SIZE; i++) comps->fp[i] += comps_t->fp[i];
+    for (i = 0; i < MV_FP_SIZE; i++) { comps->fp[i] += comps_t->fp[i];
+}
   }
 }

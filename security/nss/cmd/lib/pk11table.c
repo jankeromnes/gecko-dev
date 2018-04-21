@@ -1510,8 +1510,9 @@ totalKnownType(ConstType type)
     unsigned int i;
 
     for (i = 0; i < constCount; i++) {
-        if (consts[i].type == type)
+        if (consts[i].type == type) {
             count++;
+}
     }
     return count;
 }

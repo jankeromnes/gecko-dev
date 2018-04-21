@@ -58,12 +58,14 @@ TIntermBinary *CopyAssignmentNode(TIntermBinary *node)
 
 bool SeparateExpressionsTraverser::visitBinary(Visit visit, TIntermBinary *node)
 {
-    if (mFoundArrayExpression)
+    if (mFoundArrayExpression) {
         return false;
+}
 
     // Return if the expression is not an array or if we're not inside a complex expression.
-    if (!mPatternToSeparateMatcher.match(node, getParentNode()))
+    if (!mPatternToSeparateMatcher.match(node, getParentNode())) {
         return true;
+}
 
     ASSERT(node->getOp() == EOpAssign);
 
@@ -87,11 +89,13 @@ bool SeparateExpressionsTraverser::visitBinary(Visit visit, TIntermBinary *node)
 
 bool SeparateExpressionsTraverser::visitAggregate(Visit visit, TIntermAggregate *node)
 {
-    if (mFoundArrayExpression)
+    if (mFoundArrayExpression) {
         return false;  // No need to traverse further
+}
 
-    if (!mPatternToSeparateMatcher.match(node, getParentNode()))
+    if (!mPatternToSeparateMatcher.match(node, getParentNode())) {
         return true;
+}
 
     ASSERT(node->isConstructor() || node->getOp() == EOpCallFunctionInAST);
 
@@ -122,8 +126,9 @@ void SeparateExpressionsReturningArrays(TIntermNode *root, TSymbolTable *symbolT
     {
         traverser.nextIteration();
         root->traverse(&traverser);
-        if (traverser.foundArrayExpression())
+        if (traverser.foundArrayExpression()) {
             traverser.updateTree();
+}
     } while (traverser.foundArrayExpression());
 }
 

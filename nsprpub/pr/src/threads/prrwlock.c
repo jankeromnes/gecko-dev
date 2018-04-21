@@ -101,11 +101,13 @@ PR_NewRWLock(PRUint32 lock_rank, const char *lock_name)
 	int err;
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     rwlock = PR_NEWZAP(PRRWLock);
-    if (rwlock == NULL)
+    if (rwlock == NULL) {
 		return NULL;
+}
 
 	rwlock->rw_rank = lock_rank;
 	if (lock_name != NULL) {
@@ -175,8 +177,9 @@ PR_DestroyRWLock(PRRWLock *rwlock)
 	PR_DestroyCondVar(rwlock->rw_writer_waitq);	
 	PR_DestroyLock(rwlock->rw_lock);
 #endif
-	if (rwlock->rw_name != NULL)
+	if (rwlock->rw_name != NULL) {
 		PR_Free(rwlock->rw_name);
+}
     PR_DELETE(rwlock);
 }
 
@@ -320,8 +323,9 @@ int err;
 			/*
 			 * lock is not read-locked anymore; wakeup a waiting writer
 			 */
-			if (rwlock->rw_writer_cnt > 0)
+			if (rwlock->rw_writer_cnt > 0) {
 				PR_NotifyCondVar(rwlock->rw_writer_waitq);
+}
 		}
 	} else {
 		PR_ASSERT(rwlock->rw_lock_cnt == -1);
@@ -334,13 +338,14 @@ int err;
 		/*
 		 * wakeup a writer, if present; preference for writers
 		 */
-		if (rwlock->rw_writer_cnt > 0)
+		if (rwlock->rw_writer_cnt > 0) {
 			PR_NotifyCondVar(rwlock->rw_writer_waitq);
 		/*
 		 * else, wakeup all readers, if any
 		 */
-		else if (rwlock->rw_reader_cnt > 0)
+		} else if (rwlock->rw_reader_cnt > 0) {
 			PR_NotifyAllCondVar(rwlock->rw_reader_waitq);
+}
 	}
 	PR_Unlock(rwlock->rw_lock);
 #endif

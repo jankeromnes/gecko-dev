@@ -479,7 +479,8 @@ static void quantize_fp_helper_c(
         dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant / (1 << log_scale);
       }
 
-      if (tmp32) eob = i;
+      if (tmp32) { eob = i;
+}
     }
   }
   *eob_ptr = eob + 1;
@@ -523,7 +524,8 @@ static void highbd_quantize_fp_helper_c(
           (int)((tmp * quant_ptr[rc != 0] * wt) >> (shift + AOM_QM_BITS));
       qcoeff_ptr[rc] = (tran_low_t)((abs_qcoeff ^ coeff_sign) - coeff_sign);
       dqcoeff_ptr[rc] = qcoeff_ptr[rc] * dequant / scale;
-      if (abs_qcoeff) eob = i;
+      if (abs_qcoeff) { eob = i;
+}
     }
   }
   *eob_ptr = eob + 1;
@@ -690,7 +692,8 @@ static void quantize_dc(const tran_low_t *coeff_ptr, int n_coeffs,
     qcoeff_ptr[rc] = (tmp32 ^ coeff_sign) - coeff_sign;
     dequant = (dequant_ptr * iwt + (1 << (AOM_QM_BITS - 1))) >> AOM_QM_BITS;
     dqcoeff_ptr[rc] = (qcoeff_ptr[rc] * dequant) / (1 << log_scale);
-    if (tmp32) eob = 0;
+    if (tmp32) { eob = 0;
+}
   }
   *eob_ptr = eob + 1;
 }
@@ -955,7 +958,8 @@ static INLINE void highbd_quantize_dc(
         (dequant_ptr * iwt + (1 << (AOM_QM_BITS - 1))) >> AOM_QM_BITS;
 
     dqcoeff_ptr[0] = (qcoeff_ptr[0] * dequant) / (1 << log_scale);
-    if (abs_qcoeff) eob = 0;
+    if (abs_qcoeff) { eob = 0;
+}
   }
   *eob_ptr = eob + 1;
 }
@@ -1513,7 +1517,8 @@ static void invert_quant(int16_t *quant, int16_t *shift, int d) {
   uint32_t t;
   int l, m;
   t = d;
-  for (l = 0; t > 1; l++) t >>= 1;
+  for (l = 0; t > 1; l++) { t >>= 1;
+}
   m = 1 + (1 << (16 + l)) / d;
   *quant = (int16_t)(m - (1 << 16));
   *shift = 1 << (16 - l);
@@ -1730,8 +1735,9 @@ int av1_quantizer_to_qindex(int quantizer) {
 int av1_qindex_to_quantizer(int qindex) {
   int quantizer;
 
-  for (quantizer = 0; quantizer < 64; ++quantizer)
-    if (quantizer_to_qindex[quantizer] >= qindex) return quantizer;
+  for (quantizer = 0; quantizer < 64; ++quantizer) {
+    if (quantizer_to_qindex[quantizer] >= qindex) { return quantizer;
+}
 
   return 63;
 }

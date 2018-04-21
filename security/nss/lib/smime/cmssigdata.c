@@ -33,8 +33,9 @@ NSS_CMSSignedData_Create(NSSCMSMessage *cmsg)
     mark = PORT_ArenaMark(poolp);
 
     sigd = (NSSCMSSignedData *)PORT_ArenaZAlloc(poolp, sizeof(NSSCMSSignedData));
-    if (sigd == NULL)
+    if (sigd == NULL) {
         goto loser;
+}
 
     sigd->cmsg = cmsg;
 
@@ -56,8 +57,9 @@ NSS_CMSSignedData_Destroy(NSSCMSSignedData *sigd)
     CERTCertificateList **certlists, *certlist;
     NSSCMSSignerInfo **signerinfos, *si;
 
-    if (sigd == NULL)
+    if (sigd == NULL) {
         return;
+}
 
     certs = sigd->certs;
     tempCerts = sigd->tempCerts;
@@ -65,23 +67,27 @@ NSS_CMSSignedData_Destroy(NSSCMSSignedData *sigd)
     signerinfos = sigd->signerInfos;
 
     if (certs != NULL) {
-        while ((cert = *certs++) != NULL)
+        while ((cert = *certs++) != NULL) {
             CERT_DestroyCertificate(cert);
+}
     }
 
     if (tempCerts != NULL) {
-        while ((cert = *tempCerts++) != NULL)
+        while ((cert = *tempCerts++) != NULL) {
             CERT_DestroyCertificate(cert);
+}
     }
 
     if (certlists != NULL) {
-        while ((certlist = *certlists++) != NULL)
+        while ((certlist = *certlists++) != NULL) {
             CERT_DestroyCertificateList(certlist);
+}
     }
 
     if (signerinfos != NULL) {
-        while ((si = *signerinfos++) != NULL)
+        while ((si = *signerinfos++) != NULL) {
             NSS_CMSSignerInfo_Destroy(si);
+}
     }
 
     /* everything's in a pool, so don't worry about the storage */
@@ -122,26 +128,30 @@ NSS_CMSSignedData_Encode_BeforeStart(NSSCMSSignedData *sigd)
     /* a chunk of data for each of those algorithms */
     if (sigd->digestAlgorithms != NULL && sigd->digests != NULL) {
         for (i = 0; sigd->digestAlgorithms[i] != NULL; i++) {
-            if (sigd->digests[i] == NULL)
+            if (sigd->digests[i] == NULL) {
                 break;
+}
         }
-        if (sigd->digestAlgorithms[i] == NULL) /* reached the end of the array? */
+        if (sigd->digestAlgorithms[i] == NULL) { /* reached the end of the array? */
             haveDigests = PR_TRUE;             /* yes: we must have all the digests */
+}
     }
 
     version = NSS_CMS_SIGNED_DATA_VERSION_BASIC;
 
     /* RFC2630 5.1 "version is the syntax version number..." */
-    if (NSS_CMSContentInfo_GetContentTypeTag(&(sigd->contentInfo)) != SEC_OID_PKCS7_DATA)
+    if (NSS_CMSContentInfo_GetContentTypeTag(&(sigd->contentInfo)) != SEC_OID_PKCS7_DATA) {
         version = NSS_CMS_SIGNED_DATA_VERSION_EXT;
+}
 
     /* prepare all the SignerInfos (there may be none) */
     for (i = 0; i < NSS_CMSSignedData_SignerInfoCount(sigd); i++) {
         signerinfo = NSS_CMSSignedData_GetSignerInfo(sigd, i);
 
         /* RFC2630 5.1 "version is the syntax version number..." */
-        if (NSS_CMSSignerInfo_GetVersion(signerinfo) != NSS_CMS_SIGNER_INFO_VERSION_ISSUERSN)
+        if (NSS_CMSSignerInfo_GetVersion(signerinfo) != NSS_CMS_SIGNER_INFO_VERSION_ISSUERSN) {
             version = NSS_CMS_SIGNED_DATA_VERSION_EXT;
+}
 
         /* collect digestAlgorithms from SignerInfos */
         /* (we need to know which algorithms we have when the content comes in) */
@@ -155,23 +165,26 @@ NSS_CMSSignedData_Encode_BeforeStart(NSSCMSSignedData *sigd)
         } else if (n < 0) {
             /* add the digestAlgorithm & a NULL digest */
             rv = NSS_CMSSignedData_AddDigest(poolp, sigd, digestalgtag, NULL);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 goto loser;
+}
         } else {
             /* found it, nothing to do */
         }
     }
 
     dummy = SEC_ASN1EncodeInteger(poolp, &(sigd->version), (long)version);
-    if (dummy == NULL)
+    if (dummy == NULL) {
         return SECFailure;
+}
 
     /* this is a SET OF, so we need to sort them guys */
     rv = NSS_CMSArray_SortByDER((void **)sigd->digestAlgorithms,
                                 SEC_ASN1_GET(SECOID_AlgorithmIDTemplate),
                                 (void **)sigd->digests);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
 
     return SECSuccess;
 
@@ -197,8 +210,9 @@ NSS_CMSSignedData_Encode_BeforeData(NSSCMSSignedData *sigd)
     } else if (sigd->digestAlgorithms != NULL) {
         sigd->contentInfo.privateInfo->digcx =
             NSS_CMSDigestContext_StartMultiple(sigd->digestAlgorithms);
-        if (sigd->contentInfo.privateInfo->digcx == NULL)
+        if (sigd->contentInfo.privateInfo->digcx == NULL) {
             return SECFailure;
+}
     }
     return SECSuccess;
 }
@@ -242,8 +256,9 @@ NSS_CMSSignedData_Encode_AfterData(NSSCMSSignedData *sigd)
                                                  &(sigd->digests));
         /* error has been set by NSS_CMSDigestContext_FinishMultiple */
         cinfo->privateInfo->digcx = NULL;
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
 
     signerinfos = sigd->signerInfos;
@@ -267,24 +282,28 @@ NSS_CMSSignedData_Encode_AfterData(NSSCMSSignedData *sigd)
          * collection...") */
 
         /* pass contentType here as we want a contentType attribute */
-        if ((contentType = NSS_CMSContentInfo_GetContentTypeOID(cinfo)) == NULL)
+        if ((contentType = NSS_CMSContentInfo_GetContentTypeOID(cinfo)) == NULL) {
             goto loser;
+}
 
         /* sign the thing */
         rv = NSS_CMSSignerInfo_Sign(signerinfo, sigd->digests[n], contentType);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
 
         /* while we're at it, count number of certs in certLists */
         certlist = NSS_CMSSignerInfo_GetCertList(signerinfo);
-        if (certlist)
+        if (certlist) {
             certcount += certlist->len;
+}
     }
 
     /* this is a SET OF, so we need to sort them guys */
     rv = NSS_CMSArray_SortByDER((void **)signerinfos, NSSCMSSignerInfoTemplate, NULL);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /*
      * now prepare certs & crls
@@ -292,13 +311,15 @@ NSS_CMSSignedData_Encode_AfterData(NSSCMSSignedData *sigd)
 
     /* count the rest of the certs */
     if (sigd->certs != NULL) {
-        for (ci = 0; sigd->certs[ci] != NULL; ci++)
+        for (ci = 0; sigd->certs[ci] != NULL; ci++) {
             certcount++;
+}
     }
 
     if (sigd->certLists != NULL) {
-        for (cli = 0; sigd->certLists[cli] != NULL; cli++)
+        for (cli = 0; sigd->certLists[cli] != NULL; cli++) {
             certcount += sigd->certLists[cli]->len;
+}
     }
 
     if (certcount == 0) {
@@ -314,8 +335,9 @@ NSS_CMSSignedData_Encode_AfterData(NSSCMSSignedData *sigd)
          *  SetOfDERcertficates implementation
          */
         sigd->rawCerts = (SECItem **)PORT_ArenaAlloc(poolp, (certcount + 1) * sizeof(SECItem *));
-        if (sigd->rawCerts == NULL)
+        if (sigd->rawCerts == NULL) {
             return SECFailure;
+}
 
         /*
          * XXX Want to check for duplicates and not add *any* cert that is
@@ -330,20 +352,23 @@ NSS_CMSSignedData_Encode_AfterData(NSSCMSSignedData *sigd)
         if (signerinfos != NULL) {
             for (si = 0; signerinfos[si] != NULL; si++) {
                 signerinfo = signerinfos[si];
-                for (ci = 0; ci < signerinfo->certList->len; ci++)
+                for (ci = 0; ci < signerinfo->certList->len; ci++) {
                     sigd->rawCerts[rci++] = &(signerinfo->certList->certs[ci]);
+}
             }
         }
 
         if (sigd->certs != NULL) {
-            for (ci = 0; sigd->certs[ci] != NULL; ci++)
+            for (ci = 0; sigd->certs[ci] != NULL; ci++) {
                 sigd->rawCerts[rci++] = &(sigd->certs[ci]->derCert);
+}
         }
 
         if (sigd->certLists != NULL) {
             for (cli = 0; sigd->certLists[cli] != NULL; cli++) {
-                for (ci = 0; ci < sigd->certLists[cli]->len; ci++)
+                for (ci = 0; ci < sigd->certLists[cli]->len; ci++) {
                     sigd->rawCerts[rci++] = &(sigd->certLists[cli]->certs[ci]);
+}
             }
         }
 
@@ -393,8 +418,9 @@ NSS_CMSSignedData_Decode_BeforeData(NSSCMSSignedData *sigd)
     if (sigd->digestAlgorithms != NULL && sigd->digests == NULL) {
         /* if digests are already there, do nothing */
         sigd->contentInfo.privateInfo->digcx = NSS_CMSDigestContext_StartMultiple(sigd->digestAlgorithms);
-        if (sigd->contentInfo.privateInfo->digcx == NULL)
+        if (sigd->contentInfo.privateInfo->digcx == NULL) {
             return SECFailure;
+}
     }
     return SECSuccess;
 }
@@ -443,8 +469,9 @@ NSS_CMSSignedData_Decode_AfterEnd(NSSCMSSignedData *sigd)
 
     /* set cmsg for all the signerinfos */
     if (signerinfos) {
-        for (i = 0; signerinfos[i] != NULL; i++)
+        for (i = 0; signerinfos[i] != NULL; i++) {
             signerinfos[i]->cmsg = sigd->cmsg;
+}
     }
 
     return SECSuccess;
@@ -552,8 +579,9 @@ NSS_CMSSignedData_ImportCerts(NSSCMSSignedData *sigd, CERTCertDBHandle *certdb,
     /* save the certs so they don't get destroyed */
     for (i = 0; i < certcount; i++) {
         CERTCertificate *cert = certArray[i];
-        if (cert)
+        if (cert) {
             NSS_CMSSignedData_AddTempCertificate(sigd, cert);
+}
     }
 
     if (!keepcerts) {
@@ -568,10 +596,12 @@ NSS_CMSSignedData_ImportCerts(NSSCMSSignedData *sigd, CERTCertDBHandle *certdb,
     }
     for (i = 0; i < certcount; i++) {
         CERTCertificate *cert = certArray[i];
-        if (cert)
+        if (cert) {
             cert = CERT_DupCertificate(cert);
-        if (cert)
+}
+        if (cert) {
             CERT_AddCertToListTail(certList, cert);
+}
     }
 
     /* filter out the certs we don't want */
@@ -624,9 +654,10 @@ NSS_CMSSignedData_ImportCerts(NSSCMSSignedData *sigd, CERTCertDBHandle *certdb,
 done:
     if (sigd->signerInfos != NULL) {
         /* fill in all signerinfo's certs */
-        for (i = 0; sigd->signerInfos[i] != NULL; i++)
+        for (i = 0; sigd->signerInfos[i] != NULL; i++) {
             (void)NSS_CMSSignerInfo_GetSigningCertificate(
                 sigd->signerInfos[i], certdb);
+}
     }
 
 loser:
@@ -677,8 +708,9 @@ NSS_CMSSignedData_VerifySignerInfo(NSSCMSSignedData *sigd, int i,
 
     /* verify certificate */
     rv = NSS_CMSSignerInfo_VerifyCertificate(signerinfo, certdb, certusage);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv; /* error is set */
+}
 
     /* find digest and contentType for signerinfo */
     algiddata = NSS_CMSSignerInfo_GetDigestAlg(signerinfo);
@@ -784,8 +816,9 @@ NSS_CMSSignedData_AddCertChain(NSSCMSSignedData *sigd, CERTCertificate *cert)
 
     /* do not include root */
     certlist = CERT_CertChainFromCert(cert, usage, PR_FALSE);
-    if (certlist == NULL)
+    if (certlist == NULL) {
         return SECFailure;
+}
 
     rv = NSS_CMSSignedData_AddCertList(sigd, certlist);
 
@@ -831,12 +864,13 @@ NSS_CMSSignedData_ContainsCertsOrCrls(NSSCMSSignedData *sigd)
         PORT_SetError(SEC_ERROR_INVALID_ARGS);
         return PR_FALSE;
     }
-    if (sigd->rawCerts != NULL && sigd->rawCerts[0] != NULL)
+    if (sigd->rawCerts != NULL && sigd->rawCerts[0] != NULL) {
         return PR_TRUE;
-    else if (sigd->crls != NULL && sigd->crls[0] != NULL)
+    } else if (sigd->crls != NULL && sigd->crls[0] != NULL) {
         return PR_TRUE;
-    else
+    } else {
         return PR_FALSE;
+}
 }
 
 SECStatus
@@ -859,8 +893,9 @@ NSS_CMSSignedData_AddSignerInfo(NSSCMSSignedData *sigd,
 
     /* add signerinfo */
     rv = NSS_CMSArray_Add(poolp, (void ***)&(sigd->signerInfos), (void *)signerinfo);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /*
      * add empty digest
@@ -870,8 +905,9 @@ NSS_CMSSignedData_AddSignerInfo(NSSCMSSignedData *sigd,
      */
     digestalgtag = NSS_CMSSignerInfo_GetDigestAlgTag(signerinfo);
     rv = NSS_CMSSignedData_SetDigestValue(sigd, digestalgtag, NULL);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /*
      * The last thing to get consistency would be adding the digest.
@@ -971,8 +1007,9 @@ NSS_CMSSignedData_SetDigestValue(NSSCMSSignedData *sigd,
         digest = (SECItem *)PORT_ArenaZAlloc(poolp, sizeof(SECItem));
 
         /* copy digestdata item to arena (in case we have it and are not only making room) */
-        if (SECITEM_CopyItem(poolp, digest, digestdata) != SECSuccess)
+        if (SECITEM_CopyItem(poolp, digest, digestdata) != SECSuccess) {
             goto loser;
+}
     }
 
     /* now allocate one (same size as digestAlgorithms) */
@@ -986,13 +1023,15 @@ NSS_CMSSignedData_SetDigestValue(NSSCMSSignedData *sigd,
     }
 
     n = -1;
-    if (sigd->digestAlgorithms != NULL)
+    if (sigd->digestAlgorithms != NULL) {
         n = NSS_CMSAlgArray_GetIndexByAlgTag(sigd->digestAlgorithms, digestalgtag);
+}
 
     /* if not found, add a digest */
     if (n < 0) {
-        if (NSS_CMSSignedData_AddDigest(poolp, sigd, digestalgtag, digest) != SECSuccess)
+        if (NSS_CMSSignedData_AddDigest(poolp, sigd, digestalgtag, digest) != SECSuccess) {
             goto loser;
+}
     } else {
         /* replace NULL pointer with digest item (and leak previous value) */
         sigd->digests[n] = digest;
@@ -1023,11 +1062,13 @@ NSS_CMSSignedData_AddDigest(PLArenaPool *poolp,
     mark = PORT_ArenaMark(poolp);
 
     digestalg = PORT_ArenaZAlloc(poolp, sizeof(SECAlgorithmID));
-    if (digestalg == NULL)
+    if (digestalg == NULL) {
         goto loser;
+}
 
-    if (SECOID_SetAlgorithmID(poolp, digestalg, digestalgtag, NULL) != SECSuccess) /* no params */
+    if (SECOID_SetAlgorithmID(poolp, digestalg, digestalgtag, NULL) != SECSuccess) { /* no params */
         goto loser;
+}
 
     if (NSS_CMSArray_Add(poolp, (void ***)&(sigd->digestAlgorithms),
                          (void *)digestalg) != SECSuccess ||
@@ -1099,8 +1140,9 @@ NSS_CMSSignedData_CreateCertsOnly(NSSCMSMessage *cmsg, CERTCertificate *cert, PR
     mark = PORT_ArenaMark(poolp);
 
     sigd = NSS_CMSSignedData_Create(cmsg);
-    if (sigd == NULL)
+    if (sigd == NULL) {
         goto loser;
+}
 
     /* no signerinfos, thus no digestAlgorithms */
 
@@ -1110,8 +1152,9 @@ NSS_CMSSignedData_CreateCertsOnly(NSSCMSMessage *cmsg, CERTCertificate *cert, PR
     } else {
         rv = NSS_CMSSignedData_AddCertificate(sigd, cert);
     }
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* RFC2630 5.2 sez:
      * In the degenerate case where there are no signers, the
@@ -1121,15 +1164,17 @@ NSS_CMSSignedData_CreateCertsOnly(NSSCMSMessage *cmsg, CERTCertificate *cert, PR
      * field of the EncapsulatedContentInfo value should be omitted.
      */
     rv = NSS_CMSContentInfo_SetContent_Data(cmsg, &(sigd->contentInfo), NULL, PR_TRUE);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return sigd;
 
 loser:
-    if (sigd)
+    if (sigd) {
         NSS_CMSSignedData_Destroy(sigd);
+}
     PORT_ArenaRelease(poolp, mark);
     return NULL;
 }

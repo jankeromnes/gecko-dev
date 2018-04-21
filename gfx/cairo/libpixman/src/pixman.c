@@ -168,14 +168,18 @@ clip_general_image (pixman_region32_t * region,
 	pixman_box32_t *  cbox = pixman_region32_rectangles (clip, NULL);
 	int v;
 
-	if (rbox->x1 < (v = cbox->x1 + dx))
+	if (rbox->x1 < (v = cbox->x1 + dx)) {
 	    rbox->x1 = v;
-	if (rbox->x2 > (v = cbox->x2 + dx))
+}
+	if (rbox->x2 > (v = cbox->x2 + dx)) {
 	    rbox->x2 = v;
-	if (rbox->y1 < (v = cbox->y1 + dy))
+}
+	if (rbox->y1 < (v = cbox->y1 + dy)) {
 	    rbox->y1 = v;
-	if (rbox->y2 > (v = cbox->y2 + dy))
+}
+	if (rbox->y2 > (v = cbox->y2 + dy)) {
 	    rbox->y2 = v;
+}
 	if (rbox->x1 >= rbox->x2 || rbox->y1 >= rbox->y2)
 	{
 	    pixman_region32_init (region);
@@ -188,14 +192,17 @@ clip_general_image (pixman_region32_t * region,
     }
     else
     {
-	if (dx || dy)
+	if (dx || dy) {
 	    pixman_region32_translate (region, -dx, -dy);
+}
 
-	if (!pixman_region32_intersect (region, region, clip))
+	if (!pixman_region32_intersect (region, region, clip)) {
 	    return FALSE;
+}
 
-	if (dx || dy)
+	if (dx || dy) {
 	    pixman_region32_translate (region, dx, dy);
+}
     }
 
     return pixman_region32_not_empty (region);
@@ -212,8 +219,9 @@ clip_source_image (pixman_region32_t * region,
      * the clip was not set by a client, then it is a hierarchy
      * clip and those should always be ignored for sources).
      */
-    if (!image->common.clip_sources || !image->common.client_clip)
+    if (!image->common.clip_sources || !image->common.client_clip) {
 	return TRUE;
+}
 
     return clip_general_image (region,
                                &image->common.clip_region,
@@ -263,8 +271,9 @@ _pixman_compute_composite_region32 (pixman_region32_t * region,
 
     if (dest_image->common.have_clip_region)
     {
-	if (!clip_general_image (region, &dest_image->common.clip_region, 0, 0))
+	if (!clip_general_image (region, &dest_image->common.clip_region, 0, 0)) {
 	    return FALSE;
+}
     }
 
     if (dest_image->common.alpha_map)
@@ -277,8 +286,9 @@ _pixman_compute_composite_region32 (pixman_region32_t * region,
 	{
 	    return FALSE;
 	}
-	if (!pixman_region32_not_empty (region))
+	if (!pixman_region32_not_empty (region)) {
 	    return FALSE;
+}
 	if (dest_image->common.alpha_map->common.have_clip_region)
 	{
 	    if (!clip_general_image (region, &dest_image->common.alpha_map->common.clip_region,
@@ -293,8 +303,9 @@ _pixman_compute_composite_region32 (pixman_region32_t * region,
     /* clip against src */
     if (src_image->common.have_clip_region)
     {
-	if (!clip_source_image (region, src_image, dest_x - src_x, dest_y - src_y))
+	if (!clip_source_image (region, src_image, dest_x - src_x, dest_y - src_y)) {
 	    return FALSE;
+}
     }
     if (src_image->common.alpha_map && src_image->common.alpha_map->common.have_clip_region)
     {
@@ -308,8 +319,9 @@ _pixman_compute_composite_region32 (pixman_region32_t * region,
     /* clip against mask */
     if (mask_image && mask_image->common.have_clip_region)
     {
-	if (!clip_source_image (region, mask_image, dest_x - mask_x, dest_y - mask_y))
+	if (!clip_source_image (region, mask_image, dest_x - mask_x, dest_y - mask_y)) {
 	    return FALSE;
+}
 
 	if (mask_image->common.alpha_map && mask_image->common.alpha_map->common.have_clip_region)
 	{
@@ -369,20 +381,25 @@ compute_transformed_extents (pixman_transform_t *transform,
 	v.vector[1] = (i & 0x02)? y1 : y2;
 	v.vector[2] = pixman_fixed_1;
 
-	if (!pixman_transform_point (transform, &v))
+	if (!pixman_transform_point (transform, &v)) {
 	    return FALSE;
+}
 
 	tx = (pixman_fixed_48_16_t)v.vector[0];
 	ty = (pixman_fixed_48_16_t)v.vector[1];
 
-	if (tx < tx1)
+	if (tx < tx1) {
 	    tx1 = tx;
-	if (ty < ty1)
+}
+	if (ty < ty1) {
 	    ty1 = ty;
-	if (tx > tx2)
+}
+	if (tx > tx2) {
 	    tx2 = tx;
-	if (ty > ty2)
+}
+	if (ty > ty2) {
 	    ty2 = ty;
+}
     }
 
     transformed->x1 = tx1;
@@ -409,8 +426,9 @@ analyze_extent (pixman_image_t       *image,
     box_48_16_t transformed;
     pixman_box32_t exp_extents;
 
-    if (!image)
+    if (!image) {
 	return TRUE;
+}
 
     /* Some compositing functions walk one step
      * outside the destination rectangle, so we
@@ -432,8 +450,9 @@ analyze_extent (pixman_image_t       *image,
 	 * width/height of an image to fixed 16.16, so we need
 	 * them to be smaller than 16 bits.
 	 */
-	if (image->bits.width >= 0x7fff	|| image->bits.height >= 0x7fff)
+	if (image->bits.width >= 0x7fff	|| image->bits.height >= 0x7fff) {
 	    return FALSE;
+}
 
 	if ((image->common.flags & FAST_PATH_ID_TRANSFORM) == FAST_PATH_ID_TRANSFORM &&
 	    extents->x1 >= 0 &&
@@ -492,8 +511,9 @@ analyze_extent (pixman_image_t       *image,
 	height = 0;
     }
 
-    if (!compute_transformed_extents (transform, extents, &transformed))
+    if (!compute_transformed_extents (transform, extents, &transformed)) {
 	return FALSE;
+}
 
     /* Expand the source area by a tiny bit so account of different rounding that
      * may happen during sampling. Note that (8 * pixman_fixed_e) is very far from
@@ -533,8 +553,9 @@ analyze_extent (pixman_image_t       *image,
     exp_extents.x2 += 1;
     exp_extents.y2 += 1;
 
-    if (!compute_transformed_extents (transform, &exp_extents, &transformed))
+    if (!compute_transformed_extents (transform, &exp_extents, &transformed)) {
 	return FALSE;
+}
     
     if (!IS_16_16 (transformed.x1 + x_off - 8 * pixman_fixed_e)	||
 	!IS_16_16 (transformed.y1 + y_off - 8 * pixman_fixed_e)	||
@@ -590,8 +611,9 @@ pixman_image_composite32 (pixman_op_t      op,
     int n;
 
     _pixman_image_validate (src);
-    if (mask)
+    if (mask) {
 	_pixman_image_validate (mask);
+}
     _pixman_image_validate (dest);
 
     src_format = src->common.extended_format_code;
@@ -618,10 +640,11 @@ pixman_image_composite32 (pixman_op_t      op,
 	(info.src_flags & info.mask_flags & FAST_PATH_ID_TRANSFORM)	   &&
 	(src_x == mask_x && src_y == mask_y))
     {
-	if (src_format == PIXMAN_x8b8g8r8)
+	if (src_format == PIXMAN_x8b8g8r8) {
 	    src_format = mask_format = PIXMAN_pixbuf;
-	else if (src_format == PIXMAN_x8r8g8b8)
+	} else if (src_format == PIXMAN_x8r8g8b8) {
 	    src_format = mask_format = PIXMAN_rpixbuf;
+}
     }
 
     pixman_region32_init (&region);
@@ -640,16 +663,18 @@ pixman_image_composite32 (pixman_op_t      op,
     extents.x2 -= dest_x - src_x;
     extents.y2 -= dest_y - src_y;
 
-    if (!analyze_extent (src, &extents, &info.src_flags))
+    if (!analyze_extent (src, &extents, &info.src_flags)) {
 	goto out;
+}
 
     extents.x1 -= src_x - mask_x;
     extents.y1 -= src_y - mask_y;
     extents.x2 -= src_x - mask_x;
     extents.y2 -= src_y - mask_y;
 
-    if (!analyze_extent (mask, &extents, &info.mask_flags))
+    if (!analyze_extent (mask, &extents, &info.mask_flags)) {
 	goto out;
+}
 
     /* If the clip is within the source samples, and the samples are
      * opaque, then the source is effectively opaque.
@@ -814,16 +839,18 @@ color_to_pixel (const pixman_color_t *color,
 	    ((c & 0x0000ff00) <<  8) |
 	    ((c & 0x000000ff) << 24);
     }
-    if (PIXMAN_FORMAT_TYPE (format) == PIXMAN_TYPE_RGBA)
+    if (PIXMAN_FORMAT_TYPE (format) == PIXMAN_TYPE_RGBA) {
 	c = ((c & 0xff000000) >> 24) | (c << 8);
+}
 
-    if (format == PIXMAN_a1)
+    if (format == PIXMAN_a1) {
 	c = c >> 31;
-    else if (format == PIXMAN_a8)
+    } else if (format == PIXMAN_a8) {
 	c = c >> 24;
-    else if (format == PIXMAN_r5g6b5 ||
-             format == PIXMAN_b5g6r5)
+    } else if (format == PIXMAN_r5g6b5 ||
+             format == PIXMAN_b5g6r5) {
 	c = convert_8888_to_0565 (c);
+}
 
 #if 0
     printf ("color: %x %x %x %x\n", color->alpha, color->red, color->green, color->blue);
@@ -849,8 +876,9 @@ pixman_image_fill_rectangles (pixman_op_t                 op,
     if (n_rects > 6)
     {
         boxes = pixman_malloc_ab (sizeof (pixman_box32_t), n_rects);
-        if (boxes == NULL)
+        if (boxes == NULL) {
             return FALSE;
+}
     }
     else
     {
@@ -867,8 +895,9 @@ pixman_image_fill_rectangles (pixman_op_t                 op,
 
     result = pixman_image_fill_boxes (op, dest, color, n_rects, boxes);
 
-    if (boxes != stack_boxes)
+    if (boxes != stack_boxes) {
         free (boxes);
+}
     
     return result;
 }
@@ -888,8 +917,9 @@ pixman_image_fill_boxes (pixman_op_t           op,
     
     if (color->alpha == 0xffff)
     {
-        if (op == PIXMAN_OP_OVER)
+        if (op == PIXMAN_OP_OVER) {
             op = PIXMAN_OP_SRC;
+}
     }
 
     if (op == PIXMAN_OP_CLEAR)
@@ -914,15 +944,17 @@ pixman_image_fill_boxes (pixman_op_t           op,
             int n_rects, j;
             pixman_box32_t *rects;
 
-            if (!pixman_region32_init_rects (&fill_region, boxes, n_boxes))
+            if (!pixman_region32_init_rects (&fill_region, boxes, n_boxes)) {
                 return FALSE;
+}
 
             if (dest->common.have_clip_region)
             {
                 if (!pixman_region32_intersect (&fill_region,
                                                 &fill_region,
-                                                &dest->common.clip_region))
+                                                &dest->common.clip_region)) {
                     return FALSE;
+}
             }
 
             rects = pixman_region32_rectangles (&fill_region, &n_rects);
@@ -940,8 +972,9 @@ pixman_image_fill_boxes (pixman_op_t           op,
     }
 
     solid = pixman_image_create_solid_fill (color);
-    if (!solid)
+    if (!solid) {
         return FALSE;
+}
 
     for (i = 0; i < n_boxes; ++i)
     {
@@ -1094,8 +1127,9 @@ PIXMAN_EXPORT pixman_bool_t
 pixman_format_supported_destination (pixman_format_code_t format)
 {
     /* YUV formats cannot be written to at the moment */
-    if (format == PIXMAN_yuy2 || format == PIXMAN_yv12)
+    if (format == PIXMAN_yuy2 || format == PIXMAN_yv12) {
 	return FALSE;
+}
 
     return pixman_format_supported_source (format);
 }
@@ -1126,8 +1160,9 @@ pixman_compute_composite_region (pixman_region16_t * region,
 
     if (retval)
     {
-	if (!pixman_region16_copy_from_region32 (region, &r32))
+	if (!pixman_region16_copy_from_region32 (region, &r32)) {
 	    retval = FALSE;
+}
     }
 
     pixman_region32_fini (&r32);

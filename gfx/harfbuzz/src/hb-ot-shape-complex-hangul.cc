@@ -55,8 +55,9 @@ collect_features_hangul (hb_ot_shape_planner_t *plan)
 {
   hb_ot_map_builder_t *map = &plan->map;
 
-  for (unsigned int i = FIRST_HANGUL_FEATURE; i < HANGUL_FEATURE_COUNT; i++)
+  for (unsigned int i = FIRST_HANGUL_FEATURE; i < HANGUL_FEATURE_COUNT; i++) {
     map->add_feature (hangul_features[i], 1, F_NONE);
+}
 }
 
 static void
@@ -79,11 +80,13 @@ static void *
 data_create_hangul (const hb_ot_shape_plan_t *plan)
 {
   hangul_shape_plan_t *hangul_plan = (hangul_shape_plan_t *) calloc (1, sizeof (hangul_shape_plan_t));
-  if (unlikely (!hangul_plan))
+  if (unlikely (!hangul_plan)) {
     return nullptr;
+}
 
-  for (unsigned int i = 0; i < HANGUL_FEATURE_COUNT; i++)
+  for (unsigned int i = 0; i < HANGUL_FEATURE_COUNT; i++) {
     hangul_plan->mask_array[i] = plan->map.get_1_mask (hangul_features[i]);
+}
 
   return hangul_plan;
 }
@@ -254,10 +257,11 @@ preprocess_text_hangul (const hb_ot_shape_plan_t *plan,
 	if (buffer->idx + 2 < count)
 	{
 	  t = buffer->cur(+2).codepoint;
-	  if (isT (t))
+	  if (isT (t)) {
 	    tindex = t - TBase; /* Only used if isCombiningT (t); otherwise invalid. */
-	  else
+	  } else {
 	    t = 0; /* The next character was not a trailing jamo. */
+}
 	}
 	buffer->unsafe_to_break (buffer->idx, buffer->idx + (t ? 3 : 2));
 
@@ -269,8 +273,9 @@ preprocess_text_hangul (const hb_ot_shape_plan_t *plan,
 	  if (font->has_glyph (s))
 	  {
 	    buffer->replace_glyphs (t ? 3 : 2, 1, &s);
-	    if (unlikely (buffer->in_error))
+	    if (unlikely (buffer->in_error)) {
 	      return;
+}
 	    end = start + 1;
 	    continue;
 	  }
@@ -291,10 +296,12 @@ preprocess_text_hangul (const hb_ot_shape_plan_t *plan,
 	  buffer->next_glyph ();
 	  end = start + 3;
 	}
-	else
+	else {
 	  end = start + 2;
-	if (buffer->cluster_level == HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES)
+}
+	if (buffer->cluster_level == HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES) {
 	  buffer->merge_out_clusters (start, end);
+}
 	continue;
       }
     }
@@ -319,13 +326,15 @@ preprocess_text_hangul (const hb_ot_shape_plan_t *plan,
 	if (font->has_glyph (new_s))
 	{
 	  buffer->replace_glyphs (2, 1, &new_s);
-	  if (unlikely (buffer->in_error))
+	  if (unlikely (buffer->in_error)) {
 	    return;
+}
 	  end = start + 1;
 	  continue;
 	}
-	else
+	else {
 	  buffer->unsafe_to_break (buffer->idx, buffer->idx + 2); /* Mark unsafe between LV and T. */
+}
       }
 
       /* Otherwise, decompose if font doesn't support <LV> or <LVT>,
@@ -345,8 +354,9 @@ preprocess_text_hangul (const hb_ot_shape_plan_t *plan,
 	{
 	  unsigned int s_len = tindex ? 3 : 2;
 	  buffer->replace_glyphs (1, s_len, decomposed);
-	  if (unlikely (buffer->in_error))
+	  if (unlikely (buffer->in_error)) {
 	    return;
+}
 
 	  /* We decomposed S: apply jamo features to the individual glyphs
 	   * that are now in buffer->out_info.
@@ -366,14 +376,17 @@ preprocess_text_hangul (const hb_ot_shape_plan_t *plan,
 	  unsigned int i = start;
 	  info[i++].hangul_shaping_feature() = LJMO;
 	  info[i++].hangul_shaping_feature() = VJMO;
-	  if (i < end)
+	  if (i < end) {
 	    info[i++].hangul_shaping_feature() = TJMO;
-	  if (buffer->cluster_level == HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES)
+}
+	  if (buffer->cluster_level == HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES) {
 	    buffer->merge_out_clusters (start, end);
+}
 	  continue;
 	}
-	else if ((!tindex && buffer->idx + 1 < count && isT (buffer->cur(+1).codepoint)))
+	else if ((!tindex && buffer->idx + 1 < count && isT (buffer->cur(+1).codepoint))) {
 	  buffer->unsafe_to_break (buffer->idx, buffer->idx + 2); /* Mark unsafe between LV and T. */
+}
       }
 
       if (has_glyph)
@@ -404,8 +417,9 @@ setup_masks_hangul (const hb_ot_shape_plan_t *plan,
   {
     unsigned int count = buffer->len;
     hb_glyph_info_t *info = buffer->info;
-    for (unsigned int i = 0; i < count; i++, info++)
+    for (unsigned int i = 0; i < count; i++, info++) {
       info->mask |= hangul_plan->mask_array[info->hangul_shaping_feature()];
+}
   }
 
   HB_BUFFER_DEALLOCATE_VAR (buffer, hangul_shaping_feature);

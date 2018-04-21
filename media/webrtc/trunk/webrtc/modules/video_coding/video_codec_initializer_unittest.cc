@@ -95,8 +95,9 @@ class VideoCodecInitializerTest : public ::testing::Test {
 
     // Make sure temporal layers instances have been created.
     if (codec_out_.codecType == VideoCodecType::kVideoCodecVP8) {
-      if (!codec_out_.VP8()->tl_factory)
+      if (!codec_out_.VP8()->tl_factory) {
         return false;
+}
 
       for (int i = 0; i < codec_out_.numberOfSimulcastStreams; ++i) {
         temporal_layers_.emplace_back(codec_out_.VP8()->tl_factory->Create(

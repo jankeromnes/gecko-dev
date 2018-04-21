@@ -40,7 +40,8 @@ void vp9_iht4x4_16_add_c(const tran_low_t *input, uint8_t *dest, int stride,
 
   // inverse transform column vectors
   for (i = 0; i < 4; ++i) {
-    for (j = 0; j < 4; ++j) temp_in[j] = out[j * 4 + i];
+    for (j = 0; j < 4; ++j) { temp_in[j] = out[j * 4 + i];
+}
     IHT_4[tx_type].cols(temp_in, temp_out);
     for (j = 0; j < 4; ++j) {
       dest[j * stride + i] = clip_pixel_add(dest[j * stride + i],
@@ -73,7 +74,8 @@ void vp9_iht8x8_64_add_c(const tran_low_t *input, uint8_t *dest, int stride,
 
   // inverse transform column vectors
   for (i = 0; i < 8; ++i) {
-    for (j = 0; j < 8; ++j) temp_in[j] = out[j * 8 + i];
+    for (j = 0; j < 8; ++j) { temp_in[j] = out[j * 8 + i];
+}
     ht.cols(temp_in, temp_out);
     for (j = 0; j < 8; ++j) {
       dest[j * stride + i] = clip_pixel_add(dest[j * stride + i],
@@ -106,7 +108,8 @@ void vp9_iht16x16_256_add_c(const tran_low_t *input, uint8_t *dest, int stride,
 
   // Columns
   for (i = 0; i < 16; ++i) {
-    for (j = 0; j < 16; ++j) temp_in[j] = out[j * 16 + i];
+    for (j = 0; j < 16; ++j) { temp_in[j] = out[j * 16 + i];
+}
     ht.cols(temp_in, temp_out);
     for (j = 0; j < 16; ++j) {
       dest[j * stride + i] = clip_pixel_add(dest[j * stride + i],
@@ -118,18 +121,20 @@ void vp9_iht16x16_256_add_c(const tran_low_t *input, uint8_t *dest, int stride,
 // idct
 void vp9_idct4x4_add(const tran_low_t *input, uint8_t *dest, int stride,
                      int eob) {
-  if (eob > 1)
+  if (eob > 1) {
     vpx_idct4x4_16_add(input, dest, stride);
-  else
+  } else {
     vpx_idct4x4_1_add(input, dest, stride);
+}
 }
 
 void vp9_iwht4x4_add(const tran_low_t *input, uint8_t *dest, int stride,
                      int eob) {
-  if (eob > 1)
+  if (eob > 1) {
     vpx_iwht4x4_16_add(input, dest, stride);
-  else
+  } else {
     vpx_iwht4x4_1_add(input, dest, stride);
+}
 }
 
 void vp9_idct8x8_add(const tran_low_t *input, uint8_t *dest, int stride,
@@ -139,48 +144,52 @@ void vp9_idct8x8_add(const tran_low_t *input, uint8_t *dest, int stride,
 
   // The calculation can be simplified if there are not many non-zero dct
   // coefficients. Use eobs to decide what to do.
-  if (eob == 1)
+  if (eob == 1) {
     // DC only DCT coefficient
     vpx_idct8x8_1_add(input, dest, stride);
-  else if (eob <= 12)
+  } else if (eob <= 12) {
     vpx_idct8x8_12_add(input, dest, stride);
-  else
+  } else {
     vpx_idct8x8_64_add(input, dest, stride);
+}
 }
 
 void vp9_idct16x16_add(const tran_low_t *input, uint8_t *dest, int stride,
                        int eob) {
   /* The calculation can be simplified if there are not many non-zero dct
    * coefficients. Use eobs to separate different cases. */
-  if (eob == 1) /* DC only DCT coefficient. */
+  if (eob == 1) { /* DC only DCT coefficient. */
     vpx_idct16x16_1_add(input, dest, stride);
-  else if (eob <= 10)
+  } else if (eob <= 10) {
     vpx_idct16x16_10_add(input, dest, stride);
-  else
+  } else {
     vpx_idct16x16_256_add(input, dest, stride);
+}
 }
 
 void vp9_idct32x32_add(const tran_low_t *input, uint8_t *dest, int stride,
                        int eob) {
-  if (eob == 1)
+  if (eob == 1) {
     vpx_idct32x32_1_add(input, dest, stride);
-  else if (eob <= 34)
+  } else if (eob <= 34) {
     // non-zero coeff only in upper-left 8x8
     vpx_idct32x32_34_add(input, dest, stride);
-  else if (eob <= 135)
+  } else if (eob <= 135) {
     // non-zero coeff only in upper-left 16x16
     vpx_idct32x32_135_add(input, dest, stride);
-  else
+  } else {
     vpx_idct32x32_1024_add(input, dest, stride);
+}
 }
 
 // iht
 void vp9_iht4x4_add(TX_TYPE tx_type, const tran_low_t *input, uint8_t *dest,
                     int stride, int eob) {
-  if (tx_type == DCT_DCT)
+  if (tx_type == DCT_DCT) {
     vp9_idct4x4_add(input, dest, stride, eob);
-  else
+  } else {
     vp9_iht4x4_16_add(input, dest, stride, tx_type);
+}
 }
 
 void vp9_iht8x8_add(TX_TYPE tx_type, const tran_low_t *input, uint8_t *dest,

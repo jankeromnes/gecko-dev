@@ -86,17 +86,20 @@ PR_IMPLEMENT(PRStatus) PR_GetSystemInfo(PRSysInfo cmd, char *buf, PRUint32 bufle
 {
     PRUintn len = 0;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     switch(cmd)
     {
       case PR_SI_HOSTNAME:
       case PR_SI_HOSTNAME_UNTRUNCATED:
-        if (PR_FAILURE == _PR_MD_GETHOSTNAME(buf, (PRUintn)buflen))
+        if (PR_FAILURE == _PR_MD_GETHOSTNAME(buf, (PRUintn)buflen)) {
             return PR_FAILURE;
+}
 
-        if (cmd == PR_SI_HOSTNAME_UNTRUNCATED)
+        if (cmd == PR_SI_HOSTNAME_UNTRUNCATED) {
             break;
+}
         /*
          * On some platforms a system does not have a hostname and
          * its IP address is returned instead.   The following code
@@ -117,8 +120,9 @@ PR_IMPLEMENT(PRStatus) PR_GetSystemInfo(PRSysInfo cmd, char *buf, PRUint32 bufle
       case PR_SI_SYSNAME:
         /* Return the operating system name */
 #if defined(XP_UNIX) || defined(WIN32)
-        if (PR_FAILURE == _PR_MD_GETSYSINFO(cmd, buf, (PRUintn)buflen))
+        if (PR_FAILURE == _PR_MD_GETSYSINFO(cmd, buf, (PRUintn)buflen)) {
             return PR_FAILURE;
+}
 #else
         (void)PR_snprintf(buf, buflen, _PR_SI_SYSNAME);
 #endif
@@ -127,8 +131,9 @@ PR_IMPLEMENT(PRStatus) PR_GetSystemInfo(PRSysInfo cmd, char *buf, PRUint32 bufle
       case PR_SI_RELEASE:
         /* Return the version of the operating system */
 #if defined(XP_UNIX) || defined(WIN32)
-        if (PR_FAILURE == _PR_MD_GETSYSINFO(cmd, buf, (PRUintn)buflen))
+        if (PR_FAILURE == _PR_MD_GETSYSINFO(cmd, buf, (PRUintn)buflen)) {
             return PR_FAILURE;
+}
 #endif
 #if defined(XP_OS2)
         {
@@ -272,8 +277,9 @@ PR_IMPLEMENT(PRUint64) PR_GetPhysicalMemorySize(void)
 
     long pageSize = sysconf(_SC_PAGESIZE);
     long pageCount = sysconf(_SC_PHYS_PAGES);
-    if (pageSize >= 0 && pageCount >= 0)
+    if (pageSize >= 0 && pageCount >= 0) {
         bytes = (PRUint64) pageSize * pageCount;
+}
 
 #elif defined(NETBSD) || defined(OPENBSD) \
     || defined(FREEBSD) || defined(DRAGONFLY)

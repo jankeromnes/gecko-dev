@@ -132,8 +132,9 @@ static void DLLErrorInternal(PRIntn oserr)
     PR_snprintf(errStrBuf, sizeof(errStrBuf), "error %d", oserr);
     error = errStrBuf;
 #endif
-    if (NULL != error)
+    if (NULL != error) {
         PR_SetErrorText(strlen(error), error);
+}
 }  /* DLLErrorInternal */
 
 void _PR_InitLinker(void)
@@ -233,7 +234,8 @@ PR_IMPLEMENT(PRStatus) PR_SetLibraryPath(const char *path)
 {
     PRStatus rv = PR_SUCCESS;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
     PR_EnterMonitor(pr_linker_lock);
     if (_pr_currentLibPath) {
         free(_pr_currentLibPath);
@@ -260,7 +262,8 @@ PR_GetLibraryPath(void)
     char *ev;
     char *copy = NULL;  /* a copy of _pr_currentLibPath */
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
     PR_EnterMonitor(pr_linker_lock);
     if (_pr_currentLibPath != NULL) {
         goto exit;
@@ -654,7 +657,8 @@ pr_LoadLibraryByPathname(const char *name, PRIntn flags)
     int len;
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     /* See if library is already loaded */
     PR_EnterMonitor(pr_linker_lock);
@@ -689,7 +693,8 @@ pr_LoadLibraryByPathname(const char *name, PRIntn flags)
     result = pr_UnlockedFindLibrary(name);
 #endif
 
-    if (result != NULL) goto unlock;
+    if (result != NULL) { goto unlock;
+}
 
     lm = PR_NEWZAP(PRLibrary);
     if (lm == NULL) {
@@ -1019,9 +1024,9 @@ PR_UnloadLibrary(PRLibrary *lib)
 #endif
 
     /* unlink from library search list */
-    if (pr_loadmap == lib)
+    if (pr_loadmap == lib) {
         pr_loadmap = pr_loadmap->next;
-    else if (pr_loadmap != NULL) {
+    } else if (pr_loadmap != NULL) {
         PRLibrary* prev = pr_loadmap;
         PRLibrary* next = pr_loadmap->next;
         while (next != NULL) {
@@ -1243,7 +1248,8 @@ PR_FindSymbolAndLibrary(const char *raw_name, PRLibrary* *lib)
 #endif
     PRLibrary* lm;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
     /*
     ** Mangle the raw symbol name in any way that is platform specific.
     */
@@ -1299,7 +1305,8 @@ PR_LoadStaticLibrary(const char *name, const PRStaticLinkTable *slt)
     PRLibrary *lm=NULL;
     PRLibrary* result = NULL;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     /* See if library is already loaded */
     PR_EnterMonitor(pr_linker_lock);
@@ -1314,7 +1321,8 @@ PR_LoadStaticLibrary(const char *name, const PRStaticLinkTable *slt)
 
     /* Add library to list...Mark it static */
     lm = PR_NEWZAP(PRLibrary);
-    if (lm == NULL) goto unlock;
+    if (lm == NULL) { goto unlock;
+}
 
     lm->name = strdup(name);
     lm->refCount    = 1;

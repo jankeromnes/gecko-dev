@@ -28,26 +28,29 @@ bool Token::equals(const Token &other) const
 
 void Token::setAtStartOfLine(bool start)
 {
-    if (start)
+    if (start) {
         flags |= AT_START_OF_LINE;
-    else
+    } else {
         flags &= ~AT_START_OF_LINE;
+}
 }
 
 void Token::setHasLeadingSpace(bool space)
 {
-    if (space)
+    if (space) {
         flags |= HAS_LEADING_SPACE;
-    else
+    } else {
         flags &= ~HAS_LEADING_SPACE;
+}
 }
 
 void Token::setExpansionDisabled(bool disable)
 {
-    if (disable)
+    if (disable) {
         flags |= EXPANSION_DISABLED;
-    else
+    } else {
         flags &= ~EXPANSION_DISABLED;
+}
 }
 
 bool Token::iValue(int *value) const
@@ -70,8 +73,9 @@ bool Token::fValue(float *value) const
 
 std::ostream &operator<<(std::ostream &out, const Token &token)
 {
-    if (token.hasLeadingSpace())
+    if (token.hasLeadingSpace()) {
         out << " ";
+}
 
     out << token.text;
     return out;

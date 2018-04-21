@@ -1407,7 +1407,8 @@ TimeZoneNamesImpl::doFind(ZNameSearchHandler& handler,
 
 // Caller must synchronize.
 void TimeZoneNamesImpl::addAllNamesIntoTrie(UErrorCode& status) {
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
     int32_t pos;
     const UHashElement* element;
 
@@ -1578,7 +1579,8 @@ TimeZoneNamesImpl::ZoneStringsLoader::~ZoneStringsLoader() {
 }
 
 void TimeZoneNamesImpl::loadAllDisplayNames(UErrorCode& status) {
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
 
     {
         Mutex lock(&gDataMutex);
@@ -1589,7 +1591,8 @@ void TimeZoneNamesImpl::loadAllDisplayNames(UErrorCode& status) {
 void TimeZoneNamesImpl::getDisplayNames(const UnicodeString& tzID,
         const UTimeZoneNameType types[], int32_t numTypes,
         UDate date, UnicodeString dest[], UErrorCode& status) const {
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
 
     if (tzID.isEmpty()) { return; }
     void* tznames = NULL;

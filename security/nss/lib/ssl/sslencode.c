@@ -252,25 +252,29 @@ ssl3_AppendHandshake(sslSocket *ss, const void *void_src, unsigned int bytes)
 
     PORT_Assert(ss->opt.noLocks || ssl_HaveSSL3HandshakeLock(ss)); /* protects sendBuf. */
 
-    if (!bytes)
+    if (!bytes) {
         return SECSuccess;
+}
     if (ss->sec.ci.sendBuf.space < MAX_SEND_BUF_LENGTH && room < bytes) {
         rv = sslBuffer_Grow(&ss->sec.ci.sendBuf, PR_MAX(MIN_SEND_BUF_LENGTH,
                                                         PR_MIN(MAX_SEND_BUF_LENGTH, ss->sec.ci.sendBuf.len + bytes)));
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return SECFailure; /* sslBuffer_Grow sets a memory error code. */
+}
         room = ss->sec.ci.sendBuf.space - ss->sec.ci.sendBuf.len;
     }
 
     PRINT_BUF(60, (ss, "Append to Handshake", (unsigned char *)void_src, bytes));
     rv = ssl3_UpdateHandshakeHashes(ss, src, bytes);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure; /* error code set by ssl3_UpdateHandshakeHashes */
+}
 
     while (bytes > room) {
-        if (room > 0)
+        if (room > 0) {
             PORT_Memcpy(ss->sec.ci.sendBuf.buf + ss->sec.ci.sendBuf.len, src,
                         room);
+}
         ss->sec.ci.sendBuf.len += room;
         rv = ssl3_FlushHandshake(ss, ssl_SEND_FLAG_FORCE_INTO_BUFFER);
         if (rv != SECSuccess) {

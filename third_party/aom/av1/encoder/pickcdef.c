@@ -48,7 +48,8 @@ static uint64_t search_one(int *lev, int nb_strengths,
     /* Find best mse when adding each possible new option. */
     for (j = 0; j < total_strengths; j++) {
       uint64_t best = best_mse;
-      if (mse[i][j] < best) best = mse[i][j];
+      if (mse[i][j] < best) { best = mse[i][j];
+}
       tot_mse[j] += best;
     }
   }
@@ -97,7 +98,8 @@ static uint64_t search_one_dual(int *lev0, int *lev1, int nb_strengths,
         uint64_t best = best_mse;
         uint64_t curr = mse[0][i][j];
         curr += mse[1][i][k];
-        if (curr < best) best = curr;
+        if (curr < best) { best = curr;
+}
         tot_mse[j][k] += best;
       }
     }
@@ -133,7 +135,8 @@ static uint64_t joint_strength_search(int *best_lev, int nb_strengths,
   if (!fast) {
     for (i = 0; i < 4 * nb_strengths; i++) {
       int j;
-      for (j = 0; j < nb_strengths - 1; j++) best_lev[j] = best_lev[j + 1];
+      for (j = 0; j < nb_strengths - 1; j++) { best_lev[j] = best_lev[j + 1];
+}
       best_tot_mse =
           search_one(best_lev, nb_strengths - 1, mse, sb_count, fast);
     }
@@ -400,18 +403,22 @@ void av1_cdef_search(YV12_BUFFER_CONFIG *frame, const YV12_BUFFER_CONFIG *ref,
       cm->mi_grid_visible[MI_SIZE_64X64 * fbr * cm->mi_stride +
                           MI_SIZE_64X64 * fbc]
           ->mbmi.cdef_strength = -1;
-      if (sb_all_skip(cm, fbr * MI_SIZE_64X64, fbc * MI_SIZE_64X64)) continue;
+      if (sb_all_skip(cm, fbr * MI_SIZE_64X64, fbc * MI_SIZE_64X64)) { continue;
+}
       cdef_count = sb_compute_cdef_list(cm, fbr * MI_SIZE_64X64,
                                         fbc * MI_SIZE_64X64, dlist, 1);
       for (pli = 0; pli < nplanes; pli++) {
-        for (i = 0; i < CDEF_INBUF_SIZE; i++) inbuf[i] = CDEF_VERY_LARGE;
+        for (i = 0; i < CDEF_INBUF_SIZE; i++) { inbuf[i] = CDEF_VERY_LARGE;
+}
         for (gi = 0; gi < total_strengths; gi++) {
           int threshold;
           uint64_t curr_mse;
           int sec_strength;
           threshold = gi / CDEF_SEC_STRENGTHS;
-          if (fast) threshold = priconv[threshold];
-          if (pli > 0 && !chroma_cdef) threshold = 0;
+          if (fast) { threshold = priconv[threshold];
+}
+          if (pli > 0 && !chroma_cdef) { threshold = 0;
+}
           /* We avoid filtering the pixels for which some of the pixels to
              average
              are outside the frame. We could change the filter instead, but it
@@ -452,10 +459,11 @@ void av1_cdef_search(YV12_BUFFER_CONFIG *frame, const YV12_BUFFER_CONFIG *ref,
                   (fbc * MI_SIZE_64X64 << mi_wide_l2[pli]),
               stride[pli], tmp_dst, dlist, cdef_count, bsize[pli], coeff_shift,
               pli);
-          if (pli < 2)
+          if (pli < 2) {
             mse[pli][sb_count][gi] = curr_mse;
-          else
+          } else {
             mse[1][sb_count][gi] += curr_mse;
+}
           sb_index[sb_count] =
               MI_SIZE_64X64 * fbr * cm->mi_stride + MI_SIZE_64X64 * fbc;
         }
@@ -470,12 +478,13 @@ void av1_cdef_search(YV12_BUFFER_CONFIG *frame, const YV12_BUFFER_CONFIG *ref,
     int best_lev0[CDEF_MAX_STRENGTHS];
     int best_lev1[CDEF_MAX_STRENGTHS] = { 0 };
     nb_strengths = 1 << i;
-    if (nplanes >= 3)
+    if (nplanes >= 3) {
       tot_mse = joint_strength_search_dual(best_lev0, best_lev1, nb_strengths,
                                            mse, sb_count, fast);
-    else
+    } else {
       tot_mse = joint_strength_search(best_lev0, nb_strengths, mse[0], sb_count,
                                       fast);
+}
     /* Count superblock signalling cost. */
     tot_mse += (uint64_t)(sb_count * lambda * i);
     /* Count header signalling cost. */
@@ -500,7 +509,8 @@ void av1_cdef_search(YV12_BUFFER_CONFIG *frame, const YV12_BUFFER_CONFIG *ref,
     best_gi = 0;
     for (gi = 0; gi < cm->nb_cdef_strengths; gi++) {
       uint64_t curr = mse[0][i][cm->cdef_strengths[gi]];
-      if (nplanes >= 3) curr += mse[1][i][cm->cdef_uv_strengths[gi]];
+      if (nplanes >= 3) { curr += mse[1][i][cm->cdef_uv_strengths[gi]];
+}
       if (curr < best_mse) {
         best_gi = gi;
         best_mse = curr;

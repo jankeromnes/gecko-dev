@@ -276,8 +276,9 @@ class TestAgent {
   void Stop() {
     MOZ_MTLOG(ML_DEBUG, "Stopping");
 
-    if (audio_pipeline_)
+    if (audio_pipeline_) {
       audio_pipeline_->Stop();
+}
   }
 
   void Shutdown_s() {
@@ -287,10 +288,12 @@ class TestAgent {
   }
 
   void Shutdown() {
-    if (audio_pipeline_)
+    if (audio_pipeline_) {
       audio_pipeline_->Shutdown_m();
-    if (audio_stream_track_)
+}
+    if (audio_stream_track_) {
       audio_stream_track_->Stop();
+}
 
     mozilla::SyncRunnable::DispatchToThread(
       test_utils->sts_target(),

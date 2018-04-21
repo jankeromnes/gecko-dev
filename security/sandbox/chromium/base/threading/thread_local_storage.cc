@@ -201,13 +201,15 @@ void OnThreadExitInternal(TlsVectorEntry* tls_data) {
     for (int slot = 0; slot < kThreadLocalStorageSize ; ++slot) {
       void* tls_value = stack_allocated_tls_data[slot].data;
       if (!tls_value || tls_metadata[slot].status == TlsStatus::FREE ||
-          stack_allocated_tls_data[slot].version != tls_metadata[slot].version)
+          stack_allocated_tls_data[slot].version != tls_metadata[slot].version) {
         continue;
+}
 
       base::ThreadLocalStorage::TLSDestructorFunc destructor =
           tls_metadata[slot].destructor;
-      if (!destructor)
+      if (!destructor) {
         continue;
+}
       stack_allocated_tls_data[slot].data = nullptr;  // pre-clear the slot.
       destructor(tls_value);
       // Any destructor might have called a different service, which then set a
@@ -306,13 +308,15 @@ void* ThreadLocalStorage::StaticSlot::Get() const {
   TlsVectorEntry* tls_data = static_cast<TlsVectorEntry*>(
       PlatformThreadLocalStorage::GetTLSValue(
           base::subtle::NoBarrier_Load(&g_native_tls_key)));
-  if (!tls_data)
+  if (!tls_data) {
     tls_data = ConstructTlsVector();
+}
   DCHECK_NE(slot_, kInvalidSlotValue);
   DCHECK_LT(slot_, kThreadLocalStorageSize);
   // Version mismatches means this slot was previously freed.
-  if (tls_data[slot_].version != version_)
+  if (tls_data[slot_].version != version_) {
     return nullptr;
+}
   return tls_data[slot_].data;
 }
 
@@ -320,8 +324,9 @@ void ThreadLocalStorage::StaticSlot::Set(void* value) {
   TlsVectorEntry* tls_data = static_cast<TlsVectorEntry*>(
       PlatformThreadLocalStorage::GetTLSValue(
           base::subtle::NoBarrier_Load(&g_native_tls_key)));
-  if (!tls_data)
+  if (!tls_data) {
     tls_data = ConstructTlsVector();
+}
   DCHECK_NE(slot_, kInvalidSlotValue);
   DCHECK_LT(slot_, kThreadLocalStorageSize);
   tls_data[slot_].data = value;

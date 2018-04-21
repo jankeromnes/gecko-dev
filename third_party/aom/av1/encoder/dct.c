@@ -1459,9 +1459,11 @@ void av1_fht4x4_c(const int16_t *input, tran_low_t *output, int stride,
     // Columns
     for (i = 0; i < 4; ++i) {
       /* A C99-safe upshift by 4 for both Daala and VPx TX. */
-      for (j = 0; j < 4; ++j) temp_in[j] = input[j * stride + i] * 16;
+      for (j = 0; j < 4; ++j) { temp_in[j] = input[j * stride + i] * 16;
+}
 #if !CONFIG_DAALA_DCT4
-      if (i == 0 && temp_in[0]) temp_in[0] += 1;
+      if (i == 0 && temp_in[0]) { temp_in[0] += 1;
+}
 #endif
 #if CONFIG_LGT
       if (use_lgt_col)
@@ -1469,12 +1471,14 @@ void av1_fht4x4_c(const int16_t *input, tran_low_t *output, int stride,
       else
 #endif
         ht.cols(temp_in, temp_out);
-      for (j = 0; j < 4; ++j) out[j * 4 + i] = temp_out[j];
+      for (j = 0; j < 4; ++j) { out[j * 4 + i] = temp_out[j];
+}
     }
 
     // Rows
     for (i = 0; i < 4; ++i) {
-      for (j = 0; j < 4; ++j) temp_in[j] = out[j + i * 4];
+      for (j = 0; j < 4; ++j) { temp_in[j] = out[j + i * 4];
+}
 #if CONFIG_LGT
       if (use_lgt_row)
         flgt4(temp_in, temp_out, lgtmtx_row[0]);
@@ -1486,7 +1490,8 @@ void av1_fht4x4_c(const int16_t *input, tran_low_t *output, int stride,
          the usual VPx coefficient left-shift of 3. */
       for (j = 0; j < 4; ++j) output[j + i * 4] = temp_out[j] >> 1;
 #else
-      for (j = 0; j < 4; ++j) output[j + i * 4] = (temp_out[j] + 1) >> 2;
+      for (j = 0; j < 4; ++j) { output[j + i * 4] = (temp_out[j] + 1) >> 2;
+}
 #endif
     }
   }
@@ -1541,29 +1546,33 @@ void av1_fht4x8_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Rows
   for (i = 0; i < n2; ++i) {
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       temp_in[j] =
           (tran_low_t)fdct_round_shift(input[i * stride + j] * 4 * Sqrt2);
+}
 #if CONFIG_LGT
     if (use_lgt_row)
       flgt4(temp_in, temp_out, lgtmtx_row[0]);
     else
 #endif
       ht.rows(temp_in, temp_out);
-    for (j = 0; j < n; ++j) out[j * n2 + i] = temp_out[j];
+    for (j = 0; j < n; ++j) { out[j * n2 + i] = temp_out[j];
+}
   }
 
   // Columns
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n2; ++j) temp_in[j] = out[j + i * n2];
+    for (j = 0; j < n2; ++j) { temp_in[j] = out[j + i * n2];
+}
 #if CONFIG_LGT
     if (use_lgt_col)
       flgt8(temp_in, temp_out, lgtmtx_col[0]);
     else
 #endif
       ht.cols(temp_in, temp_out);
-    for (j = 0; j < n2; ++j)
+    for (j = 0; j < n2; ++j) {
       output[i + j * n] = (temp_out[j] + (temp_out[j] < 0)) >> 1;
+}
   }
   // Note: overall scale factor of transform is 8 times unitary
 }
@@ -1617,29 +1626,33 @@ void av1_fht8x4_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Columns
   for (i = 0; i < n2; ++i) {
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       temp_in[j] =
           (tran_low_t)fdct_round_shift(input[j * stride + i] * 4 * Sqrt2);
+}
 #if CONFIG_LGT
     if (use_lgt_col)
       flgt4(temp_in, temp_out, lgtmtx_col[0]);
     else
 #endif
       ht.cols(temp_in, temp_out);
-    for (j = 0; j < n; ++j) out[j * n2 + i] = temp_out[j];
+    for (j = 0; j < n; ++j) { out[j * n2 + i] = temp_out[j];
+}
   }
 
   // Rows
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n2; ++j) temp_in[j] = out[j + i * n2];
+    for (j = 0; j < n2; ++j) { temp_in[j] = out[j + i * n2];
+}
 #if CONFIG_LGT
     if (use_lgt_row)
       flgt8(temp_in, temp_out, lgtmtx_row[0]);
     else
 #endif
       ht.rows(temp_in, temp_out);
-    for (j = 0; j < n2; ++j)
+    for (j = 0; j < n2; ++j) {
       output[j + i * n2] = (temp_out[j] + (temp_out[j] < 0)) >> 1;
+}
   }
   // Note: overall scale factor of transform is 8 times unitary
 }
@@ -1691,22 +1704,26 @@ void av1_fht4x16_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Rows
   for (i = 0; i < n4; ++i) {
-    for (j = 0; j < n; ++j) temp_in[j] = input[i * stride + j] * 4;
+    for (j = 0; j < n; ++j) { temp_in[j] = input[i * stride + j] * 4;
+}
 #if CONFIG_LGT
     if (use_lgt_row)
       flgt4(temp_in, temp_out, lgtmtx_row[0]);
     else
 #endif
       ht.rows(temp_in, temp_out);
-    for (j = 0; j < n; ++j) out[j * n4 + i] = temp_out[j];
+    for (j = 0; j < n; ++j) { out[j * n4 + i] = temp_out[j];
+}
   }
 
   // Columns
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n4; ++j) temp_in[j] = out[j + i * n4];
+    for (j = 0; j < n4; ++j) { temp_in[j] = out[j + i * n4];
+}
     ht.cols(temp_in, temp_out);
-    for (j = 0; j < n4; ++j)
+    for (j = 0; j < n4; ++j) {
       output[i + j * n] = (temp_out[j] + (temp_out[j] < 0)) >> 1;
+}
   }
   // Note: overall scale factor of transform is 8 times unitary
 }
@@ -1758,22 +1775,26 @@ void av1_fht16x4_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Columns
   for (i = 0; i < n4; ++i) {
-    for (j = 0; j < n; ++j) temp_in[j] = input[j * stride + i] * 4;
+    for (j = 0; j < n; ++j) { temp_in[j] = input[j * stride + i] * 4;
+}
 #if CONFIG_LGT
     if (use_lgt_col)
       flgt4(temp_in, temp_out, lgtmtx_col[0]);
     else
 #endif
       ht.cols(temp_in, temp_out);
-    for (j = 0; j < n; ++j) out[j * n4 + i] = temp_out[j];
+    for (j = 0; j < n; ++j) { out[j * n4 + i] = temp_out[j];
+}
   }
 
   // Rows
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n4; ++j) temp_in[j] = out[j + i * n4];
+    for (j = 0; j < n4; ++j) { temp_in[j] = out[j + i * n4];
+}
     ht.rows(temp_in, temp_out);
-    for (j = 0; j < n4; ++j)
+    for (j = 0; j < n4; ++j) {
       output[j + i * n4] = (temp_out[j] + (temp_out[j] < 0)) >> 1;
+}
   }
   // Note: overall scale factor of transform is 8 times unitary
 }
@@ -1825,24 +1846,28 @@ void av1_fht8x16_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Rows
   for (i = 0; i < n2; ++i) {
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       temp_in[j] =
           (tran_low_t)fdct_round_shift(input[i * stride + j] * 4 * Sqrt2);
+}
 #if CONFIG_LGT
     if (use_lgt_row)
       flgt8(temp_in, temp_out, lgtmtx_row[0]);
     else
 #endif
       ht.rows(temp_in, temp_out);
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       out[j * n2 + i] = ROUND_POWER_OF_TWO_SIGNED(temp_out[j], 2);
+}
   }
 
   // Columns
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n2; ++j) temp_in[j] = out[j + i * n2];
+    for (j = 0; j < n2; ++j) { temp_in[j] = out[j + i * n2];
+}
     ht.cols(temp_in, temp_out);
-    for (j = 0; j < n2; ++j) output[i + j * n] = temp_out[j];
+    for (j = 0; j < n2; ++j) { output[i + j * n] = temp_out[j];
+}
   }
   // Note: overall scale factor of transform is 8 times unitary
 }
@@ -1894,24 +1919,28 @@ void av1_fht16x8_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Columns
   for (i = 0; i < n2; ++i) {
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       temp_in[j] =
           (tran_low_t)fdct_round_shift(input[j * stride + i] * 4 * Sqrt2);
+}
 #if CONFIG_LGT
     if (use_lgt_col)
       flgt8(temp_in, temp_out, lgtmtx_col[0]);
     else
 #endif
       ht.cols(temp_in, temp_out);
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       out[j * n2 + i] = ROUND_POWER_OF_TWO_SIGNED(temp_out[j], 2);
+}
   }
 
   // Rows
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n2; ++j) temp_in[j] = out[j + i * n2];
+    for (j = 0; j < n2; ++j) { temp_in[j] = out[j + i * n2];
+}
     ht.rows(temp_in, temp_out);
-    for (j = 0; j < n2; ++j) output[j + i * n2] = temp_out[j];
+    for (j = 0; j < n2; ++j) { output[j + i * n2] = temp_out[j];
+}
   }
   // Note: overall scale factor of transform is 8 times unitary
 }
@@ -1963,22 +1992,26 @@ void av1_fht8x32_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Rows
   for (i = 0; i < n4; ++i) {
-    for (j = 0; j < n; ++j) temp_in[j] = input[i * stride + j] * 4;
+    for (j = 0; j < n; ++j) { temp_in[j] = input[i * stride + j] * 4;
+}
 #if CONFIG_LGT
     if (use_lgt_row)
       flgt8(temp_in, temp_out, lgtmtx_row[0]);
     else
 #endif
       ht.rows(temp_in, temp_out);
-    for (j = 0; j < n; ++j) out[j * n4 + i] = temp_out[j];
+    for (j = 0; j < n; ++j) { out[j * n4 + i] = temp_out[j];
+}
   }
 
   // Columns
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n4; ++j) temp_in[j] = out[j + i * n4];
+    for (j = 0; j < n4; ++j) { temp_in[j] = out[j + i * n4];
+}
     ht.cols(temp_in, temp_out);
-    for (j = 0; j < n4; ++j)
+    for (j = 0; j < n4; ++j) {
       output[i + j * n] = ROUND_POWER_OF_TWO_SIGNED(temp_out[j], 2);
+}
   }
   // Note: overall scale factor of transform is 8 times unitary
 }
@@ -2030,22 +2063,26 @@ void av1_fht32x8_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Columns
   for (i = 0; i < n4; ++i) {
-    for (j = 0; j < n; ++j) temp_in[j] = input[j * stride + i] * 4;
+    for (j = 0; j < n; ++j) { temp_in[j] = input[j * stride + i] * 4;
+}
 #if CONFIG_LGT
     if (use_lgt_col)
       flgt8(temp_in, temp_out, lgtmtx_col[0]);
     else
 #endif
       ht.cols(temp_in, temp_out);
-    for (j = 0; j < n; ++j) out[j * n4 + i] = temp_out[j];
+    for (j = 0; j < n; ++j) { out[j * n4 + i] = temp_out[j];
+}
   }
 
   // Rows
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n4; ++j) temp_in[j] = out[j + i * n4];
+    for (j = 0; j < n4; ++j) { temp_in[j] = out[j + i * n4];
+}
     ht.rows(temp_in, temp_out);
-    for (j = 0; j < n4; ++j)
+    for (j = 0; j < n4; ++j) {
       output[j + i * n4] = ROUND_POWER_OF_TWO_SIGNED(temp_out[j], 2);
+}
   }
   // Note: overall scale factor of transform is 8 times unitary
 }
@@ -2092,19 +2129,23 @@ void av1_fht16x32_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Rows
   for (i = 0; i < n2; ++i) {
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       temp_in[j] =
           (tran_low_t)fdct_round_shift(input[i * stride + j] * 4 * Sqrt2);
+}
     ht.rows(temp_in, temp_out);
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       out[j * n2 + i] = ROUND_POWER_OF_TWO_SIGNED(temp_out[j], 4);
+}
   }
 
   // Columns
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n2; ++j) temp_in[j] = out[j + i * n2];
+    for (j = 0; j < n2; ++j) { temp_in[j] = out[j + i * n2];
+}
     ht.cols(temp_in, temp_out);
-    for (j = 0; j < n2; ++j) output[i + j * n] = temp_out[j];
+    for (j = 0; j < n2; ++j) { output[i + j * n] = temp_out[j];
+}
   }
   // Note: overall scale factor of transform is 4 times unitary
 }
@@ -2151,19 +2192,23 @@ void av1_fht32x16_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Columns
   for (i = 0; i < n2; ++i) {
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       temp_in[j] =
           (tran_low_t)fdct_round_shift(input[j * stride + i] * 4 * Sqrt2);
+}
     ht.cols(temp_in, temp_out);
-    for (j = 0; j < n; ++j)
+    for (j = 0; j < n; ++j) {
       out[j * n2 + i] = ROUND_POWER_OF_TWO_SIGNED(temp_out[j], 4);
+}
   }
 
   // Rows
   for (i = 0; i < n; ++i) {
-    for (j = 0; j < n2; ++j) temp_in[j] = out[j + i * n2];
+    for (j = 0; j < n2; ++j) { temp_in[j] = out[j + i * n2];
+}
     ht.rows(temp_in, temp_out);
-    for (j = 0; j < n2; ++j) output[j + i * n2] = temp_out[j];
+    for (j = 0; j < n2; ++j) { output[j + i * n2] = temp_out[j];
+}
   }
   // Note: overall scale factor of transform is 4 times unitary
 }
@@ -2247,7 +2292,8 @@ void av1_fht8x8_c(const int16_t *input, tran_low_t *output, int stride,
 #if CONFIG_DAALA_DCT8
       for (j = 0; j < 8; ++j) temp_in[j] = input[j * stride + i] * 16;
 #else
-      for (j = 0; j < 8; ++j) temp_in[j] = input[j * stride + i] * 4;
+      for (j = 0; j < 8; ++j) { temp_in[j] = input[j * stride + i] * 4;
+}
 #endif
 #if CONFIG_LGT
       if (use_lgt_col)
@@ -2255,12 +2301,14 @@ void av1_fht8x8_c(const int16_t *input, tran_low_t *output, int stride,
       else
 #endif
         ht.cols(temp_in, temp_out);
-      for (j = 0; j < 8; ++j) out[j * 8 + i] = temp_out[j];
+      for (j = 0; j < 8; ++j) { out[j * 8 + i] = temp_out[j];
+}
     }
 
     // Rows
     for (i = 0; i < 8; ++i) {
-      for (j = 0; j < 8; ++j) temp_in[j] = out[j + i * 8];
+      for (j = 0; j < 8; ++j) { temp_in[j] = out[j + i * 8];
+}
 #if CONFIG_LGT
       if (use_lgt_row)
         flgt8(temp_in, temp_out, lgtmtx_row[0]);
@@ -2271,8 +2319,9 @@ void av1_fht8x8_c(const int16_t *input, tran_low_t *output, int stride,
       for (j = 0; j < 8; ++j)
         output[j + i * 8] = (temp_out[j] + (temp_out[j] < 0)) >> 1;
 #else
-      for (j = 0; j < 8; ++j)
+      for (j = 0; j < 8; ++j) {
         output[j + i * 8] = (temp_out[j] + (temp_out[j] < 0)) >> 1;
+}
 #endif
     }
   }
@@ -2415,7 +2464,8 @@ void av1_fht16x16_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Rows
   for (i = 0; i < 16; ++i) {
-    for (j = 0; j < 16; ++j) temp_in[j] = out[j + i * 16];
+    for (j = 0; j < 16; ++j) { temp_in[j] = out[j + i * 16];
+}
     ht.rows(temp_in, temp_out);
     for (j = 0; j < 16; ++j) {
 #if CONFIG_DAALA_DCT16
@@ -2521,7 +2571,8 @@ void av1_fht32x32_c(const int16_t *input, tran_low_t *output, int stride,
 
   // Rows
   for (i = 0; i < 32; ++i) {
-    for (j = 0; j < 32; ++j) temp_in[j] = out[j + i * 32];
+    for (j = 0; j < 32; ++j) { temp_in[j] = out[j + i * 32];
+}
     ht.rows(temp_in, temp_out);
     for (j = 0; j < 32; ++j) {
       output[j + i * 32] = temp_out[j];
@@ -2787,7 +2838,8 @@ void av1_fwd_idtx_c(const int16_t *src_diff, tran_low_t *coeff, int stride,
   const int shift = 3 - ((pels > 256) + (pels > 1024));
   if (tx_type == IDTX) {
     for (r = 0; r < bsy; ++r) {
-      for (c = 0; c < bsx; ++c) coeff[c] = src_diff[c] * (1 << shift);
+      for (c = 0; c < bsx; ++c) { coeff[c] = src_diff[c] * (1 << shift);
+}
       src_diff += stride;
       coeff += bsx;
     }

@@ -286,8 +286,9 @@ HASH_ResultLenByOidTag(SECOidTag hashOid)
     const SECHashObject *hashObject = HASH_GetHashObjectByOidTag(hashOid);
     unsigned int resultLen = 0;
 
-    if (hashObject)
+    if (hashObject) {
         resultLen = hashObject->length;
+}
     return resultLen;
 }
 

@@ -97,10 +97,11 @@ void TSymbolTable::TSymbolTableLevel::insertUnmangled(TFunction *function)
 TSymbol *TSymbolTable::TSymbolTableLevel::find(const ImmutableString &name) const
 {
     tLevel::const_iterator it = level.find(name);
-    if (it == level.end())
+    if (it == level.end()) {
         return nullptr;
-    else
+    } else {
         return (*it).second;
+}
 }
 
 bool TSymbolTable::TSymbolTableBuiltInLevel::insert(const TSymbol *symbol)
@@ -113,10 +114,11 @@ bool TSymbolTable::TSymbolTableBuiltInLevel::insert(const TSymbol *symbol)
 const TSymbol *TSymbolTable::TSymbolTableBuiltInLevel::find(const ImmutableString &name) const
 {
     tLevel::const_iterator it = mLevel.find(name);
-    if (it == mLevel.end())
+    if (it == mLevel.end()) {
         return nullptr;
-    else
+    } else {
         return (*it).second;
+}
 }
 
 void TSymbolTable::TSymbolTableBuiltInLevel::insertUnmangledBuiltIn(const char *name,
@@ -235,19 +237,24 @@ const TSymbol *TSymbolTable::findBuiltIn(const ImmutableString &name,
 {
     for (int level = LAST_BUILTIN_LEVEL; level >= 0; level--)
     {
-        if (level == GLSL_BUILTINS && !includeGLSLBuiltins)
+        if (level == GLSL_BUILTINS && !includeGLSLBuiltins) {
             level--;
-        if (level == ESSL3_1_BUILTINS && shaderVersion != 310)
+}
+        if (level == ESSL3_1_BUILTINS && shaderVersion != 310) {
             level--;
-        if (level == ESSL3_BUILTINS && shaderVersion < 300)
+}
+        if (level == ESSL3_BUILTINS && shaderVersion < 300) {
             level--;
-        if (level == ESSL1_BUILTINS && shaderVersion != 100)
+}
+        if (level == ESSL1_BUILTINS && shaderVersion != 100) {
             level--;
+}
 
         const TSymbol *symbol = mBuiltInTable[level]->find(name);
 
-        if (symbol)
+        if (symbol) {
             return symbol;
+}
     }
 
     return nullptr;
@@ -694,8 +701,9 @@ void TSymbolTable::setDefaultPrecision(TBasicType type, TPrecision prec)
 
 TPrecision TSymbolTable::getDefaultPrecision(TBasicType type) const
 {
-    if (!SupportsPrecision(type))
+    if (!SupportsPrecision(type)) {
         return EbpUndefined;
+}
 
     // unsigned integers use the same precision as signed
     TBasicType baseType = (type == EbtUInt) ? EbtInt : type;

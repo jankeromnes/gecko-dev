@@ -27,24 +27,24 @@ vpx_codec_err_t vpx_codec_dec_init_ver(vpx_codec_ctx_t *ctx,
                                        vpx_codec_flags_t flags, int ver) {
   vpx_codec_err_t res;
 
-  if (ver != VPX_DECODER_ABI_VERSION)
+  if (ver != VPX_DECODER_ABI_VERSION) {
     res = VPX_CODEC_ABI_MISMATCH;
-  else if (!ctx || !iface)
+  } else if (!ctx || !iface) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (iface->abi_version != VPX_CODEC_INTERNAL_ABI_VERSION)
+  } else if (iface->abi_version != VPX_CODEC_INTERNAL_ABI_VERSION) {
     res = VPX_CODEC_ABI_MISMATCH;
-  else if ((flags & VPX_CODEC_USE_POSTPROC) &&
-           !(iface->caps & VPX_CODEC_CAP_POSTPROC))
+  } else if ((flags & VPX_CODEC_USE_POSTPROC) &&
+           !(iface->caps & VPX_CODEC_CAP_POSTPROC)) {
     res = VPX_CODEC_INCAPABLE;
-  else if ((flags & VPX_CODEC_USE_ERROR_CONCEALMENT) &&
-           !(iface->caps & VPX_CODEC_CAP_ERROR_CONCEALMENT))
+  } else if ((flags & VPX_CODEC_USE_ERROR_CONCEALMENT) &&
+           !(iface->caps & VPX_CODEC_CAP_ERROR_CONCEALMENT)) {
     res = VPX_CODEC_INCAPABLE;
-  else if ((flags & VPX_CODEC_USE_INPUT_FRAGMENTS) &&
-           !(iface->caps & VPX_CODEC_CAP_INPUT_FRAGMENTS))
+  } else if ((flags & VPX_CODEC_USE_INPUT_FRAGMENTS) &&
+           !(iface->caps & VPX_CODEC_CAP_INPUT_FRAGMENTS)) {
     res = VPX_CODEC_INCAPABLE;
-  else if (!(iface->caps & VPX_CODEC_CAP_DECODER))
+  } else if (!(iface->caps & VPX_CODEC_CAP_DECODER)) {
     res = VPX_CODEC_INCAPABLE;
-  else {
+  } else {
     memset(ctx, 0, sizeof(*ctx));
     ctx->iface = iface;
     ctx->name = iface->name;
@@ -69,9 +69,9 @@ vpx_codec_err_t vpx_codec_peek_stream_info(vpx_codec_iface_t *iface,
   vpx_codec_err_t res;
 
   if (!iface || !data || !data_sz || !si ||
-      si->sz < sizeof(vpx_codec_stream_info_t))
+      si->sz < sizeof(vpx_codec_stream_info_t)) {
     res = VPX_CODEC_INVALID_PARAM;
-  else {
+  } else {
     /* Set default/unknown values */
     si->w = 0;
     si->h = 0;
@@ -86,11 +86,11 @@ vpx_codec_err_t vpx_codec_get_stream_info(vpx_codec_ctx_t *ctx,
                                           vpx_codec_stream_info_t *si) {
   vpx_codec_err_t res;
 
-  if (!ctx || !si || si->sz < sizeof(vpx_codec_stream_info_t))
+  if (!ctx || !si || si->sz < sizeof(vpx_codec_stream_info_t)) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv)
+  } else if (!ctx->iface || !ctx->priv) {
     res = VPX_CODEC_ERROR;
-  else {
+  } else {
     /* Set default/unknown values */
     si->w = 0;
     si->h = 0;
@@ -108,11 +108,11 @@ vpx_codec_err_t vpx_codec_decode(vpx_codec_ctx_t *ctx, const uint8_t *data,
 
   /* Sanity checks */
   /* NULL data ptr allowed if data_sz is 0 too */
-  if (!ctx || (!data && data_sz) || (data && !data_sz))
+  if (!ctx || (!data && data_sz) || (data && !data_sz)) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv)
+  } else if (!ctx->iface || !ctx->priv) {
     res = VPX_CODEC_ERROR;
-  else {
+  } else {
     res = ctx->iface->dec.decode(get_alg_priv(ctx), data, data_sz, user_priv,
                                  deadline);
   }
@@ -123,10 +123,11 @@ vpx_codec_err_t vpx_codec_decode(vpx_codec_ctx_t *ctx, const uint8_t *data,
 vpx_image_t *vpx_codec_get_frame(vpx_codec_ctx_t *ctx, vpx_codec_iter_t *iter) {
   vpx_image_t *img;
 
-  if (!ctx || !iter || !ctx->iface || !ctx->priv)
+  if (!ctx || !iter || !ctx->iface || !ctx->priv) {
     img = NULL;
-  else
+  } else {
     img = ctx->iface->dec.get_frame(get_alg_priv(ctx), iter);
+}
 
   return img;
 }
@@ -136,12 +137,12 @@ vpx_codec_err_t vpx_codec_register_put_frame_cb(vpx_codec_ctx_t *ctx,
                                                 void *user_priv) {
   vpx_codec_err_t res;
 
-  if (!ctx || !cb)
+  if (!ctx || !cb) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv ||
-           !(ctx->iface->caps & VPX_CODEC_CAP_PUT_FRAME))
+  } else if (!ctx->iface || !ctx->priv ||
+           !(ctx->iface->caps & VPX_CODEC_CAP_PUT_FRAME)) {
     res = VPX_CODEC_ERROR;
-  else {
+  } else {
     ctx->priv->dec.put_frame_cb.u.put_frame = cb;
     ctx->priv->dec.put_frame_cb.user_priv = user_priv;
     res = VPX_CODEC_OK;
@@ -155,12 +156,12 @@ vpx_codec_err_t vpx_codec_register_put_slice_cb(vpx_codec_ctx_t *ctx,
                                                 void *user_priv) {
   vpx_codec_err_t res;
 
-  if (!ctx || !cb)
+  if (!ctx || !cb) {
     res = VPX_CODEC_INVALID_PARAM;
-  else if (!ctx->iface || !ctx->priv ||
-           !(ctx->iface->caps & VPX_CODEC_CAP_PUT_SLICE))
+  } else if (!ctx->iface || !ctx->priv ||
+           !(ctx->iface->caps & VPX_CODEC_CAP_PUT_SLICE)) {
     res = VPX_CODEC_ERROR;
-  else {
+  } else {
     ctx->priv->dec.put_slice_cb.u.put_slice = cb;
     ctx->priv->dec.put_slice_cb.user_priv = user_priv;
     res = VPX_CODEC_OK;

@@ -31,8 +31,9 @@ void
 documentInterfaceInitCB(AtkDocumentIface *aIface)
 {
     NS_ASSERTION(aIface, "Invalid Interface");
-    if(MOZ_UNLIKELY(!aIface))
+    if(MOZ_UNLIKELY(!aIface)) {
         return;
+}
 
     /*
      * We don't support get_document or set_attribute right now.

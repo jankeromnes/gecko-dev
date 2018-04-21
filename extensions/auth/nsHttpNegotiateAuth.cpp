@@ -139,15 +139,17 @@ nsHttpNegotiateAuth::ChallengeReceived(nsIHttpAuthenticableChannel *authChannel,
     nsIAuthModule *module = (nsIAuthModule *) *continuationState;
 
     *identityInvalid = false;
-    if (module)
+    if (module) {
         return NS_OK;
+}
 
     nsresult rv;
 
     nsCOMPtr<nsIURI> uri;
     rv = authChannel->GetURI(getter_AddRefs(uri));
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     uint32_t req_flags = nsIAuthModule::REQ_DEFAULT;
     nsAutoCString service;
@@ -181,8 +183,9 @@ nsHttpNegotiateAuth::ChallengeReceived(nsIHttpAuthenticableChannel *authChannel,
         }
 
         rv = uri->GetAsciiHost(service);
-        if (NS_FAILED(rv))
+        if (NS_FAILED(rv)) {
             return rv;
+}
     }
 
     LOG(("  service = %s\n", service.get()));
@@ -530,13 +533,15 @@ nsHttpNegotiateAuth::GenerateCredentials(nsIHttpAuthenticableChannel *authChanne
 
     if (len > kNegotiateLen) {
         challenge += kNegotiateLen;
-        while (*challenge == ' ')
+        while (*challenge == ' ') {
             challenge++;
+}
         len = strlen(challenge);
 
         // strip off any padding (see bug 230351)
-        while (challenge[len - 1] == '=')
+        while (challenge[len - 1] == '=') {
             len--;
+}
 
         //
         // Decode the response that followed the "Negotiate" token
@@ -560,8 +565,9 @@ nsHttpNegotiateAuth::GenerateCredentials(nsIHttpAuthenticableChannel *authChanne
 
     free(inToken);
 
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return rv;
+}
 
     if (outTokenLen == 0) {
         LOG(("  No output token to send, exiting"));
@@ -575,18 +581,20 @@ nsHttpNegotiateAuth::GenerateCredentials(nsIHttpAuthenticableChannel *authChanne
 
     free(outToken);
 
-    if (!encoded_token)
+    if (!encoded_token) {
         return NS_ERROR_OUT_OF_MEMORY;
+}
 
     LOG(("  Sending a token of length %d\n", outTokenLen));
 
     // allocate a buffer sizeof("Negotiate" + " " + b64output_token + "\0")
     const int bufsize = kNegotiateLen + 1 + strlen(encoded_token) + 1;
     *creds = (char *) moz_xmalloc(bufsize);
-    if (MOZ_UNLIKELY(!*creds))
+    if (MOZ_UNLIKELY(!*creds)) {
         rv = NS_ERROR_OUT_OF_MEMORY;
-    else
+    } else {
         snprintf(*creds, bufsize, "%s %s", kNegotiate, encoded_token);
+}
 
     PR_Free(encoded_token); // PL_Base64Encode() uses PR_Malloc().
     return rv;
@@ -596,13 +604,15 @@ bool
 nsHttpNegotiateAuth::TestBoolPref(const char *pref)
 {
     nsCOMPtr<nsIPrefBranch> prefs = do_GetService(NS_PREFSERVICE_CONTRACTID);
-    if (!prefs)
+    if (!prefs) {
         return false;
+}
 
     bool val;
     nsresult rv = prefs->GetBoolPref(pref, &val);
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         return false;
+}
 
     return val;
 }
@@ -613,11 +623,13 @@ nsHttpNegotiateAuth::TestNonFqdn(nsIURI *uri)
     nsAutoCString host;
     PRNetAddr addr;
 
-    if (!TestBoolPref(kNegotiateAuthAllowNonFqdn))
+    if (!TestBoolPref(kNegotiateAuthAllowNonFqdn)) {
         return false;
+}
 
-    if (NS_FAILED(uri->GetAsciiHost(host)))
+    if (NS_FAILED(uri->GetAsciiHost(host))) {
         return false;
+}
 
     // return true if host does not contain a dot and is not an ip address
     return !host.IsEmpty() && !host.Contains('.') &&

@@ -30,7 +30,8 @@ static struct lookahead_entry *pop(struct lookahead_ctx *ctx,
   struct lookahead_entry *buf = ctx->buf + index;
 
   assert(index < ctx->max_sz);
-  if (++index >= ctx->max_sz) index -= ctx->max_sz;
+  if (++index >= ctx->max_sz) { index -= ctx->max_sz;
+}
   *idx = index;
   return buf;
 }
@@ -74,7 +75,8 @@ struct lookahead_ctx *vp8_lookahead_init(unsigned int width,
   if (ctx) {
     ctx->max_sz = depth;
     ctx->buf = calloc(depth, sizeof(*ctx->buf));
-    if (!ctx->buf) goto bail;
+    if (!ctx->buf) { goto bail;
+}
     for (i = 0; i < depth; ++i) {
       if (vp8_yv12_alloc_frame_buffer(&ctx->buf[i].img, width, height,
                                       VP8BORDERINPIXELS)) {
@@ -96,7 +98,8 @@ int vp8_lookahead_push(struct lookahead_ctx *ctx, YV12_BUFFER_CONFIG *src,
   int mb_rows = (src->y_height + 15) >> 4;
   int mb_cols = (src->y_width + 15) >> 4;
 
-  if (ctx->sz + 2 > ctx->max_sz) return 1;
+  if (ctx->sz + 2 > ctx->max_sz) { return 1;
+}
   ctx->sz++;
   buf = pop(ctx, &ctx->write_idx);
 
@@ -112,17 +115,20 @@ int vp8_lookahead_push(struct lookahead_ctx *ctx, YV12_BUFFER_CONFIG *src,
       while (1) {
         /* Find the first active macroblock in this row. */
         for (; col < mb_cols; ++col) {
-          if (active_map[col]) break;
+          if (active_map[col]) { break;
+}
         }
 
         /* No more active macroblock in this row. */
-        if (col == mb_cols) break;
+        if (col == mb_cols) { break;
+}
 
         /* Find the end of active region in this row. */
         active_end = col;
 
         for (; active_end < mb_cols; ++active_end) {
-          if (!active_map[active_end]) break;
+          if (!active_map[active_end]) { break;
+}
         }
 
         /* Only copy this active region. */
@@ -164,7 +170,8 @@ struct lookahead_entry *vp8_lookahead_peek(struct lookahead_ctx *ctx,
     assert(index < ctx->max_sz - 1);
     if (index < ctx->sz) {
       index += ctx->read_idx;
-      if (index >= ctx->max_sz) index -= ctx->max_sz;
+      if (index >= ctx->max_sz) { index -= ctx->max_sz;
+}
       buf = ctx->buf + index;
     }
   } else if (direction == PEEK_BACKWARD) {

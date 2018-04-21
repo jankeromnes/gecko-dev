@@ -20,9 +20,10 @@ bool NeedsLazyInstance(subtle::AtomicWord* state) {
   // kLazyInstanceStateCreating have no associated data (memory barriers are
   // all about ordering of memory accesses to *associated* data).
   if (subtle::NoBarrier_CompareAndSwap(state, 0,
-                                       kLazyInstanceStateCreating) == 0)
+                                       kLazyInstanceStateCreating) == 0) {
     // Caller must create instance
     return true;
+}
 
   // It's either in the process of being created, or already created. Spin.
   // The load has acquire memory ordering as a thread which sees
@@ -46,8 +47,9 @@ void CompleteLazyInstance(subtle::AtomicWord* state,
   subtle::Release_Store(state, new_instance);
 
   // Make sure that the lazily instantiated object will get destroyed at exit.
-  if (destructor)
+  if (destructor) {
     AtExitManager::RegisterCallback(destructor, destructor_arg);
+}
 }
 
 }  // namespace internal

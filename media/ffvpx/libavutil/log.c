@@ -139,8 +139,9 @@ static void check_color_terminal(void)
     use_color = !getenv("NO_COLOR") && !getenv("AV_LOG_FORCE_NOCOLOR") &&
                 (getenv("TERM") && isatty(2) || getenv("AV_LOG_FORCE_COLOR"));
     if (   getenv("AV_LOG_FORCE_256COLOR")
-        || (term && strstr(term, "256color")))
+        || (term && strstr(term, "256color"))) {
         use_color *= 256;
+}
 #else
     use_color = getenv("AV_LOG_FORCE_COLOR") && !getenv("NO_COLOR") &&
                !getenv("AV_LOG_FORCE_NOCOLOR");
@@ -150,14 +151,17 @@ static void check_color_terminal(void)
 static void colored_fputs(int level, int tint, const char *str)
 {
     int local_use_color;
-    if (!*str)
+    if (!*str) {
         return;
+}
 
-    if (use_color < 0)
+    if (use_color < 0) {
         check_color_terminal();
+}
 
-    if (level == AV_LOG_INFO/8) local_use_color = 0;
-    else                        local_use_color = use_color;
+    if (level == AV_LOG_INFO/8) { local_use_color = 0;
+    } else {                        local_use_color = use_color;
+}
 
 #if defined(_WIN32) && !defined(__MINGW32CE__) && HAVE_SETCONSOLETEXTATTRIBUTE
     if (local_use_color)
@@ -184,8 +188,9 @@ static void colored_fputs(int level, int tint, const char *str)
                 (color[level] >> 16) & 0xff,
                 (color[level] >> 8) & 0xff,
                 str);
-    } else
+    } else {
         fputs(str, stderr);
+}
 #endif
 
 }
@@ -202,8 +207,9 @@ AVClassCategory av_default_get_category(void *ptr)
 
 static void sanitize(uint8_t *line){
     while(*line){
-        if(*line < 0x08 || (*line > 0x0D && *line < 0x20))
+        if(*line < 0x08 || (*line > 0x0D && *line < 0x20)) {
             *line='?';
+}
         line++;
     }
 }
@@ -213,10 +219,12 @@ static int get_category(void *ptr){
     if(    !avc
         || (avc->version&0xFF)<100
         ||  avc->version < (51 << 16 | 59 << 8)
-        ||  avc->category >= AV_CLASS_CATEGORY_NB) return AV_CLASS_CATEGORY_NA + 16;
+        ||  avc->category >= AV_CLASS_CATEGORY_NB) { return AV_CLASS_CATEGORY_NA + 16;
+}
 
-    if(avc->get_category)
+    if(avc->get_category) {
         return avc->get_category(ptr) + 16;
+}
 
     return avc->category + 16;
 }
@@ -254,7 +262,8 @@ static void format_line(void *avcl, int level, const char *fmt, va_list vl,
     av_bprint_init(part+2, 0, 1);
     av_bprint_init(part+3, 0, 65536);
 
-    if(type) type[0] = type[1] = AV_CLASS_CATEGORY_NA + 16;
+    if(type) { type[0] = type[1] = AV_CLASS_CATEGORY_NA + 16;
+}
     if (*print_prefix && avc) {
         if (avc->parent_log_context_offset) {
             AVClass** parent = *(AVClass ***) (((uint8_t *) avcl) +
@@ -262,15 +271,18 @@ static void format_line(void *avcl, int level, const char *fmt, va_list vl,
             if (parent && *parent) {
                 av_bprintf(part+0, "[%s @ %p] ",
                          (*parent)->item_name(parent), parent);
-                if(type) type[0] = get_category(parent);
+                if(type) { type[0] = get_category(parent);
+}
             }
         }
         av_bprintf(part+1, "[%s @ %p] ",
                  avc->item_name(avcl), avcl);
-        if(type) type[1] = get_category(avcl);
+        if(type) { type[1] = get_category(avcl);
+}
 
-        if (flags & AV_LOG_PRINT_LEVEL)
+        if (flags & AV_LOG_PRINT_LEVEL) {
             av_bprintf(part+2, "[%s] ", get_level_str(level));
+}
     }
 
     av_vbprintf(part+3, fmt, vl);
@@ -315,8 +327,9 @@ void av_log_default_callback(void* ptr, int level, const char* fmt, va_list vl)
         level &= 0xff;
     }
 
-    if (level > av_log_level)
+    if (level > av_log_level) {
         return;
+}
 #if HAVE_PTHREADS
     pthread_mutex_lock(&mutex);
 #endif
@@ -325,15 +338,17 @@ void av_log_default_callback(void* ptr, int level, const char* fmt, va_list vl)
     snprintf(line, sizeof(line), "%s%s%s%s", part[0].str, part[1].str, part[2].str, part[3].str);
 
 #if HAVE_ISATTY
-    if (!is_atty)
+    if (!is_atty) {
         is_atty = isatty(2) ? 1 : -1;
+}
 #endif
 
     if (print_prefix && (flags & AV_LOG_SKIP_REPEATED) && !strcmp(line, prev) &&
         *line && line[strlen(line) - 1] != '\r'){
         count++;
-        if (is_atty == 1)
+        if (is_atty == 1) {
             fprintf(stderr, "    Last message repeated %d times\r", count);
+}
         goto end;
     }
     if (count > 0) {
@@ -370,8 +385,9 @@ void av_log(void* avcl, int level, const char *fmt, ...)
     va_list vl;
     va_start(vl, fmt);
     if (avc && avc->version >= (50 << 16 | 15 << 8 | 2) &&
-        avc->log_level_offset_offset && level >= AV_LOG_FATAL)
+        avc->log_level_offset_offset && level >= AV_LOG_FATAL) {
         level += *(int *) (((uint8_t *) avcl) + avc->log_level_offset_offset);
+}
     av_vlog(avcl, level, fmt, vl);
     va_end(vl);
 }
@@ -379,8 +395,9 @@ void av_log(void* avcl, int level, const char *fmt, ...)
 void av_vlog(void* avcl, int level, const char *fmt, va_list vl)
 {
     void (*log_callback)(void*, int, const char*, va_list) = av_log_callback;
-    if (log_callback)
+    if (log_callback) {
         log_callback(avcl, level, fmt, vl);
+}
 }
 
 int av_log_get_level(void)
@@ -416,10 +433,11 @@ static void missing_feature_sample(int sample, void *avc, const char *msg,
            "version to the newest one from Git. If the problem still "
            "occurs, it means that your file has a feature which has not "
            "been implemented.\n");
-    if (sample)
+    if (sample) {
         av_log(avc, AV_LOG_WARNING, "If you want to help, upload a sample "
                "of this file to ftp://upload.ffmpeg.org/incoming/ "
                "and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)\n");
+}
 }
 
 void avpriv_request_sample(void *avc, const char *msg, ...)

@@ -295,15 +295,17 @@ lg_nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk)
 
                 pubk->arena = arena;
                 pubk->keyType = privk->keyType;
-                if (privk->keyType == NSSLOWKEYNullKey)
+                if (privk->keyType == NSSLOWKEYNullKey) {
                     return pubk;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.rsa.modulus,
                                       &privk->u.rsa.modulus);
                 if (rv == SECSuccess) {
                     rv = SECITEM_CopyItem(arena, &pubk->u.rsa.publicExponent,
                                           &privk->u.rsa.publicExponent);
-                    if (rv == SECSuccess)
+                    if (rv == SECSuccess) {
                         return pubk;
+}
                 }
             } else {
                 PORT_SetError(SEC_ERROR_NO_MEMORY);
@@ -319,20 +321,24 @@ lg_nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk)
                 pubk->keyType = privk->keyType;
                 rv = SECITEM_CopyItem(arena, &pubk->u.dsa.publicValue,
                                       &privk->u.dsa.publicValue);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dsa.params.prime,
                                       &privk->u.dsa.params.prime);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dsa.params.subPrime,
                                       &privk->u.dsa.params.subPrime);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dsa.params.base,
                                       &privk->u.dsa.params.base);
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
             }
             break;
         case NSSLOWKEYDHKey:
@@ -345,16 +351,19 @@ lg_nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk)
                 pubk->keyType = privk->keyType;
                 rv = SECITEM_CopyItem(arena, &pubk->u.dh.publicValue,
                                       &privk->u.dh.publicValue);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dh.prime,
                                       &privk->u.dh.prime);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 rv = SECITEM_CopyItem(arena, &pubk->u.dh.base,
                                       &privk->u.dh.base);
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
             }
             break;
         case NSSLOWKEYECKey:
@@ -367,14 +376,16 @@ lg_nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk)
                 pubk->keyType = privk->keyType;
                 rv = SECITEM_CopyItem(arena, &pubk->u.ec.publicValue,
                                       &privk->u.ec.publicValue);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     break;
+}
                 pubk->u.ec.ecParams.arena = arena;
                 /* Copy the rest of the params */
                 rv = LGEC_CopyParams(arena, &(pubk->u.ec.ecParams),
                                      &(privk->u.ec.ecParams));
-                if (rv == SECSuccess)
+                if (rv == SECSuccess) {
                     return pubk;
+}
             }
             break;
         /* No Fortezza in Low Key implementations (Fortezza keys aren't

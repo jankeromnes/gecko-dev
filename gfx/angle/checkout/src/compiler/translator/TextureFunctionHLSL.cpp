@@ -171,10 +171,11 @@ const char *GetSamplerCoordinateTypeString(
             case 2:
                 if (textureFunction.sampler == EbtSampler2DMS ||
                     textureFunction.sampler == EbtISampler2DMS ||
-                    textureFunction.sampler == EbtUSampler2DMS)
+                    textureFunction.sampler == EbtUSampler2DMS) {
                     return "int2";
-                else
+                } else {
                     return "int3";
+}
             case 3:
                 return "int4";
             default:
@@ -402,10 +403,11 @@ void OutputTextureFunctionArgumentList(TInfoSinkBase &out,
         case TextureFunctionHLSL::TextureFunction::FETCH:
             if (textureFunction.sampler == EbtSampler2DMS ||
                 textureFunction.sampler == EbtISampler2DMS ||
-                textureFunction.sampler == EbtUSampler2DMS)
+                textureFunction.sampler == EbtUSampler2DMS) {
                 out << ", int index";
-            else
+            } else {
                 out << ", int mip";
+}
             break;
         case TextureFunctionHLSL::TextureFunction::GRAD:
             break;
@@ -542,8 +544,9 @@ void OutputTextureSizeFunctionBody(TInfoSinkBase &out,
                 << "    width = max(width >> lod, 1);\n"
                 << "    height = max(height >> lod, 1);\n";
         }
-        else
+        else {
             UNREACHABLE();
+}
     }
 
     if (strcmp(textureFunction.getReturnType(), "int3") == 0)
@@ -835,8 +838,9 @@ void OutputIntegerTextureSampleFunctionComputations(
             out << "    " << textureReference
                 << ".GetDimensions(mip, width, height, depth, levels);\n";
         }
-        else
+        else {
             UNREACHABLE();
+}
 
         OutputIntTexCoordWraps(out, textureFunction, texCoordX, texCoordY, texCoordZ);
     }
@@ -898,8 +902,9 @@ void OutputTextureSampleFunctionReturnStatement(
     {
         OutputHLSL4SampleFunctionPrefix(out, textureFunction, textureReference, samplerReference);
     }
-    else
+    else {
         UNREACHABLE();
+}
 
     const int hlslCoords = GetHLSLCoordCount(textureFunction, outputType);
 
@@ -993,10 +998,11 @@ void OutputTextureSampleFunctionReturnStatement(
         {
             if (textureFunction.sampler == EbtSampler2DMS ||
                 textureFunction.sampler == EbtISampler2DMS ||
-                textureFunction.sampler == EbtUSampler2DMS)
+                textureFunction.sampler == EbtUSampler2DMS) {
                 out << "), index";
-            else
+            } else {
                 out << ", mip)";
+}
         }
         else if (IsShadowSampler(textureFunction.sampler))
         {
@@ -1053,8 +1059,9 @@ void OutputTextureSampleFunctionReturnStatement(
             out << ", offset";
         }
     }
-    else
+    else {
         UNREACHABLE();
+}
 
     out << ");\n";  // Close the sample function call and return statement
 }
@@ -1277,8 +1284,9 @@ ImmutableString TextureFunctionHLSL::useTextureFunction(const ImmutableString &n
         textureFunction.proj   = true;
         textureFunction.offset = true;
     }
-    else
+    else {
         UNREACHABLE();
+}
 
     if (textureFunction.method ==
         TextureFunction::IMPLICIT)  // Could require lod 0 or have a bias argument

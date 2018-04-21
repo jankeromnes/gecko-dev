@@ -597,7 +597,8 @@ void sdp_crypto_debug (char *buffer, ulong length_bytes)
             result = cpr_strncasecmp(current, crypto_string, crypto_strlen);
             if (!result) {
                 current += crypto_strlen;
-                if (current > last) break;
+                if (current > last) { break;
+}
 
                 /* Skip over crypto suite name */
                 FIND_WHITESPACE(current, last);
@@ -611,7 +612,8 @@ void sdp_crypto_debug (char *buffer, ulong length_bytes)
                     int star_count = 0;
 
                     current += inline_strlen;
-                    if (current > last) break;
+                    if (current > last) { break;
+}
 
                     sdp_dump_buffer(start, current - start);
 
@@ -683,7 +685,8 @@ char * sdp_debug_msg_filter (char *buffer, ulong length_bytes)
             result = cpr_strncasecmp(current, crypto_string, crypto_strlen);
             if (!result) {
                 current += crypto_strlen;
-                if (current > last) break;
+                if (current > last) { break;
+}
 
                 /* Skip over crypto suite name */
                 FIND_WHITESPACE(current, last);
@@ -695,7 +698,8 @@ char * sdp_debug_msg_filter (char *buffer, ulong length_bytes)
                 result = cpr_strncasecmp(current, inline_string, inline_strlen);
                 if (!result) {
                     current += inline_strlen;
-                    if (current > last) break;
+                    if (current > last) { break;
+}
 
                     /* Hide sensitive key/salt data */
                     while (current<=last) {

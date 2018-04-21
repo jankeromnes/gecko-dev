@@ -49,11 +49,13 @@ BinTokenReaderTester::readBuf(uint8_t* bytes, uint32_t len)
     MOZ_ASSERT(!cx_->isExceptionPending());
     MOZ_ASSERT(len > 0);
 
-    if (stop_ < current_ + len)
+    if (stop_ < current_ + len) {
         return raiseError("Buffer exceeds length");
+}
 
-    for (uint32_t i = 0; i < len; ++i)
+    for (uint32_t i = 0; i < len; ++i) {
         *bytes++ = *current_++;
+}
 
     return true;
 }
@@ -75,8 +77,9 @@ BinTokenReaderTester::readMaybeBool(Maybe<bool>& result)
 {
     updateLatestKnownGood();
     uint8_t byte;
-    if (!readByte(&byte))
+    if (!readByte(&byte)) {
         return false;
+}
 
     switch (byte) {
       case 0:
@@ -99,11 +102,13 @@ BinTokenReaderTester::readBool(bool& out)
 {
     Maybe<bool> result;
 
-    if (!readMaybeBool(result))
+    if (!readMaybeBool(result)) {
         return false;
+}
 
-    if (result.isNothing())
+    if (result.isNothing()) {
         return raiseError("Empty boolean value");
+}
 
     out = *result;
     return true;
@@ -120,8 +125,9 @@ BinTokenReaderTester::readMaybeDouble(Maybe<double>& result)
 
     uint8_t bytes[8];
     MOZ_ASSERT(sizeof(bytes) == sizeof(double));
-    if (!readBuf(reinterpret_cast<uint8_t*>(bytes), ArrayLength(bytes)))
+    if (!readBuf(reinterpret_cast<uint8_t*>(bytes), ArrayLength(bytes))) {
         return false;
+}
 
     // Decode little-endian.
     const uint64_t asInt = LittleEndian::readUint64(bytes);
@@ -143,11 +149,13 @@ BinTokenReaderTester::readDouble(double& out)
 {
     Maybe<double> result;
 
-    if (!readMaybeDouble(result))
+    if (!readMaybeDouble(result)) {
         return false;
+}
 
-    if (result.isNothing())
+    if (result.isNothing()) {
         return raiseError("Empty double value");
+}
 
     out = *result;
     return true;
@@ -161,8 +169,9 @@ BinTokenReaderTester::readInternalUint32(uint32_t* result)
 {
     uint8_t bytes[4];
     MOZ_ASSERT(sizeof(bytes) == sizeof(uint32_t));
-    if (!readBuf(bytes, 4))
+    if (!readBuf(bytes, 4)) {
         return false;
+}
 
     // Decode little-endian.
     *result = LittleEndian::readUint32(bytes);
@@ -185,20 +194,24 @@ BinTokenReaderTester::readMaybeChars(Maybe<Chars>& out)
 {
     updateLatestKnownGood();
 
-    if (!readConst("<string>"))
+    if (!readConst("<string>")) {
         return false;
+}
 
     // 1. Read byteLength
     uint32_t byteLen;
-    if (!readInternalUint32(&byteLen))
+    if (!readInternalUint32(&byteLen)) {
         return false;
+}
 
     // 2. Reject if we can't read
-    if (current_ + byteLen < current_) // Check for overflows
+    if (current_ + byteLen < current_) { // Check for overflows
         return raiseError("Arithmetics overflow: string is too long");
+}
 
-    if (current_ + byteLen > stop_)
+    if (current_ + byteLen > stop_) {
         return raiseError("Not enough bytes to read chars");
+}
 
     if (byteLen == 2 && *current_ == 255 && *(current_ + 1) == 0) {
         // 3. Special case: null string.
@@ -214,8 +227,9 @@ BinTokenReaderTester::readMaybeChars(Maybe<Chars>& out)
     }
 
     current_ += byteLen;
-    if (!readConst("</string>"))
+    if (!readConst("</string>")) {
         return false;
+}
 
     return true;
 }
@@ -225,11 +239,13 @@ BinTokenReaderTester::readChars(Chars& out)
 {
     Maybe<Chars> result;
 
-    if (!readMaybeChars(result))
+    if (!readMaybeChars(result)) {
         return false;
+}
 
-    if (result.isNothing())
+    if (result.isNothing()) {
         return raiseError("Empty string");
+}
 
     out = Move(*result);
     return true;
@@ -243,12 +259,14 @@ BinTokenReaderTester::matchConst(const char (&value)[N])
     MOZ_ASSERT(value[N - 1] == 0);
     MOZ_ASSERT(!cx_->isExceptionPending());
 
-    if (current_ + N - 1 > stop_)
+    if (current_ + N - 1 > stop_) {
         return false;
+}
 
     // Perform lookup, without side-effects.
-    if (!std::equal(current_, current_ + N - 1 /*implicit NUL*/, value))
+    if (!std::equal(current_, current_ + N - 1 /*implicit NUL*/, value)) {
         return false;
+}
 
     // Looks like we have a match. Now perform side-effects
     current_ += N - 1;
@@ -264,8 +282,9 @@ BinTokenReaderTester::matchConst(const char (&value)[N])
 bool
 BinTokenReaderTester::enterUntaggedTuple(AutoTuple& guard)
 {
-    if (!readConst("<tuple>"))
+    if (!readConst("<tuple>")) {
         return false;
+}
 
     guard.init();
     return true;
@@ -276,8 +295,9 @@ bool
 BinTokenReaderTester::readConst(const char (&value)[N])
 {
     updateLatestKnownGood();
-    if (!matchConst(value))
+    if (!matchConst(value)) {
         return raiseError("Could not find expected literal");
+}
 
     return true;
 }
@@ -295,11 +315,13 @@ bool
 BinTokenReaderTester::enterTaggedTuple(BinKind& tag, BinFields& fields, AutoTaggedTuple& guard)
 {
     // Header
-    if (!readConst("<tuple>"))
+    if (!readConst("<tuple>")) {
         return false;
+}
 
-    if (!readConst("<head>"))
+    if (!readConst("<head>")) {
         return false;
+}
 
     // This would probably be much faster with a HashTable, but we don't
     // really care about the speed of BinTokenReaderTester.
@@ -320,12 +342,14 @@ BinTokenReaderTester::enterTaggedTuple(BinKind& tag, BinFields& fields, AutoTagg
 
     // Now fields.
     uint32_t fieldNum;
-    if (!readInternalUint32(&fieldNum))
+    if (!readInternalUint32(&fieldNum)) {
         return false;
+}
 
     fields.clear();
-    if (!fields.reserve(fieldNum))
+    if (!fields.reserve(fieldNum)) {
         return raiseError("Out of memory");
+}
 
     for (uint32_t i = 0; i < fieldNum; ++i) {
         // This would probably be much faster with a HashTable, but we don't
@@ -360,8 +384,9 @@ BinTokenReaderTester::enterTaggedTuple(BinKind& tag, BinFields& fields, AutoTagg
 
     // End of header
 
-    if (!readConst("</head>"))
+    if (!readConst("</head>")) {
         return false;
+}
 
     // Enter the body.
     guard.init();
@@ -380,25 +405,30 @@ BinTokenReaderTester::enterTaggedTuple(BinKind& tag, BinFields& fields, AutoTagg
 bool
 BinTokenReaderTester::enterList(uint32_t& items, AutoList& guard)
 {
-    if (!readConst("<list>"))
+    if (!readConst("<list>")) {
         return false;
+}
 
     uint32_t byteLen;
-    if (!readInternalUint32(&byteLen))
+    if (!readInternalUint32(&byteLen)) {
         return false;
+}
 
     const uint8_t* stop = current_ + byteLen;
 
-    if (stop < current_) // Check for overflows
+    if (stop < current_) { // Check for overflows
         return raiseError("Arithmetics overflow: list is too long");
+}
 
-    if (stop > this->stop_)
+    if (stop > this->stop_) {
         return raiseError("Incorrect list length");
+}
 
     guard.init(stop);
 
-    if (!readInternalUint32(&items))
+    if (!readInternalUint32(&items)) {
         return false;
+}
 
     return true;
 }
@@ -455,8 +485,9 @@ BinTokenReaderTester::AutoBase::~AutoBase()
 bool
 BinTokenReaderTester::AutoBase::checkPosition(const uint8_t* expectedEnd)
 {
-    if (reader_.current_ != expectedEnd)
+    if (reader_.current_ != expectedEnd) {
         return reader_.raiseError("Caller did not consume the expected set of bytes");
+}
 
     return true;
 }
@@ -483,12 +514,14 @@ BinTokenReaderTester::AutoList::done()
     }
 
     // Check that we have consumed the exact number of bytes.
-    if (!checkPosition(expectedEnd_))
+    if (!checkPosition(expectedEnd_)) {
         return false;
+}
 
     // Check suffix.
-    if (!reader_.readConst("</list>"))
+    if (!reader_.readConst("</list>")) {
         return false;
+}
 
     return true;
 }
@@ -508,8 +541,9 @@ BinTokenReaderTester::AutoTaggedTuple::done()
     }
 
     // Check suffix.
-    if (!reader_.readConst("</tuple>"))
+    if (!reader_.readConst("</tuple>")) {
         return false;
+}
 
     return true;
 }
@@ -529,8 +563,9 @@ BinTokenReaderTester::AutoTuple::done()
     }
 
     // Check suffix.
-    if (!reader_.readConst("</tuple>"))
+    if (!reader_.readConst("</tuple>")) {
         return false;
+}
 
     return true;
 }

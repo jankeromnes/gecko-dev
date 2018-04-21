@@ -74,8 +74,9 @@ static void *attribute_align_arg thread_worker(void *v)
 
     while (1) {
         w->done = 1;
-        while (w->done)
+        while (w->done) {
             pthread_cond_wait(&w->cond, &w->mutex);
+}
 
         if (ctx->finished) {
             pthread_mutex_unlock(&w->mutex);
@@ -106,19 +107,22 @@ int avpriv_slicethread_create(AVSliceThread **pctx, void *priv,
     av_assert0(nb_threads >= 0);
     if (!nb_threads) {
         int nb_cpus = av_cpu_count();
-        if (nb_cpus > 1)
+        if (nb_cpus > 1) {
             nb_threads = nb_cpus + 1;
-        else
+        } else {
             nb_threads = 1;
+}
     }
 
     nb_workers = nb_threads;
-    if (!main_func)
+    if (!main_func) {
         nb_workers--;
+}
 
     *pctx = ctx = av_mallocz(sizeof(*ctx));
-    if (!ctx)
+    if (!ctx) {
         return AVERROR(ENOMEM);
+}
 
     if (nb_workers && !(ctx->workers = av_calloc(nb_workers, sizeof(*ctx->workers)))) {
         av_freep(pctx);
@@ -157,8 +161,9 @@ int avpriv_slicethread_create(AVSliceThread **pctx, void *priv,
             return AVERROR(ret);
         }
 
-        while (!w->done)
+        while (!w->done) {
             pthread_cond_wait(&w->cond, &w->mutex);
+}
         pthread_mutex_unlock(&w->mutex);
     }
 
@@ -175,8 +180,9 @@ void avpriv_slicethread_execute(AVSliceThread *ctx, int nb_jobs, int execute_mai
     atomic_store_explicit(&ctx->first_job, 0, memory_order_relaxed);
     atomic_store_explicit(&ctx->current_job, ctx->nb_active_threads, memory_order_relaxed);
     nb_workers             = ctx->nb_active_threads;
-    if (!ctx->main_func || !execute_main)
+    if (!ctx->main_func || !execute_main) {
         nb_workers--;
+}
 
     for (i = 0; i < nb_workers; i++) {
         WorkerContext *w = &ctx->workers[i];
@@ -186,15 +192,17 @@ void avpriv_slicethread_execute(AVSliceThread *ctx, int nb_jobs, int execute_mai
         pthread_mutex_unlock(&w->mutex);
     }
 
-    if (ctx->main_func && execute_main)
+    if (ctx->main_func && execute_main) {
         ctx->main_func(ctx->priv);
-    else
+    } else {
         is_last = run_jobs(ctx);
+}
 
     if (!is_last) {
         pthread_mutex_lock(&ctx->done_mutex);
-        while (!ctx->done)
+        while (!ctx->done) {
             pthread_cond_wait(&ctx->done_cond, &ctx->done_mutex);
+}
         ctx->done = 0;
         pthread_mutex_unlock(&ctx->done_mutex);
     }
@@ -205,13 +213,15 @@ void avpriv_slicethread_free(AVSliceThread **pctx)
     AVSliceThread *ctx;
     int nb_workers, i;
 
-    if (!pctx || !*pctx)
+    if (!pctx || !*pctx) {
         return;
+}
 
     ctx = *pctx;
     nb_workers = ctx->nb_threads;
-    if (!ctx->main_func)
+    if (!ctx->main_func) {
         nb_workers--;
+}
 
     ctx->finished = 1;
     for (i = 0; i < nb_workers; i++) {

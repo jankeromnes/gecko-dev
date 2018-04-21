@@ -63,7 +63,8 @@ static int alloc_seg_map(AV1_COMMON *cm, int seg_map_size) {
 
   for (i = 0; i < NUM_PING_PONG_BUFFERS; ++i) {
     cm->seg_map_array[i] = (uint8_t *)aom_calloc(seg_map_size, 1);
-    if (cm->seg_map_array[i] == NULL) return 1;
+    if (cm->seg_map_array[i] == NULL) { return 1;
+}
   }
   cm->seg_map_alloc_size = seg_map_size;
 
@@ -72,8 +73,9 @@ static int alloc_seg_map(AV1_COMMON *cm, int seg_map_size) {
   cm->prev_seg_map_idx = 1;
 
   cm->current_frame_seg_map = cm->seg_map_array[cm->seg_map_idx];
-  if (!cm->frame_parallel_decode)
+  if (!cm->frame_parallel_decode) {
     cm->last_frame_seg_map = cm->seg_map_array[cm->prev_seg_map_idx];
+}
 
   return 0;
 }
@@ -157,10 +159,11 @@ void av1_alloc_restoration_buffers(AV1_COMMON *cm) {
   int height = cm->height;
 #endif  // CONFIG_FRAME_SUPERRES
   av1_alloc_restoration_struct(cm, &cm->rst_info[0], width, height);
-  for (p = 1; p < MAX_MB_PLANE; ++p)
+  for (p = 1; p < MAX_MB_PLANE; ++p) {
     av1_alloc_restoration_struct(cm, &cm->rst_info[p],
                                  ROUND_POWER_OF_TWO(width, cm->subsampling_x),
                                  ROUND_POWER_OF_TWO(height, cm->subsampling_y));
+}
   aom_free(cm->rst_internal.tmpbuf);
   CHECK_MEM_ERROR(cm, cm->rst_internal.tmpbuf,
                   (int32_t *)aom_memalign(16, RESTORATION_TMPBUF_SIZE));
@@ -195,8 +198,9 @@ void av1_alloc_restoration_buffers(AV1_COMMON *cm) {
 
 void av1_free_restoration_buffers(AV1_COMMON *cm) {
   int p;
-  for (p = 0; p < MAX_MB_PLANE; ++p)
+  for (p = 0; p < MAX_MB_PLANE; ++p) {
     av1_free_restoration_struct(&cm->rst_info[p]);
+}
   aom_free(cm->rst_internal.tmpbuf);
   cm->rst_internal.tmpbuf = NULL;
 }
@@ -232,15 +236,18 @@ int av1_alloc_context_buffers(AV1_COMMON *cm, int width, int height) {
   new_mi_size = cm->mi_stride * calc_mi_size(cm->mi_rows);
   if (cm->mi_alloc_size < new_mi_size) {
     cm->free_mi(cm);
-    if (cm->alloc_mi(cm, new_mi_size)) goto fail;
+    if (cm->alloc_mi(cm, new_mi_size)) { goto fail;
+}
   }
 
   if (cm->seg_map_alloc_size < cm->mi_rows * cm->mi_cols) {
     // Create the segmentation map structure and set to 0.
     free_seg_map(cm);
-    if (alloc_seg_map(cm, cm->mi_rows * cm->mi_cols)) goto fail;
+    if (alloc_seg_map(cm, cm->mi_rows * cm->mi_cols)) { goto fail;
+}
   }
-  if (alloc_scratch_buffers(cm)) goto fail;
+  if (alloc_scratch_buffers(cm)) { goto fail;
+}
 
   if (cm->above_context_alloc_cols < cm->mi_cols) {
     // TODO(geza.lore): These are bigger than they need to be.
@@ -255,26 +262,30 @@ int av1_alloc_context_buffers(AV1_COMMON *cm, int width, int height) {
       cm->above_context[i] = (ENTROPY_CONTEXT *)aom_calloc(
           aligned_mi_cols << (MI_SIZE_LOG2 - tx_size_wide_log2[0]),
           sizeof(*cm->above_context[0]));
-      if (!cm->above_context[i]) goto fail;
+      if (!cm->above_context[i]) { goto fail;
+}
     }
 
     aom_free(cm->above_seg_context);
     cm->above_seg_context = (PARTITION_CONTEXT *)aom_calloc(
         aligned_mi_cols, sizeof(*cm->above_seg_context));
-    if (!cm->above_seg_context) goto fail;
+    if (!cm->above_seg_context) { goto fail;
+}
 
 #if CONFIG_VAR_TX
     aom_free(cm->above_txfm_context);
     cm->above_txfm_context = (TXFM_CONTEXT *)aom_calloc(
         aligned_mi_cols << TX_UNIT_WIDE_LOG2, sizeof(*cm->above_txfm_context));
-    if (!cm->above_txfm_context) goto fail;
+    if (!cm->above_txfm_context) { goto fail;
+}
 
     for (i = 0; i < MAX_MB_PLANE; ++i) {
       aom_free(cm->top_txfm_context[i]);
       cm->top_txfm_context[i] =
           (TXFM_CONTEXT *)aom_calloc(aligned_mi_cols << TX_UNIT_WIDE_LOG2,
                                      sizeof(*cm->top_txfm_context[0]));
-      if (!cm->top_txfm_context[i]) goto fail;
+      if (!cm->top_txfm_context[i]) { goto fail;
+}
     }
 #endif
 
@@ -301,8 +312,9 @@ void av1_remove_common(AV1_COMMON *cm) {
 
 void av1_init_context_buffers(AV1_COMMON *cm) {
   cm->setup_mi(cm);
-  if (cm->last_frame_seg_map && !cm->frame_parallel_decode)
+  if (cm->last_frame_seg_map && !cm->frame_parallel_decode) {
     memset(cm->last_frame_seg_map, 0, cm->mi_rows * cm->mi_cols);
+}
 }
 
 void av1_swap_current_and_last_seg_map(AV1_COMMON *cm) {

@@ -344,8 +344,9 @@ sec_asn1d_zalloc(PLArenaPool *poolp, unsigned long len)
     void *thing;
 
     thing = sec_asn1d_alloc(poolp, len);
-    if (thing != NULL)
+    if (thing != NULL) {
         PORT_Memset(thing, 0, len);
+}
     return thing;
 }
 
@@ -375,8 +376,9 @@ sec_asn1d_push_state(SEC_ASN1DecoderContext *cx,
     new_state->parent = state;
     new_state->theTemplate = theTemplate;
     new_state->place = notInUse;
-    if (dest != NULL)
+    if (dest != NULL) {
         new_state->dest = (char *)dest + theTemplate->offset;
+}
 
     if (state != NULL) {
         new_state->depth = state->depth;
@@ -418,8 +420,9 @@ sec_asn1d_scrub_state(sec_asn1d_state *state)
 static void
 sec_asn1d_notify_before(SEC_ASN1DecoderContext *cx, void *dest, int depth)
 {
-    if (cx->notify_proc == NULL)
+    if (cx->notify_proc == NULL) {
         return;
+}
 
     cx->during_notify = PR_TRUE;
     (*cx->notify_proc)(cx->notify_arg, PR_TRUE, dest, depth);
@@ -429,8 +432,9 @@ sec_asn1d_notify_before(SEC_ASN1DecoderContext *cx, void *dest, int depth)
 static void
 sec_asn1d_notify_after(SEC_ASN1DecoderContext *cx, void *dest, int depth)
 {
-    if (cx->notify_proc == NULL)
+    if (cx->notify_proc == NULL) {
         return;
+}
 
     cx->during_notify = PR_TRUE;
     (*cx->notify_proc)(cx->notify_arg, PR_FALSE, dest, depth);
@@ -446,8 +450,9 @@ sec_asn1d_init_state_based_on_template(sec_asn1d_state *state)
     unsigned long check_tag_mask, expect_tag_number;
 
     /* XXX Check that both of these tests are really needed/appropriate. */
-    if (state == NULL || state->top->status == decodeError)
+    if (state == NULL || state->top->status == decodeError) {
         return state;
+}
 
     encode_kind = state->theTemplate->kind;
 
@@ -472,13 +477,15 @@ sec_asn1d_init_state_based_on_template(sec_asn1d_state *state)
              * cannot convince myself one way or the other.)  If it is NULL,
              * assume that our parent dest can help us out.
              */
-            if (state->dest == NULL)
+            if (state->dest == NULL) {
                 state->dest = state->parent->dest;
-            else
+            } else {
                 state->dest = (char *)state->dest - state->theTemplate->offset;
+}
             state->theTemplate++;
-            if (state->dest != NULL)
+            if (state->dest != NULL) {
                 state->dest = (char *)state->dest + state->theTemplate->offset;
+}
             sec_asn1d_notify_before(state->top, state->dest, state->depth);
             encode_kind = state->theTemplate->kind;
             PORT_Assert((encode_kind & SEC_ASN1_SAVE) == 0);
@@ -487,8 +494,9 @@ sec_asn1d_init_state_based_on_template(sec_asn1d_state *state)
             state->place = duringSaveEncoding;
             state = sec_asn1d_push_state(state->top, SEC_AnyTemplate,
                                          state->dest, PR_FALSE);
-            if (state != NULL)
+            if (state != NULL) {
                 state = sec_asn1d_init_state_based_on_template(state);
+}
             return state;
         }
     }
@@ -568,8 +576,9 @@ sec_asn1d_init_state_based_on_template(sec_asn1d_state *state)
                  */
                 PORT_Assert((encode_kind & ~SEC_ASN1_TAG_MASK) == SEC_ASN1_POINTER);
             }
-            if (!state->top->filter_only)
+            if (!state->top->filter_only) {
                 child_allocate = PR_TRUE;
+}
             dest = NULL;
             state->place = afterPointer;
         } else {
@@ -586,8 +595,9 @@ sec_asn1d_init_state_based_on_template(sec_asn1d_state *state)
         state->optional = optional;
         subt = SEC_ASN1GetSubtemplate(state->theTemplate, state->dest, PR_FALSE);
         state = sec_asn1d_push_state(state->top, subt, dest, PR_FALSE);
-        if (state == NULL)
+        if (state == NULL) {
             return NULL;
+}
 
         state->allocate = child_allocate;
 
@@ -781,8 +791,9 @@ sec_asn1d_parse_identifier(sec_asn1d_state *state,
              * We might be an optional field that is, as we now find out,
              * missing.  Give our parent a clue that this happened.
              */
-            if (state->optional)
+            if (state->optional) {
                 state->missing = PR_TRUE;
+}
             return 0;
         }
         state->place = afterIdentifier;
@@ -827,12 +838,14 @@ sec_asn1d_parse_more_identifier(sec_asn1d_state *state,
         state->found_tag_number |= (byte & TAG_NUMBER_MASK);
 
         len--;
-        if (LAST_TAG_NUMBER_BYTE(byte))
+        if (LAST_TAG_NUMBER_BYTE(byte)) {
             state->pending = 0;
+}
     }
 
-    if (state->pending == 0)
+    if (state->pending == 0) {
         state->place = afterIdentifier;
+}
 
     return count;
 }
@@ -938,8 +951,9 @@ sec_asn1d_parse_more_length(sec_asn1d_state *state,
         state->pending--;
     }
 
-    if (state->pending == 0)
+    if (state->pending == 0) {
         state->place = afterLength;
+}
 
     return count;
 }
@@ -1123,8 +1137,9 @@ sec_asn1d_prepare_for_contents(sec_asn1d_state *state)
                                           PR_FALSE);
             state = sec_asn1d_push_state(state->top, subt, NULL, PR_TRUE);
             if (state != NULL) {
-                if (!state->top->filter_only)
+                if (!state->top->filter_only) {
                     state->allocate = PR_TRUE; /* XXX propogate this? */
+}
                 /*
                  * Do the "before" field notification for next in group.
                  */
@@ -1295,8 +1310,9 @@ sec_asn1d_prepare_for_contents(sec_asn1d_state *state)
                 if (state->subitems_head != NULL) {
                     PORT_Assert(state->underlying_kind == SEC_ASN1_ANY);
                     for (subitem = state->subitems_head;
-                         subitem != NULL; subitem = subitem->next)
+                         subitem != NULL; subitem = subitem->next) {
                         alloc_len += subitem->len;
+}
                 }
 
                 if (state->top->max_element_size > 0 &&
@@ -1399,10 +1415,11 @@ sec_asn1d_prepare_for_contents(sec_asn1d_state *state)
                 /*
                  * A non-zero-length simple string.
                  */
-                if (state->underlying_kind == SEC_ASN1_BIT_STRING)
+                if (state->underlying_kind == SEC_ASN1_BIT_STRING) {
                     state->place = beforeBitString;
-                else
+                } else {
                     state->place = duringLeaf;
+}
             }
             break;
 
@@ -1550,8 +1567,9 @@ sec_asn1d_reuse_encoding(sec_asn1d_state *state)
      * Now parse that out of our data.
      */
     if (SEC_ASN1DecoderUpdate(state->top,
-                              (char *)item->data, item->len) != SECSuccess)
+                              (char *)item->data, item->len) != SECSuccess) {
         return;
+}
     if (state->top->status == needBytes) {
         return;
     }
@@ -1585,8 +1603,9 @@ sec_asn1d_parse_leaf(sec_asn1d_state *state,
         return 0;
     }
 
-    if (state->pending < len)
+    if (state->pending < len) {
         len = state->pending;
+}
 
     bufLen = len;
 
@@ -1641,8 +1660,9 @@ sec_asn1d_parse_leaf(sec_asn1d_state *state,
         PORT_Memcpy(item->data + offset, buf, len);
     }
     state->pending -= bufLen;
-    if (state->pending == 0)
+    if (state->pending == 0) {
         state->place = beforeEndOfContents;
+}
 
     return bufLen;
 }
@@ -1729,8 +1749,9 @@ sec_asn1d_add_to_subitems(sec_asn1d_state *state,
         copy = sec_asn1d_alloc(state->top->our_pool, len);
         if (copy == NULL) {
             state->top->status = decodeError;
-            if (!state->top->our_pool)
+            if (!state->top->our_pool) {
                 PORT_Free(thing);
+}
             return NULL;
         }
         PORT_Memcpy(copy, data, len);
@@ -1808,8 +1829,9 @@ sec_asn1d_next_substring(sec_asn1d_state *state)
         }
 
         state->pending -= child_consumed;
-        if (state->pending == 0)
+        if (state->pending == 0) {
             done = PR_TRUE;
+}
     } else {
         PRBool preallocatedString;
         sec_asn1d_state *temp_state;
@@ -1927,8 +1949,9 @@ sec_asn1d_next_substring(sec_asn1d_state *state)
         /*
          * If our child was just our end-of-contents octets, we are done.
          */
-        if (child->endofcontents)
+        if (child->endofcontents) {
             done = PR_TRUE;
+}
     }
 
     /*
@@ -2159,8 +2182,9 @@ sec_asn1d_next_in_sequence(sec_asn1d_state *state)
         /*
          * Reset state and push.
          */
-        if (state->dest != NULL)
+        if (state->dest != NULL) {
             child->dest = (char *)state->dest + child->theTemplate->offset;
+}
 
         /*
          * Do the "before" field notification.
@@ -2243,8 +2267,9 @@ sec_asn1d_concat_substrings(sec_asn1d_state *state)
              * ANY that is *not* also an INNER.  Because we zero-allocate
              * below, all we need to do is increase the length here.
              */
-            if (state->underlying_kind == SEC_ASN1_ANY && state->indefinite)
+            if (state->underlying_kind == SEC_ASN1_ANY && state->indefinite) {
                 item_len += 2;
+}
             alloc_len = item_len;
         }
 
@@ -2269,10 +2294,11 @@ sec_asn1d_concat_substrings(sec_asn1d_state *state)
         where = item->data;
         substring = state->subitems_head;
         while (substring != NULL) {
-            if (is_bit_string)
+            if (is_bit_string) {
                 item_len = (substring->len + 7) >> 3;
-            else
+            } else {
                 item_len = substring->len;
+}
             PORT_Memcpy(where, substring->data, item_len);
             where += item_len;
             substring = substring->next;
@@ -2445,8 +2471,9 @@ sec_asn1d_parse_end_of_contents(sec_asn1d_state *state,
         return 0;
     }
 
-    if (state->pending < len)
+    if (state->pending < len) {
         len = state->pending;
+}
 
     for (i = 0; i < len; i++) {
         if (buf[i] != 0) {
@@ -2565,8 +2592,9 @@ sec_asn1d_during_choice(sec_asn1d_state *state)
             child->place = notInUse;
             state->place = afterChoice;
             state->endofcontents = PR_TRUE; /* propagate this up */
-            if (sec_asn1d_parent_allows_EOC(state))
+            if (sec_asn1d_parent_allows_EOC(state)) {
                 return state;
+}
             PORT_SetError(SEC_ERROR_BAD_DER);
             state->top->status = decodeError;
             return NULL;
@@ -2652,8 +2680,9 @@ sec_asn1d_uinteger(SECItem *src)
     unsigned long value;
     int len;
 
-    if (src->len > 5 || (src->len > 4 && src->data[0] == 0))
+    if (src->len > 5 || (src->len > 4 && src->data[0] == 0)) {
         return 0;
+}
 
     value = 0;
     len = src->len;
@@ -2685,10 +2714,11 @@ SEC_ASN1DecodeInteger(SECItem *src, unsigned long *value)
         return SECFailure;
     }
 
-    if (src->data[0] & 0x80)
+    if (src->data[0] & 0x80) {
         v = -1; /* signed and negative - start with all 1's */
-    else
+    } else {
         v = 0;
+}
 
     for (i = 0; i < src->len; i++) {
         /* shift in next byte */
@@ -2746,8 +2776,9 @@ SEC_ASN1DecoderUpdate(SEC_ASN1DecoderContext *cx,
     SEC_ASN1EncodingPart what;
     sec_asn1d_state *stateEnd = cx->current;
 
-    if (cx->status == needBytes)
+    if (cx->status == needBytes) {
         cx->status = keepGoing;
+}
 
     while (cx->status == keepGoing) {
         state = cx->current;
@@ -2861,8 +2892,9 @@ SEC_ASN1DecoderUpdate(SEC_ASN1DecoderContext *cx,
                 break;
         }
 
-        if (cx->status == decodeError)
+        if (cx->status == decodeError) {
             break;
+}
 
         /* We should not consume more than we have.  */
         PORT_Assert(consumed <= len);
@@ -2895,8 +2927,9 @@ SEC_ASN1DecoderUpdate(SEC_ASN1DecoderContext *cx,
             break;
         }
 
-        if (consumed == 0)
+        if (consumed == 0) {
             continue;
+}
 
         /*
          * The following check is specifically looking for an ANY
@@ -3001,8 +3034,9 @@ SEC_ASN1DecoderStart(PLArenaPool *their_pool, void *dest,
     SEC_ASN1DecoderContext *cx;
 
     our_pool = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if (our_pool == NULL)
+    if (our_pool == NULL) {
         return NULL;
+}
 
     cx = (SEC_ASN1DecoderContext *)PORT_ArenaZAlloc(our_pool, sizeof(*cx));
     if (cx == NULL) {
@@ -3095,8 +3129,9 @@ SEC_ASN1Decode(PLArenaPool *poolp, void *dest,
     SECStatus urv, frv;
 
     dcx = SEC_ASN1DecoderStart(poolp, dest, theTemplate);
-    if (dcx == NULL)
+    if (dcx == NULL) {
         return SECFailure;
+}
 
     /* In one-shot mode, there's no possibility of streaming data beyond the
      * length of len */
@@ -3105,8 +3140,9 @@ SEC_ASN1Decode(PLArenaPool *poolp, void *dest,
     urv = SEC_ASN1DecoderUpdate(dcx, buf, len);
     frv = SEC_ASN1DecoderFinish(dcx);
 
-    if (urv != SECSuccess)
+    if (urv != SECSuccess) {
         return urv;
+}
 
     return frv;
 }

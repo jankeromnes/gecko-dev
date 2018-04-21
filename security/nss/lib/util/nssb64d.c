@@ -135,8 +135,9 @@ pl_base64_decode_4to3(const unsigned char *in, unsigned char *out)
 
     for (j = 0; j < 4; j++) {
         bits = base64_codetovaluep1[in[j]];
-        if (bits == 0)
+        if (bits == 0) {
             return -1;
+}
         num = (num << 6) | (bits - 1);
     }
 
@@ -161,8 +162,9 @@ pl_base64_decode_3to2(const unsigned char *in, unsigned char *out)
     bits2 = base64_codetovaluep1[in[1]];
     bits3 = base64_codetovaluep1[in[2]];
 
-    if ((bits1 == 0) || (bits2 == 0) || (bits3 == 0))
+    if ((bits1 == 0) || (bits2 == 0) || (bits3 == 0)) {
         return -1;
+}
 
     num = ((PRUint32)(bits1 - 1)) << 10;
     num |= ((PRUint32)(bits2 - 1)) << 4;
@@ -187,8 +189,9 @@ pl_base64_decode_2to1(const unsigned char *in, unsigned char *out)
     bits1 = base64_codetovaluep1[in[0]];
     bits2 = base64_codetovaluep1[in[1]];
 
-    if ((bits1 == 0) || (bits2 == 0))
+    if ((bits1 == 0) || (bits2 == 0)) {
         return -1;
+}
 
     num = ((PRUint32)(bits1 - 1)) << 2;
     num |= ((PRUint32)(bits2 - 1)) >> 4;
@@ -205,11 +208,13 @@ pl_base64_decode_2to1(const unsigned char *in, unsigned char *out)
 static int
 pl_base64_decode_token(const unsigned char *in, unsigned char *out)
 {
-    if (in[3] != B64_PAD)
+    if (in[3] != B64_PAD) {
         return pl_base64_decode_4to3(in, out);
+}
 
-    if (in[2] == B64_PAD)
+    if (in[2] == B64_PAD) {
         return pl_base64_decode_2to1(in, out);
+}
 
     return pl_base64_decode_3to2(in, out);
 }
@@ -236,8 +241,9 @@ pl_base64_decode_buffer(PLBase64Decoder *data, const unsigned char *in,
              * the processing down doing more complicated checking, but
              * someone else might have different ideas in the future.
              */
-            if (base64_codetovaluep1[*in] > 0 || *in == B64_PAD)
+            if (base64_codetovaluep1[*in] > 0 || *in == B64_PAD) {
                 token[i++] = *in;
+}
             in++;
             length--;
         }
@@ -266,8 +272,9 @@ pl_base64_decode_buffer(PLBase64Decoder *data, const unsigned char *in,
          * Whew.  Understand?
          */
         n = pl_base64_decode_4to3(token, out);
-        if (n < 0)
+        if (n < 0) {
             break;
+}
 
         /* Advance "out" by the number of bytes just written to it. */
         out += n;
@@ -283,8 +290,9 @@ pl_base64_decode_buffer(PLBase64Decoder *data, const unsigned char *in,
      */
     if (n < 0) {
         n = pl_base64_decode_token(token, out);
-        if (n < 0)
+        if (n < 0) {
             return PR_FAILURE;
+}
 
         out += n;
     }
@@ -298,8 +306,9 @@ pl_base64_decode_buffer(PLBase64Decoder *data, const unsigned char *in,
      * we would expect to decode, something is wrong.
      */
     while (length > 0) {
-        if (base64_codetovaluep1[*in] > 0)
+        if (base64_codetovaluep1[*in] > 0) {
             return PR_FAILURE;
+}
         in++;
         length--;
     }
@@ -325,22 +334,25 @@ pl_base64_decode_flush(PLBase64Decoder *data)
      * input, but again, be tolerant), then nothing more to do.  (And, that
      * is considered successful.)
      */
-    if (data->token_size == 0 || data->token[0] == B64_PAD)
+    if (data->token_size == 0 || data->token[0] == B64_PAD) {
         return PR_SUCCESS;
+}
 
     /*
      * Assume we have all the interesting input except for some expected
      * padding characters.  Add them and decode the resulting token.
      */
-    while (data->token_size < 4)
+    while (data->token_size < 4) {
         data->token[data->token_size++] = B64_PAD;
+}
 
     data->token_size = 0; /* so a subsequent flush call is a no-op */
 
     count = pl_base64_decode_token(data->token,
                                    data->output_buffer + data->output_length);
-    if (count < 0)
+    if (count < 0) {
         return PR_FAILURE;
+}
 
     /*
      * If there is an output function, call it with this last bit of data.
@@ -354,8 +366,9 @@ pl_base64_decode_flush(PLBase64Decoder *data)
         output_result = data->output_fn(data->output_arg,
                                         data->output_buffer,
                                         (PRInt32)count);
-        if (output_result < 0)
+        if (output_result < 0) {
             return PR_FAILURE;
+}
     } else {
         data->output_length += count;
     }
@@ -437,14 +450,16 @@ PL_UpdateBase64Decoder(PLBase64Decoder *data, const char *buffer,
     if (need_length > data->output_buflen) {
         unsigned char *output_buffer = data->output_buffer;
 
-        if (output_buffer != NULL)
+        if (output_buffer != NULL) {
             output_buffer = (unsigned char *)PR_Realloc(output_buffer,
                                                         need_length);
-        else
+        } else {
             output_buffer = (unsigned char *)PR_Malloc(need_length);
+}
 
-        if (output_buffer == NULL)
+        if (output_buffer == NULL) {
             return PR_FAILURE;
+}
 
         data->output_buffer = output_buffer;
         data->output_buflen = need_length;
@@ -465,8 +480,9 @@ PL_UpdateBase64Decoder(PLBase64Decoder *data, const char *buffer,
         output_result = data->output_fn(data->output_arg,
                                         data->output_buffer,
                                         (PRInt32)data->output_length);
-        if (output_result < 0)
+        if (output_result < 0) {
             status = PR_FAILURE;
+}
     }
 
     data->output_length = 0;
@@ -490,11 +506,13 @@ PL_DestroyBase64Decoder(PLBase64Decoder *data, PRBool abort_p)
     }
 
     /* Flush out the last few buffered characters. */
-    if (!abort_p)
+    if (!abort_p) {
         status = pl_base64_decode_flush(data);
+}
 
-    if (data->output_buffer != NULL)
+    if (data->output_buffer != NULL) {
         PR_Free(data->output_buffer);
+}
     PR_Free(data);
 
     return status;
@@ -545,14 +563,16 @@ PL_Base64DecodeBuffer(const char *src, PRUint32 srclen, unsigned char *dest,
         output_buffer = dest;
     } else {
         output_buffer = (unsigned char *)PR_Malloc(need_length);
-        if (output_buffer == NULL)
+        if (output_buffer == NULL) {
             goto loser;
+}
         maxdestlen = need_length;
     }
 
     data = pl_base64_create_decoder();
-    if (data == NULL)
+    if (data == NULL) {
         goto loser;
+}
 
     data->output_buflen = maxdestlen;
     data->output_buffer = output_buffer;
@@ -564,8 +584,9 @@ PL_Base64DecodeBuffer(const char *src, PRUint32 srclen, unsigned char *dest,
      * We do not wait for Destroy to flush, because Destroy will also
      * get rid of our decoder context, which we need to look at first!
      */
-    if (status == PR_SUCCESS)
+    if (status == PR_SUCCESS) {
         status = pl_base64_decode_flush(data);
+}
 
     /* Must clear this or Destroy will free it. */
     data->output_buffer = NULL;
@@ -574,16 +595,19 @@ PL_Base64DecodeBuffer(const char *src, PRUint32 srclen, unsigned char *dest,
         *output_destlen = data->output_length;
         status = PL_DestroyBase64Decoder(data, PR_FALSE);
         data = NULL;
-        if (status == PR_FAILURE)
+        if (status == PR_FAILURE) {
             goto loser;
+}
         return output_buffer;
     }
 
 loser:
-    if (dest == NULL && output_buffer != NULL)
+    if (dest == NULL && output_buffer != NULL) {
         PR_Free(output_buffer);
-    if (data != NULL)
+}
+    if (data != NULL) {
         (void)PL_DestroyBase64Decoder(data, PR_TRUE);
+}
     return NULL;
 }
 
@@ -623,8 +647,9 @@ NSSBase64Decoder_Create(PRInt32 (*output_fn)(void *, const unsigned char *,
     NSSBase64Decoder *nss_data;
 
     nss_data = PORT_ZNew(NSSBase64Decoder);
-    if (nss_data == NULL)
+    if (nss_data == NULL) {
         return NULL;
+}
 
     pl_data = PL_CreateBase64Decoder(output_fn, output_arg);
     if (pl_data == NULL) {
@@ -653,8 +678,9 @@ NSSBase64Decoder_Update(NSSBase64Decoder *data, const char *buffer,
     }
 
     pr_status = PL_UpdateBase64Decoder(data->pl_data, buffer, size);
-    if (pr_status == PR_FAILURE)
+    if (pr_status == PR_FAILURE) {
         return SECFailure;
+}
 
     return SECSuccess;
 }
@@ -679,8 +705,9 @@ NSSBase64Decoder_Destroy(NSSBase64Decoder *data, PRBool abort_p)
 
     PORT_Free(data);
 
-    if (pr_status == PR_FAILURE)
+    if (pr_status == PR_FAILURE) {
         return SECFailure;
+}
 
     return SECSuccess;
 }
@@ -712,8 +739,9 @@ NSSBase64_DecodeBuffer(PLArenaPool *arenaOpt, SECItem *outItemOpt,
         return NULL;
     }
 
-    if (arenaOpt != NULL)
+    if (arenaOpt != NULL) {
         mark = PORT_ArenaMark(arenaOpt);
+}
 
     max_out_len = PL_Base64MaxDecodedLength(inLen);
     if (max_out_len == 0) {
@@ -781,8 +809,9 @@ ATOB_AsciiToData(const char *string, unsigned int *lenp)
 
     dummy = NSSBase64_DecodeBuffer(NULL, &binary_item, string,
                                    (PRUint32)PORT_Strlen(string));
-    if (dummy == NULL)
+    if (dummy == NULL) {
         return NULL;
+}
 
     PORT_Assert(dummy == &binary_item);
 
@@ -816,8 +845,9 @@ ATOB_ConvertAsciiToItem(SECItem *binary_item, const char *ascii)
     dummy = NSSBase64_DecodeBuffer(NULL, binary_item, ascii,
                                    (PRUint32)PORT_Strlen(ascii));
 
-    if (dummy == NULL)
+    if (dummy == NULL) {
         return SECFailure;
+}
 
     return SECSuccess;
 }

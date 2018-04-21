@@ -80,8 +80,9 @@ lg_createCertObject(SDB *sdb, CK_OBJECT_HANDLE *handle,
         inDB = PR_FALSE;
     }
     if (cert == NULL) {
-        if (label)
+        if (label) {
             PORT_Free(label);
+}
         return CKR_ATTRIBUTE_VALUE_INVALID;
     }
 
@@ -93,15 +94,17 @@ lg_createCertObject(SDB *sdb, CK_OBJECT_HANDLE *handle,
     }
 
     if (!inDB) {
-        if (!trust)
+        if (!trust) {
             trust = &defTrust;
+}
         rv = nsslowcert_AddPermCert(certHandle, cert, label, trust);
     } else {
         rv = trust ? nsslowcert_ChangeCertTrust(certHandle, cert, trust) : SECSuccess;
     }
 
-    if (label)
+    if (label) {
         PORT_Free(label);
+}
 
     if (rv != SECSuccess) {
         nsslowcert_DestroyCertificate(cert);
@@ -314,8 +317,9 @@ lg_createSMimeObject(SDB *sdb, CK_OBJECT_HANDLE *handle,
     *handle = lg_mkHandle(sdb, &emailKey, LG_TOKEN_TYPE_SMIME);
 
 loser:
-    if (email)
+    if (email) {
         PORT_Free(email);
+}
 
     return ck_rv;
 }
@@ -418,8 +422,9 @@ lg_createPublicKeyObject(SDB *sdb, CK_KEY_TYPE key_type,
 
     pubKey = &pubKeySpace;
     crv = lg_Attribute2SSecItem(NULL, pubKeyAttr, templ, count, pubKey);
-    if (crv != CKR_OK)
+    if (crv != CKR_OK) {
         return crv;
+}
 
     if (key_type == CKK_EC) {
         SECStatus rv;
@@ -520,60 +525,73 @@ lg_mkPrivKey(SDB *sdb, const CK_ATTRIBUTE *templ, CK_ULONG count,
             privKey->keyType = NSSLOWKEYRSAKey;
             crv = lg_Attribute2SSecItem(arena, CKA_MODULUS, templ, count,
                                         &privKey->u.rsa.modulus);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_Attribute2SSecItem(arena, CKA_PUBLIC_EXPONENT, templ, count,
                                         &privKey->u.rsa.publicExponent);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_PrivAttr2SSecItem(arena, CKA_PRIVATE_EXPONENT, templ, count,
                                        &privKey->u.rsa.privateExponent, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_PrivAttr2SSecItem(arena, CKA_PRIME_1, templ, count,
                                        &privKey->u.rsa.prime1, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_PrivAttr2SSecItem(arena, CKA_PRIME_2, templ, count,
                                        &privKey->u.rsa.prime2, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_PrivAttr2SSecItem(arena, CKA_EXPONENT_1, templ, count,
                                        &privKey->u.rsa.exponent1, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_PrivAttr2SSecItem(arena, CKA_EXPONENT_2, templ, count,
                                        &privKey->u.rsa.exponent2, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_PrivAttr2SSecItem(arena, CKA_COEFFICIENT, templ, count,
                                        &privKey->u.rsa.coefficient, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             rv = DER_SetUInteger(privKey->arena, &privKey->u.rsa.version,
                                  NSSLOWKEY_VERSION);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 crv = CKR_HOST_MEMORY;
+}
             break;
 
         case CKK_DSA:
             privKey->keyType = NSSLOWKEYDSAKey;
             crv = lg_Attribute2SSecItem(arena, CKA_PRIME, templ, count,
                                         &privKey->u.dsa.params.prime);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_Attribute2SSecItem(arena, CKA_SUBPRIME, templ, count,
                                         &privKey->u.dsa.params.subPrime);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_Attribute2SSecItem(arena, CKA_BASE, templ, count,
                                         &privKey->u.dsa.params.base);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_PrivAttr2SSecItem(arena, CKA_VALUE, templ, count,
                                        &privKey->u.dsa.privateValue, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             if (lg_hasAttribute(CKA_NETSCAPE_DB, templ, count)) {
                 crv = lg_Attribute2SSecItem(arena, CKA_NETSCAPE_DB, templ, count,
                                             &privKey->u.dsa.publicValue);
@@ -586,16 +604,19 @@ lg_mkPrivKey(SDB *sdb, const CK_ATTRIBUTE *templ, CK_ULONG count,
             privKey->keyType = NSSLOWKEYDHKey;
             crv = lg_Attribute2SSecItem(arena, CKA_PRIME, templ, count,
                                         &privKey->u.dh.prime);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_Attribute2SSecItem(arena, CKA_BASE, templ, count,
                                         &privKey->u.dh.base);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             crv = lg_PrivAttr2SSecItem(arena, CKA_VALUE, templ, count,
                                        &privKey->u.dh.privateValue, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             if (lg_hasAttribute(CKA_NETSCAPE_DB, templ, count)) {
                 crv = lg_Attribute2SSecItem(arena, CKA_NETSCAPE_DB, templ, count,
                                             &privKey->u.dh.publicValue);
@@ -608,8 +629,9 @@ lg_mkPrivKey(SDB *sdb, const CK_ATTRIBUTE *templ, CK_ULONG count,
             privKey->keyType = NSSLOWKEYECKey;
             crv = lg_Attribute2SSecItem(arena, CKA_EC_PARAMS, templ, count,
                                         &privKey->u.ec.ecParams.DEREncoding);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
 
             /* Fill out the rest of the ecParams structure
              * based on the encoded params
@@ -621,20 +643,23 @@ lg_mkPrivKey(SDB *sdb, const CK_ATTRIBUTE *templ, CK_ULONG count,
             }
             crv = lg_PrivAttr2SSecItem(arena, CKA_VALUE, templ, count,
                                        &privKey->u.ec.privateValue, sdb);
-            if (crv != CKR_OK)
+            if (crv != CKR_OK) {
                 break;
+}
             if (lg_hasAttribute(CKA_NETSCAPE_DB, templ, count)) {
                 crv = lg_Attribute2SSecItem(arena, CKA_NETSCAPE_DB, templ, count,
                                             &privKey->u.ec.publicValue);
-                if (crv != CKR_OK)
+                if (crv != CKR_OK) {
                     break;
+}
                 /* privKey was zero'd so public value is already set to NULL, 0
                  * if we don't set it explicitly */
             }
             rv = DER_SetUInteger(privKey->arena, &privKey->u.ec.version,
                                  NSSLOWKEY_EC_PRIVATE_KEY_VERSION);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 crv = CKR_HOST_MEMORY;
+}
             break;
 
         default:
@@ -668,8 +693,9 @@ lg_createPrivateKeyObject(SDB *sdb, CK_KEY_TYPE key_type,
     }
 
     privKey = lg_mkPrivKey(sdb, templ, count, key_type, &crv);
-    if (privKey == NULL)
+    if (privKey == NULL) {
         return crv;
+}
     label = lg_getString(CKA_LABEL, templ, count);
 
     crv = lg_Attribute2SSecItem(NULL, CKA_NETSCAPE_DB, templ, count, &pubKey);
@@ -697,14 +723,17 @@ lg_createPrivateKeyObject(SDB *sdb, CK_KEY_TYPE key_type,
                                        label, sdb /*->password*/);
 
 fail:
-    if (label)
+    if (label) {
         PORT_Free(label);
+}
     *handle = lg_mkHandle(sdb, &pubKey, LG_TOKEN_TYPE_PRIV);
-    if (pubKey.data)
+    if (pubKey.data) {
         PORT_Free(pubKey.data);
+}
     lg_nsslowkey_DestroyPrivateKey(privKey);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return crv;
+}
 
     return CKR_OK;
 }
@@ -815,8 +844,9 @@ lg_mkSecretKeyRep(const CK_ATTRIBUTE *templ,
     /* The private exponent is the actual key value */
     crv = lg_PrivAttr2SecItem(arena, CKA_VALUE, templ, count,
                               &privKey->u.rsa.privateExponent, sdbpw);
-    if (crv != CKR_OK)
+    if (crv != CKR_OK) {
         goto loser;
+}
 
     /* All other fields empty - needs testing */
     privKey->u.rsa.prime1.len = sizeof derZero;
@@ -833,8 +863,9 @@ lg_mkSecretKeyRep(const CK_ATTRIBUTE *templ,
 
     /* Coeficient set to KEY_TYPE */
     crv = lg_GetULongAttribute(CKA_KEY_TYPE, templ, count, &keyType);
-    if (crv != CKR_OK)
+    if (crv != CKR_OK) {
         goto loser;
+}
     /* on 64 bit platforms, we still want to store 32 bits of keyType (This is
      * safe since the PKCS #11 defines for all types are 32 bits or less). */
     keyTypeStorage = (PRUint32)keyType;
@@ -891,8 +922,9 @@ lg_createSecretKeyObject(SDB *sdb, CK_KEY_TYPE key_type,
 
     crv = lg_Attribute2SecItem(NULL, CKA_ID, templ, count, &pubKey);
     /* Should this be ID? */
-    if (crv != CKR_OK)
+    if (crv != CKR_OK) {
         goto loser;
+}
 
     /* if we don't have an ID, generate one */
     if (pubKey.len == 0) {
@@ -901,8 +933,9 @@ lg_createSecretKeyObject(SDB *sdb, CK_KEY_TYPE key_type,
             pubKey.data = NULL;
         }
         crv = lg_GenerateSecretCKA_ID(keyHandle, &pubKey, label);
-        if (crv != CKR_OK)
+        if (crv != CKR_OK) {
             goto loser;
+}
     }
 
     privKey = lg_mkSecretKeyRep(templ, count, key_type, &pubKey, sdb);
@@ -921,12 +954,15 @@ lg_createSecretKeyObject(SDB *sdb, CK_KEY_TYPE key_type,
     *handle = lg_mkHandle(sdb, &pubKey, LG_TOKEN_TYPE_KEY);
 
 loser:
-    if (label)
+    if (label) {
         PORT_Free(label);
-    if (privKey)
+}
+    if (privKey) {
         lg_nsslowkey_DestroyPrivateKey(privKey);
-    if (pubKey.data)
+}
+    if (pubKey.data) {
         PORT_Free(pubKey.data);
+}
 
     return crv;
 }

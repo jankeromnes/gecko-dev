@@ -502,12 +502,14 @@ uprv_fmax(double x, double y)
 {
 #if IEEE_754
     /* first handle NaN*/
-    if(uprv_isNaN(x) || uprv_isNaN(y))
+    if(uprv_isNaN(x) || uprv_isNaN(y)) {
         return uprv_getNaN();
+}
 
     /* check for -0 and 0*/
-    if(x == 0.0 && y == 0.0 && u_signBit(x))
+    if(x == 0.0 && y == 0.0 && u_signBit(x)) {
         return y;
+}
 
 #endif
 
@@ -520,12 +522,14 @@ uprv_fmin(double x, double y)
 {
 #if IEEE_754
     /* first handle NaN*/
-    if(uprv_isNaN(x) || uprv_isNaN(y))
+    if(uprv_isNaN(x) || uprv_isNaN(y)) {
         return uprv_getNaN();
+}
 
     /* check for -0 and 0*/
-    if(x == 0.0 && y == 0.0 && u_signBit(y))
+    if(x == 0.0 && y == 0.0 && u_signBit(y)) {
         return y;
+}
 
 #endif
 
@@ -545,15 +549,18 @@ uprv_trunc(double d)
 {
 #if IEEE_754
     /* handle error cases*/
-    if(uprv_isNaN(d))
+    if(uprv_isNaN(d)) {
         return uprv_getNaN();
-    if(uprv_isInfinite(d))
+}
+    if(uprv_isInfinite(d)) {
         return uprv_getInfinity();
+}
 
-    if(u_signBit(d))    /* Signbit() picks up -0.0;  d<0 does not. */
+    if(u_signBit(d)) {    /* Signbit() picks up -0.0;  d<0 does not. */
         return ceil(d);
-    else
+    } else {
         return floor(d);
+}
 
 #else
     return d >= 0 ? floor(d) : ceil(d);
@@ -1001,8 +1008,9 @@ static char* searchForTZFile(const char* path, DefaultTZInfo* tzInfo) {
                  It worked without this in most cases because we have a fallback of calling
                  localtime_r to figure out the default timezone.
                 */
-                if (result != NULL)
+                if (result != NULL) {
                     break;
+}
             } else if (uprv_strcmp(TZFILE_SKIP, dirName) != 0 && uprv_strcmp(TZFILE_SKIP2, dirName) != 0) {
                 if(compareBinaryFiles(TZDEFAULT, newpath.data(), tzInfo)) {
                     int32_t amountToSkip = sizeof(TZZONEINFO) - 1;
@@ -2349,7 +2357,8 @@ u_getVersion(UVersionInfo versionArray) {
 U_INTERNAL void * U_EXPORT2
 uprv_dl_open(const char *libName, UErrorCode *status) {
   void *ret = NULL;
-  if(U_FAILURE(*status)) return ret;
+  if(U_FAILURE(*status)) { return ret;
+}
   ret =  dlopen(libName, RTLD_NOW|RTLD_GLOBAL);
   if(ret==NULL) {
 #ifdef U_TRACE_DYLOAD
@@ -2362,7 +2371,8 @@ uprv_dl_open(const char *libName, UErrorCode *status) {
 
 U_INTERNAL void U_EXPORT2
 uprv_dl_close(void *lib, UErrorCode *status) {
-  if(U_FAILURE(*status)) return;
+  if(U_FAILURE(*status)) { return;
+}
   dlclose(lib);
 }
 
@@ -2373,7 +2383,8 @@ uprv_dlsym_func(void *lib, const char* sym, UErrorCode *status) {
       void *vp;
   } uret;
   uret.fp = NULL;
-  if(U_FAILURE(*status)) return uret.fp;
+  if(U_FAILURE(*status)) { return uret.fp;
+}
   uret.vp = dlsym(lib, sym);
   if(uret.vp == NULL) {
 #ifdef U_TRACE_DYLOAD

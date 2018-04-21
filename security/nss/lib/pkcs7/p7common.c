@@ -21,11 +21,13 @@
 SECOidTag
 SEC_PKCS7ContentType(SEC_PKCS7ContentInfo *cinfo)
 {
-    if (cinfo->contentTypeTag == NULL)
+    if (cinfo->contentTypeTag == NULL) {
         cinfo->contentTypeTag = SECOID_FindOID(&(cinfo->contentType));
+}
 
-    if (cinfo->contentTypeTag == NULL)
+    if (cinfo->contentTypeTag == NULL) {
         return SEC_OID_UNKNOWN;
+}
 
     return cinfo->contentTypeTag->offset;
 }
@@ -43,12 +45,14 @@ SEC_PKCS7DestroyContentInfo(SEC_PKCS7ContentInfo *cinfo)
     SEC_PKCS7RecipientInfo **recipientinfos;
 
     PORT_Assert(cinfo->refCount > 0);
-    if (cinfo->refCount <= 0)
+    if (cinfo->refCount <= 0) {
         return;
+}
 
     cinfo->refCount--;
-    if (cinfo->refCount > 0)
+    if (cinfo->refCount > 0) {
         return;
+}
 
     certs = NULL;
     certlists = NULL;
@@ -84,8 +88,9 @@ SEC_PKCS7DestroyContentInfo(SEC_PKCS7ContentInfo *cinfo)
                 certlists = saedp->certLists;
                 recipientinfos = saedp->recipientInfos;
                 signerinfos = saedp->signerInfos;
-                if (saedp->sigKey != NULL)
+                if (saedp->sigKey != NULL) {
                     PK11_FreeSymKey(saedp->sigKey);
+}
             }
         } break;
         default:
@@ -113,8 +118,9 @@ SEC_PKCS7DestroyContentInfo(SEC_PKCS7ContentInfo *cinfo)
         SEC_PKCS7RecipientInfo *ri;
 
         while ((ri = *recipientinfos++) != NULL) {
-            if (ri->cert != NULL)
+            if (ri->cert != NULL) {
                 CERT_DestroyCertificate(ri->cert);
+}
         }
     }
 
@@ -122,10 +128,12 @@ SEC_PKCS7DestroyContentInfo(SEC_PKCS7ContentInfo *cinfo)
         SEC_PKCS7SignerInfo *si;
 
         while ((si = *signerinfos++) != NULL) {
-            if (si->cert != NULL)
+            if (si->cert != NULL) {
                 CERT_DestroyCertificate(si->cert);
-            if (si->certList != NULL)
+}
+            if (si->certList != NULL) {
                 CERT_DestroyCertificateList(si->certList);
+}
         }
     }
 
@@ -142,8 +150,9 @@ SEC_PKCS7DestroyContentInfo(SEC_PKCS7ContentInfo *cinfo)
 SEC_PKCS7ContentInfo *
 SEC_PKCS7CopyContentInfo(SEC_PKCS7ContentInfo *cinfo)
 {
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
     PORT_Assert(cinfo->refCount > 0);
 
@@ -184,40 +193,45 @@ SEC_PKCS7GetContent(SEC_PKCS7ContentInfo *cinfo)
             SEC_PKCS7DigestedData *digd;
 
             digd = cinfo->content.digestedData;
-            if (digd == NULL)
+            if (digd == NULL) {
                 break;
+}
             return SEC_PKCS7GetContent(&(digd->contentInfo));
         }
         case SEC_OID_PKCS7_ENCRYPTED_DATA: {
             SEC_PKCS7EncryptedData *encd;
 
             encd = cinfo->content.encryptedData;
-            if (encd == NULL)
+            if (encd == NULL) {
                 break;
+}
             return &(encd->encContentInfo.plainContent);
         }
         case SEC_OID_PKCS7_ENVELOPED_DATA: {
             SEC_PKCS7EnvelopedData *envd;
 
             envd = cinfo->content.envelopedData;
-            if (envd == NULL)
+            if (envd == NULL) {
                 break;
+}
             return &(envd->encContentInfo.plainContent);
         }
         case SEC_OID_PKCS7_SIGNED_DATA: {
             SEC_PKCS7SignedData *sigd;
 
             sigd = cinfo->content.signedData;
-            if (sigd == NULL)
+            if (sigd == NULL) {
                 break;
+}
             return SEC_PKCS7GetContent(&(sigd->contentInfo));
         }
         case SEC_OID_PKCS7_SIGNED_ENVELOPED_DATA: {
             SEC_PKCS7SignedAndEnvelopedData *saed;
 
             saed = cinfo->content.signedAndEnvelopedData;
-            if (saed == NULL)
+            if (saed == NULL) {
                 break;
+}
             return &(saed->encContentInfo.plainContent);
         }
         default:
@@ -305,8 +319,9 @@ SEC_PKCS7SetContent(SEC_PKCS7ContentInfo *cinfo,
                 /* it does not really matter */
 
                 /* create content item if necessary */
-                if (cinfo->content.signedData->contentInfo.content.data == NULL)
+                if (cinfo->content.signedData->contentInfo.content.data == NULL) {
                     cinfo->content.signedData->contentInfo.content.data = SECITEM_AllocItem(cinfo->poolp, NULL, 0);
+}
                 rv = SECITEM_CopyItem(cinfo->poolp,
                                       cinfo->content.signedData->contentInfo.content.data,
                                       &content);
@@ -315,21 +330,24 @@ SEC_PKCS7SetContent(SEC_PKCS7ContentInfo *cinfo,
                 cinfo->content.signedData->contentInfo.content.data->len = 0;
                 rv = SECSuccess;
             }
-            if (rv == SECFailure)
+            if (rv == SECFailure) {
                 goto loser;
+}
 
             break;
         case SEC_OID_PKCS7_ENCRYPTED_DATA:
             /* XXX this forces the inner content type to be "data" */
             /* do we really want to override without asking or reason? */
             contentTypeTag = SECOID_FindOIDByTag(SEC_OID_PKCS7_DATA);
-            if (contentTypeTag == NULL)
+            if (contentTypeTag == NULL) {
                 goto loser;
+}
             rv = SECITEM_CopyItem(cinfo->poolp,
                                   &(cinfo->content.encryptedData->encContentInfo.contentType),
                                   &(contentTypeTag->oid));
-            if (rv == SECFailure)
+            if (rv == SECFailure) {
                 goto loser;
+}
             if (content.len > 0) {
                 rv = SECITEM_CopyItem(cinfo->poolp,
                                       &(cinfo->content.encryptedData->encContentInfo.plainContent),
@@ -341,14 +359,16 @@ SEC_PKCS7SetContent(SEC_PKCS7ContentInfo *cinfo,
                 cinfo->content.encryptedData->encContentInfo.encContent.len = 0;
                 rv = SECSuccess;
             }
-            if (rv == SECFailure)
+            if (rv == SECFailure) {
                 goto loser;
+}
             break;
         case SEC_OID_PKCS7_DATA:
             cinfo->content.data = (SECItem *)PORT_ArenaZAlloc(cinfo->poolp,
                                                               sizeof(SECItem));
-            if (cinfo->content.data == NULL)
+            if (cinfo->content.data == NULL) {
                 goto loser;
+}
             if (content.len > 0) {
                 rv = SECITEM_CopyItem(cinfo->poolp,
                                       cinfo->content.data, &content);
@@ -356,8 +376,9 @@ SEC_PKCS7SetContent(SEC_PKCS7ContentInfo *cinfo,
                 /* handle case with NULL content */
                 rv = SECSuccess;
             }
-            if (rv == SECFailure)
+            if (rv == SECFailure) {
                 goto loser;
+}
             break;
         default:
             goto loser;
@@ -404,18 +425,22 @@ SEC_PKCS7EncryptContents(PLArenaPool *poolp,
     SECStatus rv = SECFailure;
     SECItem *c_param = NULL;
 
-    if ((cinfo == NULL) || (key == NULL))
+    if ((cinfo == NULL) || (key == NULL)) {
         return SECFailure;
+}
 
-    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_ENCRYPTED_DATA)
+    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_ENCRYPTED_DATA) {
         return SECFailure;
+}
 
     algid = SEC_PKCS7GetEncryptionAlgorithm(cinfo);
-    if (algid == NULL)
+    if (algid == NULL) {
         return SECFailure;
+}
 
-    if (poolp == NULL)
+    if (poolp == NULL) {
         poolp = cinfo->poolp;
+}
 
     mark = PORT_ArenaMark(poolp);
 
@@ -502,22 +527,27 @@ SEC_PKCS7EncryptContents(PLArenaPool *poolp,
 
 loser:
     /* let success fall through */
-    if (blocked_data != NULL)
+    if (blocked_data != NULL) {
         SECITEM_ZfreeItem(blocked_data, PR_TRUE);
+}
 
-    if (rv == SECFailure)
+    if (rv == SECFailure) {
         PORT_ArenaRelease(poolp, mark);
-    else
+    } else {
         PORT_ArenaUnmark(poolp, mark);
+}
 
-    if (eKey != NULL)
+    if (eKey != NULL) {
         PK11_FreeSymKey(eKey);
+}
 
-    if (slot != NULL)
+    if (slot != NULL) {
         PK11_FreeSlot(slot);
+}
 
-    if (c_param != NULL)
+    if (c_param != NULL) {
         SECITEM_ZfreeItem(c_param, PR_TRUE);
+}
 
     return rv;
 }
@@ -554,18 +584,22 @@ SEC_PKCS7DecryptContents(PLArenaPool *poolp,
     SECItem *c_param = NULL;
     int bs;
 
-    if ((cinfo == NULL) || (key == NULL))
+    if ((cinfo == NULL) || (key == NULL)) {
         return SECFailure;
+}
 
-    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_ENCRYPTED_DATA)
+    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_ENCRYPTED_DATA) {
         return SECFailure;
+}
 
     algid = SEC_PKCS7GetEncryptionAlgorithm(cinfo);
-    if (algid == NULL)
+    if (algid == NULL) {
         return SECFailure;
+}
 
-    if (poolp == NULL)
+    if (poolp == NULL) {
         poolp = cinfo->poolp;
+}
 
     mark = PORT_ArenaMark(poolp);
 
@@ -623,19 +657,23 @@ SEC_PKCS7DecryptContents(PLArenaPool *poolp,
 
 loser:
     /* let success fall through */
-    if (rv == SECFailure)
+    if (rv == SECFailure) {
         PORT_ArenaRelease(poolp, mark);
-    else
+    } else {
         PORT_ArenaUnmark(poolp, mark);
+}
 
-    if (eKey != NULL)
+    if (eKey != NULL) {
         PK11_FreeSymKey(eKey);
+}
 
-    if (slot != NULL)
+    if (slot != NULL) {
         PK11_FreeSlot(slot);
+}
 
-    if (c_param != NULL)
+    if (c_param != NULL) {
         SECITEM_ZfreeItem(c_param, PR_TRUE);
+}
 
     return rv;
 }
@@ -656,8 +694,9 @@ SEC_PKCS7GetCertificateList(SEC_PKCS7ContentInfo *cinfo)
 int
 SEC_PKCS7GetKeyLength(SEC_PKCS7ContentInfo *cinfo)
 {
-    if (cinfo->contentTypeTag->offset == SEC_OID_PKCS7_ENVELOPED_DATA)
+    if (cinfo->contentTypeTag->offset == SEC_OID_PKCS7_ENVELOPED_DATA) {
         return cinfo->content.envelopedData->encContentInfo.keysize;
-    else
+    } else {
         return 0;
+}
 }

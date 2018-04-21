@@ -391,7 +391,8 @@ MessageFormat::operator=(const MessageFormat& that)
 UBool
 MessageFormat::operator==(const Format& rhs) const
 {
-    if (this == &rhs) return TRUE;
+    if (this == &rhs) { return TRUE;
+}
 
     MessageFormat& that = (MessageFormat&)rhs;
 
@@ -756,7 +757,8 @@ MessageFormat::setFormat(int32_t n, const Format& newFormat) {
 // Do nothing if the variable is not less than the array count.
 Format *
 MessageFormat::getFormat(const UnicodeString& formatName, UErrorCode& status) {
-    if (U_FAILURE(status) || cachedFormatters == NULL) return NULL;
+    if (U_FAILURE(status) || cachedFormatters == NULL) { return NULL;
+}
 
     int32_t argNumber = MessagePattern::validateArgumentName(formatName);
     if (argNumber < UMSGPAT_ARG_NAME_NOT_NUMBER) {
@@ -778,7 +780,8 @@ void
 MessageFormat::setFormat(const UnicodeString& formatName,
                          const Format& newFormat,
                          UErrorCode& status) {
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
 
     int32_t argNumber = MessagePattern::validateArgumentName(formatName);
     if (argNumber < UMSGPAT_ARG_NAME_NOT_NUMBER) {
@@ -846,7 +849,8 @@ UnicodeString MessageFormat::getArgName(int32_t partIndex) {
 
 StringEnumeration*
 MessageFormat::getFormatNames(UErrorCode& status) {
-    if (U_FAILURE(status))  return NULL;
+    if (U_FAILURE(status)) {  return NULL;
+}
 
     UVector *fFormatNames = new UVector(status);
     if (U_FAILURE(status)) {
@@ -904,8 +908,9 @@ MessageFormat::format(const Formattable& source,
                       FieldPosition& ignore,
                       UErrorCode& success) const
 {
-    if (U_FAILURE(success))
+    if (U_FAILURE(success)) {
         return appendTo;
+}
     if (source.getType() != Formattable::kArray) {
         success = U_ILLEGAL_ARGUMENT_ERROR;
         return appendTo;
@@ -1537,8 +1542,9 @@ MessageFormat::parseObject( const UnicodeString& source,
 {
     int32_t cnt = 0;
     Formattable* tmpResult = parse(source, status, cnt);
-    if (tmpResult != NULL)
+    if (tmpResult != NULL) {
         result.adoptArray(tmpResult, cnt);
+}
 }
 
 UnicodeString

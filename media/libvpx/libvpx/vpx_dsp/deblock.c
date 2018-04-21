@@ -96,7 +96,8 @@ void vpx_post_proc_down_and_across_mb_row_c(unsigned char *src_ptr,
 
       d[col & 3] = v;
 
-      if (col >= 2) p_dst[col - 2] = d[(col - 2) & 3];
+      if (col >= 2) { p_dst[col - 2] = d[(col - 2) & 3];
+}
     }
 
     /* handle the last two pixels */
@@ -120,12 +121,14 @@ void vpx_mbpost_proc_across_ip_c(unsigned char *src, int pitch, int rows,
     int sumsq = 16;
     int sum = 0;
 
-    for (i = -8; i < 0; i++) s[i] = s[0];
+    for (i = -8; i < 0; i++) { s[i] = s[0];
+}
 
     /* 17 avoids valgrind warning - we buffer values in c in d
      * and only write them when we've read 8 ahead...
      */
-    for (i = 0; i < 17; i++) s[i + cols] = s[cols - 1];
+    for (i = 0; i < 17; i++) { s[i + cols] = s[cols - 1];
+}
 
     for (i = -8; i <= 6; i++) {
       sumsq += s[i] * s[i];
@@ -163,12 +166,14 @@ void vpx_mbpost_proc_down_c(unsigned char *dst, int pitch, int rows, int cols,
     int sum = 0;
     unsigned char d[16];
 
-    for (i = -8; i < 0; i++) s[i * pitch] = s[0];
+    for (i = -8; i < 0; i++) { s[i * pitch] = s[0];
+}
 
     /* 17 avoids valgrind warning - we buffer values in c in d
      * and only write them when we've read 8 ahead...
      */
-    for (i = 0; i < 17; i++) s[(i + rows) * pitch] = s[(rows - 1) * pitch];
+    for (i = 0; i < 17; i++) { s[(i + rows) * pitch] = s[(rows - 1) * pitch];
+}
 
     for (i = -8; i <= 6; i++) {
       sumsq += s[i * pitch] * s[i * pitch];
@@ -183,7 +188,8 @@ void vpx_mbpost_proc_down_c(unsigned char *dst, int pitch, int rows, int cols,
       if (sumsq * 15 - sum * sum < flimit) {
         d[r & 15] = (vpx_rv[(r & 127) + (c & 7)] + sum + s[0]) >> 4;
       }
-      if (r >= 8) s[-8 * pitch] = d[(r - 8) & 15];
+      if (r >= 8) { s[-8 * pitch] = d[(r - 8) & 15];
+}
       s += pitch;
     }
   }

@@ -120,13 +120,16 @@ uint32_t SyscallSet::Iterator::NextSyscall() const {
     // boundaries between signed and unsigned values are potential
     // problem cases. We want to explicitly return these values from
     // our iterator.
-    if (num_ < 0x7FFFFFFFu)
+    if (num_ < 0x7FFFFFFFu) {
       return 0x7FFFFFFFu;
-    if (num_ < 0x80000000u)
+}
+    if (num_ < 0x80000000u) {
       return 0x80000000u;
+}
 
-    if (num_ < 0xFFFFFFFFu)
+    if (num_ < 0xFFFFFFFFu) {
       return 0xFFFFFFFFu;
+}
   }
 
   return 0;

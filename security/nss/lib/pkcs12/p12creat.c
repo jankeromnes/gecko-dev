@@ -21,13 +21,15 @@ sec_pkcs12_new_pfx(void)
     PLArenaPool *poolp = NULL;
 
     poolp = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE); /* XXX Different size? */
-    if (poolp == NULL)
+    if (poolp == NULL) {
         goto loser;
+}
 
     pfx = (SEC_PKCS12PFXItem *)PORT_ArenaZAlloc(poolp,
                                                 sizeof(SEC_PKCS12PFXItem));
-    if (pfx == NULL)
+    if (pfx == NULL) {
         goto loser;
+}
     pfx->poolp = poolp;
 
     return pfx;
@@ -50,8 +52,9 @@ sec_pkcs12_new_asafe(PLArenaPool *poolp)
     mark = PORT_ArenaMark(poolp);
     asafe = (SEC_PKCS12AuthenticatedSafe *)PORT_ArenaZAlloc(poolp,
                                                             sizeof(SEC_PKCS12AuthenticatedSafe));
-    if (asafe == NULL)
+    if (asafe == NULL) {
         goto loser;
+}
     asafe->poolp = poolp;
     PORT_Memset(&asafe->old_baggage, 0, sizeof(SEC_PKCS12Baggage_OLD));
 
@@ -72,8 +75,9 @@ sec_pkcs12_create_safe_contents(PLArenaPool *poolp)
     SEC_PKCS12SafeContents *safe;
     void *mark;
 
-    if (poolp == NULL)
+    if (poolp == NULL) {
         return NULL;
+}
 
     /* allocate structure */
     mark = PORT_ArenaMark(poolp);
@@ -177,8 +181,9 @@ sec_pkcs12_create_baggage(PLArenaPool *poolp)
     SEC_PKCS12Baggage *luggage;
     void *mark;
 
-    if (poolp == NULL)
+    if (poolp == NULL) {
         return NULL;
+}
 
     mark = PORT_ArenaMark(poolp);
 

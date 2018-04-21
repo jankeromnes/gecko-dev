@@ -33,8 +33,9 @@ GetExtension(CERTCertExtension **extensions, SECItem *oid)
         while (*exts) {
             ext = *exts;
             comp = SECITEM_CompareItem(oid, &ext->id);
-            if (comp == SECEqual)
+            if (comp == SECEqual) {
                 break;
+}
 
             exts++;
         }
@@ -55,8 +56,9 @@ cert_FindExtensionByOID(CERTCertExtension **extensions, SECItem *oid,
         PORT_SetError(SEC_ERROR_EXTENSION_NOT_FOUND);
         return (SECFailure);
     }
-    if (value)
+    if (value) {
         rv = SECITEM_CopyItem(NULL, value, &ext->value);
+}
     return (rv);
 }
 
@@ -67,8 +69,9 @@ CERT_GetExtenCriticality(CERTCertExtension **extensions, int tag,
     CERTCertExtension *ext;
     SECOidData *oid;
 
-    if (!isCritical)
+    if (!isCritical) {
         return (SECSuccess);
+}
 
     /* find the extension in the extensions list */
     oid = SECOID_FindOIDByTag((SECOidTag)tag);
@@ -83,10 +86,11 @@ CERT_GetExtenCriticality(CERTCertExtension **extensions, int tag,
 
     /* If the criticality is omitted, then it is false by default.
        ex->critical.data is NULL */
-    if (ext->critical.data == NULL)
+    if (ext->critical.data == NULL) {
         *isCritical = PR_FALSE;
-    else
+    } else {
         *isCritical = (ext->critical.data[0] == 0xff) ? PR_TRUE : PR_FALSE;
+}
     return (SECSuccess);
 }
 
@@ -256,10 +260,12 @@ PrepareBitStringForEncoding(SECItem *bitsmap, SECItem *value)
     onebyte = '\0';
     /* Get the position of the right-most turn-on bit */
     for (i = 0; i < (value->len) * 8; ++i) {
-        if (i % 8 == 0)
+        if (i % 8 == 0) {
             onebyte = value->data[i / 8];
-        if (onebyte & 0x80)
+}
+        if (onebyte & 0x80) {
             len = i;
+}
         onebyte <<= 1;
     }
     bitsmap->data = value->data;
@@ -362,8 +368,9 @@ CERT_MergeExtensions(void *exthandle, CERTCertExtension **extensions)
         tag = SECOID_FindOIDTag(&ext->id);
         for (node = handle->head; node != NULL; node = node->next) {
             if (tag == 0) {
-                if (SECITEM_ItemsAreEqual(&ext->id, &node->ext->id))
+                if (SECITEM_ItemsAreEqual(&ext->id, &node->ext->id)) {
                     break;
+}
             } else {
                 if (SECOID_FindOIDTag(&node->ext->id) == tag) {
                     break;
@@ -381,8 +388,9 @@ CERT_MergeExtensions(void *exthandle, CERTCertExtension **extensions)
             /* add to list */
             rv = CERT_AddExtensionByOID(exthandle, &ext->id, &ext->value,
                                         critical, PR_TRUE);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
         }
     }
     return rv;

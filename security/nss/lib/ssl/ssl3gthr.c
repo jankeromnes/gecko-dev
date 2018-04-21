@@ -137,8 +137,9 @@ ssl3_GatherData(sslSocket *ss, sslGather *gs, int flags, ssl2Gather *ssl2gs)
 
         gs->offset += nb;
         gs->remainder -= nb;
-        if (gs->state == GS_DATA)
+        if (gs->state == GS_DATA) {
             gs->inbuf.len += nb;
+}
 
         /* if there's more to go, read some more. */
         if (gs->remainder > 0) {

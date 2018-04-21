@@ -1941,11 +1941,13 @@ uloc_getParent(const char*    localeID,
     const char *lastUnderscore;
     int32_t i;
 
-    if (U_FAILURE(*err))
+    if (U_FAILURE(*err)) {
         return 0;
+}
 
-    if (localeID == NULL)
+    if (localeID == NULL) {
         localeID = uloc_getDefault();
+}
 
     lastUnderscore=uprv_strrchr(localeID, '_');
     if(lastUnderscore!=NULL) {
@@ -2138,11 +2140,13 @@ uloc_getISO3Language(const char* localeID)
         localeID = uloc_getDefault();
     }
     uloc_getLanguage(localeID, lang, ULOC_LANG_CAPACITY, &err);
-    if (U_FAILURE(err))
+    if (U_FAILURE(err)) {
         return "";
+}
     offset = _findIndex(LANGUAGES, lang);
-    if (offset < 0)
+    if (offset < 0) {
         return "";
+}
     return LANGUAGES_3[offset];
 }
 
@@ -2158,11 +2162,13 @@ uloc_getISO3Country(const char* localeID)
         localeID = uloc_getDefault();
     }
     uloc_getCountry(localeID, cntry, ULOC_LANG_CAPACITY, &err);
-    if (U_FAILURE(err))
+    if (U_FAILURE(err)) {
         return "";
+}
     offset = _findIndex(COUNTRIES, cntry);
-    if (offset < 0)
+    if (offset < 0) {
         return "";
+}
 
     return COUNTRIES_3[offset];
 }
@@ -2247,8 +2253,9 @@ U_CAPI void  U_EXPORT2
 uloc_setDefault(const char*   newDefaultLocale,
              UErrorCode* err)
 {
-    if (U_FAILURE(*err))
+    if (U_FAILURE(*err)) {
         return;
+}
     /* the error code isn't currently used for anything by this function*/
 
     /* propagate change to C++ */
@@ -2380,8 +2387,9 @@ uloc_acceptLanguageFromHTTP(char *result, int32_t resultAvailable, UAcceptResult
     }
 
     for(s=httpAcceptLanguage;s&&*s;) {
-        while(isspace(*s)) /* eat space at the beginning */
+        while(isspace(*s)) { /* eat space at the beginning */
             s++;
+}
         itemEnd=uprv_strchr(s,',');
         paramEnd=uprv_strchr(s,';');
         if(!itemEnd) {
@@ -2410,8 +2418,9 @@ uloc_acceptLanguageFromHTTP(char *result, int32_t resultAvailable, UAcceptResult
         }
         items[n].dummy=0;
         /* eat spaces prior to semi */
-        for(t=(paramEnd-1);(paramEnd>s)&&isspace(*t);t--)
+        for(t=(paramEnd-1);(paramEnd>s)&&isspace(*t);t--) {
             ;
+}
         int32_t slen = ((t+1)-s);
         if(slen > ULOC_FULLNAME_CAPACITY) {
           *status = U_BUFFER_OVERFLOW_ERROR;
@@ -2420,7 +2429,8 @@ uloc_acceptLanguageFromHTTP(char *result, int32_t resultAvailable, UAcceptResult
         uprv_strncpy(items[n].locale, s, slen);
         items[n].locale[slen]=0; // terminate
         int32_t clen = uloc_canonicalize(items[n].locale, tmp, UPRV_LENGTHOF(tmp)-1, status);
-        if(U_FAILURE(*status)) return -1;
+        if(U_FAILURE(*status)) { return -1;
+}
         if((clen!=slen) || (uprv_strncmp(items[n].locale, tmp, slen))) {
             // canonicalization had an effect- copy back
             uprv_strncpy(items[n].locale, tmp, clen);

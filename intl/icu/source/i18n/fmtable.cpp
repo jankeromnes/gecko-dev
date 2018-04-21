@@ -78,8 +78,9 @@ static inline UBool instanceOfMeasure(const UObject* a) {
 static Formattable* createArrayCopy(const Formattable* array, int32_t count) {
     Formattable *result = new Formattable[count];
     if (result != NULL) {
-        for (int32_t i=0; i<count; ++i)
+        for (int32_t i=0; i<count; ++i) {
             result[i] = array[i]; // Don't memcpy!
+}
     }
     return result;
 }
@@ -278,10 +279,12 @@ Formattable::operator==(const Formattable& that) const
 {
     int32_t i;
 
-    if (this == &that) return TRUE;
+    if (this == &that) { return TRUE;
+}
 
     // Returns FALSE if the data types are different.
-    if (fType != that.fType) return FALSE;
+    if (fType != that.fType) { return FALSE;
+}
 
     // Compares the actual data values.
     UBool equal = TRUE;

@@ -181,8 +181,9 @@ BindingParams::bind(sqlite3_stmt *aStatement)
       // object with the right message.  Note that we special case
       // SQLITE_MISMATCH, but otherwise get the message from SQLite.
       const char *msg = "Could not covert nsIVariant to SQLite type.";
-      if (rc != SQLITE_MISMATCH)
+      if (rc != SQLITE_MISMATCH) {
         msg = ::sqlite3_errmsg(::sqlite3_db_handle(aStatement));
+}
 
       nsCOMPtr<mozIStorageError> err(new Error(rc, msg));
       return err.forget();
@@ -197,8 +198,9 @@ AsyncBindingParams::bind(sqlite3_stmt * aStatement)
 {
   // We should bind by index using the super-class if there is nothing in our
   // hashtable.
-  if (!mNamedParameters.Count())
+  if (!mNamedParameters.Count()) {
     return BindingParams::bind(aStatement);
+}
 
   nsCOMPtr<mozIStorageError> err;
 
@@ -265,8 +267,9 @@ AsyncBindingParams::BindByName(const nsACString &aName,
   NS_ENSURE_FALSE(mLocked, NS_ERROR_UNEXPECTED);
 
   RefPtr<Variant_base> variant = convertVariantToStorageVariant(aValue);
-  if (!variant)
+  if (!variant) {
     return NS_ERROR_UNEXPECTED;
+}
 
   mNamedParameters.Put(aName, variant);
   return NS_OK;
@@ -385,8 +388,9 @@ BindingParams::BindByIndex(uint32_t aIndex,
 
   // Store the variant for later use.
   RefPtr<Variant_base> variant = convertVariantToStorageVariant(aValue);
-  if (!variant)
+  if (!variant) {
     return NS_ERROR_UNEXPECTED;
+}
   if (mParameters.Length() <= aIndex) {
     (void)mParameters.SetLength(aIndex);
     (void)mParameters.AppendElement(variant);
@@ -407,8 +411,9 @@ AsyncBindingParams::BindByIndex(uint32_t aIndex,
   // bind to, so we cannot check the validity of aIndex.
 
   RefPtr<Variant_base> variant = convertVariantToStorageVariant(aValue);
-  if (!variant)
+  if (!variant) {
     return NS_ERROR_UNEXPECTED;
+}
   if (mParameters.Length() <= aIndex) {
     mParameters.SetLength(aIndex);
     mParameters.AppendElement(variant);

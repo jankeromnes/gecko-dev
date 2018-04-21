@@ -88,7 +88,8 @@ static unsigned int tt_activity_measure(VP8_COMP *cpi, MACROBLOCK *x) {
   act = act << 4;
 
   /* If the region is flat, lower the activity some more. */
-  if (act < 8 << 12) act = act < 5 << 12 ? act : 5 << 12;
+  if (act < 8 << 12) { act = act < 5 << 12 ? act : 5 << 12;
+}
 
   return act;
 }
@@ -117,7 +118,8 @@ static unsigned int mb_activity_measure(VP8_COMP *cpi, MACROBLOCK *x,
     mb_activity = tt_activity_measure(cpi, x);
   }
 
-  if (mb_activity < VP8_ACTIVITY_AVG_MIN) mb_activity = VP8_ACTIVITY_AVG_MIN;
+  if (mb_activity < VP8_ACTIVITY_AVG_MIN) { mb_activity = VP8_ACTIVITY_AVG_MIN;
+}
 
   return mb_activity;
 }
@@ -173,7 +175,8 @@ static void calc_av_activity(VP8_COMP *cpi, int64_t activity_sum) {
   }
 
   /* Experimental code: return fixed value normalized for several clips */
-  if (ALT_ACT_MEASURE) cpi->activity_avg = 100000;
+  if (ALT_ACT_MEASURE) { cpi->activity_avg = 100000;
+}
 }
 
 #define USE_ACT_INDEX 0
@@ -431,7 +434,8 @@ static void encode_mb_row(VP8_COMP *cpi, VP8_COMMON *cm, int mb_row,
     }
 #endif
 
-    if (cpi->oxcf.tuning == VP8_TUNE_SSIM) vp8_activity_masking(cpi, x);
+    if (cpi->oxcf.tuning == VP8_TUNE_SSIM) { vp8_activity_masking(cpi, x);
+}
 
     /* Is segmentation enabled */
     /* MB level adjustment to quantizer */
@@ -597,7 +601,8 @@ static void init_encode_frame_mb_context(VP8_COMP *cpi) {
   xd->frame_type = cm->frame_type;
 
   /* reset intra mode contexts */
-  if (cm->frame_type == KEY_FRAME) vp8_init_mbmode_probs(cm);
+  if (cm->frame_type == KEY_FRAME) { vp8_init_mbmode_probs(cm);
+}
 
   /* Copy data over into macro block data structures. */
   x->src = *cpi->Source;
@@ -636,7 +641,8 @@ static void init_encode_frame_mb_context(VP8_COMP *cpi) {
   }
 
   xd->fullpixel_mask = 0xffffffff;
-  if (cm->full_pixel) xd->fullpixel_mask = 0xfffffff8;
+  if (cm->full_pixel) { xd->fullpixel_mask = 0xfffffff8;
+}
 
   vp8_zero(x->coef_counts);
   vp8_zero(x->ymode_count);
@@ -758,7 +764,8 @@ void vp8_encode_frame(VP8_COMP *cpi) {
       vp8cx_init_mbrthread_data(cpi, x, cpi->mb_row_ei,
                                 cpi->encoding_thread_count);
 
-      for (i = 0; i < cm->mb_rows; ++i) cpi->mt_current_mb_col[i] = -1;
+      for (i = 0; i < cm->mb_rows; ++i) { cpi->mt_current_mb_col[i] = -1;
+}
 
       for (i = 0; i < cpi->encoding_thread_count; ++i) {
         sem_post(&cpi->h_event_start_encoding[i]);
@@ -919,7 +926,8 @@ void vp8_encode_frame(VP8_COMP *cpi) {
 
       /* Zero probabilities not allowed */
       for (i = 0; i < MB_FEATURE_TREE_PROBS; ++i) {
-        if (xd->mb_segment_tree_probs[i] == 0) xd->mb_segment_tree_probs[i] = 1;
+        if (xd->mb_segment_tree_probs[i] == 0) { xd->mb_segment_tree_probs[i] = 1;
+}
       }
     }
   }
@@ -1106,7 +1114,8 @@ int vp8cx_encode_intra_macroblock(VP8_COMP *cpi, MACROBLOCK *x,
 
   vp8_tokenize_mb(cpi, x, t);
 
-  if (xd->mode_info_context->mbmi.mode != B_PRED) vp8_inverse_transform_mby(xd);
+  if (xd->mode_info_context->mbmi.mode != B_PRED) { vp8_inverse_transform_mby(xd);
+}
 
   vp8_dequant_idct_add_uv_block(xd->qcoeff + 16 * 16, xd->dequant_uv,
                                 xd->dst.u_buffer, xd->dst.v_buffer,
@@ -1227,7 +1236,8 @@ int vp8cx_encode_inter_macroblock(VP8_COMP *cpi, MACROBLOCK *x, TOKENEXTRA **t,
 
     /* The fast quantizer doesn't use zbin_extra, only do so with
      * the regular quantizer. */
-    if (cpi->sf.improved_quant) vp8_update_zbin_extra(cpi, x);
+    if (cpi->sf.improved_quant) { vp8_update_zbin_extra(cpi, x);
+}
   }
 
   x->count_mb_ref_frame_usage[xd->mode_info_context->mbmi.ref_frame]++;

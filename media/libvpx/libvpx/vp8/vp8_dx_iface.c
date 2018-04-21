@@ -59,7 +59,8 @@ struct vpx_codec_alg_priv {
 static int vp8_init_ctx(vpx_codec_ctx_t *ctx) {
   vpx_codec_alg_priv_t *priv =
       (vpx_codec_alg_priv_t *)vpx_calloc(1, sizeof(*priv));
-  if (!priv) return 1;
+  if (!priv) { return 1;
+}
 
   ctx->priv = (vpx_codec_priv_t *)priv;
   ctx->priv->init_flags = ctx->init_flags;
@@ -92,7 +93,8 @@ static vpx_codec_err_t vp8_init(vpx_codec_ctx_t *ctx,
    * information becomes known.
    */
   if (!ctx->priv) {
-    if (vp8_init_ctx(ctx)) return VPX_CODEC_MEM_ERROR;
+    if (vp8_init_ctx(ctx)) { return VPX_CODEC_MEM_ERROR;
+}
     priv = (vpx_codec_alg_priv_t *)ctx->priv;
 
     /* initialize number of fragments to zero */
@@ -157,7 +159,8 @@ static vpx_codec_err_t vp8_peek_si_internal(const uint8_t *data,
       si->h = (clear[8] | (clear[9] << 8)) & 0x3fff;
 
       /*printf("w=%d, h=%d\n", si->w, si->h);*/
-      if (!(si->h && si->w)) res = VPX_CODEC_CORRUPT_FRAME;
+      if (!(si->h && si->w)) { res = VPX_CODEC_CORRUPT_FRAME;
+}
     } else {
       res = VPX_CODEC_UNSUP_BITSTREAM;
     }
@@ -276,7 +279,8 @@ static vpx_codec_err_t vp8_decode(vpx_codec_alg_priv_t *ctx,
   }
 
   /* Update the input fragment data */
-  if (update_fragments(ctx, data, data_sz, &res) <= 0) return res;
+  if (update_fragments(ctx, data, data_sz, &res) <= 0) { return res;
+}
 
   /* Determine the stream parameters. Note that we rely on peek_si to
    * validate that we have a buffer that does not wrap around the top
@@ -294,9 +298,11 @@ static vpx_codec_err_t vp8_decode(vpx_codec_alg_priv_t *ctx,
     res = VPX_CODEC_OK;
   }
 
-  if (!ctx->decoder_init && !ctx->si.is_kf) res = VPX_CODEC_UNSUP_BITSTREAM;
+  if (!ctx->decoder_init && !ctx->si.is_kf) { res = VPX_CODEC_UNSUP_BITSTREAM;
+}
 
-  if ((ctx->si.h != h) || (ctx->si.w != w)) resolution_change = 1;
+  if ((ctx->si.h != h) || (ctx->si.w != w)) { resolution_change = 1;
+}
 
   /* Initialize the decoder instance on the first frame*/
   if (!res && !ctx->decoder_init) {
@@ -322,7 +328,8 @@ static vpx_codec_err_t vp8_decode(vpx_codec_alg_priv_t *ctx,
     }
 
     res = vp8_create_decoder_instances(&ctx->yv12_frame_buffers, &oxcf);
-    if (res == VPX_CODEC_OK) ctx->decoder_init = 1;
+    if (res == VPX_CODEC_OK) { ctx->decoder_init = 1;
+}
   }
 
   /* Set these even if already initialized.  The caller may have changed the
@@ -598,7 +605,8 @@ static vpx_codec_err_t vp8_get_frame_corrupted(vpx_codec_alg_priv_t *ctx,
 
   if (corrupted && pbi) {
     const YV12_BUFFER_CONFIG *const frame = pbi->common.frame_to_show;
-    if (frame == NULL) return VPX_CODEC_ERROR;
+    if (frame == NULL) { return VPX_CODEC_ERROR;
+}
     *corrupted = frame->corrupted;
     return VPX_CODEC_OK;
   } else {

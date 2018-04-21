@@ -58,10 +58,11 @@ int all_databases_locked_closed = 0;
 void
 dbSetOrClearDBLock(DBLockFlagEnum type)
 {
-    if (type == LockOutDatabase)
+    if (type == LockOutDatabase) {
         all_databases_locked_closed = 1;
-    else
+    } else {
         all_databases_locked_closed = 0;
+}
 }
 
 DB *
@@ -87,7 +88,7 @@ dbopen(const char *fname, int flags, int mode, DBTYPE type, const void *openinfo
      O_RDWR | O_TRUNC)
 #endif
 
-    if ((flags & ~(USE_OPEN_FLAGS | DB_FLAGS)) == 0)
+    if ((flags & ~(USE_OPEN_FLAGS | DB_FLAGS)) == 0) {
         switch (type) {
 /* we don't need btree and recno right now */
 #if 0
@@ -105,6 +106,7 @@ dbopen(const char *fname, int flags, int mode, DBTYPE type, const void *openinfo
             default:
                 break;
         }
+}
     errno = EINVAL;
     return (NULL);
 }

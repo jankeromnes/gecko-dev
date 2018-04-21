@@ -33,8 +33,9 @@ AVBitStreamFilter *av_bitstream_filter_next(const AVBitStreamFilter *f)
     const AVBitStreamFilter *filter = NULL;
     void *opaque = NULL;
 
-    while (filter != f)
+    while (filter != f) {
         filter = av_bsf_next(&opaque);
+}
 
     return av_bsf_next(&opaque);
 }
@@ -55,16 +56,19 @@ AVBitStreamFilterContext *av_bitstream_filter_init(const char *name)
     const AVBitStreamFilter *bsf;
 
     bsf = av_bsf_get_by_name(name);
-    if (!bsf)
+    if (!bsf) {
         return NULL;
+}
 
     ctx = av_mallocz(sizeof(*ctx));
-    if (!ctx)
+    if (!ctx) {
         return NULL;
+}
 
     priv = av_mallocz(sizeof(*priv));
-    if (!priv)
+    if (!priv) {
         goto fail;
+}
 
 
     ctx->filter    = bsf;
@@ -73,8 +77,9 @@ AVBitStreamFilterContext *av_bitstream_filter_init(const char *name)
     return ctx;
 
 fail:
-    if (priv)
+    if (priv) {
         av_bsf_free(&priv->ctx);
+}
     av_freep(&priv);
     av_freep(&ctx);
     return NULL;
@@ -84,8 +89,9 @@ void av_bitstream_filter_close(AVBitStreamFilterContext *bsfc)
 {
     BSFCompatContext *priv;
 
-    if (!bsfc)
+    if (!bsfc) {
         return;
+}
 
     priv = bsfc->priv_data;
 
@@ -105,12 +111,14 @@ int av_bitstream_filter_filter(AVBitStreamFilterContext *bsfc,
 
     if (!priv->ctx) {
         ret = av_bsf_alloc(bsfc->filter, &priv->ctx);
-        if (ret < 0)
+        if (ret < 0) {
             return ret;
+}
 
         ret = avcodec_parameters_from_context(priv->ctx->par_in, avctx);
-        if (ret < 0)
+        if (ret < 0) {
             return ret;
+}
 
         priv->ctx->time_base_in = avctx->time_base;
 
@@ -118,34 +126,39 @@ int av_bitstream_filter_filter(AVBitStreamFilterContext *bsfc,
             const AVOption *opt = av_opt_next(priv->ctx->priv_data, NULL);
             const char * shorthand[2] = {NULL};
 
-            if (opt)
+            if (opt) {
                 shorthand[0] = opt->name;
+}
 
             ret = av_opt_set_from_string(priv->ctx->priv_data, bsfc->args, shorthand, "=", ":");
-            if (ret < 0)
+            if (ret < 0) {
                 return ret;
+}
         }
 
         ret = av_bsf_init(priv->ctx);
-        if (ret < 0)
+        if (ret < 0) {
             return ret;
+}
     }
 
     pkt.data = buf;
     pkt.size = buf_size;
 
     ret = av_bsf_send_packet(priv->ctx, &pkt);
-    if (ret < 0)
+    if (ret < 0) {
         return ret;
+}
 
     *poutbuf      = NULL;
     *poutbuf_size = 0;
 
     ret = av_bsf_receive_packet(priv->ctx, &pkt);
-    if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
+    if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
         return 0;
-    else if (ret < 0)
+    } else if (ret < 0) {
         return ret;
+}
 
     *poutbuf = av_malloc(pkt.size + AV_INPUT_BUFFER_PADDING_SIZE);
     if (!*poutbuf) {
@@ -170,8 +183,9 @@ int av_bitstream_filter_filter(AVBitStreamFilterContext *bsfc,
             av_freep(&avctx->extradata);
             avctx->extradata_size = 0;
             avctx->extradata = av_mallocz(priv->ctx->par_out->extradata_size + AV_INPUT_BUFFER_PADDING_SIZE);
-            if (!avctx->extradata)
+            if (!avctx->extradata) {
                 return AVERROR(ENOMEM);
+}
             memcpy(avctx->extradata, priv->ctx->par_out->extradata, priv->ctx->par_out->extradata_size);
             avctx->extradata_size = priv->ctx->par_out->extradata_size;
         }

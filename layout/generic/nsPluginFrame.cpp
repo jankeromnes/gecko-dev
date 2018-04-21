@@ -106,8 +106,9 @@ public:
 
   void SetUnknown(uint64_t aSequenceNumber) override
   {
-    if (!AcceptUpdate(aSequenceNumber))
+    if (!AcceptUpdate(aSequenceNumber)) {
       return;
+}
     mFrame->mInstanceOwner->SetBackgroundUnknown();
   }
 
@@ -552,8 +553,9 @@ nsPluginFrame::FixupWindow(const nsSize& aSize)
 {
   nsPresContext* presContext = PresContext();
 
-  if (!mInstanceOwner)
+  if (!mInstanceOwner) {
     return;
+}
 
   NPWindow *window;
   mInstanceOwner->GetWindow(window);
@@ -606,8 +608,9 @@ nsPluginFrame::CallSetWindow(bool aCheckIsHidden)
 
   nsPluginNativeWindow *window = (nsPluginNativeWindow *)win;
 
-  if (aCheckIsHidden && IsHidden())
+  if (aCheckIsHidden && IsHidden()) {
     return NS_ERROR_FAILURE;
+}
 
   // Calling either nsPluginInstanceOwner::FixUpPluginWindow() (here,
   // on OS X) or SetWindow() (below, on all platforms) can destroy this
@@ -629,8 +632,9 @@ nsPluginFrame::CallSetWindow(bool aCheckIsHidden)
   // and reduce amount of SetWindow calls
   nsPresContext* presContext = PresContext();
   nsRootPresContext* rootPC = presContext->GetRootPresContext();
-  if (!rootPC)
+  if (!rootPC) {
     return NS_ERROR_FAILURE;
+}
   int32_t appUnitsPerDevPixel = presContext->AppUnitsPerDevPixel();
   nsIFrame* rootFrame = rootPC->PresShell()->GetRootFrame();
   nsRect bounds = GetContentRectRelativeToSelf() + GetOffsetToCrossDoc(rootFrame);
@@ -748,8 +752,9 @@ nsPluginFrame::SetInstanceOwner(nsPluginInstanceOwner* aOwner)
 bool
 nsPluginFrame::IsFocusable(int32_t *aTabIndex, bool aWithMouse)
 {
-  if (aTabIndex)
+  if (aTabIndex) {
     *aTabIndex = -1;
+}
   return nsFrame::IsFocusable(aTabIndex, aWithMouse);
 }
 
@@ -851,8 +856,9 @@ nsPluginFrame::DidReflow(nsPresContext*     aPresContext,
   if (HasView()) {
     nsView* view = GetView();
     nsViewManager* vm = view->GetViewManager();
-    if (vm)
+    if (vm) {
       vm->SetViewVisibility(view, IsHidden() ? nsViewVisibility_kHide : nsViewVisibility_kShow);
+}
   }
 }
 
@@ -1113,8 +1119,9 @@ nsPluginFrame::IsTransparentMode() const
 #if defined(XP_MACOSX)
   return false;
 #else
-  if (!mInstanceOwner)
+  if (!mInstanceOwner) {
     return false;
+}
 
   NPWindow *window = nullptr;
   mInstanceOwner->GetWindow(window);
@@ -1122,8 +1129,9 @@ nsPluginFrame::IsTransparentMode() const
     return false;
   }
 
-  if (window->type != NPWindowTypeDrawable)
+  if (window->type != NPWindowTypeDrawable) {
     return false;
+}
 
   nsresult rv;
   RefPtr<nsNPAPIPluginInstance> pi;
@@ -1150,8 +1158,9 @@ nsPluginFrame::BuildDisplayList(nsDisplayListBuilder*   aBuilder,
   nsPresContext::nsPresContextType type = PresContext()->Type();
 
   // If we are painting in Print Preview do nothing....
-  if (type == nsPresContext::eContext_PrintPreview)
+  if (type == nsPresContext::eContext_PrintPreview) {
     return;
+}
 
   DO_GLOBAL_REFLOW_COUNT_DSP("nsPluginFrame");
 
@@ -1218,8 +1227,9 @@ nsPluginFrame::PrintPlugin(gfxContext& aRenderingContext,
 
   nsIFrame* frame = nullptr;
   obj->GetPrintFrame(&frame);
-  if (!frame)
+  if (!frame) {
     return;
+}
 
   nsPresContext* presContext = PresContext();
   // make sure this is REALLY an nsIObjectFrame
@@ -1227,8 +1237,9 @@ nsPluginFrame::PrintPlugin(gfxContext& aRenderingContext,
   nsIObjectFrame* objectFrame = do_QueryFrame(frame);
   if (!objectFrame)
     objectFrame = GetNextObjectFrame(presContext,frame);
-  if (!objectFrame)
+  if (!objectFrame) {
     return;
+}
 
   // finally we can get our plugin instance
   RefPtr<nsNPAPIPluginInstance> pi;
@@ -1315,11 +1326,13 @@ nsPluginFrame::PrintPlugin(gfxContext& aRenderingContext,
 nsRect
 nsPluginFrame::GetPaintedRect(const nsDisplayPlugin* aItem) const
 {
-  if (!mInstanceOwner)
+  if (!mInstanceOwner) {
     return nsRect();
+}
   nsRect r = GetContentRectRelativeToSelf();
-  if (!mInstanceOwner->UseAsyncRendering())
+  if (!mInstanceOwner->UseAsyncRendering()) {
     return r;
+}
 
   nsIntSize size = mInstanceOwner->GetCurrentImageSize();
   nsPresContext* pc = PresContext();
@@ -1332,8 +1345,9 @@ LayerState
 nsPluginFrame::GetLayerState(nsDisplayListBuilder* aBuilder,
                              LayerManager* aManager)
 {
-  if (!mInstanceOwner)
+  if (!mInstanceOwner) {
     return LAYER_NONE;
+}
 
   if (mInstanceOwner->NeedsScrollImageLayer()) {
     return LAYER_ACTIVE;
@@ -1372,16 +1386,19 @@ private:
 bool
 nsPluginFrame::GetBounds(nsDisplayItem* aItem, IntSize& aSize, gfxRect& aRect)
 {
-  if (!mInstanceOwner)
+  if (!mInstanceOwner) {
     return false;
+}
 
   NPWindow* window = nullptr;
   mInstanceOwner->GetWindow(window);
-  if (!window)
+  if (!window) {
     return false;
+}
 
-  if (window->width <= 0 || window->height <= 0)
+  if (window->width <= 0 || window->height <= 0) {
     return false;
+}
 
 #if defined(XP_MACOSX)
   // window is in "display pixels", but size needs to be in device pixels
@@ -1587,8 +1604,9 @@ nsPluginFrame::HandleEvent(nsPresContext* aPresContext,
   NS_ENSURE_ARG_POINTER(anEventStatus);
   nsresult rv = NS_OK;
 
-  if (!mInstanceOwner)
+  if (!mInstanceOwner) {
     return NS_ERROR_NULL_POINTER;
+}
 
   mInstanceOwner->ConsiderNewEventloopNestingLevel();
 
@@ -1752,8 +1770,9 @@ nsPluginFrame::GetNextObjectFrame(nsPresContext* aPresContext, nsIFrame* aRoot)
     }
 
     outFrame = GetNextObjectFrame(aPresContext, child);
-    if (outFrame)
+    if (outFrame) {
       return outFrame;
+}
   }
 
   return nullptr;
@@ -1771,8 +1790,9 @@ nsPluginFrame::BeginSwapDocShells(nsISupports* aSupports, void*)
   // This function is called from a document content enumerator so we need
   // to filter out the nsPluginFrames and ignore the rest.
   nsIObjectFrame* obj = do_QueryFrame(content->GetPrimaryFrame());
-  if (!obj)
+  if (!obj) {
     return;
+}
 
   nsPluginFrame* objectFrame = static_cast<nsPluginFrame*>(obj);
   NS_ASSERTION(!objectFrame->mWidget || objectFrame->mWidget->GetParent(),
@@ -1792,8 +1812,9 @@ nsPluginFrame::EndSwapDocShells(nsISupports* aSupports, void*)
   // This function is called from a document content enumerator so we need
   // to filter out the nsPluginFrames and ignore the rest.
   nsIObjectFrame* obj = do_QueryFrame(content->GetPrimaryFrame());
-  if (!obj)
+  if (!obj) {
     return;
+}
 
   nsPluginFrame* objectFrame = static_cast<nsPluginFrame*>(obj);
   nsRootPresContext* rootPC = objectFrame->PresContext()->GetRootPresContext();

@@ -89,8 +89,9 @@ prettyPrintByte(FILE *out, unsigned char item, unsigned int level)
     int rv;
 
     rv = prettyIndent(out, level);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     rv = fprintf(out, "%02x ", item);
     if (rv < 0) {
@@ -115,8 +116,9 @@ prettyPrintLeaf(FILE *out, const unsigned char *data,
 
     for (i = 0; i < len; i++) {
         rv = prettyPrintByte(out, *data++, lv);
-        if (rv < 0)
+        if (rv < 0) {
             return rv;
+}
     }
     return prettyNewline(out);
 }
@@ -129,16 +131,19 @@ prettyPrintStringStart(FILE *out, const unsigned char *str,
     unsigned char buf[BUF_SIZE];
     int rv;
 
-    if (len >= BUF_SIZE)
+    if (len >= BUF_SIZE) {
         len = BUF_SIZE - 1;
+}
 
     rv = prettyNewline(out);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     rv = prettyIndent(out, level);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     memcpy(buf, str, len);
     buf[len] = '\000';
@@ -160,17 +165,20 @@ prettyPrintString(FILE *out, const unsigned char *str,
     int rv;
 
     rv = prettyPrintStringStart(out, str, len, level);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     rv = prettyNewline(out);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     if (raw) {
         rv = prettyPrintLeaf(out, str, len, level);
-        if (rv < 0)
+        if (rv < 0) {
             return rv;
+}
     }
 
     return 0;
@@ -184,8 +192,9 @@ prettyPrintTime(FILE *out, const unsigned char *str,
     int rv;
 
     rv = prettyPrintStringStart(out, str, len, level);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     time_item.data = (unsigned char *)str;
     time_item.len = len;
@@ -196,10 +205,11 @@ prettyPrintTime(FILE *out, const unsigned char *str,
         return rv;
     }
 
-    if (utc)
+    if (utc) {
         SECU_PrintUTCTime(out, &time_item, NULL, 0);
-    else
+    } else {
         SECU_PrintGeneralizedTime(out, &time_item, NULL, 0);
+}
 
     rv = fprintf(out, ")");
     if (rv < 0) {
@@ -208,13 +218,15 @@ prettyPrintTime(FILE *out, const unsigned char *str,
     }
 
     rv = prettyNewline(out);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     if (raw) {
         rv = prettyPrintLeaf(out, str, len, level);
-        if (rv < 0)
+        if (rv < 0) {
             return rv;
+}
     }
 
     return 0;
@@ -235,8 +247,9 @@ prettyPrintObjectID(FILE *out, const unsigned char *data,
      */
 
     rv = prettyIndent(out, level);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     if (len == 0) {
         PORT_SetError(SEC_ERROR_BAD_DER);
@@ -257,8 +270,9 @@ prettyPrintObjectID(FILE *out, const unsigned char *data,
 
         j = data[i];
         val = (val << 7) | (j & 0x7f);
-        if (j & 0x80)
+        if (j & 0x80) {
             continue;
+}
         rv = fprintf(out, "%lu ", val);
         if (rv < 0) {
             PORT_SetError(SEC_ERROR_IO);
@@ -277,13 +291,15 @@ prettyPrintObjectID(FILE *out, const unsigned char *data,
         i = PORT_Strlen(oiddata->desc);
         if ((prettyColumn + 1 + (i / 3)) > RIGHT_MARGIN) {
             rv = prettyNewline(out);
-            if (rv < 0)
+            if (rv < 0) {
                 return rv;
+}
         }
 
         rv = prettyIndent(out, level);
-        if (rv < 0)
+        if (rv < 0) {
             return rv;
+}
 
         rv = fprintf(out, "(%s)", oiddata->desc);
         if (rv < 0) {
@@ -293,13 +309,15 @@ prettyPrintObjectID(FILE *out, const unsigned char *data,
     }
 
     rv = prettyNewline(out);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     if (raw) {
         rv = prettyPrintLeaf(out, data, len, level);
-        if (rv < 0)
+        if (rv < 0) {
             return rv;
+}
     }
 
     return 0;
@@ -363,13 +381,15 @@ prettyPrintTag(FILE *out, const unsigned char *src, const unsigned char *end,
         return -1;
     }
 
-    if (raw)
+    if (raw) {
         rv = prettyPrintByte(out, code, level);
-    else
+    } else {
         rv = prettyIndent(out, level);
+}
 
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     if (code & SEC_ASN1_CONSTRUCTED) {
         rv = fprintf(out, "C-");
@@ -442,8 +462,9 @@ prettyPrintLength(FILE *out, const unsigned char *data, const unsigned char *end
                 return -1;
             }
             il = getInteger256(data, nb);
-            if (il < 0)
+            if (il < 0) {
                 return -1;
+}
             *lenp = (unsigned)il;
         } else {
             *lenp = 0;
@@ -454,26 +475,30 @@ prettyPrintLength(FILE *out, const unsigned char *data, const unsigned char *end
             unsigned int i;
 
             rv = prettyPrintByte(out, lbyte, lv);
-            if (rv < 0)
+            if (rv < 0) {
                 return rv;
+}
             for (i = 0; i < nb; i++) {
                 rv = prettyPrintByte(out, data[i], lv);
-                if (rv < 0)
+                if (rv < 0) {
                     return rv;
+}
             }
         }
     } else {
         *lenp = lbyte;
         if (raw) {
             rv = prettyPrintByte(out, lbyte, lv);
-            if (rv < 0)
+            if (rv < 0) {
                 return rv;
+}
         }
     }
-    if (*indefinitep)
+    if (*indefinitep) {
         rv = fprintf(out, "(indefinite)\n");
-    else
+    } else {
         rv = fprintf(out, "(%d)\n", *lenp);
+}
     if (rv < 0) {
         PORT_SetError(SEC_ERROR_IO);
         return rv;
@@ -497,13 +522,15 @@ prettyPrintItem(FILE *out, const unsigned char *data, const unsigned char *end,
         PRBool indefinite;
 
         slen = prettyPrintTag(out, data, end, &code, lv, raw);
-        if (slen < 0)
+        if (slen < 0) {
             return slen;
+}
         data += slen;
 
         lenLen = prettyPrintLength(out, data, end, &slen, &indefinite, lv, raw);
-        if (lenLen < 0)
+        if (lenLen < 0) {
             return lenLen;
+}
         data += lenLen;
 
         /*
@@ -519,8 +546,9 @@ prettyPrintItem(FILE *out, const unsigned char *data, const unsigned char *end,
                 slen = prettyPrintItem(out, data,
                                        slen == 0 ? end : data + slen,
                                        lv + 1, raw);
-                if (slen < 0)
+                if (slen < 0) {
                     return slen;
+}
                 data += slen;
             }
         } else if (code == 0) {
@@ -535,23 +563,27 @@ prettyPrintItem(FILE *out, const unsigned char *data, const unsigned char *end,
                 case SEC_ASN1_IA5_STRING:
                 case SEC_ASN1_VISIBLE_STRING:
                     rv = prettyPrintString(out, data, slen, lv + 1, raw);
-                    if (rv < 0)
+                    if (rv < 0) {
                         return rv;
+}
                     break;
                 case SEC_ASN1_UTC_TIME:
                     rv = prettyPrintTime(out, data, slen, lv + 1, raw, PR_TRUE);
-                    if (rv < 0)
+                    if (rv < 0) {
                         return rv;
+}
                     break;
                 case SEC_ASN1_GENERALIZED_TIME:
                     rv = prettyPrintTime(out, data, slen, lv + 1, raw, PR_FALSE);
-                    if (rv < 0)
+                    if (rv < 0) {
                         return rv;
+}
                     break;
                 case SEC_ASN1_OBJECT_ID:
                     rv = prettyPrintObjectID(out, data, slen, lv + 1, raw);
-                    if (rv < 0)
+                    if (rv < 0) {
                         return rv;
+}
                     break;
                 case SEC_ASN1_BOOLEAN:    /* could do nicer job */
                 case SEC_ASN1_INTEGER:    /* could do nicer job */
@@ -565,8 +597,9 @@ prettyPrintItem(FILE *out, const unsigned char *data, const unsigned char *end,
                 case SEC_ASN1_BMP_STRING:
                 default:
                     rv = prettyPrintLeaf(out, data, slen, lv + 1);
-                    if (rv < 0)
+                    if (rv < 0) {
                         return rv;
+}
                     break;
             }
             data += slen;
@@ -574,8 +607,9 @@ prettyPrintItem(FILE *out, const unsigned char *data, const unsigned char *end,
     }
 
     rv = prettyNewline(out);
-    if (rv < 0)
+    if (rv < 0) {
         return rv;
+}
 
     return data - orig;
 }
@@ -588,7 +622,8 @@ DER_PrettyPrint(FILE *out, const SECItem *it, PRBool raw)
     prettyColumn = -1;
 
     rv = prettyPrintItem(out, it->data, it->data + it->len, 0, raw);
-    if (rv < 0)
+    if (rv < 0) {
         return SECFailure;
+}
     return SECSuccess;
 }

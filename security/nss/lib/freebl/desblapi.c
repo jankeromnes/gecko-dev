@@ -216,8 +216,9 @@ DES_DestroyContext(DESContext *cx, PRBool freeit)
 {
     if (cx) {
         memset(cx, 0, sizeof *cx);
-        if (freeit)
+        if (freeit) {
             PORT_Free(cx);
+}
     }
 }
 
@@ -233,8 +234,9 @@ DES_Encrypt(DESContext *cx, BYTE *out, unsigned int *outLen,
     }
 
     cx->worker(cx, out, in, inLen);
-    if (outLen)
+    if (outLen) {
         *outLen = inLen;
+}
     return SECSuccess;
 }
 
@@ -250,7 +252,8 @@ DES_Decrypt(DESContext *cx, BYTE *out, unsigned int *outLen,
     }
 
     cx->worker(cx, out, in, inLen);
-    if (outLen)
+    if (outLen) {
         *outLen = inLen;
+}
     return SECSuccess;
 }

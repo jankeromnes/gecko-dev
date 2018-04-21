@@ -65,8 +65,9 @@ BreakIterator::buildInstance(const Locale& loc, const char *type, UErrorCode &st
     UResourceBundle *brkName  = &brkNameStack;
     RuleBasedBreakIterator *result = NULL;
 
-    if (U_FAILURE(status))
+    if (U_FAILURE(status)) {
         return NULL;
+}
 
     ures_initStackObject(brkRules);
     ures_initStackObject(brkName);

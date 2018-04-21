@@ -45,8 +45,9 @@ NS_IMETHODIMP CacheStorage::AsyncOpenURI(nsIURI *aURI,
                                          uint32_t aFlags,
                                          nsICacheEntryOpenCallback *aCallback)
 {
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   if (MOZ_UNLIKELY(!CacheObserver::UseDiskCache()) && mWriteToDisk &&
                    !(aFlags & OPEN_INTERCEPTED)) {
@@ -118,8 +119,9 @@ NS_IMETHODIMP CacheStorage::AsyncOpenURI(nsIURI *aURI,
 NS_IMETHODIMP CacheStorage::OpenTruncate(nsIURI *aURI, const nsACString & aIdExtension,
                                          nsICacheEntry **aCacheEntry)
 {
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   nsresult rv;
 
@@ -154,8 +156,9 @@ NS_IMETHODIMP CacheStorage::Exists(nsIURI *aURI, const nsACString & aIdExtension
   NS_ENSURE_ARG(aURI);
   NS_ENSURE_ARG(aResult);
 
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   nsresult rv;
 
@@ -201,8 +204,9 @@ CacheStorage::GetCacheIndexEntryAttrs(nsIURI *aURI,
 NS_IMETHODIMP CacheStorage::AsyncDoomURI(nsIURI *aURI, const nsACString & aIdExtension,
                                          nsICacheEntryDoomCallback* aCallback)
 {
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   nsresult rv;
 
@@ -223,8 +227,9 @@ NS_IMETHODIMP CacheStorage::AsyncDoomURI(nsIURI *aURI, const nsACString & aIdExt
 
 NS_IMETHODIMP CacheStorage::AsyncEvictStorage(nsICacheEntryDoomCallback* aCallback)
 {
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   nsresult rv = CacheStorageService::Self()->DoomStorageEntries(
     this, aCallback);
@@ -237,8 +242,9 @@ NS_IMETHODIMP CacheStorage::AsyncVisitStorage(nsICacheStorageVisitor* aVisitor,
                                               bool aVisitEntries)
 {
   LOG(("CacheStorage::AsyncVisitStorage [this=%p, cb=%p, disk=%d]", this, aVisitor, (bool)mWriteToDisk));
-  if (!CacheStorageService::Self())
+  if (!CacheStorageService::Self()) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   nsresult rv = CacheStorageService::Self()->WalkStorageEntries(
     this, aVisitEntries, aVisitor);

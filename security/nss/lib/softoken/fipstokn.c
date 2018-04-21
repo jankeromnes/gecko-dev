@@ -193,10 +193,12 @@ sftk_newPinCheck(CK_CHAR_PTR pPin, CK_ULONG ulPinLen)
 static CK_RV
 sftk_fipsCheck(void)
 {
-    if (sftk_fatalError)
+    if (sftk_fatalError) {
         return CKR_DEVICE_ERROR;
-    if (isLevel2 && !isLoggedIn)
+}
+    if (isLevel2 && !isLoggedIn) {
         return CKR_USER_NOT_LOGGED_IN;
+}
     return CKR_OK;
 }
 
@@ -612,8 +614,9 @@ FC_InitPIN(CK_SESSION_HANDLE hSession,
 
     CHECK_FORK();
 
-    if (sftk_fatalError)
+    if (sftk_fatalError) {
         return CKR_DEVICE_ERROR;
+}
     /* NSC_InitPIN will only work once per database. We can either initialize
      * it to level1 (pin len == 0) or level2. If we initialize to level 2, then
      * we need to make sure the pin meets FIPS requirements */
@@ -739,12 +742,14 @@ FC_Login(CK_SESSION_HANDLE hSession, CK_USER_TYPE userType,
 {
     CK_RV rv;
     PRBool successful;
-    if (sftk_fatalError)
+    if (sftk_fatalError) {
         return CKR_DEVICE_ERROR;
+}
     rv = NSC_Login(hSession, userType, pPin, usPinLen);
     successful = (rv == CKR_OK) || (rv == CKR_USER_ALREADY_LOGGED_IN);
-    if (successful)
+    if (successful) {
         isLoggedIn = PR_TRUE;
+}
     if (sftk_audit_enabled) {
         char msg[128];
         NSSAuditSeverity severity;
@@ -792,16 +797,19 @@ FC_CreateObject(CK_SESSION_HANDLE hSession,
     CHECK_FORK();
 
     classptr = (CK_OBJECT_CLASS *)fc_getAttribute(pTemplate, ulCount, CKA_CLASS);
-    if (classptr == NULL)
+    if (classptr == NULL) {
         return CKR_TEMPLATE_INCOMPLETE;
+}
 
     if (*classptr == CKO_NETSCAPE_NEWSLOT || *classptr == CKO_NETSCAPE_DELSLOT) {
-        if (sftk_fatalError)
+        if (sftk_fatalError) {
             return CKR_DEVICE_ERROR;
+}
     } else {
         rv = sftk_fipsCheck();
-        if (rv != CKR_OK)
+        if (rv != CKR_OK) {
             return rv;
+}
     }
 
     /* FIPS can't create keys from raw key material */
@@ -956,8 +964,9 @@ FC_FindObjectsInit(CK_SESSION_HANDLE hSession,
         }
     }
     if (needLogin) {
-        if ((rv = sftk_fipsCheck()) != CKR_OK)
+        if ((rv = sftk_fipsCheck()) != CKR_OK) {
             return rv;
+}
     }
     return NSC_FindObjectsInit(hSession, pTemplate, usCount);
 }

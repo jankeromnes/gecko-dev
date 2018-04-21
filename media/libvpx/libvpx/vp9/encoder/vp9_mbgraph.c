@@ -150,7 +150,8 @@ static int find_best_16x16_intra(VP9_COMP *cpi, PREDICTION_MODE *pbest_mode) {
     }
   }
 
-  if (pbest_mode) *pbest_mode = best_mode;
+  if (pbest_mode) { *pbest_mode = best_mode;
+}
 
   return best_err;
 }
@@ -175,7 +176,8 @@ static void update_mbgraph_mb_stats(VP9_COMP *cpi, MBGRAPH_MB_STATS *stats,
 
   // do intra 16x16 prediction
   intra_error = find_best_16x16_intra(cpi, &stats->ref[INTRA_FRAME].m.mode);
-  if (intra_error <= 0) intra_error = 1;
+  if (intra_error <= 0) { intra_error = 1;
+}
   stats->ref[INTRA_FRAME].err = intra_error;
 
   // Golden frame MV search, if it exists and is different than last frame
@@ -276,7 +278,8 @@ static void update_mbgraph_frame_stats(VP9_COMP *cpi,
 
     mb_y_offset += buf->y_stride * 16;
     gld_y_offset += golden_ref->y_stride * 16;
-    if (alt_ref) arf_y_offset += alt_ref->y_stride * 16;
+    if (alt_ref) { arf_y_offset += alt_ref->y_stride * 16;
+}
     x->mv_limits.row_min -= 16;
     x->mv_limits.row_max -= 16;
     offset += cm->mb_cols;
@@ -298,8 +301,9 @@ static void separate_arf_mbs(VP9_COMP *cpi) {
       vpx_calloc(cm->mb_rows * cm->mb_cols * sizeof(*arf_not_zz), 1));
 
   // We are not interested in results beyond the alt ref itself.
-  if (n_frames > cpi->rc.frames_till_gf_update_due)
+  if (n_frames > cpi->rc.frames_till_gf_update_due) {
     n_frames = cpi->rc.frames_till_gf_update_due;
+}
 
   // defer cost to reference frames
   for (i = n_frames - 1; i >= 0; i--) {
@@ -343,13 +347,14 @@ static void separate_arf_mbs(VP9_COMP *cpi) {
   // if ( ncnt[1] && (ncnt[0] / ncnt[1] < 10) )
   if (1) {
     // Note % of blocks that are marked as static
-    if (cm->MBs)
+    if (cm->MBs) {
       cpi->static_mb_pct = (ncnt[1] * 100) / (cm->mi_rows * cm->mi_cols);
 
     // This error case should not be reachable as this function should
     // never be called with the common data structure uninitialized.
-    else
+    } else {
       cpi->static_mb_pct = 0;
+}
 
     vp9_enable_segmentation(&cm->seg);
   } else {
@@ -370,9 +375,11 @@ void vp9_update_mbgraph_stats(VP9_COMP *cpi) {
 
   // we need to look ahead beyond where the ARF transitions into
   // being a GF - so exit if we don't look ahead beyond that
-  if (n_frames <= cpi->rc.frames_till_gf_update_due) return;
+  if (n_frames <= cpi->rc.frames_till_gf_update_due) { return;
+}
 
-  if (n_frames > MAX_LAG_BUFFERS) n_frames = MAX_LAG_BUFFERS;
+  if (n_frames > MAX_LAG_BUFFERS) { n_frames = MAX_LAG_BUFFERS;
+}
 
   cpi->mbgraph_n_frames = n_frames;
   for (i = 0; i < n_frames; i++) {

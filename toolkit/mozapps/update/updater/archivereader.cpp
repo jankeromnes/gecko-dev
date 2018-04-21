@@ -175,8 +175,9 @@ ArchiveReader::VerifyProductInformation(const char *MARChannelID,
 int
 ArchiveReader::Open(const NS_tchar *path)
 {
-  if (mArchive)
+  if (mArchive) {
     Close();
+}
 
   if (!mInBuf) {
     mInBuf = (uint8_t *)malloc(mInBufSize);
@@ -184,8 +185,9 @@ ArchiveReader::Open(const NS_tchar *path)
       // Try again with a smaller buffer.
       mInBufSize = 1024;
       mInBuf = (uint8_t *)malloc(mInBufSize);
-      if (!mInBuf)
+      if (!mInBuf) {
         return ARCHIVE_READER_MEM_ERROR;
+}
     }
   }
 
@@ -195,8 +197,9 @@ ArchiveReader::Open(const NS_tchar *path)
       // Try again with a smaller buffer.
       mOutBufSize = 1024;
       mOutBuf = (uint8_t *)malloc(mOutBufSize);
-      if (!mOutBuf)
+      if (!mOutBuf) {
         return ARCHIVE_READER_MEM_ERROR;
+}
     }
   }
 
@@ -205,8 +208,9 @@ ArchiveReader::Open(const NS_tchar *path)
 #else
   mArchive = mar_open(path);
 #endif
-  if (!mArchive)
+  if (!mArchive) {
     return READ_ERROR;
+}
 
   xz_crc32_init();
   xz_crc64_init();
@@ -237,20 +241,23 @@ int
 ArchiveReader::ExtractFile(const char *name, const NS_tchar *dest)
 {
   const MarItem *item = mar_find_item(mArchive, name);
-  if (!item)
+  if (!item) {
     return READ_ERROR;
+}
 
 #ifdef XP_WIN
   FILE* fp = _wfopen(dest, L"wb+");
 #else
   int fd = creat(dest, item->flags);
-  if (fd == -1)
+  if (fd == -1) {
     return WRITE_ERROR;
+}
 
   FILE *fp = fdopen(fd, "wb");
 #endif
-  if (!fp)
+  if (!fp) {
     return WRITE_ERROR;
+}
 
   int rv = ExtractItemToStream(item, fp);
 
@@ -262,8 +269,9 @@ int
 ArchiveReader::ExtractFileToStream(const char *name, FILE *fp)
 {
   const MarItem *item = mar_find_item(mArchive, name);
-  if (!item)
+  if (!item) {
     return READ_ERROR;
+}
 
   return ExtractItemToStream(item, fp);
 }

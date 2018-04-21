@@ -180,8 +180,9 @@ static aom_codec_err_t update_error_state(
     aom_codec_alg_priv_t *ctx, const struct aom_internal_error_info *error) {
   const aom_codec_err_t res = error->error_code;
 
-  if (res != AOM_CODEC_OK)
+  if (res != AOM_CODEC_OK) {
     ctx->base.err_detail = error->has_detail ? error->detail : NULL;
+}
 
   return res;
 }
@@ -268,10 +269,11 @@ static aom_codec_err_t validate_config(aom_codec_alg_priv_t *ctx,
   // AV1 does not support a lower bound on the keyframe interval in
   // automatic keyframe placement mode.
   if (cfg->kf_mode != AOM_KF_DISABLED && cfg->kf_min_dist != cfg->kf_max_dist &&
-      cfg->kf_min_dist > 0)
+      cfg->kf_min_dist > 0) {
     ERROR(
         "kf_min_dist not supported in auto mode, use 0 "
         "or kf_max_dist instead.");
+}
 
   RANGE_CHECK_HI(extra_cfg, motion_vector_unit_test, 2);
   RANGE_CHECK_HI(extra_cfg, enable_auto_alt_ref, 2);
@@ -331,8 +333,9 @@ static aom_codec_err_t validate_config(aom_codec_alg_priv_t *ctx,
   RANGE_CHECK(extra_cfg, content, AOM_CONTENT_DEFAULT, AOM_CONTENT_INVALID - 1);
 
   // TODO(yaowu): remove this when ssim tuning is implemented for av1
-  if (extra_cfg->tuning == AOM_TUNE_SSIM)
+  if (extra_cfg->tuning == AOM_TUNE_SSIM) {
     ERROR("Option --tune=ssim is not currently supported in AV1.");
+}
 
 // TODO(anybody) : remove this flag when PVQ supports pallete coding tool
 #if CONFIG_PVQ
@@ -349,21 +352,25 @@ static aom_codec_err_t validate_config(aom_codec_alg_priv_t *ctx,
     const FIRSTPASS_STATS *stats;
 #endif
 
-    if (cfg->rc_twopass_stats_in.buf == NULL)
+    if (cfg->rc_twopass_stats_in.buf == NULL) {
       ERROR("rc_twopass_stats_in.buf not set.");
+}
 
 #if !CONFIG_XIPHRC
-    if (cfg->rc_twopass_stats_in.sz % packet_sz)
+    if (cfg->rc_twopass_stats_in.sz % packet_sz) {
       ERROR("rc_twopass_stats_in.sz indicates truncated packet.");
+}
 
-    if (cfg->rc_twopass_stats_in.sz < 2 * packet_sz)
+    if (cfg->rc_twopass_stats_in.sz < 2 * packet_sz) {
       ERROR("rc_twopass_stats_in requires at least two packets.");
+}
 
     stats =
         (const FIRSTPASS_STATS *)cfg->rc_twopass_stats_in.buf + n_packets - 1;
 
-    if ((int)(stats->count + 0.5) != n_packets - 1)
+    if ((int)(stats->count + 0.5) != n_packets - 1) {
       ERROR("rc_twopass_stats_in missing EOS stats packet");
+}
 #endif
   }
 
@@ -430,8 +437,9 @@ static aom_codec_err_t validate_img(aom_codec_alg_priv_t *ctx,
       break;
   }
 
-  if (img->d_w != ctx->cfg.g_w || img->d_h != ctx->cfg.g_h)
+  if (img->d_w != ctx->cfg.g_w || img->d_h != ctx->cfg.g_h) {
     ERROR("Image size must match encoder init configuration size");
+}
 
   return AOM_CODEC_OK;
 }
@@ -464,7 +472,8 @@ static aom_codec_err_t set_encoder_config(
   oxcf->input_bit_depth = cfg->g_input_bit_depth;
   // guess a frame rate if out of whack, use 30
   oxcf->init_framerate = (double)cfg->g_timebase.den / cfg->g_timebase.num;
-  if (oxcf->init_framerate > 180) oxcf->init_framerate = 30;
+  if (oxcf->init_framerate > 180) { oxcf->init_framerate = 30;
+}
 
   oxcf->mode = GOOD;
 
@@ -499,8 +508,9 @@ static aom_codec_err_t set_encoder_config(
 #if CONFIG_DIST_8X8
   oxcf->using_dist_8x8 = extra_cfg->enable_dist_8x8;
   if (extra_cfg->tuning == AOM_TUNE_CDEF_DIST ||
-      extra_cfg->tuning == AOM_TUNE_DAALA_DIST)
+      extra_cfg->tuning == AOM_TUNE_DAALA_DIST) {
     oxcf->using_dist_8x8 = 1;
+}
 #endif
   oxcf->num_tile_groups = extra_cfg->num_tg;
 #if CONFIG_EXT_TILE
@@ -520,8 +530,9 @@ static aom_codec_err_t set_encoder_config(
   oxcf->resize_kf_scale_denominator = (uint8_t)cfg->rc_resize_kf_denominator;
   if (oxcf->resize_mode == RESIZE_FIXED &&
       oxcf->resize_scale_denominator == SCALE_NUMERATOR &&
-      oxcf->resize_kf_scale_denominator == SCALE_NUMERATOR)
+      oxcf->resize_kf_scale_denominator == SCALE_NUMERATOR) {
     oxcf->resize_mode = RESIZE_NONE;
+}
 
 #if CONFIG_FRAME_SUPERRES
   oxcf->superres_mode = (SUPERRES_MODE)cfg->rc_superres_mode;
@@ -579,10 +590,12 @@ static aom_codec_err_t set_encoder_config(
   oxcf->transfer_function = extra_cfg->transfer_function;
   oxcf->chroma_sample_position = extra_cfg->chroma_sample_position;
 #else
-  if (extra_cfg->transfer_function != AOM_TF_UNKNOWN)
+  if (extra_cfg->transfer_function != AOM_TF_UNKNOWN) {
     return AOM_CODEC_UNSUP_FEATURE;
-  if (extra_cfg->chroma_sample_position != AOM_CSP_UNKNOWN)
+}
+  if (extra_cfg->chroma_sample_position != AOM_CSP_UNKNOWN) {
     return AOM_CODEC_UNSUP_FEATURE;
+}
 #endif
 
   oxcf->color_range = extra_cfg->color_range;
@@ -670,20 +683,23 @@ static aom_codec_err_t encoder_set_config(aom_codec_alg_priv_t *ctx,
   int force_key = 0;
 
   if (cfg->g_w != ctx->cfg.g_w || cfg->g_h != ctx->cfg.g_h) {
-    if (cfg->g_lag_in_frames > 1 || cfg->g_pass != AOM_RC_ONE_PASS)
+    if (cfg->g_lag_in_frames > 1 || cfg->g_pass != AOM_RC_ONE_PASS) {
       ERROR("Cannot change width or height after initialization");
+}
     if (!valid_ref_frame_size(ctx->cfg.g_w, ctx->cfg.g_h, cfg->g_w, cfg->g_h) ||
         (ctx->cpi->initial_width && (int)cfg->g_w > ctx->cpi->initial_width) ||
-        (ctx->cpi->initial_height && (int)cfg->g_h > ctx->cpi->initial_height))
+        (ctx->cpi->initial_height && (int)cfg->g_h > ctx->cpi->initial_height)) {
       force_key = 1;
+}
   }
 
   // Prevent increasing lag_in_frames. This check is stricter than it needs
   // to be -- the limit is not increasing past the first lag_in_frames
   // value, but we don't track the initial config, only the last successful
   // config.
-  if (cfg->g_lag_in_frames > ctx->cfg.g_lag_in_frames)
+  if (cfg->g_lag_in_frames > ctx->cfg.g_lag_in_frames) {
     ERROR("Cannot increase lag_in_frames");
+}
 
   res = validate_config(ctx, cfg, &ctx->extra_cfg);
 
@@ -695,7 +711,8 @@ static aom_codec_err_t encoder_set_config(aom_codec_alg_priv_t *ctx,
     av1_change_config(ctx->cpi, &ctx->oxcf);
   }
 
-  if (force_key) ctx->next_frame_flags |= AOM_EFLAG_FORCE_KF;
+  if (force_key) { ctx->next_frame_flags |= AOM_EFLAG_FORCE_KF;
+}
 
   return res;
 }
@@ -703,7 +720,8 @@ static aom_codec_err_t encoder_set_config(aom_codec_alg_priv_t *ctx,
 static aom_codec_err_t ctrl_get_quantizer(aom_codec_alg_priv_t *ctx,
                                           va_list args) {
   int *const arg = va_arg(args, int *);
-  if (arg == NULL) return AOM_CODEC_INVALID_PARAM;
+  if (arg == NULL) { return AOM_CODEC_INVALID_PARAM;
+}
   *arg = av1_get_quantizer(ctx->cpi);
   return AOM_CODEC_OK;
 }
@@ -711,7 +729,8 @@ static aom_codec_err_t ctrl_get_quantizer(aom_codec_alg_priv_t *ctx,
 static aom_codec_err_t ctrl_get_quantizer64(aom_codec_alg_priv_t *ctx,
                                             va_list args) {
   int *const arg = va_arg(args, int *);
-  if (arg == NULL) return AOM_CODEC_INVALID_PARAM;
+  if (arg == NULL) { return AOM_CODEC_INVALID_PARAM;
+}
   *arg = av1_qindex_to_quantizer(av1_get_quantizer(ctx->cpi));
   return AOM_CODEC_OK;
 }
@@ -979,13 +998,15 @@ static aom_codec_err_t encoder_init(aom_codec_ctx_t *ctx,
 
   if (ctx->priv == NULL) {
     aom_codec_alg_priv_t *const priv = aom_calloc(1, sizeof(*priv));
-    if (priv == NULL) return AOM_CODEC_MEM_ERROR;
+    if (priv == NULL) { return AOM_CODEC_MEM_ERROR;
+}
 
     ctx->priv = (aom_codec_priv_t *)priv;
     ctx->priv->init_flags = ctx->init_flags;
     ctx->priv->enc.total_encoders = 1;
     priv->buffer_pool = (BufferPool *)aom_calloc(1, sizeof(BufferPool));
-    if (priv->buffer_pool == NULL) return AOM_CODEC_MEM_ERROR;
+    if (priv->buffer_pool == NULL) { return AOM_CODEC_MEM_ERROR;
+}
 
 #if CONFIG_MULTITHREAD
     if (pthread_mutex_init(&priv->buffer_pool->pool_mutex, NULL)) {
@@ -1011,10 +1032,11 @@ static aom_codec_err_t encoder_init(aom_codec_ctx_t *ctx,
           (ctx->init_flags & AOM_CODEC_USE_HIGHBITDEPTH) ? 1 : 0;
 #endif
       priv->cpi = av1_create_compressor(&priv->oxcf, priv->buffer_pool);
-      if (priv->cpi == NULL)
+      if (priv->cpi == NULL) {
         res = AOM_CODEC_MEM_ERROR;
-      else
+      } else {
         priv->cpi->output_pkt_list = &priv->pkt_list.head;
+}
     }
   }
 
@@ -1073,7 +1095,8 @@ static int write_superframe_index(aom_codec_alg_priv_t *ctx) {
   int mag;
   unsigned int mask;
   for (mag = 0, mask = 0xff; mag < MAG_SIZE; mag++) {
-    if (max_frame_sz <= mask) break;
+    if (max_frame_sz <= mask) { break;
+}
     mask <<= 8;
     mask |= 0xff;
   }
@@ -1090,8 +1113,9 @@ static int write_superframe_index(aom_codec_alg_priv_t *ctx) {
     marker_test |= frames_test - 1;
     marker_test |= (mag_test - 1) << 3;
     *x++ = marker_test;
-    for (int i = 0; i < mag_test * frames_test; ++i)
+    for (int i = 0; i < mag_test * frames_test; ++i) {
       *x++ = 0;  // fill up with arbitrary data
+}
     *x++ = marker_test;
     printf("Added supplemental superframe data\n");
   }
@@ -1138,9 +1162,11 @@ static aom_codec_frame_flags_t get_frame_pkt_flags(const AV1_COMP *cpi,
                                                    unsigned int lib_flags) {
   aom_codec_frame_flags_t flags = lib_flags << 16;
 
-  if (lib_flags & FRAMEFLAGS_KEY) flags |= AOM_FRAME_IS_KEY;
+  if (lib_flags & FRAMEFLAGS_KEY) { flags |= AOM_FRAME_IS_KEY;
+}
 
-  if (cpi->droppable) flags |= AOM_FRAME_IS_DROPPABLE;
+  if (cpi->droppable) { flags |= AOM_FRAME_IS_DROPPABLE;
+}
 
   return flags;
 }
@@ -1156,7 +1182,8 @@ static aom_codec_err_t encoder_encode(aom_codec_alg_priv_t *ctx,
   AV1_COMP *const cpi = ctx->cpi;
   const aom_rational_t *const timebase = &ctx->cfg.g_timebase;
 
-  if (cpi == NULL) return AOM_CODEC_INVALID_PARAM;
+  if (cpi == NULL) { return AOM_CODEC_INVALID_PARAM;
+}
 
   if (img != NULL) {
     res = validate_img(ctx, img);
@@ -1174,7 +1201,8 @@ static aom_codec_err_t encoder_encode(aom_codec_alg_priv_t *ctx,
                        get_image_bps(img) / 8 *
                        (cpi->multi_arf_allowed ? 8 : 2);
 #endif  // CONFIG_EXT_REFS
-      if (data_sz < kMinCompressedSize) data_sz = kMinCompressedSize;
+      if (data_sz < kMinCompressedSize) { data_sz = kMinCompressedSize;
+}
       if (ctx->cx_data == NULL || ctx->cx_data_sz < data_sz) {
         ctx->cx_data_sz = data_sz;
         free(ctx->cx_data);
@@ -1223,7 +1251,8 @@ static aom_codec_err_t encoder_encode(aom_codec_alg_priv_t *ctx,
         timebase_units_to_ticks(timebase, pts + duration);
 
     // Set up internal flags
-    if (ctx->base.init_flags & AOM_CODEC_USE_PSNR) cpi->b_calculate_psnr = 1;
+    if (ctx->base.init_flags & AOM_CODEC_USE_PSNR) { cpi->b_calculate_psnr = 1;
+}
 
     if (img != NULL) {
       YV12_BUFFER_CONFIG sd;
@@ -1277,7 +1306,8 @@ static aom_codec_err_t encoder_encode(aom_codec_alg_priv_t *ctx,
       }
 #endif  // CONFIG_REFERENCE_BUFFER
       if (frame_size) {
-        if (ctx->pending_cx_data == 0) ctx->pending_cx_data = cx_data;
+        if (ctx->pending_cx_data == 0) { ctx->pending_cx_data = cx_data;
+}
 
         ctx->pending_frame_sizes[ctx->pending_frame_count++] = frame_size;
         ctx->pending_cx_data_sz += frame_size;
@@ -1367,7 +1397,8 @@ static aom_codec_err_t ctrl_get_reference(aom_codec_alg_priv_t *ctx,
 
   if (frame != NULL) {
     YV12_BUFFER_CONFIG *fb = get_ref_frame(&ctx->cpi->common, frame->idx);
-    if (fb == NULL) return AOM_CODEC_ERROR;
+    if (fb == NULL) { return AOM_CODEC_ERROR;
+}
 
     yuvconfig2image(&frame->img, fb, NULL);
     return AOM_CODEC_OK;
@@ -1435,10 +1466,11 @@ static aom_codec_err_t ctrl_set_active_map(aom_codec_alg_priv_t *ctx,
 
   if (map) {
     if (!av1_set_active_map(ctx->cpi, map->active_map, (int)map->rows,
-                            (int)map->cols))
+                            (int)map->cols)) {
       return AOM_CODEC_OK;
-    else
+    } else {
       return AOM_CODEC_INVALID_PARAM;
+}
   } else {
     return AOM_CODEC_INVALID_PARAM;
   }
@@ -1450,10 +1482,11 @@ static aom_codec_err_t ctrl_get_active_map(aom_codec_alg_priv_t *ctx,
 
   if (map) {
     if (!av1_get_active_map(ctx->cpi, map->active_map, (int)map->rows,
-                            (int)map->cols))
+                            (int)map->cols)) {
       return AOM_CODEC_OK;
-    else
+    } else {
       return AOM_CODEC_INVALID_PARAM;
+}
   } else {
     return AOM_CODEC_INVALID_PARAM;
   }

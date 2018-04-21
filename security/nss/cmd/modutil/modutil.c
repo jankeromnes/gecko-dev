@@ -663,17 +663,20 @@ init_crypto(PRBool create, PRBool readOnly)
     Error retval;
     /* Open/create key database */
 
-    if (readOnly)
+    if (readOnly) {
         flags |= NSS_INIT_READONLY;
-    if (nocertdb)
+}
+    if (nocertdb) {
         flags |= NSS_INIT_NOCERTDB;
+}
     rv = NSS_Initialize(SECU_ConfigDirectory(NULL), dbprefix, dbprefix,
                         secmodName, flags);
     if (rv != SECSuccess) {
         SECU_PrintPRandOSError(progName);
         retval = NSS_INITIALIZE_FAILED_ERR;
-    } else
+    } else {
         retval = SUCCESS;
+}
 
     return retval;
 }
@@ -821,10 +824,12 @@ main(int argc, char* argv[])
     if ((command == RAW_LIST_COMMAND) || (command == RAW_ADD_COMMAND)) {
         if (!moduleName) {
             char *readOnlyStr, *noCertDBStr, *sep;
-            if (!secmodName)
+            if (!secmodName) {
                 secmodName = "secmod.db";
-            if (!dbprefix)
+}
+            if (!dbprefix) {
                 dbprefix = "";
+}
             sep = ((command == RAW_LIST_COMMAND) && nocertdb) ? "," : " ";
             readOnlyStr = (command == RAW_LIST_COMMAND) ? "readOnly" : "";
             noCertDBStr = nocertdb ? "noCertDB" : "";

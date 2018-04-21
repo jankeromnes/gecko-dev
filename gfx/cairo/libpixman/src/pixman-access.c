@@ -254,12 +254,13 @@ convert_channel (uint32_t pixel, uint32_t def_value,
 {
     uint32_t v;
 
-    if (n_from_bits && n_to_bits)
+    if (n_from_bits && n_to_bits) {
 	v  = unorm_to_unorm (pixel >> from_shift, n_from_bits, n_to_bits);
-    else if (n_to_bits)
+    } else if (n_to_bits) {
 	v = def_value;
-    else
+    } else {
 	v = 0;
+}
 
     return (v & ((1 << n_to_bits) - 1)) << to_shift;
 }
@@ -570,16 +571,18 @@ to_srgb (float f)
     {
 	uint8_t mid = (low + high) / 2;
 
-	if (to_linear[mid] > f)
+	if (to_linear[mid] > f) {
 	    high = mid;
-	else
+	} else {
 	    low = mid;
+}
     }
 
-    if (to_linear[high] - f < f - to_linear[low])
+    if (to_linear[high] - f < f - to_linear[low]) {
 	return high;
-    else
+    } else {
 	return low;
+}
 }
 
 static void
@@ -1145,8 +1148,9 @@ store_scanline_generic_float (bits_image_t *  image,
     assert (image->common.type == BITS);
 
     argb8_pixels = pixman_malloc_ab (width, sizeof(uint32_t));
-    if (!argb8_pixels)
+    if (!argb8_pixels) {
 	return;
+}
 
     /* Contract the scanline.  We could do this in place if values weren't
      * const.
@@ -1475,10 +1479,11 @@ _pixman_bits_image_setup_accessors_accessors (bits_image_t *image);
 void
 _pixman_bits_image_setup_accessors (bits_image_t *image)
 {
-    if (image->read_func || image->write_func)
+    if (image->read_func || image->write_func) {
 	_pixman_bits_image_setup_accessors_accessors (image);
-    else
+    } else {
 	setup_accessors (image);
+}
 }
 
 #else

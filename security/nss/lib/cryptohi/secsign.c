@@ -102,12 +102,14 @@ SGN_Begin(SGNContext *cx)
     }
 
     cx->hashobj = HASH_GetHashObjectByOidTag(cx->hashalg);
-    if (!cx->hashobj)
+    if (!cx->hashobj) {
         return SECFailure; /* error code is already set */
+}
 
     cx->hashcx = (*cx->hashobj->create)();
-    if (cx->hashcx == NULL)
+    if (cx->hashcx == NULL) {
         return SECFailure;
+}
 
     (*cx->hashobj->begin)(cx->hashcx);
     return SECSuccess;
@@ -265,8 +267,9 @@ SGN_End(SGNContext *cx, SECItem *result)
         (cx->signalg == SEC_OID_ANSIX962_EC_PUBLIC_KEY)) {
         /* DSAU_EncodeDerSigWithLen works for DSA and ECDSA */
         rv = DSAU_EncodeDerSigWithLen(result, &sigitem, sigitem.len);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
         SECITEM_FreeItem(&sigitem, PR_FALSE);
     } else {
         result->len = sigitem.len;
@@ -295,16 +298,19 @@ sec_SignData(SECItem *res, const unsigned char *buf, int len,
 
     sgn = sgn_NewContext(algid, params, pk);
 
-    if (sgn == NULL)
+    if (sgn == NULL) {
         return SECFailure;
+}
 
     rv = SGN_Begin(sgn);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = SGN_Update(sgn, buf, len);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = SGN_End(sgn, res);
 
@@ -412,8 +418,9 @@ sec_DerSignData(PLArenaPool *arena, SECItem *result,
 
     /* Sign input buffer */
     rv = sec_SignData(&it, buf, len, pk, algID, params);
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
     /* Fill out SignedData object */
     PORT_Memset(&sd, 0, sizeof(sd));
@@ -422,8 +429,9 @@ sec_DerSignData(PLArenaPool *arena, SECItem *result,
     sd.signature.data = it.data;
     sd.signature.len = it.len << 3; /* convert to bit string */
     rv = SECOID_SetAlgorithmID(arena, &sd.signatureAlgorithm, algID, params);
-    if (rv)
+    if (rv) {
         goto loser;
+}
 
     /* DER encode the signed data object */
     rv = DER_Encode(arena, result, CERTSignedDataTemplate, &sd);
@@ -830,12 +838,15 @@ SEC_CreateSignatureAlgorithmParameters(PLArenaPool *arena,
                                               hashAlgTag, params, key);
 
         default:
-            if (params == NULL)
+            if (params == NULL) {
                 return NULL;
-            if (result == NULL)
+}
+            if (result == NULL) {
                 result = SECITEM_AllocItem(arena, NULL, 0);
-            if (SECITEM_CopyItem(arena, result, params) != SECSuccess)
+}
+            if (SECITEM_CopyItem(arena, result, params) != SECSuccess) {
                 return NULL;
+}
             return result;
     }
 }

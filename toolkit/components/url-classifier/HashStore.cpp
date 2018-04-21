@@ -111,7 +111,8 @@ nsresult
 TableUpdateV2::NewAddPrefix(uint32_t aAddChunk, const Prefix& aHash)
 {
   AddPrefix *add = mAddPrefixes.AppendElement(fallible);
-  if (!add) return NS_ERROR_OUT_OF_MEMORY;
+  if (!add) { return NS_ERROR_OUT_OF_MEMORY;
+}
   add->addChunk = aAddChunk;
   add->prefix = aHash;
   return NS_OK;
@@ -121,7 +122,8 @@ nsresult
 TableUpdateV2::NewSubPrefix(uint32_t aAddChunk, const Prefix& aHash, uint32_t aSubChunk)
 {
   SubPrefix *sub = mSubPrefixes.AppendElement(fallible);
-  if (!sub) return NS_ERROR_OUT_OF_MEMORY;
+  if (!sub) { return NS_ERROR_OUT_OF_MEMORY;
+}
   sub->addChunk = aAddChunk;
   sub->prefix = aHash;
   sub->subChunk = aSubChunk;
@@ -132,7 +134,8 @@ nsresult
 TableUpdateV2::NewAddComplete(uint32_t aAddChunk, const Completion& aHash)
 {
   AddComplete *add = mAddCompletes.AppendElement(fallible);
-  if (!add) return NS_ERROR_OUT_OF_MEMORY;
+  if (!add) { return NS_ERROR_OUT_OF_MEMORY;
+}
   add->addChunk = aAddChunk;
   add->complete = aHash;
   return NS_OK;
@@ -142,7 +145,8 @@ nsresult
 TableUpdateV2::NewSubComplete(uint32_t aAddChunk, const Completion& aHash, uint32_t aSubChunk)
 {
   SubComplete *sub = mSubCompletes.AppendElement(fallible);
-  if (!sub) return NS_ERROR_OUT_OF_MEMORY;
+  if (!sub) { return NS_ERROR_OUT_OF_MEMORY;
+}
   sub->addChunk = aAddChunk;
   sub->complete = aHash;
   sub->subChunk = aSubChunk;
@@ -153,7 +157,8 @@ nsresult
 TableUpdateV2::NewMissPrefix(const Prefix& aPrefix)
 {
   Prefix *prefix = mMissPrefixes.AppendElement(aPrefix, fallible);
-  if (!prefix) return NS_ERROR_OUT_OF_MEMORY;
+  if (!prefix) { return NS_ERROR_OUT_OF_MEMORY;
+}
   return NS_OK;
 }
 
@@ -588,9 +593,10 @@ Merge(ChunkSet* aStoreChunks,
     // skip this chunk if we already have it, unless we're
     // merging completions, in which case we'll always already
     // have the chunk from the original prefix
-    if (aStoreChunks->Has(updatePrefix.Chunk()))
-      if (!aAllowMerging)
+    if (aStoreChunks->Has(updatePrefix.Chunk())) {
+      if (!aAllowMerging) {
         continue;
+}
     // XXX: binary search for insertion point might be faster in common
     // case?
     while (storeIter < storeEnd && (storeIter->Compare(updatePrefix) < 0)) {
@@ -610,8 +616,9 @@ Merge(ChunkSet* aStoreChunks,
   // to make the chunkranges continuous.
   aStoreChunks->Merge(aUpdateChunks);
 
-  if (!aStorePrefixes->AppendElements(adds, fallible))
+  if (!aStorePrefixes->AppendElements(adds, fallible)) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
 
   EntrySort(*aStorePrefixes);
 

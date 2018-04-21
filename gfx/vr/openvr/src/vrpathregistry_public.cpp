@@ -111,8 +111,9 @@ CVRPathRegistry_Public::CVRPathRegistry_Public()
 std::string CVRPathRegistry_Public::GetOpenVRConfigPath()
 {
 	std::string sConfigPath = GetAppSettingsPath();
-	if( sConfigPath.empty() )
+	if( sConfigPath.empty() ) {
 		return "";
+}
 
 #if defined( _WIN32 ) || defined( LINUX )
 	sConfigPath = Path_Join( sConfigPath, "openvr" );
@@ -133,8 +134,9 @@ std::string CVRPathRegistry_Public::GetOpenVRConfigPath()
 std::string CVRPathRegistry_Public::GetVRPathRegistryFilename()
 {
 	std::string sPath = GetOpenVRConfigPath();
-	if ( sPath.empty() )
+	if ( sPath.empty() ) {
 		return "";
+}
 
 #if defined( _WIN32 )
 	sPath = Path_Join( sPath, "openvrpaths.vrpath" );
@@ -153,8 +155,9 @@ std::string CVRPathRegistry_Public::GetVRPathRegistryFilename()
 // ---------------------------------------------------------------------------
 static void ParseStringListFromJson( std::vector< std::string > *pvecHistory, const Json::Value & root, const char *pchArrayName )
 {
-	if( !root.isMember( pchArrayName ) )
+	if( !root.isMember( pchArrayName ) ) {
 		return;
+}
 
 	const Json::Value & arrayNode = root[ pchArrayName ];
 	if( !arrayNode )
@@ -192,12 +195,14 @@ static void StringListToJson( const std::vector< std::string > & vecHistory, Jso
 bool CVRPathRegistry_Public::ToJsonString( std::string &sJsonString )
 {
 	std::string sRegPath = GetVRPathRegistryFilename();
-	if( sRegPath.empty() )
+	if( sRegPath.empty() ) {
 		return false;
+}
 	
 	std::string sRegistryContents = Path_ReadTextFile( sRegPath );
-	if( sRegistryContents.empty() )
+	if( sRegistryContents.empty() ) {
 		return false;
+}
 
 	sJsonString = sRegistryContents;
 
@@ -254,8 +259,9 @@ bool CVRPathRegistry_Public::BSaveToFile() const
 	return false;
 #else
 	std::string sRegPath = GetVRPathRegistryFilename();
-	if( sRegPath.empty() )
+	if( sRegPath.empty() ) {
 		return false;
+}
 	
 	Json::Value root;
 	
@@ -294,10 +300,11 @@ bool CVRPathRegistry_Public::BSaveToFile() const
 // ---------------------------------------------------------------------------
 std::string CVRPathRegistry_Public::GetRuntimePath() const
 {
-	if( m_vecRuntimePath.empty() )
+	if( m_vecRuntimePath.empty() ) {
 		return "";
-	else
+	} else {
 		return m_vecRuntimePath.front().c_str();
+}
 }
 
 
@@ -306,10 +313,11 @@ std::string CVRPathRegistry_Public::GetRuntimePath() const
 // ---------------------------------------------------------------------------
 std::string CVRPathRegistry_Public::GetConfigPath() const
 {
-	if( m_vecConfigPath.empty() )
+	if( m_vecConfigPath.empty() ) {
 		return "";
-	else
+	} else {
 		return m_vecConfigPath.front().c_str();
+}
 }
 
 
@@ -318,10 +326,11 @@ std::string CVRPathRegistry_Public::GetConfigPath() const
 // ---------------------------------------------------------------------------
 std::string CVRPathRegistry_Public::GetLogPath() const
 {
-	if( m_vecLogPath.empty() )
+	if( m_vecLogPath.empty() ) {
 		return "";
-	else
+	} else {
 		return m_vecLogPath.front().c_str();
+}
 }
 
 

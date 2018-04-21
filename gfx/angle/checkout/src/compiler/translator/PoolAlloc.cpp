@@ -67,11 +67,13 @@ TPoolAllocator::TPoolAllocator(int growthIncrement, int allocationAlignment)
     //
     size_t minAlign = sizeof(void *);
     alignment &= ~(minAlign - 1);
-    if (alignment < minAlign)
+    if (alignment < minAlign) {
         alignment = minAlign;
+}
     size_t a      = 1;
-    while (a < alignment)
+    while (a < alignment) {
         a <<= 1;
+}
     alignment     = a;
     alignmentMask = a - 1;
 
@@ -80,8 +82,9 @@ TPoolAllocator::TPoolAllocator(int growthIncrement, int allocationAlignment)
     // Don't allow page sizes we know are smaller than all common
     // OS page sizes.
     //
-    if (pageSize < 4 * 1024)
+    if (pageSize < 4 * 1024) {
         pageSize = 4 * 1024;
+}
 
     //
     // A large currentPageOffset indicates a new page needs to
@@ -199,8 +202,9 @@ void TPoolAllocator::push()
 //
 void TPoolAllocator::pop()
 {
-    if (mStack.size() < 1)
+    if (mStack.size() < 1) {
         return;
+}
 
 #if !defined(ANGLE_TRANSLATOR_DISABLE_POOL_ALLOC)
     tHeader *page     = mStack.back().page;
@@ -212,9 +216,9 @@ void TPoolAllocator::pop()
         inUseList->~tHeader();
 
         tHeader *nextInUse = inUseList->nextPage;
-        if (inUseList->pageCount > 1)
+        if (inUseList->pageCount > 1) {
             delete[] reinterpret_cast<char *>(inUseList);
-        else
+        } else
         {
             inUseList->nextPage = freeList;
             freeList            = inUseList;
@@ -238,8 +242,9 @@ void TPoolAllocator::pop()
 //
 void TPoolAllocator::popAll()
 {
-    while (mStack.size() > 0)
+    while (mStack.size() > 0) {
         pop();
+}
 }
 
 void *TPoolAllocator::allocate(size_t numBytes)
@@ -260,8 +265,9 @@ void *TPoolAllocator::allocate(size_t numBytes)
     // guardBlockSize=0 and this all gets optimized away.
     size_t allocationSize = TAllocation::allocationSize(numBytes);
     // Detect integer overflow.
-    if (allocationSize < numBytes)
+    if (allocationSize < numBytes) {
         return 0;
+}
 
     //
     // Do the allocation, most likely case first, for efficiency.
@@ -287,12 +293,14 @@ void *TPoolAllocator::allocate(size_t numBytes)
         //
         size_t numBytesToAlloc = allocationSize + headerSkip;
         // Detect integer overflow.
-        if (numBytesToAlloc < allocationSize)
+        if (numBytesToAlloc < allocationSize) {
             return 0;
+}
 
         tHeader *memory = reinterpret_cast<tHeader *>(::new char[numBytesToAlloc]);
-        if (memory == 0)
+        if (memory == 0) {
             return 0;
+}
 
         // Use placement-new to initialize header
         new (memory) tHeader(inUseList, (numBytesToAlloc + pageSize - 1) / pageSize);
@@ -316,8 +324,9 @@ void *TPoolAllocator::allocate(size_t numBytes)
     else
     {
         memory = reinterpret_cast<tHeader *>(::new char[pageSize]);
-        if (memory == 0)
+        if (memory == 0) {
             return 0;
+}
     }
 
     // Use placement-new to initialize header
@@ -355,6 +364,7 @@ void TPoolAllocator::unlock()
 //
 void TAllocation::checkAllocList() const
 {
-    for (const TAllocation *alloc = this; alloc != 0; alloc = alloc->prevAlloc)
+    for (const TAllocation *alloc = this; alloc != 0; alloc = alloc->prevAlloc) {
         alloc->check();
+}
 }

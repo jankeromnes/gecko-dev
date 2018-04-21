@@ -114,8 +114,9 @@ public:
     bool Reset()
     {
         // reset no more than once per second
-        if (PR_IntervalToSeconds(PR_IntervalNow() - mLastReset) < 1)
+        if (PR_IntervalToSeconds(PR_IntervalNow() - mLastReset) < 1) {
             return false;
+}
 
         LOG(("Calling 'res_ninit'.\n"));
 
@@ -369,8 +370,9 @@ nsHostRecord::ReportUnusable(NetAddr *aAddress)
 
     ++mBlacklistedCount;
 
-    if (negative)
+    if (negative) {
         mDoomed = true;
+}
 
     char buf[kIPv6CStrBufSize];
     if (NetAddrToString(aAddress, buf, sizeof(buf))) {
@@ -659,8 +661,9 @@ nsHostResolver::Shutdown()
         mEvictionQSize = 0;
         mPendingCount = 0;
 
-        if (mNumIdleThreads)
+        if (mNumIdleThreads) {
             mIdleThreadCV.NotifyAll();
+}
 
         // empty host database
         mRecordDB.Clear();
@@ -750,8 +753,9 @@ nsHostResolver::ResolveHost(const char             *host,
 
     // ensure that we are working with a valid hostname before proceeding.  see
     // bug 304904 for details.
-    if (!net_IsValidHostName(nsDependentCString(host)))
+    if (!net_IsValidHostName(nsDependentCString(host))) {
         return NS_ERROR_UNKNOWN_HOST;
+}
 
     RefPtr<nsResolveHostCallback> callback(aCallback);
     // if result is set inside the lock, then we need to issue the
@@ -1353,8 +1357,9 @@ nsHostResolver::GetHostToLookup(nsHostRecord **result)
 
         // Determining timeout is racy, so allow one cycle through checking the queues
         // before exiting.
-        if (timedOut)
+        if (timedOut) {
             break;
+}
 
         // wait for one or more of the following to occur:
         //  (1) the pending queue has a host record to process
@@ -1894,8 +1899,9 @@ nsHostResolver::Create(uint32_t maxCacheEntries,
     NS_ADDREF(res);
 
     nsresult rv = res->Init();
-    if (NS_FAILED(rv))
+    if (NS_FAILED(rv)) {
         NS_RELEASE(res);
+}
 
     *result = res;
     return rv;

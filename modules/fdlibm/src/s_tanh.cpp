@@ -55,14 +55,16 @@ tanh(double x)
 
     /* x is INF or NaN */
 	if(ix>=0x7ff00000) {
-	    if (jx>=0) return one/x+one;    /* tanh(+-inf)=+-1 */
-	    else       return one/x-one;    /* tanh(NaN) = NaN */
+	    if (jx>=0) { return one/x+one;    /* tanh(+-inf)=+-1 */
+	    } else {       return one/x-one;    /* tanh(NaN) = NaN */
+}
 	}
 
     /* |x| < 22 */
 	if (ix < 0x40360000) {		/* |x|<22 */
 	    if (ix<0x3e300000) {	/* |x|<2**-28 */
-		if(huge+x>one) return x; /* tanh(tiny) = tiny with inexact */
+		if(huge+x>one) { return x; /* tanh(tiny) = tiny with inexact */
+}
 	    }
 	    if (ix>=0x3ff00000) {	/* |x|>=1  */
 		t = expm1(two*fabs(x));

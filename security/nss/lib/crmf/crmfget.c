@@ -359,8 +359,9 @@ CRMF_CertRequestGetNumberOfExtensions(CRMFCertRequest *inCertReq)
 
     certTemplate = &inCertReq->certTemplate;
     if (certTemplate->extensions) {
-        while (certTemplate->extensions[count] != NULL)
+        while (certTemplate->extensions[count] != NULL) {
             count++;
+}
     }
     return count;
 }
@@ -436,8 +437,9 @@ CRMF_CertRequestGetNumControls(CRMFCertRequest *inCertReq)
         return 0;
     }
     if (inCertReq->controls) {
-        while (inCertReq->controls[count] != NULL)
+        while (inCertReq->controls[count] != NULL) {
             count++;
+}
     }
     return count;
 }

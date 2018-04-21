@@ -101,8 +101,9 @@ sec_pkcs7_encoder_start_encrypt(SEC_PKCS7ContentInfo *cinfo,
         } break;
     }
 
-    if (enccinfo == NULL)
+    if (enccinfo == NULL) {
         return NULL;
+}
 
     bulkkey = orig_bulkkey;
     if (bulkkey == NULL) {
@@ -136,8 +137,9 @@ sec_pkcs7_encoder_start_encrypt(SEC_PKCS7ContentInfo *cinfo,
 
         cert = ri->cert;
         PORT_Assert(cert != NULL);
-        if (cert == NULL)
+        if (cert == NULL) {
             continue;
+}
 
         /*
          * XXX Want an interface that takes a cert and some data and
@@ -156,23 +158,26 @@ sec_pkcs7_encoder_start_encrypt(SEC_PKCS7ContentInfo *cinfo,
             case SEC_OID_PKCS1_RSA_ENCRYPTION:
                 encalgtag = certalgtag;
                 publickey = CERT_ExtractPublicKey(cert);
-                if (publickey == NULL)
+                if (publickey == NULL) {
                     goto loser;
+}
 
                 data_len = SECKEY_PublicKeyStrength(publickey);
                 ri->encKey.data =
                     (unsigned char *)PORT_ArenaAlloc(cinfo->poolp, data_len);
                 ri->encKey.len = data_len;
-                if (ri->encKey.data == NULL)
+                if (ri->encKey.data == NULL) {
                     goto loser;
+}
 
                 rv = PK11_PubWrapSymKey(PK11_AlgtagToMechanism(certalgtag), publickey,
                                         bulkkey, &ri->encKey);
 
                 SECKEY_DestroyPublicKey(publickey);
                 publickey = NULL;
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     goto loser;
+}
                 params = NULL; /* paranoia */
                 break;
             default:
@@ -182,10 +187,12 @@ sec_pkcs7_encoder_start_encrypt(SEC_PKCS7ContentInfo *cinfo,
 
         rv = SECOID_SetAlgorithmID(cinfo->poolp, &ri->keyEncAlg, encalgtag,
                                    params);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
-        if (arena)
+}
+        if (arena) {
             PORT_FreeArena(arena, PR_FALSE);
+}
         arena = NULL;
     }
 
@@ -212,8 +219,9 @@ loser:
         PORT_ArenaRelease(cinfo->poolp, mark);
     }
     if (orig_bulkkey == NULL) {
-        if (bulkkey)
+        if (bulkkey) {
             PK11_FreeSymKey(bulkkey);
+}
     }
 
     return encryptobj;
@@ -231,8 +239,9 @@ sec_pkcs7_encoder_notify(void *arg, PRBool before, void *dest, int depth)
      * We want to notice just before the content field.  After fields are
      * not interesting to us.
      */
-    if (!before)
+    if (!before) {
         return;
+}
 
     p7ecx = (SEC_PKCS7EncoderContext *)arg;
     cinfo = p7ecx->cinfo;
@@ -251,63 +260,74 @@ sec_pkcs7_encoder_notify(void *arg, PRBool before, void *dest, int depth)
     switch (kind) {
         default:
         case SEC_OID_PKCS7_DATA:
-            if (dest == &(cinfo->content.data))
+            if (dest == &(cinfo->content.data)) {
                 before_content = PR_TRUE;
+}
             break;
 
         case SEC_OID_PKCS7_DIGESTED_DATA: {
             SEC_PKCS7DigestedData *digd;
 
             digd = cinfo->content.digestedData;
-            if (digd == NULL)
+            if (digd == NULL) {
                 break;
+}
 
-            if (dest == &(digd->contentInfo.content))
+            if (dest == &(digd->contentInfo.content)) {
                 before_content = PR_TRUE;
+}
         } break;
 
         case SEC_OID_PKCS7_ENCRYPTED_DATA: {
             SEC_PKCS7EncryptedData *encd;
 
             encd = cinfo->content.encryptedData;
-            if (encd == NULL)
+            if (encd == NULL) {
                 break;
+}
 
-            if (dest == &(encd->encContentInfo.encContent))
+            if (dest == &(encd->encContentInfo.encContent)) {
                 before_content = PR_TRUE;
+}
         } break;
 
         case SEC_OID_PKCS7_ENVELOPED_DATA: {
             SEC_PKCS7EnvelopedData *envd;
 
             envd = cinfo->content.envelopedData;
-            if (envd == NULL)
+            if (envd == NULL) {
                 break;
+}
 
-            if (dest == &(envd->encContentInfo.encContent))
+            if (dest == &(envd->encContentInfo.encContent)) {
                 before_content = PR_TRUE;
+}
         } break;
 
         case SEC_OID_PKCS7_SIGNED_DATA: {
             SEC_PKCS7SignedData *sigd;
 
             sigd = cinfo->content.signedData;
-            if (sigd == NULL)
+            if (sigd == NULL) {
                 break;
+}
 
-            if (dest == &(sigd->contentInfo.content))
+            if (dest == &(sigd->contentInfo.content)) {
                 before_content = PR_TRUE;
+}
         } break;
 
         case SEC_OID_PKCS7_SIGNED_ENVELOPED_DATA: {
             SEC_PKCS7SignedAndEnvelopedData *saed;
 
             saed = cinfo->content.signedAndEnvelopedData;
-            if (saed == NULL)
+            if (saed == NULL) {
                 break;
+}
 
-            if (dest == &(saed->encContentInfo.encContent))
+            if (dest == &(saed->encContentInfo.encContent)) {
                 before_content = PR_TRUE;
+}
         } break;
     }
 
@@ -336,8 +356,9 @@ sec_pkcs7_encoder_start_contexts(SEC_PKCS7ContentInfo *cinfo,
 
     p7ecx =
         (SEC_PKCS7EncoderContext *)PORT_ZAlloc(sizeof(SEC_PKCS7EncoderContext));
-    if (p7ecx == NULL)
+    if (p7ecx == NULL) {
         return NULL;
+}
 
     digests = NULL;
     digestalg = NULL;
@@ -395,14 +416,16 @@ sec_pkcs7_encoder_start_contexts(SEC_PKCS7ContentInfo *cinfo,
         p7ecx->digestobj = HASH_GetHashObjectByOidTag(oidTag);
         if (p7ecx->digestobj != NULL) {
             p7ecx->digestcx = (*p7ecx->digestobj->create)();
-            if (p7ecx->digestcx == NULL)
+            if (p7ecx->digestcx == NULL) {
                 p7ecx->digestobj = NULL;
-            else
+            } else {
                 (*p7ecx->digestobj->begin)(p7ecx->digestcx);
+}
         }
         if (p7ecx->digestobj == NULL) {
-            if (p7ecx->encryptobj != NULL)
+            if (p7ecx->encryptobj != NULL) {
                 sec_PKCS7DestroyEncryptObject(p7ecx->encryptobj);
+}
             PORT_Free(p7ecx);
             return NULL;
         }
@@ -422,8 +445,9 @@ SEC_PKCS7EncoderStart(SEC_PKCS7ContentInfo *cinfo,
     SECStatus rv;
 
     p7ecx = sec_pkcs7_encoder_start_contexts(cinfo, bulkkey);
-    if (p7ecx == NULL)
+    if (p7ecx == NULL) {
         return NULL;
+}
 
     p7ecx->output.outputfn = outputfn;
     p7ecx->output.outputarg = outputarg;
@@ -519,10 +543,11 @@ sec_pkcs7_encoder_work_data(SEC_PKCS7EncoderContext *p7ecx, SECItem *dest,
             return rv;
         }
 
-        if (dest != NULL)
+        if (dest != NULL) {
             buf = (unsigned char *)PORT_ArenaAlloc(p7ecx->cinfo->poolp, buflen);
-        else
+        } else {
             buf = (unsigned char *)PORT_Alloc(buflen);
+}
 
         if (buf == NULL) {
             rv = SECFailure;
@@ -533,8 +558,9 @@ sec_pkcs7_encoder_work_data(SEC_PKCS7EncoderContext *p7ecx, SECItem *dest,
             len = outlen;
         }
         if (rv != SECSuccess) {
-            if (final)
+            if (final) {
                 goto done;
+}
             return rv;
         }
     }
@@ -550,8 +576,9 @@ sec_pkcs7_encoder_work_data(SEC_PKCS7EncoderContext *p7ecx, SECItem *dest,
 
 done:
     if (p7ecx->encryptobj != NULL) {
-        if (final)
+        if (final) {
             sec_PKCS7DestroyEncryptObject(p7ecx->encryptobj);
+}
         if (dest != NULL) {
             dest->data = buf;
             dest->len = len;
@@ -586,8 +613,9 @@ done:
 
         digdata = (unsigned char *)PORT_ArenaAlloc(p7ecx->cinfo->poolp,
                                                    p7ecx->digestobj->length);
-        if (digdata == NULL)
+        if (digdata == NULL) {
             return SECFailure;
+}
 
         if (digestsp != NULL) {
             PORT_Assert(digest == NULL);
@@ -596,8 +624,9 @@ done:
                                                 sizeof(SECItem));
             digests = (SECItem **)PORT_ArenaAlloc(p7ecx->cinfo->poolp,
                                                   2 * sizeof(SECItem *));
-            if (digests == NULL || digest == NULL)
+            if (digests == NULL || digest == NULL) {
                 return SECFailure;
+}
 
             digests[0] = digest;
             digests[1] = NULL;
@@ -681,8 +710,9 @@ sec_pkcs7_encoder_sig_and_certs(SEC_PKCS7ContentInfo *cinfo,
         } break;
     }
 
-    if (certs == NULL && certlists == NULL && signerinfos == NULL)
+    if (certs == NULL && certlists == NULL && signerinfos == NULL) {
         return SECSuccess; /* nothing for us to do! */
+}
 
     poolp = cinfo->poolp;
     certcount = 0;
@@ -711,8 +741,9 @@ sec_pkcs7_encoder_sig_and_certs(SEC_PKCS7ContentInfo *cinfo,
             digestalgtag = SECOID_GetAlgorithmTag(&(signerinfo->digestAlg));
             for (di = 0; digestalgs[di] != NULL; di++) {
                 /* XXX Should I be comparing more than the tag? */
-                if (digestalgtag == SECOID_GetAlgorithmTag(digestalgs[di]))
+                if (digestalgtag == SECOID_GetAlgorithmTag(digestalgs[di])) {
                     break;
+}
             }
             if (digestalgs[di] == NULL) {
                 /* XXX oops; do what? set an error? */
@@ -722,8 +753,9 @@ sec_pkcs7_encoder_sig_and_certs(SEC_PKCS7ContentInfo *cinfo,
 
             cert = signerinfo->cert;
             privkey = PK11_FindKeyByAnyCert(cert, pwfnarg);
-            if (privkey == NULL)
+            if (privkey == NULL) {
                 return SECFailure;
+}
 
             /*
              * XXX I think there should be a cert-level interface for this,
@@ -805,40 +837,47 @@ sec_pkcs7_encoder_sig_and_certs(SEC_PKCS7ContentInfo *cinfo,
 
             SECKEY_DestroyPrivateKey(privkey);
 
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 return rv;
+}
 
             rv = SECITEM_CopyItem(poolp, &(signerinfo->encDigest), &signature);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 return rv;
+}
 
             SECITEM_FreeItem(&signature, PR_FALSE);
 
             rv = SECOID_SetAlgorithmID(poolp, &(signerinfo->digestEncAlg),
                                        signalgtag, NULL);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 return SECFailure;
+}
 
             /*
              * Count the cert chain for this signer.
              */
-            if (signerinfo->certList != NULL)
+            if (signerinfo->certList != NULL) {
                 certcount += signerinfo->certList->len;
+}
         }
     }
 
     if (certs != NULL) {
-        for (ci = 0; certs[ci] != NULL; ci++)
+        for (ci = 0; certs[ci] != NULL; ci++) {
             certcount++;
+}
     }
 
     if (certlists != NULL) {
-        for (cli = 0; certlists[cli] != NULL; cli++)
+        for (cli = 0; certlists[cli] != NULL; cli++) {
             certcount += certlists[cli]->len;
+}
     }
 
-    if (certcount == 0)
+    if (certcount == 0) {
         return SECSuccess; /* signing done; no certs */
+}
 
     /*
      * Combine all of the certs and cert chains into rawcerts.
@@ -848,8 +887,9 @@ sec_pkcs7_encoder_sig_and_certs(SEC_PKCS7ContentInfo *cinfo,
      */
     rawcerts = (SECItem **)PORT_ArenaAlloc(poolp,
                                            (certcount + 1) * sizeof(SECItem *));
-    if (rawcerts == NULL)
+    if (rawcerts == NULL) {
         return SECFailure;
+}
 
     /*
      * XXX Want to check for duplicates and not add *any* cert that is
@@ -861,20 +901,23 @@ sec_pkcs7_encoder_sig_and_certs(SEC_PKCS7ContentInfo *cinfo,
     if (signerinfos != NULL) {
         for (si = 0; signerinfos[si] != NULL; si++) {
             signerinfo = signerinfos[si];
-            for (ci = 0; ci < signerinfo->certList->len; ci++)
+            for (ci = 0; ci < signerinfo->certList->len; ci++) {
                 rawcerts[rci++] = &(signerinfo->certList->certs[ci]);
+}
         }
     }
 
     if (certs != NULL) {
-        for (ci = 0; certs[ci] != NULL; ci++)
+        for (ci = 0; certs[ci] != NULL; ci++) {
             rawcerts[rci++] = &(certs[ci]->derCert);
+}
     }
 
     if (certlists != NULL) {
         for (cli = 0; certlists[cli] != NULL; cli++) {
-            for (ci = 0; ci < certlists[cli]->len; ci++)
+            for (ci = 0; ci < certlists[cli]->len; ci++) {
                 rawcerts[rci++] = &(certlists[cli]->certs[ci]);
+}
         }
     }
 
@@ -901,12 +944,14 @@ SEC_PKCS7EncoderFinish(SEC_PKCS7EncoderContext *p7ecx,
     SEC_ASN1EncoderClearTakeFromBuf(p7ecx->ecx);
     SEC_ASN1EncoderClearStreaming(p7ecx->ecx);
 
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = sec_pkcs7_encoder_sig_and_certs(p7ecx->cinfo, pwfn, pwfnarg);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = SEC_ASN1EncoderUpdate(p7ecx->ecx, NULL, 0);
 
@@ -943,8 +988,9 @@ SEC_PKCS7PrepareForEncode(SEC_PKCS7ContentInfo *cinfo,
     SECStatus rv;
 
     p7ecx = sec_pkcs7_encoder_start_contexts(cinfo, bulkkey);
-    if (p7ecx == NULL)
+    if (p7ecx == NULL) {
         return SECFailure;
+}
 
     content = SEC_PKCS7GetContent(cinfo);
 
@@ -976,8 +1022,9 @@ SEC_PKCS7PrepareForEncode(SEC_PKCS7ContentInfo *cinfo,
     if (content != NULL && content->data != NULL && content->len) {
         rv = sec_pkcs7_encoder_work_data(p7ecx, enc_content,
                                          content->data, content->len, PR_TRUE);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
 
     rv = sec_pkcs7_encoder_sig_and_certs(cinfo, pwfn, pwfnarg);
@@ -1072,8 +1119,9 @@ SEC_PKCS7EncodeItem(PLArenaPool *pool,
     SECStatus rv;
 
     rv = SEC_PKCS7PrepareForEncode(cinfo, bulkkey, pwfn, pwfnarg);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return NULL;
+}
 
     return SEC_ASN1EncodeItem(pool, dest, cinfo, sec_PKCS7ContentInfoTemplate);
 }

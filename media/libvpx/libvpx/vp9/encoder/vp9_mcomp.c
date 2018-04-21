@@ -46,10 +46,14 @@ void vp9_set_mv_search_range(MvLimits *mv_limits, const MV *mv) {
 
   // Get intersection of UMV window and valid MV window to reduce # of checks
   // in diamond search.
-  if (mv_limits->col_min < col_min) mv_limits->col_min = col_min;
-  if (mv_limits->col_max > col_max) mv_limits->col_max = col_max;
-  if (mv_limits->row_min < row_min) mv_limits->row_min = row_min;
-  if (mv_limits->row_max > row_max) mv_limits->row_max = row_max;
+  if (mv_limits->col_min < col_min) { mv_limits->col_min = col_min;
+}
+  if (mv_limits->col_max > col_max) { mv_limits->col_max = col_max;
+}
+  if (mv_limits->row_min < row_min) { mv_limits->row_min = row_min;
+}
+  if (mv_limits->row_max > row_max) { mv_limits->row_max = row_max;
+}
 }
 
 int vp9_init_search_range(int size) {
@@ -57,7 +61,8 @@ int vp9_init_search_range(int size) {
   // Minimum search size no matter what the passed in value.
   size = VPXMAX(16, size);
 
-  while ((size << sr) < MAX_FULL_PEL_VAL) sr++;
+  while ((size << sr) < MAX_FULL_PEL_VAL) { sr++;
+}
 
   sr = VPXMIN(sr, MAX_MVSEARCH_STEPS - 2);
   return sr;
@@ -402,8 +407,9 @@ uint32_t vp9_skip_sub_pixel_tree(const MACROBLOCK *x, MV *bestmv,
   (void)cost_list;
 
   if ((abs(bestmv->col - ref_mv->col) > (MAX_FULL_PEL_VAL << 3)) ||
-      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3)))
+      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3))) {
     return UINT_MAX;
+}
 
   return besterr;
 }
@@ -471,8 +477,9 @@ uint32_t vp9_find_best_sub_pixel_tree_pruned_evenmore(
   bestmv->col = bc;
 
   if ((abs(bestmv->col - ref_mv->col) > (MAX_FULL_PEL_VAL << 3)) ||
-      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3)))
+      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3))) {
     return UINT_MAX;
+}
 
   return besterr;
 }
@@ -535,8 +542,9 @@ uint32_t vp9_find_best_sub_pixel_tree_pruned_more(
   bestmv->col = bc;
 
   if ((abs(bestmv->col - ref_mv->col) > (MAX_FULL_PEL_VAL << 3)) ||
-      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3)))
+      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3))) {
     return UINT_MAX;
+}
 
   return besterr;
 }
@@ -621,8 +629,9 @@ uint32_t vp9_find_best_sub_pixel_tree_pruned(
   bestmv->col = bc;
 
   if ((abs(bestmv->col - ref_mv->col) > (MAX_FULL_PEL_VAL << 3)) ||
-      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3)))
+      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3))) {
     return UINT_MAX;
+}
 
   return besterr;
 }
@@ -670,8 +679,9 @@ uint32_t vp9_find_best_sub_pixel_tree(
   unsigned int cost_array[5];
   int kr, kc;
 
-  if (!(allow_hp && use_mv_hp(ref_mv)))
-    if (round == 3) round = 2;
+  if (!(allow_hp && use_mv_hp(ref_mv))) {
+    if (round == 3) { round = 2;
+}
 
   bestmv->row *= 8;
   bestmv->col *= 8;
@@ -692,12 +702,13 @@ uint32_t vp9_find_best_sub_pixel_tree(
         MV this_mv;
         this_mv.row = tr;
         this_mv.col = tc;
-        if (second_pred == NULL)
+        if (second_pred == NULL) {
           thismse = vfp->svf(pre_address, y_stride, sp(tc), sp(tr), src_address,
                              src_stride, &sse);
-        else
+        } else {
           thismse = vfp->svaf(pre_address, y_stride, sp(tc), sp(tr),
                               src_address, src_stride, &sse, second_pred);
+}
         cost_array[idx] = thismse + mv_err_cost(&this_mv, ref_mv, mvjcost,
                                                 mvcost, error_per_bit);
 
@@ -721,12 +732,13 @@ uint32_t vp9_find_best_sub_pixel_tree(
     if (tc >= minc && tc <= maxc && tr >= minr && tr <= maxr) {
       const uint8_t *const pre_address = y + (tr >> 3) * y_stride + (tc >> 3);
       MV this_mv = { tr, tc };
-      if (second_pred == NULL)
+      if (second_pred == NULL) {
         thismse = vfp->svf(pre_address, y_stride, sp(tc), sp(tr), src_address,
                            src_stride, &sse);
-      else
+      } else {
         thismse = vfp->svaf(pre_address, y_stride, sp(tc), sp(tr), src_address,
                             src_stride, &sse, second_pred);
+}
       cost_array[4] = thismse + mv_err_cost(&this_mv, ref_mv, mvjcost, mvcost,
                                             error_per_bit);
 
@@ -770,8 +782,9 @@ uint32_t vp9_find_best_sub_pixel_tree(
   bestmv->col = bc;
 
   if ((abs(bestmv->col - ref_mv->col) > (MAX_FULL_PEL_VAL << 3)) ||
-      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3)))
+      (abs(bestmv->row - ref_mv->row) > (MAX_FULL_PEL_VAL << 3))) {
     return UINT_MAX;
+}
 
   return besterr;
 }
@@ -841,14 +854,15 @@ static INLINE void calc_int_cost_list(const MACROBLOCK *x, const MV *ref_mv,
   } else {
     for (i = 0; i < 4; i++) {
       const MV this_mv = { br + neighbors[i].row, bc + neighbors[i].col };
-      if (!is_mv_in(&x->mv_limits, &this_mv))
+      if (!is_mv_in(&x->mv_limits, &this_mv)) {
         cost_list[i + 1] = INT_MAX;
-      else
+      } else {
         cost_list[i + 1] = fn_ptr->vf(what->buf, what->stride,
                                       get_buf_from_mv(in_what, &this_mv),
                                       in_what->stride, &sse) +
                            mv_err_cost(&this_mv, &fcenter_mv, x->nmvjointcost,
                                        x->mvcost, x->errorperbit);
+}
     }
   }
 }
@@ -910,7 +924,8 @@ static int vp9_pattern_search(const MACROBLOCK *x, MV *ref_mv, int search_param,
         for (i = 0; i < num_candidates[t]; i++) {
           const MV this_mv = { br + candidates[t][i].row,
                                bc + candidates[t][i].col };
-          if (!is_mv_in(&x->mv_limits, &this_mv)) continue;
+          if (!is_mv_in(&x->mv_limits, &this_mv)) { continue;
+}
           thissad =
               vfp->sdf(what->buf, what->stride,
                        get_buf_from_mv(in_what, &this_mv), in_what->stride);
@@ -952,7 +967,8 @@ static int vp9_pattern_search(const MACROBLOCK *x, MV *ref_mv, int search_param,
           for (i = 0; i < num_candidates[s]; i++) {
             const MV this_mv = { br + candidates[s][i].row,
                                  bc + candidates[s][i].col };
-            if (!is_mv_in(&x->mv_limits, &this_mv)) continue;
+            if (!is_mv_in(&x->mv_limits, &this_mv)) { continue;
+}
             thissad =
                 vfp->sdf(what->buf, what->stride,
                          get_buf_from_mv(in_what, &this_mv), in_what->stride);
@@ -993,7 +1009,8 @@ static int vp9_pattern_search(const MACROBLOCK *x, MV *ref_mv, int search_param,
               br + candidates[s][next_chkpts_indices[i]].row,
               bc + candidates[s][next_chkpts_indices[i]].col
             };
-            if (!is_mv_in(&x->mv_limits, &this_mv)) continue;
+            if (!is_mv_in(&x->mv_limits, &this_mv)) { continue;
+}
             thissad =
                 vfp->sdf(what->buf, what->stride,
                          get_buf_from_mv(in_what, &this_mv), in_what->stride);
@@ -1084,7 +1101,8 @@ static int vp9_pattern_search_sad(
         for (i = 0; i < num_candidates[t]; i++) {
           const MV this_mv = { br + candidates[t][i].row,
                                bc + candidates[t][i].col };
-          if (!is_mv_in(&x->mv_limits, &this_mv)) continue;
+          if (!is_mv_in(&x->mv_limits, &this_mv)) { continue;
+}
           thissad =
               vfp->sdf(what->buf, what->stride,
                        get_buf_from_mv(in_what, &this_mv), in_what->stride);
@@ -1126,7 +1144,8 @@ static int vp9_pattern_search_sad(
           for (i = 0; i < num_candidates[s]; i++) {
             const MV this_mv = { br + candidates[s][i].row,
                                  bc + candidates[s][i].col };
-            if (!is_mv_in(&x->mv_limits, &this_mv)) continue;
+            if (!is_mv_in(&x->mv_limits, &this_mv)) { continue;
+}
             thissad =
                 vfp->sdf(what->buf, what->stride,
                          get_buf_from_mv(in_what, &this_mv), in_what->stride);
@@ -1167,7 +1186,8 @@ static int vp9_pattern_search_sad(
               br + candidates[s][next_chkpts_indices[i]].row,
               bc + candidates[s][next_chkpts_indices[i]].col
             };
-            if (!is_mv_in(&x->mv_limits, &this_mv)) continue;
+            if (!is_mv_in(&x->mv_limits, &this_mv)) { continue;
+}
             thissad =
                 vfp->sdf(what->buf, what->stride,
                          get_buf_from_mv(in_what, &this_mv), in_what->stride);
@@ -1200,7 +1220,8 @@ static int vp9_pattern_search_sad(
           for (i = 0; i < num_candidates[s]; i++) {
             const MV this_mv = { br + candidates[s][i].row,
                                  bc + candidates[s][i].col };
-            if (!is_mv_in(&x->mv_limits, &this_mv)) continue;
+            if (!is_mv_in(&x->mv_limits, &this_mv)) { continue;
+}
             cost_list[i + 1] = thissad =
                 vfp->sdf(what->buf, what->stride,
                          get_buf_from_mv(in_what, &this_mv), in_what->stride);
@@ -1281,12 +1302,13 @@ static int vp9_pattern_search_sad(
       } else {
         for (i = 0; i < 4; i++) {
           const MV this_mv = { br + neighbors[i].row, bc + neighbors[i].col };
-          if (!is_mv_in(&x->mv_limits, &this_mv))
+          if (!is_mv_in(&x->mv_limits, &this_mv)) {
             cost_list[i + 1] = INT_MAX;
-          else
+          } else {
             cost_list[i + 1] =
                 vfp->sdf(what->buf, what->stride,
                          get_buf_from_mv(in_what, &this_mv), in_what->stride);
+}
         }
       }
     } else {
@@ -1644,7 +1666,8 @@ int vp9_diamond_search_sad_c(const MACROBLOCK *x, const search_site_config *cfg,
       for (j = 0; j < cfg->searches_per_step; j += 4) {
         unsigned char const *block_offset[4];
 
-        for (t = 0; t < 4; t++) block_offset[t] = ss_os[i + t] + best_address;
+        for (t = 0; t < 4; t++) { block_offset[t] = ss_os[i + t] + best_address;
+}
 
         fn_ptr->sdx4df(what, what_stride, block_offset, in_what_stride,
                        sad_array);
@@ -1736,7 +1759,8 @@ static int vector_match(int16_t *ref, int16_t *src, int bwl) {
   for (d = -8; d <= 8; d += 16) {
     int this_pos = offset + d;
     // check limit
-    if (this_pos < 0 || this_pos > bw) continue;
+    if (this_pos < 0 || this_pos > bw) { continue;
+}
     this_sad = vpx_vector_var(&ref[this_pos], src, bwl);
     if (this_sad < best_sad) {
       best_sad = this_sad;
@@ -1748,7 +1772,8 @@ static int vector_match(int16_t *ref, int16_t *src, int bwl) {
   for (d = -4; d <= 4; d += 8) {
     int this_pos = offset + d;
     // check limit
-    if (this_pos < 0 || this_pos > bw) continue;
+    if (this_pos < 0 || this_pos > bw) { continue;
+}
     this_sad = vpx_vector_var(&ref[this_pos], src, bwl);
     if (this_sad < best_sad) {
       best_sad = this_sad;
@@ -1760,7 +1785,8 @@ static int vector_match(int16_t *ref, int16_t *src, int bwl) {
   for (d = -2; d <= 2; d += 4) {
     int this_pos = offset + d;
     // check limit
-    if (this_pos < 0 || this_pos > bw) continue;
+    if (this_pos < 0 || this_pos > bw) { continue;
+}
     this_sad = vpx_vector_var(&ref[this_pos], src, bwl);
     if (this_sad < best_sad) {
       best_sad = this_sad;
@@ -1772,7 +1798,8 @@ static int vector_match(int16_t *ref, int16_t *src, int bwl) {
   for (d = -1; d <= 1; d += 2) {
     int this_pos = offset + d;
     // check limit
-    if (this_pos < 0 || this_pos > bw) continue;
+    if (this_pos < 0 || this_pos > bw) { continue;
+}
     this_sad = vpx_vector_var(&ref[this_pos], src, bwl);
     if (this_sad < best_sad) {
       best_sad = this_sad;
@@ -1817,7 +1844,8 @@ unsigned int vp9_int_pro_motion_estimation(const VP9_COMP *cpi, MACROBLOCK *x,
     // Swap out the reference frame for a version that's been scaled to
     // match the resolution of the current frame, allowing the existing
     // motion search code to be used without additional modifications.
-    for (i = 0; i < MAX_MB_PLANE; i++) backup_yv12[i] = xd->plane[i].pre[0];
+    for (i = 0; i < MAX_MB_PLANE; i++) { backup_yv12[i] = xd->plane[i].pre[0];
+}
     vp9_setup_pre_planes(xd, 0, scaled_ref_frame, mi_row, mi_col, NULL);
   }
 
@@ -1887,15 +1915,17 @@ unsigned int vp9_int_pro_motion_estimation(const VP9_COMP *cpi, MACROBLOCK *x,
     }
   }
 
-  if (this_sad[0] < this_sad[3])
+  if (this_sad[0] < this_sad[3]) {
     this_mv.row -= 1;
-  else
+  } else {
     this_mv.row += 1;
+}
 
-  if (this_sad[1] < this_sad[2])
+  if (this_sad[1] < this_sad[2]) {
     this_mv.col -= 1;
-  else
+  } else {
     this_mv.col += 1;
+}
 
   ref_buf = xd->plane[0].pre[0].buf + this_mv.row * ref_stride + this_mv.col;
 
@@ -1910,7 +1940,8 @@ unsigned int vp9_int_pro_motion_estimation(const VP9_COMP *cpi, MACROBLOCK *x,
 
   if (scaled_ref_frame) {
     int i;
-    for (i = 0; i < MAX_MB_PLANE; i++) xd->plane[i].pre[0] = backup_yv12[i];
+    for (i = 0; i < MAX_MB_PLANE; i++) { xd->plane[i].pre[0] = backup_yv12[i];
+}
   }
 
   return best_sad;
@@ -1929,13 +1960,15 @@ static int full_pixel_diamond(const VP9_COMP *cpi, MACROBLOCK *x, MV *mvp_full,
   int thissme, n, num00 = 0;
   int bestsme = cpi->diamond_search_sad(x, &cpi->ss_cfg, mvp_full, &temp_mv,
                                         step_param, sadpb, &n, fn_ptr, ref_mv);
-  if (bestsme < INT_MAX)
+  if (bestsme < INT_MAX) {
     bestsme = vp9_get_mvpred_var(x, &temp_mv, ref_mv, fn_ptr, 1);
+}
   *dst_mv = temp_mv;
 
   // If there won't be more n-step search, check to see if refining search is
   // needed.
-  if (n > further_steps) do_refine = 0;
+  if (n > further_steps) { do_refine = 0;
+}
 
   while (n < further_steps) {
     ++n;
@@ -1946,11 +1979,13 @@ static int full_pixel_diamond(const VP9_COMP *cpi, MACROBLOCK *x, MV *mvp_full,
       thissme = cpi->diamond_search_sad(x, &cpi->ss_cfg, mvp_full, &temp_mv,
                                         step_param + n, sadpb, &num00, fn_ptr,
                                         ref_mv);
-      if (thissme < INT_MAX)
+      if (thissme < INT_MAX) {
         thissme = vp9_get_mvpred_var(x, &temp_mv, ref_mv, fn_ptr, 1);
+}
 
       // check to see if refining search is needed.
-      if (num00 > further_steps - n) do_refine = 0;
+      if (num00 > further_steps - n) { do_refine = 0;
+}
 
       if (thissme < bestsme) {
         bestsme = thissme;
@@ -1965,8 +2000,9 @@ static int full_pixel_diamond(const VP9_COMP *cpi, MACROBLOCK *x, MV *mvp_full,
     MV best_mv = *dst_mv;
     thissme = vp9_refining_search_sad(x, &best_mv, sadpb, search_range, fn_ptr,
                                       ref_mv);
-    if (thissme < INT_MAX)
+    if (thissme < INT_MAX) {
       thissme = vp9_get_mvpred_var(x, &best_mv, ref_mv, fn_ptr, 1);
+}
     if (thissme < bestsme) {
       bestsme = thissme;
       *dst_mv = best_mv;
@@ -2003,8 +2039,9 @@ static int full_pixel_exhaustive(VP9_COMP *cpi, MACROBLOCK *x,
 
   // Trap illegal values for interval and range for this function.
   if ((range < MIN_RANGE) || (range > MAX_RANGE) || (interval < MIN_INTERVAL) ||
-      (interval > range))
+      (interval > range)) {
     return INT_MAX;
+}
 
   baseline_interval_divisor = range / interval;
 
@@ -2027,12 +2064,14 @@ static int full_pixel_exhaustive(VP9_COMP *cpi, MACROBLOCK *x,
           x, &f_ref_mv, &temp_mv, sf->mesh_patterns[i].range,
           sf->mesh_patterns[i].interval, sadpb, fn_ptr, &temp_mv);
 
-      if (sf->mesh_patterns[i].interval == 1) break;
+      if (sf->mesh_patterns[i].interval == 1) { break;
+}
     }
   }
 
-  if (bestsme < INT_MAX)
+  if (bestsme < INT_MAX) {
     bestsme = vp9_get_mvpred_var(x, &temp_mv, ref_mv, fn_ptr, 1);
+}
   *dst_mv = temp_mv;
 
   // Return cost list.
@@ -2438,8 +2477,9 @@ int vp9_full_pixel_search(VP9_COMP *cpi, MACROBLOCK *x, BLOCK_SIZE bsize,
     default: assert(0 && "Invalid search method.");
   }
 
-  if (method != NSTEP && rd && var < var_max)
+  if (method != NSTEP && rd && var < var_max) {
     var = vp9_get_mvpred_var(x, tmp_mv, ref_mv, fn_ptr, 1);
+}
 
   return var;
 }

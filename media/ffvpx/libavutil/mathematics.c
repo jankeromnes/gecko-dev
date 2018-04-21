@@ -37,18 +37,21 @@
 int64_t av_gcd(int64_t a, int64_t b) {
     int za, zb, k;
     int64_t u, v;
-    if (a == 0)
+    if (a == 0) {
         return b;
-    if (b == 0)
+}
+    if (b == 0) {
         return a;
+}
     za = ff_ctzll(a);
     zb = ff_ctzll(b);
     k  = FFMIN(za, zb);
     u = llabs(a >> za);
     v = llabs(b >> zb);
     while (u != v) {
-        if (u > v)
+        if (u > v) {
             FFSWAP(int64_t, v, u);
+}
         v -= u;
         v >>= ff_ctzll(v);
     }
@@ -62,31 +65,36 @@ int64_t av_rescale_rnd(int64_t a, int64_t b, int64_t c, enum AVRounding rnd)
     av_assert2(b >=0);
     av_assert2((unsigned)(rnd&~AV_ROUND_PASS_MINMAX)<=5 && (rnd&~AV_ROUND_PASS_MINMAX)!=4);
 
-    if (c <= 0 || b < 0 || !((unsigned)(rnd&~AV_ROUND_PASS_MINMAX)<=5 && (rnd&~AV_ROUND_PASS_MINMAX)!=4))
+    if (c <= 0 || b < 0 || !((unsigned)(rnd&~AV_ROUND_PASS_MINMAX)<=5 && (rnd&~AV_ROUND_PASS_MINMAX)!=4)) {
         return INT64_MIN;
+}
 
     if (rnd & AV_ROUND_PASS_MINMAX) {
-        if (a == INT64_MIN || a == INT64_MAX)
+        if (a == INT64_MIN || a == INT64_MAX) {
             return a;
+}
         rnd -= AV_ROUND_PASS_MINMAX;
     }
 
-    if (a < 0)
+    if (a < 0) {
         return -(uint64_t)av_rescale_rnd(-FFMAX(a, -INT64_MAX), b, c, rnd ^ ((rnd >> 1) & 1));
+}
 
-    if (rnd == AV_ROUND_NEAR_INF)
+    if (rnd == AV_ROUND_NEAR_INF) {
         r = c / 2;
-    else if (rnd & 1)
+    } else if (rnd & 1) {
         r = c - 1;
+}
 
     if (b <= INT_MAX && c <= INT_MAX) {
-        if (a <= INT_MAX)
+        if (a <= INT_MAX) {
             return (a * b + r) / c;
-        else {
+        } else {
             int64_t ad = a / c;
             int64_t a2 = (a % c * b + r) / c;
-            if (ad >= INT32_MAX && b && ad > (INT64_MAX - a2) / b)
+            if (ad >= INT32_MAX && b && ad > (INT64_MAX - a2) / b) {
                 return INT64_MIN;
+}
             return ad * b + a2;
         }
     } else {
@@ -112,8 +120,9 @@ int64_t av_rescale_rnd(int64_t a, int64_t b, int64_t c, enum AVRounding rnd)
                 t1++;
             }
         }
-        if (t1 > INT64_MAX)
+        if (t1 > INT64_MAX) {
             return INT64_MIN;
+}
         return t1;
 #else
         /* reference code doing (a*b + r) / c, requires libavutil/integer.h */
@@ -148,20 +157,24 @@ int av_compare_ts(int64_t ts_a, AVRational tb_a, int64_t ts_b, AVRational tb_b)
 {
     int64_t a = tb_a.num * (int64_t)tb_b.den;
     int64_t b = tb_b.num * (int64_t)tb_a.den;
-    if ((FFABS(ts_a)|a|FFABS(ts_b)|b) <= INT_MAX)
+    if ((FFABS(ts_a)|a|FFABS(ts_b)|b) <= INT_MAX) {
         return (ts_a*a > ts_b*b) - (ts_a*a < ts_b*b);
-    if (av_rescale_rnd(ts_a, a, b, AV_ROUND_DOWN) < ts_b)
+}
+    if (av_rescale_rnd(ts_a, a, b, AV_ROUND_DOWN) < ts_b) {
         return -1;
-    if (av_rescale_rnd(ts_b, b, a, AV_ROUND_DOWN) < ts_a)
+}
+    if (av_rescale_rnd(ts_b, b, a, AV_ROUND_DOWN) < ts_a) {
         return 1;
+}
     return 0;
 }
 
 int64_t av_compare_mod(uint64_t a, uint64_t b, uint64_t mod)
 {
     int64_t c = (a - b) & (mod - 1);
-    if (c > (mod >> 1))
+    if (c > (mod >> 1)) {
         c -= mod;
+}
     return c;
 }
 
@@ -179,8 +192,9 @@ simple_round:
 
     a =  av_rescale_q_rnd(2*in_ts-1, in_tb, fs_tb, AV_ROUND_DOWN)   >>1;
     b = (av_rescale_q_rnd(2*in_ts+1, in_tb, fs_tb, AV_ROUND_UP  )+1)>>1;
-    if (*last < 2*a - b || *last > 2*b - a)
+    if (*last < 2*a - b || *last > 2*b - a) {
         goto simple_round;
+}
 
     this = av_clip64(*last, a, b);
     *last = this + duration;
@@ -192,16 +206,19 @@ int64_t av_add_stable(AVRational ts_tb, int64_t ts, AVRational inc_tb, int64_t i
 {
     int64_t m, d;
 
-    if (inc != 1)
+    if (inc != 1) {
         inc_tb = av_mul_q(inc_tb, (AVRational) {inc, 1});
+}
 
     m = inc_tb.num * (int64_t)ts_tb.den;
     d = inc_tb.den * (int64_t)ts_tb.num;
 
-    if (m % d == 0)
+    if (m % d == 0) {
         return ts + m / d;
-    if (m < d)
+}
+    if (m < d) {
         return ts;
+}
 
     {
         int64_t old = av_rescale_q(ts, ts_tb, inc_tb);

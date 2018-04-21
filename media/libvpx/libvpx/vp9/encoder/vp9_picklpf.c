@@ -41,13 +41,14 @@ static int64_t try_filter_frame(const YV12_BUFFER_CONFIG *sd,
 
   vp9_build_mask_frame(cm, filt_level, partial_frame);
 
-  if (cpi->num_workers > 1)
+  if (cpi->num_workers > 1) {
     vp9_loop_filter_frame_mt(cm->frame_to_show, cm, cpi->td.mb.e_mbd.plane,
                              filt_level, 1, partial_frame, cpi->workers,
                              cpi->num_workers, &cpi->lf_row_sync);
-  else
+  } else {
     vp9_loop_filter_frame(cm->frame_to_show, cm, &cpi->td.mb.e_mbd, filt_level,
                           1, partial_frame);
+}
 
 #if CONFIG_VP9_HIGHBITDEPTH
   if (cm->use_highbitdepth) {
@@ -99,11 +100,13 @@ static int search_filter_level(const YV12_BUFFER_CONFIG *sd, VP9_COMP *cpi,
     // Bias against raising loop filter in favor of lowering it.
     int64_t bias = (best_err >> (15 - (filt_mid / 8))) * filter_step;
 
-    if ((cpi->oxcf.pass == 2) && (cpi->twopass.section_intra_rating < 20))
+    if ((cpi->oxcf.pass == 2) && (cpi->twopass.section_intra_rating < 20)) {
       bias = (bias * cpi->twopass.section_intra_rating) / 20;
+}
 
     // yx, bias less for large block size
-    if (cm->tx_mode != ONLY_4X4) bias >>= 1;
+    if (cm->tx_mode != ONLY_4X4) { bias >>= 1;
+}
 
     if (filt_direction <= 0 && filt_low != filt_mid) {
       // Get Low filter error score
@@ -114,7 +117,8 @@ static int search_filter_level(const YV12_BUFFER_CONFIG *sd, VP9_COMP *cpi,
       // filter value.
       if ((ss_err[filt_low] - bias) < best_err) {
         // Was it actually better than the previous best?
-        if (ss_err[filt_low] < best_err) best_err = ss_err[filt_low];
+        if (ss_err[filt_low] < best_err) { best_err = ss_err[filt_low];
+}
 
         filt_best = filt_low;
       }
@@ -181,11 +185,13 @@ void vp9_pick_filter_level(const YV12_BUFFER_CONFIG *sd, VP9_COMP *cpi,
 #else
     int filt_guess = ROUND_POWER_OF_TWO(q * 20723 + 1015158, 18);
     if (cpi->oxcf.pass == 0 && cpi->oxcf.rc_mode == VPX_CBR &&
-        cpi->oxcf.content != VP9E_CONTENT_SCREEN && cm->frame_type != KEY_FRAME)
+        cpi->oxcf.content != VP9E_CONTENT_SCREEN && cm->frame_type != KEY_FRAME) {
       filt_guess = 5 * filt_guess >> 3;
+}
 
 #endif  // CONFIG_VP9_HIGHBITDEPTH
-    if (cm->frame_type == KEY_FRAME) filt_guess -= 4;
+    if (cm->frame_type == KEY_FRAME) { filt_guess -= 4;
+}
     lf->filter_level = clamp(filt_guess, min_filter_level, max_filter_level);
   } else {
     lf->filter_level =

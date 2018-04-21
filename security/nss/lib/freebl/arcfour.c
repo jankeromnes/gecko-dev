@@ -176,8 +176,9 @@ RC4_CreateContext(const unsigned char *key, int len)
 void
 RC4_DestroyContext(RC4Context *cx, PRBool freeit)
 {
-    if (freeit)
+    if (freeit) {
         PORT_ZFree(cx, sizeof(*cx));
+}
 }
 
 #if defined(NSS_BEVAND_ARCFOUR)

@@ -52,10 +52,11 @@ static int enable_noise_estimation(VP9_COMP *const cpi) {
       cpi->oxcf.aq_mode == CYCLIC_REFRESH_AQ && cpi->oxcf.speed >= 5 &&
       cpi->resize_state == ORIG && cpi->resize_pending == 0 && !cpi->use_svc &&
       cpi->oxcf.content != VP9E_CONTENT_SCREEN && cpi->common.width >= 640 &&
-      cpi->common.height >= 360)
+      cpi->common.height >= 360) {
     return 1;
-  else
+  } else {
     return 0;
+}
 }
 
 #if CONFIG_VP9_TEMPORAL_DENOISING
@@ -81,12 +82,13 @@ NOISE_LEVEL vp9_noise_estimate_extract_level(NOISE_ESTIMATE *const ne) {
   if (ne->value > (ne->thresh << 1)) {
     noise_level = kHigh;
   } else {
-    if (ne->value > ne->thresh)
+    if (ne->value > ne->thresh) {
       noise_level = kMedium;
-    else if (ne->value > ((9 * ne->thresh) >> 4))
+    } else if (ne->value > ((9 * ne->thresh) >> 4)) {
       noise_level = kLow;
-    else
+    } else {
       noise_level = kLowLow;
+}
   }
   return noise_level;
 }
@@ -149,12 +151,14 @@ void vp9_update_noise_estimate(VP9_COMP *const cpi) {
     for (mi_row = 0; mi_row < cm->mi_rows; mi_row++) {
       for (mi_col = 0; mi_col < cm->mi_cols; mi_col++) {
         int bl_index = mi_row * cm->mi_cols + mi_col;
-        if (cpi->consec_zero_mv[bl_index] > thresh_consec_zeromv)
+        if (cpi->consec_zero_mv[bl_index] > thresh_consec_zeromv) {
           num_low_motion++;
+}
       }
     }
-    if (num_low_motion < ((3 * cm->mi_rows * cm->mi_cols) >> 3))
+    if (num_low_motion < ((3 * cm->mi_rows * cm->mi_cols) >> 3)) {
       frame_low_motion = 0;
+}
     for (mi_row = 0; mi_row < cm->mi_rows; mi_row++) {
       for (mi_col = 0; mi_col < cm->mi_cols; mi_col++) {
         // 16x16 blocks, 1/4 sample of frame.

@@ -81,8 +81,9 @@ dl_iterate_callback(struct dl_phdr_info *dl_info, size_t size, void *data)
 {
   SharedLibraryInfo& info = *reinterpret_cast<SharedLibraryInfo*>(data);
 
-  if (dl_info->dlpi_phnum <= 0)
+  if (dl_info->dlpi_phnum <= 0) {
     return 0;
+}
 
   unsigned long libStart = -1;
   unsigned long libEnd = 0;
@@ -93,10 +94,12 @@ dl_iterate_callback(struct dl_phdr_info *dl_info, size_t size, void *data)
     }
     unsigned long start = dl_info->dlpi_addr + dl_info->dlpi_phdr[i].p_vaddr;
     unsigned long end = start + dl_info->dlpi_phdr[i].p_memsz;
-    if (start < libStart)
+    if (start < libStart) {
       libStart = start;
-    if (end > libEnd)
+}
+    if (end > libEnd) {
       libEnd = end;
+}
   }
 
   info.AddSharedLibrary(

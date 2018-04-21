@@ -181,8 +181,9 @@ static void check_profile_version(struct mem_source *src)
 			invalid_source(src, "Unsupported minor revision");
 	}
 	*/
-	if (reserved1 != 0 || reserved2 != 0)
+	if (reserved1 != 0 || reserved2 != 0) {
 		invalid_source(src, "Invalid reserved bytes");
+}
 }
 
 #define INPUT_DEVICE_PROFILE   0x73636e72 // 'scnr'
@@ -277,11 +278,13 @@ qcms_bool qcms_profile_is_bogus(qcms_profile *profile)
        unsigned i;
 
        // We currently only check the bogosity of RGB profiles
-       if (profile->color_space != RGB_SIGNATURE)
+       if (profile->color_space != RGB_SIGNATURE) {
 	       return false;
+}
 
-       if (profile->A2B0 || profile->B2A0)
+       if (profile->A2B0 || profile->B2A0) {
                return false;
+}
 
        rX = s15Fixed16Number_to_float(profile->redColorant.X);
        rY = s15Fixed16Number_to_float(profile->redColorant.Y);
@@ -316,8 +319,9 @@ qcms_bool qcms_profile_is_bogus(qcms_profile *profile)
        // Compare with our tolerance
        for (i = 0; i < 3; ++i) {
            if (!(((sum[i] - tolerance[i]) <= target[i]) &&
-                 ((sum[i] + tolerance[i]) >= target[i])))
+                 ((sum[i] + tolerance[i]) >= target[i]))) {
                return true;
+}
        }
 
 #ifndef __APPLE__
@@ -339,8 +343,9 @@ qcms_bool qcms_profile_is_bogus(qcms_profile *profile)
        // FIXME: allow this relaxation on all ports?
        negative = false;
 #endif
-       if (negative)
+       if (negative) {
 	       return true; // bogus
+}
 
        // All Good
        return false;
@@ -411,8 +416,9 @@ static struct XYZNumber read_tag_XYZType(struct mem_source *src, struct tag_inde
 		uint32_t offset = tag->offset;
 
 		uint32_t type = read_u32(src, offset);
-		if (type != XYZ_TYPE)
+		if (type != XYZ_TYPE) {
 			invalid_source(src, "unexpected type, expected XYZ");
+}
 		num.X = read_s15Fixed16Number(src, offset+8);
 		num.Y = read_s15Fixed16Number(src, offset+12);
 		num.Z = read_s15Fixed16Number(src, offset+16);
@@ -447,8 +453,9 @@ static struct curveType *read_curveType(struct mem_source *src, uint32_t offset,
 			return NULL;
 		}
 		curve = malloc(sizeof(struct curveType) + sizeof(uInt16Number)*count);
-		if (!curve)
+		if (!curve) {
 			return NULL;
+}
 
 		curve->count = count;
 		curve->type = CURVE_TYPE;
@@ -466,8 +473,9 @@ static struct curveType *read_curveType(struct mem_source *src, uint32_t offset,
 		}
 
 		curve = malloc(sizeof(struct curveType));
-		if (!curve)
+		if (!curve) {
 			return NULL;
+}
 
 		curve->count = count;
 		curve->type = PARAMETRIC_CURVE_TYPE;
@@ -480,8 +488,9 @@ static struct curveType *read_curveType(struct mem_source *src, uint32_t offset,
 		if ((count == 1 || count == 2)) {
 			/* we have a type 1 or type 2 function that has a division by 'a' */
 			float a = curve->parameter[1];
-			if (a == 0.f)
+			if (a == 0.f) {
 				invalid_source(src, "parametricCurve definition causes division by zero.");
+}
 		}
 	}
 
@@ -518,8 +527,9 @@ static void read_nested_curveType(struct mem_source *src, struct curveType *(*cu
 
 		channel_offset += tag_len;
 		// 4 byte aligned
-		if ((tag_len % 4) != 0)
+		if ((tag_len % 4) != 0) {
 			channel_offset += 4 - (tag_len % 4);
+}
 	}
 
 }
@@ -559,15 +569,17 @@ static struct lutmABType *read_tag_lutmABType(struct mem_source *src, struct tag
 
 	num_in_channels = read_u8(src, offset + 8);
 	num_out_channels = read_u8(src, offset + 9);
-	if (num_in_channels > MAX_CHANNELS || num_out_channels > MAX_CHANNELS)
+	if (num_in_channels > MAX_CHANNELS || num_out_channels > MAX_CHANNELS) {
 		return NULL;
+}
 
 	// We require 3in/out channels since we only support RGB->XYZ (or RGB->LAB)
 	// XXX: If we remove this restriction make sure that the number of channels
 	//      is less or equal to the maximum number of mAB curves in qcmsint.h
 	//      also check for clut_size overflow. Also make sure it's != 0
-	if (num_in_channels != 3 || num_out_channels != 3)
+	if (num_in_channels != 3 || num_out_channels != 3) {
 		return NULL;
+}
 
 	// some of this data is optional and is denoted by a zero offset
 	// we also use this to track their existance
@@ -579,16 +591,21 @@ static struct lutmABType *read_tag_lutmABType(struct mem_source *src, struct tag
 
 	// Convert offsets relative to the tag to relative to the profile
 	// preserve zero for optional fields
-	if (a_curve_offset)
+	if (a_curve_offset) {
 		a_curve_offset += offset;
-	if (clut_offset)
+}
+	if (clut_offset) {
 		clut_offset += offset;
-	if (m_curve_offset)
+}
+	if (m_curve_offset) {
 		m_curve_offset += offset;
-	if (matrix_offset)
+}
+	if (matrix_offset) {
 		matrix_offset += offset;
-	if (b_curve_offset)
+}
+	if (b_curve_offset) {
 		b_curve_offset += offset;
+}
 
 	if (clut_offset) {
 		assert (num_in_channels == 3);
@@ -606,12 +623,14 @@ static struct lutmABType *read_tag_lutmABType(struct mem_source *src, struct tag
 	// 24bits * 3 won't overflow either
 	clut_size = clut_size * num_out_channels;
 
-	if (clut_size > MAX_CLUT_SIZE)
+	if (clut_size > MAX_CLUT_SIZE) {
 		return NULL;
+}
 
 	lut = malloc(sizeof(struct lutmABType) + (clut_size) * sizeof(float));
-	if (!lut)
+	if (!lut) {
 		return NULL;
+}
 	// we'll fill in the rest below
 	memset(lut, 0, sizeof(struct lutmABType));
 	lut->clut_table   = &lut->clut_table_data[0];
@@ -829,8 +848,9 @@ static uint16_t *build_sRGB_gamma_table(int num_entries)
 	double d = 0.04045;
 
 	uint16_t *table = malloc(sizeof(uint16_t) * num_entries);
-	if (!table)
+	if (!table) {
 		return NULL;
+}
 
 	for (i=0; i<num_entries; i++) {
 		double x = (double)i / (num_entries-1);
@@ -840,20 +860,23 @@ static uint16_t *build_sRGB_gamma_table(int num_entries)
 		// Y = cX             | X < d
 		if (x >= d) {
 			double e = (a*x + b);
-			if (e > 0)
+			if (e > 0) {
 				y = pow(e, gamma);
-			else
+			} else {
 				y = 0;
+}
 		} else {
 			y = c*x;
 		}
 
 		// Saturate -- this could likely move to a separate function
 		output = y * 65535. + .5;
-		if (output > 65535.)
+		if (output > 65535.) {
 			output = 65535;
-		if (output < 0)
+}
+		if (output < 0) {
 			output = 0;
+}
 		table[i] = (uint16_t)floor(output);
 	}
 	return table;
@@ -864,8 +887,9 @@ static struct curveType *curve_from_table(uint16_t *table, int num_entries)
 	struct curveType *curve;
 	int i;
 	curve = malloc(sizeof(struct curveType) + sizeof(uInt16Number)*num_entries);
-	if (!curve)
+	if (!curve) {
 		return NULL;
+}
 	curve->type = CURVE_TYPE;
 	curve->count = num_entries;
 	for (i = 0; i < num_entries; i++) {
@@ -876,12 +900,13 @@ static struct curveType *curve_from_table(uint16_t *table, int num_entries)
 
 static uint16_t float_to_u8Fixed8Number(float a)
 {
-	if (a > (255.f + 255.f/256))
+	if (a > (255.f + 255.f/256)) {
 		return 0xffff;
-	else if (a < 0.f)
+	} else if (a < 0.f) {
 		return 0;
-	else
+	} else {
 		return floorf(a*256.f + .5f);
+}
 }
 
 static struct curveType *curve_from_gamma(float gamma)
@@ -889,8 +914,9 @@ static struct curveType *curve_from_gamma(float gamma)
 	struct curveType *curve;
 	int num_entries = 1;
 	curve = malloc(sizeof(struct curveType) + sizeof(uInt16Number)*num_entries);
-	if (!curve)
+	if (!curve) {
 		return NULL;
+}
 	curve->count = num_entries;
 	curve->data[0] = float_to_u8Fixed8Number(gamma);
   	curve->type = CURVE_TYPE;
@@ -908,8 +934,9 @@ qcms_profile* qcms_profile_create_rgb_with_gamma(
 		float gamma)
 {
 	qcms_profile* profile = qcms_profile_create();
-	if (!profile)
+	if (!profile) {
 		return NO_MEM_PROFILE;
+}
 
 	//XXX: should store the whitepoint
 	if (!set_rgb_colorants(profile, white_point, primaries)) {
@@ -937,8 +964,9 @@ qcms_profile* qcms_profile_create_rgb_with_table(
 		uint16_t *table, int num_entries)
 {
 	qcms_profile* profile = qcms_profile_create();
-	if (!profile)
+	if (!profile) {
 		return NO_MEM_PROFILE;
+}
 
 	//XXX: should store the whitepoint
 	if (!set_rgb_colorants(profile, white_point, primaries)) {
@@ -1029,8 +1057,9 @@ qcms_profile* qcms_profile_sRGB(void)
 
 	table = build_sRGB_gamma_table(1024);
 
-	if (!table)
+	if (!table) {
 		return NO_MEM_PROFILE;
+}
 
 	profile = qcms_profile_create_rgb_with_table(D65, Rec709Primaries, table, 1024);
 	free(table);
@@ -1051,8 +1080,9 @@ qcms_profile* qcms_profile_from_memory(const void *mem, size_t size)
 	source.size = size;
 	source.valid = true;
 
-	if (size < 4)
+	if (size < 4) {
 		return INVALID_PROFILE;
+}
 
 	length = read_u32(src, 0);
 	if (length <= size) {
@@ -1063,12 +1093,14 @@ qcms_profile* qcms_profile_from_memory(const void *mem, size_t size)
 	}
 
 	/* ensure that the profile size is sane so it's easier to reason about */
-	if (source.size <= 64 || source.size >= MAX_PROFILE_SIZE)
+	if (source.size <= 64 || source.size >= MAX_PROFILE_SIZE) {
 		return INVALID_PROFILE;
+}
 
 	profile = qcms_profile_create();
-	if (!profile)
+	if (!profile) {
 		return NO_MEM_PROFILE;
+}
 
 	check_CMM_type_signature(src);
 	check_profile_version(src);
@@ -1078,12 +1110,14 @@ qcms_profile* qcms_profile_from_memory(const void *mem, size_t size)
 	read_pcs(profile, src);
 	//TODO read rest of profile stuff
 
-	if (!src->valid)
+	if (!src->valid) {
 		goto invalid_profile;
+}
 
 	index = read_tag_table(profile, src);
-	if (!src->valid || !index.tags)
+	if (!src->valid || !index.tags) {
 		goto invalid_tag_table;
+}
 
 	if (find_tag(index, TAG_CHAD)) {
 		profile->chromaticAdaption = read_tag_s15Fixed16ArrayType(src, index, TAG_CHAD);
@@ -1116,22 +1150,25 @@ qcms_profile* qcms_profile_from_memory(const void *mem, size_t size)
 				profile->blueColorant = read_tag_XYZType(src, index, TAG_bXYZ);
 			}
 
-			if (!src->valid)
+			if (!src->valid) {
 				goto invalid_tag_table;
+}
 
 			if (find_tag(index, TAG_rTRC) || !qcms_supports_iccv4) {
 				profile->redTRC = read_tag_curveType(src, index, TAG_rTRC);
 				profile->greenTRC = read_tag_curveType(src, index, TAG_gTRC);
 				profile->blueTRC = read_tag_curveType(src, index, TAG_bTRC);
 
-				if (!profile->redTRC || !profile->blueTRC || !profile->greenTRC)
+				if (!profile->redTRC || !profile->blueTRC || !profile->greenTRC) {
 					goto invalid_tag_table;
+}
 			}
 		} else if (profile->color_space == GRAY_SIGNATURE) {
 
 			profile->grayTRC = read_tag_curveType(src, index, TAG_kTRC);
-			if (!profile->grayTRC)
+			if (!profile->grayTRC) {
 				goto invalid_tag_table;
+}
 
 		} else {
 			assert(0 && "read_color_space protects against entering here");
@@ -1141,8 +1178,9 @@ qcms_profile* qcms_profile_from_memory(const void *mem, size_t size)
 		goto invalid_tag_table;
 	}
 
-	if (!src->valid)
+	if (!src->valid) {
 		goto invalid_tag_table;
+}
 
 	free(index.tags);
 
@@ -1173,22 +1211,29 @@ static void lut_release(struct lutType *lut)
 
 void qcms_profile_release(qcms_profile *profile)
 {
-	if (profile->output_table_r)
+	if (profile->output_table_r) {
 		precache_release(profile->output_table_r);
-	if (profile->output_table_g)
+}
+	if (profile->output_table_g) {
 		precache_release(profile->output_table_g);
-	if (profile->output_table_b)
+}
+	if (profile->output_table_b) {
 		precache_release(profile->output_table_b);
+}
 
-	if (profile->A2B0)
+	if (profile->A2B0) {
 		lut_release(profile->A2B0);
-	if (profile->B2A0)
+}
+	if (profile->B2A0) {
 		lut_release(profile->B2A0);
+}
 
-	if (profile->mAB)
+	if (profile->mAB) {
 		mAB_release(profile->mAB);
-	if (profile->mBA)
+}
+	if (profile->mBA) {
 		mAB_release(profile->mBA);
+}
 
 	free(profile->redTRC);
 	free(profile->blueTRC);
@@ -1209,17 +1254,20 @@ static void qcms_data_from_file(FILE *file, void **mem, size_t *size)
 	*mem = NULL;
 	*size = 0;
 
-	if (fread(&length_be, 1, sizeof(length_be), file) != sizeof(length_be))
+	if (fread(&length_be, 1, sizeof(length_be), file) != sizeof(length_be)) {
 		return;
+}
 
 	length = be32_to_cpu(length_be);
-	if (length > MAX_PROFILE_SIZE || length < sizeof(length_be))
+	if (length > MAX_PROFILE_SIZE || length < sizeof(length_be)) {
 		return;
+}
 
 	/* allocate room for the entire profile */
 	data = malloc(length);
-	if (!data)
+	if (!data) {
 		return;
+}
 
 	/* copy in length to the front so that the buffer will contain the entire profile */
 	*((be32*)data) = length_be;
@@ -1244,8 +1292,9 @@ qcms_profile* qcms_profile_from_file(FILE *file)
 	void *data;
 
 	qcms_data_from_file(file, &data, &length);
-	if ((data == NULL) || (length == 0))
+	if ((data == NULL) || (length == 0)) {
 		return INVALID_PROFILE;
+}
 
 	profile = qcms_profile_from_memory(data, length);
 	free(data);
@@ -1329,8 +1378,9 @@ void qcms_data_create_rgb_with_gamma(qcms_CIE_xyY white_point, qcms_CIE_xyYTRIPL
 	uint32_t TAG_XYZ[3] = {TAG_rXYZ, TAG_gXYZ, TAG_bXYZ};
 	uint32_t TAG_TRC[3] = {TAG_rTRC, TAG_gTRC, TAG_bTRC};
 
-	if ((mem == NULL) || (size == NULL))
+	if ((mem == NULL) || (size == NULL)) {
 		return;
+}
 
 	*mem = NULL;
 	*size = 0;
@@ -1346,8 +1396,9 @@ void qcms_data_create_rgb_with_gamma(qcms_CIE_xyY white_point, qcms_CIE_xyYTRIPL
 	
 	// reserve the total memory.
 	data = malloc(length);
-	if (!data)
+	if (!data) {
 		return;
+}
 	memset(data, 0, length);
 
 	// Part1 : write rXYZ, gXYZ and bXYZ

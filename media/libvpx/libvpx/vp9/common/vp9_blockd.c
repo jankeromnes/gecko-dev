@@ -13,7 +13,8 @@
 PREDICTION_MODE vp9_left_block_mode(const MODE_INFO *cur_mi,
                                     const MODE_INFO *left_mi, int b) {
   if (b == 0 || b == 2) {
-    if (!left_mi || is_inter_block(left_mi)) return DC_PRED;
+    if (!left_mi || is_inter_block(left_mi)) { return DC_PRED;
+}
 
     return get_y_mode(left_mi, b + 1);
   } else {
@@ -25,7 +26,8 @@ PREDICTION_MODE vp9_left_block_mode(const MODE_INFO *cur_mi,
 PREDICTION_MODE vp9_above_block_mode(const MODE_INFO *cur_mi,
                                      const MODE_INFO *above_mi, int b) {
   if (b == 0 || b == 1) {
-    if (!above_mi || is_inter_block(above_mi)) return DC_PRED;
+    if (!above_mi || is_inter_block(above_mi)) { return DC_PRED;
+}
 
     return get_y_mode(above_mi, b + 2);
   } else {
@@ -79,8 +81,9 @@ void vp9_foreach_transformed_block(const MACROBLOCKD *const xd,
                                    void *arg) {
   int plane;
 
-  for (plane = 0; plane < MAX_MB_PLANE; ++plane)
+  for (plane = 0; plane < MAX_MB_PLANE; ++plane) {
     vp9_foreach_transformed_block_in_plane(xd, bsize, plane, visit, arg);
+}
 }
 
 void vp9_set_contexts(const MACROBLOCKD *xd, struct macroblockd_plane *pd,
@@ -96,11 +99,14 @@ void vp9_set_contexts(const MACROBLOCKD *xd, struct macroblockd_plane *pd,
     const int blocks_wide = num_4x4_blocks_wide_lookup[plane_bsize] +
                             (xd->mb_to_right_edge >> (5 + pd->subsampling_x));
     int above_contexts = tx_size_in_blocks;
-    if (above_contexts + aoff > blocks_wide)
+    if (above_contexts + aoff > blocks_wide) {
       above_contexts = blocks_wide - aoff;
+}
 
-    for (i = 0; i < above_contexts; ++i) a[i] = has_eob;
-    for (i = above_contexts; i < tx_size_in_blocks; ++i) a[i] = 0;
+    for (i = 0; i < above_contexts; ++i) { a[i] = has_eob;
+}
+    for (i = above_contexts; i < tx_size_in_blocks; ++i) { a[i] = 0;
+}
   } else {
     memset(a, has_eob, sizeof(ENTROPY_CONTEXT) * tx_size_in_blocks);
   }
@@ -111,10 +117,13 @@ void vp9_set_contexts(const MACROBLOCKD *xd, struct macroblockd_plane *pd,
     const int blocks_high = num_4x4_blocks_high_lookup[plane_bsize] +
                             (xd->mb_to_bottom_edge >> (5 + pd->subsampling_y));
     int left_contexts = tx_size_in_blocks;
-    if (left_contexts + loff > blocks_high) left_contexts = blocks_high - loff;
+    if (left_contexts + loff > blocks_high) { left_contexts = blocks_high - loff;
+}
 
-    for (i = 0; i < left_contexts; ++i) l[i] = has_eob;
-    for (i = left_contexts; i < tx_size_in_blocks; ++i) l[i] = 0;
+    for (i = 0; i < left_contexts; ++i) { l[i] = has_eob;
+}
+    for (i = left_contexts; i < tx_size_in_blocks; ++i) { l[i] = 0;
+}
   } else {
     memset(l, has_eob, sizeof(ENTROPY_CONTEXT) * tx_size_in_blocks);
   }

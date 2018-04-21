@@ -60,7 +60,8 @@ struct CYCLIC_REFRESH {
 CYCLIC_REFRESH *av1_cyclic_refresh_alloc(int mi_rows, int mi_cols) {
   size_t last_coded_q_map_size;
   CYCLIC_REFRESH *const cr = aom_calloc(1, sizeof(*cr));
-  if (cr == NULL) return NULL;
+  if (cr == NULL) { return NULL;
+}
 
   cr->map = aom_calloc(mi_rows * mi_cols, sizeof(*cr->map));
   if (cr->map == NULL) {
@@ -100,10 +101,11 @@ static int apply_cyclic_refresh_bitrate(const AV1_COMMON *cm,
   // Also turn off at very small frame sizes, to avoid too large fraction of
   // superblocks to be refreshed per frame. Threshold below is less than QCIF.
   if (rc->avg_frame_bandwidth < factor * number_blocks ||
-      number_blocks / 64 < 5)
+      number_blocks / 64 < 5) {
     return 0;
-  else
+  } else {
     return 1;
+}
 }
 
 // Check if this coding block, of size bsize, should be considered for refresh
@@ -122,15 +124,16 @@ static int candidate_refresh_aq(const CYCLIC_REFRESH *cr,
   if (dist > cr->thresh_dist_sb &&
       (mv.row > cr->motion_thresh || mv.row < -cr->motion_thresh ||
        mv.col > cr->motion_thresh || mv.col < -cr->motion_thresh ||
-       !is_inter_block(mbmi)))
+       !is_inter_block(mbmi))) {
     return CR_SEGMENT_ID_BASE;
-  else if (bsize >= BLOCK_16X16 && rate < cr->thresh_rate_sb &&
+  } else if (bsize >= BLOCK_16X16 && rate < cr->thresh_rate_sb &&
            is_inter_block(mbmi) && mbmi->mv[0].as_int == 0 &&
-           cr->rate_boost_fac > 10)
+           cr->rate_boost_fac > 10) {
     // More aggressive delta-q for bigger blocks with zero motion.
     return CR_SEGMENT_ID_BOOST2;
-  else
+  } else {
     return CR_SEGMENT_ID_BOOST1;
+}
 }
 
 // Compute delta-q for the segment.
@@ -232,7 +235,8 @@ void av1_cyclic_refresh_update_segment(const AV1_COMP *cpi,
   if (cyclic_refresh_segment_id_boosted(mbmi->segment_id)) {
     mbmi->segment_id = refresh_this_block;
     // Reset segment_id if will be skipped.
-    if (skip) mbmi->segment_id = CR_SEGMENT_ID_BASE;
+    if (skip) { mbmi->segment_id = CR_SEGMENT_ID_BASE;
+}
   }
 
   // Update the cyclic refresh map, to be used for setting segmentation map
@@ -245,7 +249,8 @@ void av1_cyclic_refresh_update_segment(const AV1_COMP *cpi,
     // Else if it is accepted as candidate for refresh, and has not already
     // been refreshed (marked as 1) then mark it as a candidate for cleanup
     // for future time (marked as 0), otherwise don't update it.
-    if (cr->map[block_index] == 1) new_map_value = 0;
+    if (cr->map[block_index] == 1) { new_map_value = 0;
+}
   } else {
     // Leave it marked as block that is not candidate for refresh.
     new_map_value = 1;
@@ -253,7 +258,7 @@ void av1_cyclic_refresh_update_segment(const AV1_COMP *cpi,
 
   // Update entries in the cyclic refresh map with new_map_value, and
   // copy mbmi->segment_id into global segmentation map.
-  for (y = 0; y < ymis; y++)
+  for (y = 0; y < ymis; y++) {
     for (x = 0; x < xmis; x++) {
       int map_offset = block_index + y * cm->mi_cols + x;
       cr->map[map_offset] = new_map_value;
@@ -275,6 +280,7 @@ void av1_cyclic_refresh_update_segment(const AV1_COMP *cpi,
       }
     }
 }
+}
 
 // Update the actual number of blocks that were applied the segment delta q.
 void av1_cyclic_refresh_postencode(AV1_COMP *const cpi) {
@@ -284,16 +290,18 @@ void av1_cyclic_refresh_postencode(AV1_COMP *const cpi) {
   int mi_row, mi_col;
   cr->actual_num_seg1_blocks = 0;
   cr->actual_num_seg2_blocks = 0;
-  for (mi_row = 0; mi_row < cm->mi_rows; mi_row++)
+  for (mi_row = 0; mi_row < cm->mi_rows; mi_row++) {
     for (mi_col = 0; mi_col < cm->mi_cols; mi_col++) {
       if (cyclic_refresh_segment_id(seg_map[mi_row * cm->mi_cols + mi_col]) ==
-          CR_SEGMENT_ID_BOOST1)
+          CR_SEGMENT_ID_BOOST1) {
         cr->actual_num_seg1_blocks++;
-      else if (cyclic_refresh_segment_id(
+      } else if (cyclic_refresh_segment_id(
                    seg_map[mi_row * cm->mi_cols + mi_col]) ==
-               CR_SEGMENT_ID_BOOST2)
+               CR_SEGMENT_ID_BOOST2) {
         cr->actual_num_seg2_blocks++;
+}
     }
+}
 }
 
 // Set golden frame update interval, for 1 pass CBR mode.
@@ -303,10 +311,11 @@ void av1_cyclic_refresh_set_golden_update(AV1_COMP *const cpi) {
   // Set minimum gf_interval for GF update to a multiple (== 2) of refresh
   // period. Depending on past encoding stats, GF flag may be reset and update
   // may not occur until next baseline_gf_interval.
-  if (cr->percent_refresh > 0)
+  if (cr->percent_refresh > 0) {
     rc->baseline_gf_interval = 4 * (100 / cr->percent_refresh);
-  else
+  } else {
     rc->baseline_gf_interval = 40;
+}
 }
 
 // Update some encoding stats (from the just encoded frame). If this frame's
@@ -340,12 +349,14 @@ void av1_cyclic_refresh_check_golden_update(AV1_COMP *const cpi) {
       // Calculate the motion of the background.
       if (abs_mvr <= 16 && abs_mvc <= 16) {
         cnt1++;
-        if (abs_mvr == 0 && abs_mvc == 0) cnt2++;
+        if (abs_mvr == 0 && abs_mvc == 0) { cnt2++;
+}
       }
       mi++;
 
       // Accumulate low_content_frame.
-      if (cr->map[mi_row * cols + mi_col] < 1) low_content_frame++;
+      if (cr->map[mi_row * cols + mi_col] < 1) { low_content_frame++;
+}
     }
   }
 
@@ -356,8 +367,9 @@ void av1_cyclic_refresh_check_golden_update(AV1_COMP *const cpi) {
     av1_cyclic_refresh_set_golden_update(cpi);
     rc->frames_till_gf_update_due = rc->baseline_gf_interval;
 
-    if (rc->frames_till_gf_update_due > rc->frames_to_key)
+    if (rc->frames_till_gf_update_due > rc->frames_to_key) {
       rc->frames_till_gf_update_due = rc->frames_to_key;
+}
     cpi->refresh_golden_frame = 1;
     force_gf_refresh = 1;
   }
@@ -369,8 +381,9 @@ void av1_cyclic_refresh_check_golden_update(AV1_COMP *const cpi) {
     // Don't update golden reference if the amount of low_content for the
     // current encoded frame is small, or if the recursive average of the
     // low_content over the update interval window falls below threshold.
-    if (fraction_low < 0.8 || cr->low_content_avg < 0.7)
+    if (fraction_low < 0.8 || cr->low_content_avg < 0.7) {
       cpi->refresh_golden_frame = 0;
+}
     // Reset for next internal.
     cr->low_content_avg = fraction_low;
   }
@@ -397,7 +410,8 @@ static void cyclic_refresh_update_map(AV1_COMP *const cpi) {
   // Set the segmentation map: cycle through the superblocks, starting at
   // cr->mb_index, and stopping when either block_count blocks have been found
   // to be refreshed, or we have passed through whole frame.
-  if (cr->sb_index >= sbs_in_frame) cr->sb_index = 0;
+  if (cr->sb_index >= sbs_in_frame) { cr->sb_index = 0;
+}
   assert(cr->sb_index < sbs_in_frame);
   i = cr->sb_index;
   cr->target_num_seg_blocks = 0;
@@ -425,7 +439,8 @@ static void cyclic_refresh_update_map(AV1_COMP *const cpi) {
         // for possible boost/refresh (segment 1). The segment id may get
         // reset to 0 later if block gets coded anything other than ZEROMV.
         if (cr->map[bl_index2] == 0) {
-          if (cr->last_coded_q_map[bl_index2] > qindex_thresh) sum_map++;
+          if (cr->last_coded_q_map[bl_index2] > qindex_thresh) { sum_map++;
+}
         } else if (cr->map[bl_index2] < 0) {
           cr->map[bl_index2]++;
         }
@@ -434,10 +449,11 @@ static void cyclic_refresh_update_map(AV1_COMP *const cpi) {
     // Enforce constant segment over superblock.
     // If segment is at least half of superblock, set to 1.
     if (sum_map >= xmis * ymis / 2) {
-      for (y = 0; y < ymis; y++)
+      for (y = 0; y < ymis; y++) {
         for (x = 0; x < xmis; x++) {
           seg_map[bl_index + y * cm->mi_cols + x] = CR_SEGMENT_ID_BOOST1;
         }
+}
       cr->target_num_seg_blocks += xmis * ymis;
     }
     i++;
@@ -458,10 +474,11 @@ void av1_cyclic_refresh_update_parameters(AV1_COMP *const cpi) {
   cr->time_for_refresh = 0;
   // Use larger delta-qp (increase rate_ratio_qdelta) for first few (~4)
   // periods of the refresh cycle, after a key frame.
-  if (rc->frames_since_key < 4 * cr->percent_refresh)
+  if (rc->frames_since_key < 4 * cr->percent_refresh) {
     cr->rate_ratio_qdelta = 3.0;
-  else
+  } else {
     cr->rate_ratio_qdelta = 2.0;
+}
   // Adjust some parameters for low resolutions at low bitrates.
   if (cm->width <= 352 && cm->height <= 288 && rc->avg_frame_bandwidth < 3400) {
     cr->motion_thresh = 4;
@@ -479,7 +496,8 @@ void av1_cyclic_refresh_setup(AV1_COMP *const cpi) {
   CYCLIC_REFRESH *const cr = cpi->cyclic_refresh;
   struct segmentation *const seg = &cm->seg;
   const int apply_cyclic_refresh = apply_cyclic_refresh_bitrate(cm, rc);
-  if (cm->current_video_frame == 0) cr->low_content_avg = 0.0;
+  if (cm->current_video_frame == 0) { cr->low_content_avg = 0.0;
+}
   // Don't apply refresh on key frame or enhancement layer frames.
   if (!apply_cyclic_refresh || cm->frame_type == KEY_FRAME) {
     // Set segmentation map to 0 and disable.

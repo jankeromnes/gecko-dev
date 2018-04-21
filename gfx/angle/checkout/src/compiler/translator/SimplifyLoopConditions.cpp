@@ -63,11 +63,13 @@ SimplifyLoopConditionsTraverser::SimplifyLoopConditionsTraverser(
 
 bool SimplifyLoopConditionsTraverser::visitUnary(Visit visit, TIntermUnary *node)
 {
-    if (!mInsideLoopInitConditionOrExpression)
+    if (!mInsideLoopInitConditionOrExpression) {
         return false;
+}
 
-    if (mFoundLoopToChange)
+    if (mFoundLoopToChange) {
         return false;  // Already decided to change this loop.
+}
 
     mFoundLoopToChange = mConditionsToSimplify.match(node);
     return !mFoundLoopToChange;
@@ -75,11 +77,13 @@ bool SimplifyLoopConditionsTraverser::visitUnary(Visit visit, TIntermUnary *node
 
 bool SimplifyLoopConditionsTraverser::visitBinary(Visit visit, TIntermBinary *node)
 {
-    if (!mInsideLoopInitConditionOrExpression)
+    if (!mInsideLoopInitConditionOrExpression) {
         return false;
+}
 
-    if (mFoundLoopToChange)
+    if (mFoundLoopToChange) {
         return false;  // Already decided to change this loop.
+}
 
     mFoundLoopToChange = mConditionsToSimplify.match(node, getParentNode(), isLValueRequiredHere());
     return !mFoundLoopToChange;
@@ -87,11 +91,13 @@ bool SimplifyLoopConditionsTraverser::visitBinary(Visit visit, TIntermBinary *no
 
 bool SimplifyLoopConditionsTraverser::visitAggregate(Visit visit, TIntermAggregate *node)
 {
-    if (!mInsideLoopInitConditionOrExpression)
+    if (!mInsideLoopInitConditionOrExpression) {
         return false;
+}
 
-    if (mFoundLoopToChange)
+    if (mFoundLoopToChange) {
         return false;  // Already decided to change this loop.
+}
 
     mFoundLoopToChange = mConditionsToSimplify.match(node, getParentNode());
     return !mFoundLoopToChange;
@@ -99,11 +105,13 @@ bool SimplifyLoopConditionsTraverser::visitAggregate(Visit visit, TIntermAggrega
 
 bool SimplifyLoopConditionsTraverser::visitTernary(Visit visit, TIntermTernary *node)
 {
-    if (!mInsideLoopInitConditionOrExpression)
+    if (!mInsideLoopInitConditionOrExpression) {
         return false;
+}
 
-    if (mFoundLoopToChange)
+    if (mFoundLoopToChange) {
         return false;  // Already decided to change this loop.
+}
 
     mFoundLoopToChange = mConditionsToSimplify.match(node);
     return !mFoundLoopToChange;
@@ -111,11 +119,13 @@ bool SimplifyLoopConditionsTraverser::visitTernary(Visit visit, TIntermTernary *
 
 bool SimplifyLoopConditionsTraverser::visitDeclaration(Visit visit, TIntermDeclaration *node)
 {
-    if (!mInsideLoopInitConditionOrExpression)
+    if (!mInsideLoopInitConditionOrExpression) {
         return false;
+}
 
-    if (mFoundLoopToChange)
+    if (mFoundLoopToChange) {
         return false;  // Already decided to change this loop.
+}
 
     mFoundLoopToChange = mConditionsToSimplify.match(node);
     return !mFoundLoopToChange;
@@ -282,8 +292,9 @@ void SimplifyLoopConditionsTraverser::traverseLoop(TIntermLoop *node)
     mFoundLoopToChange = false;
 
     // We traverse the body of the loop even if the loop is transformed.
-    if (node->getBody())
+    if (node->getBody()) {
         node->getBody()->traverse(this);
+}
 }
 
 }  // namespace

@@ -28,11 +28,13 @@ namespace a11y {
 Accessible*
 DocAccessibleChild::IdToAccessible(const uint64_t& aID) const
 {
-  if (!aID)
+  if (!aID) {
     return mDoc;
+}
 
-  if (!mDoc)
+  if (!mDoc) {
     return nullptr;
+}
 
   return mDoc->GetAccessibleByUniqueID(reinterpret_cast<void*>(aID));
 }
@@ -118,8 +120,9 @@ mozilla::ipc::IPCResult
 DocAccessibleChild::RecvName(const uint64_t& aID, nsString* aName)
 {
   Accessible* acc = IdToAccessible(aID);
-  if (!acc)
+  if (!acc) {
     return IPC_OK();
+}
 
   acc->Name(*aName);
   return IPC_OK();
@@ -153,8 +156,9 @@ mozilla::ipc::IPCResult
 DocAccessibleChild::RecvDescription(const uint64_t& aID, nsString* aDesc)
 {
   Accessible* acc = IdToAccessible(aID);
-  if (!acc)
+  if (!acc) {
     return IPC_OK();
+}
 
   acc->Description(*aDesc);
   return IPC_OK();
@@ -164,8 +168,9 @@ mozilla::ipc::IPCResult
 DocAccessibleChild::RecvAttributes(const uint64_t& aID, nsTArray<Attribute>* aAttributes)
 {
   Accessible* acc = IdToAccessible(aID);
-  if (!acc)
+  if (!acc) {
     return IPC_OK();
+}
 
   nsCOMPtr<nsIPersistentProperties> props = acc->Attributes();
   if (!PersistentPropertiesToArray(props, aAttributes)) {
@@ -214,13 +219,15 @@ DocAccessibleChild::RecvRelationByType(const uint64_t& aID,
                                        nsTArray<uint64_t>* aTargets)
 {
   Accessible* acc = IdToAccessible(aID);
-  if (!acc)
+  if (!acc) {
     return IPC_OK();
+}
 
   auto type = static_cast<RelationType>(aType);
   Relation rel = acc->RelationByType(type);
-  while (Accessible* target = rel.Next())
+  while (Accessible* target = rel.Next()) {
     aTargets->AppendElement(reinterpret_cast<uintptr_t>(target));
+}
 
   return IPC_OK();
 }
@@ -231,8 +238,9 @@ AddRelation(Accessible* aAcc, RelationType aType,
 {
   Relation rel = aAcc->RelationByType(aType);
   nsTArray<uint64_t> targets;
-  while (Accessible* target = rel.Next())
+  while (Accessible* target = rel.Next()) {
     targets.AppendElement(reinterpret_cast<uintptr_t>(target));
+}
 
   if (!targets.IsEmpty()) {
     RelationTargets* newRelation =
@@ -247,8 +255,9 @@ DocAccessibleChild::RecvRelations(const uint64_t& aID,
                                   nsTArray<RelationTargets>* aRelations)
 {
   Accessible* acc = IdToAccessible(aID);
-  if (!acc)
+  if (!acc) {
     return IPC_OK();
+}
 
 #define RELATIONTYPE(gecko, s, a, m, i) AddRelation(acc, RelationType::gecko, aRelations);
 
@@ -262,8 +271,9 @@ mozilla::ipc::IPCResult
 DocAccessibleChild::RecvIsSearchbox(const uint64_t& aID, bool* aRetVal)
 {
   Accessible* acc = IdToAccessible(aID);
-  if (!acc)
+  if (!acc) {
     return IPC_OK();
+}
 
   *aRetVal = acc->IsSearchbox();
   return IPC_OK();

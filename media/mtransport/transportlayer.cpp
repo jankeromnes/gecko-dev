@@ -16,8 +16,9 @@ namespace mozilla {
 MOZ_MTLOG_MODULE("mtransport")
 
 nsresult TransportLayer::Init() {
-  if (state_ != TS_NONE)
+  if (state_ != TS_NONE) {
     return state_ == TS_ERROR ? NS_ERROR_FAILURE : NS_OK;
+}
 
   nsresult rv = InitInternal();
 

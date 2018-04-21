@@ -381,7 +381,8 @@ DeleteFn(void* p) {
 StringLocalizationInfo*
 LocDataParser::parse(UChar* _data, int32_t len) {
     if (U_FAILURE(ec)) {
-        if (_data) uprv_free(_data);
+        if (_data) { uprv_free(_data);
+}
         return NULL;
     }
 
@@ -528,7 +529,8 @@ LocDataParser::nextString() {
             terminators = NOQUOTE_STOPLIST;
         }
         UChar* start = p;
-        while (p < e && !inList(*p, terminators)) ++p;
+        while (p < e && !inList(*p, terminators)) { ++p;
+}
         if (p == e) {
             ERROR("Unexpected end of data");
         }
@@ -641,10 +643,13 @@ StringLocalizationInfo::create(const UnicodeString& info, UParseError& perror, U
 StringLocalizationInfo::~StringLocalizationInfo() {
     for (UChar*** p = (UChar***)data; *p; ++p) {
         // remaining data is simply pointer into our unicode string data.
-        if (*p) uprv_free(*p);
+        if (*p) { uprv_free(*p);
+}
     }
-    if (data) uprv_free(data);
-    if (info) uprv_free(info);
+    if (data) { uprv_free(data);
+}
+    if (info) { uprv_free(info);
+}
 }
 
 
@@ -1071,7 +1076,8 @@ RuleBasedNumberFormat::getRuleSetDisplayName(int32_t index, const Locale& locale
             
             // trim trailing portion, skipping over ommitted sections
             do { --len;} while (len > 0 && localeStr[len] != 0x005f); // underscore
-            while (len > 0 && localeStr[len-1] == 0x005F) --len;
+            while (len > 0 && localeStr[len-1] == 0x005F) { --len;
+}
         }
         UnicodeString name(TRUE, localizations->getRuleSetName(index), -1);
         return name;

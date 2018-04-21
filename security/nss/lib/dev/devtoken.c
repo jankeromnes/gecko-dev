@@ -342,8 +342,9 @@ find_objects(
     if (objectHandles && objectHandles != staticObjects) {
         nss_ZFreeIf(objectHandles);
     }
-    if (statusOpt)
+    if (statusOpt) {
         *statusOpt = PR_SUCCESS;
+}
     return objects;
 loser:
     if (objectHandles && objectHandles != staticObjects) {
@@ -362,13 +363,15 @@ loser:
         (ckrv == CKR_TEMPLATE_INCONSISTENT)) {
 
         nss_SetError(NSS_ERROR_NOT_FOUND);
-        if (statusOpt)
+        if (statusOpt) {
             *statusOpt = PR_SUCCESS;
+}
     } else {
         nss_SetError(ckrv);
         nss_SetError(NSS_ERROR_PKCS11);
-        if (statusOpt)
+        if (statusOpt) {
             *statusOpt = PR_FAILURE;
+}
     }
     return (nssCryptokiObject **)NULL;
 }
@@ -388,8 +391,9 @@ nssToken_FindObjectsByTemplate(
 
     if (!token) {
         PORT_SetError(SEC_ERROR_NO_TOKEN);
-        if (statusOpt)
+        if (statusOpt) {
             *statusOpt = PR_FAILURE;
+}
         return NULL;
     }
     for (i = 0; i < otsize; i++) {
@@ -401,8 +405,9 @@ nssToken_FindObjectsByTemplate(
     PR_ASSERT(i < otsize);
     if (i == otsize) {
         PORT_SetError(SEC_ERROR_LIBRARY_FAILURE);
-        if (statusOpt)
+        if (statusOpt) {
             *statusOpt = PR_FAILURE;
+}
         return NULL;
     }
     /* If these objects are being cached, try looking there first */
@@ -416,8 +421,9 @@ nssToken_FindObjectsByTemplate(
                                                             maximumOpt,
                                                             &status);
         if (status == PR_SUCCESS) {
-            if (statusOpt)
+            if (statusOpt) {
                 *statusOpt = status;
+}
             return objects;
         }
     }
@@ -804,8 +810,9 @@ nssToken_FindCertificateByIssuerAndSerialNumber(
 
     if (!token) {
         PORT_SetError(SEC_ERROR_NO_TOKEN);
-        if (statusOpt)
+        if (statusOpt) {
             *statusOpt = PR_FAILURE;
+}
         return NULL;
     }
     /* Set the search to token/session only if provided */
@@ -1546,10 +1553,12 @@ nssToken_IsPrivateKeyAvailable(
 {
     CK_OBJECT_CLASS theClass;
 
-    if (token == NULL)
+    if (token == NULL) {
         return PR_FALSE;
-    if (c == NULL)
+}
+    if (c == NULL) {
         return PR_FALSE;
+}
 
     theClass = CKO_PRIVATE_KEY;
     if (!nssSlot_IsLoggedIn(token->slot)) {

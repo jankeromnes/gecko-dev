@@ -169,8 +169,10 @@ void cdef_filter_block_c(uint8_t *dst8, uint16_t *dst16, int dstride,
         sum += pri_taps[k] * constrain(p0 - x, pri_strength, pri_damping);
         sum += pri_taps[k] * constrain(p1 - x, pri_strength, pri_damping);
 #if CDEF_CAP
-        if (p0 != CDEF_VERY_LARGE) max = AOMMAX(p0, max);
-        if (p1 != CDEF_VERY_LARGE) max = AOMMAX(p1, max);
+        if (p0 != CDEF_VERY_LARGE) { max = AOMMAX(p0, max);
+}
+        if (p1 != CDEF_VERY_LARGE) { max = AOMMAX(p1, max);
+}
         min = AOMMIN(p0, min);
         min = AOMMIN(p1, min);
 #endif
@@ -182,10 +184,14 @@ void cdef_filter_block_c(uint8_t *dst8, uint16_t *dst16, int dstride,
         int16_t s2 = in[i * s + j + cdef_directions[(dir + 6) & 7][k]];
         int16_t s3 = in[i * s + j - cdef_directions[(dir + 6) & 7][k]];
 #if CDEF_CAP
-        if (s0 != CDEF_VERY_LARGE) max = AOMMAX(s0, max);
-        if (s1 != CDEF_VERY_LARGE) max = AOMMAX(s1, max);
-        if (s2 != CDEF_VERY_LARGE) max = AOMMAX(s2, max);
-        if (s3 != CDEF_VERY_LARGE) max = AOMMAX(s3, max);
+        if (s0 != CDEF_VERY_LARGE) { max = AOMMAX(s0, max);
+}
+        if (s1 != CDEF_VERY_LARGE) { max = AOMMAX(s1, max);
+}
+        if (s2 != CDEF_VERY_LARGE) { max = AOMMAX(s2, max);
+}
+        if (s3 != CDEF_VERY_LARGE) { max = AOMMAX(s3, max);
+}
         min = AOMMIN(s0, min);
         min = AOMMIN(s1, min);
         min = AOMMIN(s2, min);
@@ -201,10 +207,11 @@ void cdef_filter_block_c(uint8_t *dst8, uint16_t *dst16, int dstride,
 #else
       y = clamp((int16_t)x + ((8 + sum - (sum < 0)) >> 4), 0, max);
 #endif
-      if (dst8)
+      if (dst8) {
         dst8[i * dstride + j] = (uint8_t)y;
-      else
+      } else {
         dst16[i * dstride + j] = (uint16_t)y;
+}
     }
   }
 }
@@ -531,14 +538,15 @@ void cdef_filter_fb(uint8_t *dst8, uint16_t *dst16, int dstride, uint16_t *in,
 #endif
       int iy, ix;
       // TODO(stemidts/jmvalin): SIMD optimisations
-      for (iy = 0; iy < 1 << bsizey; iy++)
-        for (ix = 0; ix < 1 << bsizex; ix++)
+      for (iy = 0; iy < 1 << bsizey; iy++) {
+        for (ix = 0; ix < 1 << bsizex; ix++) {
 #if CONFIG_CDEF_SINGLEPASS
           dst16[(bi << (bsizex + bsizey)) + (iy << bsizex) + ix] =
 #else
           y[(bi << (bsizex + bsizey)) + (iy << bsizex) + ix] =
 #endif
               in[((by << bsizey) + iy) * CDEF_BSTRIDE + (bx << bsizex) + ix];
+}
     }
 #if CONFIG_CDEF_SINGLEPASS
     return;
@@ -554,7 +562,8 @@ void cdef_filter_fb(uint8_t *dst8, uint16_t *dst16, int dstride, uint16_t *in,
         dir[by][bx] = cdef_find_dir(&in[8 * by * CDEF_BSTRIDE + 8 * bx],
                                     CDEF_BSTRIDE, &var[by][bx], coeff_shift);
       }
-      if (dirinit) *dirinit = 1;
+      if (dirinit) { *dirinit = 1;
+}
     }
   }
 
@@ -564,13 +573,13 @@ void cdef_filter_fb(uint8_t *dst8, uint16_t *dst16, int dstride, uint16_t *in,
     int s = !filter_skip && dlist[bi].skip ? 0 : sec_strength;
     by = dlist[bi].by;
     bx = dlist[bi].bx;
-    if (dst8)
+    if (dst8) {
       cdef_filter_block(
           &dst8[(by << bsizey) * dstride + (bx << bsizex)], NULL, dstride,
           &in[(by * CDEF_BSTRIDE << bsizey) + (bx << bsizex)],
           (pli ? t : adjust_strength(t, var[by][bx])), s, t ? dir[by][bx] : 0,
           pri_damping, sec_damping, bsize, (256 << coeff_shift) - 1);
-    else
+    } else {
       cdef_filter_block(
           NULL,
           &dst16[dirinit ? bi << (bsizex + bsizey)
@@ -579,6 +588,7 @@ void cdef_filter_fb(uint8_t *dst8, uint16_t *dst16, int dstride, uint16_t *in,
           &in[(by * CDEF_BSTRIDE << bsizey) + (bx << bsizex)],
           (pli ? t : adjust_strength(t, var[by][bx])), s, t ? dir[by][bx] : 0,
           pri_damping, sec_damping, bsize, (256 << coeff_shift) - 1);
+}
   }
 #endif
 }

@@ -47,7 +47,8 @@ cbrt(double x)
 	EXTRACT_WORDS(hx,low,x);
 	sign=hx&0x80000000; 		/* sign= sign(x) */
 	hx  ^=sign;
-	if(hx>=0x7ff00000) return(x+x); /* cbrt(NaN,INF) is itself */
+	if(hx>=0x7ff00000) { return(x+x); /* cbrt(NaN,INF) is itself */
+}
 
     /*
      * Rough cbrt to 5 bits:
@@ -65,14 +66,16 @@ cbrt(double x)
      * division rounds towards minus infinity; this is also efficient.
      */
 	if(hx<0x00100000) { 		/* zero or subnormal? */
-	    if((hx|low)==0)
+	    if((hx|low)==0) {
 		return(x);		/* cbrt(0) is itself */
+}
 	    SET_HIGH_WORD(t,0x43500000); /* set t= 2**54 */
 	    t*=x;
 	    GET_HIGH_WORD(high,t);
 	    INSERT_WORDS(t,sign|((high&0x7fffffff)/3+B2),0);
-	} else
+	} else {
 	    INSERT_WORDS(t,sign|(hx/3+B1),0);
+}
 
     /*
      * New cbrt to 23 bits:

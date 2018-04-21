@@ -283,8 +283,9 @@ getSelectedColumnsCB(AtkTable *aTable, gint** aSelected)
     return 0;
   }
 
-  if (cols.IsEmpty())
+  if (cols.IsEmpty()) {
     return 0;
+}
 
   gint* atkColumns = g_new(gint, cols.Length());
   if (!atkColumns) {
@@ -369,8 +370,9 @@ void
 tableInterfaceInitCB(AtkTableIface* aIface)
 {
   NS_ASSERTION(aIface, "no interface!");
-  if (MOZ_UNLIKELY(!aIface))
+  if (MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   aIface->ref_at = refAtCB;
   aIface->get_index_at = getIndexAtCB;

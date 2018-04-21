@@ -36,8 +36,9 @@ gfxAlphaRecovery::RecoverAlphaSSE2(gfxImageSurface* blackSurf,
         (blackSurf->Format() != mozilla::gfx::SurfaceFormat::A8R8G8B8_UINT32 &&
          blackSurf->Format() != mozilla::gfx::SurfaceFormat::X8R8G8B8_UINT32) ||
         (whiteSurf->Format() != mozilla::gfx::SurfaceFormat::A8R8G8B8_UINT32 &&
-         whiteSurf->Format() != mozilla::gfx::SurfaceFormat::X8R8G8B8_UINT32))
+         whiteSurf->Format() != mozilla::gfx::SurfaceFormat::X8R8G8B8_UINT32)) {
         return false;
+}
 
     blackSurf->Flush();
     whiteSurf->Flush();

@@ -98,7 +98,8 @@ UnicodeSet& UnicodeSet::applyPattern(const UnicodeString& pattern,
                                      UErrorCode& status) {
     ParsePosition pos(0);
     applyPattern(pattern, pos, options, symbols, status);
-    if (U_FAILURE(status)) return *this;
+    if (U_FAILURE(status)) { return *this;
+}
 
     int32_t i = pos.getIndex();
 
@@ -130,7 +131,8 @@ UnicodeSet& UnicodeSet::applyPattern(const UnicodeString& pattern,
     UnicodeString rebuiltPat;
     RuleCharacterIterator chars(pattern, symbols, pos);
     applyPattern(chars, symbols, rebuiltPat, options, &UnicodeSet::closeOver, 0, status);
-    if (U_FAILURE(status)) return *this;
+    if (U_FAILURE(status)) { return *this;
+}
     if (chars.inVariable()) {
         // syntaxError(chars, "Extra chars in variable value");
         status = U_MALFORMED_SET;

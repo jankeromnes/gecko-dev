@@ -15,8 +15,9 @@
 bool atoi_clamp(const char *str, unsigned int *value)
 {
     bool success = pp::numeric_lex_int(str, value);
-    if (!success)
+    if (!success) {
         *value = std::numeric_limits<unsigned int>::max();
+}
     return success;
 }
 
@@ -195,8 +196,9 @@ bool strtof_clamp(const std::string &str, float *value)
     //   3. The value is out-of-range and should be evaluated as infinity.
     //   4. The value is too small and should be evaluated as zero.
     // See ESSL 3.00.6 section 4.1.4 for the relevant specification.
-    if (!success)
+    if (!success) {
         *value = NumericLexFloat32OutOfRangeToInfinity(str);
+}
     return !gl::isInf(*value);
 }
 
@@ -480,8 +482,9 @@ GLenum GLVariablePrecision(const TType &type)
 TString ArrayString(const TType &type)
 {
     TStringStream arrayString;
-    if (!type.isArray())
+    if (!type.isArray()) {
         return arrayString.str();
+}
 
     const TVector<unsigned int> &arraySizes = *type.getArraySizes();
     for (auto arraySizeIter = arraySizes.rbegin(); arraySizeIter != arraySizes.rend();
@@ -499,10 +502,11 @@ TString ArrayString(const TType &type)
 
 ImmutableString GetTypeName(const TType &type, ShHashFunction64 hashFunction, NameMap *nameMap)
 {
-    if (type.getBasicType() == EbtStruct)
+    if (type.getBasicType() == EbtStruct) {
         return HashName(type.getStruct(), hashFunction, nameMap);
-    else
+    } else {
         return ImmutableString(type.getBuiltInTypeNameString());
+}
 }
 
 bool IsVaryingOut(TQualifier qualifier)

@@ -274,7 +274,8 @@ PR_IMPLEMENT(PRInt32) PR_EmulateAcceptRead(
     ** operation - it waits indefinitely.
     */
     accepted = PR_Accept(sd, &remote, PR_INTERVAL_NO_TIMEOUT);
-    if (NULL == accepted) return rv;
+    if (NULL == accepted) { return rv;
+}
 
     rv = PR_Recv(accepted, buf, amount, 0, timeout);
     if (rv >= 0)
@@ -341,10 +342,11 @@ PR_IMPLEMENT(PRInt32) PR_EmulateSendFile(
         count = -1;
         goto done;
     }
-    if (sfd->file_nbytes)
+    if (sfd->file_nbytes) {
         file_bytes = sfd->file_nbytes;
-    else
+    } else {
         file_bytes = info.size - sfd->file_offset;
+}
 
     alignment = PR_GetMemMapAlignment();
 
@@ -400,8 +402,9 @@ PR_IMPLEMENT(PRInt32) PR_EmulateSendFile(
         index++;
     }
     rv = PR_Writev(sd, iov, index, timeout);
-    if (len)
+    if (len) {
         PR_MemUnmap(addr, mmap_len);
+}
     if (rv < 0) {
         count = -1;
         goto done;
@@ -411,8 +414,9 @@ PR_IMPLEMENT(PRInt32) PR_EmulateSendFile(
 
     file_bytes -= len;
     count += rv;
-    if (!file_bytes)    /* header, file and trailer are sent */
+    if (!file_bytes) {    /* header, file and trailer are sent */
         goto done;
+}
 
     /*
      * send remaining bytes of the file, if any
@@ -449,14 +453,17 @@ PR_IMPLEMENT(PRInt32) PR_EmulateSendFile(
         if (rv >= 0) {
             PR_ASSERT(rv == sfd->tlen);
             count += rv;
-        } else
+        } else {
             count = -1;
+}
     }
 done:
-    if (mapHandle)
+    if (mapHandle) {
         PR_CloseFileMap(mapHandle);
-    if ((count >= 0) && (flags & PR_TRANSMITFILE_CLOSE_SOCKET))
+}
+    if ((count >= 0) && (flags & PR_TRANSMITFILE_CLOSE_SOCKET)) {
         PR_Close(sd);
+}
     return count;
 }
 

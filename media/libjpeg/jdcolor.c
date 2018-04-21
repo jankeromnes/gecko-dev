@@ -616,8 +616,9 @@ static const JLONG dither_matrix[4] = {
 static INLINE boolean is_big_endian(void)
 {
   int test_value = 1;
-  if(*(char *)&test_value != 1)
+  if(*(char *)&test_value != 1) {
     return TRUE;
+}
   return FALSE;
 }
 
@@ -666,10 +667,11 @@ ycc_rgb565_convert (j_decompress_ptr cinfo,
                     JSAMPIMAGE input_buf, JDIMENSION input_row,
                     JSAMPARRAY output_buf, int num_rows)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     ycc_rgb565_convert_be(cinfo, input_buf, input_row, output_buf, num_rows);
-  else
+  } else {
     ycc_rgb565_convert_le(cinfo, input_buf, input_row, output_buf, num_rows);
+}
 }
 
 
@@ -678,10 +680,11 @@ ycc_rgb565D_convert (j_decompress_ptr cinfo,
                      JSAMPIMAGE input_buf, JDIMENSION input_row,
                      JSAMPARRAY output_buf, int num_rows)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     ycc_rgb565D_convert_be(cinfo, input_buf, input_row, output_buf, num_rows);
-  else
+  } else {
     ycc_rgb565D_convert_le(cinfo, input_buf, input_row, output_buf, num_rows);
+}
 }
 
 
@@ -690,10 +693,11 @@ rgb_rgb565_convert (j_decompress_ptr cinfo,
                     JSAMPIMAGE input_buf, JDIMENSION input_row,
                     JSAMPARRAY output_buf, int num_rows)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     rgb_rgb565_convert_be(cinfo, input_buf, input_row, output_buf, num_rows);
-  else
+  } else {
     rgb_rgb565_convert_le(cinfo, input_buf, input_row, output_buf, num_rows);
+}
 }
 
 
@@ -702,10 +706,11 @@ rgb_rgb565D_convert (j_decompress_ptr cinfo,
                      JSAMPIMAGE input_buf, JDIMENSION input_row,
                      JSAMPARRAY output_buf, int num_rows)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     rgb_rgb565D_convert_be(cinfo, input_buf, input_row, output_buf, num_rows);
-  else
+  } else {
     rgb_rgb565D_convert_le(cinfo, input_buf, input_row, output_buf, num_rows);
+}
 }
 
 
@@ -714,10 +719,11 @@ gray_rgb565_convert (j_decompress_ptr cinfo,
                      JSAMPIMAGE input_buf, JDIMENSION input_row,
                      JSAMPARRAY output_buf, int num_rows)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     gray_rgb565_convert_be(cinfo, input_buf, input_row, output_buf, num_rows);
-  else
+  } else {
     gray_rgb565_convert_le(cinfo, input_buf, input_row, output_buf, num_rows);
+}
 }
 
 
@@ -726,10 +732,11 @@ gray_rgb565D_convert (j_decompress_ptr cinfo,
                       JSAMPIMAGE input_buf, JDIMENSION input_row,
                       JSAMPARRAY output_buf, int num_rows)
 {
-  if (is_big_endian())
+  if (is_big_endian()) {
     gray_rgb565D_convert_be(cinfo, input_buf, input_row, output_buf, num_rows);
-  else
+  } else {
     gray_rgb565D_convert_le(cinfo, input_buf, input_row, output_buf, num_rows);
+}
 }
 
 
@@ -763,25 +770,29 @@ jinit_color_deconverter (j_decompress_ptr cinfo)
   /* Make sure num_components agrees with jpeg_color_space */
   switch (cinfo->jpeg_color_space) {
   case JCS_GRAYSCALE:
-    if (cinfo->num_components != 1)
+    if (cinfo->num_components != 1) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
+}
     break;
 
   case JCS_RGB:
   case JCS_YCbCr:
-    if (cinfo->num_components != 3)
+    if (cinfo->num_components != 3) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
+}
     break;
 
   case JCS_CMYK:
   case JCS_YCCK:
-    if (cinfo->num_components != 4)
+    if (cinfo->num_components != 4) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
+}
     break;
 
   default:                      /* JCS_UNKNOWN can be anything */
-    if (cinfo->num_components < 1)
+    if (cinfo->num_components < 1) {
       ERREXIT(cinfo, JERR_BAD_J_COLORSPACE);
+}
     break;
   }
 
@@ -797,13 +808,15 @@ jinit_color_deconverter (j_decompress_ptr cinfo)
         cinfo->jpeg_color_space == JCS_YCbCr) {
       cconvert->pub.color_convert = grayscale_convert;
       /* For color->grayscale conversion, only the Y (0) component is needed */
-      for (ci = 1; ci < cinfo->num_components; ci++)
+      for (ci = 1; ci < cinfo->num_components; ci++) {
         cinfo->comp_info[ci].component_needed = FALSE;
+}
     } else if (cinfo->jpeg_color_space == JCS_RGB) {
       cconvert->pub.color_convert = rgb_gray_convert;
       build_rgb_y_table(cinfo);
-    } else
+    } else {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
 
   case JCS_RGB:
@@ -819,9 +832,9 @@ jinit_color_deconverter (j_decompress_ptr cinfo)
   case JCS_EXT_ARGB:
     cinfo->out_color_components = rgb_pixelsize[cinfo->out_color_space];
     if (cinfo->jpeg_color_space == JCS_YCbCr) {
-      if (jsimd_can_ycc_rgb())
+      if (jsimd_can_ycc_rgb()) {
         cconvert->pub.color_convert = jsimd_ycc_rgb_convert;
-      else {
+      } else {
         cconvert->pub.color_convert = ycc_rgb_convert;
         build_ycc_rgb_table(cinfo);
       }
@@ -831,21 +844,23 @@ jinit_color_deconverter (j_decompress_ptr cinfo)
       if (rgb_red[cinfo->out_color_space] == 0 &&
           rgb_green[cinfo->out_color_space] == 1 &&
           rgb_blue[cinfo->out_color_space] == 2 &&
-          rgb_pixelsize[cinfo->out_color_space] == 3)
+          rgb_pixelsize[cinfo->out_color_space] == 3) {
         cconvert->pub.color_convert = null_convert;
-      else
+      } else {
         cconvert->pub.color_convert = rgb_rgb_convert;
-    } else
+}
+    } else {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
 
   case JCS_RGB565:
     cinfo->out_color_components = 3;
     if (cinfo->dither_mode == JDITHER_NONE) {
       if (cinfo->jpeg_color_space == JCS_YCbCr) {
-         if (jsimd_can_ycc_rgb565())
+         if (jsimd_can_ycc_rgb565()) {
            cconvert->pub.color_convert = jsimd_ycc_rgb565_convert;
-         else {
+         } else {
            cconvert->pub.color_convert = ycc_rgb565_convert;
            build_ycc_rgb_table(cinfo);
         }
@@ -853,8 +868,9 @@ jinit_color_deconverter (j_decompress_ptr cinfo)
         cconvert->pub.color_convert = gray_rgb565_convert;
       } else if (cinfo->jpeg_color_space == JCS_RGB) {
         cconvert->pub.color_convert = rgb_rgb565_convert;
-      } else
+      } else {
         ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     } else {
       /* only ordered dithering is supported */
       if (cinfo->jpeg_color_space == JCS_YCbCr) {
@@ -864,8 +880,9 @@ jinit_color_deconverter (j_decompress_ptr cinfo)
         cconvert->pub.color_convert = gray_rgb565D_convert;
       } else if (cinfo->jpeg_color_space == JCS_RGB) {
         cconvert->pub.color_convert = rgb_rgb565D_convert;
-      } else
+      } else {
         ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     }
     break;
 
@@ -876,8 +893,9 @@ jinit_color_deconverter (j_decompress_ptr cinfo)
       build_ycc_rgb_table(cinfo);
     } else if (cinfo->jpeg_color_space == JCS_CMYK) {
       cconvert->pub.color_convert = null_convert;
-    } else
+    } else {
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
 
   default:
@@ -885,13 +903,15 @@ jinit_color_deconverter (j_decompress_ptr cinfo)
     if (cinfo->out_color_space == cinfo->jpeg_color_space) {
       cinfo->out_color_components = cinfo->num_components;
       cconvert->pub.color_convert = null_convert;
-    } else                      /* unsupported non-null conversion */
+    } else {                      /* unsupported non-null conversion */
       ERREXIT(cinfo, JERR_CONVERSION_NOTIMPL);
+}
     break;
   }
 
-  if (cinfo->quantize_colors)
+  if (cinfo->quantize_colors) {
     cinfo->output_components = 1; /* single colormapped output component */
-  else
+  } else {
     cinfo->output_components = cinfo->out_color_components;
+}
 }

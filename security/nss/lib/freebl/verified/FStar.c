@@ -112,13 +112,14 @@ FStar_UInt128_add_u64_shift_left_respec(uint64_t hi, uint64_t lo, uint32_t s)
 static FStar_UInt128_uint128
 FStar_UInt128_shift_left_small(FStar_UInt128_uint128 a, uint32_t s)
 {
-    if (s == (uint32_t)0U)
+    if (s == (uint32_t)0U) {
         return a;
-    else
+    } else {
         return (
             (FStar_UInt128_uint128){
                 .low = a.low << s,
                 .high = FStar_UInt128_add_u64_shift_left_respec(a.high, a.low, s) });
+}
 }
 
 static FStar_UInt128_uint128
@@ -130,10 +131,11 @@ FStar_UInt128_shift_left_large(FStar_UInt128_uint128 a, uint32_t s)
 FStar_UInt128_uint128
 FStar_UInt128_shift_left(FStar_UInt128_uint128 a, uint32_t s)
 {
-    if (s < FStar_UInt128_u32_64)
+    if (s < FStar_UInt128_u32_64) {
         return FStar_UInt128_shift_left_small(a, s);
-    else
+    } else {
         return FStar_UInt128_shift_left_large(a, s);
+}
 }
 
 static uint64_t
@@ -151,13 +153,14 @@ FStar_UInt128_add_u64_shift_right_respec(uint64_t hi, uint64_t lo, uint32_t s)
 static FStar_UInt128_uint128
 FStar_UInt128_shift_right_small(FStar_UInt128_uint128 a, uint32_t s)
 {
-    if (s == (uint32_t)0U)
+    if (s == (uint32_t)0U) {
         return a;
-    else
+    } else {
         return (
             (FStar_UInt128_uint128){
                 .low = FStar_UInt128_add_u64_shift_right_respec(a.high, a.low, s),
                 .high = a.high >> s });
+}
 }
 
 static FStar_UInt128_uint128
@@ -169,10 +172,11 @@ FStar_UInt128_shift_right_large(FStar_UInt128_uint128 a, uint32_t s)
 FStar_UInt128_uint128
 FStar_UInt128_shift_right(FStar_UInt128_uint128 a, uint32_t s)
 {
-    if (s < FStar_UInt128_u32_64)
+    if (s < FStar_UInt128_u32_64) {
         return FStar_UInt128_shift_right_small(a, s);
-    else
+    } else {
         return FStar_UInt128_shift_right_large(a, s);
+}
 }
 
 FStar_UInt128_uint128

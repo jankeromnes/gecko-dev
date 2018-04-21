@@ -78,14 +78,16 @@ static bool ToNrIceAddr(nr_transport_addr &addr,
   char addrstring[INET6_ADDRSTRLEN + 1];
 
   r = nr_transport_addr_get_addrstring(&addr, addrstring, sizeof(addrstring));
-  if (r)
+  if (r) {
     return false;
+}
   out->host = addrstring;
 
   int port;
   r = nr_transport_addr_get_port(&addr, &port);
-  if (r)
+  if (r) {
     return false;
+}
 
   out->port = port;
 
@@ -115,17 +117,20 @@ static bool ToNrIceCandidate(const nr_ice_candidate& candc,
   // Const-cast because the internal nICEr code isn't const-correct.
   nr_ice_candidate *cand = const_cast<nr_ice_candidate *>(&candc);
 
-  if (!ToNrIceAddr(cand->addr, &out->cand_addr))
+  if (!ToNrIceAddr(cand->addr, &out->cand_addr)) {
     return false;
+}
 
   if (cand->isock) {
     nr_transport_addr addr;
     r = nr_socket_getaddr(cand->isock->sock, &addr);
-    if (r)
+    if (r) {
       return false;
+}
 
-    if (!ToNrIceAddr(addr, &out->local_addr))
+    if (!ToNrIceAddr(addr, &out->local_addr)) {
       return false;
+}
   }
 
   NrIceCandidate::Type type;
@@ -225,8 +230,9 @@ NrIceMediaStream::~NrIceMediaStream() {
 
 nsresult NrIceMediaStream::ParseAttributes(std::vector<std::string>&
                                            attributes) {
-  if (!stream_)
+  if (!stream_) {
     return NS_ERROR_FAILURE;
+}
 
   std::vector<char *> attributes_in;
 
@@ -294,26 +300,32 @@ nsresult NrIceMediaStream::GetActivePair(int component,
                                      component,
                                      &local_int, &remote_int);
   // If result is R_REJECTED then component is unpaired or disabled.
-  if (r == R_REJECTED)
+  if (r == R_REJECTED) {
     return NS_ERROR_NOT_AVAILABLE;
+}
 
-  if (r)
+  if (r) {
     return NS_ERROR_FAILURE;
+}
 
   UniquePtr<NrIceCandidate> local(
       MakeNrIceCandidate(*local_int));
-  if (!local)
+  if (!local) {
     return NS_ERROR_FAILURE;
+}
 
   UniquePtr<NrIceCandidate> remote(
       MakeNrIceCandidate(*remote_int));
-  if (!remote)
+  if (!remote) {
     return NS_ERROR_FAILURE;
+}
 
-  if (localp)
+  if (localp) {
     *localp = Move(local);
-  if (remotep)
+}
+  if (remotep) {
     *remotep = Move(remote);
+}
 
   return NS_OK;
 }
@@ -541,8 +553,9 @@ nsresult NrIceMediaStream::GetRemoteCandidates(
 
 
 nsresult NrIceMediaStream::DisableComponent(int component_id) {
-  if (!stream_)
+  if (!stream_) {
     return NS_ERROR_FAILURE;
+}
 
   int r = nr_ice_media_stream_disable_component(stream_,
                                                 component_id);
@@ -556,8 +569,9 @@ nsresult NrIceMediaStream::DisableComponent(int component_id) {
 }
 
 nsresult NrIceMediaStream::GetConsentStatus(int component_id, bool *can_send, struct timeval *ts) {
-  if (!stream_)
+  if (!stream_) {
     return NS_ERROR_FAILURE;
+}
 
   nr_ice_media_stream* peer_stream;
   int r = nr_ice_peer_ctx_find_pstream(ctx_peer_, stream_, &peer_stream);
@@ -583,8 +597,9 @@ nsresult NrIceMediaStream::GetConsentStatus(int component_id, bool *can_send, st
 nsresult NrIceMediaStream::SendPacket(int component_id,
                                       const unsigned char *data,
                                       size_t len) {
-  if (!stream_)
+  if (!stream_) {
     return NS_ERROR_FAILURE;
+}
 
   int r = nr_ice_media_stream_send(ctx_peer_, stream_,
                                    component_id,

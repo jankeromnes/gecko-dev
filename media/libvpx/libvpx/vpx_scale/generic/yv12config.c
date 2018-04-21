@@ -63,14 +63,16 @@ int vp8_yv12_realloc_frame_buffer(YV12_BUFFER_CONFIG *ybf, int width,
       ybf->buffer_alloc_sz = frame_size;
     }
 
-    if (!ybf->buffer_alloc || ybf->buffer_alloc_sz < frame_size) return -1;
+    if (!ybf->buffer_alloc || ybf->buffer_alloc_sz < frame_size) { return -1;
+}
 
     /* Only support allocating buffers that have a border that's a multiple
      * of 32. The border restriction is required to get 16-byte alignment of
      * the start of the chroma rows without introducing an arbitrary gap
      * between planes, which would break the semantics of things like
      * vpx_img_set_rect(). */
-    if (border & 0x1f) return -3;
+    if (border & 0x1f) { return -3;
+}
 
     ybf->y_crop_width = width;
     ybf->y_crop_height = height;
@@ -171,12 +173,15 @@ int vpx_realloc_frame_buffer(YV12_BUFFER_CONFIG *ybf, int width, int height,
 
       assert(fb != NULL);
 
-      if (external_frame_size != (size_t)external_frame_size) return -1;
+      if (external_frame_size != (size_t)external_frame_size) { return -1;
+}
 
       // Allocation to hold larger frame, or first allocation.
-      if (cb(cb_priv, (size_t)external_frame_size, fb) < 0) return -1;
+      if (cb(cb_priv, (size_t)external_frame_size, fb) < 0) { return -1;
+}
 
-      if (fb->data == NULL || fb->size < external_frame_size) return -1;
+      if (fb->data == NULL || fb->size < external_frame_size) { return -1;
+}
 
       ybf->buffer_alloc = (uint8_t *)yv12_align_addr(fb->data, 32);
 
@@ -193,10 +198,12 @@ int vpx_realloc_frame_buffer(YV12_BUFFER_CONFIG *ybf, int width, int height,
       vpx_free(ybf->buffer_alloc);
       ybf->buffer_alloc = NULL;
 
-      if (frame_size != (size_t)frame_size) return -1;
+      if (frame_size != (size_t)frame_size) { return -1;
+}
 
       ybf->buffer_alloc = (uint8_t *)vpx_memalign(32, (size_t)frame_size);
-      if (!ybf->buffer_alloc) return -1;
+      if (!ybf->buffer_alloc) { return -1;
+}
 
       ybf->buffer_alloc_sz = (int)frame_size;
 
@@ -211,7 +218,8 @@ int vpx_realloc_frame_buffer(YV12_BUFFER_CONFIG *ybf, int width, int height,
      * the start of the chroma rows without introducing an arbitrary gap
      * between planes, which would break the semantics of things like
      * vpx_img_set_rect(). */
-    if (border & 0x1f) return -3;
+    if (border & 0x1f) { return -3;
+}
 
     ybf->y_crop_width = width;
     ybf->y_crop_height = height;

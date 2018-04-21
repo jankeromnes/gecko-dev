@@ -269,19 +269,24 @@ sdb_getFallbackTempDir(void)
 
     for (i = 0; i < PR_ARRAY_SIZE(azDirs); i++) {
         zDir = azDirs[i];
-        if (zDir == NULL)
+        if (zDir == NULL) {
             continue;
-        if (stat(zDir, &buf))
+}
+        if (stat(zDir, &buf)) {
             continue;
-        if (!S_ISDIR(buf.st_mode))
+}
+        if (!S_ISDIR(buf.st_mode)) {
             continue;
-        if (access(zDir, 07))
+}
+        if (access(zDir, 07)) {
             continue;
+}
         break;
     }
 
-    if (zDir == NULL)
+    if (zDir == NULL) {
         return NULL;
+}
     return PORT_Strdup(zDir);
 }
 #else
@@ -445,8 +450,9 @@ sdb_measureAccess(const char *directory)
         PR_Access(temp, PR_ACCESS_EXISTS);
         next = PR_IntervalNow();
         delta = next - time;
-        if (delta >= duration)
+        if (delta >= duration) {
             break;
+}
     }
 
     PORT_Free(temp);
@@ -1034,8 +1040,9 @@ sdb_SetAttributeValue(SDB *sdb, CK_OBJECT_HANDLE object_id,
         goto loser;
     }
     sqlerr = sqlite3_prepare_v2(sqlDB, newStr, -1, &stmt, NULL);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
     for (i = 0; i < count; i++) {
         if (template[i].ulValueLen != 0) {
             sqlerr = sqlite3_bind_blob(stmt, i + 1, template[i].pValue,
@@ -1044,12 +1051,14 @@ sdb_SetAttributeValue(SDB *sdb, CK_OBJECT_HANDLE object_id,
             sqlerr = sqlite3_bind_blob(stmt, i + 1, SQLITE_EXPLICIT_NULL,
                                        SQLITE_EXPLICIT_NULL_LEN, SQLITE_STATIC);
         }
-        if (sqlerr != SQLITE_OK)
+        if (sqlerr != SQLITE_OK) {
             goto loser;
+}
     }
     sqlerr = sqlite3_bind_int(stmt, i + 1, object_id);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
 
     do {
         sqlerr = sqlite3_step(stmt);
@@ -1196,11 +1205,13 @@ sdb_CreateObject(SDB *sdb, CK_OBJECT_HANDLE *object_id,
         goto loser;
     }
     sqlerr = sqlite3_prepare_v2(sqlDB, newStr, -1, &stmt, NULL);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
     sqlerr = sqlite3_bind_int(stmt, 1, *object_id);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
     for (i = 0; i < count; i++) {
         if (template[i].ulValueLen) {
             sqlerr = sqlite3_bind_blob(stmt, i + 2, template[i].pValue,
@@ -1209,8 +1220,9 @@ sdb_CreateObject(SDB *sdb, CK_OBJECT_HANDLE *object_id,
             sqlerr = sqlite3_bind_blob(stmt, i + 2, SQLITE_EXPLICIT_NULL,
                                        SQLITE_EXPLICIT_NULL_LEN, SQLITE_STATIC);
         }
-        if (sqlerr != SQLITE_OK)
+        if (sqlerr != SQLITE_OK) {
             goto loser;
+}
     }
 
     do {
@@ -1270,11 +1282,13 @@ sdb_DestroyObject(SDB *sdb, CK_OBJECT_HANDLE object_id)
     }
     sqlerr = sqlite3_prepare_v2(sqlDB, newStr, -1, &stmt, NULL);
     sqlite3_free(newStr);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
     sqlerr = sqlite3_bind_int(stmt, 1, object_id);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
 
     do {
         sqlerr = sqlite3_step(stmt);
@@ -1497,8 +1511,9 @@ sdb_GetMetaData(SDB *sdb, const char *id, SECItem *item1, SECItem *item2)
         }
         sqlerr = sqlite3_prepare_v2(sqlDB, GET_PW_CMD, -1, &stmt, NULL);
     }
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
     sqlerr = sqlite3_bind_text(stmt, 1, id, PORT_Strlen(id), SQLITE_STATIC);
     do {
         sqlerr = sqlite3_step(stmt);
@@ -1582,26 +1597,31 @@ sdb_PutMetaData(SDB *sdb, const char *id, const SECItem *item1,
 
     if (!tableExists(sqlDB, "metaData")) {
         sqlerr = sqlite3_exec(sqlDB, PW_CREATE_TABLE_CMD, NULL, 0, NULL);
-        if (sqlerr != SQLITE_OK)
+        if (sqlerr != SQLITE_OK) {
             goto loser;
+}
     }
     if (item2 == NULL) {
         cmd = MD_CREATE_CMD;
     }
     sqlerr = sqlite3_prepare_v2(sqlDB, cmd, -1, &stmt, NULL);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
     sqlerr = sqlite3_bind_text(stmt, 1, id, PORT_Strlen(id), SQLITE_STATIC);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
     sqlerr = sqlite3_bind_blob(stmt, 2, item1->data, item1->len, SQLITE_STATIC);
-    if (sqlerr != SQLITE_OK)
+    if (sqlerr != SQLITE_OK) {
         goto loser;
+}
     if (item2) {
         sqlerr = sqlite3_bind_blob(stmt, 3, item2->data,
                                    item2->len, SQLITE_STATIC);
-        if (sqlerr != SQLITE_OK)
+        if (sqlerr != SQLITE_OK) {
             goto loser;
+}
     }
 
     do {
@@ -1661,8 +1681,9 @@ sdb_Reset(SDB *sdb)
         sqlerr = sqlite3_exec(sqlDB, newStr, NULL, 0, NULL);
         sqlite3_free(newStr);
 
-        if (sqlerr != SQLITE_OK)
+        if (sqlerr != SQLITE_OK) {
             goto loser;
+}
     }
 
     /* delete the password entry table */
@@ -2044,10 +2065,12 @@ s_open(const char *directory, const char *certPrefix, const char *keyPrefix,
     int inUpdate;
     PRUint32 accessOps;
 
-    if (certdb)
+    if (certdb) {
         *certdb = NULL;
-    if (keydb)
+}
+    if (keydb) {
         *keydb = NULL;
+}
     *newInit = 0;
 
 #ifdef SQLITE_UNSAFE_THREADS

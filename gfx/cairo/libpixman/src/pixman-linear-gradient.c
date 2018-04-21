@@ -72,8 +72,9 @@ linear_gradient_is_horizontal (pixman_image_t *image,
 
     l = dx * dx + dy * dy;
 
-    if (l == 0)
+    if (l == 0) {
 	return FALSE;
+}
 
     /*
      * compute how much the input of the gradient walked changes
@@ -84,8 +85,9 @@ linear_gradient_is_horizontal (pixman_image_t *image,
 	(v.vector[2] * (double) l);
 
     /* check that casting to integer would result in 0 */
-    if (-1 < inc && inc < 1)
+    if (-1 < inc && inc < 1) {
 	return TRUE;
+}
 
     return FALSE;
 }
@@ -117,8 +119,9 @@ linear_get_scanline_narrow (pixman_iter_t  *iter,
 
     if (image->common.transform)
     {
-	if (!pixman_transform_point_3d (image->common.transform, &v))
+	if (!pixman_transform_point_3d (image->common.transform, &v)) {
 	    return iter->buffer;
+}
 
 	unit.vector[0] = image->common.transform->matrix[0][0];
 	unit.vector[1] = image->common.transform->matrix[1][0];
@@ -165,8 +168,9 @@ linear_get_scanline_narrow (pixman_iter_t  *iter,
 	    register uint32_t color;
 
 	    color = _pixman_gradient_walker_pixel (&walker, t);
-	    while (buffer < end)
+	    while (buffer < end) {
 		*buffer++ = color;
+}
 	}
 	else
 	{
@@ -252,8 +256,9 @@ linear_get_scanline_16 (pixman_iter_t  *iter,
 
     if (image->common.transform)
     {
-	if (!pixman_transform_point_3d (image->common.transform, &v))
+	if (!pixman_transform_point_3d (image->common.transform, &v)) {
 	    return iter->buffer;
+}
 
 	unit.vector[0] = image->common.transform->matrix[0][0];
 	unit.vector[1] = image->common.transform->matrix[1][0];
@@ -392,23 +397,25 @@ _pixman_linear_gradient_iter_init (pixman_image_t *image, pixman_iter_t  *iter)
     if (0 && linear_gradient_is_horizontal (
 	    iter->image, iter->x, iter->y, iter->width, iter->height))
     {
-	if (iter->iter_flags & ITER_16)
+	if (iter->iter_flags & ITER_16) {
 	    linear_get_scanline_16 (iter, NULL);
-	else if (iter->iter_flags & ITER_NARROW)
+	} else if (iter->iter_flags & ITER_NARROW) {
 	    linear_get_scanline_narrow (iter, NULL);
-	else
+	} else {
 	    linear_get_scanline_wide (iter, NULL);
+}
 
 	iter->get_scanline = _pixman_iter_get_scanline_noop;
     }
     else
     {
-	if (iter->iter_flags & ITER_16)
+	if (iter->iter_flags & ITER_16) {
 	    iter->get_scanline = linear_get_scanline_16;
-	else if (iter->iter_flags & ITER_NARROW)
+	} else if (iter->iter_flags & ITER_NARROW) {
 	    iter->get_scanline = linear_get_scanline_narrow;
-	else
+	} else {
 	    iter->get_scanline = linear_get_scanline_wide;
+}
     }
 }
 
@@ -423,8 +430,9 @@ pixman_image_create_linear_gradient (const pixman_point_fixed_t *  p1,
 
     image = _pixman_image_allocate ();
 
-    if (!image)
+    if (!image) {
 	return NULL;
+}
 
     linear = &image->linear;
 

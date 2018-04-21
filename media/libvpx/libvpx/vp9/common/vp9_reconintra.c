@@ -302,17 +302,21 @@ static void build_intra_predictors(const MACROBLOCKD *xd, const uint8_t *ref,
       if (xd->mb_to_bottom_edge < 0) {
         /* slower path if the block needs border extension */
         if (y0 + bs <= frame_height) {
-          for (i = 0; i < bs; ++i) left_col[i] = ref[i * ref_stride - 1];
+          for (i = 0; i < bs; ++i) { left_col[i] = ref[i * ref_stride - 1];
+}
         } else {
           const int extend_bottom = frame_height - y0;
-          for (i = 0; i < extend_bottom; ++i)
+          for (i = 0; i < extend_bottom; ++i) {
             left_col[i] = ref[i * ref_stride - 1];
-          for (; i < bs; ++i)
+}
+          for (; i < bs; ++i) {
             left_col[i] = ref[(extend_bottom - 1) * ref_stride - 1];
+}
         }
       } else {
         /* faster path if the block does not need extension */
-        for (i = 0; i < bs; ++i) left_col[i] = ref[i * ref_stride - 1];
+        for (i = 0; i < bs; ++i) { left_col[i] = ref[i * ref_stride - 1];
+}
       }
     } else {
       memset(left_col, 129, bs);
@@ -380,10 +384,11 @@ static void build_intra_predictors(const MACROBLOCKD *xd, const uint8_t *ref,
           const_above_row = above_ref;
         } else {
           memcpy(above_row, above_ref, bs);
-          if (bs == 4 && right_available)
+          if (bs == 4 && right_available) {
             memcpy(above_row + bs, above_ref + bs, bs);
-          else
+          } else {
             memset(above_row + bs, above_row[bs - 1], bs);
+}
         }
       }
       above_row[-1] = left_available ? above_ref[-1] : 129;

@@ -59,8 +59,9 @@ void SplitSequenceOperatorTraverser::nextIteration()
 
 bool SplitSequenceOperatorTraverser::visitAggregate(Visit visit, TIntermAggregate *node)
 {
-    if (mFoundExpressionToSplit)
+    if (mFoundExpressionToSplit) {
         return false;
+}
 
     if (mInsideSequenceOperator > 0 && visit == PreVisit)
     {
@@ -74,8 +75,9 @@ bool SplitSequenceOperatorTraverser::visitAggregate(Visit visit, TIntermAggregat
 
 bool SplitSequenceOperatorTraverser::visitUnary(Visit visit, TIntermUnary *node)
 {
-    if (mFoundExpressionToSplit)
+    if (mFoundExpressionToSplit) {
         return false;
+}
 
     if (mInsideSequenceOperator > 0 && visit == PreVisit)
     {
@@ -117,8 +119,9 @@ bool SplitSequenceOperatorTraverser::visitBinary(Visit visit, TIntermBinary *nod
         return true;
     }
 
-    if (mFoundExpressionToSplit)
+    if (mFoundExpressionToSplit) {
         return false;
+}
 
     if (mInsideSequenceOperator > 0 && visit == PreVisit)
     {
@@ -133,8 +136,9 @@ bool SplitSequenceOperatorTraverser::visitBinary(Visit visit, TIntermBinary *nod
 
 bool SplitSequenceOperatorTraverser::visitTernary(Visit visit, TIntermTernary *node)
 {
-    if (mFoundExpressionToSplit)
+    if (mFoundExpressionToSplit) {
         return false;
+}
 
     if (mInsideSequenceOperator > 0 && visit == PreVisit)
     {
@@ -156,8 +160,9 @@ void SplitSequenceOperator(TIntermNode *root, int patternsToSplitMask, TSymbolTa
     {
         traverser.nextIteration();
         root->traverse(&traverser);
-        if (traverser.foundExpressionToSplit())
+        if (traverser.foundExpressionToSplit()) {
             traverser.updateTree();
+}
     } while (traverser.foundExpressionToSplit());
 }
 

@@ -32,32 +32,43 @@ JAR_new(void)
 {
     JAR *jar;
 
-    if ((jar = (JAR *)PORT_ZAlloc(sizeof(JAR))) == NULL)
+    if ((jar = (JAR *)PORT_ZAlloc(sizeof(JAR))) == NULL) {
         goto loser;
-    if ((jar->manifest = ZZ_NewList()) == NULL)
+}
+    if ((jar->manifest = ZZ_NewList()) == NULL) {
         goto loser;
-    if ((jar->hashes = ZZ_NewList()) == NULL)
+}
+    if ((jar->hashes = ZZ_NewList()) == NULL) {
         goto loser;
-    if ((jar->phy = ZZ_NewList()) == NULL)
+}
+    if ((jar->phy = ZZ_NewList()) == NULL) {
         goto loser;
-    if ((jar->metainfo = ZZ_NewList()) == NULL)
+}
+    if ((jar->metainfo = ZZ_NewList()) == NULL) {
         goto loser;
-    if ((jar->signers = ZZ_NewList()) == NULL)
+}
+    if ((jar->signers = ZZ_NewList()) == NULL) {
         goto loser;
+}
     return jar;
 
 loser:
     if (jar) {
-        if (jar->manifest)
+        if (jar->manifest) {
             ZZ_DestroyList(jar->manifest);
-        if (jar->hashes)
+}
+        if (jar->hashes) {
             ZZ_DestroyList(jar->hashes);
-        if (jar->phy)
+}
+        if (jar->phy) {
             ZZ_DestroyList(jar->phy);
-        if (jar->metainfo)
+}
+        if (jar->metainfo) {
             ZZ_DestroyList(jar->metainfo);
-        if (jar->signers)
+}
+        if (jar->signers) {
             ZZ_DestroyList(jar->signers);
+}
         PORT_Free(jar);
     }
     return NULL;
@@ -71,17 +82,22 @@ JAR_destroy(JAR *jar)
 {
     PORT_Assert(jar != NULL);
 
-    if (jar == NULL)
+    if (jar == NULL) {
         return;
+}
 
-    if (jar->fp)
+    if (jar->fp) {
         JAR_FCLOSE((PRFileDesc *)jar->fp);
-    if (jar->url)
+}
+    if (jar->url) {
         PORT_Free(jar->url);
-    if (jar->filename)
+}
+    if (jar->filename) {
         PORT_Free(jar->filename);
-    if (jar->globalmeta)
+}
+    if (jar->globalmeta) {
         PORT_Free(jar->globalmeta);
+}
 
     /* Free the linked list elements */
     jar_destroy_list(jar->manifest);
@@ -112,36 +128,43 @@ jar_destroy_list(ZZList *list)
         link = ZZ_ListHead(list);
         while (!ZZ_ListIterDone(list, link)) {
             it = link->thing;
-            if (!it)
+            if (!it) {
                 goto next;
-            if (it->pathname)
+}
+            if (it->pathname) {
                 PORT_Free(it->pathname);
+}
 
             switch (it->type) {
                 case jarTypeMeta:
                     met = (JAR_Metainfo *)it->data;
                     if (met) {
-                        if (met->header)
+                        if (met->header) {
                             PORT_Free(met->header);
-                        if (met->info)
+}
+                        if (met->info) {
                             PORT_Free(met->info);
+}
                         PORT_Free(met);
                     }
                     break;
 
                 case jarTypePhy:
                     phy = (JAR_Physical *)it->data;
-                    if (phy)
+                    if (phy) {
                         PORT_Free(phy);
+}
                     break;
 
                 case jarTypeSign:
                     fing = (JAR_Cert *)it->data;
                     if (fing) {
-                        if (fing->cert)
+                        if (fing->cert) {
                             CERT_DestroyCertificate(fing->cert);
-                        if (fing->key)
+}
+                        if (fing->key) {
                             PORT_Free(fing->key);
+}
                         PORT_Free(fing);
                     }
                     break;
@@ -157,8 +180,9 @@ jar_destroy_list(ZZList *list)
 
                 case jarTypeOwner:
                     signer = (JAR_Signer *)it->data;
-                    if (signer)
+                    if (signer) {
                         JAR_destroy_signer(signer);
+}
                     break;
 
                 default:
@@ -193,13 +217,15 @@ JAR_get_metainfo(JAR *jar, char *name, char *header, void **info,
 
     PORT_Assert(jar != NULL && header != NULL);
 
-    if (jar == NULL || header == NULL)
+    if (jar == NULL || header == NULL) {
         return JAR_ERR_PNF;
+}
 
     list = jar->metainfo;
 
-    if (ZZ_ListEmpty(list))
+    if (ZZ_ListEmpty(list)) {
         return JAR_ERR_PNF;
+}
 
     for (link = ZZ_ListHead(list);
          !ZZ_ListIterDone(list, link);
@@ -208,10 +234,12 @@ JAR_get_metainfo(JAR *jar, char *name, char *header, void **info,
         if (it->type == jarTypeMeta) {
             JAR_Metainfo *met;
 
-            if ((name && !it->pathname) || (!name && it->pathname))
+            if ((name && !it->pathname) || (!name && it->pathname)) {
                 continue;
-            if (name && it->pathname && strcmp(it->pathname, name))
+}
+            if (name && it->pathname && strcmp(it->pathname, name)) {
                 continue;
+}
             met = (JAR_Metainfo *)it->data;
             if (!PORT_Strcasecmp(met->header, header)) {
                 *info = PORT_Strdup(met->info);
@@ -240,12 +268,14 @@ JAR_find(JAR *jar, char *pattern, jarType type)
 
     PORT_Assert(jar != NULL);
 
-    if (!jar)
+    if (!jar) {
         return NULL;
+}
 
     ctx = (JAR_Context *)PORT_ZAlloc(sizeof(JAR_Context));
-    if (ctx == NULL)
+    if (ctx == NULL) {
         return NULL;
+}
 
     ctx->jar = jar;
     if (pattern) {
@@ -276,10 +306,11 @@ JAR_find(JAR *jar, char *pattern, jarType type)
             break;
 
         case jarTypeOwner:
-            if (jar->signers)
+            if (jar->signers) {
                 ctx->next = ZZ_ListHead(jar->signers);
-            else
+            } else {
                 ctx->next = NULL;
+}
             break;
 
         case jarTypeMeta:
@@ -304,8 +335,9 @@ JAR_find_end(JAR_Context *ctx)
 {
     PORT_Assert(ctx != NULL);
     if (ctx) {
-        if (ctx->pattern)
+        if (ctx->pattern) {
             PORT_Free(ctx->pattern);
+}
         PORT_Free(ctx);
     }
 }
@@ -423,11 +455,13 @@ JAR_find_next(JAR_Context *ctx, JAR_Item **it)
         while (!ZZ_ListIterDone(list, ctx->next)) {
             *it = ctx->next->thing;
             ctx->next = ctx->next->next;
-            if (!*it || (*it)->type != finding)
+            if (!*it || (*it)->type != finding) {
                 continue;
+}
             if (ctx->pattern && *ctx->pattern) {
-                if (PORT_RegExpSearch((*it)->pathname, ctx->pattern))
+                if (PORT_RegExpSearch((*it)->pathname, ctx->pattern)) {
                     continue;
+}
             }
             /* We have a valid match. If this is a jarTypeSign
 	       return the certificate instead.. */
@@ -475,26 +509,31 @@ JAR_Signer *
 JAR_new_signer(void)
 {
     JAR_Signer *signer = (JAR_Signer *)PORT_ZAlloc(sizeof(JAR_Signer));
-    if (signer == NULL)
+    if (signer == NULL) {
         goto loser;
+}
 
     /* certs */
     signer->certs = ZZ_NewList();
-    if (signer->certs == NULL)
+    if (signer->certs == NULL) {
         goto loser;
+}
 
     /* sf */
     signer->sf = ZZ_NewList();
-    if (signer->sf == NULL)
+    if (signer->sf == NULL) {
         goto loser;
+}
     return signer;
 
 loser:
     if (signer) {
-        if (signer->certs)
+        if (signer->certs) {
             ZZ_DestroyList(signer->certs);
-        if (signer->sf)
+}
+        if (signer->sf) {
             ZZ_DestroyList(signer->sf);
+}
         PORT_Free(signer);
     }
     return NULL;
@@ -504,10 +543,12 @@ void
 JAR_destroy_signer(JAR_Signer *signer)
 {
     if (signer) {
-        if (signer->owner)
+        if (signer->owner) {
             PORT_Free(signer->owner);
-        if (signer->digest)
+}
+        if (signer->digest) {
             PORT_Free(signer->digest);
+}
         jar_destroy_list(signer->sf);
         ZZ_DestroyList(signer->sf);
         jar_destroy_list(signer->certs);
@@ -524,8 +565,9 @@ jar_get_signer(JAR *jar, char *basename)
     JAR_Signer *candidate;
     JAR_Signer *signer = NULL;
 
-    if (ctx == NULL)
+    if (ctx == NULL) {
         return NULL;
+}
 
     while (JAR_find_next(ctx, &it) >= 0) {
         candidate = (JAR_Signer *)it->data;
@@ -675,10 +717,11 @@ JAR_get_error(int status)
                 /* this is not a normal situation, and would only be
 	       called in cases of improper initialization */
                 char *err = (char *)PORT_Alloc(40);
-                if (err)
+                if (err) {
                     PR_snprintf(err, 39, "Error %d\n", status); /* leak me! */
-                else
+                } else {
                     err = "Error! Bad! Out of memory!";
+}
                 return err;
             }
             break;

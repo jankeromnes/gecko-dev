@@ -124,12 +124,14 @@ bool RemoveInvariant(sh::GLenum shaderType,
                      ShCompileOptions compileOptions)
 {
     if ((compileOptions & SH_DONT_REMOVE_INVARIANT_FOR_FRAGMENT_INPUT) == 0 &&
-        shaderType == GL_FRAGMENT_SHADER && IsGLSL420OrNewer(outputType))
+        shaderType == GL_FRAGMENT_SHADER && IsGLSL420OrNewer(outputType)) {
         return true;
+}
 
     if ((compileOptions & SH_REMOVE_INVARIANT_AND_CENTROID_FOR_ESSL3) != 0 &&
-        shaderVersion >= 300 && shaderType == GL_VERTEX_SHADER)
+        shaderVersion >= 300 && shaderType == GL_VERTEX_SHADER) {
         return true;
+}
 
     return false;
 }
@@ -198,8 +200,9 @@ class TScopedSymbolTableLevel
     }
     ~TScopedSymbolTableLevel()
     {
-        while (!mTable->atBuiltInLevel())
+        while (!mTable->atBuiltInLevel()) {
             mTable->pop();
+}
     }
 
   private:
@@ -289,8 +292,9 @@ bool TCompiler::Init(const ShBuiltInResources &resources)
     SetGlobalPoolAllocator(&allocator);
 
     // Generate built-in symbol table.
-    if (!InitBuiltInSymbolTable(resources))
+    if (!InitBuiltInSymbolTable(resources)) {
         return false;
+}
     InitExtensionBehavior(resources, extensionBehavior);
     fragmentPrecisionHigh = resources.FragmentPrecisionHigh == 1;
 
@@ -535,11 +539,13 @@ bool TCompiler::checkAndSimplifyAST(TIntermBlock *root,
     }
 
     // This pass might emit short circuits so keep it before the short circuit unfolding
-    if (compileOptions & SH_REWRITE_DO_WHILE_LOOPS)
+    if (compileOptions & SH_REWRITE_DO_WHILE_LOOPS) {
         RewriteDoWhile(root, &symbolTable);
+}
 
-    if (compileOptions & SH_ADD_AND_TRUE_TO_LOOP_CONDITION)
+    if (compileOptions & SH_ADD_AND_TRUE_TO_LOOP_CONDITION) {
         AddAndTrueToLoopCondition(root);
+}
 
     if (compileOptions & SH_UNFOLD_SHORT_CIRCUIT)
     {
@@ -705,8 +711,9 @@ bool TCompiler::compile(const char *const shaderStrings[],
     DumpFuzzerCase(shaderStrings, numStrings, shaderType, shaderSpec, outputType, compileOptionsIn);
 #endif  // defined(ANGLE_ENABLE_FUZZER_CORPUS_OUTPUT)
 
-    if (numStrings == 0)
+    if (numStrings == 0) {
         return true;
+}
 
     ShCompileOptions compileOptions = compileOptionsIn;
 
@@ -722,8 +729,9 @@ bool TCompiler::compile(const char *const shaderStrings[],
 
     if (root)
     {
-        if (compileOptions & SH_INTERMEDIATE_TREE)
+        if (compileOptions & SH_INTERMEDIATE_TREE) {
             OutputTree(root, infoSink.info);
+}
 
         if (compileOptions & SH_OBJECT_CODE)
         {
@@ -1163,8 +1171,9 @@ void TCompiler::writePragma(ShCompileOptions compileOptions)
     if (!(compileOptions & SH_FLATTEN_PRAGMA_STDGL_INVARIANT_ALL))
     {
         TInfoSinkBase &sink = infoSink.obj;
-        if (mPragma.stdgl.invariantAll)
+        if (mPragma.stdgl.invariantAll) {
             sink << "#pragma STDGL invariant(all)\n";
+}
     }
 }
 

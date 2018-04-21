@@ -356,8 +356,9 @@ static int cvt_s(SprintfState *ss, const char *str, int width, int prec,
 {
     int slen;
 
-    if (prec == 0)
+    if (prec == 0) {
 	return 0;
+}
 
     /* Limit string length by precision value */
     if (!str) {
@@ -367,8 +368,9 @@ static int cvt_s(SprintfState *ss, const char *str, int width, int prec,
 	/* this is:  slen = strnlen(str, prec); */
 	register const char *s;
 
-	for(s = str; prec && *s; s++, prec-- )
+	for(s = str; prec && *s; s++, prec-- ) {
 	    ;
+}
 	slen = s - str;
     } else {
 	slen = strlen(str);
@@ -402,10 +404,12 @@ static struct NumArg* BuildArgArray( const char *fmt, va_list ap, int* rv, struc
     *rv = 0;
     i = 0;
     while( ( c = *p++ ) != 0 ){
-	if( c != '%' )
+	if( c != '%' ) {
 	    continue;
-	if( ( c = *p++ ) == '%' )	/* skip %% case */
+}
+	if( ( c = *p++ ) == '%' ) {	/* skip %% case */
 	    continue;
+}
 
 	while( c != 0 ){
 	    if( c > '9' || c < '0' ){
@@ -456,9 +460,11 @@ static struct NumArg* BuildArgArray( const char *fmt, va_list ap, int* rv, struc
 
     p = fmt;
     while( ( c = *p++ ) != 0 ){
-    	if( c != '%' )	continue;
+    	if( c != '%' ) {	continue;
+}
 	    c = *p++;
-	if( c == '%' )	continue;
+	if( c == '%' ) {	continue;
+}
 
 	cn = 0;
 	while( c && c != '$' ){	    /* should improve error check later */
@@ -473,8 +479,9 @@ static struct NumArg* BuildArgArray( const char *fmt, va_list ap, int* rv, struc
 
 	/* nas[cn] starts from 0, and make sure nas[cn].type is not assigned */
         cn--;
-	if( nas[cn].type != TYPE_UNKNOWN )
+	if( nas[cn].type != TYPE_UNKNOWN ) {
 	    continue;
+}
 
         c = *p++;
 
@@ -769,14 +776,20 @@ static int dosprintf(SprintfState *ss, const char *fmt, va_list ap)
 	 * on this feature.
 	 */
 	while ((c == '-') || (c == '+') || (c == ' ') || (c == '0')) {
-	    if (c == '-') flags |= FLAG_LEFT;
-	    if (c == '+') flags |= FLAG_SIGNED;
-	    if (c == ' ') flags |= FLAG_SPACED;
-	    if (c == '0') flags |= FLAG_ZEROS;
+	    if (c == '-') { flags |= FLAG_LEFT;
+}
+	    if (c == '+') { flags |= FLAG_SIGNED;
+}
+	    if (c == ' ') { flags |= FLAG_SPACED;
+}
+	    if (c == '0') { flags |= FLAG_ZEROS;
+}
 	    c = *fmt++;
 	}
-	if (flags & FLAG_SIGNED) flags &= ~FLAG_SPACED;
-	if (flags & FLAG_LEFT) flags &= ~FLAG_ZEROS;
+	if (flags & FLAG_SIGNED) { flags &= ~FLAG_SPACED;
+}
+	if (flags & FLAG_LEFT) { flags &= ~FLAG_ZEROS;
+}
 
 	/* width */
 	if (c == '*') {
@@ -928,8 +941,9 @@ static int dosprintf(SprintfState *ss, const char *fmt, va_list ap)
 		    memcpy( &pattern[1], dolPt, i );
 		    rv = cvt_f(ss, u.d, pattern, &pattern[i+1] );
 		}
-	    } else
+	    } else {
 		rv = cvt_f(ss, u.d, fmt0, fmt);
+}
 
 	    if (rv < 0) {
 		return rv;
@@ -1241,8 +1255,9 @@ PR_IMPLEMENT(PRUint32) PR_vsnprintf(char *out, PRUint32 outlen,const char *fmt,
     (void) dosprintf(&ss, fmt, ap);
 
     /* If we added chars, and we didn't append a null, do it now. */
-    if( (ss.cur != ss.base) && (*(ss.cur - 1) != '\0') )
+    if( (ss.cur != ss.base) && (*(ss.cur - 1) != '\0') ) {
         *(ss.cur - 1) = '\0';
+}
 
     n = ss.cur - ss.base;
     return n ? n - 1 : n;

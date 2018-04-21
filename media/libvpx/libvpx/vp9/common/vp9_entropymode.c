@@ -340,41 +340,50 @@ void vp9_adapt_mode_probs(VP9_COMMON *cm) {
   const FRAME_CONTEXT *pre_fc = &cm->frame_contexts[cm->frame_context_idx];
   const FRAME_COUNTS *counts = &cm->counts;
 
-  for (i = 0; i < INTRA_INTER_CONTEXTS; i++)
+  for (i = 0; i < INTRA_INTER_CONTEXTS; i++) {
     fc->intra_inter_prob[i] = mode_mv_merge_probs(pre_fc->intra_inter_prob[i],
                                                   counts->intra_inter[i]);
-  for (i = 0; i < COMP_INTER_CONTEXTS; i++)
+}
+  for (i = 0; i < COMP_INTER_CONTEXTS; i++) {
     fc->comp_inter_prob[i] =
         mode_mv_merge_probs(pre_fc->comp_inter_prob[i], counts->comp_inter[i]);
-  for (i = 0; i < REF_CONTEXTS; i++)
+}
+  for (i = 0; i < REF_CONTEXTS; i++) {
     fc->comp_ref_prob[i] =
         mode_mv_merge_probs(pre_fc->comp_ref_prob[i], counts->comp_ref[i]);
-  for (i = 0; i < REF_CONTEXTS; i++)
-    for (j = 0; j < 2; j++)
+}
+  for (i = 0; i < REF_CONTEXTS; i++) {
+    for (j = 0; j < 2; j++) {
       fc->single_ref_prob[i][j] = mode_mv_merge_probs(
           pre_fc->single_ref_prob[i][j], counts->single_ref[i][j]);
+}
 
-  for (i = 0; i < INTER_MODE_CONTEXTS; i++)
+  for (i = 0; i < INTER_MODE_CONTEXTS; i++) {
     vpx_tree_merge_probs(vp9_inter_mode_tree, pre_fc->inter_mode_probs[i],
                          counts->inter_mode[i], fc->inter_mode_probs[i]);
+}
 
-  for (i = 0; i < BLOCK_SIZE_GROUPS; i++)
+  for (i = 0; i < BLOCK_SIZE_GROUPS; i++) {
     vpx_tree_merge_probs(vp9_intra_mode_tree, pre_fc->y_mode_prob[i],
                          counts->y_mode[i], fc->y_mode_prob[i]);
+}
 
-  for (i = 0; i < INTRA_MODES; ++i)
+  for (i = 0; i < INTRA_MODES; ++i) {
     vpx_tree_merge_probs(vp9_intra_mode_tree, pre_fc->uv_mode_prob[i],
                          counts->uv_mode[i], fc->uv_mode_prob[i]);
+}
 
-  for (i = 0; i < PARTITION_CONTEXTS; i++)
+  for (i = 0; i < PARTITION_CONTEXTS; i++) {
     vpx_tree_merge_probs(vp9_partition_tree, pre_fc->partition_prob[i],
                          counts->partition[i], fc->partition_prob[i]);
+}
 
   if (cm->interp_filter == SWITCHABLE) {
-    for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; i++)
+    for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; i++) {
       vpx_tree_merge_probs(
           vp9_switchable_interp_tree, pre_fc->switchable_interp_prob[i],
           counts->switchable_interp[i], fc->switchable_interp_prob[i]);
+}
   }
 
   if (cm->tx_mode == TX_MODE_SELECT) {
@@ -385,25 +394,29 @@ void vp9_adapt_mode_probs(VP9_COMMON *cm) {
 
     for (i = 0; i < TX_SIZE_CONTEXTS; ++i) {
       tx_counts_to_branch_counts_8x8(counts->tx.p8x8[i], branch_ct_8x8p);
-      for (j = 0; j < TX_SIZES - 3; ++j)
+      for (j = 0; j < TX_SIZES - 3; ++j) {
         fc->tx_probs.p8x8[i][j] =
             mode_mv_merge_probs(pre_fc->tx_probs.p8x8[i][j], branch_ct_8x8p[j]);
+}
 
       tx_counts_to_branch_counts_16x16(counts->tx.p16x16[i], branch_ct_16x16p);
-      for (j = 0; j < TX_SIZES - 2; ++j)
+      for (j = 0; j < TX_SIZES - 2; ++j) {
         fc->tx_probs.p16x16[i][j] = mode_mv_merge_probs(
             pre_fc->tx_probs.p16x16[i][j], branch_ct_16x16p[j]);
+}
 
       tx_counts_to_branch_counts_32x32(counts->tx.p32x32[i], branch_ct_32x32p);
-      for (j = 0; j < TX_SIZES - 1; ++j)
+      for (j = 0; j < TX_SIZES - 1; ++j) {
         fc->tx_probs.p32x32[i][j] = mode_mv_merge_probs(
             pre_fc->tx_probs.p32x32[i][j], branch_ct_32x32p[j]);
+}
     }
   }
 
-  for (i = 0; i < SKIP_CONTEXTS; ++i)
+  for (i = 0; i < SKIP_CONTEXTS; ++i) {
     fc->skip_probs[i] =
         mode_mv_merge_probs(pre_fc->skip_probs[i], counts->skip[i]);
+}
 }
 
 static void set_default_lf_deltas(struct loopfilter *lf) {
@@ -428,11 +441,13 @@ void vp9_setup_past_independence(VP9_COMMON *cm) {
   vp9_clearall_segfeatures(&cm->seg);
   cm->seg.abs_delta = SEGMENT_DELTADATA;
 
-  if (cm->last_frame_seg_map && !cm->frame_parallel_decode)
+  if (cm->last_frame_seg_map && !cm->frame_parallel_decode) {
     memset(cm->last_frame_seg_map, 0, (cm->mi_rows * cm->mi_cols));
+}
 
-  if (cm->current_frame_seg_map)
+  if (cm->current_frame_seg_map) {
     memset(cm->current_frame_seg_map, 0, (cm->mi_rows * cm->mi_cols));
+}
 
   // Reset the mode ref deltas for loop filter
   vp9_zero(lf->last_ref_deltas);
@@ -450,16 +465,18 @@ void vp9_setup_past_independence(VP9_COMMON *cm) {
   if (cm->frame_type == KEY_FRAME || cm->error_resilient_mode ||
       cm->reset_frame_context == 3) {
     // Reset all frame contexts.
-    for (i = 0; i < FRAME_CONTEXTS; ++i) cm->frame_contexts[i] = *cm->fc;
+    for (i = 0; i < FRAME_CONTEXTS; ++i) { cm->frame_contexts[i] = *cm->fc;
+}
   } else if (cm->reset_frame_context == 2) {
     // Reset only the frame context specified in the frame header.
     cm->frame_contexts[cm->frame_context_idx] = *cm->fc;
   }
 
   // prev_mip will only be allocated in encoder.
-  if (frame_is_intra_only(cm) && cm->prev_mip && !cm->frame_parallel_decode)
+  if (frame_is_intra_only(cm) && cm->prev_mip && !cm->frame_parallel_decode) {
     memset(cm->prev_mip, 0,
            cm->mi_stride * (cm->mi_rows + 1) * sizeof(*cm->prev_mip));
+}
 
   vp9_zero(cm->ref_frame_sign_bias);
 

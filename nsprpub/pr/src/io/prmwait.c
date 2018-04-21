@@ -231,7 +231,8 @@ static PRWaitGroup *MW_Init2(void)
     if (NULL == group)  /* there is this special case */
     {
         group = PR_CreateWaitGroup(_PR_DEFAULT_HASH_LENGTH);
-        if (NULL == group) goto failed_alloc;
+        if (NULL == group) { goto failed_alloc;
+}
         PR_Lock(mw_lock);
         if (NULL == mw_state->group)
         {
@@ -239,7 +240,8 @@ static PRWaitGroup *MW_Init2(void)
             group = NULL;
         }
         PR_Unlock(mw_lock);
-        if (group != NULL) (void)PR_DestroyWaitGroup(group);
+        if (group != NULL) { (void)PR_DestroyWaitGroup(group);
+}
         group = mw_state->group;  /* somebody beat us to it */
     }
 failed_alloc:
@@ -362,7 +364,8 @@ static _PR_HashStory MW_ExpandHashInternal(PRWaitGroup *group)
                 }
             }
         }
-        if (retry) continue;
+        if (retry) { continue;
+}
 
         PR_DELETE(group->waiter);
         group->waiter = newHash;
@@ -412,7 +415,8 @@ static PRRecvWait **_MW_LookupInternal(PRWaitGroup *group, PRFileDesc *fd)
     while (rehash-- > 0)
     {
         desc = (&hash->recv_wait) + hidx;
-        if ((*desc != NULL) && ((*desc)->fd == fd)) return desc;
+        if ((*desc != NULL) && ((*desc)->fd == fd)) { return desc;
+}
         if (0 == hoffset)
         {
             hoffset = _MW_HASH2(fd, hash->length);
@@ -447,7 +451,8 @@ static PRStatus _MW_PollInternal(PRWaitGroup *group)
                 PR_SetError(PR_INVALID_STATE_ERROR, 0);
                 goto aborted;
             }
-            if (_MW_ABORTED(st)) goto aborted;
+            if (_MW_ABORTED(st)) { goto aborted;
+}
         }
 
         /*
@@ -496,15 +501,16 @@ static PRStatus _MW_PollInternal(PRWaitGroup *group)
             if (NULL != *waiter)  /* a live one! */
             {
                 if ((PR_INTERVAL_NO_TIMEOUT != (*waiter)->timeout)
-                && (since_last_poll >= (*waiter)->timeout))
+                && (since_last_poll >= (*waiter)->timeout)) {
                     _MW_DoneInternal(group, waiter, PR_MW_TIMEOUT);
-                else
+                } else
                 {
                     if (PR_INTERVAL_NO_TIMEOUT != (*waiter)->timeout)
                     {
                         (*waiter)->timeout -= since_last_poll;
-                        if ((*waiter)->timeout < polling_interval)
+                        if ((*waiter)->timeout < polling_interval) {
                             polling_interval = (*waiter)->timeout;
+}
                     }
                     PR_ASSERT(poll_list < group->polling_list
                         + group->polling_count);
@@ -529,9 +535,11 @@ static PRStatus _MW_PollInternal(PRWaitGroup *group)
         ** we need to return.
         */
         if ((!PR_CLIST_IS_EMPTY(&group->io_ready))
-        && (1 == group->waiting_threads)) break;
+        && (1 == group->waiting_threads)) { break;
+}
 
-        if (0 == count) continue;  /* wait for new business */
+        if (0 == count) { continue;  /* wait for new business */
+}
 
         group->last_poll = now;
 
@@ -564,8 +572,9 @@ static PRStatus _MW_PollInternal(PRWaitGroup *group)
                     ** If 'waiter' is NULL, that means the wait receive
                     ** descriptor has been canceled.
                     */
-                    if (NULL != waiter)
+                    if (NULL != waiter) {
                         _MW_DoneInternal(group, waiter, PR_MW_SUCCESS);
+}
                 }
             }
         }
@@ -576,7 +585,8 @@ static PRStatus _MW_PollInternal(PRWaitGroup *group)
         ** belongs to the client.
         */
         if ((!PR_CLIST_IS_EMPTY(&group->io_ready))
-        && (1 == group->waiting_threads)) break;
+        && (1 == group->waiting_threads)) { break;
+}
     }
 
     rv = PR_SUCCESS;
@@ -617,15 +627,16 @@ static void _MW_InitialRecv(PRCList *io_ready)
 {
     PRRecvWait *desc = (PRRecvWait*)io_ready;
     if ((NULL == desc->buffer.start)
-    || (0 == desc->buffer.length))
+    || (0 == desc->buffer.length)) {
         desc->bytesRecv = 0;
-    else
+    } else
     {
         desc->bytesRecv = (desc->fd->methods->recv)(
             desc->fd, desc->buffer.start,
             desc->buffer.length, 0, desc->timeout);
-        if (desc->bytesRecv < 0)  /* SetError should already be there */
+        if (desc->bytesRecv < 0) {  /* SetError should already be there */
             desc->outcome = PR_MW_FAILURE;
+}
     }
 }  /* _MW_InitialRecv */
 #endif
@@ -712,7 +723,8 @@ PR_IMPLEMENT(PRStatus) PR_AddWaitFileDesc(
     PRFileDesc *bottom;
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
     if ((NULL == group) && (NULL == (group = MW_Init2())))
     {
         return rv;
@@ -744,15 +756,18 @@ PR_IMPLEMENT(PRStatus) PR_AddWaitFileDesc(
     ** of the timing interval. As long as the list doesn't go empty,
     ** it will maintain itself.
     */
-    if (0 == group->waiter->count)
+    if (0 == group->waiter->count) {
         group->last_poll = PR_IntervalNow();
+}
 
     do
     {
         hrv = MW_AddHashInternal(desc, group->waiter);
-        if (_prmw_rehash != hrv) break;
+        if (_prmw_rehash != hrv) { break;
+}
         hrv = MW_ExpandHashInternal(group);  /* gruesome */
-        if (_prmw_success != hrv) break;
+        if (_prmw_success != hrv) { break;
+}
     } while (PR_TRUE);
 
 #ifdef WINNT
@@ -843,8 +858,10 @@ PR_IMPLEMENT(PRRecvWait*) PR_WaitRecvReady(PRWaitGroup *group)
     _MDOverlapped *overlapped;    
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
-    if ((NULL == group) && (NULL == (group = MW_Init2()))) goto failed_init;
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
+    if ((NULL == group) && (NULL == (group = MW_Init2()))) { goto failed_init;
+}
 
     PR_Lock(group->ml);
 
@@ -915,7 +932,8 @@ PR_IMPLEMENT(PRRecvWait*) PR_WaitRecvReady(PRWaitGroup *group)
                 ** The polling function should only return w/ failure or
                 ** with some I/O ready.
                 */
-                if (PR_FAILURE == _MW_PollInternal(group)) goto failed_poll;
+                if (PR_FAILURE == _MW_PollInternal(group)) { goto failed_poll;
+}
             }
             else
             {
@@ -942,7 +960,8 @@ PR_IMPLEMENT(PRRecvWait*) PR_WaitRecvReady(PRWaitGroup *group)
                         PR_SetError(PR_INVALID_STATE_ERROR, 0);
                         goto aborted;
                     }
-                    if (_MW_ABORTED(st) || (NULL == group->poller)) break;
+                    if (_MW_ABORTED(st) || (NULL == group->poller)) { break;
+}
                 } while (PR_CLIST_IS_EMPTY(&group->io_ready));
 
                 /*
@@ -955,8 +974,9 @@ PR_IMPLEMENT(PRRecvWait*) PR_WaitRecvReady(PRWaitGroup *group)
                 {
                     if ((NULL == group->poller
                     || !PR_CLIST_IS_EMPTY(&group->io_ready))
-                    && group->waiting_threads > 1)
+                    && group->waiting_threads > 1) {
                         PR_NotifyCondVar(group->io_complete);
+}
                     goto aborted;
                 }
 
@@ -969,10 +989,12 @@ PR_IMPLEMENT(PRRecvWait*) PR_WaitRecvReady(PRWaitGroup *group)
                 */ 
                 if (NULL == group->poller)
                 {
-                    if (PR_CLIST_IS_EMPTY(&group->io_ready))
+                    if (PR_CLIST_IS_EMPTY(&group->io_ready)) {
                         continue;
-                    if (group->waiting_threads > 1)
+}
+                    if (group->waiting_threads > 1) {
                         PR_NotifyCondVar(group->io_complete);
+}
                 }
             }
             PR_ASSERT(!PR_CLIST_IS_EMPTY(&group->io_ready));
@@ -1045,7 +1067,8 @@ PR_IMPLEMENT(PRStatus) PR_CancelWaitFileDesc(PRWaitGroup *group, PRRecvWait *des
     PRRecvWait **recv_wait;
 #endif
     PRStatus rv = PR_SUCCESS;
-    if (NULL == group) group = mw_state->group;
+    if (NULL == group) { group = mw_state->group;
+}
     PR_ASSERT(NULL != group);
     if (NULL == group)
     {
@@ -1097,7 +1120,8 @@ PR_IMPLEMENT(PRStatus) PR_CancelWaitFileDesc(PRWaitGroup *group, PRRecvWait *des
         do
         {
             PRRecvWait *done = (PRRecvWait*)head;
-            if (done == desc) goto unlock;
+            if (done == desc) { goto unlock;
+}
             head = PR_NEXT_LINK(head);
         } while (head != &group->io_ready);
     }
@@ -1120,7 +1144,8 @@ PR_IMPLEMENT(PRRecvWait*) PR_CancelWaitGroup(PRWaitGroup *group)
     PRThread *me = _PR_MD_CURRENT_THREAD();
 #endif
 
-    if (NULL == group) group = mw_state->group;
+    if (NULL == group) { group = mw_state->group;
+}
     PR_ASSERT(NULL != group);
     if (NULL == group)
     {
@@ -1131,17 +1156,19 @@ PR_IMPLEMENT(PRRecvWait*) PR_CancelWaitGroup(PRWaitGroup *group)
     PR_Lock(group->ml);
     if (_prmw_stopped != group->state)
     {
-        if (_prmw_running == group->state)
+        if (_prmw_running == group->state) {
             group->state = _prmw_stopping;  /* so nothing new comes in */
-        if (0 == group->waiting_threads)  /* is there anybody else? */
+}
+        if (0 == group->waiting_threads) {  /* is there anybody else? */
             group->state = _prmw_stopped;  /* we can stop right now */
-        else
+        } else
         {
             PR_NotifyAllCondVar(group->new_business);
             PR_NotifyAllCondVar(group->io_complete);
         }
-        while (_prmw_stopped != group->state)
+        while (_prmw_stopped != group->state) {
             (void)PR_WaitCondVar(group->mw_manage, PR_INTERVAL_NO_TIMEOUT);
+}
     }
 
 #ifdef WINNT
@@ -1202,15 +1229,16 @@ PR_IMPLEMENT(PRRecvWait*) PR_CancelWaitGroup(PRWaitGroup *group)
     for (desc = &group->waiter->recv_wait; group->waiter->count > 0; ++desc)
     {
         PR_ASSERT(desc < &group->waiter->recv_wait + group->waiter->length);
-        if (NULL != *desc)
+        if (NULL != *desc) {
             _MW_DoneInternal(group, desc, PR_MW_INTERRUPT);
+}
     }
 #endif
 
     /* take first element of finished list and return it or NULL */
-    if (PR_CLIST_IS_EMPTY(&group->io_ready))
+    if (PR_CLIST_IS_EMPTY(&group->io_ready)) {
         PR_SetError(PR_GROUP_EMPTY_ERROR, 0);
-    else
+    } else
     {
         PRCList *head = PR_LIST_HEAD(&group->io_ready);
         PR_REMOVE_AND_INIT_LINK(head);
@@ -1253,15 +1281,20 @@ PR_IMPLEMENT(PRWaitGroup*) PR_CreateWaitGroup(PRInt32 size /* ignored */)
     }
     /* the wait group itself */
     wg->ml = PR_NewLock();
-    if (NULL == wg->ml) goto failed_lock;
+    if (NULL == wg->ml) { goto failed_lock;
+}
     wg->io_taken = PR_NewCondVar(wg->ml);
-    if (NULL == wg->io_taken) goto failed_cvar0;
+    if (NULL == wg->io_taken) { goto failed_cvar0;
+}
     wg->io_complete = PR_NewCondVar(wg->ml);
-    if (NULL == wg->io_complete) goto failed_cvar1;
+    if (NULL == wg->io_complete) { goto failed_cvar1;
+}
     wg->new_business = PR_NewCondVar(wg->ml);
-    if (NULL == wg->new_business) goto failed_cvar2;
+    if (NULL == wg->new_business) { goto failed_cvar2;
+}
     wg->mw_manage = PR_NewCondVar(wg->ml);
-    if (NULL == wg->mw_manage) goto failed_cvar3;
+    if (NULL == wg->mw_manage) { goto failed_cvar3;
+}
 
     PR_INIT_CLIST(&wg->group_link);
     PR_INIT_CLIST(&wg->io_ready);
@@ -1309,7 +1342,8 @@ failed:
 PR_IMPLEMENT(PRStatus) PR_DestroyWaitGroup(PRWaitGroup *group)
 {
     PRStatus rv = PR_SUCCESS;
-    if (NULL == group) group = mw_state->group;
+    if (NULL == group) { group = mw_state->group;
+}
     PR_ASSERT(NULL != group);
     if (NULL != group)
     {
@@ -1326,7 +1360,8 @@ PR_IMPLEMENT(PRStatus) PR_DestroyWaitGroup(PRWaitGroup *group)
             rv = PR_FAILURE;
         }
         PR_Unlock(group->ml);
-        if (PR_FAILURE == rv) return rv;
+        if (PR_FAILURE == rv) { return rv;
+}
 
         PR_Lock(mw_lock);
         PR_REMOVE_LINK(&group->group_link);
@@ -1347,7 +1382,8 @@ PR_IMPLEMENT(PRStatus) PR_DestroyWaitGroup(PRWaitGroup *group)
         PR_DestroyCondVar(group->io_complete);
         PR_DestroyCondVar(group->io_taken);
         PR_DestroyLock(group->ml);
-        if (group == mw_state->group) mw_state->group = NULL;
+        if (group == mw_state->group) { mw_state->group = NULL;
+}
         PR_DELETE(group);
     }
     else
@@ -1368,8 +1404,8 @@ PR_IMPLEMENT(PRStatus) PR_DestroyWaitGroup(PRWaitGroup *group)
 PR_IMPLEMENT(PRMWaitEnumerator*) PR_CreateMWaitEnumerator(PRWaitGroup *group)
 {
     PRMWaitEnumerator *enumerator = PR_NEWZAP(PRMWaitEnumerator);
-    if (NULL == enumerator) PR_SetError(PR_OUT_OF_MEMORY_ERROR, 0);
-    else
+    if (NULL == enumerator) { PR_SetError(PR_OUT_OF_MEMORY_ERROR, 0);
+    } else
     {
         enumerator->group = group;
         enumerator->seal = _PR_ENUM_SEALED;
@@ -1400,7 +1436,8 @@ PR_IMPLEMENT(PRRecvWait*) PR_EnumerateWaitGroup(
     PR_ASSERT(NULL != enumerator);
     PR_ASSERT(_PR_ENUM_SEALED == enumerator->seal);
     if ((NULL == enumerator)
-    || (_PR_ENUM_SEALED != enumerator->seal)) goto bad_argument;
+    || (_PR_ENUM_SEALED != enumerator->seal)) { goto bad_argument;
+}
 
     /* beginning of enumeration */
     if (NULL == previous)
@@ -1424,11 +1461,13 @@ PR_IMPLEMENT(PRRecvWait*) PR_EnumerateWaitGroup(
     {
         PRThread *me = PR_GetCurrentThread();
         PR_ASSERT(me == enumerator->thread);
-        if (me != enumerator->thread) goto bad_argument;
+        if (me != enumerator->thread) { goto bad_argument;
+}
 
         /* need to restart the enumeration */
-        if (enumerator->p_timestamp != enumerator->group->p_timestamp)
+        if (enumerator->p_timestamp != enumerator->group->p_timestamp) {
             return PR_EnumerateWaitGroup(enumerator, NULL);
+}
     }
 
     /* actually progress the enumeration */
@@ -1439,7 +1478,8 @@ PR_IMPLEMENT(PRRecvWait*) PR_EnumerateWaitGroup(
 #endif
     while (enumerator->index++ < enumerator->group->waiter->length)
     {
-        if (NULL != (result = *(enumerator->waiter)++)) break;
+        if (NULL != (result = *(enumerator->waiter)++)) { break;
+}
     }
 #if defined(WINNT)
     _PR_MD_UNLOCK(&enumerator->group->mdlock);

@@ -58,8 +58,9 @@ _PR_DestroyZones(void)
 {   
     int i, j;
 
-    if (!use_zone_allocator)
+    if (!use_zone_allocator) {
         return;
+}
     
     for (j = 0; j < THREAD_POOLS; j++) {
         for (i = 0; i < MEM_ZONES; i++) {
@@ -96,8 +97,9 @@ pr_FindSymbolInProg(const char *name)
     void *sym;
 
     h = dlopen(0, RTLD_LAZY);
-    if (h == NULL)
+    if (h == NULL) {
         return NULL;
+}
     sym = dlsym(h, name);
     (void)dlclose(h);
     return sym;
@@ -157,8 +159,9 @@ _PR_InitZones(void)
         use_zone_allocator = (atoi(envp) == 1);
     }
 
-    if (!use_zone_allocator)
+    if (!use_zone_allocator) {
         return;
+}
 
     for (j = 0; j < THREAD_POOLS; j++) { 
         for (i = 0; i < MEM_ZONES; i++) {
@@ -223,8 +226,9 @@ pr_ZoneMalloc(PRUint32 size)
         wasLocked = mz->locked;
         pthread_mutex_lock(&mz->lock);
         mz->locked = 1;
-        if (wasLocked)
+        if (wasLocked) {
             mz->contention++;
+}
         if (mz->head) {
             mb = mz->head;
             PR_ASSERT(mb->s.magic == ZONE_MAGIC);
@@ -312,8 +316,9 @@ pr_ZoneRealloc(void *oldptr, PRUint32 bytes)
     int           ours;
     MemBlockHdr   phony;
 
-    if (!oldptr)
+    if (!oldptr) {
         return pr_ZoneMalloc(bytes);
+}
     mb = (MemBlockHdr *)((char *)oldptr - (sizeof *mb));
     if (mb->s.magic != ZONE_MAGIC) {
         /* Maybe this just came from ordinary malloc */
@@ -371,12 +376,14 @@ pr_ZoneRealloc(void *oldptr, PRUint32 bytes)
         }
     }
     
-    if (oldptr && mb->s.requestedSize)
+    if (oldptr && mb->s.requestedSize) {
         memcpy(rv, oldptr, mb->s.requestedSize);
-    if (ours)
+}
+    if (ours) {
         pr_ZoneFree(oldptr);
-    else if (oldptr)
+    } else if (oldptr) {
         free(oldptr);
+}
     return rv;
 }
 
@@ -388,8 +395,9 @@ pr_ZoneFree(void *ptr)
     size_t        blockSize;
     PRUint32      wasLocked;
 
-    if (!ptr)
+    if (!ptr) {
         return;
+}
 
     mb = (MemBlockHdr *)((char *)ptr - (sizeof *mb));
 
@@ -419,8 +427,9 @@ pr_ZoneFree(void *ptr)
     wasLocked = mz->locked;
     pthread_mutex_lock(&mz->lock);
     mz->locked = 1;
-    if (wasLocked)
+    if (wasLocked) {
         mz->contention++;
+}
     mt->s.next = mb->s.next = mz->head;        /* put on head of list */
     mz->head = mb;
     mz->elements++;
@@ -430,14 +439,16 @@ pr_ZoneFree(void *ptr)
 
 PR_IMPLEMENT(void *) PR_Malloc(PRUint32 size)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     return use_zone_allocator ? pr_ZoneMalloc(size) : malloc(size);
 }
 
 PR_IMPLEMENT(void *) PR_Calloc(PRUint32 nelem, PRUint32 elsize)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     return use_zone_allocator ?
         pr_ZoneCalloc(nelem, elsize) : calloc(nelem, elsize);
@@ -445,17 +456,19 @@ PR_IMPLEMENT(void *) PR_Calloc(PRUint32 nelem, PRUint32 elsize)
 
 PR_IMPLEMENT(void *) PR_Realloc(void *ptr, PRUint32 size)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     return use_zone_allocator ? pr_ZoneRealloc(ptr, size) : realloc(ptr, size);
 }
 
 PR_IMPLEMENT(void) PR_Free(void *ptr)
 {
-    if (use_zone_allocator)
+    if (use_zone_allocator) {
         pr_ZoneFree(ptr);
-    else
+    } else {
         free(ptr);
+}
 }
 
 #else /* !defined(_PR_ZONE_ALLOCATOR) */

@@ -56,8 +56,9 @@ nr_stun_message_create(nr_stun_message **msg)
     nr_stun_message *m = 0;
 
     m = RCALLOC(sizeof(*m));
-    if (!m)
+    if (!m) {
         ABORT(R_NO_MEMORY);
+}
 
     TAILQ_INIT(&m->attributes);
 
@@ -78,8 +79,9 @@ nr_stun_message_create2(nr_stun_message **msg, UCHAR *buffer, int length)
         ABORT(R_BAD_DATA);
     }
 
-    if ((r=nr_stun_message_create(&m)))
+    if ((r=nr_stun_message_create(&m))) {
         ABORT(r);
+}
 
     memcpy(m->buffer, buffer, length);
     m->length = length;
@@ -122,8 +124,9 @@ nr_stun_message_attribute_create(nr_stun_message *msg, nr_stun_message_attribute
     nr_stun_message_attribute *a = 0;
 
     a = RCALLOC(sizeof(*a));
-    if (!a)
+    if (!a) {
         ABORT(R_NO_MEMORY);
+}
 
     TAILQ_INSERT_TAIL(&msg->attributes, a, entry);
 
@@ -159,19 +162,23 @@ nr_stun_message_has_attribute(nr_stun_message *msg, UINT2 type, nr_stun_message_
 {
     nr_stun_message_attribute *attr = 0;
 
-    if (attribute)
+    if (attribute) {
         *attribute = 0;
+}
 
     TAILQ_FOREACH(attr, &msg->attributes, entry) {
-        if (attr->type == type)
+        if (attr->type == type) {
             break;
+}
     }
 
-    if (!attr || attr->invalid)
+    if (!attr || attr->invalid) {
         return 0;  /* does not have */
+}
 
-    if (attribute)
+    if (attribute) {
         *attribute = attr;
+}
 
     return 1;  /* has */
 }

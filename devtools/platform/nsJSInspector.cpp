@@ -94,10 +94,11 @@ nsJSInspector::ExitNestedEventLoop(uint32_t *out)
 {
   if (mNestedLoopLevel > 0) {
     mRequestors.RemoveElementAt(--mNestedLoopLevel);
-    if (mNestedLoopLevel > 0)
+    if (mNestedLoopLevel > 0) {
       mLastRequestor = mRequestors.ElementAt(mNestedLoopLevel - 1);
-    else
+    } else {
       mLastRequestor = JS::NullValue();
+}
   } else {
     return NS_ERROR_FAILURE;
   }

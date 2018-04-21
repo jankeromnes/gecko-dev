@@ -51,11 +51,13 @@ static char sccsid[] = "@(#)realpath.c	8.1 (Berkeley) 2/16/94";
 static size_t my_strlcat(char* s1, const char* s2, size_t len) {
   size_t pos1 = 0;
 
-  while (pos1 < len && s1[pos1] != '\0')
+  while (pos1 < len && s1[pos1] != '\0') {
     pos1++;
+}
 
-  if (pos1 == len)
+  if (pos1 == len) {
     return pos1;
+}
 
   return pos1 + base::strlcpy(s1 + pos1, s2, len - pos1);
 }
@@ -96,25 +98,28 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
     }
     if (resolved == NULL) {
         resolved = (char*)malloc(PATH_MAX);
-        if (resolved == NULL)
+        if (resolved == NULL) {
             return (NULL);
+}
         m = 1;
-    } else
+    } else {
         m = 0;
+}
     symlinks = 0;
     backup_allowed = PATH_MAX;
     if (path[0] == '/') {
         resolved[0] = '/';
         resolved[1] = '\0';
-        if (path[1] == '\0')
+        if (path[1] == '\0') {
             return (resolved);
+}
         resolved_len = 1;
         left_len = base::strlcpy(left, path + 1, sizeof(left));
     } else {
         if (getcwd(resolved, PATH_MAX) == NULL) {
-            if (m)
+            if (m) {
                 free(resolved);
-            else {
+            } else {
                 resolved[0] = '.';
                 resolved[1] = '\0';
             }
@@ -124,8 +129,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
         left_len = base::strlcpy(left, path, sizeof(left));
     }
     if (left_len >= sizeof(left) || resolved_len >= PATH_MAX) {
-        if (m)
+        if (m) {
             free(resolved);
+}
         errno = ENAMETOOLONG;
         return (NULL);
     }
@@ -141,20 +147,23 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
         p = strchr(left, '/');
         s = p ? p : left + left_len;
         if (s - left >= (ssize_t)sizeof(next_token)) {
-            if (m)
+            if (m) {
                 free(resolved);
+}
             errno = ENAMETOOLONG;
             return (NULL);
         }
         memcpy(next_token, left, s - left);
         next_token[s - left] = '\0';
         left_len -= s - left;
-        if (p != NULL)
+        if (p != NULL) {
             memmove(left, s + 1, left_len + 1);
+}
         if (resolved[resolved_len - 1] != '/') {
             if (resolved_len + 1 >= PATH_MAX) {
-                if (m)
+                if (m) {
                     free(resolved);
+}
                 errno = ENAMETOOLONG;
                 return (NULL);
             }
@@ -165,9 +174,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
             /* Handle consequential slashes. */
             continue;
         }
-        else if (strcmp(next_token, ".") == 0)
+        else if (strcmp(next_token, ".") == 0) {
             continue;
-        else if (strcmp(next_token, "..") == 0) {
+        } else if (strcmp(next_token, "..") == 0) {
             /*
              * Strip the last path component except when we have
              * single "/"
@@ -183,8 +192,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
                     // Backing out past a symlink target.
                     // We don't allow this, because it can eliminate
                     // permissions we accumulated while descending.
-                    if (m)
+                    if (m) {
                         free(resolved);
+}
                     errno = EPERM;
                     return (NULL);
                 }
@@ -198,20 +208,23 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
         resolved_len = my_strlcat(resolved, next_token, PATH_MAX);
         backup_allowed++;
         if (resolved_len >= PATH_MAX) {
-            if (m)
+            if (m) {
                 free(resolved);
+}
             errno = ENAMETOOLONG;
             return (NULL);
         }
         if (lstat(resolved, &sb) != 0) {
-            if (m)
+            if (m) {
                 free(resolved);
+}
             return (NULL);
         }
         if (S_ISLNK(sb.st_mode)) {
             if (symlinks++ > MAXSYMLINKS) {
-                if (m)
+                if (m) {
                     free(resolved);
+}
                 errno = ELOOP;
                 return (NULL);
             }
@@ -220,8 +233,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
              * it sits in, in which case we won't resolve and just error out. */
             int link_path_perms = policy->Lookup(resolved);
             if (link_path_perms & MAY_WRITE) {
-                if (m)
+                if (m) {
                     free(resolved);
+}
                 errno = EPERM;
                 return (NULL);
             } else {
@@ -231,8 +245,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
             /* Original symlink lookup code */
             slen = readlink(resolved, symlink, sizeof(symlink) - 1);
             if (slen < 0) {
-                if (m)
+                if (m) {
                     free(resolved);
+}
                 return (NULL);
             }
             symlink[slen] = '\0';
@@ -255,8 +270,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
             if (p != NULL) {
                 if (symlink[slen - 1] != '/') {
                     if (slen + 1 >= (ssize_t)sizeof(symlink)) {
-                        if (m)
+                        if (m) {
                             free(resolved);
+}
                         errno = ENAMETOOLONG;
                         return (NULL);
                     }
@@ -265,8 +281,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
                 }
                 left_len = my_strlcat(symlink, left, sizeof(symlink));
                 if (left_len >= sizeof(left)) {
-                    if (m)
+                    if (m) {
                         free(resolved);
+}
                     errno = ENAMETOOLONG;
                     return (NULL);
                 }
@@ -274,8 +291,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
             left_len = base::strlcpy(left, symlink, sizeof(left));
             backup_allowed = 0;
         } else if (!S_ISDIR(sb.st_mode) && p != NULL) {
-            if (m)
+            if (m) {
                 free(resolved);
+}
             errno = ENOTDIR;
             return (NULL);
         }
@@ -285,8 +303,9 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
      * Remove trailing slash except when the resolved pathname
      * is a single "/".
      */
-    if (resolved_len > 1 && resolved[resolved_len - 1] == '/')
+    if (resolved_len > 1 && resolved[resolved_len - 1] == '/') {
         resolved[resolved_len - 1] = '\0';
+}
 
     /* Accumulate permissions. */
     *perms |= policy->Lookup(resolved);

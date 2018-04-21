@@ -54,11 +54,13 @@ start_pass_main (j_compress_ptr cinfo, J_BUF_MODE pass_mode)
   my_main_ptr main_ptr = (my_main_ptr) cinfo->main;
 
   /* Do nothing in raw-data mode. */
-  if (cinfo->raw_data_in)
+  if (cinfo->raw_data_in) {
     return;
+}
 
-  if (pass_mode != JBUF_PASS_THRU)
+  if (pass_mode != JBUF_PASS_THRU) {
     ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
 
   main_ptr->cur_iMCU_row = 0;   /* initialize counters */
   main_ptr->rowgroup_ctr = 0;
@@ -83,18 +85,20 @@ process_data_simple_main (j_compress_ptr cinfo,
 
   while (main_ptr->cur_iMCU_row < cinfo->total_iMCU_rows) {
     /* Read input data if we haven't filled the main buffer yet */
-    if (main_ptr->rowgroup_ctr < DCTSIZE)
+    if (main_ptr->rowgroup_ctr < DCTSIZE) {
       (*cinfo->prep->pre_process_data) (cinfo,
                                         input_buf, in_row_ctr, in_rows_avail,
                                         main_ptr->buffer, &main_ptr->rowgroup_ctr,
                                         (JDIMENSION) DCTSIZE);
+}
 
     /* If we don't have a full iMCU row buffered, return to application for
      * more data.  Note that preprocessor will always pad to fill the iMCU row
      * at the bottom of the image.
      */
-    if (main_ptr->rowgroup_ctr != DCTSIZE)
+    if (main_ptr->rowgroup_ctr != DCTSIZE) {
       return;
+}
 
     /* Send the completed row to the compressor */
     if (! (*cinfo->coef->compress_data) (cinfo, main_ptr->buffer)) {
@@ -141,8 +145,9 @@ jinit_c_main_controller (j_compress_ptr cinfo, boolean need_full_buffer)
   main_ptr->pub.start_pass = start_pass_main;
 
   /* We don't need to create a buffer in raw-data mode. */
-  if (cinfo->raw_data_in)
+  if (cinfo->raw_data_in) {
     return;
+}
 
   /* Create the buffer.  It holds downsampled data, so each component
    * may be of a different size.

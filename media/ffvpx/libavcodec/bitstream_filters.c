@@ -52,8 +52,9 @@ const AVBitStreamFilter *av_bsf_next(void **opaque)
     uintptr_t i = (uintptr_t)*opaque;
     const AVBitStreamFilter *f = bitstream_filters[i];
 
-    if (f)
+    if (f) {
         *opaque = (void*)(i + 1);
+}
 
     return f;
 }
@@ -64,8 +65,9 @@ const AVBitStreamFilter *av_bsf_get_by_name(const char *name)
 
     for (i = 0; bitstream_filters[i]; i++) {
         const AVBitStreamFilter *f = bitstream_filters[i];
-        if (!strcmp(f->name, name))
+        if (!strcmp(f->name, name)) {
             return f;
+}
     }
 
     return NULL;
@@ -84,8 +86,9 @@ const AVClass *ff_bsf_child_class_next(const AVClass *prev)
     }
 
     /* find next filter with priv options */
-    for (; bitstream_filters[i]; i++)
-        if (bitstream_filters[i]->priv_class)
+    for (; bitstream_filters[i]; i++) {
+        if (bitstream_filters[i]->priv_class) {
             return bitstream_filters[i]->priv_class;
+}
     return NULL;
 }

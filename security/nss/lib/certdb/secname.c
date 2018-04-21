@@ -68,8 +68,9 @@ SECOidTag
 CERT_GetAVATag(CERTAVA *ava)
 {
     SECOidData *oid;
-    if (!ava->type.data)
+    if (!ava->type.data) {
         return (SECOidTag)-1;
+}
 
     oid = SECOID_FindOID(&ava->type);
 
@@ -89,8 +90,9 @@ SetupAVAType(PLArenaPool *arena, SECOidTag type, SECItem *it, unsigned *maxLenp)
     SECOidData *oidrec;
 
     oidrec = SECOID_FindOIDByTag(type);
-    if (oidrec == NULL)
+    if (oidrec == NULL) {
         return SECFailure;
+}
 
     oid = oidrec->oid.data;
     oidLen = oidrec->oid.len;
@@ -173,12 +175,14 @@ CERT_CreateAVAFromRaw(PLArenaPool *pool, const SECItem *OID,
     ava = PORT_ArenaZNew(pool, CERTAVA);
     if (ava) {
         rv = SECITEM_CopyItem(pool, &ava->type, OID);
-        if (rv)
+        if (rv) {
             return NULL;
+}
 
         rv = SECITEM_CopyItem(pool, &ava->value, value);
-        if (rv)
+        if (rv) {
             return NULL;
+}
     }
     return ava;
 }
@@ -227,11 +231,13 @@ CERT_CopyAVA(PLArenaPool *arena, CERTAVA *from)
     ava = (CERTAVA *)PORT_ArenaZAlloc(arena, sizeof(CERTAVA));
     if (ava) {
         rv = SECITEM_CopyItem(arena, &ava->type, &from->type);
-        if (rv)
+        if (rv) {
             goto loser;
+}
         rv = SECITEM_CopyItem(arena, &ava->value, &from->value);
-        if (rv)
+        if (rv) {
             goto loser;
+}
     }
     return ava;
 
@@ -307,8 +313,9 @@ CERT_CopyRDN(PLArenaPool *arena, CERTRDN *to, CERTRDN *from)
                 break;
             }
             rv = CERT_AddAVA(arena, to, tava);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
         }
     }
     return rv;
@@ -388,8 +395,9 @@ CERT_DestroyName(CERTName *name)
         PLArenaPool *arena = name->arena;
         name->rdns = NULL;
         name->arena = NULL;
-        if (arena)
+        if (arena) {
             PORT_FreeArena(arena, PR_FALSE);
+}
     }
 }
 
@@ -428,11 +436,13 @@ CERT_CopyName(PLArenaPool *arena, CERTName *to, const CERTName *from)
                 break;
             }
             rv = CERT_CopyRDN(arena, trdn, frdn);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
             rv = CERT_AddRDN(to, trdn);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 break;
+}
         }
     }
     return rv;
@@ -464,8 +474,9 @@ canonicalize(SECItem *foo)
         ch = foo->data[src++];
         if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n') {
             ch = ' ';
-            if (ch == lastch)
+            if (ch == lastch) {
                 continue;
+}
         } else if (ch >= 'A' && ch <= 'Z') {
             ch |= 0x20; /* downshift */
         }
@@ -498,12 +509,14 @@ CERT_CompareAVA(const CERTAVA *a, const CERTAVA *b)
     SECComparison rv;
 
     rv = SECITEM_CompareItem(&a->type, &b->type);
-    if (SECEqual != rv)
+    if (SECEqual != rv) {
         return rv; /* Attribute types don't match. */
+}
     /* Let's be optimistic.  Maybe the values will just compare equal. */
     rv = SECITEM_CompareItem(&a->value, &b->value);
-    if (SECEqual == rv)
+    if (SECEqual == rv) {
         return rv; /* values compared exactly. */
+}
     if (a->value.len && a->value.data && b->value.len && b->value.data) {
         /* Here, the values did not match.
         ** If the values had different encodings, convert them to the same
@@ -544,23 +557,27 @@ CERT_CompareRDN(const CERTRDN *a, const CERTRDN *b)
     */
     ac = CountArray((void **)aavas);
     bc = CountArray((void **)bavas);
-    if (ac < bc)
+    if (ac < bc) {
         return SECLessThan;
-    if (ac > bc)
+}
+    if (ac > bc) {
         return SECGreaterThan;
+}
 
     while (NULL != (aava = *aavas++)) {
         for (bavas = b->avas; NULL != (bava = *bavas++);) {
             rv = SECITEM_CompareItem(&aava->type, &bava->type);
             if (SECEqual == rv) {
                 rv = CERT_CompareAVA(aava, bava);
-                if (SECEqual != rv)
+                if (SECEqual != rv) {
                     return rv;
+}
                 break;
             }
         }
-        if (!bava) /* didn't find a match */
+        if (!bava) { /* didn't find a match */
             return SECGreaterThan;
+}
     }
     return rv;
 }
@@ -582,10 +599,12 @@ CERT_CompareName(const CERTName *a, const CERTName *b)
     */
     ac = CountArray((void **)ardns);
     bc = CountArray((void **)brdns);
-    if (ac < bc)
+    if (ac < bc) {
         return SECLessThan;
-    if (ac > bc)
+}
+    if (ac > bc) {
         return SECGreaterThan;
+}
 
     while (rv == SECEqual && *ardns) {
         rv = CERT_CompareRDN(*ardns++, *brdns++);

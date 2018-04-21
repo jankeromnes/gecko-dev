@@ -136,8 +136,9 @@ void SecureHashAlgorithm::Final()
     Pad();
     Process();
 
-    for (int t = 0; t < 5; ++t)
+    for (int t = 0; t < 5; ++t) {
         H[t]   = ByteSwap(H[t]);
+}
 }
 
 void SecureHashAlgorithm::Update(const void *data, size_t nbytes)
@@ -146,8 +147,9 @@ void SecureHashAlgorithm::Update(const void *data, size_t nbytes)
     while (nbytes--)
     {
         M[cursor++] = *d++;
-        if (cursor >= 64)
+        if (cursor >= 64) {
             Process();
+}
         l += 8;
     }
 }
@@ -159,14 +161,16 @@ void SecureHashAlgorithm::Pad()
     if (cursor > 64 - 8)
     {
         // pad out to next block
-        while (cursor < 64)
+        while (cursor < 64) {
             M[cursor++] = 0;
+}
 
         Process();
     }
 
-    while (cursor < 64 - 8)
+    while (cursor < 64 - 8) {
         M[cursor++] = 0;
+}
 
     M[cursor++] = (l >> 56) & 0xff;
     M[cursor++] = (l >> 48) & 0xff;
@@ -188,12 +192,14 @@ void SecureHashAlgorithm::Process()
     //
     // W and M are in a union, so no need to memcpy.
     // memcpy(W, M, sizeof(M));
-    for (t   = 0; t < 16; ++t)
+    for (t   = 0; t < 16; ++t) {
         W[t] = ByteSwap(W[t]);
+}
 
     // b.
-    for (t   = 16; t < 80; ++t)
+    for (t   = 16; t < 80; ++t) {
         W[t] = S(1, W[t - 3] ^ W[t - 8] ^ W[t - 14] ^ W[t - 16]);
+}
 
     // c.
     A = H[0];

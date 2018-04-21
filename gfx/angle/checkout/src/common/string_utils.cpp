@@ -76,12 +76,14 @@ void SplitStringAlongWhitespace(const std::string &input,
         size_t prev = 0, pos;
         while ((pos = line.find_first_of(kWhitespaceASCII, prev)) != std::string::npos)
         {
-            if (pos > prev)
+            if (pos > prev) {
                 tokensOut->push_back(line.substr(prev, pos - prev));
+}
             prev = pos + 1;
         }
-        if (prev < line.length())
+        if (prev < line.length()) {
             tokensOut->push_back(line.substr(prev, std::string::npos));
+}
     }
 }
 
@@ -182,8 +184,9 @@ bool BeginsWith(const std::string &str, const std::string &prefix, const size_t 
 bool EndsWith(const std::string &str, const char *suffix)
 {
     const auto len = strlen(suffix);
-    if (len > str.size())
+    if (len > str.size()) {
         return false;
+}
 
     const char *end = str.c_str() + str.size() - len;
 

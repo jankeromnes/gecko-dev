@@ -88,28 +88,33 @@ int nr_ice_fetch_stun_servers(int ct, nr_ice_stun_server **out)
     UINT2 port;
     in_addr_t addr_int;
 
-    if(!(servers=RCALLOC(sizeof(nr_ice_stun_server)*ct)))
+    if(!(servers=RCALLOC(sizeof(nr_ice_stun_server)*ct))) {
       ABORT(R_NO_MEMORY);
+}
 
     for(i=0;i<ct;i++){
-      if(r=NR_reg_get_child_registry(NR_ICE_REG_STUN_SRV_PRFX,i,child))
+      if(r=NR_reg_get_child_registry(NR_ICE_REG_STUN_SRV_PRFX,i,child)) {
         ABORT(r);
+}
       /* Assume we have a v4 addr for now */
-      if(r=NR_reg_alloc2_string(child,"addr",&addr))
+      if(r=NR_reg_alloc2_string(child,"addr",&addr)) {
         ABORT(r);
+}
       addr_int=inet_addr(addr);
       if(addr_int==INADDR_NONE){
         r_log(LOG_ICE,LOG_ERR,"Invalid address %s;",addr);
         ABORT(R_BAD_ARGS);
       }
       if(r=NR_reg_get2_uint2(child,"port",&port)) {
-        if (r != R_NOT_FOUND)
+        if (r != R_NOT_FOUND) {
           ABORT(r);
+}
         port = 3478;
       }
       if(r=nr_ip4_port_to_transport_addr(ntohl(addr_int), port, IPPROTO_UDP,
-        &servers[i].u.addr))
+        &servers[i].u.addr)) {
         ABORT(r);
+}
       servers[i].type = NR_ICE_STUN_SERVER_TYPE_ADDR;
       RFREE(addr);
       addr=0;
@@ -120,7 +125,8 @@ int nr_ice_fetch_stun_servers(int ct, nr_ice_stun_server **out)
     _status=0;
   abort:
     RFREE(addr);
-    if (_status) RFREE(servers);
+    if (_status) { RFREE(servers);
+}
     return(_status);
   }
 
@@ -134,8 +140,9 @@ int nr_ice_ctx_set_stun_servers(nr_ice_ctx *ctx,nr_ice_stun_server *servers,int 
     }
 
     if (ct) {
-      if(!(ctx->stun_servers=RCALLOC(sizeof(nr_ice_stun_server)*ct)))
+      if(!(ctx->stun_servers=RCALLOC(sizeof(nr_ice_stun_server)*ct))) {
         ABORT(R_NO_MEMORY);
+}
 
       memcpy(ctx->stun_servers,servers,sizeof(nr_ice_stun_server)*ct);
       ctx->stun_server_ct = ct;
@@ -156,8 +163,9 @@ int nr_ice_ctx_set_turn_servers(nr_ice_ctx *ctx,nr_ice_turn_server *servers,int 
     }
 
     if(ct) {
-      if(!(ctx->turn_servers=RCALLOC(sizeof(nr_ice_turn_server)*ct)))
+      if(!(ctx->turn_servers=RCALLOC(sizeof(nr_ice_turn_server)*ct))) {
         ABORT(R_NO_MEMORY);
+}
 
       memcpy(ctx->turn_servers,servers,sizeof(nr_ice_turn_server)*ct);
       ctx->turn_server_ct = ct;
@@ -204,8 +212,9 @@ static int nr_ice_ctx_set_local_addrs(nr_ice_ctx *ctx,nr_local_addr *addrs,int c
     }
 
     if (ct) {
-      if(!(ctx->local_addrs=RCALLOC(sizeof(nr_local_addr)*ct)))
+      if(!(ctx->local_addrs=RCALLOC(sizeof(nr_local_addr)*ct))) {
         ABORT(R_NO_MEMORY);
+}
 
       for (i=0;i<ct;++i) {
         if (r=nr_local_addr_copy(ctx->local_addrs+i,addrs+i)) {
@@ -283,43 +292,51 @@ int nr_ice_fetch_turn_servers(int ct, nr_ice_turn_server **out)
     in_addr_t addr_int;
     Data data={0};
 
-    if(!(servers=RCALLOC(sizeof(nr_ice_turn_server)*ct)))
+    if(!(servers=RCALLOC(sizeof(nr_ice_turn_server)*ct))) {
       ABORT(R_NO_MEMORY);
+}
 
     for(i=0;i<ct;i++){
-      if(r=NR_reg_get_child_registry(NR_ICE_REG_TURN_SRV_PRFX,i,child))
+      if(r=NR_reg_get_child_registry(NR_ICE_REG_TURN_SRV_PRFX,i,child)) {
         ABORT(r);
+}
       /* Assume we have a v4 addr for now */
-      if(r=NR_reg_alloc2_string(child,"addr",&addr))
+      if(r=NR_reg_alloc2_string(child,"addr",&addr)) {
         ABORT(r);
+}
       addr_int=inet_addr(addr);
       if(addr_int==INADDR_NONE){
         r_log(LOG_ICE,LOG_ERR,"Invalid address %s",addr);
         ABORT(R_BAD_ARGS);
       }
       if(r=NR_reg_get2_uint2(child,"port",&port)) {
-        if (r != R_NOT_FOUND)
+        if (r != R_NOT_FOUND) {
           ABORT(r);
+}
         port = 3478;
       }
       if(r=nr_ip4_port_to_transport_addr(ntohl(addr_int), port, IPPROTO_UDP,
-        &servers[i].turn_server.u.addr))
+        &servers[i].turn_server.u.addr)) {
         ABORT(r);
+}
 
 
       if(r=NR_reg_alloc2_string(child,NR_ICE_REG_TURN_SRV_USERNAME,&servers[i].username)){
-        if(r!=R_NOT_FOUND)
+        if(r!=R_NOT_FOUND) {
           ABORT(r);
+}
       }
 
       if(r=NR_reg_alloc2_data(child,NR_ICE_REG_TURN_SRV_PASSWORD,&data)){
-        if(r!=R_NOT_FOUND)
+        if(r!=R_NOT_FOUND) {
           ABORT(r);
+}
       }
       else {
         servers[i].password=RCALLOC(sizeof(*servers[i].password));
-        if(!servers[i].password)
+        if(!servers[i].password) {
           ABORT(R_NO_MEMORY);
+}
         servers[i].password->data = data.data;
         servers[i].password->len = data.len;
         data.data=0;
@@ -335,7 +352,8 @@ int nr_ice_fetch_turn_servers(int ct, nr_ice_turn_server **out)
   abort:
     RFREE(data.data);
     RFREE(addr);
-    if (_status) RFREE(servers);
+    if (_status) { RFREE(servers);
+}
     return(_status);
   }
 #endif /* USE_TURN */
@@ -347,13 +365,16 @@ int nr_ice_ctx_create(char *label, UINT4 flags, nr_ice_ctx **ctxp)
     char *ufrag = 0;
     char *pwd = 0;
 
-    if (r=nr_ice_get_new_ice_ufrag(&ufrag))
+    if (r=nr_ice_get_new_ice_ufrag(&ufrag)) {
       ABORT(r);
-    if (r=nr_ice_get_new_ice_pwd(&pwd))
+}
+    if (r=nr_ice_get_new_ice_pwd(&pwd)) {
       ABORT(r);
+}
 
-    if (r=nr_ice_ctx_create_with_credentials(label, flags, ufrag, pwd, ctxp))
+    if (r=nr_ice_ctx_create_with_credentials(label, flags, ufrag, pwd, ctxp)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -368,21 +389,26 @@ int nr_ice_ctx_create_with_credentials(char *label, UINT4 flags, char *ufrag, ch
     nr_ice_ctx *ctx=0;
     int r,_status;
 
-    if(r=r_log_register("ice", &LOG_ICE))
+    if(r=r_log_register("ice", &LOG_ICE)) {
       ABORT(r);
+}
 
-    if(!(ctx=RCALLOC(sizeof(nr_ice_ctx))))
+    if(!(ctx=RCALLOC(sizeof(nr_ice_ctx)))) {
       ABORT(R_NO_MEMORY);
+}
 
     ctx->flags=flags;
 
-    if(!(ctx->label=r_strdup(label)))
+    if(!(ctx->label=r_strdup(label))) {
       ABORT(R_NO_MEMORY);
+}
 
-    if(!(ctx->ufrag=r_strdup(ufrag)))
+    if(!(ctx->ufrag=r_strdup(ufrag))) {
       ABORT(r);
-    if(!(ctx->pwd=r_strdup(pwd)))
+}
+    if(!(ctx->pwd=r_strdup(pwd))) {
       ABORT(r);
+}
 
     /* Get the STUN servers */
     if(r=NR_reg_get_child_count(NR_ICE_REG_STUN_SRV_PRFX,
@@ -440,8 +466,9 @@ int nr_ice_ctx_create_with_credentials(char *label, UINT4 flags, char *ufrag, ch
 
     ctx->test_timer_divider = 0;
 
-    if (r=nr_socket_factory_create_int(NULL, &default_socket_factory_vtbl, &ctx->socket_factory))
+    if (r=nr_socket_factory_create_int(NULL, &default_socket_factory_vtbl, &ctx->socket_factory)) {
       ABORT(r);
+}
 
     if ((r=NR_reg_get_string((char *)NR_ICE_REG_PREF_FORCE_INTERFACE_NAME, ctx->force_net_interface, sizeof(ctx->force_net_interface)))) {
       if (r == R_NOT_FOUND) {
@@ -461,8 +488,9 @@ int nr_ice_ctx_create_with_credentials(char *label, UINT4 flags, char *ufrag, ch
 
     _status=0;
   abort:
-    if(_status && ctx)
+    if(_status && ctx) {
       nr_ice_ctx_destroy_cb(0,0,ctx);
+}
 
     return(_status);
   }
@@ -526,8 +554,9 @@ void nr_ice_ctx_remove_flags(nr_ice_ctx *ctx, UINT4 flags)
 
 int nr_ice_ctx_destroy(nr_ice_ctx **ctxp)
   {
-    if(!ctxp || !*ctxp)
+    if(!ctxp || !*ctxp) {
       return(0);
+}
 
     (*ctxp)->done_cb=0;
     (*ctxp)->trickle_cb=0;
@@ -547,16 +576,18 @@ void nr_ice_gather_finished_cb(NR_SOCKET s, int h, void *cb_arg)
 
 
     assert(cb_arg);
-    if (!cb_arg)
+    if (!cb_arg) {
       return;
+}
     ctx = cand->ctx;
 
     ctx->uninitialized_candidates--;
     r_log(LOG_ICE,LOG_DEBUG,"ICE(%s)/CAND(%s): initialized, %d remaining",ctx->label,cand->codeword,ctx->uninitialized_candidates);
 
     /* Avoid the need for yet another initialization function */
-    if (cand->state == NR_ICE_CAND_STATE_INITIALIZING && cand->type == HOST)
+    if (cand->state == NR_ICE_CAND_STATE_INITIALIZING && cand->type == HOST) {
       cand->state = NR_ICE_CAND_STATE_INITIALIZED;
+}
 
     if (cand->state == NR_ICE_CAND_STATE_INITIALIZED) {
       int was_pruned = 0;
@@ -602,8 +633,9 @@ static int nr_ice_ctx_pair_new_trickle_candidates(nr_ice_ctx *ctx, nr_ice_candid
     while(pctx){
       if (pctx->state == NR_ICE_PEER_STATE_PAIRED) {
         r = nr_ice_peer_ctx_pair_new_trickle_candidate(ctx, pctx, cand);
-        if (r)
+        if (r) {
           ABORT(r);
+}
       }
 
       pctx=STAILQ_NEXT(pctx,entry);
@@ -632,28 +664,35 @@ static int nr_ice_get_default_address(nr_ice_ctx *ctx, int ip_version, nr_transp
 
     switch(ip_version) {
       case NR_IPV4:
-        if ((r=nr_str_port_to_transport_addr("0.0.0.0", 0, IPPROTO_UDP, &addr)))
+        if ((r=nr_str_port_to_transport_addr("0.0.0.0", 0, IPPROTO_UDP, &addr))) {
           ABORT(r);
-        if ((r=nr_str_port_to_transport_addr("8.8.8.8", 53, IPPROTO_UDP, &remote_addr)))
+}
+        if ((r=nr_str_port_to_transport_addr("8.8.8.8", 53, IPPROTO_UDP, &remote_addr))) {
           ABORT(r);
+}
         break;
       case NR_IPV6:
-        if ((r=nr_str_port_to_transport_addr("::0", 0, IPPROTO_UDP, &addr)))
+        if ((r=nr_str_port_to_transport_addr("::0", 0, IPPROTO_UDP, &addr))) {
           ABORT(r);
-        if ((r=nr_str_port_to_transport_addr("2001:4860:4860::8888", 53, IPPROTO_UDP, &remote_addr)))
+}
+        if ((r=nr_str_port_to_transport_addr("2001:4860:4860::8888", 53, IPPROTO_UDP, &remote_addr))) {
           ABORT(r);
+}
         break;
       default:
         assert(0);
         ABORT(R_INTERNAL);
     }
 
-    if ((r=nr_socket_factory_create_socket(ctx->socket_factory, &addr, &sock)))
+    if ((r=nr_socket_factory_create_socket(ctx->socket_factory, &addr, &sock))) {
       ABORT(r);
-    if ((r=nr_socket_connect(sock, &remote_addr)))
+}
+    if ((r=nr_socket_connect(sock, &remote_addr))) {
       ABORT(r);
-    if ((r=nr_socket_getaddr(sock, addrp)))
+}
+    if ((r=nr_socket_getaddr(sock, addrp))) {
       ABORT(r);
+}
 
     r_log(LOG_GENERIC, LOG_DEBUG, "Default address: %s", addrp->as_string);
 
@@ -669,8 +708,9 @@ static int nr_ice_get_default_local_address(nr_ice_ctx *ctx, int ip_version, nr_
     nr_transport_addr default_addr;
     int i;
 
-    if ((r=nr_ice_get_default_address(ctx, ip_version, &default_addr)))
+    if ((r=nr_ice_get_default_address(ctx, ip_version, &default_addr))) {
         ABORT(r);
+}
 
     for (i=0; i < addr_ct; ++i) {
       // if default addr is found in local addrs, copy the more fully
@@ -678,8 +718,9 @@ static int nr_ice_get_default_local_address(nr_ice_ctx *ctx, int ip_version, nr_
       // about comparing ports here.
       if (!nr_transport_addr_cmp(&default_addr, &addrs[i].addr,
                                  NR_TRANSPORT_ADDR_CMP_MODE_ADDR)) {
-        if ((r=nr_local_addr_copy(addrp, &addrs[i])))
+        if ((r=nr_local_addr_copy(addrp, &addrs[i]))) {
           ABORT(r);
+}
         break;
       }
     }
@@ -687,8 +728,9 @@ static int nr_ice_get_default_local_address(nr_ice_ctx *ctx, int ip_version, nr_
     // if default addr is not in local addrs, just copy the transport addr
     // to output arg.
     if (i == addr_ct) {
-      if ((r=nr_transport_addr_copy(&addrp->addr, &default_addr)))
+      if ((r=nr_transport_addr_copy(&addrp->addr, &default_addr))) {
         ABORT(r);
+}
       strlcpy(addrp->addr.ifname, "default route", sizeof(addrp->addr.ifname));
     }
 
@@ -822,14 +864,16 @@ int nr_ice_gather(nr_ice_ctx *ctx, NR_async_cb done_cb, void *cb_arg)
     /* Initialize all the media stream/component pairs */
     stream=STAILQ_FIRST(&ctx->streams);
     while(stream){
-      if(r=nr_ice_media_stream_initialize(ctx,stream))
+      if(r=nr_ice_media_stream_initialize(ctx,stream)) {
         ABORT(r);
+}
 
       stream=STAILQ_NEXT(stream,entry);
     }
 
-    if(ctx->uninitialized_candidates)
+    if(ctx->uninitialized_candidates) {
       ABORT(R_WOULDBLOCK);
+}
 
     _status=0;
   abort:
@@ -840,8 +884,9 @@ int nr_ice_add_media_stream(nr_ice_ctx *ctx,char *label,int components, nr_ice_m
   {
     int r,_status;
 
-    if(r=nr_ice_media_stream_create(ctx,label,components,streamp))
+    if(r=nr_ice_media_stream_create(ctx,label,components,streamp)) {
       ABORT(r);
+}
 
     STAILQ_INSERT_TAIL(&ctx->streams,*streamp,entry);
 
@@ -883,16 +928,19 @@ int nr_ice_get_global_attributes(nr_ice_ctx *ctx,char ***attrsp, int *attrctp)
     int _status;
     char *tmp=0;
 
-    if(!(attrs=RCALLOC(sizeof(char *)*2)))
+    if(!(attrs=RCALLOC(sizeof(char *)*2))) {
       ABORT(R_NO_MEMORY);
+}
 
-    if(!(tmp=RMALLOC(100)))
+    if(!(tmp=RMALLOC(100))) {
       ABORT(R_NO_MEMORY);
+}
     snprintf(tmp,100,"ice-ufrag:%s",ctx->ufrag);
     attrs[0]=tmp;
 
-    if(!(tmp=RMALLOC(100)))
+    if(!(tmp=RMALLOC(100))) {
       ABORT(R_NO_MEMORY);
+}
     snprintf(tmp,100,"ice-pwd:%s",ctx->pwd);
     attrs[1]=tmp;
 
@@ -917,16 +965,20 @@ static int nr_ice_random_string(char *str, int len)
     int needed;
     int r,_status;
 
-    if(len%2) ABORT(R_BAD_ARGS);
+    if(len%2) { ABORT(R_BAD_ARGS);
+}
     needed=len/2;
 
-    if(needed>sizeof(bytes)) ABORT(R_BAD_ARGS);
+    if(needed>sizeof(bytes)) { ABORT(R_BAD_ARGS);
+}
 
-    if(r=nr_crypto_random_bytes(bytes,needed))
+    if(r=nr_crypto_random_bytes(bytes,needed)) {
       ABORT(r);
+}
 
-    if(r=nr_bin2hex(bytes,needed,(unsigned char *)str))
+    if(r=nr_bin2hex(bytes,needed,(unsigned char *)str)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -946,14 +998,16 @@ int nr_ice_ctx_deliver_packet(nr_ice_ctx *ctx, nr_ice_component *comp, nr_transp
     pctx=STAILQ_FIRST(&ctx->peers);
     while(pctx){
       r=nr_ice_peer_ctx_deliver_packet_maybe(pctx, comp, source_addr, data, len);
-      if(!r)
+      if(!r) {
         break;
+}
 
       pctx=STAILQ_NEXT(pctx,entry);
     }
 
-    if(!pctx)
+    if(!pctx) {
       r_log(LOG_ICE,LOG_WARNING,"ICE(%s): Packet received from %s which doesn't match any known peer",ctx->label,source_addr->as_string);
+}
 
     return(0);
   }
@@ -964,8 +1018,9 @@ int nr_ice_ctx_is_known_id(nr_ice_ctx *ctx, UCHAR id[12])
 
     xid=STAILQ_FIRST(&ctx->ids);
     while(xid){
-      if (!memcmp(xid->id, id, 12))
+      if (!memcmp(xid->id, id, 12)) {
           return 1;
+}
 
       xid=STAILQ_NEXT(xid,entry);
     }
@@ -979,8 +1034,9 @@ int nr_ice_ctx_remember_id(nr_ice_ctx *ctx, nr_stun_message *msg)
     nr_ice_stun_id *xid;
 
     xid = RCALLOC(sizeof(*xid));
-    if (!xid)
+    if (!xid) {
         ABORT(R_NO_MEMORY);
+}
 
     assert(sizeof(xid->id) == sizeof(msg->header.id));
 #if __STDC_VERSION__ >= 201112L
@@ -1013,8 +1069,9 @@ int nr_ice_ctx_finalize(nr_ice_ctx *ctx, nr_ice_peer_ctx *pctx)
       rstr=STAILQ_FIRST(&pctx->peer_streams);
 
       while(rstr){
-        if(rstr->local_stream==lstr)
+        if(rstr->local_stream==lstr) {
           break;
+}
 
         rstr=STAILQ_NEXT(rstr,entry);
       }
@@ -1043,8 +1100,9 @@ int nr_ice_ctx_hide_candidate(nr_ice_ctx *ctx, nr_ice_candidate *cand)
     }
 
     if (ctx->flags & NR_ICE_CTX_FLAGS_HIDE_HOST_CANDIDATES) {
-      if (cand->type == HOST)
+      if (cand->type == HOST) {
         return 1;
+}
     }
 
     return 0;
@@ -1055,10 +1113,12 @@ int nr_ice_get_new_ice_ufrag(char** ufrag)
     int r,_status;
     char buf[ICE_UFRAG_LEN+1];
 
-    if(r=nr_ice_random_string(buf,ICE_UFRAG_LEN))
+    if(r=nr_ice_random_string(buf,ICE_UFRAG_LEN)) {
       ABORT(r);
-    if(!(*ufrag=r_strdup(buf)))
+}
+    if(!(*ufrag=r_strdup(buf))) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -1074,10 +1134,12 @@ int nr_ice_get_new_ice_pwd(char** pwd)
     int r,_status;
     char buf[ICE_PWD_LEN+1];
 
-    if(r=nr_ice_random_string(buf,ICE_PWD_LEN))
+    if(r=nr_ice_random_string(buf,ICE_PWD_LEN)) {
       ABORT(r);
-    if(!(*pwd=r_strdup(buf)))
+}
+    if(!(*pwd=r_strdup(buf))) {
       ABORT(r);
+}
 
     _status=0;
   abort:

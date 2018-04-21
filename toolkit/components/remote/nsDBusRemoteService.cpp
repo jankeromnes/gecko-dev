@@ -59,8 +59,9 @@ nsDBusRemoteService::Introspect(DBusMessage *msg)
   DBusMessage *reply;
 
   reply = dbus_message_new_method_return(msg);
-  if (!reply)
+  if (!reply) {
    return DBUS_HANDLER_RESULT_NEED_MEMORY;
+}
 
   nsAutoCString introspect_xml;
   introspect_xml = nsPrintfCString(introspect_template, mAppName.get());
@@ -163,8 +164,9 @@ nsDBusRemoteService::Startup(const char* aAppName, const char* aProfileName)
 
   // Don't even try to start without any application/profile name
   if (!aAppName || aAppName[0] == '\0' ||
-      !aProfileName || aProfileName[0] == '\0')
+      !aProfileName || aProfileName[0] == '\0') {
     return NS_ERROR_INVALID_ARG;
+}
 
   mConnection = already_AddRefed<DBusConnection>(
     dbus_bus_get(DBUS_BUS_SESSION, nullptr));
@@ -186,8 +188,9 @@ nsDBusRemoteService::Startup(const char* aAppName, const char* aProfileName)
   nsAutoCString busName;
   busName = nsPrintfCString("org.mozilla.%s.%s", mAppName.get(),
                                                  profileName.get());
-  if (busName.Length() > DBUS_MAXIMUM_NAME_LENGTH)
+  if (busName.Length() > DBUS_MAXIMUM_NAME_LENGTH) {
     busName.Truncate(DBUS_MAXIMUM_NAME_LENGTH);
+}
 
   DBusError err;
   dbus_error_init(&err);

@@ -295,8 +295,9 @@ sec_pkcs12_generate_key_from_password(SECOidTag algorithm,
 
     switch (algorithm) {
         case SEC_OID_SHA1:
-            if (key_len == 0)
+            if (key_len == 0) {
                 key_len = 16;
+}
             key = (SECItem *)PORT_ZAlloc(sizeof(SECItem));
             if (key == NULL) {
                 PORT_SetError(SEC_ERROR_NO_MEMORY);
@@ -342,64 +343,77 @@ sec_pkcs12_generate_old_mac(SECItem *key,
     int i;
     SECItem *mac = NULL;
 
-    if ((key == NULL) || (msg == NULL))
+    if ((key == NULL) || (msg == NULL)) {
         goto loser;
+}
 
     /* allocate return item */
     mac = (SECItem *)PORT_ZAlloc(sizeof(SECItem));
-    if (mac == NULL)
+    if (mac == NULL) {
         return NULL;
+}
     mac->data = (unsigned char *)PORT_ZAlloc(sizeof(unsigned char) * SHA1_LENGTH);
     mac->len = SHA1_LENGTH;
-    if (mac->data == NULL)
+    if (mac->data == NULL) {
         goto loser;
+}
 
     /* allocate temporary items */
     temparena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (temparena == NULL)
+    if (temparena == NULL) {
         goto loser;
+}
 
     hash_src1 = (unsigned char *)PORT_ArenaZAlloc(temparena,
                                                   sizeof(unsigned char) * (16 + msg->len));
-    if (hash_src1 == NULL)
+    if (hash_src1 == NULL) {
         goto loser;
+}
 
     hash_src2 = (unsigned char *)PORT_ArenaZAlloc(temparena,
                                                   sizeof(unsigned char) * (SHA1_LENGTH + 16));
-    if (hash_src2 == NULL)
+    if (hash_src2 == NULL) {
         goto loser;
+}
 
     hash_dest = (unsigned char *)PORT_ArenaZAlloc(temparena,
                                                   sizeof(unsigned char) * SHA1_LENGTH);
-    if (hash_dest == NULL)
+    if (hash_dest == NULL) {
         goto loser;
+}
 
     /* perform mac'ing as per PKCS 12 */
 
     /* first round of hashing */
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++) {
         hash_src1[i] = key->data[i] ^ 0x36;
+}
     PORT_Memcpy(&(hash_src1[16]), msg->data, msg->len);
     res = PK11_HashBuf(SEC_OID_SHA1, hash_dest, hash_src1, (16 + msg->len));
-    if (res == SECFailure)
+    if (res == SECFailure) {
         goto loser;
+}
 
     /* second round of hashing */
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++) {
         hash_src2[i] = key->data[i] ^ 0x5c;
+}
     PORT_Memcpy(&(hash_src2[16]), hash_dest, SHA1_LENGTH);
     res = PK11_HashBuf(SEC_OID_SHA1, mac->data, hash_src2, SHA1_LENGTH + 16);
-    if (res == SECFailure)
+    if (res == SECFailure) {
         goto loser;
+}
 
     PORT_FreeArena(temparena, PR_TRUE);
     return mac;
 
 loser:
-    if (temparena != NULL)
+    if (temparena != NULL) {
         PORT_FreeArena(temparena, PR_TRUE);
-    if (mac != NULL)
+}
+    if (mac != NULL) {
         SECITEM_ZfreeItem(mac, PR_TRUE);
+}
     return NULL;
 }
 
@@ -482,8 +496,9 @@ sec_pkcs12_compute_thumbprint(SECItem *der_cert)
     PLArenaPool *temparena = NULL;
     SECStatus rv = SECFailure;
 
-    if (der_cert == NULL)
+    if (der_cert == NULL) {
         return NULL;
+}
 
     temparena = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
     if (temparena == NULL) {
@@ -580,8 +595,9 @@ sec_pkcs12_append_shrouded_key(SEC_PKCS12BaggageItem *bag,
     int size;
     void *mark = NULL, *dummy = NULL;
 
-    if ((bag == NULL) || (espvk == NULL))
+    if ((bag == NULL) || (espvk == NULL)) {
         return SECFailure;
+}
 
     mark = PORT_ArenaMark(bag->poolp);
 
@@ -987,10 +1003,11 @@ sec_pkcs12_decode_password(PLArenaPool *arena,
                            SECOidTag algorithm,
                            const SECItem *pwitem)
 {
-    if (!sec_pkcs12_is_pkcs12_pbe_algorithm(algorithm))
+    if (!sec_pkcs12_is_pkcs12_pbe_algorithm(algorithm)) {
         return sec_pkcs12_convert_item_to_unicode(arena, result,
                                                   (SECItem *)pwitem,
                                                   PR_TRUE, PR_FALSE, PR_FALSE);
+}
 
     return SECITEM_CopyItem(arena, result, pwitem) == SECSuccess;
 }
@@ -1007,10 +1024,11 @@ sec_pkcs12_encode_password(PLArenaPool *arena,
                            SECOidTag algorithm,
                            const SECItem *pwitem)
 {
-    if (sec_pkcs12_is_pkcs12_pbe_algorithm(algorithm))
+    if (sec_pkcs12_is_pkcs12_pbe_algorithm(algorithm)) {
         return sec_pkcs12_convert_item_to_unicode(arena, result,
                                                   (SECItem *)pwitem,
                                                   PR_TRUE, PR_TRUE, PR_TRUE);
+}
 
     return SECITEM_CopyItem(arena, result, pwitem) == SECSuccess;
 }

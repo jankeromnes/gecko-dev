@@ -189,8 +189,9 @@ Hacl_Bignum_Fmul_fmul(uint64_t *output, uint64_t *input, uint64_t *input21)
     memcpy(tmp, input, (uint32_t)5U * sizeof input[0U]);
     KRML_CHECK_SIZE(FStar_UInt128_uint64_to_uint128((uint64_t)0U), (uint32_t)5U);
     FStar_UInt128_t t[5U];
-    for (uint32_t _i = 0U; _i < (uint32_t)5U; ++_i)
+    for (uint32_t _i = 0U; _i < (uint32_t)5U; ++_i) {
         t[_i] = FStar_UInt128_uint64_to_uint128((uint64_t)0U);
+}
     Hacl_Bignum_Fmul_mul_shift_reduce_(t, tmp, input21);
     Hacl_Bignum_Fproduct_carry_wide_(t);
     FStar_UInt128_t b4 = t[4U];
@@ -287,8 +288,9 @@ static void
 Hacl_Bignum_Fsquare_fsquare_times_(uint64_t *input, FStar_UInt128_t *tmp, uint32_t count1)
 {
     Hacl_Bignum_Fsquare_fsquare_(tmp, input);
-    for (uint32_t i = (uint32_t)1U; i < count1; i = i + (uint32_t)1U)
+    for (uint32_t i = (uint32_t)1U; i < count1; i = i + (uint32_t)1U) {
         Hacl_Bignum_Fsquare_fsquare_(tmp, input);
+}
 }
 
 inline static void
@@ -296,8 +298,9 @@ Hacl_Bignum_Fsquare_fsquare_times(uint64_t *output, uint64_t *input, uint32_t co
 {
     KRML_CHECK_SIZE(FStar_UInt128_uint64_to_uint128((uint64_t)0U), (uint32_t)5U);
     FStar_UInt128_t t[5U];
-    for (uint32_t _i = 0U; _i < (uint32_t)5U; ++_i)
+    for (uint32_t _i = 0U; _i < (uint32_t)5U; ++_i) {
         t[_i] = FStar_UInt128_uint64_to_uint128((uint64_t)0U);
+}
     memcpy(output, input, (uint32_t)5U * sizeof input[0U]);
     Hacl_Bignum_Fsquare_fsquare_times_(output, t, count1);
 }
@@ -307,8 +310,9 @@ Hacl_Bignum_Fsquare_fsquare_times_inplace(uint64_t *output, uint32_t count1)
 {
     KRML_CHECK_SIZE(FStar_UInt128_uint64_to_uint128((uint64_t)0U), (uint32_t)5U);
     FStar_UInt128_t t[5U];
-    for (uint32_t _i = 0U; _i < (uint32_t)5U; ++_i)
+    for (uint32_t _i = 0U; _i < (uint32_t)5U; ++_i) {
         t[_i] = FStar_UInt128_uint64_to_uint128((uint64_t)0U);
+}
     Hacl_Bignum_Fsquare_fsquare_times_(output, t, count1);
 }
 
@@ -427,8 +431,9 @@ Hacl_Bignum_fscalar(uint64_t *output, uint64_t *b, uint64_t s)
 {
     KRML_CHECK_SIZE(FStar_UInt128_uint64_to_uint128((uint64_t)0U), (uint32_t)5U);
     FStar_UInt128_t tmp[5U];
-    for (uint32_t _i = 0U; _i < (uint32_t)5U; ++_i)
+    for (uint32_t _i = 0U; _i < (uint32_t)5U; ++_i) {
         tmp[_i] = FStar_UInt128_uint64_to_uint128((uint64_t)0U);
+}
     {
         uint64_t xi = b[0U];
         tmp[0U] = FStar_UInt128_mul_wide(xi, s);

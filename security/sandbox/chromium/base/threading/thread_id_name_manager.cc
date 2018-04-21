@@ -87,13 +87,15 @@ void ThreadIdNameManager::SetName(PlatformThreadId id,
 const char* ThreadIdNameManager::GetName(PlatformThreadId id) {
   AutoLock locked(lock_);
 
-  if (id == main_process_id_)
+  if (id == main_process_id_) {
     return main_process_name_->c_str();
+}
 
   ThreadIdToHandleMap::iterator id_to_handle_iter =
       thread_id_to_handle_.find(id);
-  if (id_to_handle_iter == thread_id_to_handle_.end())
+  if (id_to_handle_iter == thread_id_to_handle_.end()) {
     return name_to_interned_name_[kDefaultName]->c_str();
+}
 
   ThreadHandleToInternedNameMap::iterator handle_to_name_iter =
       thread_handle_to_interned_name_.find(id_to_handle_iter->second);
@@ -114,8 +116,9 @@ void ThreadIdNameManager::RemoveName(PlatformThreadHandle::Handle handle,
   DCHECK((id_to_handle_iter!= thread_id_to_handle_.end()));
   // The given |id| may have been re-used by the system. Make sure the
   // mapping points to the provided |handle| before removal.
-  if (id_to_handle_iter->second != handle)
+  if (id_to_handle_iter->second != handle) {
     return;
+}
 
   thread_id_to_handle_.erase(id_to_handle_iter);
 }

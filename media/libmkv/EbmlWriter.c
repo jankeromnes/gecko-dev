@@ -27,8 +27,9 @@ void Ebml_WriteLen(EbmlGlobal *glob, int64_t val) {
   int64_t minVal = 0xff;
 
   for (size = 1; size < 8; size ++) {
-    if (val < minVal)
+    if (val < minVal) {
       break;
+}
 
     minVal = (minVal << 7);
   }
@@ -63,14 +64,15 @@ void Ebml_WriteUTF8(EbmlGlobal *glob, const wchar_t *wstr) {
 void Ebml_WriteID(EbmlGlobal *glob, unsigned long class_id) {
   int len;
 
-  if (class_id >= 0x01000000)
+  if (class_id >= 0x01000000) {
     len = 4;
-  else if (class_id >= 0x00010000)
+  } else if (class_id >= 0x00010000) {
     len = 3;
-  else if (class_id >= 0x00000100)
+  } else if (class_id >= 0x00000100) {
     len = 2;
-  else
+  } else {
     len = 1;
+}
 
   Ebml_Serialize(glob, (void *)&class_id, sizeof(class_id), len);
 }
@@ -113,8 +115,9 @@ void Ebml_SerializeUnsigned(EbmlGlobal *glob, unsigned long class_id, unsigned l
 void Ebml_SerializeBinary(EbmlGlobal *glob, unsigned long class_id, unsigned long bin) {
   int size;
   for (size = 4; size > 1; size--) {
-    if (bin & (unsigned int)0x000000ff << ((size - 1) * 8))
+    if (bin & (unsigned int)0x000000ff << ((size - 1) * 8)) {
       break;
+}
   }
   Ebml_WriteID(glob, class_id);
   Ebml_WriteLen(glob, size);

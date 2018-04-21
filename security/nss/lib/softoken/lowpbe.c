@@ -197,8 +197,9 @@ nsspkcs5_PFXPBE(const SECHashObject *hashObj, NSSPKCS5PBEParameter *pbe_param,
 
     /* allocate return buffer */
     ret_bits = (SECItem *)PORT_ZAlloc(sizeof(SECItem));
-    if (ret_bits == NULL)
+    if (ret_bits == NULL) {
         return NULL;
+}
     ret_bits->data = (unsigned char *)PORT_ZAlloc((hash_iter * hash_size) + 1);
     ret_bits->len = (hash_iter * hash_size);
     if (ret_bits->data == NULL) {
@@ -238,22 +239,25 @@ nsspkcs5_PFXPBE(const SECHashObject *hashObj, NSSPKCS5PBEParameter *pbe_param,
         HMAC_Update(cx, pbe_param->salt.data, pbe_param->salt.len);
         rv = HMAC_Finish(cx, ret_bits->data + (i * hash_size),
                          &dig_len, hash_size);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
         PORT_Assert((unsigned int)hash_size == dig_len);
 
         /* generate new state */
         HMAC_Begin(cx);
         HMAC_Update(cx, state, state_len);
         rv = HMAC_Finish(cx, state, &state_len, state_len);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
         PORT_Assert(state_len == dig_len);
     }
 
 loser:
-    if (state != NULL)
+    if (state != NULL) {
         PORT_ZFree(state, state_len);
+}
     HMAC_Destroy(cx, PR_TRUE);
 
     if (rv != SECSuccess) {
@@ -292,8 +296,9 @@ nsspkcs5_PBKDF1Extended(const SECHashObject *hashObj,
     }
 
     newHash = nsspkcs5_PFXPBE(hashObj, pbe_param, hash, bytes_needed);
-    if (hash != newHash)
+    if (hash != newHash) {
         SECITEM_FreeItem(hash, PR_TRUE);
+}
     return newHash;
 }
 
@@ -739,8 +744,9 @@ nsspkcs5_NewParam(SECOidTag alg, HASH_HashType hashType, SECItem *salt,
     SECStatus rv = SECFailure;
 
     arena = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
 
     /* allocate memory for the parameter */
     pbe_param = (NSSPKCS5PBEParameter *)PORT_ArenaZAlloc(arena,
@@ -904,8 +910,9 @@ sec_pkcs5_des(SECItem *key, SECItem *iv, SECItem *src, PRBool triple_des,
     SECStatus rv = SECFailure;
     int pad;
 
-    if ((src == NULL) || (key == NULL) || (iv == NULL))
+    if ((src == NULL) || (key == NULL) || (iv == NULL)) {
         return NULL;
+}
 
     dup_src = SECITEM_DupItem(src);
     if (dup_src == NULL) {
@@ -984,8 +991,9 @@ sec_pkcs5_aes(SECItem *key, SECItem *iv, SECItem *src, PRBool triple_des,
     SECStatus rv = SECFailure;
     int pad;
 
-    if ((src == NULL) || (key == NULL) || (iv == NULL))
+    if ((src == NULL) || (key == NULL) || (iv == NULL)) {
         return NULL;
+}
 
     dup_src = SECITEM_DupItem(src);
     if (dup_src == NULL) {
@@ -1243,8 +1251,9 @@ nsspkcs5_CipherData(NSSPKCS5PBEParameter *pbe_param, SECItem *pwitem,
     if ((dest == NULL) && (encrypt == PR_FALSE) &&
         (pbe_param->encAlg == SEC_OID_DES_EDE3_CBC)) {
         dest = (*cryptof)(key, &iv, src, PR_FALSE, encrypt);
-        if (update && (dest != NULL))
+        if (update && (dest != NULL)) {
             *update = PR_TRUE;
+}
     }
 
 loser:

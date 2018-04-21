@@ -60,27 +60,31 @@ InitProgressUI(int *pargc, char ***pargv)
 int
 ShowProgressUI()
 {
-  if (!sEnableUI)
+  if (!sEnableUI) {
     return -1;
+}
 
   // Only show the Progress UI if the process is taking a significant amount of
   // time where a significant amount of time is defined as .5 seconds after
   // ShowProgressUI is called sProgress is less than 70.
   usleep(500000);
 
-  if (sQuit || sProgressVal > 70.0f)
+  if (sQuit || sProgressVal > 70.0f) {
     return 0;
+}
 
   char ini_path[PATH_MAX];
   SprintfLiteral(ini_path, "%s.ini", sProgramPath);
 
   StringTable strings;
-  if (ReadStrings(ini_path, &strings) != OK)
+  if (ReadStrings(ini_path, &strings) != OK) {
     return -1;
+}
 
   sWin = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  if (!sWin)
+  if (!sWin) {
     return -1;
+}
 
   static GdkPixbuf *pixbuf;
   char icon_path[PATH_MAX];

@@ -561,8 +561,9 @@ loser:
         /* The transaction must have failed. Abort. */
         (*keyTarget->sdb_Abort)(keyTarget);
         PORT_Assert(crv != CKR_OK);
-        if (crv == CKR_OK)
+        if (crv == CKR_OK) {
             crv = CKR_GENERAL_ERROR;
+}
     }
     return crv;
 }
@@ -1031,8 +1032,9 @@ sftkdb_resolveConflicts(PLArenaPool *arena, CK_OBJECT_CLASS objectType,
     /* does nickname end with " #n*" ? */
     for (end = attr->ulValueLen - 1;
          end >= 2 && (digit = nickname[end]) <= '9' && digit >= '0';
-         end--) /* just scan */
+         end--) { /* just scan */
         ;
+}
     if (attr->ulValueLen >= 3 &&
         end < (attr->ulValueLen - 1) /* at least one digit */ &&
         nickname[end] == '#' &&
@@ -1192,8 +1194,9 @@ loser:
          * happen unless something is horribly wrong with our compilier or
          * hardware */
         PORT_Assert(crv != CKR_OK);
-        if (crv == CKR_OK)
+        if (crv == CKR_OK) {
             crv = CKR_GENERAL_ERROR;
+}
     }
 
     if (arena) {
@@ -1326,8 +1329,9 @@ sftkdb_GetAttributeValue(SFTKDBHandle *handle, CK_OBJECT_HANDLE objectID,
                                        ntemplate, count);
     crv2 = sftkdb_fixupTemplateOut(template, objectID, ntemplate,
                                    count, handle);
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = crv2;
+}
     if (data) {
         PORT_Free(ntemplate);
         PORT_Free(data);
@@ -2287,8 +2291,9 @@ sftkdb_Update(SFTKDBHandle *handle, SECItem *key)
         }
     }
     crv2 = sftkdb_FindObjectsFinal(handle, find);
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = crv2;
+}
 
 loser:
     /* no longer need the old key value */
@@ -2382,8 +2387,9 @@ sftk_freeDB(SFTKDBHandle *handle)
 {
     PRInt32 ref;
 
-    if (!handle)
+    if (!handle) {
         return;
+}
     ref = PR_ATOMIC_DECREMENT(&handle->ref);
     if (ref == 0) {
         sftkdb_CloseDB(handle);

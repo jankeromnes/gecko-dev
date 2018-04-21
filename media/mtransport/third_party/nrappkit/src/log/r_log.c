@@ -196,15 +196,18 @@ int r_log_register(char *facility_name,int *log_facility)
       if(NR_reg_initted()){
 
         if(snprintf(dest_prefix,sizeof(NR_registry),
-          "logging.%s.facility",log_destinations[j].dest_name)>=sizeof(NR_registry))
+          "logging.%s.facility",log_destinations[j].dest_name)>=sizeof(NR_registry)) {
           ABORT(R_INTERNAL);
+}
 
-        if (r=NR_reg_make_registry(dest_prefix,facility_name,dest_facility_prefix))
+        if (r=NR_reg_make_registry(dest_prefix,facility_name,dest_facility_prefix)) {
           ABORT(r);
+}
 
         if(snprintf(log_types[i].dest_facility_key[j],sizeof(NR_registry),
-          "%s.level",dest_facility_prefix)>=sizeof(NR_registry))
+          "%s.level",dest_facility_prefix)>=sizeof(NR_registry)) {
           ABORT(R_INTERNAL);
+}
 
         if(!r_log_get_reg_level(log_types[i].dest_facility_key[j],&level)){
           log_types[i].level[j]=level;
@@ -213,20 +216,23 @@ int r_log_register(char *facility_name,int *log_facility)
         /* Set a callback for the facility's level */
         if(r=NR_reg_register_callback(log_types[i].dest_facility_key[j],
           NR_REG_CB_ACTION_ADD|NR_REG_CB_ACTION_CHANGE,
-          r_log_facility_change_cb,(void *)&(log_types[i].level[j])))
+          r_log_facility_change_cb,(void *)&(log_types[i].level[j]))) {
           ABORT(r);
+}
         if(r=NR_reg_register_callback(log_types[i].dest_facility_key[j],
           NR_REG_CB_ACTION_DELETE,
-          r_log_facility_delete_cb,(void *)&(log_types[i].level[j])))
+          r_log_facility_delete_cb,(void *)&(log_types[i].level[j]))) {
           ABORT(r);
+}
 
       }
     }
 
     _status=0;
   abort:
-    if(_status)
+    if(_status) {
       RFREE(buf);
+}
     return(_status);
   }
 
@@ -245,8 +251,9 @@ static int r_log_get_reg_level(NR_registry name, int *out)
     int r,_status;
     int i;
 
-    if(r=NR_reg_get_string(name,level,sizeof(level)))
+    if(r=NR_reg_get_string(name,level,sizeof(level))) {
       ABORT(r);
+}
 
     if(!strcasecmp(level,"none")){
       *out=LOG_LEVEL_NONE;
@@ -276,8 +283,9 @@ static void r_log_facility_change_cb(void *cb_arg, char action, NR_registry name
     int level;
     int r,_status;
 
-    if(r=r_log_get_reg_level(name,&level))
+    if(r=r_log_get_reg_level(name,&level)) {
       ABORT(r);
+}
 
     *lt_level=level;
 
@@ -311,20 +319,24 @@ int r_dump(int facility,int level,char *name,char *data,int len)
     char *hex = 0;
     int unused;
 
-    if(!r_logging(facility,level))
+    if(!r_logging(facility,level)) {
       return(0);
+}
 
     hex=RMALLOC((len*2)+1);
-    if (!hex)
+    if (!hex) {
       return(R_FAILED);
+}
 
-    if (nr_nbin2hex((UCHAR*)data, len, hex, len*2+1, &unused))
+    if (nr_nbin2hex((UCHAR*)data, len, hex, len*2+1, &unused)) {
       strcpy(hex, "?");
+}
 
-    if(name)
+    if(name) {
       r_log(facility,level,"%s[%d]=%s",name,len,hex);
-    else
+    } else {
       r_log(facility,level,"%s",hex);
+}
 
     RFREE(hex);
     return(0);
@@ -348,11 +360,13 @@ int r_vlog(int facility,int level,const char *format,va_list ap)
     int i;
 
     if(r_log_env_verbose){
-      if((level>=LOG_EMERG) && (level<=LOG_DEBUG))
+      if((level>=LOG_EMERG) && (level<=LOG_DEBUG)) {
         level_str=log_level_strings[level];
+}
 
-      if(facility >= 0 && facility < log_type_ct)
+      if(facility >= 0 && facility < log_type_ct) {
         facility_str=log_types[facility].facility_name;
+}
 
       snprintf(log_fmt_buf, MAX_ERROR_STRING_SIZE, "(%s/%s) %s",
         facility_str,level_str,format);
@@ -423,8 +437,9 @@ int r_vlog_e(int facility,int level,const char *format,va_list ap)
     if(r_logging(facility,level)) {
       int formatlen = strlen(format);
 
-      if(formatlen+2 > MAX_ERROR_STRING_SIZE)
+      if(formatlen+2 > MAX_ERROR_STRING_SIZE) {
         return(1);
+}
 
       strncpy(log_fmt_buf, format, formatlen);
       strcpy(&log_fmt_buf[formatlen], ": ");
@@ -458,8 +473,9 @@ int r_vlog_nr(int facility,int level,int r,const char *format,va_list ap)
     if(r_logging(facility,level)) {
       int formatlen = strlen(format);
 
-      if(formatlen+2 > MAX_ERROR_STRING_SIZE)
+      if(formatlen+2 > MAX_ERROR_STRING_SIZE) {
         return(1);
+}
       strncpy(log_fmt_buf, format, formatlen);
       strcpy(&log_fmt_buf[formatlen], ": ");
       snprintf(&log_fmt_buf[formatlen+2], MAX_ERROR_STRING_SIZE - formatlen - 2, "%s",
@@ -478,31 +494,37 @@ static int r_logging_dest(int dest_index, int facility, int level)
 
     _r_log_init(0);
 
-    if(!log_destinations[dest_index].enabled)
+    if(!log_destinations[dest_index].enabled) {
       return(0);
+}
 
-    if(level <= r_log_level_environment)
+    if(level <= r_log_level_environment) {
       return(1);
+}
 
-    if(r_log_initted<R_LOG_INITTED2)
+    if(r_log_initted<R_LOG_INITTED2) {
       return(level<=r_log_level);
+}
 
-    if(facility < 0 || facility > log_type_ct)
+    if(facility < 0 || facility > log_type_ct) {
       thresh=r_log_level;
-    else{
-      if(log_types[facility].level[dest_index]==LOG_LEVEL_NONE)
+    } else{
+      if(log_types[facility].level[dest_index]==LOG_LEVEL_NONE) {
         return(0);
+}
 
-      if(log_types[facility].level[dest_index]>=0)
+      if(log_types[facility].level[dest_index]>=0) {
         thresh=log_types[facility].level[dest_index];
-      else if(log_destinations[dest_index].default_level!=LOG_LEVEL_UNDEFINED)
+      } else if(log_destinations[dest_index].default_level!=LOG_LEVEL_UNDEFINED) {
         thresh=log_destinations[dest_index].default_level;
-      else
+      } else {
         thresh=r_log_level;
+}
     }
 
-    if(level<=thresh)
+    if(level<=thresh) {
       return(1);
+}
 
     return(0);
   }
@@ -516,8 +538,9 @@ int r_logging(int facility, int level)
     /* return 1 if logging is on for any dest */
 
     for(i=0; i<LOG_NUM_DESTINATIONS; i++){
-      if(r_logging_dest(i,facility,level))
+      if(r_logging_dest(i,facility,level)) {
         return(1);
+}
     }
 
     return(0);
@@ -553,8 +576,9 @@ static int r_log_get_destinations(int usereg)
 
     log=getenv("R_LOG_DESTINATION");
     if(log){
-      for(i=0; i<LOG_NUM_DESTINATIONS; i++)
+      for(i=0; i<LOG_NUM_DESTINATIONS; i++) {
         log_destinations[i].enabled=!strcmp(log,log_destinations[i].dest_name);
+}
     }
     else if(usereg){
       NR_registry reg_key;
@@ -566,39 +590,45 @@ static int r_log_get_destinations(int usereg)
       for(i=0; i<LOG_NUM_DESTINATIONS; i++){
         /* set callback for default level */
         if(snprintf(reg_key,sizeof(reg_key),"%s.%s.level",LOGGING_REG_PREFIX,
-          log_destinations[i].dest_name)>=sizeof(reg_key))
+          log_destinations[i].dest_name)>=sizeof(reg_key)) {
           ABORT(R_INTERNAL);
+}
 
         NR_reg_register_callback(reg_key,
           NR_REG_CB_ACTION_ADD|NR_REG_CB_ACTION_CHANGE|NR_REG_CB_ACTION_DELETE,
           r_log_default_level_change_cb,0);
 
         if(r=r_log_get_reg_level(reg_key,&value)){
-          if(r==R_NOT_FOUND)
+          if(r==R_NOT_FOUND) {
             log_destinations[i].default_level=LOG_LEVEL_UNDEFINED;
-          else
+          } else {
             ABORT(R_INTERNAL);
+}
         }
-        else
+        else {
           log_destinations[i].default_level=value;
+}
 
         /* set callback for the enabled key for this logging dest */
         if(snprintf(reg_key,sizeof(reg_key),"%s.%s.enabled",LOGGING_REG_PREFIX,
-          log_destinations[i].dest_name)>=sizeof(reg_key))
+          log_destinations[i].dest_name)>=sizeof(reg_key)) {
           ABORT(R_INTERNAL);
+}
 
         NR_reg_register_callback(reg_key,
           NR_REG_CB_ACTION_ADD|NR_REG_CB_ACTION_CHANGE|NR_REG_CB_ACTION_DELETE,
           r_log_destination_change_cb,0);
 
         if(r=NR_reg_get_char(reg_key,&c)){
-          if(r==R_NOT_FOUND)
+          if(r==R_NOT_FOUND) {
             log_destinations[i].enabled=0;
-          else
+          } else {
             ABORT(r);
+}
         }
-        else
+        else {
           log_destinations[i].enabled=c;
+}
       }
     }
 
@@ -657,8 +687,9 @@ int _r_log_init(int use_reg)
     r_log_env_verbose=1;
 #else
     log=getenv("R_LOG_VERBOSE");
-    if(log)
+    if(log) {
       r_log_env_verbose=atoi(log);
+}
 #endif
 
     return(0);
@@ -676,8 +707,9 @@ int r_log_set_extra_destination(int default_level, r_dest_vlog *dest_vlog)
       }
     }
 
-    if(!dest)
+    if(!dest) {
       return(R_INTERNAL);
+}
 
     if (dest_vlog==0){
       dest->enabled=0;

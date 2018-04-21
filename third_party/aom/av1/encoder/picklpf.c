@@ -354,11 +354,13 @@ static int search_filter_level(const YV12_BUFFER_CONFIG *sd, AV1_COMP *cpi,
     // Bias against raising loop filter in favor of lowering it.
     int64_t bias = (best_err >> (15 - (filt_mid / 8))) * filter_step;
 
-    if ((cpi->oxcf.pass == 2) && (cpi->twopass.section_intra_rating < 20))
+    if ((cpi->oxcf.pass == 2) && (cpi->twopass.section_intra_rating < 20)) {
       bias = (bias * cpi->twopass.section_intra_rating) / 20;
+}
 
     // yx, bias less for large block size
-    if (cm->tx_mode != ONLY_4X4) bias >>= 1;
+    if (cm->tx_mode != ONLY_4X4) { bias >>= 1;
+}
 
     if (filt_direction <= 0 && filt_low != filt_mid) {
       // Get Low filter error score
@@ -412,7 +414,8 @@ static int search_filter_level(const YV12_BUFFER_CONFIG *sd, AV1_COMP *cpi,
   // Update best error
   best_err = ss_err[filt_best];
 
-  if (best_cost_ret) *best_cost_ret = RDCOST_DBL(x->rdmult, 0, best_err);
+  if (best_cost_ret) { *best_cost_ret = RDCOST_DBL(x->rdmult, 0, best_err);
+}
   return filt_best;
 }
 #endif  // CONFIG_LPF_SB
@@ -458,7 +461,8 @@ void av1_pick_filter_level(const YV12_BUFFER_CONFIG *sd, AV1_COMP *cpi,
 #else
     int filt_guess = ROUND_POWER_OF_TWO(q * 20723 + 1015158, 18);
 #endif  // CONFIG_HIGHBITDEPTH
-    if (cm->frame_type == KEY_FRAME) filt_guess -= 4;
+    if (cm->frame_type == KEY_FRAME) { filt_guess -= 4;
+}
 #if CONFIG_LOOPFILTER_LEVEL
     lf->filter_level[0] = clamp(filt_guess, min_filter_level, max_filter_level);
     lf->filter_level[1] = clamp(filt_guess, min_filter_level, max_filter_level);

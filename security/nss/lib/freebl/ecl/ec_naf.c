@@ -42,8 +42,9 @@ ec_compute_wNAF(signed char *out, int bitsize, const mp_int *in, int w)
     while (mp_cmp_z(&k) > 0) {
         if (mp_isodd(&k)) {
             out[i] = MP_DIGIT(&k, 0) & mask;
-            if (out[i] >= twowm1)
+            if (out[i] >= twowm1) {
                 out[i] -= 2 * twowm1;
+}
 
             /* Subtract off out[i].  Note mp_sub_d only works with
              * unsigned digits */

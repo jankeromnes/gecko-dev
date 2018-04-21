@@ -636,8 +636,9 @@ sctp_ss_fb_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (!TAILQ_EMPTY(&strq->outqueue) &&
 	    (strq->ss_params.fb.next_spoke.tqe_next == NULL) &&
 	    (strq->ss_params.fb.next_spoke.tqe_prev == NULL)) {
-		if (strq->ss_params.fb.rounds < 0)
+		if (strq->ss_params.fb.rounds < 0) {
 			strq->ss_params.fb.rounds = TAILQ_FIRST(&strq->outqueue)->length;
+}
 		TAILQ_INSERT_TAIL(&asoc->ss_data.out.wheel, strq, ss_params.fb.next_spoke);
 	}
 	if (holds_lock == 0) {
@@ -734,8 +735,9 @@ sctp_ss_fb_scheduled(struct sctp_tcb *stcb, struct sctp_nets *net SCTP_UNUSED,
 	subtract = strq->ss_params.fb.rounds;
 	TAILQ_FOREACH(strqt, &asoc->ss_data.out.wheel, ss_params.fb.next_spoke) {
 		strqt->ss_params.fb.rounds -= subtract;
-		if (strqt->ss_params.fb.rounds < 0)
+		if (strqt->ss_params.fb.rounds < 0) {
 			strqt->ss_params.fb.rounds = 0;
+}
 	}
 	if (TAILQ_FIRST(&strq->outqueue)) {
 		strq->ss_params.fb.rounds = TAILQ_FIRST(&strq->outqueue)->length;

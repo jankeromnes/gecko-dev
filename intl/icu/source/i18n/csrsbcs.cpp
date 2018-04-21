@@ -178,8 +178,9 @@ int32_t NGramParser_IBM420::isLamAlef(int32_t b)
          	return 0x49;
         }else if(b == 0xB8 || b == 0xB9){
          	return 0x56;
-        }else
+        }else {
          	return 0x00;
+}
 }
 
 /*
@@ -198,10 +199,11 @@ int32_t NGramParser_IBM420::nextByte(InputText *det)
     int next;
              
     alef = isLamAlef(det->fInputBytes[byteIndex]);
-    if(alef != 0x00)
+    if(alef != 0x00) {
         next = 0xB1 & 0xFF;
-    else
+    } else {
         next = unshapeMap_IBM420[det->fInputBytes[byteIndex]& 0xFF] & 0xFF;
+}
             
     byteIndex++;
              

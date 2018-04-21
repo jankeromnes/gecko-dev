@@ -48,8 +48,9 @@ nsRemoteService::Startup(const char* aAppName, const char* aProfileName)
         mGtkRemoteService->Startup(aAppName, aProfileName);
     }
 
-    if (!mDBusRemoteService && !mGtkRemoteService)
+    if (!mDBusRemoteService && !mGtkRemoteService) {
         return NS_ERROR_FAILURE;
+}
 
     nsCOMPtr<nsIObserverService> obs(do_GetService("@mozilla.org/observer-service;1"));
     if (obs) {
@@ -111,8 +112,9 @@ void
 nsRemoteService::SetDesktopStartupIDOrTimestamp(const nsACString& aDesktopStartupID,
                                                 uint32_t aTimestamp) {
   nsGTKToolkit* toolkit = nsGTKToolkit::GetToolkit();
-  if (!toolkit)
+  if (!toolkit) {
     return;
+}
 
   if (!aDesktopStartupID.IsEmpty()) {
     toolkit->SetDesktopStartupID(aDesktopStartupID);
@@ -135,8 +137,9 @@ FindExtensionParameterInCommand(const char* aParameterName,
   nsACString::const_iterator start, end;
   aCommand.BeginReading(start);
   aCommand.EndReading(end);
-  if (!FindInReadable(searchFor, start, end))
+  if (!FindInReadable(searchFor, start, end)) {
     return false;
+}
 
   nsACString::const_iterator charStart, charEnd;
   charStart = end;
@@ -159,8 +162,9 @@ nsRemoteService::HandleCommandLine(const char* aBuffer, nsIDOMWindow* aWindow,
 
   nsCOMPtr<nsICommandLineRunner> cmdline
     (do_CreateInstance("@mozilla.org/toolkit/command-line;1", &rv));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return "509 internal error";
+}
 
   // the commandline property is constructed as an array of int32_t
   // followed by a series of null-terminated strings:
@@ -174,13 +178,15 @@ nsRemoteService::HandleCommandLine(const char* aBuffer, nsIDOMWindow* aWindow,
   nsCOMPtr<nsIFile> lf;
   rv = NS_NewNativeLocalFile(nsDependentCString(wd), true,
                              getter_AddRefs(lf));
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return "509 internal error";
+}
 
   nsAutoCString desktopStartupID;
 
   const char **argv = (const char**) malloc(sizeof(char*) * argc);
-  if (!argv) return "509 internal error";
+  if (!argv) { return "509 internal error";
+}
 
   const int32_t *offset = reinterpret_cast<const int32_t*>(aBuffer) + 1;
 
@@ -202,18 +208,21 @@ nsRemoteService::HandleCommandLine(const char* aBuffer, nsIDOMWindow* aWindow,
     return "509 internal error";
   }
 
-  if (aWindow)
+  if (aWindow) {
     cmdline->SetWindowContext(aWindow);
+}
 
   SetDesktopStartupIDOrTimestamp(desktopStartupID, aTimestamp);
 
   rv = cmdline->Run();
 
-  if (NS_ERROR_ABORT == rv)
+  if (NS_ERROR_ABORT == rv) {
     return "500 command not parseable";
+}
 
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return "509 internal error";
+}
 
   return "200 executed command";
 }

@@ -179,16 +179,18 @@ class TlsParser {
 
   // Read an integral type of specified width.
   bool Read(uint32_t *val, size_t len) {
-    if (len > sizeof(uint32_t))
+    if (len > sizeof(uint32_t)) {
       return false;
+}
 
     *val = 0;
 
     for (size_t i=0; i<len; ++i) {
       unsigned char tmp;
 
-      if (!Read(&tmp))
+      if (!Read(&tmp)) {
         return false;
+}
 
       (*val) = ((*val) << 8) + tmp;
     }
@@ -224,8 +226,9 @@ class DtlsRecordParser {
       : buffer_(data, len), offset_(0) {}
 
   bool NextRecord(uint8_t* ct, nsAutoPtr<DataBuffer>* buffer) {
-    if (!remaining())
+    if (!remaining()) {
       return false;
+}
 
     CHECK_LENGTH(13U);
     const uint8_t *ctp = reinterpret_cast<const uint8_t *>(ptr());
@@ -518,8 +521,9 @@ class TransportTestPeer : public sigslot::has_slots<> {
       memcpy(fingerprint_to_set,
              peer->fingerprint_,
              peer->fingerprint_len_);
-      if (damage & mask)
+      if (damage & mask) {
         fingerprint_to_set[0]++;
+}
 
       nsresult res = dtls_->SetVerificationDigest(
           "sha-1",
@@ -649,8 +653,9 @@ class TransportTestPeer : public sigslot::has_slots<> {
     peer_ = peer;
 
     // If gathering is already complete, push the candidates over
-    if (gathering_complete_)
+    if (gathering_complete_) {
       GatheringComplete();
+}
   }
 
   // New candidate

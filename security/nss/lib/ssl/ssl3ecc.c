@@ -87,12 +87,14 @@ ssl_ECPubKey2NamedGroup(const SECKEYPublicKey *pubKey)
      * representing a named curve. Here, we strip away everything
      * before the actual OID and use the OID to look up a named curve.
      */
-    if (params->data[0] != SEC_ASN1_OBJECT_ID)
+    if (params->data[0] != SEC_ASN1_OBJECT_ID) {
         return NULL;
+}
     oid.len = params->len - 2;
     oid.data = params->data + 2;
-    if ((oidData = SECOID_FindOID(&oid)) == NULL)
+    if ((oidData = SECOID_FindOID(&oid)) == NULL) {
         return NULL;
+}
     if ((NSS_GetAlgorithmPolicy(oidData->offset, &policyFlags) ==
          SECSuccess) &&
         !(policyFlags & NSS_USE_ALG_IN_SSL_KX)) {
@@ -155,8 +157,9 @@ ssl3_ComputeECDHKeyHash(SSLHashType hashAlg,
     PRINT_BUF(95, (NULL, "ECDHkey hash: SHA1 result",
                    hashes->u.s.sha, SHA1_LENGTH));
 
-    if (hashBuf != buf)
+    if (hashBuf != buf) {
         PORT_Free(hashBuf);
+}
     return rv;
 }
 
@@ -243,10 +246,12 @@ ssl3_SendECDHClientKeyExchange(sslSocket *ss, SECKEYPublicKey *svrPubKey)
     return SECSuccess;
 
 loser:
-    if (pms)
+    if (pms) {
         PK11_FreeSymKey(pms);
-    if (keyPair)
+}
+    if (keyPair) {
         ssl_FreeEphemeralKeyPair(keyPair);
+}
     return SECFailure;
 }
 
@@ -568,8 +573,9 @@ ssl3_HandleECDHServerKeyExchange(sslSocket *ss, PRUint8 *b, PRUint32 length)
     }
 
     if (length != 0) {
-        if (isTLS)
+        if (isTLS) {
             desc = decode_error;
+}
         goto alert_loser; /* malformed. */
     }
 
@@ -751,8 +757,9 @@ ssl3_SendECDHServerKeyExchange(sslSocket *ss)
     return SECSuccess;
 
 loser:
-    if (signed_hash.data != NULL)
+    if (signed_hash.data != NULL) {
         PORT_Free(signed_hash.data);
+}
     return SECFailure;
 }
 
@@ -827,8 +834,9 @@ ssl_IsSuiteEnabled(const sslSocket *ss, const ssl3CipherSuite *list)
         SECStatus rv = ssl3_CipherPrefGet(ss, *suite, &enabled);
 
         PORT_Assert(rv == SECSuccess); /* else is coding error */
-        if (rv == SECSuccess && enabled)
+        if (rv == SECSuccess && enabled) {
             return PR_TRUE;
+}
     }
     return PR_FALSE;
 }

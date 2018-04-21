@@ -132,8 +132,9 @@ P12U_NicknameCollisionCallback(SECItem *old_nick, PRBool *cancel, void *wincx)
         return NULL;
     }
 
-    if (!old_nick)
+    if (!old_nick) {
         fprintf(stdout, "pk12util: no nickname for cert in PKCS12 file.\n");
+}
 
 #if 0
     /* XXX not handled yet  */
@@ -284,8 +285,9 @@ P12U_GetP12FilePassword(PRBool confirmPw, secuPWData *p12FilePw)
         for (;;) {
             p0 = SECU_GetPasswordString(NULL,
                                         "Enter password for PKCS12 file: ");
-            if (!confirmPw || p0 == NULL)
+            if (!confirmPw || p0 == NULL) {
                 break;
+}
             p1 = SECU_GetPasswordString(NULL, "Re-enter password: ");
             if (p1 == NULL) {
                 PORT_ZFree(p0, PL_strlen(p0));
@@ -294,8 +296,9 @@ P12U_GetP12FilePassword(PRBool confirmPw, secuPWData *p12FilePw)
             }
             rc = PL_strcmp(p0, p1);
             PORT_ZFree(p1, PL_strlen(p1));
-            if (rc == 0)
+            if (rc == 0) {
                 break;
+}
             PORT_ZFree(p0, PL_strlen(p0));
         }
     } else if (p12FilePw->source == PW_FROMFILE) {
@@ -822,8 +825,9 @@ P12U_ListPKCS12File(char *in_file, PK11SlotInfo *slot,
                 case SEC_OID_PKCS12_V1_KEY_BAG_ID:
                 case SEC_OID_PKCS12_V1_PKCS8_SHROUDED_KEY_BAG_ID:
                     printf("Key");
-                    if (dip->type == SEC_OID_PKCS12_V1_PKCS8_SHROUDED_KEY_BAG_ID)
+                    if (dip->type == SEC_OID_PKCS12_V1_PKCS8_SHROUDED_KEY_BAG_ID) {
                         printf("(shrouded)");
+}
                     printf(":\n");
                     if (dip->friendlyName != NULL) {
                         printf("    Friendly Name: %s\n\n",
@@ -1019,8 +1023,9 @@ main(int argc, char **argv)
 
     rv = SECU_ParseCommandLine(argc, argv, progName, &pk12util);
 
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         Usage();
+}
 
     pk12_debugging = pk12util.options[opt_Debug].activated;
 
@@ -1088,10 +1093,11 @@ main(int argc, char **argv)
     P12U_Init(SECU_ConfigDirectory(NULL), dbprefix,
               pk12util.options[opt_List].activated);
 
-    if (!slotname || PL_strcmp(slotname, "internal") == 0)
+    if (!slotname || PL_strcmp(slotname, "internal") == 0) {
         slot = PK11_GetInternalKeySlot();
-    else
+    } else {
         slot = PK11_FindSlotByName(slotname);
+}
 
     if (!slot) {
         SECU_PrintError(progName, "Invalid slot \"%s\"", slotname);
@@ -1149,16 +1155,21 @@ main(int argc, char **argv)
     }
 
 done:
-    if (import_file != NULL)
+    if (import_file != NULL) {
         PORT_ZFree(import_file, PL_strlen(import_file));
-    if (export_file != NULL)
+}
+    if (export_file != NULL) {
         PORT_ZFree(export_file, PL_strlen(export_file));
-    if (slotPw.data != NULL)
+}
+    if (slotPw.data != NULL) {
         PORT_ZFree(slotPw.data, PL_strlen(slotPw.data));
-    if (p12FilePw.data != NULL)
+}
+    if (p12FilePw.data != NULL) {
         PORT_ZFree(p12FilePw.data, PL_strlen(p12FilePw.data));
-    if (slot)
+}
+    if (slot) {
         PK11_FreeSlot(slot);
+}
     if (NSS_Shutdown() != SECSuccess) {
         pk12uErrno = 1;
     }

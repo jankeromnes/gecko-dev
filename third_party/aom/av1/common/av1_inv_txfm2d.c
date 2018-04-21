@@ -258,8 +258,9 @@ static INLINE void inv_txfm2d_add_c(const int32_t *input, uint16_t *output,
     round_shift_array(buf_ptr, txfm_size_col, -shift[0]);
     // Multiply everything by Sqrt2 if the transform is rectangular
     if (txfm_size_row != txfm_size_col) {
-      for (c = 0; c < txfm_size_col; ++c)
+      for (c = 0; c < txfm_size_col; ++c) {
         buf_ptr[c] = (int32_t)dct_const_round_shift(buf_ptr[c] * Sqrt2);
+}
     }
     input += txfm_size_col;
     buf_ptr += txfm_size_col;
@@ -268,12 +269,14 @@ static INLINE void inv_txfm2d_add_c(const int32_t *input, uint16_t *output,
   // Columns
   for (c = 0; c < txfm_size_col; ++c) {
     if (cfg->lr_flip == 0) {
-      for (r = 0; r < txfm_size_row; ++r)
+      for (r = 0; r < txfm_size_row; ++r) {
         temp_in[r] = buf[r * txfm_size_col + c];
+}
     } else {
       // flip left right
-      for (r = 0; r < txfm_size_row; ++r)
+      for (r = 0; r < txfm_size_row; ++r) {
         temp_in[r] = buf[r * txfm_size_col + (txfm_size_col - c - 1)];
+}
     }
     txfm_func_col(temp_in, temp_out, cos_bit_col, stage_range_col);
     round_shift_array(temp_out, txfm_size_row, -shift[1]);

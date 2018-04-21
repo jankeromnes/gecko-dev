@@ -43,12 +43,13 @@ static void find_mv_refs_idx(const VP9_COMMON *cm, const MACROBLOCKD *xd,
       context_counter += mode_2_counter[candidate_mi->mode];
       different_ref_found = 1;
 
-      if (candidate_mi->ref_frame[0] == ref_frame)
+      if (candidate_mi->ref_frame[0] == ref_frame) {
         ADD_MV_REF_LIST(get_sub_block_mv(candidate_mi, 0, mv_ref->col, block),
                         refmv_count, mv_ref_list, Done);
-      else if (candidate_mi->ref_frame[1] == ref_frame)
+      } else if (candidate_mi->ref_frame[1] == ref_frame) {
         ADD_MV_REF_LIST(get_sub_block_mv(candidate_mi, 1, mv_ref->col, block),
                         refmv_count, mv_ref_list, Done);
+}
     }
   }
 
@@ -62,10 +63,11 @@ static void find_mv_refs_idx(const VP9_COMMON *cm, const MACROBLOCKD *xd,
           xd->mi[mv_ref->col + mv_ref->row * xd->mi_stride];
       different_ref_found = 1;
 
-      if (candidate_mi->ref_frame[0] == ref_frame)
+      if (candidate_mi->ref_frame[0] == ref_frame) {
         ADD_MV_REF_LIST(candidate_mi->mv[0], refmv_count, mv_ref_list, Done);
-      else if (candidate_mi->ref_frame[1] == ref_frame)
+      } else if (candidate_mi->ref_frame[1] == ref_frame) {
         ADD_MV_REF_LIST(candidate_mi->mv[1], refmv_count, mv_ref_list, Done);
+}
     }
   }
 
@@ -126,8 +128,9 @@ Done:
   mode_context[ref_frame] = counter_to_context[context_counter];
 
   // Clamp vectors
-  for (i = 0; i < MAX_MV_REF_CANDIDATES; ++i)
+  for (i = 0; i < MAX_MV_REF_CANDIDATES; ++i) {
     clamp_mv_ref(&mv_ref_list[i].as_mv, xd);
+}
 }
 
 void vp9_find_mv_refs(const VP9_COMMON *cm, const MACROBLOCKD *xd,
@@ -173,11 +176,12 @@ void vp9_append_sub8x8_mvs_for_idx(VP9_COMMON *cm, MACROBLOCKD *xd, int block,
     case 1:
     case 2:
       nearest_mv->as_int = bmi[0].as_mv[ref].as_int;
-      for (n = 0; n < MAX_MV_REF_CANDIDATES; ++n)
+      for (n = 0; n < MAX_MV_REF_CANDIDATES; ++n) {
         if (nearest_mv->as_int != mv_list[n].as_int) {
           near_mv->as_int = mv_list[n].as_int;
           break;
         }
+}
       break;
     case 3: {
       int_mv candidates[2 + MAX_MV_REF_CANDIDATES];
@@ -187,11 +191,12 @@ void vp9_append_sub8x8_mvs_for_idx(VP9_COMMON *cm, MACROBLOCKD *xd, int block,
       candidates[3] = mv_list[1];
 
       nearest_mv->as_int = bmi[2].as_mv[ref].as_int;
-      for (n = 0; n < 2 + MAX_MV_REF_CANDIDATES; ++n)
+      for (n = 0; n < 2 + MAX_MV_REF_CANDIDATES; ++n) {
         if (nearest_mv->as_int != candidates[n].as_int) {
           near_mv->as_int = candidates[n].as_int;
           break;
         }
+}
       break;
     }
     default: assert(0 && "Invalid block index.");

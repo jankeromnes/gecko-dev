@@ -84,11 +84,14 @@ static int is_skin_color(int y, int cb, int cr, int consec_zeromv) {
     } else {
       int i = 0;
       // No skin if block has been zero motion for long consecutive time.
-      if (consec_zeromv > 60) return 0;
+      if (consec_zeromv > 60) { return 0;
+}
       // Exit on grey.
-      if (cb == 128 && cr == 128) return 0;
+      if (cb == 128 && cr == 128) { return 0;
+}
       // Exit on very strong cb.
-      if (cb > 150 && cr < 110) return 0;
+      if (cb > 150 && cr < 110) { return 0;
+}
       for (; i < 5; ++i) {
         int skin_color_diff = evaluate_skin_color_difference(cb, cr, i);
         if (skin_color_diff < skin_threshold[i + 1]) {
@@ -318,7 +321,8 @@ static int pick_intra4x4mby_modes(MACROBLOCK *mb, int *Rate, int *best_dist) {
     /* Break out case where we have already exceeded best so far value
      * that was passed in
      */
-    if (distortion > *best_dist) break;
+    if (distortion > *best_dist) { break;
+}
   }
 
   *Rate = cost;
@@ -397,13 +401,17 @@ static void pick_intra_mbuv_mode(MACROBLOCK *mb) {
       u_p = usrc_ptr[j];
       v_p = vsrc_ptr[j];
 
-      if (predu < 0) predu = 0;
+      if (predu < 0) { predu = 0;
+}
 
-      if (predu > 255) predu = 255;
+      if (predu > 255) { predu = 255;
+}
 
-      if (predv < 0) predv = 0;
+      if (predv < 0) { predv = 0;
+}
 
-      if (predv > 255) predv = 255;
+      if (predv > 255) { predv = 255;
+}
 
       diff = u_p - expected_udc;
       pred_error[DC_PRED] += diff * diff;
@@ -491,8 +499,9 @@ static void get_lower_res_motion_info(VP8_COMP *cpi, MACROBLOCKD *xd,
 
   /* For highest-resolution encoder, adjust dissim value. Lower its quality
    * for good performance. */
-  if (cpi->oxcf.mr_encoder_id == (cpi->oxcf.mr_total_resolutions - 1))
+  if (cpi->oxcf.mr_encoder_id == (cpi->oxcf.mr_total_resolutions - 1)) {
     *dissim >>= 1;
+}
 
   if (*parent_ref_frame != INTRA_FRAME) {
     /* Consider different down_sampling_factor.
@@ -516,7 +525,8 @@ static void check_for_encode_breakout(unsigned int sse, MACROBLOCK *x) {
   unsigned int threshold =
       (xd->block[0].dequant[1] * xd->block[0].dequant[1] >> 4);
 
-  if (threshold < x->encode_breakout) threshold = x->encode_breakout;
+  if (threshold < x->encode_breakout) { threshold = x->encode_breakout;
+}
 
   if (sse < threshold) {
     /* Check u and v to make sure skip is ok */
@@ -568,7 +578,8 @@ static int evaluate_inter_mode(unsigned int *sse, int rate2, int *distortion2,
       x->e_mbd.mode_info_context->mbmi.ref_frame == LAST_FRAME &&
       (denoise_aggressive || (cpi->closest_reference_frame == LAST_FRAME))) {
     // No adjustment if block is considered to be skin area.
-    if (x->is_skin) rd_adj = 100;
+    if (x->is_skin) { rd_adj = 100;
+}
 
     this_rd = (int)(((int64_t)this_rd) * rd_adj / 100);
   }
@@ -739,20 +750,23 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
 
     parent_ref_flag = 0;
     // Note availability for mv reuse is only based on last and golden.
-    if (parent_ref_frame == LAST_FRAME)
+    if (parent_ref_frame == LAST_FRAME) {
       parent_ref_flag = (cpi->ref_frame_flags & VP8_LAST_FRAME);
-    else if (parent_ref_frame == GOLDEN_FRAME)
+    } else if (parent_ref_frame == GOLDEN_FRAME) {
       parent_ref_flag = (cpi->ref_frame_flags & VP8_GOLD_FRAME);
+}
 
     // assert(!parent_ref_frame || parent_ref_flag);
 
     // If |parent_ref_frame| did not match either last or golden then
     // shut off mv reuse.
-    if (parent_ref_frame && !parent_ref_flag) parent_ref_valid = 0;
+    if (parent_ref_frame && !parent_ref_flag) { parent_ref_valid = 0;
+}
 
     // Don't do mv reuse since we want to allow for another mode besides
     // ZEROMV_LAST to remove dot artifact.
-    if (dot_artifact_candidate) parent_ref_valid = 0;
+    if (dot_artifact_candidate) { parent_ref_valid = 0;
+}
   }
 #endif
 
@@ -802,9 +816,10 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
     ref_frame_map[1] = parent_ref_frame;
     ref_frame_map[2] = -1;
     ref_frame_map[3] = -1;
-  } else
+  } else {
 #endif
     get_reference_search_order(cpi, ref_frame_map);
+}
 
   /* Check to see if there is at least 1 valid reference frame that we need
    * to calculate near_mvs.
@@ -855,9 +870,11 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
     int this_rd = INT_MAX;
     int this_ref_frame = ref_frame_map[vp8_ref_frame_order[mode_index]];
 
-    if (best_rd <= x->rd_threshes[mode_index]) continue;
+    if (best_rd <= x->rd_threshes[mode_index]) { continue;
+}
 
-    if (this_ref_frame < 0) continue;
+    if (this_ref_frame < 0) { continue;
+}
 
     x->e_mbd.mode_info_context->mbmi.ref_frame = this_ref_frame;
 
@@ -876,17 +893,20 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
 #if CONFIG_MULTI_RES_ENCODING
       if (parent_ref_valid) {
         if (vp8_mode_order[mode_index] == NEARESTMV &&
-            mode_mv[NEARESTMV].as_int == 0)
+            mode_mv[NEARESTMV].as_int == 0) {
           continue;
-        if (vp8_mode_order[mode_index] == NEARMV && mode_mv[NEARMV].as_int == 0)
+}
+        if (vp8_mode_order[mode_index] == NEARMV && mode_mv[NEARMV].as_int == 0) {
           continue;
+}
 
         if (vp8_mode_order[mode_index] == NEWMV && parent_mode == ZEROMV &&
-            best_ref_mv.as_int == 0)
+            best_ref_mv.as_int == 0) {
           continue;
-        else if (vp8_mode_order[mode_index] == NEWMV && dissim == 0 &&
-                 best_ref_mv.as_int == parent_ref_mv.as_int)
+        } else if (vp8_mode_order[mode_index] == NEWMV && dissim == 0 &&
+                 best_ref_mv.as_int == parent_ref_mv.as_int) {
           continue;
+}
       }
 #endif
     }
@@ -1015,7 +1035,8 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
            resol encoder does motion search without any previous knowledge.
            Also, since last frame motion info is not stored, then we can not
            use improved_mv_pred. */
-        if (cpi->oxcf.mr_encoder_id) sf_improved_mv_pred = 0;
+        if (cpi->oxcf.mr_encoder_id) { sf_improved_mv_pred = 0;
+}
 
         // Only use parent MV as predictor if this candidate reference frame
         // (|this_ref_frame|) is equal to |parent_ref_frame|.
@@ -1027,12 +1048,13 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
           mvp_full.as_mv.col = parent_ref_mv.as_mv.col >> 3;
           mvp_full.as_mv.row = parent_ref_mv.as_mv.row >> 3;
 
-          if (dissim <= 32)
+          if (dissim <= 32) {
             step_param += 3;
-          else if (dissim <= 128)
+          } else if (dissim <= 128) {
             step_param += 2;
-          else
+          } else {
             step_param += 1;
+}
         } else
 #endif
         {
@@ -1048,7 +1070,8 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
 
             sr += speed_adjust;
             /* adjust search range according to sr from mv prediction */
-            if (sr > step_param) step_param = sr;
+            if (sr > step_param) { step_param = sr;
+}
 
             mvp_full.as_mv.col = mvp.as_mv.col >> 3;
             mvp_full.as_mv.row = mvp.as_mv.row >> 3;
@@ -1075,10 +1098,14 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
         {
           /* Get intersection of UMV window and valid MV window to
            * reduce # of checks in diamond search. */
-          if (x->mv_col_min < col_min) x->mv_col_min = col_min;
-          if (x->mv_col_max > col_max) x->mv_col_max = col_max;
-          if (x->mv_row_min < row_min) x->mv_row_min = row_min;
-          if (x->mv_row_max > row_max) x->mv_row_max = row_max;
+          if (x->mv_col_min < col_min) { x->mv_col_min = col_min;
+}
+          if (x->mv_col_max > col_max) { x->mv_col_max = col_max;
+}
+          if (x->mv_row_min < row_min) { x->mv_row_min = row_min;
+}
+          if (x->mv_row_max > row_max) { x->mv_row_max = row_max;
+}
 
           further_steps =
               (cpi->Speed >= 8)
@@ -1097,8 +1124,9 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
              * or if this candidate reference frame (|this_ref_frame|) is
              * not equal to |parent_ref_frame|.
              */
-            if (!parent_ref_valid || (parent_ref_frame != this_ref_frame))
+            if (!parent_ref_valid || (parent_ref_frame != this_ref_frame)) {
               step_param = 0;
+}
 #endif
             bestsme = vp8_hex_search(x, b, d, &mvp_full, &d->bmi.mv, step_param,
                                      sadpb, &cpi->fn_ptr[BLOCK_16X16],
@@ -1157,7 +1185,8 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
 
       case NEARESTMV:
       case NEARMV:
-        if (mode_mv[this_mode].as_int == 0) continue;
+        if (mode_mv[this_mode].as_int == 0) { continue;
+}
 
       case ZEROMV:
 
@@ -1248,7 +1277,8 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
                                    x->rd_thresh_mult[mode_index];
     }
 
-    if (x->skip) break;
+    if (x->skip) { break;
+}
   }
 
   /* Reduce the activation RD thresholds for the best choice mode */
@@ -1300,7 +1330,8 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
         is_noisy = 1;
       }
     } else {
-      if (cpi->mse_source_denoised > 1000) is_noisy = 1;
+      if (cpi->mse_source_denoised > 1000) { is_noisy = 1;
+}
     }
     x->increase_denoising = 0;
     if (!x->is_skin && x->best_sse_inter_mode == ZEROMV &&

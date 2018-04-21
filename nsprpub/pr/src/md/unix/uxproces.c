@@ -647,7 +647,8 @@ static void WaitPidDaemonThread(void *unused)
 	    do {
 	        pid = waitpid((pid_t) -1, &status, WNOHANG);
 	    } while ((pid_t) -1 == pid && EINTR == errno);
-	    if (0 == pid) break;
+	    if (0 == pid) { break;
+}
 	    if ((pid_t) -1 == pid) {
 		/* must be because we have no child processes */
 		PR_ASSERT(ECHILD == errno);

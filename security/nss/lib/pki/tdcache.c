@@ -456,8 +456,9 @@ nssTrustDomain_UpdateCachedTokenCerts(
     nssList *certList;
     PRUint32 count;
     certList = nssList_Create(NULL, PR_FALSE);
-    if (!certList)
+    if (!certList) {
         return PR_FAILURE;
+}
     (void)nssTrustDomain_GetCertsFromCache(td, certList);
     count = nssList_Count(certList);
     if (count > 0) {

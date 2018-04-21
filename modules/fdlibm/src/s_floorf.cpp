@@ -45,15 +45,18 @@ floorf(float x)
 		}
 	    } else {
 		i = (0x007fffff)>>j0;
-		if((i0&i)==0) return x; /* x is integral */
+		if((i0&i)==0) { return x; /* x is integral */
+}
 		if(huge+x>(float)0.0) {	/* raise inexact flag */
-		    if(i0<0) i0 += (0x00800000)>>j0;
+		    if(i0<0) { i0 += (0x00800000)>>j0;
+}
 		    i0 &= (~i);
 		}
 	    }
 	} else {
-	    if(j0==0x80) return x+x;	/* inf or NaN */
-	    else return x;		/* x is integral */
+	    if(j0==0x80) { return x+x;	/* inf or NaN */
+	    } else { return x;		/* x is integral */
+}
 	}
 	SET_FLOAT_WORD(x,i0);
 	return x;

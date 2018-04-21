@@ -77,8 +77,9 @@ static void nr_ice_socket_readable_cb(NR_SOCKET s, int how, void *cb_arg)
 
     /* Deal with the fact that sizeof(int) and sizeof(size_t) may not
        be the same */
-    if (len_s > (size_t)INT_MAX)
+    if (len_s > (size_t)INT_MAX) {
       return;
+}
 
     len = (int)len_s;
 
@@ -131,13 +132,14 @@ static void nr_ice_socket_readable_cb(NR_SOCKET s, int how, void *cb_arg)
                skip */
             if (nr_transport_addr_cmp(
                     &sc1->u.turn_client.turn_client->turn_server_addr,
-                    &addr, NR_TRANSPORT_ADDR_CMP_MODE_ALL))
+                    &addr, NR_TRANSPORT_ADDR_CMP_MODE_ALL)) {
               break;
+}
 
             if(!is_req){
-              if(!is_ind)
+              if(!is_ind) {
                 r=nr_turn_client_process_response(sc1->u.turn_client.turn_client,buf,len,&addr);
-              else{
+              } else{
                 nr_transport_addr n_addr;
                 size_t n_len;
 
@@ -179,10 +181,11 @@ static void nr_ice_socket_readable_cb(NR_SOCKET s, int how, void *cb_arg)
         sc1=sc2;
       }
       if(!sc1){
-        if (nr_ice_ctx_is_known_id(sock->ctx,((nr_stun_message_header*)buf)->id.octet))
+        if (nr_ice_ctx_is_known_id(sock->ctx,((nr_stun_message_header*)buf)->id.octet)) {
             r_log(LOG_ICE,LOG_DEBUG,"ICE(%s): Message is a retransmit",sock->ctx->label);
-        else
+        } else {
             r_log(LOG_ICE,LOG_NOTICE,"ICE(%s): Message does not correspond to any registered stun ctx",sock->ctx->label);
+}
       }
     }
     else{
@@ -201,15 +204,17 @@ int nr_ice_socket_create(nr_ice_ctx *ctx,nr_ice_component *comp, nr_socket *nsoc
     nr_transport_addr addr;
     int r,_status;
 
-    if(!(sock=RCALLOC(sizeof(nr_ice_socket))))
+    if(!(sock=RCALLOC(sizeof(nr_ice_socket)))) {
       ABORT(R_NO_MEMORY);
+}
 
     sock->sock=nsock;
     sock->ctx=ctx;
     sock->component=comp;
 
-    if(r=nr_socket_getaddr(nsock, &addr))
+    if(r=nr_socket_getaddr(nsock, &addr)) {
       ABORT(r);
+}
 
     if (type == NR_ICE_SOCKET_TYPE_DGRAM) {
       assert(addr.protocol == IPPROTO_UDP);
@@ -223,8 +228,9 @@ int nr_ice_socket_create(nr_ice_ctx *ctx,nr_ice_component *comp, nr_socket *nsoc
     TAILQ_INIT(&sock->stun_ctxs);
 
     if (sock->type == NR_ICE_SOCKET_TYPE_DGRAM){
-      if((r=nr_socket_getfd(nsock,&fd)))
+      if((r=nr_socket_getfd(nsock,&fd))) {
         ABORT(r);
+}
       NR_ASYNC_WAIT(fd,NR_ASYNC_WAIT_READ,nr_ice_socket_readable_cb,sock);
     }
     else if (sock->type == NR_ICE_SOCKET_TYPE_STREAM_TURN) {
@@ -235,15 +241,17 @@ int nr_ice_socket_create(nr_ice_ctx *ctx,nr_ice_component *comp, nr_socket *nsoc
     else if (sock->type == NR_ICE_SOCKET_TYPE_STREAM_TCP) {
       /* in this case we can't hook up using NR_ASYNC_WAIT, because nr_socket_multi_tcp
          consists of multiple nr_sockets and file descriptors. */
-      if((r=nr_socket_multi_tcp_set_readable_cb(nsock,nr_ice_socket_readable_cb,sock)))
+      if((r=nr_socket_multi_tcp_set_readable_cb(nsock,nr_ice_socket_readable_cb,sock))) {
         ABORT(r);
+}
     }
 
     *sockp=sock;
 
     _status=0;
   abort:
-    if(_status) RFREE(sock);
+    if(_status) { RFREE(sock);
+}
     return(_status);
   }
 
@@ -253,8 +261,9 @@ int nr_ice_socket_destroy(nr_ice_socket **isockp)
     nr_ice_stun_ctx *s1,*s2;
     nr_ice_socket *isock;
 
-    if(!isockp || !*isockp)
+    if(!isockp || !*isockp) {
       return(0);
+}
 
     isock=*isockp;
     *isockp=0;
@@ -286,8 +295,9 @@ int nr_ice_socket_close(nr_ice_socket *isock)
     NR_SOCKET no_socket = -1;
 #endif
 
-    if (!isock||!isock->sock)
+    if (!isock||!isock->sock) {
       return(0);
+}
 
     if (isock->type != NR_ICE_SOCKET_TYPE_STREAM_TCP){
       nr_socket_getfd(isock->sock,&fd);
@@ -307,8 +317,9 @@ int nr_ice_socket_register_stun_client(nr_ice_socket *sock, nr_stun_client_ctx *
     nr_ice_stun_ctx *sc=0;
     int _status;
 
-    if(!(sc=RCALLOC(sizeof(nr_ice_stun_ctx))))
+    if(!(sc=RCALLOC(sizeof(nr_ice_stun_ctx)))) {
       ABORT(R_NO_MEMORY);
+}
 
     sc->type=NR_ICE_STUN_CLIENT;
     sc->u.client=srv;
@@ -327,8 +338,9 @@ int nr_ice_socket_register_stun_server(nr_ice_socket *sock, nr_stun_server_ctx *
     nr_ice_stun_ctx *sc=0;
     int _status;
 
-    if(!(sc=RCALLOC(sizeof(nr_ice_stun_ctx))))
+    if(!(sc=RCALLOC(sizeof(nr_ice_stun_ctx)))) {
       ABORT(R_NO_MEMORY);
+}
 
     sc->type=NR_ICE_STUN_SERVER;
     sc->u.server=srv;
@@ -348,8 +360,9 @@ int nr_ice_socket_register_turn_client(nr_ice_socket *sock, nr_turn_client_ctx *
     nr_ice_stun_ctx *sc=0;
     int _status;
 
-    if(!(sc=RCALLOC(sizeof(nr_ice_stun_ctx))))
+    if(!(sc=RCALLOC(sizeof(nr_ice_stun_ctx)))) {
       ABORT(R_NO_MEMORY);
+}
 
     sc->type=NR_ICE_TURN_CLIENT;
     sc->u.turn_client.turn_client=srv;
@@ -370,8 +383,9 @@ int nr_ice_socket_deregister(nr_ice_socket *sock, void *handle)
   {
     nr_ice_stun_ctx *sc=handle;
 
-    if(!sc)
+    if(!sc) {
       return(0);
+}
 
     sc->type=NR_ICE_STUN_NONE;
 

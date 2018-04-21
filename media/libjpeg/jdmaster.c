@@ -35,8 +35,9 @@ use_merged_upsample (j_decompress_ptr cinfo)
 {
 #ifdef UPSAMPLE_MERGING_SUPPORTED
   /* Merging is the equivalent of plain box-filter upsampling */
-  if (cinfo->do_fancy_upsampling || cinfo->CCIR601_sampling)
+  if (cinfo->do_fancy_upsampling || cinfo->CCIR601_sampling) {
     return FALSE;
+}
   /* jdmerge.c only supports YCC=>RGB and YCC=>RGB565 color conversion */
   if (cinfo->jpeg_color_space != JCS_YCbCr || cinfo->num_components != 3 ||
       (cinfo->out_color_space != JCS_RGB &&
@@ -50,26 +51,30 @@ use_merged_upsample (j_decompress_ptr cinfo)
       cinfo->out_color_space != JCS_EXT_RGBA &&
       cinfo->out_color_space != JCS_EXT_BGRA &&
       cinfo->out_color_space != JCS_EXT_ABGR &&
-      cinfo->out_color_space != JCS_EXT_ARGB))
+      cinfo->out_color_space != JCS_EXT_ARGB)) {
     return FALSE;
+}
   if ((cinfo->out_color_space == JCS_RGB565 &&
       cinfo->out_color_components != 3) ||
       (cinfo->out_color_space != JCS_RGB565 &&
-      cinfo->out_color_components != rgb_pixelsize[cinfo->out_color_space]))
+      cinfo->out_color_components != rgb_pixelsize[cinfo->out_color_space])) {
     return FALSE;
+}
   /* and it only handles 2h1v or 2h2v sampling ratios */
   if (cinfo->comp_info[0].h_samp_factor != 2 ||
       cinfo->comp_info[1].h_samp_factor != 1 ||
       cinfo->comp_info[2].h_samp_factor != 1 ||
       cinfo->comp_info[0].v_samp_factor >  2 ||
       cinfo->comp_info[1].v_samp_factor != 1 ||
-      cinfo->comp_info[2].v_samp_factor != 1)
+      cinfo->comp_info[2].v_samp_factor != 1) {
     return FALSE;
+}
   /* furthermore, it doesn't work if we've scaled the IDCTs differently */
   if (cinfo->comp_info[0]._DCT_scaled_size != cinfo->_min_DCT_scaled_size ||
       cinfo->comp_info[1]._DCT_scaled_size != cinfo->_min_DCT_scaled_size ||
-      cinfo->comp_info[2]._DCT_scaled_size != cinfo->_min_DCT_scaled_size)
+      cinfo->comp_info[2]._DCT_scaled_size != cinfo->_min_DCT_scaled_size) {
     return FALSE;
+}
 #ifdef WITH_SIMD
   /* If YCbCr-to-RGB color conversion is SIMD-accelerated but merged upsampling
      isn't, then disabling merged upsampling is likely to be faster when
@@ -78,8 +83,9 @@ use_merged_upsample (j_decompress_ptr cinfo)
       jsimd_can_ycc_rgb() && cinfo->jpeg_color_space == JCS_YCbCr &&
       (cinfo->out_color_space == JCS_RGB ||
        (cinfo->out_color_space >= JCS_EXT_RGB &&
-        cinfo->out_color_space <= JCS_EXT_ARGB)))
+        cinfo->out_color_space <= JCS_EXT_ARGB))) {
     return FALSE;
+}
 #endif
   /* ??? also need to test for upsample-time rescaling, when & if supported */
   return TRUE;                  /* by golly, it'll work... */
@@ -277,8 +283,9 @@ jpeg_calc_output_dimensions (j_decompress_ptr cinfo)
 #endif
 
   /* Prevent application from calling me at wrong times */
-  if (cinfo->global_state != DSTATE_READY)
+  if (cinfo->global_state != DSTATE_READY) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
   /* Compute core output image dimensions and DCT scaling choices. */
   jpeg_core_output_dimensions(cinfo);
@@ -369,10 +376,11 @@ jpeg_calc_output_dimensions (j_decompress_ptr cinfo)
                               cinfo->out_color_components);
 
   /* See if upsampler will want to emit more than one row at a time */
-  if (use_merged_upsample(cinfo))
+  if (use_merged_upsample(cinfo)) {
     cinfo->rec_outbuf_height = cinfo->max_v_samp_factor;
-  else
+  } else {
     cinfo->rec_outbuf_height = 1;
+}
 }
 
 
@@ -431,12 +439,14 @@ prepare_range_limit_table (j_decompress_ptr cinfo)
   /* First segment of "simple" table: limit[x] = 0 for x < 0 */
   MEMZERO(table - (MAXJSAMPLE+1), (MAXJSAMPLE+1) * sizeof(JSAMPLE));
   /* Main part of "simple" table: limit[x] = x */
-  for (i = 0; i <= MAXJSAMPLE; i++)
+  for (i = 0; i <= MAXJSAMPLE; i++) {
     table[i] = (JSAMPLE) i;
+}
   table += CENTERJSAMPLE;       /* Point to where post-IDCT table starts */
   /* End of simple table, rest of first half of post-IDCT table */
-  for (i = CENTERJSAMPLE; i < 2*(MAXJSAMPLE+1); i++)
+  for (i = CENTERJSAMPLE; i < 2*(MAXJSAMPLE+1); i++) {
     table[i] = MAXJSAMPLE;
+}
   /* Second half of post-IDCT table */
   MEMZERO(table + (2 * (MAXJSAMPLE+1)),
           (2 * (MAXJSAMPLE+1) - CENTERJSAMPLE) * sizeof(JSAMPLE));
@@ -471,8 +481,9 @@ master_selection (j_decompress_ptr cinfo)
   /* Width of an output scanline must be representable as JDIMENSION. */
   samplesperrow = (long) cinfo->output_width * (long) cinfo->out_color_components;
   jd_samplesperrow = (JDIMENSION) samplesperrow;
-  if ((long) jd_samplesperrow != samplesperrow)
+  if ((long) jd_samplesperrow != samplesperrow) {
     ERREXIT(cinfo, JERR_WIDTH_OVERFLOW);
+}
 
   /* Initialize my private state */
   master->pass_number = 0;
@@ -488,8 +499,9 @@ master_selection (j_decompress_ptr cinfo)
     cinfo->enable_2pass_quant = FALSE;
   }
   if (cinfo->quantize_colors) {
-    if (cinfo->raw_data_out)
+    if (cinfo->raw_data_out) {
       ERREXIT(cinfo, JERR_NOTIMPL);
+}
     /* 2-pass quantizer only works in 3-component color space. */
     if (cinfo->out_color_components != 3) {
       cinfo->enable_1pass_quant = TRUE;
@@ -557,16 +569,18 @@ master_selection (j_decompress_ptr cinfo)
 #else
       ERREXIT(cinfo, JERR_NOT_COMPILED);
 #endif
-    } else
+    } else {
       jinit_huff_decoder(cinfo);
+}
   }
 
   /* Initialize principal buffer controllers. */
   use_c_buffer = cinfo->inputctl->has_multiple_scans || cinfo->buffered_image;
   jinit_d_coef_controller(cinfo, use_c_buffer);
 
-  if (! cinfo->raw_data_out)
+  if (! cinfo->raw_data_out) {
     jinit_d_main_controller(cinfo, FALSE /* never need full buffer here */);
+}
 
   /* We can now tell the memory manager to allocate virtual arrays. */
   (*cinfo->mem->realize_virt_arrays) ((j_common_ptr) cinfo);
@@ -646,11 +660,13 @@ prepare_for_output_pass (j_decompress_ptr cinfo)
     (*cinfo->idct->start_pass) (cinfo);
     (*cinfo->coef->start_output_pass) (cinfo);
     if (! cinfo->raw_data_out) {
-      if (! master->using_merged_upsample)
+      if (! master->using_merged_upsample) {
         (*cinfo->cconvert->start_pass) (cinfo);
+}
       (*cinfo->upsample->start_pass) (cinfo);
-      if (cinfo->quantize_colors)
+      if (cinfo->quantize_colors) {
         (*cinfo->cquantize->start_pass) (cinfo, master->pub.is_dummy_pass);
+}
       (*cinfo->post->start_pass) (cinfo,
             (master->pub.is_dummy_pass ? JBUF_SAVE_AND_PASS : JBUF_PASS_THRU));
       (*cinfo->main->start_pass) (cinfo, JBUF_PASS_THRU);
@@ -681,8 +697,9 @@ finish_output_pass (j_decompress_ptr cinfo)
 {
   my_master_ptr master = (my_master_ptr) cinfo->master;
 
-  if (cinfo->quantize_colors)
+  if (cinfo->quantize_colors) {
     (*cinfo->cquantize->finish_pass) (cinfo);
+}
   master->pass_number++;
 }
 
@@ -699,8 +716,9 @@ jpeg_new_colormap (j_decompress_ptr cinfo)
   my_master_ptr master = (my_master_ptr) cinfo->master;
 
   /* Prevent application from calling me at wrong times */
-  if (cinfo->global_state != DSTATE_BUFIMAGE)
+  if (cinfo->global_state != DSTATE_BUFIMAGE) {
     ERREXIT1(cinfo, JERR_BAD_STATE, cinfo->global_state);
+}
 
   if (cinfo->quantize_colors && cinfo->enable_external_quant &&
       cinfo->colormap != NULL) {
@@ -709,8 +727,9 @@ jpeg_new_colormap (j_decompress_ptr cinfo)
     /* Notify quantizer of colormap change */
     (*cinfo->cquantize->new_color_map) (cinfo);
     master->pub.is_dummy_pass = FALSE; /* just in case */
-  } else
+  } else {
     ERREXIT(cinfo, JERR_MODE_CHANGE);
+}
 }
 
 #endif /* D_MULTISCAN_FILES_SUPPORTED */

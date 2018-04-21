@@ -76,8 +76,9 @@ error_table_name (PRErrorCode num)
     /* num = 00 000 000 aaa aaa bbb bbb ccc ccc ddd ddd */
     for (i = 4; i >= 0; i--) {
 	ch = (num >> BITS_PER_CHAR * i) & ((1 << BITS_PER_CHAR) - 1);
-	if (ch != 0)
+	if (ch != 0) {
 	    *p++ = char_set[ch-1];
+}
     }
     *p = '\0';
     return(buf);
@@ -105,7 +106,8 @@ PR_ErrorToString(PRErrorCode code, PRLanguageCode language)
 	    if (callback_lookup) {
 		msg = callback_lookup(code, language, et->table,
 		    callback_private, et->table_private);
-		if (msg) return msg;
+		if (msg) { return msg;
+}
 	    }
     
 	    return(et->table->msgs[code - et->table->base].en_text);
@@ -123,8 +125,9 @@ PR_ErrorToString(PRErrorCode code, PRLanguageCode language)
 	strcat(buffer, error_table_name (table_num));
 	strcat(buffer, " ");
     }
-    for (cp = buffer; *cp; cp++)
+    for (cp = buffer; *cp; cp++) {
 	;
+}
     if (offset >= 100) {
 	*cp++ = (char)('0' + offset / 100);
 	offset %= 100;
@@ -168,8 +171,9 @@ PR_ErrorInstallTable(const struct PRErrorTable *table)
 
     new_et = (struct PRErrorTableList *)
 					PR_Malloc(sizeof(struct PRErrorTableList));
-    if (!new_et)
+    if (!new_et) {
 	return errno;	/* oops */
+}
     new_et->table = table;
     if (callback_newtable) {
 	new_et->table_private = callback_newtable(table, callback_private);

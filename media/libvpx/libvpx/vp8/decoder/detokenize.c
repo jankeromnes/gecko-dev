@@ -57,7 +57,8 @@ static int GetSigned(BOOL_DECODER *br, int value_to_sign) {
   VP8_BD_VALUE bigsplit = (VP8_BD_VALUE)split << (VP8_BD_VALUE_SIZE - 8);
   int v;
 
-  if (br->count < 0) vp8dx_bool_decoder_fill(br);
+  if (br->count < 0) { vp8dx_bool_decoder_fill(br);
+}
 
   if (br->value < bigsplit) {
     br->range = split;

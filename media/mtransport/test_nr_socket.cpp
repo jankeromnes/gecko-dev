@@ -105,13 +105,15 @@ static int test_nat_socket_create(void *obj,
   int r, _status;
 
   r = sock->create(addr);
-  if (r)
+  if (r) {
     ABORT(r);
+}
 
   r = nr_socket_create_int(static_cast<void *>(sock),
                            sock->vtbl(), sockp);
-  if (r)
+  if (r) {
     ABORT(r);
+}
 
   _status = 0;
 
@@ -838,8 +840,9 @@ TestNrSocket::PortMapping* TestNrSocket::get_port_mapping(
     // TODO(bug 1170299): Remove const_cast when no longer necessary
     if (!nr_transport_addr_cmp(const_cast<nr_transport_addr*>(&remote_address),
                                &port_mapping->remote_address_,
-                               compare_flags))
+                               compare_flags)) {
       return port_mapping;
+}
   }
   return nullptr;
 }

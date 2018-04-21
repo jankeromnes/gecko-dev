@@ -57,7 +57,8 @@ static INLINE void obmc_variance_w4(const uint8_t *pre, const int pre_stride,
 
     n += 4;
 
-    if (n % 4 == 0) pre += pre_step;
+    if (n % 4 == 0) { pre += pre_step;
+}
   } while (n < 4 * h);
 
   *sum = xx_hsum_epi32_si32(v_sum_d);
@@ -108,7 +109,8 @@ static INLINE void obmc_variance_w8n(const uint8_t *pre, const int pre_stride,
 
     n += 8;
 
-    if (n % w == 0) pre += pre_step;
+    if (n % w == 0) { pre += pre_step;
+}
   } while (n < w * h);
 
   *sum = xx_hsum_epi32_si32(v_sum_d);
@@ -196,7 +198,8 @@ static INLINE void hbd_obmc_variance_w4(
 
     n += 4;
 
-    if (n % 4 == 0) pre += pre_step;
+    if (n % 4 == 0) { pre += pre_step;
+}
   } while (n < 4 * h);
 
   *sum = xx_hsum_epi32_si32(v_sum_d);
@@ -248,7 +251,8 @@ static INLINE void hbd_obmc_variance_w8n(
 
     n += 8;
 
-    if (n % w == 0) pre += pre_step;
+    if (n % w == 0) { pre += pre_step;
+}
   } while (n < w * h);
 
   *sum += xx_hsum_epi32_si64(v_sum_d);

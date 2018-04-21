@@ -735,7 +735,8 @@ UnicodeString &MeasureFormat::format(
         UnicodeString &appendTo,
         FieldPosition &pos,
         UErrorCode &status) const {
-    if (U_FAILURE(status)) return appendTo;
+    if (U_FAILURE(status)) { return appendTo;
+}
     if (obj.getType() == Formattable::kObject) {
         const UObject* formatObj = obj.getObject();
         const Measure* amount = dynamic_cast<const Measure*>(formatObj);

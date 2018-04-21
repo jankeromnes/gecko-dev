@@ -476,7 +476,8 @@ void vp9_tokenize_sb(VP9_COMP *cpi, ThreadData *td, TOKENEXTRA **t, int dry_run,
   }
 
   if (mi->skip) {
-    if (!dry_run && !seg_skip) ++td->counts->skip[ctx][1];
+    if (!dry_run && !seg_skip) { ++td->counts->skip[ctx][1];
+}
     reset_skip_context(xd, bsize);
     return;
   }

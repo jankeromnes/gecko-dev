@@ -36,8 +36,9 @@ UnicodeToNative(JSContext *cx, const char16_t *source, size_t slen)
   }
 
   char* result = static_cast<char*>(JS_malloc(cx, native.Length() + 1));
-  if (!result)
+  if (!result) {
     return nullptr;
+}
 
   memcpy(result, native.get(), native.Length() + 1);
   return result;
@@ -64,8 +65,9 @@ static bool
 SealObjectAndPrototype(JSContext* cx, JS::Handle<JSObject *> parent, const char* name)
 {
   JS::Rooted<JS::Value> prop(cx);
-  if (!JS_GetProperty(cx, parent, name, &prop))
+  if (!JS_GetProperty(cx, parent, name, &prop)) {
     return false;
+}
 
   if (prop.isUndefined()) {
     // Pretend we sealed the object.
@@ -73,8 +75,9 @@ SealObjectAndPrototype(JSContext* cx, JS::Handle<JSObject *> parent, const char*
   }
 
   JS::Rooted<JSObject*> obj(cx, prop.toObjectOrNull());
-  if (!JS_GetProperty(cx, obj, "prototype", &prop))
+  if (!JS_GetProperty(cx, obj, "prototype", &prop)) {
     return false;
+}
 
   JS::Rooted<JSObject*> prototype(cx, prop.toObjectOrNull());
   return JS_FreezeObject(cx, obj) && JS_FreezeObject(cx, prototype);
@@ -84,13 +87,15 @@ static bool
 InitAndSealCTypesClass(JSContext* cx, JS::Handle<JSObject*> global)
 {
   // Init the ctypes object.
-  if (!JS_InitCTypesClass(cx, global))
+  if (!JS_InitCTypesClass(cx, global)) {
     return false;
+}
 
   // Set callbacks for charset conversion and such.
   JS::Rooted<JS::Value> ctypes(cx);
-  if (!JS_GetProperty(cx, global, "ctypes", &ctypes))
+  if (!JS_GetProperty(cx, global, "ctypes", &ctypes)) {
     return false;
+}
 
   JS_SetCTypesCallbacks(ctypes.toObjectOrNull(), &sCallbacks);
 
@@ -100,8 +105,9 @@ InitAndSealCTypesClass(JSContext* cx, JS::Handle<JSObject*> global)
   if (!SealObjectAndPrototype(cx, global, "Object") ||
       !SealObjectAndPrototype(cx, global, "Function") ||
       !SealObjectAndPrototype(cx, global, "Array") ||
-      !SealObjectAndPrototype(cx, global, "Error"))
+      !SealObjectAndPrototype(cx, global, "Error")) {
     return false;
+}
 
   return true;
 }

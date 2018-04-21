@@ -78,12 +78,14 @@ static int read_mvcomponent(vp8_reader *r, const MV_CONTEXT *mvc) {
       x += vp8_read(r, p[MVPbits + i]) << i;
     } while (--i > 3);
 
-    if (!(x & 0xFFF0) || vp8_read(r, p[MVPbits + 3])) x += 8;
+    if (!(x & 0xFFF0) || vp8_read(r, p[MVPbits + 3])) { x += 8;
+}
   } else { /* small */
     x = vp8_treed_read(r, vp8_small_mvtree, p + MVPshort);
   }
 
-  if (x && vp8_read(r, p[MVPsign])) x = -x;
+  if (x && vp8_read(r, p[MVPsign])) { x = -x;
+}
 
   return x;
 }

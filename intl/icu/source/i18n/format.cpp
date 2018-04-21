@@ -112,7 +112,8 @@ Format::format(const Formattable& obj,
                UnicodeString& toAppendTo,
                UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return toAppendTo;
+    if (U_FAILURE(status)) { return toAppendTo;
+}
 
     FieldPosition pos(FieldPosition::DONT_CARE);
 
@@ -144,7 +145,8 @@ Format::parseObject(const UnicodeString& source,
                     Formattable& result,
                     UErrorCode& status) const
 {
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
 
     ParsePosition parsePosition(0);
     parseObject(source, result, parsePosition);

@@ -92,8 +92,9 @@ rounded_udiv_128_by_48 (uint64_t  hi,
     remainder = tmp % div;
 
     /* round to nearest */
-    if (remainder * 2 >= div && ++result_lo == 0)
+    if (remainder * 2 >= div && ++result_lo == 0) {
         *result_hi += 1;
+}
 
     return result_lo;
 }
@@ -114,8 +115,9 @@ rounded_sdiv_128_by_49 (int64_t   hi,
     }
     if (hi < 0)
     {
-        if (lo != 0)
+        if (lo != 0) {
             hi++;
+}
         hi = -hi;
         lo = -lo;
         sign ^= 1;
@@ -123,8 +125,9 @@ rounded_sdiv_128_by_49 (int64_t   hi,
     result_lo = rounded_udiv_128_by_48 (hi, lo, div, &result_hi);
     if (sign)
     {
-        if (result_lo != 0)
+        if (result_lo != 0) {
             result_hi++;
+}
         result_hi = -result_hi;
         result_lo = -result_lo;
     }
@@ -159,10 +162,11 @@ fixed_64_16_to_int128 (int64_t  hi,
     {
         *rhi = hi >> (64 - scalebits);
         *rlo = (uint64_t)hi << scalebits;
-        if (scalebits < 16)
+        if (scalebits < 16) {
             *rlo += lo >> (16 - scalebits);
-        else
+        } else {
             *rlo += lo << (scalebits - 16);
+}
     }
 }
 
@@ -250,15 +254,17 @@ pixman_transform_point_31_16 (const pixman_transform_t    *t,
         result->v[0] = tmp[0][0] + ((tmp[0][1] + 0x8000) >> 16);
         result->v[1] = tmp[1][0] + ((tmp[1][1] + 0x8000) >> 16);
 
-        if (result->v[0] > 0)
+        if (result->v[0] > 0) {
             result->v[0] = INT64_MAX;
-        else if (result->v[0] < 0)
+        } else if (result->v[0] < 0) {
             result->v[0] = INT64_MIN;
+}
 
-        if (result->v[1] > 0)
+        if (result->v[1] > 0) {
             result->v[1] = INT64_MAX;
-        else if (result->v[1] < 0)
+        } else if (result->v[1] < 0) {
             result->v[1] = INT64_MIN;
+}
     }
     else
     {
@@ -266,8 +272,9 @@ pixman_transform_point_31_16 (const pixman_transform_t    *t,
          * projective transformation, analyze the top 32 bits of the divisor
          */
         int32_t hi32divbits = divint >> 32;
-        if (hi32divbits < 0)
+        if (hi32divbits < 0) {
             hi32divbits = ~hi32divbits;
+}
 
         if (hi32divbits == 0)
         {
@@ -372,8 +379,9 @@ pixman_transform_init_identity (struct pixman_transform *matrix)
     int i;
 
     memset (matrix, '\0', sizeof (struct pixman_transform));
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++) {
 	matrix->matrix[i][i] = F (1);
+}
 }
 
 typedef pixman_fixed_32_32_t pixman_fixed_34_30_t;
@@ -407,8 +415,9 @@ pixman_transform_point (const struct pixman_transform *transform,
     tmp.v[1] = vector->vector[1];
     tmp.v[2] = vector->vector[2];
 
-    if (!pixman_transform_point_31_16 (transform, &tmp, &tmp))
+    if (!pixman_transform_point_31_16 (transform, &tmp, &tmp)) {
         return FALSE;
+}
 
     vector->vector[0] = tmp.v[0];
     vector->vector[1] = tmp.v[1];
@@ -445,8 +454,9 @@ pixman_transform_multiply (struct pixman_transform *      dst,
 		v += (partial + 0x8000) >> 16;
 	    }
 
-	    if (v > pixman_max_fixed_48_16 || v < pixman_min_fixed_48_16)
+	    if (v > pixman_max_fixed_48_16 || v < pixman_min_fixed_48_16) {
 		return FALSE;
+}
 	    
 	    d.matrix[dy][dx] = (pixman_fixed_t) v;
 	}
@@ -482,22 +492,25 @@ pixman_transform_scale (struct pixman_transform *forward,
 {
     struct pixman_transform t;
 
-    if (sx == 0 || sy == 0)
+    if (sx == 0 || sy == 0) {
 	return FALSE;
+}
 
     if (forward)
     {
 	pixman_transform_init_scale (&t, sx, sy);
-	if (!pixman_transform_multiply (forward, &t, forward))
+	if (!pixman_transform_multiply (forward, &t, forward)) {
 	    return FALSE;
+}
     }
     
     if (reverse)
     {
 	pixman_transform_init_scale (&t, fixed_inverse (sx),
 	                             fixed_inverse (sy));
-	if (!pixman_transform_multiply (reverse, reverse, &t))
+	if (!pixman_transform_multiply (reverse, reverse, &t)) {
 	    return FALSE;
+}
     }
     
     return TRUE;
@@ -528,15 +541,17 @@ pixman_transform_rotate (struct pixman_transform *forward,
     if (forward)
     {
 	pixman_transform_init_rotate (&t, c, s);
-	if (!pixman_transform_multiply (forward, &t, forward))
+	if (!pixman_transform_multiply (forward, &t, forward)) {
 	    return FALSE;
+}
     }
 
     if (reverse)
     {
 	pixman_transform_init_rotate (&t, c, -s);
-	if (!pixman_transform_multiply (reverse, reverse, &t))
+	if (!pixman_transform_multiply (reverse, reverse, &t)) {
 	    return FALSE;
+}
     }
     
     return TRUE;
@@ -568,16 +583,18 @@ pixman_transform_translate (struct pixman_transform *forward,
     {
 	pixman_transform_init_translate (&t, tx, ty);
 
-	if (!pixman_transform_multiply (forward, &t, forward))
+	if (!pixman_transform_multiply (forward, &t, forward)) {
 	    return FALSE;
+}
     }
 
     if (reverse)
     {
 	pixman_transform_init_translate (&t, -tx, -ty);
 
-	if (!pixman_transform_multiply (reverse, reverse, &t))
+	if (!pixman_transform_multiply (reverse, reverse, &t)) {
 	    return FALSE;
+}
     }
     return TRUE;
 }
@@ -609,8 +626,9 @@ pixman_transform_bounds (const struct pixman_transform *matrix,
 
     for (i = 0; i < 4; i++)
     {
-	if (!pixman_transform_point (matrix, &v[i]))
+	if (!pixman_transform_point (matrix, &v[i])) {
 	    return FALSE;
+}
 
 	x1 = pixman_fixed_to_int (v[i].vector[0]);
 	y1 = pixman_fixed_to_int (v[i].vector[1]);
@@ -626,10 +644,14 @@ pixman_transform_bounds (const struct pixman_transform *matrix,
 	}
 	else
 	{
-	    if (x1 < b->x1) b->x1 = x1;
-	    if (y1 < b->y1) b->y1 = y1;
-	    if (x2 > b->x2) b->x2 = x2;
-	    if (y2 > b->y2) b->y2 = y2;
+	    if (x1 < b->x1) { b->x1 = x1;
+}
+	    if (y1 < b->y1) { b->y1 = y1;
+}
+	    if (x2 > b->x2) { b->x2 = x2;
+}
+	    if (y2 > b->y2) { b->y2 = y2;
+}
 	}
     }
 
@@ -644,11 +666,13 @@ pixman_transform_invert (struct pixman_transform *      dst,
 
     pixman_f_transform_from_pixman_transform (&m, src);
 
-    if (!pixman_f_transform_invert (&m, &m))
+    if (!pixman_f_transform_invert (&m, &m)) {
 	return FALSE;
+}
 
-    if (!pixman_transform_from_pixman_f_transform (dst, &m))
+    if (!pixman_transform_from_pixman_f_transform (dst, &m)) {
 	return FALSE;
+}
 
     return TRUE;
 }
@@ -660,8 +684,9 @@ within_epsilon (pixman_fixed_t a,
 {
     pixman_fixed_t t = a - b;
 
-    if (t < 0)
+    if (t < 0) {
 	t = -t;
+}
 
     return t <= epsilon;
 }
@@ -729,8 +754,9 @@ pixman_transform_is_inverse (const struct pixman_transform *a,
 {
     struct pixman_transform t;
 
-    if (!pixman_transform_multiply (&t, a, b))
+    if (!pixman_transform_multiply (&t, a, b)) {
 	return FALSE;
+}
 
     return pixman_transform_is_identity (&t);
 }
@@ -743,8 +769,9 @@ pixman_f_transform_from_pixman_transform (struct pixman_f_transform *    ft,
 
     for (j = 0; j < 3; j++)
     {
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 3; i++) {
 	    ft->m[j][i] = pixman_fixed_to_double (t->matrix[j][i]);
+}
     }
 }
 
@@ -759,8 +786,9 @@ pixman_transform_from_pixman_f_transform (struct pixman_transform *        t,
 	for (i = 0; i < 3; i++)
 	{
 	    double d = ft->m[j][i];
-	    if (d < -32767.0 || d > 32767.0)
+	    if (d < -32767.0 || d > 32767.0) {
 		return FALSE;
+}
 	    d = d * 65536.0 + 0.5;
 	    t->matrix[j][i] = (pixman_fixed_t) floor (d);
 	}
@@ -787,13 +815,15 @@ pixman_f_transform_invert (struct pixman_f_transform *      dst,
 	int bi = b[i];
 	p = src->m[i][0] * (src->m[ai][2] * src->m[bi][1] -
 	                    src->m[ai][1] * src->m[bi][2]);
-	if (i == 1)
+	if (i == 1) {
 	    p = -p;
+}
 	det += p;
     }
     
-    if (det == 0)
+    if (det == 0) {
 	return FALSE;
+}
     
     det = 1 / det;
     for (j = 0; j < 3; j++)
@@ -809,8 +839,9 @@ pixman_f_transform_invert (struct pixman_f_transform *      dst,
 	    p = (src->m[ai][aj] * src->m[bi][bj] -
 	         src->m[ai][bj] * src->m[bi][aj]);
 	    
-	    if (((i + j) & 1) != 0)
+	    if (((i + j) & 1) != 0) {
 		p = -p;
+}
 	    
 	    d.m[j][i] = det * p;
 	}
@@ -832,16 +863,19 @@ pixman_f_transform_point (const struct pixman_f_transform *t,
     for (j = 0; j < 3; j++)
     {
 	a = 0;
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 3; i++) {
 	    a += t->m[j][i] * v->v[i];
+}
 	result.v[j] = a;
     }
     
-    if (!result.v[2])
+    if (!result.v[2]) {
 	return FALSE;
+}
 
-    for (j = 0; j < 2; j++)
+    for (j = 0; j < 2; j++) {
 	v->v[j] = result.v[j] / result.v[2];
+}
 
     v->v[2] = 1;
 
@@ -859,8 +893,9 @@ pixman_f_transform_point_3d (const struct pixman_f_transform *t,
     for (j = 0; j < 3; j++)
     {
 	a = 0;
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 3; i++) {
 	    a += t->m[j][i] * v->v[i];
+}
 	result.v[j] = a;
     }
     
@@ -881,8 +916,9 @@ pixman_f_transform_multiply (struct pixman_f_transform *      dst,
 	for (dx = 0; dx < 3; dx++)
 	{
 	    double v = 0;
-	    for (o = 0; o < 3; o++)
+	    for (o = 0; o < 3; o++) {
 		v += l->m[dy][o] * r->m[o][dx];
+}
 	    d.m[dy][dx] = v;
 	}
     }
@@ -914,8 +950,9 @@ pixman_f_transform_scale (struct pixman_f_transform *forward,
 {
     struct pixman_f_transform t;
 
-    if (sx == 0 || sy == 0)
+    if (sx == 0 || sy == 0) {
 	return FALSE;
+}
 
     if (forward)
     {
@@ -1033,8 +1070,9 @@ pixman_f_transform_bounds (const struct pixman_f_transform *t,
 
     for (i = 0; i < 4; i++)
     {
-	if (!pixman_f_transform_point (t, &v[i]))
+	if (!pixman_f_transform_point (t, &v[i])) {
 	    return FALSE;
+}
 
 	x1 = floor (v[i].v[0]);
 	y1 = floor (v[i].v[1]);
@@ -1050,10 +1088,14 @@ pixman_f_transform_bounds (const struct pixman_f_transform *t,
 	}
 	else
 	{
-	    if (x1 < b->x1) b->x1 = x1;
-	    if (y1 < b->y1) b->y1 = y1;
-	    if (x2 > b->x2) b->x2 = x2;
-	    if (y2 > b->y2) b->y2 = y2;
+	    if (x1 < b->x1) { b->x1 = x1;
+}
+	    if (y1 < b->y1) { b->y1 = y1;
+}
+	    if (x2 > b->x2) { b->x2 = x2;
+}
+	    if (y2 > b->y2) { b->y2 = y2;
+}
 	}
     }
 
@@ -1067,7 +1109,8 @@ pixman_f_transform_init_identity (struct pixman_f_transform *t)
 
     for (j = 0; j < 3; j++)
     {
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 3; i++) {
 	    t->m[j][i] = i == j ? 1 : 0;
+}
     }
 }

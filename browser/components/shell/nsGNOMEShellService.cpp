@@ -106,15 +106,17 @@ nsGNOMEShellService::Init()
   nsCOMPtr<nsIGSettingsService> gsettings =
     do_GetService(NS_GSETTINGSSERVICE_CONTRACTID);
 
-  if (!gconf && !giovfs && !gsettings)
+  if (!gconf && !giovfs && !gsettings) {
     return NS_ERROR_NOT_AVAILABLE;
+}
 
   // Check G_BROKEN_FILENAMES.  If it's set, then filenames in glib use
   // the locale encoding.  If it's not set, they use UTF-8.
   mUseLocaleFilenames = PR_GetEnv("G_BROKEN_FILENAMES") != nullptr;
 
-  if (GetAppPathFromLauncher())
+  if (GetAppPathFromLauncher()) {
     return NS_OK;
+}
 
   nsCOMPtr<nsIProperties> dirSvc
     (do_GetService("@mozilla.org/file/directory_service;1"));
@@ -136,20 +138,23 @@ nsGNOMEShellService::GetAppPathFromLauncher()
   gchar *tmp;
 
   const char *launcher = PR_GetEnv("MOZ_APP_LAUNCHER");
-  if (!launcher)
+  if (!launcher) {
     return false;
+}
 
   if (g_path_is_absolute(launcher)) {
     mAppPath = launcher;
     tmp = g_path_get_basename(launcher);
     gchar *fullpath = g_find_program_in_path(tmp);
-    if (fullpath && mAppPath.Equals(fullpath))
+    if (fullpath && mAppPath.Equals(fullpath)) {
       mAppIsInPath = true;
+}
     g_free(fullpath);
   } else {
     tmp = g_find_program_in_path(launcher);
-    if (!tmp)
+    if (!tmp) {
       return false;
+}
     mAppPath = tmp;
     mAppIsInPath = true;
   }
@@ -177,8 +182,9 @@ nsGNOMEShellService::KeyMatchesAppName(const char *aKeyValue) const
     commandPath = g_find_program_in_path(aKeyValue);
   }
 
-  if (!commandPath)
+  if (!commandPath) {
     return false;
+}
 
   bool matches = mAppPath.Equals(commandPath);
   g_free(commandPath);
@@ -200,8 +206,9 @@ nsGNOMEShellService::CheckHandlerMatchesAppName(const nsACString &handler) const
     g_strfreev(argv);
   }
 
-  if (!KeyMatchesAppName(command.get()))
+  if (!KeyMatchesAppName(command.get())) {
     return false; // the handler is set to another app
+}
 
   return true;
 }
@@ -243,16 +250,18 @@ nsGNOMEShellService::IsDefaultBrowser(bool aStartupCheck,
   nsCOMPtr<nsIGIOMimeApp> gioApp;
 
   for (unsigned int i = 0; i < ArrayLength(appProtocols); ++i) {
-    if (!appProtocols[i].essential)
+    if (!appProtocols[i].essential) {
       continue;
+}
 
     if (gconf) {
       handler.Truncate();
       gconf->GetAppForProtocol(nsDependentCString(appProtocols[i].name),
                                &enabled, handler);
 
-      if (!CheckHandlerMatchesAppName(handler) || !enabled)
+      if (!CheckHandlerMatchesAppName(handler) || !enabled) {
         return NS_OK; // the handler is disabled or set to another app
+}
     }
 
     if (giovfs) {
@@ -261,13 +270,15 @@ nsGNOMEShellService::IsDefaultBrowser(bool aStartupCheck,
       giovfs->GetAppForURIScheme(nsDependentCString(appProtocols[i].name),
                                  getter_AddRefs(handlerApp));
       gioApp = do_QueryInterface(handlerApp);
-      if (!gioApp)
+      if (!gioApp) {
         return NS_OK;
+}
 
       gioApp->GetCommand(handler);
 
-      if (!CheckHandlerMatchesAppName(handler))
+      if (!CheckHandlerMatchesAppName(handler)) {
         return NS_OK; // the handler is set to another app
+}
     }
   }
 
@@ -396,12 +407,14 @@ WriteImage(const nsCString& aPath, imgIContainer* aImage)
 #else
   nsCOMPtr<nsIImageToPixbuf> imgToPixbuf =
     do_GetService("@mozilla.org/widget/image-to-gdk-pixbuf;1");
-  if (!imgToPixbuf)
+  if (!imgToPixbuf) {
       return NS_ERROR_NOT_AVAILABLE;
+}
 
   GdkPixbuf* pixbuf = imgToPixbuf->ConvertImageToPixbuf(aImage);
-  if (!pixbuf)
+  if (!pixbuf) {
       return NS_ERROR_NOT_AVAILABLE;
+}
 
   gboolean res = gdk_pixbuf_save(pixbuf, aPath.get(), "png", nullptr, nullptr);
 
@@ -417,29 +430,33 @@ nsGNOMEShellService::SetDesktopBackground(nsIDOMElement* aElement,
 {
   nsresult rv;
   nsCOMPtr<nsIImageLoadingContent> imageContent = do_QueryInterface(aElement, &rv);
-  if (!imageContent) return rv;
+  if (!imageContent) { return rv;
+}
 
   // get the image container
   nsCOMPtr<imgIRequest> request;
   rv = imageContent->GetRequest(nsIImageLoadingContent::CURRENT_REQUEST,
                                 getter_AddRefs(request));
-  if (!request) return rv;
+  if (!request) { return rv;
+}
   nsCOMPtr<imgIContainer> container;
   rv = request->GetImage(getter_AddRefs(container));
-  if (!container) return rv;
+  if (!container) { return rv;
+}
 
   // Set desktop wallpaper filling style
   nsAutoCString options;
-  if (aPosition == BACKGROUND_TILE)
+  if (aPosition == BACKGROUND_TILE) {
     options.AssignLiteral("wallpaper");
-  else if (aPosition == BACKGROUND_STRETCH)
+  } else if (aPosition == BACKGROUND_STRETCH) {
     options.AssignLiteral("stretched");
-  else if (aPosition == BACKGROUND_FILL)
+  } else if (aPosition == BACKGROUND_FILL) {
     options.AssignLiteral("zoom");
-  else if (aPosition == BACKGROUND_FIT)
+  } else if (aPosition == BACKGROUND_FIT) {
     options.AssignLiteral("scaled");
-  else
+  } else {
     options.AssignLiteral("centered");
+}
 
   // Write the background file to the home directory.
   nsAutoCString filePath(PR_GetEnv("HOME"));
@@ -478,8 +495,9 @@ nsGNOMEShellService::SetDesktopBackground(nsIDOMElement* aElement,
       NS_LITERAL_CSTRING(kDesktopBGSchema), getter_AddRefs(background_settings));
     if (background_settings) {
       gchar *file_uri = g_filename_to_uri(filePath.get(), nullptr, nullptr);
-      if (!file_uri)
+      if (!file_uri) {
          return NS_ERROR_FAILURE;
+}
 
       background_settings->SetString(NS_LITERAL_CSTRING(kDesktopOptionGSKey),
                                      options);
@@ -534,8 +552,9 @@ nsGNOMEShellService::GetDesktopBackgroundColor(uint32_t *aColor)
 
   if (!background_settings) {
     nsCOMPtr<nsIGConfService> gconf = do_GetService(NS_GCONFSERVICE_CONTRACTID);
-    if (gconf)
+    if (gconf) {
       gconf->GetString(NS_LITERAL_CSTRING(kDesktopColorKey), background);
+}
   }
 
   if (background.IsEmpty()) {
@@ -560,8 +579,9 @@ ColorToCString(uint32_t aColor, nsCString& aResult)
   // The #rrrrggggbbbb format is used to match gdk_color_to_string()
   aResult.SetLength(13);
   char *buf = aResult.BeginWriting();
-  if (!buf)
+  if (!buf) {
     return;
+}
 
   uint16_t red = COLOR_8_TO_16_BIT((aColor >> 16) & 0xff);
   uint16_t green = COLOR_8_TO_16_BIT((aColor >> 8) & 0xff);
@@ -603,44 +623,50 @@ NS_IMETHODIMP
 nsGNOMEShellService::OpenApplication(int32_t aApplication)
 {
   nsAutoCString scheme;
-  if (aApplication == APPLICATION_MAIL)
+  if (aApplication == APPLICATION_MAIL) {
     scheme.AssignLiteral("mailto");
-  else if (aApplication == APPLICATION_NEWS)
+  } else if (aApplication == APPLICATION_NEWS) {
     scheme.AssignLiteral("news");
-  else
+  } else {
     return NS_ERROR_NOT_AVAILABLE;
+}
 
   nsCOMPtr<nsIGIOService> giovfs = do_GetService(NS_GIOSERVICE_CONTRACTID);
   if (giovfs) {
     nsCOMPtr<nsIHandlerApp> handlerApp;
     giovfs->GetAppForURIScheme(scheme, getter_AddRefs(handlerApp));
-    if (handlerApp)
+    if (handlerApp) {
       return handlerApp->LaunchWithURI(nullptr, nullptr);
+}
   }
 
   nsCOMPtr<nsIGConfService> gconf = do_GetService(NS_GCONFSERVICE_CONTRACTID);
-  if (!gconf)
+  if (!gconf) {
     return NS_ERROR_FAILURE;
+}
 
   bool enabled;
   nsAutoCString appCommand;
   gconf->GetAppForProtocol(scheme, &enabled, appCommand);
 
-  if (!enabled)
+  if (!enabled) {
     return NS_ERROR_FAILURE;
+}
 
   // XXX we don't currently handle launching a terminal window.
   // If the handler requires a terminal, bail.
   bool requiresTerminal;
   gconf->HandlerRequiresTerminal(scheme, &requiresTerminal);
-  if (requiresTerminal)
+  if (requiresTerminal) {
     return NS_ERROR_FAILURE;
+}
 
   // Perform shell argument expansion
   int argc;
   char **argv;
-  if (!g_shell_parse_argv(appCommand.get(), &argc, &argv, nullptr))
+  if (!g_shell_parse_argv(appCommand.get(), &argc, &argv, nullptr)) {
     return NS_ERROR_FAILURE;
+}
 
   char **newArgv = new char*[argc + 1];
   int newArgc = 0;
@@ -648,8 +674,9 @@ nsGNOMEShellService::OpenApplication(int32_t aApplication)
   // Run through the list of arguments.  Copy all of them to the new
   // argv except for %s, which we skip.
   for (int i = 0; i < argc; ++i) {
-    if (strcmp(argv[i], "%s") != 0)
+    if (strcmp(argv[i], "%s") != 0) {
       newArgv[newArgc++] = argv[i];
+}
   }
 
   newArgv[newArgc] = nullptr;
@@ -669,12 +696,14 @@ nsGNOMEShellService::OpenApplicationWithURI(nsIFile* aApplication, const nsACStr
   nsresult rv;
   nsCOMPtr<nsIProcess> process =
     do_CreateInstance("@mozilla.org/process/util;1", &rv);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   rv = process->Init(aApplication);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     return rv;
+}
 
   const nsCString spec(aURI);
   const char* specStr = spec.get();

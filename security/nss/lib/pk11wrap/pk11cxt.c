@@ -63,17 +63,22 @@ PK11_DestroyContext(PK11Context *context, PRBool freeit)
 {
     pk11_CloseSession(context->slot, context->session, context->ownSession);
     /* initialize the critical fields of the context */
-    if (context->savedData != NULL)
+    if (context->savedData != NULL) {
         PORT_Free(context->savedData);
-    if (context->key)
+}
+    if (context->key) {
         PK11_FreeSymKey(context->key);
-    if (context->param && context->param != &pk11_null_params)
+}
+    if (context->param && context->param != &pk11_null_params) {
         SECITEM_FreeItem(context->param, PR_TRUE);
-    if (context->sessionLock)
+}
+    if (context->sessionLock) {
         PZ_DestroyLock(context->sessionLock);
+}
     PK11_FreeSlot(context->slot);
-    if (freeit)
+    if (freeit) {
         PORT_Free(context);
+}
 }
 
 /*
@@ -159,8 +164,9 @@ pk11_context_init(PK11Context *context, CK_MECHANISM *mech_info)
                 CK_ULONG count = 0;
                 /* generate the IV for fortezza */
                 crv = PK11_GETTAB(context->slot)->C_EncryptInit(context->session, mech_info, symKey->objectID);
-                if (crv != CKR_OK)
+                if (crv != CKR_OK) {
                     break;
+}
                 PK11_GETTAB(context->slot)
                     ->C_EncryptFinal(context->session,
                                      NULL, &count);
@@ -192,8 +198,9 @@ pk11_context_init(PK11Context *context, CK_MECHANISM *mech_info)
     if (!context->ownSession) {
         context->savedData = pk11_saveContext(context, context->savedData,
                                               &context->savedLength);
-        if (context->savedData == NULL)
+        if (context->savedData == NULL) {
             rv = SECFailure;
+}
         /* clear out out session for others to use */
         pk11_Finalize(context);
     }
@@ -306,8 +313,9 @@ __PK11_CreateContextByRawKey(PK11SlotInfo *slot, CK_MECHANISM_TYPE type,
 
     /* now import the key */
     symKey = PK11_ImportSymKey(slot, type, origin, operation, key, wincx);
-    if (symKey == NULL)
+    if (symKey == NULL) {
         goto loser;
+}
 
     context = PK11_CreateContextBySymKey(type, operation, symKey, param);
 
@@ -401,8 +409,9 @@ PK11_CloneContext(PK11Context *old)
 
     newcx = pk11_CreateNewContextInSlot(old->type, old->slot, old->operation,
                                         old->key, old->param);
-    if (newcx == NULL)
+    if (newcx == NULL) {
         return NULL;
+}
 
     /* now clone the save state. First we need to find the save state
       * of the old session. If the old context owns it's session,
@@ -441,8 +450,9 @@ PK11_CloneContext(PK11Context *old)
         }
     }
 
-    if (needFree)
+    if (needFree) {
         PORT_Free(data);
+}
 
     if (rv != SECSuccess) {
         PK11_DestroyContext(newcx, PR_TRUE);
@@ -465,8 +475,9 @@ PK11_SaveContext(PK11Context *cx, unsigned char *save, int *len, int saveLength)
         PK11_EnterContextMonitor(cx);
         data = pk11_saveContextHelper(cx, save, &length);
         PK11_ExitContextMonitor(cx);
-        if (data)
+        if (data) {
             *len = length;
+}
     } else if ((unsigned)saveLength >= cx->savedLength) {
         data = (unsigned char *)cx->savedData;
         if (cx->savedData) {
@@ -552,8 +563,9 @@ PK11_HashOK(SECOidTag algID)
     PK11Context *cx;
 
     cx = PK11_CreateDigestContext(algID);
-    if (cx == NULL)
+    if (cx == NULL) {
         return PR_FALSE;
+}
     PK11_DestroyContext(cx, PR_TRUE);
     return PR_TRUE;
 }
@@ -606,8 +618,9 @@ PK11_HashBuf(SECOidTag hashAlg, unsigned char *out, const unsigned char *in,
     }
 
     context = PK11_CreateDigestContext(hashAlg);
-    if (context == NULL)
+    if (context == NULL) {
         return SECFailure;
+}
 
     rv = PK11_DigestBegin(context);
     if (rv != SECSuccess) {
@@ -624,8 +637,9 @@ PK11_HashBuf(SECOidTag hashAlg, unsigned char *out, const unsigned char *in,
     /* XXX This really should have been an argument to this function! */
     max_length = HASH_ResultLenByOidTag(hashAlg);
     PORT_Assert(max_length);
-    if (!max_length)
+    if (!max_length) {
         max_length = HASH_LENGTH_MAX;
+}
 
     rv = PK11_DigestFinal(context, out, &out_length, max_length);
     PK11_DestroyContext(context, PR_TRUE);
@@ -730,8 +744,9 @@ PK11_CipherOp(PK11Context *context, unsigned char *out, int *outlen,
     if (!context->ownSession) {
         context->savedData = pk11_saveContext(context, context->savedData,
                                               &context->savedLength);
-        if (context->savedData == NULL)
+        if (context->savedData == NULL) {
             rv = SECFailure;
+}
 
         /* clear out out session for others to use */
         pk11_Finalize(context);
@@ -798,8 +813,9 @@ PK11_DigestOp(PK11Context *context, const unsigned char *in, unsigned inLen)
     if (!context->ownSession) {
         context->savedData = pk11_saveContext(context, context->savedData,
                                               &context->savedLength);
-        if (context->savedData == NULL)
+        if (context->savedData == NULL) {
             rv = SECFailure;
+}
 
         /* clear out out session for others to use */
         pk11_Finalize(context);
@@ -864,15 +880,17 @@ PK11_DigestKey(PK11Context *context, PK11SymKey *key)
     if (!context->ownSession) {
         context->savedData = pk11_saveContext(context, context->savedData,
                                               &context->savedLength);
-        if (context->savedData == NULL)
+        if (context->savedData == NULL) {
             rv = SECFailure;
+}
 
         /* clear out out session for others to use */
         pk11_Finalize(context);
     }
     PK11_ExitContextMonitor(context);
-    if (newKey)
+    if (newKey) {
         PK11_FreeSymKey(newKey);
+}
     return rv;
 }
 

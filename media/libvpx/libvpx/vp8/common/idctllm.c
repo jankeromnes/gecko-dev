@@ -90,9 +90,11 @@ void vp8_short_idct4x4llm_c(short *input, unsigned char *pred_ptr,
     for (c = 0; c < 4; ++c) {
       int a = ip[c] + pred_ptr[c];
 
-      if (a < 0) a = 0;
+      if (a < 0) { a = 0;
+}
 
-      if (a > 255) a = 255;
+      if (a > 255) { a = 255;
+}
 
       dst_ptr[c] = (unsigned char)a;
     }
@@ -112,9 +114,11 @@ void vp8_dc_only_idct_add_c(short input_dc, unsigned char *pred_ptr,
     for (c = 0; c < 4; ++c) {
       int a = a1 + pred_ptr[c];
 
-      if (a < 0) a = 0;
+      if (a < 0) { a = 0;
+}
 
-      if (a > 255) a = 255;
+      if (a > 255) { a = 255;
+}
 
       dst_ptr[c] = (unsigned char)a;
     }

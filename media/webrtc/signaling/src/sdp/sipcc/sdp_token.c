@@ -65,14 +65,17 @@ static sdp_result_e sdp_verify_unsigned(const char *ptr, uint64_t max_value)
        characters */
     size_t end = strspn(ptr, "0123456789");
 
-    if (ptr[end] != '\0')
+    if (ptr[end] != '\0') {
         return SDP_INVALID_PARAMETER;
+}
 
-    if (PR_sscanf(ptr, "%llu", &numeric_value) != 1)
+    if (PR_sscanf(ptr, "%llu", &numeric_value) != 1) {
         return SDP_INVALID_PARAMETER;
+}
 
-    if (numeric_value > max_value)
+    if (numeric_value > max_value) {
         return SDP_INVALID_PARAMETER;
+}
 
     return SDP_SUCCESS;
 }
@@ -1040,8 +1043,9 @@ sdp_result_e sdp_parse_encryption (sdp_t *sdp_p, uint16_t level, const char *ptr
     /*sa_ignore NO_NULL_CHK
       {ptr is valid since the pointer was checked earlier and the
        function would have exited if NULL.}*/
-    if (*ptr == ':')
+    if (*ptr == ':') {
         ptr++;
+}
     if (encrypt_p->encrypt_type != SDP_ENCRYPT_PROMPT) {
         ptr = sdp_getnextstrtok(ptr, encrypt_p->encrypt_key, sizeof(encrypt_p->encrypt_key), " \t", &result);
         if ((result != SDP_SUCCESS) &&

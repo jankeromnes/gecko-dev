@@ -140,8 +140,9 @@ int nr_ice_candidate_create(nr_ice_ctx *ctx,nr_ice_component *comp,nr_ice_socket
     int r,_status;
     char label[512];
 
-    if(!(cand=RCALLOC(sizeof(nr_ice_candidate))))
+    if(!(cand=RCALLOC(sizeof(nr_ice_candidate)))) {
       ABORT(R_NO_MEMORY);
+}
     cand->state=NR_ICE_CAND_STATE_CREATED;
     cand->ctx=ctx;
     cand->isock=isock;
@@ -154,8 +155,9 @@ int nr_ice_candidate_create(nr_ice_ctx *ctx,nr_ice_component *comp,nr_ice_socket
     cand->stream=comp->stream;
 
     /* Extract the addr as the base */
-    if(r=nr_socket_getaddr(cand->isock->sock,&cand->base))
+    if(r=nr_socket_getaddr(cand->isock->sock,&cand->base)) {
       ABORT(r);
+}
 
     switch(ctype) {
       case HOST:
@@ -163,13 +165,15 @@ int nr_ice_candidate_create(nr_ice_ctx *ctx,nr_ice_component *comp,nr_ice_socket
         break;
 
       case SERVER_REFLEXIVE:
-        if(r=nr_ice_candidate_format_stun_label(label, sizeof(label), cand))
+        if(r=nr_ice_candidate_format_stun_label(label, sizeof(label), cand)) {
           ABORT(r);
+}
         break;
 
       case RELAYED:
-        if(r=nr_ice_candidate_format_stun_label(label, sizeof(label), cand))
+        if(r=nr_ice_candidate_format_stun_label(label, sizeof(label), cand)) {
           ABORT(r);
+}
         break;
 
       case PEER_REFLEXIVE:
@@ -191,13 +195,16 @@ int nr_ice_candidate_create(nr_ice_ctx *ctx,nr_ice_component *comp,nr_ice_socket
       }
     }
 
-    if(!(cand->label=r_strdup(label)))
+    if(!(cand->label=r_strdup(label))) {
       ABORT(R_NO_MEMORY);
+}
 
-    if(r=nr_ice_get_foundation(ctx,cand))
+    if(r=nr_ice_get_foundation(ctx,cand)) {
       ABORT(r);
-    if(r=nr_ice_candidate_compute_priority(cand))
+}
+    if(r=nr_ice_candidate_compute_priority(cand)) {
       ABORT(r);
+}
 
     TAILQ_FOREACH(tmp,&isock->candidates,entry_sock){
       if(cand->priority==tmp->priority){
@@ -206,8 +213,9 @@ int nr_ice_candidate_create(nr_ice_ctx *ctx,nr_ice_component *comp,nr_ice_socket
       }
     }
 
-    if(ctype==RELAYED)
+    if(ctype==RELAYED) {
       cand->u.relayed.turn_sock=osock;
+}
 
 
     /* Add the candidate to the isock list*/
@@ -237,10 +245,12 @@ int nr_ice_peer_peer_rflx_candidate_create(nr_ice_ctx *ctx,char *label, nr_ice_c
     nr_ice_candidate_type ctype=PEER_REFLEXIVE;
     int r,_status;
 
-    if(!(cand=RCALLOC(sizeof(nr_ice_candidate))))
+    if(!(cand=RCALLOC(sizeof(nr_ice_candidate)))) {
       ABORT(R_NO_MEMORY);
-    if(!(cand->label=r_strdup(label)))
+}
+    if(!(cand->label=r_strdup(label))) {
       ABORT(R_NO_MEMORY);
+}
 
     cand->state=NR_ICE_CAND_STATE_INITIALIZED;
     cand->ctx=ctx;
@@ -253,13 +263,16 @@ int nr_ice_peer_peer_rflx_candidate_create(nr_ice_ctx *ctx,char *label, nr_ice_c
     r_log(LOG_ICE,LOG_DEBUG,"ICE(%s)/CAND(%s): creating candidate with type %s",
       ctx->label,label,nr_ctype_name(ctype));
 
-    if(r=nr_transport_addr_copy(&cand->base,addr))
+    if(r=nr_transport_addr_copy(&cand->base,addr)) {
       ABORT(r);
-    if(r=nr_transport_addr_copy(&cand->addr,addr))
+}
+    if(r=nr_transport_addr_copy(&cand->addr,addr)) {
       ABORT(r);
+}
     /* Bogus foundation */
-    if(!(cand->foundation=r_strdup(cand->addr.as_string)))
+    if(!(cand->foundation=r_strdup(cand->addr.as_string))) {
       ABORT(R_NO_MEMORY);
+}
 
     nr_ice_candidate_compute_codeword(cand);
 
@@ -305,8 +318,9 @@ int nr_ice_candidate_destroy(nr_ice_candidate **candp)
   {
     nr_ice_candidate *cand=0;
 
-    if(!candp || !*candp)
+    if(!candp || !*candp) {
       return(0);
+}
 
     cand=*candp;
 
@@ -335,19 +349,23 @@ int nr_ice_candidate_destroy(nr_ice_candidate **candp)
             stun_ctx = STAILQ_NEXT(stun_ctx, entry);
           }
         }
-        if (cand->u.relayed.turn_handle)
+        if (cand->u.relayed.turn_handle) {
           nr_ice_socket_deregister(cand->isock, cand->u.relayed.turn_handle);
-        if (cand->u.relayed.srvflx_candidate)
+}
+        if (cand->u.relayed.srvflx_candidate) {
           cand->u.relayed.srvflx_candidate->u.srvrflx.relay_candidate=0;
+}
         nr_turn_client_ctx_destroy(&cand->u.relayed.turn);
         nr_socket_destroy(&cand->u.relayed.turn_sock);
         break;
 #endif /* USE_TURN */
       case SERVER_REFLEXIVE:
-        if (cand->u.srvrflx.stun_handle)
+        if (cand->u.srvrflx.stun_handle) {
           nr_ice_socket_deregister(cand->isock, cand->u.srvrflx.stun_handle);
-        if (cand->u.srvrflx.relay_candidate)
+}
+        if (cand->u.srvrflx.relay_candidate) {
           cand->u.srvrflx.relay_candidate->u.relayed.srvflx_candidate=0;
+}
         nr_stun_client_ctx_destroy(&cand->u.srvrflx.stun);
         break;
       default:
@@ -378,16 +396,20 @@ static int nr_ice_get_foundation(nr_ice_ctx *ctx,nr_ice_candidate *cand)
 
     foundation=STAILQ_FIRST(&ctx->foundations);
     while(foundation){
-      if(nr_transport_addr_cmp(&cand->base,&foundation->addr,NR_TRANSPORT_ADDR_CMP_MODE_ADDR))
+      if(nr_transport_addr_cmp(&cand->base,&foundation->addr,NR_TRANSPORT_ADDR_CMP_MODE_ADDR)) {
         goto next;
-      if(cand->type != foundation->type)
+}
+      if(cand->type != foundation->type) {
         goto next;
-      if(cand->stun_server != foundation->stun_server)
+}
+      if(cand->stun_server != foundation->stun_server) {
         goto next;
+}
 
       snprintf(fnd,sizeof(fnd),"%d",i);
-      if(!(cand->foundation=r_strdup(fnd)))
+      if(!(cand->foundation=r_strdup(fnd))) {
         ABORT(R_NO_MEMORY);
+}
       return(0);
 
     next:
@@ -395,16 +417,18 @@ static int nr_ice_get_foundation(nr_ice_ctx *ctx,nr_ice_candidate *cand)
       i++;
     }
 
-    if(!(foundation=RCALLOC(sizeof(nr_ice_foundation))))
+    if(!(foundation=RCALLOC(sizeof(nr_ice_foundation)))) {
       ABORT(R_NO_MEMORY);
+}
     nr_transport_addr_copy(&foundation->addr,&cand->base);
     foundation->type=cand->type;
     foundation->stun_server=cand->stun_server;
     STAILQ_INSERT_TAIL(&ctx->foundations,foundation,entry);
 
     snprintf(fnd,sizeof(fnd),"%d",i);
-    if(!(cand->foundation=r_strdup(fnd)))
+    if(!(cand->foundation=r_strdup(fnd))) {
       ABORT(R_NO_MEMORY);
+}
 
     _status=0;
   abort:
@@ -428,41 +452,49 @@ int nr_ice_candidate_compute_priority(nr_ice_candidate *cand)
     switch(cand->type){
       case HOST:
         if(cand->base.protocol == IPPROTO_UDP) {
-          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_HOST,&type_preference))
+          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_HOST,&type_preference)) {
             ABORT(r);
+}
         } else if(cand->base.protocol == IPPROTO_TCP) {
-          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_HOST_TCP,&type_preference))
+          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_HOST_TCP,&type_preference)) {
             ABORT(r);
+}
         }
         stun_priority=0;
         break;
       case RELAYED:
         if(cand->base.protocol == IPPROTO_UDP) {
-          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_RELAYED,&type_preference))
+          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_RELAYED,&type_preference)) {
             ABORT(r);
+}
         } else if(cand->base.protocol == IPPROTO_TCP) {
-          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_RELAYED_TCP,&type_preference))
+          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_RELAYED_TCP,&type_preference)) {
             ABORT(r);
+}
         }
         stun_priority=31-cand->stun_server->id;
         break;
       case SERVER_REFLEXIVE:
         if(cand->base.protocol == IPPROTO_UDP) {
-          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_SRV_RFLX,&type_preference))
+          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_SRV_RFLX,&type_preference)) {
             ABORT(r);
+}
         } else if(cand->base.protocol == IPPROTO_TCP) {
-          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_SRV_RFLX_TCP,&type_preference))
+          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_SRV_RFLX_TCP,&type_preference)) {
             ABORT(r);
+}
         }
         stun_priority=31-cand->stun_server->id;
         break;
       case PEER_REFLEXIVE:
         if(cand->base.protocol == IPPROTO_UDP) {
-          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_PEER_RFLX,&type_preference))
+          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_PEER_RFLX,&type_preference)) {
             ABORT(r);
+}
         } else if(cand->base.protocol == IPPROTO_TCP) {
-          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_PEER_RFLX_TCP,&type_preference))
+          if(r=NR_reg_get_uchar(NR_ICE_REG_PREF_TYPE_PEER_RFLX_TCP,&type_preference)) {
             ABORT(r);
+}
         }
         stun_priority=0;
         break;
@@ -473,22 +505,25 @@ int nr_ice_candidate_compute_priority(nr_ice_candidate *cand)
     if(cand->base.protocol == IPPROTO_TCP){
       switch (cand->tcp_type) {
         case TCP_TYPE_ACTIVE:
-          if (cand->type == HOST)
+          if (cand->type == HOST) {
             direction_priority=6;
-          else
+          } else {
             direction_priority=4;
+}
           break;
         case  TCP_TYPE_PASSIVE:
-          if (cand->type == HOST)
+          if (cand->type == HOST) {
             direction_priority=4;
-          else
+          } else {
             direction_priority=2;
+}
           break;
         case  TCP_TYPE_SO:
-          if (cand->type == HOST)
+          if (cand->type == HOST) {
             direction_priority=2;
-          else
+          } else {
             direction_priority=6;
+}
           break;
         case  TCP_TYPE_NONE:
           break;
@@ -499,8 +534,9 @@ int nr_ice_candidate_compute_priority(nr_ice_candidate *cand)
       }
     }
 
-    if(type_preference > 126)
+    if(type_preference > 126) {
       r_log(LOG_ICE,LOG_ERR,"Illegal type preference %d",type_preference);
+}
 
     if(!cand->ctx->interface_prioritizer) {
       /* Prioritizer is not set, read from registry */
@@ -532,8 +568,9 @@ int nr_ice_candidate_compute_priority(nr_ice_candidate *cand)
       char key_of_interface[MAXIFNAME + 41];
       nr_transport_addr addr;
 
-      if(r=nr_socket_getaddr(cand->isock->sock, &addr))
+      if(r=nr_socket_getaddr(cand->isock->sock, &addr)) {
         ABORT(r);
+}
 
       if(r=nr_transport_addr_fmt_ifname_addr_string(&addr,key_of_interface,
          sizeof(key_of_interface))) {
@@ -581,8 +618,9 @@ int nr_ice_candidate_initialize(nr_ice_candidate *cand, NR_async_cb ready_cb, vo
 
     switch(cand->type){
       case HOST:
-        if(r=nr_socket_getaddr(cand->isock->sock,&cand->addr))
+        if(r=nr_socket_getaddr(cand->isock->sock,&cand->addr)) {
           ABORT(r);
+}
         cand->osock=cand->isock->sock;
         // Post this so that it doesn't happen in-line
         cand->ready_cb = ready_cb;
@@ -608,8 +646,9 @@ int nr_ice_candidate_initialize(nr_ice_candidate *cand, NR_async_cb ready_cb, vo
             ABORT(r);
           }
 
-          if(r=nr_ice_candidate_initialize2(cand))
+          if(r=nr_ice_candidate_initialize2(cand)) {
             ABORT(r);
+}
         }
         else {
           nr_resolver_resource resource;
@@ -653,8 +692,9 @@ int nr_ice_candidate_initialize(nr_ice_candidate *cand, NR_async_cb ready_cb, vo
 
     _status=0;
   abort:
-    if(_status && _status!=R_WOULDBLOCK)
+    if(_status && _status!=R_WOULDBLOCK) {
       nr_ice_candidate_mark_done(cand, NR_ICE_CAND_STATE_FAILED);
+}
     return(_status);
   }
 
@@ -682,17 +722,20 @@ static int nr_ice_candidate_resolved_cb(void *cb_arg, nr_transport_addr *addr)
     }
 
     /* Copy the address */
-    if(r=nr_transport_addr_copy(&cand->stun_server_addr,addr))
+    if(r=nr_transport_addr_copy(&cand->stun_server_addr,addr)) {
       ABORT(r);
+}
 
     if (cand->tcp_type == TCP_TYPE_PASSIVE || cand->tcp_type == TCP_TYPE_SO){
-      if (r=nr_socket_multi_tcp_stun_server_connect(cand->osock, addr))
+      if (r=nr_socket_multi_tcp_stun_server_connect(cand->osock, addr)) {
         ABORT(r);
+}
     }
 
     /* Now start initializing */
-    if(r=nr_ice_candidate_initialize2(cand))
+    if(r=nr_ice_candidate_initialize2(cand)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -713,15 +756,17 @@ static int nr_ice_candidate_initialize2(nr_ice_candidate *cand)
         break;
 #ifdef USE_TURN
       case RELAYED:
-        if(r=nr_ice_start_relay_turn(cand))
+        if(r=nr_ice_start_relay_turn(cand)) {
           ABORT(r);
+}
         ABORT(R_WOULDBLOCK);
         break;
 #endif /* USE_TURN */
       case SERVER_REFLEXIVE:
         /* Need to start stun */
-        if(r=nr_ice_srvrflx_start_stun(cand))
+        if(r=nr_ice_srvrflx_start_stun(cand)) {
           ABORT(r);
+}
         cand->osock=cand->isock->sock;
         ABORT(R_WOULDBLOCK);
         break;
@@ -744,14 +789,17 @@ static void nr_ice_srvrflx_start_stun_timer_cb(NR_SOCKET s, int how, void *cb_ar
 /* TODO: if the response is a BINDING-ERROR-RESPONSE, then restart
  * TODO: using NR_STUN_CLIENT_MODE_BINDING_REQUEST because the
  * TODO: server may not have understood the 0.96-style request */
-    if(r=nr_stun_client_start(cand->u.srvrflx.stun, NR_STUN_CLIENT_MODE_BINDING_REQUEST_NO_AUTH, nr_ice_srvrflx_stun_finished_cb, cand))
+    if(r=nr_stun_client_start(cand->u.srvrflx.stun, NR_STUN_CLIENT_MODE_BINDING_REQUEST_NO_AUTH, nr_ice_srvrflx_stun_finished_cb, cand)) {
       ABORT(r);
+}
 
-    if(r=nr_ice_ctx_remember_id(cand->ctx, cand->u.srvrflx.stun->request))
+    if(r=nr_ice_ctx_remember_id(cand->ctx, cand->u.srvrflx.stun->request)) {
       ABORT(r);
+}
 
-    if(r=nr_ice_socket_register_stun_client(cand->isock,cand->u.srvrflx.stun,&cand->u.srvrflx.stun_handle))
+    if(r=nr_ice_socket_register_stun_client(cand->isock,cand->u.srvrflx.stun,&cand->u.srvrflx.stun_handle)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -768,8 +816,9 @@ static int nr_ice_srvrflx_start_stun(nr_ice_candidate *cand)
     assert(!cand->delay_timer);
     if(r=nr_stun_client_ctx_create(cand->label, cand->isock->sock,
       &cand->stun_server_addr, cand->stream->ctx->gather_rto,
-      &cand->u.srvrflx.stun))
+      &cand->u.srvrflx.stun)) {
       ABORT(r);
+}
 
     NR_ASYNC_TIMER_SET(cand->stream->ctx->stun_delay,nr_ice_srvrflx_start_stun_timer_cb,cand,&cand->delay_timer);
     cand->stream->ctx->stun_delay += cand->stream->ctx->Ta;
@@ -787,12 +836,14 @@ static void nr_ice_start_relay_turn_timer_cb(NR_SOCKET s, int how, void *cb_arg)
 
     cand->delay_timer=0;
 
-    if(r=nr_turn_client_allocate(cand->u.relayed.turn, nr_ice_turn_allocated_cb, cb_arg))
+    if(r=nr_turn_client_allocate(cand->u.relayed.turn, nr_ice_turn_allocated_cb, cb_arg)) {
       ABORT(r);
+}
 
     if(r=nr_ice_socket_register_turn_client(cand->isock, cand->u.relayed.turn,
-                                            cand->osock, &cand->u.relayed.turn_handle))
+                                            cand->osock, &cand->u.relayed.turn_handle)) {
       ABORT(r);
+}
 
     _status=0;
   abort:
@@ -810,11 +861,13 @@ static int nr_ice_start_relay_turn(nr_ice_candidate *cand)
                                    cand->u.relayed.server->username,
                                    cand->u.relayed.server->password,
                                    &cand->stun_server_addr,
-                                   &cand->u.relayed.turn))
+                                   &cand->u.relayed.turn)) {
       ABORT(r);
+}
 
-    if(r=nr_socket_turn_set_ctx(cand->osock, cand->u.relayed.turn))
+    if(r=nr_socket_turn_set_ctx(cand->osock, cand->u.relayed.turn)) {
       ABORT(r);
+}
 
     NR_ASYNC_TIMER_SET(cand->stream->ctx->stun_delay,nr_ice_start_relay_turn_timer_cb,cand,&cand->delay_timer);
     cand->stream->ctx->stun_delay += cand->stream->ctx->Ta;
@@ -876,22 +929,26 @@ static void nr_ice_turn_allocated_cb(NR_SOCKET s, int how, void *cb_arg)
     switch(turn->state){
       /* OK, we should have a mapped address */
       case NR_TURN_CLIENT_STATE_ALLOCATED:
-        if (r=nr_turn_client_get_relayed_address(turn, &relay_addr))
+        if (r=nr_turn_client_get_relayed_address(turn, &relay_addr)) {
           ABORT(r);
+}
 
         if(r=nr_concat_strings(&label,"turn-relay(",cand->base.as_string,"|",
-                               relay_addr.as_string,")",NULL))
+                               relay_addr.as_string,")",NULL)) {
           ABORT(r);
+}
 
         r_log(LOG_ICE,LOG_DEBUG,"TURN-CLIENT(%s)/CAND(%s): Switching from TURN to RELAY (%s)",cand->u.relayed.turn->label,cand->label,label);
 
         /* Copy the relayed address into the candidate addr and
            into the candidate base. Note that we need to keep the
            ifname in the base. */
-        if (r=nr_transport_addr_copy(&cand->addr, &relay_addr))
+        if (r=nr_transport_addr_copy(&cand->addr, &relay_addr)) {
           ABORT(r);
-        if (r=nr_transport_addr_copy_keep_ifname(&cand->base, &relay_addr))  /* Need to keep interface for priority calculation */
+}
+        if (r=nr_transport_addr_copy_keep_ifname(&cand->base, &relay_addr)) {  /* Need to keep interface for priority calculation */
           ABORT(r);
+}
 
         r_log(LOG_ICE,LOG_DEBUG,"ICE(%s)/CAND(%s): new relay base=%s addr=%s", cand->ctx->label, cand->label, cand->base.as_string, cand->addr.as_string);
 
@@ -939,13 +996,16 @@ int nr_ice_format_candidate_attribute(nr_ice_candidate *cand, char *attr, int ma
     assert(!strcmp(nr_ice_candidate_type_names[HOST], "host"));
     assert(!strcmp(nr_ice_candidate_type_names[RELAYED], "relay"));
 
-    if(r=nr_transport_addr_get_addrstring(&cand->addr,addr,sizeof(addr)))
+    if(r=nr_transport_addr_get_addrstring(&cand->addr,addr,sizeof(addr))) {
       ABORT(r);
-    if(r=nr_transport_addr_get_port(&cand->addr,&port))
+}
+    if(r=nr_transport_addr_get_port(&cand->addr,&port)) {
       ABORT(r);
+}
     /* https://tools.ietf.org/html/rfc6544#section-4.5 */
-    if (cand->base.protocol==IPPROTO_TCP && cand->tcp_type==TCP_TYPE_ACTIVE)
+    if (cand->base.protocol==IPPROTO_TCP && cand->tcp_type==TCP_TYPE_ACTIVE) {
       port=9;
+}
     snprintf(attr,maxlen,"candidate:%s %d %s %u %s %d typ %s",
       cand->foundation, cand->component_id, cand->addr.protocol==IPPROTO_UDP?"UDP":"TCP",cand->priority, addr, port,
       nr_ctype_name(cand->type));
@@ -963,18 +1023,22 @@ int nr_ice_format_candidate_attribute(nr_ice_candidate *cand, char *attr, int ma
         break;
       case SERVER_REFLEXIVE:
       case PEER_REFLEXIVE:
-        if(r=nr_transport_addr_get_addrstring(raddr,addr,sizeof(addr)))
+        if(r=nr_transport_addr_get_addrstring(raddr,addr,sizeof(addr))) {
           ABORT(r);
-        if(r=nr_transport_addr_get_port(raddr,&port))
+}
+        if(r=nr_transport_addr_get_port(raddr,&port)) {
           ABORT(r);
+}
         snprintf(attr,maxlen," raddr %s rport %d",addr,port);
         break;
       case RELAYED:
         // comes from XorMappedAddress via AllocateResponse
-        if(r=nr_transport_addr_get_addrstring(raddr,addr,sizeof(addr)))
+        if(r=nr_transport_addr_get_addrstring(raddr,addr,sizeof(addr))) {
           ABORT(r);
-        if(r=nr_transport_addr_get_port(raddr,&port))
+}
+        if(r=nr_transport_addr_get_port(raddr,&port)) {
           ABORT(r);
+}
 
         snprintf(attr,maxlen," raddr %s rport %d",addr,port);
         break;

@@ -101,8 +101,9 @@ static int parse_setup_header(AVVorbisParseContext *s,
         av_log(s, AV_LOG_ERROR, "Out of memory\n");
         return AVERROR(ENOMEM);
     }
-    for (i = 0; i < buf_size; i++)
+    for (i = 0; i < buf_size; i++) {
         rev_buf[i] = buf[buf_size - 1 - i];
+}
     init_get_bits(&gb, rev_buf, buf_size * 8);
 
     got_framing_bit = 0;
@@ -127,12 +128,14 @@ static int parse_setup_header(AVVorbisParseContext *s,
     mode_count = 0;
     got_mode_header = 0;
     while (get_bits_left(&gb) >= 97) {
-        if (get_bits(&gb, 8) > 63 || get_bits(&gb, 16) || get_bits(&gb, 16))
+        if (get_bits(&gb, 8) > 63 || get_bits(&gb, 16) || get_bits(&gb, 16)) {
             break;
+}
         skip_bits(&gb, 1);
         mode_count++;
-        if (mode_count > 64)
+        if (mode_count > 64) {
             break;
+}
         gb0 = gb;
         if (get_bits(&gb0, 6) + 1 == mode_count) {
             got_mode_header = 1;
@@ -198,11 +201,13 @@ static int vorbis_parse_init(AVVorbisParseContext *s,
         return ret;
     }
 
-    if ((ret = parse_id_header(s, header_start[0], header_len[0])) < 0)
+    if ((ret = parse_id_header(s, header_start[0], header_len[0])) < 0) {
         return ret;
+}
 
-    if ((ret = parse_setup_header(s, header_start[2], header_len[2])) < 0)
+    if ((ret = parse_setup_header(s, header_start[2], header_len[2])) < 0) {
         return ret;
+}
 
     s->valid_extradata = 1;
     s->previous_blocksize = s->blocksize[s->mode_blocksize[0]];
@@ -221,18 +226,20 @@ int av_vorbis_parse_frame_flags(AVVorbisParseContext *s, const uint8_t *buf,
 
         if (buf[0] & 1) {
             /* If the user doesn't care about special packets, it's a bad one. */
-            if (!flags)
+            if (!flags) {
                 goto bad_packet;
+}
 
             /* Set the flag for which kind of special packet it is. */
-            if (buf[0] == 1)
+            if (buf[0] == 1) {
                 *flags |= VORBIS_FLAG_HEADER;
-            else if (buf[0] == 3)
+            } else if (buf[0] == 3) {
                 *flags |= VORBIS_FLAG_COMMENT;
-            else if (buf[0] == 5)
+            } else if (buf[0] == 5) {
                 *flags |= VORBIS_FLAG_SETUP;
-            else
+            } else {
                 goto bad_packet;
+}
 
             /* Special packets have no duration. */
             return 0;
@@ -241,10 +248,11 @@ bad_packet:
             av_log(s, AV_LOG_ERROR, "Invalid packet\n");
             return AVERROR_INVALIDDATA;
         }
-        if (s->mode_count == 1)
+        if (s->mode_count == 1) {
             mode = 0;
-        else
+        } else {
             mode = (buf[0] & s->mode_mask) >> 1;
+}
         if (mode >= s->mode_count) {
             av_log(s, AV_LOG_ERROR, "Invalid mode in packet\n");
             return AVERROR_INVALIDDATA;
@@ -269,8 +277,9 @@ int av_vorbis_parse_frame(AVVorbisParseContext *s, const uint8_t *buf,
 
 void av_vorbis_parse_reset(AVVorbisParseContext *s)
 {
-    if (s->valid_extradata)
+    if (s->valid_extradata) {
         s->previous_blocksize = s->blocksize[0];
+}
 }
 
 void av_vorbis_parse_free(AVVorbisParseContext **s)
@@ -284,8 +293,9 @@ AVVorbisParseContext *av_vorbis_parse_init(const uint8_t *extradata,
     AVVorbisParseContext *s = av_mallocz(sizeof(*s));
     int ret;
 
-    if (!s)
+    if (!s) {
         return NULL;
+}
 
     ret = vorbis_parse_init(s, extradata, extradata_size);
     if (ret < 0) {

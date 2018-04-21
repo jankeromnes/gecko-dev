@@ -21,8 +21,9 @@ namespace {
 // Return a timeout suitable for the glib loop, -1 to block forever,
 // 0 to return right away, or a timeout in milliseconds from now.
 int GetTimeIntervalMilliseconds(const base::TimeTicks& from) {
-  if (from.is_null())
+  if (from.is_null()) {
     return -1;
+}
 
   // Be careful here.  TimeDelta has a precision of microseconds, but we want a
   // value in milliseconds.  If there are 5.5ms left, should the delay be 5 or
@@ -193,24 +194,29 @@ void MessagePumpForUI::RunWithDispatcher(Delegate* delegate,
 
     // g_main_context_iteration returns true if events have been dispatched.
     more_work_is_plausible = g_main_context_iteration(context_, block);
-    if (state_->should_quit)
+    if (state_->should_quit) {
       break;
+}
 
     more_work_is_plausible |= state_->delegate->DoWork();
-    if (state_->should_quit)
+    if (state_->should_quit) {
       break;
+}
 
     more_work_is_plausible |=
         state_->delegate->DoDelayedWork(&delayed_work_time_);
-    if (state_->should_quit)
+    if (state_->should_quit) {
       break;
+}
 
-    if (more_work_is_plausible)
+    if (more_work_is_plausible) {
       continue;
+}
 
     more_work_is_plausible = state_->delegate->DoIdleWork();
-    if (state_->should_quit)
+    if (state_->should_quit) {
       break;
+}
   }
 
   state_ = previous_state;
@@ -221,8 +227,9 @@ int MessagePumpForUI::HandlePrepare() {
   // We know we have work, but we haven't called HandleDispatch yet. Don't let
   // the pump block so that we can do some processing.
   if (state_ &&  // state_ may be null during tests.
-      state_->has_work)
+      state_->has_work) {
     return 0;
+}
 
   // We don't think we have work to do, but make sure not to block
   // longer than the next time we need to run delayed work.
@@ -230,8 +237,9 @@ int MessagePumpForUI::HandlePrepare() {
 }
 
 bool MessagePumpForUI::HandleCheck() {
-  if (!state_)  // state_ may be null during tests.
+  if (!state_) {  // state_ may be null during tests.
     return false;
+}
 
   // We should only ever have a single message on the wakeup pipe since we only
   // write to the pipe when pipe_full_ is false. The glib poll will tell us
@@ -249,8 +257,9 @@ bool MessagePumpForUI::HandleCheck() {
     state_->has_work = true;
   }
 
-  if (state_->has_work)
+  if (state_->has_work) {
     return true;
+}
 
   if (GetTimeIntervalMilliseconds(delayed_work_time_) == 0) {
     // The timer has expired. That condition will stay true until we process
@@ -271,8 +280,9 @@ void MessagePumpForUI::HandleDispatch() {
     state_->has_work = true;
   }
 
-  if (state_->should_quit)
+  if (state_->should_quit) {
     return;
+}
 
   state_->delegate->DoDelayedWork(&delayed_work_time_);
 }
@@ -330,8 +340,9 @@ void MessagePumpForUI::EventDispatcher(GdkEvent* event, gpointer data) {
   message_pump->WillProcessEvent(event);
   if (message_pump->state_ &&  // state_ may be null during tests.
       message_pump->state_->dispatcher) {
-    if (!message_pump->state_->dispatcher->Dispatch(event))
+    if (!message_pump->state_->dispatcher->Dispatch(event)) {
       message_pump->state_->should_quit = true;
+}
   } else {
     gtk_main_do_event(event);
   }

@@ -107,13 +107,15 @@ sec_asn1e_push_state(SEC_ASN1EncoderContext *cx,
     new_state->parent = state;
     new_state->theTemplate = theTemplate;
     new_state->place = notInUse;
-    if (src != NULL)
+    if (src != NULL) {
         new_state->src = (char *)src + theTemplate->offset;
+}
 
     if (state != NULL) {
         new_state->depth = state->depth;
-        if (new_depth)
+        if (new_depth) {
             new_state->depth++;
+}
         state->child = new_state;
     }
 
@@ -135,8 +137,9 @@ sec_asn1e_scrub_state(sec_asn1e_state *state)
 static void
 sec_asn1e_notify_before(SEC_ASN1EncoderContext *cx, void *src, int depth)
 {
-    if (cx->notify_proc == NULL)
+    if (cx->notify_proc == NULL) {
         return;
+}
 
     cx->during_notify = PR_TRUE;
     (*cx->notify_proc)(cx->notify_arg, PR_TRUE, src, depth);
@@ -146,8 +149,9 @@ sec_asn1e_notify_before(SEC_ASN1EncoderContext *cx, void *src, int depth)
 static void
 sec_asn1e_notify_after(SEC_ASN1EncoderContext *cx, void *src, int depth)
 {
-    if (cx->notify_proc == NULL)
+    if (cx->notify_proc == NULL) {
         return;
+}
 
     cx->during_notify = PR_TRUE;
     (*cx->notify_proc)(cx->notify_arg, PR_FALSE, src, depth);
@@ -208,8 +212,9 @@ sec_asn1e_init_state_based_on_template(sec_asn1e_state *state)
                  * not need to be encoded.  In this case we are done;
                  * we do not want to push a subtemplate.
                  */
-                if (optional)
+                if (optional) {
                     return state;
+}
 
                 /*
                  * XXX this is an error; need to figure out
@@ -255,8 +260,9 @@ sec_asn1e_init_state_based_on_template(sec_asn1e_state *state)
             }
         }
         state = sec_asn1e_push_state(state->top, subt, src, PR_FALSE);
-        if (state == NULL)
+        if (state == NULL) {
             return state;
+}
 
         if (universal) {
             /*
@@ -621,8 +627,9 @@ sec_asn1e_contents_length(const SEC_ASN1Template *theTemplate, void *src,
                 len = 0;
 
                 group = *(void ***)src;
-                if (group == NULL)
+                if (group == NULL) {
                     break;
+}
 
                 tmpt = SEC_ASN1GetSubtemplate(theTemplate, src, PR_TRUE);
 
@@ -637,8 +644,9 @@ sec_asn1e_contents_length(const SEC_ASN1Template *theTemplate, void *src,
                      * XXX The 1 below is the presumed length of the identifier;
                      * to support a high-tag-number this would need to be smarter.
                      */
-                    if (*pHdrException == hdr_normal)
+                    if (*pHdrException == hdr_normal) {
                         len += 1 + SEC_ASN1LengthLength(sub_len);
+}
                 }
             } break;
 
@@ -660,8 +668,9 @@ sec_asn1e_contents_length(const SEC_ASN1Template *theTemplate, void *src,
                      * XXX The 1 below is the presumed length of the identifier;
                      * to support a high-tag-number this would need to be smarter.
                      */
-                    if (*pHdrException == hdr_normal)
+                    if (*pHdrException == hdr_normal) {
                         len += 1 + SEC_ASN1LengthLength(sub_len);
+}
                 }
             } break;
 
@@ -669,8 +678,9 @@ sec_asn1e_contents_length(const SEC_ASN1Template *theTemplate, void *src,
                 /* convert bit length to byte */
                 len = (((SECItem *)src)->len + 7) >> 3;
                 /* bit string contents involve an extra octet */
-                if (len)
+                if (len) {
                     len++;
+}
                 break;
 
             case SEC_ASN1_INTEGER:
@@ -715,12 +725,13 @@ sec_asn1e_contents_length(const SEC_ASN1Template *theTemplate, void *src,
 #endif
     } /* end else */
 
-    if (len == 0 && optional)
+    if (len == 0 && optional) {
         *pHdrException = hdr_optional;
-    else if (underlying_kind == SEC_ASN1_ANY)
+    } else if (underlying_kind == SEC_ASN1_ANY) {
         *pHdrException = hdr_any;
-    else
+    } else {
         *pHdrException = hdr_normal;
+}
 
     return len;
 }
@@ -1094,8 +1105,9 @@ sec_asn1e_next_in_group(sec_asn1e_state *state)
      * Find placement of current item.
      */
     member = (char *)(state->child->src) - child->theTemplate->offset;
-    while (*group != member)
+    while (*group != member) {
         group++;
+}
 
     /*
      * Move forward to next item.
@@ -1170,8 +1182,9 @@ sec_asn1e_after_contents(sec_asn1e_state *state)
 {
     PORT_Assert(state->place == afterContents);
 
-    if (state->indefinite)
+    if (state->indefinite) {
         sec_asn1e_write_end_of_contents_bytes(state);
+}
 
     /*
      * Just make my parent be the current state.  It will then clean
@@ -1208,10 +1221,11 @@ SEC_ASN1EncoderUpdate(SEC_ASN1EncoderContext *cx,
                 sec_asn1e_write_header(state);
                 break;
             case duringContents:
-                if (cx->from_buf)
+                if (cx->from_buf) {
                     sec_asn1e_write_contents_from_buf(state, buf, len);
-                else
+                } else {
                     sec_asn1e_write_contents(state);
+}
                 break;
             case duringGroup:
                 sec_asn1e_next_in_group(state);
@@ -1241,8 +1255,9 @@ SEC_ASN1EncoderUpdate(SEC_ASN1EncoderContext *cx,
                 break;
         }
 
-        if (cx->status == encodeError)
+        if (cx->status == encodeError) {
             break;
+}
 
         /* It might have changed, so we have to update our local copy.  */
         state = cx->current;
@@ -1279,8 +1294,9 @@ SEC_ASN1EncoderStart(const void *src, const SEC_ASN1Template *theTemplate,
     SEC_ASN1EncoderContext *cx;
 
     our_pool = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if (our_pool == NULL)
+    if (our_pool == NULL) {
         return NULL;
+}
 
     cx = (SEC_ASN1EncoderContext *)PORT_ArenaZAlloc(our_pool, sizeof(*cx));
     if (cx == NULL) {
@@ -1368,8 +1384,9 @@ SEC_ASN1EncoderClearTakeFromBuf(SEC_ASN1EncoderContext *cx)
 {
     /* we should actually be taking from buf *now* */
     PORT_Assert(cx->from_buf);
-    if (!cx->from_buf) /* if not, just do nothing */
+    if (!cx->from_buf) { /* if not, just do nothing */
         return;
+}
 
     cx->from_buf = PR_FALSE;
 
@@ -1387,8 +1404,9 @@ SEC_ASN1Encode(const void *src, const SEC_ASN1Template *theTemplate,
     SECStatus rv;
 
     ecx = SEC_ASN1EncoderStart(src, theTemplate, output_proc, output_arg);
-    if (ecx == NULL)
+    if (ecx == NULL) {
         return SECFailure;
+}
 
     rv = SEC_ASN1EncoderUpdate(ecx, NULL, 0);
 
@@ -1442,8 +1460,9 @@ sec_asn1e_allocate_item(PLArenaPool *poolp, SECItem *dest, unsigned long len)
         void *release;
 
         release = PORT_ArenaMark(poolp);
-        if (dest == NULL)
+        if (dest == NULL) {
             dest = (SECItem *)PORT_ArenaAlloc(poolp, sizeof(SECItem));
+}
         if (dest != NULL) {
             dest->data = (unsigned char *)PORT_ArenaAlloc(poolp, len);
             if (dest->data == NULL) {
@@ -1461,14 +1480,16 @@ sec_asn1e_allocate_item(PLArenaPool *poolp, SECItem *dest, unsigned long len)
         SECItem *indest;
 
         indest = dest;
-        if (dest == NULL)
+        if (dest == NULL) {
             dest = (SECItem *)PORT_Alloc(sizeof(SECItem));
+}
         if (dest != NULL) {
             dest->type = siBuffer;
             dest->data = (unsigned char *)PORT_Alloc(len);
             if (dest->data == NULL) {
-                if (indest == NULL)
+                if (indest == NULL) {
                     PORT_Free(dest);
+}
                 dest = NULL;
             }
         }
@@ -1489,17 +1510,20 @@ SEC_ASN1EncodeItem(PLArenaPool *poolp, SECItem *dest, const void *src,
     encoding_length = 0;
     rv = SEC_ASN1Encode(src, theTemplate,
                         sec_asn1e_encode_item_count, &encoding_length);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return NULL;
+}
 
     dest = sec_asn1e_allocate_item(poolp, dest, encoding_length);
-    if (dest == NULL)
+    if (dest == NULL) {
         return NULL;
+}
 
     /* XXX necessary?  This really just checks for a bug in the allocate fn */
     PORT_Assert(dest->data != NULL);
-    if (dest->data == NULL)
+    if (dest->data == NULL) {
         return NULL;
+}
 
     dest->len = 0;
     (void)SEC_ASN1Encode(src, theTemplate, sec_asn1e_encode_item_store, dest);
@@ -1531,15 +1555,17 @@ sec_asn1e_integer(PLArenaPool *poolp, SECItem *dest, unsigned long value,
      * byte we counted was set, we need to add one to the length so
      * we put a high-order zero byte in the encoding.
      */
-    if (sign && (is_unsigned || (long)value >= 0))
+    if (sign && (is_unsigned || (long)value >= 0)) {
         len++;
+}
 
     /*
      * Allocate the item (if necessary) and the data pointer within.
      */
     dest = sec_asn1e_allocate_item(poolp, dest, len);
-    if (dest == NULL)
+    if (dest == NULL) {
         return NULL;
+}
 
     /*
      * Store the value, byte by byte, in the item.

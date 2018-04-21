@@ -67,8 +67,9 @@ PR_IMPLEMENT(PRInt32) PR_GetErrorTextLength(void)
 PR_IMPLEMENT(PRInt32) PR_GetErrorText(char *text)
 {
     PRThread *thread = PR_GetCurrentThread();
-    if (0 != thread->errorStringLength)
+    if (0 != thread->errorStringLength) {
         memcpy(text, thread->errorString, thread->errorStringLength+1);
+}
     return thread->errorStringLength;
 }  /* PR_GetErrorText */
 

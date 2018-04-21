@@ -36,10 +36,11 @@ static AVCodecParser *av_first_parser = NULL;
 
 AVCodecParser *av_parser_next(const AVCodecParser *p)
 {
-    if (p)
+    if (p) {
         return p->next;
-    else
+    } else {
         return av_first_parser;
+}
 }
 
 void av_register_codec_parser(AVCodecParser *parser)
@@ -55,33 +56,38 @@ AVCodecParserContext *av_parser_init(int codec_id)
     AVCodecParser *parser;
     int ret;
 
-    if (codec_id == AV_CODEC_ID_NONE)
+    if (codec_id == AV_CODEC_ID_NONE) {
         return NULL;
+}
 
     for (parser = av_first_parser; parser; parser = parser->next) {
         if (parser->codec_ids[0] == codec_id ||
             parser->codec_ids[1] == codec_id ||
             parser->codec_ids[2] == codec_id ||
             parser->codec_ids[3] == codec_id ||
-            parser->codec_ids[4] == codec_id)
+            parser->codec_ids[4] == codec_id) {
             goto found;
+}
     }
     return NULL;
 
 found:
     s = av_mallocz(sizeof(AVCodecParserContext));
-    if (!s)
+    if (!s) {
         goto err_out;
+}
     s->parser = parser;
     s->priv_data = av_mallocz(parser->priv_data_size);
-    if (!s->priv_data)
+    if (!s->priv_data) {
         goto err_out;
+}
     s->fetch_timestamp=1;
     s->pict_type = AV_PICTURE_TYPE_I;
     if (parser->parser_init) {
         ret = parser->parser_init(s);
-        if (ret != 0)
+        if (ret != 0) {
             goto err_out;
+}
     }
     s->key_frame            = -1;
 #if FF_API_CONVERGENCE_DURATION
@@ -97,8 +103,9 @@ FF_ENABLE_DEPRECATION_WARNINGS
     return s;
 
 err_out:
-    if (s)
+    if (s) {
         av_freep(&s->priv_data);
+}
     av_free(s);
     return NULL;
 }
@@ -126,10 +133,12 @@ void ff_fetch_timestamp(AVCodecParserContext *s, int off, int remove, int fuzzy)
                 s->pos    = s->cur_frame_pos[i];
                 s->offset = s->next_frame_offset - s->cur_frame_offset[i];
             }
-            if (remove)
+            if (remove) {
                 s->cur_frame_offset[i] = INT64_MAX;
-            if (s->cur_offset + off < s->cur_frame_end[i])
+}
+            if (s->cur_offset + off < s->cur_frame_end[i]) {
                 break;
+}
         }
     }
 }
@@ -197,8 +206,9 @@ int av_parser_parse2(AVCodecParserContext *s, AVCodecContext *avctx,
         s->next_frame_offset = s->cur_offset + index;
         s->fetch_timestamp   = 1;
     }
-    if (index < 0)
+    if (index < 0) {
         index = 0;
+}
     s->cur_offset += index;
     return index;
 }
@@ -225,8 +235,9 @@ int av_parser_change(AVCodecParserContext *s, AVCodecContext *avctx,
 
             *poutbuf_size = size;
             *poutbuf      = av_malloc(size + AV_INPUT_BUFFER_PADDING_SIZE);
-            if (!*poutbuf)
+            if (!*poutbuf) {
                 return AVERROR(ENOMEM);
+}
 
             memcpy(*poutbuf, avctx->extradata, avctx->extradata_size);
             memcpy(*poutbuf + avctx->extradata_size, buf,
@@ -241,8 +252,9 @@ int av_parser_change(AVCodecParserContext *s, AVCodecContext *avctx,
 void av_parser_close(AVCodecParserContext *s)
 {
     if (s) {
-        if (s->parser->parser_close)
+        if (s->parser->parser_close) {
             s->parser->parser_close(s);
+}
         av_freep(&s->priv_data);
         av_free(s);
     }
@@ -259,12 +271,14 @@ int ff_combine_frame(ParseContext *pc, int next,
     }
 
     /* Copy overread bytes from last frame into buffer. */
-    for (; pc->overread > 0; pc->overread--)
+    for (; pc->overread > 0; pc->overread--) {
         pc->buffer[pc->index++] = pc->buffer[pc->overread_index++];
+}
 
     /* flush remaining if EOF */
-    if (!*buf_size && next == END_NOT_FOUND)
+    if (!*buf_size && next == END_NOT_FOUND) {
         next = 0;
+}
 
     pc->last_index = pc->index;
 
@@ -302,9 +316,10 @@ int ff_combine_frame(ParseContext *pc, int next,
             return AVERROR(ENOMEM);
         }
         pc->buffer = new_buffer;
-        if (next > -AV_INPUT_BUFFER_PADDING_SIZE)
+        if (next > -AV_INPUT_BUFFER_PADDING_SIZE) {
             memcpy(&pc->buffer[pc->index], *buf,
                    next + AV_INPUT_BUFFER_PADDING_SIZE);
+}
         pc->index = 0;
         *buf      = pc->buffer;
     }
@@ -340,8 +355,9 @@ int ff_mpeg4video_split(AVCodecContext *avctx, const uint8_t *buf, int buf_size)
 
     while (ptr < end) {
         ptr = avpriv_find_start_code(ptr, end, &state);
-        if (state == 0x1B3 || state == 0x1B6)
+        if (state == 0x1B3 || state == 0x1B6) {
             return ptr - 4 - buf;
+}
     }
 
     return 0;

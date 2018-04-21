@@ -76,13 +76,15 @@ __ieee754_asin(double x)
 	if(ix>= 0x3ff00000) {		/* |x|>= 1 */
 	    u_int32_t lx;
 	    GET_LOW_WORD(lx,x);
-	    if(((ix-0x3ff00000)|lx)==0)
+	    if(((ix-0x3ff00000)|lx)==0) {
 		    /* asin(1)=+-pi/2 with inexact */
 		return x*pio2_hi+x*pio2_lo;	
+}
 	    return (x-x)/(x-x);		/* asin(|x|>1) is NaN */   
 	} else if (ix<0x3fe00000) {	/* |x|<0.5 */
 	    if(ix<0x3e500000) {		/* if |x| < 2**-26 */
-		if(huge+x>one) return x;/* return x with inexact if x!=0*/
+		if(huge+x>one) { return x;/* return x with inexact if x!=0*/
+}
 	    }
 	    t = x*x;
 	    p = t*(pS0+t*(pS1+t*(pS2+t*(pS3+t*(pS4+t*pS5)))));
@@ -108,5 +110,6 @@ __ieee754_asin(double x)
 	    q  = pio4_hi-2.0*w;
 	    t  = pio4_hi-(p-q);
 	}    
-	if(hx>0) return t; else return -t;    
+	if(hx>0) { return t; } else { return -t;    
+}
 }

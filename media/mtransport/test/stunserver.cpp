@@ -117,8 +117,9 @@ struct nr_socket_wrapped {
 };
 
 static int nr_socket_wrapped_destroy(void **objp) {
-  if (!objp || !*objp)
+  if (!objp || !*objp) {
     return 0;
+}
 
   nr_socket_wrapped *wrapped = static_cast<nr_socket_wrapped *>(*objp);
   *objp = nullptr;
@@ -185,8 +186,9 @@ int nr_socket_wrapped_create(nr_socket *inner, nr_socket **outp) {
   wrapped->sock_ = inner;
 
   int r = nr_socket_create_int(wrapped.get(), &nr_socket_wrapped_vtbl, outp);
-  if (r)
+  if (r) {
     return r;
+}
 
   Unused << wrapped.release();
   return 0;
@@ -220,8 +222,9 @@ TestStunServer::~TestStunServer() {
   nr_socket_destroy(&send_sock_);
 
   // Make sure we aren't still waiting on a deferred response timer to pop
-  if (timer_handle_)
+  if (timer_handle_) {
     NR_async_timer_cancel(timer_handle_);
+}
 
   delete response_addr_;
 }
@@ -244,8 +247,9 @@ int TestStunServer::TryOpenListenSocket(nr_local_addr *addr, uint16_t port) {
 
   int r = SetInternalPort(addr, port);
 
-  if (r)
+  if (r) {
     return r;
+}
 
   if (nr_socket_local_create(nullptr, &addr->addr, &listen_sock_)) {
     MOZ_MTLOG(ML_ERROR, "Couldn't create listen socket");
@@ -341,8 +345,9 @@ UniquePtr<TestStunServer> TestStunServer::Create(int address_family) {
 
   UniquePtr<TestStunServer> server(new TestStunServer());
 
-  if (server->Initialize(address_family))
+  if (server->Initialize(address_family)) {
     return nullptr;
+}
 
   NR_SOCKET fd;
   int r = nr_socket_getfd(server->listen_sock_, &fd);
@@ -363,14 +368,16 @@ void TestStunServer::ConfigurePort(uint16_t port) {
 TestStunServer* TestStunServer::GetInstance(int address_family) {
   switch (address_family) {
     case AF_INET:
-      if (!instance)
+      if (!instance) {
         instance = Create(address_family).release();
+}
 
       MOZ_ASSERT(instance);
       return instance;
     case AF_INET6:
-      if (!instance6)
+      if (!instance6) {
         instance6 = Create(address_family).release();
+}
 
       return instance6;
     default:
@@ -507,8 +514,9 @@ nsresult TestStunServer::SetResponseAddr(nr_transport_addr *addr) {
   response_addr_ = new nr_transport_addr();
 
   int r = nr_transport_addr_copy(response_addr_, addr);
-  if (r)
+  if (r) {
     return NS_ERROR_FAILURE;
+}
 
   return NS_OK;
 }
@@ -520,8 +528,9 @@ nsresult TestStunServer::SetResponseAddr(const std::string& addr,
   int r = nr_str_port_to_transport_addr(addr.c_str(),
                                         port, IPPROTO_UDP,
                                         &addr2);
-  if (r)
+  if (r) {
     return NS_ERROR_FAILURE;
+}
 
   return SetResponseAddr(&addr2);
 }
@@ -547,14 +556,16 @@ void TestStunTcpServer::ConfigurePort(uint16_t port) {
 TestStunTcpServer* TestStunTcpServer::GetInstance(int address_family) {
   switch (address_family) {
     case AF_INET:
-      if (!instance)
+      if (!instance) {
         instance = Create(address_family).release();
+}
 
       MOZ_ASSERT(instance);
       return instance;
     case AF_INET6:
-      if (!instance6)
+      if (!instance6) {
         instance6 = Create(address_family).release();
+}
 
       return instance6;
     default:
@@ -575,8 +586,9 @@ int TestStunTcpServer::TryOpenListenSocket(nr_local_addr *addr, uint16_t port) {
 
   int r = SetInternalPort(addr, port);
 
-  if (r)
+  if (r) {
     return r;
+}
 
   nr_socket *sock;
   if (nr_socket_local_create(nullptr, &addr->addr, &sock)) {

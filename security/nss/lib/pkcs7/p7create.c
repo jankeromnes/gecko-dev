@@ -36,19 +36,22 @@ sec_pkcs7_init_content_info(SEC_PKCS7ContentInfo *cinfo, PLArenaPool *poolp,
     SECStatus rv;
 
     PORT_Assert(cinfo != NULL && poolp != NULL);
-    if (cinfo == NULL || poolp == NULL)
+    if (cinfo == NULL || poolp == NULL) {
         return SECFailure;
+}
 
     cinfo->contentTypeTag = SECOID_FindOIDByTag(kind);
     PORT_Assert(cinfo->contentTypeTag && cinfo->contentTypeTag->offset == kind);
 
     rv = SECITEM_CopyItem(poolp, &(cinfo->contentType),
                           &(cinfo->contentTypeTag->oid));
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
-    if (detached)
+    if (detached) {
         return SECSuccess;
+}
 
     switch (kind) {
         default:
@@ -93,16 +96,18 @@ sec_pkcs7_init_content_info(SEC_PKCS7ContentInfo *cinfo, PLArenaPool *poolp,
             break;
     }
 
-    if (thing == NULL)
+    if (thing == NULL) {
         return SECFailure;
+}
 
     if (versionp != NULL) {
         SECItem *dummy;
 
         PORT_Assert(version >= 0);
         dummy = SEC_ASN1EncodeInteger(poolp, versionp, version);
-        if (dummy == NULL)
+        if (dummy == NULL) {
             return SECFailure;
+}
         PORT_Assert(dummy == versionp);
     }
 
@@ -118,8 +123,9 @@ sec_pkcs7_create_content_info(SECOidTag kind, PRBool detached,
     SECStatus rv;
 
     poolp = PORT_NewArena(1024); /* XXX what is right value? */
-    if (poolp == NULL)
+    if (poolp == NULL) {
         return NULL;
+}
 
     cinfo = (SEC_PKCS7ContentInfo *)PORT_ArenaZAlloc(poolp, sizeof(*cinfo));
     if (cinfo == NULL) {
@@ -193,8 +199,9 @@ sec_pkcs7_add_signer(SEC_PKCS7ContentInfo *cinfo,
      */
     if (certdb == NULL) {
         certdb = CERT_GetDefaultCertDB();
-        if (certdb == NULL)
+        if (certdb == NULL) {
             return SECFailure; /* XXX set an error? */
+}
     }
 
     if (CERT_VerifyCert(certdb, cert, PR_TRUE, certusage, PR_Now(),
@@ -209,8 +216,9 @@ sec_pkcs7_add_signer(SEC_PKCS7ContentInfo *cinfo,
      * and *add* the new signer.
      */
     PORT_Assert(*signerinfosp == NULL && *digestalgsp == NULL && *digestsp == NULL);
-    if (*signerinfosp != NULL || *digestalgsp != NULL || *digestsp != NULL)
+    if (*signerinfosp != NULL || *digestalgsp != NULL || *digestsp != NULL) {
         return SECFailure;
+}
 
     mark = PORT_ArenaMark(cinfo->poolp);
 
@@ -324,8 +332,9 @@ sec_pkcs7_create_signed_data(SECKEYGetPasswordKey pwfn, void *pwfn_arg)
 
     cinfo = sec_pkcs7_create_content_info(SEC_OID_PKCS7_SIGNED_DATA, PR_FALSE,
                                           pwfn, pwfn_arg);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
     sigd = cinfo->content.signedData;
     PORT_Assert(sigd != NULL);
@@ -384,8 +393,9 @@ SEC_PKCS7CreateSignedData(CERTCertificate *cert,
     SECStatus rv;
 
     cinfo = sec_pkcs7_create_signed_data(pwfn, pwfn_arg);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
     rv = sec_pkcs7_add_signer(cinfo, cert, certusage, certdb,
                               digestalg, digest);
@@ -410,30 +420,36 @@ sec_pkcs7_create_attribute(PLArenaPool *poolp, SECOidTag oidtag,
 
     attr = (SEC_PKCS7Attribute *)PORT_ArenaAlloc(poolp,
                                                  sizeof(SEC_PKCS7Attribute));
-    if (attr == NULL)
+    if (attr == NULL) {
         goto loser;
+}
 
     attr->typeTag = SECOID_FindOIDByTag(oidtag);
-    if (attr->typeTag == NULL)
+    if (attr->typeTag == NULL) {
         goto loser;
+}
 
     if (SECITEM_CopyItem(poolp, &(attr->type),
-                         &(attr->typeTag->oid)) != SECSuccess)
+                         &(attr->typeTag->oid)) != SECSuccess) {
         goto loser;
+}
 
     values = (SECItem **)PORT_ArenaAlloc(poolp, 2 * sizeof(SECItem *));
-    if (values == NULL)
+    if (values == NULL) {
         goto loser;
+}
 
     if (value != NULL) {
         SECItem *copy;
 
         copy = (SECItem *)PORT_ArenaAlloc(poolp, sizeof(SECItem));
-        if (copy == NULL)
+        if (copy == NULL) {
             goto loser;
+}
 
-        if (SECITEM_CopyItem(poolp, copy, value) != SECSuccess)
+        if (SECITEM_CopyItem(poolp, copy, value) != SECSuccess) {
             goto loser;
+}
 
         value = copy;
     }
@@ -462,8 +478,9 @@ sec_pkcs7_add_attribute(SEC_PKCS7ContentInfo *cinfo,
     void *mark;
 
     PORT_Assert(SEC_PKCS7ContentType(cinfo) == SEC_OID_PKCS7_SIGNED_DATA);
-    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_SIGNED_DATA)
+    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_SIGNED_DATA) {
         return SECFailure;
+}
 
     attrs = *attrsp;
     if (attrs != NULL) {
@@ -485,13 +502,15 @@ sec_pkcs7_add_attribute(SEC_PKCS7ContentInfo *cinfo,
                                            SEC_OID_PKCS9_MESSAGE_DIGEST,
                                            PR_FALSE) != NULL);
 
-        for (count = 0; attrs[count] != NULL; count++)
+        for (count = 0; attrs[count] != NULL; count++) {
             ;
+}
         attrs = (SEC_PKCS7Attribute **)PORT_ArenaGrow(cinfo->poolp, attrs,
                                                       (count + 1) * sizeof(SEC_PKCS7Attribute *),
                                                       (count + 2) * sizeof(SEC_PKCS7Attribute *));
-        if (attrs == NULL)
+        if (attrs == NULL) {
             return SECFailure;
+}
 
         attrs[count] = attr;
         attrs[count + 1] = NULL;
@@ -512,8 +531,9 @@ sec_pkcs7_add_attribute(SEC_PKCS7ContentInfo *cinfo,
      */
     attrs = (SEC_PKCS7Attribute **)PORT_ArenaAlloc(cinfo->poolp,
                                                    4 * sizeof(SEC_PKCS7Attribute *));
-    if (attrs == NULL)
+    if (attrs == NULL) {
         return SECFailure;
+}
 
     mark = PORT_ArenaMark(cinfo->poolp);
 
@@ -572,26 +592,30 @@ SEC_PKCS7AddSigningTime(SEC_PKCS7ContentInfo *cinfo)
     int si;
 
     PORT_Assert(SEC_PKCS7ContentType(cinfo) == SEC_OID_PKCS7_SIGNED_DATA);
-    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_SIGNED_DATA)
+    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_SIGNED_DATA) {
         return SECFailure;
+}
 
     signerinfos = cinfo->content.signedData->signerInfos;
 
     /* There has to be a signer, or it makes no sense. */
-    if (signerinfos == NULL || signerinfos[0] == NULL)
+    if (signerinfos == NULL || signerinfos[0] == NULL) {
         return SECFailure;
+}
 
     rv = DER_EncodeTimeChoice(NULL, &stime, PR_Now());
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     attr = sec_pkcs7_create_attribute(cinfo->poolp,
                                       SEC_OID_PKCS9_SIGNING_TIME,
                                       &stime, PR_FALSE);
     SECITEM_FreeItem(&stime, PR_FALSE);
 
-    if (attr == NULL)
+    if (attr == NULL) {
         return SECFailure;
+}
 
     rv = SECSuccess;
     for (si = 0; signerinfos[si] != NULL; si++) {
@@ -600,13 +624,15 @@ SEC_PKCS7AddSigningTime(SEC_PKCS7ContentInfo *cinfo)
         oattr = sec_PKCS7FindAttribute(signerinfos[si]->authAttr,
                                        SEC_OID_PKCS9_SIGNING_TIME, PR_FALSE);
         PORT_Assert(oattr == NULL);
-        if (oattr != NULL)
+        if (oattr != NULL) {
             continue; /* XXX or would it be better to replace it? */
+}
 
         rv = sec_pkcs7_add_attribute(cinfo, &(signerinfos[si]->authAttr),
                                      attr);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break; /* could try to continue, but may as well give up now */
+}
     }
 
     return rv;
@@ -639,20 +665,23 @@ SEC_PKCS7AddSignedAttribute(SEC_PKCS7ContentInfo *cinfo,
     SEC_PKCS7Attribute *attr;
 
     PORT_Assert(SEC_PKCS7ContentType(cinfo) == SEC_OID_PKCS7_SIGNED_DATA);
-    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_SIGNED_DATA)
+    if (SEC_PKCS7ContentType(cinfo) != SEC_OID_PKCS7_SIGNED_DATA) {
         return SECFailure;
+}
 
     signerinfos = cinfo->content.signedData->signerInfos;
 
     /*
      * No signature or more than one means no deal.
      */
-    if (signerinfos == NULL || signerinfos[0] == NULL || signerinfos[1] != NULL)
+    if (signerinfos == NULL || signerinfos[0] == NULL || signerinfos[1] != NULL) {
         return SECFailure;
+}
 
     attr = sec_pkcs7_create_attribute(cinfo->poolp, oidtag, value, PR_TRUE);
-    if (attr == NULL)
+    if (attr == NULL) {
         return SECFailure;
+}
 
     return sec_pkcs7_add_attribute(cinfo, &(signerinfos[0]->authAttr), attr);
 }
@@ -687,8 +716,9 @@ SEC_PKCS7IncludeCertChain(SEC_PKCS7ContentInfo *cinfo,
             return SECFailure; /* XXX set an error? */
     }
 
-    if (signerinfos == NULL) /* no signer, no certs? */
+    if (signerinfos == NULL) { /* no signer, no certs? */
         return SECFailure;   /* XXX set an error? */
+}
 
     if (certdb == NULL) {
         certdb = CERT_GetDefaultCertDB();
@@ -700,13 +730,14 @@ SEC_PKCS7IncludeCertChain(SEC_PKCS7ContentInfo *cinfo,
 
     /* XXX Should it be an error if we find no signerinfo or no certs? */
     while ((signerinfo = *signerinfos++) != NULL) {
-        if (signerinfo->cert != NULL)
+        if (signerinfo->cert != NULL) {
             /* get the cert chain.  don't send the root to avoid contamination
 	     * of old clients with a new root that they don't trust
 	     */
             signerinfo->certList = CERT_CertChainFromCert(signerinfo->cert,
                                                           certUsageEmailSigner,
                                                           PR_FALSE);
+}
     }
 
     return SECSuccess;
@@ -752,8 +783,9 @@ sec_pkcs7_add_cert_chain(SEC_PKCS7ContentInfo *cinfo,
     }
 
     certlist = CERT_CertChainFromCert(cert, certUsageEmailSigner, PR_FALSE);
-    if (certlist == NULL)
+    if (certlist == NULL) {
         return SECFailure;
+}
 
     certlists = *certlistsp;
     if (certlists == NULL) {
@@ -761,8 +793,9 @@ sec_pkcs7_add_cert_chain(SEC_PKCS7ContentInfo *cinfo,
         certlists = (CERTCertificateList **)PORT_ArenaAlloc(cinfo->poolp,
                                                             2 * sizeof(CERTCertificateList *));
     } else {
-        for (count = 0; certlists[count] != NULL; count++)
+        for (count = 0; certlists[count] != NULL; count++) {
             ;
+}
         PORT_Assert(count); /* should be at least one already */
         certlists = (CERTCertificateList **)PORT_ArenaGrow(cinfo->poolp,
                                                            certlists,
@@ -814,8 +847,9 @@ sec_pkcs7_add_certificate(SEC_PKCS7ContentInfo *cinfo,
     }
 
     cert = CERT_DupCertificate(cert);
-    if (cert == NULL)
+    if (cert == NULL) {
         return SECFailure;
+}
 
     certs = *certsp;
     if (certs == NULL) {
@@ -823,8 +857,9 @@ sec_pkcs7_add_certificate(SEC_PKCS7ContentInfo *cinfo,
         certs = (CERTCertificate **)PORT_ArenaAlloc(cinfo->poolp,
                                                     2 * sizeof(CERTCertificate *));
     } else {
-        for (count = 0; certs[count] != NULL; count++)
+        for (count = 0; certs[count] != NULL; count++) {
             ;
+}
         PORT_Assert(count); /* should be at least one already */
         certs = (CERTCertificate **)PORT_ArenaGrow(cinfo->poolp, certs,
                                                    (count + 1) * sizeof(CERTCertificate *),
@@ -870,13 +905,15 @@ SEC_PKCS7CreateCertsOnly(CERTCertificate *cert,
     SECStatus rv;
 
     cinfo = sec_pkcs7_create_signed_data(NULL, NULL);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
-    if (include_chain)
+    if (include_chain) {
         rv = sec_pkcs7_add_cert_chain(cinfo, cert, certdb);
-    else
+    } else {
         rv = sec_pkcs7_add_certificate(cinfo, cert);
+}
 
     if (rv != SECSuccess) {
         SEC_PKCS7DestroyContentInfo(cinfo);
@@ -903,8 +940,9 @@ SEC_PKCS7AddCertChain(SEC_PKCS7ContentInfo *cinfo,
     SECOidTag kind;
 
     kind = SEC_PKCS7ContentType(cinfo);
-    if (kind != SEC_OID_PKCS7_SIGNED_DATA && kind != SEC_OID_PKCS7_SIGNED_ENVELOPED_DATA)
+    if (kind != SEC_OID_PKCS7_SIGNED_DATA && kind != SEC_OID_PKCS7_SIGNED_ENVELOPED_DATA) {
         return SECFailure; /* XXX set an error? */
+}
 
     return sec_pkcs7_add_cert_chain(cinfo, cert, certdb);
 }
@@ -921,8 +959,9 @@ SEC_PKCS7AddCertificate(SEC_PKCS7ContentInfo *cinfo, CERTCertificate *cert)
     SECOidTag kind;
 
     kind = SEC_PKCS7ContentType(cinfo);
-    if (kind != SEC_OID_PKCS7_SIGNED_DATA && kind != SEC_OID_PKCS7_SIGNED_ENVELOPED_DATA)
+    if (kind != SEC_OID_PKCS7_SIGNED_DATA && kind != SEC_OID_PKCS7_SIGNED_ENVELOPED_DATA) {
         return SECFailure; /* XXX set an error? */
+}
 
     return sec_pkcs7_add_certificate(cinfo, cert);
 }
@@ -936,8 +975,9 @@ sec_pkcs7_init_encrypted_content_info(SEC_PKCS7EncryptedContentInfo *enccinfo,
     SECStatus rv;
 
     PORT_Assert(enccinfo != NULL && poolp != NULL);
-    if (enccinfo == NULL || poolp == NULL)
+    if (enccinfo == NULL || poolp == NULL) {
         return SECFailure;
+}
 
     /*
      * XXX Some day we may want to allow for other kinds.  That needs
@@ -953,8 +993,9 @@ sec_pkcs7_init_encrypted_content_info(SEC_PKCS7EncryptedContentInfo *enccinfo,
 
     rv = SECITEM_CopyItem(poolp, &(enccinfo->contentType),
                           &(enccinfo->contentTypeTag->oid));
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return rv;
+}
 
     /* Save keysize and algorithm for later. */
     enccinfo->keysize = keysize;
@@ -1003,8 +1044,9 @@ sec_pkcs7_add_recipient(SEC_PKCS7ContentInfo *cinfo,
      */
     if (certdb == NULL) {
         certdb = CERT_GetDefaultCertDB();
-        if (certdb == NULL)
+        if (certdb == NULL) {
             return SECFailure; /* XXX set an error? */
+}
     }
 
     if (CERT_VerifyCert(certdb, cert, PR_TRUE, certusage, PR_Now(),
@@ -1056,8 +1098,9 @@ sec_pkcs7_add_recipient(SEC_PKCS7ContentInfo *cinfo,
             cinfo->poolp,
             2 * sizeof(SEC_PKCS7RecipientInfo *));
     } else {
-        for (count = 0; recipientinfos[count] != NULL; count++)
+        for (count = 0; recipientinfos[count] != NULL; count++) {
             ;
+}
         PORT_Assert(count); /* should be at least one already */
         recipientinfos = (SEC_PKCS7RecipientInfo **)PORT_ArenaGrow(
             cinfo->poolp, recipientinfos,
@@ -1119,8 +1162,9 @@ SEC_PKCS7CreateEnvelopedData(CERTCertificate *cert,
 
     cinfo = sec_pkcs7_create_content_info(SEC_OID_PKCS7_ENVELOPED_DATA,
                                           PR_FALSE, pwfn, pwfn_arg);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
     rv = sec_pkcs7_add_recipient(cinfo, cert, certusage, certdb);
     if (rv != SECSuccess) {
@@ -1207,8 +1251,9 @@ SEC_PKCS7CreateEncryptedData(SECOidTag algorithm, int keysize,
 
     cinfo = sec_pkcs7_create_content_info(SEC_OID_PKCS7_ENCRYPTED_DATA,
                                           PR_FALSE, pwfn, pwfn_arg);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
     enc_data = cinfo->content.encryptedData;
     algid = &(enc_data->encContentInfo.contentEncAlg);
@@ -1268,8 +1313,9 @@ SEC_PKCS7CreateEncryptedDataWithPBEV2(SECOidTag pbe_algorithm,
 
     cinfo = sec_pkcs7_create_content_info(SEC_OID_PKCS7_ENCRYPTED_DATA,
                                           PR_FALSE, pwfn, pwfn_arg);
-    if (cinfo == NULL)
+    if (cinfo == NULL) {
         return NULL;
+}
 
     enc_data = cinfo->content.encryptedData;
     algid = &(enc_data->encContentInfo.contentEncAlg);

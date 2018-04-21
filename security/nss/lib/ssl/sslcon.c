@@ -127,8 +127,9 @@ ssl_BeginClientHandshake(sslSocket *ss)
     ss->sec.isServer = PR_FALSE;
 
     rv = ssl_CheckConfigSanity(ss);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* Get peer name of server */
     rv = ssl_GetPeerInfo(ss);
@@ -222,8 +223,9 @@ ssl_BeginServerHandshake(sslSocket *ss)
     ss->ssl3.hs.ws = wait_client_hello;
 
     rv = ssl_CheckConfigSanity(ss);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     ss->handshake = ssl_GatherRecord1stHandshake;
     return SECSuccess;

@@ -42,18 +42,19 @@ general_src_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
 {
     pixman_image_t *image = iter->image;
 
-    if (image->type == LINEAR)
+    if (image->type == LINEAR) {
 	_pixman_linear_gradient_iter_init (image, iter);
-    else if (image->type == RADIAL)
+    } else if (image->type == RADIAL) {
 	_pixman_radial_gradient_iter_init (image, iter);
-    else if (image->type == CONICAL)
+    } else if (image->type == CONICAL) {
 	_pixman_conical_gradient_iter_init (image, iter);
-    else if (image->type == BITS)
+    } else if (image->type == BITS) {
 	_pixman_bits_image_src_iter_init (image, iter);
-    else if (image->type == SOLID)
+    } else if (image->type == SOLID) {
         _pixman_log_error (FUNC, "Solid image not handled by noop");
-    else         
+    } else {         
 	_pixman_log_error (FUNC, "Pixman bug: unknown image type\n");
+}
 
     return TRUE;
 }
@@ -152,8 +153,9 @@ general_composite_rect  (pixman_implementation_t *imp,
     {
 	scanline_buffer = pixman_malloc_abc (width, 3, Bpp);
 
-	if (!scanline_buffer)
+	if (!scanline_buffer) {
 	    return;
+}
     }
 
     src_buffer = scanline_buffer;
@@ -216,8 +218,9 @@ general_composite_rect  (pixman_implementation_t *imp,
 	dest_iter.write_back (&dest_iter);
     }
 
-    if (scanline_buffer != (uint8_t *) stack_scanline_buffer)
+    if (scanline_buffer != (uint8_t *) stack_scanline_buffer) {
 	free (scanline_buffer);
+}
 }
 
 static const pixman_fast_path_t general_fast_path[] =

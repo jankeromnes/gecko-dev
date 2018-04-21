@@ -1005,7 +1005,8 @@ collectCurrencyNames(const char* locale,
       ec = U_MEMORY_ALLOCATION_ERROR;
     }
 
-    if (U_FAILURE(ec)) return;
+    if (U_FAILURE(ec)) { return;
+}
 
     const UChar* s = NULL;  // currency name
     char* iso = NULL;  // currency ISO code

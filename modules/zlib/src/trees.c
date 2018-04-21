@@ -410,9 +410,12 @@ local void init_block(s)
     int n; /* iterates over tree elements */
 
     /* Initialize the trees. */
-    for (n = 0; n < L_CODES;  n++) s->dyn_ltree[n].Freq = 0;
-    for (n = 0; n < D_CODES;  n++) s->dyn_dtree[n].Freq = 0;
-    for (n = 0; n < BL_CODES; n++) s->bl_tree[n].Freq = 0;
+    for (n = 0; n < L_CODES;  n++) { s->dyn_ltree[n].Freq = 0;
+}
+    for (n = 0; n < D_CODES;  n++) { s->dyn_dtree[n].Freq = 0;
+}
+    for (n = 0; n < BL_CODES; n++) { s->bl_tree[n].Freq = 0;
+}
 
     s->dyn_ltree[END_BLOCK].Freq = 1;
     s->opt_len = s->static_len = 0L;
@@ -462,7 +465,8 @@ local void pqdownheap(s, tree, k)
             j++;
         }
         /* Exit if v is smaller than both sons */
-        if (smaller(tree, v, s->heap[j], s->depth)) break;
+        if (smaller(tree, v, s->heap[j], s->depth)) { break;
+}
 
         /* Exchange v with the smallest son */
         s->heap[k] = s->heap[j];  k = j;
@@ -500,7 +504,8 @@ local void gen_bitlen(s, desc)
     ush f;              /* frequency */
     int overflow = 0;   /* number of elements with bit length too large */
 
-    for (bits = 0; bits <= MAX_BITS; bits++) s->bl_count[bits] = 0;
+    for (bits = 0; bits <= MAX_BITS; bits++) { s->bl_count[bits] = 0;
+}
 
     /* In a first pass, compute the optimal bit lengths (which may
      * overflow in the case of the bit length tree).
@@ -510,20 +515,25 @@ local void gen_bitlen(s, desc)
     for (h = s->heap_max+1; h < HEAP_SIZE; h++) {
         n = s->heap[h];
         bits = tree[tree[n].Dad].Len + 1;
-        if (bits > max_length) bits = max_length, overflow++;
+        if (bits > max_length) { bits = max_length, overflow++;
+}
         tree[n].Len = (ush)bits;
         /* We overwrite tree[n].Dad which is no longer needed */
 
-        if (n > max_code) continue; /* not a leaf node */
+        if (n > max_code) { continue; /* not a leaf node */
+}
 
         s->bl_count[bits]++;
         xbits = 0;
-        if (n >= base) xbits = extra[n-base];
+        if (n >= base) { xbits = extra[n-base];
+}
         f = tree[n].Freq;
         s->opt_len += (ulg)f * (unsigned)(bits + xbits);
-        if (stree) s->static_len += (ulg)f * (unsigned)(stree[n].Len + xbits);
+        if (stree) { s->static_len += (ulg)f * (unsigned)(stree[n].Len + xbits);
+}
     }
-    if (overflow == 0) return;
+    if (overflow == 0) { return;
+}
 
     Tracev((stderr,"\nbit length overflow\n"));
     /* This happens for example on obj2 and pic of the Calgary corpus */
@@ -531,7 +541,8 @@ local void gen_bitlen(s, desc)
     /* Find the first bit length which could increase: */
     do {
         bits = max_length-1;
-        while (s->bl_count[bits] == 0) bits--;
+        while (s->bl_count[bits] == 0) { bits--;
+}
         s->bl_count[bits]--;      /* move one leaf down the tree */
         s->bl_count[bits+1] += 2; /* move one overflow item as its brother */
         s->bl_count[max_length]--;
@@ -550,7 +561,8 @@ local void gen_bitlen(s, desc)
         n = s->bl_count[bits];
         while (n != 0) {
             m = s->heap[--h];
-            if (m > max_code) continue;
+            if (m > max_code) { continue;
+}
             if ((unsigned) tree[m].Len != (unsigned) bits) {
                 Tracev((stderr,"code %d bits %d->%d\n", m, tree[m].Len, bits));
                 s->opt_len += ((ulg)bits - tree[m].Len) * tree[m].Freq;
@@ -595,7 +607,8 @@ local void gen_codes (tree, max_code, bl_count)
 
     for (n = 0;  n <= max_code; n++) {
         int len = tree[n].Len;
-        if (len == 0) continue;
+        if (len == 0) { continue;
+}
         /* Now reverse the bits */
         tree[n].Code = (ush)bi_reverse(next_code[len]++, len);
 
@@ -647,7 +660,8 @@ local void build_tree(s, desc)
         node = s->heap[++(s->heap_len)] = (max_code < 2 ? ++max_code : 0);
         tree[node].Freq = 1;
         s->depth[node] = 0;
-        s->opt_len--; if (stree) s->static_len -= stree[node].Len;
+        s->opt_len--; if (stree) { s->static_len -= stree[node].Len;
+}
         /* node is 0 or 1 so it does not have extra bits */
     }
     desc->max_code = max_code;
@@ -655,7 +669,8 @@ local void build_tree(s, desc)
     /* The elements heap[heap_len/2+1 .. heap_len] are leaves of the tree,
      * establish sub-heaps of increasing lengths:
      */
-    for (n = s->heap_len/2; n >= 1; n--) pqdownheap(s, tree, n);
+    for (n = s->heap_len/2; n >= 1; n--) { pqdownheap(s, tree, n);
+}
 
     /* Construct the Huffman tree by repeatedly combining the least two
      * frequent nodes.
@@ -713,7 +728,8 @@ local void scan_tree (s, tree, max_code)
     int max_count = 7;         /* max repeat count */
     int min_count = 4;         /* min repeat count */
 
-    if (nextlen == 0) max_count = 138, min_count = 3;
+    if (nextlen == 0) { max_count = 138, min_count = 3;
+}
     tree[max_code+1].Len = (ush)0xffff; /* guard */
 
     for (n = 0; n <= max_code; n++) {
@@ -723,7 +739,8 @@ local void scan_tree (s, tree, max_code)
         } else if (count < min_count) {
             s->bl_tree[curlen].Freq += count;
         } else if (curlen != 0) {
-            if (curlen != prevlen) s->bl_tree[curlen].Freq++;
+            if (curlen != prevlen) { s->bl_tree[curlen].Freq++;
+}
             s->bl_tree[REP_3_6].Freq++;
         } else if (count <= 10) {
             s->bl_tree[REPZ_3_10].Freq++;
@@ -759,7 +776,8 @@ local void send_tree (s, tree, max_code)
     int min_count = 4;         /* min repeat count */
 
     /* tree[max_code+1].Len = -1; */  /* guard already set */
-    if (nextlen == 0) max_count = 138, min_count = 3;
+    if (nextlen == 0) { max_count = 138, min_count = 3;
+}
 
     for (n = 0; n <= max_code; n++) {
         curlen = nextlen; nextlen = tree[n+1].Len;
@@ -816,7 +834,8 @@ local int build_bl_tree(s)
      * 3 but the actual value used is 4.)
      */
     for (max_blindex = BL_CODES-1; max_blindex >= 3; max_blindex--) {
-        if (s->bl_tree[bl_order[max_blindex]].Len != 0) break;
+        if (s->bl_tree[bl_order[max_blindex]].Len != 0) { break;
+}
     }
     /* Update opt_len to include the bit length tree and counts */
     s->opt_len += 3*((ulg)max_blindex+1) + 5+5+4;
@@ -921,8 +940,9 @@ void ZLIB_INTERNAL _tr_flush_block(s, buf, stored_len, last)
     if (s->level > 0) {
 
         /* Check if the file is binary or text */
-        if (s->strm->data_type == Z_UNKNOWN)
+        if (s->strm->data_type == Z_UNKNOWN) {
             s->strm->data_type = detect_data_type(s);
+}
 
         /* Construct the literal and distance trees */
         build_tree(s, (tree_desc *)(&(s->l_desc)));
@@ -949,7 +969,8 @@ void ZLIB_INTERNAL _tr_flush_block(s, buf, stored_len, last)
                 opt_lenb, s->opt_len, static_lenb, s->static_len, stored_len,
                 s->last_lit));
 
-        if (static_lenb <= opt_lenb) opt_lenb = static_lenb;
+        if (static_lenb <= opt_lenb) { opt_lenb = static_lenb;
+}
 
     } else {
         Assert(buf != (char*)0, "lost buf");
@@ -1072,7 +1093,7 @@ local void compress_block(s, ltree, dtree)
     unsigned code;      /* the code to send */
     int extra;          /* number of extra bits to send */
 
-    if (s->last_lit != 0) do {
+    if (s->last_lit != 0) { do {
         dist = s->d_buf[lx];
         lc = s->l_buf[lx++];
         if (dist == 0) {
@@ -1104,6 +1125,7 @@ local void compress_block(s, ltree, dtree)
                "pendingBuf overflow");
 
     } while (lx < s->last_lit);
+}
 
     send_code(s, END_BLOCK, ltree);
 }
@@ -1132,17 +1154,20 @@ local int detect_data_type(s)
     int n;
 
     /* Check for non-textual ("black-listed") bytes. */
-    for (n = 0; n <= 31; n++, black_mask >>= 1)
-        if ((black_mask & 1) && (s->dyn_ltree[n].Freq != 0))
+    for (n = 0; n <= 31; n++, black_mask >>= 1) {
+        if ((black_mask & 1) && (s->dyn_ltree[n].Freq != 0)) {
             return Z_BINARY;
+}
 
     /* Check for textual ("white-listed") bytes. */
     if (s->dyn_ltree[9].Freq != 0 || s->dyn_ltree[10].Freq != 0
-            || s->dyn_ltree[13].Freq != 0)
+            || s->dyn_ltree[13].Freq != 0) {
         return Z_TEXT;
-    for (n = 32; n < LITERALS; n++)
-        if (s->dyn_ltree[n].Freq != 0)
+}
+    for (n = 32; n < LITERALS; n++) {
+        if (s->dyn_ltree[n].Freq != 0) {
             return Z_TEXT;
+}
 
     /* There are no "black-listed" or "white-listed" bytes:
      * this stream either is empty or has tolerated ("gray-listed") bytes only.

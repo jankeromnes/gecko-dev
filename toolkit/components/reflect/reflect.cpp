@@ -41,8 +41,9 @@ Module::Call(nsIXPConnectWrappedNative* wrapper,
              bool* _retval)
 {
   JS::Rooted<JSObject*> global(cx, JS::CurrentGlobalOrNull(cx));
-  if (!global)
+  if (!global) {
     return NS_ERROR_NOT_AVAILABLE;
+}
 
   *_retval = JS_InitReflectParse(cx, global);
   return NS_OK;

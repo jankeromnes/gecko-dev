@@ -407,10 +407,12 @@ public:
         : fMutex(mutex)
         , fActive(!reentering) 
     {
-        if (fActive) umtx_lock(fMutex);
+        if (fActive) { umtx_lock(fMutex);
+}
     }
     inline ~XMutex() {
-        if (fActive) umtx_unlock(fMutex);
+        if (fActive) { umtx_unlock(fMutex);
+}
     }
 
 private:
@@ -657,7 +659,8 @@ ICUService::getVisibleIDs(UVector& result, const UnicodeString* matchID, UErrorC
 
 const Hashtable* 
 ICUService::getVisibleIDMap(UErrorCode& status) const {
-    if (U_FAILURE(status)) return NULL;
+    if (U_FAILURE(status)) { return NULL;
+}
 
     // must only be called when lock is already held
 

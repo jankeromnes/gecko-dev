@@ -38,22 +38,25 @@ static ffi_status initialize_aggregate(ffi_type *arg)
 {
   ffi_type **ptr;
 
-  if (UNLIKELY(arg == NULL || arg->elements == NULL))
+  if (UNLIKELY(arg == NULL || arg->elements == NULL)) {
     return FFI_BAD_TYPEDEF;
+}
 
   arg->size = 0;
   arg->alignment = 0;
 
   ptr = &(arg->elements[0]);
 
-  if (UNLIKELY(ptr == 0))
+  if (UNLIKELY(ptr == 0)) {
     return FFI_BAD_TYPEDEF;
+}
 
   while ((*ptr) != NULL)
     {
       if (UNLIKELY(((*ptr)->size == 0)
-		    && (initialize_aggregate((*ptr)) != FFI_OK)))
+		    && (initialize_aggregate((*ptr)) != FFI_OK))) {
 	return FFI_BAD_TYPEDEF;
+}
 
       /* Perform a sanity check on the argument type */
       FFI_ASSERT_VALID_TYPE(*ptr);
@@ -83,10 +86,11 @@ static ffi_status initialize_aggregate(ffi_type *arg)
     arg->alignment = FFI_AGGREGATE_ALIGNMENT;
 #endif
 
-  if (arg->size == 0)
+  if (arg->size == 0) {
     return FFI_BAD_TYPEDEF;
-  else
+  } else {
     return FFI_OK;
+}
 }
 
 #ifndef __CRIS__
@@ -118,8 +122,9 @@ ffi_status FFI_HIDDEN ffi_prep_cif_core(ffi_cif *cif, ffi_abi abi,
   FFI_ASSERT((!isvariadic) || (nfixedargs >= 1));
   FFI_ASSERT(nfixedargs <= ntotalargs);
 
-  if (! (abi > FFI_FIRST_ABI && abi < FFI_LAST_ABI))
+  if (! (abi > FFI_FIRST_ABI && abi < FFI_LAST_ABI)) {
     return FFI_BAD_ABI;
+}
 
   cif->abi = abi;
   cif->arg_types = atypes;
@@ -133,8 +138,9 @@ ffi_status FFI_HIDDEN ffi_prep_cif_core(ffi_cif *cif, ffi_abi abi,
 #endif
 
   /* Initialize the return type if necessary */
-  if ((cif->rtype->size == 0) && (initialize_aggregate(cif->rtype) != FFI_OK))
+  if ((cif->rtype->size == 0) && (initialize_aggregate(cif->rtype) != FFI_OK)) {
     return FFI_BAD_TYPEDEF;
+}
 
   /* Perform a sanity check on the return type */
   FFI_ASSERT_VALID_TYPE(cif->rtype);
@@ -163,8 +169,9 @@ ffi_status FFI_HIDDEN ffi_prep_cif_core(ffi_cif *cif, ffi_abi abi,
     {
 
       /* Initialize any uninitialized aggregate type definitions */
-      if (((*ptr)->size == 0) && (initialize_aggregate((*ptr)) != FFI_OK))
+      if (((*ptr)->size == 0) && (initialize_aggregate((*ptr)) != FFI_OK)) {
 	return FFI_BAD_TYPEDEF;
+}
 
       /* Perform a sanity check on the argument type, do this
 	 check after the initialization.  */

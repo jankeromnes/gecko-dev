@@ -89,8 +89,9 @@ _gettemp(char *path, register int *doopen, int extraFlags)
     unsigned int pid;
 
     pid = getpid();
-    for (trv = path; *trv; ++trv)
+    for (trv = path; *trv; ++trv) {
         ; /* extra X's get set to 0's */
+}
     while (*--trv == 'X') {
         *trv = (pid % 10) + '0';
         pid /= 10;
@@ -102,16 +103,18 @@ _gettemp(char *path, register int *doopen, int extraFlags)
      */
     for (start = trv + 1;; --trv) {
         char saved;
-        if (trv <= path)
+        if (trv <= path) {
             break;
+}
         saved = *trv;
         if (saved == '/' || saved == '\\') {
             int rv;
             *trv = '\0';
             rv = stat(path, &sbuf);
             *trv = saved;
-            if (rv)
+            if (rv) {
                 return (0);
+}
             if (!S_ISDIR(sbuf.st_mode)) {
                 errno = ENOTDIR;
                 return (0);
@@ -123,24 +126,29 @@ _gettemp(char *path, register int *doopen, int extraFlags)
     for (;;) {
         if (doopen) {
             if ((*doopen =
-                     open(path, O_CREAT | O_EXCL | O_RDWR | extraFlags, 0600)) >= 0)
+                     open(path, O_CREAT | O_EXCL | O_RDWR | extraFlags, 0600)) >= 0) {
                 return (1);
-            if (errno != EEXIST)
+}
+            if (errno != EEXIST) {
                 return (0);
-        } else if (stat(path, &sbuf))
+}
+        } else if (stat(path, &sbuf)) {
             return (errno == ENOENT ? 1 : 0);
+}
 
         /* tricky little algorithm for backward compatibility */
         for (trv = start;;) {
-            if (!*trv)
+            if (!*trv) {
                 return (0);
-            if (*trv == 'z')
+}
+            if (*trv == 'z') {
                 *trv++ = 'a';
-            else {
-                if (isdigit(*trv))
+            } else {
+                if (isdigit(*trv)) {
                     *trv = 'a';
-                else
+                } else {
                     ++*trv;
+}
                 break;
             }
         }

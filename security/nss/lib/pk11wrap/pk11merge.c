@@ -714,8 +714,9 @@ pk11_IncrementNickname(char *nickname)
     /* does nickname end with " #n*" ? */
     for (end = len - 1;
          end >= 2 && (digit = nickname[end]) <= '9' && digit >= '0';
-         end--) /* just scan */
+         end--) { /* just scan */
         ;
+}
     if (len >= 3 &&
         end < (len - 1) /* at least one digit */ &&
         nickname[end] == '#' &&

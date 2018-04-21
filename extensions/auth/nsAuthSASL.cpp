@@ -49,8 +49,9 @@ nsAuthSASL::Init(const char *serviceName,
     if (prefs) {
         bool val;
         rv = prefs->GetBoolPref(kNegotiateAuthSSPI, &val);
-        if (NS_SUCCEEDED(rv) && val)
+        if (NS_SUCCEEDED(rv) && val) {
             contractID = NS_AUTH_MODULE_CONTRACTID_PREFIX "kerb-sspi";
+}
     }
 
     mInnerModule = do_CreateInstance(contractID, &rv);
@@ -74,8 +75,9 @@ nsAuthSASL::GetNextToken(const void *inToken,
     uint32_t unwrappedTokenLen, messageLen;
     nsAutoCString userbuf;
 
-    if (!mInnerModule)
+    if (!mInnerModule) {
         return NS_ERROR_NOT_INITIALIZED;
+}
 
     if (mSASLReady) {
         // If the server COMPLETEs with an empty token, Cyrus sends us that token.

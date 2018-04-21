@@ -162,8 +162,9 @@ nssList_Clear(nssList *list, nssListElementDestructorFunc destructor)
     node = list->head;
     list->head = NULL;
     while (node && list->count > 0) {
-        if (destructor)
+        if (destructor) {
             (*destructor)(node->data);
+}
         link = &node->link;
         tmp = (nssListElement *)PR_NEXT_LINK(link);
         PR_REMOVE_LINK(link);
@@ -195,8 +196,9 @@ nsslist_add_element(nssList *list, void *data)
                     /* new element goes before current node */
                     PR_INSERT_BEFORE(&node->link, link);
                     /* reset head if this is first */
-                    if (currNode == list->head)
+                    if (currNode == list->head) {
                         list->head = node;
+}
                     break;
                 }
                 if (link == PR_LIST_TAIL(&list->head->link)) {
@@ -292,8 +294,9 @@ nssList_GetArray(nssList *list, void **rvArray, PRUint32 maxElements)
     NSSLIST_LOCK_IF(list);
     while (node) {
         rvArray[i++] = node->data;
-        if (i == maxElements)
+        if (i == maxElements) {
             break;
+}
         node = (nssListElement *)PR_NEXT_LINK(&node->link);
         if (node == list->head) {
             break;

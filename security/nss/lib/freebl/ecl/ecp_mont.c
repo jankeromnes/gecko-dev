@@ -23,8 +23,9 @@ GFMethod_consGFp_mont(const mp_int *irr)
     mp_mont_modulus *mmm;
 
     meth = GFMethod_consGFp(irr);
-    if (meth == NULL)
+    if (meth == NULL) {
         return NULL;
+}
 
     mmm = (mp_mont_modulus *)malloc(sizeof(mp_mont_modulus));
     if (mmm == NULL) {

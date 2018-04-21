@@ -363,7 +363,8 @@ TimeZone::TimeZone(const TimeZone &source)
 TimeZone &
 TimeZone::operator=(const TimeZone &right)
 {
-    if (this != &right) fID = right.fID;
+    if (this != &right) { fID = right.fID;
+}
     return *this;
 }
 

@@ -32,7 +32,8 @@ static void convolve_horiz(const uint8_t *src, ptrdiff_t src_stride,
       const uint8_t *const src_x = &src[x_q4 >> SUBPEL_BITS];
       const int16_t *const x_filter = x_filters[x_q4 & SUBPEL_MASK];
       int k, sum = 0;
-      for (k = 0; k < SUBPEL_TAPS; ++k) sum += src_x[k] * x_filter[k];
+      for (k = 0; k < SUBPEL_TAPS; ++k) { sum += src_x[k] * x_filter[k];
+}
       dst[x] = clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS));
       x_q4 += x_step_q4;
     }
@@ -54,7 +55,8 @@ static void convolve_avg_horiz(const uint8_t *src, ptrdiff_t src_stride,
       const uint8_t *const src_x = &src[x_q4 >> SUBPEL_BITS];
       const int16_t *const x_filter = x_filters[x_q4 & SUBPEL_MASK];
       int k, sum = 0;
-      for (k = 0; k < SUBPEL_TAPS; ++k) sum += src_x[k] * x_filter[k];
+      for (k = 0; k < SUBPEL_TAPS; ++k) { sum += src_x[k] * x_filter[k];
+}
       dst[x] = ROUND_POWER_OF_TWO(
           dst[x] + clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS)), 1);
       x_q4 += x_step_q4;
@@ -77,8 +79,9 @@ static void convolve_vert(const uint8_t *src, ptrdiff_t src_stride,
       const uint8_t *src_y = &src[(y_q4 >> SUBPEL_BITS) * src_stride];
       const int16_t *const y_filter = y_filters[y_q4 & SUBPEL_MASK];
       int k, sum = 0;
-      for (k = 0; k < SUBPEL_TAPS; ++k)
+      for (k = 0; k < SUBPEL_TAPS; ++k) {
         sum += src_y[k * src_stride] * y_filter[k];
+}
       dst[y * dst_stride] = clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS));
       y_q4 += y_step_q4;
     }
@@ -100,8 +103,9 @@ static void convolve_avg_vert(const uint8_t *src, ptrdiff_t src_stride,
       const uint8_t *src_y = &src[(y_q4 >> SUBPEL_BITS) * src_stride];
       const int16_t *const y_filter = y_filters[y_q4 & SUBPEL_MASK];
       int k, sum = 0;
-      for (k = 0; k < SUBPEL_TAPS; ++k)
+      for (k = 0; k < SUBPEL_TAPS; ++k) {
         sum += src_y[k * src_stride] * y_filter[k];
+}
       dst[y * dst_stride] = ROUND_POWER_OF_TWO(
           dst[y * dst_stride] +
               clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS)),
@@ -262,7 +266,8 @@ void vpx_convolve_avg_c(const uint8_t *src, ptrdiff_t src_stride, uint8_t *dst,
   (void)filter_y_stride;
 
   for (y = 0; y < h; ++y) {
-    for (x = 0; x < w; ++x) dst[x] = ROUND_POWER_OF_TWO(dst[x] + src[x], 1);
+    for (x = 0; x < w; ++x) { dst[x] = ROUND_POWER_OF_TWO(dst[x] + src[x], 1);
+}
     src += src_stride;
     dst += dst_stride;
   }

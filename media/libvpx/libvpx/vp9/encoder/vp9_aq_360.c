@@ -28,12 +28,13 @@ static const double rate_ratio[MAX_SEGMENTS] = { 1.0, 0.75, 0.6, 0.5,
 // Sets segment id 0 for the equatorial region, 1 for temperate region
 // and 2 for the polar regions
 unsigned int vp9_360aq_segment_id(int mi_row, int mi_rows) {
-  if (mi_row < mi_rows / 8 || mi_row > mi_rows - mi_rows / 8)
+  if (mi_row < mi_rows / 8 || mi_row > mi_rows - mi_rows / 8) {
     return 2;
-  else if (mi_row < mi_rows / 4 || mi_row > mi_rows - mi_rows / 4)
+  } else if (mi_row < mi_rows / 4 || mi_row > mi_rows - mi_rows / 4) {
     return 1;
-  else
+  } else {
     return 0;
+}
 }
 
 void vp9_360aq_frame_setup(VP9_COMP *cpi) {

@@ -414,8 +414,9 @@ mozilla::detail::VectorTesting::testReplaceRawBuffer()
     MOZ_ASSERT(v.reserved() == 4);
     MOZ_ASSERT(v.capacity() == 4);
     MOZ_ASSERT(v[0].j == 9);
-    for (size_t i = 0; i < 5; i++)
+    for (size_t i = 0; i < 5; i++) {
       MOZ_RELEASE_ASSERT(v.emplaceBack(i, i));
+}
     MOZ_ASSERT(v.length() == 6);
     MOZ_ASSERT(v.reserved() == 6);
     MOZ_ASSERT(S::constructCount == 6);

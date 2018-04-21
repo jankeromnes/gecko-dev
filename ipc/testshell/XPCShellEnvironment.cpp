@@ -78,11 +78,13 @@ Print(JSContext *cx, unsigned argc, JS::Value *vp)
 
     for (unsigned i = 0; i < args.length(); i++) {
         JSString *str = JS::ToString(cx, args[i]);
-        if (!str)
+        if (!str) {
             return false;
+}
         JSAutoByteString bytes(cx, str);
-        if (!bytes)
+        if (!bytes) {
             return false;
+}
         fprintf(stdout, "%s%s", i ? " " : "", bytes.ptr());
         fflush(stdout);
     }
@@ -99,8 +101,9 @@ GetLine(char *bufp,
     char line[256];
     fputs(prompt, stdout);
     fflush(stdout);
-    if (!fgets(line, sizeof line, file))
+    if (!fgets(line, sizeof line, file)) {
         return false;
+}
     strcpy(bufp, line);
     return true;
 }
@@ -110,15 +113,18 @@ Dump(JSContext *cx, unsigned argc, JS::Value *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 
-    if (!args.length())
+    if (!args.length()) {
         return true;
+}
 
     JSString *str = JS::ToString(cx, args[0]);
-    if (!str)
+    if (!str) {
         return false;
+}
     JSAutoByteString bytes(cx, str);
-    if (!bytes)
+    if (!bytes) {
       return false;
+}
 
     fputs(bytes.ptr(), stdout);
     fflush(stdout);
@@ -133,8 +139,9 @@ Load(JSContext *cx,
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 
     JS::RootedObject thisObject(cx);
-    if (!args.computeThis(cx, &thisObject))
+    if (!args.computeThis(cx, &thisObject)) {
         return false;
+}
     if (!JS_IsGlobalObject(thisObject)) {
         JS_ReportErrorASCII(cx, "Trying to load() into a non-global object");
         return false;
@@ -142,16 +149,19 @@ Load(JSContext *cx,
 
     for (unsigned i = 0; i < args.length(); i++) {
         JS::Rooted<JSString*> str(cx, JS::ToString(cx, args[i]));
-        if (!str)
+        if (!str) {
             return false;
+}
         JSAutoByteString filename(cx, str);
-        if (!filename)
+        if (!filename) {
             return false;
+}
         FILE *file = fopen(filename.ptr(), "r");
         if (!file) {
             filename.clear();
-            if (!filename.encodeUtf8(cx, str))
+            if (!filename.encodeUtf8(cx, str)) {
                 return false;
+}
             JS_ReportErrorUTF8(cx, "cannot open file '%s' for reading", filename.ptr());
             return false;
         }
@@ -161,8 +171,9 @@ Load(JSContext *cx,
         JS::Rooted<JSScript*> script(cx);
         bool ok = JS::Compile(cx, options, file, &script);
         fclose(file);
-        if (!ok)
+        if (!ok) {
             return false;
+}
 
         if (!JS_ExecuteScript(cx, script)) {
             return false;
@@ -193,13 +204,15 @@ DumpXPC(JSContext *cx,
 
     uint16_t depth = 2;
     if (args.length() > 0) {
-        if (!JS::ToUint16(cx, args[0], &depth))
+        if (!JS::ToUint16(cx, args[0], &depth)) {
             return false;
+}
     }
 
     nsCOMPtr<nsIXPConnect> xpc = do_GetService(nsIXPConnect::GetCID());
-    if (xpc)
+    if (xpc) {
         xpc->DebugDump(int16_t(depth));
+}
     args.rval().setUndefined();
     return true;
 }
@@ -291,8 +304,9 @@ XPCShellEnvironment::ProcessFile(JSContext *cx,
         int ch = fgetc(file);
         if (ch == '#') {
             while((ch = fgetc(file)) != EOF) {
-                if(ch == '\n' || ch == '\r')
+                if(ch == '\n' || ch == '\r') {
                     break;
+}
             }
         }
         ungetc(ch, file);
@@ -301,8 +315,9 @@ XPCShellEnvironment::ProcessFile(JSContext *cx,
         options.setUTF8(true)
                .setFileAndLine(filename, 1);
         JS::Rooted<JSScript*> script(cx);
-        if (JS::Compile(cx, options, file, &script))
+        if (JS::Compile(cx, options, file, &script)) {
             (void)JS_ExecuteScript(cx, script, &result);
+}
 
         return;
     }
@@ -344,14 +359,16 @@ XPCShellEnvironment::ProcessFile(JSContext *cx,
                 older = JS::SetWarningReporter(cx, nullptr);
                 str = JS::ToString(cx, result);
                 JSAutoByteString bytes;
-                if (str)
+                if (str) {
                     bytes.encodeLatin1(cx, str);
+}
                 JS::SetWarningReporter(cx, older);
 
-                if (!!bytes)
+                if (!!bytes) {
                     fprintf(stdout, "%s\n", bytes.ptr());
-                else
+                } else {
                     ok = false;
+}
             }
         }
     } while (!hitEOF && !env->IsQuitting());
@@ -430,8 +447,9 @@ XPCShellEnvironment::Init()
 
     JS::CompartmentOptions options;
     options.creationOptions().setSystemZone();
-    if (xpc::SharedMemoryEnabled())
+    if (xpc::SharedMemoryEnabled()) {
         options.creationOptions().setSharedMemoryAndAtomicsEnabled(true);
+}
 
     JS::Rooted<JSObject*> globalObj(cx);
     rv = xpc::InitClassesWithNewWrappedGlobal(cx,
@@ -503,8 +521,9 @@ XPCShellEnvironment::EvaluateString(const nsString& aString,
       JS::WarningReporter old = JS::SetWarningReporter(cx, nullptr);
       JSString* str = JS::ToString(cx, result);
       nsAutoJSString autoStr;
-      if (str)
+      if (str) {
           autoStr.init(cx, str);
+}
       JS::SetWarningReporter(cx, old);
 
       if (!autoStr.IsEmpty() && aResult) {

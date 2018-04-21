@@ -54,8 +54,9 @@ lg_Attribute2SecItem(PLArenaPool *arena, CK_ATTRIBUTE_TYPE type,
     const CK_ATTRIBUTE *attribute;
 
     attribute = lg_FindAttribute(type, templ, count);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return CKR_TEMPLATE_INCOMPLETE;
+}
     len = attribute->ulValueLen;
 
     if (arena) {
@@ -86,8 +87,9 @@ lg_Attribute2SSecItem(PLArenaPool *arena, CK_ATTRIBUTE_TYPE type,
     item->data = NULL;
 
     attribute = lg_FindAttribute(type, templ, count);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return CKR_TEMPLATE_INCOMPLETE;
+}
 
     (void)SECITEM_AllocItem(arena, item, attribute->ulValueLen);
     if (item->data == NULL) {
@@ -113,8 +115,9 @@ lg_PrivAttr2SSecItem(PLArenaPool *arena, CK_ATTRIBUTE_TYPE type,
     item->data = NULL;
 
     attribute = lg_FindAttribute(type, templ, count);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return CKR_TEMPLATE_INCOMPLETE;
+}
 
     epki.data = attribute->pValue;
     epki.len = attribute->ulValueLen;
@@ -172,8 +175,9 @@ lg_getString(CK_ATTRIBUTE_TYPE type, const CK_ATTRIBUTE *templ, CK_ULONG count)
     char *label = NULL;
 
     attribute = lg_FindAttribute(type, templ, count);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return NULL;
+}
 
     if (attribute->pValue != NULL) {
         label = (char *)PORT_Alloc(attribute->ulValueLen + 1);
@@ -197,8 +201,9 @@ lg_GetULongAttribute(CK_ATTRIBUTE_TYPE type, const CK_ATTRIBUTE *templ,
     int i;
 
     attribute = lg_FindAttribute(type, templ, count);
-    if (attribute == NULL)
+    if (attribute == NULL) {
         return CKR_TEMPLATE_INCOMPLETE;
+}
 
     if (attribute->ulValueLen != 4) {
         return CKR_ATTRIBUTE_VALUE_INVALID;

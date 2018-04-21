@@ -98,8 +98,9 @@ int ff_get_cpu_flags_x86(void)
     int family = 0, model = 0;
     union { int i[3]; char c[12]; } vendor;
 
-    if (!cpuid_test())
+    if (!cpuid_test()) {
         return 0; /* CPUID not supported */
+}
 
     cpuid(0, max_std_level, vendor.i[0], vendor.i[2], vendor.i[1]);
 
@@ -107,25 +108,34 @@ int ff_get_cpu_flags_x86(void)
         cpuid(1, eax, ebx, ecx, std_caps);
         family = ((eax >> 8) & 0xf) + ((eax >> 20) & 0xff);
         model  = ((eax >> 4) & 0xf) + ((eax >> 12) & 0xf0);
-        if (std_caps & (1 << 15))
+        if (std_caps & (1 << 15)) {
             rval |= AV_CPU_FLAG_CMOV;
-        if (std_caps & (1 << 23))
+}
+        if (std_caps & (1 << 23)) {
             rval |= AV_CPU_FLAG_MMX;
-        if (std_caps & (1 << 25))
+}
+        if (std_caps & (1 << 25)) {
             rval |= AV_CPU_FLAG_MMXEXT;
+}
 #if HAVE_SSE
-        if (std_caps & (1 << 25))
+        if (std_caps & (1 << 25)) {
             rval |= AV_CPU_FLAG_SSE;
-        if (std_caps & (1 << 26))
+}
+        if (std_caps & (1 << 26)) {
             rval |= AV_CPU_FLAG_SSE2;
-        if (ecx & 1)
+}
+        if (ecx & 1) {
             rval |= AV_CPU_FLAG_SSE3;
-        if (ecx & 0x00000200 )
+}
+        if (ecx & 0x00000200 ) {
             rval |= AV_CPU_FLAG_SSSE3;
-        if (ecx & 0x00080000 )
+}
+        if (ecx & 0x00080000 ) {
             rval |= AV_CPU_FLAG_SSE4;
-        if (ecx & 0x00100000 )
+}
+        if (ecx & 0x00100000 ) {
             rval |= AV_CPU_FLAG_SSE42;
+}
 #if HAVE_AVX
         /* Check OXSAVE and AVX bits */
         if ((ecx & 0x18000000) == 0x18000000) {
@@ -133,8 +143,9 @@ int ff_get_cpu_flags_x86(void)
             xgetbv(0, eax, edx);
             if ((eax & 0x6) == 0x6) {
                 rval |= AV_CPU_FLAG_AVX;
-                if (ecx & 0x00001000)
+                if (ecx & 0x00001000) {
                     rval |= AV_CPU_FLAG_FMA3;
+}
             }
         }
 #endif /* HAVE_AVX */
@@ -143,14 +154,16 @@ int ff_get_cpu_flags_x86(void)
     if (max_std_level >= 7) {
         cpuid(7, eax, ebx, ecx, edx);
 #if HAVE_AVX2
-        if (ebx & 0x00000020)
+        if (ebx & 0x00000020) {
             rval |= AV_CPU_FLAG_AVX2;
+}
 #endif /* HAVE_AVX2 */
         /* BMI1/2 don't need OS support */
         if (ebx & 0x00000008) {
             rval |= AV_CPU_FLAG_BMI1;
-            if (ebx & 0x00000100)
+            if (ebx & 0x00000100) {
                 rval |= AV_CPU_FLAG_BMI2;
+}
         }
     }
 
@@ -158,14 +171,18 @@ int ff_get_cpu_flags_x86(void)
 
     if (max_ext_level >= 0x80000001) {
         cpuid(0x80000001, eax, ebx, ecx, ext_caps);
-        if (ext_caps & (1U << 31))
+        if (ext_caps & (1U << 31)) {
             rval |= AV_CPU_FLAG_3DNOW;
-        if (ext_caps & (1 << 30))
+}
+        if (ext_caps & (1 << 30)) {
             rval |= AV_CPU_FLAG_3DNOWEXT;
-        if (ext_caps & (1 << 23))
+}
+        if (ext_caps & (1 << 23)) {
             rval |= AV_CPU_FLAG_MMX;
-        if (ext_caps & (1 << 22))
+}
+        if (ext_caps & (1 << 22)) {
             rval |= AV_CPU_FLAG_MMXEXT;
+}
 
         /* Allow for selectively disabling SSE2 functions on AMD processors
            with SSE2 support but not SSE4a. This includes Athlon64, some
@@ -182,10 +199,12 @@ int ff_get_cpu_flags_x86(void)
         /* XOP and FMA4 use the AVX instruction coding scheme, so they can't be
          * used unless the OS has AVX support. */
         if (rval & AV_CPU_FLAG_AVX) {
-            if (ecx & 0x00000800)
+            if (ecx & 0x00000800) {
                 rval |= AV_CPU_FLAG_XOP;
-            if (ecx & 0x00010000)
+}
+            if (ecx & 0x00010000) {
                 rval |= AV_CPU_FLAG_FMA4;
+}
         }
     }
 
@@ -198,18 +217,21 @@ int ff_get_cpu_flags_x86(void)
              * enabled so that SSE2 is not used unless explicitly enabled
              * by checking AV_CPU_FLAG_SSE2SLOW. The same situation
              * applies for AV_CPU_FLAG_SSE3 and AV_CPU_FLAG_SSE3SLOW. */
-            if (rval & AV_CPU_FLAG_SSE2)
+            if (rval & AV_CPU_FLAG_SSE2) {
                 rval ^= AV_CPU_FLAG_SSE2SLOW | AV_CPU_FLAG_SSE2;
-            if (rval & AV_CPU_FLAG_SSE3)
+}
+            if (rval & AV_CPU_FLAG_SSE3) {
                 rval ^= AV_CPU_FLAG_SSE3SLOW | AV_CPU_FLAG_SSE3;
+}
         }
         /* The Atom processor has SSSE3 support, which is useful in many cases,
          * but sometimes the SSSE3 version is slower than the SSE2 equivalent
          * on the Atom, but is generally faster on other processors supporting
          * SSSE3. This flag allows for selectively disabling certain SSSE3
          * functions on the Atom. */
-        if (family == 6 && model == 28)
+        if (family == 6 && model == 28) {
             rval |= AV_CPU_FLAG_ATOM;
+}
     }
 
 #endif /* cpuid */

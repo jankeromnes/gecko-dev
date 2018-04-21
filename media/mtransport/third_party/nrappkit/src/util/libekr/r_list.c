@@ -105,8 +105,9 @@ int r_list_create(listp)
     r_list *list=0;
     int _status;
 
-    if(!(list=(r_list *)RCALLOC(sizeof(r_list))))
+    if(!(list=(r_list *)RCALLOC(sizeof(r_list)))) {
       ABORT(R_NO_MEMORY);
+}
 
     list->first=0;
     list->last=0;
@@ -123,8 +124,9 @@ int r_list_destroy(listp)
     r_list *list;
     r_list_el *el;
 
-    if(!listp || !*listp)
+    if(!listp || !*listp) {
       return(0);
+}
     list=*listp;
 
     el=list->first;
@@ -132,8 +134,9 @@ int r_list_destroy(listp)
     while(el){
       r_list_el *el_t;
 
-      if(el->destroy && el->data)
+      if(el->destroy && el->data) {
         el->destroy(&el->data);
+}
       el_t=el;
       el=el->next;
       RFREE(el_t);
@@ -158,26 +161,31 @@ int r_list_copy(outp,in)
       return(0);
     }
 
-    if(r=r_list_create(&out))
+    if(r=r_list_create(&out)) {
       ABORT(r);
+}
 
     for(el=in->first;el;el=el->next){
-      if(!(el2=(r_list_el *)RCALLOC(sizeof(r_list_el))))
+      if(!(el2=(r_list_el *)RCALLOC(sizeof(r_list_el)))) {
         ABORT(R_NO_MEMORY);
+}
 
       if(el->copy && el->data){
-        if(r=el->copy(&el2->data,el->data))
+        if(r=el->copy(&el2->data,el->data)) {
           ABORT(r);
+}
       }
 
       el2->copy=el->copy;
       el2->destroy=el->destroy;
 
-      if(!(out->first))
+      if(!(out->first)) {
         out->first=el2;
+}
 
       el2->prev=last;
-      if(last) last->next=el2;
+      if(last) { last->next=el2;
+}
       last=el2;
     }
 
@@ -187,8 +195,9 @@ int r_list_copy(outp,in)
 
     _status=0;
   abort:
-    if(_status)
+    if(_status) {
       r_list_destroy(&out);
+}
     return(_status);
   }
 
@@ -201,8 +210,9 @@ int r_list_insert(list,value,copy,destroy)
     r_list_el *el=0;
     int _status;
 
-    if(!(el=(r_list_el *)RCALLOC(sizeof(r_list_el))))
+    if(!(el=(r_list_el *)RCALLOC(sizeof(r_list_el)))) {
       ABORT(R_NO_MEMORY);
+}
     el->data=value;
     el->copy=copy;
     el->destroy=destroy;
@@ -228,8 +238,9 @@ int r_list_append(list,value,copy,destroy)
     r_list_el *el=0;
     int _status;
 
-    if(!(el=(r_list_el *)RCALLOC(sizeof(r_list_el))))
+    if(!(el=(r_list_el *)RCALLOC(sizeof(r_list_el)))) {
       ABORT(R_NO_MEMORY);
+}
     el->data=value;
     el->copy=copy;
     el->destroy=destroy;
@@ -237,8 +248,9 @@ int r_list_append(list,value,copy,destroy)
     el->prev=list->last;
     el->next=0;
 
-    if(list->last) list->last->next=el;
-    else list->first=el;
+    if(list->last) { list->last->next=el;
+    } else { list->first=el;
+}
 
     list->last=el;
 
@@ -261,8 +273,9 @@ int r_list_iter(iter,val)
   r_list_iterator *iter;
   void **val;
   {
-    if(!iter->ptr)
+    if(!iter->ptr) {
       return(R_EOD);
+}
 
     *val=iter->ptr->data;
     iter->ptr=iter->ptr->next;

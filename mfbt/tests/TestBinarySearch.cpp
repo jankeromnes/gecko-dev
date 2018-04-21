@@ -33,8 +33,10 @@ struct RangeFinder {
   const int mLower, mUpper;
   RangeFinder(int lower, int upper) : mLower(lower), mUpper(upper) {}
   int operator()(int val) const {
-    if (val >= mUpper) return -1;
-    if (val < mLower) return 1;
+    if (val >= mUpper) { return -1;
+}
+    if (val < mLower) { return 1;
+}
     return 0;
   }
 };

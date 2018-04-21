@@ -650,8 +650,9 @@ sctp_handle_asconf(struct mbuf *m, unsigned int offset,
 		SCTPDBG(SCTP_DEBUG_ASCONF1,"handle_asconf: Now processing first ASCONF. Try to delete old cache\n");
 
 		TAILQ_FOREACH_SAFE(ack, &asoc->asconf_ack_sent, next, ack_next) {
-			if (ack->serial_number == serial_num)
+			if (ack->serial_number == serial_num) {
 				break;
+}
 			SCTPDBG(SCTP_DEBUG_ASCONF1,"handle_asconf: delete old(%u) < first(%u)\n",
 			    ack->serial_number, serial_num);
 			TAILQ_REMOVE(&asoc->asconf_ack_sent, ack, next);
@@ -1121,8 +1122,9 @@ sctp_path_check_and_react(struct sctp_tcb *stcb, struct sctp_ifa *newifa)
 		SCTP_RTALLOC((sctp_route_t *)&net->ro,
 			     stcb->sctp_ep->def_vrf_id,
 			     stcb->sctp_ep->fibnum);
-		if (net->ro.ro_rt == NULL)
+		if (net->ro.ro_rt == NULL) {
 			continue;
+}
 
 		changed = 0;
 		switch (net->ro._l_addr.sa.sa_family) {
@@ -1147,8 +1149,9 @@ sctp_path_check_and_react(struct sctp_tcb *stcb, struct sctp_ifa *newifa)
 		/* if the newly added address does not relate routing
 		   information, we skip.
 		 */
-		if (changed == 0)
+		if (changed == 0) {
 			continue;
+}
 		/* Retransmit unacknowledged DATA chunks immediately */
 		if (sctp_is_mobility_feature_on(stcb->sctp_ep,
 		                                SCTP_MOBILITY_FASTHANDOFF)) {
@@ -1218,8 +1221,9 @@ sctp_asconf_queue_mgmt(struct sctp_tcb *stcb, struct sctp_ifa *ifa,
 	/* make sure the request isn't already in the queue */
 	TAILQ_FOREACH_SAFE(aa, &stcb->asoc.asconf_queue, next, aa_next) {
 		/* address match? */
-		if (sctp_asconf_addr_match(aa, &ifa->address.sa) == 0)
+		if (sctp_asconf_addr_match(aa, &ifa->address.sa) == 0) {
 			continue;
+}
 		/* is the request already in queue but not sent?
 		 * pass the request already sent in order to resolve the following case:
 		 *  1. arrival of ADD, then sent
@@ -1446,15 +1450,17 @@ sctp_asconf_queue_sa_delete(struct sctp_tcb *stcb, struct sockaddr *sa)
 	/* make sure the request isn't already in the queue */
 	TAILQ_FOREACH_SAFE(aa, &stcb->asoc.asconf_queue, next, aa_next) {
 		/* address match? */
-		if (sctp_asconf_addr_match(aa, sa) == 0)
+		if (sctp_asconf_addr_match(aa, sa) == 0) {
 			continue;
+}
 		/* is the request already in queue (sent or not) */
 		if (aa->ap.aph.ph.param_type == SCTP_DEL_IP_ADDRESS) {
 			return (-1);
 		}
 		/* is the negative request already in queue, and not sent */
-		if (aa->sent == 1)
+		if (aa->sent == 1) {
 			continue;
+}
 		if (aa->ap.aph.ph.param_type == SCTP_ADD_IP_ADDRESS) {
 			/* add already queued, so remove existing entry */
 			TAILQ_REMOVE(&stcb->asoc.asconf_queue, aa, next);
@@ -1482,8 +1488,9 @@ sctp_asconf_queue_sa_delete(struct sctp_tcb *stcb, struct sockaddr *sa)
 	/* top level elements are "networked" during send */
 	aa->ap.aph.ph.param_type = SCTP_DEL_IP_ADDRESS;
 	aa->ifa = ifa;
-	if (ifa)
+	if (ifa) {
 		atomic_add_int(&ifa->refcount, 1);
+}
 	/* correlation_id filled in during send routine later... */
 	switch (sa->sa_family) {
 #ifdef INET6
@@ -1518,8 +1525,9 @@ sctp_asconf_queue_sa_delete(struct sctp_tcb *stcb, struct sockaddr *sa)
 	default:
 		/* invalid family! */
 		SCTP_FREE(aa, SCTP_M_ASC_ADDR);
-		if (ifa)
+		if (ifa) {
 			sctp_free_ifa(ifa);
+}
 		return (-1);
 	}
 	aa->sent = 0;		/* clear sent flag */
@@ -1637,8 +1645,9 @@ sctp_asconf_process_param_ack(struct sctp_tcb *stcb,
 
 	/* remove the param and free it */
 	TAILQ_REMOVE(&stcb->asoc.asconf_queue, aparam, next);
-	if (aparam->ifa)
+	if (aparam->ifa) {
 		sctp_free_ifa(aparam->ifa);
+}
 	SCTP_FREE(aparam, SCTP_M_ASC_ADDR);
 }
 
@@ -1804,18 +1813,20 @@ sctp_handle_asconf_ack(struct mbuf *m, int offset,
 	 * beginning from 1 and that we don't have *that* many outstanding
 	 * at any given time
 	 */
-	if (last_error_id == 0)
+	if (last_error_id == 0) {
 		last_error_id--;	/* set to "max" value */
+}
 	TAILQ_FOREACH_SAFE(aa, &stcb->asoc.asconf_queue, next, aa_next) {
 		if (aa->sent == 1) {
 			/*
 			 * implicitly successful or failed if correlation_id
 			 * < last_error_id, then success else, failure
 			 */
-			if (aa->ap.aph.correlation_id < last_error_id)
+			if (aa->ap.aph.correlation_id < last_error_id) {
 				sctp_asconf_process_param_ack(stcb, aa, 1);
-			else
+			} else {
 				sctp_asconf_process_param_ack(stcb, aa, 0);
+}
 		} else {
 			/*
 			 * since we always process in order (FIFO queue) if
@@ -2063,8 +2074,9 @@ sctp_asconf_iterator_ep(struct sctp_inpcb *inp, void *ptr, uint32_t val SCTP_UNU
 		default:
 			/* invalid address family */
 			cnt_invalid++;
-			if (asc->cnt == cnt_invalid)
+			if (asc->cnt == cnt_invalid) {
 				return (1);
+}
 		}
 	}
 	return (0);
@@ -2203,10 +2215,11 @@ sctp_asconf_iterator_stcb(struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 		default:
 			/* invalid address family */
 			cnt_invalid++;
-			if (asc->cnt == cnt_invalid)
+			if (asc->cnt == cnt_invalid) {
 				return;
-			else
+			} else {
 				continue;
+}
 			break;
 		}
 
@@ -2442,12 +2455,14 @@ sctp_find_valid_localaddr(struct sctp_tcb *stcb, int addr_locked)
 	struct sctp_ifn *sctp_ifn;
 	struct sctp_ifa *sctp_ifa;
 
-	if (addr_locked == SCTP_ADDR_NOT_LOCKED)
+	if (addr_locked == SCTP_ADDR_NOT_LOCKED) {
 		SCTP_IPI_ADDR_RLOCK();
+}
 	vrf = sctp_find_vrf(stcb->asoc.vrf_id);
 	if (vrf == NULL) {
-		if (addr_locked == SCTP_ADDR_NOT_LOCKED)
+		if (addr_locked == SCTP_ADDR_NOT_LOCKED) {
 			SCTP_IPI_ADDR_RUNLOCK();
+}
 		return (NULL);
 	}
 	LIST_FOREACH(sctp_ifn, &vrf->ifnlist, next_ifn) {
@@ -2531,8 +2546,9 @@ sctp_find_valid_localaddr(struct sctp_tcb *stcb, int addr_locked)
 		}
 	}
 	/* no valid addresses found */
-	if (addr_locked == SCTP_ADDR_NOT_LOCKED)
+	if (addr_locked == SCTP_ADDR_NOT_LOCKED) {
 		SCTP_IPI_ADDR_RUNLOCK();
+}
 	return (NULL);
 }
 
@@ -2547,8 +2563,9 @@ sctp_find_valid_localaddr_ep(struct sctp_tcb *stcb)
 		}
 		/* is the address restricted ? */
 		if (sctp_is_addr_restricted(stcb, laddr->ifa) &&
-		    (!sctp_is_addr_pending(stcb, laddr->ifa)))
+		    (!sctp_is_addr_pending(stcb, laddr->ifa))) {
 			continue;
+}
 
 		/* found a valid local address to use */
 		return (&laddr->ifa->address.sa);
@@ -2576,11 +2593,13 @@ sctp_compose_asconf(struct sctp_tcb *stcb, int *retlen, int addr_locked)
 
 	/* are there any asconf params to send? */
 	TAILQ_FOREACH(aa, &stcb->asoc.asconf_queue, next) {
-		if (aa->sent == 0)
+		if (aa->sent == 0) {
 			break;
+}
 	}
-	if (aa == NULL)
+	if (aa == NULL) {
 		return (NULL);
+}
 
 	/*
 	 * get a chunk header mbuf and a cluster for the asconf params since
@@ -2618,8 +2637,9 @@ sctp_compose_asconf(struct sctp_tcb *stcb, int *retlen, int addr_locked)
 
 	/* add parameters... up to smallest MTU allowed */
 	TAILQ_FOREACH(aa, &stcb->asoc.asconf_queue, next) {
-		if (aa->sent)
+		if (aa->sent) {
 			continue;
+}
 		/* get the parameter length */
 		p_length = SCTP_SIZE32(aa->ap.aph.ph.param_length);
 		/* will it fit in current chunk? */
@@ -2691,11 +2711,12 @@ sctp_compose_asconf(struct sctp_tcb *stcb, int *retlen, int addr_locked)
 		struct sockaddr *found_addr;
 		caddr_t addr_ptr;
 
-		if (stcb->sctp_ep->sctp_flags & SCTP_PCB_FLAGS_BOUNDALL)
+		if (stcb->sctp_ep->sctp_flags & SCTP_PCB_FLAGS_BOUNDALL) {
 			found_addr = sctp_find_valid_localaddr(stcb,
 							       addr_locked);
-		else
+		} else {
 			found_addr = sctp_find_valid_localaddr_ep(stcb);
+}
 
 		lookup = (struct sctp_ipv6addr_param *)lookup_ptr;
 		if (found_addr != NULL) {
@@ -2774,8 +2795,9 @@ sctp_process_initack_addresses(struct sctp_tcb *stcb, struct mbuf *m,
 #endif
 
 	SCTPDBG(SCTP_DEBUG_ASCONF2, "processing init-ack addresses\n");
-	if (stcb == NULL) /* Un-needed check for SA */
+	if (stcb == NULL) { /* Un-needed check for SA */
 		return;
+}
 
 	/* convert to upper bound */
 	length += offset;
@@ -2885,8 +2907,9 @@ next_addr:
 		}
 		/* get next parameter */
 		offset += SCTP_SIZE32(plen);
-		if ((offset + sizeof(struct sctp_paramhdr)) > length)
+		if ((offset + sizeof(struct sctp_paramhdr)) > length) {
 			return;
+}
 		ph = (struct sctp_paramhdr *)sctp_m_getptr(m, offset,
 		    sizeof(struct sctp_paramhdr), (uint8_t *)&tmp_param);
 	} /* while */
@@ -3472,11 +3495,12 @@ sctp_asconf_send_nat_state_update(struct sctp_tcb *stcb,
 			if (laddr->ifa == NULL) {
 				continue;
 			}
-			if (laddr->ifa->localifa_flags & SCTP_BEING_DELETED)
+			if (laddr->ifa->localifa_flags & SCTP_BEING_DELETED) {
 				/* Address being deleted by the system, dont
 				 * list.
 				 */
 				continue;
+}
 			if (laddr->action == SCTP_DEL_IP_ADDRESS) {
 				/* Address being deleted on this ep
 				 * don't list.

@@ -354,13 +354,16 @@ NS_IMPL_ISUPPORTS0(NrSocket)
 
 // The nsASocket callbacks
 void NrSocket::OnSocketReady(PRFileDesc *fd, int16_t outflags) {
-  if (outflags & PR_POLL_READ & poll_flags())
+  if (outflags & PR_POLL_READ & poll_flags()) {
     fire_callback(NR_ASYNC_WAIT_READ);
-  if (outflags & PR_POLL_WRITE & poll_flags())
+}
+  if (outflags & PR_POLL_WRITE & poll_flags()) {
     fire_callback(NR_ASYNC_WAIT_WRITE);
-  if (outflags & (PR_POLL_ERR | PR_POLL_NVAL | PR_POLL_HUP))
+}
+  if (outflags & (PR_POLL_ERR | PR_POLL_NVAL | PR_POLL_HUP)) {
     // TODO: Bug 946423: how do we notify the upper layers about this?
     close();
+}
 }
 
 void NrSocket::OnSocketDetached(PRFileDesc *fd) {
@@ -491,14 +494,16 @@ int nr_netaddr_to_transport_addr(const net::NetAddr *netaddr,
       case AF_INET:
         if ((r = nr_ip4_port_to_transport_addr(ntohl(netaddr->inet.ip),
                                                ntohs(netaddr->inet.port),
-                                               protocol, addr)))
+                                               protocol, addr))) {
           ABORT(r);
+}
         break;
       case AF_INET6:
         if ((r = nr_ip6_port_to_transport_addr((in6_addr *)&netaddr->inet6.ip.u8,
                                                ntohs(netaddr->inet6.port),
-                                               protocol, addr)))
+                                               protocol, addr))) {
           ABORT(r);
+}
         break;
       default:
         MOZ_ASSERT(false);
@@ -525,8 +530,9 @@ int nr_praddr_to_transport_addr(const PRNetAddr *praddr,
         ip4.sin_port = praddr->inet.port;
         if ((r = nr_sockaddr_to_transport_addr((sockaddr *)&ip4,
                                                protocol, keep,
-                                               addr)))
+                                               addr))) {
           ABORT(r);
+}
         break;
       case PR_AF_INET6:
         ip6.sin6_family = PF_INET6;
@@ -534,8 +540,9 @@ int nr_praddr_to_transport_addr(const PRNetAddr *praddr,
         ip6.sin6_flowinfo = praddr->ipv6.flowinfo;
         memcpy(&ip6.sin6_addr, &praddr->ipv6.ip, sizeof(in6_addr));
         ip6.sin6_scope_id = praddr->ipv6.scope_id;
-        if ((r = nr_sockaddr_to_transport_addr((sockaddr *)&ip6,protocol,keep,addr)))
+        if ((r = nr_sockaddr_to_transport_addr((sockaddr *)&ip6,protocol,keep,addr))) {
           ABORT(r);
+}
         break;
       default:
         MOZ_ASSERT(false);
@@ -589,8 +596,9 @@ int NrSocket::create(nr_transport_addr *addr) {
     ABORT(R_INTERNAL);
   }
 
-  if((r=nr_transport_addr_to_praddr(addr, &naddr)))
+  if((r=nr_transport_addr_to_praddr(addr, &naddr))) {
     ABORT(r);
+}
 
   switch (addr->protocol) {
     case IPPROTO_UDP:
@@ -649,8 +657,9 @@ int NrSocket::create(nr_transport_addr *addr) {
       break;
     case IPPROTO_TCP:
       // TODO: Add TLS layer with nsISocketProviderService?
-      if (my_addr_.tls_host[0] != '\0')
+      if (my_addr_.tls_host[0] != '\0') {
         ABORT(R_INTERNAL);
+}
 
       if (!(fd_ = PR_OpenTCPSocket(naddr.raw.family))) {
         r_log(LOG_GENERIC,LOG_CRIT,"Couldn't create TCP socket, "
@@ -713,8 +722,9 @@ int NrSocket::create(nr_transport_addr *addr) {
       ABORT(R_INTERNAL);
     }
 
-    if((r=nr_praddr_to_transport_addr(&naddr,&my_addr_,addr->protocol,1)))
+    if((r=nr_praddr_to_transport_addr(&naddr,&my_addr_,addr->protocol,1))) {
       ABORT(r);
+}
   }
 
 
@@ -730,8 +740,9 @@ int NrSocket::create(nr_transport_addr *addr) {
 
   // Remember our thread.
   ststhread_ = do_QueryInterface(stservice, &rv);
-  if (!NS_SUCCEEDED(rv))
+  if (!NS_SUCCEEDED(rv)) {
     ABORT(R_INTERNAL);
+}
 
   // Finally, register with the STS
   rv = stservice->AttachSocket(fd_, this);
@@ -807,11 +818,13 @@ int NrSocket::sendto(const void *msg, size_t len,
   PRNetAddr naddr;
   int32_t status;
 
-  if ((r=nr_transport_addr_to_praddr(to, &naddr)))
+  if ((r=nr_transport_addr_to_praddr(to, &naddr))) {
     ABORT(r);
+}
 
-  if(fd_==nullptr)
+  if(fd_==nullptr) {
     ABORT(R_EOD);
+}
 
   if (nr_is_stun_request_message((UCHAR*)msg, len) && ShouldDrop(len)) {
     ABORT(R_WOULDBLOCK);
@@ -820,8 +833,9 @@ int NrSocket::sendto(const void *msg, size_t len,
   // TODO: Convert flags?
   status = PR_SendTo(fd_, msg, len, flags, &naddr, PR_INTERVAL_NO_WAIT);
   if (status < 0 || (size_t)status != len) {
-    if (PR_GetError() == PR_WOULD_BLOCK_ERROR)
+    if (PR_GetError() == PR_WOULD_BLOCK_ERROR) {
       ABORT(R_WOULDBLOCK);
+}
 
     r_log(LOG_GENERIC, LOG_INFO, "Error in sendto %s: %d",
           to->as_string, PR_GetError());
@@ -843,15 +857,17 @@ int NrSocket::recvfrom(void * buf, size_t maxlen,
 
   status = PR_RecvFrom(fd_, buf, maxlen, flags, &nfrom, PR_INTERVAL_NO_WAIT);
   if (status <= 0) {
-    if (PR_GetError() == PR_WOULD_BLOCK_ERROR)
+    if (PR_GetError() == PR_WOULD_BLOCK_ERROR) {
       ABORT(R_WOULDBLOCK);
+}
     r_log(LOG_GENERIC, LOG_INFO, "Error in recvfrom: %d", (int)PR_GetError());
     ABORT(R_IO_ERROR);
   }
   *len = status;
 
-  if((r=nr_praddr_to_transport_addr(&nfrom,from,my_addr_.protocol,0)))
+  if((r=nr_praddr_to_transport_addr(&nfrom,from,my_addr_.protocol,0))) {
     ABORT(r);
+}
 
   //r_log(LOG_GENERIC,LOG_DEBUG,"Read %d bytes from %s",*len,addr->as_string);
 
@@ -878,19 +894,22 @@ int NrSocket::connect(nr_transport_addr *addr) {
   PRNetAddr naddr;
   int32_t connect_status, getsockname_status;
 
-  if ((r=nr_transport_addr_to_praddr(addr, &naddr)))
+  if ((r=nr_transport_addr_to_praddr(addr, &naddr))) {
     ABORT(r);
+}
 
-  if(!fd_)
+  if(!fd_) {
     ABORT(R_EOD);
+}
 
   // Note: this just means we tried to connect, not that we
   // are actually live.
   connect_invoked_ = true;
   connect_status = PR_Connect(fd_, &naddr, PR_INTERVAL_NO_WAIT);
   if (connect_status != PR_SUCCESS) {
-    if (PR_GetError() != PR_IN_PROGRESS_ERROR)
+    if (PR_GetError() != PR_IN_PROGRESS_ERROR) {
       ABORT(R_IO_ERROR);
+}
   }
 
   // If our local address is wildcard, then fill in the
@@ -902,8 +921,9 @@ int NrSocket::connect(nr_transport_addr *addr) {
       ABORT(R_INTERNAL);
     }
 
-    if((r=nr_praddr_to_transport_addr(&naddr,&my_addr_,addr->protocol,1)))
+    if((r=nr_praddr_to_transport_addr(&naddr,&my_addr_,addr->protocol,1))) {
       ABORT(r);
+}
   }
 
   // Now return the WOULDBLOCK if needed.
@@ -922,13 +942,15 @@ int NrSocket::write(const void *msg, size_t len, size_t *written) {
   int _status;
   int32_t status;
 
-  if (!connect_invoked_)
+  if (!connect_invoked_) {
     ABORT(R_FAILED);
+}
 
   status = PR_Write(fd_, msg, len);
   if (status < 0) {
-    if (PR_GetError() == PR_WOULD_BLOCK_ERROR)
+    if (PR_GetError() == PR_WOULD_BLOCK_ERROR) {
       ABORT(R_WOULDBLOCK);
+}
     r_log(LOG_GENERIC, LOG_INFO, "Error in write");
     ABORT(R_IO_ERROR);
   }
@@ -945,18 +967,21 @@ int NrSocket::read(void* buf, size_t maxlen, size_t *len) {
   int _status;
   int32_t status;
 
-  if (!connect_invoked_)
+  if (!connect_invoked_) {
     ABORT(R_FAILED);
+}
 
   status = PR_Read(fd_, buf, maxlen);
   if (status < 0) {
-    if (PR_GetError() == PR_WOULD_BLOCK_ERROR)
+    if (PR_GetError() == PR_WOULD_BLOCK_ERROR) {
       ABORT(R_WOULDBLOCK);
+}
     r_log(LOG_GENERIC, LOG_INFO, "Error in read");
     ABORT(R_IO_ERROR);
   }
-  if (status == 0)
+  if (status == 0) {
     ABORT(R_EOD);
+}
 
   *len = (size_t)status;  // Guaranteed to be > 0
   _status = 0;
@@ -998,14 +1023,16 @@ int NrSocket::accept(nr_transport_addr *addrp, nr_socket **sockp) {
     ABORT(R_INTERNAL);
   }
 
-  if(!fd_)
+  if(!fd_) {
     ABORT(R_EOD);
+}
 
   prfd = PR_Accept(fd_, &nfrom, PR_INTERVAL_NO_WAIT);
 
   if (!prfd) {
-    if (PR_GetError() == PR_WOULD_BLOCK_ERROR)
+    if (PR_GetError() == PR_WOULD_BLOCK_ERROR) {
       ABORT(R_WOULDBLOCK);
+}
 
     ABORT(R_IO_ERROR);
   }
@@ -1015,8 +1042,9 @@ int NrSocket::accept(nr_transport_addr *addrp, nr_socket **sockp) {
   sock->fd_=prfd;
   nr_transport_addr_copy(&sock->my_addr_, &my_addr_);
 
-  if((r=nr_praddr_to_transport_addr(&nfrom, addrp, my_addr_.protocol, 0)))
+  if((r=nr_praddr_to_transport_addr(&nfrom, addrp, my_addr_.protocol, 0))) {
     ABORT(r);
+}
 
   // Set nonblocking
   opt_nonblock.option = PR_SockOpt_Nonblocking;
@@ -1037,13 +1065,15 @@ int NrSocket::accept(nr_transport_addr *addrp, nr_socket **sockp) {
   }
 
   // Should fail only with OOM
-  if ((r=nr_socket_create_int(static_cast<void *>(sock), sock->vtbl(), sockp)))
+  if ((r=nr_socket_create_int(static_cast<void *>(sock), sock->vtbl(), sockp))) {
     ABORT(r);
+}
 
   // Remember our thread.
   sock->ststhread_ = do_QueryInterface(stservice, &rv);
-  if (NS_FAILED(rv))
+  if (NS_FAILED(rv)) {
     ABORT(R_INTERNAL);
+}
 
   // Finally, register with the STS
   rv = stservice->AttachSocket(prfd, sock);
@@ -2183,8 +2213,9 @@ NrSocketBase::CreateSocket(nr_transport_addr *addr, RefPtr<NrSocketBase> *sock)
   }
 
   r = (*sock)->create(addr);
-  if (r)
+  if (r) {
     ABORT(r);
+}
 
   _status = 0;
 abort:
@@ -2205,8 +2236,9 @@ int nr_socket_local_create(void *obj, nr_transport_addr *addr, nr_socket **sockp
 
   r = nr_socket_create_int(static_cast<void *>(sock),
                            sock->vtbl(), sockp);
-  if (r)
+  if (r) {
     ABORT(r);
+}
 
   _status = 0;
 
@@ -2223,8 +2255,9 @@ abort:
 
 
 static int nr_socket_local_destroy(void **objp) {
-  if(!objp || !*objp)
+  if(!objp || !*objp) {
     return 0;
+}
 
   NrSocketBase *sock = static_cast<NrSocketBase *>(*objp);
   *objp = nullptr;

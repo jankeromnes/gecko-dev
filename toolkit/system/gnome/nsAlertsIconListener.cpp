@@ -149,22 +149,26 @@ nsAlertsIconListener::OnImageReady(nsISupports*, imgIRequest* aRequest)
 nsresult
 nsAlertsIconListener::ShowAlert(GdkPixbuf* aPixbuf)
 {
-  if (!mBackend->IsActiveListener(mAlertName, this))
+  if (!mBackend->IsActiveListener(mAlertName, this)) {
     return NS_OK;
+}
 
   mNotification = notify_notification_new(mAlertTitle.get(), mAlertText.get(),
                                           nullptr, nullptr);
 
-  if (!mNotification)
+  if (!mNotification) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
 
   nsCOMPtr<nsIObserverService> obsServ =
       do_GetService("@mozilla.org/observer-service;1");
-  if (obsServ)
+  if (obsServ) {
     obsServ->AddObserver(this, "quit-application", true);
+}
 
-  if (aPixbuf)
+  if (aPixbuf) {
     notify_notification_set_icon_from_pixbuf(mNotification, aPixbuf);
+}
 
   NS_ADDREF(this);
   if (mAlertHasAction) {
@@ -189,8 +193,9 @@ nsAlertsIconListener::ShowAlert(GdkPixbuf* aPixbuf)
     return NS_ERROR_FAILURE;
   }
 
-  if (mAlertListener)
+  if (mAlertListener) {
     mAlertListener->Observe(nullptr, "alertshow", mAlertCookie.get());
+}
 
   return NS_OK;
 }
@@ -198,8 +203,9 @@ nsAlertsIconListener::ShowAlert(GdkPixbuf* aPixbuf)
 void
 nsAlertsIconListener::SendCallback()
 {
-  if (mAlertListener)
+  if (mAlertListener) {
     mAlertListener->Observe(nullptr, "alertclickcallback", mAlertCookie.get());
+}
 }
 
 void
@@ -253,8 +259,9 @@ nsresult
 nsAlertsIconListener::InitAlertAsync(nsIAlertNotification* aAlert,
                                      nsIObserver* aAlertListener)
 {
-  if (!libNotifyHandle)
+  if (!libNotifyHandle) {
     return NS_ERROR_FAILURE;
+}
 
   if (!notify_is_initted()) {
     // Give the name of this application to libnotify
@@ -279,8 +286,9 @@ nsAlertsIconListener::InitAlertAsync(nsIAlertNotification* aAlert,
       appShortName.AssignLiteral("Mozilla");
     }
 
-    if (!notify_init(appShortName.get()))
+    if (!notify_init(appShortName.get())) {
       return NS_ERROR_FAILURE;
+}
 
     GList *server_caps = notify_get_server_caps();
     if (server_caps) {
@@ -304,8 +312,9 @@ nsAlertsIconListener::InitAlertAsync(nsIAlertNotification* aAlert,
 
   nsresult rv = aAlert->GetTextClickable(&mAlertHasAction);
   NS_ENSURE_SUCCESS(rv, rv);
-  if (!gHasActions && mAlertHasAction)
+  if (!gHasActions && mAlertHasAction) {
     return NS_ERROR_FAILURE; // No good, fallback to XUL
+}
 
   nsAutoString title;
   rv = aAlert->GetTitle(title);
@@ -334,6 +343,7 @@ nsAlertsIconListener::InitAlertAsync(nsIAlertNotification* aAlert,
 
 void nsAlertsIconListener::NotifyFinished()
 {
-  if (mAlertListener)
+  if (mAlertListener) {
     mAlertListener->Observe(nullptr, "alertfinished", mAlertCookie.get());
+}
 }

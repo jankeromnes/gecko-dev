@@ -146,19 +146,22 @@ BinASTParser::parseAux(const uint8_t* start, const size_t length)
     GlobalSharedContext globalsc(cx_, ScopeKind::Global,
                                  directives, options().extraWarningsOption);
     BinParseContext globalpc(cx_, this, &globalsc, /* newDirectives = */ nullptr);
-    if (!globalpc.init())
+    if (!globalpc.init()) {
         return cx_->alreadyReportedError();
+}
 
     ParseContext::VarScope varScope(cx_, &globalpc, usedNames_);
-    if (!varScope.init(&globalpc))
+    if (!varScope.init(&globalpc)) {
         return cx_->alreadyReportedError();
+}
 
     ParseNode* result(nullptr);
     MOZ_TRY_VAR(result, parseProgram());
 
     Maybe<GlobalScope::Data*> bindings = NewGlobalScopeData(cx_, varScope, alloc_, parseContext_);
-    if (!bindings)
+    if (!bindings) {
         return cx_->alreadyReportedError();
+}
     globalsc.bindings = *bindings;
 
     return result; // Magic conversion to Ok.
@@ -203,8 +206,9 @@ BinASTParser::buildFunction(const size_t start, const BinKind kind, ParseNode* n
     TokenPos pos = tokenizer_->pos(start);
 
     RootedAtom atom((cx_));
-    if (name)
+    if (name) {
         atom = name->name();
+}
 
 
     funbox->function()->setArgCount(uint16_t(params->pn_count));
@@ -274,8 +278,9 @@ BinASTParser::parseAndUpdateScopeNames(ParseContext::Scope& scope, DeclarationKi
 
         MOZ_TRY(readString(&name));
         auto ptr = scope.lookupDeclaredNameForAdd(name);
-        if (ptr)
+        if (ptr) {
             return raiseError("Variable redeclaration");
+}
 
         TRY(scope.addDeclaredName(parseContext_, ptr, name.get(), kind, tokenizer_->offset()));
     }
@@ -293,8 +298,9 @@ BinASTParser::checkBinding(JSAtom* name)
         : *parseContext_->innermostScope();
 
     auto ptr = scope.lookupDeclaredName(name->asPropertyName());
-    if (!ptr)
+    if (!ptr) {
         return raiseMissingVariableInAssertedScope(name);
+}
 
     return Ok();
 }
@@ -513,8 +519,9 @@ BinASTParser::reportErrorNoOffsetVA(unsigned errorNumber, va_list args)
 bool
 BinASTParser::hasUsedName(HandlePropertyName name)
 {
-    if (UsedNamePtr p = usedNames_.lookup(name))
+    if (UsedNamePtr p = usedNames_.lookup(name)) {
         return p->value().isUsedInScript(parseContext_->scriptId());
+}
 
     return false;
 }

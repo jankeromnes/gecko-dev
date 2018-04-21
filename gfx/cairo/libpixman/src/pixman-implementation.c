@@ -45,8 +45,9 @@ _pixman_implementation_create (pixman_implementation_t *fallback,
 	imp->fast_paths = fast_paths;
 	
 	/* Make sure the whole fallback chain has the right toplevel */
-	for (d = imp; d != NULL; d = d->fallback)
+	for (d = imp; d != NULL; d = d->fallback) {
 	    d->toplevel = imp;
+}
     }
 
     return imp;
@@ -157,8 +158,9 @@ _pixman_implementation_lookup_composite (pixman_implementation_t  *toplevel,
 update_cache:
     if (i)
     {
-	while (i--)
+	while (i--) {
 	    cache->cache[i + 1] = cache->cache[i];
+}
 
 	cache->cache[0].imp = *out_imp;
 	cache->cache[0].fast_path.op = op;
@@ -211,11 +213,13 @@ _pixman_implementation_lookup_combiner (pixman_implementation_t *imp,
 	    f = imp->combine_32_ca[op];
 	    break;
 	}
-	if (rgb16)
+	if (rgb16) {
 	    f = (pixman_combine_32_func_t *)imp->combine_16[op];
+}
 
-	if (f)
+	if (f) {
 	    return f;
+}
 
 	imp = imp->fallback;
     }
@@ -304,8 +308,9 @@ _pixman_implementation_src_iter_init (pixman_implementation_t	*imp,
 
     while (imp)
     {
-	if (imp->src_iter_init && (*imp->src_iter_init) (imp, iter))
+	if (imp->src_iter_init && (*imp->src_iter_init) (imp, iter)) {
 	    return TRUE;
+}
 
 	imp = imp->fallback;
     }
@@ -336,8 +341,9 @@ _pixman_implementation_dest_iter_init (pixman_implementation_t	*imp,
 
     while (imp)
     {
-	if (imp->dest_iter_init && (*imp->dest_iter_init) (imp, iter))
+	if (imp->dest_iter_init && (*imp->dest_iter_init) (imp, iter)) {
 	    return TRUE;
+}
 
 	imp = imp->fallback;
     }
@@ -357,10 +363,11 @@ _pixman_disabled (const char *name)
 	    const char *end;
 	    int len;
 
-	    if ((end = strchr (env, ' ')))
+	    if ((end = strchr (env, ' '))) {
 		len = end - env;
-	    else
+	    } else {
 		len = strlen (env);
+}
 
 	    if (strlen (name) == len && strncmp (name, env, len) == 0)
 	    {
@@ -383,8 +390,9 @@ _pixman_choose_implementation (void)
 
     imp = _pixman_implementation_create_general();
 
-    if (!_pixman_disabled ("fast"))
+    if (!_pixman_disabled ("fast")) {
 	imp = _pixman_implementation_create_fast_path (imp);
+}
 
     imp = _pixman_x86_get_implementations (imp);
     imp = _pixman_arm_get_implementations (imp);

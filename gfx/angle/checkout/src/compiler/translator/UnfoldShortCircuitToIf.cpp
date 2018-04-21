@@ -51,14 +51,17 @@ UnfoldShortCircuitTraverser::UnfoldShortCircuitTraverser(TSymbolTable *symbolTab
 
 bool UnfoldShortCircuitTraverser::visitBinary(Visit visit, TIntermBinary *node)
 {
-    if (mFoundShortCircuit)
+    if (mFoundShortCircuit) {
         return false;
+}
 
-    if (visit != PreVisit)
+    if (visit != PreVisit) {
         return true;
+}
 
-    if (!mPatternToUnfoldMatcher.match(node, getParentNode()))
+    if (!mPatternToUnfoldMatcher.match(node, getParentNode())) {
         return true;
+}
 
     // If our right node doesn't have side effects, we know we don't need to unfold this
     // expression: there will be no short-circuiting side effects to avoid
@@ -131,14 +134,17 @@ bool UnfoldShortCircuitTraverser::visitBinary(Visit visit, TIntermBinary *node)
 
 bool UnfoldShortCircuitTraverser::visitTernary(Visit visit, TIntermTernary *node)
 {
-    if (mFoundShortCircuit)
+    if (mFoundShortCircuit) {
         return false;
+}
 
-    if (visit != PreVisit)
+    if (visit != PreVisit) {
         return true;
+}
 
-    if (!mPatternToUnfoldMatcher.match(node))
+    if (!mPatternToUnfoldMatcher.match(node)) {
         return true;
+}
 
     mFoundShortCircuit = true;
 
@@ -186,8 +192,9 @@ void UnfoldShortCircuitToIf(TIntermNode *root, TSymbolTable *symbolTable)
     {
         traverser.nextIteration();
         root->traverse(&traverser);
-        if (traverser.foundShortCircuit())
+        if (traverser.foundShortCircuit()) {
             traverser.updateTree();
+}
     } while (traverser.foundShortCircuit());
 }
 

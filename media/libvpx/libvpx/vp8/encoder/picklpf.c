@@ -230,9 +230,11 @@ void vp8cx_pick_filter_level_fast(YV12_BUFFER_CONFIG *sd, VP8_COMP *cpi) {
 
   cm->filter_level = best_filt_val;
 
-  if (cm->filter_level < min_filter_level) cm->filter_level = min_filter_level;
+  if (cm->filter_level < min_filter_level) { cm->filter_level = min_filter_level;
+}
 
-  if (cm->filter_level > max_filter_level) cm->filter_level = max_filter_level;
+  if (cm->filter_level > max_filter_level) { cm->filter_level = max_filter_level;
+}
 
   /* restore unfiltered frame pointer */
   cm->frame_to_show = saved_frame;
@@ -346,7 +348,8 @@ void vp8cx_pick_filter_level(YV12_BUFFER_CONFIG *sd, VP8_COMP *cpi) {
        */
       if ((filt_err - Bias) < best_err) {
         /* Was it actually better than the previous best? */
-        if (filt_err < best_err) best_err = filt_err;
+        if (filt_err < best_err) { best_err = filt_err;
+}
 
         filt_best = filt_low;
       }

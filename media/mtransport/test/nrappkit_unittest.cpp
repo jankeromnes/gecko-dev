@@ -59,8 +59,9 @@ class TimerTest : public MtransportTest {
   int ArmCancelTimer_w(int timeout) {
     int r;
     r = ArmTimer_w(timeout);
-    if (r)
+    if (r) {
       return r;
+}
 
     return CancelTimer_w();
   }

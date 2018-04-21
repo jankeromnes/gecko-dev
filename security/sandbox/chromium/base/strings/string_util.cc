@@ -158,8 +158,9 @@ template<typename StringType>
 StringType ToLowerASCIIImpl(BasicStringPiece<StringType> str) {
   StringType ret;
   ret.reserve(str.size());
-  for (size_t i = 0; i < str.size(); i++)
+  for (size_t i = 0; i < str.size(); i++) {
     ret.push_back(ToLowerASCII(str[i]));
+}
   return ret;
 }
 
@@ -167,8 +168,9 @@ template<typename StringType>
 StringType ToUpperASCIIImpl(BasicStringPiece<StringType> str) {
   StringType ret;
   ret.reserve(str.size());
-  for (size_t i = 0; i < str.size(); i++)
+  for (size_t i = 0; i < str.size(); i++) {
     ret.push_back(ToUpperASCII(str[i]));
+}
   return ret;
 }
 
@@ -200,20 +202,24 @@ int CompareCaseInsensitiveASCIIT(BasicStringPiece<StringType> a,
   while (i < a.length() && i < b.length()) {
     typename StringType::value_type lower_a = ToLowerASCII(a[i]);
     typename StringType::value_type lower_b = ToLowerASCII(b[i]);
-    if (lower_a < lower_b)
+    if (lower_a < lower_b) {
       return -1;
-    if (lower_a > lower_b)
+}
+    if (lower_a > lower_b) {
       return 1;
+}
     i++;
   }
 
   // End of one string hit before finding a different character. Expect the
   // common case to be "strings equal" at this point so check that first.
-  if (a.length() == b.length())
+  if (a.length() == b.length()) {
     return 0;
+}
 
-  if (a.length() < b.length())
+  if (a.length() < b.length()) {
     return -1;
+}
   return 1;
 }
 
@@ -226,14 +232,16 @@ int CompareCaseInsensitiveASCII(StringPiece16 a, StringPiece16 b) {
 }
 
 bool EqualsCaseInsensitiveASCII(StringPiece a, StringPiece b) {
-  if (a.length() != b.length())
+  if (a.length() != b.length()) {
     return false;
+}
   return CompareCaseInsensitiveASCIIT<std::string>(a, b) == 0;
 }
 
 bool EqualsCaseInsensitiveASCII(StringPiece16 a, StringPiece16 b) {
-  if (a.length() != b.length())
+  if (a.length() != b.length()) {
     return false;
+}
   return CompareCaseInsensitiveASCIIT<string16>(a, b) == 0;
 }
 
@@ -393,10 +401,11 @@ void TruncateUTF8ToByteSize(const std::string& input,
     }
   }
 
-  if (char_index >= 0 )
+  if (char_index >= 0 ) {
     *output = input.substr(0, char_index);
-  else
+  } else {
     output->clear();
+}
 }
 
 TrimPositions TrimWhitespace(const string16& input,
@@ -538,8 +547,9 @@ bool IsStringUTF8(const StringPiece& str) {
   while (char_index < src_len) {
     int32_t code_point;
     CBU8_NEXT(src, char_index, src_len, code_point);
-    if (!IsValidCharacter(code_point))
+    if (!IsValidCharacter(code_point)) {
       return false;
+}
   }
   return true;
 }
@@ -562,11 +572,13 @@ bool IsStringUTF8(const StringPiece& str) {
 template<typename Str>
 static inline bool DoLowerCaseEqualsASCII(BasicStringPiece<Str> str,
                                           StringPiece lowercase_ascii) {
-  if (str.size() != lowercase_ascii.size())
+  if (str.size() != lowercase_ascii.size()) {
     return false;
+}
   for (size_t i = 0; i < str.size(); i++) {
-    if (ToLowerASCII(str[i]) != lowercase_ascii[i])
+    if (ToLowerASCII(str[i]) != lowercase_ascii[i]) {
       return false;
+}
   }
   return true;
 }
@@ -580,8 +592,9 @@ bool LowerCaseEqualsASCII(StringPiece16 str, StringPiece lowercase_ascii) {
 }
 
 bool EqualsASCII(StringPiece16 str, StringPiece ascii) {
-  if (str.length() != ascii.length())
+  if (str.length() != ascii.length()) {
     return false;
+}
   return std::equal(ascii.begin(), ascii.end(), str.begin());
 }
 
@@ -589,8 +602,9 @@ template<typename Str>
 bool StartsWithT(BasicStringPiece<Str> str,
                  BasicStringPiece<Str> search_for,
                  CompareCase case_sensitivity) {
-  if (search_for.size() > str.size())
+  if (search_for.size() > str.size()) {
     return false;
+}
 
   BasicStringPiece<Str> source = str.substr(0, search_for.size());
 
@@ -626,8 +640,9 @@ template <typename Str>
 bool EndsWithT(BasicStringPiece<Str> str,
                BasicStringPiece<Str> search_for,
                CompareCase case_sensitivity) {
-  if (search_for.size() > str.size())
+  if (search_for.size() > str.size()) {
     return false;
+}
 
   BasicStringPiece<Str> source = str.substr(str.size() - search_for.size(),
                                             search_for.size());
@@ -662,20 +677,24 @@ bool EndsWith(StringPiece16 str,
 
 char HexDigitToInt(wchar_t c) {
   DCHECK(IsHexDigit(c));
-  if (c >= '0' && c <= '9')
+  if (c >= '0' && c <= '9') {
     return static_cast<char>(c - '0');
-  if (c >= 'A' && c <= 'F')
+}
+  if (c >= 'A' && c <= 'F') {
     return static_cast<char>(c - 'A' + 10);
-  if (c >= 'a' && c <= 'f')
+}
+  if (c >= 'a' && c <= 'f') {
     return static_cast<char>(c - 'a' + 10);
+}
   return 0;
 }
 
 bool IsUnicodeWhitespace(wchar_t c) {
   // kWhitespaceWide is a NULL-terminated string
   for (const wchar_t* cur = kWhitespaceWide; *cur; ++cur) {
-    if (*cur == c)
+    if (*cur == c) {
       return true;
+}
   }
   return false;
 }
@@ -724,8 +743,9 @@ void DoReplaceSubstringsAfterOffset(StringType* str,
   // If the find string doesn't appear, there's nothing to do.
   const size_t find_length = find_this.length();
   size_t first_match = str->find(find_this.data(), initial_offset, find_length);
-  if (first_match == StringType::npos)
+  if (first_match == StringType::npos) {
     return;
+}
 
   // If we're only replacing one instance, there's no need to do anything
   // complicated.
@@ -794,8 +814,9 @@ void DoReplaceSubstringsAfterOffset(StringType* str,
 
         // A mid-loop test/break enables skipping the final find() call; the
         // number of matches is known, so don't search past the last one.
-        if (!--num_matches)
+        if (!--num_matches) {
           break;
+}
       }
 
       // Handle substring after the final match.
@@ -811,8 +832,9 @@ void DoReplaceSubstringsAfterOffset(StringType* str,
 
     // Big |expansion| factors (relative to |str_length|) require padding up to
     // |shift_dst|.
-    if (shift_dst > str_length)
+    if (shift_dst > str_length) {
       str->resize(shift_dst);
+}
 
     str->replace(shift_dst, str_length - shift_src, *str, shift_src,
                  str_length - shift_src);
@@ -912,14 +934,16 @@ char16* WriteInto(string16* str, size_t length_with_null) {
 template <typename list_type, typename string_type>
 static string_type JoinStringT(const list_type& parts,
                                BasicStringPiece<string_type> sep) {
-  if (parts.size() == 0)
+  if (parts.size() == 0) {
     return string_type();
+}
 
   // Pre-allocate the eventual size of the string. Start with the size of all of
   // the separators (note that this *assumes* parts.size() > 0).
   size_t total_size = (parts.size() - 1) * sep.size();
-  for (const auto& part : parts)
+  for (const auto& part : parts) {
     total_size += part.size();
+}
   string_type result;
   result.reserve(total_size);
 
@@ -981,8 +1005,9 @@ OutStringType DoReplaceStringPlaceholders(
   DCHECK_LT(substitutions, 10U);
 
   size_t sub_length = 0;
-  for (const auto& cur : subst)
+  for (const auto& cur : subst) {
     sub_length += cur.length();
+}
 
   OutStringType formatted;
   formatted.reserve(format_string.length() + sub_length);
@@ -1013,8 +1038,9 @@ OutStringType DoReplaceStringPlaceholders(
                                               &CompareParameter),
                              r_offset);
           }
-          if (index < substitutions)
+          if (index < substitutions) {
             formatted.append(subst.at(index));
+}
         }
       }
     } else {
@@ -1022,8 +1048,9 @@ OutStringType DoReplaceStringPlaceholders(
     }
   }
   if (offsets) {
-    for (const auto& cur : r_offsets)
+    for (const auto& cur : r_offsets) {
       offsets->push_back(cur.offset);
+}
   }
   return formatted;
 }
@@ -1049,8 +1076,9 @@ string16 ReplaceStringPlaceholders(const string16& format_string,
   string16 result = ReplaceStringPlaceholders(format_string, subst, &offsets);
 
   DCHECK_EQ(1U, offsets.size());
-  if (offset)
+  if (offset) {
     *offset = offsets[0];
+}
   return result;
 }
 
@@ -1063,16 +1091,19 @@ namespace {
 template <typename CHAR>
 size_t lcpyT(CHAR* dst, const CHAR* src, size_t dst_size) {
   for (size_t i = 0; i < dst_size; ++i) {
-    if ((dst[i] = src[i]) == 0)  // We hit and copied the terminating NULL.
+    if ((dst[i] = src[i]) == 0) {  // We hit and copied the terminating NULL.
       return i;
+}
   }
 
   // We were left off at dst_size.  We over copied 1 byte.  Null terminate.
-  if (dst_size != 0)
+  if (dst_size != 0) {
     dst[dst_size - 1] = 0;
+}
 
   // Count the rest of the |src|, and return it's length in characters.
-  while (src[dst_size]) ++dst_size;
+  while (src[dst_size]) { ++dst_size;
+}
   return dst_size;
 }
 

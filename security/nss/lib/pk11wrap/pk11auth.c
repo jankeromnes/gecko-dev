@@ -66,15 +66,17 @@ pk11_CheckPassword(PK11SlotInfo *slot, CK_SESSION_HANDLE session,
     }
 
     do {
-        if (!alreadyLocked)
+        if (!alreadyLocked) {
             PK11_EnterSlotMonitor(slot);
+}
         crv = PK11_GETTAB(slot)->C_Login(session,
                                          contextSpecific ? CKU_CONTEXT_SPECIFIC : CKU_USER,
                                          (unsigned char *)pw, len);
         slot->lastLoginCheck = 0;
         mustRetry = PR_FALSE;
-        if (!alreadyLocked)
+        if (!alreadyLocked) {
             PK11_ExitSlotMonitor(slot);
+}
         switch (crv) {
             /* if we're already logged in, we're good to go */
             case CKR_OK:
@@ -231,8 +233,9 @@ PK11_HandlePasswordCheck(PK11SlotInfo *slot, void *wincx)
     int askpw = slot->askpw;
     PRBool NeedAuth = PR_FALSE;
 
-    if (!slot->needLogin)
+    if (!slot->needLogin) {
         return;
+}
 
     if ((slot->defaultFlags & PK11_OWN_PW_DEFAULTS) == 0) {
         PK11SlotInfo *def_slot = PK11_GetInternalKeySlot();
@@ -256,9 +259,10 @@ PK11_HandlePasswordCheck(PK11SlotInfo *slot, void *wincx)
             NeedAuth = PR_TRUE;
         }
     }
-    if (NeedAuth)
+    if (NeedAuth) {
         PK11_DoPassword(slot, slot->session, PR_TRUE,
                         wincx, PR_FALSE, PR_FALSE);
+}
 }
 
 void
@@ -421,10 +425,12 @@ PK11_InitPin(PK11SlotInfo *slot, const char *ssopw, const char *userpw)
     int len;
     int ssolen;
 
-    if (userpw == NULL)
+    if (userpw == NULL) {
         userpw = "";
-    if (ssopw == NULL)
+}
+    if (ssopw == NULL) {
         ssopw = "";
+}
 
     len = PORT_Strlen(userpw);
     ssolen = PORT_Strlen(ssopw);
@@ -492,15 +498,19 @@ PK11_ChangePW(PK11SlotInfo *slot, const char *oldpw, const char *newpw)
 
     /* use NULL values to trigger the protected authentication path */
     if (!slot->protectedAuthPath) {
-        if (newpw == NULL)
+        if (newpw == NULL) {
             newpw = "";
-        if (oldpw == NULL)
+}
+        if (oldpw == NULL) {
             oldpw = "";
+}
     }
-    if (newpw)
+    if (newpw) {
         newLen = PORT_Strlen(newpw);
-    if (oldpw)
+}
+    if (oldpw) {
         oldLen = PORT_Strlen(oldpw);
+}
 
     /* get a rwsession */
     rwsession = PK11_GetRWSession(slot);
@@ -527,8 +537,9 @@ PK11_ChangePW(PK11SlotInfo *slot, const char *oldpw, const char *newpw)
 static char *
 pk11_GetPassword(PK11SlotInfo *slot, PRBool retry, void *wincx)
 {
-    if (PK11_Global.getPass == NULL)
+    if (PK11_Global.getPass == NULL) {
         return NULL;
+}
     return (*PK11_Global.getPass)(slot, retry, wincx);
 }
 
@@ -632,16 +643,18 @@ PK11_DoPassword(PK11SlotInfo *slot, CK_SESSION_HANDLE session,
                                 alreadyLocked, contextSpecific);
         PORT_Memset(password, 0, PORT_Strlen(password));
         PORT_Free(password);
-        if (rv != SECWouldBlock)
+        if (rv != SECWouldBlock) {
             break;
+}
     }
     if (rv == SECSuccess) {
         if (!contextSpecific && !PK11_IsFriendly(slot)) {
             nssTrustDomain_UpdateCachedTokenCerts(slot->nssToken->trustDomain,
                                                   slot->nssToken);
         }
-    } else if (!attempt)
+    } else if (!attempt) {
         PORT_SetError(SEC_ERROR_BAD_PASSWORD);
+}
     return rv;
 }
 

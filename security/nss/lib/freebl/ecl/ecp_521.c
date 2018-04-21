@@ -30,8 +30,9 @@ ec_GFp_nistp521_mod(const mp_int *a, mp_int *r, const GFMethod *meth)
     MP_DIGITS(&m1) = s1;
 
     if (a_bits < 521) {
-        if (a == r)
+        if (a == r) {
             return MP_OKAY;
+}
         return mp_copy(a, r);
     }
     /* for polynomials larger than twice the field size or polynomials

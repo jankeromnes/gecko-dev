@@ -66,7 +66,8 @@ static void remove_decompressor(VP8D_COMP *pbi) {
 static struct VP8D_COMP *create_decompressor(VP8D_CONFIG *oxcf) {
   VP8D_COMP *pbi = vpx_memalign(32, sizeof(VP8D_COMP));
 
-  if (!pbi) return NULL;
+  if (!pbi) { return NULL;
+}
 
   memset(pbi, 0, sizeof(VP8D_COMP));
 
@@ -144,8 +145,9 @@ vpx_codec_err_t vp8dx_get_reference(VP8D_COMP *pbi,
       cm->yv12_fb[ref_fb_idx].uv_width != sd->uv_width) {
     vpx_internal_error(&pbi->common.error, VPX_CODEC_ERROR,
                        "Incorrect buffer dimensions");
-  } else
+  } else {
     vp8_yv12_copy_frame(&cm->yv12_fb[ref_fb_idx], sd);
+}
 
   return pbi->common.error.error_code;
 }
@@ -193,7 +195,8 @@ vpx_codec_err_t vp8dx_set_reference(VP8D_COMP *pbi,
 static int get_free_fb(VP8_COMMON *cm) {
   int i;
   for (i = 0; i < NUM_YV12_BUFFERS; ++i) {
-    if (cm->fb_idx_ref_cnt[i] == 0) break;
+    if (cm->fb_idx_ref_cnt[i] == 0) { break;
+}
   }
 
   assert(i < NUM_YV12_BUFFERS);
@@ -202,7 +205,8 @@ static int get_free_fb(VP8_COMMON *cm) {
 }
 
 static void ref_cnt_fb(int *buf, int *idx, int new_idx) {
-  if (buf[*idx] > 0) buf[*idx]--;
+  if (buf[*idx] > 0) { buf[*idx]--;
+}
 
   *idx = new_idx;
 
@@ -312,7 +316,8 @@ int vp8dx_receive_compressed_data(VP8D_COMP *pbi, size_t size,
   pbi->common.error.error_code = VPX_CODEC_OK;
 
   retcode = check_fragments_for_errors(pbi);
-  if (retcode <= 0) return retcode;
+  if (retcode <= 0) { return retcode;
+}
 
   cm->new_fb_idx = get_free_fb(cm);
 
@@ -392,10 +397,12 @@ int vp8dx_get_raw_frame(VP8D_COMP *pbi, YV12_BUFFER_CONFIG *sd,
                         vp8_ppflags_t *flags) {
   int ret = -1;
 
-  if (pbi->ready_for_new_data == 1) return ret;
+  if (pbi->ready_for_new_data == 1) { return ret;
+}
 
   /* ie no raw frame to show!!! */
-  if (pbi->common.show_frame == 0) return ret;
+  if (pbi->common.show_frame == 0) { return ret;
+}
 
   pbi->ready_for_new_data = 1;
   *time_stamp = pbi->last_time_stamp;
@@ -431,7 +438,8 @@ int vp8dx_references_buffer(VP8_COMMON *oci, int ref_frame) {
 
   for (mb_row = 0; mb_row < oci->mb_rows; ++mb_row) {
     for (mb_col = 0; mb_col < oci->mb_cols; mb_col++, mi++) {
-      if (mi->mbmi.ref_frame == ref_frame) return 1;
+      if (mi->mbmi.ref_frame == ref_frame) { return 1;
+}
     }
     mi++;
   }
@@ -441,7 +449,8 @@ int vp8dx_references_buffer(VP8_COMMON *oci, int ref_frame) {
 int vp8_create_decoder_instances(struct frame_buffers *fb, VP8D_CONFIG *oxcf) {
   /* decoder instance for single thread mode */
   fb->pbi[0] = create_decompressor(oxcf);
-  if (!fb->pbi[0]) return VPX_CODEC_ERROR;
+  if (!fb->pbi[0]) { return VPX_CODEC_ERROR;
+}
 
 #if CONFIG_MULTITHREAD
   if (setjmp(fb->pbi[0]->common.error.jmp)) {
@@ -462,7 +471,8 @@ int vp8_create_decoder_instances(struct frame_buffers *fb, VP8D_CONFIG *oxcf) {
 int vp8_remove_decoder_instances(struct frame_buffers *fb) {
   VP8D_COMP *pbi = fb->pbi[0];
 
-  if (!pbi) return VPX_CODEC_ERROR;
+  if (!pbi) { return VPX_CODEC_ERROR;
+}
 #if CONFIG_MULTITHREAD
   vp8_decoder_remove_threads(pbi);
 #endif

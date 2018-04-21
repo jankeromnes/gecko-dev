@@ -225,7 +225,8 @@ set_bottom_pointers (j_decompress_ptr cinfo)
     rgroup = iMCUheight / cinfo->_min_DCT_scaled_size;
     /* Count nondummy sample rows remaining for this component */
     rows_left = (int) (compptr->downsampled_height % (JDIMENSION) iMCUheight);
-    if (rows_left == 0) rows_left = iMCUheight;
+    if (rows_left == 0) { rows_left = iMCUheight;
+}
     /* Count nondummy row groups.  Should get same answer for each component,
      * so we need only do it once.
      */
@@ -295,8 +296,9 @@ process_data_simple_main (j_decompress_ptr cinfo,
 
   /* Read input data if we haven't filled the main buffer yet */
   if (! main_ptr->buffer_full) {
-    if (! (*cinfo->coef->decompress_data) (cinfo, main_ptr->buffer))
+    if (! (*cinfo->coef->decompress_data) (cinfo, main_ptr->buffer)) {
       return;                   /* suspension forced, can do nothing more */
+}
     main_ptr->buffer_full = TRUE;       /* OK, we have an iMCU row to work with */
   }
 
@@ -335,8 +337,9 @@ process_data_context_main (j_decompress_ptr cinfo,
   /* Read input data if we haven't filled the main buffer yet */
   if (! main_ptr->buffer_full) {
     if (! (*cinfo->coef->decompress_data) (cinfo,
-                                           main_ptr->xbuffer[main_ptr->whichptr]))
+                                           main_ptr->xbuffer[main_ptr->whichptr])) {
       return;                   /* suspension forced, can do nothing more */
+}
     main_ptr->buffer_full = TRUE;       /* OK, we have an iMCU row to work with */
     main_ptr->iMCU_row_ctr++;   /* count rows received */
   }
@@ -352,11 +355,13 @@ process_data_context_main (j_decompress_ptr cinfo,
     (*cinfo->post->post_process_data) (cinfo, main_ptr->xbuffer[main_ptr->whichptr],
                         &main_ptr->rowgroup_ctr, main_ptr->rowgroups_avail,
                         output_buf, out_row_ctr, out_rows_avail);
-    if (main_ptr->rowgroup_ctr < main_ptr->rowgroups_avail)
+    if (main_ptr->rowgroup_ctr < main_ptr->rowgroups_avail) {
       return;                   /* Need to suspend */
+}
     main_ptr->context_state = CTX_PREPARE_FOR_IMCU;
-    if (*out_row_ctr >= out_rows_avail)
+    if (*out_row_ctr >= out_rows_avail) {
       return;                   /* Postprocessor exactly filled output buf */
+}
     /*FALLTHROUGH*/
   case CTX_PREPARE_FOR_IMCU:
     /* Prepare to process first M-1 row groups of this iMCU row */
@@ -365,8 +370,9 @@ process_data_context_main (j_decompress_ptr cinfo,
     /* Check for bottom of image: if so, tweak pointers to "duplicate"
      * the last sample row, and adjust rowgroups_avail to ignore padding rows.
      */
-    if (main_ptr->iMCU_row_ctr == cinfo->total_iMCU_rows)
+    if (main_ptr->iMCU_row_ctr == cinfo->total_iMCU_rows) {
       set_bottom_pointers(cinfo);
+}
     main_ptr->context_state = CTX_PROCESS_IMCU;
     /*FALLTHROUGH*/
   case CTX_PROCESS_IMCU:
@@ -374,11 +380,13 @@ process_data_context_main (j_decompress_ptr cinfo,
     (*cinfo->post->post_process_data) (cinfo, main_ptr->xbuffer[main_ptr->whichptr],
                         &main_ptr->rowgroup_ctr, main_ptr->rowgroups_avail,
                         output_buf, out_row_ctr, out_rows_avail);
-    if (main_ptr->rowgroup_ctr < main_ptr->rowgroups_avail)
+    if (main_ptr->rowgroup_ctr < main_ptr->rowgroups_avail) {
       return;                   /* Need to suspend */
+}
     /* After the first iMCU, change wraparound pointers to normal state */
-    if (main_ptr->iMCU_row_ctr == 1)
+    if (main_ptr->iMCU_row_ctr == 1) {
       set_wraparound_pointers(cinfo);
+}
     /* Prepare to load new iMCU row using other xbuffer list */
     main_ptr->whichptr ^= 1;    /* 0=>1 or 1=>0 */
     main_ptr->buffer_full = FALSE;
@@ -429,15 +437,17 @@ jinit_d_main_controller (j_decompress_ptr cinfo, boolean need_full_buffer)
   cinfo->main = (struct jpeg_d_main_controller *) main_ptr;
   main_ptr->pub.start_pass = start_pass_main;
 
-  if (need_full_buffer)         /* shouldn't happen */
+  if (need_full_buffer) {         /* shouldn't happen */
     ERREXIT(cinfo, JERR_BAD_BUFFER_MODE);
+}
 
   /* Allocate the workspace.
    * ngroups is the number of row groups we need.
    */
   if (cinfo->upsample->need_context_rows) {
-    if (cinfo->_min_DCT_scaled_size < 2) /* unsupported, see comments above */
+    if (cinfo->_min_DCT_scaled_size < 2) { /* unsupported, see comments above */
       ERREXIT(cinfo, JERR_NOTIMPL);
+}
     alloc_funny_pointers(cinfo); /* Alloc space for xbuffer[] lists */
     ngroups = cinfo->_min_DCT_scaled_size + 2;
   } else {

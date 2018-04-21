@@ -43,8 +43,9 @@ int av_timecode_adjust_ntsc_framenum2(int framenum, int fps)
     } else if (fps == 60) {
         drop_frames = 4;
         frames_per_10mins = 35964;
-    } else
+    } else {
         return framenum;
+}
 
     d = framenum / frames_per_10mins;
     m = framenum % frames_per_10mins;
@@ -59,8 +60,9 @@ uint32_t av_timecode_get_smpte_from_framenum(const AVTimecode *tc, int framenum)
     int hh, mm, ss, ff;
 
     framenum += tc->start;
-    if (drop)
+    if (drop) {
         framenum = av_timecode_adjust_ntsc_framenum2(framenum, tc->fps);
+}
     ff = framenum % fps;
     ss = framenum / fps      % 60;
     mm = framenum / (fps*60) % 60;
@@ -88,8 +90,9 @@ char *av_timecode_make_string(const AVTimecode *tc, char *buf, int framenum)
     int hh, mm, ss, ff, neg = 0;
 
     framenum += tc->start;
-    if (drop)
+    if (drop) {
         framenum = av_timecode_adjust_ntsc_framenum2(framenum, fps);
+}
     if (framenum < 0) {
         framenum = -framenum;
         neg = tc->flags & AV_TIMECODE_FLAG_ALLOWNEGATIVE;
@@ -98,8 +101,9 @@ char *av_timecode_make_string(const AVTimecode *tc, char *buf, int framenum)
     ss = framenum / fps        % 60;
     mm = framenum / (fps*60)   % 60;
     hh = framenum / (fps*3600);
-    if (tc->flags & AV_TIMECODE_FLAG_24HOURSMAX)
+    if (tc->flags & AV_TIMECODE_FLAG_24HOURSMAX) {
         hh = hh % 24;
+}
     snprintf(buf, AV_TIMECODE_STR_SIZE, "%s%02d:%02d:%02d%c%02d",
              neg ? "-" : "",
              hh, mm, ss, drop ? ';' : ':', ff);
@@ -110,8 +114,9 @@ static unsigned bcd2uint(uint8_t bcd)
 {
    unsigned low  = bcd & 0xf;
    unsigned high = bcd >> 4;
-   if (low > 9 || high > 9)
+   if (low > 9 || high > 9) {
        return 0;
+}
    return low + 10*high;
 }
 
@@ -146,9 +151,10 @@ static int check_fps(int fps)
         24, 25, 30, 48, 50, 60, 100, 120, 150,
     };
 
-    for (i = 0; i < FF_ARRAY_ELEMS(supported_fps); i++)
-        if (fps == supported_fps[i])
+    for (i = 0; i < FF_ARRAY_ELEMS(supported_fps); i++) {
+        if (fps == supported_fps[i]) {
             return 0;
+}
     return -1;
 }
 
@@ -171,8 +177,9 @@ static int check_timecode(void *log_ctx, AVTimecode *tc)
 
 static int fps_from_frame_rate(AVRational rate)
 {
-    if (!rate.den || !rate.num)
+    if (!rate.den || !rate.num) {
         return -1;
+}
     return (rate.num + rate.den/2) / rate.den;
 }
 
@@ -208,8 +215,9 @@ int av_timecode_init_from_string(AVTimecode *tc, AVRational rate, const char *st
     tc->fps   = fps_from_frame_rate(rate);
 
     ret = check_timecode(log_ctx, tc);
-    if (ret < 0)
+    if (ret < 0) {
         return ret;
+}
 
     tc->start = (hh*3600 + mm*60 + ss) * tc->fps + ff;
     if (tc->flags & AV_TIMECODE_FLAG_DROPFRAME) { /* adjust frame number */

@@ -127,8 +127,9 @@ static void scale1d_2t1_ps(const unsigned char *source, int source_step,
   source_step *= 2;
   j = 0;
 
-  for (i = 0; i < dest_length * dest_step; i += dest_step, j += source_step)
+  for (i = 0; i < dest_length * dest_step; i += dest_step, j += source_step) {
     dest[i] = source[j];
+}
 }
 /****************************************************************************
  *
@@ -340,7 +341,8 @@ static void Scale2D(
     }
 
     if (interpolation) {
-      if (source < source_base) source = source_base;
+      if (source < source_base) { source = source_base;
+}
 
       horiz_line_scale(source, source_width, temp_area, dest_width);
     }
@@ -354,7 +356,8 @@ static void Scale2D(
 
         line_src = (unsigned char *)source + i * source_pitch;
 
-        if (line_src < source_base) line_src = source_base;
+        if (line_src < source_base) { line_src = source_base;
+}
 
         horiz_line_scale(line_src, source_width,
                          temp_area + (i + 1) * dest_pitch, dest_width);
@@ -364,9 +367,10 @@ static void Scale2D(
       vert_band_scale(temp_area + dest_pitch, dest_pitch, dest, dest_pitch,
                       dest_width);
 
-      if (interpolation)
+      if (interpolation) {
         memcpy(temp_area, temp_area + source_band_height * dest_pitch,
                dest_width);
+}
 
       /* Next band... */
       source += (unsigned long)source_band_height * source_pitch;
@@ -376,13 +380,15 @@ static void Scale2D(
     return;
   }
 
-  if (hscale == 2 && hratio == 1) Scale1Dh = scale1d_2t1_ps;
+  if (hscale == 2 && hratio == 1) { Scale1Dh = scale1d_2t1_ps;
+}
 
   if (vscale == 2 && vratio == 1) {
-    if (interlaced)
+    if (interlaced) {
       Scale1Dv = scale1d_2t1_ps;
-    else
+    } else {
       Scale1Dv = scale1d_2t1_i;
+}
   }
 
   if (source_height == dest_height) {
@@ -485,45 +491,51 @@ void vpx_scale_frame(YV12_BUFFER_CONFIG *src, YV12_BUFFER_CONFIG *dst,
           src->y_height, (unsigned char *)dst->y_buffer, dst->y_stride, dw, dh,
           temp_area, temp_height, hscale, hratio, vscale, vratio, interlaced);
 
-  if (dw < (int)dst->y_width)
-    for (i = 0; i < dh; i++)
+  if (dw < (int)dst->y_width) {
+    for (i = 0; i < dh; i++) {
       memset(dst->y_buffer + i * dst->y_stride + dw - 1,
              dst->y_buffer[i * dst->y_stride + dw - 2], dst->y_width - dw + 1);
+}
 
-  if (dh < (int)dst->y_height)
-    for (i = dh - 1; i < (int)dst->y_height; i++)
+  if (dh < (int)dst->y_height) {
+    for (i = dh - 1; i < (int)dst->y_height; i++) {
       memcpy(dst->y_buffer + i * dst->y_stride,
              dst->y_buffer + (dh - 2) * dst->y_stride, dst->y_width + 1);
+}
 
   Scale2D((unsigned char *)src->u_buffer, src->uv_stride, src->uv_width,
           src->uv_height, (unsigned char *)dst->u_buffer, dst->uv_stride,
           dw / 2, dh / 2, temp_area, temp_height, hscale, hratio, vscale,
           vratio, interlaced);
 
-  if (dw / 2 < (int)dst->uv_width)
-    for (i = 0; i < dst->uv_height; i++)
+  if (dw / 2 < (int)dst->uv_width) {
+    for (i = 0; i < dst->uv_height; i++) {
       memset(dst->u_buffer + i * dst->uv_stride + dw / 2 - 1,
              dst->u_buffer[i * dst->uv_stride + dw / 2 - 2],
              dst->uv_width - dw / 2 + 1);
+}
 
-  if (dh / 2 < (int)dst->uv_height)
-    for (i = dh / 2 - 1; i < (int)dst->y_height / 2; i++)
+  if (dh / 2 < (int)dst->uv_height) {
+    for (i = dh / 2 - 1; i < (int)dst->y_height / 2; i++) {
       memcpy(dst->u_buffer + i * dst->uv_stride,
              dst->u_buffer + (dh / 2 - 2) * dst->uv_stride, dst->uv_width);
+}
 
   Scale2D((unsigned char *)src->v_buffer, src->uv_stride, src->uv_width,
           src->uv_height, (unsigned char *)dst->v_buffer, dst->uv_stride,
           dw / 2, dh / 2, temp_area, temp_height, hscale, hratio, vscale,
           vratio, interlaced);
 
-  if (dw / 2 < (int)dst->uv_width)
-    for (i = 0; i < dst->uv_height; i++)
+  if (dw / 2 < (int)dst->uv_width) {
+    for (i = 0; i < dst->uv_height; i++) {
       memset(dst->v_buffer + i * dst->uv_stride + dw / 2 - 1,
              dst->v_buffer[i * dst->uv_stride + dw / 2 - 2],
              dst->uv_width - dw / 2 + 1);
+}
 
-  if (dh / 2 < (int)dst->uv_height)
-    for (i = dh / 2 - 1; i < (int)dst->y_height / 2; i++)
+  if (dh / 2 < (int)dst->uv_height) {
+    for (i = dh / 2 - 1; i < (int)dst->y_height / 2; i++) {
       memcpy(dst->v_buffer + i * dst->uv_stride,
              dst->v_buffer + (dh / 2 - 2) * dst->uv_stride, dst->uv_width);
+}
 }

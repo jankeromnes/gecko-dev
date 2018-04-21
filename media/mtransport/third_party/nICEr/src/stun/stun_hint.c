@@ -67,11 +67,13 @@ nr_is_stun_message(UCHAR *buf, int len)
    unsigned int attrLen;
    int atrType;
 
-   if (sizeof(nr_stun_message_header) > len)
+   if (sizeof(nr_stun_message_header) > len) {
        return 0;
+}
 
-   if ((buf[0] & (0x80|0x40)) != 0)
+   if ((buf[0] & (0x80|0x40)) != 0) {
        return 0;
+}
 
    memcpy(&type, buf, 2);
    type = ntohs(type);
@@ -124,8 +126,9 @@ nr_is_stun_message(UCHAR *buf, int len)
        return 1;
    }
 
-   if (memcmp(&cookie, &buf[4], sizeof(UINT4)))
+   if (memcmp(&cookie, &buf[4], sizeof(UINT4))) {
        return 0;
+}
 
    /* the magic cookie was right, so it's pretty darn likely that what we've
     * got here is a STUN message */
@@ -134,8 +137,9 @@ nr_is_stun_message(UCHAR *buf, int len)
    attrLen = ntohs(attr->length);
    atrType = ntohs(attr->type);
 
-   if (atrType != NR_STUN_ATTR_FINGERPRINT || attrLen != 4)
+   if (atrType != NR_STUN_ATTR_FINGERPRINT || attrLen != 4) {
        return 1;
+}
 
    /* the fingerprint is in the right place and looks sane, so we can be quite
     * sure we've got a STUN message */
@@ -167,11 +171,13 @@ nr_is_stun_request_message(UCHAR *buf, int len)
 {
    UINT2 type;
 
-   if (sizeof(nr_stun_message_header) > len)
+   if (sizeof(nr_stun_message_header) > len) {
        return 0;
+}
 
-   if (!nr_is_stun_message(buf, len))
+   if (!nr_is_stun_message(buf, len)) {
        return 0;
+}
 
    memcpy(&type, buf, 2);
    type = ntohs(type);
@@ -184,11 +190,13 @@ nr_is_stun_indication_message(UCHAR *buf, int len)
 {
    UINT2 type;
 
-   if (sizeof(nr_stun_message_header) > len)
+   if (sizeof(nr_stun_message_header) > len) {
        return 0;
+}
 
-   if (!nr_is_stun_message(buf, len))
+   if (!nr_is_stun_message(buf, len)) {
        return 0;
+}
 
    memcpy(&type, buf, 2);
    type = ntohs(type);
@@ -201,11 +209,13 @@ nr_is_stun_response_message(UCHAR *buf, int len)
 {
    UINT2 type;
 
-   if (sizeof(nr_stun_message_header) > len)
+   if (sizeof(nr_stun_message_header) > len) {
        return 0;
+}
 
-   if (!nr_is_stun_message(buf, len))
+   if (!nr_is_stun_message(buf, len)) {
        return 0;
+}
 
    memcpy(&type, buf, 2);
    type = ntohs(type);
@@ -221,11 +231,13 @@ nr_has_stun_cookie(UCHAR *buf, int len)
 
    cookie = htonl(NR_STUN_MAGIC_COOKIE);
 
-   if (sizeof(nr_stun_message_header) > len)
+   if (sizeof(nr_stun_message_header) > len) {
        return 0;
+}
 
-   if (memcmp(&cookie, &buf[4], sizeof(UINT4)))
+   if (memcmp(&cookie, &buf[4], sizeof(UINT4))) {
        return 0;
+}
 
    return 1;
 }
@@ -235,8 +247,9 @@ nr_stun_message_length(UCHAR *buf, int buf_len, int *msg_len)
 {
   nr_stun_message_header *hdr;
 
-  if (!nr_is_stun_message(buf, buf_len))
+  if (!nr_is_stun_message(buf, buf_len)) {
     return(R_BAD_DATA);
+}
 
   hdr = (nr_stun_message_header *)buf;
 

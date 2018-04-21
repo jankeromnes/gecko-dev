@@ -324,7 +324,8 @@ int16_t av1_qindex_from_ac(int ac, aom_bit_depth_t bit_depth) {
 #endif
   (void)bit_depth;
   for (i = 0; i < QINDEX_RANGE; i++) {
-    if (ac <= tab[i]) return i;
+    if (ac <= tab[i]) { return i;
+}
   }
   return QINDEX_RANGE - 1;
 }

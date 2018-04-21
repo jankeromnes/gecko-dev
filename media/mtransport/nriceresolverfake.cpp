@@ -78,8 +78,9 @@ nr_resolver *NrIceResolverFake::AllocateResolver() {
   int r = nr_resolver_create_int((void *)this,
                                  vtbl_, &resolver);
   MOZ_ASSERT(!r);
-  if(r)
+  if(r) {
     return nullptr;
+}
 
   ++allocated_resolvers_;
 
@@ -91,8 +92,9 @@ void NrIceResolverFake::DestroyResolver() {
 }
 
 int NrIceResolverFake::destroy(void **objp) {
-  if (!objp || !*objp)
+  if (!objp || !*objp) {
     return 0;
+}
 
   NrIceResolverFake *fake = static_cast<NrIceResolverFake *>(*objp);
   *objp = nullptr;
@@ -150,19 +152,22 @@ void NrIceResolverFake::resolve_cb(NR_SOCKET s, int how, void *cb_arg) {
     int r = nr_praddr_to_transport_addr(addr, &transport_addr,
                                         pending->transport_, 0);
     MOZ_ASSERT(!r);
-    if (r)
+    if (r) {
       goto abort;
+}
 
     r=nr_transport_addr_set_port(&transport_addr, pending->port_);
     MOZ_ASSERT(!r);
-    if (r)
+    if (r) {
       goto abort;
+}
 
     /* Fill in the address string */
     r=nr_transport_addr_fmt_addr_string(&transport_addr);
     MOZ_ASSERT(!r);
-    if (r)
+    if (r) {
       goto abort;
+}
 
     pending->cb_(pending->cb_arg_, &transport_addr);
     delete pending;

@@ -43,8 +43,9 @@ nss_cms_recipients_traverse(NSSCMSRecipientInfo **recipientinfos,
                     }
                     /* alloc one & fill it out */
                     rle = (NSSCMSRecipient *)PORT_ZAlloc(sizeof(NSSCMSRecipient));
-                    if (!rle)
+                    if (!rle) {
                         return -1;
+}
 
                     rle->riIndex = i;
                     rle->subIndex = -1;
@@ -67,15 +68,17 @@ nss_cms_recipients_traverse(NSSCMSRecipientInfo **recipientinfos,
                 }
                 break;
             case NSSCMSRecipientInfoID_KeyAgree:
-                if (ri->ri.keyAgreeRecipientInfo.recipientEncryptedKeys == NULL)
+                if (ri->ri.keyAgreeRecipientInfo.recipientEncryptedKeys == NULL) {
                     break;
+}
                 for (j = 0; ri->ri.keyAgreeRecipientInfo.recipientEncryptedKeys[j] != NULL; j++) {
                     if (recipient_list) {
                         rek = ri->ri.keyAgreeRecipientInfo.recipientEncryptedKeys[j];
                         /* alloc one & fill it out */
                         rle = (NSSCMSRecipient *)PORT_ZAlloc(sizeof(NSSCMSRecipient));
-                        if (!rle)
+                        if (!rle) {
                             return -1;
+}
 
                         rle->riIndex = i;
                         rle->subIndex = j;
@@ -131,8 +134,9 @@ nss_cms_recipient_list_create(NSSCMSRecipientInfo **recipientinfos)
     /* allocate an array of pointers */
     recipient_list = (NSSCMSRecipient **)
         PORT_ZAlloc((count + 1) * sizeof(NSSCMSRecipient *));
-    if (recipient_list == NULL)
+    if (recipient_list == NULL) {
         return NULL;
+}
 
     /* now fill in the recipient_list */
     rv = nss_cms_recipients_traverse(recipientinfos, recipient_list);
@@ -151,12 +155,15 @@ nss_cms_recipient_list_destroy(NSSCMSRecipient **recipient_list)
 
     for (i = 0; recipient_list[i] != NULL; i++) {
         recipient = recipient_list[i];
-        if (recipient->cert)
+        if (recipient->cert) {
             CERT_DestroyCertificate(recipient->cert);
-        if (recipient->privkey)
+}
+        if (recipient->privkey) {
             SECKEY_DestroyPrivateKey(recipient->privkey);
-        if (recipient->slot)
+}
+        if (recipient->slot) {
             PK11_FreeSlot(recipient->slot);
+}
         PORT_Free(recipient);
     }
     PORT_Free(recipient_list);

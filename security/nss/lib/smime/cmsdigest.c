@@ -56,12 +56,14 @@ NSS_CMSDigestContext_StartMultiple(SECAlgorithmID **digestalgs)
     ** messages.
     */
     pool = PORT_NewArena(2048);
-    if (!pool)
+    if (!pool) {
         return NULL;
+}
 
     cmsdigcx = PORT_ArenaNew(pool, NSSCMSDigestContext);
-    if (cmsdigcx == NULL)
+    if (cmsdigcx == NULL) {
         goto loser;
+}
 
     cmsdigcx->saw_contents = PR_FALSE;
     cmsdigcx->pool = pool;
@@ -88,8 +90,9 @@ NSS_CMSDigestContext_StartMultiple(SECAlgorithmID **digestalgs)
          * the particular algorithm may not actually be important,
          * but we cannot know that until later.
          */
-        if (digobj == NULL)
+        if (digobj == NULL) {
             continue;
+}
 
         digcx = (*digobj->create)();
         if (digcx != NULL) {
@@ -215,8 +218,9 @@ NSS_CMSDigestContext_FinishMultiple(NSSCMSDigestContext *cmsdigcx,
     digests[i] = NULL;
     if (rv == SECSuccess) {
         PORT_ArenaUnmark(poolp, mark);
-    } else
+    } else {
         PORT_ArenaRelease(poolp, mark);
+}
 
 cleanup:
     NSS_CMSDigestContext_Cancel(cmsdigcx);
@@ -242,8 +246,9 @@ NSS_CMSDigestContext_FinishSingle(NSSCMSDigestContext *cmsdigcx,
     SECItem **dp;
     PLArenaPool *arena = NULL;
 
-    if ((arena = PORT_NewArena(1024)) == NULL)
+    if ((arena = PORT_NewArena(1024)) == NULL) {
         goto loser;
+}
 
     /* get the digests into arena, then copy the first digest into poolp */
     rv = NSS_CMSDigestContext_FinishMultiple(cmsdigcx, arena, &dp);
@@ -252,8 +257,9 @@ NSS_CMSDigestContext_FinishSingle(NSSCMSDigestContext *cmsdigcx,
         rv = SECITEM_CopyItem(poolp, digest, dp[0]);
     }
 loser:
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
 
     return rv;
 }

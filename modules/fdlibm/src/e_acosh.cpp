@@ -49,8 +49,9 @@ __ieee754_acosh(double x)
 	} else if(hx >=0x41b00000) {	/* x > 2**28 */
 	    if(hx >=0x7ff00000) {	/* x is inf of NaN */
 	        return x+x;
-	    } else 
+	    } else { 
 		return __ieee754_log(x)+ln2;	/* acosh(huge)=log(2x) */
+}
 	} else if(((hx-0x3ff00000)|lx)==0) {
 	    return 0.0;			/* acosh(1) = 0 */
 	} else if (hx > 0x40000000) {	/* 2**28 > x > 2 */

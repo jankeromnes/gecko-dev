@@ -65,7 +65,8 @@ void vp8_loop_filter_update_sharpness(loop_filter_info_n *lfi,
       }
     }
 
-    if (block_inside_limit < 1) block_inside_limit = 1;
+    if (block_inside_limit < 1) { block_inside_limit = 1;
+}
 
     memset(lfi->lim[i], block_inside_limit, SIMD_WIDTH);
     memset(lfi->blim[i], (2 * filt_lvl + block_inside_limit), SIMD_WIDTH);
@@ -194,22 +195,26 @@ void vp8_loop_filter_row_normal(VP8_COMMON *cm, MODE_INFO *mode_info_context,
       lfi.lim = lfi_n->lim[filter_level];
       lfi.hev_thr = lfi_n->hev_thr[hev_index];
 
-      if (mb_col > 0)
+      if (mb_col > 0) {
         vp8_loop_filter_mbv(y_ptr, u_ptr, v_ptr, post_ystride, post_uvstride,
                             &lfi);
+}
 
-      if (!skip_lf)
+      if (!skip_lf) {
         vp8_loop_filter_bv(y_ptr, u_ptr, v_ptr, post_ystride, post_uvstride,
                            &lfi);
+}
 
       /* don't apply across umv border */
-      if (mb_row > 0)
+      if (mb_row > 0) {
         vp8_loop_filter_mbh(y_ptr, u_ptr, v_ptr, post_ystride, post_uvstride,
                             &lfi);
+}
 
-      if (!skip_lf)
+      if (!skip_lf) {
         vp8_loop_filter_bh(y_ptr, u_ptr, v_ptr, post_ystride, post_uvstride,
                            &lfi);
+}
     }
 
     y_ptr += 16;
@@ -241,22 +246,26 @@ void vp8_loop_filter_row_simple(VP8_COMMON *cm, MODE_INFO *mode_info_context,
     filter_level = lfi_n->lvl[seg][ref_frame][mode_index];
 
     if (filter_level) {
-      if (mb_col > 0)
+      if (mb_col > 0) {
         vp8_loop_filter_simple_mbv(y_ptr, post_ystride,
                                    lfi_n->mblim[filter_level]);
+}
 
-      if (!skip_lf)
+      if (!skip_lf) {
         vp8_loop_filter_simple_bv(y_ptr, post_ystride,
                                   lfi_n->blim[filter_level]);
+}
 
       /* don't apply across umv border */
-      if (mb_row > 0)
+      if (mb_row > 0) {
         vp8_loop_filter_simple_mbh(y_ptr, post_ystride,
                                    lfi_n->mblim[filter_level]);
+}
 
-      if (!skip_lf)
+      if (!skip_lf) {
         vp8_loop_filter_simple_bh(y_ptr, post_ystride,
                                   lfi_n->blim[filter_level]);
+}
     }
 
     y_ptr += 16;
@@ -314,22 +323,26 @@ void vp8_loop_filter_frame(VP8_COMMON *cm, MACROBLOCKD *mbd, int frame_type) {
           lfi.lim = lfi_n->lim[filter_level];
           lfi.hev_thr = lfi_n->hev_thr[hev_index];
 
-          if (mb_col > 0)
+          if (mb_col > 0) {
             vp8_loop_filter_mbv(y_ptr, u_ptr, v_ptr, post_y_stride,
                                 post_uv_stride, &lfi);
+}
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_bv(y_ptr, u_ptr, v_ptr, post_y_stride,
                                post_uv_stride, &lfi);
+}
 
           /* don't apply across umv border */
-          if (mb_row > 0)
+          if (mb_row > 0) {
             vp8_loop_filter_mbh(y_ptr, u_ptr, v_ptr, post_y_stride,
                                 post_uv_stride, &lfi);
+}
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_bh(y_ptr, u_ptr, v_ptr, post_y_stride,
                                post_uv_stride, &lfi);
+}
         }
 
         y_ptr += 16;
@@ -361,16 +374,20 @@ void vp8_loop_filter_frame(VP8_COMMON *cm, MACROBLOCKD *mbd, int frame_type) {
           const unsigned char *mblim = lfi_n->mblim[filter_level];
           const unsigned char *blim = lfi_n->blim[filter_level];
 
-          if (mb_col > 0)
+          if (mb_col > 0) {
             vp8_loop_filter_simple_mbv(y_ptr, post_y_stride, mblim);
+}
 
-          if (!skip_lf) vp8_loop_filter_simple_bv(y_ptr, post_y_stride, blim);
+          if (!skip_lf) { vp8_loop_filter_simple_bv(y_ptr, post_y_stride, blim);
+}
 
           /* don't apply across umv border */
-          if (mb_row > 0)
+          if (mb_row > 0) {
             vp8_loop_filter_simple_mbh(y_ptr, post_y_stride, mblim);
+}
 
-          if (!skip_lf) vp8_loop_filter_simple_bh(y_ptr, post_y_stride, blim);
+          if (!skip_lf) { vp8_loop_filter_simple_bh(y_ptr, post_y_stride, blim);
+}
         }
 
         y_ptr += 16;
@@ -437,35 +454,43 @@ void vp8_loop_filter_frame_yonly(VP8_COMMON *cm, MACROBLOCKD *mbd,
           lfi.lim = lfi_n->lim[filter_level];
           lfi.hev_thr = lfi_n->hev_thr[hev_index];
 
-          if (mb_col > 0)
+          if (mb_col > 0) {
             vp8_loop_filter_mbv(y_ptr, 0, 0, post->y_stride, 0, &lfi);
+}
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_bv(y_ptr, 0, 0, post->y_stride, 0, &lfi);
+}
 
           /* don't apply across umv border */
-          if (mb_row > 0)
+          if (mb_row > 0) {
             vp8_loop_filter_mbh(y_ptr, 0, 0, post->y_stride, 0, &lfi);
+}
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_bh(y_ptr, 0, 0, post->y_stride, 0, &lfi);
+}
         } else {
-          if (mb_col > 0)
+          if (mb_col > 0) {
             vp8_loop_filter_simple_mbv(y_ptr, post->y_stride,
                                        lfi_n->mblim[filter_level]);
+}
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_simple_bv(y_ptr, post->y_stride,
                                       lfi_n->blim[filter_level]);
+}
 
           /* don't apply across umv border */
-          if (mb_row > 0)
+          if (mb_row > 0) {
             vp8_loop_filter_simple_mbh(y_ptr, post->y_stride,
                                        lfi_n->mblim[filter_level]);
+}
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_simple_bh(y_ptr, post->y_stride,
                                       lfi_n->blim[filter_level]);
+}
         }
       }
 
@@ -535,31 +560,37 @@ void vp8_loop_filter_partial_frame(VP8_COMMON *cm, MACROBLOCKD *mbd,
           lfi.lim = lfi_n->lim[filter_level];
           lfi.hev_thr = lfi_n->hev_thr[hev_index];
 
-          if (mb_col > 0)
+          if (mb_col > 0) {
             vp8_loop_filter_mbv(y_ptr, 0, 0, post->y_stride, 0, &lfi);
+}
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_bv(y_ptr, 0, 0, post->y_stride, 0, &lfi);
+}
 
           vp8_loop_filter_mbh(y_ptr, 0, 0, post->y_stride, 0, &lfi);
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_bh(y_ptr, 0, 0, post->y_stride, 0, &lfi);
+}
         } else {
-          if (mb_col > 0)
+          if (mb_col > 0) {
             vp8_loop_filter_simple_mbv(y_ptr, post->y_stride,
                                        lfi_n->mblim[filter_level]);
+}
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_simple_bv(y_ptr, post->y_stride,
                                       lfi_n->blim[filter_level]);
+}
 
           vp8_loop_filter_simple_mbh(y_ptr, post->y_stride,
                                      lfi_n->mblim[filter_level]);
 
-          if (!skip_lf)
+          if (!skip_lf) {
             vp8_loop_filter_simple_bh(y_ptr, post->y_stride,
                                       lfi_n->blim[filter_level]);
+}
         }
       }
 

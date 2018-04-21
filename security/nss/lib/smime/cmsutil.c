@@ -33,30 +33,35 @@ NSS_CMSArray_SortByDER(void **objs, const SEC_ASN1Template *objtemplate, void **
     SECStatus rv = SECFailure;
     int i;
 
-    if (objs == NULL) /* already sorted */
+    if (objs == NULL) { /* already sorted */
         return SECSuccess;
+}
 
     num_objs = NSS_CMSArray_Count((void **)objs);
-    if (num_objs == 0 || num_objs == 1) /* already sorted. */
+    if (num_objs == 0 || num_objs == 1) { /* already sorted. */
         return SECSuccess;
+}
 
     poolp = PORT_NewArena(1024); /* arena for temporaries */
-    if (poolp == NULL)
+    if (poolp == NULL) {
         return SECFailure; /* no memory; nothing we can do... */
+}
 
     /*
      * Allocate arrays to hold the individual encodings which we will use
      * for comparisons and the reordered attributes as they are sorted.
      */
     enc_objs = (SECItem **)PORT_ArenaZAlloc(poolp, (num_objs + 1) * sizeof(SECItem *));
-    if (enc_objs == NULL)
+    if (enc_objs == NULL) {
         goto loser;
+}
 
     /* DER encode each individual object. */
     for (i = 0; i < num_objs; i++) {
         enc_objs[i] = SEC_ASN1EncodeItem(poolp, NULL, objs[i], objtemplate);
-        if (enc_objs[i] == NULL)
+        if (enc_objs[i] == NULL) {
             goto loser;
+}
     }
     enc_objs[num_objs] = NULL;
 
@@ -92,12 +97,14 @@ NSS_CMSUtil_DERCompare(void *a, void *b)
      * same length need to be compared byte by byte until a mismatch
      * is found.
      */
-    if (der1->len != der2->len)
+    if (der1->len != der2->len) {
         return (der1->len < der2->len) ? -1 : 1;
+}
 
     for (j = 0; j < der1->len; j++) {
-        if (der1->data[j] == der2->data[j])
+        if (der1->data[j] == der2->data[j]) {
             continue;
+}
         return (der1->data[j] < der2->data[j]) ? -1 : 1;
     }
     return 0;
@@ -119,16 +126,19 @@ NSS_CMSAlgArray_GetIndexByAlgID(SECAlgorithmID **algorithmArray, SECAlgorithmID 
 {
     int i;
 
-    if (algorithmArray == NULL || algorithmArray[0] == NULL)
+    if (algorithmArray == NULL || algorithmArray[0] == NULL) {
         return -1;
+}
 
     for (i = 0; algorithmArray[i] != NULL; i++) {
-        if (SECOID_CompareAlgorithmID(algorithmArray[i], algid) == SECEqual)
+        if (SECOID_CompareAlgorithmID(algorithmArray[i], algid) == SECEqual) {
             break; /* bingo */
+}
     }
 
-    if (algorithmArray[i] == NULL)
+    if (algorithmArray[i] == NULL) {
         return -1; /* not found */
+}
 
     return i;
 }
@@ -151,8 +161,9 @@ NSS_CMSAlgArray_GetIndexByAlgTag(SECAlgorithmID **algorithmArray,
     SECOidData *algid;
     int i = -1;
 
-    if (algorithmArray == NULL || algorithmArray[0] == NULL)
+    if (algorithmArray == NULL || algorithmArray[0] == NULL) {
         return i;
+}
 
 #ifdef ORDER_N_SQUARED
     for (i = 0; algorithmArray[i] != NULL; i++) {
@@ -162,16 +173,19 @@ NSS_CMSAlgArray_GetIndexByAlgTag(SECAlgorithmID **algorithmArray,
     }
 #else
     algid = SECOID_FindOIDByTag(algtag);
-    if (!algid)
+    if (!algid) {
         return i;
+}
     for (i = 0; algorithmArray[i] != NULL; i++) {
-        if (SECITEM_ItemsAreEqual(&algorithmArray[i]->algorithm, &algid->oid))
+        if (SECITEM_ItemsAreEqual(&algorithmArray[i]->algorithm, &algid->oid)) {
             break; /* bingo */
+}
     }
 #endif
 
-    if (algorithmArray[i] == NULL)
+    if (algorithmArray[i] == NULL) {
         return -1; /* not found */
+}
 
     return i;
 }
@@ -284,8 +298,9 @@ NSS_CMSContent_GetContentInfo(void *msg, SECOidTag type)
     NSSCMSContent c;
     NSSCMSContentInfo *cinfo = NULL;
 
-    if (!msg)
+    if (!msg) {
         return cinfo;
+}
     c.pointer = msg;
     switch (type) {
         case SEC_OID_PKCS7_SIGNED_DATA:

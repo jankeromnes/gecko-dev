@@ -62,8 +62,9 @@ void Die::SandboxDie(const char* msg, const char* file, int line) {
 }
 
 void Die::RawSandboxDie(const char* msg) {
-  if (!msg)
+  if (!msg) {
     msg = "";
+}
   RAW_LOG(FATAL, msg);
   ExitGroup();
 }

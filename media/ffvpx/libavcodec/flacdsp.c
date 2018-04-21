@@ -65,8 +65,9 @@ static void flac_lpc_16_c(int32_t *decoded, const int coeffs[32],
     }
     if (i < len) {
         int sum = 0;
-        for (j = 0; j < pred_order; j++)
+        for (j = 0; j < pred_order; j++) {
             sum += coeffs[j] * (SUINT)decoded[j];
+}
         decoded[j] = decoded[j] + (unsigned)(sum >> qlevel);
     }
 }
@@ -78,8 +79,9 @@ static void flac_lpc_32_c(int32_t *decoded, const int coeffs[32],
 
     for (i = pred_order; i < len; i++, decoded++) {
         int64_t sum = 0;
-        for (j = 0; j < pred_order; j++)
+        for (j = 0; j < pred_order; j++) {
             sum += (int64_t)coeffs[j] * decoded[j];
+}
         decoded[j] += sum >> qlevel;
     }
 
@@ -123,8 +125,10 @@ av_cold void ff_flacdsp_init(FLACDSPContext *c, enum AVSampleFormat fmt, int cha
         break;
     }
 
-    if (ARCH_ARM)
+    if (ARCH_ARM) {
         ff_flacdsp_init_arm(c, fmt, channels, bps);
-    if (ARCH_X86)
+}
+    if (ARCH_X86) {
         ff_flacdsp_init_x86(c, fmt, channels, bps);
+}
 }

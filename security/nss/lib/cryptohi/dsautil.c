@@ -50,8 +50,9 @@ DSAU_ConvertUnsignedToSigned(SECItem *dest, SECItem *src)
         return;
     }
 
-    if (*pSrc & 0x80)
+    if (*pSrc & 0x80) {
         *pDst++ = 0;
+}
 
     PORT_Memcpy(pDst, pSrc, cntSrc);
     dest->len = (pDst - dest->data) + cntSrc;
@@ -83,8 +84,9 @@ DSAU_ConvertSignedToFixedUnsigned(SECItem *dest, SECItem *src)
     if (zCount <= 0) {
         /* Source is longer than destination.  Check for leading zeros. */
         while (zCount++ < 0) {
-            if (*pSrc++ != 0)
+            if (*pSrc++ != 0) {
                 goto loser;
+}
         }
     }
     PORT_Memcpy(pDst, pSrc, cntDst);
@@ -114,12 +116,14 @@ common_EncodeDerSig(SECItem *dest, SECItem *src)
      */
     len = src->len / 2;
     signedR = (unsigned char *)PORT_Alloc(len + 1);
-    if (!signedR)
+    if (!signedR) {
         return SECFailure;
+}
     signedS = (unsigned char *)PORT_ZAlloc(len + 1);
     if (!signedS) {
-        if (signedR)
+        if (signedR) {
             PORT_Free(signedR);
+}
         return SECFailure;
     }
 
@@ -145,12 +149,15 @@ common_EncodeDerSig(SECItem *dest, SECItem *src)
     DSAU_ConvertUnsignedToSigned(&sig.s, &srcItem);
 
     item = SEC_ASN1EncodeItem(NULL, dest, &sig, DSA_SignatureTemplate);
-    if (signedR)
+    if (signedR) {
         PORT_Free(signedR);
-    if (signedS)
+}
+    if (signedS) {
         PORT_Free(signedS);
-    if (item == NULL)
+}
+    if (item == NULL) {
         return SECFailure;
+}
 
     /* XXX leak item? */
     return SECSuccess;
@@ -177,19 +184,22 @@ common_DecodeDerSig(const SECItem *item, unsigned int len)
     PORT_InitCheapArena(&arena, PR_MAX(2 * MAX_ECKEY_LEN, DSA_MAX_SIGNATURE_LEN));
 
     result = PORT_ZNew(SECItem);
-    if (result == NULL)
+    if (result == NULL) {
         goto loser;
+}
 
     result->len = 2 * len;
     result->data = (unsigned char *)PORT_Alloc(2 * len);
-    if (result->data == NULL)
+    if (result->data == NULL) {
         goto loser;
+}
 
     sig.r.type = siUnsignedInteger;
     sig.s.type = siUnsignedInteger;
     status = SEC_QuickDERDecodeItem(&arena.arena, &sig, DSA_SignatureTemplate, item);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     /* Convert sig.r and sig.s from variable  length signed integers to
     ** fixed length unsigned integers.
@@ -197,13 +207,15 @@ common_DecodeDerSig(const SECItem *item, unsigned int len)
     dst.data = result->data;
     dst.len = len;
     status = DSAU_ConvertSignedToFixedUnsigned(&dst, &sig.r);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     dst.data += len;
     status = DSAU_ConvertSignedToFixedUnsigned(&dst, &sig.s);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
 done:
     PORT_DestroyCheapArena(&arena);

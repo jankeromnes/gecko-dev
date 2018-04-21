@@ -344,11 +344,14 @@ UnicodeFunctor *UnicodeSet::cloneAsThawed() const {
  * @return <tt>true</tt> if the specified set is equal to this set.
  */
 UBool UnicodeSet::operator==(const UnicodeSet& o) const {
-    if (len != o.len) return FALSE;
+    if (len != o.len) { return FALSE;
+}
     for (int32_t i = 0; i < len; ++i) {
-        if (list[i] != o.list[i]) return FALSE;
+        if (list[i] != o.list[i]) { return FALSE;
+}
     }
-    if (*strings != *o.strings) return FALSE;
+    if (*strings != *o.strings) { return FALSE;
+}
     return TRUE;
 }
 
@@ -444,14 +447,16 @@ int32_t UnicodeSet::findCodePoint(UChar32 c) const {
 
     // Return the smallest i such that c < list[i].  Assume
     // list[len - 1] == HIGH and that c is legal (0..HIGH-1).
-    if (c < list[0])
+    if (c < list[0]) {
         return 0;
+}
     // High runner test.  c is often after the last range, so an
     // initial check for this condition pays off.
     int32_t lo = 0;
     int32_t hi = len - 1;
-    if (lo >= hi || c >= list[hi-1])
+    if (lo >= hi || c >= list[hi-1]) {
         return hi;
+}
     // invariant: c >= list[lo]
     // invariant: c < list[hi]
     for (;;) {
@@ -490,7 +495,8 @@ UBool UnicodeSet::contains(UChar32 start, UChar32 end) const {
  * @return <tt>true</tt> if this set contains the specified string
  */
 UBool UnicodeSet::contains(const UnicodeString& s) const {
-    if (s.length() == 0) return FALSE;
+    if (s.length() == 0) { return FALSE;
+}
     int32_t cp = getSingleCP(s);
     if (cp < 0) {
         return strings->contains((void*) &s);
@@ -515,7 +521,8 @@ UBool UnicodeSet::containsAll(const UnicodeSet& c) const {
             return FALSE;
         }
     }
-    if (!strings->containsAll(*c.strings)) return FALSE;
+    if (!strings->containsAll(*c.strings)) { return FALSE;
+}
     return TRUE;
 }
 
@@ -562,7 +569,8 @@ UBool UnicodeSet::containsNone(const UnicodeSet& c) const {
             return FALSE;
         }
     }
-    if (!strings->containsNone(*c.strings)) return FALSE;
+    if (!strings->containsNone(*c.strings)) { return FALSE;
+}
     return TRUE;
 }
 
@@ -672,8 +680,10 @@ UMatchDegree UnicodeSet::matches(const Replaceable& text,
 
                 // Strings are sorted, so we can optimize in the
                 // forward direction.
-                if (forward && c > firstChar) break;
-                if (c != firstChar) continue;
+                if (forward && c > firstChar) { break;
+}
+                if (c != firstChar) { continue;
+}
 
                 int32_t matchLen = matchRest(text, offset, limit, trial);
 
@@ -739,16 +749,20 @@ int32_t UnicodeSet::matchRest(const Replaceable& text,
     int32_t slen = s.length();
     if (start < limit) {
         maxLen = limit - start;
-        if (maxLen > slen) maxLen = slen;
+        if (maxLen > slen) { maxLen = slen;
+}
         for (i = 1; i < maxLen; ++i) {
-            if (text.charAt(start + i) != s.charAt(i)) return 0;
+            if (text.charAt(start + i) != s.charAt(i)) { return 0;
+}
         }
     } else {
         maxLen = start - limit;
-        if (maxLen > slen) maxLen = slen;
+        if (maxLen > slen) { maxLen = slen;
+}
         --slen; // <=> slen = s.length() - 1;
         for (i = 1; i < maxLen; ++i) {
-            if (text.charAt(start - i) != s.charAt(slen - i)) return 0;
+            if (text.charAt(start - i) != s.charAt(slen - i)) { return 0;
+}
         }
     }
     return maxLen;
@@ -881,7 +895,8 @@ UnicodeSet& UnicodeSet::add(UChar32 c) {
     int32_t i = findCodePoint(pinCodePoint(c));
 
     // already in set?
-    if ((i & 1) != 0  || isFrozen() || isBogus()) return *this;
+    if ((i & 1) != 0  || isFrozen() || isBogus()) { return *this;
+}
 
     // HIGH is 0x110000
     // assert(list[len-1] == HIGH);
@@ -929,7 +944,8 @@ UnicodeSet& UnicodeSet::add(UChar32 c) {
             UChar32* dst = list + i - 1;
             UChar32* src = dst + 2;
             UChar32* srclimit = list + len;
-            while (src < srclimit) *(dst++) = *(src++);
+            while (src < srclimit) { *(dst++) = *(src++);
+}
 
             len -= 2;
         }
@@ -966,7 +982,8 @@ UnicodeSet& UnicodeSet::add(UChar32 c) {
         UChar32* src = list + len;
         UChar32* dst = src + 2;
         UChar32* srclimit = list + i;
-        while (src > srclimit) *(--dst) = *(--src);
+        while (src > srclimit) { *(--dst) = *(--src);
+}
 
         list[i] = c;
         list[i+1] = c+1;
@@ -1000,7 +1017,8 @@ UnicodeSet& UnicodeSet::add(UChar32 c) {
  * @return the modified set, for chaining
  */
 UnicodeSet& UnicodeSet::add(const UnicodeString& s) {
-    if (s.length() == 0 || isFrozen() || isBogus()) return *this;
+    if (s.length() == 0 || isFrozen() || isBogus()) { return *this;
+}
     int32_t cp = getSingleCP(s);
     if (cp < 0) {
         if (!strings->contains((void*) &s)) {
@@ -1044,8 +1062,10 @@ int32_t UnicodeSet::getSingleCP(const UnicodeString& s) {
     //if (s.length() < 1) {
     //    throw new IllegalArgumentException("Can't use zero-length strings in UnicodeSet");
     //}
-    if (s.length() > 2) return -1;
-    if (s.length() == 1) return s.charAt(0);
+    if (s.length() > 2) { return -1;
+}
+    if (s.length() == 1) { return s.charAt(0);
+}
 
     // at this point, len = 2
     UChar32 cp = s.char32At(0);
@@ -1203,7 +1223,8 @@ UnicodeSet& UnicodeSet::remove(UChar32 c) {
  * @return the modified set, for chaining
  */
 UnicodeSet& UnicodeSet::remove(const UnicodeString& s) {
-    if (s.length() == 0 || isFrozen() || isBogus()) return *this;
+    if (s.length() == 0 || isFrozen() || isBogus()) { return *this;
+}
     int32_t cp = getSingleCP(s);
     if (cp < 0) {
         strings->removeElement((void*) &s);
@@ -1280,7 +1301,8 @@ UnicodeSet& UnicodeSet::complement(void) {
  * @return this object, for chaining
  */
 UnicodeSet& UnicodeSet::complement(const UnicodeString& s) {
-    if (s.length() == 0 || isFrozen() || isBogus()) return *this;
+    if (s.length() == 0 || isFrozen() || isBogus()) { return *this;
+}
     int32_t cp = getSingleCP(s);
     if (cp < 0) {
         if (strings->contains((void*) &s)) {
@@ -1654,8 +1676,9 @@ UBool UnicodeSet::allocateStrings(UErrorCode &status) {
 }
 
 void UnicodeSet::ensureCapacity(int32_t newLen, UErrorCode& ec) {
-    if (newLen <= capacity)
+    if (newLen <= capacity) {
         return;
+}
     UChar32* temp = (UChar32*) uprv_realloc(list, sizeof(UChar32) * (newLen + GROW_EXTRA));
     if (temp == NULL) {
         ec = U_MEMORY_ALLOCATION_ERROR;
@@ -1668,8 +1691,9 @@ void UnicodeSet::ensureCapacity(int32_t newLen, UErrorCode& ec) {
 }
 
 void UnicodeSet::ensureBufferCapacity(int32_t newLen, UErrorCode& ec) {
-    if (buffer != NULL && newLen <= bufferCapacity)
+    if (buffer != NULL && newLen <= bufferCapacity) {
         return;
+}
     UChar32* temp = (UChar32*) uprv_realloc(buffer, sizeof(UChar32) * (newLen + GROW_EXTRA));
     if (temp == NULL) {
         ec = U_MEMORY_ALLOCATION_ERROR;
@@ -1801,7 +1825,8 @@ void UnicodeSet::add(const UChar32* other, int32_t otherLen, int8_t polarity) {
                 j++;
                 polarity ^= 2;
             } else { // a == b, take a, drop b
-                if (a == UNICODESET_HIGH) goto loop_end;
+                if (a == UNICODESET_HIGH) { goto loop_end;
+}
                 // This is symmetrical; it doesn't matter if
                 // we backtrack with a or b. - liu
                 if (k > 0 && a <= buffer[k-1]) {
@@ -1819,10 +1844,12 @@ void UnicodeSet::add(const UChar32* other, int32_t otherLen, int8_t polarity) {
             break;
           case 3: // both second; take higher if unequal, and drop other
             if (b <= a) { // take a
-                if (a == UNICODESET_HIGH) goto loop_end;
+                if (a == UNICODESET_HIGH) { goto loop_end;
+}
                 buffer[k++] = a;
             } else { // take b
-                if (b == UNICODESET_HIGH) goto loop_end;
+                if (b == UNICODESET_HIGH) { goto loop_end;
+}
                 buffer[k++] = b;
             }
             a = list[i++];
@@ -1837,7 +1864,8 @@ void UnicodeSet::add(const UChar32* other, int32_t otherLen, int8_t polarity) {
                 b = other[j++];
                 polarity ^= 2;
             } else { // a == b, drop both!
-                if (a == UNICODESET_HIGH) goto loop_end;
+                if (a == UNICODESET_HIGH) { goto loop_end;
+}
                 a = list[i++];
                 polarity ^= 1;
                 b = other[j++];
@@ -1853,7 +1881,8 @@ void UnicodeSet::add(const UChar32* other, int32_t otherLen, int8_t polarity) {
                 a = list[i++];
                 polarity ^= 1;
             } else { // a == b, drop both!
-                if (a == UNICODESET_HIGH) goto loop_end;
+                if (a == UNICODESET_HIGH) { goto loop_end;
+}
                 a = list[i++];
                 polarity ^= 1;
                 b = other[j++];
@@ -1899,7 +1928,8 @@ void UnicodeSet::retain(const UChar32* other, int32_t otherLen, int8_t polarity)
                 b = other[j++];
                 polarity ^= 2;
             } else { // a == b, take one, drop other
-                if (a == UNICODESET_HIGH) goto loop_end;
+                if (a == UNICODESET_HIGH) { goto loop_end;
+}
                 buffer[k++] = a;
                 a = list[i++];
                 polarity ^= 1;
@@ -1917,7 +1947,8 @@ void UnicodeSet::retain(const UChar32* other, int32_t otherLen, int8_t polarity)
                 b = other[j++];
                 polarity ^= 2;
             } else { // a == b, take one, drop other
-                if (a == UNICODESET_HIGH) goto loop_end;
+                if (a == UNICODESET_HIGH) { goto loop_end;
+}
                 buffer[k++] = a;
                 a = list[i++];
                 polarity ^= 1;
@@ -1934,7 +1965,8 @@ void UnicodeSet::retain(const UChar32* other, int32_t otherLen, int8_t polarity)
                 b = other[j++];
                 polarity ^= 2;
             } else { // a == b, drop both!
-                if (a == UNICODESET_HIGH) goto loop_end;
+                if (a == UNICODESET_HIGH) { goto loop_end;
+}
                 a = list[i++];
                 polarity ^= 1;
                 b = other[j++];
@@ -1950,7 +1982,8 @@ void UnicodeSet::retain(const UChar32* other, int32_t otherLen, int8_t polarity)
                 a = list[i++];
                 polarity ^= 1;
             } else { // a == b, drop both!
-                if (a == UNICODESET_HIGH) goto loop_end;
+                if (a == UNICODESET_HIGH) { goto loop_end;
+}
                 a = list[i++];
                 polarity ^= 1;
                 b = other[j++];

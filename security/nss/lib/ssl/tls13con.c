@@ -503,16 +503,19 @@ tls13_ImportDHEKeyShare(sslSocket *ss, SECKEYPublicKey *peerKey,
     peerKey->keyType = dhKey;
     rv = SECITEM_CopyItem(peerKey->arena, &peerKey->u.dh.prime,
                           &pubKey->u.dh.prime);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
     rv = SECITEM_CopyItem(peerKey->arena, &peerKey->u.dh.base,
                           &pubKey->u.dh.base);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
     rv = SECITEM_CopyItem(peerKey->arena, &peerKey->u.dh.publicValue,
                           &publicValue);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
 
     return SECSuccess;
 }
@@ -881,8 +884,9 @@ tls13_RecoverWrappedSharedSecret(sslSocket *ss, sslSessionID *sid)
     } else {
         PK11SlotInfo *slot = SECMOD_LookupSlot(sid->u.ssl3.masterModuleID,
                                                sid->u.ssl3.masterSlotID);
-        if (!slot)
+        if (!slot) {
             return SECFailure;
+}
 
         wrapKey = PK11_GetWrapKey(slot,
                                   sid->u.ssl3.masterWrapIndex,
@@ -1218,20 +1222,26 @@ tls13_CanNegotiateZeroRtt(sslSocket *ss, const sslSessionID *sid)
 {
     PORT_Assert(ss->ssl3.hs.zeroRttState == ssl_0rtt_sent);
 
-    if (!sid)
+    if (!sid) {
         return PR_FALSE;
+}
     PORT_Assert(ss->statelessResume);
-    if (!ss->statelessResume)
+    if (!ss->statelessResume) {
         return PR_FALSE;
-    if (ss->ssl3.hs.cipher_suite != sid->u.ssl3.cipherSuite)
+}
+    if (ss->ssl3.hs.cipher_suite != sid->u.ssl3.cipherSuite) {
         return PR_FALSE;
-    if (!ss->opt.enable0RttData)
+}
+    if (!ss->opt.enable0RttData) {
         return PR_FALSE;
-    if (!(sid->u.ssl3.locked.sessionTicket.flags & ticket_allow_early_data))
+}
+    if (!(sid->u.ssl3.locked.sessionTicket.flags & ticket_allow_early_data)) {
         return PR_FALSE;
+}
     if (SECITEM_CompareItem(&ss->xtnData.nextProto,
-                            &sid->u.ssl3.alpnSelection) != 0)
+                            &sid->u.ssl3.alpnSelection) != 0) {
         return PR_FALSE;
+}
 
     if (tls13_IsReplay(ss, sid)) {
         return PR_FALSE;
@@ -2658,8 +2668,9 @@ tls13_HandleServerKeyShare(sslSocket *ss)
     PORT_Assert(ssl_NamedGroupEnabled(ss, entry->group));
 
     rv = tls13_HandleKeyShare(ss, entry, keyPair->keys);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure; /* Error code set by caller. */
+}
 
     tls13_SetKeyExchangeType(ss, entry->group);
     ss->sec.keaKeyBits = SECKEY_PublicKeyStrengthInBits(keyPair->keys->pubKey);
@@ -2704,8 +2715,9 @@ tls13_SendCertificate(sslSocket *ss)
         certChain = ss->sec.serverCert->serverCertChain;
         ss->sec.localCert = CERT_DupCertificate(ss->sec.serverCert->serverCert);
     } else {
-        if (ss->sec.localCert)
+        if (ss->sec.localCert) {
             CERT_DestroyCertificate(ss->sec.localCert);
+}
 
         certChain = ss->ssl3.clientCertChain;
         ss->sec.localCert = CERT_DupCertificate(ss->ssl3.clientCertificate);
@@ -2860,8 +2872,9 @@ tls13_HandleCertificate(sslSocket *ss, PRUint8 *b, PRUint32 length)
         rv = TLS13_CHECK_HS_STATE(ss, SSL_ERROR_RX_UNEXPECTED_CERTIFICATE,
                                   wait_cert_request, wait_server_cert);
     }
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
 
     /* We can ignore any other cleartext from the client. */
     if (ss->sec.isServer && IS_DTLS(ss)) {
@@ -2870,8 +2883,9 @@ tls13_HandleCertificate(sslSocket *ss, PRUint8 *b, PRUint32 length)
     }
     /* Process the context string */
     rv = ssl3_ConsumeHandshakeVariable(ss, &context, 1, &b, &length);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         return SECFailure;
+}
 
     if (context.len) {
         /* The context string MUST be empty */
@@ -3777,8 +3791,9 @@ tls13_SendCertificateVerify(sslSocket *ss, SECKEYPrivateKey *privKey)
 done:
     /* For parity with the allocation functions, which don't use
      * SECITEM_AllocItem(). */
-    if (buf.data)
+    if (buf.data) {
         PORT_Free(buf.data);
+}
     return rv;
 }
 
@@ -3999,17 +4014,20 @@ tls13_ComputeFinished(sslSocket *ss, PK11SymKey *baseKey,
     }
 
     rv = PK11_DigestBegin(hmacCtx);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto abort;
+}
 
     rv = PK11_DigestOp(hmacCtx, hashes->u.raw, hashes->len);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto abort;
+}
 
     PORT_Assert(maxOutputLen >= tls13_GetHashSize(ss));
     rv = PK11_DigestFinal(hmacCtx, output, &outputLenUint, maxOutputLen);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto abort;
+}
     *outputLen = outputLenUint;
 
     PK11_FreeSymKey(secret);
@@ -4449,8 +4467,9 @@ tls13_SendNewSessionTicket(sslSocket *ss, const PRUint8 *appToken,
     /* The ticket age obfuscator. */
     rv = PK11_GenerateRandom((PRUint8 *)&ticket.ticket_age_add,
                              sizeof(ticket.ticket_age_add));
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = sslBuffer_AppendNumber(&ticketNonceBuf, ss->ssl3.hs.ticketNonce,
                                 sizeof(ticketNonce));
@@ -4472,8 +4491,9 @@ tls13_SendNewSessionTicket(sslSocket *ss, const PRUint8 *appToken,
     rv = ssl3_EncodeSessionTicket(ss, &ticket, appToken, appTokenLen,
                                   secret, &ticket_data);
     PK11_FreeSymKey(secret);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     message_length =
         4 +                           /* lifetime */
@@ -4485,48 +4505,57 @@ tls13_SendNewSessionTicket(sslSocket *ss, const PRUint8 *appToken,
 
     rv = ssl3_AppendHandshakeHeader(ss, ssl_hs_new_session_ticket,
                                     message_length);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* This is a fixed value. */
     rv = ssl3_AppendHandshakeNumber(ss, ssl_ticket_lifetime, 4);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     rv = ssl3_AppendHandshakeNumber(ss, ticket.ticket_age_add, 4);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* The ticket nonce. */
     rv = ssl3_AppendHandshakeVariable(ss, ticketNonce, sizeof(ticketNonce), 1);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* Encode the ticket. */
     rv = ssl3_AppendHandshakeVariable(
         ss, ticket_data.data, ticket_data.len, 2);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* Extensions. */
     rv = ssl3_AppendHandshakeNumber(ss, max_early_data_size_len, 2);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     if (max_early_data_size_len) {
         rv = ssl3_AppendHandshakeNumber(
             ss, ssl_tls13_early_data_xtn, 2);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
 
         /* Length */
         rv = ssl3_AppendHandshakeNumber(ss, 4, 2);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
 
         rv = ssl3_AppendHandshakeNumber(ss, ss->opt.maxEarlyDataSize, 4);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
 
     SECITEM_FreeItem(&ticket_data, PR_FALSE);
@@ -5070,16 +5099,21 @@ tls13_ClientAllow0Rtt(const sslSocket *ss, const sslSessionID *sid)
 {
     /* We checked that the cipher suite was still allowed back in
      * ssl3_SendClientHello. */
-    if (sid->version < SSL_LIBRARY_VERSION_TLS_1_3)
+    if (sid->version < SSL_LIBRARY_VERSION_TLS_1_3) {
         return PR_FALSE;
-    if (ss->ssl3.hs.helloRetry)
+}
+    if (ss->ssl3.hs.helloRetry) {
         return PR_FALSE;
-    if (!ss->opt.enable0RttData)
+}
+    if (!ss->opt.enable0RttData) {
         return PR_FALSE;
-    if (!ss->statelessResume)
+}
+    if (!ss->statelessResume) {
         return PR_FALSE;
-    if ((sid->u.ssl3.locked.sessionTicket.flags & ticket_allow_early_data) == 0)
+}
+    if ((sid->u.ssl3.locked.sessionTicket.flags & ticket_allow_early_data) == 0) {
         return PR_FALSE;
+}
     return ssl_AlpnTagAllowed(ss, &sid->u.ssl3.alpnSelection);
 }
 

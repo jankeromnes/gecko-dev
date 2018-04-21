@@ -304,8 +304,9 @@ nsUrlClassifierStreamUpdater::DownloadUpdates(
     // manager listens for and uses to cancel pending downloads.
     nsCOMPtr<nsIObserverService> observerService =
       mozilla::services::GetObserverService();
-    if (!observerService)
+    if (!observerService) {
       return NS_ERROR_FAILURE;
+}
 
     observerService->AddObserver(this, gQuitApplicationMessage, false);
 
@@ -697,8 +698,9 @@ nsUrlClassifierStreamUpdater::OnDataAvailable(nsIRequest *request,
                                               uint64_t aSourceOffset,
                                               uint32_t aLength)
 {
-  if (!mDBService)
+  if (!mDBService) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   LOG(("OnDataAvailable (%d bytes)", aLength));
 
@@ -725,8 +727,9 @@ NS_IMETHODIMP
 nsUrlClassifierStreamUpdater::OnStopRequest(nsIRequest *request, nsISupports* context,
                                             nsresult aStatus)
 {
-  if (!mDBService)
+  if (!mDBService) {
     return NS_ERROR_NOT_INITIALIZED;
+}
 
   if (LOG_ENABLED()) {
     nsAutoCString errorName;

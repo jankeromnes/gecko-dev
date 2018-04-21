@@ -277,8 +277,9 @@ DecimalFormat::DecimalFormat(const UnicodeString& pattern,
                              UErrorCode& status) {
     init();
     UParseError parseError;
-    if (symbolsToAdopt == NULL)
+    if (symbolsToAdopt == NULL) {
         status = U_ILLEGAL_ARGUMENT_ERROR;
+}
     construct(status, parseError, &pattern, symbolsToAdopt);
 }
 
@@ -287,8 +288,9 @@ DecimalFormat::DecimalFormat(  const UnicodeString& pattern,
                     UParseError& parseErr,
                     UErrorCode& status) {
     init();
-    if (symbolsToAdopt == NULL)
+    if (symbolsToAdopt == NULL) {
         status = U_ILLEGAL_ARGUMENT_ERROR;
+}
     construct(status,parseErr, &pattern, symbolsToAdopt);
 }
 
@@ -352,8 +354,9 @@ DecimalFormat::construct(UErrorCode&            status,
                          DecimalFormatSymbols*  symbolsToAdopt)
 {
     LocalPointer<DecimalFormatSymbols> adoptedSymbols(symbolsToAdopt);
-    if (U_FAILURE(status))
+    if (U_FAILURE(status)) {
         return;
+}
 
     if (adoptedSymbols.isNull())
     {
@@ -648,8 +651,9 @@ DecimalFormat::operator=(const DecimalFormat& rhs)
 UBool
 DecimalFormat::operator==(const Format& that) const
 {
-    if (this == &that)
+    if (this == &that) {
         return TRUE;
+}
 
     // NumberFormat::operator== guarantees this cast is safe
     const DecimalFormat* other = (DecimalFormat*)&that;
@@ -3075,7 +3079,8 @@ DecimalFormat::setContext(UDisplayContext value, UErrorCode& status) {
 DecimalFormat& DecimalFormat::setAttribute( UNumberFormatAttribute attr,
                                             int32_t newValue,
                                             UErrorCode &status) {
-  if(U_FAILURE(status)) return *this;
+  if(U_FAILURE(status)) { return *this;
+}
 
   switch(attr) {
   case UNUM_LENIENT_PARSE:
@@ -3198,7 +3203,8 @@ DecimalFormat& DecimalFormat::setAttribute( UNumberFormatAttribute attr,
 
 int32_t DecimalFormat::getAttribute( UNumberFormatAttribute attr, 
                                      UErrorCode &status ) const {
-  if(U_FAILURE(status)) return -1;
+  if(U_FAILURE(status)) { return -1;
+}
   switch(attr) {
     case UNUM_LENIENT_PARSE: 
         return isLenient();

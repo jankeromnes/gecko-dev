@@ -69,8 +69,9 @@ static bool ElfClassBuildIDNoteIdentifier(const void *section, size_t length,
   const void* section_end = reinterpret_cast<const char*>(section) + length;
   const Nhdr* note_header = reinterpret_cast<const Nhdr*>(section);
   while (reinterpret_cast<const void *>(note_header) < section_end) {
-    if (note_header->n_type == NT_GNU_BUILD_ID)
+    if (note_header->n_type == NT_GNU_BUILD_ID) {
       break;
+}
     note_header = reinterpret_cast<const Nhdr*>(
                   reinterpret_cast<const char*>(note_header) + sizeof(Nhdr) +
                   NOTE_PADDING(note_header->n_namesz) +
@@ -137,8 +138,9 @@ static bool HashElfTextSection(const void* elf_mapped_base,
   const uint8_t* ptr = reinterpret_cast<const uint8_t*>(text_section);
   const uint8_t* ptr_end = ptr + std::min(text_size, static_cast<size_t>(4096));
   while (ptr < ptr_end) {
-    for (unsigned i = 0; i < kMDGUIDSize; i++)
+    for (unsigned i = 0; i < kMDGUIDSize; i++) {
       identifier[i] ^= ptr[i];
+}
     ptr += kMDGUIDSize;
   }
   return true;
@@ -148,8 +150,9 @@ static bool HashElfTextSection(const void* elf_mapped_base,
 bool FileID::ElfFileIdentifierFromMappedFile(const void* base,
                                              wasteful_vector<uint8_t>& identifier) {
   // Look for a build id note first.
-  if (FindElfBuildIDNote(base, identifier))
+  if (FindElfBuildIDNote(base, identifier)) {
     return true;
+}
 
   // Fall back on hashing the first page of the text section.
   return HashElfTextSection(base, identifier);
@@ -157,8 +160,9 @@ bool FileID::ElfFileIdentifierFromMappedFile(const void* base,
 
 bool FileID::ElfFileIdentifier(wasteful_vector<uint8_t>& identifier) {
   MemoryMappedFile mapped_file(path_.c_str(), 0);
-  if (!mapped_file.data())  // Should probably check if size >= ElfW(Ehdr)?
+  if (!mapped_file.data()) {  // Should probably check if size >= ElfW(Ehdr)?
     return false;
+}
 
   return ElfFileIdentifierFromMappedFile(mapped_file.data(), identifier);
 }

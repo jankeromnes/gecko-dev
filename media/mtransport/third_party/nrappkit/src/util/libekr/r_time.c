@@ -93,10 +93,12 @@ int r_timeval_diff(t1,t0,diff)
   {
     long d;
 
-    if(t0->tv_sec > t1->tv_sec)
+    if(t0->tv_sec > t1->tv_sec) {
       ERETURN(R_BAD_ARGS);
-    if((t0->tv_sec == t1->tv_sec) && (t0->tv_usec > t1->tv_usec))
+}
+    if((t0->tv_sec == t1->tv_sec) && (t0->tv_usec > t1->tv_usec)) {
       ERETURN(R_BAD_ARGS);
+}
 
     /*Easy case*/
     if(t0->tv_usec <= t1->tv_usec){
@@ -107,8 +109,9 @@ int r_timeval_diff(t1,t0,diff)
 
     /*Hard case*/
     d=t0->tv_usec - t1->tv_usec;
-    if(t1->tv_sec < (t0->tv_sec + 1))
+    if(t1->tv_sec < (t0->tv_sec + 1)) {
       ERETURN(R_BAD_ARGS);
+}
     diff->tv_sec=t1->tv_sec - (t0->tv_sec + 1);
     diff->tv_usec=1000000 - d;
 
@@ -143,14 +146,18 @@ int r_timeval_cmp(t1,t2)
   struct timeval *t1;
   struct timeval *t2;
   {
-    if(t1->tv_sec>t2->tv_sec)
+    if(t1->tv_sec>t2->tv_sec) {
       return(1);
-    if(t1->tv_sec<t2->tv_sec)
+}
+    if(t1->tv_sec<t2->tv_sec) {
       return(-1);
-    if(t1->tv_usec>t2->tv_usec)
+}
+    if(t1->tv_usec>t2->tv_usec) {
       return(1);
-    if(t1->tv_usec<t2->tv_usec)
+}
+    if(t1->tv_usec<t2->tv_usec) {
       return(-1);
+}
     return(0);
   }
 
@@ -195,8 +202,9 @@ int r_timeval_diff_usec(struct timeval *t1, struct timeval *t0, INT8 *diff)
     if (r=r_timeval_diff(t1, t0, &tmp)) {
         if (r == R_BAD_ARGS) {
             sign = -1;
-            if (r=r_timeval_diff(t0, t1, &tmp))
+            if (r=r_timeval_diff(t0, t1, &tmp)) {
                 ABORT(r);
+}
         }
     }
 
@@ -221,8 +229,9 @@ int r_timeval_diff_ms(struct timeval *t1, struct timeval *t0, INT8 *diff)
     if (r=r_timeval_diff(t1, t0, &tmp)) {
         if (r == R_BAD_ARGS) {
             sign = -1;
-            if (r=r_timeval_diff(t0, t1, &tmp))
+            if (r=r_timeval_diff(t0, t1, &tmp)) {
                 ABORT(r);
+}
         }
     }
 

@@ -51,12 +51,14 @@ mpl_not(mp_int *a, mp_int *b)
 
     ARGCHK(a != NULL && b != NULL, MP_BADARG);
 
-    if ((res = mp_copy(a, b)) != MP_OKAY)
+    if ((res = mp_copy(a, b)) != MP_OKAY) {
         return res;
+}
 
     /* This relies on the fact that the digit type is unsigned */
-    for (ix = 0; ix < USED(b); ix++)
+    for (ix = 0; ix < USED(b); ix++) {
         DIGIT(b, ix) = ~DIGIT(b, ix);
+}
 
     s_mp_clamp(b);
 
@@ -85,11 +87,13 @@ mpl_and(mp_int *a, mp_int *b, mp_int *c)
         other = a;
     }
 
-    if ((res = mp_copy(which, c)) != MP_OKAY)
+    if ((res = mp_copy(which, c)) != MP_OKAY) {
         return res;
+}
 
-    for (ix = 0; ix < USED(which); ix++)
+    for (ix = 0; ix < USED(which); ix++) {
         DIGIT(c, ix) &= DIGIT(other, ix);
+}
 
     s_mp_clamp(c);
 
@@ -118,11 +122,13 @@ mpl_or(mp_int *a, mp_int *b, mp_int *c)
         other = a;
     }
 
-    if ((res = mp_copy(which, c)) != MP_OKAY)
+    if ((res = mp_copy(which, c)) != MP_OKAY) {
         return res;
+}
 
-    for (ix = 0; ix < USED(which); ix++)
+    for (ix = 0; ix < USED(which); ix++) {
         DIGIT(c, ix) |= DIGIT(other, ix);
+}
 
     return MP_OKAY;
 
@@ -149,11 +155,13 @@ mpl_xor(mp_int *a, mp_int *b, mp_int *c)
         other = a;
     }
 
-    if ((res = mp_copy(which, c)) != MP_OKAY)
+    if ((res = mp_copy(which, c)) != MP_OKAY) {
         return res;
+}
 
-    for (ix = 0; ix < USED(which); ix++)
+    for (ix = 0; ix < USED(which); ix++) {
         DIGIT(c, ix) ^= DIGIT(other, ix);
+}
 
     s_mp_clamp(c);
 
@@ -178,8 +186,9 @@ mpl_rsh(const mp_int *a, mp_int *b, mp_digit d)
 
     ARGCHK(a != NULL && b != NULL, MP_BADARG);
 
-    if ((res = mp_copy(a, b)) != MP_OKAY)
+    if ((res = mp_copy(a, b)) != MP_OKAY) {
         return res;
+}
 
     s_mp_div_2d(b, d);
 
@@ -198,8 +207,9 @@ mpl_lsh(const mp_int *a, mp_int *b, mp_digit d)
 
     ARGCHK(a != NULL && b != NULL, MP_BADARG);
 
-    if ((res = mp_copy(a, b)) != MP_OKAY)
+    if ((res = mp_copy(a, b)) != MP_OKAY) {
         return res;
+}
 
     return s_mp_mul_2d(b, d);
 
@@ -241,8 +251,9 @@ mpl_num_set(mp_int *a, int *num)
         }
     }
 
-    if (num)
+    if (num) {
         *num = nset;
+}
 
     return MP_OKAY;
 
@@ -272,8 +283,9 @@ mpl_num_clear(mp_int *a, int *num)
         }
     }
 
-    if (num)
+    if (num) {
         *num = nset;
+}
 
     return MP_OKAY;
 
@@ -317,10 +329,11 @@ mpl_parity(mp_int *a)
         par ^= cur;
     }
 
-    if (par)
+    if (par) {
         return MP_ODD;
-    else
+    } else {
         return MP_EVEN;
+}
 
 } /* end mpl_parity() */
 
@@ -344,16 +357,18 @@ mpl_set_bit(mp_int *a, mp_size bitNum, mp_size value)
     ix = bitNum / MP_DIGIT_BIT;
     if (ix + 1 > MP_USED(a)) {
         rv = s_mp_pad(a, ix + 1);
-        if (rv != MP_OKAY)
+        if (rv != MP_OKAY) {
             return rv;
+}
     }
 
     bitNum = bitNum % MP_DIGIT_BIT;
     mask = (mp_digit)1 << bitNum;
-    if (value)
+    if (value) {
         MP_DIGIT(a, ix) |= mask;
-    else
+    } else {
         MP_DIGIT(a, ix) &= ~mask;
+}
     s_mp_clamp(a);
     return MP_OKAY;
 }
@@ -434,8 +449,9 @@ mpl_significant_bits(const mp_int *a)
         }
     }
     bits += ix * MP_DIGIT_BIT;
-    if (!bits)
+    if (!bits) {
         bits = 1;
+}
     return bits;
 }
 

@@ -54,8 +54,9 @@ TestPopulation()
 
   // Give it some time to warm up; it should tend towards more
   // even distributions of zeros and ones.
-  for (size_t i = 0; i < 40; i++)
+  for (size_t i = 0; i < 40; i++) {
     rng.next();
+}
 
   for (size_t i = 0; i < 40; i++) {
     size_t pop = Population(rng.next());
@@ -72,13 +73,15 @@ TestSetState()
   const size_t n = 10;
   uint64_t log[n];
 
-  for (size_t i = 0; i < n; i++)
+  for (size_t i = 0; i < n; i++) {
     log[i] = rng.next();
+}
 
   rng.setState(seed[0], seed[1]);
 
-  for (size_t i = 0; i < n; i++)
+  for (size_t i = 0; i < n; i++) {
     MOZ_RELEASE_ASSERT(log[i] == rng.next());
+}
 }
 
 static void

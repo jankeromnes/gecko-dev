@@ -139,8 +139,9 @@ void
 selectionInterfaceInitCB(AtkSelectionIface* aIface)
 {
   NS_ASSERTION(aIface, "Invalid aIface");
-  if (MOZ_UNLIKELY(!aIface))
+  if (MOZ_UNLIKELY(!aIface)) {
     return;
+}
 
   aIface->add_selection = addSelectionCB;
   aIface->clear_selection = clearSelectionCB;

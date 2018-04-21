@@ -61,8 +61,9 @@ int GetMinLogLevel() {
 }
 
 bool ShouldCreateLogMessage(int severity) {
-  if (severity < g_min_log_level)
+  if (severity < g_min_log_level) {
     return false;
+}
 
   // Return true here unless we know ~LogMessage won't do anything. Note that
   // ~LogMessage writes to stderr if severity_ >= kAlwaysPrintErrorLevel, even

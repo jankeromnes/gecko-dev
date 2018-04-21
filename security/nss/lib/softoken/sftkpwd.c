@@ -688,8 +688,9 @@ sftkdb_CheckPassword(SFTKDBHandle *keydb, const char *pw, PRBool *tokenRemoved)
     key.data = NULL;
     key.len = 0;
 
-    if (pw == NULL)
+    if (pw == NULL) {
         pw = "";
+}
 
     /* get the entry from the database */
     salt.data = saltData;
@@ -989,8 +990,9 @@ sftk_updateEncrypted(PLArenaPool *arena, SFTKDBHandle *keydb,
           * find the first and last good entry.
           */
         if ((privAttrs[i].ulValueLen == -1) || (privAttrs[i].ulValueLen == 0)) {
-            if (!first)
+            if (!first) {
                 continue;
+}
             if (!last) {
                 /* previous entry was last good entry */
                 last = &privAttrs[i - 1];
@@ -1124,8 +1126,9 @@ sftkdb_convertObjects(SFTKDBHandle *handle, CK_ATTRIBUTE *template,
         }
     }
     crv2 = sftkdb_FindObjectsFinal(handle, find);
-    if (crv == CKR_OK)
+    if (crv == CKR_OK) {
         crv = crv2;
+}
 
     return crv;
 }

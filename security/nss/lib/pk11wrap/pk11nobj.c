@@ -80,8 +80,9 @@ pk11_HandleTrustObject(PK11SlotInfo *slot, CERTCertificate *cert, CERTCertTrust 
     }
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (NULL == arena)
+    if (NULL == arena) {
         return PR_FALSE;
+}
 
     /* Unfortunately, it seems that PK11_GetAttributes doesn't deal
      * well with nonexistent attributes.  I guess we have to check
@@ -171,10 +172,11 @@ pk11_CollectCrls(PK11SlotInfo *slot, CK_OBJECT_HANDLE crlID, void *arg)
         goto loser;
     }
 
-    if (*((CK_BBOOL *)fetchCrl[1].pValue))
+    if (*((CK_BBOOL *)fetchCrl[1].pValue)) {
         new_node->type = SEC_KRL_TYPE;
-    else
+    } else {
         new_node->type = SEC_CRL_TYPE;
+}
 
     derCrl.type = siBuffer;
     derCrl.data = (unsigned char *)fetchCrl[0].pValue;
@@ -465,10 +467,12 @@ PK11_FindCrlByName(PK11SlotInfo **slot, CK_OBJECT_HANDLE *crlHandle,
     return rvItem;
 
 loser:
-    if (url)
+    if (url) {
         PORT_Free(url);
-    if (crl)
+}
+    if (crl) {
         nssCRL_Destroy(crl);
+}
     if (PORT_GetError() == 0) {
         PORT_SetError(SEC_ERROR_CRL_NOT_FOUND);
     }
@@ -740,8 +744,9 @@ PK11_ImportCRL(PK11SlotInfo *slot, SECItem *derCRL, char *url,
         if (newCrl == NULL) {
             if (type == SEC_CRL_TYPE) {
                 /* only promote error when the error code is too generic */
-                if (PORT_GetError() == SEC_ERROR_BAD_DER)
+                if (PORT_GetError() == SEC_ERROR_BAD_DER) {
                     PORT_SetError(SEC_ERROR_CRL_INVALID);
+}
             } else {
                 PORT_SetError(SEC_ERROR_KRL_INVALID);
             }

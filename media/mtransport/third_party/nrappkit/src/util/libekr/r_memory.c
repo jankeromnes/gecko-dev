@@ -73,8 +73,9 @@ void *r_malloc(type,size)
 
     total=size+sizeof(r_malloc_chunk);
 
-    if(!(chunk=malloc(total)))
+    if(!(chunk=malloc(total))) {
       return(0);
+}
 
 #ifdef SANITY_CHECKS
     chunk->hdr=HDR_FLAG;
@@ -98,8 +99,9 @@ void *r_calloc(type,number,size)
 
     total=number*size;
 
-    if(!(ret=r_malloc(type,total)))
+    if(!(ret=r_malloc(type,total))) {
       return(0);
+}
 
     memset(ret,0,size);
 
@@ -111,7 +113,8 @@ void r_free(ptr)
   {
     r_malloc_chunk *chunk;
 
-    if(!ptr) return;
+    if(!ptr) { return;
+}
 
     chunk=(r_malloc_chunk *)GET_CHUNK_ADDR_FROM_MEM_ADDR(ptr);
 #ifdef SANITY_CHECKS
@@ -131,7 +134,8 @@ void *r_realloc(ptr,size)
     r_malloc_chunk *chunk,*nchunk;
     size_t total;
 
-    if(!ptr) return(r_malloc(255,size));
+    if(!ptr) { return(r_malloc(255,size));
+}
 
     chunk=(r_malloc_chunk *)GET_CHUNK_ADDR_FROM_MEM_ADDR(ptr);
 #ifdef SANITY_CHECKS
@@ -140,8 +144,9 @@ void *r_realloc(ptr,size)
 
     total=size + sizeof(r_malloc_chunk);
 
-    if(!(nchunk=realloc(chunk,total)))
+    if(!(nchunk=realloc(chunk,total))) {
       return(0);
+}
 
     mem_usage-=CHUNK_SIZE(nchunk->size);
     mem_stats[nchunk->type]-=nchunk->size;
@@ -159,13 +164,15 @@ char *r_strdup(str)
     int len;
     char *nstr;
 
-    if(!str)
+    if(!str) {
       return(0);
+}
 
     len=strlen(str)+1;
 
-    if(!(nstr=r_malloc(0,len)))
+    if(!(nstr=r_malloc(0,len))) {
       return(0);
+}
 
     memcpy(nstr,str,len);
 

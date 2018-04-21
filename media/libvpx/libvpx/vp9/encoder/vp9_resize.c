@@ -138,16 +138,17 @@ static const int16_t vp9_down2_symodd_half_filter[] = { 64, 35, 0, -3 };
 
 static const interp_kernel *choose_interp_filter(int inlength, int outlength) {
   int outlength16 = outlength * 16;
-  if (outlength16 >= inlength * 16)
+  if (outlength16 >= inlength * 16) {
     return filteredinterp_filters1000;
-  else if (outlength16 >= inlength * 13)
+  } else if (outlength16 >= inlength * 13) {
     return filteredinterp_filters875;
-  else if (outlength16 >= inlength * 11)
+  } else if (outlength16 >= inlength * 11) {
     return filteredinterp_filters750;
-  else if (outlength16 >= inlength * 9)
+  } else if (outlength16 >= inlength * 9) {
     return filteredinterp_filters625;
-  else
+  } else {
     return filteredinterp_filters500;
+}
 }
 
 static void interpolate(const uint8_t *const input, int inlength,
@@ -204,10 +205,11 @@ static void interpolate(const uint8_t *const input, int inlength,
       sub_pel = (y >> (INTERP_PRECISION_BITS - SUBPEL_BITS)) & SUBPEL_MASK;
       filter = interp_filters[sub_pel];
       sum = 0;
-      for (k = 0; k < INTERP_TAPS; ++k)
+      for (k = 0; k < INTERP_TAPS; ++k) {
         sum += filter[k] * input[(int_pel - INTERP_TAPS / 2 + 1 + k < 0
                                       ? 0
                                       : int_pel - INTERP_TAPS / 2 + 1 + k)];
+}
       *optr++ = clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS));
     }
     // Middle part.
@@ -217,8 +219,9 @@ static void interpolate(const uint8_t *const input, int inlength,
       sub_pel = (y >> (INTERP_PRECISION_BITS - SUBPEL_BITS)) & SUBPEL_MASK;
       filter = interp_filters[sub_pel];
       sum = 0;
-      for (k = 0; k < INTERP_TAPS; ++k)
+      for (k = 0; k < INTERP_TAPS; ++k) {
         sum += filter[k] * input[int_pel - INTERP_TAPS / 2 + 1 + k];
+}
       *optr++ = clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS));
     }
     // End part.
@@ -228,10 +231,11 @@ static void interpolate(const uint8_t *const input, int inlength,
       sub_pel = (y >> (INTERP_PRECISION_BITS - SUBPEL_BITS)) & SUBPEL_MASK;
       filter = interp_filters[sub_pel];
       sum = 0;
-      for (k = 0; k < INTERP_TAPS; ++k)
+      for (k = 0; k < INTERP_TAPS; ++k) {
         sum += filter[k] * input[(int_pel - INTERP_TAPS / 2 + 1 + k >= inlength
                                       ? inlength - 1
                                       : int_pel - INTERP_TAPS / 2 + 1 + k)];
+}
       *optr++ = clip_pixel(ROUND_POWER_OF_TWO(sum, FILTER_BITS));
     }
   }
@@ -350,7 +354,8 @@ static void down2_symodd(const uint8_t *const input, int length,
 
 static int get_down2_length(int length, int steps) {
   int s;
-  for (s = 0; s < steps; ++s) length = (length + 1) >> 1;
+  for (s = 0; s < steps; ++s) { length = (length + 1) >> 1;
+}
   return length;
 }
 
@@ -384,14 +389,16 @@ static void resize_multistep(const uint8_t *const input, int length,
     for (s = 0; s < steps; ++s) {
       const int proj_filteredlength = get_down2_length(filteredlength, 1);
       const uint8_t *const in = (s == 0 ? input : out);
-      if (s == steps - 1 && proj_filteredlength == olength)
+      if (s == steps - 1 && proj_filteredlength == olength) {
         out = output;
-      else
+      } else {
         out = (s & 1 ? otmp2 : otmp);
-      if (filteredlength & 1)
+}
+      if (filteredlength & 1) {
         down2_symodd(in, filteredlength, out);
-      else
+      } else {
         down2_symeven(in, filteredlength, out);
+}
       filteredlength = proj_filteredlength;
     }
     if (filteredlength != olength) {
@@ -429,15 +436,17 @@ void vp9_resize_plane(const uint8_t *const input, int height, int width,
       (uint8_t *)malloc(sizeof(uint8_t) * (width < height ? height : width));
   uint8_t *arrbuf = (uint8_t *)malloc(sizeof(uint8_t) * height);
   uint8_t *arrbuf2 = (uint8_t *)malloc(sizeof(uint8_t) * height2);
-  if (intbuf == NULL || tmpbuf == NULL || arrbuf == NULL || arrbuf2 == NULL)
+  if (intbuf == NULL || tmpbuf == NULL || arrbuf == NULL || arrbuf2 == NULL) {
     goto Error;
+}
   assert(width > 0);
   assert(height > 0);
   assert(width2 > 0);
   assert(height2 > 0);
-  for (i = 0; i < height; ++i)
+  for (i = 0; i < height; ++i) {
     resize_multistep(input + in_stride * i, width, intbuf + width2 * i, width2,
                      tmpbuf);
+}
   for (i = 0; i < width2; ++i) {
     fill_col_to_arr(intbuf + i, width2, height, arrbuf);
     resize_multistep(arrbuf, height, arrbuf2, height2, tmpbuf);

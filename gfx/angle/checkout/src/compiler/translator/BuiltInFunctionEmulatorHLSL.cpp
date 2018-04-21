@@ -19,8 +19,9 @@ const char *FindHLSLFunction(const FunctionId &functionID);
 void InitBuiltInIsnanFunctionEmulatorForHLSLWorkarounds(BuiltInFunctionEmulator *emu,
                                                         int targetGLSLVersion)
 {
-    if (targetGLSLVersion < GLSL_VERSION_130)
+    if (targetGLSLVersion < GLSL_VERSION_130) {
         return;
+}
 
     TType *float1 = new TType(EbtFloat);
     TType *float2 = new TType(EbtFloat, 2);

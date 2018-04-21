@@ -185,15 +185,17 @@ static void *_pt_root(void *arg)
 #endif
 
     /* If this is a GCABLE thread, set its state appropriately */
-    if (thred->suspend & PT_THREAD_SETGCABLE)
+    if (thred->suspend & PT_THREAD_SETGCABLE) {
 	    thred->state |= PT_THREAD_GCABLE;
+}
     thred->suspend = 0;
 
     thred->prev = pt_book.last;
-    if (pt_book.last)
+    if (pt_book.last) {
         pt_book.last->next = thred;
-    else
+    } else {
         pt_book.first = thred;
+}
     thred->next = NULL;
     pt_book.last = thred;
     PR_Unlock(pt_book.ml);
@@ -209,22 +211,26 @@ static void *_pt_root(void *arg)
      */
     if (detached)
     {
-        while (!thred->okToDelete)
+        while (!thred->okToDelete) {
             PR_WaitCondVar(pt_book.cv, PR_INTERVAL_NO_TIMEOUT);
+}
     }
 
-    if (thred->state & PT_THREAD_SYSTEM)
+    if (thred->state & PT_THREAD_SYSTEM) {
         pt_book.system -= 1;
-    else if (--pt_book.user == pt_book.this_many)
+    } else if (--pt_book.user == pt_book.this_many) {
         PR_NotifyAllCondVar(pt_book.cv);
-    if (NULL == thred->prev)
+}
+    if (NULL == thred->prev) {
         pt_book.first = thred->next;
-    else
+    } else {
         thred->prev->next = thred->next;
-    if (NULL == thred->next)
+}
+    if (NULL == thred->next) {
         pt_book.last = thred->prev;
-    else
+    } else {
         thred->next->prev = thred->prev;
+}
     PR_Unlock(pt_book.ml);
 
     /*
@@ -259,7 +265,8 @@ static PRThread* pt_AttachThread(void)
      * either (e.g., PR_SetError()) as that will result in infinite
      * recursion.
      */
-    if (!_pr_initialized) return NULL;
+    if (!_pr_initialized) { return NULL;
+}
 
     /* PR_NEWZAP must not call PR_GetCurrentThread() */
     thred = PR_NEWZAP(PRThread);
@@ -281,10 +288,11 @@ static PRThread* pt_AttachThread(void)
 
         /* then put it into the list */
         thred->prev = pt_book.last;
-        if (pt_book.last)
+        if (pt_book.last) {
             pt_book.last->next = thred;
-        else
+        } else {
             pt_book.first = thred;
+}
         thred->next = NULL;
         pt_book.last = thred;
         PR_Unlock(pt_book.ml);
@@ -302,12 +310,14 @@ static PRThread* _PR_CreateThread(
     PRThread *thred;
     pthread_attr_t tattr;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
-    if ((PRIntn)PR_PRIORITY_FIRST > (PRIntn)priority)
+    if ((PRIntn)PR_PRIORITY_FIRST > (PRIntn)priority) {
         priority = PR_PRIORITY_FIRST;
-    else if ((PRIntn)PR_PRIORITY_LAST < (PRIntn)priority)
+    } else if ((PRIntn)PR_PRIORITY_LAST < (PRIntn)priority) {
         priority = PR_PRIORITY_LAST;
+}
 
     rv = _PT_PTHREAD_ATTR_INIT(&tattr);
     PR_ASSERT(0 == rv);
@@ -369,11 +379,13 @@ static PRThread* _PR_CreateThread(
         thred->arg = arg;
         thred->startFunc = start;
         thred->priority = priority;
-        if (PR_UNJOINABLE_THREAD == state)
+        if (PR_UNJOINABLE_THREAD == state) {
             thred->state |= PT_THREAD_DETACHED;
+}
 
-        if (PR_LOCAL_THREAD == scope)
+        if (PR_LOCAL_THREAD == scope) {
         	scope = PR_GLOBAL_THREAD;
+}
 			
         if (PR_GLOBAL_BOUND_THREAD == scope) {
 #if _POSIX_THREAD_PRIORITY_SCHEDULING > 0
@@ -391,14 +403,16 @@ static PRThread* _PR_CreateThread(
 			}
 #endif
 		}
-        if (PR_GLOBAL_THREAD == scope)
+        if (PR_GLOBAL_THREAD == scope) {
             thred->state |= PT_THREAD_GLOBAL;
-        else if (PR_GLOBAL_BOUND_THREAD == scope)
+        } else if (PR_GLOBAL_BOUND_THREAD == scope) {
             thred->state |= (PT_THREAD_GLOBAL | PT_THREAD_BOUND);
-		else	/* force it global */
+		} else {	/* force it global */
             thred->state |= PT_THREAD_GLOBAL;
-        if (PR_SYSTEM_THREAD == type)
+}
+        if (PR_SYSTEM_THREAD == type) {
             thred->state |= PT_THREAD_SYSTEM;
+}
 
         thred->suspend =(isGCAble) ? PT_THREAD_SETGCABLE : 0;
 
@@ -420,9 +434,10 @@ static PRThread* _PR_CreateThread(
 
         /* make the thread counted to the rest of the runtime */
         PR_Lock(pt_book.ml);
-        if (PR_SYSTEM_THREAD == type)
+        if (PR_SYSTEM_THREAD == type) {
             pt_book.system += 1;
-        else pt_book.user += 1;
+        } else { pt_book.user += 1;
+}
         PR_Unlock(pt_book.ml);
 
         /*
@@ -462,10 +477,11 @@ static PRThread* _PR_CreateThread(
         {
             PRIntn oserr = rv;
             PR_Lock(pt_book.ml);
-            if (thred->state & PT_THREAD_SYSTEM)
+            if (thred->state & PT_THREAD_SYSTEM) {
                 pt_book.system -= 1;
-            else if (--pt_book.user == pt_book.this_many)
+            } else if (--pt_book.user == pt_book.this_many) {
                 PR_NotifyAllCondVar(pt_book.cv);
+}
             PR_Unlock(pt_book.ml);
 
             PR_Free(thred->stack);
@@ -606,7 +622,8 @@ PR_IMPLEMENT(void) PR_DetachThread(void)
     int rv;
 
     _PT_PTHREAD_GETSPECIFIC(pt_book.key, thred);
-    if (NULL == thred) return;
+    if (NULL == thred) { return;
+}
     _pt_thread_death(thred);
     rv = pthread_setspecific(pt_book.key, NULL);
     PR_ASSERT(0 == rv);
@@ -616,10 +633,12 @@ PR_IMPLEMENT(PRThread*) PR_GetCurrentThread(void)
 {
     void *thred;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     _PT_PTHREAD_GETSPECIFIC(pt_book.key, thred);
-    if (NULL == thred) thred = pt_AttachThread();
+    if (NULL == thred) { thred = pt_AttachThread();
+}
     PR_ASSERT(NULL != thred);
     return (PRThread*)thred;
 }  /* PR_GetCurrentThread */
@@ -654,10 +673,11 @@ PR_IMPLEMENT(void) PR_SetThreadPriority(PRThread *thred, PRThreadPriority newPri
 
     PR_ASSERT(NULL != thred);
 
-    if ((PRIntn)PR_PRIORITY_FIRST > (PRIntn)newPri)
+    if ((PRIntn)PR_PRIORITY_FIRST > (PRIntn)newPri) {
         newPri = PR_PRIORITY_FIRST;
-    else if ((PRIntn)PR_PRIORITY_LAST < (PRIntn)newPri)
+    } else if ((PRIntn)PR_PRIORITY_LAST < (PRIntn)newPri) {
         newPri = PR_PRIORITY_LAST;
+}
 
 #if _POSIX_THREAD_PRIORITY_SCHEDULING > 0
     if (EPERM != pt_schedpriv)
@@ -681,8 +701,9 @@ PR_IMPLEMENT(void) PR_SetThreadPriority(PRThread *thred, PRThreadPriority newPri
     }
 #elif defined(_PR_NICE_PRIORITY_SCHEDULING)
     PR_Lock(pt_book.ml);
-    while (thred->tid == 0)
+    while (thred->tid == 0) {
         PR_WaitCondVar(pt_book.cv, PR_INTERVAL_NO_TIMEOUT);
+}
     PR_Unlock(pt_book.ml);
 
     errno = 0;
@@ -733,7 +754,8 @@ PR_IMPLEMENT(PRStatus) PR_Interrupt(PRThread *thred)
     */
     PRCondVar *cv;
     PR_ASSERT(NULL != thred);
-    if (NULL == thred) return PR_FAILURE;
+    if (NULL == thred) { return PR_FAILURE;
+}
 
     thred->state |= PT_THREAD_ABORTED;
 
@@ -744,8 +766,9 @@ PR_IMPLEMENT(PRStatus) PR_Interrupt(PRThread *thred)
         (void)PR_ATOMIC_INCREMENT(&cv->notify_pending);
         rv = pthread_cond_broadcast(&cv->cv);
         PR_ASSERT(0 == rv);
-        if (0 > PR_ATOMIC_DECREMENT(&cv->notify_pending))
+        if (0 > PR_ATOMIC_DECREMENT(&cv->notify_pending)) {
             PR_DestroyCondVar(cv);
+}
     }
     return PR_SUCCESS;
 }  /* PR_Interrupt */
@@ -771,8 +794,9 @@ PR_IMPLEMENT(void) PR_UnblockInterrupt(void)
 PR_IMPLEMENT(PRStatus) PR_Yield(void)
 {
     static PRBool warning = PR_TRUE;
-    if (warning) warning = _PR_Obsolete(
+    if (warning) { warning = _PR_Obsolete(
         "PR_Yield()", "PR_Sleep(PR_INTERVAL_NO_WAIT)");
+}
     return PR_Sleep(PR_INTERVAL_NO_WAIT);
 }
 
@@ -780,7 +804,8 @@ PR_IMPLEMENT(PRStatus) PR_Sleep(PRIntervalTime ticks)
 {
     PRStatus rv = PR_SUCCESS;
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     if (PR_INTERVAL_NO_WAIT == ticks)
     {
@@ -799,7 +824,8 @@ PR_IMPLEMENT(PRStatus) PR_Sleep(PRIntervalTime ticks)
         {
             PRIntervalTime now = PR_IntervalNow();
             PRIntervalTime delta = now - timein;
-            if (delta > ticks) break;
+            if (delta > ticks) { break;
+}
             rv = PR_WaitCondVar(cv, ticks - delta);
         } while (PR_SUCCESS == rv);
         PR_Unlock(_pr_sleeplock);
@@ -841,26 +867,32 @@ static void _pt_thread_death_internal(void *arg, PRBool callDestructors)
     if (thred->state & (PT_THREAD_FOREIGN|PT_THREAD_PRIMORD))
     {
         PR_Lock(pt_book.ml);
-        if (NULL == thred->prev)
+        if (NULL == thred->prev) {
             pt_book.first = thred->next;
-        else
+        } else {
             thred->prev->next = thred->next;
-        if (NULL == thred->next)
+}
+        if (NULL == thred->next) {
             pt_book.last = thred->prev;
-        else
+        } else {
             thred->next->prev = thred->prev;
+}
         PR_Unlock(pt_book.ml);
     }
-    if (callDestructors)
+    if (callDestructors) {
         _PR_DestroyThreadPrivate(thred);
+}
     PR_Free(thred->privateData);
-    if (NULL != thred->errorString)
+    if (NULL != thred->errorString) {
         PR_Free(thred->errorString);
-    if (NULL != thred->name)
+}
+    if (NULL != thred->name) {
         PR_Free(thred->name);
+}
     PR_Free(thred->stack);
-    if (NULL != thred->syspoll_list)
+    if (NULL != thred->syspoll_list) {
         PR_Free(thred->syspoll_list);
+}
 #if defined(_PR_POLL_WITH_SELECT)
     if (NULL != thred->selectfd_list)
         PR_Free(thred->selectfd_list);
@@ -966,8 +998,9 @@ void _PR_InitThreads(
      * nothing.
      */
     rv = _PT_PTHREAD_KEY_CREATE(&pt_book.key, _pt_thread_death);
-    if (0 != rv)
+    if (0 != rv) {
         PR_Assert("0 == rv", __FILE__, __LINE__);
+}
     pt_book.keyCreated = PR_TRUE;
     rv = pthread_setspecific(pt_book.key, thred);
     PR_ASSERT(0 == rv);
@@ -1085,12 +1118,14 @@ PR_IMPLEMENT(PRStatus) PR_Cleanup(void)
     if (me->state & PT_THREAD_PRIMORD)
     {
         PR_Lock(pt_book.ml);
-        while (pt_book.user > pt_book.this_many)
+        while (pt_book.user > pt_book.this_many) {
             PR_WaitCondVar(pt_book.cv, PR_INTERVAL_NO_TIMEOUT);
-        if (me->state & PT_THREAD_SYSTEM)
+}
+        if (me->state & PT_THREAD_SYSTEM) {
             pt_book.system -= 1;
-        else
+        } else {
             pt_book.user -= 1;
+}
         PR_Unlock(pt_book.ml);
 
         _PR_MD_EARLY_CLEANUP();
@@ -1289,8 +1324,9 @@ PR_IMPLEMENT(PRStatus) PR_EnumerateThreads(PREnumerator func, void *arg)
                     thred, thred->id));
 
             rv = func(thred, count++, arg);
-            if (rv != PR_SUCCESS)
+            if (rv != PR_SUCCESS) {
                 return rv;
+}
         }
         thred = next;
     }
@@ -1535,8 +1571,9 @@ PR_IMPLEMENT(void) PR_SuspendAll(void)
 #endif
     while (thred != NULL)
     {
-	    if ((thred != me) && _PT_IS_GCABLE_THREAD(thred))
+	    if ((thred != me) && _PT_IS_GCABLE_THREAD(thred)) {
     		pt_SuspendSet(thred);
+}
         thred = thred->next;
     }
 
@@ -1544,8 +1581,9 @@ PR_IMPLEMENT(void) PR_SuspendAll(void)
     thred = pt_book.first;
     while (thred != NULL)
     {
-	    if ((thred != me) && _PT_IS_GCABLE_THREAD(thred))
+	    if ((thred != me) && _PT_IS_GCABLE_THREAD(thred)) {
             pt_SuspendTest(thred);
+}
         thred = thred->next;
     }
 
@@ -1577,16 +1615,18 @@ PR_IMPLEMENT(void) PR_ResumeAll(void)
 
     while (thred != NULL)
     {
-	    if ((thred != me) && _PT_IS_GCABLE_THREAD(thred))
+	    if ((thred != me) && _PT_IS_GCABLE_THREAD(thred)) {
     	    pt_ResumeSet(thred);
+}
         thred = thred->next;
     }
 
     thred = pt_book.first;
     while (thred != NULL)
     {
-	    if ((thred != me) && _PT_IS_GCABLE_THREAD(thred))
+	    if ((thred != me) && _PT_IS_GCABLE_THREAD(thred)) {
     	    pt_ResumeTest(thred);
+}
         thred = thred->next;
     }
 
@@ -1621,14 +1661,16 @@ PR_IMPLEMENT(PRStatus) PR_SetCurrentThreadName(const char *name)
     }
 
     thread = PR_GetCurrentThread();
-    if (!thread)
+    if (!thread) {
         return PR_FAILURE;
+}
 
     PR_Free(thread->name);
     nameLen = strlen(name);
     thread->name = (char *)PR_Malloc(nameLen + 1);
-    if (!thread->name)
+    if (!thread->name) {
         return PR_FAILURE;
+}
     memcpy(thread->name, name, nameLen + 1);
 
 #if defined(OPENBSD) || defined(FREEBSD) || defined(DRAGONFLY)
@@ -1648,8 +1690,9 @@ PR_IMPLEMENT(PRStatus) PR_SetCurrentThreadName(const char *name)
 
     *(void**)(&dynamic_pthread_setname_np) =
         dlsym(RTLD_DEFAULT, "pthread_setname_np");
-    if (!dynamic_pthread_setname_np)
+    if (!dynamic_pthread_setname_np) {
         return PR_SUCCESS;
+}
 
     /*
      * The 15-character name length limit is an experimentally determined
@@ -1688,8 +1731,9 @@ PR_IMPLEMENT(PRStatus) PR_SetCurrentThreadName(const char *name)
 
 PR_IMPLEMENT(const char *) PR_GetThreadName(const PRThread *thread)
 {
-    if (!thread)
+    if (!thread) {
         return NULL;
+}
     return thread->name;
 }
 

@@ -78,8 +78,9 @@ sftk_parseTokens(char *tokenParams, sftk_parameters *parsed)
     sftk_token_parameters *tokens = NULL;
     int i = 0, count = 0, next;
 
-    if ((tokenParams == NULL) || (*tokenParams == 0))
+    if ((tokenParams == NULL) || (*tokenParams == 0)) {
         return;
+}
 
     /* first count the number of slots */
     for (tokenIndex = NSSUTIL_ArgStrip(tokenParams); *tokenIndex;
@@ -90,8 +91,9 @@ sftk_parseTokens(char *tokenParams, sftk_parameters *parsed)
     /* get the data structures */
     tokens = (sftk_token_parameters *)
         PORT_ZAlloc(count * sizeof(sftk_token_parameters));
-    if (tokens == NULL)
+    if (tokens == NULL) {
         return;
+}
 
     for (tokenIndex = NSSUTIL_ArgStrip(tokenParams), i = 0;
          *tokenIndex && i < count; i++) {
@@ -111,8 +113,9 @@ sftk_parseTokens(char *tokenParams, sftk_parameters *parsed)
                 PORT_Free(args);
             }
         }
-        if (name)
+        if (name) {
             PORT_Free(name);
+}
         tokenIndex = NSSUTIL_ArgStrip(tokenIndex);
     }
     parsed->token_count = i;

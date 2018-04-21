@@ -66,8 +66,9 @@ nsJPEGEncoder::InitFromData(const uint8_t* aData,
   // validate input format
   if (aInputFormat != INPUT_FORMAT_RGB &&
       aInputFormat != INPUT_FORMAT_RGBA &&
-      aInputFormat != INPUT_FORMAT_HOSTARGB)
+      aInputFormat != INPUT_FORMAT_HOSTARGB) {
     return NS_ERROR_INVALID_ARG;
+}
 
   // Stride is the padded width of each row, so it better be longer (I'm afraid
   // people will not understand what stride means, so check it well)

@@ -109,26 +109,32 @@ SandboxBroker::Policy::Policy(const Policy& aOther) {
 // Async signal safe
 bool
 SandboxBroker::Policy::ValidatePath(const char* path) const {
-  if (!path)
+  if (!path) {
     return false;
+}
 
   const size_t len = strlen(path);
   // No empty paths
-  if (len == 0)
+  if (len == 0) {
     return false;
+}
   // Paths must be absolute and not relative
-  if (path[0] != '/')
+  if (path[0] != '/') {
     return false;
+}
   // No trailing / (but "/" is valid)
-  if (len > 1 && path[len - 1] == '/')
+  if (len > 1 && path[len - 1] == '/') {
     return false;
+}
   // No trailing /.
-  if (len >= 2 && path[len - 2] == '/' && path[len - 1] == '.')
+  if (len >= 2 && path[len - 2] == '/' && path[len - 1] == '.') {
     return false;
+}
   // No trailing /..
   if (len >= 3 && path[len - 3] == '/' && path[len - 2] == '.' &&
-      path[len - 1] == '.')
+      path[len - 1] == '.') {
     return false;
+}
   // No /../ anywhere
   for (size_t i = 0; i < len; i++) {
     if (path[i] == '/' && (len - i) > 3) {
@@ -281,7 +287,8 @@ SandboxBroker::Policy::AddDynamic(int aPerms, const char* aPath)
     AddPrefix(aPerms, aPath);
   } else {
     size_t len = strlen(aPath);
-    if (!len) return;
+    if (!len) { return;
+}
     if (aPath[len - 1] == '/') {
       AddDir(aPerms, aPath);
     } else {
@@ -376,8 +383,9 @@ SandboxBroker::Policy::Lookup(const nsACString& aPath) const
   }
 
   // Not a legally constructed path
-  if (!ValidatePath(PromiseFlatCString(aPath).get()))
+  if (!ValidatePath(PromiseFlatCString(aPath).get())) {
     return 0;
+}
 
   // Now it's either an illegal access, or a recursive
   // directory permission. We'll have to check the entire
@@ -387,8 +395,9 @@ SandboxBroker::Policy::Lookup(const nsACString& aPath) const
     const nsACString& whiteListPath = iter.Key();
     const int& perms = iter.Data();
 
-    if (!(perms & RECURSIVE))
+    if (!(perms & RECURSIVE)) {
       continue;
+}
 
     // passed part starts with something on the whitelist
     if (StringBeginsWith(aPath, whiteListPath)) {

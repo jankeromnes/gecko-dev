@@ -97,8 +97,9 @@ MinidumpFileWriter::MinidumpFileWriter()
 }
 
 MinidumpFileWriter::~MinidumpFileWriter() {
-  if (close_file_when_destroyed_)
+  if (close_file_when_destroyed_) {
     Close();
+}
 }
 
 bool MinidumpFileWriter::Open(const char *path) {
@@ -159,8 +160,9 @@ bool MinidumpFileWriter::CopyStringToMDString(const wchar_t *str,
     // Copy the string character by character
     while (length && result) {
       UTF32ToUTF16Char(*str, out);
-      if (!out[0])
+      if (!out[0]) {
         return false;
+}
 
       // Process one character at a time
       --length;
@@ -188,8 +190,9 @@ bool MinidumpFileWriter::CopyStringToMDString(const char *str,
   // Copy the string character by character
   while (length && result) {
     int conversion_count = UTF8ToUTF16Char(str, length, out);
-    if (!conversion_count)
+    if (!conversion_count) {
       return false;
+}
 
     // Move the pointer along based on the nubmer of converted characters
     length -= conversion_count;
@@ -213,15 +216,18 @@ bool MinidumpFileWriter::WriteStringCore(const CharType *str,
   // Calculate the mdstring length by either limiting to |length| as passed in
   // or by finding the location of the NULL character.
   unsigned int mdstring_length = 0;
-  if (!length)
+  if (!length) {
     length = INT_MAX;
-  for (; mdstring_length < length && str[mdstring_length]; ++mdstring_length)
+}
+  for (; mdstring_length < length && str[mdstring_length]; ++mdstring_length) {
     ;
+}
 
   // Allocate the string buffer
   TypedMDRVA<MDString> mdstring(this);
-  if (!mdstring.AllocateObjectAndArray(mdstring_length + 1, sizeof(uint16_t)))
+  if (!mdstring.AllocateObjectAndArray(mdstring_length + 1, sizeof(uint16_t))) {
     return false;
+}
 
   // Set length excluding the NULL and copy the string
   mdstring.get()->length =
@@ -233,8 +239,9 @@ bool MinidumpFileWriter::WriteStringCore(const CharType *str,
     uint16_t ch = 0;
     result = mdstring.CopyIndexAfterObject(mdstring_length, &ch, sizeof(ch));
 
-    if (result)
+    if (result) {
       *location = mdstring.location();
+}
   }
 
   return result;
@@ -256,10 +263,12 @@ bool MinidumpFileWriter::WriteMemory(const void *src, size_t size,
   assert(output);
   UntypedMDRVA mem(this);
 
-  if (!mem.Allocate(size))
+  if (!mem.Allocate(size)) {
     return false;
-  if (!mem.Copy(src, mem.size()))
+}
+  if (!mem.Copy(src, mem.size())) {
     return false;
+}
 
   output->start_of_memory_range = reinterpret_cast<uint64_t>(src);
   output->memory = mem.location();
@@ -291,12 +300,14 @@ MDRVA MinidumpFileWriter::Allocate(size_t size) {
     size_t minimal_growth = getpagesize();
 
     // Ensure that the file grows by at least the size of a memory page
-    if (growth < minimal_growth)
+    if (growth < minimal_growth) {
       growth = minimal_growth;
+}
 
     size_t new_size = size_ + growth;
-    if (ftruncate(file_, new_size) != 0)
+    if (ftruncate(file_, new_size) != 0) {
       return kInvalidMDRVA;
+}
 
     size_ = new_size;
   }
@@ -313,8 +324,9 @@ bool MinidumpFileWriter::Copy(MDRVA position, const void *src, ssize_t size) {
   assert(file_ != -1);
 
   // Ensure that the data will fit in the allocated space
-  if (static_cast<size_t>(size + position) > size_)
+  if (static_cast<size_t>(size + position) > size_) {
     return false;
+}
 
   // Seek and write the data
 #if defined(__linux__) && __linux__

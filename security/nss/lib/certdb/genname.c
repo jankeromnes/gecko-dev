@@ -180,17 +180,19 @@ cert_CopyOneGeneralName(PLArenaPool *arena, CERTGeneralName *dest,
         case certDirectoryName:
             rv = SECITEM_CopyItem(arena, &dest->derDirectoryName,
                                   &src->derDirectoryName);
-            if (rv == SECSuccess)
+            if (rv == SECSuccess) {
                 rv = CERT_CopyName(arena, &dest->name.directoryName,
                                    &src->name.directoryName);
+}
             break;
 
         case certOtherName:
             rv = SECITEM_CopyItem(arena, &dest->name.OthName.name,
                                   &src->name.OthName.name);
-            if (rv == SECSuccess)
+            if (rv == SECSuccess) {
                 rv = SECITEM_CopyItem(arena, &dest->name.OthName.oid,
                                       &src->name.OthName.oid);
+}
             break;
 
         default:
@@ -235,20 +237,24 @@ CERT_CreateGeneralNameList(CERTGeneralName *name)
         goto done;
     }
     list = PORT_ArenaZNew(arena, CERTGeneralNameList);
-    if (!list)
+    if (!list) {
         goto loser;
+}
     if (name != NULL) {
         SECStatus rv;
         list->name = CERT_NewGeneralName(arena, (CERTGeneralNameType)0);
-        if (!list->name)
+        if (!list->name) {
             goto loser;
+}
         rv = CERT_CopyGeneralName(arena, list->name, name);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
     list->lock = PZ_NewLock(nssILockList);
-    if (!list->lock)
+    if (!list->lock) {
         goto loser;
+}
     list->arena = arena;
     list->refCount = 1;
 done:
@@ -310,8 +316,9 @@ CERT_EncodeGeneralName(CERTGeneralName *genName, SECItem *dest,
     /* TODO: mark arena */
     if (dest == NULL) {
         dest = PORT_ArenaZNew(arena, SECItem);
-        if (!dest)
+        if (!dest) {
             goto loser;
+}
     }
     if (genName->type == certDirectoryName) {
         if (genName->derDirectoryName.data == NULL) {
@@ -319,8 +326,9 @@ CERT_EncodeGeneralName(CERTGeneralName *genName, SECItem *dest,
             SECItem *pre_dest = SEC_ASN1EncodeItem(
                 arena, &(genName->derDirectoryName),
                 &(genName->name.directoryName), CERT_NameTemplate);
-            if (!pre_dest)
+            if (!pre_dest) {
                 goto loser;
+}
         }
         if (genName->derDirectoryName.data == NULL) {
             goto loser;
@@ -435,8 +443,9 @@ CERT_DecodeGeneralName(PLArenaPool *reqArena, SECItem *encodedName,
     genNameType = (CERTGeneralNameType)((*(newEncodedName->data) & 0x0f) + 1);
     if (genName == NULL) {
         genName = CERT_NewGeneralName(reqArena, genNameType);
-        if (!genName)
+        if (!genName) {
             goto loser;
+}
     } else {
         genName->type = genNameType;
         genName->l.prev = genName->l.next = &genName->l;
@@ -474,14 +483,16 @@ CERT_DecodeGeneralName(PLArenaPool *reqArena, SECItem *encodedName,
             goto loser;
     }
     rv = SEC_QuickDERDecodeItem(reqArena, genName, template, newEncodedName);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
     if (genNameType == certDirectoryName) {
         rv = SEC_QuickDERDecodeItem(reqArena, &(genName->name.directoryName),
                                     CERT_NameTemplate,
                                     &(genName->derDirectoryName));
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
     }
 
     /* TODO: unmark arena */
@@ -506,8 +517,9 @@ cert_DecodeGeneralNames(PLArenaPool *arena, SECItem **encodedGenName)
     /* TODO: mark arena */
     while (*encodedGenName != NULL) {
         currentName = CERT_DecodeGeneralName(arena, *encodedGenName, NULL);
-        if (currentName == NULL)
+        if (currentName == NULL) {
             break;
+}
         if (head == NULL) {
             head = &(currentName->l);
             tail = head;
@@ -661,8 +673,9 @@ cert_DecodeNameConstraint(PLArenaPool *reqArena, SECItem *encodedConstraint)
     }
     /* TODO: mark arena */
     constraint = PORT_ArenaZNew(reqArena, CERTNameConstraint);
-    if (!constraint)
+    if (!constraint) {
         goto loser;
+}
     rv = SEC_QuickDERDecodeItem(
         reqArena, constraint, CERTNameConstraintTemplate, newEncodedConstraint);
     if (rv != SECSuccess) {
@@ -800,16 +813,18 @@ CERT_CopyGeneralName(PLArenaPool *arena, CERTGeneralName *dest,
     /* TODO: mark arena */
     do {
         rv = cert_CopyOneGeneralName(arena, dest, src);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
         src = CERT_GetNextGeneralName(src);
         /* if there is only one general name, we shouldn't do this */
         if (src != srcHead) {
             if (dest->l.next == &destHead->l) {
                 CERTGeneralName *temp;
                 temp = CERT_NewGeneralName(arena, (CERTGeneralNameType)0);
-                if (!temp)
+                if (!temp) {
                     goto loser;
+}
                 temp->l.next = &destHead->l;
                 temp->l.prev = &dest->l;
                 destHead->l.prev = &temp->l;
@@ -848,8 +863,9 @@ CERT_CopyNameConstraint(PLArenaPool *arena, CERTNameConstraint *dest,
     /* TODO: mark arena */
     if (dest == NULL) {
         dest = PORT_ArenaZNew(arena, CERTNameConstraint);
-        if (!dest)
+        if (!dest) {
             goto loser;
+}
         /* mark that it is not linked */
         dest->name.l.prev = dest->name.l.next = &(dest->name.l);
     }
@@ -948,8 +964,9 @@ CERT_GetNameConstraintByType(CERTNameConstraint *constraints,
     void *mark = NULL;
 
     *returnList = NULL;
-    if (!constraints)
+    if (!constraints) {
         return SECSuccess;
+}
 
     mark = PORT_ArenaMark(arena);
 
@@ -959,8 +976,9 @@ CERT_GetNameConstraintByType(CERTNameConstraint *constraints,
         if (current->name.type == type) {
             CERTNameConstraint *temp;
             temp = CERT_CopyNameConstraint(arena, NULL, current);
-            if (temp == NULL)
+            if (temp == NULL) {
                 goto loser;
+}
             *returnList = CERT_AddNameConstraint(*returnList, temp);
         }
         current = CERT_GetNextNameConstraint(current);
@@ -979,8 +997,9 @@ CERT_GetGeneralNameByType(CERTGeneralName *genNames, CERTGeneralNameType type,
 {
     CERTGeneralName *current;
 
-    if (!genNames)
+    if (!genNames) {
         return NULL;
+}
     current = genNames;
 
     do {
@@ -1056,8 +1075,9 @@ cert_ExtractDNEmailAddrs(CERTGeneralName *name, PLArenaPool *arena)
                 tag == SEC_OID_RFC1274_MAIL) { /* email AVA */
                 CERTGeneralName *newName = NULL;
                 SECItem *avaValue = CERT_DecodeAVAValue(&nAVA->value);
-                if (!avaValue)
+                if (!avaValue) {
                     goto loser;
+}
                 rv = SECFailure;
                 newName = CERT_NewGeneralName(arena, certRFC822Name);
                 if (newName) {
@@ -1065,8 +1085,9 @@ cert_ExtractDNEmailAddrs(CERTGeneralName *name, PLArenaPool *arena)
                         SECITEM_CopyItem(arena, &newName->name.other, avaValue);
                 }
                 SECITEM_FreeItem(avaValue, PR_TRUE);
-                if (rv != SECSuccess)
+                if (rv != SECSuccess) {
                     goto loser;
+}
                 nameList = cert_CombineNamesLists(nameList, newName);
             } /* handle one email AVA */
         }     /* loop over AVAs */
@@ -1124,8 +1145,9 @@ CERT_GetConstrainedCertificateNames(const CERTCertificate *cert,
     ** for them, add them to the name list
     */
     rv = cert_ExtractDNEmailAddrs(DN, arena);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* Now extract any GeneralNames from the subject name names extension. */
     SAN = cert_GetSubjectAltNameList(cert, arena);
@@ -1180,26 +1202,31 @@ compareURIN2C(const SECItem *name, const SECItem *constraint)
     /* The spec is silent on intepreting zero-length constraints.
     ** We interpret them as matching no URI names.
     */
-    if (!constraint->len)
+    if (!constraint->len) {
         return SECFailure;
+}
     if (constraint->data[0] != '.') {
         /* constraint is a host name. */
         if (name->len != constraint->len ||
             PL_strncasecmp((char *)name->data, (char *)constraint->data,
-                           constraint->len))
+                           constraint->len)) {
             return SECFailure;
+}
         return SECSuccess;
     }
     /* constraint is a domain name. */
-    if (name->len < constraint->len)
+    if (name->len < constraint->len) {
         return SECFailure;
+}
     offset = name->len - constraint->len;
     if (PL_strncasecmp((char *)(name->data + offset), (char *)constraint->data,
-                       constraint->len))
+                       constraint->len)) {
         return SECFailure;
+}
     if (!offset ||
-        (name->data[offset - 1] == '.') + (constraint->data[0] == '.') == 1)
+        (name->data[offset - 1] == '.') + (constraint->data[0] == '.') == 1) {
         return SECSuccess;
+}
     return SECFailure;
 }
 
@@ -1234,17 +1261,21 @@ compareDNSN2C(const SECItem *name, const SECItem *constraint)
     /* The spec is silent on intepreting zero-length constraints.
     ** We interpret them as matching all DNSnames.
     */
-    if (!constraint->len)
+    if (!constraint->len) {
         return SECSuccess;
-    if (name->len < constraint->len)
+}
+    if (name->len < constraint->len) {
         return SECFailure;
+}
     offset = name->len - constraint->len;
     if (PL_strncasecmp((char *)(name->data + offset), (char *)constraint->data,
-                       constraint->len))
+                       constraint->len)) {
         return SECFailure;
+}
     if (!offset ||
-        (name->data[offset - 1] == '.') + (constraint->data[0] == '.') == 1)
+        (name->data[offset - 1] == '.') + (constraint->data[0] == '.') == 1) {
         return SECSuccess;
+}
     return SECFailure;
 }
 
@@ -1260,12 +1291,15 @@ static SECStatus
 compareRFC822N2C(const SECItem *name, const SECItem *constraint)
 {
     int offset;
-    if (!constraint->len)
+    if (!constraint->len) {
         return SECSuccess;
-    if (name->len < constraint->len)
+}
+    if (name->len < constraint->len) {
         return SECFailure;
-    if (constraint->len == 1 && constraint->data[0] == '.')
+}
+    if (constraint->len == 1 && constraint->data[0] == '.') {
         return SECSuccess;
+}
     for (offset = constraint->len - 1; offset >= 0; --offset) {
         if (constraint->data[offset] == '@') {
             return (name->len == constraint->len &&
@@ -1277,12 +1311,15 @@ compareRFC822N2C(const SECItem *name, const SECItem *constraint)
     }
     offset = name->len - constraint->len;
     if (PL_strncasecmp((char *)(name->data + offset), (char *)constraint->data,
-                       constraint->len))
+                       constraint->len)) {
         return SECFailure;
-    if (constraint->data[0] == '.')
+}
+    if (constraint->data[0] == '.') {
         return SECSuccess;
-    if (offset > 0 && name->data[offset - 1] == '@')
+}
+    if (offset > 0 && name->data[offset - 1] == '@') {
         return SECSuccess;
+}
     return SECFailure;
 }
 
@@ -1298,16 +1335,18 @@ compareIPaddrN2C(const SECItem *name, const SECItem *constraint)
     int i;
     if (name->len == 4 && constraint->len == 8) { /* ipv4 addr */
         for (i = 0; i < 4; i++) {
-            if ((name->data[i] ^ constraint->data[i]) & constraint->data[i + 4])
+            if ((name->data[i] ^ constraint->data[i]) & constraint->data[i + 4]) {
                 goto loser;
+}
         }
         return SECSuccess;
     }
     if (name->len == 16 && constraint->len == 32) { /* ipv6 addr */
         for (i = 0; i < 16; i++) {
             if ((name->data[i] ^ constraint->data[i]) &
-                constraint->data[i + 16])
+                constraint->data[i + 16]) {
                 goto loser;
+}
         }
         return SECSuccess;
     }
@@ -1335,8 +1374,9 @@ parseUriHostname(SECItem *item)
             break;
         }
     }
-    if (!found)
+    if (!found) {
         return SECFailure;
+}
     /* now look for a '/', which is an upper bound in the end of the name */
     for (i = 0; (unsigned)i < item->len; ++i) {
         if (item->data[i] == '/') {
@@ -1440,14 +1480,17 @@ cert_CompareNameWithConstraints(const CERTGeneralName *name,
                             while (nAVAs && *nAVAs) { /* loop over name AVAs */
                                 CERTAVA *nAVA = *nAVAs++;
                                 status = CERT_CompareAVA(cAVA, nAVA);
-                                if (status == SECEqual)
+                                if (status == SECEqual) {
                                     break;
+}
                             } /* loop over name AVAs */
-                            if (status != SECEqual)
+                            if (status != SECEqual) {
                                 break;
+}
                         } /* loop over constraint AVAs */
-                        if (status != SECEqual)
+                        if (status != SECEqual) {
                             break;
+}
                     } /* loop over name RDNs and constraint RDNs */
                     matched = (status == SECEqual) ? SECSuccess : SECFailure;
                     break;
@@ -1495,15 +1538,17 @@ cert_CompareNameWithConstraints(const CERTGeneralName *name,
                 rv = SECFailure;
                 break;
         }
-        if (matched == SECSuccess || rv != SECSuccess)
+        if (matched == SECSuccess || rv != SECSuccess) {
             break;
+}
         current = CERT_GetNextNameConstraint((CERTNameConstraint *)current);
     } while (current != constraints);
     if (rv == SECSuccess) {
-        if (matched == SECSuccess)
+        if (matched == SECSuccess) {
             rv = excluded ? SECFailure : SECSuccess;
-        else
+        } else {
             rv = excluded ? SECSuccess : SECFailure;
+}
         return rv;
     }
 
@@ -1781,8 +1826,9 @@ CERT_CompareNameSpace(CERTCertificate *cert, CERTGeneralName *namesList,
     CERTCertificate *badCert = NULL;
 
     /* If no names to check, then no names can be bad. */
-    if (!namesList)
+    if (!namesList) {
         goto done;
+}
     rv = CERT_FindNameConstraintsExten(reqArena, cert, &constraints);
     if (rv != SECSuccess) {
         count = -1;
@@ -1805,8 +1851,9 @@ done:
     if (rv != SECSuccess) {
         badCert = (count >= 0) ? certsList[count] : cert;
     }
-    if (pBadCert)
+    if (pBadCert) {
         *pBadCert = badCert;
+}
 
     return rv;
 }

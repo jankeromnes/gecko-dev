@@ -448,8 +448,9 @@ CollectNicknames(NSSCertificate *c, void *data)
         names->numnicknames++;
     }
 
-    if (nickname)
+    if (nickname) {
         PORT_Free(nickname);
+}
     return (PR_SUCCESS);
 }
 
@@ -714,17 +715,20 @@ CERT_DistNamesFromCertList(CERTCertList *certList)
     }
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         goto loser;
+}
     dnames = PORT_ArenaZNew(arena, CERTDistNames);
-    if (dnames == NULL)
+    if (dnames == NULL) {
         goto loser;
+}
 
     dnames->arena = arena;
     dnames->nnames = listLen;
     dnames->names = names = PORT_ArenaZNewArray(arena, SECItem, listLen);
-    if (names == NULL)
+    if (names == NULL) {
         goto loser;
+}
 
     node = CERT_LIST_HEAD(certList);
     while (!CERT_LIST_END(node, certList)) {
@@ -754,34 +758,41 @@ CERT_DistNamesFromNicknames(CERTCertDBHandle *handle, char **nicknames,
     CERTCertificate *cert = NULL;
 
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         goto loser;
+}
     dnames = PORT_ArenaZNew(arena, CERTDistNames);
-    if (dnames == NULL)
+    if (dnames == NULL) {
         goto loser;
+}
 
     dnames->arena = arena;
     dnames->nnames = nnames;
     dnames->names = names = PORT_ArenaZNewArray(arena, SECItem, nnames);
-    if (names == NULL)
+    if (names == NULL) {
         goto loser;
+}
 
     for (i = 0; i < nnames; i++) {
         cert = CERT_FindCertByNicknameOrEmailAddr(handle, nicknames[i]);
-        if (cert == NULL)
+        if (cert == NULL) {
             goto loser;
+}
         rv = SECITEM_CopyItem(arena, &names[i], &cert->derSubject);
-        if (rv == SECFailure)
+        if (rv == SECFailure) {
             goto loser;
+}
         CERT_DestroyCertificate(cert);
     }
     return dnames;
 
 loser:
-    if (cert != NULL)
+    if (cert != NULL) {
         CERT_DestroyCertificate(cert);
-    if (arena != NULL)
+}
+    if (arena != NULL) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return NULL;
 }
 
@@ -1067,11 +1078,13 @@ CERT_CertChainFromCert(CERTCertificate *cert, SECCertUsage usage,
 
     chain = (CERTCertificateList *)PORT_ArenaAlloc(arena,
                                                    sizeof(CERTCertificateList));
-    if (!chain)
+    if (!chain) {
         goto loser;
+}
     chain->certs = (SECItem *)PORT_ArenaAlloc(arena, len * sizeof(SECItem));
-    if (!chain->certs)
+    if (!chain->certs) {
         goto loser;
+}
     i = 0;
     stanCert = stanChain[i];
     while (stanCert) {
@@ -1134,19 +1147,23 @@ CERT_CertListFromCert(CERTCertificate *cert)
 
     /* arena for SecCertificateList */
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         goto no_memory;
+}
 
     /* build the CERTCertificateList */
     chain = (CERTCertificateList *)PORT_ArenaAlloc(arena, sizeof(CERTCertificateList));
-    if (chain == NULL)
+    if (chain == NULL) {
         goto no_memory;
+}
     chain->certs = (SECItem *)PORT_ArenaAlloc(arena, 1 * sizeof(SECItem));
-    if (chain->certs == NULL)
+    if (chain->certs == NULL) {
         goto no_memory;
+}
     rv = SECITEM_CopyItem(arena, chain->certs, &(cert->derCert));
-    if (rv < 0)
+    if (rv < 0) {
         goto loser;
+}
     chain->len = 1;
     chain->arena = arena;
 
@@ -1173,24 +1190,28 @@ CERT_DupCertList(const CERTCertificateList *oldList)
 
     /* arena for SecCertificateList */
     arena = PORT_NewArena(DER_DEFAULT_CHUNKSIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         goto no_memory;
+}
 
     /* now build the CERTCertificateList */
     newList = PORT_ArenaNew(arena, CERTCertificateList);
-    if (newList == NULL)
+    if (newList == NULL) {
         goto no_memory;
+}
     newList->arena = arena;
     newItem = (SECItem *)PORT_ArenaAlloc(arena, len * sizeof(SECItem));
-    if (newItem == NULL)
+    if (newItem == NULL) {
         goto no_memory;
+}
     newList->certs = newItem;
     newList->len = len;
 
     for (oldItem = oldList->certs; len > 0; --len, ++newItem, ++oldItem) {
         rv = SECITEM_CopyItem(arena, newItem, oldItem);
-        if (rv < 0)
+        if (rv < 0) {
             goto loser;
+}
     }
     return newList;
 

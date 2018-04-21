@@ -91,7 +91,8 @@ void vp8_temporal_filter_apply_c(unsigned char *frame1, unsigned int stride,
       modifier += rounding;
       modifier >>= strength;
 
-      if (modifier > 16) modifier = 16;
+      if (modifier > 16) { modifier = 16;
+}
 
       modifier = 16 - modifier;
       modifier *= filter_weight;
@@ -235,7 +236,8 @@ static void vp8_temporal_filter_iterate_c(VP8_COMP *cpi, int frame_count,
 #endif
 
       for (frame = 0; frame < frame_count; ++frame) {
-        if (cpi->frames[frame] == NULL) continue;
+        if (cpi->frames[frame] == NULL) { continue;
+}
 
         mbd->block[0].bmi.mv.as_mv.row = 0;
         mbd->block[0].bmi.mv.as_mv.col = 0;

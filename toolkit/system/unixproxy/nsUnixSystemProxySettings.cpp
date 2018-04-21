@@ -110,8 +110,9 @@ IsInNoProxyList(const nsACString& aHost, int32_t aPort, const char* noProxyVal)
   NS_ASSERTION(aPort >= 0, "Negative port?");
 
   nsAutoCString noProxy(noProxyVal);
-  if (noProxy.EqualsLiteral("*"))
+  if (noProxy.EqualsLiteral("*")) {
     return true;
+}
 
   noProxy.StripWhitespace();
 
@@ -149,8 +150,9 @@ IsInNoProxyList(const nsACString& aHost, int32_t aPort, const char* noProxyVal)
     if (port == -1 || port == aPort) {
       nsDependentCSubstring hostStr(pos, colon);
       // By using StringEndsWith instead of an equality comparator, we can include sub-domains
-      if (StringEndsWith(aHost, hostStr, nsCaseInsensitiveCStringComparator()))
+      if (StringEndsWith(aHost, hostStr, nsCaseInsensitiveCStringComparator())) {
         return true;
+}
     }
 
     pos = nextPos;
@@ -206,8 +208,9 @@ GetProxyFromEnvironment(const nsACString& aScheme,
   bool isHTTP;
   rv = proxyURI->SchemeIs("http", &isHTTP);
   NS_ENSURE_SUCCESS(rv, rv);
-  if (!isHTTP)
+  if (!isHTTP) {
     return NS_ERROR_UNKNOWN_PROTOCOL;
+}
 
   nsAutoCString proxyHost;
   rv = proxyURI->GetHost(proxyHost);
@@ -231,8 +234,9 @@ nsUnixSystemProxySettings::SetProxyResultFromGConf(const char* aKeyBase, const c
   nsAutoCString host;
   nsresult rv = mGConf->GetString(hostKey, host);
   NS_ENSURE_SUCCESS(rv, rv);
-  if (host.IsEmpty())
+  if (host.IsEmpty()) {
     return NS_ERROR_FAILURE;
+}
 
   nsAutoCString portKey;
   portKey.AppendASCII(aKeyBase);
@@ -242,8 +246,9 @@ nsUnixSystemProxySettings::SetProxyResultFromGConf(const char* aKeyBase, const c
   NS_ENSURE_SUCCESS(rv, rv);
 
   /* When port is 0, proxy is not considered as enabled even if host is set. */
-  if (port == 0)
+  if (port == 0) {
     return NS_ERROR_FAILURE;
+}
 
   SetProxyResult(aType, host, port, aResult);
   return NS_OK;
@@ -267,16 +272,18 @@ nsUnixSystemProxySettings::SetProxyResultFromGSettings(const char* aKeyBase, con
   nsAutoCString host;
   rv = proxy_settings->GetString(NS_LITERAL_CSTRING("host"), host);
   NS_ENSURE_SUCCESS(rv, rv);
-  if (host.IsEmpty())
+  if (host.IsEmpty()) {
     return NS_ERROR_FAILURE;
+}
 
   int32_t port;
   rv = proxy_settings->GetInt(NS_LITERAL_CSTRING("port"), &port);
   NS_ENSURE_SUCCESS(rv, rv);
 
   /* When port is 0, proxy is not considered as enabled even if host is set. */
-  if (port == 0)
+  if (port == 0) {
     return NS_ERROR_FAILURE;
+}
 
   SetProxyResult(aType, host, port, aResult);
   return NS_OK;
@@ -286,8 +293,9 @@ nsUnixSystemProxySettings::SetProxyResultFromGSettings(const char* aKeyBase, con
 static void
 proxy_MaskIPv6Addr(PRIPv6Addr &addr, uint16_t mask_len)
 {
-  if (mask_len == 128)
+  if (mask_len == 128) {
     return;
+}
 
   if (mask_len > 96) {
     addr.pr_s6_addr32[3] = PR_htonl(
@@ -318,18 +326,20 @@ static bool ConvertToIPV6Addr(const nsACString& aName,
 {
   PRNetAddr addr;
   // try to convert hostname to IP
-  if (PR_StringToNetAddr(PromiseFlatCString(aName).get(), &addr) != PR_SUCCESS)
+  if (PR_StringToNetAddr(PromiseFlatCString(aName).get(), &addr) != PR_SUCCESS) {
     return false;
+}
 
   // convert parsed address to IPv6
   if (addr.raw.family == PR_AF_INET) {
     // convert to IPv4-mapped address
     PR_ConvertIPv4AddrToIPv6(addr.inet.ip, aAddr);
     if (aMask) {
-      if (*aMask <= 32)
+      if (*aMask <= 32) {
         *aMask += 96;
-      else
+      } else {
         return false;
+}
     }
   } else if (addr.raw.family == PR_AF_INET6) {
     // copy the address
@@ -344,13 +354,15 @@ static bool ConvertToIPV6Addr(const nsACString& aName,
 static bool HostIgnoredByProxy(const nsACString& aIgnore,
                                const nsACString& aHost)
 {
-  if (aIgnore.Equals(aHost, nsCaseInsensitiveCStringComparator()))
+  if (aIgnore.Equals(aHost, nsCaseInsensitiveCStringComparator())) {
     return true;
+}
 
   if (aIgnore.First() == '*' &&
       StringEndsWith(aHost, nsDependentCSubstring(aIgnore, 1),
-                     nsCaseInsensitiveCStringComparator()))
+                     nsCaseInsensitiveCStringComparator())) {
     return true;
+}
 
   int32_t mask = 128;
   nsReadingIterator<char> start;
@@ -376,8 +388,9 @@ static bool HostIgnoredByProxy(const nsACString& aIgnore,
   nsDependentCSubstring ignoreStripped(start, slash);
   PRIPv6Addr ignoreAddr, hostAddr;
   if (!ConvertToIPV6Addr(ignoreStripped, &ignoreAddr, &mask) ||
-      !ConvertToIPV6Addr(aHost, &hostAddr, nullptr))
+      !ConvertToIPV6Addr(aHost, &hostAddr, nullptr)) {
     return false;
+}
 
   proxy_MaskIPv6Addr(ignoreAddr, mask);
   proxy_MaskIPv6Addr(hostAddr, mask);
@@ -424,8 +437,9 @@ nsUnixSystemProxySettings::GetProxyFromGConf(const nsACString& aScheme,
   nsresult rv;
   if (!useHttpProxyForAll) {
     rv = SetProxyResultFromGConf("/system/proxy/socks_", "SOCKS", aResult);
-    if (NS_SUCCEEDED(rv))
+    if (NS_SUCCEEDED(rv)) {
       return rv;
+}
   }
 
   if (aScheme.LowerCaseEqualsLiteral("http") || useHttpProxyForAll) {
@@ -480,8 +494,9 @@ nsUnixSystemProxySettings::GetProxyFromGSettings(const nsACString& aScheme,
   } else if (aScheme.LowerCaseEqualsLiteral("https")) {
     rv = SetProxyResultFromGSettings("org.gnome.system.proxy.https", "PROXY", aResult);
     /* Try to use HTTP proxy when HTTPS proxy is not explicitly defined */
-    if (rv != NS_OK)
+    if (rv != NS_OK) {
       rv = SetProxyResultFromGSettings("org.gnome.system.proxy.http", "PROXY", aResult);
+}
   } else if (aScheme.LowerCaseEqualsLiteral("ftp")) {
     rv = SetProxyResultFromGSettings("org.gnome.system.proxy.ftp", "PROXY", aResult);
   } else {
@@ -508,11 +523,13 @@ nsUnixSystemProxySettings::GetProxyForURI(const nsACString & aSpec,
 {
   if (mProxySettings) {
     nsresult rv = GetProxyFromGSettings(aScheme, aHost, aPort, aResult);
-    if (NS_SUCCEEDED(rv))
+    if (NS_SUCCEEDED(rv)) {
       return rv;
+}
   }
-  if (mGConf)
+  if (mGConf) {
     return GetProxyFromGConf(aScheme, aHost, aPort, aResult);
+}
 
   return GetProxyFromEnvironment(aScheme, aHost, aPort, aResult);
 }

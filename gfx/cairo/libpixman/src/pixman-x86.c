@@ -158,19 +158,24 @@ detect_cpu_features (void)
     uint32_t a, b, c, d;
     cpu_features_t features = 0;
 
-    if (!have_cpuid())
+    if (!have_cpuid()) {
 	return features;
+}
 
     /* Get feature bits */
     pixman_cpuid (0x01, &a, &b, &c, &d);
-    if (d & (1 << 15))
+    if (d & (1 << 15)) {
 	features |= X86_CMOV;
-    if (d & (1 << 23))
+}
+    if (d & (1 << 23)) {
 	features |= X86_MMX;
-    if (d & (1 << 25))
+}
+    if (d & (1 << 25)) {
 	features |= X86_SSE;
-    if (d & (1 << 26))
+}
+    if (d & (1 << 26)) {
 	features |= X86_SSE2;
+}
 
     /* Check for AMD specific features */
     if ((features & X86_MMX) && !(features & X86_SSE))
@@ -193,8 +198,9 @@ detect_cpu_features (void)
 	    {
 		pixman_cpuid (0x80000001, &a, &b, &c, &d);
 
-		if (d & (1 << 22))
+		if (d & (1 << 22)) {
 		    features |= X86_MMX_EXTENSIONS;
+}
 	    }
 	}
     }
@@ -233,8 +239,9 @@ _pixman_x86_get_implementations (pixman_implementation_t *imp)
 #endif
 
 #ifdef USE_SSE2
-    if (!_pixman_disabled ("sse2") && have_feature (SSE2_BITS))
+    if (!_pixman_disabled ("sse2") && have_feature (SSE2_BITS)) {
 	imp = _pixman_implementation_create_sse2 (imp);
+}
 #endif
 
     return imp;

@@ -500,19 +500,22 @@ static PRStatus CopyHostent(
 		to->h_length = 16;
 	} else {
 #if defined(_PR_INET6) || defined(_PR_INET6_PROBE)
-		if (AF_INET6 == from->h_addrtype)
+		if (AF_INET6 == from->h_addrtype) {
 			to->h_addrtype = PR_AF_INET6;
-		else
+		} else {
 #endif
 			to->h_addrtype = from->h_addrtype;
+}
 		to->h_length = from->h_length;
 	}
 
 	/* Copy the official name */
-	if (!from->h_name) return PR_FAILURE;
+	if (!from->h_name) { return PR_FAILURE;
+}
 	len = strlen(from->h_name) + 1;
 	to->h_name = Alloc(len, buf, bufsize, 0);
-	if (!to->h_name) return PR_FAILURE;
+	if (!to->h_name) { return PR_FAILURE;
+}
 	memcpy(to->h_name, from->h_name, len);
 
 	/* Count the aliases, then allocate storage for the pointers */
@@ -523,7 +526,8 @@ static PRStatus CopyHostent(
 	}
 	to->h_aliases = (char**)Alloc(
 	    na * sizeof(char*), buf, bufsize, sizeof(char**));
-	if (!to->h_aliases) return PR_FAILURE;
+	if (!to->h_aliases) { return PR_FAILURE;
+}
 
 	/* Copy the aliases, one at a time */
 	if (!from->h_aliases) {
@@ -532,7 +536,8 @@ static PRStatus CopyHostent(
 		for (na = 0, ap = from->h_aliases; *ap != 0; na++, ap++) {
 			len = strlen(*ap) + 1;
 			to->h_aliases[na] = Alloc(len, buf, bufsize, 0);
-			if (!to->h_aliases[na]) return PR_FAILURE;
+			if (!to->h_aliases[na]) { return PR_FAILURE;
+}
 			memcpy(to->h_aliases[na], *ap, len);
 		}
 		to->h_aliases[na] = 0;
@@ -542,12 +547,14 @@ static PRStatus CopyHostent(
 	for (na = 1, ap = from->h_addr_list; *ap != 0; na++, ap++){;} /* nothing to execute */
 	to->h_addr_list = (char**)Alloc(
 	    na * sizeof(char*), buf, bufsize, sizeof(char**));
-	if (!to->h_addr_list) return PR_FAILURE;
+	if (!to->h_addr_list) { return PR_FAILURE;
+}
 
 	/* Copy the addresses, one at a time */
 	for (na = 0, ap = from->h_addr_list; *ap != 0; na++, ap++) {
 		to->h_addr_list[na] = Alloc(to->h_length, buf, bufsize, 0);
-		if (!to->h_addr_list[na]) return PR_FAILURE;
+		if (!to->h_addr_list[na]) { return PR_FAILURE;
+}
 		if (conversion != _PRIPAddrNoConversion
 				&& from->h_addrtype == AF_INET) {
 			if (conversion == _PRIPAddrIPv4Mapped) {
@@ -670,7 +677,8 @@ PR_IMPLEMENT(PRStatus) PR_GetHostByName(
     int h_err;
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
 #if defined(_PR_HAVE_GETHOST_R)
     tmpbuf = localbuf;
@@ -697,13 +705,15 @@ PR_IMPLEMENT(PRStatus) PR_GetHostByName(
 	{
 		_PRIPAddrConversion conversion = _PRIPAddrNoConversion;
 		rv = CopyHostent(h, &buf, &bufsize, conversion, hp);
-		if (PR_SUCCESS != rv)
+		if (PR_SUCCESS != rv) {
 		    PR_SetError(PR_INSUFFICIENT_RESOURCES_ERROR, 0);
+}
 	}
 	UNLOCK_DNS();
 #if defined(_PR_HAVE_GETHOST_R)
-    if (tmpbuf != localbuf)
+    if (tmpbuf != localbuf) {
         PR_Free(tmpbuf);
+}
 #endif
 	return rv;
 }
@@ -771,7 +781,8 @@ static PRStatus AppendV4AddrsToHostent(
         {;} /* nothing to execute */
     new_addr_list = (char**)Alloc(
         na * sizeof(char*), buf, bufsize, sizeof(char**));
-    if (!new_addr_list) return PR_FAILURE;
+    if (!new_addr_list) { return PR_FAILURE;
+}
 
     /* Copy the V6 addresses, one at a time */
     for (na = 0, ap = to->h_addr_list; *ap != 0; na++, ap++) {
@@ -782,7 +793,8 @@ static PRStatus AppendV4AddrsToHostent(
     /* Copy the V4 addresses, one at a time */
     for (ap = from->h_addr_list; *ap != 0; na++, ap++) {
         to->h_addr_list[na] = Alloc(to->h_length, buf, bufsize, 0);
-        if (!to->h_addr_list[na]) return PR_FAILURE;
+        if (!to->h_addr_list[na]) { return PR_FAILURE;
+}
         MakeIPv4MappedAddr(*ap, to->h_addr_list[na]);
     }
     to->h_addr_list[na] = 0;
@@ -811,7 +823,8 @@ PR_IMPLEMENT(PRStatus) PR_GetIPNodeByName(
     PRBool did_af_inet = PR_FALSE;
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     if (af != PR_AF_INET && af != PR_AF_INET6) {
         PR_SetError(PR_INVALID_ARGUMENT_ERROR, 0);
@@ -872,9 +885,10 @@ PR_IMPLEMENT(PRStatus) PR_GetIPNodeByName(
         if ((flags & PR_AI_ADDRCONFIG) == 0 || _pr_have_inet6_if)
         {
 #ifdef _PR_INET6_PROBE
-          if (_pr_ipv6_is_present())
+          if (_pr_ipv6_is_present()) {
 #endif
             h = GETHOSTBYNAME2(name, AF_INET6); 
+}
         }
         if ((NULL == h) && (flags & PR_AI_V4MAPPED)
         && ((flags & PR_AI_ADDRCONFIG) == 0 || _pr_have_inet_if))
@@ -931,10 +945,12 @@ PR_IMPLEMENT(PRStatus) PR_GetIPNodeByName(
 	{
 		_PRIPAddrConversion conversion = _PRIPAddrNoConversion;
 
-		if (af == PR_AF_INET6) conversion = _PRIPAddrIPv4Mapped;
+		if (af == PR_AF_INET6) { conversion = _PRIPAddrIPv4Mapped;
+}
 		rv = CopyHostent(h, &buf, &bufsize, conversion, hp);
-		if (PR_SUCCESS != rv)
+		if (PR_SUCCESS != rv) {
 		    PR_SetError(PR_INSUFFICIENT_RESOURCES_ERROR, 0);
+}
 #if defined(_PR_INET6) && defined(_PR_HAVE_GETIPNODEBYNAME)
 		freehostent(h);
 #elif defined(_PR_INET6_PROBE) && defined(_PR_HAVE_GETIPNODEBYNAME)
@@ -947,8 +963,9 @@ PR_IMPLEMENT(PRStatus) PR_GetIPNodeByName(
 				|| ((flags & PR_AI_ADDRCONFIG) && _pr_have_inet_if))
 				&& !did_af_inet && (h = GETHOSTBYNAME2(name, AF_INET)) != 0) {
 			rv = AppendV4AddrsToHostent(h, &buf, &bufsize, hp);
-			if (PR_SUCCESS != rv)
+			if (PR_SUCCESS != rv) {
 				PR_SetError(PR_INSUFFICIENT_RESOURCES_ERROR, 0);
+}
 		}
 #endif
 	}
@@ -970,8 +987,9 @@ PR_IMPLEMENT(PRStatus) PR_GetIPNodeByName(
 #endif /* _PR_INET6 */
 
 #if defined(_PR_HAVE_GETHOST_R)
-    if (tmpbuf != localbuf)
+    if (tmpbuf != localbuf) {
         PR_Free(tmpbuf);
+}
 #endif
 
 	return rv;
@@ -996,7 +1014,8 @@ PR_IMPLEMENT(PRStatus) PR_GetHostByAddr(
 	int error_num;
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
 	if (hostaddr->raw.family == PR_AF_INET6)
 	{
@@ -1130,8 +1149,9 @@ PR_IMPLEMENT(PRStatus) PR_GetHostByAddr(
 #endif /* _PR_HAVE_GETIPNODEBYADDR */
 
 #if defined(_PR_HAVE_GETHOST_R)
-    if (tmpbuf != localbuf)
+    if (tmpbuf != localbuf) {
         PR_Free(tmpbuf);
+}
 #endif
 
 	return rv;
@@ -1183,7 +1203,8 @@ PR_IMPLEMENT(PRStatus) PR_GetProtoByName(
 	struct protoent* res = (struct protoent*)result;
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
 #if defined(_PR_HAVE_GETPROTO_R_INT)
     {
@@ -1267,7 +1288,8 @@ PR_IMPLEMENT(PRStatus) PR_GetProtoByNumber(
 	struct protoent* res = (struct protoent*)result;
 #endif
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
 #if defined(_PR_HAVE_GETPROTO_R_INT)
     {
@@ -1356,19 +1378,20 @@ PRUintn _PR_NetAddrSize(const PRNetAddr* addr)
      * we take the size of struct sockaddr_in6 instead of
      * addr->ipv6.
      */
-    if (AF_INET == addr->raw.family)
+    if (AF_INET == addr->raw.family) {
         addrsize = sizeof(addr->inet);
-    else if (PR_AF_INET6 == addr->raw.family)
+    } else if (PR_AF_INET6 == addr->raw.family) {
 #if defined(_PR_INET6)
         addrsize = sizeof(struct sockaddr_in6);
 #else
         addrsize = sizeof(addr->ipv6);
 #endif
 #if defined(XP_UNIX) || defined(XP_OS2)
-    else if (AF_UNIX == addr->raw.family)
+    } else if (AF_UNIX == addr->raw.family) {
         addrsize = sizeof(addr->local);
 #endif
-    else addrsize = 0;
+    } else { addrsize = 0;
+}
 
     return addrsize;
 }  /* _PR_NetAddrSize */
@@ -1378,8 +1401,8 @@ PR_IMPLEMENT(PRIntn) PR_EnumerateHostEnt(
 {
     void *addr = hostEnt->h_addr_list[enumIndex++];
     memset(address, 0, sizeof(PRNetAddr));
-    if (NULL == addr) enumIndex = 0;
-    else
+    if (NULL == addr) { enumIndex = 0;
+    } else
     {
         address->raw.family = hostEnt->h_addrtype;
         if (PR_AF_INET6 == hostEnt->h_addrtype)
@@ -1403,9 +1426,11 @@ PR_IMPLEMENT(PRStatus) PR_InitializeNetAddr(
     PRNetAddrValue val, PRUint16 port, PRNetAddr *addr)
 {
     PRStatus rv = PR_SUCCESS;
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
-	if (val != PR_IpAddrNull) memset(addr, 0, sizeof(*addr));
+	if (val != PR_IpAddrNull) { memset(addr, 0, sizeof(*addr));
+}
 	addr->inet.family = AF_INET;
 	addr->inet.port = htons(port);
 	switch (val)
@@ -1429,11 +1454,13 @@ PR_IMPLEMENT(PRStatus) PR_SetNetAddr(
     PRNetAddrValue val, PRUint16 af, PRUint16 port, PRNetAddr *addr)
 {
     PRStatus rv = PR_SUCCESS;
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     if (af == PR_AF_INET6)
     {
-        if (val != PR_IpAddrNull) memset(addr, 0, sizeof(addr->ipv6));
+        if (val != PR_IpAddrNull) { memset(addr, 0, sizeof(addr->ipv6));
+}
         addr->ipv6.family = af;
         addr->ipv6.port = htons(port);
         addr->ipv6.flowinfo = 0;
@@ -1455,7 +1482,8 @@ PR_IMPLEMENT(PRStatus) PR_SetNetAddr(
     }
     else
     {
-        if (val != PR_IpAddrNull) memset(addr, 0, sizeof(addr->inet));
+        if (val != PR_IpAddrNull) { memset(addr, 0, sizeof(addr->inet));
+}
         addr->inet.family = af;
         addr->inet.port = htons(port);
         switch (val)
@@ -1556,16 +1584,19 @@ static int StringToV6Addr(const char *string, PRIPv6Addr *addr)
 
     /* Handle initial (double) colon */
     if (*s == ':') {
-        if (s[1] != ':') return 0;
+        if (s[1] != ':') { return 0;
+}
         s += 2;
         addr->pr_s6_addr16[0] = 0;
         section = double_colon = 1;
     }
 
     while (*s) {
-        if (section == 8) return 0; /* too long */
+        if (section == 8) { return 0; /* too long */
+}
         if (*s == ':') {
-            if (double_colon != -1) return 0; /* two double colons */
+            if (double_colon != -1) { return 0; /* two double colons */
+}
             addr->pr_s6_addr16[section++] = 0;
             double_colon = section;
             s++;
@@ -1575,12 +1606,14 @@ static int StringToV6Addr(const char *string, PRIPv6Addr *addr)
             val = (val << 4) + index_hex[*s++];
         }
         if (*s == '.') {
-            if (len == 0) return 0; /* nothing between : and . */
+            if (len == 0) { return 0; /* nothing between : and . */
+}
             break;
         }
         if (*s == ':') {
             s++;
-            if (!*s) return 0; /* cannot end with single colon */
+            if (!*s) { return 0; /* cannot end with single colon */
+}
         } else if (*s) {
             return 0; /* bad character */
         }
@@ -1589,46 +1622,57 @@ static int StringToV6Addr(const char *string, PRIPv6Addr *addr)
     
     if (*s == '.') {
         /* Have a trailing v4 format address */
-        if (section > 6) return 0; /* not enough room */
+        if (section > 6) { return 0; /* not enough room */
+}
 
         /*
          * The number before the '.' is decimal, but we parsed it
          * as hex.  That means it is in BCD.  Check it for validity
          * and convert it to binary.
          */
-        if (val > 0x0255 || (val & 0xf0) > 0x90 || (val & 0xf) > 9) return 0;
+        if (val > 0x0255 || (val & 0xf0) > 0x90 || (val & 0xf) > 9) { return 0;
+}
         val = (val >> 8) * 100 + ((val >> 4) & 0xf) * 10 + (val & 0xf);
         addr->pr_s6_addr[2 * section] = val;
 
         s++;
         val = index_hex[*s++];
-        if (val > 9) return 0;
+        if (val > 9) { return 0;
+}
         while (*s >= '0' && *s <= '9') {
             val = val * 10 + *s++ - '0';
-            if (val > 255) return 0;
+            if (val > 255) { return 0;
+}
         }
-        if (*s != '.') return 0; /* must have exactly 4 decimal numbers */
+        if (*s != '.') { return 0; /* must have exactly 4 decimal numbers */
+}
         addr->pr_s6_addr[2 * section + 1] = val;
         section++;
 
         s++;
         val = index_hex[*s++];
-        if (val > 9) return 0;
+        if (val > 9) { return 0;
+}
         while (*s >= '0' && *s <= '9') {
             val = val * 10 + *s++ - '0';
-            if (val > 255) return 0;
+            if (val > 255) { return 0;
+}
         }
-        if (*s != '.') return 0; /* must have exactly 4 decimal numbers */
+        if (*s != '.') { return 0; /* must have exactly 4 decimal numbers */
+}
         addr->pr_s6_addr[2 * section] = val;
 
         s++;
         val = index_hex[*s++];
-        if (val > 9) return 0;
+        if (val > 9) { return 0;
+}
         while (*s >= '0' && *s <= '9') {
             val = val * 10 + *s++ - '0';
-            if (val > 255) return 0;
+            if (val > 255) { return 0;
+}
         }
-        if (*s) return 0; /* must have exactly 4 decimal numbers */
+        if (*s) { return 0; /* must have exactly 4 decimal numbers */
+}
         addr->pr_s6_addr[2 * section + 1] = val;
         section++;
     }
@@ -1976,7 +2020,8 @@ PR_IMPLEMENT(PRAddrInfo *) PR_GetAddrInfoByName(const char  *hostname,
         return NULL;
     }
 
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
 #if !defined(_PR_HAVE_GETADDRINFO)
     return pr_GetAddrInfoByNameFB(hostname, af, flags);
@@ -1997,8 +2042,9 @@ PR_IMPLEMENT(PRAddrInfo *) PR_GetAddrInfoByName(const char  *hostname,
          */
 
         memset(&hints, 0, sizeof(hints));
-        if (!(flags & PR_AI_NOCANONNAME))
+        if (!(flags & PR_AI_NOCANONNAME)) {
             hints.ai_flags |= AI_CANONNAME;
+}
 #ifdef AI_ADDRCONFIG
         /* 
          * Propagate AI_ADDRCONFIG to the GETADDRINFO call if PR_AI_ADDRCONFIG
@@ -2041,8 +2087,9 @@ PR_IMPLEMENT(PRAddrInfo *) PR_GetAddrInfoByName(const char  *hostname,
             rv = GETADDRINFO(hostname, NULL, &hints, &res);
         }
 #endif
-        if (rv == 0)
+        if (rv == 0) {
             return (PRAddrInfo *) res;
+}
 
         PR_SetError(PR_DIRECTORY_LOOKUP_ERROR, rv);
     }
@@ -2054,11 +2101,12 @@ PR_IMPLEMENT(void) PR_FreeAddrInfo(PRAddrInfo *ai)
 {
 #if defined(_PR_HAVE_GETADDRINFO)
 #if defined(_PR_INET6_PROBE)
-    if (!_pr_ipv6_is_present())
+    if (!_pr_ipv6_is_present()) {
         PR_Free((PRAddrInfoFB *) ai);
-    else
+    } else {
 #endif
         FREEADDRINFO((PRADDRINFO *) ai);
+}
 #else
     PR_Free((PRAddrInfoFB *) ai);
 #endif
@@ -2076,35 +2124,41 @@ PR_IMPLEMENT(void *) PR_EnumerateAddrInfo(void             *iterPtr,
         /* using PRAddrInfoFB */
         PRIntn iter = (PRIntn)(PRPtrdiff) iterPtr;
         iter = PR_EnumerateHostEnt(iter, &((PRAddrInfoFB *) base)->hostent, port, result);
-        if (iter < 0)
+        if (iter < 0) {
             iter = 0;
+}
         return (void *)(PRPtrdiff) iter;
     }
 #endif
 
-    if (iterPtr)
+    if (iterPtr) {
         ai = ((PRADDRINFO *) iterPtr)->ai_next;
-    else
+    } else {
         ai = (PRADDRINFO *) base;
+}
 
-    while (ai && ai->ai_addrlen > sizeof(PRNetAddr))
+    while (ai && ai->ai_addrlen > sizeof(PRNetAddr)) {
         ai = ai->ai_next;
+}
 
     if (ai) {
         /* copy sockaddr to PRNetAddr */
         memcpy(result, ai->ai_addr, ai->ai_addrlen);
         result->raw.family = ai->ai_addr->sa_family;
 #ifdef _PR_INET6
-        if (AF_INET6 == result->raw.family)
+        if (AF_INET6 == result->raw.family) {
             result->raw.family = PR_AF_INET6;
+}
 #endif
-        if (ai->ai_addrlen < sizeof(PRNetAddr))
+        if (ai->ai_addrlen < sizeof(PRNetAddr)) {
             memset(((char*)result)+ai->ai_addrlen, 0, sizeof(PRNetAddr) - ai->ai_addrlen);
+}
 
-        if (result->raw.family == PR_AF_INET)
+        if (result->raw.family == PR_AF_INET) {
             result->inet.port = htons(port);
-        else
+        } else {
             result->ipv6.port = htons(port);
+}
     }
 
     return ai;
@@ -2207,7 +2261,8 @@ static PRStatus pr_StringToNetAddrFB(const char *string, PRNetAddr *addr)
 
 PR_IMPLEMENT(PRStatus) PR_StringToNetAddr(const char *string, PRNetAddr *addr)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
     if (!addr || !string || !*string)
     {
@@ -2224,12 +2279,14 @@ PR_IMPLEMENT(PRStatus) PR_StringToNetAddr(const char *string, PRNetAddr *addr)
      * and most likely others. So we only use it to convert literal IP addresses
      * that contain IPv6 scope IDs, which pr_inet_aton cannot convert.
      */
-    if (!strchr(string, '%'))
+    if (!strchr(string, '%')) {
         return pr_StringToNetAddrFB(string, addr);
+}
 
 #if defined(_PR_INET6_PROBE)
-    if (!_pr_ipv6_is_present())
+    if (!_pr_ipv6_is_present()) {
         return pr_StringToNetAddrFB(string, addr);
+}
 #endif
 
     return pr_StringToNetAddrGAI(string, addr);
@@ -2297,9 +2354,10 @@ static PRStatus pr_NetAddrToStringFB(
     }
     else
     {
-        if (size < 16) goto failed;
-        if (AF_INET != addr->raw.family) goto failed;
-        else
+        if (size < 16) { goto failed;
+}
+        if (AF_INET != addr->raw.family) { goto failed;
+        } else
         {
             unsigned char *byte = (unsigned char*)&addr->inet.ip;
             PR_snprintf(string, size, "%u.%u.%u.%u",
@@ -2319,14 +2377,16 @@ failed:
 PR_IMPLEMENT(PRStatus) PR_NetAddrToString(
     const PRNetAddr *addr, char *string, PRUint32 size)
 {
-    if (!_pr_initialized) _PR_ImplicitInitialization();
+    if (!_pr_initialized) { _PR_ImplicitInitialization();
+}
 
 #if !defined(_PR_HAVE_GETADDRINFO)
     return pr_NetAddrToStringFB(addr, string, size);
 #else
 #if defined(_PR_INET6_PROBE)
-    if (!_pr_ipv6_is_present())
+    if (!_pr_ipv6_is_present()) {
         return pr_NetAddrToStringFB(addr, string, size);
+}
 #endif
     return pr_NetAddrToStringGNI(addr, string, size);
 #endif

@@ -32,7 +32,8 @@ static int bsr(int mask) {
   asm volatile("bsr %1, %0" : "=r"(eob) : "r"(mask) : "flags");
 #endif
   eob++;
-  if (mask == 0) eob = 0;
+  if (mask == 0) { eob = 0;
+}
   return eob;
 }
 #endif

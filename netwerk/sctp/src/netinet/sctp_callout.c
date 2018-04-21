@@ -90,8 +90,9 @@ sctp_os_timer_start(sctp_os_timer_t *c, int to_ticks, void (*ftn) (void *),
                     void *arg)
 {
 	/* paranoia */
-	if ((c == NULL) || (ftn == NULL))
+	if ((c == NULL) || (ftn == NULL)) {
 	    return;
+}
 
 	SCTP_TIMERQ_LOCK();
 	/* check to see if we're rescheduling a timer */
@@ -112,8 +113,9 @@ sctp_os_timer_start(sctp_os_timer_t *c, int to_ticks, void (*ftn) (void *),
 	 * We could unlock/splx here and lock/spl at the TAILQ_INSERT_TAIL,
 	 * but there's no point since doing this setup doesn't take much time.
 	 */
-	if (to_ticks <= 0)
+	if (to_ticks <= 0) {
 		to_ticks = 1;
+}
 
 	c->c_arg = arg;
 	c->c_flags = (SCTP_CALLOUT_ACTIVE | SCTP_CALLOUT_PENDING);

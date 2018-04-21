@@ -53,12 +53,14 @@ tls13_HkdfExtract(PK11SymKey *ikm1, PK11SymKey *ikm2in, SSLHashType baseHash,
         /* TODO(ekr@rtfm.com): This violates the PKCS#11 key boundary
          * but is imposed on us by the present HKDF interface. */
         rv = PK11_ExtractKeyValue(ikm1);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         salt = PK11_GetKeyData(ikm1);
-        if (!salt)
+        if (!salt) {
             return SECFailure;
+}
 
         params.pSalt = salt->data;
         params.ulSaltLen = salt->len;
@@ -94,8 +96,9 @@ tls13_HkdfExtract(PK11SymKey *ikm1, PK11SymKey *ikm2in, SSLHashType baseHash,
                                     kTlsHkdfInfo[baseHash].pkcs11Mech,
                                     PK11_OriginUnwrap,
                                     CKA_DERIVE, &zeroItem, NULL);
-        if (!zeroKey)
+        if (!zeroKey) {
             return SECFailure;
+}
         ikm2 = zeroKey;
     } else {
         ikm2 = ikm2in;
@@ -108,12 +111,15 @@ tls13_HkdfExtract(PK11SymKey *ikm1, PK11SymKey *ikm2in, SSLHashType baseHash,
     prk = PK11_Derive(ikm2, kTlsHkdfInfo[baseHash].pkcs11Mech,
                       &paramsi, kTlsHkdfInfo[baseHash].pkcs11Mech,
                       CKA_DERIVE, kTlsHkdfInfo[baseHash].hashSize);
-    if (zeroKey)
+    if (zeroKey) {
         PK11_FreeSymKey(zeroKey);
-    if (slot)
+}
+    if (slot) {
         PK11_FreeSlot(slot);
-    if (!prk)
+}
+    if (!prk) {
         return SECFailure;
+}
 
     PRINT_KEY(50, (NULL, "HKDF Extract", prk));
     *prkp = prk;
@@ -202,8 +208,9 @@ tls13_HkdfExpandLabel(PK11SymKey *prk, SSLHashType baseHash,
                                    &paramsi, algorithm,
                                    CKA_DERIVE, keySize,
                                    CKF_SIGN | CKF_VERIFY);
-    if (!derived)
+    if (!derived) {
         return SECFailure;
+}
 
     *keyp = derived;
 

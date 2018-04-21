@@ -125,8 +125,9 @@ Concrete<DeserializedNode>::edges(JSContext* cx, bool) const
 {
   js::UniquePtr<DeserializedEdgeRange> range(js_new<DeserializedEdgeRange>(get()));
 
-  if (!range)
+  if (!range) {
     return nullptr;
+}
 
   return js::UniquePtr<EdgeRange>(range.release());
 }

@@ -163,8 +163,9 @@ void RemoveSwitchFallThroughTraverser::outputSequence(TIntermSequence *sequence,
 
 void RemoveSwitchFallThroughTraverser::handlePreviousCase()
 {
-    if (mPreviousCase)
+    if (mPreviousCase) {
         mCasesSharingBreak.push_back(mPreviousCase);
+}
     if (mLastStatementWasBreak)
     {
         for (size_t i = 0; i < mCasesSharingBreak.size(); ++i)

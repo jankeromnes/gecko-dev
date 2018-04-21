@@ -38,8 +38,9 @@ void
 FinishX(Display* aDisplay)
 {
   unsigned long lastRequest = NextRequest(aDisplay) - 1;
-  if (lastRequest == LastKnownRequestProcessed(aDisplay))
+  if (lastRequest == LastKnownRequestProcessed(aDisplay)) {
     return;
+}
 
   XSync(aDisplay, False);
 }
@@ -51,8 +52,9 @@ ScopedXErrorHandler::ErrorHandler(Display *, XErrorEvent *ev)
 {
     // only record the error if no error was previously recorded.
     // this means that in case of multiple errors, it's the first error that we report.
-    if (!sXErrorPtr->mError.error_code)
+    if (!sXErrorPtr->mError.error_code) {
       sXErrorPtr->mError = *ev;
+}
     return 0;
 }
 
@@ -84,8 +86,9 @@ ScopedXErrorHandler::SyncAndGetError(Display *dpy, XErrorEvent *ev)
     FinishX(dpy);
 
     bool retval = mXError.mError.error_code != 0;
-    if (ev)
+    if (ev) {
         *ev = mXError.mError;
+}
     mXError = ErrorEvent(); // reset
     return retval;
 }

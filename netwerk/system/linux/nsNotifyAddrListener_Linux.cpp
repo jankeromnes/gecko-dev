@@ -209,16 +209,18 @@ void nsNotifyAddrListener::checkLink(void)
     bool link = false;
     bool prevLinkUp = mLinkUp;
 
-    if (getifaddrs(&list))
+    if (getifaddrs(&list)) {
         return;
+}
 
     // Walk through the linked list, maintaining head pointer so we can free
     // list later
 
     for (ifa = list; ifa != nullptr; ifa = ifa->ifa_next) {
         int family;
-        if (ifa->ifa_addr == nullptr)
+        if (ifa->ifa_addr == nullptr) {
             continue;
+}
 
         family = ifa->ifa_addr->sa_family;
 
@@ -444,8 +446,9 @@ nsNotifyAddrListener::Init(void)
 {
     nsCOMPtr<nsIObserverService> observerService =
         mozilla::services::GetObserverService();
-    if (!observerService)
+    if (!observerService) {
         return NS_ERROR_FAILURE;
+}
 
     nsresult rv = observerService->AddObserver(this, "xpcom-shutdown-threads",
                                                false);
@@ -470,8 +473,9 @@ nsNotifyAddrListener::Shutdown(void)
     // remove xpcom shutdown observer
     nsCOMPtr<nsIObserverService> observerService =
         mozilla::services::GetObserverService();
-    if (observerService)
+    if (observerService) {
         observerService->RemoveObserver(this, "xpcom-shutdown-threads");
+}
 
     LOG(("write() to signal thread shutdown\n"));
 
@@ -516,14 +520,16 @@ nsNotifyAddrListener::NetworkChanged()
 nsresult
 nsNotifyAddrListener::SendEvent(const char *aEventID)
 {
-    if (!aEventID)
+    if (!aEventID) {
         return NS_ERROR_NULL_POINTER;
+}
 
     LOG(("SendEvent: %s\n", aEventID));
     nsresult rv = NS_OK;
     nsCOMPtr<nsIRunnable> event = new ChangeEvent(this, aEventID);
-    if (NS_FAILED(rv = NS_DispatchToMainThread(event)))
+    if (NS_FAILED(rv = NS_DispatchToMainThread(event))) {
         NS_WARNING("Failed to dispatch ChangeEvent");
+}
     return rv;
 }
 
@@ -532,9 +538,10 @@ nsNotifyAddrListener::ChangeEvent::Run()
 {
     nsCOMPtr<nsIObserverService> observerService =
         mozilla::services::GetObserverService();
-    if (observerService)
+    if (observerService) {
         observerService->NotifyObservers(
                 mService, NS_NETWORK_LINK_TOPIC,
                 NS_ConvertASCIItoUTF16(mEventID).get());
+}
     return NS_OK;
 }

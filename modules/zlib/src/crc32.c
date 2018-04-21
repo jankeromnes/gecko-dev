@@ -204,7 +204,8 @@ unsigned long ZEXPORT crc32_z(crc, buf, len)
     const unsigned char FAR *buf;
     z_size_t len;
 {
-    if (buf == Z_NULL) return 0UL;
+    if (buf == Z_NULL) { return 0UL;
+}
 
 #ifdef DYNAMIC_CRC_TABLE
     if (crc_table_empty)
@@ -216,10 +217,11 @@ unsigned long ZEXPORT crc32_z(crc, buf, len)
         z_crc_t endian;
 
         endian = 1;
-        if (*((unsigned char *)(&endian)))
+        if (*((unsigned char *)(&endian))) {
             return crc32_little(crc, buf, len);
-        else
+        } else {
             return crc32_big(crc, buf, len);
+}
     }
 #endif /* BYFOUR */
     crc = crc ^ 0xffffffffUL;
@@ -227,9 +229,10 @@ unsigned long ZEXPORT crc32_z(crc, buf, len)
         DO8;
         len -= 8;
     }
-    if (len) do {
+    if (len) { do {
         DO1;
     } while (--len);
+}
     return crc ^ 0xffffffffUL;
 }
 
@@ -289,9 +292,10 @@ local unsigned long crc32_little(crc, buf, len)
     }
     buf = (const unsigned char FAR *)buf4;
 
-    if (len) do {
+    if (len) { do {
         c = crc_table[0][(c ^ *buf++) & 0xff] ^ (c >> 8);
     } while (--len);
+}
     c = ~c;
     return (unsigned long)c;
 }
@@ -329,9 +333,10 @@ local unsigned long crc32_big(crc, buf, len)
     }
     buf = (const unsigned char FAR *)buf4;
 
-    if (len) do {
+    if (len) { do {
         c = crc_table[4][(c >> 24) ^ *buf++] ^ (c << 8);
     } while (--len);
+}
     c = ~c;
     return (unsigned long)(ZSWAP32(c));
 }
@@ -349,8 +354,9 @@ local unsigned long gf2_matrix_times(mat, vec)
 
     sum = 0;
     while (vec) {
-        if (vec & 1)
+        if (vec & 1) {
             sum ^= *mat;
+}
         vec >>= 1;
         mat++;
     }
@@ -364,8 +370,9 @@ local void gf2_matrix_square(square, mat)
 {
     int n;
 
-    for (n = 0; n < GF2_DIM; n++)
+    for (n = 0; n < GF2_DIM; n++) {
         square[n] = gf2_matrix_times(mat, mat[n]);
+}
 }
 
 /* ========================================================================= */
@@ -380,8 +387,9 @@ local uLong crc32_combine_(crc1, crc2, len2)
     unsigned long odd[GF2_DIM];     /* odd-power-of-two zeros operator */
 
     /* degenerate case (also disallow negative lengths) */
-    if (len2 <= 0)
+    if (len2 <= 0) {
         return crc1;
+}
 
     /* put operator for one zero bit in odd */
     odd[0] = 0xedb88320UL;          /* CRC-32 polynomial */
@@ -402,18 +410,21 @@ local uLong crc32_combine_(crc1, crc2, len2)
     do {
         /* apply zeros operator for this bit of len2 */
         gf2_matrix_square(even, odd);
-        if (len2 & 1)
+        if (len2 & 1) {
             crc1 = gf2_matrix_times(even, crc1);
+}
         len2 >>= 1;
 
         /* if no more bits set, then done */
-        if (len2 == 0)
+        if (len2 == 0) {
             break;
+}
 
         /* another iteration of the loop with odd and even swapped */
         gf2_matrix_square(odd, even);
-        if (len2 & 1)
+        if (len2 & 1) {
             crc1 = gf2_matrix_times(odd, crc1);
+}
         len2 >>= 1;
 
         /* if no more bits set, then done */

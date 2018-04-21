@@ -121,8 +121,9 @@ gfxCallbackDrawable::MakeSurfaceDrawable(gfxContext *aContext, const SamplingFil
     RefPtr<DrawTarget> dt =
         aContext->GetDrawTarget()->CreateSimilarDrawTarget(mSize, format);
 
-    if (!dt || !dt->IsValid())
+    if (!dt || !dt->IsValid()) {
         return nullptr;
+}
 
     RefPtr<gfxContext> ctx = gfxContext::CreateOrNull(dt);
     MOZ_ASSERT(ctx); // already checked for target above
@@ -163,13 +164,15 @@ gfxCallbackDrawable::Draw(gfxContext* aContext,
         mSurfaceDrawable = MakeSurfaceDrawable(aContext, aSamplingFilter);
     }
 
-    if (mSurfaceDrawable)
+    if (mSurfaceDrawable) {
         return mSurfaceDrawable->Draw(aContext, aFillRect, aExtendMode,
                                       aSamplingFilter,
                                       aOpacity, aTransform);
+}
 
-    if (mCallback)
+    if (mCallback) {
         return (*mCallback)(aContext, aFillRect, aSamplingFilter, aTransform);
+}
 
     return false;
 }
@@ -225,8 +228,9 @@ gfxPatternDrawable::Draw(gfxContext* aContext,
 {
     DrawTarget& aDrawTarget = *aContext->GetDrawTarget();
 
-    if (!mPattern)
+    if (!mPattern) {
         return false;
+}
 
     if (IsRepeatingExtendMode(aExtendMode)) {
         // We can't use mPattern directly: We want our repeated tiles to have

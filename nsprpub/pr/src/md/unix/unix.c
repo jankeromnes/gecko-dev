@@ -2537,12 +2537,13 @@ static int _MD_convert_stat_to_fileinfo(
     const struct stat *sb,
     PRFileInfo *info)
 {
-    if (S_IFREG & sb->st_mode)
+    if (S_IFREG & sb->st_mode) {
         info->type = PR_FILE_FILE;
-    else if (S_IFDIR & sb->st_mode)
+    } else if (S_IFDIR & sb->st_mode) {
         info->type = PR_FILE_DIRECTORY;
-    else
+    } else {
         info->type = PR_FILE_OTHER;
+}
 
 #if defined(_PR_HAVE_LARGE_OFF_T)
     if (0x7fffffffL < sb->st_size)
@@ -2561,12 +2562,13 @@ static int _MD_convert_stat64_to_fileinfo64(
     const _MDStat64 *sb,
     PRFileInfo64 *info)
 {
-    if (S_IFREG & sb->st_mode)
+    if (S_IFREG & sb->st_mode) {
         info->type = PR_FILE_FILE;
-    else if (S_IFDIR & sb->st_mode)
+    } else if (S_IFDIR & sb->st_mode) {
         info->type = PR_FILE_DIRECTORY;
-    else
+    } else {
         info->type = PR_FILE_OTHER;
+}
 
     LL_I2L(info->size, sb->st_size);
 
@@ -2580,10 +2582,11 @@ PRInt32 _MD_getfileinfo(const char *fn, PRFileInfo *info)
     struct stat sb;
 
     rv = stat(fn, &sb);
-    if (rv < 0)
+    if (rv < 0) {
         _PR_MD_MAP_STAT_ERROR(_MD_ERRNO());
-    else if (NULL != info)
+    } else if (NULL != info) {
         rv = _MD_convert_stat_to_fileinfo(&sb, info);
+}
     return rv;
 }
 
@@ -2591,10 +2594,11 @@ PRInt32 _MD_getfileinfo64(const char *fn, PRFileInfo64 *info)
 {
     _MDStat64 sb;
     PRInt32 rv = _md_iovector._stat64(fn, &sb);
-    if (rv < 0)
+    if (rv < 0) {
         _PR_MD_MAP_STAT_ERROR(_MD_ERRNO());
-    else if (NULL != info)
+    } else if (NULL != info) {
         rv = _MD_convert_stat64_to_fileinfo64(&sb, info);
+}
     return rv;
 }
 
@@ -2602,10 +2606,11 @@ PRInt32 _MD_getopenfileinfo(const PRFileDesc *fd, PRFileInfo *info)
 {
     struct stat sb;
     PRInt32 rv = fstat(fd->secret->md.osfd, &sb);
-    if (rv < 0)
+    if (rv < 0) {
         _PR_MD_MAP_FSTAT_ERROR(_MD_ERRNO());
-    else if (NULL != info)
+    } else if (NULL != info) {
         rv = _MD_convert_stat_to_fileinfo(&sb, info);
+}
     return rv;
 }
 
@@ -2613,10 +2618,11 @@ PRInt32 _MD_getopenfileinfo64(const PRFileDesc *fd, PRFileInfo64 *info)
 {
     _MDStat64 sb;
     PRInt32 rv = _md_iovector._fstat64(fd->secret->md.osfd, &sb);
-    if (rv < 0)
+    if (rv < 0) {
         _PR_MD_MAP_FSTAT_ERROR(_MD_ERRNO());
-    else if (NULL != info)
+    } else if (NULL != info) {
         rv = _MD_convert_stat64_to_fileinfo64(&sb, info);
+}
     return rv;
 }
 
@@ -3390,8 +3396,9 @@ _MD_LockFile(PRInt32 f)
     arg.l_start = 0;
     arg.l_len = 0;  /* until EOF */
     rv = fcntl(f, F_SETLKW, &arg);
-    if (rv == 0)
+    if (rv == 0) {
         return PR_SUCCESS;
+}
     _PR_MD_MAP_FLOCK_ERROR(_MD_ERRNO());
     return PR_FAILURE;
 }
@@ -3407,8 +3414,9 @@ _MD_TLockFile(PRInt32 f)
     arg.l_start = 0;
     arg.l_len = 0;  /* until EOF */
     rv = fcntl(f, F_SETLK, &arg);
-    if (rv == 0)
+    if (rv == 0) {
         return PR_SUCCESS;
+}
     _PR_MD_MAP_FLOCK_ERROR(_MD_ERRNO());
     return PR_FAILURE;
 }
@@ -3424,8 +3432,9 @@ _MD_UnlockFile(PRInt32 f)
     arg.l_start = 0;
     arg.l_len = 0;  /* until EOF */
     rv = fcntl(f, F_SETLK, &arg);
-    if (rv == 0)
+    if (rv == 0) {
         return PR_SUCCESS;
+}
     _PR_MD_MAP_FLOCK_ERROR(_MD_ERRNO());
     return PR_FAILURE;
 }
@@ -3524,12 +3533,13 @@ PRStatus _MD_getsysinfo(PRSysInfo cmd, char *name, PRUint32 namelen)
 		_PR_MD_MAP_DEFAULT_ERROR(errno);
     	return PR_FAILURE;
 	}
-	if (PR_SI_SYSNAME == cmd)
+	if (PR_SI_SYSNAME == cmd) {
 		(void)PR_snprintf(name, namelen, info.sysname);
-	else if (PR_SI_RELEASE == cmd)
+	} else if (PR_SI_RELEASE == cmd) {
 		(void)PR_snprintf(name, namelen, info.release);
-	else
+	} else {
 		return PR_FAILURE;
+}
     return PR_SUCCESS;
 }
 

@@ -93,11 +93,13 @@ sstrncpy (char *dst, const char *src, unsigned long max)
 char *
 sstrncat (char *s1, const char *s2, unsigned long max)
 {
-    if (s1 == NULL)
+    if (s1 == NULL) {
         return (char *) NULL;
+}
 
-    while (*s1)
+    while (*s1) {
         s1++;
+}
 
     if (s2) {
         while ((max-- > 1) && (*s2)) {

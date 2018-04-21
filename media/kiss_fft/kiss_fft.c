@@ -224,7 +224,8 @@ static void kf_bfly_generic(
             Fout[ k ] = scratch[0];
             for (q=1;q<p;++q ) {
                 twidx += fstride * k;
-                if (twidx>=Norig) twidx-=Norig;
+                if (twidx>=Norig) { twidx-=Norig;
+}
                 C_MUL(t,scratch[q] , twiddles[twidx] );
                 C_ADDTO( Fout[ k ] ,t);
             }
@@ -320,8 +321,9 @@ void kf_factor(int n,int * facbuf)
                 case 2: p = 3; break;
                 default: p += 2; break;
             }
-            if (p > floor_sqrt)
+            if (p > floor_sqrt) {
                 p = n;          /* no more factors, skip to end */
+}
         }
         n /= p;
         *facbuf++ = p;
@@ -345,8 +347,9 @@ kiss_fft_cfg kiss_fft_alloc(int nfft,int inverse_fft,void * mem,size_t * lenmem 
     if ( lenmem==NULL ) {
         st = ( kiss_fft_cfg)KISS_FFT_MALLOC( memneeded );
     }else{
-        if (mem != NULL && *lenmem >= memneeded)
+        if (mem != NULL && *lenmem >= memneeded) {
             st = (kiss_fft_cfg)mem;
+}
         *lenmem = memneeded;
     }
     if (st) {
@@ -357,8 +360,9 @@ kiss_fft_cfg kiss_fft_alloc(int nfft,int inverse_fft,void * mem,size_t * lenmem 
         for (i=0;i<nfft;++i) {
             const double pi=3.141592653589793238462643383279502884197169399375105820974944;
             double phase = -2*pi*i / nfft;
-            if (st->inverse)
+            if (st->inverse) {
                 phase *= -1;
+}
             kf_cexp(st->twiddles+i, phase );
         }
 
@@ -397,11 +401,15 @@ int kiss_fft_next_fast_size(int n)
 {
     while(1) {
         int m=n;
-        while ( (m%2) == 0 ) m/=2;
-        while ( (m%3) == 0 ) m/=3;
-        while ( (m%5) == 0 ) m/=5;
-        if (m<=1)
+        while ( (m%2) == 0 ) { m/=2;
+}
+        while ( (m%3) == 0 ) { m/=3;
+}
+        while ( (m%5) == 0 ) { m/=5;
+}
+        if (m<=1) {
             break; /* n is completely factorable by twos, threes, and fives */
+}
         n++;
     }
     return n;

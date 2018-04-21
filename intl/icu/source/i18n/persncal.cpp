@@ -237,8 +237,9 @@ UBool
 PersianCalendar::inDaylightTime(UErrorCode& status) const
 {
     // copied from GregorianCalendar
-    if (U_FAILURE(status) || !getTimeZone().useDaylightTime()) 
+    if (U_FAILURE(status) || !getTimeZone().useDaylightTime()) { 
         return FALSE;
+}
 
     // Force an update of the state of the Calendar.
     ((PersianCalendar*)this)->complete(status); // cast away const

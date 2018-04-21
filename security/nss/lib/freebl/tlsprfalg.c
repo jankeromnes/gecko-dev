@@ -36,39 +36,45 @@ TLS_P_hash(HASH_HashType hashType, const SECItem *secret, const char *label,
     remaining = result->len;
     res = result->data;
 
-    if (label != NULL)
+    if (label != NULL) {
         label_len = PORT_Strlen(label);
+}
 
     cx = HMAC_Create(hashObj, secret->data, secret->len, isFIPS);
-    if (cx == NULL)
+    if (cx == NULL) {
         goto loser;
+}
 
     /* initialize the state = A(1) = HMAC_hash(secret, seed) */
     HMAC_Begin(cx);
     HMAC_Update(cx, (unsigned char *)label, label_len);
     HMAC_Update(cx, seed->data, seed->len);
     status = HMAC_Finish(cx, state, &state_len, sizeof(state));
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     /* generate a block at a time until we're done */
     while (remaining > 0) {
 
         HMAC_Begin(cx);
         HMAC_Update(cx, state, state_len);
-        if (label_len)
+        if (label_len) {
             HMAC_Update(cx, (unsigned char *)label, label_len);
+}
         HMAC_Update(cx, seed->data, seed->len);
         status = HMAC_Finish(cx, outbuf, &outbuf_len, sizeof(outbuf));
-        if (status != SECSuccess)
+        if (status != SECSuccess) {
             goto loser;
+}
 
         /* Update the state = A(i) = HMAC_hash(secret, A(i-1)) */
         HMAC_Begin(cx);
         HMAC_Update(cx, state, state_len);
         status = HMAC_Finish(cx, state, &state_len, sizeof(state));
-        if (status != SECSuccess)
+        if (status != SECSuccess) {
             goto loser;
+}
 
         chunk_size = PR_MIN(outbuf_len, remaining);
         PORT_Memcpy(res, &outbuf, chunk_size);
@@ -80,8 +86,9 @@ TLS_P_hash(HASH_HashType hashType, const SECItem *secret, const char *label,
 
 loser:
     /* clear out state so it's not left on the stack */
-    if (cx)
+    if (cx) {
         HMAC_Destroy(cx, PR_TRUE);
+}
     PORT_Memset(state, 0, sizeof(state));
     PORT_Memset(outbuf, 0, sizeof(outbuf));
     return rv;
@@ -110,25 +117,30 @@ TLS_PRF(const SECItem *secret, const char *label, SECItem *seed,
     S2.data = secret->data + (secret->len - S2.len);
 
     tmp.data = (unsigned char *)PORT_Alloc(result->len);
-    if (tmp.data == NULL)
+    if (tmp.data == NULL) {
         goto loser;
+}
     tmp.len = result->len;
 
     status = TLS_P_hash(HASH_AlgMD5, &S1, label, seed, result, isFIPS);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
     status = TLS_P_hash(HASH_AlgSHA1, &S2, label, seed, &tmp, isFIPS);
-    if (status != SECSuccess)
+    if (status != SECSuccess) {
         goto loser;
+}
 
-    for (i = 0; i < result->len; i++)
+    for (i = 0; i < result->len; i++) {
         result->data[i] ^= tmp.data[i];
+}
 
     rv = SECSuccess;
 
 loser:
-    if (tmp.data != NULL)
+    if (tmp.data != NULL) {
         PORT_ZFree(tmp.data, tmp.len);
+}
     return rv;
 }

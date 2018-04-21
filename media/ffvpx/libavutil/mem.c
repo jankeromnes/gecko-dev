@@ -79,13 +79,15 @@ void *av_malloc(size_t size)
     void *ptr = NULL;
 
     /* let's disallow possibly ambiguous cases */
-    if (size > (max_alloc_size - 32))
+    if (size > (max_alloc_size - 32)) {
         return NULL;
+}
 
 #if HAVE_POSIX_MEMALIGN
-    if (size) //OS X on SDK 10.6 has a broken posix_memalign implementation
-    if (posix_memalign(&ptr, ALIGN, size))
+    if (size) { //OS X on SDK 10.6 has a broken posix_memalign implementation
+    if (posix_memalign(&ptr, ALIGN, size)) {
         ptr = NULL;
+}
 #elif HAVE_ALIGNED_MALLOC
     ptr = _aligned_malloc(size, ALIGN);
 #elif HAVE_MEMALIGN
@@ -135,8 +137,9 @@ void *av_malloc(size_t size)
 void *av_realloc(void *ptr, size_t size)
 {
     /* let's disallow possibly ambiguous cases */
-    if (size > (max_alloc_size - 32))
+    if (size > (max_alloc_size - 32)) {
         return NULL;
+}
 
 #if HAVE_ALIGNED_MALLOC
     return _aligned_realloc(ptr, size + !size, ALIGN);
@@ -155,8 +158,9 @@ void *av_realloc_f(void *ptr, size_t nelem, size_t elsize)
         return NULL;
     }
     r = av_realloc(ptr, size);
-    if (!r)
+    if (!r) {
         av_free(ptr);
+}
     return r;
 }
 
@@ -183,8 +187,9 @@ int av_reallocp(void *ptr, size_t size)
 
 void *av_realloc_array(void *ptr, size_t nmemb, size_t size)
 {
-    if (!size || nmemb >= INT_MAX / size)
+    if (!size || nmemb >= INT_MAX / size) {
         return NULL;
+}
     return av_realloc(ptr, nmemb * size);
 }
 
@@ -195,8 +200,9 @@ int av_reallocp_array(void *ptr, size_t nmemb, size_t size)
     memcpy(&val, ptr, sizeof(val));
     val = av_realloc_f(val, nmemb, size);
     memcpy(ptr, &val, sizeof(val));
-    if (!val && nmemb && size)
+    if (!val && nmemb && size) {
         return AVERROR(ENOMEM);
+}
 
     return 0;
 }
@@ -222,15 +228,17 @@ void av_freep(void *arg)
 void *av_mallocz(size_t size)
 {
     void *ptr = av_malloc(size);
-    if (ptr)
+    if (ptr) {
         memset(ptr, 0, size);
+}
     return ptr;
 }
 
 void *av_calloc(size_t nmemb, size_t size)
 {
-    if (size <= 0 || nmemb >= INT_MAX / size)
+    if (size <= 0 || nmemb >= INT_MAX / size) {
         return NULL;
+}
     return av_mallocz(nmemb * size);
 }
 
@@ -240,8 +248,9 @@ char *av_strdup(const char *s)
     if (s) {
         size_t len = strlen(s) + 1;
         ptr = av_realloc(NULL, len);
-        if (ptr)
+        if (ptr) {
             memcpy(ptr, s, len);
+}
     }
     return ptr;
 }
@@ -250,16 +259,19 @@ char *av_strndup(const char *s, size_t len)
 {
     char *ret = NULL, *end;
 
-    if (!s)
+    if (!s) {
         return NULL;
+}
 
     end = memchr(s, 0, len);
-    if (end)
+    if (end) {
         len = end - s;
+}
 
     ret = av_realloc(NULL, len + 1);
-    if (!ret)
+    if (!ret) {
         return NULL;
+}
 
     memcpy(ret, s, len);
     ret[len] = 0;
@@ -271,8 +283,9 @@ void *av_memdup(const void *p, size_t size)
     void *ptr = NULL;
     if (p) {
         ptr = av_malloc(size);
-        if (ptr)
+        if (ptr) {
             memcpy(ptr, p, size);
+}
     }
     return ptr;
 }
@@ -400,8 +413,9 @@ static void fill32(uint8_t *dst, int len)
 void av_memcpy_backptr(uint8_t *dst, int back, int cnt)
 {
     const uint8_t *src = &dst[-back];
-    if (!back)
+    if (!back) {
         return;
+}
 
     if (back == 1) {
         memset(dst, *src, cnt);
@@ -442,15 +456,17 @@ void av_memcpy_backptr(uint8_t *dst, int back, int cnt)
             dst += 2;
             cnt -= 2;
         }
-        if (cnt)
+        if (cnt) {
             *dst = *src;
+}
     }
 }
 
 void *av_fast_realloc(void *ptr, unsigned int *size, size_t min_size)
 {
-    if (min_size < *size)
+    if (min_size < *size) {
         return ptr;
+}
 
     min_size = FFMAX(min_size + min_size / 16 + 32, min_size);
 
@@ -458,8 +474,9 @@ void *av_fast_realloc(void *ptr, unsigned int *size, size_t min_size)
     /* we could set this to the unmodified min_size but this is safer
      * if the user lost the ptr and uses NULL now
      */
-    if (!ptr)
+    if (!ptr) {
         min_size = 0;
+}
 
     *size = min_size;
 

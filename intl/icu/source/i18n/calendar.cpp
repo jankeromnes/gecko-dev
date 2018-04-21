@@ -1113,11 +1113,13 @@ Calendar::getNow()
 double
 Calendar::getTimeInMillis(UErrorCode& status) const
 {
-    if(U_FAILURE(status))
+    if(U_FAILURE(status)) {
         return 0.0;
+}
 
-    if ( ! fIsTimeSet)
+    if ( ! fIsTimeSet) {
         ((Calendar*)this)->updateTime(status);
+}
 
     /* Test for buffer overflows */
     if(U_FAILURE(status)) {
@@ -1137,8 +1139,9 @@ Calendar::getTimeInMillis(UErrorCode& status) const
 */
 void
 Calendar::setTimeInMillis( double millis, UErrorCode& status ) {
-    if(U_FAILURE(status))
+    if(U_FAILURE(status)) {
         return;
+}
 
     if (millis > MAX_MILLIS) {
         if(isLenient()) {
@@ -1177,7 +1180,8 @@ Calendar::get(UCalendarDateFields field, UErrorCode& status) const
     // field values are only computed when actually requested; for more on when computation
     // of various things happens, see the "data flow in Calendar" description at the top
     // of this file
-    if (U_SUCCESS(status)) ((Calendar*)this)->complete(status); // Cast away const
+    if (U_SUCCESS(status)) { ((Calendar*)this)->complete(status); // Cast away const
+}
     return U_SUCCESS(status) ? fFields[field] : 0;
 }
 
@@ -1701,7 +1705,8 @@ int32_t Calendar::weekNumber(int32_t desiredDay, int32_t dayOfPeriod, int32_t da
     // in question (either a year or a month).  Zero represents the
     // first day of the week on this calendar.
     int32_t periodStartDayOfWeek = (dayOfWeek - getFirstDayOfWeek() - dayOfPeriod + 1) % 7;
-    if (periodStartDayOfWeek < 0) periodStartDayOfWeek += 7;
+    if (periodStartDayOfWeek < 0) { periodStartDayOfWeek += 7;
+}
 
     // Compute the week number.  Initially, ignore the first week, which
     // may be fractional (or may not be).  We add periodStartDayOfWeek in
@@ -1711,7 +1716,8 @@ int32_t Calendar::weekNumber(int32_t desiredDay, int32_t dayOfPeriod, int32_t da
     // If the first week is long enough, then count it.  If
     // the minimal days in the first week is one, or if the period start
     // is zero, we always increment weekNo.
-    if ((7 - periodStartDayOfWeek) >= getMinimalDaysInFirstWeek()) ++weekNo;
+    if ((7 - periodStartDayOfWeek) >= getMinimalDaysInFirstWeek()) { ++weekNo;
+}
 
     return weekNo;
 }
@@ -1900,22 +1906,25 @@ void Calendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& statu
             // Normalize the DAY_OF_WEEK so that 0 is the first day of the week
             // in this locale.  We have dow in 0..6.
             int32_t dow = internalGet(UCAL_DAY_OF_WEEK) - getFirstDayOfWeek();
-            if (dow < 0) dow += 7;
+            if (dow < 0) { dow += 7;
+}
 
             // Find the day of the week (normalized for locale) for the first
             // of the month.
             int32_t fdm = (dow - internalGet(UCAL_DAY_OF_MONTH) + 1) % 7;
-            if (fdm < 0) fdm += 7;
+            if (fdm < 0) { fdm += 7;
+}
 
             // Get the first day of the first full week of the month,
             // including phantom days, if any.  Figure out if the first week
             // counts or not; if it counts, then fill in phantom days.  If
             // not, advance to the first real full week (skip the partial week).
             int32_t start;
-            if ((7 - fdm) < getMinimalDaysInFirstWeek())
+            if ((7 - fdm) < getMinimalDaysInFirstWeek()) {
                 start = 8 - fdm; // Skip the first partial week
-            else
+            } else {
                 start = 1 - fdm; // This may be zero or negative
+}
 
             // Get the day of the week (normalized for locale) for the last
             // day of the month.
@@ -1933,12 +1942,15 @@ void Calendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& statu
             int32_t gap = limit - start;
             int32_t day_of_month = (internalGet(UCAL_DAY_OF_MONTH) + amount*7 -
                 start) % gap;
-            if (day_of_month < 0) day_of_month += gap;
+            if (day_of_month < 0) { day_of_month += gap;
+}
             day_of_month += start;
 
             // Finally, pin to the real start and end of the month.
-            if (day_of_month < 1) day_of_month = 1;
-            if (day_of_month > monthLen) day_of_month = monthLen;
+            if (day_of_month < 1) { day_of_month = 1;
+}
+            if (day_of_month > monthLen) { day_of_month = monthLen;
+}
 
             // Set the DAY_OF_MONTH.  We rely on the fact that this field
             // takes precedence over everything else (since all other fields
@@ -1958,22 +1970,25 @@ void Calendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& statu
             // Normalize the DAY_OF_WEEK so that 0 is the first day of the week
             // in this locale.  We have dow in 0..6.
             int32_t dow = internalGet(UCAL_DAY_OF_WEEK) - getFirstDayOfWeek();
-            if (dow < 0) dow += 7;
+            if (dow < 0) { dow += 7;
+}
 
             // Find the day of the week (normalized for locale) for the first
             // of the year.
             int32_t fdy = (dow - internalGet(UCAL_DAY_OF_YEAR) + 1) % 7;
-            if (fdy < 0) fdy += 7;
+            if (fdy < 0) { fdy += 7;
+}
 
             // Get the first day of the first full week of the year,
             // including phantom days, if any.  Figure out if the first week
             // counts or not; if it counts, then fill in phantom days.  If
             // not, advance to the first real full week (skip the partial week).
             int32_t start;
-            if ((7 - fdy) < getMinimalDaysInFirstWeek())
+            if ((7 - fdy) < getMinimalDaysInFirstWeek()) {
                 start = 8 - fdy; // Skip the first partial week
-            else
+            } else {
                 start = 1 - fdy; // This may be zero or negative
+}
 
             // Get the day of the week (normalized for locale) for the last
             // day of the year.
@@ -1991,12 +2006,15 @@ void Calendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& statu
             int32_t gap = limit - start;
             int32_t day_of_year = (internalGet(UCAL_DAY_OF_YEAR) + amount*7 -
                 start) % gap;
-            if (day_of_year < 0) day_of_year += gap;
+            if (day_of_year < 0) { day_of_year += gap;
+}
             day_of_year += start;
 
             // Finally, pin to the real start and end of the month.
-            if (day_of_year < 1) day_of_year = 1;
-            if (day_of_year > yearLen) day_of_year = yearLen;
+            if (day_of_year < 1) { day_of_year = 1;
+}
+            if (day_of_year > yearLen) { day_of_year = yearLen;
+}
 
             // Make sure that the year and day of year are attended to by
             // clearing other fields which would normally take precedence.
@@ -2022,7 +2040,8 @@ void Calendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& statu
             double oneYear = yearLength;
             oneYear *= kOneDay;
             newtime = uprv_fmod((internalGetTime() + delta - min2), oneYear);
-            if (newtime < 0) newtime += oneYear;
+            if (newtime < 0) { newtime += oneYear;
+}
             setTimeInMillis(newtime + min2, status);
             return;
         }
@@ -2037,10 +2056,12 @@ void Calendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& statu
             // week.  This will be a value 0..6.
             int32_t leadDays = internalGet(field);
             leadDays -= (field == UCAL_DAY_OF_WEEK) ? getFirstDayOfWeek() : 1;
-            if (leadDays < 0) leadDays += 7;
+            if (leadDays < 0) { leadDays += 7;
+}
             double min2 = internalGetTime() - leadDays * kOneDay;
             double newtime = uprv_fmod((internalGetTime() + delta - min2), kOneWeek);
-            if (newtime < 0) newtime += kOneWeek;
+            if (newtime < 0) { newtime += kOneWeek;
+}
             setTimeInMillis(newtime + min2, status);
             return;
         }
@@ -2062,7 +2083,8 @@ void Calendar::roll(UCalendarDateFields field, int32_t amount, UErrorCode& statu
             double gap2 = kOneWeek * (preWeeks + postWeeks + 1); // Must add 1!
             // Roll within this range
             double newtime = uprv_fmod((internalGetTime() + delta - min2), gap2);
-            if (newtime < 0) newtime += gap2;
+            if (newtime < 0) { newtime += gap2;
+}
             setTimeInMillis(newtime + min2, status);
             return;
         }
@@ -2272,7 +2294,8 @@ int32_t Calendar::fieldDifference(UDate when, EDateFields field, UErrorCode& sta
 }
 
 int32_t Calendar::fieldDifference(UDate targetMs, UCalendarDateFields field, UErrorCode& ec) {
-    if (U_FAILURE(ec)) return 0;
+    if (U_FAILURE(ec)) { return 0;
+}
     int32_t min = 0;
     double startMs = getTimeInMillis(ec);
     // Always add from the start millis.  This accomodates
@@ -2377,7 +2400,8 @@ void
 Calendar::adoptTimeZone(TimeZone* zone)
 {
     // Do nothing if passed-in zone is NULL
-    if (zone == NULL) return;
+    if (zone == NULL) { return;
+}
 
     // fZone should always be non-null
     delete fZone;
@@ -2535,8 +2559,9 @@ Calendar::getDayOfWeekType(UCalendarDaysOfWeek dayOfWeek, UErrorCode &status) co
         return UCAL_WEEKDAY;
     }
     if (fWeekendOnset == fWeekendCease) {
-        if (dayOfWeek != fWeekendOnset)
+        if (dayOfWeek != fWeekendOnset) {
             return UCAL_WEEKDAY;
+}
         return (fWeekendOnsetMillis == 0) ? UCAL_WEEKEND : UCAL_WEEKEND_ONSET;
     }
     if (fWeekendOnset < fWeekendCease) {
@@ -3576,7 +3601,8 @@ Calendar::getActualMaximum(UCalendarDateFields field, UErrorCode& status) const
     switch (field) {
     case UCAL_DATE:
         {
-            if(U_FAILURE(status)) return 0;
+            if(U_FAILURE(status)) { return 0;
+}
             Calendar *cal = clone();
             if(!cal) { status = U_MEMORY_ALLOCATION_ERROR; return 0; }
             cal->setLenient(TRUE);
@@ -3588,7 +3614,8 @@ Calendar::getActualMaximum(UCalendarDateFields field, UErrorCode& status) const
 
     case UCAL_DAY_OF_YEAR:
         {
-            if(U_FAILURE(status)) return 0;
+            if(U_FAILURE(status)) { return 0;
+}
             Calendar *cal = clone();
             if(!cal) { status = U_MEMORY_ALLOCATION_ERROR; return 0; }
             cal->setLenient(TRUE);
@@ -3710,7 +3737,8 @@ int32_t Calendar::getActualHelper(UCalendarDateFields field, int32_t startValue,
 
     // clone the calendar so we don't mess with the real one, and set it to
     // accept anything for the field values
-    if(U_FAILURE(status)) return startValue;
+    if(U_FAILURE(status)) { return startValue;
+}
     Calendar *work = clone();
     if(!work) { status = U_MEMORY_ALLOCATION_ERROR; return startValue; }
 
@@ -3766,7 +3794,8 @@ void
 Calendar::setWeekData(const Locale& desiredLocale, const char *type, UErrorCode& status)
 {
 
-    if (U_FAILURE(status)) return;
+    if (U_FAILURE(status)) { return;
+}
 
     fFirstDayOfWeek = UCAL_SUNDAY;
     fMinimalDaysInFirstWeek = 1;
@@ -3880,14 +3909,16 @@ void
 Calendar::updateTime(UErrorCode& status)
 {
     computeTime(status);
-    if(U_FAILURE(status))
+    if(U_FAILURE(status)) {
         return;
+}
 
     // If we are lenient, we need to recompute the fields to normalize
     // the values.  Also, if we haven't set all the fields yet (i.e.,
     // in a newly-created object), we need to fill in the fields. [LIU]
-    if (isLenient() || ! fAreAllFieldsSet)
+    if (isLenient() || ! fAreAllFieldsSet) {
         fAreFieldsSet = FALSE;
+}
 
     fIsTimeSet = TRUE;
     fAreFieldsVirtuallySet = FALSE;

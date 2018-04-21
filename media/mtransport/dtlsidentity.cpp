@@ -28,8 +28,9 @@ RefPtr<DtlsIdentity> DtlsIdentity::Generate() {
 
   SECStatus rv = PK11_GenerateRandomOnSlot(slot.get(), random_name,
                                            sizeof(random_name));
-  if (rv != SECSuccess)
+  if (rv != SECSuccess) {
     return nullptr;
+}
 
   std::string name;
   char chunk[3];
@@ -60,8 +61,9 @@ RefPtr<DtlsIdentity> DtlsIdentity::Generate() {
       PK11_GenerateKeyPair(slot.get(),
                            CKM_EC_KEY_PAIR_GEN, &ecdsaParams, &pubkey,
                            PR_FALSE, PR_TRUE, nullptr));
-  if (private_key == nullptr)
+  if (private_key == nullptr) {
     return nullptr;
+}
   UniqueSECKEYPublicKey public_key(pubkey);
   pubkey = nullptr;
 
@@ -117,8 +119,9 @@ RefPtr<DtlsIdentity> DtlsIdentity::Generate() {
 
   rv = SECOID_SetAlgorithmID(arena, &certificate->signature,
                              SEC_OID_ANSIX962_ECDSA_SHA256_SIGNATURE, nullptr);
-  if (rv != SECSuccess)
+  if (rv != SECSuccess) {
     return nullptr;
+}
 
   // Set version to X509v3.
   *(certificate->version.data) = SEC_CERTIFICATE_VERSION_3;

@@ -117,8 +117,9 @@ empty_output_buffer (j_compress_ptr cinfo)
   my_dest_ptr dest = (my_dest_ptr) cinfo->dest;
 
   if (JFWRITE(dest->outfile, dest->buffer, OUTPUT_BUF_SIZE) !=
-      (size_t) OUTPUT_BUF_SIZE)
+      (size_t) OUTPUT_BUF_SIZE) {
     ERREXIT(cinfo, JERR_FILE_WRITE);
+}
 
   dest->pub.next_output_byte = dest->buffer;
   dest->pub.free_in_buffer = OUTPUT_BUF_SIZE;
@@ -176,13 +177,15 @@ term_destination (j_compress_ptr cinfo)
 
   /* Write any data remaining in the buffer */
   if (datacount > 0) {
-    if (JFWRITE(dest->outfile, dest->buffer, datacount) != datacount)
+    if (JFWRITE(dest->outfile, dest->buffer, datacount) != datacount) {
       ERREXIT(cinfo, JERR_FILE_WRITE);
+}
   }
   fflush(dest->outfile);
   /* Make sure we wrote the output file OK */
-  if (ferror(dest->outfile))
+  if (ferror(dest->outfile)) {
     ERREXIT(cinfo, JERR_FILE_WRITE);
+}
 }
 
 #if JPEG_LIB_VERSION >= 80 || defined(MEM_SRCDST_SUPPORTED)

@@ -51,8 +51,9 @@ DefaultAllocEntry(void *pool, const void *key)
 static void PR_CALLBACK
 DefaultFreeEntry(void *pool, PLHashEntry *he, PRUintn flag)
 {
-    if (flag == HT_FREE_ENTRY)
+    if (flag == HT_FREE_ENTRY) {
         PR_Free(he);
+}
 }
 
 static PLHashAllocOps defaultHashAllocOps = {
@@ -72,15 +73,18 @@ PL_NewHashTable(PRUint32 n, PLHashFunction keyHash,
         n = MINBUCKETSLOG2;
     } else {
         n = PR_CeilingLog2(n);
-        if ((PRInt32)n < 0)
+        if ((PRInt32)n < 0) {
             return 0;
+}
     }
 
-    if (!allocOps) allocOps = &defaultHashAllocOps;
+    if (!allocOps) { allocOps = &defaultHashAllocOps;
+}
 
     ht = (PLHashTable*)((*allocOps->allocTable)(allocPriv, sizeof *ht));
-    if (!ht)
+    if (!ht) {
 	return 0;
+}
     memset(ht, 0, sizeof *ht);
     ht->shift = PL_HASH_BITS - n;
     n = 1 << n;
@@ -231,8 +235,9 @@ PL_HashTableRawAdd(PLHashTable *ht, PLHashEntry **hep,
 
     /* Make a new key value entry */
     he = (*ht->allocOps->allocEntry)(ht->allocPriv, key);
-    if (!he)
+    if (!he) {
 	return 0;
+}
     he->keyHash = keyHash;
     he->key = key;
     he->value = value;
@@ -256,8 +261,9 @@ PL_HashTableAdd(PLHashTable *ht, const void *key, void *value)
             /* key,value pair is already present in table */
             return he;
         }
-        if (he->value)
+        if (he->value) {
             (*ht->allocOps->freeEntry)(ht->allocPriv, he, HT_FREE_VALUE);
+}
         he->value = value;
         return he;
     }
@@ -315,8 +321,9 @@ PL_HashTableRemove(PLHashTable *ht, const void *key)
 
     keyHash = (*ht->keyHash)(key);
     hep = PL_HashTableRawLookup(ht, keyHash, key);
-    if ((he = *hep) == 0)
+    if ((he = *hep) == 0) {
         return PR_FALSE;
+}
 
     /* Hit; remove element */
     PL_HashTableRawRemove(ht, hep, he);
@@ -465,8 +472,9 @@ PL_HashString(const void *key)
     const PRUint8 *s;
 
     h = 0;
-    for (s = (const PRUint8*)key; *s; s++)
+    for (s = (const PRUint8*)key; *s; s++) {
         h = PR_ROTATE_LEFT32(h, 4) ^ *s;
+}
     return h;
 }
 

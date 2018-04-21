@@ -56,8 +56,9 @@ static void
 skip_whitespace(char **str)
 {
     char *c = *str;
-    while (*c == ' ')
+    while (*c == ' ') {
         ++c;
+}
 
     *str = c;
 }
@@ -66,8 +67,9 @@ static void
 fast_forward(char **str, int skip)
 {
     char *c = *str;
-    while (*c != '\0' && skip-- > 0)
+    while (*c != '\0' && skip-- > 0) {
         ++c;
+}
 
     *str = c;
 }
@@ -76,8 +78,9 @@ static void
 skip_to_past_space(char **str)
 {
     char *c = *str;
-    while (*c != ' ' && *c != '\0')
+    while (*c != ' ' && *c != '\0') {
         ++c;
+}
 
     *str = c;
 
@@ -92,14 +95,16 @@ grab_token(char **str, char **out)
     int len;
     char *tmp;
 
-    while (*c != ' ' && *c != '\0')
+    while (*c != ' ' && *c != '\0') {
         ++c;
+}
 
     len = c - *str;
 
     tmp = RMALLOC(len + 1);
-    if (!tmp)
+    if (!tmp) {
         ABORT(R_NO_MEMORY);
+}
 
     memcpy(tmp, *str, len);
     tmp[len] = '\0';
@@ -125,11 +130,13 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
     char *rel_addr=0;
     unsigned char transport;
 
-    if(!(cand=RCALLOC(sizeof(nr_ice_candidate))))
+    if(!(cand=RCALLOC(sizeof(nr_ice_candidate)))) {
         ABORT(R_NO_MEMORY);
+}
 
-    if(!(cand->label=r_strdup(orig)))
+    if(!(cand->label=r_strdup(orig))) {
         ABORT(R_NO_MEMORY);
+}
 
     cand->ctx=ctx;
     cand->isock=0;
@@ -138,107 +145,133 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
     skip_whitespace(&str);
 
     /* Skip a= if present */
-    if (!strncmp(str, "a=", 2))
+    if (!strncmp(str, "a=", 2)) {
         str += 2;
+}
 
     /* Candidate attr */
-    if (strncasecmp(str, "candidate:", 10))
+    if (strncasecmp(str, "candidate:", 10)) {
         ABORT(R_BAD_DATA);
+}
 
     fast_forward(&str, 10);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     skip_whitespace(&str);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     /* Foundation */
-    if ((r=grab_token(&str, &cand->foundation)))
+    if ((r=grab_token(&str, &cand->foundation))) {
         ABORT(r);
+}
 
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     skip_whitespace(&str);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     /* component */
-    if (sscanf(str, "%u", &component_id) != 1)
+    if (sscanf(str, "%u", &component_id) != 1) {
         ABORT(R_BAD_DATA);
+}
 
-    if (component_id < 1 || component_id > 256)
+    if (component_id < 1 || component_id > 256) {
         ABORT(R_BAD_DATA);
+}
 
     cand->component_id = (UCHAR)component_id;
 
     skip_to_past_space(&str);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     /* Protocol */
-    if (!strncasecmp(str, "UDP", 3))
+    if (!strncasecmp(str, "UDP", 3)) {
       transport=IPPROTO_UDP;
-    else if (!strncasecmp(str, "TCP", 3))
+    } else if (!strncasecmp(str, "TCP", 3)) {
       transport=IPPROTO_TCP;
-    else
+    } else {
       ABORT(R_BAD_DATA);
+}
 
     fast_forward(&str, 3);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     skip_whitespace(&str);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     /* priority */
-    if (sscanf(str, "%u", &cand->priority) != 1)
+    if (sscanf(str, "%u", &cand->priority) != 1) {
         ABORT(R_BAD_DATA);
+}
 
-    if (cand->priority < 1)
+    if (cand->priority < 1) {
         ABORT(R_BAD_DATA);
+}
 
     skip_to_past_space(&str);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     /* Peer address/port */
-    if ((r=grab_token(&str, &connection_address)))
+    if ((r=grab_token(&str, &connection_address))) {
         ABORT(r);
+}
 
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     skip_whitespace(&str);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
-    if (sscanf(str, "%u", &port) != 1)
+    if (sscanf(str, "%u", &port) != 1) {
         ABORT(R_BAD_DATA);
+}
 
-    if (port < 1 || port > 0x0FFFF)
+    if (port < 1 || port > 0x0FFFF) {
         ABORT(R_BAD_DATA);
+}
 
-    if ((r=nr_str_port_to_transport_addr(connection_address,port,transport,&cand->addr)))
+    if ((r=nr_str_port_to_transport_addr(connection_address,port,transport,&cand->addr))) {
       ABORT(r);
+}
 
     skip_to_past_space(&str);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     /* Type */
-    if (strncasecmp("typ", str, 3))
+    if (strncasecmp("typ", str, 3)) {
         ABORT(R_BAD_DATA);
+}
 
     fast_forward(&str, 3);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     skip_whitespace(&str);
-    if (*str == '\0')
+    if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
     assert(nr_ice_candidate_type_names[0] == 0);
 
@@ -248,8 +281,9 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
             break;
         }
     }
-    if (nr_ice_candidate_type_names[i] == 0)
+    if (nr_ice_candidate_type_names[i] == 0) {
         ABORT(R_BAD_DATA);
+}
 
     fast_forward(&str, strlen(nr_ice_candidate_type_names[i]));
 
@@ -263,49 +297,62 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
     case RELAYED:
 
         skip_whitespace(&str);
-        if (*str == '\0')
+        if (*str == '\0') {
             ABORT(R_BAD_DATA);
+}
 
-        if (strncasecmp("raddr", str, 5))
+        if (strncasecmp("raddr", str, 5)) {
             ABORT(R_BAD_DATA);
+}
 
         fast_forward(&str, 5);
-        if (*str == '\0')
+        if (*str == '\0') {
             ABORT(R_BAD_DATA);
+}
 
         skip_whitespace(&str);
-        if (*str == '\0')
+        if (*str == '\0') {
             ABORT(R_BAD_DATA);
+}
 
-        if ((r=grab_token(&str, &rel_addr)))
+        if ((r=grab_token(&str, &rel_addr))) {
             ABORT(r);
+}
 
-        if (*str == '\0')
+        if (*str == '\0') {
             ABORT(R_BAD_DATA);
+}
 
         skip_whitespace(&str);
-        if (*str == '\0')
+        if (*str == '\0') {
             ABORT(R_BAD_DATA);
+}
 
-        if (strncasecmp("rport", str, 5))
+        if (strncasecmp("rport", str, 5)) {
               ABORT(R_BAD_DATA);
+}
 
         fast_forward(&str, 5);
-        if (*str == '\0')
+        if (*str == '\0') {
             ABORT(R_BAD_DATA);
+}
 
         skip_whitespace(&str);
-        if (*str == '\0')
+        if (*str == '\0') {
             ABORT(R_BAD_DATA);
+}
 
-        if (sscanf(str, "%u", &port) != 1)
+        if (sscanf(str, "%u", &port) != 1) {
             ABORT(R_BAD_DATA);
+}
 
-        if (port > 0x0FFFF)
+        if (port > 0x0FFFF) {
             ABORT(R_BAD_DATA);
+}
 
-        if ((r=nr_str_port_to_transport_addr(rel_addr,port,transport,&cand->base)))
+        if ((r=nr_str_port_to_transport_addr(rel_addr,port,transport,&cand->base))) {
           ABORT(r);
+}
 
         skip_to_past_space(&str);
         /* it's expected to be at EOD at this point */
@@ -320,8 +367,9 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
 
     if (transport == IPPROTO_TCP && cand->type != RELAYED) {
       /* Parse tcptype extension per RFC 6544 S 4.5 */
-      if (strncasecmp("tcptype ", str, 8))
+      if (strncasecmp("tcptype ", str, 8)) {
         ABORT(R_BAD_DATA);
+}
 
       fast_forward(&str, 8);
       skip_whitespace(&str);
@@ -334,11 +382,13 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
         }
       }
 
-      if (cand->tcp_type == 0)
+      if (cand->tcp_type == 0) {
         ABORT(R_BAD_DATA);
+}
 
-      if (*str && *str != ' ')
+      if (*str && *str != ' ') {
         ABORT(R_BAD_DATA);
+}
     }
     /* Ignore extensions per RFC 5245 S 15.1 */
 #if 0
@@ -377,27 +427,33 @@ nr_ice_peer_ctx_parse_media_stream_attribute(nr_ice_peer_ctx *pctx, nr_ice_media
 
     if (!strncasecmp(str, "ice-ufrag:", 10)) {
       fast_forward(&str, 10);
-      if (*str == '\0')
+      if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
       skip_whitespace(&str);
-      if (*str == '\0')
+      if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
-      if ((r=grab_token(&str, &stream->ufrag)))
+      if ((r=grab_token(&str, &stream->ufrag))) {
         ABORT(r);
+}
     }
     else if (!strncasecmp(str, "ice-pwd:", 8)) {
       fast_forward(&str, 8);
-      if (*str == '\0')
+      if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
       skip_whitespace(&str);
-      if (*str == '\0')
+      if (*str == '\0') {
         ABORT(R_BAD_DATA);
+}
 
-      if ((r=grab_token(&str, &stream->pwd)))
+      if ((r=grab_token(&str, &stream->pwd))) {
         ABORT(r);
+}
     }
     else {
       ABORT(R_BAD_DATA);
@@ -414,8 +470,9 @@ nr_ice_peer_ctx_parse_media_stream_attribute(nr_ice_peer_ctx *pctx, nr_ice_media
     _status=0;
   abort:
     if (_status) {
-      if (orig)
+      if (orig) {
         r_log(LOG_ICE,LOG_WARNING,"ICE-PEER(%s): Error parsing attribute: %s",pctx->label,orig);
+}
     }
 
     return(_status);
@@ -446,35 +503,44 @@ nr_ice_peer_ctx_parse_global_attributes(nr_ice_peer_ctx *pctx, char **attrs, int
             skip_whitespace(&str);
 
             while (*str != '\0') {
-                if ((r=grab_token(&str, &component_id)))
+                if ((r=grab_token(&str, &component_id))) {
                     ABORT(r);
+}
 
-                if (*str == '\0')
+                if (*str == '\0') {
                     ABORT(R_BAD_DATA);
+}
 
                 skip_whitespace(&str);
-                if (*str == '\0')
+                if (*str == '\0') {
                     ABORT(R_BAD_DATA);
+}
 
-                if ((r=grab_token(&str, &connection_address)))
+                if ((r=grab_token(&str, &connection_address))) {
                     ABORT(r);
+}
 
-                if (*str == '\0')
+                if (*str == '\0') {
                     ABORT(R_BAD_DATA);
+}
 
                 addr = inet_addr(connection_address);
-                if (addr == INADDR_NONE)
+                if (addr == INADDR_NONE) {
                     ABORT(R_BAD_DATA);
+}
 
                 skip_whitespace(&str);
-                if (*str == '\0')
+                if (*str == '\0') {
                     ABORT(R_BAD_DATA);
+}
 
-                if (sscanf(str, "%u", &port) != 1)
+                if (sscanf(str, "%u", &port) != 1) {
                     ABORT(R_BAD_DATA);
+}
 
-                if (port < 1 || port > 0x0FFFF)
+                if (port < 1 || port > 0x0FFFF) {
                     ABORT(R_BAD_DATA);
+}
 
                 skip_to_past_space(&str);
 
@@ -504,39 +570,46 @@ nr_ice_peer_ctx_parse_global_attributes(nr_ice_peer_ctx *pctx, char **attrs, int
         }
         else if (!strncasecmp(str, "ice-ufrag:", 10)) {
             fast_forward(&str, 10);
-            if (*str == '\0')
+            if (*str == '\0') {
                 ABORT(R_BAD_DATA);
+}
 
             skip_whitespace(&str);
-            if (*str == '\0')
+            if (*str == '\0') {
                 ABORT(R_BAD_DATA);
+}
 
             RFREE(pctx->peer_ufrag);
             pctx->peer_ufrag = 0;
-            if ((r=grab_token(&str, &pctx->peer_ufrag)))
+            if ((r=grab_token(&str, &pctx->peer_ufrag))) {
                 ABORT(r);
+}
         }
         else if (!strncasecmp(str, "ice-pwd:", 8)) {
             fast_forward(&str, 8);
-            if (*str == '\0')
+            if (*str == '\0') {
                 ABORT(R_BAD_DATA);
+}
 
             skip_whitespace(&str);
-            if (*str == '\0')
+            if (*str == '\0') {
                 ABORT(R_BAD_DATA);
+}
 
             RFREE(pctx->peer_pwd);
             pctx->peer_pwd = 0;
-            if ((r=grab_token(&str, &pctx->peer_pwd)))
+            if ((r=grab_token(&str, &pctx->peer_pwd))) {
                 ABORT(r);
+}
         }
         else if (!strncasecmp(str, "ice-options:", 12)) {
             fast_forward(&str, 12);
             skip_whitespace(&str);
 
             while (*str != '\0') {
-                if ((r=grab_token(&str, &ice_option_tag)))
+                if ((r=grab_token(&str, &ice_option_tag))) {
                     ABORT(r);
+}
 
                 skip_whitespace(&str);
 
@@ -563,8 +636,9 @@ nr_ice_peer_ctx_parse_global_attributes(nr_ice_peer_ctx *pctx, char **attrs, int
     _status=0;
   abort:
     if (_status) {
-      if (orig)
+      if (orig) {
         r_log(LOG_ICE,LOG_WARNING,"ICE-PEER(%s): Error parsing attribute: %s",pctx->label,orig);
+}
     }
 
     RFREE(connection_address);

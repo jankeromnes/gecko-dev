@@ -1062,8 +1062,9 @@ yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, Context *context)
 {
   YYUSE (yyvaluep);
   YYUSE (context);
-  if (!yymsg)
+  if (!yymsg) {
     yymsg = "Deleting";
+}
   YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
@@ -1191,23 +1192,27 @@ YYSTYPE yylval YY_INITIAL_VALUE (= yyval_default);
       goto yyexhaustedlab;
 # else
       /* Extend the stack our own way.  */
-      if (YYMAXDEPTH <= yystacksize)
+      if (YYMAXDEPTH <= yystacksize) {
         goto yyexhaustedlab;
+}
       yystacksize *= 2;
-      if (YYMAXDEPTH < yystacksize)
+      if (YYMAXDEPTH < yystacksize) {
         yystacksize = YYMAXDEPTH;
+}
 
       {
         yytype_int16 *yyss1 = yyss;
         union yyalloc *yyptr =
           (union yyalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (yystacksize));
-        if (! yyptr)
+        if (! yyptr) {
           goto yyexhaustedlab;
+}
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
 #  undef YYSTACK_RELOCATE
-        if (yyss1 != yyssa)
+        if (yyss1 != yyssa) {
           YYSTACK_FREE (yyss1);
+}
       }
 # endif
 #endif /* no yyoverflow */
@@ -1218,14 +1223,16 @@ YYSTYPE yylval YY_INITIAL_VALUE (= yyval_default);
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
                   (unsigned long int) yystacksize));
 
-      if (yyss + yystacksize - 1 <= yyssp)
+      if (yyss + yystacksize - 1 <= yyssp) {
         YYABORT;
+}
     }
 
   YYDPRINTF ((stderr, "Entering state %d\n", yystate));
 
-  if (yystate == YYFINAL)
+  if (yystate == YYFINAL) {
     YYACCEPT;
+}
 
   goto yybackup;
 
@@ -1239,8 +1246,9 @@ yybackup:
 
   /* First try to decide what to do without reference to lookahead token.  */
   yyn = yypact[yystate];
-  if (yypact_value_is_default (yyn))
+  if (yypact_value_is_default (yyn)) {
     goto yydefault;
+}
 
   /* Not known => get a lookahead token if don't already have one.  */
 
@@ -1265,21 +1273,24 @@ yybackup:
   /* If the proper action on seeing token YYTOKEN is to reduce or to
      detect an error, take that action.  */
   yyn += yytoken;
-  if (yyn < 0 || YYLAST < yyn || yycheck[yyn] != yytoken)
+  if (yyn < 0 || YYLAST < yyn || yycheck[yyn] != yytoken) {
     goto yydefault;
+}
   yyn = yytable[yyn];
   if (yyn <= 0)
     {
-      if (yytable_value_is_error (yyn))
+      if (yytable_value_is_error (yyn)) {
         goto yyerrlab;
+}
       yyn = -yyn;
       goto yyreduce;
     }
 
   /* Count tokens shifted since error; after three, turn off error
      status.  */
-  if (yyerrstatus)
+  if (yyerrstatus) {
     yyerrstatus--;
+}
 
   /* Shift the lookahead token.  */
   YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
@@ -1300,8 +1311,9 @@ yybackup:
 `-----------------------------------------------------------*/
 yydefault:
   yyn = yydefact[yystate];
-  if (yyn == 0)
+  if (yyn == 0) {
     goto yyerrlab;
+}
   goto yyreduce;
 
 
@@ -1710,10 +1722,11 @@ yyreduce:
   yyn = yyr1[yyn];
 
   yystate = yypgoto[yyn - YYNTOKENS] + *yyssp;
-  if (0 <= yystate && yystate <= YYLAST && yycheck[yystate] == *yyssp)
+  if (0 <= yystate && yystate <= YYLAST && yycheck[yystate] == *yyssp) {
     yystate = yytable[yystate];
-  else
+  } else {
     yystate = yydefgoto[yyn - YYNTOKENS];
+}
 
   goto yynewstate;
 
@@ -1776,8 +1789,9 @@ yyerrlab:
       if (yychar <= YYEOF)
         {
           /* Return failure if at end of input.  */
-          if (yychar == YYEOF)
+          if (yychar == YYEOF) {
             YYABORT;
+}
         }
       else
         {
@@ -1800,8 +1814,9 @@ yyerrorlab:
   /* Pacify compilers like GCC when the user code never invokes
      YYERROR and the label yyerrorlab therefore never appears in user
      code.  */
-  if (/*CONSTCOND*/ 0)
+  if (/*CONSTCOND*/ 0) {
      goto yyerrorlab;
+}
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -1827,14 +1842,16 @@ yyerrlab1:
           if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
             {
               yyn = yytable[yyn];
-              if (0 < yyn)
+              if (0 < yyn) {
                 break;
+}
             }
         }
 
       /* Pop the current state because it cannot handle the error token.  */
-      if (yyssp == yyss)
+      if (yyssp == yyss) {
         YYABORT;
+}
 
 
       yydestruct ("Error: popping",
@@ -1900,8 +1917,9 @@ yyreturn:
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
-  if (yyss != yyssa)
+  if (yyss != yyssa) {
     YYSTACK_FREE (yyss);
+}
 #endif
 #if YYERROR_VERBOSE
   if (yymsg != yymsgbuf)

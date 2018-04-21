@@ -28,8 +28,9 @@ void InitBuiltInIsnanFunctionEmulatorForGLSLWorkarounds(BuiltInFunctionEmulator 
                                                         int targetGLSLVersion)
 {
     // isnan() is supported since GLSL 1.3.
-    if (targetGLSLVersion < GLSL_VERSION_130)
+    if (targetGLSLVersion < GLSL_VERSION_130) {
         return;
+}
 
     const TType *float1 = StaticType::GetBasic<EbtFloat>();
     const TType *float2 = StaticType::GetBasic<EbtFloat, 2>();

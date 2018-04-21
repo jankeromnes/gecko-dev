@@ -319,7 +319,8 @@ static void GenerateCountedDigits(int count, int* decimal_point,
   // Correct bad digits (in case we had a sequence of '9's). Propagate the
   // carry until we hat a non-'9' or til we reach the first digit.
   for (int i = count - 1; i > 0; --i) {
-    if (buffer[i] != '0' + 10) break;
+    if (buffer[i] != '0' + 10) { break;
+}
     buffer[i] = '0';
     buffer[i - 1]++;
   }

@@ -302,8 +302,9 @@ void RemoveUnreferencedVariablesTraverser::traverseBlock(TIntermBlock *node)
 
     TIntermSequence *sequence = node->getSequence();
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitBlock(PreVisit, node);
+}
 
     if (visit)
     {
@@ -312,14 +313,16 @@ void RemoveUnreferencedVariablesTraverser::traverseBlock(TIntermBlock *node)
             (*iter)->traverse(this);
             if (visit && inVisit)
             {
-                if ((iter + 1) != sequence->rend())
+                if ((iter + 1) != sequence->rend()) {
                     visit = visitBlock(InVisit, node);
+}
             }
         }
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitBlock(PostVisit, node);
+}
 }
 
 void RemoveUnreferencedVariablesTraverser::traverseLoop(TIntermLoop *node)
@@ -331,8 +334,9 @@ void RemoveUnreferencedVariablesTraverser::traverseLoop(TIntermLoop *node)
 
     bool visit = true;
 
-    if (preVisit)
+    if (preVisit) {
         visit = visitLoop(PreVisit, node);
+}
 
     if (visit)
     {
@@ -344,15 +348,18 @@ void RemoveUnreferencedVariablesTraverser::traverseLoop(TIntermLoop *node)
         ASSERT(node->getCondition() == nullptr ||
                node->getCondition()->getAsDeclarationNode() == nullptr);
 
-        if (node->getBody())
+        if (node->getBody()) {
             node->getBody()->traverse(this);
+}
 
-        if (node->getInit())
+        if (node->getInit()) {
             node->getInit()->traverse(this);
+}
     }
 
-    if (visit && postVisit)
+    if (visit && postVisit) {
         visitLoop(PostVisit, node);
+}
 }
 
 }  // namespace

@@ -71,16 +71,19 @@ nss_cmssignerinfo_create(NSSCMSMessage *cmsg, NSSCMSSignerIDSelector type,
     switch (type) {
         case NSSCMSSignerID_IssuerSN:
             signerinfo->signerIdentifier.identifierType = NSSCMSSignerID_IssuerSN;
-            if ((signerinfo->cert = CERT_DupCertificate(cert)) == NULL)
+            if ((signerinfo->cert = CERT_DupCertificate(cert)) == NULL) {
                 goto loser;
-            if ((signerinfo->signerIdentifier.id.issuerAndSN = CERT_GetCertIssuerAndSN(poolp, cert)) == NULL)
+}
+            if ((signerinfo->signerIdentifier.id.issuerAndSN = CERT_GetCertIssuerAndSN(poolp, cert)) == NULL) {
                 goto loser;
+}
             break;
         case NSSCMSSignerID_SubjectKeyID:
             signerinfo->signerIdentifier.identifierType = NSSCMSSignerID_SubjectKeyID;
             PORT_Assert(subjKeyID);
-            if (!subjKeyID)
+            if (!subjKeyID) {
                 goto loser;
+}
 
             signerinfo->signerIdentifier.id.subjectKeyID = PORT_ArenaNew(poolp, SECItem);
             rv = SECITEM_CopyItem(poolp, signerinfo->signerIdentifier.id.subjectKeyID,
@@ -89,11 +92,13 @@ nss_cmssignerinfo_create(NSSCMSMessage *cmsg, NSSCMSSignerIDSelector type,
                 goto loser;
             }
             signerinfo->signingKey = SECKEY_CopyPrivateKey(signingKey);
-            if (!signerinfo->signingKey)
+            if (!signerinfo->signingKey) {
                 goto loser;
+}
             signerinfo->pubKey = SECKEY_CopyPublicKey(pubKey);
-            if (!signerinfo->pubKey)
+            if (!signerinfo->pubKey) {
                 goto loser;
+}
             break;
         default:
             goto loser;
@@ -102,12 +107,14 @@ nss_cmssignerinfo_create(NSSCMSMessage *cmsg, NSSCMSSignerIDSelector type,
     /* set version right now */
     version = NSS_CMS_SIGNER_INFO_VERSION_ISSUERSN;
     /* RFC2630 5.3 "version is the syntax version number. If the .... " */
-    if (signerinfo->signerIdentifier.identifierType == NSSCMSSignerID_SubjectKeyID)
+    if (signerinfo->signerIdentifier.identifierType == NSSCMSSignerID_SubjectKeyID) {
         version = NSS_CMS_SIGNER_INFO_VERSION_SUBJKEY;
+}
     (void)SEC_ASN1EncodeInteger(poolp, &(signerinfo->version), (long)version);
 
-    if (SECOID_SetAlgorithmID(poolp, &signerinfo->digestAlg, digestalgtag, NULL) != SECSuccess)
+    if (SECOID_SetAlgorithmID(poolp, &signerinfo->digestAlg, digestalgtag, NULL) != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return signerinfo;
@@ -123,11 +130,13 @@ loser:
 void
 NSS_CMSSignerInfo_Destroy(NSSCMSSignerInfo *si)
 {
-    if (si->cert != NULL)
+    if (si->cert != NULL) {
         CERT_DestroyCertificate(si->cert);
+}
 
-    if (si->certList != NULL)
+    if (si->certList != NULL) {
         CERT_DestroyCertificateList(si->certList);
+}
 
     /* XXX storage ??? */
 }
@@ -159,8 +168,9 @@ NSS_CMSSignerInfo_Sign(NSSCMSSignerInfo *signerinfo, SECItem *digest,
             cert = signerinfo->cert;
 
             privkey = PK11_FindKeyByAnyCert(cert, signerinfo->cmsg->pwfn_arg);
-            if (privkey == NULL)
+            if (privkey == NULL) {
                 goto loser;
+}
             algID = &cert->subjectPublicKeyInfo.algorithm;
             break;
         case NSSCMSSignerID_SubjectKeyID:
@@ -193,15 +203,17 @@ NSS_CMSSignerInfo_Sign(NSSCMSSignerInfo *signerinfo, SECItem *digest,
         /* find and fill in the message digest attribute. */
         rv = NSS_CMSAttributeArray_SetAttr(poolp, &(signerinfo->authAttr),
                                            SEC_OID_PKCS9_MESSAGE_DIGEST, digest, PR_FALSE);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             goto loser;
+}
 
         if (contentType != NULL) {
             /* if the caller wants us to, find and fill in the content type attribute. */
             rv = NSS_CMSAttributeArray_SetAttr(poolp, &(signerinfo->authAttr),
                                                SEC_OID_PKCS9_CONTENT_TYPE, contentType, PR_FALSE);
-            if (rv != SECSuccess)
+            if (rv != SECSuccess) {
                 goto loser;
+}
         }
 
         if ((tmppoolp = PORT_NewArena(1024)) == NULL) {
@@ -221,14 +233,16 @@ NSS_CMSSignerInfo_Sign(NSSCMSSignerInfo *signerinfo, SECItem *digest,
      * that we send out good DER encodings of attributes, but not
      * to expect to receive them.
      */
-        if (NSS_CMSAttributeArray_Reorder(signerinfo->authAttr) != SECSuccess)
+        if (NSS_CMSAttributeArray_Reorder(signerinfo->authAttr) != SECSuccess) {
             goto loser;
+}
 
         encoded_attrs.data = NULL;
         encoded_attrs.len = 0;
         if (NSS_CMSAttributeArray_Encode(tmppoolp, &(signerinfo->authAttr),
-                                         &encoded_attrs) == NULL)
+                                         &encoded_attrs) == NULL) {
             goto loser;
+}
 
         signAlgTag = SEC_GetSignatureAlgorithmOidTag(privkey->keyType,
                                                      digestalgtag);
@@ -247,27 +261,33 @@ NSS_CMSSignerInfo_Sign(NSSCMSSignerInfo *signerinfo, SECItem *digest,
     SECKEY_DestroyPrivateKey(privkey);
     privkey = NULL;
 
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
-    if (SECITEM_CopyItem(poolp, &(signerinfo->encDigest), &signature) != SECSuccess)
+    if (SECITEM_CopyItem(poolp, &(signerinfo->encDigest), &signature) != SECSuccess) {
         goto loser;
+}
 
     SECITEM_FreeItem(&signature, PR_FALSE);
 
     if (SECOID_SetAlgorithmID(poolp, &(signerinfo->digestEncAlg), pubkAlgTag,
-                              NULL) != SECSuccess)
+                              NULL) != SECSuccess) {
         goto loser;
+}
 
     return SECSuccess;
 
 loser:
-    if (signature.len != 0)
+    if (signature.len != 0) {
         SECITEM_FreeItem(&signature, PR_FALSE);
-    if (privkey)
+}
+    if (privkey) {
         SECKEY_DestroyPrivateKey(privkey);
-    if (tmppoolp)
+}
+    if (tmppoolp) {
         PORT_FreeArena(tmppoolp, PR_FALSE);
+}
     return SECFailure;
 }
 
@@ -288,8 +308,9 @@ NSS_CMSSignerInfo_VerifyCertificate(NSSCMSSignerInfo *signerinfo, CERTCertDBHand
      * both on the cert verification and for importing the sender
      * email profile.
      */
-    if (NSS_CMSSignerInfo_GetSigningTime(signerinfo, &stime) != SECSuccess)
+    if (NSS_CMSSignerInfo_GetSigningTime(signerinfo, &stime) != SECSuccess) {
         stime = PR_Now(); /* not found or conversion failed, so check against now */
+}
 
     /*
      * XXX  This uses the signing time, if available.  Additionally, we
@@ -327,8 +348,9 @@ NSS_CMSSignerInfo_Verify(NSSCMSSignerInfo *signerinfo,
     SECOidTag digestalgtag;
     SECOidTag pubkAlgTag;
 
-    if (signerinfo == NULL)
+    if (signerinfo == NULL) {
         return SECFailure;
+}
 
     /* NSS_CMSSignerInfo_GetSigningCertificate will fail if 2nd parm is NULL
     ** and cert has not been verified
@@ -429,8 +451,9 @@ NSS_CMSSignerInfo_Verify(NSSCMSSignerInfo *signerinfo,
     ** The signature is based on the plain message digest.
     */
         sig = &(signerinfo->encDigest);
-        if (sig->len == 0)
+        if (sig->len == 0) {
             goto loser;
+}
 
         vs = (!digest ||
               VFY_VerifyDigestDirect(digest, publickey, sig, pubkAlgTag,
@@ -457,8 +480,9 @@ NSS_CMSSignerInfo_Verify(NSSCMSSignerInfo *signerinfo,
      * certificate signature check that failed during the cert
      * verification done above.  Our error handling is really a mess.
      */
-        if (error == SEC_ERROR_BAD_SIGNATURE)
+        if (error == SEC_ERROR_BAD_SIGNATURE) {
             PORT_SetError(SEC_ERROR_PKCS7_BAD_SIGNATURE);
+}
         /*
      * map algorithm failures to NSSCMSVS values
      */
@@ -470,16 +494,18 @@ NSS_CMSSignerInfo_Verify(NSSCMSSignerInfo *signerinfo,
         }
     }
 
-    if (publickey != NULL)
+    if (publickey != NULL) {
         SECKEY_DestroyPublicKey(publickey);
+}
 
     signerinfo->verificationStatus = vs;
 
     return (vs == NSSCMSVS_GoodSignature) ? SECSuccess : SECFailure;
 
 loser:
-    if (publickey != NULL)
+    if (publickey != NULL) {
         SECKEY_DestroyPublicKey(publickey);
+}
 
     signerinfo->verificationStatus = vs;
 
@@ -530,10 +556,11 @@ NSS_CMSSignerInfo_GetDigestAlgTag(NSSCMSSignerInfo *signerinfo)
     }
 
     algdata = NSS_CMSSignerInfo_GetDigestAlg(signerinfo);
-    if (algdata != NULL)
+    if (algdata != NULL) {
         return algdata->offset;
-    else
+    } else {
         return SEC_OID_UNKNOWN;
+}
 }
 
 CERTCertificateList *
@@ -548,10 +575,11 @@ NSS_CMSSignerInfo_GetVersion(NSSCMSSignerInfo *signerinfo)
     unsigned long version;
 
     /* always take apart the SECItem */
-    if (SEC_ASN1DecodeInteger(&(signerinfo->version), &version) != SECSuccess)
+    if (SEC_ASN1DecodeInteger(&(signerinfo->version), &version) != SECSuccess) {
         return 0;
-    else
+    } else {
         return (int)version;
+}
 }
 
 /*
@@ -570,8 +598,9 @@ NSS_CMSSignerInfo_GetSigningTime(NSSCMSSignerInfo *sinfo, PRTime *stime)
     NSSCMSAttribute *attr;
     SECItem *value;
 
-    if (sinfo == NULL)
+    if (sinfo == NULL) {
         return SECFailure;
+}
 
     if (sinfo->signingTime != 0) {
         *stime = sinfo->signingTime; /* cached copy */
@@ -581,10 +610,12 @@ NSS_CMSSignerInfo_GetSigningTime(NSSCMSSignerInfo *sinfo, PRTime *stime)
     attr = NSS_CMSAttributeArray_FindAttrByOidTag(sinfo->authAttr,
                                                   SEC_OID_PKCS9_SIGNING_TIME, PR_TRUE);
     /* XXXX multi-valued attributes NIH */
-    if (attr == NULL || (value = NSS_CMSAttribute_GetValue(attr)) == NULL)
+    if (attr == NULL || (value = NSS_CMSAttribute_GetValue(attr)) == NULL) {
         return SECFailure;
-    if (DER_DecodeTimeChoice(stime, value) != SECSuccess)
+}
+    if (DER_DecodeTimeChoice(stime, value) != SECSuccess) {
         return SECFailure;
+}
     sinfo->signingTime = *stime; /* make cached copy */
     return SECSuccess;
 }
@@ -600,12 +631,14 @@ NSS_CMSSignerInfo_GetSigningCertificate(NSSCMSSignerInfo *signerinfo, CERTCertDB
     CERTCertificate *cert;
     NSSCMSSignerIdentifier *sid;
 
-    if (signerinfo->cert != NULL)
+    if (signerinfo->cert != NULL) {
         return signerinfo->cert;
+}
 
     /* no certdb, and cert hasn't been set yet? */
-    if (certdb == NULL)
+    if (certdb == NULL) {
         return NULL;
+}
 
     /*
      * This cert will also need to be freed, but since we save it
@@ -646,8 +679,9 @@ NSS_CMSSignerInfo_GetSignerCommonName(NSSCMSSignerInfo *sinfo)
     CERTCertificate *signercert;
 
     /* will fail if cert is not verified */
-    if ((signercert = NSS_CMSSignerInfo_GetSigningCertificate(sinfo, NULL)) == NULL)
+    if ((signercert = NSS_CMSSignerInfo_GetSigningCertificate(sinfo, NULL)) == NULL) {
         return NULL;
+}
 
     return (CERT_GetCommonName(&signercert->subject));
 }
@@ -665,11 +699,13 @@ NSS_CMSSignerInfo_GetSignerEmailAddress(NSSCMSSignerInfo *sinfo)
 {
     CERTCertificate *signercert;
 
-    if ((signercert = NSS_CMSSignerInfo_GetSigningCertificate(sinfo, NULL)) == NULL)
+    if ((signercert = NSS_CMSSignerInfo_GetSigningCertificate(sinfo, NULL)) == NULL) {
         return NULL;
+}
 
-    if (!signercert->emailAddr || !signercert->emailAddr[0])
+    if (!signercert->emailAddr || !signercert->emailAddr[0]) {
         return NULL;
+}
 
     return (PORT_Strdup(signercert->emailAddr));
 }
@@ -720,8 +756,9 @@ NSS_CMSSignerInfo_AddSigningTime(NSSCMSSignerInfo *signerinfo, PRTime t)
     mark = PORT_ArenaMark(poolp);
 
     /* create new signing time attribute */
-    if (DER_EncodeTimeChoice(NULL, &stime, t) != SECSuccess)
+    if (DER_EncodeTimeChoice(NULL, &stime, t) != SECSuccess) {
         goto loser;
+}
 
     if ((attr = NSS_CMSAttribute_Create(poolp, SEC_OID_PKCS9_SIGNING_TIME, &stime, PR_FALSE)) == NULL) {
         SECITEM_FreeItem(&stime, PR_FALSE);
@@ -730,8 +767,9 @@ NSS_CMSSignerInfo_AddSigningTime(NSSCMSSignerInfo *signerinfo, PRTime t)
 
     SECITEM_FreeItem(&stime, PR_FALSE);
 
-    if (NSS_CMSSignerInfo_AddAuthAttr(signerinfo, attr) != SECSuccess)
+    if (NSS_CMSSignerInfo_AddAuthAttr(signerinfo, attr) != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
 
@@ -762,18 +800,22 @@ NSS_CMSSignerInfo_AddSMIMECaps(NSSCMSSignerInfo *signerinfo)
     mark = PORT_ArenaMark(poolp);
 
     smimecaps = SECITEM_AllocItem(poolp, NULL, 0);
-    if (smimecaps == NULL)
+    if (smimecaps == NULL) {
         goto loser;
+}
 
     /* create new signing time attribute */
-    if (NSS_SMIMEUtil_CreateSMIMECapabilities(poolp, smimecaps) != SECSuccess)
+    if (NSS_SMIMEUtil_CreateSMIMECapabilities(poolp, smimecaps) != SECSuccess) {
         goto loser;
+}
 
-    if ((attr = NSS_CMSAttribute_Create(poolp, SEC_OID_PKCS9_SMIME_CAPABILITIES, smimecaps, PR_TRUE)) == NULL)
+    if ((attr = NSS_CMSAttribute_Create(poolp, SEC_OID_PKCS9_SMIME_CAPABILITIES, smimecaps, PR_TRUE)) == NULL) {
         goto loser;
+}
 
-    if (NSS_CMSSignerInfo_AddAuthAttr(signerinfo, attr) != SECSuccess)
+    if (NSS_CMSSignerInfo_AddAuthAttr(signerinfo, attr) != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return SECSuccess;
@@ -806,18 +848,22 @@ NSS_CMSSignerInfo_AddSMIMEEncKeyPrefs(NSSCMSSignerInfo *signerinfo, CERTCertific
     mark = PORT_ArenaMark(poolp);
 
     smimeekp = SECITEM_AllocItem(poolp, NULL, 0);
-    if (smimeekp == NULL)
+    if (smimeekp == NULL) {
         goto loser;
+}
 
     /* create new signing time attribute */
-    if (NSS_SMIMEUtil_CreateSMIMEEncKeyPrefs(poolp, smimeekp, cert) != SECSuccess)
+    if (NSS_SMIMEUtil_CreateSMIMEEncKeyPrefs(poolp, smimeekp, cert) != SECSuccess) {
         goto loser;
+}
 
-    if ((attr = NSS_CMSAttribute_Create(poolp, SEC_OID_SMIME_ENCRYPTION_KEY_PREFERENCE, smimeekp, PR_TRUE)) == NULL)
+    if ((attr = NSS_CMSAttribute_Create(poolp, SEC_OID_SMIME_ENCRYPTION_KEY_PREFERENCE, smimeekp, PR_TRUE)) == NULL) {
         goto loser;
+}
 
-    if (NSS_CMSSignerInfo_AddAuthAttr(signerinfo, attr) != SECSuccess)
+    if (NSS_CMSSignerInfo_AddAuthAttr(signerinfo, attr) != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return SECSuccess;
@@ -851,18 +897,22 @@ NSS_CMSSignerInfo_AddMSSMIMEEncKeyPrefs(NSSCMSSignerInfo *signerinfo, CERTCertif
     mark = PORT_ArenaMark(poolp);
 
     smimeekp = SECITEM_AllocItem(poolp, NULL, 0);
-    if (smimeekp == NULL)
+    if (smimeekp == NULL) {
         goto loser;
+}
 
     /* create new signing time attribute */
-    if (NSS_SMIMEUtil_CreateMSSMIMEEncKeyPrefs(poolp, smimeekp, cert) != SECSuccess)
+    if (NSS_SMIMEUtil_CreateMSSMIMEEncKeyPrefs(poolp, smimeekp, cert) != SECSuccess) {
         goto loser;
+}
 
-    if ((attr = NSS_CMSAttribute_Create(poolp, SEC_OID_MS_SMIME_ENCRYPTION_KEY_PREFERENCE, smimeekp, PR_TRUE)) == NULL)
+    if ((attr = NSS_CMSAttribute_Create(poolp, SEC_OID_MS_SMIME_ENCRYPTION_KEY_PREFERENCE, smimeekp, PR_TRUE)) == NULL) {
         goto loser;
+}
 
-    if (NSS_CMSSignerInfo_AddAuthAttr(signerinfo, attr) != SECSuccess)
+    if (NSS_CMSSignerInfo_AddAuthAttr(signerinfo, attr) != SECSuccess) {
         goto loser;
+}
 
     PORT_ArenaUnmark(poolp, mark);
     return SECSuccess;
@@ -913,22 +963,25 @@ NSS_SMIMESignerInfo_SaveSMIMEProfile(NSSCMSSignerInfo *signerinfo)
     certdb = CERT_GetDefaultCertDB();
 
     /* sanity check - see if verification status is ok (unverified does not count...) */
-    if (signerinfo->verificationStatus != NSSCMSVS_GoodSignature)
+    if (signerinfo->verificationStatus != NSSCMSVS_GoodSignature) {
         return SECFailure;
+}
 
     /* find preferred encryption cert */
     if (!NSS_CMSArray_IsEmpty((void **)signerinfo->authAttr) &&
         (attr = NSS_CMSAttributeArray_FindAttrByOidTag(signerinfo->authAttr,
                                                        SEC_OID_SMIME_ENCRYPTION_KEY_PREFERENCE, PR_TRUE)) != NULL) { /* we have a SMIME_ENCRYPTION_KEY_PREFERENCE attribute! */
         ekp = NSS_CMSAttribute_GetValue(attr);
-        if (ekp == NULL)
+        if (ekp == NULL) {
             return SECFailure;
+}
 
         /* we assume that all certs coming with the message have been imported to the */
         /* temporary database */
         cert = NSS_SMIMEUtil_GetCertFromEncryptionKeyPreference(certdb, ekp);
-        if (cert == NULL)
+        if (cert == NULL) {
             return SECFailure;
+}
         must_free_cert = PR_TRUE;
     }
 
@@ -936,8 +989,9 @@ NSS_SMIMESignerInfo_SaveSMIMEProfile(NSSCMSSignerInfo *signerinfo)
         /* no preferred cert found?
      * find the cert the signerinfo is signed with instead */
         cert = NSS_CMSSignerInfo_GetSigningCertificate(signerinfo, certdb);
-        if (cert == NULL || cert->emailAddr == NULL || !cert->emailAddr[0])
+        if (cert == NULL || cert->emailAddr == NULL || !cert->emailAddr[0]) {
             return SECFailure;
+}
     }
 
 /* verify this cert for encryption (has been verified for signing so far) */
@@ -972,8 +1026,9 @@ NSS_SMIMESignerInfo_SaveSMIMEProfile(NSSCMSSignerInfo *signerinfo)
     }
 
     rv = CERT_SaveSMimeProfile(cert, profile, stime);
-    if (must_free_cert)
+    if (must_free_cert) {
         CERT_DestroyCertificate(cert);
+}
 
     /*
      * Restore the saved error in case the calls above set a new
@@ -991,8 +1046,9 @@ SECStatus
 NSS_CMSSignerInfo_IncludeCerts(NSSCMSSignerInfo *signerinfo,
                                NSSCMSCertChainMode cm, SECCertUsage usage)
 {
-    if (signerinfo->cert == NULL)
+    if (signerinfo->cert == NULL) {
         return SECFailure;
+}
 
     /* don't leak if we get called twice */
     if (signerinfo->certList != NULL) {
@@ -1017,8 +1073,9 @@ NSS_CMSSignerInfo_IncludeCerts(NSSCMSSignerInfo *signerinfo,
             break;
     }
 
-    if (cm != NSSCMSCM_None && signerinfo->certList == NULL)
+    if (cm != NSSCMSCM_None && signerinfo->certList == NULL) {
         return SECFailure;
+}
 
     return SECSuccess;
 }

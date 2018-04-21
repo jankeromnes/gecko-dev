@@ -106,32 +106,38 @@ start_pass_phuff_decoder (j_decompress_ptr cinfo)
   /* Validate scan parameters */
   bad = FALSE;
   if (is_DC_band) {
-    if (cinfo->Se != 0)
+    if (cinfo->Se != 0) {
       bad = TRUE;
+}
   } else {
     /* need not check Ss/Se < 0 since they came from unsigned bytes */
-    if (cinfo->Ss > cinfo->Se || cinfo->Se >= DCTSIZE2)
+    if (cinfo->Ss > cinfo->Se || cinfo->Se >= DCTSIZE2) {
       bad = TRUE;
+}
     /* AC scans may have only one component */
-    if (cinfo->comps_in_scan != 1)
+    if (cinfo->comps_in_scan != 1) {
       bad = TRUE;
+}
   }
   if (cinfo->Ah != 0) {
     /* Successive approximation refinement scan: must have Al = Ah-1. */
-    if (cinfo->Al != cinfo->Ah-1)
+    if (cinfo->Al != cinfo->Ah-1) {
       bad = TRUE;
+}
   }
-  if (cinfo->Al > 13)           /* need not check for < 0 */
+  if (cinfo->Al > 13) {           /* need not check for < 0 */
     bad = TRUE;
+}
   /* Arguably the maximum Al value should be less than 13 for 8-bit precision,
    * but the spec doesn't say so, and we try to be liberal about what we
    * accept.  Note: large Al values could result in out-of-range DC
    * coefficients during early scans, leading to bizarre displays due to
    * overflows in the IDCT math.  But we won't crash.
    */
-  if (bad)
+  if (bad) {
     ERREXIT4(cinfo, JERR_BAD_PROGRESSION,
              cinfo->Ss, cinfo->Se, cinfo->Ah, cinfo->Al);
+}
   /* Update progression status, and verify that scan order is legal.
    * Note that inter-scan inconsistencies are treated as warnings
    * not fatal errors ... not clear if this is right way to behave.
@@ -139,27 +145,31 @@ start_pass_phuff_decoder (j_decompress_ptr cinfo)
   for (ci = 0; ci < cinfo->comps_in_scan; ci++) {
     int cindex = cinfo->cur_comp_info[ci]->component_index;
     coef_bit_ptr = & cinfo->coef_bits[cindex][0];
-    if (!is_DC_band && coef_bit_ptr[0] < 0) /* AC without prior DC scan */
+    if (!is_DC_band && coef_bit_ptr[0] < 0) { /* AC without prior DC scan */
       WARNMS2(cinfo, JWRN_BOGUS_PROGRESSION, cindex, 0);
+}
     for (coefi = cinfo->Ss; coefi <= cinfo->Se; coefi++) {
       int expected = (coef_bit_ptr[coefi] < 0) ? 0 : coef_bit_ptr[coefi];
-      if (cinfo->Ah != expected)
+      if (cinfo->Ah != expected) {
         WARNMS2(cinfo, JWRN_BOGUS_PROGRESSION, cindex, coefi);
+}
       coef_bit_ptr[coefi] = cinfo->Al;
     }
   }
 
   /* Select MCU decoding routine */
   if (cinfo->Ah == 0) {
-    if (is_DC_band)
+    if (is_DC_band) {
       entropy->pub.decode_mcu = decode_mcu_DC_first;
-    else
+    } else {
       entropy->pub.decode_mcu = decode_mcu_AC_first;
+}
   } else {
-    if (is_DC_band)
+    if (is_DC_band) {
       entropy->pub.decode_mcu = decode_mcu_DC_refine;
-    else
+    } else {
       entropy->pub.decode_mcu = decode_mcu_AC_refine;
+}
   }
 
   for (ci = 0; ci < cinfo->comps_in_scan; ci++) {
@@ -242,12 +252,14 @@ process_restart (j_decompress_ptr cinfo)
   entropy->bitstate.bits_left = 0;
 
   /* Advance past the RSTn marker */
-  if (! (*cinfo->marker->read_restart_marker) (cinfo))
+  if (! (*cinfo->marker->read_restart_marker) (cinfo)) {
     return FALSE;
+}
 
   /* Re-initialize DC predictions to 0 */
-  for (ci = 0; ci < cinfo->comps_in_scan; ci++)
+  for (ci = 0; ci < cinfo->comps_in_scan; ci++) {
     entropy->saved.last_dc_val[ci] = 0;
+}
   /* Re-init EOB run count, too */
   entropy->saved.EOBRUN = 0;
 
@@ -259,8 +271,9 @@ process_restart (j_decompress_ptr cinfo)
    * segment as empty, and we can avoid producing bogus output pixels by
    * leaving the flag set.
    */
-  if (cinfo->unread_marker == 0)
+  if (cinfo->unread_marker == 0) {
     entropy->pub.insufficient_data = FALSE;
+}
 
   return TRUE;
 }
@@ -303,9 +316,10 @@ decode_mcu_DC_first (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 
   /* Process restart marker if needed; may have to suspend */
   if (cinfo->restart_interval) {
-    if (entropy->restarts_to_go == 0)
-      if (! process_restart(cinfo))
+    if (entropy->restarts_to_go == 0) {
+      if (! process_restart(cinfo)) {
         return FALSE;
+}
   }
 
   /* If we've run out of data, just leave the MCU set to zeroes.
@@ -373,9 +387,10 @@ decode_mcu_AC_first (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 
   /* Process restart marker if needed; may have to suspend */
   if (cinfo->restart_interval) {
-    if (entropy->restarts_to_go == 0)
-      if (! process_restart(cinfo))
+    if (entropy->restarts_to_go == 0) {
+      if (! process_restart(cinfo)) {
         return FALSE;
+}
   }
 
   /* If we've run out of data, just leave the MCU set to zeroes.
@@ -390,9 +405,9 @@ decode_mcu_AC_first (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 
     /* There is always only one block per MCU */
 
-    if (EOBRUN > 0)             /* if it's a band of zeroes... */
+    if (EOBRUN > 0) {             /* if it's a band of zeroes... */
       EOBRUN--;                 /* ...process it now (we do nothing) */
-    else {
+    } else {
       BITREAD_LOAD_STATE(cinfo,entropy->bitstate);
       block = MCU_data[0];
       tbl = entropy->ac_derived_tbl;
@@ -455,9 +470,10 @@ decode_mcu_DC_refine (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 
   /* Process restart marker if needed; may have to suspend */
   if (cinfo->restart_interval) {
-    if (entropy->restarts_to_go == 0)
-      if (! process_restart(cinfo))
+    if (entropy->restarts_to_go == 0) {
+      if (! process_restart(cinfo)) {
         return FALSE;
+}
   }
 
   /* Not worth the cycles to check insufficient_data here,
@@ -474,8 +490,9 @@ decode_mcu_DC_refine (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 
     /* Encoded data is simply the next bit of the two's-complement DC value */
     CHECK_BIT_BUFFER(br_state, 1, return FALSE);
-    if (GET_BITS(1))
+    if (GET_BITS(1)) {
       (*block)[0] |= p1;
+}
     /* Note: since we use |=, repeating the assignment later is safe */
   }
 
@@ -511,9 +528,10 @@ decode_mcu_AC_refine (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 
   /* Process restart marker if needed; may have to suspend */
   if (cinfo->restart_interval) {
-    if (entropy->restarts_to_go == 0)
-      if (! process_restart(cinfo))
+    if (entropy->restarts_to_go == 0) {
+      if (! process_restart(cinfo)) {
         return FALSE;
+}
   }
 
   /* If we've run out of data, don't modify the MCU.
@@ -545,13 +563,15 @@ decode_mcu_AC_refine (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
         r = s >> 4;
         s &= 15;
         if (s) {
-          if (s != 1)           /* size of new coef should always be 1 */
+          if (s != 1) {           /* size of new coef should always be 1 */
             WARNMS(cinfo, JWRN_HUFF_BAD_CODE);
+}
           CHECK_BIT_BUFFER(br_state, 1, goto undoit);
-          if (GET_BITS(1))
+          if (GET_BITS(1)) {
             s = p1;             /* newly nonzero coef is positive */
-          else
+          } else {
             s = m1;             /* newly nonzero coef is negative */
+}
         } else {
           if (r != 15) {
             EOBRUN = 1 << r;    /* EOBr, run length is 2^r + appended bits */
@@ -574,15 +594,17 @@ decode_mcu_AC_refine (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
             CHECK_BIT_BUFFER(br_state, 1, goto undoit);
             if (GET_BITS(1)) {
               if ((*thiscoef & p1) == 0) { /* do nothing if already set it */
-                if (*thiscoef >= 0)
+                if (*thiscoef >= 0) {
                   *thiscoef += p1;
-                else
+                } else {
                   *thiscoef += m1;
+}
               }
             }
           } else {
-            if (--r < 0)
+            if (--r < 0) {
               break;            /* reached target zero coefficient */
+}
           }
           k++;
         } while (k <= Se);
@@ -608,10 +630,11 @@ decode_mcu_AC_refine (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
           CHECK_BIT_BUFFER(br_state, 1, goto undoit);
           if (GET_BITS(1)) {
             if ((*thiscoef & p1) == 0) { /* do nothing if already changed it */
-              if (*thiscoef >= 0)
+              if (*thiscoef >= 0) {
                 *thiscoef += p1;
-              else
+              } else {
                 *thiscoef += m1;
+}
             }
           }
         }
@@ -632,8 +655,9 @@ decode_mcu_AC_refine (j_decompress_ptr cinfo, JBLOCKROW *MCU_data)
 
 undoit:
   /* Re-zero any output coefficients that we made newly nonzero */
-  while (num_newnz > 0)
+  while (num_newnz > 0) {
     (*block)[newnz_pos[--num_newnz]] = 0;
+}
 
   return FALSE;
 }
@@ -666,9 +690,10 @@ jinit_phuff_decoder (j_decompress_ptr cinfo)
     (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
                                 cinfo->num_components*DCTSIZE2*sizeof(int));
   coef_bit_ptr = & cinfo->coef_bits[0][0];
-  for (ci = 0; ci < cinfo->num_components; ci++)
-    for (i = 0; i < DCTSIZE2; i++)
+  for (ci = 0; ci < cinfo->num_components; ci++) {
+    for (i = 0; i < DCTSIZE2; i++) {
       *coef_bit_ptr++ = -1;
+}
 }
 
 #endif /* D_PROGRESSIVE_SUPPORTED */

@@ -102,10 +102,12 @@ int av_base64_decode(uint8_t *out, const char *in_str, int out_size)
         BASE64_DEC_STEP(2);
         BASE64_DEC_STEP(3);
         *dst++ = v >> 16;
-        if (end - dst)
+        if (end - dst) {
             *dst++ = v >> 8;
-        if (end - dst)
+}
+        if (end - dst) {
             *dst++ = v;
+}
         in += 4;
     }
     while (1) {
@@ -145,8 +147,9 @@ char *av_base64_encode(char *out, int out_size, const uint8_t *in, int in_size)
     int bytes_remaining = in_size;
 
     if (in_size >= UINT_MAX / 4 ||
-        out_size < AV_BASE64_SIZE(in_size))
+        out_size < AV_BASE64_SIZE(in_size)) {
         return NULL;
+}
     ret = dst = out;
     while (bytes_remaining > 3) {
         i_bits = AV_RB32(in);
@@ -166,8 +169,9 @@ char *av_base64_encode(char *out, int out_size, const uint8_t *in, int in_size)
         *dst++ = b64[(i_bits << 6 >> i_shift) & 0x3f];
         i_shift -= 6;
     }
-    while ((dst - ret) & 3)
+    while ((dst - ret) & 3) {
         *dst++ = '=';
+}
     *dst = '\0';
 
     return ret;

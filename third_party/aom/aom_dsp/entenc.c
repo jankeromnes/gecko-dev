@@ -185,7 +185,8 @@ void od_ec_encode_bool_q15(od_ec_enc *enc, int val, unsigned f) {
   r = enc->rng;
   OD_ASSERT(32768U <= r);
   v = (r >> 8) * (uint32_t)f >> 7;
-  if (val) l += r - v;
+  if (val) { l += r - v;
+}
   r = val ? v : r - v;
   od_ec_enc_normalize(enc, l, r);
 #if OD_MEASURE_EC_OVERHEAD
@@ -326,7 +327,8 @@ unsigned char *od_ec_enc_done(od_ec_enc *enc, uint32_t *nbytes) {
   unsigned r;
   int c;
   int s;
-  if (enc->error) return NULL;
+  if (enc->error) { return NULL;
+}
 #if OD_MEASURE_EC_OVERHEAD
   {
     uint32_t tell;
@@ -419,7 +421,8 @@ unsigned char *od_ec_enc_done(od_ec_enc *enc, uint32_t *nbytes) {
   /*Add any remaining raw bits to the last byte.
     There is guaranteed to be enough room, because nend_bits <= s.*/
   OD_ASSERT(nend_bits <= 0 || end_offs > 0);
-  if (nend_bits > 0) out[end_offs - 1] |= (unsigned char)e;
+  if (nend_bits > 0) { out[end_offs - 1] |= (unsigned char)e;
+}
   /*Note: Unless there's an allocation error, if you keep encoding into the
      current buffer and call this function again later, everything will work
      just fine (you won't get a new packet out, but you will get a single

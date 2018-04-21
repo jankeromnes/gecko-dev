@@ -144,8 +144,9 @@ findCommonICUDataByName(const char *inBasename, UErrorCode &err)
     int32_t i;
 
     UDataMemory  *pData = udata_findCachedData(inBasename, err);
-    if (U_FAILURE(err) || pData == NULL)
+    if (U_FAILURE(err) || pData == NULL) {
         return FALSE;
+}
 
     {
         Mutex lock;

@@ -75,8 +75,9 @@ void RemoveArrayLengthMethod(TIntermBlock *root)
     {
         traverser.nextIteration();
         root->traverse(&traverser);
-        if (traverser.foundArrayLength())
+        if (traverser.foundArrayLength()) {
             traverser.updateTree();
+}
     } while (traverser.foundArrayLength());
 }
 

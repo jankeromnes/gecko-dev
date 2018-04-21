@@ -523,8 +523,9 @@ isIssuerCertAllowedAtCertIssuanceTime(CERTCertificate *issuerCert,
         SECStatus rv;
 
         rv = CERT_GetCertTimes(referenceCert, &notBefore, &notAfter);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             return rv;
+}
 
         if (notBefore > OCTOBER_21_2016) {
             return SECFailure;
@@ -625,8 +626,9 @@ cert_VerifyCertChainOld(CERTCertDBHandle *handle, CERTCertificate *cert,
     }
 
     certsList = PORT_ZNewArray(CERTCertificate *, certsListLen);
-    if (certsList == NULL)
+    if (certsList == NULL) {
         goto loser;
+}
 
     /* RFC 3280 says that the name constraints will apply to the names
     ** in the leaf (EE) cert, whether it is self issued or not, so
@@ -649,11 +651,13 @@ cert_VerifyCertChainOld(CERTCertDBHandle *handle, CERTCertificate *cert,
             subjectNameList =
                 CERT_GetConstrainedCertificateNames(subjectCert, arena,
                                                     getSubjectCN);
-            if (!subjectNameList)
+            if (!subjectNameList) {
                 goto loser;
+}
             subjectNameListLen = CERT_GetNamesLength(subjectNameList);
-            if (!subjectNameListLen)
+            if (!subjectNameListLen) {
                 goto loser;
+}
             if (certsListLen <= namesCount + subjectNameListLen) {
                 CERTCertificate **tmpCertsList;
                 certsListLen = (namesCount + subjectNameListLen) * 2;
@@ -831,8 +835,9 @@ cert_VerifyCertChainOld(CERTCertDBHandle *handle, CERTCertificate *cert,
                         rv = rvFinal;
                         goto done;
                     }
-                    if (flags & CERTDB_VALID_CA)
+                    if (flags & CERTDB_VALID_CA) {
                         validCAOverride = PR_TRUE;
+}
                 }
                 /* We have 2 separate loops because we want any single trust
                  * bit to allow this usage to return trusted. Only if none of

@@ -16,20 +16,23 @@
 static void accumulate_rd_opt(ThreadData *td, ThreadData *td_t) {
   int i, j, k, l, m, n;
 
-  for (i = 0; i < REFERENCE_MODES; i++)
+  for (i = 0; i < REFERENCE_MODES; i++) {
     td->rd_counts.comp_pred_diff[i] += td_t->rd_counts.comp_pred_diff[i];
+}
 
-  for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; i++)
+  for (i = 0; i < SWITCHABLE_FILTER_CONTEXTS; i++) {
     td->rd_counts.filter_diff[i] += td_t->rd_counts.filter_diff[i];
+}
 
-  for (i = 0; i < TX_SIZES; i++)
-    for (j = 0; j < PLANE_TYPES; j++)
-      for (k = 0; k < REF_TYPES; k++)
-        for (l = 0; l < COEF_BANDS; l++)
-          for (m = 0; m < COEFF_CONTEXTS; m++)
-            for (n = 0; n < ENTROPY_TOKENS; n++)
+  for (i = 0; i < TX_SIZES; i++) {
+    for (j = 0; j < PLANE_TYPES; j++) {
+      for (k = 0; k < REF_TYPES; k++) {
+        for (l = 0; l < COEF_BANDS; l++) {
+          for (m = 0; m < COEFF_CONTEXTS; m++) {
+            for (n = 0; n < ENTROPY_TOKENS; n++) {
               td->rd_counts.coef_counts[i][j][k][l][m][n] +=
                   td_t->rd_counts.coef_counts[i][j][k][l][m][n];
+}
 }
 
 static int enc_worker_hook(EncWorkerData *const thread_data, void *unused) {
@@ -115,9 +118,10 @@ void vp9_encode_tiles_mt(VP9_COMP *cpi) {
                         vpx_calloc(1, sizeof(*thread_data->td->counts)));
 
         // Create threads
-        if (!winterface->reset(worker))
+        if (!winterface->reset(worker)) {
           vpx_internal_error(&cm->error, VPX_CODEC_ERROR,
                              "Tile encoder thread creation failed");
+}
       } else {
         // Main thread acts as a worker and uses the thread data in cpi.
         thread_data->cpi = cpi;
@@ -173,10 +177,11 @@ void vp9_encode_tiles_mt(VP9_COMP *cpi) {
     // Set the starting tile for each thread.
     thread_data->start = i;
 
-    if (i == cpi->num_workers - 1)
+    if (i == cpi->num_workers - 1) {
       winterface->execute(worker);
-    else
+    } else {
       winterface->launch(worker);
+}
   }
 
   // Encoding ends.

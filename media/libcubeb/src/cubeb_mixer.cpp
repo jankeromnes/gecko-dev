@@ -223,8 +223,9 @@ int MixerContext::auto_matrix()
     if (out_ch_layout & CHANNEL_FRONT_CENTER) {
       matrix[FRONT_CENTER][FRONT_LEFT] += M_SQRT1_2;
       matrix[FRONT_CENTER][FRONT_RIGHT] += M_SQRT1_2;
-      if (in_ch_layout & CHANNEL_FRONT_CENTER)
+      if (in_ch_layout & CHANNEL_FRONT_CENTER) {
         matrix[FRONT_CENTER][FRONT_CENTER] = _center_mix_level * M_SQRT2;
+}
     }
   }
 
@@ -348,10 +349,11 @@ int MixerContext::auto_matrix()
   // Normalize matrix if needed.
   if (maxcoef > maxval) {
     maxcoef /= maxval;
-    for (uint32_t i = 0; i < CHANNELS_MAX; i++)
+    for (uint32_t i = 0; i < CHANNELS_MAX; i++) {
       for (uint32_t j = 0; j < CHANNELS_MAX; j++) {
         _matrix[i][j] /= maxcoef;
       }
+}
   }
 
   if (_format == CUBEB_SAMPLE_FLOAT32NE) {

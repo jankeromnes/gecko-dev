@@ -130,8 +130,9 @@ insert_glyph (pixman_glyph_cache_t *cache,
 	loc = &cache->glyphs[idx++ & HASH_MASK];
     } while (*loc && *loc != TOMBSTONE);
 
-    if (*loc == TOMBSTONE)
+    if (*loc == TOMBSTONE) {
 	cache->n_tombstones--;
+}
     cache->n_glyphs++;
 
     *loc = glyph;
@@ -144,8 +145,9 @@ remove_glyph (pixman_glyph_cache_t *cache,
     unsigned idx;
 
     idx = hash (glyph->font_key, glyph->glyph_key);
-    while (cache->glyphs[idx & HASH_MASK] != glyph)
+    while (cache->glyphs[idx & HASH_MASK] != glyph) {
 	idx++;
+}
 
     cache->glyphs[idx & HASH_MASK] = TOMBSTONE;
     cache->n_tombstones++;
@@ -172,8 +174,9 @@ clear_table (pixman_glyph_cache_t *cache)
     {
 	glyph_t *glyph = cache->glyphs[i];
 
-	if (glyph && glyph != TOMBSTONE)
+	if (glyph && glyph != TOMBSTONE) {
 	    free_glyph (glyph);
+}
 
 	cache->glyphs[i] = NULL;
     }
@@ -187,8 +190,9 @@ pixman_glyph_cache_create (void)
 {
     pixman_glyph_cache_t *cache;
 
-    if (!(cache = malloc (sizeof *cache)))
+    if (!(cache = malloc (sizeof *cache))) {
 	return NULL;
+}
 
     memset (cache->glyphs, 0, sizeof (cache->glyphs));
     cache->n_glyphs = 0;
@@ -265,11 +269,13 @@ pixman_glyph_cache_insert (pixman_glyph_cache_t  *cache,
     width = image->bits.width;
     height = image->bits.height;
 
-    if (cache->n_glyphs >= HASH_SIZE)
+    if (cache->n_glyphs >= HASH_SIZE) {
 	return NULL;
+}
 
-    if (!(glyph = malloc (sizeof *glyph)))
+    if (!(glyph = malloc (sizeof *glyph))) {
 	return NULL;
+}
 
     glyph->font_key = font_key;
     glyph->glyph_key = glyph_key;
@@ -337,14 +343,18 @@ pixman_glyph_get_extents (pixman_glyph_cache_t *cache,
 	x2 = glyphs[i].x - glyph->origin_x + glyph->image->bits.width;
 	y2 = glyphs[i].y - glyph->origin_y + glyph->image->bits.height;
 
-	if (x1 < extents->x1)
+	if (x1 < extents->x1) {
 	    extents->x1 = x1;
-	if (y1 < extents->y1)
+}
+	if (y1 < extents->y1) {
 	    extents->y1 = y1;
-	if (x2 > extents->x2)
+}
+	if (x2 > extents->x2) {
 	    extents->x2 = x2;
-	if (y2 > extents->y2)
+}
+	if (y2 > extents->y2) {
 	    extents->y2 = y2;
+}
     }
 }
 
@@ -366,8 +376,9 @@ pixman_glyph_get_mask_format (pixman_glyph_cache_t *cache,
 
 	if (PIXMAN_FORMAT_TYPE (glyph_format) == PIXMAN_TYPE_A)
 	{
-	    if (PIXMAN_FORMAT_A (glyph_format) > PIXMAN_FORMAT_A (format))
+	    if (PIXMAN_FORMAT_A (glyph_format) > PIXMAN_FORMAT_A (format)) {
 		format = glyph_format;
+}
 	}
 	else
 	{
@@ -559,8 +570,9 @@ add_glyphs (pixman_glyph_cache_t *cache,
 		{
 		    static const pixman_color_t white = { 0xffff, 0xffff, 0xffff, 0xffff };
 
-		    if (!(white_img = pixman_image_create_solid_fill (&white)))
+		    if (!(white_img = pixman_image_create_solid_fill (&white))) {
 			goto out;
+}
 
 		    _pixman_image_validate (white_img);
 		}
@@ -591,10 +603,11 @@ add_glyphs (pixman_glyph_cache_t *cache,
 	    int src_x = composite_box.x1 - glyph_box.x1;
 	    int src_y = composite_box.y1 - glyph_box.y1;
 
-	    if (white_src)
+	    if (white_src) {
 		info.mask_image = glyph_img;
-	    else
+	    } else {
 		info.src_image = glyph_img;
+}
 
 	    info.mask_x = info.src_x = src_x;
 	    info.mask_y = info.src_y = src_y;
@@ -610,8 +623,9 @@ add_glyphs (pixman_glyph_cache_t *cache,
     }
 
 out:
-    if (white_img)
+    if (white_img) {
 	pixman_image_unref (white_img);
+}
 }
 
 /* Conceptually, for each glyph, (white IN glyph) is PIXMAN_OP_ADDed to an
@@ -649,8 +663,9 @@ pixman_composite_glyphs (pixman_op_t            op,
 {
     pixman_image_t *mask;
 
-    if (!(mask = pixman_image_create_bits (mask_format, width, height, NULL, -1)))
+    if (!(mask = pixman_image_create_bits (mask_format, width, height, NULL, -1))) {
 	return;
+}
 
     if (PIXMAN_FORMAT_A   (mask_format) != 0 &&
 	PIXMAN_FORMAT_RGB (mask_format) != 0)

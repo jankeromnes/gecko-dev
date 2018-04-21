@@ -12,13 +12,15 @@ namespace devtools {
 /* static */ already_AddRefed<FileDescriptorOutputStream>
 FileDescriptorOutputStream::Create(const ipc::FileDescriptor& fileDescriptor)
 {
-  if (NS_WARN_IF(!fileDescriptor.IsValid()))
+  if (NS_WARN_IF(!fileDescriptor.IsValid())) {
     return nullptr;
+}
 
   auto rawFD = fileDescriptor.ClonePlatformHandle();
   PRFileDesc* prfd = PR_ImportFile(PROsfd(rawFD.release()));
-  if (NS_WARN_IF(!prfd))
+  if (NS_WARN_IF(!prfd)) {
     return nullptr;
+}
 
   RefPtr<FileDescriptorOutputStream> stream = new FileDescriptorOutputStream(prfd);
   return stream.forget();
@@ -30,11 +32,13 @@ NS_IMETHODIMP
 FileDescriptorOutputStream::Close()
 {
   // Repeatedly closing is idempotent.
-  if (!fd)
+  if (!fd) {
     return NS_OK;
+}
 
-  if (PR_Close(fd) != PR_SUCCESS)
+  if (PR_Close(fd) != PR_SUCCESS) {
     return NS_ERROR_FAILURE;
+}
   fd = nullptr;
   return NS_OK;
 }
@@ -42,12 +46,14 @@ FileDescriptorOutputStream::Close()
 NS_IMETHODIMP
 FileDescriptorOutputStream::Write(const char* buf, uint32_t count, uint32_t* retval)
 {
-  if (NS_WARN_IF(!fd))
+  if (NS_WARN_IF(!fd)) {
     return NS_ERROR_FAILURE;
+}
 
   auto written = PR_Write(fd, buf, count);
-  if (written < 0)
+  if (written < 0) {
     return NS_ERROR_FAILURE;
+}
   *retval = written;
   return NS_OK;
 }
@@ -55,8 +61,9 @@ FileDescriptorOutputStream::Write(const char* buf, uint32_t count, uint32_t* ret
 NS_IMETHODIMP
 FileDescriptorOutputStream::Flush()
 {
-  if (NS_WARN_IF(!fd))
+  if (NS_WARN_IF(!fd)) {
     return NS_ERROR_FAILURE;
+}
 
   return PR_Sync(fd) == PR_SUCCESS ? NS_OK : NS_ERROR_FAILURE;
 }

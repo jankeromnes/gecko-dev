@@ -118,8 +118,9 @@ public:
     {
       nsCOMPtr<nsIObserverService> observerService =
         mozilla::services::GetObserverService();
-      if (!observerService)
+      if (!observerService) {
         return;
+}
 
       nsresult rv = observerService->AddObserver(this,
                                                  "xpcom-will-shutdown",
@@ -140,8 +141,9 @@ public:
       }
       nsCOMPtr<nsIObserverService> observerService =
         mozilla::services::GetObserverService();
-      if (!observerService)
+      if (!observerService) {
         return NS_ERROR_FAILURE;
+}
 
       nsresult rv = observerService->RemoveObserver(this,
                                                     "xpcom-will-shutdown");
@@ -388,10 +390,12 @@ DataChannelConnection::Destroy()
 void DataChannelConnection::DestroyOnSTS(struct socket *aMasterSocket,
                                          struct socket *aSocket)
 {
-  if (aSocket && aSocket != aMasterSocket)
+  if (aSocket && aSocket != aMasterSocket) {
     usrsctp_close(aSocket);
-  if (aMasterSocket)
+}
+  if (aMasterSocket) {
     usrsctp_close(aMasterSocket);
+}
 
   usrsctp_deregister_address(static_cast<void *>(this));
   LOG(("Deregistered %p from the SCTP stack.", static_cast<void *>(this)));
@@ -712,8 +716,9 @@ DataChannelConnection::CompleteConnect(TransportFlow *flow, TransportLayer::Stat
   // We should abort connection on TS_ERROR.
   // Note however that the association will also fail (perhaps with a delay) and
   // notify us in that way
-  if (state != TransportLayer::TS_OPEN || !mMasterSocket)
+  if (state != TransportLayer::TS_OPEN || !mMasterSocket) {
     return;
+}
 
   struct sockaddr_conn addr;
   memset(&addr, 0, sizeof(addr));
@@ -832,8 +837,9 @@ DataChannelConnection::SendPacket(unsigned char data[], size_t len, bool release
 {
   //LOG(("%p: SCTP/DTLS sent %ld bytes", this, len));
   int res = mTransportFlow->SendPacket(data, len) < 0 ? 1 : 0;
-  if (release)
+  if (release) {
     delete [] data;
+}
   return res;
 }
 
@@ -1033,8 +1039,9 @@ DataChannelConnection::FindFreeStream()
   uint32_t i, j, limit;
 
   limit = mStreams.Length();
-  if (limit > MAX_NUM_STREAMS)
+  if (limit > MAX_NUM_STREAMS) {
     limit = MAX_NUM_STREAMS;
+}
 
   for (i = (mAllocateEven ? 0 : 1); i < limit; i += 2) {
     if (!mStreams[i]) {
@@ -1044,8 +1051,9 @@ DataChannelConnection::FindFreeStream()
           break;
         }
       }
-      if (j == mStreamsResetting.Length())
+      if (j == mStreamsResetting.Length()) {
         break;
+}
     }
   }
   if (i >= limit) {
@@ -1358,8 +1366,9 @@ DataChannelConnection::HandleOpenRequestMessage(const struct rtcweb_datachannel_
   if (((size_t)length) != requiredLength) {
     LOG(("%s: Inconsistent length: %u, should be %zu",
          __FUNCTION__, length, requiredLength));
-    if (((size_t)length) < requiredLength)
+    if (((size_t)length) < requiredLength) {
       return;
+}
   }
 
   LOG(("%s: length %u, sizeof(*req) = %zu", __FUNCTION__, length, sizeof(*req)));
@@ -2184,8 +2193,9 @@ DataChannelConnection::HandleStreamChangeEvent(const struct sctp_stream_change_e
          new_len - old_len));
     num_needed -= (new_len - old_len); // number we added
     if (num_needed > 0) {
-      if (num_needed < 16)
+      if (num_needed < 16) {
         num_needed = 16;
+}
       LOG(("Not enough new streams, asking for %zu more", num_needed));
       // TODO: parameter is an int32_t but we pass size_t
       RequestMoreStreams(num_needed);
@@ -2201,8 +2211,9 @@ DataChannelConnection::HandleStreamChangeEvent(const struct sctp_stream_change_e
 
   for (uint32_t i = 0; i < mStreams.Length(); ++i) {
     channel = mStreams[i];
-    if (!channel)
+    if (!channel) {
       continue;
+}
 
     if ((channel->mState == CONNECTING) &&
         (channel->mStream == INVALID_STREAM)) {

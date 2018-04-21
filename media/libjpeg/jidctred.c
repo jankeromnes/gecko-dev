@@ -140,8 +140,9 @@ jpeg_idct_4x4 (j_decompress_ptr cinfo, jpeg_component_info *compptr,
   wsptr = workspace;
   for (ctr = DCTSIZE; ctr > 0; inptr++, quantptr++, wsptr++, ctr--) {
     /* Don't bother to process column 4, because second pass won't use it */
-    if (ctr == DCTSIZE-4)
+    if (ctr == DCTSIZE-4) {
       continue;
+}
     if (inptr[DCTSIZE*1] == 0 && inptr[DCTSIZE*2] == 0 &&
         inptr[DCTSIZE*3] == 0 && inptr[DCTSIZE*5] == 0 &&
         inptr[DCTSIZE*6] == 0 && inptr[DCTSIZE*7] == 0) {
@@ -293,8 +294,9 @@ jpeg_idct_2x2 (j_decompress_ptr cinfo, jpeg_component_info *compptr,
   wsptr = workspace;
   for (ctr = DCTSIZE; ctr > 0; inptr++, quantptr++, wsptr++, ctr--) {
     /* Don't bother to process columns 2,4,6 */
-    if (ctr == DCTSIZE-2 || ctr == DCTSIZE-4 || ctr == DCTSIZE-6)
+    if (ctr == DCTSIZE-2 || ctr == DCTSIZE-4 || ctr == DCTSIZE-6) {
       continue;
+}
     if (inptr[DCTSIZE*1] == 0 && inptr[DCTSIZE*3] == 0 &&
         inptr[DCTSIZE*5] == 0 && inptr[DCTSIZE*7] == 0) {
       /* AC terms all zero; we need not examine terms 2,4,6 for 2x2 output */

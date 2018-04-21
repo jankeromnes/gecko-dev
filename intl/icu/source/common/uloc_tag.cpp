@@ -1221,7 +1221,8 @@ _appendLDMLExtensionAsKeywords(const char* ldmlext, ExtensionListEntry** appendT
     /* Iterate through u extension attributes */
     while (*pTag) {
         /* locate next separator char */
-        for (len = 0; *(pTag + len) && *(pTag + len) != SEP; len++);
+        for (len = 0; *(pTag + len) && *(pTag + len) != SEP; len++) {;
+}
 
         if (ultag_isUnicodeLocaleKey(pTag, len)) {
             pKwds = pTag;
@@ -1329,7 +1330,8 @@ _appendLDMLExtensionAsKeywords(const char* ldmlext, ExtensionListEntry** appendT
 
             if (*pTag) {
                 /* locate next separator char */
-                for (len = 0; *(pTag + len) && *(pTag + len) != SEP; len++);
+                for (len = 0; *(pTag + len) && *(pTag + len) != SEP; len++) {;
+}
 
                 if (ultag_isUnicodeLocaleKey(pTag, len)) {
                     if (pBcpKey) {

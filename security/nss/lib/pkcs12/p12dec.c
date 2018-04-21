@@ -166,8 +166,9 @@ sec_pkcs12_check_pfx_mac(SEC_PKCS12PFXItem *pfx,
     }
 
     /* let success fall through */
-    if (key != NULL)
+    if (key != NULL) {
         SECITEM_ZfreeItem(key, PR_TRUE);
+}
 
     return ret;
 }

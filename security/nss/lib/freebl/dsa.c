@@ -213,8 +213,9 @@ cleanup:
     mp_clear(&g);
     mp_clear(&x);
     mp_clear(&y);
-    if (key)
+    if (key) {
         PORT_FreeArena(key->params.arena, PR_TRUE);
+}
     if (err) {
         translate_mpi_error(err);
         return SECFailure;
@@ -420,12 +421,14 @@ dsa_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest,
     ** Signature is tuple (r, s)
     */
     err = mp_to_fixlen_octets(&r, signature->data, dsa_subprime_len);
-    if (err < 0)
+    if (err < 0) {
         goto cleanup;
+}
     err = mp_to_fixlen_octets(&s, signature->data + dsa_subprime_len,
                               dsa_subprime_len);
-    if (err < 0)
+    if (err < 0) {
         goto cleanup;
+}
     err = MP_OKAY;
     signature->len = dsa_signature_len;
 cleanup:
@@ -467,8 +470,9 @@ DSA_SignDigest(DSAPrivateKey *key, SECItem *signature, const SECItem *digest)
     do {
         rv = dsa_GenerateGlobalRandomBytes(&key->params.subPrime,
                                            kSeed, &kSeedLen, sizeof kSeed);
-        if (rv != SECSuccess)
+        if (rv != SECSuccess) {
             break;
+}
         if (kSeedLen != dsa_subprime_len) {
             PORT_SetError(SEC_ERROR_INVALID_ARGS);
             rv = SECFailure;

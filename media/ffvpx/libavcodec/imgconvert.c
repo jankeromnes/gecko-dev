@@ -70,8 +70,9 @@ enum AVPixelFormat avcodec_find_best_pix_fmt_of_list(const enum AVPixelFormat *p
 
     enum AVPixelFormat best = AV_PIX_FMT_NONE;
 
-    for(i=0; pix_fmt_list[i] != AV_PIX_FMT_NONE; i++)
+    for(i=0; pix_fmt_list[i] != AV_PIX_FMT_NONE; i++) {
         best = avcodec_find_best_pix_fmt_of_2(best, pix_fmt_list[i], src_pix_fmt, has_alpha, loss_ptr);
+}
 
     return best;
 }
@@ -85,17 +86,20 @@ static inline int is_yuv_planar(const AVPixFmtDescriptor *desc)
     int planes[4] = { 0 };
 
     if (     desc->flags & AV_PIX_FMT_FLAG_RGB
-        || !(desc->flags & AV_PIX_FMT_FLAG_PLANAR))
+        || !(desc->flags & AV_PIX_FMT_FLAG_PLANAR)) {
         return 0;
+}
 
     /* set the used planes */
-    for (i = 0; i < desc->nb_components; i++)
+    for (i = 0; i < desc->nb_components; i++) {
         planes[desc->comp[i].plane] = 1;
+}
 
     /* if there is an unused plane, the format is not planar */
-    for (i = 0; i < desc->nb_components; i++)
-        if (!planes[i])
+    for (i = 0; i < desc->nb_components; i++) {
+        if (!planes[i]) {
             return 0;
+}
     return 1;
 }
 
@@ -107,8 +111,9 @@ int av_picture_crop(AVPicture *dst, const AVPicture *src,
     int x_shift;
     int max_step[4];
 
-    if (pix_fmt < 0 || pix_fmt >= AV_PIX_FMT_NB)
+    if (pix_fmt < 0 || pix_fmt >= AV_PIX_FMT_NB) {
         return -1;
+}
 
     y_shift = desc->log2_chroma_h;
     x_shift = desc->log2_chroma_w;
@@ -119,8 +124,9 @@ int av_picture_crop(AVPicture *dst, const AVPicture *src,
     dst->data[1] = src->data[1] + ((top_band >> y_shift) * src->linesize[1]) + (left_band >> x_shift);
     dst->data[2] = src->data[2] + ((top_band >> y_shift) * src->linesize[2]) + (left_band >> x_shift);
     } else{
-        if(top_band % (1<<y_shift) || left_band % (1<<x_shift))
+        if(top_band % (1<<y_shift) || left_band % (1<<x_shift)) {
             return -1;
+}
         dst->data[0] = src->data[0] + (top_band * src->linesize[0]) + (left_band * max_step[0]);
     }
 
@@ -142,12 +148,14 @@ int av_picture_pad(AVPicture *dst, const AVPicture *src, int height, int width,
     int i, y;
     int max_step[4];
 
-    if (pix_fmt < 0 || pix_fmt >= AV_PIX_FMT_NB)
+    if (pix_fmt < 0 || pix_fmt >= AV_PIX_FMT_NB) {
         return -1;
+}
 
     if (!is_yuv_planar(desc)) {
-        if (src)
+        if (src) {
             return -1; //TODO: Not yet implemented
+}
 
         av_image_fill_max_pixsteps(max_step, NULL, desc);
 

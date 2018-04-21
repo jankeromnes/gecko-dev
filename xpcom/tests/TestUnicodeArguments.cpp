@@ -62,8 +62,9 @@ static const char* expected_utf8[args_length] = {
 };
 
 int main(int argc, char* argv[]) {
-  if (argc != args_length + 1)
+  if (argc != args_length + 1) {
     return -1;
+}
 
   for (int i = 1; i < argc; ++i) {
     printf("argv[%d] = %s; expected = %s\n", i, argv[i], expected_utf8[i - 1]);

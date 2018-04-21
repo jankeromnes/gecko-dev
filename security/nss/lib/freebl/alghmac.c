@@ -25,16 +25,18 @@ struct HMACContextStr {
 void
 HMAC_Destroy(HMACContext *cx, PRBool freeit)
 {
-    if (cx == NULL)
+    if (cx == NULL) {
         return;
+}
 
     PORT_Assert(!freeit == !cx->wasAllocated);
     if (cx->hash != NULL) {
         cx->hashobj->destroy(cx->hash, PR_TRUE);
         PORT_Memset(cx, 0, sizeof *cx);
     }
-    if (freeit)
+    if (freeit) {
         PORT_Free(cx);
+}
 }
 
 SECStatus
@@ -56,8 +58,9 @@ HMAC_Init(HMACContext *cx, const SECHashObject *hash_obj,
     cx->wasAllocated = PR_FALSE;
     cx->hashobj = hash_obj;
     cx->hash = cx->hashobj->create();
-    if (cx->hash == NULL)
+    if (cx->hash == NULL) {
         goto loser;
+}
 
     if (secret_len > cx->hashobj->blocklength) {
         cx->hashobj->begin(cx->hash);
@@ -85,8 +88,9 @@ HMAC_Init(HMACContext *cx, const SECHashObject *hash_obj,
 
 loser:
     PORT_Memset(hashed_secret, 0, sizeof hashed_secret);
-    if (cx->hash != NULL)
+    if (cx->hash != NULL) {
         cx->hashobj->destroy(cx->hash, PR_TRUE);
+}
     return SECFailure;
 }
 
@@ -96,8 +100,9 @@ HMAC_Create(const SECHashObject *hash_obj, const unsigned char *secret,
 {
     SECStatus rv;
     HMACContext *cx = PORT_ZNew(HMACContext);
-    if (cx == NULL)
+    if (cx == NULL) {
         return NULL;
+}
     rv = HMAC_Init(cx, hash_obj, secret, secret_len, isFIPS);
     cx->wasAllocated = PR_TRUE;
     if (rv != SECSuccess) {
@@ -131,8 +136,9 @@ HMAC_Finish(HMACContext *cx, unsigned char *result, unsigned int *result_len,
     }
 
     cx->hashobj->end(cx->hash, result, result_len, max_result_len);
-    if (*result_len != cx->hashobj->length)
+    if (*result_len != cx->hashobj->length) {
         return SECFailure;
+}
 
     cx->hashobj->begin(cx->hash);
     cx->hashobj->update(cx->hash, cx->opad, cx->hashobj->blocklength);
@@ -147,14 +153,16 @@ HMAC_Clone(HMACContext *cx)
     HMACContext *newcx;
 
     newcx = (HMACContext *)PORT_ZAlloc(sizeof(HMACContext));
-    if (newcx == NULL)
+    if (newcx == NULL) {
         goto loser;
+}
 
     newcx->wasAllocated = PR_TRUE;
     newcx->hashobj = cx->hashobj;
     newcx->hash = cx->hashobj->clone(cx->hash);
-    if (newcx->hash == NULL)
+    if (newcx->hash == NULL) {
         goto loser;
+}
     PORT_Memcpy(newcx->ipad, cx->ipad, cx->hashobj->blocklength);
     PORT_Memcpy(newcx->opad, cx->opad, cx->hashobj->blocklength);
     return newcx;

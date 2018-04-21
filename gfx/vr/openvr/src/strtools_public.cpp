@@ -23,8 +23,9 @@ bool StringHasSuffix( const std::string &sString, const std::string &sSuffix )
 	size_t cStrLen = sString.length();
 	size_t cSuffixLen = sSuffix.length();
 
-	if ( cSuffixLen > cStrLen )
+	if ( cSuffixLen > cStrLen ) {
 		return false;
+}
 
 	std::string sStringSuffix = sString.substr( cStrLen - cSuffixLen, cSuffixLen );
 
@@ -36,8 +37,9 @@ bool StringHasSuffixCaseSensitive( const std::string &sString, const std::string
 	size_t cStrLen = sString.length();
 	size_t cSuffixLen = sSuffix.length();
 
-	if ( cSuffixLen > cStrLen )
+	if ( cSuffixLen > cStrLen ) {
 		return false;
+}
 
 	std::string sStringSuffix = sString.substr( cStrLen - cSuffixLen, cSuffixLen );
 
@@ -53,18 +55,19 @@ std::string UTF16to8(const wchar_t * in)
 	unsigned int codepoint = 0;
 	for ( ; in && *in != 0; ++in )
 	{
-		if (*in >= 0xd800 && *in <= 0xdbff)
+		if (*in >= 0xd800 && *in <= 0xdbff) {
 			codepoint = ((*in - 0xd800) << 10) + 0x10000;
-		else
+		} else
 		{
-			if (*in >= 0xdc00 && *in <= 0xdfff)
+			if (*in >= 0xdc00 && *in <= 0xdfff) {
 				codepoint |= *in - 0xdc00;
-			else
+			} else {
 				codepoint = *in;
+}
 
-			if (codepoint <= 0x7f)
+			if (codepoint <= 0x7f) {
 				out.append(1, static_cast<char>(codepoint));
-			else if (codepoint <= 0x7ff)
+			} else if (codepoint <= 0x7ff)
 			{
 				out.append(1, static_cast<char>(0xc0 | ((codepoint >> 6) & 0x1f)));
 				out.append(1, static_cast<char>(0x80 | (codepoint & 0x3f)));
@@ -131,8 +134,9 @@ std::wstring UTF8to16(const char * in)
 				out.append(1, static_cast<wchar_t>(0xd800 + (codepoint >> 10)));
 				out.append(1, static_cast<wchar_t>(0xdc00 + (codepoint & 0x03ff)));
 			}
-			else
+			else {
 				out.append(1, static_cast<wchar_t>(codepoint));
+}
 			codepoint = 0;
 		}
 	}
@@ -182,8 +186,9 @@ std::string StringToLower( const std::string & sString )
 uint32_t ReturnStdString( const std::string & sValue, char *pchBuffer, uint32_t unBufferLen )
 {
 	uint32_t unLen = (uint32_t)sValue.length() + 1;
-	if( !pchBuffer || !unBufferLen )
+	if( !pchBuffer || !unBufferLen ) {
 		return unLen;
+}
 
 	if( unBufferLen < unLen )
 	{
@@ -241,12 +246,14 @@ char cIntToHexDigit( int nValue )
 int iHexCharToInt( char cValue )
 {
 	int32_t iValue = cValue;
-	if ( (uint32_t)( iValue - '0' ) < 10 )
+	if ( (uint32_t)( iValue - '0' ) < 10 ) {
 		return iValue - '0';
+}
 
 	iValue |= 0x20;
-	if ( (uint32_t)( iValue - 'a' ) < 6 )
+	if ( (uint32_t)( iValue - 'a' ) < 6 ) {
 		return iValue - 'a' + 10;
+}
 
 	return -1;
 }

@@ -56,12 +56,14 @@ void avpriv_solve_lls(LLSModel *m, double threshold, unsigned short min_order)
         for (j = i; j < count; j++) {
             double sum = covar[i][j];
 
-            for (k = 0; k <= i-1; k++)
+            for (k = 0; k <= i-1; k++) {
                 sum -= factor[i][k] * factor[j][k];
+}
 
             if (i == j) {
-                if (sum < threshold)
+                if (sum < threshold) {
                     sum = 1.0;
+}
                 factor[i][i] = sqrt(sum);
             } else {
                 factor[j][i] = sum / factor[i][i];
@@ -72,8 +74,9 @@ void avpriv_solve_lls(LLSModel *m, double threshold, unsigned short min_order)
     for (i = 0; i < count; i++) {
         double sum = covar_y[i + 1];
 
-        for (k = 0; k <= i-1; k++)
+        for (k = 0; k <= i-1; k++) {
             sum -= factor[i][k] * m->coeff[0][k];
+}
 
         m->coeff[0][i] = sum / factor[i][i];
     }
@@ -82,8 +85,9 @@ void avpriv_solve_lls(LLSModel *m, double threshold, unsigned short min_order)
         for (i = j; i >= 0; i--) {
             double sum = m->coeff[0][i];
 
-            for (k = i + 1; k <= j; k++)
+            for (k = i + 1; k <= j; k++) {
                 sum -= factor[k][i] * m->coeff[j][k];
+}
 
             m->coeff[j][i] = sum / factor[i][i];
         }
@@ -93,8 +97,9 @@ void avpriv_solve_lls(LLSModel *m, double threshold, unsigned short min_order)
         for (i = 0; i <= j; i++) {
             double sum = m->coeff[j][i] * covar[i][i] - 2 * covar_y[i + 1];
 
-            for (k = 0; k < i; k++)
+            for (k = 0; k < i; k++) {
                 sum += 2 * m->coeff[j][k] * covar[k][i];
+}
 
             m->variance[j] += m->coeff[j][i] * sum;
         }
@@ -106,8 +111,9 @@ static double evaluate_lls(LLSModel *m, const double *param, int order)
     int i;
     double out = 0;
 
-    for (i = 0; i <= order; i++)
+    for (i = 0; i <= order; i++) {
         out += param[i] * m->coeff[order][i];
+}
 
     return out;
 }
@@ -118,6 +124,7 @@ av_cold void avpriv_init_lls(LLSModel *m, int indep_count)
     m->indep_count = indep_count;
     m->update_lls = update_lls;
     m->evaluate_lls = evaluate_lls;
-    if (ARCH_X86)
+    if (ARCH_X86) {
         ff_init_lls_x86(m);
+}
 }

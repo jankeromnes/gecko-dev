@@ -37,7 +37,8 @@ rintf(float x)
 	j0 = ((i0>>23)&0xff)-0x7f;
 	if(j0<23) {
 	    if(j0<0) {
-		if((i0&0x7fffffff)==0) return x;
+		if((i0&0x7fffffff)==0) { return x;
+}
 		STRICT_ASSIGN(float,w,TWO23[sx]+x);
 	        t =  w-TWO23[sx];
 		GET_FLOAT_WORD(i0,t);
@@ -47,6 +48,7 @@ rintf(float x)
 	    STRICT_ASSIGN(float,w,TWO23[sx]+x);
 	    return w-TWO23[sx];
 	}
-	if(j0==0x80) return x+x;	/* inf or NaN */
-	else return x;			/* x is integral */
+	if(j0==0x80) { return x+x;	/* inf or NaN */
+	} else { return x;			/* x is integral */
+}
 }

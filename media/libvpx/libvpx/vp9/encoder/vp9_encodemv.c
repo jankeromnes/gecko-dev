@@ -53,7 +53,8 @@ static void encode_mv_component(vpx_writer *w, int comp,
   } else {
     int i;
     const int n = mv_class + CLASS0_BITS - 1;  // number of bits
-    for (i = 0; i < n; ++i) vpx_write(w, (d >> i) & 1, mvcomp->bits[i]);
+    for (i = 0; i < n; ++i) { vpx_write(w, (d >> i) & 1, mvcomp->bits[i]);
+}
   }
 
   // Fractional bits
@@ -62,8 +63,9 @@ static void encode_mv_component(vpx_writer *w, int comp,
                   &mv_fp_encodings[fr]);
 
   // High precision bit
-  if (usehp)
+  if (usehp) {
     vpx_write(w, hp, mv_class == MV_CLASS_0 ? mvcomp->class0_hp : mvcomp->hp);
+}
 }
 
 static void build_nmv_component_cost_table(int *mvcost,
@@ -85,8 +87,9 @@ static void build_nmv_component_cost_table(int *mvcost,
     bits_cost[i][1] = vp9_cost_one(mvcomp->bits[i]);
   }
 
-  for (i = 0; i < CLASS0_SIZE; ++i)
+  for (i = 0; i < CLASS0_SIZE; ++i) {
     vp9_cost_tokens(class0_fp_cost[i], mvcomp->class0_fp[i], vp9_mv_fp_tree);
+}
   vp9_cost_tokens(fp_cost, mvcomp->fp, vp9_mv_fp_tree);
 
   // Always build the hp costs to avoid an uninitialized warning from gcc
@@ -118,20 +121,23 @@ static void build_nmv_component_cost_table(int *mvcost,
       int f;
       int whole_cost = class_cost[c];
       int b = c + CLASS0_BITS - 1; /* number of bits */
-      for (i = 0; i < b; ++i) whole_cost += bits_cost[i][((d >> i) & 1)];
+      for (i = 0; i < b; ++i) { whole_cost += bits_cost[i][((d >> i) & 1)];
+}
       for (f = 0; f < 4; ++f) {
         int cost = whole_cost + fp_cost[f];
         int v = (CLASS0_SIZE << (c + 2)) + d * 8 + f * 2 /* + e */ + 1;
         if (usehp) {
           mvcost[v] = cost + hp_cost[0] + sign_cost[0];
           mvcost[-v] = cost + hp_cost[0] + sign_cost[1];
-          if (v + 1 > MV_MAX) break;
+          if (v + 1 > MV_MAX) { break;
+}
           mvcost[v + 1] = cost + hp_cost[1] + sign_cost[0];
           mvcost[-v - 1] = cost + hp_cost[1] + sign_cost[1];
         } else {
           mvcost[v] = cost + sign_cost[0];
           mvcost[-v] = cost + sign_cost[1];
-          if (v + 1 > MV_MAX) break;
+          if (v + 1 > MV_MAX) { break;
+}
           mvcost[v + 1] = cost + sign_cost[0];
           mvcost[-v - 1] = cost + sign_cost[1];
         }
@@ -165,8 +171,9 @@ static void write_mv_update(const vpx_tree_index *tree,
   assert(n <= 32);
 
   vp9_tree_probs_from_distribution(tree, branch_ct, counts);
-  for (i = 0; i < n - 1; ++i)
+  for (i = 0; i < n - 1; ++i) {
     update_mv(w, branch_ct[i], &probs[i], MV_UPDATE_PROB);
+}
 }
 
 void vp9_write_nmv_probs(VP9_COMMON *cm, int usehp, vpx_writer *w,
@@ -185,14 +192,16 @@ void vp9_write_nmv_probs(VP9_COMMON *cm, int usehp, vpx_writer *w,
                     MV_CLASSES, w);
     write_mv_update(vp9_mv_class0_tree, comp->class0, comp_counts->class0,
                     CLASS0_SIZE, w);
-    for (j = 0; j < MV_OFFSET_BITS; ++j)
+    for (j = 0; j < MV_OFFSET_BITS; ++j) {
       update_mv(w, comp_counts->bits[j], &comp->bits[j], MV_UPDATE_PROB);
+}
   }
 
   for (i = 0; i < 2; ++i) {
-    for (j = 0; j < CLASS0_SIZE; ++j)
+    for (j = 0; j < CLASS0_SIZE; ++j) {
       write_mv_update(vp9_mv_fp_tree, mvc->comps[i].class0_fp[j],
                       counts->comps[i].class0_fp[j], MV_FP_SIZE, w);
+}
 
     write_mv_update(vp9_mv_fp_tree, mvc->comps[i].fp, counts->comps[i].fp,
                     MV_FP_SIZE, w);
@@ -215,11 +224,13 @@ void vp9_encode_mv(VP9_COMP *cpi, vpx_writer *w, const MV *mv, const MV *ref,
   usehp = usehp && use_mv_hp(ref);
 
   vp9_write_token(w, vp9_mv_joint_tree, mvctx->joints, &mv_joint_encodings[j]);
-  if (mv_joint_vertical(j))
+  if (mv_joint_vertical(j)) {
     encode_mv_component(w, diff.row, &mvctx->comps[0], usehp);
+}
 
-  if (mv_joint_horizontal(j))
+  if (mv_joint_horizontal(j)) {
     encode_mv_component(w, diff.col, &mvctx->comps[1], usehp);
+}
 
   // If auto_mv_step_size is enabled then keep track of the largest
   // motion vector component used.
@@ -261,11 +272,13 @@ void vp9_update_mv_count(ThreadData *td) {
     for (idy = 0; idy < 2; idy += num_4x4_h) {
       for (idx = 0; idx < 2; idx += num_4x4_w) {
         const int i = idy * 2 + idx;
-        if (mi->bmi[i].as_mode == NEWMV)
+        if (mi->bmi[i].as_mode == NEWMV) {
           inc_mvs(mi, mbmi_ext, mi->bmi[i].as_mv, &td->counts->mv);
+}
       }
     }
   } else {
-    if (mi->mode == NEWMV) inc_mvs(mi, mbmi_ext, mi->mv, &td->counts->mv);
+    if (mi->mode == NEWMV) { inc_mvs(mi, mbmi_ext, mi->mv, &td->counts->mv);
+}
   }
 }

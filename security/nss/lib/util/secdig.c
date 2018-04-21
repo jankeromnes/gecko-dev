@@ -108,8 +108,9 @@ SGN_DecodeDigestInfo(SECItem *didata)
     SECItem diCopy = { siBuffer, NULL, 0 };
 
     arena = PORT_NewArena(SEC_ASN1_DEFAULT_ARENA_SIZE);
-    if (arena == NULL)
+    if (arena == NULL) {
         return NULL;
+}
 
     rv = SECITEM_CopyItem(arena, &diCopy, didata);
     if (rv != SECSuccess) {
@@ -147,15 +148,17 @@ SGN_CopyDigestInfo(PLArenaPool *poolp, SGNDigestInfo *a, SGNDigestInfo *b)
     SECStatus rv;
     void *mark;
 
-    if ((poolp == NULL) || (a == NULL) || (b == NULL))
+    if ((poolp == NULL) || (a == NULL) || (b == NULL)) {
         return SECFailure;
+}
 
     mark = PORT_ArenaMark(poolp);
     a->arena = poolp;
     rv = SECOID_CopyAlgorithmID(poolp, &a->digestAlgorithm,
                                 &b->digestAlgorithm);
-    if (rv == SECSuccess)
+    if (rv == SECSuccess) {
         rv = SECITEM_CopyItem(poolp, &a->digest, &b->digest);
+}
 
     if (rv != SECSuccess) {
         PORT_ArenaRelease(poolp, mark);
@@ -173,8 +176,9 @@ SGN_CompareDigestInfo(SGNDigestInfo *a, SGNDigestInfo *b)
 
     /* Check signature algorithm's */
     rv = SECOID_CompareAlgorithmID(&a->digestAlgorithm, &b->digestAlgorithm);
-    if (rv)
+    if (rv) {
         return rv;
+}
 
     /* Compare signature block length's */
     rv = SECITEM_CompareItem(&a->digest, &b->digest);

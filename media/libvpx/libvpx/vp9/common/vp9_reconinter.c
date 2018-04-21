@@ -164,12 +164,13 @@ static void build_inter_predictors(MACROBLOCKD *xd, int plane, int block,
       assert(mv_q4.row == mv.row * (1 << (1 - pd->subsampling_y)) &&
              mv_q4.col == mv.col * (1 << (1 - pd->subsampling_x)));
 #endif
-      if (plane == 0)
+      if (plane == 0) {
         pre_buf->buf = xd->block_refs[ref]->buf->y_buffer;
-      else if (plane == 1)
+      } else if (plane == 1) {
         pre_buf->buf = xd->block_refs[ref]->buf->u_buffer;
-      else
+      } else {
         pre_buf->buf = xd->block_refs[ref]->buf->v_buffer;
+}
 
       pre_buf->buf +=
           scaled_buffer_offset(x_start + x, y_start + y, pre_buf->stride, sf);
@@ -221,10 +222,11 @@ static void build_inter_predictors_for_planes(MACROBLOCKD *xd, BLOCK_SIZE bsize,
     if (xd->mi[0]->sb_type < BLOCK_8X8) {
       int i = 0, x, y;
       assert(bsize == BLOCK_8X8);
-      for (y = 0; y < num_4x4_h; ++y)
-        for (x = 0; x < num_4x4_w; ++x)
+      for (y = 0; y < num_4x4_h; ++y) {
+        for (x = 0; x < num_4x4_w; ++x) {
           build_inter_predictors(xd, plane, i++, bw, bh, 4 * x, 4 * y, 4, 4,
                                  mi_x, mi_y);
+}
     } else {
       build_inter_predictors(xd, plane, 0, bw, bh, 0, 0, bw, bh, mi_x, mi_y);
     }

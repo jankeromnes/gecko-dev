@@ -91,8 +91,9 @@ SEC_GetPassword(FILE *input, FILE *output, char *prompt,
         /* Validate password */
         if (!(*ok)(phrase)) {
             /* Not weird enough */
-            if (!isTTY)
+            if (!isTTY) {
                 return NULL;
+}
             fprintf(output, "Password must be at least 8 characters long with one or more\n");
             fprintf(output, "non-alphabetic characters\n");
             continue;

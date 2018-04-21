@@ -48,10 +48,11 @@ static void cost(int *costs, aom_tree tree, const aom_prob *probs, int i,
     const int cc = c + av1_cost_bit(prob, b);
     const aom_tree_index ii = tree[i + b];
 
-    if (ii <= 0)
+    if (ii <= 0) {
       costs[-ii] = cc;
-    else
+    } else {
       cost(costs, tree, probs, ii, cc);
+}
   }
 }
 
@@ -74,12 +75,14 @@ void av1_cost_tokens_from_cdf(int *costs, const aom_cdf_prob *cdf,
     const aom_cdf_prob p15 = AOM_ICDF(cdf[i]) - prev_cdf;
     prev_cdf = AOM_ICDF(cdf[i]);
 
-    if (inv_map)
+    if (inv_map) {
       costs[inv_map[i]] = av1_cost_symbol(p15);
-    else
+    } else {
       costs[i] = av1_cost_symbol(p15);
+}
 
     // Stop once we reach the end of the CDF
-    if (cdf[i] == AOM_ICDF(CDF_PROB_TOP)) break;
+    if (cdf[i] == AOM_ICDF(CDF_PROB_TOP)) { break;
+}
   }
 }

@@ -782,10 +782,11 @@ void aom_comp_mask_pred_c(uint8_t *comp_pred, const uint8_t *pred, int width,
 
   for (i = 0; i < height; ++i) {
     for (j = 0; j < width; ++j) {
-      if (!invert_mask)
+      if (!invert_mask) {
         comp_pred[j] = AOM_BLEND_A64(mask[j], ref[j], pred[j]);
-      else
+      } else {
         comp_pred[j] = AOM_BLEND_A64(mask[j], pred[j], ref[j]);
+}
     }
     comp_pred += width;
     pred += width;
@@ -805,10 +806,11 @@ void aom_comp_mask_upsampled_pred_c(uint8_t *comp_pred, const uint8_t *pred,
                      ref_stride);
   for (i = 0; i < height; i++) {
     for (j = 0; j < width; j++) {
-      if (!invert_mask)
+      if (!invert_mask) {
         comp_pred[j] = AOM_BLEND_A64(mask[j], comp_pred[j], pred[j]);
-      else
+      } else {
         comp_pred[j] = AOM_BLEND_A64(mask[j], pred[j], comp_pred[j]);
+}
     }
     comp_pred += width;
     pred += width;
@@ -878,10 +880,11 @@ void aom_highbd_comp_mask_pred_c(uint16_t *comp_pred, const uint8_t *pred8,
   uint16_t *ref = CONVERT_TO_SHORTPTR(ref8);
   for (i = 0; i < height; ++i) {
     for (j = 0; j < width; ++j) {
-      if (!invert_mask)
+      if (!invert_mask) {
         comp_pred[j] = AOM_BLEND_A64(mask[j], ref[j], pred[j]);
-      else
+      } else {
         comp_pred[j] = AOM_BLEND_A64(mask[j], pred[j], ref[j]);
+}
     }
     comp_pred += width;
     pred += width;
@@ -901,10 +904,11 @@ void aom_highbd_comp_mask_upsampled_pred_c(
                             ref8, ref_stride, bd);
   for (i = 0; i < height; ++i) {
     for (j = 0; j < width; ++j) {
-      if (!invert_mask)
+      if (!invert_mask) {
         comp_pred[j] = AOM_BLEND_A64(mask[j], comp_pred[j], pred[j]);
-      else
+      } else {
         comp_pred[j] = AOM_BLEND_A64(mask[j], pred[j], comp_pred[j]);
+}
     }
     comp_pred += width;
     pred += width;

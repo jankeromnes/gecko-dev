@@ -24,18 +24,21 @@ ZeroCopyNSIOutputStream::ZeroCopyNSIOutputStream(nsCOMPtr<nsIOutputStream>& out)
 
 ZeroCopyNSIOutputStream::~ZeroCopyNSIOutputStream()
 {
-  if (!failed())
+  if (!failed()) {
     Unused << NS_WARN_IF(NS_FAILED(writeBuffer()));
+}
 }
 
 nsresult
 ZeroCopyNSIOutputStream::writeBuffer()
 {
-  if (failed())
+  if (failed()) {
     return result_;
+}
 
-  if (amountUsed == 0)
+  if (amountUsed == 0) {
     return NS_OK;
+}
 
   int32_t amountWritten = 0;
   while (amountWritten < amountUsed) {
@@ -44,8 +47,9 @@ ZeroCopyNSIOutputStream::writeBuffer()
     result_ = out->Write(buffer + amountWritten,
                          amountUsed - amountWritten,
                          &justWritten);
-    if (NS_WARN_IF(NS_FAILED(result_)))
+    if (NS_WARN_IF(NS_FAILED(result_))) {
       return result_;
+}
 
     amountWritten += justWritten;
   }
@@ -63,12 +67,14 @@ ZeroCopyNSIOutputStream::Next(void** data, int* size)
   MOZ_ASSERT(data != nullptr);
   MOZ_ASSERT(size != nullptr);
 
-  if (failed())
+  if (failed()) {
     return false;
+}
 
   if (amountUsed == BUFFER_SIZE) {
-    if (NS_FAILED(writeBuffer()))
+    if (NS_FAILED(writeBuffer())) {
       return false;
+}
   }
 
   *data = buffer + amountUsed;

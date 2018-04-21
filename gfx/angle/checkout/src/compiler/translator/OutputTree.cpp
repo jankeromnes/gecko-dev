@@ -64,8 +64,9 @@ void OutputTreeText(TInfoSinkBase &out, TIntermNode *node, const int depth)
 
     out.location(node->getLine().first_file, node->getLine().first_line);
 
-    for (i = 0; i < depth; ++i)
+    for (i = 0; i < depth; ++i) {
         out << "  ";
+}
 }
 
 //
@@ -560,10 +561,11 @@ void TOutputTraverser::visitConstantUnion(TIntermConstantUnion *node)
         switch (node->getConstantValue()[i].getType())
         {
             case EbtBool:
-                if (node->getConstantValue()[i].getBConst())
+                if (node->getConstantValue()[i].getBConst()) {
                     mOut << "true";
-                else
+                } else {
                     mOut << "false";
+}
 
                 mOut << " ("
                      << "const bool"
@@ -600,8 +602,9 @@ bool TOutputTraverser::visitLoop(Visit visit, TIntermLoop *node)
     OutputTreeText(mOut, node, mDepth);
 
     mOut << "Loop with condition ";
-    if (node->getType() == ELoopDoWhile)
+    if (node->getType() == ELoopDoWhile) {
         mOut << "not ";
+}
     mOut << "tested first\n";
 
     ++mDepth;

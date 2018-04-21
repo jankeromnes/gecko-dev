@@ -93,20 +93,24 @@ pk11uri_AppendBuffer(PK11URIBuffer *buffer, const unsigned char *data,
                      size_t size)
 {
     /* Check overflow. */
-    if (buffer->size + size < buffer->size)
+    if (buffer->size + size < buffer->size) {
         return SECFailure;
+}
 
     if (buffer->size + size > buffer->allocated) {
         size_t allocated = buffer->allocated * 2 + size;
-        if (allocated < buffer->allocated)
+        if (allocated < buffer->allocated) {
             return SECFailure;
-        if (buffer->arena)
+}
+        if (buffer->arena) {
             buffer->data = PORT_ArenaGrow(buffer->arena, buffer->data,
                                           buffer->allocated, allocated);
-        else
+        } else {
             buffer->data = PORT_Realloc(buffer->data, allocated);
-        if (buffer->data == NULL)
+}
+        if (buffer->data == NULL) {
             return SECFailure;
+}
         buffer->allocated = allocated;
     }
 
@@ -592,8 +596,9 @@ pk11uri_ParseAttributes(const char **string,
             break;
         }
         for (name_start = p; *p != '=' && *p != '\0'; p++) {
-            if (strchr(PK11URI_ATTR_NM_CHAR, *p) != NULL)
+            if (strchr(PK11URI_ATTR_NM_CHAR, *p) != NULL) {
                 continue;
+}
 
             return SECFailure;
         }
@@ -618,8 +623,9 @@ pk11uri_ParseAttributes(const char **string,
                 const char ch2 = *++p;
                 if (strchr(PK11URI_HEXDIG, ch2) != NULL) {
                     const char ch3 = *++p;
-                    if (strchr(PK11URI_HEXDIG, ch3) != NULL)
+                    if (strchr(PK11URI_HEXDIG, ch3) != NULL) {
                         continue;
+}
                 }
             }
 
@@ -726,8 +732,9 @@ PK11URI_FormatURI(PLArenaPool *arena, PK11URI *uri)
     pk11uri_InitBuffer(&buffer, arena);
 
     ret = pk11uri_AppendBuffer(&buffer, (unsigned char *)"pkcs11:", 7);
-    if (ret != SECSuccess)
+    if (ret != SECSuccess) {
         goto fail;
+}
 
     ret = pk11uri_AppendAttributeListToBuffer(&buffer, &uri->pattrs, ';', PK11URI_PCHAR);
     if (ret != SECSuccess) {

@@ -626,8 +626,9 @@ static SECStatus
 EncodeDBCertKey(const SECItem *certKey, PLArenaPool *arena, SECItem *dbkey)
 {
     unsigned int len = certKey->len + SEC_DB_KEY_HEADER_LEN;
-    if (len > NSS_MAX_LEGACY_DB_KEY_SIZE)
+    if (len > NSS_MAX_LEGACY_DB_KEY_SIZE) {
         goto loser;
+}
     if (arena) {
         dbkey->data = (unsigned char *)PORT_ArenaAlloc(arena, len);
     } else {
@@ -666,8 +667,9 @@ EncodeDBGenericKey(const SECItem *certKey, PLArenaPool *arena, SECItem *dbkey,
     }
 
     dbkey->len = certKey->len + SEC_DB_KEY_HEADER_LEN;
-    if (dbkey->len > NSS_MAX_LEGACY_DB_KEY_SIZE)
+    if (dbkey->len > NSS_MAX_LEGACY_DB_KEY_SIZE) {
         goto loser;
+}
     dbkey->data = (unsigned char *)PORT_ArenaAlloc(arena, dbkey->len);
     if (dbkey->data == NULL) {
         goto loser;
@@ -1449,8 +1451,9 @@ EncodeDBNicknameKey(char *nickname, PLArenaPool *arena,
 
     /* now get the database key and format it */
     dbkey->len = nnlen + SEC_DB_KEY_HEADER_LEN;
-    if (dbkey->len > NSS_MAX_LEGACY_DB_KEY_SIZE)
+    if (dbkey->len > NSS_MAX_LEGACY_DB_KEY_SIZE) {
         goto loser;
+}
     dbkey->data = (unsigned char *)PORT_ArenaAlloc(arena, dbkey->len);
     if (dbkey->data == NULL) {
         goto loser;
@@ -1783,8 +1786,9 @@ EncodeDBSMimeKey(char *emailAddr, PLArenaPool *arena,
 
     /* now get the database key and format it */
     dbkey->len = addrlen + SEC_DB_KEY_HEADER_LEN;
-    if (dbkey->len > NSS_MAX_LEGACY_DB_KEY_SIZE)
+    if (dbkey->len > NSS_MAX_LEGACY_DB_KEY_SIZE) {
         goto loser;
+}
     dbkey->data = (unsigned char *)PORT_ArenaAlloc(arena, dbkey->len);
     if (dbkey->data == NULL) {
         goto loser;
@@ -2245,8 +2249,9 @@ EncodeDBSubjectKey(SECItem *derSubject, PLArenaPool *arena,
                    SECItem *dbkey)
 {
     dbkey->len = derSubject->len + SEC_DB_KEY_HEADER_LEN;
-    if (dbkey->len > NSS_MAX_LEGACY_DB_KEY_SIZE)
+    if (dbkey->len > NSS_MAX_LEGACY_DB_KEY_SIZE) {
         goto loser;
+}
     dbkey->data = (unsigned char *)PORT_ArenaAlloc(arena, dbkey->len);
     if (dbkey->data == NULL) {
         goto loser;
@@ -2388,8 +2393,9 @@ DecodeDBSubjectEntry(certDBEntrySubject *entry, SECItem *dbentry,
         /* read in the additional email addresses */
         entry->nemailAddrs = (((unsigned int)tmpbuf[0]) << 8) | tmpbuf[1];
         tmpbuf += 2;
-        if (end - tmpbuf < 2 * (int)entry->nemailAddrs)
+        if (end - tmpbuf < 2 * (int)entry->nemailAddrs) {
             goto loser;
+}
         entry->emailAddrs = PORT_ArenaNewArray(arena, char *, entry->nemailAddrs);
         if (entry->emailAddrs == NULL) {
             PORT_SetError(SEC_ERROR_NO_MEMORY);
@@ -2413,8 +2419,9 @@ DecodeDBSubjectEntry(certDBEntrySubject *entry, SECItem *dbentry,
             PORT_Memcpy(entry->emailAddrs[i], tmpbuf, nameLen);
             tmpbuf += nameLen;
         }
-        if (tmpbuf != end)
+        if (tmpbuf != end) {
             goto loser;
+}
     }
     PORT_ArenaUnmark(arena, mark);
     return (SECSuccess);
@@ -2737,10 +2744,12 @@ nsslowcert_UpdateSubjectEmailAddr(NSSLOWCERTCertDBHandle *dbhandle,
     rv = WriteDBSubjectEntry(dbhandle, entry);
 
 done:
-    if (entry)
+    if (entry) {
         DestroyDBEntry((certDBEntry *)entry);
-    if (emailAddr)
+}
+    if (emailAddr) {
         PORT_Free(emailAddr);
+}
     return rv;
 }
 
@@ -3042,8 +3051,9 @@ AddPermSubjectNode(certDBEntrySubject *entry, NSSLOWCERTCertificate *cert,
 
         isNewer = nsslowcert_IsNewer(cert, cmpcert);
         nsslowcert_DestroyCertificate(cmpcert);
-        if (isNewer)
+        if (isNewer) {
             break;
+}
         /* copy this cert entry */
         newCertKeys[new_i] = entry->certKeys[i];
         newKeyIDs[new_i] = entry->keyIDs[i];
@@ -3240,8 +3250,9 @@ nsslowcert_AddPermNickname(NSSLOWCERTCertDBHandle *dbhandle,
     nsslowcert_LockDB(dbhandle);
 
     entry = ReadDBSubjectEntry(dbhandle, &cert->derSubject);
-    if (entry == NULL)
+    if (entry == NULL) {
         goto loser;
+}
 
     if (entry->nickname == NULL) {
 
@@ -4608,8 +4619,9 @@ loser:
 PRBool
 nsslowcert_needDBVerify(NSSLOWCERTCertDBHandle *handle)
 {
-    if (!handle)
+    if (!handle) {
         return PR_FALSE;
+}
     return handle->dbVerify;
 }
 
@@ -5114,12 +5126,14 @@ nsslowcert_UpdateCrl(NSSLOWCERTCertDBHandle *handle, SECItem *derCrl,
 
     /* Write the new entry into the data base */
     entry = NewDBCrlEntry(derCrl, url, crlType, 0);
-    if (entry == NULL)
+    if (entry == NULL) {
         goto done;
+}
 
     rv = WriteDBCrlEntry(handle, entry, crlKey);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto done;
+}
 
 done:
     if (entry) {
@@ -5148,8 +5162,9 @@ nsslowcert_DeletePermCRL(NSSLOWCERTCertDBHandle *handle, const SECItem *derName,
                                     : certDBEntryTypeRevocation;
 
     rv = DeleteDBCrlEntry(handle, derName, crlType);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto done;
+}
 
 done:
     return rv;
@@ -5295,8 +5310,9 @@ nsslowcert_DecodeAnyDBEntry(SECItem *dbData, const SECItem *dbKey,
         goto loser;
     }
     entry = PORT_ArenaZNew(arena, certDBEntry);
-    if (!entry)
+    if (!entry) {
         goto loser;
+}
 
     entry->common.version = (unsigned int)dbData->data[0];
     entry->common.flags = (unsigned int)dbData->data[2];
@@ -5338,11 +5354,13 @@ nsslowcert_DecodeAnyDBEntry(SECItem *dbData, const SECItem *dbKey,
             rv = SECFailure;
     }
 
-    if (rv == SECSuccess)
+    if (rv == SECSuccess) {
         return entry;
+}
 
 loser:
-    if (arena)
+    if (arena) {
         PORT_FreeArena(arena, PR_FALSE);
+}
     return NULL;
 }

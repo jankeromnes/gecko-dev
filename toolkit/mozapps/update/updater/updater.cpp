@@ -158,8 +158,9 @@ crc32(const unsigned char *buf, unsigned int len)
   unsigned int crc = 0xffffffffL;
 
   const unsigned char *end = buf + len;
-  for (; buf != end; ++buf)
+  for (; buf != end; ++buf) {
     crc = (crc << 8) ^ BZ2_crc32Table[(crc >> 24) ^ *buf];
+}
 
   crc = ~crc;
   return crc;
@@ -177,13 +178,15 @@ public:
   }
 
   ~AutoFile() {
-    if (mFile != nullptr)
+    if (mFile != nullptr) {
       fclose(mFile);
+}
   }
 
   AutoFile &operator=(FILE* file) {
-    if (mFile != 0)
+    if (mFile != 0) {
       fclose(mFile);
+}
     mFile = file;
     return *this;
   }
@@ -509,8 +512,9 @@ get_quoted_path(const NS_tchar *path)
   size_t len = lenQuote + lenPath + lenQuote + 1;
 
   NS_tchar *s = (NS_tchar *) malloc(len * sizeof(NS_tchar));
-  if (!s)
+  if (!s) {
     return nullptr;
+}
 
   NS_tchar *c = s;
   NS_tstrcpy(c, kQuote);
@@ -540,9 +544,10 @@ static int ensure_remove(const NS_tchar *path)
 {
   ensure_write_permissions(path);
   int rv = NS_tremove(path);
-  if (rv)
+  if (rv) {
     LOG(("ensure_remove: failed to remove file: " LOG_S ", rv: %d, err: %d",
          path, rv, errno));
+}
   return rv;
 }
 
@@ -601,20 +606,24 @@ static int ensure_remove_recursive(const NS_tchar *path,
 static bool is_read_only(const NS_tchar *flags)
 {
   size_t length = NS_tstrlen(flags);
-  if (length == 0)
+  if (length == 0) {
     return false;
+}
 
   // Make sure the string begins with "r"
-  if (flags[0] != NS_T('r'))
+  if (flags[0] != NS_T('r')) {
     return false;
+}
 
   // Look for "r+" or "r+b"
-  if (length > 1 && flags[1] == NS_T('+'))
+  if (length > 1 && flags[1] == NS_T('+')) {
     return false;
+}
 
   // Look for "rb+"
-  if (NS_tstrcmp(flags, NS_T("rb+")) == 0)
+  if (NS_tstrcmp(flags, NS_T("rb+")) == 0) {
     return false;
+}
 
   return true;
 }
@@ -736,8 +745,9 @@ static int ensure_copy(const NS_tchar *path, const NS_tchar *dest)
   // is 100k */
   const int blockSize = 32 * 1024;
   void* buffer = malloc(blockSize);
-  if (!buffer)
+  if (!buffer) {
     return UPDATER_MEM_ERROR;
+}
 
   while (!feof(infile.get())) {
     size_t read = fread(buffer, 1, blockSize, infile);
@@ -857,8 +867,9 @@ static int rename_file(const NS_tchar *spath, const NS_tchar *dpath,
                        bool allowDirs = false)
 {
   int rv = ensure_parent_dir(dpath);
-  if (rv)
+  if (rv) {
     return rv;
+}
 
   struct NS_tstat_t spathInfo;
   rv = NS_tstat(spath, &spathInfo);
@@ -1034,8 +1045,9 @@ static int backup_discard(const NS_tchar *path, const NS_tchar *relPath)
     }
   }
 #else
-  if (rv)
+  if (rv) {
     return WRITE_ERROR_DELETE_BACKUP;
+}
 #endif
 
   return OK;
@@ -1045,10 +1057,11 @@ static int backup_discard(const NS_tchar *path, const NS_tchar *relPath)
 static void backup_finish(const NS_tchar *path, const NS_tchar *relPath,
                           int status)
 {
-  if (status == OK)
+  if (status == OK) {
     backup_discard(path, relPath);
-  else
+  } else {
     backup_restore(path, relPath);
+}
 }
 
 //-----------------------------------------------------------------------------
@@ -1167,8 +1180,9 @@ RemoveFile::Prepare()
 int
 RemoveFile::Execute()
 {
-  if (mSkip)
+  if (mSkip) {
     return OK;
+}
 
   LOG(("EXECUTE REMOVEFILE " LOG_S, mRelPath.get()));
 
@@ -1290,8 +1304,9 @@ RemoveDir::Prepare()
 int
 RemoveDir::Execute()
 {
-  if (mSkip)
+  if (mSkip) {
     return OK;
+}
 
   LOG(("EXECUTE REMOVEDIR " LOG_S "/", mRelPath.get()));
 
@@ -1309,8 +1324,9 @@ RemoveDir::Execute()
 void
 RemoveDir::Finish(int status)
 {
-  if (mSkip || status != OK)
+  if (mSkip || status != OK) {
     return;
+}
 
   LOG(("FINISH REMOVEDIR " LOG_S "/", mRelPath.get()));
 
@@ -1397,8 +1413,9 @@ AddFile::Execute()
     }
   } else {
     rv = ensure_parent_dir(mFile.get());
-    if (rv)
+    if (rv) {
       return rv;
+}
   }
 
 #ifdef XP_WIN
@@ -1803,8 +1820,9 @@ AddIfFile::Prepare()
 int
 AddIfFile::Execute()
 {
-  if (!mTestFile)
+  if (!mTestFile) {
     return OK;
+}
 
   return AddFile::Execute();
 }
@@ -1812,8 +1830,9 @@ AddIfFile::Execute()
 void
 AddIfFile::Finish(int status)
 {
-  if (!mTestFile)
+  if (!mTestFile) {
     return;
+}
 
   AddFile::Finish(status);
 }
@@ -1864,8 +1883,9 @@ AddIfNotFile::Prepare()
 int
 AddIfNotFile::Execute()
 {
-  if (!mTestFile)
+  if (!mTestFile) {
     return OK;
+}
 
   return AddFile::Execute();
 }
@@ -1873,8 +1893,9 @@ AddIfNotFile::Execute()
 void
 AddIfNotFile::Finish(int status)
 {
-  if (!mTestFile)
+  if (!mTestFile) {
     return;
+}
 
   AddFile::Finish(status);
 }
@@ -1925,8 +1946,9 @@ PatchIfFile::Prepare()
 int
 PatchIfFile::Execute()
 {
-  if (!mTestFile)
+  if (!mTestFile) {
     return OK;
+}
 
   return PatchFile::Execute();
 }
@@ -1934,8 +1956,9 @@ PatchIfFile::Execute()
 void
 PatchIfFile::Finish(int status)
 {
-  if (!mTestFile)
+  if (!mTestFile) {
     return;
+}
 
   PatchFile::Finish(status);
 }
@@ -2982,8 +3005,9 @@ int NS_main(int argc, NS_tchar **argv)
     }
   }
 #else
-  if (pid > 0)
+  if (pid > 0) {
     waitpid(pid, nullptr, 0);
+}
 #endif
 
 #ifdef XP_WIN
@@ -3656,10 +3680,11 @@ ActionList::~ActionList()
 void
 ActionList::Append(Action *action)
 {
-  if (mLast)
+  if (mLast) {
     mLast->mNext = action;
-  else
+  } else {
     mFirst = action;
+}
 
   mLast = action;
   mCount++;
@@ -3680,8 +3705,9 @@ ActionList::Prepare()
   int i = 0;
   while (a) {
     int rv = a->Prepare();
-    if (rv)
+    if (rv) {
       return rv;
+}
 
     float percent = float(++i) / float(mCount);
     UpdateProgressUI(PROGRESS_PREPARE_SIZE * percent);
@@ -3737,8 +3763,9 @@ ActionList::Finish(int status)
     a = a->mNext;
   }
 
-  if (status == OK)
+  if (status == OK) {
     gSucceeded = true;
+}
 }
 
 
@@ -3915,8 +3942,9 @@ int add_dir_entries(const NS_tchar *dirpath, ActionList *list)
   // returned.
   if (!(ftsdir = fts_open(pathargv,
                           FTS_PHYSICAL | FTS_NOSTAT | FTS_XDEV | FTS_NOCHDIR,
-                          nullptr)))
+                          nullptr))) {
     return UNEXPECTED_FILE_OPERATION_ERROR;
+}
 
   while ((ftsdirEntry = fts_read(ftsdir)) != nullptr) {
     NS_tchar foundpath[MAXPATHLEN];
@@ -3947,8 +3975,9 @@ int add_dir_entries(const NS_tchar *dirpath, ActionList *list)
         action = new RemoveFile();
         rv = action->Parse(quotedpath);
         free(quotedpath);
-        if (!rv)
+        if (!rv) {
           list->Append(action);
+}
         break;
 
       // Directories
@@ -3966,8 +3995,9 @@ int add_dir_entries(const NS_tchar *dirpath, ActionList *list)
         action = new RemoveDir();
         rv = action->Parse(quotedpath);
         free(quotedpath);
-        if (!rv)
+        if (!rv) {
           list->Append(action);
+}
         break;
 
       // Errors
@@ -4000,8 +4030,9 @@ int add_dir_entries(const NS_tchar *dirpath, ActionList *list)
         break;
     }
 
-    if (rv != OK)
+    if (rv != OK) {
       break;
+}
   }
 
   fts_close(ftsdir);
@@ -4027,8 +4058,9 @@ GetManifestContents(const NS_tchar *manifest)
   }
 
   char *mbuf = (char *) malloc(ms.st_size + 1);
-  if (!mbuf)
+  if (!mbuf) {
     return nullptr;
+}
 
   size_t r = ms.st_size;
   char *rb = mbuf;
@@ -4092,8 +4124,9 @@ int AddPreCompleteActions(ActionList *list)
   NS_tchar *line;
   while((line = mstrtok(kNL, &rb)) != 0) {
     // skip comments
-    if (*line == NS_T('#'))
+    if (*line == NS_T('#')) {
       continue;
+}
 
     NS_tchar *token = mstrtok(kWhitespace, &line);
     if (!token) {
@@ -4116,12 +4149,14 @@ int AddPreCompleteActions(ActionList *list)
       return PARSE_ERROR;
     }
 
-    if (!action)
+    if (!action) {
       return BAD_ACTION_ERROR;
+}
 
     rv = action->Parse(line);
-    if (rv)
+    if (rv) {
       return rv;
+}
 
     list->Append(action);
   }
@@ -4157,8 +4192,9 @@ int DoUpdate()
 
   while((line = mstrtok(kNL, &rb)) != 0) {
     // skip comments
-    if (*line == NS_T('#'))
+    if (*line == NS_T('#')) {
       continue;
+}
 
     NS_tchar *token = mstrtok(kWhitespace, &line);
     if (!token) {
@@ -4175,8 +4211,9 @@ int DoUpdate()
         LOG(("UPDATE TYPE " LOG_S, type));
         if (NS_tstrcmp(type, NS_T("complete")) == 0) {
           rv = AddPreCompleteActions(&list);
-          if (rv)
+          if (rv) {
             return rv;
+}
         }
         continue;
       }
@@ -4191,15 +4228,18 @@ int DoUpdate()
     }
     else if (NS_tstrcmp(token, NS_T("rmrfdir")) == 0) { // rmdir recursive
       const NS_tchar *reldirpath = mstrtok(kQuote, &line);
-      if (!reldirpath)
+      if (!reldirpath) {
         return PARSE_ERROR;
+}
 
-      if (reldirpath[NS_tstrlen(reldirpath) - 1] != NS_T('/'))
+      if (reldirpath[NS_tstrlen(reldirpath) - 1] != NS_T('/')) {
         return PARSE_ERROR;
+}
 
       rv = add_dir_entries(reldirpath, &list);
-      if (rv)
+      if (rv) {
         return rv;
+}
 
       continue;
     }
@@ -4223,19 +4263,22 @@ int DoUpdate()
       return PARSE_ERROR;
     }
 
-    if (!action)
+    if (!action) {
       return BAD_ACTION_ERROR;
+}
 
     rv = action->Parse(line);
-    if (rv)
+    if (rv) {
       return rv;
+}
 
     list.Append(action);
   }
 
   rv = list.Prepare();
-  if (rv)
+  if (rv) {
     return rv;
+}
 
   rv = list.Execute();
 

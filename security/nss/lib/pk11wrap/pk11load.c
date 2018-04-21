@@ -35,8 +35,9 @@ CK_RV PR_CALLBACK
 secmodCreateMutext(CK_VOID_PTR_PTR pmutex)
 {
     *pmutex = (CK_VOID_PTR)PZ_NewLock(nssILockOther);
-    if (*pmutex)
+    if (*pmutex) {
         return CKR_OK;
+}
     return CKR_HOST_MEMORY;
 }
 
@@ -398,8 +399,9 @@ secmod_LoadPKCS11Module(SECMODModule *mod, SECMODModule **oldModule)
     PRBool alreadyLoaded = PR_FALSE;
     char *disableUnload = NULL;
 
-    if (mod->loaded)
+    if (mod->loaded) {
         return SECSuccess;
+}
 
     /* internal modules get loaded from their internal list */
     if (mod->internal && (mod->dllName == NULL)) {
@@ -411,8 +413,9 @@ secmod_LoadPKCS11Module(SECMODModule *mod, SECMODModule **oldModule)
          * even though the rest of NSS assumes this as the "internal" module.
          */
         if (!softokenLib &&
-            PR_SUCCESS != PR_CallOnce(&loadSoftokenOnce, &softoken_LoadDSO))
+            PR_SUCCESS != PR_CallOnce(&loadSoftokenOnce, &softoken_LoadDSO)) {
             return SECFailure;
+}
 
         PR_ATOMIC_INCREMENT(&softokenLoadCount);
 
@@ -424,8 +427,9 @@ secmod_LoadPKCS11Module(SECMODModule *mod, SECMODModule **oldModule)
                 PR_FindSymbol(softokenLib, "NSC_GetFunctionList");
         }
 
-        if (!entry)
+        if (!entry) {
             return SECFailure;
+}
 #endif
 
         if (mod->isModuleDB) {
@@ -468,8 +472,9 @@ secmod_LoadPKCS11Module(SECMODModule *mod, SECMODModule **oldModule)
             mod->moduleDBFunc = (void *)
                 PR_FindSymbol(library, "NSS_ReturnModuleSpecData");
         }
-        if (mod->moduleDBFunc == NULL)
+        if (mod->moduleDBFunc == NULL) {
             mod->isModuleDB = PR_FALSE;
+}
         if (entry == NULL) {
             if (mod->isModuleDB) {
                 mod->loaded = PR_TRUE;
@@ -484,8 +489,9 @@ secmod_LoadPKCS11Module(SECMODModule *mod, SECMODModule **oldModule)
     /*
      * We need to get the function list
      */
-    if ((*entry)((CK_FUNCTION_LIST_PTR *)&mod->functionList) != CKR_OK)
+    if ((*entry)((CK_FUNCTION_LIST_PTR *)&mod->functionList) != CKR_OK) {
         goto fail;
+}
 
 #ifdef DEBUG_MODULE
     if (PR_TRUE) {
@@ -513,10 +519,12 @@ secmod_LoadPKCS11Module(SECMODModule *mod, SECMODModule **oldModule)
     }
 
     /* check the version number */
-    if (PK11_GETTAB(mod)->C_GetInfo(&info) != CKR_OK)
+    if (PK11_GETTAB(mod)->C_GetInfo(&info) != CKR_OK) {
         goto fail2;
-    if (info.cryptokiVersion.major != 2)
+}
+    if (info.cryptokiVersion.major != 2) {
         goto fail2;
+}
     /* all 2.0 are a priori *not* thread safe */
     if (info.cryptokiVersion.minor < 1) {
         if (!loadSingleThreadedModules) {
@@ -532,8 +540,9 @@ secmod_LoadPKCS11Module(SECMODModule *mod, SECMODModule **oldModule)
     if ((mod->commonName == NULL) || (mod->commonName[0] == 0)) {
         mod->commonName = PK11_MakeString(mod->arena, NULL,
                                           (char *)info.libraryDescription, sizeof(info.libraryDescription));
-        if (mod->commonName == NULL)
+        if (mod->commonName == NULL) {
             goto fail2;
+}
     }
 
     /* initialize the Slots */
@@ -544,8 +553,9 @@ secmod_LoadPKCS11Module(SECMODModule *mod, SECMODModule **oldModule)
 
         mod->slots = (PK11SlotInfo **)PORT_ArenaAlloc(mod->arena,
                                                       sizeof(PK11SlotInfo *) * slotCount);
-        if (mod->slots == NULL)
+        if (mod->slots == NULL) {
             goto fail2;
+}
 
         slotIDs = (CK_SLOT_ID *)PORT_Alloc(sizeof(CK_SLOT_ID) * slotCount);
         if (slotIDs == NULL) {

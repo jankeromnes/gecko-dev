@@ -22,14 +22,15 @@ static TBehavior getBehavior(const std::string &str)
     const char kDisable[] = "disable";
     const char kWarn[]    = "warn";
 
-    if (str == kRequire)
+    if (str == kRequire) {
         return EBhRequire;
-    else if (str == kEnable)
+    } else if (str == kEnable) {
         return EBhEnable;
-    else if (str == kDisable)
+    } else if (str == kDisable) {
         return EBhDisable;
-    else if (str == kWarn)
+    } else if (str == kWarn) {
         return EBhWarn;
+}
     return EBhUndefined;
 }
 
@@ -92,30 +93,33 @@ void TDirectiveHandler::handlePragma(const pp::SourceLocation &loc,
         bool invalidValue = false;
         if (name == kOptimize)
         {
-            if (value == kOn)
+            if (value == kOn) {
                 mPragma.optimize = true;
-            else if (value == kOff)
+            } else if (value == kOff) {
                 mPragma.optimize = false;
-            else
+            } else {
                 invalidValue = true;
+}
         }
         else if (name == kDebug)
         {
-            if (value == kOn)
+            if (value == kOn) {
                 mPragma.debug = true;
-            else if (value == kOff)
+            } else if (value == kOff) {
                 mPragma.debug = false;
-            else
+            } else {
                 invalidValue = true;
+}
         }
         else if (name == kDebugShaderPrecision && mDebugShaderPrecisionSupported)
         {
-            if (value == kOn)
+            if (value == kOn) {
                 mPragma.debugShaderPrecision = true;
-            else if (value == kOff)
+            } else if (value == kOff) {
                 mPragma.debugShaderPrecision = false;
-            else
+            } else {
                 invalidValue = true;
+}
         }
         else
         {
@@ -156,8 +160,9 @@ void TDirectiveHandler::handleExtension(const pp::SourceLocation &loc,
         else
         {
             for (TExtensionBehavior::iterator iter = mExtensionBehavior.begin();
-                 iter != mExtensionBehavior.end(); ++iter)
+                 iter != mExtensionBehavior.end(); ++iter) {
                 iter->second = behaviorVal;
+}
         }
         return;
     }

@@ -60,8 +60,9 @@ constantTimeCompare(const unsigned char *a,
 {
     unsigned char tmp = 0;
     unsigned int i;
-    for (i = 0; i < len; ++i, ++a, ++b)
+    for (i = 0; i < len; ++i, ++a, ++b) {
         tmp |= *a ^ *b;
+}
     return constantTimeEQ8(0x00, tmp);
 }
 
@@ -120,8 +121,9 @@ rsa_FormatOneBlock(unsigned modulusLen,
     SECStatus rv;
 
     block = (unsigned char *)PORT_Alloc(modulusLen);
-    if (block == NULL)
+    if (block == NULL) {
         return NULL;
+}
 
     bp = block;
 
@@ -190,8 +192,9 @@ rsa_FormatOneBlock(unsigned modulusLen,
                     if (j <= padLen) {
                         rv = RNG_GenerateGlobalRandomBytes(bp + padLen,
                                                            modulusLen - (2 + padLen));
-                        if (rv != SECSuccess)
+                        if (rv != SECSuccess) {
                             break;
+}
                         j = modulusLen - 2;
                     }
                     do {
@@ -345,22 +348,25 @@ RSA_SignRaw(RSAPrivateKey *key,
     SECItem formatted;
     SECItem unformatted;
 
-    if (maxOutputLen < modulusLen)
+    if (maxOutputLen < modulusLen) {
         return SECFailure;
+}
 
     unformatted.len = dataLen;
     unformatted.data = (unsigned char *)data;
     formatted.data = NULL;
     rv = rsa_FormatBlock(&formatted, modulusLen, RSA_BlockRaw, &unformatted);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto done;
+}
 
     rv = RSA_PrivateKeyOpDoubleChecked(key, output, formatted.data);
     *outputLen = modulusLen;
 
 done:
-    if (formatted.data != NULL)
+    if (formatted.data != NULL) {
         PORT_ZFree(formatted.data, modulusLen);
+}
     return rv;
 }
 
@@ -376,26 +382,31 @@ RSA_CheckSignRaw(RSAPublicKey *key,
     unsigned int modulusLen = rsa_modulusLen(&key->modulus);
     unsigned char *buffer;
 
-    if (sigLen != modulusLen)
+    if (sigLen != modulusLen) {
         goto failure;
-    if (hashLen > modulusLen)
+}
+    if (hashLen > modulusLen) {
         goto failure;
+}
 
     buffer = (unsigned char *)PORT_Alloc(modulusLen + 1);
-    if (!buffer)
+    if (!buffer) {
         goto failure;
+}
 
     rv = RSA_PublicKeyOp(key, buffer, sig);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /*
      * make sure we get the same results
      */
     /* XXX(rsleevi): Constant time */
     /* NOTE: should we verify the leading zeros? */
-    if (PORT_Memcmp(buffer + (modulusLen - hashLen), hash, hashLen) != 0)
+    if (PORT_Memcmp(buffer + (modulusLen - hashLen), hash, hashLen) != 0) {
         goto loser;
+}
 
     PORT_Free(buffer);
     return SECSuccess;
@@ -418,14 +429,17 @@ RSA_CheckSignRecoverRaw(RSAPublicKey *key,
     SECStatus rv;
     unsigned int modulusLen = rsa_modulusLen(&key->modulus);
 
-    if (sigLen != modulusLen)
+    if (sigLen != modulusLen) {
         goto failure;
-    if (maxDataLen < modulusLen)
+}
+    if (maxDataLen < modulusLen) {
         goto failure;
+}
 
     rv = RSA_PublicKeyOp(key, data, sig);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto failure;
+}
 
     *dataLen = modulusLen;
     return SECSuccess;
@@ -449,27 +463,31 @@ RSA_EncryptRaw(RSAPublicKey *key,
     SECItem unformatted;
 
     formatted.data = NULL;
-    if (maxOutputLen < modulusLen)
+    if (maxOutputLen < modulusLen) {
         goto failure;
+}
 
     unformatted.len = inputLen;
     unformatted.data = (unsigned char *)input;
     formatted.data = NULL;
     rv = rsa_FormatBlock(&formatted, modulusLen, RSA_BlockRaw, &unformatted);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto failure;
+}
 
     rv = RSA_PublicKeyOp(key, output, formatted.data);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto failure;
+}
 
     PORT_ZFree(formatted.data, modulusLen);
     *outputLen = modulusLen;
     return SECSuccess;
 
 failure:
-    if (formatted.data != NULL)
+    if (formatted.data != NULL) {
         PORT_ZFree(formatted.data, modulusLen);
+}
     return SECFailure;
 }
 
@@ -485,14 +503,17 @@ RSA_DecryptRaw(RSAPrivateKey *key,
     SECStatus rv;
     unsigned int modulusLen = rsa_modulusLen(&key->modulus);
 
-    if (modulusLen > maxOutputLen)
+    if (modulusLen > maxOutputLen) {
         goto failure;
-    if (inputLen != modulusLen)
+}
+    if (inputLen != modulusLen) {
         goto failure;
+}
 
     rv = RSA_PrivateKeyOp(key, output, input);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto failure;
+}
 
     *outputLen = modulusLen;
     return SECSuccess;
@@ -548,8 +569,9 @@ eme_oaep_decode(unsigned char *output,
         return SECFailure;
     }
     (*hash->begin)(hashContext);
-    if (labelLen > 0)
+    if (labelLen > 0) {
         (*hash->update)(hashContext, label, labelLen);
+}
     (*hash->end)(hashContext, labelHash, &i, sizeof(labelHash));
     (*hash->destroy)(hashContext, PR_TRUE);
 
@@ -572,14 +594,16 @@ eme_oaep_decode(unsigned char *output,
     MGF1(maskHashAlg, mask, hash->length, &tmpOutput[1 + hash->length],
          inputLen - hash->length - 1);
     /* 3.d - Unmask seed */
-    for (i = 0; i < hash->length; ++i)
+    for (i = 0; i < hash->length; ++i) {
         tmpOutput[1 + i] ^= mask[i];
+}
 
     /* 3.e - Generate dbMask */
     MGF1(maskHashAlg, mask, maskLen, &tmpOutput[1], hash->length);
     /* 3.f - Unmask DB */
-    for (i = 0; i < maskLen; ++i)
+    for (i = 0; i < maskLen; ++i) {
         tmpOutput[1 + hash->length + i] ^= mask[i];
+}
 
     /* 3.g - Compare Y, lHash, and PS in constant time
      * Warning: This code is timing dependent and must not disclose which of
@@ -651,15 +675,18 @@ eme_oaep_decode(unsigned char *output,
         goto done;
     }
 
-    if (*outputLen)
+    if (*outputLen) {
         PORT_Memcpy(output, &tmpOutput[paddingOffset], *outputLen);
+}
     rv = SECSuccess;
 
 done:
-    if (mask)
+    if (mask) {
         PORT_ZFree(mask, maskLen);
-    if (tmpOutput)
+}
+    if (tmpOutput) {
         PORT_ZFree(tmpOutput, inputLen);
+}
     return rv;
 }
 
@@ -730,8 +757,9 @@ eme_oaep_encode(unsigned char *em,
         return SECFailure;
     }
     (*hash->begin)(hashContext);
-    if (labelLen > 0)
+    if (labelLen > 0) {
         (*hash->update)(hashContext, label, labelLen);
+}
     (*hash->end)(hashContext, &em[1 + hash->length], &i, hash->length);
     (*hash->destroy)(hashContext, PR_TRUE);
 
@@ -747,8 +775,9 @@ eme_oaep_encode(unsigned char *em,
      * appropriate offsets. This just copies M into place
      */
     em[emLen - inputLen - 1] = 0x01;
-    if (inputLen)
+    if (inputLen) {
         PORT_Memcpy(em + emLen - inputLen, input, inputLen);
+}
 
     if (seed == NULL) {
         /* Step 2.d - Generate seed */
@@ -770,14 +799,16 @@ eme_oaep_encode(unsigned char *em,
     }
     MGF1(maskHashAlg, mask, dbMaskLen, em + 1, hash->length);
     /* Step 2.f - Compute maskedDB*/
-    for (i = 0; i < dbMaskLen; ++i)
+    for (i = 0; i < dbMaskLen; ++i) {
         em[1 + hash->length + i] ^= mask[i];
+}
 
     /* Step 2.g - Generate seedMask */
     MGF1(maskHashAlg, mask, hash->length, &em[1 + hash->length], dbMaskLen);
     /* Step 2.h - Compute maskedSeed */
-    for (i = 0; i < hash->length; ++i)
+    for (i = 0; i < hash->length; ++i) {
         em[1 + i] ^= mask[i];
+}
 
     PORT_ZFree(mask, dbMaskLen);
     return SECSuccess;
@@ -824,12 +855,14 @@ RSA_EncryptOAEP(RSAPublicKey *key,
     }
     rv = eme_oaep_encode(oaepEncoded, modulusLen, input, inputLen,
                          hashAlg, maskHashAlg, label, labelLen, seed, seedLen);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto done;
+}
 
     rv = RSA_PublicKeyOp(key, output, oaepEncoded);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto done;
+}
     *outputLen = modulusLen;
 
 done:
@@ -884,8 +917,9 @@ RSA_DecryptOAEP(RSAPrivateKey *key,
                          labelLen);
 
 done:
-    if (oaepEncoded)
+    if (oaepEncoded) {
         PORT_ZFree(oaepEncoded, modulusLen);
+}
     return rv;
 }
 
@@ -904,28 +938,32 @@ RSA_EncryptBlock(RSAPublicKey *key,
     SECItem unformatted;
 
     formatted.data = NULL;
-    if (maxOutputLen < modulusLen)
+    if (maxOutputLen < modulusLen) {
         goto failure;
+}
 
     unformatted.len = inputLen;
     unformatted.data = (unsigned char *)input;
     formatted.data = NULL;
     rv = rsa_FormatBlock(&formatted, modulusLen, RSA_BlockPublic,
                          &unformatted);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto failure;
+}
 
     rv = RSA_PublicKeyOp(key, output, formatted.data);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto failure;
+}
 
     PORT_ZFree(formatted.data, modulusLen);
     *outputLen = modulusLen;
     return SECSuccess;
 
 failure:
-    if (formatted.data != NULL)
+    if (formatted.data != NULL) {
         PORT_ZFree(formatted.data, modulusLen);
+}
     return SECFailure;
 }
 
@@ -943,16 +981,19 @@ RSA_DecryptBlock(RSAPrivateKey *key,
     unsigned int i;
     unsigned char *buffer;
 
-    if (inputLen != modulusLen)
+    if (inputLen != modulusLen) {
         goto failure;
+}
 
     buffer = (unsigned char *)PORT_Alloc(modulusLen + 1);
-    if (!buffer)
+    if (!buffer) {
         goto failure;
+}
 
     rv = RSA_PrivateKeyOp(key, buffer, input);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto loser;
+}
 
     /* XXX(rsleevi): Constant time */
     if (buffer[0] != RSA_BLOCK_FIRST_OCTET ||
@@ -966,10 +1007,12 @@ RSA_DecryptBlock(RSAPrivateKey *key,
             break;
         }
     }
-    if (*outputLen == 0)
+    if (*outputLen == 0) {
         goto loser;
-    if (*outputLen > maxOutputLen)
+}
+    if (*outputLen > maxOutputLen) {
         goto loser;
+}
 
     PORT_Memcpy(output, buffer + modulusLen - *outputLen, *outputLen);
 
@@ -1052,8 +1095,9 @@ emsa_pss_encode(unsigned char *em,
     MGF1(maskHashAlg, dbMask, dbMaskLen, &em[dbMaskLen], hash->length);
 
     /* Step 10 */
-    for (i = 0; i < dbMaskLen; i++)
+    for (i = 0; i < dbMaskLen; i++) {
         em[i] ^= dbMask[i];
+}
     PORT_Free(dbMask);
 
     /* Step 11 */
@@ -1215,8 +1259,9 @@ RSA_SignPSS(RSAPrivateKey *key,
     }
     rv = emsa_pss_encode(em, emLen, modulusBits - 1, input, hashAlg,
                          maskHashAlg, salt, saltLength);
-    if (rv != SECSuccess)
+    if (rv != SECSuccess) {
         goto done;
+}
 
     // This sets error codes upon failure.
     rv = RSA_PrivateKeyOpDoubleChecked(key, output, pssEncoded);

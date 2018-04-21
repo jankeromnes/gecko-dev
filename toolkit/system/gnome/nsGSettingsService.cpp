@@ -105,12 +105,14 @@ nsGSettingsCollection::~nsGSettingsCollection()
 bool
 nsGSettingsCollection::KeyExists(const nsACString& aKey)
 {
-  if (!mKeys)
+  if (!mKeys) {
     mKeys = g_settings_list_keys(mSettings);
+}
 
   for (uint32_t i = 0; mKeys[i] != nullptr; i++) {
-    if (aKey.Equals(mKeys[i]))
+    if (aKey.Equals(mKeys[i])) {
       return true;
+}
   }
 
   return false;
@@ -140,8 +142,9 @@ nsGSettingsCollection::SetString(const nsACString& aKey,
                                  const nsACString& aValue)
 {
   GVariant *value = g_variant_new_string(PromiseFlatCString(aValue).get());
-  if (!value)
+  if (!value) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
 
   bool res = SetValue(aKey, value);
 
@@ -153,8 +156,9 @@ nsGSettingsCollection::SetBoolean(const nsACString& aKey,
                                   bool aValue)
 {
   GVariant *value = g_variant_new_boolean(aValue);
-  if (!value)
+  if (!value) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
 
   bool res = SetValue(aKey, value);
 
@@ -166,8 +170,9 @@ nsGSettingsCollection::SetInt(const nsACString& aKey,
                               int32_t aValue)
 {
   GVariant *value = g_variant_new_int32(aValue);
-  if (!value)
+  if (!value) {
     return NS_ERROR_OUT_OF_MEMORY;
+}
 
   bool res = SetValue(aKey, value);
 
@@ -178,8 +183,9 @@ NS_IMETHODIMP
 nsGSettingsCollection::GetString(const nsACString& aKey,
                                  nsACString& aResult)
 {
-  if (!KeyExists(aKey))
+  if (!KeyExists(aKey)) {
     return NS_ERROR_INVALID_ARG;
+}
 
   GVariant *value = g_settings_get_value(mSettings,
                                          PromiseFlatCString(aKey).get());
@@ -202,8 +208,9 @@ nsGSettingsCollection::GetBoolean(const nsACString& aKey,
 {
   NS_ENSURE_ARG_POINTER(aResult);
 
-  if (!KeyExists(aKey))
+  if (!KeyExists(aKey)) {
     return NS_ERROR_INVALID_ARG;
+}
 
   GVariant *value = g_settings_get_value(mSettings,
                                          PromiseFlatCString(aKey).get());
@@ -225,8 +232,9 @@ nsGSettingsCollection::GetInt(const nsACString& aKey,
 {
   NS_ENSURE_ARG_POINTER(aResult);
 
-  if (!KeyExists(aKey))
+  if (!KeyExists(aKey)) {
     return NS_ERROR_INVALID_ARG;
+}
 
   GVariant *value = g_settings_get_value(mSettings,
                                          PromiseFlatCString(aKey).get());
@@ -253,8 +261,9 @@ struct nsGSettingsDynamicFunction {
 NS_IMETHODIMP
 nsGSettingsCollection::GetStringList(const nsACString& aKey, nsIArray** aResult)
 {
-  if (!KeyExists(aKey))
+  if (!KeyExists(aKey)) {
     return NS_ERROR_INVALID_ARG;
+}
 
   nsCOMPtr<nsIMutableArray> items(do_CreateInstance(NS_ARRAY_CONTRACTID));
   if (!items) {
@@ -304,8 +313,9 @@ nsGSettingsService::Init()
 
   if (!gioLib) {
     gioLib = PR_LoadLibrary("libgio-2.0.so.0");
-    if (!gioLib)
+    if (!gioLib) {
       return NS_ERROR_FAILURE;
+}
   }
 
   for (auto GSettingsSymbol : kGSettingsSymbols) {

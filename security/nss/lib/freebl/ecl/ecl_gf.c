@@ -15,8 +15,9 @@ GFMethod_new()
     mp_err res = MP_OKAY;
     GFMethod *meth;
     meth = (GFMethod *)malloc(sizeof(GFMethod));
-    if (meth == NULL)
+    if (meth == NULL) {
         return NULL;
+}
     meth->constructed = MP_YES;
     MP_DIGITS(&meth->irr) = 0;
     meth->extra_free = NULL;
@@ -39,8 +40,9 @@ GFMethod_consGFp(const mp_int *irr)
     GFMethod *meth = NULL;
 
     meth = GFMethod_new();
-    if (meth == NULL)
+    if (meth == NULL) {
         return NULL;
+}
 
     MP_CHECKOK(mp_copy(irr, &meth->irr));
     meth->irr_arr[0] = mpl_significant_bits(irr);
@@ -91,13 +93,16 @@ CLEANUP:
 void
 GFMethod_free(GFMethod *meth)
 {
-    if (meth == NULL)
+    if (meth == NULL) {
         return;
-    if (meth->constructed == MP_NO)
+}
+    if (meth->constructed == MP_NO) {
         return;
+}
     mp_clear(&meth->irr);
-    if (meth->extra_free != NULL)
+    if (meth->extra_free != NULL) {
         meth->extra_free(meth);
+}
     free(meth);
 }
 

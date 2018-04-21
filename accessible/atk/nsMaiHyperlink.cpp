@@ -108,8 +108,9 @@ MaiHyperlink::MaiHyperlink(AccessibleOrProxy aHyperLink) :
         reinterpret_cast<AtkHyperlink *>
                         (g_object_new(mai_atk_hyperlink_get_type(), nullptr));
     NS_ASSERTION(mMaiAtkHyperlink, "OUT OF MEMORY");
-    if (!mMaiAtkHyperlink)
+    if (!mMaiAtkHyperlink) {
       return;
+}
 
     MAI_ATK_HYPERLINK(mMaiAtkHyperlink)->maiHyperlink = this;
 }
@@ -146,29 +147,33 @@ void
 finalizeCB(GObject *aObj)
 {
     NS_ASSERTION(MAI_IS_ATK_HYPERLINK(aObj), "Invalid MaiAtkHyperlink");
-    if (!MAI_IS_ATK_HYPERLINK(aObj))
+    if (!MAI_IS_ATK_HYPERLINK(aObj)) {
         return;
+}
 
     MaiAtkHyperlink *maiAtkHyperlink = MAI_ATK_HYPERLINK(aObj);
     maiAtkHyperlink->maiHyperlink = nullptr;
 
     /* call parent finalize function */
-    if (G_OBJECT_CLASS (parent_class)->finalize)
+    if (G_OBJECT_CLASS (parent_class)->finalize) {
         G_OBJECT_CLASS (parent_class)->finalize(aObj);
+}
 }
 
 gchar *
 getUriCB(AtkHyperlink *aLink, gint aLinkIndex)
 {
   MaiHyperlink* maiLink = GetMaiHyperlink(aLink);
-  if (!maiLink)
+  if (!maiLink) {
     return nullptr;
+}
 
   nsAutoCString cautoStr;
   if (Accessible* hyperlink = maiLink->GetAccHyperlink()) {
     nsCOMPtr<nsIURI> uri = hyperlink->AnchorURIAt(aLinkIndex);
-    if (!uri)
+    if (!uri) {
       return nullptr;
+}
 
     nsresult rv = uri->GetSpec(cautoStr);
     NS_ENSURE_SUCCESS(rv, nullptr);
@@ -178,8 +183,9 @@ getUriCB(AtkHyperlink *aLink, gint aLinkIndex)
 
   bool valid;
   maiLink->Proxy()->AnchorURIAt(aLinkIndex, cautoStr, &valid);
-  if (!valid)
+  if (!valid) {
     return nullptr;
+}
 
   return g_strdup(cautoStr.get());
 }
@@ -207,11 +213,13 @@ gint
 getEndIndexCB(AtkHyperlink *aLink)
 {
   MaiHyperlink* maiLink = GetMaiHyperlink(aLink);
-  if (!maiLink)
+  if (!maiLink) {
     return false;
+}
 
-  if (Accessible* hyperlink = maiLink->GetAccHyperlink())
+  if (Accessible* hyperlink = maiLink->GetAccHyperlink()) {
     return static_cast<gint>(hyperlink->EndOffset());
+}
 
   bool valid = false;
   uint32_t endIdx = maiLink->Proxy()->EndOffset(&valid);
@@ -222,11 +230,13 @@ gint
 getStartIndexCB(AtkHyperlink *aLink)
 {
   MaiHyperlink* maiLink = GetMaiHyperlink(aLink);
-  if (!maiLink)
+  if (!maiLink) {
     return -1;
+}
 
-  if (Accessible* hyperlink = maiLink->GetAccHyperlink())
+  if (Accessible* hyperlink = maiLink->GetAccHyperlink()) {
     return static_cast<gint>(hyperlink->StartOffset());
+}
 
   bool valid = false;
   uint32_t startIdx = maiLink->Proxy()->StartOffset(&valid);
@@ -237,11 +247,13 @@ gboolean
 isValidCB(AtkHyperlink *aLink)
 {
   MaiHyperlink* maiLink = GetMaiHyperlink(aLink);
-  if (!maiLink)
+  if (!maiLink) {
     return false;
+}
 
-  if (Accessible* hyperlink = maiLink->GetAccHyperlink())
+  if (Accessible* hyperlink = maiLink->GetAccHyperlink()) {
     return static_cast<gboolean>(hyperlink->IsLinkValid());
+}
 
   return static_cast<gboolean>(maiLink->Proxy()->IsLinkValid());
 }
@@ -250,11 +262,13 @@ gint
 getAnchorCountCB(AtkHyperlink *aLink)
 {
   MaiHyperlink* maiLink = GetMaiHyperlink(aLink);
-  if (!maiLink)
+  if (!maiLink) {
     return -1;
+}
 
-  if (Accessible* hyperlink = maiLink->GetAccHyperlink())
+  if (Accessible* hyperlink = maiLink->GetAccHyperlink()) {
     return static_cast<gint>(hyperlink->AnchorCount());
+}
 
   bool valid = false;
   uint32_t anchorCount = maiLink->Proxy()->AnchorCount(&valid);

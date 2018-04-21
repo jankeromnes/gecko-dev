@@ -105,16 +105,21 @@ SSL_SecurityStatus(PRFileDesc *fd, int *op, char **cp, int *kp0, int *kp1,
         return SECFailure;
     }
 
-    if (cp)
+    if (cp) {
         *cp = 0;
-    if (kp0)
+}
+    if (kp0) {
         *kp0 = 0;
-    if (kp1)
+}
+    if (kp1) {
         *kp1 = 0;
-    if (ip)
+}
+    if (ip) {
         *ip = 0;
-    if (sp)
+}
+    if (sp) {
         *sp = 0;
+}
     if (op) {
         *op = SSL_SECURITY_STATUS_OFF;
     }
@@ -133,13 +138,15 @@ SSL_SecurityStatus(PRFileDesc *fd, int *op, char **cp, int *kp0, int *kp1,
 
         if (kp0) {
             *kp0 = bulkCipherDef->key_size * 8;
-            if (isDes)
+            if (isDes) {
                 *kp0 = (*kp0 * 7) / 8;
+}
         }
         if (kp1) {
             *kp1 = bulkCipherDef->secret_key_size * 8;
-            if (isDes)
+            if (isDes) {
                 *kp1 = (*kp1 * 7) / 8;
+}
         }
         if (op) {
             if (bulkCipherDef->key_size == 0) {
@@ -273,20 +280,23 @@ SSL_AuthCertificate(void *arg, PRFileDesc *fd, PRBool checkSig, PRBool isServer)
     rv = CERT_VerifyCert(handle, ss->sec.peerCert, checkSig, certUsage,
                          now, ss->pkcs11PinArg, NULL);
 
-    if (rv != SECSuccess || isServer)
+    if (rv != SECSuccess || isServer) {
         return rv;
+}
 
     /* cert is OK.  This is the client side of an SSL connection.
      * Now check the name field in the cert against the desired hostname.
      * NB: This is our only defense against Man-In-The-Middle (MITM) attacks!
      */
     hostname = ss->url;
-    if (hostname && hostname[0])
+    if (hostname && hostname[0]) {
         rv = CERT_VerifyCertName(ss->sec.peerCert, hostname);
-    else
+    } else {
         rv = SECFailure;
-    if (rv != SECSuccess)
+}
+    if (rv != SECSuccess) {
         PORT_SetError(SSL_ERROR_BAD_CERT_DOMAIN);
+}
 
     return rv;
 }
