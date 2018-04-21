@@ -93,15 +93,15 @@ public:
     // Data Members
     //
 
-    int32_t           fMagic;             // Internal sanity check.
-    int32_t           fChecks;            // Bit vector of checks to perform.
+    int32_t           fMagic{};             // Internal sanity check.
+    int32_t           fChecks{};            // Bit vector of checks to perform.
 
     SpoofData        *fSpoofData;
     
-    const UnicodeSet *fAllowedCharsSet;   // The UnicodeSet of allowed characters.
+    const UnicodeSet *fAllowedCharsSet{};   // The UnicodeSet of allowed characters.
                                           //   for this Spoof Checker.  Defaults to all chars.
 
-    const char       *fAllowedLocales;    // The list of allowed locales.
+    const char       *fAllowedLocales{};    // The list of allowed locales.
     URestrictionLevel fRestrictionLevel;  // The maximum restriction level for an acceptable identifier.
 };
 
@@ -125,7 +125,7 @@ public:
 
     // Data Members
     int32_t fMagic;                        // Internal sanity check.
-    int32_t fChecks;                       // Bit vector of checks that were failed.
+    int32_t fChecks{};                       // Bit vector of checks that were failed.
     UnicodeSet fNumerics;                  // Set of numerics found in the string.
     URestrictionLevel fRestrictionLevel;   // The restriction level of the string.
 };
@@ -269,19 +269,19 @@ class SpoofData: public UMemory {
     void initPtrs(UErrorCode &status);
 
     SpoofDataHeader             *fRawData;          // Ptr to the raw memory-mapped data
-    UBool                       fDataOwned;         // True if the raw data is owned, and needs
+    UBool                       fDataOwned{};         // True if the raw data is owned, and needs
                                                     //  to be deleted when refcount goes to zero.
-    UDataMemory                 *fUDM;              // If not NULL, our data came from a
+    UDataMemory                 *fUDM{};              // If not NULL, our data came from a
                                                     //   UDataMemory, which we must close when
                                                     //   we are done.
 
-    uint32_t                    fMemLimit;          // Limit of available raw data space
+    uint32_t                    fMemLimit{};          // Limit of available raw data space
     u_atomic_int32_t            fRefCount;
 
     // Confusable data
-    int32_t                     *fCFUKeys;
-    uint16_t                    *fCFUValues;
-    UChar                       *fCFUStrings;
+    int32_t                     *fCFUKeys{};
+    uint16_t                    *fCFUValues{};
+    UChar                       *fCFUStrings{};
 
     friend class ConfusabledataBuilder;
 };

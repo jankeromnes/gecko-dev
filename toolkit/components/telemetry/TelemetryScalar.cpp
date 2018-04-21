@@ -1188,7 +1188,7 @@ ScalarResult
 internal_UpdateScalar(const StaticMutexAutoLock& lock, const nsACString& aName,
                       ScalarActionType aType, nsIVariant* aValue)
 {
-  ScalarKey uniqueId;
+  ScalarKey uniqueId{};
   nsresult rv = internal_GetEnumByScalarName(lock, aName, &uniqueId);
   if (NS_FAILED(rv)) {
     return (rv == NS_ERROR_FAILURE) ?
@@ -1348,7 +1348,7 @@ internal_UpdateKeyedScalar(const StaticMutexAutoLock& lock,
                            const nsACString& aName, const nsAString& aKey,
                            ScalarActionType aType, nsIVariant* aValue)
 {
-  ScalarKey uniqueId;
+  ScalarKey uniqueId{};
   nsresult rv = internal_GetEnumByScalarName(lock, aName, &uniqueId);
   if (NS_FAILED(rv)) {
     return (rv == NS_ERROR_FAILURE) ?

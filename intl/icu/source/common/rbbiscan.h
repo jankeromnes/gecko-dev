@@ -114,11 +114,11 @@ private:
     RBBIRuleTableEl               **fStateTable;     // State Transition Table for RBBI Rule
                                                      //   parsing.  index by p[state][char-class]
 
-    uint16_t                      fStack[kStackSize];  // State stack, holds state pushes
+    uint16_t                      fStack[kStackSize]{};  // State stack, holds state pushes
     int32_t                       fStackPtr;           //  and pops as specified in the state
                                                        //  transition rules.
 
-    RBBINode                      *fNodeStack[kStackSize]; // Node stack, holds nodes created
+    RBBINode                      *fNodeStack[kStackSize]{}; // Node stack, holds nodes created
                                                            //  during the parse of a rule
     int32_t                        fNodeStackPtr;
 
@@ -151,10 +151,10 @@ private:
     int32_t                        fOptionStart;     // Input index of start of a !!option
                                                      //   keyword, while being scanned.
 
-    UnicodeSet *gRuleSet_rule_char;
-    UnicodeSet *gRuleSet_white_space;
-    UnicodeSet *gRuleSet_name_char;
-    UnicodeSet *gRuleSet_name_start_char;
+    UnicodeSet *gRuleSet_rule_char{};
+    UnicodeSet *gRuleSet_white_space{};
+    UnicodeSet *gRuleSet_name_char{};
+    UnicodeSet *gRuleSet_name_start_char{};
 
     RBBIRuleScanner(const RBBIRuleScanner &other); // forbid copying of this class
     RBBIRuleScanner &operator=(const RBBIRuleScanner &other); // forbid copying of this class

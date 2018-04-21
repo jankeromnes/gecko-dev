@@ -227,7 +227,7 @@ private:
     void skipPrevious();  // Requires start<codePointStart.
     uint8_t previousCC();  // Returns 0 if there is no previous character.
 
-    UChar *codePointStart, *codePointLimit;
+    UChar *codePointStart{}, *codePointLimit{};
 };
 
 /**

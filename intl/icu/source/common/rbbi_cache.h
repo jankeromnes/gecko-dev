@@ -184,14 +184,14 @@ class RuleBasedBreakIterator::BreakCache: public UMemory {
     static_assert((CACHE_SIZE & (CACHE_SIZE-1)) == 0, "CACHE_SIZE must be power of two.");
 
     RuleBasedBreakIterator *fBI;
-    int32_t                 fStartBufIdx;
-    int32_t                 fEndBufIdx;    // inclusive
+    int32_t                 fStartBufIdx{};
+    int32_t                 fEndBufIdx{};    // inclusive
 
-    int32_t                 fTextIdx;
-    int32_t                 fBufIdx;
+    int32_t                 fTextIdx{};
+    int32_t                 fBufIdx{};
 
-    int32_t                 fBoundaries[CACHE_SIZE];
-    uint16_t                fStatuses[CACHE_SIZE];
+    int32_t                 fBoundaries[CACHE_SIZE]{};
+    uint16_t                fStatuses[CACHE_SIZE]{};
 
     UVector32               fSideBuffer;
 };

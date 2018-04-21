@@ -64,7 +64,7 @@ class CongestionControllerTest : public ::testing::Test {
 
   SimulatedClock clock_;
   StrictMock<MockCongestionObserver> observer_;
-  NiceMock<MockPacedSender>* pacer_;
+  NiceMock<MockPacedSender>* pacer_{};
   NiceMock<MockRemoteBitrateObserver> remote_bitrate_observer_;
   NiceMock<MockRtcEventLog> event_log_;
   std::unique_ptr<RtcpBandwidthObserver> bandwidth_observer_;

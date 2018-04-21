@@ -3599,7 +3599,7 @@ int yylex_init(yyscan_t* ptr_yy_globals)
  */
 int yylex_init_extra( YY_EXTRA_TYPE yy_user_defined, yyscan_t* ptr_yy_globals )
 {
-    struct yyguts_t dummy_yyguts;
+    struct yyguts_t dummy_yyguts{};
 
     yyset_extra (yy_user_defined, &dummy_yyguts);
 

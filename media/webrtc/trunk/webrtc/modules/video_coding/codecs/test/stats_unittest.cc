@@ -26,7 +26,7 @@ class StatsTest : public testing::Test {
 
   void TearDown() { delete stats_; }
 
-  Stats* stats_;
+  Stats* stats_{};
 };
 
 // Test empty object

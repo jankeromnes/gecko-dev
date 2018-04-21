@@ -305,7 +305,7 @@ class LocaleDisplayNamesImpl : public LocaleDisplayNames {
     };
     // Capitalization transforms. For each usage type, indicates whether to titlecase for
     // the context specified in capitalizationContext (which we know at construction time)
-     UBool fCapitalization[kCapContextUsageCount];
+     UBool fCapitalization[kCapContextUsageCount]{};
 
 public:
     // constructor

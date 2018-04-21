@@ -742,7 +742,7 @@ RuleBasedTimeZone::findNext(UDate base, UBool inclusive, UDate& transitionTime,
     }
     UBool isFinal = FALSE;
     UBool found = FALSE;
-    Transition result;
+    Transition result{};
     Transition *tzt = (Transition*)fHistoricTransitions->elementAt(0);
     UDate tt = tzt->time;
     if (tt > base || (inclusive && tt == base)) {
@@ -825,7 +825,7 @@ RuleBasedTimeZone::findPrev(UDate base, UBool inclusive, UDate& transitionTime,
         return FALSE;
     }
     UBool found = FALSE;
-    Transition result;
+    Transition result{};
     Transition *tzt = (Transition*)fHistoricTransitions->elementAt(0);
     UDate tt = tzt->time;
     if (inclusive && tt == base) {

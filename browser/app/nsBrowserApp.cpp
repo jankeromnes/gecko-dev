@@ -197,7 +197,7 @@ static int do_main(int argc, char* argv[], char* envp[])
     return gBootstrap->XRE_XPCShellMain(--argc, argv, envp, &shellData);
   }
 
-  BootstrapConfig config;
+  BootstrapConfig config{};
 
   if (appDataFile && *appDataFile) {
     config.appData = nullptr;

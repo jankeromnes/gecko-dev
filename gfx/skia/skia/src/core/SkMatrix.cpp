@@ -294,7 +294,7 @@ void SkMatrix::preTranslate(SkScalar dx, SkScalar dy) {
         fMat[kMTransX] += dx;
         fMat[kMTransY] += dy;
     } else if (mask & kPerspective_Mask) {
-        SkMatrix    m;
+        SkMatrix    m{};
         m.setTranslate(dx, dy);
         this->preConcat(m);
         return;
@@ -307,7 +307,7 @@ void SkMatrix::preTranslate(SkScalar dx, SkScalar dy) {
 
 void SkMatrix::postTranslate(SkScalar dx, SkScalar dy) {
     if (this->hasPerspective()) {
-        SkMatrix    m;
+        SkMatrix    m{};
         m.setTranslate(dx, dy);
         this->postConcat(m);
     } else {
@@ -348,7 +348,7 @@ void SkMatrix::preScale(SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
         return;
     }
 
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setScale(sx, sy, px, py);
     this->preConcat(m);
 }
@@ -387,7 +387,7 @@ void SkMatrix::postScale(SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
     if (1 == sx && 1 == sy) {
         return;
     }
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setScale(sx, sy, px, py);
     this->postConcat(m);
 }
@@ -396,7 +396,7 @@ void SkMatrix::postScale(SkScalar sx, SkScalar sy) {
     if (1 == sx && 1 == sy) {
         return;
     }
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setScale(sx, sy);
     this->postConcat(m);
 }
@@ -486,25 +486,25 @@ void SkMatrix::setRotate(SkScalar degrees) {
 }
 
 void SkMatrix::preRotate(SkScalar degrees, SkScalar px, SkScalar py) {
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setRotate(degrees, px, py);
     this->preConcat(m);
 }
 
 void SkMatrix::preRotate(SkScalar degrees) {
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setRotate(degrees);
     this->preConcat(m);
 }
 
 void SkMatrix::postRotate(SkScalar degrees, SkScalar px, SkScalar py) {
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setRotate(degrees, px, py);
     this->postConcat(m);
 }
 
 void SkMatrix::postRotate(SkScalar degrees) {
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setRotate(degrees);
     this->postConcat(m);
 }
@@ -542,25 +542,25 @@ void SkMatrix::setSkew(SkScalar sx, SkScalar sy) {
 }
 
 void SkMatrix::preSkew(SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setSkew(sx, sy, px, py);
     this->preConcat(m);
 }
 
 void SkMatrix::preSkew(SkScalar sx, SkScalar sy) {
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setSkew(sx, sy);
     this->preConcat(m);
 }
 
 void SkMatrix::postSkew(SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setSkew(sx, sy, px, py);
     this->postConcat(m);
 }
 
 void SkMatrix::postSkew(SkScalar sx, SkScalar sy) {
-    SkMatrix    m;
+    SkMatrix    m{};
     m.setSkew(sx, sy);
     this->postConcat(m);
 }
@@ -646,7 +646,7 @@ void SkMatrix::setConcat(const SkMatrix& a, const SkMatrix& b) {
                                 a.fMat[kMScaleX] * b.fMat[kMTransX] + a.fMat[kMTransX],
                                 a.fMat[kMScaleY] * b.fMat[kMTransY] + a.fMat[kMTransY]);
     } else {
-        SkMatrix tmp;
+        SkMatrix tmp{};
 
         if ((aType | bType) & kPerspective_Mask) {
             tmp.fMat[kMScaleX] = rowcol3(&a.fMat[0], &b.fMat[0]);
@@ -879,7 +879,7 @@ bool SkMatrix::invertNonIdentity(SkMatrix* inv) const {
 
     SkMatrix* tmp = inv;
 
-    SkMatrix storage;
+    SkMatrix storage{};
     if (applyingInPlace || nullptr == tmp) {
         tmp = &storage;     // we either need to avoid trampling memory or have no memory
     }
@@ -1087,13 +1087,13 @@ void SkMatrix::mapHomogeneousPoints(SkPoint3 dst[], const SkPoint3 src[], int co
 
 void SkMatrix::mapVectors(SkPoint dst[], const SkPoint src[], int count) const {
     if (this->hasPerspective()) {
-        SkPoint origin;
+        SkPoint origin{};
 
         MapXYProc proc = this->getMapXYProc();
         proc(*this, 0, 0, &origin);
 
         for (int i = count - 1; i >= 0; --i) {
-            SkPoint tmp;
+            SkPoint tmp{};
 
             proc(*this, src[i].fX, src[i].fY, &tmp);
             dst[i].set(tmp.fX - origin.fX, tmp.fY - origin.fY);
@@ -1286,7 +1286,7 @@ static inline bool checkForZero(float x) {
 
 static inline bool poly_to_point(SkPoint* pt, const SkPoint poly[], int count) {
     float   x = 1, y = 1;
-    SkPoint pt1, pt2;
+    SkPoint pt1{}, pt2{};
 
     if (count > 1) {
         pt1.fX = poly[1].fX - poly[0].fX;
@@ -1429,7 +1429,7 @@ bool SkMatrix::setPolyToPoly(const SkPoint src[], const SkPoint dst[],
         return true;
     }
 
-    SkPoint scale;
+    SkPoint scale{};
     if (!poly_to_point(&scale, src, count) ||
             SkScalarNearlyZero(scale.fX) ||
             SkScalarNearlyZero(scale.fY)) {
@@ -1441,7 +1441,7 @@ bool SkMatrix::setPolyToPoly(const SkPoint src[], const SkPoint dst[],
     };
     PolyMapProc proc = gPolyMapProcs[count - 2];
 
-    SkMatrix tempMap, result;
+    SkMatrix tempMap{}, result{};
     tempMap.setTypeMask(kUnknown_Mask);
 
     if (!proc(src, &tempMap, scale)) {
@@ -1700,11 +1700,11 @@ bool SkTreatAsSprite(const SkMatrix& mat, const SkISize& size, const SkPaint& pa
         return false;
     }
 
-    SkRect dst;
+    SkRect dst{};
     SkIRect isrc = SkIRect::MakeSize(size);
 
     {
-        SkRect src;
+        SkRect src{};
         src.set(isrc);
         mat.mapRect(&dst, src);
     }
@@ -1726,7 +1726,7 @@ bool SkTreatAsSprite(const SkMatrix& mat, const SkISize& size, const SkPaint& pa
         dst.fBottom *= scale;
     }
 
-    SkIRect idst;
+    SkIRect idst{};
     dst.round(&idst);
     return isrc == idst;
 }

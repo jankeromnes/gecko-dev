@@ -534,7 +534,7 @@ void SkScan::AntiHairLineRgn(const SkPoint array[], int arrayCount, const SkRegi
     const SkScalar max = SkIntToScalar(32767);
     const SkRect fixedBounds = SkRect::MakeLTRB(-max, -max, max, max);
 
-    SkRect clipBounds;
+    SkRect clipBounds{};
     if (clip) {
         clipBounds.set(clip->getBounds());
         /*  We perform integral clipping later on, but we do a scalar clip first
@@ -572,7 +572,7 @@ void SkScan::AntiHairLineRgn(const SkPoint array[], int arrayCount, const SkRegi
             SkFDot6 top = SkMin32(y0, y1);
             SkFDot6 right = SkMax32(x0, x1);
             SkFDot6 bottom = SkMax32(y0, y1);
-            SkIRect ir;
+            SkIRect ir{};
 
             ir.set( SkFDot6Floor(left) - 1,
                     SkFDot6Floor(top) - 1,
@@ -701,7 +701,7 @@ void SkScan::AntiFillXRect(const SkXRect& xr, const SkRegion* clip,
     if (nullptr == clip) {
         antifillrect(xr, blitter);
     } else {
-        SkIRect outerBounds;
+        SkIRect outerBounds{};
         XRect_roundOut(xr, &outerBounds);
 
         if (clip->isRect()) {
@@ -740,7 +740,7 @@ void SkScan::AntiFillXRect(const SkXRect& xr, const SkRasterClip& clip,
     if (clip.isBW()) {
         AntiFillXRect(xr, &clip.bwRgn(), blitter);
     } else {
-        SkIRect outerBounds;
+        SkIRect outerBounds{};
         XRect_roundOut(xr, &outerBounds);
 
         if (clip.quickContains(outerBounds)) {
@@ -774,7 +774,7 @@ static void antifillrect(const SkRect& r, SkBlitter* blitter) {
 void SkScan::AntiFillRect(const SkRect& origR, const SkRegion* clip,
                           SkBlitter* blitter) {
     if (clip) {
-        SkRect newR;
+        SkRect newR{};
         newR.set(clip->getBounds());
         if (!newR.intersect(origR)) {
             return;
@@ -926,7 +926,7 @@ void SkScan::AntiFrameRect(const SkRect& r, const SkPoint& strokeSize,
     FDot8 outerR = SkScalarToFDot8(r.fRight + rx);
     FDot8 outerB = SkScalarToFDot8(r.fBottom + ry);
 
-    SkIRect outer;
+    SkIRect outer{};
     // set outer to the outer rect of the outer section
     outer.set(FDot8Floor(outerL), FDot8Floor(outerT), FDot8Ceil(outerR), FDot8Ceil(outerB));
 
@@ -972,7 +972,7 @@ void SkScan::AntiFrameRect(const SkRect& r, const SkPoint& strokeSize,
         fillcheckrect(outer.fLeft, outer.fTop, outer.fRight, outer.fBottom,
                       blitter);
     } else {
-        SkIRect inner;
+        SkIRect inner{};
         // set inner to the inner rect of the middle section
         inner.set(FDot8Floor(innerL), FDot8Floor(innerT), FDot8Ceil(innerR), FDot8Ceil(innerB));
 

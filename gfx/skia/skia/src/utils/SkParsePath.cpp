@@ -163,7 +163,7 @@ bool SkParsePath::FromSVGString(const char data[], SkPath* result) {
                 c = points[1];
                 break;
             case 'A': {
-                SkPoint radii;
+                SkPoint radii{};
                 SkScalar angle, largeArc, sweep;
                 if ((data = find_points(data, &radii, 1, false, nullptr))
                         && (data = skip_sep(data))

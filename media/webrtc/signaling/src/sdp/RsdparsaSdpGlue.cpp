@@ -24,7 +24,7 @@ std::vector<std::string> convertStringVec(StringVec* vec)
   std::vector<std::string> ret;
   size_t len = string_vec_len(vec);
   for (size_t i = 0; i < len; i++) {
-    StringView view;
+    StringView view{};
     string_vec_get_view(vec, i, &view);
     ret.push_back(convertStringView(view));
   }

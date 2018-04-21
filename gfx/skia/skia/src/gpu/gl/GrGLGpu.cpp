@@ -586,7 +586,7 @@ sk_sp<GrTexture> GrGLGpu::onWrapRenderableBackendTexture(const GrBackendTexture&
         return nullptr;
     }
 
-    GrGLRenderTarget::IDDesc rtIDDesc;
+    GrGLRenderTarget::IDDesc rtIDDesc{};
     if (!this->createRenderTargetObjects(surfDesc, idDesc.fInfo, &rtIDDesc)) {
         return nullptr;
     }
@@ -606,7 +606,7 @@ sk_sp<GrRenderTarget> GrGLGpu::onWrapBackendRenderTarget(const GrBackendRenderTa
         return nullptr;
     }
 
-    GrGLRenderTarget::IDDesc idDesc;
+    GrGLRenderTarget::IDDesc idDesc{};
     idDesc.fRTFBOID = info->fFBOID;
     idDesc.fMSColorRenderbufferID = 0;
     idDesc.fTexFBOID = GrGLRenderTarget::kUnresolvableFBOID;
@@ -651,7 +651,7 @@ sk_sp<GrRenderTarget> GrGLGpu::onWrapBackendTextureAsRenderTarget(const GrBacken
     surfDesc.fConfig = tex.config();
     surfDesc.fSampleCnt = this->caps()->getRenderTargetSampleCount(sampleCnt, tex.config());
 
-    GrGLRenderTarget::IDDesc rtIDDesc;
+    GrGLRenderTarget::IDDesc rtIDDesc{};
     if (!this->createRenderTargetObjects(surfDesc, texInfo, &rtIDDesc)) {
         return nullptr;
     }
@@ -1426,7 +1426,7 @@ sk_sp<GrTexture> GrGLGpu::onCreateTexture(const GrSurfaceDesc& desc,
 
     bool performClear = (desc.fFlags & kPerformInitialClear_GrSurfaceFlag);
 
-    GrMipLevel zeroLevel;
+    GrMipLevel zeroLevel{};
     std::unique_ptr<uint8_t[]> zeros;
     if (performClear && !this->glCaps().clearTextureSupport() &&
         !this->glCaps().canConfigBeFBOColorAttachment(desc.fConfig)) {
@@ -1446,7 +1446,7 @@ sk_sp<GrTexture> GrGLGpu::onCreateTexture(const GrSurfaceDesc& desc,
     GrGLTexture::IDDesc idDesc;
     idDesc.fOwnership = GrBackendObjectOwnership::kOwned;
     GrMipMapsStatus mipMapsStatus;
-    GrGLTexture::TexParams initialTexParams;
+    GrGLTexture::TexParams initialTexParams{};
     if (!this->createTextureImpl(desc, &idDesc.fInfo, isRenderTarget, &initialTexParams,
                                  texels, mipLevelCount, &mipMapsStatus)) {
         return return_null_texture();
@@ -1456,7 +1456,7 @@ sk_sp<GrTexture> GrGLGpu::onCreateTexture(const GrSurfaceDesc& desc,
     if (isRenderTarget) {
         // unbind the texture from the texture unit before binding it to the frame buffer
         GL_CALL(BindTexture(idDesc.fInfo.fTarget, 0));
-        GrGLRenderTarget::IDDesc rtIDDesc;
+        GrGLRenderTarget::IDDesc rtIDDesc{};
 
         if (!this->createRenderTargetObjects(desc, idDesc.fInfo, &rtIDDesc)) {
             GL_CALL(DeleteTextures(1, &idDesc.fInfo.fID));
@@ -1478,7 +1478,7 @@ sk_sp<GrTexture> GrGLGpu::onCreateTexture(const GrSurfaceDesc& desc,
             static constexpr uint32_t kZero = 0;
             GL_CALL(ClearTexImage(tex->textureID(), 0, GR_GL_RGBA, GR_GL_UNSIGNED_BYTE, &kZero));
         } else {
-            GrGLIRect viewport;
+            GrGLIRect viewport{};
             this->bindSurfaceFBOForPixelOps(tex.get(), GR_GL_FRAMEBUFFER, &viewport,
                                             kDst_TempFBOTarget);
             this->disableScissor();
@@ -1732,7 +1732,7 @@ void GrGLGpu::flushScissor(const GrScissorState& scissorState,
                            const GrGLIRect& rtViewport,
                            GrSurfaceOrigin rtOrigin) {
     if (scissorState.enabled()) {
-        GrGLIRect scissor;
+        GrGLIRect scissor{};
         scissor.setRelativeTo(rtViewport, scissorState.rect(), rtOrigin);
         // if the scissor fully contains the viewport then we fall through and
         // disable the scissor test.
@@ -1816,7 +1816,7 @@ bool GrGLGpu::flushGLState(const GrPipeline& pipeline, const GrPrimitiveProcesso
 
     program->generateMipmaps(primProc, pipeline);
 
-    GrXferProcessor::BlendInfo blendInfo;
+    GrXferProcessor::BlendInfo blendInfo{};
     pipeline.getXferProcessor().getBlendInfo(&blendInfo);
 
     this->flushColorWrite(blendInfo.fWriteColor);
@@ -2151,7 +2151,7 @@ bool GrGLGpu::readPixelsSupported(GrPixelConfig rtConfig, GrPixelConfig readConf
             if (!temp) {
                 return false;
             }
-            GrGLIRect vp;
+            GrGLIRect vp{};
             this->bindSurfaceFBOForPixelOps(temp.get(), GR_GL_FRAMEBUFFER, &vp, kDst_TempFBOTarget);
             fHWBoundRenderTargetUniqueID.makeInvalid();
             return true;
@@ -2345,7 +2345,7 @@ bool GrGLGpu::onReadPixels(GrSurface* surface, GrSurfaceOrigin origin, int left,
     }
     bool flipY = kBottomLeft_GrSurfaceOrigin == origin;
 
-    GrGLIRect glvp;
+    GrGLIRect glvp{};
     if (renderTarget) {
         // resolve the render target if necessary
         switch (renderTarget->getResolveType()) {
@@ -2371,7 +2371,7 @@ bool GrGLGpu::onReadPixels(GrSurface* surface, GrSurfaceOrigin origin, int left,
     }
 
     // the read rect is viewport-relative
-    GrGLIRect readRect;
+    GrGLIRect readRect{};
     readRect.setRelativeTo(glvp, left, top, width, height, origin);
 
     int bytesPerPixel = GrBytesPerPixel(dstAsConfig);
@@ -2720,7 +2720,7 @@ void GrGLGpu::onResolveRenderTarget(GrRenderTarget* target) {
                     r = target->width();
                     t = target->height();
                 } else {
-                    GrGLIRect rect;
+                    GrGLIRect rect{};
                     rect.setRelativeTo(vp, dirtyRect, kDirtyRectOrigin);
                     l = rect.fLeft;
                     b = rect.fBottom;
@@ -3035,7 +3035,7 @@ void GrGLGpu::bindTexture(int unitIdx, const GrSamplerState& samplerState, bool 
     ResetTimestamp timestamp;
     const GrGLTexture::TexParams& oldTexParams = texture->getCachedTexParams(&timestamp);
     bool setAll = timestamp < this->getResetTimestamp();
-    GrGLTexture::TexParams newTexParams;
+    GrGLTexture::TexParams newTexParams{};
 
     GrSamplerState::Filter filterMode = samplerState.filter();
 
@@ -3867,7 +3867,7 @@ void GrGLGpu::clearStencilClipAsDraw(const GrFixedClip& clip, bool insideStencil
     attribs->set(this, 0, fStencilClipClearArrayBuffer.get(), kHalf2_GrVertexAttribType,
                  2 * sizeof(GrGLfloat), 0);
 
-    GrXferProcessor::BlendInfo blendInfo;
+    GrXferProcessor::BlendInfo blendInfo{};
     blendInfo.reset();
     this->flushBlend(blendInfo, GrSwizzle::RGBA());
     this->flushColorWrite(false);
@@ -3965,7 +3965,7 @@ void GrGLGpu::clearColorAsDraw(const GrFixedClip& clip, GrGLfloat r, GrGLfloat g
         }
     }
 
-    GrGLIRect dstVP;
+    GrGLIRect dstVP{};
     this->bindSurfaceFBOForPixelOps(dst, GR_GL_FRAMEBUFFER, &dstVP, kDst_TempFBOTarget);
     this->flushViewport(dstVP);
     fHWBoundRenderTargetUniqueID.makeInvalid();
@@ -3986,7 +3986,7 @@ void GrGLGpu::clearColorAsDraw(const GrFixedClip& clip, GrGLfloat r, GrGLfloat g
 
     GL_CALL(Uniform4f(fClearColorProgram.fColorUniform, r, g, b, a));
 
-    GrXferProcessor::BlendInfo blendInfo;
+    GrXferProcessor::BlendInfo blendInfo{};
     blendInfo.reset();
     this->flushBlend(blendInfo, GrSwizzle::RGBA());
     this->flushColorWrite(true);
@@ -4020,7 +4020,7 @@ bool GrGLGpu::copySurfaceAsDraw(GrSurface* dst, GrSurfaceOrigin dstOrigin,
 
     this->bindTexture(0, GrSamplerState::ClampNearest(), true, srcTex, srcOrigin);
 
-    GrGLIRect dstVP;
+    GrGLIRect dstVP{};
     this->bindSurfaceFBOForPixelOps(dst, GR_GL_FRAMEBUFFER, &dstVP, kDst_TempFBOTarget);
     this->flushViewport(dstVP);
     fHWBoundRenderTargetUniqueID.makeInvalid();
@@ -4070,7 +4070,7 @@ bool GrGLGpu::copySurfaceAsDraw(GrSurface* dst, GrSurfaceOrigin dstOrigin,
                       sx1 - sx0, sy1 - sy0, sx0, sy0));
     GL_CALL(Uniform1i(fCopyPrograms[progIdx].fTextureUniform, 0));
 
-    GrXferProcessor::BlendInfo blendInfo;
+    GrXferProcessor::BlendInfo blendInfo{};
     blendInfo.reset();
     this->flushBlend(blendInfo, GrSwizzle::RGBA());
     this->flushColorWrite(true);
@@ -4094,13 +4094,13 @@ void GrGLGpu::copySurfaceAsCopyTexSubImage(GrSurface* dst, GrSurfaceOrigin dstOr
                                            const SkIRect& srcRect,
                                            const SkIPoint& dstPoint) {
     SkASSERT(can_copy_texsubimage(dst, dstOrigin, src, srcOrigin, this));
-    GrGLIRect srcVP;
+    GrGLIRect srcVP{};
     this->bindSurfaceFBOForPixelOps(src, GR_GL_FRAMEBUFFER, &srcVP, kSrc_TempFBOTarget);
     GrGLTexture* dstTex = static_cast<GrGLTexture *>(dst->asTexture());
     SkASSERT(dstTex);
     // We modified the bound FBO
     fHWBoundRenderTargetUniqueID.makeInvalid();
-    GrGLIRect srcGLRect;
+    GrGLIRect srcGLRect{};
     srcGLRect.setRelativeTo(srcVP, srcRect, srcOrigin);
 
     this->setScratchTextureUnit();
@@ -4135,14 +4135,14 @@ bool GrGLGpu::copySurfaceAsBlitFramebuffer(GrSurface* dst, GrSurfaceOrigin dstOr
         }
     }
 
-    GrGLIRect dstVP;
-    GrGLIRect srcVP;
+    GrGLIRect dstVP{};
+    GrGLIRect srcVP{};
     this->bindSurfaceFBOForPixelOps(dst, GR_GL_DRAW_FRAMEBUFFER, &dstVP, kDst_TempFBOTarget);
     this->bindSurfaceFBOForPixelOps(src, GR_GL_READ_FRAMEBUFFER, &srcVP, kSrc_TempFBOTarget);
     // We modified the bound FBO
     fHWBoundRenderTargetUniqueID.makeInvalid();
-    GrGLIRect srcGLRect;
-    GrGLIRect dstGLRect;
+    GrGLIRect srcGLRect{};
+    GrGLIRect dstGLRect{};
     srcGLRect.setRelativeTo(srcVP, srcRect, srcOrigin);
     dstGLRect.setRelativeTo(dstVP, dstRect, dstOrigin);
 
@@ -4268,7 +4268,7 @@ bool GrGLGpu::generateMipmap(GrGLTexture* texture, GrSurfaceOrigin textureOrigin
                  2 * sizeof(GrGLfloat), 0);
 
     // Set "simple" state once:
-    GrXferProcessor::BlendInfo blendInfo;
+    GrXferProcessor::BlendInfo blendInfo{};
     blendInfo.reset();
     this->flushBlend(blendInfo, GrSwizzle::RGBA());
     this->flushColorWrite(true);
@@ -4280,7 +4280,7 @@ bool GrGLGpu::generateMipmap(GrGLTexture* texture, GrSurfaceOrigin textureOrigin
     // Do all the blits:
     width = texture->width();
     height = texture->height();
-    GrGLIRect viewport;
+    GrGLIRect viewport{};
     viewport.fLeft = 0;
     viewport.fBottom = 0;
     for (GrGLint level = 1; level < levelCount; ++level) {

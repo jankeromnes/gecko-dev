@@ -105,9 +105,9 @@ class VariablePacker
     void fillColumns(int topRow, int numRows, int column, int numComponentsPerRow);
     bool searchColumn(int column, int numRows, int *destRow, int *destSize);
 
-    int topNonFullRow_;
-    int bottomNonFullRow_;
-    int maxRows_;
+    int topNonFullRow_{};
+    int bottomNonFullRow_{};
+    int maxRows_{};
     std::vector<unsigned> rows_;
 };
 

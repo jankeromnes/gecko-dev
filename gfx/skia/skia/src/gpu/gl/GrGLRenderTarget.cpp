@@ -70,7 +70,7 @@ sk_sp<GrGLRenderTarget> GrGLRenderTarget::MakeWrapped(GrGLGpu* gpu,
     GrGLStencilAttachment* sb = nullptr;
     if (stencilBits) {
         GrGLStencilAttachment::IDDesc sbDesc;
-        GrGLStencilAttachment::Format format;
+        GrGLStencilAttachment::Format format{};
         format.fInternalFormat = GrGLStencilAttachment::kUnknownInternalFormat;
         format.fPacked = false;
         format.fStencilBits = stencilBits;

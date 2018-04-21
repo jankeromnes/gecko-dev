@@ -171,24 +171,24 @@ public:
     /*                                     */
     /*   Pointers to items within the data */
     /*                                     */
-    const RBBIDataHeader     *fHeader;
-    const RBBIStateTable     *fForwardTable;
-    const RBBIStateTable     *fReverseTable;
-    const RBBIStateTable     *fSafeFwdTable;
-    const RBBIStateTable     *fSafeRevTable;
-    const UChar              *fRuleSource;
-    const int32_t            *fRuleStatusTable; 
+    const RBBIDataHeader     *fHeader{};
+    const RBBIStateTable     *fForwardTable{};
+    const RBBIStateTable     *fReverseTable{};
+    const RBBIStateTable     *fSafeFwdTable{};
+    const RBBIStateTable     *fSafeRevTable{};
+    const UChar              *fRuleSource{};
+    const int32_t            *fRuleStatusTable{}; 
 
     /* number of int32_t values in the rule status table.   Used to sanity check indexing */
-    int32_t             fStatusMaxIdx;
+    int32_t             fStatusMaxIdx{};
 
-    UTrie2             *fTrie;
+    UTrie2             *fTrie{};
 
 private:
     u_atomic_int32_t    fRefCount;
-    UDataMemory        *fUDataMem;
+    UDataMemory        *fUDataMem{};
     UnicodeString       fRuleString;
-    UBool               fDontFreeData;
+    UBool               fDontFreeData{};
 
     RBBIDataWrapper(const RBBIDataWrapper &other); /*  forbid copying of this class */
     RBBIDataWrapper &operator=(const RBBIDataWrapper &other); /*  forbid copying of this class */

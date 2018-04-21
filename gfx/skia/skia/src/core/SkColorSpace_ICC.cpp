@@ -1344,7 +1344,7 @@ static sk_sp<SkColorSpace> make_xyz(const ICCProfileHeader& header, ICCTag* tags
     if (r && g && b) {
         if (tag_equals(r, g, base) && tag_equals(g, b, base)) {
             SkGammas::Data data;
-            SkColorSpaceTransferFn params;
+            SkColorSpaceTransferFn params{};
             SkGammas::Type type =
                     parse_gamma(&data, &params, &tagBytes, r->addr(base), r->fLength);
             handle_invalid_gamma(&type, &data);
@@ -1367,19 +1367,19 @@ static sk_sp<SkColorSpace> make_xyz(const ICCProfileHeader& header, ICCTag* tags
             }
         } else {
             SkGammas::Data rData;
-            SkColorSpaceTransferFn rParams;
+            SkColorSpaceTransferFn rParams{};
             SkGammas::Type rType =
                     parse_gamma(&rData, &rParams, &tagBytes, r->addr(base), r->fLength);
             handle_invalid_gamma(&rType, &rData);
 
             SkGammas::Data gData;
-            SkColorSpaceTransferFn gParams;
+            SkColorSpaceTransferFn gParams{};
             SkGammas::Type gType =
                     parse_gamma(&gData, &gParams, &tagBytes, g->addr(base), g->fLength);
             handle_invalid_gamma(&gType, &gData);
 
             SkGammas::Data bData;
-            SkColorSpaceTransferFn bParams;
+            SkColorSpaceTransferFn bParams{};
             SkGammas::Type bType =
                     parse_gamma(&bData, &bParams, &tagBytes, b->addr(base), b->fLength);
             handle_invalid_gamma(&bType, &bData);
@@ -1440,7 +1440,7 @@ static sk_sp<SkColorSpace> make_gray(const ICCProfileHeader& header, ICCTag* tag
         return_null("grayTRC tag required for monochrome profiles.");
     }
     SkGammas::Data data;
-    SkColorSpaceTransferFn params;
+    SkColorSpaceTransferFn params{};
     size_t tagBytes;
     SkGammas::Type type =
             parse_gamma(&data, &params, &tagBytes, grayTRC->addr(base), grayTRC->fLength);
@@ -1502,7 +1502,7 @@ sk_sp<SkColorSpace> SkColorSpace::MakeICC(const void* input, size_t len) {
     const uint8_t* ptr = base;
 
     // Read the ICC profile header and check to make sure that it is valid.
-    ICCProfileHeader header;
+    ICCProfileHeader header{};
     header.init(ptr, len);
     if (!header.valid()) {
         return nullptr;

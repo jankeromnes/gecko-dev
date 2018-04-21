@@ -88,7 +88,7 @@ private:
     // This is the count of data elements (rather than total nodes in the tree)
     int fCount;
     SkScalar fAspectRatio;
-    Branch fRoot;
+    Branch fRoot{};
     SkTDArray<Node> fNodes;
 
     typedef SkBBoxHierarchy INHERITED;

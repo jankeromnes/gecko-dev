@@ -104,7 +104,7 @@ CheckMsg(const NS_tchar *path, const char *expected)
     return false;
   }
 
-  struct stat ms;
+  struct stat ms{};
   if (fstat(fileno(inFP), &ms)) {
     fclose(inFP);
     inFP = nullptr;
@@ -284,7 +284,7 @@ int NS_main(int argc, NS_tchar **argv)
 
   if (!NS_tstrcmp(argv[1], NS_T("check-symlink"))) {
 #ifdef XP_UNIX
-    struct stat ss;
+    struct stat ss{};
     lstat(argv[2], &ss);
     return S_ISLNK(ss.st_mode) ? 0 : 1;
 #else

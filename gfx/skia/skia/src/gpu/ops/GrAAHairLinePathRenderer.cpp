@@ -250,8 +250,8 @@ static int gather_lines_and_quads(const SkPath& path,
     SkPath::Iter iter(path, false);
 
     int totalQuadCount = 0;
-    SkRect bounds;
-    SkIRect ibounds;
+    SkRect bounds{};
+    SkIRect ibounds{};
 
     bool persp = m.hasPerspective();
 
@@ -260,7 +260,7 @@ static int gather_lines_and_quads(const SkPath& path,
     // suffice for AA square & circle capping.
     int verbsInContour = 0; // Does not count moves
     bool seenZeroLengthVerb = false;
-    SkPoint zeroVerbPt;
+    SkPoint zeroVerbPt{};
 
     for (;;) {
         SkPoint pathPts[4];
@@ -597,7 +597,7 @@ static void bloat_quad(const SkPoint qpts[3], const SkMatrix* toDevice,
 // k, l, m are calculated in function GrPathUtils::getConicKLM
 static void set_conic_coeffs(const SkPoint p[3], BezierVertex verts[kQuadNumVertices],
                              const SkScalar weight) {
-    SkMatrix klm;
+    SkMatrix klm{};
 
     GrPathUtils::getConicKLM(p, weight, &klm);
 
@@ -736,7 +736,7 @@ bool check_bounds(const SkMatrix& viewMatrix, const SkRect& devBounds, void* ver
         // Non-persp matrices cause this path renderer to draw in device space.
         SkASSERT(viewMatrix.isIdentity());
     }
-    SkRect actualBounds;
+    SkRect actualBounds{};
 
     VertexType* verts = reinterpret_cast<VertexType*>(vertices);
     bool first = true;
@@ -897,7 +897,7 @@ private:
 
 void AAHairlineOp::onPrepareDraws(Target* target) {
     // Setup the viewmatrix and localmatrix for the GrGeometryProcessor.
-    SkMatrix invert;
+    SkMatrix invert{};
     if (!this->viewMatrix().invert(&invert)) {
         return;
     }
@@ -1047,7 +1047,7 @@ bool GrAAHairLinePathRenderer::onDrawPath(const DrawPathArgs& args) {
                               "GrAAHairlinePathRenderer::onDrawPath");
     SkASSERT(GrFSAAType::kUnifiedMSAA != args.fRenderTargetContext->fsaaType());
 
-    SkIRect devClipBounds;
+    SkIRect devClipBounds{};
     args.fClip->getConservativeBounds(args.fRenderTargetContext->width(),
                                       args.fRenderTargetContext->height(),
                                       &devClipBounds);

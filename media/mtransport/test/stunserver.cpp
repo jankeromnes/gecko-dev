@@ -399,7 +399,7 @@ struct DeferredStunOperation {
 
   TestStunServer *server_;
   DataBuffer buffer_;
-  nr_transport_addr addr_;
+  nr_transport_addr addr_{};
   nr_socket *sock_;
 };
 

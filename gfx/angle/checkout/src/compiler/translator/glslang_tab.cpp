@@ -2283,7 +2283,7 @@ YYLTYPE yylloc = yyloc_default;
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
-  YYLTYPE yyloc;
+  YYLTYPE yyloc{};
 
 #if YYERROR_VERBOSE
   /* Buffer for error messages, and its allocated size.  */

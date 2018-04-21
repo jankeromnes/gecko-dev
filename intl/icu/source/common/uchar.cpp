@@ -74,7 +74,7 @@ _enumTypeRange(const void *context, UChar32 start, UChar32 end, uint32_t value) 
 
 U_CAPI void U_EXPORT2
 u_enumCharTypes(UCharEnumTypeRange *enumRange, const void *context) {
-    struct _EnumTypeCallback callback;
+    struct _EnumTypeCallback callback{};
 
     if(enumRange==NULL) {
         return;

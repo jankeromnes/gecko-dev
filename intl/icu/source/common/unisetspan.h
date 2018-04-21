@@ -137,7 +137,7 @@ private:
     // For example, for 8 strings:
     // 8 UTF-8 lengths, 8*4 bytes span lengths, 8*2 3-byte UTF-8 characters
     // = 112 bytes = int32_t[28].
-    int32_t staticLengths[32];
+    int32_t staticLengths[32]{};
 };
 
 UBool UnicodeSetStringSpan::needsStringSpanUTF16() {

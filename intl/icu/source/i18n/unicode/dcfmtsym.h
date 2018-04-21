@@ -474,18 +474,18 @@ private:
      * should never be set directly; rather, it should be updated only when digitStrings mutates.
      * That is, the flow of information is digitStrings -> codePointZero, not the other way.
      */
-    UChar32 fCodePointZero;
+    UChar32 fCodePointZero{};
 
     Locale locale;
 
-    char actualLocale[ULOC_FULLNAME_CAPACITY];
-    char validLocale[ULOC_FULLNAME_CAPACITY];
-    const char16_t* currPattern;
+    char actualLocale[ULOC_FULLNAME_CAPACITY]{};
+    char validLocale[ULOC_FULLNAME_CAPACITY]{};
+    const char16_t* currPattern{};
 
     UnicodeString currencySpcBeforeSym[UNUM_CURRENCY_SPACING_COUNT];
     UnicodeString currencySpcAfterSym[UNUM_CURRENCY_SPACING_COUNT];
-    UBool fIsCustomCurrencySymbol;
-    UBool fIsCustomIntlCurrencySymbol;
+    UBool fIsCustomCurrencySymbol{};
+    UBool fIsCustomIntlCurrencySymbol{};
 };
 
 // -------------------------------------

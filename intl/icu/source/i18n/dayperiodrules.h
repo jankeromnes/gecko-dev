@@ -81,7 +81,7 @@ private:
 
     UBool fHasMidnight;
     UBool fHasNoon;
-    DayPeriod fDayPeriodForHour[24];
+    DayPeriod fDayPeriodForHour[24]{};
 };
 
 U_NAMESPACE_END

@@ -68,7 +68,7 @@ protected:
 
   RefPtr<nsSystemAlertsService> mBackend;
 
-  bool mAlertHasAction;
+  bool mAlertHasAction{};
 
   static void* libNotifyHandle;
   static bool libNotifyNotAvail;
@@ -81,7 +81,7 @@ protected:
   static notify_notification_add_action_t notify_notification_add_action;
   static notify_notification_close_t notify_notification_close;
   NotifyNotification* mNotification;
-  gulong mClosureHandler;
+  gulong mClosureHandler{};
 
   nsresult ShowAlert(GdkPixbuf* aPixbuf);
 

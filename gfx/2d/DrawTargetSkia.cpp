@@ -343,7 +343,7 @@ DrawTargetSkia::LockBits(uint8_t** aData, IntSize* aSize,
 {
   SkImageInfo info;
   size_t rowBytes;
-  SkIPoint origin;
+  SkIPoint origin{};
   void* pixels = mCanvas->accessTopLayerPixels(&info, &rowBytes, &origin);
   if (!pixels ||
       // Ensure the layer is at the origin if required.
@@ -466,7 +466,7 @@ SetPaintPattern(SkPaint& aPaint, const Pattern& aPattern, Float aAlpha = 1.0, co
         points[0] = SkPoint::Make(SkFloatToScalar(pat.mBegin.x), SkFloatToScalar(pat.mBegin.y));
         points[1] = SkPoint::Make(SkFloatToScalar(pat.mEnd.x), SkFloatToScalar(pat.mEnd.y));
 
-        SkMatrix mat;
+        SkMatrix mat{};
         GfxMatrixToSkiaMatrix(pat.mMatrix, mat);
         if (aMatrix) {
             mat.postConcat(*aMatrix);
@@ -497,7 +497,7 @@ SetPaintPattern(SkPaint& aPaint, const Pattern& aPattern, Float aAlpha = 1.0, co
         points[0] = SkPoint::Make(SkFloatToScalar(pat.mCenter1.x), SkFloatToScalar(pat.mCenter1.y));
         points[1] = SkPoint::Make(SkFloatToScalar(pat.mCenter2.x), SkFloatToScalar(pat.mCenter2.y));
 
-        SkMatrix mat;
+        SkMatrix mat{};
         GfxMatrixToSkiaMatrix(pat.mMatrix, mat);
         if (aMatrix) {
             mat.postConcat(*aMatrix);
@@ -526,7 +526,7 @@ SetPaintPattern(SkPaint& aPaint, const Pattern& aPattern, Float aAlpha = 1.0, co
         break;
       }
 
-      SkMatrix mat;
+      SkMatrix mat{};
       GfxMatrixToSkiaMatrix(pat.mMatrix, mat);
       if (aMatrix) {
           mat.postConcat(*aMatrix);
@@ -556,15 +556,15 @@ GetClipBounds(SkCanvas *aCanvas)
   // Use a manually transformed getClipDeviceBounds instead of
   // getClipBounds because getClipBounds inflates the the bounds
   // by a pixel in each direction to compensate for antialiasing.
-  SkIRect deviceBounds;
+  SkIRect deviceBounds{};
   if (!aCanvas->getDeviceClipBounds(&deviceBounds)) {
     return Rect();
   }
-  SkMatrix inverseCTM;
+  SkMatrix inverseCTM{};
   if (!aCanvas->getTotalMatrix().invert(&inverseCTM)) {
     return Rect();
   }
-  SkRect localBounds;
+  SkRect localBounds{};
   inverseCTM.mapRect(&localBounds, SkRect::Make(deviceBounds));
   return SkRectToRect(localBounds);
 }
@@ -627,7 +627,7 @@ struct AutoPaintSetup {
   // TODO: Maybe add an operator overload to access this easier?
   SkPaint mPaint;
   bool mNeedsRestore;
-  SkCanvas* mCanvas;
+  SkCanvas* mCanvas{};
   Float mAlpha;
 };
 
@@ -917,7 +917,7 @@ DrawTargetSkia::StrokeRect(const Rect &aRect,
   Rect rect = aRect;
   if (aStrokeOptions.mDashLength > 0 && !rect.IsEmpty()) {
     IntRect deviceClip(IntPoint(0, 0), mSize);
-    SkIRect clipBounds;
+    SkIRect clipBounds{};
     if (mCanvas->getDeviceClipBounds(&clipBounds)) {
       deviceClip = SkIRectToIntRect(clipBounds);
     }
@@ -1520,11 +1520,11 @@ DrawTargetSkia::Mask(const Pattern &aSource,
                      const Pattern &aMask,
                      const DrawOptions &aOptions)
 {
-  SkIRect maskBounds;
+  SkIRect maskBounds{};
   if (!mCanvas->getDeviceClipBounds(&maskBounds)) {
       return;
   }
-  SkPoint maskOrigin;
+  SkPoint maskOrigin{};
   maskOrigin.iset(maskBounds.fLeft, maskBounds.fTop);
 
   SkMatrix maskMatrix = mCanvas->getTotalMatrix();
@@ -1628,7 +1628,7 @@ DrawTarget::Draw3DTransformedSurface(SourceSurface* aSurface, const Matrix4x4& a
   paint.setFilterQuality(kLow_SkFilterQuality);
   paint.setBlendMode(SkBlendMode::kSrc);
 
-  SkMatrix xform;
+  SkMatrix xform{};
   GfxMatrixToSkiaMatrix(fullMat, xform);
   dstCanvas->setMatrix(xform);
 
@@ -1667,7 +1667,7 @@ DrawTargetSkia::Draw3DTransformedSurface(SourceSurface* aSurface, const Matrix4x
   paint.setAntiAlias(true);
   paint.setFilterQuality(kLow_SkFilterQuality);
 
-  SkMatrix xform;
+  SkMatrix xform{};
   GfxMatrixToSkiaMatrix(aMatrix, xform);
   mCanvas->concat(xform);
 
@@ -2027,7 +2027,7 @@ DrawTargetSkia::Init(unsigned char* aData, const IntSize &aSize, int32_t aStride
 void
 DrawTargetSkia::SetTransform(const Matrix& aTransform)
 {
-  SkMatrix mat;
+  SkMatrix mat{};
   GfxMatrixToSkiaMatrix(aTransform, mat);
   mCanvas->setMatrix(mat);
   mTransform = aTransform;
@@ -2133,7 +2133,7 @@ DrawTargetSkia::PushLayerWithBlend(bool aOpaque, Float aOpacity, SourceSurface* 
   // aBounds is supplied in device space, but SaveLayerRec wants local space.
   SkRect bounds = IntRectToSkRect(aBounds);
   if (!bounds.isEmpty()) {
-    SkMatrix inverseCTM;
+    SkMatrix inverseCTM{};
     if (mCanvas->getTotalMatrix().invert(&inverseCTM)) {
       inverseCTM.mapRect(&bounds);
     } else {
@@ -2142,7 +2142,7 @@ DrawTargetSkia::PushLayerWithBlend(bool aOpaque, Float aOpacity, SourceSurface* 
   }
 
   sk_sp<SkImage> clipImage = aMask ? GetSkImageForSurface(aMask) : nullptr;
-  SkMatrix clipMatrix;
+  SkMatrix clipMatrix{};
   GfxMatrixToSkiaMatrix(aMaskTransform, clipMatrix);
   SkCanvas::SaveLayerRec saveRec(aBounds.IsEmpty() ? nullptr : &bounds,
                                  &paint,

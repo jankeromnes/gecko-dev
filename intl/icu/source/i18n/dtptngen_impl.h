@@ -138,8 +138,8 @@ public:
     inline UBool operator!=(const SkeletonFields& other) const;
 
 private:
-    int8_t chars[UDATPG_FIELD_COUNT];
-    int8_t lengths[UDATPG_FIELD_COUNT];
+    int8_t chars[UDATPG_FIELD_COUNT]{};
+    int8_t lengths[UDATPG_FIELD_COUNT]{};
 };
 
 inline UBool SkeletonFields::operator==(const SkeletonFields& other) const {
@@ -153,10 +153,10 @@ inline UBool SkeletonFields::operator!=(const SkeletonFields& other) const {
 
 class PtnSkeleton : public UMemory {
 public:
-    int32_t type[UDATPG_FIELD_COUNT];
+    int32_t type[UDATPG_FIELD_COUNT]{};
     SkeletonFields original;
     SkeletonFields baseOriginal;
-    UBool addedDefaultDayPeriod;
+    UBool addedDefaultDayPeriod{};
 
     PtnSkeleton();
     PtnSkeleton(const PtnSkeleton& other);
@@ -178,7 +178,7 @@ public:
     UnicodeString basePattern;
     PtnSkeleton   *skeleton;
     UnicodeString pattern;
-    UBool         skeletonWasSpecified; // if specified in availableFormats, not derived
+    UBool         skeletonWasSpecified{}; // if specified in availableFormats, not derived
     PtnElem       *next;
 
     PtnElem(const UnicodeString &basePattern, const UnicodeString &pattern);
@@ -246,7 +246,7 @@ public:
 
 class PatternMap : public UMemory {
 public:
-    PtnElem *boot[MAX_PATTERN_ENTRIES];
+    PtnElem *boot[MAX_PATTERN_ENTRIES]{};
     PatternMap();
     virtual  ~PatternMap();
     void  add(const UnicodeString& basePattern, const PtnSkeleton& skeleton, const UnicodeString& value, UBool skeletonWasSpecified, UErrorCode& status);

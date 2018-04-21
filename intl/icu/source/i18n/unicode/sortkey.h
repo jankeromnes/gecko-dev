@@ -311,7 +311,7 @@ private:
             uint8_t *fBytes;
             int32_t fCapacity;
         } fFields;
-    } fUnion;
+    } fUnion{};
 };
 
 inline UBool

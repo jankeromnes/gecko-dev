@@ -112,12 +112,12 @@ static void generate_aa_fill_rect_geometry(intptr_t verts,
     }
 
     if (localMatrix) {
-        SkMatrix invViewMatrix;
+        SkMatrix invViewMatrix{};
         if (!viewMatrix.invert(&invViewMatrix)) {
             SkDebugf("View matrix is non-invertible, local coords will be wrong.");
             invViewMatrix = SkMatrix::I();
         }
-        SkMatrix localCoordMatrix;
+        SkMatrix localCoordMatrix{};
         localCoordMatrix.setConcat(*localMatrix, invViewMatrix);
         SkPoint* fan0Loc = reinterpret_cast<SkPoint*>(verts + sizeof(SkPoint) + sizeof(GrColor));
         SkMatrixPriv::MapPointsWithStride(localCoordMatrix, fan0Loc, vertexStride, fan0Pos,
@@ -365,7 +365,7 @@ std::unique_ptr<GrDrawOp> MakeAAFill(GrPaint&& paint, const SkMatrix& viewMatrix
     if (!view_matrix_ok_for_aa_fill_rect(viewMatrix)) {
         return nullptr;
     }
-    SkRect devRect;
+    SkRect devRect{};
     viewMatrix.mapRect(&devRect, rect);
     return AAFillRectOp::Make(std::move(paint), viewMatrix, rect, devRect, nullptr, stencil);
 }
@@ -376,7 +376,7 @@ std::unique_ptr<GrDrawOp> MakeAAFillWithLocalMatrix(GrPaint&& paint, const SkMat
     if (!view_matrix_ok_for_aa_fill_rect(viewMatrix)) {
         return nullptr;
     }
-    SkRect devRect;
+    SkRect devRect{};
     viewMatrix.mapRect(&devRect, rect);
     return AAFillRectOp::Make(std::move(paint), viewMatrix, rect, devRect, &localMatrix, nullptr);
 }
@@ -386,9 +386,9 @@ std::unique_ptr<GrDrawOp> MakeAAFillWithLocalRect(GrPaint&& paint, const SkMatri
     if (!view_matrix_ok_for_aa_fill_rect(viewMatrix)) {
         return nullptr;
     }
-    SkRect devRect;
+    SkRect devRect{};
     viewMatrix.mapRect(&devRect, rect);
-    SkMatrix localMatrix;
+    SkMatrix localMatrix{};
     if (!localMatrix.setRectToRect(rect, localRect, SkMatrix::kFill_ScaleToFit)) {
         return nullptr;
     }

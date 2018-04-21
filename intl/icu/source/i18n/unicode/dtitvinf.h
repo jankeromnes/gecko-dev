@@ -497,7 +497,7 @@ private:
     // fallback interval pattern
     UnicodeString fFallbackIntervalPattern;
     // default order
-    UBool fFirstDateInPtnIsLaterDate;
+    UBool fFirstDateInPtnIsLaterDate{};
 
     // HashMap<UnicodeString, UnicodeString[kIPI_MAX_INDEX]>
     // HashMap( skeleton, pattern[largest_different_field] )

@@ -144,7 +144,7 @@ SkRTree::Branch SkRTree::bulkLoad(SkTDArray<Branch>* branches, int level) {
             Node* n = allocateNodeAtLevel(level);
             n->fNumChildren = 1;
             n->fChildren[0] = (*branches)[currentBranch];
-            Branch b;
+            Branch b{};
             b.fBounds = (*branches)[currentBranch].fBounds;
             b.fSubtree = n;
             ++currentBranch;

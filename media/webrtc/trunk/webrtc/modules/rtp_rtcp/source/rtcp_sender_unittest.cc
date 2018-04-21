@@ -581,7 +581,7 @@ TEST_F(RtcpSenderTest, RembNotIncludedInCompoundPacketIfNotEnabled) {
 
 TEST_F(RtcpSenderTest, SendXrWithVoipMetric) {
   rtcp_sender_->SetRTCPStatus(RtcpMode::kReducedSize);
-  RTCPVoIPMetric metric;
+  RTCPVoIPMetric metric{};
   metric.lossRate = 1;
   metric.discardRate = 2;
   metric.burstDensity = 3;
@@ -816,7 +816,7 @@ TEST_F(RtcpSenderTest, ByeMustBeLast) {
 
   // Set up XR VoIP metric to be included with BYE
   rtcp_sender_->SetRTCPStatus(RtcpMode::kCompound);
-  RTCPVoIPMetric metric;
+  RTCPVoIPMetric metric{};
   EXPECT_EQ(0, rtcp_sender_->SetRTCPVoIPMetrics(&metric));
   EXPECT_EQ(0, rtcp_sender_->SendRTCP(feedback_state(), kRtcpBye));
 }

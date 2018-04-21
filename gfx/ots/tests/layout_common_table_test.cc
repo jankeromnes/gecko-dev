@@ -247,7 +247,7 @@ class TestStream : public ots::MemoryStream {
 
  private:
   size_t size_;
-  uint8_t data_[4096];
+  uint8_t data_[4096]{};
 };
 
 class TableTest : public ::testing::Test {
@@ -266,7 +266,7 @@ class TableTest : public ::testing::Test {
   }
 
   TestStream out;
-  ots::Font *font;
+  ots::Font *font{};
 };
 
 class ScriptListTableTest : public TableTest { };
@@ -287,7 +287,7 @@ class FeatureListTableTest : public TableTest {
     num_features = 0;
   }
 
-  uint16_t num_features;
+  uint16_t num_features{};
 };
 
 bool fakeTypeParserReturnsTrue(const ots::Font*, const uint8_t *,
@@ -336,7 +336,7 @@ class LookupListTableTest : public TableTest {
                                      &num_lookups);
   }
 
-  uint16_t num_lookups;
+  uint16_t num_lookups{};
 };
 
 }  // namespace

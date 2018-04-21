@@ -67,7 +67,7 @@ const char *GetSharedLibraryExtension()
 
 Optional<std::string> GetCWD()
 {
-    std::array<char, 4096> pathBuf;
+    std::array<char, 4096> pathBuf{};
     char *result = getcwd(pathBuf.data(), pathBuf.size());
     if (result == nullptr)
     {

@@ -235,7 +235,7 @@ std::unique_ptr<GrFragmentProcessor> GrNonlinearColorSpaceXformEffect::Make(
         srcToDstMtx = gamutXform->gamutXform();
     }
 
-    SkColorSpaceTransferFn srcTransferFn;
+    SkColorSpaceTransferFn srcTransferFn{};
     if (!src->gammaIsLinear()) {
         if (src->isNumericalTransferFn(&srcTransferFn)) {
             ops |= kSrcTransfer_Op;
@@ -244,7 +244,7 @@ std::unique_ptr<GrFragmentProcessor> GrNonlinearColorSpaceXformEffect::Make(
         }
     }
 
-    SkColorSpaceTransferFn dstTransferFn;
+    SkColorSpaceTransferFn dstTransferFn{};
     if (!dst->gammaIsLinear()) {
         if (dst->isNumericalTransferFn(&dstTransferFn)) {
             dstTransferFn = dstTransferFn.invert();

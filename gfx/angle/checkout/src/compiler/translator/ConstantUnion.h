@@ -103,7 +103,7 @@ class TConstantUnion
   private:
     union {
         int iConst;           // used for ivec, scalar ints
-        unsigned int uConst;  // used for uvec, scalar uints
+        unsigned int uConst{};  // used for uvec, scalar uints
         bool bConst;          // used for bvec, scalar bools
         float fConst;         // used for vec, mat, scalar floats
         TYuvCscStandardEXT yuvCscStandardEXTConst;

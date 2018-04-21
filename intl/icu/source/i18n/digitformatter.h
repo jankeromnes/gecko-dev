@@ -217,14 +217,14 @@ int32_t countChar32(
 UBool equals(const DigitFormatter &rhs) const;
 
 private:
-UChar32 fLocalizedDigits[10];
+UChar32 fLocalizedDigits[10]{};
 UnicodeString fGroupingSeparator;
 UnicodeString fDecimal;
 UnicodeString fNegativeSign;
 UnicodeString fPositiveSign;
 DigitAffix fInfinity;
 DigitAffix fNan;
-UBool fIsStandardDigits;
+UBool fIsStandardDigits{};
 UnicodeString fExponent;
 UBool isStandardDigits() const;
 

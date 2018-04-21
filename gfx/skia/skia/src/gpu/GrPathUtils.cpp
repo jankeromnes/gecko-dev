@@ -24,7 +24,7 @@ SkScalar GrPathUtils::scaleToleranceToSrc(SkScalar devTol,
         // take worst case mapRadius amoung four corners.
         // (less than perfect)
         for (int i = 0; i < 4; ++i) {
-            SkMatrix mat;
+            SkMatrix mat{};
             mat.setTranslate((i % 2) ? pathBounds.fLeft : pathBounds.fRight,
                              (i < 2) ? pathBounds.fTop : pathBounds.fBottom);
             mat.postConcat(viewM);
@@ -203,7 +203,7 @@ int GrPathUtils::worstCasePointCount(const SkPath& path, int* subpaths, SkScalar
 }
 
 void GrPathUtils::QuadUVMatrix::set(const SkPoint qPts[3]) {
-    SkMatrix m;
+    SkMatrix m{};
     // We want M such that M * xy_pt = uv_pt
     // We know M * control_pts = [0  1/2 1]
     //                           [0  0   1]
@@ -684,12 +684,12 @@ inline static void calc_loop_lmcoeffs(SkScalar t2, SkScalar s2, SkScalar t1, SkS
 //     | ..K.. |     |   1       1       1       1    |      | 0   1/3  2/3  1 |
 //
 static void calc_quadratic_klm(const SkPoint pts[4], double d3, SkMatrix* klm) {
-    SkMatrix klmAtPts;
+    SkMatrix klmAtPts{};
     klmAtPts.setAll(0,  1.f/3,  1,
                     0,      0,  1,
                     0,  1.f/3,  1);
 
-    SkMatrix inversePts;
+    SkMatrix inversePts{};
     inversePts.setAll(pts[0].x(),  pts[1].x(),  pts[3].x(),
                       pts[0].y(),  pts[1].y(),  pts[3].y(),
                                1,           1,           1);
@@ -733,7 +733,7 @@ SkCubicType GrPathUtils::getCubicKLM(const SkPoint src[4], SkMatrix* klm, double
         return SkCubicType::kQuadratic;
     }
 
-    SkMatrix CIT;
+    SkMatrix CIT{};
     ExcludedTerm skipTerm = calcCubicInverseTransposePowerBasisMatrix(src, &CIT);
     if (ExcludedTerm::kNonInvertible == skipTerm) {
         // This could technically also happen if the curve were quadratic, but SkClassifyCubic
@@ -745,7 +745,7 @@ SkCubicType GrPathUtils::getCubicKLM(const SkPoint src[4], SkMatrix* klm, double
     const SkScalar t0 = static_cast<SkScalar>(tt[0]), t1 = static_cast<SkScalar>(tt[1]),
                    s0 = static_cast<SkScalar>(ss[0]), s1 = static_cast<SkScalar>(ss[1]);
 
-    SkMatrix klmCoeffs;
+    SkMatrix klmCoeffs{};
     switch (type) {
         case SkCubicType::kCuspAtInfinity:
             SkASSERT(1 == t1 && 0 == s1); // Infinity.

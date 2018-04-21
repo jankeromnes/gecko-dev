@@ -73,7 +73,7 @@ public:
     // e.g., Next Tuesday; Yesterday; etc. For third index, 0
     // means past, e.g., 5 days ago; 1 means future, e.g., in 5 days.
     SimpleFormatter *relativeUnitsFormatters[UDAT_STYLE_COUNT]
-        [UDAT_RELATIVE_UNIT_COUNT][2][StandardPlural::COUNT];
+        [UDAT_RELATIVE_UNIT_COUNT][2][StandardPlural::COUNT]{};
 
     const UnicodeString& getAbsoluteUnitString(int32_t fStyle,
                                                UDateAbsoluteUnit unit,
@@ -86,7 +86,7 @@ public:
     const UnicodeString emptyString;
 
     // Mappping from source to target styles for alias fallback.
-    int32_t fallBackCache[UDAT_STYLE_COUNT];
+    int32_t fallBackCache[UDAT_STYLE_COUNT]{};
 
     void adoptCombinedDateAndTime(SimpleFormatter *fmtToAdopt) {
         delete combinedDateAndTime;
@@ -292,7 +292,7 @@ struct RelDateTimeFmtDataSink : public ResourceSink {
     }
 
     // Values kept between levels of parsing the CLDR data.
-    int32_t pastFutureIndex;  // 0 == past or 1 ==  future
+    int32_t pastFutureIndex{};  // 0 == past or 1 ==  future
     UDateRelativeDateTimeFormatterStyle style;  // {LONG, SHORT, NARROW}
     RelAbsUnit genericUnit;
 

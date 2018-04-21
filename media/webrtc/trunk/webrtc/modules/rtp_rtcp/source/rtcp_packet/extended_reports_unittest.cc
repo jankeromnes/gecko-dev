@@ -111,7 +111,7 @@ Rrtr RtcpPacketExtendedReportsTest::Rand<Rrtr>() {
 
 template <>
 RTCPVoIPMetric RtcpPacketExtendedReportsTest::Rand<RTCPVoIPMetric>() {
-  RTCPVoIPMetric metric;
+  RTCPVoIPMetric metric{};
   metric.lossRate       = Rand<uint8_t>();
   metric.discardRate    = Rand<uint8_t>();
   metric.burstDensity   = Rand<uint8_t>();

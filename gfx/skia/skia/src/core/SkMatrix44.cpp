@@ -994,7 +994,7 @@ SkMatrix44& SkMatrix44::operator=(const SkMatrix& src) {
 }
 
 SkMatrix44::operator SkMatrix() const {
-    SkMatrix dst;
+    SkMatrix dst{};
 
     dst[SkMatrix::kMScaleX]  = SkMScalarToScalar(fMat[0][0]);
     dst[SkMatrix::kMSkewX]  = SkMScalarToScalar(fMat[1][0]);

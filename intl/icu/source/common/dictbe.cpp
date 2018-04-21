@@ -97,8 +97,8 @@ private:
     int32_t   offset;     // Offset in the text of these candidates
     int32_t   mark;       // The preferred candidate's offset
     int32_t   current;    // The candidate we're currently looking at
-    int32_t   cuLengths[POSSIBLE_WORD_LIST_MAX];   // Word Lengths, in code units.
-    int32_t   cpLengths[POSSIBLE_WORD_LIST_MAX];   // Word Lengths, in code points.
+    int32_t   cuLengths[POSSIBLE_WORD_LIST_MAX]{};   // Word Lengths, in code units.
+    int32_t   cpLengths[POSSIBLE_WORD_LIST_MAX]{};   // Word Lengths, in code points.
 
 public:
     PossibleWord() : count(0), prefix(0), offset(-1), mark(0), current(0) {};

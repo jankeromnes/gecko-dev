@@ -189,7 +189,7 @@ public:
 #endif  /* U_HIDE_INTERNAL_API */
 
 private:
-    char id[4];
+    char id[4]{};
     UnicodeString idStr;
     int32_t code;
     URegionType type;

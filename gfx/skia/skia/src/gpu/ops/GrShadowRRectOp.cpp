@@ -655,7 +655,7 @@ std::unique_ptr<GrDrawOp> Make(GrColor color,
 
     // Do any matrix crunching before we reset the draw state for device coords.
     const SkRect& rrectBounds = rrect.getBounds();
-    SkRect bounds;
+    SkRect bounds{};
     viewMatrix.mapRect(&bounds, rrectBounds);
 
     // Map radius and inset. As the matrix is a similarity matrix, this should be isotropic.

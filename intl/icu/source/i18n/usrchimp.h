@@ -62,7 +62,7 @@ struct PCEI
 
 struct PCEBuffer
 {
-    PCEI    defaultBuffer[16];
+    PCEI    defaultBuffer[16]{};
     PCEI   *buffer;
     int32_t bufferIndex;
     int32_t bufferSize;
@@ -79,11 +79,11 @@ struct PCEBuffer
 class UCollationPCE : public UMemory {
 private:
     PCEBuffer          pceBuffer;
-    CollationElementIterator *cei;
+    CollationElementIterator *cei{};
     UCollationStrength strength;
-    UBool              toShift;
-    UBool              isShifted;
-    uint32_t           variableTop;
+    UBool              toShift{};
+    UBool              isShifted{};
+    uint32_t           variableTop{};
 
 public:
     UCollationPCE(UCollationElements *elems);

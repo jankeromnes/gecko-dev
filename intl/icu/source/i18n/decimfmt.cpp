@@ -146,7 +146,7 @@ struct AffixesForCurrency : public UMemory {
 	// positive suffix
 	UnicodeString posSuffixForCurrency;
 
-	int32_t formatWidth;
+	int32_t formatWidth{};
 
 	AffixesForCurrency(const UnicodeString& negPrefix,
 					   const UnicodeString& negSuffix,

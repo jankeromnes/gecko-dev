@@ -431,7 +431,7 @@ public:
 private:
     AffixPattern *fDest;
     int32_t fIdx;
-    UChar fBuffer[32];
+    UChar fBuffer[32]{};
     AffixPatternAppender(const AffixPatternAppender &other);
     AffixPatternAppender &operator=(const AffixPatternAppender &other);
 };

@@ -295,8 +295,8 @@ protected:
                             UParseError& parseError);
 
  private:
-    char actualLocale[ULOC_FULLNAME_CAPACITY];
-    char validLocale[ULOC_FULLNAME_CAPACITY];
+    char actualLocale[ULOC_FULLNAME_CAPACITY]{};
+    char validLocale[ULOC_FULLNAME_CAPACITY]{};
 };
 
 U_NAMESPACE_END

@@ -167,7 +167,7 @@ const SkAdvancedTypefaceMetrics* SkPDFFont::GetMetrics(SkTypeface* typeface,
             // This probably isn't very good with an italic font.
             int16_t stemV = SHRT_MAX;
             for (char c : {'i', 'I', '!', '1'}) {
-                SkRect bounds;
+                SkRect bounds{};
                 tmpPaint.measureText(&c, 1, &bounds);
                 stemV = SkTMin(stemV, SkToS16(SkScalarRoundToInt(bounds.width())));
             }
@@ -177,7 +177,7 @@ const SkAdvancedTypefaceMetrics* SkPDFFont::GetMetrics(SkTypeface* typeface,
             // Figure out a good guess for CapHeight: average the height of M and X.
             SkScalar capHeight = 0;
             for (char c : {'M', 'X'}) {
-                SkRect bounds;
+                SkRect bounds{};
                 tmpPaint.measureText(&c, 1, &bounds);
                 capHeight += bounds.height();
             }
@@ -634,7 +634,7 @@ static void add_type3_font_info(SkPDFCanon* canon,
     SkScalar emSize = (SkScalar)unitsPerEm;
     font->insertName("Subtype", "Type3");
     // Flip about the x-axis and scale by 1/emSize.
-    SkMatrix fontMatrix;
+    SkMatrix fontMatrix{};
     fontMatrix.setScale(SkScalarInvert(emSize), -SkScalarInvert(emSize));
     font->insertObject("FontMatrix", SkPDFUtils::MatrixToArray(fontMatrix));
 
@@ -661,7 +661,7 @@ static void add_type3_font_info(SkPDFCanon* canon,
         bool skipGlyph = gID != 0 && !subset.has(gID);
         SkString characterName;
         SkScalar advance = 0.0f;
-        SkIRect glyphBBox;
+        SkIRect glyphBBox{};
         if (skipGlyph) {
             characterName.set("g0");
         } else {

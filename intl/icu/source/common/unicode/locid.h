@@ -743,17 +743,17 @@ private:
      */
     static Locale *getLocaleCache(void);
 
-    char language[ULOC_LANG_CAPACITY];
-    char script[ULOC_SCRIPT_CAPACITY];
-    char country[ULOC_COUNTRY_CAPACITY];
-    int32_t variantBegin;
+    char language[ULOC_LANG_CAPACITY]{};
+    char script[ULOC_SCRIPT_CAPACITY]{};
+    char country[ULOC_COUNTRY_CAPACITY]{};
+    int32_t variantBegin{};
     char* fullName;
-    char fullNameBuffer[ULOC_FULLNAME_CAPACITY];
+    char fullNameBuffer[ULOC_FULLNAME_CAPACITY]{};
     // name without keywords
     char* baseName;
     void initBaseName(UErrorCode& status);
 
-    UBool fIsBogus;
+    UBool fIsBogus{};
 
     static const Locale &getLocale(int locid);
 

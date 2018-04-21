@@ -53,7 +53,7 @@ private:
     mutable SkOnce         fFromXYZOnce;
 
     mutable sk_sp<SkData>  fDstStorage;
-    mutable const uint8_t* fToDstGammaTables[3];
+    mutable const uint8_t* fToDstGammaTables[3]{};
     mutable SkOnce         fToDstGammaOnce;
 
     friend class SkColorSpace;

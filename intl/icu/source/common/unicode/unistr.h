@@ -3803,7 +3803,7 @@ private:
       // or pointer sizes that are not a power of 2
       char16_t   *fArray;    // the Unicode data
     } fFields;
-  } fUnion;
+  } fUnion{};
 };
 
 /**

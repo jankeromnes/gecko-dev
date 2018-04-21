@@ -96,8 +96,8 @@ private:
         }
     }
 
-    TexParams                       fTexParams;
-    GrGpu::ResetTimestamp           fTexParamsTimestamp;
+    TexParams                       fTexParams{};
+    GrGpu::ResetTimestamp           fTexParamsTimestamp{};
     // Holds the texture target and ID. A pointer to this may be shared to external clients for
     // direct interaction with the GL object.
     GrGLTextureInfo                 fInfo;

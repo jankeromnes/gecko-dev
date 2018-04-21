@@ -200,29 +200,29 @@ class U_I18N_API MutablePatternModifier
     const bool fStrong;
 
     // Pattern details (initialized in setPatternInfo and setPatternAttributes)
-    const AffixPatternProvider *patternInfo;
+    const AffixPatternProvider *patternInfo{};
     UNumberSignDisplay signDisplay;
-    bool perMilleReplacesPercent;
+    bool perMilleReplacesPercent{};
 
     // Symbol details (initialized in setSymbols)
-    const DecimalFormatSymbols *symbols;
+    const DecimalFormatSymbols *symbols{};
     UNumberUnitWidth unitWidth;
-    char16_t currencyCode[4];
-    const PluralRules *rules;
+    char16_t currencyCode[4]{};
+    const PluralRules *rules{};
 
     // Number details (initialized in setNumberProperties)
-    int8_t signum;
+    int8_t signum{};
     StandardPlural::Form plural;
 
     // QuantityChain details (initialized in addToChain)
-    const MicroPropsGenerator *parent;
+    const MicroPropsGenerator *parent{};
 
     // Transient CharSequence fields (initialized in enterCharSequenceMode)
     bool inCharSequenceMode = false;
-    int32_t fFlags;
-    int32_t fLength;
-    bool prependSign;
-    bool plusReplacesMinusSign;
+    int32_t fFlags{};
+    int32_t fLength{};
+    bool prependSign{};
+    bool plusReplacesMinusSign{};
 
     /**
      * Uses the current properties to create a single {@link ConstantMultiFieldModifier} with currency spacing support

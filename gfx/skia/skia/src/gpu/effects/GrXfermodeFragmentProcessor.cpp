@@ -406,7 +406,7 @@ private:
     GrColor4f constantOutputForConstantInput(GrColor4f inputColor) const override {
         GrColor4f childColor =
                 ConstantOutputForConstantInput(this->childProcessor(0), GrColor4f::OpaqueWhite());
-        SkPM4f src, dst;
+        SkPM4f src{}, dst{};
         if (kSrc_Child == fChild) {
             src = GrColor4fToSkPM4f(childColor);
             dst = GrColor4fToSkPM4f(inputColor);

@@ -433,7 +433,7 @@ bool SkColorSpaceXform_XYZ::onApply(ColorFormat dstColorFormat, void* dst,
     SkJumper_MemoryCtx src_ctx = { (void*)src, 0 },
                        dst_ctx = { (void*)dst, 0 };
 
-    LoadTablesContext loadTables;
+    LoadTablesContext loadTables{};
     switch (srcColorFormat) {
         case kRGBA_8888_ColorFormat:
             if (kLinear_SrcGamma == fSrcGamma) {
@@ -531,7 +531,7 @@ bool SkColorSpaceXform_XYZ::onApply(ColorFormat dstColorFormat, void* dst,
         pipeline.append(SkRasterPipeline::premul);
     }
 
-    TablesContext tables;
+    TablesContext tables{};
     float to_2dot2 = 1/2.2f;
     switch (fDstGamma) {
         case kSRGB_DstGamma:

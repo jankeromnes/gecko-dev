@@ -463,7 +463,7 @@ private:
      */
 
 public:
-    decContext    fContext;   // public access to status flags.  
+    decContext    fContext{};   // public access to status flags.  
 
 private:
     decNumber     *fDecNumber;
@@ -476,7 +476,7 @@ private:
     union DoubleOrInt64 {
       double        fDouble;
       int64_t       fInt64;
-    } fUnion;
+    } fUnion{};
     enum EHave {
       kNone=0,
       kDouble

@@ -450,7 +450,7 @@ ucol_prepareShortStringOpen( const char *definition,
     // settings
 
     // analyse the string in order to get everything we need.
-    CollatorSpec s;
+    CollatorSpec s{};
     ucol_sit_initCollatorSpecs(&s);
     ucol_sit_readSpecs(&s, definition, parseError, status);
     ucol_sit_calculateWholeLocale(&s);
@@ -521,7 +521,7 @@ ucol_openFromShortString( const char *definition,
 
     // analyse the string in order to get everything we need.
     const char *string = definition;
-    CollatorSpec s;
+    CollatorSpec s{};
     ucol_sit_initCollatorSpecs(&s);
     string = ucol_sit_readSpecs(&s, definition, parseError, status);
     ucol_sit_calculateWholeLocale(&s);
@@ -603,7 +603,7 @@ ucol_normalizeShortDefinitionString(const char *definition,
     }
 
     // validate
-    CollatorSpec s;
+    CollatorSpec s{};
     ucol_sit_initCollatorSpecs(&s);
     ucol_sit_readSpecs(&s, definition, parseError, status);
     return ucol_sit_dumpSpecs(&s, destination, capacity, status);

@@ -46,7 +46,7 @@ private:
     // We store DrawState inside DrawElement because inifFn and drawFn both want to use it
     struct DrawState {
         SkPixmap fDst;
-        SkMatrix fMatrix;
+        SkMatrix fMatrix{};
         SkRasterClip fRC;
 
         DrawState() {}

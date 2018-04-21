@@ -101,7 +101,7 @@ class DummyResolver {
 
  private:
   nr_resolver_vtbl *vtbl_;
-  nr_resolver *resolver_;
+  nr_resolver *resolver_{};
 };
 
 class ProxyTunnelSocketTest : public MtransportTest {
@@ -168,10 +168,10 @@ class ProxyTunnelSocketTest : public MtransportTest {
   RefPtr<DummySocket> socket_impl_;
   DummyResolver resolver_impl_;
   nr_socket *nr_socket_;
-  nr_resolver *nr_resolver_;
-  nr_proxy_tunnel_config *config_;
-  nr_transport_addr proxy_addr_;
-  nr_transport_addr remote_addr_;
+  nr_resolver *nr_resolver_{};
+  nr_proxy_tunnel_config *config_{};
+  nr_transport_addr proxy_addr_{};
+  nr_transport_addr remote_addr_{};
 };
 
 

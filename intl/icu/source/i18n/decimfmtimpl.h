@@ -367,10 +367,10 @@ DecimalFormat::ERoundingMode fRoundingMode;
 // We have this two phase update because of backward compatibility. 
 // DecimalFormat has to remember all settings even if those settings are
 // invalid or disabled.
-int32_t fMinSigDigits;
-int32_t fMaxSigDigits;
-UBool fUseScientific;
-UBool fUseSigDigits;
+int32_t fMinSigDigits{};
+int32_t fMaxSigDigits{};
+UBool fUseScientific{};
+UBool fUseSigDigits{};
 // In addition to these listed above, changes to min/max int digits and
 // min/max frac digits from fSuper also trigger an update.
 

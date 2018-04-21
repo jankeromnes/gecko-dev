@@ -117,7 +117,7 @@ class U_I18N_API CurrencyUnit: public MeasureUnit {
     /**
      * The ISO 4217 code of this object.
      */
-    char16_t isoCode[4];
+    char16_t isoCode[4]{};
 };
 
 inline const char16_t* CurrencyUnit::getISOCurrency() const {

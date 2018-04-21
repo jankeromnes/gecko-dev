@@ -299,7 +299,7 @@ private:
     TextTrieMap fGNamesTrie;
     UBool fGNamesTrieFullyLoaded;
 
-    char fTargetRegion[ULOC_COUNTRY_CAPACITY];
+    char fTargetRegion[ULOC_COUNTRY_CAPACITY]{};
 
     void initialize(const Locale& locale, UErrorCode& status);
     void cleanup();

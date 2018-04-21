@@ -676,7 +676,7 @@ private:
     Locale fLocale;
 
     /* Stores the region (could be implicit default) */
-    char fTargetRegion[ULOC_COUNTRY_CAPACITY];
+    char fTargetRegion[ULOC_COUNTRY_CAPACITY]{};
 
     /* TimeZoneNames object used by this formatter */
     TimeZoneNames* fTimeZoneNames;
@@ -691,22 +691,22 @@ private:
     UnicodeString fGMTOffsetPatterns[UTZFMT_PAT_COUNT];
 
     /* Localized decimal digits used by Localized GMT format */
-    UChar32 fGMTOffsetDigits[10];
+    UChar32 fGMTOffsetDigits[10]{};
 
     /* Localized GMT zero format - e.g. "GMT" */
     UnicodeString fGMTZeroFormat;
 
     /* Bit flags representing parse options */
-    uint32_t fDefParseOptionFlags;
+    uint32_t fDefParseOptionFlags{};
 
     /* Constant parts of GMT format pattern, populated from localized GMT format pattern*/
     UnicodeString fGMTPatternPrefix;    /* Substring before {0} */
     UnicodeString fGMTPatternSuffix;    /* Substring after {0} */
 
     /* Compiled offset patterns generated from fGMTOffsetPatterns[] */
-    UVector* fGMTOffsetPatternItems[UTZFMT_PAT_COUNT];
+    UVector* fGMTOffsetPatternItems[UTZFMT_PAT_COUNT]{};
 
-    UBool fAbuttingOffsetHoursAndMinutes;
+    UBool fAbuttingOffsetHoursAndMinutes{};
 
     /* TZDBTimeZoneNames object used for parsing */
     TZDBTimeZoneNames* fTZDBTimeZoneNames;

@@ -347,7 +347,7 @@ private:
         // allocate vertex / index buffers
         const GrBuffer* lineVertexBuffer;
         int firstLineVertex;
-        MSAALineVertices lines;
+        MSAALineVertices lines{};
         int lineVertexStride = sizeof(MSAALineVertices::Vertex);
         lines.vertices = (MSAALineVertices::Vertex*) target->makeVertexSpace(lineVertexStride,
                                                                              fMaxLineVertices,
@@ -360,7 +360,7 @@ private:
         lines.nextVertex = lines.vertices;
         SkDEBUGCODE(lines.verticesEnd = lines.vertices + fMaxLineVertices;)
 
-        MSAAQuadVertices quads;
+        MSAAQuadVertices quads{};
         int quadVertexStride = sizeof(MSAAQuadVertices::Vertex);
         SkAutoMalloc quadVertexPtr(fMaxQuadVertices * quadVertexStride);
         quads.vertices = (MSAAQuadVertices::Vertex*) quadVertexPtr.get();
@@ -636,7 +636,7 @@ bool GrMSAAPathRenderer::internalDrawPath(GrRenderTargetContext* renderTargetCon
         }
     }
 
-    SkRect devBounds;
+    SkRect devBounds{};
     GetPathDevBounds(path,
                      renderTargetContext->asRenderTargetProxy()->worstCaseWidth(),
                      renderTargetContext->asRenderTargetProxy()->worstCaseHeight(),
@@ -663,12 +663,12 @@ bool GrMSAAPathRenderer::internalDrawPath(GrRenderTargetContext* renderTargetCon
     }
 
     if (passes[1]) {
-        SkRect bounds;
+        SkRect bounds{};
         SkMatrix localMatrix = SkMatrix::I();
         if (reverse) {
             // draw over the dev bounds (which will be the whole dst surface for inv fill).
             bounds = devBounds;
-            SkMatrix vmi;
+            SkMatrix vmi{};
             // mapRect through persp matrix may not be correct
             if (!viewMatrix.hasPerspective() && viewMatrix.invert(&vmi)) {
                 vmi.mapRect(&bounds);

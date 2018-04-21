@@ -86,7 +86,7 @@ void GrGLProgram::setData(const GrPrimitiveProcessor& primProc, const GrPipeline
     this->setFragmentData(primProc, pipeline, &nextTexSamplerIdx, &nextTexelBufferIdx);
 
     const GrXferProcessor& xp = pipeline.getXferProcessor();
-    SkIPoint offset;
+    SkIPoint offset{};
     GrTexture* dstTexture = pipeline.peekDstTexture(&offset);
 
     fXferProcessor->setData(fProgramDataManager, xp, dstTexture, offset);
@@ -139,7 +139,7 @@ void GrGLProgram::setRenderTargetState(const GrPrimitiveProcessor& primProc,
     }
 
     // set RT adjustment
-    SkISize size;
+    SkISize size{};
     size.set(rt->width(), rt->height());
     if (!primProc.isPathRendering()) {
         if (fRenderTargetState.fRenderTargetOrigin != proxy->origin() ||

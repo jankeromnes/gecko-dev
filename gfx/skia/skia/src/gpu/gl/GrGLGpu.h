@@ -412,7 +412,7 @@ private:
     ///////////////////////////////////////////////////////////////////////////
     ///@name Caching of GL State
     ///@{
-    int                         fHWActiveTextureUnitIdx;
+    int                         fHWActiveTextureUnitIdx{};
     GrGLuint                    fHWProgramID;
 
     enum TriState {
@@ -434,7 +434,7 @@ private:
             fEnabled = kUnknown_TriState;
             fRect.invalidate();
         }
-    } fHWScissorSettings;
+    } fHWScissorSettings{};
 
     class {
     public:
@@ -472,7 +472,7 @@ private:
         GrWindowRectsState   fWindowState;
     } fHWWindowRectsState;
 
-    GrGLIRect                   fHWViewport;
+    GrGLIRect                   fHWViewport{};
 
     /**
      * Tracks vertex attrib array state.
@@ -561,7 +561,7 @@ private:
             fConstColorValid = false;
             fEnabled = kUnknown_TriState;
         }
-    }                                       fHWBlendState;
+    }                                       fHWBlendState{};
 
     TriState fMSAAEnabled;
 
@@ -591,7 +591,7 @@ private:
 
     // EXT_raster_multisample.
     TriState                                fHWRasterMultisampleEnabled;
-    int                                     fHWNumRasterSamples;
+    int                                     fHWNumRasterSamples{};
     ///@}
 
     /** IDs for copy surface program. (3 sampler types) */

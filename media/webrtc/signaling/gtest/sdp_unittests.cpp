@@ -246,7 +246,7 @@ class SdpTest : public ::testing::Test {
     }
 
   protected:
-    int final_level_;
+    int final_level_{};
     sdp_t *sdp_ptr_;
 };
 
@@ -1629,7 +1629,7 @@ class NewSdpTest : public ::testing::Test,
       ASSERT_EQ(expected, str.str());
     }
 
-    SdpErrorHolder* mSdpErrorHolder;
+    SdpErrorHolder* mSdpErrorHolder{};
     SipccSdpParser mSipccParser;
     RsdparsaSdpParser mRustParser;
     mozilla::UniquePtr<Sdp> mSdp;

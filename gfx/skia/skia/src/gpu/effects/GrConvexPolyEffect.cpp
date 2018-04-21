@@ -34,7 +34,7 @@ protected:
 
 private:
     GrGLSLProgramDataManager::UniformHandle fEdgeUniform;
-    SkScalar                                fPrevEdges[3 * GrConvexPolyEffect::kMaxEdges];
+    SkScalar                                fPrevEdges[3 * GrConvexPolyEffect::kMaxEdges]{};
     typedef GrGLSLFragmentProcessor INHERITED;
 };
 

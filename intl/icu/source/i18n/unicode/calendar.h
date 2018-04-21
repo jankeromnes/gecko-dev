@@ -1861,7 +1861,7 @@ protected:
      * The flag which indicates if the current time is set in the calendar.
      * @stable ICU 2.0
      */
-    UBool      fIsTimeSet;
+    UBool      fIsTimeSet{};
 
     /**
      * True if the fields are in sync with the currently set time of this Calendar.
@@ -1873,14 +1873,14 @@ protected:
      * for backward compatibility.
      * @stable ICU 2.0
      */
-    UBool      fAreFieldsSet;
+    UBool      fAreFieldsSet{};
 
     /**
      * True if all of the fields have been set.  This is initially false, and set to
      * true by computeFields().
      * @stable ICU 2.0
      */
-    UBool      fAreAllFieldsSet;
+    UBool      fAreAllFieldsSet{};
 
     /**
      * True if all fields have been virtually set, but have not yet been
@@ -1889,7 +1889,7 @@ protected:
      * necessary, but otherwise will delay such computation.
      * @stable ICU 3.0
      */
-    UBool fAreFieldsVirtuallySet;
+    UBool fAreFieldsVirtuallySet{};
 
     /**
      * Get the current time without recomputing.
@@ -1912,13 +1912,13 @@ protected:
      * The time fields containing values into which the millis is computed.
      * @stable ICU 2.0
      */
-    int32_t     fFields[UCAL_FIELD_COUNT];
+    int32_t     fFields[UCAL_FIELD_COUNT]{};
 
     /**
      * The flags which tell if a specified time field for the calendar is set.
      * @deprecated ICU 2.8 use (fStamp[n]!=kUnset)
      */
-    UBool      fIsSet[UCAL_FIELD_COUNT];
+    UBool      fIsSet[UCAL_FIELD_COUNT]{};
 
     /** Special values of stamp[]
      * @stable ICU 2.0
@@ -1935,7 +1935,7 @@ protected:
      * MINIMUM_USER_SET to Integer.MAX_VALUE are legal user set values.
      * @stable ICU 2.0
      */
-    int32_t        fStamp[UCAL_FIELD_COUNT];
+    int32_t        fStamp[UCAL_FIELD_COUNT]{};
 
     /**
      * Subclasses may override this method to compute several fields
@@ -2146,7 +2146,7 @@ private:
     /**
      * The next available value for fStamp[]
      */
-    int32_t fNextStamp;// = MINIMUM_USER_STAMP;
+    int32_t fNextStamp{};// = MINIMUM_USER_STAMP;
 
     /**
      * Recalculates the time stamp array (fStamp).
@@ -2157,12 +2157,12 @@ private:
     /**
      * The current time set for the calendar.
      */
-    UDate        fTime;
+    UDate        fTime{};
 
     /**
      * @see   #setLenient
      */
-    UBool      fLenient;
+    UBool      fLenient{};
 
     /**
      * Time zone affects the time calculation done by Calendar. Calendar subclasses use
@@ -2191,11 +2191,11 @@ private:
      * a Calendar is constructed.
      */
     UCalendarDaysOfWeek fFirstDayOfWeek;
-    uint8_t     fMinimalDaysInFirstWeek;
+    uint8_t     fMinimalDaysInFirstWeek{};
     UCalendarDaysOfWeek fWeekendOnset;
-    int32_t fWeekendOnsetMillis;
+    int32_t fWeekendOnsetMillis{};
     UCalendarDaysOfWeek fWeekendCease;
-    int32_t fWeekendCeaseMillis;
+    int32_t fWeekendCeaseMillis{};
 
     /**
      * Sets firstDayOfWeek and minimalDaysInFirstWeek. Called at Calendar construction
@@ -2225,28 +2225,28 @@ private:
      * returned by getGregorianYear().
      * @see #computeGregorianFields
      */
-    int32_t fGregorianYear;
+    int32_t fGregorianYear{};
 
     /**
      * The Gregorian month, as computed by computeGregorianFields() and
      * returned by getGregorianMonth().
      * @see #computeGregorianFields
      */
-    int32_t fGregorianMonth;
+    int32_t fGregorianMonth{};
 
     /**
      * The Gregorian day of the year, as computed by
      * computeGregorianFields() and returned by getGregorianDayOfYear().
      * @see #computeGregorianFields
      */
-    int32_t fGregorianDayOfYear;
+    int32_t fGregorianDayOfYear{};
 
     /**
      * The Gregorian day of the month, as computed by
      * computeGregorianFields() and returned by getGregorianDayOfMonth().
      * @see #computeGregorianFields
      */
-    int32_t fGregorianDayOfMonth;
+    int32_t fGregorianDayOfMonth{};
 
     /* calculations */
 
@@ -2329,8 +2329,8 @@ private:
 #endif  /* U_HIDE_INTERNAL_API */
 
  private:
-    char validLocale[ULOC_FULLNAME_CAPACITY];
-    char actualLocale[ULOC_FULLNAME_CAPACITY];
+    char validLocale[ULOC_FULLNAME_CAPACITY]{};
+    char actualLocale[ULOC_FULLNAME_CAPACITY]{};
 
  public:
 #if !UCONFIG_NO_SERVICE

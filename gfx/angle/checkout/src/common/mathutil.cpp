@@ -52,7 +52,7 @@ unsigned int convertRGBFloatsTo999E5(float red, float green, float blue)
     const int max_s = static_cast<int>(floor((max_c / (pow(2.0f, exp_p - g_sharedexp_bias - g_sharedexp_mantissabits))) + 0.5f));
     const int exp_s = static_cast<int>((max_s < pow(2.0f, g_sharedexp_mantissabits)) ? exp_p : exp_p + 1);
 
-    RGB9E5Data output;
+    RGB9E5Data output{};
     output.R = static_cast<unsigned int>(floor((red_c / (pow(2.0f, exp_s - g_sharedexp_bias - g_sharedexp_mantissabits))) + 0.5f));
     output.G = static_cast<unsigned int>(floor((green_c / (pow(2.0f, exp_s - g_sharedexp_bias - g_sharedexp_mantissabits))) + 0.5f));
     output.B = static_cast<unsigned int>(floor((blue_c / (pow(2.0f, exp_s - g_sharedexp_bias - g_sharedexp_mantissabits))) + 0.5f));

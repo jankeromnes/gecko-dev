@@ -474,7 +474,7 @@ void SkRectClipBlitter::blitV(int x, int y, int height, SkAlpha alpha) {
 }
 
 void SkRectClipBlitter::blitRect(int left, int y, int width, int height) {
-    SkIRect    r;
+    SkIRect    r{};
 
     r.set(left, y, left + width, y + height);
     if (r.intersect(fClipRect)) {
@@ -484,7 +484,7 @@ void SkRectClipBlitter::blitRect(int left, int y, int width, int height) {
 
 void SkRectClipBlitter::blitAntiRect(int left, int y, int width, int height,
                                      SkAlpha leftAlpha, SkAlpha rightAlpha) {
-    SkIRect    r;
+    SkIRect    r{};
 
     // The *true* width of the rectangle blitted is width+2:
     r.set(left, y, left + width + 2, y + height);
@@ -579,7 +579,7 @@ void SkRgnClipBlitter::blitAntiH(int x, int y, const SkAlpha aa[],
 }
 
 void SkRgnClipBlitter::blitV(int x, int y, int height, SkAlpha alpha) {
-    SkIRect    bounds;
+    SkIRect    bounds{};
     bounds.set(x, y, x + 1, y + height);
 
     SkRegion::Cliperator    iter(*fRgn, bounds);
@@ -594,7 +594,7 @@ void SkRgnClipBlitter::blitV(int x, int y, int height, SkAlpha alpha) {
 }
 
 void SkRgnClipBlitter::blitRect(int x, int y, int width, int height) {
-    SkIRect    bounds;
+    SkIRect    bounds{};
     bounds.set(x, y, x + width, y + height);
 
     SkRegion::Cliperator    iter(*fRgn, bounds);
@@ -611,7 +611,7 @@ void SkRgnClipBlitter::blitRect(int x, int y, int width, int height) {
 void SkRgnClipBlitter::blitAntiRect(int x, int y, int width, int height,
                                     SkAlpha leftAlpha, SkAlpha rightAlpha) {
     // The *true* width of the rectangle to blit is width + 2
-    SkIRect    bounds;
+    SkIRect    bounds{};
     bounds.set(x, y, x + width + 2, y + height);
 
     SkRegion::Cliperator    iter(*fRgn, bounds);

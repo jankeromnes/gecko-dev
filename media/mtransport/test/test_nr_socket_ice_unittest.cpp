@@ -293,7 +293,7 @@ public:
   nr_ice_ctx* ice_ctx_;
   nr_ice_handler* ice_handler_;
   nr_ice_handler_vtbl* ice_handler_vtbl_;
-  nr_ice_media_stream* ice_media_stream_;
+  nr_ice_media_stream* ice_media_stream_{};
   nr_ice_peer_ctx* peer_ctx_;
   TestNat* nat_;
   MtransportTestUtils* test_utils_;
@@ -319,8 +319,8 @@ public:
     delete test_utils2_;
   }
 
-  MtransportTestUtils* test_utils_;
-  MtransportTestUtils* test_utils2_;
+  MtransportTestUtils* test_utils_{};
+  MtransportTestUtils* test_utils2_{};
 
 };
 

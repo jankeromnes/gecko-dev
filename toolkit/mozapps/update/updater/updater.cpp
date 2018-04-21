@@ -206,7 +206,7 @@ struct MARChannelStringTable {
     MARChannelID[0] = '\0';
   }
 
-  char MARChannelID[MAX_TEXT_LEN];
+  char MARChannelID[MAX_TEXT_LEN]{};
 };
 
 //-----------------------------------------------------------------------------
@@ -529,7 +529,7 @@ static void ensure_write_permissions(const NS_tchar *path)
 #ifdef XP_WIN
   (void) _wchmod(path, _S_IREAD | _S_IWRITE);
 #else
-  struct stat fs;
+  struct stat fs{};
   if (!stat(path, &fs) && !(fs.st_mode & S_IWUSR)) {
     (void)chmod(path, fs.st_mode | S_IWUSR);
   }
@@ -552,7 +552,7 @@ static int ensure_remove_recursive(const NS_tchar *path,
 {
   // We use lstat rather than stat here so that we can successfully remove
   // symlinks.
-  struct NS_tstat_t sInfo;
+  struct NS_tstat_t sInfo{};
   int rv = NS_tlstat(path, &sInfo);
   if (rv) {
     // This error is benign
@@ -634,7 +634,7 @@ static FILE* ensure_open(const NS_tchar *path, const NS_tchar *flags, unsigned i
     }
     return nullptr;
   }
-  struct NS_tstat_t ss;
+  struct NS_tstat_t ss{};
   if (NS_tstat(path, &ss) != 0 || ss.st_mode != options) {
     if (f != nullptr) {
       fclose(f);
@@ -704,7 +704,7 @@ static int ensure_copy(const NS_tchar *path, const NS_tchar *dest)
   }
   return OK;
 #else
-  struct NS_tstat_t ss;
+  struct NS_tstat_t ss{};
   int rv = NS_tlstat(path, &ss);
   if (rv) {
     LOG(("ensure_copy: failed to read file status info: " LOG_S ", err: %d",
@@ -794,7 +794,7 @@ template <unsigned N>
 static int ensure_copy_recursive(const NS_tchar *path, const NS_tchar *dest,
                                  copy_recursive_skiplist<N>& skiplist)
 {
-  struct NS_tstat_t sInfo;
+  struct NS_tstat_t sInfo{};
   int rv = NS_tlstat(path, &sInfo);
   if (rv) {
     LOG(("ensure_copy_recursive: path doesn't exist: " LOG_S ", rv: %d, err: %d",
@@ -860,7 +860,7 @@ static int rename_file(const NS_tchar *spath, const NS_tchar *dpath,
   if (rv)
     return rv;
 
-  struct NS_tstat_t spathInfo;
+  struct NS_tstat_t spathInfo{};
   rv = NS_tstat(spath, &spathInfo);
   if (rv) {
     LOG(("rename_file: failed to read file status info: " LOG_S ", " \
@@ -1134,7 +1134,7 @@ RemoveFile::Prepare()
   LOG(("PREPARE REMOVEFILE " LOG_S, mRelPath.get()));
 
   // Make sure that we're actually a file...
-  struct NS_tstat_t fileInfo;
+  struct NS_tstat_t fileInfo{};
   rv = NS_tstat(mFile.get(), &fileInfo);
   if (rv) {
     LOG(("failed to read file status info: " LOG_S ", err: %d", mFile.get(),
@@ -1265,7 +1265,7 @@ RemoveDir::Prepare()
   LOG(("PREPARE REMOVEDIR " LOG_S "/", mRelPath.get()));
 
   // Make sure that we're actually a dir.
-  struct NS_tstat_t dirInfo;
+  struct NS_tstat_t dirInfo{};
   rv = NS_tstat(mDir.get(), &dirInfo);
   if (rv) {
     LOG(("failed to read directory status info: " LOG_S ", err: %d", mRelPath.get(),
@@ -1455,9 +1455,9 @@ private:
   mozilla::UniquePtr<NS_tchar[]> mFile;
   mozilla::UniquePtr<NS_tchar[]> mFileRelPath;
   int mPatchIndex;
-  MBSPatchHeader header;
+  MBSPatchHeader header{};
   unsigned char *buf;
-  NS_tchar spath[MAXPATHLEN];
+  NS_tchar spath[MAXPATHLEN]{};
   AutoFile mPatchStream;
 };
 
@@ -1488,7 +1488,7 @@ PatchFile::~PatchFile()
 int
 PatchFile::LoadSourceFile(FILE* ofile)
 {
-  struct stat os;
+  struct stat os{};
   int rv = fstat(fileno((FILE *)ofile), &os);
   if (rv) {
     LOG(("LoadSourceFile: unable to stat destination file: " LOG_S ", " \
@@ -1649,7 +1649,7 @@ PatchFile::Execute()
 
   // Rename the destination file if it exists before proceeding so it can be
   // used to restore the file to its original state if there is an error.
-  struct NS_tstat_t ss;
+  struct NS_tstat_t ss{};
   rv = NS_tstat(mFile.get(), &ss);
   if (rv) {
     LOG(("failed to read file status info: " LOG_S ", err: %d",
@@ -2264,7 +2264,7 @@ CopyInstallDirToDestDir()
 #else
 #define SKIPLIST_COUNT 2
 #endif
-  copy_recursive_skiplist<SKIPLIST_COUNT> skiplist;
+  copy_recursive_skiplist<SKIPLIST_COUNT> skiplist{};
 #ifndef XP_MACOSX
   skiplist.append(0, gInstallDirPath, NS_T("updated"));
   skiplist.append(1, gInstallDirPath, NS_T("updates/0"));
@@ -3555,7 +3555,7 @@ int NS_main(int argc, NS_tchar **argv)
   // before QuitProgressUI has been called, so wait for UpdateThreadFunc to
   // terminate. Avoid showing the progress UI when staging an update, or if this
   // is an elevated process on OSX.
-  Thread t;
+  Thread t{};
   if (t.Run(UpdateThreadFunc, nullptr) == 0) {
     if (!sStagedUpdate && !sReplaceRequest
 #ifdef XP_MACOSX
@@ -4019,7 +4019,7 @@ GetManifestContents(const NS_tchar *manifest)
     return nullptr;
   }
 
-  struct stat ms;
+  struct stat ms{};
   int rv = fstat(fileno((FILE *)mfile), &ms);
   if (rv) {
     LOG(("GetManifestContents: error stating manifest file: " LOG_S, manifest));

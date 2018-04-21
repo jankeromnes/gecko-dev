@@ -89,7 +89,7 @@ double VisibleDigits::computeAbsDoubleValue() const {
     struct {
         decNumber  decNum;
         char       digits[MAX_DBL_DIGITS+3];
-    } decNumberWithStorage;
+    } decNumberWithStorage{};
     decNumber *numberPtr = &decNumberWithStorage.decNum;
 
     int32_t mostSig = fInterval.getMostSignificantExclusive();

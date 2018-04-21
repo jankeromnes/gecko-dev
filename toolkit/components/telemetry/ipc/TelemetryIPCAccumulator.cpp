@@ -266,7 +266,7 @@ SendAccumulatedData(TActor* ipcActor)
   nsTArray<ScalarAction> scalarsToSend;
   nsTArray<KeyedScalarAction> keyedScalarsToSend;
   nsTArray<ChildEventData> eventsToSend;
-  DiscardedData discardedData;
+  DiscardedData discardedData{};
 
   {
     StaticMutexAutoLock locker(gTelemetryIPCAccumulatorMutex);

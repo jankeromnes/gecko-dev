@@ -166,7 +166,7 @@ private:
     SkArenaAlloc*      fAlloc;
     SkBlitter*         fBlitter;
     SkJumper_MemoryCtx fSrcPtr;
-    SkColor4f          fPaintColor;
+    SkColor4f          fPaintColor{};
 
     typedef SkSpriteBlitter INHERITED;
 };

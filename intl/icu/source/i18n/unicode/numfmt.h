@@ -1122,11 +1122,11 @@ private:
                                       UNumberFormatStyle style,
                                       UErrorCode& errorCode);
 
-    UBool       fGroupingUsed;
-    int32_t     fMaxIntegerDigits;
-    int32_t     fMinIntegerDigits;
-    int32_t     fMaxFractionDigits;
-    int32_t     fMinFractionDigits;
+    UBool       fGroupingUsed{};
+    int32_t     fMaxIntegerDigits{};
+    int32_t     fMinIntegerDigits{};
+    int32_t     fMaxFractionDigits{};
+    int32_t     fMinFractionDigits{};
 
   protected:
     /** \internal */
@@ -1135,11 +1135,11 @@ private:
     static const int32_t gDefaultMinIntegerDigits;
 
   private:
-    UBool      fParseIntegerOnly;
-    UBool      fLenient; // TRUE => lenient parse is enabled
+    UBool      fParseIntegerOnly{};
+    UBool      fLenient{}; // TRUE => lenient parse is enabled
 
     // ISO currency code
-    char16_t      fCurrency[4];
+    char16_t      fCurrency[4]{};
 
     UDisplayContext fCapitalizationContext;
 

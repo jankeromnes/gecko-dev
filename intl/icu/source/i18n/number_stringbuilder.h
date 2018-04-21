@@ -98,8 +98,8 @@ class U_I18N_API NumberStringBuilder : public UMemory {
 
   private:
     bool fUsingHeap = false;
-    ValueOrHeapArray<char16_t> fChars;
-    ValueOrHeapArray<Field> fFields;
+    ValueOrHeapArray<char16_t> fChars{};
+    ValueOrHeapArray<Field> fFields{};
     int32_t fZero = DEFAULT_CAPACITY / 2;
     int32_t fLength = 0;
 

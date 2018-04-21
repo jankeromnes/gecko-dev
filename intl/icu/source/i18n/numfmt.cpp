@@ -477,7 +477,7 @@ NumberFormat::format(StringPiece decimalNum,
 */
 class ArgExtractor {
   const Formattable* num;
-  UChar save[4];
+  UChar save[4]{};
   UBool fWasCurrency;
 
  public:

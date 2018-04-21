@@ -72,7 +72,7 @@ struct U_I18N_API CollationTailoring : public SharedObject {
     // version[1]: bits 7..3=u, bits 2..0=v
     // version[2]: bits 7..6=w, bits 5..0=r
     // version[3]= (s<<5)+(s>>3)+t+(q<<4)+(q>>4)
-    UVersionInfo version;
+    UVersionInfo version{};
 
     // owned objects
     CollationData *ownedData;
@@ -82,7 +82,7 @@ struct U_I18N_API CollationTailoring : public SharedObject {
     UTrie2 *trie;
     UnicodeSet *unsafeBackwardSet;
     mutable UHashtable *maxExpansions;
-    mutable UInitOnce maxExpansionsInitOnce;
+    mutable UInitOnce maxExpansionsInitOnce{};
 
 private:
     /**

@@ -26,10 +26,10 @@
 
 struct hnjFile_ {
     nsCOMPtr<nsIInputStream> mStream;
-    char                     mBuffer[BUFSIZE];
-    uint32_t                 mCurPos;
-    uint32_t                 mLimit;
-    bool                     mEOF;
+    char                     mBuffer[BUFSIZE]{};
+    uint32_t                 mCurPos{};
+    uint32_t                 mLimit{};
+    bool                     mEOF{};
 };
 
 // replacement for fopen()

@@ -68,7 +68,7 @@ public:
     void dumpJSON(SkJSONWriter*) const;
 
 private:
-    bool                                fInitialized;
+    bool                                fInitialized{};
     std::unique_ptr<SkTArray<SkString>> fStrings;
 };
 

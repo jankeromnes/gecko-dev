@@ -175,7 +175,7 @@ SkColorSpaceXform_A2B::SkColorSpaceXform_A2B(SkColorSpace_A2B* srcSpace,
                         gammaNeedsRef |= !this->buildTableFn(&table);
                         this->addTableFn(table, channel);
                     } else {
-                        SkColorSpaceTransferFn fn;
+                        SkColorSpaceTransferFn fn{};
                         SkAssertResult(gamma_to_parametric(&fn, gammas, channel));
                         this->addTransferFn(fn, channel);
                     }
@@ -254,7 +254,7 @@ SkColorSpaceXform_A2B::SkColorSpaceXform_A2B(SkColorSpace_A2B* srcSpace,
                     SkTableTransferFn table = { storage, kInvTableSize };
                     this->addTableFn(table, channel);
                 } else {
-                    SkColorSpaceTransferFn fn;
+                    SkColorSpaceTransferFn fn{};
                     SkAssertResult(gamma_to_parametric(&fn, gammas, channel));
                     this->addTransferFn(fn.invert(), channel);
                 }

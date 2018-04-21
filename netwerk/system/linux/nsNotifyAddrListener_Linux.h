@@ -83,7 +83,7 @@ private:
     bool mStatusKnown;
 
     // A pipe to signal shutdown with.
-    int mShutdownPipe[2];
+    int mShutdownPipe[2]{};
 
     // Network changed events are enabled
     bool mAllowChangedEvent;

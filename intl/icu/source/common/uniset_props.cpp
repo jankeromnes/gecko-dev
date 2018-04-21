@@ -473,7 +473,7 @@ void UnicodeSet::applyPattern(RuleCharacterIterator& chars,
     UnicodeString patLocal, buf;
     UBool usePat = FALSE;
     UnicodeSetPointer scratch;
-    RuleCharacterIterator::Pos backup;
+    RuleCharacterIterator::Pos backup{};
 
     // mode: 0=before [, 1=between [...], 2=after ]
     // lastItem: 0=none, 1=char, 2=set
@@ -1178,7 +1178,7 @@ UBool UnicodeSet::resemblesPropertyPattern(RuleCharacterIterator& chars,
     UBool result = FALSE, literal;
     UErrorCode ec = U_ZERO_ERROR;
     iterOpts &= ~RuleCharacterIterator::PARSE_ESCAPES;
-    RuleCharacterIterator::Pos pos;
+    RuleCharacterIterator::Pos pos{};
     chars.getPos(pos);
     UChar32 c = chars.next(iterOpts, literal, ec);
     if (c == 0x5B /*'['*/ || c == 0x5C /*'\\'*/) {

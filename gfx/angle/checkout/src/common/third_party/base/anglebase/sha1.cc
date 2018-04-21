@@ -55,17 +55,17 @@ class SecureHashAlgorithm
     void Pad();
     void Process();
 
-    uint32_t A, B, C, D, E;
+    uint32_t A{}, B{}, C{}, D{}, E{};
 
-    uint32_t H[5];
+    uint32_t H[5]{};
 
     union {
-        uint32_t W[80];
+        uint32_t W[80]{};
         uint8_t M[64];
     };
 
-    uint32_t cursor;
-    uint64_t l;
+    uint32_t cursor{};
+    uint64_t l{};
 };
 
 static inline uint32_t f(uint32_t t, uint32_t B, uint32_t C, uint32_t D)

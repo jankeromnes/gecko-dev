@@ -167,7 +167,7 @@ void MessagePumpForUI::RunWithDispatcher(Delegate* delegate,
       "this is unsupported by GLib!";
 #endif
 
-  RunState state;
+  RunState state{};
   state.delegate = delegate;
   state.dispatcher = dispatcher;
   state.should_quit = false;

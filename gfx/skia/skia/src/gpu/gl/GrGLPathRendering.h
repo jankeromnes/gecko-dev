@@ -123,11 +123,11 @@ private:
     };
     GrGLGpu* gpu();
 
-    GrGLuint fFirstPreallocatedPathID;
+    GrGLuint fFirstPreallocatedPathID{};
     GrGLsizei fPreallocatedPathCount;
     MatrixState fHWProjectionMatrixState;
     GrStencilSettings fHWPathStencilSettings;
-    Caps fCaps;
+    Caps fCaps{};
 };
 
 #endif

@@ -119,7 +119,7 @@ bool CodecManager::RegisterEncoder(const CodecInst& send_codec) {
 
 CodecInst CodecManager::ForgeCodecInst(
     const AudioEncoder* external_speech_encoder) {
-  CodecInst ci;
+  CodecInst ci{};
   ci.channels = external_speech_encoder->NumChannels();
   ci.plfreq = external_speech_encoder->SampleRateHz();
   ci.pacsize = rtc::CheckedDivExact(

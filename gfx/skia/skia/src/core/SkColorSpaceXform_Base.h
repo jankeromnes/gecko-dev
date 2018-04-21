@@ -58,12 +58,12 @@ public:
 
 private:
     // These tables pointers may point into fSrcStorage/fDstStorage or into pre-baked tables.
-    const float*               fSrcGammaTables[3];
-    const uint8_t*             fDstGammaTables[3];
+    const float*               fSrcGammaTables[3]{};
+    const uint8_t*             fDstGammaTables[3]{};
     SkAutoTMalloc<float>       fSrcStorage;
     sk_sp<SkData>              fDstStorage;
 
-    float                      fSrcToDst[12];
+    float                      fSrcToDst[12]{};
     bool                       fSrcToDstIsIdentity;
     bool                       fColorSpacesAreIdentical;
     SrcGamma                   fSrcGamma;

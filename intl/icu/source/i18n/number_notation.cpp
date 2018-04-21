@@ -20,7 +20,7 @@ ScientificNotation Notation::scientific() {
     settings.fRequireMinInt = false;
     settings.fMinExponentDigits = 1;
     settings.fExponentSignDisplay = UNUM_SIGN_AUTO;
-    NotationUnion union_;
+    NotationUnion union_{};
     union_.scientific = settings;
     return {NTN_SCIENTIFIC, union_};
 }
@@ -31,19 +31,19 @@ ScientificNotation Notation::engineering() {
     settings.fRequireMinInt = false;
     settings.fMinExponentDigits = 1;
     settings.fExponentSignDisplay = UNUM_SIGN_AUTO;
-    NotationUnion union_;
+    NotationUnion union_{};
     union_.scientific = settings;
     return {NTN_SCIENTIFIC, union_};
 }
 
 Notation Notation::compactShort() {
-    NotationUnion union_;
+    NotationUnion union_{};
     union_.compactStyle = CompactStyle::UNUM_SHORT;
     return {NTN_COMPACT, union_};
 }
 
 Notation Notation::compactLong() {
-    NotationUnion union_;
+    NotationUnion union_{};
     union_.compactStyle = CompactStyle::UNUM_LONG;
     return {NTN_COMPACT, union_};
 }

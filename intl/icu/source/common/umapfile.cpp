@@ -196,7 +196,7 @@
     uprv_mapFile(UDataMemory *pData, const char *path) {
         int fd;
         int length;
-        struct stat mystat;
+        struct stat mystat{};
         void *data;
 
         UDataMemory_init(pData); /* Clear the output struct.        */

@@ -503,7 +503,7 @@ RsdparsaSdpAttributeList::LoadAll(RustAttributeList *attributeList)
 void
 RsdparsaSdpAttributeList::LoadIceUfrag(RustAttributeList* attributeList)
 {
-  StringView ufragStr;
+  StringView ufragStr{};
   nsresult nr = sdp_get_iceufrag(attributeList, &ufragStr);
   if (NS_SUCCEEDED(nr)) {
     std::string iceufrag = convertStringView(ufragStr);
@@ -515,7 +515,7 @@ RsdparsaSdpAttributeList::LoadIceUfrag(RustAttributeList* attributeList)
 void
 RsdparsaSdpAttributeList::LoadIcePwd(RustAttributeList* attributeList)
 {
-  StringView pwdStr;
+  StringView pwdStr{};
   nsresult nr = sdp_get_icepwd(attributeList, &pwdStr);
   if (NS_SUCCEEDED(nr)) {
     std::string icePwd = convertStringView(pwdStr);
@@ -527,7 +527,7 @@ RsdparsaSdpAttributeList::LoadIcePwd(RustAttributeList* attributeList)
 void
 RsdparsaSdpAttributeList::LoadIdentity(RustAttributeList* attributeList)
 {
-  StringView identityStr;
+  StringView identityStr{};
   nsresult nr = sdp_get_identity(attributeList, &identityStr);
   if (NS_SUCCEEDED(nr)) {
     std::string identity = convertStringView(identityStr);
@@ -546,7 +546,7 @@ RsdparsaSdpAttributeList::LoadIceOptions(RustAttributeList* attributeList)
     auto optionsAttr = MakeUnique<SdpOptionsAttribute>(
                                   SdpAttribute::kIceOptionsAttribute);
     for (size_t i = 0; i < string_vec_len(options); i++) {
-      StringView optionStr;
+      StringView optionStr{};
       string_vec_get_view(options, i, &optionStr);
       optionsAttr->PushEntry(convertStringView(optionStr));
     }
@@ -739,7 +739,7 @@ RsdparsaSdpAttributeList::LoadFlags(RustAttributeList* attributeList)
 void
 RsdparsaSdpAttributeList::LoadMid(RustAttributeList* attributeList)
 {
-  StringView rustMid;
+  StringView rustMid{};
   if (NS_SUCCEEDED(sdp_get_mid(attributeList, &rustMid))) {
     std::string mid = convertStringView(rustMid);
     SetAttribute(new SdpStringAttribute(SdpAttribute::kMidAttribute, mid));
@@ -833,7 +833,7 @@ RsdparsaSdpAttributeList::LoadGroup(RustAttributeList* attributeList)
 void
 RsdparsaSdpAttributeList::LoadRtcp(RustAttributeList* attributeList)
 {
-  RustSdpAttributeRtcp rtcp;
+  RustSdpAttributeRtcp rtcp{};
   if (NS_SUCCEEDED(sdp_get_rtcp(attributeList, &rtcp))) {
     sdp::AddrType addrType = convertAddressType(rtcp.unicastAddr.addrType);
     if (sdp::kAddrTypeNone == addrType) {

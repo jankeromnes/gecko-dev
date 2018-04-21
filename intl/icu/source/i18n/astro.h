@@ -704,16 +704,16 @@ private:
   // of this object, so the clearCache method is provided.
   //
 
-  double    julianDay;
-  double    julianCentury;
-  double    sunLongitude;
-  double    meanAnomalySun;
-  double    moonLongitude;
-  double    moonEclipLong;
-  double    meanAnomalyMoon;
-  double    eclipObliquity;
-  double    siderealT0;
-  double    siderealTime;
+  double    julianDay{};
+  double    julianCentury{};
+  double    sunLongitude{};
+  double    meanAnomalySun{};
+  double    moonLongitude{};
+  double    moonEclipLong{};
+  double    meanAnomalyMoon{};
+  double    eclipObliquity{};
+  double    siderealT0{};
+  double    siderealTime{};
 
   void clearCache();
 

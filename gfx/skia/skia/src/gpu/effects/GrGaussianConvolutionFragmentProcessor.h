@@ -78,8 +78,8 @@ private:
     TextureSampler fTextureSampler;
     // TODO: Inline the kernel constants into the generated shader code. This may involve pulling
     // some of the logic from SkGpuBlurUtils into this class related to radius/sigma calculations.
-    float fKernel[kMaxKernelWidth];
-    int   fBounds[2];
+    float fKernel[kMaxKernelWidth]{};
+    int   fBounds[2]{};
     int fRadius;
     Direction fDirection;
     GrTextureDomain::Mode fMode;

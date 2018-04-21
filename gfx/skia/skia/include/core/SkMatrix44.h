@@ -454,8 +454,8 @@ public:
 
 private:
     /* This is indexed by [col][row]. */
-    SkMScalar           fMat[4][4];
-    mutable unsigned    fTypeMask;
+    SkMScalar           fMat[4][4]{};
+    mutable unsigned    fTypeMask{};
 
     enum {
         kUnknown_Mask = 0x80,

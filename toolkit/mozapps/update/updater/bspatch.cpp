@@ -69,7 +69,7 @@ MBS_ReadHeader(FILE* file, MBSPatchHeader *header)
   header->difflen   = ntohl(header->difflen);
   header->extralen  = ntohl(header->extralen);
 
-  struct stat hs;
+  struct stat hs{};
   s = fstat(fileno(file), &hs);
   if (s)
     return READ_ERROR;

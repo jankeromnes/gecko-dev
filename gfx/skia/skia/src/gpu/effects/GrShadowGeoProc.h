@@ -37,7 +37,7 @@ public:
 private:
     GrRRectShadowGeoProc();
 
-    GrColor          fColor;
+    GrColor          fColor{};
     const Attribute* fInPosition;
     const Attribute* fInColor;
     const Attribute* fInShadowParams;

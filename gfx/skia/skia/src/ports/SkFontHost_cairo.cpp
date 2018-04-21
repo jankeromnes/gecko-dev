@@ -118,11 +118,11 @@ private:
     cairo_scaled_font_t* fScaledFont;
     FT_Int32 fLoadGlyphFlags;
     FT_LcdFilter fLcdFilter;
-    SkScalar fScaleX;
-    SkScalar fScaleY;
-    SkMatrix fShapeMatrix;
-    FT_Matrix fShapeMatrixFT;
-    bool fHaveShape;
+    SkScalar fScaleX{};
+    SkScalar fScaleY{};
+    SkMatrix fShapeMatrix{};
+    FT_Matrix fShapeMatrixFT{};
+    bool fHaveShape{};
 };
 
 class CairoLockedFTFace {
@@ -325,7 +325,7 @@ SkScalerContext_CairoFT::SkScalerContext_CairoFT(sk_sp<SkTypeface> typeface, con
     : SkScalerContext_FreeType_Base(std::move(typeface), effects, desc)
     , fLcdFilter(FT_LCD_FILTER_NONE)
 {
-    SkMatrix matrix;
+    SkMatrix matrix{};
     fRec.getSingleMatrix(&matrix);
 
     cairo_matrix_t fontMatrix, ctMatrix;
@@ -650,7 +650,7 @@ void SkScalerContext_CairoFT::generateMetrics(SkGlyph* glyph)
         glyph->fAdvanceY = -SkFDot6ToFloat(face->glyph->advance.y);
     }
 
-    SkIRect bounds;
+    SkIRect bounds{};
     switch (face->glyph->format) {
     case FT_GLYPH_FORMAT_OUTLINE:
         if (!face->glyph->outline.n_contours) {
@@ -706,7 +706,7 @@ void SkScalerContext_CairoFT::generateMetrics(SkGlyph* glyph)
                 -SkIntToScalar(face->glyph->bitmap_top),
                 SkIntToScalar(face->glyph->bitmap.width),
                 SkIntToScalar(face->glyph->bitmap.rows));
-            SkRect destRect;
+            SkRect destRect{};
             fShapeMatrix.mapRect(&destRect, srcRect);
             SkIRect glyphRect = destRect.roundOut();
             bounds = SkIRect::MakeXYWH(SkScalarRoundToInt(destRect.fLeft),
@@ -756,7 +756,7 @@ void SkScalerContext_CairoFT::generateImage(const SkGlyph& glyph)
         gSetLcdFilter(face->glyph->library, fLcdFilter);
     }
 
-    SkMatrix matrix;
+    SkMatrix matrix{};
     if (face->glyph->format == FT_GLYPH_FORMAT_BITMAP &&
         fHaveShape) {
         matrix = fShapeMatrix;

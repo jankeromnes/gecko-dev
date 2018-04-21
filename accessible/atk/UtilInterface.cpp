@@ -214,7 +214,7 @@ static gboolean
 notify_hf(gpointer key, gpointer value, gpointer data)
 {
     MaiKeyEventInfo *info = (MaiKeyEventInfo *)data;
-    AtkKeySnoopFuncPointer atkKeySnoop;
+    AtkKeySnoopFuncPointer atkKeySnoop{};
     atkKeySnoop.data = value;
     return (atkKeySnoop.func_ptr)(info->key_event, info->func_data) ? TRUE : FALSE;
 }
@@ -269,7 +269,7 @@ mai_util_add_key_event_listener(AtkKeySnoopFunc listener, gpointer data)
     sKey_snooper_id = gtk_key_snooper_install(mai_key_snooper, data);
   }
 
-  AtkKeySnoopFuncPointer atkKeySnoop;
+  AtkKeySnoopFuncPointer atkKeySnoop{};
   atkKeySnoop.func_ptr = listener;
   key++;
   g_hash_table_insert(sKey_listener_list, GUINT_TO_POINTER(key),

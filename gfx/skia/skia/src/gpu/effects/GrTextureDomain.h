@@ -141,7 +141,7 @@ public:
 
 protected:
     Mode    fMode;
-    SkRect  fDomain;
+    SkRect  fDomain{};
     int     fIndex;
 };
 
@@ -220,7 +220,7 @@ public:
 private:
     TextureSampler fTextureSampler;
     GrTextureDomain fTextureDomain;
-    SkIPoint fDeviceSpaceOffset;
+    SkIPoint fDeviceSpaceOffset{};
 
     GrDeviceSpaceTextureDecalFragmentProcessor(sk_sp<GrTextureProxy>,
                                                const SkIRect&, const SkIPoint&);

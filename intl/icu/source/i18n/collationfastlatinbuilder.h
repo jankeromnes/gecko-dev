@@ -71,7 +71,7 @@ private:
     // temporary "buffer"
     int64_t ce0, ce1;
 
-    int64_t charCEs[CollationFastLatin::NUM_FAST_CHARS][2];
+    int64_t charCEs[CollationFastLatin::NUM_FAST_CHARS][2]{};
 
     UVector64 contractionCEs;
     UVector64 uniqueCEs;
@@ -80,7 +80,7 @@ private:
     uint16_t *miniCEs;
 
     // These are constant for a given root collator.
-    uint32_t lastSpecialPrimaries[NUM_SPECIAL_GROUPS];
+    uint32_t lastSpecialPrimaries[NUM_SPECIAL_GROUPS]{};
     uint32_t firstDigitPrimary;
     uint32_t firstLatinPrimary;
     uint32_t lastLatinPrimary;

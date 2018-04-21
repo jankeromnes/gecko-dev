@@ -77,7 +77,7 @@ class BufferedStunSocketTest : public MtransportTest {
  protected:
   RefPtr<DummySocket> dummy_;
   nr_socket *test_socket_;
-  nr_transport_addr remote_addr_;
+  nr_transport_addr remote_addr_{};
 };
 
 

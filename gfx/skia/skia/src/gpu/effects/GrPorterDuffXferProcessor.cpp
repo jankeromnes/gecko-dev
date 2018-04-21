@@ -154,7 +154,7 @@ private:
             GrBlendCoeff      fDstCoeff             : 6;
             Properties        fProps                : 32 - (4 + 4 + 6 + 6 + 6);
         };
-        uint32_t fData;
+        uint32_t fData{};
     };
 
     GR_STATIC_ASSERT(kLast_OutputType      < (1 << 3));
@@ -759,7 +759,7 @@ const GrXPFactory* GrPorterDuffXPFactory::Get(SkBlendMode blendMode) {
 sk_sp<const GrXferProcessor> GrPorterDuffXPFactory::makeXferProcessor(
         const GrProcessorAnalysisColor& color, GrProcessorAnalysisCoverage coverage,
         bool hasMixedSamples, const GrCaps& caps, GrPixelConfigIsClamped dstIsClamped) const {
-    BlendFormula blendFormula;
+    BlendFormula blendFormula{};
     bool isLCD = coverage == GrProcessorAnalysisCoverage::kLCD;
     if (isLCD) {
         // See comment in MakeSrcOverXferProcessor about color.isOpaque here
@@ -794,7 +794,7 @@ static inline GrXPFactory::AnalysisProperties analysis_properties(
     AnalysisProperties props = AnalysisProperties::kNone;
     bool hasCoverage = GrProcessorAnalysisCoverage::kNone != coverage;
     bool isLCD = GrProcessorAnalysisCoverage::kLCD == coverage;
-    BlendFormula formula;
+    BlendFormula formula{};
     if (isLCD) {
         formula = gLCDBlendTable[(int)mode];
     } else {
@@ -926,7 +926,7 @@ sk_sp<const GrXferProcessor> GrPorterDuffXPFactory::MakeSrcOverXferProcessor(
         return PDLCDXferProcessor::Make(SkBlendMode::kSrcOver, color);
     }
 
-    BlendFormula blendFormula;
+    BlendFormula blendFormula{};
     blendFormula = get_lcd_blend_formula(SkBlendMode::kSrcOver);
     // See comment above regarding why the opaque check is commented out here.
     if (/*!color.isOpaque() ||*/

@@ -1194,7 +1194,7 @@ ImmutableString TextureFunctionHLSL::useTextureFunction(const ImmutableString &n
                                                         bool lod0,
                                                         sh::GLenum shaderType)
 {
-    TextureFunction textureFunction;
+    TextureFunction textureFunction{};
     textureFunction.sampler = samplerType;
     textureFunction.coords  = coords;
     textureFunction.method  = TextureFunction::IMPLICIT;

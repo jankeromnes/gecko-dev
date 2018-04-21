@@ -81,7 +81,7 @@ private:
 
     GrClipEdgeType fEdgeType;
     int            fEdgeCount;
-    SkScalar       fEdges[3 * kMaxEdges];
+    SkScalar       fEdges[3 * kMaxEdges]{};
 
     GR_DECLARE_FRAGMENT_PROCESSOR_TEST
 

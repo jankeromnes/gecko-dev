@@ -25,7 +25,7 @@ UnscaledFontFreeType::GetFontFileData(FontFileDataOutput aDataCallback, void* aB
     if (fd < 0) {
       return false;
     }
-    struct stat buf;
+    struct stat buf{};
     if (fstat(fd, &buf) < 0 ||
         // Don't erroneously read directories as files.
         !S_ISREG(buf.st_mode) ||

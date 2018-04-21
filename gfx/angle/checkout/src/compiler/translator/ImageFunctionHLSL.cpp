@@ -245,7 +245,7 @@ TString ImageFunctionHLSL::useImageFunction(const ImmutableString &name,
                                             bool readonly)
 {
     ASSERT(IsImage(type));
-    ImageFunction imageFunction;
+    ImageFunction imageFunction{};
     imageFunction.image               = type;
     imageFunction.imageInternalFormat = imageInternalFormat;
     imageFunction.readonly            = readonly;

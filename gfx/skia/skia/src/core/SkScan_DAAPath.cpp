@@ -179,7 +179,7 @@ void gen_alpha_deltas(const SkPath& path, const SkIRect& clipBounds, Deltas& res
                 continue;
             }
 
-            SkAnalyticEdge l, r;
+            SkAnalyticEdge l{}, r{};
             l.setLine(lb->fP0, lb->fP1);
             r.setLine(rb->fP0, rb->fP1);
 
@@ -218,7 +218,7 @@ void gen_alpha_deltas(const SkPath& path, const SkIRect& clipBounds, Deltas& res
     // Future todo: parallize and SIMD the following code.
     // 4. iterate through edges and generate deltas
     for(int index = 0; index < count; ++index) {
-        SkAnalyticCubicEdge storage;
+        SkAnalyticCubicEdge storage{};
         SkASSERT(sizeof(SkAnalyticQuadraticEdge) >= sizeof(SkAnalyticEdge));
         SkASSERT(sizeof(SkAnalyticCubicEdge) >= sizeof(SkAnalyticQuadraticEdge));
 

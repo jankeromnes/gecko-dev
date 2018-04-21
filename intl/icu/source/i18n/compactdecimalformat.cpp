@@ -87,7 +87,7 @@ class CDFLocaleStyleData : public UMemory {
   // What to divide by for each log10 value when formatting. These values
   // will be powers of 10. For English, would be:
   // 1, 1, 1, 1000, 1000, 1000, 1000000, 1000000, 1000000, 1000000000 ...
-  double divisors[MAX_DIGITS];
+  double divisors[MAX_DIGITS]{};
   // Maps plural variants to CDFUnit[MAX_DIGITS] arrays.
   // To format a number x,
   // first compute log10(x). Compute displayNum = (x / divisors[log10(x)]).

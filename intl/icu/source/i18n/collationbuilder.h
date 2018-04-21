@@ -305,7 +305,7 @@ private:
     UnicodeSet optimizeSet;
     const char *errorReason;
 
-    int64_t ces[Collation::MAX_EXPANSION_LENGTH];
+    int64_t ces[Collation::MAX_EXPANSION_LENGTH]{};
     int32_t cesLength;
 
     /**

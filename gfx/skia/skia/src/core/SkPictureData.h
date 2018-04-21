@@ -151,21 +151,21 @@ private:
     const SkPath    fEmptyPath;
     const SkBitmap  fEmptyBitmap;
 
-    const SkPicture** fPictureRefs;
-    int fPictureCount;
-    SkDrawable** fDrawableRefs;
-    int fDrawableCount;
-    const SkTextBlob** fTextBlobRefs;
-    int fTextBlobCount;
-    const SkVertices** fVerticesRefs;
-    int fVerticesCount;
-    const SkImage** fImageRefs;
-    int fImageCount;
-    const SkImage** fBitmapImageRefs;
-    int fBitmapImageCount;
+    const SkPicture** fPictureRefs{};
+    int fPictureCount{};
+    SkDrawable** fDrawableRefs{};
+    int fDrawableCount{};
+    const SkTextBlob** fTextBlobRefs{};
+    int fTextBlobCount{};
+    const SkVertices** fVerticesRefs{};
+    int fVerticesCount{};
+    const SkImage** fImageRefs{};
+    int fImageCount{};
+    const SkImage** fBitmapImageRefs{};
+    int fBitmapImageCount{};
 
     SkTypefacePlayback fTFPlayback;
-    SkFactoryPlayback* fFactoryPlayback;
+    SkFactoryPlayback* fFactoryPlayback{};
 
     const SkPictInfo fInfo;
 

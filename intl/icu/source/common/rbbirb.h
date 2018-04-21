@@ -89,7 +89,7 @@ public:
 #else
     // A do-nothing inline function for non-debug builds.  Member funcs can't be empty
     //  or the call sites won't compile.
-    int32_t fFakeField;
+    int32_t fFakeField{};
     #define rbbiSymtablePrint() fFakeField=0; 
 #endif
 

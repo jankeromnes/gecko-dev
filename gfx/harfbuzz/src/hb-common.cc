@@ -44,7 +44,7 @@ hb_options_union_t _hb_options;
 void
 _hb_options_init (void)
 {
-  hb_options_union_t u;
+  hb_options_union_t u{};
   u.i = 0;
   u.opts.initialized = 1;
 

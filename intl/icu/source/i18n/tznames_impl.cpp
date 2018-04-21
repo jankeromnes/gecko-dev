@@ -445,7 +445,7 @@ static const int32_t POOL_CHUNK_SIZE = 2000;
 struct ZNStringPoolChunk: public UMemory {
     ZNStringPoolChunk    *fNext;                       // Ptr to next pool chunk
     int32_t               fLimit;                       // Index to start of unused area at end of fStrings
-    UChar                 fStrings[POOL_CHUNK_SIZE];    //  Strings array
+    UChar                 fStrings[POOL_CHUNK_SIZE]{};    //  Strings array
     ZNStringPoolChunk();
 };
 
@@ -597,7 +597,7 @@ private:
         }
     }
 
-    const UChar* fNames[UTZNM_INDEX_COUNT];
+    const UChar* fNames[UTZNM_INDEX_COUNT]{};
     UBool fDidAddIntoTrie;
 
     // Whether we own the location string, if computed rather than loaded from a bundle.
@@ -727,7 +727,7 @@ public:
 };
 
 struct ZNames::ZNamesLoader : public ResourceSink {
-    const UChar *names[UTZNM_INDEX_COUNT];
+    const UChar *names[UTZNM_INDEX_COUNT]{};
 
     ZNamesLoader() {
         clear();

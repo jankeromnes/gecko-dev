@@ -144,7 +144,7 @@ class U_I18N_API Measure: public UObject {
      * The unit of this object, e.g., "millimeter" or "JPY".  This is
      * owned by this object.
      */
-    MeasureUnit* unit;
+    MeasureUnit* unit{};
 };
 
 inline const Formattable& Measure::getNumber() const {

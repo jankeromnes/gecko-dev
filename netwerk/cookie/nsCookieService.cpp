@@ -2643,7 +2643,7 @@ nsCookieService::Remove(const nsACString& aHost, const OriginAttributes& aAttrs,
   rv = GetBaseDomainFromHost(mTLDService, host, baseDomain);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  nsListIter matchIter;
+  nsListIter matchIter{};
   RefPtr<nsCookie> cookie;
   if (FindCookie(nsCookieKey(baseDomain, aAttrs),
                  host,
@@ -3591,7 +3591,7 @@ nsCookieService::AddInternal(const nsCookieKey &aKey,
 
   int64_t currentTime = aCurrentTimeInUsec / PR_USEC_PER_SEC;
 
-  nsListIter exactIter;
+  nsListIter exactIter{};
   bool foundCookie = false;
   foundCookie = FindCookie(aKey, aCookie->Host(),
                            aCookie->Name(), aCookie->Path(), exactIter);
@@ -3721,7 +3721,7 @@ nsCookieService::AddInternal(const nsCookieKey &aKey,
     // check if we have to delete an old cookie.
     nsCookieEntry *entry = mDBState->hostTable.GetEntry(aKey);
     if (entry && entry->GetCookies().Length() >= mMaxCookiesPerHost) {
-      nsListIter iter;
+      nsListIter iter{};
       // Prioritize evicting insecure cookies.
       // (draft-ietf-httpbis-cookie-alone section 3.3)
       mozilla::Maybe<bool> optionalSecurity = mLeaveSecureAlone ? Some(false) : Nothing();
@@ -4673,7 +4673,7 @@ nsCookieService::CookieExistsNative(nsICookie2* aCookie,
   rv = GetBaseDomainFromHost(mTLDService, host, baseDomain);
   NS_ENSURE_SUCCESS(rv, rv);
 
-  nsListIter iter;
+  nsListIter iter{};
   *aFoundCookie = FindCookie(nsCookieKey(baseDomain, *aOriginAttributes),
                              host, name, path, iter);
   return NS_OK;
@@ -4700,11 +4700,11 @@ nsCookieService::FindStaleCookie(nsCookieEntry *aEntry,
   const nsCookieEntry::ArrayType &cookies = aEntry->GetCookies();
 
   int64_t oldestNonMatchingCookieTime = 0;
-  nsListIter oldestNonMatchingCookie;
+  nsListIter oldestNonMatchingCookie{};
   oldestNonMatchingCookie.entry = nullptr;
 
   int64_t oldestCookieTime = 0;
-  nsListIter oldestCookie;
+  nsListIter oldestCookie{};
   oldestCookie.entry = nullptr;
 
   int64_t actualOldestCookieTime = cookies.Length() ? cookies[0]->LastAccessed() : 0;

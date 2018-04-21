@@ -40,7 +40,7 @@ void FlagStd140StructsTraverser::mapBlockStructMembers(TIntermSymbol *blockDecla
     {
         if (field->type()->getBasicType() == EbtStruct)
         {
-            MappedStruct mappedStruct;
+            MappedStruct mappedStruct{};
             mappedStruct.blockDeclarator = blockDeclarator;
             mappedStruct.field           = field;
             mMappedStructs.push_back(mappedStruct);

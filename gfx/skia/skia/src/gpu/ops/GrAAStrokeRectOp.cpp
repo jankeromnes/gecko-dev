@@ -45,7 +45,7 @@ inline static bool allowed_stroke(const SkStrokeRec& stroke, bool* isMiter) {
 static void compute_rects(SkRect* devOutside, SkRect* devOutsideAssist, SkRect* devInside,
                           bool* isDegenerate, const SkMatrix& viewMatrix, const SkRect& rect,
                           SkScalar strokeWidth, bool miterStroke) {
-    SkRect devRect;
+    SkRect devRect{};
     viewMatrix.mapRect(&devRect, rect);
 
     SkVector devStrokeSize;
@@ -581,7 +581,7 @@ std::unique_ptr<GrDrawOp> MakeAAFillNestedRects(GrPaint&& paint,
     SkASSERT(viewMatrix.rectStaysRect());
     SkASSERT(!rects[0].isEmpty() && !rects[1].isEmpty());
 
-    SkRect devOutside, devInside;
+    SkRect devOutside{}, devInside{};
     viewMatrix.mapRect(&devOutside, rects[0]);
     viewMatrix.mapRect(&devInside, rects[1]);
     if (devInside.isEmpty()) {

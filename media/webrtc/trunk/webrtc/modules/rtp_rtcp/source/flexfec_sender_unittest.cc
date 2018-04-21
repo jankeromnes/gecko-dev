@@ -47,7 +47,7 @@ constexpr uint32_t kDeterministicTimestamp = 2305613085;
 std::unique_ptr<RtpPacketToSend> GenerateSingleFlexfecPacket(
     FlexfecSender* sender) {
   // Parameters selected to generate a single FEC packet.
-  FecProtectionParams params;
+  FecProtectionParams params{};
   params.fec_rate = 15;
   params.max_fec_frames = 1;
   params.fec_mask_type = kFecMaskRandom;
@@ -112,7 +112,7 @@ TEST(FlexfecSenderTest, ProtectOneFrameWithOneFecPacket) {
 
 TEST(FlexfecSenderTest, ProtectTwoFramesWithOneFecPacket) {
   // FEC parameters selected to generate a single FEC packet per frame.
-  FecProtectionParams params;
+  FecProtectionParams params{};
   params.fec_rate = 15;
   params.max_fec_frames = 2;
   params.fec_mask_type = kFecMaskRandom;
@@ -152,7 +152,7 @@ TEST(FlexfecSenderTest, ProtectTwoFramesWithOneFecPacket) {
 
 TEST(FlexfecSenderTest, ProtectTwoFramesWithTwoFecPackets) {
   // FEC parameters selected to generate a single FEC packet per frame.
-  FecProtectionParams params;
+  FecProtectionParams params{};
   params.fec_rate = 30;
   params.max_fec_frames = 1;
   params.fec_mask_type = kFecMaskRandom;

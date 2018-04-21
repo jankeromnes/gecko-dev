@@ -93,7 +93,7 @@ class U_I18N_API SimpleModifier : public Modifier, public UMemory {
     Field fField;
     bool fStrong;
     int32_t fPrefixLength;
-    int32_t fSuffixOffset;
+    int32_t fSuffixOffset{};
     int32_t fSuffixLength;
 };
 

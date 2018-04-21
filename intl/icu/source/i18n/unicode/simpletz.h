@@ -856,14 +856,14 @@ private:
     void decodeStartRule(UErrorCode& status);
     void decodeEndRule(UErrorCode& status);
 
-    int8_t startMonth, startDay, startDayOfWeek;   // the month, day, DOW, and time DST starts
-    int32_t startTime;
+    int8_t startMonth{}, startDay{}, startDayOfWeek{};   // the month, day, DOW, and time DST starts
+    int32_t startTime{};
     TimeMode startTimeMode, endTimeMode; // Mode for startTime, endTime; see TimeMode
-    int8_t endMonth, endDay, endDayOfWeek; // the month, day, DOW, and time DST ends
-    int32_t endTime;
-    int32_t startYear;  // the year these DST rules took effect
-    int32_t rawOffset;  // the TimeZone's raw GMT offset
-    UBool useDaylight; // flag indicating whether this TimeZone uses DST
+    int8_t endMonth{}, endDay{}, endDayOfWeek{}; // the month, day, DOW, and time DST ends
+    int32_t endTime{};
+    int32_t startYear{};  // the year these DST rules took effect
+    int32_t rawOffset{};  // the TimeZone's raw GMT offset
+    UBool useDaylight{}; // flag indicating whether this TimeZone uses DST
     static const int8_t STATICMONTHLENGTH[12]; // lengths of the months
     EMode startMode, endMode;   // flags indicating what kind of rules the DST rules are
 
@@ -871,18 +871,18 @@ private:
      * A positive value indicating the amount of time saved during DST in ms.
      * Typically one hour; sometimes 30 minutes.
      */
-    int32_t dstSavings;
+    int32_t dstSavings{};
 
     /* Private for BasicTimeZone implementation */
     void checkTransitionRules(UErrorCode& status) const;
     void initTransitionRules(UErrorCode& status);
     void clearTransitionRules(void);
     void deleteTransitionRules(void);
-    UBool   transitionRulesInitialized;
-    InitialTimeZoneRule*    initialRule;
-    TimeZoneTransition*     firstTransition;
-    AnnualTimeZoneRule*     stdRule;
-    AnnualTimeZoneRule*     dstRule;
+    UBool   transitionRulesInitialized{};
+    InitialTimeZoneRule*    initialRule{};
+    TimeZoneTransition*     firstTransition{};
+    AnnualTimeZoneRule*     stdRule{};
+    AnnualTimeZoneRule*     dstRule{};
 };
 
 inline void SimpleTimeZone::setStartRule(int32_t month, int32_t dayOfWeekInMonth,
