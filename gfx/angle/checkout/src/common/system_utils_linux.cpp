@@ -40,7 +40,7 @@ std::string GetExecutablePathImpl()
 std::string GetExecutableDirectoryImpl()
 {
     std::string executablePath = GetExecutablePath();
-    size_t lastPathSepLoc      = executablePath.find_last_of("/");
+    size_t lastPathSepLoc      = executablePath.find_last_of('/');
     return (lastPathSepLoc != std::string::npos) ? executablePath.substr(0, lastPathSepLoc) : "";
 }
 

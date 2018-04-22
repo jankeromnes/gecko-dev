@@ -778,7 +778,7 @@ const sh::ShaderVariable *FindShaderVarField(const sh::ShaderVariable &var,
     {
         return nullptr;
     }
-    size_t pos = fullName.find_first_of(".");
+    size_t pos = fullName.find_first_of('.');
     if (pos == std::string::npos)
     {
         return nullptr;
