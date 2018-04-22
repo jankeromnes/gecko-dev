@@ -22,7 +22,7 @@
 #include "taiwncal.h"
 #include "unicode/gregocal.h"
 #include "umutex.h"
-#include <float.h>
+#include <cfloat>
 
 U_NAMESPACE_BEGIN
 

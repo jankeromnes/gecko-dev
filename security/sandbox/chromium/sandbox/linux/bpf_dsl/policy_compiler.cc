@@ -4,9 +4,9 @@
 
 #include "sandbox/linux/bpf_dsl/policy_compiler.h"
 
-#include <errno.h>
-#include <stddef.h>
-#include <stdint.h>
+#include <cerrno>
+#include <cstddef>
+#include <cstdint>
 #include <sys/syscall.h>
 
 #include <limits>

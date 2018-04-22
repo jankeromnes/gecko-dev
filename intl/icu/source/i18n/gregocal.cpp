@@ -40,7 +40,7 @@
 */
 
 #include "unicode/utypes.h"
-#include <float.h>
+#include <cfloat>
 
 #if !UCONFIG_NO_FORMATTING
 

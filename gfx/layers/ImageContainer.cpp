@@ -6,7 +6,7 @@
 
 
 #include "ImageContainer.h"
-#include <string.h>                     // for memcpy, memset
+#include <cstring>                     // for memcpy, memset
 #include "GLImages.h"                   // for SurfaceTextureImage
 #include "gfx2DGlue.h"
 #include "gfxPlatform.h"                // for gfxPlatform

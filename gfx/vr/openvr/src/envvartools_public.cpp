@@ -1,6 +1,6 @@
 //========= Copyright Valve Corporation ============//
 #include "envvartools_public.h"
-#include <stdlib.h>
+#include <cstdlib>
 
 #if defined(_WIN32)
 #include <windows.h>

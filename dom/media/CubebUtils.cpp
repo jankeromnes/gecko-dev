@@ -24,7 +24,7 @@
 #include "nsThreadUtils.h"
 #include "prdtoa.h"
 #include <algorithm>
-#include <stdint.h>
+#include <cstdint>
 #ifdef MOZ_WIDGET_ANDROID
 #include "GeneratedJNIWrappers.h"
 #endif

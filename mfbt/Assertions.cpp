@@ -6,7 +6,7 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/Atomics.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 MOZ_BEGIN_EXTERN_C
 

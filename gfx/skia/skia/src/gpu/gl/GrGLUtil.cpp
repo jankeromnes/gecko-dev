@@ -9,7 +9,7 @@
 #include "GrGLUtil.h"
 #include "GrTypesPriv.h"
 #include "SkMatrix.h"
-#include <stdio.h>
+#include <cstdio>
 
 void GrGLClearErr(const GrGLInterface* gl) {
     while (GR_GL_NO_ERROR != gl->fFunctions.fGetError()) {}

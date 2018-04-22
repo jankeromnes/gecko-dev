@@ -34,8 +34,8 @@
 #include "unicode/utypes.h"
 #if !UCONFIG_NO_FORMATTING
 
-#include <limits.h>
-#include <math.h>
+#include <climits>
+#include <cmath>
 
 // ICU PATCH: Customize header file paths for ICU.
 // The files fixed-dtoa.h and strtod.h are not needed.

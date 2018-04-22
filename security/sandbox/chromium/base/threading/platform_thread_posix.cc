@@ -4,11 +4,11 @@
 
 #include "base/threading/platform_thread.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <pthread.h>
 #include <sched.h>
-#include <stddef.h>
-#include <stdint.h>
+#include <cstddef>
+#include <cstdint>
 #include <sys/resource.h>
 #include <sys/time.h>
 #include <sys/types.h>

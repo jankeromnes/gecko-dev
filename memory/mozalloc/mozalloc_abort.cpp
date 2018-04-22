@@ -14,7 +14,7 @@
 # include "APKOpen.h"
 # include "dlfcn.h"
 #endif
-#include <stdio.h>
+#include <cstdio>
 
 #include "mozilla/Assertions.h"
 #include "mozilla/Sprintf.h"

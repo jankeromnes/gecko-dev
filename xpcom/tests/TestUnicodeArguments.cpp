@@ -47,8 +47,8 @@ int wmain(int argc, _TCHAR* argv[]) {
   return 0;
 }
 #else
-#include <string.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdio>
 
 static const char* expected_utf8[args_length] = {
   // Latin-1

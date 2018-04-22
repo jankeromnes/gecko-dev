@@ -6,7 +6,7 @@
 
 #include <algorithm>
 #include <limits>
-#include <stdint.h>
+#include <cstdint>
 
 #include "MP4Demuxer.h"
 

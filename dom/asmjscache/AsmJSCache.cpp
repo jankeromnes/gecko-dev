@@ -6,7 +6,7 @@
 
 #include "AsmJSCache.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #include "js/RootingAPI.h"
 #include "jsfriendapi.h"

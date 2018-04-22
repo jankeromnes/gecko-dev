@@ -16,8 +16,8 @@
 //#include <sys/cdefs.h>
 //__FBSDID("$FreeBSD$");
 
-#include <float.h>
-#include <stdint.h>
+#include <cfloat>
+#include <cstdint>
 
 #include "math_private.h"
 

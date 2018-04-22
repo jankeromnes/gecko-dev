@@ -17,11 +17,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <errno.h>
+#include <cerrno>
 #include <utime.h>
 #include <dirent.h>
-#include <ctype.h>
-#include <locale.h>
+#include <cctype>
+#include <clocale>
 
 #if defined(HAVE_SYS_QUOTA_H) && defined(HAVE_LINUX_QUOTA_H)
 #define USE_LINUX_QUOTACTL

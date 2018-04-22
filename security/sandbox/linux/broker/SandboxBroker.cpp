@@ -10,7 +10,7 @@
 #include "SandboxBrokerUtils.h"
 
 #include <dirent.h>
-#include <errno.h>
+#include <cerrno>
 #include <fcntl.h>
 #include <sys/socket.h>
 #include <sys/stat.h>

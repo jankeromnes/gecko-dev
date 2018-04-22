@@ -34,7 +34,7 @@
 using namespace moz_decimal_utils;
 
 #include <algorithm>
-#include <float.h>
+#include <cfloat>
 
 namespace blink {
 

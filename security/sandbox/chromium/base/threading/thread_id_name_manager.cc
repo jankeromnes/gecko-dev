@@ -4,8 +4,8 @@
 
 #include "base/threading/thread_id_name_manager.h"
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 #include "base/logging.h"
 #include "base/memory/singleton.h"

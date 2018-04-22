@@ -8,10 +8,10 @@
 #include "SandboxLogging.h"
 
 #include <algorithm>
-#include <errno.h>
+#include <cerrno>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <time.h> // for clockid_t
+#include <ctime> // for clockid_t
 
 #include "mozilla/Assertions.h"
 #include "mozilla/ClearOnShutdown.h"

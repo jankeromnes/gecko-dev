@@ -33,15 +33,15 @@
  *************************************************************************************
  */
 
-#include <stdint.h>
-#include <time.h>
+#include <cstdint>
+#include <ctime>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <string>
 #include <memory>
-#include <assert.h>
-#include <limits.h>
+#include <cassert>
+#include <climits>
 
 #include "gmp-platform.h"
 #include "gmp-video-host.h"

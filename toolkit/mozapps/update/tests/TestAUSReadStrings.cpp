@@ -23,9 +23,9 @@
   #define PATH_SEPARATOR_CHAR '/'
 #endif
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdarg>
+#include <cstring>
 
 #include "updater/resource.h"
 #include "updater/progressui.h"

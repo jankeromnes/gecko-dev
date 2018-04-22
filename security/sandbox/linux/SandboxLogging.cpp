@@ -10,8 +10,8 @@
 #include <android/log.h>
 #endif
 #include <algorithm>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <sys/uio.h>
 #include <unistd.h>
 

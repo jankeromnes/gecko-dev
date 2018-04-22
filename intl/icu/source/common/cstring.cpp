@@ -23,8 +23,8 @@
 
 
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 #include "unicode/utypes.h"
 #include "cmemory.h"
 #include "cstring.h"

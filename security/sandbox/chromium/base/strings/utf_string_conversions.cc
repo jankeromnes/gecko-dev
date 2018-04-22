@@ -4,7 +4,7 @@
 
 #include "base/strings/utf_string_conversions.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 #include "base/strings/string_piece.h"
 #include "base/strings/string_util.h"

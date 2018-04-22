@@ -6,7 +6,7 @@
 
 #include <pthread.h>
 #include <sched.h>
-#include <setjmp.h>
+#include <csetjmp>
 #include <sys/resource.h>
 #include <sys/syscall.h>
 #include <sys/time.h>

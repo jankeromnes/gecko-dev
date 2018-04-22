@@ -13,9 +13,9 @@
  */
 #include "webrtc/modules/audio_processing/aec/echo_cancellation.h"
 
-#include <math.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
 
 extern "C" {
 #include "webrtc/common_audio/ring_buffer.h"

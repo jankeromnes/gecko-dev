@@ -4,8 +4,8 @@
 
 #include "base/strings/safe_sprintf.h"
 
-#include <errno.h>
-#include <string.h>
+#include <cerrno>
+#include <cstring>
 
 #include <limits>
 

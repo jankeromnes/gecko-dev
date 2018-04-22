@@ -8,7 +8,7 @@
 
 #include "SSEHelpers.h"
 
-#include <string.h>
+#include <cstring>
 
 namespace mozilla {
 namespace gfx {

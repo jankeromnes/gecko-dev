@@ -10,7 +10,7 @@
 
 #include "webrtc/modules/audio_processing/echo_control_mobile_impl.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "webrtc/base/constructormagic.h"
 #include "webrtc/modules/audio_processing/aecm/echo_control_mobile.h"

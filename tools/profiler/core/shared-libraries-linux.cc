@@ -8,10 +8,10 @@
 
 #define PATH_MAX_TOSTRING(x) #x
 #define PATH_MAX_STRING(x) PATH_MAX_TOSTRING(x)
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <limits.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
+#include <climits>
 #include <unistd.h>
 #include <fstream>
 #include "platform.h"

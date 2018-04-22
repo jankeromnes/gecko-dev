@@ -148,8 +148,8 @@
 #include "mozilla/StartupTimeline.h"
 #include "mozilla/LateWriteChecks.h"
 
-#include <stdlib.h>
-#include <locale.h>
+#include <cstdlib>
+#include <clocale>
 
 #ifdef XP_UNIX
 #include <sys/stat.h>

@@ -19,7 +19,7 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include <math.h>
+#include <cmath>
 #include "unicode/fmtable.h"
 #include "unicode/ustring.h"
 #include "unicode/measure.h"

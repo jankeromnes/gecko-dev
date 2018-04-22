@@ -11,7 +11,7 @@
 #include <X11/extensions/render.h>      // for PictFormat
 #include "cairo-xlib.h"
 #include "X11UndefineNone.h"
-#include <stdint.h>                     // for uint32_t
+#include <cstdint>                     // for uint32_t
 #include "GLDefs.h"                     // for GLenum
 #include "gfxPlatform.h"                // for gfxPlatform
 #include "gfxXlibSurface.h"             // for gfxXlibSurface

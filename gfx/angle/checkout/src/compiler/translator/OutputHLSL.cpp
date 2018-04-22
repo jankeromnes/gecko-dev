@@ -8,7 +8,7 @@
 
 #include <algorithm>
 #include <cfloat>
-#include <stdio.h>
+#include <cstdio>
 
 #include "common/angleutils.h"
 #include "common/debug.h"

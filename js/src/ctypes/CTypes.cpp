@@ -14,7 +14,7 @@
 #include "mozilla/WrappingOperations.h"
 
 #if defined(XP_UNIX)
-# include <errno.h>
+# include <cerrno>
 #endif
 #if defined(XP_WIN)
 # include <float.h>
@@ -23,8 +23,8 @@
 # include <ieeefp.h>
 #endif
 #include <limits>
-#include <math.h>
-#include <stdint.h>
+#include <cmath>
+#include <cstdint>
 #ifdef HAVE_SSIZE_T
 # include <sys/types.h>
 #endif

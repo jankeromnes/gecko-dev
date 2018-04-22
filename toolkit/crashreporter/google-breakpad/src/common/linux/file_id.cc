@@ -35,8 +35,8 @@
 #include "common/linux/file_id.h"
 
 #include <arpa/inet.h>
-#include <assert.h>
-#include <string.h>
+#include <cassert>
+#include <cstring>
 
 #include <algorithm>
 #include <string>

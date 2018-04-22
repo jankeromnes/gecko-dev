@@ -6,9 +6,9 @@
 
 #include "mozilla/Assertions.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <pthread.h>
-#include <stdio.h>
+#include <cstdio>
 
 #include "mozilla/PlatformMutex.h"
 #include "MutexPlatformData_posix.h"

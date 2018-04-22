@@ -4,7 +4,7 @@
 
 #include "sandbox/linux/bpf_dsl/syscall_set.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 #include "base/logging.h"
 #include "base/macros.h"

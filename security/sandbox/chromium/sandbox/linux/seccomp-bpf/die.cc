@@ -4,9 +4,9 @@
 
 #include "sandbox/linux/seccomp-bpf/die.h"
 
-#include <errno.h>
-#include <signal.h>
-#include <stdio.h>
+#include <cerrno>
+#include <csignal>
+#include <cstdio>
 #include <sys/prctl.h>
 #include <sys/syscall.h>
 #include <unistd.h>

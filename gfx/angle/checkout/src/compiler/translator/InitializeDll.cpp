@@ -9,7 +9,7 @@
 
 #include "common/platform.h"
 
-#include <assert.h>
+#include <cassert>
 
 namespace sh
 {

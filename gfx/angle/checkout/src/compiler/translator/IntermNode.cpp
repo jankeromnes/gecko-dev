@@ -8,10 +8,10 @@
 // Build the intermediate representation.
 //
 
-#include <float.h>
-#include <limits.h>
-#include <math.h>
-#include <stdlib.h>
+#include <cfloat>
+#include <climits>
+#include <cmath>
+#include <cstdlib>
 #include <algorithm>
 #include <vector>
 

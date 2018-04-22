@@ -7,7 +7,7 @@
 #include "mozISandboxReporter.h"
 #include "SandboxReporter.h"
 
-#include <time.h>
+#include <ctime>
 
 #include "mozilla/Assertions.h"
 #include "mozilla/ModuleUtils.h"

@@ -4,8 +4,8 @@
 
 #include "base/synchronization/condition_variable.h"
 
-#include <errno.h>
-#include <stdint.h>
+#include <cerrno>
+#include <cstdint>
 #include <sys/time.h>
 
 #include "base/synchronization/lock.h"

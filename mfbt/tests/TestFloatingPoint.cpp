@@ -7,8 +7,8 @@
 #include "mozilla/Compiler.h"
 #include "mozilla/FloatingPoint.h"
 
-#include <float.h>
-#include <math.h>
+#include <cfloat>
+#include <cmath>
 
 using mozilla::ExponentComponent;
 using mozilla::FloatingPoint;

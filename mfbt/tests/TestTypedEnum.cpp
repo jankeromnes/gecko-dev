@@ -8,7 +8,7 @@
 #include "mozilla/Attributes.h"
 #include "mozilla/TypedEnumBits.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 // A rough feature check for is_literal_type. Not very carefully checked.
 // Feel free to amend as needed.

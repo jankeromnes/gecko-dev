@@ -45,10 +45,10 @@
 #include "ucln_in.h"
 #include "umutex.h"
 #include "double-conversion.h"
-#include <stdlib.h>
-#include <limits.h>
-#include <string.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <climits>
+#include <cstring>
+#include <cstdio>
 #include <limits>
 
 using icu::double_conversion::DoubleToStringConverter;

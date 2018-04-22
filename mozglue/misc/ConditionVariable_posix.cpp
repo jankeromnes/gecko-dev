@@ -7,10 +7,10 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/CheckedInt.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <pthread.h>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 #include <unistd.h>
 
 #include "mozilla/PlatformConditionVariable.h"

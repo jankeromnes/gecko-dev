@@ -15,7 +15,7 @@
 #include "mozilla/Maybe.h"
 #include "mozilla/Sprintf.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "jslibmath.h"
 #include "jsnum.h"

@@ -13,7 +13,7 @@
 #if defined(ANDROID) && !defined(__LP64__)
 #include <time64.h>
 #else
-#include <time.h>
+#include <ctime>
 #endif
 #if defined(ANDROID) || defined(OS_POSIX)
 #include <unistd.h>

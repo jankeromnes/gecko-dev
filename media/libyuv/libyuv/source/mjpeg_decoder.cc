@@ -11,12 +11,12 @@
 #include "libyuv/mjpeg_decoder.h"
 
 #ifdef HAVE_JPEG
-#include <assert.h>
+#include <cassert>
 
 #if !defined(__pnacl__) && !defined(__CLR_VER) && \
     !defined(COVERAGE_ENABLED) && !defined(TARGET_IPHONE_SIMULATOR)
 // Must be included before jpeglib.
-#include <setjmp.h>
+#include <csetjmp>
 #define HAVE_SETJMP
 
 #if defined(_MSC_VER)

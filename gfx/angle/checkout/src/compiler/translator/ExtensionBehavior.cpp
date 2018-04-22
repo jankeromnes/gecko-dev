@@ -10,7 +10,7 @@
 
 #include "common/debug.h"
 
-#include <string.h>
+#include <cstring>
 
 #define LIST_EXTENSIONS(OP)             \
     OP(ARB_texture_rectangle)           \

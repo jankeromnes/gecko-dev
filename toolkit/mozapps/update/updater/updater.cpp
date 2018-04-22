@@ -36,16 +36,16 @@
 #include "errors.h"
 #include "bzlib.h"
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdarg.h>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <cstdarg>
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <limits.h>
-#include <errno.h>
+#include <climits>
+#include <cerrno>
 #include <algorithm>
 
 #include "updatecommon.h"

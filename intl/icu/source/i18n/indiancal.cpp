@@ -10,11 +10,11 @@
  */
 
 #include "indiancal.h"
-#include <stdlib.h>
+#include <cstdlib>
 #if !UCONFIG_NO_FORMATTING
 
 #include "mutex.h"
-#include <float.h>
+#include <cfloat>
 #include "gregoimp.h" // Math
 #include "astro.h" // CalendarAstronomer
 #include "uhash.h"

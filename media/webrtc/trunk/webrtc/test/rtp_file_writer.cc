@@ -10,7 +10,7 @@
 
 #include "webrtc/test/rtp_file_writer.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #include <string>
 

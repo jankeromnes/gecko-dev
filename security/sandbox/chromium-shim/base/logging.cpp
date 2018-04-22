@@ -19,7 +19,7 @@
 #endif
 
 #if defined(OS_POSIX)
-#include <errno.h>
+#include <cerrno>
 #endif
 
 #if defined(OS_WIN)

@@ -46,7 +46,7 @@
 #include "uassert.h"
 #include "charstr.h"
 
-#include <stdio.h> /* for sprintf */
+#include <cstdio> /* for sprintf */
 
 U_NAMESPACE_USE
 

@@ -9,7 +9,7 @@
 #include <prio.h>
 #include <prproces.h>
 #if defined(XP_UNIX) && !defined(XP_DARWIN)
-#include <time.h>
+#include <ctime>
 #else
 #include <chrono>
 #endif

@@ -4,7 +4,7 @@
 
 #include "base/at_exit.h"
 
-#include <stddef.h>
+#include <cstddef>
 #include <ostream>
 #include <utility>
 

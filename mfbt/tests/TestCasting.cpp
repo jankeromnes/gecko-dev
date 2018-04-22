@@ -6,7 +6,7 @@
 
 #include "mozilla/Casting.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 using mozilla::BitwiseCast;
 using mozilla::detail::IsInBounds;

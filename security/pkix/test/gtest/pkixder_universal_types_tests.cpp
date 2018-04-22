@@ -23,7 +23,7 @@
  */
 
 #include <limits>
-#include <stdint.h>
+#include <cstdint>
 #include <vector>
 
 #include "pkixder.h"

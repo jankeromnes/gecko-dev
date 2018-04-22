@@ -4,7 +4,7 @@
 
 #include "base/synchronization/lock_impl.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "base/debug/activity_tracker.h"
 #include "base/synchronization/lock.h"

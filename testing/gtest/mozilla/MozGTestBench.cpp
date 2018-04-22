@@ -5,7 +5,7 @@
 
 #include "MozGTestBench.h"
 #include "mozilla/TimeStamp.h"
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <vector>
 

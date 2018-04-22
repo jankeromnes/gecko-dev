@@ -17,7 +17,7 @@
 #include <AppKit/AppKit.h>
 #elif defined(LINUX)
 #include <dlfcn.h>
-#include <stdio.h>
+#include <cstdio>
 #endif
 
 #include <algorithm>

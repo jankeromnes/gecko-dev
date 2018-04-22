@@ -8,7 +8,7 @@
 
 #include "simpletokenbucket.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 #include "prinrval.h"
 

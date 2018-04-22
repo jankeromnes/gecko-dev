@@ -11,7 +11,7 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include <math.h>
+#include <cmath>
 #include "unicode/numfmt.h"
 #include "unicode/plurrule.h"
 #include "unicode/ustring.h"

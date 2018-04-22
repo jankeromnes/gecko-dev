@@ -22,8 +22,8 @@
 /* context structures.                                                */
 /* ------------------------------------------------------------------ */
 
-#include <string.h>           /* for strcmp  */
-#include <stdio.h>            /* for printf if DECCHECK  */
+#include <cstring>           /* for strcmp  */
+#include <cstdio>            /* for printf if DECCHECK  */
 #include "decContext.h"       /* context and base types  */
 #include "decNumberLocal.h"   /* decNumber local types, etc.  */
 

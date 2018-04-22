@@ -32,15 +32,15 @@
 // Mozilla-specific code, to make it easy to compile and test on different
 // machines.
 
-#include <assert.h>
+#include <cassert>
 #include <getopt.h>
-#include <math.h>
-#include <signal.h>
-#include <stdarg.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cmath>
+#include <csignal>
+#include <cstdarg>
+#include <cstdint>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <sys/time.h>
 #include <unistd.h>
 

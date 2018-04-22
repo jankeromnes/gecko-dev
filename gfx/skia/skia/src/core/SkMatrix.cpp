@@ -13,7 +13,7 @@
 #include "SkPoint3.h"
 #include "SkRSXform.h"
 #include "SkString.h"
-#include <stddef.h>
+#include <cstddef>
 
 static void normalize_perspective(SkScalar mat[9]) {
     // If it was interesting to never store the last element, we could divide all 8 other

@@ -38,9 +38,9 @@ static char sccsid[] = "@(#)realpath.c	8.1 (Berkeley) 2/16/94";
 #include <sys/param.h>
 #include <sys/stat.h>
 
-#include <errno.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cerrno>
+#include <cstdlib>
+#include <cstring>
 #include <unistd.h>
 
 #include "base/string_util.h"

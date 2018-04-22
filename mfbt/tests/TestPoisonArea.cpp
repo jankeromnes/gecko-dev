@@ -85,19 +85,19 @@
 #define _GNU_SOURCE 1
 #define _DARWIN_C_SOURCE 1
 
-#include <stddef.h>
+#include <cstddef>
 
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cerrno>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #ifdef _WIN32
 #include <windows.h>
 #else
 #include <sys/types.h>
 #include <fcntl.h>
-#include <signal.h>
+#include <csignal>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/wait.h>

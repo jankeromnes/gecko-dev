@@ -29,7 +29,7 @@
  *	acosh(NaN) is NaN without signal.
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

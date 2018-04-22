@@ -10,7 +10,7 @@
 
 #include "webrtc/modules/audio_processing/transient/wpd_node.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "webrtc/test/gtest.h"
 

@@ -15,8 +15,8 @@
 #include "nsTArray.h"
 
 #include <dlfcn.h>
-#include <errno.h>
-#include <string.h>
+#include <cerrno>
+#include <cstring>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 

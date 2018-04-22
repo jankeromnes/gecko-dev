@@ -8,7 +8,7 @@
 
 #include "nsXULAppAPI.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #if defined(MOZ_WIDGET_GTK)
 #include <glib.h>
 #endif

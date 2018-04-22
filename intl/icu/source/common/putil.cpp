@@ -54,7 +54,7 @@
 /*
  * Cygwin with GCC requires inclusion of time.h after the above disabling strict asci mode statement.
  */
-#include <time.h>
+#include <ctime>
 
 #if !U_PLATFORM_USES_ONLY_WIN32_API
 #include <sys/time.h>
@@ -73,12 +73,12 @@
 #include "charstr.h"
 
 /* Include standard headers. */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <locale.h>
-#include <float.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+#include <clocale>
+#include <cfloat>
 
 #ifndef U_COMMON_IMPLEMENTATION
 #error U_COMMON_IMPLEMENTATION not set - must be set for all ICU source files in common/ - see http://userguide.icu-project.org/howtouseicu
@@ -124,7 +124,7 @@ using namespace Microsoft::WRL::Wrappers;
 #elif U_PLATFORM == U_PF_OS390
 #   include "unicode/ucnv.h"   /* Needed for UCNV_SWAP_LFNL_OPTION_STRING */
 #elif U_PLATFORM_IS_DARWIN_BASED || U_PLATFORM_IS_LINUX_BASED || U_PLATFORM == U_PF_BSD || U_PLATFORM == U_PF_SOLARIS
-#   include <limits.h>
+#   include <climits>
 #   include <unistd.h>
 #   if U_PLATFORM == U_PF_SOLARIS
 #       ifndef _XPG4_2

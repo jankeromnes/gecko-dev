@@ -7,7 +7,7 @@
 // This module gets enough CPU information to optimize the
 // atomicops module on x86.
 
-#include <string.h>
+#include <cstring>
 
 #include "base/atomicops.h"
 #include "base/basictypes.h"

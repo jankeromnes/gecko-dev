@@ -37,8 +37,8 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 
-#include <errno.h>
-#include <stdio.h>
+#include <cerrno>
+#include <cstdio>
 
 gboolean save_to_stdout(const gchar *buf, gsize count,
                         GError **error, gpointer data)

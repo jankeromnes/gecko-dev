@@ -30,7 +30,7 @@
 
 #if !UCONFIG_NO_CONVERSION
 
-#include <string.h>
+#include <cstring>
 
 #include "unicode/uchar.h"
 #include "unicode/uniset.h"

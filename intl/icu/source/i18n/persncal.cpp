@@ -23,7 +23,7 @@
 
 #include "umutex.h"
 #include "gregoimp.h" // Math
-#include <float.h>
+#include <cfloat>
 
 static const int16_t kPersianNumDays[]
 = {0,31,62,93,124,155,186,216,246,276,306,336}; // 0-based, for day-in-year

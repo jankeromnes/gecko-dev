@@ -12,7 +12,7 @@
 #include "mozilla/UniquePtr.h"
 #include "mozilla/Unused.h"
 
-#include <stddef.h>
+#include <cstddef>
 #include <utility>
 
 using mozilla::Get;

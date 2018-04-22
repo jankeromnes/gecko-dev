@@ -37,7 +37,7 @@
  *	only tanh(0)=0 is exact for finite argument.
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

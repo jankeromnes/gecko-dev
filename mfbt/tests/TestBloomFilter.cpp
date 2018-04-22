@@ -7,8 +7,8 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/BloomFilter.h"
 
-#include <stddef.h>
-#include <stdio.h>
+#include <cstddef>
+#include <cstdio>
 
 using mozilla::BloomFilter;
 

@@ -8,7 +8,7 @@
 
 #include "common/debug.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 #include <array>
 #include <cstdio>

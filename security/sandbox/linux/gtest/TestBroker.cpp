@@ -10,15 +10,15 @@
 #include "broker/SandboxBrokerUtils.h"
 #include "SandboxBrokerClient.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <fcntl.h>
 #include <pthread.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <sched.h>
 #include <semaphore.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <time.h>
+#include <ctime>
 #include <unistd.h>
 
 #include "mozilla/Atomics.h"

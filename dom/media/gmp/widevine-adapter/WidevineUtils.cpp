@@ -6,9 +6,9 @@
 #include "WidevineUtils.h"
 #include "GMPLog.h"
 #include "gmp-api/gmp-errors.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <inttypes.h>
+#include <cstdarg>
+#include <cstdio>
+#include <cinttypes>
 
 namespace mozilla {
 

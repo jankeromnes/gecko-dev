@@ -13,12 +13,12 @@
  */
 
 #include "ScopedNSSTypes.h"
-#include <assert.h>
-#include <stdio.h>
+#include <cassert>
+#include <cstdio>
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <stdarg.h>
+#include <cstdarg>
 #include "prinit.h"
 #include "prerror.h"
 #include "prenv.h"

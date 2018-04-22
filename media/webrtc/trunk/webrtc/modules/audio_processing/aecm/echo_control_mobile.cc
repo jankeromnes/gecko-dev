@@ -13,7 +13,7 @@
 #ifdef AEC_DEBUG
 #include <stdio.h>
 #endif
-#include <stdlib.h>
+#include <cstdlib>
 
 extern "C" {
 #include "webrtc/common_audio/ring_buffer.h"

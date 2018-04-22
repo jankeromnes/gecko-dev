@@ -68,7 +68,7 @@ using namespace soundtouch;
 
 #include "TDStretch.h"
 #include <xmmintrin.h>
-#include <math.h>
+#include <cmath>
 
 // Calculates cross correlation of two buffers
 double TDStretchSSE::calcCrossCorr(const float *pV1, const float *pV2, double &anorm) const

@@ -1,6 +1,6 @@
 //========= Copyright Valve Corporation ============//
 #include "sharedlibtools_public.h"
-#include <string.h>
+#include <cstring>
 
 #if defined(_WIN32)
 #include <windows.h>

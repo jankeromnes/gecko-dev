@@ -11,7 +11,7 @@
 
 #include <atk/atk.h>
 #include <gtk/gtk.h>
-#include <string.h>
+#include <cstring>
 
 using namespace mozilla;
 using namespace mozilla::a11y;

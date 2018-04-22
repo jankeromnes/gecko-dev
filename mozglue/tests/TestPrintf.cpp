@@ -7,7 +7,7 @@
 #include "mozilla/Printf.h"
 
 #include <cfloat>
-#include <stdarg.h>
+#include <cstdarg>
 
 // A simple implementation of PrintfTarget, just for testing
 // PrintfTarget::print.

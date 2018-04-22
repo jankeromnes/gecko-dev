@@ -7,7 +7,7 @@
 #include "common/angleutils.h"
 #include "common/debug.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #include <limits>
 #include <vector>

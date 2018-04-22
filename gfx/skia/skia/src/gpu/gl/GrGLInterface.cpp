@@ -10,7 +10,7 @@
 #include "gl/GrGLExtensions.h"
 #include "gl/GrGLUtil.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 GrGLInterface::GrGLInterface() {
     fStandard = kNone_GrGLStandard;

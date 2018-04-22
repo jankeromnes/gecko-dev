@@ -84,11 +84,11 @@ nrappkit copyright:
 */
 
 #include <csi_platform.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <sys/types.h>
-#include <assert.h>
-#include <errno.h>
+#include <cassert>
+#include <cerrno>
 #include <string>
 
 #include "nspr.h"

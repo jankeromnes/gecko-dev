@@ -22,7 +22,7 @@
  * in not-quite-routine extra precision.
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 #include "k_log.h"

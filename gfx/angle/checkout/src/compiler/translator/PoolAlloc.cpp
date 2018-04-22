@@ -6,9 +6,9 @@
 
 #include "compiler/translator/PoolAlloc.h"
 
-#include <stdint.h>
-#include <stdio.h>
-#include <assert.h>
+#include <cstdint>
+#include <cstdio>
+#include <cassert>
 
 #include "common/angleutils.h"
 #include "common/debug.h"

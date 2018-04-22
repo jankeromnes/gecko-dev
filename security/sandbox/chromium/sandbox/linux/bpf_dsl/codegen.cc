@@ -4,8 +4,8 @@
 
 #include "sandbox/linux/bpf_dsl/codegen.h"
 
-#include <stddef.h>
-#include <stdint.h>
+#include <cstddef>
+#include <cstdint>
 
 #include <limits>
 #include <utility>

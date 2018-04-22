@@ -9,7 +9,7 @@
 #include "nsStreamUtils.h"
 #include "gfxColor.h"
 
-#include <setjmp.h>
+#include <csetjmp>
 #include "jerror.h"
 
 using namespace mozilla;

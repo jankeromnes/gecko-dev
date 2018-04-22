@@ -21,21 +21,21 @@
 #include "mozilla/UniquePtr.h"
 #include "prenv.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <fcntl.h>
 #include <linux/ioctl.h>
 #include <linux/ipc.h>
 #include <linux/net.h>
 #include <linux/prctl.h>
 #include <linux/sched.h>
-#include <string.h>
+#include <cstring>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/socket.h>
 #include <sys/syscall.h>
 #include <sys/un.h>
 #include <sys/utsname.h>
-#include <time.h>
+#include <ctime>
 #include <unistd.h>
 #include <vector>
 #include <algorithm>

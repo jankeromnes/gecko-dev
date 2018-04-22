@@ -20,7 +20,7 @@
 *   charset families (ASCII<->EBCDIC).
 */
 
-#include <stdarg.h>
+#include <cstdarg>
 #include "unicode/utypes.h"
 #include "unicode/udata.h" /* UDataInfo */
 #include "ucmndata.h" /* DataHeader */

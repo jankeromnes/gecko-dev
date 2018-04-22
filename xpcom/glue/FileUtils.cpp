@@ -6,8 +6,8 @@
 
 #include "mozilla/FileUtils.h"
 
-#include <errno.h>
-#include <stdio.h>
+#include <cerrno>
+#include <cstdio>
 
 #include "nscore.h"
 #include "private/pprio.h"

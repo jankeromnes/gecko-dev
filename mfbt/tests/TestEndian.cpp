@@ -7,7 +7,7 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/EndianUtils.h"
 
-#include <stddef.h>
+#include <cstddef>
 
 using mozilla::BigEndian;
 using mozilla::LittleEndian;

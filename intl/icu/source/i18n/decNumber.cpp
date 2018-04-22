@@ -176,10 +176,10 @@
 /*      **  -- raise to the power                                     */
 /* ------------------------------------------------------------------ */
 
-#include <stdlib.h>                /* for malloc, free, etc.  */
+#include <cstdlib>                /* for malloc, free, etc.  */
 /*  #include <stdio.h>   */        /* for printf [if needed]  */
-#include <string.h>                /* for strcpy  */
-#include <ctype.h>                 /* for lower  */
+#include <cstring>                /* for strcpy  */
+#include <cctype>                 /* for lower  */
 #include "cmemory.h"               /* for uprv_malloc, etc., in ICU */
 #include "decNumber.h"             /* base number library  */
 #include "decNumberLocal.h"        /* decNumber local types, etc.  */

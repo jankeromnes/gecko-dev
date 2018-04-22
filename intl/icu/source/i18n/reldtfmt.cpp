@@ -11,7 +11,7 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "unicode/datefmt.h"
 #include "unicode/reldatefmt.h"

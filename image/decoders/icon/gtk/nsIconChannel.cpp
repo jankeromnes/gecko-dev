@@ -5,7 +5,7 @@
 
 #include "nsIconChannel.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h>
 
 #include "mozilla/DebugOnly.h"

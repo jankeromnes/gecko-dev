@@ -9,8 +9,8 @@
 * File plurrule.cpp
 */
 
-#include <math.h>
-#include <stdio.h>
+#include <cmath>
+#include <cstdio>
 
 #include "unicode/utypes.h"
 #include "unicode/localpointer.h"

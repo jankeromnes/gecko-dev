@@ -15,7 +15,7 @@
 #include "mozilla/RangedPtr.h"
 #include "mozilla/Unused.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "jstypes.h"
 

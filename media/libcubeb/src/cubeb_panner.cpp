@@ -6,8 +6,8 @@
  */
 
 #define _USE_MATH_DEFINES
-#include <math.h>
-#include <stdint.h>
+#include <cmath>
+#include <cstdint>
 
 #include "cubeb_panner.h"
 

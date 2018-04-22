@@ -22,7 +22,7 @@
  *	Inexact flag raised if x not equal to trunc(x).
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

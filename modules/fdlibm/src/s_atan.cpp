@@ -33,7 +33,7 @@
  * to produce the hexadecimal values shown.
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

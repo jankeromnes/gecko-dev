@@ -10,8 +10,8 @@
 
 #include "webrtc/modules/audio_processing/aecm/aecm_core.h"
 
-#include <stddef.h>
-#include <stdlib.h>
+#include <cstddef>
+#include <cstdlib>
 
 extern "C" {
 #include "webrtc/common_audio/ring_buffer.h"

@@ -12,7 +12,7 @@
 #ifdef _WIN32
 #include <windows.h>
 #else
-#include <time.h>
+#include <ctime>
 #endif
 
 cubeb_log_level g_cubeb_log_level;

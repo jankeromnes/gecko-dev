@@ -7,7 +7,7 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/WrappingOperations.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 using mozilla::WrappingAdd;
 using mozilla::WrappingMultiply;

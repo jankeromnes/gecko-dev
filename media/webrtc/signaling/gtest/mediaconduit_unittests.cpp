@@ -6,7 +6,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 

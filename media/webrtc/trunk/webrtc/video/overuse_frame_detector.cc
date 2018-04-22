@@ -10,8 +10,8 @@
 
 #include "webrtc/video/overuse_frame_detector.h"
 
-#include <assert.h>
-#include <math.h>
+#include <cassert>
+#include <cmath>
 
 #include <algorithm>
 #include <list>

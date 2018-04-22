@@ -8,8 +8,8 @@
 
 #include <fcntl.h>
 #include <sched.h>
-#include <setjmp.h>
-#include <signal.h>
+#include <csetjmp>
+#include <csignal>
 #include <sys/socket.h>
 #include <sys/syscall.h>
 #include <unistd.h>

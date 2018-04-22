@@ -12,7 +12,7 @@
 #define RES_RETRY_ON_FAILURE
 #endif
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <ctime>
 #include "nsHostResolver.h"
 #include "nsError.h"

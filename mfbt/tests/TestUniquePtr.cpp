@@ -11,7 +11,7 @@
 #include "mozilla/UniquePtr.h"
 #include "mozilla/Vector.h"
 
-#include <stddef.h>
+#include <cstddef>
 
 using mozilla::DefaultDelete;
 using mozilla::IsSame;

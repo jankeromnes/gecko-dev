@@ -4,8 +4,8 @@
 
 #include "base/strings/stringprintf.h"
 
-#include <errno.h>
-#include <stddef.h>
+#include <cerrno>
+#include <cstddef>
 
 #include <vector>
 

@@ -7,7 +7,7 @@
 #include "base/message_pump_glib.h"
 
 #include <fcntl.h>
-#include <math.h>
+#include <cmath>
 
 #include <gtk/gtk.h>
 #include <glib.h>

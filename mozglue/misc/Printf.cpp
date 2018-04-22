@@ -16,10 +16,10 @@
 #include "mozilla/UniquePtrExtensions.h"
 #include "mozilla/Vector.h"
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #if defined(XP_WIN)
 #include <windows.h>

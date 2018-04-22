@@ -26,7 +26,7 @@
 #include "ureslocs.h"
 #include "uresimp.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 /**
  * Concatenate a number of null-terminated strings to buffer, leaving a

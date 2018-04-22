@@ -4,9 +4,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-#include <limits.h>
-#include <string.h>
-#include <stdio.h>
+#include <climits>
+#include <cstring>
+#include <cstdio>
 #include "readstrings.h"
 #include "errors.h"
 

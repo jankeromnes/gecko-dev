@@ -7,7 +7,7 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/FastBernoulliTrial.h"
 
-#include <math.h>
+#include <cmath>
 
 // Note that because we always provide FastBernoulliTrial with a fixed
 // pseudorandom seed in these tests, the results here are completely

@@ -13,8 +13,8 @@
 // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnsecure/html/http-sso-1.asp
 //
 
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 
 #include "nsAuth.h"
 #include "nsHttpNegotiateAuth.h"

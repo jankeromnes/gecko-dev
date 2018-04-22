@@ -8,7 +8,7 @@
 #include "Key.h"
 
 #include <algorithm>
-#include <stdint.h> // for UINT32_MAX, uintptr_t
+#include <cstdint> // for UINT32_MAX, uintptr_t
 #include "IndexedDatabaseManager.h"
 #include "js/Date.h"
 #include "js/Value.h"

@@ -9,7 +9,7 @@
  * to generate (one or more) ocsp responses.
  */
 
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <vector>
 

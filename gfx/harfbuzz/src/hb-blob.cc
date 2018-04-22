@@ -41,8 +41,8 @@
 #include <sys/mman.h>
 #endif /* HAVE_SYS_MMAN_H */
 
-#include <stdio.h>
-#include <errno.h>
+#include <cstdio>
+#include <cerrno>
 
 
 struct hb_blob_t {

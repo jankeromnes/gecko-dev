@@ -4,9 +4,9 @@
 
 #include "base/time/time.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <sys/time.h>
-#include <time.h>
+#include <ctime>
 #if defined(OS_ANDROID) && !defined(__LP64__)
 #include <time64.h>
 #endif

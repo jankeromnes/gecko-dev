@@ -7,8 +7,8 @@
 #include "CTPolicyEnforcer.h"
 
 #include <algorithm>
-#include <stdint.h>
-#include <stdio.h>
+#include <cstdint>
+#include <cstdio>
 
 #include "CTVerifyResult.h"
 #include "gtest/gtest.h"

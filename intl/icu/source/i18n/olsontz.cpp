@@ -24,7 +24,7 @@
 #include "cmemory.h"
 #include "uassert.h"
 #include "uvector.h"
-#include <float.h> // DBL_MAX
+#include <cfloat> // DBL_MAX
 #include "uresimp.h" // struct UResourceBundle
 #include "zonemeta.h"
 #include "umutex.h"

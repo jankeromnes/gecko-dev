@@ -31,7 +31,7 @@
 #include "hb-mutex-private.hh"
 #include "hb-object-private.hh"
 
-#include <locale.h>
+#include <clocale>
 #ifdef HAVE_XLOCALE_H
 #include <xlocale.h>
 #endif

@@ -21,14 +21,14 @@
 #ifdef NIGHTLY_BUILD
 #include "dlfcn.h"
 #endif
-#include <errno.h>
+#include <cerrno>
 #include <fcntl.h>
 #include <linux/futex.h>
 #include <pthread.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <csignal>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <sys/prctl.h>
 #include <sys/ptrace.h>
 #include <sys/syscall.h>

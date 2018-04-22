@@ -7,7 +7,7 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/Atomics.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 using mozilla::Atomic;
 using mozilla::MemoryOrdering;

@@ -10,7 +10,7 @@
 
 #include "webrtc/modules/audio_processing/rms_level.h"
 
-#include <math.h>
+#include <cmath>
 #include <algorithm>
 #include <numeric>
 

@@ -10,8 +10,8 @@
 #include "string_utils.h"
 
 #include <algorithm>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 #include <fstream>
 #include <sstream>
 

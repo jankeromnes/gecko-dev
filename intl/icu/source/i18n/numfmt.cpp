@@ -52,7 +52,7 @@
 #include "umutex.h"
 #include "mutex.h"
 #include "digitlst.h"
-#include <float.h>
+#include <cfloat>
 #include "sharednumberformat.h"
 #include "unifiedcache.h"
 

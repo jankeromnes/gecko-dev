@@ -3,14 +3,14 @@
 #include "strtools_public.h"
 #include "pathtools_public.h"
 
-#include <errno.h>
-#include <string.h>
+#include <cerrno>
+#include <cstring>
 
 #ifdef _WIN32
 #include "windows.h"
 #else
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 #include <sys/stat.h>
 #include <sys/types.h>
 #endif

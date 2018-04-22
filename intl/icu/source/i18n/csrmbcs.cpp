@@ -15,7 +15,7 @@
 #include "csmatch.h"
 #include "csrmbcs.h"
 
-#include <math.h>
+#include <cmath>
 
 U_NAMESPACE_BEGIN
 

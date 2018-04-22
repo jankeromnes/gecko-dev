@@ -37,8 +37,8 @@
 #include "messageimpl.h"
 #include "putilimp.h"
 #include "uassert.h"
-#include <stdio.h>
-#include <float.h>
+#include <cstdio>
+#include <cfloat>
 
 // *****************************************************************************
 // class ChoiceFormat

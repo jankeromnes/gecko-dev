@@ -13,9 +13,9 @@
 #undef GetEnvironmentVariable
 #else
 #include <dlfcn.h>
-#include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 #if defined OSX
 #include <Foundation/Foundation.h>

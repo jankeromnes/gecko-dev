@@ -33,7 +33,7 @@
  *************************************************************************************
  */
 
-#include "stddef.h"
+#include <cstddef>
 #include "cdm-test-decryptor.h"
 #include "content_decryption_module.h"
 #include "content_decryption_module_ext.h"

@@ -7,12 +7,12 @@
 #include "SandboxReporterClient.h"
 #include "SandboxLogging.h"
 
-#include <errno.h>
-#include <signal.h>
+#include <cerrno>
+#include <csignal>
 #include <sys/socket.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
-#include <time.h>
+#include <ctime>
 
 #include "mozilla/Assertions.h"
 #include "mozilla/PodOperations.h"

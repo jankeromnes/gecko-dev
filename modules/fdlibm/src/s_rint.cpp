@@ -23,7 +23,7 @@
  *	Inexact flag raised if x not equal to rint(x).
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

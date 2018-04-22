@@ -7,7 +7,7 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/IntegerRange.h"
 
-#include <stddef.h>
+#include <cstddef>
 
 using mozilla::IntegerRange;
 using mozilla::IsSame;

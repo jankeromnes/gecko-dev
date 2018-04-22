@@ -10,7 +10,7 @@
 
 #include "webrtc/modules/audio_processing/echo_cancellation_impl.h"
 
-#include <string.h>
+#include <cstring>
 
 #include "webrtc/base/checks.h"
 #include "webrtc/modules/audio_processing/aec/aec_core.h"

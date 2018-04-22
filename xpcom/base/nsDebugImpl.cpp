@@ -34,7 +34,7 @@
 #include "nsTraceRefcnt.h"
 
 #if defined(XP_UNIX)
-#include <signal.h>
+#include <csignal>
 #endif
 
 #if defined(XP_WIN)
@@ -95,7 +95,7 @@ Break(const char* aMsg);
 #include <signal.h>
 #include <malloc.h> // for _alloca
 #elif defined(XP_UNIX)
-#include <stdlib.h>
+#include <cstdlib>
 #endif
 
 using namespace mozilla;

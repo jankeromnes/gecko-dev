@@ -38,7 +38,7 @@
  * Function needed: sqrt
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

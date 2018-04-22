@@ -6,7 +6,7 @@
 
 /* XPConnect JavaScript interactive shell. */
 
-#include <stdio.h>
+#include <cstdio>
 
 #include "mozilla/WindowsDllBlocklist.h"
 #include "mozilla/Bootstrap.h"

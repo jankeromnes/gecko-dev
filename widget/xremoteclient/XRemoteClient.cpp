@@ -16,14 +16,14 @@
 #include "mozilla/Logging.h"
 #include "prenv.h"
 #include "prdtoa.h"
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h>
-#include <string.h>
+#include <cstring>
 #include <strings.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <limits.h>
+#include <climits>
 #include <X11/Xatom.h>
 
 #define MOZILLA_VERSION_PROP   "_MOZILLA_VERSION"

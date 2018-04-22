@@ -7,7 +7,7 @@
  * file name: visibledigits.cpp
  */
 
-#include <math.h>
+#include <cmath>
 
 #include "unicode/utypes.h"
 

@@ -33,11 +33,11 @@
 #include "errors.h"
 
 #include <sys/stat.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 #include <fcntl.h>
-#include <string.h>
-#include <limits.h>
+#include <cstring>
+#include <climits>
 
 #if defined(XP_WIN)
 # include <io.h>

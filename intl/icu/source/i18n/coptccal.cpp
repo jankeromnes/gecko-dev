@@ -14,7 +14,7 @@
 #include "umutex.h"
 #include "coptccal.h"
 #include "cecal.h"
-#include <float.h>
+#include <cfloat>
 
 U_NAMESPACE_BEGIN
 

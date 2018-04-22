@@ -35,7 +35,7 @@
  *	only cosh(0)=1 is exact for finite x.
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

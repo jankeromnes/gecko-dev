@@ -12,14 +12,14 @@
 #if !UCONFIG_NO_FORMATTING
 
 #include "unicode/calendar.h"
-#include <math.h>
-#include <float.h>
+#include <cmath>
+#include <cfloat>
 #include "unicode/putil.h"
 #include "uhash.h"
 #include "umutex.h"
 #include "ucln_in.h"
 #include "putilimp.h"
-#include <stdio.h>  // for toString()
+#include <cstdio>  // for toString()
 
 #if defined (PI) 
 #undef PI

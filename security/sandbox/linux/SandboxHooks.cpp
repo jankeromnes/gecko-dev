@@ -8,11 +8,11 @@
 #include "mozilla/Types.h"
 
 #include <dlfcn.h>
-#include <signal.h>
-#include <errno.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <csignal>
+#include <cerrno>
+#include <csignal>
+#include <cstdio>
+#include <cstdlib>
 #include <sys/inotify.h>
 #ifdef MOZ_X11
 #include <X11/Xlib.h>

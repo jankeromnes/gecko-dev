@@ -5,7 +5,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 #include "PathSkia.h"
-#include <math.h>
+#include <cmath>
 #include "DrawTargetSkia.h"
 #include "Logging.h"
 #include "HelpersSkia.h"

@@ -10,7 +10,7 @@
 
 #include "webrtc/modules/audio_coding/neteq/audio_vector.h"
 
-#include <assert.h>
+#include <cassert>
 
 #include <algorithm>
 #include <memory>

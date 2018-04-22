@@ -11,7 +11,7 @@
 #include "mozilla/IntegerPrintfMacros.h"
 #include "mozilla/StackWalk.h"
 
-#include <string.h>
+#include <cstring>
 
 using namespace mozilla;
 
@@ -822,9 +822,9 @@ MozDescribeCodeAddress(void* aPC, MozCodeAddressDetails* aDetails)
 // i386 or PPC Linux stackwalking code
 #elif HAVE_DLADDR && (HAVE__UNWIND_BACKTRACE || MOZ_STACKWALK_SUPPORTS_LINUX || MOZ_STACKWALK_SUPPORTS_MACOSX)
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstring>
+#include <cstdio>
 
 // On glibc 2.1, the Dl_info api defined in <dlfcn.h> is only exposed
 // if __USE_GNU is defined.  I suppose its some kind of standards

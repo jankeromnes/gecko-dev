@@ -4,11 +4,11 @@
 
 #include "sandbox/linux/seccomp-bpf/trap.h"
 
-#include <errno.h>
-#include <signal.h>
-#include <stddef.h>
-#include <stdint.h>
-#include <string.h>
+#include <cerrno>
+#include <csignal>
+#include <cstddef>
+#include <cstdint>
+#include <cstring>
 #include <sys/syscall.h>
 
 #include <algorithm>

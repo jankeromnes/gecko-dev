@@ -4,7 +4,7 @@
 
 #include "sandbox/linux/bpf_dsl/policy.h"
 
-#include <errno.h>
+#include <cerrno>
 
 #include "sandbox/linux/bpf_dsl/bpf_dsl.h"
 

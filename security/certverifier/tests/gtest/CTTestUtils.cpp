@@ -6,7 +6,7 @@
 
 #include "CTTestUtils.h"
 
-#include <stdint.h>
+#include <cstdint>
 #include <iomanip>
 
 #include "BTInclusionProof.h"

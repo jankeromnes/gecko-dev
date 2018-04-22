@@ -37,8 +37,8 @@
 #include "gfxQuartzSurface.h"
 #endif
 
-#include <stdio.h>
-#include <limits.h>
+#include <cstdio>
+#include <climits>
 
 #include "imgIEncoder.h"
 #include "nsComponentManagerUtils.h"

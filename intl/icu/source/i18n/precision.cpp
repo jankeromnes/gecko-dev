@@ -7,7 +7,7 @@
  * file name: precisison.cpp
  */
 
-#include <math.h>
+#include <cmath>
 
 #include "unicode/utypes.h"
 

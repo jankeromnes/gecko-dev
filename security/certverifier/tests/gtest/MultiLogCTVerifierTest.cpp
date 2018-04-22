@@ -6,7 +6,7 @@
 
 #include "MultiLogCTVerifier.h"
 
-#include <stdint.h>
+#include <cstdint>
 
 #include "CTLogVerifier.h"
 #include "CTObjectsExtractor.h"

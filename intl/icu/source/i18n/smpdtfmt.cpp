@@ -62,7 +62,7 @@
 #include "uassert.h"
 #include "cmemory.h"
 #include "umutex.h"
-#include <float.h>
+#include <cfloat>
 #include "smpdtfst.h"
 #include "sharednumberformat.h"
 #include "ucasemap_imp.h"

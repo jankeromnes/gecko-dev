@@ -32,7 +32,7 @@
  *	only sinh(0)=0 is exact for finite x.
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

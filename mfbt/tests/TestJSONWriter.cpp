@@ -7,8 +7,8 @@
 #include "mozilla/Assertions.h"
 #include "mozilla/JSONWriter.h"
 #include "mozilla/UniquePtr.h"
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 using mozilla::JSONWriteFunc;
 using mozilla::JSONWriter;

@@ -16,7 +16,7 @@
 #include "cmemory.h"
 #include "cstring.h"
 
-#include <string.h>
+#include <cstring>
 
 U_NAMESPACE_BEGIN
 

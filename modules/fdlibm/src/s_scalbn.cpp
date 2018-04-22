@@ -20,7 +20,7 @@
  * exponentiation or a multiplication.
  */
 
-#include <float.h>
+#include <cfloat>
 
 #include "math_private.h"
 

@@ -11,8 +11,8 @@
 #include "nsIServiceManager.h"
 #include "nsXPCOMPrivate.h"
 #include "nsCOMPtr.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 
 #include "mozilla/FileUtils.h"
 #include "mozilla/Sprintf.h"

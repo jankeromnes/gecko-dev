@@ -10,7 +10,7 @@
 // to _all_ header files:  C standard library, C++ standard library, Skia... everything.
 
 #include <immintrin.h>   // ODR safe
-#include <stdint.h>      // ODR safe
+#include <cstdint>      // ODR safe
 
 #if defined(__AVX2__)
 

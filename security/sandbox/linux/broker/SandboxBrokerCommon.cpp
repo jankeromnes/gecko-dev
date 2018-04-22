@@ -8,11 +8,11 @@
 
 #include "mozilla/Assertions.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <string.h>
+#include <cstring>
 
 #ifndef MSG_CMSG_CLOEXEC
 #ifdef XP_LINUX

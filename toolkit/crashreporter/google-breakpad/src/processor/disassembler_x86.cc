@@ -26,7 +26,7 @@
 
 #include "processor/disassembler_x86.h"
 
-#include <string.h>
+#include <cstring>
 
 namespace google_breakpad {
 

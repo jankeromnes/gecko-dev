@@ -11,7 +11,7 @@
 // it. That is, when the server is all set up and ready to receive connections,
 // it will connect to a specified port and issue a simple HTTP request.
 
-#include <stdio.h>
+#include <cstdio>
 
 #include "OCSPCommon.h"
 #include "TLSServer.h"

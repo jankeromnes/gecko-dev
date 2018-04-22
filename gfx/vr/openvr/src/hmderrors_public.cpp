@@ -1,7 +1,7 @@
 //========= Copyright Valve Corporation ============//
 #include "openvr.h"
 #include "hmderrors_public.h"
-#include <stdio.h>
+#include <cstdio>
 #include <algorithm>
 
 using namespace vr;

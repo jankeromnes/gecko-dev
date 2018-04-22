@@ -8,9 +8,9 @@
 #include "mozilla/IntegerPrintfMacros.h" // this must pick up <stdint.h>
 #include "mozilla/Sprintf.h"
 
-#include <stddef.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstddef>
+#include <cstdio>
+#include <cstring>
 
 /* Output array and poisoning method shared by all tests. */
 static char gOutput[32];

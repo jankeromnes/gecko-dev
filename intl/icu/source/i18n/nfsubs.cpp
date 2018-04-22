@@ -15,7 +15,7 @@
 * 10/11/2001  Doug      Ported from ICU4J
 */
 
-#include <stdio.h>
+#include <cstdio>
 #include "utypeinfo.h"  // for 'typeid' to work
 
 #include "nfsubs.h"

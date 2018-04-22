@@ -8,7 +8,7 @@
 
 #include "common/tls.h"
 
-#include <assert.h>
+#include <cassert>
 
 #ifdef ANGLE_ENABLE_WINDOWS_STORE
 #include <vector>

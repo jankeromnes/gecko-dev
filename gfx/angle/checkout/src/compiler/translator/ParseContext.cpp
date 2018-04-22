@@ -6,8 +6,8 @@
 
 #include "compiler/translator/ParseContext.h"
 
-#include <stdarg.h>
-#include <stdio.h>
+#include <cstdarg>
+#include <cstdio>
 
 #include "common/mathutil.h"
 #include "compiler/preprocessor/SourceLocation.h"

@@ -32,9 +32,9 @@
 // See minidump_file_writer.h for documentation.
 
 #include <fcntl.h>
-#include <limits.h>
-#include <stdio.h>
-#include <string.h>
+#include <climits>
+#include <cstdio>
+#include <cstring>
 #include <unistd.h>
 
 #include "minidump_file_writer-inl.h"

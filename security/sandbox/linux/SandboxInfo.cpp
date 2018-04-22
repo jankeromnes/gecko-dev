@@ -8,8 +8,8 @@
 #include "SandboxLogging.h"
 #include "LinuxSched.h"
 
-#include <errno.h>
-#include <stdlib.h>
+#include <cerrno>
+#include <cstdlib>
 #include <sys/prctl.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>

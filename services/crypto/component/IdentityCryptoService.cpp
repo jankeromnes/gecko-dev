@@ -24,7 +24,7 @@
 #include "keyhi.h"
 #include "cryptohi.h"
 
-#include <limits.h>
+#include <climits>
 
 using namespace mozilla;
 

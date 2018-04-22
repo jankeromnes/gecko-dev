@@ -29,7 +29,7 @@
 //#include <sys/cdefs.h>
 //__FBSDID("$FreeBSD$");
 
-#include <fenv.h>
+#include <cfenv>
 #include "math_private.h"
 
 /*

@@ -8,9 +8,9 @@
  * existence of <linux/perf_event.h>.
  */
 
-#include <errno.h>
+#include <cerrno>
 #include <linux/perf_event.h>
-#include <string.h>
+#include <cstring>
 #include <sys/ioctl.h>
 #include <sys/syscall.h>
 #include <unistd.h>

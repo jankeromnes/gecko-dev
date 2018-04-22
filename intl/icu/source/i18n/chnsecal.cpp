@@ -20,7 +20,7 @@
 #if !UCONFIG_NO_FORMATTING
 
 #include "umutex.h"
-#include <float.h>
+#include <cfloat>
 #include "gregoimp.h" // Math
 #include "astro.h" // CalendarAstronomer
 #include "unicode/simpletz.h"
