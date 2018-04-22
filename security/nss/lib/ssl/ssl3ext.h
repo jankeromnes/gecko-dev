@@ -121,7 +121,7 @@ SECStatus ssl3_HandleExtensions(sslSocket *ss,
 SECStatus ssl3_ParseExtensions(sslSocket *ss,
                                PRUint8 **b, PRUint32 *length);
 SECStatus ssl3_HandleParsedExtensions(sslSocket *ss,
-                                      SSLHandshakeType handshakeMessage);
+                                      SSLHandshakeType message);
 TLSExtension *ssl3_FindExtension(sslSocket *ss,
                                  SSLExtensionType extension_type);
 void ssl3_DestroyRemoteExtensions(PRCList *list);

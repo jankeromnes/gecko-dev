@@ -459,7 +459,7 @@ void av_free(void *ptr);
  * @note `*ptr = NULL` is safe and leads to no action.
  * @see av_free()
  */
-void av_freep(void *ptr);
+void av_freep(void *arg);
 
 /**
  * Duplicate a string.

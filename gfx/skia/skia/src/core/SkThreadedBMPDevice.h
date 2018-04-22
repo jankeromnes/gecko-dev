@@ -26,7 +26,7 @@ protected:
     void drawPoints(SkCanvas::PointMode mode, size_t count,
                             const SkPoint[], const SkPaint& paint) override;
     void drawRect(const SkRect& r, const SkPaint& paint) override;
-    void drawRRect(const SkRRect& rr, const SkPaint& paint) override;
+    void drawRRect(const SkRRect& rrect, const SkPaint& paint) override;
 
     void drawPath(const SkPath&, const SkPaint&, const SkMatrix* prePathMatrix,
                   bool pathIsMutable) override;
@@ -35,7 +35,7 @@ protected:
 
     void drawText(const void* text, size_t len, SkScalar x, SkScalar y,
                   const SkPaint&) override;
-    void drawPosText(const void* text, size_t len, const SkScalar pos[],
+    void drawPosText(const void* text, size_t len, const SkScalar xpos[],
                      int scalarsPerPos, const SkPoint& offset, const SkPaint& paint) override;
     void drawVertices(const SkVertices*, SkBlendMode, const SkPaint&) override;
     void drawDevice(SkBaseDevice*, int x, int y, const SkPaint&) override;

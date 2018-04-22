@@ -129,7 +129,7 @@ public:
     UChar getFieldChar(int32_t field) const;
     int32_t getFieldLength(int32_t field) const;
     void populate(int32_t field, const UnicodeString& value);
-    void populate(int32_t field, UChar repeatChar, int32_t repeatCount);
+    void populate(int32_t field, UChar ch, int32_t length);
     UBool isFieldEmpty(int32_t field) const;
     UnicodeString& appendTo(UnicodeString& string) const;
     UnicodeString& appendFieldTo(int32_t field, UnicodeString& string) const;
@@ -181,7 +181,7 @@ public:
     UBool         skeletonWasSpecified; // if specified in availableFormats, not derived
     PtnElem       *next;
 
-    PtnElem(const UnicodeString &basePattern, const UnicodeString &pattern);
+    PtnElem(const UnicodeString &basePat, const UnicodeString &pat);
     virtual ~PtnElem();
 
 };
@@ -193,7 +193,7 @@ public:
 
     FormatParser();
     virtual ~FormatParser();
-    void set(const UnicodeString& patternString);
+    void set(const UnicodeString& pattern);
     void getQuoteLiteral(UnicodeString& quote, int32_t *itemIndex);
     UBool isPatternSeparator(UnicodeString& field);
     static UBool isQuoteLiteral(const UnicodeString& s);
@@ -229,11 +229,11 @@ class DateTimeMatcher: public UMemory {
 public:
     PtnSkeleton skeleton;
 
-    void getBasePattern(UnicodeString& basePattern);
+    void getBasePattern(UnicodeString& result);
     UnicodeString getPattern();
     void set(const UnicodeString& pattern, FormatParser* fp);
-    void set(const UnicodeString& pattern, FormatParser* fp, PtnSkeleton& skeleton);
-    void copyFrom(const PtnSkeleton& skeleton);
+    void set(const UnicodeString& pattern, FormatParser* fp, PtnSkeleton& skeletonResult);
+    void copyFrom(const PtnSkeleton& newSkeleton);
     void copyFrom();
     PtnSkeleton* getSkeletonPtr();
     UBool equals(const DateTimeMatcher* other) const;
@@ -264,7 +264,7 @@ class PatternMapIterator : public UMemory {
 public:
     PatternMapIterator();
     virtual ~PatternMapIterator();
-    void set(PatternMap& patternMap);
+    void set(PatternMap& newPatternMap);
     PtnSkeleton* getSkeleton();
     UBool hasNext();
     DateTimeMatcher& next();

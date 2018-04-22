@@ -294,7 +294,7 @@ ubiditransform_open(UErrorCode *pErrorCode);
  * @stable ICU 58
  */
 U_STABLE void U_EXPORT2
-ubiditransform_close(UBiDiTransform *pBidiTransform);
+ubiditransform_close(UBiDiTransform *pBiDiTransform);
 
 #if U_SHOW_CPLUSPLUS_API
 

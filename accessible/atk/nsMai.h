@@ -70,7 +70,7 @@ typedef struct _MaiAtkSocketClass
 extern "C" GType (*gAtkTableCellGetTypeFunc)();
 
 mozilla::a11y::AccessibleWrap* GetAccessibleWrap(AtkObject* aAtkObj);
-mozilla::a11y::ProxyAccessible* GetProxy(AtkObject* aAtkObj);
+mozilla::a11y::ProxyAccessible* GetProxy(AtkObject* aObj);
 mozilla::a11y::AccessibleOrProxy GetInternalObj(AtkObject* aObj);
 AtkObject* GetWrapperFor(mozilla::a11y::ProxyAccessible* aProxy);
 AtkObject* GetWrapperFor(mozilla::a11y::AccessibleOrProxy aObj);
@@ -125,7 +125,7 @@ struct MaiAtkObject
    * Notify ATK of a text change within this ATK object.
    */
   void FireTextChangeEvent(const nsString& aStr, int32_t aStart, uint32_t aLen,
-                           bool aIsInsert, bool aIsFromUser);
+                           bool aIsInsert, bool aFromUser);
 
   /**
    * Notify ATK of a shown or hidden subtree rooted at aObject whose parent is

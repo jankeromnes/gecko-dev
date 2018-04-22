@@ -101,7 +101,7 @@ private:
 
     void onGetBlendInfo(BlendInfo*) const override;
 
-    bool onIsEqual(const GrXferProcessor& xpBase) const override;
+    bool onIsEqual(const GrXferProcessor& other) const override;
 
     const SkBlendMode      fMode;
     const GrBlendEquation  fHWBlendEquation;

@@ -633,7 +633,7 @@ uset_removeString(USet* set, const UChar* str, int32_t strLen);
  * @stable ICU 3.2
  */
 U_STABLE void U_EXPORT2
-uset_removeAll(USet* set, const USet* removeSet);
+uset_removeAll(USet* set, const USet* remove);
 
 /**
  * Retain only the elements in this set that are contained in the
@@ -819,7 +819,7 @@ uset_indexOf(const USet* set, UChar32 c);
  * @stable ICU 3.2
  */
 U_STABLE UChar32 U_EXPORT2
-uset_charAt(const USet* set, int32_t charIndex);
+uset_charAt(const USet* set, int32_t index);
 
 /**
  * Returns the number of characters and strings contained in the given
@@ -841,7 +841,7 @@ uset_size(const USet* set);
  * @stable ICU 2.4
  */
 U_STABLE int32_t U_EXPORT2
-uset_getItemCount(const USet* set);
+uset_getItemCount(const USet* uset);
 
 /**
  * Returns an item of this set.  An item is either a range of
@@ -862,7 +862,7 @@ uset_getItemCount(const USet* set);
  * @stable ICU 2.4
  */
 U_STABLE int32_t U_EXPORT2
-uset_getItem(const USet* set, int32_t itemIndex,
+uset_getItem(const USet* uset, int32_t itemIndex,
              UChar32* start, UChar32* end,
              UChar* str, int32_t strCapacity,
              UErrorCode* ec);
@@ -1064,7 +1064,7 @@ uset_equals(const USet* set1, const USet* set2);
  * @stable ICU 2.4
  */
 U_STABLE int32_t U_EXPORT2
-uset_serialize(const USet* set, uint16_t* dest, int32_t destCapacity, UErrorCode* pErrorCode);
+uset_serialize(const USet* set, uint16_t* dest, int32_t destCapacity, UErrorCode* ec);
 
 /**
  * Given a serialized array, fill in the given serialized set object.

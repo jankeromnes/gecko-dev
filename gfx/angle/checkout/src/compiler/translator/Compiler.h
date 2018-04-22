@@ -96,7 +96,7 @@ class TCompiler : public TShHandleBase
 
     bool compile(const char *const shaderStrings[],
                  size_t numStrings,
-                 ShCompileOptions compileOptions);
+                 ShCompileOptions compileOptionsIn);
 
     // Get results of the last compilation.
     int getShaderVersion() const { return shaderVersion; }

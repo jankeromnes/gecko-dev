@@ -9,7 +9,7 @@ SEC_BEGIN_PROTOS
 /* NSS private functions */
 /* map an oid to a keytype... actually this function and it's converse
  *  are good candidates for public functions..  */
-KeyType seckey_GetKeyType(SECOidTag pubKeyOid);
+KeyType seckey_GetKeyType(SECOidTag tag);
 
 /* extract the 'encryption' (could be signing) and hash oids from and
  * algorithm, key and parameters (parameters is the parameters field

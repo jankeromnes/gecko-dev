@@ -433,7 +433,7 @@ public:
   UBool isBogus() const;
 
 private:
-  StringPair(const UnicodeString& displayName, const UnicodeString& id);
+  StringPair(const UnicodeString& _displayName, const UnicodeString& _id);
 };
 
 /*******************************************************************
@@ -571,7 +571,7 @@ class U_COMMON_API ICUService : public ICUNotifier {
      *
      * @param name a name to use in debugging.
      */
-    ICUService(const UnicodeString& name);
+    ICUService(const UnicodeString& newName);
 
     /**
      * <p>Destructor.</p>
@@ -881,7 +881,7 @@ class U_COMMON_API ICUService : public ICUNotifier {
      * @param status the error code status.
      * @return an instance of ICUServiceFactory that maps this instance to the provided ID.
      */
-    virtual ICUServiceFactory* createSimpleFactory(UObject* instanceToAdopt, const UnicodeString& id, UBool visible, UErrorCode& status);
+    virtual ICUServiceFactory* createSimpleFactory(UObject* objToAdopt, const UnicodeString& id, UBool visible, UErrorCode& status);
 
     /**
      * <p>Reinitialize the factory list to its default state.  After this call, isDefault()

@@ -57,11 +57,11 @@ private:
     MOZ_MUST_USE nsresult
     GenCredsAndSetEntry(nsIHttpAuthenticator *, bool proxyAuth,
                         const char *scheme, const char *host, int32_t port,
-                        const char *dir, const char *realm,
+                        const char *directory, const char *realm,
                         const char *challenge, const nsHttpAuthIdentity &ident,
-                        nsCOMPtr<nsISupports> &session, char **result);
+                        nsCOMPtr<nsISupports> &sessionState, char **result);
     MOZ_MUST_USE nsresult GetAuthenticator(const char *challenge,
-                                           nsCString &scheme,
+                                           nsCString &authType,
                                            nsIHttpAuthenticator **auth);
     void     ParseRealm(const char *challenge, nsACString &realm);
     void     GetIdentityFromURI(uint32_t authFlags, nsHttpAuthIdentity&);
@@ -75,7 +75,7 @@ private:
     MOZ_MUST_USE nsresult GetCredentials(const char *challenges, bool proxyAuth,
                                          nsCString& creds);
     MOZ_MUST_USE nsresult
-    GetCredentialsForChallenge(const char *challenge, const char *scheme,
+    GetCredentialsForChallenge(const char *challenge, const char *authType,
                                bool proxyAuth, nsIHttpAuthenticator *auth,
                                nsCString& creds);
     MOZ_MUST_USE nsresult PromptForIdentity(uint32_t level, bool proxyAuth,
@@ -124,17 +124,17 @@ private:
     bool BlockPrompt(bool proxyAuth);
 
     // Store credentials to the cache when appropriate aFlags are set.
-    MOZ_MUST_USE nsresult UpdateCache(nsIHttpAuthenticator *aAuth,
-                                      const char           *aScheme,
-                                      const char           *aHost,
-                                      int32_t               aPort,
-                                      const char           *aDirectory,
-                                      const char           *aRealm,
-                                      const char           *aChallenge,
-                                      const nsHttpAuthIdentity &aIdent,
-                                      const char           *aCreds,
-                                      uint32_t              aGenerateFlags,
-                                      nsISupports          *aSessionState);
+    MOZ_MUST_USE nsresult UpdateCache(nsIHttpAuthenticator *auth,
+                                      const char           *scheme,
+                                      const char           *host,
+                                      int32_t               port,
+                                      const char           *directory,
+                                      const char           *realm,
+                                      const char           *challenge,
+                                      const nsHttpAuthIdentity &ident,
+                                      const char           *creds,
+                                      uint32_t              generateFlags,
+                                      nsISupports          *sessionState);
 
 private:
     nsIHttpAuthenticableChannel      *mAuthChannel;  // weak ref

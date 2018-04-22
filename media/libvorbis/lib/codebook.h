@@ -96,8 +96,8 @@ extern long vorbis_book_codelen(codebook *book,int entry);
 
 
 
-extern int vorbis_staticbook_pack(const static_codebook *c,oggpack_buffer *b);
-extern static_codebook *vorbis_staticbook_unpack(oggpack_buffer *b);
+extern int vorbis_staticbook_pack(const static_codebook *c,oggpack_buffer *opb);
+extern static_codebook *vorbis_staticbook_unpack(oggpack_buffer *opb);
 
 extern int vorbis_book_encode(codebook *book, int a, oggpack_buffer *b);
 
@@ -109,7 +109,7 @@ extern long vorbis_book_decodev_set(codebook *book, float *a,
 extern long vorbis_book_decodev_add(codebook *book, float *a,
                                     oggpack_buffer *b,int n);
 extern long vorbis_book_decodevv_add(codebook *book, float **a,
-                                     long off,int ch,
+                                     long offset,int ch,
                                     oggpack_buffer *b,int n);
 
 

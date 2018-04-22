@@ -59,7 +59,7 @@ NSPR_API(void) PR_DetachThread(void);
 ** Get the id of the named thread. Each thread is assigned a unique id
 ** when it is created or attached.
 */
-NSPR_API(PRUint32) PR_GetThreadID(PRThread *thread);
+NSPR_API(PRUint32) PR_GetThreadID(PRThread *thred);
 
 /*
 ** Set the procedure that is called when a thread is dumped. The procedure
@@ -161,7 +161,7 @@ NSPR_API(void) PR_ResumeAll(void);
 ** Return the thread stack pointer of the given thread. 
 ** Needed by the garbage collector.
 */
-NSPR_API(void *) PR_GetSP(PRThread *thread);
+NSPR_API(void *) PR_GetSP(PRThread *thred);
 
 /*
 ** Save the registers that the GC would find interesting into the thread
@@ -186,8 +186,8 @@ NSPR_API(PRWord *) PR_GetGCRegisters(PRThread *t, int isCurrent, int *np);
 **
 ** There's no locking required around these calls.
 */
-NSPR_API(void*) GetExecutionEnvironment(PRThread *thread);
-NSPR_API(void) SetExecutionEnvironment(PRThread* thread, void *environment);
+NSPR_API(void*) GetExecutionEnvironment(PRThread *thred);
+NSPR_API(void) SetExecutionEnvironment(PRThread* thred, void *env);
 
 /*
 ** Enumeration function that applies "func(thread,i,arg)" to each active

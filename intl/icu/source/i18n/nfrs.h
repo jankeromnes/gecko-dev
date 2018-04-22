@@ -32,8 +32,8 @@ U_NAMESPACE_BEGIN
 
 class NFRuleSet : public UMemory {
 public:
-    NFRuleSet(RuleBasedNumberFormat *owner, UnicodeString* descriptions, int32_t index, UErrorCode& status);
-    void parseRules(UnicodeString& rules, UErrorCode& status);
+    NFRuleSet(RuleBasedNumberFormat *_owner, UnicodeString* descriptions, int32_t index, UErrorCode& status);
+    void parseRules(UnicodeString& description, UErrorCode& status);
     void setNonNumericalRule(NFRule *rule);
     void setBestFractionRule(int32_t originalIndex, NFRule *newRule, UBool rememberRule);
     void makeIntoFractionRuleSet() { fIsFractionRuleSet = TRUE; }
@@ -90,10 +90,10 @@ int64_t util64_fromDouble(double d);
 // raise radix to the power exponent, only non-negative exponents
 // Arithmetic is performed in unsigned space since overflow in
 // signed space is undefined behavior.
-uint64_t util64_pow(uint32_t radix, uint16_t exponent);
+uint64_t util64_pow(uint32_t base, uint16_t exponent);
 
 // convert n to digit string in buffer, return length of string
-uint32_t util64_tou(int64_t n, UChar* buffer, uint32_t buflen, uint32_t radix = 10, UBool raw = FALSE);
+uint32_t util64_tou(int64_t w, UChar* buf, uint32_t len, uint32_t radix = 10, UBool raw = FALSE);
 
 #ifdef RBNF_DEBUG
 int64_t util64_utoi(const UChar* str, uint32_t radix = 10);

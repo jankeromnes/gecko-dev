@@ -65,7 +65,7 @@ public:
 
     int32_t getValue() const { return value; }
 
-    int32_t compareStringTo(const BytesTrieElement &o, const CharString &strings) const;
+    int32_t compareStringTo(const BytesTrieElement &other, const CharString &strings) const;
 
 private:
     const char *data(const CharString &strings) const {

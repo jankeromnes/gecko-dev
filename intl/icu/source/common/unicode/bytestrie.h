@@ -194,7 +194,7 @@ public:
      * @return The match/value Result.
      * @stable ICU 4.8
      */
-    UStringTrieResult next(const char *s, int32_t length);
+    UStringTrieResult next(const char *s, int32_t sLength);
 
     /**
      * Returns a matching byte sequence's value if called immediately after

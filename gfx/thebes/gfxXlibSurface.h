@@ -58,7 +58,7 @@ public:
     virtual ~gfxXlibSurface();
 
     virtual already_AddRefed<gfxASurface>
-    CreateSimilarSurface(gfxContentType aType,
+    CreateSimilarSurface(gfxContentType aContent,
                          const mozilla::gfx::IntSize& aSize) override;
     virtual void Finish() override;
 
@@ -72,7 +72,7 @@ public:
     static int DepthOfVisual(const ::Screen* screen, const Visual* visual);
     static Visual* FindVisual(::Screen* screen, gfxImageFormat format);
     static XRenderPictFormat *FindRenderFormat(Display *dpy, gfxImageFormat format);
-    static bool GetColormapAndVisual(cairo_surface_t* aXlibSurface, Colormap* colormap, Visual **visual);
+    static bool GetColormapAndVisual(cairo_surface_t* aXlibSurface, Colormap* aColormap, Visual **aVisual);
 
     // take ownership of a passed-in Pixmap, calling XFreePixmap on it
     // when the gfxXlibSurface is destroyed.
@@ -84,7 +84,7 @@ public:
     Drawable ReleasePixmap();
 
     // Find a visual and colormap pair suitable for rendering to this surface.
-    bool GetColormapAndVisual(Colormap* colormap, Visual **visual);
+    bool GetColormapAndVisual(Colormap* aColormap, Visual **aVisual);
 
 #if defined(GL_PROVIDER_GLX)
     GLXPixmap GetGLXPixmap();

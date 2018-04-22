@@ -93,8 +93,8 @@ public:
      * @param status Any error returned here.
      */
     UBool setVariant(
-            const char *category,
-            const UnicodeString &variant,
+            const char *variant,
+            const UnicodeString &value,
             UErrorCode &status);
     /**
      * Make the 'other' variant be the empty string with no field annotations

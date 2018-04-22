@@ -83,9 +83,9 @@ SECStatus tls13_ConstructHelloRetryRequest(sslSocket *ss,
                                            PRUint8 *cookie,
                                            unsigned int cookieLen,
                                            sslBuffer *buffer);
-SECStatus tls13_HandleHelloRetryRequest(sslSocket *ss, const PRUint8 *b,
-                                        PRUint32 length);
-void tls13_DestroyKeyShareEntry(TLS13KeyShareEntry *entry);
+SECStatus tls13_HandleHelloRetryRequest(sslSocket *ss, const PRUint8 *savedMsg,
+                                        PRUint32 savedLength);
+void tls13_DestroyKeyShareEntry(TLS13KeyShareEntry *offer);
 void tls13_DestroyKeyShares(PRCList *list);
 SECStatus tls13_CreateKeyShare(sslSocket *ss, const sslNamedGroupDef *groupDef);
 void tls13_DestroyEarlyData(PRCList *list);
@@ -104,7 +104,7 @@ PRBool tls13_ClientAllow0Rtt(const sslSocket *ss, const sslSessionID *sid);
 PRUint16 tls13_EncodeDraftVersion(SSL3ProtocolVersion version);
 SECStatus tls13_ClientReadSupportedVersion(sslSocket *ss);
 SECStatus tls13_NegotiateVersion(sslSocket *ss,
-                                 const TLSExtension *supported_versions);
+                                 const TLSExtension *supportedVersions);
 
 PRBool tls13_IsReplay(const sslSocket *ss, const sslSessionID *sid);
 void tls13_AntiReplayRollover(PRTime now);

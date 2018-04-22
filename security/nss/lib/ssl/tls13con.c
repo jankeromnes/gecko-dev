@@ -25,7 +25,7 @@
 #include "tls13hashstate.h"
 
 static SECStatus tls13_SetCipherSpec(sslSocket *ss, PRUint16 epoch,
-                                     CipherSpecDirection install,
+                                     CipherSpecDirection direction,
                                      PRBool deleteSecret);
 static SECStatus tls13_AESGCM(
     ssl3KeyMaterial *keys,
@@ -45,8 +45,8 @@ static void tls13_SetKeyExchangeType(sslSocket *ss, const sslNamedGroupDef *grou
 static SECStatus tls13_HandleClientKeyShare(sslSocket *ss,
                                             TLS13KeyShareEntry *peerShare);
 static SECStatus tls13_SendHelloRetryRequest(
-    sslSocket *ss, const sslNamedGroupDef *selectedGroup,
-    const PRUint8 *token, unsigned int tokenLen);
+    sslSocket *ss, const sslNamedGroupDef *requestedGroup,
+    const PRUint8 *appToken, unsigned int appTokenLen);
 
 static SECStatus tls13_HandleServerKeyShare(sslSocket *ss);
 static SECStatus tls13_HandleEncryptedExtensions(sslSocket *ss, PRUint8 *b,
@@ -79,7 +79,7 @@ static SECStatus tls13_SendEndOfEarlyData(sslSocket *ss);
 static SECStatus tls13_HandleEndOfEarlyData(sslSocket *ss, PRUint8 *b,
                                             PRUint32 length);
 static SECStatus tls13_SendFinished(sslSocket *ss, PK11SymKey *baseKey);
-static SECStatus tls13_ComputePskBinderHash(sslSocket *ss, unsigned int prefix,
+static SECStatus tls13_ComputePskBinderHash(sslSocket *ss, unsigned int prefixLength,
                                             SSL3Hashes *hashes);
 static SECStatus tls13_VerifyFinished(sslSocket *ss, SSLHandshakeType message,
                                       PK11SymKey *secret,

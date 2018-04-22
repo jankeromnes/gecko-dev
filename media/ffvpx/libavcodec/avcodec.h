@@ -3704,22 +3704,22 @@ typedef struct AVCodecContext {
     int apply_cropping;
 } AVCodecContext;
 
-AVRational av_codec_get_pkt_timebase         (const AVCodecContext *avctx);
-void       av_codec_set_pkt_timebase         (AVCodecContext *avctx, AVRational val);
+AVRational av_codec_get_pkt_timebase         (const AVCodecContext *s);
+void       av_codec_set_pkt_timebase         (AVCodecContext *s, AVRational v);
 
-const AVCodecDescriptor *av_codec_get_codec_descriptor(const AVCodecContext *avctx);
-void                     av_codec_set_codec_descriptor(AVCodecContext *avctx, const AVCodecDescriptor *desc);
+const AVCodecDescriptor *av_codec_get_codec_descriptor(const AVCodecContext *s);
+void                     av_codec_set_codec_descriptor(AVCodecContext *s, const AVCodecDescriptor *v);
 
-unsigned av_codec_get_codec_properties(const AVCodecContext *avctx);
+unsigned av_codec_get_codec_properties(const AVCodecContext *codec);
 
-int  av_codec_get_lowres(const AVCodecContext *avctx);
-void av_codec_set_lowres(AVCodecContext *avctx, int val);
+int  av_codec_get_lowres(const AVCodecContext *s);
+void av_codec_set_lowres(AVCodecContext *s, int v);
 
-int  av_codec_get_seek_preroll(const AVCodecContext *avctx);
-void av_codec_set_seek_preroll(AVCodecContext *avctx, int val);
+int  av_codec_get_seek_preroll(const AVCodecContext *s);
+void av_codec_set_seek_preroll(AVCodecContext *s, int v);
 
-uint16_t *av_codec_get_chroma_intra_matrix(const AVCodecContext *avctx);
-void av_codec_set_chroma_intra_matrix(AVCodecContext *avctx, uint16_t *val);
+uint16_t *av_codec_get_chroma_intra_matrix(const AVCodecContext *s);
+void av_codec_set_chroma_intra_matrix(AVCodecContext *s, uint16_t *v);
 
 /**
  * AVProfile.
@@ -4355,7 +4355,7 @@ AVCodecContext *avcodec_alloc_context3(const AVCodec *codec);
  * Free the codec context and everything associated with it and write NULL to
  * the provided pointer.
  */
-void avcodec_free_context(AVCodecContext **avctx);
+void avcodec_free_context(AVCodecContext **pavctx);
 
 #if FF_API_GET_CONTEXT_DEFAULTS
 /**
@@ -4423,7 +4423,7 @@ AVCodecParameters *avcodec_parameters_alloc(void);
  * Free an AVCodecParameters instance and everything associated with it and
  * write NULL to the supplied pointer.
  */
-void avcodec_parameters_free(AVCodecParameters **par);
+void avcodec_parameters_free(AVCodecParameters **ppar);
 
 /**
  * Copy the contents of src to dst. Any allocated fields in dst are freed and
@@ -4637,7 +4637,7 @@ int av_copy_packet(AVPacket *dst, const AVPacket *src);
  * @deprecated Use av_packet_copy_props
  */
 attribute_deprecated
-int av_copy_packet_side_data(AVPacket *dst, const AVPacket *src);
+int av_copy_packet_side_data(AVPacket *pkt, const AVPacket *src);
 
 /**
  * Free a packet.
@@ -4797,7 +4797,7 @@ int av_packet_copy_props(AVPacket *dst, const AVPacket *src);
  * @param tb_dst destination timebase, to which the timing fields will be
  *               converted
  */
-void av_packet_rescale_ts(AVPacket *pkt, AVRational tb_src, AVRational tb_dst);
+void av_packet_rescale_ts(AVPacket *pkt, AVRational src_tb, AVRational dst_tb);
 
 /**
  * @}
@@ -4829,7 +4829,7 @@ AVCodec *avcodec_find_decoder_by_name(const char *name);
  * it can be called by custom get_buffer2() implementations for decoders without
  * AV_CODEC_CAP_DR1 set.
  */
-int avcodec_default_get_buffer2(AVCodecContext *s, AVFrame *frame, int flags);
+int avcodec_default_get_buffer2(AVCodecContext *avctx, AVFrame *frame, int flags);
 
 #if FF_API_EMU_EDGE
 /**
@@ -5346,7 +5346,7 @@ typedef struct AVCodecParser {
     struct AVCodecParser *next;
 } AVCodecParser;
 
-AVCodecParser *av_parser_next(const AVCodecParser *c);
+AVCodecParser *av_parser_next(const AVCodecParser *p);
 
 void av_register_codec_parser(AVCodecParser *parser);
 AVCodecParserContext *av_parser_init(int codec_id);
@@ -5576,7 +5576,7 @@ void audio_resample_close(ReSampleContext *s);
  * @param cutoff cutoff frequency, 1.0 corresponds to half the output sampling rate
  */
 attribute_deprecated
-struct AVResampleContext *av_resample_init(int out_rate, int in_rate, int filter_length, int log2_phase_count, int linear, double cutoff);
+struct AVResampleContext *av_resample_init(int out_rate, int in_rate, int filter_size, int phase_shift, int linear, double cutoff);
 
 /**
  * Resample an array of samples using a previously configured context.
@@ -5708,7 +5708,7 @@ void avcodec_get_chroma_sub_sample(enum AVPixelFormat pix_fmt, int *h_shift, int
  * pixel format pix_fmt, or 0 if no associated fourCC code can be
  * found.
  */
-unsigned int avcodec_pix_fmt_to_codec_tag(enum AVPixelFormat pix_fmt);
+unsigned int avcodec_pix_fmt_to_codec_tag(enum AVPixelFormat fmt);
 
 /**
  * @deprecated see av_get_pix_fmt_loss()
@@ -6063,7 +6063,7 @@ int av_bitstream_filter_filter(AVBitStreamFilterContext *bsfc,
  * av_bitstream_filter_init(), can be NULL
  */
 attribute_deprecated
-void av_bitstream_filter_close(AVBitStreamFilterContext *bsf);
+void av_bitstream_filter_close(AVBitStreamFilterContext *bsfc);
 
 /**
  * If f is NULL, return the first registered bitstream filter,
@@ -6106,7 +6106,7 @@ const AVBitStreamFilter *av_bsf_next(void **opaque);
  *
  * @return 0 on success, a negative AVERROR code on failure
  */
-int av_bsf_alloc(const AVBitStreamFilter *filter, AVBSFContext **ctx);
+int av_bsf_alloc(const AVBitStreamFilter *filter, AVBSFContext **pctx);
 
 /**
  * Prepare the filter for use, after all the parameters and options have been
@@ -6161,7 +6161,7 @@ int av_bsf_receive_packet(AVBSFContext *ctx, AVPacket *pkt);
  * Free a bitstream filter context and everything associated with it; write NULL
  * into the supplied pointer.
  */
-void av_bsf_free(AVBSFContext **ctx);
+void av_bsf_free(AVBSFContext **pctx);
 
 /**
  * Get the AVClass for AVBSFContext. It can be used in combination with
@@ -6245,7 +6245,7 @@ int av_bsf_list_finalize(AVBSFList **lst, AVBSFContext **bsf);
  *
  * @return >=0 on success, negative AVERROR in case of failure
  */
-int av_bsf_list_parse_str(const char *str, AVBSFContext **bsf);
+int av_bsf_list_parse_str(const char *str, AVBSFContext **bsf_lst);
 
 /**
  * Get null/pass-through bitstream filter.

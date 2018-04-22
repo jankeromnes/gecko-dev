@@ -51,7 +51,7 @@ public:
      *  @return The row index we inserted into, or -1 if we failed to find an open row. The caller
      *      is responsible for calling unlockRow() with this row index when it's done with it.
      */
-    int lockRow(const SkBitmap& data);
+    int lockRow(const SkBitmap& bitmap);
     /**
      * This is intended to be used when cloning a processor that already holds a lock. It is
      * assumed that the row already has at least one lock.

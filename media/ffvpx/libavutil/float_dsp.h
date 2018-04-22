@@ -197,6 +197,6 @@ void ff_float_dsp_init_mips(AVFloatDSPContext *fdsp);
  *
  * @param strict  setting to non-zero avoids using functions which may not be IEEE-754 compliant
  */
-AVFloatDSPContext *avpriv_float_dsp_alloc(int strict);
+AVFloatDSPContext *avpriv_float_dsp_alloc(int bit_exact);
 
 #endif /* AVUTIL_FLOAT_DSP_H */

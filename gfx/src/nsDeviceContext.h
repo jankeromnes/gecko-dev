@@ -63,7 +63,7 @@ public:
      * @param aDevSpec the specification of the printing device
      * @return error status
      */
-    nsresult InitForPrinting(nsIDeviceContextSpec *aDevSpec);
+    nsresult InitForPrinting(nsIDeviceContextSpec *aDevice);
 
     /**
      * Create a rendering context and initialize it.  Only call this

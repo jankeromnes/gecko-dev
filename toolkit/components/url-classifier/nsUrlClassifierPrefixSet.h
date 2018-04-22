@@ -46,7 +46,7 @@ public:
 
   nsresult GetPrefixesNative(FallibleTArray<uint32_t>& outArray);
 
-  size_t SizeOfIncludingThis(mozilla::MallocSizeOf mallocSizeOf);
+  size_t SizeOfIncludingThis(mozilla::MallocSizeOf aMallocSizeOf);
 
   NS_DECL_THREADSAFE_ISUPPORTS
   NS_DECL_NSIMEMORYREPORTER
@@ -62,7 +62,7 @@ private:
   static const uint32_t PREFIXSET_VERSION_MAGIC = 1;
 
   void Clear();
-  nsresult MakePrefixSet(const uint32_t* aArray, uint32_t aLength);
+  nsresult MakePrefixSet(const uint32_t* aPrefixes, uint32_t aLength);
   uint32_t BinSearch(uint32_t start, uint32_t end, uint32_t target);
 
   uint32_t CalculatePreallocateSize();

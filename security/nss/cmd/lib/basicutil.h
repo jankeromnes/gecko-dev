@@ -48,7 +48,7 @@ extern void SECU_PrintInteger(FILE *out, const SECItem *i, const char *m,
                               int level);
 
 /* Print SECItem as hex */
-extern void SECU_PrintAsHex(FILE *out, const SECItem *i, const char *m,
+extern void SECU_PrintAsHex(FILE *out, const SECItem *data, const char *m,
                             int level);
 
 /* dump a buffer in hex and ASCII */

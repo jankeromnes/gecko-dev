@@ -28,7 +28,7 @@ extern "C" {
 // indicate 0 or non-zero, mag_bits bits are used to indicate magnitide
 // and 1 more bit for the sign if non-zero.
 void aom_write_primitive_symmetric(aom_writer *w, int16_t v,
-                                   unsigned int mag_bits);
+                                   unsigned int abs_bits);
 
 // Encodes a value v in [0, n-1] quasi-uniformly
 void aom_write_primitive_quniform(aom_writer *w, uint16_t n, uint16_t v);
@@ -59,7 +59,7 @@ void aom_wb_write_signed_primitive_refsubexpfin(struct aom_write_bit_buffer *wb,
                                                 int16_t ref, int16_t v);
 
 // Functions that counts bits for the above primitives
-int aom_count_primitive_symmetric(int16_t v, unsigned int mag_bits);
+int aom_count_primitive_symmetric(int16_t v, unsigned int abs_bits);
 int aom_count_primitive_quniform(uint16_t n, uint16_t v);
 int aom_count_primitive_refbilevel(uint16_t n, uint16_t p, uint16_t ref,
                                    uint16_t v);

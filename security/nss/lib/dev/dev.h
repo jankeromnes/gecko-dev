@@ -332,7 +332,7 @@ nssToken_ImportCertificate(
     NSSDER *issuer,
     NSSDER *subject,
     NSSDER *serial,
-    NSSASCII7 *emailAddr,
+    NSSASCII7 *email,
     PRBool asTokenObject);
 
 NSS_EXTERN nssCryptokiObject *
@@ -541,8 +541,8 @@ nssCryptokiObject_Destroy(
 
 NSS_EXTERN PRBool
 nssCryptokiObject_Equal(
-    nssCryptokiObject *object1,
-    nssCryptokiObject *object2);
+    nssCryptokiObject *o1,
+    nssCryptokiObject *o2);
 
 NSS_EXTERN nssCryptokiObject *
 nssCryptokiObject_Clone(
@@ -550,7 +550,7 @@ nssCryptokiObject_Clone(
 
 NSS_EXTERN PRStatus
 nssCryptokiCertificate_GetAttributes(
-    nssCryptokiObject *object,
+    nssCryptokiObject *certObject,
     nssSession *sessionOpt,
     NSSArena *arenaOpt,
     NSSCertificateType *certTypeOpt,
@@ -622,7 +622,7 @@ nssTokenArray_Destroy(
  */
 NSS_EXTERN void
 nssCryptokiObjectArray_Destroy(
-    nssCryptokiObject **object);
+    nssCryptokiObject **objects);
 
 /* nssSlotList
  *

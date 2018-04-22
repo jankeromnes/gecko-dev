@@ -73,8 +73,8 @@ public:
   nsresult Init();
 
   // Management of the Geolocation objects
-  void AddLocator(mozilla::dom::Geolocation* locator);
-  void RemoveLocator(mozilla::dom::Geolocation* locator);
+  void AddLocator(mozilla::dom::Geolocation* aLocator);
+  void RemoveLocator(mozilla::dom::Geolocation* aLocator);
 
   void SetCachedPosition(nsIDOMGeoPosition* aPosition);
   CachedPositionAndAccuracy GetCachedPosition();
@@ -159,7 +159,7 @@ public:
   void NotifyAllowedRequest(nsGeolocationRequest* aRequest);
 
   // Remove request from all callbacks arrays
-  void RemoveRequest(nsGeolocationRequest* request);
+  void RemoveRequest(nsGeolocationRequest* aRequest);
 
   // Check if there is already ClearWatch called for current
   // request & clear if yes
@@ -184,9 +184,9 @@ private:
 
   ~Geolocation();
 
-  nsresult GetCurrentPosition(GeoPositionCallback aCallback,
-                              GeoPositionErrorCallback aErrorCallback,
-                              UniquePtr<PositionOptions>&& aOptions,
+  nsresult GetCurrentPosition(GeoPositionCallback callback,
+                              GeoPositionErrorCallback errorCallback,
+                              UniquePtr<PositionOptions>&& options,
                               CallerType aCallerType);
   nsresult WatchPosition(GeoPositionCallback aCallback,
                          GeoPositionErrorCallback aErrorCallback,
@@ -256,7 +256,7 @@ public:
     return mCode;
   }
 
-  void NotifyCallback(const GeoPositionErrorCallback& callback);
+  void NotifyCallback(const GeoPositionErrorCallback& aCallback);
 private:
   ~PositionError();
   int16_t mCode;

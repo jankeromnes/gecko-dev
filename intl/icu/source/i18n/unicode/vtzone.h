@@ -98,7 +98,7 @@ public:
      * @return A <code>VTimeZone</code> object initialized by the basic time zone.
      * @stable ICU 4.6
      */
-    static VTimeZone* createVTimeZoneFromBasicTimeZone(const BasicTimeZone& basicTZ,
+    static VTimeZone* createVTimeZoneFromBasicTimeZone(const BasicTimeZone& basic_time_zone,
                                                        UErrorCode &status);
 
     /**
@@ -260,7 +260,7 @@ public:
      * @stable ICU 3.8
      */
     virtual void getOffset(UDate date, UBool local, int32_t& rawOffset,
-                           int32_t& dstOffset, UErrorCode& ec) const;
+                           int32_t& dstOffset, UErrorCode& status) const;
 
     /**
      * Sets the TimeZone's raw GMT offset (i.e., the number of milliseconds to add
@@ -379,7 +379,7 @@ private:
     void writeZone(VTZWriter& w, BasicTimeZone& basictz, UVector* customProps,
         UErrorCode& status) const;
 
-    void writeHeaders(VTZWriter& w, UErrorCode& status) const;
+    void writeHeaders(VTZWriter& writer, UErrorCode& status) const;
     void writeFooter(VTZWriter& writer, UErrorCode& status) const;
 
     void writeZonePropsByTime(VTZWriter& writer, UBool isDst, const UnicodeString& zonename,

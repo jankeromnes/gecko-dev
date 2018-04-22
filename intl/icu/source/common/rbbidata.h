@@ -45,7 +45,7 @@
 U_CAPI int32_t U_EXPORT2
 ubrk_swap(const UDataSwapper *ds,
           const void *inData, int32_t length, void *outData,
-          UErrorCode *pErrorCode);
+          UErrorCode *status);
 
 #ifdef __cplusplus
 

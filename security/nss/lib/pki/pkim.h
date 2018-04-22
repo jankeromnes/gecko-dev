@@ -52,7 +52,7 @@ nssPKIObject_Create(
     NSSArena *arenaOpt,
     nssCryptokiObject *instanceOpt,
     NSSTrustDomain *td,
-    NSSCryptoContext *ccOpt,
+    NSSCryptoContext *cc,
     nssPKILockType lockType);
 
 /* nssPKIObject_AddRef
@@ -513,7 +513,7 @@ NSS_EXTERN NSSCertificate *
 nssTrustDomain_GetCertForIssuerAndSNFromCache(
     NSSTrustDomain *td,
     NSSDER *issuer,
-    NSSDER *serialNum);
+    NSSDER *serial);
 
 /*
  * Look for a specific cert in the cache.

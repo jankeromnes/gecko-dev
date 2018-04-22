@@ -286,7 +286,7 @@ public:
      * @see Locale#getDefault
      * @stable ICU 2.0
      */
-    static Collator* U_EXPORT2 createInstance(UErrorCode&  err);
+    static Collator* U_EXPORT2 createInstance(UErrorCode&  success);
 
     /**
      * Gets the collation object for the desired locale. The
@@ -321,7 +321,7 @@ public:
      * @see ResourceLoader
      * @stable ICU 2.2
      */
-    static Collator* U_EXPORT2 createInstance(const Locale& loc, UErrorCode& err);
+    static Collator* U_EXPORT2 createInstance(const Locale& desiredLocale, UErrorCode& status);
 
     /**
      * The comparison function compares the character data stored in two
@@ -668,8 +668,8 @@ public:
      */
     static int32_t U_EXPORT2 getEquivalentReorderCodes(int32_t reorderCode,
                                 int32_t* dest,
-                                int32_t destCapacity,
-                                UErrorCode& status);
+                                int32_t capacity,
+                                UErrorCode& errorCode);
 
     /**
      * Get name of the object for the desired Locale, in the desired language
@@ -758,7 +758,7 @@ public:
      * @return a string enumeration over keyword values for the given key and the locale.
      * @stable ICU 4.2
      */
-    static StringEnumeration* U_EXPORT2 getKeywordValuesForLocale(const char* keyword, const Locale& locale,
+    static StringEnumeration* U_EXPORT2 getKeywordValuesForLocale(const char* key, const Locale& locale,
                                                                     UBool commonlyUsed, UErrorCode& status);
 
     /**

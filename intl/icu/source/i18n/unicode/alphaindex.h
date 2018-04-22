@@ -397,7 +397,7 @@ public:
      * @return this
      * @stable ICU 4.8
      */
-    virtual AlphabeticIndex &setInflowLabel(const UnicodeString &inflowLabel, UErrorCode &status);
+    virtual AlphabeticIndex &setInflowLabel(const UnicodeString &label, UErrorCode &status);
 
 
    /**
@@ -419,7 +419,7 @@ public:
      * @return this
      * @stable ICU 4.8
      */
-    virtual AlphabeticIndex &setOverflowLabel(const UnicodeString &overflowLabel, UErrorCode &status);
+    virtual AlphabeticIndex &setOverflowLabel(const UnicodeString &label, UErrorCode &status);
 
    /**
      * Get the special label used for items that sort before the first normal label,
@@ -439,7 +439,7 @@ public:
      * @return this
      * @stable ICU 4.8
      */
-    virtual AlphabeticIndex &setUnderflowLabel(const UnicodeString &underflowLabel, UErrorCode &status);
+    virtual AlphabeticIndex &setUnderflowLabel(const UnicodeString &label, UErrorCode &status);
 
 
     /**
@@ -530,7 +530,7 @@ public:
      * @stable ICU 4.8
      *
      */
-    virtual int32_t  getBucketIndex(const UnicodeString &itemName, UErrorCode &status);
+    virtual int32_t  getBucketIndex(const UnicodeString &name, UErrorCode &status);
 
 
     /**

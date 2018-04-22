@@ -482,7 +482,7 @@ public:
   /**
    * TODO Make this public when the entire class is package-private.
    */
-  /*public*/ void getSunLongitude(double julianDay, double &longitude, double &meanAnomaly);
+  /*public*/ void getSunLongitude(double jDay, double &longitude, double &meanAnomaly);
 
   /**
    * The position of the sun at this object's current date and time,

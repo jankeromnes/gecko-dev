@@ -74,22 +74,22 @@ SECStatus SECU_ChangePW2(PK11SlotInfo *slot, char *oldPass, char *newPass,
 ** characters long and contain one non-alphabetic. Return DSTrue if the
 ** password is ok, DSFalse otherwise.
 */
-extern PRBool SEC_CheckPassword(char *password);
+extern PRBool SEC_CheckPassword(char *cp);
 
 /*
 ** Blind check of a password. Complement to SEC_CheckPassword which
 ** ignores length and content type, just retuning DSTrue is the password
 ** exists, DSFalse if NULL
 */
-extern PRBool SEC_BlindCheckPassword(char *password);
+extern PRBool SEC_BlindCheckPassword(char *cp);
 
 /*
 ** Get a password.
 ** First prompt with "msg" on "out", then read the password from "in".
 ** The password is then checked using "chkpw".
 */
-extern char *SEC_GetPassword(FILE *in, FILE *out, char *msg,
-                             PRBool (*chkpw)(char *));
+extern char *SEC_GetPassword(FILE *input, FILE *output, char *prompt,
+                             PRBool (*ok)(char *));
 
 char *SECU_FilePasswd(PK11SlotInfo *slot, PRBool retry, void *arg);
 
@@ -201,7 +201,7 @@ extern void SECU_PrintTimeChoice(FILE *out, const SECItem *t, const char *m,
                                  int level);
 
 /* callback for listing certs through pkcs11 */
-extern SECStatus SECU_PrintCertNickname(CERTCertListNode *cert, void *data);
+extern SECStatus SECU_PrintCertNickname(CERTCertListNode *node, void *data);
 
 /* Dump all certificate nicknames in a database */
 extern SECStatus
@@ -360,7 +360,7 @@ SECU_FindCRLAuthKeyIDExten(PLArenaPool *arena, CERTSignedCrl *crl);
  * Find the issuer of a crl. Cert usage should be checked before signing a crl.
  */
 CERTCertificate *
-SECU_FindCrlIssuer(CERTCertDBHandle *dbHandle, SECItem *subject,
+SECU_FindCrlIssuer(CERTCertDBHandle *dbhandle, SECItem *subject,
                    CERTAuthKeyID *id, PRTime validTime);
 
 /* call back function used in encoding of an extension. Called from

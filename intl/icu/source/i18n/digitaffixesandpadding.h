@@ -129,7 +129,7 @@ UBool needsPluralRules() const;
  * @status any error returned here.
  */
 UnicodeString &format(
-        const VisibleDigitsWithExponent &value,
+        const VisibleDigitsWithExponent &digits,
         const ValueFormatter &formatter,
         FieldPositionHandler &handler,
         const PluralRules *optPluralRules,

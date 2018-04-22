@@ -153,8 +153,8 @@ class SandboxBroker final
   // Retrieves permissions for the path the original symlink sits in.
   int SymlinkPermissions(const char* aPath, const size_t aPathLen);
   // In SandboxBrokerRealPath.cpp
-  char* SymlinkPath(const Policy* aPolicy, const char* __restrict aPath,
-                    char* __restrict aResolved, int* aPermission);
+  char* SymlinkPath(const Policy* policy, const char* __restrict path,
+                    char* __restrict resolved, int* perms);
 
   // Holding a UniquePtr should disallow copying, but to make that explicit:
   SandboxBroker(const SandboxBroker&) = delete;

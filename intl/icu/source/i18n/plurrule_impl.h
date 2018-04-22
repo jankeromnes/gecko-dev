@@ -143,13 +143,13 @@ public:
     PluralRuleParser();
     virtual ~PluralRuleParser();
 
-    void parse(const UnicodeString &rules, PluralRules *dest, UErrorCode &status);
+    void parse(const UnicodeString &ruleData, PluralRules *prules, UErrorCode &status);
     void getNextToken(UErrorCode &status);
     void checkSyntax(UErrorCode &status);
     static int32_t getNumberValue(const UnicodeString &token);
 
 private:
-    static tokenType getKeyType(const UnicodeString& token, tokenType type);
+    static tokenType getKeyType(const UnicodeString& token, tokenType keyType);
     static tokenType charType(UChar ch);
     static UBool isValidKeyword(const UnicodeString& token);
 
@@ -263,10 +263,10 @@ class U_I18N_API FixedDecimal: public IFixedDecimal, public UObject {
     FixedDecimal(double  n, int32_t v, int64_t f);
     FixedDecimal(double n, int32_t);
     explicit FixedDecimal(double n);
-    explicit FixedDecimal(const VisibleDigits &n);
+    explicit FixedDecimal(const VisibleDigits &digits);
     FixedDecimal();
     ~FixedDecimal() U_OVERRIDE;
-    FixedDecimal(const UnicodeString &s, UErrorCode &ec);
+    FixedDecimal(const UnicodeString &num, UErrorCode &status);
     FixedDecimal(const FixedDecimal &other);
 
     double getPluralOperand(PluralOperand operand) const U_OVERRIDE;
@@ -281,7 +281,7 @@ class U_I18N_API FixedDecimal: public IFixedDecimal, public UObject {
     void init(double n);
     UBool quickInit(double n);  // Try a fast-path only initialization,
                                 //    return TRUE if successful.
-    void adjustForMinFractionDigits(int32_t min);
+    void adjustForMinFractionDigits(int32_t minFractionDigits);
     static int64_t getFractionalDigits(double n, int32_t v);
     static int32_t decimals(double n);
 
@@ -349,8 +349,8 @@ public:
 
     UnicodeString select(const IFixedDecimal &number) const;
     void          dumpRules(UnicodeString& result);
-    UErrorCode    getKeywords(int32_t maxArraySize, UnicodeString *keywords, int32_t& arraySize) const;
-    UBool         isKeyword(const UnicodeString& keyword) const;
+    UErrorCode    getKeywords(int32_t capacityOfKeywords, UnicodeString *keywords, int32_t& arraySize) const;
+    UBool         isKeyword(const UnicodeString& keywordParam) const;
 };
 
 class PluralKeywordEnumeration : public StringEnumeration {

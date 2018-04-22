@@ -1494,7 +1494,7 @@ NSS_EXTERN NSSCertificate *
 NSSTrustDomain_FindCertificateByIssuerAndSerialNumber(
     NSSTrustDomain *td,
     NSSDER *issuer,
-    NSSDER *serialNumber);
+    NSSDER *serial);
 
 /*
  * NSSTrustDomain_FindCertificatesByIssuerAndSerialNumber
@@ -1573,7 +1573,7 @@ NSSTrustDomain_FindCertificatesByNameComponents(
 NSS_EXTERN NSSCertificate *
 NSSTrustDomain_FindCertificateByEncodedCertificate(
     NSSTrustDomain *td,
-    NSSBER *encodedCertificate);
+    NSSBER *ber);
 
 /*
  * NSSTrustDomain_FindBestCertificateByEmail

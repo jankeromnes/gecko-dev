@@ -80,6 +80,6 @@ SECStatus sslRead_Read(sslReader *reader, unsigned int count,
 SECStatus sslRead_ReadVariable(sslReader *reader, unsigned int sizeLen,
                                sslReadBuffer *out);
 SECStatus sslRead_ReadNumber(sslReader *reader, unsigned int bytes,
-                             PRUint64 *val);
+                             PRUint64 *num);
 
 #endif /* __sslencode_h_ */

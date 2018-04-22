@@ -807,7 +807,7 @@ static SECStatus DPCache_Destroy(CRLDPCache* cache);
 
 /* add a new CRL object to the dynamic array of CRLs of the DPCache, and
    returns the cached CRL object . Needs write access to DPCache. */
-static SECStatus DPCache_AddCRL(CRLDPCache* cache, CachedCrl* crl,
+static SECStatus DPCache_AddCRL(CRLDPCache* cache, CachedCrl* newcrl,
                                 PRBool* added);
 
 /* fetch the CRL for this DP from the PKCS#11 tokens */

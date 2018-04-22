@@ -196,7 +196,7 @@ public:
 
   virtual int32_t next(void);
 
-  virtual int32_t next(int32_t n);
+  virtual int32_t next(int32_t offset);
   virtual int32_t following(int32_t offset);
   virtual int32_t last(void);
 

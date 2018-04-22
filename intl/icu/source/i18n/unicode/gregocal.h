@@ -168,7 +168,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(UErrorCode& success);
+    GregorianCalendar(UErrorCode& status);
 
     /**
      * Constructs a GregorianCalendar based on the current time in the given time zone
@@ -180,7 +180,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(TimeZone* zoneToAdopt, UErrorCode& success);
+    GregorianCalendar(TimeZone* zone, UErrorCode& status);
 
     /**
      * Constructs a GregorianCalendar based on the current time in the given time zone
@@ -191,7 +191,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(const TimeZone& zone, UErrorCode& success);
+    GregorianCalendar(const TimeZone& zone, UErrorCode& status);
 
     /**
      * Constructs a GregorianCalendar based on the current time in the default time zone
@@ -202,7 +202,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(const Locale& aLocale, UErrorCode& success);
+    GregorianCalendar(const Locale& aLocale, UErrorCode& status);
 
     /**
      * Constructs a GregorianCalendar based on the current time in the given time zone
@@ -215,7 +215,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(TimeZone* zoneToAdopt, const Locale& aLocale, UErrorCode& success);
+    GregorianCalendar(TimeZone* zone, const Locale& aLocale, UErrorCode& status);
 
     /**
      * Constructs a GregorianCalendar based on the current time in the given time zone
@@ -227,7 +227,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(const TimeZone& zone, const Locale& aLocale, UErrorCode& success);
+    GregorianCalendar(const TimeZone& zone, const Locale& aLocale, UErrorCode& status);
 
     /**
      * Constructs a GregorianCalendar with the given AD date set in the default time
@@ -241,7 +241,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(int32_t year, int32_t month, int32_t date, UErrorCode& success);
+    GregorianCalendar(int32_t year, int32_t month, int32_t date, UErrorCode& status);
 
     /**
      * Constructs a GregorianCalendar with the given AD date and time set for the
@@ -257,7 +257,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(int32_t year, int32_t month, int32_t date, int32_t hour, int32_t minute, UErrorCode& success);
+    GregorianCalendar(int32_t year, int32_t month, int32_t date, int32_t hour, int32_t minute, UErrorCode& status);
 
     /**
      * Constructs a GregorianCalendar with the given AD date and time set for the
@@ -274,7 +274,7 @@ public:
      *                 Returns U_ZERO_ERROR if constructed successfully.
      * @stable ICU 2.0
      */
-    GregorianCalendar(int32_t year, int32_t month, int32_t date, int32_t hour, int32_t minute, int32_t second, UErrorCode& success);
+    GregorianCalendar(int32_t year, int32_t month, int32_t date, int32_t hour, int32_t minute, int32_t second, UErrorCode& status);
 
     /**
      * Destructor
@@ -312,7 +312,7 @@ public:
      * @param success  Output param set to success/failure code on exit.
      * @stable ICU 2.0
      */
-    void setGregorianChange(UDate date, UErrorCode& success);
+    void setGregorianChange(UDate date, UErrorCode& status);
 
     /**
      * Gets the Gregorian Calendar change date. This is the point when the switch from

@@ -389,8 +389,8 @@ public:
      *
      * @internal
      */
-    UnicodeSet(const uint16_t buffer[], int32_t bufferLen,
-               ESerialization serialization, UErrorCode &status);
+    UnicodeSet(const uint16_t data[], int32_t dataLen,
+               ESerialization serialization, UErrorCode &ec);
 #endif  /* U_HIDE_INTERNAL_API */
 
     /**

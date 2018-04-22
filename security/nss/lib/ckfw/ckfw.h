@@ -1202,7 +1202,7 @@ nssCKFWMechanism_GetWrapKeyLength(
     CK_MECHANISM_PTR pMechanism,
     NSSCKFWSession *fwSession,
     NSSCKFWObject *fwWrappingKeyObject,
-    NSSCKFWObject *fwObject,
+    NSSCKFWObject *fwKeyObject,
     CK_RV *pError);
 
 /*
@@ -1214,7 +1214,7 @@ nssCKFWMechanism_WrapKey(
     CK_MECHANISM_PTR pMechanism,
     NSSCKFWSession *fwSession,
     NSSCKFWObject *fwWrappingKeyObject,
-    NSSCKFWObject *fwObject,
+    NSSCKFWObject *fwKeyObject,
     NSSItem *wrappedKey);
 
 /*
@@ -1351,7 +1351,7 @@ nssCKFWCryptoOperation_DigestUpdate(
 NSS_EXTERN CK_RV
 nssCKFWCryptoOperation_DigestKey(
     NSSCKFWCryptoOperation *fwOperation,
-    NSSCKFWObject *fwKey);
+    NSSCKFWObject *fwObject);
 
 /*
  * nssCKFWCryptoOperation_UpdateFinal
@@ -1515,7 +1515,7 @@ nssCKFWSession_SetFWFindObjects(
  */
 NSS_EXTERN NSSCKFWFindObjects *
 nssCKFWSession_GetFWFindObjects(
-    NSSCKFWSession *fwSesssion,
+    NSSCKFWSession *fwSession,
     CK_RV *pError);
 
 /*
@@ -1604,8 +1604,8 @@ nssCKFWSession_InitPIN(
 NSS_EXTERN CK_RV
 nssCKFWSession_SetPIN(
     NSSCKFWSession *fwSession,
-    NSSItem *newPin,
-    NSSItem *oldPin);
+    NSSItem *oldPin,
+    NSSItem *newPin);
 
 /*
  * nssCKFWSession_GetOperationStateLen
@@ -1654,7 +1654,7 @@ nssCKFWSession_CreateObject(
 NSS_EXTERN NSSCKFWObject *
 nssCKFWSession_CopyObject(
     NSSCKFWSession *fwSession,
-    NSSCKFWObject *object,
+    NSSCKFWObject *fwObject,
     CK_ATTRIBUTE_PTR pTemplate,
     CK_ULONG ulAttributeCount,
     CK_RV *pError);

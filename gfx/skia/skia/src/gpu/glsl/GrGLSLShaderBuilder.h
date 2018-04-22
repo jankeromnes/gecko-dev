@@ -41,7 +41,7 @@ public:
     /** Version of above that appends the result to the shader code instead.*/
     void appendTextureLookup(SamplerHandle,
                              const char* coordName,
-                             GrSLType coordType = kHalf2_GrSLType,
+                             GrSLType varyingType = kHalf2_GrSLType,
                              GrGLSLColorSpaceXformHelper* colorXformHelper = nullptr);
 
 
@@ -52,7 +52,7 @@ public:
     void appendTextureLookupAndModulate(const char* modulation,
                                         SamplerHandle,
                                         const char* coordName,
-                                        GrSLType coordType = kHalf2_GrSLType,
+                                        GrSLType varyingType = kHalf2_GrSLType,
                                         GrGLSLColorSpaceXformHelper* colorXformHelper = nullptr);
 
     /** Adds a helper function to facilitate color gamut transformation, and produces code that

@@ -34,13 +34,13 @@ extern SECOidTag SEC_PKCS7ContentType(SEC_PKCS7ContentInfo *cinfo);
 /*
  * Destroy a PKCS7 contentInfo and all of its sub-pieces.
  */
-extern void SEC_PKCS7DestroyContentInfo(SEC_PKCS7ContentInfo *contentInfo);
+extern void SEC_PKCS7DestroyContentInfo(SEC_PKCS7ContentInfo *cinfo);
 
 /*
  * Copy a PKCS7 contentInfo.  A Destroy is needed on *each* copy.
  */
 extern SEC_PKCS7ContentInfo *
-SEC_PKCS7CopyContentInfo(SEC_PKCS7ContentInfo *contentInfo);
+SEC_PKCS7CopyContentInfo(SEC_PKCS7ContentInfo *cinfo);
 
 /*
  * Return a pointer to the actual content.  In the case of those types
@@ -53,8 +53,8 @@ extern SECItem *SEC_PKCS7GetContent(SEC_PKCS7ContentInfo *cinfo);
  ************************************************************************/
 
 extern SEC_PKCS7DecoderContext *
-SEC_PKCS7DecoderStart(SEC_PKCS7DecoderContentCallback callback,
-                      void *callback_arg,
+SEC_PKCS7DecoderStart(SEC_PKCS7DecoderContentCallback cb,
+                      void *cb_arg,
                       SECKEYGetPasswordKey pwfn, void *pwfn_arg,
                       SEC_PKCS7GetDecryptKeyCallback decrypt_key_cb,
                       void *decrypt_key_cb_arg,
@@ -538,7 +538,7 @@ SEC_PKCS7EncoderStart(SEC_PKCS7ContentInfo *cinfo,
  * Encode more contents, hashing and/or encrypting along the way.
  */
 extern SECStatus SEC_PKCS7EncoderUpdate(SEC_PKCS7EncoderContext *p7ecx,
-                                        const char *buf,
+                                        const char *data,
                                         unsigned long len);
 
 /*
@@ -556,7 +556,7 @@ extern SECStatus SEC_PKCS7EncoderFinish(SEC_PKCS7EncoderContext *p7ecx,
                                         void *pwfnarg);
 
 /*  Abort the underlying ASN.1 stream & set an error  */
-void SEC_PKCS7EncoderAbort(SEC_PKCS7EncoderContext *p7dcx, int error);
+void SEC_PKCS7EncoderAbort(SEC_PKCS7EncoderContext *p7ecx, int error);
 
 /* retrieve the algorithm ID used to encrypt the content info
  * for encrypted and enveloped data.  The SECAlgorithmID pointer

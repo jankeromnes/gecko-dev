@@ -79,7 +79,7 @@ public:
      * this surface (at least if tiling is not involved).
      * Returns null on error.
      */
-    virtual already_AddRefed<gfxASurface> CreateSimilarSurface(gfxContentType aType,
+    virtual already_AddRefed<gfxASurface> CreateSimilarSurface(gfxContentType aContent,
                                                                const mozilla::gfx::IntSize& aSize);
 
     /**

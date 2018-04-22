@@ -898,7 +898,7 @@ unum_parseToUFormattable(const UNumberFormat* fmt,
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2 
-unum_applyPattern(          UNumberFormat  *format,
+unum_applyPattern(          UNumberFormat  *fmt,
                             UBool          localized,
                     const   UChar          *pattern,
                             int32_t         patternLength,
@@ -917,7 +917,7 @@ unum_applyPattern(          UNumberFormat  *format,
 * @stable ICU 2.0
 */
 U_STABLE const char* U_EXPORT2 
-unum_getAvailable(int32_t localeIndex);
+unum_getAvailable(int32_t index);
 
 /**
 * Determine how many locales have decimal formatting patterns available.  The

@@ -31,7 +31,7 @@ SEC_BEGIN_PROTOS
 **     stored data
 **  "src" is a pointer to the structure that will be encoded
 */
-extern SECStatus DER_Encode(PLArenaPool *arena, SECItem *dest, DERTemplate *t,
+extern SECStatus DER_Encode(PLArenaPool *arena, SECItem *dest, DERTemplate *dtemplate,
                             void *src);
 
 extern SECStatus DER_Lengths(SECItem *item, int *header_len_p,
@@ -46,8 +46,8 @@ extern SECStatus DER_Lengths(SECItem *item, int *header_len_p,
 **  "encodingLen" is the number of bytes of data that will follow
 **     the header
 */
-extern unsigned char *DER_StoreHeader(unsigned char *to, unsigned int code,
-                                      PRUint32 encodingLen);
+extern unsigned char *DER_StoreHeader(unsigned char *buf, unsigned int code,
+                                      PRUint32 len);
 
 /*
 ** Return the number of bytes it will take to hold a der encoded length.
@@ -58,27 +58,27 @@ extern int DER_LengthLength(PRUint32 len);
 ** Store a der encoded *signed* integer (whose value is "src") into "dst".
 ** XXX This should really be enhanced to take a long.
 */
-extern SECStatus DER_SetInteger(PLArenaPool *arena, SECItem *dst, PRInt32 src);
+extern SECStatus DER_SetInteger(PLArenaPool *arena, SECItem *it, PRInt32 i);
 
 /*
 ** Store a der encoded *unsigned* integer (whose value is "src") into "dst".
 ** XXX This should really be enhanced to take an unsigned long.
 */
-extern SECStatus DER_SetUInteger(PLArenaPool *arena, SECItem *dst, PRUint32 src);
+extern SECStatus DER_SetUInteger(PLArenaPool *arena, SECItem *it, PRUint32 ui);
 
 /*
 ** Decode a der encoded *signed* integer that is stored in "src".
 ** If "-1" is returned, then the caller should check the error in
 ** XP_GetError() to see if an overflow occurred (SEC_ERROR_BAD_DER).
 */
-extern long DER_GetInteger(const SECItem *src);
+extern long DER_GetInteger(const SECItem *it);
 
 /*
 ** Decode a der encoded *unsigned* integer that is stored in "src".
 ** If the ULONG_MAX is returned, then the caller should check the error
 ** in XP_GetError() to see if an overflow occurred (SEC_ERROR_BAD_DER).
 */
-extern unsigned long DER_GetUInteger(SECItem *src);
+extern unsigned long DER_GetUInteger(SECItem *it);
 
 /*
 ** Convert an NSPR time value to a der encoded time value.
@@ -89,7 +89,7 @@ extern unsigned long DER_GetUInteger(SECItem *src);
 ** The caller is responsible for freeing up the buffer which
 ** result->data points to upon a successful operation.
 */
-extern SECStatus DER_TimeToUTCTime(SECItem *result, PRTime time);
+extern SECStatus DER_TimeToUTCTime(SECItem *dst, PRTime gmttime);
 extern SECStatus DER_TimeToUTCTimeArena(PLArenaPool *arenaOpt,
                                         SECItem *dst, PRTime gmttime);
 
@@ -99,12 +99,12 @@ extern SECStatus DER_TimeToUTCTimeArena(PLArenaPool *arenaOpt,
 **  "result" the resulting NSPR time
 **  "string" the der notation ascii value to decode
 */
-extern SECStatus DER_AsciiToTime(PRTime *result, const char *string);
+extern SECStatus DER_AsciiToTime(PRTime *dst, const char *string);
 
 /*
 ** Same as DER_AsciiToTime except takes an SECItem instead of a string
 */
-extern SECStatus DER_UTCTimeToTime(PRTime *result, const SECItem *time);
+extern SECStatus DER_UTCTimeToTime(PRTime *dst, const SECItem *time);
 
 /*
 ** Convert a DER encoded UTC time to an ascii time representation

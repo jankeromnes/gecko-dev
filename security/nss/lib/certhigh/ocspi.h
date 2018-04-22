@@ -48,10 +48,10 @@ typedef enum { ocspMissing,
 SECStatus
 ocsp_GetCachedOCSPResponseStatus(CERTOCSPCertID *certID,
                                  PRTime time,
-                                 PRBool ignoreOcspFailureMode,
+                                 PRBool ignoreGlobalOcspFailureSetting,
                                  SECStatus *rvOcsp,
                                  SECErrorCodes *missingResponseError,
-                                 OCSPFreshness *freshness);
+                                 OCSPFreshness *cacheFreshness);
 
 /*
  * FUNCTION: cert_ProcessOCSPResponse
@@ -131,7 +131,7 @@ cert_RememberOCSPProcessingFailure(CERTOCSPCertID *certID,
 char *
 ocsp_GetResponderLocation(CERTCertDBHandle *handle,
                           CERTCertificate *cert,
-                          PRBool canUseDefaultLocation,
+                          PRBool canUseDefault,
                           PRBool *isDefault);
 
 /* FUNCTION: ocsp_FetchingFailureIsVerificationFailure

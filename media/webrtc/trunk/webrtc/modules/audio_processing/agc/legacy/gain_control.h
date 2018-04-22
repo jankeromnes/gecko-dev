@@ -71,7 +71,7 @@ int WebRtcAgc_GetAddFarendError(void* state, size_t samples);
  *                          :  0 - Normal operation.
  *                          : -1 - Error
  */
-int WebRtcAgc_AddFarend(void* agcInst, const int16_t* inFar, size_t samples);
+int WebRtcAgc_AddFarend(void* state, const int16_t* in_far, size_t samples);
 
 /*
  * This function processes a 10 ms frame of microphone speech to determine
@@ -93,8 +93,8 @@ int WebRtcAgc_AddFarend(void* agcInst, const int16_t* inFar, size_t samples);
  *                          :  0 - Normal operation.
  *                          : -1 - Error
  */
-int WebRtcAgc_AddMic(void* agcInst,
-                     int16_t* const* inMic,
+int WebRtcAgc_AddMic(void* state,
+                     int16_t* const* in_mic,
                      size_t num_bands,
                      size_t samples);
 
@@ -122,7 +122,7 @@ int WebRtcAgc_AddMic(void* agcInst,
  *                          : -1 - Error
  */
 int WebRtcAgc_VirtualMic(void* agcInst,
-                         int16_t* const* inMic,
+                         int16_t* const* in_near,
                          size_t num_bands,
                          size_t samples,
                          int32_t micLevelIn,
@@ -163,7 +163,7 @@ int WebRtcAgc_VirtualMic(void* agcInst,
  *                          : -1 - Error
  */
 int WebRtcAgc_Process(void* agcInst,
-                      const int16_t* const* inNear,
+                      const int16_t* const* in_near,
                       size_t num_bands,
                       size_t samples,
                       int16_t* const* out,
@@ -186,7 +186,7 @@ int WebRtcAgc_Process(void* agcInst,
  *                          :  0 - Normal operation.
  *                          : -1 - Error
  */
-int WebRtcAgc_set_config(void* agcInst, WebRtcAgcConfig config);
+int WebRtcAgc_set_config(void* agcInst, WebRtcAgcConfig agcConfig);
 
 /*
  * This function returns the config parameters (targetLevelDbfs,
@@ -216,7 +216,7 @@ void* WebRtcAgc_Create();
  * Input:
  *      - agcInst           : AGC instance.
  */
-void WebRtcAgc_Free(void* agcInst);
+void WebRtcAgc_Free(void* state);
 
 /*
  * This function initializes an AGC instance.

@@ -74,7 +74,7 @@ PRBool SEC_CrlIsNewer(CERTCrl *inNew, CERTCrl *old);
 **	"notBefore" is the start of the validity period (last update)
 **	"notAfter" is the end of the validity period (next update)
 */
-SECStatus SEC_GetCrlTimes(CERTCrl *crl, PRTime *notBefore, PRTime *notAfter);
+SECStatus SEC_GetCrlTimes(CERTCrl *date, PRTime *notBefore, PRTime *notAfter);
 
 /*
 ** Check the validity times of a crl vs. time 't', allowing

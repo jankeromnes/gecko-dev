@@ -173,13 +173,13 @@ public:
 
     /** Deprecated.
     */
-    static sk_sp<SkImage> MakeFromTexture(GrContext* context,
-                                          const GrBackendTexture& backendTexture,
+    static sk_sp<SkImage> MakeFromTexture(GrContext* ctx,
+                                          const GrBackendTexture& tex,
                                           GrSurfaceOrigin origin,
-                                          SkAlphaType alphaType,
-                                          sk_sp<SkColorSpace> colorSpace,
-                                          TextureReleaseProc textureReleaseProc,
-                                          ReleaseContext releaseContext);
+                                          SkAlphaType at,
+                                          sk_sp<SkColorSpace> cs,
+                                          TextureReleaseProc releaseP,
+                                          ReleaseContext releaseC);
 
     /** Creates SkImage from GPU texture associated with context. Caller is responsible for
         managing the lifetime of GPU texture.
@@ -230,14 +230,14 @@ public:
         @param releaseContext      state passed to textureReleaseProc
         @return                    created SkImage, or nullptr
     */
-    static sk_sp<SkImage> MakeFromTexture(GrContext* context,
-                                          const GrBackendTexture& backendTexture,
+    static sk_sp<SkImage> MakeFromTexture(GrContext* ctx,
+                                          const GrBackendTexture& tex,
                                           GrSurfaceOrigin origin,
-                                          SkColorType colorType,
-                                          SkAlphaType alphaType,
-                                          sk_sp<SkColorSpace> colorSpace,
-                                          TextureReleaseProc textureReleaseProc,
-                                          ReleaseContext releaseContext);
+                                          SkColorType ct,
+                                          SkAlphaType at,
+                                          sk_sp<SkColorSpace> cs,
+                                          TextureReleaseProc releaseP,
+                                          ReleaseContext releaseC);
 
     /** Creates SkImage from encoded data. SkImage is uploaded to GPU back-end using context.
 
@@ -263,7 +263,7 @@ public:
         @param dstColorSpace  range of colors of matching SkSurface on GPU
         @return               created SkImage, or nullptr
     */
-    static sk_sp<SkImage> MakeCrossContextFromEncoded(GrContext* context, sk_sp<SkData> data,
+    static sk_sp<SkImage> MakeCrossContextFromEncoded(GrContext* context, sk_sp<SkData> encoded,
                                                       bool buildMips, SkColorSpace* dstColorSpace);
 
     /** Creates SkImage from pixmap. SkImage is uploaded to GPU back-end using context.
@@ -295,11 +295,11 @@ public:
 
     /** Deprecated.
     */
-    static sk_sp<SkImage> MakeFromAdoptedTexture(GrContext* context,
-                                                 const GrBackendTexture& backendTexture,
-                                                 GrSurfaceOrigin surfaceOrigin,
-                                                 SkAlphaType alphaType = kPremul_SkAlphaType,
-                                                 sk_sp<SkColorSpace> colorSpace = nullptr);
+    static sk_sp<SkImage> MakeFromAdoptedTexture(GrContext* ctx,
+                                                 const GrBackendTexture& tex,
+                                                 GrSurfaceOrigin origin,
+                                                 SkAlphaType at = kPremul_SkAlphaType,
+                                                 sk_sp<SkColorSpace> cs = nullptr);
 
     /** Creates SkImage from backendTexture associated with context. backendTexture and
         returned SkImage are managed internally, and are released when no longer needed.
@@ -319,12 +319,12 @@ public:
         @param colorSpace      range of colors; may be nullptr
         @return                created SkImage, or nullptr
     */
-    static sk_sp<SkImage> MakeFromAdoptedTexture(GrContext* context,
-                                                 const GrBackendTexture& backendTexture,
-                                                 GrSurfaceOrigin surfaceOrigin,
-                                                 SkColorType colorType,
-                                                 SkAlphaType alphaType = kPremul_SkAlphaType,
-                                                 sk_sp<SkColorSpace> colorSpace = nullptr);
+    static sk_sp<SkImage> MakeFromAdoptedTexture(GrContext* ctx,
+                                                 const GrBackendTexture& tex,
+                                                 GrSurfaceOrigin origin,
+                                                 SkColorType ct,
+                                                 SkAlphaType at = kPremul_SkAlphaType,
+                                                 sk_sp<SkColorSpace> cs = nullptr);
 
     /** Creates SkImage from copy of yuvTextureHandles, an array of textures on GPU.
         yuvTextureHandles contain pixels for YUV planes of SkImage.
@@ -341,11 +341,11 @@ public:
         @param colorSpace         range of colors; may be nullptr
         @return                   created SkImage, or nullptr
     */
-    static sk_sp<SkImage> MakeFromYUVTexturesCopy(GrContext* context, SkYUVColorSpace yuvColorSpace,
+    static sk_sp<SkImage> MakeFromYUVTexturesCopy(GrContext* ctx, SkYUVColorSpace colorSpace,
                                                   const GrBackendObject yuvTextureHandles[3],
                                                   const SkISize yuvSizes[3],
-                                                  GrSurfaceOrigin surfaceOrigin,
-                                                  sk_sp<SkColorSpace> colorSpace = nullptr);
+                                                  GrSurfaceOrigin origin,
+                                                  sk_sp<SkColorSpace> imageColorSpace = nullptr);
 
     /** Creates SkImage from copy of nv12TextureHandles, an array of textures on GPU.
         nv12TextureHandles[0] contains pixels for YUV_Component_Y plane.
@@ -364,12 +364,12 @@ public:
         @param colorSpace          range of colors; may be nullptr
         @return                    created SkImage, or nullptr
     */
-    static sk_sp<SkImage> MakeFromNV12TexturesCopy(GrContext* context,
-                                                   SkYUVColorSpace yuvColorSpace,
-                                                   const GrBackendObject nv12TextureHandles[2],
-                                                   const SkISize nv12Sizes[2],
-                                                   GrSurfaceOrigin surfaceOrigin,
-                                                   sk_sp<SkColorSpace> colorSpace = nullptr);
+    static sk_sp<SkImage> MakeFromNV12TexturesCopy(GrContext* ctx,
+                                                   SkYUVColorSpace colorSpace,
+                                                   const GrBackendObject yuvTextureHandles[2],
+                                                   const SkISize yuvSizes[2],
+                                                   GrSurfaceOrigin origin,
+                                                   sk_sp<SkColorSpace> imageColorSpace = nullptr);
 
     /** Creates SkImage from copy of yuvTextureHandles, an array of textures on GPU.
         yuvTextureHandles contain pixels for YUV planes of SkImage.
@@ -386,11 +386,11 @@ public:
         @param colorSpace         range of colors; may be nullptr
         @return                   created SkImage, or nullptr
     */
-    static sk_sp<SkImage> MakeFromYUVTexturesCopy(GrContext* context, SkYUVColorSpace yuvColorSpace,
-                                                  const GrBackendTexture yuvTextureHandles[3],
+    static sk_sp<SkImage> MakeFromYUVTexturesCopy(GrContext* ctx, SkYUVColorSpace colorSpace,
+                                                  const GrBackendTexture yuvBackendTextures[3],
                                                   const SkISize yuvSizes[3],
-                                                  GrSurfaceOrigin surfaceOrigin,
-                                                  sk_sp<SkColorSpace> colorSpace = nullptr);
+                                                  GrSurfaceOrigin origin,
+                                                  sk_sp<SkColorSpace> imageColorSpace = nullptr);
 
     /** Creates SkImage from copy of nv12TextureHandles, an array of textures on GPU.
         nv12TextureHandles[0] contains pixels for YUV_Component_Y plane.
@@ -409,12 +409,12 @@ public:
         @param colorSpace          range of colors; may be nullptr
         @return                    created SkImage, or nullptr
     */
-    static sk_sp<SkImage> MakeFromNV12TexturesCopy(GrContext* context,
-                                                   SkYUVColorSpace yuvColorSpace,
-                                                   const GrBackendTexture nv12TextureHandles[2],
-                                                   const SkISize nv12Sizes[2],
-                                                   GrSurfaceOrigin surfaceOrigin,
-                                                   sk_sp<SkColorSpace> colorSpace = nullptr);
+    static sk_sp<SkImage> MakeFromNV12TexturesCopy(GrContext* ctx,
+                                                   SkYUVColorSpace colorSpace,
+                                                   const GrBackendTexture yuvBackendTextures[2],
+                                                   const SkISize yuvSizes[2],
+                                                   GrSurfaceOrigin origin,
+                                                   sk_sp<SkColorSpace> imageColorSpace = nullptr);
 
     enum class BitDepth {
         kU8,  //!< Use 8 bits per ARGB component using unsigned integer format.
@@ -873,10 +873,10 @@ public:
         @param backendTextureReleaseProc  storage for clean up function
         @return                           true if backend texture was created
     */
-    static bool MakeBackendTextureFromSkImage(GrContext* context,
+    static bool MakeBackendTextureFromSkImage(GrContext* ctx,
                                               sk_sp<SkImage> image,
                                               GrBackendTexture* backendTexture,
-                                              BackendTextureReleaseProc* backendTextureReleaseProc);
+                                              BackendTextureReleaseProc* releaseProc);
 
     enum LegacyBitmapMode {
         kRO_LegacyBitmapMode, //!< Returned bitmap is read-only and immutable.

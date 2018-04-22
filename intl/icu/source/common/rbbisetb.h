@@ -91,7 +91,7 @@ public:
                                              //    columns in the DFA state table
     int32_t  getTrieSize() /*const*/;        // Size in bytes of the serialized Trie.
     void     serializeTrie(uint8_t *where);  // write out the serialized Trie.
-    UChar32  getFirstChar(int32_t  val) const;
+    UChar32  getFirstChar(int32_t  category) const;
     UBool    sawBOF() const;                 // Indicate whether any references to the {bof} pseudo
                                              //   character were encountered.
     /** merge two character categories that have been identified as having equivalent behavior.

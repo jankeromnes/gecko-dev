@@ -711,8 +711,8 @@ void sctp_fill_pcbinfo(struct sctp_pcbinfo *);
 struct sctp_ifn *
 sctp_find_ifn(void *ifn, uint32_t ifn_index);
 
-struct sctp_vrf *sctp_allocate_vrf(int vrfid);
-struct sctp_vrf *sctp_find_vrf(uint32_t vrfid);
+struct sctp_vrf *sctp_allocate_vrf(int vrf_id);
+struct sctp_vrf *sctp_find_vrf(uint32_t vrf_id);
 void sctp_free_vrf(struct sctp_vrf *vrf);
 
 /*-
@@ -728,7 +728,7 @@ void sctp_mark_ifa_addr_down(uint32_t vrf_id, struct sockaddr *addr, const char 
 void sctp_mark_ifa_addr_up(uint32_t vrf_id, struct sockaddr *addr, const char *if_name, uint32_t ifn_index);
 
 struct sctp_ifa *
-sctp_add_addr_to_vrf(uint32_t vrfid,
+sctp_add_addr_to_vrf(uint32_t vrf_id,
 		     void *ifn, uint32_t ifn_index, uint32_t ifn_type,
 		     const char *if_name,
 		     void *ifa, struct sockaddr *addr, uint32_t ifa_flags,
@@ -740,7 +740,7 @@ void sctp_free_ifn(struct sctp_ifn *sctp_ifnp);
 void sctp_free_ifa(struct sctp_ifa *sctp_ifap);
 
 
-void sctp_del_addr_from_vrf(uint32_t vrfid, struct sockaddr *addr,
+void sctp_del_addr_from_vrf(uint32_t vrf_id, struct sockaddr *addr,
 			    uint32_t ifn_index, const char *if_name);
 
 
@@ -876,7 +876,7 @@ sctp_initiate_iterator(inp_func inpf,
 		       uint32_t,
 		       end_func ef,
 		       struct sctp_inpcb *,
-		       uint8_t co_off);
+		       uint8_t chunk_output_off);
 #if defined(__FreeBSD__) && defined(SCTP_MCORE_INPUT) && defined(SMP)
 void
 sctp_queue_to_mcore(struct mbuf *m, int off, int cpu_to_use);

@@ -16,7 +16,7 @@ namespace mozilla {
 class WidevineVideoFrame : public cdm::VideoFrame {
 public:
   WidevineVideoFrame();
-  WidevineVideoFrame(WidevineVideoFrame&& other);
+  WidevineVideoFrame(WidevineVideoFrame&& aOther);
   ~WidevineVideoFrame();
 
   void SetFormat(cdm::VideoFormat aFormat) override;
@@ -34,7 +34,7 @@ public:
   void SetStride(cdm::VideoFrame::VideoPlane aPlane, uint32_t aStride) override;
   uint32_t Stride(cdm::VideoFrame::VideoPlane aPlane) override;
 
-  void SetTimestamp(int64_t aTimestamp) override;
+  void SetTimestamp(int64_t timestamp) override;
   int64_t Timestamp() const override;
 
   MOZ_MUST_USE bool InitToBlack(uint32_t aWidth, uint32_t aHeight, int64_t aTimeStamp);

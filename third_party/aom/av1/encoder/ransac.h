@@ -27,18 +27,18 @@ typedef int (*RansacFunc)(int *matched_points, int npoints,
    corresponding points in 2 frames using RANSAC. */
 int ransac_homography(int *matched_points, int npoints,
                       int *num_inliers_by_motion, double *params_by_motion,
-                      int num_motions);
+                      int num_desired_motions);
 int ransac_affine(int *matched_points, int npoints, int *num_inliers_by_motion,
-                  double *params_by_motion, int num_motions);
+                  double *params_by_motion, int num_desired_motions);
 int ransac_hortrapezoid(int *matched_points, int npoints,
                         int *num_inliers_by_motion, double *params_by_motion,
-                        int num_motions);
+                        int num_desired_motions);
 int ransac_vertrapezoid(int *matched_points, int npoints,
                         int *num_inliers_by_motion, double *params_by_motion,
-                        int num_motions);
+                        int num_desired_motions);
 int ransac_rotzoom(int *matched_points, int npoints, int *num_inliers_by_motion,
-                   double *params_by_motion, int num_motions);
+                   double *params_by_motion, int num_desired_motions);
 int ransac_translation(int *matched_points, int npoints,
                        int *num_inliers_by_motion, double *params_by_motion,
-                       int num_motions);
+                       int num_desired_motions);
 #endif  // AV1_ENCODER_RANSAC_H_

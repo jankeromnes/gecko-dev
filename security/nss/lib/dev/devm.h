@@ -75,7 +75,7 @@ nssToken_IsLoginRequired(
 
 NSS_EXTERN void
 nssToken_Remove(
-    NSSToken *token);
+    NSSToken *tok);
 
 NSS_EXTERN nssCryptokiObject *
 nssCryptokiObject_Create(
@@ -149,7 +149,7 @@ nssToken_GetCachedObjectAttributes(
  */
 NSS_EXTERN PRUint32
 nssPKCS11String_Length(
-    CK_CHAR *pkcs11str,
+    CK_CHAR *pkcs11Str,
     PRUint32 bufLen);
 
 PR_END_EXTERN_C

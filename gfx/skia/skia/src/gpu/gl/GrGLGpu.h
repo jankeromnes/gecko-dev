@@ -223,7 +223,7 @@ private:
     // Checks whether glReadPixels can be called to get pixel values in readConfig from a
     // render target that has renderTargetConfig. This may have to create a temporary
     // render target and thus is less preferable than the variant that takes a render target.
-    bool readPixelsSupported(GrPixelConfig renderTargetConfig, GrPixelConfig readConfig);
+    bool readPixelsSupported(GrPixelConfig rtConfig, GrPixelConfig readConfig);
 
     // Checks whether glReadPixels can be called to get pixel values in readConfig from a
     // render target that has the same config as surfaceForConfig. Calls one of the the two
@@ -256,7 +256,7 @@ private:
                        const SkIRect& srcRect, const SkIPoint& dstPoint) override;
 
     // binds texture unit in GL
-    void setTextureUnit(int unitIdx);
+    void setTextureUnit(int unit);
 
     void setTextureSwizzle(int unitIdx, GrGLenum target, const GrGLenum swizzle[]);
 
@@ -274,7 +274,7 @@ private:
 
     void flushBlend(const GrXferProcessor::BlendInfo& blendInfo, const GrSwizzle&);
 
-    void onFinishFlush(bool insertedSemaphores) override;
+    void onFinishFlush(bool insertedSemaphore) override;
 
     bool hasExtension(const char* ext) const { return fGLContext->hasExtension(ext); }
 
@@ -300,7 +300,7 @@ private:
 
         void abandon();
         GrGLProgram* refProgram(const GrGLGpu*, const GrPipeline&, const GrPrimitiveProcessor&,
-                                bool hasPointSize);
+                                bool isPoints);
 
     private:
         // We may actually have kMaxEntries+1 shaders in the GL context because we create a new
@@ -399,7 +399,7 @@ private:
 
     void onDumpJSON(SkJSONWriter*) const override;
 
-    bool createCopyProgram(GrTexture* srcTexture);
+    bool createCopyProgram(GrTexture* srcTex);
     bool createMipmapProgram(int progIdx);
     bool createStencilClipClearProgram();
     bool createClearColorProgram();
@@ -520,7 +520,7 @@ private:
          *
          * The returned GrGLAttribArrayState should be used to set vertex attribute arrays.
          */
-        GrGLAttribArrayState* bindInternalVertexArray(GrGLGpu*, const GrBuffer* ibuff = nullptr);
+        GrGLAttribArrayState* bindInternalVertexArray(GrGLGpu*, const GrBuffer* ibuf = nullptr);
 
     private:
         GrGLuint             fBoundVertexArrayID;

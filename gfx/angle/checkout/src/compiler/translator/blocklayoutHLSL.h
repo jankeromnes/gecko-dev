@@ -44,12 +44,12 @@ class HLSLBlockEncoder : public BlockLayoutEncoder
     static HLSLBlockEncoderStrategy GetStrategyFor(ShShaderOutput outputType);
 
   protected:
-    void getBlockLayoutInfo(GLenum type,
+    void getBlockLayoutInfo(GLenum typeIn,
                             const std::vector<unsigned int> &arraySizes,
                             bool isRowMajorMatrix,
                             int *arrayStrideOut,
                             int *matrixStrideOut) override;
-    void advanceOffset(GLenum type,
+    void advanceOffset(GLenum typeIn,
                        const std::vector<unsigned int> &arraySizes,
                        bool isRowMajorMatrix,
                        int arrayStride,

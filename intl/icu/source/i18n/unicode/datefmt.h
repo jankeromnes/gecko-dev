@@ -242,7 +242,7 @@ public:
      */
     virtual UnicodeString& format(const Formattable& obj,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos,
+                                  FieldPosition& fieldPosition,
                                   UErrorCode& status) const;
 
     /**
@@ -509,7 +509,7 @@ public:
      */
     virtual void parseObject(const UnicodeString& source,
                              Formattable& result,
-                             ParsePosition& parse_pos) const;
+                             ParsePosition& pos) const;
 
     /**
      * Create a default date/time formatter that uses the SHORT style for both
@@ -722,7 +722,7 @@ public:
      * @param calendarToAdopt    Calendar object to be adopted.
      * @stable ICU 2.0
      */
-    virtual void adoptCalendar(Calendar* calendarToAdopt);
+    virtual void adoptCalendar(Calendar* newCalendar);
 
     /**
      * Set the calendar to be used by this date format. Initially, the default
@@ -748,7 +748,7 @@ public:
      * @param formatToAdopt     NumberFormat object to be adopted.
      * @stable ICU 2.0
      */
-    virtual void adoptNumberFormat(NumberFormat* formatToAdopt);
+    virtual void adoptNumberFormat(NumberFormat* newNumberFormat);
 
     /**
      * Allows you to set the number formatter.
@@ -770,7 +770,7 @@ public:
      * @param zoneToAdopt the TimeZone to be adopted.
      * @stable ICU 2.0
      */
-    virtual void adoptTimeZone(TimeZone* zoneToAdopt);
+    virtual void adoptTimeZone(TimeZone* zone);
 
     /**
      * Sets the time zone for the calendar of this DateFormat object.
@@ -814,7 +814,7 @@ public:
      */
 
     virtual DateFormat&  U_EXPORT2 setBooleanAttribute(UDateFormatBooleanAttribute attr,
-    									UBool newvalue,
+    									UBool newValue,
     									UErrorCode &status);
 
     /**
@@ -876,7 +876,7 @@ private:
      * @param inLocale the given locale.
      * @return a date/time formatter, or 0 on failure.
      */
-    static DateFormat* U_EXPORT2 create(EStyle timeStyle, EStyle dateStyle, const Locale& inLocale);
+    static DateFormat* U_EXPORT2 create(EStyle timeStyle, EStyle dateStyle, const Locale& locale);
 
      
     /**

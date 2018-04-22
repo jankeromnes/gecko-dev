@@ -40,7 +40,7 @@ public:
      * @param toDate    The to date in date interval.
      * @stable ICU 4.0
      */
-    DateInterval(UDate fromDate, UDate toDate);
+    DateInterval(UDate from, UDate to);
 
     /**
      * destructor

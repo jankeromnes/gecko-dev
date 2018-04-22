@@ -387,7 +387,7 @@ class CjkBreakEngine : public DictionaryBreakEngine {
      * @param foundBreaks Output of C array of int32_t break positions, or 0
      * @return The number of breaks found
      */
-  virtual int32_t divideUpDictionaryRange( UText *text,
+  virtual int32_t divideUpDictionaryRange( UText *inText,
           int32_t rangeStart,
           int32_t rangeEnd,
           UVector32 &foundBreaks ) const;

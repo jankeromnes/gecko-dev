@@ -277,8 +277,8 @@ int XmlParseXmlDecl(int isGeneralTextEntity,
 int XmlInitEncoding(INIT_ENCODING *, const ENCODING **, const char *name);
 const ENCODING *XmlGetUtf8InternalEncoding(void);
 const ENCODING *XmlGetUtf16InternalEncoding(void);
-int FASTCALL XmlUtf8Encode(int charNumber, char *buf);
-int FASTCALL XmlUtf16Encode(int charNumber, unsigned short *buf);
+int FASTCALL XmlUtf8Encode(int c, char *buf);
+int FASTCALL XmlUtf16Encode(int charNum, unsigned short *buf);
 int XmlSizeOfUnknownEncoding(void);
 
 

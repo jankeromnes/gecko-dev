@@ -44,14 +44,14 @@ public:
         kOtherRule = -7
     };
 
-    static void makeRules(UnicodeString& definition,
-                          NFRuleSet* ruleSet, 
+    static void makeRules(UnicodeString& description,
+                          NFRuleSet* owner, 
                           const NFRule* predecessor, 
                           const RuleBasedNumberFormat* rbnf, 
-                          NFRuleList& ruleList,
+                          NFRuleList& rules,
                           UErrorCode& status);
 
-    NFRule(const RuleBasedNumberFormat* rbnf, const UnicodeString &ruleText, UErrorCode &status);
+    NFRule(const RuleBasedNumberFormat* _rbnf, const UnicodeString &_ruleText, UErrorCode &status);
     ~NFRule();
 
     UBool operator==(const NFRule& rhs) const;
@@ -61,39 +61,39 @@ public:
     void setType(ERuleType ruleType) { baseValue = (int32_t)ruleType; }
 
     int64_t getBaseValue() const { return baseValue; }
-    void setBaseValue(int64_t value, UErrorCode& status);
+    void setBaseValue(int64_t newBaseValue, UErrorCode& status);
 
     UChar getDecimalPoint() const { return decimalPoint; }
 
     int64_t getDivisor() const;
 
-    void doFormat(int64_t number, UnicodeString& toAppendTo, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
-    void doFormat(double  number, UnicodeString& toAppendTo, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
+    void doFormat(int64_t number, UnicodeString& toInsertInto, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
+    void doFormat(double  number, UnicodeString& toInsertInto, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
 
     UBool doParse(const UnicodeString& text, 
-                  ParsePosition& pos, 
-                  UBool isFractional, 
+                  ParsePosition& parsePosition, 
+                  UBool isFractionRule, 
                   double upperBound,
                   uint32_t nonNumericalExecutedRuleMask,
-                  Formattable& result) const;
+                  Formattable& resVal) const;
 
     UBool shouldRollBack(int64_t number) const;
 
     void _appendRuleText(UnicodeString& result) const;
 
     int32_t findTextLenient(const UnicodeString& str, const UnicodeString& key, 
-                     int32_t startingAt, int32_t* resultCount) const;
+                     int32_t startingAt, int32_t* length) const;
 
     void setDecimalFormatSymbols(const DecimalFormatSymbols &newSymbols, UErrorCode& status);
 
 private:
-    void parseRuleDescriptor(UnicodeString& descriptor, UErrorCode& status);
+    void parseRuleDescriptor(UnicodeString& description, UErrorCode& status);
     void extractSubstitutions(const NFRuleSet* ruleSet, const UnicodeString &ruleText, const NFRule* predecessor, UErrorCode& status);
     NFSubstitution* extractSubstitution(const NFRuleSet* ruleSet, const NFRule* predecessor, UErrorCode& status);
     
     int16_t expectedExponent() const;
     int32_t indexOfAnyRulePrefix() const;
-    double matchToDelimiter(const UnicodeString& text, int32_t startPos, double baseValue,
+    double matchToDelimiter(const UnicodeString& text, int32_t startPos, double _baseValue,
                             const UnicodeString& delimiter, ParsePosition& pp, const NFSubstitution* sub, 
                             uint32_t nonNumericalExecutedRuleMask,
                             double upperBound) const;
@@ -102,7 +102,7 @@ private:
     int32_t prefixLength(const UnicodeString& str, const UnicodeString& prefix, UErrorCode& status) const;
     UBool allIgnorable(const UnicodeString& str, UErrorCode& status) const;
     int32_t findText(const UnicodeString& str, const UnicodeString& key, 
-                     int32_t startingAt, int32_t* resultCount) const;
+                     int32_t startingAt, int32_t* length) const;
 
 private:
     int64_t baseValue;

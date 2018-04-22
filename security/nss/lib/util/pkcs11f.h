@@ -19,7 +19,7 @@
 CK_PKCS11_FUNCTION_INFO(C_Initialize)
 #ifdef CK_NEED_ARG_LIST
 (
-    CK_VOID_PTR pInitArgs /* if this is not NULL_PTR, it gets
+    CK_VOID_PTR pReserved /* if this is not NULL_PTR, it gets
                            * cast to CK_C_INITIALIZE_ARGS_PTR
                            * and dereferenced */
     );
@@ -46,7 +46,7 @@ CK_PKCS11_FUNCTION_INFO(C_GetInfo)
 CK_PKCS11_FUNCTION_INFO(C_GetFunctionList)
 #ifdef CK_NEED_ARG_LIST
 (
-    CK_FUNCTION_LIST_PTR_PTR ppFunctionList /* receives pointer to
+    CK_FUNCTION_LIST_PTR_PTR pFunctionList /* receives pointer to
                                              * function list */
     );
 #endif
@@ -90,7 +90,7 @@ CK_PKCS11_FUNCTION_INFO(C_GetMechanismList)
 (
     CK_SLOT_ID slotID,                    /* ID of token's slot */
     CK_MECHANISM_TYPE_PTR pMechanismList, /* gets mech. array */
-    CK_ULONG_PTR pulCount                 /* gets # of mechs. */
+    CK_ULONG_PTR pusCount                 /* gets # of mechs. */
     );
 #endif
 
@@ -112,7 +112,7 @@ CK_PKCS11_FUNCTION_INFO(C_InitToken)
 (
     CK_SLOT_ID slotID,     /* ID of the token's slot */
     CK_UTF8CHAR_PTR pPin,  /* the SO's initial PIN */
-    CK_ULONG ulPinLen,     /* length in bytes of the PIN */
+    CK_ULONG usPinLen,     /* length in bytes of the PIN */
     CK_UTF8CHAR_PTR pLabel /* 32-byte token label (blank padded) */
     );
 #endif
@@ -133,9 +133,9 @@ CK_PKCS11_FUNCTION_INFO(C_SetPIN)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_UTF8CHAR_PTR pOldPin,    /* the old PIN */
-    CK_ULONG ulOldLen,          /* length of the old PIN */
+    CK_ULONG usOldLen,          /* length of the old PIN */
     CK_UTF8CHAR_PTR pNewPin,    /* the new PIN */
-    CK_ULONG ulNewLen           /* length of the new PIN */
+    CK_ULONG usNewLen           /* length of the new PIN */
     );
 #endif
 
@@ -211,7 +211,7 @@ CK_PKCS11_FUNCTION_INFO(C_Login)
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_USER_TYPE userType,      /* the user type */
     CK_UTF8CHAR_PTR pPin,       /* the user's PIN */
-    CK_ULONG ulPinLen           /* the length of the PIN */
+    CK_ULONG usPinLen           /* the length of the PIN */
     );
 #endif
 
@@ -299,7 +299,7 @@ CK_PKCS11_FUNCTION_INFO(C_FindObjectsInit)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_ATTRIBUTE_PTR pTemplate, /* attribute values to match */
-    CK_ULONG ulCount            /* attrs in search template */
+    CK_ULONG usCount            /* attrs in search template */
     );
 #endif
 
@@ -311,8 +311,8 @@ CK_PKCS11_FUNCTION_INFO(C_FindObjects)
 (
     CK_SESSION_HANDLE hSession,    /* session's handle */
     CK_OBJECT_HANDLE_PTR phObject, /* gets obj. handles */
-    CK_ULONG ulMaxObjectCount,     /* max handles to get */
-    CK_ULONG_PTR pulObjectCount    /* actual # returned */
+    CK_ULONG usMaxObjectCount,     /* max handles to get */
+    CK_ULONG_PTR pusObjectCount    /* actual # returned */
     );
 #endif
 
@@ -343,9 +343,9 @@ CK_PKCS11_FUNCTION_INFO(C_Encrypt)
 (
     CK_SESSION_HANDLE hSession,      /* session's handle */
     CK_BYTE_PTR pData,               /* the plaintext data */
-    CK_ULONG ulDataLen,              /* bytes of plaintext */
+    CK_ULONG usDataLen,              /* bytes of plaintext */
     CK_BYTE_PTR pEncryptedData,      /* gets ciphertext */
-    CK_ULONG_PTR pulEncryptedDataLen /* gets c-text size */
+    CK_ULONG_PTR pusEncryptedDataLen /* gets c-text size */
     );
 #endif
 
@@ -356,9 +356,9 @@ CK_PKCS11_FUNCTION_INFO(C_EncryptUpdate)
 (
     CK_SESSION_HANDLE hSession,      /* session's handle */
     CK_BYTE_PTR pPart,               /* the plaintext data */
-    CK_ULONG ulPartLen,              /* plaintext data len */
+    CK_ULONG usPartLen,              /* plaintext data len */
     CK_BYTE_PTR pEncryptedPart,      /* gets ciphertext */
-    CK_ULONG_PTR pulEncryptedPartLen /* gets c-text size */
+    CK_ULONG_PTR pusEncryptedPartLen /* gets c-text size */
     );
 #endif
 
@@ -369,7 +369,7 @@ CK_PKCS11_FUNCTION_INFO(C_EncryptFinal)
 (
     CK_SESSION_HANDLE hSession,          /* session handle */
     CK_BYTE_PTR pLastEncryptedPart,      /* last c-text */
-    CK_ULONG_PTR pulLastEncryptedPartLen /* gets last size */
+    CK_ULONG_PTR pusLastEncryptedPartLen /* gets last size */
     );
 #endif
 
@@ -389,9 +389,9 @@ CK_PKCS11_FUNCTION_INFO(C_Decrypt)
 (
     CK_SESSION_HANDLE hSession,  /* session's handle */
     CK_BYTE_PTR pEncryptedData,  /* ciphertext */
-    CK_ULONG ulEncryptedDataLen, /* ciphertext length */
+    CK_ULONG usEncryptedDataLen, /* ciphertext length */
     CK_BYTE_PTR pData,           /* gets plaintext */
-    CK_ULONG_PTR pulDataLen      /* gets p-text size */
+    CK_ULONG_PTR pusDataLen      /* gets p-text size */
     );
 #endif
 
@@ -402,9 +402,9 @@ CK_PKCS11_FUNCTION_INFO(C_DecryptUpdate)
 (
     CK_SESSION_HANDLE hSession,  /* session's handle */
     CK_BYTE_PTR pEncryptedPart,  /* encrypted data */
-    CK_ULONG ulEncryptedPartLen, /* input length */
+    CK_ULONG usEncryptedPartLen, /* input length */
     CK_BYTE_PTR pPart,           /* gets plaintext */
-    CK_ULONG_PTR pulPartLen      /* p-text size */
+    CK_ULONG_PTR pusPartLen      /* p-text size */
     );
 #endif
 
@@ -415,7 +415,7 @@ CK_PKCS11_FUNCTION_INFO(C_DecryptFinal)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pLastPart,      /* gets plaintext */
-    CK_ULONG_PTR pulLastPartLen /* p-text size */
+    CK_ULONG_PTR pusLastPartLen /* p-text size */
     );
 #endif
 
@@ -436,9 +436,9 @@ CK_PKCS11_FUNCTION_INFO(C_Digest)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pData,          /* data to be digested */
-    CK_ULONG ulDataLen,         /* bytes of data to digest */
+    CK_ULONG usDataLen,         /* bytes of data to digest */
     CK_BYTE_PTR pDigest,        /* gets the message digest */
-    CK_ULONG_PTR pulDigestLen   /* gets digest length */
+    CK_ULONG_PTR pusDigestLen   /* gets digest length */
     );
 #endif
 
@@ -449,7 +449,7 @@ CK_PKCS11_FUNCTION_INFO(C_DigestUpdate)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pPart,          /* data to be digested */
-    CK_ULONG ulPartLen          /* bytes of data to be digested */
+    CK_ULONG usPartLen          /* bytes of data to be digested */
     );
 #endif
 
@@ -471,7 +471,7 @@ CK_PKCS11_FUNCTION_INFO(C_DigestFinal)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pDigest,        /* gets the message digest */
-    CK_ULONG_PTR pulDigestLen   /* gets byte count of digest */
+    CK_ULONG_PTR pusDigestLen   /* gets byte count of digest */
     );
 #endif
 
@@ -498,9 +498,9 @@ CK_PKCS11_FUNCTION_INFO(C_Sign)
 (
     CK_SESSION_HANDLE hSession,  /* the session's handle */
     CK_BYTE_PTR pData,           /* the data to sign */
-    CK_ULONG ulDataLen,          /* count of bytes to sign */
+    CK_ULONG usDataLen,          /* count of bytes to sign */
     CK_BYTE_PTR pSignature,      /* gets the signature */
-    CK_ULONG_PTR pulSignatureLen /* gets signature length */
+    CK_ULONG_PTR pusSignatureLen /* gets signature length */
     );
 #endif
 
@@ -512,7 +512,7 @@ CK_PKCS11_FUNCTION_INFO(C_SignUpdate)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pPart,          /* the data to sign */
-    CK_ULONG ulPartLen          /* count of bytes to sign */
+    CK_ULONG usPartLen          /* count of bytes to sign */
     );
 #endif
 
@@ -523,7 +523,7 @@ CK_PKCS11_FUNCTION_INFO(C_SignFinal)
 (
     CK_SESSION_HANDLE hSession,  /* the session's handle */
     CK_BYTE_PTR pSignature,      /* gets the signature */
-    CK_ULONG_PTR pulSignatureLen /* gets signature length */
+    CK_ULONG_PTR pusSignatureLen /* gets signature length */
     );
 #endif
 
@@ -545,9 +545,9 @@ CK_PKCS11_FUNCTION_INFO(C_SignRecover)
 (
     CK_SESSION_HANDLE hSession,  /* the session's handle */
     CK_BYTE_PTR pData,           /* the data to sign */
-    CK_ULONG ulDataLen,          /* count of bytes to sign */
+    CK_ULONG usDataLen,          /* count of bytes to sign */
     CK_BYTE_PTR pSignature,      /* gets the signature */
-    CK_ULONG_PTR pulSignatureLen /* gets signature length */
+    CK_ULONG_PTR pusSignatureLen /* gets signature length */
     );
 #endif
 
@@ -573,9 +573,9 @@ CK_PKCS11_FUNCTION_INFO(C_Verify)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pData,          /* signed data */
-    CK_ULONG ulDataLen,         /* length of signed data */
+    CK_ULONG usDataLen,         /* length of signed data */
     CK_BYTE_PTR pSignature,     /* signature */
-    CK_ULONG ulSignatureLen     /* signature length*/
+    CK_ULONG usSignatureLen     /* signature length*/
     );
 #endif
 
@@ -587,7 +587,7 @@ CK_PKCS11_FUNCTION_INFO(C_VerifyUpdate)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pPart,          /* signed data */
-    CK_ULONG ulPartLen          /* length of signed data */
+    CK_ULONG usPartLen          /* length of signed data */
     );
 #endif
 
@@ -598,7 +598,7 @@ CK_PKCS11_FUNCTION_INFO(C_VerifyFinal)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pSignature,     /* signature to verify */
-    CK_ULONG ulSignatureLen     /* signature length */
+    CK_ULONG usSignatureLen     /* signature length */
     );
 #endif
 
@@ -620,9 +620,9 @@ CK_PKCS11_FUNCTION_INFO(C_VerifyRecover)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pSignature,     /* signature to verify */
-    CK_ULONG ulSignatureLen,    /* signature length */
+    CK_ULONG usSignatureLen,    /* signature length */
     CK_BYTE_PTR pData,          /* gets signed data */
-    CK_ULONG_PTR pulDataLen     /* gets signed data len */
+    CK_ULONG_PTR pusDataLen     /* gets signed data len */
     );
 #endif
 
@@ -673,10 +673,10 @@ CK_PKCS11_FUNCTION_INFO(C_DecryptVerifyUpdate)
 #ifdef CK_NEED_ARG_LIST
 (
     CK_SESSION_HANDLE hSession,  /* session's handle */
-    CK_BYTE_PTR pEncryptedPart,  /* ciphertext */
-    CK_ULONG ulEncryptedPartLen, /* ciphertext length */
-    CK_BYTE_PTR pPart,           /* gets plaintext */
-    CK_ULONG_PTR pulPartLen      /* gets p-text length */
+    CK_BYTE_PTR pEncryptedData,  /* ciphertext */
+    CK_ULONG ulEncryptedDataLen, /* ciphertext length */
+    CK_BYTE_PTR pData,           /* gets plaintext */
+    CK_ULONG_PTR pulDataLen      /* gets p-text length */
     );
 #endif
 
@@ -703,9 +703,9 @@ CK_PKCS11_FUNCTION_INFO(C_GenerateKeyPair)
     CK_SESSION_HANDLE hSession,           /* session handle */
     CK_MECHANISM_PTR pMechanism,          /* key-gen mech. */
     CK_ATTRIBUTE_PTR pPublicKeyTemplate,  /* template for pub. key */
-    CK_ULONG ulPublicKeyAttributeCount,   /* # pub. attrs. */
+    CK_ULONG usPublicKeyAttributeCount,   /* # pub. attrs. */
     CK_ATTRIBUTE_PTR pPrivateKeyTemplate, /* template for priv. key */
-    CK_ULONG ulPrivateKeyAttributeCount,  /* # priv. attrs. */
+    CK_ULONG usPrivateKeyAttributeCount,  /* # priv. attrs. */
     CK_OBJECT_HANDLE_PTR phPublicKey,     /* gets pub. key handle */
     CK_OBJECT_HANDLE_PTR phPrivateKey     /* gets priv. key handle */
     );
@@ -763,7 +763,7 @@ CK_PKCS11_FUNCTION_INFO(C_SeedRandom)
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
     CK_BYTE_PTR pSeed,          /* the seed material */
-    CK_ULONG ulSeedLen          /* length of seed material */
+    CK_ULONG usSeedLen          /* length of seed material */
     );
 #endif
 
@@ -772,7 +772,7 @@ CK_PKCS11_FUNCTION_INFO(C_GenerateRandom)
 #ifdef CK_NEED_ARG_LIST
 (
     CK_SESSION_HANDLE hSession, /* the session's handle */
-    CK_BYTE_PTR RandomData,     /* receives the random data */
+    CK_BYTE_PTR pRandomData,     /* receives the random data */
     CK_ULONG ulRandomLen        /* # of bytes to generate */
     );
 #endif
@@ -807,6 +807,6 @@ CK_PKCS11_FUNCTION_INFO(C_WaitForSlotEvent)
 (
     CK_FLAGS flags,       /* blocking/nonblocking flag */
     CK_SLOT_ID_PTR pSlot, /* location that receives the slot ID */
-    CK_VOID_PTR pRserved  /* reserved.  Should be NULL_PTR */
+    CK_VOID_PTR pReserved  /* reserved.  Should be NULL_PTR */
     );
 #endif

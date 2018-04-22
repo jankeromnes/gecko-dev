@@ -161,7 +161,7 @@ private:
     #endif
 
     private:
-        void computeNormals(const GrAAConvexTessellator& result);
+        void computeNormals(const GrAAConvexTessellator& tess);
         void computeBisectors(const GrAAConvexTessellator& tess);
 
         SkDEBUGCODE(bool isConvex(const GrAAConvexTessellator& tess) const;)
@@ -225,7 +225,7 @@ private:
 
     void conicTo(const SkMatrix& m, SkPoint pts[3], SkScalar w);
 
-    void terminate(const Ring& lastRing);
+    void terminate(const Ring& ring);
 
     // return false on failure/degenerate path
     bool extractFromPath(const SkMatrix& m, const SkPath& path);

@@ -36,7 +36,7 @@ class FieldPositionOnlyHandler : public FieldPositionHandler {
   FieldPosition& pos;
 
  public:
-  FieldPositionOnlyHandler(FieldPosition& pos);
+  FieldPositionOnlyHandler(FieldPosition& _pos);
   virtual ~FieldPositionOnlyHandler();
 
   virtual void addAttribute(int32_t id, int32_t start, int32_t limit);
@@ -60,7 +60,7 @@ class FieldPositionIteratorHandler : public FieldPositionHandler {
   void *operator new[](size_t s);
 
  public:
-  FieldPositionIteratorHandler(FieldPositionIterator* posIter, UErrorCode& status);
+  FieldPositionIteratorHandler(FieldPositionIterator* posIter, UErrorCode& _status);
   ~FieldPositionIteratorHandler();
 
   virtual void addAttribute(int32_t id, int32_t start, int32_t limit);

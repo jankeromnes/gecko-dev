@@ -689,7 +689,7 @@ public:
      * @draft ICU 60
      */
     virtual UBool
-    isNormalizedUTF8(StringPiece s, UErrorCode &errorCode) const U_OVERRIDE;
+    isNormalizedUTF8(StringPiece sp, UErrorCode &errorCode) const U_OVERRIDE;
     /**
      * Tests if the string is normalized.
      * For details see the Normalizer2 base class documentation.

@@ -178,7 +178,7 @@ public:
      * @param source    the object to be copied.
      * @internal
      */
-    HebrewCalendar(const HebrewCalendar& source);
+    HebrewCalendar(const HebrewCalendar& other);
 
     /**
      * Default assignment operator

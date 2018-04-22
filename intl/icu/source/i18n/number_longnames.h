@@ -21,7 +21,7 @@ class LongNameHandler : public MicroPropsGenerator, public UMemory {
                          const MicroPropsGenerator *parent, UErrorCode &status);
 
     static LongNameHandler
-    forMeasureUnit(const Locale &loc, const MeasureUnit &unit, const MeasureUnit &perUnit,
+    forMeasureUnit(const Locale &loc, const MeasureUnit &unitRef, const MeasureUnit &perUnit,
                    const UNumberUnitWidth &width, const PluralRules *rules,
                    const MicroPropsGenerator *parent, UErrorCode &status);
 

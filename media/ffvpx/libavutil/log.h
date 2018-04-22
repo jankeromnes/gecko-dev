@@ -294,7 +294,7 @@ void av_log_set_callback(void (*callback)(void*, int, const char*, va_list));
  *        subsequent arguments are converted to output.
  * @param vl The arguments referenced by the format string.
  */
-void av_log_default_callback(void *avcl, int level, const char *fmt,
+void av_log_default_callback(void *ptr, int level, const char *fmt,
                              va_list vl);
 
 /**
@@ -304,7 +304,7 @@ void av_log_default_callback(void *avcl, int level, const char *fmt,
  *
  * @return The AVClass class_name
  */
-const char* av_default_item_name(void* ctx);
+const char* av_default_item_name(void* ptr);
 AVClassCategory av_default_get_category(void *ptr);
 
 /**

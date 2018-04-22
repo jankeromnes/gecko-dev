@@ -153,14 +153,14 @@ public:
      *  without an input color.
      */
     void emitChild(int childIndex, const char* inputColor, SkString* outputColor,
-                   EmitArgs& parentArgs);
+                   EmitArgs& args);
 
     inline void emitChild(int childIndex, EmitArgs& args) {
         this->emitChild(childIndex, "half4(1.0)", args);
     }
 
     /** Variation that uses the parent's output color variable to hold the child's output.*/
-    void emitChild(int childIndex, const char* inputColor, EmitArgs& parentArgs);
+    void emitChild(int childIndex, const char* inputColor, EmitArgs& args);
 
     /**
      * Pre-order traversal of a GLSLFP hierarchy, or of multiple trees with roots in an array of

@@ -109,7 +109,7 @@ public:
 
     int32_t lastElementi(void) const;
 
-    int32_t indexOf(int32_t elem, int32_t startIndex = 0) const;
+    int32_t indexOf(int32_t key, int32_t startIndex = 0) const;
 
     UBool contains(int32_t elem) const;
 
@@ -158,7 +158,7 @@ public:
      * Insert the given integer into this vector at its sorted position.
      * The current elements are assumed to be sorted already.
      */
-    void sortedInsert(int32_t elem, UErrorCode& ec);
+    void sortedInsert(int32_t tok, UErrorCode& ec);
 
     /**
      * Returns a pointer to the internal array holding the vector.

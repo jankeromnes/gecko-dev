@@ -119,7 +119,7 @@ typedef struct VP8D_COMP {
   void *decrypt_state;
 } VP8D_COMP;
 
-int vp8_decode_frame(VP8D_COMP *cpi);
+int vp8_decode_frame(VP8D_COMP *pbi);
 
 int vp8_create_decoder_instances(struct frame_buffers *fb, VP8D_CONFIG *oxcf);
 int vp8_remove_decoder_instances(struct frame_buffers *fb);

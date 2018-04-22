@@ -38,7 +38,7 @@ class SimpleTokenBucket {
      *  Note: To get the number of tokens in the bucket, pass something
      *  like UINT32_MAX.
      */
-    size_t getTokens(size_t num_tokens);
+    size_t getTokens(size_t num_requested_tokens);
 
   protected: // Allow testing to touch these.
     uint64_t max_tokens_;

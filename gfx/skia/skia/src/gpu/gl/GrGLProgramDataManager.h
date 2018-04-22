@@ -65,9 +65,9 @@ public:
     void setMatrix2f(UniformHandle, const float matrix[]) const override;
     void setMatrix3f(UniformHandle, const float matrix[]) const override;
     void setMatrix4f(UniformHandle, const float matrix[]) const override;
-    void setMatrix2fv(UniformHandle, int arrayCount, const float matrices[]) const override;
-    void setMatrix3fv(UniformHandle, int arrayCount, const float matrices[]) const override;
-    void setMatrix4fv(UniformHandle, int arrayCount, const float matrices[]) const override;
+    void setMatrix2fv(UniformHandle, int arrayCount, const float m[]) const override;
+    void setMatrix3fv(UniformHandle, int arrayCount, const float m[]) const override;
+    void setMatrix4fv(UniformHandle, int arrayCount, const float m[]) const override;
 
     // for nvpr only
     void setPathFragmentInputTransform(VaryingHandle u, int components,

@@ -614,7 +614,7 @@ extern CK_RV sftk_Attribute2SecItem(PLArenaPool *arena, SECItem *item,
                                     SFTKObject *object, CK_ATTRIBUTE_TYPE type);
 extern CK_RV sftk_MultipleAttribute2SecItem(PLArenaPool *arena,
                                             SFTKObject *object,
-                                            SFTKItemTemplate *templ, int count);
+                                            SFTKItemTemplate *itemTemplate, int itemTemplateCount);
 extern unsigned int sftk_GetLengthInBits(unsigned char *buf,
                                          unsigned int bufLen);
 extern CK_RV sftk_ConstrainAttribute(SFTKObject *object,
@@ -657,7 +657,7 @@ extern CK_RV SFTK_ClearTokenKeyHashTable(SFTKSlot *slot);
 
 extern CK_RV sftk_searchObjectList(SFTKSearchResults *search,
                                    SFTKObject **head, unsigned int size,
-                                   PZLock *lock, CK_ATTRIBUTE_PTR inTemplate,
+                                   PZLock *lock, CK_ATTRIBUTE_PTR theTemplate,
                                    int count, PRBool isLoggedIn);
 extern SFTKObjectListElement *sftk_FreeObjectListElement(
     SFTKObjectListElement *objectList);
@@ -713,7 +713,7 @@ PRBool sftk_poisonHandle(SFTKSlot *slot, SECItem *dbkey,
                          CK_OBJECT_HANDLE handle);
 SFTKObject *sftk_NewTokenObject(SFTKSlot *slot, SECItem *dbKey,
                                 CK_OBJECT_HANDLE handle);
-SFTKTokenObject *sftk_convertSessionToToken(SFTKObject *so);
+SFTKTokenObject *sftk_convertSessionToToken(SFTKObject *obj);
 
 /* J-PAKE (jpakesftk.c) */
 extern CK_RV jpake_Round1(HASH_HashType hashType,
@@ -723,7 +723,7 @@ extern CK_RV jpake_Round2(HASH_HashType hashType,
                           CK_NSS_JPAKERound2Params *params,
                           SFTKObject *sourceKey, SFTKObject *key);
 extern CK_RV jpake_Final(HASH_HashType hashType,
-                         const CK_NSS_JPAKEFinalParams *params,
+                         const CK_NSS_JPAKEFinalParams *param,
                          SFTKObject *sourceKey, SFTKObject *key);
 
 /* Constant time MAC functions (hmacct.c) */

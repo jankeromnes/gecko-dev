@@ -98,7 +98,7 @@ public:
     nsHTTPIndex();
     nsresult Init(void);
 
-    static nsresult Create(nsIURI* aBaseURI, nsIInterfaceRequestor* aContainer,
+    static nsresult Create(nsIURI* aBaseURL, nsIInterfaceRequestor* aRequestor,
                            nsIHTTPIndex** aResult);
 
     // nsIHTTPIndex interface

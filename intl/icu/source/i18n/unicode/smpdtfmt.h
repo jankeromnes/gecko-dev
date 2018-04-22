@@ -820,7 +820,7 @@ public:
      * @stable ICU 2.0
      */
     SimpleDateFormat(const UnicodeString& pattern,
-                     DateFormatSymbols* formatDataToAdopt,
+                     DateFormatSymbols* symbolsToAdopt,
                      UErrorCode& status);
 
     /**
@@ -833,7 +833,7 @@ public:
      * @stable ICU 2.0
      */
     SimpleDateFormat(const UnicodeString& pattern,
-                     const DateFormatSymbols& formatData,
+                     const DateFormatSymbols& symbols,
                      UErrorCode& status);
 
     /**
@@ -947,7 +947,7 @@ public:
      */
     virtual void parse( const UnicodeString& text,
                         Calendar& cal,
-                        ParsePosition& pos) const;
+                        ParsePosition& parsePos) const;
 
 
     /**
@@ -1348,7 +1348,7 @@ private:
      * indicating matching failure, otherwise.
      */
     int32_t matchString(const UnicodeString& text, int32_t start, UCalendarDateFields field,
-                        const UnicodeString* stringArray, int32_t stringArrayCount,
+                        const UnicodeString* data, int32_t dataCount,
                         const UnicodeString* monthPattern, Calendar& cal) const;
 
     /**
@@ -1364,13 +1364,13 @@ private:
      * indicating matching failure, otherwise.
      */
     int32_t matchQuarterString(const UnicodeString& text, int32_t start, UCalendarDateFields field,
-                               const UnicodeString* stringArray, int32_t stringArrayCount, Calendar& cal) const;
+                               const UnicodeString* data, int32_t dataCount, Calendar& cal) const;
 
     /**
      * Used by subParse() to match localized day period strings.
      */
     int32_t matchDayPeriodStrings(const UnicodeString& text, int32_t start,
-                                  const UnicodeString* stringArray, int32_t stringArrayCount,
+                                  const UnicodeString* data, int32_t dataCount,
                                   int32_t &dayPeriod) const;
 
     /**

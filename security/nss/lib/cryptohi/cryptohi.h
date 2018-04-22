@@ -57,7 +57,7 @@ extern SECItem *DSAU_DecodeDerSigToLen(const SECItem *item, unsigned int len);
 **      "alg" the signature algorithm to use (e.g. SEC_OID_PKCS1_MD5_WITH_RSA_ENCRYPTION)
 **	"privKey" the private key to use
 */
-extern SGNContext *SGN_NewContext(SECOidTag alg, SECKEYPrivateKey *privKey);
+extern SGNContext *SGN_NewContext(SECOidTag alg, SECKEYPrivateKey *key);
 
 /*
 ** Create a new signature context from an algorithmID.
@@ -65,7 +65,7 @@ extern SGNContext *SGN_NewContext(SECOidTag alg, SECKEYPrivateKey *privKey);
 **	"privKey" the private key to use
 */
 extern SGNContext *SGN_NewContextWithAlgorithmID(SECAlgorithmID *alg,
-                                                 SECKEYPrivateKey *privKey);
+                                                 SECKEYPrivateKey *key);
 
 /*
 ** Destroy a signature-context object
@@ -109,7 +109,7 @@ extern SECStatus SGN_End(SGNContext *cx, SECItem *result);
 **	"algid" the signature/hash algorithm to sign with
 **		(must be compatible with the key type).
 */
-extern SECStatus SEC_SignData(SECItem *result,
+extern SECStatus SEC_SignData(SECItem *res,
                               const unsigned char *buf, int len,
                               SECKEYPrivateKey *pk, SECOidTag algid);
 
@@ -123,7 +123,7 @@ extern SECStatus SEC_SignData(SECItem *result,
 **	"algid" the signature/hash algorithm to sign with
 **		(must be compatible with the key type).
 */
-extern SECStatus SEC_SignDataWithAlgorithmID(SECItem *result,
+extern SECStatus SEC_SignDataWithAlgorithmID(SECItem *res,
                                              const unsigned char *buf, int len,
                                              SECKEYPrivateKey *pk,
                                              SECAlgorithmID *algid);
@@ -152,7 +152,7 @@ extern SECStatus SGN_Digest(SECKEYPrivateKey *privKey,
 */
 extern SECStatus SEC_DerSignData(PLArenaPool *arena, SECItem *result,
                                  const unsigned char *buf, int len,
-                                 SECKEYPrivateKey *pk, SECOidTag algid);
+                                 SECKEYPrivateKey *pk, SECOidTag algID);
 
 /*
 ** DER sign a single block of data using private key encryption and
@@ -173,7 +173,7 @@ extern SECStatus SEC_DerSignDataWithAlgorithmID(PLArenaPool *arena,
                                                 const unsigned char *buf,
                                                 int len,
                                                 SECKEYPrivateKey *pk,
-                                                SECAlgorithmID *algid);
+                                                SECAlgorithmID *algID);
 
 /*
 ** Destroy a signed-data object.
@@ -246,7 +246,7 @@ extern VFYContext *VFY_CreateContext(SECKEYPublicKey *key, SECItem *sig,
 */
 extern VFYContext *VFY_CreateContextDirect(const SECKEYPublicKey *key,
                                            const SECItem *sig,
-                                           SECOidTag pubkAlg,
+                                           SECOidTag encAlg,
                                            SECOidTag hashAlg,
                                            SECOidTag *hash, void *wincx);
 /*
@@ -263,7 +263,7 @@ extern VFYContext *VFY_CreateContextDirect(const SECKEYPublicKey *key,
 */
 extern VFYContext *VFY_CreateContextWithAlgorithmID(const SECKEYPublicKey *key,
                                                     const SECItem *sig,
-                                                    const SECAlgorithmID *algid,
+                                                    const SECAlgorithmID *sigAlgorithm,
                                                     SECOidTag *hash,
                                                     void *wincx);
 
@@ -322,8 +322,8 @@ extern SECStatus VFY_EndWithSignature(VFYContext *cx, SECItem *sig);
 **	    the key type.
 **	"wincx" void pointer to the window context
 **/
-extern SECStatus VFY_VerifyDigest(SECItem *dig, SECKEYPublicKey *key,
-                                  SECItem *sig, SECOidTag sigAlg, void *wincx);
+extern SECStatus VFY_VerifyDigest(SECItem *digest, SECKEYPublicKey *key,
+                                  SECItem *sig, SECOidTag algid, void *wincx);
 /*
 ** Verify the signature on a block of data for which we already have
 ** the digest. The signature data is an RSA private key encrypted
@@ -337,9 +337,9 @@ extern SECStatus VFY_VerifyDigest(SECItem *dig, SECKEYPublicKey *key,
 **	"hashAlg" specifies the hashing algorithm used.
 **	"wincx" void pointer to the window context
 **/
-extern SECStatus VFY_VerifyDigestDirect(const SECItem *dig,
+extern SECStatus VFY_VerifyDigestDirect(const SECItem *digest,
                                         const SECKEYPublicKey *key,
-                                        const SECItem *sig, SECOidTag pubkAlg,
+                                        const SECItem *sig, SECOidTag encAlg,
                                         SECOidTag hashAlg, void *wincx);
 /*
 ** Verify the signature on a block of data for which we already have
@@ -355,9 +355,9 @@ extern SECStatus VFY_VerifyDigestDirect(const SECItem *dig,
 **         not set to SEC_OID_UNKNOWN, it must match the hash of the signature.
 **	"wincx" void pointer to the window context
 */
-extern SECStatus VFY_VerifyDigestWithAlgorithmID(const SECItem *dig,
+extern SECStatus VFY_VerifyDigestWithAlgorithmID(const SECItem *digest,
                                                  const SECKEYPublicKey *key, const SECItem *sig,
-                                                 const SECAlgorithmID *algid, SECOidTag hash,
+                                                 const SECAlgorithmID *sigAlgorithm, SECOidTag hashCmp,
                                                  void *wincx);
 
 /*
@@ -375,7 +375,7 @@ extern SECStatus VFY_VerifyDigestWithAlgorithmID(const SECItem *dig,
 */
 extern SECStatus VFY_VerifyData(const unsigned char *buf, int len,
                                 const SECKEYPublicKey *key, const SECItem *sig,
-                                SECOidTag sigAlg, void *wincx);
+                                SECOidTag algid, void *wincx);
 /*
 ** Verify the signature on a block of data. The signature data is an RSA
 ** private key encrypted block of data formatted according to PKCS#1.
@@ -398,7 +398,7 @@ extern SECStatus VFY_VerifyData(const unsigned char *buf, int len,
 extern SECStatus VFY_VerifyDataDirect(const unsigned char *buf, int len,
                                       const SECKEYPublicKey *key,
                                       const SECItem *sig,
-                                      SECOidTag pubkAlg, SECOidTag hashAlg,
+                                      SECOidTag encAlg, SECOidTag hashAlg,
                                       SECOidTag *hash, void *wincx);
 
 /*
@@ -417,7 +417,7 @@ extern SECStatus VFY_VerifyDataDirect(const unsigned char *buf, int len,
 extern SECStatus VFY_VerifyDataWithAlgorithmID(const unsigned char *buf,
                                                int len, const SECKEYPublicKey *key,
                                                const SECItem *sig,
-                                               const SECAlgorithmID *algid, SECOidTag *hash,
+                                               const SECAlgorithmID *sigAlgorithm, SECOidTag *hash,
                                                void *wincx);
 
 SEC_END_PROTOS

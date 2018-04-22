@@ -28,9 +28,9 @@ SEC_BEGIN_PROTOS
 ** Decoding.
 */
 
-extern SEC_ASN1DecoderContext *SEC_ASN1DecoderStart(PLArenaPool *pool,
+extern SEC_ASN1DecoderContext *SEC_ASN1DecoderStart(PLArenaPool *their_pool,
                                                     void *dest,
-                                                    const SEC_ASN1Template *t);
+                                                    const SEC_ASN1Template *theTemplate);
 
 /* XXX char or unsigned char? */
 extern SECStatus SEC_ASN1DecoderUpdate(SEC_ASN1DecoderContext *cx,
@@ -44,7 +44,7 @@ extern void SEC_ASN1DecoderAbort(SEC_ASN1DecoderContext *cx, int error);
 
 extern void SEC_ASN1DecoderSetFilterProc(SEC_ASN1DecoderContext *cx,
                                          SEC_ASN1WriteProc fn,
-                                         void *arg, PRBool no_store);
+                                         void *arg, PRBool only);
 
 extern void SEC_ASN1DecoderClearFilterProc(SEC_ASN1DecoderContext *cx);
 
@@ -66,8 +66,8 @@ extern void SEC_ASN1DecoderClearNotifyProc(SEC_ASN1DecoderContext *cx);
 extern void SEC_ASN1DecoderSetMaximumElementSize(SEC_ASN1DecoderContext *cx,
                                                  unsigned long max_size);
 
-extern SECStatus SEC_ASN1Decode(PLArenaPool *pool, void *dest,
-                                const SEC_ASN1Template *t,
+extern SECStatus SEC_ASN1Decode(PLArenaPool *poolp, void *dest,
+                                const SEC_ASN1Template *theTemplate,
                                 const char *buf, long len);
 
 /* Both classic ASN.1 and QuickDER have a feature that removes leading zeroes
@@ -77,8 +77,8 @@ extern SECStatus SEC_ASN1Decode(PLArenaPool *pool, void *dest,
    allocated (from POINTER, SET OF, SEQUENCE OF) the decoder sets the type
    field to siBuffer. */
 
-extern SECStatus SEC_ASN1DecodeItem(PLArenaPool *pool, void *dest,
-                                    const SEC_ASN1Template *t,
+extern SECStatus SEC_ASN1DecodeItem(PLArenaPool *poolp, void *dest,
+                                    const SEC_ASN1Template *theTemplate,
                                     const SECItem *src);
 
 extern SECStatus SEC_QuickDERDecodeItem(PLArenaPool *arena, void *dest,
@@ -90,8 +90,8 @@ extern SECStatus SEC_QuickDERDecodeItem(PLArenaPool *arena, void *dest,
 */
 
 extern SEC_ASN1EncoderContext *SEC_ASN1EncoderStart(const void *src,
-                                                    const SEC_ASN1Template *t,
-                                                    SEC_ASN1WriteProc fn,
+                                                    const SEC_ASN1Template *theTemplate,
+                                                    SEC_ASN1WriteProc output_proc,
                                                     void *output_arg);
 
 /* XXX char or unsigned char? */
@@ -122,7 +122,7 @@ extern void SEC_ASN1EncoderSetTakeFromBuf(SEC_ASN1EncoderContext *cx);
 
 extern void SEC_ASN1EncoderClearTakeFromBuf(SEC_ASN1EncoderContext *cx);
 
-extern SECStatus SEC_ASN1Encode(const void *src, const SEC_ASN1Template *t,
+extern SECStatus SEC_ASN1Encode(const void *src, const SEC_ASN1Template *theTemplate,
                                 SEC_ASN1WriteProc output_proc,
                                 void *output_arg);
 
@@ -132,13 +132,13 @@ extern SECStatus SEC_ASN1Encode(const void *src, const SEC_ASN1Template *t,
  * not NULL, the caller should free the data buffer pointed to by dest with a
  * SECITEM_FreeItem(dest, PR_FALSE) or PORT_Free(dest->data) call.
  */
-extern SECItem *SEC_ASN1EncodeItem(PLArenaPool *pool, SECItem *dest,
-                                   const void *src, const SEC_ASN1Template *t);
+extern SECItem *SEC_ASN1EncodeItem(PLArenaPool *poolp, SECItem *dest,
+                                   const void *src, const SEC_ASN1Template *theTemplate);
 
-extern SECItem *SEC_ASN1EncodeInteger(PLArenaPool *pool,
+extern SECItem *SEC_ASN1EncodeInteger(PLArenaPool *poolp,
                                       SECItem *dest, long value);
 
-extern SECItem *SEC_ASN1EncodeUnsignedInteger(PLArenaPool *pool,
+extern SECItem *SEC_ASN1EncodeUnsignedInteger(PLArenaPool *poolp,
                                               SECItem *dest,
                                               unsigned long value);
 
@@ -171,7 +171,7 @@ extern int SEC_ASN1EncodeLength(unsigned char *buf, int value);
  *  (as opposed to in the process of decoding)
  */
 extern const SEC_ASN1Template *
-SEC_ASN1GetSubtemplate(const SEC_ASN1Template *inTemplate, void *thing,
+SEC_ASN1GetSubtemplate(const SEC_ASN1Template *theTemplate, void *thing,
                        PRBool encoding);
 
 /* whether the template is for a primitive type or a choice of

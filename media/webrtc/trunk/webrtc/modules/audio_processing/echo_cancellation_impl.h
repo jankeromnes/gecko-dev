@@ -38,9 +38,9 @@ class EchoCancellationImpl : public EchoCancellation {
   bool is_drift_compensation_enabled() const override;
 
   void Initialize(int sample_rate_hz,
-                  size_t num_reverse_channels_,
-                  size_t num_output_channels_,
-                  size_t num_proc_channels_);
+                  size_t num_reverse_channels,
+                  size_t num_output_channels,
+                  size_t num_proc_channels);
   void SetExtraOptions(const webrtc::Config& config);
   bool is_delay_agnostic_enabled() const;
   bool is_extended_filter_enabled() const;

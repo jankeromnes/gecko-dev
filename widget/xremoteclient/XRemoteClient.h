@@ -19,7 +19,7 @@ public:
                                    const char *aProfile,
                                    int32_t argc, char **argv,
                                    const char* aDesktopStartupID,
-                                   char **aResponse, bool *aSucceeded) override;
+                                   char **aResponse, bool *aWindowFound) override;
   void Shutdown();
 
 private:

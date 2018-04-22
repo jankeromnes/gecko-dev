@@ -29,8 +29,8 @@ public:
                                const char *appVersion);
   void Close();
 
-  int ExtractFile(const char *item, const NS_tchar *destination);
-  int ExtractFileToStream(const char *item, FILE *fp);
+  int ExtractFile(const char *name, const NS_tchar *dest);
+  int ExtractFileToStream(const char *name, FILE *fp);
 
 private:
   int ExtractItemToStream(const MarItem *item, FILE *fp);

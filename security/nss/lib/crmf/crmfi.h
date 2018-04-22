@@ -146,7 +146,7 @@ extern SECStatus crmf_template_add_public_key(PLArenaPool *poolp,
                                               CERTSubjectPublicKeyInfo *pubKey);
 
 extern CRMFCertExtension *crmf_create_cert_extension(PLArenaPool *poolp,
-                                                     SECOidTag tag,
+                                                     SECOidTag id,
                                                      PRBool isCritical,
                                                      SECItem *data);
 extern CRMFCertRequest *
@@ -157,7 +157,7 @@ extern SECStatus crmf_destroy_encrypted_value(CRMFEncryptedValue *inEncrValue,
 
 extern CRMFEncryptedValue *
 crmf_create_encrypted_value_wrapped_privkey(SECKEYPrivateKey *inPrivKey,
-                                            SECKEYPublicKey *inPubKey,
+                                            SECKEYPublicKey *inCAKey,
                                             CRMFEncryptedValue *destValue);
 
 extern CK_MECHANISM_TYPE

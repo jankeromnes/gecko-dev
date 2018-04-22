@@ -198,7 +198,7 @@ public:
      * @param count Filled in with length of the array.
      * @stable ICU 2.0
      */
-    void setEras(const UnicodeString* eras, int32_t count);
+    void setEras(const UnicodeString* erasArray, int32_t count);
 
     /**
      * Gets era name strings. For example: "Anno Domini" and "Before Christ".
@@ -215,7 +215,7 @@ public:
      * @param count Filled in with length of the array.
      * @stable ICU 3.6
      */
-    void setEraNames(const UnicodeString* eraNames, int32_t count);
+    void setEraNames(const UnicodeString* eraNamesArray, int32_t count);
 
     /**
      * Gets narrow era strings. For example: "A" and "B".
@@ -232,7 +232,7 @@ public:
      * @param count Filled in with length of the array.
      * @stable ICU 4.2
      */
-    void setNarrowEras(const UnicodeString* narrowEras, int32_t count);
+    void setNarrowEras(const UnicodeString* narrowErasArray, int32_t count);
 
     /**
      * Gets month strings. For example: "January", "February", etc.
@@ -249,7 +249,7 @@ public:
      * @param count     Filled in with length of the array.
      * @stable ICU 2.0
      */
-    void setMonths(const UnicodeString* months, int32_t count);
+    void setMonths(const UnicodeString* monthsArray, int32_t count);
 
     /**
      * Gets short month strings. For example: "Jan", "Feb", etc.
@@ -266,7 +266,7 @@ public:
      * @param shortMonths  the new short month strings. (not adopted; caller retains ownership)
      * @stable ICU 2.0
      */
-    void setShortMonths(const UnicodeString* shortMonths, int32_t count);
+    void setShortMonths(const UnicodeString* shortMonthsArray, int32_t count);
 
     /**
      * Selector for date formatting context
@@ -325,7 +325,7 @@ public:
      * @param width   The width of returned strings, either WIDE, ABBREVIATED, or NARROW.
      * @stable ICU 3.6
      */
-    void setMonths(const UnicodeString* months, int32_t count, DtContextType context, DtWidthType width);
+    void setMonths(const UnicodeString* monthsArray, int32_t count, DtContextType context, DtWidthType width);
 
     /**
      * Gets wide weekday strings. For example: "Sunday", "Monday", etc.
@@ -342,7 +342,7 @@ public:
      * @param count        Filled in with length of the array.
      * @stable ICU 2.0
      */
-    void setWeekdays(const UnicodeString* weekdays, int32_t count);
+    void setWeekdays(const UnicodeString* weekdaysArray, int32_t count);
 
     /**
      * Gets abbreviated weekday strings. For example: "Sun", "Mon", etc. (Note: The method name is
@@ -360,7 +360,7 @@ public:
      * @param count           Filled in with length of the array.
      * @stable ICU 2.0
      */
-    void setShortWeekdays(const UnicodeString* abbrevWeekdays, int32_t count);
+    void setShortWeekdays(const UnicodeString* shortWeekdaysArray, int32_t count);
 
     /**
      * Gets weekday strings by width and context. For example: "Sunday", "Monday", etc.
@@ -380,7 +380,7 @@ public:
      * @param width     The width of returned strings, either WIDE, ABBREVIATED, SHORT, or NARROW
      * @stable ICU 3.6
      */
-    void setWeekdays(const UnicodeString* weekdays, int32_t count, DtContextType context, DtWidthType width);
+    void setWeekdays(const UnicodeString* weekdaysArray, int32_t count, DtContextType context, DtWidthType width);
 
     /**
      * Gets quarter strings by width and context. For example: "1st Quarter", "2nd Quarter", etc.
@@ -403,7 +403,7 @@ public:
      *                are no NARROW quarters.
      * @stable ICU 3.6
      */
-    void setQuarters(const UnicodeString* quarters, int32_t count, DtContextType context, DtWidthType width);
+    void setQuarters(const UnicodeString* quartersArray, int32_t count, DtContextType context, DtWidthType width);
 
     /**
      * Gets AM/PM strings. For example: "AM" and "PM".
@@ -419,7 +419,7 @@ public:
      * @param count        Filled in with length of the array.
      * @stable ICU 2.0
      */
-    void setAmPmStrings(const UnicodeString* ampms, int32_t count);
+    void setAmPmStrings(const UnicodeString* amPmsArray, int32_t count);
 
 #ifndef U_HIDE_INTERNAL_API
     /**

@@ -34,7 +34,7 @@ public:
     sk_sp<SkImageFilter> apply(const SkImageFilter*);
     sk_sp<SkShader>      apply(const SkShader*);
     SkPaint apply(const SkPaint&);
-    void apply(SkColor dst[], const SkColor src[], int n);
+    void apply(SkColor xformed[], const SkColor srgb[], int n);
     SkColor apply(SkColor srgb);
 
     sk_sp<SkColorSpace> dst() const { return fDst; }

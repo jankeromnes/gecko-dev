@@ -193,7 +193,7 @@ public:
 
     UObjectDeleter *setDeleter(UObjectDeleter *d);
 
-    UElementsAreEqual *setComparer(UElementsAreEqual *c);
+    UElementsAreEqual *setComparer(UElementsAreEqual *d);
 
     void* operator[](int32_t index) const;
 

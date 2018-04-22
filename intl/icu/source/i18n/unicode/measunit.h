@@ -110,7 +110,7 @@ class U_I18N_API MeasureUnit: public UObject {
      * @stable ICU 53
      */
     static int32_t getAvailable(
-            MeasureUnit *destArray,
+            MeasureUnit *dest,
             int32_t destCapacity,
             UErrorCode &errorCode);
 
@@ -128,7 +128,7 @@ class U_I18N_API MeasureUnit: public UObject {
      */
     static int32_t getAvailable(
             const char *type,
-            MeasureUnit *destArray,
+            MeasureUnit *dest,
             int32_t destCapacity,
             UErrorCode &errorCode);
 

@@ -482,7 +482,7 @@ CRMF_CreatePKIArchiveOptions(CRMFPKIArchiveOptionsType inType,
  *    Any other return value indicates an error while freeing the memory.
  */
 extern SECStatus
-CRMF_DestroyPKIArchiveOptions(CRMFPKIArchiveOptions *inArchOpt);
+CRMF_DestroyPKIArchiveOptions(CRMFPKIArchiveOptions *inArchOptions);
 
 /*
  * FUNCTION: CRMF_CertRequestSetPKIArchiveOptions
@@ -1282,7 +1282,7 @@ extern SECStatus CRMF_DestroyPOPOPrivKey(CRMFPOPOPrivKey *inPrivKey);
  * the definition of CRMFPOPOPrivKeyChoice in crmft.h for the possible return
  * values.
  */
-extern CRMFPOPOPrivKeyChoice CRMF_POPOPrivKeyGetChoice(CRMFPOPOPrivKey *inKey);
+extern CRMFPOPOPrivKeyChoice CRMF_POPOPrivKeyGetChoice(CRMFPOPOPrivKey *inPrivKey);
 
 /*
  * FUNCTION: CRMF_POPOPrivKeyGetThisMessage
@@ -1484,7 +1484,7 @@ CRMF_ControlGetPKIArchiveOptions(CRMFControl *inControl);
  * freeing the PKIArchiveOptions.
  */
 extern SECStatus
-CRMF_DestroyPKIArchiveOptions(CRMFPKIArchiveOptions *inOptions);
+CRMF_DestroyPKIArchiveOptions(CRMFPKIArchiveOptions *inArchOptions);
 
 /*
  * FUNCTION: CRMF_PKIArchiveOptionsGetOptionType
@@ -1548,7 +1548,7 @@ CRMF_EncryptedKeyGetChoice(CRMFEncryptedKey *inEncrKey);
  * the EncryptedKey.
  */
 extern CRMFEncryptedValue *
-CRMF_EncryptedKeyGetEncryptedValue(CRMFEncryptedKey *inKey);
+CRMF_EncryptedKeyGetEncryptedValue(CRMFEncryptedKey *inEncrKey);
 
 /*
  * FUNCTION: CRMF_DestroyEncryptedValue
@@ -1581,7 +1581,7 @@ extern SECStatus CRMF_DestroyEncryptedValue(CRMFEncryptedValue *inEncrValue);
  * as opposed to the allocated number of bytes.
  * ANULL return value indicates an error in copying the encValue field.
  */
-extern SECItem *CRMF_EncryptedValueGetEncValue(CRMFEncryptedValue *inEncValue);
+extern SECItem *CRMF_EncryptedValueGetEncValue(CRMFEncryptedValue *inEncrValue);
 
 /*
  * FUNCTION: CRMF_EncryptedValueGetIntendedAlg

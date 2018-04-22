@@ -178,7 +178,7 @@ int av_buffer_get_ref_count(const AVBufferRef *buf);
  *            written in its place. On failure, buf is left untouched.
  * @return 0 on success, a negative AVERROR on failure.
  */
-int av_buffer_make_writable(AVBufferRef **buf);
+int av_buffer_make_writable(AVBufferRef **pbuf);
 
 /**
  * Reallocate a given buffer.
@@ -195,7 +195,7 @@ int av_buffer_make_writable(AVBufferRef **buf);
  * reference to it (i.e. the one passed to this function). In all other cases
  * a new buffer is allocated and the data is copied.
  */
-int av_buffer_realloc(AVBufferRef **buf, int size);
+int av_buffer_realloc(AVBufferRef **pbuf, int size);
 
 /**
  * @}
@@ -274,7 +274,7 @@ AVBufferPool *av_buffer_pool_init2(int size, void *opaque,
  *
  * @param pool pointer to the pool to be freed. It will be set to NULL.
  */
-void av_buffer_pool_uninit(AVBufferPool **pool);
+void av_buffer_pool_uninit(AVBufferPool **ppool);
 
 /**
  * Allocate a new AVBuffer, reusing an old buffer from the pool when available.

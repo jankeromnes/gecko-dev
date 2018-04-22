@@ -17,7 +17,7 @@ class TIntermNode;
 class TSymbolTable;
 
 void SimplifyLoopConditions(TIntermNode *root,
-                            unsigned int conditionsToSimplify,
+                            unsigned int conditionsToSimplifyMask,
                             TSymbolTable *symbolTable);
 }  // namespace sh
 

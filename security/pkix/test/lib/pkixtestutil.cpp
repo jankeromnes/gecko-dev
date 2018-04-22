@@ -178,7 +178,7 @@ static ByteString ResponseBytes(OCSPResponseContext& context);
 static ByteString BasicOCSPResponse(OCSPResponseContext& context);
 static ByteString ResponseData(OCSPResponseContext& context);
 static ByteString ResponderID(OCSPResponseContext& context);
-static ByteString KeyHash(const ByteString& subjectPublicKeyInfo);
+static ByteString KeyHash(const ByteString& subjectPublicKey);
 static ByteString SingleResponse(OCSPResponseContext& context);
 static ByteString CertID(OCSPResponseContext& context);
 static ByteString CertStatus(OCSPResponseContext& context);
@@ -519,10 +519,10 @@ MaybeLogOutput(const ByteString& result, const char* suffix)
 ///////////////////////////////////////////////////////////////////////////////
 // Certificates
 
-static ByteString TBSCertificate(long version, const ByteString& serialNumber,
+static ByteString TBSCertificate(long versionValue, const ByteString& serialNumber,
                                  const ByteString& signature,
                                  const ByteString& issuer,
-                                 time_t notBefore, time_t notAfter,
+                                 time_t notBeforeTime, time_t notAfterTime,
                                  const ByteString& subject,
                                  const ByteString& subjectPublicKeyInfo,
                                  /*optional*/ const ByteString* extensions);

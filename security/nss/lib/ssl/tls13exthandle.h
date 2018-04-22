@@ -11,10 +11,10 @@
 
 SECStatus tls13_ServerSendStatusRequestXtn(const sslSocket *ss,
                                            TLSExtensionData *xtnData,
-                                           sslBuffer *buf, PRBool *append);
+                                           sslBuffer *buf, PRBool *added);
 SECStatus tls13_ClientSendKeyShareXtn(const sslSocket *ss,
                                       TLSExtensionData *xtnData,
-                                      sslBuffer *buf, PRBool *append);
+                                      sslBuffer *buf, PRBool *added);
 SECStatus tls13_ClientHandleKeyShareXtn(const sslSocket *ss,
                                         TLSExtensionData *xtnData,
                                         SECItem *data);
@@ -26,10 +26,10 @@ SECStatus tls13_ServerHandleKeyShareXtn(const sslSocket *ss,
                                         SECItem *data);
 SECStatus tls13_ServerSendKeyShareXtn(const sslSocket *ss,
                                       TLSExtensionData *xtnData,
-                                      sslBuffer *buf, PRBool *append);
+                                      sslBuffer *buf, PRBool *added);
 SECStatus tls13_ClientSendPreSharedKeyXtn(const sslSocket *ss,
                                           TLSExtensionData *xtnData,
-                                          sslBuffer *buf, PRBool *append);
+                                          sslBuffer *buf, PRBool *added);
 SECStatus tls13_ServerHandlePreSharedKeyXtn(const sslSocket *ss,
                                             TLSExtensionData *xtnData,
                                             SECItem *data);
@@ -38,10 +38,10 @@ SECStatus tls13_ClientHandlePreSharedKeyXtn(const sslSocket *ss,
                                             SECItem *data);
 SECStatus tls13_ServerSendPreSharedKeyXtn(const sslSocket *ss,
                                           TLSExtensionData *xtnData,
-                                          sslBuffer *buf, PRBool *append);
+                                          sslBuffer *buf, PRBool *added);
 SECStatus tls13_ClientSendEarlyDataXtn(const sslSocket *ss,
                                        TLSExtensionData *xtnData,
-                                       sslBuffer *buf, PRBool *append);
+                                       sslBuffer *buf, PRBool *added);
 SECStatus tls13_ServerHandleEarlyDataXtn(const sslSocket *ss,
                                          TLSExtensionData *xtnData,
                                          SECItem *data);
@@ -53,7 +53,7 @@ SECStatus tls13_ClientHandleTicketEarlyDataXtn(const sslSocket *ss,
                                                SECItem *data);
 SECStatus tls13_ClientSendSupportedVersionsXtn(const sslSocket *ss,
                                                TLSExtensionData *xtnData,
-                                               sslBuffer *buf, PRBool *append);
+                                               sslBuffer *buf, PRBool *added);
 SECStatus tls13_ServerSendSupportedVersionsXtn(const sslSocket *ss,
                                                TLSExtensionData *xtnData,
                                                sslBuffer *buf, PRBool *added);
@@ -62,16 +62,16 @@ SECStatus tls13_ClientHandleHrrCookie(const sslSocket *ss,
                                       SECItem *data);
 SECStatus tls13_ClientSendHrrCookieXtn(const sslSocket *ss,
                                        TLSExtensionData *xtnData,
-                                       sslBuffer *buf, PRBool *append);
+                                       sslBuffer *buf, PRBool *added);
 SECStatus tls13_ClientSendPskModesXtn(const sslSocket *ss,
                                       TLSExtensionData *xtnData,
-                                      sslBuffer *buf, PRBool *append);
+                                      sslBuffer *buf, PRBool *added);
 SECStatus tls13_ServerHandlePskModesXtn(const sslSocket *ss,
                                         TLSExtensionData *xtnData,
                                         SECItem *data);
 SECStatus tls13_SendCertAuthoritiesXtn(const sslSocket *ss,
                                        TLSExtensionData *xtnData,
-                                       sslBuffer *buf, PRBool *append);
+                                       sslBuffer *buf, PRBool *added);
 SECStatus tls13_ClientHandleCertAuthoritiesXtn(const sslSocket *ss,
                                                TLSExtensionData *xtnData,
                                                SECItem *data);

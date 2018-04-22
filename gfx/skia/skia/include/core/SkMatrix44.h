@@ -385,7 +385,7 @@ public:
         not invertible, return false and leave the inverse parameter in an
         unspecified state.
      */
-    bool invert(SkMatrix44* inverse) const;
+    bool invert(SkMatrix44* storage) const;
 
     /** Transpose this matrix in place. */
     void transpose();

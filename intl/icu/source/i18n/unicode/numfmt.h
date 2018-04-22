@@ -261,7 +261,7 @@ public:
      * @return    true if the given Format objects are semantically equal.
      * @stable ICU 2.0
      */
-    virtual UBool operator==(const Format& other) const;
+    virtual UBool operator==(const Format& that) const;
 
 
     using Format::format;
@@ -426,7 +426,7 @@ public:
      * @stable ICU 4.4
      */
     virtual UnicodeString& format(double number,
-                                  UnicodeString& appendTo,
+                                  UnicodeString& toAppendTo,
                                   FieldPositionIterator* posIter,
                                   UErrorCode& status) const;
     /**
@@ -478,7 +478,7 @@ public:
      * @stable ICU 4.4
      */
     virtual UnicodeString& format(int32_t number,
-                                  UnicodeString& appendTo,
+                                  UnicodeString& toAppendTo,
                                   FieldPositionIterator* posIter,
                                   UErrorCode& status) const;
     /**
@@ -531,7 +531,7 @@ public:
      * @stable ICU 4.4
      */
     virtual UnicodeString& format(int64_t number,
-                                  UnicodeString& appendTo,
+                                  UnicodeString& toAppendTo,
                                   FieldPositionIterator* posIter,
                                   UErrorCode& status) const;
 
@@ -551,9 +551,9 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 4.4
      */
-    virtual UnicodeString& format(StringPiece number,
-                                  UnicodeString& appendTo,
-                                  FieldPositionIterator* posIter,
+    virtual UnicodeString& format(StringPiece decimalNum,
+                                  UnicodeString& toAppendTo,
+                                  FieldPositionIterator* fpi,
                                   UErrorCode& status) const;
 public:
     /**
@@ -738,9 +738,9 @@ public:
      * @return                 A new NumberFormat instance.
      * @stable ICU 4.8
      */
-    static NumberFormat* U_EXPORT2 createInstance(const Locale& desiredLocale,
-                                                  UNumberFormatStyle style,
-                                                  UErrorCode& errorCode);
+    static NumberFormat* U_EXPORT2 createInstance(const Locale& loc,
+                                                  UNumberFormatStyle kind,
+                                                  UErrorCode& status);
 
 #ifndef U_HIDE_INTERNAL_API
 
@@ -750,9 +750,9 @@ public:
      * @internal
      */
     static NumberFormat* internalCreateInstance(
-            const Locale& desiredLocale,
-            UNumberFormatStyle style,
-            UErrorCode& errorCode);
+            const Locale& loc,
+            UNumberFormatStyle kind,
+            UErrorCode& status);
 
     /**
      * ICU use only.
@@ -762,7 +762,7 @@ public:
      * @internal
      */
     static const SharedNumberFormat* U_EXPORT2 createSharedInstance(
-            const Locale& inLocale, UNumberFormatStyle style, UErrorCode& status);
+            const Locale& loc, UNumberFormatStyle kind, UErrorCode& status);
 
 #endif  /* U_HIDE_INTERNAL_API */
 
@@ -1104,7 +1104,7 @@ protected:
     static NumberFormat* makeInstance(const Locale& desiredLocale,
                                       UNumberFormatStyle style,
                                       UBool mustBeDecimalFormat,
-                                      UErrorCode& errorCode);
+                                      UErrorCode& status);
 #endif  /* U_HIDE_INTERNAL_API */
 
 private:
@@ -1120,7 +1120,7 @@ private:
      */
     static NumberFormat* makeInstance(const Locale& desiredLocale,
                                       UNumberFormatStyle style,
-                                      UErrorCode& errorCode);
+                                      UErrorCode& status);
 
     UBool       fGroupingUsed;
     int32_t     fMaxIntegerDigits;

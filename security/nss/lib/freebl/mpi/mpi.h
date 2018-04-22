@@ -191,7 +191,7 @@ mp_err mp_add(const mp_int *a, const mp_int *b, mp_int *c);
 mp_err mp_sub(const mp_int *a, const mp_int *b, mp_int *c);
 mp_err mp_mul(const mp_int *a, const mp_int *b, mp_int *c);
 #if MP_SQUARE
-mp_err mp_sqr(const mp_int *a, mp_int *b);
+mp_err mp_sqr(const mp_int *a, mp_int *sqr);
 #else
 #define mp_sqr(a, b) mp_mul(a, a, b)
 #endif
@@ -212,7 +212,7 @@ mp_err mp_sqrmod(const mp_int *a, const mp_int *m, mp_int *c);
 #else
 #define mp_sqrmod(a, m, c) mp_mulmod(a, a, m, c)
 #endif
-mp_err mp_exptmod(const mp_int *a, const mp_int *b, const mp_int *m, mp_int *c);
+mp_err mp_exptmod(const mp_int *inBase, const mp_int *exponent, const mp_int *modulus, mp_int *result);
 mp_err mp_exptmod_d(const mp_int *a, mp_digit d, const mp_int *m, mp_int *c);
 #endif /* MP_MODARITH */
 
@@ -259,7 +259,7 @@ mp_err mp_read_unsigned_octets(mp_int *mp, const unsigned char *str, mp_size len
 unsigned int mp_unsigned_octet_size(const mp_int *mp);
 mp_err mp_to_unsigned_octets(const mp_int *mp, unsigned char *str, mp_size maxlen);
 mp_err mp_to_signed_octets(const mp_int *mp, unsigned char *str, mp_size maxlen);
-mp_err mp_to_fixlen_octets(const mp_int *mp, unsigned char *str, mp_size len);
+mp_err mp_to_fixlen_octets(const mp_int *mp, unsigned char *str, mp_size length);
 
 /* Miscellaneous */
 mp_size mp_trailing_zeros(const mp_int *mp);

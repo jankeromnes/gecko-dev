@@ -362,7 +362,7 @@ public:
      * @stable ICU 2.0
      */
     static BreakIterator* U_EXPORT2
-    createWordInstance(const Locale& where, UErrorCode& status);
+    createWordInstance(const Locale& key, UErrorCode& status);
 
     /**
      * Create BreakIterator for line-breaks using specified locale.
@@ -386,7 +386,7 @@ public:
      * @stable ICU 2.0
      */
     static BreakIterator* U_EXPORT2
-    createLineInstance(const Locale& where, UErrorCode& status);
+    createLineInstance(const Locale& key, UErrorCode& status);
 
     /**
      * Create BreakIterator for character-breaks using specified locale
@@ -408,7 +408,7 @@ public:
      * @stable ICU 2.0
      */
     static BreakIterator* U_EXPORT2
-    createCharacterInstance(const Locale& where, UErrorCode& status);
+    createCharacterInstance(const Locale& key, UErrorCode& status);
 
     /**
      * Create BreakIterator for sentence-breaks using specified locale
@@ -429,7 +429,7 @@ public:
      * @stable ICU 2.0
      */
     static BreakIterator* U_EXPORT2
-    createSentenceInstance(const Locale& where, UErrorCode& status);
+    createSentenceInstance(const Locale& key, UErrorCode& status);
 
     /**
      * Create BreakIterator for title-casing breaks using the specified locale
@@ -454,7 +454,7 @@ public:
      * @stable ICU 2.1
      */
     static BreakIterator* U_EXPORT2
-    createTitleInstance(const Locale& where, UErrorCode& status);
+    createTitleInstance(const Locale& key, UErrorCode& status);
 
     /**
      * Get the set of Locales for which TextBoundaries are installed.

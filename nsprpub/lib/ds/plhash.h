@@ -67,7 +67,7 @@ struct PLHashTable {
  * If allocOps is null, use default allocator ops built on top of malloc().
  */
 PR_EXTERN(PLHashTable *)
-PL_NewHashTable(PRUint32 numBuckets, PLHashFunction keyHash,
+PL_NewHashTable(PRUint32 n, PLHashFunction keyHash,
                 PLHashComparator keyCompare, PLHashComparator valueCompare,
                 const PLHashAllocOps *allocOps, void *allocPriv);
 

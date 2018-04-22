@@ -103,7 +103,7 @@ utrace_exit(int32_t fnNumber, int32_t returnType, ...);
  * @internal
  */
 U_CAPI void U_EXPORT2
-utrace_data(int32_t utraceFnNumber, int32_t level, const char *fmt, ...);
+utrace_data(int32_t fnNumber, int32_t level, const char *fmt, ...);
 
 U_CDECL_END
 

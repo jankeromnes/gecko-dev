@@ -291,7 +291,7 @@ private:
     /**
      * @return the number of days in "until-now"
      */
-    static int32_t dayDifference(Calendar &until, UErrorCode &status);
+    static int32_t dayDifference(Calendar &cal, UErrorCode &status);
 
     /**
      * initializes fCalendar from parameters.  Returns fCalendar as a convenience.

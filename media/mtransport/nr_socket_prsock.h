@@ -371,14 +371,14 @@ private:
                  const nsACString &local_addr,
                  uint16_t local_port,
                  const nsACString &tls_host);
-  void write_i(nsAutoPtr<InfallibleTArray<uint8_t>> buf,
+  void write_i(nsAutoPtr<InfallibleTArray<uint8_t>> arr,
                uint32_t tracking_number);
   void close_i();
 
   static void release_child_i(dom::TCPSocketChild* aChild);
 
   // STS thread executor
-  void message_sent_s(uint32_t bufferedAmount, uint32_t tracking_number);
+  void message_sent_s(uint32_t buffered_amount, uint32_t tracking_number);
   void recv_message_s(nr_tcp_message *msg);
   void update_state_s(NrSocketIpcState next_state);
   void maybe_post_socket_ready();

@@ -310,10 +310,10 @@ gfxXlibSurface::DoSizeQuery()
 
 class DisplayTable {
 public:
-    static bool GetColormapAndVisual(Screen* screen,
-                                       XRenderPictFormat* format,
-                                       Visual* visual, Colormap* colormap,
-                                       Visual** visualForColormap);
+    static bool GetColormapAndVisual(Screen* aScreen,
+                                       XRenderPictFormat* aFormat,
+                                       Visual* aVisual, Colormap* aColormap,
+                                       Visual** aVisualForColormap);
 
 private:
     struct ColormapEntry {

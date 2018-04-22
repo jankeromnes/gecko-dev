@@ -210,7 +210,7 @@ ucsdet_detect(UCharsetDetector *ucsd, UErrorCode *status);
  * @stable ICU 3.6
  */
 U_STABLE const UCharsetMatch ** U_EXPORT2
-ucsdet_detectAll(UCharsetDetector *ucsd, int32_t *matchesFound, UErrorCode *status);
+ucsdet_detectAll(UCharsetDetector *ucsd, int32_t *maxMatchesFound, UErrorCode *status);
 
 
 

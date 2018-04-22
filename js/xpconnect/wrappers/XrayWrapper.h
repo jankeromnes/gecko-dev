@@ -97,7 +97,7 @@ public:
     virtual void preserveWrapper(JSObject* target) = 0;
 
     bool getExpandoObject(JSContext* cx, JS::HandleObject target,
-                          JS::HandleObject consumer, JS::MutableHandleObject expandObject);
+                          JS::HandleObject consumer, JS::MutableHandleObject expandoObject);
     JSObject* ensureExpandoObject(JSContext* cx, JS::HandleObject wrapper,
                                   JS::HandleObject target);
 
@@ -345,14 +345,14 @@ public:
     static bool getOwnPropertyFromWrapperIfSafe(JSContext* cx,
                                                 JS::HandleObject wrapper,
                                                 JS::HandleId id,
-                                                JS::MutableHandle<JS::PropertyDescriptor> desc);
+                                                JS::MutableHandle<JS::PropertyDescriptor> outDesc);
 
     // Like the above, but operates in the target compartment.
     static bool getOwnPropertyFromTargetIfSafe(JSContext* cx,
                                                JS::HandleObject target,
                                                JS::HandleObject wrapper,
                                                JS::HandleId id,
-                                               JS::MutableHandle<JS::PropertyDescriptor> desc);
+                                               JS::MutableHandle<JS::PropertyDescriptor> outDesc);
 
     static const JSClass HolderClass;
     static JSXrayTraits singleton;
@@ -499,8 +499,8 @@ class XrayWrapper : public Base {
     virtual bool getOwnEnumerablePropertyKeys(JSContext* cx, JS::Handle<JSObject*> wrapper,
                                               JS::AutoIdVector& props) const override;
 
-    virtual bool getBuiltinClass(JSContext* cx, JS::HandleObject wapper, js::ESClass* cls) const override;
-    virtual const char* className(JSContext* cx, JS::HandleObject proxy) const override;
+    virtual bool getBuiltinClass(JSContext* cx, JS::HandleObject wrapper, js::ESClass* cls) const override;
+    virtual const char* className(JSContext* cx, JS::HandleObject wrapper) const override;
 
     static const XrayWrapper singleton;
 

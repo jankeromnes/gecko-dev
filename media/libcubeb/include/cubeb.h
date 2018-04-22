@@ -454,7 +454,7 @@ CUBEB_EXPORT int cubeb_get_max_channel_count(cubeb * context, uint32_t * max_cha
     @retval CUBEB_ERROR_NOT_SUPPORTED */
 CUBEB_EXPORT int cubeb_get_min_latency(cubeb * context,
                                        cubeb_stream_params * params,
-                                       uint32_t * latency_frames);
+                                       uint32_t * latency_ms);
 
 /** Get the preferred sample rate for this backend: this is hardware and
     platform dependent, and can avoid resampling, and/or trigger fastpaths.
@@ -501,7 +501,7 @@ CUBEB_EXPORT int cubeb_stream_init(cubeb * context,
                                    cubeb_stream_params * input_stream_params,
                                    cubeb_devid output_device,
                                    cubeb_stream_params * output_stream_params,
-                                   uint32_t latency_frames,
+                                   uint32_t latency,
                                    cubeb_data_callback data_callback,
                                    cubeb_state_callback state_callback,
                                    void * user_ptr);
@@ -578,7 +578,7 @@ CUBEB_EXPORT int cubeb_stream_set_panning(cubeb_stream * stream, float panning);
     @retval CUBEB_ERROR_INVALID_PARAMETER if either stm, device or count are
             invalid pointers
     @retval CUBEB_ERROR_NOT_SUPPORTED */
-CUBEB_EXPORT int cubeb_stream_get_current_device(cubeb_stream * stm,
+CUBEB_EXPORT int cubeb_stream_get_current_device(cubeb_stream * stream,
                                                  cubeb_device ** const device);
 
 /** Destroy a cubeb_device structure.
@@ -588,7 +588,7 @@ CUBEB_EXPORT int cubeb_stream_get_current_device(cubeb_stream * stm,
     @retval CUBEB_ERROR_INVALID_PARAMETER if devices is an invalid pointer
     @retval CUBEB_ERROR_NOT_SUPPORTED */
 CUBEB_EXPORT int cubeb_stream_device_destroy(cubeb_stream * stream,
-                                             cubeb_device * devices);
+                                             cubeb_device * device);
 
 /** Set a callback to be notified when the output device changes.
     @param stream the stream for which to set the callback.

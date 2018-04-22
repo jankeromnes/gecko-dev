@@ -89,7 +89,7 @@ class SANDBOX_EXPORT CodeGen {
   // WithinRange returns a node equivalent to |next| that is at most
   // |range| instructions away from the (logical) beginning of the
   // program.
-  Node WithinRange(Node next, size_t range);
+  Node WithinRange(Node target, size_t range);
 
   // Append appends a new instruction to the physical end (i.e.,
   // logical beginning) of |program_|.

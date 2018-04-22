@@ -518,7 +518,7 @@ uscript_getShortName(UScriptCode scriptCode);
  * @stable ICU 2.4
  */
 U_STABLE UScriptCode  U_EXPORT2
-uscript_getScript(UChar32 codepoint, UErrorCode *err);
+uscript_getScript(UChar32 c, UErrorCode *pErrorCode);
 
 /**
  * Do the Script_Extensions of code point c contain script sc?
@@ -567,7 +567,7 @@ uscript_hasScript(UChar32 c, UScriptCode sc);
 U_STABLE int32_t U_EXPORT2
 uscript_getScriptExtensions(UChar32 c,
                             UScriptCode *scripts, int32_t capacity,
-                            UErrorCode *errorCode);
+                            UErrorCode *pErrorCode);
 
 /**
  * Script usage constants.

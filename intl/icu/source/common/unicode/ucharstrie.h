@@ -208,7 +208,7 @@ public:
      * @return The match/value Result.
      * @stable ICU 4.8
      */
-    UStringTrieResult next(ConstChar16Ptr s, int32_t length);
+    UStringTrieResult next(ConstChar16Ptr ptr, int32_t sLength);
 
     /**
      * Returns a matching string's value if called immediately after

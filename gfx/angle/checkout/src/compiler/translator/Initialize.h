@@ -15,13 +15,13 @@ namespace sh
 {
 
 void InitExtensionBehavior(const ShBuiltInResources &resources,
-                           TExtensionBehavior &extensionBehavior);
+                           TExtensionBehavior &extBehavior);
 
 // Resets the behavior of the extensions listed in |extensionBehavior| to the
 // undefined state. These extensions will only be those initially supported in
 // the ShBuiltInResources object for this compiler instance. All other
 // extensions will remain unsupported.
-void ResetExtensionBehavior(TExtensionBehavior &extensionBehavior);
+void ResetExtensionBehavior(TExtensionBehavior &extBehavior);
 
 }  // namespace sh
 

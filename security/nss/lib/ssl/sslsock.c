@@ -185,7 +185,7 @@ PR_STATIC_ASSERT(SSL_NAMED_GROUP_COUNT == PR_ARRAY_SIZE(ssl_named_groups));
 #undef FFGROUP
 
 /* forward declarations. */
-static sslSocket *ssl_NewSocket(PRBool makeLocks, SSLProtocolVariant variant);
+static sslSocket *ssl_NewSocket(PRBool makeLocks, SSLProtocolVariant protocolVariant);
 static SECStatus ssl_MakeLocks(sslSocket *ss);
 static void ssl_SetDefaultsFromEnvironment(void);
 static PRStatus ssl_PushIOLayer(sslSocket *ns, PRFileDesc *stack,

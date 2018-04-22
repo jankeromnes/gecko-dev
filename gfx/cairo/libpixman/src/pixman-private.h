@@ -536,7 +536,7 @@ pixman_combine_32_func_t
 _pixman_implementation_lookup_combiner (pixman_implementation_t *imp,
 					pixman_op_t		 op,
 					pixman_bool_t		 component_alpha,
-					pixman_bool_t		 wide,
+					pixman_bool_t		 narrow,
 					pixman_bool_t		 rgb16);
 
 pixman_bool_t
@@ -574,7 +574,7 @@ _pixman_implementation_src_iter_init (pixman_implementation_t       *imp,
 				      int                            width,
 				      int                            height,
 				      uint8_t                       *buffer,
-				      iter_flags_t                   flags,
+				      iter_flags_t                   iter_flags,
 				      uint32_t                       image_flags);
 
 pixman_bool_t
@@ -586,7 +586,7 @@ _pixman_implementation_dest_iter_init (pixman_implementation_t       *imp,
 				       int                            width,
 				       int                            height,
 				       uint8_t                       *buffer,
-				       iter_flags_t                   flags,
+				       iter_flags_t                   iter_flags,
 				       uint32_t                       image_flags);
 
 /* Specific implementations */
@@ -796,7 +796,7 @@ _pixman_internal_only_get_implementation (void);
 
 /* Memory allocation helpers */
 void *
-pixman_malloc_ab (unsigned int n, unsigned int b);
+pixman_malloc_ab (unsigned int a, unsigned int b);
 
 void *
 pixman_malloc_abc (unsigned int a, unsigned int b, unsigned int c);

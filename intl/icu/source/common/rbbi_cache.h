@@ -38,8 +38,8 @@ class RuleBasedBreakIterator::DictionaryCache: public UMemory {
 
      void reset();
 
-     UBool following(int32_t fromPos, int32_t *pos, int32_t *statusIndex);
-     UBool preceding(int32_t fromPos, int32_t *pos, int32_t *statusIndex);
+     UBool following(int32_t fromPos, int32_t *result, int32_t *statusIndex);
+     UBool preceding(int32_t fromPos, int32_t *result, int32_t *statusIndex);
 
     /**
      * Populate the cache with the dictionary based boundaries within a region of text.
@@ -103,9 +103,9 @@ class RuleBasedBreakIterator::BreakCache: public UMemory {
 
     // Move the iteration state to the position following the startPosition.
     // Input position must be pinned to the input length.
-    void        following(int32_t startPosition, UErrorCode &status);
+    void        following(int32_t startPos, UErrorCode &status);
 
-    void        preceding(int32_t startPosition, UErrorCode &status);
+    void        preceding(int32_t startPos, UErrorCode &status);
 
     /*
      * Update the state of the public BreakIterator (fBI) to reflect the
@@ -173,7 +173,7 @@ class RuleBasedBreakIterator::BreakCache: public UMemory {
      *  Return TRUE if successful, FALSE if the specified position is after
      *  the last cached boundary or before the first.
      */
-    UBool                   seek(int32_t startPosition);
+    UBool                   seek(int32_t pos);
 
     void dumpCache();
 

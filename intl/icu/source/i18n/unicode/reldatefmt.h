@@ -352,7 +352,7 @@ public:
     RelativeDateTimeFormatter(
             const Locale& locale,
             NumberFormat *nfToAdopt,
-            UDateRelativeDateTimeFormatterStyle style,
+            UDateRelativeDateTimeFormatterStyle styl,
             UDisplayContext capitalizationContext,
             UErrorCode& status);
 
@@ -510,7 +510,7 @@ private:
     Locale fLocale;
     void init(
             NumberFormat *nfToAdopt,
-            BreakIterator *brkIter,
+            BreakIterator *biToAdopt,
             UErrorCode &status);
     void adjustForContext(UnicodeString &) const;
 };

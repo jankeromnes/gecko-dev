@@ -56,7 +56,7 @@ namespace GrPathUtils {
         QuadUVMatrix() {}
         // Initialize the matrix from the control pts
         QuadUVMatrix(const SkPoint controlPts[3]) { this->set(controlPts); }
-        void set(const SkPoint controlPts[3]);
+        void set(const SkPoint qPts[3]);
 
         /**
          * Applies the matrix to vertex positions to compute UV coords. This
@@ -103,7 +103,7 @@ namespace GrPathUtils {
     //     | ..L.. | * | y |  ==  | l |
     //     | ..M.. |   | 1 |      | m |
     //
-    void getConicKLM(const SkPoint p[3], const SkScalar weight, SkMatrix* klm);
+    void getConicKLM(const SkPoint p[3], const SkScalar weight, SkMatrix* out);
 
     // Converts a cubic into a sequence of quads. If working in device space
     // use tolScale = 1, otherwise set based on stretchiness of the matrix. The
@@ -182,7 +182,7 @@ namespace GrPathUtils {
     // intersect with K (See SkClassifyCubic).
     //
     // Returns the cubic's classification.
-    SkCubicType getCubicKLM(const SkPoint src[4], SkMatrix* klm, double t[2], double s[2]);
+    SkCubicType getCubicKLM(const SkPoint src[4], SkMatrix* klm, double tt[2], double ss[2]);
 
     // Chops the cubic bezier passed in by src, at the double point (intersection point)
     // if the curve is a cubic loop. If it is a loop, there will be two parametric values for

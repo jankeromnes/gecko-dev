@@ -108,7 +108,7 @@ class U_I18N_API MeasureFormat : public Format {
      * @stable ICU 53
      */
     MeasureFormat(
-            const Locale &locale, UMeasureFormatWidth width, UErrorCode &status);
+            const Locale &locale, UMeasureFormatWidth w, UErrorCode &status);
 
     /**
      * Constructor.
@@ -119,7 +119,7 @@ class U_I18N_API MeasureFormat : public Format {
      */
     MeasureFormat(
             const Locale &locale,
-            UMeasureFormatWidth width,
+            UMeasureFormatWidth w,
             NumberFormat *nfToAdopt,
             UErrorCode &status);
 
@@ -133,7 +133,7 @@ class U_I18N_API MeasureFormat : public Format {
      * Assignment operator.
      * @stable ICU 3.0
      */
-    MeasureFormat &operator=(const MeasureFormat &rhs);
+    MeasureFormat &operator=(const MeasureFormat &other);
 
     /**
      * Destructor.
@@ -299,7 +299,7 @@ class U_I18N_API MeasureFormat : public Format {
      */
     void initMeasureFormat(
             const Locale &locale,
-            UMeasureFormatWidth width,
+            UMeasureFormatWidth w,
             NumberFormat *nfToAdopt,
             UErrorCode &status);
     /**

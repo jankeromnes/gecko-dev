@@ -178,7 +178,7 @@ public:
     //  exponent-marker ::= 'e' | 'E'
     //  digit ::= '0' | '1' | ... | '9'
     // Note: fromString doesn't support "infinity" and "nan".
-    static MFBT_API Decimal fromString(const std::string& aValue);
+    static MFBT_API Decimal fromString(const std::string& str);
     static MFBT_API Decimal infinity(Sign);
     static MFBT_API Decimal nan();
     static MFBT_API Decimal zero(Sign);

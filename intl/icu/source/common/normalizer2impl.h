@@ -150,7 +150,7 @@ public:
     UChar *getLimit() { return limit; }
     uint8_t getLastCC() const { return lastCC; }
 
-    UBool equals(const UChar *start, const UChar *limit) const;
+    UBool equals(const UChar *otherStart, const UChar *otherLimit) const;
     UBool equals(const uint8_t *otherStart, const uint8_t *otherLimit) const;
 
     UBool append(UChar32 c, uint8_t cc, UErrorCode &errorCode) {

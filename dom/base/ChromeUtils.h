@@ -32,21 +32,21 @@ private:
   // Implemented in devtools/shared/heapsnapshot/HeapSnapshot.cpp
   static void SaveHeapSnapshotShared(GlobalObject& global,
                                      const HeapSnapshotBoundaries& boundaries,
-                                     nsAString& filePath,
-                                     nsAString& snapshotId,
+                                     nsAString& outFilePath,
+                                     nsAString& outSnapshotId,
                                      ErrorResult& rv);
 
 public:
   // Implemented in devtools/shared/heapsnapshot/HeapSnapshot.cpp
   static void SaveHeapSnapshot(GlobalObject& global,
                                const HeapSnapshotBoundaries& boundaries,
-                               nsAString& filePath,
+                               nsAString& outFilePath,
                                ErrorResult& rv);
 
   // Implemented in devtools/shared/heapsnapshot/HeapSnapshot.cpp
   static void SaveHeapSnapshotGetId(GlobalObject& global,
                                     const HeapSnapshotBoundaries& boundaries,
-                                    nsAString& snapshotId,
+                                    nsAString& outSnapshotId,
                                     ErrorResult& rv);
 
   // Implemented in devtools/shared/heapsnapshot/HeapSnapshot.cpp

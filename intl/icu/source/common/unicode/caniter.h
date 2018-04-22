@@ -79,7 +79,7 @@ public:
      * @param status    Fill-in parameter which receives the status of this operation.
      * @stable ICU 2.4
      */
-    CanonicalIterator(const UnicodeString &source, UErrorCode &status);
+    CanonicalIterator(const UnicodeString &sourceStr, UErrorCode &status);
 
     /** Destructor
      *  Cleans pieces

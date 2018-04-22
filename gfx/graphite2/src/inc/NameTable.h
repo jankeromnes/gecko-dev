@@ -38,14 +38,14 @@ class NameTable
     NameTable & operator = (const NameTable &);
 
 public:
-    NameTable(const void * data, size_t length, uint16 platfromId=3, uint16 encodingID = 1);
+    NameTable(const void * data, size_t length, uint16 platformId=3, uint16 encodingID = 1);
     ~NameTable() { free(const_cast<TtfUtil::Sfnt::FontNames *>(m_table)); }
     enum eNameFallback {
         eNoFallback = 0,
         eEnUSFallbackOnly = 1,
         eEnOrAnyFallback = 2
     };
-    uint16 setPlatformEncoding(uint16 platfromId=3, uint16 encodingID = 1);
+    uint16 setPlatformEncoding(uint16 platformId=3, uint16 encodingID = 1);
     void * getName(uint16 & languageId, uint16 nameId, gr_encform enc, uint32 & length);
     uint16 getLanguageId(const char * bcp47Locale);
 

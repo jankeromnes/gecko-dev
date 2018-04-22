@@ -44,7 +44,7 @@ public:
   MFBT_API void wait(MutexImpl& lock);
 
   MFBT_API CVStatus wait_for(MutexImpl& lock,
-                             const mozilla::TimeDuration& rel_time);
+                             const mozilla::TimeDuration& a_rel_time);
 
 private:
   ConditionVariableImpl(const ConditionVariableImpl&) = delete;

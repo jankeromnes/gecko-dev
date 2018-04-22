@@ -55,7 +55,7 @@ int NR_async_wait_init(void);
 int NR_async_wait(NR_SOCKET sock, int how, NR_async_cb cb,void *cb_arg,
                             char *function,int line);
 int NR_async_cancel(NR_SOCKET sock,int how);
-int NR_async_schedule(NR_async_cb cb,void *arg,char *function,int line);
+int NR_async_schedule(NR_async_cb cb,void *arg,char *func,int l);
 int NR_async_event_wait(int *eventsp);
 int NR_async_event_wait2(int *eventsp,struct timeval *tv);
 

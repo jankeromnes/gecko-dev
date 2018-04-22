@@ -276,22 +276,22 @@ typedef size_t uintptr_t;
  * Floating point utility to determine if a double is Not a Number (NaN).
  * @internal
  */
-U_INTERNAL UBool   U_EXPORT2 uprv_isNaN(double d);
+U_INTERNAL UBool   U_EXPORT2 uprv_isNaN(double number);
 /**
  * Floating point utility to determine if a double has an infinite value.
  * @internal
  */
-U_INTERNAL UBool   U_EXPORT2 uprv_isInfinite(double d);
+U_INTERNAL UBool   U_EXPORT2 uprv_isInfinite(double number);
 /**
  * Floating point utility to determine if a double has a positive infinite value.
  * @internal
  */
-U_INTERNAL UBool   U_EXPORT2 uprv_isPositiveInfinity(double d);
+U_INTERNAL UBool   U_EXPORT2 uprv_isPositiveInfinity(double number);
 /**
  * Floating point utility to determine if a double has a negative infinite value.
  * @internal
  */
-U_INTERNAL UBool   U_EXPORT2 uprv_isNegativeInfinity(double d);
+U_INTERNAL UBool   U_EXPORT2 uprv_isNegativeInfinity(double number);
 /**
  * Floating point utility that returns a Not a Number (NaN) value.
  * @internal
@@ -312,57 +312,57 @@ U_INTERNAL double  U_EXPORT2 uprv_trunc(double d);
  * Floating point utility to calculate the floor of a double.
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_floor(double d);
+U_INTERNAL double  U_EXPORT2 uprv_floor(double x);
 /**
  * Floating point utility to calculate the ceiling of a double.
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_ceil(double d);
+U_INTERNAL double  U_EXPORT2 uprv_ceil(double x);
 /**
  * Floating point utility to calculate the absolute value of a double.
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_fabs(double d);
+U_INTERNAL double  U_EXPORT2 uprv_fabs(double x);
 /**
  * Floating point utility to calculate the fractional and integer parts of a double.
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_modf(double d, double* pinteger);
+U_INTERNAL double  U_EXPORT2 uprv_modf(double x, double* y);
 /**
  * Floating point utility to calculate the remainder of a double divided by another double.
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_fmod(double d, double y);
+U_INTERNAL double  U_EXPORT2 uprv_fmod(double x, double y);
 /**
  * Floating point utility to calculate d to the power of exponent (d^exponent).
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_pow(double d, double exponent);
+U_INTERNAL double  U_EXPORT2 uprv_pow(double x, double y);
 /**
  * Floating point utility to calculate 10 to the power of exponent (10^exponent).
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_pow10(int32_t exponent);
+U_INTERNAL double  U_EXPORT2 uprv_pow10(int32_t x);
 /**
  * Floating point utility to calculate the maximum value of two doubles.
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_fmax(double d, double y);
+U_INTERNAL double  U_EXPORT2 uprv_fmax(double x, double y);
 /**
  * Floating point utility to calculate the minimum value of two doubles.
  * @internal
  */
-U_INTERNAL double  U_EXPORT2 uprv_fmin(double d, double y);
+U_INTERNAL double  U_EXPORT2 uprv_fmin(double x, double y);
 /**
  * Private utility to calculate the maximum value of two integers.
  * @internal
  */
-U_INTERNAL int32_t U_EXPORT2 uprv_max(int32_t d, int32_t y);
+U_INTERNAL int32_t U_EXPORT2 uprv_max(int32_t x, int32_t y);
 /**
  * Private utility to calculate the minimum value of two integers.
  * @internal
  */
-U_INTERNAL int32_t U_EXPORT2 uprv_min(int32_t d, int32_t y);
+U_INTERNAL int32_t U_EXPORT2 uprv_min(int32_t x, int32_t y);
 
 #if U_IS_BIG_ENDIAN
 #   define uprv_isNegative(number) (*((signed char *)&(number))<0)
@@ -581,7 +581,7 @@ U_INTERNAL void U_EXPORT2 uprv_dl_close( void *lib, UErrorCode *status);
  * Extract a symbol from a library (function)
  * @internal (ICU 4.8)
  */
-U_INTERNAL UVoidFunction* U_EXPORT2 uprv_dlsym_func( void *lib, const char *symbolName, UErrorCode *status);
+U_INTERNAL UVoidFunction* U_EXPORT2 uprv_dlsym_func( void *lib, const char *sym, UErrorCode *status);
 
 /**
  * Extract a symbol from a library (function)

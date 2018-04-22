@@ -86,15 +86,15 @@ typedef struct PORTCheapArenaPool_str {
 
 SEC_BEGIN_PROTOS
 
-extern void *PORT_Alloc(size_t len);
-extern void *PORT_Realloc(void *old, size_t len);
-extern void *PORT_ZAlloc(size_t len);
+extern void *PORT_Alloc(size_t bytes);
+extern void *PORT_Realloc(void *oldptr, size_t bytes);
+extern void *PORT_ZAlloc(size_t bytes);
 extern void *PORT_ZAllocAligned(size_t bytes, size_t alignment, void **mem);
-extern void *PORT_ZAllocAlignedOffset(size_t bytes, size_t alignment,
+extern void *PORT_ZAllocAlignedOffset(size_t size, size_t alignment,
                                       size_t offset);
 extern void PORT_Free(void *ptr);
 extern void PORT_ZFree(void *ptr, size_t len);
-extern char *PORT_Strdup(const char *s);
+extern char *PORT_Strdup(const char *str);
 extern void PORT_SetError(int value);
 extern int PORT_GetError(void);
 
@@ -103,9 +103,9 @@ extern PLArenaPool *PORT_NewArena(unsigned long chunksize);
 extern void PORT_FreeArena(PLArenaPool *arena, PRBool zero);
 
 /* These functions are for use with PORTCheapArenaPools. */
-extern void PORT_InitCheapArena(PORTCheapArenaPool *arena,
+extern void PORT_InitCheapArena(PORTCheapArenaPool *pool,
                                 unsigned long chunksize);
-extern void PORT_DestroyCheapArena(PORTCheapArenaPool *arena);
+extern void PORT_DestroyCheapArena(PORTCheapArenaPool *pool);
 
 /* These functions work with both kinds of arena pool. */
 extern void *PORT_ArenaAlloc(PLArenaPool *arena, size_t size);
@@ -251,7 +251,7 @@ sec_port_iso88591_utf8_conversion_function(
 
 extern int NSS_PutEnv(const char *envVarName, const char *envValue);
 
-extern int NSS_SecureMemcmp(const void *a, const void *b, size_t n);
+extern int NSS_SecureMemcmp(const void *ia, const void *ib, size_t n);
 extern unsigned int NSS_SecureMemcmpZero(const void *mem, size_t n);
 
 /*

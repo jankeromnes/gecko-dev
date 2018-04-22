@@ -61,7 +61,7 @@ public:
      * the assignment operator, to make copies explicit and to
      * use a UErrorCode where memory allocations might be needed.
      */
-    CharString &copyFrom(const CharString &other, UErrorCode &errorCode);
+    CharString &copyFrom(const CharString &s, UErrorCode &errorCode);
 
     UBool isEmpty() const { return len==0; }
     int32_t length() const { return len; }
@@ -84,7 +84,7 @@ public:
     CharString &append(const CharString &s, UErrorCode &errorCode) {
         return append(s.data(), s.length(), errorCode);
     }
-    CharString &append(const char *s, int32_t sLength, UErrorCode &status);
+    CharString &append(const char *s, int32_t sLength, UErrorCode &errorCode);
     /**
      * Returns a writable buffer for appending and writes the buffer's capacity to
      * resultCapacity. Guarantees resultCapacity>=minCapacity if U_SUCCESS().

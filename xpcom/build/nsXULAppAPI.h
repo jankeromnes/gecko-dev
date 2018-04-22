@@ -471,7 +471,7 @@ XRE_API(nsresult,
         XRE_InitParentProcess, (int aArgc,
                                 char* aArgv[],
                                 MainFunction aMainFunction,
-                                void* aMainFunctionExtraData))
+                                void* aMainFunctionData))
 
 XRE_API(int,
         XRE_RunIPDLTest, (int aArgc,
@@ -511,8 +511,8 @@ XRE_API(void,
         XRE_StartupTimelineRecord, (int aEvent, mozilla::TimeStamp aWhen))
 
 XRE_API(void,
-        XRE_InitOmnijar, (nsIFile* aGreOmni,
-                          nsIFile* aAppOmni))
+        XRE_InitOmnijar, (nsIFile* greOmni,
+                          nsIFile* appOmni))
 XRE_API(void,
         XRE_StopLateWriteChecks, (void))
 

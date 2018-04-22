@@ -161,7 +161,7 @@ XPCOM_API(nsresult) NS_NewLocalFile(const nsAString& aPath,
                                     nsIFile** aResult);
 
 XPCOM_API(nsresult) NS_NewNativeLocalFile(const nsACString& aPath,
-                                          bool aFollowLinks,
+                                          bool aFollowSymlinks,
                                           nsIFile** aResult);
 
 // Use NS_NewLocalFile if you already have a UTF-16 string.

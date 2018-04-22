@@ -27,7 +27,7 @@ void ECGroup_free(ECGroup *group);
  * of the group of points on the elliptic curve. Input and output values
  * are assumed to be NOT field-encoded. */
 mp_err ECPoint_mul(const ECGroup *group, const mp_int *k, const mp_int *px,
-                   const mp_int *py, mp_int *qx, mp_int *qy);
+                   const mp_int *py, mp_int *rx, mp_int *ry);
 
 /* Elliptic curve scalar-point multiplication. Computes Q(x, y) = k1 * G +
  * k2 * P(x, y), where G is the generator (base point) of the group of
@@ -35,7 +35,7 @@ mp_err ECPoint_mul(const ECGroup *group, const mp_int *k, const mp_int *px,
  * be NOT field-encoded. */
 mp_err ECPoints_mul(const ECGroup *group, const mp_int *k1,
                     const mp_int *k2, const mp_int *px, const mp_int *py,
-                    mp_int *qx, mp_int *qy);
+                    mp_int *rx, mp_int *ry);
 
 /* Validates an EC public key as described in Section 5.2.2 of X9.62.
  * Returns MP_YES if the public key is valid, MP_NO if the public key

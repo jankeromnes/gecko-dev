@@ -167,22 +167,22 @@ class U_I18N_API OlsonTimeZone: public BasicTimeZone {
      * TimeZone API.  Do not call this; prefer getOffset(UDate,...).
      */
     virtual int32_t getOffset(uint8_t era, int32_t year, int32_t month,
-                              int32_t day, uint8_t dayOfWeek,
+                              int32_t dom, uint8_t dow,
                               int32_t millis, UErrorCode& ec) const;
 
     /**
      * TimeZone API.  Do not call this; prefer getOffset(UDate,...).
      */
     virtual int32_t getOffset(uint8_t era, int32_t year, int32_t month,
-                              int32_t day, uint8_t dayOfWeek,
+                              int32_t dom, uint8_t dow,
                               int32_t millis, int32_t monthLength,
                               UErrorCode& ec) const;
 
     /**
      * TimeZone API.
      */
-    virtual void getOffset(UDate date, UBool local, int32_t& rawOffset,
-                   int32_t& dstOffset, UErrorCode& ec) const;
+    virtual void getOffset(UDate date, UBool local, int32_t& rawoff,
+                   int32_t& dstoff, UErrorCode& ec) const;
 
     /**
      * BasicTimeZone API.

@@ -34,7 +34,7 @@ SECStatus PK11_DeleteSlotFromList(PK11SlotList *list, PK11SlotListElement *le);
 PK11SlotListElement *PK11_FindSlotElement(PK11SlotList *list,
                                           PK11SlotInfo *slot);
 PK11SlotInfo *PK11_FindSlotBySerial(char *serial);
-int PK11_GetMaxKeyLength(CK_MECHANISM_TYPE type);
+int PK11_GetMaxKeyLength(CK_MECHANISM_TYPE mechanism);
 
 /************************************************************
  * Generic Slot Management
@@ -45,11 +45,11 @@ SECStatus PK11_ReadAttribute(PK11SlotInfo *slot, CK_OBJECT_HANDLE id,
                              CK_ATTRIBUTE_TYPE type, PLArenaPool *arena, SECItem *result);
 CK_ULONG PK11_ReadULongAttribute(PK11SlotInfo *slot, CK_OBJECT_HANDLE id,
                                  CK_ATTRIBUTE_TYPE type);
-char *PK11_MakeString(PLArenaPool *arena, char *space, char *staticSring,
+char *PK11_MakeString(PLArenaPool *arena, char *space, char *staticString,
                       int stringLen);
 PRBool pk11_MatchString(const char *string,
                         const char *staticString, int staticStringLen);
-int PK11_MapError(CK_RV error);
+int PK11_MapError(CK_RV rv);
 CK_SESSION_HANDLE PK11_GetRWSession(PK11SlotInfo *slot);
 void PK11_RestoreROSession(PK11SlotInfo *slot, CK_SESSION_HANDLE rwsession);
 PRBool PK11_RWSessionHasLock(PK11SlotInfo *slot,
@@ -94,8 +94,8 @@ void pk11_SetInternalKeySlotIfFirst(PK11SlotInfo *slot);
  *       Mechanism Mapping functions
  *********************************************************************/
 void PK11_AddMechanismEntry(CK_MECHANISM_TYPE type, CK_KEY_TYPE key,
-                            CK_MECHANISM_TYPE keygen, CK_MECHANISM_TYPE pad,
-                            int ivLen, int blocksize);
+                            CK_MECHANISM_TYPE keyGen, CK_MECHANISM_TYPE padType,
+                            int ivLen, int blockSize);
 CK_MECHANISM_TYPE PK11_GetKeyMechanism(CK_KEY_TYPE type);
 CK_MECHANISM_TYPE PK11_GetKeyGenWithSize(CK_MECHANISM_TYPE type, int size);
 
@@ -121,8 +121,8 @@ SECKEYPrivateKey *PK11_FindPrivateKeyFromNickname(char *nickname, void *wincx);
 CK_OBJECT_HANDLE *PK11_FindObjectsFromNickname(char *nickname,
                                                PK11SlotInfo **slotptr, CK_OBJECT_CLASS objclass, int *returnCount,
                                                void *wincx);
-CK_OBJECT_HANDLE PK11_MatchItem(PK11SlotInfo *slot, CK_OBJECT_HANDLE peer,
-                                CK_OBJECT_CLASS o_class);
+CK_OBJECT_HANDLE PK11_MatchItem(PK11SlotInfo *slot, CK_OBJECT_HANDLE searchID,
+                                CK_OBJECT_CLASS matchclass);
 CK_BBOOL pk11_HasAttributeSet_Lock(PK11SlotInfo *slot,
                                    CK_OBJECT_HANDLE id,
                                    CK_ATTRIBUTE_TYPE type,
@@ -144,22 +144,22 @@ SECStatus PK11_LookupCrls(CERTCrlHeadNode *nodes, int type, void *wincx);
 PK11Context *PK11_CreateContextByRawKey(PK11SlotInfo *slot,
                                         CK_MECHANISM_TYPE type, PK11Origin origin, CK_ATTRIBUTE_TYPE operation,
                                         SECItem *key, SECItem *param, void *wincx);
-PRBool PK11_HashOK(SECOidTag hashAlg);
+PRBool PK11_HashOK(SECOidTag algID);
 
 /**********************************************************************
  * Functions which are  deprecated....
  **********************************************************************/
 
 SECItem *
-PK11_FindCrlByName(PK11SlotInfo **slot, CK_OBJECT_HANDLE *handle,
-                   SECItem *derName, int type, char **url);
+PK11_FindCrlByName(PK11SlotInfo **slot, CK_OBJECT_HANDLE *crlHandle,
+                   SECItem *name, int type, char **pUrl);
 
 CK_OBJECT_HANDLE
 PK11_PutCrl(PK11SlotInfo *slot, SECItem *crl,
             SECItem *name, char *url, int type);
 
 SECItem *
-PK11_FindSMimeProfile(PK11SlotInfo **slotp, char *emailAddr, SECItem *derSubj,
+PK11_FindSMimeProfile(PK11SlotInfo **slot, char *emailAddr, SECItem *name,
                       SECItem **profileTime);
 SECStatus
 PK11_SaveSMimeProfile(PK11SlotInfo *slot, char *emailAddr, SECItem *derSubj,
@@ -173,7 +173,7 @@ SECStatus PK11_SetObjectNickname(PK11SlotInfo *slot, CK_OBJECT_HANDLE id,
 
 /* private */
 SECStatus pk11_TraverseAllSlots(SECStatus (*callback)(PK11SlotInfo *, void *),
-                                void *cbArg, PRBool forceLogin, void *pwArg);
+                                void *arg, PRBool forceLogin, void *wincx);
 
 /* fetch multiple CRLs for a specific issuer */
 SECStatus pk11_RetrieveCrls(CERTCrlHeadNode *nodes, SECItem *issuer,

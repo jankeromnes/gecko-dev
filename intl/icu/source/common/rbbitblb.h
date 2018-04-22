@@ -52,7 +52,7 @@ public:
      *  pair, within this state table. This is an iterator-like function, used to
      *  identify char classes (state table columns) that can be eliminated.
      */
-    bool     findDuplCharClassFrom(int &baseClass, int &duplClass);
+    bool     findDuplCharClassFrom(int &baseCategory, int &duplCategory);
 
     /** Remove a column from the state table. Used when two character categories
      *  have been found equivalent, and merged together, to eliminate the uneeded table column.
@@ -68,7 +68,7 @@ private:
     void     calcFirstPos(RBBINode *n);
     void     calcLastPos(RBBINode  *n);
     void     calcFollowPos(RBBINode *n);
-    void     calcChainedFollowPos(RBBINode *n);
+    void     calcChainedFollowPos(RBBINode *tree);
     void     bofFixup();
     void     buildStateTable();
     void     flagAcceptingStates();
@@ -90,7 +90,7 @@ private:
      * @param duplicateState returns the duplicate state of fistState
      * @return true if a duplicate pair of states was found.
      */
-    bool findDuplicateState(int32_t &firstState, int32_t &duplicateState);
+    bool findDuplicateState(int32_t &firstState, int32_t &duplState);
 
     /** Remove a duplicate state/
      * @param keepState First of the duplicate pair. Keep it.
@@ -105,7 +105,7 @@ private:
     void     setAdd(UVector *dest, UVector *source);
     UBool    setEquals(UVector *a, UVector *b);
 
-    void     sortedAdd(UVector **dest, int32_t val);
+    void     sortedAdd(UVector **vector, int32_t val);
 
 public:
 #ifdef RBBI_DEBUG
@@ -154,7 +154,7 @@ public:
                                            //   contents is int index of dest state
                                            //   in RBBITableBuilder.fDStates
 
-    RBBIStateDescriptor(int maxInputSymbol,  UErrorCode *fStatus);
+    RBBIStateDescriptor(int lastInputSymbol,  UErrorCode *fStatus);
     ~RBBIStateDescriptor();
 
 private:

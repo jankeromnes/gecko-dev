@@ -282,7 +282,7 @@ extern bool
 math_atan2(JSContext* cx, unsigned argc, Value* vp);
 
 extern double
-ecmaAtan2(double x, double y);
+ecmaAtan2(double y, double x);
 
 extern double
 math_atan_impl(MathCache* cache, double x);
@@ -312,7 +312,7 @@ extern bool
 math_acos(JSContext* cx, unsigned argc, js::Value* vp);
 
 extern bool
-math_ceil_handle(JSContext* cx, HandleValue value, MutableHandleValue res);
+math_ceil_handle(JSContext* cx, HandleValue v, MutableHandleValue res);
 
 extern bool
 math_ceil(JSContext* cx, unsigned argc, Value* vp);

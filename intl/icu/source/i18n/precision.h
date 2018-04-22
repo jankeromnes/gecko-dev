@@ -111,7 +111,7 @@ public:
      * @return a reference to interval.
      */
     DigitInterval &getInterval(
-            const DigitList &roundedValue, DigitInterval &interval) const;
+            const DigitList &value, DigitInterval &interval) const;
     
     /**
      * Returns TRUE if this instance allows for fast formatting of integers.

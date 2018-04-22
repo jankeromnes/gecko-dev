@@ -35,7 +35,7 @@ public:
 
 private:
 
-  bool AddIceInfo(JSContext *cx, JS::Handle<JSObject*> rootObj);
+  bool AddIceInfo(JSContext *cx, JS::Handle<JSObject*> iceObj);
 
   mozilla::Telemetry::Common::AutoHashtable<WebrtcIceCandidateType> mWebrtcIceCandidates;
 };

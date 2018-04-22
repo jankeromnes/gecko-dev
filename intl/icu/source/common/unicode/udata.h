@@ -360,7 +360,7 @@ udata_getInfo(UDataMemory *pData, UDataInfo *pInfo);
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-udata_setCommonData(const void *data, UErrorCode *err);
+udata_setCommonData(const void *data, UErrorCode *pErrorCode);
 
 
 /**
@@ -391,7 +391,7 @@ udata_setCommonData(const void *data, UErrorCode *err);
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-udata_setAppData(const char *packageName, const void *data, UErrorCode *err);
+udata_setAppData(const char *path, const void *data, UErrorCode *err);
 
 /**
  * Possible settings for udata_setFileAccess()

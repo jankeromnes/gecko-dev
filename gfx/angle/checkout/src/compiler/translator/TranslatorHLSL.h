@@ -18,8 +18,8 @@ class TranslatorHLSL : public TCompiler
     TranslatorHLSL(sh::GLenum type, ShShaderSpec spec, ShShaderOutput output);
     TranslatorHLSL *getAsTranslatorHLSL() override { return this; }
 
-    bool hasUniformBlock(const std::string &interfaceBlockName) const;
-    unsigned int getUniformBlockRegister(const std::string &interfaceBlockName) const;
+    bool hasUniformBlock(const std::string &uniformBlockName) const;
+    unsigned int getUniformBlockRegister(const std::string &uniformBlockName) const;
 
     const std::map<std::string, unsigned int> *getUniformRegisterMap() const;
 

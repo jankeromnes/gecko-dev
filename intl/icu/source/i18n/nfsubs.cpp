@@ -49,8 +49,8 @@ U_NAMESPACE_BEGIN
 
 class SameValueSubstitution : public NFSubstitution {
 public:
-    SameValueSubstitution(int32_t pos,
-        const NFRuleSet* ruleset,
+    SameValueSubstitution(int32_t _pos,
+        const NFRuleSet* _ruleSet,
         const UnicodeString& description,
         UErrorCode& status);
     virtual ~SameValueSubstitution();
@@ -126,10 +126,10 @@ class ModulusSubstitution : public NFSubstitution {
     int64_t  divisor;
     const NFRule* ruleToUse;
 public:
-    ModulusSubstitution(int32_t pos,
+    ModulusSubstitution(int32_t _pos,
         const NFRule* rule,
-        const NFRule* rulePredecessor,
-        const NFRuleSet* ruleSet,
+        const NFRule* predecessor,
+        const NFRuleSet* _ruleSet,
         const UnicodeString& description,
         UErrorCode& status);
     virtual ~ModulusSubstitution();
@@ -144,8 +144,8 @@ public:
 
     virtual UBool operator==(const NFSubstitution& rhs) const;
 
-    virtual void doSubstitution(int64_t number, UnicodeString& toInsertInto, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
-    virtual void doSubstitution(double number, UnicodeString& toInsertInto, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
+    virtual void doSubstitution(int64_t number, UnicodeString& toInsertInto, int32_t _pos, int32_t recursionCount, UErrorCode& status) const;
+    virtual void doSubstitution(double number, UnicodeString& toInsertInto, int32_t _pos, int32_t recursionCount, UErrorCode& status) const;
 
     virtual int64_t transformNumber(int64_t number) const { return number % divisor; }
     virtual double transformNumber(double number) const { return uprv_fmod(number, static_cast<double>(divisor)); }
@@ -168,7 +168,7 @@ public:
 
     virtual UChar tokenChar() const { return (UChar)0x003e; } // '>'
 
-	virtual void toString(UnicodeString& result) const;
+	virtual void toString(UnicodeString& text) const;
 
 public:
     static UClassID getStaticClassID(void);
@@ -204,15 +204,15 @@ class FractionalPartSubstitution : public NFSubstitution {
     UBool useSpaces;
     enum { kMaxDecimalDigits = 8 };
 public:
-    FractionalPartSubstitution(int32_t pos,
-        const NFRuleSet* ruleSet,
+    FractionalPartSubstitution(int32_t _pos,
+        const NFRuleSet* _ruleSet,
         const UnicodeString& description,
         UErrorCode& status);
     virtual ~FractionalPartSubstitution();
 
     virtual UBool operator==(const NFSubstitution& rhs) const;
 
-    virtual void doSubstitution(double number, UnicodeString& toInsertInto, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
+    virtual void doSubstitution(double number, UnicodeString& toInsertInto, int32_t _pos, int32_t recursionCount, UErrorCode& status) const;
     virtual void doSubstitution(int64_t /*number*/, UnicodeString& /*toInsertInto*/, int32_t /*_pos*/, int32_t /*recursionCount*/, UErrorCode& /*status*/) const {}
     virtual int64_t transformNumber(int64_t /*number*/) const { return 0; }
     virtual double transformNumber(double number) const { return number - uprv_floor(number); }
@@ -223,7 +223,7 @@ public:
         double upperBound,
         UBool lenientParse,
         uint32_t nonNumericalExecutedRuleMask,
-        Formattable& result) const;
+        Formattable& resVal) const;
 
     virtual double composeRuleValue(double newRuleValue, double oldRuleValue) const { return newRuleValue + oldRuleValue; }
     virtual double calcUpperBound(double /*oldUpperBound*/) const { return 0.0; }
@@ -288,7 +288,7 @@ public:
     virtual double transformNumber(double number) const { return uprv_round(number * denominator); }
 
     virtual void doSubstitution(int64_t /*number*/, UnicodeString& /*toInsertInto*/, int32_t /*_pos*/, int32_t /*recursionCount*/, UErrorCode& /*status*/) const {}
-    virtual void doSubstitution(double number, UnicodeString& toInsertInto, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
+    virtual void doSubstitution(double number, UnicodeString& toInsertInto, int32_t apos, int32_t recursionCount, UErrorCode& status) const;
     virtual UBool doParse(const UnicodeString& text, 
         ParsePosition& parsePosition,
         double baseValue,

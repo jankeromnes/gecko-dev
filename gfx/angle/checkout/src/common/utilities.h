@@ -174,7 +174,7 @@ EGLenum GLComponentTypeToEGLColorComponentType(GLenum glComponentType);
 
 #if !defined(ANGLE_ENABLE_WINDOWS_STORE)
 std::string getTempPath();
-void writeFile(const char* path, const void* data, size_t size);
+void writeFile(const char* path, const void* content, size_t size);
 #endif
 
 #if defined (ANGLE_PLATFORM_WINDOWS)

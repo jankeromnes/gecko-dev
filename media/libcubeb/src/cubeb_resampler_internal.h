@@ -144,8 +144,8 @@ public:
 private:
   typedef long(cubeb_resampler_speex::*processing_callback)(T * input_buffer, long * input_frames_count, T * output_buffer, long output_frames_needed);
 
-  long fill_internal_duplex(T * input_buffer, long * input_frames_count,
-                            T * output_buffer, long output_frames_needed);
+  long fill_internal_duplex(T * in_buffer, long * input_frames_count,
+                            T * out_buffer, long output_frames_needed);
   long fill_internal_input(T * input_buffer, long * input_frames_count,
                            T * output_buffer, long output_frames_needed);
   long fill_internal_output(T * input_buffer, long * input_frames_count,

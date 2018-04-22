@@ -143,7 +143,7 @@ pkix::Input InputForSECItem(const SECItem& item);
 namespace mozilla {
 
 // GTest needs this to be in Buffer's namespace (i.e. in mozilla::Vector's).
-std::ostream& operator<<(std::ostream& stream, const ct::Buffer& buf);
+std::ostream& operator<<(std::ostream& stream, const ct::Buffer& buffer);
 
 } // namespace mozilla
 

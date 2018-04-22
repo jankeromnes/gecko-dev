@@ -180,7 +180,7 @@ public:
   /**
    * Closes the SQLite database, and warns about any non-finalized statements.
    */
-  nsresult internalClose(sqlite3 *aDBConn);
+  nsresult internalClose(sqlite3 *aNativeConnection);
 
   /**
    * Shuts down the passed-in async thread.

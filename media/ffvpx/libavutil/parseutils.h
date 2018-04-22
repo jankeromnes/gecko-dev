@@ -74,7 +74,7 @@ int av_parse_video_size(int *width_ptr, int *height_ptr, const char *str);
  * rate_num / rate_den, a float number or a valid video rate abbreviation
  * @return >= 0 on success, a negative error code otherwise
  */
-int av_parse_video_rate(AVRational *rate, const char *str);
+int av_parse_video_rate(AVRational *rate, const char *arg);
 
 /**
  * Put the RGBA values that correspond to color_string in rgba_color.
@@ -109,7 +109,7 @@ int av_parse_color(uint8_t *rgba_color, const char *color_string, int slen,
  * @param rgbp      if not NULL, will point to a 3-elements array with the color value in RGB
  * @return the color name string or NULL if color_idx is not in the array
  */
-const char *av_get_known_color_name(int color_idx, const uint8_t **rgb);
+const char *av_get_known_color_name(int color_idx, const uint8_t **rgbp);
 
 /**
  * Parse timestr and return in *time a corresponding number of

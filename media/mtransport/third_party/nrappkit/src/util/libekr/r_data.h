@@ -95,7 +95,7 @@ int r_data_make(Data *dp, const UCHAR *d,int l);
 int r_data_alloc_mem(Data *d,int l);
 int r_data_destroy(Data **dp);
 int r_data_destroy_v(void *v);
-int r_data_destroy_vp(void **vp);
+int r_data_destroy_vp(void **v);
 int r_data_copy(Data *dst,Data *src);
 int r_data_zfree(Data *d);
 int r_data_compare(Data *d1,Data *d2);

@@ -38,7 +38,7 @@ public:
      * array object.
      */
     void set(GrGLGpu*,
-             int attribIndex,
+             int index,
              const GrBuffer* vertexBuffer,
              GrVertexAttribType type,
              GrGLsizei stride,
@@ -113,7 +113,7 @@ public:
      * This is a version of the above function that also binds an index buffer to the vertex
      * array object.
      */
-    GrGLAttribArrayState* bindWithIndexBuffer(GrGLGpu* gpu, const GrBuffer* indexBuffer);
+    GrGLAttribArrayState* bindWithIndexBuffer(GrGLGpu* gpu, const GrBuffer* ibuff);
 
     GrGLuint arrayID() const { return fID; }
 

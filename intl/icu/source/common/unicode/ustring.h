@@ -208,7 +208,7 @@ u_strstr(const UChar *s, const UChar *substring);
  * @see u_strFindLast
  */
 U_STABLE UChar * U_EXPORT2
-u_strFindFirst(const UChar *s, int32_t length, const UChar *substring, int32_t subLength);
+u_strFindFirst(const UChar *s, int32_t length, const UChar *sub, int32_t subLength);
 
 /**
  * Find the first occurrence of a BMP code point in a string.
@@ -295,7 +295,7 @@ u_strrstr(const UChar *s, const UChar *substring);
  * @see u_strFindLast
  */
 U_STABLE UChar * U_EXPORT2
-u_strFindLast(const UChar *s, int32_t length, const UChar *substring, int32_t subLength);
+u_strFindLast(const UChar *s, int32_t length, const UChar *sub, int32_t subLength);
 
 /**
  * Find the last occurrence of a BMP code point in a string.
@@ -556,8 +556,8 @@ u_strCaseCompare(const UChar *s1, int32_t length1,
  * @stable ICU 2.0
  */
 U_STABLE int32_t U_EXPORT2
-u_strncmp(const UChar     *ucs1, 
-     const UChar     *ucs2, 
+u_strncmp(const UChar     *s1, 
+     const UChar     *s2, 
      int32_t     n);
 
 /**
@@ -686,8 +686,8 @@ u_strncpy(UChar     *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2 u_uastrcpy(UChar *dst,
-               const char *src );
+U_STABLE UChar* U_EXPORT2 u_uastrcpy(UChar *ucs1,
+               const char *s2 );
 
 /**
  * Copy a byte string encoded in the default codepage to a ustring.
@@ -701,8 +701,8 @@ U_STABLE UChar* U_EXPORT2 u_uastrcpy(UChar *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE UChar* U_EXPORT2 u_uastrncpy(UChar *dst,
-            const char *src,
+U_STABLE UChar* U_EXPORT2 u_uastrncpy(UChar *ucs1,
+            const char *s2,
             int32_t n);
 
 /**
@@ -715,8 +715,8 @@ U_STABLE UChar* U_EXPORT2 u_uastrncpy(UChar *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE char* U_EXPORT2 u_austrcpy(char *dst,
-            const UChar *src );
+U_STABLE char* U_EXPORT2 u_austrcpy(char *s1,
+            const UChar *ucs2 );
 
 /**
  * Copy ustring to a byte string encoded in the default codepage.
@@ -730,8 +730,8 @@ U_STABLE char* U_EXPORT2 u_austrcpy(char *dst,
  * @return A pointer to <code>dst</code>.
  * @stable ICU 2.0
  */
-U_STABLE char* U_EXPORT2 u_austrncpy(char *dst,
-            const UChar *src,
+U_STABLE char* U_EXPORT2 u_austrncpy(char *s1,
+            const UChar *ucs2,
             int32_t n );
 
 #endif
@@ -1267,7 +1267,7 @@ U_STABLE char* U_EXPORT2
 u_strToUTF8(char *dest,           
             int32_t destCapacity,
             int32_t *pDestLength,
-            const UChar *src, 
+            const UChar *pSrc, 
             int32_t srcLength,
             UErrorCode *pErrorCode);
 
@@ -1340,7 +1340,7 @@ U_STABLE char* U_EXPORT2
 u_strToUTF8WithSub(char *dest,
             int32_t destCapacity,
             int32_t *pDestLength,
-            const UChar *src,
+            const UChar *pSrc,
             int32_t srcLength,
             UChar32 subchar, int32_t *pNumSubstitutions,
             UErrorCode *pErrorCode);

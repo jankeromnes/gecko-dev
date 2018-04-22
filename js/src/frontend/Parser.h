@@ -547,7 +547,7 @@ class PerHandlerParser
     }
 
     FunctionBox* newFunctionBox(Node fn, JSFunction* fun, uint32_t toStringStart,
-                                Directives directives, GeneratorKind generatorKind,
+                                Directives inheritedDirectives, GeneratorKind generatorKind,
                                 FunctionAsyncKind asyncKind);
 };
 
@@ -973,7 +973,7 @@ class GeneralParser
                       FunctionAsyncKind asyncKind);
 
     Node statement(YieldHandling yieldHandling);
-    bool maybeParseDirective(Node list, Node pn, bool* cont);
+    bool maybeParseDirective(Node list, Node possibleDirective, bool* cont);
 
     Node blockStatement(YieldHandling yieldHandling,
                         unsigned errorNumber = JSMSG_CURLY_IN_COMPOUND);
@@ -984,7 +984,7 @@ class GeneralParser
     bool forHeadStart(YieldHandling yieldHandling,
                       ParseNodeKind* forHeadKind,
                       Node* forInitialPart,
-                      mozilla::Maybe<ParseContext::Scope>& forLetImpliedScope,
+                      mozilla::Maybe<ParseContext::Scope>& forLoopLexicalScope,
                       Node* forInOrOfExpression);
     Node expressionAfterForInOrOf(ParseNodeKind forHeadKind, YieldHandling yieldHandling);
 
@@ -1117,7 +1117,7 @@ class GeneralParser
                            Node funcpn);
 
     Node functionDefinition(Node funcNode, uint32_t toStringStart, InHandling inHandling,
-                            YieldHandling yieldHandling, HandleAtom name, FunctionSyntaxKind kind,
+                            YieldHandling yieldHandling, HandleAtom funName, FunctionSyntaxKind kind,
                             GeneratorKind generatorKind, FunctionAsyncKind asyncKind,
                             bool tryAnnexB = false);
 
@@ -1454,8 +1454,8 @@ class Parser<FullParseHandler, CharT> final
     Node importDeclaration();
     bool checkLocalExportNames(Node node);
     bool checkExportedName(JSAtom* exportName);
-    bool checkExportedNamesForArrayBinding(Node node);
-    bool checkExportedNamesForObjectBinding(Node node);
+    bool checkExportedNamesForArrayBinding(Node pn);
+    bool checkExportedNamesForObjectBinding(Node pn);
     bool checkExportedNamesForDeclaration(Node node);
     bool checkExportedNamesForDeclarationList(Node node);
     bool checkExportedNameForFunction(Node node);

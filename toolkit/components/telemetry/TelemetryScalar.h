@@ -25,7 +25,7 @@ namespace Telemetry {
 
 namespace TelemetryScalar {
 
-void InitializeGlobalState(bool canRecordBase, bool canRecordExtended);
+void InitializeGlobalState(bool aCanRecordBase, bool aCanRecordExtended);
 void DeInitializeGlobalState();
 
 void SetCanRecordBase(bool b);

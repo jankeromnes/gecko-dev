@@ -248,7 +248,7 @@ extern SECStatus NSS_ShutdownContext(NSSInitContext *);
  *      asking to authenticate to the old database  */
 extern SECStatus NSS_InitWithMerge(const char *configdir,
                                    const char *certPrefix, const char *keyPrefix, const char *secmodName,
-                                   const char *updatedir, const char *updCertPrefix,
+                                   const char *updateDir, const char *updCertPrefix,
                                    const char *updKeyPrefix, const char *updateID,
                                    const char *updateName, PRUint32 flags);
 /*

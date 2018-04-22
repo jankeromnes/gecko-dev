@@ -51,14 +51,14 @@ void Init();
  * @param id - histogram id
  * @param sample - value to record.
  */
-void Accumulate(HistogramID id, uint32_t sample);
+void Accumulate(HistogramID aHistogram, uint32_t aSample);
 
 /**
  * Adds an array of samples to a histogram defined in TelemetryHistograms.h
  * @param id - histogram id
  * @param samples - values to record.
  */
-void Accumulate(HistogramID id, const nsTArray<uint32_t>& samples);
+void Accumulate(HistogramID aHistogram, const nsTArray<uint32_t>& aSamples);
 
 /**
  * Adds sample to a keyed histogram defined in TelemetryHistogramEnums.h
@@ -67,7 +67,7 @@ void Accumulate(HistogramID id, const nsTArray<uint32_t>& samples);
  * @param key - the string key
  * @param sample - (optional) value to record, defaults to 1.
  */
-void Accumulate(HistogramID id, const nsCString& key, uint32_t sample = 1);
+void Accumulate(HistogramID aID, const nsCString& aKey, uint32_t aSample = 1);
 
 /**
  * Adds an array of samples to a histogram defined in TelemetryHistograms.h
@@ -75,7 +75,7 @@ void Accumulate(HistogramID id, const nsCString& key, uint32_t sample = 1);
  * @param samples - values to record.
  * @param key - the string key
  */
-void Accumulate(HistogramID id, const nsCString& key, const nsTArray<uint32_t>& samples);
+void Accumulate(HistogramID aID, const nsCString& aKey, const nsTArray<uint32_t>& aSamples);
 
 /**
  * Adds a sample to a histogram defined in TelemetryHistogramEnums.h.
@@ -205,7 +205,7 @@ void AccumulateCategorical(HistogramID id, const nsTArray<nsCString>& labels);
  * @param start - start time
  * @param end - end time
  */
-void AccumulateTimeDelta(HistogramID id, TimeStamp start, TimeStamp end = TimeStamp::Now());
+void AccumulateTimeDelta(HistogramID aHistogram, TimeStamp start, TimeStamp end = TimeStamp::Now());
 
 /**
  * Adds time delta in milliseconds to a keyed histogram defined in
@@ -217,7 +217,7 @@ void AccumulateTimeDelta(HistogramID id, TimeStamp start, TimeStamp end = TimeSt
  * @param end - end time
  */
 void
-AccumulateTimeDelta(HistogramID id,
+AccumulateTimeDelta(HistogramID aHistogram,
                     const nsCString& key,
                     TimeStamp start,
                     TimeStamp end = TimeStamp::Now());
@@ -230,7 +230,7 @@ AccumulateTimeDelta(HistogramID id,
  * @param id - histogram id
  * @param enabled - whether or not to enable recording from now on.
  */
-void SetHistogramRecordingEnabled(HistogramID id, bool enabled);
+void SetHistogramRecordingEnabled(HistogramID aID, bool aEnabled);
 
 const char* GetHistogramName(HistogramID id);
 
@@ -488,7 +488,7 @@ class ProcessedStack;
  * @param aAnnotations - Any annotations to be added to the report
  */
 #if defined(MOZ_GECKO_PROFILER)
-void RecordChromeHang(uint32_t aDuration,
+void RecordChromeHang(uint32_t duration,
                       ProcessedStack &aStack,
                       int32_t aSystemUptime,
                       int32_t aFirefoxUptime,
@@ -519,7 +519,7 @@ void WriteFailedProfileLock(nsIFile* aProfileDir);
  * @param aId The scalar enum id.
  * @param aValue The value to add to the scalar.
  */
-void ScalarAdd(mozilla::Telemetry::ScalarID aId, uint32_t aValue);
+void ScalarAdd(mozilla::Telemetry::ScalarID aId, uint32_t aVal);
 
 /**
  * Sets the scalar to the given value.
@@ -527,7 +527,7 @@ void ScalarAdd(mozilla::Telemetry::ScalarID aId, uint32_t aValue);
  * @param aId The scalar enum id.
  * @param aValue The value to set the scalar to.
  */
-void ScalarSet(mozilla::Telemetry::ScalarID aId, uint32_t aValue);
+void ScalarSet(mozilla::Telemetry::ScalarID aId, uint32_t aVal);
 
 /**
  * Sets the scalar to the given value.
@@ -535,7 +535,7 @@ void ScalarSet(mozilla::Telemetry::ScalarID aId, uint32_t aValue);
  * @param aId The scalar enum id.
  * @param aValue The value to set the scalar to.
  */
-void ScalarSet(mozilla::Telemetry::ScalarID aId, bool aValue);
+void ScalarSet(mozilla::Telemetry::ScalarID aId, bool aVal);
 
 /**
  * Sets the scalar to the given value.
@@ -544,7 +544,7 @@ void ScalarSet(mozilla::Telemetry::ScalarID aId, bool aValue);
  * @param aValue The value to set the scalar to, truncated to
  *        50 characters if exceeding that length.
  */
-void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aValue);
+void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aVal);
 
 /**
  * Sets the scalar to the maximum of the current and the passed value.
@@ -553,7 +553,7 @@ void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aValue);
  * @param aValue The value the scalar is set to if its greater
  *        than the current value.
  */
-void ScalarSetMaximum(mozilla::Telemetry::ScalarID aId, uint32_t aValue);
+void ScalarSetMaximum(mozilla::Telemetry::ScalarID aId, uint32_t aVal);
 
 /**
  * Adds the value to the given scalar.
@@ -562,7 +562,7 @@ void ScalarSetMaximum(mozilla::Telemetry::ScalarID aId, uint32_t aValue);
  * @param aKey The scalar key.
  * @param aValue The value to add to the scalar.
  */
-void ScalarAdd(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, uint32_t aValue);
+void ScalarAdd(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, uint32_t aVal);
 
 /**
  * Sets the scalar to the given value.
@@ -571,7 +571,7 @@ void ScalarAdd(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, uint32_t
  * @param aKey The scalar key.
  * @param aValue The value to set the scalar to.
  */
-void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, uint32_t aValue);
+void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, uint32_t aVal);
 
 /**
  * Sets the scalar to the given value.
@@ -580,7 +580,7 @@ void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, uint32_t
  * @param aKey The scalar key.
  * @param aValue The value to set the scalar to.
  */
-void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, bool aValue);
+void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, bool aVal);
 
 /**
  * Sets the scalar to the maximum of the current and the passed value.
@@ -590,7 +590,7 @@ void ScalarSet(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, bool aVa
  * @param aValue The value the scalar is set to if its greater
  *        than the current value.
  */
-void ScalarSetMaximum(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, uint32_t aValue);
+void ScalarSetMaximum(mozilla::Telemetry::ScalarID aId, const nsAString& aKey, uint32_t aVal);
 
 } // namespace Telemetry
 } // namespace mozilla

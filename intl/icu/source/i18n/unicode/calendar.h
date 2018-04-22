@@ -371,7 +371,7 @@ public:
      * @return             A Calendar if created successfully. NULL otherwise.
      * @stable ICU 2.0
      */
-    static Calendar* U_EXPORT2 createInstance(TimeZone* zoneToAdopt, const Locale& aLocale, UErrorCode& success);
+    static Calendar* U_EXPORT2 createInstance(TimeZone* zone, const Locale& aLocale, UErrorCode& success);
 
     /**
      * Gets a Calendar using the given timezone and given locale.  The TimeZone
@@ -827,7 +827,7 @@ public:
      * <code>field</code>.
      * @stable ICU 2.6.
      */
-    virtual int32_t fieldDifference(UDate when, UCalendarDateFields field, UErrorCode& status);
+    virtual int32_t fieldDifference(UDate targetMs, UCalendarDateFields field, UErrorCode& ec);
 
     /**
      * Sets the calendar's time zone to be the one passed in. The Calendar takes ownership
@@ -837,7 +837,7 @@ public:
      * @param value  The given time zone.
      * @stable ICU 2.0
      */
-    void adoptTimeZone(TimeZone* value);
+    void adoptTimeZone(TimeZone* zone);
 
     /**
      * Sets the calendar's time zone to be the same as the one passed in. The TimeZone
@@ -1501,7 +1501,7 @@ protected:
      *                leniency, this will be set to an error status.
      * @stable ICU 2.0
      */
-    virtual void computeFields(UErrorCode& status);
+    virtual void computeFields(UErrorCode& ec);
 
     /**
      * Gets this Calendar's current time as a long.
@@ -1763,7 +1763,7 @@ protected:
      * @return the stamp value of the best stamp
      * @internal
      */
-    int32_t newestStamp(UCalendarDateFields start, UCalendarDateFields end, int32_t bestSoFar) const;
+    int32_t newestStamp(UCalendarDateFields first, UCalendarDateFields last, int32_t bestStampSoFar) const;
 
     /**
      * Values for field resolution tables
@@ -2207,7 +2207,7 @@ private:
      *                       the resource for the given locale. Returns U_ZERO_ERROR if
      *                       constructed successfully.
      */
-    void        setWeekData(const Locale& desiredLocale, const char *type, UErrorCode& success);
+    void        setWeekData(const Locale& desiredLocale, const char *type, UErrorCode& status);
 
     /**
      * Recompute the time and update the status fields isTimeSet
@@ -2475,7 +2475,7 @@ public:
      * @internal For ICU use only.
      */
     static Calendar * U_EXPORT2 makeInstance(
-            const Locale &locale, UErrorCode &status);
+            const Locale &aLocale, UErrorCode &success);
 
     /**
      * Get the calendar type for given locale.
@@ -2488,10 +2488,10 @@ public:
      * @internal For ICU use only.
      */
     static void U_EXPORT2 getCalendarTypeFromLocale(
-            const Locale &locale,
+            const Locale &aLocale,
             char *typeBuffer,
             int32_t typeBufferSize,
-            UErrorCode &status);
+            UErrorCode &success);
 #endif  /* U_HIDE_INTERNAL_API */
 };
 

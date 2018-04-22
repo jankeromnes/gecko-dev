@@ -343,7 +343,7 @@ public:
    * @deprecated ICU 56 Use Normalizer2 instead.
    */
   static UBool
-  isNormalized(const UnicodeString &src, UNormalizationMode mode, int32_t options, UErrorCode &errorCode);
+  isNormalized(const UnicodeString &source, UNormalizationMode mode, int32_t options, UErrorCode &status);
 
   /**
    * Concatenate normalized strings, making sure that the result is normalized as well.

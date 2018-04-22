@@ -205,8 +205,8 @@ pixman_bool_t pixman_transform_scale            (struct pixman_transform       *
 						 pixman_fixed_t                 sx,
 						 pixman_fixed_t                 sy);
 void          pixman_transform_init_rotate      (struct pixman_transform       *t,
-						 pixman_fixed_t                 cos,
-						 pixman_fixed_t                 sin);
+						 pixman_fixed_t                 c,
+						 pixman_fixed_t                 s);
 pixman_bool_t pixman_transform_rotate           (struct pixman_transform       *forward,
 						 struct pixman_transform       *reverse,
 						 pixman_fixed_t                 c,
@@ -265,8 +265,8 @@ pixman_bool_t pixman_f_transform_scale                 (struct pixman_f_transfor
 							double                           sx,
 							double                           sy);
 void          pixman_f_transform_init_rotate           (struct pixman_f_transform       *t,
-							double                           cos,
-							double                           sin);
+							double                           c,
+							double                           s);
 pixman_bool_t pixman_f_transform_rotate                (struct pixman_f_transform       *forward,
 							struct pixman_f_transform       *reverse,
 							double                           c,
@@ -613,7 +613,7 @@ pixman_bool_t pixman_fill               (uint32_t           *bits,
 					 int                 y,
 					 int                 width,
 					 int                 height,
-					 uint32_t            _xor);
+					 uint32_t            filler);
 
 int           pixman_version            (void);
 const char*   pixman_version_string     (void);
@@ -797,7 +797,7 @@ pixman_image_t *pixman_image_ref                     (pixman_image_t            
 pixman_bool_t   pixman_image_unref                   (pixman_image_t               *image);
 
 void		pixman_image_set_destroy_function    (pixman_image_t		   *image,
-						      pixman_image_destroy_func_t   function,
+						      pixman_image_destroy_func_t   func,
 						      void			   *data);
 void *		pixman_image_get_destroy_data        (pixman_image_t		   *image);
 
@@ -807,17 +807,17 @@ pixman_bool_t   pixman_image_set_clip_region         (pixman_image_t            
 pixman_bool_t   pixman_image_set_clip_region32       (pixman_image_t               *image,
 						      pixman_region32_t            *region);
 void		pixman_image_set_has_client_clip     (pixman_image_t               *image,
-						      pixman_bool_t		    clien_clip);
+						      pixman_bool_t		    client_clip);
 pixman_bool_t   pixman_image_set_transform           (pixman_image_t               *image,
 						      const pixman_transform_t     *transform);
 void            pixman_image_set_repeat              (pixman_image_t               *image,
 						      pixman_repeat_t               repeat);
 pixman_bool_t   pixman_image_set_filter              (pixman_image_t               *image,
 						      pixman_filter_t               filter,
-						      const pixman_fixed_t         *filter_params,
-						      int                           n_filter_params);
+						      const pixman_fixed_t         *params,
+						      int                           n_params);
 void		pixman_image_set_source_clipping     (pixman_image_t		   *image,
-						      pixman_bool_t                 source_clipping);
+						      pixman_bool_t                 clip_sources);
 void            pixman_image_set_alpha_map           (pixman_image_t               *image,
 						      pixman_image_t               *alpha_map,
 						      int16_t                       x,
@@ -864,7 +864,7 @@ pixman_filter_create_separable_convolution (int             *n_values,
 					    int              subsample_bits_y);
 
 pixman_bool_t	pixman_image_fill_rectangles	     (pixman_op_t		    op,
-						      pixman_image_t		   *image,
+						      pixman_image_t		   *dest,
 						      const pixman_color_t	   *color,
 						      int			    n_rects,
 						      const pixman_rectangle16_t   *rects);
@@ -954,7 +954,7 @@ const void *          pixman_glyph_cache_insert       (pixman_glyph_cache_t *cac
 						       void                 *glyph_key,
 						       int		     origin_x,
 						       int                   origin_y,
-						       pixman_image_t       *glyph_image);
+						       pixman_image_t       *image);
 void                  pixman_glyph_cache_remove       (pixman_glyph_cache_t *cache,
 						       void                 *font_key,
 						       void                 *glyph_key);
@@ -1048,20 +1048,20 @@ struct pixman_trap
 };
 
 pixman_fixed_t pixman_sample_ceil_y        (pixman_fixed_t             y,
-					    int                        bpp);
+					    int                        n);
 pixman_fixed_t pixman_sample_floor_y       (pixman_fixed_t             y,
-					    int                        bpp);
+					    int                        n);
 void           pixman_edge_step            (pixman_edge_t             *e,
 					    int                        n);
 void           pixman_edge_init            (pixman_edge_t             *e,
-					    int                        bpp,
+					    int                        n,
 					    pixman_fixed_t             y_start,
 					    pixman_fixed_t             x_top,
 					    pixman_fixed_t             y_top,
 					    pixman_fixed_t             x_bot,
 					    pixman_fixed_t             y_bot);
 void           pixman_line_fixed_edge_init (pixman_edge_t             *e,
-					    int                        bpp,
+					    int                        n,
 					    pixman_fixed_t             y,
 					    const pixman_line_fixed_t *line,
 					    int                        x_off,

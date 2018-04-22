@@ -856,7 +856,7 @@ public:
     // helper to get family name from name table
     static nsresult
     GetFamilyNameFromTable(hb_blob_t *aNameTable,
-                           nsAString& aFamilyName);
+                           nsAString& aFullName);
 
     // Find the table directory entry for a given table tag, in a (validated)
     // buffer of 'sfnt' data. Returns null if the tag is not present.
@@ -897,9 +897,9 @@ public:
     // provided we know how; return true if successful, or false
     // if we can't handle the encoding
     static bool
-    DecodeFontName(const char *aBuf, int32_t aLength, 
+    DecodeFontName(const char *aNameData, int32_t aByteLen, 
                    uint32_t aPlatformCode, uint32_t aScriptCode,
-                   uint32_t aLangCode, nsAString& dest);
+                   uint32_t aLangCode, nsAString& aName);
 
     static inline bool IsJoinCauser(uint32_t ch) {
         return (ch == 0x200D);

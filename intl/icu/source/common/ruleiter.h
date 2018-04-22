@@ -100,8 +100,8 @@ public:
      * variable has been dereferenced, then pos will <em>not</em> increment as
      * characters of the variable value are iterated.
      */
-    RuleCharacterIterator(const UnicodeString& text, const SymbolTable* sym,
-                          ParsePosition& pos);
+    RuleCharacterIterator(const UnicodeString& theText, const SymbolTable* theSym,
+                          ParsePosition& thePos);
     
     /**
      * Returns true if this iterator has no more characters to return.

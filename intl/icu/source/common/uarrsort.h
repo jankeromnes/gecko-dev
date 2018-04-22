@@ -97,7 +97,7 @@ uprv_uint32Comparator(const void *context, const void *left, const void *right);
  *         or the index<0 for inserting the item at ~index in sorted order
  */
 U_CAPI int32_t U_EXPORT2
-uprv_stableBinarySearch(char *array, int32_t length, void *item, int32_t itemSize,
+uprv_stableBinarySearch(char *array, int32_t limit, void *item, int32_t itemSize,
                         UComparator *cmp, const void *context);
 
 #endif

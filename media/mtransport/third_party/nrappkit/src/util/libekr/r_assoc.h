@@ -94,18 +94,18 @@ int r_assoc_create(r_assoc **assocp,
                              int (*hash_func)(char *,int,int),
                              int bits);
 int r_assoc_insert(r_assoc *assoc,char *key,int len,
-  void *value,int (*copy)(void **knew,void *old),
+  void *data,int (*copy)(void **knew,void *old),
   int (*destroy)(void *ptr),int how);
 #define R_ASSOC_REPLACE		  0x1
 #define R_ASSOC_NEW		  0x2
 
-int r_assoc_fetch(r_assoc *assoc,char *key, int len, void **value);
+int r_assoc_fetch(r_assoc *assoc,char *key, int len, void **datap);
 int r_assoc_delete(r_assoc *assoc,char *key, int len);
 
-int r_assoc_copy(r_assoc **knew,r_assoc *old);
+int r_assoc_copy(r_assoc **knewp,r_assoc *old);
 int r_assoc_destroy(r_assoc **assocp);
 int r_assoc_simple_hash_compute(char *key, int len,int bits);
-int r_assoc_crc32_hash_compute(char *key, int len,int bits);
+int r_assoc_crc32_hash_compute(char *data, int len,int bits);
 
 /*We need iterators, but I haven't written them yet*/
 typedef struct r_assoc_iterator_ {

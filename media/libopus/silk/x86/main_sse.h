@@ -226,7 +226,7 @@ void silk_VAD_GetNoiseLevels(
 #  define OVERRIDE_silk_VAD_GetSA_Q8
 
 opus_int silk_VAD_GetSA_Q8_sse4_1(
-    silk_encoder_state *psEnC,
+    silk_encoder_state *psEncC,
     const opus_int16   pIn[]
 );
 

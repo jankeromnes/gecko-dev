@@ -102,7 +102,7 @@ public:
 
     UBool nextChar(IteratedChar *it, InputText *det) const;
 
-    UBool match(InputText* input, CharsetMatch *results) const;
+    UBool match(InputText* det, CharsetMatch *results) const;
 
     const char *getName() const;
     const char *getLanguage() const;
@@ -146,7 +146,7 @@ public:
     const char *getName() const;
     const char *getLanguage() const;
 
-    UBool match(InputText* input, CharsetMatch *results) const;
+    UBool match(InputText* det, CharsetMatch *results) const;
 };
 
 /**
@@ -161,7 +161,7 @@ public:
     const char *getName() const;
     const char *getLanguage() const;
 
-    UBool match(InputText* input, CharsetMatch *results) const;
+    UBool match(InputText* det, CharsetMatch *results) const;
 };
 
 /**
@@ -179,7 +179,7 @@ public:
     const char *getName() const;
     const char *getLanguage() const;
 
-    UBool match(InputText* input, CharsetMatch *results) const;
+    UBool match(InputText* det, CharsetMatch *results) const;
 };
 
 
@@ -198,7 +198,7 @@ public:
     const char *getName() const;
     const char *getLanguage() const;
 
-    UBool match(InputText* input, CharsetMatch *results) const;
+    UBool match(InputText* det, CharsetMatch *results) const;
 };
 
 U_NAMESPACE_END

@@ -225,7 +225,7 @@ uhash_openSize(UHashFunction *keyHash,
  * @see uhash_openSize
  */
 U_CAPI UHashtable* U_EXPORT2
-uhash_init(UHashtable *hash,
+uhash_init(UHashtable *fillinResult,
            UHashFunction *keyHash,
            UKeyComparator *keyComp,
            UValueComparator *valueComp,
@@ -243,7 +243,7 @@ uhash_init(UHashtable *hash,
  * @see uhash_openSize
  */
 U_CAPI UHashtable* U_EXPORT2
-uhash_initSize(UHashtable *hash,
+uhash_initSize(UHashtable *fillinResult,
                UHashFunction *keyHash,
                UKeyComparator *keyComp,
                UValueComparator *valueComp,

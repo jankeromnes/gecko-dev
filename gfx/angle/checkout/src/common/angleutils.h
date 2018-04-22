@@ -173,7 +173,7 @@ inline std::string Str(int i)
     return strstr.str();
 }
 
-size_t FormatStringIntoVector(const char *fmt, va_list vararg, std::vector<char>& buffer);
+size_t FormatStringIntoVector(const char *fmt, va_list vararg, std::vector<char>& outBuffer);
 
 std::string FormatString(const char *fmt, va_list vararg);
 std::string FormatString(const char *fmt, ...);

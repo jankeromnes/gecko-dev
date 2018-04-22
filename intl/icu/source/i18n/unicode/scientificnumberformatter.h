@@ -165,7 +165,7 @@ public:
                 const UnicodeString &original,
                 FieldPositionIterator &fpi,
                 const UnicodeString &preExponent,
-                const DecimalFormatStaticSets &decimalFormatSets,
+                const DecimalFormatStaticSets &staticSets,
                 UnicodeString &appendTo,
                 UErrorCode &status) const;
     };

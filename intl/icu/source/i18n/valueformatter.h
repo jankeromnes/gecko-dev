@@ -89,7 +89,7 @@ public:
      * @param appendTo formatted value appended here.
      */
     UnicodeString &format(
-        const VisibleDigitsWithExponent &positiveValue,
+        const VisibleDigitsWithExponent &value,
         FieldPositionHandler &handler,
         UnicodeString &appendTo) const;
 
@@ -101,7 +101,7 @@ public:
      * results in undefined behavior.
      */
     UnicodeString &formatInt32(
-        int32_t positiveValue,
+        int32_t value,
         FieldPositionHandler &handler,
         UnicodeString &appendTo) const;
 
@@ -111,7 +111,7 @@ public:
      *   in count.
      */
     int32_t countChar32(
-            const VisibleDigitsWithExponent &positiveValue) const;
+            const VisibleDigitsWithExponent &value) const;
   
     /**
      * Prepares this instance for fixed decimal formatting.

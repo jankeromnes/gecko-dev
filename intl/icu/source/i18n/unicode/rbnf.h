@@ -575,7 +575,7 @@ public:
      * @param status The status indicating whether the constructor succeeded.
      * @stable ICU 3.2
      */
-    RuleBasedNumberFormat(const UnicodeString& rules, UParseError& perror, UErrorCode& status);
+    RuleBasedNumberFormat(const UnicodeString& description, UParseError& perror, UErrorCode& status);
 
     /**
      * Creates a RuleBasedNumberFormat that behaves according to the description
@@ -600,7 +600,7 @@ public:
      * @param status The status indicating whether the constructor succeeded.
      * @stable ICU 3.2
      */
-    RuleBasedNumberFormat(const UnicodeString& rules, const UnicodeString& localizations,
+    RuleBasedNumberFormat(const UnicodeString& description, const UnicodeString& locs,
                         UParseError& perror, UErrorCode& status);
 
   /**
@@ -618,7 +618,7 @@ public:
    * @param status The status indicating whether the constructor succeeded.
    * @stable ICU 2.0
    */
-  RuleBasedNumberFormat(const UnicodeString& rules, const Locale& locale,
+  RuleBasedNumberFormat(const UnicodeString& description, const Locale& aLocale,
                         UParseError& perror, UErrorCode& status);
 
     /**
@@ -647,8 +647,8 @@ public:
      * @param status The status indicating whether the constructor succeeded.
      * @stable ICU 3.2
      */
-    RuleBasedNumberFormat(const UnicodeString& rules, const UnicodeString& localizations,
-                        const Locale& locale, UParseError& perror, UErrorCode& status);
+    RuleBasedNumberFormat(const UnicodeString& description, const UnicodeString& locs,
+                        const Locale& alocale, UParseError& perror, UErrorCode& status);
 
   /**
    * Creates a RuleBasedNumberFormat from a predefined ruleset.  The selector
@@ -665,7 +665,7 @@ public:
    * @param status The status indicating whether the constructor succeeded.
    * @stable ICU 2.0
    */
-  RuleBasedNumberFormat(URBNFRuleSetTag tag, const Locale& locale, UErrorCode& status);
+  RuleBasedNumberFormat(URBNFRuleSetTag tag, const Locale& alocale, UErrorCode& status);
 
   //-----------------------------------------------------------------------
   // boilerplate
@@ -766,7 +766,7 @@ public:
      * @stable ICU 3.2
      */
   virtual UnicodeString getRuleSetDisplayName(int32_t index,
-                          const Locale& locale = Locale::getDefault());
+                          const Locale& localeParam = Locale::getDefault());
 
     /**
      * Return the rule set display name for the provided rule set and locale.
@@ -777,7 +777,7 @@ public:
      * @see #getRuleSetDisplayName
      */
   virtual UnicodeString getRuleSetDisplayName(const UnicodeString& ruleSetName,
-                          const Locale& locale = Locale::getDefault());
+                          const Locale& localeParam = Locale::getDefault());
 
 
   using NumberFormat::format;
@@ -1065,13 +1065,13 @@ private:
 
     // this will ref the localizations if they are not NULL
     // caller must deref to get adoption
-    RuleBasedNumberFormat(const UnicodeString& description, LocalizationInfo* localizations,
-              const Locale& locale, UParseError& perror, UErrorCode& status);
+    RuleBasedNumberFormat(const UnicodeString& description, LocalizationInfo* info,
+              const Locale& alocale, UParseError& perror, UErrorCode& status);
 
-    void init(const UnicodeString& rules, LocalizationInfo* localizations, UParseError& perror, UErrorCode& status);
+    void init(const UnicodeString& rules, LocalizationInfo* localizationInfos, UParseError& pErr, UErrorCode& status);
     void initCapitalizationContextInfo(const Locale& thelocale);
     void dispose();
-    void stripWhitespace(UnicodeString& src);
+    void stripWhitespace(UnicodeString& description);
     void initDefaultRuleSet();
     NFRuleSet* findRuleSet(const UnicodeString& name, UErrorCode& status) const;
 

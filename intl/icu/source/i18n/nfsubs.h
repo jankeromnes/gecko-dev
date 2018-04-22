@@ -37,8 +37,8 @@ class NFSubstitution : public UObject {
     DecimalFormat* numberFormat;
     
 protected:
-    NFSubstitution(int32_t pos,
-        const NFRuleSet* ruleSet,
+    NFSubstitution(int32_t _pos,
+        const NFRuleSet* _ruleSet,
         const UnicodeString& description,
         UErrorCode& status);
     
@@ -59,7 +59,7 @@ public:
         const NFRule* rule, 
         const NFRule* predecessor,
         const NFRuleSet* ruleSet, 
-        const RuleBasedNumberFormat* rbnf, 
+        const RuleBasedNumberFormat* formatter, 
         const UnicodeString& description,
         UErrorCode& status);
     
@@ -97,7 +97,7 @@ public:
      * Replaces result with the string describing the substitution.
      * @param result    Output param which will receive the string.
      */
-    virtual void toString(UnicodeString& result) const;
+    virtual void toString(UnicodeString& text) const;
     
     void setDecimalFormatSymbols(const DecimalFormatSymbols &newSymbols, UErrorCode& status);
 
@@ -115,7 +115,7 @@ public:
      * rule text begins (this value is added to this substitution's
      * position to determine exactly where to insert the new text)
      */
-    virtual void doSubstitution(int64_t number, UnicodeString& toInsertInto, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
+    virtual void doSubstitution(int64_t number, UnicodeString& toInsertInto, int32_t _pos, int32_t recursionCount, UErrorCode& status) const;
 
     /**
      * Performs a mathematical operation on the number, formats it using
@@ -127,7 +127,7 @@ public:
      * rule text begins (this value is added to this substitution's
      * position to determine exactly where to insert the new text)
      */
-    virtual void doSubstitution(double number, UnicodeString& toInsertInto, int32_t pos, int32_t recursionCount, UErrorCode& status) const;
+    virtual void doSubstitution(double number, UnicodeString& toInsertInto, int32_t _pos, int32_t recursionCount, UErrorCode& status) const;
     
 protected:
     /**

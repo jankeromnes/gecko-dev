@@ -37,17 +37,17 @@ struct SFTKDBHandleStr {
     ((handle)->update ? (handle)->update : (handle)->db)
 
 SECStatus sftkdb_DecryptAttribute(SECItem *passKey, SECItem *cipherText,
-                                  SECItem **plainText);
+                                  SECItem **plain);
 SECStatus sftkdb_EncryptAttribute(PLArenaPool *arena, SECItem *passKey,
                                   SECItem *plainText, SECItem **cipherText);
 SECStatus sftkdb_SignAttribute(PLArenaPool *arena, SECItem *passKey,
                                CK_OBJECT_HANDLE objectID,
                                CK_ATTRIBUTE_TYPE attrType,
-                               SECItem *plainText, SECItem **sigText);
+                               SECItem *plainText, SECItem **signature);
 SECStatus sftkdb_VerifyAttribute(SECItem *passKey,
                                  CK_OBJECT_HANDLE objectID,
                                  CK_ATTRIBUTE_TYPE attrType,
-                                 SECItem *plainText, SECItem *sigText);
+                                 SECItem *plainText, SECItem *signText);
 
 PRBool sftkdb_isULONGAttribute(CK_ATTRIBUTE_TYPE type);
 void sftk_ULong2SDBULong(unsigned char *data, CK_ULONG value);

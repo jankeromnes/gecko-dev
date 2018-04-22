@@ -17,13 +17,13 @@ class SkColorSpace_XYZ;
 class SkColorSpaceXform_Base : public SkColorSpaceXform {
 public:
     // A somewhat more powerful SkColorSpaceXform::New() that allows tweaking premulBehavior.
-    static std::unique_ptr<SkColorSpaceXform> New(SkColorSpace* srcSpace,
-                                                  SkColorSpace* dstSpace,
+    static std::unique_ptr<SkColorSpaceXform> New(SkColorSpace* src,
+                                                  SkColorSpace* dst,
                                                   SkTransferFunctionBehavior premulBehavior);
 
     static constexpr int kDstGammaTableSize = 1024;
-    static void BuildDstGammaTables(const uint8_t* outGammaTables[3],
-                                    uint8_t* gammaTableStorage,
+    static void BuildDstGammaTables(const uint8_t* dstGammaTables[3],
+                                    uint8_t* dstStorage,
                                     const SkColorSpace_XYZ* space,
                                     bool gammasAreMatching);
 
@@ -48,9 +48,9 @@ class SkColorSpaceXform_XYZ : public SkColorSpaceXform_Base {
 public:
     SkColorSpaceXform_XYZ(SkColorSpace_XYZ* src, SkColorSpace_XYZ* dst, SkTransferFunctionBehavior);
 
-    bool onApply(ColorFormat dstFormat, void* dst,
-                 ColorFormat srcFormat, const void* src,
-                 int count, SkAlphaType alphaType) const override;
+    bool onApply(ColorFormat dstColorFormat, void* dst,
+                 ColorFormat srcColorFormat, const void* src,
+                 int len, SkAlphaType alphaType) const override;
 
     void pretendNotToBeIdentityForTesting() {
         fSrcToDstIsIdentity = false;

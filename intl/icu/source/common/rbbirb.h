@@ -78,7 +78,7 @@ public:
                                          ParsePosition& pos, int32_t limit) const;
 
     //  Additional Functions
-    RBBISymbolTable(RBBIRuleScanner *, const UnicodeString &fRules, UErrorCode &status);
+    RBBISymbolTable(RBBIRuleScanner *, const UnicodeString &rules, UErrorCode &status);
     virtual ~RBBISymbolTable();
 
     virtual RBBINode *lookupNode(const UnicodeString &key) const;

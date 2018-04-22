@@ -126,7 +126,7 @@ U_CFUNC UResourceBundle *ures_copyResb(UResourceBundle *r, const UResourceBundle
  * @return                  a pointer to a UResourceBundle struct. If fill in param was NULL, caller must delete it
  */
 U_CAPI UResourceBundle* U_EXPORT2
-ures_findResource(const char* pathToResource, 
+ures_findResource(const char* path, 
                   UResourceBundle *fillIn, UErrorCode *status); 
 
 /**
@@ -146,7 +146,7 @@ ures_findResource(const char* pathToResource,
  */
 U_CAPI UResourceBundle* U_EXPORT2
 ures_findSubResource(const UResourceBundle *resB, 
-                     char* pathToResource, 
+                     char* path, 
                      UResourceBundle *fillIn, UErrorCode *status);
 
 /**
@@ -240,7 +240,7 @@ ures_getAllItemsWithFallback(const UResourceBundle *bundle, const char *path,
  * @param status error code
  */
 U_CAPI void U_EXPORT2
-ures_getVersionByKey(const UResourceBundle *resB,
+ures_getVersionByKey(const UResourceBundle *res,
                      const char *key,
                      UVersionInfo ver,
                      UErrorCode *status);

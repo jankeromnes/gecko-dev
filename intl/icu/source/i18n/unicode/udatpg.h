@@ -331,7 +331,7 @@ udatpg_getSkeleton(UDateTimePatternGenerator *unusedDtpg,
 U_STABLE int32_t U_EXPORT2
 udatpg_getBaseSkeleton(UDateTimePatternGenerator *unusedDtpg,
                        const UChar *pattern, int32_t length,
-                       UChar *baseSkeleton, int32_t capacity,
+                       UChar *skeleton, int32_t capacity,
                        UErrorCode *pErrorCode);
 
 /**

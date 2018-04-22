@@ -180,7 +180,7 @@ public:
      * @param that The RuleBasedBreakIterator passed to be copied
      * @stable ICU 2.0
      */
-    RuleBasedBreakIterator(const RuleBasedBreakIterator& that);
+    RuleBasedBreakIterator(const RuleBasedBreakIterator& other);
 
     /**
      * Construct a RuleBasedBreakIterator from a set of rules supplied as a string.
@@ -233,7 +233,7 @@ public:
      * @see #getBinaryRules
      * @stable ICU 2.8
      */
-    RuleBasedBreakIterator(UDataMemory* image, UErrorCode &status);
+    RuleBasedBreakIterator(UDataMemory* udm, UErrorCode &status);
 
     /**
      * Destructor
@@ -378,7 +378,7 @@ public:
      * @param status  Receives any error codes.
      * @stable ICU 3.4
      */
-    virtual void  setText(UText *text, UErrorCode &status);
+    virtual void  setText(UText *ut, UErrorCode &status);
 
     /**
      * Sets the current iteration position to the beginning of the text, position zero.
@@ -427,7 +427,7 @@ public:
      * @return The position of the first break after the current position.
      *  @stable ICU 2.0
      */
-    virtual int32_t following(int32_t offset);
+    virtual int32_t following(int32_t startPos);
 
     /**
      * Sets the iterator to refer to the last boundary position before the
@@ -570,7 +570,7 @@ public:
      * @deprecated ICU 52. Use clone() instead.
      */
     virtual BreakIterator *  createBufferClone(void *stackBuffer,
-                                               int32_t &BufferSize,
+                                               int32_t &bufferSize,
                                                UErrorCode &status);
 
 

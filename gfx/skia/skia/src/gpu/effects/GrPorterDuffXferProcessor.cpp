@@ -579,7 +579,7 @@ GrGLSLXferProcessor* ShaderPDXferProcessor::createGLSLInstance() const {
 class PDLCDXferProcessor : public GrXferProcessor {
 public:
     static sk_sp<const GrXferProcessor> Make(SkBlendMode mode,
-                                             const GrProcessorAnalysisColor& inputColor);
+                                             const GrProcessorAnalysisColor& color);
 
     ~PDLCDXferProcessor() override;
 

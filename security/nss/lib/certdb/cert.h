@@ -50,7 +50,7 @@ extern char *CERT_NameToAscii(CERTName *name);
 extern char *CERT_NameToAsciiInvertible(CERTName *name,
                                         CertStrictnessLevel strict);
 
-extern CERTAVA *CERT_CopyAVA(PLArenaPool *arena, CERTAVA *src);
+extern CERTAVA *CERT_CopyAVA(PLArenaPool *arena, CERTAVA *from);
 
 /* convert an OID to dotted-decimal representation */
 /* Returns a string that must be freed with PR_smprintf_free(). */
@@ -71,12 +71,12 @@ extern SECComparison CERT_CompareAVA(const CERTAVA *a, const CERTAVA *b);
 ** Create an RDN (relative-distinguished-name). The argument list is a
 ** NULL terminated list of AVA's.
 */
-extern CERTRDN *CERT_CreateRDN(PLArenaPool *arena, CERTAVA *avas, ...);
+extern CERTRDN *CERT_CreateRDN(PLArenaPool *arena, CERTAVA *ava0, ...);
 
 /*
 ** Make a copy of "src" storing it in "dest".
 */
-extern SECStatus CERT_CopyRDN(PLArenaPool *arena, CERTRDN *dest, CERTRDN *src);
+extern SECStatus CERT_CopyRDN(PLArenaPool *arena, CERTRDN *to, CERTRDN *from);
 
 /*
 ** Add an AVA to an RDN.
@@ -93,7 +93,7 @@ extern SECComparison CERT_CompareRDN(const CERTRDN *a, const CERTRDN *b);
 /*
 ** Create an X.500 style name using a NULL terminated list of RDN's.
 */
-extern CERTName *CERT_CreateName(CERTRDN *rdn, ...);
+extern CERTName *CERT_CreateName(CERTRDN *rdn0, ...);
 
 /*
 ** Make a copy of "src" storing it in "dest". Memory is allocated in
@@ -101,8 +101,8 @@ extern CERTName *CERT_CreateName(CERTRDN *rdn, ...);
 ** "dest" before allocation is done (use CERT_DestroyName(dest, PR_FALSE) to
 ** do that).
 */
-extern SECStatus CERT_CopyName(PLArenaPool *arena, CERTName *dest,
-                               const CERTName *src);
+extern SECStatus CERT_CopyName(PLArenaPool *arena, CERTName *to,
+                               const CERTName *from);
 
 /*
 ** Destroy a Name object.
@@ -171,8 +171,8 @@ extern void CERT_DestroyValidity(CERTValidity *v);
 ** before memory is allocated (use CERT_DestroyValidity(v, PR_FALSE) to do
 ** that).
 */
-extern SECStatus CERT_CopyValidity(PLArenaPool *arena, CERTValidity *dest,
-                                   CERTValidity *src);
+extern SECStatus CERT_CopyValidity(PLArenaPool *arena, CERTValidity *to,
+                                   CERTValidity *from);
 
 /*
 ** The cert lib considers a cert or CRL valid if the "notBefore" time is
@@ -223,14 +223,14 @@ extern CERTCertificate *CERT_DupCertificate(CERTCertificate *c);
 **	"attributes" if non-zero, some optional attribute data
 */
 extern CERTCertificateRequest *CERT_CreateCertificateRequest(
-    CERTName *name, CERTSubjectPublicKeyInfo *spki, SECItem **attributes);
+    CERTName *subject, CERTSubjectPublicKeyInfo *spki, SECItem **attributes);
 
 /*
 ** Destroy a certificate-request object
 **	"r" the certificate-request to destroy
 **	"freeit" if PR_TRUE then free the object as well as its sub-objects
 */
-extern void CERT_DestroyCertificateRequest(CERTCertificateRequest *r);
+extern void CERT_DestroyCertificateRequest(CERTCertificateRequest *req);
 
 /*
 ** Start adding extensions to a certificate request.
@@ -377,14 +377,14 @@ extern CERTCertNicknames *CERT_GetValidDNSPatternsFromCert(
 ** is given in the common name of the certificate.
 */
 extern SECStatus CERT_VerifyCertName(const CERTCertificate *cert,
-                                     const char *hostname);
+                                     const char *hn);
 
 /*
 ** Add a domain name to the list of names that the user has explicitly
 ** allowed (despite cert name mismatches) for use with a server cert.
 */
 extern SECStatus CERT_AddOKDomainName(CERTCertificate *cert,
-                                      const char *hostname);
+                                      const char *hn);
 
 /*
 ** Decode a DER encoded certificate into an CERTCertificate structure
@@ -405,7 +405,7 @@ extern CERTCertificate *CERT_DecodeDERCertificate(SECItem *derSignedCert,
 #define SEC_CRL_TYPE 1
 #define SEC_KRL_TYPE 0 /* deprecated */
 
-extern CERTSignedCrl *CERT_DecodeDERCrl(PLArenaPool *arena,
+extern CERTSignedCrl *CERT_DecodeDERCrl(PLArenaPool *narena,
                                         SECItem *derSignedCrl, int type);
 
 /*
@@ -461,12 +461,12 @@ void CERT_CRLCacheRefreshIssuer(CERTCertDBHandle *dbhandle, SECItem *crlKey);
    application can only free the object after it calls CERT_UncacheCRL to
    remove it from the CRL cache.
 */
-SECStatus CERT_CacheCRL(CERTCertDBHandle *dbhandle, SECItem *newcrl);
+SECStatus CERT_CacheCRL(CERTCertDBHandle *dbhandle, SECItem *newdercrl);
 
 /* remove a previously added CRL object from the CRL cache. It is OK
    for the application to free the memory after a successful removal
 */
-SECStatus CERT_UncacheCRL(CERTCertDBHandle *dbhandle, SECItem *oldcrl);
+SECStatus CERT_UncacheCRL(CERTCertDBHandle *dbhandle, SECItem *olddercrl);
 
 /*
 ** Find a certificate in the database
@@ -487,7 +487,7 @@ extern CERTCertificate *CERT_FindCertByName(CERTCertDBHandle *handle,
 **	"name" is the distinguished name to look up (in ascii)
 */
 extern CERTCertificate *CERT_FindCertByNameString(CERTCertDBHandle *handle,
-                                                  char *name);
+                                                  char *nameStr);
 
 /*
 ** Find a certificate in the database by name and keyid
@@ -585,7 +585,7 @@ CERTCertificate *CERT_FindCertIssuer(CERTCertificate *cert, PRTime validTime,
 **	"allowOverride" if true then check to see if the invalidity has
 **		been overridden by the user.
 */
-extern SECCertTimeValidity CERT_CheckCertValidTimes(const CERTCertificate *cert,
+extern SECCertTimeValidity CERT_CheckCertValidTimes(const CERTCertificate *c,
                                                     PRTime t,
                                                     PRBool allowOverride);
 
@@ -597,7 +597,7 @@ extern SECCertTimeValidity CERT_CheckCertValidTimes(const CERTCertificate *cert,
 ** some slop for broken clocks and stuff.
 **	"cert" is the certificate to be checked
 */
-extern SECStatus CERT_CertTimesValid(CERTCertificate *cert);
+extern SECStatus CERT_CertTimesValid(CERTCertificate *c);
 
 /*
 ** Extract the validity times from a certificate
@@ -837,7 +837,7 @@ extern SECStatus CERT_FinishExtensions(void *exthandle);
 ** only when its OID matches none of the cert's existing extensions. Call this
 ** immediately before calling CERT_FinishExtensions().
 */
-SECStatus CERT_MergeExtensions(void *exthandle, CERTCertExtension **exts);
+SECStatus CERT_MergeExtensions(void *exthandle, CERTCertExtension **extensions);
 
 /* If the extension is found, return its criticality and value.
 ** This allocate storage for the returning extension value.
@@ -918,7 +918,7 @@ extern SECStatus CERT_FindCertExtension(const CERTCertificate *cert, int tag,
                                         SECItem *value);
 
 extern SECStatus CERT_FindNSCertTypeExtension(CERTCertificate *cert,
-                                              SECItem *value);
+                                              SECItem *retItem);
 
 extern char *CERT_FindNSStringExtension(CERTCertificate *cert, int oidtag);
 
@@ -947,7 +947,7 @@ extern CERTCrlDistributionPoints *CERT_FindCRLDistributionPoints(
 ** allocated in value->data.
 */
 extern SECStatus CERT_FindKeyUsageExtension(CERTCertificate *cert,
-                                            SECItem *value);
+                                            SECItem *retItem);
 
 /* Return the decoded value of the subjectKeyID extension. The caller should
 ** free up the storage allocated in retItem->data.
@@ -1035,7 +1035,7 @@ extern CERTDistNames *CERT_DistNamesFromNicknames(CERTCertDBHandle *handle,
 /*
 ** Generate an array of Distinguished names from a list of certs.
 */
-extern CERTDistNames *CERT_DistNamesFromCertList(CERTCertList *list);
+extern CERTDistNames *CERT_DistNamesFromCertList(CERTCertList *certList);
 
 /*
 ** Generate a certificate chain from a certificate.
@@ -1091,7 +1091,7 @@ char *CERT_MakeCANickname(CERTCertificate *cert);
 
 PRBool CERT_IsCACert(CERTCertificate *cert, unsigned int *rettype);
 
-PRBool CERT_IsCADERCert(SECItem *derCert, unsigned int *rettype);
+PRBool CERT_IsCADERCert(SECItem *derCert, unsigned int *type);
 
 PRBool CERT_IsRootDERCert(SECItem *derCert);
 
@@ -1112,7 +1112,7 @@ void CERT_DestroyCertificatePoliciesExtension(
     CERTCertificatePolicies *policies);
 
 CERTCertificatePolicyMappings *CERT_DecodePolicyMappingsExtension(
-    SECItem *encodedCertPolicyMaps);
+    SECItem *extnValue);
 
 SECStatus CERT_DestroyPolicyMappingsExtension(
     CERTCertificatePolicyMappings *mappings);
@@ -1122,7 +1122,7 @@ SECStatus CERT_DecodePolicyConstraintsExtension(
     const SECItem *encodedValue);
 
 SECStatus CERT_DecodeInhibitAnyExtension(
-    CERTCertificateInhibitAny *decodedValue, SECItem *extnValue);
+    CERTCertificateInhibitAny *decodedValue, SECItem *encodedValue);
 
 CERTUserNotice *CERT_DecodeUserNotice(SECItem *noticeItem);
 
@@ -1402,7 +1402,7 @@ CERTStatusConfig *CERT_GetStatusConfig(CERTCertDBHandle *handle);
  * database and will be freed by calling the 'Destroy' function in
  * the configuration object.
  */
-void CERT_SetStatusConfig(CERTCertDBHandle *handle, CERTStatusConfig *config);
+void CERT_SetStatusConfig(CERTCertDBHandle *handle, CERTStatusConfig *statusConfig);
 
 /*
  * Acquire the cert reference count lock
@@ -1495,9 +1495,9 @@ extern SECStatus CERT_EncodePolicyConstraintsExtension(
     PLArenaPool *arena, CERTCertificatePolicyConstraints *constr,
     SECItem *dest);
 extern SECStatus CERT_EncodeInhibitAnyExtension(
-    PLArenaPool *arena, CERTCertificateInhibitAny *inhibitAny, SECItem *dest);
+    PLArenaPool *arena, CERTCertificateInhibitAny *certInhibitAny, SECItem *dest);
 extern SECStatus CERT_EncodePolicyMappingExtension(
-    PLArenaPool *arena, CERTCertificatePolicyMappings *maps, SECItem *dest);
+    PLArenaPool *arena, CERTCertificatePolicyMappings *mapping, SECItem *dest);
 
 extern SECStatus CERT_EncodeInfoAccessExtension(PLArenaPool *arena,
                                                 CERTAuthInfoAccess **info,

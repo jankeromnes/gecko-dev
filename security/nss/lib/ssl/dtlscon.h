@@ -10,7 +10,7 @@
 #define __dtlscon_h_
 
 extern void dtls_FreeHandshakeMessage(DTLSQueuedMessage *msg);
-extern void dtls_FreeHandshakeMessages(PRCList *lst);
+extern void dtls_FreeHandshakeMessages(PRCList *list);
 SECStatus dtls_TransmitMessageFlight(sslSocket *ss);
 void dtls_InitTimers(sslSocket *ss);
 SECStatus dtls_StartTimer(sslSocket *ss, dtlsTimer *timer,
@@ -44,7 +44,7 @@ dtls_DTLSVersionToTLSVersion(SSL3ProtocolVersion dtlsv);
 DTLSEpoch dtls_ReadEpoch(const ssl3CipherSpec *crSpec, const PRUint8 *hdr);
 extern PRBool dtls_IsRelevant(sslSocket *ss, const ssl3CipherSpec *spec,
                               const SSL3Ciphertext *cText,
-                              sslSequenceNumber *seqNum);
+                              sslSequenceNumber *seqNumOut);
 void dtls_ReceivedFirstMessageInFlight(sslSocket *ss);
 PRBool dtls_IsLongHeader(SSL3ProtocolVersion version, PRUint8 firstOctet);
 #endif

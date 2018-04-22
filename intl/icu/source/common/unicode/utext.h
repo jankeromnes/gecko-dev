@@ -528,7 +528,7 @@ utext_previous32(UText *ut);
   * @stable ICU 3.4
   */
 U_STABLE UChar32 U_EXPORT2
-utext_next32From(UText *ut, int64_t nativeIndex);
+utext_next32From(UText *ut, int64_t index);
 
 
 
@@ -548,7 +548,7 @@ utext_next32From(UText *ut, int64_t nativeIndex);
   * @stable ICU 3.4
   */
 U_STABLE UChar32 U_EXPORT2
-utext_previous32From(UText *ut, int64_t nativeIndex);
+utext_previous32From(UText *ut, int64_t index);
 
 /**
   * Get the current iterator position, which can range from 0 to 
@@ -589,7 +589,7 @@ utext_getNativeIndex(const UText *ut);
  * @stable ICU 3.4
  */
 U_STABLE void U_EXPORT2
-utext_setNativeIndex(UText *ut, int64_t nativeIndex);
+utext_setNativeIndex(UText *ut, int64_t index);
 
 /**
  * Move the iterator position by delta code points.  The number of code points
@@ -672,7 +672,7 @@ utext_getPreviousNativeIndex(UText *ut);
  */
 U_STABLE int32_t U_EXPORT2
 utext_extract(UText *ut,
-             int64_t nativeStart, int64_t nativeLimit,
+             int64_t start, int64_t limit,
              UChar *dest, int32_t destCapacity,
              UErrorCode *status);
 

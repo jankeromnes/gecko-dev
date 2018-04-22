@@ -147,7 +147,7 @@ typedef struct AV1Decoder {
 } AV1Decoder;
 
 int av1_receive_compressed_data(struct AV1Decoder *pbi, size_t size,
-                                const uint8_t **dest);
+                                const uint8_t **psource);
 
 int av1_get_raw_frame(struct AV1Decoder *pbi, YV12_BUFFER_CONFIG *sd);
 

@@ -68,7 +68,7 @@ public:
      *               which must not indicate a failure before the function call.
      * @stable ICU 3.8
      */
-    static DateTimePatternGenerator* U_EXPORT2 createInstance(const Locale& uLocale, UErrorCode& status);
+    static DateTimePatternGenerator* U_EXPORT2 createInstance(const Locale& locale, UErrorCode& status);
 
 #ifndef U_HIDE_INTERNAL_API
 
@@ -307,7 +307,7 @@ public:
      *            pattern and {0} will be replaced by the time pattern.
      * @stable ICU 3.8
      */
-    void setDateTimeFormat(const UnicodeString& dateTimeFormat);
+    void setDateTimeFormat(const UnicodeString& dtFormat);
 
     /**
      * Getter corresponding to setDateTimeFormat.
@@ -334,7 +334,7 @@ public:
      * \snippet samples/dtptngsample/dtptngsample.cpp getBestPatternExample
      * <p>
      */
-     UnicodeString getBestPattern(const UnicodeString& skeleton, UErrorCode& status);
+     UnicodeString getBestPattern(const UnicodeString& patternForm, UErrorCode& status);
 
 
     /**
@@ -356,7 +356,7 @@ public:
      *            The best pattern found from the given skeleton.
      * @stable ICU 4.4
      */
-     UnicodeString getBestPattern(const UnicodeString& skeleton,
+     UnicodeString getBestPattern(const UnicodeString& patternForm,
                                   UDateTimePatternMatchOptions options,
                                   UErrorCode& status);
 
@@ -472,7 +472,7 @@ public:
      * @param decimal
      * @stable ICU 3.8
      */
-    void setDecimal(const UnicodeString& decimal);
+    void setDecimal(const UnicodeString& newDecimal);
 
     /**
      * Getter corresponding to setDecimal.
@@ -556,9 +556,9 @@ private:
     void hackTimes(const UnicodeString& hackPattern, UErrorCode& status);
     void getCalendarTypeToUse(const Locale& locale, CharString& destination, UErrorCode& err);
     void consumeShortTimePattern(const UnicodeString& shortTimePattern, UErrorCode& status);
-    void addCLDRData(const Locale& locale, UErrorCode& status);
+    void addCLDRData(const Locale& locale, UErrorCode& errorCode);
     UDateTimePatternConflict addPatternWithSkeleton(const UnicodeString& pattern, const UnicodeString * skeletonToUse, UBool override, UnicodeString& conflictingPattern, UErrorCode& status);
-    void initHashtable(UErrorCode& status);
+    void initHashtable(UErrorCode& err);
     void setDateTimeFromCalendar(const Locale& locale, UErrorCode& status);
     void setDecimalSymbols(const Locale& locale, UErrorCode& status);
     UDateTimePatternField getAppendFormatNumber(const char* field) const;
@@ -574,7 +574,7 @@ private:
     UnicodeString adjustFieldTypes(const UnicodeString& pattern, const PtnSkeleton* specifiedSkeleton, int32_t flags, UDateTimePatternMatchOptions options = UDATPG_MATCH_NO_OPTIONS);
     UnicodeString getBestAppending(int32_t missingFields, int32_t flags, UDateTimePatternMatchOptions options = UDATPG_MATCH_NO_OPTIONS);
     int32_t getTopBitNumber(int32_t foundMask);
-    void setAvailableFormat(const UnicodeString &key, UErrorCode& status);
+    void setAvailableFormat(const UnicodeString &key, UErrorCode& err);
     UBool isAvailableFormatSet(const UnicodeString &key) const;
     void copyHashtable(Hashtable *other, UErrorCode &status);
     UBool isCanonicalItem(const UnicodeString& item) const;

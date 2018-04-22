@@ -41,7 +41,7 @@ SANDBOX_EXPORT long sys_clone(unsigned long flags,
                               std::nullptr_t child_stack,
                               pid_t* ptid,
                               pid_t* ctid,
-                              std::nullptr_t regs);
+                              std::nullptr_t tls);
 
 SANDBOX_EXPORT void sys_exit_group(int status);
 

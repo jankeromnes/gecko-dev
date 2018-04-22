@@ -61,7 +61,7 @@ class Bignum {
   void AssignDecimalString(Vector<const char> value);
   void AssignHexString(Vector<const char> value);
 
-  void AssignPowerUInt16(uint16_t base, int exponent);
+  void AssignPowerUInt16(uint16_t base, int power_exponent);
 
   void AddUInt64(uint64_t operand);
   void AddBignum(const Bignum& other);

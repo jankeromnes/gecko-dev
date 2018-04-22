@@ -80,7 +80,7 @@ public:
     static UnicodeString stripRules(const UnicodeString &rules);
 private:
 
-    UBool       doParseActions(int32_t a);
+    UBool       doParseActions(int32_t action);
     void        error(UErrorCode e);                   // error reporting convenience function.
     void        fixOpStack(RBBINode::OpPrecedence p);
                                                        //   a character.

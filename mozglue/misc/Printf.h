@@ -75,7 +75,7 @@ public:
     bool MFBT_API print(const char* format, ...) MOZ_FORMAT_PRINTF(2, 3);
 
     /* The Vprintf-like interface.  */
-    bool MFBT_API vprint(const char* format, va_list) MOZ_FORMAT_PRINTF(2, 0);
+    bool MFBT_API vprint(const char* fmt, va_list) MOZ_FORMAT_PRINTF(2, 0);
 
 protected:
     MFBT_API PrintfTarget();
@@ -100,7 +100,7 @@ private:
 
     bool fill2(const char* src, int srclen, int width, int flags);
     bool fill_n(const char* src, int srclen, int width, int prec, int type, int flags);
-    bool cvt_l(long num, int width, int prec, int radix, int type, int flags, const char* hxp);
+    bool cvt_l(long num, int width, int prec, int radix, int type, int flags, const char* hexp);
     bool cvt_ll(int64_t num, int width, int prec, int radix, int type, int flags, const char* hexp);
     bool cvt_f(double d, const char* fmt0, const char* fmt1);
     bool cvt_s(const char* s, int width, int prec, int flags);

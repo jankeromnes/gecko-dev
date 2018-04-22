@@ -64,7 +64,7 @@ void vp8_tree_probs_from_distribution(int n, /* n = size of alphabet */
                                       vp8_prob probs[/* n-1 */],
                                       unsigned int branch_ct[/* n-1 */][2],
                                       const unsigned int num_events[/* n */],
-                                      unsigned int Pfactor, int Round);
+                                      unsigned int Pfac, int rd);
 
 /* Variant of above using coder spec rather than hardwired 8-bit probs. */
 

@@ -130,8 +130,8 @@ class RemoveUnreferencedVariablesTraverser : public TIntermTraverser
 
     // Traverse loop and block nodes in reverse order. Note that this traverser does not track
     // parent block positions, so insertStatementInParentBlock is unusable!
-    void traverseBlock(TIntermBlock *block) override;
-    void traverseLoop(TIntermLoop *loop) override;
+    void traverseBlock(TIntermBlock *node) override;
+    void traverseLoop(TIntermLoop *node) override;
 
   private:
     void removeVariableDeclaration(TIntermDeclaration *node, TIntermTyped *declarator);

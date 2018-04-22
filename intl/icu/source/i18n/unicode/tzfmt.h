@@ -815,7 +815,7 @@ private:
      * @return TRUE when the specified code array is fully filled with code points
      *         (no under/overflow).
      */
-    static UBool toCodePoints(const UnicodeString& str, UChar32* codeArray, int32_t capacity);
+    static UBool toCodePoints(const UnicodeString& str, UChar32* codeArray, int32_t size);
 
     /**
      * Private method supprting all of ISO8601 formats

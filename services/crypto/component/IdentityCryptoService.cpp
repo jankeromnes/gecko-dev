@@ -52,8 +52,8 @@ public:
   NS_DECL_THREADSAFE_ISUPPORTS
   NS_DECL_NSIIDENTITYKEYPAIR
 
-  KeyPair(SECKEYPrivateKey* aPrivateKey, SECKEYPublicKey* aPublicKey,
-          nsIEventTarget* aOperationThread);
+  KeyPair(SECKEYPrivateKey* privateKey, SECKEYPublicKey* publicKey,
+          nsIEventTarget* operationThread);
 
 private:
   virtual ~KeyPair()
@@ -81,8 +81,8 @@ class KeyGenRunnable : public Runnable
 public:
   NS_DECL_NSIRUNNABLE
 
-  KeyGenRunnable(KeyType keyType, nsIIdentityKeyGenCallback * aCallback,
-                 nsIEventTarget* aOperationThread);
+  KeyGenRunnable(KeyType keyType, nsIIdentityKeyGenCallback * callback,
+                 nsIEventTarget* operationThread);
 
 private:
   const KeyType mKeyType; // in
@@ -100,7 +100,7 @@ class SignRunnable : public Runnable
 public:
   NS_DECL_NSIRUNNABLE
 
-  SignRunnable(const nsACString & textToSign, SECKEYPrivateKey * privateKey,
+  SignRunnable(const nsACString & aText, SECKEYPrivateKey * privateKey,
                nsIIdentitySignCallback * aCallback);
 
 private:

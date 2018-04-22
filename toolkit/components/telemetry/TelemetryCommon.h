@@ -62,8 +62,8 @@ AutoHashtable<EntryType>::ReflectIntoJS(ReflectEntryFunc entryFunc,
 bool IsExpiredVersion(const char* aExpiration);
 bool IsInDataset(uint32_t aDataset, uint32_t aContainingDataset);
 bool CanRecordDataset(uint32_t aDataset, bool aCanRecordBase, bool aCanRecordExtended);
-bool CanRecordInProcess(RecordedProcessType aProcesses, GeckoProcessType aProcess);
-bool CanRecordInProcess(RecordedProcessType aProcesses, ProcessID aProcess);
+bool CanRecordInProcess(RecordedProcessType processes, GeckoProcessType processType);
+bool CanRecordInProcess(RecordedProcessType processes, ProcessID processId);
 
 /**
  * Return the number of milliseconds since process start using monotonic

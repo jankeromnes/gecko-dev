@@ -56,15 +56,15 @@ private:
   nsresult AddRequestBody(const nsACString &aRequestBody);
 
   // Fetches an update for a single table.
-  nsresult FetchUpdate(nsIURI *aURI,
-                       const nsACString &aRequest,
+  nsresult FetchUpdate(nsIURI *aUpdateUrl,
+                       const nsACString &aRequestPayload,
                        bool aIsPostRequest,
-                       const nsACString &aTable);
+                       const nsACString &aStreamTable);
   // Dumb wrapper so we don't have to create URIs.
-  nsresult FetchUpdate(const nsACString &aURI,
-                       const nsACString &aRequest,
+  nsresult FetchUpdate(const nsACString &aUpdateUrl,
+                       const nsACString &aRequestPayload,
                        bool aIsPostRequest,
-                       const nsACString &aTable);
+                       const nsACString &aStreamTable);
 
   // Fetches the next table, from mPendingUpdates.
   nsresult FetchNext();

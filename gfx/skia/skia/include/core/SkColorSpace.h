@@ -33,7 +33,7 @@ struct SK_API SkColorSpacePrimaries {
      *  Convert primaries and a white point to a toXYZD50 matrix, the preferred color gamut
      *  representation of SkColorSpace.
      */
-    bool toXYZD50(SkMatrix44* toXYZD50) const;
+    bool toXYZD50(SkMatrix44* toXYZ_D50) const;
 };
 
 /**

@@ -26,7 +26,7 @@ public:
      */
     typedef void (*Proc32)(uint32_t dst[], const SkPMColor src[], int count, U8CPU alpha);
 
-    static Proc32 Factory32(unsigned flags32);
+    static Proc32 Factory32(unsigned flags);
 
     /** Blend a single color onto a row of S32 pixels, writing the result
         into a row of D32 pixels. src and dst may be the same memory, but

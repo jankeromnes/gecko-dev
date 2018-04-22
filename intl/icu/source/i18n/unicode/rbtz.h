@@ -196,7 +196,7 @@ public:
      * @stable ICU 3.8
      */
     virtual void getOffset(UDate date, UBool local, int32_t& rawOffset,
-                           int32_t& dstOffset, UErrorCode& ec) const;
+                           int32_t& dstOffset, UErrorCode& status) const;
 
     /**
      * Sets the TimeZone's raw GMT offset (i.e., the number of milliseconds to add
@@ -311,14 +311,14 @@ private:
     UVector* copyRules(UVector* source);
     TimeZoneRule* findRuleInFinal(UDate date, UBool local,
         int32_t NonExistingTimeOpt, int32_t DuplicatedTimeOpt) const;
-    UBool findNext(UDate base, UBool inclusive, UDate& time, TimeZoneRule*& from, TimeZoneRule*& to) const;
-    UBool findPrev(UDate base, UBool inclusive, UDate& time, TimeZoneRule*& from, TimeZoneRule*& to) const;
+    UBool findNext(UDate base, UBool inclusive, UDate& transitionTime, TimeZoneRule*& fromRule, TimeZoneRule*& toRule) const;
+    UBool findPrev(UDate base, UBool inclusive, UDate& transitionTime, TimeZoneRule*& fromRule, TimeZoneRule*& toRule) const;
     int32_t getLocalDelta(int32_t rawBefore, int32_t dstBefore, int32_t rawAfter, int32_t dstAfter,
         int32_t NonExistingTimeOpt, int32_t DuplicatedTimeOpt) const;
     UDate getTransitionTime(Transition* transition, UBool local,
         int32_t NonExistingTimeOpt, int32_t DuplicatedTimeOpt) const;
     void getOffsetInternal(UDate date, UBool local, int32_t NonExistingTimeOpt, int32_t DuplicatedTimeOpt,
-        int32_t& rawOffset, int32_t& dstOffset, UErrorCode& ec) const;
+        int32_t& rawOffset, int32_t& dstOffset, UErrorCode& status) const;
     void completeConst(UErrorCode &status) const;
 
     InitialTimeZoneRule *fInitialRule;

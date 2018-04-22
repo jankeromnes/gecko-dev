@@ -49,7 +49,7 @@ private:
     // Get advance of a single glyph from FreeType, and return true;
     // or return false if we should fall back to getting the glyph
     // extents from cairo instead.
-    bool GetFTGlyphAdvance(uint16_t aGID, int32_t* aWidth);
+    bool GetFTGlyphAdvance(uint16_t aGID, int32_t* aAdvance);
 
     void InitMetrics();
 

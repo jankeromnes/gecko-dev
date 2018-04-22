@@ -83,7 +83,7 @@ extern MOZ_MUST_USE bool
 IsRegExp(JSContext* cx, HandleValue value, bool* result);
 
 extern MOZ_MUST_USE bool
-RegExpCreate(JSContext* cx, HandleValue pattern, HandleValue flags, MutableHandleValue rval);
+RegExpCreate(JSContext* cx, HandleValue patternValue, HandleValue flagsValue, MutableHandleValue rval);
 
 extern MOZ_MUST_USE bool
 RegExpPrototypeOptimizable(JSContext* cx, unsigned argc, Value* vp);

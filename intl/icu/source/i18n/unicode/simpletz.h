@@ -160,9 +160,9 @@ public:
      * @stable ICU 2.0
      */
     SimpleTimeZone(int32_t rawOffsetGMT, const UnicodeString& ID,
-        int8_t savingsStartMonth, int8_t savingsStartDayOfWeekInMonth,
+        int8_t savingsStartMonth, int8_t savingsStartDay,
         int8_t savingsStartDayOfWeek, int32_t savingsStartTime,
-        int8_t savingsEndMonth, int8_t savingsEndDayOfWeekInMonth,
+        int8_t savingsEndMonth, int8_t savingsEndDay,
         int8_t savingsEndDayOfWeek, int32_t savingsEndTime,
         UErrorCode& status);
     /**
@@ -203,9 +203,9 @@ public:
      * @stable ICU 2.0
      */
     SimpleTimeZone(int32_t rawOffsetGMT, const UnicodeString& ID,
-        int8_t savingsStartMonth, int8_t savingsStartDayOfWeekInMonth,
+        int8_t savingsStartMonth, int8_t savingsStartDay,
         int8_t savingsStartDayOfWeek, int32_t savingsStartTime,
-        int8_t savingsEndMonth, int8_t savingsEndDayOfWeekInMonth,
+        int8_t savingsEndMonth, int8_t savingsEndDay,
         int8_t savingsEndDayOfWeek, int32_t savingsEndTime,
         int32_t savingsDST, UErrorCode& status);
 
@@ -251,10 +251,10 @@ public:
      * @stable ICU 2.0
      */
     SimpleTimeZone(int32_t rawOffsetGMT, const UnicodeString& ID,
-        int8_t savingsStartMonth, int8_t savingsStartDayOfWeekInMonth,
+        int8_t savingsStartMonth, int8_t savingsStartDay,
         int8_t savingsStartDayOfWeek, int32_t savingsStartTime,
         TimeMode savingsStartTimeMode,
-        int8_t savingsEndMonth, int8_t savingsEndDayOfWeekInMonth,
+        int8_t savingsEndMonth, int8_t savingsEndDay,
         int8_t savingsEndDayOfWeek, int32_t savingsEndTime, TimeMode savingsEndTimeMode,
         int32_t savingsDST, UErrorCode& status);
 
@@ -587,7 +587,7 @@ public:
      * @stable ICU 2.0
      */
     virtual int32_t getOffset(uint8_t era, int32_t year, int32_t month, int32_t day,
-                           uint8_t dayOfWeek, int32_t milliseconds,
+                           uint8_t dayOfWeek, int32_t millis,
                            int32_t monthLength, UErrorCode& status) const;
     /**
      * Gets the time zone offset, for current date, modified in case of
@@ -606,7 +606,7 @@ public:
      * @stable ICU 2.0
      */
     virtual int32_t getOffset(uint8_t era, int32_t year, int32_t month, int32_t day,
-                              uint8_t dayOfWeek, int32_t milliseconds,
+                              uint8_t dayOfWeek, int32_t millis,
                               int32_t monthLength, int32_t prevMonthLength,
                               UErrorCode& status) const;
 
@@ -623,7 +623,7 @@ public:
      * @internal
      */
     virtual void getOffsetFromLocal(UDate date, int32_t nonExistingTimeOpt, int32_t duplicatedTimeOpt,
-        int32_t& rawOffset, int32_t& dstOffset, UErrorCode& status) const;
+        int32_t& rawOffsetGMT, int32_t& savingsDST, UErrorCode& status) const;
 
     /**
      * Returns the TimeZone's raw GMT offset (i.e., the number of milliseconds to add
@@ -816,11 +816,11 @@ private:
      * @param status          An UErrorCode to receive the status.
      */
     void construct(int32_t rawOffsetGMT,
-                   int8_t startMonth, int8_t startDay, int8_t startDayOfWeek,
-                   int32_t startTime, TimeMode startTimeMode,
-                   int8_t endMonth, int8_t endDay, int8_t endDayOfWeek,
-                   int32_t endTime, TimeMode endTimeMode,
-                   int32_t dstSavings, UErrorCode& status);
+                   int8_t savingsStartMonth, int8_t savingsStartDay, int8_t savingsStartDayOfWeek,
+                   int32_t savingsStartTime, TimeMode savingsStartTimeMode,
+                   int8_t savingsEndMonth, int8_t savingsEndDay, int8_t savingsEndDayOfWeek,
+                   int32_t savingsEndTime, TimeMode savingsEndTimeMode,
+                   int32_t savingsDST, UErrorCode& status);
 
     /**
      * Compare a given date in the year to a rule. Return 1, 0, or -1, depending

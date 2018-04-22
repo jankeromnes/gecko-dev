@@ -60,7 +60,7 @@ SEC_BEGIN_PROTOS
  */
 extern SECAlgorithmID *
 nsspkcs5_CreateAlgorithmID(PLArenaPool *arena, SECOidTag algorithm,
-                           NSSPKCS5PBEParameter *pbe);
+                           NSSPKCS5PBEParameter *pbe_param);
 
 /*
  * Convert an Algorithm ID to a PBE Param.
@@ -98,9 +98,9 @@ nsspkcs5_ComputeKeyAndIV(NSSPKCS5PBEParameter *, SECItem *pwitem,
 
 /* Destroys PBE parameter */
 extern void
-nsspkcs5_DestroyPBEParameter(NSSPKCS5PBEParameter *param);
+nsspkcs5_DestroyPBEParameter(NSSPKCS5PBEParameter *pbe_param);
 
-HASH_HashType HASH_FromHMACOid(SECOidTag oid);
+HASH_HashType HASH_FromHMACOid(SECOidTag hmac);
 
 SEC_END_PROTOS
 

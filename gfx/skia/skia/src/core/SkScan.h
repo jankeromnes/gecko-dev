@@ -86,19 +86,19 @@ private:
     static void FillRect(const SkRect&, const SkRegion* clip, SkBlitter*);
     static void AntiFillRect(const SkRect&, const SkRegion* clip, SkBlitter*);
     static void AntiFillXRect(const SkXRect&, const SkRegion*, SkBlitter*);
-    static void AntiFillPath(const SkPath&, const SkRegion& clip, SkBlitter*,
+    static void AntiFillPath(const SkPath&, const SkRegion& origClip, SkBlitter*,
                              bool forceRLE = false, SkDAARecord* daaRecord = nullptr);
     static void FillTriangle(const SkPoint pts[], const SkRegion*, SkBlitter*);
 
     static void AntiFrameRect(const SkRect&, const SkPoint& strokeSize,
                               const SkRegion*, SkBlitter*);
     static void HairLineRgn(const SkPoint[], int count, const SkRegion*, SkBlitter*);
-    static void AntiHairLineRgn(const SkPoint[], int count, const SkRegion*, SkBlitter*);
+    static void AntiHairLineRgn(const SkPoint[], int arrayCount, const SkRegion*, SkBlitter*);
     static void AAAFillPath(const SkPath& path, SkBlitter* blitter, const SkIRect& pathIR,
                             const SkIRect& clipBounds, bool forceRLE);
-    static void DAAFillPath(const SkPath& path, SkBlitter* blitter, const SkIRect& pathIR,
-                            const SkIRect& clipBounds, bool forceRLE, SkDAARecord* daaRecord);
-    static void SAAFillPath(const SkPath& path, SkBlitter* blitter, const SkIRect& pathIR,
+    static void DAAFillPath(const SkPath& path, SkBlitter* blitter, const SkIRect& ir,
+                            const SkIRect& clipBounds, bool forceRLE, SkDAARecord* record);
+    static void SAAFillPath(const SkPath& path, SkBlitter* blitter, const SkIRect& ir,
                             const SkIRect& clipBounds, bool forceRLE);
 };
 

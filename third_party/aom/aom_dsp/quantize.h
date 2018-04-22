@@ -55,11 +55,11 @@ void aom_highbd_quantize_b_c(const tran_low_t *coeff_ptr, intptr_t n_coeffs,
 #endif
 
 void aom_quantize_dc(const tran_low_t *coeff_ptr, int n_coeffs, int skip_block,
-                     const int16_t *round_ptr, const int16_t quant_ptr,
+                     const int16_t *round_ptr, const int16_t quant,
                      tran_low_t *qcoeff_ptr, tran_low_t *dqcoeff_ptr,
                      const int16_t dequant_ptr, uint16_t *eob_ptr);
 void aom_quantize_dc_32x32(const tran_low_t *coeff_ptr, int skip_block,
-                           const int16_t *round_ptr, const int16_t quant_ptr,
+                           const int16_t *round_ptr, const int16_t quant,
                            tran_low_t *qcoeff_ptr, tran_low_t *dqcoeff_ptr,
                            const int16_t dequant_ptr, uint16_t *eob_ptr);
 #if CONFIG_TX64X64

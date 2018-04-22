@@ -273,12 +273,12 @@ void ScaleFilterCols_16_C(uint16* dst_ptr,
 void ScaleFilterCols64_C(uint8* dst_ptr,
                          const uint8* src_ptr,
                          int dst_width,
-                         int x,
+                         int x32,
                          int dx);
 void ScaleFilterCols64_16_C(uint16* dst_ptr,
                             const uint16* src_ptr,
                             int dst_width,
-                            int x,
+                            int x32,
                             int dx);
 void ScaleRowDown38_C(const uint8* src_ptr,
                       ptrdiff_t src_stride,
@@ -336,7 +336,7 @@ void ScaleARGBCols_C(uint8* dst_argb,
 void ScaleARGBCols64_C(uint8* dst_argb,
                        const uint8* src_argb,
                        int dst_width,
-                       int x,
+                       int x32,
                        int dx);
 void ScaleARGBColsUp2_C(uint8* dst_argb,
                         const uint8* src_argb,
@@ -351,7 +351,7 @@ void ScaleARGBFilterCols_C(uint8* dst_argb,
 void ScaleARGBFilterCols64_C(uint8* dst_argb,
                              const uint8* src_argb,
                              int dst_width,
-                             int x,
+                             int x32,
                              int dx);
 
 // Specialized scalers for x86.

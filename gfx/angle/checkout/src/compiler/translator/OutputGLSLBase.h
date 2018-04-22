@@ -85,7 +85,7 @@ class TOutputGLSLBase : public TIntermTraverser
 
     void writeBuiltInFunctionTriplet(Visit visit, TOperator op, bool useEmulatedFunction);
 
-    const char *mapQualifierToString(TQualifier qialifier);
+    const char *mapQualifierToString(TQualifier qualifier);
 
     TInfoSinkBase &mObjSink;
     bool mDeclaringVariable;

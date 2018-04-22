@@ -311,7 +311,7 @@ class TestNrSocket : public NrSocketBase {
     static void socket_readable_callback(void *real_sock_v,
                                          int how,
                                          void *test_sock_v);
-    void on_socket_readable(NrSocketBase *external_or_internal_socket);
+    void on_socket_readable(NrSocketBase *real_socket);
     void fire_readable_callback();
 
     static void port_mapping_tcp_passthrough_callback(void *ext_sock_v,
@@ -325,10 +325,10 @@ class TestNrSocket : public NrSocketBase {
     void write_to_port_mapping(NrSocketBase *external_socket);
     bool is_tcp_connection_behind_nat() const;
 
-    PortMapping* get_port_mapping(const nr_transport_addr &remote_addr,
+    PortMapping* get_port_mapping(const nr_transport_addr &remote_address,
                                   TestNat::NatBehavior filter) const;
     PortMapping* create_port_mapping(
-        const nr_transport_addr &remote_addr,
+        const nr_transport_addr &remote_address,
         const RefPtr<NrSocketBase> &external_socket) const;
     RefPtr<NrSocketBase> create_external_socket(
         const nr_transport_addr &remote_addr) const;

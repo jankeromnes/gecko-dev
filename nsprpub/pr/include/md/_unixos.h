@@ -347,9 +347,9 @@ extern PRInt32	_MD_accept_read(PRInt32 sock, PRInt32 *newSock,
 extern PRInt32 	_PR_UnixSendFile(PRFileDesc *sd, PRSendFileData *sfd,
 			PRTransmitFileFlags flags, PRIntervalTime timeout);
 
-extern PRStatus _MD_LockFile(PRInt32 osfd);
-extern PRStatus _MD_TLockFile(PRInt32 osfd);
-extern PRStatus _MD_UnlockFile(PRInt32 osfd);
+extern PRStatus _MD_LockFile(PRInt32 f);
+extern PRStatus _MD_TLockFile(PRInt32 f);
+extern PRStatus _MD_UnlockFile(PRInt32 f);
 
 #define _MD_OPEN_DIR(dir, name)		    _MD_open_dir(dir, name)
 #define _MD_CLOSE_DIR(dir)		        _MD_close_dir(dir)
@@ -487,7 +487,7 @@ extern void * _MD_MemMap(struct PRFileMap *fmap, PRInt64 offset,
         PRUint32 len);
 #define _MD_MEM_MAP _MD_MemMap
 
-extern PRStatus _MD_MemUnmap(void *addr, PRUint32 size);
+extern PRStatus _MD_MemUnmap(void *addr, PRUint32 len);
 #define _MD_MEM_UNMAP _MD_MemUnmap
 
 extern PRStatus _MD_CloseFileMap(struct PRFileMap *fmap);

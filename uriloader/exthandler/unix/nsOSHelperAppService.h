@@ -25,7 +25,7 @@ public:
   virtual ~nsOSHelperAppService();
 
   // method overrides for mime.types and mime.info look up steps
-  already_AddRefed<nsIMIMEInfo> GetMIMEInfoFromOS(const nsACString& aMimeType,
+  already_AddRefed<nsIMIMEInfo> GetMIMEInfoFromOS(const nsACString& aType,
                                                   const nsACString& aFileExt,
                                                   bool       *aFound) override;
   NS_IMETHOD GetProtocolHandlerInfoFromOS(const nsACString &aScheme,
@@ -43,7 +43,7 @@ public:
   virtual nsresult GetFileTokenForPath(const char16_t * platformAppPath, nsIFile ** aFile) override;
 
 protected:
-  already_AddRefed<nsMIMEInfoBase> GetFromType(const nsCString& aMimeType);
+  already_AddRefed<nsMIMEInfoBase> GetFromType(const nsCString& aMIMEType);
   already_AddRefed<nsMIMEInfoBase> GetFromExtension(const nsCString& aFileExt);
 
 private:

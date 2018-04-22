@@ -109,7 +109,7 @@ public:
      *                 Objects of different subclasses are considered unequal.
      * @stable ICU 2.0
      */
-    virtual UBool operator==(const Format& other) const = 0;
+    virtual UBool operator==(const Format& that) const = 0;
 
     /**
      * Return true if the given Format objects are not semantically
@@ -139,7 +139,7 @@ public:
      * @stable ICU 2.0
      */
     UnicodeString& format(const Formattable& obj,
-                          UnicodeString& appendTo,
+                          UnicodeString& toAppendTo,
                           UErrorCode& status) const;
 
     /**
@@ -179,7 +179,7 @@ public:
      * @stable ICU 4.4
      */
     virtual UnicodeString& format(const Formattable& obj,
-                                  UnicodeString& appendTo,
+                                  UnicodeString& toAppendTo,
                                   FieldPositionIterator* posIter,
                                   UErrorCode& status) const;
 

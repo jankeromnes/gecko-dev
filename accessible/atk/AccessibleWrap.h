@@ -59,7 +59,7 @@ public:
   virtual nsresult HandleAccEvent(AccEvent* aEvent) override;
 
   AtkObject * GetAtkObject(void);
-  static AtkObject* GetAtkObject(Accessible* aAccessible);
+  static AtkObject* GetAtkObject(Accessible* acc);
 
   bool IsValidObject();
 

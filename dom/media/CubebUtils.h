@@ -38,7 +38,7 @@ enum Side {
 double GetVolumeScale();
 bool GetFirstStream();
 cubeb* GetCubebContext();
-void ReportCubebStreamInitFailure(bool aIsFirstStream);
+void ReportCubebStreamInitFailure(bool aIsFirst);
 void ReportCubebBackendUsed();
 uint32_t GetCubebPlaybackLatencyInMilliseconds();
 uint32_t GetCubebMSGLatencyInFrames(cubeb_stream_params * params);

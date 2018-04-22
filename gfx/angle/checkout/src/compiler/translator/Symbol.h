@@ -80,7 +80,7 @@ class TVariable : public TSymbol
               const ImmutableString &name,
               const TType *type,
               SymbolType symbolType,
-              TExtension ext = TExtension::UNDEFINED);
+              TExtension extension = TExtension::UNDEFINED);
 
     bool isVariable() const override { return true; }
     const TType &getType() const { return *mType; }

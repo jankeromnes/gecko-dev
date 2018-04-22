@@ -591,8 +591,8 @@ int I422ToYUY2(const uint8* src_y,
                int src_stride_u,
                const uint8* src_v,
                int src_stride_v,
-               uint8* dst_frame,
-               int dst_stride_frame,
+               uint8* dst_yuy2,
+               int dst_stride_yuy2,
                int width,
                int height);
 
@@ -604,8 +604,8 @@ int I422ToUYVY(const uint8* src_y,
                int src_stride_u,
                const uint8* src_v,
                int src_stride_v,
-               uint8* dst_frame,
-               int dst_stride_frame,
+               uint8* dst_uyvy,
+               int dst_stride_uyvy,
                int width,
                int height);
 

@@ -158,7 +158,7 @@ struct AV1EncoderConfig;
 void av1_rc_init(const struct AV1EncoderConfig *oxcf, int pass,
                  RATE_CONTROL *rc);
 
-int av1_estimate_bits_at_q(FRAME_TYPE frame_kind, int q, int mbs,
+int av1_estimate_bits_at_q(FRAME_TYPE frame_type, int q, int mbs,
                            double correction_factor, aom_bit_depth_t bit_depth);
 
 double av1_convert_qindex_to_q(int qindex, aom_bit_depth_t bit_depth);
@@ -169,7 +169,7 @@ int av1_rc_get_default_min_gf_interval(int width, int height, double framerate);
 // Note av1_rc_get_default_max_gf_interval() requires the min_gf_interval to
 // be passed in to ensure that the max_gf_interval returned is at least as bis
 // as that.
-int av1_rc_get_default_max_gf_interval(double framerate, int min_frame_rate);
+int av1_rc_get_default_max_gf_interval(double framerate, int min_gf_interval);
 
 // Generally at the high level, the following flow is expected
 // to be enforced for rate control:
@@ -214,7 +214,7 @@ int av1_rc_drop_frame(struct AV1_COMP *cpi);
 
 // Computes frame size bounds.
 void av1_rc_compute_frame_size_bounds(const struct AV1_COMP *cpi,
-                                      int this_frame_target,
+                                      int frame_target,
                                       int *frame_under_shoot_limit,
                                       int *frame_over_shoot_limit);
 

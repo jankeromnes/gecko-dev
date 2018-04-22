@@ -26,7 +26,7 @@ U_NAMESPACE_BEGIN
 
 class FormatNameEnumeration : public StringEnumeration {
 public:
-    FormatNameEnumeration(UVector *fFormatNames, UErrorCode& status);
+    FormatNameEnumeration(UVector *fNameList, UErrorCode& status);
     virtual ~FormatNameEnumeration();
     static UClassID U_EXPORT2 getStaticClassID(void);
     virtual UClassID getDynamicClassID(void) const;

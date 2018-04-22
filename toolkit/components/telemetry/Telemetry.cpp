@@ -177,7 +177,7 @@ private:
 
   enum SanitizedState { Sanitized, Unsanitized };
 
-  static void StoreSlowSQL(const nsACString &offender, uint32_t delay,
+  static void StoreSlowSQL(const nsACString &sql, uint32_t delay,
                            SanitizedState state);
 
   static bool ReflectMainThreadSQL(SlowSQLEntryType *entry, JSContext *cx,

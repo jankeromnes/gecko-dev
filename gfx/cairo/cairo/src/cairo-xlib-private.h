@@ -113,7 +113,7 @@ struct _cairo_xlib_screen {
 };
 
 cairo_private cairo_device_t *
-_cairo_xlib_device_create (Display *display);
+_cairo_xlib_device_create (Display *dpy);
 
 cairo_private cairo_xlib_screen_t *
 _cairo_xlib_display_get_screen (cairo_xlib_display_t *display,
@@ -133,7 +133,7 @@ _cairo_xlib_display_queue_work (cairo_xlib_display_t *display,
 cairo_private cairo_status_t
 _cairo_xlib_display_queue_resource (cairo_xlib_display_t *display,
 	                           cairo_xlib_notify_resource_func notify,
-				   XID resource);
+				   XID xid);
 cairo_private cairo_status_t
 _cairo_xlib_display_acquire (cairo_device_t *device,
                              cairo_xlib_display_t **display);
@@ -185,7 +185,7 @@ _cairo_xlib_screen_get_font_options (cairo_xlib_screen_t *info);
 cairo_private cairo_status_t
 _cairo_xlib_screen_get_visual_info (cairo_xlib_display_t *display,
                                     cairo_xlib_screen_t *info,
-				    Visual *visual,
+				    Visual *v,
 				    cairo_xlib_visual_info_t **out);
 
 cairo_private cairo_status_t

@@ -227,7 +227,7 @@ static cairo_font_face_t *
 _cairo_ft_resolve_pattern (FcPattern		      *pattern,
 			   const cairo_matrix_t       *font_matrix,
 			   const cairo_matrix_t       *ctm,
-			   const cairo_font_options_t *options);
+			   const cairo_font_options_t *font_options);
 
 #endif
 

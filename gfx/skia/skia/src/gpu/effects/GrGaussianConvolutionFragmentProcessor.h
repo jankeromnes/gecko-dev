@@ -61,7 +61,7 @@ public:
 private:
     /// Convolve with a Gaussian kernel
     GrGaussianConvolutionFragmentProcessor(sk_sp<GrTextureProxy>, Direction,
-                                           int halfWidth, float gaussianSigma,
+                                           int radius, float gaussianSigma,
                                            GrTextureDomain::Mode mode, int bounds[2]);
 
     explicit GrGaussianConvolutionFragmentProcessor(const GrGaussianConvolutionFragmentProcessor&);

@@ -295,7 +295,7 @@ extern SECStatus cert_GetCertType(CERTCertificate* cert);
 extern PRUint32 cert_ComputeCertType(CERTCertificate* cert);
 
 void cert_AddToVerifyLog(CERTVerifyLog* log, CERTCertificate* cert,
-                         long errorCode, unsigned int depth, void* arg);
+                         long error, unsigned int depth, void* arg);
 
 /* Insert a DER CRL into the CRL cache, and take ownership of it.
  *
@@ -375,8 +375,8 @@ PRUint32 cert_CountDNSPatterns(CERTGeneralName* firstName);
  * SECSuccess. This function does not check if the cert is fit for a
  * particular usage.
  */
-SECStatus cert_CheckLeafTrust(CERTCertificate* cert, SECCertUsage usage,
-                              unsigned int* failedFlags, PRBool* isTrusted);
+SECStatus cert_CheckLeafTrust(CERTCertificate* cert, SECCertUsage certUsage,
+                              unsigned int* failedFlags, PRBool* trusted);
 
 /*
  * Acquire the cert temp/perm lock

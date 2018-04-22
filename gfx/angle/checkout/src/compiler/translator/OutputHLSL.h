@@ -33,7 +33,7 @@ class UniformHLSL;
 struct TReferencedBlock : angle::NonCopyable
 {
     POOL_ALLOCATOR_NEW_DELETE();
-    TReferencedBlock(const TInterfaceBlock *block, const TVariable *instanceVariable);
+    TReferencedBlock(const TInterfaceBlock *aBlock, const TVariable *aInstanceVariable);
     const TInterfaceBlock *block;
     const TVariable *instanceVariable;  // May be nullptr if the block is not instanced.
 };
@@ -132,7 +132,7 @@ class OutputHLSL : public TIntermTraverser
     // Returns true if variable initializer could be written using literal {} notation.
     bool writeConstantInitialization(TInfoSinkBase &out,
                                      TIntermSymbol *symbolNode,
-                                     TIntermTyped *expression);
+                                     TIntermTyped *initializer);
 
     void writeIfElse(TInfoSinkBase &out, TIntermIfElse *node);
 

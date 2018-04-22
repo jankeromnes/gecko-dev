@@ -911,7 +911,7 @@ private:
      * @return Returns TRUE when the given custom id is valid.
      */
     static UBool parseCustomID(const UnicodeString& id, int32_t& sign, int32_t& hour,
-        int32_t& minute, int32_t& second);
+        int32_t& min, int32_t& sec);
 
     /**
      * Parse a custom time zone identifier and return the normalized

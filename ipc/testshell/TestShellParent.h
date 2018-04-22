@@ -33,7 +33,7 @@ public:
   DeallocPTestShellCommandParent(PTestShellCommandParent* aActor) override;
 
   bool
-  CommandDone(TestShellCommandParent* aActor, const nsString& aResponse);
+  CommandDone(TestShellCommandParent* command, const nsString& aResponse);
 };
 
 

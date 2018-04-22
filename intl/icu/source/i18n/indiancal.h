@@ -209,13 +209,13 @@ public:
    * @param year  The month(0-based) in Indian year
    * @internal
    */
-  virtual int32_t handleGetMonthLength(int32_t extendedYear, int32_t month) const;
+  virtual int32_t handleGetMonthLength(int32_t eyear, int32_t month) const;
   
   /**
    * Return the number of days in the given Indian year
    * @internal
    */
-  virtual int32_t handleGetYearLength(int32_t extendedYear) const;
+  virtual int32_t handleGetYearLength(int32_t eyear) const;
 
   //-------------------------------------------------------------------------
   // Functions for converting from field values to milliseconds....

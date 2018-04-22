@@ -136,7 +136,7 @@ int av_fifo_generic_write(AVFifoBuffer *f, void *src, int size, int (*func)(void
  * @param size new AVFifoBuffer size in bytes
  * @return <0 for failure, >=0 otherwise
  */
-int av_fifo_realloc2(AVFifoBuffer *f, unsigned int size);
+int av_fifo_realloc2(AVFifoBuffer *f, unsigned int new_size);
 
 /**
  * Enlarge an AVFifoBuffer.
@@ -147,7 +147,7 @@ int av_fifo_realloc2(AVFifoBuffer *f, unsigned int size);
  * @param additional_space the amount of space in bytes to allocate in addition to av_fifo_size()
  * @return <0 for failure, >=0 otherwise
  */
-int av_fifo_grow(AVFifoBuffer *f, unsigned int additional_space);
+int av_fifo_grow(AVFifoBuffer *f, unsigned int size);
 
 /**
  * Read and discard the specified amount of data from an AVFifoBuffer.

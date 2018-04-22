@@ -54,18 +54,18 @@ SEC_BEGIN_PROTOS
  */
 
 /* Initialization */
-extern SECMODModule *SECMOD_LoadModule(char *moduleSpec, SECMODModule *parent,
+extern SECMODModule *SECMOD_LoadModule(char *modulespec, SECMODModule *parent,
                                        PRBool recurse);
 
-extern SECMODModule *SECMOD_LoadUserModule(char *moduleSpec, SECMODModule *parent,
+extern SECMODModule *SECMOD_LoadUserModule(char *modulespec, SECMODModule *parent,
                                            PRBool recurse);
 
 SECStatus SECMOD_UnloadUserModule(SECMODModule *mod);
 
-SECMODModule *SECMOD_CreateModule(const char *lib, const char *name,
-                                  const char *param, const char *nss);
-SECMODModule *SECMOD_CreateModuleEx(const char *lib, const char *name,
-                                    const char *param, const char *nss,
+SECMODModule *SECMOD_CreateModule(const char *library, const char *moduleName,
+                                  const char *parameters, const char *nss);
+SECMODModule *SECMOD_CreateModuleEx(const char *library, const char *moduleName,
+                                    const char *parameters, const char *nss,
                                     const char *config);
 /*
  * After a fork(), PKCS #11 says we need to call C_Initialize again in
@@ -125,7 +125,7 @@ extern SECStatus SECMOD_AddNewModuleEx(const char *moduleName,
 extern SECMODModule *SECMOD_GetInternalModule(void);
 extern SECMODModule *SECMOD_ReferenceModule(SECMODModule *module);
 extern void SECMOD_DestroyModule(SECMODModule *module);
-extern PK11SlotInfo *SECMOD_LookupSlot(SECMODModuleID module,
+extern PK11SlotInfo *SECMOD_LookupSlot(SECMODModuleID moduleID,
                                        unsigned long slotID);
 extern PK11SlotInfo *SECMOD_FindSlot(SECMODModule *module, const char *name);
 

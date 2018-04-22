@@ -126,7 +126,7 @@ protected:
     void setRenderTargetState(const GrPrimitiveProcessor&, const GrRenderTargetProxy*);
 
     // Helper for setData() that binds textures and texel buffers to the appropriate texture units
-    void bindTextures(const GrResourceIOProcessor&, bool allowSRGBInputs, int* nextSamplerIdx,
+    void bindTextures(const GrResourceIOProcessor&, bool allowSRGBInputs, int* nextTexSamplerIdx,
                       int* nextTexelBufferIdx);
 
     // Helper for generateMipmaps() that ensures mipmaps are up to date

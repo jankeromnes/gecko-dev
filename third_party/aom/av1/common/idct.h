@@ -82,11 +82,11 @@ void av1_inverse_transform_block_facade(MACROBLOCKD *xd, int plane, int block,
 void av1_highbd_iwht4x4_add(const tran_low_t *input, uint8_t *dest, int stride,
                             int eob, int bd);
 void av1_highbd_inv_txfm_add_4x4(const tran_low_t *input, uint8_t *dest,
-                                 int stride, const TxfmParam *param);
+                                 int stride, const TxfmParam *txfm_param);
 void av1_highbd_inv_txfm_add_4x8(const tran_low_t *input, uint8_t *dest,
-                                 int stride, const TxfmParam *param);
+                                 int stride, const TxfmParam *txfm_param);
 void av1_highbd_inv_txfm_add_8x4(const tran_low_t *input, uint8_t *dest,
-                                 int stride, const TxfmParam *param);
+                                 int stride, const TxfmParam *txfm_param);
 void av1_highbd_inv_txfm_add(const tran_low_t *input, uint8_t *dest, int stride,
                              TxfmParam *txfm_param);
 

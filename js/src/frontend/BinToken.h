@@ -338,7 +338,7 @@ const char* describeBinKind(const BinKind& kind);
 /**
  * Return a string describing a `BinField`.
  */
-const char* describeBinField(const BinField& kind);
+const char* describeBinField(const BinField& field);
 
 } // namespace frontend
 } // namespace js

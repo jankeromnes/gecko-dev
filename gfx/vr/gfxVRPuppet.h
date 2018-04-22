@@ -141,9 +141,9 @@ private:
                          uint64_t aButtonMask,
                          uint64_t aButtonPressed,
                          uint64_t aButtonTouched);
-  void HandleAxisMove(uint32_t aControllerIndex, uint32_t aAxis,
+  void HandleAxisMove(uint32_t aControllerIdx, uint32_t aAxis,
                       float aValue);
-  void HandlePoseTracking(uint32_t aControllerIndex,
+  void HandlePoseTracking(uint32_t aControllerIdx,
                           const dom::GamepadPoseState& aPose,
                           VRControllerHost* aController);
 

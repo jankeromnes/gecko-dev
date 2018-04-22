@@ -404,7 +404,7 @@ void av1_build_inter_predictor(const uint8_t *src, int src_stride, uint8_t *dst,
 #if CONFIG_HIGHBITDEPTH
 void av1_highbd_build_inter_predictor(
     const uint8_t *src, int src_stride, uint8_t *dst, int dst_stride,
-    const MV *mv_q3, const struct scale_factors *sf, int w, int h, int do_avg,
+    const MV *src_mv, const struct scale_factors *sf, int w, int h, int ref,
     InterpFilters interp_filters,
 #if CONFIG_GLOBAL_MOTION || CONFIG_WARPED_MOTION
     const WarpTypesAllowed *warp_types, int p_col, int p_row,
@@ -585,8 +585,8 @@ static INLINE const uint8_t *av1_get_contiguous_soft_mask(int wedge_index,
 }
 
 const uint8_t *av1_get_soft_mask(int wedge_index, int wedge_sign,
-                                 BLOCK_SIZE sb_type, int wedge_offset_x,
-                                 int wedge_offset_y);
+                                 BLOCK_SIZE sb_type, int offset_x,
+                                 int offset_y);
 
 const uint8_t *av1_get_compound_type_mask_inverse(
     const INTERINTER_COMPOUND_DATA *const comp_data,
@@ -617,7 +617,7 @@ void av1_build_interintra_predictors_sbuv(const AV1_COMMON *cm, MACROBLOCKD *xd,
 
 void av1_build_intra_predictors_for_interintra(
     const AV1_COMMON *cm, MACROBLOCKD *xd, BLOCK_SIZE bsize, int plane,
-    BUFFER_SET *ctx, uint8_t *intra_pred, int intra_stride);
+    BUFFER_SET *ctx, uint8_t *dst, int dst_stride);
 void av1_combine_interintra(MACROBLOCKD *xd, BLOCK_SIZE bsize, int plane,
                             const uint8_t *inter_pred, int inter_stride,
                             const uint8_t *intra_pred, int intra_stride);

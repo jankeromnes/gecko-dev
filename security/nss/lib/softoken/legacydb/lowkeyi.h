@@ -35,7 +35,7 @@ typedef char *(*NSSLOWKEYDBNameFunc)(void *arg, int dbVersion);
 ** Open a key database.
 */
 extern NSSLOWKEYDBHandle *nsslowkey_OpenKeyDB(PRBool readOnly,
-                                              const char *domain,
+                                              const char *appName,
                                               const char *prefix,
                                               NSSLOWKEYDBNameFunc namecb,
                                               void *cbarg);
@@ -63,7 +63,7 @@ extern SECStatus nsslowkey_DeleteKey(NSSLOWKEYDBHandle *handle,
 **  "arg" is the argument for the callback
 */
 extern SECStatus nsslowkey_StoreKeyByPublicKey(NSSLOWKEYDBHandle *handle,
-                                               NSSLOWKEYPrivateKey *pk,
+                                               NSSLOWKEYPrivateKey *privkey,
                                                SECItem *pubKeyData,
                                                char *nickname,
                                                SDB *sdb);
@@ -79,21 +79,21 @@ extern PRBool nsslowkey_KeyForIDExists(NSSLOWKEYDBHandle *handle, SECItem *id);
 **  "key" the object
 **  "freeit" if PR_TRUE then free the object as well as its sub-objects
 */
-extern void lg_nsslowkey_DestroyPrivateKey(NSSLOWKEYPrivateKey *key);
+extern void lg_nsslowkey_DestroyPrivateKey(NSSLOWKEYPrivateKey *privk);
 
 /*
 ** Destroy a public key object.
 **  "key" the object
 **  "freeit" if PR_TRUE then free the object as well as its sub-objects
 */
-extern void lg_nsslowkey_DestroyPublicKey(NSSLOWKEYPublicKey *key);
+extern void lg_nsslowkey_DestroyPublicKey(NSSLOWKEYPublicKey *pubk);
 
 /*
 ** Convert a low private key "privateKey" into a public low key
 */
 extern NSSLOWKEYPublicKey
     *
-    lg_nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privateKey);
+    lg_nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk);
 
 SECStatus
 nsslowkey_UpdateNickname(NSSLOWKEYDBHandle *handle,
@@ -115,7 +115,7 @@ nsslowkey_StoreKeyByPublicKeyAlg(NSSLOWKEYDBHandle *handle,
                                  NSSLOWKEYPrivateKey *privkey,
                                  SECItem *pubKeyData,
                                  char *nickname,
-                                 SDB *sdb,
+                                 SDB *sdbpw,
                                  PRBool update);
 
 /* Find key by modulus.  This function is the inverse of store key
@@ -126,11 +126,11 @@ nsslowkey_StoreKeyByPublicKeyAlg(NSSLOWKEYDBHandle *handle,
  */
 extern NSSLOWKEYPrivateKey *
 nsslowkey_FindKeyByPublicKey(NSSLOWKEYDBHandle *handle, SECItem *modulus,
-                             SDB *sdb);
+                             SDB *sdbpw);
 
 extern char *
 nsslowkey_FindKeyNicknameByPublicKey(NSSLOWKEYDBHandle *handle,
-                                     SECItem *modulus, SDB *sdb);
+                                     SECItem *modulus, SDB *sdbpw);
 
 /*
  * smaller version of EC_FillParams. In this code, we only need

@@ -58,7 +58,7 @@ class TFieldListCollection : angle::NonCopyable
 
     bool containsArrays() const;
     bool containsMatrices() const;
-    bool containsType(TBasicType t) const;
+    bool containsType(TBasicType type) const;
     bool containsSamplers() const;
 
     size_t objectSize() const;

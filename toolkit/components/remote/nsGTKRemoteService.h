@@ -28,13 +28,13 @@ public:
     : mServerWindow(nullptr)
     { }
 
-  static gboolean HandlePropertyChange(GtkWidget *widget,
-                                       GdkEventProperty *event,
+  static gboolean HandlePropertyChange(GtkWidget *aWidget,
+                                       GdkEventProperty *pevent,
                                        nsIWeakReference* aThis);
 private:
   ~nsGTKRemoteService() { }
 
-  void HandleCommandsFor(GtkWidget* aWidget,
+  void HandleCommandsFor(GtkWidget* widget,
                          nsIWeakReference* aWindow);
 
   nsInterfaceHashtable<nsPtrHashKey<GtkWidget>, nsIWeakReference> mWindows;

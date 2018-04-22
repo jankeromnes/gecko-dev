@@ -787,7 +787,7 @@ public:
      * @stable ICU 51
      */
     virtual DecimalFormat& setAttribute( UNumberFormatAttribute attr,
-                                       int32_t newvalue,
+                                       int32_t newValue,
                                        UErrorCode &status);
 
     /**
@@ -818,7 +818,7 @@ public:
      * @see isParseIntegerOnly
      * @stable ICU 53
      */
-    virtual void setParseIntegerOnly(UBool value);
+    virtual void setParseIntegerOnly(UBool newValue);
 
     /**
      * Set a particular UDisplayContext value in the formatter, such as
@@ -855,7 +855,7 @@ public:
      */
     DecimalFormat(  const UnicodeString& pattern,
                     DecimalFormatSymbols* symbolsToAdopt,
-                    UParseError& parseError,
+                    UParseError& parseErr,
                     UErrorCode& status);
     /**
      * Create a DecimalFormat from the given pattern and symbols.
@@ -920,7 +920,7 @@ public:
      * @return         true if the given Format objects are semantically equal.
      * @stable ICU 2.0
      */
-    virtual UBool operator==(const Format& other) const;
+    virtual UBool operator==(const Format& that) const;
 
 
     using NumberFormat::format;
@@ -938,7 +938,7 @@ public:
      */
     virtual UnicodeString& format(double number,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos) const;
+                                  FieldPosition& fieldPosition) const;
 
 
     /**
@@ -955,7 +955,7 @@ public:
      */
     virtual UnicodeString& format(double number,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos,
+                                  FieldPosition& fieldPosition,
                                   UErrorCode &status) const;
 
     /**
@@ -989,7 +989,7 @@ public:
      */
     virtual UnicodeString& format(int32_t number,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos) const;
+                                  FieldPosition& fieldPosition) const;
 
     /**
      * Format a long number using base-10 representation.
@@ -1004,7 +1004,7 @@ public:
      */
     virtual UnicodeString& format(int32_t number,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos,
+                                  FieldPosition& fieldPosition,
                                   UErrorCode &status) const;
 
     /**
@@ -1038,7 +1038,7 @@ public:
      */
     virtual UnicodeString& format(int64_t number,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos) const;
+                                  FieldPosition& fieldPosition) const;
 
     /**
      * Format an int64 number using base-10 representation.
@@ -1053,7 +1053,7 @@ public:
      */
     virtual UnicodeString& format(int64_t number,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos,
+                                  FieldPosition& fieldPosition,
                                   UErrorCode &status) const;
 
     /**
@@ -1091,7 +1091,7 @@ public:
      * @stable ICU 4.4
      */
     virtual UnicodeString& format(StringPiece number,
-                                  UnicodeString& appendTo,
+                                  UnicodeString& toAppendTo,
                                   FieldPositionIterator* posIter,
                                   UErrorCode& status) const;
 
@@ -1976,7 +1976,7 @@ public:
      * @param currencyContext new currency context object to use.
      * @stable ICU 54
      */
-    void setCurrencyUsage(UCurrencyUsage newUsage, UErrorCode* ec);
+    void setCurrencyUsage(UCurrencyUsage newContext, UErrorCode* ec);
 
     /**
      * Returns the <tt>Currency Context</tt> object used to display currency
@@ -2106,7 +2106,7 @@ private:
 
     void parse(const UnicodeString& text,
                Formattable& result,
-               ParsePosition& pos,
+               ParsePosition& parsePosition,
                char16_t* currency) const;
 
     enum {
@@ -2138,7 +2138,7 @@ private:
 
     int32_t skipPadding(const UnicodeString& text, int32_t position) const;
 
-    int32_t compareAffix(const UnicodeString& input,
+    int32_t compareAffix(const UnicodeString& text,
                          int32_t pos,
                          UBool isNegative,
                          UBool isPrefix,
@@ -2165,7 +2165,7 @@ private:
     static int32_t skipBidiMarks(const UnicodeString& text, int32_t pos);
 
     int32_t compareComplexAffix(const UnicodeString& affixPat,
-                                const UnicodeString& input,
+                                const UnicodeString& text,
                                 int32_t pos,
                                 int8_t type,
                                 char16_t* currency) const;

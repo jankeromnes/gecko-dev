@@ -59,7 +59,7 @@ Result DigestBufNSS(Input item,
                     /*out*/ uint8_t* digestBuf,
                     size_t digestBufLen);
 
-Result MapPRErrorCodeToResult(PRErrorCode errorCode);
+Result MapPRErrorCodeToResult(PRErrorCode error);
 PRErrorCode MapResultToPRErrorCode(Result result);
 
 // The error codes within each module must fit in 16 bits. We want these

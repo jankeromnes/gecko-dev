@@ -63,7 +63,7 @@ int nr_p_buf_ctx_create(int size,nr_p_buf_ctx **ctxp);
 int nr_p_buf_ctx_destroy(nr_p_buf_ctx **ctxp);
 int nr_p_buf_alloc(nr_p_buf_ctx *ctx,nr_p_buf **bufp);
 int nr_p_buf_free(nr_p_buf_ctx *ctx,nr_p_buf *buf);
-int nr_p_buf_free_chain(nr_p_buf_ctx *ctx,nr_p_buf_head *chain);
+int nr_p_buf_free_chain(nr_p_buf_ctx *ctx,nr_p_buf_head *head);
 int nr_p_buf_write_to_chain(nr_p_buf_ctx *ctx,
                                        nr_p_buf_head *chain,
                                        UCHAR *data,UINT4 len);

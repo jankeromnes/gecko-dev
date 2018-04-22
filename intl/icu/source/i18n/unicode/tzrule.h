@@ -278,7 +278,7 @@ public:
      * @return  true if the other <code>TimeZoneRule</code> is equivalent to this one.
      * @stable ICU 3.8
      */
-    virtual UBool isEquivalentTo(const TimeZoneRule& that) const;
+    virtual UBool isEquivalentTo(const TimeZoneRule& other) const;
 
     /**
      * Gets the very first time when this rule takes effect.
@@ -513,7 +513,7 @@ public:
      * @return  true if the other <code>TimeZoneRule</code> is equivalent to this one.
      * @stable ICU 3.8
      */
-    virtual UBool isEquivalentTo(const TimeZoneRule& that) const;
+    virtual UBool isEquivalentTo(const TimeZoneRule& other) const;
 
     /**
      * Gets the very first time when this rule takes effect.
@@ -719,7 +719,7 @@ public:
      * @return  true if the other <code>TimeZoneRule</code> is equivalent to this one.
      * @stable ICU 3.8
      */
-    virtual UBool isEquivalentTo(const TimeZoneRule& that) const;
+    virtual UBool isEquivalentTo(const TimeZoneRule& other) const;
 
     /**
      * Gets the very first time when this rule takes effect.
@@ -784,7 +784,7 @@ public:
 
 private:
     enum { TIMEARRAY_STACK_BUFFER_SIZE = 32 };
-    UBool initStartTimes(const UDate source[], int32_t size, UErrorCode& ec);
+    UBool initStartTimes(const UDate source[], int32_t size, UErrorCode& status);
     UDate getUTC(UDate time, int32_t raw, int32_t dst) const;
 
     DateTimeRule::TimeRuleType  fTimeRuleType;

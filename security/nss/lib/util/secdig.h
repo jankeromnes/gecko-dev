@@ -40,12 +40,12 @@ SEC_ASN1_CHOOSER_DECLARE(sgn_DigestInfoTemplate)
 */
 extern SGNDigestInfo *SGN_CreateDigestInfo(SECOidTag algorithm,
                                            const unsigned char *sig,
-                                           unsigned int sigLen);
+                                           unsigned int len);
 
 /*
 ** Destroy a digest-info object
 */
-extern void SGN_DestroyDigestInfo(SGNDigestInfo *info);
+extern void SGN_DestroyDigestInfo(SGNDigestInfo *di);
 
 /*
 ** Encode a digest-info object

@@ -114,7 +114,7 @@ int nr_socket_listen(nr_socket *sock, int backlog);
 int nr_socket_accept(nr_socket *sock, nr_transport_addr *addrp, nr_socket **sockp);
 
 int nr_socket_factory_create_int(void *obj, nr_socket_factory_vtbl *vtbl, nr_socket_factory **factorypp);
-int nr_socket_factory_destroy(nr_socket_factory **factoryp);
+int nr_socket_factory_destroy(nr_socket_factory **factorypp);
 int nr_socket_factory_create_socket(nr_socket_factory *factory, nr_transport_addr *addr, nr_socket **sockp);
 
 #endif

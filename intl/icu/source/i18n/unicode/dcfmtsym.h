@@ -179,7 +179,7 @@ public:
      *                  failure code upon return.
      * @stable ICU 2.0
      */
-    DecimalFormatSymbols(const Locale& locale, UErrorCode& status);
+    DecimalFormatSymbols(const Locale& loc, UErrorCode& status);
 
 #ifndef U_HIDE_DRAFT_API
     /**
@@ -198,7 +198,7 @@ public:
      *                  failure code upon return.
      * @draft ICU 60
      */
-    DecimalFormatSymbols(const Locale& locale, const NumberingSystem& ns, UErrorCode& status);
+    DecimalFormatSymbols(const Locale& loc, const NumberingSystem& ns, UErrorCode& status);
 #endif  /* U_HIDE_DRAFT_API */
 
     /**
@@ -255,7 +255,7 @@ public:
      * @return         true if another object is semantically equal to this one.
      * @stable ICU 2.0
      */
-    UBool operator==(const DecimalFormatSymbols& other) const;
+    UBool operator==(const DecimalFormatSymbols& that) const;
 
     /**
      * Return true if another object is semantically unequal to this one.
@@ -366,7 +366,7 @@ private:
      * @param ns                   The NumberingSystem to use; otherwise, fall
      *                             back to the locale.
      */
-    void initialize(const Locale& locale, UErrorCode& success,
+    void initialize(const Locale& loc, UErrorCode& status,
         UBool useLastResortData = FALSE, const NumberingSystem* ns = nullptr);
 
     /**

@@ -26,7 +26,7 @@ NSPR_API(PRSemaphore*) PR_NewSem(PRUintn value);
 ** Destroy the given semaphore object.
 **
 */
-NSPR_API(void) PR_DestroySem(PRSemaphore *sem);
+NSPR_API(void) PR_DestroySem(PRSemaphore *semaphore);
 
 /*
 ** Wait on a Semaphore.
@@ -42,14 +42,14 @@ NSPR_API(void) PR_DestroySem(PRSemaphore *sem);
 ** This routine can return PR_PENDING_INTERRUPT if the waiting thread 
 ** has been interrupted.
 */
-NSPR_API(PRStatus) PR_WaitSem(PRSemaphore *sem);
+NSPR_API(PRStatus) PR_WaitSem(PRSemaphore *semaphore);
 
 /*
 ** This routine increments the counter value of the semaphore. If other threads 
 ** are blocked for the semaphore, then the scheduler will determine which ONE 
 ** thread will be unblocked.
 */
-NSPR_API(void) PR_PostSem(PRSemaphore *sem);
+NSPR_API(void) PR_PostSem(PRSemaphore *semaphore);
 
 /*
 ** Returns the value of the semaphore referenced by sem without affecting

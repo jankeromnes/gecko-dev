@@ -75,7 +75,7 @@ class U_COMMON_API LocaleBased : public UMemory {
      * @param valid the ID of the valid locale
      * @param actual the ID of the actual locale
      */
-    void setLocaleIDs(const char* valid, const char* actual);
+    void setLocaleIDs(const char* validID, const char* actualID);
 
     /**
      * Set the locale meta-data for the service object wrapped by this
@@ -83,7 +83,7 @@ class U_COMMON_API LocaleBased : public UMemory {
      * @param valid the ID of the valid locale
      * @param actual the ID of the actual locale
      */
-    void setLocaleIDs(const Locale& valid, const Locale& actual);
+    void setLocaleIDs(const Locale& validID, const Locale& actualID);
 
  private:
 

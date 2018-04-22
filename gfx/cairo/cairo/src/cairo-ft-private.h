@@ -53,7 +53,7 @@ _cairo_scaled_font_is_ft (cairo_scaled_font_t *scaled_font);
  * the different fonts-on-disk used by a document, so it can embed them
  */
 cairo_private cairo_unscaled_font_t *
-_cairo_ft_scaled_font_get_unscaled_font (cairo_scaled_font_t *scaled_font);
+_cairo_ft_scaled_font_get_unscaled_font (cairo_scaled_font_t *abstract_font);
 
 cairo_private FT_Face
 _cairo_ft_unscaled_font_lock_face (cairo_ft_unscaled_font_t *unscaled);

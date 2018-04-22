@@ -88,7 +88,7 @@ class ArrayObject;
  * |result| receives an error code if the change is invalid.
  */
 extern bool
-ArraySetLength(JSContext* cx, Handle<ArrayObject*> obj, HandleId id,
+ArraySetLength(JSContext* cx, Handle<ArrayObject*> arr, HandleId id,
                unsigned attrs, HandleValue value, ObjectOpResult& result);
 
 /*
@@ -223,7 +223,7 @@ class ObjectElements
     friend bool js::SetIntegrityLevel(JSContext* cx, HandleObject obj, IntegrityLevel level);
 
     friend bool
-    ArraySetLength(JSContext* cx, Handle<ArrayObject*> obj, HandleId id,
+    ArraySetLength(JSContext* cx, Handle<ArrayObject*> arr, HandleId id,
                    unsigned attrs, HandleValue value, ObjectOpResult& result);
 
     // The NumShiftedElementsBits high bits of this are used to store the

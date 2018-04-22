@@ -30,10 +30,10 @@ public:
 private:
     void addTransferFn(const SkColorSpaceTransferFn& fn, int channelIndex);
 
-    bool buildTableFn(SkTableTransferFn* table);
-    void addTableFn(const SkTableTransferFn& table, int channelIndex);
+    bool buildTableFn(SkTableTransferFn* fn);
+    void addTableFn(const SkTableTransferFn& fn, int channelIndex);
 
-    void addMatrix(const SkMatrix44& matrix);
+    void addMatrix(const SkMatrix44& m44);
 
     SkRasterPipeline fElementsPipeline;
     bool             fLinearDstGamma;

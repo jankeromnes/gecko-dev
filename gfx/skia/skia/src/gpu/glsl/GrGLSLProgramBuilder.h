@@ -144,7 +144,7 @@ private:
     void emitAndInstallPrimProc(const GrPrimitiveProcessor&,
                                 SkString* outputColor,
                                 SkString* outputCoverage);
-    void emitAndInstallFragProcs(SkString* colorInOut, SkString* coverageInOut);
+    void emitAndInstallFragProcs(SkString* color, SkString* coverage);
     SkString emitAndInstallFragProc(const GrFragmentProcessor&,
                                     int index,
                                     int transformedCoordVarsIdx,

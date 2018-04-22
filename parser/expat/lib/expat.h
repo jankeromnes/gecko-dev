@@ -190,7 +190,7 @@ typedef void (XMLCALL *XML_XmlDeclHandler) (void           *userData,
 
 XMLPARSEAPI(void)
 XML_SetXmlDeclHandler(XML_Parser parser,
-                      XML_XmlDeclHandler xmldecl);
+                      XML_XmlDeclHandler handler);
 
 
 typedef struct {
@@ -230,9 +230,9 @@ XML_ParserCreateNS(const XML_Char *encoding, XML_Char namespaceSeparator);
    the given suite.
 */
 XMLPARSEAPI(XML_Parser)
-XML_ParserCreate_MM(const XML_Char *encoding,
+XML_ParserCreate_MM(const XML_Char *encodingName,
                     const XML_Memory_Handling_Suite *memsuite,
-                    const XML_Char *namespaceSeparator);
+                    const XML_Char *nameSep);
 
 /* Prepare a parser object to be re-used.  This is particularly
    valuable when memory allocation overhead is disproportionatly high,
@@ -668,7 +668,7 @@ XML_SetReturnNSTriplet(XML_Parser parser, int do_nst);
 
 /* This value is passed as the userData argument to callbacks. */
 XMLPARSEAPI(void)
-XML_SetUserData(XML_Parser parser, void *userData);
+XML_SetUserData(XML_Parser parser, void *p);
 
 /* Returns the last value set by XML_SetUserData or NULL. */
 #define XML_GetUserData(parser) (*(void **)(parser))
@@ -720,7 +720,7 @@ XML_UseForeignDTD(XML_Parser parser, XML_Bool useDTD);
    XML_STATUS_OK otherwise.
 */
 XMLPARSEAPI(enum XML_Status)
-XML_SetBase(XML_Parser parser, const XML_Char *base);
+XML_SetBase(XML_Parser parser, const XML_Char *p);
 
 XMLPARSEAPI(const XML_Char *)
 XML_GetBase(XML_Parser parser);
@@ -846,9 +846,9 @@ XML_GetParsingStatus(XML_Parser parser, XML_ParsingStatus *status);
    Otherwise returns a new XML_Parser object.
 */
 XMLPARSEAPI(XML_Parser)
-XML_ExternalEntityParserCreate(XML_Parser parser,
+XML_ExternalEntityParserCreate(XML_Parser oldParser,
                                const XML_Char *context,
-                               const XML_Char *encoding);
+                               const XML_Char *encodingName);
 
 enum XML_ParamEntityParsing {
   XML_PARAM_ENTITY_PARSING_NEVER,
@@ -881,7 +881,7 @@ enum XML_ParamEntityParsing {
 */
 XMLPARSEAPI(int)
 XML_SetParamEntityParsing(XML_Parser parser,
-                          enum XML_ParamEntityParsing parsing);
+                          enum XML_ParamEntityParsing peParsing);
 
 /* If XML_Parse or XML_ParseBuffer have returned XML_STATUS_ERROR, then
    XML_GetErrorCode returns information about the error.

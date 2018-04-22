@@ -56,12 +56,12 @@ class U_I18N_API ScriptSet: public UMemory {
     ScriptSet &resetAll();
     int32_t countMembers() const;
     int32_t hashCode() const;
-    int32_t nextSetBit(int32_t script) const;
+    int32_t nextSetBit(int32_t fromIndex) const;
 
     UBool isEmpty() const;
 
     UnicodeString &displayScripts(UnicodeString &dest) const; // append script names to dest string.
-    ScriptSet & parseScripts(const UnicodeString &scriptsString, UErrorCode &status);  // Replaces ScriptSet contents.
+    ScriptSet & parseScripts(const UnicodeString &scriptString, UErrorCode &status);  // Replaces ScriptSet contents.
 
     // Wraps around UScript::getScriptExtensions() and adds the corresponding scripts to this instance.
     void setScriptExtensions(UChar32 codePoint, UErrorCode& status);
@@ -73,7 +73,7 @@ class U_I18N_API ScriptSet: public UMemory {
 U_NAMESPACE_END
 
 U_CAPI UBool U_EXPORT2
-uhash_compareScriptSet(const UElement key1, const UElement key2);
+uhash_compareScriptSet(const UElement key0, const UElement key1);
 
 U_CAPI int32_t U_EXPORT2
 uhash_hashScriptSet(const UElement key);

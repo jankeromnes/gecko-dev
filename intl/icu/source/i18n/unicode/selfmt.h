@@ -193,7 +193,7 @@ public:
      *                 must not indicate a failure before the function call.
      * @stable ICU 4.4
      */
-    SelectFormat(const UnicodeString& pattern, UErrorCode& status);
+    SelectFormat(const UnicodeString& pat, UErrorCode& status);
 
     /**
      * copy constructor.
@@ -218,7 +218,7 @@ public:
      *                must not indicate a failure before the function call.
      * @stable ICU 4.4
      */
-    void applyPattern(const UnicodeString& pattern, UErrorCode& status);
+    void applyPattern(const UnicodeString& newPattern, UErrorCode& status);
 
 
     using Format::format;
@@ -328,7 +328,7 @@ public:
      */
     virtual void parseObject(const UnicodeString& source,
                             Formattable& result,
-                            ParsePosition& parse_pos) const;
+                            ParsePosition& pos) const;
 
     /**
      * ICU "poor man's RTTI", returns a UClassID for this class.

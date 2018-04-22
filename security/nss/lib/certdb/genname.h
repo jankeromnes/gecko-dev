@@ -29,7 +29,7 @@ extern SECStatus cert_EncodeNameConstraints(CERTNameConstraints *constraints,
                                             PLArenaPool *arena, SECItem *dest);
 
 extern CERTNameConstraints *cert_DecodeNameConstraints(
-    PLArenaPool *arena, const SECItem *encodedConstraints);
+    PLArenaPool *reqArena, const SECItem *encodedConstraints);
 
 extern CERTGeneralName *cert_CombineNamesLists(CERTGeneralName *list1,
                                                CERTGeneralName *list2);

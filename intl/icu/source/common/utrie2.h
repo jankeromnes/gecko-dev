@@ -577,7 +577,7 @@ utrie2_enumForLeadSurrogate(const UTrie2 *trie, UChar32 lead,
  */
 U_CAPI void U_EXPORT2
 utrie2_set32ForLeadSurrogateCodeUnit(UTrie2 *trie,
-                                     UChar32 lead, uint32_t value,
+                                     UChar32 c, uint32_t value,
                                      UErrorCode *pErrorCode);
 
 /**

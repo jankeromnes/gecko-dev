@@ -65,7 +65,7 @@ NSS_EXTERN CERTCertificate *
 STAN_GetCERTCertificateOrRelease(NSSCertificate *c);
 
 NSS_EXTERN NSSCertificate *
-STAN_GetNSSCertificate(CERTCertificate *c);
+STAN_GetNSSCertificate(CERTCertificate *cc);
 
 NSS_EXTERN CERTCertTrust *
 nssTrust_GetCERTCertTrustForCert(NSSCertificate *c, CERTCertificate *cc);

@@ -46,7 +46,7 @@ class RemoteBitrateEstimatorSingleStream : public RemoteBitrateEstimator {
   typedef std::map<uint32_t, Detector*> SsrcOveruseEstimatorMap;
 
   // Triggers a new estimate calculation.
-  void UpdateEstimate(int64_t time_now)
+  void UpdateEstimate(int64_t now_ms)
       EXCLUSIVE_LOCKS_REQUIRED(crit_sect_.get());
 
   void GetSsrcs(std::vector<uint32_t>* ssrcs) const

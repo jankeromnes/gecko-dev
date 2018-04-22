@@ -39,7 +39,7 @@ class Normalizer2Impl;
 
 class U_I18N_API CollationBuilder : public CollationRuleParser::Sink {
 public:
-    CollationBuilder(const CollationTailoring *base, UErrorCode &errorCode);
+    CollationBuilder(const CollationTailoring *b, UErrorCode &errorCode);
     virtual ~CollationBuilder();
 
     void disableFastLatin() { fastLatinEnabled = FALSE; }
@@ -57,7 +57,7 @@ private:
 
     /** Implements CollationRuleParser::Sink. */
     virtual void addReset(int32_t strength, const UnicodeString &str,
-                          const char *&errorReason, UErrorCode &errorCode);
+                          const char *&parserErrorReason, UErrorCode &errorCode);
     /**
      * Returns the secondary or tertiary weight preceding the current node's weight.
      * node=nodes[index].
@@ -70,7 +70,7 @@ private:
     /** Implements CollationRuleParser::Sink. */
     virtual void addRelation(int32_t strength, const UnicodeString &prefix,
                              const UnicodeString &str, const UnicodeString &extension,
-                             const char *&errorReason, UErrorCode &errorCode);
+                             const char *&parserErrorReason, UErrorCode &errorCode);
 
     /**
      * Picks one of the current CEs and finds or inserts a node in the graph

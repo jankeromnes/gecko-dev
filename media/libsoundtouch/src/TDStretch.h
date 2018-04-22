@@ -262,8 +262,8 @@ public:
     class TDStretchSSE : public TDStretch
     {
     protected:
-        double calcCrossCorr(const float *mixingPos, const float *compare, double &norm) const;
-        double calcCrossCorrAccumulate(const float *mixingPos, const float *compare, double &norm) const;
+        double calcCrossCorr(const float *pV1, const float *pV2, double &anorm) const;
+        double calcCrossCorrAccumulate(const float *pV1, const float *pV2, double &norm) const;
     };
 
 #endif /// SOUNDTOUCH_ALLOW_SSE

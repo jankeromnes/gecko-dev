@@ -69,10 +69,10 @@ class TestStunServer {
   int SetInternalPort(nr_local_addr *addr, uint16_t port);
   int Initialize(int address_family);
 
-  static void readable_cb(NR_SOCKET sock, int how, void *cb_arg);
+  static void readable_cb(NR_SOCKET s, int how, void *cb_arg);
 
  private:
-  void Process(const uint8_t *msg, size_t len, nr_transport_addr *addr_in, nr_socket *sock);
+  void Process(const uint8_t *msg, size_t len, nr_transport_addr *addr, nr_socket *sock);
   virtual int TryOpenListenSocket(nr_local_addr *addr, uint16_t port);
   static void process_cb(NR_SOCKET sock, int how, void *cb_arg);
 
@@ -107,7 +107,7 @@ class TestStunTcpServer: public TestStunServer {
 
  protected:
   TestStunTcpServer() {}
-  static void accept_cb(NR_SOCKET sock, int how, void *cb_arg);
+  static void accept_cb(NR_SOCKET s, int how, void *cb_arg);
 
  private:
   virtual int TryOpenListenSocket(nr_local_addr *addr, uint16_t port);

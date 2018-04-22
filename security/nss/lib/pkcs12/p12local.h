@@ -28,7 +28,7 @@ extern SECItem *sec_pkcs12_generate_mac(SECItem *key, SECItem *msg,
                                         PRBool old_method);
 extern SGNDigestInfo *sec_pkcs12_compute_thumbprint(SECItem *der_cert);
 extern SECItem *sec_pkcs12_create_virtual_password(SECItem *password,
-                                                   SECItem *salt, PRBool swapUnicodeBytes);
+                                                   SECItem *salt, PRBool swap);
 extern SECStatus sec_pkcs12_append_shrouded_key(SEC_PKCS12BaggageItem *bag,
                                                 SEC_PKCS12ESPVKItem *espvk);
 extern void *sec_pkcs12_find_object(SEC_PKCS12SafeContents *safe,

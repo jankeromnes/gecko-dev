@@ -123,7 +123,7 @@ mp_err s_mp_norm(mp_int *a, mp_int *b, mp_digit *pd);
 /* normalize for division  */
 mp_err s_mp_add_d(mp_int *mp, mp_digit d); /* unsigned digit addition */
 mp_err s_mp_sub_d(mp_int *mp, mp_digit d); /* unsigned digit subtract */
-mp_err s_mp_mul_d(mp_int *mp, mp_digit d); /* unsigned digit multiply */
+mp_err s_mp_mul_d(mp_int *a, mp_digit d); /* unsigned digit multiply */
 mp_err s_mp_div_d(mp_int *mp, mp_digit d, mp_digit *r);
 /* unsigned digit divide   */
 mp_err s_mp_reduce(mp_int *x, const mp_int *m, const mp_int *mu);
@@ -204,12 +204,12 @@ void MPI_ASM_DECL s_mpv_mul_d_add(const mp_digit *a, mp_size a_len,
 void MPI_ASM_DECL s_mpv_mul_d_add_prop(const mp_digit *a,
                                        mp_size a_len, mp_digit b,
                                        mp_digit *c);
-void MPI_ASM_DECL s_mpv_sqr_add_prop(const mp_digit *a,
+void MPI_ASM_DECL s_mpv_sqr_add_prop(const mp_digit *pa,
                                      mp_size a_len,
-                                     mp_digit *sqrs);
+                                     mp_digit *ps);
 
 mp_err MPI_ASM_DECL s_mpv_div_2dx1d(mp_digit Nhi, mp_digit Nlo,
-                                    mp_digit divisor, mp_digit *quot, mp_digit *rem);
+                                    mp_digit divisor, mp_digit *qp, mp_digit *rp);
 
 /* c += a * b * (MP_RADIX ** offset);  */
 /* Callers of this macro should be aware that the return type might vary;

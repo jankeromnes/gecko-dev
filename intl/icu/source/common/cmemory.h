@@ -55,10 +55,10 @@ U_CAPI void * U_EXPORT2
 uprv_malloc(size_t s) U_MALLOC_ATTR U_ALLOC_SIZE_ATTR(1);
 
 U_CAPI void * U_EXPORT2
-uprv_realloc(void *mem, size_t size) U_ALLOC_SIZE_ATTR(2);
+uprv_realloc(void *buffer, size_t size) U_ALLOC_SIZE_ATTR(2);
 
 U_CAPI void U_EXPORT2
-uprv_free(void *mem);
+uprv_free(void *buffer);
 
 U_CAPI void * U_EXPORT2
 uprv_calloc(size_t num, size_t size) U_MALLOC_ATTR U_ALLOC_SIZE_ATTR2(1,2);

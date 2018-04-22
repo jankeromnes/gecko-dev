@@ -327,7 +327,7 @@ public:
     static const char* OpStr(SkPathOp );
     static void ShowActiveSpans(SkOpContourHead* contourList);
     static void ShowOnePath(const SkPath& path, const char* name, bool includeDeclaration);
-    static void ShowPath(const SkPath& one, const SkPath& two, SkPathOp op, const char* name);
+    static void ShowPath(const SkPath& a, const SkPath& b, SkPathOp shapeOp, const char* testName);
 
     static bool ChaseContains(const SkTDArray<class SkOpSpanBase*>& , const class SkOpSpanBase* );
 

@@ -43,7 +43,7 @@ struct SkBitmapProcInfo {
     SkFilterQuality               fFilterQuality;
     SkMatrix::TypeMask            fInvType;
 
-    bool init(const SkMatrix& inverse, const SkPaint&);
+    bool init(const SkMatrix& inv, const SkPaint&);
 
 private:
     enum {

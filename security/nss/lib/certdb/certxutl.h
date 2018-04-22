@@ -26,7 +26,7 @@ extern PRBool cert_HasCriticalExtension(CERTCertExtension **extensions);
 
 extern SECStatus CERT_FindBitStringExtension(CERTCertExtension **extensions,
                                              int tag, SECItem *retItem);
-extern void *cert_StartExtensions(void *owner, PLArenaPool *arena,
+extern void *cert_StartExtensions(void *owner, PLArenaPool *ownerArena,
                                   void (*setExts)(void *object,
                                                   CERTCertExtension **exts));
 

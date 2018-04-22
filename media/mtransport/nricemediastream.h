@@ -160,24 +160,24 @@ class NrIceMediaStream {
   nsresult GetDefaultCandidate(int component, NrIceCandidate* candidate) const;
 
   // Parse remote attributes
-  nsresult ParseAttributes(std::vector<std::string>& candidates);
+  nsresult ParseAttributes(std::vector<std::string>& attributes);
   bool HasParsedAttributes() const { return has_parsed_attrs_; }
 
   // Parse trickle ICE candidate
   nsresult ParseTrickleCandidate(const std::string& candidate);
 
   // Disable a component
-  nsresult DisableComponent(int component);
+  nsresult DisableComponent(int component_id);
 
   // Get the candidate pair currently active. It's the
   // caller's responsibility to free these.
   nsresult GetActivePair(int component,
-                         UniquePtr<NrIceCandidate>* local,
-                         UniquePtr<NrIceCandidate>* remote);
+                         UniquePtr<NrIceCandidate>* localp,
+                         UniquePtr<NrIceCandidate>* remotep);
 
   // Get the current ICE consent send status plus the timeval of the last
   // consent update time.
-  nsresult GetConsentStatus(int component, bool *can_send, struct timeval *ts);
+  nsresult GetConsentStatus(int component_id, bool *can_send, struct timeval *ts);
 
   // The number of components
   size_t components() const { return components_; }

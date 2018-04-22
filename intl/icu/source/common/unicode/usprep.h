@@ -183,7 +183,7 @@ typedef enum UStringPrepProfileType {
  */
 U_STABLE UStringPrepProfile* U_EXPORT2
 usprep_open(const char* path, 
-            const char* fileName,
+            const char* name,
             UErrorCode* status);
 
 /**
@@ -258,7 +258,7 @@ U_NAMESPACE_END
  */
 
 U_STABLE int32_t U_EXPORT2
-usprep_prepare(   const UStringPrepProfile* prep,
+usprep_prepare(   const UStringPrepProfile* profile,
                   const UChar* src, int32_t srcLength, 
                   UChar* dest, int32_t destCapacity,
                   int32_t options,

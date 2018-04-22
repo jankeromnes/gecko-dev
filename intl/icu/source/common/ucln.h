@@ -86,6 +86,6 @@ U_CAPI void U_EXPORT2 ucln_registerCleanup(ECleanupLibraryType type,
  * Not thread safe.
  * @param type which library to cleanup
  */
-U_CAPI void U_EXPORT2 ucln_cleanupOne(ECleanupLibraryType type);
+U_CAPI void U_EXPORT2 ucln_cleanupOne(ECleanupLibraryType libType);
 
 #endif

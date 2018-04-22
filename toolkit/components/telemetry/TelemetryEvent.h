@@ -22,7 +22,7 @@ namespace Telemetry {
 
 namespace TelemetryEvent {
 
-void InitializeGlobalState(bool canRecordBase, bool canRecordExtended);
+void InitializeGlobalState(bool aCanRecordBase, bool aCanRecordExtended);
 void DeInitializeGlobalState();
 
 void SetCanRecordBase(bool b);
@@ -31,14 +31,14 @@ void SetCanRecordExtended(bool b);
 // JS API Endpoints.
 nsresult RecordEvent(const nsACString& aCategory, const nsACString& aMethod,
                      const nsACString& aObject, JS::HandleValue aValue,
-                     JS::HandleValue aExtra, JSContext* aCx,
+                     JS::HandleValue aExtra, JSContext* cx,
                      uint8_t optional_argc);
 
-void SetEventRecordingEnabled(const nsACString& aCategory, bool aEnabled);
+void SetEventRecordingEnabled(const nsACString& category, bool enabled);
 nsresult RegisterEvents(const nsACString& aCategory, JS::Handle<JS::Value> aEventData,
                         JSContext* cx);
 
-nsresult CreateSnapshots(uint32_t aDataset, bool aClear, JSContext* aCx,
+nsresult CreateSnapshots(uint32_t aDataset, bool aClear, JSContext* cx,
                          uint8_t optional_argc, JS::MutableHandleValue aResult);
 
 // Record events from child processes.

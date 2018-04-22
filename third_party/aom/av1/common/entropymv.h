@@ -26,7 +26,7 @@ struct AV1Common;
 
 void av1_init_mv_probs(struct AV1Common *cm);
 
-void av1_adapt_mv_probs(struct AV1Common *cm, int usehp);
+void av1_adapt_mv_probs(struct AV1Common *cm, int allow_hp);
 
 #define MV_UPDATE_PROB 252
 
@@ -144,7 +144,7 @@ typedef enum {
   MV_SUBPEL_HIGH_PRECISION,
 } MvSubpelPrecision;
 
-void av1_inc_mv(const MV *mv, nmv_context_counts *mvctx,
+void av1_inc_mv(const MV *mv, nmv_context_counts *counts,
                 MvSubpelPrecision precision);
 
 #ifdef __cplusplus

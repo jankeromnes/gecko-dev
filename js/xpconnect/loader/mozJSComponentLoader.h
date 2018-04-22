@@ -62,16 +62,16 @@ class mozJSComponentLoader final : public mozilla::ModuleLoader,
 
     static mozJSComponentLoader* Get() { return sSelf; }
 
-    nsresult ImportInto(const nsACString& aResourceURI, JS::HandleValue aTargetObj,
-                        JSContext* aCx, uint8_t aArgc, JS::MutableHandleValue aRetval);
+    nsresult ImportInto(const nsACString& registryLocation, JS::HandleValue targetValArg,
+                        JSContext* cx, uint8_t optionalArgc, JS::MutableHandleValue retval);
 
-    nsresult Import(JSContext* aCx, const nsACString& aResourceURI,
+    nsresult Import(JSContext* aCx, const nsACString& aLocation,
                     JS::MutableHandleObject aModuleGlobal,
                     JS::MutableHandleObject aModuleExports,
                     bool aIgnoreExports = false);
 
-    nsresult Unload(const nsACString& aResourceURI);
-    nsresult IsModuleLoaded(const nsACString& aResourceURI, bool* aRetval);
+    nsresult Unload(const nsACString& aLocation);
+    nsresult IsModuleLoaded(const nsACString& aLocation, bool* retval);
     bool IsLoaderGlobal(JSObject* aObj) {
         return mLoaderGlobal == aObj;
     }
@@ -108,13 +108,13 @@ class mozJSComponentLoader final : public mozilla::ModuleLoader,
                             const nsACString& aLocation,
                             JS::MutableHandleObject aGlobal);
 
-    bool ReuseGlobal(nsIURI* aComponent);
+    bool ReuseGlobal(nsIURI* aURI);
 
     JSObject* GetSharedGlobal(JSContext* aCx);
 
     JSObject* PrepareObjectForLocation(JSContext* aCx,
                                        nsIFile* aComponentFile,
-                                       nsIURI* aComponent,
+                                       nsIURI* aURI,
                                        bool* aReuseGlobal,
                                        bool* aRealFile);
 
@@ -122,13 +122,13 @@ class mozJSComponentLoader final : public mozilla::ModuleLoader,
                                nsIFile* aComponentFile,
                                JS::MutableHandleObject aObject,
                                JS::MutableHandleScript aTableScript,
-                               char** location,
-                               bool aCatchException,
+                               char** aLocation,
+                               bool aPropagateExceptions,
                                JS::MutableHandleValue aException);
 
     nsresult ImportInto(const nsACString& aLocation,
                         JS::HandleObject targetObj,
-                        JSContext* callercx,
+                        JSContext* cx,
                         JS::MutableHandleObject vp);
 
     nsCOMPtr<nsIComponentManager> mCompMgr;

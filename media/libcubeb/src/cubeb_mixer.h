@@ -28,7 +28,7 @@ int cubeb_mixer_mix(cubeb_mixer * mixer,
                     void * output_buffer,
                     size_t output_buffer_size);
 
-unsigned int cubeb_channel_layout_nb_channels(cubeb_channel_layout channel_layout);
+unsigned int cubeb_channel_layout_nb_channels(cubeb_channel_layout x);
 
 #if defined(__cplusplus)
 }

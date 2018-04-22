@@ -211,10 +211,10 @@ enum {
  * @deprecated ICU 56 Use unorm2.h instead.
  */
 U_DEPRECATED int32_t U_EXPORT2
-unorm_normalize(const UChar *source, int32_t sourceLength,
+unorm_normalize(const UChar *src, int32_t srcLength,
                 UNormalizationMode mode, int32_t options,
-                UChar *result, int32_t resultLength,
-                UErrorCode *status);
+                UChar *dest, int32_t destCapacity,
+                UErrorCode *pErrorCode);
 
 /**
  * Performing quick check on a string, to quickly determine if the string is
@@ -237,9 +237,9 @@ unorm_normalize(const UChar *source, int32_t sourceLength,
  * @deprecated ICU 56 Use unorm2.h instead.
  */
 U_DEPRECATED UNormalizationCheckResult U_EXPORT2
-unorm_quickCheck(const UChar *source, int32_t sourcelength,
+unorm_quickCheck(const UChar *src, int32_t srcLength,
                  UNormalizationMode mode,
-                 UErrorCode *status);
+                 UErrorCode *pErrorCode);
 
 /**
  * Performing quick check on a string; same as unorm_quickCheck but

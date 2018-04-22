@@ -2124,13 +2124,13 @@ using namespace mozilla;
 // Bridge to the nr_socket interface
 static int nr_socket_local_destroy(void **objp);
 static int nr_socket_local_sendto(void *obj,const void *msg, size_t len,
-                                  int flags, nr_transport_addr *to);
+                                  int flags, nr_transport_addr *addr);
 static int nr_socket_local_recvfrom(void *obj,void * restrict buf,
-  size_t maxlen, size_t *len, int flags, nr_transport_addr *from);
+  size_t maxlen, size_t *len, int flags, nr_transport_addr *addr);
 static int nr_socket_local_getfd(void *obj, NR_SOCKET *fd);
 static int nr_socket_local_getaddr(void *obj, nr_transport_addr *addrp);
 static int nr_socket_local_close(void *obj);
-static int nr_socket_local_connect(void *sock, nr_transport_addr *addr);
+static int nr_socket_local_connect(void *obj, nr_transport_addr *addr);
 static int nr_socket_local_write(void *obj,const void *msg, size_t len,
                                  size_t *written);
 static int nr_socket_local_read(void *obj,void * restrict buf, size_t maxlen,

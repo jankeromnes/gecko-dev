@@ -452,7 +452,7 @@ public:
     UnicodeString& format(Calendar& fromCalendar,
                           Calendar& toCalendar,
                           UnicodeString& appendTo,
-                          FieldPosition& fieldPosition,
+                          FieldPosition& pos,
                           UErrorCode& status) const ;
 
     /**
@@ -501,7 +501,7 @@ public:
      * @param status          output param set to success/failure code on exit
      * @stable ICU 4.0
      */
-    void setDateIntervalInfo(const DateIntervalInfo& newIntervalPatterns,
+    void setDateIntervalInfo(const DateIntervalInfo& newItvPattern,
                              UErrorCode& status);
 
 
@@ -531,7 +531,7 @@ public:
      * @param zoneToAdopt the TimeZone to be adopted.
      * @stable ICU 4.8
      */
-    virtual void adoptTimeZone(TimeZone* zoneToAdopt);
+    virtual void adoptTimeZone(TimeZone* zone);
 
     /**
      * Sets the time zone for the calendar used by this DateIntervalFormat object.
@@ -794,10 +794,10 @@ private:
      *
      */
     static void  U_EXPORT2 getDateTimeSkeleton(const UnicodeString& skeleton,
-                                    UnicodeString& date,
-                                    UnicodeString& normalizedDate,
-                                    UnicodeString& time,
-                                    UnicodeString& normalizedTime);
+                                    UnicodeString& dateSkeleton,
+                                    UnicodeString& normalizedDateSkeleton,
+                                    UnicodeString& timeSkeleton,
+                                    UnicodeString& normalizedTimeSkeleton);
 
 
 
@@ -891,9 +891,9 @@ private:
     static void U_EXPORT2 adjustFieldWidth(
                             const UnicodeString& inputSkeleton,
                             const UnicodeString& bestMatchSkeleton,
-                            const UnicodeString& bestMatchIntervalPattern,
+                            const UnicodeString& bestIntervalPattern,
                             int8_t differenceInfo,
-                            UnicodeString& adjustedIntervalPattern);
+                            UnicodeString& adjustedPtn);
 
     /**
      * Concat a single date pattern with a time interval pattern,
@@ -991,7 +991,7 @@ private:
     UnicodeString& formatImpl(Calendar& fromCalendar,
                               Calendar& toCalendar,
                               UnicodeString& appendTo,
-                              FieldPosition& fieldPosition,
+                              FieldPosition& pos,
                               UErrorCode& status) const ;
 
 

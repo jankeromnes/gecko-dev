@@ -79,7 +79,7 @@ public:
      * @param range the acceptable range of digit counts.
      */
     static UnicodeString &format(
-            int32_t positiveValue,
+            int32_t smallPositiveValue,
             const IntDigitCountRange &range,
             UnicodeString &appendTo);
     

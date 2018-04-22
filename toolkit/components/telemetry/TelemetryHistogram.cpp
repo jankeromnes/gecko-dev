@@ -151,15 +151,15 @@ class KeyedHistogram {
 public:
   KeyedHistogram(HistogramID id, const HistogramInfo& info);
   ~KeyedHistogram();
-  nsresult GetHistogram(const nsCString& name, Histogram** histogram, bool subsession);
-  Histogram* GetHistogram(const nsCString& name, bool subsession);
+  nsresult GetHistogram(const nsCString& key, Histogram** histogram, bool subsession);
+  Histogram* GetHistogram(const nsCString& key, bool subsession);
   uint32_t GetHistogramType() const { return mHistogramInfo.histogramType; }
   nsresult GetJSKeys(JSContext* cx, JS::CallArgs& args);
   nsresult GetJSSnapshot(JSContext* cx, JS::Handle<JSObject*> obj,
                          bool subsession, bool clearSubsession);
 
-  nsresult Add(const nsCString& key, uint32_t aSample, ProcessID aProcessType);
-  void Clear(bool subsession);
+  nsresult Add(const nsCString& key, uint32_t sample, ProcessID aProcessType);
+  void Clear(bool onlySubsession);
 
   HistogramID GetHistogramID() const { return mId; }
 
@@ -311,7 +311,7 @@ void internal_SetKeyedHistogramInStorage(HistogramID aHistogramId,
 
 // Factory function for histogram instances.
 Histogram*
-internal_CreateHistogramInstance(const HistogramInfo& info, int bucketsOffset);
+internal_CreateHistogramInstance(const HistogramInfo& passedInfo, int bucketsOffset);
 
 bool
 internal_IsHistogramEnumId(HistogramID aID)

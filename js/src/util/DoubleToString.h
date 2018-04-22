@@ -87,7 +87,7 @@ typedef enum JSDToStrMode {
  */
 char*
 js_dtostr(DtoaState* state, char* buffer, size_t bufferSize, JSDToStrMode mode, int precision,
-          double dval);
+          double dinput);
 
 /*
  * DO NOT USE THIS FUNCTION IF YOU CAN AVOID IT.  js::NumberToCString() is a
@@ -108,6 +108,6 @@ js_dtostr(DtoaState* state, char* buffer, size_t bufferSize, JSDToStrMode mode, 
  * released via js_free().
  */
 char*
-js_dtobasestr(DtoaState* state, int base, double d);
+js_dtobasestr(DtoaState* state, int base, double dinput);
 
 #endif /* util_DoubleToString_h */

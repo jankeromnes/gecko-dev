@@ -344,7 +344,7 @@ u_parseMessageWithError(const char  *locale,
                         int32_t     patternLength,
                         const UChar *source,
                         int32_t     sourceLength,
-                        UParseError *parseError,
+                        UParseError *error,
                         UErrorCode  *status,
                         ...);
 
@@ -373,7 +373,7 @@ u_vparseMessageWithError(const char  *locale,
                          const UChar *source,
                          int32_t     sourceLength,
                          va_list     ap,
-                         UParseError *parseError,
+                         UParseError *error,
                          UErrorCode* status);
 
 /*----------------------- New experimental API --------------------------- */

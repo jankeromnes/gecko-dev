@@ -209,7 +209,7 @@ class TParseContext : angle::NonCopyable
                          TIntermNode *cond,
                          TIntermTyped *expr,
                          TIntermNode *body,
-                         const TSourceLoc &loc);
+                         const TSourceLoc &line);
 
     // For "if" test nodes. There are three children: a condition, a true path, and a false path.
     // The two paths are in TIntermNodePair code.
@@ -369,7 +369,7 @@ class TParseContext : angle::NonCopyable
     void parseMaxVertices(int intValue,
                           const TSourceLoc &intValueLine,
                           const std::string &intValueString,
-                          int *numMaxVertices);
+                          int *maxVertices);
     TLayoutQualifier parseLayoutQualifier(const ImmutableString &qualifierType,
                                           const TSourceLoc &qualifierTypeLine);
     TLayoutQualifier parseLayoutQualifier(const ImmutableString &qualifierType,
@@ -433,7 +433,7 @@ class TParseContext : angle::NonCopyable
     TIntermTyped *addTernarySelection(TIntermTyped *cond,
                                       TIntermTyped *trueExpression,
                                       TIntermTyped *falseExpression,
-                                      const TSourceLoc &line);
+                                      const TSourceLoc &loc);
 
     int getGeometryShaderMaxVertices() const { return mGeometryShaderMaxVertices; }
     int getGeometryShaderInvocations() const
@@ -569,7 +569,7 @@ class TParseContext : angle::NonCopyable
                                                               const TSourceLoc &location,
                                                               bool insertParametersToSymbolTable);
 
-    void setAtomicCounterBindingDefaultOffset(const TPublicType &declaration,
+    void setAtomicCounterBindingDefaultOffset(const TPublicType &publicType,
                                               const TSourceLoc &location);
 
     bool checkPrimitiveTypeMatchesTypeQualifier(const TTypeQualifier &typeQualifier);

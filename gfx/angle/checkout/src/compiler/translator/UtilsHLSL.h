@@ -97,7 +97,7 @@ const char *TextureTypeSuffix(const TBasicType type,
                               TLayoutImageInternalFormat imageInternalFormat = EiifUnspecified);
 HLSLRWTextureGroup RWTextureGroup(const TBasicType type,
                                   TLayoutImageInternalFormat imageInternalFormat);
-const char *RWTextureString(const HLSLRWTextureGroup textureGroup);
+const char *RWTextureString(const HLSLRWTextureGroup RWTextureGroup);
 const char *RWTextureString(const TBasicType type, TLayoutImageInternalFormat imageInternalFormat);
 const char *RWTextureGroupSuffix(const HLSLRWTextureGroup type);
 const char *RWTextureGroupSuffix(const TBasicType type,

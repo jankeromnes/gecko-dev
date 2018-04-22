@@ -103,7 +103,7 @@ namespace mozilla { namespace pkix {
 //  requiredPolicy:
 //         This is the policy to apply; typically included in EV certificates.
 //         If there is no policy, pass in CertPolicyId::anyPolicy.
-Result BuildCertChain(TrustDomain& trustDomain, Input cert,
+Result BuildCertChain(TrustDomain& trustDomain, Input certDER,
                       Time time, EndEntityOrCA endEntityOrCA,
                       KeyUsage requiredKeyUsageIfPresent,
                       KeyPurposeId requiredEKUIfPresent,
@@ -142,7 +142,7 @@ Result CreateEncodedOCSPRequest(TrustDomain& trustDomain,
 // the response will be considered trustworthy).
 Result VerifyEncodedOCSPResponse(TrustDomain& trustDomain,
                                  const CertID& certID, Time time,
-                                 uint16_t maxLifetimeInDays,
+                                 uint16_t maxOCSPLifetimeInDays,
                                  Input encodedResponse,
                        /* out */ bool& expired,
               /* optional out */ Time* thisUpdate = nullptr,

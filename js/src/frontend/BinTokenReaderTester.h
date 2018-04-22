@@ -98,7 +98,7 @@ class MOZ_STACK_CLASS BinTokenReaderTester
      * @return false If a boolean could not be read. In this case, an error
      * has been raised.
      */
-    MOZ_MUST_USE bool readMaybeBool(Maybe<bool>& out);
+    MOZ_MUST_USE bool readMaybeBool(Maybe<bool>& result);
     MOZ_MUST_USE bool readBool(bool& out);
 
     /**
@@ -111,7 +111,7 @@ class MOZ_STACK_CLASS BinTokenReaderTester
      * @return false If a double could not be read. In this case, an error
      * has been raised.
      */
-    MOZ_MUST_USE bool readMaybeDouble(Maybe<double>& out);
+    MOZ_MUST_USE bool readMaybeDouble(Maybe<double>& result);
     MOZ_MUST_USE bool readDouble(double& out);
 
     /**
@@ -150,7 +150,7 @@ class MOZ_STACK_CLASS BinTokenReaderTester
      *
      * @return out If the header of the list is invalid.
      */
-    MOZ_MUST_USE bool enterList(uint32_t& length, AutoList& guard);
+    MOZ_MUST_USE bool enterList(uint32_t& items, AutoList& guard);
 
     /**
      * Start reading a tagged tuple.
@@ -188,7 +188,7 @@ class MOZ_STACK_CLASS BinTokenReaderTester
      * Return the position of the latest token.
      */
     TokenPos pos();
-    TokenPos pos(size_t startOffset);
+    TokenPos pos(size_t start);
     size_t offset() const;
 
     /**
@@ -296,7 +296,7 @@ class MOZ_STACK_CLASS BinTokenReaderTester
         ~AutoBase();
 
         // Raise an error if we are not in the expected position.
-        MOZ_MUST_USE bool checkPosition(const uint8_t* expectedPosition);
+        MOZ_MUST_USE bool checkPosition(const uint8_t* expectedEnd);
 
         friend BinTokenReaderTester;
         void init();

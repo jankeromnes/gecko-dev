@@ -98,8 +98,8 @@ typedef struct PR_fd_set {
 **************************************************************************
 */
 NSPR_API(PRInt32) PR_Select(
-    PRInt32 num, PR_fd_set *readfds, PR_fd_set *writefds,
-    PR_fd_set *exceptfds, PRIntervalTime timeout);
+    PRInt32 num, PR_fd_set *pr_rd, PR_fd_set *pr_wr,
+    PR_fd_set *pr_ex, PRIntervalTime timeout);
 
 /* 
 ** The following are not thread safe for two threads operating on them at the
@@ -120,12 +120,12 @@ NSPR_API(PRInt32) PR_Select(
 */
 
 NSPR_API(void)        PR_FD_ZERO(PR_fd_set *set);
-NSPR_API(void)        PR_FD_SET(PRFileDesc *fd, PR_fd_set *set);
-NSPR_API(void)        PR_FD_CLR(PRFileDesc *fd, PR_fd_set *set);
-NSPR_API(PRInt32)     PR_FD_ISSET(PRFileDesc *fd, PR_fd_set *set);
-NSPR_API(void)        PR_FD_NSET(PROsfd osfd, PR_fd_set *set);
-NSPR_API(void)        PR_FD_NCLR(PROsfd osfd, PR_fd_set *set);
-NSPR_API(PRInt32)     PR_FD_NISSET(PROsfd osfd, PR_fd_set *set);
+NSPR_API(void)        PR_FD_SET(PRFileDesc *fh, PR_fd_set *set);
+NSPR_API(void)        PR_FD_CLR(PRFileDesc *fh, PR_fd_set *set);
+NSPR_API(PRInt32)     PR_FD_ISSET(PRFileDesc *fh, PR_fd_set *set);
+NSPR_API(void)        PR_FD_NSET(PROsfd fd, PR_fd_set *set);
+NSPR_API(void)        PR_FD_NCLR(PROsfd fd, PR_fd_set *set);
+NSPR_API(PRInt32)     PR_FD_NISSET(PROsfd fd, PR_fd_set *set);
 
 /*
 ** The next two entry points should not be in the API, but they are

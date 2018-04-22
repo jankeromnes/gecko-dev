@@ -246,5 +246,5 @@ mp_err ec_group_set_gf2m233(ECGroup *group, ECCurveName name);
 /* Optimized point multiplication */
 mp_err ec_group_set_gfp256_32(ECGroup *group, ECCurveName name);
 
-SECStatus ec_Curve25519_mul(PRUint8 *q, const PRUint8 *s, const PRUint8 *p);
+SECStatus ec_Curve25519_mul(PRUint8 *mypublic, const PRUint8 *secret, const PRUint8 *basepoint);
 #endif /* __ecl_priv_h_ */

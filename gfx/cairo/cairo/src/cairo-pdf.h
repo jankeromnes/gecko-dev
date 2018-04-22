@@ -70,7 +70,7 @@ cairo_pdf_surface_create_for_stream (cairo_write_func_t	write_func,
 				     double		height_in_points);
 
 cairo_public void
-cairo_pdf_surface_restrict_to_version (cairo_surface_t 		*surface,
+cairo_pdf_surface_restrict_to_version (cairo_surface_t 		*abstract_surface,
 				       cairo_pdf_version_t  	 version);
 
 cairo_public void

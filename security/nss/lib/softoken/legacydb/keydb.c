@@ -65,15 +65,15 @@ free_dbt(DBT *dbt)
     return;
 }
 
-static int keydb_Get(NSSLOWKEYDBHandle *db, DBT *key, DBT *data,
+static int keydb_Get(NSSLOWKEYDBHandle *kdb, DBT *key, DBT *data,
                      unsigned int flags);
-static int keydb_Put(NSSLOWKEYDBHandle *db, DBT *key, DBT *data,
+static int keydb_Put(NSSLOWKEYDBHandle *kdb, DBT *key, DBT *data,
                      unsigned int flags);
-static int keydb_Sync(NSSLOWKEYDBHandle *db, unsigned int flags);
-static int keydb_Del(NSSLOWKEYDBHandle *db, DBT *key, unsigned int flags);
-static int keydb_Seq(NSSLOWKEYDBHandle *db, DBT *key, DBT *data,
+static int keydb_Sync(NSSLOWKEYDBHandle *kdb, unsigned int flags);
+static int keydb_Del(NSSLOWKEYDBHandle *kdb, DBT *key, unsigned int flags);
+static int keydb_Seq(NSSLOWKEYDBHandle *kdb, DBT *key, DBT *data,
                      unsigned int flags);
-static void keydb_Close(NSSLOWKEYDBHandle *db);
+static void keydb_Close(NSSLOWKEYDBHandle *kdb);
 
 /*
  * format of key database entries for version 3 of database:

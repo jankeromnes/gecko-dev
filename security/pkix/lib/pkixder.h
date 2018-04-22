@@ -343,7 +343,7 @@ namespace internal {
 // Only times from 1970-01-01-00:00:00 onward are accepted, in order to
 // eliminate the chance for complications in converting times to traditional
 // time formats that start at 1970.
-Result TimeChoice(Reader& input, uint8_t tag, /*out*/ Time& time);
+Result TimeChoice(Reader& tagged, uint8_t expectedTag, /*out*/ Time& time);
 
 } // namespace internal
 
@@ -558,7 +558,7 @@ public:
 //    signature            BIT STRING,
 //    certs            [0] EXPLICIT SEQUENCE OF Certificate OPTIONAL }
 Result SignedData(Reader& input, /*out*/ Reader& tbs,
-                  /*out*/ SignedDataWithSignature& signedDataWithSignature);
+                  /*out*/ SignedDataWithSignature& signedData);
 
 } } } // namespace mozilla::pkix::der
 

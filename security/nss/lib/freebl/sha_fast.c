@@ -16,7 +16,7 @@
 #include "ssltrace.h"
 #endif
 
-static void shaCompress(volatile SHA_HW_t *X, const PRUint32 *datain);
+static void shaCompress(volatile SHA_HW_t *X, const PRUint32 *inbuf);
 
 #define W u.w
 #define B u.b

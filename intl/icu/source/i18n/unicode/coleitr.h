@@ -154,7 +154,7 @@ public:
     * @return         true if "other" is the same as "this"
     * @stable ICU 2.0
     */
-    UBool operator==(const CollationElementIterator& other) const;
+    UBool operator==(const CollationElementIterator& that) const;
 
     /**
     * Returns true if "other" is not the same as "this".
@@ -238,7 +238,7 @@ public:
     * @param status the error code status.
     * @stable ICU 2.0
     */
-    void setText(const UnicodeString& str, UErrorCode& status);
+    void setText(const UnicodeString& source, UErrorCode& status);
 
     /**
     * Sets the source string.
@@ -246,7 +246,7 @@ public:
     * @param status the error code status.
     * @stable ICU 2.0
     */
-    void setText(CharacterIterator& str, UErrorCode& status);
+    void setText(CharacterIterator& source, UErrorCode& status);
 
     /**
     * Checks if a comparison order is ignorable.
@@ -318,8 +318,8 @@ private:
     * @param order         the collation object.
     * @param status        the error code status.
     */
-    CollationElementIterator(const UnicodeString& sourceText,
-        const RuleBasedCollator* order, UErrorCode& status);
+    CollationElementIterator(const UnicodeString& source,
+        const RuleBasedCollator* coll, UErrorCode& status);
     // Note: The constructors should take settings & tailoring, not a collator,
     // to avoid circular dependencies.
     // However, for operator==() we would need to be able to compare tailoring data for equality
@@ -338,8 +338,8 @@ private:
     * @param order         the collation object.
     * @param status        the error code status.
     */
-    CollationElementIterator(const CharacterIterator& sourceText,
-        const RuleBasedCollator* order, UErrorCode& status);
+    CollationElementIterator(const CharacterIterator& source,
+        const RuleBasedCollator* coll, UErrorCode& status);
 
     /**
     * Assignment operator

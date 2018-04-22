@@ -75,7 +75,7 @@ private:
         Branch fChildren[kMaxChildren];
     };
 
-    void search(Node* root, const SkRect& query, SkTDArray<int>* results) const;
+    void search(Node* node, const SkRect& query, SkTDArray<int>* results) const;
 
     // Consumes the input array.
     Branch bulkLoad(SkTDArray<Branch>* branches, int level = 0);

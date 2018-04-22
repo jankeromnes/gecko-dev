@@ -158,7 +158,7 @@ void setDecimalFormatSymbolsForMonetary(const DecimalFormatSymbols &symbols);
  * @return appendTo
  */
 UnicodeString &format(
-        const VisibleDigits &positiveDigits,
+        const VisibleDigits &digits,
         const DigitGrouping &grouping,
         const DigitFormatterOptions &options,
         FieldPositionHandler &handler,
@@ -173,7 +173,7 @@ UnicodeString &format(
  * @param appendTo formatted value appended here.
  */
 UnicodeString &format(
-        const VisibleDigitsWithExponent &positiveDigits,
+        const VisibleDigitsWithExponent &digits,
         const SciFormatterOptions &options,
         FieldPositionHandler &handler,
         UnicodeString &appendTo) const;

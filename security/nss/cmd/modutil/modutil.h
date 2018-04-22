@@ -24,8 +24,8 @@
 Error LoadMechanismList(void);
 Error FipsMode(char *arg);
 Error ChkFipsMode(char *arg);
-Error AddModule(char *moduleName, char *libFile, char *ciphers,
-                char *mechanisms, char *modparms);
+Error AddModule(char *moduleName, char *libFile, char *cipherString,
+                char *mechanismString, char *modparms);
 Error DeleteModule(char *moduleName);
 Error ListModule(char *moduleName);
 Error ListModules();

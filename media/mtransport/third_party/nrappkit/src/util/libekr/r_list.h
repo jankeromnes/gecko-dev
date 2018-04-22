@@ -93,7 +93,7 @@ typedef struct r_list_iterator_ {
 
 int r_list_create(r_list **listp);
 int r_list_destroy(r_list **listp);
-int r_list_copy(r_list **out,r_list *in);
+int r_list_copy(r_list **outp,r_list *in);
 int r_list_insert(r_list *list,void *value,
   int (*copy)(void **knew,void *old),
   int (*destroy)(void **ptr));

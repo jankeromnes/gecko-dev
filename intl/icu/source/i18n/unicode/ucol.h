@@ -430,7 +430,7 @@ ucol_openRules( const UChar        *rules,
                 UColAttributeValue normalizationMode,
                 UCollationStrength strength,
                 UParseError        *parseError,
-                UErrorCode         *status);
+                UErrorCode         *pErrorCode);
 
 #ifndef U_HIDE_DEPRECATED_API
 /** 
@@ -489,7 +489,7 @@ ucol_openFromShortString( const char *definition,
  */
 U_DEPRECATED int32_t U_EXPORT2
 ucol_getContractions( const UCollator *coll,
-                  USet *conts,
+                  USet *contractions,
                   UErrorCode *status);
 #endif  /* U_HIDE_DEPRECATED_API */
 
@@ -710,7 +710,7 @@ U_STABLE int32_t U_EXPORT2
 ucol_getReorderCodes(const UCollator* coll,
                     int32_t* dest,
                     int32_t destCapacity,
-                    UErrorCode *pErrorCode);
+                    UErrorCode *status);
 /** 
  * Sets the reordering codes for this collator.
  * Collation reordering allows scripts and some other groups of characters
@@ -755,7 +755,7 @@ U_STABLE void U_EXPORT2
 ucol_setReorderCodes(UCollator* coll,
                     const int32_t* reorderCodes,
                     int32_t reorderCodesLength,
-                    UErrorCode *pErrorCode);
+                    UErrorCode *status);
 
 /**
  * Retrieves the reorder codes that are grouped with the given reorder code. Some reorder
@@ -811,7 +811,7 @@ ucol_getDisplayName(    const    char        *objLoc,
  * @stable ICU 2.0
  */
 U_STABLE const char* U_EXPORT2 
-ucol_getAvailable(int32_t localeIndex);
+ucol_getAvailable(int32_t index);
 
 /**
  * Determine how many locales have collation rules available.
@@ -957,7 +957,7 @@ ucol_getRules(    const    UCollator    *coll,
 U_DEPRECATED int32_t U_EXPORT2
 ucol_getShortDefinitionString(const UCollator *coll,
                               const char *locale,
-                              char *buffer,
+                              char *dst,
                               int32_t capacity,
                               UErrorCode *status);
 
@@ -982,7 +982,7 @@ ucol_getShortDefinitionString(const UCollator *coll,
  */
 
 U_DEPRECATED int32_t U_EXPORT2
-ucol_normalizeShortDefinitionString(const char *source,
+ucol_normalizeShortDefinitionString(const char *definition,
                                     char *destination,
                                     int32_t capacity,
                                     UParseError *parseError,
@@ -1125,7 +1125,7 @@ ucol_getBound(const uint8_t       *source,
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-ucol_getVersion(const UCollator* coll, UVersionInfo info);
+ucol_getVersion(const UCollator* coll, UVersionInfo versionInfo);
 
 /**
  * Gets the UCA version information for a Collator. Version is the

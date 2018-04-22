@@ -48,7 +48,7 @@ public:
                type == SkAdvancedTypefaceMetrics::kTrueType_Font;
     }
 
-    static SkAutoGlyphCache MakeVectorCache(SkTypeface*, int* sizeOut);
+    static SkAutoGlyphCache MakeVectorCache(SkTypeface*, int* size);
 
     /** Returns true if this font encoding supports glyph IDs above 255.
      */
@@ -84,7 +84,7 @@ public:
      *  @param glyphID   Specify which section of a large font is of interest.
      */
     static sk_sp<SkPDFFont> GetFontResource(SkPDFCanon* canon,
-                                            SkTypeface* typeface,
+                                            SkTypeface* face,
                                             SkGlyphID glyphID);
 
     /** Gets SkAdvancedTypefaceMetrics, and caches the result.

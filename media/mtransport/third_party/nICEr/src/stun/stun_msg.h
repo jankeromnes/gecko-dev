@@ -193,7 +193,7 @@ int nr_stun_message_add_use_candidate_attribute(nr_stun_message *msg);
 #ifdef USE_TURN
 int nr_stun_message_add_data_attribute(nr_stun_message *msg, UCHAR *data, int length);
 int nr_stun_message_add_lifetime_attribute(nr_stun_message *msg, UINT4 lifetime_secs);
-int nr_stun_message_add_requested_transport_attribute(nr_stun_message *msg, UCHAR transport);
+int nr_stun_message_add_requested_transport_attribute(nr_stun_message *msg, UCHAR protocol);
 int
 nr_stun_message_add_xor_peer_address_attribute(nr_stun_message *msg, nr_transport_addr *peer_address);
 #endif /* USE_TURN */

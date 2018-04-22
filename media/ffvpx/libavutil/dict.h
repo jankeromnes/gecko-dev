@@ -173,7 +173,7 @@ int av_dict_copy(AVDictionary **dst, const AVDictionary *src, int flags);
  * Free all the memory allocated for an AVDictionary struct
  * and all keys and values.
  */
-void av_dict_free(AVDictionary **m);
+void av_dict_free(AVDictionary **pm);
 
 /**
  * Get dictionary entries as a string.

@@ -114,7 +114,7 @@ public:
     * @param count number of collation key values, including trailing nulls.
     * @stable ICU 2.0
     */
-    CollationKey(const  uint8_t*    values,
+    CollationKey(const  uint8_t*    newValues,
                 int32_t     count);
 
     /**

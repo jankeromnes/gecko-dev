@@ -240,10 +240,10 @@ unsigned int avpriv_toupper4(unsigned int x);
 /**
  * does needed setup of pkt_pts/pos and such for (re)get_buffer();
  */
-int ff_init_buffer_info(AVCodecContext *s, AVFrame *frame);
+int ff_init_buffer_info(AVCodecContext *avctx, AVFrame *frame);
 
 
-void ff_color_frame(AVFrame *frame, const int color[4]);
+void ff_color_frame(AVFrame *frame, const int c[4]);
 
 extern volatile int ff_avcodec_locked;
 int ff_lock_avcodec(AVCodecContext *log_ctx, const AVCodec *codec);

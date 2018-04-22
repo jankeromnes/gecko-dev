@@ -230,8 +230,8 @@ int WebRtcAecm_ProcessFrame(AecmCore* aecm,
 int WebRtcAecm_ProcessBlock(AecmCore* aecm,
                             const int16_t* farend,
                             const int16_t* nearendNoisy,
-                            const int16_t* noisyClean,
-                            int16_t* out);
+                            const int16_t* nearendClean,
+                            int16_t* output);
 
 ////////////////////////////////////////////////////////////////////////////////
 // WebRtcAecm_BufferFarFrame()

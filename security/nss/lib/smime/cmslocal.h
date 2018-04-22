@@ -146,7 +146,7 @@ NSS_CMSCipherContext_Encrypt(NSSCMSCipherContext *cc, unsigned char *output,
  */
 extern SECStatus
 NSS_CMSUtil_EncryptSymKey_RSA(PLArenaPool *poolp, CERTCertificate *cert,
-                              PK11SymKey *key,
+                              PK11SymKey *bulkkey,
                               SECItem *encKey);
 
 extern SECStatus

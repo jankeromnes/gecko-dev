@@ -34,7 +34,7 @@ public:
      * caller must not call uenum_close on 'uenum' after calling this
      * constructor.
      */
-    UStringEnumeration(UEnumeration* uenum);
+    UStringEnumeration(UEnumeration* _uenum);
 
     /**
      * Destructor.  This closes the UEnumeration passed in to the
@@ -76,7 +76,7 @@ public:
     static UClassID U_EXPORT2 getStaticClassID();
 
     static UStringEnumeration * U_EXPORT2 fromUEnumeration(
-            UEnumeration *enumToAdopt, UErrorCode &status);
+            UEnumeration *uenumToAdopt, UErrorCode &status);
 private:
     UEnumeration *uenum; // owned
 };

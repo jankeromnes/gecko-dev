@@ -121,7 +121,7 @@ public:
     void clear();
 
     // Used to convert this CheckResult to the older int32_t return value API
-    int32_t toCombinedBitmask(int32_t expectedChecks);
+    int32_t toCombinedBitmask(int32_t enabledChecks);
 
     // Data Members
     int32_t fMagic;                        // Internal sanity check.
@@ -214,7 +214,7 @@ class SpoofData: public UMemory {
 
     // Constructor for use when creating from serialized data.
     //
-    SpoofData(const void *serializedData, int32_t length, UErrorCode &status);
+    SpoofData(const void *data, int32_t length, UErrorCode &status);
 
     //  Check raw Spoof Data Version compatibility.
     //  Return TRUE it looks good.

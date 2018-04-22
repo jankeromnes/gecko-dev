@@ -26,8 +26,8 @@ class ElseBlockRewriter : public TIntermTraverser
     ElseBlockRewriter(TSymbolTable *symbolTable);
 
   protected:
-    bool visitFunctionDefinition(Visit visit, TIntermFunctionDefinition *aggregate) override;
-    bool visitBlock(Visit visit, TIntermBlock *block) override;
+    bool visitFunctionDefinition(Visit visit, TIntermFunctionDefinition *node) override;
+    bool visitBlock(Visit visit, TIntermBlock *node) override;
 
   private:
     TIntermNode *rewriteIfElse(TIntermIfElse *ifElse);

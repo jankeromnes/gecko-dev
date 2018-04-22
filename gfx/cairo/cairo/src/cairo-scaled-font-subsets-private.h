@@ -359,7 +359,7 @@ typedef struct _cairo_cff_subset {
  **/
 cairo_private cairo_status_t
 _cairo_cff_subset_init (cairo_cff_subset_t          *cff_subset,
-                        const char                  *name,
+                        const char                  *subset_name,
                         cairo_scaled_font_subset_t  *font_subset);
 
 /**
@@ -371,7 +371,7 @@ _cairo_cff_subset_init (cairo_cff_subset_t          *cff_subset,
  * subsequent call to _cairo_cff_subset_init() again first.
  **/
 cairo_private void
-_cairo_cff_subset_fini (cairo_cff_subset_t *cff_subset);
+_cairo_cff_subset_fini (cairo_cff_subset_t *subset);
 
 /**
  * _cairo_cff_fallback_init:
@@ -390,7 +390,7 @@ _cairo_cff_subset_fini (cairo_cff_subset_t *cff_subset);
  **/
 cairo_private cairo_status_t
 _cairo_cff_fallback_init (cairo_cff_subset_t          *cff_subset,
-                          const char                  *name,
+                          const char                  *subset_name,
                           cairo_scaled_font_subset_t  *font_subset);
 
 /**
@@ -402,7 +402,7 @@ _cairo_cff_fallback_init (cairo_cff_subset_t          *cff_subset,
  * subsequent call to _cairo_cff_subset_init() again first.
  **/
 cairo_private void
-_cairo_cff_fallback_fini (cairo_cff_subset_t *cff_subset);
+_cairo_cff_fallback_fini (cairo_cff_subset_t *subset);
 
 typedef struct _cairo_truetype_subset {
     char *font_name;
@@ -445,7 +445,7 @@ _cairo_truetype_subset_init (cairo_truetype_subset_t    *truetype_subset,
  * subsequent call to _cairo_truetype_subset_init() again first.
  **/
 cairo_private void
-_cairo_truetype_subset_fini (cairo_truetype_subset_t *truetype_subset);
+_cairo_truetype_subset_fini (cairo_truetype_subset_t *subset);
 
 
 
@@ -480,9 +480,9 @@ typedef struct _cairo_type1_subset {
  * include %CAIRO_STATUS_NO_MEMORY.
  **/
 cairo_private cairo_status_t
-_cairo_type1_subset_init (cairo_type1_subset_t		*type_subset,
+_cairo_type1_subset_init (cairo_type1_subset_t		*type1_subset,
 			  const char			*name,
-			  cairo_scaled_font_subset_t	*font_subset,
+			  cairo_scaled_font_subset_t	*scaled_font_subset,
                           cairo_bool_t                   hex_encode);
 
 /**
@@ -525,9 +525,9 @@ _cairo_type1_scaled_font_is_type1 (cairo_scaled_font_t	*scaled_font);
  * include %CAIRO_STATUS_NO_MEMORY.
  **/
 cairo_private cairo_status_t
-_cairo_type1_fallback_init_binary (cairo_type1_subset_t	      *type_subset,
+_cairo_type1_fallback_init_binary (cairo_type1_subset_t	      *type1_subset,
                                    const char		      *name,
-                                   cairo_scaled_font_subset_t *font_subset);
+                                   cairo_scaled_font_subset_t *scaled_font_subset);
 
 /**
  * _cairo_type1_fallback_init_hexencode:
@@ -546,9 +546,9 @@ _cairo_type1_fallback_init_binary (cairo_type1_subset_t	      *type_subset,
  * include %CAIRO_STATUS_NO_MEMORY.
  **/
 cairo_private cairo_status_t
-_cairo_type1_fallback_init_hex (cairo_type1_subset_t	   *type_subset,
+_cairo_type1_fallback_init_hex (cairo_type1_subset_t	   *type1_subset,
                                 const char		   *name,
-                                cairo_scaled_font_subset_t *font_subset);
+                                cairo_scaled_font_subset_t *scaled_font_subset);
 
 /**
  * _cairo_type1_fallback_fini:
@@ -584,8 +584,8 @@ typedef struct _cairo_type2_charstrings {
  * include %CAIRO_STATUS_NO_MEMORY.
  **/
 cairo_private cairo_status_t
-_cairo_type2_charstrings_init (cairo_type2_charstrings_t   *charstrings,
-                               cairo_scaled_font_subset_t  *font_subset);
+_cairo_type2_charstrings_init (cairo_type2_charstrings_t   *type2_subset,
+                               cairo_scaled_font_subset_t  *scaled_font_subset);
 
 /**
  * _cairo_type2_charstrings_fini:
@@ -596,7 +596,7 @@ _cairo_type2_charstrings_init (cairo_type2_charstrings_t   *charstrings,
  * _cairo_type2_charstring_init() again first.
  **/
 cairo_private void
-_cairo_type2_charstrings_fini (cairo_type2_charstrings_t *charstrings);
+_cairo_type2_charstrings_fini (cairo_type2_charstrings_t *type2_subset);
 
 /**
  * _cairo_truetype_create_glyph_to_unicode_map:
@@ -660,8 +660,8 @@ _cairo_truetype_index_to_ucs4 (cairo_scaled_font_t *scaled_font,
  **/
 cairo_private cairo_int_status_t
 _cairo_truetype_read_font_name (cairo_scaled_font_t   *scaled_font,
-				char		     **ps_name,
-				char		     **font_name);
+				char		     **ps_name_out,
+				char		     **font_name_out);
 
 #endif /* CAIRO_HAS_FONT_SUBSET */
 

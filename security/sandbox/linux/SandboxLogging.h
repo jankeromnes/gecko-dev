@@ -33,7 +33,7 @@
 
 namespace mozilla {
 // Logs the formatted string (marked with "error" severity, if supported).
-void SandboxLogError(const char* aMessage);
+void SandboxLogError(const char* message);
 }
 
 #define SANDBOX_LOG_LEN 256

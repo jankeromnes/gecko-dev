@@ -1788,7 +1788,7 @@ class U_I18N_API NumberFormatterSettings {
      * @see NumberingSystem
      * @draft ICU 60
      */
-    Derived adoptSymbols(NumberingSystem *symbols) const;
+    Derived adoptSymbols(NumberingSystem *ns) const;
 
     /**
      * Sets the width of the unit (measure unit or currency).  Most common values:
@@ -1843,7 +1843,7 @@ class U_I18N_API NumberFormatterSettings {
      * @provisional This API might change or be removed in a future release.
      * @draft ICU 60
      */
-    Derived sign(const UNumberSignDisplay &width) const;
+    Derived sign(const UNumberSignDisplay &style) const;
 
     /**
      * Sets the decimal separator display strategy. This affects integer numbers with no fraction part. Most common
@@ -1871,7 +1871,7 @@ class U_I18N_API NumberFormatterSettings {
      * @provisional This API might change or be removed in a future release.
      * @draft ICU 60
      */
-    Derived decimal(const UNumberDecimalSeparatorDisplay &width) const;
+    Derived decimal(const UNumberDecimalSeparatorDisplay &style) const;
 
 #ifndef U_HIDE_INTERNAL_API
 

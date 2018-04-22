@@ -116,7 +116,7 @@ typedef struct _WidgetRec {
  } WidgetRec, CoreRec;   
 
 /* Exported functions, used by Xt plugins */
-void xt_client_create(XtClient * xtclient, Window embeder, int height, int width);
+void xt_client_create(XtClient * xtclient, Window embedderid, int height, int width);
 void xt_client_unrealize(XtClient* xtclient);
 void xt_client_destroy(XtClient* xtclient);
 void xt_client_init(XtClient * xtclient, Visual *xtvisual, Colormap xtcolormap, int xtdepth);

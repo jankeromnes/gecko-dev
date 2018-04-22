@@ -24,7 +24,7 @@ SECStatus nsslowcert_InitLocks(void);
 **  "nickname" is the nickname to use for the cert
 **  "trust" is the trust parameters for the cert
 */
-SECStatus nsslowcert_AddPermCert(NSSLOWCERTCertDBHandle *handle,
+SECStatus nsslowcert_AddPermCert(NSSLOWCERTCertDBHandle *dbhandle,
                                  NSSLOWCERTCertificate *cert,
                                  char *nickname, NSSLOWCERTCertTrust *trust);
 SECStatus nsslowcert_AddPermNickname(NSSLOWCERTCertDBHandle *dbhandle,
@@ -57,7 +57,7 @@ nsslowcert_DeletePermCRL(NSSLOWCERTCertDBHandle *handle, const SECItem *derName,
                          PRBool isKRL);
 SECStatus
 nsslowcert_AddCrl(NSSLOWCERTCertDBHandle *handle, SECItem *derCrl,
-                  SECItem *derKey, char *url, PRBool isKRL);
+                  SECItem *crlKey, char *url, PRBool isKRL);
 
 NSSLOWCERTCertDBHandle *nsslowcert_GetDefaultCertDB();
 NSSLOWKEYPublicKey *nsslowcert_ExtractPublicKey(NSSLOWCERTCertificate *);
@@ -66,9 +66,9 @@ NSSLOWCERTCertificate *
 nsslowcert_NewTempCertificate(NSSLOWCERTCertDBHandle *handle, SECItem *derCert,
                               char *nickname, PRBool isperm, PRBool copyDER);
 NSSLOWCERTCertificate *
-nsslowcert_DupCertificate(NSSLOWCERTCertificate *cert);
+nsslowcert_DupCertificate(NSSLOWCERTCertificate *c);
 void nsslowcert_DestroyCertificate(NSSLOWCERTCertificate *cert);
-void nsslowcert_DestroyTrust(NSSLOWCERTTrust *Trust);
+void nsslowcert_DestroyTrust(NSSLOWCERTTrust *trust);
 
 /*
  * Lookup a certificate in the databases without locking
@@ -131,14 +131,14 @@ SECStatus
 nsslowcert_KeyFromDERCert(PLArenaPool *arena, SECItem *derCert, SECItem *key);
 
 certDBEntrySMime *
-nsslowcert_ReadDBSMimeEntry(NSSLOWCERTCertDBHandle *certHandle,
+nsslowcert_ReadDBSMimeEntry(NSSLOWCERTCertDBHandle *handle,
                             char *emailAddr);
 void
 nsslowcert_DestroyDBEntry(certDBEntry *entry);
 
 SECStatus
 nsslowcert_OpenCertDB(NSSLOWCERTCertDBHandle *handle, PRBool readOnly,
-                      const char *domain, const char *prefix,
+                      const char *appName, const char *prefix,
                       NSSLOWCERTDBNameFunc namecb, void *cbarg, PRBool openVolatile);
 
 void
@@ -211,10 +211,10 @@ void
 pkcs11_freeStaticData(unsigned char *data, unsigned char *space);
 
 unsigned char *
-pkcs11_allocStaticData(int datalen, unsigned char *space, int spaceLen);
+pkcs11_allocStaticData(int len, unsigned char *space, int spaceLen);
 
 unsigned char *
-pkcs11_copyStaticData(unsigned char *data, int datalen, unsigned char *space,
+pkcs11_copyStaticData(unsigned char *data, int len, unsigned char *space,
                       int spaceLen);
 NSSLOWCERTCertificate *
 nsslowcert_CreateCert(void);

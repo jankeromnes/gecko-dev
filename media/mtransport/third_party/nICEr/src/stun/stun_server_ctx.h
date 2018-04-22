@@ -76,7 +76,7 @@ int nr_stun_server_add_client(nr_stun_server_ctx *ctx, char *client_label, char 
 int nr_stun_server_remove_client(nr_stun_server_ctx *ctx, void *cb_arg);
 int nr_stun_server_add_default_client(nr_stun_server_ctx *ctx, char *ufrag, Data *pass, nr_stun_server_cb cb, void *cb_arg);
 int nr_stun_server_process_request(nr_stun_server_ctx *ctx, nr_socket *sock, char *msg, int len, nr_transport_addr *peer_addr, int auth_rule);
-int nr_stun_get_message_client(nr_stun_server_ctx *ctx, nr_stun_message *req, nr_stun_server_client **clnt);
+int nr_stun_get_message_client(nr_stun_server_ctx *ctx, nr_stun_message *req, nr_stun_server_client **out);
 
 #endif
 

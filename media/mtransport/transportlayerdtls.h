@@ -72,8 +72,8 @@ class TransportLayerDtls final : public TransportLayer {
   void SetIdentity(const RefPtr<DtlsIdentity>& identity) {
     identity_ = identity;
   }
-  nsresult SetAlpn(const std::set<std::string>& allowedAlpn,
-                   const std::string& alpnDefault);
+  nsresult SetAlpn(const std::set<std::string>& alpn_allowed,
+                   const std::string& alpn_default);
   const std::string& GetNegotiatedAlpn() const { return alpn_; }
 
   nsresult SetVerificationAllowAll();
@@ -159,7 +159,7 @@ class TransportLayerDtls final : public TransportLayer {
   static void TimerCallback(nsITimer *timer, void *arg);
 
   SECStatus CheckDigest(const RefPtr<VerificationDigest>& digest,
-                        UniqueCERTCertificate& cert) const;
+                        UniqueCERTCertificate& peer_cert) const;
 
   void RecordHandshakeCompletionTelemetry(TransportLayer::State endState);
 

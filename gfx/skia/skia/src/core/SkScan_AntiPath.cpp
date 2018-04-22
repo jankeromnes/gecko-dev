@@ -38,7 +38,7 @@
 /// Base class for a single-pass supersampled blitter.
 class BaseSuperBlitter : public SkBlitter {
 public:
-    BaseSuperBlitter(SkBlitter* realBlitter, const SkIRect& ir,
+    BaseSuperBlitter(SkBlitter* realBlit, const SkIRect& ir,
                      const SkIRect& clipBounds, bool isInverse);
 
     /// Must be explicitly defined on subclasses.

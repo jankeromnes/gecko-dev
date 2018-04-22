@@ -83,14 +83,14 @@ public:
   MOZ_MUST_USE nsresult NewSubExpiration(uint32_t aChunk) {
     return mSubExpirations.Set(aChunk);
   };
-  MOZ_MUST_USE nsresult NewAddPrefix(uint32_t aAddChunk, const Prefix& aPrefix);
+  MOZ_MUST_USE nsresult NewAddPrefix(uint32_t aAddChunk, const Prefix& aHash);
   MOZ_MUST_USE nsresult NewSubPrefix(uint32_t aAddChunk,
-                                     const Prefix& aPrefix,
+                                     const Prefix& aHash,
                                      uint32_t aSubChunk);
-  MOZ_MUST_USE nsresult NewAddComplete(uint32_t aChunk,
-                                       const Completion& aCompletion);
+  MOZ_MUST_USE nsresult NewAddComplete(uint32_t aAddChunk,
+                                       const Completion& aHash);
   MOZ_MUST_USE nsresult NewSubComplete(uint32_t aAddChunk,
-                                       const Completion& aCompletion,
+                                       const Completion& aHash,
                                        uint32_t aSubChunk);
   MOZ_MUST_USE nsresult NewMissPrefix(const Prefix& aPrefix);
 
@@ -193,7 +193,7 @@ class HashStore {
 public:
   HashStore(const nsACString& aTableName,
             const nsACString& aProvider,
-            nsIFile* aRootStoreFile);
+            nsIFile* aRootStoreDir);
   ~HashStore();
 
   const nsCString& TableName() const { return mTableName; }

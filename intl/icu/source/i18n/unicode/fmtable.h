@@ -90,28 +90,28 @@ public:
      * @param flag the flag to indicate this is a date. Always set it to kIsDate
      * @stable ICU 2.0
      */
-    Formattable(UDate d, ISDATE flag);
+    Formattable(UDate date, ISDATE flag);
 
     /**
      * Creates a Formattable object with a double number.
      * @param d the double number.
      * @stable ICU 2.0
      */
-    Formattable(double d);
+    Formattable(double value);
 
     /**
      * Creates a Formattable object with a long number.
      * @param l the long number.
      * @stable ICU 2.0
      */
-    Formattable(int32_t l);
+    Formattable(int32_t value);
 
     /**
      * Creates a Formattable object with an int64_t number
      * @param ll the int64_t number.
      * @stable ICU 2.8
      */
-    Formattable(int64_t ll);
+    Formattable(int64_t value);
 
 #if !UCONFIG_NO_CONVERSION
     /**
@@ -120,7 +120,7 @@ public:
      * @param strToCopy the char string.
      * @stable ICU 2.0
      */
-    Formattable(const char* strToCopy);
+    Formattable(const char* stringToCopy);
 #endif
 
     /**
@@ -143,14 +143,14 @@ public:
      * @param strToCopy the UnicodeString string.
      * @stable ICU 2.0
      */
-    Formattable(const UnicodeString& strToCopy);
+    Formattable(const UnicodeString& stringToCopy);
 
     /**
      * Creates a Formattable object with a UnicodeString object to adopt from.
      * @param strToAdopt the UnicodeString string.
      * @stable ICU 2.0
      */
-    Formattable(UnicodeString* strToAdopt);
+    Formattable(UnicodeString* stringToAdopt);
 
     /**
      * Creates a Formattable object with an array of Formattable objects.
@@ -178,7 +178,7 @@ public:
      * @param rhs   The Formattable object to copy into this object.
      * @stable ICU 2.0
      */
-    Formattable&    operator=(const Formattable &rhs);
+    Formattable&    operator=(const Formattable &source);
 
     /**
      * Equality comparison.
@@ -186,7 +186,7 @@ public:
      * @return        TRUE if other are equal to this, FALSE otherwise.
      * @stable ICU 2.0
      */
-    UBool          operator==(const Formattable &other) const;
+    UBool          operator==(const Formattable &that) const;
 
     /**
      * Equality operator.

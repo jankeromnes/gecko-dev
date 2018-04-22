@@ -32,7 +32,7 @@ class InlineTranslator final : public Translator
 public:
   explicit InlineTranslator(DrawTarget* aDT, void* aFontContext = nullptr);
 
-  bool TranslateRecording(char *, size_t len);
+  bool TranslateRecording(char *, size_t aLen);
 
   DrawTarget* LookupDrawTarget(ReferencePtr aRefPtr) final
   {

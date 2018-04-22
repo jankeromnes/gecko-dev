@@ -409,8 +409,8 @@ U_NAMESPACE_BEGIN
 class UDataPathIterator
 {
 public:
-    UDataPathIterator(const char *path, const char *pkg,
-                      const char *item, const char *suffix, UBool doCheckLastFour,
+    UDataPathIterator(const char *inPath, const char *pkg,
+                      const char *item, const char *inSuffix, UBool doCheckLastFour,
                       UErrorCode *pErrorCode);
     const char *next(UErrorCode *pErrorCode);
 

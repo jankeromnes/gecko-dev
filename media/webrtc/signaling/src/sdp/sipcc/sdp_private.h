@@ -46,11 +46,11 @@ extern const  sdp_srtp_crypto_suite_list sdp_srtp_crypto_suite_array[];
 
 /* sdp_access.c */
 extern sdp_mca_t *sdp_find_media_level(sdp_t *sdp_p, uint16_t level);
-extern sdp_bw_data_t* sdp_find_bw_line (sdp_t *sdp_ptr, uint16_t level, uint16_t inst_num);
+extern sdp_bw_data_t* sdp_find_bw_line (sdp_t *sdp_p, uint16_t level, uint16_t inst_num);
 
 /* sdp_attr.c */
 extern sdp_result_e
-sdp_build_attr_fmtp_params (sdp_t *sdp_p, sdp_fmtp_t *attr_p, flex_string *fs);
+sdp_build_attr_fmtp_params (sdp_t *sdp_p, sdp_fmtp_t *fmtp_p, flex_string *fs);
 
 extern sdp_result_e sdp_parse_attribute(sdp_t *sdp_p, uint16_t level,
                                         const char *ptr);
@@ -274,7 +274,7 @@ extern const char *sdp_get_silencesupp_pref_name(sdp_silencesupp_pref_e pref);
 extern const char *sdp_get_silencesupp_siduse_name(sdp_silencesupp_siduse_e
                                                    siduse);
 
-extern const char *sdp_get_group_attr_name(sdp_group_attr_e group_attr);
+extern const char *sdp_get_group_attr_name(sdp_group_attr_e group_attr_type);
 extern const char *sdp_get_src_filter_mode_name(sdp_src_filter_mode_e type);
 extern const char *sdp_get_rtcp_unicast_mode_name(sdp_rtcp_unicast_mode_e type);
 
@@ -288,7 +288,7 @@ extern sdp_result_e sdp_build_owner(sdp_t *sdp_p, uint16_t token, flex_string *f
 extern sdp_result_e sdp_parse_sessname(sdp_t *sdp_p, uint16_t token,
                                        const char *ptr);
 extern sdp_result_e sdp_build_sessname(sdp_t *sdp_p, uint16_t token, flex_string *fs);
-extern sdp_result_e sdp_parse_sessinfo(sdp_t *sdp_p, uint16_t token,
+extern sdp_result_e sdp_parse_sessinfo(sdp_t *sdp_p, uint16_t level,
                                        const char *ptr);
 extern sdp_result_e sdp_build_sessinfo(sdp_t *sdp_p, uint16_t token, flex_string *fs);
 extern sdp_result_e sdp_parse_uri(sdp_t *sdp_p, uint16_t token, const char *ptr);
@@ -298,12 +298,12 @@ extern sdp_result_e sdp_build_email(sdp_t *sdp_p, uint16_t token, flex_string *f
 extern sdp_result_e sdp_parse_phonenum(sdp_t *sdp_p, uint16_t token,
                                        const char *ptr);
 extern sdp_result_e sdp_build_phonenum(sdp_t *sdp_p, uint16_t token, flex_string *fs);
-extern sdp_result_e sdp_parse_connection(sdp_t *sdp_p, uint16_t token,
+extern sdp_result_e sdp_parse_connection(sdp_t *sdp_p, uint16_t level,
                                          const char *ptr);
-extern sdp_result_e sdp_build_connection(sdp_t *sdp_p, uint16_t token, flex_string *fs);
-extern sdp_result_e sdp_parse_bandwidth(sdp_t *sdp_p, uint16_t token,
+extern sdp_result_e sdp_build_connection(sdp_t *sdp_p, uint16_t level, flex_string *fs);
+extern sdp_result_e sdp_parse_bandwidth(sdp_t *sdp_p, uint16_t level,
                                         const char *ptr);
-extern sdp_result_e sdp_build_bandwidth(sdp_t *sdp_p, uint16_t token, flex_string *fs);
+extern sdp_result_e sdp_build_bandwidth(sdp_t *sdp_p, uint16_t level, flex_string *fs);
 extern sdp_result_e sdp_parse_timespec(sdp_t *sdp_p, uint16_t token,
                                        const char *ptr);
 extern sdp_result_e sdp_build_timespec(sdp_t *sdp_p, uint16_t token, flex_string *fs);
@@ -313,14 +313,14 @@ extern sdp_result_e sdp_build_repeat_time(sdp_t *sdp_p, uint16_t token, flex_str
 extern sdp_result_e sdp_parse_timezone_adj(sdp_t *sdp_p, uint16_t token,
                                            const char *ptr);
 extern sdp_result_e sdp_build_timezone_adj(sdp_t *sdp_p, uint16_t token, flex_string *fs);
-extern sdp_result_e sdp_parse_encryption(sdp_t *sdp_p, uint16_t token,
+extern sdp_result_e sdp_parse_encryption(sdp_t *sdp_p, uint16_t level,
                                          const char *ptr);
-extern sdp_result_e sdp_build_encryption(sdp_t *sdp_p, uint16_t token, flex_string *fs);
+extern sdp_result_e sdp_build_encryption(sdp_t *sdp_p, uint16_t level, flex_string *fs);
 extern sdp_result_e sdp_parse_media(sdp_t *sdp_p, uint16_t token, const char *ptr);
-extern sdp_result_e sdp_build_media(sdp_t *sdp_p, uint16_t token, flex_string *fs);
-extern sdp_result_e sdp_parse_attribute(sdp_t *sdp_p, uint16_t token,
+extern sdp_result_e sdp_build_media(sdp_t *sdp_p, uint16_t level, flex_string *fs);
+extern sdp_result_e sdp_parse_attribute(sdp_t *sdp_p, uint16_t level,
                                         const char *ptr);
-extern sdp_result_e sdp_build_attribute(sdp_t *sdp_p, uint16_t token, flex_string *fs);
+extern sdp_result_e sdp_build_attribute(sdp_t *sdp_p, uint16_t level, flex_string *fs);
 
 extern void sdp_parse_payload_types(sdp_t *sdp_p, sdp_mca_t *mca_p,
                                      const char *ptr);
@@ -359,6 +359,6 @@ tinybool verify_sdescriptions_lifetime(char *buf);
 /* sdp_services_xxx.c */
 extern void sdp_dump_buffer(char *_ptr, int _size_bytes);
 
-tinybool sdp_checkrange(sdp_t *sdp, char *num, ulong* lval);
+tinybool sdp_checkrange(sdp_t *sdp_p, char *num, ulong* u_val);
 
 #endif /* _SDP_PRIVATE_H_ */

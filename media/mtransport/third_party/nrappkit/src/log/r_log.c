@@ -161,8 +161,8 @@ static void r_log_default_level_change_cb(void *cb_arg, char action, NR_registry
 static int r_log_get_default_level(void);
 static int r_log_get_destinations(int usereg);
 static int r_logging_dest(int dest_index, int facility, int level);
-static int _r_log_init(int usereg);
-static int r_log_get_reg_level(NR_registry name, int *level);
+static int _r_log_init(int use_reg);
+static int r_log_get_reg_level(NR_registry name, int *out);
 
 int r_log_register(char *facility_name,int *log_facility)
   {

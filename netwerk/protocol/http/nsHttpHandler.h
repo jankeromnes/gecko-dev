@@ -73,8 +73,8 @@ public:
     MOZ_MUST_USE nsresult AddStandardRequestHeaders(nsHttpRequestHead *,
                                                     bool isSecure);
     MOZ_MUST_USE nsresult AddConnectionHeader(nsHttpRequestHead *,
-                                              uint32_t capabilities);
-    bool     IsAcceptableEncoding(const char *encoding, bool isSecure);
+                                              uint32_t caps);
+    bool     IsAcceptableEncoding(const char *enc, bool isSecure);
 
     const nsCString& UserAgent();
 
@@ -310,7 +310,7 @@ public:
     // provides the following helper routines for accessing those services:
     //
     MOZ_MUST_USE nsresult GetStreamConverterService(nsIStreamConverterService **);
-    MOZ_MUST_USE nsresult GetIOService(nsIIOService** service);
+    MOZ_MUST_USE nsresult GetIOService(nsIIOService** result);
     nsICookieService * GetCookieService(); // not addrefed
     nsISiteSecurityService * GetSSService();
 
@@ -438,7 +438,7 @@ private:
 
     MOZ_MUST_USE nsresult SetAccept(const char *);
     MOZ_MUST_USE nsresult SetAcceptLanguages();
-    MOZ_MUST_USE nsresult SetAcceptEncodings(const char *, bool mIsSecure);
+    MOZ_MUST_USE nsresult SetAcceptEncodings(const char *, bool isSecure);
 
     MOZ_MUST_USE nsresult InitConnectionMgr();
 

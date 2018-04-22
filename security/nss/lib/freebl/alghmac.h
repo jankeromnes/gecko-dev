@@ -22,12 +22,12 @@ HMAC_Destroy(HMACContext *cx, PRBool freeit);
  * NULL is returned if an error occurs.
  */
 extern HMACContext *
-HMAC_Create(const SECHashObject *hash_obj, const unsigned char *secret,
+HMAC_Create(const SECHashObject *hashObj, const unsigned char *secret,
             unsigned int secret_len, PRBool isFIPS);
 
 /* like HMAC_Create, except caller allocates HMACContext. */
 SECStatus
-HMAC_Init(HMACContext *cx, const SECHashObject *hash_obj,
+HMAC_Init(HMACContext *cx, const SECHashObject *hashObj,
           const unsigned char *secret, unsigned int secret_len, PRBool isFIPS);
 
 /* reset HMAC for a fresh round */

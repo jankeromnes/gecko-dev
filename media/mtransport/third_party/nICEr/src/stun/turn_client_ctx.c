@@ -68,9 +68,9 @@ int NR_LOG_TURN = 0;
 // TODO(pkerr@mozilla.com) This should be replace/removed when bug 935806 is implemented.
 #define REFRESH_RESERVATION_ON_RECV 1
 
-static int nr_turn_stun_ctx_create(nr_turn_client_ctx *tctx, int type,
+static int nr_turn_stun_ctx_create(nr_turn_client_ctx *tctx, int mode,
                                    NR_async_cb success_cb,
-                                   NR_async_cb failure_cb,
+                                   NR_async_cb error_cb,
                                    nr_turn_stun_ctx **ctxp);
 static int nr_turn_stun_ctx_destroy(nr_turn_stun_ctx **ctxp);
 static void nr_turn_stun_ctx_cb(NR_SOCKET s, int how, void *arg);
@@ -79,7 +79,7 @@ static int nr_turn_stun_set_auth_params(nr_turn_stun_ctx *ctx,
 static void nr_turn_client_refresh_timer_cb(NR_SOCKET s, int how, void *arg);
 static int nr_turn_client_refresh_setup(nr_turn_client_ctx *ctx,
                                         nr_turn_stun_ctx **sctx);
-static int nr_turn_client_start_refresh_timer(nr_turn_client_ctx *ctx,
+static int nr_turn_client_start_refresh_timer(nr_turn_client_ctx *tctx,
                                               nr_turn_stun_ctx *sctx,
                                               UINT4 lifetime);
 static int nr_turn_permission_create(nr_turn_client_ctx *ctx,
@@ -90,7 +90,7 @@ static int nr_turn_permission_find(nr_turn_client_ctx *ctx,
                                    nr_turn_permission **permp);
 static int nr_turn_permission_destroy(nr_turn_permission **permp);
 static void nr_turn_client_refresh_cb(NR_SOCKET s, int how, void *arg);
-static void nr_turn_client_permissions_cb(NR_SOCKET s, int how, void *cb);
+static void nr_turn_client_permissions_cb(NR_SOCKET s, int how, void *arg);
 static int nr_turn_client_send_stun_request(nr_turn_client_ctx *ctx,
                                             nr_stun_message *req,
                                             int flags);

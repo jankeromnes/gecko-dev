@@ -105,10 +105,10 @@ TestPublicKeyAlgorithm RSA_PKCS1();
 
 struct TestSignatureAlgorithm
 {
-  TestSignatureAlgorithm(const TestPublicKeyAlgorithm& publicKeyAlg,
-                         TestDigestAlgorithmID digestAlg,
-                         const ByteString& algorithmIdentifier,
-                         bool accepted);
+  TestSignatureAlgorithm(const TestPublicKeyAlgorithm& aPublicKeyAlg,
+                         TestDigestAlgorithmID aDigestAlg,
+                         const ByteString& aAlgorithmIdentifier,
+                         bool aAccepted);
 
   TestPublicKeyAlgorithm publicKeyAlg;
   TestDigestAlgorithmID digestAlg;
@@ -304,7 +304,7 @@ public:
 
   virtual TestKeyPair* Clone() const = 0;
 protected:
-  TestKeyPair(const TestPublicKeyAlgorithm& publicKeyAlg, const ByteString& spk);
+  TestKeyPair(const TestPublicKeyAlgorithm& aPublicKeyAlg, const ByteString& spk);
   TestKeyPair(const TestKeyPair&) = delete;
   void operator=(const TestKeyPair&) = delete;
 };
@@ -359,16 +359,16 @@ ByteString CreateEncodedCertificate(long version,
                                     const TestKeyPair& issuerKeyPair,
                                     const TestSignatureAlgorithm& signatureAlgorithm);
 
-ByteString CreateEncodedSerialNumber(long value);
+ByteString CreateEncodedSerialNumber(long serialNumberValue);
 
 enum class Critical { No = 0, Yes = 1 };
 
 ByteString CreateEncodedBasicConstraints(bool isCA,
-                                         /*optional in*/ const long* pathLenConstraint,
+                                         /*optional in*/ const long* pathLenConstraintValue,
                                          Critical critical);
 
 // Creates a DER-encoded extKeyUsage extension with one EKU OID.
-ByteString CreateEncodedEKUExtension(Input eku, Critical critical);
+ByteString CreateEncodedEKUExtension(Input ekuOID, Critical critical);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Encode OCSP responses
@@ -387,7 +387,7 @@ public:
 class OCSPResponseContext final
 {
 public:
-  OCSPResponseContext(const CertID& certID, std::time_t time);
+  OCSPResponseContext(const CertID& aCertID, std::time_t time);
 
   const CertID& certID;
   // TODO(bug 980538): add a way to specify what certificates are included.

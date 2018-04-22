@@ -22,7 +22,7 @@ SEC_BEGIN_PROTOS
 SECAlgorithmID *
 sec_pkcs5CreateAlgorithmID(SECOidTag algorithm, SECOidTag cipherAlgorithm,
                            SECOidTag prfAlg, SECOidTag *pPbeAlgorithm,
-                           int keyLengh, SECItem *salt, int iteration);
+                           int keyLength, SECItem *salt, int iteration);
 
 /* Get the initialization vector.  The password is passed in, hashing
  * is performed, and the initialization vector is returned.
@@ -36,7 +36,7 @@ SEC_PKCS5GetIV(SECAlgorithmID *algid, SECItem *pwitem, PRBool faulty3DES);
 
 SECOidTag SEC_PKCS5GetCryptoAlgorithm(SECAlgorithmID *algid);
 PRBool SEC_PKCS5IsAlgorithmPBEAlg(SECAlgorithmID *algid);
-PRBool SEC_PKCS5IsAlgorithmPBEAlgTag(SECOidTag algTag);
+PRBool SEC_PKCS5IsAlgorithmPBEAlgTag(SECOidTag algtag);
 SECOidTag SEC_PKCS5GetPBEAlgorithm(SECOidTag algTag, int keyLen);
 int SEC_PKCS5GetKeyLength(SECAlgorithmID *algid);
 

@@ -165,7 +165,7 @@ public:
      *               must not indicate a failure before the function call.
      * @stable ICU 4.0
      */
-    PluralFormat(const Locale& locale, UErrorCode& status);
+    PluralFormat(const Locale& loc, UErrorCode& status);
 
     /**
      * Creates a new <code>PluralFormat</code> for a given set of rules.
@@ -194,7 +194,7 @@ public:
 	 * \snippet samples/plurfmtsample/plurfmtsample.cpp PluralFormatExample
 	 * <p>
      */
-    PluralFormat(const Locale& locale, const PluralRules& rules, UErrorCode& status);
+    PluralFormat(const Locale& loc, const PluralRules& rules, UErrorCode& status);
 
     /**
      * Creates a new <code>PluralFormat</code> for the plural type.
@@ -206,7 +206,7 @@ public:
      *                must not indicate a failure before the function call.
      * @stable ICU 50
      */
-    PluralFormat(const Locale& locale, UPluralType type, UErrorCode& status);
+    PluralFormat(const Locale& loc, UPluralType type, UErrorCode& status);
 
     /**
      * Creates a new cardinal-number <code>PluralFormat</code> for a given pattern string.
@@ -218,7 +218,7 @@ public:
      *                 must not indicate a failure before the function call.
      * @stable ICU 4.0
      */
-    PluralFormat(const UnicodeString& pattern, UErrorCode& status);
+    PluralFormat(const UnicodeString& pat, UErrorCode& status);
 
     /**
      * Creates a new cardinal-number <code>PluralFormat</code> for a given pattern string and
@@ -234,7 +234,7 @@ public:
      *                 must not indicate a failure before the function call.
      * @stable ICU 4.0
      */
-    PluralFormat(const Locale& locale, const UnicodeString& pattern, UErrorCode& status);
+    PluralFormat(const Locale& loc, const UnicodeString& pat, UErrorCode& status);
 
     /**
      * Creates a new <code>PluralFormat</code> for a given set of rules, a
@@ -248,7 +248,7 @@ public:
      * @stable ICU 4.0
      */
     PluralFormat(const PluralRules& rules,
-                 const UnicodeString& pattern,
+                 const UnicodeString& pat,
                  UErrorCode& status);
 
     /**
@@ -265,9 +265,9 @@ public:
      *                must not indicate a failure before the function call.
      * @stable ICU 4.0
      */
-    PluralFormat(const Locale& locale,
+    PluralFormat(const Locale& loc,
                  const PluralRules& rules,
-                 const UnicodeString& pattern,
+                 const UnicodeString& pat,
                  UErrorCode& status);
 
     /**
@@ -283,9 +283,9 @@ public:
      *                must not indicate a failure before the function call.
      * @stable ICU 50
      */
-    PluralFormat(const Locale& locale,
+    PluralFormat(const Locale& loc,
                  UPluralType type,
-                 const UnicodeString& pattern,
+                 const UnicodeString& pat,
                  UErrorCode& status);
 
     /**
@@ -312,7 +312,7 @@ public:
      *                must not indicate a failure before the function call.
      * @stable ICU 4.0
      */
-    void applyPattern(const UnicodeString& pattern, UErrorCode& status);
+    void applyPattern(const UnicodeString& newPattern, UErrorCode& status);
 
 
     using Format::format;
@@ -403,7 +403,7 @@ public:
      *             a different kind of PluralRules instance;
      *             use one of the constructors to create a new instance instead.
      */
-    void setLocale(const Locale& locale, UErrorCode& status);
+    void setLocale(const Locale& loc, UErrorCode& status);
 #endif  /* U_HIDE_DEPRECATED_API */
 
     /**
@@ -503,7 +503,7 @@ public:
     */
    virtual void parseObject(const UnicodeString& source,
                             Formattable& result,
-                            ParsePosition& parse_pos) const;
+                            ParsePosition& pos) const;
 
     /**
      * ICU "poor man's RTTI", returns a UClassID for this class.

@@ -275,7 +275,7 @@ U_CAPI int32_t U_EXPORT2
 ucase_toFullLower(UChar32 c,
                   UCaseContextIterator *iter, void *context,
                   const UChar **pString,
-                  int32_t caseLocale);
+                  int32_t loc);
 
 U_CAPI int32_t U_EXPORT2
 ucase_toFullUpper(UChar32 c,

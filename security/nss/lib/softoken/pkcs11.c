@@ -1010,7 +1010,7 @@ sftk_handlePublicKeyObject(SFTKSession *session, SFTKObject *object,
 }
 
 static NSSLOWKEYPrivateKey *
-sftk_mkPrivKey(SFTKObject *object, CK_KEY_TYPE key, CK_RV *rvp);
+sftk_mkPrivKey(SFTKObject *object, CK_KEY_TYPE key_type, CK_RV *crvp);
 
 static SECStatus
 sftk_verifyRSAPrivateKey(SFTKObject *object, PRBool fillIfNeeded);

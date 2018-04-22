@@ -293,9 +293,9 @@ BASE_EXPORT bool IsStringASCII(const std::wstring& str);
 // Compare the lower-case form of the given string against the given
 // previously-lower-cased ASCII string (typically a constant).
 BASE_EXPORT bool LowerCaseEqualsASCII(StringPiece str,
-                                      StringPiece lowecase_ascii);
+                                      StringPiece lowercase_ascii);
 BASE_EXPORT bool LowerCaseEqualsASCII(StringPiece16 str,
-                                      StringPiece lowecase_ascii);
+                                      StringPiece lowercase_ascii);
 
 // Performs a case-sensitive string compare of the given 16-bit string against
 // the given 8-bit ASCII string (typically a constant). The behavior is

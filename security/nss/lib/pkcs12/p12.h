@@ -163,7 +163,7 @@ SEC_PKCS12AddCertAndKey(SEC_PKCS12ExportContext *p12ctxt,
                         void *certSafe, void *certNestedDest,
                         CERTCertificate *cert, CERTCertDBHandle *certDb,
                         void *keySafe, void *keyNestedDest,
-                        PRBool shroudKey, SECItem *pwitem, SECOidTag algorithm);
+                        PRBool shroudKey, SECItem *pwItem, SECOidTag algorithm);
 
 extern void *
 SEC_PKCS12CreateNestedSafeContents(SEC_PKCS12ExportContext *p12ctxt,
@@ -174,7 +174,7 @@ SEC_PKCS12Encode(SEC_PKCS12ExportContext *p12exp,
                  SEC_PKCS12EncoderOutputCallback output, void *outputarg);
 
 extern void
-SEC_PKCS12DestroyExportContext(SEC_PKCS12ExportContext *p12exp);
+SEC_PKCS12DestroyExportContext(SEC_PKCS12ExportContext *p12ecx);
 
 extern SEC_PKCS12DecoderContext *
 SEC_PKCS12DecoderStart(SECItem *pwitem, PK11SlotInfo *slot, void *wincx,

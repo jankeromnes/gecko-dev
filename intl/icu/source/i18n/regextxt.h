@@ -41,7 +41,7 @@ struct URegexUTextUnescapeCharContext {
 #define U_REGEX_UTEXT_UNESCAPE_CONTEXT(text) { (text), -1 }
 
 U_CFUNC UChar U_CALLCONV
-uregex_utext_unescape_charAt(int32_t offset, void * /* struct URegexUTextUnescapeCharContext* */ context);
+uregex_utext_unescape_charAt(int32_t offset, void * /* struct URegexUTextUnescapeCharContext* */ ct);
 U_CFUNC UChar U_CALLCONV
 uregex_ucstr_unescape_charAt(int32_t offset, void * /* UChar* */ context);
 

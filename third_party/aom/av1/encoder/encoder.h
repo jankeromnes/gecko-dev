@@ -646,7 +646,7 @@ void av1_change_config(AV1_COMP *cpi, const AV1EncoderConfig *oxcf);
 // frame is made and not just a copy of the pointer..
 int av1_receive_raw_frame(AV1_COMP *cpi, aom_enc_frame_flags_t frame_flags,
                           YV12_BUFFER_CONFIG *sd, int64_t time_stamp,
-                          int64_t end_time_stamp);
+                          int64_t end_time);
 
 int av1_get_compressed_data(AV1_COMP *cpi, unsigned int *frame_flags,
                             size_t *size, uint8_t *dest, int64_t *time_stamp,
@@ -666,9 +666,9 @@ int av1_set_reference_enc(AV1_COMP *cpi, int idx, YV12_BUFFER_CONFIG *sd);
 
 int av1_update_entropy(AV1_COMP *cpi, int update);
 
-int av1_set_active_map(AV1_COMP *cpi, unsigned char *map, int rows, int cols);
+int av1_set_active_map(AV1_COMP *cpi, unsigned char *new_map_16x16, int rows, int cols);
 
-int av1_get_active_map(AV1_COMP *cpi, unsigned char *map, int rows, int cols);
+int av1_get_active_map(AV1_COMP *cpi, unsigned char *new_map_16x16, int rows, int cols);
 
 int av1_set_internal_size(AV1_COMP *cpi, AOM_SCALING horiz_mode,
                           AOM_SCALING vert_mode);

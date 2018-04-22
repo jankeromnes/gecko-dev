@@ -346,7 +346,7 @@ U_STABLE UBool U_EXPORT2
 ucurr_isAvailable(const UChar* isoCode, 
              UDate from, 
              UDate to, 
-             UErrorCode* errorCode);
+             UErrorCode* eErrorCode);
 
 /** 
  * Finds the number of valid currency codes for the

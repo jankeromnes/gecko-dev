@@ -88,7 +88,7 @@ private:
   der::PublicKeyAlgorithm subjectSignaturePublicKeyAlg;
   SignedDigest subjectSignature;
 
-  Result RecordResult(Result currentResult, /*out*/ bool& keepGoing);
+  Result RecordResult(Result newResult, /*out*/ bool& keepGoing);
   Result result;
   bool resultWasSet;
   unsigned int& buildForwardCallBudget;

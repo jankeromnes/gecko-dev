@@ -107,16 +107,16 @@ typedef int sslPID;
 
 SEC_BEGIN_PROTOS
 
-extern SECStatus sslMutex_Init(sslMutex *sem, int shared);
+extern SECStatus sslMutex_Init(sslMutex *pMutex, int shared);
 
 /* If processLocal is set to true, then just free resources which are *only* associated
  * with the current process. Leave any shared resources (including the state of
  * shared memory) intact. */
-extern SECStatus sslMutex_Destroy(sslMutex *sem, PRBool processLocal);
+extern SECStatus sslMutex_Destroy(sslMutex *pMutex, PRBool processLocal);
 
-extern SECStatus sslMutex_Unlock(sslMutex *sem);
+extern SECStatus sslMutex_Unlock(sslMutex *pMutex);
 
-extern SECStatus sslMutex_Lock(sslMutex *sem);
+extern SECStatus sslMutex_Lock(sslMutex *pMutex);
 
 #ifdef WINNT
 

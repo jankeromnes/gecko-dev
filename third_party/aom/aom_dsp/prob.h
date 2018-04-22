@@ -124,8 +124,8 @@ void aom_tree_merge_probs(const aom_tree_index *tree, const aom_prob *pre_probs,
                           const unsigned int *counts, aom_prob *probs);
 
 int tree_to_cdf(const aom_tree_index *tree, const aom_prob *probs,
-                aom_tree_index root, aom_cdf_prob *cdf, aom_tree_index *ind,
-                int *pth, int *len);
+                aom_tree_index root, aom_cdf_prob *cdf, aom_tree_index *index,
+                int *path, int *len);
 
 static INLINE void av1_tree_to_cdf(const aom_tree_index *tree,
                                    const aom_prob *probs, aom_cdf_prob *cdf) {

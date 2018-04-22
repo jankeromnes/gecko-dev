@@ -169,7 +169,7 @@ int Android420ToI420(const uint8* src_y,
                      int src_stride_u,
                      const uint8* src_v,
                      int src_stride_v,
-                     int pixel_stride_uv,
+                     int src_pixel_stride_uv,
                      uint8* dst_y,
                      int dst_stride_y,
                      uint8* dst_u,
@@ -181,8 +181,8 @@ int Android420ToI420(const uint8* src_y,
 
 // ARGB little endian (bgra in memory) to I420.
 LIBYUV_API
-int ARGBToI420(const uint8* src_frame,
-               int src_stride_frame,
+int ARGBToI420(const uint8* src_argb,
+               int src_stride_argb,
                uint8* dst_y,
                int dst_stride_y,
                uint8* dst_u,
@@ -194,8 +194,8 @@ int ARGBToI420(const uint8* src_frame,
 
 // BGRA little endian (argb in memory) to I420.
 LIBYUV_API
-int BGRAToI420(const uint8* src_frame,
-               int src_stride_frame,
+int BGRAToI420(const uint8* src_bgra,
+               int src_stride_bgra,
                uint8* dst_y,
                int dst_stride_y,
                uint8* dst_u,
@@ -207,8 +207,8 @@ int BGRAToI420(const uint8* src_frame,
 
 // ABGR little endian (rgba in memory) to I420.
 LIBYUV_API
-int ABGRToI420(const uint8* src_frame,
-               int src_stride_frame,
+int ABGRToI420(const uint8* src_abgr,
+               int src_stride_abgr,
                uint8* dst_y,
                int dst_stride_y,
                uint8* dst_u,
@@ -220,8 +220,8 @@ int ABGRToI420(const uint8* src_frame,
 
 // RGBA little endian (abgr in memory) to I420.
 LIBYUV_API
-int RGBAToI420(const uint8* src_frame,
-               int src_stride_frame,
+int RGBAToI420(const uint8* src_rgba,
+               int src_stride_rgba,
                uint8* dst_y,
                int dst_stride_y,
                uint8* dst_u,
@@ -233,8 +233,8 @@ int RGBAToI420(const uint8* src_frame,
 
 // RGB little endian (bgr in memory) to I420.
 LIBYUV_API
-int RGB24ToI420(const uint8* src_frame,
-                int src_stride_frame,
+int RGB24ToI420(const uint8* src_rgb24,
+                int src_stride_rgb24,
                 uint8* dst_y,
                 int dst_stride_y,
                 uint8* dst_u,
@@ -246,8 +246,8 @@ int RGB24ToI420(const uint8* src_frame,
 
 // RGB big endian (rgb in memory) to I420.
 LIBYUV_API
-int RAWToI420(const uint8* src_frame,
-              int src_stride_frame,
+int RAWToI420(const uint8* src_raw,
+              int src_stride_raw,
               uint8* dst_y,
               int dst_stride_y,
               uint8* dst_u,
@@ -259,8 +259,8 @@ int RAWToI420(const uint8* src_frame,
 
 // RGB16 (RGBP fourcc) little endian to I420.
 LIBYUV_API
-int RGB565ToI420(const uint8* src_frame,
-                 int src_stride_frame,
+int RGB565ToI420(const uint8* src_rgb565,
+                 int src_stride_rgb565,
                  uint8* dst_y,
                  int dst_stride_y,
                  uint8* dst_u,
@@ -272,8 +272,8 @@ int RGB565ToI420(const uint8* src_frame,
 
 // RGB15 (RGBO fourcc) little endian to I420.
 LIBYUV_API
-int ARGB1555ToI420(const uint8* src_frame,
-                   int src_stride_frame,
+int ARGB1555ToI420(const uint8* src_argb1555,
+                   int src_stride_argb1555,
                    uint8* dst_y,
                    int dst_stride_y,
                    uint8* dst_u,
@@ -285,8 +285,8 @@ int ARGB1555ToI420(const uint8* src_frame,
 
 // RGB12 (R444 fourcc) little endian to I420.
 LIBYUV_API
-int ARGB4444ToI420(const uint8* src_frame,
-                   int src_stride_frame,
+int ARGB4444ToI420(const uint8* src_argb4444,
+                   int src_stride_argb4444,
                    uint8* dst_y,
                    int dst_stride_y,
                    uint8* dst_u,

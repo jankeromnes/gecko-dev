@@ -147,7 +147,7 @@ private:
      */
     class BTLinearMatchNode : public LinearMatchNode {
     public:
-        BTLinearMatchNode(const char *units, int32_t len, Node *nextNode);
+        BTLinearMatchNode(const char *bytes, int32_t len, Node *nextNode);
         virtual UBool operator==(const Node &other) const;
         virtual void write(StringTrieBuilder &builder);
     private:

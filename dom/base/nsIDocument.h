@@ -4581,7 +4581,7 @@ NS_NewXBLDocument(nsIDOMDocument** aInstancePtrResult,
                   nsIPrincipal* aPrincipal);
 
 nsresult
-NS_NewPluginDocument(nsIDocument** aInstancePtrResult);
+NS_NewPluginDocument(nsIDocument** aResult);
 
 inline nsIDocument*
 nsINode::GetOwnerDocument() const

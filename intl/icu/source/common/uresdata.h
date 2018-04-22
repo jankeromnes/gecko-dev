@@ -447,13 +447,13 @@ U_INTERNAL int32_t U_EXPORT2
 res_countArrayItems(const ResourceData *pResData, Resource res);
 
 U_INTERNAL Resource U_EXPORT2
-res_getArrayItem(const ResourceData *pResData, Resource array, int32_t indexS);
+res_getArrayItem(const ResourceData *pResData, Resource array, int32_t indexR);
 
 U_INTERNAL Resource U_EXPORT2
-res_getTableItemByIndex(const ResourceData *pResData, Resource table, int32_t indexS, const char ** key);
+res_getTableItemByIndex(const ResourceData *pResData, Resource table, int32_t indexR, const char ** key);
 
 U_INTERNAL Resource U_EXPORT2
-res_getTableItemByKey(const ResourceData *pResData, Resource table, int32_t *indexS, const char* * key);
+res_getTableItemByKey(const ResourceData *pResData, Resource table, int32_t *indexR, const char* * key);
 
 /**
  * Iterates over the path and stops when a scalar resource is found.

@@ -146,7 +146,7 @@ class BinASTParser : private JS::AutoGCRooter, public ErrorReporter
         ParseNode* directives);
 
     // Read a string
-    MOZ_MUST_USE JS::Result<Ok> readString(Chars& out);
+    MOZ_MUST_USE JS::Result<Ok> readString(Chars& result);
     MOZ_MUST_USE JS::Result<Ok> readMaybeString(Maybe<Chars>& out);
     MOZ_MUST_USE JS::Result<Ok> readString(MutableHandleAtom out);
     MOZ_MUST_USE JS::Result<Ok> readMaybeString(MutableHandleAtom out);

@@ -1571,7 +1571,7 @@ public:
    * integers to store buffer lengths etc.
    */
   static bool CheckSurfaceSize(const IntSize &sz,
-                               int32_t limit = 0,
+                               int32_t extentLimit = 0,
                                int32_t allocLimit = 0);
 
   /**

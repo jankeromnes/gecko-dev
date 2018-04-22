@@ -201,22 +201,22 @@ private:
 
     // it might actually be simpler to make them Decimal Formats later.
     // initialize all private data members
-    void setup(UErrorCode& status);
+    void setup(UErrorCode& err);
 
     // initialize data member without fill in data for fTimeUnitToCountToPattern
-    void initDataMembers(UErrorCode& status);
+    void initDataMembers(UErrorCode& err);
 
     // initialize fTimeUnitToCountToPatterns from current locale's resource.
     void readFromCurrentLocale(UTimeUnitFormatStyle style, const char* key, const UVector& pluralCounts,
-                               UErrorCode& status);
+                               UErrorCode& err);
 
     // check completeness of fTimeUnitToCountToPatterns against all time units,
     // and all plural rules, fill in fallback as necessary.
-    void checkConsistency(UTimeUnitFormatStyle style, const char* key, UErrorCode& status);
+    void checkConsistency(UTimeUnitFormatStyle style, const char* key, UErrorCode& err);
 
     // fill in fTimeUnitToCountToPatterns from locale fall-back chain
     void searchInLocaleChain(UTimeUnitFormatStyle style, const char* key, const char* localeName,
-                             TimeUnit::UTimeUnitFields field, const UnicodeString&,
+                             TimeUnit::UTimeUnitFields srcTimeUnitField, const UnicodeString&,
                              const char*, Hashtable*, UErrorCode&);
 
     // initialize hash table
@@ -229,7 +229,7 @@ private:
     void copyHash(const Hashtable* source, Hashtable* target, UErrorCode& status);
     // get time unit name, such as "year", from time unit field enum, such as
     // UTIMEUNIT_YEAR.
-    static const char* getTimeUnitName(TimeUnit::UTimeUnitFields field, UErrorCode& status);
+    static const char* getTimeUnitName(TimeUnit::UTimeUnitFields unitField, UErrorCode& status);
 
     friend struct TimeUnitFormatReadSink;
 };

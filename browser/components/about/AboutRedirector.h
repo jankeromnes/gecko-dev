@@ -20,7 +20,7 @@ public:
   AboutRedirector() {}
 
   static nsresult
-    Create(nsISupports *aOuter, REFNSIID aIID, void **aResult);
+    Create(nsISupports *aOuter, REFNSIID aIID, void **result);
 
 protected:
   virtual ~AboutRedirector() {}

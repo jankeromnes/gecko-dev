@@ -131,7 +131,7 @@ public:
         float *filterCoeffsUnalign;
         float *filterCoeffsAlign;
 
-        virtual uint evaluateFilterStereo(float *dest, const float *src, uint numSamples) const;
+        virtual uint evaluateFilterStereo(float *dest, const float *source, uint numSamples) const;
     public:
         FIRFilterSSE();
         ~FIRFilterSSE();

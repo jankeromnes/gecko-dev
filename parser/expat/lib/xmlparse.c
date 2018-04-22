@@ -341,7 +341,7 @@ processInternalEntity(XML_Parser parser, ENTITY *entity,
                       XML_Bool betweenDecl);
 static enum XML_Error
 doContent(XML_Parser parser, int startTagLevel, const ENCODING *enc,
-          const char *start, const char *end, const char **endPtr, 
+          const char *s, const char *end, const char **nextPtr, 
           XML_Bool haveMore);
 static enum XML_Error
 doCdataSection(XML_Parser parser, const ENCODING *, const char **startPtr,
@@ -353,14 +353,14 @@ doIgnoreSection(XML_Parser parser, const ENCODING *, const char **startPtr,
 #endif /* XML_DTD */
 
 static enum XML_Error
-storeAtts(XML_Parser parser, const ENCODING *, const char *s,
+storeAtts(XML_Parser parser, const ENCODING *, const char *attStr,
           TAG_NAME *tagNamePtr, BINDING **bindingsPtr);
 static enum XML_Error
 addBinding(XML_Parser parser, PREFIX *prefix, const ATTRIBUTE_ID *attId,
            const XML_Char *uri, BINDING **bindingsPtr);
 static int
 defineAttribute(ELEMENT_TYPE *type, ATTRIBUTE_ID *, XML_Bool isCdata, 
-                XML_Bool isId, const XML_Char *dfltValue, XML_Parser parser);
+                XML_Bool isId, const XML_Char *value, XML_Parser parser);
 static enum XML_Error
 storeAttributeValue(XML_Parser parser, const ENCODING *, XML_Bool isCdata,
                     const char *, const char *, STRING_POOL *);
@@ -373,8 +373,8 @@ getAttributeId(XML_Parser parser, const ENCODING *enc, const char *start,
 static int
 setElementTypePrefix(XML_Parser parser, ELEMENT_TYPE *);
 static enum XML_Error
-storeEntityValue(XML_Parser parser, const ENCODING *enc, const char *start,
-                 const char *end);
+storeEntityValue(XML_Parser parser, const ENCODING *enc, const char *entityTextPtr,
+                 const char *entityTextEnd);
 static int
 reportProcessingInstruction(XML_Parser parser, const ENCODING *enc,
                             const char *start, const char *end);
@@ -382,14 +382,14 @@ static int
 reportComment(XML_Parser parser, const ENCODING *enc, const char *start,
               const char *end);
 static void
-reportDefault(XML_Parser parser, const ENCODING *enc, const char *start,
+reportDefault(XML_Parser parser, const ENCODING *enc, const char *s,
               const char *end);
 
 static const XML_Char * getContext(XML_Parser parser);
 static XML_Bool
 setContext(XML_Parser parser, const XML_Char *context);
 
-static void FASTCALL normalizePublicId(XML_Char *s);
+static void FASTCALL normalizePublicId(XML_Char *publicId);
 
 static DTD * dtdCreate(const XML_Memory_Handling_Suite *ms);
 /* BEGIN MOZILLA CHANGE (unused API) */

@@ -124,32 +124,32 @@ void av1_highbd_convolve_2d_facade(const uint8_t *src8, int src_stride,
 
 void av1_convolve(const uint8_t *src, int src_stride, uint8_t *dst,
                   int dst_stride, int w, int h, InterpFilters interp_filters,
-                  const int subpel_x, int xstep, const int subpel_y, int ystep,
+                  const int subpel_x_q4, int x_step_q4, const int subpel_y_q4, int y_step_q4,
                   ConvolveParams *conv_params);
 
 void av1_convolve_c(const uint8_t *src, int src_stride, uint8_t *dst,
                     int dst_stride, int w, int h, InterpFilters interp_filters,
-                    const int subpel_x, int xstep, const int subpel_y,
-                    int ystep, ConvolveParams *conv_params);
+                    const int subpel_x_q4, int x_step_q4, const int subpel_y_q4,
+                    int y_step_q4, ConvolveParams *conv_params);
 
 void av1_convolve_scale(const uint8_t *src, int src_stride, uint8_t *dst,
                         int dst_stride, int w, int h,
-                        InterpFilters interp_filters, const int subpel_x,
-                        int xstep, const int subpel_y, int ystep,
+                        InterpFilters interp_filters, const int subpel_x_qn,
+                        int x_step_qn, const int subpel_y_qn, int y_step_qn,
                         ConvolveParams *conv_params);
 
 #if CONFIG_HIGHBITDEPTH
-void av1_highbd_convolve(const uint8_t *src, int src_stride, uint8_t *dst,
+void av1_highbd_convolve(const uint8_t *src8, int src_stride, uint8_t *dst8,
                          int dst_stride, int w, int h,
-                         InterpFilters interp_filters, const int subpel_x,
-                         int xstep, const int subpel_y, int ystep, int avg,
+                         InterpFilters interp_filters, const int subpel_x_q4,
+                         int x_step_q4, const int subpel_y_q4, int y_step_q4, int ref_idx,
                          int bd);
 
-void av1_highbd_convolve_scale(const uint8_t *src, int src_stride, uint8_t *dst,
+void av1_highbd_convolve_scale(const uint8_t *src8, int src_stride, uint8_t *dst8,
                                int dst_stride, int w, int h,
-                               InterpFilters interp_filters, const int subpel_x,
-                               int xstep, const int subpel_y, int ystep,
-                               int avg, int bd);
+                               InterpFilters interp_filters, const int subpel_x_qn,
+                               int x_step_qn, const int subpel_y_qn, int y_step_qn,
+                               int ref_idx, int bd);
 #endif  // CONFIG_HIGHBITDEPTH
 
 #ifdef __cplusplus

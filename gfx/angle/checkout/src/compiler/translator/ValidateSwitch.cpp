@@ -40,7 +40,7 @@ class ValidateSwitch : public TIntermTraverser
     bool visitBranch(Visit, TIntermBranch *) override;
 
   private:
-    ValidateSwitch(TBasicType switchType, int shaderVersion, TDiagnostics *context);
+    ValidateSwitch(TBasicType switchType, int shaderVersion, TDiagnostics *diagnostics);
 
     bool validateInternal(const TSourceLoc &loc);
 

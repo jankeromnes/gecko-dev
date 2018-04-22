@@ -110,7 +110,7 @@ ucnv_createConverterFromPackage(const char *packageName, const char *converterNa
  */
 U_CFUNC UConverterSharedData *
 ucnv_loadSharedData(const char *converterName,
-                    UConverterNamePieces *pieces,
+                    UConverterNamePieces *pPieces,
                     UConverterLoadArgs *pArgs,
                     UErrorCode * err);
 

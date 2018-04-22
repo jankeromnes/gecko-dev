@@ -896,7 +896,7 @@ class nsGIOProtocolHandler final : public nsIProtocolHandler
     ~nsGIOProtocolHandler() {}
 
     void InitSupportedProtocolsPref(nsIPrefBranch *prefs);
-    bool IsSupportedProtocol(const nsCString &spec);
+    bool IsSupportedProtocol(const nsCString &aSpec);
 
     nsCString mSupportedProtocols;
 };

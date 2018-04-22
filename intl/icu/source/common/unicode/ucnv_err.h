@@ -260,7 +260,7 @@ U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_STOP (
 U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_STOP (
                   const void *context,
                   UConverterToUnicodeArgs *toUArgs,
-                  const char* codeUnits,
+                  const char* codePoints,
                   int32_t length,
                   UConverterCallbackReason reason,
                   UErrorCode * err);
@@ -316,7 +316,7 @@ U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_SKIP (
  */
 U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_SUBSTITUTE (
                   const void *context,
-                  UConverterFromUnicodeArgs *fromUArgs,
+                  UConverterFromUnicodeArgs *fromArgs,
                   const UChar* codeUnits,
                   int32_t length,
                   UChar32 codePoint,
@@ -372,7 +372,7 @@ U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_SUBSTITUTE (
  */
 U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_ESCAPE (
                   const void *context,
-                  UConverterFromUnicodeArgs *fromUArgs,
+                  UConverterFromUnicodeArgs *fromArgs,
                   const UChar* codeUnits,
                   int32_t length,
                   UChar32 codePoint,
@@ -400,7 +400,7 @@ U_STABLE void U_EXPORT2 UCNV_FROM_U_CALLBACK_ESCAPE (
  */
 U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_SKIP (
                   const void *context,
-                  UConverterToUnicodeArgs *toUArgs,
+                  UConverterToUnicodeArgs *toArgs,
                   const char* codeUnits,
                   int32_t length,
                   UConverterCallbackReason reason,
@@ -426,7 +426,7 @@ U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_SKIP (
  */
 U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_SUBSTITUTE (
                   const void *context,
-                  UConverterToUnicodeArgs *toUArgs,
+                  UConverterToUnicodeArgs *toArgs,
                   const char* codeUnits,
                   int32_t length,
                   UConverterCallbackReason reason,
@@ -452,7 +452,7 @@ U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_SUBSTITUTE (
 
 U_STABLE void U_EXPORT2 UCNV_TO_U_CALLBACK_ESCAPE (
                   const void *context,
-                  UConverterToUnicodeArgs *toUArgs,
+                  UConverterToUnicodeArgs *toArgs,
                   const char* codeUnits,
                   int32_t length,
                   UConverterCallbackReason reason,

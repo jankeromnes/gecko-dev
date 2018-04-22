@@ -116,7 +116,7 @@ typedef enum UTraceFunctionNumber {
  * @stable ICU 2.8
  */
 U_STABLE void U_EXPORT2
-utrace_setLevel(int32_t traceLevel);
+utrace_setLevel(int32_t level);
 
 /**
  * Getter for the trace level.

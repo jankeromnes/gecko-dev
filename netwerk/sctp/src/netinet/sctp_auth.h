@@ -112,9 +112,9 @@ typedef struct sctp_authinformation {
 
 /* socket option api functions */
 extern sctp_auth_chklist_t *sctp_alloc_chunklist(void);
-extern void sctp_free_chunklist(sctp_auth_chklist_t *chklist);
+extern void sctp_free_chunklist(sctp_auth_chklist_t *list);
 extern void sctp_clear_chunklist(sctp_auth_chklist_t *chklist);
-extern sctp_auth_chklist_t *sctp_copy_chunklist(sctp_auth_chklist_t *chklist);
+extern sctp_auth_chklist_t *sctp_copy_chunklist(sctp_auth_chklist_t *list);
 extern int sctp_auth_add_chunk(uint8_t chunk, sctp_auth_chklist_t *list);
 extern int sctp_auth_delete_chunk(uint8_t chunk, sctp_auth_chklist_t *list);
 extern size_t sctp_auth_get_chklist_size(const sctp_auth_chklist_t *list);
@@ -145,8 +145,8 @@ extern int sctp_insert_sharedkey(struct sctp_keyhead *shared_keys,
 extern int sctp_copy_skeylist(const struct sctp_keyhead *src,
     struct sctp_keyhead *dest);
 /* ref counts on shared keys, by key id */
-extern void sctp_auth_key_acquire(struct sctp_tcb *stcb, uint16_t keyid);
-extern void sctp_auth_key_release(struct sctp_tcb *stcb, uint16_t keyid,
+extern void sctp_auth_key_acquire(struct sctp_tcb *stcb, uint16_t key_id);
+extern void sctp_auth_key_release(struct sctp_tcb *stcb, uint16_t key_id,
     int so_locked);
 
 
@@ -197,11 +197,11 @@ extern int sctp_deact_sharedkey_ep(struct sctp_inpcb *inp, uint16_t keyid);
 extern void sctp_auth_get_cookie_params(struct sctp_tcb *stcb, struct mbuf *m,
     uint32_t offset, uint32_t length);
 extern void sctp_fill_hmac_digest_m(struct mbuf *m, uint32_t auth_offset,
-    struct sctp_auth_chunk *auth, struct sctp_tcb *stcb, uint16_t key_id);
+    struct sctp_auth_chunk *auth, struct sctp_tcb *stcb, uint16_t keyid);
 extern struct mbuf *sctp_add_auth_chunk(struct mbuf *m, struct mbuf **m_end,
     struct sctp_auth_chunk **auth_ret, uint32_t *offset,
     struct sctp_tcb *stcb, uint8_t chunk);
-extern int sctp_handle_auth(struct sctp_tcb *stcb, struct sctp_auth_chunk *ch,
+extern int sctp_handle_auth(struct sctp_tcb *stcb, struct sctp_auth_chunk *auth,
     struct mbuf *m, uint32_t offset);
 extern void sctp_notify_authentication(struct sctp_tcb *stcb,
     uint32_t indication, uint16_t keyid, uint16_t alt_keyid, int so_locked);

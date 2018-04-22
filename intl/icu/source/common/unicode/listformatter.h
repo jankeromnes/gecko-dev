@@ -130,7 +130,7 @@ class U_COMMON_API ListFormatter : public UObject{
      * @return Formatted string combining the elements of items, appended to appendTo.
      * @stable ICU 50
      */
-    UnicodeString& format(const UnicodeString items[], int32_t n_items,
+    UnicodeString& format(const UnicodeString items[], int32_t nItems,
         UnicodeString& appendTo, UErrorCode& errorCode) const;
 
 #ifndef U_HIDE_INTERNAL_API
@@ -139,7 +139,7 @@ class U_COMMON_API ListFormatter : public UObject{
     */
     UnicodeString& format(
             const UnicodeString items[],
-            int32_t n_items,
+            int32_t nItems,
             UnicodeString& appendTo,
             int32_t index,
             int32_t &offset,
@@ -147,7 +147,7 @@ class U_COMMON_API ListFormatter : public UObject{
     /**
      * @internal constructor made public for testing.
      */
-    ListFormatter(const ListFormatData &data, UErrorCode &errorCode);
+    ListFormatter(const ListFormatData &listFormatData, UErrorCode &errorCode);
     /**
      * @internal constructor made public for testing.
      */

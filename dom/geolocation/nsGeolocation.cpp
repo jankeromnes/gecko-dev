@@ -86,7 +86,7 @@ class nsGeolocationRequest final
 
   void Shutdown();
 
-  void SendLocation(nsIDOMGeoPosition* aLocation);
+  void SendLocation(nsIDOMGeoPosition* aPosition);
   bool WantsHighAccuracy() {return !mShutdown && mOptions && mOptions->mEnableHighAccuracy;}
   void SetTimeoutTimer();
   void StopTimeoutTimer();

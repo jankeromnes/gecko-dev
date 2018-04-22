@@ -900,7 +900,7 @@ class BASE_EXPORT ThreadTicks : public time_internal::TimeBase<ThreadTicks> {
 };
 
 // For logging use only.
-BASE_EXPORT std::ostream& operator<<(std::ostream& os, ThreadTicks time_ticks);
+BASE_EXPORT std::ostream& operator<<(std::ostream& os, ThreadTicks thread_ticks);
 
 }  // namespace base
 

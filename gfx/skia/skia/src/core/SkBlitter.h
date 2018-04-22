@@ -146,15 +146,15 @@ public:
     /** @name Factories
         Return the correct blitter to use given the specified context.
      */
-    static SkBlitter* Choose(const SkPixmap& dst,
+    static SkBlitter* Choose(const SkPixmap& device,
                              const SkMatrix& matrix,
-                             const SkPaint& paint,
+                             const SkPaint& origPaint,
                              SkArenaAlloc*,
                              bool drawCoverage = false);
 
     static SkBlitter* ChooseSprite(const SkPixmap& dst,
                                    const SkPaint&,
-                                   const SkPixmap& src,
+                                   const SkPixmap& source,
                                    int left, int top,
                                    SkArenaAlloc*);
     ///@}
@@ -192,11 +192,11 @@ public:
         fClipRect = clipRect;
     }
 
-    void blitH(int x, int y, int width) override;
-    void blitAntiH(int x, int y, const SkAlpha[], const int16_t runs[]) override;
+    void blitH(int left, int y, int width) override;
+    void blitAntiH(int left, int y, const SkAlpha[], const int16_t runs[]) override;
     void blitV(int x, int y, int height, SkAlpha alpha) override;
-    void blitRect(int x, int y, int width, int height) override;
-    virtual void blitAntiRect(int x, int y, int width, int height,
+    void blitRect(int left, int y, int width, int height) override;
+    virtual void blitAntiRect(int left, int y, int width, int height,
                      SkAlpha leftAlpha, SkAlpha rightAlpha) override;
     void blitMask(const SkMask&, const SkIRect& clip) override;
     const SkPixmap* justAnOpaqueColor(uint32_t* value) override;
@@ -290,7 +290,7 @@ private:
 class SkBlitterClipper {
 public:
     SkBlitter*  apply(SkBlitter* blitter, const SkRegion* clip,
-                      const SkIRect* bounds = nullptr);
+                      const SkIRect* ir = nullptr);
 
 private:
     SkNullBlitter       fNullBlitter;

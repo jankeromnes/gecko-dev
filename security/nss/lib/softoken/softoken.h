@@ -31,9 +31,9 @@ RSA_HashSign(SECOidTag hashOid, NSSLOWKEYPrivateKey *key,
              const unsigned char *hash, unsigned int hashLen);
 
 extern SECStatus
-RSA_HashCheckSign(SECOidTag hashOid, NSSLOWKEYPublicKey *key,
+RSA_HashCheckSign(SECOidTag digestOid, NSSLOWKEYPublicKey *key,
                   const unsigned char *sig, unsigned int sigLen,
-                  const unsigned char *hash, unsigned int hashLen);
+                  const unsigned char *digestData, unsigned int digestLen);
 
 /*
 ** Prepare a buffer for padded CBC encryption, growing to the appropriate

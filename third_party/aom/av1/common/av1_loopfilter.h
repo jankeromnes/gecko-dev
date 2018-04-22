@@ -106,7 +106,7 @@ struct AV1LfSyncData;
 // This function sets up the bit masks for the entire 64x64 region represented
 // by mi_row, mi_col.
 void av1_setup_mask(struct AV1Common *const cm, const int mi_row,
-                    const int mi_col, MODE_INFO **mi_8x8,
+                    const int mi_col, MODE_INFO **mi,
                     const int mode_info_stride, LOOP_FILTER_MASK *lfm);
 
 void av1_filter_block_plane_ss00_ver(struct AV1Common *const cm,
@@ -124,11 +124,11 @@ void av1_filter_block_plane_ss11_hor(struct AV1Common *const cm,
 
 void av1_filter_block_plane_non420_ver(struct AV1Common *const cm,
                                        struct macroblockd_plane *plane,
-                                       MODE_INFO **mi_8x8, int mi_row,
+                                       MODE_INFO **mib, int mi_row,
                                        int mi_col, int pl);
 void av1_filter_block_plane_non420_hor(struct AV1Common *const cm,
                                        struct macroblockd_plane *plane,
-                                       MODE_INFO **mi_8x8, int mi_row,
+                                       MODE_INFO **mib, int mi_row,
                                        int mi_col, int pl);
 
 void av1_loop_filter_init(struct AV1Common *cm);
@@ -161,7 +161,7 @@ void av1_loop_filter_sb_level_init(struct AV1Common *cm, int mi_row, int mi_col,
                                    int lvl);
 #else
 void av1_loop_filter_frame(YV12_BUFFER_CONFIG *frame, struct AV1Common *cm,
-                           struct macroblockd *mbd, int filter_level,
+                           struct macroblockd *xd, int frame_filter_level,
 #if CONFIG_LOOPFILTER_LEVEL
                            int filter_level_r,
 #endif

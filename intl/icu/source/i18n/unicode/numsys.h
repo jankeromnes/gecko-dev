@@ -102,7 +102,7 @@ public:
      * @param status ICU status
      * @stable ICU 4.2
      */
-    static NumberingSystem* U_EXPORT2 createInstance(int32_t radix, UBool isAlgorithmic, const UnicodeString& description, UErrorCode& status );
+    static NumberingSystem* U_EXPORT2 createInstance(int32_t radix_in, UBool isAlgorithmic_in, const UnicodeString& desc_in, UErrorCode& status );
 
     /**
      * Return a StringEnumeration over all the names of numbering systems known to ICU.
@@ -189,13 +189,13 @@ private:
     UBool           algorithmic;
     char            name[NUMSYS_NAME_CAPACITY+1];
 
-    void setRadix(int32_t radix);
+    void setRadix(int32_t r);
 
-    void setAlgorithmic(UBool algorithmic);
+    void setAlgorithmic(UBool c);
 
-    void setDesc(const UnicodeString &desc);
+    void setDesc(const UnicodeString &d);
 
-    void setName(const char* name);
+    void setName(const char* n);
 
     static UBool isValidDigitString(const UnicodeString &str);
 

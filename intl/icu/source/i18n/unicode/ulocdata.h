@@ -268,8 +268,8 @@ ulocdata_getCLDRVersion(UVersionInfo versionArray, UErrorCode *status);
  */
 U_STABLE int32_t U_EXPORT2
 ulocdata_getLocaleDisplayPattern(ULocaleData *uld,
-                                 UChar *pattern,
-                                 int32_t patternCapacity,
+                                 UChar *result,
+                                 int32_t resultCapacity,
                                  UErrorCode *status);
 
 
@@ -290,7 +290,7 @@ ulocdata_getLocaleDisplayPattern(ULocaleData *uld,
  */
 U_STABLE int32_t U_EXPORT2
 ulocdata_getLocaleSeparator(ULocaleData *uld,
-                            UChar *separator,
-                            int32_t separatorCapacity,
+                            UChar *result,
+                            int32_t resultCapacity,
                             UErrorCode *status);
 #endif

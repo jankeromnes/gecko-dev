@@ -21,7 +21,7 @@ namespace mozilla {
 namespace net {
 
 static nsresult
-ListInterfaceAddresses(int aFd, const char* aIface, AddrMapType& aAddrMap);
+ListInterfaceAddresses(int aFd, const char* aInterface, AddrMapType& aAddrMap);
 
 nsresult
 DoListAddresses(AddrMapType& aAddrMap)

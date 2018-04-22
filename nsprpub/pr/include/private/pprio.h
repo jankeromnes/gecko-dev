@@ -164,7 +164,7 @@ NSPR_API(PRInt32) PR_EmulateAcceptRead(PRFileDesc *sd, PRFileDesc **nd,
 ** The file is memory-mapped if memory-mapped files are supported.
 */
 NSPR_API(PRInt32) PR_EmulateSendFile(
-    PRFileDesc *networkSocket, PRSendFileData *sendData,
+    PRFileDesc *sd, PRSendFileData *sfd,
     PRTransmitFileFlags flags, PRIntervalTime timeout);
 
 #ifdef WIN32

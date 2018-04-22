@@ -43,7 +43,7 @@ private:
     void onGetGLSLProcessorKey(const GrShaderCaps&, GrProcessorKeyBuilder*) const override;
     bool onIsEqual(const GrFragmentProcessor&) const override;
 
-    GrColor4f constantOutputForConstantInput(GrColor4f input) const override;
+    GrColor4f constantOutputForConstantInput(GrColor4f color) const override;
 
     Mode fMode;
     Alpha fAlpha;

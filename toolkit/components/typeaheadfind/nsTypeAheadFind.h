@@ -61,12 +61,12 @@ protected:
                              bool *aIsInsideLink, bool *aIsStartingLink);
 
   void GetSelection(nsIPresShell *aPresShell, nsISelectionController **aSelCon,
-                    mozilla::dom::Selection **aDomSel);
+                    mozilla::dom::Selection **aDOMSel);
   // *aNewRange may not be collapsed.  If you want to collapse it in a
   // particular way, you need to do it yourself.
   bool IsRangeVisible(nsIPresShell *aPresShell, nsPresContext *aPresContext,
-                      nsRange *aRange, bool aMustBeVisible,
-                      bool aGetTopVisibleLeaf, nsRange **aNewRange,
+                      nsRange *aRange, bool aMustBeInViewPort,
+                      bool aGetTopVisibleLeaf, nsRange **aFirstVisibleRange,
                       bool *aUsesIndependentSelection);
   bool IsRangeRendered(nsIPresShell *aPresShell, nsPresContext *aPresContext,
                        nsRange *aRange);

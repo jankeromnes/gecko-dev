@@ -1543,7 +1543,7 @@ public:
    * @stable ICU 3.2
    */
   int32_t extract(int32_t start,
-           int32_t startLength,
+           int32_t length,
            char *target,
            int32_t targetCapacity,
            enum EInvariant inv) const;
@@ -1570,9 +1570,9 @@ public:
    * @stable ICU 2.0
    */
   int32_t extract(int32_t start,
-           int32_t startLength,
+           int32_t len,
            char *target,
-           uint32_t targetLength) const;
+           uint32_t dstSize) const;
 
 #endif
 
@@ -1638,9 +1638,9 @@ public:
    * @stable ICU 2.0
    */
   int32_t extract(int32_t start,
-           int32_t startLength,
+           int32_t length,
            char *target,
-           uint32_t targetLength,
+           uint32_t dstSize,
            const char *codepage) const;
 
   /**
@@ -1679,7 +1679,7 @@ public:
    * @return a read-only alias UnicodeString object for the substring
    * @stable ICU 4.4
    */
-  UnicodeString tempSubString(int32_t start=0, int32_t length=INT32_MAX) const;
+  UnicodeString tempSubString(int32_t start=0, int32_t len=INT32_MAX) const;
 
   /**
    * Create a temporary substring for the specified range.
@@ -1862,7 +1862,7 @@ public:
    * @stable ICU 2.0
    * @see fastCopyFrom
    */
-  UnicodeString &operator=(const UnicodeString &srcText);
+  UnicodeString &operator=(const UnicodeString &src);
 
   /**
    * Almost the same as the assignment operator.
@@ -2048,7 +2048,7 @@ public:
    * @stable ICU 2.0
    */
   UnicodeString &setTo(UBool isTerminated,
-                       ConstChar16Ptr text,
+                       ConstChar16Ptr textPtr,
                        int32_t textLength);
 
   /**
@@ -2124,7 +2124,7 @@ public:
    * @stable ICU 2.0
    */
   UnicodeString& setCharAt(int32_t offset,
-               char16_t ch);
+               char16_t c);
 
 
   /* Append operations */
@@ -2421,7 +2421,7 @@ public:
    * @return a reference to this
    * @stable ICU 2.0
    */
-  UnicodeString& replace(int32_t start, int32_t length, UChar32 srcChar);
+  UnicodeString& replace(int32_t start, int32_t _length, UChar32 srcChar);
 
   /**
    * Replace the characters in the range [<TT>start</TT>, <TT>limit</TT>)
@@ -2720,7 +2720,7 @@ public:
    * @return A reference to this.
    * @stable ICU 2.1
    */
-  UnicodeString &toTitle(BreakIterator *titleIter);
+  UnicodeString &toTitle(BreakIterator *iter);
 
   /**
    * Titlecase this string.
@@ -2749,7 +2749,7 @@ public:
    * @return A reference to this.
    * @stable ICU 2.1
    */
-  UnicodeString &toTitle(BreakIterator *titleIter, const Locale &locale);
+  UnicodeString &toTitle(BreakIterator *iter, const Locale &locale);
 
   /**
    * Titlecase this string, with options.
@@ -2782,7 +2782,7 @@ public:
    * @return A reference to this.
    * @stable ICU 3.8
    */
-  UnicodeString &toTitle(BreakIterator *titleIter, const Locale &locale, uint32_t options);
+  UnicodeString &toTitle(BreakIterator *iter, const Locale &locale, uint32_t options);
 
 #endif
 
@@ -3105,7 +3105,7 @@ public:
    * @stable ICU 2.0
    */
   UnicodeString(UBool isTerminated,
-                ConstChar16Ptr text,
+                ConstChar16Ptr textPtr,
                 int32_t textLength);
 
   /**
@@ -3126,7 +3126,7 @@ public:
    * @param buffCapacity The size of <code>buffer</code> in char16_ts.
    * @stable ICU 2.0
    */
-  UnicodeString(char16_t *buffer, int32_t buffLength, int32_t buffCapacity);
+  UnicodeString(char16_t *buff, int32_t buffLength, int32_t buffCapacity);
 
 #if !U_CHAR16_IS_TYPEDEF
   /**
@@ -3327,7 +3327,7 @@ public:
    * @param srcStart The offset into <tt>src</tt> at which to start copying.
    * @stable ICU 2.2
    */
-  UnicodeString(const UnicodeString& src, int32_t srcStart);
+  UnicodeString(const UnicodeString& that, int32_t srcStart);
 
   /**
    * 'Substring' constructor from subrange of source string.
@@ -3336,7 +3336,7 @@ public:
    * @param srcLength The number of characters from <tt>src</tt> to copy.
    * @stable ICU 2.2
    */
-  UnicodeString(const UnicodeString& src, int32_t srcStart, int32_t srcLength);
+  UnicodeString(const UnicodeString& that, int32_t srcStart, int32_t srcLength);
 
   /**
    * Clone this object, an instance of a subclass of Replaceable.
@@ -3576,7 +3576,7 @@ private:
 
   UnicodeString& doReplace(int32_t start,
                int32_t length,
-               const UnicodeString& srcText,
+               const UnicodeString& src,
                int32_t srcStart,
                int32_t srcLength);
 

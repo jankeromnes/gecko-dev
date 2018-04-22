@@ -36,7 +36,7 @@ protected:
   NS_tchar mDstFilePath[MAXPATHLEN];
 };
 
-bool IsValidFullPath(NS_tchar* fullPath);
+bool IsValidFullPath(NS_tchar* origFullPath);
 
 #define LOG_WARN(args) UpdateLog::GetPrimaryLog().WarnPrintf args
 #define LOG(args) UpdateLog::GetPrimaryLog().Printf args

@@ -48,7 +48,7 @@ public:
               suffix(NULL),
               errorCode(U_ZERO_ERROR) {}
 
-    void forData(const CollationData *d, UErrorCode &errorCode);
+    void forData(const CollationData *d, UErrorCode &ec);
 
     /**
      * @return U_SUCCESS(errorCode) in C++, void in Java
@@ -102,7 +102,7 @@ public:
               suffix(NULL),
               errorCode(U_ZERO_ERROR) {}
 
-    void forData(const CollationData *d, UErrorCode &errorCode);
+    void forData(const CollationData *d, UErrorCode &ec);
     void forCodePoint(const CollationData *d, UChar32 c, UErrorCode &ec);
 
     // all following: @internal, only public for access by callback

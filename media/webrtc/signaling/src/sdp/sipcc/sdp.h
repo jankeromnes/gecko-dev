@@ -1157,35 +1157,35 @@ typedef struct {
 
 /* sdp_config.c */
 extern sdp_conf_options_t *sdp_init_config(void);
-extern void sdp_free_config(sdp_conf_options_t *config_p);
-extern void sdp_appl_debug(sdp_conf_options_t *config_p, sdp_debug_e debug_type,
+extern void sdp_free_config(sdp_conf_options_t *conf_p);
+extern void sdp_appl_debug(sdp_conf_options_t *conf_p, sdp_debug_e debug_type,
                            tinybool debug_flag);
-extern void sdp_require_version(sdp_conf_options_t *config_p, tinybool version_required);
-extern void sdp_require_owner(sdp_conf_options_t *config_p, tinybool owner_required);
-extern void sdp_require_session_name(sdp_conf_options_t *config_p,
+extern void sdp_require_version(sdp_conf_options_t *conf_p, tinybool version_required);
+extern void sdp_require_owner(sdp_conf_options_t *conf_p, tinybool owner_required);
+extern void sdp_require_session_name(sdp_conf_options_t *conf_p,
                                      tinybool sess_name_required);
-extern void sdp_require_timespec(sdp_conf_options_t *config_p, tinybool timespec_required);
-extern void sdp_media_supported(sdp_conf_options_t *config_p, sdp_media_e media_type,
+extern void sdp_require_timespec(sdp_conf_options_t *conf_p, tinybool timespec_required);
+extern void sdp_media_supported(sdp_conf_options_t *conf_p, sdp_media_e media_type,
                          tinybool media_supported);
-extern void sdp_nettype_supported(sdp_conf_options_t *config_p, sdp_nettype_e nettype,
+extern void sdp_nettype_supported(sdp_conf_options_t *conf_p, sdp_nettype_e nettype,
                            tinybool nettype_supported);
-extern void sdp_addrtype_supported(sdp_conf_options_t *config_p, sdp_addrtype_e addrtype,
+extern void sdp_addrtype_supported(sdp_conf_options_t *conf_p, sdp_addrtype_e addrtype,
                             tinybool addrtype_supported);
-extern void sdp_transport_supported(sdp_conf_options_t *config_p, sdp_transport_e transport,
+extern void sdp_transport_supported(sdp_conf_options_t *conf_p, sdp_transport_e transport,
                              tinybool transport_supported);
-extern void sdp_allow_choose(sdp_conf_options_t *config_p, sdp_choose_param_e param,
+extern void sdp_allow_choose(sdp_conf_options_t *conf_p, sdp_choose_param_e param,
                              tinybool choose_allowed);
-extern void sdp_config_set_error_handler(sdp_conf_options_t *config_p,
+extern void sdp_config_set_error_handler(sdp_conf_options_t *conf_p,
                                          sdp_parse_error_handler handler,
                                          void *context);
 
 /* sdp_main.c */
-extern sdp_t *sdp_init_description(sdp_conf_options_t *config_p);
-extern void sdp_debug(sdp_t *sdp_ptr, sdp_debug_e debug_type, tinybool debug_flag);
-extern void sdp_set_string_debug(sdp_t *sdp_ptr, const char *debug_str);
-extern sdp_result_e sdp_parse(sdp_t *sdp_ptr, const char *buf, size_t len);
-extern sdp_result_e sdp_build(sdp_t *sdp_ptr, flex_string *fs);
-extern sdp_result_e sdp_free_description(sdp_t *sdp_ptr);
+extern sdp_t *sdp_init_description(sdp_conf_options_t *conf_p);
+extern void sdp_debug(sdp_t *sdp_p, sdp_debug_e debug_type, tinybool debug_flag);
+extern void sdp_set_string_debug(sdp_t *sdp_p, const char *debug_str);
+extern sdp_result_e sdp_parse(sdp_t *sdp_p, const char *buf, size_t len);
+extern sdp_result_e sdp_build(sdp_t *sdp_p, flex_string *fs);
+extern sdp_result_e sdp_free_description(sdp_t *sdp_p);
 extern void sdp_parse_error(sdp_t *sdp, const char *format, ...);
 
 extern const char *sdp_get_result_name(sdp_result_e rc);
@@ -1204,7 +1204,7 @@ extern sdp_nettype_e sdp_get_owner_network_type(sdp_t *sdp_p);
 extern sdp_addrtype_e sdp_get_owner_address_type(sdp_t *sdp_p);
 extern const char *sdp_get_owner_address(sdp_t *sdp_p);
 extern sdp_result_e sdp_set_owner_username(sdp_t *sdp_p, const char *username);
-extern sdp_result_e sdp_set_owner_sessionid(sdp_t *sdp_p, const char *sessid);
+extern sdp_result_e sdp_set_owner_sessionid(sdp_t *sdp_p, const char *sessionid);
 extern sdp_result_e sdp_set_owner_version(sdp_t *sdp_p, const char *version);
 extern sdp_result_e sdp_set_owner_network_type(sdp_t *sdp_p,
                                                sdp_nettype_e network_type);
@@ -1216,9 +1216,9 @@ extern tinybool sdp_session_name_valid(sdp_t *sdp_p);
 extern const char *sdp_get_session_name(sdp_t *sdp_p);
 extern sdp_result_e sdp_set_session_name(sdp_t *sdp_p, const char *sessname);
 
-extern tinybool sdp_timespec_valid(sdp_t *sdp_ptr);
-extern const char *sdp_get_time_start(sdp_t *sdp_ptr);
-extern const char *sdp_get_time_stop(sdp_t *sdp_ptr);
+extern tinybool sdp_timespec_valid(sdp_t *sdp_p);
+extern const char *sdp_get_time_start(sdp_t *sdp_p);
+extern const char *sdp_get_time_stop(sdp_t *sdp_p);
 sdp_result_e sdp_set_time_start(sdp_t *sdp_p, const char *start_time);
 sdp_result_e sdp_set_time_stop(sdp_t *sdp_p, const char *stop_time);
 
@@ -1245,7 +1245,7 @@ extern sdp_result_e sdp_set_conn_address(sdp_t *sdp_p, uint16_t level,
                                          const char *address);
 
 extern tinybool sdp_media_line_valid(sdp_t *sdp_p, uint16_t level);
-extern uint16_t sdp_get_num_media_lines(sdp_t *sdp_ptr);
+extern uint16_t sdp_get_num_media_lines(sdp_t *sdp_p);
 extern sdp_media_e sdp_get_media_type(sdp_t *sdp_p, uint16_t level);
 extern uint32_t sdp_get_media_line_number(sdp_t *sdp_p, uint16_t level);
 extern sdp_port_format_e sdp_get_media_port_format(sdp_t *sdp_p, uint16_t level);
@@ -1273,7 +1273,7 @@ extern sdp_result_e sdp_insert_media_line(sdp_t *sdp_p, uint16_t level);
 extern sdp_result_e sdp_set_media_type(sdp_t *sdp_p, uint16_t level,
                                        sdp_media_e media);
 extern sdp_result_e sdp_set_media_portnum(sdp_t *sdp_p, uint16_t level,
-                                          int32_t portnum, int32_t sctpport);
+                                          int32_t portnum, int32_t sctp_port);
 extern int32_t sdp_get_media_sctp_port(sdp_t *sdp_p, uint16_t level);
 extern sdp_sctp_media_fmt_type_e sdp_get_media_sctp_fmt(sdp_t *sdp_p, uint16_t level);
 extern sdp_result_e sdp_set_media_transport(sdp_t *sdp_p, uint16_t level,
@@ -1290,7 +1290,7 @@ extern sdp_result_e sdp_add_media_profile_payload_type(sdp_t *sdp_p,
 extern sdp_attr_t *sdp_find_attr (sdp_t *sdp_p, uint16_t level, uint8_t cap_num,
                                   sdp_attr_e attr_type, uint16_t inst_num);
 
-extern int sdp_find_fmtp_inst(sdp_t *sdp_ptr, uint16_t level, uint16_t payload_num);
+extern int sdp_find_fmtp_inst(sdp_t *sdp_p, uint16_t level, uint16_t payload_num);
 extern sdp_result_e sdp_add_new_attr(sdp_t *sdp_p, uint16_t level, uint8_t cap_num,
                                      sdp_attr_e attr_type, uint16_t *inst_num);
 extern sdp_result_e sdp_attr_num_instances(sdp_t *sdp_p, uint16_t level,
@@ -1376,12 +1376,12 @@ extern sdp_result_e sdp_attr_get_fmtp_range(sdp_t *sdp_p, uint16_t level,
                            uint8_t cap_num, uint16_t inst_num, uint32_t *bmap);
 extern sdp_result_e sdp_attr_clear_fmtp_range(sdp_t *sdp_p, uint16_t level,
                            uint8_t cap_num, uint16_t inst_num, uint8_t low_val, uint8_t high_val);
-extern sdp_ne_res_e sdp_attr_compare_fmtp_ranges(sdp_t *src_sdp_ptr,
-                           sdp_t *dst_sdp_ptr, uint16_t src_level, uint16_t dst_level,
+extern sdp_ne_res_e sdp_attr_compare_fmtp_ranges(sdp_t *src_sdp_p,
+                           sdp_t *dst_sdp_p, uint16_t src_level, uint16_t dst_level,
                            uint8_t src_cap_num, uint8_t dst_cap_num, uint16_t src_inst_num,
                            uint16_t dst_inst_num);
-extern sdp_result_e sdp_attr_copy_fmtp_ranges(sdp_t *src_sdp_ptr,
-                           sdp_t *dst_sdp_ptr, uint16_t src_level, uint16_t dst_level,
+extern sdp_result_e sdp_attr_copy_fmtp_ranges(sdp_t *src_sdp_p,
+                           sdp_t *dst_sdp_p, uint16_t src_level, uint16_t dst_level,
                            uint8_t src_cap_num, uint8_t dst_cap_num, uint16_t src_inst_num,
                            uint16_t dst_inst_num);
 extern uint32_t sdp_attr_get_fmtp_mode_for_payload_type (sdp_t *sdp_p, uint16_t level,
@@ -1476,9 +1476,9 @@ extern sdp_result_e sdp_attr_get_sctpmap_streams (sdp_t *sdp_p, uint16_t level,
                              uint8_t cap_num, uint16_t inst_num, uint32_t* val);
 
 extern const char *sdp_attr_get_msid_identifier(sdp_t *sdp_p, uint16_t level,
-                                                uint8_t cap_num, uint16_t inst_num);
+                                                uint8_t cap_num, uint16_t inst);
 extern const char *sdp_attr_get_msid_appdata(sdp_t *sdp_p, uint16_t level,
-                                             uint8_t cap_num, uint16_t inst_num);
+                                             uint8_t cap_num, uint16_t inst);
 
 /* H.264 codec specific params */
 
@@ -1610,14 +1610,14 @@ extern uint16_t sdp_attr_get_mptime_num_intervals(
 extern uint16_t sdp_attr_get_mptime_interval(
     sdp_t *sdp_p, uint16_t level, uint8_t cap_num, uint16_t inst_num, uint16_t interval_num);
 extern sdp_result_e sdp_attr_add_mptime_interval(
-    sdp_t *sdp_p, uint16_t level, uint8_t cap_num, uint16_t inst_num, uint16_t interval);
+    sdp_t *sdp_p, uint16_t level, uint8_t cap_num, uint16_t inst_num, uint16_t mp_interval);
 
 
-extern sdp_result_e sdp_copy_all_bw_lines(sdp_t *src_sdp_ptr, sdp_t *dst_sdp_ptr,
+extern sdp_result_e sdp_copy_all_bw_lines(sdp_t *src_sdp_p, sdp_t *dst_sdp_p,
                                           uint16_t src_level, uint16_t dst_level);
 extern sdp_bw_modifier_e sdp_get_bw_modifier(sdp_t *sdp_p, uint16_t level,
                                              uint16_t inst_num);
-extern const char *sdp_get_bw_modifier_name(sdp_bw_modifier_e bw_modifier);
+extern const char *sdp_get_bw_modifier_name(sdp_bw_modifier_e bw_modifier_type);
 extern int32_t sdp_get_bw_value(sdp_t *sdp_p, uint16_t level, uint16_t inst_num);
 extern int32_t sdp_get_num_bw_lines (sdp_t *sdp_p, uint16_t level);
 
@@ -1792,10 +1792,10 @@ sdp_result_e
 sdp_attr_set_rtcp_fb_ccm(sdp_t *sdp_p, uint16_t level, uint16_t payload_type, uint16_t inst,
                          sdp_rtcp_fb_ccm_type_e);
 const char *
-sdp_attr_get_extmap_uri(sdp_t *sdp_p, uint16_t level, uint16_t inst);
+sdp_attr_get_extmap_uri(sdp_t *sdp_p, uint16_t level, uint16_t inst_num);
 
 uint16_t
-sdp_attr_get_extmap_id(sdp_t *sdp_p, uint16_t level, uint16_t inst);
+sdp_attr_get_extmap_id(sdp_t *sdp_p, uint16_t level, uint16_t inst_num);
 
 sdp_result_e
 sdp_attr_set_extmap(sdp_t *sdp_p, uint16_t level, uint16_t id, const char* uri, uint16_t inst);

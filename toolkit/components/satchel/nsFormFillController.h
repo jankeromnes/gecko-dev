@@ -56,8 +56,8 @@ public:
   NS_DECL_CYCLE_COLLECTION_CLASS_AMBIGUOUS(nsFormFillController, nsIFormFillController)
 
   nsresult Focus(nsIDOMEvent* aEvent);
-  nsresult KeyPress(nsIDOMEvent* aKeyEvent);
-  nsresult MouseDown(nsIDOMEvent* aMouseEvent);
+  nsresult KeyPress(nsIDOMEvent* aEvent);
+  nsresult MouseDown(nsIDOMEvent* aEvent);
 
   nsFormFillController();
 
@@ -76,7 +76,7 @@ protected:
    * Checks that aElement is a type of element we want to fill, then calls
    * StartControllingInput on it.
    */
-  void MaybeStartControllingInput(mozilla::dom::HTMLInputElement* aElement);
+  void MaybeStartControllingInput(mozilla::dom::HTMLInputElement* aInput);
 
   nsresult PerformInputListAutoComplete(const nsAString& aSearch,
                                         nsIAutoCompleteResult** aResult);

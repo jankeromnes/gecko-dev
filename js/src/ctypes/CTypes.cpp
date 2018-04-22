@@ -258,7 +258,7 @@ namespace CType {
    *
    * This function never returns nullptr.
    */
-  static JSObject* GetGlobalCTypes(JSContext* cx, JSObject* obj);
+  static JSObject* GetGlobalCTypes(JSContext* cx, JSObject* objArg);
 
 } // namespace CType
 
@@ -291,14 +291,14 @@ namespace ArrayType {
   bool IsArrayOrArrayType(HandleValue v);
 
   static bool Create(JSContext* cx, unsigned argc, Value* vp);
-  static bool ConstructData(JSContext* cx, HandleObject obj, const CallArgs& args);
+  static bool ConstructData(JSContext* cx, HandleObject obj_, const CallArgs& args);
 
   bool ElementTypeGetter(JSContext* cx, const JS::CallArgs& args);
   bool LengthGetter(JSContext* cx, const JS::CallArgs& args);
 
   static bool Getter(JSContext* cx, HandleObject obj, HandleId idval, MutableHandleValue vp,
                      bool *handled);
-  static bool Setter(JSContext* cx, HandleObject obj, HandleId idval, HandleValue v,
+  static bool Setter(JSContext* cx, HandleObject obj, HandleId idval, HandleValue vp,
                      ObjectOpResult& result, bool* handled);
   static bool AddressOfElement(JSContext* cx, unsigned argc, Value* vp);
 } // namespace ArrayType
@@ -486,7 +486,7 @@ namespace CDataFinalizer {
    *
    * Note that the Value is actually not recorded, but converted back from C.
    */
-  static bool GetValue(JSContext* cx, JSObject* obj, MutableHandleValue result);
+  static bool GetValue(JSContext* cx, JSObject* obj, MutableHandleValue aResult);
 
 } // namespace CDataFinalizer
 

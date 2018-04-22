@@ -76,7 +76,7 @@ public:
     virtual ~CharsetRecog_sbcs();
     virtual const char *getName() const = 0;
     virtual UBool match(InputText *det, CharsetMatch *results) const = 0;
-    virtual int32_t match_sbcs(InputText *det, const int32_t ngrams[], const uint8_t charMap[]) const;
+    virtual int32_t match_sbcs(InputText *det, const int32_t ngrams[], const uint8_t byteMap[]) const;
 };
 
 class CharsetRecog_8859_1 : public CharsetRecog_sbcs
@@ -84,7 +84,7 @@ class CharsetRecog_8859_1 : public CharsetRecog_sbcs
 public:
     virtual ~CharsetRecog_8859_1();
     const char *getName() const;
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_8859_2 : public CharsetRecog_sbcs
@@ -92,7 +92,7 @@ class CharsetRecog_8859_2 : public CharsetRecog_sbcs
 public:
     virtual ~CharsetRecog_8859_2();
     const char *getName() const;
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_8859_5 : public CharsetRecog_sbcs
@@ -143,7 +143,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_8859_6_ar : public CharsetRecog_8859_6
@@ -153,7 +153,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_8859_7_el : public CharsetRecog_8859_7
@@ -163,7 +163,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_8859_8_I_he : public CharsetRecog_8859_8
@@ -175,7 +175,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_8859_8_he : public CharsetRecog_8859_8
@@ -185,7 +185,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_8859_9_tr : public CharsetRecog_8859_9
@@ -195,7 +195,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_windows_1256 : public CharsetRecog_sbcs
@@ -207,7 +207,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_windows_1251 : public CharsetRecog_sbcs
@@ -219,7 +219,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 
@@ -232,7 +232,7 @@ public:
 
     const char *getLanguage() const;
 
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 #if !UCONFIG_ONLY_HTML_CONVERSION
@@ -250,7 +250,7 @@ public:
     
     const char *getName() const;
     
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_IBM424_he_ltr : public CharsetRecog_IBM424_he {
@@ -258,7 +258,7 @@ class CharsetRecog_IBM424_he_ltr : public CharsetRecog_IBM424_he {
     
     const char *getName() const;
     
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_IBM420_ar : public CharsetRecog_sbcs
@@ -267,7 +267,7 @@ public:
     virtual ~CharsetRecog_IBM420_ar();
 
     const char *getLanguage() const;
-	int32_t match_sbcs(InputText *det, const int32_t ngrams[], const uint8_t charMap[]) const;
+	int32_t match_sbcs(InputText *det, const int32_t ngrams[], const uint8_t byteMap[]) const;
     
 };
 
@@ -277,7 +277,7 @@ public:
     
     const char *getName() const;
     
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 
 class CharsetRecog_IBM420_ar_ltr : public CharsetRecog_IBM420_ar {
@@ -285,7 +285,7 @@ class CharsetRecog_IBM420_ar_ltr : public CharsetRecog_IBM420_ar {
     
     const char *getName() const;
     
-    virtual UBool match(InputText *det, CharsetMatch *results) const;
+    virtual UBool match(InputText *textIn, CharsetMatch *results) const;
 };
 #endif
 

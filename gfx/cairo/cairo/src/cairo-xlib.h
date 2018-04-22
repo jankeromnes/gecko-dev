@@ -55,41 +55,41 @@ cairo_xlib_surface_create (Display     *dpy,
 cairo_public cairo_surface_t *
 cairo_xlib_surface_create_for_bitmap (Display  *dpy,
 				      Pixmap	bitmap,
-				      Screen	*screen,
+				      Screen	*scr,
 				      int	width,
 				      int	height);
 
 cairo_public void
-cairo_xlib_surface_set_size (cairo_surface_t *surface,
+cairo_xlib_surface_set_size (cairo_surface_t *abstract_surface,
 			     int              width,
 			     int              height);
 
 cairo_public void
-cairo_xlib_surface_set_drawable (cairo_surface_t *surface,
+cairo_xlib_surface_set_drawable (cairo_surface_t *abstract_surface,
 				 Drawable	  drawable,
 				 int              width,
 				 int              height);
 
 cairo_public Display *
-cairo_xlib_surface_get_display (cairo_surface_t *surface);
+cairo_xlib_surface_get_display (cairo_surface_t *abstract_surface);
 
 cairo_public Drawable
-cairo_xlib_surface_get_drawable (cairo_surface_t *surface);
+cairo_xlib_surface_get_drawable (cairo_surface_t *abstract_surface);
 
 cairo_public Screen *
-cairo_xlib_surface_get_screen (cairo_surface_t *surface);
+cairo_xlib_surface_get_screen (cairo_surface_t *abstract_surface);
 
 cairo_public Visual *
 cairo_xlib_surface_get_visual (cairo_surface_t *surface);
 
 cairo_public int
-cairo_xlib_surface_get_depth (cairo_surface_t *surface);
+cairo_xlib_surface_get_depth (cairo_surface_t *abstract_surface);
 
 cairo_public int
-cairo_xlib_surface_get_width (cairo_surface_t *surface);
+cairo_xlib_surface_get_width (cairo_surface_t *abstract_surface);
 
 cairo_public int
-cairo_xlib_surface_get_height (cairo_surface_t *surface);
+cairo_xlib_surface_get_height (cairo_surface_t *abstract_surface);
 
 CAIRO_END_DECLS
 

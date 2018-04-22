@@ -179,7 +179,7 @@ class UntypedMDRVA {
 
   // Copy |size| bytes starting at |src| into the minidump at |position|
   // Return true on success, or false on failure
-  bool Copy(MDRVA position, const void *src, size_t size);
+  bool Copy(MDRVA pos, const void *src, size_t size);
 
   // Copy |size| bytes from |src| to the current position
   inline bool Copy(const void *src, size_t size) {

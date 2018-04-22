@@ -174,7 +174,7 @@ PrependString(mozilla::Vector<char16_t, N, AP>& v, JSString* str)
 template <typename CharT>
 extern size_t
 GetDeflatedUTF8StringLength(JSContext* maybecx, const CharT* chars,
-                            size_t charsLength);
+                            size_t nchars);
 
 template <typename CharT>
 MOZ_MUST_USE bool
@@ -445,11 +445,11 @@ enum Int64FunctionSlot {
 
 namespace CType {
   JSObject* Create(JSContext* cx, HandleObject typeProto, HandleObject dataProto,
-    TypeCode type, JSString* name, HandleValue size, HandleValue align,
+    TypeCode type, JSString* name_, HandleValue size, HandleValue align,
                    ffi_type* ffiType);
 
   JSObject* DefineBuiltin(JSContext* cx, HandleObject ctypesObj, const char* propName,
-    JSObject* typeProto, JSObject* dataProto, const char* name, TypeCode type,
+    JSObject* typeProto_, JSObject* dataProto_, const char* name, TypeCode type,
     HandleValue size, HandleValue align, ffi_type* ffiType);
 
   bool IsCType(JSObject* obj);
@@ -463,7 +463,7 @@ namespace CType {
   ffi_type* GetFFIType(JSContext* cx, JSObject* obj);
   JSString* GetName(JSContext* cx, HandleObject obj);
   JSObject* GetProtoFromCtor(JSObject* obj, CTypeProtoSlot slot);
-  JSObject* GetProtoFromType(JSContext* cx, JSObject* obj, CTypeProtoSlot slot);
+  JSObject* GetProtoFromType(JSContext* cx, JSObject* objArg, CTypeProtoSlot slot);
   const JSCTypesCallbacks* GetCallbacksFromType(JSObject* obj);
 } // namespace CType
 
@@ -486,7 +486,7 @@ namespace ArrayType {
 } // namespace ArrayType
 
 namespace StructType {
-  MOZ_MUST_USE bool DefineInternal(JSContext* cx, JSObject* typeObj, JSObject* fieldsObj);
+  MOZ_MUST_USE bool DefineInternal(JSContext* cx, JSObject* typeObj_, JSObject* fieldsObj_);
 
   const FieldInfoHash* GetFieldInfo(JSObject* obj);
   const FieldInfo* LookupField(JSContext* cx, JSObject* obj, JSFlatString* name);
@@ -513,7 +513,7 @@ namespace CClosure {
 
 namespace CData {
   JSObject* Create(JSContext* cx, HandleObject typeObj, HandleObject refObj,
-    void* data, bool ownResult);
+    void* source, bool ownResult);
 
   JSObject* GetCType(JSObject* dataObj);
   void* GetData(JSObject* dataObj);

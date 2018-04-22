@@ -26,7 +26,7 @@ void nss_DumpModuleLog(void);
 extern int secmod_PrivateModuleCount;
 
 extern void SECMOD_Init(void);
-SECStatus secmod_ModuleInit(SECMODModule *mod, SECMODModule **oldModule,
+SECStatus secmod_ModuleInit(SECMODModule *mod, SECMODModule **reload,
                             PRBool *alreadyLoaded);
 
 /* list managment */
@@ -81,8 +81,8 @@ char *secmod_ParseModuleSpecForTokens(PRBool convert,
                                       char ***children,
                                       CK_SLOT_ID **ids);
 void secmod_FreeChildren(char **children, CK_SLOT_ID *ids);
-char *secmod_MkAppendTokensList(PLArenaPool *arena, char *origModuleSpec,
-                                char *newModuleSpec, CK_SLOT_ID newID,
+char *secmod_MkAppendTokensList(PLArenaPool *arena, char *oldParam,
+                                char *newToken, CK_SLOT_ID newID,
                                 char **children, CK_SLOT_ID *ids);
 
 void SECMOD_SlotDestroyModule(SECMODModule *module, PRBool fromSlot);
@@ -90,9 +90,9 @@ CK_RV pk11_notify(CK_SESSION_HANDLE session, CK_NOTIFICATION event,
                   CK_VOID_PTR pdata);
 void pk11_SignedToUnsigned(CK_ATTRIBUTE *attrib);
 CK_OBJECT_HANDLE pk11_FindObjectByTemplate(PK11SlotInfo *slot,
-                                           CK_ATTRIBUTE *inTemplate, int tsize);
+                                           CK_ATTRIBUTE *theTemplate, int tsize);
 CK_OBJECT_HANDLE *pk11_FindObjectsByTemplate(PK11SlotInfo *slot,
-                                             CK_ATTRIBUTE *inTemplate, int tsize, int *objCount);
+                                             CK_ATTRIBUTE *findTemplate, int templCount, int *object_count);
 
 #define PK11_GETTAB(x) ((CK_FUNCTION_LIST_PTR)((x)->functionList))
 #define PK11_SETATTRS(x, id, v, l) \
@@ -109,11 +109,11 @@ SECStatus PBE_PK11ParamToAlgid(SECOidTag algTag, SECItem *param,
 
 PK11SymKey *pk11_TokenKeyGenWithFlagsAndKeyType(PK11SlotInfo *slot,
                                                 CK_MECHANISM_TYPE type, SECItem *param, CK_KEY_TYPE keyType,
-                                                int keySize, SECItem *keyId, CK_FLAGS opFlags,
+                                                int keySize, SECItem *keyid, CK_FLAGS opFlags,
                                                 PK11AttrFlags attrFlags, void *wincx);
 
 CK_MECHANISM_TYPE pk11_GetPBECryptoMechanism(SECAlgorithmID *algid,
-                                             SECItem **param, SECItem *pwd, PRBool faulty3DES);
+                                             SECItem **param, SECItem *pbe_pwd, PRBool faulty3DES);
 
 extern void pk11sdr_Init(void);
 extern void pk11sdr_Shutdown(void);
@@ -124,7 +124,7 @@ extern void pk11sdr_Shutdown(void);
 
 PRBool pk11_LoginStillRequired(PK11SlotInfo *slot, void *wincx);
 CK_SESSION_HANDLE pk11_GetNewSession(PK11SlotInfo *slot, PRBool *owner);
-void pk11_CloseSession(PK11SlotInfo *slot, CK_SESSION_HANDLE sess, PRBool own);
+void pk11_CloseSession(PK11SlotInfo *slot, CK_SESSION_HANDLE session, PRBool owner);
 PK11SymKey *pk11_ForceSlot(PK11SymKey *symKey, CK_MECHANISM_TYPE type,
                            CK_ATTRIBUTE_TYPE operation);
 /* Convert key operation flags to PKCS #11 attributes. */
@@ -150,7 +150,7 @@ CK_OBJECT_HANDLE pk11_FindPubKeyByAnyCert(CERTCertificate *cert,
 SECStatus pk11_AuthenticateUnfriendly(PK11SlotInfo *slot, PRBool loadCerts,
                                       void *wincx);
 int PK11_NumberObjectsFor(PK11SlotInfo *slot, CK_ATTRIBUTE *findTemplate,
-                          int templateCount);
+                          int templCount);
 SECItem *pk11_GetLowLevelKeyFromHandle(PK11SlotInfo *slot,
                                        CK_OBJECT_HANDLE handle);
 SECStatus PK11_TraverseSlot(PK11SlotInfo *slot, void *arg);

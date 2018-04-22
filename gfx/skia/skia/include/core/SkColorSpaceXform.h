@@ -22,7 +22,7 @@ public:
      *  @param dstSpace The destination color space.
      *
      */
-    static std::unique_ptr<SkColorSpaceXform> New(SkColorSpace* srcSpace, SkColorSpace* dstSpace);
+    static std::unique_ptr<SkColorSpaceXform> New(SkColorSpace* src, SkColorSpace* dst);
 
     enum ColorFormat {
         kRGBA_8888_ColorFormat,
@@ -55,7 +55,7 @@ public:
      *                        kOpaque   optimization hint, |dst| alphas set to 1
      *
      */
-    bool apply(ColorFormat dstFormat, void* dst, ColorFormat srcFormat, const void* src, int count,
+    bool apply(ColorFormat dstColorFormat, void* dst, ColorFormat srcColorFormat, const void* src, int len,
                SkAlphaType alphaType) const;
 
     virtual ~SkColorSpaceXform() {}
@@ -67,7 +67,7 @@ public:
     };
     static bool Apply(SkColorSpace* dstCS, ColorFormat dstFormat, void* dst,
                       SkColorSpace* srcCS, ColorFormat srcFormat, const void* src,
-                      int count, AlphaOp);
+                      int len, AlphaOp);
 
 protected:
     SkColorSpaceXform() {}

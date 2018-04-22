@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-extern void vp8_build_inter_predictors_mb(MACROBLOCKD *x);
+extern void vp8_build_inter_predictors_mb(MACROBLOCKD *xd);
 extern void vp8_build_inter16x16_predictors_mb(
     MACROBLOCKD *x, unsigned char *dst_y, unsigned char *dst_u,
     unsigned char *dst_v, int dst_ystride, int dst_uvstride);

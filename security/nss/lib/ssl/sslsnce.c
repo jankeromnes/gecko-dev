@@ -1777,7 +1777,7 @@ ssl_GetSelfEncryptKeyPair(SECKEYPublicKey **pubKey,
 
 static PRBool
 ssl_GenerateSelfEncryptKeys(void *pwArg, PRUint8 *keyName,
-                            PK11SymKey **aesKey, PK11SymKey **macKey);
+                            PK11SymKey **encKey, PK11SymKey **macKey);
 
 static PRStatus
 ssl_GenerateSelfEncryptKeysOnce(void *arg)

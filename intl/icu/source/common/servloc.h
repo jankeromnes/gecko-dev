@@ -437,7 +437,7 @@ class U_COMMON_API ICULocaleService : public ICUService
   /**
    * Construct an ICULocaleService with a name (useful for debugging).
    */
-  ICULocaleService(const UnicodeString& name);
+  ICULocaleService(const UnicodeString& dname);
 
   /**
    * Destructor.

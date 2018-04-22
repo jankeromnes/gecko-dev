@@ -154,7 +154,7 @@ int hnj_hyphen_hyphenate (HyphenDict *dict,
 
 int hnj_hyphen_hyphenate2 (HyphenDict *dict,
         const char *word, int word_size, char * hyphens,
-        char *hyphenated_word, char *** rep, int ** pos, int ** cut);
+        char *hyphword, char *** rep, int ** pos, int ** cut);
 
 /* like hnj_hyphen_hyphenate2, but with hyphenmin parameters */
 /* lhmin: lefthyphenmin

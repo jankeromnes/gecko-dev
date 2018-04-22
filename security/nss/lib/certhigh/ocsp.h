@@ -407,7 +407,7 @@ extern SECStatus
 CERT_VerifyOCSPResponseSignature(CERTOCSPResponse *response,
                                  CERTCertDBHandle *handle, void *pwArg,
                                  CERTCertificate **pSignerCert,
-                                 CERTCertificate *issuerCert);
+                                 CERTCertificate *issuer);
 
 /*
  * FUNCTION: CERT_GetOCSPAuthorityInfoAccessLocation

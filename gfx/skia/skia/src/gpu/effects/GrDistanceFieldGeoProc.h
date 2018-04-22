@@ -85,7 +85,7 @@ public:
 #endif
     uint32_t getFlags() const { return fFlags; }
 
-    void addNewProxies(const sk_sp<GrTextureProxy> proxies[kMaxTextures], const GrSamplerState& p);
+    void addNewProxies(const sk_sp<GrTextureProxy> proxies[kMaxTextures], const GrSamplerState& params);
 
     void getGLSLProcessorKey(const GrShaderCaps& caps, GrProcessorKeyBuilder* b) const override;
 
@@ -142,7 +142,7 @@ public:
     const SkMatrix& matrix() const { return fMatrix; }
     uint32_t getFlags() const { return fFlags; }
 
-    void addNewProxies(const sk_sp<GrTextureProxy> proxies[kMaxTextures], const GrSamplerState& p);
+    void addNewProxies(const sk_sp<GrTextureProxy> proxies[kMaxTextures], const GrSamplerState& params);
 
     void getGLSLProcessorKey(const GrShaderCaps& caps, GrProcessorKeyBuilder* b) const override;
 
@@ -210,7 +210,7 @@ public:
     uint32_t getFlags() const { return fFlags; }
     const SkMatrix& localMatrix() const { return fLocalMatrix; }
 
-    void addNewProxies(const sk_sp<GrTextureProxy> proxies[kMaxTextures], const GrSamplerState& p);
+    void addNewProxies(const sk_sp<GrTextureProxy> prox[kMaxTextures], const GrSamplerState& params);
 
     void getGLSLProcessorKey(const GrShaderCaps& caps, GrProcessorKeyBuilder* b) const override;
 
@@ -218,7 +218,7 @@ public:
 
 private:
     GrDistanceFieldLCDTextGeoProc(const sk_sp<GrTextureProxy> proxies[kMaxTextures],
-                                  const GrSamplerState& params, DistanceAdjust wa, uint32_t flags,
+                                  const GrSamplerState& params, DistanceAdjust distanceAdjust, uint32_t flags,
                                   const SkMatrix& localMatrix);
 
     TextureSampler   fTextureSamplers[kMaxTextures];

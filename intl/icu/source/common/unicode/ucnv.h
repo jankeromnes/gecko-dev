@@ -364,7 +364,7 @@ ucnv_compareNames(const char *name1, const char *name2);
  * @stable ICU 2.0
  */
 U_STABLE UConverter* U_EXPORT2
-ucnv_open(const char *converterName, UErrorCode *err);
+ucnv_open(const char *name, UErrorCode *err);
 
 
 /**
@@ -608,7 +608,7 @@ U_NAMESPACE_END
  */
 U_STABLE void U_EXPORT2
 ucnv_getSubstChars(const UConverter *converter,
-                   char *subChars,
+                   char *mySubChar,
                    int8_t *len,
                    UErrorCode *err);
 
@@ -633,7 +633,7 @@ ucnv_getSubstChars(const UConverter *converter,
  */
 U_STABLE void U_EXPORT2
 ucnv_setSubstChars(UConverter *converter,
-                   const char *subChars,
+                   const char *mySubChar,
                    int8_t len,
                    UErrorCode *err);
 
@@ -704,7 +704,7 @@ ucnv_getInvalidChars(const UConverter *converter,
  */
 U_STABLE void U_EXPORT2
 ucnv_getInvalidUChars(const UConverter *converter,
-                      UChar *errUChars,
+                      UChar *errChars,
                       int8_t *len,
                       UErrorCode *err);
 
@@ -841,11 +841,11 @@ ucnv_getMinCharSize(const UConverter *converter);
  * @stable ICU 2.0
  */
 U_STABLE int32_t U_EXPORT2
-ucnv_getDisplayName(const UConverter *converter,
+ucnv_getDisplayName(const UConverter *cnv,
                     const char *displayLocale,
                     UChar *displayName,
                     int32_t displayNameCapacity,
-                    UErrorCode *err);
+                    UErrorCode *pErrorCode);
 
 /**
  * Gets the internal, canonical name of the converter (zero-terminated).
@@ -1141,7 +1141,7 @@ ucnv_setFromUCallBack (UConverter * converter,
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-ucnv_fromUnicode (UConverter * converter,
+ucnv_fromUnicode (UConverter * cnv,
                   char **target,
                   const char *targetLimit,
                   const UChar ** source,
@@ -1210,7 +1210,7 @@ ucnv_fromUnicode (UConverter * converter,
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-ucnv_toUnicode(UConverter *converter,
+ucnv_toUnicode(UConverter *cnv,
                UChar **target,
                const UChar *targetLimit,
                const char **source,
@@ -1355,7 +1355,7 @@ ucnv_toUChars(UConverter *cnv,
  * @stable ICU 2.0
  */
 U_STABLE UChar32 U_EXPORT2
-ucnv_getNextUChar(UConverter * converter,
+ucnv_getNextUChar(UConverter * cnv,
                   const char **source,
                   const char * sourceLimit,
                   UErrorCode * err);
@@ -1833,7 +1833,7 @@ ucnv_getStandard(uint16_t n, UErrorCode *pErrorCode);
  * @stable ICU 2.0
  */
 U_STABLE const char * U_EXPORT2
-ucnv_getStandardName(const char *name, const char *standard, UErrorCode *pErrorCode);
+ucnv_getStandardName(const char *alias, const char *standard, UErrorCode *pErrorCode);
 
 /**
  * This function will return the internal canonical converter name of the
@@ -1913,7 +1913,7 @@ ucnv_setDefaultName(const char *name);
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-ucnv_fixFileSeparator(const UConverter *cnv, UChar *source, int32_t sourceLen);
+ucnv_fixFileSeparator(const UConverter *cnv, UChar *source, int32_t sourceLength);
 
 /**
  * Determines if the converter contains ambiguous mappings of the same

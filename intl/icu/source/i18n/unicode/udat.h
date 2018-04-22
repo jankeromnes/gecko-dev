@@ -1020,7 +1020,7 @@ U_CAPI int32_t U_EXPORT2
 udat_formatCalendar(    const UDateFormat*  format,
                         UCalendar*      calendar,
                         UChar*          result,
-                        int32_t         capacity,
+                        int32_t         resultLength,
                         UFieldPosition* position,
                         UErrorCode*     status);
 
@@ -1093,7 +1093,7 @@ U_CAPI int32_t U_EXPORT2
 udat_formatCalendarForFields( const UDateFormat* format,
                         UCalendar*      calendar,
                         UChar*          result,
-                        int32_t         capacity,
+                        int32_t         resultLength,
                         UFieldPositionIterator* fpositer,
                         UErrorCode*     status);
 
@@ -1290,7 +1290,7 @@ udat_adoptNumberFormat(            UDateFormat*    fmt,
 * @stable ICU 2.0
 */
 U_CAPI const char* U_EXPORT2
-udat_getAvailable(int32_t localeIndex);
+udat_getAvailable(int32_t index);
 
 /**
 * Determine how many locales have date/time  formatting patterns available.
@@ -1490,7 +1490,7 @@ typedef struct UDateFormatSymbols UDateFormatSymbols;
 U_CAPI int32_t U_EXPORT2
 udat_getSymbols(const   UDateFormat             *fmt,
                         UDateFormatSymbolType   type,
-                        int32_t                 symbolIndex,
+                        int32_t                 index,
                         UChar                   *result,
                         int32_t                 resultLength,
                         UErrorCode              *status);
@@ -1529,7 +1529,7 @@ udat_countSymbols(    const    UDateFormat                *fmt,
 U_CAPI void U_EXPORT2
 udat_setSymbols(    UDateFormat             *format,
                     UDateFormatSymbolType   type,
-                    int32_t                 symbolIndex,
+                    int32_t                 index,
                     UChar                   *value,
                     int32_t                 valueLength,
                     UErrorCode              *status);

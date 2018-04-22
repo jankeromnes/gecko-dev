@@ -150,9 +150,9 @@ public:
     void Invalidate();
 
     // hold addr_info_lock when calling the blacklist functions
-    bool   Blacklisted(mozilla::net::NetAddr *query);
+    bool   Blacklisted(mozilla::net::NetAddr *aQuery);
     void   ResetBlacklist();
-    void   ReportUnusable(mozilla::net::NetAddr *addr);
+    void   ReportUnusable(mozilla::net::NetAddr *aAddress);
 
     size_t SizeOfIncludingThis(mozilla::MallocSizeOf mallocSizeOf) const;
 
@@ -310,14 +310,14 @@ public:
     static nsresult Create(uint32_t maxCacheEntries, // zero disables cache
                            uint32_t defaultCacheEntryLifetime, // seconds
                            uint32_t defaultGracePeriod, // seconds
-                           nsHostResolver **resolver);
+                           nsHostResolver **result);
 
     /**
      * Set (new) cache limits.
      */
-    void SetCacheLimits(uint32_t maxCacheEntries, // zero disables cache
-                        uint32_t defaultCacheEntryLifetime, // seconds
-                        uint32_t defaultGracePeriod); // seconds
+    void SetCacheLimits(uint32_t aMaxCacheEntries, // zero disables cache
+                        uint32_t aDefaultCacheEntryLifetime, // seconds
+                        uint32_t aDefaultGracePeriod); // seconds
 
     /**
      * puts the resolver in the shutdown state, which will cause any pending
@@ -332,12 +332,12 @@ public:
      * host lookup cannot be canceled (cancelation can be layered above this by
      * having the callback implementation return without doing anything).
      */
-    nsresult ResolveHost(const char                      *hostname,
+    nsresult ResolveHost(const char                      *host,
                          const mozilla::OriginAttributes &aOriginAttributes,
                          uint16_t                         flags,
                          uint16_t                         af,
                          const char                      *netInterface,
-                         nsResolveHostCallback           *callback);
+                         nsResolveHostCallback           *aCallback);
 
     /**
      * removes the specified callback from the nsHostRecord for the given
@@ -345,12 +345,12 @@ public:
      * should correspond to the parameters passed to ResolveHost.  this function
      * executes the callback if the callback is still pending with the given status.
      */
-    void DetachCallback(const char                      *hostname,
+    void DetachCallback(const char                      *host,
                         const mozilla::OriginAttributes &aOriginAttributes,
                         uint16_t                         flags,
                         uint16_t                         af,
                         const char                      *netInterface,
-                        nsResolveHostCallback           *callback,
+                        nsResolveHostCallback           *aCallback,
                         nsresult                         status);
 
     /**
@@ -418,7 +418,7 @@ private:
 
     // Kick-off a name resolve operation, using native resolver and/or TRR
     nsresult NameLookup(nsHostRecord *);
-    bool     GetHostToLookup(nsHostRecord **m);
+    bool     GetHostToLookup(nsHostRecord **result);
 
     // Removes the first element from the list and returns it AddRef-ed in aResult
     // Should not be called for an empty linked list.

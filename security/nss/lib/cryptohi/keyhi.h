@@ -26,8 +26,8 @@ extern void SECKEY_DestroySubjectPublicKeyInfo(CERTSubjectPublicKeyInfo *spki);
 ** appropriately (memory is allocated for each of the sub objects).
 */
 extern SECStatus SECKEY_CopySubjectPublicKeyInfo(PLArenaPool *arena,
-                                                 CERTSubjectPublicKeyInfo *dst,
-                                                 CERTSubjectPublicKeyInfo *src);
+                                                 CERTSubjectPublicKeyInfo *to,
+                                                 CERTSubjectPublicKeyInfo *from);
 
 /*
 ** Update the PQG parameters for a cert's public key.
@@ -60,17 +60,17 @@ extern unsigned SECKEY_SignatureLen(const SECKEYPublicKey *pubk);
 /*
 ** Make a copy of the private key "privKey"
 */
-extern SECKEYPrivateKey *SECKEY_CopyPrivateKey(const SECKEYPrivateKey *privKey);
+extern SECKEYPrivateKey *SECKEY_CopyPrivateKey(const SECKEYPrivateKey *privk);
 
 /*
 ** Make a copy of the public key "pubKey"
 */
-extern SECKEYPublicKey *SECKEY_CopyPublicKey(const SECKEYPublicKey *pubKey);
+extern SECKEYPublicKey *SECKEY_CopyPublicKey(const SECKEYPublicKey *pubk);
 
 /*
 ** Convert a private key "privateKey" into a public key
 */
-extern SECKEYPublicKey *SECKEY_ConvertToPublicKey(SECKEYPrivateKey *privateKey);
+extern SECKEYPublicKey *SECKEY_ConvertToPublicKey(SECKEYPrivateKey *privk);
 
 /*
  * create a new RSA key pair. The private Key is returned...
@@ -94,7 +94,7 @@ SECKEYPrivateKey *SECKEY_CreateECPrivateKey(SECKEYECParams *param,
 ** Create a subject-public-key-info based on a public key.
 */
 extern CERTSubjectPublicKeyInfo *
-SECKEY_CreateSubjectPublicKeyInfo(const SECKEYPublicKey *k);
+SECKEY_CreateSubjectPublicKeyInfo(const SECKEYPublicKey *pubk);
 
 /*
 ** Convert a base64 ascii encoded DER public key and challenge to spki,
@@ -102,7 +102,7 @@ SECKEY_CreateSubjectPublicKeyInfo(const SECKEYPublicKey *k);
 */
 extern CERTSubjectPublicKeyInfo *
 SECKEY_ConvertAndDecodePublicKeyAndChallenge(char *pkacstr, char *challenge,
-                                             void *cx);
+                                             void *wincx);
 
 /*
 ** Encode a  CERTSubjectPublicKeyInfo structure. into a
@@ -136,13 +136,13 @@ SECKEY_ExtractPublicKey(const CERTSubjectPublicKeyInfo *);
 ** Destroy a private key object.
 **	"key" the object
 */
-extern void SECKEY_DestroyPrivateKey(SECKEYPrivateKey *key);
+extern void SECKEY_DestroyPrivateKey(SECKEYPrivateKey *privk);
 
 /*
 ** Destroy a public key object.
 **	"key" the object
 */
-extern void SECKEY_DestroyPublicKey(SECKEYPublicKey *key);
+extern void SECKEY_DestroyPublicKey(SECKEYPublicKey *pubk);
 
 /* Destroy and zero out a private key info structure.  for now this
  * function zero's out memory allocated in an arena for the key
@@ -247,7 +247,7 @@ SECKEY_AddPublicKeyToListTail(SECKEYPublicKeyList *list,
  *
  * Return 0 on failure (unknown EC domain parameters).
  */
-extern int SECKEY_ECParamsToKeySize(const SECItem *params);
+extern int SECKEY_ECParamsToKeySize(const SECItem *encodedParams);
 
 /*
  * Length in bits of the EC base point order, usually denoted n.  This
@@ -256,7 +256,7 @@ extern int SECKEY_ECParamsToKeySize(const SECItem *params);
  *
  * Return 0 on failure (unknown EC domain parameters).
  */
-extern int SECKEY_ECParamsToBasePointOrderLen(const SECItem *params);
+extern int SECKEY_ECParamsToBasePointOrderLen(const SECItem *encodedParams);
 
 /*
  * Returns the object identifier of the curve, of the provided

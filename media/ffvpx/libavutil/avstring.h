@@ -65,7 +65,7 @@ int av_stristart(const char *str, const char *pfx, const char **ptr);
  * @return         pointer to the located match within haystack
  *                 or a null pointer if no match
  */
-char *av_stristr(const char *haystack, const char *needle);
+char *av_stristr(const char *s1, const char *s2);
 
 /**
  * Locate the first occurrence of the string needle in the string haystack

@@ -73,7 +73,7 @@ nssRWLock_AtomicCreate(NSSRWLock **prwlock,
 ** OUTPUTS:     void
 ** RETURN:      None
 ***********************************************************************/
-extern void NSSRWLock_Destroy(NSSRWLock *lock);
+extern void NSSRWLock_Destroy(NSSRWLock *rwlock);
 
 /***********************************************************************
 ** FUNCTION:    NSSRWLock_LockRead
@@ -83,7 +83,7 @@ extern void NSSRWLock_Destroy(NSSRWLock *lock);
 ** OUTPUTS:     void
 ** RETURN:      None
 ***********************************************************************/
-extern void NSSRWLock_LockRead(NSSRWLock *lock);
+extern void NSSRWLock_LockRead(NSSRWLock *rwlock);
 
 /***********************************************************************
 ** FUNCTION:    NSSRWLock_LockWrite
@@ -93,7 +93,7 @@ extern void NSSRWLock_LockRead(NSSRWLock *lock);
 ** OUTPUTS:     void
 ** RETURN:      None
 ***********************************************************************/
-extern void NSSRWLock_LockWrite(NSSRWLock *lock);
+extern void NSSRWLock_LockWrite(NSSRWLock *rwlock);
 
 /***********************************************************************
 ** FUNCTION:    NSSRWLock_UnlockRead
@@ -103,7 +103,7 @@ extern void NSSRWLock_LockWrite(NSSRWLock *lock);
 ** OUTPUTS:     void
 ** RETURN:      void
 ***********************************************************************/
-extern void NSSRWLock_UnlockRead(NSSRWLock *lock);
+extern void NSSRWLock_UnlockRead(NSSRWLock *rwlock);
 
 /***********************************************************************
 ** FUNCTION:    NSSRWLock_UnlockWrite
@@ -113,7 +113,7 @@ extern void NSSRWLock_UnlockRead(NSSRWLock *lock);
 ** OUTPUTS:     void
 ** RETURN:      void
 ***********************************************************************/
-extern void NSSRWLock_UnlockWrite(NSSRWLock *lock);
+extern void NSSRWLock_UnlockWrite(NSSRWLock *rwlock);
 
 /***********************************************************************
 ** FUNCTION:    NSSRWLock_HaveWriteLock

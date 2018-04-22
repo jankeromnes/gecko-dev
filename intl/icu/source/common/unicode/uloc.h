@@ -392,8 +392,8 @@ uloc_getDefault(void);
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-uloc_setDefault(const char* localeID,
-        UErrorCode*       status);
+uloc_setDefault(const char* newDefaultLocale,
+        UErrorCode*       err);
 #endif  /* U_HIDE_SYSTEM_API */
 
 /**
@@ -568,9 +568,9 @@ uloc_getLCID(const char* localeID);
 U_STABLE int32_t U_EXPORT2
 uloc_getDisplayLanguage(const char* locale,
             const char* displayLocale,
-            UChar* language,
-            int32_t languageCapacity,
-            UErrorCode* status);
+            UChar* dest,
+            int32_t destCapacity,
+            UErrorCode* pErrorCode);
 
 /**
  * Gets the script name suitable for display for the specified locale.
@@ -591,9 +591,9 @@ uloc_getDisplayLanguage(const char* locale,
 U_STABLE int32_t U_EXPORT2
 uloc_getDisplayScript(const char* locale,
             const char* displayLocale,
-            UChar* script,
-            int32_t scriptCapacity,
-            UErrorCode* status);
+            UChar* dest,
+            int32_t destCapacity,
+            UErrorCode* pErrorCode);
 
 /**
  * Gets the country name suitable for display for the specified locale.
@@ -616,9 +616,9 @@ uloc_getDisplayScript(const char* locale,
 U_STABLE int32_t U_EXPORT2
 uloc_getDisplayCountry(const char* locale,
                        const char* displayLocale,
-                       UChar* country,
-                       int32_t countryCapacity,
-                       UErrorCode* status);
+                       UChar* dest,
+                       int32_t destCapacity,
+                       UErrorCode* pErrorCode);
 
 
 /**
@@ -640,9 +640,9 @@ uloc_getDisplayCountry(const char* locale,
 U_STABLE int32_t U_EXPORT2
 uloc_getDisplayVariant(const char* locale,
                        const char* displayLocale,
-                       UChar* variant,
-                       int32_t variantCapacity,
-                       UErrorCode* status);
+                       UChar* dest,
+                       int32_t destCapacity,
+                       UErrorCode* pErrorCode);
 
 /**
  * Gets the keyword name suitable for display for the specified locale.
@@ -734,11 +734,11 @@ uloc_getDisplayKeywordValue(   const char* locale,
  * @stable ICU 2.0
  */
 U_STABLE int32_t U_EXPORT2
-uloc_getDisplayName(const char* localeID,
-            const char* inLocaleID,
-            UChar* result,
-            int32_t maxResultSize,
-            UErrorCode* err);
+uloc_getDisplayName(const char* locale,
+            const char* displayLocale,
+            UChar* dest,
+            int32_t destCapacity,
+            UErrorCode* pErrorCode);
 
 
 /**
@@ -752,7 +752,7 @@ uloc_getDisplayName(const char* localeID,
  * @stable ICU 2.0
  */
 U_STABLE const char* U_EXPORT2
-uloc_getAvailable(int32_t n);
+uloc_getAvailable(int32_t offset);
 
 /**
  * Gets the size of the all available locale list.
@@ -1029,7 +1029,7 @@ uloc_acceptLanguage(char *result, int32_t resultAvailable,
  * @stable ICU 3.8
  */
 U_STABLE int32_t U_EXPORT2
-uloc_getLocaleForLCID(uint32_t hostID, char *locale, int32_t localeCapacity,
+uloc_getLocaleForLCID(uint32_t hostid, char *locale, int32_t localeCapacity,
                     UErrorCode *status);
 
 
@@ -1140,7 +1140,7 @@ uloc_forLanguageTag(const char* langtag,
                     char* localeID,
                     int32_t localeIDCapacity,
                     int32_t* parsedLength,
-                    UErrorCode* err);
+                    UErrorCode* status);
 
 /**
  * Returns a well-formed language tag for this locale ID. 
@@ -1168,7 +1168,7 @@ uloc_toLanguageTag(const char* localeID,
                    char* langtag,
                    int32_t langtagCapacity,
                    UBool strict,
-                   UErrorCode* err);
+                   UErrorCode* status);
 
 /**
  * Converts the specified keyword (legacy key, or BCP 47 Unicode locale

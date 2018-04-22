@@ -42,7 +42,7 @@ extern CK_RV lg_PrivAttr2SSecItem(PLArenaPool *, CK_ATTRIBUTE_TYPE type,
                                   SECItem *item, SDB *sdbpw);
 extern CK_RV lg_GetULongAttribute(CK_ATTRIBUTE_TYPE type,
                                   const CK_ATTRIBUTE *templ, CK_ULONG count,
-                                  CK_ULONG *out);
+                                  CK_ULONG *longData);
 extern PRBool lg_hasAttribute(CK_ATTRIBUTE_TYPE type,
                               const CK_ATTRIBUTE *templ, CK_ULONG count);
 extern PRBool lg_isTrue(CK_ATTRIBUTE_TYPE type,
@@ -61,7 +61,7 @@ extern void lg_FreeSearch(SDBFind *search);
 NSSLOWCERTCertDBHandle *lg_getCertDB(SDB *sdb);
 NSSLOWKEYDBHandle *lg_getKeyDB(SDB *sdb);
 
-const char *lg_EvaluateConfigDir(const char *configdir, char **domain);
+const char *lg_EvaluateConfigDir(const char *configdir, char **appName);
 
 /* verify the FIPS selftests ran and were successful */
 PRBool lg_FIPSEntryOK(void);
@@ -92,16 +92,16 @@ PRBool lg_FIPSEntryOK(void);
  * token object utilities
  */
 void lg_addHandle(SDBFind *search, CK_OBJECT_HANDLE handle);
-PRBool lg_poisonHandle(SDB *sdb, SECItem *dbkey, CK_OBJECT_HANDLE handle);
+PRBool lg_poisonHandle(SDB *sdb, SECItem *dbKey, CK_OBJECT_HANDLE class);
 PRBool lg_tokenMatch(SDB *sdb, const SECItem *dbKey, CK_OBJECT_HANDLE class,
                      const CK_ATTRIBUTE *templ, CK_ULONG count);
 const SECItem *lg_lookupTokenKeyByHandle(SDB *sdb, CK_OBJECT_HANDLE handle);
 CK_OBJECT_HANDLE lg_mkHandle(SDB *sdb, SECItem *dbKey, CK_OBJECT_HANDLE class);
 SECStatus lg_deleteTokenKeyByHandle(SDB *sdb, CK_OBJECT_HANDLE handle);
 
-SECStatus lg_util_encrypt(PLArenaPool *arena, SDB *sdbpw,
+SECStatus lg_util_encrypt(PLArenaPool *arena, SDB *sdb,
                           SECItem *plainText, SECItem **cipherText);
-SECStatus lg_util_decrypt(SDB *sdbpw,
+SECStatus lg_util_decrypt(SDB *sdb,
                           SECItem *cipherText, SECItem **plainText);
 PLHashTable *lg_GetHashTable(SDB *sdb);
 void lg_DBLock(SDB *sdb);
@@ -116,7 +116,7 @@ typedef void (*LGFreeFunc)(void *);
 /* lg_FindObjectsInit initializes a search for token and session objects
  * that match a template. */
 CK_RV lg_FindObjectsInit(SDB *sdb, const CK_ATTRIBUTE *pTemplate,
-                         CK_ULONG ulCount, SDBFind **search);
+                         CK_ULONG ulCount, SDBFind **retSearch);
 /* lg_FindObjects continues a search for token and session objects
  * that match a template, obtaining additional object handles. */
 CK_RV lg_FindObjects(SDB *sdb, SDBFind *search,
@@ -131,10 +131,10 @@ CK_RV lg_FindObjectsFinal(SDB *lgdb, SDBFind *search);
 CK_RV lg_CreateObject(SDB *sdb, CK_OBJECT_HANDLE *handle,
                       const CK_ATTRIBUTE *templ, CK_ULONG count);
 
-CK_RV lg_GetAttributeValue(SDB *sdb, CK_OBJECT_HANDLE object_id,
-                           CK_ATTRIBUTE *template, CK_ULONG count);
-CK_RV lg_SetAttributeValue(SDB *sdb, CK_OBJECT_HANDLE object_id,
-                           const CK_ATTRIBUTE *template, CK_ULONG count);
+CK_RV lg_GetAttributeValue(SDB *sdb, CK_OBJECT_HANDLE handle,
+                           CK_ATTRIBUTE *templ, CK_ULONG count);
+CK_RV lg_SetAttributeValue(SDB *sdb, CK_OBJECT_HANDLE handle,
+                           const CK_ATTRIBUTE *templ, CK_ULONG count);
 CK_RV lg_DestroyObject(SDB *sdb, CK_OBJECT_HANDLE object_id);
 
 CK_RV lg_Close(SDB *sdb);

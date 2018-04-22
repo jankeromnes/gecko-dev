@@ -42,7 +42,7 @@
 
 
 int NR_async_timer_init(void);
-int NR_async_timer_set(int delay_ms,NR_async_cb cb,void *cb_arg,char *function,int line,void **handle);
+int NR_async_timer_set(int timeout,NR_async_cb cb,void *arg,char *func,int l,void **handle);
 int NR_async_timer_cancel(void *handle);
 int NR_async_timer_update_time(struct timeval *tv);
 int NR_async_timer_next_timeout(int *delay_ms);

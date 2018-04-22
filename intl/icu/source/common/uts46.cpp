@@ -113,7 +113,7 @@ IDNA::nameToUnicodeUTF8(StringPiece name, ByteSink &dest,
 
 class UTS46 : public IDNA {
 public:
-    UTS46(uint32_t options, UErrorCode &errorCode);
+    UTS46(uint32_t opt, UErrorCode &errorCode);
     virtual ~UTS46();
 
     virtual UnicodeString &

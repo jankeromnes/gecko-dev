@@ -38,13 +38,13 @@ public:
     nsString mName;
     std::string mBreakpadId;
 
-    bool operator==(const Module& other) const;
+    bool operator==(const Module& aOther) const;
   };
 
   const Frame &GetFrame(unsigned aIndex) const;
   void AddFrame(const Frame& aFrame);
   const Module &GetModule(unsigned aIndex) const;
-  void AddModule(const Module& aFrame);
+  void AddModule(const Module& aModule);
 
   void Clear();
 

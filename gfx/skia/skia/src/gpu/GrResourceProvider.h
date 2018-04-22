@@ -269,7 +269,7 @@ private:
 
     // Attempts to find a resource in the cache that exactly matches the GrSurfaceDesc. Failing that
     // it returns null. If non-null, the resulting texture is always budgeted.
-    sk_sp<GrTexture> refScratchTexture(const GrSurfaceDesc&, uint32_t scratchTextureFlags);
+    sk_sp<GrTexture> refScratchTexture(const GrSurfaceDesc&, uint32_t flags);
 
     /*
      * Try to find an existing scratch texture that exactly matches 'desc'. If successful

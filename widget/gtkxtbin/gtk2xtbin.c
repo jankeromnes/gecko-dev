@@ -38,7 +38,7 @@
 static void            gtk_xtbin_class_init (GtkXtBinClass *klass);
 static void            gtk_xtbin_init       (GtkXtBin      *xtbin);
 static void            gtk_xtbin_realize    (GtkWidget      *widget);
-static void            gtk_xtbin_unrealize    (GtkWidget      *widget);
+static void            gtk_xtbin_unrealize    (GtkWidget      *object);
 static void            gtk_xtbin_destroy    (GtkObject      *object);
 
 /* Xt aware XEmbed */

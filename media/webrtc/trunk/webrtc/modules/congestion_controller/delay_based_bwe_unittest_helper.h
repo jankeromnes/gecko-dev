@@ -140,7 +140,7 @@ class DelayBasedBweTest : public ::testing::Test {
   // Can for instance be used to run the estimator for some time to get it
   // into a steady state.
   uint32_t SteadyStateRun(uint32_t ssrc,
-                          int number_of_frames,
+                          int max_number_of_frames,
                           uint32_t start_bitrate,
                           uint32_t min_bitrate,
                           uint32_t max_bitrate,
@@ -151,7 +151,7 @@ class DelayBasedBweTest : public ::testing::Test {
   void TestWrappingHelper(int silence_time_s);
 
   void InitialBehaviorTestHelper(uint32_t expected_converge_bitrate);
-  void RateIncreaseReorderingTestHelper(uint32_t expected_bitrate);
+  void RateIncreaseReorderingTestHelper(uint32_t expected_bitrate_bps);
   void RateIncreaseRtpTimestampsTestHelper(int expected_iterations);
   void CapacityDropTestHelper(int number_of_streams,
                               bool wrap_time_stamp,

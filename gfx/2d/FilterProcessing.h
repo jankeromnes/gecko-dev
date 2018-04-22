@@ -100,11 +100,11 @@ protected:
   static void ApplyMorphologyHorizontal_SSE2(uint8_t* aSourceData, int32_t aSourceStride,
                                              uint8_t* aDestData, int32_t aDestStride,
                                              const IntRect& aDestRect, int32_t aRadius,
-                                             MorphologyOperator aOperator);
+                                             MorphologyOperator aOp);
   static void ApplyMorphologyVertical_SSE2(uint8_t* aSourceData, int32_t aSourceStride,
                                              uint8_t* aDestData, int32_t aDestStride,
                                              const IntRect& aDestRect, int32_t aRadius,
-                                             MorphologyOperator aOperator);
+                                             MorphologyOperator aOp);
   static already_AddRefed<DataSourceSurface> ApplyColorMatrix_SSE2(DataSourceSurface* aInput, const Matrix5x4 &aMatrix);
   static void ApplyComposition_SSE2(DataSourceSurface* aSource, DataSourceSurface* aDest, CompositeOperator aOperator);
   static void SeparateColorChannels_SSE2(const IntSize &size, uint8_t* sourceData, int32_t sourceStride, uint8_t* channel0Data, uint8_t* channel1Data, uint8_t* channel2Data, uint8_t* channel3Data, int32_t channelStride);

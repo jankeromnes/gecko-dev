@@ -55,7 +55,7 @@ public:
      * returns false it may indicate that the best fallback is to use kMipMap, kBilerp, or
      * kNearest).
      */
-    static bool ShouldUseBicubic(const SkMatrix& localCoordsToDevice,
+    static bool ShouldUseBicubic(const SkMatrix& matrix,
                                  GrSamplerState::Filter* filterMode);
 
 private:

@@ -619,7 +619,7 @@ uspoof_open(UErrorCode *status);
  */
 U_STABLE USpoofChecker * U_EXPORT2
 uspoof_openFromSerialized(const void *data, int32_t length, int32_t *pActualLength,
-                          UErrorCode *pErrorCode);
+                          UErrorCode *status);
 
 /**
   * Open a Spoof Checker from the source form of the spoof data.
@@ -1363,8 +1363,8 @@ uspoof_areConfusableUTF8(const USpoofChecker *sc,
  */
 U_STABLE int32_t U_EXPORT2
 uspoof_areConfusableUnicodeString(const USpoofChecker *sc,
-                                  const icu::UnicodeString &s1,
-                                  const icu::UnicodeString &s2,
+                                  const icu::UnicodeString &id1,
+                                  const icu::UnicodeString &id2,
                                   UErrorCode *status);
 #endif
 
@@ -1567,7 +1567,7 @@ uspoof_getRecommendedUnicodeSet(UErrorCode *status);
  */
 U_STABLE int32_t U_EXPORT2
 uspoof_serialize(USpoofChecker *sc,
-                 void *data, int32_t capacity,
+                 void *buf, int32_t capacity,
                  UErrorCode *status);
 
 

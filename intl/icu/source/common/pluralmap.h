@@ -42,20 +42,20 @@ public:
      * or "other" to a category enum. Returns NONE for an unrecognized
      * category name.
      */
-    static Category toCategory(const char *categoryName);
+    static Category toCategory(const char *pluralForm);
 
     /**
      * Converts a category name such as "zero", "one", "two", "few", "many"
      * or "other" to a category enum.  Returns NONE for urecongized
      * category name.
      */
-    static Category toCategory(const UnicodeString &categoryName);
+    static Category toCategory(const UnicodeString &pluralForm);
 
     /**
      * Converts a category to a name.
      * Passing NONE or CATEGORY_COUNT for category returns NULL.
      */
-    static const char *getCategoryName(Category category);
+    static const char *getCategoryName(Category c);
 };
 
 /**

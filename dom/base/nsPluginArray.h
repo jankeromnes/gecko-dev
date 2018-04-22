@@ -44,7 +44,7 @@ public:
   void GetMimeTypes(nsTArray<RefPtr<nsMimeType>>& aMimeTypes);
   void GetCTPMimeTypes(nsTArray<RefPtr<nsMimeType>>& aMimeTypes);
 
-  static void NotifyHiddenPluginTouched(nsPluginElement* aElement);
+  static void NotifyHiddenPluginTouched(nsPluginElement* aHiddenElement);
 
   // PluginArray WebIDL methods
 
@@ -98,10 +98,10 @@ public:
   void GetFilename(nsString& retval) const;
   void GetVersion(nsString& retval) const;
   void GetName(nsString& retval) const;
-  nsMimeType* Item(uint32_t index);
-  nsMimeType* NamedItem(const nsAString& name);
-  nsMimeType* IndexedGetter(uint32_t index, bool &found);
-  nsMimeType* NamedGetter(const nsAString& name, bool &found);
+  nsMimeType* Item(uint32_t aIndex);
+  nsMimeType* NamedItem(const nsAString& aName);
+  nsMimeType* IndexedGetter(uint32_t aIndex, bool &aFound);
+  nsMimeType* NamedGetter(const nsAString& aName, bool &aFound);
   uint32_t Length();
   void GetSupportedNames(nsTArray<nsString>& retval);
 

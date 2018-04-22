@@ -448,7 +448,7 @@ const AVOption *av_opt_find2(void *obj, const char *name, const char *unit,
  *             or NULL
  * @return next AVOption or NULL
  */
-const AVOption *av_opt_next(void *obj, const AVOption *prev);
+const AVOption *av_opt_next(void *obj, const AVOption *last);
 
 /**
  * Iterate over AVOptions-enabled children of obj.
@@ -496,7 +496,7 @@ int av_opt_set         (void *obj, const char *name, const char *val, int search
 int av_opt_set_int     (void *obj, const char *name, int64_t     val, int search_flags);
 int av_opt_set_double  (void *obj, const char *name, double      val, int search_flags);
 int av_opt_set_q       (void *obj, const char *name, AVRational  val, int search_flags);
-int av_opt_set_bin     (void *obj, const char *name, const uint8_t *val, int size, int search_flags);
+int av_opt_set_bin     (void *obj, const char *name, const uint8_t *val, int len, int search_flags);
 /**
  * @note Any old dictionary present is discarded and replaced with a copy of the new one. The
  * caller still owns val is and responsible for freeing it.

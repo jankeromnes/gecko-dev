@@ -32,7 +32,7 @@ public:
      *  and indices is ignored if indexCount == 0.
      */
     static sk_sp<SkVertices> MakeCopy(VertexMode mode, int vertexCount,
-                                      const SkPoint positions[],
+                                      const SkPoint pos[],
                                       const SkPoint texs[],
                                       const SkColor colors[],
                                       int indexCount,
@@ -53,7 +53,7 @@ public:
     };
     class Builder {
     public:
-        Builder(VertexMode mode, int vertexCount, int indexCount, uint32_t flags);
+        Builder(VertexMode mode, int vertexCount, int indexCount, uint32_t builderFlags);
 
         bool isValid() const { return fVertices != nullptr; }
 
@@ -102,7 +102,7 @@ public:
      *  Recreate a vertices from a buffer previously created by calling encode().
      *  Returns null if the data is corrupt or the length is incorrect for the contents.
      */
-    static sk_sp<SkVertices> Decode(const void* buffer, size_t length);
+    static sk_sp<SkVertices> Decode(const void* data, size_t length);
 
     /**
      *  Pack the vertices object into a byte buffer. This can be used to recreate the vertices

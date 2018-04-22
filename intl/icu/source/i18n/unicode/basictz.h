@@ -82,7 +82,7 @@ public:
      * @stable ICU 3.8
      */
     virtual UBool hasEquivalentTransitions(const BasicTimeZone& tz, UDate start, UDate end,
-        UBool ignoreDstAmount, UErrorCode& ec) const;
+        UBool ignoreDstAmount, UErrorCode& status) const;
 
     /**
      * Returns the number of <code>TimeZoneRule</code>s which represents time transitions,

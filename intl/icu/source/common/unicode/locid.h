@@ -267,10 +267,10 @@ public:
      * @see uloc_getDefault
      * @stable ICU 2.0
      */
-    Locale( const   char * language,
-            const   char * country  = 0,
-            const   char * variant  = 0,
-            const   char * keywordsAndValues = 0);
+    Locale( const   char * newLanguage,
+            const   char * newCountry  = 0,
+            const   char * newVariant  = 0,
+            const   char * newKeywords = 0);
 
     /**
      * Initializes a Locale object from another Locale object.
@@ -359,7 +359,7 @@ public:
      * @stable ICU 2.0
      */
     static void U_EXPORT2 setDefault(const Locale& newLocale,
-                                     UErrorCode&   success);
+                                     UErrorCode&   status);
 #endif  /* U_HIDE_SYSTEM_API */
 
     /**
@@ -454,7 +454,7 @@ public:
      *
      * @stable ICU 2.8
      */
-    int32_t getKeywordValue(const char* keywordName, char *buffer, int32_t bufferCapacity, UErrorCode &status) const;
+    int32_t getKeywordValue(const char* keywordName, char *buffer, int32_t bufLen, UErrorCode &status) const;
 
     /**
      * Sets or removes the value for a keyword.
@@ -536,7 +536,7 @@ public:
      * @stable ICU 2.0
      */
     UnicodeString&  getDisplayLanguage( const   Locale&         displayLocale,
-                                                UnicodeString&  dispLang) const;
+                                                UnicodeString&  result) const;
 
     /**
      * Fills in "dispScript" with the name of this locale's script in a format suitable
@@ -564,7 +564,7 @@ public:
      * @stable ICU 2.8
      */
     UnicodeString&  getDisplayScript(  const   Locale&         displayLocale,
-                                               UnicodeString&  dispScript) const;
+                                               UnicodeString&  result) const;
 
     /**
      * Fills in "dispCountry" with the name of this locale's country in a format suitable
@@ -575,7 +575,7 @@ public:
      * @return              A reference to "dispCountry".
      * @stable ICU 2.0
      */
-    UnicodeString&  getDisplayCountry(          UnicodeString& dispCountry) const;
+    UnicodeString&  getDisplayCountry(          UnicodeString& dispCntry) const;
 
     /**
      * Fills in "dispCountry" with the name of this locale's country in a format suitable
@@ -592,7 +592,7 @@ public:
      * @stable ICU 2.0
      */
     UnicodeString&  getDisplayCountry(  const   Locale&         displayLocale,
-                                                UnicodeString&  dispCountry) const;
+                                                UnicodeString&  result) const;
 
     /**
      * Fills in "dispVar" with the name of this locale's variant code in a format suitable
@@ -612,7 +612,7 @@ public:
      * @stable ICU 2.0
      */
     UnicodeString&  getDisplayVariant(  const   Locale&         displayLocale,
-                                                UnicodeString&  dispVar) const;
+                                                UnicodeString&  result) const;
 
     /**
      * Fills in "name" with the name of this locale in a format suitable for user display
@@ -640,7 +640,7 @@ public:
      * @stable ICU 2.0
      */
     UnicodeString&  getDisplayName( const   Locale&         displayLocale,
-                                            UnicodeString&  name) const;
+                                            UnicodeString&  result) const;
 
     /**
      * Generates a hash code for the locale.
@@ -726,7 +726,7 @@ private:
      * @param cLocaleID The new locale name.
      * @param canonicalize whether to call uloc_canonicalize on cLocaleID
      */
-    Locale& init(const char* cLocaleID, UBool canonicalize);
+    Locale& init(const char* localeID, UBool canonicalize);
 
     /*
      * Internal constructor to allow construction of a locale object with

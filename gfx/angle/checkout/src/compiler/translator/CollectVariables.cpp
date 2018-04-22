@@ -149,7 +149,7 @@ class CollectVariablesTraverser : public TIntermTraverser
     void recordBuiltInFragmentOutputUsed(const ImmutableString &name, bool *addedFlag);
     void recordBuiltInAttributeUsed(const ImmutableString &name, bool *addedFlag);
     InterfaceBlock *recordGLInUsed(const TType &glInType);
-    InterfaceBlock *findNamedInterfaceBlock(const ImmutableString &name) const;
+    InterfaceBlock *findNamedInterfaceBlock(const ImmutableString &blockName) const;
 
     std::vector<Attribute> *mAttribs;
     std::vector<OutputVariable> *mOutputVariables;

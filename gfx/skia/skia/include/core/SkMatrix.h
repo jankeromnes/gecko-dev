@@ -591,7 +591,7 @@ public:
         @param px        pivot x
         @param py        pivot y
     */
-    void setSinCos(SkScalar sinValue, SkScalar cosValue,
+    void setSinCos(SkScalar sinV, SkScalar cosV,
                    SkScalar px, SkScalar py);
 
     /** Sets SkMatrix to rotate by sinValue and cosValue, about a pivot point at (0, 0).
@@ -602,7 +602,7 @@ public:
         @param sinValue  rotation vector x component
         @param cosValue  rotation vector y component
     */
-    void setSinCos(SkScalar sinValue, SkScalar cosValue);
+    void setSinCos(SkScalar sinV, SkScalar cosV);
 
     /** Sets SkMatrix to rotate, scale, and translate using a compressed matrix form.
 
@@ -613,7 +613,7 @@ public:
         @param rsxForm  compressed SkRSXform matrix
         @return         reference to SkMatrix
     */
-    SkMatrix& setRSXform(const SkRSXform& rsxForm);
+    SkMatrix& setRSXform(const SkRSXform& xform);
 
     /** Sets SkMatrix to skew by kx and ky, about a pivot point at (px, py).
         The pivot point is unchanged when mapped with SkMatrix.
@@ -623,14 +623,14 @@ public:
         @param px  pivot x
         @param py  pivot y
     */
-    void setSkew(SkScalar kx, SkScalar ky, SkScalar px, SkScalar py);
+    void setSkew(SkScalar sx, SkScalar sy, SkScalar px, SkScalar py);
 
     /** Sets SkMatrix to skew by kx and ky, about a pivot point at (0, 0).
 
         @param kx  horizontal skew factor
         @param ky  vertical skew factor
     */
-    void setSkew(SkScalar kx, SkScalar ky);
+    void setSkew(SkScalar sx, SkScalar sy);
 
     /** Sets SkMatrix to SkMatrix a multiplied by SkMatrix b. Either a or b may be this.
 
@@ -804,7 +804,7 @@ public:
         @param px  pivot x
         @param py  pivot y
     */
-    void preSkew(SkScalar kx, SkScalar ky, SkScalar px, SkScalar py);
+    void preSkew(SkScalar sx, SkScalar sy, SkScalar px, SkScalar py);
 
     /** Sets SkMatrix to SkMatrix multiplied by SkMatrix constructed from skewing by (kx, ky)
         about pivot point (0, 0).
@@ -825,7 +825,7 @@ public:
         @param kx  horizontal skew factor
         @param ky  vertical skew factor
     */
-    void preSkew(SkScalar kx, SkScalar ky);
+    void preSkew(SkScalar sx, SkScalar sy);
 
     /** Sets SkMatrix to SkMatrix multiplied by SkMatrix other.
         This can be thought of mapping by other before applying SkMatrix.
@@ -844,7 +844,7 @@ public:
 
         @param other  SkMatrix on right side of multiply expression
     */
-    void preConcat(const SkMatrix& other);
+    void preConcat(const SkMatrix& mat);
 
     /** Sets SkMatrix to SkMatrix constructed from translation (dx, dy) multiplied by SkMatrix.
         This can be thought of as moving the point to be mapped after applying SkMatrix.
@@ -1026,7 +1026,7 @@ public:
         @param px  pivot x
         @param py  pivot y
     */
-    void postSkew(SkScalar kx, SkScalar ky, SkScalar px, SkScalar py);
+    void postSkew(SkScalar sx, SkScalar sy, SkScalar px, SkScalar py);
 
     /** Sets SkMatrix to SkMatrix constructed from skewing by (kx, ky) about pivot point
         (0, 0), multiplied by SkMatrix.
@@ -1047,7 +1047,7 @@ public:
         @param kx  horizontal skew factor
         @param ky  vertical skew factor
     */
-    void postSkew(SkScalar kx, SkScalar ky);
+    void postSkew(SkScalar sx, SkScalar sy);
 
     /** Sets SkMatrix to SkMatrix other multiplied by SkMatrix.
         This can be thought of mapping by other after applying SkMatrix.
@@ -1066,7 +1066,7 @@ public:
 
         @param other  SkMatrix on left side of multiply expression
     */
-    void postConcat(const SkMatrix& other);
+    void postConcat(const SkMatrix& mat);
 
     /** \enum SkMatrix::ScaleToFit
         ScaleToFit describes how SkMatrix is constructed to map one SkRect to another.
@@ -1115,7 +1115,7 @@ public:
                     kCenter_ScaleToFit, kEnd_ScaleToFit
         @return     true if SkMatrix can represent SkRect mapping
     */
-    bool setRectToRect(const SkRect& src, const SkRect& dst, ScaleToFit stf);
+    bool setRectToRect(const SkRect& src, const SkRect& dst, ScaleToFit align);
 
     /** Returns SkMatrix set to scale and translate src SkRect to dst SkRect. stf selects
         whether mapping completely fills dst or preserves the aspect ratio, and how to
@@ -1210,7 +1210,7 @@ public:
 
         @param affine  3x2 affine matrix
     */
-    void setAffine(const SkScalar affine[6]);
+    void setAffine(const SkScalar buffer[6]);
 
     /** Maps src SkPoint array of length count to dst SkPoint array of equal or greater
         length. SkPoint are mapped by multiplying each SkPoint by SkMatrix. Given:
@@ -1827,7 +1827,7 @@ private:
         return GetMapPtsProc(this->getType());
     }
 
-    bool SK_WARN_UNUSED_RESULT invertNonIdentity(SkMatrix* inverse) const;
+    bool SK_WARN_UNUSED_RESULT invertNonIdentity(SkMatrix* inv) const;
 
     static bool Poly2Proc(const SkPoint[], SkMatrix*, const SkPoint& scale);
     static bool Poly3Proc(const SkPoint[], SkMatrix*, const SkPoint& scale);

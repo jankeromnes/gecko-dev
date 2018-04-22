@@ -76,10 +76,10 @@ public:
   bool WaitForJob(Job*& aOutJob);
 
   // Any thread
-  bool PopJob(Job*& aOutJob, AccessType aAccess);
+  bool PopJob(Job*& aOutJobs, AccessType aAccess);
 
   // Any threads
-  void SubmitJob(Job* aJob);
+  void SubmitJob(Job* aJobs);
 
   // Producer thread
   void ShutDown();

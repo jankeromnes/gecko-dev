@@ -103,14 +103,14 @@ int Aec::instance_count = 0;
 
 // Estimates delay to set the position of the far-end buffer read pointer
 // (controlled by knownDelay)
-static void EstBufDelayNormal(Aec* aecInst);
-static void EstBufDelayExtended(Aec* aecInst);
-static int ProcessNormal(Aec* self,
-                         const float* const* near,
+static void EstBufDelayNormal(Aec* aecpc);
+static void EstBufDelayExtended(Aec* self);
+static int ProcessNormal(Aec* aecpc,
+                         const float* const* nearend,
                          size_t num_bands,
                          float* const* out,
-                         size_t num_samples,
-                         int16_t reported_delay_ms,
+                         size_t nrOfSamples,
+                         int16_t msInSndCardBuf,
                          int32_t skew);
 static void ProcessExtended(Aec* self,
                             const float* const* near,

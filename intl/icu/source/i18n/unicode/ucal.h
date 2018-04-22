@@ -691,7 +691,7 @@ U_STABLE UCalendar* U_EXPORT2
 ucal_open(const UChar*   zoneID,
           int32_t        len,
           const char*    locale,
-          UCalendarType  type,
+          UCalendarType  caltype,
           UErrorCode*    status);
 
 /**
@@ -970,7 +970,7 @@ ucal_setAttribute(UCalendar*          cal,
  * @stable ICU 2.0
  */
 U_STABLE const char* U_EXPORT2 
-ucal_getAvailable(int32_t localeIndex);
+ucal_getAvailable(int32_t index);
 
 /**
  * Determine how many locales have calendars available.

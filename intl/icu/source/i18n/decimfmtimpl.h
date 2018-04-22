@@ -278,7 +278,7 @@ void applyPattern(
 void applyLocalizedPattern(const UnicodeString &pattern, UErrorCode &status);
 void applyLocalizedPattern(
         const UnicodeString &pattern, UParseError &perror, UErrorCode &status);
-void setCurrencyUsage(UCurrencyUsage usage, UErrorCode &status);
+void setCurrencyUsage(UCurrencyUsage currencyUsage, UErrorCode &status);
 UCurrencyUsage getCurrencyUsage() const { return fCurrencyUsage; }
 void setRoundingIncrement(double d);
 double getRoundingIncrement() const;
@@ -321,7 +321,7 @@ void setPositiveSuffix(const UnicodeString &str);
 void setNegativePrefix(const UnicodeString &str);
 void setNegativeSuffix(const UnicodeString &str);
 UnicodeString &toPattern(UnicodeString& result) const;
-FixedDecimal &getFixedDecimal(double value, FixedDecimal &result, UErrorCode &status) const;
+FixedDecimal &getFixedDecimal(double number, FixedDecimal &result, UErrorCode &status) const;
 FixedDecimal &getFixedDecimal(DigitList &number, FixedDecimal &result, UErrorCode &status) const;
 DigitList &round(DigitList &number, UErrorCode &status) const;
 
@@ -448,7 +448,7 @@ UnicodeString &formatAdjustedDigitList(
         UErrorCode &status) const;
 
 UnicodeString &formatVisibleDigitsWithExponent(
-        const VisibleDigitsWithExponent &number,
+        const VisibleDigitsWithExponent &digits,
         UnicodeString &appendTo,
         FieldPositionHandler &handler,
         UErrorCode &status) const;
@@ -469,7 +469,7 @@ UBool maybeFormatWithDigitList(
 template<class T>
 UBool maybeInitVisibleDigitsFromDigitList(
         T number,
-        VisibleDigitsWithExponent &digits,
+        VisibleDigitsWithExponent &visibleDigits,
         UErrorCode &status) const;
 
 DigitList &adjustDigitList(DigitList &number, UErrorCode &status) const;
@@ -479,7 +479,7 @@ void applyPattern(
         UBool localized, UParseError &perror, UErrorCode &status);
 
 ValueFormatter &prepareValueFormatter(ValueFormatter &vf) const;
-void setMultiplierScale(int32_t s);
+void setMultiplierScale(int32_t scale);
 int32_t getPatternScale() const;
 void setScale(int32_t s) { fScale = s; }
 int32_t getScale() const { return fScale; }

@@ -183,9 +183,9 @@ private:
    * The return value indicates whether the function successfully
    * resolved at least one locale.
    */
-  bool ReadSystemLocales(nsTArray<nsCString>& aRetVal);
+  bool ReadSystemLocales(nsTArray<nsCString>& aLocaleList);
 
-  bool ReadRegionalPrefsLocales(nsTArray<nsCString>& aRetVal);
+  bool ReadRegionalPrefsLocales(nsTArray<nsCString>& aLocaleList);
 
   /**
    * This is a host environment specific method that will be implemented
@@ -200,8 +200,8 @@ private:
    *
    * The heuristic may depend on the OS API and HIG guidelines.
    */
-  bool ReadDateTimePattern(DateTimeFormatStyle aDateFormatStyle,
-                           DateTimeFormatStyle aTimeFormatStyle,
+  bool ReadDateTimePattern(DateTimeFormatStyle aDateStyle,
+                           DateTimeFormatStyle aTimeStyle,
                            const nsACString& aLocale,
                            nsAString& aRetVal);
 };

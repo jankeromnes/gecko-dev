@@ -106,7 +106,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * @param set set to iterate over
      * @stable ICU 2.4
      */
-    UnicodeSetIterator(const UnicodeSet& set);
+    UnicodeSetIterator(const UnicodeSet& uSet);
 
     /**
      * Create an iterator over nothing.  <tt>next()</tt> and
@@ -219,7 +219,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * @param set the set to iterate over.
      * @stable ICU 2.4
      */
-    void reset(const UnicodeSet& set);
+    void reset(const UnicodeSet& uSet);
 
     /**
      * Resets this iterator to the start of the set.
@@ -298,7 +298,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
     /** Load range
      * @stable ICU 2.4
      */
-    virtual void loadRange(int32_t range);
+    virtual void loadRange(int32_t iRange);
 
 };
 

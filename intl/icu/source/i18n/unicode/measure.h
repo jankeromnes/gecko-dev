@@ -52,7 +52,7 @@ class U_I18N_API Measure: public UObject {
      * is invalid, then this will be set to a failing value.
      * @stable ICU 3.0
      */
-    Measure(const Formattable& number, MeasureUnit* adoptedUnit,
+    Measure(const Formattable& _number, MeasureUnit* adoptedUnit,
             UErrorCode& ec);
 
     /**

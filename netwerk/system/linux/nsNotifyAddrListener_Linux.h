@@ -72,7 +72,7 @@ private:
     void checkLink(void);
 
     // Deals with incoming NETLINK messages.
-    void OnNetlinkMessage(int NetlinkSocket);
+    void OnNetlinkMessage(int aNetlinkSocket);
 
     nsCOMPtr<nsIThread> mThread;
 

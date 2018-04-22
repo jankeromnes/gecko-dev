@@ -346,7 +346,7 @@ U_STABLE UStringSearch * U_EXPORT2 usearch_openFromCollator(
 * @param searchiter data struct to clean up
 * @stable ICU 2.4
 */
-U_STABLE void U_EXPORT2 usearch_close(UStringSearch *searchiter);
+U_STABLE void U_EXPORT2 usearch_close(UStringSearch *strsrch);
 
 #if U_SHOW_CPLUSPLUS_API
 

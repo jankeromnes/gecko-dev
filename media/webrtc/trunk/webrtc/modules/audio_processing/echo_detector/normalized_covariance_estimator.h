@@ -19,10 +19,10 @@ class NormalizedCovarianceEstimator {
  public:
   void Update(float x,
               float x_mean,
-              float x_var,
+              float x_sigma,
               float y,
               float y_mean,
-              float y_var);
+              float y_sigma);
   // This function returns an estimate of the Pearson product-moment correlation
   // coefficient of the two signals.
   float normalized_cross_correlation() const {

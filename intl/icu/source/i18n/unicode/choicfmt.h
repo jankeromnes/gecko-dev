@@ -180,7 +180,7 @@ public:
      *                  pattern cannot be parsed, set to failure code.
      * @deprecated ICU 49 Use MessageFormat instead, with plural and select arguments.
      */
-    ChoiceFormat(const UnicodeString& pattern,
+    ChoiceFormat(const UnicodeString& newPattern,
                  UErrorCode& status);
 
 
@@ -198,7 +198,7 @@ public:
      */
     ChoiceFormat(const double* limits,
                  const UnicodeString* formats,
-                 int32_t count );
+                 int32_t cnt );
 
     /**
      * Constructs a new ChoiceFormat with the given limits, closure flags and message strings.
@@ -217,7 +217,7 @@ public:
     ChoiceFormat(const double* limits,
                  const UBool* closures,
                  const UnicodeString* formats,
-                 int32_t count);
+                 int32_t cnt);
 
     /**
      * Copy constructor.
@@ -258,7 +258,7 @@ public:
      * @return         true if other is the same as this.
      * @deprecated ICU 49 Use MessageFormat instead, with plural and select arguments.
      */
-    virtual UBool operator==(const Format& other) const;
+    virtual UBool operator==(const Format& that) const;
 
     /**
      * Sets the pattern.
@@ -292,7 +292,7 @@ public:
      * @return    A reference to 'pattern'
      * @deprecated ICU 49 Use MessageFormat instead, with plural and select arguments.
      */
-    virtual UnicodeString& toPattern(UnicodeString &pattern) const;
+    virtual UnicodeString& toPattern(UnicodeString &result) const;
 
     /**
      * Sets the choices to be used in formatting.
@@ -307,9 +307,9 @@ public:
      * @param count             The size of the above arrays.
      * @deprecated ICU 49 Use MessageFormat instead, with plural and select arguments.
      */
-    virtual void setChoices(const double* limitsToCopy,
-                            const UnicodeString* formatsToCopy,
-                            int32_t count );
+    virtual void setChoices(const double* limits,
+                            const UnicodeString* formats,
+                            int32_t cnt );
 
     /**
      * Sets the choices to be used in formatting.
@@ -324,7 +324,7 @@ public:
     virtual void setChoices(const double* limits,
                             const UBool* closures,
                             const UnicodeString* formats,
-                            int32_t count);
+                            int32_t cnt);
 
     /**
      * Returns NULL and 0.
@@ -334,7 +334,7 @@ public:
      * @return NULL
      * @deprecated ICU 4.8 Use the MessagePattern class to analyze a ChoiceFormat pattern.
      */
-    virtual const double* getLimits(int32_t& count) const;
+    virtual const double* getLimits(int32_t& cnt) const;
 
     /**
      * Returns NULL and 0.
@@ -344,7 +344,7 @@ public:
      * @return NULL
      * @deprecated ICU 4.8 Use the MessagePattern class to analyze a ChoiceFormat pattern.
      */
-    virtual const UBool* getClosures(int32_t& count) const;
+    virtual const UBool* getClosures(int32_t& cnt) const;
 
     /**
      * Returns NULL and 0.
@@ -354,7 +354,7 @@ public:
      * @return NULL
      * @deprecated ICU 4.8 Use the MessagePattern class to analyze a ChoiceFormat pattern.
      */
-    virtual const UnicodeString* getFormats(int32_t& count) const;
+    virtual const UnicodeString* getFormats(int32_t& cnt) const;
 
 
     using NumberFormat::format;
@@ -386,7 +386,7 @@ public:
      */
     virtual UnicodeString& format(int32_t number,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos) const;
+                                  FieldPosition& status) const;
 
     /**
      * Formats an int64_t number using this object's choices.
@@ -401,7 +401,7 @@ public:
      */
     virtual UnicodeString& format(int64_t number,
                                   UnicodeString& appendTo,
-                                  FieldPosition& pos) const;
+                                  FieldPosition& status) const;
 
     /**
      * Formats an array of objects using this object's choices.
@@ -421,7 +421,7 @@ public:
                                   int32_t cnt,
                                   UnicodeString& appendTo,
                                   FieldPosition& pos,
-                                  UErrorCode& success) const;
+                                  UErrorCode& status) const;
 
    using NumberFormat::parse;
 
@@ -441,7 +441,7 @@ public:
     */
     virtual void parse(const UnicodeString& text,
                        Formattable& result,
-                       ParsePosition& parsePosition) const;
+                       ParsePosition& pos) const;
 
     /**
      * Returns a unique class ID POLYMORPHICALLY. Part of ICU's "poor man's RTTI".

@@ -33,7 +33,7 @@ jar_eat_line(int lines, int eating, char *data, long *len);
 static JAR_Digest *
 jar_digest_section(char *manifest, long length);
 
-static JAR_Digest *jar_get_mf_digest(JAR *jar, char *path);
+static JAR_Digest *jar_get_mf_digest(JAR *jar, char *pathname);
 
 static int
 jar_parse_digital_signature(char *raw_manifest, JAR_Signer *signer,

@@ -234,7 +234,7 @@ ssize_t SafeSPrintf(char (&buf)[N], const char* fmt, Args... args) {
 }
 
 // Fast-path when we don't actually need to substitute any arguments.
-BASE_EXPORT ssize_t SafeSNPrintf(char* buf, size_t N, const char* fmt);
+BASE_EXPORT ssize_t SafeSNPrintf(char* buf, size_t sz, const char* fmt);
 template<size_t N>
 inline ssize_t SafeSPrintf(char (&buf)[N], const char* fmt) {
   return SafeSNPrintf(buf, N, fmt);

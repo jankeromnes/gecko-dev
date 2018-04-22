@@ -122,8 +122,8 @@ RSA_SignRaw(RSAPrivateKey *key,
             unsigned char *output,
             unsigned int *outputLen,
             unsigned int maxOutputLen,
-            const unsigned char *input,
-            unsigned int inputLen);
+            const unsigned char *data,
+            unsigned int dataLen);
 
 extern SECStatus
 RSA_CheckSignRaw(RSAPublicKey *key,
@@ -226,7 +226,7 @@ RSA_SignPSS(RSAPrivateKey *key,
             HASH_HashType hashAlg,
             HASH_HashType maskHashAlg,
             const unsigned char *salt,
-            unsigned int saltLen,
+            unsigned int saltLength,
             unsigned char *output,
             unsigned int *outputLen,
             unsigned int maxOutputLen,
@@ -237,7 +237,7 @@ extern SECStatus
 RSA_CheckSignPSS(RSAPublicKey *key,
                  HASH_HashType hashAlg,
                  HASH_HashType maskHashAlg,
-                 unsigned int saltLen,
+                 unsigned int saltLength,
                  const unsigned char *sig,
                  unsigned int sigLen,
                  const unsigned char *hash,
@@ -257,8 +257,8 @@ RSA_Sign(RSAPrivateKey *key,
          unsigned char *output,
          unsigned int *outputLen,
          unsigned int maxOutputLen,
-         const unsigned char *data,
-         unsigned int dataLen);
+         const unsigned char *input,
+         unsigned int inputLen);
 
 extern SECStatus
 RSA_CheckSign(RSAPublicKey *key,
@@ -282,7 +282,7 @@ RSA_CheckSignRecover(RSAPublicKey *key,
 /* Generate a new random value within the interval [2, q-1].
 */
 extern SECStatus DSA_NewRandom(PLArenaPool *arena, const SECItem *q,
-                               SECItem *random);
+                               SECItem *seed);
 
 /*
 ** Generate and return a new DSA public and private key pair,
@@ -360,7 +360,7 @@ extern SECStatus DH_Derive(SECItem *publicValue,
                            SECItem *prime,
                            SECItem *privateValue,
                            SECItem *derivedSecret,
-                           unsigned int outBytes);
+                           unsigned int maxOutBytes);
 
 /*
 ** KEA_CalcKey returns octet string with the private key for a dual
@@ -453,10 +453,10 @@ JPAKE_Final(PLArenaPool *arena, const SECItem *p, const SECItem *q,
 ** in a single ECPrivateKey struct. Params is input, privKey are
 ** output.
 */
-extern SECStatus EC_NewKey(ECParams *params,
+extern SECStatus EC_NewKey(ECParams *ecParams,
                            ECPrivateKey **privKey);
 
-extern SECStatus EC_NewKeyFromSeed(ECParams *params,
+extern SECStatus EC_NewKeyFromSeed(ECParams *ecParams,
                                    ECPrivateKey **privKey,
                                    const unsigned char *seed,
                                    int seedlen);
@@ -465,7 +465,7 @@ extern SECStatus EC_NewKeyFromSeed(ECParams *params,
  * X9.62. Such validation prevents against small subgroup attacks
  * when the ECDH primitive is used with the cofactor.
  */
-extern SECStatus EC_ValidatePublicKey(ECParams *params,
+extern SECStatus EC_ValidatePublicKey(ECParams *ecParams,
                                       SECItem *publicValue);
 
 /*
@@ -482,7 +482,7 @@ extern SECStatus EC_ValidatePublicKey(ECParams *params,
 ** buffer containing the derived secret.
 */
 extern SECStatus ECDH_Derive(SECItem *publicValue,
-                             ECParams *params,
+                             ECParams *ecParams,
                              SECItem *privateValue,
                              PRBool withCofactor,
                              SECItem *derivedSecret);
@@ -507,8 +507,8 @@ extern SECStatus ECDSA_VerifyDigest(ECPublicKey *key,
 extern SECStatus ECDSA_SignDigestWithSeed(ECPrivateKey *key,
                                           SECItem *signature,
                                           const SECItem *digest,
-                                          const unsigned char *seed,
-                                          const int seedlen);
+                                          const unsigned char *kb,
+                                          const int kblen);
 
 /******************************************/
 /*
@@ -525,7 +525,7 @@ extern RC4Context *RC4_CreateContext(const unsigned char *key, int len);
 extern RC4Context *RC4_AllocateContext(void);
 extern SECStatus RC4_InitContext(RC4Context *cx,
                                  const unsigned char *key,
-                                 unsigned int keylen,
+                                 unsigned int len,
                                  const unsigned char *,
                                  int,
                                  unsigned int,
@@ -587,14 +587,14 @@ extern SECStatus RC4_Decrypt(RC4Context *cx, unsigned char *output,
 */
 extern RC2Context *RC2_CreateContext(const unsigned char *key, unsigned int len,
                                      const unsigned char *iv, int mode,
-                                     unsigned effectiveKeyLen);
+                                     unsigned efLen8);
 extern RC2Context *RC2_AllocateContext(void);
 extern SECStatus RC2_InitContext(RC2Context *cx,
                                  const unsigned char *key,
-                                 unsigned int keylen,
-                                 const unsigned char *iv,
+                                 unsigned int len,
+                                 const unsigned char *input,
                                  int mode,
-                                 unsigned int effectiveKeyLen,
+                                 unsigned int efLen8,
                                  unsigned int);
 
 /*
@@ -747,9 +747,9 @@ extern void DES_DestroyContext(DESContext *cx, PRBool freeit);
 **
 ** NOTE: the inputLen must be a multiple of DES_KEY_LENGTH
 */
-extern SECStatus DES_Encrypt(DESContext *cx, unsigned char *output,
-                             unsigned int *outputLen, unsigned int maxOutputLen,
-                             const unsigned char *input, unsigned int inputLen);
+extern SECStatus DES_Encrypt(DESContext *cx, unsigned char *out,
+                             unsigned int *outLen, unsigned int maxOutLen,
+                             const unsigned char *in, unsigned int inLen);
 
 /*
 ** Perform DES decryption.
@@ -764,9 +764,9 @@ extern SECStatus DES_Encrypt(DESContext *cx, unsigned char *output,
 **
 ** NOTE: the inputLen must be a multiple of DES_KEY_LENGTH
 */
-extern SECStatus DES_Decrypt(DESContext *cx, unsigned char *output,
-                             unsigned int *outputLen, unsigned int maxOutputLen,
-                             const unsigned char *input, unsigned int inputLen);
+extern SECStatus DES_Decrypt(DESContext *cx, unsigned char *out,
+                             unsigned int *outLen, unsigned int maxOutLen,
+                             const unsigned char *in, unsigned int inLen);
 
 /******************************************/
 /*
@@ -784,13 +784,13 @@ extern SECStatus SEED_InitContext(SEEDContext *cx,
                                   unsigned int);
 extern void SEED_DestroyContext(SEEDContext *cx, PRBool freeit);
 extern SECStatus
-SEED_Encrypt(SEEDContext *cx, unsigned char *output,
-             unsigned int *outputLen, unsigned int maxOutputLen,
-             const unsigned char *input, unsigned int inputLen);
+SEED_Encrypt(SEEDContext *cx, unsigned char *out,
+             unsigned int *outLen, unsigned int maxOutputLen,
+             const unsigned char *in, unsigned int inLen);
 extern SECStatus
-SEED_Decrypt(SEEDContext *cx, unsigned char *output,
-             unsigned int *outputLen, unsigned int maxOutputLen,
-             const unsigned char *input, unsigned int inputLen);
+SEED_Decrypt(SEEDContext *cx, unsigned char *out,
+             unsigned int *outLen, unsigned int maxOutputLen,
+             const unsigned char *in, unsigned int inLen);
 
 /******************************************/
 /*
@@ -806,15 +806,15 @@ SEED_Decrypt(SEEDContext *cx, unsigned char *output,
 extern AESContext *
 AES_CreateContext(const unsigned char *key, const unsigned char *iv,
                   int mode, int encrypt,
-                  unsigned int keylen, unsigned int blocklen);
+                  unsigned int keysize, unsigned int blocksize);
 extern AESContext *AES_AllocateContext(void);
 extern SECStatus AES_InitContext(AESContext *cx,
                                  const unsigned char *key,
-                                 unsigned int keylen,
+                                 unsigned int keysize,
                                  const unsigned char *iv,
                                  int mode,
                                  unsigned int encrypt,
-                                 unsigned int blocklen);
+                                 unsigned int blocksize);
 
 /*
 ** Destroy a AES encryption/decryption context.
@@ -902,7 +902,7 @@ AESKeyWrap_DestroyContext(AESKeyWrapContext *cx, PRBool freeit);
 */
 extern SECStatus
 AESKeyWrap_Encrypt(AESKeyWrapContext *cx, unsigned char *output,
-                   unsigned int *outputLen, unsigned int maxOutputLen,
+                   unsigned int *pOutputLen, unsigned int maxOutputLen,
                    const unsigned char *input, unsigned int inputLen);
 
 /*
@@ -918,7 +918,7 @@ AESKeyWrap_Encrypt(AESKeyWrapContext *cx, unsigned char *output,
 */
 extern SECStatus
 AESKeyWrap_Decrypt(AESKeyWrapContext *cx, unsigned char *output,
-                   unsigned int *outputLen, unsigned int maxOutputLen,
+                   unsigned int *pOutputLen, unsigned int maxOutputLen,
                    const unsigned char *input, unsigned int inputLen);
 
 /******************************************/
@@ -933,12 +933,12 @@ AESKeyWrap_Decrypt(AESKeyWrapContext *cx, unsigned char *output,
 */
 extern CamelliaContext *
 Camellia_CreateContext(const unsigned char *key, const unsigned char *iv,
-                       int mode, int encrypt, unsigned int keylen);
+                       int mode, int encrypt, unsigned int keysize);
 
 extern CamelliaContext *Camellia_AllocateContext(void);
 extern SECStatus Camellia_InitContext(CamelliaContext *cx,
                                       const unsigned char *key,
-                                      unsigned int keylen,
+                                      unsigned int keysize,
                                       const unsigned char *iv,
                                       int mode,
                                       unsigned int encrypt,
@@ -1209,7 +1209,7 @@ extern void SHA1_DestroyContext(SHA1Context *cx, PRBool freeit);
 /*
 ** Reset a SHA-1 context, preparing it for a fresh round of hashing
 */
-extern void SHA1_Begin(SHA1Context *cx);
+extern void SHA1_Begin(SHA1Context *ctx);
 
 /*
 ** Update the SHA-1 hash function with more data.
@@ -1217,8 +1217,8 @@ extern void SHA1_Begin(SHA1Context *cx);
 **  "input" the data to hash
 **  "inputLen" the amount of data to hash
 */
-extern void SHA1_Update(SHA1Context *cx, const unsigned char *input,
-                        unsigned int inputLen);
+extern void SHA1_Update(SHA1Context *ctx, const unsigned char *dataIn,
+                        unsigned int len);
 
 /*
 ** Finish the SHA-1 hash function. Produce the digested results in "digest"
@@ -1228,8 +1228,8 @@ extern void SHA1_Update(SHA1Context *cx, const unsigned char *input,
 **  "maxDigestLen" the maximum amount of data that can ever be
 **     stored in "digest"
 */
-extern void SHA1_End(SHA1Context *cx, unsigned char *digest,
-                     unsigned int *digestLen, unsigned int maxDigestLen);
+extern void SHA1_End(SHA1Context *ctx, unsigned char *hashout,
+                     unsigned int *pDigestLen, unsigned int maxDigestLen);
 
 /*
 ** Export the current state of the SHA-1 hash without appending the standard
@@ -1240,8 +1240,8 @@ extern void SHA1_End(SHA1Context *cx, unsigned char *digest,
 **  "maxDigestLen" the maximum amount of data that can ever be
 **     stored in "digest"
 */
-extern void SHA1_EndRaw(SHA1Context *cx, unsigned char *digest,
-                        unsigned int *digestLen, unsigned int maxDigestLen);
+extern void SHA1_EndRaw(SHA1Context *ctx, unsigned char *hashout,
+                        unsigned int *pDigestLen, unsigned int maxDigestLen);
 
 /*
 ** trace the intermediate state info of the SHA1 hash.
@@ -1275,11 +1275,11 @@ extern void SHA1_Clone(SHA1Context *dest, SHA1Context *src);
 /******************************************/
 
 extern SHA224Context *SHA224_NewContext(void);
-extern void SHA224_DestroyContext(SHA224Context *cx, PRBool freeit);
-extern void SHA224_Begin(SHA224Context *cx);
-extern void SHA224_Update(SHA224Context *cx, const unsigned char *input,
+extern void SHA224_DestroyContext(SHA224Context *ctx, PRBool freeit);
+extern void SHA224_Begin(SHA224Context *ctx);
+extern void SHA224_Update(SHA224Context *ctx, const unsigned char *input,
                           unsigned int inputLen);
-extern void SHA224_End(SHA224Context *cx, unsigned char *digest,
+extern void SHA224_End(SHA224Context *ctx, unsigned char *digest,
                        unsigned int *digestLen, unsigned int maxDigestLen);
 /*
 ** Export the current state of the SHA-224 hash without appending the standard
@@ -1290,25 +1290,25 @@ extern void SHA224_End(SHA224Context *cx, unsigned char *digest,
 **  "maxDigestLen" the maximum amount of data that can ever be
 **     stored in "digest"
 */
-extern void SHA224_EndRaw(SHA224Context *cx, unsigned char *digest,
+extern void SHA224_EndRaw(SHA224Context *ctx, unsigned char *digest,
                           unsigned int *digestLen, unsigned int maxDigestLen);
 extern SECStatus SHA224_HashBuf(unsigned char *dest, const unsigned char *src,
                                 PRUint32 src_length);
 extern SECStatus SHA224_Hash(unsigned char *dest, const char *src);
 extern void SHA224_TraceState(SHA224Context *cx);
-extern unsigned int SHA224_FlattenSize(SHA224Context *cx);
-extern SECStatus SHA224_Flatten(SHA224Context *cx, unsigned char *space);
+extern unsigned int SHA224_FlattenSize(SHA224Context *ctx);
+extern SECStatus SHA224_Flatten(SHA224Context *ctx, unsigned char *space);
 extern SHA224Context *SHA224_Resurrect(unsigned char *space, void *arg);
 extern void SHA224_Clone(SHA224Context *dest, SHA224Context *src);
 
 /******************************************/
 
 extern SHA256Context *SHA256_NewContext(void);
-extern void SHA256_DestroyContext(SHA256Context *cx, PRBool freeit);
-extern void SHA256_Begin(SHA256Context *cx);
-extern void SHA256_Update(SHA256Context *cx, const unsigned char *input,
+extern void SHA256_DestroyContext(SHA256Context *ctx, PRBool freeit);
+extern void SHA256_Begin(SHA256Context *ctx);
+extern void SHA256_Update(SHA256Context *ctx, const unsigned char *input,
                           unsigned int inputLen);
-extern void SHA256_End(SHA256Context *cx, unsigned char *digest,
+extern void SHA256_End(SHA256Context *ctx, unsigned char *digest,
                        unsigned int *digestLen, unsigned int maxDigestLen);
 /*
 ** Export the current state of the SHA-256 hash without appending the standard
@@ -1319,23 +1319,23 @@ extern void SHA256_End(SHA256Context *cx, unsigned char *digest,
 **  "maxDigestLen" the maximum amount of data that can ever be
 **     stored in "digest"
 */
-extern void SHA256_EndRaw(SHA256Context *cx, unsigned char *digest,
+extern void SHA256_EndRaw(SHA256Context *ctx, unsigned char *digest,
                           unsigned int *digestLen, unsigned int maxDigestLen);
 extern SECStatus SHA256_HashBuf(unsigned char *dest, const unsigned char *src,
                                 PRUint32 src_length);
 extern SECStatus SHA256_Hash(unsigned char *dest, const char *src);
 extern void SHA256_TraceState(SHA256Context *cx);
-extern unsigned int SHA256_FlattenSize(SHA256Context *cx);
-extern SECStatus SHA256_Flatten(SHA256Context *cx, unsigned char *space);
+extern unsigned int SHA256_FlattenSize(SHA256Context *ctx);
+extern SECStatus SHA256_Flatten(SHA256Context *ctx, unsigned char *space);
 extern SHA256Context *SHA256_Resurrect(unsigned char *space, void *arg);
 extern void SHA256_Clone(SHA256Context *dest, SHA256Context *src);
 
 /******************************************/
 
 extern SHA512Context *SHA512_NewContext(void);
-extern void SHA512_DestroyContext(SHA512Context *cx, PRBool freeit);
-extern void SHA512_Begin(SHA512Context *cx);
-extern void SHA512_Update(SHA512Context *cx, const unsigned char *input,
+extern void SHA512_DestroyContext(SHA512Context *ctx, PRBool freeit);
+extern void SHA512_Begin(SHA512Context *ctx);
+extern void SHA512_Update(SHA512Context *ctx, const unsigned char *input,
                           unsigned int inputLen);
 /*
 ** Export the current state of the SHA-512 hash without appending the standard
@@ -1346,27 +1346,27 @@ extern void SHA512_Update(SHA512Context *cx, const unsigned char *input,
 **  "maxDigestLen" the maximum amount of data that can ever be
 **     stored in "digest"
 */
-extern void SHA512_EndRaw(SHA512Context *cx, unsigned char *digest,
+extern void SHA512_EndRaw(SHA512Context *ctx, unsigned char *digest,
                           unsigned int *digestLen, unsigned int maxDigestLen);
-extern void SHA512_End(SHA512Context *cx, unsigned char *digest,
+extern void SHA512_End(SHA512Context *ctx, unsigned char *digest,
                        unsigned int *digestLen, unsigned int maxDigestLen);
 extern SECStatus SHA512_HashBuf(unsigned char *dest, const unsigned char *src,
                                 PRUint32 src_length);
 extern SECStatus SHA512_Hash(unsigned char *dest, const char *src);
 extern void SHA512_TraceState(SHA512Context *cx);
-extern unsigned int SHA512_FlattenSize(SHA512Context *cx);
-extern SECStatus SHA512_Flatten(SHA512Context *cx, unsigned char *space);
+extern unsigned int SHA512_FlattenSize(SHA512Context *ctx);
+extern SECStatus SHA512_Flatten(SHA512Context *ctx, unsigned char *space);
 extern SHA512Context *SHA512_Resurrect(unsigned char *space, void *arg);
 extern void SHA512_Clone(SHA512Context *dest, SHA512Context *src);
 
 /******************************************/
 
 extern SHA384Context *SHA384_NewContext(void);
-extern void SHA384_DestroyContext(SHA384Context *cx, PRBool freeit);
-extern void SHA384_Begin(SHA384Context *cx);
-extern void SHA384_Update(SHA384Context *cx, const unsigned char *input,
+extern void SHA384_DestroyContext(SHA384Context *ctx, PRBool freeit);
+extern void SHA384_Begin(SHA384Context *ctx);
+extern void SHA384_Update(SHA384Context *ctx, const unsigned char *input,
                           unsigned int inputLen);
-extern void SHA384_End(SHA384Context *cx, unsigned char *digest,
+extern void SHA384_End(SHA384Context *ctx, unsigned char *digest,
                        unsigned int *digestLen, unsigned int maxDigestLen);
 /*
 ** Export the current state of the SHA-384 hash without appending the standard
@@ -1377,14 +1377,14 @@ extern void SHA384_End(SHA384Context *cx, unsigned char *digest,
 **  "maxDigestLen" the maximum amount of data that can ever be
 **     stored in "digest"
 */
-extern void SHA384_EndRaw(SHA384Context *cx, unsigned char *digest,
+extern void SHA384_EndRaw(SHA384Context *ctx, unsigned char *digest,
                           unsigned int *digestLen, unsigned int maxDigestLen);
 extern SECStatus SHA384_HashBuf(unsigned char *dest, const unsigned char *src,
                                 PRUint32 src_length);
 extern SECStatus SHA384_Hash(unsigned char *dest, const char *src);
 extern void SHA384_TraceState(SHA384Context *cx);
 extern unsigned int SHA384_FlattenSize(SHA384Context *cx);
-extern SECStatus SHA384_Flatten(SHA384Context *cx, unsigned char *space);
+extern SECStatus SHA384_Flatten(SHA384Context *ctx, unsigned char *space);
 extern SHA384Context *SHA384_Resurrect(unsigned char *space, void *arg);
 extern void SHA384_Clone(SHA384Context *dest, SHA384Context *src);
 
@@ -1397,7 +1397,7 @@ TLS_PRF(const SECItem *secret, const char *label, SECItem *seed,
         SECItem *result, PRBool isFIPS);
 
 extern SECStatus
-TLS_P_hash(HASH_HashType hashAlg, const SECItem *secret, const char *label,
+TLS_P_hash(HASH_HashType hashType, const SECItem *secret, const char *label,
            SECItem *seed, SECItem *result, PRBool isFIPS);
 
 /******************************************/
@@ -1668,7 +1668,7 @@ PRBool BLAPI_SHVerify(const char *name, PRFuncPtr addr);
 /**************************************************************************
  *  Verify a given filename's signature                               *
  **************************************************************************/
-PRBool BLAPI_SHVerifyFile(const char *shName);
+PRBool BLAPI_SHVerifyFile(const char *name);
 
 /**************************************************************************
  *  Verify Are Own Shared library signature                               *

@@ -511,7 +511,7 @@ void av1_initialize_rd_consts(struct AV1_COMP *cpi);
 void av1_initialize_me_consts(const struct AV1_COMP *cpi, MACROBLOCK *x,
                               int qindex);
 
-void av1_model_rd_from_var_lapndz(int64_t var, unsigned int n,
+void av1_model_rd_from_var_lapndz(int64_t var, unsigned int n_log2,
                                   unsigned int qstep, int *rate, int64_t *dist);
 
 int av1_get_switchable_rate(const AV1_COMMON *const cm, MACROBLOCK *x,
@@ -541,7 +541,7 @@ void av1_set_rd_speed_thresholds(struct AV1_COMP *cpi);
 void av1_set_rd_speed_thresholds_sub8x8(struct AV1_COMP *cpi);
 
 void av1_update_rd_thresh_fact(const AV1_COMMON *const cm,
-                               int (*fact)[MAX_MODES], int rd_thresh, int bsize,
+                               int (*factor_buf)[MAX_MODES], int rd_thresh, int bsize,
                                int best_mode_index);
 
 static INLINE int rd_less_than_thresh(int64_t best_rd, int thresh,

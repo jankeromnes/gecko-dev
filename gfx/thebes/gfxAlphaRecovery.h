@@ -38,8 +38,8 @@ public:
      * optimizations. Usually this should not be called directly.  Be sure to
      * check mozilla::supports_sse2() before calling this function.
      */
-    static bool RecoverAlphaSSE2 (gfxImageSurface *blackSurface,
-                                    const gfxImageSurface *whiteSurface);
+    static bool RecoverAlphaSSE2 (gfxImageSurface *blackSurf,
+                                    const gfxImageSurface *whiteSurf);
 
     /**
      * A common use-case for alpha recovery is to paint into a

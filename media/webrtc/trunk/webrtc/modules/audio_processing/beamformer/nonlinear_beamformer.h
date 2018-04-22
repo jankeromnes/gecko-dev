@@ -122,7 +122,7 @@ class NonlinearBeamformer : public LappedTransform::Callback {
   float CalculatePostfilterMask(const ComplexMatrixF& interf_cov_mat,
                                 float rpsiw,
                                 float ratio_rxiw_rxim,
-                                float rmxi_r);
+                                float rmw_r);
 
   // Prevents the postfilter masks from degenerating too quickly (a cause of
   // musical noise).
@@ -141,7 +141,7 @@ class NonlinearBeamformer : public LappedTransform::Callback {
   void ApplyHighFrequencyCorrection();
 
   // Compute the means needed for the above frequency correction.
-  float MaskRangeMean(size_t start_bin, size_t end_bin);
+  float MaskRangeMean(size_t first, size_t last);
 
   // Applies post-filter mask to |input| and store in |output|.
   void ApplyPostFilter(const complex_f* input, complex_f* output);

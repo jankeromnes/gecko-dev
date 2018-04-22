@@ -163,7 +163,7 @@ static inline Result OCSPResponse(Reader&, Context&);
 static inline Result ResponseBytes(Reader&, Context&);
 static inline Result BasicResponse(Reader&, Context&);
 static inline Result ResponseData(
-                       Reader& tbsResponseData,
+                       Reader& input,
                        Context& context,
                        const der::SignedDataWithSignature& signedResponseData,
                        const DERArray& certs);
@@ -181,8 +181,8 @@ static inline Result MatchCertID(Reader& input,
                                  const Context& context,
                                  /*out*/ bool& match);
 static Result MatchKeyHash(TrustDomain& trustDomain,
-                           Input issuerKeyHash,
-                           Input issuerSubjectPublicKeyInfo,
+                           Input keyHash,
+                           Input subjectPublicKeyInfo,
                            /*out*/ bool& match);
 static Result KeyHash(TrustDomain& trustDomain,
                       Input subjectPublicKeyInfo,

@@ -132,7 +132,7 @@ public:
  */
 class U_I18N_API TextTrieMap : public UMemory {
 public:
-    TextTrieMap(UBool ignoreCase, UObjectDeleter *valeDeleter);
+    TextTrieMap(UBool ignoreCase, UObjectDeleter *valueDeleter);
     virtual ~TextTrieMap();
 
     void put(const UnicodeString &key, void *value, ZNStringPool &sp, UErrorCode &status);
@@ -217,11 +217,11 @@ private:
 
     void loadStrings(const UnicodeString& tzCanonicalID, UErrorCode& status);
 
-    ZNames* loadMetaZoneNames(const UnicodeString& mzId, UErrorCode& status);
-    ZNames* loadTimeZoneNames(const UnicodeString& mzId, UErrorCode& status);
+    ZNames* loadMetaZoneNames(const UnicodeString& mzID, UErrorCode& status);
+    ZNames* loadTimeZoneNames(const UnicodeString& tzID, UErrorCode& status);
     TimeZoneNames::MatchInfoCollection* doFind(ZNameSearchHandler& handler,
         const UnicodeString& text, int32_t start, UErrorCode& status) const;
-    void addAllNamesIntoTrie(UErrorCode& errorCode);
+    void addAllNamesIntoTrie(UErrorCode& status);
 
     void internalLoadAllDisplayNames(UErrorCode& status);
 
@@ -251,7 +251,7 @@ public:
 
     // When TZDBNames for the metazone is not available, this method returns NULL,
     // but does NOT set U_MISSING_RESOURCE_ERROR to status.
-    static const TZDBNames* getMetaZoneNames(const UnicodeString& mzId, UErrorCode& status);
+    static const TZDBNames* getMetaZoneNames(const UnicodeString& mzID, UErrorCode& status);
 
 private:
     Locale fLocale;

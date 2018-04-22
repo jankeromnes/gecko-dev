@@ -111,7 +111,7 @@ public:
      * @return         TRUE if the given Format objects are semantically equal.
      * @stable ICU 51
      */
-    virtual UBool operator==(const Format& other) const;
+    virtual UBool operator==(const Format& that) const;
 
 
     using DecimalFormat::format;

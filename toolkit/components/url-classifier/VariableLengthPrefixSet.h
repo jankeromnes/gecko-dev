@@ -34,7 +34,7 @@ public:
   nsresult LoadFromFile(nsIFile* aFile);
   nsresult StoreToFile(nsIFile* aFile);
 
-  size_t SizeOfIncludingThis(mozilla::MallocSizeOf mallocSizeOf);
+  size_t SizeOfIncludingThis(mozilla::MallocSizeOf aMallocSizeOf);
 
   NS_DECL_THREADSAFE_ISUPPORTS
   NS_DECL_NSIMEMORYREPORTER

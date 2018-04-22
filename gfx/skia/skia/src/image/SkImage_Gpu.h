@@ -52,7 +52,7 @@ public:
                                        GrSurfaceOrigin* origin) const override;
     GrTexture* onGetTexture() const override;
 
-    bool onReadPixels(const SkImageInfo&, void* dstPixels, size_t dstRowBytes,
+    bool onReadPixels(const SkImageInfo&, void* dstPixels, size_t dstRB,
                       int srcX, int srcY, CachingHint) const override;
 
     sk_sp<SkColorSpace> refColorSpace() { return fColorSpace; }

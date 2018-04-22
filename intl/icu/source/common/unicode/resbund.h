@@ -105,9 +105,9 @@ public:
      * fall back locales could be found.
      * @stable ICU 2.0
      */
-    ResourceBundle(const UnicodeString&    packageName,
+    ResourceBundle(const UnicodeString&    path,
                    const Locale&           locale,
-                   UErrorCode&              err);
+                   UErrorCode&              error);
 
     /**
      * Construct a resource bundle for the default bundle in the specified package.
@@ -120,8 +120,8 @@ public:
      * @param err A UErrorCode value
      * @stable ICU 2.0
      */
-    ResourceBundle(const UnicodeString&    packageName,
-                   UErrorCode&              err);
+    ResourceBundle(const UnicodeString&    path,
+                   UErrorCode&              error);
 
     /**
      * Construct a resource bundle for the ICU default bundle.
@@ -145,7 +145,7 @@ public:
      * @param err A UErrorCode value
      * @stable ICU 2.0
      */
-    ResourceBundle(const char* packageName,
+    ResourceBundle(const char* path,
                    const Locale& locale,
                    UErrorCode& err);
 
@@ -155,7 +155,7 @@ public:
      * @param original The resource bundle to copy.
      * @stable ICU 2.0
      */
-    ResourceBundle(const ResourceBundle &original);
+    ResourceBundle(const ResourceBundle &other);
 
     /**
      * Constructor from a C UResourceBundle. The resource bundle is
@@ -167,7 +167,7 @@ public:
      * @stable ICU 2.0
      */
     ResourceBundle(UResourceBundle *res,
-                   UErrorCode &status);
+                   UErrorCode &err);
 
     /**
      * Assignment operator.
@@ -370,7 +370,7 @@ public:
      * @stable ICU 2.0
      */
     ResourceBundle
-      get(int32_t index,
+      get(int32_t indexR,
           UErrorCode& status) const;
 
     /**
@@ -382,7 +382,7 @@ public:
      * @stable ICU 2.0
      */
     UnicodeString
-      getStringEx(int32_t index,
+      getStringEx(int32_t indexS,
                   UErrorCode& status) const;
 
     /**

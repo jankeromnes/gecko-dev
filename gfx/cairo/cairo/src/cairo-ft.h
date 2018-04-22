@@ -59,10 +59,10 @@ cairo_ft_font_face_create_for_ft_face (FT_Face         face,
                                        int             num_var_coords);
 
 cairo_public FT_Face
-cairo_ft_scaled_font_lock_face (cairo_scaled_font_t *scaled_font);
+cairo_ft_scaled_font_lock_face (cairo_scaled_font_t *abstract_font);
 
 cairo_public void
-cairo_ft_scaled_font_unlock_face (cairo_scaled_font_t *scaled_font);
+cairo_ft_scaled_font_unlock_face (cairo_scaled_font_t *abstract_font);
 
 #if CAIRO_HAS_FC_FONT
 

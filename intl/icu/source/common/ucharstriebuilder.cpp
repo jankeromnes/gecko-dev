@@ -53,7 +53,7 @@ public:
 
     int32_t getValue() const { return value; }
 
-    int32_t compareStringTo(const UCharsTrieElement &o, const UnicodeString &strings) const;
+    int32_t compareStringTo(const UCharsTrieElement &other, const UnicodeString &strings) const;
 
 private:
     // The first strings unit contains the string length.

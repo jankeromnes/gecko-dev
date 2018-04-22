@@ -176,7 +176,7 @@ typedef void (*sslCipherSpecChangedFunc)(void *arg,
                                          PRBool sending,
                                          ssl3CipherSpec *newSpec);
 
-const ssl3BulkCipherDef *ssl_GetBulkCipherDef(const ssl3CipherSuiteDef *cipher_def);
+const ssl3BulkCipherDef *ssl_GetBulkCipherDef(const ssl3CipherSuiteDef *suiteDef);
 const ssl3MACDef *ssl_GetMacDefByAlg(SSL3MACAlgorithm mac);
 const ssl3MACDef *ssl_GetMacDef(const sslSocket *ss, const ssl3CipherSuiteDef *suiteDef);
 
@@ -190,7 +190,7 @@ SECStatus ssl_SetupNullCipherSpec(sslSocket *ss, CipherSpecDirection dir);
 ssl3CipherSpec *ssl_FindCipherSpecByEpoch(sslSocket *ss,
                                           CipherSpecDirection direction,
                                           DTLSEpoch epoch);
-void ssl_CipherSpecReleaseByEpoch(sslSocket *ss, CipherSpecDirection direction,
+void ssl_CipherSpecReleaseByEpoch(sslSocket *ss, CipherSpecDirection dir,
                                   DTLSEpoch epoch);
 
 #endif /* __sslspec_h_ */

@@ -79,7 +79,7 @@ protected:
 class BufferedOutgoingMsg : public OutgoingMsg
 {
 public:
-  explicit BufferedOutgoingMsg(OutgoingMsg &message);
+  explicit BufferedOutgoingMsg(OutgoingMsg &msg);
   ~BufferedOutgoingMsg();
 };
 
@@ -279,7 +279,7 @@ private:
   void HandleUnknownMessage(uint32_t ppid, uint32_t length, uint16_t stream);
   uint8_t BufferMessage(nsACString& recvBuffer, const void *data, uint32_t length, uint32_t ppid,
                         int flags);
-  void HandleDataMessage(const void *buffer, size_t length, uint32_t ppid, uint16_t stream,
+  void HandleDataMessage(const void *data, size_t length, uint32_t ppid, uint16_t stream,
                          int flags);
   void HandleDCEPMessage(const void *buffer, size_t length, uint32_t ppid, uint16_t stream,
                          int flags);

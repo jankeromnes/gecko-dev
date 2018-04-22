@@ -61,7 +61,7 @@ cubeb_resampler * cubeb_resampler_create(cubeb_stream * stream,
  */
 long cubeb_resampler_fill(cubeb_resampler * resampler,
                           void * input_buffer,
-                          long * input_frame_count,
+                          long * input_frames_count,
                           void * output_buffer,
                           long output_frames_needed);
 

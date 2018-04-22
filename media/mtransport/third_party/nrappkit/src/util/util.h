@@ -48,8 +48,8 @@ int nr_get_filename(char *base,char *name, char **namep);
 
 int read_RSA_private_key(char *base, char *name,RSA **keyp);
 #endif
-void nr_errprintf_log(const char *fmt,...);
-void nr_errprintf_log2(void *ignore, const char *fmt,...);
+void nr_errprintf_log(const char *format,...);
+void nr_errprintf_log2(void *ignore, const char *format,...);
 extern int nr_util_default_log_facility;
 
 int nr_read_data(int fd,char *buf,int len);

@@ -34,30 +34,30 @@ extern void prepare_low_rsa_pub_key_for_asn1(NSSLOWKEYPublicKey *key);
 **  "key" the object
 **  "freeit" if PR_TRUE then free the object as well as its sub-objects
 */
-extern void nsslowkey_DestroyPrivateKey(NSSLOWKEYPrivateKey *key);
+extern void nsslowkey_DestroyPrivateKey(NSSLOWKEYPrivateKey *privk);
 
 /*
 ** Destroy a public key object.
 **  "key" the object
 **  "freeit" if PR_TRUE then free the object as well as its sub-objects
 */
-extern void nsslowkey_DestroyPublicKey(NSSLOWKEYPublicKey *key);
+extern void nsslowkey_DestroyPublicKey(NSSLOWKEYPublicKey *pubk);
 
 /*
 ** Return the modulus length of "pubKey".
 */
-extern unsigned int nsslowkey_PublicModulusLen(NSSLOWKEYPublicKey *pubKey);
+extern unsigned int nsslowkey_PublicModulusLen(NSSLOWKEYPublicKey *pubk);
 
 /*
 ** Return the modulus length of "privKey".
 */
-extern unsigned int nsslowkey_PrivateModulusLen(NSSLOWKEYPrivateKey *privKey);
+extern unsigned int nsslowkey_PrivateModulusLen(NSSLOWKEYPrivateKey *privk);
 
 /*
 ** Convert a low private key "privateKey" into a public low key
 */
 extern NSSLOWKEYPublicKey *
-nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privateKey);
+nsslowkey_ConvertToPublicKey(NSSLOWKEYPrivateKey *privk);
 
 /* Make a copy of a low private key in it's own arena.
  * a return of NULL indicates an error.

@@ -120,10 +120,10 @@ int Scale(const uint8* src_y,
 
 // Legacy API.  Deprecated.
 LIBYUV_API
-int ScaleOffset(const uint8* src_i420,
+int ScaleOffset(const uint8* src,
                 int src_width,
                 int src_height,
-                uint8* dst_i420,
+                uint8* dst,
                 int dst_width,
                 int dst_height,
                 int dst_yoffset,

@@ -70,7 +70,7 @@ struct SPEED_FEATURES;
 int av1_init_search_range(int size);
 
 int av1_refining_search_sad(struct macroblock *x, struct mv *ref_mv,
-                            int sad_per_bit, int distance,
+                            int error_per_bit, int search_range,
                             const aom_variance_fn_ptr_t *fn_ptr,
                             const struct mv *center_mv);
 

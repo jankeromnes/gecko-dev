@@ -150,7 +150,7 @@ public:
      * @return true if another object is semantically equal to this one.
      * return false otherwise.
      */
-    UBool operator==(const DigitList& other) const;
+    UBool operator==(const DigitList& that) const;
 
     int32_t  compare(const DigitList& other);
 
@@ -276,12 +276,12 @@ public:
      *    This digitlist will be expanded if necessary to accomodate the result.
      *  @param arg  the number to multiply by.
      */
-    void mult(const DigitList &arg, UErrorCode &status);
+    void mult(const DigitList &other, UErrorCode &status);
 
     /**
      *   Divide    this = this / arg
      */
-    void div(const DigitList &arg, UErrorCode &status);
+    void div(const DigitList &other, UErrorCode &status);
 
     //  The following functions replace direct access to the original DigitList implmentation
     //  data structures.
@@ -326,7 +326,7 @@ public:
      *      the requested size.   Capacity is not reduced if it is already greater
      *      than requested.
      */
-    void  ensureCapacity(int32_t  requestedSize, UErrorCode &status); 
+    void  ensureCapacity(int32_t  requestedCapacity, UErrorCode &status); 
 
     UBool    isPositive(void) const { return decNumberIsNegative(fDecNumber) == 0;}
     void     setPositive(UBool s); 
@@ -400,13 +400,13 @@ public:
      * If maxSigDigits is set then this instance is rounded to have no more
      * than maxSigDigits. The end result is guaranteed to be trimmed.
      */
-    void roundAtExponent(int32_t digitExponent, int32_t maxSigDigits=INT32_MAX);
+    void roundAtExponent(int32_t exponent, int32_t maxSigDigits=INT32_MAX);
 
     /**
      * Quantizes according to some amount and rounds according to the
      * context of this instance. Quantizing 3.233 with 0.05 gives 3.25.
      */
-    void quantize(const DigitList &amount, UErrorCode &status);
+    void quantize(const DigitList &quantity, UErrorCode &status);
 
     /**
      * Like toScientific but only returns the exponent
@@ -431,7 +431,7 @@ public:
     /**
      * Shifts decimal to the right.
      */
-    void shiftDecimalRight(int32_t numPlaces);
+    void shiftDecimalRight(int32_t n);
 
 private:
     /*

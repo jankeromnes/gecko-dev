@@ -164,8 +164,8 @@ typedef enum {
  * @stable ICU 2.0
  */
 U_STABLE UResourceBundle*  U_EXPORT2
-ures_open(const char*    packageName,
-          const char*  locale,
+ures_open(const char*    path,
+          const char*  localeID,
           UErrorCode*     status);
 
 
@@ -187,8 +187,8 @@ ures_open(const char*    packageName,
  * @stable ICU 2.0
  */
 U_STABLE UResourceBundle* U_EXPORT2
-ures_openDirect(const char* packageName,
-                const char* locale,
+ures_openDirect(const char* path,
+                const char* localeID,
                 UErrorCode* status);
 
 /**
@@ -210,8 +210,8 @@ ures_openDirect(const char* packageName,
  * @stable ICU 2.0
  */
 U_STABLE UResourceBundle* U_EXPORT2
-ures_openU(const UChar* packageName,
-           const char* locale,
+ures_openU(const UChar* myPath,
+           const char* localeID,
            UErrorCode* status);
 
 #ifndef U_HIDE_DEPRECATED_API
@@ -234,7 +234,7 @@ ures_openU(const UChar* packageName,
 U_DEPRECATED int32_t U_EXPORT2
 ures_countArrayItems(const UResourceBundle* resourceBundle,
                      const char* resourceKey,
-                     UErrorCode* err);
+                     UErrorCode* status);
 #endif  /* U_HIDE_DEPRECATED_API */
 
 /**
@@ -246,7 +246,7 @@ ures_countArrayItems(const UResourceBundle* resourceBundle,
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-ures_close(UResourceBundle* resourceBundle);
+ures_close(UResourceBundle* resB);
 
 #if U_SHOW_CPLUSPLUS_API
 
@@ -350,7 +350,7 @@ ures_getLocaleByType(const UResourceBundle* resourceBundle,
  */
 U_INTERNAL void U_EXPORT2
 ures_openFillIn(UResourceBundle *r,
-                const char* packageName,
+                const char* path,
                 const char* localeID,
                 UErrorCode* status);
 #endif  /* U_HIDE_INTERNAL_API */
@@ -373,7 +373,7 @@ ures_openFillIn(UResourceBundle *r,
  * @stable ICU 2.0
  */
 U_STABLE const UChar* U_EXPORT2
-ures_getString(const UResourceBundle* resourceBundle,
+ures_getString(const UResourceBundle* resB,
                int32_t* len,
                UErrorCode* status);
 
@@ -426,7 +426,7 @@ ures_getString(const UResourceBundle* resourceBundle,
  */
 U_STABLE const char * U_EXPORT2
 ures_getUTF8String(const UResourceBundle *resB,
-                   char *dest, int32_t *length,
+                   char *dest, int32_t *pLength,
                    UBool forceCopy,
                    UErrorCode *status);
 
@@ -448,7 +448,7 @@ ures_getUTF8String(const UResourceBundle *resB,
  * @stable ICU 2.0
  */
 U_STABLE const uint8_t* U_EXPORT2
-ures_getBinary(const UResourceBundle* resourceBundle,
+ures_getBinary(const UResourceBundle* resB,
                int32_t* len,
                UErrorCode* status);
 
@@ -470,7 +470,7 @@ ures_getBinary(const UResourceBundle* resourceBundle,
  * @stable ICU 2.0
  */
 U_STABLE const int32_t* U_EXPORT2
-ures_getIntVector(const UResourceBundle* resourceBundle,
+ures_getIntVector(const UResourceBundle* resB,
                   int32_t* len,
                   UErrorCode* status);
 
@@ -491,7 +491,7 @@ ures_getIntVector(const UResourceBundle* resourceBundle,
  * @stable ICU 2.0
  */
 U_STABLE uint32_t U_EXPORT2
-ures_getUInt(const UResourceBundle* resourceBundle,
+ures_getUInt(const UResourceBundle* resB,
              UErrorCode *status);
 
 /**
@@ -511,7 +511,7 @@ ures_getUInt(const UResourceBundle* resourceBundle,
  * @stable ICU 2.0
  */
 U_STABLE int32_t U_EXPORT2
-ures_getInt(const UResourceBundle* resourceBundle,
+ures_getInt(const UResourceBundle* resB,
             UErrorCode *status);
 
 /**
@@ -525,7 +525,7 @@ ures_getInt(const UResourceBundle* resourceBundle,
  * @stable ICU 2.0
  */
 U_STABLE int32_t U_EXPORT2
-ures_getSize(const UResourceBundle *resourceBundle);
+ures_getSize(const UResourceBundle *resB);
 
 /**
  * Returns the type of a resource. Available types are defined in enum UResType
@@ -536,7 +536,7 @@ ures_getSize(const UResourceBundle *resourceBundle);
  * @stable ICU 2.0
  */
 U_STABLE UResType U_EXPORT2
-ures_getType(const UResourceBundle *resourceBundle);
+ures_getType(const UResourceBundle *resB);
 
 /**
  * Returns the key associated with a given resource. Not all the resources have a key - only
@@ -547,7 +547,7 @@ ures_getType(const UResourceBundle *resourceBundle);
  * @stable ICU 2.0
  */
 U_STABLE const char * U_EXPORT2
-ures_getKey(const UResourceBundle *resourceBundle);
+ures_getKey(const UResourceBundle *resB);
 
 /* ITERATION API
     This API provides means for iterating through a resource
@@ -560,7 +560,7 @@ ures_getKey(const UResourceBundle *resourceBundle);
  * @stable ICU 2.0
  */
 U_STABLE void U_EXPORT2
-ures_resetIterator(UResourceBundle *resourceBundle);
+ures_resetIterator(UResourceBundle *resB);
 
 /**
  * Checks whether the given resource has another element to iterate over.
@@ -570,7 +570,7 @@ ures_resetIterator(UResourceBundle *resourceBundle);
  * @stable ICU 2.0
  */
 U_STABLE UBool U_EXPORT2
-ures_hasNext(const UResourceBundle *resourceBundle);
+ures_hasNext(const UResourceBundle *resB);
 
 /**
  * Returns the next resource in a given resource or NULL if there are no more resources
@@ -585,7 +585,7 @@ ures_hasNext(const UResourceBundle *resourceBundle);
  * @stable ICU 2.0
  */
 U_STABLE UResourceBundle* U_EXPORT2
-ures_getNextResource(UResourceBundle *resourceBundle,
+ures_getNextResource(UResourceBundle *resB,
                      UResourceBundle *fillIn,
                      UErrorCode *status);
 
@@ -602,7 +602,7 @@ ures_getNextResource(UResourceBundle *resourceBundle,
  * @stable ICU 2.0
  */
 U_STABLE const UChar* U_EXPORT2
-ures_getNextString(UResourceBundle *resourceBundle,
+ures_getNextString(UResourceBundle *resB,
                    int32_t* len,
                    const char ** key,
                    UErrorCode *status);
@@ -620,7 +620,7 @@ ures_getNextString(UResourceBundle *resourceBundle,
  * @stable ICU 2.0
  */
 U_STABLE UResourceBundle* U_EXPORT2
-ures_getByIndex(const UResourceBundle *resourceBundle,
+ures_getByIndex(const UResourceBundle *resB,
                 int32_t indexR,
                 UResourceBundle *fillIn,
                 UErrorCode *status);
@@ -637,7 +637,7 @@ ures_getByIndex(const UResourceBundle *resourceBundle,
  * @stable ICU 2.0
  */
 U_STABLE const UChar* U_EXPORT2
-ures_getStringByIndex(const UResourceBundle *resourceBundle,
+ures_getStringByIndex(const UResourceBundle *resB,
                       int32_t indexS,
                       int32_t* len,
                       UErrorCode *status);
@@ -692,7 +692,7 @@ ures_getStringByIndex(const UResourceBundle *resourceBundle,
  */
 U_STABLE const char * U_EXPORT2
 ures_getUTF8StringByIndex(const UResourceBundle *resB,
-                          int32_t stringIndex,
+                          int32_t idx,
                           char *dest, int32_t *pLength,
                           UBool forceCopy,
                           UErrorCode *status);
@@ -710,8 +710,8 @@ ures_getUTF8StringByIndex(const UResourceBundle *resB,
  * @stable ICU 2.0
  */
 U_STABLE UResourceBundle* U_EXPORT2
-ures_getByKey(const UResourceBundle *resourceBundle,
-              const char* key,
+ures_getByKey(const UResourceBundle *resB,
+              const char* inKey,
               UResourceBundle *fillIn,
               UErrorCode *status);
 
@@ -729,7 +729,7 @@ ures_getByKey(const UResourceBundle *resourceBundle,
  */
 U_STABLE const UChar* U_EXPORT2
 ures_getStringByKey(const UResourceBundle *resB,
-                    const char* key,
+                    const char* inKey,
                     int32_t* len,
                     UErrorCode *status);
 
@@ -901,7 +901,7 @@ U_NAMESPACE_END
  * @stable ICU 3.2
  */
 U_STABLE UEnumeration* U_EXPORT2
-ures_openAvailableLocales(const char *packageName, UErrorCode *status);
+ures_openAvailableLocales(const char *path, UErrorCode *status);
 
 
 #endif /*_URES*/

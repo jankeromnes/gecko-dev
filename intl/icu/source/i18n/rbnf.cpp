@@ -312,7 +312,7 @@ public:
     * On a successful parse, return a StringLocalizationInfo*, otherwise delete locData, set perror and status,
     * and return NULL.  The StringLocalizationInfo will adopt locData if it is created.
     */
-    StringLocalizationInfo* parse(UChar* data, int32_t len);
+    StringLocalizationInfo* parse(UChar* _data, int32_t len);
     
 private:
     

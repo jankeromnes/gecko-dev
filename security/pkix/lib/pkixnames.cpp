@@ -157,9 +157,9 @@ Result MatchPresentedIDWithReferenceID(GeneralNameType presentedIDType,
                                        GeneralNameType referenceIDType,
                                        Input referenceID,
                                        /*in/out*/ MatchResult& matchResult);
-Result CheckPresentedIDConformsToConstraints(GeneralNameType referenceIDType,
+Result CheckPresentedIDConformsToConstraints(GeneralNameType presentedIDType,
                                              Input presentedID,
-                                             Input nameConstraints);
+                                             Input encodedNameConstraints);
 
 uint8_t LocaleInsensitveToLower(uint8_t a);
 bool StartsWithIDNALabel(Input id);

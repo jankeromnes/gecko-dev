@@ -44,8 +44,8 @@ extern SECOidData *SECOID_FindOIDByMechanism(unsigned long mechanism);
 **      "tag" the tag number defining the algorithm
 **      "params" if not NULL, the parameters to go with the algorithm
 */
-extern SECStatus SECOID_SetAlgorithmID(PLArenaPool *arena, SECAlgorithmID *aid,
-                                       SECOidTag tag, SECItem *params);
+extern SECStatus SECOID_SetAlgorithmID(PLArenaPool *arena, SECAlgorithmID *id,
+                                       SECOidTag which, SECItem *params);
 
 /*
 ** Copy the "src" object to "dest". Memory is allocated in "dest" for
@@ -53,20 +53,20 @@ extern SECStatus SECOID_SetAlgorithmID(PLArenaPool *arena, SECAlgorithmID *aid,
 ** before memory is allocated (use SECOID_DestroyAlgorithmID(dest, PR_FALSE)
 ** to do that).
 */
-extern SECStatus SECOID_CopyAlgorithmID(PLArenaPool *arena, SECAlgorithmID *dest,
-                                        const SECAlgorithmID *src);
+extern SECStatus SECOID_CopyAlgorithmID(PLArenaPool *arena, SECAlgorithmID *to,
+                                        const SECAlgorithmID *from);
 
 /*
 ** Get the tag number for the given algorithm-id object.
 */
-extern SECOidTag SECOID_GetAlgorithmTag(const SECAlgorithmID *aid);
+extern SECOidTag SECOID_GetAlgorithmTag(const SECAlgorithmID *id);
 
 /*
 ** Destroy an algorithm-id object.
 **      "aid" the certificate-request to destroy
 **      "freeit" if PR_TRUE then free the object as well as its sub-objects
 */
-extern void SECOID_DestroyAlgorithmID(SECAlgorithmID *aid, PRBool freeit);
+extern void SECOID_DestroyAlgorithmID(SECAlgorithmID *algid, PRBool freeit);
 
 /*
 ** Compare two algorithm-id objects, returning the difference between
