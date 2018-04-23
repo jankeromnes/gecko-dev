@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <memory>
+
 #include "webrtc/test/gtest.h"
 #include "webrtc/base/constructormagic.h"
 #include "webrtc/modules/pacing/paced_sender.h"
@@ -176,7 +178,7 @@ class DelayBasedBweExperimentTest : public DelayBasedBweTest {
  public:
   DelayBasedBweExperimentTest()
       : override_field_trials_("WebRTC-ImprovedBitrateEstimate/Enabled/") {
-    bitrate_estimator_.reset(new DelayBasedBwe(&clock_));
+    bitrate_estimator_ = std::make_unique<DelayBasedBwe>(&clock_);
   }
 
  private:
@@ -207,7 +209,7 @@ class DelayBasedBweTrendlineExperimentTest : public DelayBasedBweTest {
  public:
   DelayBasedBweTrendlineExperimentTest()
       : override_field_trials_("WebRTC-BweTrendlineFilter/Enabled-15,0.9,4/") {
-    bitrate_estimator_.reset(new DelayBasedBwe(&clock_));
+    bitrate_estimator_ = std::make_unique<DelayBasedBwe>(&clock_);
   }
 
  private:
@@ -238,7 +240,7 @@ class DelayBasedBweMedianSlopeExperimentTest : public DelayBasedBweTest {
  public:
   DelayBasedBweMedianSlopeExperimentTest()
       : override_field_trials_("WebRTC-BweMedianSlopeFilter/Enabled-20,4/") {
-    bitrate_estimator_.reset(new DelayBasedBwe(&clock_));
+    bitrate_estimator_ = std::make_unique<DelayBasedBwe>(&clock_);
   }
 
  private:

@@ -75,15 +75,15 @@ class OveruseFrameDetectorTest : public ::testing::Test,
                                  public CpuOveruseMetricsObserver {
  protected:
   void SetUp() override {
-    clock_.reset(new SimulatedClock(1234));
-    observer_.reset(new MockCpuOveruseObserver());
+    clock_ = std::make_unique<SimulatedClock>(1234);
+    observer_ = std::make_unique<MockCpuOveruseObserver>();
     options_.min_process_count = 0;
     ReinitializeOveruseDetector();
   }
 
   void ReinitializeOveruseDetector() {
-    overuse_detector_.reset(new OveruseFrameDetectorUnderTest(
-        clock_.get(), options_, observer_.get(), nullptr, this));
+    overuse_detector_ = std::make_unique<OveruseFrameDetectorUnderTest>(
+        clock_.get(), options_, observer_.get(), nullptr, this);
   }
 
   void OnEncodedFrameTimeMeasured(int encode_time_ms,
@@ -170,8 +170,8 @@ TEST_F(OveruseFrameDetectorTest, OveruseAndRecover) {
 }
 
 TEST_F(OveruseFrameDetectorTest, OveruseAndRecoverWithNoObserver) {
-  overuse_detector_.reset(new OveruseFrameDetectorUnderTest(
-      clock_.get(), options_, nullptr, nullptr, this));
+  overuse_detector_ = std::make_unique<OveruseFrameDetectorUnderTest>(
+      clock_.get(), options_, nullptr, nullptr, this);
   EXPECT_CALL(*(observer_.get()), ScaleDown(reason_)).Times(0);
   TriggerOveruse(options_.high_threshold_consecutive_count);
   EXPECT_CALL(*(observer_.get()), ScaleUp(reason_)).Times(0);
@@ -189,8 +189,8 @@ TEST_F(OveruseFrameDetectorTest, DoubleOveruseAndRecover) {
 TEST_F(OveruseFrameDetectorTest, TriggerUnderuseWithMinProcessCount) {
   options_.min_process_count = 1;
   CpuOveruseObserverImpl overuse_observer;
-  overuse_detector_.reset(new OveruseFrameDetectorUnderTest(
-      clock_.get(), options_, &overuse_observer, nullptr, this));
+  overuse_detector_ = std::make_unique<OveruseFrameDetectorUnderTest>(
+      clock_.get(), options_, &overuse_observer, nullptr, this);
   InsertAndSendFramesWithInterval(
       1200, kFrameInterval33ms, kWidth, kHeight, kProcessTime5ms);
   overuse_detector_->CheckForOveruse();

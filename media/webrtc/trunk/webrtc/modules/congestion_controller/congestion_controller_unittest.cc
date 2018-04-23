@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <memory>
+
 #include "webrtc/logging/rtc_event_log/mock/mock_rtc_event_log.h"
 #include "webrtc/modules/bitrate_controller/include/bitrate_controller.h"
 #include "webrtc/modules/congestion_controller/include/congestion_controller.h"
@@ -49,9 +51,9 @@ class CongestionControllerTest : public ::testing::Test {
   void SetUp() override {
     pacer_ = new NiceMock<MockPacedSender>();
     std::unique_ptr<PacedSender> pacer(pacer_);  // Passes ownership.
-    controller_.reset(new CongestionController(
+    controller_ = std::make_unique<CongestionController>(
         &clock_, &observer_, &remote_bitrate_observer_, &event_log_,
-        &packet_router_, std::move(pacer)));
+        &packet_router_, std::move(pacer));
     bandwidth_observer_.reset(
         controller_->GetBitrateController()->CreateRtcpBandwidthObserver());
 
@@ -217,9 +219,9 @@ TEST_F(CongestionControllerTest, OnReceivedPacketWithAbsSendTime) {
   NiceMock<MockCongestionObserver> observer;
   StrictMock<MockRemoteBitrateObserver> remote_bitrate_observer;
   std::unique_ptr<PacedSender> pacer(new NiceMock<MockPacedSender>());
-  controller_.reset(
-      new CongestionController(&clock_, &observer, &remote_bitrate_observer,
-                               &event_log_, &packet_router_, std::move(pacer)));
+  controller_ = std::make_unique<CongestionController>(
+      &clock_, &observer, &remote_bitrate_observer,
+                               &event_log_, &packet_router_, std::move(pacer));
 
   size_t payload_size = 1000;
   RTPHeader header;

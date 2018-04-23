@@ -8,6 +8,7 @@
 #include "GrGLGpu.h"
 
 #include <cmath>
+#include <memory>
 #include "../private/GrGLSL.h"
 #include "GrBackendSemaphore.h"
 #include "GrBackendSurface.h"
@@ -242,7 +243,7 @@ GrGLGpu::GrGLGpu(std::unique_ptr<GrGLContext> ctx, GrContext* context)
     }
 
     if (this->glCaps().shaderCaps()->pathRenderingSupport()) {
-        fPathRendering.reset(new GrGLPathRendering(this));
+        fPathRendering = std::make_unique<GrGLPathRendering>(this);
     }
 
     GrGLClearErr(this->glInterface());
@@ -1432,7 +1433,7 @@ sk_sp<GrTexture> GrGLGpu::onCreateTexture(const GrSurfaceDesc& desc,
         !this->glCaps().canConfigBeFBOColorAttachment(desc.fConfig)) {
         size_t rowSize = GrBytesPerPixel(desc.fConfig) * desc.fWidth;
         size_t size = rowSize * desc.fHeight;
-        zeros.reset(new uint8_t[size]);
+        zeros = std::make_unique<uint8_t[]>(size);
         memset(zeros.get(), 0, size);
         zeroLevel.fPixels = zeros.get();
         zeroLevel.fRowBytes = 0;

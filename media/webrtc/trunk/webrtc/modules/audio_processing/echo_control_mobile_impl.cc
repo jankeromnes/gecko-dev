@@ -12,6 +12,8 @@
 
 #include <string.h>
 
+#include <memory>
+
 #include "webrtc/base/constructormagic.h"
 #include "webrtc/modules/audio_processing/aecm/echo_control_mobile.h"
 #include "webrtc/modules/audio_processing/audio_buffer.h"
@@ -346,8 +348,8 @@ void EchoControlMobileImpl::Initialize(int sample_rate_hz,
   rtc::CritScope cs_render(crit_render_);
   rtc::CritScope cs_capture(crit_capture_);
 
-  stream_properties_.reset(new StreamProperties(
-      sample_rate_hz, num_reverse_channels, num_output_channels));
+  stream_properties_ = std::make_unique<StreamProperties>(
+      sample_rate_hz, num_reverse_channels, num_output_channels);
 
   if (!enabled_) {
     return;
@@ -363,7 +365,7 @@ void EchoControlMobileImpl::Initialize(int sample_rate_hz,
 
   for (auto& canceller : cancellers_) {
     if (!canceller) {
-      canceller.reset(new Canceller());
+      canceller = std::make_unique<Canceller>();
     }
     canceller->Initialize(sample_rate_hz, external_echo_path_,
                           echo_path_size_bytes());

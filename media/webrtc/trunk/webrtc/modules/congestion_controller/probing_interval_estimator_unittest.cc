@@ -33,10 +33,10 @@ struct ProbingIntervalEstimatorStates {
 
 ProbingIntervalEstimatorStates CreateProbingIntervalEstimatorStates() {
   ProbingIntervalEstimatorStates states;
-  states.aimd_rate_control.reset(new MockAimdRateControl());
-  states.probing_interval_estimator.reset(new ProbingIntervalEstimator(
+  states.aimd_rate_control = std::make_unique<MockAimdRateControl>();
+  states.probing_interval_estimator = std::make_unique<ProbingIntervalEstimator>(
       kMinIntervalMs, kMaxIntervalMs, kDefaultIntervalMs,
-      states.aimd_rate_control.get()));
+      states.aimd_rate_control.get());
   return states;
 }
 }  // namespace

@@ -16,6 +16,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <memory>
 #include <numeric>
 #include <vector>
 
@@ -236,15 +237,15 @@ void NonlinearBeamformer::Initialize(int chunk_size_ms, int sample_rate_hz) {
   hold_target_blocks_ = kHoldTargetSeconds * 2 * sample_rate_hz / kFftSize;
   interference_blocks_count_ = hold_target_blocks_;
 
-  process_transform_.reset(new LappedTransform(num_input_channels_,
+  process_transform_ = std::make_unique<LappedTransform>(num_input_channels_,
                                                0u,
                                                chunk_length_,
                                                window_,
                                                kFftSize,
                                                kFftSize / 2,
-                                               this));
-  postfilter_transform_.reset(new PostFilterTransform(
-      num_postfilter_channels_, chunk_length_, window_, kFftSize));
+                                               this);
+  postfilter_transform_ = std::make_unique<PostFilterTransform>(
+      num_postfilter_channels_, chunk_length_, window_, kFftSize);
   const float wave_number_step =
       (2.f * M_PI * sample_rate_hz_) / (kFftSize * kSpeedOfSoundMeterSeconds);
   for (size_t i = 0; i < kNumFreqBins; ++i) {
@@ -362,8 +363,8 @@ void NonlinearBeamformer::InitInterfCovMats() {
   for (size_t i = 0; i < kNumFreqBins; ++i) {
     interf_cov_mats_[i].clear();
     for (size_t j = 0; j < interf_angles_radians_.size(); ++j) {
-      interf_cov_mats_[i].push_back(std::unique_ptr<ComplexMatrixF>(
-          new ComplexMatrixF(num_input_channels_, num_input_channels_)));
+      interf_cov_mats_[i].push_back(std::make_unique<ComplexMatrixF>(
+          num_input_channels_, num_input_channels_));
       ComplexMatrixF angled_cov_mat(num_input_channels_, num_input_channels_);
       CovarianceMatrixGenerator::AngledCovarianceMatrix(
           kSpeedOfSoundMeterSeconds,

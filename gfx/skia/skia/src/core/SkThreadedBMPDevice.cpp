@@ -7,6 +7,8 @@
 
 #include "SkThreadedBMPDevice.h"
 
+#include <memory>
+
 #include "SkPath.h"
 #include "SkRectPriv.h"
 #include "SkTaskGroup.h"
@@ -35,8 +37,8 @@ void SkThreadedBMPDevice::DrawQueue::reset() {
     // using TaskGroup2D = SkSpinningTaskGroup2D;
     using TaskGroup2D = SkFlexibleTaskGroup2D;
 
-    fTasks.reset(new TaskGroup2D(this, fDevice->fTileCnt, fDevice->fExecutor,
-                                 fDevice->fThreadCnt));
+    fTasks = std::make_unique<TaskGroup2D>(this, fDevice->fTileCnt, fDevice->fExecutor,
+                                 fDevice->fThreadCnt);
     fTasks->start();
 }
 

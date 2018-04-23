@@ -10,6 +10,8 @@
 
 #include "webrtc/modules/audio_processing/noise_suppression_impl.h"
 
+#include <memory>
+
 #include "webrtc/base/constructormagic.h"
 #include "webrtc/modules/audio_processing/audio_buffer.h"
 #if defined(WEBRTC_NS_FLOAT)
@@ -61,7 +63,7 @@ void NoiseSuppressionImpl::Initialize(size_t channels, int sample_rate_hz) {
   if (enabled_) {
     new_suppressors.resize(channels);
     for (size_t i = 0; i < channels; i++) {
-      new_suppressors[i].reset(new Suppressor(sample_rate_hz));
+      new_suppressors[i] = std::make_unique<Suppressor>(sample_rate_hz);
     }
   }
   suppressors_.swap(new_suppressors);

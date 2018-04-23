@@ -17,6 +17,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <memory>
+
 extern "C" {
 #include "webrtc/common_audio/ring_buffer.h"
 #include "webrtc/common_audio/signal_processing/include/signal_processing_library.h"
@@ -126,7 +128,7 @@ void* WebRtcAec_Create() {
   if (!aecpc) {
     return NULL;
   }
-  aecpc->data_dumper.reset(new ApmDataDumper(aecpc->instance_count));
+  aecpc->data_dumper = std::make_unique<ApmDataDumper>(aecpc->instance_count);
 
   aecpc->aec = WebRtcAec_CreateAec(aecpc->instance_count);
   if (!aecpc->aec) {

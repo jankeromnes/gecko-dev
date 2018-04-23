@@ -10,6 +10,8 @@
 
 #include "webrtc/modules/audio_processing/gain_control_impl.h"
 
+#include <memory>
+
 #include "webrtc/base/constructormagic.h"
 #include "webrtc/base/optional.h"
 #include "webrtc/modules/audio_processing/audio_buffer.h"
@@ -404,7 +406,7 @@ void GainControlImpl::Initialize(size_t num_proc_channels, int sample_rate_hz) {
   gain_controllers_.resize(*num_proc_channels_);
   for (auto& gain_controller : gain_controllers_) {
     if (!gain_controller) {
-      gain_controller.reset(new GainController());
+      gain_controller = std::make_unique<GainController>();
     }
     gain_controller->Initialize(minimum_capture_level_, maximum_capture_level_,
                                 mode_, *sample_rate_hz_, analog_capture_level_);

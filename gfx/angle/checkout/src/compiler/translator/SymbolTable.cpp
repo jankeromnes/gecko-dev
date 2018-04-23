@@ -14,6 +14,7 @@
 #include "compiler/translator/SymbolTable.h"
 
 #include <algorithm>
+#include <memory>
 #include <set>
 
 #include "angle_gl.h"
@@ -150,13 +151,13 @@ TSymbolTable::~TSymbolTable() = default;
 void TSymbolTable::pushBuiltInLevel()
 {
     mBuiltInTable.push_back(
-        std::unique_ptr<TSymbolTableBuiltInLevel>(new TSymbolTableBuiltInLevel));
+        std::make_unique<TSymbolTableBuiltInLevel>());
 }
 
 void TSymbolTable::push()
 {
-    mTable.push_back(std::unique_ptr<TSymbolTableLevel>(new TSymbolTableLevel));
-    mPrecisionStack.push_back(std::unique_ptr<PrecisionStackLevel>(new PrecisionStackLevel));
+    mTable.push_back(std::make_unique<TSymbolTableLevel>());
+    mPrecisionStack.push_back(std::make_unique<PrecisionStackLevel>());
 }
 
 void TSymbolTable::pop()
@@ -807,7 +808,7 @@ void TSymbolTable::initializeBuiltIns(sh::GLenum type,
     pushBuiltInLevel();  // GLSL_BUILTINS
 
     // We need just one precision stack level for predefined precisions.
-    mPrecisionStack.push_back(std::unique_ptr<PrecisionStackLevel>(new PrecisionStackLevel));
+    mPrecisionStack.push_back(std::make_unique<PrecisionStackLevel>());
 
     switch (type)
     {

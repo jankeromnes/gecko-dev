@@ -35,7 +35,7 @@ class TransportFeedbackAdapterTest : public ::testing::Test {
   virtual ~TransportFeedbackAdapterTest() {}
 
   virtual void SetUp() {
-    adapter_.reset(new TransportFeedbackAdapter(&clock_, &bitrate_controller_));
+    adapter_ = std::make_unique<TransportFeedbackAdapter>(&clock_, &bitrate_controller_);
     adapter_->InitBwe();
   }
 
@@ -305,7 +305,7 @@ TEST_F(TransportFeedbackAdapterTest, TimestampDeltas) {
   }
 
   // Create a new feedback message and add the trailing item.
-  feedback.reset(new rtcp::TransportFeedback());
+  feedback = std::make_unique<rtcp::TransportFeedback>();
   feedback->SetBase(info.sequence_number, info.arrival_time_ms * 1000);
   EXPECT_TRUE(feedback->AddReceivedPacket(info.sequence_number,
                                           info.arrival_time_ms * 1000));

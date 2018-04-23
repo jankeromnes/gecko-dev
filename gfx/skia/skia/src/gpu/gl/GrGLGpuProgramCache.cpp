@@ -5,6 +5,8 @@
  * found in the LICENSE file.
  */
 
+#include <memory>
+
 #include "GrGLGpu.h"
 
 #include "builders/GrGLProgramBuilder.h"
@@ -96,7 +98,7 @@ GrGLProgram* GrGLGpu::ProgramCache::refProgram(const GrGLGpu* gpu,
         if (nullptr == program) {
             return nullptr;
         }
-        entry = fMap.insert(desc, std::unique_ptr<Entry>(new Entry(sk_sp<GrGLProgram>(program))));
+        entry = fMap.insert(desc, std::make_unique<Entry>(sk_sp<GrGLProgram>(program)));
     }
 
     return SkRef((*entry)->fProgram.get());

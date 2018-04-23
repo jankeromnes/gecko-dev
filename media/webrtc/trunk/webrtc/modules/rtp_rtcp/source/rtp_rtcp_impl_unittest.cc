@@ -111,7 +111,7 @@ class RtpRtcpModule : public RtcpPacketTypeCounterObserver {
     config.rtt_stats = &rtt_stats_;
     config.retransmission_rate_limiter = &retransmission_rate_limiter_;
 
-    impl_.reset(new ModuleRtpRtcpImpl(config));
+    impl_ = std::make_unique<ModuleRtpRtcpImpl>(config);
     impl_->SetRTCPStatus(RtcpMode::kCompound);
 
     transport_.SimulateNetworkDelay(kOneWayNetworkDelayMs, clock);

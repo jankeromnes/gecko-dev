@@ -100,7 +100,7 @@ void TestFua(size_t frame_size,
              size_t max_payload_size,
              const std::vector<size_t>& expected_sizes) {
   std::unique_ptr<uint8_t[]> frame;
-  frame.reset(new uint8_t[frame_size]);
+  frame = std::make_unique<uint8_t[]>(frame_size);
   frame[0] = 0x05;  // F=0, NRI=0, Type=5.
   for (size_t i = 0; i < frame_size - kNalHeaderSize; ++i) {
     frame[i + kNalHeaderSize] = i;

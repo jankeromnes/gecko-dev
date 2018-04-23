@@ -11,6 +11,8 @@
 #include "SkPatchUtils.h"
 #include "SkPicture.h"
 #include "SkRecorder.h"
+
+#include <memory>
 #include "SkSurface.h"
 
 SkDrawableList::~SkDrawableList() {
@@ -169,7 +171,7 @@ void SkRecorder::onDrawDRRect(const SkRRect& outer, const SkRRect& inner, const 
 void SkRecorder::onDrawDrawable(SkDrawable* drawable, const SkMatrix* matrix) {
     if (fDrawPictureMode == Record_DrawPictureMode) {
         if (!fDrawableList) {
-            fDrawableList.reset(new SkDrawableList);
+            fDrawableList = std::make_unique<SkDrawableList>();
         }
         fDrawableList->append(drawable);
         APPEND(DrawDrawable, this->copy(matrix), drawable->getBounds(), fDrawableList->count() - 1);

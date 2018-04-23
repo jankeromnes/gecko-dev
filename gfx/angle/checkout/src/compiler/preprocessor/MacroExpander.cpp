@@ -7,6 +7,7 @@
 #include "compiler/preprocessor/MacroExpander.h"
 
 #include <algorithm>
+#include <memory>
 
 #include "common/debug.h"
 #include "compiler/preprocessor/DiagnosticsBase.h"
@@ -178,7 +179,7 @@ void MacroExpander::ungetToken(const Token &token)
     else
     {
         ASSERT(!mReserveToken.get());
-        mReserveToken.reset(new Token(token));
+        mReserveToken = std::make_unique<Token>(token);
     }
 }
 

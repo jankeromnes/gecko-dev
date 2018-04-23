@@ -10,6 +10,7 @@
 
 #include "webrtc/modules/remote_bitrate_estimator/remote_bitrate_estimator_single_stream.h"
 
+#include <memory>
 #include <utility>
 
 #include "webrtc/base/constructormagic.h"
@@ -252,7 +253,7 @@ void RemoteBitrateEstimatorSingleStream::GetSsrcs(
 
 AimdRateControl* RemoteBitrateEstimatorSingleStream::GetRemoteRate() {
   if (!remote_rate_)
-    remote_rate_.reset(new AimdRateControl());
+    remote_rate_ = std::make_unique<AimdRateControl>();
   return remote_rate_.get();
 }
 

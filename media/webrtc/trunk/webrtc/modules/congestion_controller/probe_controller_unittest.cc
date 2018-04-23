@@ -39,7 +39,7 @@ constexpr int kAlrProbeInterval = 5000;
 class ProbeControllerTest : public ::testing::Test {
  protected:
   ProbeControllerTest() : clock_(100000000L) {
-    probe_controller_.reset(new ProbeController(&pacer_, &clock_));
+    probe_controller_ = std::make_unique<ProbeController>(&pacer_, &clock_);
   }
   ~ProbeControllerTest() override {}
 

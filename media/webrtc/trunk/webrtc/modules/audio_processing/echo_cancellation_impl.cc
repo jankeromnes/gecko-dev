@@ -12,6 +12,8 @@
 
 #include <string.h>
 
+#include <memory>
+
 #include "webrtc/base/checks.h"
 #include "webrtc/modules/audio_processing/aec/aec_core.h"
 #include "webrtc/modules/audio_processing/aec/echo_cancellation.h"
@@ -400,9 +402,9 @@ void EchoCancellationImpl::Initialize(int sample_rate_hz,
   rtc::CritScope cs_render(crit_render_);
   rtc::CritScope cs_capture(crit_capture_);
 
-  stream_properties_.reset(
-      new StreamProperties(sample_rate_hz, num_reverse_channels,
-                           num_output_channels, num_proc_channels));
+  stream_properties_ = std::make_unique<StreamProperties>(
+      sample_rate_hz, num_reverse_channels,
+                           num_output_channels, num_proc_channels);
 
   if (!enabled_) {
     return;
@@ -416,7 +418,7 @@ void EchoCancellationImpl::Initialize(int sample_rate_hz,
     cancellers_.resize(num_cancellers_required);
 
     for (size_t i = cancellers_old_size; i < cancellers_.size(); ++i) {
-      cancellers_[i].reset(new Canceller());
+      cancellers_[i] = std::make_unique<Canceller>();
     }
   }
 

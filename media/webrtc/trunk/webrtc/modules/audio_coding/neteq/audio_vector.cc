@@ -315,7 +315,7 @@ void AudioVector::InsertByPushBack(const int16_t* insert_this,
   std::unique_ptr<int16_t[]> temp_array(nullptr);
   if (move_chunk_length > 0) {
     // TODO(minyue): see if it is possible to avoid copying to a buffer.
-    temp_array.reset(new int16_t[move_chunk_length]);
+    temp_array = std::make_unique<int16_t[]>(move_chunk_length);
     CopyTo(move_chunk_length, position, temp_array.get());
     PopBack(move_chunk_length);
   }
@@ -332,7 +332,7 @@ void AudioVector::InsertByPushFront(const int16_t* insert_this,
   std::unique_ptr<int16_t[]> temp_array(nullptr);
   if (position > 0) {
     // TODO(minyue): see if it is possible to avoid copying to a buffer.
-    temp_array.reset(new int16_t[position]);
+    temp_array = std::make_unique<int16_t[]>(position);
     CopyTo(position, 0, temp_array.get());
     PopFront(position);
   }
@@ -348,7 +348,7 @@ void AudioVector::InsertZerosByPushBack(size_t length,
   const size_t move_chunk_length = Size() - position;
   std::unique_ptr<int16_t[]> temp_array(nullptr);
   if (move_chunk_length > 0) {
-    temp_array.reset(new int16_t[move_chunk_length]);
+    temp_array = std::make_unique<int16_t[]>(move_chunk_length);
     CopyTo(move_chunk_length, position, temp_array.get());
     PopBack(move_chunk_length);
   }
@@ -371,7 +371,7 @@ void AudioVector::InsertZerosByPushFront(size_t length,
                                          size_t position) {
   std::unique_ptr<int16_t[]> temp_array(nullptr);
   if (position > 0) {
-    temp_array.reset(new int16_t[position]);
+    temp_array = std::make_unique<int16_t[]>(position);
     CopyTo(position, 0, temp_array.get());
     PopFront(position);
   }

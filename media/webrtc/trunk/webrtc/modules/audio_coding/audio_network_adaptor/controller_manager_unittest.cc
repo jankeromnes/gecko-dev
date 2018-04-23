@@ -8,6 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <memory>
 #include <utility>
 
 #include "webrtc/base/ignore_wundef.h"
@@ -74,12 +75,12 @@ ControllerManagerStates CreateControllerManager() {
       std::make_pair(kChracteristicBandwithBps[1],
                      kChracteristicPacketLossFraction[1]);
 
-  states.simulated_clock.reset(new SimulatedClock(kClockInitialTime));
-  states.controller_manager.reset(new ControllerManagerImpl(
+  states.simulated_clock = std::make_unique<SimulatedClock>(kClockInitialTime);
+  states.controller_manager = std::make_unique<ControllerManagerImpl>(
       ControllerManagerImpl::Config(kMinReorderingTimeMs,
                                     kMinReorderingSquareDistance,
                                     states.simulated_clock.get()),
-      std::move(controllers), chracteristic_points));
+      std::move(controllers), chracteristic_points);
   return states;
 }
 
