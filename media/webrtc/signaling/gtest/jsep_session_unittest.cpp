@@ -42,7 +42,7 @@ class FakeUuidGenerator : public mozilla::JsepUuidGenerator
 {
 public:
   bool
-  Generate(std::string* str)
+  Generate(std::string* str) override
   {
     std::ostringstream os;
     os << "FAKE_UUID_" << ++ctr;

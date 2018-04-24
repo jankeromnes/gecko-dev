@@ -238,7 +238,7 @@ class TestStream : public ots::MemoryStream {
   uint8_t* data() { return data_; }
   size_t size() const { return size_; }
 
-  virtual bool WriteRaw(const void *d, size_t length) {
+  bool WriteRaw(const void *d, size_t length) override {
     if (Tell() + length > size_) {
       size_ = Tell() + length;
     }
@@ -253,13 +253,13 @@ class TestStream : public ots::MemoryStream {
 class TableTest : public ::testing::Test {
  protected:
 
-  virtual void SetUp() {
+  void SetUp() override {
     ots::FontFile *file = new ots::FontFile();
     file->context = new ots::OTSContext();
     font = new ots::Font(file);
   }
 
-  virtual void TearDown() {
+  void TearDown() override {
     delete font->file->context;
     delete font->file;
     delete font;
@@ -282,7 +282,7 @@ class LookupSubtableParserTest : public TableTest { };
 class FeatureListTableTest : public TableTest {
  protected:
 
-  virtual void SetUp() {
+  void SetUp() override {
     TableTest::SetUp();
     num_features = 0;
   }
@@ -325,7 +325,7 @@ const ots::LookupSubtableParser FakeLookupParserReturnsFalse = {
 class LookupListTableTest : public TableTest {
  protected:
 
-  virtual void SetUp() {
+  void SetUp() override {
     TableTest::SetUp();
     num_lookups = 0;
   }

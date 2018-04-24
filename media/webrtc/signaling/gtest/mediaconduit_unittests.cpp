@@ -285,11 +285,11 @@ public:
   {
   }
 
-  ~WebrtcMediaTransport()
+  ~WebrtcMediaTransport() override
   {
   }
 
-  virtual nsresult SendRtpPacket(const uint8_t* data, size_t len)
+  nsresult SendRtpPacket(const uint8_t* data, size_t len) override
   {
     ++numPkts;
 
@@ -303,7 +303,7 @@ public:
     return NS_OK;
   }
 
-  virtual nsresult SendRtcpPacket(const uint8_t* data, size_t len)
+  nsresult SendRtcpPacket(const uint8_t* data, size_t len) override
   {
     if(mAudio)
     {
@@ -361,7 +361,7 @@ class TransportConduitTest : public ::testing::Test
     NSS_NoDB_Init(nullptr);
   }
 
-  ~TransportConduitTest()
+  ~TransportConduitTest() override
   {
     mAudioSession = nullptr;
     mAudioSession2 = nullptr;

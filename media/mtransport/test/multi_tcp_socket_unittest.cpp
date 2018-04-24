@@ -44,7 +44,7 @@ class MultiTcpSocketTest : public MtransportTest {
      ice_ctx_()
    {}
 
-  void SetUp() {
+  void SetUp() override {
     MtransportTest::SetUp();
 
     ice_ctx_ = NrIceCtxHandler::Create("stun", true);
@@ -58,7 +58,7 @@ class MultiTcpSocketTest : public MtransportTest {
   }
 
 
-  void TearDown() {
+  void TearDown() override {
     test_utils_->sts_target()->Dispatch(
             WrapRunnable(
                 this, &MultiTcpSocketTest::Shutdown_s),

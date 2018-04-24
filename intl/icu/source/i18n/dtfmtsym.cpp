@@ -1524,7 +1524,7 @@ struct CalendarDataSink : public ResourceSink {
         resourcesToVisit(NULL), aliasRelativePath() {
         if (U_FAILURE(status)) { return; }
     }
-    virtual ~CalendarDataSink();
+    ~CalendarDataSink() override;
 
     // Configure the CalendarSink to visit all the resources
     void visitAllResources() {
@@ -1538,7 +1538,7 @@ struct CalendarDataSink : public ResourceSink {
         aliasPathPairs.removeAllElements();
     }
 
-    virtual void put(const char *key, ResourceValue &value, UBool, UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool, UErrorCode &errorCode) override {
         if (U_FAILURE(errorCode)) { return; }
         U_ASSERT(!currentCalendarType.isEmpty());
 

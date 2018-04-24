@@ -44,7 +44,7 @@ class SdpTest : public ::testing::Test {
     SdpTest() : sdp_ptr_(nullptr) {
     }
 
-    ~SdpTest() {
+    ~SdpTest() override {
       sdp_free_description(sdp_ptr_);
     }
 
@@ -53,7 +53,7 @@ class SdpTest : public ::testing::Test {
       NSS_SetDomesticPolicy();
     }
 
-    void SetUp() {
+    void SetUp() override {
       final_level_ = 0;
       sdp_ptr_ = nullptr;
     }

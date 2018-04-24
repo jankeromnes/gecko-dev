@@ -46,7 +46,7 @@ class BufferedStunSocketTest : public MtransportTest {
         dummy_(nullptr),
         test_socket_(nullptr) { }
 
-  ~BufferedStunSocketTest() {
+  ~BufferedStunSocketTest() override {
     nr_socket_destroy(&test_socket_);
   }
 

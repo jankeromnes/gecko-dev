@@ -135,7 +135,7 @@ public:
 
     // The virtual destructor must not be inline.
     // See ticket #8454 for details.
-    virtual ~BucketList();
+    ~BucketList() override;
 
     int32_t getBucketCount() const {
         return immutableVisibleList_->size();

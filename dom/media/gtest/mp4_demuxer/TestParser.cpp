@@ -69,7 +69,7 @@ public:
   // Offset past the last character ever read. 0 when nothing read yet.
   size_t mHighestSuccessfulEndOffset;
 protected:
-  virtual ~TestStream()
+  ~TestStream() override
   {
   }
 

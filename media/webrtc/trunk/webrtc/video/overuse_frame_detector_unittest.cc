@@ -34,7 +34,7 @@ namespace {
 class MockCpuOveruseObserver : public ScalingObserverInterface {
  public:
   MockCpuOveruseObserver() {}
-  virtual ~MockCpuOveruseObserver() {}
+  ~MockCpuOveruseObserver() override {}
 
   MOCK_METHOD1(ScaleUp, void(ScaleReason));
   MOCK_METHOD1(ScaleDown, void(ScaleReason));
@@ -45,10 +45,10 @@ class CpuOveruseObserverImpl : public ScalingObserverInterface {
   CpuOveruseObserverImpl() :
     overuse_(0),
     normaluse_(0) {}
-  virtual ~CpuOveruseObserverImpl() {}
+  ~CpuOveruseObserverImpl() override {}
 
-  void ScaleDown(ScaleReason) { ++overuse_; }
-  void ScaleUp(ScaleReason) { ++normaluse_; }
+  void ScaleDown(ScaleReason) override { ++overuse_; }
+  void ScaleUp(ScaleReason) override { ++normaluse_; }
 
   int overuse_;
   int normaluse_;

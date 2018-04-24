@@ -114,39 +114,39 @@ IDNA::nameToUnicodeUTF8(StringPiece name, ByteSink &dest,
 class UTS46 : public IDNA {
 public:
     UTS46(uint32_t options, UErrorCode &errorCode);
-    virtual ~UTS46();
+    ~UTS46() override;
 
-    virtual UnicodeString &
+    UnicodeString &
     labelToASCII(const UnicodeString &label, UnicodeString &dest,
-                 IDNAInfo &info, UErrorCode &errorCode) const;
+                 IDNAInfo &info, UErrorCode &errorCode) const override;
 
-    virtual UnicodeString &
+    UnicodeString &
     labelToUnicode(const UnicodeString &label, UnicodeString &dest,
-                   IDNAInfo &info, UErrorCode &errorCode) const;
+                   IDNAInfo &info, UErrorCode &errorCode) const override;
 
-    virtual UnicodeString &
+    UnicodeString &
     nameToASCII(const UnicodeString &name, UnicodeString &dest,
-                IDNAInfo &info, UErrorCode &errorCode) const;
+                IDNAInfo &info, UErrorCode &errorCode) const override;
 
-    virtual UnicodeString &
+    UnicodeString &
     nameToUnicode(const UnicodeString &name, UnicodeString &dest,
-                  IDNAInfo &info, UErrorCode &errorCode) const;
+                  IDNAInfo &info, UErrorCode &errorCode) const override;
 
-    virtual void
+    void
     labelToASCII_UTF8(StringPiece label, ByteSink &dest,
-                      IDNAInfo &info, UErrorCode &errorCode) const;
+                      IDNAInfo &info, UErrorCode &errorCode) const override;
 
-    virtual void
+    void
     labelToUnicodeUTF8(StringPiece label, ByteSink &dest,
-                       IDNAInfo &info, UErrorCode &errorCode) const;
+                       IDNAInfo &info, UErrorCode &errorCode) const override;
 
-    virtual void
+    void
     nameToASCII_UTF8(StringPiece name, ByteSink &dest,
-                     IDNAInfo &info, UErrorCode &errorCode) const;
+                     IDNAInfo &info, UErrorCode &errorCode) const override;
 
-    virtual void
+    void
     nameToUnicodeUTF8(StringPiece name, ByteSink &dest,
-                      IDNAInfo &info, UErrorCode &errorCode) const;
+                      IDNAInfo &info, UErrorCode &errorCode) const override;
 
 private:
     UnicodeString &

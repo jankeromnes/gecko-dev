@@ -360,9 +360,9 @@ struct TimeUnitFormatReadSink : public ResourceSink {
             timeUnitFormatObj(timeUnitFormatObj), pluralCounts(pluralCounts),
             style(style), beenHere(FALSE){}
 
-    virtual ~TimeUnitFormatReadSink();
+    ~TimeUnitFormatReadSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool, UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool, UErrorCode &errorCode) override {
         // Skip all put() calls except the first one -- discard all fallback data.
         if (beenHere) {
             return;

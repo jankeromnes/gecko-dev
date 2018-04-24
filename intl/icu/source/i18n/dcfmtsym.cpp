@@ -227,10 +227,10 @@ struct DecFmtSymDataSink : public ResourceSink {
     DecFmtSymDataSink(DecimalFormatSymbols& _dfs) : dfs(_dfs) {
         uprv_memset(seenSymbol, FALSE, sizeof(seenSymbol));
     }
-    virtual ~DecFmtSymDataSink();
+    ~DecFmtSymDataSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-            UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+            UErrorCode &errorCode) override {
         ResourceTable symbolsTable = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
         for (int32_t j = 0; symbolsTable.getKeyAndValue(j, key, value); ++j) {
@@ -282,10 +282,10 @@ struct CurrencySpacingSink : public ResourceSink {
 
     CurrencySpacingSink(DecimalFormatSymbols& _dfs)
         : dfs(_dfs), hasBeforeCurrency(FALSE), hasAfterCurrency(FALSE) {}
-    virtual ~CurrencySpacingSink();
+    ~CurrencySpacingSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-            UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+            UErrorCode &errorCode) override {
         ResourceTable spacingTypesTable = value.getTable(errorCode);
         for (int32_t i = 0; spacingTypesTable.getKeyAndValue(i, key, value); ++i) {
             UBool beforeCurrency;

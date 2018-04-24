@@ -68,7 +68,7 @@ class TransportLayerDummy : public TransportLayer {
     *destroyed_ = false;
   }
 
-  virtual ~TransportLayerDummy() {
+  ~TransportLayerDummy() override {
     *destroyed_ = true;
   }
 
@@ -100,7 +100,7 @@ class Inspector {
 class TransportLayerLossy : public TransportLayer {
  public:
   TransportLayerLossy() : loss_mask_(0), packet_(0), inspector_(nullptr) {}
-  ~TransportLayerLossy () {}
+  ~TransportLayerLossy () override {}
 
   TransportResult SendPacket(const unsigned char *data, size_t len) override {
     MOZ_MTLOG(ML_NOTICE, LAYER_INFO << "SendPacket(" << len << ")");
@@ -259,8 +259,8 @@ class DtlsRecordParser {
 // them on.
 class DtlsRecordInspector : public Inspector {
  public:
-  virtual void Inspect(TransportLayer* layer,
-                       const unsigned char *data, size_t len) {
+  void Inspect(TransportLayer* layer,
+                       const unsigned char *data, size_t len) override {
     DtlsRecordParser parser(data, len);
 
     uint8_t ct;
@@ -290,9 +290,9 @@ class DtlsInspectorInjector : public DtlsRecordInspector {
     len_ = len;
   }
 
-  virtual void OnRecord(TransportLayer* layer,
+  void OnRecord(TransportLayer* layer,
                         uint8_t content_type,
-                        const unsigned char *data, size_t len) {
+                        const unsigned char *data, size_t len) override {
     // Only inject once.
     if (injected_) {
       return;
@@ -333,9 +333,9 @@ class DtlsInspectorRecordHandshakeMessage : public DtlsRecordInspector {
       : handshake_type_(handshake_type),
         buffer_() {}
 
-  virtual void OnRecord(TransportLayer* layer,
+  void OnRecord(TransportLayer* layer,
                         uint8_t content_type,
-                        const unsigned char *data, size_t len) {
+                        const unsigned char *data, size_t len) override {
     // Only do this once.
     if (buffer_.len()) {
       return;
@@ -468,7 +468,7 @@ class TransportTestPeer : public sigslot::has_slots<> {
     EXPECT_EQ(20u, fingerprint_len_);
   }
 
-  ~TransportTestPeer() {
+  ~TransportTestPeer() override {
     test_utils_->sts_target()->Dispatch(
       WrapRunnable(this, &TransportTestPeer::DestroyFlow),
       NS_DISPATCH_SYNC);

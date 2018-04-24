@@ -420,7 +420,7 @@ class IceTestPeer : public sigslot::has_slots<> {
     MOZ_ASSERT(!r);
   }
 
-  ~IceTestPeer() {
+  ~IceTestPeer() override {
     test_utils_->sts_target()->Dispatch(WrapRunnable(this,
                                                     &IceTestPeer::Shutdown),
         NS_DISPATCH_SYNC);
@@ -1994,7 +1994,7 @@ class WebRtcIcePrioritizerTest : public StunTest {
   WebRtcIcePrioritizerTest():
     prioritizer_(nullptr) {}
 
-  ~WebRtcIcePrioritizerTest() {
+  ~WebRtcIcePrioritizerTest() override {
     if (prioritizer_) {
       nr_interface_prioritizer_destroy(&prioritizer_);
     }
@@ -2042,7 +2042,7 @@ class WebRtcIcePacketFilterTest : public StunTest {
   WebRtcIcePacketFilterTest(): udp_filter_(nullptr),
                                tcp_filter_(nullptr) {}
 
-  void SetUp() {
+  void SetUp() override {
     StunTest::SetUp();
 
     // Set up enough of the ICE ctx to allow the packet filter to work
@@ -2059,7 +2059,7 @@ class WebRtcIcePacketFilterTest : public StunTest {
     tcp_handler->NewFilter(getter_AddRefs(tcp_filter_));
   }
 
-  void TearDown() {
+  void TearDown() override {
     test_utils_->sts_target()->Dispatch(WrapRunnable(this,
                                        &WebRtcIcePacketFilterTest::TearDown_s),
                                        NS_DISPATCH_SYNC);

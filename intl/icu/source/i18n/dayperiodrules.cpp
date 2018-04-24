@@ -48,9 +48,9 @@ struct DayPeriodRulesDataSink : public ResourceSink {
     DayPeriodRulesDataSink() {
         for (int32_t i = 0; i < UPRV_LENGTHOF(cutoffs); ++i) { cutoffs[i] = 0; }
     }
-    virtual ~DayPeriodRulesDataSink();
+    ~DayPeriodRulesDataSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool, UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool, UErrorCode &errorCode) override {
         ResourceTable dayPeriodData = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
 
@@ -280,9 +280,9 @@ struct DayPeriodRulesDataSink : public ResourceSink {
 };  // struct DayPeriodRulesDataSink
 
 struct DayPeriodRulesCountSink : public ResourceSink {
-    virtual ~DayPeriodRulesCountSink();
+    ~DayPeriodRulesCountSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool, UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool, UErrorCode &errorCode) override {
         ResourceTable rules = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
 

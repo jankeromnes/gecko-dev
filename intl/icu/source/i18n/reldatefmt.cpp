@@ -64,7 +64,7 @@ public:
           fallBackCache[i] = -1;
         }
     }
-    virtual ~RelativeDateTimeCacheData();
+    ~RelativeDateTimeCacheData() override;
 
     // no numbers: e.g Next Tuesday; Yesterday; etc.
     UnicodeString absoluteUnits[UDAT_STYLE_COUNT][UDAT_ABSOLUTE_UNIT_COUNT][UDAT_DIRECTION_COUNT];
@@ -307,7 +307,7 @@ struct RelDateTimeFmtDataSink : public ResourceSink {
         cacheData.fallBackCache[UDAT_STYLE_NARROW] = -1;
     }
 
-    ~RelDateTimeFmtDataSink();
+    ~RelDateTimeFmtDataSink() override;
 
     // Utility functions
     static UDateRelativeDateTimeFormatterStyle styleFromString(const char *s) {
@@ -535,8 +535,8 @@ struct RelDateTimeFmtDataSink : public ResourceSink {
         }
     }
 
-    virtual void put(const char *key, ResourceValue &value,
-                     UBool /*noFallback*/, UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value,
+                     UBool /*noFallback*/, UErrorCode &errorCode) override {
         // Main entry point to sink
         ResourceTable table = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }

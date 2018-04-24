@@ -934,7 +934,7 @@ private:
 
 public:
     static UClassID U_EXPORT2 getStaticClassID(void) { return (UClassID)&fgClassID; }
-    virtual UClassID getDynamicClassID(void) const { return getStaticClassID(); }
+    UClassID getDynamicClassID(void) const override { return getStaticClassID(); }
 public:
     KeywordEnumeration(const char *keys, int32_t keywordLen, int32_t currentIndex, UErrorCode &status)
         : keywords((char *)&fgClassID), current((char *)&fgClassID), length(0) {
@@ -956,15 +956,15 @@ public:
         }
     }
 
-    virtual ~KeywordEnumeration();
+    ~KeywordEnumeration() override;
 
-    virtual StringEnumeration * clone() const
+    StringEnumeration * clone() const override
     {
         UErrorCode status = U_ZERO_ERROR;
         return new KeywordEnumeration(keywords, length, (int32_t)(current - keywords), status);
     }
 
-    virtual int32_t count(UErrorCode &/*status*/) const {
+    int32_t count(UErrorCode &/*status*/) const override {
         char *kw = keywords;
         int32_t result = 0;
         while(*kw) {
@@ -974,7 +974,7 @@ public:
         return result;
     }
 
-    virtual const char* next(int32_t* resultLength, UErrorCode& status) {
+    const char* next(int32_t* resultLength, UErrorCode& status) override {
         const char* result;
         int32_t len;
         if(U_SUCCESS(status) && *current != 0) {
@@ -993,13 +993,13 @@ public:
         return result;
     }
 
-    virtual const UnicodeString* snext(UErrorCode& status) {
+    const UnicodeString* snext(UErrorCode& status) override {
         int32_t resultLength = 0;
         const char *s = next(&resultLength, status);
         return setChars(s, resultLength, status);
     }
 
-    virtual void reset(UErrorCode& /*status*/) {
+    void reset(UErrorCode& /*status*/) override {
         current = keywords;
     }
 };

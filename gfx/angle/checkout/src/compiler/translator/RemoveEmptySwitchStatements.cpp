@@ -20,7 +20,7 @@ class RemoveEmptySwitchStatementsTraverser : public TIntermTraverser
   public:
     RemoveEmptySwitchStatementsTraverser() : TIntermTraverser(true, false, false) {}
 
-    bool visitSwitch(Visit visit, TIntermSwitch *node);
+    bool visitSwitch(Visit visit, TIntermSwitch *node) override;
 };
 
 bool RemoveEmptySwitchStatementsTraverser::visitSwitch(Visit visit, TIntermSwitch *node)

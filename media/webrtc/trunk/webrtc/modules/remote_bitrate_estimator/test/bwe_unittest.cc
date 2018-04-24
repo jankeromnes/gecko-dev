@@ -25,7 +25,7 @@ class LinkedSetTest : public ::testing::Test {
  public:
   LinkedSetTest() : linked_set_(kSetCapacity) {}
 
-  ~LinkedSetTest() {}
+  ~LinkedSetTest() override {}
 
  protected:
   LinkedSet linked_set_;
@@ -83,7 +83,7 @@ TEST_F(LinkedSetTest, Overflow) {
 class SequenceNumberOlderThanTest : public ::testing::Test {
  public:
   SequenceNumberOlderThanTest() {}
-  ~SequenceNumberOlderThanTest() {}
+  ~SequenceNumberOlderThanTest() override {}
 
  protected:
   SequenceNumberOlderThan comparator_;
@@ -104,7 +104,7 @@ TEST_F(SequenceNumberOlderThanTest, Operator) {
 class LossAccountTest : public ::testing::Test {
  public:
   LossAccountTest() {}
-  ~LossAccountTest() {}
+  ~LossAccountTest() override {}
 
  protected:
   LossAccount loss_account_;
@@ -131,7 +131,7 @@ TEST_F(LossAccountTest, Operations) {
 class BweReceiverTest : public ::testing::Test {
  public:
   BweReceiverTest() : bwe_receiver_(kFlowId) {}
-  ~BweReceiverTest() {}
+  ~BweReceiverTest() override {}
 
  protected:
   const int kFlowId = 1;  // Arbitrary.

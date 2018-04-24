@@ -408,7 +408,7 @@ public:
     BasicCalendarFactory()
         : LocaleKeyFactory(LocaleKeyFactory::INVISIBLE) { }
 
-    virtual ~BasicCalendarFactory();
+    ~BasicCalendarFactory() override;
 
 protected:
     //virtual UBool isSupportedID( const UnicodeString& id, UErrorCode& status) const {
@@ -420,7 +420,7 @@ protected:
     //  return isStandardSupportedKeyword(keyword, status);
     //}
 
-    virtual void updateVisibleIDs(Hashtable& result, UErrorCode& status) const
+    void updateVisibleIDs(Hashtable& result, UErrorCode& status) const override
     {
         if (U_SUCCESS(status)) {
             for(int32_t i=0;gCalTypes[i] != NULL;i++) {
@@ -432,7 +432,7 @@ protected:
         }
     }
 
-    virtual UObject* create(const ICUServiceKey& key, const ICUService* /*service*/, UErrorCode& status) const {
+    UObject* create(const ICUServiceKey& key, const ICUService* /*service*/, UErrorCode& status) const override {
 #ifdef U_DEBUG_CALSVC
         if(dynamic_cast<const LocaleKey*>(&key) == NULL) {
             fprintf(stderr, "::create - not a LocaleKey!\n");
@@ -476,9 +476,9 @@ BasicCalendarFactory::~BasicCalendarFactory() {}
 class DefaultCalendarFactory : public ICUResourceBundleFactory {
 public:
     DefaultCalendarFactory() : ICUResourceBundleFactory() { }
-    virtual ~DefaultCalendarFactory();
+    ~DefaultCalendarFactory() override;
 protected:
-    virtual UObject* create(const ICUServiceKey& key, const ICUService* /*service*/, UErrorCode& status) const  {
+    UObject* create(const ICUServiceKey& key, const ICUService* /*service*/, UErrorCode& status) const override  {
 
         LocaleKey &lkey = (LocaleKey&)key;
         Locale loc;
@@ -508,9 +508,9 @@ public:
         registerFactory(new DefaultCalendarFactory(), status);
     }
 
-    virtual ~CalendarService();
+    ~CalendarService() override;
 
-    virtual UObject* cloneInstance(UObject* instance) const {
+    UObject* cloneInstance(UObject* instance) const override {
         UnicodeString *s = dynamic_cast<UnicodeString *>(instance);
         if(s != NULL) {
             return s->clone();
@@ -523,7 +523,7 @@ public:
         }
     }
 
-    virtual UObject* handleDefault(const ICUServiceKey& key, UnicodeString* /*actualID*/, UErrorCode& status) const {
+    UObject* handleDefault(const ICUServiceKey& key, UnicodeString* /*actualID*/, UErrorCode& status) const override {
         LocaleKey& lkey = (LocaleKey&)key;
         //int32_t kind = lkey.kind();
 
@@ -544,7 +544,7 @@ public:
         return nc;
     }
 
-    virtual UBool isDefault() const {
+    UBool isDefault() const override {
         return countFactories() == 1;
     }
 };
