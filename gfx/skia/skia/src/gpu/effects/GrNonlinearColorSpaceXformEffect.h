@@ -63,8 +63,8 @@ private:
     void onGetGLSLProcessorKey(const GrShaderCaps&, GrProcessorKeyBuilder*) const override;
     bool onIsEqual(const GrFragmentProcessor&) const override;
 
-    float fSrcTransferFnCoeffs[kNumTransferFnCoeffs];
-    float fDstTransferFnCoeffs[kNumTransferFnCoeffs];
+    float fSrcTransferFnCoeffs[kNumTransferFnCoeffs]{};
+    float fDstTransferFnCoeffs[kNumTransferFnCoeffs]{};
     SkMatrix44 fGamutXform;
     uint32_t fOps;
 

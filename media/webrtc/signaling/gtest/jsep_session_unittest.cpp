@@ -83,7 +83,7 @@ protected:
   struct TransportData {
     std::string mIceUfrag;
     std::string mIcePwd;
-    int iceCredentialSerial;
+    int iceCredentialSerial{};
     std::map<std::string, std::vector<uint8_t> > mFingerprints;
   };
 

@@ -48,7 +48,7 @@ int64_t ConvertTimespecToMicros(const struct timespec& ts) {
      _POSIX_MONOTONIC_CLOCK >= 0) ||                         \
     defined(OS_BSD) || defined(OS_ANDROID)
 int64_t ClockNow(clockid_t clk_id) {
-  struct timespec ts;
+  struct timespec ts{};
   CHECK(clock_gettime(clk_id, &ts) == 0);
   return ConvertTimespecToMicros(ts);
 }
@@ -64,7 +64,7 @@ namespace base {
 
 // static
 Time Time::Now() {
-  struct timeval tv;
+  struct timeval tv{};
   struct timezone tz = {0, 0};  // UTC
   CHECK(gettimeofday(&tv, &tz) == 0);
   // Combine seconds and microseconds in a 64-bit field containing microseconds

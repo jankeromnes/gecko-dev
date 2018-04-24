@@ -77,7 +77,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * the iterator points to a string.
      * @stable ICU 2.4
      */
-    UChar32 codepoint;
+    UChar32 codepoint{};
 
     /**
      * When iterating over ranges using <tt>nextRange()</tt>,
@@ -88,7 +88,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * <tt>codepointEnd</tt> is undefined.
      * @stable ICU 2.4
      */
-    UChar32 codepointEnd;
+    UChar32 codepointEnd{};
 
     /**
      * If <tt>codepoint == IS_STRING</tt>, then <tt>string</tt> points
@@ -96,7 +96,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * value of <tt>string</tt> is undefined.
      * @stable ICU 2.4
      */
-    const UnicodeString* string;
+    const UnicodeString* string{};
 
  public:
 
@@ -251,32 +251,32 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
     /** The set
      * @stable ICU 2.4
      */
-    const UnicodeSet* set;
+    const UnicodeSet* set{};
     /** End range
      * @stable ICU 2.4
      */
-    int32_t endRange;
+    int32_t endRange{};
     /** Range
      * @stable ICU 2.4
      */
-    int32_t range;
+    int32_t range{};
     /** End element
      * @stable ICU 2.4
      */
-    int32_t endElement;
+    int32_t endElement{};
     /** Next element
      * @stable ICU 2.4
      */
-    int32_t nextElement;
+    int32_t nextElement{};
     //UBool abbreviated;
     /** Next string
      * @stable ICU 2.4
      */
-    int32_t nextString;
+    int32_t nextString{};
     /** String count
      * @stable ICU 2.4
      */
-    int32_t stringCount;
+    int32_t stringCount{};
 
     /**
      *  Points to the string to use when the caller asks for a

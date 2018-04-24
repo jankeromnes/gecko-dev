@@ -776,7 +776,7 @@ public:
     }
 
 private:
-    GrDistanceFieldLCDTextGeoProc::DistanceAdjust fDistanceAdjust;
+    GrDistanceFieldLCDTextGeoProc::DistanceAdjust fDistanceAdjust{};
     UniformHandle                                 fDistanceAdjustUni;
 
     SkISize                                       fAtlasSize;

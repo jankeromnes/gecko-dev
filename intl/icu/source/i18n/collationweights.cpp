@@ -241,7 +241,7 @@ CollationWeights::getWeightRanges(uint32_t lowerLimit, uint32_t upperLimit) {
     }
     /* if the upper limit is a prefix of the lower limit then the earlier test lowerLimit>=upperLimit has caught it */
 
-    WeightRange lower[5], middle, upper[5]; /* [0] and [1] are not used - this simplifies indexing */
+    WeightRange lower[5], middle{}, upper[5]; /* [0] and [1] are not used - this simplifies indexing */
     uprv_memset(lower, 0, sizeof(lower));
     uprv_memset(&middle, 0, sizeof(middle));
     uprv_memset(upper, 0, sizeof(upper));

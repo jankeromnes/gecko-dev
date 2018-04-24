@@ -56,7 +56,7 @@ class BASE_EXPORT LockImpl {
 #endif
 
  private:
-  NativeHandle native_handle_;
+  NativeHandle native_handle_{};
 
   DISALLOW_COPY_AND_ASSIGN(LockImpl);
 };

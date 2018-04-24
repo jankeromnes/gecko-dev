@@ -3465,7 +3465,7 @@ namespace {
 #define   MAX_TARGET_IGNORABLES_PER_PAT_OTHER 3
 #define   MIGHT_BE_JAMO_L(c) ((c >= 0x1100 && c <= 0x115E) || (c >= 0x3131 && c <= 0x314E) || (c >= 0x3165 && c <= 0x3186))
 struct CEIBuffer {
-    CEI                  defBuf[DEFAULT_CEBUFFER_SIZE];
+    CEI                  defBuf[DEFAULT_CEBUFFER_SIZE]{};
     CEI                 *buf;
     int32_t              bufSize;
     int32_t              firstIx;

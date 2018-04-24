@@ -153,7 +153,7 @@ void Time::Explode(bool is_local, Exploded* exploded) const {
       millisecond += kMillisecondsPerSecond;
   }
 
-  struct tm timestruct;
+  struct tm timestruct{};
   SysTimeToTimeStruct(seconds, &timestruct, is_local);
 
   exploded->year = timestruct.tm_year + 1900;
@@ -177,7 +177,7 @@ bool Time::FromExploded(bool is_local, const Exploded& exploded, Time* time) {
     return false;
   }
 
-  struct tm timestruct;
+  struct tm timestruct{};
   timestruct.tm_sec = exploded.second;
   timestruct.tm_min = exploded.minute;
   timestruct.tm_hour = exploded.hour;
@@ -284,7 +284,7 @@ bool Time::FromExploded(bool is_local, const Exploded& exploded, Time* time) {
   // If |exploded.day_of_month| is set to 31 on a 28-30 day month, it will
   // return the first day of the next month. Thus round-trip the time and
   // compare the initial |exploded| with |utc_to_exploded| time.
-  base::Time::Exploded to_exploded;
+  base::Time::Exploded to_exploded{};
   if (!is_local)
     converted_time.UTCExplode(&to_exploded);
   else

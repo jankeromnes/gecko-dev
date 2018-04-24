@@ -43,8 +43,8 @@ protected:
   cdm::VideoFormat mFormat;
   cdm::Size mSize;
   cdm::Buffer* mBuffer;
-  uint32_t mPlaneOffsets[kMaxPlanes];
-  uint32_t mPlaneStrides[kMaxPlanes];
+  uint32_t mPlaneOffsets[kMaxPlanes]{};
+  uint32_t mPlaneStrides[kMaxPlanes]{};
   int64_t mTimestamp;
 };
 

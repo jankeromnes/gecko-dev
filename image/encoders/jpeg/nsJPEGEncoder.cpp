@@ -114,11 +114,11 @@ nsJPEGEncoder::InitFromData(const uint8_t* aData,
     }
   }
 
-  jpeg_compress_struct cinfo;
+  jpeg_compress_struct cinfo{};
 
   // We set up the normal JPEG error routines, then override error_exit.
   // This must be done before the call to create_compress
-  encoder_error_mgr errmgr;
+  encoder_error_mgr errmgr{};
   cinfo.err = jpeg_std_error(&errmgr.pub);
   errmgr.pub.error_exit = errorExit;
   // Establish the setjmp return context for my_error_exit to use.
@@ -146,7 +146,7 @@ nsJPEGEncoder::InitFromData(const uint8_t* aData,
   }
 
   // set up the destination manager
-  jpeg_destination_mgr destmgr;
+  jpeg_destination_mgr destmgr{};
   destmgr.init_destination = initDestination;
   destmgr.empty_output_buffer = emptyOutputBuffer;
   destmgr.term_destination = termDestination;

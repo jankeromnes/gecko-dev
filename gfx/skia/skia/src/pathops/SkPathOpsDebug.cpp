@@ -709,7 +709,7 @@ void SkIntersections::debugResetLoopCount() {
 #include "SkPathOpsCubic.h"
 
 SkDCubic SkDQuad::debugToCubic() const {
-    SkDCubic cubic;
+    SkDCubic cubic{};
     cubic[0] = fPts[0];
     cubic[2] = fPts[1];
     cubic[3] = fPts[2];

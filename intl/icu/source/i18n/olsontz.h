@@ -319,48 +319,48 @@ private:
     /**
      * Number of transitions in each time range
      */
-    int16_t transitionCountPre32;
-    int16_t transitionCount32;
-    int16_t transitionCountPost32;
+    int16_t transitionCountPre32{};
+    int16_t transitionCount32{};
+    int16_t transitionCountPost32{};
 
     /**
      * Time of each transition in seconds from 1970 epoch before 32bit second range (<= 1900).
      * Each transition in this range is represented by a pair of int32_t.
      * Length is transitionCount int32_t's.  NULL if no transitions in this range.
      */
-    const int32_t *transitionTimesPre32; // alias into res; do not delete
+    const int32_t *transitionTimesPre32{}; // alias into res; do not delete
 
     /**
      * Time of each transition in seconds from 1970 epoch in 32bit second range.
      * Length is transitionCount int32_t's.  NULL if no transitions in this range.
      */
-    const int32_t *transitionTimes32; // alias into res; do not delete
+    const int32_t *transitionTimes32{}; // alias into res; do not delete
 
     /**
      * Time of each transition in seconds from 1970 epoch after 32bit second range (>= 2038).
      * Each transition in this range is represented by a pair of int32_t.
      * Length is transitionCount int32_t's.  NULL if no transitions in this range.
      */
-    const int32_t *transitionTimesPost32; // alias into res; do not delete
+    const int32_t *transitionTimesPost32{}; // alias into res; do not delete
 
     /**
      * Number of types, 1..255
      */
-    int16_t typeCount;
+    int16_t typeCount{};
 
     /**
      * Offset from GMT in seconds for each type.
      * Length is typeCount int32_t's.  At least one type (a pair of int32_t)
      * is required.
      */
-    const int32_t *typeOffsets; // alias into res; do not delete
+    const int32_t *typeOffsets{}; // alias into res; do not delete
 
     /**
      * Type description data, consisting of transitionCount uint8_t
      * type indices (from 0..typeCount-1).
      * Length is transitionCount int16_t's.  NULL if no transitions.
      */
-    const uint8_t *typeMapData; // alias into res; do not delete
+    const uint8_t *typeMapData{}; // alias into res; do not delete
 
     /**
      * A SimpleTimeZone that governs the behavior for date >= finalMillis.
@@ -370,17 +370,17 @@ private:
     /**
      * For date >= finalMillis, the finalZone will be used.
      */
-    double finalStartMillis;
+    double finalStartMillis{};
 
     /**
      * For year >= finalYear, the finalZone will be used.
      */
-    int32_t finalStartYear;
+    int32_t finalStartYear{};
 
     /*
      * Canonical (CLDR) ID of this zone
      */
-    const UChar *canonicalID;
+    const UChar *canonicalID{};
 
     /* BasicTimeZone support */
     void clearTransitionRules(void);
@@ -391,14 +391,14 @@ private:
     void initTransitionRules(UErrorCode& status);
   private:
 
-    InitialTimeZoneRule *initialRule;
-    TimeZoneTransition  *firstTZTransition;
-    int16_t             firstTZTransitionIdx;
-    TimeZoneTransition  *firstFinalTZTransition;
-    TimeArrayTimeZoneRule   **historicRules;
-    int16_t             historicRuleCount;
-    SimpleTimeZone      *finalZoneWithStartYear; // hack
-    UInitOnce           transitionRulesInitOnce;
+    InitialTimeZoneRule *initialRule{};
+    TimeZoneTransition  *firstTZTransition{};
+    int16_t             firstTZTransitionIdx{};
+    TimeZoneTransition  *firstFinalTZTransition{};
+    TimeArrayTimeZoneRule   **historicRules{};
+    int16_t             historicRuleCount{};
+    SimpleTimeZone      *finalZoneWithStartYear{}; // hack
+    UInitOnce           transitionRulesInitOnce{};
 };
 
 inline int16_t

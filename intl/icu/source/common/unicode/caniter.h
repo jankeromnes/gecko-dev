@@ -165,7 +165,7 @@ private:
 
     // fields
     UnicodeString source;
-    UBool done;
+    UBool done{};
 
     // 2 dimensional array holds the pieces of the string with
     // their different canonically equivalent representations

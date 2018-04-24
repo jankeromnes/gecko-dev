@@ -941,7 +941,7 @@ MFBT_API void
 MozStackWalk(MozWalkStackCallback aCallback, uint32_t aSkipFrames,
              uint32_t aMaxFrames, void* aClosure)
 {
-  unwind_info info;
+  unwind_info info{};
   info.callback = aCallback;
   info.skip = aSkipFrames + 1;
   info.maxFrames = aMaxFrames;

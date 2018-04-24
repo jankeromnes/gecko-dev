@@ -57,8 +57,8 @@ private:
     const GrStyle fStyle;
     GrGLuint fBasePathID;
     mutable size_t fGpuMemorySize;
-    bool fShouldStroke;
-    bool fShouldFill;
+    bool fShouldStroke{};
+    bool fShouldFill{};
 
     typedef GrPathRange INHERITED;
 };

@@ -515,8 +515,8 @@ int nr_praddr_to_transport_addr(const PRNetAddr *praddr,
   {
     int _status;
     int r;
-    struct sockaddr_in ip4;
-    struct sockaddr_in6 ip6;
+    struct sockaddr_in ip4{};
+    struct sockaddr_in6 ip6{};
 
     switch(praddr->raw.family) {
       case PR_AF_INET:
@@ -1367,7 +1367,7 @@ int NrUdpSocketIpc::sendto(const void *msg, size_t len, int flags,
   }
 
   int r;
-  net::NetAddr addr;
+  net::NetAddr addr{};
   if ((r=nr_transport_addr_to_netaddr(to, &addr))) {
     return r;
   }

@@ -256,7 +256,7 @@ class MOZ_STACK_CLASS BinTokenReaderTester
 
     // `true` if we have encountered an error. Errors are non recoverable.
     // Attempting to read from a poisoned tokenizer will cause assertion errors.
-    bool poisoned_;
+    bool poisoned_{};
 
     // The first byte of the buffer. Not owned.
     const uint8_t* start_;
@@ -303,7 +303,7 @@ class MOZ_STACK_CLASS BinTokenReaderTester
 
         // Set to `true` if `init()` has been called. Reset to `false` once
         // all conditions have been checked.
-        bool initialized_;
+        bool initialized_{};
         BinTokenReaderTester& reader_;
     };
 
@@ -319,7 +319,7 @@ class MOZ_STACK_CLASS BinTokenReaderTester
         friend BinTokenReaderTester;
         void init(const uint8_t* expectedEnd);
       private:
-        const uint8_t* expectedEnd_;
+        const uint8_t* expectedEnd_{};
     };
 
     // Guard class used to ensure that `enterTaggedTuple` is used properly.

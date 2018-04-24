@@ -122,7 +122,7 @@ bool ArrayReturnValueToOutParameterTraverser::visitFunctionPrototype(Visit visit
         {
             TType *returnValueVariableType = new TType(node->getType());
             returnValueVariableType->setQualifier(EvqOut);
-            ChangedFunction changedFunction;
+            ChangedFunction changedFunction{};
             changedFunction.returnValueVariable =
                 new TVariable(mSymbolTable, kReturnValueVariableName, returnValueVariableType,
                               SymbolType::AngleInternal);

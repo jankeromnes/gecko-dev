@@ -115,7 +115,7 @@ struct UCaseMap : public icu::UMemory {
 #if !UCONFIG_NO_BREAK_ITERATION
     icu::BreakIterator *iter;  /* We adopt the iterator, so we own it. */
 #endif
-    char locale[32];
+    char locale[32]{};
     int32_t caseLocale;
     uint32_t options;
 };

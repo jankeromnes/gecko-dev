@@ -84,7 +84,7 @@ private:
   const Result deferredSubjectError;
 
   // Initialized lazily.
-  uint8_t subjectSignatureDigestBuf[MAX_DIGEST_SIZE_IN_BYTES];
+  uint8_t subjectSignatureDigestBuf[MAX_DIGEST_SIZE_IN_BYTES]{};
   der::PublicKeyAlgorithm subjectSignaturePublicKeyAlg;
   SignedDigest subjectSignature;
 

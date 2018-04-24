@@ -1195,7 +1195,7 @@ class U_I18N_API IntegerWidth : public UMemory {
             impl::digits_t fMaxInt;
         } minMaxInt;
         UErrorCode errorCode;
-    } fUnion;
+    } fUnion{};
     bool fHasError = false;
 
     IntegerWidth(impl::digits_t minInt, impl::digits_t maxInt);
@@ -1307,7 +1307,7 @@ class U_I18N_API SymbolsWrapper : public UMemory {
     union {
         const DecimalFormatSymbols *dfs;
         const NumberingSystem *ns;
-    } fPtr;
+    } fPtr{};
 
     void doCopyFrom(const SymbolsWrapper &other);
 
@@ -1389,7 +1389,7 @@ class U_I18N_API Padder : public UMemory {
             UNumberFormatPadPosition fPosition;
         } padding;
         UErrorCode errorCode;
-    } fUnion;
+    } fUnion{};
 
     Padder(UChar32 cp, int32_t width, UNumberFormatPadPosition position);
 

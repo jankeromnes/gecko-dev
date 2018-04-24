@@ -153,7 +153,7 @@ private:
     static tokenType charType(UChar ch);
     static UBool isValidKeyword(const UnicodeString& token);
 
-    const UnicodeString  *ruleSrc;  // The rules string.
+    const UnicodeString  *ruleSrc{};  // The rules string.
     int32_t        ruleIndex;       // String index in the input rules, the current parse position.
     UnicodeString  token;           // Token most recently scanned.
     tokenType      type;
@@ -285,15 +285,15 @@ class U_I18N_API FixedDecimal: public IFixedDecimal, public UObject {
     static int64_t getFractionalDigits(double n, int32_t v);
     static int32_t decimals(double n);
 
-    double      source;
-    int32_t     visibleDecimalDigitCount;
-    int64_t     decimalDigits;
-    int64_t     decimalDigitsWithoutTrailingZeros;
-    int64_t     intValue;
-    UBool       hasIntegerValue;
-    UBool       isNegative;
-    UBool       _isNaN;
-    UBool       _isInfinite;
+    double      source{};
+    int32_t     visibleDecimalDigitCount{};
+    int64_t     decimalDigits{};
+    int64_t     decimalDigitsWithoutTrailingZeros{};
+    int64_t     intValue{};
+    UBool       hasIntegerValue{};
+    UBool       isNegative{};
+    UBool       _isNaN{};
+    UBool       _isInfinite{};
 };
 
 class AndConstraint : public UMemory  {

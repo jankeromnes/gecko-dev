@@ -104,7 +104,7 @@ SandboxBrokerClient::DoCall(const Request* aReq, const char* aPath,
   }
 
   // Set up iovecs for response.
-  Response resp;
+  Response resp{};
   ios[0].iov_base = &resp;
   ios[0].iov_len = sizeof(resp);
   if (aResponseBuff) {

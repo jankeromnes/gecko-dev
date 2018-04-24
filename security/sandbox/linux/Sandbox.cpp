@@ -170,7 +170,7 @@ SigSysHandler(int nr, siginfo_t *info, void *void_context)
 static void
 InstallSigSysHandler(void)
 {
-  struct sigaction act;
+  struct sigaction act{};
 
   // Ensure that the Chromium handler is installed.
   Unused << sandbox::Trap::Registry();
@@ -264,7 +264,7 @@ static int
 FindFreeSignalNumber()
 {
   for (int signum = SIGRTMAX; signum >= SIGRTMIN; --signum) {
-    struct sigaction sa;
+    struct sigaction sa{};
 
     if (sigaction(signum, nullptr, &sa) == 0 &&
         (sa.sa_flags & SA_SIGINFO) == 0 &&
@@ -385,7 +385,7 @@ BroadcastSetThreadSandbox(const sock_fprog* aFilter)
       // blocking forever or silently losing security, and it
       // shouldn't actually happen.
       static const int crashDelay = 10; // seconds
-      struct timespec timeLimit;
+      struct timespec timeLimit{};
       clock_gettime(CLOCK_MONOTONIC, &timeLimit);
       timeLimit.tv_sec += crashDelay;
       while (true) {
@@ -416,7 +416,7 @@ BroadcastSetThreadSandbox(const sock_fprog* aFilter)
           sandboxProgress = true;
           break;
         }
-        struct timespec now;
+        struct timespec now{};
         clock_gettime(CLOCK_MONOTONIC, &now);
         if (now.tv_sec > timeLimit.tv_sec ||
             (now.tv_sec == timeLimit.tv_sec &&
@@ -576,7 +576,7 @@ SetCurrentProcessSandbox(UniquePtr<sandbox::bpf_dsl::Policy> aPolicy)
     flatProgram[i - program.begin()] = *i;
   }
 
-  sock_fprog fprog;
+  sock_fprog fprog{};
   fprog.filter = flatProgram.get();
   fprog.len = static_cast<unsigned short>(programLen);
   MOZ_RELEASE_ASSERT(static_cast<size_t>(fprog.len) == programLen);

@@ -416,9 +416,9 @@ bool
 DataChannelConnection::Init(unsigned short aPort, uint16_t aNumStreams, bool aMaxMessageSizeSet,
                             uint64_t aMaxMessageSize)
 {
-  struct sctp_initmsg initmsg;
-  struct sctp_assoc_value av;
-  struct sctp_event event;
+  struct sctp_initmsg initmsg{};
+  struct sctp_assoc_value av{};
+  struct sctp_event event{};
   socklen_t len;
 
   uint16_t event_types[] = {SCTP_ASSOC_CHANGE,
@@ -498,7 +498,7 @@ DataChannelConnection::Init(unsigned short aPort, uint16_t aNumStreams, bool aMa
 
   // Make sure when we close the socket, make sure it doesn't call us back again!
   // This would cause it try to use an invalid DataChannelConnection pointer
-  struct linger l;
+  struct linger l{};
   l.l_onoff = 1;
   l.l_linger = 0;
   if (usrsctp_setsockopt(mMasterSocket, SOL_SOCKET, SO_LINGER,
@@ -715,7 +715,7 @@ DataChannelConnection::CompleteConnect(TransportFlow *flow, TransportLayer::Stat
   if (state != TransportLayer::TS_OPEN || !mMasterSocket)
     return;
 
-  struct sockaddr_conn addr;
+  struct sockaddr_conn addr{};
   memset(&addr, 0, sizeof(addr));
   addr.sconn_family = AF_CONN;
 #if defined(__Userspace_os_Darwin)
@@ -736,7 +736,7 @@ DataChannelConnection::CompleteConnect(TransportFlow *flow, TransportLayer::Stat
     r = usrsctp_connect(mMasterSocket, reinterpret_cast<struct sockaddr *>(&addr),
                         sizeof(addr));
     if (r >= 0 || errno == EINPROGRESS) {
-      struct sctp_paddrparams paddrparams;
+      struct sctp_paddrparams paddrparams{};
       socklen_t opt_len;
 
       memset(&paddrparams, 0, sizeof(struct sctp_paddrparams));
@@ -1080,8 +1080,8 @@ DataChannelConnection::GetCurrentStreamIndex()
 bool
 DataChannelConnection::RequestMoreStreams(int32_t aNeeded)
 {
-  struct sctp_status status;
-  struct sctp_add_streams sas;
+  struct sctp_status status{};
+  struct sctp_add_streams sas{};
   uint32_t outStreamsNeeded;
   socklen_t len;
 
@@ -1157,7 +1157,7 @@ DataChannelConnection::SendControlMessage(const uint8_t *data, uint32_t len, uin
 int
 DataChannelConnection::SendOpenAckMessage(uint16_t stream)
 {
-  struct rtcweb_datachannel_ack ack;
+  struct rtcweb_datachannel_ack ack{};
 
   memset(&ack, 0, sizeof(struct rtcweb_datachannel_ack));
   ack.msg_type = DATA_CHANNEL_ACK;
@@ -2445,7 +2445,7 @@ DataChannelConnection::OpenFinish(already_AddRefed<DataChannel>&& aChannel)
     if (stream != INVALID_STREAM && stream >= mStreams.Length() &&
         mState == CLOSED) {
       // Update number of streams for init message
-      struct sctp_initmsg initmsg;
+      struct sctp_initmsg initmsg{};
       socklen_t len = sizeof(initmsg);
       int32_t total_needed = stream+16;
 

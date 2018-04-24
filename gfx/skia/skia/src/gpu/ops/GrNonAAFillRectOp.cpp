@@ -212,9 +212,9 @@ private:
     }
 
     struct RectInfo {
-        GrColor fColor;
-        SkMatrix fViewMatrix;
-        SkRect fRect;
+        GrColor fColor{};
+        SkMatrix fViewMatrix{};
+        SkRect fRect{};
         GrQuad fLocalQuad;
     };
 
@@ -366,7 +366,7 @@ private:
     Helper fHelper;
     bool fHasLocalMatrix;
     bool fHasLocalRect;
-    SkMatrix fLocalMatrix;
+    SkMatrix fLocalMatrix{};
     SkMatrix fViewMatrix;
 
     typedef GrMeshDrawOp INHERITED;

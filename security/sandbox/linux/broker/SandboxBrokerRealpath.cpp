@@ -76,7 +76,7 @@ char* SandboxBroker::SymlinkPath(const Policy* policy,
                                  char* __restrict resolved,
                                  int* perms)
 {
-    struct stat sb;
+    struct stat sb{};
     char *p, *q, *s;
     size_t left_len, resolved_len, backup_allowed;
     unsigned symlinks;

@@ -131,7 +131,7 @@ public:
             UErrorCode &status);
 
 private:
-    SimpleFormatter *formatters[StandardPlural::COUNT];
+    SimpleFormatter *formatters[StandardPlural::COUNT]{};
 };
 
 U_NAMESPACE_END

@@ -254,7 +254,7 @@ class TCompiler : public TShHandleBase
     int maxCallStackDepth;
     int maxFunctionParameters;
 
-    ShBuiltInResources compileResources;
+    ShBuiltInResources compileResources{};
     std::string builtInResourcesString;
 
     // Built-in symbol table for the given language, spec, and resources.
@@ -269,7 +269,7 @@ class TCompiler : public TShHandleBase
     BuiltInFunctionEmulator builtInFunctionEmulator;
 
     // Results of compilation.
-    int shaderVersion;
+    int shaderVersion{};
     TInfoSink infoSink;       // Output sink.
     TDiagnostics mDiagnostics;
     const char *mSourcePath;  // Path of source file or NULL
@@ -279,7 +279,7 @@ class TCompiler : public TShHandleBase
     sh::WorkGroupSize mComputeShaderLocalSize;
 
     // GL_OVR_multiview num_views.
-    int mNumViews;
+    int mNumViews{};
 
     // geometry shader parameters.
     int mGeometryShaderMaxVertices;
@@ -288,7 +288,7 @@ class TCompiler : public TShHandleBase
     TLayoutPrimitiveType mGeometryShaderOutputPrimitiveType;
 
     // name hashing.
-    ShHashFunction64 hashFunction;
+    ShHashFunction64 hashFunction{};
     NameMap nameMap;
 
     TPragma mPragma;

@@ -123,7 +123,7 @@ bool SkBitmapProcInfo::init(const SkMatrix& inv, const SkPaint& paint) {
         // if it's already pure translate then we won't do this inversion.
 
         if (matrix_only_scale_translate(fInvMatrix)) {
-            SkMatrix forward;
+            SkMatrix forward{};
             if (fInvMatrix.invert(&forward) && just_trans_general(forward)) {
                 fInvMatrix.setTranslate(-forward.getTranslateX(), -forward.getTranslateY());
             }
@@ -443,7 +443,7 @@ static void DoNothing_shaderproc(const void*, int x, int y,
 }
 
 bool SkBitmapProcState::setupForTranslate() {
-    SkPoint pt;
+    SkPoint pt{};
     const SkBitmapProcStateAutoMapper mapper(*this, 0, 0, &pt);
 
     /*

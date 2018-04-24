@@ -1122,7 +1122,7 @@ nsLocalFile::SetLastModifiedTime(PRTime aLastModTime)
   int result;
   if (aLastModTime != 0) {
     ENSURE_STAT_CACHE();
-    struct utimbuf ut;
+    struct utimbuf ut{};
     ut.actime = mCachedStat.st_atime;
 
     // convert milliseconds to seconds since the unix epoch
@@ -1142,7 +1142,7 @@ nsLocalFile::GetLastModifiedTimeOfLink(PRTime* aLastModTimeOfLink)
     return NS_ERROR_INVALID_ARG;
   }
 
-  struct STAT sbuf;
+  struct STAT sbuf{};
   if (LSTAT(mPath.get(), &sbuf) == -1) {
     return NSRESULT_FOR_ERRNO();
   }
@@ -1186,7 +1186,7 @@ nsLocalFile::GetPermissionsOfLink(uint32_t* aPermissionsOfLink)
     return NS_ERROR_INVALID_ARG;
   }
 
-  struct STAT sbuf;
+  struct STAT sbuf{};
   if (LSTAT(mPath.get(), &sbuf) == -1) {
     return NSRESULT_FOR_ERRNO();
   }
@@ -1284,7 +1284,7 @@ nsLocalFile::GetFileSizeOfLink(int64_t* aFileSize)
     return NS_ERROR_INVALID_ARG;
   }
 
-  struct STAT sbuf;
+  struct STAT sbuf{};
   if (LSTAT(mPath.get(), &sbuf) == -1) {
     return NSRESULT_FOR_ERRNO();
   }
@@ -1361,7 +1361,7 @@ nsLocalFile::GetDiskSpaceAvailable(int64_t* aDiskSpaceAvailable)
   // check to make sure that mPath is properly initialized
   CHECK_mPath();
 
-  struct STATFS fs_buf;
+  struct STATFS fs_buf{};
 
   /*
    * Members of the STATFS struct that you should know about:
@@ -1399,7 +1399,7 @@ nsLocalFile::GetDiskSpaceAvailable(int64_t* aDiskSpaceAvailable)
     return NS_OK;
   }
 
-  struct dqblk dq;
+  struct dqblk dq{};
   if (!quotactl(QCMD(Q_GETQUOTA, USRQUOTA), deviceName.get(),
                 getuid(), (caddr_t)&dq)
 #ifdef QIF_BLIMITS
@@ -1671,7 +1671,7 @@ nsLocalFile::IsSymlink(bool* aResult)
   }
   CHECK_mPath();
 
-  struct STAT symStat;
+  struct STAT symStat{};
   if (LSTAT(mPath.get(), &symStat) == -1) {
     return NSRESULT_FOR_ERRNO();
   }
@@ -1757,7 +1757,7 @@ nsLocalFile::GetNativeTarget(nsACString& aResult)
   CHECK_mPath();
   aResult.Truncate();
 
-  struct STAT symStat;
+  struct STAT symStat{};
   if (LSTAT(mPath.get(), &symStat) == -1) {
     return NSRESULT_FOR_ERRNO();
   }

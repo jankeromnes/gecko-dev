@@ -206,7 +206,7 @@ nsresult NrIceResolver::PendingResolution::OnLookupComplete(
     nr_transport_addr ta;
     // TODO(jib@mozilla.com): Revisit when we do TURN.
     if (NS_SUCCEEDED(status)) {
-      net::NetAddr na;
+      net::NetAddr na{};
       if (NS_SUCCEEDED(record->GetNextAddr(port_, &na))) {
         MOZ_ALWAYS_TRUE (nr_netaddr_to_transport_addr(&na, &ta,
                                                       transport_) == 0);

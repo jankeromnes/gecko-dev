@@ -78,7 +78,7 @@ public:
     virtual ~GenderInfo();
 
 private:
-    int32_t _style;
+    int32_t _style{};
 
     /**
      * Copy constructor. One object per locale invariant. Clients

@@ -311,7 +311,7 @@ public:
 private:
     nsCOMPtr<nsIHttpAuthenticatorCallback> mCallback;
     char *mCreds; // This class owns it, freed in destructor
-    uint32_t mFlags;
+    uint32_t mFlags{};
     nsresult mResult;
     bool mCancelled;
     nsCOMPtr<nsISupports> mSessionState;

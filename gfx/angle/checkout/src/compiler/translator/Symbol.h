@@ -131,7 +131,7 @@ class TStructure : public TSymbol, public TFieldListCollection
     friend class RegenerateStructNames;
     void setName(const ImmutableString &name);
 
-    bool mAtGlobalScope;
+    bool mAtGlobalScope{};
 };
 
 // Interface block. Note that this contains the block name, not the instance name. Interface block

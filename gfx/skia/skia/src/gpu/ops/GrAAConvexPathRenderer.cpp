@@ -74,8 +74,8 @@ static void center_of_mass(const SegmentArray& segments, SkPoint* c) {
         // This avoids some precision issues with small area polygons far away
         // from the origin.
         p0 = segments[0].endPt();
-        SkPoint pi;
-        SkPoint pj;
+        SkPoint pi{};
+        SkPoint pj{};
         // the first and last iteration of the below loop would compute
         // zeros since the starting / ending point is (0,0). So instead we start
         // at i=1 and make the last iteration i=count-2.
@@ -94,7 +94,7 @@ static void center_of_mass(const SegmentArray& segments, SkPoint* c) {
     // If the poly has no area then we instead return the average of
     // its points.
     if (SkScalarNearlyZero(area)) {
-        SkPoint avg;
+        SkPoint avg{};
         avg.set(0, 0);
         for (int i = 0; i < count; ++i) {
             const SkPoint& pt = segments[i].endPt();
@@ -178,9 +178,9 @@ struct DegenerateTestData {
         kLine,
         kNonDegenerate
     }           fStage;
-    SkPoint     fFirstPoint;
-    SkVector    fLineNormal;
-    SkScalar    fLineC;
+    SkPoint     fFirstPoint{};
+    SkVector    fLineNormal{};
+    SkScalar    fLineC{};
 };
 
 static const SkScalar kClose = (SK_Scalar1 / 16);
@@ -844,7 +844,7 @@ private:
         const GrPipeline* pipeline = fHelper.makePipeline(target);
         int instanceCount = fPaths.count();
 
-        SkMatrix invert;
+        SkMatrix invert{};
         if (fHelper.usesLocalCoords() && !fPaths.back().fViewMatrix.invert(&invert)) {
             SkDebugf("Could not invert viewmatrix\n");
             return;
@@ -881,7 +881,7 @@ private:
                 kPreallocDrawCnt = 4,
             };
             SkSTArray<kPreallocSegmentCnt, Segment, true> segments;
-            SkPoint fanPt;
+            SkPoint fanPt{};
 
             if (!get_segments(*pathPtr, *viewMatrix, &segments, &fanPt, &vertexCount,
                               &indexCount)) {

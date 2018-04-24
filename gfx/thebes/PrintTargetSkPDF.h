@@ -65,7 +65,7 @@ private:
   // Members needed to provide a reference DrawTarget:
   sk_sp<SkDocument> mRefPDFDoc;
   // Canvas owned by mRefPDFDoc, which handles its deletion.
-  SkCanvas* mRefCanvas;
+  SkCanvas* mRefCanvas{};
   SkDynamicMemoryWStream mRefOStream;
 };
 

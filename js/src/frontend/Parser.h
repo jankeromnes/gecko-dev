@@ -458,7 +458,7 @@ class PerHandlerParser
     // here, then intermediate all access to this field through accessors in
     // |GeneralParser<ParseHandler, CharT>| that impose the real type on this
     // field.
-    void* internalSyntaxParser_;
+    void* internalSyntaxParser_{};
 
   protected:
     PerHandlerParser(JSContext* cx, LifoAlloc& alloc, const ReadOnlyCompileOptions& options,

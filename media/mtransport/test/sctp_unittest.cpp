@@ -80,14 +80,14 @@ class TransportTestPeer : public sigslot::has_slots<> {
     int r = usrsctp_set_non_blocking(sctp_, 1);
     EXPECT_GE(r, 0);
 
-    struct linger l;
+    struct linger l{};
     l.l_onoff = 1;
     l.l_linger = 0;
     r = usrsctp_setsockopt(sctp_, SOL_SOCKET, SO_LINGER, &l,
                        (socklen_t)sizeof(l));
     EXPECT_GE(r, 0);
 
-    struct sctp_event subscription;
+    struct sctp_event subscription{};
     memset(&subscription, 0, sizeof(subscription));
     subscription.se_assoc_id = SCTP_ALL_ASSOC;
     subscription.se_on = 1;
@@ -178,7 +178,7 @@ class TransportTestPeer : public sigslot::has_slots<> {
     unsigned char buf[100];
     memset(buf, sent_ & 0xff, sizeof(buf));
 
-    struct sctp_sndinfo info;
+    struct sctp_sndinfo info{};
     info.snd_sid = 1;
     info.snd_flags = 0;
     info.snd_ppid = 50;  // What the heck is this?
@@ -291,8 +291,8 @@ class TransportTestPeer : public sigslot::has_slots<> {
   RefPtr<TransportFlow> flow_;
   TransportLayerLoopback *loopback_;
 
-  struct sockaddr_conn local_addr_;
-  struct sockaddr_conn remote_addr_;
+  struct sockaddr_conn local_addr_{};
+  struct sockaddr_conn remote_addr_{};
   struct socket *sctp_;
   nsCOMPtr<nsITimer> timer_;
   RefPtr<SendPeriodic> periodic_;
@@ -372,8 +372,8 @@ class SctpTransportTest : public MtransportTest {
   }
 
  protected:
-  TransportTestPeer *p1_;
-  TransportTestPeer *p2_;
+  TransportTestPeer *p1_{};
+  TransportTestPeer *p2_{};
 };
 
 TEST_F(SctpTransportTest, TestConnect) {

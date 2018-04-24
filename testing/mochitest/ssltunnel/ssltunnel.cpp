@@ -149,33 +149,33 @@ enum client_auth_option {
 
 // Structs for passing data into jobs on the thread pool
 typedef struct {
-  int32_t listen_port;
+  int32_t listen_port{};
   string cert_nickname;
-  PLHashTable* host_cert_table;
-  PLHashTable* host_clientauth_table;
-  PLHashTable* host_redir_table;
-  PLHashTable* host_ssl3_table;
-  PLHashTable* host_tls1_table;
-  PLHashTable* host_rc4_table;
-  PLHashTable* host_failhandshake_table;
+  PLHashTable* host_cert_table{};
+  PLHashTable* host_clientauth_table{};
+  PLHashTable* host_redir_table{};
+  PLHashTable* host_ssl3_table{};
+  PLHashTable* host_tls1_table{};
+  PLHashTable* host_rc4_table{};
+  PLHashTable* host_failhandshake_table{};
 } server_info_t;
 
 typedef struct {
-  PRFileDesc* client_sock;
-  PRNetAddr client_addr;
-  server_info_t* server_info;
+  PRFileDesc* client_sock{};
+  PRNetAddr client_addr{};
+  server_info_t* server_info{};
   // the original host in the Host: header for this connection is
   // stored here, for proxied connections
   string original_host;
   // true if no SSL should be used for this connection
-  bool http_proxy_only;
+  bool http_proxy_only{};
   // true if this connection is for a WebSocket
-  bool iswebsocket;
+  bool iswebsocket{};
 } connection_info_t;
 
 typedef struct {
   string fullHost;
-  bool matched;
+  bool matched{};
 } server_match_t;
 
 const int32_t BUF_SIZE = 16384;

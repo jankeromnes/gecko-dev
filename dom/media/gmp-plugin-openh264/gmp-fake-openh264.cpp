@@ -177,7 +177,7 @@ class FakeVideoEncoder : public GMPVideoEncoder {
     // Encode this in a frame that looks a little bit like H.264.
     // Send SPS/PPS/IDR to avoid confusing people
     // Copy the data. This really should convert this to network byte order.
-    EncodedFrame eframe;
+    EncodedFrame eframe{};
     eframe.length_ = sizeof(eframe) - sizeof(uint32_t);
     eframe.h264_compat_ = nal_type; // 7 = SPS, 8 = PPS, 5 = IFrame/IDR slice, 1=PFrame/slice
     eframe.magic_ = ENCODED_FRAME_MAGIC;
@@ -235,7 +235,7 @@ class FakeVideoEncoder : public GMPVideoEncoder {
             << "x" << eframe.height_);
 
     // Return the encoded frame.
-    GMPCodecSpecificInfo info;
+    GMPCodecSpecificInfo info{};
     mozilla::PodZero(&info);
     info.mCodecType = kGMPVideoCodecH264;
     info.mBufferType = GMP_BufferLength32;

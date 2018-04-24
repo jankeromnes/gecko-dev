@@ -477,7 +477,7 @@ class Domain
   bool mIsSupported;      // Is the domain supported by the processor?
 
   // These three are only set if |mIsSupported| is true.
-  double mJoulesPerTick;  // How many Joules each tick of the MSR represents.
+  double mJoulesPerTick{};  // How many Joules each tick of the MSR represents.
   int mFd;                // The fd through which the MSR is read.
   double mPrevTicks;      // The previous sample's MSR value.
 
@@ -511,7 +511,7 @@ public:
       Abort("unexpected unit '%s' in .unit file", unit);
     }
 
-    struct perf_event_attr attr;
+    struct perf_event_attr attr{};
     memset(&attr, 0, sizeof(attr));
     attr.type = aType;
     attr.size = uint32_t(sizeof(attr));
@@ -854,7 +854,7 @@ main(int argc, char** argv)
 
   // Install the signal handlers.
 
-  struct sigaction sa;
+  struct sigaction sa{};
   memset(&sa, 0, sizeof(sa));
   sa.sa_flags = SA_RESTART | SA_SIGINFO;
   // The extra parens around (0) suppress a -Wunreachable-code warning on OS X
@@ -872,7 +872,7 @@ main(int argc, char** argv)
   }
 
   // Set up the timer.
-  struct itimerval timer;
+  struct itimerval timer{};
   timer.it_interval.tv_sec = sampleInterval_msec / 1000;
   timer.it_interval.tv_usec = (sampleInterval_msec % 1000) * 1000;
   timer.it_value = timer.it_interval;

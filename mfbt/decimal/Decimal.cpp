@@ -616,7 +616,7 @@ Decimal::AlignedOperands Decimal::alignOperands(const Decimal& lhs, const Decima
         }
     }
 
-    AlignedOperands alignedOperands;
+    AlignedOperands alignedOperands{};
     alignedOperands.exponent = exponent;
     alignedOperands.lhsCoefficient = lhsCoefficient;
     alignedOperands.rhsCoefficient = rhsCoefficient;

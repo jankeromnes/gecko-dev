@@ -131,8 +131,8 @@ private:
      */
     DateInterval();
 
-    UDate fromDate;
-    UDate toDate;
+    UDate fromDate{};
+    UDate toDate{};
 
 } ;// end class DateInterval
 

@@ -417,7 +417,7 @@ cubeb* GetCubebContextUnlocked()
       MOZ_DIAGNOSTIC_ASSERT(sIPCConnection);
     }
 
-    AudioIpcInitParams initParams;
+    AudioIpcInitParams initParams{};
     initParams.mPoolSize = sAudioIPCPoolSize;
     initParams.mStackSize = sAudioIPCStackSize;
     initParams.mServerConnection = sIPCConnection->ClonePlatformHandle().release();

@@ -294,7 +294,7 @@ TEST(MP4Metadata, test_case_mp4)
       EXPECT_EQ(!!indices.Ref(), tests[test].mHasVideoIndice) << tests[test].mFilename;
       if (tests[test].mHasVideoIndice) {
         for (size_t i = 0; i < indices.Ref()->Length(); i++) {
-          Index::Indice data;
+          Index::Indice data{};
           EXPECT_TRUE(indices.Ref()->GetIndice(i, data)) << tests[test].mFilename;
           EXPECT_TRUE(data.start_offset <= data.end_offset) << tests[test].mFilename;
           EXPECT_TRUE(data.start_composition <= data.end_composition) << tests[test].mFilename;
@@ -323,7 +323,7 @@ TEST(MP4Metadata, test_case_mp4)
         metadata.GetTrackIndice(audioInfo->mTrackId);
       EXPECT_TRUE(!!indices.Ref()) << tests[test].mFilename;
       for (size_t i = 0; i < indices.Ref()->Length(); i++) {
-        Index::Indice data;
+        Index::Indice data{};
         EXPECT_TRUE(indices.Ref()->GetIndice(i, data)) << tests[test].mFilename;
         EXPECT_TRUE(data.start_offset <= data.end_offset) << tests[test].mFilename;
         EXPECT_TRUE(int64_t(data.start_composition) <= int64_t(data.end_composition)) << tests[test].mFilename;

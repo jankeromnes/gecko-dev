@@ -168,8 +168,8 @@ class LIBYUV_API MJpegDecoder {
   int GetComponentScanlinePadding(int component);
 
   // A buffer holding the input data for a frame.
-  Buffer buf_;
-  BufferVector buf_vec_;
+  Buffer buf_{};
+  BufferVector buf_vec_{};
 
   jpeg_decompress_struct* decompress_struct_;
   jpeg_source_mgr* source_mgr_;

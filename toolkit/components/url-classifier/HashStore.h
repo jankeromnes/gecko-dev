@@ -276,7 +276,7 @@ private:
     uint32_t numSubCompletes;
   };
 
-  Header mHeader;
+  Header mHeader{};
 
   // The name of the table (must end in -shavar or -digest256, or evidently
   // -simple for unittesting.

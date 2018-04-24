@@ -853,7 +853,7 @@ void DirectiveParser::parseLine(Token *token)
     else
     {
         ExpressionParser expressionParser(&macroExpander, mDiagnostics);
-        ExpressionParser::ErrorSettings errorSettings;
+        ExpressionParser::ErrorSettings errorSettings{};
 
         // See GLES3 section 12.42
         errorSettings.integerLiteralsMustFit32BitSignedRange = true;
@@ -953,7 +953,7 @@ int DirectiveParser::parseExpressionIf(Token *token)
     ExpressionParser expressionParser(&macroExpander, mDiagnostics);
 
     int expression = 0;
-    ExpressionParser::ErrorSettings errorSettings;
+    ExpressionParser::ErrorSettings errorSettings{};
     errorSettings.integerLiteralsMustFit32BitSignedRange = false;
     errorSettings.unexpectedIdentifier = Diagnostics::PP_CONDITIONAL_UNEXPECTED_TOKEN;
 

@@ -269,7 +269,7 @@ void GetCurrentTime(int64* seconds, int32* nanos) {
 }
 
 string FormatTime(int64 seconds, int32 nanos) {
-  DateTime time;
+  DateTime time{};
   if (nanos < 0 || nanos > 999999999 || !SecondsToDateTime(seconds, &time)) {
     return "InvalidTime";
   }
@@ -283,7 +283,7 @@ string FormatTime(int64 seconds, int32 nanos) {
 }
 
 bool ParseTime(const string& value, int64* seconds, int32* nanos) {
-  DateTime time;
+  DateTime time{};
   const char* data = value.c_str();
   // We only accept:
   //   Z-normalized: 2015-05-20T13:29:35.120Z

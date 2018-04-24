@@ -326,7 +326,7 @@ uprv_getRawUTCtime()
 #else
 
 #if HAVE_GETTIMEOFDAY
-    struct timeval posixTime;
+    struct timeval posixTime{};
     gettimeofday(&posixTime, NULL);
     return (UDate)(((int64_t)posixTime.tv_sec * U_MILLIS_PER_SECOND) + (posixTime.tv_usec/1000));
 #else
@@ -1199,7 +1199,7 @@ uprv_tzname(int n)
     uprv_detectWindowsTimeZone should have already given the correct answer.
     */
     {
-        struct tm juneSol, decemberSol;
+        struct tm juneSol{}, decemberSol{};
         int daylightType;
         static const time_t juneSolstice=1182478260; /*2007-06-21 18:11 UT*/
         static const time_t decemberSolstice=1198332540; /*2007-12-22 06:09 UT*/
@@ -2371,7 +2371,7 @@ uprv_dlsym_func(void *lib, const char* sym, UErrorCode *status) {
   union {
       UVoidFunction *fp;
       void *vp;
-  } uret;
+  } uret{};
   uret.fp = NULL;
   if(U_FAILURE(*status)) return uret.fp;
   uret.vp = dlsym(lib, sym);

@@ -4819,7 +4819,7 @@ TTypeSpecifierNonArray TParseContext::addStructure(const TSourceLoc &structLine,
         checkLocationIsNotSpecified(field.line(), field.type()->getLayoutQualifier());
     }
 
-    TTypeSpecifierNonArray typeSpecifierNonArray;
+    TTypeSpecifierNonArray typeSpecifierNonArray{};
     typeSpecifierNonArray.initializeStruct(structure, true, structLine);
     exitStructDeclaration();
 

@@ -23,7 +23,7 @@ namespace voe {
 namespace {
 
 TEST(VoECodecInst, TestCompareCodecInstances) {
-  CodecInst codec1, codec2;
+  CodecInst codec1{}, codec2{};
   memset(&codec1, 0, sizeof(CodecInst));
   memset(&codec2, 0, sizeof(CodecInst));
 

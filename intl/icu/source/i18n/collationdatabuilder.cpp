@@ -146,7 +146,7 @@ protected:
 
     CollationDataBuilder &builder;
     CollationData builderData;
-    uint32_t jamoCE32s[CollationData::JAMO_CE32S_LENGTH];
+    uint32_t jamoCE32s[CollationData::JAMO_CE32S_LENGTH]{};
     const UnicodeString *s;
     int32_t pos;
 };
@@ -1010,7 +1010,7 @@ public:
     const CollationDataBuilder &src;
     CollationDataBuilder &dest;
     const CollationDataBuilder::CEModifier &modifier;
-    int64_t modifiedCEs[Collation::MAX_EXPANSION_LENGTH];
+    int64_t modifiedCEs[Collation::MAX_EXPANSION_LENGTH]{};
     UErrorCode errorCode;
 };
 

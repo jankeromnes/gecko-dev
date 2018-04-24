@@ -106,8 +106,8 @@ class UlpfecGenerator {
   std::list<ForwardErrorCorrection::Packet*> generated_fec_packets_;
   int num_protected_frames_;
   int min_num_media_packets_;
-  FecProtectionParams params_;
-  FecProtectionParams new_params_;
+  FecProtectionParams params_{};
+  FecProtectionParams new_params_{};
 };
 
 }  // namespace webrtc

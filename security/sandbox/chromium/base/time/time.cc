@@ -232,7 +232,7 @@ Time Time::UnixEpoch() {
 }
 
 Time Time::LocalMidnight() const {
-  Exploded exploded;
+  Exploded exploded{};
   LocalExplode(&exploded);
   exploded.hour = 0;
   exploded.minute = 0;
@@ -278,7 +278,7 @@ bool Time::ExplodedMostlyEquals(const Exploded& lhs, const Exploded& rhs) {
 }
 
 std::ostream& operator<<(std::ostream& os, Time time) {
-  Time::Exploded exploded;
+  Time::Exploded exploded{};
   time.UTCExplode(&exploded);
   // Use StringPrintf because iostreams formatting is painful.
   return os << StringPrintf("%04d-%02d-%02d %02d:%02d:%02d.%03d UTC",

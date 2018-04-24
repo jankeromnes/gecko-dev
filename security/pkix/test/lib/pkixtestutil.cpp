@@ -273,7 +273,7 @@ TimeToEncodedTime(time_t time, TimeEncoding encoding)
 {
   assert(encoding == UTCTime || encoding == GeneralizedTime);
 
-  tm exploded;
+  tm exploded{};
   if (!gmtime_r(&time, &exploded)) {
     return ByteString();
   }
@@ -329,7 +329,7 @@ TimeToGeneralizedTime(time_t time)
 static ByteString
 TimeToTimeChoice(time_t time)
 {
-  tm exploded;
+  tm exploded{};
   if (!gmtime_r(&time, &exploded)) {
     return ByteString();
   }

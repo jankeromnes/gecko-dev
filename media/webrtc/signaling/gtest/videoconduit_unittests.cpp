@@ -58,12 +58,12 @@ public:
     cricket::VideoAdapter::OnScaleResolutionBy(scale_resolution_by);
   }
 
-  int mInWidth;
-  int mInHeight;
-  int64_t mInTimestampNs;
-  int mMaxPixelCount;
-  int mMaxPixelCountStepUp;
-  int mScaleResolutionBy;
+  int mInWidth{};
+  int mInHeight{};
+  int64_t mInTimestampNs{};
+  int mMaxPixelCount{};
+  int mMaxPixelCountStepUp{};
+  int mScaleResolutionBy{};
 };
 
 class MockVideoSink : public rtc::VideoSinkInterface<webrtc::VideoFrame>

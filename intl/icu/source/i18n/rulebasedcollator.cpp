@@ -820,8 +820,8 @@ protected:
      */
     virtual UChar32 nextRawCodePoint() = 0;
 private:
-    const UChar *decomp;
-    UChar buffer[4];
+    const UChar *decomp{};
+    UChar buffer[4]{};
     int32_t index;
     int32_t length;
 };

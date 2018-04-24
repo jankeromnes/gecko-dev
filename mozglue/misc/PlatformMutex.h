@@ -45,7 +45,7 @@ private:
   PlatformData* platformData();
 
 #if !defined(XP_WIN)
-  void* platformData_[sizeof(pthread_mutex_t) / sizeof(void*)];
+  void* platformData_[sizeof(pthread_mutex_t) / sizeof(void*)]{};
   static_assert(sizeof(pthread_mutex_t) / sizeof(void*) != 0 &&
                 sizeof(pthread_mutex_t) % sizeof(void*) == 0,
                 "pthread_mutex_t must have pointer alignment");

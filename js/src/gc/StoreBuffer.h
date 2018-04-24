@@ -516,7 +516,7 @@ class ArenaCellSet
     ArenaCellSet* next;
 
     // Bit vector for each possible cell start position.
-    BitArray<MaxArenaCellIndex> bits;
+    BitArray<MaxArenaCellIndex> bits{};
 
 #ifdef DEBUG
     // The minor GC number when this was created. This object should not survive

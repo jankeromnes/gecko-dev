@@ -67,7 +67,7 @@ class U_I18N_API ScriptSet: public UMemory {
     void setScriptExtensions(UChar32 codePoint, UErrorCode& status);
 
   private:
-    uint32_t  bits[6];
+    uint32_t  bits[6]{};
 };
 
 U_NAMESPACE_END

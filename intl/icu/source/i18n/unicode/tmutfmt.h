@@ -194,7 +194,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 
 private:
-    Hashtable*    fTimeUnitToCountToPatterns[TimeUnit::UTIMEUNIT_FIELD_COUNT];
+    Hashtable*    fTimeUnitToCountToPatterns[TimeUnit::UTIMEUNIT_FIELD_COUNT]{};
     UTimeUnitFormatStyle fStyle;
 
     void create(UTimeUnitFormatStyle style, UErrorCode& status);

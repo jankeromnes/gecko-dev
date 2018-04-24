@@ -3229,7 +3229,7 @@ CheckForUserMismatch()
 
   for (const auto var : kVars) {
     if (const auto path = PR_GetEnv(var)) {
-      struct stat st;
+      struct stat st{};
       if (stat(path, &st) == 0) {
         if (st.st_uid != euid) {
           const auto owner = FormatUid(st.st_uid);

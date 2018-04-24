@@ -2753,7 +2753,7 @@ TConstantUnion *TIntermConstantUnion::FoldAggregateBuiltIn(TIntermAggregate *agg
     std::vector<size_t> objectSizes(argsCount);
     size_t maxObjectSize = 0;
     TBasicType basicType = EbtVoid;
-    TSourceLoc loc;
+    TSourceLoc loc{};
     for (unsigned int i = 0; i < argsCount; i++)
     {
         TIntermConstantUnion *argConstant = (*arguments)[i]->getAsConstantUnion();

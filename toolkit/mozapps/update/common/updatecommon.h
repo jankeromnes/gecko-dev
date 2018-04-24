@@ -32,8 +32,8 @@ public:
 protected:
   UpdateLog();
   FILE *logFP;
-  NS_tchar mTmpFilePath[MAXPATHLEN];
-  NS_tchar mDstFilePath[MAXPATHLEN];
+  NS_tchar mTmpFilePath[MAXPATHLEN]{};
+  NS_tchar mDstFilePath[MAXPATHLEN]{};
 };
 
 bool IsValidFullPath(NS_tchar* fullPath);

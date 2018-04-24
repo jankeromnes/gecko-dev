@@ -135,8 +135,8 @@ protected:
 
   // These headers will always contain endian independent stuff
   // They store the BMP headers which will be encoded
-  mozilla::image::bmp::FileHeader mBMPFileHeader;
-  mozilla::image::bmp::V5InfoHeader mBMPInfoHeader;
+  mozilla::image::bmp::FileHeader mBMPFileHeader{};
+  mozilla::image::bmp::V5InfoHeader mBMPInfoHeader{};
 
   // Keeps track of the start of the image buffer
   uint8_t* mImageBufferStart;

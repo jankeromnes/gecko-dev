@@ -34,10 +34,10 @@ struct SkBitmapProcInfo {
     const SkBitmapProvider        fProvider;
 
     SkPixmap                      fPixmap;
-    SkMatrix                      fInvMatrix;         // This changes based on tile mode.
+    SkMatrix                      fInvMatrix{};         // This changes based on tile mode.
     // TODO: combine fInvMatrix and fRealInvMatrix.
-    SkMatrix                      fRealInvMatrix;     // The actual inverse matrix.
-    SkColor                       fPaintColor;
+    SkMatrix                      fRealInvMatrix{};     // The actual inverse matrix.
+    SkColor                       fPaintColor{};
     SkShader::TileMode            fTileModeX;
     SkShader::TileMode            fTileModeY;
     SkFilterQuality               fFilterQuality;
@@ -49,7 +49,7 @@ private:
     enum {
         kBMStateSize = 136  // found by inspection. if too small, we will call new/delete
     };
-    SkAlignedSStorage<kBMStateSize> fBMStateStorage;
+    SkAlignedSStorage<kBMStateSize> fBMStateStorage{};
     SkBitmapController::State* fBMState;
 };
 

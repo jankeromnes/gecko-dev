@@ -121,8 +121,8 @@ private:
     const CollationCacheEntry *rootEntry;
     Locale validLocale;
     Locale locale;
-    char type[16];
-    char defaultType[16];
+    char type[16]{};
+    char defaultType[16]{};
     uint32_t typesTried;
     UBool typeFallback;
     UResourceBundle *bundle;

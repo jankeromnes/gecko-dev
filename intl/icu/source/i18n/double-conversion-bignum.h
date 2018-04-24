@@ -142,7 +142,7 @@ class Bignum {
   Chunk BigitAt(int index) const;
   void SubtractTimes(const Bignum& other, int factor);
 
-  Chunk bigits_buffer_[kBigitCapacity];
+  Chunk bigits_buffer_[kBigitCapacity]{};
   // A vector backed by bigits_buffer_. This way accesses to the array are
   // checked for out-of-bounds errors.
   Vector<Chunk> bigits_;

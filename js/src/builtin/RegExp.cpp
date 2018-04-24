@@ -1178,9 +1178,9 @@ using CapturesVector = GCVector<Value, 4>;
 
 struct JSSubString
 {
-    JSLinearString* base;
-    size_t          offset;
-    size_t          length;
+    JSLinearString* base{};
+    size_t          offset{};
+    size_t          length{};
 
     JSSubString() { mozilla::PodZero(this); }
 
@@ -1771,7 +1771,7 @@ js::intrinsic_GetStringDataProperty(JSContext* cx, unsigned argc, Value* vp)
     if (!atom)
         return false;
 
-    Value v;
+    Value v{};
     if (GetPropertyPure(cx, obj, AtomToId(atom), &v) && v.isString())
         args.rval().set(v);
     else

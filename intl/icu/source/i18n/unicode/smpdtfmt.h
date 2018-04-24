@@ -1580,10 +1580,10 @@ private:
      * defaultCenturyStartYear are only used if explicitly set by the user
      * through the API method parseAmbiguousDatesAsAfter().
      */
-    UDate                fDefaultCenturyStart;
+    UDate                fDefaultCenturyStart{};
 
-    UBool                fHasMinute;
-    UBool                fHasSecond;
+    UBool                fHasMinute{};
+    UBool                fHasSecond{};
 
     /**
      * Sets fHasMinutes and fHasSeconds.
@@ -1593,7 +1593,7 @@ private:
     /**
      * See documentation for defaultCenturyStart.
      */
-    /*transient*/ int32_t   fDefaultCenturyStartYear;
+    /*transient*/ int32_t   fDefaultCenturyStartYear{};
 
     struct NSOverride : public UMemory {
         const SharedNumberFormat *snf;
@@ -1611,7 +1611,7 @@ private:
      */
     const SharedNumberFormat    **fSharedNumberFormatters;
 
-    UBool fHaveDefaultCentury;
+    UBool fHaveDefaultCentury{};
 
     BreakIterator* fCapitalizationBrkIter;
 };

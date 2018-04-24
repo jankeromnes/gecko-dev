@@ -57,7 +57,7 @@ protected:
     virtual const Metrics& GetHorizontalMetrics() override;
 
     uint32_t mSpaceGlyph;
-    Metrics mMetrics;
+    Metrics mMetrics{};
     bool    mEmbolden;
 
     // For variation/multiple-master fonts, this will be an array of the values

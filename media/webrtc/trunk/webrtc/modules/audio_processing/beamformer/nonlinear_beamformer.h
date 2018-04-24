@@ -47,7 +47,7 @@ class PostFilterTransform : public LappedTransform::Callback {
  private:
   LappedTransform transform_;
   const size_t num_freq_bins_;
-  float* final_mask_;
+  float* final_mask_{};
 };
 
 // Enhances sound sources coming directly in front of a uniform linear array
@@ -152,15 +152,15 @@ class NonlinearBeamformer : public LappedTransform::Callback {
   static const size_t kNumFreqBins = kFftSize / 2 + 1;
 
   // Deals with the fft transform and blocking.
-  size_t chunk_length_;
+  size_t chunk_length_{};
   std::unique_ptr<LappedTransform> process_transform_;
   std::unique_ptr<PostFilterTransform> postfilter_transform_;
-  float window_[kFftSize];
+  float window_[kFftSize]{};
 
   // Parameters exposed to the user.
   const size_t num_input_channels_;
   const size_t num_postfilter_channels_;
-  int sample_rate_hz_;
+  int sample_rate_hz_{};
 
   const std::vector<Point> array_geometry_;
   // The normal direction of the array if it has one and it is in the xy-plane.
@@ -170,17 +170,17 @@ class NonlinearBeamformer : public LappedTransform::Callback {
   const float min_mic_spacing_;
 
   // Calculated based on user-input and constants in the .cc file.
-  size_t low_mean_start_bin_;
-  size_t low_mean_end_bin_;
-  size_t high_mean_start_bin_;
-  size_t high_mean_end_bin_;
+  size_t low_mean_start_bin_{};
+  size_t low_mean_end_bin_{};
+  size_t high_mean_start_bin_{};
+  size_t high_mean_end_bin_{};
 
   // Quickly varying mask updated every block.
-  float new_mask_[kNumFreqBins];
+  float new_mask_[kNumFreqBins]{};
   // Time smoothed mask.
-  float time_smooth_mask_[kNumFreqBins];
+  float time_smooth_mask_[kNumFreqBins]{};
   // Time and frequency smoothed mask.
-  float final_mask_[kNumFreqBins];
+  float final_mask_[kNumFreqBins]{};
 
   float target_angle_radians_;
   // Angles of the interferer scenarios.
@@ -201,11 +201,11 @@ class NonlinearBeamformer : public LappedTransform::Callback {
   std::vector<std::unique_ptr<ComplexMatrixF>> interf_cov_mats_[kNumFreqBins];
 
   // Of length |kNumFreqBins|.
-  float wave_numbers_[kNumFreqBins];
+  float wave_numbers_[kNumFreqBins]{};
 
   // Preallocated for ProcessAudioBlock()
   // Of length |kNumFreqBins|.
-  float rxiws_[kNumFreqBins];
+  float rxiws_[kNumFreqBins]{};
   // The vector has a size equal to the number of interferer scenarios.
   std::vector<float> rpsiws_[kNumFreqBins];
 
@@ -213,16 +213,16 @@ class NonlinearBeamformer : public LappedTransform::Callback {
   ComplexMatrixF eig_m_;
 
   // For processing the high-frequency input signal.
-  float high_pass_postfilter_mask_;
-  float old_high_pass_mask_;
+  float high_pass_postfilter_mask_{};
+  float old_high_pass_mask_{};
 
   // True when the target signal is present.
-  bool is_target_present_;
+  bool is_target_present_{};
   // Number of blocks after which the data is considered interference if the
   // mask does not pass |kMaskSignalThreshold|.
-  size_t hold_target_blocks_;
+  size_t hold_target_blocks_{};
   // Number of blocks since the last mask that passed |kMaskSignalThreshold|.
-  size_t interference_blocks_count_;
+  size_t interference_blocks_count_{};
 };
 
 }  // namespace webrtc

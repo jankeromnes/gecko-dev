@@ -27,7 +27,7 @@ std::unique_ptr<GrFragmentProcessor> GrRRectBlurEffect::Make(GrContext* context,
     // sufficiently small relative to both the size of the corner radius and the
     // width (and height) of the rrect.
     SkRRect rrectToDraw;
-    SkISize size;
+    SkISize size{};
     SkScalar ignored[SkBlurMaskFilter::kMaxDivisions];
     int ignoredSize;
     uint32_t ignored32;

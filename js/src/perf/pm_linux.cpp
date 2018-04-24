@@ -139,7 +139,7 @@ Impl::init(EventMask toMeasure)
         return EventMask(0);
 
     EventMask measured = EventMask(0);
-    struct perf_event_attr attr;
+    struct perf_event_attr attr{};
     for (const auto& slot : kSlots) {
         if (!(toMeasure & slot.bit))
             continue;
@@ -293,7 +293,7 @@ PerfMeasurement::canMeasureSomething()
     // be sure it will (newer kernels might add more event types), so
     // we have to take care to close any valid fd it might return.
 
-    struct perf_event_attr attr;
+    struct perf_event_attr attr{};
     memset(&attr, 0, sizeof(attr));
     attr.size = sizeof(attr);
     attr.type = PERF_TYPE_MAX;

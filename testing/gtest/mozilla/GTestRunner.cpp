@@ -59,7 +59,7 @@ public:
     mTestInfo = nullptr;
   }
 
-  const TestInfo* mTestInfo;
+  const TestInfo* mTestInfo{};
 };
 
 static void ReplaceGTestLogger()

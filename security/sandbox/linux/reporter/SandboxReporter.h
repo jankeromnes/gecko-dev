@@ -65,7 +65,7 @@ private:
   // These are constant over the life of the object:
   int mClientFd;
   int mServerFd;
-  PlatformThreadHandle mThread;
+  PlatformThreadHandle mThread{};
 
   Mutex mMutex;
   // These are protected by mMutex:

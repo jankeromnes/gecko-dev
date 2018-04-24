@@ -39,7 +39,7 @@ const int64_t Time::kTimeTToMicrosecondsOffset = GG_INT64_C(0);
 
 // static
 Time Time::Now() {
-  struct timeval tv;
+  struct timeval tv{};
   struct timezone tz = { 0, 0 };  // UTC
   if (gettimeofday(&tv, &tz) != 0) {
     DCHECK(0) << "Could not determine time of day";
@@ -57,7 +57,7 @@ Time Time::NowFromSystemTime() {
 
 // static
 Time Time::FromExploded(bool is_local, const Exploded& exploded) {
-  struct tm timestruct;
+  struct tm timestruct{};
   timestruct.tm_sec    = exploded.second;
   timestruct.tm_min    = exploded.minute;
   timestruct.tm_hour   = exploded.hour;
@@ -130,7 +130,7 @@ void Time::Explode(bool is_local, Exploded* exploded) const {
   int64_t milliseconds = us_ / kMicrosecondsPerMillisecond;
   time_t seconds = milliseconds / kMillisecondsPerSecond;
 
-  struct tm timestruct;
+  struct tm timestruct{};
   if (is_local)
     localtime_r(&seconds, &timestruct);
   else
@@ -180,7 +180,7 @@ TimeTicks TimeTicks::Now() {
 #elif defined(OS_OPENBSD) || defined(OS_POSIX) && \
       defined(_POSIX_MONOTONIC_CLOCK) && _POSIX_MONOTONIC_CLOCK >= 0
 
-  struct timespec ts;
+  struct timespec ts{};
   if (clock_gettime(CLOCK_MONOTONIC, &ts) != 0) {
     NOTREACHED() << "clock_gettime(CLOCK_MONOTONIC) failed.";
     return TimeTicks();

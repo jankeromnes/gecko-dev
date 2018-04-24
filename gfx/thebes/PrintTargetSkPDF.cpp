@@ -50,7 +50,7 @@ PrintTargetSkPDF::BeginPrinting(const nsAString& aTitle,
   SkDocument::PDFMetadata metadata;
   metadata.fTitle = NS_ConvertUTF16toUTF8(aTitle).get();
   metadata.fCreator = "Firefox";
-  SkTime::DateTime now;
+  SkTime::DateTime now{};
   SkTime::GetDateTime(&now);
   metadata.fCreation.fEnabled = true;
   metadata.fCreation.fDateTime = now;

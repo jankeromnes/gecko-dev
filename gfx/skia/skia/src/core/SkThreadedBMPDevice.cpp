@@ -84,7 +84,7 @@ SkIRect SkThreadedBMPDevice::transformDrawBounds(const SkRect& drawBounds) const
     if (drawBounds == SkRectPriv::MakeLargest()) {
         return SkRectPriv::MakeILarge();
     }
-    SkRect transformedBounds;
+    SkRect transformedBounds{};
     this->ctm().mapRect(&transformedBounds, drawBounds);
     return transformedBounds.roundOut();
 }
@@ -106,7 +106,7 @@ SkThreadedBMPDevice::TileDraw::TileDraw(const DrawState& ds, const SkIRect& tile
 }
 
 static inline SkRect get_fast_bounds(const SkRect& r, const SkPaint& p) {
-    SkRect result;
+    SkRect result{};
     if (p.canComputeFastBounds()) {
         result = p.computeFastBounds(r, &result);
     } else {

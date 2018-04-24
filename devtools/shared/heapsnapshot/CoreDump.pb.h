@@ -172,8 +172,8 @@ class Metadata : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::uint64 timestamp_;
+  mutable int _cached_size_{};
+  ::google::protobuf::uint64 timestamp_{};
   friend struct protobuf_CoreDump_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -395,13 +395,13 @@ class StackFrame_Data : public ::google::protobuf::MessageLite /* @@protoc_inser
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::mozilla::devtools::protobuf::StackFrame* parent_;
-  ::google::protobuf::uint64 id_;
-  ::google::protobuf::uint32 line_;
-  ::google::protobuf::uint32 column_;
-  bool issystem_;
-  bool isselfhosted_;
+  mutable int _cached_size_{};
+  ::mozilla::devtools::protobuf::StackFrame* parent_{};
+  ::google::protobuf::uint64 id_{};
+  ::google::protobuf::uint32 line_{};
+  ::google::protobuf::uint32 column_{};
+  bool issystem_{};
+  bool isselfhosted_{};
   union SourceOrRefUnion {
     SourceOrRefUnion() {}
     ::google::protobuf::internal::ArenaStringPtr source_;
@@ -412,7 +412,7 @@ class StackFrame_Data : public ::google::protobuf::MessageLite /* @@protoc_inser
     ::google::protobuf::internal::ArenaStringPtr functiondisplayname_;
     ::google::protobuf::uint64 functiondisplaynameref_;
   } FunctionDisplayNameOrRef_;
-  ::google::protobuf::uint32 _oneof_case_[2];
+  ::google::protobuf::uint32 _oneof_case_[2]{};
 
   friend struct protobuf_CoreDump_2eproto::TableStruct;
 };
@@ -540,13 +540,13 @@ class StackFrame : public ::google::protobuf::MessageLite /* @@protoc_insertion_
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  mutable int _cached_size_{};
   union StackFrameTypeUnion {
     StackFrameTypeUnion() {}
     ::mozilla::devtools::protobuf::StackFrame_Data* data_;
     ::google::protobuf::uint64 ref_;
   } StackFrameType_;
-  ::google::protobuf::uint32 _oneof_case_[1];
+  ::google::protobuf::uint32 _oneof_case_[1]{};
 
   friend struct protobuf_CoreDump_2eproto::TableStruct;
 };
@@ -798,12 +798,12 @@ class Node : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  mutable int _cached_size_{};
   ::google::protobuf::RepeatedPtrField< ::mozilla::devtools::protobuf::Edge > edges_;
-  ::mozilla::devtools::protobuf::StackFrame* allocationstack_;
-  ::google::protobuf::uint64 id_;
-  ::google::protobuf::uint64 size_;
-  ::google::protobuf::uint32 coarsetype_;
+  ::mozilla::devtools::protobuf::StackFrame* allocationstack_{};
+  ::google::protobuf::uint64 id_{};
+  ::google::protobuf::uint64 size_{};
+  ::google::protobuf::uint32 coarsetype_{};
   union TypeNameOrRefUnion {
     TypeNameOrRefUnion() {}
     ::google::protobuf::internal::ArenaStringPtr typename__;
@@ -819,7 +819,7 @@ class Node : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(
     ::google::protobuf::internal::ArenaStringPtr scriptfilename_;
     ::google::protobuf::uint64 scriptfilenameref_;
   } ScriptFilenameOrRef_;
-  ::google::protobuf::uint32 _oneof_case_[3];
+  ::google::protobuf::uint32 _oneof_case_[3]{};
 
   friend struct protobuf_CoreDump_2eproto::TableStruct;
 };
@@ -960,14 +960,14 @@ class Edge : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::uint64 referent_;
+  mutable int _cached_size_{};
+  ::google::protobuf::uint64 referent_{};
   union EdgeNameOrRefUnion {
     EdgeNameOrRefUnion() {}
     ::google::protobuf::internal::ArenaStringPtr name_;
     ::google::protobuf::uint64 nameref_;
   } EdgeNameOrRef_;
-  ::google::protobuf::uint32 _oneof_case_[1];
+  ::google::protobuf::uint32 _oneof_case_[1]{};
 
   friend struct protobuf_CoreDump_2eproto::TableStruct;
 };

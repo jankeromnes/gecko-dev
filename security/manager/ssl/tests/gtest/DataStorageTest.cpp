@@ -29,7 +29,7 @@ protected:
   }
 
   RefPtr<DataStorage> storage;
-  bool dataWillPersist;
+  bool dataWillPersist{};
 };
 
 NS_NAMED_LITERAL_CSTRING(testKey, "test");

@@ -267,10 +267,10 @@ class TestNrSocket : public NrSocketBase {
         int send_from_queue();
         NS_INLINE_DECL_THREADSAFE_REFCOUNTING(PortMapping);
 
-        PRIntervalTime last_used_;
+        PRIntervalTime last_used_{};
         RefPtr<NrSocketBase> external_socket_;
         // For non-symmetric, most of the data here doesn't matter
-        nr_transport_addr remote_address_;
+        nr_transport_addr remote_address_{};
 
       private:
         ~PortMapping() {

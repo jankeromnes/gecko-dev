@@ -75,8 +75,8 @@ SandboxReporterClient::SendReport(const SandboxReport& aReport)
 {
   // The "common" seccomp-bpf policy allows sendmsg but not send(to),
   // so just use sendmsg even though send would suffice for this.
-  struct iovec iov;
-  struct msghdr msg;
+  struct iovec iov{};
+  struct msghdr msg{};
 
   iov.iov_base = const_cast<void*>(static_cast<const void*>(&aReport));
   iov.iov_len = sizeof(SandboxReport);

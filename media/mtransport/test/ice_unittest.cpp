@@ -79,7 +79,7 @@ namespace {
 static std::string
 Resolve(const std::string& fqdn, int address_family)
 {
-  struct addrinfo hints;
+  struct addrinfo hints{};
   memset(&hints, 0, sizeof(hints));
   hints.ai_family = address_family;
   hints.ai_protocol = IPPROTO_UDP;
@@ -1332,7 +1332,7 @@ class IceTestPeer : public sigslot::has_slots<> {
     ASSERT_TRUE(ice_ctx_->ctx()->GetStream(stream).get()) << "No such stream "
                                                           << stream;
     bool can_send;
-    struct timeval timestamp;
+    struct timeval timestamp{};
     nsresult res = ice_ctx_->ctx()->GetStream(stream)->
                     GetConsentStatus(component_id, &can_send, &timestamp);
     ASSERT_TRUE(NS_SUCCEEDED(res));
@@ -1448,7 +1448,7 @@ class IceTestPeer : public sigslot::has_slots<> {
   bool ice_reached_checking_;
   size_t received_;
   size_t sent_;
-  struct timeval consent_timestamp_;
+  struct timeval consent_timestamp_{};
   NrIceResolverFake fake_resolver_;
   RefPtr<NrIceResolver> dns_resolver_;
   IceTestPeer *remote_;
@@ -2073,7 +2073,7 @@ class WebRtcIcePacketFilterTest : public StunTest {
   void TestIncoming(const uint8_t* data, uint32_t len,
                     uint8_t from_addr, int from_port,
                     bool expected_result) {
-    mozilla::net::NetAddr addr;
+    mozilla::net::NetAddr addr{};
     MakeNetAddr(&addr, from_addr, from_port);
     bool result;
     nsresult rv = udp_filter_->FilterPacket(&addr, data, len,
@@ -2085,7 +2085,7 @@ class WebRtcIcePacketFilterTest : public StunTest {
 
   void TestIncomingTcp(const uint8_t* data, uint32_t len,
                        bool expected_result) {
-    mozilla::net::NetAddr addr;
+    mozilla::net::NetAddr addr{};
     bool result;
     nsresult rv = tcp_filter_->FilterPacket(&addr, data, len,
                                             nsISocketFilter::SF_INCOMING,
@@ -2096,7 +2096,7 @@ class WebRtcIcePacketFilterTest : public StunTest {
 
   void TestIncomingTcpFramed(const uint8_t* data, uint32_t len,
                              bool expected_result) {
-    mozilla::net::NetAddr addr;
+    mozilla::net::NetAddr addr{};
     bool result;
     uint8_t* framed_data = new uint8_t[len+2];
     framed_data[0] = htons(len);
@@ -2112,7 +2112,7 @@ class WebRtcIcePacketFilterTest : public StunTest {
   void TestOutgoing(const uint8_t* data, uint32_t len,
                     uint8_t to_addr, int to_port,
                     bool expected_result) {
-    mozilla::net::NetAddr addr;
+    mozilla::net::NetAddr addr{};
     MakeNetAddr(&addr, to_addr, to_port);
     bool result;
     nsresult rv = udp_filter_->FilterPacket(&addr, data, len,
@@ -2124,7 +2124,7 @@ class WebRtcIcePacketFilterTest : public StunTest {
 
   void TestOutgoingTcp(const uint8_t* data, uint32_t len,
                        bool expected_result) {
-    mozilla::net::NetAddr addr;
+    mozilla::net::NetAddr addr{};
     bool result;
     nsresult rv = tcp_filter_->FilterPacket(&addr, data, len,
                                             nsISocketFilter::SF_OUTGOING,
@@ -2135,7 +2135,7 @@ class WebRtcIcePacketFilterTest : public StunTest {
 
   void TestOutgoingTcpFramed(const uint8_t* data, uint32_t len,
                              bool expected_result) {
-    mozilla::net::NetAddr addr;
+    mozilla::net::NetAddr addr{};
     bool result;
     uint8_t* framed_data = new uint8_t[len+2];
     framed_data[0] = htons(len);

@@ -47,7 +47,7 @@ private:
   AutoTArray<RefPtr<MP4TrackDemuxer>, 1> mAudioDemuxers;
   AutoTArray<RefPtr<MP4TrackDemuxer>, 1> mVideoDemuxers;
   nsTArray<uint8_t> mCryptoInitData;
-  bool mIsSeekable;
+  bool mIsSeekable{};
 };
 
 } // namespace mozilla

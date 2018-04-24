@@ -562,7 +562,7 @@ mozilla::PrintfTarget::vprint(const char* fmt, va_list ap)
 #if defined(XP_WIN)
         const wchar_t* ws;
 #endif
-    } u;
+    } u{};
     const char* fmt0;
     static const char hex[] = "0123456789abcdef";
     static const char HEX[] = "0123456789ABCDEF";

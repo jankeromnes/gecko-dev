@@ -788,9 +788,9 @@ private:
     UDate getUTC(UDate time, int32_t raw, int32_t dst) const;
 
     DateTimeRule::TimeRuleType  fTimeRuleType;
-    int32_t fNumStartTimes;
+    int32_t fNumStartTimes{};
     UDate*  fStartTimes;
-    UDate   fLocalStartTimes[TIMEARRAY_STACK_BUFFER_SIZE];
+    UDate   fLocalStartTimes[TIMEARRAY_STACK_BUFFER_SIZE]{};
 
 public:
     /**

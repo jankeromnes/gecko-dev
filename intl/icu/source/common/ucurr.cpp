@@ -410,8 +410,8 @@ static CReg* gCRegHead = 0;
 
 struct CReg : public icu::UMemory {
     CReg *next;
-    UChar iso[ISO_CURRENCY_CODE_LENGTH+1];
-    char  id[ULOC_FULLNAME_CAPACITY];
+    UChar iso[ISO_CURRENCY_CODE_LENGTH+1]{};
+    char  id[ULOC_FULLNAME_CAPACITY]{};
 
     CReg(const UChar* _iso, const char* _id)
         : next(0)

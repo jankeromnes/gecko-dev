@@ -58,7 +58,7 @@ Now()
   // "The gettimeofday() function shall obtain the current time, expressed as
   // seconds and microseconds since the Epoch."
   //   - http://pubs.opengroup.org/onlinepubs/009695399/functions/gettimeofday.html
-  timeval tv;
+  timeval tv{};
   (void) gettimeofday(&tv, nullptr);
   seconds = (DaysBeforeYear(1970) * Time::ONE_DAY_IN_SECONDS) +
             static_cast<uint64_t>(tv.tv_sec);

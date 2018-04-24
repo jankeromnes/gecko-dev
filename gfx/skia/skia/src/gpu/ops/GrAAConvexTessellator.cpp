@@ -320,7 +320,7 @@ bool GrAAConvexTessellator::computePtAlongBisector(int startIdx,
     const SkPoint& norm = fNorms[edgeIdx];
 
     // First find the point where the edge and the bisector intersect
-    SkPoint newP;
+    SkPoint newP{};
 
     SkScalar t = perp_intersect(fPts[startIdx], bisector, fPts[edgeIdx], norm);
     if (SkScalarNearlyEqual(t, 0.0f)) {

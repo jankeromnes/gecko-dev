@@ -33,7 +33,7 @@ class FrameWriterTest: public testing::Test {
     // Cleanup the temporary file.
     remove(temp_filename_.c_str());
   }
-  FrameWriter* frame_writer_;
+  FrameWriter* frame_writer_{};
   std::string temp_filename_;
 };
 

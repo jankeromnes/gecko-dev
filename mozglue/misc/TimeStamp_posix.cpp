@@ -71,7 +71,7 @@ TimespecToNs(const struct timespec& aTs)
 static uint64_t
 ClockTimeNs()
 {
-  struct timespec ts;
+  struct timespec ts{};
   // this can't fail: we know &ts is valid, and TimeStamp::Startup()
   // checks that CLOCK_MONOTONIC is supported (and aborts if not)
   clock_gettime(CLOCK_MONOTONIC, &ts);
@@ -115,7 +115,7 @@ ClockResolutionNs()
   if (0 == minres) {
     // measurable resolution is either incredibly low, ~1ns, or very
     // high.  fall back on clock_getres()
-    struct timespec ts;
+    struct timespec ts{};
     if (0 == clock_getres(CLOCK_MONOTONIC, &ts)) {
       minres = TimespecToNs(ts);
     }
@@ -177,7 +177,7 @@ TimeStamp::Startup()
     return;
   }
 
-  struct timespec dummy;
+  struct timespec dummy{};
   if (clock_gettime(CLOCK_MONOTONIC, &dummy) != 0) {
     MOZ_CRASH("CLOCK_MONOTONIC is absent!");
   }

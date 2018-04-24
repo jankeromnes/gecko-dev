@@ -714,12 +714,12 @@ private:
   // State initialized during eReadyToReadMetadata
   nsCOMPtr<nsIFile> mDirectory;
   nsCOMPtr<nsIFile> mMetadataFile;
-  Metadata mMetadata;
+  Metadata mMetadata{};
 
   Atomic<bool> mOperationMayProceed;
 
   // State initialized during eWaitingToOpenCacheFileForRead
-  unsigned mModuleIndex;
+  unsigned mModuleIndex{};
 
   enum State {
     eInitial, // Just created, waiting to be dispatched to main thread

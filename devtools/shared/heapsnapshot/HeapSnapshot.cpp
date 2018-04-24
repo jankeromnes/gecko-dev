@@ -1353,8 +1353,8 @@ class MOZ_STACK_CLASS HeapSnapshotHandler
 
 public:
   // For telemetry.
-  uint32_t nodeCount;
-  uint32_t edgeCount;
+  uint32_t nodeCount{};
+  uint32_t edgeCount{};
 
   HeapSnapshotHandler(CoreDumpWriter& writer,
                       JS::CompartmentSet* compartments)

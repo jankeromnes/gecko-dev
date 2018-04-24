@@ -361,7 +361,7 @@ XRemoteClient::GetLock(Window aWindow, bool *aDestroyed)
 	XEvent event;
 	int select_retval;
 	fd_set select_set;
-	struct timeval delay;
+	struct timeval delay{};
 	delay.tv_sec = 10;
 	delay.tv_usec = 0;
 

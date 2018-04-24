@@ -243,7 +243,7 @@ class U_I18N_API DecimalQuantity : public IFixedDecimal, public UMemory {
      * <p>Note that in {@link java.math.BigDecimal}, the scale is defined differently: the number of
      * digits after the decimal place, which is the negative of our definition of scale.
      */
-    int32_t scale;
+    int32_t scale{};
 
     /**
      * The number of digits in the BCD. For example, "1007" has BCD "0x1007" and precision 4. The
@@ -252,7 +252,7 @@ class U_I18N_API DecimalQuantity : public IFixedDecimal, public UMemory {
      * <p>This value must be re-calculated whenever the value in bcd changes by using {@link
      * #computePrecisionAndCompact()}.
      */
-    int32_t precision;
+    int32_t precision{};
 
     /**
      * A bitmask of properties relating to the number represented by this object.
@@ -261,7 +261,7 @@ class U_I18N_API DecimalQuantity : public IFixedDecimal, public UMemory {
      * @see #INFINITY_FLAG
      * @see #NAN_FLAG
      */
-    int8_t flags;
+    int8_t flags{};
 
     // The following three fields relate to the double-to-ascii fast path algorithm.
     // When a double is given to DecimalQuantityBCD, it is converted to using a fast algorithm. The
@@ -275,19 +275,19 @@ class U_I18N_API DecimalQuantity : public IFixedDecimal, public UMemory {
      * Whether the value in the BCD comes from the double fast path without having been rounded to
      * ensure correctness
      */
-    UBool isApproximate;
+    UBool isApproximate{};
 
     /**
      * The original number provided by the user and which is represented in BCD. Used when we need to
      * re-compute the BCD for an exact double representation.
      */
-    double origDouble;
+    double origDouble{};
 
     /**
      * The change in magnitude relative to the original double. Used when we need to re-compute the
      * BCD for an exact double representation.
      */
-    int32_t origDelta;
+    int32_t origDelta{};
 
     // Four positions: left optional '(', left required '[', right required ']', right optional ')'.
     // These four positions determine which digits are displayed in the output string.  They do NOT
@@ -333,7 +333,7 @@ class U_I18N_API DecimalQuantity : public IFixedDecimal, public UMemory {
             int32_t len;
         } bcdBytes;
         uint64_t bcdLong;
-    } fBCD;
+    } fBCD{};
 
     bool usingBytes = false;
 

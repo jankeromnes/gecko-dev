@@ -702,13 +702,13 @@ private:
           Formattable*  fArray;
           int32_t       fCount;
         }               fArrayAndCount;
-    } fValue;
+    } fValue{};
 
-    CharString           *fDecimalStr;
+    CharString           *fDecimalStr{};
 
-    DigitList            *fDecimalNum;
+    DigitList            *fDecimalNum{};
 
-    char                fStackData[UNUM_INTERNAL_STACKARRAY_SIZE]; // must be big enough for DigitList
+    char                fStackData[UNUM_INTERNAL_STACKARRAY_SIZE]{}; // must be big enough for DigitList
 
     Type                fType;
     UnicodeString       fBogus; // Bogus string when it's needed.

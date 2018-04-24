@@ -79,7 +79,7 @@ int NS_main(int argc, NS_tchar **argv)
   int rv = 0;
   int retval;
   NS_tchar inifile[MAXPATHLEN];
-  StringTable testStrings;
+  StringTable testStrings{};
 
   NS_tchar *slash = NS_tstrrchr(argv[0], PATH_SEPARATOR_CHAR);
 #ifdef ALT_PATH_SEPARATOR_CHAR

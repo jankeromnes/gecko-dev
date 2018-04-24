@@ -300,9 +300,9 @@ class FramePacket : public ::google::protobuf::MessageLite /* @@protoc_insertion
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::uint64 value_;
-  float scale_;
+  mutable int _cached_size_{};
+  ::google::protobuf::uint64 value_{};
+  float scale_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -434,11 +434,11 @@ class ColorPacket : public ::google::protobuf::MessageLite /* @@protoc_insertion
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::uint64 layerref_;
-  ::google::protobuf::uint32 width_;
-  ::google::protobuf::uint32 height_;
-  ::google::protobuf::uint32 color_;
+  mutable int _cached_size_{};
+  ::google::protobuf::uint64 layerref_{};
+  ::google::protobuf::uint32 width_{};
+  ::google::protobuf::uint32 height_{};
+  ::google::protobuf::uint32 color_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -570,11 +570,11 @@ class TexturePacket_Rect : public ::google::protobuf::MessageLite /* @@protoc_in
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  float x_;
-  float y_;
-  float w_;
-  float h_;
+  mutable int _cached_size_{};
+  float x_{};
+  float y_{};
+  float w_{};
+  float h_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -688,9 +688,9 @@ class TexturePacket_Size : public ::google::protobuf::MessageLite /* @@protoc_in
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::int32 w_;
-  ::google::protobuf::int32 h_;
+  mutable int _cached_size_{};
+  ::google::protobuf::int32 w_{};
+  ::google::protobuf::int32 h_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -816,10 +816,10 @@ class TexturePacket_Matrix : public ::google::protobuf::MessageLite /* @@protoc_
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  mutable int _cached_size_{};
   ::google::protobuf::RepeatedField< float > m_;
-  bool is2d_;
-  bool isid_;
+  bool is2d_{};
+  bool isid_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -946,10 +946,10 @@ class TexturePacket_EffectMask : public ::google::protobuf::MessageLite /* @@pro
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::mozilla::layers::layerscope::TexturePacket_Size* msize_;
-  ::mozilla::layers::layerscope::TexturePacket_Matrix* mmasktransform_;
-  bool mis3d_;
+  mutable int _cached_size_{};
+  ::mozilla::layers::layerscope::TexturePacket_Size* msize_{};
+  ::mozilla::layers::layerscope::TexturePacket_Matrix* mmasktransform_{};
+  bool mis3d_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -1205,21 +1205,21 @@ class TexturePacket : public ::google::protobuf::MessageLite /* @@protoc_inserti
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr data_;
-  ::mozilla::layers::layerscope::TexturePacket_Rect* mtexturecoords_;
-  ::mozilla::layers::layerscope::TexturePacket_EffectMask* mask_;
-  ::google::protobuf::uint64 layerref_;
-  ::google::protobuf::uint32 width_;
-  ::google::protobuf::uint32 height_;
-  ::google::protobuf::uint32 stride_;
-  ::google::protobuf::uint32 name_;
-  ::google::protobuf::uint32 target_;
-  ::google::protobuf::uint32 dataformat_;
-  ::google::protobuf::uint64 glcontext_;
-  int mfilter_;
-  bool mpremultiplied_;
-  bool ismask_;
+  mutable int _cached_size_{};
+  ::google::protobuf::internal::ArenaStringPtr data_{};
+  ::mozilla::layers::layerscope::TexturePacket_Rect* mtexturecoords_{};
+  ::mozilla::layers::layerscope::TexturePacket_EffectMask* mask_{};
+  ::google::protobuf::uint64 layerref_{};
+  ::google::protobuf::uint32 width_{};
+  ::google::protobuf::uint32 height_{};
+  ::google::protobuf::uint32 stride_{};
+  ::google::protobuf::uint32 name_{};
+  ::google::protobuf::uint32 target_{};
+  ::google::protobuf::uint32 dataformat_{};
+  ::google::protobuf::uint64 glcontext_{};
+  int mfilter_{};
+  bool mpremultiplied_{};
+  bool ismask_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -1333,9 +1333,9 @@ class LayersPacket_Layer_Size : public ::google::protobuf::MessageLite /* @@prot
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::int32 w_;
-  ::google::protobuf::int32 h_;
+  mutable int _cached_size_{};
+  ::google::protobuf::int32 w_{};
+  ::google::protobuf::int32 h_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -1467,11 +1467,11 @@ class LayersPacket_Layer_Rect : public ::google::protobuf::MessageLite /* @@prot
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::int32 x_;
-  ::google::protobuf::int32 y_;
-  ::google::protobuf::int32 w_;
-  ::google::protobuf::int32 h_;
+  mutable int _cached_size_{};
+  ::google::protobuf::int32 x_{};
+  ::google::protobuf::int32 y_{};
+  ::google::protobuf::int32 w_{};
+  ::google::protobuf::int32 h_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -1579,7 +1579,7 @@ class LayersPacket_Layer_Region : public ::google::protobuf::MessageLite /* @@pr
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  mutable int _cached_size_{};
   ::google::protobuf::RepeatedPtrField< ::mozilla::layers::layerscope::LayersPacket_Layer_Rect > r_;
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
@@ -1706,10 +1706,10 @@ class LayersPacket_Layer_Matrix : public ::google::protobuf::MessageLite /* @@pr
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  mutable int _cached_size_{};
   ::google::protobuf::RepeatedField< float > m_;
-  bool is2d_;
-  bool isid_;
+  bool is2d_{};
+  bool isid_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -1838,10 +1838,10 @@ class LayersPacket_Layer_Shadow : public ::google::protobuf::MessageLite /* @@pr
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Rect* clip_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Matrix* transform_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* vregion_;
+  mutable int _cached_size_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Rect* clip_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Matrix* transform_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* vregion_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -2276,32 +2276,32 @@ class LayersPacket_Layer : public ::google::protobuf::MessageLite /* @@protoc_in
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr displaylistlog_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Rect* clip_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Matrix* transform_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* vregion_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Shadow* shadow_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* hitregion_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* dispatchregion_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* noactionregion_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* hpanregion_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* vpanregion_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* valid_;
-  ::mozilla::layers::layerscope::LayersPacket_Layer_Size* size_;
-  ::google::protobuf::uint64 ptr_;
-  ::google::protobuf::uint64 parentptr_;
-  int type_;
-  float opacity_;
-  ::google::protobuf::uint64 barid_;
-  ::google::protobuf::uint64 mask_;
-  bool copaque_;
-  bool calpha_;
-  ::google::protobuf::uint32 color_;
-  ::google::protobuf::uint64 refid_;
-  int filter_;
-  ::google::protobuf::uint32 displaylistloglength_;
-  int direct_;
+  mutable int _cached_size_{};
+  ::google::protobuf::internal::ArenaStringPtr displaylistlog_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Rect* clip_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Matrix* transform_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* vregion_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Shadow* shadow_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* hitregion_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* dispatchregion_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* noactionregion_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* hpanregion_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* vpanregion_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Region* valid_{};
+  ::mozilla::layers::layerscope::LayersPacket_Layer_Size* size_{};
+  ::google::protobuf::uint64 ptr_{};
+  ::google::protobuf::uint64 parentptr_{};
+  int type_{};
+  float opacity_{};
+  ::google::protobuf::uint64 barid_{};
+  ::google::protobuf::uint64 mask_{};
+  bool copaque_{};
+  bool calpha_{};
+  ::google::protobuf::uint32 color_{};
+  ::google::protobuf::uint64 refid_{};
+  int filter_{};
+  ::google::protobuf::uint32 displaylistloglength_{};
+  int direct_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -2411,7 +2411,7 @@ class LayersPacket : public ::google::protobuf::MessageLite /* @@protoc_insertio
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  mutable int _cached_size_{};
   ::google::protobuf::RepeatedPtrField< ::mozilla::layers::layerscope::LayersPacket_Layer > layer_;
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
@@ -2517,8 +2517,8 @@ class MetaPacket : public ::google::protobuf::MessageLite /* @@protoc_insertion_
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  bool composedbyhwc_;
+  mutable int _cached_size_{};
+  bool composedbyhwc_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -2653,11 +2653,11 @@ class DrawPacket_Rect : public ::google::protobuf::MessageLite /* @@protoc_inser
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  float x_;
-  float y_;
-  float w_;
-  float h_;
+  mutable int _cached_size_{};
+  float x_{};
+  float y_{};
+  float w_{};
+  float h_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -2842,15 +2842,15 @@ class DrawPacket : public ::google::protobuf::MessageLite /* @@protoc_insertion_
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
+  mutable int _cached_size_{};
   ::google::protobuf::RepeatedField< float > mvmatrix_;
   ::google::protobuf::RepeatedPtrField< ::mozilla::layers::layerscope::DrawPacket_Rect > layerrect_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > texids_;
   ::google::protobuf::RepeatedPtrField< ::mozilla::layers::layerscope::DrawPacket_Rect > texturerect_;
-  float offsetx_;
-  float offsety_;
-  ::google::protobuf::uint64 layerref_;
-  ::google::protobuf::uint32 totalrects_;
+  float offsetx_{};
+  float offsety_{};
+  ::google::protobuf::uint64 layerref_{};
+  ::google::protobuf::uint32 totalrects_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -3046,14 +3046,14 @@ class Packet : public ::google::protobuf::MessageLite /* @@protoc_insertion_poin
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::mozilla::layers::layerscope::FramePacket* frame_;
-  ::mozilla::layers::layerscope::ColorPacket* color_;
-  ::mozilla::layers::layerscope::TexturePacket* texture_;
-  ::mozilla::layers::layerscope::LayersPacket* layers_;
-  ::mozilla::layers::layerscope::MetaPacket* meta_;
-  ::mozilla::layers::layerscope::DrawPacket* draw_;
-  int type_;
+  mutable int _cached_size_{};
+  ::mozilla::layers::layerscope::FramePacket* frame_{};
+  ::mozilla::layers::layerscope::ColorPacket* color_{};
+  ::mozilla::layers::layerscope::TexturePacket* texture_{};
+  ::mozilla::layers::layerscope::LayersPacket* layers_{};
+  ::mozilla::layers::layerscope::MetaPacket* meta_{};
+  ::mozilla::layers::layerscope::DrawPacket* draw_{};
+  int type_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -3184,9 +3184,9 @@ class CommandPacket : public ::google::protobuf::MessageLite /* @@protoc_inserti
 
   ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  int type_;
-  bool value_;
+  mutable int _cached_size_{};
+  int type_{};
+  bool value_{};
   friend struct protobuf_LayerScopePacket_2eproto::TableStruct;
 };
 // ===================================================================

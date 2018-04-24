@@ -31,7 +31,7 @@ class MOZ_STACK_CLASS ZeroCopyNSIOutputStream
   nsCOMPtr<nsIOutputStream>& out;
 
   // The buffer we write data to before passing it to the output stream.
-  char buffer[BUFFER_SIZE];
+  char buffer[BUFFER_SIZE]{};
 
   // The status of writing to the underlying output stream.
   nsresult result_;

@@ -214,7 +214,7 @@ UniquePtr<SdpConnection> convertRustConnection(RustSdpConnection conn)
 void
 RsdparsaSdpMediaSection::LoadConnection()
 {
-  RustSdpConnection conn;
+  RustSdpConnection conn{};
   nsresult nr;
   if (sdp_media_has_connection(mSection)) {
     nr = sdp_get_media_connection(mSection, &conn);

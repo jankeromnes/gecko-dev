@@ -53,7 +53,7 @@ private:
   PlatformData* platformData();
 
 #ifndef XP_WIN
-  void* platformData_[sizeof(pthread_cond_t) / sizeof(void*)];
+  void* platformData_[sizeof(pthread_cond_t) / sizeof(void*)]{};
   static_assert(sizeof(pthread_cond_t) / sizeof(void*) != 0 &&
                 sizeof(pthread_cond_t) % sizeof(void*) == 0,
                 "pthread_cond_t must have pointer alignment");

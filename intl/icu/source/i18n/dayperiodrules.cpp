@@ -130,10 +130,10 @@ struct DayPeriodRulesDataSink : public ResourceSink {
     }
 
     // Members.
-    int32_t cutoffs[25];  // [0] thru [24]: 24 is allowed in "before 24".
+    int32_t cutoffs[25]{};  // [0] thru [24]: 24 is allowed in "before 24".
 
     // "Path" to data.
-    int32_t ruleSetNum;
+    int32_t ruleSetNum{};
     DayPeriodRules::DayPeriod period;
     CutoffType cutoffType;
 

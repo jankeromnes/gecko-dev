@@ -113,7 +113,7 @@ private:
 protected:
   // This stat cache holds the *last stat* - it does not invalidate.
   // Call "FillStatCache" whenever you want to stat our file.
-  struct STAT  mCachedStat;
+  struct STAT  mCachedStat{};
   nsCString    mPath;
 
   void LocateNativeLeafName(nsACString::const_iterator&,

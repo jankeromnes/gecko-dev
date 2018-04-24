@@ -70,7 +70,7 @@ private:
   sk_sp<SkSurface> mSurface;
   SurfaceFormat mFormat;
   IntSize mSize;
-  int32_t mStride;
+  int32_t mStride{};
   DrawTargetSkia* mDrawTarget;
   Mutex mChangeMutex;
 };

@@ -72,7 +72,7 @@ private:
 private:
     UnicodeString name;
     NFRuleList rules;
-    NFRule *nonNumericalRules[6];
+    NFRule *nonNumericalRules[6]{};
     RuleBasedNumberFormat *owner;
     NFRuleList fractionRules;
     UBool fIsFractionRuleSet;

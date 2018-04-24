@@ -148,7 +148,7 @@ SandboxBroker::Policy::AddPath(int aPerms, const char* aPath,
   MOZ_ASSERT(path.Length() <= kMaxPathLen);
   int perms;
   if (aCond == AddIfExistsNow) {
-    struct stat statBuf;
+    struct stat statBuf{};
     if (lstat(aPath, &statBuf) != 0) {
       return;
     }
@@ -168,7 +168,7 @@ SandboxBroker::Policy::AddPath(int aPerms, const char* aPath,
 void
 SandboxBroker::Policy::AddTree(int aPerms, const char* aPath)
 {
-  struct stat statBuf;
+  struct stat statBuf{};
 
   if (stat(aPath, &statBuf) != 0) {
     return;
@@ -198,7 +198,7 @@ SandboxBroker::Policy::AddTree(int aPerms, const char* aPath)
 void
 SandboxBroker::Policy::AddDir(int aPerms, const char* aPath)
 {
-  struct stat statBuf;
+  struct stat statBuf{};
 
   if (stat(aPath, &statBuf) != 0) {
     return;
@@ -274,7 +274,7 @@ SandboxBroker::Policy::AddFilePrefix(int aPerms, const char* aDir,
 void
 SandboxBroker::Policy::AddDynamic(int aPerms, const char* aPath)
 {
-  struct stat statBuf;
+  struct stat statBuf{};
   bool exists = (stat(aPath, &statBuf) == 0);
 
   if (!exists) {
@@ -524,7 +524,7 @@ DoConnect(const char* aPath, size_t aLen, int aType)
 
   // Try to copy the name into a normal-sized sockaddr_un, with
   // null-termination:
-  struct sockaddr_un sun;
+  struct sockaddr_un sun{};
   memset(&sun, 0, sizeof(sun));
   sun.sun_family = AF_UNIX;
   if (aLen + 1 > sizeof(sun.sun_path)) {
@@ -711,8 +711,8 @@ SandboxBroker::ThreadMain(void)
     size_t pathLen = 0;
     size_t pathLen2 = 0;
     char respBuf[kMaxPathLen + 1]; // Also serves as struct stat
-    Request req;
-    Response resp;
+    Request req{};
+    Response resp{};
     int respfd;
 
     // Make sure stat responses fit in the response buffer
@@ -932,7 +932,7 @@ SandboxBroker::ThreadMain(void)
             resp.mError = -errno;
           }
         } else {
-          struct stat sb;
+          struct stat sb{};
           // This doesn't need an additional policy check because
           // MAY_ACCESS is required to even enter this switch statement.
           if (lstat(pathBuf, &sb) == 0) {
@@ -1049,7 +1049,7 @@ SandboxBroker::AuditPermissive(int aOp, int aFlags, int aPerms, const char* aPat
 {
   MOZ_RELEASE_ASSERT(SandboxInfo::Get().Test(SandboxInfo::kPermissive));
 
-  struct stat statBuf;
+  struct stat statBuf{};
 
   if (lstat(aPath, &statBuf) == 0) {
     // Path exists, set errno to 0 to indicate "success".

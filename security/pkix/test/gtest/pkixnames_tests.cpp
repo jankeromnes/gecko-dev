@@ -578,8 +578,8 @@ template <unsigned int L>
 struct IPAddressParams
 {
   ByteString input;
-  bool isValid;
-  uint8_t expectedValueIfValid[L];
+  bool isValid{};
+  uint8_t expectedValueIfValid[L]{};
 };
 
 template <unsigned int L>

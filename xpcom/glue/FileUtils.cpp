@@ -379,7 +379,7 @@ mozilla::ReadAheadLib(mozilla::pathstr_t aFilePath)
   {
     char buf[bufsize];
     Elf_Ehdr ehdr;
-  } elf;
+  } elf{};
   // Read ELF header (ehdr) and program header table (phdr).
   // We check that the ELF magic is found, that the ELF class matches
   // our own, and that the program header table as defined in the ELF
@@ -512,7 +512,7 @@ mozilla::ReadAheadFile(mozilla::pathstr_t aFilePath, const size_t aOffset,
   }
   size_t count;
   if (aCount == SIZE_MAX) {
-    struct stat st;
+    struct stat st{};
     if (fstat(fd, &st) < 0) {
       if (!aOutFd) {
         close(fd);

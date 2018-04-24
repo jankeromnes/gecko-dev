@@ -360,7 +360,7 @@ nsNotifyAddrListener::Run()
         return NS_ERROR_FAILURE;
     }
 
-    struct sockaddr_nl addr;
+    struct sockaddr_nl addr{};
     memset(&addr, 0, sizeof(addr));   // clear addr
 
     addr.nl_family = AF_NETLINK;

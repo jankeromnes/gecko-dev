@@ -199,7 +199,7 @@ class RtpRtcpImplTest : public ::testing::Test {
   void SendFrame(const RtpRtcpModule* module, uint8_t tid) {
     RTPVideoHeaderVP8 vp8_header = {};
     vp8_header.temporalIdx = tid;
-    RTPVideoHeader rtp_video_header;
+    RTPVideoHeader rtp_video_header{};
     rtp_video_header.width = codec_.width;
     rtp_video_header.height = codec_.height;
     rtp_video_header.rotation = kVideoRotation_0;

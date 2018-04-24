@@ -39,8 +39,8 @@ public:
 protected:
     SkPixmap        fDst;
     const SkPixmap  fSource;
-    int             fLeft, fTop;
-    const SkPaint*  fPaint;
+    int             fLeft{}, fTop{};
+    const SkPaint*  fPaint{};
 
 private:
     typedef SkBlitter INHERITED;

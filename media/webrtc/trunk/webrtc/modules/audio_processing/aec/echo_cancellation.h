@@ -70,47 +70,47 @@ typedef struct Aec {
 
   std::unique_ptr<ApmDataDumper> data_dumper;
 
-  int delayCtr;
-  int sampFreq;
-  int splitSampFreq;
-  int scSampFreq;
-  float sampFactor;  // scSampRate / sampFreq
-  short skewMode;
-  int bufSizeStart;
-  int knownDelay;
-  int rate_factor;
+  int delayCtr{};
+  int sampFreq{};
+  int splitSampFreq{};
+  int scSampFreq{};
+  float sampFactor{};  // scSampRate / sampFreq
+  short skewMode{};
+  int bufSizeStart{};
+  int knownDelay{};
+  int rate_factor{};
 
-  short initFlag;  // indicates if AEC has been initialized
+  short initFlag{};  // indicates if AEC has been initialized
 
   // Variables used for averaging far end buffer size
-  short counter;
-  int sum;
-  short firstVal;
-  short checkBufSizeCtr;
+  short counter{};
+  int sum{};
+  short firstVal{};
+  short checkBufSizeCtr{};
 
   // Variables used for delay shifts
-  short msInSndCardBuf;
-  short filtDelay;  // Filtered delay estimate.
-  int timeForDelayChange;
-  int startup_phase;
-  int checkBuffSize;
-  short lastDelayDiff;
+  short msInSndCardBuf{};
+  short filtDelay{};  // Filtered delay estimate.
+  int timeForDelayChange{};
+  int startup_phase{};
+  int checkBuffSize{};
+  short lastDelayDiff{};
 
   // Structures
-  void* resampler;
+  void* resampler{};
 
-  int skewFrCtr;
-  int resample;  // if the skew is small enough we don't resample
-  int highSkewCtr;
-  float skew;
+  int skewFrCtr{};
+  int resample{};  // if the skew is small enough we don't resample
+  int highSkewCtr{};
+  float skew{};
 
-  RingBuffer* far_pre_buf;  // Time domain far-end pre-buffer.
+  RingBuffer* far_pre_buf{};  // Time domain far-end pre-buffer.
 
-  int farend_started;
+  int farend_started{};
 
   // Aec instance counter.
   static int instance_count;
-  AecCore* aec;
+  AecCore* aec{};
 } Aec;
 
 /*

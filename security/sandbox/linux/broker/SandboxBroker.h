@@ -130,7 +130,7 @@ class SandboxBroker final
   virtual ~SandboxBroker();
 
  private:
-  PlatformThreadHandle mThread;
+  PlatformThreadHandle mThread{};
   int mFileDesc;
   const int mChildPid;
   const UniquePtr<const Policy> mPolicy;

@@ -436,7 +436,7 @@ bool Path_IsDirectory( const std::string & sPath )
 	// see if the specified path actually exists.
 
 #if defined(POSIX)
-	struct	stat	buf;
+	struct	stat	buf{};
 	if ( stat( sFixedPath.c_str(), &buf ) == -1 )
 	{
 		return false;
@@ -490,7 +490,7 @@ bool Path_Exists( const std::string & sPath )
 		return false;
 	}
 #else
-	struct stat buf;
+	struct stat buf{};
 	if ( stat ( sFixedPath.c_str(), &buf ) == -1)
 	{
 		return false;

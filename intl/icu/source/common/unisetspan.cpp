@@ -160,7 +160,7 @@ private:
     int32_t length;
     int32_t start;
 
-    UBool staticList[16];
+    UBool staticList[16]{};
 };
 
 // Get the number of UTF-8 bytes for a UTF-16 (sub)string.

@@ -67,7 +67,7 @@ public:
 protected:
     ~nsFontCache() {}
 
-    nsDeviceContext*          mContext; // owner
+    nsDeviceContext*          mContext{}; // owner
     RefPtr<nsAtom>         mLocaleLanguage;
     nsTArray<nsFontMetrics*>  mFontMetrics;
 };

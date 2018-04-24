@@ -810,15 +810,15 @@ class TransportTestPeer : public sigslot::has_slots<> {
   TransportLayerLogging *logging_;
   TransportLayerLossy *lossy_;
   TransportLayerDtls *dtls_;
-  TransportLayerIce *ice_;
+  TransportLayerIce *ice_{};
   RefPtr<DtlsIdentity> identity_;
   RefPtr<NrIceCtxHandler> ice_ctx_;
   std::vector<RefPtr<NrIceMediaStream> > streams_;
   std::map<std::string, std::vector<std::string> > candidates_;
   TransportTestPeer *peer_;
   bool gathering_complete_;
-  unsigned char fingerprint_[TransportLayerDtls::kMaxDigestLength];
-  size_t fingerprint_len_;
+  unsigned char fingerprint_[TransportLayerDtls::kMaxDigestLength]{};
+  size_t fingerprint_len_{};
   std::vector<uint16_t> enabled_cipersuites_;
   std::vector<uint16_t> disabled_cipersuites_;
   bool reuse_dhe_key_;
@@ -956,7 +956,7 @@ class TransportTest : public MtransportTest {
       NS_DISPATCH_SYNC);
   }
 
-  PRFileDesc *fds_[2];
+  PRFileDesc *fds_[2]{};
   TransportTestPeer *p1_;
   TransportTestPeer *p2_;
   nsCOMPtr<nsIEventTarget> target_;

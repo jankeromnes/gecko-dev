@@ -76,12 +76,12 @@ private:
     GrCoordTransform fCoordTransform;
     GrTextureDomain  fDomain;
     TextureSampler   fTextureSampler;
-    SkIRect          fBounds;
+    SkIRect          fBounds{};
     SkISize          fKernelSize;
-    float            fKernel[MAX_KERNEL_SIZE];
+    float            fKernel[MAX_KERNEL_SIZE]{};
     float            fGain;
     float            fBias;
-    float            fKernelOffset[2];
+    float            fKernelOffset[2]{};
     bool             fConvolveAlpha;
 
     GR_DECLARE_FRAGMENT_PROCESSOR_TEST

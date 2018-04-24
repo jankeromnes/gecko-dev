@@ -542,25 +542,25 @@ typedef struct {
 } Format4Cmap;
 
 typedef struct {
-    AutoSwap_PRUint16 format;
-    AutoSwap_PRUint32 length;
-    AutoSwap_PRUint32 numVarSelectorRecords;
+    AutoSwap_PRUint16 format{};
+    AutoSwap_PRUint32 length{};
+    AutoSwap_PRUint32 numVarSelectorRecords{};
 
     typedef struct {
         AutoSwap_PRUint24 varSelector;
-        AutoSwap_PRUint32 defaultUVSOffset;
-        AutoSwap_PRUint32 nonDefaultUVSOffset;
+        AutoSwap_PRUint32 defaultUVSOffset{};
+        AutoSwap_PRUint32 nonDefaultUVSOffset{};
     } VarSelectorRecord;
 
     VarSelectorRecord varSelectorRecords[1];
 } Format14Cmap;
 
 typedef struct {
-    AutoSwap_PRUint32 numUVSMappings;
+    AutoSwap_PRUint32 numUVSMappings{};
 
     typedef struct {
         AutoSwap_PRUint24 unicodeValue;
-        AutoSwap_PRUint16 glyphID;
+        AutoSwap_PRUint16 glyphID{};
     } UVSMapping;
 
     UVSMapping uvsMappings[1];
@@ -872,7 +872,7 @@ nsresult gfxFontUtils::MakeUniqueUserFontName(nsAString& aName)
       do_GetService("@mozilla.org/uuid-generator;1");
     NS_ENSURE_TRUE(uuidgen, NS_ERROR_OUT_OF_MEMORY);
 
-    nsID guid;
+    nsID guid{};
 
     NS_ASSERTION(sizeof(guid) * 2 <= MAX_B64_LEN, "size of nsID has changed!");
 
@@ -1935,7 +1935,7 @@ gfxFontUtils::GetVariationInstances(gfxFontEntry* aFontEntry,
         }
         instance.mValues.SetCapacity(axisCount);
         for (unsigned j = 0; j < axisCount; ++j) {
-            gfxFontVariationValue value;
+            gfxFontVariationValue value{};
             value.mAxis = axes[j].axisTag;
             value.mValue = int32_t(coords[j]) / 65536.0;
             instance.mValues.AppendElement(value);

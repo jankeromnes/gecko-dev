@@ -33,7 +33,7 @@ class MathCache
     static const unsigned SizeLog2 = 12;
     static const unsigned Size = 1 << SizeLog2;
     struct Entry { double in; MathFuncId id; double out; };
-    Entry table[Size];
+    Entry table[Size]{};
 
   public:
     MathCache();

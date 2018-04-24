@@ -1088,7 +1088,7 @@ IsArraySpecies(JSContext* cx, HandleObject origArray)
     if (cx->compartment()->arraySpeciesLookup.tryOptimizeArray(cx, &origArray->as<ArrayObject>()))
         return true;
 
-    Value ctor;
+    Value ctor{};
     if (!GetPropertyPure(cx, origArray, NameToId(cx->names().constructor), &ctor))
         return false;
 

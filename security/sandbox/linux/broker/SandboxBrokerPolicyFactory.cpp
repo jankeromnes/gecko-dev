@@ -67,7 +67,7 @@ AddMesaSysfsPaths(SandboxBroker::Policy* aPolicy)
     while (auto entry = readdir(dir)) {
       if (entry->d_name[0] != '.') {
         nsPrintfCString devPath("/dev/dri/%s", entry->d_name);
-        struct stat sb;
+        struct stat sb{};
         if (stat(devPath.get(), &sb) == 0 && S_ISCHR(sb.st_mode)) {
           // For both the DRI node and its parent (the physical
           // device), allow reading the "uevent" file.

@@ -63,9 +63,9 @@ class RmsLevel {
   // Reset() and stores the new size.
   void CheckBlockSize(size_t block_size);
 
-  float sum_square_;
-  size_t sample_count_;
-  float max_sum_square_;
+  float sum_square_{};
+  size_t sample_count_{};
+  float max_sum_square_{};
   rtc::Optional<size_t> block_size_;
 };
 

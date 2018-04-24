@@ -195,7 +195,7 @@ FractionRounder Rounder::constructFraction(int32_t minFrac, int32_t maxFrac) {
     settings.fMaxFrac = static_cast<digits_t>(maxFrac);
     settings.fMinSig = -1;
     settings.fMaxSig = -1;
-    RounderUnion union_;
+    RounderUnion union_{};
     union_.fracSig = settings;
     return {RND_FRACTION, union_, kDefaultMode};
 }
@@ -206,7 +206,7 @@ Rounder Rounder::constructSignificant(int32_t minSig, int32_t maxSig) {
     settings.fMaxFrac = -1;
     settings.fMinSig = static_cast<digits_t>(minSig);
     settings.fMaxSig = static_cast<digits_t>(maxSig);
-    RounderUnion union_;
+    RounderUnion union_{};
     union_.fracSig = settings;
     return {RND_SIGNIFICANT, union_, kDefaultMode};
 }
@@ -216,7 +216,7 @@ Rounder::constructFractionSignificant(const FractionRounder &base, int32_t minSi
     FractionSignificantSettings settings = base.fUnion.fracSig;
     settings.fMinSig = static_cast<digits_t>(minSig);
     settings.fMaxSig = static_cast<digits_t>(maxSig);
-    RounderUnion union_;
+    RounderUnion union_{};
     union_.fracSig = settings;
     return {RND_FRACTION_SIGNIFICANT, union_, kDefaultMode};
 }
@@ -225,19 +225,19 @@ IncrementRounder Rounder::constructIncrement(double increment, int32_t minFrac) 
     IncrementSettings settings;
     settings.fIncrement = increment;
     settings.fMinFrac = static_cast<digits_t>(minFrac);
-    RounderUnion union_;
+    RounderUnion union_{};
     union_.increment = settings;
     return {RND_INCREMENT, union_, kDefaultMode};
 }
 
 CurrencyRounder Rounder::constructCurrency(UCurrencyUsage usage) {
-    RounderUnion union_;
+    RounderUnion union_{};
     union_.currencyUsage = usage;
     return {RND_CURRENCY, union_, kDefaultMode};
 }
 
 Rounder Rounder::constructPassThrough() {
-    RounderUnion union_;
+    RounderUnion union_{};
     union_.errorCode = U_ZERO_ERROR; // initialize the variable
     return {RND_PASS_THROUGH, union_, kDefaultMode};
 }

@@ -74,7 +74,7 @@ ShowProgressUI()
   char ini_path[PATH_MAX];
   SprintfLiteral(ini_path, "%s.ini", sProgramPath);
 
-  StringTable strings;
+  StringTable strings{};
   if (ReadStrings(ini_path, &strings) != OK)
     return -1;
 

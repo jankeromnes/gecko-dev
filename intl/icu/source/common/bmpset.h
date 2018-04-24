@@ -99,7 +99,7 @@ private:
     /*
      * One byte 0 or 1 per Latin-1 character.
      */
-    UBool latin1Contains[0x100];
+    UBool latin1Contains[0x100]{};
 
     /* TRUE if contains(U+FFFD). */
     UBool containsFFFD;
@@ -116,7 +116,7 @@ private:
      * Bits for 0..7F (non-shortest forms) are set to the result of contains(FFFD)
      * for faster validity checking at runtime.
      */
-    uint32_t table7FF[64];
+    uint32_t table7FF[64]{};
 
     /*
      * One bit per 64 BMP code points.
@@ -134,7 +134,7 @@ private:
      * Bits for 0..7FF (non-shortest forms) and D800..DFFF are set to
      * the result of contains(FFFD) for faster validity checking at runtime.
      */
-    uint32_t bmpBlockBits[64];
+    uint32_t bmpBlockBits[64]{};
 
     /*
      * Inversion list indexes for restricted binary searches in
@@ -144,7 +144,7 @@ private:
      * always looked up in the bit tables.
      * The last pair of indexes is for finding supplementary code points.
      */
-    int32_t list4kStarts[18];
+    int32_t list4kStarts[18]{};
 
     /*
      * The inversion list of the parent set, for the slower contains() implementation

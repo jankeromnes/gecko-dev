@@ -715,7 +715,7 @@ public:
      * The year of the gregorianCutover, with 0 representing
      * 1 BC, -1 representing 2 BC, etc.
      */
-    int32_t fGregorianCutoverJulianDay;// = 2299161;
+    int32_t fGregorianCutoverJulianDay{};// = 2299161;
 
     /**
      * Converts time as milliseconds to Julian date. The Julian date used here is not a

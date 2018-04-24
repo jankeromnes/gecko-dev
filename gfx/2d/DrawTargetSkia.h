@@ -196,7 +196,7 @@ private:
 
   IntSize mSize;
   sk_sp<SkSurface> mSurface;
-  SkCanvas* mCanvas;
+  SkCanvas* mCanvas{};
   RefPtr<SourceSurfaceSkia> mSnapshot;
   Mutex mSnapshotLock;
 

@@ -123,7 +123,7 @@ ArchiveReader::VerifyProductInformation(const char *MARChannelID,
     return ARCHIVE_NOT_OPEN;
   }
 
-  ProductInformationBlock productInfoBlock;
+  ProductInformationBlock productInfoBlock{};
   int rv = mar_read_product_info_block(mArchive,
                                        &productInfoBlock);
   if (rv != OK) {

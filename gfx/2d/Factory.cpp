@@ -1123,8 +1123,8 @@ Factory::CopyDataSourceSurface(DataSourceSurface* aSource,
              aDest->GetFormat() == SurfaceFormat::B8G8R8X8 ||
              aDest->GetFormat() == SurfaceFormat::R5G6B5_UINT16);
 
-  DataSourceSurface::MappedSurface srcMap;
-  DataSourceSurface::MappedSurface destMap;
+  DataSourceSurface::MappedSurface srcMap{};
+  DataSourceSurface::MappedSurface destMap{};
   if (!aSource->Map(DataSourceSurface::MapType::READ, &srcMap) ||
     !aDest->Map(DataSourceSurface::MapType::WRITE, &destMap)) {
     MOZ_ASSERT(false, "CopyDataSourceSurface: Failed to map surface.");

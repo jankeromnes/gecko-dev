@@ -2012,7 +2012,7 @@ bool ExpressionParser::parse(Token *token,
                              const ErrorSettings &errorSettings,
                              bool *valid)
 {
-    Context context;
+    Context context{};
     context.diagnostics = mDiagnostics;
     context.lexer = mLexer;
     context.token = token;

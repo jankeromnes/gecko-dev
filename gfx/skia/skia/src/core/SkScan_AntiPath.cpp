@@ -68,14 +68,14 @@ protected:
     /// Initial y coordinate (top of bounds).
     int fTop;
 
-    SkIRect fSectBounds;
+    SkIRect fSectBounds{};
 };
 
 BaseSuperBlitter::BaseSuperBlitter(SkBlitter* realBlit, const SkIRect& ir,
                                    const SkIRect& clipBounds, bool isInverse) {
     fRealBlitter = realBlit;
 
-    SkIRect sectBounds;
+    SkIRect sectBounds{};
     if (isInverse) {
         // We use the clip bounds instead of the ir, since we may be asked to
         //draw outside of the rect when we're a inverse filltype
@@ -128,7 +128,7 @@ private:
     int         fRunsToBuffer;
     void*       fRunsBuffer;
     int         fCurrentRun;
-    SkAlphaRuns fRuns;
+    SkAlphaRuns fRuns{};
 
     // extra one to store the zero at the end
     int getRunsSz() const { return (fWidth + 1 + (fWidth + 2)/2) * sizeof(int16_t); }
@@ -426,10 +426,10 @@ private:
     };
 
     SkMask      fMask;
-    SkIRect     fClipRect;
+    SkIRect     fClipRect{};
     // we add 1 because add_aa_span can write (unchanged) 1 extra byte at the end, rather than
     // perform a test to see if stopAlpha != 0
-    uint32_t    fStorage[(kMAX_STORAGE >> 2) + 1];
+    uint32_t    fStorage[(kMAX_STORAGE >> 2) + 1]{};
 };
 
 MaskSuperBlitter::MaskSuperBlitter(SkBlitter* realBlitter, const SkIRect& ir,
@@ -684,7 +684,7 @@ void SkScan::AntiFillPath(const SkPath& path, const SkRegion& origClip,
     // If the intersection of the path bounds and the clip bounds
     // will overflow 32767 when << by SHIFT, we can't supersample,
     // so draw without antialiasing.
-    SkIRect clippedIR;
+    SkIRect clippedIR{};
     if (isInverse) {
        // If the path is an inverse fill, it's going to fill the entire
        // clip, and we care whether the entire clip exceeds our limits.

@@ -76,7 +76,7 @@ void ConditionVariable::Wait() {
 void ConditionVariable::TimedWait(const TimeDelta& max_time) {
   base::ThreadRestrictions::AssertWaitAllowed();
   int64_t usecs = max_time.InMicroseconds();
-  struct timespec relative_time;
+  struct timespec relative_time{};
   relative_time.tv_sec = usecs / Time::kMicrosecondsPerSecond;
   relative_time.tv_nsec =
       (usecs % Time::kMicrosecondsPerSecond) * Time::kNanosecondsPerMicrosecond;
@@ -90,7 +90,7 @@ void ConditionVariable::TimedWait(const TimeDelta& max_time) {
       &condition_, user_mutex_, &relative_time);
 #else
   // The timeout argument to pthread_cond_timedwait is in absolute time.
-  struct timespec absolute_time;
+  struct timespec absolute_time{};
 #if defined(OS_NACL)
   // See comment in constructor for why this is different in NaCl.
   struct timeval now;
@@ -98,7 +98,7 @@ void ConditionVariable::TimedWait(const TimeDelta& max_time) {
   absolute_time.tv_sec = now.tv_sec;
   absolute_time.tv_nsec = now.tv_usec * Time::kNanosecondsPerMicrosecond;
 #else
-  struct timespec now;
+  struct timespec now{};
   clock_gettime(CLOCK_MONOTONIC, &now);
   absolute_time.tv_sec = now.tv_sec;
   absolute_time.tv_nsec = now.tv_nsec;

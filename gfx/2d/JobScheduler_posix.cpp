@@ -44,7 +44,7 @@ public:
   }
 
 protected:
-  pthread_t mThread;
+  pthread_t mThread{};
 };
 
 void* ThreadCallback(void* threadData)

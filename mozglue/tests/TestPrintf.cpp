@@ -36,7 +36,7 @@ public:
 
 private:
 
-  char mBuffer[100];
+  char mBuffer[100]{};
   size_t mOut;
 };
 

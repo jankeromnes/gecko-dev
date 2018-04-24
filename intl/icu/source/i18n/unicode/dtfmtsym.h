@@ -645,116 +645,116 @@ private:
     /**
      * Abbreviated era strings. For example: "AD" and "BC".
      */
-    UnicodeString*  fEras;
-    int32_t         fErasCount;
+    UnicodeString*  fEras{};
+    int32_t         fErasCount{};
 
     /**
      * Era name strings. For example: "Anno Domini" and "Before Christ".
      */
-    UnicodeString*  fEraNames;
-    int32_t         fEraNamesCount;
+    UnicodeString*  fEraNames{};
+    int32_t         fEraNamesCount{};
 
     /**
      * Narrow era strings. For example: "A" and "B".
      */
-    UnicodeString*  fNarrowEras;
-    int32_t         fNarrowErasCount;
+    UnicodeString*  fNarrowEras{};
+    int32_t         fNarrowErasCount{};
 
     /**
      * Month strings. For example: "January", "February", etc.
      */
-    UnicodeString*  fMonths;
-    int32_t         fMonthsCount;
+    UnicodeString*  fMonths{};
+    int32_t         fMonthsCount{};
 
     /**
      * Short month strings. For example: "Jan", "Feb", etc.
      */
-    UnicodeString*  fShortMonths;
-    int32_t         fShortMonthsCount;
+    UnicodeString*  fShortMonths{};
+    int32_t         fShortMonthsCount{};
 
     /**
      * Narrow month strings. For example: "J", "F", etc.
      */
-    UnicodeString*  fNarrowMonths;
-    int32_t         fNarrowMonthsCount;
+    UnicodeString*  fNarrowMonths{};
+    int32_t         fNarrowMonthsCount{};
 
     /**
      * Standalone Month strings. For example: "January", "February", etc.
      */
-    UnicodeString*  fStandaloneMonths;
-    int32_t         fStandaloneMonthsCount;
+    UnicodeString*  fStandaloneMonths{};
+    int32_t         fStandaloneMonthsCount{};
 
     /**
      * Standalone Short month strings. For example: "Jan", "Feb", etc.
      */
-    UnicodeString*  fStandaloneShortMonths;
-    int32_t         fStandaloneShortMonthsCount;
+    UnicodeString*  fStandaloneShortMonths{};
+    int32_t         fStandaloneShortMonthsCount{};
 
     /**
      * Standalone Narrow month strings. For example: "J", "F", etc.
      */
-    UnicodeString*  fStandaloneNarrowMonths;
-    int32_t         fStandaloneNarrowMonthsCount;
+    UnicodeString*  fStandaloneNarrowMonths{};
+    int32_t         fStandaloneNarrowMonthsCount{};
 
     /**
      * CLDR-style format wide weekday strings. For example: "Sunday", "Monday", etc.
      */
-    UnicodeString*  fWeekdays;
-    int32_t         fWeekdaysCount;
+    UnicodeString*  fWeekdays{};
+    int32_t         fWeekdaysCount{};
 
     /**
      * CLDR-style format abbreviated (not short) weekday strings. For example: "Sun", "Mon", etc.
      */
-    UnicodeString*  fShortWeekdays;
-    int32_t         fShortWeekdaysCount;
+    UnicodeString*  fShortWeekdays{};
+    int32_t         fShortWeekdaysCount{};
 
     /**
      * CLDR-style format short weekday strings. For example: "Su", "Mo", etc.
      */
-    UnicodeString*  fShorterWeekdays;
-    int32_t         fShorterWeekdaysCount;
+    UnicodeString*  fShorterWeekdays{};
+    int32_t         fShorterWeekdaysCount{};
 
     /**
      * CLDR-style format narrow weekday strings. For example: "S", "M", etc.
      */
-    UnicodeString*  fNarrowWeekdays;
-    int32_t         fNarrowWeekdaysCount;
+    UnicodeString*  fNarrowWeekdays{};
+    int32_t         fNarrowWeekdaysCount{};
 
     /**
      * CLDR-style standalone wide weekday strings. For example: "Sunday", "Monday", etc.
      */
-    UnicodeString*  fStandaloneWeekdays;
-    int32_t         fStandaloneWeekdaysCount;
+    UnicodeString*  fStandaloneWeekdays{};
+    int32_t         fStandaloneWeekdaysCount{};
 
     /**
      * CLDR-style standalone abbreviated (not short) weekday strings. For example: "Sun", "Mon", etc.
      */
-    UnicodeString*  fStandaloneShortWeekdays;
-    int32_t         fStandaloneShortWeekdaysCount;
+    UnicodeString*  fStandaloneShortWeekdays{};
+    int32_t         fStandaloneShortWeekdaysCount{};
 
     /**
      * CLDR-style standalone short weekday strings. For example: "Su", "Mo", etc.
      */
-    UnicodeString*  fStandaloneShorterWeekdays;
-    int32_t         fStandaloneShorterWeekdaysCount;
+    UnicodeString*  fStandaloneShorterWeekdays{};
+    int32_t         fStandaloneShorterWeekdaysCount{};
 
     /**
      * Standalone Narrow weekday strings. For example: "Sun", "Mon", etc.
      */
-    UnicodeString*  fStandaloneNarrowWeekdays;
-    int32_t         fStandaloneNarrowWeekdaysCount;
+    UnicodeString*  fStandaloneNarrowWeekdays{};
+    int32_t         fStandaloneNarrowWeekdaysCount{};
 
     /**
      * Ampm strings. For example: "AM" and "PM".
      */
-    UnicodeString*  fAmPms;
-    int32_t         fAmPmsCount;
+    UnicodeString*  fAmPms{};
+    int32_t         fAmPmsCount{};
 
     /**
      * Narrow Ampm strings. For example: "a" and "p".
      */
-    UnicodeString*  fNarrowAmPms;
-    int32_t         fNarrowAmPmsCount;
+    UnicodeString*  fNarrowAmPms{};
+    int32_t         fNarrowAmPmsCount{};
 
     /**
      * Time separator string. For example: ":".
@@ -764,48 +764,48 @@ private:
     /**
      * Quarter strings. For example: "1st quarter", "2nd quarter", etc.
      */
-    UnicodeString  *fQuarters;
-    int32_t         fQuartersCount;
+    UnicodeString  *fQuarters{};
+    int32_t         fQuartersCount{};
 
     /**
      * Short quarters. For example: "Q1", "Q2", etc.
      */
-    UnicodeString  *fShortQuarters;
-    int32_t         fShortQuartersCount;
+    UnicodeString  *fShortQuarters{};
+    int32_t         fShortQuartersCount{};
 
     /**
      * Standalone quarter strings. For example: "1st quarter", "2nd quarter", etc.
      */
-    UnicodeString  *fStandaloneQuarters;
-    int32_t         fStandaloneQuartersCount;
+    UnicodeString  *fStandaloneQuarters{};
+    int32_t         fStandaloneQuartersCount{};
 
     /**
      * Standalone short quarter strings. For example: "Q1", "Q2", etc.
      */
-    UnicodeString  *fStandaloneShortQuarters;
-    int32_t         fStandaloneShortQuartersCount;
+    UnicodeString  *fStandaloneShortQuarters{};
+    int32_t         fStandaloneShortQuartersCount{};
 
     /**
      * All leap month patterns, for example "{0}bis".
      */
-    UnicodeString  *fLeapMonthPatterns;
-    int32_t         fLeapMonthPatternsCount;
+    UnicodeString  *fLeapMonthPatterns{};
+    int32_t         fLeapMonthPatternsCount{};
 
     /**
      * Cyclic year names, for example: "jia-zi", "yi-chou", ... "gui-hai";
      * currently we only have data for format/abbreviated.
      * For the others, just get from format/abbreviated, ignore set.
      */
-    UnicodeString  *fShortYearNames;
-    int32_t         fShortYearNamesCount;
+    UnicodeString  *fShortYearNames{};
+    int32_t         fShortYearNamesCount{};
 
     /**
      * Cyclic zodiac names, for example "Rat", "Ox", "Tiger", etc.;
      * currently we only have data for format/abbreviated.
      * For the others, just get from format/abbreviated, ignore set.
      */
-    UnicodeString  *fShortZodiacNames;
-    int32_t         fShortZodiacNamesCount;
+    UnicodeString  *fShortZodiacNames{};
+    int32_t         fShortZodiacNamesCount{};
 
     /**
      * Localized names of time zones in this locale.  This is a
@@ -844,10 +844,10 @@ private:
      * instance.  But we still need to support the old way of customizing
      * localized zone names, so we keep this field for the purpose.
      */
-    UnicodeString   **fZoneStrings;         // Zone string array set by setZoneStrings
-    UnicodeString   **fLocaleZoneStrings;   // Zone string array created by the locale
-    int32_t         fZoneStringsRowCount;
-    int32_t         fZoneStringsColCount;
+    UnicodeString   **fZoneStrings{};         // Zone string array set by setZoneStrings
+    UnicodeString   **fLocaleZoneStrings{};   // Zone string array created by the locale
+    int32_t         fZoneStringsRowCount{};
+    int32_t         fZoneStringsColCount{};
 
     Locale                  fZSFLocale;         // Locale used for getting ZoneStringFormat
 
@@ -861,50 +861,50 @@ private:
      * whether to titlecase for uiListOrMenu context, the second indicates whether to
      * titlecase for stand-alone context.
      */
-     UBool fCapitalization[kCapContextUsageTypeCount][2];
+     UBool fCapitalization[kCapContextUsageTypeCount][2]{};
 
     /**
      * Abbreviated (== short) day period strings.
      */
-    UnicodeString  *fAbbreviatedDayPeriods;
-    int32_t         fAbbreviatedDayPeriodsCount;
+    UnicodeString  *fAbbreviatedDayPeriods{};
+    int32_t         fAbbreviatedDayPeriodsCount{};
 
     /**
      * Wide day period strings.
      */
-    UnicodeString  *fWideDayPeriods;
-    int32_t         fWideDayPeriodsCount;
+    UnicodeString  *fWideDayPeriods{};
+    int32_t         fWideDayPeriodsCount{};
 
     /**
      * Narrow day period strings.
      */
-    UnicodeString  *fNarrowDayPeriods;
-    int32_t         fNarrowDayPeriodsCount;
+    UnicodeString  *fNarrowDayPeriods{};
+    int32_t         fNarrowDayPeriodsCount{};
 
     /**
      * Stand-alone abbreviated (== short) day period strings.
      */
-    UnicodeString  *fStandaloneAbbreviatedDayPeriods;
-    int32_t         fStandaloneAbbreviatedDayPeriodsCount;
+    UnicodeString  *fStandaloneAbbreviatedDayPeriods{};
+    int32_t         fStandaloneAbbreviatedDayPeriodsCount{};
 
     /**
      * Stand-alone wide day period strings.
      */
-    UnicodeString  *fStandaloneWideDayPeriods;
-    int32_t         fStandaloneWideDayPeriodsCount;
+    UnicodeString  *fStandaloneWideDayPeriods{};
+    int32_t         fStandaloneWideDayPeriodsCount{};
 
     /**
      * Stand-alone narrow day period strings.
      */
-    UnicodeString  *fStandaloneNarrowDayPeriods;
-    int32_t         fStandaloneNarrowDayPeriodsCount;
+    UnicodeString  *fStandaloneNarrowDayPeriods{};
+    int32_t         fStandaloneNarrowDayPeriodsCount{};
 
 private:
     /** valid/actual locale information 
      *  these are always ICU locales, so the length should not be a problem
      */
-    char validLocale[ULOC_FULLNAME_CAPACITY];
-    char actualLocale[ULOC_FULLNAME_CAPACITY];
+    char validLocale[ULOC_FULLNAME_CAPACITY]{};
+    char actualLocale[ULOC_FULLNAME_CAPACITY]{};
 
     DateFormatSymbols(); // default constructor not implemented
 

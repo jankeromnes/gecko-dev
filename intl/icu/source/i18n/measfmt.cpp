@@ -109,10 +109,10 @@ public:
      * - UMEASFMT_WIDTH_COUNT: initial value, just fall back to root
      * - UMEASFMT_WIDTH_WIDE/SHORT/NARROW: sideways alias for missing data
      */
-    UMeasureFormatWidth widthFallback[WIDTH_INDEX_COUNT];
+    UMeasureFormatWidth widthFallback[WIDTH_INDEX_COUNT]{};
     /** Measure unit -> format width -> array of patterns ("{0} meters") (plurals + PER_UNIT_INDEX) */
-    SimpleFormatter* patterns[MEAS_UNIT_COUNT][WIDTH_INDEX_COUNT][PATTERN_COUNT];
-    const UChar* dnams[MEAS_UNIT_COUNT][WIDTH_INDEX_COUNT];
+    SimpleFormatter* patterns[MEAS_UNIT_COUNT][WIDTH_INDEX_COUNT][PATTERN_COUNT]{};
+    const UChar* dnams[MEAS_UNIT_COUNT][WIDTH_INDEX_COUNT]{};
     SimpleFormatter perFormatters[WIDTH_INDEX_COUNT];
 
     MeasureFormatCacheData();
@@ -147,7 +147,7 @@ public:
     }
 
 private:
-    NumberFormat* currencyFormats[WIDTH_INDEX_COUNT];
+    NumberFormat* currencyFormats[WIDTH_INDEX_COUNT]{};
     NumberFormat* integerFormat;
     NumericDateFormatters* numericDateFormatters;
 

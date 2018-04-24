@@ -89,8 +89,8 @@ class RtpFecTest : public ::testing::Test {
   ForwardErrorCorrection::ReceivedPacketList received_packets_;
   ForwardErrorCorrection::RecoveredPacketList recovered_packets_;
 
-  int media_loss_mask_[kUlpfecMaxMediaPackets];
-  int fec_loss_mask_[kUlpfecMaxMediaPackets];
+  int media_loss_mask_[kUlpfecMaxMediaPackets]{};
+  int fec_loss_mask_[kUlpfecMaxMediaPackets]{};
 };
 
 template <typename ForwardErrorCorrectionType>

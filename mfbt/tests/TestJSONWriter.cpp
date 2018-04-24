@@ -18,7 +18,7 @@ using mozilla::MakeUnique;
 struct StringWriteFunc : public JSONWriteFunc
 {
   const static size_t kLen = 100000;
-  char mBuf[kLen];
+  char mBuf[kLen]{};
   char* mPtr;
 
   StringWriteFunc() : mPtr(mBuf) {}

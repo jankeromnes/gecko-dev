@@ -255,7 +255,7 @@ public:
 
 private:
     Locale fLocale;
-    char fRegion[ULOC_COUNTRY_CAPACITY];
+    char fRegion[ULOC_COUNTRY_CAPACITY]{};
 };
 
 U_NAMESPACE_END

@@ -2209,7 +2209,7 @@ private:
     void copyHashForAffixPattern(const Hashtable* source,
                                  Hashtable* target, UErrorCode& status);
 
-    DecimalFormatImpl *fImpl;
+    DecimalFormatImpl *fImpl{};
 
     /**
      * Constants.
@@ -2224,7 +2224,7 @@ private:
 
     // style is only valid when decimal formatter is constructed by
     // DecimalFormat(pattern, decimalFormatSymbol, style)
-    int fStyle;
+    int fStyle{};
 
 
     // Affix pattern set for currency.
@@ -2240,17 +2240,17 @@ private:
     // For example, if 2 currency plural patterns are the same, only one pattern
     // is included in the set. When parsing, we do not check whether the plural
     // count match or not.
-    Hashtable* fAffixPatternsForCurrency;
+    Hashtable* fAffixPatternsForCurrency{};
 
     // Information needed for DecimalFormat to format/parse currency plural.
-    CurrencyPluralInfo* fCurrencyPluralInfo;
+    CurrencyPluralInfo* fCurrencyPluralInfo{};
 
 #if UCONFIG_HAVE_PARSEALLINPUT
     UNumberFormatAttributeValue fParseAllInput;
 #endif
 
     // Decimal Format Static Sets singleton.
-    const DecimalFormatStaticSets *fStaticSets;
+    const DecimalFormatStaticSets *fStaticSets{};
 
 protected:
 

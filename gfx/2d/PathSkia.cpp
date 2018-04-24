@@ -17,7 +17,7 @@ namespace gfx {
 PathBuilderSkia::PathBuilderSkia(const Matrix& aTransform, const SkPath& aPath, FillRule aFillRule)
   : mPath(aPath)
 {
-  SkMatrix matrix;
+  SkMatrix matrix{};
   GfxMatrixToSkiaMatrix(aTransform, matrix);
   mPath.transform(matrix);
   SetFillRule(aFillRule);

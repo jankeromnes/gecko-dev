@@ -53,7 +53,7 @@ public:
     return storage;
   }
 private:
-  char storage[CUBEB_LOG_MESSAGE_MAX_SIZE];
+  char storage[CUBEB_LOG_MESSAGE_MAX_SIZE]{};
 };
 
 /** Lock-free asynchronous logger, made so that logging from a
@@ -83,7 +83,7 @@ public:
         Sleep(CUBEB_LOG_BATCH_PRINT_INTERVAL_MS);
 #else
         timespec sleep_duration = sleep_for;
-        timespec remainder;
+        timespec remainder{};
         do {
           if (nanosleep(&sleep_duration, &remainder) == 0 ||
               errno != EINTR) {

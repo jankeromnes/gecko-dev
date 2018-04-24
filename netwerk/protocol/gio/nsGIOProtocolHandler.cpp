@@ -198,7 +198,7 @@ class nsGIOInputStream final : public nsIInputStream
     bool                  mDirOpen;
     MountOperationResult  mMountRes;
     mozilla::Monitor      mMonitorMountInProgress;
-    gint                  mMountErrorCode;
+    gint                  mMountErrorCode{};
 };
 /**
  * Set result of mount operation and notify monitor waiting for results.

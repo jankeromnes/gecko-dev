@@ -283,7 +283,7 @@ private:
   /* Buffer representation of mRawBuf */
   Buffer mBuf;
   /* read() buffer */
-  char mRawBuf[4096];
+  char mRawBuf[4096]{};
 };
 
 MOZ_BEGIN_EXTERN_C

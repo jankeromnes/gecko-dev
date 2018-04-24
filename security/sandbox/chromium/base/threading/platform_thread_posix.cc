@@ -174,7 +174,7 @@ void PlatformThread::YieldCurrentThread() {
 
 // static
 void PlatformThread::Sleep(TimeDelta duration) {
-  struct timespec sleep_time, remaining;
+  struct timespec sleep_time{}, remaining{};
 
   // Break the duration into seconds and nanoseconds.
   // NOTE: TimeDelta's microseconds are int64s while timespec's

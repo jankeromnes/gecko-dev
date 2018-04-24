@@ -986,7 +986,7 @@ class BASE_EXPORT LogMessage {
 
   LogSeverity severity_;
   std::ostringstream stream_;
-  size_t message_start_;  // Offset of the start of the message (past prefix
+  size_t message_start_{};  // Offset of the start of the message (past prefix
                           // info).
   // The file and line information passed in to the constructor.
   const char* file_;

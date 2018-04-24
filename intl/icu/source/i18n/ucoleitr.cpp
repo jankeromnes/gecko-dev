@@ -53,7 +53,7 @@ U_NAMESPACE_BEGIN
 
 struct RCEBuffer
 {
-    RCEI    defaultBuffer[DEFAULT_BUFFER_SIZE];
+    RCEI    defaultBuffer[DEFAULT_BUFFER_SIZE]{};
     RCEI   *buffer;
     int32_t bufferIndex;
     int32_t bufferSize;

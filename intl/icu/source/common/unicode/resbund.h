@@ -483,7 +483,7 @@ public:
 private:
     ResourceBundle(); // default constructor not implemented
 
-    UResourceBundle *fResource;
+    UResourceBundle *fResource{};
     void constructForLocale(const UnicodeString& path, const Locale& locale, UErrorCode& error);
     Locale *fLocale;
 };

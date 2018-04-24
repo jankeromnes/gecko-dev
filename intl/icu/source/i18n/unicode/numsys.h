@@ -185,9 +185,9 @@ public:
 
 private:
     UnicodeString   desc;
-    int32_t         radix;
-    UBool           algorithmic;
-    char            name[NUMSYS_NAME_CAPACITY+1];
+    int32_t         radix{};
+    UBool           algorithmic{};
+    char            name[NUMSYS_NAME_CAPACITY+1]{};
 
     void setRadix(int32_t radix);
 

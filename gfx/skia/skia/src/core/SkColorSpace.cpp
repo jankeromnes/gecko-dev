@@ -20,11 +20,11 @@ bool SkColorSpacePrimaries::toXYZD50(SkMatrix44* toXYZ_D50) const {
     }
 
     // First, we need to convert xy values (primaries) to XYZ.
-    SkMatrix primaries;
+    SkMatrix primaries{};
     primaries.setAll(             fRX,              fGX,              fBX,
                                   fRY,              fGY,              fBY,
                      1.0f - fRX - fRY, 1.0f - fGX - fGY, 1.0f - fBX - fBY);
-    SkMatrix primariesInv;
+    SkMatrix primariesInv{};
     if (!primaries.invert(&primariesInv)) {
         return false;
     }
@@ -35,7 +35,7 @@ bool SkColorSpacePrimaries::toXYZD50(SkMatrix44* toXYZ_D50) const {
     XYZ.fX = primariesInv[0] * wXYZ.fX + primariesInv[1] * wXYZ.fY + primariesInv[2] * wXYZ.fZ;
     XYZ.fY = primariesInv[3] * wXYZ.fX + primariesInv[4] * wXYZ.fY + primariesInv[5] * wXYZ.fZ;
     XYZ.fZ = primariesInv[6] * wXYZ.fX + primariesInv[7] * wXYZ.fY + primariesInv[8] * wXYZ.fZ;
-    SkMatrix toXYZ;
+    SkMatrix toXYZ{};
     toXYZ.setAll(XYZ.fX,   0.0f,   0.0f,
                    0.0f, XYZ.fY,   0.0f,
                    0.0f,   0.0f, XYZ.fZ);
@@ -47,7 +47,7 @@ bool SkColorSpacePrimaries::toXYZD50(SkMatrix44* toXYZ_D50) const {
     // Calculate the chromatic adaptation matrix.  We will use the Bradford method, thus
     // the matrices below.  The Bradford method is used by Adobe and is widely considered
     // to be the best.
-    SkMatrix mA, mAInv;
+    SkMatrix mA{}, mAInv{};
     mA.setAll(+0.8951f, +0.2664f, -0.1614f,
               -0.7502f, +1.7135f, +0.0367f,
               +0.0389f, -0.0685f, +1.0296f);
@@ -64,7 +64,7 @@ bool SkColorSpacePrimaries::toXYZD50(SkMatrix44* toXYZ_D50) const {
     dstCone.fY = mA[3] * wXYZD50.fX + mA[4] * wXYZD50.fY + mA[5] * wXYZD50.fZ;
     dstCone.fZ = mA[6] * wXYZD50.fX + mA[7] * wXYZD50.fY + mA[8] * wXYZD50.fZ;
 
-    SkMatrix DXToD50;
+    SkMatrix DXToD50{};
     DXToD50.setIdentity();
     DXToD50[0] = dstCone.fX / srcCone.fX;
     DXToD50[4] = dstCone.fY / srcCone.fY;
@@ -309,7 +309,7 @@ struct ColorSpaceHeader {
 
     static ColorSpaceHeader Pack(Version version, uint8_t named, uint8_t gammaNamed, uint8_t flags)
     {
-        ColorSpaceHeader header;
+        ColorSpaceHeader header{};
 
         SkASSERT(k0_Version == version);
         header.fVersion = (uint8_t) version;
@@ -368,7 +368,7 @@ size_t SkColorSpace::writeToMemory(void* memory) const {
                 return sizeof(ColorSpaceHeader) + 12 * sizeof(float);
             }
             default: {
-                SkColorSpaceTransferFn transferFn;
+                SkColorSpaceTransferFn transferFn{};
                 SkAssertResult(this->isNumericalTransferFn(&transferFn));
 
                 if (memory) {
@@ -481,7 +481,7 @@ sk_sp<SkColorSpace> SkColorSpace::Deserialize(const void* data, size_t length) {
                 return nullptr;
             }
 
-            SkColorSpaceTransferFn transferFn;
+            SkColorSpaceTransferFn transferFn{};
             transferFn.fA = *(((const float*) data) + 0);
             transferFn.fB = *(((const float*) data) + 1);
             transferFn.fC = *(((const float*) data) + 2);

@@ -238,13 +238,13 @@ ScaledFontFontconfig::GetWRFontInstanceOptions(Maybe<wr::FontInstanceOptions>* a
                                                Maybe<wr::FontInstancePlatformOptions>* aOutPlatformOptions,
                                                std::vector<FontVariation>* aOutVariations)
 {
-  wr::FontInstanceOptions options;
+  wr::FontInstanceOptions options{};
   options.render_mode = wr::FontRenderMode::Alpha;
   options.subpx_dir = wr::SubpixelDirection::Horizontal;
   options.flags = 0;
   options.bg_color = wr::ToColorU(Color());
 
-  wr::FontInstancePlatformOptions platformOptions;
+  wr::FontInstancePlatformOptions platformOptions{};
   platformOptions.lcd_filter = wr::FontLCDFilter::Legacy;
   platformOptions.hinting = wr::FontHinting::Normal;
 

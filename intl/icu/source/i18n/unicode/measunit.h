@@ -1323,9 +1323,9 @@ class U_I18N_API MeasureUnit: public UObject {
 #endif  /* U_HIDE_INTERNAL_API */
 
 private:
-    int32_t fTypeId;
-    int32_t fSubTypeId;
-    char fCurrency[4];
+    int32_t fTypeId{};
+    int32_t fSubTypeId{};
+    char fCurrency[4]{};
 
     MeasureUnit(int32_t typeId, int32_t subTypeId) : fTypeId(typeId), fSubTypeId(subTypeId) {
         fCurrency[0] = 0;

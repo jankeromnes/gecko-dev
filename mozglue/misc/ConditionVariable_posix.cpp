@@ -138,16 +138,16 @@ mozilla::detail::ConditionVariableImpl::wait_for(MutexImpl& lock,
                           : a_rel_time;
 
   // Convert the duration to a timespec.
-  struct timespec rel_ts;
+  struct timespec rel_ts{};
   rel_ts.tv_sec = static_cast<time_t>(rel_time.ToSeconds());
   rel_ts.tv_nsec = static_cast<uint64_t>(rel_time.ToMicroseconds() * 1000.0) % NanoSecPerSec;
 
 #ifdef CV_USE_CLOCK_API
-  struct timespec now_ts;
+  struct timespec now_ts{};
   r = clock_gettime(WhichClock, &now_ts);
   MOZ_RELEASE_ASSERT(!r);
 
-  struct timespec abs_ts;
+  struct timespec abs_ts{};
   moz_timespecadd(&now_ts, &rel_ts, &abs_ts);
 
   r = pthread_cond_timedwait(ptCond, ptMutex, &abs_ts);

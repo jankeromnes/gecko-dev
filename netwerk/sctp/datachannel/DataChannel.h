@@ -308,15 +308,15 @@ private:
   // Exists solely for proxying release of the TransportFlow to the STS thread
   static void ReleaseTransportFlow(const RefPtr<TransportFlow>& aFlow) {}
 
-  bool mSendInterleaved;
-  bool mPpidFragmentation;
-  bool mMaxMessageSizeSet;
-  uint64_t mMaxMessageSize;
+  bool mSendInterleaved{};
+  bool mPpidFragmentation{};
+  bool mMaxMessageSizeSet{};
+  uint64_t mMaxMessageSize{};
 
   // Data:
   // NOTE: while this array will auto-expand, increases in the number of
   // channels available from the stack must be negotiated!
-  bool mAllocateEven;
+  bool mAllocateEven{};
   AutoTArray<RefPtr<DataChannel>,16> mStreams;
   uint32_t mCurrentStream;
   nsDeque mPending; // Holds addref'ed DataChannel's -- careful!

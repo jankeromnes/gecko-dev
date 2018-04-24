@@ -239,8 +239,8 @@ SandboxReporter::ThreadMain(void)
 {
   for (;;) {
     SandboxReport rep;
-    struct iovec iov;
-    struct msghdr msg;
+    struct iovec iov{};
+    struct msghdr msg{};
 
     iov.iov_base = &rep;
     iov.iov_len = sizeof(rep);
