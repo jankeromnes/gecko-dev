@@ -39,19 +39,14 @@ TaiwanCalendar::TaiwanCalendar(const Locale& aLocale, UErrorCode& success)
 }
 
 TaiwanCalendar::~TaiwanCalendar()
-{
-}
+= default;
 
 TaiwanCalendar::TaiwanCalendar(const TaiwanCalendar& source)
-: GregorianCalendar(source)
-{
-}
+: 
+= default;
 
 TaiwanCalendar& TaiwanCalendar::operator= ( const TaiwanCalendar& right)
-{
-    GregorianCalendar::operator=(right);
-    return *this;
-}
+= default;
 
 Calendar* TaiwanCalendar::clone(void) const
 {

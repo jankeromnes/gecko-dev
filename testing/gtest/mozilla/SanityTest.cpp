@@ -16,7 +16,7 @@ TEST(MozillaGTestSanity, Runs) {
 namespace {
 class TestMock {
 public:
-  TestMock() {}
+  TestMock() = default;
   MOCK_METHOD0(MockedCall, void());
 };
 } // namespace

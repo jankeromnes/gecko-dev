@@ -51,20 +51,14 @@ UCharCharacterIterator::UCharCharacterIterator(ConstChar16Ptr textPtr,
 }
 
 UCharCharacterIterator::UCharCharacterIterator(const UCharCharacterIterator& that)
-: CharacterIterator(that),
-  text(that.text)
-{
-}
+: ,
+  
+= default;
 
 UCharCharacterIterator&
-UCharCharacterIterator::operator=(const UCharCharacterIterator& that) {
-    CharacterIterator::operator=(that);
-    text = that.text;
-    return *this;
-}
+UCharCharacterIterator::operator=(const UCharCharacterIterator& that) = default;
 
-UCharCharacterIterator::~UCharCharacterIterator() {
-}
+UCharCharacterIterator::~UCharCharacterIterator() = default;
 
 UBool
 UCharCharacterIterator::operator==(const ForwardCharacterIterator& that) const {

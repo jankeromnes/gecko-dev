@@ -24,7 +24,7 @@
 
 U_NAMESPACE_BEGIN
 
-SortKeyByteSink::~SortKeyByteSink() {}
+SortKeyByteSink::~SortKeyByteSink() = default;
 
 void
 SortKeyByteSink::Append(const char *bytes, int32_t n) {
@@ -91,7 +91,7 @@ namespace {
 class SortKeyLevel : public UMemory {
 public:
     SortKeyLevel() : len(0), ok(TRUE) {}
-    ~SortKeyLevel() {}
+    ~SortKeyLevel() = default;
 
     /** @return FALSE if memory allocation failed */
     UBool isOk() const { return ok; }
@@ -200,7 +200,7 @@ UBool SortKeyLevel::ensureCapacity(int32_t appendCapacity) {
 
 }  // namespace
 
-CollationKeys::LevelCallback::~LevelCallback() {}
+CollationKeys::LevelCallback::~LevelCallback() = default;
 
 UBool
 CollationKeys::LevelCallback::needToWrite(Collation::Level /*level*/) { return TRUE; }

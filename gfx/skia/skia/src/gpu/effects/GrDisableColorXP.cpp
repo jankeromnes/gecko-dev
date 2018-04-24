@@ -44,7 +44,7 @@ class GLDisableColorXP : public GrGLSLXferProcessor {
 public:
     GLDisableColorXP(const GrProcessor&) {}
 
-    ~GLDisableColorXP() override {}
+    ~GLDisableColorXP() override = default;
 
     static void GenKey(const GrProcessor&, const GrShaderCaps&, GrProcessorKeyBuilder*) {}
 

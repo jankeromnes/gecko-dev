@@ -57,13 +57,11 @@ DangiCalendar::DangiCalendar(const Locale& aLocale, UErrorCode& success)
 }
 
 DangiCalendar::DangiCalendar (const DangiCalendar& other) 
-: ChineseCalendar(other)
-{
-}
+: 
+= default;
 
 DangiCalendar::~DangiCalendar()
-{
-}
+= default;
 
 Calendar*
 DangiCalendar::clone() const

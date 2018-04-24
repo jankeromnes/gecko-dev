@@ -41,7 +41,7 @@ class ProbeControllerTest : public ::testing::Test {
   ProbeControllerTest() : clock_(100000000L) {
     probe_controller_.reset(new ProbeController(&pacer_, &clock_));
   }
-  ~ProbeControllerTest() override {}
+  ~ProbeControllerTest() override = default;
 
   SimulatedClock clock_;
   NiceMock<MockPacedSender> pacer_;

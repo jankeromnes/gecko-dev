@@ -34,7 +34,7 @@ const uint16_t END_ENTITY_MAX_LIFETIME_IN_DAYS = 10;
 class OCSPTestTrustDomain : public DefaultCryptoTrustDomain
 {
 public:
-  OCSPTestTrustDomain() { }
+  OCSPTestTrustDomain() = default;
 
   Result GetCertTrust(EndEntityOrCA endEntityOrCA, const CertPolicyId&,
                       Input, /*out*/ TrustLevel& trustLevel)

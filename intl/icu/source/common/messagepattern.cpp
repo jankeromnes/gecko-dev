@@ -90,7 +90,7 @@ static const UChar kOther[]={  // "other"
 template<typename T, int32_t stackCapacity>
 class MessagePatternList : public UMemory {
 public:
-    MessagePatternList() {}
+    MessagePatternList() = default;
     void copyFrom(const MessagePatternList<T, stackCapacity> &other,
                   int32_t length,
                   UErrorCode &errorCode);

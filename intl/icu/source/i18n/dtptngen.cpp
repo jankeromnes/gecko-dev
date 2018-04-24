@@ -489,7 +489,7 @@ namespace {
 
 struct AllowedHourFormatsSink : public ResourceSink {
     // Initialize sub-sinks.
-    AllowedHourFormatsSink() {}
+    AllowedHourFormatsSink() = default;
     virtual ~AllowedHourFormatsSink();
 
     virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
@@ -550,7 +550,7 @@ struct AllowedHourFormatsSink : public ResourceSink {
 
 }  // namespace
 
-AllowedHourFormatsSink::~AllowedHourFormatsSink() {}
+AllowedHourFormatsSink::~AllowedHourFormatsSink() = default;
 
 U_CFUNC void U_CALLCONV DateTimePatternGenerator::loadAllowedHourFormatsData(UErrorCode &status) {
     if (U_FAILURE(status)) { return; }
@@ -911,9 +911,9 @@ struct DateTimePatternGenerator::AvailableFormatsSink : public ResourceSink {
 };
 
 // Virtual destructors must be defined out of line.
-DateTimePatternGenerator::AppendItemFormatsSink::~AppendItemFormatsSink() {}
-DateTimePatternGenerator::AppendItemNamesSink::~AppendItemNamesSink() {}
-DateTimePatternGenerator::AvailableFormatsSink::~AvailableFormatsSink() {}
+DateTimePatternGenerator::AppendItemFormatsSink::~AppendItemFormatsSink() = default;
+DateTimePatternGenerator::AppendItemNamesSink::~AppendItemNamesSink() = default;
+DateTimePatternGenerator::AvailableFormatsSink::~AvailableFormatsSink() = default;
 
 void
 DateTimePatternGenerator::addCLDRData(const Locale& locale, UErrorCode& errorCode) {
@@ -1939,10 +1939,9 @@ PatternMap::getDuplicateElem(
 
 }  // PatternMap::getDuplicateElem
 
-DateTimeMatcher::DateTimeMatcher(void) {
-}
+DateTimeMatcher::DateTimeMatcher(void) = default;
 
-DateTimeMatcher::~DateTimeMatcher() {}
+DateTimeMatcher::~DateTimeMatcher() = default;
 
 DateTimeMatcher::DateTimeMatcher(const DateTimeMatcher& other) {
     copyFrom(other.skeleton);
@@ -2098,8 +2097,7 @@ FormatParser::FormatParser () {
 }
 
 
-FormatParser::~FormatParser () {
-}
+FormatParser::~FormatParser () = default;
 
 
 // Find the next token with the starting position and length
@@ -2236,7 +2234,7 @@ FormatParser::isPatternSeparator(UnicodeString& field) {
     return TRUE;
 }
 
-DistanceInfo::~DistanceInfo() {}
+DistanceInfo::~DistanceInfo() = default;
 
 void
 DistanceInfo::setTo(DistanceInfo &other) {
@@ -2407,8 +2405,7 @@ UChar SkeletonFields::getFirstChar() const {
 }
 
 
-PtnSkeleton::PtnSkeleton() {
-}
+PtnSkeleton::PtnSkeleton() = default;
 
 PtnSkeleton::PtnSkeleton(const PtnSkeleton& other) {
     copyFrom(other);
@@ -2464,8 +2461,7 @@ PtnSkeleton::getFirstChar() const {
     return baseOriginal.getFirstChar();
 }
 
-PtnSkeleton::~PtnSkeleton() {
-}
+PtnSkeleton::~PtnSkeleton() = default;
 
 PtnElem::PtnElem(const UnicodeString &basePat, const UnicodeString &pat) :
 basePattern(basePat),

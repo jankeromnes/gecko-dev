@@ -271,8 +271,7 @@ GregorianCalendar::GregorianCalendar(int32_t year, int32_t month, int32_t date,
 // -------------------------------------
 
 GregorianCalendar::~GregorianCalendar()
-{
-}
+= default;
 
 // -------------------------------------
 

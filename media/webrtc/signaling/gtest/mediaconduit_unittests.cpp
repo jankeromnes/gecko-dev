@@ -48,12 +48,10 @@ public:
   static const unsigned int PLAYOUT_SAMPLE_LENGTH; //default is 160
 
   AudioSendAndReceive()
-  {
-  }
+  = default;
 
   ~AudioSendAndReceive()
-  {
-  }
+  = default;
 
  void Init(RefPtr<mozilla::AudioSessionConduit> aSession,
            RefPtr<mozilla::AudioSessionConduit> aOtherSession,
@@ -286,8 +284,7 @@ public:
   }
 
   ~WebrtcMediaTransport()
-  {
-  }
+  = default;
 
   virtual nsresult SendRtpPacket(const uint8_t* data, size_t len)
   {

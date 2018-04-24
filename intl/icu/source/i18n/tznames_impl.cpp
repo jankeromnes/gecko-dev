@@ -165,8 +165,7 @@ CharacterNode::addValue(void *value, UObjectDeleter *valueDeleter, UErrorCode &s
 // ---------------------------------------------------
 // TextTrieMapSearchResultHandler class implementation
 // ---------------------------------------------------
-TextTrieMapSearchResultHandler::~TextTrieMapSearchResultHandler(){
-}
+TextTrieMapSearchResultHandler::~TextTrieMapSearchResultHandler()= default;
 
 // ---------------------------------------------------
 // TextTrieMap class implementation
@@ -840,7 +839,7 @@ struct ZNames::ZNamesLoader : public ResourceSink {
     }
 };
 
-ZNames::ZNamesLoader::~ZNamesLoader() {}
+ZNames::ZNamesLoader::~ZNamesLoader() = default;
 
 
 // ---------------------------------------------------
@@ -2146,8 +2145,7 @@ TZDBTimeZoneNames::TZDBTimeZoneNames(const Locale& locale)
     }
 }
 
-TZDBTimeZoneNames::~TZDBTimeZoneNames() {
-}
+TZDBTimeZoneNames::~TZDBTimeZoneNames() = default;
 
 UBool
 TZDBTimeZoneNames::operator==(const TimeZoneNames& other) const {

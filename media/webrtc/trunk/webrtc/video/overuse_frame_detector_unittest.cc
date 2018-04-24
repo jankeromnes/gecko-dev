@@ -33,8 +33,8 @@ namespace {
 
 class MockCpuOveruseObserver : public ScalingObserverInterface {
  public:
-  MockCpuOveruseObserver() {}
-  virtual ~MockCpuOveruseObserver() {}
+  MockCpuOveruseObserver() = default;
+  virtual ~MockCpuOveruseObserver() = default;
 
   MOCK_METHOD1(ScaleUp, void(ScaleReason));
   MOCK_METHOD1(ScaleDown, void(ScaleReason));
@@ -45,7 +45,7 @@ class CpuOveruseObserverImpl : public ScalingObserverInterface {
   CpuOveruseObserverImpl() :
     overuse_(0),
     normaluse_(0) {}
-  virtual ~CpuOveruseObserverImpl() {}
+  virtual ~CpuOveruseObserverImpl() = default;
 
   void ScaleDown(ScaleReason) { ++overuse_; }
   void ScaleUp(ScaleReason) { ++normaluse_; }
@@ -66,7 +66,7 @@ class OveruseFrameDetectorUnderTest : public OveruseFrameDetector {
                              overuse_observer,
                              encoder_timing,
                              metrics_observer) {}
-  ~OveruseFrameDetectorUnderTest() {}
+  ~OveruseFrameDetectorUnderTest() = default;
 
   using OveruseFrameDetector::CheckForOveruse;
 };

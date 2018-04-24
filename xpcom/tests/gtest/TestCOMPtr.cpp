@@ -149,8 +149,7 @@ int IBar::total_destructions_;
 int IBar::total_queries_;
 
 IBar::IBar()
-{
-}
+= default;
 
 IBar::~IBar()
 {

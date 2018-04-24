@@ -22,7 +22,7 @@
 #include "SkUtils.h"
 #include "SkXfermodeInterpretation.h"
 
-SkBlitter::~SkBlitter() {}
+SkBlitter::~SkBlitter() = default;
 
 bool SkBlitter::isNullBlitter() const { return false; }
 

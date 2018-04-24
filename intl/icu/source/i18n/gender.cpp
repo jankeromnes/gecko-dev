@@ -85,11 +85,9 @@ void U_CALLCONV GenderInfo_initCache(UErrorCode &status) {
 }
 
 
-GenderInfo::GenderInfo() {
-}
+GenderInfo::GenderInfo() = default;
 
-GenderInfo::~GenderInfo() {
-}
+GenderInfo::~GenderInfo() = default;
 
 const GenderInfo* GenderInfo::getInstance(const Locale& locale, UErrorCode& status) {
   // Make sure our cache exists.

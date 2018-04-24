@@ -688,8 +688,7 @@ public:
 
   private:
     virtual ~GLXDisplay()
-    {
-    }
+    = default;
 
     void RunVsync()
     {

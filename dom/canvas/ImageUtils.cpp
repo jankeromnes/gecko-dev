@@ -156,7 +156,7 @@ public:
   }
 
 protected:
-  Impl() {}
+  Impl() = default;
 
   DataSourceSurface* Surface() const
   {

@@ -53,7 +53,7 @@ class GLCoverageSetOpXP : public GrGLSLXferProcessor {
 public:
     GLCoverageSetOpXP(const GrProcessor&) {}
 
-    ~GLCoverageSetOpXP() override {}
+    ~GLCoverageSetOpXP() override = default;
 
     static void GenKey(const GrProcessor& processor, const GrShaderCaps& caps,
                        GrProcessorKeyBuilder* b) {

@@ -15,8 +15,8 @@
 
 U_NAMESPACE_BEGIN
 
-ResourceValue::~ResourceValue() {}
+ResourceValue::~ResourceValue() = default;
 
-ResourceSink::~ResourceSink() {}
+ResourceSink::~ResourceSink() = default;
 
 U_NAMESPACE_END

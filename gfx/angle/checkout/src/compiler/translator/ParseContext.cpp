@@ -251,8 +251,7 @@ TParseContext::TParseContext(TSymbolTable &symt,
 }
 
 TParseContext::~TParseContext()
-{
-}
+= default;
 
 bool TParseContext::parseVectorFields(const TSourceLoc &line,
                                       const ImmutableString &compString,

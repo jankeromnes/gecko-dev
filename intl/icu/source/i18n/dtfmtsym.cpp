@@ -166,8 +166,7 @@ typedef enum LastResortSize {
 
 U_NAMESPACE_BEGIN
 
-SharedDateFormatSymbols::~SharedDateFormatSymbols() {
-}
+SharedDateFormatSymbols::~SharedDateFormatSymbols() = default;
 
 template<> U_I18N_API
 const SharedDateFormatSymbols *

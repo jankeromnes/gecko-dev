@@ -93,8 +93,7 @@ class BuiltInFunctionEmulator::BuiltInFunctionEmulationMarker : public TIntermTr
 };
 
 BuiltInFunctionEmulator::BuiltInFunctionEmulator()
-{
-}
+= default;
 
 FunctionId BuiltInFunctionEmulator::addEmulatedFunction(TOperator op,
                                                         const TType *param,

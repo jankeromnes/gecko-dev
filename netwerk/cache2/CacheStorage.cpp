@@ -37,8 +37,7 @@ CacheStorage::CacheStorage(nsILoadContextInfo* aInfo,
 }
 
 CacheStorage::~CacheStorage()
-{
-}
+= default;
 
 NS_IMETHODIMP CacheStorage::AsyncOpenURI(nsIURI *aURI,
                                          const nsACString & aIdExtension,

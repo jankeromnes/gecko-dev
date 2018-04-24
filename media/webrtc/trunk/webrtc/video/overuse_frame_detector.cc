@@ -117,7 +117,7 @@ class OveruseFrameDetector::SendProcessingUsage {
         filtered_frame_diff_ms_(new rtc::ExpFilter(kWeightFactorFrameDiff)) {
     Reset();
   }
-  ~SendProcessingUsage() {}
+  ~SendProcessingUsage() = default;
 
   void Reset() {
     count_ = 0;

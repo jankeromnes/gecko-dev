@@ -462,8 +462,7 @@ int32_t CheckResult::toCombinedBitmask(int32_t enabledChecks) {
     }
 }
 
-CheckResult::~CheckResult() {
-}
+CheckResult::~CheckResult() = default;
 
 //----------------------------------------------------------------------------------------------
 //

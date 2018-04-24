@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLOverdrawFragmentProcessor : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLOverdrawFragmentProcessor() {}
+    GrGLSLOverdrawFragmentProcessor() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrOverdrawFragmentProcessor& _outer = args.fFp.cast<GrOverdrawFragmentProcessor>();

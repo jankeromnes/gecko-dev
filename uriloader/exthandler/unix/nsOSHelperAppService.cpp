@@ -59,7 +59,7 @@ nsOSHelperAppService::nsOSHelperAppService() : nsExternalHelperAppService()
 }
 
 nsOSHelperAppService::~nsOSHelperAppService()
-{}
+= default;
 
 /*
  * Take a command with all the mailcap escapes in it and unescape it

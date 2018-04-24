@@ -41,8 +41,8 @@ class VideoProcessorTest : public testing::Test {
   TestConfig config_;
   VideoCodec codec_settings_;
 
-  VideoProcessorTest() {}
-  virtual ~VideoProcessorTest() {}
+  VideoProcessorTest() = default;
+  virtual ~VideoProcessorTest() = default;
   void SetUp() {
     // Get a codec configuration struct and configure it.
     VideoCodingModule::Codec(kVideoCodecVP8, &codec_settings_);

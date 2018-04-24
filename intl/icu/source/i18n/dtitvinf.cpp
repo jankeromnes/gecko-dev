@@ -375,7 +375,7 @@ struct DateIntervalInfo::DateIntervalSink : public ResourceSink {
 };
 
 // Virtual destructors must be defined out of line.
-DateIntervalInfo::DateIntervalSink::~DateIntervalSink() {}
+DateIntervalInfo::DateIntervalSink::~DateIntervalSink() = default;
 
 
 

@@ -33,7 +33,7 @@ class RoundingHelperWriter : angle::NonCopyable
                                        const char *opStr,
                                        const char *opNameStr);
 
-    virtual ~RoundingHelperWriter() {}
+    virtual ~RoundingHelperWriter() = default;
 
   protected:
     RoundingHelperWriter(const ShShaderOutput outputLanguage) : mOutputLanguage(outputLanguage) {}

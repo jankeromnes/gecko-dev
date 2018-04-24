@@ -67,7 +67,7 @@ isASCIIOkBiDi(const char *s, int32_t length);
 
 // IDNA class default implementations -------------------------------------- ***
 
-IDNA::~IDNA() {}
+IDNA::~IDNA() = default;
 
 void
 IDNA::labelToASCII_UTF8(StringPiece label, ByteSink &dest,
@@ -219,7 +219,7 @@ UTS46::UTS46(uint32_t opt, UErrorCode &errorCode)
         : uts46Norm2(*Normalizer2::getInstance(NULL, "uts46", UNORM2_COMPOSE, errorCode)),
           options(opt) {}
 
-UTS46::~UTS46() {}
+UTS46::~UTS46() = default;
 
 UnicodeString &
 UTS46::labelToASCII(const UnicodeString &label, UnicodeString &dest,

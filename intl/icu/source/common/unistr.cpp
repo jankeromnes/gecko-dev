@@ -101,7 +101,7 @@ U_NAMESPACE_BEGIN
 /* The Replaceable virtual destructor can't be defined in the header
    due to how AIX works with multiple definitions of virtual functions.
 */
-Replaceable::~Replaceable() {}
+Replaceable::~Replaceable() = default;
 
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(UnicodeString)
 
@@ -1859,7 +1859,7 @@ UnicodeString::cloneArrayIfNeeded(int32_t newCapacity,
 
 // UnicodeStringAppendable ------------------------------------------------- ***
 
-UnicodeStringAppendable::~UnicodeStringAppendable() {}
+UnicodeStringAppendable::~UnicodeStringAppendable() = default;
 
 UBool
 UnicodeStringAppendable::appendCodeUnit(UChar c) {

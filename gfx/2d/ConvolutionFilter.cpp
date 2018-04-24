@@ -22,8 +22,7 @@ ConvolutionFilter::ConvolutionFilter()
 }
 
 ConvolutionFilter::~ConvolutionFilter()
-{
-}
+= default;
 
 int32_t
 ConvolutionFilter::MaxFilter() const

@@ -121,7 +121,7 @@ cubeb_resampler_speex<T, InputProcessor, OutputProcessor>
 template<typename T, typename InputProcessor, typename OutputProcessor>
 cubeb_resampler_speex<T, InputProcessor, OutputProcessor>
   ::~cubeb_resampler_speex()
-{ }
+= default;
 
 template<typename T, typename InputProcessor, typename OutputProcessor>
 long

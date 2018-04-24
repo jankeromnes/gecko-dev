@@ -217,8 +217,7 @@ BreakIterator &BreakIterator::operator =(const BreakIterator &other) {
 }
 
 BreakIterator::~BreakIterator()
-{
-}
+= default;
 
 // ------------------------------------------
 //
@@ -238,7 +237,7 @@ protected:
     }
 };
 
-ICUBreakIteratorFactory::~ICUBreakIteratorFactory() {}
+ICUBreakIteratorFactory::~ICUBreakIteratorFactory() = default;
 
 // -------------------------------------
 
@@ -270,7 +269,7 @@ public:
     }
 };
 
-ICUBreakIteratorService::~ICUBreakIteratorService() {}
+ICUBreakIteratorService::~ICUBreakIteratorService() = default;
 
 // -------------------------------------
 

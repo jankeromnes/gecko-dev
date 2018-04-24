@@ -103,7 +103,7 @@ U_NAMESPACE_BEGIN
 
 //-------------------------------------------
 
-CollatorFactory::~CollatorFactory() {}
+CollatorFactory::~CollatorFactory() = default;
 
 //-------------------------------------------
 
@@ -132,7 +132,7 @@ class ICUCollatorFactory : public ICUResourceBundleFactory {
     virtual UObject* create(const ICUServiceKey& key, const ICUService* service, UErrorCode& status) const;
 };
 
-ICUCollatorFactory::~ICUCollatorFactory() {}
+ICUCollatorFactory::~ICUCollatorFactory() = default;
 
 UObject*
 ICUCollatorFactory::create(const ICUServiceKey& key, const ICUService* /* service */, UErrorCode& status) const {
@@ -192,7 +192,7 @@ public:
     }
 };
 
-ICUCollatorService::~ICUCollatorService() {}
+ICUCollatorService::~ICUCollatorService() = default;
 
 // -------------------------------------
 
@@ -623,13 +623,11 @@ Collator::Collator(UCollationStrength, UNormalizationMode )
 }
 
 Collator::~Collator()
-{
-}
+= default;
 
 Collator::Collator(const Collator &other)
-    : UObject(other)
-{
-}
+    : 
+= default;
 
 UBool Collator::operator==(const Collator& other) const
 {
@@ -849,7 +847,7 @@ public:
     }
 };
 
-CollationLocaleListEnumeration::~CollationLocaleListEnumeration() {}
+CollationLocaleListEnumeration::~CollationLocaleListEnumeration() = default;
 
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(CollationLocaleListEnumeration)
 

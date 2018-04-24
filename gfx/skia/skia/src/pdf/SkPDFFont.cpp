@@ -63,13 +63,13 @@ struct SkPDFType0Font final : public SkPDFFont {
 
 struct SkPDFType1Font final : public SkPDFFont {
     SkPDFType1Font(SkPDFFont::Info, const SkAdvancedTypefaceMetrics&, SkPDFCanon*);
-    ~SkPDFType1Font() override {}
+    ~SkPDFType1Font() override = default;
     void getFontSubset(SkPDFCanon*) override {} // TODO(halcanary): implement
 };
 
 struct SkPDFType3Font final : public SkPDFFont {
     SkPDFType3Font(SkPDFFont::Info, const SkAdvancedTypefaceMetrics&);
-    ~SkPDFType3Font() override {}
+    ~SkPDFType3Font() override = default;
     void getFontSubset(SkPDFCanon*) override;
 };
 
@@ -133,7 +133,7 @@ static sk_sp<SkPDFArray> makeFontBBox(SkIRect glyphBBox, uint16_t emSize) {
  * from each page and combine it and ask for a resource with that subset.
  */
 
-SkPDFFont::~SkPDFFont() {}
+SkPDFFont::~SkPDFFont() = default;
 
 static bool can_embed(const SkAdvancedTypefaceMetrics& metrics) {
     return !SkToBool(metrics.fFlags & SkAdvancedTypefaceMetrics::kNotEmbeddable_FontFlag);
@@ -301,7 +301,7 @@ SkPDFType0Font::SkPDFType0Font(
     SkDEBUGCODE(fPopulated = false);
 }
 
-SkPDFType0Font::~SkPDFType0Font() {}
+SkPDFType0Font::~SkPDFType0Font() = default;
 
 
 #ifdef SK_DEBUG

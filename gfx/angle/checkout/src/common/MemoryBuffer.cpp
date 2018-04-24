@@ -87,8 +87,7 @@ ScratchBuffer::ScratchBuffer(uint32_t lifetime) : mLifetime(lifetime), mResetCou
 }
 
 ScratchBuffer::~ScratchBuffer()
-{
-}
+= default;
 
 bool ScratchBuffer::get(size_t requestedSize, MemoryBuffer **memoryBufferOut)
 {

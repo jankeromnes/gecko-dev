@@ -1033,7 +1033,7 @@ protected:
 
   class CandidateSet {
     public:
-      CandidateSet() {}
+      CandidateSet() = default;
 
       void Gather(JsepSession& session,
                   const std::vector<SdpMediaSection::MediaType>& types,

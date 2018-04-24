@@ -26,7 +26,7 @@
 
 U_NAMESPACE_BEGIN
 
-ValueFormatter::~ValueFormatter() {}
+ValueFormatter::~ValueFormatter() = default;
 
 VisibleDigitsWithExponent &
 ValueFormatter::toVisibleDigitsWithExponent(

@@ -13,7 +13,7 @@ U_NAMESPACE_BEGIN
 
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(ParsePosition)
 
-ParsePosition::~ParsePosition() {}
+ParsePosition::~ParsePosition() = default;
 
 ParsePosition *
 ParsePosition::clone() const {

@@ -153,7 +153,7 @@ ICUDataTable::getNoFallback(const char* tableKey, const char* subTableKey, const
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-LocaleDisplayNames::~LocaleDisplayNames() {}
+LocaleDisplayNames::~LocaleDisplayNames() = default;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -441,7 +441,7 @@ struct LocaleDisplayNamesImpl::CapitalizationContextSink : public ResourceSink {
 };
 
 // Virtual destructors must be defined out of line.
-LocaleDisplayNamesImpl::CapitalizationContextSink::~CapitalizationContextSink() {}
+LocaleDisplayNamesImpl::CapitalizationContextSink::~CapitalizationContextSink() = default;
 
 void
 LocaleDisplayNamesImpl::initialize(void) {

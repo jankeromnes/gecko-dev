@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLSimpleTextureEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLSimpleTextureEffect() {}
+    GrGLSLSimpleTextureEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrSimpleTextureEffect& _outer = args.fFp.cast<GrSimpleTextureEffect>();

@@ -47,8 +47,7 @@ TDirectiveHandler::TDirectiveHandler(TExtensionBehavior &extBehavior,
 }
 
 TDirectiveHandler::~TDirectiveHandler()
-{
-}
+= default;
 
 void TDirectiveHandler::handleError(const pp::SourceLocation &loc, const std::string &msg)
 {

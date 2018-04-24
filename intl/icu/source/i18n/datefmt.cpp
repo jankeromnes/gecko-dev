@@ -55,8 +55,7 @@ public:
     ~DateFmtBestPattern();
 };
 
-DateFmtBestPattern::~DateFmtBestPattern() {
-}
+DateFmtBestPattern::~DateFmtBestPattern() = default;
 
 template<> U_I18N_API
 const DateFmtBestPattern *LocaleCacheKey<DateFmtBestPattern>::createObject(
@@ -76,8 +75,8 @@ public:
             : LocaleCacheKey<DateFmtBestPattern>(loc),
               fSkeleton(DateTimePatternGenerator::staticGetSkeleton(skeleton, status)) { }
     DateFmtBestPatternKey(const DateFmtBestPatternKey &other) :
-            LocaleCacheKey<DateFmtBestPattern>(other),
-            fSkeleton(other.fSkeleton) { }
+            ,
+            = default;
     virtual ~DateFmtBestPatternKey();
     virtual int32_t hashCode() const {
         return (int32_t)(37u * (uint32_t)LocaleCacheKey<DateFmtBestPattern>::hashCode() + (uint32_t)fSkeleton.hashCode());
@@ -119,7 +118,7 @@ public:
     }
 };
 
-DateFmtBestPatternKey::~DateFmtBestPatternKey() { }
+DateFmtBestPatternKey::~DateFmtBestPatternKey() = default;
 
 
 DateFormat::DateFormat()

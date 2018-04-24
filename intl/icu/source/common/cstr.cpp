@@ -44,8 +44,7 @@ CStr::CStr(const UnicodeString &in) {
 #endif
 }
 
-CStr::~CStr() {
-}
+CStr::~CStr() = default;
 
 const char * CStr::operator ()() const {
     return s.data();

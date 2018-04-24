@@ -28,7 +28,7 @@ DateInterval::DateInterval(UDate from, UDate to)
 {}
 
 
-DateInterval::~DateInterval(){}
+DateInterval::~DateInterval()= default;
 
 
 DateInterval::DateInterval(const DateInterval& other)

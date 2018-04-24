@@ -91,7 +91,7 @@ void U_EXPORT2 UMemory::operator delete(void* p, const char* /*file*/, int /*lin
 
 #endif
 
-UObject::~UObject() {}
+UObject::~UObject() = default;
 
 UClassID UObject::getDynamicClassID() const { return NULL; }
 

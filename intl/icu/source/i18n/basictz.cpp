@@ -29,11 +29,9 @@ BasicTimeZone::BasicTimeZone(const UnicodeString &id)
 }
 
 BasicTimeZone::BasicTimeZone(const BasicTimeZone& source)
-: TimeZone(source) {
-}
+: = default;
 
-BasicTimeZone::~BasicTimeZone() {
-}
+BasicTimeZone::~BasicTimeZone() = default;
 
 UBool
 BasicTimeZone::hasEquivalentTransitions(const BasicTimeZone& tz, UDate start, UDate end,

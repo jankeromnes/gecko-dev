@@ -259,7 +259,7 @@ protected:
 
 public:
 
-  TestTransaction() {}
+  TestTransaction() = default;
 
   NS_DECL_ISUPPORTS
 };

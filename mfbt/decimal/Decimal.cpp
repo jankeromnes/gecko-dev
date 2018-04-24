@@ -290,15 +290,11 @@ Decimal::Decimal(const EncodedData& data)
 }
 
 Decimal::Decimal(const Decimal& other)
-    : m_data(other.m_data)
-{
-}
+    : 
+= default;
 
 Decimal& Decimal::operator=(const Decimal& other)
-{
-    m_data = other.m_data;
-    return *this;
-}
+= default;
 
 Decimal& Decimal::operator+=(const Decimal& other)
 {

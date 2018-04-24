@@ -37,14 +37,12 @@ EthiopicCalendar::EthiopicCalendar(const Locale& aLocale,
 }
 
 EthiopicCalendar::EthiopicCalendar(const EthiopicCalendar& other)
-:   CECalendar(other),
-    eraType(other.eraType)
-{
-}
+:   ,
+    
+= default;
 
 EthiopicCalendar::~EthiopicCalendar()
-{
-}
+= default;
 
 Calendar*
 EthiopicCalendar::clone() const

@@ -893,7 +893,7 @@ class nsGIOProtocolHandler final : public nsIProtocolHandler
     nsresult Init();
 
   private:
-    ~nsGIOProtocolHandler() {}
+    ~nsGIOProtocolHandler() = default;
 
     void InitSupportedProtocolsPref(nsIPrefBranch *prefs);
     bool IsSupportedProtocol(const nsCString &spec);

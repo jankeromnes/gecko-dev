@@ -497,7 +497,7 @@ res_countArrayItems(const ResourceData *pResData, Resource res) {
 
 U_NAMESPACE_BEGIN
 
-ResourceDataValue::~ResourceDataValue() {}
+ResourceDataValue::~ResourceDataValue() = default;
 
 UResType ResourceDataValue::getType() const {
     return res_getPublicType(res);

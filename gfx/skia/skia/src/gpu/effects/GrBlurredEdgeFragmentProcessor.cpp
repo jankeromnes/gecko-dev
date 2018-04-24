@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLBlurredEdgeFragmentProcessor : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLBlurredEdgeFragmentProcessor() {}
+    GrGLSLBlurredEdgeFragmentProcessor() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrBlurredEdgeFragmentProcessor& _outer =

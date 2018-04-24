@@ -178,7 +178,7 @@ struct ListFormatter::ListPatternsSink : public ResourceSink {
 #else
     char aliasedStyle[kStyleLenMax+1] = {0};
 
-    ListPatternsSink() {}
+    ListPatternsSink() = default;
 #endif
     virtual ~ListPatternsSink();
 
@@ -231,7 +231,7 @@ struct ListFormatter::ListPatternsSink : public ResourceSink {
 };
 
 // Virtual destructors must be defined out of line.
-ListFormatter::ListPatternsSink::~ListPatternsSink() {}
+ListFormatter::ListPatternsSink::~ListPatternsSink() = default;
 
 ListFormatInternal* ListFormatter::loadListFormatInternal(
         const Locale& locale, const char * style, UErrorCode& errorCode) {

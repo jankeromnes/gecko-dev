@@ -31,8 +31,7 @@ const int32_t  DictionaryData::TRANSFORM_TYPE_OFFSET = 0x1000000;
 const int32_t  DictionaryData::TRANSFORM_TYPE_MASK = 0x7f000000;
 const int32_t  DictionaryData::TRANSFORM_OFFSET_MASK = 0x1fffff;
     
-DictionaryMatcher::~DictionaryMatcher() {
-}
+DictionaryMatcher::~DictionaryMatcher() = default;
 
 UCharsDictionaryMatcher::~UCharsDictionaryMatcher() {
     udata_close(file);

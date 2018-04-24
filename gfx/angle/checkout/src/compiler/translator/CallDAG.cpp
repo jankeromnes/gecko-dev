@@ -264,12 +264,10 @@ class CallDAG::CallDAGCreator : public TIntermTraverser
 // CallDAG
 
 CallDAG::CallDAG()
-{
-}
+= default;
 
 CallDAG::~CallDAG()
-{
-}
+= default;
 
 const size_t CallDAG::InvalidIndex = std::numeric_limits<size_t>::max();
 

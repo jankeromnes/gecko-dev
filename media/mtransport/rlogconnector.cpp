@@ -72,8 +72,7 @@ RLogConnector::RLogConnector()
     disableCount_(0) {
 }
 
-RLogConnector::~RLogConnector() {
-}
+RLogConnector::~RLogConnector() = default;
 
 void RLogConnector::SetLogLimit(uint32_t new_limit) {
   OffTheBooksMutexAutoLock lock(mutex_);

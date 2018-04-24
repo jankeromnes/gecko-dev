@@ -42,7 +42,7 @@ U_NAMESPACE_BEGIN
 
 // Public API dispatch via Normalizer2 subclasses -------------------------- ***
 
-Normalizer2::~Normalizer2() {}
+Normalizer2::~Normalizer2() = default;
 
 void
 Normalizer2::normalizeUTF8(uint32_t /*options*/, StringPiece src, ByteSink &sink,
@@ -164,15 +164,15 @@ class NoopNormalizer2 : public Normalizer2 {
     virtual UBool isInert(UChar32) const U_OVERRIDE { return TRUE; }
 };
 
-NoopNormalizer2::~NoopNormalizer2() {}
+NoopNormalizer2::~NoopNormalizer2() = default;
 
-Normalizer2WithImpl::~Normalizer2WithImpl() {}
+Normalizer2WithImpl::~Normalizer2WithImpl() = default;
 
-DecomposeNormalizer2::~DecomposeNormalizer2() {}
+DecomposeNormalizer2::~DecomposeNormalizer2() = default;
 
-ComposeNormalizer2::~ComposeNormalizer2() {}
+ComposeNormalizer2::~ComposeNormalizer2() = default;
 
-FCDNormalizer2::~FCDNormalizer2() {}
+FCDNormalizer2::~FCDNormalizer2() = default;
 
 // instance cache ---------------------------------------------------------- ***
 

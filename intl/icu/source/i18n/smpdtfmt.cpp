@@ -330,8 +330,7 @@ class SimpleDateFormatMutableNFNode {
 // allocated and used for a single format call.
 class SimpleDateFormatMutableNFs : public UMemory {
  public:
-    SimpleDateFormatMutableNFs() {
-    }
+    SimpleDateFormatMutableNFs() = default;
 
     // Returns a non-const clone of nf which can be safely modified.
     // Subsequent calls with same nf will return the same non-const clone.

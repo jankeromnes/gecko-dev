@@ -39,8 +39,8 @@ static Result BuildForward(TrustDomain& trustDomain,
                            unsigned int subCACount,
                            unsigned int& buildForwardCallBudget);
 
-TrustDomain::IssuerChecker::IssuerChecker() { }
-TrustDomain::IssuerChecker::~IssuerChecker() { }
+TrustDomain::IssuerChecker::IssuerChecker() = default;
+TrustDomain::IssuerChecker::~IssuerChecker() = default;
 
 // The implementation of TrustDomain::IssuerTracker is in a subclass only to
 // hide the implementation from external users.

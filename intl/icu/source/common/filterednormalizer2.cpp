@@ -30,7 +30,7 @@
 
 U_NAMESPACE_BEGIN
 
-FilteredNormalizer2::~FilteredNormalizer2() {}
+FilteredNormalizer2::~FilteredNormalizer2() = default;
 
 UnicodeString &
 FilteredNormalizer2::normalize(const UnicodeString &src,

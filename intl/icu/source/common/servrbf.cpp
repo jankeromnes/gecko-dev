@@ -40,7 +40,7 @@ ICUResourceBundleFactory::ICUResourceBundleFactory(const UnicodeString& bundleNa
 {
 }
 
-ICUResourceBundleFactory::~ICUResourceBundleFactory() {}
+ICUResourceBundleFactory::~ICUResourceBundleFactory() = default;
 
 const Hashtable*
 ICUResourceBundleFactory::getSupportedIDs(UErrorCode& status) const

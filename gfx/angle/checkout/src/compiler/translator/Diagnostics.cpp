@@ -20,8 +20,7 @@ TDiagnostics::TDiagnostics(TInfoSinkBase &infoSink)
 }
 
 TDiagnostics::~TDiagnostics()
-{
-}
+= default;
 
 void TDiagnostics::writeInfo(Severity severity,
                              const pp::SourceLocation &loc,

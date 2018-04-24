@@ -432,7 +432,7 @@ struct UnitDataSink : public ResourceSink {
 };
 
 // Virtual destructors must be defined out of line.
-UnitDataSink::~UnitDataSink() {}
+UnitDataSink::~UnitDataSink() = default;
 
 }  // namespace
 

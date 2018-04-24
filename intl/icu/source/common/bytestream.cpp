@@ -12,7 +12,7 @@
 
 U_NAMESPACE_BEGIN
 
-ByteSink::~ByteSink() {}
+ByteSink::~ByteSink() = default;
 
 char* ByteSink::GetAppendBuffer(int32_t min_capacity,
                                 int32_t /*desired_capacity_hint*/,
@@ -33,7 +33,7 @@ CheckedArrayByteSink::CheckedArrayByteSink(char* outbuf, int32_t capacity)
       size_(0), appended_(0), overflowed_(FALSE) {
 }
 
-CheckedArrayByteSink::~CheckedArrayByteSink() {}
+CheckedArrayByteSink::~CheckedArrayByteSink() = default;
 
 CheckedArrayByteSink& CheckedArrayByteSink::Reset() {
   size_ = appended_ = 0;

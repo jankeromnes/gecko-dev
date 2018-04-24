@@ -60,8 +60,7 @@ BMPSet::BMPSet(const BMPSet &otherBMPSet, const int32_t *newParentList, int32_t 
     uprv_memcpy(list4kStarts, otherBMPSet.list4kStarts, sizeof(list4kStarts));
 }
 
-BMPSet::~BMPSet() {
-}
+BMPSet::~BMPSet() = default;
 
 /*
  * Set bits in a bit rectangle in "vertical" bit organization.

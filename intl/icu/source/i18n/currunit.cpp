@@ -71,8 +71,7 @@ UObject* CurrencyUnit::clone() const {
     return new CurrencyUnit(*this);
 }
 
-CurrencyUnit::~CurrencyUnit() {
-}
+CurrencyUnit::~CurrencyUnit() = default;
     
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(CurrencyUnit)
 

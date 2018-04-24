@@ -70,8 +70,7 @@ public:
   size_t mHighestSuccessfulEndOffset;
 protected:
   virtual ~TestStream()
-  {
-  }
+  = default;
 
   const uint8_t* mBuffer;
   size_t mSize;

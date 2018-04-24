@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLConfigConversionEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLConfigConversionEffect() {}
+    GrGLSLConfigConversionEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrConfigConversionEffect& _outer = args.fFp.cast<GrConfigConversionEffect>();

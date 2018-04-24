@@ -214,8 +214,7 @@ NumberingSystem::createInstanceByName(const char *name, UErrorCode& status) {
      * Destructor.
      * @draft ICU 4.2
      */
-NumberingSystem::~NumberingSystem() {
-}
+NumberingSystem::~NumberingSystem() = default;
 
 int32_t NumberingSystem::getRadix() const {
     return radix;

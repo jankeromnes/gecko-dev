@@ -17,8 +17,7 @@ Macro::Macro() : predefined(false), disabled(false), expansionCount(0), type(kTy
 }
 
 Macro::~Macro()
-{
-}
+= default;
 
 bool Macro::equals(const Macro &other) const
 {

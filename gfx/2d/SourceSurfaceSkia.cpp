@@ -25,8 +25,7 @@ SourceSurfaceSkia::SourceSurfaceSkia()
 }
 
 SourceSurfaceSkia::~SourceSurfaceSkia()
-{
-}
+= default;
 
 IntSize
 SourceSurfaceSkia::GetSize() const

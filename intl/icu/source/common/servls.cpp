@@ -39,8 +39,7 @@ ICULocaleService::ICULocaleService(const UnicodeString& dname)
 }
 
 ICULocaleService::~ICULocaleService()
-{
-}
+= default;
 
 UObject*
 ICULocaleService::get(const Locale& locale, UErrorCode& status) const
@@ -249,7 +248,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 };
 
-ServiceEnumeration::~ServiceEnumeration() {}
+ServiceEnumeration::~ServiceEnumeration() = default;
 
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(ServiceEnumeration)
 

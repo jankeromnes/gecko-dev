@@ -66,7 +66,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 };
 
-SameValueSubstitution::~SameValueSubstitution() {}
+SameValueSubstitution::~SameValueSubstitution() = default;
 
 class MultiplierSubstitution : public NFSubstitution {
     int64_t divisor;
@@ -120,7 +120,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 };
 
-MultiplierSubstitution::~MultiplierSubstitution() {}
+MultiplierSubstitution::~MultiplierSubstitution() = default;
 
 class ModulusSubstitution : public NFSubstitution {
     int64_t  divisor;
@@ -175,7 +175,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 };
 
-ModulusSubstitution::~ModulusSubstitution() {}
+ModulusSubstitution::~ModulusSubstitution() = default;
 
 class IntegralPartSubstitution : public NFSubstitution {
 public:
@@ -197,7 +197,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 };
 
-IntegralPartSubstitution::~IntegralPartSubstitution() {}
+IntegralPartSubstitution::~IntegralPartSubstitution() = default;
 
 class FractionalPartSubstitution : public NFSubstitution {
     UBool byDigits;
@@ -234,7 +234,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 };
 
-FractionalPartSubstitution::~FractionalPartSubstitution() {}
+FractionalPartSubstitution::~FractionalPartSubstitution() = default;
 
 class AbsoluteValueSubstitution : public NFSubstitution {
 public:
@@ -256,7 +256,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 };
 
-AbsoluteValueSubstitution::~AbsoluteValueSubstitution() {}
+AbsoluteValueSubstitution::~AbsoluteValueSubstitution() = default;
 
 class NumeratorSubstitution : public NFSubstitution {
     double denominator;
@@ -308,7 +308,7 @@ public:
     virtual UClassID getDynamicClassID(void) const;
 };
 
-NumeratorSubstitution::~NumeratorSubstitution() {}
+NumeratorSubstitution::~NumeratorSubstitution() = default;
 
 NFSubstitution*
 NFSubstitution::makeSubstitution(int32_t pos,

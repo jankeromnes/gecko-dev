@@ -100,8 +100,7 @@ TimeUnit::TimeUnit(TimeUnit::UTimeUnitFields timeUnitField) {
 }
 
 TimeUnit::TimeUnit(const TimeUnit& other) 
-:   MeasureUnit(other), fTimeUnitField(other.fTimeUnitField) {
-}
+:   , = default;
 
 UObject* 
 TimeUnit::clone() const {
@@ -123,8 +122,7 @@ TimeUnit::getTimeUnitField() const {
     return fTimeUnitField;
 }
 
-TimeUnit::~TimeUnit() {
-}
+TimeUnit::~TimeUnit() = default;
 
 
 U_NAMESPACE_END

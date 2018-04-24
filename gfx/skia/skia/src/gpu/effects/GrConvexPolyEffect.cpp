@@ -167,7 +167,7 @@ std::unique_ptr<GrFragmentProcessor> GrConvexPolyEffect::Make(GrClipEdgeType edg
     return GrAARectEffect::Make(edgeType, rect);
 }
 
-GrConvexPolyEffect::~GrConvexPolyEffect() {}
+GrConvexPolyEffect::~GrConvexPolyEffect() = default;
 
 void GrConvexPolyEffect::onGetGLSLProcessorKey(const GrShaderCaps& caps,
                                                GrProcessorKeyBuilder* b) const {

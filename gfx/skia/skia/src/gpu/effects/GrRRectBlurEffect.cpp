@@ -57,7 +57,7 @@ std::unique_ptr<GrFragmentProcessor> GrRRectBlurEffect::Make(GrContext* context,
 #include "SkSLUtil.h"
 class GrGLSLRRectBlurEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLRRectBlurEffect() {}
+    GrGLSLRRectBlurEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrRRectBlurEffect& _outer = args.fFp.cast<GrRRectBlurEffect>();

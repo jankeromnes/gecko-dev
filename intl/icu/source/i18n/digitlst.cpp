@@ -111,8 +111,7 @@ DigitList::DigitList()
 // -------------------------------------
 
 DigitList::~DigitList()
-{
-}
+= default;
 
 // -------------------------------------
 // copy constructor

@@ -48,7 +48,7 @@ public:
     static std::unique_ptr<GrFragmentProcessor> Make(GrClipEdgeType,
                                                      uint32_t circularCornerFlags, const SkRRect&);
 
-    ~CircularRRectEffect() override {}
+    ~CircularRRectEffect() override = default;
 
     const char* name() const override { return "CircularRRect"; }
 
@@ -386,7 +386,7 @@ class EllipticalRRectEffect : public GrFragmentProcessor {
 public:
     static std::unique_ptr<GrFragmentProcessor> Make(GrClipEdgeType, const SkRRect&);
 
-    ~EllipticalRRectEffect() override {}
+    ~EllipticalRRectEffect() override = default;
 
     const char* name() const override { return "EllipticalRRect"; }
 

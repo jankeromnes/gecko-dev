@@ -118,8 +118,7 @@ TIntermTraverser::TIntermTraverser(bool preVisit,
 }
 
 TIntermTraverser::~TIntermTraverser()
-{
-}
+= default;
 
 const TIntermBlock *TIntermTraverser::getParentBlock() const
 {

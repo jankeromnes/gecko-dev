@@ -20,6 +20,5 @@ DocAccessibleWrap::
 }
 
 DocAccessibleWrap::~DocAccessibleWrap()
-{
-}
+= default;
 

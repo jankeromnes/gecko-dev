@@ -47,7 +47,7 @@ using mozilla::widget::ScreenManager;
 class nsFontCache final : public nsIObserver
 {
 public:
-    nsFontCache() {}
+    nsFontCache() = default;
 
     NS_DECL_ISUPPORTS
     NS_DECL_NSIOBSERVER
@@ -65,7 +65,7 @@ public:
     void UpdateUserFonts(gfxUserFontSet* aUserFontSet);
 
 protected:
-    ~nsFontCache() {}
+    ~nsFontCache() = default;
 
     nsDeviceContext*          mContext; // owner
     RefPtr<nsAtom>         mLocaleLanguage;

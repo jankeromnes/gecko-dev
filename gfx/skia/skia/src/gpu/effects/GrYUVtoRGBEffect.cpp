@@ -70,7 +70,7 @@ std::unique_ptr<GrFragmentProcessor> GrYUVtoRGBEffect::Make(sk_sp<GrTextureProxy
 #include "SkSLUtil.h"
 class GrGLSLYUVtoRGBEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLYUVtoRGBEffect() {}
+    GrGLSLYUVtoRGBEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrYUVtoRGBEffect& _outer = args.fFp.cast<GrYUVtoRGBEffect>();

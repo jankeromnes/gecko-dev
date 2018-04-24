@@ -204,14 +204,14 @@ UOBJECT_DEFINE_ABSTRACT_RTTI_IMPLEMENTATION(NumberFormat)
 #if !UCONFIG_NO_SERVICE
 // -------------------------------------
 // SimpleNumberFormatFactory implementation
-NumberFormatFactory::~NumberFormatFactory() {}
+NumberFormatFactory::~NumberFormatFactory() = default;
 SimpleNumberFormatFactory::SimpleNumberFormatFactory(const Locale& locale, UBool visible)
     : _visible(visible)
 {
     LocaleUtility::initNameFromLocale(locale, _id);
 }
 
-SimpleNumberFormatFactory::~SimpleNumberFormatFactory() {}
+SimpleNumberFormatFactory::~SimpleNumberFormatFactory() = default;
 
 UBool SimpleNumberFormatFactory::visible(void) const {
     return _visible;
@@ -247,8 +247,7 @@ NumberFormat::NumberFormat()
 // -------------------------------------
 
 NumberFormat::~NumberFormat()
-{
-}
+= default;
 
 SharedNumberFormat::~SharedNumberFormat() {
     delete ptr;
@@ -521,8 +520,7 @@ ArgExtractor::ArgExtractor(const NumberFormat& /*nf*/, const Formattable& obj, U
     }
 }
 
-ArgExtractor::~ArgExtractor() {
-}
+ArgExtractor::~ArgExtractor() = default;
 
 UnicodeString& NumberFormat::format(const DigitList &number,
                       UnicodeString& appendTo,
@@ -868,7 +866,7 @@ protected:
     }
 };
 
-ICUNumberFormatFactory::~ICUNumberFormatFactory() {}
+ICUNumberFormatFactory::~ICUNumberFormatFactory() = default;
 
 // -------------------------------------
 
@@ -963,7 +961,7 @@ public:
     }
 };
 
-ICUNumberFormatService::~ICUNumberFormatService() {}
+ICUNumberFormatService::~ICUNumberFormatService() = default;
 
 // -------------------------------------
 

@@ -300,19 +300,14 @@ JapaneseCalendar::JapaneseCalendar(const Locale& aLocale, UErrorCode& success)
 }
 
 JapaneseCalendar::~JapaneseCalendar()
-{
-}
+= default;
 
 JapaneseCalendar::JapaneseCalendar(const JapaneseCalendar& source)
-: GregorianCalendar(source)
-{
-}
+: 
+= default;
 
 JapaneseCalendar& JapaneseCalendar::operator= ( const JapaneseCalendar& right)
-{
-    GregorianCalendar::operator=(right);
-    return *this;
-}
+= default;
 
 Calendar* JapaneseCalendar::clone(void) const
 {

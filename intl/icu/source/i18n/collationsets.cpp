@@ -352,7 +352,7 @@ TailoredSet::add(UChar32 c) {
     }
 }
 
-ContractionsAndExpansions::CESink::~CESink() {}
+ContractionsAndExpansions::CESink::~CESink() = default;
 
 U_CDECL_BEGIN
 

@@ -10,7 +10,6 @@ namespace pp
 {
 
 Lexer::~Lexer()
-{
-}
+= default;
 
 }  // namespace pp

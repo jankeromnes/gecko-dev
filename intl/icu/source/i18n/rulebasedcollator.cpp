@@ -70,7 +70,7 @@ private:
     virtual UBool Resize(int32_t appendCapacity, int32_t length);
 };
 
-FixedSortKeyByteSink::~FixedSortKeyByteSink() {}
+FixedSortKeyByteSink::~FixedSortKeyByteSink() = default;
 
 void
 FixedSortKeyByteSink::AppendBeyondCapacity(const char *bytes, int32_t /*n*/, int32_t length) {
@@ -104,7 +104,7 @@ private:
     CollationKey &key_;
 };
 
-CollationKeyByteSink::~CollationKeyByteSink() {}
+CollationKeyByteSink::~CollationKeyByteSink() = default;
 
 void
 CollationKeyByteSink::AppendBeyondCapacity(const char *bytes, int32_t n, int32_t length) {
@@ -781,7 +781,7 @@ namespace {
 class NFDIterator : public UObject {
 public:
     NFDIterator() : index(-1), length(0) {}
-    virtual ~NFDIterator() {}
+    virtual ~NFDIterator() = default;
     /**
      * Returns the next code point from the internal normalization buffer,
      * or else the next text code point.
@@ -1397,7 +1397,7 @@ public:
             : sink(s), level(Collation::PRIMARY_LEVEL) {
         levelCapacity = sink.GetRemainingCapacity();
     }
-    virtual ~PartLevelCallback() {}
+    virtual ~PartLevelCallback() = default;
     virtual UBool needToWrite(Collation::Level l) {
         if(!sink.Overflowed()) {
             // Remember a level that will be at least partially written.

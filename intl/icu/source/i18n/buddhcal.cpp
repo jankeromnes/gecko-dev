@@ -39,19 +39,14 @@ BuddhistCalendar::BuddhistCalendar(const Locale& aLocale, UErrorCode& success)
 }
 
 BuddhistCalendar::~BuddhistCalendar()
-{
-}
+= default;
 
 BuddhistCalendar::BuddhistCalendar(const BuddhistCalendar& source)
-: GregorianCalendar(source)
-{
-}
+: 
+= default;
 
 BuddhistCalendar& BuddhistCalendar::operator= ( const BuddhistCalendar& right)
-{
-    GregorianCalendar::operator=(right);
-    return *this;
-}
+= default;
 
 Calendar* BuddhistCalendar::clone(void) const
 {

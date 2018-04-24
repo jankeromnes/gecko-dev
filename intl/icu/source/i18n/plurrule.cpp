@@ -1074,8 +1074,7 @@ PluralRuleParser::PluralRuleParser() :
 {
 }
 
-PluralRuleParser::~PluralRuleParser() {
-}
+PluralRuleParser::~PluralRuleParser() = default;
 
 
 int32_t
@@ -1404,8 +1403,7 @@ PluralKeywordEnumeration::count(UErrorCode& /*status*/) const {
        return fKeywordNames.size();
 }
 
-PluralKeywordEnumeration::~PluralKeywordEnumeration() {
-}
+PluralKeywordEnumeration::~PluralKeywordEnumeration() = default;
 
 PluralOperand tokenTypeToPluralOperand(tokenType tt) {
     switch(tt) {

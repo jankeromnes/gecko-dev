@@ -26,8 +26,7 @@ NS_IMPL_ISUPPORTS(nsNetworkInfoService,
                   nsINetworkInfoService)
 
 nsNetworkInfoService::nsNetworkInfoService()
-{
-}
+= default;
 
 nsresult
 nsNetworkInfoService::Init()

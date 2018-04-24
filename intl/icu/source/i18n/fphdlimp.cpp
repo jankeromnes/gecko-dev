@@ -19,8 +19,7 @@ U_NAMESPACE_BEGIN
 // utility FieldPositionHandler
 // base class, null implementation
 
-FieldPositionHandler::~FieldPositionHandler() {
-}
+FieldPositionHandler::~FieldPositionHandler() = default;
 
 void
 FieldPositionHandler::addAttribute(int32_t, int32_t, int32_t) {
@@ -42,8 +41,7 @@ FieldPositionOnlyHandler::FieldPositionOnlyHandler(FieldPosition& _pos)
   : pos(_pos) {
 }
 
-FieldPositionOnlyHandler::~FieldPositionOnlyHandler() {
-}
+FieldPositionOnlyHandler::~FieldPositionOnlyHandler() = default;
 
 void
 FieldPositionOnlyHandler::addAttribute(int32_t id, int32_t start, int32_t limit) {

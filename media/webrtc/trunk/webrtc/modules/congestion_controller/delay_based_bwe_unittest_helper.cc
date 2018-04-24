@@ -156,7 +156,7 @@ DelayBasedBweTest::DelayBasedBweTest()
       arrival_time_offset_ms_(0),
       first_update_(true) {}
 
-DelayBasedBweTest::~DelayBasedBweTest() {}
+DelayBasedBweTest::~DelayBasedBweTest() = default;
 
 void DelayBasedBweTest::AddDefaultStream() {
   stream_generator_->AddStream(new test::RtpStream(30, 3e5));

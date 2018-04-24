@@ -30,8 +30,7 @@ NGramParser::NGramParser(const int32_t *theNgramList, const uint8_t *theCharMap)
 }
 
 NGramParser::~NGramParser()
-{
-}
+= default;
 
 /*
  * Binary search for value in table, which must have exactly 64 entries.
@@ -168,7 +167,7 @@ NGramParser_IBM420::NGramParser_IBM420(const int32_t *theNgramList, const uint8_
 	alef = 0x00;
 }
 
-NGramParser_IBM420::~NGramParser_IBM420() {}
+NGramParser_IBM420::~NGramParser_IBM420() = default;
 
 int32_t NGramParser_IBM420::isLamAlef(int32_t b)
 {

@@ -456,7 +456,7 @@ struct TimeUnitFormatReadSink : public ResourceSink {
 
 };
 
-TimeUnitFormatReadSink::~TimeUnitFormatReadSink() {}
+TimeUnitFormatReadSink::~TimeUnitFormatReadSink() = default;
 
 void
 TimeUnitFormat::readFromCurrentLocale(UTimeUnitFormatStyle style, const char* key,

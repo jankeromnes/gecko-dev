@@ -41,8 +41,7 @@ LocaleKeyFactory::LocaleKeyFactory(int32_t coverage, const UnicodeString& name)
 {
 }
 
-LocaleKeyFactory::~LocaleKeyFactory() {
-}
+LocaleKeyFactory::~LocaleKeyFactory() = default;
 
 UObject*
 LocaleKeyFactory::create(const ICUServiceKey& key, const ICUService* service, UErrorCode& status) const {

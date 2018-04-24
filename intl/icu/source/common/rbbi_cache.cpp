@@ -30,8 +30,7 @@ RuleBasedBreakIterator::DictionaryCache::DictionaryCache(RuleBasedBreakIterator 
         fStart(0), fLimit(0), fFirstRuleStatusIndex(0), fOtherRuleStatusIndex(0) {
 }
 
-RuleBasedBreakIterator::DictionaryCache::~DictionaryCache() {
-}
+RuleBasedBreakIterator::DictionaryCache::~DictionaryCache() = default;
 
 void RuleBasedBreakIterator::DictionaryCache::reset() {
     fPositionInCache = -1;
@@ -212,8 +211,7 @@ RuleBasedBreakIterator::BreakCache::BreakCache(RuleBasedBreakIterator *bi, UErro
 }
 
 
-RuleBasedBreakIterator::BreakCache::~BreakCache() {
-}
+RuleBasedBreakIterator::BreakCache::~BreakCache() = default;
 
 
 void RuleBasedBreakIterator::BreakCache::reset(int32_t pos, int32_t ruleStatus) {

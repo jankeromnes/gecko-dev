@@ -58,7 +58,7 @@ SimpleFormatter &SimpleFormatter::operator=(const SimpleFormatter& other) {
     return *this;
 }
 
-SimpleFormatter::~SimpleFormatter() {}
+SimpleFormatter::~SimpleFormatter() = default;
 
 UBool SimpleFormatter::applyPatternMinMaxArguments(
         const UnicodeString &pattern,

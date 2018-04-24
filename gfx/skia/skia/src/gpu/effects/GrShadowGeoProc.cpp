@@ -15,7 +15,7 @@
 
 class GrGLSLRRectShadowGeoProc : public GrGLSLGeometryProcessor {
 public:
-    GrGLSLRRectShadowGeoProc() {}
+    GrGLSLRRectShadowGeoProc() = default;
 
     void onEmitCode(EmitArgs& args, GrGPArgs* gpArgs) override {
         const GrRRectShadowGeoProc& rsgp = args.fGP.cast<GrRRectShadowGeoProc>();

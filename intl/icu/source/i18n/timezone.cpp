@@ -348,15 +348,13 @@ TimeZone::TimeZone(const UnicodeString &id)
 // -------------------------------------
 
 TimeZone::~TimeZone()
-{
-}
+= default;
 
 // -------------------------------------
 
 TimeZone::TimeZone(const TimeZone &source)
-    :   UObject(source), fID(source.fID)
-{
-}
+    :   , 
+= default;
 
 // -------------------------------------
 

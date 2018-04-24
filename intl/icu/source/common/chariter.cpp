@@ -11,13 +11,13 @@
 
 U_NAMESPACE_BEGIN
 
-ForwardCharacterIterator::~ForwardCharacterIterator() {}
+ForwardCharacterIterator::~ForwardCharacterIterator() = default;
 ForwardCharacterIterator::ForwardCharacterIterator()
 : UObject()
 {}
 ForwardCharacterIterator::ForwardCharacterIterator(const ForwardCharacterIterator &other)
-: UObject(other)
-{}
+: 
+= default;
 
 
 CharacterIterator::CharacterIterator()
@@ -65,23 +65,15 @@ CharacterIterator::CharacterIterator(int32_t length, int32_t textBegin, int32_t 
     }
 }
 
-CharacterIterator::~CharacterIterator() {}
+CharacterIterator::~CharacterIterator() = default;
 
 CharacterIterator::CharacterIterator(const CharacterIterator &that) :
-ForwardCharacterIterator(that),
-textLength(that.textLength), pos(that.pos), begin(that.begin), end(that.end)
-{
-}
+,
+, , , 
+= default;
 
 CharacterIterator &
-CharacterIterator::operator=(const CharacterIterator &that) {
-    ForwardCharacterIterator::operator=(that);
-    textLength = that.textLength;
-    pos = that.pos;
-    begin = that.begin;
-    end = that.end;
-    return *this;
-}
+CharacterIterator::operator=(const CharacterIterator &that) = default;
 
 // implementing first[32]PostInc() directly in a subclass should be faster
 // but these implementations make subclassing a little easier

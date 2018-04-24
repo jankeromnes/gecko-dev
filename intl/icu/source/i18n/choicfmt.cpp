@@ -111,11 +111,10 @@ ChoiceFormat::ChoiceFormat(const double* limits,
 // copy constructor
 
 ChoiceFormat::ChoiceFormat(const    ChoiceFormat&   that) 
-: NumberFormat(that),
-  constructorErrorCode(that.constructorErrorCode),
-  msgPattern(that.msgPattern)
-{
-}
+: ,
+  ,
+  
+= default;
 
 // -------------------------------------
 // Private constructor that creates a 
@@ -158,8 +157,7 @@ ChoiceFormat::operator=(const   ChoiceFormat& that)
 // -------------------------------------
 
 ChoiceFormat::~ChoiceFormat()
-{
-}
+= default;
 
 // -------------------------------------
 

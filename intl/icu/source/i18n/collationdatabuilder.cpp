@@ -39,7 +39,7 @@
 
 U_NAMESPACE_BEGIN
 
-CollationDataBuilder::CEModifier::~CEModifier() {}
+CollationDataBuilder::CEModifier::~CEModifier() = default;
 
 /**
  * Build-time context and CE32 for a code point.
@@ -165,7 +165,7 @@ DataBuilderCollationIterator::DataBuilderCollationIterator(CollationDataBuilder 
     builderData.jamoCE32s = jamoCE32s;
 }
 
-DataBuilderCollationIterator::~DataBuilderCollationIterator() {}
+DataBuilderCollationIterator::~DataBuilderCollationIterator() = default;
 
 int32_t
 DataBuilderCollationIterator::fetchCEs(const UnicodeString &str, int32_t start,

@@ -54,7 +54,7 @@ namespace {
 
 class BundleImporter : public CollationRuleParser::Importer {
 public:
-    BundleImporter() {}
+    BundleImporter() = default;
     virtual ~BundleImporter();
     virtual void getRules(
             const char *localeID, const char *collationType,
@@ -62,7 +62,7 @@ public:
             const char *&errorReason, UErrorCode &errorCode);
 };
 
-BundleImporter::~BundleImporter() {}
+BundleImporter::~BundleImporter() = default;
 
 void
 BundleImporter::getRules(
@@ -1604,7 +1604,7 @@ private:
     const int64_t *finalCEs;
 };
 
-CEFinalizer::~CEFinalizer() {}
+CEFinalizer::~CEFinalizer() = default;
 
 void
 CollationBuilder::finalizeCEs(UErrorCode &errorCode) {

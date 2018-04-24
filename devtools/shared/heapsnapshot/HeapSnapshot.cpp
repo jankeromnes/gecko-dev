@@ -1253,7 +1253,7 @@ public:
            oneByteStringsAlreadySerialized.init();
   }
 
-  ~StreamWriter() override { }
+  ~StreamWriter() override = default;
 
   bool writeMetadata(uint64_t timestamp) final {
     protobuf::Metadata metadata;
@@ -1481,7 +1481,7 @@ HeapSnapshot::CreateUniqueCoreDumpFile(ErrorResult& rv,
 class DeleteHeapSnapshotTempFileHelperChild
 {
 public:
-  constexpr DeleteHeapSnapshotTempFileHelperChild() { }
+  constexpr DeleteHeapSnapshotTempFileHelperChild() = default;
 
   void operator()(PHeapSnapshotTempFileHelperChild* ptr) const {
     Unused << NS_WARN_IF(!HeapSnapshotTempFileHelperChild::Send__delete__(ptr));

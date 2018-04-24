@@ -55,20 +55,15 @@ CECalendar::CECalendar(const Locale& aLocale, UErrorCode& success)
 }
 
 CECalendar::CECalendar (const CECalendar& other) 
-:   Calendar(other)
-{
-}
+:   
+= default;
 
 CECalendar::~CECalendar()
-{
-}
+= default;
 
 CECalendar&
 CECalendar::operator=(const CECalendar& right)
-{
-    Calendar::operator=(right);
-    return *this;
-}
+= default;
 
 //-------------------------------------------------------------------------
 // Calendar framework

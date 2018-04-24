@@ -898,8 +898,7 @@ VTZWriter::VTZWriter(UnicodeString& output) {
     out = &output;
 }
 
-VTZWriter::~VTZWriter() {
-}
+VTZWriter::~VTZWriter() = default;
 
 void
 VTZWriter::write(const UnicodeString& str) {
@@ -939,8 +938,7 @@ VTZReader::VTZReader(const UnicodeString& input) {
     index = 0;
 }
 
-VTZReader::~VTZReader() {
-}
+VTZReader::~VTZReader() = default;
 
 UChar
 VTZReader::read(void) {

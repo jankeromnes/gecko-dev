@@ -185,7 +185,7 @@ TEST(NACKStringBuilderTest, TestCase13) {
 class RtcpPacketTypeCounterObserverImpl : public RtcpPacketTypeCounterObserver {
  public:
   RtcpPacketTypeCounterObserverImpl() : ssrc_(0) {}
-  virtual ~RtcpPacketTypeCounterObserverImpl() {}
+  virtual ~RtcpPacketTypeCounterObserverImpl() = default;
   void RtcpPacketTypesCounterUpdated(
       uint32_t ssrc,
       const RtcpPacketTypeCounter& packet_counter) override {
@@ -199,7 +199,7 @@ class RtcpPacketTypeCounterObserverImpl : public RtcpPacketTypeCounterObserver {
 class TestTransport : public Transport,
                       public NullRtpData {
  public:
-  TestTransport() {}
+  TestTransport() = default;
 
   bool SendRtp(const uint8_t* /*data*/,
                size_t /*len*/,
