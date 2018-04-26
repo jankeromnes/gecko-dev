@@ -490,10 +490,10 @@ namespace {
 struct AllowedHourFormatsSink : public ResourceSink {
     // Initialize sub-sinks.
     AllowedHourFormatsSink() {}
-    virtual ~AllowedHourFormatsSink();
+    ~AllowedHourFormatsSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-                     UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+                     UErrorCode &errorCode) override {
         ResourceTable timeData = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
         for (int32_t i = 0; timeData.getKeyAndValue(i, key, value); ++i) {
@@ -798,10 +798,10 @@ struct DateTimePatternGenerator::AppendItemFormatsSink : public ResourceSink {
     DateTimePatternGenerator& dtpg;
 
     AppendItemFormatsSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
-    virtual ~AppendItemFormatsSink();
+    ~AppendItemFormatsSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-            UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+            UErrorCode &errorCode) override {
         ResourceTable itemsTable = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
         for (int32_t i = 0; itemsTable.getKeyAndValue(i, key, value); ++i) {
@@ -831,10 +831,10 @@ struct DateTimePatternGenerator::AppendItemNamesSink : public ResourceSink {
     DateTimePatternGenerator& dtpg;
 
     AppendItemNamesSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
-    virtual ~AppendItemNamesSink();
+    ~AppendItemNamesSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-            UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+            UErrorCode &errorCode) override {
         ResourceTable itemsTable = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
         for (int32_t i = 0; itemsTable.getKeyAndValue(i, key, value); ++i) {
@@ -890,10 +890,10 @@ struct DateTimePatternGenerator::AvailableFormatsSink : public ResourceSink {
     UnicodeString conflictingPattern;
 
     AvailableFormatsSink(DateTimePatternGenerator& _dtpg) : dtpg(_dtpg) {}
-    virtual ~AvailableFormatsSink();
+    ~AvailableFormatsSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool isRoot,
-            UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool isRoot,
+            UErrorCode &errorCode) override {
         ResourceTable itemsTable = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
         for (int32_t i = 0; itemsTable.getKeyAndValue(i, key, value); ++i) {

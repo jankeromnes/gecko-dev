@@ -557,9 +557,9 @@ struct CmptDecDataSink : public ResourceSink {
 
   CmptDecDataSink(CDFLocaleData& _dataBundle)
     : dataBundle(_dataBundle), isLatin(FALSE), isFallback(FALSE) {}
-  virtual ~CmptDecDataSink();
+  ~CmptDecDataSink() override;
 
-  virtual void put(const char *key, ResourceValue &value, UBool isRoot, UErrorCode &errorCode) {
+  void put(const char *key, ResourceValue &value, UBool isRoot, UErrorCode &errorCode) override {
     // SPECIAL CASE: Don't consume root in the non-Latin numbering system
     if (isRoot && !isLatin) { return; }
 

@@ -311,31 +311,31 @@ public:
     // constructor
     LocaleDisplayNamesImpl(const Locale& locale, UDialectHandling dialectHandling);
     LocaleDisplayNamesImpl(const Locale& locale, UDisplayContext *contexts, int32_t length);
-    virtual ~LocaleDisplayNamesImpl();
+    ~LocaleDisplayNamesImpl() override;
 
-    virtual const Locale& getLocale() const;
-    virtual UDialectHandling getDialectHandling() const;
-    virtual UDisplayContext getContext(UDisplayContextType type) const;
+    const Locale& getLocale() const override;
+    UDialectHandling getDialectHandling() const override;
+    UDisplayContext getContext(UDisplayContextType type) const override;
 
-    virtual UnicodeString& localeDisplayName(const Locale& locale,
-                                                UnicodeString& result) const;
-    virtual UnicodeString& localeDisplayName(const char* localeId,
-                                                UnicodeString& result) const;
-    virtual UnicodeString& languageDisplayName(const char* lang,
-                                               UnicodeString& result) const;
-    virtual UnicodeString& scriptDisplayName(const char* script,
-                                                UnicodeString& result) const;
-    virtual UnicodeString& scriptDisplayName(UScriptCode scriptCode,
-                                                UnicodeString& result) const;
-    virtual UnicodeString& regionDisplayName(const char* region,
-                                                UnicodeString& result) const;
-    virtual UnicodeString& variantDisplayName(const char* variant,
-                                                UnicodeString& result) const;
-    virtual UnicodeString& keyDisplayName(const char* key,
-                                                UnicodeString& result) const;
-    virtual UnicodeString& keyValueDisplayName(const char* key,
+    UnicodeString& localeDisplayName(const Locale& locale,
+                                                UnicodeString& result) const override;
+    UnicodeString& localeDisplayName(const char* localeId,
+                                                UnicodeString& result) const override;
+    UnicodeString& languageDisplayName(const char* lang,
+                                               UnicodeString& result) const override;
+    UnicodeString& scriptDisplayName(const char* script,
+                                                UnicodeString& result) const override;
+    UnicodeString& scriptDisplayName(UScriptCode scriptCode,
+                                                UnicodeString& result) const override;
+    UnicodeString& regionDisplayName(const char* region,
+                                                UnicodeString& result) const override;
+    UnicodeString& variantDisplayName(const char* variant,
+                                                UnicodeString& result) const override;
+    UnicodeString& keyDisplayName(const char* key,
+                                                UnicodeString& result) const override;
+    UnicodeString& keyValueDisplayName(const char* key,
                                                 const char* value,
-                                                UnicodeString& result) const;
+                                                UnicodeString& result) const override;
 private:
     UnicodeString& localeIdName(const char* localeId,
                                 UnicodeString& result) const;
@@ -401,10 +401,10 @@ struct LocaleDisplayNamesImpl::CapitalizationContextSink : public ResourceSink {
 
     CapitalizationContextSink(LocaleDisplayNamesImpl& _parent)
       : hasCapitalizationUsage(FALSE), parent(_parent) {}
-    virtual ~CapitalizationContextSink();
+    ~CapitalizationContextSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-            UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+            UErrorCode &errorCode) override {
         ResourceTable contexts = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
         for (int i = 0; contexts.getKeyAndValue(i, key, value); ++i) {

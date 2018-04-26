@@ -149,7 +149,7 @@ public:
   TestEmptyContinuation(TestManager* aTestManager, const string& aTestID)
     : mTestmanager(aTestManager), mTestID(aTestID) {}
 
-  virtual void operator()(bool aSuccess,
+  void operator()(bool aSuccess,
                           const uint8_t* aData,
                           uint32_t aDataSize) override
   {
@@ -171,7 +171,7 @@ public:
                        const string& aTestID)
     : mID(aID), mTestmanager(aTestManager), mTestID(aTestID) {}
 
-  virtual void operator()(bool aSuccess,
+  void operator()(bool aSuccess,
                           const uint8_t* aData,
                           uint32_t aDataSize) override
   {
@@ -198,7 +198,7 @@ public:
                                        const string& aTestID)
   : mValue(aValue), mTestmanager(aTestManager), mTestID(aTestID) {}
 
-  virtual void operator()(bool aSuccess,
+  void operator()(bool aSuccess,
                           const uint8_t* aData,
                           uint32_t aDataSize) override
   {
@@ -225,7 +225,7 @@ public:
     , mTestID(aTestID)
   {}
 
-  virtual void operator()(bool aSuccess,
+  void operator()(bool aSuccess,
                           const uint8_t* aData,
                           uint32_t aDataSize) override
   {

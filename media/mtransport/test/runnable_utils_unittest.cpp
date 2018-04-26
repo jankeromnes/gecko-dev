@@ -106,7 +106,7 @@ class DispatchTest : public MtransportTest {
  public:
   DispatchTest() : MtransportTest(), ran_(0), cl_(&ran_) {}
 
-  void SetUp() {
+  void SetUp() override {
     MtransportTest::SetUp();
 
     nsresult rv;

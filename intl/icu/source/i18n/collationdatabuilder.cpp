@@ -127,22 +127,22 @@ class DataBuilderCollationIterator : public CollationIterator {
 public:
     DataBuilderCollationIterator(CollationDataBuilder &b);
 
-    virtual ~DataBuilderCollationIterator();
+    ~DataBuilderCollationIterator() override;
 
     int32_t fetchCEs(const UnicodeString &str, int32_t start, int64_t ces[], int32_t cesLength);
 
-    virtual void resetToOffset(int32_t newOffset);
-    virtual int32_t getOffset() const;
+    void resetToOffset(int32_t newOffset) override;
+    int32_t getOffset() const override;
 
-    virtual UChar32 nextCodePoint(UErrorCode &errorCode);
-    virtual UChar32 previousCodePoint(UErrorCode &errorCode);
+    UChar32 nextCodePoint(UErrorCode &errorCode) override;
+    UChar32 previousCodePoint(UErrorCode &errorCode) override;
 
 protected:
-    virtual void forwardNumCodePoints(int32_t num, UErrorCode &errorCode);
-    virtual void backwardNumCodePoints(int32_t num, UErrorCode &errorCode);
+    void forwardNumCodePoints(int32_t num, UErrorCode &errorCode) override;
+    void backwardNumCodePoints(int32_t num, UErrorCode &errorCode) override;
 
-    virtual uint32_t getDataCE32(UChar32 c) const;
-    virtual uint32_t getCE32FromBuilderData(uint32_t ce32, UErrorCode &errorCode);
+    uint32_t getDataCE32(UChar32 c) const override;
+    uint32_t getCE32FromBuilderData(uint32_t ce32, UErrorCode &errorCode) override;
 
     CollationDataBuilder &builder;
     CollationData builderData;

@@ -203,7 +203,7 @@ AttachSandboxReporter(base::file_handle_mapping_vector* aFdMap)
 class SandboxFork : public base::LaunchOptions::ForkDelegate {
 public:
   explicit SandboxFork(int aFlags, bool aChroot);
-  virtual ~SandboxFork();
+  ~SandboxFork() override;
 
   void PrepareMapping(base::file_handle_mapping_vector* aMap);
   pid_t Fork() override;

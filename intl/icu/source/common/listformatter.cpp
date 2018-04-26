@@ -180,7 +180,7 @@ struct ListFormatter::ListPatternsSink : public ResourceSink {
 
     ListPatternsSink() {}
 #endif
-    virtual ~ListPatternsSink();
+    ~ListPatternsSink() override;
 
     void setAliasedStyle(UnicodeString alias) {
         int32_t startIndex = alias.indexOf(aliasPrefix, kAliasPrefixLen, 0);
@@ -208,8 +208,8 @@ struct ListFormatter::ListPatternsSink : public ResourceSink {
         }
     }
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-            UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+            UErrorCode &errorCode) override {
         aliasedStyle[0] = 0;
         if (value.getType() == URES_ALIAS) {
             setAliasedStyle(value.getAliasUnicodeString(errorCode));

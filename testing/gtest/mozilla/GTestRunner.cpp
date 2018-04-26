@@ -28,29 +28,29 @@ namespace mozilla {
 class MozillaPrinter : public EmptyTestEventListener
 {
 public:
-  virtual void OnTestProgramStart(const UnitTest& /* aUnitTest */) override {
+  void OnTestProgramStart(const UnitTest& /* aUnitTest */) override {
     printf("TEST-INFO | GTest unit test starting\n");
   }
-  virtual void OnTestProgramEnd(const UnitTest& aUnitTest) override {
+  void OnTestProgramEnd(const UnitTest& aUnitTest) override {
     printf("TEST-%s | GTest unit test: %s\n",
            aUnitTest.Passed() ? "PASS" : "UNEXPECTED-FAIL",
            aUnitTest.Passed() ? "passed" : "failed");
     printf("Passed: %d\n", aUnitTest.successful_test_count());
     printf("Failed: %d\n", aUnitTest.failed_test_count());
   }
-  virtual void OnTestStart(const TestInfo& aTestInfo) override {
+  void OnTestStart(const TestInfo& aTestInfo) override {
     mTestInfo = &aTestInfo;
     printf("TEST-START | %s.%s\n",
         mTestInfo->test_case_name(), mTestInfo->name());
   }
-  virtual void OnTestPartResult(const TestPartResult& aTestPartResult) override {
+  void OnTestPartResult(const TestPartResult& aTestPartResult) override {
     printf("TEST-%s | %s.%s | %s @ %s:%i\n",
            !aTestPartResult.failed() ? "PASS" : "UNEXPECTED-FAIL",
            mTestInfo ? mTestInfo->test_case_name() : "?", mTestInfo ? mTestInfo->name() : "?",
            aTestPartResult.summary(),
            aTestPartResult.file_name(), aTestPartResult.line_number());
   }
-  virtual void OnTestEnd(const TestInfo& aTestInfo) override {
+  void OnTestEnd(const TestInfo& aTestInfo) override {
     printf("TEST-%s | %s.%s | test completed (time: %llims)\n",
            aTestInfo.result()->Passed() ? "PASS": "UNEXPECTED-FAIL",
            aTestInfo.test_case_name(), aTestInfo.name(),

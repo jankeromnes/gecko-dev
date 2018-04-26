@@ -48,11 +48,11 @@ class PacketManipulatorTest : public PacketRelatedTest {
     no_drop_config_.packet_loss_mode = kUniform;
   }
 
-  virtual ~PacketManipulatorTest() {}
+  ~PacketManipulatorTest() override {}
 
-  void SetUp() { PacketRelatedTest::SetUp(); }
+  void SetUp() override { PacketRelatedTest::SetUp(); }
 
-  void TearDown() { PacketRelatedTest::TearDown(); }
+  void TearDown() override { PacketRelatedTest::TearDown(); }
 
   void VerifyPacketLoss(int expected_nbr_packets_dropped,
                         int actual_nbr_packets_dropped,

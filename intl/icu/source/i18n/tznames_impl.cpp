@@ -732,7 +732,7 @@ struct ZNames::ZNamesLoader : public ResourceSink {
     ZNamesLoader() {
         clear();
     }
-    virtual ~ZNamesLoader();
+    ~ZNamesLoader() override;
 
     /** Reset for loading another set of names. */
     void clear() {
@@ -789,8 +789,8 @@ struct ZNames::ZNamesLoader : public ResourceSink {
         }
     }
 
-    virtual void put(const char* key, ResourceValue& value, UBool /*noFallback*/,
-            UErrorCode &errorCode) {
+    void put(const char* key, ResourceValue& value, UBool /*noFallback*/,
+            UErrorCode &errorCode) override {
         ResourceTable namesTable = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }
         for (int32_t i = 0; namesTable.getKeyAndValue(i, key, value); ++i) {
@@ -851,12 +851,12 @@ public:
     MetaZoneIDsEnumeration();
     MetaZoneIDsEnumeration(const UVector& mzIDs);
     MetaZoneIDsEnumeration(UVector* mzIDs);
-    virtual ~MetaZoneIDsEnumeration();
+    ~MetaZoneIDsEnumeration() override;
     static UClassID U_EXPORT2 getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
-    virtual const UnicodeString* snext(UErrorCode& status);
-    virtual void reset(UErrorCode& status);
-    virtual int32_t count(UErrorCode& status) const;
+    UClassID getDynamicClassID(void) const override;
+    const UnicodeString* snext(UErrorCode& status) override;
+    void reset(UErrorCode& status) override;
+    int32_t count(UErrorCode& status) const override;
 private:
     int32_t fLen;
     int32_t fPos;
@@ -914,9 +914,9 @@ MetaZoneIDsEnumeration::~MetaZoneIDsEnumeration() {
 class ZNameSearchHandler : public TextTrieMapSearchResultHandler {
 public:
     ZNameSearchHandler(uint32_t types);
-    virtual ~ZNameSearchHandler();
+    ~ZNameSearchHandler() override;
 
-    UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status);
+    UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status) override;
     TimeZoneNames::MatchInfoCollection* getMatches(int32_t& maxMatchLen);
 
 private:
@@ -1450,7 +1450,7 @@ struct TimeZoneNamesImpl::ZoneStringsLoader : public ResourceSink {
         uhash_setKeyDeleter(keyToLoader, uprv_free);
         uhash_setValueDeleter(keyToLoader, deleteZNamesLoader);
     }
-    virtual ~ZoneStringsLoader();
+    ~ZoneStringsLoader() override;
 
     void* createKey(const char* key, UErrorCode& status) {
         int32_t len = sizeof(char) * (uprv_strlen(key) + 1);
@@ -1555,8 +1555,8 @@ struct TimeZoneNamesImpl::ZoneStringsLoader : public ResourceSink {
         }
     }
 
-    virtual void put(const char *key, ResourceValue &value, UBool noFallback,
-            UErrorCode &status) {
+    void put(const char *key, ResourceValue &value, UBool noFallback,
+            UErrorCode &status) override {
         ResourceTable timeZonesTable = value.getTable(status);
         if (U_FAILURE(status)) { return; }
         for (int32_t i = 0; timeZonesTable.getKeyAndValue(i, key, value); ++i) {
@@ -1885,9 +1885,9 @@ U_CDECL_END
 class TZDBNameSearchHandler : public TextTrieMapSearchResultHandler {
 public:
     TZDBNameSearchHandler(uint32_t types, const char* region);
-    virtual ~TZDBNameSearchHandler();
+    ~TZDBNameSearchHandler() override;
 
-    UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status);
+    UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status) override;
     TimeZoneNames::MatchInfoCollection* getMatches(int32_t& maxMatchLen);
 
 private:
