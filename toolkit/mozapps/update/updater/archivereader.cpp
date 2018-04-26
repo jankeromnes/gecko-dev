@@ -243,7 +243,7 @@ ArchiveReader::ExtractFile(const char *name, const NS_tchar *dest)
 #ifdef XP_WIN
   FILE* fp = _wfopen(dest, L"wb+");
 #else
-  int fd = creat(dest, item->flags);
+  int fd = open (dest, O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC, item->flags);
   if (fd == -1)
     return WRITE_ERROR;
 
