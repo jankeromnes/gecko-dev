@@ -786,7 +786,7 @@ void TSymbolTable::clearCompilationResults()
     mUniqueIdCounter = mUserDefinedUniqueIdsStart;
 
     // User-defined scopes should have already been cleared when the compilation finished.
-    ASSERT(mTable.size() == 0u);
+    ASSERT(mTable.empty());
 }
 
 int TSymbolTable::nextUniqueIdValue()

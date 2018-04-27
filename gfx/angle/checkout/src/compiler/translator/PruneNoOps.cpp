@@ -64,7 +64,7 @@ PruneNoOpsTraverser::PruneNoOpsTraverser(TSymbolTable *symbolTable)
 bool PruneNoOpsTraverser::visitDeclaration(Visit, TIntermDeclaration *node)
 {
     TIntermSequence *sequence = node->getSequence();
-    if (sequence->size() >= 1)
+    if (!sequence->empty())
     {
         TIntermSymbol *declaratorSymbol = sequence->front()->getAsSymbolNode();
         // Prune declarations without a variable name, unless it's an interface block declaration.

@@ -74,7 +74,7 @@ MacroExpander::ScopedMacroReenabler::~ScopedMacroReenabler()
     {
         // Copying the string here by using substr is a check for use-after-free. It detects
         // use-after-free more reliably than just toggling the disabled flag.
-        ASSERT(macro->name.substr() != "");
+        ASSERT(!macro->name.substr().empty());
         macro->disabled = false;
     }
     mExpander->mMacrosToReenable.clear();

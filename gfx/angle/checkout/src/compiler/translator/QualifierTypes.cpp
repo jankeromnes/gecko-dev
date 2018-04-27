@@ -44,7 +44,7 @@ bool IsInvariantCorrect(const TTypeQualifierBuilder::QualifierSequence &qualifie
 {
     // We should have at least one qualifier.
     // The first qualifier always tells the scope.
-    return qualifiers.size() >= 1 && IsScopeQualifierWrapper(qualifiers[0]);
+    return !qualifiers.empty() && IsScopeQualifierWrapper(qualifiers[0]);
 }
 
 // Returns true if there are qualifiers which have been specified multiple times

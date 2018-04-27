@@ -205,7 +205,7 @@ TVariable *ScalarizeArgsTraverser::createTempVariable(TIntermTyped *original)
 
     TVariable *variable = CreateTempVariable(mSymbolTable, type);
 
-    ASSERT(mBlockStack.size() > 0);
+    ASSERT(!mBlockStack.empty());
     TIntermSequence &sequence = mBlockStack.back();
     TIntermDeclaration *declaration = CreateTempInitDeclarationNode(variable, original);
     sequence.push_back(declaration);

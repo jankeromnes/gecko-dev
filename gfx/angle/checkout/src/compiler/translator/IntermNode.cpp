@@ -537,7 +537,7 @@ const TConstantUnion *TIntermAggregate::getConstantValue() const
         return nullptr;
     }
     ASSERT(isConstructor());
-    ASSERT(mArguments.size() > 0u);
+    ASSERT(!mArguments.empty());
 
     TConstantUnion *constArray = nullptr;
     if (isArray())

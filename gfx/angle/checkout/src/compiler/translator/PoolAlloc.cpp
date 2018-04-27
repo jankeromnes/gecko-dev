@@ -199,7 +199,7 @@ void TPoolAllocator::push()
 //
 void TPoolAllocator::pop()
 {
-    if (mStack.size() < 1)
+    if (mStack.empty())
         return;
 
 #if !defined(ANGLE_TRANSLATOR_DISABLE_POOL_ALLOC)
@@ -238,7 +238,7 @@ void TPoolAllocator::pop()
 //
 void TPoolAllocator::popAll()
 {
-    while (mStack.size() > 0)
+    while (!mStack.empty())
         pop();
 }
 

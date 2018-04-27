@@ -287,7 +287,7 @@ StructureHLSL::DefinedStructs::iterator StructureHLSL::defineVariants(const TStr
 void StructureHLSL::ensureStructDefined(const TStructure &structure)
 {
     const TString name = StructNameString(structure);
-    if (name == "")
+    if (name.empty())
     {
         return;  // Nameless structures are not defined
     }
@@ -301,7 +301,7 @@ TString StructureHLSL::addStructConstructor(const TStructure &structure)
 {
     const TString name = StructNameString(structure);
 
-    if (name == "")
+    if (name.empty())
     {
         return TString();  // Nameless structures don't have constructors
     }

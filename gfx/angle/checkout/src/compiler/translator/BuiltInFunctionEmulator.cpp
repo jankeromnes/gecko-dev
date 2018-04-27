@@ -168,7 +168,7 @@ FunctionId BuiltInFunctionEmulator::addEmulatedFunctionWithDependency(
 
 bool BuiltInFunctionEmulator::isOutputEmpty() const
 {
-    return (mFunctions.size() == 0);
+    return (mFunctions.empty());
 }
 
 void BuiltInFunctionEmulator::outputEmulatedFunctions(TInfoSinkBase &out) const

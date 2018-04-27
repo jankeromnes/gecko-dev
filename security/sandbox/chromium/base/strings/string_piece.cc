@@ -175,7 +175,7 @@ template<typename STR>
 size_t rfindT(const BasicStringPiece<STR>& self,
               typename STR::value_type c,
               size_t pos) {
-  if (self.size() == 0)
+  if (self.empty())
     return BasicStringPiece<STR>::npos;
 
   for (size_t i = std::min(pos, self.size() - 1); ;
@@ -200,7 +200,7 @@ size_t rfind(const StringPiece16& self, char16 c, size_t pos) {
 size_t find_first_of(const StringPiece& self,
                      const StringPiece& s,
                      size_t pos) {
-  if (self.size() == 0 || s.size() == 0)
+  if (self.empty() || s.empty())
     return StringPiece::npos;
 
   // Avoid the cost of BuildLookupTable() for a single-character search.
@@ -232,10 +232,10 @@ size_t find_first_of(const StringPiece16& self,
 size_t find_first_not_of(const StringPiece& self,
                          const StringPiece& s,
                          size_t pos) {
-  if (self.size() == 0)
+  if (self.empty())
     return StringPiece::npos;
 
-  if (s.size() == 0)
+  if (s.empty())
     return 0;
 
   // Avoid the cost of BuildLookupTable() for a single-character search.
@@ -256,7 +256,7 @@ size_t find_first_not_of(const StringPiece& self,
 BASE_EXPORT size_t find_first_not_of(const StringPiece16& self,
                                      const StringPiece16& s,
                                      size_t pos) {
-  if (self.size() == 0)
+  if (self.empty())
     return StringPiece16::npos;
 
   for (size_t self_i = pos; self_i < self.size(); ++self_i) {
@@ -277,7 +277,7 @@ template<typename STR>
 size_t find_first_not_ofT(const BasicStringPiece<STR>& self,
                           typename STR::value_type c,
                           size_t pos) {
-  if (self.size() == 0)
+  if (self.empty())
     return BasicStringPiece<STR>::npos;
 
   for (; pos < self.size(); ++pos) {
@@ -302,7 +302,7 @@ size_t find_first_not_of(const StringPiece16& self,
 
 // 8-bit version using lookup table.
 size_t find_last_of(const StringPiece& self, const StringPiece& s, size_t pos) {
-  if (self.size() == 0 || s.size() == 0)
+  if (self.empty() || s.empty())
     return StringPiece::npos;
 
   // Avoid the cost of BuildLookupTable() for a single-character search.
@@ -324,7 +324,7 @@ size_t find_last_of(const StringPiece& self, const StringPiece& s, size_t pos) {
 size_t find_last_of(const StringPiece16& self,
                     const StringPiece16& s,
                     size_t pos) {
-  if (self.size() == 0)
+  if (self.empty())
     return StringPiece16::npos;
 
   for (size_t self_i = std::min(pos, self.size() - 1); ;
@@ -343,11 +343,11 @@ size_t find_last_of(const StringPiece16& self,
 size_t find_last_not_of(const StringPiece& self,
                         const StringPiece& s,
                         size_t pos) {
-  if (self.size() == 0)
+  if (self.empty())
     return StringPiece::npos;
 
   size_t i = std::min(pos, self.size() - 1);
-  if (s.size() == 0)
+  if (s.empty())
     return i;
 
   // Avoid the cost of BuildLookupTable() for a single-character search.
@@ -369,7 +369,7 @@ size_t find_last_not_of(const StringPiece& self,
 size_t find_last_not_of(const StringPiece16& self,
                         const StringPiece16& s,
                         size_t pos) {
-  if (self.size() == 0)
+  if (self.empty())
     return StringPiece::npos;
 
   for (size_t self_i = std::min(pos, self.size() - 1); ; --self_i) {
@@ -392,7 +392,7 @@ template<typename STR>
 size_t find_last_not_ofT(const BasicStringPiece<STR>& self,
                          typename STR::value_type c,
                          size_t pos) {
-  if (self.size() == 0)
+  if (self.empty())
     return BasicStringPiece<STR>::npos;
 
   for (size_t i = std::min(pos, self.size() - 1); ; --i) {

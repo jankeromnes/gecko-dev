@@ -748,7 +748,7 @@ void TType::setArraySize(size_t arrayDimension, unsigned int s)
 void TType::toArrayElementType()
 {
     ASSERT(mArraySizes != nullptr);
-    if (mArraySizes->size() > 0)
+    if (!mArraySizes->empty())
     {
         mArraySizes->pop_back();
         invalidateMangledName();

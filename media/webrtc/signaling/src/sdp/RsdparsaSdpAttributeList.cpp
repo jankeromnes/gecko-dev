@@ -570,7 +570,7 @@ RsdparsaSdpAttributeList::LoadFingerprint(RustAttributeList* attributeList)
     std::string fingerprintToken = convertStringView(fingerprint.fingerprint);
     std::vector<uint8_t> fingerprintBytes =
       SdpFingerprintAttributeList::ParseFingerprint(fingerprintToken);
-    if (fingerprintBytes.size() == 0) {
+    if (fingerprintBytes.empty()) {
       // TODO: Should we load fingerprint earlier to detect if it is malformed
       // and throw a proper error?
       // TODO: We should improve our error checking. See Bug 1437169.

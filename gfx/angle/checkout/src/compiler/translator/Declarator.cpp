@@ -27,7 +27,7 @@ TDeclarator::TDeclarator(const ImmutableString &name,
 
 bool TDeclarator::isArray() const
 {
-    return mArraySizes != nullptr && mArraySizes->size() > 0;
+    return mArraySizes != nullptr && !mArraySizes->empty();
 }
 
 }  // namespace sh
