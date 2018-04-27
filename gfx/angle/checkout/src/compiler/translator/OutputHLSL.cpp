@@ -2688,7 +2688,7 @@ void OutputHLSL::writeParameter(const TIntermSymbol *symbol, TInfoSinkBase &out)
         ASSERT(qualifier != EvqOut && qualifier != EvqInOut);
         TVector<const TVariable *> samplerSymbols;
         std::string namePrefix = "angle";
-        namePrefix += nameStr.c_str();
+        namePrefix += nameStr;
         type.createSamplerSymbols(ImmutableString(namePrefix), "", &samplerSymbols, nullptr,
                                   mSymbolTable);
         for (const TVariable *sampler : samplerSymbols)

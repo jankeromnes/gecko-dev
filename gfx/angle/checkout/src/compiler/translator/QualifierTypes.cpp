@@ -142,7 +142,7 @@ bool HasRepeatingQualifiers(const TTypeQualifierBuilder::QualifierSequence &qual
                         TQualifier previousQualifier = previousQualifierWrapper->getQualifier();
                         if (currentQualifier == previousQualifier)
                         {
-                            *errorMessage = previousQualifierWrapper->getQualifierString().c_str();
+                            *errorMessage = previousQualifierWrapper->getQualifierString();
                             *errorMessage += " specified multiple times";
                             return true;
                         }
@@ -167,7 +167,7 @@ bool HasRepeatingQualifiers(const TTypeQualifierBuilder::QualifierSequence &qual
                         TQualifier previousQualifier = previousQualifierWrapper->getQualifier();
                         if (currentQualifier == previousQualifier)
                         {
-                            *errorMessage = previousQualifierWrapper->getQualifierString().c_str();
+                            *errorMessage = previousQualifierWrapper->getQualifierString();
                             *errorMessage += " specified multiple times";
                             return true;
                         }

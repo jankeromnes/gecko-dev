@@ -188,7 +188,7 @@ unsigned int UniformHLSL::assignSamplerInStructUniformRegister(const TType &type
     // Sampler that is a field of a uniform structure.
     ASSERT(IsSampler(type.getBasicType()));
     unsigned int registerIndex                     = mTextureRegister;
-    mUniformRegisterMap[std::string(name.c_str())] = registerIndex;
+    mUniformRegisterMap[std::string(name)] = registerIndex;
     unsigned int registerCount = type.isArray() ? type.getArraySizeProduct() : 1u;
     mTextureRegister += registerCount;
     if (outRegisterCount)

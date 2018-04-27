@@ -297,7 +297,7 @@ std::string CVRPathRegistry_Public::GetRuntimePath() const
 	if( m_vecRuntimePath.empty() )
 		return "";
 	else
-		return m_vecRuntimePath.front().c_str();
+		return m_vecRuntimePath.front();
 }
 
 
@@ -309,7 +309,7 @@ std::string CVRPathRegistry_Public::GetConfigPath() const
 	if( m_vecConfigPath.empty() )
 		return "";
 	else
-		return m_vecConfigPath.front().c_str();
+		return m_vecConfigPath.front();
 }
 
 
@@ -321,7 +321,7 @@ std::string CVRPathRegistry_Public::GetLogPath() const
 	if( m_vecLogPath.empty() )
 		return "";
 	else
-		return m_vecLogPath.front().c_str();
+		return m_vecLogPath.front();
 }
 
 
