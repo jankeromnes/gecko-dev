@@ -18,7 +18,7 @@ NS_IMPL_ISUPPORTS(nsICOEncoder, imgIEncoder, nsIInputStream,
                   nsIAsyncInputStream)
 
 nsICOEncoder::nsICOEncoder() : mImageBufferStart(nullptr),
-                               mImageBufferCurr(0),
+                               mImageBufferCurr(nullptr),
                                mImageBufferSize(0),
                                mImageBufferReadPoint(0),
                                mFinished(false),

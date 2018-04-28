@@ -54,8 +54,8 @@ TPoolAllocator::TPoolAllocator(int growthIncrement, int allocationAlignment)
     : alignment(allocationAlignment),
 #if !defined(ANGLE_TRANSLATOR_DISABLE_POOL_ALLOC)
       pageSize(growthIncrement),
-      freeList(0),
-      inUseList(0),
+      freeList(nullptr),
+      inUseList(nullptr),
       numCalls(0),
       totalBytes(0),
 #endif
@@ -261,7 +261,7 @@ void *TPoolAllocator::allocate(size_t numBytes)
     size_t allocationSize = TAllocation::allocationSize(numBytes);
     // Detect integer overflow.
     if (allocationSize < numBytes)
-        return 0;
+        return nullptr;
 
     //
     // Do the allocation, most likely case first, for efficiency.
@@ -288,11 +288,11 @@ void *TPoolAllocator::allocate(size_t numBytes)
         size_t numBytesToAlloc = allocationSize + headerSkip;
         // Detect integer overflow.
         if (numBytesToAlloc < allocationSize)
-            return 0;
+            return nullptr;
 
         tHeader *memory = reinterpret_cast<tHeader *>(::new char[numBytesToAlloc]);
-        if (memory == 0)
-            return 0;
+        if (memory == nullptr)
+            return nullptr;
 
         // Use placement-new to initialize header
         new (memory) tHeader(inUseList, (numBytesToAlloc + pageSize - 1) / pageSize);
@@ -316,8 +316,8 @@ void *TPoolAllocator::allocate(size_t numBytes)
     else
     {
         memory = reinterpret_cast<tHeader *>(::new char[pageSize]);
-        if (memory == 0)
-            return 0;
+        if (memory == nullptr)
+            return nullptr;
     }
 
     // Use placement-new to initialize header
@@ -355,6 +355,6 @@ void TPoolAllocator::unlock()
 //
 void TAllocation::checkAllocList() const
 {
-    for (const TAllocation *alloc = this; alloc != 0; alloc = alloc->prevAlloc)
+    for (const TAllocation *alloc = this; alloc != nullptr; alloc = alloc->prevAlloc)
         alloc->check();
 }

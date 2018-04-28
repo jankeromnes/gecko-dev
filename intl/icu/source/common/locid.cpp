@@ -502,7 +502,7 @@ Locale& Locale::init(const char* localeID, UBool canonicalize)
     // without goto and without another function
     do {
         char *separator;
-        char *field[5] = {0};
+        char *field[5] = {nullptr};
         int32_t fieldLen[5] = {0};
         int32_t fieldIdx;
         int32_t variantField;
@@ -526,7 +526,7 @@ Locale& Locale::init(const char* localeID, UBool canonicalize)
         if(err == U_BUFFER_OVERFLOW_ERROR || length >= (int32_t)sizeof(fullNameBuffer)) {
             /*Go to heap for the fullName if necessary*/
             fullName = (char *)uprv_malloc(sizeof(char)*(length + 1));
-            if(fullName == 0) {
+            if(fullName == nullptr) {
                 fullName = fullNameBuffer;
                 break; // error: out of memory
             }

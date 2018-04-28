@@ -297,20 +297,20 @@ ShHandle ConstructCompiler(sh::GLenum type,
     TShHandleBase *base = static_cast<TShHandleBase *>(ConstructCompiler(type, spec, output));
     if (base == nullptr)
     {
-        return 0;
+        return nullptr;
     }
 
     TCompiler *compiler = base->getAsCompiler();
     if (compiler == nullptr)
     {
-        return 0;
+        return nullptr;
     }
 
     // Generate built-in symbol table.
     if (!compiler->Init(*resources))
     {
         Destruct(base);
-        return 0;
+        return nullptr;
     }
 
     return reinterpret_cast<void *>(base);
@@ -318,7 +318,7 @@ ShHandle ConstructCompiler(sh::GLenum type,
 
 void Destruct(ShHandle handle)
 {
-    if (handle == 0)
+    if (handle == nullptr)
         return;
 
     TShHandleBase *base = static_cast<TShHandleBase *>(handle);

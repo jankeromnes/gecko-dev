@@ -224,7 +224,7 @@ TType::TType(const TInterfaceBlock *interfaceBlockIn,
       secondarySize(1),
       mArraySizes(nullptr),
       mInterfaceBlock(interfaceBlockIn),
-      mStructure(0),
+      mStructure(nullptr),
       mIsStructSpecifier(false),
       mMangledName(nullptr)
 {

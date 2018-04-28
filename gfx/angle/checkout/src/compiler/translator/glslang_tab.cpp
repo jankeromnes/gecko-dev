@@ -3359,7 +3359,7 @@ yyreduce:
   case 109:
 
     {
-        TParameter param = { 0, new TType((yyvsp[0].interm.type)) };
+        TParameter param = { nullptr, new TType((yyvsp[0].interm.type)) };
         (yyval.interm.param) = param;
     }
 
@@ -4740,7 +4740,7 @@ yyreduce:
 
     {
         context->symbolTable.pop();
-        (yyval.interm.intermNode) = context->addLoop(ELoopWhile, 0, (yyvsp[-2].interm.intermNode), 0, (yyvsp[0].interm.intermNode), (yylsp[-5]));
+        (yyval.interm.intermNode) = context->addLoop(ELoopWhile, nullptr, (yyvsp[-2].interm.intermNode), nullptr, (yyvsp[0].interm.intermNode), (yylsp[-5]));
         context->decrLoopNestingLevel();
     }
 
@@ -4755,7 +4755,7 @@ yyreduce:
   case 278:
 
     {
-        (yyval.interm.intermNode) = context->addLoop(ELoopDoWhile, 0, (yyvsp[-2].interm.intermTypedNode), 0, (yyvsp[-5].interm.intermNode), (yylsp[-4]));
+        (yyval.interm.intermNode) = context->addLoop(ELoopDoWhile, nullptr, (yyvsp[-2].interm.intermTypedNode), nullptr, (yyvsp[-5].interm.intermNode), (yylsp[-4]));
         context->decrLoopNestingLevel();
     }
 
@@ -4813,7 +4813,7 @@ yyreduce:
 
     {
         (yyval.interm.nodePair).node1 = (yyvsp[-1].interm.intermNode);
-        (yyval.interm.nodePair).node2 = 0;
+        (yyval.interm.nodePair).node2 = nullptr;
     }
 
     break;

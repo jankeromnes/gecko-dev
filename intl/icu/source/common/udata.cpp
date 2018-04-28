@@ -835,8 +835,8 @@ static UBool extendICUData(UErrorCode *pErr)
        UDataMemory_init(&copyPData);
        if(pData != NULL) {
           UDatamemory_assign(&copyPData, pData);
-          copyPData.map = 0;              /* The mapping for this data is owned by the hash table */
-          copyPData.mapAddr = 0;          /*   which will unmap it when ICU is shut down.         */
+          copyPData.map = nullptr;              /* The mapping for this data is owned by the hash table */
+          copyPData.mapAddr = nullptr;          /*   which will unmap it when ICU is shut down.         */
                                           /* CommonICUData is also unmapped when ICU is shut down.*/
                                           /* To avoid unmapping the data twice, zero out the map  */
                                           /*   fields in the UDataMemory that we're assigning     */

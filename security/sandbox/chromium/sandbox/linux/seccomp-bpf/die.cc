@@ -38,8 +38,8 @@ void Die::ExitGroup() {
   sa.sa_handler = LINUX_SIG_DFL;
   sa.sa_flags = LINUX_SA_RESTART;
   sys_sigaction(LINUX_SIGSEGV, &sa, nullptr);
-  Syscall::Call(__NR_prctl, PR_SET_DUMPABLE, (void*)0, (void*)0, (void*)0);
-  if (*(volatile char*)0) {
+  Syscall::Call(__NR_prctl, PR_SET_DUMPABLE, (void*)nullptr, (void*)nullptr, (void*)nullptr);
+  if (*(volatile char*)nullptr) {
   }
 
   // If there is no way for us to ask for the program to exit, the next

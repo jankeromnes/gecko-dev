@@ -1625,7 +1625,7 @@ uloc_openKeywords(const char* localeID,
     const char* tmpLocaleID;
 
     if(status==NULL || U_FAILURE(*status)) {
-        return 0;
+        return nullptr;
     }
 
     if (_hasBCP47Extension(localeID)) {
@@ -2520,7 +2520,7 @@ uloc_acceptLanguage(char *result, int32_t resultAvailable,
         if(uloc_getParent(acceptList[i], tmp, UPRV_LENGTHOF(tmp), status)!=0) {
             fallbackList[i] = uprv_strdup(tmp);
         } else {
-            fallbackList[i]=0;
+            fallbackList[i]=nullptr;
         }
     }
 
@@ -2559,7 +2559,7 @@ uloc_acceptLanguage(char *result, int32_t resultAvailable,
                     fallbackList[i] = uprv_strdup(tmp);
                 } else {
                     uprv_free(fallbackList[i]);
-                    fallbackList[i]=0;
+                    fallbackList[i]=nullptr;
                 }
             }
         }

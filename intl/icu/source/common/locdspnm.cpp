@@ -584,7 +584,7 @@ LocaleDisplayNamesImpl::localeDisplayName(const Locale& locale,
     char buffer[ULOC_FULLNAME_CAPACITY];
     do { // loop construct is so we can break early out of search
       if (hasScript && hasCountry) {
-        ncat(buffer, ULOC_FULLNAME_CAPACITY, lang, "_", script, "_", country, (char *)0);
+        ncat(buffer, ULOC_FULLNAME_CAPACITY, lang, "_", script, "_", country, (char *)nullptr);
         localeIdName(buffer, resultName);
         if (!resultName.isBogus()) {
           hasScript = FALSE;
@@ -593,7 +593,7 @@ LocaleDisplayNamesImpl::localeDisplayName(const Locale& locale,
         }
       }
       if (hasScript) {
-        ncat(buffer, ULOC_FULLNAME_CAPACITY, lang, "_", script, (char *)0);
+        ncat(buffer, ULOC_FULLNAME_CAPACITY, lang, "_", script, (char *)nullptr);
         localeIdName(buffer, resultName);
         if (!resultName.isBogus()) {
           hasScript = FALSE;
@@ -601,7 +601,7 @@ LocaleDisplayNamesImpl::localeDisplayName(const Locale& locale,
         }
       }
       if (hasCountry) {
-        ncat(buffer, ULOC_FULLNAME_CAPACITY, lang, "_", country, (char*)0);
+        ncat(buffer, ULOC_FULLNAME_CAPACITY, lang, "_", country, (char*)nullptr);
         localeIdName(buffer, resultName);
         if (!resultName.isBogus()) {
           hasCountry = FALSE;
@@ -635,7 +635,7 @@ LocaleDisplayNamesImpl::localeDisplayName(const Locale& locale,
     UnicodeString temp2;
     char value[ULOC_KEYWORD_AND_VALUES_CAPACITY]; // sigh, no ULOC_VALUE_CAPACITY
     const char* key;
-    while ((key = e->next((int32_t *)0, status)) != NULL) {
+    while ((key = e->next((int32_t *)nullptr, status)) != NULL) {
       value[0] = 0;
       locale.getKeywordValue(key, value, ULOC_KEYWORD_AND_VALUES_CAPACITY, status);
       if (U_FAILURE(status) || status == U_STRING_NOT_TERMINATED_WARNING) {
@@ -861,7 +861,7 @@ uldn_open(const char * locale,
           UDialectHandling dialectHandling,
           UErrorCode *pErrorCode) {
   if (U_FAILURE(*pErrorCode)) {
-    return 0;
+    return nullptr;
   }
   if (locale == NULL) {
     locale = uloc_getDefault();
@@ -874,7 +874,7 @@ uldn_openForContext(const char * locale,
                     UDisplayContext *contexts, int32_t length,
                     UErrorCode *pErrorCode) {
   if (U_FAILURE(*pErrorCode)) {
-    return 0;
+    return nullptr;
   }
   if (locale == NULL) {
     locale = uloc_getDefault();

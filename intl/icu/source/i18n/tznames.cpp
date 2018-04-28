@@ -128,7 +128,7 @@ private:
 };
 
 TimeZoneNamesDelegate::TimeZoneNamesDelegate()
-: fTZnamesCacheEntry(0) {
+: fTZnamesCacheEntry(nullptr) {
 }
 
 TimeZoneNamesDelegate::TimeZoneNamesDelegate(const Locale& locale, UErrorCode& status) {

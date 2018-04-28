@@ -89,7 +89,7 @@ RBBIRuleBuilder::RBBIRuleBuilder(const UnicodeString   &rules,
     if (U_FAILURE(status)) {
         return;
     }
-    if(fSetBuilder == 0 || fScanner == 0 || fUSetNodes == 0 || fRuleStatusVals == 0) {
+    if(fSetBuilder == nullptr || fScanner == nullptr || fUSetNodes == nullptr || fRuleStatusVals == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
     }
 }

@@ -89,7 +89,7 @@ Foo::QueryInterface( const nsIID& aIID, void** aResult )
 {
   ++total_queries_;
 
-  nsISupports* rawPtr = 0;
+  nsISupports* rawPtr = nullptr;
   nsresult status = NS_OK;
 
   if ( aIID.Equals(NS_GET_IID(Foo)) )
@@ -196,7 +196,7 @@ Bar::QueryInterface( const nsID& aIID, void** aResult )
 {
   ++total_queries_;
 
-  nsISupports* rawPtr = 0;
+  nsISupports* rawPtr = nullptr;
   nsresult status = NS_OK;
 
   if ( aIID.Equals(NS_GET_IID(Bar)) )

@@ -350,7 +350,7 @@ GregorianCalendar::setGregorianChange(UDate date, UErrorCode& status)
     // values.
     GregorianCalendar *cal = new GregorianCalendar(getTimeZone(), status);
     /* test for NULL */
-    if (cal == 0) {
+    if (cal == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
         return;
     }

@@ -136,7 +136,7 @@ struct S
     , k(Move(rhs.k))
   {
     rhs.j = 0;
-    rhs.k.reset(0);
+    rhs.k.reset(nullptr);
     moveCount++;
   }
 

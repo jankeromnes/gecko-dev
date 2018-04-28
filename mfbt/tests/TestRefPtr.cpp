@@ -63,7 +63,7 @@ GetNewFoo(RefPtr<Foo>* aFoo)
 already_AddRefed<Foo>
 GetNullFoo()
 {
-  return 0;
+  return nullptr;
 }
 
 int

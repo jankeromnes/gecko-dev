@@ -140,7 +140,7 @@ public:
   SimpleFilteredSentenceBreakData(UCharsTrie *forwards, UCharsTrie *backwards ) 
       : fForwardsPartialTrie(forwards), fBackwardsTrie(backwards), refcount(1) { }
   SimpleFilteredSentenceBreakData *incr() { refcount++;  return this; }
-  SimpleFilteredSentenceBreakData *decr() { if((--refcount) <= 0) delete this; return 0; }
+  SimpleFilteredSentenceBreakData *decr() { if((--refcount) <= 0) delete this; return nullptr; }
   virtual ~SimpleFilteredSentenceBreakData();
 
   LocalPointer<UCharsTrie>    fForwardsPartialTrie; //  Has ".a" for "a.M."

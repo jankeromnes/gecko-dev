@@ -320,7 +320,7 @@ void
 TimeUnitFormat::setup(UErrorCode& err) {
     initDataMembers(err);
 
-    UVector pluralCounts(0, uhash_compareUnicodeString, 6, err);
+    UVector pluralCounts(nullptr, uhash_compareUnicodeString, 6, err);
     LocalPointer<StringEnumeration> keywords(getPluralRules().getKeywords(err), err);
     if (U_FAILURE(err)) {
         return;

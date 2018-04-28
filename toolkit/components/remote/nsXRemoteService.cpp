@@ -124,7 +124,7 @@ nsXRemoteService::HandleNewProperty(XID aWindowId, Display* aDisplay,
     Atom actual_type;
     int actual_format;
     unsigned long nitems, bytes_after;
-    char *data = 0;
+    char *data = nullptr;
 
     result = XGetWindowProperty (aDisplay,
                                  aWindowId,

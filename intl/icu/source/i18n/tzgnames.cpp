@@ -1174,7 +1174,7 @@ static void sweepCache() {
 }
 
 TimeZoneGenericNames::TimeZoneGenericNames()
-: fRef(0) {
+: fRef(nullptr) {
 }
 
 TimeZoneGenericNames::~TimeZoneGenericNames() {

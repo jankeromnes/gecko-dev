@@ -50,7 +50,7 @@ UnicodeSet::UnicodeSet(const UnicodeString& pattern,
                        uint32_t options,
                        const SymbolTable* symbols,
                        UErrorCode& status) :
-    len(0), capacity(START_EXTRA), list(0), bmpSet(0), buffer(0),
+    len(0), capacity(START_EXTRA), list(nullptr), bmpSet(nullptr), buffer(nullptr),
     bufferCapacity(0), patLen(0), pat(NULL), strings(NULL), stringSpan(NULL),
     fFlags(0)
 {
@@ -71,7 +71,7 @@ UnicodeSet::UnicodeSet(const UnicodeString& pattern, ParsePosition& pos,
                        uint32_t options,
                        const SymbolTable* symbols,
                        UErrorCode& status) :
-    len(0), capacity(START_EXTRA), list(0), bmpSet(0), buffer(0),
+    len(0), capacity(START_EXTRA), list(nullptr), bmpSet(nullptr), buffer(nullptr),
     bufferCapacity(0), patLen(0), pat(NULL), strings(NULL), stringSpan(NULL),
     fFlags(0)
 {

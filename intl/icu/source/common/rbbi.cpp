@@ -70,7 +70,7 @@ RuleBasedBreakIterator::RuleBasedBreakIterator(RBBIDataHeader* data, UErrorCode 
     init(status);
     fData = new RBBIDataWrapper(data, status); // status checked in constructor
     if (U_FAILURE(status)) {return;}
-    if(fData == 0) {
+    if(fData == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
         return;
     }
@@ -100,7 +100,7 @@ RuleBasedBreakIterator::RuleBasedBreakIterator(const uint8_t *compiledRules,
     }
     fData = new RBBIDataWrapper(data, RBBIDataWrapper::kDontAdopt, status);
     if (U_FAILURE(status)) {return;}
-    if(fData == 0) {
+    if(fData == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
         return;
     }
@@ -119,7 +119,7 @@ RuleBasedBreakIterator::RuleBasedBreakIterator(UDataMemory* udm, UErrorCode &sta
     init(status);
     fData = new RBBIDataWrapper(udm, status); // status checked in constructor
     if (U_FAILURE(status)) {return;}
-    if(fData == 0) {
+    if(fData == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
         return;
     }
@@ -1272,7 +1272,7 @@ RuleBasedBreakIterator::getLanguageBreakEngine(UChar32 c) {
         fLanguageBreakEngines = new UStack(status);
         if (fLanguageBreakEngines == NULL || U_FAILURE(status)) {
             delete fLanguageBreakEngines;
-            fLanguageBreakEngines = 0;
+            fLanguageBreakEngines = nullptr;
             return NULL;
         }
     }
@@ -1311,7 +1311,7 @@ RuleBasedBreakIterator::getLanguageBreakEngine(UChar32 c) {
         // If we can't insert it, or creation failed, get rid of it
         if (U_FAILURE(status)) {
             delete fUnhandledBreakEngine;
-            fUnhandledBreakEngine = 0;
+            fUnhandledBreakEngine = nullptr;
             return NULL;
         }
     }

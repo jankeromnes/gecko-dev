@@ -290,9 +290,9 @@ SearchIterator * StringSearch::safeClone(void) const
                                             m_breakiterator_,
                                             status);
     /* test for NULL */
-    if (result == 0) {
+    if (result == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
-        return 0;
+        return nullptr;
     }
     result->setOffset(getOffset(), status);
     result->setMatchStart(m_strsrch_->search->matchedIndex);

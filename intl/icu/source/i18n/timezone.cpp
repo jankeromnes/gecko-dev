@@ -156,17 +156,17 @@ static UBool U_CALLCONV timeZone_cleanup(void)
 
     LEN_SYSTEM_ZONES = 0;
     uprv_free(MAP_SYSTEM_ZONES);
-    MAP_SYSTEM_ZONES = 0;
+    MAP_SYSTEM_ZONES = nullptr;
     gSystemZonesInitOnce.reset();
 
     LEN_CANONICAL_SYSTEM_ZONES = 0;
     uprv_free(MAP_CANONICAL_SYSTEM_ZONES);
-    MAP_CANONICAL_SYSTEM_ZONES = 0;
+    MAP_CANONICAL_SYSTEM_ZONES = nullptr;
     gCanonicalZonesInitOnce.reset();
 
     LEN_CANONICAL_SYSTEM_LOCATION_ZONES = 0;
     uprv_free(MAP_CANONICAL_SYSTEM_LOCATION_ZONES);
-    MAP_CANONICAL_SYSTEM_LOCATION_ZONES = 0;
+    MAP_CANONICAL_SYSTEM_LOCATION_ZONES = nullptr;
     gCanonicalLocationZonesInitOnce.reset();
 
     return TRUE;
@@ -279,7 +279,7 @@ static UResourceBundle* openOlsonResource(const UnicodeString& id,
     char buf[128];
     id.extract(0, sizeof(buf)-1, buf, sizeof(buf), "");
 #endif
-    UResourceBundle *top = ures_openDirect(0, kZONEINFO, &ec);
+    UResourceBundle *top = ures_openDirect(nullptr, kZONEINFO, &ec);
     U_DEBUG_TZ_MSG(("pre: res sz=%d\n", ures_getSize(&res)));
     /* &res = */ getZoneByName(top, id, &res, ec);
     // Dereference if this is an alias.  Docs say result should be 1
@@ -384,7 +384,7 @@ createSystemTimeZone(const UnicodeString& id, UErrorCode& ec) {
     if (U_FAILURE(ec)) {
         return NULL;
     }
-    TimeZone* z = 0;
+    TimeZone* z = nullptr;
     UResourceBundle res;
     ures_initStackObject(&res);
     U_DEBUG_TZ_MSG(("pre-err=%s\n", u_errorName(ec)));
@@ -401,7 +401,7 @@ createSystemTimeZone(const UnicodeString& id, UErrorCode& ec) {
     if (U_FAILURE(ec)) {
         U_DEBUG_TZ_MSG(("cstz: failed to create, err %s\n", u_errorName(ec)));
         delete z;
-        z = 0;
+        z = nullptr;
     }
     return z;
 }
@@ -606,7 +606,7 @@ TimeZone::setDefault(const TimeZone& zone)
 static void U_CALLCONV initMap(USystemTimeZoneType type, UErrorCode& ec) {
     ucln_i18n_registerCleanup(UCLN_I18N_TIMEZONE, timeZone_cleanup);
 
-    UResourceBundle *res = ures_openDirect(0, kZONEINFO, &ec);
+    UResourceBundle *res = ures_openDirect(nullptr, kZONEINFO, &ec);
     res = ures_getByKey(res, kNAMES, res, &ec); // dereference Zones section
     if (U_SUCCESS(ec)) {
         int32_t size = ures_getSize(res);
@@ -756,7 +756,7 @@ private:
         UErrorCode ec = U_ZERO_ERROR;
         int32_t idLen = 0;
         const UChar* id = NULL;
-        UResourceBundle *top = ures_openDirect(0, kZONEINFO, &ec);
+        UResourceBundle *top = ures_openDirect(nullptr, kZONEINFO, &ec);
         top = ures_getByKey(top, kNAMES, top, &ec); // dereference Zones section
         id = ures_getStringByIndex(top, i, &idLen, &ec);
         if(U_FAILURE(ec)) {
@@ -832,7 +832,7 @@ public:
             }
 
             // Walk through the base map
-            UResourceBundle *res = ures_openDirect(0, kZONEINFO, &ec);
+            UResourceBundle *res = ures_openDirect(nullptr, kZONEINFO, &ec);
             res = ures_getByKey(res, kNAMES, res, &ec); // dereference Zones section
             for (int32_t i = 0; i < baseLen; i++) {
                 int32_t zidx = baseMap[i];
@@ -947,7 +947,7 @@ public:
             ++pos;
             return &unistr;
         }
-        return 0;
+        return nullptr;
     }
 
     virtual void reset(UErrorCode& /*status*/) {
@@ -1343,7 +1343,7 @@ TimeZone::parseCustomID(const UnicodeString& id, int32_t& sign,
                         int32_t& hour, int32_t& min, int32_t& sec) {
     static const int32_t         kParseFailed = -99999;
 
-    NumberFormat* numberFormat = 0;
+    NumberFormat* numberFormat = nullptr;
     UnicodeString idUppercase = id;
     idUppercase.toUpper("");
 

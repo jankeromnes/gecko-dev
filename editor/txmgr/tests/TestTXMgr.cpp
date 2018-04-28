@@ -11,11 +11,11 @@
 
 static int32_t sConstructorCount     = 0;
 static int32_t sDoCount              = 0;
-static int32_t *sDoOrderArr          = 0;
+static int32_t *sDoOrderArr          = nullptr;
 static int32_t sUndoCount            = 0;
-static int32_t *sUndoOrderArr        = 0;
+static int32_t *sUndoOrderArr        = nullptr;
 static int32_t sRedoCount            = 0;
-static int32_t *sRedoOrderArr        = 0;
+static int32_t *sRedoOrderArr        = nullptr;
 
 
 int32_t sSimpleTestDoOrderArr[] = {
@@ -512,13 +512,13 @@ reset_globals()
   sConstructorCount   = 0;
 
   sDoCount            = 0;
-  sDoOrderArr         = 0;
+  sDoOrderArr         = nullptr;
 
   sUndoCount          = 0;
-  sUndoOrderArr       = 0;
+  sUndoOrderArr       = nullptr;
 
   sRedoCount          = 0;
-  sRedoOrderArr       = 0;
+  sRedoOrderArr       = nullptr;
 }
 
 /**
@@ -544,7 +544,7 @@ quick_test(TestTransactionFactory *factory)
    *
    *******************************************************************/
 
-  rv = mgr->DoTransaction(0);
+  rv = mgr->DoTransaction(nullptr);
   EXPECT_EQ(rv, NS_ERROR_NULL_POINTER);
 
   /*******************************************************************

@@ -1424,7 +1424,7 @@ U_CAPI int32_t U_EXPORT2 ures_getSize(const UResourceBundle *resB) {
 
 static const UChar* ures_getStringWithAlias(const UResourceBundle *resB, Resource r, int32_t sIndex, int32_t *len, UErrorCode *status) {
   if(RES_GET_TYPE(r) == URES_ALIAS) {
-    const UChar* result = 0;
+    const UChar* result = nullptr;
     UResourceBundle *tempRes = ures_getByIndex(resB, sIndex, NULL, status);
     result = ures_getString(tempRes, len, status);
     ures_close(tempRes);
@@ -2061,7 +2061,7 @@ U_CAPI const UChar* U_EXPORT2 ures_getStringByKey(const UResourceBundle *resB, c
                         return res_getString(rd, res, len);
                     case URES_ALIAS:
                       {
-                        const UChar* result = 0;
+                        const UChar* result = nullptr;
                         UResourceBundle *tempRes = ures_getByKey(resB, inKey, NULL, status);
                         result = ures_getString(tempRes, len, status);
                         ures_close(tempRes);
@@ -2083,7 +2083,7 @@ U_CAPI const UChar* U_EXPORT2 ures_getStringByKey(const UResourceBundle *resB, c
                 return res_getString(&(resB->fResData), res, len);
             case URES_ALIAS:
               {
-                const UChar* result = 0;
+                const UChar* result = nullptr;
                 UResourceBundle *tempRes = ures_getByKey(resB, inKey, NULL, status);
                 result = ures_getString(tempRes, len, status);
                 ures_close(tempRes);

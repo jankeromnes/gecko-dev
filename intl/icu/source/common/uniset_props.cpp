@@ -330,7 +330,7 @@ isPOSIXClose(const UnicodeString &pattern, int32_t pos) {
  */
 UnicodeSet::UnicodeSet(const UnicodeString& pattern,
                        UErrorCode& status) :
-    len(0), capacity(START_EXTRA), list(0), bmpSet(0), buffer(0),
+    len(0), capacity(START_EXTRA), list(nullptr), bmpSet(nullptr), buffer(nullptr),
     bufferCapacity(0), patLen(0), pat(NULL), strings(NULL), stringSpan(NULL),
     fFlags(0)
 {
@@ -418,14 +418,14 @@ namespace {
 class UnicodeSetPointer {
     UnicodeSet* p;
 public:
-    inline UnicodeSetPointer() : p(0) {}
+    inline UnicodeSetPointer() : p(nullptr) {}
     inline ~UnicodeSetPointer() { delete p; }
     inline UnicodeSet* pointer() { return p; }
     inline UBool allocate() {
-        if (p == 0) {
+        if (p == nullptr) {
             p = new UnicodeSet();
         }
-        return p != 0;
+        return p != nullptr;
     }
 };
 
@@ -493,7 +493,7 @@ void UnicodeSet::applyPattern(RuleCharacterIterator& chars,
 
         UChar32 c = 0;
         UBool literal = FALSE;
-        UnicodeSet* nested = 0; // alias - do not delete
+        UnicodeSet* nested = nullptr; // alias - do not delete
 
         // -------- Check for property pattern
 
@@ -545,9 +545,9 @@ void UnicodeSet::applyPattern(RuleCharacterIterator& chars,
                         continue;
                     }
                 }
-            } else if (symbols != 0) {
+            } else if (symbols != nullptr) {
                 const UnicodeFunctor *m = symbols->lookupMatcher(c);
-                if (m != 0) {
+                if (m != nullptr) {
                     const UnicodeSet *ms = dynamic_cast<const UnicodeSet *>(m);
                     if (ms == NULL) {
                         ec = U_MALFORMED_SET;
@@ -583,7 +583,7 @@ void UnicodeSet::applyPattern(RuleCharacterIterator& chars,
                 patLocal.append(op);
             }
 
-            if (nested == 0) {
+            if (nested == nullptr) {
                 // lazy allocation
                 if (!scratch.allocate()) {
                     ec = U_MEMORY_ALLOCATION_ERROR;
@@ -742,7 +742,7 @@ void UnicodeSet::applyPattern(RuleCharacterIterator& chars,
                     c = chars.next(opts, literal, ec);
                     if (U_FAILURE(ec)) return;
                     UBool anchor = (c == 0x5D /*']'*/ && !literal);
-                    if (symbols == 0 && !anchor) {
+                    if (symbols == nullptr && !anchor) {
                         c = SymbolTable::SYMBOL_REF;
                         chars.setPos(backup);
                         break; // literal '$'

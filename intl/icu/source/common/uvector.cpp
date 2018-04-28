@@ -32,9 +32,9 @@ UOBJECT_DEFINE_RTTI_IMPLEMENTATION(UVector)
 UVector::UVector(UErrorCode &status) :
     count(0),
     capacity(0),
-    elements(0),
-    deleter(0),
-    comparer(0)
+    elements(nullptr),
+    deleter(nullptr),
+    comparer(nullptr)
 {
     _init(DEFAULT_CAPACITY, status);
 }
@@ -42,9 +42,9 @@ UVector::UVector(UErrorCode &status) :
 UVector::UVector(int32_t initialCapacity, UErrorCode &status) :
     count(0),
     capacity(0),
-    elements(0),
-    deleter(0),
-    comparer(0)
+    elements(nullptr),
+    deleter(nullptr),
+    comparer(nullptr)
 {
     _init(initialCapacity, status);
 }
@@ -52,7 +52,7 @@ UVector::UVector(int32_t initialCapacity, UErrorCode &status) :
 UVector::UVector(UObjectDeleter *d, UElementsAreEqual *c, UErrorCode &status) :
     count(0),
     capacity(0),
-    elements(0),
+    elements(nullptr),
     deleter(d),
     comparer(c)
 {
@@ -62,7 +62,7 @@ UVector::UVector(UObjectDeleter *d, UElementsAreEqual *c, UErrorCode &status) :
 UVector::UVector(UObjectDeleter *d, UElementsAreEqual *c, int32_t initialCapacity, UErrorCode &status) :
     count(0),
     capacity(0),
-    elements(0),
+    elements(nullptr),
     deleter(d),
     comparer(c)
 {
@@ -78,7 +78,7 @@ void UVector::_init(int32_t initialCapacity, UErrorCode &status) {
         initialCapacity = DEFAULT_CAPACITY;
     }
     elements = (UElement *)uprv_malloc(sizeof(UElement)*initialCapacity);
-    if (elements == 0) {
+    if (elements == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
     } else {
         capacity = initialCapacity;
@@ -88,7 +88,7 @@ void UVector::_init(int32_t initialCapacity, UErrorCode &status) {
 UVector::~UVector() {
     removeAllElements();
     uprv_free(elements);
-    elements = 0;
+    elements = nullptr;
 }
 
 /**
@@ -100,7 +100,7 @@ void UVector::assign(const UVector& other, UElementAssigner *assign, UErrorCode 
         setSize(other.count, ec);
         if (U_SUCCESS(ec)) {
             for (int32_t i=0; i<other.count; ++i) {
-                if (elements[i].pointer != 0 && deleter != 0) {
+                if (elements[i].pointer != nullptr && deleter != nullptr) {
                     (*deleter)(elements[i].pointer);
                 }
                 (*assign)(&elements[i], &other.elements[i]);
@@ -140,7 +140,7 @@ void UVector::addElement(int32_t elem, UErrorCode &status) {
 
 void UVector::setElementAt(void* obj, int32_t index) {
     if (0 <= index && index < count) {
-        if (elements[index].pointer != 0 && deleter != 0) {
+        if (elements[index].pointer != nullptr && deleter != nullptr) {
             (*deleter)(elements[index].pointer);
         }
         elements[index].pointer = obj;
@@ -150,7 +150,7 @@ void UVector::setElementAt(void* obj, int32_t index) {
 
 void UVector::setElementAt(int32_t elem, int32_t index) {
     if (0 <= index && index < count) {
-        if (elements[index].pointer != 0 && deleter != 0) {
+        if (elements[index].pointer != nullptr && deleter != nullptr) {
             // TODO:  this should be an error.  mixing up ints and pointers.
             (*deleter)(elements[index].pointer);
         }
@@ -186,7 +186,7 @@ void UVector::insertElementAt(int32_t elem, int32_t index, UErrorCode &status) {
 }
 
 void* UVector::elementAt(int32_t index) const {
-    return (0 <= index && index < count) ? elements[index].pointer : 0;
+    return (0 <= index && index < count) ? elements[index].pointer : nullptr;
 }
 
 int32_t UVector::elementAti(int32_t index) const {
@@ -237,7 +237,7 @@ UBool UVector::retainAll(const UVector& other) {
 
 void UVector::removeElementAt(int32_t index) {
     void* e = orphanElementAt(index);
-    if (e != 0 && deleter != 0) {
+    if (e != nullptr && deleter != nullptr) {
         (*deleter)(e);
     }
 }
@@ -252,9 +252,9 @@ UBool UVector::removeElement(void* obj) {
 }
 
 void UVector::removeAllElements(void) {
-    if (deleter != 0) {
+    if (deleter != nullptr) {
         for (int32_t i=0; i<count; ++i) {
-            if (elements[i].pointer != 0) {
+            if (elements[i].pointer != nullptr) {
                 (*deleter)(elements[i].pointer);
             }
         }
@@ -268,7 +268,7 @@ UBool   UVector::equals(const UVector &other) const {
     if (this->count != other.count) {
         return FALSE;
     }
-    if (comparer == 0) {
+    if (comparer == nullptr) {
         for (i=0; i<count; i++) {
             if (elements[i].pointer != other.elements[i].pointer) {
                 return FALSE;
@@ -303,7 +303,7 @@ int32_t UVector::indexOf(int32_t obj, int32_t startIndex) const {
 // This only works if this object has a non-null comparer
 int32_t UVector::indexOf(UElement key, int32_t startIndex, int8_t hint) const {
     int32_t i;
-    if (comparer != 0) {
+    if (comparer != nullptr) {
         for (i=startIndex; i<count; ++i) {
             if ((*comparer)(key, elements[i])) {
                 return i;
@@ -422,7 +422,7 @@ UElementsAreEqual *UVector::setComparer(UElementsAreEqual *d) {
  * then 0 is returned and the vector is unchanged.
  */
 void* UVector::orphanElementAt(int32_t index) {
-    void* e = 0;
+    void* e = nullptr;
     if (0 <= index && index < count) {
         e = elements[index].pointer;
         for (int32_t i=index; i<count-1; ++i) {

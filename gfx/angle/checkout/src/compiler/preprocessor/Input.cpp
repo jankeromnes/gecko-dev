@@ -14,7 +14,7 @@
 namespace pp
 {
 
-Input::Input() : mCount(0), mString(0)
+Input::Input() : mCount(0), mString(nullptr)
 {
 }
 

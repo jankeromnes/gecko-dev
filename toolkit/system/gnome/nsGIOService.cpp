@@ -248,7 +248,7 @@ nsGIOMimeApp::Equals(nsIHandlerApp* aHandlerApp, bool* _retval)
 NS_IMETHODIMP
 nsGIOMimeApp::LaunchWithURI(nsIURI* aUri, nsIInterfaceRequestor* aRequestor)
 {
-  GList uris = { 0 };
+  GList uris = { nullptr };
   nsCString spec;
   aUri->GetSpec(spec);
   //nsPromiseFlatCString flatUri(aUri);

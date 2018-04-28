@@ -88,7 +88,7 @@ js_dtostr(DtoaState* state, char* buffer, size_t bufferSize, JSDToStrMode mode, 
     int sign;         /* Nonzero if the sign bit was set in d */
     int nDigits;      /* Number of significand digits returned by js_dtoa */
     char* numBegin;   /* Pointer to the digits returned by js_dtoa */
-    char* numEnd = 0; /* Pointer past the digits returned by js_dtoa */
+    char* numEnd = nullptr; /* Pointer past the digits returned by js_dtoa */
 
     MOZ_ASSERT(bufferSize >= (size_t)(mode <= DTOSTR_STANDARD_EXPONENTIAL
                                      ? DTOSTR_STANDARD_BUFFER_SIZE

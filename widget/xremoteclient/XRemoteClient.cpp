@@ -59,7 +59,7 @@ static bool sGotBadWindow;
 
 XRemoteClient::XRemoteClient()
 {
-  mDisplay = 0;
+  mDisplay = nullptr;
   mInitialized = false;
   mMozVersionAtom = 0;
   mMozLockAtom = 0;
@@ -69,7 +69,7 @@ XRemoteClient::XRemoteClient()
   mMozUserAtom = 0;
   mMozProfileAtom = 0;
   mMozProgramAtom = 0;
-  mLockData = 0;
+  mLockData = nullptr;
   MOZ_LOG(sRemoteLm, LogLevel::Debug, ("XRemoteClient::XRemoteClient"));
 }
 
@@ -102,7 +102,7 @@ XRemoteClient::Init()
     return NS_OK;
 
   // try to open the display
-  mDisplay = XOpenDisplay(0);
+  mDisplay = XOpenDisplay(nullptr);
   if (!mDisplay)
     return NS_ERROR_FAILURE;
 
@@ -135,11 +135,11 @@ XRemoteClient::Shutdown (void)
 
   // shut everything down
   XCloseDisplay(mDisplay);
-  mDisplay = 0;
+  mDisplay = nullptr;
   mInitialized = false;
   if (mLockData) {
     free(mLockData);
-    mLockData = 0;
+    mLockData = nullptr;
   }
 }
 
@@ -317,7 +317,7 @@ XRemoteClient::GetLock(Window aWindow, bool *aDestroyed)
     Atom actual_type;
     int actual_format;
     unsigned long nitems, bytes_after;
-    unsigned char *data = 0;
+    unsigned char *data = nullptr;
 
     XGrabServer(mDisplay);
 
@@ -441,7 +441,7 @@ XRemoteClient::FindBestWindow(const char *aProgram, const char *aUsername,
     Atom type;
     int format;
     unsigned long nitems, bytesafter;
-    unsigned char *data_return = 0;
+    unsigned char *data_return = nullptr;
     Window w;
     w = kids[i];
     // find the inner window with WM_STATE on it
@@ -462,7 +462,7 @@ XRemoteClient::FindBestWindow(const char *aProgram, const char *aUsername,
     if (!(version >= 5.1 && version < 6))
       continue;
 
-    data_return = 0;
+    data_return = nullptr;
 
     if (status != Success || type == None)
       continue;
@@ -569,7 +569,7 @@ XRemoteClient::FreeLock(Window aWindow)
   Atom actual_type;
   int actual_format;
   unsigned long nitems, bytes_after;
-  unsigned char *data = 0;
+  unsigned char *data = nullptr;
 
   result = XGetWindowProperty(mDisplay, aWindow, mMozLockAtom,
                               0, (65536 / sizeof(long)),
@@ -651,7 +651,7 @@ XRemoteClient::WaitForResponse(Window aWindow, char **aResponse,
       Atom actual_type;
       int actual_format;
       unsigned long nitems, bytes_after;
-      unsigned char *data = 0;
+      unsigned char *data = nullptr;
       Bool result;
       result = XGetWindowProperty (mDisplay, aWindow, mMozResponseAtom,
                                    0, (65536 / sizeof (long)),

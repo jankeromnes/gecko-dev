@@ -575,7 +575,7 @@ XRE_InitChildProcess(int aArgc,
   MOZ_ASSERT(parentPIDString, "NULL parent PID");
   --aArgc;
 
-  char* end = 0;
+  char* end = nullptr;
   base::ProcessId parentPID = strtol(parentPIDString, &end, 10);
   MOZ_ASSERT(!*end, "invalid parent PID");
 

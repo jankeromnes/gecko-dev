@@ -55,8 +55,8 @@ RBBISetBuilder::RBBISetBuilder(RBBIRuleBuilder *rb)
 {
     fRB             = rb;
     fStatus         = rb->fStatus;
-    fRangeList      = 0;
-    fTrie           = 0;
+    fRangeList      = nullptr;
+    fTrie           = nullptr;
     fTrieSize       = 0;
     fGroupCount     = 0;
     fSawBOF         = FALSE;
@@ -198,7 +198,7 @@ void RBBISetBuilder::buildRanges() {
     //               # 3  is the first range list.
     //
     RangeDescriptor *rlSearchRange;
-    for (rlRange = fRangeList; rlRange!=0; rlRange=rlRange->fNext) {
+    for (rlRange = fRangeList; rlRange!=nullptr; rlRange=rlRange->fNext) {
         for (rlSearchRange=fRangeList; rlSearchRange != rlRange; rlSearchRange=rlSearchRange->fNext) {
             if (rlRange->fIncludesSets->equals(*rlSearchRange->fIncludesSets)) {
                 rlRange->fNum = rlSearchRange->fNum;
@@ -259,7 +259,7 @@ void RBBISetBuilder::buildTrie() {
                         0,       //  Error value for out-of-range input.
                         fStatus);
 
-    for (rlRange = fRangeList; rlRange!=0 && U_SUCCESS(*fStatus); rlRange=rlRange->fNext) {
+    for (rlRange = fRangeList; rlRange!=nullptr && U_SUCCESS(*fStatus); rlRange=rlRange->fNext) {
         utrie2_setRange32(fTrie,
                           rlRange->fStartChar,     // Range start
                           rlRange->fEndChar,       // Range end (inclusive)
@@ -403,7 +403,7 @@ UBool  RBBISetBuilder::sawBOF() const {
 UChar32  RBBISetBuilder::getFirstChar(int32_t category) const {
     RangeDescriptor   *rlRange;
     UChar32            retVal = (UChar32)-1;
-    for (rlRange = fRangeList; rlRange!=0; rlRange=rlRange->fNext) {
+    for (rlRange = fRangeList; rlRange!=nullptr; rlRange=rlRange->fNext) {
         if (rlRange->fNum == category) {
             retVal = rlRange->fStartChar;
             break;
@@ -566,7 +566,7 @@ RangeDescriptor::RangeDescriptor(const RangeDescriptor &other, UErrorCode &statu
         return;
     }
     /* test for NULL */
-    if (this->fIncludesSets == 0) {
+    if (this->fIncludesSets == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
         return;
     }
@@ -596,7 +596,7 @@ RangeDescriptor::RangeDescriptor(UErrorCode &status) {
         return;
     }
     /* test for NULL */
-    if(this->fIncludesSets == 0) {
+    if(this->fIncludesSets == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
         return;
     }
@@ -622,7 +622,7 @@ RangeDescriptor::~RangeDescriptor() {
 void RangeDescriptor::split(UChar32 where, UErrorCode &status) {
     U_ASSERT(where>fStartChar && where<=fEndChar);
     RangeDescriptor *nr = new RangeDescriptor(*this, status);
-    if(nr == 0) {
+    if(nr == nullptr) {
         status = U_MEMORY_ALLOCATION_ERROR;
         return;
     }

@@ -215,7 +215,7 @@
 
         /* get a view of the mapping */
 #if U_PLATFORM != U_PF_HPUX
-        data=mmap(0, length, PROT_READ, MAP_SHARED,  fd, 0);
+        data=mmap(nullptr, length, PROT_READ, MAP_SHARED,  fd, 0);
 #else
         data=mmap(0, length, PROT_READ, MAP_PRIVATE, fd, 0);
 #endif
@@ -240,7 +240,7 @@
             if(munmap(pData->mapAddr, dataLen)==-1) {
             }
             pData->pHeader=NULL;
-            pData->map=0;
+            pData->map=nullptr;
             pData->mapAddr=NULL;
         }
     }

@@ -747,24 +747,24 @@ TEST_F(DeviceTableTest, TestDeltaFormat3Fail2) {
 
 TEST_F(LookupSubtableParserTest, TestSuccess) {
   {
-    EXPECT_TRUE(FakeLookupParserReturnsTrue.Parse(font, 0, 0, 1));
+    EXPECT_TRUE(FakeLookupParserReturnsTrue.Parse(font, nullptr, 0, 1));
   }
   {
-    EXPECT_TRUE(FakeLookupParserReturnsTrue.Parse(font, 0, 0, 5));
+    EXPECT_TRUE(FakeLookupParserReturnsTrue.Parse(font, nullptr, 0, 5));
   }
 }
 
 TEST_F(LookupSubtableParserTest, TestFail) {
   {
     // Pass bad lookup type which less than the smallest type.
-    EXPECT_FALSE(FakeLookupParserReturnsTrue.Parse(font, 0, 0, 0));
+    EXPECT_FALSE(FakeLookupParserReturnsTrue.Parse(font, nullptr, 0, 0));
   }
   {
     // Pass bad lookup type which greater than the maximum type.
-    EXPECT_FALSE(FakeLookupParserReturnsTrue.Parse(font, 0, 0, 6));
+    EXPECT_FALSE(FakeLookupParserReturnsTrue.Parse(font, nullptr, 0, 6));
   }
   {
     // Check the type parser failure.
-    EXPECT_FALSE(FakeLookupParserReturnsFalse.Parse(font, 0, 0, 1));
+    EXPECT_FALSE(FakeLookupParserReturnsFalse.Parse(font, nullptr, 0, 1));
   }
 }

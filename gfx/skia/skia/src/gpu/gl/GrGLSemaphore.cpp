@@ -10,7 +10,7 @@
 #include "GrGLGpu.h"
 
 GrGLSemaphore::GrGLSemaphore(const GrGLGpu* gpu, bool isOwned)
-    : INHERITED(gpu), fSync(0), fIsOwned(isOwned) {
+    : INHERITED(gpu), fSync(nullptr), fIsOwned(isOwned) {
 }
 
 GrGLSemaphore::~GrGLSemaphore() {

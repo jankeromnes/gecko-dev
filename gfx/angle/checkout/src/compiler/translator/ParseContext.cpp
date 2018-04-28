@@ -608,7 +608,7 @@ bool TParseContext::checkCanBeLValue(const TSourceLoc &line, const char *op, TIn
             }
     }
 
-    if (message.empty() && binaryNode == 0 && symNode == 0)
+    if (message.empty() && binaryNode == nullptr && symNode == nullptr)
     {
         error(line, "l-value required", op);
 
@@ -5355,7 +5355,7 @@ TIntermTyped *TParseContext::addBinaryMath(TOperator op,
                                            const TSourceLoc &loc)
 {
     TIntermTyped *node = addBinaryMathInternal(op, left, right, loc);
-    if (node == 0)
+    if (node == nullptr)
     {
         binaryOpError(loc, GetOperatorString(op), left->getCompleteString(),
                       right->getCompleteString());

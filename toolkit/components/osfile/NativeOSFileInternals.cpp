@@ -85,7 +85,7 @@ struct ArrayBufferContents {
 struct ScopedArrayBufferContentsTraits {
   typedef ArrayBufferContents type;
   const static type empty() {
-    type result = {0, 0};
+    type result = {nullptr, 0};
     return result;
   }
   static void release(type ptr) {

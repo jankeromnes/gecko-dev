@@ -165,7 +165,7 @@ int32_t CharsetRecog_mbcs::match_mbcs(InputText *det, const uint16_t commonChars
             } else {
                 doubleByteCharCount++;
 
-                if (commonChars != 0) {
+                if (commonChars != nullptr) {
                     if (binarySearch(commonChars, commonCharsLen, iter.charValue) >= 0){
                         commonCharCount += 1;
                     }
@@ -208,7 +208,7 @@ int32_t CharsetRecog_mbcs::match_mbcs(InputText *det, const uint16_t commonChars
         return confidence;
     }
 
-    if (commonChars == 0) {
+    if (commonChars == nullptr) {
         // We have no statistics on frequently occuring characters.
         //  Assess confidence purely on having a reasonable number of
         //  multi-byte characters (the more the better)

@@ -586,7 +586,7 @@ unsigned char * Path_ReadBinaryFile( const std::string &strFilename, int *pSize 
 		else
 		{
 			delete[] buf;
-			buf = 0;
+			buf = nullptr;
 		}
 
 		fclose(f);

@@ -293,7 +293,7 @@ void XRE_LibFuzzerSetDriver(LibFuzzerDriver aDriver) {
 #endif // FUZZING
 
 namespace mozilla {
-int (*RunGTest)(int*, char**) = 0;
+int (*RunGTest)(int*, char**) = nullptr;
 } // namespace mozilla
 
 using namespace mozilla;
@@ -4531,7 +4531,7 @@ XREMain::XRE_mainRun()
 #endif
 
 #if defined(XP_LINUX) && !defined(ANDROID)
-  PR_CreateThread(PR_USER_THREAD, AnnotateLSBRelease, 0, PR_PRIORITY_LOW,
+  PR_CreateThread(PR_USER_THREAD, AnnotateLSBRelease, nullptr, PR_PRIORITY_LOW,
                   PR_GLOBAL_THREAD, PR_UNJOINABLE_THREAD, 0);
 #endif
 
@@ -5354,7 +5354,7 @@ SetupErrorHandling(const char* progname)
   InstallSignalHandlers(progname);
 
   // Unbuffer stdout, needed for tinderbox tests.
-  setbuf(stdout, 0);
+  setbuf(stdout, nullptr);
 }
 
 // Note: This function should not be needed anymore. See Bug 818634 for details.

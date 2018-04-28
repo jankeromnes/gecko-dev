@@ -68,7 +68,7 @@ bool LaunchApp(const std::vector<std::string>& argv,
   gProcessLog.print("==> process %d launched child process %d\n",
                     GetCurrentProcId(), pid);
   if (options.wait)
-    HANDLE_EINTR(waitpid(pid, 0, 0));
+    HANDLE_EINTR(waitpid(pid, nullptr, 0));
 
   if (process_handle)
     *process_handle = pid;

@@ -2238,7 +2238,7 @@ static void yy_load_buffer_state  (yyscan_t yyscanner)
 		return;
 
 	if ( b == YY_CURRENT_BUFFER ) /* Not sure if we should pop here. */
-		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;
+		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) nullptr;
 
 	if ( b->yy_is_our_buffer )
 		yyfree( (void *) b->yy_ch_buf , yyscanner );
@@ -2996,7 +2996,7 @@ Tokenizer::~Tokenizer()
 
 bool Tokenizer::init(size_t count, const char * const string[], const int length[])
 {
-    if ((count > 0) && (string == 0))
+    if ((count > 0) && (string == nullptr))
         return false;
 
     mContext.input = Input(count, string, length);
@@ -3055,7 +3055,7 @@ bool Tokenizer::initScanner()
     if ((mHandle == nullptr) && yylex_init_extra(&mContext, &mHandle))
         return false;
 
-    yyrestart(0, mHandle);
+    yyrestart(nullptr, mHandle);
     return true;
 }
 

@@ -1770,7 +1770,7 @@ u_strCaseCompare(const UChar *s1, int32_t length1,
                  uint32_t options,
                  UErrorCode *pErrorCode) {
     /* argument checking */
-    if(pErrorCode==0 || U_FAILURE(*pErrorCode)) {
+    if(pErrorCode==nullptr || U_FAILURE(*pErrorCode)) {
         return 0;
     }
     if(s1==NULL || length1<-1 || s2==NULL || length2<-1) {
