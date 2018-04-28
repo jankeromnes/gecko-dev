@@ -397,9 +397,9 @@ namespace {
 class MaxExpSink : public ContractionsAndExpansions::CESink {
 public:
     MaxExpSink(UHashtable *h, UErrorCode &ec) : maxExpansions(h), errorCode(ec) {}
-    virtual ~MaxExpSink();
-    virtual void handleCE(int64_t /*ce*/) {}
-    virtual void handleExpansion(const int64_t ces[], int32_t length) {
+    ~MaxExpSink() override;
+    void handleCE(int64_t /*ce*/) override {}
+    void handleExpansion(const int64_t ces[], int32_t length) override {
         if (length <= 1) {
             // We do not need to add single CEs into the map.
             return;

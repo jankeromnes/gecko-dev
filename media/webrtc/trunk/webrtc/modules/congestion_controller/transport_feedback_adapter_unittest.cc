@@ -32,14 +32,14 @@ class TransportFeedbackAdapterTest : public ::testing::Test {
   TransportFeedbackAdapterTest()
       : clock_(0), bitrate_controller_(this), target_bitrate_bps_(0) {}
 
-  virtual ~TransportFeedbackAdapterTest() {}
+  ~TransportFeedbackAdapterTest() override {}
 
-  virtual void SetUp() {
+  void SetUp() override {
     adapter_.reset(new TransportFeedbackAdapter(&clock_, &bitrate_controller_));
     adapter_->InitBwe();
   }
 
-  virtual void TearDown() { adapter_.reset(); }
+  void TearDown() override { adapter_.reset(); }
 
  protected:
   // Proxy class used since TransportFeedbackAdapter will own the instance

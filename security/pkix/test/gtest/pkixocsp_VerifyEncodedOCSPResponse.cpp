@@ -45,7 +45,7 @@ public:
     return Success;
   }
 
-  virtual void NoteAuxiliaryExtension(AuxiliaryExtension extension,
+  void NoteAuxiliaryExtension(AuxiliaryExtension extension,
                                       Input extensionData) override
   {
     if (extension == AuxiliaryExtension::SCTListFromOCSPResponse) {
@@ -75,7 +75,7 @@ public:
     }
   }
 
-  void SetUp()
+  void SetUp() override
   {
     rootNameDER = CNToDERName(rootName);
     if (ENCODING_FAILED(rootNameDER)) {
@@ -195,7 +195,7 @@ class pkixocsp_VerifyEncodedResponse_successful
   : public pkixocsp_VerifyEncodedResponse
 {
 public:
-  void SetUp()
+  void SetUp() override
   {
     pkixocsp_VerifyEncodedResponse::SetUp();
   }
@@ -948,7 +948,7 @@ TEST_F(pkixocsp_VerifyEncodedResponse_DelegatedResponder,
 class pkixocsp_VerifyEncodedResponse_GetCertTrust
   : public pkixocsp_VerifyEncodedResponse_DelegatedResponder {
 public:
-  void SetUp()
+  void SetUp() override
   {
     pkixocsp_VerifyEncodedResponse_DelegatedResponder::SetUp();
 

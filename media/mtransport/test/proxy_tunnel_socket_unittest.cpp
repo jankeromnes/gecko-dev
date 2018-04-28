@@ -110,7 +110,7 @@ class ProxyTunnelSocketTest : public MtransportTest {
       : socket_impl_(nullptr),
         nr_socket_(nullptr) {}
 
-  ~ProxyTunnelSocketTest() {
+  ~ProxyTunnelSocketTest() override {
     nr_socket_destroy(&nr_socket_);
     nr_proxy_tunnel_config_destroy(&config_);
   }

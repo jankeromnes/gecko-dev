@@ -931,17 +931,17 @@ public:
         }
     }
 
-    virtual ~TZEnumeration();
+    ~TZEnumeration() override;
 
-    virtual StringEnumeration *clone() const {
+    StringEnumeration *clone() const override {
         return new TZEnumeration(*this);
     }
 
-    virtual int32_t count(UErrorCode& status) const {
+    int32_t count(UErrorCode& status) const override {
         return U_FAILURE(status) ? 0 : len;
     }
 
-    virtual const UnicodeString* snext(UErrorCode& status) {
+    const UnicodeString* snext(UErrorCode& status) override {
         if (U_SUCCESS(status) && map != NULL && pos < len) {
             getID(map[pos]);
             ++pos;
@@ -950,13 +950,13 @@ public:
         return 0;
     }
 
-    virtual void reset(UErrorCode& /*status*/) {
+    void reset(UErrorCode& /*status*/) override {
         pos = 0;
     }
 
 public:
     static UClassID U_EXPORT2 getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    UClassID getDynamicClassID(void) const override;
 };
 
 TZEnumeration::~TZEnumeration() {

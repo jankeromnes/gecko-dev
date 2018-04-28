@@ -63,11 +63,11 @@ class FixedSortKeyByteSink : public SortKeyByteSink {
 public:
     FixedSortKeyByteSink(char *dest, int32_t destCapacity)
             : SortKeyByteSink(dest, destCapacity) {}
-    virtual ~FixedSortKeyByteSink();
+    ~FixedSortKeyByteSink() override;
 
 private:
-    virtual void AppendBeyondCapacity(const char *bytes, int32_t n, int32_t length);
-    virtual UBool Resize(int32_t appendCapacity, int32_t length);
+    void AppendBeyondCapacity(const char *bytes, int32_t n, int32_t length) override;
+    UBool Resize(int32_t appendCapacity, int32_t length) override;
 };
 
 FixedSortKeyByteSink::~FixedSortKeyByteSink() {}
@@ -95,11 +95,11 @@ public:
     CollationKeyByteSink(CollationKey &key)
             : SortKeyByteSink(reinterpret_cast<char *>(key.getBytes()), key.getCapacity()),
               key_(key) {}
-    virtual ~CollationKeyByteSink();
+    ~CollationKeyByteSink() override;
 
 private:
-    virtual void AppendBeyondCapacity(const char *bytes, int32_t n, int32_t length);
-    virtual UBool Resize(int32_t appendCapacity, int32_t length);
+    void AppendBeyondCapacity(const char *bytes, int32_t n, int32_t length) override;
+    UBool Resize(int32_t appendCapacity, int32_t length) override;
 
     CollationKey &key_;
 };
@@ -781,7 +781,7 @@ namespace {
 class NFDIterator : public UObject {
 public:
     NFDIterator() : index(-1), length(0) {}
-    virtual ~NFDIterator() {}
+    ~NFDIterator() override {}
     /**
      * Returns the next code point from the internal normalization buffer,
      * or else the next text code point.
@@ -830,7 +830,7 @@ class UTF16NFDIterator : public NFDIterator {
 public:
     UTF16NFDIterator(const UChar *text, const UChar *textLimit) : s(text), limit(textLimit) {}
 protected:
-    virtual UChar32 nextRawCodePoint() {
+    UChar32 nextRawCodePoint() override {
         if(s == limit) { return U_SENTINEL; }
         UChar32 c = *s++;
         if(limit == NULL && c == 0) {
@@ -882,7 +882,7 @@ public:
     UTF8NFDIterator(const uint8_t *text, int32_t textLength)
         : s(text), pos(0), length(textLength) {}
 protected:
-    virtual UChar32 nextRawCodePoint() {
+    UChar32 nextRawCodePoint() override {
         if(pos == length || (s[pos] == 0 && length < 0)) { return U_SENTINEL; }
         UChar32 c;
         U8_NEXT_OR_FFFD(s, pos, length, c);
@@ -899,7 +899,7 @@ public:
     FCDUTF8NFDIterator(const CollationData *data, const uint8_t *text, int32_t textLength)
             : u8ci(data, FALSE, text, 0, textLength) {}
 protected:
-    virtual UChar32 nextRawCodePoint() {
+    UChar32 nextRawCodePoint() override {
         UErrorCode errorCode = U_ZERO_ERROR;
         return u8ci.nextCodePoint(errorCode);
     }
@@ -911,7 +911,7 @@ class UIterNFDIterator : public NFDIterator {
 public:
     UIterNFDIterator(UCharIterator &it) : iter(it) {}
 protected:
-    virtual UChar32 nextRawCodePoint() {
+    UChar32 nextRawCodePoint() override {
         return uiter_next32(&iter);
     }
 private:
@@ -923,7 +923,7 @@ public:
     FCDUIterNFDIterator(const CollationData *data, UCharIterator &it, int32_t startIndex)
             : uici(data, FALSE, it, startIndex) {}
 protected:
-    virtual UChar32 nextRawCodePoint() {
+    UChar32 nextRawCodePoint() override {
         UErrorCode errorCode = U_ZERO_ERROR;
         return uici.nextCodePoint(errorCode);
     }
@@ -1397,8 +1397,8 @@ public:
             : sink(s), level(Collation::PRIMARY_LEVEL) {
         levelCapacity = sink.GetRemainingCapacity();
     }
-    virtual ~PartLevelCallback() {}
-    virtual UBool needToWrite(Collation::Level l) {
+    ~PartLevelCallback() override {}
+    UBool needToWrite(Collation::Level l) override {
         if(!sink.Overflowed()) {
             // Remember a level that will be at least partially written.
             level = l;

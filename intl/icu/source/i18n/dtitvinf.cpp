@@ -235,9 +235,9 @@ struct DateIntervalInfo::DateIntervalSink : public ResourceSink {
 
     DateIntervalSink(DateIntervalInfo &diInfo, const char *currentCalendarType)
             : dateIntervalInfo(diInfo), nextCalendarType(currentCalendarType, -1, US_INV) { }
-    virtual ~DateIntervalSink();
+    ~DateIntervalSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/, UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/, UErrorCode &errorCode) override {
         if (U_FAILURE(errorCode)) { return; }
 
         // Iterate over all the calendar entries and only pick the 'intervalFormats' table.

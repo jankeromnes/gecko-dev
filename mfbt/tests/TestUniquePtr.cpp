@@ -49,7 +49,7 @@ struct B : public A
 {
 public:
   B() : mY(1) {}
-  ~B() { gBDestructorCalls++; }
+  ~B() override { gBDestructorCalls++; }
 
   int mY;
 };

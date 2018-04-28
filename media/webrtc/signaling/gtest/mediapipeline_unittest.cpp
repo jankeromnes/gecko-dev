@@ -47,12 +47,12 @@ public:
   {
   }
 
-  virtual ~FakeSourceMediaStream() override
+  ~FakeSourceMediaStream() override
   {
     mMainThreadDestroyed = true;
   }
 
-  virtual bool AppendToTrack(TrackID aID, MediaSegment* aSegment, MediaSegment *aRawSegment = nullptr) override
+  bool AppendToTrack(TrackID aID, MediaSegment* aSegment, MediaSegment *aRawSegment = nullptr) override
   {
     return true;
   }
@@ -67,21 +67,21 @@ public:
   {
   }
 
-  virtual mozilla::dom::MediaSourceEnum GetMediaSource() const override
+  mozilla::dom::MediaSourceEnum GetMediaSource() const override
   {
     return mozilla::dom::MediaSourceEnum::Microphone;
   }
 
 
-  virtual void Disable() override
+  void Disable() override
   {
   }
 
-  virtual void Enable() override
+  void Enable() override
   {
   }
 
-  virtual void Stop() override
+  void Stop() override
   {
   }
 
@@ -113,13 +113,13 @@ public:
     mTimer->Cancel();
   }
 
-  virtual void AddListener(MediaStreamTrackListener* aListener) override
+  void AddListener(MediaStreamTrackListener* aListener) override
   {
     mozilla::MutexAutoLock lock(mMutex);
     mListeners.push_back(aListener);
   }
 
-  virtual already_AddRefed<mozilla::dom::MediaStreamTrack> CloneInternal(DOMMediaStream* aOwningStream, TrackID aTrackID) override
+  already_AddRefed<mozilla::dom::MediaStreamTrack> CloneInternal(DOMMediaStream* aOwningStream, TrackID aTrackID) override
   {
     return RefPtr<MediaStreamTrack>(new FakeAudioStreamTrack).forget();
   }
@@ -355,7 +355,7 @@ class TestAgentSend : public TestAgent {
     audio_stream_track_ = new FakeAudioStreamTrack();
   }
 
-  virtual void CreatePipeline(bool aIsRtcpMux) {
+  void CreatePipeline(bool aIsRtcpMux) override {
 
     std::string test_pc;
 
@@ -403,7 +403,7 @@ class TestAgentReceive : public TestAgent {
     EXPECT_EQ(mozilla::kMediaConduitNoError, err);
   }
 
-  virtual void CreatePipeline(bool aIsRtcpMux) {
+  void CreatePipeline(bool aIsRtcpMux) override {
     std::string test_pc;
 
     if (aIsRtcpMux) {
@@ -448,7 +448,7 @@ class TestAgentReceive : public TestAgent {
 
 class MediaPipelineTest : public ::testing::Test {
  public:
-  ~MediaPipelineTest() {
+  ~MediaPipelineTest() override {
     p1_.Shutdown();
     p2_.Shutdown();
   }

@@ -98,7 +98,7 @@ class TurnClient : public MtransportTest {
         protocol_(IPPROTO_UDP) {
   }
 
-  ~TurnClient() {
+  ~TurnClient() override {
   }
 
   static void SetUpTestCase() {
@@ -158,7 +158,7 @@ class TurnClient : public MtransportTest {
     nr_socket_destroy(&buffered_socket_);
   }
 
-  void TearDown() {
+  void TearDown() override {
     RUN_ON_THREAD(test_utils_->sts_target(),
                   WrapRunnable(this, &TurnClient::TearDown_s),
                   NS_DISPATCH_SYNC);

@@ -200,9 +200,9 @@ public:
         return NULL;
     }
 
-    virtual ~ServiceEnumeration();
+    ~ServiceEnumeration() override;
 
-    virtual StringEnumeration *clone() const {
+    StringEnumeration *clone() const override {
         UErrorCode status = U_ZERO_ERROR;
         ServiceEnumeration *cl = new ServiceEnumeration(*this, status);
         if(U_FAILURE(status)) {
@@ -222,18 +222,18 @@ public:
         return FALSE;
     }
 
-    virtual int32_t count(UErrorCode& status) const {
+    int32_t count(UErrorCode& status) const override {
         return upToDate(status) ? _ids.size() : 0;
     }
 
-    virtual const UnicodeString* snext(UErrorCode& status) {
+    const UnicodeString* snext(UErrorCode& status) override {
         if (upToDate(status) && (_pos < _ids.size())) {
             return (const UnicodeString*)_ids[_pos++];
         }
         return NULL;
     }
 
-    virtual void reset(UErrorCode& status) {
+    void reset(UErrorCode& status) override {
         if (status == U_ENUM_OUT_OF_SYNC_ERROR) {
             status = U_ZERO_ERROR;
         }
@@ -246,7 +246,7 @@ public:
 
 public:
     static UClassID U_EXPORT2 getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    UClassID getDynamicClassID(void) const override;
 };
 
 ServiceEnumeration::~ServiceEnumeration() {}

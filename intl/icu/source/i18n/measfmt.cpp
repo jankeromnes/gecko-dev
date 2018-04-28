@@ -116,7 +116,7 @@ public:
     SimpleFormatter perFormatters[WIDTH_INDEX_COUNT];
 
     MeasureFormatCacheData();
-    virtual ~MeasureFormatCacheData();
+    ~MeasureFormatCacheData() override;
 
     UBool hasPerFormatter(int32_t width) const {
         // TODO: Create a more obvious way to test if the per-formatter has been set?
@@ -234,7 +234,7 @@ struct UnitDataSink : public ResourceSink {
     UnitDataSink(MeasureFormatCacheData &outputData)
             : cacheData(outputData),
               width(UMEASFMT_WIDTH_COUNT), type(NULL), unitIndex(0) {}
-    ~UnitDataSink();
+    ~UnitDataSink() override;
 
     void setFormatterIfAbsent(int32_t index, const ResourceValue &value,
                                 int32_t minPlaceholders, UErrorCode &errorCode) {
@@ -416,8 +416,8 @@ struct UnitDataSink : public ResourceSink {
         return UMEASFMT_WIDTH_COUNT;
     }
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-            UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+            UErrorCode &errorCode) override {
         // Main entry point to sink
         ResourceTable widthsTable = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }

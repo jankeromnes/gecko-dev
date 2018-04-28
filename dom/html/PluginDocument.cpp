@@ -48,7 +48,7 @@ public:
 
   void StartLayout() { MediaDocument::StartLayout(); }
 
-  virtual void Destroy() override
+  void Destroy() override
   {
     if (mStreamListener) {
       mStreamListener->DropDocumentRef();

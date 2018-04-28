@@ -21,7 +21,7 @@ public:
     memset(mBuffer, '\0', sizeof(mBuffer));
   }
 
-  ~TestPrintfTarget() {
+  ~TestPrintfTarget() override {
     MOZ_RELEASE_ASSERT(mOut == strlen(test_string));
     MOZ_RELEASE_ASSERT(strncmp(mBuffer, test_string, strlen (test_string)) == 0);
   }

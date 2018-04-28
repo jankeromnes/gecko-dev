@@ -620,10 +620,10 @@ struct KeywordsSink : public ResourceSink {
 public:
     KeywordsSink(UErrorCode &errorCode) :
             values(ulist_createEmptyList(&errorCode)), hasDefault(FALSE) {}
-    virtual ~KeywordsSink();
+    ~KeywordsSink() override;
 
-    virtual void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
-                     UErrorCode &errorCode) {
+    void put(const char *key, ResourceValue &value, UBool /*noFallback*/,
+                     UErrorCode &errorCode) override {
         if (U_FAILURE(errorCode)) { return; }
         ResourceTable collations = value.getTable(errorCode);
         for (int32_t i = 0; collations.getKeyAndValue(i, key, value); ++i) {
