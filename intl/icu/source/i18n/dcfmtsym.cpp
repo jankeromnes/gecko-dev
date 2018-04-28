@@ -98,7 +98,7 @@ static const char *gNumberElementKeys[DecimalFormatSymbols::kFormatSymbolCount] 
 // Initializes this with the decimal format symbols in the default locale.
 
 DecimalFormatSymbols::DecimalFormatSymbols(UErrorCode& status)
-        : UObject(), locale() {
+        : , {
     initialize(locale, status, TRUE);
 }
 
@@ -106,17 +106,17 @@ DecimalFormatSymbols::DecimalFormatSymbols(UErrorCode& status)
 // Initializes this with the decimal format symbols in the desired locale.
 
 DecimalFormatSymbols::DecimalFormatSymbols(const Locale& loc, UErrorCode& status)
-        : UObject(), locale(loc) {
+        : , locale(loc) {
     initialize(locale, status);
 }
 
 DecimalFormatSymbols::DecimalFormatSymbols(const Locale& loc, const NumberingSystem& ns, UErrorCode& status)
-        : UObject(), locale(loc) {
+        : , locale(loc) {
     initialize(locale, status, FALSE, &ns);
 }
 
 DecimalFormatSymbols::DecimalFormatSymbols()
-        : UObject(), locale(Locale::getRoot()), currPattern(NULL) {
+        : , locale(Locale::getRoot()), currPattern(NULL) {
     *validLocale = *actualLocale = 0;
     initialize();
 }

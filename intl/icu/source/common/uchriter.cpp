@@ -19,7 +19,7 @@ U_NAMESPACE_BEGIN
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(UCharCharacterIterator)
 
 UCharCharacterIterator::UCharCharacterIterator()
-  : CharacterIterator(),
+  : ,
   text(0)
 {
     // never default construct!

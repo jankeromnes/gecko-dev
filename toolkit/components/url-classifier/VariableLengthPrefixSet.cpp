@@ -32,7 +32,7 @@ const uint32_t VariableLengthPrefixSet::MAX_BUFFER_SIZE;
 // they will be passed to nsUrlClassifierPrefixSet because of better optimization.
 VariableLengthPrefixSet::VariableLengthPrefixSet()
   : mLock("VariableLengthPrefixSet.mLock")
-  , mMemoryReportPath()
+  , 
 {
   mFixedPrefixSet = new nsUrlClassifierPrefixSet();
 }

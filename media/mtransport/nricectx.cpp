@@ -280,7 +280,7 @@ NrIceCtx::NrIceCtx(const std::string& name, Policy policy)
     name_(name),
     offerer_(false),
     ice_controlling_set_(false),
-    streams_(),
+    ,
     ctx_(nullptr),
     peer_(nullptr),
     ice_handler_vtbl_(nullptr),

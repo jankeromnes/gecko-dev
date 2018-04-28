@@ -42,7 +42,7 @@ DateTimeRule::DateTimeRule(int32_t month,
                            UBool after,
                            int32_t millisInDay,
                            TimeRuleType timeType)
-: UObject(),
+: ,
   fMonth(month), fDayOfMonth(dayOfMonth), fDayOfWeek(dayOfWeek), fWeekInMonth(0), fMillisInDay(millisInDay),
   fTimeRuleType(timeType) {
     if (after) {

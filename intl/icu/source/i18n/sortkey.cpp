@@ -51,14 +51,14 @@ static const int32_t kBogusHashCode = 2;
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(CollationKey)
 
 CollationKey::CollationKey()
-    : UObject(), fFlagAndLength(0),
+    : , fFlagAndLength(0),
       fHashCode(kEmptyHashCode)
 {
 }
 
 // Create a collation key from a bit array.
 CollationKey::CollationKey(const uint8_t* newValues, int32_t count)
-    : UObject(), fFlagAndLength(count),
+    : , fFlagAndLength(count),
       fHashCode(kInvalidHashCode)
 {
     if (count < 0 || (newValues == NULL && count != 0) ||

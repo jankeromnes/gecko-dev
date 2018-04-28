@@ -38,7 +38,7 @@ NS_IMPL_ISUPPORTS(nsEffectiveTLDService, nsIEffectiveTLDService,
 static nsEffectiveTLDService *gService = nullptr;
 
 nsEffectiveTLDService::nsEffectiveTLDService()
-  : mIDNService()
+  : 
   , mGraph(etld_dafsa::kDafsa)
 {
 }

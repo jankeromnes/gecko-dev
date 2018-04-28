@@ -956,7 +956,7 @@ VTZReader::read(void) {
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(VTimeZone)
 
 VTimeZone::VTimeZone()
-:   BasicTimeZone(), tz(NULL), vtzlines(NULL),
+:   , tz(NULL), vtzlines(NULL),
     lastmod(MAX_MILLIS) {
 }
 

@@ -123,7 +123,7 @@ Resolve(const std::string& fqdn, int address_family)
 
 class StunTest : public MtransportTest {
 public:
-  StunTest() : MtransportTest() {
+  StunTest() : {
     stun_server_hostname_ = kDefaultStunServerHostname;
   }
 
@@ -386,7 +386,7 @@ class IceTestPeer : public sigslot::has_slots<> {
                                        enable_tcp, allow_link_local,
                                        ice_policy)),
       offerer_(offerer),
-      candidates_(),
+      ,
       shutting_down_(false),
       gathering_complete_(false),
       ready_ct_(0),
@@ -395,7 +395,7 @@ class IceTestPeer : public sigslot::has_slots<> {
       ice_reached_checking_(false),
       received_(0),
       sent_(0),
-      fake_resolver_(),
+      ,
       dns_resolver_(new NrIceResolver()),
       remote_(nullptr),
       candidate_filter_(nullptr),

@@ -122,7 +122,7 @@ class CDFLocaleStyleData : public UMemory {
 struct CDFLocaleData : public UMemory {
   CDFLocaleStyleData shortData;
   CDFLocaleStyleData longData;
-  inline CDFLocaleData() : shortData(), longData() { }
+  inline CDFLocaleData() : , { }
   inline ~CDFLocaleData() { }
   // Init initializes this object.
   void Init(UErrorCode& status);

@@ -33,7 +33,7 @@ using namespace mozilla;
 namespace {
 class SocketTransportServiceTest : public MtransportTest {
  public:
-  SocketTransportServiceTest() : MtransportTest(),
+  SocketTransportServiceTest() : ,
                                  received_(0),
                                  readpipe_(nullptr),
                                  writepipe_(nullptr),

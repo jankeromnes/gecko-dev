@@ -79,7 +79,7 @@ DecimalFormatPattern::DecimalFormatPattern()
           fDecimalSeparatorAlwaysShown(FALSE),
           fFormatWidth(0),
           fRoundingIncrementUsed(FALSE),
-          fRoundingIncrement(),
+          ,
           fPad(kDefaultPad),
           fNegPatternsBogus(TRUE),
           fPosPatternsBogus(TRUE),

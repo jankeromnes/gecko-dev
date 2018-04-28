@@ -56,7 +56,7 @@ TrendlineEstimator::TrendlineEstimator(size_t window_size,
       first_arrival_time_ms(-1),
       accumulated_delay_(0),
       smoothed_delay_(0),
-      delay_hist_(),
+      ,
       trendline_(0) {}
 
 TrendlineEstimator::~TrendlineEstimator() {}

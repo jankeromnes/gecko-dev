@@ -194,7 +194,7 @@ Formattable::Formattable(UObject* objectToAdopt)
 // -------------------------------------
 
 Formattable::Formattable(const Formattable* arrayToCopy, int32_t count)
-    :   UObject(), fType(kArray)
+    :   , fType(kArray)
 {
     init();
     fType = kArray;

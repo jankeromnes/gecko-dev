@@ -475,7 +475,7 @@ BasicCalendarFactory::~BasicCalendarFactory() {}
 
 class DefaultCalendarFactory : public ICUResourceBundleFactory {
 public:
-    DefaultCalendarFactory() : ICUResourceBundleFactory() { }
+    DefaultCalendarFactory() : { }
     virtual ~DefaultCalendarFactory();
 protected:
     virtual UObject* create(const ICUServiceKey& key, const ICUService* /*service*/, UErrorCode& status) const  {
@@ -696,7 +696,7 @@ static const char gGregorian[] = "gregorian";
 // -------------------------------------
 
 Calendar::Calendar(UErrorCode& success)
-:   UObject(),
+:   ,
 fIsTimeSet(FALSE),
 fAreFieldsSet(FALSE),
 fAreAllFieldsSet(FALSE),
@@ -724,7 +724,7 @@ fSkippedWallTime(UCAL_WALLTIME_LAST)
 // -------------------------------------
 
 Calendar::Calendar(TimeZone* zone, const Locale& aLocale, UErrorCode& success)
-:   UObject(),
+:   ,
 fIsTimeSet(FALSE),
 fAreFieldsSet(FALSE),
 fAreAllFieldsSet(FALSE),
@@ -758,7 +758,7 @@ fSkippedWallTime(UCAL_WALLTIME_LAST)
 // -------------------------------------
 
 Calendar::Calendar(const TimeZone& zone, const Locale& aLocale, UErrorCode& success)
-:   UObject(),
+:   ,
 fIsTimeSet(FALSE),
 fAreFieldsSet(FALSE),
 fAreAllFieldsSet(FALSE),

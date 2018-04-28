@@ -23,7 +23,7 @@ constexpr int INVALID_BPS = -1;
 
 class TestProbeBitrateEstimator : public ::testing::Test {
  public:
-  TestProbeBitrateEstimator() : probe_bitrate_estimator_() {}
+  TestProbeBitrateEstimator() : {}
 
   void AddPacketFeedback(int probe_cluster_id,
                          size_t size_bytes,

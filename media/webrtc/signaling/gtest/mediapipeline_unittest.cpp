@@ -43,7 +43,7 @@ class FakeSourceMediaStream : public mozilla::SourceMediaStream {
 public:
 
   FakeSourceMediaStream()
-    : SourceMediaStream()
+    : 
   {
   }
 
@@ -252,7 +252,7 @@ class TestAgent {
   TestAgent() :
       audio_config_(109, "opus", 48000, 960, 2, 64000, false),
       audio_conduit_(mozilla::AudioSessionConduit::Create()),
-      audio_pipeline_(),
+      ,
       use_bundle_(false) {
   }
 

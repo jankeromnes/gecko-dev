@@ -352,7 +352,7 @@ DateTimePatternGenerator::DateTimePatternGenerator(const Locale& locale, UErrorC
 }
 
 DateTimePatternGenerator::DateTimePatternGenerator(const DateTimePatternGenerator& other) :
-    UObject(),
+    ,
     skipMatcher(NULL),
     fAvailableFormatKeyHash(NULL)
 {

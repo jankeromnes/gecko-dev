@@ -42,7 +42,7 @@ U_NAMESPACE_BEGIN
  */
 class WholeStringBreakIterator : public BreakIterator {
 public:
-    WholeStringBreakIterator() : BreakIterator(), length(0) {}
+    WholeStringBreakIterator() : , length(0) {}
     ~WholeStringBreakIterator() U_OVERRIDE;
     UBool operator==(const BreakIterator&) const U_OVERRIDE;
     BreakIterator *clone() const U_OVERRIDE;

@@ -44,7 +44,7 @@ nsUrlClassifierPrefixSet::nsUrlClassifierPrefixSet()
   : mLock("nsUrlClassifierPrefixSet.mLock")
   , mIndexDeltasChecksum(~0)
   , mTotalPrefixes(0)
-  , mMemoryReportPath()
+  , 
 {
 }
 

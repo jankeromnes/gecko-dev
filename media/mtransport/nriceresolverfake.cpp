@@ -59,7 +59,7 @@ extern "C" {
 namespace mozilla {
 
 NrIceResolverFake::NrIceResolverFake() :
-    vtbl_(new nr_resolver_vtbl), addrs_(), delay_ms_(100),
+    vtbl_(new nr_resolver_vtbl), , delay_ms_(100),
     allocated_resolvers_(0) {
   vtbl_->destroy = &NrIceResolverFake::destroy;
   vtbl_->resolve = &NrIceResolverFake::resolve;

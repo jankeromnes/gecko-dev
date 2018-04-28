@@ -51,7 +51,7 @@ CurrencyUnit::CurrencyUnit(const MeasureUnit& other, UErrorCode& ec) : MeasureUn
     }
 }
 
-CurrencyUnit::CurrencyUnit() : MeasureUnit() {
+CurrencyUnit::CurrencyUnit() : {
     u_strcpy(isoCode, u"XXX");
     char simpleIsoCode[4];
     u_UCharsToChars(isoCode, simpleIsoCode, 4);

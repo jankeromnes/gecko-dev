@@ -33,7 +33,7 @@ U_CDECL_END
 U_NAMESPACE_BEGIN
 
 TimeZoneRule::TimeZoneRule(const UnicodeString& name, int32_t rawOffset, int32_t dstSavings)
-: UObject(), fName(name), fRawOffset(rawOffset), fDSTSavings(dstSavings) {
+: , fName(name), fRawOffset(rawOffset), fDSTSavings(dstSavings) {
 }
 
 TimeZoneRule::TimeZoneRule(const TimeZoneRule& source)

@@ -603,7 +603,7 @@ UnicodeString& U_EXPORT2 Collator::getDisplayName(const Locale& objectLocale,
 * is left to the child class.
 */
 Collator::Collator()
-: UObject()
+: 
 {
 }
 
@@ -618,7 +618,7 @@ Collator::Collator()
 * @deprecated 2.4 use the default constructor instead
 */
 Collator::Collator(UCollationStrength, UNormalizationMode )
-: UObject()
+: 
 {
 }
 

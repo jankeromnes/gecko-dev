@@ -97,7 +97,7 @@ struct ScopedArrayBufferContentsTraits {
 
 struct MOZ_NON_TEMPORARY_CLASS ScopedArrayBufferContents: public Scoped<ScopedArrayBufferContentsTraits> {
   explicit ScopedArrayBufferContents(MOZ_GUARD_OBJECT_NOTIFIER_ONLY_PARAM):
-    Scoped<ScopedArrayBufferContentsTraits>(MOZ_GUARD_OBJECT_NOTIFIER_ONLY_PARAM_TO_PARENT)
+    
   { }
 
   ScopedArrayBufferContents& operator=(ArrayBufferContents ptr) {

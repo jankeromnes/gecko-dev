@@ -38,7 +38,7 @@ UOBJECT_DEFINE_RTTI_IMPLEMENTATION(Normalizer)
 //-------------------------------------------------------------------------
 
 Normalizer::Normalizer(const UnicodeString& str, UNormalizationMode mode) :
-    UObject(), fFilteredNorm2(NULL), fNorm2(NULL), fUMode(mode), fOptions(0),
+    , fFilteredNorm2(NULL), fNorm2(NULL), fUMode(mode), fOptions(0),
     text(new StringCharacterIterator(str)),
     currentIndex(0), nextIndex(0),
     buffer(), bufferPos(0)
@@ -47,7 +47,7 @@ Normalizer::Normalizer(const UnicodeString& str, UNormalizationMode mode) :
 }
 
 Normalizer::Normalizer(ConstChar16Ptr str, int32_t length, UNormalizationMode mode) :
-    UObject(), fFilteredNorm2(NULL), fNorm2(NULL), fUMode(mode), fOptions(0),
+    , fFilteredNorm2(NULL), fNorm2(NULL), fUMode(mode), fOptions(0),
     text(new UCharCharacterIterator(str, length)),
     currentIndex(0), nextIndex(0),
     buffer(), bufferPos(0)
@@ -56,7 +56,7 @@ Normalizer::Normalizer(ConstChar16Ptr str, int32_t length, UNormalizationMode mo
 }
 
 Normalizer::Normalizer(const CharacterIterator& iter, UNormalizationMode mode) :
-    UObject(), fFilteredNorm2(NULL), fNorm2(NULL), fUMode(mode), fOptions(0),
+    , fFilteredNorm2(NULL), fNorm2(NULL), fUMode(mode), fOptions(0),
     text(iter.clone()),
     currentIndex(0), nextIndex(0),
     buffer(), bufferPos(0)

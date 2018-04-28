@@ -264,7 +264,7 @@ Locale::~Locale()
 }
 
 Locale::Locale()
-    : UObject(), fullName(fullNameBuffer), baseName(NULL)
+    : , fullName(fullNameBuffer), baseName(NULL)
 {
     init(NULL, FALSE);
 }
@@ -275,7 +275,7 @@ Locale::Locale()
  *   the default locale.)
  */
 Locale::Locale(Locale::ELocaleType)
-    : UObject(), fullName(fullNameBuffer), baseName(NULL)
+    : , fullName(fullNameBuffer), baseName(NULL)
 {
     setToBogus();
 }
@@ -285,7 +285,7 @@ Locale::Locale( const   char * newLanguage,
                 const   char * newCountry,
                 const   char * newVariant,
                 const   char * newKeywords)
-    : UObject(), fullName(fullNameBuffer), baseName(NULL)
+    : , fullName(fullNameBuffer), baseName(NULL)
 {
     if( (newLanguage==NULL) && (newCountry == NULL) && (newVariant == NULL) )
     {

@@ -183,7 +183,7 @@ bool CanFoldAggregateBuiltInOp(TOperator op)
 //
 ////////////////////////////////////////////////////////////////
 
-TIntermExpression::TIntermExpression(const TType &t) : TIntermTyped(), mType(t)
+TIntermExpression::TIntermExpression(const TType &t) : , mType(t)
 {
 }
 
@@ -308,7 +308,7 @@ bool TIntermAggregateBase::insertChildNodes(TIntermSequence::size_type position,
     return true;
 }
 
-TIntermSymbol::TIntermSymbol(const TVariable *variable) : TIntermTyped(), mVariable(variable)
+TIntermSymbol::TIntermSymbol(const TVariable *variable) : , mVariable(variable)
 {
 }
 
@@ -736,7 +736,7 @@ bool TIntermCase::replaceChildNode(TIntermNode *original, TIntermNode *replaceme
     return false;
 }
 
-TIntermTyped::TIntermTyped(const TIntermTyped &node) : TIntermNode()
+TIntermTyped::TIntermTyped(const TIntermTyped &node) : 
 {
     // Copy constructor is disallowed for TIntermNode in order to disallow it for subclasses that
     // don't explicitly allow it, so normal TIntermNode constructor is used to construct the copy.
@@ -761,7 +761,7 @@ TIntermConstantUnion::TIntermConstantUnion(const TIntermConstantUnion &node)
 }
 
 TIntermFunctionPrototype::TIntermFunctionPrototype(const TFunction *function)
-    : TIntermTyped(), mFunction(function)
+    : , mFunction(function)
 {
     ASSERT(mFunction->symbolType() != SymbolType::Empty);
 }
@@ -1075,7 +1075,7 @@ TIntermBinary *TIntermBinary::CreateComma(TIntermTyped *left,
 }
 
 TIntermInvariantDeclaration::TIntermInvariantDeclaration(TIntermSymbol *symbol, const TSourceLoc &line)
-    : TIntermNode(), mSymbol(symbol)
+    : , mSymbol(symbol)
 {
     ASSERT(symbol);
     setLine(line);
@@ -1110,7 +1110,7 @@ TIntermLoop::TIntermLoop(TLoopType type,
 }
 
 TIntermIfElse::TIntermIfElse(TIntermTyped *cond, TIntermBlock *trueB, TIntermBlock *falseB)
-    : TIntermNode(), mCondition(cond), mTrueBlock(trueB), mFalseBlock(falseB)
+    : , mCondition(cond), mTrueBlock(trueB), mFalseBlock(falseB)
 {
     // Prune empty false blocks so that there won't be unnecessary operations done on it.
     if (mFalseBlock && mFalseBlock->getSequence()->empty())
@@ -1120,7 +1120,7 @@ TIntermIfElse::TIntermIfElse(TIntermTyped *cond, TIntermBlock *trueB, TIntermBlo
 }
 
 TIntermSwitch::TIntermSwitch(TIntermTyped *init, TIntermBlock *statementList)
-    : TIntermNode(), mInit(init), mStatementList(statementList)
+    : , mInit(init), mStatementList(statementList)
 {
     ASSERT(mStatementList);
 }

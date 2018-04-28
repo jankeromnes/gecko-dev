@@ -200,7 +200,7 @@ double TDStretchSSE::calcCrossCorrAccumulate(const float *pV1, const float *pV2,
 
 #include "FIRFilter.h"
 
-FIRFilterSSE::FIRFilterSSE() : FIRFilter()
+FIRFilterSSE::FIRFilterSSE() : 
 {
     filterCoeffsAlign = NULL;
     filterCoeffsUnalign = NULL;

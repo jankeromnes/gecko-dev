@@ -27,14 +27,14 @@ U_NAMESPACE_BEGIN
 ResourceBundle::ResourceBundle( const UnicodeString&    path,
                                 const Locale&           locale,
                                 UErrorCode&              error)
-                                :UObject(), fLocale(NULL)
+                                :, fLocale(NULL)
 {
     constructForLocale(path, locale, error);
 }
 
 ResourceBundle::ResourceBundle( const UnicodeString&    path,
                                 UErrorCode&              error)
-                                :UObject(), fLocale(NULL)
+                                :, fLocale(NULL)
 {
     constructForLocale(path, Locale::getDefault(), error);
 }

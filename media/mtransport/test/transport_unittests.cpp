@@ -331,7 +331,7 @@ class DtlsInspectorRecordHandshakeMessage : public DtlsRecordInspector {
  public:
   explicit DtlsInspectorRecordHandshakeMessage(uint8_t handshake_type)
       : handshake_type_(handshake_type),
-        buffer_() {}
+        {}
 
   virtual void OnRecord(TransportLayer* layer,
                         uint8_t content_type,
@@ -442,11 +442,11 @@ class TransportTestPeer : public sigslot::has_slots<> {
         dtls_(new TransportLayerDtls()),
         identity_(DtlsIdentity::Generate()),
         ice_ctx_(NrIceCtxHandler::Create(name)),
-        streams_(), candidates_(),
+        , ,
         peer_(nullptr),
         gathering_complete_(false),
-        enabled_cipersuites_(),
-        disabled_cipersuites_(),
+        ,
+        ,
         reuse_dhe_key_(false),
         test_utils_(utils) {
     std::vector<NrIceStunServer> stun_servers;

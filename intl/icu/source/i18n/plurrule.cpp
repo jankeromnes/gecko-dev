@@ -63,7 +63,7 @@ UOBJECT_DEFINE_RTTI_IMPLEMENTATION(PluralRules)
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(PluralKeywordEnumeration)
 
 PluralRules::PluralRules(UErrorCode& /*status*/)
-:   UObject(),
+:   ,
     mRules(NULL)
 {
 }

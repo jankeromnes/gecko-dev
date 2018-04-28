@@ -47,7 +47,7 @@ class TransportFeedbackAdapterTest : public ::testing::Test {
   class MockBitrateControllerAdapter : public MockBitrateController {
    public:
     explicit MockBitrateControllerAdapter(TransportFeedbackAdapterTest* owner)
-        : MockBitrateController(), owner_(owner) {}
+        : , owner_(owner) {}
 
     ~MockBitrateControllerAdapter() override {}
 

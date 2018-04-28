@@ -334,14 +334,14 @@ TimeZone::getGMT(void)
 UOBJECT_DEFINE_ABSTRACT_RTTI_IMPLEMENTATION(TimeZone)
 
 TimeZone::TimeZone()
-    :   UObject(), fID()
+    :   , fID()
 {
 }
 
 // -------------------------------------
 
 TimeZone::TimeZone(const UnicodeString &id)
-    :   UObject(), fID(id)
+    :   , fID(id)
 {
 }
 
@@ -910,7 +910,7 @@ public:
         return result;
     }
 
-    TZEnumeration(const TZEnumeration &other) : StringEnumeration(), map(NULL), localMap(NULL), len(0), pos(0) {
+    TZEnumeration(const TZEnumeration &other) : , map(NULL), localMap(NULL), len(0), pos(0) {
         if (other.localMap != NULL) {
             localMap = (int32_t *)uprv_malloc(other.len * sizeof(int32_t));
             if (localMap != NULL) {

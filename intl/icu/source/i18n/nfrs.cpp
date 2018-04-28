@@ -137,7 +137,7 @@ NFRuleSet::NFRuleSet(RuleBasedNumberFormat *_owner, UnicodeString* descriptions,
   : name()
   , rules(0)
   , owner(_owner)
-  , fractionRules()
+  , 
   , fIsFractionRuleSet(FALSE)
   , fIsPublic(FALSE)
   , fIsParseable(TRUE)

@@ -38,10 +38,10 @@ namespace {
 class MultiTcpSocketTest : public MtransportTest {
  public:
   MultiTcpSocketTest()
-    :MtransportTest(),
+    :,
      socks(3,nullptr),
      readable(false),
-     ice_ctx_()
+     
    {}
 
   void SetUp() {

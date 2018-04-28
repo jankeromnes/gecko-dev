@@ -725,9 +725,9 @@ internal_ShouldReflectHistogram(Histogram* h, HistogramID id)
 namespace {
 
 KeyedHistogram::KeyedHistogram(HistogramID id, const HistogramInfo& info)
-  : mHistogramMap()
+  : 
 #if !defined(MOZ_WIDGET_ANDROID)
-  , mSubsessionMap()
+  , 
 #endif
   , mId(id)
   , mHistogramInfo(info)

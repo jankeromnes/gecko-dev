@@ -21,15 +21,15 @@ U_NAMESPACE_BEGIN
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(TimeZoneTransition)
 
 TimeZoneTransition::TimeZoneTransition(UDate time, const TimeZoneRule& from, const TimeZoneRule& to)
-: UObject(), fTime(time), fFrom(from.clone()), fTo(to.clone()) {
+: , fTime(time), fFrom(from.clone()), fTo(to.clone()) {
 }
 
 TimeZoneTransition::TimeZoneTransition()
-: UObject(), fTime(0), fFrom(NULL), fTo(NULL) {
+: , fTime(0), fFrom(NULL), fTo(NULL) {
 }
 
 TimeZoneTransition::TimeZoneTransition(const TimeZoneTransition& source)
-: UObject(), fTime(source.fTime), fFrom(NULL), fTo(NULL) {
+: , fTime(source.fTime), fFrom(NULL), fTo(NULL) {
       if (source.fFrom != NULL) {
           fFrom = source.fFrom->clone();
       }

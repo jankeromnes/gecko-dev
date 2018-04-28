@@ -69,7 +69,7 @@ RelativeDateFormat::RelativeDateFormat(const RelativeDateFormat& other) :
 
 RelativeDateFormat::RelativeDateFormat( UDateFormatStyle timeStyle, UDateFormatStyle dateStyle,
                                         const Locale& locale, UErrorCode& status) :
- DateFormat(), fDateTimeFormatter(NULL), fDatePattern(), fTimePattern(), fCombinedFormat(NULL),
+ , fDateTimeFormatter(NULL), fDatePattern(), fTimePattern(), fCombinedFormat(NULL),
  fDateStyle(dateStyle), fLocale(locale), fDatesLen(0), fDates(NULL),
  fCombinedHasDateAtStart(FALSE), fCapitalizationInfoSet(FALSE),
  fCapitalizationOfRelativeUnitsForUIListMenu(FALSE), fCapitalizationOfRelativeUnitsForStandAlone(FALSE),

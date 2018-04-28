@@ -88,8 +88,8 @@ class PendingSTUNRequest {
 class STUNUDPSocketFilter : public nsISocketFilter {
  public:
   STUNUDPSocketFilter()
-    : white_list_(),
-      pending_requests_() {}
+    : ,
+      {}
 
   // Allocated/freed and used on the PBackground IPC thread
   NS_DECL_ISUPPORTS
@@ -213,8 +213,8 @@ class STUNTCPSocketFilter : public nsISocketFilter {
  public:
   STUNTCPSocketFilter()
     : white_listed_(false),
-      pending_request_ids_(),
-      response_allowed_ids_() {}
+      ,
+      {}
 
   // Allocated/freed and used on the PBackground IPC thread
   NS_DECL_ISUPPORTS

@@ -70,7 +70,7 @@ FieldPosition::clone() const {
 // default constructor
 
 Format::Format()
-    : UObject()
+    : 
 {
     *validLocale = *actualLocale = 0;
 }

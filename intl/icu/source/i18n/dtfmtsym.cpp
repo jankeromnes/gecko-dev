@@ -263,13 +263,13 @@ DateFormatSymbols::createForLocale(
 
 DateFormatSymbols::DateFormatSymbols(const Locale& locale,
                                      UErrorCode& status)
-    : UObject()
+    : 
 {
   initializeData(locale, NULL,  status);
 }
 
 DateFormatSymbols::DateFormatSymbols(UErrorCode& status)
-    : UObject()
+    : 
 {
   initializeData(Locale::getDefault(), NULL, status, TRUE);
 }
@@ -278,13 +278,13 @@ DateFormatSymbols::DateFormatSymbols(UErrorCode& status)
 DateFormatSymbols::DateFormatSymbols(const Locale& locale,
                                      const char *type,
                                      UErrorCode& status)
-    : UObject()
+    : 
 {
   initializeData(locale, type,  status);
 }
 
 DateFormatSymbols::DateFormatSymbols(const char *type, UErrorCode& status)
-    : UObject()
+    : 
 {
   initializeData(Locale::getDefault(), type, status, TRUE);
 }

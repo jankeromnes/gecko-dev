@@ -176,7 +176,7 @@ U_NAMESPACE_BEGIN
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(ResourceBundle)
 
 ResourceBundle::ResourceBundle(UErrorCode &err)
-                                :UObject(), fLocale(NULL)
+                                :, fLocale(NULL)
 {
     fResource = ures_open(0, Locale::getDefault().getName(), &err);
 }
@@ -195,7 +195,7 @@ ResourceBundle::ResourceBundle(const ResourceBundle &other)
 }
 
 ResourceBundle::ResourceBundle(UResourceBundle *res, UErrorCode& err)
-                               :UObject(), fLocale(NULL)
+                               :, fLocale(NULL)
 {
     if (res) {
         fResource = ures_copyResb(0, res, &err);
@@ -206,7 +206,7 @@ ResourceBundle::ResourceBundle(UResourceBundle *res, UErrorCode& err)
 }
 
 ResourceBundle::ResourceBundle(const char* path, const Locale& locale, UErrorCode& err) 
-                               :UObject(), fLocale(NULL)
+                               :, fLocale(NULL)
 {
     fResource = ures_open(path, locale.getName(), &err);
 }
