@@ -215,8 +215,7 @@ void RemoveUnreferencedVariablesTraverser::removeVariableDeclaration(TIntermDecl
     if (getParentNode()->getAsBlock())
     {
         TIntermSequence emptyReplacement;
-        mMultiReplacements.push_back(
-            NodeReplaceWithMultipleEntry(getParentNode()->getAsBlock(), node, emptyReplacement));
+        mMultiReplacements.emplace_back(getParentNode()->getAsBlock(), node, emptyReplacement);
     }
     else
     {

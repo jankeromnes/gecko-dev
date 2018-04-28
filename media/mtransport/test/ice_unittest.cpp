@@ -579,7 +579,7 @@ class IceTestPeer : public sigslot::has_slots<> {
   std::vector<std::string> GetGlobalAttributes() {
     std::vector<std::string> attrs(ice_ctx_->ctx()->GetGlobalAttributes());
     if (simulate_ice_lite_) {
-      attrs.push_back("ice-lite");
+      attrs.emplace_back("ice-lite");
     }
     return attrs;
   }

@@ -156,7 +156,7 @@ public:
         while(cand){
           int r = nr_ice_format_candidate_attribute(cand, attr, 255);
           if (r == 0) {
-            candidates.push_back(attr);
+            candidates.emplace_back(attr);
           }
 
           cand = TAILQ_NEXT(cand, entry_comp);
@@ -178,7 +178,7 @@ public:
     nr_ice_get_global_attributes(ice_ctx_, &attrs, &attrct);
 
     for (int i=0; i<attrct; i++) {
-      ret.push_back(std::string(attrs[i]));
+      ret.emplace_back(attrs[i]);
       RFREE(attrs[i]);
     }
     RFREE(attrs);

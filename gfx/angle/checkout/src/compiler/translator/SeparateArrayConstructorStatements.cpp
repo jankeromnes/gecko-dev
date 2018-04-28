@@ -67,8 +67,7 @@ bool SeparateArrayConstructorStatementsTraverser::visitAggregate(Visit visit,
 
     TIntermSequence constructorArgs;
     SplitConstructorArgs(*node->getSequence(), &constructorArgs);
-    mMultiReplacements.push_back(
-        NodeReplaceWithMultipleEntry(parentAsBlock, node, constructorArgs));
+    mMultiReplacements.emplace_back(parentAsBlock, node, constructorArgs);
 
     return false;
 }

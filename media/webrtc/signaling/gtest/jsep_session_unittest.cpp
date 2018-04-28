@@ -1063,9 +1063,8 @@ protected:
           session.AddLocalIceCandidate(kAEqualsCandidate + candidate.str(),
                                        level, &mid, &skipped);
           if (!skipped) {
-            mCandidatesToTrickle.push_back(
-                Tuple<Level, Mid, Candidate>(
-                  level, mid, kAEqualsCandidate + candidate.str()));
+            mCandidatesToTrickle.emplace_back(
+                  level, mid, kAEqualsCandidate + candidate.str());
             candidates.push_back(candidate.str());
           }
         }

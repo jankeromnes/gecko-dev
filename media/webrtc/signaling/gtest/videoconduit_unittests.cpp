@@ -249,8 +249,8 @@ TEST_F(VideoConduitTest, TestConfigureReceiveMediaCodecsKeyframeRequestType)
 
   // PLI should be preferred to FIR
   VideoCodecConfig codecConfig(120, "VP8", constraints);
-  codecConfig.mNackFbTypes.push_back("pli");
-  codecConfig.mCcmFbTypes.push_back("fir");
+  codecConfig.mNackFbTypes.emplace_back("pli");
+  codecConfig.mCcmFbTypes.emplace_back("fir");
   codecs.push_back(&codecConfig);
 
   ec = mVideoConduit->ConfigureRecvMediaCodecs(codecs);
@@ -275,7 +275,7 @@ TEST_F(VideoConduitTest, TestConfigureReceiveMediaCodecsNack)
   std::vector<VideoCodecConfig *> codecs;
 
   VideoCodecConfig codecConfig(120, "VP8", constraints);
-  codecConfig.mNackFbTypes.push_back("");
+  codecConfig.mNackFbTypes.emplace_back("");
   codecs.push_back(&codecConfig);
 
   ec = mVideoConduit->ConfigureRecvMediaCodecs(codecs);
@@ -331,7 +331,7 @@ TEST_F(VideoConduitTest, TestConfigureReceiveMediaCodecsTmmbr)
   std::vector<VideoCodecConfig *> codecs;
 
   VideoCodecConfig codecConfig(120, "VP8", constraints);
-  codecConfig.mCcmFbTypes.push_back("tmmbr");
+  codecConfig.mCcmFbTypes.emplace_back("tmmbr");
   codecs.push_back(&codecConfig);
 
   ec = mVideoConduit->ConfigureRecvMediaCodecs(codecs);
@@ -623,7 +623,7 @@ TEST_F(VideoConduitTest, TestConfigureSendMediaCodecFEC)
 
   // H264 + FEC + Nack
   codecConfig.mFECFbSet = true;
-  codecConfig.mNackFbTypes.push_back("");
+  codecConfig.mNackFbTypes.emplace_back("");
   codecConfig.mULPFECPayloadType = 1;
   codecConfig.mREDPayloadType = 2;
   codecConfig.mREDRTXPayloadType = 3;
@@ -639,7 +639,7 @@ TEST_F(VideoConduitTest, TestConfigureSendMediaCodecFEC)
   VideoCodecConfig codecConfig2(120, "VP8", constraints);
   codecConfig2.mSimulcastEncodings.push_back(encoding);
   codecConfig2.mFECFbSet = true;
-  codecConfig2.mNackFbTypes.push_back("");
+  codecConfig2.mNackFbTypes.emplace_back("");
   codecConfig2.mULPFECPayloadType = 1;
   codecConfig2.mREDPayloadType = 2;
   codecConfig2.mREDRTXPayloadType = 3;
@@ -666,7 +666,7 @@ TEST_F(VideoConduitTest, TestConfigureSendMediaCodecNack)
   ASSERT_EQ(mCall->mVideoSendConfig.rtp.nack.rtp_history_ms, 0);
   mVideoConduit->StopTransmitting();
 
-  codecConfig.mNackFbTypes.push_back("");
+  codecConfig.mNackFbTypes.emplace_back("");
   ec = mVideoConduit->ConfigureSendMediaCodec(&codecConfig);
   ASSERT_EQ(ec, kMediaConduitNoError);
   mVideoConduit->StartTransmitting();
@@ -868,7 +868,7 @@ TEST_F(VideoConduitTest, TestReconfigureReceiveMediaCodecs)
   // Nack
   codecs.clear();
   VideoCodecConfig codecConfigNack(120, "VP8", constraints);
-  codecConfigNack.mNackFbTypes.push_back("");
+  codecConfigNack.mNackFbTypes.emplace_back("");
   codecs.push_back(&codecConfigNack);
 
   ec = mVideoConduit->ConfigureRecvMediaCodecs(codecs);
@@ -914,7 +914,7 @@ TEST_F(VideoConduitTest, TestReconfigureReceiveMediaCodecs)
   // Tmmbr
   codecs.clear();
   VideoCodecConfig codecConfigTmmbr(120, "VP8", constraints);
-  codecConfigTmmbr.mCcmFbTypes.push_back("tmmbr");
+  codecConfigTmmbr.mCcmFbTypes.emplace_back("tmmbr");
   codecs.push_back(&codecConfigTmmbr);
 
   ec = mVideoConduit->ConfigureRecvMediaCodecs(codecs);
@@ -972,7 +972,7 @@ TEST_F(VideoConduitTest, TestReconfigureSendMediaCodec)
   VideoCodecConfig codecConfigFEC(120, "VP8", constraints);
   codecConfigFEC.mSimulcastEncodings.push_back(encoding);
   codecConfigFEC.mFECFbSet = true;
-  codecConfigFEC.mNackFbTypes.push_back("");
+  codecConfigFEC.mNackFbTypes.emplace_back("");
   codecConfigFEC.mULPFECPayloadType = 1;
   codecConfigFEC.mREDPayloadType = 2;
   codecConfigFEC.mREDRTXPayloadType = 3;

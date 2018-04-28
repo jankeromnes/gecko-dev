@@ -85,8 +85,8 @@ TEST_F(RLogConnectorTest, TestBasicFilterContent) {
 TEST_F(RLogConnectorTest, TestFilterAnyFrontMatch) {
   r_log(NR_LOG_TEST, LOG_INFO, "Test");
   std::vector<std::string> substrings;
-  substrings.push_back("foo");
-  substrings.push_back("Test");
+  substrings.emplace_back("foo");
+  substrings.emplace_back("Test");
   std::deque<std::string> logs;
   RLogConnector::GetInstance()->FilterAny(substrings, 0, &logs);
   ASSERT_EQ("Test", logs.back());
@@ -95,8 +95,8 @@ TEST_F(RLogConnectorTest, TestFilterAnyFrontMatch) {
 TEST_F(RLogConnectorTest, TestFilterAnyBackMatch) {
   r_log(NR_LOG_TEST, LOG_INFO, "Test");
   std::vector<std::string> substrings;
-  substrings.push_back("Test");
-  substrings.push_back("foo");
+  substrings.emplace_back("Test");
+  substrings.emplace_back("foo");
   std::deque<std::string> logs;
   RLogConnector::GetInstance()->FilterAny(substrings, 0, &logs);
   ASSERT_EQ("Test", logs.back());
@@ -105,8 +105,8 @@ TEST_F(RLogConnectorTest, TestFilterAnyBackMatch) {
 TEST_F(RLogConnectorTest, TestFilterAnyBothMatch) {
   r_log(NR_LOG_TEST, LOG_INFO, "Test");
   std::vector<std::string> substrings;
-  substrings.push_back("Tes");
-  substrings.push_back("est");
+  substrings.emplace_back("Tes");
+  substrings.emplace_back("est");
   std::deque<std::string> logs;
   RLogConnector::GetInstance()->FilterAny(substrings, 0, &logs);
   ASSERT_EQ("Test", logs.back());
@@ -115,8 +115,8 @@ TEST_F(RLogConnectorTest, TestFilterAnyBothMatch) {
 TEST_F(RLogConnectorTest, TestFilterAnyNeitherMatch) {
   r_log(NR_LOG_TEST, LOG_INFO, "Test");
   std::vector<std::string> substrings;
-  substrings.push_back("tes");
-  substrings.push_back("esT");
+  substrings.emplace_back("tes");
+  substrings.emplace_back("esT");
   std::deque<std::string> logs;
   RLogConnector::GetInstance()->FilterAny(substrings, 0, &logs);
   ASSERT_EQ(0U, logs.size());
@@ -179,10 +179,10 @@ TEST_F(RLogConnectorTest, TestFilterAnyLimit) {
   r_log(NR_LOG_TEST, LOG_INFO, "TestSix");
   std::vector<std::string> substrings;
   // Matches Two, Three, Four, and Six
-  substrings.push_back("tT");
-  substrings.push_back("o");
-  substrings.push_back("r");
-  substrings.push_back("S");
+  substrings.emplace_back("tT");
+  substrings.emplace_back("o");
+  substrings.emplace_back("r");
+  substrings.emplace_back("S");
   std::deque<std::string> logs;
   RLogConnector::GetInstance()->FilterAny(substrings, 2, &logs);
   ASSERT_EQ(2U, logs.size());

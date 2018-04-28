@@ -475,7 +475,7 @@ std::vector<std::string> NrIceMediaStream::GetCandidates() const {
   }
 
   for (int i=0; i<attrct; i++) {
-    ret.push_back(attrs[i]);
+    ret.emplace_back(attrs[i]);
     RFREE(attrs[i]);
   }
 

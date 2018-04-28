@@ -96,7 +96,7 @@ bool ScalarizeArgsTraverser::visitAggregate(Visit visit, TIntermAggregate *node)
 
 bool ScalarizeArgsTraverser::visitBlock(Visit visit, TIntermBlock *node)
 {
-    mBlockStack.push_back(TIntermSequence());
+    mBlockStack.emplace_back();
     {
         for (TIntermNode *child : *node->getSequence())
         {

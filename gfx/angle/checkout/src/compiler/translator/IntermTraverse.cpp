@@ -132,7 +132,7 @@ const TIntermBlock *TIntermTraverser::getParentBlock() const
 
 void TIntermTraverser::pushParentBlock(TIntermBlock *node)
 {
-    mParentBlockStack.push_back(ParentBlock(node, 0));
+    mParentBlockStack.emplace_back(node, 0);
 }
 
 void TIntermTraverser::incrementParentBlockPos()
@@ -638,7 +638,7 @@ void TIntermTraverser::queueReplacementWithParent(TIntermNode *parent,
                                                   OriginalNode originalStatus)
 {
     bool originalBecomesChild = (originalStatus == OriginalNode::BECOMES_CHILD);
-    mReplacements.push_back(NodeUpdateEntry(parent, original, replacement, originalBecomesChild));
+    mReplacements.emplace_back(parent, original, replacement, originalBecomesChild);
 }
 
 TLValueTrackingTraverser::TLValueTrackingTraverser(bool preVisit,

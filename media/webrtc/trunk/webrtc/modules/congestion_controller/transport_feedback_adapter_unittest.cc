@@ -104,11 +104,11 @@ class TransportFeedbackAdapterTest : public ::testing::Test {
 
 TEST_F(TransportFeedbackAdapterTest, AdaptsFeedbackAndPopulatesSendTimes) {
   std::vector<PacketInfo> packets;
-  packets.push_back(PacketInfo(100, 200, 0, 1500, 0));
-  packets.push_back(PacketInfo(110, 210, 1, 1500, 0));
-  packets.push_back(PacketInfo(120, 220, 2, 1500, 0));
-  packets.push_back(PacketInfo(130, 230, 3, 1500, 1));
-  packets.push_back(PacketInfo(140, 240, 4, 1500, 1));
+  packets.emplace_back(100, 200, 0, 1500, 0);
+  packets.emplace_back(110, 210, 1, 1500, 0);
+  packets.emplace_back(120, 220, 2, 1500, 0);
+  packets.emplace_back(130, 230, 3, 1500, 1);
+  packets.emplace_back(140, 240, 4, 1500, 1);
 
   for (const PacketInfo& packet : packets)
     OnSentPacket(packet);
@@ -130,11 +130,11 @@ TEST_F(TransportFeedbackAdapterTest, AdaptsFeedbackAndPopulatesSendTimes) {
 
 TEST_F(TransportFeedbackAdapterTest, HandlesDroppedPackets) {
   std::vector<PacketInfo> packets;
-  packets.push_back(PacketInfo(100, 200, 0, 1500, 1));
-  packets.push_back(PacketInfo(110, 210, 1, 1500, 2));
-  packets.push_back(PacketInfo(120, 220, 2, 1500, 3));
-  packets.push_back(PacketInfo(130, 230, 3, 1500, 4));
-  packets.push_back(PacketInfo(140, 240, 4, 1500, 5));
+  packets.emplace_back(100, 200, 0, 1500, 1);
+  packets.emplace_back(110, 210, 1, 1500, 2);
+  packets.emplace_back(120, 220, 2, 1500, 3);
+  packets.emplace_back(130, 230, 3, 1500, 4);
+  packets.emplace_back(140, 240, 4, 1500, 5);
 
   const uint16_t kSendSideDropBefore = 1;
   const uint16_t kReceiveSideDropAfter = 3;
@@ -171,12 +171,11 @@ TEST_F(TransportFeedbackAdapterTest, SendTimeWrapsBothWays) {
                                static_cast<int64_t>(1 << 8) *
                                static_cast<int64_t>((1 << 23) - 1) / 1000;
   std::vector<PacketInfo> packets;
-  packets.push_back(PacketInfo(kHighArrivalTimeMs - 64, 200, 0, 1500,
-                               PacketInfo::kNotAProbe));
-  packets.push_back(PacketInfo(kHighArrivalTimeMs + 64, 210, 1, 1500,
-                               PacketInfo::kNotAProbe));
-  packets.push_back(
-      PacketInfo(kHighArrivalTimeMs, 220, 2, 1500, PacketInfo::kNotAProbe));
+  packets.emplace_back(kHighArrivalTimeMs - 64, 200, 0, 1500,
+                               PacketInfo::kNotAProbe);
+  packets.emplace_back(kHighArrivalTimeMs + 64, 210, 1, 1500,
+                               PacketInfo::kNotAProbe);
+  packets.emplace_back(kHighArrivalTimeMs, 220, 2, 1500, PacketInfo::kNotAProbe);
 
   for (const PacketInfo& packet : packets)
     OnSentPacket(packet);
@@ -205,9 +204,9 @@ TEST_F(TransportFeedbackAdapterTest, SendTimeWrapsBothWays) {
 
 TEST_F(TransportFeedbackAdapterTest, HandlesReordering) {
   std::vector<PacketInfo> packets;
-  packets.push_back(PacketInfo(120, 200, 0, 1500, 0));
-  packets.push_back(PacketInfo(110, 210, 1, 1500, 0));
-  packets.push_back(PacketInfo(100, 220, 2, 1500, 0));
+  packets.emplace_back(120, 200, 0, 1500, 0);
+  packets.emplace_back(110, 210, 1, 1500, 0);
+  packets.emplace_back(100, 220, 2, 1500, 0);
   std::vector<PacketInfo> expected_packets;
   expected_packets.push_back(packets[2]);
   expected_packets.push_back(packets[1]);

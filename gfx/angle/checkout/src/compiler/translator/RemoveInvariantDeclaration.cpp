@@ -25,8 +25,7 @@ class RemoveInvariantDeclarationTraverser : public TIntermTraverser
     bool visitInvariantDeclaration(Visit visit, TIntermInvariantDeclaration *node) override
     {
         TIntermSequence emptyReplacement;
-        mMultiReplacements.push_back(
-            NodeReplaceWithMultipleEntry(getParentNode()->getAsBlock(), node, emptyReplacement));
+        mMultiReplacements.emplace_back(getParentNode()->getAsBlock(), node, emptyReplacement);
         return false;
     }
 };

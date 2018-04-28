@@ -36,8 +36,8 @@ bool RemoveEmptySwitchStatementsTraverser::visitSwitch(Visit visit, TIntermSwitc
         {
             TIntermSequence emptyReplacement;
             ASSERT(getParentNode()->getAsBlock());
-            mMultiReplacements.push_back(NodeReplaceWithMultipleEntry(getParentNode()->getAsBlock(),
-                                                                      node, emptyReplacement));
+            mMultiReplacements.emplace_back(getParentNode()->getAsBlock(),
+                                                                      node, emptyReplacement);
         }
         return false;  // Nothing inside the child nodes to traverse.
     }

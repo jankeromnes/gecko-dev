@@ -182,8 +182,7 @@ bool ArrayReturnValueToOutParameterTraverser::visitAggregate(Visit visit, TInter
             // f(s0);
             TIntermSymbol *returnValueSymbol = CreateTempSymbolNode(returnValue);
             replacements.push_back(createReplacementCall(node, returnValueSymbol));
-            mMultiReplacements.push_back(
-                NodeReplaceWithMultipleEntry(parentBlock, node, replacements));
+            mMultiReplacements.emplace_back(parentBlock, node, replacements);
         }
         return false;
     }
@@ -213,8 +212,7 @@ bool ArrayReturnValueToOutParameterTraverser::visitBranch(Visit visit, TIntermBr
         replacementBranch->setLine(node->getLine());
         replacements.push_back(replacementBranch);
 
-        mMultiReplacements.push_back(
-            NodeReplaceWithMultipleEntry(getParentNode()->getAsBlock(), node, replacements));
+        mMultiReplacements.emplace_back(getParentNode()->getAsBlock(), node, replacements);
     }
     return false;
 }

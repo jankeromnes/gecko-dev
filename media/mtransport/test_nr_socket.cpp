@@ -364,7 +364,7 @@ int TestNrSocket::sendto(const void *msg, size_t len,
     }
 
     port_mapping = create_port_mapping(*to, external_socket);
-    port_mappings_.push_back(port_mapping);
+    port_mappings_.emplace_back(port_mapping);
 
     if (poll_flags() & PR_POLL_READ) {
       // Make sure the new port mapping is ready to receive traffic if the
@@ -500,7 +500,7 @@ int TestNrSocket::connect(nr_transport_addr *addr) {
   }
 
   PortMapping *port_mapping = create_port_mapping(*addr, external_socket);
-  port_mappings_.push_back(port_mapping);
+  port_mappings_.emplace_back(port_mapping);
   int r = port_mapping->external_socket_->connect(addr);
   if (r && r != R_WOULDBLOCK) {
     return r;

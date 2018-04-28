@@ -292,8 +292,8 @@ void OveruseFrameDetector::FrameCaptured(const VideoFrame& frame,
 
   last_capture_time_ms_ = time_when_first_seen_ms;
 
-  frame_timing_.push_back(FrameTiming(frame.ntp_time_ms(), frame.timestamp(),
-                                      time_when_first_seen_ms));
+  frame_timing_.emplace_back(frame.ntp_time_ms(), frame.timestamp(),
+                                      time_when_first_seen_ms);
 }
 
 void OveruseFrameDetector::FrameSent(uint32_t timestamp,

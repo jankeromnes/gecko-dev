@@ -4631,14 +4631,14 @@ TEST(NewSdpTestNoFixture, CheckImageattrSerialization)
   os.str("");
 
   imageattr.sendAll = false;
-  imageattr.sendSets.push_back(SdpImageattrAttributeList::Set());
+  imageattr.sendSets.emplace_back();
   imageattr.sendSets.back().xRange.discreteValues.push_back(320);
   imageattr.sendSets.back().yRange.discreteValues.push_back(240);
   imageattr.Serialize(os);
   ASSERT_EQ("* send [x=320,y=240] recv *", os.str());
   os.str("");
 
-  imageattr.sendSets.push_back(SdpImageattrAttributeList::Set());
+  imageattr.sendSets.emplace_back();
   imageattr.sendSets.back().xRange.discreteValues.push_back(640);
   imageattr.sendSets.back().yRange.discreteValues.push_back(480);
   imageattr.Serialize(os);
@@ -4646,14 +4646,14 @@ TEST(NewSdpTestNoFixture, CheckImageattrSerialization)
   os.str("");
 
   imageattr.recvAll = false;
-  imageattr.recvSets.push_back(SdpImageattrAttributeList::Set());
+  imageattr.recvSets.emplace_back();
   imageattr.recvSets.back().xRange.discreteValues.push_back(320);
   imageattr.recvSets.back().yRange.discreteValues.push_back(240);
   imageattr.Serialize(os);
   ASSERT_EQ("* send [x=320,y=240] [x=640,y=480] recv [x=320,y=240]", os.str());
   os.str("");
 
-  imageattr.recvSets.push_back(SdpImageattrAttributeList::Set());
+  imageattr.recvSets.emplace_back();
   imageattr.recvSets.back().xRange.discreteValues.push_back(640);
   imageattr.recvSets.back().yRange.discreteValues.push_back(480);
   imageattr.Serialize(os);
@@ -4668,17 +4668,17 @@ TEST(NewSdpTestNoFixture, CheckSimulcastVersionSerialize)
   std::ostringstream os;
 
   SdpSimulcastAttribute::Version version;
-  version.choices.push_back("8");
+  version.choices.emplace_back("8");
   version.Serialize(os);
   ASSERT_EQ("8", os.str());
   os.str("");
 
-  version.choices.push_back("9");
+  version.choices.emplace_back("9");
   version.Serialize(os);
   ASSERT_EQ("8,9", os.str());
   os.str("");
 
-  version.choices.push_back("0");
+  version.choices.emplace_back("0");
   version.Serialize(os);
   ASSERT_EQ("8,9,0", os.str());
   os.str("");
@@ -4733,7 +4733,7 @@ TEST(NewSdpTestNoFixture, CheckSimulcastVersionsSerialize)
   SdpSimulcastAttribute::Versions versions;
   versions.type = SdpSimulcastAttribute::Versions::kPt;
   versions.push_back(SdpSimulcastAttribute::Version());
-  versions.back().choices.push_back("8");
+  versions.back().choices.emplace_back("8");
   versions.Serialize(os);
   ASSERT_EQ("pt=8", os.str());
   os.str("");
@@ -4748,13 +4748,13 @@ TEST(NewSdpTestNoFixture, CheckSimulcastVersionsSerialize)
   ASSERT_EQ("rid=8", os.str());
   os.str("");
 
-  versions.back().choices.push_back("9");
+  versions.back().choices.emplace_back("9");
   versions.Serialize(os);
   ASSERT_EQ("rid=8;9", os.str());
   os.str("");
 
   versions.push_back(SdpSimulcastAttribute::Version());
-  versions.back().choices.push_back("0");
+  versions.back().choices.emplace_back("0");
   versions.Serialize(os);
   ASSERT_EQ("rid=8;9;0", os.str());
   os.str("");
@@ -4836,13 +4836,13 @@ TEST(NewSdpTestNoFixture, CheckSimulcastSerialize)
   SdpSimulcastAttribute simulcast;
   simulcast.recvVersions.type = SdpSimulcastAttribute::Versions::kPt;
   simulcast.recvVersions.push_back(SdpSimulcastAttribute::Version());
-  simulcast.recvVersions.back().choices.push_back("8");
+  simulcast.recvVersions.back().choices.emplace_back("8");
   simulcast.Serialize(os);
   ASSERT_EQ("a=simulcast: recv pt=8" CRLF, os.str());
   os.str("");
 
   simulcast.sendVersions.push_back(SdpSimulcastAttribute::Version());
-  simulcast.sendVersions.back().choices.push_back("9");
+  simulcast.sendVersions.back().choices.emplace_back("9");
   simulcast.Serialize(os);
   ASSERT_EQ("a=simulcast: send rid=9 recv pt=8" CRLF, os.str());
   os.str("");
@@ -5373,7 +5373,7 @@ TEST(NewSdpTestNoFixture, CheckRidSerialize)
     SdpRidAttributeList::Rid rid;
     rid.id = "foo";
     rid.direction = sdp::kSend;
-    rid.dependIds.push_back("foo");
+    rid.dependIds.emplace_back("foo");
     std::ostringstream os;
     rid.Serialize(os);
     ASSERT_EQ("foo send depend=foo", os.str());
@@ -5383,8 +5383,8 @@ TEST(NewSdpTestNoFixture, CheckRidSerialize)
     SdpRidAttributeList::Rid rid;
     rid.id = "foo";
     rid.direction = sdp::kSend;
-    rid.dependIds.push_back("foo");
-    rid.dependIds.push_back("bar");
+    rid.dependIds.emplace_back("foo");
+    rid.dependIds.emplace_back("bar");
     std::ostringstream os;
     rid.Serialize(os);
     ASSERT_EQ("foo send depend=foo,bar", os.str());

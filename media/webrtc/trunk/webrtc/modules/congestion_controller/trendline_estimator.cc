@@ -81,9 +81,9 @@ void TrendlineEstimator::Update(double recv_delta_ms,
                         smoothed_delay_);
 
   // Simple linear regression.
-  delay_hist_.push_back(std::make_pair(
+  delay_hist_.emplace_back(
       static_cast<double>(arrival_time_ms - first_arrival_time_ms),
-      smoothed_delay_));
+      smoothed_delay_);
   if (delay_hist_.size() > window_size_)
     delay_hist_.pop_front();
   if (delay_hist_.size() == window_size_) {
