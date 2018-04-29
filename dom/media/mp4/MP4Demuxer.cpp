@@ -235,7 +235,7 @@ MP4Demuxer::Init()
         continue;
       }
       RefPtr<MP4TrackDemuxer> demuxer =
-        new MP4TrackDemuxer(this, Move(info.Ref()), *indices.Ref().get());
+        new MP4TrackDemuxer(this, Move(info.Ref()), *indices.Ref());
       DDLINKCHILD("audio demuxer", demuxer.get());
       mAudioDemuxers.AppendElement(Move(demuxer));
     }
@@ -271,7 +271,7 @@ MP4Demuxer::Init()
         continue;
       }
       RefPtr<MP4TrackDemuxer> demuxer =
-        new MP4TrackDemuxer(this, Move(info.Ref()), *indices.Ref().get());
+        new MP4TrackDemuxer(this, Move(info.Ref()), *indices.Ref());
       DDLINKCHILD("video demuxer", demuxer.get());
       mVideoDemuxers.AppendElement(Move(demuxer));
     }

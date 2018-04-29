@@ -143,7 +143,7 @@ void MacroExpander::lex(Token *token)
 
 void MacroExpander::getToken(Token *token)
 {
-    if (mReserveToken.get())
+    if (mReserveToken)
     {
         *token = *mReserveToken;
         mReserveToken.reset();

@@ -455,7 +455,7 @@ TEST(RtcpPacketTest, TransportFeedback_Padding) {
 
   std::unique_ptr<TransportFeedback> parsed_packet(
       TransportFeedback::ParseFrom(mod_buffer, kExpectedSizeWithPadding));
-  ASSERT_TRUE(parsed_packet.get() != nullptr);
+  ASSERT_TRUE(parsed_packet != nullptr);
   EXPECT_EQ(kExpectedSizeWords * 4, packet.size());  // Padding not included.
 }
 
@@ -478,7 +478,7 @@ TEST(RtcpPacketTest, TransportFeedback_CorrectlySplitsVectorChunks) {
     std::unique_ptr<TransportFeedback> deserialized_packet =
         TransportFeedback::ParseFrom(serialized_packet.data(),
                                      serialized_packet.size());
-    EXPECT_TRUE(deserialized_packet.get() != nullptr);
+    EXPECT_TRUE(deserialized_packet != nullptr);
   }
 }
 

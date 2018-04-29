@@ -197,7 +197,7 @@ TEST_F(TransportFeedbackAdapterTest, SendTimeWrapsBothWays) {
     std::vector<PacketInfo> expected_packets;
     expected_packets.push_back(packets[i]);
 
-    adapter_->OnTransportFeedback(*feedback.get());
+    adapter_->OnTransportFeedback(*feedback);
     ComparePacketVectors(expected_packets,
                          adapter_->GetTransportFeedbackVector());
   }
@@ -290,8 +290,8 @@ TEST_F(TransportFeedbackAdapterTest, TimestampDeltas) {
 
   std::vector<PacketInfo> received_feedback;
 
-  EXPECT_TRUE(feedback.get() != nullptr);
-  adapter_->OnTransportFeedback(*feedback.get());
+  EXPECT_TRUE(feedback != nullptr);
+  adapter_->OnTransportFeedback(*feedback);
   {
     // Expected to be ordered on arrival time when the feedback message has been
     // parsed.
@@ -313,8 +313,8 @@ TEST_F(TransportFeedbackAdapterTest, TimestampDeltas) {
   feedback =
       rtcp::TransportFeedback::ParseFrom(raw_packet.data(), raw_packet.size());
 
-  EXPECT_TRUE(feedback.get() != nullptr);
-  adapter_->OnTransportFeedback(*feedback.get());
+  EXPECT_TRUE(feedback != nullptr);
+  adapter_->OnTransportFeedback(*feedback);
   {
     std::vector<PacketInfo> expected_packets;
     expected_packets.push_back(info);
@@ -343,8 +343,8 @@ TEST_F(TransportFeedbackAdapterTest, UpdatesDelayBasedEstimate) {
     rtc::Buffer raw_packet = feedback->Build();
     feedback = rtcp::TransportFeedback::ParseFrom(raw_packet.data(),
                                                   raw_packet.size());
-    EXPECT_TRUE(feedback.get() != nullptr);
-    adapter_->OnTransportFeedback(*feedback.get());
+    EXPECT_TRUE(feedback != nullptr);
+    adapter_->OnTransportFeedback(*feedback);
     clock_.AdvanceTimeMilliseconds(50);
     ++seq_num;
   }
