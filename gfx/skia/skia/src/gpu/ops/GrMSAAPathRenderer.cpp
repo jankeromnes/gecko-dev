@@ -117,7 +117,7 @@ public:
         return new MSAAQuadProcessor(viewMatrix);
     }
 
-    ~MSAAQuadProcessor() override {}
+    ~MSAAQuadProcessor() override = default;
 
     const char* name() const override { return "MSAAQuadProcessor"; }
 

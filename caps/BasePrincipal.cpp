@@ -33,7 +33,7 @@ BasePrincipal::BasePrincipal(PrincipalKind aKind)
 {}
 
 BasePrincipal::~BasePrincipal()
-{}
+= default;
 
 NS_IMETHODIMP
 BasePrincipal::GetOrigin(nsACString& aOrigin)

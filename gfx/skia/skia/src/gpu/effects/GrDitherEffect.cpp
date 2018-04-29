@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLDitherEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLDitherEffect() {}
+    GrGLSLDitherEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrDitherEffect& _outer = args.fFp.cast<GrDitherEffect>();

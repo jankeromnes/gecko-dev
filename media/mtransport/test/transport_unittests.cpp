@@ -90,7 +90,7 @@ class TransportLayerDummy : public TransportLayer {
 
 class Inspector {
  public:
-  virtual ~Inspector() {}
+  virtual ~Inspector() = default;
 
   virtual void Inspect(TransportLayer* layer,
                        const unsigned char *data, size_t len) = 0;
@@ -100,7 +100,7 @@ class Inspector {
 class TransportLayerLossy : public TransportLayer {
  public:
   TransportLayerLossy() : loss_mask_(0), packet_(0), inspector_(nullptr) {}
-  ~TransportLayerLossy () {}
+  ~TransportLayerLossy () = default;
 
   TransportResult SendPacket(const unsigned char *data, size_t len) override {
     MOZ_MTLOG(ML_NOTICE, LAYER_INFO << "SendPacket(" << len << ")");

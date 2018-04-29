@@ -95,19 +95,13 @@ Std140PaddingHelper::Std140PaddingHelper(const std::map<TString, int> &structEle
 }
 
 Std140PaddingHelper::Std140PaddingHelper(const Std140PaddingHelper &other)
-    : mPaddingCounter(other.mPaddingCounter),
-      mElementIndex(other.mElementIndex),
-      mStructElementIndexes(other.mStructElementIndexes)
-{
-}
+    : ,
+      ,
+      
+= default;
 
 Std140PaddingHelper &Std140PaddingHelper::operator=(const Std140PaddingHelper &other)
-{
-    mPaddingCounter       = other.mPaddingCounter;
-    mElementIndex         = other.mElementIndex;
-    mStructElementIndexes = other.mStructElementIndexes;
-    return *this;
-}
+= default;
 
 TString Std140PaddingHelper::next()
 {

@@ -69,7 +69,7 @@ LocaleKey::LocaleKey(const UnicodeString& primaryID,
     _currentID = _primaryID;
 }
 
-LocaleKey::~LocaleKey() {}
+LocaleKey::~LocaleKey() = default;
 
 UnicodeString&
 LocaleKey::prefix(UnicodeString& result) const {

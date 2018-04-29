@@ -61,7 +61,7 @@
 
 U_NAMESPACE_BEGIN
 
-SymbolTable::~SymbolTable() {}
+SymbolTable::~SymbolTable() = default;
 
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(UnicodeSet)
 

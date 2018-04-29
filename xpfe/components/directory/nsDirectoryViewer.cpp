@@ -1220,14 +1220,12 @@ nsHTTPIndex::GetAllCmds(nsIRDFResource *aSource, nsISimpleEnumerator **_retval)
 // nsDirectoryViewerFactory
 //
 nsDirectoryViewerFactory::nsDirectoryViewerFactory()
-{
-}
+= default;
 
 
 
 nsDirectoryViewerFactory::~nsDirectoryViewerFactory()
-{
-}
+= default;
 
 
 NS_IMPL_ISUPPORTS(nsDirectoryViewerFactory, nsIDocumentLoaderFactory)

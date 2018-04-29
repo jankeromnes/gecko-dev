@@ -113,7 +113,7 @@ public:
 //    static UClassID getStaticClassID(void);
 };
 
-LocalizationInfo::~LocalizationInfo() {}
+LocalizationInfo::~LocalizationInfo() = default;
 
 //UOBJECT_DEFINE_ABSTRACT_RTTI_IMPLEMENTATION(LocalizationInfo)
 
@@ -306,7 +306,7 @@ class LocDataParser {
 public:
     LocDataParser(UParseError& parseError, UErrorCode& status) 
         : data(NULL), e(NULL), p(NULL), ch(0xffff), pe(parseError), ec(status) {}
-    ~LocDataParser() {}
+    ~LocDataParser() = default;
     
     /*
     * On a successful parse, return a StringLocalizationInfo*, otherwise delete locData, set perror and status,

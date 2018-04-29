@@ -241,12 +241,10 @@ cType(type)
     setTimeInMillis(getNow(), success); // Call this again now that the vtable is set up properly.
 }
 
-IslamicCalendar::IslamicCalendar(const IslamicCalendar& other) : Calendar(other), cType(other.cType) {
-}
+IslamicCalendar::IslamicCalendar(const IslamicCalendar& other) : , = default;
 
 IslamicCalendar::~IslamicCalendar()
-{
-}
+= default;
 
 void IslamicCalendar::setCalculationType(ECalculationType type, UErrorCode &status)
 {

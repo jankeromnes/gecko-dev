@@ -37,11 +37,9 @@ TimeZoneRule::TimeZoneRule(const UnicodeString& name, int32_t rawOffset, int32_t
 }
 
 TimeZoneRule::TimeZoneRule(const TimeZoneRule& source)
-: UObject(source), fName(source.fName), fRawOffset(source.fRawOffset), fDSTSavings(source.fDSTSavings) {
-}
+: , , , = default;
 
-TimeZoneRule::~TimeZoneRule() {
-}
+TimeZoneRule::~TimeZoneRule() = default;
 
 TimeZoneRule&
 TimeZoneRule::operator=(const TimeZoneRule& right) {
@@ -101,11 +99,9 @@ InitialTimeZoneRule::InitialTimeZoneRule(const UnicodeString& name,
 }
 
 InitialTimeZoneRule::InitialTimeZoneRule(const InitialTimeZoneRule& source)
-: TimeZoneRule(source) {
-}
+: = default;
 
-InitialTimeZoneRule::~InitialTimeZoneRule() {
-}
+InitialTimeZoneRule::~InitialTimeZoneRule() = default;
 
 InitialTimeZoneRule*
 InitialTimeZoneRule::clone(void) const {

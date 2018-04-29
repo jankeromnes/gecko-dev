@@ -53,14 +53,12 @@ DateTimeRule::DateTimeRule(int32_t month,
 }
 
 DateTimeRule::DateTimeRule(const DateTimeRule& source)
-: UObject(source),
-  fMonth(source.fMonth), fDayOfMonth(source.fDayOfMonth), fDayOfWeek(source.fDayOfWeek),
-  fWeekInMonth(source.fWeekInMonth), fMillisInDay(source.fMillisInDay),
-  fDateRuleType(source.fDateRuleType), fTimeRuleType(source.fTimeRuleType) {
-}
+: ,
+  , , ,
+  , ,
+  , = default;
 
-DateTimeRule::~DateTimeRule() {
-}
+DateTimeRule::~DateTimeRule() = default;
 
 DateTimeRule*
 DateTimeRule::clone() const {

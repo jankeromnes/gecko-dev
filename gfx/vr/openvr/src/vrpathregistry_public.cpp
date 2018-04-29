@@ -101,9 +101,7 @@ static std::string GetAppSettingsPath()
 // Purpose: Constructor
 // ---------------------------------------------------------------------------
 CVRPathRegistry_Public::CVRPathRegistry_Public()
-{
-
-}
+= default;
 
 // ---------------------------------------------------------------------------
 // Purpose: Computes the registry filename

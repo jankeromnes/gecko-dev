@@ -1104,8 +1104,7 @@ UObject *MeasureUnit::clone() const {
     return new MeasureUnit(*this);
 }
 
-MeasureUnit::~MeasureUnit() {
-}
+MeasureUnit::~MeasureUnit() = default;
 
 const char *MeasureUnit::getType() const {
     return gTypes[fTypeId];

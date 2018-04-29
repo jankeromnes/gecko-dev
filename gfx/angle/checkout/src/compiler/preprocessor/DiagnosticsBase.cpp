@@ -12,8 +12,7 @@ namespace pp
 {
 
 Diagnostics::~Diagnostics()
-{
-}
+= default;
 
 void Diagnostics::report(ID id, const SourceLocation &loc, const std::string &text)
 {

@@ -33,7 +33,7 @@ UStack::UStack(UObjectDeleter *d, UElementsAreEqual *c, int32_t initialCapacity,
 {
 }
 
-UStack::~UStack() {}
+UStack::~UStack() = default;
 
 void* UStack::pop(void) {
     int32_t n = size() - 1;

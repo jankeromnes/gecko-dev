@@ -30,20 +30,15 @@ CurrencyAmount::CurrencyAmount(double amount, ConstChar16Ptr isoCode,
 }
 
 CurrencyAmount::CurrencyAmount(const CurrencyAmount& other) :
-    Measure(other) {
-}
+    = default;
 
-CurrencyAmount& CurrencyAmount::operator=(const CurrencyAmount& other) {
-    Measure::operator=(other);
-    return *this;
-}
+CurrencyAmount& CurrencyAmount::operator=(const CurrencyAmount& other) = default;
 
 UObject* CurrencyAmount::clone() const {
     return new CurrencyAmount(*this);
 }
 
-CurrencyAmount::~CurrencyAmount() {
-}
+CurrencyAmount::~CurrencyAmount() = default;
     
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(CurrencyAmount)
 

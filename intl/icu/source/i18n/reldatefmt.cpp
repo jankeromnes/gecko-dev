@@ -557,7 +557,7 @@ struct RelDateTimeFmtDataSink : public ResourceSink {
 };
 
 // Virtual destructors must be defined out of line.
-RelDateTimeFmtDataSink::~RelDateTimeFmtDataSink() {}
+RelDateTimeFmtDataSink::~RelDateTimeFmtDataSink() = default;
 } // namespace
 
 static const DateFormatSymbols::DtWidthType styleToDateFormatSymbolWidth[UDAT_STYLE_COUNT] = {

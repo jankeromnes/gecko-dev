@@ -110,7 +110,7 @@ PluginStreamListener::OnStartRequest(nsIRequest* request, nsISupports *ctxt)
 }
 
 PluginDocument::PluginDocument()
-{}
+= default;
 
 PluginDocument::~PluginDocument() = default;
 

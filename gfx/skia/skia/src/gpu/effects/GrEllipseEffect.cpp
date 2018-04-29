@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLEllipseEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLEllipseEffect() {}
+    GrGLSLEllipseEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrEllipseEffect& _outer = args.fFp.cast<GrEllipseEffect>();

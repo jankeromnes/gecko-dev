@@ -29,11 +29,9 @@ U_NAMESPACE_BEGIN
  ******************************************************************
  */
 
-DictionaryBreakEngine::DictionaryBreakEngine() {
-}
+DictionaryBreakEngine::DictionaryBreakEngine() = default;
 
-DictionaryBreakEngine::~DictionaryBreakEngine() {
-}
+DictionaryBreakEngine::~DictionaryBreakEngine() = default;
 
 UBool
 DictionaryBreakEngine::handles(UChar32 c) const {
@@ -102,7 +100,7 @@ private:
 
 public:
     PossibleWord() : count(0), prefix(0), offset(-1), mark(0), current(0) {};
-    ~PossibleWord() {};
+    ~PossibleWord() = default;;
   
     // Fill the list of candidates if needed, select the longest, and return the number found
     int32_t   candidates( UText *text, DictionaryMatcher *dict, int32_t rangeEnd );

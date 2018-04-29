@@ -50,7 +50,7 @@ class SendPeriodic : public nsITimerCallback {
   NS_DECL_NSITIMERCALLBACK
 
  protected:
-  virtual ~SendPeriodic() {}
+  virtual ~SendPeriodic() = default;
 
   TransportTestPeer *peer_;
   int to_send_;
@@ -312,11 +312,9 @@ NS_IMETHODIMP SendPeriodic::Notify(nsITimer *timer) {
 
 class SctpTransportTest : public MtransportTest {
  public:
-  SctpTransportTest() {
-  }
+  SctpTransportTest() = default;
 
-  ~SctpTransportTest() {
-  }
+  ~SctpTransportTest() = default;
 
   static void debug_printf(const char *format, ...) {
     va_list ap;

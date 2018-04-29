@@ -254,7 +254,7 @@ static_assert(!mozilla::IsEmpty<U2>::value,
 
 struct NE1 { int mX; };
 struct NE2 : virtual E1 {};
-struct NE3 : E2 { virtual ~NE3() {} };
+struct NE3 : E2 { virtual ~NE3() = default; };
 struct NE4 { virtual void f() {} };
 
 static_assert(!mozilla::IsEmpty<NE1>::value &&
@@ -357,14 +357,14 @@ static_assert(!IsUnsigned<NotIntConstructible>::value,
 struct TrivialCtor0 {};
 struct TrivialCtor1 { int mX; };
 
-struct DefaultCtor0 { DefaultCtor0() {} };
+struct DefaultCtor0 { DefaultCtor0() = default; };
 struct DefaultCtor1 { DefaultCtor1() = default; };
-struct DefaultCtor2 { DefaultCtor2() {} explicit DefaultCtor2(int) {} };
+struct DefaultCtor2 { DefaultCtor2() = default; explicit DefaultCtor2(int) {} };
 
 struct NoDefaultCtor0 { explicit NoDefaultCtor0(int) {} };
 struct NoDefaultCtor1 { NoDefaultCtor1() = delete; };
 
-class PrivateCtor0 { PrivateCtor0() {} };
+class PrivateCtor0 { PrivateCtor0() = default; };
 class PrivateCtor1 { PrivateCtor1() = default; };
 
 enum EnumCtor0 {};

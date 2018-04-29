@@ -49,35 +49,22 @@ ShaderVariable::ShaderVariable(GLenum typeIn, unsigned int arraySizeIn)
 }
 
 ShaderVariable::~ShaderVariable()
-{
-}
+= default;
 
 ShaderVariable::ShaderVariable(const ShaderVariable &other)
-    : type(other.type),
-      precision(other.precision),
-      name(other.name),
-      mappedName(other.mappedName),
-      arraySizes(other.arraySizes),
-      flattenedOffsetInParentArrays(other.flattenedOffsetInParentArrays),
-      staticUse(other.staticUse),
-      fields(other.fields),
-      structName(other.structName)
-{
-}
+    : ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      
+= default;
 
 ShaderVariable &ShaderVariable::operator=(const ShaderVariable &other)
-{
-    type       = other.type;
-    precision  = other.precision;
-    name       = other.name;
-    mappedName = other.mappedName;
-    arraySizes                    = other.arraySizes;
-    staticUse  = other.staticUse;
-    flattenedOffsetInParentArrays = other.flattenedOffsetInParentArrays;
-    fields     = other.fields;
-    structName = other.structName;
-    return *this;
-}
+= default;
 
 bool ShaderVariable::operator==(const ShaderVariable &other) const
 {
@@ -251,27 +238,18 @@ Uniform::Uniform() : binding(-1), offset(-1), readonly(false), writeonly(false)
 }
 
 Uniform::~Uniform()
-{
-}
+= default;
 
 Uniform::Uniform(const Uniform &other)
-    : VariableWithLocation(other),
-      binding(other.binding),
-      offset(other.offset),
-      readonly(other.readonly),
-      writeonly(other.writeonly)
-{
-}
+    : ,
+      ,
+      ,
+      ,
+      
+= default;
 
 Uniform &Uniform::operator=(const Uniform &other)
-{
-    VariableWithLocation::operator=(other);
-    binding                 = other.binding;
-    offset                        = other.offset;
-    readonly                      = other.readonly;
-    writeonly                     = other.writeonly;
-    return *this;
-}
+= default;
 
 bool Uniform::operator==(const Uniform &other) const
 {
@@ -307,20 +285,14 @@ VariableWithLocation::VariableWithLocation() : location(-1)
 }
 
 VariableWithLocation::~VariableWithLocation()
-{
-}
+= default;
 
 VariableWithLocation::VariableWithLocation(const VariableWithLocation &other)
-    : ShaderVariable(other), location(other.location)
-{
-}
+    : , 
+= default;
 
 VariableWithLocation &VariableWithLocation::operator=(const VariableWithLocation &other)
-{
-    ShaderVariable::operator=(other);
-    location                = other.location;
-    return *this;
-}
+= default;
 
 bool VariableWithLocation::operator==(const VariableWithLocation &other) const
 {
@@ -328,22 +300,16 @@ bool VariableWithLocation::operator==(const VariableWithLocation &other) const
 }
 
 Attribute::Attribute()
-{
-}
+= default;
 
 Attribute::~Attribute()
-{
-}
+= default;
 
-Attribute::Attribute(const Attribute &other) : VariableWithLocation(other)
-{
-}
+Attribute::Attribute(const Attribute &other) : 
+= default;
 
 Attribute &Attribute::operator=(const Attribute &other)
-{
-    VariableWithLocation::operator=(other);
-    return *this;
-}
+= default;
 
 bool Attribute::operator==(const Attribute &other) const
 {
@@ -351,22 +317,16 @@ bool Attribute::operator==(const Attribute &other) const
 }
 
 OutputVariable::OutputVariable()
-{
-}
+= default;
 
 OutputVariable::~OutputVariable()
-{
-}
+= default;
 
-OutputVariable::OutputVariable(const OutputVariable &other) : VariableWithLocation(other)
-{
-}
+OutputVariable::OutputVariable(const OutputVariable &other) : 
+= default;
 
 OutputVariable &OutputVariable::operator=(const OutputVariable &other)
-{
-    VariableWithLocation::operator=(other);
-    return *this;
-}
+= default;
 
 bool OutputVariable::operator==(const OutputVariable &other) const
 {
@@ -378,20 +338,14 @@ InterfaceBlockField::InterfaceBlockField() : isRowMajorLayout(false)
 }
 
 InterfaceBlockField::~InterfaceBlockField()
-{
-}
+= default;
 
 InterfaceBlockField::InterfaceBlockField(const InterfaceBlockField &other)
-    : ShaderVariable(other), isRowMajorLayout(other.isRowMajorLayout)
-{
-}
+    : , 
+= default;
 
 InterfaceBlockField &InterfaceBlockField::operator=(const InterfaceBlockField &other)
-{
-    ShaderVariable::operator=(other);
-    isRowMajorLayout        = other.isRowMajorLayout;
-    return *this;
-}
+= default;
 
 bool InterfaceBlockField::operator==(const InterfaceBlockField &other) const
 {
@@ -410,23 +364,16 @@ Varying::Varying() : interpolation(INTERPOLATION_SMOOTH), isInvariant(false)
 }
 
 Varying::~Varying()
-{
-}
+= default;
 
 Varying::Varying(const Varying &other)
-    : VariableWithLocation(other),
-      interpolation(other.interpolation),
-      isInvariant(other.isInvariant)
-{
-}
+    : ,
+      ,
+      
+= default;
 
 Varying &Varying::operator=(const Varying &other)
-{
-    VariableWithLocation::operator=(other);
-    interpolation           = other.interpolation;
-    isInvariant             = other.isInvariant;
-    return *this;
-}
+= default;
 
 bool Varying::operator==(const Varying &other) const
 {
@@ -459,37 +406,23 @@ InterfaceBlock::InterfaceBlock()
 }
 
 InterfaceBlock::~InterfaceBlock()
-{
-}
+= default;
 
 InterfaceBlock::InterfaceBlock(const InterfaceBlock &other)
-    : name(other.name),
-      mappedName(other.mappedName),
-      instanceName(other.instanceName),
-      arraySize(other.arraySize),
-      layout(other.layout),
-      isRowMajorLayout(other.isRowMajorLayout),
-      binding(other.binding),
-      staticUse(other.staticUse),
-      blockType(other.blockType),
-      fields(other.fields)
-{
-}
+    : ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      ,
+      
+= default;
 
 InterfaceBlock &InterfaceBlock::operator=(const InterfaceBlock &other)
-{
-    name             = other.name;
-    mappedName       = other.mappedName;
-    instanceName     = other.instanceName;
-    arraySize        = other.arraySize;
-    layout           = other.layout;
-    isRowMajorLayout = other.isRowMajorLayout;
-    binding          = other.binding;
-    staticUse        = other.staticUse;
-    blockType        = other.blockType;
-    fields           = other.fields;
-    return *this;
-}
+= default;
 
 std::string InterfaceBlock::fieldPrefix() const
 {

@@ -20,7 +20,7 @@
 
 U_NAMESPACE_BEGIN
 
-Appendable::~Appendable() {}
+Appendable::~Appendable() = default;
 
 UBool
 Appendable::appendCodePoint(UChar32 c) {

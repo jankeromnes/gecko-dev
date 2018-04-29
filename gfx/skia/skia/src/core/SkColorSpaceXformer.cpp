@@ -22,7 +22,7 @@ SkColorSpaceXformer::SkColorSpaceXformer(sk_sp<SkColorSpace> dst,
     , fFromSRGB(std::move(fromSRGB))
     , fReentryCount(0) {}
 
-SkColorSpaceXformer::~SkColorSpaceXformer() {}
+SkColorSpaceXformer::~SkColorSpaceXformer() = default;
 
 std::unique_ptr<SkColorSpaceXformer> SkColorSpaceXformer::Make(sk_sp<SkColorSpace> dst) {
     std::unique_ptr<SkColorSpaceXform> fromSRGB = SkColorSpaceXform_Base::New(

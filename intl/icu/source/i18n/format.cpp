@@ -59,7 +59,7 @@ U_NAMESPACE_BEGIN
 
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(FieldPosition)
 
-FieldPosition::~FieldPosition() {}
+FieldPosition::~FieldPosition() = default;
 
 FieldPosition *
 FieldPosition::clone() const {
@@ -78,8 +78,7 @@ Format::Format()
 // -------------------------------------
 
 Format::~Format()
-{
-}
+= default;
 
 // -------------------------------------
 // copy constructor

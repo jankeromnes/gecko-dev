@@ -51,7 +51,7 @@ NoiseSuppressionImpl::NoiseSuppressionImpl(rtc::CriticalSection* crit)
   RTC_DCHECK(crit);
 }
 
-NoiseSuppressionImpl::~NoiseSuppressionImpl() {}
+NoiseSuppressionImpl::~NoiseSuppressionImpl() = default;
 
 void NoiseSuppressionImpl::Initialize(size_t channels, int sample_rate_hz) {
   rtc::CritScope cs(crit_);

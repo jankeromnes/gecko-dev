@@ -84,12 +84,10 @@ PersianCalendar::PersianCalendar(const Locale& aLocale, UErrorCode& success)
     setTimeInMillis(getNow(), success); // Call this again now that the vtable is set up properly.
 }
 
-PersianCalendar::PersianCalendar(const PersianCalendar& other) : Calendar(other) {
-}
+PersianCalendar::PersianCalendar(const PersianCalendar& other) : = default;
 
 PersianCalendar::~PersianCalendar()
-{
-}
+= default;
 
 //-------------------------------------------------------------------------
 // Minimum / Maximum access functions

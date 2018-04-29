@@ -44,7 +44,7 @@ namespace test {
 class CongestionControllerTest : public ::testing::Test {
  protected:
   CongestionControllerTest() : clock_(123456) {}
-  ~CongestionControllerTest() override {}
+  ~CongestionControllerTest() override = default;
 
   void SetUp() override {
     pacer_ = new NiceMock<MockPacedSender>();

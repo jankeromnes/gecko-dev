@@ -15,9 +15,9 @@
 
 U_NAMESPACE_BEGIN
 
-SharedObject::~SharedObject() {}
+SharedObject::~SharedObject() = default;
 
-UnifiedCacheBase::~UnifiedCacheBase() {}
+UnifiedCacheBase::~UnifiedCacheBase() = default;
 
 void
 SharedObject::addRef() const {

@@ -18,9 +18,9 @@ namespace test {
 
 class StatsTest : public testing::Test {
  protected:
-  StatsTest() {}
+  StatsTest() = default;
 
-  virtual ~StatsTest() {}
+  virtual ~StatsTest() = default;
 
   void SetUp() { stats_ = new Stats(); }
 

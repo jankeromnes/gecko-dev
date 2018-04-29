@@ -120,7 +120,7 @@ class U_COMMON_API UStringSet : public UVector {
 /**
  * Virtual, won't be inlined
  */
-UStringSet::~UStringSet() {}
+UStringSet::~UStringSet() = default;
 
 /* ----------------------------------------------------------- */
 
@@ -148,7 +148,7 @@ public:
   int32_t                     refcount;
 };
 
-SimpleFilteredSentenceBreakData::~SimpleFilteredSentenceBreakData() {}
+SimpleFilteredSentenceBreakData::~SimpleFilteredSentenceBreakData() = default;
 
 /**
  * Concrete implementation
@@ -469,8 +469,7 @@ private:
 };
 
 SimpleFilteredBreakIteratorBuilder::~SimpleFilteredBreakIteratorBuilder()
-{
-}
+= default;
 
 SimpleFilteredBreakIteratorBuilder::SimpleFilteredBreakIteratorBuilder(UErrorCode &status) 
   : fSet(status)
@@ -680,11 +679,9 @@ SimpleFilteredBreakIteratorBuilder::build(BreakIterator* adoptBreakIterator, UEr
 
 // ----------- Base class implementation
 
-FilteredBreakIteratorBuilder::FilteredBreakIteratorBuilder() {
-}
+FilteredBreakIteratorBuilder::FilteredBreakIteratorBuilder() = default;
 
-FilteredBreakIteratorBuilder::~FilteredBreakIteratorBuilder() {
-}
+FilteredBreakIteratorBuilder::~FilteredBreakIteratorBuilder() = default;
 
 FilteredBreakIteratorBuilder *
 FilteredBreakIteratorBuilder::createInstance(const Locale& where, UErrorCode& status) {

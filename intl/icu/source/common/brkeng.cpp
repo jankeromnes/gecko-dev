@@ -39,21 +39,17 @@ U_NAMESPACE_BEGIN
  ******************************************************************
  */
 
-LanguageBreakEngine::LanguageBreakEngine() {
-}
+LanguageBreakEngine::LanguageBreakEngine() = default;
 
-LanguageBreakEngine::~LanguageBreakEngine() {
-}
+LanguageBreakEngine::~LanguageBreakEngine() = default;
 
 /*
  ******************************************************************
  */
 
-LanguageBreakFactory::LanguageBreakFactory() {
-}
+LanguageBreakFactory::LanguageBreakFactory() = default;
 
-LanguageBreakFactory::~LanguageBreakFactory() {
-}
+LanguageBreakFactory::~LanguageBreakFactory() = default;
 
 /*
  ******************************************************************

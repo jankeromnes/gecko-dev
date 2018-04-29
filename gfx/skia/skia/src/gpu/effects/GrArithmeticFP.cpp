@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLArithmeticFP : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLArithmeticFP() {}
+    GrGLSLArithmeticFP() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrArithmeticFP& _outer = args.fFp.cast<GrArithmeticFP>();

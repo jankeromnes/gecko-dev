@@ -33,16 +33,12 @@ TimeUnitAmount::TimeUnitAmount(double amount,
 
 
 TimeUnitAmount::TimeUnitAmount(const TimeUnitAmount& other)
-:   Measure(other)
-{
-}
+:   
+= default;
 
 
 TimeUnitAmount& 
-TimeUnitAmount::operator=(const TimeUnitAmount& other) {
-    Measure::operator=(other);
-    return *this;
-}
+TimeUnitAmount::operator=(const TimeUnitAmount& other) = default;
 
 
 UBool
@@ -56,8 +52,7 @@ TimeUnitAmount::clone() const {
 }
 
     
-TimeUnitAmount::~TimeUnitAmount() {
-}
+TimeUnitAmount::~TimeUnitAmount() = default;
 
 
 

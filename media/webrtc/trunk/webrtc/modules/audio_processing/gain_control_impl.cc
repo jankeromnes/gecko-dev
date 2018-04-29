@@ -105,7 +105,7 @@ GainControlImpl::GainControlImpl(rtc::CriticalSection* crit_render,
   RTC_DCHECK(crit_capture);
 }
 
-GainControlImpl::~GainControlImpl() {}
+GainControlImpl::~GainControlImpl() = default;
 
 void GainControlImpl::ProcessRenderAudio(
     rtc::ArrayView<const int16_t> packed_render_audio) {

@@ -216,8 +216,7 @@ DirectiveParser::DirectiveParser(Tokenizer *tokenizer,
 }
 
 DirectiveParser::~DirectiveParser()
-{
-}
+= default;
 
 void DirectiveParser::lex(Token *token)
 {

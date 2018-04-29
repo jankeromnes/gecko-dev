@@ -2736,8 +2736,7 @@ ZoneIdMatchHandler::ZoneIdMatchHandler()
 : fLen(0), fID(NULL) {
 }
 
-ZoneIdMatchHandler::~ZoneIdMatchHandler() {
-}
+ZoneIdMatchHandler::~ZoneIdMatchHandler() = default;
 
 UBool
 ZoneIdMatchHandler::handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status) {

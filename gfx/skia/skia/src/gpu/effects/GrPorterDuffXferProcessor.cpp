@@ -620,7 +620,7 @@ class GLPDLCDXferProcessor : public GrGLSLXferProcessor {
 public:
     GLPDLCDXferProcessor(const GrProcessor&) : fLastAlpha(SK_MaxU32) {}
 
-    ~GLPDLCDXferProcessor() override {}
+    ~GLPDLCDXferProcessor() override = default;
 
     static void GenKey(const GrProcessor& processor, const GrShaderCaps& caps,
                        GrProcessorKeyBuilder* b) {}
@@ -675,8 +675,7 @@ sk_sp<const GrXferProcessor> PDLCDXferProcessor::Make(SkBlendMode mode,
     return sk_sp<GrXferProcessor>(new PDLCDXferProcessor(blendConstant, alpha));
 }
 
-PDLCDXferProcessor::~PDLCDXferProcessor() {
-}
+PDLCDXferProcessor::~PDLCDXferProcessor() = default;
 
 void PDLCDXferProcessor::onGetGLSLProcessorKey(const GrShaderCaps& caps,
                                                GrProcessorKeyBuilder* b) const {

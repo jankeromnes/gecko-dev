@@ -63,8 +63,7 @@ ucache_deleteKey(void *obj) {
     delete p;
 }
 
-CacheKeyBase::~CacheKeyBase() {
-}
+CacheKeyBase::~CacheKeyBase() = default;
 
 static void U_CALLCONV cacheInit(UErrorCode &status) {
     U_ASSERT(gCache == NULL);

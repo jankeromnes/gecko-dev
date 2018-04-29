@@ -18,7 +18,7 @@
 
 U_NAMESPACE_BEGIN
 
-EventListener::~EventListener() {}
+EventListener::~EventListener() = default;
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(EventListener)
 
 static UMutex notifyLock = U_MUTEX_INITIALIZER;

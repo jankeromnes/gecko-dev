@@ -459,8 +459,7 @@ MacroExpander::MacroContext::MacroContext() : macro(0), index(0)
 }
 
 MacroExpander::MacroContext::~MacroContext()
-{
-}
+= default;
 
 bool MacroExpander::MacroContext::empty() const
 {

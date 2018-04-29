@@ -219,7 +219,7 @@ void GrGLConicEffect::GenKey(const GrGeometryProcessor& gp,
 
 //////////////////////////////////////////////////////////////////////////////
 
-GrConicEffect::~GrConicEffect() {}
+GrConicEffect::~GrConicEffect() = default;
 
 void GrConicEffect::getGLSLProcessorKey(const GrShaderCaps& caps,
                                         GrProcessorKeyBuilder* b) const {
@@ -420,7 +420,7 @@ void GrGLQuadEffect::GenKey(const GrGeometryProcessor& gp,
 
 //////////////////////////////////////////////////////////////////////////////
 
-GrQuadEffect::~GrQuadEffect() {}
+GrQuadEffect::~GrQuadEffect() = default;
 
 void GrQuadEffect::getGLSLProcessorKey(const GrShaderCaps& caps,
                                        GrProcessorKeyBuilder* b) const {
@@ -647,7 +647,7 @@ void GrGLCubicEffect::GenKey(const GrGeometryProcessor& gp,
 
 //////////////////////////////////////////////////////////////////////////////
 
-GrCubicEffect::~GrCubicEffect() {}
+GrCubicEffect::~GrCubicEffect() = default;
 
 void GrCubicEffect::getGLSLProcessorKey(const GrShaderCaps& caps, GrProcessorKeyBuilder* b) const {
     GrGLCubicEffect::GenKey(*this, caps, b);

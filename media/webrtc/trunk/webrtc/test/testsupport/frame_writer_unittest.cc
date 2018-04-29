@@ -20,8 +20,8 @@ const size_t kFrameLength = 1000;
 
 class FrameWriterTest: public testing::Test {
  protected:
-  FrameWriterTest() {}
-  virtual ~FrameWriterTest() {}
+  FrameWriterTest() = default;
+  virtual ~FrameWriterTest() = default;
   void SetUp() {
     temp_filename_ = webrtc::test::TempFilename(webrtc::test::OutputPath(),
                                                 "frame_writer_unittest");

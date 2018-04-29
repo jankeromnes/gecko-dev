@@ -1506,7 +1506,7 @@ class NewSdpTest : public ::testing::Test,
                    public ::testing::WithParamInterface<
                      ::testing::tuple<bool, bool> > {
   public:
-    NewSdpTest() {}
+    NewSdpTest() = default;
 
     void ParseSdp(const std::string &sdp, bool expectSuccess = true) {
       if (::testing::get<1>(GetParam())) {

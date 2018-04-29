@@ -45,7 +45,7 @@ const int32_t BEFORE_LENGTH = 7;
 
 }  // namespace
 
-CollationRuleParser::Sink::~Sink() {}
+CollationRuleParser::Sink::~Sink() = default;
 
 void
 CollationRuleParser::Sink::suppressContractions(const UnicodeSet &, const char *&, UErrorCode &) {}
@@ -53,7 +53,7 @@ CollationRuleParser::Sink::suppressContractions(const UnicodeSet &, const char *
 void
 CollationRuleParser::Sink::optimize(const UnicodeSet &, const char *&, UErrorCode &) {}
 
-CollationRuleParser::Importer::~Importer() {}
+CollationRuleParser::Importer::~Importer() = default;
 
 CollationRuleParser::CollationRuleParser(const CollationData *base, UErrorCode &errorCode)
         : nfd(*Normalizer2::getNFDInstance(errorCode)),
@@ -64,8 +64,7 @@ CollationRuleParser::CollationRuleParser(const CollationData *base, UErrorCode &
           ruleIndex(0) {
 }
 
-CollationRuleParser::~CollationRuleParser() {
-}
+CollationRuleParser::~CollationRuleParser() = default;
 
 void
 CollationRuleParser::parse(const UnicodeString &ruleString,

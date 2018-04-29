@@ -140,7 +140,7 @@ static const uint8_t escapeSequences_2022CN[][5] = {
 };
 #endif
 
-CharsetRecog_2022JP::~CharsetRecog_2022JP() {}
+CharsetRecog_2022JP::~CharsetRecog_2022JP() = default;
 
 const char *CharsetRecog_2022JP::getName() const {
     return "ISO-2022-JP";
@@ -156,7 +156,7 @@ UBool CharsetRecog_2022JP::match(InputText *textIn, CharsetMatch *results) const
 }
 
 #if !UCONFIG_ONLY_HTML_CONVERSION
-CharsetRecog_2022KR::~CharsetRecog_2022KR() {}
+CharsetRecog_2022KR::~CharsetRecog_2022KR() = default;
 
 const char *CharsetRecog_2022KR::getName() const {
     return "ISO-2022-KR";
@@ -171,7 +171,7 @@ UBool CharsetRecog_2022KR::match(InputText *textIn, CharsetMatch *results) const
     return (confidence > 0);
 }
 
-CharsetRecog_2022CN::~CharsetRecog_2022CN() {}
+CharsetRecog_2022CN::~CharsetRecog_2022CN() = default;
 
 const char *CharsetRecog_2022CN::getName() const {
     return "ISO-2022-CN";

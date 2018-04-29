@@ -26,15 +26,13 @@ NoUnit::NoUnit(const char* subtype) {
     initNoUnit(subtype);
 }
 
-NoUnit::NoUnit(const NoUnit& other) : MeasureUnit(other) {
-}
+NoUnit::NoUnit(const NoUnit& other) : = default;
 
 UObject* NoUnit::clone() const {
     return new NoUnit(*this);
 }
 
-NoUnit::~NoUnit() {
-}
+NoUnit::~NoUnit() = default;
 
 
 U_NAMESPACE_END

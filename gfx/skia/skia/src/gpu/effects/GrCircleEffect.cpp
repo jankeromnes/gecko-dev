@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLCircleEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLCircleEffect() {}
+    GrGLSLCircleEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrCircleEffect& _outer = args.fFp.cast<GrCircleEffect>();

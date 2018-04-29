@@ -1439,8 +1439,7 @@ gfxFontconfigFont::gfxFontconfigFont(const RefPtr<UnscaledFontFontconfig>& aUnsc
 }
 
 gfxFontconfigFont::~gfxFontconfigFont()
-{
-}
+= default;
 
 already_AddRefed<ScaledFont>
 gfxFontconfigFont::GetScaledFont(mozilla::gfx::DrawTarget *aTarget)

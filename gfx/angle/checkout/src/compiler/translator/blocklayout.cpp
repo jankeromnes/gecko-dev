@@ -190,8 +190,7 @@ void BlockLayoutEncoder::nextRegister()
 }
 
 Std140BlockEncoder::Std140BlockEncoder()
-{
-}
+= default;
 
 void Std140BlockEncoder::enterAggregateType()
 {

@@ -162,8 +162,7 @@ HebrewCalendar::HebrewCalendar(const Locale& aLocale, UErrorCode& success)
 }
 
 
-HebrewCalendar::~HebrewCalendar() {
-}
+HebrewCalendar::~HebrewCalendar() = default;
 
 const char *HebrewCalendar::getType() const {
     return "hebrew";
@@ -173,8 +172,7 @@ Calendar* HebrewCalendar::clone() const {
     return new HebrewCalendar(*this);
 }
 
-HebrewCalendar::HebrewCalendar(const HebrewCalendar& other) : Calendar(other) {
-}
+HebrewCalendar::HebrewCalendar(const HebrewCalendar& other) : = default;
 
 
 //-------------------------------------------------------------------------

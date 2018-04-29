@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLLumaColorFilterEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLLumaColorFilterEffect() {}
+    GrGLSLLumaColorFilterEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrLumaColorFilterEffect& _outer = args.fFp.cast<GrLumaColorFilterEffect>();

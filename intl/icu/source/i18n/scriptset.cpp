@@ -34,8 +34,7 @@ ScriptSet::ScriptSet() {
     }
 }
 
-ScriptSet::~ScriptSet() {
-}
+ScriptSet::~ScriptSet() = default;
 
 ScriptSet::ScriptSet(const ScriptSet &other) {
     *this = other;

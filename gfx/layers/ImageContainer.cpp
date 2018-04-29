@@ -109,8 +109,7 @@ ImageContainerListener::ImageContainerListener(ImageContainer* aImageContainer)
 }
 
 ImageContainerListener::~ImageContainerListener()
-{
-}
+= default;
 
 void
 ImageContainerListener::NotifyComposite(const ImageCompositeNotification& aNotification)

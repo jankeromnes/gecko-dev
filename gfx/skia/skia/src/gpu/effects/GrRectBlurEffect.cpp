@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLRectBlurEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLRectBlurEffect() {}
+    GrGLSLRectBlurEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrRectBlurEffect& _outer = args.fFp.cast<GrRectBlurEffect>();

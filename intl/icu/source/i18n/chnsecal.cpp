@@ -148,8 +148,7 @@ ChineseCalendar::ChineseCalendar(const ChineseCalendar& other) : Calendar(other)
 }
 
 ChineseCalendar::~ChineseCalendar()
-{
-}
+= default;
 
 const char *ChineseCalendar::getType() const { 
     return "chinese";

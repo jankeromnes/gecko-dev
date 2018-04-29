@@ -147,8 +147,7 @@ nsDirectoryService::RealInit()
 }
 
 nsDirectoryService::~nsDirectoryService()
-{
-}
+= default;
 
 NS_IMPL_ISUPPORTS(nsDirectoryService,
                   nsIProperties,

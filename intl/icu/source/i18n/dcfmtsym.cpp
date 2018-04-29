@@ -134,8 +134,7 @@ DecimalFormatSymbols::createWithLastResortData(UErrorCode& status) {
 // -------------------------------------
 
 DecimalFormatSymbols::~DecimalFormatSymbols()
-{
-}
+= default;
 
 // -------------------------------------
 // copy constructor
@@ -338,8 +337,8 @@ struct CurrencySpacingSink : public ResourceSink {
 };
 
 // Virtual destructors must be defined out of line.
-DecFmtSymDataSink::~DecFmtSymDataSink() {}
-CurrencySpacingSink::~CurrencySpacingSink() {}
+DecFmtSymDataSink::~DecFmtSymDataSink() = default;
+CurrencySpacingSink::~CurrencySpacingSink() = default;
 
 } // namespace
 

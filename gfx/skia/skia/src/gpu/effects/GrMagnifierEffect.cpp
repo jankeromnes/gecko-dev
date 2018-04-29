@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLMagnifierEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLMagnifierEffect() {}
+    GrGLSLMagnifierEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrMagnifierEffect& _outer = args.fFp.cast<GrMagnifierEffect>();

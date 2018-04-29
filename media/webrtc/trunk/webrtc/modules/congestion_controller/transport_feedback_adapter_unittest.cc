@@ -32,7 +32,7 @@ class TransportFeedbackAdapterTest : public ::testing::Test {
   TransportFeedbackAdapterTest()
       : clock_(0), bitrate_controller_(this), target_bitrate_bps_(0) {}
 
-  virtual ~TransportFeedbackAdapterTest() {}
+  virtual ~TransportFeedbackAdapterTest() = default;
 
   virtual void SetUp() {
     adapter_.reset(new TransportFeedbackAdapter(&clock_, &bitrate_controller_));
@@ -49,7 +49,7 @@ class TransportFeedbackAdapterTest : public ::testing::Test {
     explicit MockBitrateControllerAdapter(TransportFeedbackAdapterTest* owner)
         : MockBitrateController(), owner_(owner) {}
 
-    ~MockBitrateControllerAdapter() override {}
+    ~MockBitrateControllerAdapter() override = default;
 
     void OnDelayBasedBweResult(const DelayBasedBwe::Result& result) override {
       owner_->target_bitrate_bps_ = result.target_bitrate_bps;

@@ -133,7 +133,7 @@ public:
         : _hash(hash) { 
         _start = _current = &s;
     }
-    inline ~EquivIterator() { }
+    inline ~EquivIterator() = default;
 
     // next returns the next equivalent string or NULL if there are no more.
     // If s has no equivalent strings, next returns NULL on the first call.

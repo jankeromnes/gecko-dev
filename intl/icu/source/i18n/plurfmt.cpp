@@ -576,7 +576,7 @@ void PluralFormat::parseType(const UnicodeString& source, const NFRule *rbnfLeni
     pos.setEndIndex(-1);
 }
 
-PluralFormat::PluralSelector::~PluralSelector() {}
+PluralFormat::PluralSelector::~PluralSelector() = default;
 
 PluralFormat::PluralSelectorAdapter::~PluralSelectorAdapter() {
     delete pluralRules;

@@ -48,12 +48,10 @@ SelectFormat::SelectFormat(const UnicodeString& pat,
    applyPattern(pat, status);
 }
 
-SelectFormat::SelectFormat(const SelectFormat& other) : Format(other),
-                                                        msgPattern(other.msgPattern) {
-}
+SelectFormat::SelectFormat(const SelectFormat& other) : ,
+                                                        = default;
 
-SelectFormat::~SelectFormat() {
-}
+SelectFormat::~SelectFormat() = default;
 
 void
 SelectFormat::applyPattern(const UnicodeString& newPattern, UErrorCode& status) {

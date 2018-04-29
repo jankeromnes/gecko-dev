@@ -296,8 +296,8 @@ struct DayPeriodRulesCountSink : public ResourceSink {
 };
 
 // Out-of-line virtual destructors.
-DayPeriodRulesDataSink::~DayPeriodRulesDataSink() {}
-DayPeriodRulesCountSink::~DayPeriodRulesCountSink() {}
+DayPeriodRulesDataSink::~DayPeriodRulesDataSink() = default;
+DayPeriodRulesCountSink::~DayPeriodRulesCountSink() = default;
 
 namespace {
 

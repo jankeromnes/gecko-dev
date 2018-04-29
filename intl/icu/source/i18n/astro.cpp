@@ -280,8 +280,7 @@ CalendarAstronomer::CalendarAstronomer(double longitude, double latitude) :
 }
 
 CalendarAstronomer::~CalendarAstronomer()
-{
-}
+= default;
 
 //-------------------------------------------------------------------------
 // Time and date getters and setters
@@ -712,7 +711,7 @@ double CalendarAstronomer::WINTER_SOLSTICE() {
     return  ((CalendarAstronomer::PI*3)/2);
 }
 
-CalendarAstronomer::AngleFunc::~AngleFunc() {}
+CalendarAstronomer::AngleFunc::~AngleFunc() = default;
 
 /**
  * Find the next time at which the sun's ecliptic longitude will have
@@ -726,7 +725,7 @@ public:
     virtual double eval(CalendarAstronomer& a) { return a.getSunLongitude(); }
 };
 
-SunTimeAngleFunc::~SunTimeAngleFunc() {}
+SunTimeAngleFunc::~SunTimeAngleFunc() = default;
 
 UDate CalendarAstronomer::getSunTime(double desired, UBool next)
 {
@@ -738,7 +737,7 @@ UDate CalendarAstronomer::getSunTime(double desired, UBool next)
                         next);
 }
 
-CalendarAstronomer::CoordFunc::~CoordFunc() {}
+CalendarAstronomer::CoordFunc::~CoordFunc() = default;
 
 class RiseSetCoordFunc : public CalendarAstronomer::CoordFunc {
 public:
@@ -746,7 +745,7 @@ public:
     virtual void eval(CalendarAstronomer::Equatorial& result, CalendarAstronomer&a) {  a.getSunPosition(result); }
 };
 
-RiseSetCoordFunc::~RiseSetCoordFunc() {}
+RiseSetCoordFunc::~RiseSetCoordFunc() = default;
 
 UDate CalendarAstronomer::getSunRiseSet(UBool rise)
 {
@@ -1228,7 +1227,7 @@ public:
     virtual double eval(CalendarAstronomer&a) { return a.getMoonAge(); }
 };
 
-MoonTimeAngleFunc::~MoonTimeAngleFunc() {}
+MoonTimeAngleFunc::~MoonTimeAngleFunc() = default;
 
 /*const CalendarAstronomer::MoonAge CalendarAstronomer::LAST_QUARTER() {
   return  CalendarAstronomer::MoonAge((CalendarAstronomer::PI*3)/2);
@@ -1274,7 +1273,7 @@ public:
     virtual void eval(CalendarAstronomer::Equatorial& result, CalendarAstronomer&a) { result = a.getMoonPosition(); }
 };
 
-MoonRiseSetCoordFunc::~MoonRiseSetCoordFunc() {}
+MoonRiseSetCoordFunc::~MoonRiseSetCoordFunc() = default;
 
 /**
  * Returns the time (GMT) of sunrise or sunset on the local date to which

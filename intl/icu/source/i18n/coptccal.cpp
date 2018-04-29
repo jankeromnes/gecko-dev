@@ -32,13 +32,11 @@ CopticCalendar::CopticCalendar(const Locale& aLocale, UErrorCode& success)
 }
 
 CopticCalendar::CopticCalendar (const CopticCalendar& other) 
-: CECalendar(other)
-{
-}
+: 
+= default;
 
 CopticCalendar::~CopticCalendar()
-{
-}
+= default;
 
 Calendar*
 CopticCalendar::clone() const

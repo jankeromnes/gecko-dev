@@ -23,7 +23,7 @@ U_NAMESPACE_BEGIN
 
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(Measure)
 
-Measure::Measure() {}
+Measure::Measure() = default;
 
 Measure::Measure(const Formattable& _number, MeasureUnit* adoptedUnit,
                  UErrorCode& ec) :

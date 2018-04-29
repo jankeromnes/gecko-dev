@@ -59,7 +59,7 @@ TrendlineEstimator::TrendlineEstimator(size_t window_size,
       delay_hist_(),
       trendline_(0) {}
 
-TrendlineEstimator::~TrendlineEstimator() {}
+TrendlineEstimator::~TrendlineEstimator() = default;
 
 void TrendlineEstimator::Update(double recv_delta_ms,
                                 double send_delta_ms,

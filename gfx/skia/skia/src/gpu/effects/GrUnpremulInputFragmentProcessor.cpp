@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLUnpremulInputFragmentProcessor : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLUnpremulInputFragmentProcessor() {}
+    GrGLSLUnpremulInputFragmentProcessor() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrUnpremulInputFragmentProcessor& _outer =

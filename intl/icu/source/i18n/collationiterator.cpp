@@ -31,7 +31,7 @@
 
 U_NAMESPACE_BEGIN
 
-CollationIterator::CEBuffer::~CEBuffer() {}
+CollationIterator::CEBuffer::~CEBuffer() = default;
 
 UBool
 CollationIterator::CEBuffer::ensureAppendCapacity(int32_t appCap, UErrorCode &errorCode) {

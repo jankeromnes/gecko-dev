@@ -67,8 +67,7 @@ StringCharacterIterator::StringCharacterIterator(const StringCharacterIterator& 
     UCharCharacterIterator::text = this->text.getBuffer();
 }
 
-StringCharacterIterator::~StringCharacterIterator() {
-}
+StringCharacterIterator::~StringCharacterIterator() = default;
 
 StringCharacterIterator&
 StringCharacterIterator::operator=(const StringCharacterIterator& that) {

@@ -21,7 +21,7 @@
 
 U_NAMESPACE_BEGIN
 
-ErrorCode::~ErrorCode() {}
+ErrorCode::~ErrorCode() = default;
 
 UErrorCode ErrorCode::reset() {
     UErrorCode code = errorCode;

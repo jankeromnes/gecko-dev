@@ -710,7 +710,7 @@ class nsXULAppInfo : public nsIXULAppInfo,
 
 {
 public:
-  constexpr nsXULAppInfo() {}
+  constexpr nsXULAppInfo() = default;
   NS_DECL_ISUPPORTS_INHERITED
   NS_DECL_NSIPLATFORMINFO
   NS_DECL_NSIXULAPPINFO
@@ -1595,7 +1595,7 @@ public:
   explicit nsSingletonFactory(nsISupports* aSingleton);
 
 private:
-  ~nsSingletonFactory() { }
+  ~nsSingletonFactory() = default;
   nsCOMPtr<nsISupports> mSingleton;
 };
 

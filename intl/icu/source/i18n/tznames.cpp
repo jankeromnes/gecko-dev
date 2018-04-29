@@ -301,8 +301,7 @@ TimeZoneNamesDelegate::find(const UnicodeString& text, int32_t start, uint32_t t
 // ---------------------------------------------------
 // TimeZoneNames base class
 // ---------------------------------------------------
-TimeZoneNames::~TimeZoneNames() {
-}
+TimeZoneNames::~TimeZoneNames() = default;
 
 TimeZoneNames*
 TimeZoneNames::createInstance(const Locale& locale, UErrorCode& status) {

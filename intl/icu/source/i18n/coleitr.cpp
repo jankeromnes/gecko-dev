@@ -429,7 +429,7 @@ private:
     UErrorCode &errorCode;
 };
 
-MaxExpSink::~MaxExpSink() {}
+MaxExpSink::~MaxExpSink() = default;
 
 }  // namespace
 

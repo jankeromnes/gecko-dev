@@ -153,8 +153,7 @@ ErrnoLogMessage::ErrnoLogMessage(const char* file,
   mozilla::Unused << err_;
 }
 
-ErrnoLogMessage::~ErrnoLogMessage() {
-}
+ErrnoLogMessage::~ErrnoLogMessage() = default;
 #endif  // OS_WIN
 
 void RawLog(int level, const char* message) {

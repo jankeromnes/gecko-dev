@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLConstColorProcessor : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLConstColorProcessor() {}
+    GrGLSLConstColorProcessor() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrConstColorProcessor& _outer = args.fFp.cast<GrConstColorProcessor>();

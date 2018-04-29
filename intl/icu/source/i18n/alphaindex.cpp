@@ -1058,8 +1058,7 @@ UBool isOneLabelBetterThanOther(const Normalizer2 &nfkdNormalizer,
 AlphabeticIndex::Record::Record(const UnicodeString &name, const void *data)
         : name_(name), data_(data) {}
 
-AlphabeticIndex::Record::~Record() {
-}
+AlphabeticIndex::Record::~Record() = default;
 
 
 AlphabeticIndex & AlphabeticIndex::addRecord(const UnicodeString &name, const void *data, UErrorCode &status) {

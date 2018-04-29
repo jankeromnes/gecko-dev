@@ -13,7 +13,7 @@ U_NAMESPACE_BEGIN
 
 UOBJECT_DEFINE_ABSTRACT_RTTI_IMPLEMENTATION(UnicodeFunctor)
 
-UnicodeFunctor::~UnicodeFunctor() {}
+UnicodeFunctor::~UnicodeFunctor() = default;
 
 UnicodeMatcher* UnicodeFunctor::toMatcher() const {
     return 0;

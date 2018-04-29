@@ -10,7 +10,6 @@ namespace pp
 {
 
 DirectiveHandler::~DirectiveHandler()
-{
-}
+= default;
 
 }  // namespace pp

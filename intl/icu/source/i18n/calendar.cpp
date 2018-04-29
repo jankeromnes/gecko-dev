@@ -467,7 +467,7 @@ protected:
     }
 };
 
-BasicCalendarFactory::~BasicCalendarFactory() {}
+BasicCalendarFactory::~BasicCalendarFactory() = default;
 
 /**
 * A factory which looks up the DefaultCalendar resource to determine which class of calendar to use
@@ -496,7 +496,7 @@ protected:
     }
 };
 
-DefaultCalendarFactory::~DefaultCalendarFactory() {}
+DefaultCalendarFactory::~DefaultCalendarFactory() = default;
 
 // -------------------------------------
 class CalendarService : public ICULocaleService {
@@ -549,7 +549,7 @@ public:
     }
 };
 
-CalendarService::~CalendarService() {}
+CalendarService::~CalendarService() = default;
 
 // -------------------------------------
 

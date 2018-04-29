@@ -224,8 +224,7 @@ nsDirEnumeratorUnix::Close()
 }
 
 nsLocalFile::nsLocalFile()
-{
-}
+= default;
 
 nsLocalFile::nsLocalFile(const nsACString& aFilePath)
 {

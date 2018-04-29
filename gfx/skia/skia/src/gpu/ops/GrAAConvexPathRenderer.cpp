@@ -30,8 +30,7 @@
 #include "glsl/GrGLSLVertexGeoBuilder.h"
 #include "ops/GrMeshDrawOp.h"
 
-GrAAConvexPathRenderer::GrAAConvexPathRenderer() {
-}
+GrAAConvexPathRenderer::GrAAConvexPathRenderer() = default;
 
 struct Segment {
     enum {
@@ -549,13 +548,13 @@ public:
         return sk_sp<GrGeometryProcessor>(new QuadEdgeEffect(localMatrix, usesLocalCoords));
     }
 
-    ~QuadEdgeEffect() override {}
+    ~QuadEdgeEffect() override = default;
 
     const char* name() const override { return "QuadEdge"; }
 
     class GLSLProcessor : public GrGLSLGeometryProcessor {
     public:
-        GLSLProcessor() {}
+        GLSLProcessor() = default;
 
         void onEmitCode(EmitArgs& args, GrGPArgs* gpArgs) override {
             const QuadEdgeEffect& qe = args.fGP.cast<QuadEdgeEffect>();

@@ -71,7 +71,7 @@ struct CDFUnit : public UMemory {
   inline CDFUnit() : prefix(), suffix() {
     prefix.setToBogus();
   }
-  inline ~CDFUnit() {}
+  inline ~CDFUnit() = default;
   inline UBool isSet() const {
     return !prefix.isBogus();
   }
@@ -123,7 +123,7 @@ struct CDFLocaleData : public UMemory {
   CDFLocaleStyleData shortData;
   CDFLocaleStyleData longData;
   inline CDFLocaleData() : shortData(), longData() { }
-  inline ~CDFLocaleData() { }
+  inline ~CDFLocaleData() = default;
   // Init initializes this object.
   void Init(UErrorCode& status);
 };
@@ -694,7 +694,7 @@ struct CmptDecDataSink : public ResourceSink {
 };
 
 // Virtual destructors must be defined out of line.
-CmptDecDataSink::~CmptDecDataSink() {}
+CmptDecDataSink::~CmptDecDataSink() = default;
 
 } // namespace
 

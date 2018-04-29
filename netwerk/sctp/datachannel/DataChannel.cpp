@@ -112,7 +112,7 @@ public:
 
   NS_DECL_ISUPPORTS
 
-  DataChannelShutdown() {}
+  DataChannelShutdown() = default;
 
   void Init()
     {

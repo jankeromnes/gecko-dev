@@ -18,7 +18,7 @@
 #include "SkSLUtil.h"
 class GrGLSLAARectEffect : public GrGLSLFragmentProcessor {
 public:
-    GrGLSLAARectEffect() {}
+    GrGLSLAARectEffect() = default;
     void emitCode(EmitArgs& args) override {
         GrGLSLFPFragmentBuilder* fragBuilder = args.fFragBuilder;
         const GrAARectEffect& _outer = args.fFp.cast<GrAARectEffect>();

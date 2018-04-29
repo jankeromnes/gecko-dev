@@ -3993,8 +3993,7 @@ public:
 
 private:
   ~FullscreenTransitionTask() override
-  {
-  }
+  = default;
 
   /**
    * The flow of fullscreen transition:
@@ -7733,7 +7732,7 @@ nsPIDOMWindowOuter::nsPIDOMWindowOuter()
 {
 }
 
-nsPIDOMWindowOuter::~nsPIDOMWindowOuter() {}
+nsPIDOMWindowOuter::~nsPIDOMWindowOuter() = default;
 
 nsAutoPopupStatePusherInternal::nsAutoPopupStatePusherInternal(PopupControlState aState, bool aForce)
   : mOldState(nsContentUtils::PushPopupControlState(aState, aForce))

@@ -48,7 +48,7 @@ class PacketManipulatorTest : public PacketRelatedTest {
     no_drop_config_.packet_loss_mode = kUniform;
   }
 
-  virtual ~PacketManipulatorTest() {}
+  virtual ~PacketManipulatorTest() = default;
 
   void SetUp() { PacketRelatedTest::SetUp(); }
 

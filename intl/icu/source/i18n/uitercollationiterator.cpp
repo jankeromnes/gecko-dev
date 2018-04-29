@@ -28,7 +28,7 @@
 
 U_NAMESPACE_BEGIN
 
-UIterCollationIterator::~UIterCollationIterator() {}
+UIterCollationIterator::~UIterCollationIterator() = default;
 
 void
 UIterCollationIterator::resetToOffset(int32_t newOffset) {
@@ -83,7 +83,7 @@ UIterCollationIterator::backwardNumCodePoints(int32_t num, UErrorCode & /*errorC
 
 // FCDUIterCollationIterator ----------------------------------------------- ***
 
-FCDUIterCollationIterator::~FCDUIterCollationIterator() {}
+FCDUIterCollationIterator::~FCDUIterCollationIterator() = default;
 
 void
 FCDUIterCollationIterator::resetToOffset(int32_t newOffset) {

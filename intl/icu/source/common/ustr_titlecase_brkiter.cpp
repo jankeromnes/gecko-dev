@@ -72,7 +72,7 @@ private:
 
 UOBJECT_DEFINE_RTTI_IMPLEMENTATION(WholeStringBreakIterator)
 
-WholeStringBreakIterator::~WholeStringBreakIterator() {}
+WholeStringBreakIterator::~WholeStringBreakIterator() = default;
 UBool WholeStringBreakIterator::operator==(const BreakIterator&) const { return FALSE; }
 BreakIterator *WholeStringBreakIterator::clone() const { return nullptr; }
 
