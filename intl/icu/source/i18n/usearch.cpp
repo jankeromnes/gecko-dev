@@ -2799,7 +2799,7 @@ UBool initTextProcessedIter(UStringSearch *strsrch, UErrorCode *status) {
     return TRUE;
 }
 
-}
+} // namespace
 
 // set and get methods --------------------------------------------------
 
@@ -3603,7 +3603,7 @@ const CEI *CEIBuffer::getPrevious(int32_t index) {
     return &buf[i];
 }
 
-}
+} // namespace
 
 U_NAMESPACE_END
 

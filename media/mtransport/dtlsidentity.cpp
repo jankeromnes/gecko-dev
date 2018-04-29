@@ -211,4 +211,4 @@ nsresult DtlsIdentity::ComputeFingerprint(const UniqueCERTCertificate& cert,
   return NS_OK;
 }
 
-}  // close namespace
+} // namespace mozilla

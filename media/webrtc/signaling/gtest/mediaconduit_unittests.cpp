@@ -571,4 +571,4 @@ TEST_F(TransportConduitTest, TestVideoConduitCodecAPI) {
   TestVideoConduitCodecAPI();
 }
 
-}  // end namespace
+} // namespace test

@@ -312,4 +312,4 @@ AudioBufferSumOfSquares_SSE(const float* aInput, uint32_t aLength)
   return out[0] + out[1] + out[2] + out[3];
 }
 
-}
+} // namespace mozilla

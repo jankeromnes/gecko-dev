@@ -1188,7 +1188,7 @@ void NrIceCtx::SetGatheringState(GatheringState state) {
   SignalGatheringStateChange(this, state);
 }
 
-}  // close namespace
+} // namespace mozilla
 
 // Reimplement nr_ice_compute_codeword to avoid copyright issues
 void nr_ice_compute_codeword(char *buf, int len,char *codeword) {

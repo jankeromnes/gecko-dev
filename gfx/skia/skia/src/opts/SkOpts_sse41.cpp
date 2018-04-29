@@ -14,4 +14,4 @@ namespace SkOpts {
     void Init_sse41() {
         blit_row_s32a_opaque = sse41::blit_row_s32a_opaque;
     }
-}
+} // namespace SkOpts

@@ -270,7 +270,7 @@ class InitializeLocalsTraverser : public TIntermTraverser
     bool mHighPrecisionSupported;
 };
 
-}  // namespace anonymous
+} // namespace
 
 TIntermSequence *CreateInitCode(const TIntermTyped *initializedSymbol,
                                 bool canUseLoopsToInitialize,

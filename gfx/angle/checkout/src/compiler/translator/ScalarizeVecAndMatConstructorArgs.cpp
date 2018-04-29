@@ -213,7 +213,7 @@ TVariable *ScalarizeArgsTraverser::createTempVariable(TIntermTyped *original)
     return variable;
 }
 
-}  // namespace anonymous
+} // namespace
 
 void ScalarizeVecAndMatConstructorArgs(TIntermBlock *root,
                                        sh::GLenum shaderType,

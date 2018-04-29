@@ -144,7 +144,7 @@ TEST(FrameLengthControllerTest, Maintain20MsWhenFecIsOn) {
 namespace {
 constexpr int kFl60msTo120msBandwidthBps = 18000;
 constexpr int kFl120msTo60msBandwidthBps = 72000;
-}
+} // namespace
 
 class FrameLengthControllerForTest {
  public:

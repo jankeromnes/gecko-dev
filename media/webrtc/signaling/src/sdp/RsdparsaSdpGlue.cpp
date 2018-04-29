@@ -45,4 +45,4 @@ sdp::AddrType convertAddressType(RustSdpAddrType addrType)
   MOZ_CRASH("unknown address type");
 }
 
-}
+} // namespace mozilla

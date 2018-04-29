@@ -108,7 +108,7 @@ class TimerTest : public MtransportTest {
   void *handle_;
   bool fired_;
 };
-}
+} // namespace
 
 TEST_F(TimerTest, SimpleTimer) {
   ArmTimer(100);

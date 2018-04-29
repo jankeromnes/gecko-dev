@@ -190,5 +190,5 @@ EventObject::Wait()
   mCond.Wait(&mMutex);
 }
 
-} // namespce
-} // namespce
+} // namespace gfx
+} // namespace mozilla

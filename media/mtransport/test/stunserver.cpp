@@ -673,4 +673,4 @@ TestStunTcpServer::~TestStunTcpServer() {
   }
 }
 
-}  // close namespace
+} // namespace mozilla

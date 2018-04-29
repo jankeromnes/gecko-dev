@@ -475,7 +475,7 @@ bool ParentConstructorTakesCareOfRounding(TIntermNode *parent, TIntermTyped *nod
     return canRoundFloat(parentConstructor->getType());
 }
 
-}  // namespace anonymous
+} // namespace
 
 EmulatePrecision::EmulatePrecision(TSymbolTable *symbolTable)
     : TLValueTrackingTraverser(true, true, true, symbolTable), mDeclaringVariables(false)

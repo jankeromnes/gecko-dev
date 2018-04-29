@@ -535,7 +535,7 @@ void convert_noninflect_cubic_to_quads(const SkPoint p[4],
                                       quads,
                                       sublevel + 1);
 }
-}
+} // namespace
 
 void GrPathUtils::convertCubicToQuads(const SkPoint p[4],
                                       SkScalar tolScale,

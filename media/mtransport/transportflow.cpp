@@ -254,4 +254,4 @@ void TransportFlow::PacketReceived(TransportLayer* layer,
   SignalPacketReceived(this, data, len);
 }
 
-}  // close namespace
+} // namespace mozilla

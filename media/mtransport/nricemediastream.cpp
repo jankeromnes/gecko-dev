@@ -628,4 +628,4 @@ void NrIceMediaStream::Close() {
   }
 }
 
-}  // close namespace
+} // namespace mozilla

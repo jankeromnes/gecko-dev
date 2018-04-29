@@ -100,7 +100,7 @@ void GLFragColorBroadcastTraverser::broadcastGLFragColor(TIntermBlock *root)
     RunAtTheEndOfShader(root, broadcastBlock, mSymbolTable);
 }
 
-}  // namespace anonymous
+} // namespace
 
 void EmulateGLFragColorBroadcast(TIntermBlock *root,
                                  int maxDrawBuffers,

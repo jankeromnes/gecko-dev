@@ -349,7 +349,7 @@ class MultiTcpSocketTest : public MtransportTest {
   Atomic<bool> readable;
   RefPtr<NrIceCtxHandler> ice_ctx_;
 };
-}
+} // namespace
 
 TEST_F(MultiTcpSocketTest, TestListen) {
   socks[0] = Create(TCP_TYPE_PASSIVE);

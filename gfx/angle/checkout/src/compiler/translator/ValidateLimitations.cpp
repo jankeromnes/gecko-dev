@@ -428,7 +428,7 @@ bool ValidateLimitationsTraverser::validateIndexing(TIntermBinary *node)
     return valid;
 }
 
-}  // namespace anonymous
+} // namespace
 
 bool ValidateLimitations(TIntermNode *root,
                          GLenum shaderType,

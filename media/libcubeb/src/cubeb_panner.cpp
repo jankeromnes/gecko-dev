@@ -46,7 +46,7 @@ void cubeb_pan_stereo_buffer(T * buf, uint32_t frames, float pan)
     }
   }
 }
-}
+} // namespace
 
 void cubeb_pan_stereo_buffer_float(float * buf, uint32_t frames, float pan)
 {

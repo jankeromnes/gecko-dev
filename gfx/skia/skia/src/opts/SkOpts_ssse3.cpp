@@ -27,4 +27,4 @@ namespace SkOpts {
         inverted_CMYK_to_RGB1 = ssse3::inverted_CMYK_to_RGB1;
         inverted_CMYK_to_BGR1 = ssse3::inverted_CMYK_to_BGR1;
     }
-}
+} // namespace SkOpts

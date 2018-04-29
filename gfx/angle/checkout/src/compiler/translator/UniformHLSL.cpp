@@ -586,4 +586,4 @@ TString UniformHLSL::uniformBlockStructString(const TInterfaceBlock &interfaceBl
            "{\n" +
            uniformBlockMembersString(interfaceBlock, blockStorage) + "};\n\n";
 }
-}
+} // namespace sh

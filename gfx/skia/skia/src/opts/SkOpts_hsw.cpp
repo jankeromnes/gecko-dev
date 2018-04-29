@@ -99,7 +99,7 @@ namespace hsw {
         }
     }
 
-}
+} // namespace hsw
 
 namespace SkOpts {
     // See SkOpts.h, writing SkConvolutionFilter1D::ConvolutionFixed as the underlying type.
@@ -109,7 +109,7 @@ namespace SkOpts {
     void Init_hsw() {
         convolve_vertically = hsw::convolve_vertically;
     }
-}
+} // namespace SkOpts
 
 #else  // defined(__AVX2__) is not true...
 
