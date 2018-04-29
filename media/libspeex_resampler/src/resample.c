@@ -239,7 +239,7 @@ static double compute_func(float x, const struct FuncDef *func)
    double interp[4];
    int ind;
    y = x*func->oversample;
-   ind = (int)floor(y);
+   ind = (int)floorf(y);
    frac = (y-ind);
    /* CSE with handle the repeated powers */
    interp[3] =  -0.1666666667*frac + 0.1666666667*(frac*frac*frac);
@@ -285,9 +285,9 @@ static spx_word16_t sinc(float cutoff, float x, int N, const struct FuncDef *win
 {
    /*fprintf (stderr, "%f ", x);*/
    float xx = x * cutoff;
-   if (fabs(x)<1e-6)
+   if (fabsf(x)<1e-6)
       return cutoff;
-   else if (fabs(x) > .5*N)
+   else if (fabsf(x) > .5*N)
       return 0;
    /*FIXME: Can it really be any slower than this? */
    return cutoff*sin(M_PI*xx)/(M_PI*xx) * compute_func(fabs(2.*x/N), window_func);

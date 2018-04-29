@@ -8,6 +8,8 @@
 
 #include "common/matrix_utils.h"
 
+#include <cmath>
+
 namespace angle
 {
 
@@ -77,9 +79,9 @@ Mat4 Mat4::Rotate(float angle, const Vector3 &axis)
 {
     auto axis_normalized = axis.normalized();
     float angle_radians  = angle * (3.14159265358979323f / 180.0f);
-    float c              = cos(angle_radians);
+    float c              = std::cos(angle_radians);
     float ci             = 1.f - c;
-    float s              = sin(angle_radians);
+    float s              = std::sin(angle_radians);
 
     float x = axis_normalized.x();
     float y = axis_normalized.y();

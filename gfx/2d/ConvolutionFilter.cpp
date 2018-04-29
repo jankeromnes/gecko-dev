@@ -113,7 +113,7 @@ ConvolutionFilter::ComputeResizeFilter(ResizeMethod aResizeMethod, int32_t aSrcS
   // filter values for each one. Those values will tell us how to blend the
   // source pixels to compute the destination pixel.
 
-  mFilter->reserveAdditional(aDstSize, int32_t(ceil(aDstSize * srcSupport * 2)));
+  mFilter->reserveAdditional(aDstSize, int32_t(std::ceil(aDstSize * srcSupport * 2)));
   for (int32_t destI = 0; destI < aDstSize; destI++) {
     // This is the pixel in the source directly under the pixel in the dest.
     // Note that we base computations on the "center" of the pixels. To see

@@ -2001,8 +2001,8 @@ void GrGLGpu::clear(const GrFixedClip& clip, GrColor color,
 
     if (this->glCaps().clearToBoundaryValuesIsBroken() &&
         (1 == r || 0 == r) && (1 == g || 0 == g) && (1 == b || 0 == b) && (1 == a || 0 == a)) {
-        static const GrGLfloat safeAlpha1 = nextafter(1.f, 2.f);
-        static const GrGLfloat safeAlpha0 = nextafter(0.f, -1.f);
+        static const GrGLfloat safeAlpha1 = std::nextafter(1.f, 2.f);
+        static const GrGLfloat safeAlpha0 = std::nextafter(0.f, -1.f);
         a = (1 == a) ? safeAlpha1 : safeAlpha0;
     }
     GL_CALL(ClearColor(r, g, b, a));

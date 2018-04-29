@@ -438,7 +438,7 @@ void NonlinearBeamformer::AimAt(const SphericalPointf& target_direction) {
 bool NonlinearBeamformer::IsInBeam(const SphericalPointf& spherical_point) {
   // If more than half-beamwidth degrees away from the beam's center,
   // you are out of the beam.
-  return fabs(spherical_point.azimuth() - target_angle_radians_) <
+  return std::fabs(spherical_point.azimuth() - target_angle_radians_) <
          kHalfBeamWidthRadians;
 }
 

@@ -109,7 +109,7 @@ void CovarianceMatrixGenerator::PhaseAlignmentMasks(
     float phase_shift = -2.f * M_PI * distance * freq_in_hertz / sound_speed;
 
     // Euler's formula for mat[0][c_ix] = e^(j * phase_shift).
-    mat_els[0][c_ix] = complex<float>(cos(phase_shift), sin(phase_shift));
+    mat_els[0][c_ix] = complex<float>(std::cos(phase_shift), std::sin(phase_shift));
   }
 }
 

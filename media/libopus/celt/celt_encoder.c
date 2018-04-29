@@ -368,7 +368,7 @@ static int transient_analysis(const opus_val32 * OPUS_RESTRICT in, int len, int 
 #ifdef FIXED_POINT
          id = MAX32(0,MIN32(127,MULT16_32_Q15(tmp[i]+EPSILON,norm))); /* Do not round to nearest */
 #else
-         id = (int)MAX32(0,MIN32(127,floor(64*norm*(tmp[i]+EPSILON)))); /* Do not round to nearest */
+         id = (int)MAX32(0,MIN32(127,floorf(64*norm*(tmp[i]+EPSILON)))); /* Do not round to nearest */
 #endif
          unmask += inv_table[id];
       }
@@ -859,7 +859,7 @@ static int alloc_trim_analysis(const CELTMode *m, const celt_norm *X,
 #ifdef FIXED_POINT
    trim_index = PSHR32(trim, 8);
 #else
-   trim_index = (int)floor(.5f+trim);
+   trim_index = (int)floorf(.5f+trim);
 #endif
    trim_index = IMAX(0, IMIN(10, trim_index));
    /*printf("%d\n", trim_index);*/
@@ -1197,7 +1197,7 @@ static int run_prefilter(CELTEncoder *st, celt_sig *in, celt_sig *prefilter_mem,
 #ifdef FIXED_POINT
       qg = ((gain1+1536)>>10)/3-1;
 #else
-      qg = (int)floor(.5f+gain1*32/3)-1;
+      qg = (int)floorf(.5f+gain1*32/3)-1;
 #endif
       qg = IMAX(0, IMIN(7, qg));
       gain1 = QCONST16(0.09375f,15)*(qg+1);
