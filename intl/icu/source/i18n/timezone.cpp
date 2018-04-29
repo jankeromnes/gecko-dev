@@ -910,7 +910,7 @@ public:
         return result;
     }
 
-    TZEnumeration(const TZEnumeration &other) : StringEnumeration(), map(NULL), localMap(NULL), len(0), pos(0) {
+    TZEnumeration(const TZEnumeration &other) : StringEnumeration(other), map(NULL), localMap(NULL), len(0), pos(0) {
         if (other.localMap != NULL) {
             localMap = (int32_t *)uprv_malloc(other.len * sizeof(int32_t));
             if (localMap != NULL) {

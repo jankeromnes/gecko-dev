@@ -68,7 +68,7 @@ public:
   typedef const char* KeyTypePointer;
 
   explicit EntityToUnicodeEntry(const char* aKey) { mNode = nullptr; }
-  EntityToUnicodeEntry(const EntityToUnicodeEntry& aEntry) { mNode = aEntry.mNode; }
+  EntityToUnicodeEntry(const EntityToUnicodeEntry& aEntry)  : PLDHashEntryHdr(aEntry) { mNode = aEntry.mNode; }
   ~EntityToUnicodeEntry() = default;
 
   bool KeyEquals(const char* aEntity) const { return !strcmp(mNode->mStr, aEntity); }
