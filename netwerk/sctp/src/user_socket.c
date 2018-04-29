@@ -3499,8 +3499,7 @@ usrsctp_conninput(void *addr, const void *buffer, size_t length, uint8_t ecn_bit
 	if (m) {
 		sctp_m_freem(m);
 	}
-	return;
-}
+	}
 
 
 #define USRSCTP_SYSCTL_SET_DEF(__field) \

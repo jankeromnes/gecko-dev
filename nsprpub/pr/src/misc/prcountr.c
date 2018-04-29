@@ -92,8 +92,6 @@ static void _PR_CounterInitialize( void )
     PR_INIT_CLIST( &qNameList );
     lm = PR_NewLogModule("counters");
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: Initialization complete"));
-
-    return;
 } /* end _PR_CounterInitialize() */
 
 /*
@@ -242,7 +240,6 @@ PR_IMPLEMENT(void)
 
     /* Unlock the Facility */
     PR_Unlock( counterLock );
-    return;
 } /*  end PR_DestroyCounter() */
 
 /*
@@ -305,8 +302,6 @@ PR_IMPLEMENT(void)
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: GetConterNameFromHandle: "
         "QNp: %p, RNp: %p,\n\tQName: %s, RName: %s, Desc: %s", 
         qnp, rnp, qnp->name, rnp->name, rnp->desc ));
-
-    return;
 } /*  end PR_GetCounterNameFromHandle() */
 
 
@@ -324,8 +319,6 @@ PR_IMPLEMENT(void)
 
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: Increment: %p, %ld", 
         handle, ((RName *)handle)->counter ));
-
-    return;
 } /*  end PR_IncrementCounter() */
 
 
@@ -344,8 +337,6 @@ PR_IMPLEMENT(void)
 
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: Decrement: %p, %ld", 
         handle, ((RName *)handle)->counter ));
-
-    return;
 } /*  end PR_DecrementCounter()  */
 
 
@@ -364,8 +355,6 @@ PR_IMPLEMENT(void)
 
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: AddToCounter: %p, %ld", 
         handle, ((RName *)handle)->counter ));
-
-    return;
 } /*  end PR_AddToCounter() */
 
 
@@ -384,8 +373,6 @@ PR_IMPLEMENT(void)
     
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: SubtractFromCounter: %p, %ld", 
         handle, ((RName *)handle)->counter ));
-
-    return;
 } /*  end  PR_SubtractFromCounter() */
 
 /*
@@ -415,8 +402,6 @@ PR_IMPLEMENT(void)
 
     PR_LOG( lm, PR_LOG_DEBUG, ("PR_Counter: SetCounter: %p, %ld", 
         handle, ((RName *)handle)->counter ));
-
-    return;
 } /*  end  PR_SetCounter() */
 
 /*

@@ -416,7 +416,6 @@ lg_CertSetupData(lgCertData *certData, int count)
     }
     certData->certs = (NSSLOWCERTCertificate **)
         PORT_Alloc(count * sizeof(NSSLOWCERTCertificate *));
-    return;
 }
 
 static void
@@ -541,7 +540,6 @@ lg_searchCertsAndTrust(SDB *sdb, SECItem *derCert, SECItem *name,
 
     if (certData.certs)
         PORT_Free(certData.certs);
-    return;
 }
 
 static SECStatus
@@ -605,8 +603,7 @@ lg_searchSMime(SDB *sdb, SECItem *email, SDBFind *handles,
         nsslowcert_TraverseDBEntries(certHandle, certDBEntryTypeSMimeProfile,
                                      lg_smime_collect, (void *)&smimeData);
     }
-    return;
-}
+    }
 
 static CK_RV
 lg_searchTokenList(SDB *sdb, SDBFind *search,

@@ -1720,8 +1720,7 @@ cleanupParse:
     if (rbtz != NULL) {
         delete rbtz;
     }
-    return;
-}
+    }
 
 void
 VTimeZone::write(VTZWriter& writer, UErrorCode& status) const {

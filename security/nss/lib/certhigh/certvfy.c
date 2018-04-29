@@ -376,8 +376,7 @@ cert_AddToVerifyLog(CERTVerifyLog *log, CERTCertificate *cert, long error,
 
         log->count++;
     }
-    return;
-}
+    }
 
 #define EXIT_IF_NOT_LOGGING(log) \
     if (log == NULL) {           \

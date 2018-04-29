@@ -1279,7 +1279,6 @@ sctp_delete_prim_timer(struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 	sctp_free_remote_addr(stcb->asoc.deleted_primary);
 	stcb->asoc.deleted_primary = NULL;
 	sctp_mobility_feature_off(inp, SCTP_MOBILITY_PRIM_DELETED);
-	return;
 }
 
 /*

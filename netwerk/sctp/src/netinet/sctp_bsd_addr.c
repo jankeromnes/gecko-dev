@@ -675,8 +675,7 @@ void
 sctp_addr_change(struct ifaddr *ifa, int cmd)
 {
 #if defined(__Userspace__)
-        return;
-#else
+        #else
 	uint32_t ifa_flags = 0;
 
 	if (SCTP_BASE_VAR(sctp_pcb_initialized) == 0) {

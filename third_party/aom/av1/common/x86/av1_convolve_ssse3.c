@@ -1030,5 +1030,4 @@ void av1_lowbd_convolve_init_ssse3(void) {
     }
   }
 #endif
-  return;
-}
+  }

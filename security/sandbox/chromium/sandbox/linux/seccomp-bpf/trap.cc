@@ -249,8 +249,6 @@ void Trap::SigSys(int nr, LinuxSigInfo* info, ucontext_t* ctx) {
   // before entering the signal handler.
   Syscall::PutValueInUcontext(rc, ctx);
   errno = old_errno;
-
-  return;
 }
 
 bool Trap::TrapKey::operator<(const TrapKey& o) const {

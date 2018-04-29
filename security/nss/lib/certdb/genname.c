@@ -221,8 +221,7 @@ CERT_DestroyGeneralNameList(CERTGeneralNameList *list)
             PZ_Unlock(lock);
         }
     }
-    return;
-}
+    }
 
 CERTGeneralNameList *
 CERT_CreateGeneralNameList(CERTGeneralName *name)

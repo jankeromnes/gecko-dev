@@ -568,8 +568,7 @@ delete_threadpool(PRThreadPool *tp)
 			PR_DestroyPollableEvent(tp->ioq.notify_fd);
 		PR_Free(tp);
 	}
-	return;
-}
+	}
 
 static PRThreadPool *
 alloc_threadpool(void)

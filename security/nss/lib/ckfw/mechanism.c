@@ -109,8 +109,7 @@ nssCKFWMechanism_Destroy(
     }
     /* if the Destroy function wasn't supplied, then the mechanism is 'static',
      * and there is nothing to destroy */
-    return;
-}
+    }
 
 /*
  * nssCKFWMechanism_GetMDMechanism

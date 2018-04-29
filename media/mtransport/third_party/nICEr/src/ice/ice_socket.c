@@ -191,8 +191,7 @@ static void nr_ice_socket_readable_cb(NR_SOCKET s, int how, void *cb_arg)
       nr_ice_ctx_deliver_packet(sock->ctx, sock->component, &addr, buf, len);
     }
 
-    return;
-  }
+     }
 
 int nr_ice_socket_create(nr_ice_ctx *ctx,nr_ice_component *comp, nr_socket *nsock, int type, nr_ice_socket **sockp)
   {

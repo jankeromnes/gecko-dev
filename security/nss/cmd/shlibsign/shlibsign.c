@@ -127,7 +127,6 @@ encodeInt(unsigned char *buf, int val)
     buf[2] = (val >> 8) & 0xff;
     buf[1] = (val >> 16) & 0xff;
     buf[0] = (val >> 24) & 0xff;
-    return;
 }
 
 static PRStatus

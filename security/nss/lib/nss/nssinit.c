@@ -231,8 +231,6 @@ PK11_ConfigurePKCS11(const char *man, const char *libdesc, const char *tokdesc,
     }
     pk11_config_strings = strings;
     pk11_password_required = pwRequired;
-
-    return;
 }
 
 void
@@ -309,7 +307,6 @@ nss_FindExternalRootPaths(const char *dbpath,
     }
     *retoldpath = oldpath;
     *retnewpath = path;
-    return;
 }
 
 static void
@@ -344,7 +341,6 @@ nss_FindExternalRoot(const char *dbpath, const char *secmodprefix)
         (void)SECMOD_AddNewModule("Root Certs", path, 0, 0);
     }
     nss_FreeExternalRootPaths(oldpath, path);
-    return;
 }
 
 /*

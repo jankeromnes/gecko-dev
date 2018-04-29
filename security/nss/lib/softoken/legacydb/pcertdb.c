@@ -94,7 +94,6 @@ static void
 nsslowcert_LockDB(NSSLOWCERTCertDBHandle *handle)
 {
     PZ_EnterMonitor(handle->dbMon);
-    return;
 }
 
 /*
@@ -123,7 +122,6 @@ nsslowcert_LockCertRefCount(NSSLOWCERTCertificate *cert)
     PORT_Assert(certRefCountLock != NULL);
 
     PZ_Lock(certRefCountLock);
-    return;
 }
 
 /*
@@ -156,7 +154,6 @@ nsslowcert_LockCertTrust(NSSLOWCERTCertificate *cert)
     PORT_Assert(certTrustLock != NULL);
 
     PZ_Lock(certTrustLock);
-    return;
 }
 
 /*
@@ -189,7 +186,6 @@ nsslowcert_LockFreeList(void)
     PORT_Assert(freeListLock != NULL);
 
     SKIP_AFTER_FORK(PZ_Lock(freeListLock));
-    return;
 }
 
 /*
@@ -312,8 +308,6 @@ certdb_Close(DB *db)
     (*db->close)(db);
 
     SKIP_AFTER_FORK(PZ_Unlock(dbLock));
-
-    return;
 }
 
 void
@@ -411,8 +405,6 @@ DestroyDBEntry(certDBEntry *entry)
      * will cause an exception (e.g. null pointer reference). */
     PORT_Memset(&entry->common, 0, sizeof entry->common);
     PORT_FreeArena(arena, PR_FALSE);
-
-    return;
 }
 
 /* forward references */
@@ -1401,7 +1393,6 @@ void
 nsslowcert_DestroyDBEntry(certDBEntry *entry)
 {
     DestroyDBEntry(entry);
-    return;
 }
 
 /*
@@ -4448,8 +4439,7 @@ nsslowcert_ClosePermCertDB(NSSLOWCERTCertDBHandle *handle)
         }
         PORT_Free(handle);
     }
-    return;
-}
+    }
 
 /*
  * Get the trust attributes from a certificate
@@ -4984,8 +4974,7 @@ DestroyCertificate(NSSLOWCERTCertificate *cert, PRBool lockdb)
         }
     }
 
-    return;
-}
+    }
 
 NSSLOWCERTCertificate *
 nsslowcert_CreateCert(void)
@@ -5041,22 +5030,18 @@ nsslowcert_DestroyTrust(NSSLOWCERTTrust *trust)
         trustListHead = trust;
     }
     nsslowcert_UnlockFreeList();
-
-    return;
 }
 
 void
 nsslowcert_DestroyCertificate(NSSLOWCERTCertificate *cert)
 {
     DestroyCertificate(cert, PR_TRUE);
-    return;
 }
 
 static void
 nsslowcert_DestroyCertificateNoLocking(NSSLOWCERTCertificate *cert)
 {
     DestroyCertificate(cert, PR_FALSE);
-    return;
 }
 
 /*

@@ -487,8 +487,7 @@ void SkPDFType0Font::getFontSubset(SkPDFCanon* canon) {
                                                   lastGlyphID()));
     }
     SkDEBUGCODE(fPopulated = true);
-    return;
-}
+    }
 
 ///////////////////////////////////////////////////////////////////////////////
 // class SkPDFType1Font

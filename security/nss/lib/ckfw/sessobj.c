@@ -307,8 +307,7 @@ nss_ckmdSessionObject_Finalize(
     NSSCKFWInstance *fwInstance)
 {
     /* This shouldn't ever be called */
-    return;
-}
+    }
 
 /*
  * nss_ckmdSessionObject_Destroy
@@ -847,8 +846,6 @@ findfcn(
     node->mdObject = mdObject;
     node->next = mdfso->list;
     mdfso->list = node;
-
-    return;
 }
 
 /*
@@ -963,12 +960,6 @@ nss_ckmdFindSessionObjects_Final(
     mdfso = (nssCKMDFindSessionObjects *)mdFindObjects->etc;
     if (mdfso->arena)
         NSSArena_Destroy(mdfso->arena);
-
-#ifdef DEBUG
-    (void)nss_ckmdFindSessionObjects_remove_pointer(mdFindObjects);
-#endif /* DEBUG */
-
-    return;
 }
 
 static NSSCKMDObject *

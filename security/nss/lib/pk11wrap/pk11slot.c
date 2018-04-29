@@ -842,7 +842,6 @@ PK11_DestroySlotLists(void)
     pk11_FreeSlotListStatic(&pk11_randomSlotList);
     pk11_FreeSlotListStatic(&pk11_sha256SlotList);
     pk11_FreeSlotListStatic(&pk11_sha512SlotList);
-    return;
 }
 
 /* return a system slot list based on mechanism */
@@ -971,8 +970,7 @@ PK11_LoadSlotList(PK11SlotInfo *slot, PK11PreSlotInfo *psi, int count)
         }
     }
 
-    return;
-}
+    }
 
 /*
  * update a slot to its new attribute according to the slot list

@@ -75,7 +75,6 @@ void vp8_encode_intra4x4mby(MACROBLOCK *mb) {
   intra_prediction_down_copy(xd, xd->dst.y_buffer - xd->dst.y_stride + 16);
 
   for (i = 0; i < 16; ++i) vp8_encode_intra4x4block(mb, i);
-  return;
 }
 
 void vp8_encode_intra16x16mby(MACROBLOCK *x) {

@@ -134,7 +134,6 @@ dbs_mkBlob(DBS *dbsp, const DBT *key, const DBT *data, DBT *blobData)
     dbs_replaceSlash(&b[BLOB_NAME_START + 1], BLOB_NAME_LEN - 1);
     blobData->data = b;
     blobData->size = BLOB_BUF_LEN;
-    return;
 }
 
 /*

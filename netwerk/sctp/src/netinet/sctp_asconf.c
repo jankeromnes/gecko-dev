@@ -1029,8 +1029,7 @@ sctp_assoc_immediate_retrans(struct sctp_tcb *stcb, struct sctp_nets *dstnet)
 					 stcb, chk->whoTo);
 		}
 	}
-	return;
-}
+	}
 
 #if defined(__FreeBSD__) || defined(__APPLE__) || defined(__Userspace__)
 static int

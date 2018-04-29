@@ -196,12 +196,6 @@ nssCKFWFindObjects_Destroy(
     }
 
     nss_ZFreeIf(fwFindObjects);
-
-#ifdef DEBUG
-    (void)findObjects_remove_pointer(fwFindObjects);
-#endif /* DEBUG */
-
-    return;
 }
 
 /*

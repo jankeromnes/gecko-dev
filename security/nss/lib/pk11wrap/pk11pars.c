@@ -1315,8 +1315,7 @@ secmod_FreeChildren(char **children, CK_SLOT_ID *ids)
     if (ids) {
         PORT_Free(ids);
     }
-    return;
-}
+    }
 
 /*
  * caclulate the length of each child record:

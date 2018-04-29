@@ -128,8 +128,7 @@ breakLines(char *string)
         tmpstr++;
     }
 
-    return;
-}
+    }
 
 CERTCertificatePolicies *
 CERT_DecodeCertificatePoliciesExtension(const SECItem *extnValue)
@@ -204,8 +203,7 @@ CERT_DestroyCertificatePoliciesExtension(CERTCertificatePolicies *policies)
     if (policies != NULL) {
         PORT_FreeArena(policies->arena, PR_FALSE);
     }
-    return;
-}
+    }
 
 CERTCertificatePolicyMappings *
 CERT_DecodePolicyMappingsExtension(SECItem *extnValue)
@@ -420,8 +418,7 @@ CERT_DestroyUserNotice(CERTUserNotice *userNotice)
     if (userNotice != NULL) {
         PORT_FreeArena(userNotice->arena, PR_FALSE);
     }
-    return;
-}
+    }
 
 static CERTPolicyStringCallback policyStringCB = NULL;
 static void *policyStringCBArg = NULL;
@@ -431,7 +428,6 @@ CERT_SetCAPolicyStringCallback(CERTPolicyStringCallback cb, void *cbarg)
 {
     policyStringCB = cb;
     policyStringCBArg = cbarg;
-    return;
 }
 
 char *
@@ -640,8 +636,7 @@ CERT_DestroyOidSequence(CERTOidSequence *oidSeq)
     if (oidSeq != NULL) {
         PORT_FreeArena(oidSeq->arena, PR_FALSE);
     }
-    return;
-}
+    }
 
 PRBool
 CERT_GovtApprovedBitSet(CERTCertificate *cert)

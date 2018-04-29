@@ -5124,7 +5124,6 @@ int vp9_set_size_literal(VP9_COMP *cpi, unsigned int width,
 
 void vp9_set_svc(VP9_COMP *cpi, int use_svc) {
   cpi->use_svc = use_svc;
-  return;
 }
 
 int vp9_get_quantizer(VP9_COMP *cpi) { return cpi->common.base_qindex; }

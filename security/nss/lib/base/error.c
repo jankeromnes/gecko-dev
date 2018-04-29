@@ -231,8 +231,7 @@ nss_SetError(PRUint32 error)
                 (es->header.space - 1) * (sizeof es->stack[0]));
         es->stack[es->header.space - 1] = error;
     }
-    return;
-}
+    }
 
 /*
  * nss_ClearErrorStack
@@ -251,7 +250,6 @@ nss_ClearErrorStack(void)
 
     es->header.count = 0;
     es->stack[0] = 0;
-    return;
 }
 
 /*
@@ -268,5 +266,4 @@ nss_DestroyErrorStack(void)
         error_stack_index = INVALID_TPD_INDEX;
         error_call_once = error_call_again; /* allow to init again */
     }
-    return;
-}
+    }

@@ -1059,8 +1059,6 @@ TimeZoneNamesImpl::initialize(const Locale& locale, UErrorCode& status) {
         loadStrings(UnicodeString(tzID), status);
     }
     delete tz;
-
-    return;
 }
 
 /*

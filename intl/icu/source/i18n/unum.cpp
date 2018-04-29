@@ -881,7 +881,6 @@ unum_setContext(UNumberFormat* fmt, UDisplayContext value, UErrorCode* status)
         return;
     }
     ((NumberFormat*)fmt)->setContext(value, *status);
-    return;
 }
 
 U_CAPI UDisplayContext U_EXPORT2

@@ -203,7 +203,6 @@ PORT_SetError(int value)
     PORT_Assert(value != SEC_ERROR_REUSED_ISSUER_AND_SERIAL);
 #endif
     PR_SetError(value, 0);
-    return;
 }
 
 int

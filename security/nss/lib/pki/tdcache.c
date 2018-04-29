@@ -401,7 +401,6 @@ remove_token_certs(const void *k, void *v, void *a)
     }
     nssPKIObject_Unlock(object);
     nssPKIObject_Destroy(object);
-    return;
 }
 
 /*

@@ -235,7 +235,6 @@ clust_constructor_dup(caddr_t m_clust, struct mbuf* m)
 	m->m_ext.ext_size = size;
 	m->m_ext.ext_type = type;
 	m->m_ext.ref_cnt = refcnt;
-	return;
 }
 
 

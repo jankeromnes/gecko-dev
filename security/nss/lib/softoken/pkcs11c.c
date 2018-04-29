@@ -62,8 +62,7 @@ typedef struct {
 static void
 sftk_Null(void *data, PRBool freeit)
 {
-    return;
-}
+    }
 
 #ifdef EC_DEBUG
 #define SEC_PRINT(str1, str2, num, sitem)             \
@@ -386,8 +385,7 @@ sftk_SetContextByType(SFTKSession *session, SFTKContextType type,
             session->hash_context = context;
             break;
     }
-    return;
-}
+    }
 
 /*
  * code to grab the context. Needed by every C_XXXUpdate, C_XXXFinal,

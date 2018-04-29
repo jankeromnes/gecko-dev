@@ -62,8 +62,7 @@ free_dbt(DBT *dbt)
         PORT_Free(dbt);
     }
 
-    return;
-}
+    }
 
 static int keydb_Get(NSSLOWKEYDBHandle *db, DBT *key, DBT *data,
                      unsigned int flags);
@@ -2165,8 +2164,6 @@ keydb_Close(NSSLOWKEYDBHandle *kdb)
     (*db->close)(db);
 
     SKIP_AFTER_FORK(PZ_Unlock(kdbLock));
-
-    return;
 }
 
 /*

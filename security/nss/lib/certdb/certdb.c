@@ -876,8 +876,7 @@ CERT_DestroyValidity(CERTValidity *v)
     if (v && v->arena) {
         PORT_FreeArena(v->arena, PR_FALSE);
     }
-    return;
-}
+    }
 
 /*
 ** Amount of time that a certifiate is allowed good before it is actually
@@ -1247,8 +1246,6 @@ void
 CERT_SetDefaultCertDB(CERTCertDBHandle *handle)
 {
     default_cert_db_handle = handle;
-
-    return;
 }
 
 CERTCertDBHandle *
@@ -1270,8 +1267,7 @@ sec_lower_string(char *s)
         s++;
     }
 
-    return;
-}
+    }
 
 static PRBool
 cert_IsIPAddr(const char *hn)
@@ -2236,8 +2232,7 @@ CERT_DestroyCertArray(CERTCertificate **certs, unsigned int ncerts)
         PORT_Free(certs);
     }
 
-    return;
-}
+    }
 
 char *
 CERT_FixupEmailAddr(const char *emailAddr)
@@ -2363,7 +2358,6 @@ EncodeFlags(char *trusts, unsigned int flags)
         PORT_Strcat(trusts, "I");
     if (flags & CERTDB_GOVT_APPROVED_CA)
         PORT_Strcat(trusts, "G");
-    return;
 }
 
 char *
@@ -2512,8 +2506,6 @@ CERT_DestroyCertList(CERTCertList *certs)
     }
 
     PORT_FreeArena(certs->arena, PR_FALSE);
-
-    return;
 }
 
 void
@@ -2521,7 +2513,6 @@ CERT_RemoveCertListNode(CERTCertListNode *node)
 {
     CERT_DestroyCertificate(node->cert);
     PR_REMOVE_LINK(&node->links);
-    return;
 }
 
 SECStatus
@@ -2832,7 +2823,6 @@ CERT_LockCertRefCount(CERTCertificate *cert)
 {
     PORT_Assert(certRefCountLock != NULL);
     PZ_Lock(certRefCountLock);
-    return;
 }
 
 /*

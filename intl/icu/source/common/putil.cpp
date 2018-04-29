@@ -1435,7 +1435,6 @@ static void U_CALLCONV dataDirectoryInitFn() {
     }
 
     u_setDataDirectory(path);
-    return;
 }
 
 U_CAPI const char * U_EXPORT2

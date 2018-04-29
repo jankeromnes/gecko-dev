@@ -218,7 +218,6 @@ nssHash_Remove(nssHash *hash, const void *it)
     }
 
     (void)PZ_Unlock(hash->mutex);
-    return;
 }
 
 /*
@@ -309,6 +308,4 @@ nssHash_Iterate(nssHash *hash, nssHashIterator fcn, void *closure)
     PL_HashTableEnumerateEntries(hash->plHashTable, nss_hash_enumerator, &as);
 
     (void)PZ_Unlock(hash->mutex);
-
-    return;
 }

@@ -138,8 +138,7 @@ SGN_DestroyDigestInfo(SGNDigestInfo *di)
         PORT_FreeArena(di->arena, PR_FALSE);
     }
 
-    return;
-}
+    }
 
 SECStatus
 SGN_CopyDigestInfo(PLArenaPool *poolp, SGNDigestInfo *a, SGNDigestInfo *b)

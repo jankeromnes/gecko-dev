@@ -2962,7 +2962,6 @@ sftk_closePeer(PRBool isFIPS)
         return;
     }
     sftk_DBShutdown(slot);
-    return;
 }
 
 /* NSC_Initialize initializes the Cryptoki library. */

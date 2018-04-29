@@ -513,8 +513,7 @@ getIntelCacheEntryLineSize(unsigned long val, int *level,
         *level = 3;
         *lineSize = CacheMap[val].lineSize;
     }
-    return;
-}
+    }
 
 static void
 getIntelRegisterCacheLineSize(unsigned long val,

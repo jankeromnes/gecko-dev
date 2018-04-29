@@ -591,8 +591,7 @@ sftkdb_FreeUpdatePasswordKey(SFTKDBHandle *handle)
         SECITEM_ZfreeItem(key, PR_TRUE);
     }
 
-    return;
-}
+    }
 
 /*
  * what password db we use depends heavily on the update state machine

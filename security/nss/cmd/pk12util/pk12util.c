@@ -759,7 +759,6 @@ loser:
         SECITEM_ZfreeItem(pwitem, PR_TRUE);
     }
     p12u_DoPKCS12ExportErrors();
-    return;
 }
 
 PRIntn

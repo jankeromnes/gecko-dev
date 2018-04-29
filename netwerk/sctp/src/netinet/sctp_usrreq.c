@@ -905,8 +905,7 @@ sctp_close(struct socket *so)
 			goto sctp_must_try_again;
 		}
 	}
-	return;
-}
+	}
 
 #else
 

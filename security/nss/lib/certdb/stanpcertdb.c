@@ -819,8 +819,7 @@ CERT_DestroyCertificate(CERTCertificate *cert)
             PORT_FreeArena(cert->arena, PR_FALSE);
         }
     }
-    return;
-}
+    }
 
 int
 CERT_GetDBContentVersion(CERTCertDBHandle *handle)
@@ -1080,7 +1079,6 @@ void
 __CERT_ClosePermCertDB(CERTCertDBHandle *handle)
 {
     PORT_Assert("CERT_ClosePermCertDB is Deprecated" == NULL);
-    return;
 }
 
 SECStatus

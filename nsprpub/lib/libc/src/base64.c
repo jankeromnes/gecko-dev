@@ -33,8 +33,7 @@ encode3to4
         j -= 6;
     }
 
-    return;
-}
+    }
 
 static void
 encode2to4
@@ -47,7 +46,6 @@ encode2to4
     dest[1] = base[ (PRUint32)(((src[0] & 0x03) << 4) | ((src[1] >> 4) & 0x0F)) ];
     dest[2] = base[ (PRUint32)((src[1] & 0x0F) << 2) ];
     dest[3] = (unsigned char)'=';
-    return;
 }
 
 static void
@@ -61,7 +59,6 @@ encode1to4
     dest[1] = base[ (PRUint32)((src[0] & 0x03) << 4) ];
     dest[2] = (unsigned char)'=';
     dest[3] = (unsigned char)'=';
-    return;
 }
 
 static void
@@ -94,8 +91,7 @@ encode
             PR_NOT_REACHED("coding error");
     }
 
-    return;
-}
+    }
 
 /*
  * PL_Base64Encode

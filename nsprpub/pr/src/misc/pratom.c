@@ -359,7 +359,6 @@ PR_StackPush(PRStack *stack, PRStackElem *stack_elem)
 	stack_elem->prstk_elem_next = stack->prstk_head.prstk_elem_next;
 	stack->prstk_head.prstk_elem_next = stack_elem;
     PR_Unlock(stack->prstk_lock);
-    return;
 }
 
 PR_IMPLEMENT(PRStackElem *)

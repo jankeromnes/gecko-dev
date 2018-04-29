@@ -158,8 +158,7 @@ combine_dst (pixman_implementation_t *imp,
 	     const uint32_t *          mask,
 	     int		      width)
 {
-    return;
-}
+    }
 
 static void
 combine_src_u (pixman_implementation_t *imp,

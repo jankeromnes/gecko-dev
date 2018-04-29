@@ -784,8 +784,7 @@ abort:
   if (_status) {
     nr_turn_client_failed(ctx->tctx);
   }
-  return;
-}
+  }
 
 static void nr_turn_client_refresh_cb(NR_SOCKET s, int how, void *arg)
 {

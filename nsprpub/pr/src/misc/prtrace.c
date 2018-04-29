@@ -179,7 +179,6 @@ static void _PR_InitializeTrace( void )
     logCVar = PR_NewCondVar( logLock );
 
     PR_Unlock( traceLock );
-    return;    
 } /* end _PR_InitializeTrace() */
 
 /*
@@ -319,7 +318,6 @@ PR_IMPLEMENT(void)
 
     /* Unlock the Facility */
     PR_Unlock( traceLock );
-    return;
 } /* end PR_DestroyTrace()  */
 
 /*
@@ -394,8 +392,7 @@ PR_IMPLEMENT(void)
         /* PR_Sleep(0); */
     }
 
-    return;
-} /* end PR_Trace() */
+    } /* end PR_Trace() */
 
 /*
 **
@@ -493,8 +490,7 @@ PR_IMPLEMENT(void)
             PR_ASSERT( 0 );
             break;
     } /* end switch() */
-    return;
-} /* end  PR_SetTraceOption() */
+    } /* end  PR_SetTraceOption() */
 
 /*
 **
@@ -519,8 +515,7 @@ PR_IMPLEMENT(void)
             PR_ASSERT( 0 );
             break;
     } /* end switch() */
-    return;
-} /* end PR_GetTraceOption() */
+    } /* end PR_GetTraceOption() */
 
 /*
 **
@@ -582,8 +577,6 @@ PR_IMPLEMENT(void)
     PR_LOG( lm, PR_LOG_DEBUG, ("PRTrace: GetConterNameFromHandle: "
         "QNp: %p, RNp: %p,\n\tQName: %s, RName: %s, Desc: %s", 
         qnp, rnp, qnp->name, rnp->name, rnp->desc ));
-
-    return;
 } /* end PR_GetTraceNameFromHandle() */
 
 /*
@@ -715,8 +708,7 @@ static void ProcessOrders( void )
         PR_ASSERT( 0 );
         break;
     } /* end switch() */
-    return ;
-} /* end ProcessOrders() */
+    } /* end ProcessOrders() */
 
 /*
 **
@@ -738,8 +730,6 @@ static void WriteTraceSegment( PRFileDesc *logFile, void *buf, PRInt32 amount )
     else 
         PR_LOG( lm, PR_LOG_DEBUG,
             ("RecordTraceEntries: PR_Write(): Buffer: %p, bytes: %ld", buf, amount));
-
-    return;
 } /* end WriteTraceSegment() */
 
 /*
@@ -818,7 +808,6 @@ PR_IMPLEMENT(void)
     PR_Close( logFile );
     PR_LOG( lm, PR_LOG_DEBUG,
         ("RecordTraceEntries: exiting"));
-    return;
 } /* end  PR_RecordTraceEntries() */
 
 /*

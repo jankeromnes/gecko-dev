@@ -34,8 +34,7 @@ static void
 noop_composite (pixman_implementation_t *imp,
 		pixman_composite_info_t *info)
 {
-    return;
-}
+    }
 
 static void
 dest_write_back_direct (pixman_iter_t *iter)

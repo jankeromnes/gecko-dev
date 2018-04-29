@@ -1332,8 +1332,7 @@ PR_IMPLEMENT(PRStatus) PR_EnumerateThreads(PREnumerator func, void *arg)
 #if defined(PT_NO_SIGTIMEDWAIT)
 static void null_signal_handler(PRIntn sig)
 {
-	return;
-}
+	}
 #endif
 
 static void suspend_signal_handler(PRIntn sig)

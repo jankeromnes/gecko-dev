@@ -919,8 +919,7 @@ sctp_del_addr_from_vrf(uint32_t vrf_id, struct sockaddr *addr,
 				 (struct sctp_nets *)NULL);
 		SCTP_WQ_ADDR_UNLOCK();
 	}
-	return;
-}
+	}
 
 
 static int
@@ -6244,8 +6243,7 @@ sctp_add_local_addr_ep(struct sctp_inpcb *inp, struct sctp_ifa *ifa, uint32_t ac
 			sctp_add_local_addr_restricted(stcb, ifa);
 		}
 	}
-	return;
-}
+	}
 
 
 /*
@@ -6344,8 +6342,7 @@ sctp_del_local_addr_ep(struct sctp_inpcb *inp, struct sctp_ifa *ifa)
 		/* update inp_vflag flags */
 		sctp_update_ep_vflag(inp);
 	}
-	return;
-}
+	}
 
 /*
  * Add the address to the TCB local address restricted list.
@@ -6381,7 +6378,6 @@ sctp_add_local_addr_restricted(struct sctp_tcb *stcb, struct sctp_ifa *ifa)
 
 	/* add to the list */
 	(void)sctp_insert_laddr(list, ifa, 0);
-	return;
 }
 
 /*
@@ -6423,8 +6419,7 @@ sctp_del_local_addr_restricted(struct sctp_tcb *stcb, struct sctp_ifa *ifa)
 	}
 
 	/* address not found! */
-	return;
-}
+	}
 
 #if defined(__FreeBSD__)
 /*

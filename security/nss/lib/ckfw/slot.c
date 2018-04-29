@@ -624,7 +624,6 @@ nssCKFWSlot_ClearToken(
 
     fwSlot->fwToken = (NSSCKFWToken *)NULL;
     (void)nssCKFWMutex_Unlock(fwSlot->mutex);
-    return;
 }
 
 /*

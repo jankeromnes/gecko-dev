@@ -1825,8 +1825,6 @@ SECKEY_DestroyPrivateKeyList(SECKEYPrivateKeyList *keys)
     }
 
     PORT_FreeArena(keys->arena, PR_FALSE);
-
-    return;
 }
 
 void
@@ -1836,7 +1834,6 @@ SECKEY_RemovePrivateKeyListNode(SECKEYPrivateKeyListNode *node)
     SECKEY_DestroyPrivateKey(node->key);
     node->key = NULL;
     PR_REMOVE_LINK(&node->links);
-    return;
 }
 
 SECStatus
@@ -1899,8 +1896,6 @@ SECKEY_DestroyPublicKeyList(SECKEYPublicKeyList *keys)
     }
 
     PORT_FreeArena(keys->arena, PR_FALSE);
-
-    return;
 }
 
 void
@@ -1910,7 +1905,6 @@ SECKEY_RemovePublicKeyListNode(SECKEYPublicKeyListNode *node)
     SECKEY_DestroyPublicKey(node->key);
     node->key = NULL;
     PR_REMOVE_LINK(&node->links);
-    return;
 }
 
 SECStatus

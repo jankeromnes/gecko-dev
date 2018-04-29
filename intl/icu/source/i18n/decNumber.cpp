@@ -3794,9 +3794,7 @@ static void decToString(const decNumber *dn, char *string, Flag eng) {
       c++;                              /* step for next  */
       } /* cut  */
     }
-  *c='\0';          /* terminate the string (all paths)  */
-  return;
-  } /* decToString  */
+  *c='\0';           } /* decToString  */
 
 /* ------------------------------------------------------------------ */
 /* decAddOp -- add/subtract operation                                 */
@@ -6712,8 +6710,7 @@ static void decReverse(Unit *ulo, Unit *uhi) {
     *ulo=*uhi;
     *uhi=temp;
     }
-  return;
-  } /* decReverse  */
+   } /* decReverse  */
 
 /* ------------------------------------------------------------------ */
 /* decShiftToMost -- shift digits in array towards most significant   */
@@ -7078,9 +7075,7 @@ static void decSetCoeff(decNumber *dn, decContext *set, const Unit *lsu,
       } /* shift to least  */
     } /* not unit boundary  */
 
-  if (*residue!=0) *status|=DEC_Inexact; /* record inexactitude  */
-  return;
-  } /* decSetCoeff  */
+  if (*residue!=0) *status|=DEC_Inexact;  } /* decSetCoeff  */
 
 /* ------------------------------------------------------------------ */
 /* decApplyRound -- apply pending rounding to a number                */
@@ -7377,9 +7372,7 @@ static void decFinalize(decNumber *dn, decContext *set, Int *residue,
     dn->digits=decShiftToMost(dn->lsu, dn->digits, shift);
     }
   dn->exponent-=shift;   /* adjust the exponent to match  */
-  *status|=DEC_Clamped;  /* and record the dirty deed  */
-  return;
-  } /* decFinalize  */
+  *status|=DEC_Clamped;   } /* decFinalize  */
 
 /* ------------------------------------------------------------------ */
 /* decSetOverflow -- set number to proper overflow value              */
@@ -7794,9 +7787,7 @@ static void decStatus(decNumber *dn, uInt status, decContext *set) {
       dn->bits=DECNAN;                  /* and make a quiet NaN  */
       }
     }
-  uprv_decContextSetStatus(set, status);     /* [may not return]  */
-  return;
-  } /* decStatus  */
+  uprv_decContextSetStatus(set, status);      } /* decStatus  */
 
 /* ------------------------------------------------------------------ */
 /* decGetDigits -- count digits in a Units array                      */

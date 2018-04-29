@@ -1980,7 +1980,6 @@ CERT_DestroyCERTRevocationFlags(CERTRevocationFlags *flags)
 {
 #ifdef NSS_DISABLE_LIBPKIX
     PORT_SetError(PR_NOT_IMPLEMENTED_ERROR);
-    return;
 #else
     if (!flags)
         return;

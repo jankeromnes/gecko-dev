@@ -221,12 +221,6 @@ nssCKFWObject_Finalize(
         nssCKFWSession_DeregisterSessionObject(fwObject->fwSession, fwObject);
     }
     nss_ZFreeIf(fwObject);
-
-#ifdef DEBUG
-    (void)object_remove_pointer(fwObject);
-#endif /* DEBUG */
-
-    return;
 }
 
 /*
@@ -262,12 +256,6 @@ nssCKFWObject_Destroy(
         nssCKFWSession_DeregisterSessionObject(fwObject->fwSession, fwObject);
     }
     nss_ZFreeIf(fwObject);
-
-#ifdef DEBUG
-    (void)object_remove_pointer(fwObject);
-#endif /* DEBUG */
-
-    return;
 }
 
 /*

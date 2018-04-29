@@ -401,14 +401,12 @@ HASH_Destroy(HASHContext *context)
 {
     (*context->hashobj->destroy)(context->hash_context, PR_TRUE);
     PORT_Free(context);
-    return;
 }
 
 void
 HASH_Begin(HASHContext *context)
 {
     (*context->hashobj->begin)(context->hash_context);
-    return;
 }
 
 void
@@ -417,7 +415,6 @@ HASH_Update(HASHContext *context,
             unsigned int len)
 {
     (*context->hashobj->update)(context->hash_context, src, len);
-    return;
 }
 
 void
@@ -428,7 +425,6 @@ HASH_End(HASHContext *context,
 {
     (*context->hashobj->end)(context->hash_context, result, result_len,
                              max_result_len);
-    return;
 }
 
 HASH_HashType

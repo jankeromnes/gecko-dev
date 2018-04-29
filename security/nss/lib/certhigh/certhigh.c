@@ -517,8 +517,6 @@ void
 CERT_FreeNicknames(CERTCertNicknames *nicknames)
 {
     PORT_FreeArena(nicknames->arena, PR_FALSE);
-
-    return;
 }
 
 /* [ FROM pcertdb.c ] */
@@ -532,8 +530,6 @@ void
 CERT_FreeDistNames(CERTDistNames *names)
 {
     PORT_FreeArena(names->arena, PR_FALSE);
-
-    return;
 }
 
 static SECStatus

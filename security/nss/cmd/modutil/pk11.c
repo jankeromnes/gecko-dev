@@ -438,8 +438,7 @@ printModule(SECMODModule *module, int *count)
         PR_fprintf(PR_STDOUT, "\t  uri: %s\n", tokenUri);
         PORT_Free(tokenUri);
     }
-    return;
-}
+    }
 
 /************************************************************************
  *

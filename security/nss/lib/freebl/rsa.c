@@ -682,8 +682,7 @@ rsa_get_prime_from_exponents(mp_int *e, mp_int *d, mp_int *p, mp_int *q,
         /* we only have one q so far, save it and if no others are found,
          * it's safe to return it */
         CHECK_MPI_OK(mp_copy(&tmp, q));
-        continue;
-    }
+   }
     if ((unsigned)mpl_significant_bits(&k) < order_k) {
         if (mp_cmp_z(q) == 0) {
             /* If we get here, something was wrong with the parameters we

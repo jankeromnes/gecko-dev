@@ -2388,8 +2388,7 @@ sftk_freeDB(SFTKDBHandle *handle)
     if (ref == 0) {
         sftkdb_CloseDB(handle);
     }
-    return;
-}
+    }
 
 /*
  * acquire a database handle for a certificate db

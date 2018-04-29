@@ -1790,7 +1790,6 @@ nssCKFWSession_SetCurrentCryptoOperation(
     }
 #endif /* NSSDEBUG */
     fwSession->fwOperationArray[state] = fwOperation;
-    return;
 }
 
 /*

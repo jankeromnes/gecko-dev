@@ -2179,7 +2179,6 @@ printflags(char *trusts, unsigned int flags)
         PORT_Strcat(trusts, "I");
     if (flags & CERTDB_GOVT_APPROVED_CA)
         PORT_Strcat(trusts, "G");
-    return;
 }
 
 /* callback for listing certs through pkcs11 */

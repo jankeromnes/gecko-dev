@@ -269,8 +269,7 @@ static void nr_stun_client_timer_expired_cb(NR_SOCKET s, int b, void *cb_arg)
 
         nr_stun_client_fire_finished_cb(ctx);
     }
-    return;
-  }
+     }
 
 int nr_stun_client_force_retransmit(nr_stun_client_ctx *ctx)
   {

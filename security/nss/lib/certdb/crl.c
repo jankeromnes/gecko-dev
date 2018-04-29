@@ -2521,7 +2521,6 @@ CERT_CRLCacheRefreshIssuer(CERTCertDBHandle* dbhandle, SECItem* crlKey)
     cache->refresh = PR_TRUE;
     DPCache_UnlockWrite();
     ReleaseDPCache(cache, writeLocked);
-    return;
 }
 
 /* add the specified RAM CRL object to the cache */

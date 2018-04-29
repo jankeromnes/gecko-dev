@@ -123,8 +123,7 @@ PK11_CleanKeyList(PK11SlotInfo *slot)
         pk11_CloseSession(slot, symKey->session, symKey->sessionOwner);
         PORT_Free(symKey);
     }
-    return;
-}
+    }
 
 /*
  * create a symetric key:
@@ -309,7 +308,6 @@ PK11_SetSymKeyUserData(PK11SymKey *symKey, void *userData,
     }
     symKey->userData = userData;
     symKey->freeFunc = freeFunc;
-    return;
 }
 
 /*

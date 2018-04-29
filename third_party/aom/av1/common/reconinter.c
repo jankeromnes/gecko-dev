@@ -2218,7 +2218,6 @@ void modify_neighbor_predictor_for_obmc(MB_MODE_INFO *mbmi) {
 #endif  // CONFIG_COMPOUND_SINGLEREF
   }
   if (has_second_ref(mbmi)) mbmi->ref_frame[1] = NONE_FRAME;
-  return;
 }
 
 struct build_prediction_ctxt {

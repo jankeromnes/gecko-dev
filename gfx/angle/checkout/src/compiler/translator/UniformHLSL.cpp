@@ -289,7 +289,6 @@ void UniformHLSL::outputHLSL4_1_FL11Texture(TInfoSinkBase &out,
         << TextureString(type.getBasicType(), type.getLayoutQualifier().imageInternalFormat) << " "
         << DecorateVariableIfNeeded(variable) << ArrayString(type) << " : register(t"
         << str(registerIndex) << ");\n";
-    return;
 }
 
 void UniformHLSL::outputHLSL4_1_FL11RWTexture(TInfoSinkBase &out,
@@ -313,8 +312,7 @@ void UniformHLSL::outputHLSL4_1_FL11RWTexture(TInfoSinkBase &out,
         // TODO(xinghua.cao@intel.com): Support images in vertex shader and fragment shader,
         // which are needed to sync binding value when linking program.
     }
-    return;
-}
+    }
 
 void UniformHLSL::outputUniform(TInfoSinkBase &out,
                                 const TType &type,

@@ -76,14 +76,12 @@ void
 NSSLOW_Shutdown(NSSLOWInitContext *context)
 {
     PORT_Assert(context == &dummyContext);
-    return;
 }
 
 void
 NSSLOW_Reset(NSSLOWInitContext *context)
 {
     PORT_Assert(context == &dummyContext);
-    return;
 }
 
 NSSLOWHASHContext *

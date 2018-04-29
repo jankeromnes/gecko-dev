@@ -106,7 +106,6 @@ ctr_GetNextCtr(unsigned char *counter, unsigned int counterBits,
     mask = (1 << counterBits) - 1;
     count = ++(*counterPtr) & mask;
     *counterPtr = ((*counterPtr) & ~mask) | count;
-    return;
 }
 
 static void

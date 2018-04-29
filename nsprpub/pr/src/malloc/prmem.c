@@ -175,7 +175,6 @@ _PR_InitZones(void)
 
 loser:
     _PR_DestroyZones();
-    return;
 }
 
 PR_IMPLEMENT(void)

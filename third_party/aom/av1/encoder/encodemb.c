@@ -638,8 +638,7 @@ void av1_xform_quant(const AV1_COMMON *cm, MACROBLOCK *x, int plane, int block,
   p->txb_entropy_ctx[block] =
       (uint8_t)av1_get_txb_entropy_context(qcoeff, scan_order, *eob);
 #endif  // CONFIG_LV_MAP
-  return;
-#else  // CONFIG_PVQ
+  #else  // CONFIG_PVQ
   (void)xform_quant_idx;
 #if CONFIG_HIGHBITDEPTH
   txfm_param.bd = xd->bd;

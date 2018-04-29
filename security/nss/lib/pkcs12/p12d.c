@@ -364,7 +364,6 @@ loser:
     p12dcx->error = PR_TRUE;
     SEC_ASN1DecoderFinish(safeContentsCtx->currentSafeBagA1Dcx);
     safeContentsCtx->currentSafeBagA1Dcx = NULL;
-    return;
 }
 
 /* notify function for decoding safeBags.  This function is
@@ -437,8 +436,7 @@ sec_pkcs12_decoder_safe_bag_notify(void *arg, PRBool before,
             break;
     }
 
-    return;
-}
+    }
 
 /* notify function for decoding safe contents.  each entry in the
  * safe contents is a safeBag which needs to be allocated and
@@ -519,8 +517,6 @@ loser:
 
     SEC_ASN1DecoderClearNotifyProc(safeContentsCtx->safeContentsA1Dcx);
     SEC_ASN1DecoderClearFilterProc(safeContentsCtx->safeContentsA1Dcx);
-
-    return;
 }
 
 /* initialize the safeContents for decoding.  this routine
@@ -748,8 +744,7 @@ loser:
         safeContentsCtx->safeContentsA1Dcx = NULL;
     }
 
-    return;
-}
+    }
 
 /* this is a wrapper for the ASN1 decoder to call SEC_PKCS7DecoderUpdate
  */
@@ -831,7 +826,6 @@ sec_pkcs12_decoder_asafes_notify(void *arg, PRBool before, void *dest,
 loser:
     /* set the error flag */
     p12dcx->error = PR_TRUE;
-    return;
 }
 
 /* wrapper for updating asafes decoding context.  this function
@@ -874,8 +868,6 @@ loser:
     p12dcx->error = PR_TRUE;
     SEC_ASN1DecoderFinish(p12dcx->aSafeA1Dcx);
     p12dcx->aSafeA1Dcx = NULL;
-
-    return;
 }
 
 /* start the decode of an authenticatedSafe contentInfo.

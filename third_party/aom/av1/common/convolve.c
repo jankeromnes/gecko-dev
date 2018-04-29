@@ -1148,13 +1148,11 @@ void av1_convolve_scale(const uint8_t *src, int src_stride, uint8_t *dst,
 
 void av1_lowbd_convolve_init_c(void) {
   // A placeholder for SIMD initialization
-  return;
-}
+  }
 
 void av1_highbd_convolve_init_c(void) {
   // A placeholder for SIMD initialization
-  return;
-}
+  }
 
 void av1_convolve_init(AV1_COMMON *cm) {
 #if CONFIG_HIGHBITDEPTH
@@ -1162,11 +1160,6 @@ void av1_convolve_init(AV1_COMMON *cm) {
     av1_highbd_convolve_init();
   else
     av1_lowbd_convolve_init();
-#else
-  (void)cm;
-  av1_lowbd_convolve_init();
-#endif
-  return;
 }
 
 #if CONFIG_HIGHBITDEPTH

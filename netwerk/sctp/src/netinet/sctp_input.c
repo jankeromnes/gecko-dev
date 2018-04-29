@@ -3458,10 +3458,6 @@ sctp_handle_shutdown_complete(struct sctp_shutdown_complete_chunk *cp SCTP_UNUSE
 #endif
 	(void)sctp_free_assoc(stcb->sctp_ep, stcb, SCTP_NORMAL_PROC,
 	                      SCTP_FROM_SCTP_INPUT + SCTP_LOC_25);
-#if defined(__APPLE__) || defined(SCTP_SO_LOCK_TESTING)
-	SCTP_SOCKET_UNLOCK(so, 1);
-#endif
-	return;
 }
 
 static int
@@ -6111,8 +6107,7 @@ trigger_send:
 		SCTP_INP_DECR_REF(inp_decr);
 		SCTP_INP_WUNLOCK(inp_decr);
 	}
-	return;
-}
+	}
 
 #ifdef INET
 #if !defined(__Userspace__)

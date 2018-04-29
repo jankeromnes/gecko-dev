@@ -758,8 +758,7 @@ static void nr_ice_srvrflx_start_stun_timer_cb(NR_SOCKET s, int how, void *cb_ar
     if (_status && (cand->u.srvrflx.stun->state==NR_STUN_CLIENT_STATE_RUNNING)) {
       nr_stun_client_failed(cand->u.srvrflx.stun);
     }
-    return;
-  }
+     }
 
 static int nr_ice_srvrflx_start_stun(nr_ice_candidate *cand)
   {
@@ -799,8 +798,7 @@ static void nr_ice_start_relay_turn_timer_cb(NR_SOCKET s, int how, void *cb_arg)
     if(_status && (cand->u.relayed.turn->state==NR_TURN_CLIENT_STATE_ALLOCATING)){
       nr_turn_client_failed(cand->u.relayed.turn);
     }
-    return;
-  }
+     }
 
 static int nr_ice_start_relay_turn(nr_ice_candidate *cand)
   {

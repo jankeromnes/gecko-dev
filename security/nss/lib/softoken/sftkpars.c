@@ -27,7 +27,6 @@ sftk_parseTokenFlags(char *tmp, sftk_token_parameters *parsed)
     parsed->forceOpen = NSSUTIL_ArgHasFlag("flags", "forceOpen", tmp);
     parsed->pwRequired = NSSUTIL_ArgHasFlag("flags", "passwordRequired", tmp);
     parsed->optimizeSpace = NSSUTIL_ArgHasFlag("flags", "optimizeSpace", tmp);
-    return;
 }
 
 static void
@@ -40,7 +39,6 @@ sftk_parseFlags(char *tmp, sftk_parameters *parsed)
     parsed->forceOpen = NSSUTIL_ArgHasFlag("flags", "forceOpen", tmp);
     parsed->pwRequired = NSSUTIL_ArgHasFlag("flags", "passwordRequired", tmp);
     parsed->optimizeSpace = NSSUTIL_ArgHasFlag("flags", "optimizeSpace", tmp);
-    return;
 }
 
 static CK_RV
@@ -117,7 +115,6 @@ sftk_parseTokens(char *tokenParams, sftk_parameters *parsed)
     }
     parsed->token_count = i;
     parsed->tokens = tokens;
-    return;
 }
 
 CK_RV

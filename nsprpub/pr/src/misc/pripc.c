@@ -43,8 +43,7 @@ static void _pr_ConvertSemName(char *result)
     return;
 #endif
 #elif defined(_PR_HAVE_SYSV_SEMAPHORES)
-    return;
-#elif defined(WIN32)
+    #elif defined(WIN32)
     return;
 #endif
 }
@@ -66,8 +65,7 @@ static void _pr_ConvertShmName(char *result)
     return;
 #endif
 #elif defined(PR_HAVE_SYSV_NAMED_SHARED_MEMORY)
-    return;
-#elif defined(WIN32)
+    #elif defined(WIN32)
     return;
 #else
     return;

@@ -343,16 +343,6 @@ int err;
 			PR_NotifyAllCondVar(rwlock->rw_reader_waitq);
 	}
 	PR_Unlock(rwlock->rw_lock);
-#endif
-
-#ifdef _PR_RWLOCK_RANK_ORDER_DEBUG
-	/*
-	 * update thread's lock rank
-	 */
-	if (rwlock->rw_rank != PR_RWLOCK_RANK_NONE)
-		_PR_UNSET_THREAD_RWLOCK_RANK(rwlock);
-#endif
-	return;
 }
 
 #ifndef _PR_RWLOCK_RANK_ORDER_DEBUG

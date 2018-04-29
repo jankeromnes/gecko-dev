@@ -9671,7 +9671,6 @@ sctp_send_cookie_ack(struct sctp_tcb *stcb)
 	SCTP_BUF_LEN(cookie_ack) = chk->send_size;
 	TAILQ_INSERT_TAIL(&chk->asoc->control_send_queue, chk, sctp_next);
 	chk->asoc->ctrl_queue_cnt++;
-	return;
 }
 
 
@@ -9716,7 +9715,6 @@ sctp_send_shutdown_ack(struct sctp_tcb *stcb, struct sctp_nets *net)
 	SCTP_BUF_LEN(m_shutdown_ack) = chk->send_size;
 	TAILQ_INSERT_TAIL(&chk->asoc->control_send_queue, chk, sctp_next);
 	chk->asoc->ctrl_queue_cnt++;
-	return;
 }
 
 void
@@ -9782,8 +9780,7 @@ sctp_send_shutdown(struct sctp_tcb *stcb, struct sctp_nets *net)
 		shutdown_cp->cumulative_tsn_ack = htonl(stcb->asoc.cumulative_tsn);
 		TAILQ_INSERT_TAIL(&stcb->asoc.control_send_queue, chk, sctp_next);
 	}
-	return;
-}
+	}
 
 void
 sctp_send_asconf(struct sctp_tcb *stcb, struct sctp_nets *net, int addr_locked)
@@ -9832,7 +9829,6 @@ sctp_send_asconf(struct sctp_tcb *stcb, struct sctp_nets *net, int addr_locked)
 	}
 	TAILQ_INSERT_TAIL(&chk->asoc->asconf_send_queue, chk, sctp_next);
 	chk->asoc->ctrl_queue_cnt++;
-	return;
 }
 
 void
@@ -9924,8 +9920,7 @@ sctp_send_asconf_ack(struct sctp_tcb *stcb)
 		TAILQ_INSERT_TAIL(&chk->asoc->control_send_queue, chk, sctp_next);
 		chk->asoc->ctrl_queue_cnt++;
 	}
-	return;
-}
+	}
 
 
 static int
@@ -10489,8 +10484,7 @@ sctp_timer_validation(struct sctp_inpcb *inp,
 	} else {
 		sctp_timer_start(SCTP_TIMER_TYPE_SEND, inp, stcb, asoc->primary_destination);
 	}
-	return;
-}
+	}
 
 void
 sctp_chunk_output(struct sctp_inpcb *inp,
@@ -10769,8 +10763,7 @@ do_it_again:
 			goto do_it_again;
 		}
 	}
-	return;
-}
+	}
 
 
 int
@@ -11035,8 +11028,7 @@ sctp_fill_in_rest:
 		}
 		i++;
 	}
-	return;
-}
+	}
 
 void
 sctp_send_sack(struct sctp_tcb *stcb, int so_locked
@@ -11431,7 +11423,6 @@ sctp_send_sack(struct sctp_tcb *stcb, int so_locked
 	asoc->ctrl_queue_cnt++;
 	asoc->send_sack = 0;
 	SCTP_STAT_INCR(sctps_sendsacks);
-	return;
 }
 
 void
@@ -11595,7 +11586,6 @@ sctp_send_shutdown_complete(struct sctp_tcb *stcb,
 		stcb->asoc.ifp_had_enobuf = 0;
 	}
 	SCTP_STAT_INCR_COUNTER64(sctps_outcontrolchunks);
-	return;
 }
 
 #if defined(__FreeBSD__)
@@ -12010,7 +12000,6 @@ sctp_send_resp_msg(struct sockaddr *src, struct sockaddr *dst,
 	SCTP_STAT_INCR(sctps_sendpackets);
 	SCTP_STAT_INCR_COUNTER64(sctps_outpackets);
 	SCTP_STAT_INCR_COUNTER64(sctps_outcontrolchunks);
-	return;
 }
 
 void
@@ -12168,7 +12157,6 @@ sctp_send_hb(struct sctp_tcb *stcb, struct sctp_nets *net,int so_locked
 	TAILQ_INSERT_TAIL(&stcb->asoc.control_send_queue, chk, sctp_next);
 	stcb->asoc.ctrl_queue_cnt++;
 	SCTP_STAT_INCR(sctps_sendheartbeat);
-	return;
 }
 
 void
@@ -12552,7 +12540,6 @@ sctp_add_stream_reset_in(struct sctp_tmit_chunk *chk,
 	chk->book_size_scale = 0;
 	chk->send_size = SCTP_SIZE32(chk->book_size);
 	SCTP_BUF_LEN(chk->data) = chk->send_size;
-	return;
 }
 
 static void
@@ -12580,7 +12567,6 @@ sctp_add_stream_reset_tsn(struct sctp_tmit_chunk *chk,
 	chk->book_size = SCTP_SIZE32(chk->send_size);
 	chk->book_size_scale = 0;
 	SCTP_BUF_LEN(chk->data) = SCTP_SIZE32(chk->send_size);
-	return;
 }
 
 void
@@ -12609,7 +12595,6 @@ sctp_add_stream_reset_result(struct sctp_tmit_chunk *chk,
 	chk->book_size_scale = 0;
 	chk->send_size = SCTP_SIZE32(chk->book_size);
 	SCTP_BUF_LEN(chk->data) = chk->send_size;
-	return;
 }
 
 void
@@ -12703,7 +12688,6 @@ sctp_add_stream_reset_result_tsn(struct sctp_tmit_chunk *chk,
 	chk->send_size = SCTP_SIZE32(chk->book_size);
 	chk->book_size_scale = 0;
 	SCTP_BUF_LEN(chk->data) = chk->send_size;
-	return;
 }
 
 static void
@@ -12736,7 +12720,6 @@ sctp_add_an_out_stream(struct sctp_tmit_chunk *chk,
 	chk->book_size = SCTP_SIZE32(chk->send_size);
 	chk->book_size_scale = 0;
 	SCTP_BUF_LEN(chk->data) = SCTP_SIZE32(chk->send_size);
-	return;
 }
 
 static void
@@ -12768,7 +12751,6 @@ sctp_add_an_in_stream(struct sctp_tmit_chunk *chk,
 	chk->book_size = SCTP_SIZE32(chk->send_size);
 	chk->book_size_scale = 0;
 	SCTP_BUF_LEN(chk->data) = SCTP_SIZE32(chk->send_size);
-	return;
 }
 
 int
@@ -13058,7 +13040,6 @@ sctp_send_abort(struct mbuf *m, int iphlen, struct sockaddr *src, struct sockadd
 	                   mflowtype, mflowid, fibnum,
 #endif
 	                   vrf_id, port);
-	return;
 }
 
 void
@@ -13074,7 +13055,6 @@ sctp_send_operr_to(struct sockaddr *src, struct sockaddr *dst,
 	                   mflowtype, mflowid, fibnum,
 #endif
 	                   vrf_id, port);
-	return;
 }
 
 static struct mbuf *

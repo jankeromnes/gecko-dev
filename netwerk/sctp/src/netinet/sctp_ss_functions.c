@@ -73,8 +73,7 @@ sctp_ss_default_init(struct sctp_tcb *stcb, struct sctp_association *asoc,
 		                                              &stcb->asoc.strmout[i],
 		                                              NULL, holds_lock);
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_default_clear(struct sctp_tcb *stcb, struct sctp_association *asoc,
@@ -93,8 +92,7 @@ sctp_ss_default_clear(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_default_init_stream(struct sctp_tcb *stcb, struct sctp_stream_out *strq, struct sctp_stream_out *with_strq)
@@ -109,7 +107,6 @@ sctp_ss_default_init_stream(struct sctp_tcb *stcb, struct sctp_stream_out *strq,
 	}
 	strq->ss_params.rr.next_spoke.tqe_next = NULL;
 	strq->ss_params.rr.next_spoke.tqe_prev = NULL;
-	return;
 }
 
 static void
@@ -130,8 +127,7 @@ sctp_ss_default_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static int
 sctp_ss_default_is_empty(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_association *asoc)
@@ -174,8 +170,7 @@ sctp_ss_default_remove(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 
 static struct sctp_stream_out *
@@ -246,16 +241,14 @@ sctp_ss_default_scheduled(struct sctp_tcb *stcb,
 	} else {
 		stcb->asoc.ss_data.locked_on_sending = NULL;
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_default_packet_done(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net SCTP_UNUSED,
                             struct sctp_association *asoc SCTP_UNUSED)
 {
 	/* Nothing to be done here */
-	return;
-}
+	}
 
 static int
 sctp_ss_default_get_value(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_association *asoc SCTP_UNUSED,
@@ -327,8 +320,7 @@ sctp_ss_rr_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 /*
  * Real round-robin per packet algorithm.
@@ -385,7 +377,6 @@ rrp_again:
 		}
 	}
 	asoc->ss_data.last_out_stream = strq;
-	return;
 }
 
 
@@ -414,8 +405,7 @@ sctp_ss_prio_clear(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_prio_init_stream(struct sctp_tcb *stcb, struct sctp_stream_out *strq, struct sctp_stream_out *with_strq)
@@ -435,8 +425,7 @@ sctp_ss_prio_init_stream(struct sctp_tcb *stcb, struct sctp_stream_out *strq, st
 	} else {
 		strq->ss_params.prio.priority = 0;
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_prio_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
@@ -469,8 +458,7 @@ sctp_ss_prio_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_prio_remove(struct sctp_tcb *stcb, struct sctp_association *asoc,
@@ -502,8 +490,7 @@ sctp_ss_prio_remove(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static struct sctp_stream_out*
 sctp_ss_prio_select(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net,
@@ -601,8 +588,7 @@ sctp_ss_fb_clear(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_fb_init_stream(struct sctp_tcb *stcb, struct sctp_stream_out *strq, struct sctp_stream_out *with_strq)
@@ -622,8 +608,7 @@ sctp_ss_fb_init_stream(struct sctp_tcb *stcb, struct sctp_stream_out *strq, stru
 	} else {
 		strq->ss_params.fb.rounds = -1;
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_fb_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
@@ -643,8 +628,7 @@ sctp_ss_fb_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_fb_remove(struct sctp_tcb *stcb, struct sctp_association *asoc,
@@ -676,8 +660,7 @@ sctp_ss_fb_remove(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static struct sctp_stream_out*
 sctp_ss_fb_select(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net,
@@ -743,7 +726,6 @@ sctp_ss_fb_scheduled(struct sctp_tcb *stcb, struct sctp_nets *net SCTP_UNUSED,
 		strq->ss_params.fb.rounds = -1;
 	}
 	asoc->ss_data.last_out_stream = strq;
-	return;
 }
 
 /*
@@ -788,8 +770,7 @@ sctp_ss_fcfs_init(struct sctp_tcb *stcb, struct sctp_association *asoc,
 		}
 		n++;
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_fcfs_clear(struct sctp_tcb *stcb, struct sctp_association *asoc,
@@ -806,8 +787,7 @@ sctp_ss_fcfs_clear(struct sctp_tcb *stcb, struct sctp_association *asoc,
 			SCTP_TCB_SEND_UNLOCK(stcb);
 		}
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_fcfs_init_stream(struct sctp_tcb *stcb, struct sctp_stream_out *strq, struct sctp_stream_out *with_strq)
@@ -820,8 +800,7 @@ sctp_ss_fcfs_init_stream(struct sctp_tcb *stcb, struct sctp_stream_out *strq, st
 			stcb->asoc.ss_data.last_out_stream = strq;
 		}
 	}
-	return;
-}
+	}
 
 static void
 sctp_ss_fcfs_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
@@ -838,8 +817,7 @@ sctp_ss_fcfs_add(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 static int
 sctp_ss_fcfs_is_empty(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_association *asoc)
@@ -867,8 +845,7 @@ sctp_ss_fcfs_remove(struct sctp_tcb *stcb, struct sctp_association *asoc,
 	if (holds_lock == 0) {
 		SCTP_TCB_SEND_UNLOCK(stcb);
 	}
-	return;
-}
+	}
 
 
 static struct sctp_stream_out *

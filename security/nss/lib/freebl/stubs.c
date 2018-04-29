@@ -529,7 +529,6 @@ PR_Lock_stub(PRLock *lock)
 {
     STUB_SAFE_CALL1(PR_Lock, lock);
     abort();
-    return;
 }
 
 extern void
@@ -537,7 +536,6 @@ PR_DestroyLock_stub(PRLock *lock)
 {
     STUB_SAFE_CALL1(PR_DestroyLock, lock);
     abort();
-    return;
 }
 
 extern PRCondVar *
@@ -585,7 +583,6 @@ PR_DestroyCondVar_stub(PRCondVar *cvar)
 {
     STUB_SAFE_CALL1(PR_DestroyCondVar, cvar);
     abort();
-    return;
 }
 
 /*

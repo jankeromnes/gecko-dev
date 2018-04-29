@@ -41,8 +41,7 @@ builtins_mdFindObjects_Final(
         NSSArena_Destroy(arena);
     }
 
-    return;
-}
+    }
 
 static NSSCKMDObject *
 builtins_mdFindObjects_Next(

@@ -1537,7 +1537,6 @@ sctp_iterator_worker(void)
 		/*sa_ignore FREED_MEMORY*/
 	}
 	sctp_it_ctl.iterator_running = 0;
-	return;
 }
 
 
@@ -2338,7 +2337,6 @@ sctp_timer_start(int t_type, struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 	tmr->ticks = sctp_get_tick_count();
 #endif
 	(void)SCTP_OS_TIMER_START(&tmr->timer, to_ticks, sctp_timeout_handler, tmr);
-	return;
 }
 
 void
@@ -2489,7 +2487,6 @@ sctp_timer_stop(int t_type, struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 	tmr->self = NULL;
 	tmr->stopped_from = from;
 	(void)SCTP_OS_TIMER_STOP(&tmr->timer);
-	return;
 }
 
 uint32_t
@@ -5580,7 +5577,6 @@ sctp_user_rcvd(struct sctp_tcb *stcb, uint32_t *freed_so_far, int hold_rlock,
 	SCTP_INP_DECR_REF(stcb->sctp_ep);
  no_lock:
 	atomic_add_int(&stcb->asoc.refcnt, -1);
-	return;
 }
 
 int

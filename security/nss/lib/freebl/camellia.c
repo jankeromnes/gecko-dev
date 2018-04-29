@@ -692,8 +692,6 @@ camellia_setup128(const unsigned char *key, PRUint32 *subkey)
     CamelliaSubkeyR(22) = CamelliaSubkeyL(22) ^ dw, CamelliaSubkeyL(22) = dw;
     dw = CamelliaSubkeyL(23) ^ CamelliaSubkeyR(23), dw = CAMELLIA_RL8(dw);
     CamelliaSubkeyR(23) = CamelliaSubkeyL(23) ^ dw, CamelliaSubkeyL(23) = dw;
-
-    return;
 }
 
 void
@@ -1053,8 +1051,6 @@ camellia_setup256(const unsigned char *key, PRUint32 *subkey)
     CamelliaSubkeyR(30) = CamelliaSubkeyL(30) ^ dw, CamelliaSubkeyL(30) = dw;
     dw = CamelliaSubkeyL(31) ^ CamelliaSubkeyR(31), dw = CAMELLIA_RL8(dw);
     CamelliaSubkeyR(31) = CamelliaSubkeyL(31) ^ dw, CamelliaSubkeyL(31) = dw;
-
-    return;
 }
 
 void
@@ -1071,7 +1067,6 @@ camellia_setup192(const unsigned char *key, PRUint32 *subkey)
     memcpy(kk + 24, (unsigned char *)&krrl, 4);
     memcpy(kk + 28, (unsigned char *)&krrr, 4);
     camellia_setup256(kk, subkey);
-    return;
 }
 
 /**

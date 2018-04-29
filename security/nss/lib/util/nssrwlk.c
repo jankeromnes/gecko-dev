@@ -194,14 +194,6 @@ NSSRWLock_UnlockRead(NSSRWLock *rwlock)
     }
 
     PZ_Unlock(rwlock->rw_lock);
-
-#ifdef NSS_RWLOCK_RANK_ORDER_DEBUG
-    /*
-     * update thread's lock rank
-     */
-    nssRWLock_UnsetThreadRank(me, rwlock);
-#endif
-    return;
 }
 
 /*
@@ -282,14 +274,6 @@ NSSRWLock_UnlockWrite(NSSRWLock *rwlock)
         }
     }
     PZ_Unlock(rwlock->rw_lock);
-
-#ifdef NSS_RWLOCK_RANK_ORDER_DEBUG
-    /*
-     * update thread's lock rank
-     */
-    nssRWLock_UnsetThreadRank(me, rwlock);
-#endif
-    return;
 }
 
 /* This is primarily for debugging, i.e. for inclusion in ASSERT calls. */

@@ -287,7 +287,6 @@ nss_ckfwtoken_session_iterator(
      */
     NSSCKFWSession *fwSession = (NSSCKFWSession *)value;
     (void)nssCKFWSession_Destroy(fwSession, CK_FALSE);
-    return;
 }
 
 static void
@@ -301,7 +300,6 @@ nss_ckfwtoken_object_iterator(
      */
     NSSCKFWObject *fwObject = (NSSCKFWObject *)value;
     (void)nssCKFWObject_Finalize(fwObject, CK_FALSE);
-    return;
 }
 
 /*

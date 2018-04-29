@@ -165,7 +165,6 @@ nssCKFWHash_Remove(
     }
 
     (void)nssCKFWMutex_Unlock(hash->mutex);
-    return;
 }
 
 /*
@@ -275,6 +274,4 @@ nssCKFWHash_Iterate(
     PL_HashTableEnumerateEntries(hash->plHashTable, nss_ckfwhash_enumerator, &as);
 
     (void)nssCKFWMutex_Unlock(hash->mutex);
-
-    return;
 }

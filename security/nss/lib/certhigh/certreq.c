@@ -232,8 +232,7 @@ CERT_DestroyCertificateRequest(CERTCertificateRequest *req)
     if (req && req->arena) {
         PORT_FreeArena(req->arena, PR_FALSE);
     }
-    return;
-}
+    }
 
 static void
 setCRExt(void *o, CERTCertExtension **exts)

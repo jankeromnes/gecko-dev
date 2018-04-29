@@ -618,8 +618,6 @@ nssCKFWInstance_DestroySessionHandle(
     }
 
     (void)nssCKFWMutex_Unlock(fwInstance->mutex);
-
-    return;
 }
 
 /*
@@ -798,7 +796,6 @@ nssCKFWInstance_DestroyObjectHandle(
     }
 
     (void)nssCKFWMutex_Unlock(fwInstance->mutex);
-    return;
 }
 
 /*

@@ -1358,8 +1358,7 @@ searchCurrencyName(const CurrencyNameStruct* currencyNames,
             break;
         }
     }
-    return;
-}
+    }
 
 //========================= currency name cache =====================
 typedef struct {

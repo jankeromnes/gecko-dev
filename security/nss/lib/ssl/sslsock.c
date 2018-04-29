@@ -479,7 +479,6 @@ ssl_FreeSocket(sslSocket *ss)
     PORT_Memset(ss, 0x1f, sizeof *ss);
 #endif
     PORT_Free(ss);
-    return;
 }
 
 /************************************************************************/

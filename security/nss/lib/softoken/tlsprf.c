@@ -11,8 +11,7 @@
 static void
 sftk_TLSPRFNull(void *data, PRBool freeit)
 {
-    return;
-}
+    }
 
 typedef struct {
     PRUint32 cxSize;          /* size of allocated block, in bytes.        */
