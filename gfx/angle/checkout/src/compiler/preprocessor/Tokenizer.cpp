@@ -1355,7 +1355,7 @@ YY_DECL
 
     /* Line comment */
 
-	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
+	while ( /*CONSTCOND*/true )		/* loops until end-of-file is reached */
 		{
 		yy_cp = yyg->yy_c_buf_p;
 

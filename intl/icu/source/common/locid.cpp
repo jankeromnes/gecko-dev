@@ -604,7 +604,7 @@ Locale& Locale::init(const char* localeID, UBool canonicalize)
 
         // successful end of init()
         return *this;
-    } while(0); /*loop doesn't iterate*/
+    } while(false); /*loop doesn't iterate*/
 
     // when an error occurs, then set this object to "bogus" (there is no UErrorCode here)
     setToBogus();

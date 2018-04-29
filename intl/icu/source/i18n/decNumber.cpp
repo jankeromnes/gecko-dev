@@ -734,7 +734,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberFromString(decNumber *dn, const char 
         }
       }
     /* decNumberShow(dn);  */
-    } while(0);                         /* [for break]  */
+    } while(false);                         /* [for break]  */
 
   if (allocres!=NULL) free(allocres);   /* drop any storage used  */
   if (status!=0) decStatus(dn, status, set);
@@ -993,7 +993,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberCompareTotalMag(decNumber *res, const
       rhs=b;                            /* use copy from here on  */
       }
     decCompareOp(res, lhs, rhs, set, COMPTOTAL, &status);
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   if (allocbufa!=NULL) free(allocbufa); /* drop any storage used  */
   if (allocbufb!=NULL) free(allocbufb); /* ..  */
@@ -1096,7 +1096,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberExp(decNumber *res, const decNumber *
       }
     #endif
     decExpOp(res, rhs, set, &status);
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   #if DECSUBSET
   if (allocrhs !=NULL) free(allocrhs);  /* drop any storage used  */
@@ -1192,7 +1192,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberFMA(decNumber *res, const decNumber *
     #endif
     /* add the third operand and result -> res, and all is done  */
     decAddOp(res, acc, fhs, set, 0, &status);
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   if (allocbufa!=NULL) free(allocbufa); /* drop any storage used  */
   if (status!=0) decStatus(res, status, set);
@@ -1318,7 +1318,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberLn(decNumber *res, const decNumber *r
       } /* extended=0  */
     #endif
     decLnOp(res, rhs, set, &status);
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   #if DECSUBSET
   if (allocrhs !=NULL) free(allocrhs);  /* drop any storage used  */
@@ -1536,7 +1536,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberLog10(decNumber *res, const decNumber
 
     aset.digits=set->digits;            /* for final divide  */
     decDivideOp(res, a, b, &aset, DIVIDE, &status); /* into result  */
-    } while(0);                         /* [for break]  */
+    } while(false);                         /* [for break]  */
 
   if (allocbufa!=NULL) free(allocbufa); /* drop any storage used  */
   if (allocbufb!=NULL) free(allocbufb); /* ..  */
@@ -2283,7 +2283,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberPower(decNumber *res, const decNumber
     #if DECSUBSET
     if (!set->extended) decTrim(res, set, 0, 1, &dropped); /* trailing zeros  */
     #endif
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   if (allocdac!=NULL) free(allocdac);   /* drop any storage used  */
   if (allocinv!=NULL) free(allocinv);   /* ..  */
@@ -2378,7 +2378,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberReduce(decNumber *res, const decNumbe
     decFinish(res, set, &residue, &status);       /* cleanup/set flags  */
     decTrim(res, set, 1, 0, &dropped);            /* normalize in place  */
                                                   /* [may clamp]  */
-    } while(0);                              /* end protected  */
+    } while(false);                              /* end protected  */
 
   #if DECSUBSET
   if (allocrhs !=NULL) free(allocrhs);       /* ..  */
@@ -3145,7 +3145,7 @@ U_CAPI decNumber * U_EXPORT2 uprv_decNumberSquareRoot(decNumber *res, const decN
       }
 
     uprv_decNumberCopy(res, a);                   /* a is now the result  */
-    } while(0);                              /* end protected  */
+    } while(false);                              /* end protected  */
 
   if (allocbuff!=NULL) free(allocbuff);      /* drop any storage used  */
   if (allocbufa!=NULL) free(allocbufa);      /* ..  */
@@ -4169,7 +4169,7 @@ static decNumber * decAddOp(decNumber *res, const decNumber *lhs,
       if (set->round==DEC_ROUND_FLOOR) res->bits|=DECNEG;   /* sign -  */
                                   else res->bits&=~DECNEG;  /* sign +  */
       }
-    } while(0);                              /* end protected  */
+    } while(false);                              /* end protected  */
 
   if (allocacc!=NULL) free(allocacc);        /* drop any storage used  */
   #if DECSUBSET
@@ -4821,7 +4821,7 @@ static decNumber * decDivideOp(decNumber *res,
     /* If a divide then strip trailing zeros if subset [after round]  */
     if (!set->extended && (op==DIVIDE)) decTrim(res, set, 0, 1, &dropped);
     #endif
-    } while(0);                              /* end protected  */
+    } while(false);                              /* end protected  */
 
   if (varalloc!=NULL) free(varalloc);   /* drop any storage used  */
   if (allocacc!=NULL) free(allocacc);   /* ..  */
@@ -5170,7 +5170,7 @@ static decNumber * decMultiplyOp(decNumber *res, const decNumber *lhs,
     /* Set the coefficient.  If any rounding, residue records  */
     decSetCoeff(res, set, acc, res->digits, &residue, status);
     decFinish(res, set, &residue, status);   /* final cleanup  */
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   if (allocacc!=NULL) free(allocacc);   /* drop any storage used  */
   #if DECSUBSET
@@ -5526,7 +5526,7 @@ decNumber * decExpOp(decNumber *res, const decNumber *rhs,
     aset.digits=set->digits;            /* [use default rounding]  */
     decCopyFit(res, a, &aset, &residue, status); /* copy & shorten  */
     decFinish(res, set, &residue, status);       /* cleanup/set flags  */
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   if (allocrhs !=NULL) free(allocrhs);  /* drop any storage used  */
   if (allocbufa!=NULL) free(allocbufa); /* ..  */
@@ -5841,7 +5841,7 @@ decNumber * decLnOp(decNumber *res, const decNumber *rhs,
     aset.digits=set->digits;            /* [use default rounding]  */
     decCopyFit(res, a, &aset, &residue, status); /* copy & shorten  */
     decFinish(res, set, &residue, status);       /* cleanup/set flags  */
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   if (allocbufa!=NULL) free(allocbufa); /* drop any storage used  */
   if (allocbufb!=NULL) free(allocbufb); /* ..  */
@@ -6008,7 +6008,7 @@ static decNumber * decQuantizeOp(decNumber *res, const decNumber *lhs,
       decFinalize(res, set, &residue, status);    /* set subnormal flags  */
       *status&=~DEC_Underflow;          /* suppress Underflow [as per 754]  */
       }
-    } while(0);                         /* end protected  */
+    } while(false);                         /* end protected  */
 
   #if DECSUBSET
   if (allocrhs!=NULL) free(allocrhs);   /* drop any storage used  */
@@ -6134,7 +6134,7 @@ static decNumber * decCompareOp(decNumber *res, const decNumber *lhs,
     /* have numbers  */
     if (op==COMPMAXMAG || op==COMPMINMAG) result=decCompare(lhs, rhs, 1);
      else result=decCompare(lhs, rhs, 0);    /* sign matters  */
-    } while(0);                              /* end protected  */
+    } while(false);                              /* end protected  */
 
   if (result==BADINT) *status|=DEC_Insufficient_storage; /* rare  */
    else {

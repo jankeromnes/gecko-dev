@@ -299,7 +299,7 @@ static SkJumper_Engine choose_engine() {
 
 #elif defined(__x86_64__) || defined(_M_X64)
     #if !defined(_MSC_VER)  // No _skx stages for Windows yet.
-        if (1 && SkCpu::Supports(SkCpu::SKX)) {
+        if (true && SkCpu::Supports(SkCpu::SKX)) {
             return {
             #define M(stage) ASM(stage, skx),
                 { SK_RASTER_PIPELINE_STAGES(M) },
@@ -309,7 +309,7 @@ static SkJumper_Engine choose_engine() {
             };
         }
     #endif
-    if (1 && SkCpu::Supports(SkCpu::HSW)) {
+    if (true && SkCpu::Supports(SkCpu::HSW)) {
         return {
         #define M(stage) ASM(stage, hsw),
             { SK_RASTER_PIPELINE_STAGES(M) },
@@ -318,7 +318,7 @@ static SkJumper_Engine choose_engine() {
         #undef M
         };
     }
-    if (1 && SkCpu::Supports(SkCpu::AVX)) {
+    if (true && SkCpu::Supports(SkCpu::AVX)) {
         return {
         #define M(stage) ASM(stage, avx),
             { SK_RASTER_PIPELINE_STAGES(M) },
@@ -327,7 +327,7 @@ static SkJumper_Engine choose_engine() {
         #undef M
         };
     }
-    if (1 && SkCpu::Supports(SkCpu::SSE41)) {
+    if (true && SkCpu::Supports(SkCpu::SSE41)) {
         return {
         #define M(stage) ASM(stage, sse41),
             { SK_RASTER_PIPELINE_STAGES(M) },
@@ -336,7 +336,7 @@ static SkJumper_Engine choose_engine() {
         #undef M
         };
     }
-    if (1 && SkCpu::Supports(SkCpu::SSE2)) {
+    if (true && SkCpu::Supports(SkCpu::SSE2)) {
         return {
         #define M(stage) ASM(stage, sse2),
             { SK_RASTER_PIPELINE_STAGES(M) },
@@ -375,7 +375,7 @@ static SkJumper_Engine choose_engine() {
     static SkJumper_Engine choose_lowp() {
     #if SK_JUMPER_USE_ASSEMBLY
         #if defined(__x86_64__) || defined(_M_X64)
-            if (1 && SkCpu::Supports(SkCpu::HSW)) {
+            if (true && SkCpu::Supports(SkCpu::HSW)) {
                 return {
                 #define M(st) hsw_lowp<SkRasterPipeline::st>(),
                     { SK_RASTER_PIPELINE_STAGES(M) },
@@ -384,7 +384,7 @@ static SkJumper_Engine choose_engine() {
                 #undef M
                 };
             }
-            if (1 && SkCpu::Supports(SkCpu::SSE41)) {
+            if (true && SkCpu::Supports(SkCpu::SSE41)) {
                 return {
                 #define M(st) sse41_lowp<SkRasterPipeline::st>(),
                     { SK_RASTER_PIPELINE_STAGES(M) },
@@ -393,7 +393,7 @@ static SkJumper_Engine choose_engine() {
                 #undef M
                 };
             }
-            if (1 && SkCpu::Supports(SkCpu::SSE2)) {
+            if (true && SkCpu::Supports(SkCpu::SSE2)) {
                 return {
                 #define M(st) sse2_lowp<SkRasterPipeline::st>(),
                     { SK_RASTER_PIPELINE_STAGES(M) },

@@ -216,7 +216,7 @@ public:
     constexpr int64_t jitter = RtpSourceHistory::kMinJitterWindow / 2;
     const int64_t jitterAdjusted = timeNow + jitter;
 
-    history.Insert(timeNow, jitterAdjusted, 0, false);
+    history.Insert(timeNow, jitterAdjusted, false, false);
     history.Prune(timeNow + (jitter * 3) + 1);
     EXPECT_EQ(history.mDetailedHistory.size(), static_cast<size_t>(0));
     EXPECT_TRUE(history.mHasEvictedEntry);
