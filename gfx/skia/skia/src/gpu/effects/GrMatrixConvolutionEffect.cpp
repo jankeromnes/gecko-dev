@@ -24,7 +24,7 @@ protected:
     void onSetData(const GrGLSLProgramDataManager&, const GrFragmentProcessor&) override;
 
 private:
-    typedef GrGLSLProgramDataManager::UniformHandle UniformHandle;
+    using UniformHandle = GrGLSLProgramDataManager::UniformHandle;
 
     UniformHandle               fKernelUni;
     UniformHandle               fImageIncrementUni;
@@ -33,7 +33,7 @@ private:
     UniformHandle               fBiasUni;
     GrTextureDomain::GLDomain   fDomain;
 
-    typedef GrGLSLFragmentProcessor INHERITED;
+    using INHERITED = GrGLSLFragmentProcessor;
 };
 
 void GrGLMatrixConvolutionEffect::emitCode(EmitArgs& args) {

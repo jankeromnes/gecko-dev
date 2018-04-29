@@ -106,7 +106,7 @@ private:
     const SkBlendMode      fMode;
     const GrBlendEquation  fHWBlendEquation;
 
-    typedef GrXferProcessor INHERITED;
+    using INHERITED = GrXferProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -165,7 +165,7 @@ private:
 
     void onSetData(const GrGLSLProgramDataManager&, const GrXferProcessor&) override {}
 
-    typedef GrGLSLXferProcessor INHERITED;
+    using INHERITED = GrGLSLXferProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -230,7 +230,7 @@ private:
     SkBlendMode fMode;
     GrBlendEquation fHWBlendEquation;
 
-    typedef GrXPFactory INHERITED;
+    using INHERITED = GrXPFactory;
 };
 #if defined(__GNUC__)
 #pragma GCC diagnostic pop

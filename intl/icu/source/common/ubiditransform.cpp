@@ -45,7 +45,7 @@
  * indicates whether the text was changed in the course of this operation or
  * not.
  */
-typedef UBool (*UBiDiAction)(UBiDiTransform *, UErrorCode *);
+using UBiDiAction = UBool (*)(UBiDiTransform *, UErrorCode *);
 
 /**
  * Structure that holds a predefined reordering scheme, including the following

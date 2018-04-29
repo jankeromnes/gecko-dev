@@ -248,7 +248,7 @@ private:
     SkMatrix fViewMatrix;
     bool fMiterStroke;
 
-    typedef GrMeshDrawOp INHERITED;
+    using INHERITED = GrMeshDrawOp;
 };
 
 }  // anonymous namespace

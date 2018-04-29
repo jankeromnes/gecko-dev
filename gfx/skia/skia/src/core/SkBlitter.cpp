@@ -794,7 +794,7 @@ public:
         Context*      fProxyContext;
         SkPMColor     fPMColor;
 
-        typedef Context INHERITED;
+        using INHERITED = Context;
     };
 
 #ifndef SK_IGNORE_TO_STRING
@@ -822,7 +822,7 @@ protected:
 private:
     sk_sp<SkShader> fProxy;
 
-    typedef SkShaderBase INHERITED;
+    using INHERITED = SkShaderBase;
 };
 
 sk_sp<SkFlattenable> Sk3DShader::CreateProc(SkReadBuffer& buffer) {

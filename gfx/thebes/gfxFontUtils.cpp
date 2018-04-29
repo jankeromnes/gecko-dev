@@ -1362,7 +1362,7 @@ const Encoding* gfxFontUtils::gMSFontNameCharsets[] =
 
 struct MacCharsetMappingComparator
 {
-    typedef gfxFontUtils::MacFontNameCharsetMapping MacFontNameCharsetMapping;
+    using MacFontNameCharsetMapping = gfxFontUtils::MacFontNameCharsetMapping;
     const MacFontNameCharsetMapping& mSearchValue;
     explicit MacCharsetMappingComparator(const MacFontNameCharsetMapping& aSearchValue)
       : mSearchValue(aSearchValue) {}

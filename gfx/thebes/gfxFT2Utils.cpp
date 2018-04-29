@@ -37,9 +37,7 @@ gfxFT2LockedFace::GetGlyph(uint32_t aCharCode)
 #endif
 }
 
-typedef FT_UInt (*GetCharVariantFunction)(FT_Face  face,
-                                          FT_ULong charcode,
-                                          FT_ULong variantSelector);
+using GetCharVariantFunction = FT_UInt (*)(FT_Face, FT_ULong, FT_ULong);
 
 uint32_t
 gfxFT2LockedFace::GetUVSGlyph(uint32_t aCharCode, uint32_t aVariantSelector)

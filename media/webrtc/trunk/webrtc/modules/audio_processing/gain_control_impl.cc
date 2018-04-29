@@ -18,7 +18,7 @@
 
 namespace webrtc {
 
-typedef void Handle;
+using Handle = void;
 
 namespace {
 int16_t MapSetting(GainControl::Mode mode) {

@@ -345,7 +345,7 @@ _getStringOrCopyKey(const char *path, const char *locale,
     return u_terminateUChars(dest, destCapacity, length, pErrorCode);
 }
 
-typedef  int32_t U_CALLCONV UDisplayNameGetter(const char *, char *, int32_t, UErrorCode *);
+using UDisplayNameGetter = int32_t (const char *, char *, int32_t, UErrorCode *);
 
 static int32_t
 _getDisplayNameForComponent(const char *locale,

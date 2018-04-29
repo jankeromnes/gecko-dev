@@ -273,7 +273,7 @@ DecoderTraits::CreateReader(const MediaContainerType& aType,
 bool
 DecoderTraits::IsSupportedType(const MediaContainerType& aType)
 {
-  typedef bool (*IsSupportedFunction)(const MediaContainerType& aType);
+  using IsSupportedFunction = bool (*)(const MediaContainerType &);
   static const IsSupportedFunction funcs[] = {
     &ADTSDecoder::IsSupportedType,
     &FlacDecoder::IsSupportedType,

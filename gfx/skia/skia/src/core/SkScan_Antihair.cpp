@@ -612,7 +612,7 @@ void SkScan::AntiHairRect(const SkRect& rect, const SkRasterClip& clip,
 
 ///////////////////////////////////////////////////////////////////////////////
 
-typedef int FDot8;  // 24.8 integer fixed point
+using FDot8 = int;  // 24.8 integer fixed point
 
 static inline FDot8 SkFixedToFDot8(SkFixed x) {
     return (x + 0x80) >> 8;

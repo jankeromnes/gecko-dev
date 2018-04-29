@@ -636,7 +636,7 @@ private:
     int fVertCount;
     int fIndexCount;
 
-    typedef GrMeshDrawOp INHERITED;
+    using INHERITED = GrMeshDrawOp;
 };
 
 }  // anonymous namespace

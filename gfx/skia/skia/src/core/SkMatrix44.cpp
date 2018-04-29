@@ -744,8 +744,8 @@ void SkMatrix44::mapMScalars(const SkMScalar src[4], SkMScalar dst[4]) const {
 
 #endif
 
-typedef void (*Map2Procf)(const SkMScalar mat[][4], const float src2[], int count, float dst4[]);
-typedef void (*Map2Procd)(const SkMScalar mat[][4], const double src2[], int count, double dst4[]);
+using Map2Procf = void (*)(const SkMScalar (*)[4], const float *, int, float *);
+using Map2Procd = void (*)(const SkMScalar (*)[4], const double *, int, double *);
 
 static void map2_if(const SkMScalar mat[][4], const float* SK_RESTRICT src2,
                     int count, float* SK_RESTRICT dst4) {

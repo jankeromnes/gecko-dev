@@ -130,7 +130,7 @@ U_NAMESPACE_USE
 struct CmpEquivLevel {
     const UChar *start, *s, *limit;
 };
-typedef struct CmpEquivLevel CmpEquivLevel;
+using CmpEquivLevel = struct CmpEquivLevel;
 
 /**
  * Internal option for unorm_cmpEquivFold() for decomposing.

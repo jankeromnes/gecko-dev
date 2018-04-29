@@ -239,7 +239,7 @@ UmaskContext::~UmaskContext()
 
 //-----------------------------------------------------------------------------
 
-typedef void (* ThreadFunc)(void *param);
+using ThreadFunc = void (*)(void *);
 
 #ifdef XP_WIN
 #include <process.h>

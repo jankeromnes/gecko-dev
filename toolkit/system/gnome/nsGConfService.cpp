@@ -52,7 +52,7 @@ GCONF_FUNCTIONS
 
 static PRLibrary *gconfLib = nullptr;
 
-typedef void (*nsGConfFunc)();
+using nsGConfFunc = void (*)();
 struct nsGConfDynamicFunction {
   const char *functionName;
   nsGConfFunc *function;

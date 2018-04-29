@@ -201,7 +201,7 @@ private:
     SkISize fAtlasSize = {0, 0};
     UniformHandle fAtlasSizeInvUniform;
 
-    typedef GrGLSLGeometryProcessor INHERITED;
+    using INHERITED = GrGLSLGeometryProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -487,7 +487,7 @@ private:
     SkISize       fAtlasSize;
     UniformHandle fAtlasSizeInvUniform;
 
-    typedef GrGLSLGeometryProcessor INHERITED;
+    using INHERITED = GrGLSLGeometryProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -782,7 +782,7 @@ private:
     SkISize                                       fAtlasSize;
     UniformHandle                                 fAtlasSizeInvUniform;
 
-    typedef GrGLSLGeometryProcessor INHERITED;
+    using INHERITED = GrGLSLGeometryProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -146,9 +146,7 @@ ucol_sit_letterToAttributeValue(char letter, UErrorCode *status) {
 
 /* function prototype for functions used to parse a short string */
 U_CDECL_BEGIN
-typedef const char* U_CALLCONV
-ActionFunction(CollatorSpec *spec, uint32_t value1, const char* string,
-               UErrorCode *status);
+using ActionFunction = const char *(CollatorSpec *, uint32_t, const char *, UErrorCode *);
 U_CDECL_END
 
 U_CDECL_BEGIN

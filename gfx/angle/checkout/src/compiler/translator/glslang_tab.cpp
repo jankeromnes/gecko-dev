@@ -346,7 +346,7 @@ union YYSTYPE
 
 };
 
-typedef union YYSTYPE YYSTYPE;
+using YYSTYPE = union YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -438,25 +438,25 @@ extern void yyerror(YYLTYPE* yylloc, TParseContext* context, void *scanner, cons
 #ifdef YYTYPE_UINT8
 typedef YYTYPE_UINT8 yytype_uint8;
 #else
-typedef unsigned char yytype_uint8;
+using yytype_uint8 = unsigned char;
 #endif
 
 #ifdef YYTYPE_INT8
 typedef YYTYPE_INT8 yytype_int8;
 #else
-typedef signed char yytype_int8;
+using yytype_int8 = signed char;
 #endif
 
 #ifdef YYTYPE_UINT16
 typedef YYTYPE_UINT16 yytype_uint16;
 #else
-typedef unsigned short int yytype_uint16;
+using yytype_uint16 = unsigned short;
 #endif
 
 #ifdef YYTYPE_INT16
 typedef YYTYPE_INT16 yytype_int16;
 #else
-typedef short int yytype_int16;
+using yytype_int16 = short;
 #endif
 
 #ifndef YYSIZE_T

@@ -40,7 +40,7 @@ class ValidateOutputsTraverser : public TIntermTraverser
     bool mAllowUnspecifiedOutputLocationResolution;
     bool mUsesFragDepth;
 
-    typedef std::vector<TIntermSymbol *> OutputVector;
+    using OutputVector = std::vector<TIntermSymbol *>;
     OutputVector mOutputs;
     OutputVector mUnspecifiedLocationOutputs;
     OutputVector mYuvOutputs;

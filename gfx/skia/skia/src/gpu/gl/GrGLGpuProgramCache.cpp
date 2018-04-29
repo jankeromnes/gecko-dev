@@ -20,7 +20,7 @@
 static const bool c_DisplayCache{false};
 #endif
 
-typedef GrGLSLProgramDataManager::UniformHandle UniformHandle;
+using UniformHandle = GrGLSLProgramDataManager::UniformHandle;
 
 struct GrGLGpu::ProgramCache::Entry {
     Entry(sk_sp<GrGLProgram> program)

@@ -64,7 +64,7 @@ FileID::FileID(const char* path) : path_(path) {}
 template<typename ElfClass>
 static bool ElfClassBuildIDNoteIdentifier(const void *section, size_t length,
                                           wasteful_vector<uint8_t>& identifier) {
-  typedef typename ElfClass::Nhdr Nhdr;
+  using Nhdr = typename ElfClass::Nhdr;
 
   const void* section_end = reinterpret_cast<const char*>(section) + length;
   const Nhdr* note_header = reinterpret_cast<const Nhdr*>(section);

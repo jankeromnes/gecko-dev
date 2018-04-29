@@ -20,7 +20,7 @@ static void *g_pVRModule = NULL;
 static IVRClientCore *g_pHmdSystem = NULL;
 
 
-typedef void* (*VRClientCoreFactoryFn)(const char *pInterfaceName, int *pReturnCode);
+using VRClientCoreFactoryFn = void *(*)(const char *, int *);
 
 static uint32_t g_nVRToken = 0;
 

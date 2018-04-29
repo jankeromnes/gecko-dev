@@ -33,7 +33,7 @@ private:
     UniformHandle fImageIncrementUni;
     UniformHandle fBoundsUni;
 
-    typedef GrGLSLFragmentProcessor INHERITED;
+    using INHERITED = GrGLSLFragmentProcessor;
 };
 
 void GrGLConvolutionEffect::emitCode(EmitArgs& args) {

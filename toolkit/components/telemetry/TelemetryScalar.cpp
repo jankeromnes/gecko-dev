@@ -174,7 +174,7 @@ DynamicScalarInfo::expiration() const
 }
 
 typedef nsBaseHashtableET<nsDepCharHashKey, ScalarKey> CharPtrEntryType;
-typedef AutoHashtable<CharPtrEntryType> ScalarMapType;
+using ScalarMapType = AutoHashtable<CharPtrEntryType>;
 
 // Dynamic scalar definitions.
 StaticAutoPtr<nsTArray<DynamicScalarInfo>> gDynamicScalarInfo;
@@ -836,8 +836,8 @@ KeyedScalar::SizeOfIncludingThis(mozilla::MallocSizeOf aMallocSizeOf)
   return n;
 }
 
-typedef nsUint32HashKey ScalarIDHashKey;
-typedef nsUint32HashKey ProcessIDHashKey;
+using ScalarIDHashKey = nsUint32HashKey;
+using ProcessIDHashKey = nsUint32HashKey;
 typedef nsClassHashtable<ScalarIDHashKey, ScalarBase> ScalarStorageMapType;
 typedef nsClassHashtable<ScalarIDHashKey, KeyedScalar> KeyedScalarStorageMapType;
 typedef nsClassHashtable<ProcessIDHashKey, ScalarStorageMapType> ProcessesScalarsMapType;
@@ -2177,7 +2177,7 @@ TelemetryScalar::CreateSnapshots(unsigned int aDataset, bool aClearScalars, JSCo
 
   // Only lock the mutex while accessing our data, without locking any JS related code.
   typedef mozilla::Pair<const char*, nsCOMPtr<nsIVariant>> DataPair;
-  typedef nsTArray<DataPair> ScalarArray;
+  using ScalarArray = nsTArray<DataPair>;
   nsDataHashtable<ProcessIDHashKey, ScalarArray> scalarsToReflect;
   {
     StaticMutexAutoLock locker(gTelemetryScalarsMutex);
@@ -2307,7 +2307,7 @@ TelemetryScalar::CreateKeyedSnapshots(unsigned int aDataset, bool aClearScalars,
 
   // Only lock the mutex while accessing our data, without locking any JS related code.
   typedef mozilla::Pair<const char*, nsTArray<KeyedScalar::KeyValuePair>> DataPair;
-  typedef nsTArray<DataPair> ScalarArray;
+  using ScalarArray = nsTArray<DataPair>;
   nsDataHashtable<ProcessIDHashKey, ScalarArray> scalarsToReflect;
   {
     StaticMutexAutoLock locker(gTelemetryScalarsMutex);

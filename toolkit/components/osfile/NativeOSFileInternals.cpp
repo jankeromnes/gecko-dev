@@ -83,7 +83,7 @@ struct ArrayBufferContents {
  * RAII for ArrayBufferContents.
  */
 struct ScopedArrayBufferContentsTraits {
-  typedef ArrayBufferContents type;
+  using type = ArrayBufferContents;
   const static type empty() {
     type result = {0, 0};
     return result;

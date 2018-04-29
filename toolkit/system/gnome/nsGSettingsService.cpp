@@ -19,9 +19,9 @@
 
 using namespace mozilla;
 
-typedef struct _GSettings GSettings;
-typedef struct _GVariantType GVariantType;
-typedef struct _GVariant GVariant;
+using GSettings = struct _GSettings;
+using GVariantType = struct _GVariantType;
+using GVariant = struct _GVariant;
 
 #ifndef G_VARIANT_TYPE_INT32
 # define G_VARIANT_TYPE_INT32        ((const GVariantType *) "i")
@@ -244,7 +244,7 @@ nsGSettingsCollection::GetInt(const nsACString& aKey,
 // These types are local to nsGSettingsService::Init, but ISO C++98 doesn't
 // allow a template (ArrayLength) to be instantiated based on a local type.
 // Boo-urns!
-typedef void (*nsGSettingsFunc)();
+using nsGSettingsFunc = void (*)();
 struct nsGSettingsDynamicFunction {
   const char *functionName;
   nsGSettingsFunc *function;

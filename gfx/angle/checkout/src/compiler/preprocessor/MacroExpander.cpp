@@ -23,7 +23,7 @@ const size_t kMaxContextTokens = 10000;
 class TokenLexer : public Lexer
 {
   public:
-    typedef std::vector<Token> TokenVector;
+    using TokenVector = std::vector<Token>;
 
     TokenLexer(TokenVector *tokens)
     {

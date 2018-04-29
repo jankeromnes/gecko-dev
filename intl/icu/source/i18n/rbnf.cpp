@@ -188,7 +188,7 @@ LocalizationInfo::indexForRuleSet(const UChar* ruleset) const {
 }
 
 
-typedef void (*Fn_Deleter)(void*);
+using Fn_Deleter = void (*)(void *);
 
 class VArray {
     void** buf;

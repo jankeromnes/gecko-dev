@@ -1096,7 +1096,7 @@ ucnv_io_countKnownConverters(UErrorCode *pErrorCode) {
 
 U_CDECL_BEGIN
 
-typedef char * U_CALLCONV StripForCompareFn(char *dst, const char *name);
+using StripForCompareFn = char *(char *, const char *);
 U_CDECL_END
 
 

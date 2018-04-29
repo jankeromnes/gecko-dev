@@ -137,7 +137,7 @@ private:
 
     GrGLSLUniformHandler::UniformHandle fAtlasAdjustUniform;
 
-    typedef GrGLSLGeometryProcessor INHERITED;
+    using INHERITED = GrGLSLGeometryProcessor;
 };
 
 GrGLSLPrimitiveProcessor* GrCCPathProcessor::createGLSLInstance(const GrShaderCaps&) const {

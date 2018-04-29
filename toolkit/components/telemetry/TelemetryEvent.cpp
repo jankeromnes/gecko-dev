@@ -171,7 +171,7 @@ enum class RecordEventResult {
   WrongProcess,
 };
 
-typedef nsTArray<EventExtraEntry> ExtraArray;
+using ExtraArray = nsTArray<EventExtraEntry>;
 
 class EventRecord {
 public:
@@ -316,7 +316,7 @@ nsTHashtable<nsCStringHashKey> gEnabledCategories;
 
 // The main event storage. Events are inserted here, keyed by process id and
 // in recording order.
-typedef nsTArray<EventRecord> EventRecordArray;
+using EventRecordArray = nsTArray<EventRecord>;
 nsClassHashtable<nsUint32HashKey, EventRecordArray> gEventRecords;
 
 // The details on dynamic events that are recorded from addons are registered here.

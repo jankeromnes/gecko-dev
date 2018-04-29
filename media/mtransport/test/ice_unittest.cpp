@@ -186,7 +186,7 @@ const unsigned int ICE_TEST_PEER_ALLOW_LOOPBACK = (1 << 1);
 const unsigned int ICE_TEST_PEER_ENABLED_TCP = (1 << 2);
 const unsigned int ICE_TEST_PEER_ALLOW_LINK_LOCAL = (1 << 3);
 
-typedef std::string (*CandidateFilter)(const std::string& candidate);
+using CandidateFilter = std::string (*)(const std::string &);
 
 std::vector<std::string> split(const std::string &s, char delim) {
   std::vector<std::string> elems;

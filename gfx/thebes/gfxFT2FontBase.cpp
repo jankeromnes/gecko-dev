@@ -250,7 +250,7 @@ gfxFT2FontBase::InitMetrics()
 #if MOZ_TREE_FREETYPE
             FT_Set_Var_Design_Coordinates(face, mCoords.Length(), mCoords.Elements());
 #else
-            typedef FT_Error (*SetCoordsFunc)(FT_Face, FT_UInt, FT_Fixed*);
+            using SetCoordsFunc = FT_Error (*)(FT_Face, FT_UInt, FT_Fixed *);
             static SetCoordsFunc setCoords;
             static bool firstTime = true;
             if (firstTime) {
@@ -660,8 +660,8 @@ gfxFT2FontBase::SetupVarCoords(FT_Face aFace,
 {
     aCoords->TruncateLength(0);
     if (aFace->face_flags & FT_FACE_FLAG_MULTIPLE_MASTERS) {
-        typedef FT_Error (*GetVarFunc)(FT_Face, FT_MM_Var**);
-        typedef FT_Error (*DoneVarFunc)(FT_Library, FT_MM_Var*);
+        using GetVarFunc = FT_Error (*)(FT_Face, FT_MM_Var **);
+        using DoneVarFunc = FT_Error (*)(FT_Library, FT_MM_Var *);
 #if MOZ_TREE_FREETYPE
         GetVarFunc getVar = &FT_Get_MM_Var;
         DoneVarFunc doneVar = &FT_Done_MM_Var;

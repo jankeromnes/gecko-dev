@@ -58,7 +58,7 @@ struct SkPDFType0Font final : public SkPDFFont {
     void emitObject(SkWStream*, const SkPDFObjNumMap&) const override;
     bool fPopulated;
 #endif
-    typedef SkPDFDict INHERITED;
+    using INHERITED = SkPDFDict;
 };
 
 struct SkPDFType1Font final : public SkPDFFont {

@@ -43,7 +43,7 @@
 
 #   define IS_MAP(map) ((map)!=NULL)
 #elif MAP_IMPLEMENTATION==MAP_POSIX || MAP_IMPLEMENTATION==MAP_390DLL
-    typedef size_t MemoryMap;
+    using MemoryMap = size_t;
 
 #   define IS_MAP(map) ((map)!=0)
 

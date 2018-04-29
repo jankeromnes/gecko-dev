@@ -1067,7 +1067,7 @@ void SkMatrixPriv::MapHomogeneousPointsWithStride(const SkMatrix& mx, SkPoint3 d
             SkScalar sw = src->fZ;
             src = reinterpret_cast<const SkPoint3*>(reinterpret_cast<const char*>(src) + srcStride);
             const SkScalar* mat = mx.fMat;
-            typedef SkMatrix M;
+            using M = SkMatrix;
             SkScalar x = sdot(sx, mat[M::kMScaleX], sy, mat[M::kMSkewX],  sw, mat[M::kMTransX]);
             SkScalar y = sdot(sx, mat[M::kMSkewY],  sy, mat[M::kMScaleY], sw, mat[M::kMTransY]);
             SkScalar w = sdot(sx, mat[M::kMPersp0], sy, mat[M::kMPersp1], sw, mat[M::kMPersp2]);
@@ -1409,7 +1409,7 @@ bool SkMatrix::Poly4Proc(const SkPoint srcPt[], SkMatrix* dst,
     return true;
 }
 
-typedef bool (*PolyMapProc)(const SkPoint[], SkMatrix*, const SkPoint&);
+using PolyMapProc = bool (*)(const SkPoint *, SkMatrix *, const SkPoint &);
 
 /*  Taken from Rob Johnson's original sample code in QuickDraw GX
 */

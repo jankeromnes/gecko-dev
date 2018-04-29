@@ -426,7 +426,7 @@ private:
 
     const BlendFormula fBlendFormula;
 
-    typedef GrXferProcessor INHERITED;
+    using INHERITED = GrXferProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -488,7 +488,7 @@ private:
 
     void onSetData(const GrGLSLProgramDataManager&, const GrXferProcessor&) override {}
 
-    typedef GrGLSLXferProcessor INHERITED;
+    using INHERITED = GrGLSLXferProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -528,7 +528,7 @@ private:
 
     const SkBlendMode fXfermode;
 
-    typedef GrXferProcessor INHERITED;
+    using INHERITED = GrXferProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -560,7 +560,7 @@ private:
 
     void onSetData(const GrGLSLProgramDataManager&, const GrXferProcessor&) override {}
 
-    typedef GrGLSLXferProcessor INHERITED;
+    using INHERITED = GrGLSLXferProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -611,7 +611,7 @@ private:
     GrColor fBlendConstant;
     uint8_t fAlpha;
 
-    typedef GrXferProcessor INHERITED;
+    using INHERITED = GrXferProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -649,7 +649,7 @@ private:
 
     GrGLSLUniformHandler::UniformHandle fAlphaUniform;
     uint32_t fLastAlpha;
-    typedef GrGLSLXferProcessor INHERITED;
+    using INHERITED = GrGLSLXferProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

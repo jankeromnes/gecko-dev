@@ -327,7 +327,7 @@ private:
     SkSTArray<1, PathData, true> fPaths;
     Helper fHelper;
 
-    typedef GrMeshDrawOp INHERITED;
+    using INHERITED = GrMeshDrawOp;
 };
 
 }  // anonymous namespace

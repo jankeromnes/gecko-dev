@@ -72,7 +72,7 @@ public:
 private:
     const SkBlendMode fMode;
 
-    typedef SkXfermode INHERITED;
+    using INHERITED = SkXfermode;
 };
 
 const char* SkBlendMode_Name(SkBlendMode mode) {

@@ -27,12 +27,12 @@ protected:
     void onSetData(const GrGLSLProgramDataManager&, const GrFragmentProcessor&) override;
 
 private:
-    typedef GrGLSLProgramDataManager::UniformHandle UniformHandle;
+    using UniformHandle = GrGLSLProgramDataManager::UniformHandle;
 
     UniformHandle               fImageIncrementUni;
     GrTextureDomain::GLDomain   fDomain;
 
-    typedef GrGLSLFragmentProcessor INHERITED;
+    using INHERITED = GrGLSLFragmentProcessor;
 };
 
 void GrGLBicubicEffect::emitCode(EmitArgs& args) {

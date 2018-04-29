@@ -181,7 +181,7 @@ public:
         }
 
     private:
-        typedef GrGLSLGeometryProcessor INHERITED;
+        using INHERITED = GrGLSLGeometryProcessor;
 
         UniformHandle fViewMatrixUniform;
     };
@@ -212,7 +212,7 @@ private:
 
     GR_DECLARE_GEOMETRY_PROCESSOR_TEST
 
-    typedef GrGeometryProcessor INHERITED;
+    using INHERITED = GrGeometryProcessor;
 };
 
 class MSAAPathOp final : public GrMeshDrawOp {
@@ -583,7 +583,7 @@ private:
     int fMaxQuadVertices;
     bool fIsIndexed;
 
-    typedef GrMeshDrawOp INHERITED;
+    using INHERITED = GrMeshDrawOp;
 };
 
 }  // anonymous namespace

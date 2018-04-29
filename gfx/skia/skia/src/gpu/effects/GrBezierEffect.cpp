@@ -59,7 +59,7 @@ private:
     UniformHandle fCoverageScaleUniform;
     UniformHandle fViewMatrixUniform;
 
-    typedef GrGLSLGeometryProcessor INHERITED;
+    using INHERITED = GrGLSLGeometryProcessor;
 };
 
 GrGLConicEffect::GrGLConicEffect(const GrGeometryProcessor& processor)
@@ -311,7 +311,7 @@ private:
     UniformHandle fCoverageScaleUniform;
     UniformHandle fViewMatrixUniform;
 
-    typedef GrGLSLGeometryProcessor INHERITED;
+    using INHERITED = GrGLSLGeometryProcessor;
 };
 
 GrGLQuadEffect::GrGLQuadEffect(const GrGeometryProcessor& processor)
@@ -514,7 +514,7 @@ private:
     UniformHandle fViewMatrixUniform;
     UniformHandle fDevKLMUniform;
 
-    typedef GrGLSLGeometryProcessor INHERITED;
+    using INHERITED = GrGLSLGeometryProcessor;
 };
 
 GrGLCubicEffect::GrGLCubicEffect(const GrGeometryProcessor& processor)

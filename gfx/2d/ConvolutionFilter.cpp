@@ -71,7 +71,7 @@ ConvolutionFilter::ConvolveVertically(uint8_t* const* aSrc, uint8_t* aDst, int32
 bool
 ConvolutionFilter::ComputeResizeFilter(ResizeMethod aResizeMethod, int32_t aSrcSize, int32_t aDstSize)
 {
-  typedef SkConvolutionFilter1D::ConvolutionFixed Fixed;
+  using Fixed = SkConvolutionFilter1D::ConvolutionFixed;
 
   UniquePtr<SkBitmapFilter> bitmapFilter;
   switch (aResizeMethod) {

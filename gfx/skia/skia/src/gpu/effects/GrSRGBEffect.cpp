@@ -71,7 +71,7 @@ public:
     }
 
 private:
-    typedef GrGLSLFragmentProcessor INHERITED;
+    using INHERITED = GrGLSLFragmentProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

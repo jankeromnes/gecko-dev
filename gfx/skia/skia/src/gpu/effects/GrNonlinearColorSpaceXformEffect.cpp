@@ -129,7 +129,7 @@ private:
     GrGLSLProgramDataManager::UniformHandle fDstTransferFnUni;
     GrGLSLProgramDataManager::UniformHandle fGamutXformUni;
 
-    typedef GrGLSLFragmentProcessor INHERITED;
+    using INHERITED = GrGLSLFragmentProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

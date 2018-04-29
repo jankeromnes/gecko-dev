@@ -1228,11 +1228,11 @@ protected:
       }
 
     private:
-      typedef size_t Level;
-      typedef std::string Mid;
-      typedef std::string Candidate;
-      typedef std::string Address;
-      typedef uint16_t Port;
+      using Level = size_t;
+      using Mid = std::string;
+      using Candidate = std::string;
+      using Address = std::string;
+      using Port = uint16_t;
       // Default candidates are put into the m-line, c-line, and rtcp
       // attribute for endpoints that don't support ICE.
       std::map<Level,

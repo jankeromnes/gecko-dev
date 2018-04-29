@@ -220,7 +220,7 @@ private:
 
     Helper fHelper;
     SkSTArray<1, RectInfo, true> fRects;
-    typedef GrMeshDrawOp INHERITED;
+    using INHERITED = GrMeshDrawOp;
 };
 
 // We handle perspective in the local matrix or viewmatrix with special ops.
@@ -369,7 +369,7 @@ private:
     SkMatrix fLocalMatrix;
     SkMatrix fViewMatrix;
 
-    typedef GrMeshDrawOp INHERITED;
+    using INHERITED = GrMeshDrawOp;
 };
 
 }  // anonymous namespace

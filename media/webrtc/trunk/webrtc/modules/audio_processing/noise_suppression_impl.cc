@@ -18,7 +18,7 @@
 #define NS_FREE WebRtcNs_Free
 #define NS_INIT WebRtcNs_Init
 #define NS_SET_POLICY WebRtcNs_set_policy
-typedef NsHandle NsState;
+using NsState = NsHandle;
 #elif defined(WEBRTC_NS_FIXED)
 #include "webrtc/modules/audio_processing/ns/noise_suppression_x.h"
 #define NS_CREATE WebRtcNsx_Create

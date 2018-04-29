@@ -45,7 +45,7 @@
 #else
 # include <unistd.h>
 # define NS_main main
-  typedef char NS_tchar;
+  using NS_tchar = char;
 # define NS_T(str) str
 # define NS_tsnprintf snprintf
 # define NS_taccess access

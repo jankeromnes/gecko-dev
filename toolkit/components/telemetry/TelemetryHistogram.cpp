@@ -165,7 +165,7 @@ public:
 
 private:
   typedef nsBaseHashtableET<nsCStringHashKey, Histogram*> KeyedHistogramEntry;
-  typedef AutoHashtable<KeyedHistogramEntry> KeyedHistogramMapType;
+  using KeyedHistogramMapType = AutoHashtable<KeyedHistogramEntry>;
   KeyedHistogramMapType mHistogramMap;
 #if !defined(MOZ_WIDGET_ANDROID)
   KeyedHistogramMapType mSubsessionMap;

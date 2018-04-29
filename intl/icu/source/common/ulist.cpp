@@ -12,7 +12,7 @@
 #include "cstring.h"
 #include "uenumimp.h"
 
-typedef struct UListNode UListNode;
+using UListNode = struct UListNode;
 struct UListNode {
     void *data;
     

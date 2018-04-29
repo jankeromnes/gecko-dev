@@ -46,14 +46,14 @@
 #define BUILD_NETWORK_INFO_SERVICE 1
 #endif
 
-typedef nsCategoryCache<nsIContentSniffer> ContentSnifferCache;
+using ContentSnifferCache = nsCategoryCache<nsIContentSniffer>;
 ContentSnifferCache* gNetSniffers = nullptr;
 ContentSnifferCache* gDataSniffers = nullptr;
 
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "nsIOService.h"
-typedef mozilla::net::nsIOService nsIOService;
+using nsIOService = mozilla::net::nsIOService;
 NS_GENERIC_FACTORY_SINGLETON_CONSTRUCTOR(nsIOService, nsIOService::GetInstance)
 
 #include "nsDNSService2.h"
@@ -61,29 +61,29 @@ NS_GENERIC_FACTORY_SINGLETON_CONSTRUCTOR(nsIDNSService,
   nsDNSService::GetXPCOMSingleton)
 
 #include "nsProtocolProxyService.h"
-typedef mozilla::net::nsProtocolProxyService nsProtocolProxyService;
+using nsProtocolProxyService = mozilla::net::nsProtocolProxyService;
 NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsProtocolProxyService, Init)
 
 #include "nsStreamTransportService.h"
-typedef mozilla::net::nsStreamTransportService nsStreamTransportService;
+using nsStreamTransportService = mozilla::net::nsStreamTransportService;
 NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsStreamTransportService, Init)
 
 #include "nsSocketTransportService2.h"
-typedef mozilla::net::nsSocketTransportService nsSocketTransportService;
+using nsSocketTransportService = mozilla::net::nsSocketTransportService;
 #undef LOG
 #undef LOG_ENABLED
 NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsSocketTransportService, Init)
 
 #include "nsServerSocket.h"
-typedef mozilla::net::nsServerSocket nsServerSocket;
+using nsServerSocket = mozilla::net::nsServerSocket;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsServerSocket)
 
 #include "TLSServerSocket.h"
-typedef mozilla::net::TLSServerSocket TLSServerSocket;
+using TLSServerSocket = mozilla::net::TLSServerSocket;
 NS_GENERIC_FACTORY_CONSTRUCTOR(TLSServerSocket)
 
 #include "nsUDPSocket.h"
-typedef mozilla::net::nsUDPSocket nsUDPSocket;
+using nsUDPSocket = mozilla::net::nsUDPSocket;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsUDPSocket)
 
 #include "nsUDPSocketProvider.h"
@@ -96,7 +96,7 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(nsAsyncStreamCopier)
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsInputStreamPump)
 
 #include "nsInputStreamChannel.h"
-typedef mozilla::net::nsInputStreamChannel nsInputStreamChannel;
+using nsInputStreamChannel = mozilla::net::nsInputStreamChannel;
 NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsInputStreamChannel, Init)
 
 #include "nsDownloader.h"
@@ -119,7 +119,7 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(nsSafeFileOutputStream)
 
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsFileStream)
 
-typedef mozilla::net::nsLoadGroup nsLoadGroup;
+using nsLoadGroup = mozilla::net::nsLoadGroup;
 NS_GENERIC_AGGREGATED_CONSTRUCTOR_INIT(nsLoadGroup, Init)
 
 #include "ArrayBufferInputStream.h"
@@ -132,15 +132,15 @@ NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsEffectiveTLDService, Init)
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsSerializationHelper)
 
 #include "RedirectChannelRegistrar.h"
-typedef mozilla::net::RedirectChannelRegistrar RedirectChannelRegistrar;
+using RedirectChannelRegistrar = mozilla::net::RedirectChannelRegistrar;
 NS_GENERIC_FACTORY_CONSTRUCTOR(RedirectChannelRegistrar)
 
 #include "CacheStorageService.h"
-typedef mozilla::net::CacheStorageService CacheStorageService;
+using CacheStorageService = mozilla::net::CacheStorageService;
 NS_GENERIC_FACTORY_CONSTRUCTOR(CacheStorageService)
 
 #include "LoadContextInfo.h"
-typedef mozilla::net::LoadContextInfoFactory LoadContextInfoFactory;
+using LoadContextInfoFactory = mozilla::net::LoadContextInfoFactory;
 NS_GENERIC_FACTORY_CONSTRUCTOR(LoadContextInfoFactory)
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ namespace net {
 } // namespace mozilla
 
 #include "RequestContextService.h"
-typedef mozilla::net::RequestContextService RequestContextService;
+using RequestContextService = mozilla::net::RequestContextService;
 NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(RequestContextService, Init)
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -181,9 +181,9 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(nsMIMEHeaderParamImpl)
 #include "nsDirIndexParser.h"
 #include "nsDirIndex.h"
 
-typedef mozilla::net::nsRequestObserverProxy nsRequestObserverProxy;
+using nsRequestObserverProxy = mozilla::net::nsRequestObserverProxy;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsRequestObserverProxy)
-typedef mozilla::net::nsSimpleStreamListener nsSimpleStreamListener;
+using nsSimpleStreamListener = mozilla::net::nsSimpleStreamListener;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsSimpleStreamListener)
 NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsDirIndexParser, Init)
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsDirIndex)
@@ -191,7 +191,7 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(nsDirIndex)
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "nsStreamListenerTee.h"
-typedef mozilla::net::nsStreamListenerTee nsStreamListenerTee;
+using nsStreamListenerTee = mozilla::net::nsStreamListenerTee;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsStreamListenerTee)
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -219,9 +219,9 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(nsWifiMonitor)
 // about:blank is mandatory
 #include "nsAboutProtocolHandler.h"
 #include "nsAboutBlank.h"
-typedef mozilla::net::nsAboutProtocolHandler nsAboutProtocolHandler;
-typedef mozilla::net::nsSafeAboutProtocolHandler nsSafeAboutProtocolHandler;
-typedef mozilla::net::nsNestedAboutURI::Mutator nsNestedAboutURIMutator;
+using nsAboutProtocolHandler = mozilla::net::nsAboutProtocolHandler;
+using nsSafeAboutProtocolHandler = mozilla::net::nsSafeAboutProtocolHandler;
+using nsNestedAboutURIMutator = mozilla::net::nsNestedAboutURI::Mutator;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsAboutProtocolHandler)
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsSafeAboutProtocolHandler)
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsNestedAboutURIMutator)
@@ -293,7 +293,7 @@ NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(NamedPipeService, Init)
 #include "nsResProtocolHandler.h"
 #include "ExtensionProtocolHandler.h"
 #include "SubstitutingProtocolHandler.h"
-typedef mozilla::net::SubstitutingURL::Mutator SubstitutingURLMutator;
+using SubstitutingURLMutator = mozilla::net::SubstitutingURL::Mutator;
 NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsResProtocolHandler, Init)
 
 namespace mozilla {
@@ -303,7 +303,7 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(SubstitutingURLMutator)
 } // namespace mozilla
 
 #include "nsViewSourceHandler.h"
-typedef mozilla::net::nsViewSourceHandler nsViewSourceHandler;
+using nsViewSourceHandler = mozilla::net::nsViewSourceHandler;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsViewSourceHandler)
 
 #include "nsDataHandler.h"
@@ -363,12 +363,12 @@ NS_GENERIC_FACTORY_CONSTRUCTOR(nsAuthURLParser)
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsStdURLParser)
 
 #include "nsStandardURL.h"
-typedef mozilla::net::nsStandardURL::Mutator nsStandardURLMutator;
+using nsStandardURLMutator = mozilla::net::nsStandardURL::Mutator;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsStandardURLMutator)
-typedef mozilla::net::nsSimpleURI::Mutator nsSimpleURIMutator;
+using nsSimpleURIMutator = mozilla::net::nsSimpleURI::Mutator;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsSimpleURIMutator)
 
-typedef mozilla::net::nsSimpleNestedURI::Mutator nsSimpleNestedURIMutator;
+using nsSimpleNestedURIMutator = mozilla::net::nsSimpleNestedURI::Mutator;
 NS_GENERIC_FACTORY_CONSTRUCTOR(nsSimpleNestedURIMutator)
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -406,7 +406,7 @@ nsresult NS_NewFTPDirListingConv(nsFTPDirListingConv** result);
 
 #ifdef BUILD_NETWORK_INFO_SERVICE
 #include "nsNetworkInfoService.h"
-typedef mozilla::net::nsNetworkInfoService nsNetworkInfoService;
+using nsNetworkInfoService = mozilla::net::nsNetworkInfoService;
 NS_GENERIC_FACTORY_CONSTRUCTOR_INIT(nsNetworkInfoService, Init)
 #endif // BUILD_NETWORK_INFO_SERVICE
 

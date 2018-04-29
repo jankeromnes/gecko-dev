@@ -93,7 +93,7 @@ public:
     }
 
 private:
-    typedef SkSpriteBlitter INHERITED;
+    using INHERITED = SkSpriteBlitter;
 };
 
 class SkRasterPipelineSpriteBlitter : public SkSpriteBlitter {
@@ -168,7 +168,7 @@ private:
     SkJumper_MemoryCtx fSrcPtr;
     SkColor4f          fPaintColor;
 
-    typedef SkSpriteBlitter INHERITED;
+    using INHERITED = SkSpriteBlitter;
 };
 
 // returning null means the caller will call SkBlitter::Choose() and

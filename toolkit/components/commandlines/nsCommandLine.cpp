@@ -57,12 +57,8 @@ public:
 protected:
   ~nsCommandLine() = default;
 
-  typedef nsresult (*EnumerateHandlersCallback)(nsICommandLineHandler* aHandler,
-					nsICommandLine* aThis,
-					void *aClosure);
-  typedef nsresult (*EnumerateValidatorsCallback)(nsICommandLineValidator* aValidator,
-					nsICommandLine* aThis,
-					void *aClosure);
+  using EnumerateHandlersCallback = nsresult (*)(nsICommandLineHandler *, nsICommandLine *, void *);
+  using EnumerateValidatorsCallback = nsresult (*)(nsICommandLineValidator *, nsICommandLine *, void *);
 
   void appendArg(const char* arg);
   MOZ_MUST_USE nsresult resolveShortcutURL(nsIFile* aFile, nsACString& outURL);

@@ -1756,7 +1756,7 @@ void GrGLGpu::flushScissor(const GrScissorState& scissorState,
 void GrGLGpu::flushWindowRectangles(const GrWindowRectsState& windowState,
                                     const GrGLRenderTarget* rt, GrSurfaceOrigin origin) {
 #ifndef USE_NSIGHT
-    typedef GrWindowRectsState::Mode Mode;
+    using Mode = GrWindowRectsState::Mode;
     SkASSERT(!windowState.enabled() || rt->renderFBOID()); // Window rects can't be used on-screen.
     SkASSERT(windowState.numWindows() <= this->caps()->maxWindowRectangles());
 

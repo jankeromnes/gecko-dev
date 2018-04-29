@@ -1375,7 +1375,7 @@ U_NAMESPACE_END
 struct CmpEquivLevel {
     const UChar *start, *s, *limit;
 };
-typedef struct CmpEquivLevel CmpEquivLevel;
+using CmpEquivLevel = struct CmpEquivLevel;
 
 /**
  * Internal implementation code comparing string with case fold.

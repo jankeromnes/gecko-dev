@@ -42,7 +42,7 @@ U_NAMESPACE_USE
 
 struct BinaryProperty;
 
-typedef UBool BinaryPropertyContains(const BinaryProperty &prop, UChar32 c, UProperty which);
+using BinaryPropertyContains = UBool (const BinaryProperty &, UChar32, UProperty);
 
 struct BinaryProperty {
     int32_t column;  // SRC_PROPSVEC column, or "source" if mask==0
@@ -298,8 +298,8 @@ u_hasBinaryProperty(UChar32 c, UProperty which) {
 
 struct IntProperty;
 
-typedef int32_t IntPropertyGetValue(const IntProperty &prop, UChar32 c, UProperty which);
-typedef int32_t IntPropertyGetMaxValue(const IntProperty &prop, UProperty which);
+using IntPropertyGetValue = int32_t (const IntProperty &, UChar32, UProperty);
+using IntPropertyGetMaxValue = int32_t (const IntProperty &, UProperty);
 
 struct IntProperty {
     int32_t column;  // SRC_PROPSVEC column, or "source" if mask==0

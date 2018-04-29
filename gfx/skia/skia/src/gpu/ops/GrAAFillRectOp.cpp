@@ -353,7 +353,7 @@ private:
     Helper fHelper;
     int fRectCnt;
 
-    typedef GrMeshDrawOp INHERITED;
+    using INHERITED = GrMeshDrawOp;
 };
 
 }  // anonymous namespace

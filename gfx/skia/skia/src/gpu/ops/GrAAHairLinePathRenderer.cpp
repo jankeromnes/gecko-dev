@@ -890,7 +890,7 @@ private:
     GrColor fColor;
     uint8_t fCoverage;
 
-    typedef GrMeshDrawOp INHERITED;
+    using INHERITED = GrMeshDrawOp;
 };
 
 }  // anonymous namespace

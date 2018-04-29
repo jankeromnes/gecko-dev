@@ -599,7 +599,7 @@ enum UResOpenType {
      */
     URES_OPEN_DIRECT
 };
-typedef enum UResOpenType UResOpenType;
+using UResOpenType = enum UResOpenType;
 
 static UResourceDataEntry *entryOpen(const char* path, const char* localeID,
                                      UResOpenType openType, UErrorCode* status) {

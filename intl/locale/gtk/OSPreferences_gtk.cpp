@@ -60,7 +60,7 @@ OSPreferences::ReadRegionalPrefsLocales(nsTArray<nsCString>& aLocaleList)
  * We're taking the current 12/24h settings irrelevant of the locale, because
  * in the UI user selects this setting for all locales.
  */
-typedef GVariant* (*get_value_fn_t)(GSettings*, const gchar*);
+using get_value_fn_t = GVariant *(*)(GSettings *, const gchar *);
 
 static get_value_fn_t
 FindGetValueFunction()

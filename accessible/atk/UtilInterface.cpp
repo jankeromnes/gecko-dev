@@ -16,8 +16,8 @@
 using namespace mozilla;
 using namespace mozilla::a11y;
 
-typedef AtkUtil MaiUtil;
-typedef AtkUtilClass MaiUtilClass;
+using MaiUtil = AtkUtil;
+using MaiUtilClass = AtkUtilClass;
 
 #define MAI_VERSION MOZILLA_VERSION
 #define MAI_NAME "Gecko"

@@ -115,7 +115,7 @@ private:
     SkISize       fAtlasSize;
     UniformHandle fAtlasSizeInvUniform;
 
-    typedef GrGLSLGeometryProcessor INHERITED;
+    using INHERITED = GrGLSLGeometryProcessor;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
