@@ -471,7 +471,7 @@ XRemoteClient::FindBestWindow(const char *aProgram, const char *aUsername,
     // unless it's "any" in which case, we don't care.  If someone did
     // pass in a program name and this window doesn't support that
     // protocol, we don't include it in our list.
-    if (aProgram && strcmp(aProgram, "any")) {
+    if (aProgram && strcmp(aProgram, "any") != 0) {
         status = XGetWindowProperty(mDisplay, w, mMozProgramAtom,
                                     0, (65536 / sizeof(long)),
                                     False, XA_STRING,
@@ -481,7 +481,7 @@ XRemoteClient::FindBestWindow(const char *aProgram, const char *aUsername,
         // If the return name is not the same as what someone passed in,
         // we don't want this window.
         if (data_return) {
-            if (strcmp(aProgram, (const char *)data_return)) {
+            if (strcmp(aProgram, (const char *)data_return) != 0) {
                 XFree(data_return);
                 continue;
             }
@@ -516,7 +516,7 @@ XRemoteClient::FindBestWindow(const char *aProgram, const char *aUsername,
         // if there's a username compare it with what we have
         if (data_return) {
             // If the IDs aren't equal, we don't want this window.
-            if (strcmp(username, (const char *)data_return)) {
+            if (strcmp(username, (const char *)data_return) != 0) {
                 XFree(data_return);
                 continue;
             }
@@ -538,7 +538,7 @@ XRemoteClient::FindBestWindow(const char *aProgram, const char *aUsername,
         // If there's a profile compare it with what we have
         if (data_return) {
             // If the profiles aren't equal, we don't want this window.
-            if (strcmp(aProfile, (const char *)data_return)) {
+            if (strcmp(aProfile, (const char *)data_return) != 0) {
                 XFree(data_return);
                 continue;
             }
@@ -591,7 +591,7 @@ XRemoteClient::FreeLock(Window aWindow)
               (unsigned int) aWindow));
       return NS_ERROR_FAILURE;
   }
-  else if (strcmp((char *)data, mLockData)) {
+  else if (strcmp((char *)data, mLockData) != 0) {
       MOZ_LOG(sRemoteLm, LogLevel::Debug,
              (MOZILLA_LOCK_PROP " was stolen!  Expected \"%s\", saw \"%s\"!\n",
               mLockData, data));

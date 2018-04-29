@@ -2421,7 +2421,7 @@ uloc_acceptLanguageFromHTTP(char *result, int32_t resultAvailable, UAcceptResult
         items[n].locale[slen]=0; // terminate
         int32_t clen = uloc_canonicalize(items[n].locale, tmp, UPRV_LENGTHOF(tmp)-1, status);
         if(U_FAILURE(*status)) return -1;
-        if((clen!=slen) || (uprv_strncmp(items[n].locale, tmp, slen))) {
+        if((clen!=slen) || (uprv_strncmp(items[n].locale, tmp, slen) != 0)) {
             // canonicalization had an effect- copy back
             uprv_strncpy(items[n].locale, tmp, clen);
             items[n].locale[clen] = 0; // terminate

@@ -391,7 +391,7 @@ DecimalFormat::construct(UErrorCode&            status,
         resource = ures_getByKeyWithFallback(resource, ns->getName(), resource, &status);
         resource = ures_getByKeyWithFallback(resource, fgPatterns, resource, &status);
         const UChar *resStr = ures_getStringByKeyWithFallback(resource, fgDecimalFormat, &len, &status);
-        if ( status == U_MISSING_RESOURCE_ERROR && uprv_strcmp(fgLatn,ns->getName())) {
+        if ( status == U_MISSING_RESOURCE_ERROR && uprv_strcmp(fgLatn,ns->getName()) != 0) {
             status = U_ZERO_ERROR;
             resource = ures_getByKeyWithFallback(top, fgNumberElements, resource, &status);
             resource = ures_getByKeyWithFallback(resource, fgLatn, resource, &status);
@@ -528,7 +528,7 @@ DecimalFormat::setupCurrencyAffixPatterns(UErrorCode& status) {
     resource = ures_getByKeyWithFallback(resource, fgPatterns, resource, &error);
     int32_t patLen = 0;
     const UChar *patResStr = ures_getStringByKeyWithFallback(resource, fgCurrencyFormat,  &patLen, &error);
-    if ( error == U_MISSING_RESOURCE_ERROR && uprv_strcmp(ns->getName(),fgLatn)) {
+    if ( error == U_MISSING_RESOURCE_ERROR && uprv_strcmp(ns->getName(),fgLatn) != 0) {
         error = U_ZERO_ERROR;
         resource = ures_getByKeyWithFallback(numElements, fgLatn, resource, &error);
         resource = ures_getByKeyWithFallback(resource, fgPatterns, resource, &error);

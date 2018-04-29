@@ -142,7 +142,7 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
         str += 2;
 
     /* Candidate attr */
-    if (strncasecmp(str, "candidate:", 10))
+    if (strncasecmp(str, "candidate:", 10) != 0)
         ABORT(R_BAD_DATA);
 
     fast_forward(&str, 10);
@@ -229,7 +229,7 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
         ABORT(R_BAD_DATA);
 
     /* Type */
-    if (strncasecmp("typ", str, 3))
+    if (strncasecmp("typ", str, 3) != 0)
         ABORT(R_BAD_DATA);
 
     fast_forward(&str, 3);
@@ -266,7 +266,7 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
         if (*str == '\0')
             ABORT(R_BAD_DATA);
 
-        if (strncasecmp("raddr", str, 5))
+        if (strncasecmp("raddr", str, 5) != 0)
             ABORT(R_BAD_DATA);
 
         fast_forward(&str, 5);
@@ -287,7 +287,7 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
         if (*str == '\0')
             ABORT(R_BAD_DATA);
 
-        if (strncasecmp("rport", str, 5))
+        if (strncasecmp("rport", str, 5) != 0)
               ABORT(R_BAD_DATA);
 
         fast_forward(&str, 5);
@@ -320,7 +320,7 @@ nr_ice_peer_candidate_from_attribute(nr_ice_ctx *ctx,char *orig,nr_ice_media_str
 
     if (transport == IPPROTO_TCP && cand->type != RELAYED) {
       /* Parse tcptype extension per RFC 6544 S 4.5 */
-      if (strncasecmp("tcptype ", str, 8))
+      if (strncasecmp("tcptype ", str, 8) != 0)
         ABORT(R_BAD_DATA);
 
       fast_forward(&str, 8);

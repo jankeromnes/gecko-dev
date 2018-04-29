@@ -356,7 +356,7 @@ int vorbis_synthesis_idheader(ogg_packet *op){
 
     memset(buffer,0,6);
     _v_readstring(&opb,buffer,6);
-    if(memcmp(buffer,"vorbis",6))
+    if(memcmp(buffer,"vorbis",6) != 0)
       return 0; /* not vorbis */
 
     return 1;
@@ -383,7 +383,7 @@ int vorbis_synthesis_headerin(vorbis_info *vi,vorbis_comment *vc,ogg_packet *op)
       int packtype=oggpack_read(&opb,8);
       memset(buffer,0,6);
       _v_readstring(&opb,buffer,6);
-      if(memcmp(buffer,"vorbis",6)){
+      if(memcmp(buffer,"vorbis",6) != 0){
         /* not a vorbis header */
         return(OV_ENOTVORBIS);
       }

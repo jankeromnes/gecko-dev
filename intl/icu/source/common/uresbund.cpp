@@ -2684,7 +2684,7 @@ ures_getFunctionalEquivalent(char *result, int32_t resultCapacity,
         ures_close(res);
     } while(!full[0] && *found && U_SUCCESS(*status));
     
-    if((full[0]==0) && uprv_strcmp(kwVal, defVal)) {
+    if((full[0]==0) && uprv_strcmp(kwVal, defVal) != 0) {
 #if defined(URES_TREE_DEBUG)
         fprintf(stderr, "Failed to locate kw %s - try default %s\n", kwVal, defVal);
 #endif

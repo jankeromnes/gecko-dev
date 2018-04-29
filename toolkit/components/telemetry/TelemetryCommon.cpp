@@ -25,7 +25,7 @@ IsExpiredVersion(const char* aExpiration)
   MOZ_ASSERT(aExpiration);
   // Note: We intentionally don't construct a static Version object here as we
   // saw odd crashes around this (see bug 1334105).
-  return strcmp(aExpiration, "never") && strcmp(aExpiration, "default") &&
+  return strcmp(aExpiration, "never") != 0 && strcmp(aExpiration, "default") &&
     (mozilla::Version(aExpiration) <= MOZ_APP_VERSION);
 }
 

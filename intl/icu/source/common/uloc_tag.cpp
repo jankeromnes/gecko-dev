@@ -823,7 +823,7 @@ _appendVariantsToLanguageTag(const char* localeID, char* appendAt, int32_t capac
 
                     /* validate */
                     if (_isVariantSubtag(pVar, -1)) {
-                        if (uprv_strcmp(pVar,POSIX_VALUE) || len != (int32_t)uprv_strlen(POSIX_VALUE)) {
+                        if (uprv_strcmp(pVar,POSIX_VALUE) != 0 || len != (int32_t)uprv_strlen(POSIX_VALUE)) {
                             /* emit the variant to the list */
                             var = (VariantListEntry*)uprv_malloc(sizeof(VariantListEntry));
                             if (var == NULL) {

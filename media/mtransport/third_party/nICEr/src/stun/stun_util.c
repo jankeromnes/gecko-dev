@@ -221,7 +221,7 @@ nr_stun_different_transaction(UCHAR *msg, int len, nr_stun_message *req)
 
     memcpy(&header, msg, sizeof(header));
 
-    if (memcmp(&req->header.id, &header.id, sizeof(header.id))) {
+    if (memcmp(&req->header.id, &header.id, sizeof(header.id)) != 0) {
         nr_nbin2hex((UCHAR*)&req->header.id, sizeof(req->header.id), reqid, sizeof(reqid), &len2);
         nr_nbin2hex((UCHAR*)&header.id, sizeof(header.id), msgid, sizeof(msgid), &len2);
         r_log(NR_LOG_STUN, LOG_DEBUG, "Mismatched message IDs %s/%s", reqid, msgid);

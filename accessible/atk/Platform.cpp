@@ -301,7 +301,7 @@ a11y::ShouldA11yBeEnabled()
   sPendingCall = nullptr;
   if (!reply ||
       dbus_message_get_type(reply) != DBUS_MESSAGE_TYPE_METHOD_RETURN ||
-      strcmp(dbus_message_get_signature (reply), DBUS_TYPE_VARIANT_AS_STRING))
+      strcmp(dbus_message_get_signature (reply), DBUS_TYPE_VARIANT_AS_STRING) != 0)
     goto dbus_done;
 
   DBusMessageIter iter, iter_variant, iter_struct;

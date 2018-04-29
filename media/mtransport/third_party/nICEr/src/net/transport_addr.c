@@ -378,7 +378,7 @@ int nr_transport_addr_cmp(nr_transport_addr *addr1,nr_transport_addr *addr2,int 
           return(1);
         break;
       case NR_IPV6:
-        if(memcmp(addr1->u.addr6.sin6_addr.s6_addr,addr2->u.addr6.sin6_addr.s6_addr,sizeof(struct in6_addr)))
+        if(memcmp(addr1->u.addr6.sin6_addr.s6_addr,addr2->u.addr6.sin6_addr.s6_addr,sizeof(struct in6_addr)) != 0)
           return(1);
         if(mode < NR_TRANSPORT_ADDR_CMP_MODE_ALL)
           return(0);

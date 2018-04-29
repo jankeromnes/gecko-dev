@@ -362,7 +362,7 @@ gfxPlatformGtk::GetOffscreenFormat()
 void gfxPlatformGtk::FontsPrefsChanged(const char *aPref)
 {
     // only checking for generic substitions, pass other changes up
-    if (strcmp(GFX_PREF_MAX_GENERIC_SUBSTITUTIONS, aPref)) {
+    if (strcmp(GFX_PREF_MAX_GENERIC_SUBSTITUTIONS, aPref) != 0) {
         gfxPlatform::FontsPrefsChanged(aPref);
         return;
     }

@@ -179,11 +179,11 @@ bool GrNonlinearColorSpaceXformEffect::onIsEqual(const GrFragmentProcessor& s) c
         return false;
     }
     if (SkToBool(fOps & kSrcTransfer_Op) &&
-        memcmp(&other.fSrcTransferFnCoeffs, &fSrcTransferFnCoeffs, sizeof(fSrcTransferFnCoeffs))) {
+        memcmp(&other.fSrcTransferFnCoeffs, &fSrcTransferFnCoeffs, sizeof(fSrcTransferFnCoeffs)) != 0) {
         return false;
     }
     if (SkToBool(fOps & kDstTransfer_Op) &&
-        memcmp(&other.fDstTransferFnCoeffs, &fDstTransferFnCoeffs, sizeof(fDstTransferFnCoeffs))) {
+        memcmp(&other.fDstTransferFnCoeffs, &fDstTransferFnCoeffs, sizeof(fDstTransferFnCoeffs)) != 0) {
         return false;
     }
     if (SkToBool(fOps & kGamutXform_Op) && other.fGamutXform != fGamutXform) {

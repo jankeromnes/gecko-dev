@@ -573,7 +573,7 @@ static int ensure_remove_recursive(const NS_tchar *path,
   }
 
   while ((entry = NS_treaddir(dir)) != 0) {
-    if (NS_tstrcmp(entry->d_name, NS_T(".")) &&
+    if (NS_tstrcmp(entry->d_name, NS_T(".")) != 0 &&
         NS_tstrcmp(entry->d_name, NS_T(".."))) {
       NS_tchar childPath[MAXPATHLEN];
       NS_tsnprintf(childPath, sizeof(childPath)/sizeof(childPath[0]),
@@ -830,7 +830,7 @@ static int ensure_copy_recursive(const NS_tchar *path, const NS_tchar *dest,
   }
 
   while ((entry = NS_treaddir(dir)) != 0) {
-    if (NS_tstrcmp(entry->d_name, NS_T(".")) &&
+    if (NS_tstrcmp(entry->d_name, NS_T(".")) != 0 &&
         NS_tstrcmp(entry->d_name, NS_T(".."))) {
       NS_tchar childPath[MAXPATHLEN];
       NS_tsnprintf(childPath, sizeof(childPath)/sizeof(childPath[0]),

@@ -321,7 +321,7 @@ void nsNotifyAddrListener::OnNetlinkMessage(int aNetlinkSocket)
                 ifam = entry.Data();
                 LOG(("nsNotifyAddrListener::OnNetlinkMessage: the address "
                      "already known."));
-                if (memcmp(ifam, newifam, sizeof(struct ifaddrmsg))) {
+                if (memcmp(ifam, newifam, sizeof(struct ifaddrmsg)) != 0) {
                     LOG(("nsNotifyAddrListener::OnNetlinkMessage: but "
                          "the address info has been changed."));
                     networkChange = true;

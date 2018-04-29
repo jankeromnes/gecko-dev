@@ -252,7 +252,7 @@ CurrencyPluralInfo::setupCurrencyPluralPattern(const Locale& loc, UErrorCode& st
     int32_t ptnLen;
     const UChar* numberStylePattern = ures_getStringByKeyWithFallback(rb, gDecimalFormatTag, &ptnLen, &ec);
     // Fall back to "latn" if num sys specific pattern isn't there.
-    if ( ec == U_MISSING_RESOURCE_ERROR && uprv_strcmp(ns->getName(),gLatnTag)) {
+    if ( ec == U_MISSING_RESOURCE_ERROR && uprv_strcmp(ns->getName(),gLatnTag) != 0) {
         ec = U_ZERO_ERROR;
         rb = ures_getByKeyWithFallback(numElements, gLatnTag, rb, &ec);
         rb = ures_getByKeyWithFallback(rb, gPatternsTag, rb, &ec);

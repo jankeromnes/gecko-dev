@@ -54,7 +54,7 @@ static int parse_id_header(AVVorbisParseContext *s,
     }
 
     /* check for header signature */
-    if (memcmp(&buf[1], "vorbis", 6)) {
+    if (memcmp(&buf[1], "vorbis", 6) != 0) {
         av_log(s, AV_LOG_ERROR, "Invalid packet signature in Id header\n");
         return AVERROR_INVALIDDATA;
     }
@@ -91,7 +91,7 @@ static int parse_setup_header(AVVorbisParseContext *s,
     }
 
     /* check for header signature */
-    if (memcmp(&buf[1], "vorbis", 6)) {
+    if (memcmp(&buf[1], "vorbis", 6) != 0) {
         av_log(s, AV_LOG_ERROR, "Invalid packet signature in Setup header\n");
         return AVERROR_INVALIDDATA;
     }

@@ -124,7 +124,7 @@ nr_is_stun_message(UCHAR *buf, int len)
        return 1;
    }
 
-   if (memcmp(&cookie, &buf[4], sizeof(UINT4)))
+   if (memcmp(&cookie, &buf[4], sizeof(UINT4)) != 0)
        return 0;
 
    /* the magic cookie was right, so it's pretty darn likely that what we've
@@ -224,7 +224,7 @@ nr_has_stun_cookie(UCHAR *buf, int len)
    if (sizeof(nr_stun_message_header) > len)
        return 0;
 
-   if (memcmp(&cookie, &buf[4], sizeof(UINT4)))
+   if (memcmp(&cookie, &buf[4], sizeof(UINT4)) != 0)
        return 0;
 
    return 1;
