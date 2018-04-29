@@ -193,7 +193,7 @@ bool MacroExpander::isNextTokenLeftParen()
     return lparen;
 }
 
-bool MacroExpander::pushMacro(std::shared_ptr<Macro> macro, const Token &identifier)
+bool MacroExpander::pushMacro(const std::shared_ptr<Macro>& macro, const Token &identifier)
 {
     ASSERT(!macro->disabled);
     ASSERT(!identifier.expansionDisabled());

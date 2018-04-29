@@ -43,7 +43,7 @@ TransportFlow::~TransportFlow() {
   }
 }
 
-void TransportFlow::DestroyFinal(nsAutoPtr<std::deque<TransportLayer *> > layers) {
+void TransportFlow::DestroyFinal(const nsAutoPtr<std::deque<TransportLayer *> >& layers) {
   ClearLayers(layers.get());
 }
 
@@ -103,7 +103,7 @@ nsresult TransportFlow::PushLayer(TransportLayer *layer) {
 }
 
 // This is all-or-nothing.
-nsresult TransportFlow::PushLayers(nsAutoPtr<std::queue<TransportLayer *> > layers) {
+nsresult TransportFlow::PushLayers(const nsAutoPtr<std::queue<TransportLayer *> >& layers) {
   CheckThread();
 
   MOZ_ASSERT(!layers->empty());

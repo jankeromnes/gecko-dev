@@ -235,7 +235,7 @@ public:
                                           GrSurfaceOrigin origin,
                                           SkColorType colorType,
                                           SkAlphaType alphaType,
-                                          sk_sp<SkColorSpace> colorSpace,
+                                          const sk_sp<SkColorSpace>& colorSpace,
                                           TextureReleaseProc textureReleaseProc,
                                           ReleaseContext releaseContext);
 
@@ -324,7 +324,7 @@ public:
                                                  GrSurfaceOrigin surfaceOrigin,
                                                  SkColorType colorType,
                                                  SkAlphaType alphaType = kPremul_SkAlphaType,
-                                                 sk_sp<SkColorSpace> colorSpace = nullptr);
+                                                 const sk_sp<SkColorSpace>& colorSpace = nullptr);
 
     /** Creates SkImage from copy of yuvTextureHandles, an array of textures on GPU.
         yuvTextureHandles contain pixels for YUV planes of SkImage.

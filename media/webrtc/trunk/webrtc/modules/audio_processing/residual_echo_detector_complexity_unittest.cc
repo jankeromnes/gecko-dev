@@ -74,7 +74,7 @@ void RunStandaloneSubmodule() {
       FormPerformanceMeasureString(timer), "us", false);
 }
 
-void RunTogetherWithApm(std::string test_description,
+void RunTogetherWithApm(const std::string& test_description,
                         bool use_mobile_aec,
                         bool include_default_apm_processing) {
   test::SimulatorBuffers buffers(

@@ -116,7 +116,7 @@ NrIceCtxHandler::CreateCtx(const std::string& ufrag,
 
 
 bool
-NrIceCtxHandler::BeginIceRestart(RefPtr<NrIceCtx> new_ctx)
+NrIceCtxHandler::BeginIceRestart(const RefPtr<NrIceCtx>& new_ctx)
 {
   MOZ_ASSERT(!old_ctx, "existing ice restart in progress");
   if (old_ctx) {

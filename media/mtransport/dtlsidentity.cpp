@@ -154,7 +154,7 @@ RefPtr<DtlsIdentity> DtlsIdentity::Generate() {
 
 const std::string DtlsIdentity::DEFAULT_HASH_ALGORITHM = "sha-256";
 
-nsresult DtlsIdentity::ComputeFingerprint(const std::string algorithm,
+nsresult DtlsIdentity::ComputeFingerprint(const std::string& algorithm,
                                           uint8_t *digest,
                                           size_t size,
                                           size_t *digest_length) const {
@@ -165,7 +165,7 @@ nsresult DtlsIdentity::ComputeFingerprint(const std::string algorithm,
 }
 
 nsresult DtlsIdentity::ComputeFingerprint(const UniqueCERTCertificate& cert,
-                                          const std::string algorithm,
+                                          const std::string& algorithm,
                                           uint8_t *digest,
                                           size_t size,
                                           size_t *digest_length) {

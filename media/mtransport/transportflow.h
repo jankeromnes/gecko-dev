@@ -77,7 +77,7 @@ class TransportFlow final : public nsISupports,
   // Any failures cause the flow to become inoperable and
   // destroys all the layers including those already pushed.
   // TODO(ekr@rtfm.com): Change layers to be ref-counted.
-  nsresult PushLayers(nsAutoPtr<std::queue<TransportLayer *> > layers);
+  nsresult PushLayers(const nsAutoPtr<std::queue<TransportLayer *> >& layers);
 
   TransportLayer *top() const;
   TransportLayer *GetLayer(const std::string& id) const;
@@ -127,7 +127,7 @@ class TransportFlow final : public nsISupports,
   void StateChangeInt(TransportLayer::State state);
   void PacketReceived(TransportLayer* layer, const unsigned char *data,
       size_t len);
-  static void DestroyFinal(nsAutoPtr<std::deque<TransportLayer *> > layers);
+  static void DestroyFinal(const nsAutoPtr<std::deque<TransportLayer *> >& layers);
 
   // Overload needed because we use deque internally and queue externally.
   static void ClearLayers(std::deque<TransportLayer *>* layers);

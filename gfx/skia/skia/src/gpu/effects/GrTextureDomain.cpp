@@ -325,7 +325,7 @@ std::unique_ptr<GrFragmentProcessor> GrDeviceSpaceTextureDecalFragmentProcessor:
 }
 
 GrDeviceSpaceTextureDecalFragmentProcessor::GrDeviceSpaceTextureDecalFragmentProcessor(
-        sk_sp<GrTextureProxy> proxy, const SkIRect& subset, const SkIPoint& deviceSpaceOffset)
+        const sk_sp<GrTextureProxy>& proxy, const SkIRect& subset, const SkIPoint& deviceSpaceOffset)
         : INHERITED(kGrDeviceSpaceTextureDecalFragmentProcessor_ClassID,
                     kCompatibleWithCoverageAsAlpha_OptimizationFlag)
         , fTextureSampler(proxy, GrSamplerState::ClampNearest())

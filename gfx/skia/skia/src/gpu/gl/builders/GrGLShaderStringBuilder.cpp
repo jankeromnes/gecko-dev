@@ -22,7 +22,7 @@ static const bool gPrintSKSL = false;
 static const bool gPrintGLSL = false;
 
 static void print_source_lines_with_numbers(const char* source,
-                                            std::function<void(const char*)> println) {
+                                            const std::function<void(const char*)>& println) {
     SkTArray<SkString> lines;
     SkStrSplit(source, "\n", kStrict_SkStrSplitMode, &lines);
     for (int i = 0; i < lines.count(); ++i) {
@@ -34,7 +34,7 @@ static void print_source_lines_with_numbers(const char* source,
 
 // Prints shaders one line at the time. This ensures they don't get truncated by the adb log.
 static void print_sksl_line_by_line(const char** skslStrings, int* lengths, int count,
-                                    std::function<void(const char*)> println = [](const char* ln) {
+                                    const std::function<void(const char*)>& println = [](const char* ln) {
                                         SkDebugf("%s\n", ln);
                                     }) {
     SkSL::String sksl = GrSKSLPrettyPrint::PrettyPrint(skslStrings, lengths, count, false);
@@ -43,7 +43,7 @@ static void print_sksl_line_by_line(const char** skslStrings, int* lengths, int 
 }
 
 static void print_glsl_line_by_line(const SkSL::String& glsl,
-                                    std::function<void(const char*)> println = [](const char* ln) {
+                                    const std::function<void(const char*)>& println = [](const char* ln) {
                                         SkDebugf("%s\n", ln);
                                     }) {
     println("GLSL:");

@@ -42,12 +42,12 @@ class DtlsIdentity final {
   // expected).
   SSLKEAType auth_type() const { return auth_type_; }
 
-  nsresult ComputeFingerprint(const std::string algorithm,
+  nsresult ComputeFingerprint(const std::string& algorithm,
                               uint8_t *digest,
                               size_t size,
                               size_t *digest_length) const;
   static nsresult ComputeFingerprint(const UniqueCERTCertificate& cert,
-                                     const std::string algorithm,
+                                     const std::string& algorithm,
                                      uint8_t *digest,
                                      size_t size,
                                      size_t *digest_length);

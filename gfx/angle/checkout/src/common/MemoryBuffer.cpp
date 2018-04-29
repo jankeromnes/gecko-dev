@@ -104,7 +104,7 @@ bool ScratchBuffer::getInitialized(size_t requestedSize,
 
 bool ScratchBuffer::getImpl(size_t requestedSize,
                             MemoryBuffer **memoryBufferOut,
-                            Optional<uint8_t> initValue)
+                            const Optional<uint8_t>& initValue)
 {
     if (mScratchMemory.size() == requestedSize)
     {

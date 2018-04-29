@@ -22,6 +22,8 @@
  * limitations under the License.
  */
 
+#include <utility>
+
 #include "pkixder.h"
 #include "pkixgtest.h"
 #include "pkixutil.h"
@@ -498,7 +500,7 @@ class CheckExtendedKeyUsageChainTest
 
 static ByteString
 CreateCert(const char* issuerCN, const char* subjectCN,
-           EndEntityOrCA endEntityOrCA, ByteString encodedEKU)
+           EndEntityOrCA endEntityOrCA, const ByteString& encodedEKU)
 {
   static long serialNumberValue = 0;
   ++serialNumberValue;
@@ -532,7 +534,7 @@ class EKUTrustDomain final : public DefaultCryptoTrustDomain
 {
 public:
   explicit EKUTrustDomain(ByteString issuerCertDER)
-    : mIssuerCertDER(issuerCertDER)
+    : mIssuerCertDER(std::move(issuerCertDER))
   {
   }
 
@@ -600,7 +602,7 @@ static const uint8_t tlv_id_ce_extKeyUsage[] = {
 };
 
 static inline ByteString
-CreateEKUExtension(ByteString ekuOIDs)
+CreateEKUExtension(const ByteString& ekuOIDs)
 {
   return TLV(der::SEQUENCE,
              BytesToByteString(tlv_id_ce_extKeyUsage) +

@@ -218,7 +218,7 @@ UnicodeString::UnicodeString(const UChar *text,
 }
 
 UnicodeString::UnicodeString(UBool isTerminated,
-                             ConstChar16Ptr textPtr,
+                             const ConstChar16Ptr& textPtr,
                              int32_t textLength) {
   fUnion.fFields.fLengthAndFlags = kReadonlyAlias;
   const UChar *text = textPtr;
@@ -873,7 +873,7 @@ UnicodeString::doExtract(int32_t start,
 }
 
 int32_t
-UnicodeString::extract(Char16Ptr dest, int32_t destCapacity,
+UnicodeString::extract(const Char16Ptr& dest, int32_t destCapacity,
                        UErrorCode &errorCode) const {
   int32_t len = length();
   if(U_SUCCESS(errorCode)) {
@@ -1256,7 +1256,7 @@ UnicodeString::getTerminatedBuffer() {
 // setTo() analogous to the readonly-aliasing constructor with the same signature
 UnicodeString &
 UnicodeString::setTo(UBool isTerminated,
-                     ConstChar16Ptr textPtr,
+                     const ConstChar16Ptr& textPtr,
                      int32_t textLength)
 {
   if(fUnion.fFields.fLengthAndFlags & kOpenGetBuffer) {

@@ -64,10 +64,10 @@ static void eat_space_sep_strings(SkTArray<SkString>* out, const char in[]) {
 }
 
 bool GrGLExtensions::init(GrGLStandard standard,
-                          GrGLFunction<GrGLGetStringProc> getString,
-                          GrGLFunction<GrGLGetStringiProc> getStringi,
-                          GrGLFunction<GrGLGetIntegervProc> getIntegerv,
-                          GrGLFunction<GrEGLQueryStringProc> queryString,
+                          const GrGLFunction<GrGLGetStringProc>& getString,
+                          const GrGLFunction<GrGLGetStringiProc>& getStringi,
+                          const GrGLFunction<GrGLGetIntegervProc>& getIntegerv,
+                          const GrGLFunction<GrEGLQueryStringProc>& queryString,
                           GrEGLDisplay eglDisplay) {
     fInitialized = false;
     fStrings->reset();

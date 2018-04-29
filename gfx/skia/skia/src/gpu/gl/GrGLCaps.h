@@ -321,9 +321,9 @@ public:
     /// Does ReadPixels support reading readConfig pixels from a FBO that is surfaceConfig?
     bool readPixelsSupported(GrPixelConfig surfaceConfig,
                              GrPixelConfig readConfig,
-                             std::function<void (GrGLenum, GrGLint*)> getIntegerv,
-                             std::function<bool ()> bindRenderTarget,
-                             std::function<void ()> unbindRenderTarget) const;
+                             const std::function<void (GrGLenum, GrGLint*)>& getIntegerv,
+                             const std::function<bool ()>& bindRenderTarget,
+                             const std::function<void ()>& unbindRenderTarget) const;
 
     bool isCoreProfile() const { return fIsCoreProfile; }
 

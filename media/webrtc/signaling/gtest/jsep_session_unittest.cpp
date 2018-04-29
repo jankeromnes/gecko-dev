@@ -324,7 +324,7 @@ protected:
 
   void
   AddTracksToStream(JsepSessionImpl& side,
-                    const std::string stream_id,
+                    const std::string& stream_id,
                     const std::string& mediatypes,
                     AddTrackMagic magic = ADDTRACK_MAGIC)
   {
@@ -341,7 +341,7 @@ protected:
 
   void
   AddTracksToStream(JsepSessionImpl& side,
-                    const std::string stream_id,
+                    const std::string& stream_id,
                     const std::vector<SdpMediaSection::MediaType>& mediatypes,
                     AddTrackMagic magic = ADDTRACK_MAGIC)
 

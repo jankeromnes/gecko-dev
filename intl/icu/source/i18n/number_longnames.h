@@ -43,7 +43,7 @@ class LongNameHandler : public MicroPropsGenerator, public UMemory {
 
     static void simpleFormatsToModifiers(const UnicodeString *simpleFormats, Field field,
                                          SimpleModifier *output, UErrorCode &status);
-    static void multiSimpleFormatsToModifiers(const UnicodeString *leadFormats, UnicodeString trailFormat,
+    static void multiSimpleFormatsToModifiers(const UnicodeString *leadFormats, const UnicodeString& trailFormat,
                                          Field field, SimpleModifier *output, UErrorCode &status);
 };
 

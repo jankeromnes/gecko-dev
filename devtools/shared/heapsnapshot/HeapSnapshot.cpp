@@ -1367,7 +1367,7 @@ public:
   class NodeData { };
   typedef JS::ubi::BreadthFirst<HeapSnapshotHandler> Traversal;
   bool operator() (Traversal& traversal,
-                   JS::ubi::Node origin,
+                   const JS::ubi::Node& origin,
                    const JS::ubi::Edge& edge,
                    NodeData*,
                    bool first)

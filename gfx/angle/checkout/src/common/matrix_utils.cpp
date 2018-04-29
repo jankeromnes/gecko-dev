@@ -15,7 +15,7 @@ Mat4::Mat4() : Mat4(1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 
 {
 }
 
-Mat4::Mat4(const Matrix<float> generalMatrix) : Matrix(std::vector<float>(16, 0), 4, 4)
+Mat4::Mat4(const Matrix<float>& generalMatrix) : Matrix(std::vector<float>(16, 0), 4, 4)
 {
     unsigned int minCols = std::min((unsigned int)4, generalMatrix.columns());
     unsigned int minRows = std::min((unsigned int)4, generalMatrix.rows());

@@ -1594,7 +1594,7 @@ void NrUdpSocketIpc::connect_i(const nsACString &host, const uint16_t port) {
 }
 
 
-void NrUdpSocketIpc::sendto_i(const net::NetAddr &addr, nsAutoPtr<DataBuffer> buf) {
+void NrUdpSocketIpc::sendto_i(const net::NetAddr &addr, const nsAutoPtr<DataBuffer>& buf) {
   ASSERT_ON_THREAD(io_thread_);
 
   ReentrantMonitorAutoEnter mon(monitor_);
@@ -1643,7 +1643,7 @@ void NrUdpSocketIpc::destroy_i(nsIUDPSocketChild* aChild,
 }
 #endif
 
-void NrUdpSocketIpc::recv_callback_s(RefPtr<nr_udp_message> msg) {
+void NrUdpSocketIpc::recv_callback_s(const RefPtr<nr_udp_message>& msg) {
   ASSERT_ON_THREAD(sts_thread_);
 
   {
@@ -1996,7 +1996,7 @@ void NrTcpSocketIpc::connect_i(const nsACString &remote_addr,
   }
 }
 
-void NrTcpSocketIpc::write_i(nsAutoPtr<InfallibleTArray<uint8_t>> arr,
+void NrTcpSocketIpc::write_i(const nsAutoPtr<InfallibleTArray<uint8_t>>& arr,
                              uint32_t tracking_number) {
   ASSERT_ON_THREAD(io_thread_);
   if (!socket_child_) {

@@ -34,7 +34,7 @@ class TransportLayerIce : public TransportLayer {
 
   virtual ~TransportLayerIce();
 
-  void SetParameters(RefPtr<NrIceMediaStream> stream,
+  void SetParameters(const RefPtr<NrIceMediaStream>& stream,
                      int component);
 
   void ResetOldStream(); // called after successful ice restart

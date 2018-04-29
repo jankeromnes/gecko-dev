@@ -35,7 +35,7 @@ class MacroExpander : public Lexer
     void ungetToken(const Token &token);
     bool isNextTokenLeftParen();
 
-    bool pushMacro(std::shared_ptr<Macro> macro, const Token &identifier);
+    bool pushMacro(const std::shared_ptr<Macro>& macro, const Token &identifier);
     void popMacro();
 
     bool expandMacro(const Macro &macro, const Token &identifier, std::vector<Token> *replacements);

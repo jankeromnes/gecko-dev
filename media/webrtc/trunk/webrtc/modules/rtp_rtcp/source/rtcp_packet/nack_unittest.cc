@@ -8,6 +8,8 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#include <utility>
+
 #include "webrtc/modules/rtp_rtcp/source/rtcp_packet/nack.h"
 
 #include "webrtc/test/gmock.h"
@@ -133,7 +135,7 @@ TEST(RtcpPacketNackTest, CreateFragmented) {
 
   class NackVerifier {
    public:
-    explicit NackVerifier(std::vector<uint16_t> ids) : ids_(ids) {}
+    explicit NackVerifier(std::vector<uint16_t> ids) : ids_(std::move(ids)) {}
     void operator()(uint8_t* data, size_t length) {
       Nack nack;
       EXPECT_TRUE(test::ParseSinglePacket(data, length, &nack));

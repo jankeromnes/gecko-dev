@@ -95,7 +95,7 @@ class MultiTcpSocketTest : public MtransportTest {
     return port | 49152;
   }
 
-  void Create_s(nr_socket_tcp_type tcp_type, std::string stun_server_addr,
+  void Create_s(nr_socket_tcp_type tcp_type, const std::string& stun_server_addr,
                 uint16_t stun_server_port, nr_socket **sock) {
     nr_transport_addr local;
     // Get start of port range for test

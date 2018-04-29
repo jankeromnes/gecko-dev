@@ -6,6 +6,8 @@
 
 #include "nsGeolocation.h"
 
+#include <utility>
+
 #include "mozilla/ClearOnShutdown.h"
 #include "mozilla/dom/ContentChild.h"
 #include "mozilla/dom/PermissionMessageUtils.h"
@@ -157,7 +159,7 @@ public:
   RequestPromptEvent(nsGeolocationRequest* aRequest, nsWeakPtr aWindow)
     : mozilla::Runnable("RequestPromptEvent")
     , mRequest(aRequest)
-    , mWindow(aWindow)
+    , mWindow(std::move(aWindow))
   {
   }
 

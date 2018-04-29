@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <queue>
 #include <sstream>
+#include <utility>
 
 #include "dtlsidentity.h"
 #include "keyhi.h"
@@ -436,7 +437,7 @@ nsresult TransportLayerDtls::SetVerificationAllowAll() {
 }
 
 nsresult
-TransportLayerDtls::SetVerificationDigest(const std::string digest_algorithm,
+TransportLayerDtls::SetVerificationDigest(const std::string& digest_algorithm,
                                           const unsigned char *digest_value,
                                           size_t digest_len) {
   // Defensive programming
@@ -1138,7 +1139,7 @@ SECStatus TransportLayerDtls::GetClientAuthDataHook(void *arg, PRFileDesc *fd,
 
 nsresult TransportLayerDtls::SetSrtpCiphers(std::vector<uint16_t> ciphers) {
   // TODO: We should check these
-  srtp_ciphers_ = ciphers;
+  srtp_ciphers_ = std::move(ciphers);
 
   return NS_OK;
 }

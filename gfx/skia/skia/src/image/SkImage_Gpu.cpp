@@ -30,6 +30,8 @@
 #include "SkBitmapCache.h"
 #include "SkGr.h"
 #include "SkImage_Gpu.h"
+
+#include <utility>
 #include "SkImageCacherator.h"
 #include "SkImageInfoPriv.h"
 #include "SkMipMap.h"
@@ -330,7 +332,7 @@ bool validate_backend_texture(GrContext* ctx, const GrBackendTexture& tex, GrPix
                               SkColorType ct, SkAlphaType at, sk_sp<SkColorSpace> cs) {
     // TODO: Create a SkImageColorInfo struct for color, alpha, and color space so we don't need to
     // create a fake image info here.
-    SkImageInfo info = SkImageInfo::Make(1, 1, ct, at, cs);
+    SkImageInfo info = SkImageInfo::Make(1, 1, ct, at, std::move(cs));
     if (!SkImageInfoIsValidAllowNumericalCS(info)) {
         return false;
     }
@@ -340,7 +342,7 @@ bool validate_backend_texture(GrContext* ctx, const GrBackendTexture& tex, GrPix
 
 sk_sp<SkImage> SkImage::MakeFromTexture(GrContext* ctx,
                                         const GrBackendTexture& tex, GrSurfaceOrigin origin,
-                                        SkColorType ct, SkAlphaType at, sk_sp<SkColorSpace> cs,
+                                        SkColorType ct, SkAlphaType at, const sk_sp<SkColorSpace>& cs,
                                         TextureReleaseProc releaseP, ReleaseContext releaseC) {
     if (!ctx) {
         return nullptr;
@@ -366,7 +368,7 @@ sk_sp<SkImage> SkImage::MakeFromAdoptedTexture(GrContext* ctx,
 sk_sp<SkImage> SkImage::MakeFromAdoptedTexture(GrContext* ctx,
                                                const GrBackendTexture& tex, GrSurfaceOrigin origin,
                                                SkColorType ct, SkAlphaType at,
-                                               sk_sp<SkColorSpace> cs) {
+                                               const sk_sp<SkColorSpace>& cs) {
     GrBackendTexture texCopy = tex;
     if (!validate_backend_texture(ctx, texCopy, &texCopy.fConfig, ct, at, cs)) {
         return nullptr;

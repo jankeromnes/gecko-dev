@@ -8,6 +8,7 @@
 #include <stdint.h>
 
 #include <limits>
+#include <utility>
 
 #include "base/logging.h"
 #include "base/macros.h"
@@ -289,7 +290,7 @@ Elser If(BoolExpr cond, ResultExpr then_result) {
   return Elser(nullptr).ElseIf(std::move(cond), std::move(then_result));
 }
 
-Elser::Elser(cons::List<Clause> clause_list) : clause_list_(clause_list) {
+Elser::Elser(cons::List<Clause> clause_list) : clause_list_(std::move(clause_list)) {
 }
 
 Elser::Elser(const Elser& elser) : clause_list_(elser.clause_list_) {

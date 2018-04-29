@@ -397,7 +397,7 @@ void TParseContext::outOfRangeError(bool isError,
 //
 // Same error message for all places assignments don't work.
 //
-void TParseContext::assignError(const TSourceLoc &line, const char *op, TString left, TString right)
+void TParseContext::assignError(const TSourceLoc &line, const char *op, const TString& left, const TString& right)
 {
     std::stringstream reasonStream;
     reasonStream << "cannot convert from '" << right << "' to '" << left << "'";
@@ -408,7 +408,7 @@ void TParseContext::assignError(const TSourceLoc &line, const char *op, TString 
 //
 // Same error message for all places unary operations don't work.
 //
-void TParseContext::unaryOpError(const TSourceLoc &line, const char *op, TString operand)
+void TParseContext::unaryOpError(const TSourceLoc &line, const char *op, const TString& operand)
 {
     std::stringstream reasonStream;
     reasonStream << "wrong operand type - no operation '" << op
@@ -423,8 +423,8 @@ void TParseContext::unaryOpError(const TSourceLoc &line, const char *op, TString
 //
 void TParseContext::binaryOpError(const TSourceLoc &line,
                                   const char *op,
-                                  TString left,
-                                  TString right)
+                                  const TString& left,
+                                  const TString& right)
 {
     std::stringstream reasonStream;
     reasonStream << "wrong operand types - no operation '" << op
@@ -3521,7 +3521,7 @@ TParameter TParseContext::parseParameterArrayDeclarator(const ImmutableString &n
 
 bool TParseContext::checkUnsizedArrayConstructorArgumentDimensionality(
     const TIntermSequence &arguments,
-    TType type,
+    const TType& type,
     const TSourceLoc &line)
 {
     if (arguments.empty())

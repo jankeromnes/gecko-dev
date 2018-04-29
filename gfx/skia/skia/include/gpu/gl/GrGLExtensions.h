@@ -40,10 +40,10 @@ public:
      * NULL if on desktop GL with version 3.0 or higher. Otherwise it will fail.
      */
     bool init(GrGLStandard standard,
-              GrGLFunction<GrGLGetStringProc> getString,
-              GrGLFunction<GrGLGetStringiProc> getStringi,
-              GrGLFunction<GrGLGetIntegervProc> getIntegerv,
-              GrGLFunction<GrEGLQueryStringProc> queryString = nullptr,
+              const GrGLFunction<GrGLGetStringProc>& getString,
+              const GrGLFunction<GrGLGetStringiProc>& getStringi,
+              const GrGLFunction<GrGLGetIntegervProc>& getIntegerv,
+              const GrGLFunction<GrEGLQueryStringProc>& queryString = nullptr,
               GrEGLDisplay eglDisplay = nullptr);
 
     bool isInitialized() const { return fInitialized; }

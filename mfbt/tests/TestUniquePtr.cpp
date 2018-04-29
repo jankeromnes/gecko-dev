@@ -529,7 +529,7 @@ struct Q
   Q(Q&, char) {}
 
   template<typename T>
-  Q(Q, T&&, int) {}
+  Q(const Q&, T&&, int) {}
 
   Q(int, long, double, void*) {}
 };

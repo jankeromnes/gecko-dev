@@ -182,7 +182,7 @@ struct ListFormatter::ListPatternsSink : public ResourceSink {
 #endif
     virtual ~ListPatternsSink();
 
-    void setAliasedStyle(UnicodeString alias) {
+    void setAliasedStyle(const UnicodeString& alias) {
         int32_t startIndex = alias.indexOf(aliasPrefix, kAliasPrefixLen, 0);
         if (startIndex < 0) {
             return;

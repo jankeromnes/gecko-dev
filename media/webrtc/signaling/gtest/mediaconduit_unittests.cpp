@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <utility>
 #include <vector>
 #include <math.h>
 
@@ -60,10 +61,10 @@ public:
            std::string fileIn, std::string fileOut)
   {
 
-    mSession = aSession;
-    mOtherSession = aOtherSession;
-    iFile = fileIn;
-    oFile = fileOut;
+    mSession = std::move(aSession);
+    mOtherSession = std::move(aOtherSession);
+    iFile = std::move(fileIn);
+    oFile = std::move(fileOut);
  }
 
   //Kick start the test
@@ -320,8 +321,8 @@ public:
                         RefPtr<mozilla::AudioSessionConduit>
                         aOtherSession)
   {
-    mAudioSession = aSession;
-    mOtherAudioSession = aOtherSession;
+    mAudioSession = std::move(aSession);
+    mOtherAudioSession = std::move(aOtherSession);
     mAudio = true;
   }
 
@@ -330,8 +331,8 @@ public:
                        RefPtr<mozilla::VideoSessionConduit>
                        aOtherSession)
   {
-    mVideoSession = aSession;
-    mOtherVideoSession = aOtherSession;
+    mVideoSession = std::move(aSession);
+    mOtherVideoSession = std::move(aOtherSession);
     mVideo = true;
   }
 

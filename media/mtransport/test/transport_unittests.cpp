@@ -10,6 +10,7 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <utility>
 
 #include "mozilla/UniquePtr.h"
 
@@ -433,8 +434,8 @@ class TlsServerKeyExchangeECDHE {
 namespace {
 class TransportTestPeer : public sigslot::has_slots<> {
  public:
-  TransportTestPeer(nsCOMPtr<nsIEventTarget> target, std::string name, MtransportTestUtils* utils)
-      : name_(name), offerer_(name == "P1"), target_(target),
+  TransportTestPeer(nsCOMPtr<nsIEventTarget> target, const std::string& name, MtransportTestUtils* utils)
+      : name_(name), offerer_(name == "P1"), target_(std::move(target)),
         received_packets_(0),received_bytes_(0),flow_(new TransportFlow(name)),
         loopback_(new TransportLayerLoopback()),
         logging_(new TransportLayerLogging()),
@@ -495,7 +496,7 @@ class TransportTestPeer : public sigslot::has_slots<> {
     ASSERT_TRUE(NS_SUCCEEDED(res));
   }
 
-  void SetAlpn(std::string str, bool withDefault, std::string extra = "") {
+  void SetAlpn(const std::string& str, bool withDefault, const std::string& extra = "") {
     std::set<std::string> alpn;
     alpn.insert(str); // the one we want to select
     if (!extra.empty()) {
@@ -886,7 +887,7 @@ class TransportTest : public MtransportTest {
     p2_->SetDtlsAllowAll();
   }
 
-  void SetAlpn(std::string first, std::string second,
+  void SetAlpn(const std::string& first, const std::string& second,
                bool withDefaults = true) {
     if (!first.empty()) {
       p1_->SetAlpn(first, withDefaults, "bogus");

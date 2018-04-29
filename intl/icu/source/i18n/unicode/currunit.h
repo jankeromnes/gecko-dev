@@ -50,7 +50,7 @@ class U_I18N_API CurrencyUnit: public MeasureUnit {
      * then this will be set to a failing value.
      * @stable ICU 3.0
      */
-    CurrencyUnit(ConstChar16Ptr isoCode, UErrorCode &ec);
+    CurrencyUnit(const ConstChar16Ptr& isoCode, UErrorCode &ec);
 
     /**
      * Copy constructor

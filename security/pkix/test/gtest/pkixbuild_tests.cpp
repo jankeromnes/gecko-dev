@@ -31,6 +31,7 @@
 #endif
 
 #include <map>
+#include <utility>
 #include <vector>
 
 #if defined(_MSC_VER) && _MSC_VER < 1900
@@ -260,7 +261,7 @@ class SingleRootTrustDomain : public DefaultCryptoTrustDomain
 {
 public:
   explicit SingleRootTrustDomain(ByteString aRootDER)
-    : rootDER(aRootDER)
+    : rootDER(std::move(aRootDER))
   {
   }
 
@@ -316,7 +317,7 @@ class ExpiredCertTrustDomain final : public SingleRootTrustDomain
 {
 public:
   explicit ExpiredCertTrustDomain(ByteString aRootDER)
-    : SingleRootTrustDomain(aRootDER)
+    : SingleRootTrustDomain(std::move(aRootDER))
   {
   }
 
@@ -525,7 +526,7 @@ class EmbeddedSCTListTestTrustDomain final : public SingleRootTrustDomain
 {
 public:
   explicit EmbeddedSCTListTestTrustDomain(ByteString aRootDER)
-    : SingleRootTrustDomain(aRootDER)
+    : SingleRootTrustDomain(std::move(aRootDER))
   {
   }
 

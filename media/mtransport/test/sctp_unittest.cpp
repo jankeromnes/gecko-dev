@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <utility>
 
 #include "sigslot.h"
 
@@ -63,7 +64,7 @@ class TransportTestPeer : public sigslot::has_slots<> {
  public:
   TransportTestPeer(std::string name, int local_port, int remote_port,
                     MtransportTestUtils* utils)
-      : name_(name), connected_(false),
+      : name_(std::move(name)), connected_(false),
         sent_(0), received_(0),
         flow_(new TransportFlow()),
         loopback_(new TransportLayerLoopback()),

@@ -325,7 +325,7 @@ class Mat4 : public Matrix<float>
 {
   public:
     Mat4();
-    Mat4(const Matrix<float> generalMatrix);
+    Mat4(const Matrix<float>& generalMatrix);
     Mat4(const std::vector<float> &elements);
     Mat4(const float *elements);
     Mat4(float m00,

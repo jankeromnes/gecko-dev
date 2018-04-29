@@ -239,7 +239,7 @@ void LongNameHandler::simpleFormatsToModifiers(const UnicodeString *simpleFormat
     }
 }
 
-void LongNameHandler::multiSimpleFormatsToModifiers(const UnicodeString *leadFormats, UnicodeString trailFormat,
+void LongNameHandler::multiSimpleFormatsToModifiers(const UnicodeString *leadFormats, const UnicodeString& trailFormat,
                                                     Field field, SimpleModifier *output, UErrorCode &status) {
     SimpleFormatter trailCompiled(trailFormat, 1, 1, status);
     if (U_FAILURE(status)) { return; }

@@ -77,7 +77,7 @@ class TransportLayerDtls final : public TransportLayer {
   const std::string& GetNegotiatedAlpn() const { return alpn_; }
 
   nsresult SetVerificationAllowAll();
-  nsresult SetVerificationDigest(const std::string digest_algorithm,
+  nsresult SetVerificationDigest(const std::string& digest_algorithm,
                                  const unsigned char *digest_value,
                                  size_t digest_len);
 

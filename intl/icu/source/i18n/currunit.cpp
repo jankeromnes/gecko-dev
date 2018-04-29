@@ -20,7 +20,7 @@
 
 U_NAMESPACE_BEGIN
 
-CurrencyUnit::CurrencyUnit(ConstChar16Ptr _isoCode, UErrorCode& ec) {
+CurrencyUnit::CurrencyUnit(const ConstChar16Ptr& _isoCode, UErrorCode& ec) {
     *isoCode = 0;
     if (U_SUCCESS(ec)) {
         if (_isoCode != nullptr && u_strlen(_isoCode)==3) {

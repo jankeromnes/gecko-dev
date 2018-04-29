@@ -12,6 +12,7 @@
 #include <limits>
 #include <map>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "sigslot.h"
@@ -463,7 +464,7 @@ class IceTestPeer : public sigslot::has_slots<> {
         NS_DISPATCH_SYNC);
   }
 
-  void SetStunServer(const std::string addr, uint16_t port,
+  void SetStunServer(const std::string& addr, uint16_t port,
                      const char* transport = kNrIceTransportUdp) {
     if (addr.empty()) {
       // Happens when MOZ_DISABLE_NONLOCAL_CONNECTIONS is set
@@ -486,18 +487,18 @@ class IceTestPeer : public sigslot::has_slots<> {
                   TestStunServer::GetInstance(AF_INET)->port());
   }
 
-  void SetTurnServer(const std::string addr, uint16_t port,
-                     const std::string username,
-                     const std::string password,
+  void SetTurnServer(const std::string& addr, uint16_t port,
+                     const std::string& username,
+                     const std::string& password,
                      const char* transport) {
     std::vector<unsigned char> password_vec(password.begin(), password.end());
     SetTurnServer(addr, port, username, password_vec, transport);
   }
 
 
-  void SetTurnServer(const std::string addr, uint16_t port,
-                     const std::string username,
-                     const std::vector<unsigned char> password,
+  void SetTurnServer(const std::string& addr, uint16_t port,
+                     const std::string& username,
+                     const std::vector<unsigned char>& password,
                      const char* transport) {
     std::vector<NrIceTurnServer> turn_servers;
     UniquePtr<NrIceTurnServer> server(NrIceTurnServer::Create(
@@ -506,7 +507,7 @@ class IceTestPeer : public sigslot::has_slots<> {
     ASSERT_TRUE(NS_SUCCEEDED(ice_ctx_->ctx()->SetTurnServers(turn_servers)));
   }
 
-  void SetTurnServers(const std::vector<NrIceTurnServer> servers) {
+  void SetTurnServers(const std::vector<NrIceTurnServer>& servers) {
     ASSERT_TRUE(NS_SUCCEEDED(ice_ctx_->ctx()->SetTurnServers(servers)));
   }
 
@@ -629,7 +630,7 @@ class IceTestPeer : public sigslot::has_slots<> {
                         NrIceCandidate::Type remote,
                         std::string local_transport = kNrIceTransportUdp) {
     expected_local_type_ = local;
-    expected_local_transport_ = local_transport;
+    expected_local_transport_ = std::move(local_transport);
     expected_remote_type_ = remote;
   }
 
@@ -698,7 +699,7 @@ class IceTestPeer : public sigslot::has_slots<> {
 
 
   void RestartIce_s(RefPtr<NrIceCtx> new_ctx) {
-    ice_ctx_->BeginIceRestart(new_ctx);
+    ice_ctx_->BeginIceRestart(std::move(new_ctx));
 
     // set signals for the newly restarted ctx
     ice_ctx_->ctx()->SignalGatheringStateChange.connect(
@@ -846,7 +847,7 @@ class IceTestPeer : public sigslot::has_slots<> {
     return ice_ctx_->ctx()->GetStream(stream)->ParseTrickleCandidate(candidate);
   }
 
-  void DumpCandidate(std::string which, const NrIceCandidate& cand) {
+  void DumpCandidate(const std::string& which, const NrIceCandidate& cand) {
     std::string type;
     std::string tcp_type;
 
@@ -1798,9 +1799,9 @@ class WebRtcIceConnectTest : public StunTest {
     p2_->UseTestStunServer();
   }
 
-  void SetTurnServer(const std::string addr, uint16_t port,
-                     const std::string username,
-                     const std::string password,
+  void SetTurnServer(const std::string& addr, uint16_t port,
+                     const std::string& username,
+                     const std::string& password,
                      const char* transport = kNrIceTransportUdp) {
     p1_->SetTurnServer(addr, port, username, password, transport);
     p2_->SetTurnServer(addr, port, username, password, transport);
@@ -1850,7 +1851,7 @@ class WebRtcIceConnectTest : public StunTest {
   }
 
   void SetExpectedTypes(NrIceCandidate::Type local, NrIceCandidate::Type remote,
-                        std::string transport = kNrIceTransportUdp) {
+                        const std::string& transport = kNrIceTransportUdp) {
     p1_->SetExpectedTypes(local, remote, transport);
     p2_->SetExpectedTypes(local, remote, transport);
   }

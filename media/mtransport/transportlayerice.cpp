@@ -95,7 +95,7 @@ TransportLayerIce::~TransportLayerIce() {
   // No need to do anything here, since we use smart pointers
 }
 
-void TransportLayerIce::SetParameters(RefPtr<NrIceMediaStream> stream,
+void TransportLayerIce::SetParameters(const RefPtr<NrIceMediaStream>& stream,
                                       int component) {
   // Stream could be null in the case of some badly written js that causes
   // us to be in an ICE restart case, but not have valid streams due to

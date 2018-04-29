@@ -65,7 +65,7 @@ class ScratchBuffer final : NonCopyable
     void clear();
 
   private:
-    bool getImpl(size_t requestedSize, MemoryBuffer **memoryBufferOut, Optional<uint8_t> initValue);
+    bool getImpl(size_t requestedSize, MemoryBuffer **memoryBufferOut, const Optional<uint8_t>& initValue);
 
     const uint32_t mLifetime;
     uint32_t mResetCounter;

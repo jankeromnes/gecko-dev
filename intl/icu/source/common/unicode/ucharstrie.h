@@ -208,7 +208,7 @@ public:
      * @return The match/value Result.
      * @stable ICU 4.8
      */
-    UStringTrieResult next(ConstChar16Ptr s, int32_t length);
+    UStringTrieResult next(const ConstChar16Ptr& s, int32_t length);
 
     /**
      * Returns a matching string's value if called immediately after
@@ -268,7 +268,7 @@ public:
          *                  function chaining. (See User Guide for details.)
          * @stable ICU 4.8
          */
-        Iterator(ConstChar16Ptr trieUChars, int32_t maxStringLength, UErrorCode &errorCode);
+        Iterator(const ConstChar16Ptr& trieUChars, int32_t maxStringLength, UErrorCode &errorCode);
 
         /**
          * Iterates from the current state of the specified UCharsTrie.

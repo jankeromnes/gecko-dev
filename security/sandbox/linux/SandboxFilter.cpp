@@ -37,6 +37,7 @@
 #include <sys/utsname.h>
 #include <time.h>
 #include <unistd.h>
+#include <utility>
 #include <vector>
 #include <algorithm>
 
@@ -161,7 +162,7 @@ public:
     static const int flags_optional = CLONE_DETACHED;
 
     return If((flags & ~flags_optional) == flags_required, Allow())
-      .Else(failPolicy);
+      .Else(std::move(failPolicy));
   }
 
   virtual ResultExpr PrctlPolicy() const {

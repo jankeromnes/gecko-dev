@@ -46,7 +46,7 @@ Normalizer::Normalizer(const UnicodeString& str, UNormalizationMode mode) :
     init();
 }
 
-Normalizer::Normalizer(ConstChar16Ptr str, int32_t length, UNormalizationMode mode) :
+Normalizer::Normalizer(const ConstChar16Ptr& str, int32_t length, UNormalizationMode mode) :
     UObject(), fFilteredNorm2(NULL), fNorm2(NULL), fUMode(mode), fOptions(0),
     text(new UCharCharacterIterator(str, length)),
     currentIndex(0), nextIndex(0),
@@ -441,7 +441,7 @@ Normalizer::setText(const CharacterIterator& newText,
 }
 
 void
-Normalizer::setText(ConstChar16Ptr newText,
+Normalizer::setText(const ConstChar16Ptr& newText,
                     int32_t length,
                     UErrorCode &status)
 {

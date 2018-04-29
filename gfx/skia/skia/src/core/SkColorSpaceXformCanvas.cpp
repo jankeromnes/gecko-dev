@@ -7,6 +7,8 @@
 
 #include "SkColorFilter.h"
 #include "SkColorSpaceXformCanvas.h"
+
+#include <utility>
 #include "SkColorSpaceXformer.h"
 #include "SkDrawShadowInfo.h"
 #include "SkGradientShader.h"
@@ -35,7 +37,7 @@ public:
                             std::unique_ptr<SkColorSpaceXformer> xformer)
         : SkNoDrawCanvas(SkIRect::MakeSize(target->getBaseLayerSize()))
         , fTarget(target)
-        , fTargetCS(targetCS)
+        , fTargetCS(std::move(targetCS))
         , fXformer(std::move(xformer))
     {
         // Set the matrix and clip to match |fTarget|.  Otherwise, we'll answer queries for

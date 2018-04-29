@@ -222,7 +222,7 @@ private:
     GrTextureDomain fTextureDomain;
     SkIPoint fDeviceSpaceOffset;
 
-    GrDeviceSpaceTextureDecalFragmentProcessor(sk_sp<GrTextureProxy>,
+    GrDeviceSpaceTextureDecalFragmentProcessor(const sk_sp<GrTextureProxy>&,
                                                const SkIRect&, const SkIPoint&);
     GrDeviceSpaceTextureDecalFragmentProcessor(const GrDeviceSpaceTextureDecalFragmentProcessor&);
 

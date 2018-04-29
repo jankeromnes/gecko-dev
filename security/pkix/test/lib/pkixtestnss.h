@@ -40,7 +40,7 @@ typedef ScopedPtr<SECKEYPublicKey, SECKEY_DestroyPublicKey>
 typedef ScopedPtr<SECKEYPrivateKey, SECKEY_DestroyPrivateKey>
   ScopedSECKEYPrivateKey;
 
-TestKeyPair* CreateTestKeyPair(const TestPublicKeyAlgorithm publicKeyAlg,
+TestKeyPair* CreateTestKeyPair(const TestPublicKeyAlgorithm& publicKeyAlg,
                                const ScopedSECKEYPublicKey& publicKey,
                                const ScopedSECKEYPrivateKey& privateKey);
 

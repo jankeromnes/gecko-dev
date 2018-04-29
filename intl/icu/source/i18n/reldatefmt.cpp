@@ -333,7 +333,7 @@ struct RelDateTimeFmtDataSink : public ResourceSink {
     }
 
     // Utility functions
-    static UDateRelativeDateTimeFormatterStyle styleFromAliasUnicodeString(UnicodeString s) {
+    static UDateRelativeDateTimeFormatterStyle styleFromAliasUnicodeString(const UnicodeString& s) {
         static const UChar narrow[7] = {0x002D, 0x006E, 0x0061, 0x0072, 0x0072, 0x006F, 0x0077};
         static const UChar sshort[6] = {0x002D, 0x0073, 0x0068, 0x006F, 0x0072, 0x0074,};
         if (s.endsWith(narrow, 7)) {

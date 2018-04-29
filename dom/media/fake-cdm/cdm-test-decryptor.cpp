@@ -9,6 +9,7 @@
 
 #include <mutex>
 #include <string>
+#include <utility>
 #include <vector>
 #include <iostream>
 #include <istream>
@@ -110,7 +111,7 @@ template<class Continuation>
 class WriteRecordSuccessTask {
 public:
   WriteRecordSuccessTask(string aId, Continuation aThen)
-    : mId(aId)
+    : mId(std::move(aId))
     , mThen(move(aThen))
   {}
 
@@ -196,7 +197,7 @@ public:
   explicit VerifyAndFinishContinuation(string aValue,
                                        TestManager* aTestManager,
                                        const string& aTestID)
-  : mValue(aValue), mTestmanager(aTestManager), mTestID(aTestID) {}
+  : mValue(std::move(aValue)), mTestmanager(aTestManager), mTestID(aTestID) {}
 
   virtual void operator()(bool aSuccess,
                           const uint8_t* aData,
@@ -218,9 +219,9 @@ class VerifyAndOverwriteContinuation : public ReadContinuation {
 public:
   VerifyAndOverwriteContinuation(string aId, string aValue, string aOverwrite,
                                  TestManager* aTestManager, const string& aTestID)
-    : mId(aId)
-    , mValue(aValue)
-    , mOverwrite(aOverwrite)
+    : mId(std::move(aId))
+    , mValue(std::move(aValue))
+    , mOverwrite(std::move(aOverwrite))
     , mTestmanager(aTestManager)
     , mTestID(aTestID)
   {}

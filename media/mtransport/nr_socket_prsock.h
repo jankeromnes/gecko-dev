@@ -277,14 +277,14 @@ private:
   // Main or private thread executors of the NrSocketBase APIs
   void create_i(const nsACString &host, const uint16_t port);
   void connect_i(const nsACString &host, const uint16_t port);
-  void sendto_i(const net::NetAddr &addr, nsAutoPtr<DataBuffer> buf);
+  void sendto_i(const net::NetAddr &addr, const nsAutoPtr<DataBuffer>& buf);
   void close_i();
 #if defined(MOZILLA_INTERNAL_API) && !defined(MOZILLA_XPCOMRT_API)
   static void destroy_i(nsIUDPSocketChild* aChild,
                         nsCOMPtr<nsIEventTarget>& aStsThread);
 #endif
   // STS thread executor
-  void recv_callback_s(RefPtr<nr_udp_message> msg);
+  void recv_callback_s(const RefPtr<nr_udp_message>& msg);
 
   ReentrantMonitor monitor_; // protects err_and state_
   bool err_;
@@ -371,7 +371,7 @@ private:
                  const nsACString &local_addr,
                  uint16_t local_port,
                  const nsACString &tls_host);
-  void write_i(nsAutoPtr<InfallibleTArray<uint8_t>> buf,
+  void write_i(const nsAutoPtr<InfallibleTArray<uint8_t>>& buf,
                uint32_t tracking_number);
   void close_i();
 

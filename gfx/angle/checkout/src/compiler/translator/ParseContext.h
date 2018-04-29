@@ -109,9 +109,9 @@ class TParseContext : angle::NonCopyable
                            int vecSize,
                            TVector<int> *fieldOffsets);
 
-    void assignError(const TSourceLoc &line, const char *op, TString left, TString right);
-    void unaryOpError(const TSourceLoc &line, const char *op, TString operand);
-    void binaryOpError(const TSourceLoc &line, const char *op, TString left, TString right);
+    void assignError(const TSourceLoc &line, const char *op, const TString& left, const TString& right);
+    void unaryOpError(const TSourceLoc &line, const char *op, const TString& operand);
+    void binaryOpError(const TSourceLoc &line, const char *op, const TString& left, const TString& right);
 
     // Check functions - the ones that return bool return false if an error was generated.
 
@@ -526,7 +526,7 @@ class TParseContext : angle::NonCopyable
     void checkYuvIsNotSpecified(const TSourceLoc &location, bool yuv);
 
     bool checkUnsizedArrayConstructorArgumentDimensionality(const TIntermSequence &arguments,
-                                                            TType type,
+                                                            const TType& type,
                                                             const TSourceLoc &line);
 
     // Will set the size of the outermost array according to geometry shader input layout.

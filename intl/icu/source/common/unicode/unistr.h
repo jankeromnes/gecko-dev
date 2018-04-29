@@ -1475,7 +1475,7 @@ public:
    * @stable ICU 2.0
    */
   int32_t
-  extract(Char16Ptr dest, int32_t destCapacity,
+  extract(const Char16Ptr& dest, int32_t destCapacity,
           UErrorCode &errorCode) const;
 
   /**
@@ -2048,7 +2048,7 @@ public:
    * @stable ICU 2.0
    */
   UnicodeString &setTo(UBool isTerminated,
-                       ConstChar16Ptr text,
+                       const ConstChar16Ptr& text,
                        int32_t textLength);
 
   /**
@@ -3105,7 +3105,7 @@ public:
    * @stable ICU 2.0
    */
   UnicodeString(UBool isTerminated,
-                ConstChar16Ptr text,
+                const ConstChar16Ptr& text,
                 int32_t textLength);
 
   /**

@@ -196,7 +196,7 @@ private:
 
 // This private function is also used by Gecko's PSM test framework
 // (OCSPCommon.cpp).
-TestKeyPair* CreateTestKeyPair(const TestPublicKeyAlgorithm publicKeyAlg,
+TestKeyPair* CreateTestKeyPair(const TestPublicKeyAlgorithm& publicKeyAlg,
                                const ScopedSECKEYPublicKey& publicKey,
                                const ScopedSECKEYPrivateKey& privateKey)
 {

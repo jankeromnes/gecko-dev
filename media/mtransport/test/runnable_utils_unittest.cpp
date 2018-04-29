@@ -74,7 +74,7 @@ class TargetClass {
   void destructor_target(Destructor*) {
   }
 
-  void destructor_target_ref(RefPtr<Destructor> destructor) {
+  void destructor_target_ref(const RefPtr<Destructor>& destructor) {
   }
 
   int *ran_;

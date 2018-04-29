@@ -487,10 +487,10 @@ sk_sp<GrSemaphore> GrResourceProvider::wrapBackendSemaphore(const GrBackendSemap
                                                                       ownership);
 }
 
-void GrResourceProvider::takeOwnershipOfSemaphore(sk_sp<GrSemaphore> semaphore) {
+void GrResourceProvider::takeOwnershipOfSemaphore(const sk_sp<GrSemaphore>& semaphore) {
     semaphore->resetGpu(fGpu);
 }
 
-void GrResourceProvider::releaseOwnershipOfSemaphore(sk_sp<GrSemaphore> semaphore) {
+void GrResourceProvider::releaseOwnershipOfSemaphore(const sk_sp<GrSemaphore>& semaphore) {
     semaphore->resetGpu(nullptr);
 }

@@ -46,7 +46,7 @@ class U_I18N_API CurrencyAmount: public Measure {
      * is invalid, then this will be set to a failing value.
      * @stable ICU 3.0
      */
-    CurrencyAmount(const Formattable& amount, ConstChar16Ptr isoCode,
+    CurrencyAmount(const Formattable& amount, const ConstChar16Ptr& isoCode,
                    UErrorCode &ec);
 
     /**
@@ -59,7 +59,7 @@ class U_I18N_API CurrencyAmount: public Measure {
      * then this will be set to a failing value.
      * @stable ICU 3.0
      */
-    CurrencyAmount(double amount, ConstChar16Ptr isoCode,
+    CurrencyAmount(double amount, const ConstChar16Ptr& isoCode,
                    UErrorCode &ec);
 
     /**

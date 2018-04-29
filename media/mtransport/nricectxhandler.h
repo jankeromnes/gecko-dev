@@ -25,7 +25,7 @@ public:
 
   RefPtr<NrIceCtx> ctx() { return current_ctx; }
 
-  bool BeginIceRestart(RefPtr<NrIceCtx> new_ctx);
+  bool BeginIceRestart(const RefPtr<NrIceCtx>& new_ctx);
   bool IsRestarting() const { return (old_ctx != nullptr); }
   void FinalizeIceRestart();
   void RollbackIceRestart();
