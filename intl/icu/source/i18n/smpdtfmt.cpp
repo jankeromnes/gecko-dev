@@ -1508,9 +1508,9 @@ SimpleDateFormat::subFormat(UnicodeString &appendTo,
     case UDAT_STANDALONE_MONTH_FIELD:
         if ( isHebrewCalendar ) {
            HebrewCalendar *hc = (HebrewCalendar*)&cal;
-           if (hc->isLeapYear(hc->get(UCAL_YEAR,status)) && value == 6 && count >= 3 )
+           if (icu_61::HebrewCalendar::isLeapYear(hc->get(UCAL_YEAR,status)) && value == 6 && count >= 3 )
                value = 13; // Show alternate form for Adar II in leap years in Hebrew calendar.
-           if (!hc->isLeapYear(hc->get(UCAL_YEAR,status)) && value >= 6 && count < 3 )
+           if (!icu_61::HebrewCalendar::isLeapYear(hc->get(UCAL_YEAR,status)) && value >= 6 && count < 3 )
                value--; // Adjust the month number down 1 in Hebrew non-leap years, i.e. Adar is 6, not 7.
         }
         {
@@ -3081,7 +3081,7 @@ int32_t SimpleDateFormat::subParse(const UnicodeString& text, int32_t& start, UC
         // Delayed checking for adjustment of Hebrew month numbers in non-leap years.
         if (saveHebrewMonth >= 0) {
             HebrewCalendar *hc = (HebrewCalendar*)&cal;
-            if (!hc->isLeapYear(value) && saveHebrewMonth >= 6) {
+            if (!icu_61::HebrewCalendar::isLeapYear(value) && saveHebrewMonth >= 6) {
                cal.set(UCAL_MONTH,saveHebrewMonth);
             } else {
                cal.set(UCAL_MONTH,saveHebrewMonth-1);
@@ -3131,7 +3131,7 @@ int32_t SimpleDateFormat::subParse(const UnicodeString& text, int32_t& start, UC
                 HebrewCalendar *hc = (HebrewCalendar*)&cal;
                 if (cal.isSet(UCAL_YEAR)) {
                    UErrorCode status = U_ZERO_ERROR;
-                   if (!hc->isLeapYear(hc->get(UCAL_YEAR,status)) && value >= 6) {
+                   if (!icu_61::HebrewCalendar::isLeapYear(hc->get(UCAL_YEAR,status)) && value >= 6) {
                        cal.set(UCAL_MONTH, value);
                    } else {
                        cal.set(UCAL_MONTH, value - 1);
@@ -3643,7 +3643,7 @@ int32_t SimpleDateFormat::subParse(const UnicodeString& text, int32_t& start, UC
                 HebrewCalendar *hc = (HebrewCalendar*)&cal;
                 if (cal.isSet(UCAL_YEAR)) {
                    UErrorCode status = U_ZERO_ERROR;
-                   if (!hc->isLeapYear(hc->get(UCAL_YEAR,status)) && value >= 6) {
+                   if (!icu_61::HebrewCalendar::isLeapYear(hc->get(UCAL_YEAR,status)) && value >= 6) {
                        cal.set(UCAL_MONTH, value);
                    } else {
                        cal.set(UCAL_MONTH, value - 1);

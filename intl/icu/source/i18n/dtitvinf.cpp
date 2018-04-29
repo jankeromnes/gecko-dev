@@ -351,7 +351,7 @@ struct DateIntervalInfo::DateIntervalSink : public ResourceSink {
                                     const ResourceValue &value, UErrorCode &errorCode) {
         // Check if the pattern has already been stored on the data structure
         IntervalPatternIndex index =
-            dateIntervalInfo.calendarFieldToIntervalIndex(lrgDiffCalUnit, errorCode);
+            icu_61::DateIntervalInfo::calendarFieldToIntervalIndex(lrgDiffCalUnit, errorCode);
         if (U_FAILURE(errorCode)) { return; }
 
         UnicodeString skeleton(currentSkeleton, -1, US_INV);

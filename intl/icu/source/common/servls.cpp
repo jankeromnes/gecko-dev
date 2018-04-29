@@ -81,7 +81,7 @@ ICULocaleService::get(const Locale& locale, int32_t kind, Locale* actualReturn, 
                 result = getKey(*key, &temp, status);
 
                 if (result != NULL) {
-                    key->parseSuffix(temp);
+                    icu_61::ICUServiceKey::parseSuffix(temp);
                     LocaleUtility::initLocaleFromName(temp, *actualReturn);
                 }
             }

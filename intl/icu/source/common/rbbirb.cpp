@@ -149,7 +149,7 @@ RBBIDataHeader *RBBIRuleBuilder::flattenData() {
 
     // Remove whitespace from the rules to make it smaller.
     // The rule parser has already removed comments.
-    fStrippedRules = fScanner->stripRules(fStrippedRules);
+    fStrippedRules = icu_61::RBBIRuleScanner::stripRules(fStrippedRules);
 
     // Calculate the size of each section in the data.
     //   Sizes here are padded up to a multiple of 8 for better memory alignment.

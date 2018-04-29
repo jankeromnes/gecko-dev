@@ -403,7 +403,7 @@ DisplayTable::GetColormapAndVisual(Screen* aScreen, XRenderPictFormat* aFormat,
     nsTArray<DisplayInfo>* displays = &sDisplayTable->mDisplays;
     size_t d = displays->IndexOf(display, 0, FindDisplay());
 
-    if (d == displays->NoIndex) {
+    if (d == nsTArray<DisplayTable::DisplayInfo>::NoIndex) {
         d = displays->Length();
         // Register for notification of display closing, when this info
         // becomes invalid.

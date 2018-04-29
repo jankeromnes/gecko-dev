@@ -92,7 +92,7 @@ ztrans_adoptTo(ZTrans* trans, void* to) {
 
 U_CAPI UClassID U_EXPORT2
 ztrans_getStaticClassID(ZTrans* trans) {
-    return ((TimeZoneTransition*)trans)->TimeZoneTransition::getStaticClassID();
+    return icu_61::TimeZoneTransition::getStaticClassID();
 }
 
 U_CAPI UClassID U_EXPORT2

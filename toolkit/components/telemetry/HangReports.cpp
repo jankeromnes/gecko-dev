@@ -80,7 +80,7 @@ HangReports::PruneStackReferences(const size_t aRemovedStackIndex) {
   // linked to no stacks.
   for (auto iter = mAnnotationInfo.Iter(); !iter.Done(); iter.Next()) {
     nsTArray<uint32_t>& stackIndices = iter.Data()->mHangIndices;
-    size_t toRemove = stackIndices.NoIndex;
+    size_t toRemove = nsTArray<uint32_t>::NoIndex;
     for (size_t k = 0; k < stackIndices.Length(); k++) {
       // Is this index referencing the removed stack?
       if (stackIndices[k] == aRemovedStackIndex) {
@@ -90,7 +90,7 @@ HangReports::PruneStackReferences(const size_t aRemovedStackIndex) {
     }
 
     // Remove the index referencing the old stack from the annotation.
-    if (toRemove != stackIndices.NoIndex) {
+    if (toRemove != nsTArray<uint32_t>::NoIndex) {
       stackIndices.RemoveElementAt(toRemove);
     }
 

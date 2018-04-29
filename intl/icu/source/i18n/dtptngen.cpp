@@ -697,7 +697,7 @@ DateTimePatternGenerator::hackTimes(const UnicodeString& hackPattern, UErrorCode
     UBool gotMm=FALSE;
     for (int32_t i=0; i<fp->itemNumber; ++i) {
         UnicodeString field = fp->items[i];
-        if ( fp->isQuoteLiteral(field) ) {
+        if ( icu_61::FormatParser::isQuoteLiteral(field) ) {
             if ( gotMm ) {
                UnicodeString quoteLiteral;
                fp->getQuoteLiteral(quoteLiteral, &i);
@@ -1410,7 +1410,7 @@ DateTimePatternGenerator::adjustFieldTypes(const UnicodeString& pattern,
     fp->set(pattern);
     for (int32_t i=0; i < fp->itemNumber; i++) {
         UnicodeString field = fp->items[i];
-        if ( fp->isQuoteLiteral(field) ) {
+        if ( icu_61::FormatParser::isQuoteLiteral(field) ) {
 
             UnicodeString quoteLiteral;
             fp->getQuoteLiteral(quoteLiteral, &i);
@@ -1421,7 +1421,7 @@ DateTimePatternGenerator::adjustFieldTypes(const UnicodeString& pattern,
                 newPattern+=field;
                 continue;
             }
-            int32_t canonicalIndex = fp->getCanonicalIndex(field);
+            int32_t canonicalIndex = icu_61::FormatParser::getCanonicalIndex(field);
             if (canonicalIndex < 0) {
                 newPattern+=field;
                 continue;  // don't adjust
@@ -1970,12 +1970,12 @@ DateTimeMatcher::set(const UnicodeString& pattern, FormatParser* fp, PtnSkeleton
         const UnicodeString& value = fp->items[i];
         // don't skip 'a' anymore, dayPeriod handled specially below
 
-        if ( fp->isQuoteLiteral(value) ) {
+        if ( icu_61::FormatParser::isQuoteLiteral(value) ) {
             UnicodeString quoteLiteral;
             fp->getQuoteLiteral(quoteLiteral, &i);
             continue;
         }
-        int32_t canonicalIndex = fp->getCanonicalIndex(value);
+        int32_t canonicalIndex = icu_61::FormatParser::getCanonicalIndex(value);
         if (canonicalIndex < 0 ) {
             continue;
         }

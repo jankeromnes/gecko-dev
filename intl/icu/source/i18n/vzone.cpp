@@ -176,7 +176,7 @@ vzone_countTransitionRules(VZone* zone, UErrorCode& status) {
 
 U_CAPI UClassID U_EXPORT2
 vzone_getStaticClassID(VZone* zone) {
-    return ((VTimeZone*)zone)->VTimeZone::getStaticClassID();
+    return icu_61::VTimeZone::getStaticClassID();
 }
 
 U_CAPI UClassID U_EXPORT2

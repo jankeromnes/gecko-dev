@@ -140,7 +140,7 @@ izrule_getPreviousStart(IZRule* rule, UDate base, int32_t prevRawOffset,
 
 U_CAPI UClassID U_EXPORT2
 izrule_getStaticClassID(IZRule* rule) {
-    return ((InitialTimeZoneRule*)rule)->InitialTimeZoneRule::getStaticClassID();
+    return icu_61::InitialTimeZoneRule::getStaticClassID();
 }
 
 U_CAPI UClassID U_EXPORT2

@@ -159,7 +159,7 @@ unsigned int HLSLVariableRegisterCount(const Uniform &variable, ShShaderOutput o
     HLSLBlockEncoder encoder(HLSLBlockEncoder::GetStrategyFor(outputType), true);
     HLSLVariableRegisterCount(variable, &encoder);
 
-    const size_t registerBytes = (encoder.BytesPerComponent * encoder.ComponentsPerRegister);
+    const size_t registerBytes = (sh::HLSLBlockEncoder::BytesPerComponent * sh::HLSLBlockEncoder::ComponentsPerRegister);
     return static_cast<unsigned int>(rx::roundUp<size_t>(encoder.getBlockSize(), registerBytes) /
                                      registerBytes);
 }

@@ -376,7 +376,7 @@ TString OutputHLSL::generateStructMapping(const std::vector<MappedStruct> &std14
                 unsigned int instanceStringArrayIndex = GL_INVALID_INDEX;
                 if (isInstanceArray)
                     instanceStringArrayIndex = instanceArrayIndex;
-                TString instanceString = mUniformHLSL->UniformBlockInstanceString(
+                TString instanceString = sh::UniformHLSL::UniformBlockInstanceString(
                     instanceName, instanceStringArrayIndex);
                 originalName += instanceString;
                 mappedName += instanceString;
@@ -1266,7 +1266,7 @@ bool OutputHLSL::visitBinary(Visit visit, TIntermBinary *node)
                             new TReferencedBlock(interfaceBlock, &instanceArraySymbol->variable());
                     }
                     const int arrayIndex = node->getRight()->getAsConstantUnion()->getIConst(0);
-                    out << mUniformHLSL->UniformBlockInstanceString(instanceArraySymbol->getName(),
+                    out << sh::UniformHLSL::UniformBlockInstanceString(instanceArraySymbol->getName(),
                                                                     arrayIndex);
                     return false;
                 }

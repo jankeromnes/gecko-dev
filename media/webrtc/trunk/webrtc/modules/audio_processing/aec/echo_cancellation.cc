@@ -126,9 +126,9 @@ void* WebRtcAec_Create() {
   if (!aecpc) {
     return NULL;
   }
-  aecpc->data_dumper.reset(new ApmDataDumper(aecpc->instance_count));
+  aecpc->data_dumper.reset(new ApmDataDumper(webrtc::Aec::instance_count));
 
-  aecpc->aec = WebRtcAec_CreateAec(aecpc->instance_count);
+  aecpc->aec = WebRtcAec_CreateAec(webrtc::Aec::instance_count);
   if (!aecpc->aec) {
     WebRtcAec_Free(aecpc);
     return NULL;
@@ -150,7 +150,7 @@ void* WebRtcAec_Create() {
 
   aecpc->initFlag = 0;
 
-  aecpc->instance_count++;
+  webrtc::Aec::instance_count++;
   return aecpc;
 }
 

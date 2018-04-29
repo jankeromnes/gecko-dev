@@ -523,7 +523,7 @@ hb_ot_hide_default_ignorables (hb_ot_shape_context_t *c)
 	    unsigned int mask = info[i].mask;
 	    unsigned int old_cluster = info[j - 1].cluster;
 	    for (unsigned k = j; k && info[k - 1].cluster == old_cluster; k--)
-	      buffer->set_cluster (info[k - 1], cluster, mask);
+	      hb_buffer_t::set_cluster (info[k - 1], cluster, mask);
 	  }
 	  continue;
 	}
