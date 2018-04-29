@@ -26,7 +26,7 @@ public:
   {
   }
 
-  T operator++(int)
+  const T operator++(int)
   {
     if (!mMaxIncrement) {
       MOZ_CRASH("overflow detected");
