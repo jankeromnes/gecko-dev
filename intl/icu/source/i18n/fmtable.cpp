@@ -469,10 +469,10 @@ Formattable::getInt64(UErrorCode& status) const
             int64_t val = fDecimalNum->getInt64();
             if (val != 0) {
                 return val;
-            } else {
+            } 
                 status = U_INVALID_FORMAT_ERROR;
                 return fValue.fDouble > 0 ? U_INT64_MAX : U_INT64_MIN;
-            }
+            
         } else {
             return (int64_t)fValue.fDouble;
         } 
@@ -707,9 +707,9 @@ StringPiece Formattable::getDecimalNumber(UErrorCode &status) {
     CharString *decimalStr = internalGetCharString(status);
     if(decimalStr == NULL) {
       return ""; // getDecimalNumber returns "" for error cases
-    } else {
+    } 
       return decimalStr->toStringPiece();
-    }
+    
 }
 
 CharString *Formattable::internalGetCharString(UErrorCode &status) {
@@ -1011,7 +1011,7 @@ ufmt_getArrayItemByIndex(UFormattable* fmt, int32_t n, UErrorCode *status) {
   (void)obj->getArray(count, *status);
   if(U_FAILURE(*status)) {
     return NULL;
-  } else if(n<0 || n>=count) {
+  } if(n<0 || n>=count) {
     setError(*status, U_INDEX_OUTOFBOUNDS_ERROR);
     return NULL;
   } else {
@@ -1032,12 +1032,12 @@ ufmt_getDecNumChars(UFormattable *fmt, int32_t *len, UErrorCode *status) {
   if(charString == NULL) {
     *status = U_MEMORY_ALLOCATION_ERROR;
     return "";
-  } else {
+  } 
     if(len!=NULL) {
       *len = charString->length();
     }
     return charString->data();
-  }
+  
 }
 
 U_DRAFT int64_t U_EXPORT2

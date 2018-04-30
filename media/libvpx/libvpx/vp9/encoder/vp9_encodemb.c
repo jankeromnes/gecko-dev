@@ -582,9 +582,9 @@ static void encode_block(int plane, int block, int row, int col,
         p->eobs[block] = 0;
         *a = *l = 0;
         return;
-      } else {
+      } 
         vp9_xform_quant_fp(x, plane, block, row, col, plane_bsize, tx_size);
-      }
+      
     } else {
       if (max_txsize_lookup[plane_bsize] == tx_size) {
         int txfm_blk_index = (plane << 2) + (block >> (tx_size << 1));

@@ -32,9 +32,9 @@ U_CAPI UDateTimePatternGenerator * U_EXPORT2
 udatpg_open(const char *locale, UErrorCode *pErrorCode) {
     if(locale==NULL) {
         return (UDateTimePatternGenerator *)DateTimePatternGenerator::createInstance(*pErrorCode);
-    } else {
+    } 
         return (UDateTimePatternGenerator *)DateTimePatternGenerator::createInstance(Locale(locale), *pErrorCode);
-    }
+    
 }
 
 U_CAPI UDateTimePatternGenerator * U_EXPORT2

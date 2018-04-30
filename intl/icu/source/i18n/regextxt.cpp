@@ -35,9 +35,9 @@ uregex_utext_unescape_charAt(int32_t offset, void *ct) {
     // !!!: Doesn't handle characters outside BMP
     if (U_IS_BMP(c)) {
         return (UChar)c;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 U_CFUNC UChar U_CALLCONV

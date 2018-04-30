@@ -215,7 +215,7 @@ CollationLoader::createCacheEntry(UErrorCode &errorCode) {
     // loadFromCollations() will recurse to itself as well for collation type fallback.
     if(bundle == NULL) {
         return loadFromLocale(errorCode);
-    } else if(collations == NULL) {
+    } if(collations == NULL) {
         return loadFromBundle(errorCode);
     } else if(data == NULL) {
         return loadFromCollations(errorCode);
@@ -245,9 +245,9 @@ CollationLoader::loadFromLocale(UErrorCode &errorCode) {
     }
     if(locale != requestedLocale) {
         return getCacheEntry(errorCode);
-    } else {
+    } 
         return loadFromBundle(errorCode);
-    }
+    
 }
 
 const CollationCacheEntry *
@@ -297,7 +297,7 @@ CollationLoader::loadFromBundle(UErrorCode &errorCode) {
         }
         locale.setKeywordValue("collation", type, errorCode);
         return getCacheEntry(errorCode);
-    } else {
+    } 
         if(uprv_strcmp(type, defaultType) == 0) {
             typesTried |= TRIED_DEFAULT;
         }
@@ -308,7 +308,7 @@ CollationLoader::loadFromBundle(UErrorCode &errorCode) {
             typesTried |= TRIED_STANDARD;
         }
         return loadFromCollations(errorCode);
-    }
+    
 }
 
 const CollationCacheEntry *
@@ -372,9 +372,9 @@ CollationLoader::loadFromCollations(UErrorCode &errorCode) {
         locale.setKeywordValue("collation", type, errorCode);
         const CollationCacheEntry *entry = getCacheEntry(errorCode);
         return makeCacheEntry(validLocale, entry, errorCode);
-    } else {
+    } 
         return loadFromData(errorCode);
-    }
+    
 }
 
 const CollationCacheEntry *
@@ -452,9 +452,9 @@ CollationLoader::loadFromData(UErrorCode &errorCode) {
     if(entry == NULL) {
         errorCode = U_MEMORY_ALLOCATION_ERROR;
         return nullptr;
-    } else {
+    } 
         t.orphan();
-    }
+    
     // Have to add that reference that we promise.
     entry->addRef();
     return entry;

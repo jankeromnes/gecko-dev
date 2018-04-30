@@ -651,7 +651,7 @@ Region::contains(const Region &other) const {
     }
     if (containedRegions->contains((void *)&other.idStr)) {
         return TRUE;
-    } else {
+    } 
         for ( int32_t i = 0 ; i < containedRegions->size() ; i++ ) {
             UnicodeString *crStr = (UnicodeString *)containedRegions->elementAt(i);
             Region *cr = (Region *) uhash_get(regionIDMap,(void *)crStr);
@@ -659,7 +659,7 @@ Region::contains(const Region &other) const {
                 return TRUE;
             }
         }
-    }
+    
 
     return FALSE;
 }

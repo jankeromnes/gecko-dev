@@ -366,9 +366,9 @@ enumCnERange(const void *context, UChar32 start, UChar32 end, uint32_t ce32) {
         // Collect the set of code points with mappings in the tailoring data.
         if(ce32 == Collation::FALLBACK_CE32) {
             return TRUE;  // fallback to base, not tailored
-        } else {
+        } 
             cne->tailored.add(start, end);
-        }
+        
         // checkTailored > 0: Exclude tailored ranges from the base data enumeration.
     } else if(start == end) {
         if(cne->tailored.contains(start)) {

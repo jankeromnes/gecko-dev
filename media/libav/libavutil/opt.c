@@ -475,7 +475,7 @@ static void opt_list(void *obj, void *av_log_obj, const char *unit,
          */
         if (!unit && opt->type==AV_OPT_TYPE_CONST)
             continue;
-        else if (unit && opt->type!=AV_OPT_TYPE_CONST)
+        if (unit && opt->type!=AV_OPT_TYPE_CONST)
             continue;
         else if (unit && opt->type==AV_OPT_TYPE_CONST && strcmp(unit, opt->unit))
             continue;

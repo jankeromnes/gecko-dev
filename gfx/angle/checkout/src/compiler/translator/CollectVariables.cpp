@@ -330,10 +330,10 @@ InterfaceBlock *CollectVariablesTraverser::recordGLInUsed(const TType &glInType)
         mInBlocks->push_back(info);
         return &mInBlocks->back();
     }
-    else
-    {
+    
+    
         return FindVariable(ImmutableString("gl_PerVertex"), mInBlocks);
-    }
+    
 }
 
 // We want to check whether a uniform/varying is statically used

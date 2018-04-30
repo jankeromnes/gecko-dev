@@ -156,12 +156,12 @@ CollationWeights::incWeight(uint32_t weight, int32_t length) const {
         uint32_t byte=getWeightByte(weight, length);
         if(byte<maxBytes[length]) {
             return setWeightByte(weight, length, byte+1);
-        } else {
+        } 
             // Roll over, set this byte to the minimum and increment the previous one.
             weight=setWeightByte(weight, length, minBytes[length]);
             --length;
             U_ASSERT(length > 0);
-        }
+        
     }
 }
 
@@ -171,14 +171,14 @@ CollationWeights::incWeightByOffset(uint32_t weight, int32_t length, int32_t off
         offset += getWeightByte(weight, length);
         if((uint32_t)offset <= maxBytes[length]) {
             return setWeightByte(weight, length, offset);
-        } else {
+        } 
             // Split the offset between this byte and the previous one.
             offset -= minBytes[length];
             weight = setWeightByte(weight, length, minBytes[length] + offset % countBytes(length));
             offset /= countBytes(length);
             --length;
             U_ASSERT(length > 0);
-        }
+        
     }
 }
 
@@ -200,7 +200,7 @@ compareRanges(const void * /*context*/, const void *left, const void *right) {
     r=((const CollationWeights::WeightRange *)right)->start;
     if(l<r) {
         return -1;
-    } else if(l>r) {
+    } if(l>r) {
         return 1;
     } else {
         return 0;
@@ -548,7 +548,7 @@ uint32_t
 CollationWeights::nextWeight() {
     if(rangeIndex >= rangeCount) {
         return 0xffffffff;
-    } else {
+    } 
         /* get the next weight */
         WeightRange &range = ranges[rangeIndex];
         uint32_t weight = range.start;
@@ -562,7 +562,7 @@ CollationWeights::nextWeight() {
         }
 
         return weight;
-    }
+    
 }
 
 U_NAMESPACE_END

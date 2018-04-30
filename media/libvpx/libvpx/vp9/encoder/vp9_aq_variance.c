@@ -168,7 +168,7 @@ static unsigned int block_variance(VP9_COMP *cpi, MACROBLOCK *x,
 #endif  // CONFIG_VP9_HIGHBITDEPTH
     var = sse - (unsigned int)(((int64_t)avg * avg) / (bw * bh));
     return (unsigned int)(((uint64_t)256 * var) / (bw * bh));
-  } else {
+  } 
 #if CONFIG_VP9_HIGHBITDEPTH
     if (xd->cur_buf->flags & YV12_FLAG_HIGHBITDEPTH) {
       var =
@@ -183,7 +183,7 @@ static unsigned int block_variance(VP9_COMP *cpi, MACROBLOCK *x,
                              vp9_64_zeros, 0, &sse);
 #endif  // CONFIG_VP9_HIGHBITDEPTH
     return (unsigned int)(((uint64_t)256 * var) >> num_pels_log2_lookup[bs]);
-  }
+  
 }
 
 double vp9_log_block_var(VP9_COMP *cpi, MACROBLOCK *x, BLOCK_SIZE bs) {

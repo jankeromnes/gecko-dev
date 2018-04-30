@@ -993,7 +993,7 @@ _fromUnicodeWithCallback(UConverterFromUnicodeArgs *pArgs, UErrorCode *err) {
                      * (continue converting by breaking out of only the inner loop)
                      */
                     break;
-                } else if(realSource!=NULL) {
+                } if(realSource!=NULL) {
                     /* switch back from replaying to the real source and continue */
                     pArgs->source=realSource;
                     pArgs->sourceLimit=realSourceLimit;
@@ -1438,7 +1438,7 @@ _toUnicodeWithCallback(UConverterToUnicodeArgs *pArgs, UErrorCode *err) {
                      * (continue converting by breaking out of only the inner loop)
                      */
                     break;
-                } else if(realSource!=NULL) {
+                } if(realSource!=NULL) {
                     /* switch back from replaying to the real source and continue */
                     pArgs->source=realSource;
                     pArgs->sourceLimit=realSourceLimit;
@@ -1940,7 +1940,7 @@ ucnv_getNextUChar(UConverter *cnv,
                 /* reset the converter without calling the callback function */
                 _reset(cnv, UCNV_RESET_TO_UNICODE, FALSE);
                 return 0xffff; /* no output */
-            } else if(U_SUCCESS(*err) && c>=0) {
+            } if(U_SUCCESS(*err) && c>=0) {
                 return c;
             /*
              * else fall through to use _toUnicode() because
@@ -2286,7 +2286,7 @@ ucnv_convertEx(UConverter *targetCnv, UConverter *sourceCnv,
             convert(&fromUArgs, &toUArgs, pErrorCode);
             if(*pErrorCode==U_BUFFER_OVERFLOW_ERROR) {
                 break;
-            } else if(U_FAILURE(*pErrorCode)) {
+            } if(U_FAILURE(*pErrorCode)) {
                 if(sourceCnv->toULength>0) {
                     /*
                      * Fall through to calling _toUnicodeWithCallback()
@@ -2790,14 +2790,14 @@ ucnv_detectUnicodeSignature( const char* source,
     if(start[0] == '\xFE' && start[1] == '\xFF') {
         *signatureLength=2;
         return  "UTF-16BE";
-    } else if(start[0] == '\xFF' && start[1] == '\xFE') {
+    } if(start[0] == '\xFF' && start[1] == '\xFE') {
         if(start[2] == '\x00' && start[3] =='\x00') {
             *signatureLength=4;
             return "UTF-32LE";
-        } else {
+        } 
             *signatureLength=2;
             return  "UTF-16LE";
-        }
+        
     } else if(start[0] == '\xEF' && start[1] == '\xBB' && start[2] == '\xBF') {
         *signatureLength=3;
         return  "UTF-8";
@@ -2824,7 +2824,7 @@ ucnv_detectUnicodeSignature( const char* source,
             /* 5 bytes +/v8- */
             *signatureLength=5;
             return "UTF-7";
-        } else if(start[3] == '\x38' || start[3] == '\x39' || start[3] == '\x2B' || start[3] == '\x2F') {
+        } if(start[3] == '\x38' || start[3] == '\x39' || start[3] == '\x2B' || start[3] == '\x2F') {
             /* 4 bytes +/v8  or  +/v9  or  +/v+  or  +/v/ */
             *signatureLength=4;
             return "UTF-7";
@@ -2853,7 +2853,7 @@ ucnv_fromUCountPending(const UConverter* cnv, UErrorCode* status)
 
     if(cnv->preFromUFirstCP >= 0){
         return U16_LENGTH(cnv->preFromUFirstCP)+cnv->preFromULength ;
-    }else if(cnv->preFromULength < 0){
+    }if(cnv->preFromULength < 0){
         return -cnv->preFromULength ;
     }else if(cnv->fromUChar32 > 0){
         return 1;
@@ -2875,7 +2875,7 @@ ucnv_toUCountPending(const UConverter* cnv, UErrorCode* status){
 
     if(cnv->preToULength > 0){
         return cnv->preToULength ;
-    }else if(cnv->preToULength < 0){
+    }if(cnv->preToULength < 0){
         return -cnv->preToULength;
     }else if(cnv->toULength > 0){
         return cnv->toULength;

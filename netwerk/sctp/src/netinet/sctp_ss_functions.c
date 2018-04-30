@@ -138,9 +138,9 @@ sctp_ss_default_is_empty(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_associat
 {
 	if (TAILQ_EMPTY(&asoc->ss_data.out.wheel)) {
 		return (1);
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 
 static void
@@ -217,10 +217,10 @@ default_again:
 		    TAILQ_FIRST(&strq->outqueue)->net != net) {
 			if (strq == asoc->ss_data.last_out_stream) {
 				return (NULL);
-			} else {
+			} 
 				strqt = strq;
 				goto default_again;
-			}
+			
 		}
 	}
 	return (strq);
@@ -544,10 +544,10 @@ prio_again:
 		    TAILQ_FIRST(&strq->outqueue)->net != net) {
 			if (strq == asoc->ss_data.last_out_stream) {
 				return (NULL);
-			} else {
+			} 
 				strqt = strq;
 				goto prio_again;
-			}
+			
 		}
 	}
 	return (strq);
@@ -846,9 +846,9 @@ sctp_ss_fcfs_is_empty(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_association
 {
 	if (TAILQ_EMPTY(&asoc->ss_data.out.list)) {
 		return (1);
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 
 static void

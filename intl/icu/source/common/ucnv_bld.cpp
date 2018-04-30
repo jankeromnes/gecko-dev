@@ -482,14 +482,14 @@ ucnv_getSharedConverterData(const char *name)
     {
         return NULL;
     }
-    else
-    {
+    
+    
         UConverterSharedData *rc;
 
         rc = (UConverterSharedData*)uhash_get(SHARED_DATA_HASHTABLE, name);
         UCNV_DEBUG_LOG("get",name,rc);
         return rc;
-    }
+    
 }
 
 /*frees the string of memory blocks associates with a sharedConverter
@@ -556,7 +556,7 @@ ucnv_load(UConverterLoadArgs *pArgs, UErrorCode *err) {
         {
             return NULL;
         }
-        else if (!pArgs->onlyTestIsLoadable)
+        if (!pArgs->onlyTestIsLoadable)
         {
             /* share it with other library clients */
             ucnv_shareConverterData(mySharedConverterData);
@@ -677,7 +677,7 @@ parseConverterOptions(const char *inName,
             if(c==0) {
                 pArgs->options=(pPieces->options&=~UCNV_OPTION_VERSION);
                 return;
-            } else if((uint8_t)(c-'0')<10) {
+            } if((uint8_t)(c-'0')<10) {
                 pArgs->options=pPieces->options=(pPieces->options&~UCNV_OPTION_VERSION)|(uint32_t)(c-'0');
                 ++inName;
             }
@@ -762,7 +762,7 @@ ucnv_loadSharedData(const char *converterName,
         /* the default converter name is already canonical */
 #endif
     }
-    else if(UCNV_FAST_IS_UTF8(converterName)) {
+    if(UCNV_FAST_IS_UTF8(converterName)) {
         /* fastpath for UTF-8 */
         pArgs->name = "UTF-8";
         return (UConverterSharedData *)converterData[UCNV_UTF8];

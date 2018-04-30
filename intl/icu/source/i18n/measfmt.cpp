@@ -389,7 +389,7 @@ struct UnitDataSink : public ResourceSink {
             key += 5;
             if (*key == 0) {
                 return UMEASFMT_WIDTH_WIDE;
-            } else if (uprv_strcmp(key, "Short") == 0) {
+            } if (uprv_strcmp(key, "Short") == 0) {
                 return UMEASFMT_WIDTH_SHORT;
             } else if (uprv_strcmp(key, "Narrow") == 0) {
                 return UMEASFMT_WIDTH_NARROW;
@@ -407,7 +407,7 @@ struct UnitDataSink : public ResourceSink {
             length -= 13;
             if (*s == 0) {
                 return UMEASFMT_WIDTH_WIDE;
-            } else if (u_strCompare(s, length, gShort, 5, FALSE) == 0) {
+            } if (u_strCompare(s, length, gShort, 5, FALSE) == 0) {
                 return UMEASFMT_WIDTH_SHORT;
             } else if (u_strCompare(s, length, gNarrow, 6, FALSE) == 0) {
                 return UMEASFMT_WIDTH_NARROW;

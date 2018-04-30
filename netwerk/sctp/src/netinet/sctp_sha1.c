@@ -209,7 +209,7 @@ sctp_sha1_update(struct sctp_sha1_context *ctx, const unsigned char *ptr, unsign
 			ctx->how_many_in_block += number_left;
 			ctx->running_total += number_left;
 			break;
-		} else {
+		} 
 			/* block is now full, process it */
 			memcpy(&ctx->sha_block[ctx->how_many_in_block],
 			    ptr, left_to_fill);
@@ -219,7 +219,7 @@ sctp_sha1_update(struct sctp_sha1_context *ctx, const unsigned char *ptr, unsign
 			ctx->running_total += left_to_fill;
 			ctx->how_many_in_block = 0;
 			ptr = (const unsigned char *)(ptr + left_to_fill);
-		}
+		
 	}
 }
 

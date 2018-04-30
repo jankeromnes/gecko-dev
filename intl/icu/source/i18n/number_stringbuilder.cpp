@@ -168,7 +168,7 @@ int32_t NumberStringBuilder::insert(int32_t index, const UnicodeString &unistr, 
     if (unistr.length() == 0) {
         // Nothing to insert.
         return 0;
-    } else if (unistr.length() == 1) {
+    } if (unistr.length() == 1) {
         // Fast path: insert using insertCodePoint.
         return insertCodePoint(index, unistr.charAt(0), field, status);
     } else {
@@ -247,7 +247,7 @@ int32_t NumberStringBuilder::prepareForInsert(int32_t index, int32_t count, UErr
         fZero -= count;
         fLength += count;
         return fZero;
-    } else if (index == fLength && fZero + fLength + count < getCapacity()) {
+    } if (index == fLength && fZero + fLength + count < getCapacity()) {
         // Append to end
         fLength += count;
         return fZero + fLength - count;
@@ -436,7 +436,7 @@ void NumberStringBuilder::populateFieldPosition(FieldPosition &fp, int32_t offse
             }
             fp.setEndIndex(i - fZero + offset);
             break;
-        } else if (!seenStart && field == _field) {
+        } if (!seenStart && field == _field) {
             fp.setBeginIndex(i - fZero + offset);
             seenStart = true;
         }

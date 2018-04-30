@@ -386,7 +386,7 @@ bool AffixUtils::hasNext(const AffixTag &tag, const CharSequence &string) {
     // First check for the {-1} and default initializer syntax.
     if (tag.offset < 0) {
         return false;
-    } else if (tag.offset == 0) {
+    } if (tag.offset == 0) {
         return string.length() > 0;
     }
     // The rest of the fields are safe to use now.
@@ -394,7 +394,7 @@ bool AffixUtils::hasNext(const AffixTag &tag, const CharSequence &string) {
     if (tag.state == STATE_INSIDE_QUOTE && tag.offset == string.length() - 1 &&
         string.charAt(tag.offset) == u'\'') {
         return false;
-    } else if (tag.state != STATE_BASE) {
+    } if (tag.state != STATE_BASE) {
         return true;
     } else {
         return tag.offset < string.length();

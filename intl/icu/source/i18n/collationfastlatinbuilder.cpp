@@ -47,7 +47,7 @@ int32_t
 compareInt64AsUnsigned(int64_t a, int64_t b) {
     if((uint64_t)a < (uint64_t)b) {
         return -1;
-    } else if((uint64_t)a > (uint64_t)b) {
+    } if((uint64_t)a > (uint64_t)b) {
         return 1;
     } else {
         return 0;
@@ -70,7 +70,7 @@ binarySearch(const int64_t list[], int32_t limit, int64_t ce) {
         int32_t cmp = compareInt64AsUnsigned(ce, list[i]);
         if (cmp == 0) {
             return i;
-        } else if (cmp < 0) {
+        } if (cmp < 0) {
             if (i == start) {
                 return ~start;  // insert ce before i
             }
@@ -168,7 +168,7 @@ CollationFastLatinBuilder::inSameGroup(uint32_t p, uint32_t q) const {
     // so that we can test only one and use the same bit mask.
     if(p >= firstShortPrimary) {
         return q >= firstShortPrimary;
-    } else if(q >= firstShortPrimary) {
+    } if(q >= firstShortPrimary) {
         return FALSE;
     }
     // Both or neither must be potentially-variable,
@@ -176,7 +176,7 @@ CollationFastLatinBuilder::inSameGroup(uint32_t p, uint32_t q) const {
     uint32_t lastVariablePrimary = lastSpecialPrimaries[NUM_SPECIAL_GROUPS - 1];
     if(p > lastVariablePrimary) {
         return q > lastVariablePrimary;
-    } else if(q > lastVariablePrimary) {
+    } if(q > lastVariablePrimary) {
         return FALSE;
     }
     // Both will be encoded with long mini primaries.
@@ -187,7 +187,7 @@ CollationFastLatinBuilder::inSameGroup(uint32_t p, uint32_t q) const {
         uint32_t lastPrimary = lastSpecialPrimaries[i];
         if(p <= lastPrimary) {
             return q <= lastPrimary;
-        } else if(q <= lastPrimary) {
+        } if(q <= lastPrimary) {
             return FALSE;
         }
     }
@@ -265,9 +265,9 @@ CollationFastLatinBuilder::getCEsFromCE32(const CollationData &data, UChar32 c, 
                     ce1 = Collation::ceFromCE32(ce32s[1]);
                 }
                 break;
-            } else {
+            } 
                 return FALSE;
-            }
+            
         }
         case Collation::EXPANSION_TAG: {
             const int64_t *ces = data.ces + Collation::indexFromCE32(ce32);
@@ -278,9 +278,9 @@ CollationFastLatinBuilder::getCEsFromCE32(const CollationData &data, UChar32 c, 
                     ce1 = ces[1];
                 }
                 break;
-            } else {
+            } 
                 return FALSE;
-            }
+            
         }
         // Note: We could support PREFIX_TAG (assert c>=0)
         // by recursing on its default CE32 and checking that none of the prefixes starts

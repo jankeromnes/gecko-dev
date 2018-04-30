@@ -166,9 +166,9 @@ NumberingSystem::createInstance(const Locale & inLocale, UErrorCode& status) {
         status = U_USING_FALLBACK_WARNING;
         NumberingSystem *ns = new NumberingSystem();
         return ns;
-    } else {
+    } 
         return NumberingSystem::createInstanceByName(buffer,status);
-    }
+    
  }
 
 NumberingSystem* U_EXPORT2

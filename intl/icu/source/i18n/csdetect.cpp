@@ -235,9 +235,9 @@ const CharsetMatch *CharsetDetector::detect(UErrorCode &status)
 
     if(maxMatchesFound > 0) {
         return resultArray[0];
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 const CharsetMatch * const *CharsetDetector::detectAll(int32_t &maxMatchesFound, UErrorCode &status)
@@ -246,7 +246,7 @@ const CharsetMatch * const *CharsetDetector::detectAll(int32_t &maxMatchesFound,
         status = U_MISSING_RESOURCE_ERROR;// TODO:  Need to set proper status code for input text not set
 
         return NULL;
-    } else if (fFreshTextSet) {
+    } if (fFreshTextSet) {
         CharsetRecognizer *csr;
         int32_t            i;
 

@@ -294,7 +294,7 @@ static int bsf_list_filter(AVBSFContext *bsf, AVPacket *out)
                 ret = 0;
                 lst->idx--;
                 continue;
-            } else if (ret == AVERROR_EOF) {
+            } if (ret == AVERROR_EOF) {
                 /* filter idx-1 is done, continue with idx...nb_bsfs */
                 lst->flushed_idx = lst->idx;
                 continue;

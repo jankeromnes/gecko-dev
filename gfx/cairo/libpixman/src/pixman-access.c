@@ -303,10 +303,10 @@ convert_pixel_to_a8r8g8b8 (pixman_image_t *image,
     {
 	return image->bits.indexed->rgba[pixel];
     }
-    else
-    {
+    
+    
 	return convert_pixel (format, PIXMAN_a8r8g8b8, pixel);
-    }
+    
 }
 
 static force_inline uint32_t
@@ -319,7 +319,7 @@ convert_pixel_from_a8r8g8b8 (pixman_image_t *image,
 
 	return image->bits.indexed->ent[pixel & 0x7fff];
     }
-    else if (PIXMAN_FORMAT_TYPE (format) == PIXMAN_TYPE_COLOR)
+    if (PIXMAN_FORMAT_TYPE (format) == PIXMAN_TYPE_COLOR)
     {
 	pixel = convert_pixel (PIXMAN_a8r8g8b8, PIXMAN_x1r5g5b5, pixel);
 
@@ -578,7 +578,7 @@ to_srgb (float f)
 
     if (to_linear[high] - f < f - to_linear[low])
 	return high;
-    else
+    
 	return low;
 }
 

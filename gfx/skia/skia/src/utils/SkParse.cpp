@@ -38,7 +38,7 @@ static int to_hex(int c)
     c |= 0x20;  // make us lower-case
     if (is_between(c, 'a', 'f'))
         return c + 10 - 'a';
-    else
+    
         return -1;
 }
 
@@ -253,7 +253,7 @@ bool SkParse::FindBool(const char str[], bool* value)
         if (value) *value = true;
         return true;
     }
-    else if (lookup_str(str, gNo, SK_ARRAY_COUNT(gNo)))
+    if (lookup_str(str, gNo, SK_ARRAY_COUNT(gNo)))
     {
         if (value) *value = false;
         return true;

@@ -110,7 +110,7 @@ ucal_getDSTSavings(const UChar* zoneID, UErrorCode* ec) {
                 zone->getOffset(d, FALSE, raw, dst, *ec);
                 if (U_FAILURE(*ec)) {
                     break;
-                } else if (dst != 0) {
+                } if (dst != 0) {
                     result = dst;
                     break;
                 }

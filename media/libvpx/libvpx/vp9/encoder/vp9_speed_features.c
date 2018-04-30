@@ -53,7 +53,7 @@ static BLOCK_SIZE set_partition_min_limit(VP9_COMMON *const cm) {
   if (screen_area < 1280 * 720) {
     // Formats smaller in area than 720P
     return BLOCK_4X4;
-  } else if (screen_area < 1920 * 1080) {
+  } if (screen_area < 1920 * 1080) {
     // Format >= 720P and < 1080P
     return BLOCK_8X8;
   } else {

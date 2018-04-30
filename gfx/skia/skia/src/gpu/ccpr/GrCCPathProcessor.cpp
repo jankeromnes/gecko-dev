@@ -68,10 +68,10 @@ sk_sp<const GrBuffer> GrCCPathProcessor::FindIndexBuffer(GrOnFlushResourceProvid
     if (onFlushRP->caps()->usePrimitiveRestart()) {
         return onFlushRP->findOrMakeStaticBuffer(kIndex_GrBufferType, sizeof(kOctoIndicesAsStrips),
                                                  kOctoIndicesAsStrips, gIndexBufferKey);
-    } else {
+    } 
         return onFlushRP->findOrMakeStaticBuffer(kIndex_GrBufferType, sizeof(kOctoIndicesAsTris),
                                                  kOctoIndicesAsTris, gIndexBufferKey);
-    }
+    
 }
 
 int GrCCPathProcessor::NumIndicesPerInstance(const GrCaps& caps) {

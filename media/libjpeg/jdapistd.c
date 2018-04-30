@@ -428,13 +428,13 @@ jpeg_skip_scanlines (j_decompress_ptr cinfo, JDIMENSION num_lines)
     if (num_lines < lines_left_in_iMCU_row) {
       increment_simple_rowgroup_ctr(cinfo, num_lines);
       return num_lines;
-    } else {
+    } 
       cinfo->output_scanline += lines_left_in_iMCU_row;
       main_ptr->buffer_full = FALSE;
       main_ptr->rowgroup_ctr = 0;
       upsample->next_row_out = cinfo->max_v_samp_factor;
       upsample->rows_to_go = cinfo->output_height - cinfo->output_scanline;
-    }
+    
   }
 
   /* Calculate how many full iMCU rows we can skip. */

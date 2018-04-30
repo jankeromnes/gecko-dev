@@ -689,11 +689,11 @@ blend_color_dodge (uint32_t dca, uint32_t da, uint32_t sca, uint32_t sa)
     {
 	return dca == 0 ? 0 : DIV_ONE_UN8 (sa * da);
     }
-    else
-    {
+    
+    
 	uint32_t rca = dca * sa / (sa - sca);
 	return DIV_ONE_UN8 (sa * MIN (rca, da));
-    }
+    
 }
 
 PDF_SEPARABLE_BLEND_MODE (color_dodge)
@@ -715,11 +715,11 @@ blend_color_burn (uint32_t dca, uint32_t da, uint32_t sca, uint32_t sa)
     {
 	return dca < da ? 0 : DIV_ONE_UN8 (sa * da);
     }
-    else
-    {
+    
+    
 	uint32_t rca = (da - dca) * sa / sca;
 	return DIV_ONE_UN8 (sa * (MAX (rca, da) - rca));
-    }
+    
 }
 
 PDF_SEPARABLE_BLEND_MODE (color_burn)
@@ -737,7 +737,7 @@ blend_hard_light (uint32_t dca, uint32_t da, uint32_t sca, uint32_t sa)
 {
     if (2 * sca < sa)
 	return DIV_ONE_UN8 (2 * sca * dca);
-    else
+    
 	return DIV_ONE_UN8 (sa * da - 2 * (da - dca) * (sa - sca));
 }
 
@@ -802,7 +802,7 @@ blend_difference (uint32_t dca, uint32_t da, uint32_t sca, uint32_t sa)
 
     if (scada < dcasa)
 	return DIV_ONE_UN8 (dcasa - scada);
-    else
+    
 	return DIV_ONE_UN8 (scada - dcasa);
 }
 

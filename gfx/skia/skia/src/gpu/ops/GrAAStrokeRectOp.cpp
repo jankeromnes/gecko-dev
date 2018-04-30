@@ -327,7 +327,7 @@ sk_sp<const GrBuffer> AAStrokeRectOp::GetIndexBuffer(GrResourceProvider* resourc
         return resourceProvider->findOrCreatePatternedIndexBuffer(
                 gMiterIndices, kMiterIndexCnt, kNumMiterRectsInIndexBuffer, kMiterVertexCnt,
                 gMiterIndexBufferKey);
-    } else {
+    } 
         /**
          * As in miter-stroke, index = a + b, and a is the current index, b is the shift
          * from the first index. The index layout:
@@ -392,7 +392,7 @@ sk_sp<const GrBuffer> AAStrokeRectOp::GetIndexBuffer(GrResourceProvider* resourc
         return resourceProvider->findOrCreatePatternedIndexBuffer(
                 gBevelIndices, kBevelIndexCnt, kNumBevelRectsInIndexBuffer, kBevelVertexCnt,
                 gBevelIndexBufferKey);
-    }
+    
 }
 
 bool AAStrokeRectOp::onCombineIfPossible(GrOp* t, const GrCaps& caps) {

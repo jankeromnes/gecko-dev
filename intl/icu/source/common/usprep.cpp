@@ -93,9 +93,9 @@ isSPrepAcceptable(void * /* context */,
         //uprv_memcpy(formatVersion, pInfo->formatVersion, 4);
         uprv_memcpy(dataVersion, pInfo->dataVersion, 4);
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 static int32_t U_CALLCONV
@@ -540,7 +540,7 @@ usprep_map(  const UStringPrepProfile* profile,
             *status = U_STRINGPREP_UNASSIGNED_ERROR;
             return 0;
             
-        }else if(type == USPREP_MAP){
+        }if(type == USPREP_MAP){
             
             int32_t index, length;
 
@@ -568,10 +568,10 @@ usprep_map(  const UStringPrepProfile* profile,
                     destIndex++; /* for pre-flighting */
                 }  
                 continue;
-            }else{
+            }
                 // subtract the delta to arrive at the code point
                 ch -= value;
-            }
+            
 
         }else if(type==USPREP_DELETE){
              // just consume the codepoint and contine

@@ -176,13 +176,13 @@ LocaleUtility::initLocaleFromName(const UnicodeString& id, Locale& result)
                 // no @ between prev and the rest of the string
                 id.extract(prev, INT32_MAX, buffer + prev, BUFLEN - prev, US_INV);
                 break; // done
-            } else {
+            } 
                 // normal invariant-character conversion for text between @s
                 id.extract(prev, i - prev, buffer + prev, BUFLEN - prev, US_INV);
                 // manually "convert" U+0040 at id[i] into '@' at buffer[i]
                 buffer[i] = '@';
                 prev = i + 1;
-            }
+            
         }
         result = Locale::createFromName(buffer);
     }

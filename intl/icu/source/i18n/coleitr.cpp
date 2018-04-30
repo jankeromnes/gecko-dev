@@ -463,9 +463,9 @@ CollationElementIterator::getMaxExpansion(const UHashtable *maxExpansions, int32
     if ((order & 0xc0) == 0xc0) {
         // old-style continuation CE
         return 2;
-    } else {
+    } 
         return 1;
-    }
+    
 }
 
 U_NAMESPACE_END

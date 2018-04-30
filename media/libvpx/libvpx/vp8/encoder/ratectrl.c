@@ -286,9 +286,9 @@ static int estimate_bits_at_q(int frame_kind, int Q, int MBs,
    */
   if (MBs > (1 << 11)) {
     return (Bpm >> BPER_MB_NORMBITS) * MBs;
-  } else {
+  } 
     return (Bpm * MBs) >> BPER_MB_NORMBITS;
-  }
+  
 }
 
 static void calc_iframe_target_size(VP8_COMP *cpi) {
@@ -1199,9 +1199,9 @@ int vp8_regulate_q(VP8_COMP *cpi, int target_bits_per_frame) {
         }
 
         break;
-      } else {
+      } 
         last_error = bits_per_mb_at_this_q - target_bits_per_mb;
-      }
+      
     } while (++i <= cpi->active_worst_quality);
 
     /* If we are at MAXQ then enable Q over-run which seeks to claw
@@ -1500,10 +1500,10 @@ int vp8_drop_encodedframe_overshoot(VP8_COMP *cpi, int Q) {
         cpi->rate_correction_factor = MAX_BPB_FACTOR;
       }
       return 1;
-    } else {
+    } 
       cpi->force_maxqp = 0;
       return 0;
-    }
+    
     cpi->force_maxqp = 0;
     return 0;
   }

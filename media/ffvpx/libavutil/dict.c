@@ -266,7 +266,7 @@ int avpriv_dict_set_timestamp(AVDictionary **dict, const char *key, int64_t time
             return AVERROR_EXTERNAL;
         av_strlcatf(buf, sizeof(buf), ".%06dZ", (int)(timestamp % 1000000));
         return av_dict_set(dict, key, buf, 0);
-    } else {
+    } 
         return AVERROR_EXTERNAL;
-    }
+    
 }

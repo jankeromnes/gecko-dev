@@ -84,7 +84,7 @@ static INLINE TX_SIZE read_tx_size(VP9_COMMON *cm, MACROBLOCKD *xd,
   const TX_SIZE max_tx_size = max_txsize_lookup[bsize];
   if (allow_select && tx_mode == TX_MODE_SELECT && bsize >= BLOCK_8X8)
     return read_selected_tx_size(cm, xd, max_tx_size, r);
-  else
+  
     return VPXMIN(max_tx_size, tx_mode_to_biggest_tx_size[tx_mode]);
 }
 
@@ -180,13 +180,13 @@ static int read_skip(VP9_COMMON *cm, const MACROBLOCKD *xd, int segment_id,
                      vpx_reader *r) {
   if (segfeature_active(&cm->seg, segment_id, SEG_LVL_SKIP)) {
     return 1;
-  } else {
+  } 
     const int ctx = vp9_get_skip_context(xd);
     const int skip = vpx_read(r, cm->fc->skip_probs[ctx]);
     FRAME_COUNTS *counts = xd->counts;
     if (counts) ++counts->skip[ctx][skip];
     return skip;
-  }
+  
 }
 
 static void read_intra_frame_mode_info(VP9_COMMON *const cm,
@@ -294,9 +294,9 @@ static REFERENCE_MODE read_block_reference_mode(VP9_COMMON *cm,
     FRAME_COUNTS *counts = xd->counts;
     if (counts) ++counts->comp_inter[ctx][mode];
     return mode;  // SINGLE_REFERENCE or COMPOUND_REFERENCE
-  } else {
+  } 
     return cm->reference_mode;
-  }
+  
 }
 
 // Read the referncence frame
@@ -435,13 +435,13 @@ static int read_is_inter_block(VP9_COMMON *const cm, MACROBLOCKD *const xd,
                                int segment_id, vpx_reader *r) {
   if (segfeature_active(&cm->seg, segment_id, SEG_LVL_REF_FRAME)) {
     return get_segdata(&cm->seg, segment_id, SEG_LVL_REF_FRAME) != INTRA_FRAME;
-  } else {
+  } 
     const int ctx = get_intra_inter_context(xd);
     const int is_inter = vpx_read(r, cm->fc->intra_inter_prob[ctx]);
     FRAME_COUNTS *counts = xd->counts;
     if (counts) ++counts->intra_inter[ctx][is_inter];
     return is_inter;
-  }
+  
 }
 
 static void dec_find_best_ref_mvs(int allow_hp, int_mv *mvlist, int_mv *best_mv,

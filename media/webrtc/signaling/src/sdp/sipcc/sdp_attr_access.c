@@ -643,9 +643,9 @@ tinybool sdp_attr_valid (sdp_t *sdp_p, sdp_attr_e attr_type, uint16_t level,
 {
     if (sdp_find_attr(sdp_p, level, cap_num, attr_type, inst_num) == NULL) {
         return (FALSE);
-    } else {
+    } 
         return (TRUE);
-    }
+    
 }
 
 /* Function:    sdp_attr_line_number(sdp_t *sdp_p)
@@ -668,9 +668,9 @@ uint32_t sdp_attr_line_number (sdp_t *sdp_p, sdp_attr_e attr_type, uint16_t leve
     attr_p = sdp_find_attr(sdp_p, level, cap_num, attr_type, inst_num);
     if (attr_p == NULL) {
         return 0;
-    } else {
+    } 
         return attr_p->line_number;
-    }
+    
 }
 
 static boolean sdp_attr_is_simple_string(sdp_attr_e attr_type) {
@@ -734,9 +734,9 @@ const char *sdp_attr_get_simple_string (sdp_t *sdp_p, sdp_attr_e attr_type,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         return (attr_p->attr.string_val);
-    }
+    
 }
 
 static boolean sdp_attr_is_long_string(sdp_attr_e attr_type) {
@@ -767,9 +767,9 @@ const char *sdp_attr_get_long_string (sdp_t *sdp_p, sdp_attr_e attr_type,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         return (attr_p->attr.stringp);
-    }
+    
 }
 
 static boolean sdp_attr_is_simple_u32(sdp_attr_e attr_type) {
@@ -837,9 +837,9 @@ uint32_t sdp_attr_get_simple_u32 (sdp_t *sdp_p, sdp_attr_e attr_type, uint16_t l
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.u32_val);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_simple_boolean
@@ -887,9 +887,9 @@ tinybool sdp_attr_get_simple_boolean (sdp_t *sdp_p, sdp_attr_e attr_type,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.boolean_val);
-    }
+    
 }
 
 /*
@@ -919,9 +919,9 @@ sdp_attr_get_maxprate (sdp_t *sdp_p, uint16_t level, uint16_t inst_num)
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         return (attr_p->attr.string_val);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_t38ratemgmt
@@ -949,9 +949,9 @@ sdp_t38_ratemgmt_e sdp_attr_get_t38ratemgmt (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_T38_UNKNOWN_RATE);
-    } else {
+    } 
         return (attr_p->attr.t38ratemgmt);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_t38udpec
@@ -979,9 +979,9 @@ sdp_t38_udpec_e sdp_attr_get_t38udpec (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_T38_UDPEC_UNKNOWN);
-    } else {
+    } 
         return (attr_p->attr.t38udpec);
-    }
+    
 }
 
 /* Function:    sdp_get_media_direction
@@ -1053,9 +1053,9 @@ tinybool sdp_validate_qos_attr (sdp_attr_e qos_attr)
         (qos_attr == SDP_ATTR_DES) ||
         (qos_attr == SDP_ATTR_CONF)){
         return (TRUE);
-    } else {
+    } 
         return (FALSE);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_qos_strength
@@ -1093,7 +1093,7 @@ sdp_qos_strength_e sdp_attr_get_qos_strength (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_QOS_STRENGTH_UNKNOWN);
-    } else {
+    } 
         switch (qos_attr) {
             case SDP_ATTR_QOS:
                 return (attr_p->attr.qos.strength);
@@ -1103,7 +1103,7 @@ sdp_qos_strength_e sdp_attr_get_qos_strength (sdp_t *sdp_p, uint16_t level,
                 return SDP_QOS_STRENGTH_UNKNOWN;
 
         }
-    }
+    
 }
 
 /* Function:    sdp_attr_get_qos_direction
@@ -1141,7 +1141,7 @@ sdp_qos_dir_e sdp_attr_get_qos_direction (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_QOS_DIR_UNKNOWN);
-    } else {
+    } 
          switch (qos_attr) {
             case SDP_ATTR_QOS:
                  return (attr_p->attr.qos.direction);
@@ -1155,7 +1155,7 @@ sdp_qos_dir_e sdp_attr_get_qos_direction (sdp_t *sdp_p, uint16_t level,
                 return SDP_QOS_DIR_UNKNOWN;
 
         }
-    }
+    
 }
 
 /* Function:    sdp_attr_get_qos_status_type
@@ -1193,7 +1193,7 @@ sdp_qos_status_types_e sdp_attr_get_qos_status_type (sdp_t *sdp_p, uint16_t leve
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_QOS_STATUS_TYPE_UNKNOWN);
-    } else {
+    } 
         switch (qos_attr) {
             case SDP_ATTR_CURR:
                 return (attr_p->attr.curr.status_type);
@@ -1205,7 +1205,7 @@ sdp_qos_status_types_e sdp_attr_get_qos_status_type (sdp_t *sdp_p, uint16_t leve
                 return SDP_QOS_STATUS_TYPE_UNKNOWN;
 
         }
-    }
+    
 }
 
 /* Function:    sdp_attr_get_qos_confirm
@@ -1242,9 +1242,9 @@ tinybool sdp_attr_get_qos_confirm (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.qos.confirm);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_curr_type
@@ -1275,9 +1275,9 @@ sdp_curr_type_e sdp_attr_get_curr_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_CURR_UNKNOWN_TYPE);
-    } else {
+    } 
         return (attr_p->attr.curr.type);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_des_type
@@ -1308,9 +1308,9 @@ sdp_des_type_e sdp_attr_get_des_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_DES_UNKNOWN_TYPE);
-    } else {
+    } 
         return (attr_p->attr.des.type);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_conf_type
@@ -1341,9 +1341,9 @@ sdp_conf_type_e sdp_attr_get_conf_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_CONF_UNKNOWN_TYPE);
-    } else {
+    } 
         return (attr_p->attr.conf.type);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_subnet_nettype
@@ -1371,9 +1371,9 @@ sdp_nettype_e sdp_attr_get_subnet_nettype (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_NT_INVALID);
-    } else {
+    } 
         return (attr_p->attr.subnet.nettype);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_subnet_addrtype
@@ -1401,9 +1401,9 @@ sdp_addrtype_e sdp_attr_get_subnet_addrtype (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_AT_INVALID);
-    } else {
+    } 
         return (attr_p->attr.subnet.addrtype);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_subnet_addr
@@ -1433,9 +1433,9 @@ const char *sdp_attr_get_subnet_addr (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         return (attr_p->attr.subnet.addr);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_subnet_prefix
@@ -1465,9 +1465,9 @@ int32_t sdp_attr_get_subnet_prefix (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.subnet.prefix);
-    }
+    
 }
 
 /* Function:    sdp_attr_rtpmap_payload_valid
@@ -1536,9 +1536,9 @@ uint16_t sdp_attr_get_rtpmap_payload_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.transport_map.payload_num);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_rtpmap_encname
@@ -1570,9 +1570,9 @@ const char *sdp_attr_get_rtpmap_encname (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         return (attr_p->attr.transport_map.encname);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_rtpmap_clockrate
@@ -1599,9 +1599,9 @@ uint32_t sdp_attr_get_rtpmap_clockrate (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.transport_map.clockrate);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_rtpmap_num_chan
@@ -1628,9 +1628,9 @@ uint16_t sdp_attr_get_rtpmap_num_chan (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.transport_map.num_chan);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_ice_attribute
@@ -1658,14 +1658,14 @@ sdp_result_e sdp_attr_get_ice_attribute (sdp_t *sdp_p, uint16_t level,
     if (attr_p != NULL) {
         *out = attr_p->attr.ice_attr;
         return (SDP_SUCCESS);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_ERRORS]) {
                 CSFLogError(logTag, "%s ice attribute, level %u instance %u "
                           "not found.", sdp_p->debug_str, (unsigned)level, (unsigned)inst_num);
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    }
+    
 }
 
 /* Function:    sdp_attr_is_present
@@ -1724,14 +1724,14 @@ sdp_result_e sdp_attr_get_rtcp_mux_attribute (sdp_t *sdp_p, uint16_t level,
     if (attr_p != NULL) {
         *rtcp_mux = attr_p->attr.boolean_val;
         return (SDP_SUCCESS);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_ERRORS]) {
                 CSFLogError(logTag, "%s rtcp-mux attribute, level %u instance %u "
                           "not found.", sdp_p->debug_str, (unsigned)level, (unsigned)inst_num);
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_setup_attribute
@@ -1827,14 +1827,14 @@ sdp_result_e sdp_attr_get_dtls_fingerprint_attribute (sdp_t *sdp_p, uint16_t lev
     if (attr_p != NULL) {
         *out = attr_p->attr.string_val;
         return (SDP_SUCCESS);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_ERRORS]) {
                 CSFLogError(logTag, "%s dtls fingerprint attribute, level %u instance %u "
                           "not found.", sdp_p->debug_str, (unsigned)level, (unsigned)inst_num);
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    }
+    
 }
 
 /* Function:    sdp_attr_sprtmap_payload_valid
@@ -1900,9 +1900,9 @@ uint16_t sdp_attr_get_sprtmap_payload_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.transport_map.payload_num);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_sprtmap_encname
@@ -1931,9 +1931,9 @@ const char *sdp_attr_get_sprtmap_encname (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         return (attr_p->attr.transport_map.encname);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_sprtmap_clockrate
@@ -1960,9 +1960,9 @@ uint32_t sdp_attr_get_sprtmap_clockrate (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.transport_map.clockrate);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_sprtmap_num_chan
@@ -1989,9 +1989,9 @@ uint16_t sdp_attr_get_sprtmap_num_chan (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.transport_map.num_chan);
-    }
+    
 }
 
 /* Note:  The fmtp attribute formats currently handled are:
@@ -2063,9 +2063,9 @@ uint16_t sdp_attr_get_fmtp_payload_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.fmtp.payload_num);
-    }
+    
 }
 
 
@@ -2119,7 +2119,7 @@ sdp_ne_res_e sdp_attr_fmtp_is_range_set (sdp_t *sdp_p, uint16_t level, uint8_t c
 
     if (num_vals == num_vals_set) {
         return (SDP_FULL_MATCH);
-    } else if (num_vals_set == 0) {
+    } if (num_vals_set == 0) {
         return (SDP_NO_MATCH);
     } else {
         return (SDP_PARTIAL_MATCH);
@@ -2208,10 +2208,10 @@ sdp_result_e sdp_attr_set_fmtp_payload_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         attr_p->attr.fmtp.payload_num = payload_num;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_range
@@ -2347,7 +2347,7 @@ sdp_ne_res_e sdp_attr_compare_fmtp_ranges (sdp_t *src_sdp_p,sdp_t *dst_sdp_p,
 
     if (num_vals_match == (SDP_NE_NUM_BMAP_WORDS * SDP_NE_BITS_PER_WORD)) {
         return (SDP_FULL_MATCH);
-    } else if (num_vals_match == 0) {
+    } if (num_vals_match == 0) {
         return (SDP_NO_MATCH);
     } else {
         return (SDP_PARTIAL_MATCH);
@@ -2460,9 +2460,9 @@ sdp_result_e sdp_attr_set_fmtp_max_fs (sdp_t *sdp_p, uint16_t level,
     if (max_fs > 0) {
         fmtp_p->max_fs  = max_fs;
         return (SDP_SUCCESS);
-    } else {
+    } 
         return (SDP_FAILURE);
-    }
+    
 }
 
 sdp_result_e sdp_attr_set_fmtp_max_fr (sdp_t *sdp_p, uint16_t level,
@@ -2488,9 +2488,9 @@ sdp_result_e sdp_attr_set_fmtp_max_fr (sdp_t *sdp_p, uint16_t level,
     if (max_fr > 0) {
         fmtp_p->max_fr  = max_fr;
         return (SDP_SUCCESS);
-    } else {
+    } 
         return (SDP_FAILURE);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_max_average_bitrate
@@ -2516,10 +2516,10 @@ sdp_result_e sdp_attr_get_fmtp_max_average_bitrate (sdp_t *sdp_p, uint16_t level
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.maxaveragebitrate;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 
@@ -2547,10 +2547,10 @@ sdp_result_e sdp_attr_get_fmtp_usedtx (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = (tinybool)attr_p->attr.fmtp.usedtx;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_usedtx
@@ -2577,10 +2577,10 @@ sdp_result_e sdp_attr_get_fmtp_stereo (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = (tinybool)attr_p->attr.fmtp.stereo;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_useinbandfec
@@ -2607,10 +2607,10 @@ sdp_result_e sdp_attr_get_fmtp_useinbandfec (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = (tinybool)attr_p->attr.fmtp.useinbandfec;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_maxcodedaudiobandwidth
@@ -2637,9 +2637,9 @@ char* sdp_attr_get_fmtp_maxcodedaudiobandwidth (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.fmtp.maxcodedaudiobandwidth);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_cbr
@@ -2666,10 +2666,10 @@ sdp_result_e sdp_attr_get_fmtp_cbr (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = (tinybool)attr_p->attr.fmtp.cbr;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 uint16_t sdp_attr_get_sctpmap_port(sdp_t *sdp_p, uint16_t level,
@@ -2685,9 +2685,9 @@ uint16_t sdp_attr_get_sctpmap_port(sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return 0;
-    } else {
+    } 
         return attr_p->attr.sctpmap.port;
-    }
+    
 }
 
 sdp_result_e sdp_attr_get_sctpmap_streams (sdp_t *sdp_p, uint16_t level,
@@ -2703,10 +2703,10 @@ sdp_result_e sdp_attr_get_sctpmap_streams (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.sctpmap.streams;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 sdp_result_e sdp_attr_get_sctpmap_protocol (sdp_t *sdp_p, uint16_t level,
@@ -2725,9 +2725,9 @@ sdp_result_e sdp_attr_get_sctpmap_protocol (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         sstrncpy(protocol, attr_p->attr.sctpmap.protocol, SDP_MAX_STRING_LEN+1);
-    }
+    
     return (SDP_SUCCESS);
 }
 
@@ -2758,9 +2758,9 @@ tinybool sdp_attr_fmtp_is_annexb_set (sdp_t *sdp_p, uint16_t level, uint8_t cap_
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annexb);
-    }
+    
 }
 
 /* Function:    sdp_attr_fmtp_is_annexa_set
@@ -2789,9 +2789,9 @@ tinybool sdp_attr_fmtp_is_annexa_set (sdp_t *sdp_p, uint16_t level, uint8_t cap_
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annexa);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_bitrate_type
@@ -2819,9 +2819,9 @@ int32_t sdp_attr_get_fmtp_bitrate_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.bitrate);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_qcif
@@ -2849,9 +2849,9 @@ int32_t sdp_attr_get_fmtp_qcif (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.qcif);
-    }
+    
 }
 /* Function:    sdp_attr_get_fmtp_cif
  * Description: Gets the value of the fmtp attribute CIF type parameter
@@ -2878,9 +2878,9 @@ int32_t sdp_attr_get_fmtp_cif (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.cif);
-    }
+    
 }
 
 
@@ -2909,9 +2909,9 @@ int32_t sdp_attr_get_fmtp_sqcif (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.sqcif);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_cif4
@@ -2939,9 +2939,9 @@ int32_t sdp_attr_get_fmtp_cif4 (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.cif4);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_cif16
@@ -2970,9 +2970,9 @@ int32_t sdp_attr_get_fmtp_cif16 (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.cif16);
-    }
+    
 }
 
 
@@ -3001,9 +3001,9 @@ int32_t sdp_attr_get_fmtp_maxbr (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.maxbr);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_custom_x
@@ -3032,9 +3032,9 @@ int32_t sdp_attr_get_fmtp_custom_x (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.custom_x);
-    }
+    
 }
 /* Function:    sdp_attr_get_fmtp_custom_y
  * Description: Gets the value of the fmtp attribute custom_y type parameter
@@ -3062,9 +3062,9 @@ int32_t sdp_attr_get_fmtp_custom_y (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.custom_y);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_custom_mpi
@@ -3093,9 +3093,9 @@ int32_t sdp_attr_get_fmtp_custom_mpi (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.custom_mpi);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_par_width
@@ -3122,9 +3122,9 @@ int32_t sdp_attr_get_fmtp_par_width (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.par_width);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_par_height
@@ -3151,9 +3151,9 @@ int32_t sdp_attr_get_fmtp_par_height (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.par_height);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_cpcf
@@ -3180,9 +3180,9 @@ int32_t sdp_attr_get_fmtp_cpcf (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.cpcf);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_bpp
@@ -3209,9 +3209,9 @@ int32_t sdp_attr_get_fmtp_bpp (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.bpp);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_hrd
@@ -3238,9 +3238,9 @@ int32_t sdp_attr_get_fmtp_hrd (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.hrd);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_profile
@@ -3267,9 +3267,9 @@ int32_t sdp_attr_get_fmtp_profile (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.profile);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_level
@@ -3296,9 +3296,9 @@ int32_t sdp_attr_get_fmtp_level (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.level);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_interlace
@@ -3325,9 +3325,9 @@ tinybool sdp_attr_get_fmtp_interlace (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return FALSE;
-    } else {
+    } 
         return (attr_p->attr.fmtp.is_interlace);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_pack_mode
@@ -3355,7 +3355,7 @@ sdp_result_e sdp_attr_get_fmtp_pack_mode (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (SDP_INVALID_PACKETIZATION_MODE_VALUE == attr_p->attr.fmtp.packetization_mode) {
             /* packetization mode unspecified (optional) */
             *val = SDP_DEFAULT_PACKETIZATION_MODE_VALUE;
@@ -3363,7 +3363,7 @@ sdp_result_e sdp_attr_get_fmtp_pack_mode (sdp_t *sdp_p, uint16_t level,
             *val = attr_p->attr.fmtp.packetization_mode;
         }
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_level_asymmetry_allowed
@@ -3391,10 +3391,10 @@ sdp_result_e sdp_attr_get_fmtp_level_asymmetry_allowed (sdp_t *sdp_p, uint16_t l
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.level_asymmetry_allowed;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_profile_id
@@ -3421,9 +3421,9 @@ const char* sdp_attr_get_fmtp_profile_id (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.fmtp.profile_level_id);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_param_sets
@@ -3450,9 +3450,9 @@ const char* sdp_attr_get_fmtp_param_sets (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.fmtp.parameter_sets);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_interleaving_depth
@@ -3479,10 +3479,10 @@ sdp_result_e sdp_attr_get_fmtp_interleaving_depth (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.interleaving_depth;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_deint_buf_req
@@ -3510,14 +3510,14 @@ sdp_result_e sdp_attr_get_fmtp_deint_buf_req (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (attr_p->attr.fmtp.flag & SDP_DEINT_BUF_REQ_FLAG) {
             *val = attr_p->attr.fmtp.deint_buf_req;
             return (SDP_SUCCESS);
-        } else {
+        } 
             return (SDP_FAILURE);
-        }
-    }
+        
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_max_don_diff
@@ -3544,10 +3544,10 @@ sdp_result_e sdp_attr_get_fmtp_max_don_diff (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.max_don_diff;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_init_buf_time
@@ -3574,14 +3574,14 @@ sdp_result_e sdp_attr_get_fmtp_init_buf_time (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (attr_p->attr.fmtp.flag & SDP_INIT_BUF_TIME_FLAG) {
             *val = attr_p->attr.fmtp.init_buf_time;
             return (SDP_SUCCESS);
-        } else {
+        } 
             return (SDP_FAILURE);
-        }
-    }
+        
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_max_mbps
@@ -3609,10 +3609,10 @@ sdp_result_e sdp_attr_get_fmtp_max_mbps (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.max_mbps;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_max_fs
@@ -3639,10 +3639,10 @@ sdp_result_e sdp_attr_get_fmtp_max_fs (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.max_fs;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_max_fr
@@ -3669,10 +3669,10 @@ sdp_result_e sdp_attr_get_fmtp_max_fr (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.max_fr;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_max_cpb
@@ -3699,10 +3699,10 @@ sdp_result_e sdp_attr_get_fmtp_max_cpb (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.max_cpb;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_max_dpb
@@ -3729,10 +3729,10 @@ sdp_result_e sdp_attr_get_fmtp_max_dpb (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.max_dpb;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 
@@ -3760,10 +3760,10 @@ sdp_result_e sdp_attr_get_fmtp_max_br (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         *val = attr_p->attr.fmtp.max_br;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_fmtp_is_redundant_pic_cap
@@ -3790,9 +3790,9 @@ tinybool sdp_attr_fmtp_is_redundant_pic_cap (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.redundant_pic_cap);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_deint_buf_cap
@@ -3821,14 +3821,14 @@ sdp_result_e sdp_attr_get_fmtp_deint_buf_cap (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (attr_p->attr.fmtp.flag & SDP_DEINT_BUF_CAP_FLAG) {
             *val = attr_p->attr.fmtp.deint_buf_cap;
             return (SDP_SUCCESS);
-        } else {
+        } 
             return (SDP_FAILURE);
-        }
-    }
+        
+    
 }
 
 /* Function:    sdp_attr_get_fmtp_max_rcmd_nalu_size
@@ -3856,14 +3856,14 @@ sdp_result_e sdp_attr_get_fmtp_max_rcmd_nalu_size (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (attr_p->attr.fmtp.flag & SDP_MAX_RCMD_NALU_SIZE_FLAG) {
             *val = attr_p->attr.fmtp.max_rcmd_nalu_size;
             return (SDP_SUCCESS);
-        } else {
+        } 
             return (SDP_FAILURE);
-        }
-    }
+        
+    
 }
 
 /* Function:    sdp_attr_fmtp_is_parameter_add
@@ -3890,11 +3890,11 @@ tinybool sdp_attr_fmtp_is_parameter_add (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         /* Both 1 and SDP_FMTP_UNUSED (parameter not present) should be
          * treated as TRUE, per RFC 3984, page 45 */
         return (attr_p->attr.fmtp.parameter_add != 0);
-    }
+    
 }
 
 /****** Following functions are get routines for Annex values
@@ -3925,9 +3925,9 @@ tinybool sdp_attr_get_fmtp_annex_d (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_d);
-    }
+    
 }
 
 tinybool sdp_attr_get_fmtp_annex_f (sdp_t *sdp_p, uint16_t level,
@@ -3945,9 +3945,9 @@ tinybool sdp_attr_get_fmtp_annex_f (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_f);
-    }
+    
 }
 
 tinybool sdp_attr_get_fmtp_annex_i (sdp_t *sdp_p, uint16_t level,
@@ -3965,9 +3965,9 @@ tinybool sdp_attr_get_fmtp_annex_i (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_i);
-    }
+    
 }
 
 tinybool sdp_attr_get_fmtp_annex_j (sdp_t *sdp_p, uint16_t level,
@@ -3985,9 +3985,9 @@ tinybool sdp_attr_get_fmtp_annex_j (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_j);
-    }
+    
 }
 
 tinybool sdp_attr_get_fmtp_annex_t (sdp_t *sdp_p, uint16_t level,
@@ -4005,9 +4005,9 @@ tinybool sdp_attr_get_fmtp_annex_t (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_t);
-    }
+    
 }
 
 int32_t sdp_attr_get_fmtp_annex_k_val (sdp_t *sdp_p, uint16_t level,
@@ -4025,9 +4025,9 @@ int32_t sdp_attr_get_fmtp_annex_k_val (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_k_val);
-    }
+    
 }
 
 int32_t sdp_attr_get_fmtp_annex_n_val (sdp_t *sdp_p, uint16_t level,
@@ -4045,9 +4045,9 @@ int32_t sdp_attr_get_fmtp_annex_n_val (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_n_val);
-    }
+    
 }
 
 int32_t sdp_attr_get_fmtp_annex_p_picture_resize (sdp_t *sdp_p, uint16_t level,
@@ -4066,9 +4066,9 @@ int32_t sdp_attr_get_fmtp_annex_p_picture_resize (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_p_val_picture_resize);
-    }
+    
 }
 
 int32_t sdp_attr_get_fmtp_annex_p_warp (sdp_t *sdp_p, uint16_t level,
@@ -4086,9 +4086,9 @@ int32_t sdp_attr_get_fmtp_annex_p_warp (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_VALUE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.annex_p_val_warp);
-    }
+    
 }
 
 /* Function:    sdp_attr_fmtp_get_fmtp_format
@@ -4119,9 +4119,9 @@ sdp_fmtp_format_type_e  sdp_attr_fmtp_get_fmtp_format (sdp_t *sdp_p,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_FMTP_UNKNOWN_TYPE);
-    } else {
+    } 
         return (attr_p->attr.fmtp.fmtp_format);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_pccodec_num_payload_types
@@ -4149,9 +4149,9 @@ uint16_t sdp_attr_get_pccodec_num_payload_types (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         return (attr_p->attr.pccodec.num_payloads);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_pccodec_payload_type
@@ -4181,7 +4181,7 @@ uint16_t sdp_attr_get_pccodec_payload_type (sdp_t *sdp_p, uint16_t level, uint8_
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         if ((payload_num < 1) ||
             (payload_num > attr_p->attr.pccodec.num_payloads)) {
             if (sdp_p->debug_flag[SDP_DEBUG_ERRORS]) {
@@ -4191,10 +4191,10 @@ uint16_t sdp_attr_get_pccodec_payload_type (sdp_t *sdp_p, uint16_t level, uint8_
             }
             sdp_p->conf_p->num_invalid_param++;
             return (0);
-        } else {
+        } 
             return (attr_p->attr.pccodec.payload_type[payload_num-1]);
-        }
-    }
+        
+    
 }
 
 /* Function:    sdp_attr_add_pccodec_payload_type
@@ -4227,11 +4227,11 @@ sdp_result_e sdp_attr_add_pccodec_payload_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         payload_num = attr_p->attr.pccodec.num_payloads++;
         attr_p->attr.pccodec.payload_type[payload_num] = payload_type;
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_xcap_first_cap_num
@@ -4258,9 +4258,9 @@ uint16_t sdp_attr_get_xcap_first_cap_num (sdp_t *sdp_p, uint16_t level, uint16_t
                 attr_count++;
                 if (attr_count == inst_num) {
                     return (cap_num);
-                } else {
+                } 
                     cap_num += attr_p->attr.cap_p->num_payloads;
-                }
+                
             }
         }
     } else {  /* Capability is at a media level */
@@ -4275,9 +4275,9 @@ uint16_t sdp_attr_get_xcap_first_cap_num (sdp_t *sdp_p, uint16_t level, uint16_t
                 attr_count++;
                 if (attr_count == inst_num) {
                     return (cap_num);
-                } else {
+                } 
                     cap_num += attr_p->attr.cap_p->num_payloads;
-                }
+                
             }
         }
     }  /* Attr is at a media level */
@@ -4314,10 +4314,10 @@ sdp_media_e sdp_attr_get_xcap_media_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_MEDIA_INVALID);
-    } else {
+    } 
         cap_p = attr_p->attr.cap_p;
         return (cap_p->media);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_xcap_transport_type
@@ -4345,10 +4345,10 @@ sdp_transport_e sdp_attr_get_xcap_transport_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_TRANSPORT_INVALID);
-    } else {
+    } 
         cap_p = attr_p->attr.cap_p;
         return (cap_p->transport);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_xcap_num_payload_types
@@ -4378,10 +4378,10 @@ uint16_t sdp_attr_get_xcap_num_payload_types (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         cap_p = attr_p->attr.cap_p;
         return (cap_p->num_payloads);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_xcap_payload_type
@@ -4412,7 +4412,7 @@ uint16_t sdp_attr_get_xcap_payload_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         cap_p = attr_p->attr.cap_p;
         if ((payload_num < 1) ||
             (payload_num > cap_p->num_payloads)) {
@@ -4423,11 +4423,11 @@ uint16_t sdp_attr_get_xcap_payload_type (sdp_t *sdp_p, uint16_t level,
             }
             sdp_p->conf_p->num_invalid_param++;
             return (0);
-        } else {
+        } 
             *indicator = cap_p->payload_indicator[payload_num-1];
             return (cap_p->payload_type[payload_num-1]);
-        }
-    }
+        
+    
 }
 
 
@@ -4489,9 +4489,9 @@ uint16_t sdp_attr_get_cdsc_first_cap_num(sdp_t *sdp_p, uint16_t level, uint16_t 
                 attr_count++;
                 if (attr_count == inst_num) {
                     return (cap_num);
-                } else {
+                } 
                     cap_num += attr_p->attr.cap_p->num_payloads;
-                }
+                
             }
         }
     } else {  /* Capability is at a media level */
@@ -4506,9 +4506,9 @@ uint16_t sdp_attr_get_cdsc_first_cap_num(sdp_t *sdp_p, uint16_t level, uint16_t 
                 attr_count++;
                 if (attr_count == inst_num) {
                     return (cap_num);
-                } else {
+                } 
                     cap_num += attr_p->attr.cap_p->num_payloads;
-                }
+                
             }
         }
     }  /* Attr is at a media level */
@@ -4545,10 +4545,10 @@ sdp_media_e sdp_attr_get_cdsc_media_type(sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_MEDIA_INVALID);
-    } else {
+    } 
         cdsc_p = attr_p->attr.cap_p;
         return (cdsc_p->media);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_cdsc_transport_type
@@ -4576,10 +4576,10 @@ sdp_transport_e sdp_attr_get_cdsc_transport_type(sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_TRANSPORT_INVALID);
-    } else {
+    } 
         cdsc_p = attr_p->attr.cap_p;
         return (cdsc_p->transport);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_cdsc_num_payload_types
@@ -4609,10 +4609,10 @@ uint16_t sdp_attr_get_cdsc_num_payload_types (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         cdsc_p = attr_p->attr.cap_p;
         return (cdsc_p->num_payloads);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_cdsc_payload_type
@@ -4643,7 +4643,7 @@ uint16_t sdp_attr_get_cdsc_payload_type (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         cdsc_p = attr_p->attr.cap_p;
         if ((payload_num < 1) ||
             (payload_num > cdsc_p->num_payloads)) {
@@ -4654,11 +4654,11 @@ uint16_t sdp_attr_get_cdsc_payload_type (sdp_t *sdp_p, uint16_t level,
             }
             sdp_p->conf_p->num_invalid_param++;
             return (0);
-        } else {
+        } 
             *indicator = cdsc_p->payload_indicator[payload_num-1];
             return (cdsc_p->payload_type[payload_num-1]);
-        }
-    }
+        
+    
 }
 
 /* Function:    sdp_attr_add_cdsc_payload_type
@@ -4766,9 +4766,9 @@ tinybool sdp_attr_get_rtr_confirm (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.rtr.confirm);
-    }
+    
 }
 
 
@@ -4787,9 +4787,9 @@ sdp_mediadir_role_e sdp_attr_get_comediadir_role (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_MEDIADIR_ROLE_UNKNOWN);
-    } else {
+    } 
         return (attr_p->attr.comediadir.role);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_silencesupp_enabled
@@ -4817,9 +4817,9 @@ tinybool sdp_attr_get_silencesupp_enabled (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (FALSE);
-    } else {
+    } 
         return (attr_p->attr.silencesupp.enabled);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_silencesupp_timer
@@ -4850,10 +4850,10 @@ uint16_t sdp_attr_get_silencesupp_timer (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         *null_ind = attr_p->attr.silencesupp.timer_null;
         return (attr_p->attr.silencesupp.timer);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_silencesupp_pref
@@ -4884,9 +4884,9 @@ sdp_silencesupp_pref_e sdp_attr_get_silencesupp_pref (sdp_t *sdp_p,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_SILENCESUPP_PREF_UNKNOWN);
-    } else {
+    } 
         return (attr_p->attr.silencesupp.pref);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_silencesupp_siduse
@@ -4917,9 +4917,9 @@ sdp_silencesupp_siduse_e sdp_attr_get_silencesupp_siduse (sdp_t *sdp_p,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_SILENCESUPP_SIDUSE_UNKNOWN);
-    } else {
+    } 
         return (attr_p->attr.silencesupp.siduse);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_silencesupp_fxnslevel
@@ -4950,10 +4950,10 @@ uint8_t sdp_attr_get_silencesupp_fxnslevel (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         *null_ind = attr_p->attr.silencesupp.fxnslevel_null;
         return (attr_p->attr.silencesupp.fxnslevel);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_mptime_num_intervals
@@ -5108,14 +5108,14 @@ sdp_group_attr_e sdp_get_group_attr (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_GROUP_ATTR_UNSUPPORTED);
-    } else {
+    } 
        if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
            SDP_PRINT("%s Stream data group attr field is :%s ",
                      sdp_p->debug_str,
                      sdp_get_group_attr_name(attr_p->attr.stream_data.group_attr) );
         }
         return (attr_p->attr.stream_data.group_attr);
-    }
+    
 }
 
 /* Function:    sdp_get_group_num_id
@@ -5138,13 +5138,13 @@ uint16_t sdp_get_group_num_id (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (0);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             SDP_PRINT("%s Stream data group attr - num of ids is :%u ",
                       sdp_p->debug_str,
                       (unsigned)attr_p->attr.stream_data.num_group_id);
         }
-    }
+    
     return (attr_p->attr.stream_data.num_group_id);
 }
 
@@ -5171,7 +5171,7 @@ const char* sdp_get_group_id (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             SDP_PRINT("%s Stream data group attr - num of ids is :%u ",
                       sdp_p->debug_str,
@@ -5180,7 +5180,7 @@ const char* sdp_get_group_id (sdp_t *sdp_p, uint16_t level,
         if ((id_num < 1) || (id_num > attr_p->attr.stream_data.num_group_id)) {
             return (NULL);
         }
-    }
+    
     return (attr_p->attr.stream_data.group_ids[id_num-1]);
 }
 
@@ -5208,14 +5208,14 @@ const char* sdp_attr_get_x_sidin (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             SDP_PRINT("%s Stream X-sidin attr field is :%s ",
                       sdp_p->debug_str,
                       attr_p->attr.stream_data.x_sidin);
         }
         return (attr_p->attr.stream_data.x_sidin);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_x_sidout
@@ -5242,14 +5242,14 @@ const char* sdp_attr_get_x_sidout (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             SDP_PRINT("%s Stream X-sidout attr field is :%s ",
                       sdp_p->debug_str,
                       attr_p->attr.stream_data.x_sidout);
         }
         return (attr_p->attr.stream_data.x_sidout);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_x_confid
@@ -5276,14 +5276,14 @@ const char* sdp_attr_get_x_confid (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             SDP_PRINT("%s Stream X-confid attr field is :%s ",
                       sdp_p->debug_str,
                       attr_p->attr.stream_data.x_confid);
         }
         return (attr_p->attr.stream_data.x_confid);
-    }
+    
 }
 
 /* Function:    sdp_get_source_filter_mode
@@ -5467,9 +5467,9 @@ sdp_attr_get_sdescriptions_tag (sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return SDP_INVALID_VALUE;
-    } else {
+    } 
         return attr_p->attr.srtp_context.tag;
-    }
+    
 }
 
 /* Function:    sdp_attr_get_sdescriptions_crypto_suite
@@ -6288,9 +6288,9 @@ const char *sdp_attr_get_extmap_uri(sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return (NULL);
-    } else {
+    } 
         return (attr_p->attr.extmap.uri);
-    }
+    
 }
 
 /* Function:    sdp_attr_get_extmap_id
@@ -6315,9 +6315,9 @@ uint16_t sdp_attr_get_extmap_id(sdp_t *sdp_p, uint16_t level,
         }
         sdp_p->conf_p->num_invalid_param++;
         return 0xFFFF;
-    } else {
+    } 
         return (attr_p->attr.extmap.id);
-    }
+    
 }
 
 /* Function:    sdp_attr_set_extmap

@@ -155,7 +155,7 @@ static BLOCK_SIZE get_rd_var_based_fixed_partition(VP9_COMP *cpi, MACROBLOCK *x,
       cpi, &x->plane[0].src, mi_row, mi_col, BLOCK_64X64);
   if (var < 8)
     return BLOCK_64X64;
-  else if (var < 128)
+  if (var < 128)
     return BLOCK_32X32;
   else if (var < 2048)
     return BLOCK_16X16;
@@ -412,7 +412,7 @@ static int set_vt_partitioning(VP9_COMP *cpi, MACROBLOCK *const x,
       return 1;
     }
     return 0;
-  } else if (bsize > bsize_min) {
+  } if (bsize > bsize_min) {
     // Variance already computed to set the force_split.
     if (cm->frame_type == KEY_FRAME) get_variance(&vt.part_variances->none);
     // For key frame: take split for bsize above 32X32 or very high variance.
@@ -511,7 +511,7 @@ void vp9_set_variance_partition_thresholds(VP9_COMP *cpi, int q) {
   if (sf->partition_search_type != VAR_BASED_PARTITION &&
       sf->partition_search_type != REFERENCE_PARTITION) {
     return;
-  } else {
+  } 
     set_vbp_thresholds(cpi, cpi->vbp_thresholds, q);
     // The thresholds below are not changed locally.
     if (is_key_frame) {
@@ -528,7 +528,7 @@ void vp9_set_variance_partition_thresholds(VP9_COMP *cpi, int q) {
     }
     cpi->vbp_threshold_copy = cpi->vbp_thresholds[0] << 16;
     cpi->vbp_threshold_minmax = 15 + (q >> 3);
-  }
+  
 }
 
 // Compute the minmax over the 8x8 subblocks.
@@ -1784,7 +1784,7 @@ static BLOCK_SIZE find_partition_size(BLOCK_SIZE bsize, int rows_left,
                                       int cols_left, int *bh, int *bw) {
   if (rows_left <= 0 || cols_left <= 0) {
     return VPXMIN(bsize, BLOCK_8X8);
-  } else {
+  } 
     for (; bsize > 0; bsize -= 3) {
       *bh = num_8x8_blocks_high_lookup[bsize];
       *bw = num_8x8_blocks_wide_lookup[bsize];
@@ -1792,7 +1792,7 @@ static BLOCK_SIZE find_partition_size(BLOCK_SIZE bsize, int rows_left,
         break;
       }
     }
-  }
+  
   return bsize;
 }
 
@@ -2888,11 +2888,11 @@ static void rd_pick_partition(VP9_COMP *cpi, ThreadData *td,
         if (this_rdc.rate == INT_MAX) {
           sum_rdc.rdcost = INT64_MAX;
           break;
-        } else {
+        } 
           sum_rdc.rate += this_rdc.rate;
           sum_rdc.dist += this_rdc.dist;
           sum_rdc.rdcost += this_rdc.rdcost;
-        }
+        
       }
     }
 
@@ -3143,10 +3143,10 @@ static int check_dual_ref_flags(VP9_COMP *cpi) {
 
   if (segfeature_active(&cpi->common.seg, 1, SEG_LVL_REF_FRAME)) {
     return 0;
-  } else {
+  } 
     return (!!(ref_flags & VP9_GOLD_FLAG) + !!(ref_flags & VP9_LAST_FLAG) +
             !!(ref_flags & VP9_ALT_FLAG)) >= 2;
-  }
+  
 }
 
 static void reset_skip_tx_size(VP9_COMMON *cm, TX_SIZE max_tx_size) {
@@ -3165,7 +3165,7 @@ static void reset_skip_tx_size(VP9_COMMON *cm, TX_SIZE max_tx_size) {
 static MV_REFERENCE_FRAME get_frame_type(const VP9_COMP *cpi) {
   if (frame_is_intra_only(&cpi->common))
     return INTRA_FRAME;
-  else if (cpi->rc.is_src_frame_alt_ref && cpi->refresh_golden_frame)
+  if (cpi->rc.is_src_frame_alt_ref && cpi->refresh_golden_frame)
     return ALTREF_FRAME;
   else if (cpi->refresh_golden_frame || cpi->refresh_alt_ref_frame)
     return GOLDEN_FRAME;
@@ -3179,7 +3179,7 @@ static TX_MODE select_tx_mode(const VP9_COMP *cpi, MACROBLOCKD *const xd) {
     return ALLOW_16X16;
   if (cpi->sf.tx_size_search_method == USE_LARGESTALL)
     return ALLOW_32X32;
-  else if (cpi->sf.tx_size_search_method == USE_FULL_RD ||
+  if (cpi->sf.tx_size_search_method == USE_FULL_RD ||
            cpi->sf.tx_size_search_method == USE_TX_8X8)
     return TX_MODE_SELECT;
   else
@@ -4239,7 +4239,7 @@ static INTERP_FILTER get_interp_filter(
       threshes[EIGHTTAP_SMOOTH] > threshes[EIGHTTAP_SHARP] &&
       threshes[EIGHTTAP_SMOOTH] > threshes[SWITCHABLE - 1]) {
     return EIGHTTAP_SMOOTH;
-  } else if (threshes[EIGHTTAP_SHARP] > threshes[EIGHTTAP] &&
+  } if (threshes[EIGHTTAP_SHARP] > threshes[EIGHTTAP] &&
              threshes[EIGHTTAP_SHARP] > threshes[SWITCHABLE - 1]) {
     return EIGHTTAP_SHARP;
   } else if (threshes[EIGHTTAP] > threshes[SWITCHABLE - 1]) {

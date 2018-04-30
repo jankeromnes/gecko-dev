@@ -59,10 +59,10 @@ std::string Path_GetExecutablePath()
 		rchPath[ nRead ] = 0;
 		return rchPath;
 	}
-	else
-	{
+	
+	
 		return "";
-	}
+	
 #else
 	AssertMsg( false, "Implement Plat_GetExecutablePath" );
 	return "";
@@ -106,7 +106,7 @@ std::string Path_StripFilename( const std::string & sPath, char slash )
 	std::string::size_type n = sPath.find_last_of( slash );
 	if( n == std::string::npos )
 		return sPath;
-	else
+	
 		return std::string( sPath.begin(), sPath.begin() + n );
 }
 
@@ -119,7 +119,7 @@ std::string Path_StripDirectory( const std::string & sPath, char slash )
 	std::string::size_type n = sPath.find_last_of( slash );
 	if( n == std::string::npos )
 		return sPath;
-	else
+	
 		return std::string( sPath.begin() + n + 1, sPath.end() );
 }
 
@@ -195,17 +195,17 @@ std::string Path_MakeAbsolute( const std::string & sRelativePath, const std::str
 
 	if( Path_IsAbsolute( sRelativePath ) )
 		return sRelativePath;
-	else
-	{
+	
+	
 		if( !Path_IsAbsolute( sBasePath ) )
 			return "";
 
 		std::string sCompacted = Path_Compact( Path_Join( sBasePath, sRelativePath, slash ), slash );
 		if( Path_IsAbsolute( sCompacted ) )
 			return sCompacted;
-		else
+		
 			return "";
-	}
+	
 }
 
 
@@ -754,13 +754,13 @@ std::string Path_FilePathToUrl( const std::string & sRelativePath, const std::st
 	{
 		return sRelativePath;
 	}
-	else
-	{
+	
+	
 		std::string sAbsolute = Path_MakeAbsolute( sRelativePath, sBasePath );
 		if ( sAbsolute.empty() )
 			return sAbsolute;
 		return std::string( FILE_URL_PREFIX ) + sAbsolute;
-	}
+	
 }
 
 // -----------------------------------------------------------------------------------------------------
@@ -772,10 +772,10 @@ std::string Path_UrlToFilePath( const std::string & sFileUrl )
 	{
 		return sFileUrl.c_str() + strlen( FILE_URL_PREFIX );
 	}
-	else
-	{
+	
+	
 		return "";
-	}
+	
 }
 
 

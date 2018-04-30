@@ -287,7 +287,7 @@ static spx_word16_t sinc(float cutoff, float x, int N, const struct FuncDef *win
    float xx = x * cutoff;
    if (fabs(x)<1e-6)
       return cutoff;
-   else if (fabs(x) > .5*N)
+   if (fabs(x) > .5*N)
       return 0;
    /*FIXME: Can it really be any slower than this? */
    return cutoff*sin(M_PI*xx)/(M_PI*xx) * compute_func(fabs(2.*x/N), window_func);

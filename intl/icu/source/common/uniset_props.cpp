@@ -666,7 +666,7 @@ void UnicodeSet::applyPattern(RuleCharacterIterator& chars,
                     if (lastItem != 0) {
                         op = (UChar) c;
                         continue;
-                    } else {
+                    } 
                         // Treat final trailing '-' as a literal
                         add(c, c);
                         c = chars.next(opts, literal, ec);
@@ -676,7 +676,7 @@ void UnicodeSet::applyPattern(RuleCharacterIterator& chars,
                             mode = 2;
                             continue;
                         }
-                    }
+                    
                 }
                 // syntaxError(chars, "'-' not after char or set");
                 ec = U_MALFORMED_SET;
@@ -1070,9 +1070,9 @@ UnicodeSet::applyPropertyAlias(const UnicodeString& prop,
                         clear();
                         add(ch);
                         return *this;
-                    } else {
+                    } 
                         FAIL(ec);
-                    }
+                    
                 }
             case UCHAR_UNICODE_1_NAME:
                 // ICU 49 deprecates the Unicode_1_Name property APIs.

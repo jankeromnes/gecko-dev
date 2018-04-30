@@ -1648,9 +1648,9 @@ UBool DecimalFormat::subparse(const UnicodeString& text,
                         }
 
                         break; // Whether we fail or succeed, we exit this loop
-                    } else {
+                    } 
                         break;
-                    }
+                    
                 } else { // not parsing exponent
                     break;
               }
@@ -1758,7 +1758,7 @@ printf("PP -> %d, SLOW = [%s]!    pp=%d, os=%d, err=%s\n", position, parsedNum.d
         return FALSE;
     }
 #if UCONFIG_HAVE_PARSEALLINPUT
-  else if (fParseAllInput==UNUM_YES&&parsePosition.getIndex()!=textLength)
+  if (fParseAllInput==UNUM_YES&&parsePosition.getIndex()!=textLength)
     {
 #ifdef FMT_DEBUG
       printf(" PP didnt consume all (UNUM_YES), err\n");
@@ -2280,7 +2280,7 @@ UBool DecimalFormat::matchDecimal(UChar32 symbolChar,
                              const UnicodeSet *sset, UChar32 schar) {
    if(sawDecimal) {
        return schar==sawDecimalChar;
-   } else if(schar==symbolChar) {
+   } if(schar==symbolChar) {
        return TRUE;
    } else if(sset!=NULL) {
         return sset->contains(schar);
@@ -2296,7 +2296,7 @@ UBool DecimalFormat::matchGrouping(UChar32 groupingChar,
                              UChar32 schar) {
     if(sawGrouping) {
         return schar==sawGroupingChar;  // previously found
-    } else if(schar==groupingChar) {
+    } if(schar==groupingChar) {
         return TRUE; // char from symbols
     } else if(sset!=NULL) {
         return sset->contains(schar) &&  // in groupingSet but...

@@ -960,7 +960,7 @@ static const uint16_t data2126 = 0x03A9 | HAS_VOWEL;
 uint32_t getLetterData(UChar32 c) {
     if (c < 0x370 || 0x2126 < c || (0x3ff < c && c < 0x1f00)) {
         return 0;
-    } else if (c <= 0x3ff) {
+    } if (c <= 0x3ff) {
         return data0370[c - 0x370];
     } else if (c <= 0x1fff) {
         return data1F00[c - 0x1f00];
@@ -1563,7 +1563,7 @@ static int32_t _cmpFold(
             }
             c1=c2=-1;       /* make us fetch new code units */
             continue;
-        } else if(c1<0) {
+        } if(c1<0) {
             cmpRes=-1;      /* string 1 ends before string 2 */
             break;
         } else if(c2<0) {

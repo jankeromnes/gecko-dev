@@ -596,10 +596,10 @@ Format* MessageFormat::getCachedFormatter(int32_t argumentNumber) const {
     void* ptr = uhash_iget(cachedFormatters, argumentNumber);
     if (ptr != NULL && dynamic_cast<DummyFormat*>((Format*)ptr) == NULL) {
         return (Format*) ptr;
-    } else {
+    } 
         // Not cached, or a DummyFormat representing setFormat(NULL).
         return NULL;
-    }
+    
 }
 
 // -------------------------------------
@@ -1184,7 +1184,7 @@ void MessageFormat::formatComplexSubMessage(int32_t msgStart,
         if (type == UMSGPAT_PART_TYPE_MSG_LIMIT) {
             sb.append(msgString, prevIndex, index - prevIndex);
             break;
-        } else if (type == UMSGPAT_PART_TYPE_REPLACE_NUMBER || type == UMSGPAT_PART_TYPE_SKIP_SYNTAX) {
+        } if (type == UMSGPAT_PART_TYPE_REPLACE_NUMBER || type == UMSGPAT_PART_TYPE_SKIP_SYNTAX) {
             sb.append(msgString, prevIndex, index - prevIndex);
             if (type == UMSGPAT_PART_TYPE_REPLACE_NUMBER) {
                 const PluralSelectorContext &pluralNumber =
@@ -1450,7 +1450,7 @@ MessageFormat::parse(int32_t msgStart,
             if (next < 0) {
                 pos.setErrorIndex(sourceOffset);
                 return NULL; // leave index as is to signal error
-            } else {
+            } 
                 UnicodeString strValue(source.tempSubString(sourceOffset, next - sourceOffset));
                 UnicodeString compValue;
                 compValue.append(LEFT_CURLY_BRACE);
@@ -1461,7 +1461,7 @@ MessageFormat::parse(int32_t msgStart,
                     haveArgResult = TRUE;
                 }
                 sourceOffset = next;
-            }
+            
         } else if(argType==UMSGPAT_ARG_TYPE_CHOICE) {
             tempStatus.setIndex(sourceOffset);
             double choiceResult = ChoiceFormat::parseArgument(msgPattern, i, source, tempStatus);
@@ -1967,9 +1967,9 @@ UnicodeString MessageFormat::PluralSelectorProvider::select(void *ctx, double nu
             return UnicodeString(FALSE, OTHER_STRING, 5);
         }
         return rules->select(digits);
-    } else {
+    } 
         return rules->select(number);
-    }
+    
 }
 
 void MessageFormat::PluralSelectorProvider::reset() {

@@ -74,7 +74,7 @@ static inline uint32_t f(uint32_t t, uint32_t B, uint32_t C, uint32_t D)
     {
         return (B & C) | ((~B) & D);
     }
-    else if (t < 40)
+    if (t < 40)
     {
         return B ^ C ^ D;
     }
@@ -99,7 +99,7 @@ static inline uint32_t K(uint32_t t)
     {
         return 0x5a827999;
     }
-    else if (t < 40)
+    if (t < 40)
     {
         return 0x6ed9eba1;
     }

@@ -140,66 +140,66 @@ const GrXPFactory* GrCoverageSetOpXPFactory::Get(SkRegion::Op regionOp, bool inv
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gReplaceCDXPFI(
                         SkRegion::kReplace_Op, true);
                 return &gReplaceCDXPFI;
-            } else {
+            } 
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gReplaceCDXPF(
                         SkRegion::kReplace_Op, false);
                 return &gReplaceCDXPF;
-            }
+            
         }
         case SkRegion::kIntersect_Op: {
             if (invertCoverage) {
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gIntersectCDXPFI(
                         SkRegion::kIntersect_Op, true);
                 return &gIntersectCDXPFI;
-            } else {
+            } 
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gIntersectCDXPF(
                         SkRegion::kIntersect_Op, false);
                 return &gIntersectCDXPF;
-            }
+            
         }
         case SkRegion::kUnion_Op: {
             if (invertCoverage) {
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gUnionCDXPFI(SkRegion::kUnion_Op,
                                                                                true);
                 return &gUnionCDXPFI;
-            } else {
+            } 
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gUnionCDXPF(SkRegion::kUnion_Op,
                                                                               false);
                 return &gUnionCDXPF;
-            }
+            
         }
         case SkRegion::kXOR_Op: {
             if (invertCoverage) {
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gXORCDXPFI(SkRegion::kXOR_Op,
                                                                              true);
                 return &gXORCDXPFI;
-            } else {
+            } 
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gXORCDXPF(SkRegion::kXOR_Op,
                                                                             false);
                 return &gXORCDXPF;
-            }
+            
         }
         case SkRegion::kDifference_Op: {
             if (invertCoverage) {
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gDifferenceCDXPFI(
                         SkRegion::kDifference_Op, true);
                 return &gDifferenceCDXPFI;
-            } else {
+            } 
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gDifferenceCDXPF(
                         SkRegion::kDifference_Op, false);
                 return &gDifferenceCDXPF;
-            }
+            
         }
         case SkRegion::kReverseDifference_Op: {
             if (invertCoverage) {
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gRevDiffCDXPFI(
                         SkRegion::kReverseDifference_Op, true);
                 return &gRevDiffCDXPFI;
-            } else {
+            } 
                 static _CONSTEXPR_ const GrCoverageSetOpXPFactory gRevDiffCDXPF(
                         SkRegion::kReverseDifference_Op, false);
                 return &gRevDiffCDXPF;
-            }
+            
         }
     }
 #undef _CONSTEXPR_

@@ -919,10 +919,10 @@ static int vp9_pattern_search(const MACROBLOCK *x, MV *ref_mv, int search_param,
       }
       if (best_site == -1) {
         continue;
-      } else {
+      } 
         best_init_s = t;
         k = best_site;
-      }
+      
     }
     if (best_init_s != -1) {
       br += candidates[best_init_s][k].row;
@@ -962,11 +962,11 @@ static int vp9_pattern_search(const MACROBLOCK *x, MV *ref_mv, int search_param,
 
         if (best_site == -1) {
           continue;
-        } else {
+        } 
           br += candidates[s][best_site].row;
           bc += candidates[s][best_site].col;
           k = best_site;
-        }
+        
       }
 
       do {
@@ -1093,10 +1093,10 @@ static int vp9_pattern_search_sad(
       }
       if (best_site == -1) {
         continue;
-      } else {
+      } 
         best_init_s = t;
         k = best_site;
-      }
+      
     }
     if (best_init_s != -1) {
       br += candidates[best_init_s][k].row;
@@ -1136,11 +1136,11 @@ static int vp9_pattern_search_sad(
 
         if (best_site == -1) {
           continue;
-        } else {
+        } 
           br += candidates[s][best_site].row;
           bc += candidates[s][best_site].col;
           k = best_site;
-        }
+        
       }
 
       do {
@@ -2296,11 +2296,11 @@ int vp9_refining_search_sad(const MACROBLOCK *x, MV *ref_mv, int error_per_bit,
 
     if (best_site == -1) {
       break;
-    } else {
+    } 
       ref_mv->row += neighbors[best_site].row;
       ref_mv->col += neighbors[best_site].col;
       best_address = get_buf_from_mv(in_what, ref_mv);
-    }
+    
   }
 
   return best_sad;
@@ -2350,10 +2350,10 @@ int vp9_refining_search_8p_c(const MACROBLOCK *x, MV *ref_mv, int error_per_bit,
 
     if (best_site == -1) {
       break;
-    } else {
+    } 
       ref_mv->row += neighbors[best_site].row;
       ref_mv->col += neighbors[best_site].col;
-    }
+    
   }
   return best_sad;
 }

@@ -552,7 +552,7 @@ uprv_trunc(double d)
 
     if(u_signBit(d))    /* Signbit() picks up -0.0;  d<0 does not. */
         return ceil(d);
-    else
+    
         return floor(d);
 
 #else

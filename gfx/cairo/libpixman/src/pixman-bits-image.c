@@ -84,10 +84,10 @@ bits_image_fetch_pixel_nearest (bits_image_t   *image,
 
 	return get_pixel (image, x0, y0, FALSE);
     }
-    else
-    {
+    
+    
 	return get_pixel (image, x0, y0, TRUE);
-    }
+    
 }
 
 static force_inline uint32_t
@@ -238,7 +238,7 @@ bits_image_fetch_bilinear_no_repeat_8888 (pixman_iter_t *iter,
 	memset (buffer, 0, width * sizeof (uint32_t));
 	return iter->buffer;
     }
-    else if (bits->format == PIXMAN_x8r8g8b8)
+    if (bits->format == PIXMAN_x8r8g8b8)
     {
 	if (top_row == zero)
 	{
@@ -1743,7 +1743,7 @@ create_bits (pixman_format_code_t format,
 
     if (clear)
 	return calloc (buf_size, 1);
-    else
+    
 	return malloc (buf_size);
 }
 

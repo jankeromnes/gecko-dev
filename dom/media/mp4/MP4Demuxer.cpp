@@ -150,7 +150,7 @@ MP4Demuxer::Init()
       : MediaResult(NS_ERROR_DOM_MEDIA_DEMUXER_ERR,
                     RESULT_DETAIL("Invalid MP4 metadata or OOM")),
       __func__);
-  } else if (NS_FAILED(initData.Result()) && result == NS_OK) {
+  } if (NS_FAILED(initData.Result()) && result == NS_OK) {
     result = Move(initData.Result());
   }
 
@@ -223,7 +223,7 @@ MP4Demuxer::Init()
                                              info.Result().Description().get()));
         }
         continue;
-      } else if (NS_FAILED(info.Result()) && result == NS_OK) {
+      } if (NS_FAILED(info.Result()) && result == NS_OK) {
         result = Move(info.Result());
       }
       MP4Metadata::ResultAndIndice indices =
@@ -259,7 +259,7 @@ MP4Demuxer::Init()
                                              info.Result().Description().get()));
         }
         continue;
-      } else if (NS_FAILED(info.Result()) && result == NS_OK) {
+      } if (NS_FAILED(info.Result()) && result == NS_OK) {
         result = Move(info.Result());
       }
       MP4Metadata::ResultAndIndice indices =

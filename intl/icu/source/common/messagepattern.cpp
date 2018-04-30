@@ -362,7 +362,7 @@ MessagePattern::getNumericValue(const Part &part) const {
     UMessagePatternPartType type=part.type;
     if(type==UMSGPAT_PART_TYPE_ARG_INT) {
         return part.value;
-    } else if(type==UMSGPAT_PART_TYPE_ARG_DOUBLE) {
+    } if(type==UMSGPAT_PART_TYPE_ARG_DOUBLE) {
         return numericValues[part.value];
     } else {
         return UMSGPAT_NO_NUMERIC_VALUE;
@@ -380,9 +380,9 @@ MessagePattern::getPluralOffset(int32_t pluralStart) const {
     const Part &part=getPart(pluralStart);
     if(Part::hasNumericValue(part.type)) {
         return getNumericValue(part);
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 // MessagePattern::Part ---------------------------------------------------- ***
@@ -520,10 +520,10 @@ MessagePattern::parseMessage(int32_t index, int32_t msgStartLength,
             if(parentType==UMSGPAT_ARG_TYPE_CHOICE) {
                 // Let the choice style parser see the '}' or '|'.
                 return index-1;
-            } else {
+            } 
                 // continue parsing after the '}'
                 return index;
-            }
+            
         }  // else: c is part of literal text
     }
     if(nestingLevel>0 && !inTopLevelChoiceMessage(nestingLevel, parentType)) {
@@ -852,7 +852,7 @@ MessagePattern::parsePluralOrSelectStyle(UMessagePatternArgType argType,
                 }
                 isEmpty=FALSE;
                 continue;  // no message fragment after the offset
-            } else {
+            } 
                 // normal selector word
                 if(length>Part::MAX_LENGTH) {
                     setParseError(parseError, selectorIndex);  // Argument selector too long.
@@ -863,7 +863,7 @@ MessagePattern::parsePluralOrSelectStyle(UMessagePatternArgType argType,
                 if(0==msg.compare(selectorIndex, length, kOther, 0, 5)) {
                     hasOther=TRUE;
                 }
-            }
+            
         }
         if(U_FAILURE(errorCode)) {
             return 0;
@@ -899,10 +899,10 @@ MessagePattern::parseArgNumber(const UnicodeString &s, int32_t start, int32_t li
     if(c==0x30) {
         if(start==limit) {
             return 0;
-        } else {
+        } 
             number=0;
             badNumber=TRUE;  // leading zero
-        }
+        
     } else if(0x31<=c && c<=0x39) {
         number=c-0x30;
         badNumber=FALSE;
@@ -923,9 +923,9 @@ MessagePattern::parseArgNumber(const UnicodeString &s, int32_t start, int32_t li
     // There are only ASCII digits.
     if(badNumber) {
         return UMSGPAT_ARG_NAME_NOT_VALID;
-    } else {
+    } 
         return number;
-    }
+    
 }
 
 void
@@ -961,9 +961,9 @@ MessagePattern::parseDouble(int32_t start, int32_t limit, UBool allowInfinity,
                     isNegative!=0 ? -infinity : infinity,
                     start, limit-start, errorCode);
                 return;
-            } else {
+            } 
                 break;
-            }
+            
         }
         // try to parse the number as a small integer but fall back to a double
         while('0'<=c && c<='9') {
@@ -1214,7 +1214,7 @@ MessageImpl::appendSubMessageWithoutSkipSyntax(const MessagePattern &msgPattern,
         int32_t index=part.getIndex();
         if(type==UMSGPAT_PART_TYPE_MSG_LIMIT) {
             return result.append(msgString, prevIndex, index-prevIndex);
-        } else if(type==UMSGPAT_PART_TYPE_SKIP_SYNTAX) {
+        } if(type==UMSGPAT_PART_TYPE_SKIP_SYNTAX) {
             result.append(msgString, prevIndex, index-prevIndex);
             prevIndex=part.getLimit();
         } else if(type==UMSGPAT_PART_TYPE_ARG_START) {

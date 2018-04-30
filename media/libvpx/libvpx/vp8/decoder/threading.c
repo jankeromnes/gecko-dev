@@ -574,12 +574,12 @@ static THREAD_FUNCTION thread_decoding_proc(void *p_data) {
     if (sem_wait(&pbi->h_event_start_decoding[ithread]) == 0) {
       if (protected_read(&pbi->mt_mutex, &pbi->b_multithreaded_rd) == 0) {
         break;
-      } else {
+      } 
         MACROBLOCKD *xd = &mbrd->mbd;
         xd->left_context = &mb_row_left_context;
 
         mt_decode_mb_rows(pbi, xd, ithread + 1);
-      }
+      
     }
   }
 

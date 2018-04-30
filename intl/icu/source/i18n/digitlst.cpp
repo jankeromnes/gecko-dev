@@ -191,7 +191,7 @@ int32_t DigitList::compare(const DigitList &other) {
     fContext.digits = savedDigits;
     if (decNumberIsZero(&result)) {
         return 0;
-    } else if (decNumberIsSpecial(&result)) {
+    } if (decNumberIsSpecial(&result)) {
         return -2;
     } else if (result.bits & DECNEG) {
         return -1;
@@ -357,9 +357,9 @@ DigitList::getCount() const {
        // The extra test for exponent==0 is needed because parsing sometimes appends
        // zero digits.  It's bogus, decimalFormatter parsing needs to be cleaned up.
        return 0;
-    } else {
+    } 
        return fDecNumber->digits;
-    }
+    
 }
     
 void     

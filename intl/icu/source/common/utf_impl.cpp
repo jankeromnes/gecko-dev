@@ -96,7 +96,7 @@ static UChar32
 errorValue(int32_t count, int8_t strict) {
     if(strict>=0) {
         return utf8_errorValue[count];
-    } else if(strict==-3) {
+    } if(strict==-3) {
         return 0xfffd;
     } else {
         return U_SENTINEL;
@@ -242,7 +242,7 @@ utf8_prevCharSafeBody(const uint8_t *s, int32_t start, int32_t *pi, UChar32 c, U
             if(b1<0xe0) {
                 *pi=i;
                 return ((b1-0xc0)<<6)|(c&0x3f);
-            } else if(b1<0xf0 ? U8_IS_VALID_LEAD3_AND_T1(b1, c) : U8_IS_VALID_LEAD4_AND_T1(b1, c)) {
+            } if(b1<0xf0 ? U8_IS_VALID_LEAD3_AND_T1(b1, c) : U8_IS_VALID_LEAD4_AND_T1(b1, c)) {
                 // Truncated 3- or 4-byte sequence.
                 *pi=i;
                 return errorValue(1, strict);
@@ -260,10 +260,10 @@ utf8_prevCharSafeBody(const uint8_t *s, int32_t start, int32_t *pi, UChar32 c, U
                             c=(b2<<12)|((b1&0x3f)<<6)|c;
                             if(strict<=0 || !U_IS_UNICODE_NONCHAR(c)) {
                                 return c;
-                            } else {
+                            } 
                                 // strict: forbid non-characters like U+fffe
                                 return errorValue(2, strict);
-                            }
+                            
                         }
                     } else {
                         // strict=-2 -> lenient: allow surrogates
@@ -287,10 +287,10 @@ utf8_prevCharSafeBody(const uint8_t *s, int32_t start, int32_t *pi, UChar32 c, U
                         c=(b3<<18)|((b2&0x3f)<<12)|((b1&0x3f)<<6)|c;
                         if(strict<=0 || !U_IS_UNICODE_NONCHAR(c)) {
                             return c;
-                        } else {
+                        } 
                             // strict: forbid non-characters like U+fffe
                             return errorValue(3, strict);
-                        }
+                        
                     }
                 }
             }

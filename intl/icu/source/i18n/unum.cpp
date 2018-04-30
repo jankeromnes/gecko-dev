@@ -443,7 +443,7 @@ unum_parseDecimal(const UNumberFormat*  fmt,
     StringPiece sp = res.getDecimalNumber(*status);
     if (U_FAILURE(*status)) {
        return -1;
-    } else if (sp.size() > outBufLength) {
+    } if (sp.size() > outBufLength) {
         *status = U_BUFFER_OVERFLOW_ERROR;
     } else if (sp.size() == outBufLength) {
         uprv_strncpy(outBuf, sp.data(), sp.size());
@@ -512,7 +512,7 @@ unum_getAttribute(const UNumberFormat*          fmt,
         // Supported for all subclasses
         return nf->isLenient();
     }
-    else if (attr == UNUM_MAX_INTEGER_DIGITS) {
+    if (attr == UNUM_MAX_INTEGER_DIGITS) {
         return nf->getMaximumIntegerDigits();
     }
     else if (attr == UNUM_MIN_INTEGER_DIGITS) {
@@ -557,7 +557,7 @@ unum_setAttribute(    UNumberFormat*          fmt,
         // keep this here as the class may not be a DecimalFormat
         return nf->setLenient(newValue != 0);
     }
-    else if (attr == UNUM_MAX_INTEGER_DIGITS) {
+    if (attr == UNUM_MAX_INTEGER_DIGITS) {
         return nf->setMaximumIntegerDigits(newValue);
     }
     else if (attr == UNUM_MIN_INTEGER_DIGITS) {
@@ -597,9 +597,9 @@ unum_getDoubleAttribute(const UNumberFormat*          fmt,
     const DecimalFormat* df = dynamic_cast<const DecimalFormat*>(nf);
     if (df != NULL &&  attr == UNUM_ROUNDING_INCREMENT) {
         return df->getRoundingIncrement();
-    } else {
+    } 
         return -1.0;
-    }
+    
 }
 
 U_CAPI void U_EXPORT2

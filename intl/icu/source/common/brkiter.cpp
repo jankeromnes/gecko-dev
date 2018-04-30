@@ -390,11 +390,11 @@ BreakIterator::createInstance(const Locale& loc, int32_t kind, UErrorCode& statu
         }
         return result;
     }
-    else
+    
 #endif
-    {
+    
         return makeInstance(loc, kind, status);
-    }
+    
 }
 
 // -------------------------------------

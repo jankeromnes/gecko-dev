@@ -571,9 +571,9 @@ DecimalFormatSymbols::getPatternForCurrencySpacing(UCurrencySpacing type,
     }
     if (beforeCurrency) {
       return currencySpcBeforeSym[(int32_t)type];
-    } else {
+    } 
       return currencySpcAfterSym[(int32_t)type];
-    }
+    
 }
 
 void

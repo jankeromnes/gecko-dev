@@ -405,9 +405,9 @@ NumberFormat::format(double number,
                      UErrorCode &status) const {
     if(U_SUCCESS(status)) {
         return format(number,appendTo,pos);
-    } else {
+    } 
         return appendTo;
-    }
+    
 }
 
 UnicodeString&
@@ -417,9 +417,9 @@ NumberFormat::format(int32_t number,
                      UErrorCode &status) const {
     if(U_SUCCESS(status)) {
         return format(number,appendTo,pos);
-    } else {
+    } 
         return appendTo;
-    }
+    
 }
 
 UnicodeString&
@@ -429,9 +429,9 @@ NumberFormat::format(int64_t number,
                      UErrorCode &status) const {
     if(U_SUCCESS(status)) {
         return format(number,appendTo,pos);
-    } else {
+    } 
         return appendTo;
-    }
+    
 }
 
 
@@ -1010,10 +1010,10 @@ NumberFormat::unregister(URegistryKey key, UErrorCode& status)
     }
     if (haveService()) {
         return gService->unregister(key, status);
-    } else {
+    } 
         status = U_ILLEGAL_ARGUMENT_ERROR;
         return FALSE;
-    }
+    
 }
 
 // -------------------------------------
@@ -1393,7 +1393,7 @@ NumberFormat::makeInstance(const Locale& desiredLocale,
     if (U_FAILURE(status)) {
         return NULL;
     }
-    else {
+    
         // Loads the decimal symbols of the desired locale.
         symbolsToAdopt.adoptInsteadAndCheckErrorCode(new DecimalFormatSymbols(desiredLocale, status), status);
         if (U_FAILURE(status)) {
@@ -1421,7 +1421,7 @@ NumberFormat::makeInstance(const Locale& desiredLocale,
 
         // Creates the specified decimal format style of the desired locale.
         pattern.setTo(TRUE, patResStr, patLen);
-    }
+    
     if (U_FAILURE(status)) {
         return NULL;
     }

@@ -66,7 +66,7 @@ pixman_malloc_abc (unsigned int a,
 {
     if (a >= INT32_MAX / b)
 	return NULL;
-    else if (a * b >= INT32_MAX / c)
+    if (a * b >= INT32_MAX / c)
 	return NULL;
     else
 	return malloc (a * b * c);

@@ -1786,7 +1786,7 @@ _cairo_ps_surface_analyze_operation (cairo_ps_surface_t    *surface,
 	if (surface_pattern->surface->type == CAIRO_SURFACE_TYPE_RECORDING) {
 	    if (pattern->extend == CAIRO_EXTEND_PAD)
 		return CAIRO_INT_STATUS_UNSUPPORTED;
-	    else
+	    
 		return CAIRO_INT_STATUS_ANALYZE_RECORDING_SURFACE_PATTERN;
 	}
     }
@@ -2639,7 +2639,7 @@ _cairo_ps_surface_acquire_surface (cairo_ps_surface_t      *surface,
 	    *height = extents.height;
 	}
 	return CAIRO_STATUS_SUCCESS;
-    } else {
+    } 
 	status = _cairo_surface_acquire_source_image (pattern->surface,
 						      &surface->acquired_image,
 						      &surface->image_extra);
@@ -2691,7 +2691,7 @@ _cairo_ps_surface_acquire_surface (cairo_ps_surface_t      *surface,
 	*origin_x = x;
 	*origin_y = y;
 	return CAIRO_STATUS_SUCCESS;
-    }
+    
 
 BAIL:
     _cairo_ps_surface_release_surface (surface, pattern);

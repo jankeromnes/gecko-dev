@@ -933,9 +933,9 @@ UnicodeString& RelativeDateTimeFormatter::format(
                 UnicodeString result(unitFormatString);
                 adjustForContext(result);
                 return appendTo.append(result);
-            } else {
+            } 
                 return appendTo.append(unitFormatString);
-            }
+            
         }
     }
     // otherwise fallback to formatNumeric

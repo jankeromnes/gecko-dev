@@ -614,9 +614,9 @@ const char* get_glsl_version_decl_string(GrGLStandard standard, GrGLSLGeneration
             SkASSERT(kGL_GrGLStandard == standard);
             if (isCoreProfile) {
                 return "#version 150\n";
-            } else {
+            } 
                 return "#version 150 compatibility\n";
-            }
+            
         case k330_GrGLSLGeneration:
             if (kGLES_GrGLStandard == standard) {
                 return "#version 300 es\n";
@@ -624,25 +624,25 @@ const char* get_glsl_version_decl_string(GrGLStandard standard, GrGLSLGeneration
                 SkASSERT(kGL_GrGLStandard == standard);
                 if (isCoreProfile) {
                     return "#version 330\n";
-                } else {
+                } 
                     return "#version 330 compatibility\n";
-                }
+                
             }
         case k400_GrGLSLGeneration:
             SkASSERT(kGL_GrGLStandard == standard);
             if (isCoreProfile) {
                 return "#version 400\n";
-            } else {
+            } 
                 return "#version 400 compatibility\n";
-            }
+            
         case k420_GrGLSLGeneration:
             SkASSERT(kGL_GrGLStandard == standard);
             if (isCoreProfile) {
                 return "#version 420\n";
             }
-            else {
+            
                 return "#version 420 compatibility\n";
-            }
+            
         case k310es_GrGLSLGeneration:
             SkASSERT(kGLES_GrGLStandard == standard);
             return "#version 310 es\n";

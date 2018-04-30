@@ -328,9 +328,9 @@ strcmpMax(const UChar *s, int32_t length, const UChar *t, int32_t max) {
 
     if(max==0 || *t==0) {
         return 0; /* equal to length of both strings */
-    } else {
+    } 
         return -max; /* return lengh difference */
-    }
+    
 }
 
 U_CFUNC UBool U_EXPORT2
@@ -380,7 +380,7 @@ ucase_addStringCaseClosure(const UChar *s, int32_t length, const USetAdder *sa) 
                 ucase_addCaseClosure(c, sa);
             }
             return TRUE;
-        } else if(result<0) {
+        } if(result<0) {
             limit=i;
         } else /* result>0 */ {
             start=i+1;
@@ -576,10 +576,10 @@ getDotType(UChar32 c) {
     uint16_t props=UTRIE2_GET16(&ucase_props_singleton.trie, c);
     if(!UCASE_HAS_EXCEPTION(props)) {
         return props&UCASE_DOT_MASK;
-    } else {
+    } 
         const uint16_t *pe=GET_EXCEPTIONS(&ucase_props_singleton, props);
         return (*pe>>UCASE_EXC_DOT_SHIFT)&UCASE_DOT_MASK;
-    }
+    
 }
 
 U_CAPI UBool U_EXPORT2
@@ -891,7 +891,7 @@ isPrecededBySoftDotted(UCaseContextIterator *iter, void *context) {
         dotType=getDotType(c);
         if(dotType==UCASE_SOFT_DOTTED) {
             return TRUE; /* preceded by TYPE_i */
-        } else if(dotType!=UCASE_OTHER_ACCENT) {
+        } if(dotType!=UCASE_OTHER_ACCENT) {
             return FALSE; /* preceded by different base character (not TYPE_i), or intervening cc==230 */
         }
     }
@@ -972,7 +972,7 @@ isFollowedByMoreAbove(UCaseContextIterator *iter, void *context) {
         dotType=getDotType(c);
         if(dotType==UCASE_ABOVE) {
             return TRUE; /* at least one cc==230 following */
-        } else if(dotType!=UCASE_OTHER_ACCENT) {
+        } if(dotType!=UCASE_OTHER_ACCENT) {
             return FALSE; /* next base character, no more cc==230 following */
         }
     }
@@ -1185,7 +1185,7 @@ toUpperOrTitle(UChar32 c,
                     0069; 0069; 0130; 0130; az; # LATIN SMALL LETTER I
                 */
                 return 0x130;
-            } else if(loc==UCASE_LOC_LITHUANIAN && c==0x307 && isPrecededBySoftDotted(iter, context)) {
+            } if(loc==UCASE_LOC_LITHUANIAN && c==0x307 && isPrecededBySoftDotted(iter, context)) {
                 /*
                     # Lithuanian
 
@@ -1319,7 +1319,7 @@ ucase_fold(UChar32 c, uint32_t options) {
                 if(c==0x49) {
                     /* 0049; C; 0069; # LATIN CAPITAL LETTER I */
                     return 0x69;
-                } else if(c==0x130) {
+                } if(c==0x130) {
                     /* no simple case folding for U+0130 */
                     return c;
                 }
@@ -1328,7 +1328,7 @@ ucase_fold(UChar32 c, uint32_t options) {
                 if(c==0x49) {
                     /* 0049; T; 0131; # LATIN CAPITAL LETTER I */
                     return 0x131;
-                } else if(c==0x130) {
+                } if(c==0x130) {
                     /* 0130; T; 0069; # LATIN CAPITAL LETTER I WITH DOT ABOVE */
                     return 0x69;
                 }
@@ -1387,7 +1387,7 @@ ucase_toFullFolding(UChar32 c,
                 if(c==0x49) {
                     /* 0049; C; 0069; # LATIN CAPITAL LETTER I */
                     return 0x69;
-                } else if(c==0x130) {
+                } if(c==0x130) {
                     /* 0130; F; 0069 0307; # LATIN CAPITAL LETTER I WITH DOT ABOVE */
                     *pString=iDot;
                     return 2;
@@ -1397,7 +1397,7 @@ ucase_toFullFolding(UChar32 c,
                 if(c==0x49) {
                     /* 0049; T; 0131; # LATIN CAPITAL LETTER I */
                     return 0x131;
-                } else if(c==0x130) {
+                } if(c==0x130) {
                     /* 0130; T; 0069; # LATIN CAPITAL LETTER I WITH DOT ABOVE */
                     return 0x69;
                 }

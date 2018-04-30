@@ -2674,7 +2674,7 @@ sctp_m_getptr(struct mbuf *m, int off, int len, uint8_t * in_ptr)
 	/* is the current mbuf large enough (eg. contiguous)? */
 	if ((SCTP_BUF_LEN(m) - off) >= len) {
 		return (mtod(m, caddr_t) + off);
-	} else {
+	} 
 		/* else, it spans more than one mbuf, so save a temp copy... */
 		while ((m != NULL) && (len > 0)) {
 			count = min(SCTP_BUF_LEN(m) - off, len);
@@ -2686,9 +2686,9 @@ sctp_m_getptr(struct mbuf *m, int off, int len, uint8_t * in_ptr)
 		}
 		if ((m == NULL) && (len > 0))
 			return (NULL);
-		else
+		
 			return ((caddr_t)in_ptr);
-	}
+	
 }
 
 
@@ -2744,13 +2744,13 @@ sctp_pad_lastmbuf(struct mbuf *m, int padval, struct mbuf *last_mbuf)
 
 	if (last_mbuf != NULL) {
 		return (sctp_add_pad_tombuf(last_mbuf, padval));
-	} else {
+	} 
 		for (m_at = m; m_at; m_at = SCTP_BUF_NEXT(m_at)) {
 			if (SCTP_BUF_NEXT(m_at) == NULL) {
 				return (sctp_add_pad_tombuf(m_at, padval));
 			}
 		}
-	}
+	
 	return (NULL);
 }
 
@@ -4263,9 +4263,9 @@ sctp_abort_an_association(struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 			}
 		}
 		return;
-	} else {
+	} 
 		stcb->asoc.state |= SCTP_STATE_WAS_ABORTED;
-	}
+	
 	/* notify the peer */
 	sctp_send_abort_tcb(stcb, op_err, so_locked);
 	SCTP_STAT_INCR_COUNTER32(sctps_aborted);
@@ -7138,9 +7138,9 @@ sctp_connectx_helper_find(struct sctp_inpcb *inp, struct sockaddr *addr,
 		if (stcb != NULL) {
 			/* Already have or am bring up an association */
 			return (stcb);
-		} else {
+		} 
 			SCTP_INP_DECR_REF(inp);
-		}
+		
 		if ((at + incr) > limit) {
 			*totaddr = i;
 			break;
@@ -7269,10 +7269,10 @@ sctp_bindx_add_address(struct socket *so, struct sctp_inpcb *inp,
 			SCTP_LTRACE_ERR_RET(inp, NULL, NULL, SCTP_FROM_SCTPUTIL, EINVAL);
 			*error = EINVAL;
 			return;
-		} else {
+		} 
 			/* user specified 0 port, set it to existing port */
 			lsin->sin_port = inp->sctp_lport;
-		}
+		
 
 		lep = sctp_pcb_findep(addr_touse, 1, 0, vrf_id);
 		if (lep != NULL) {
@@ -7287,7 +7287,7 @@ sctp_bindx_add_address(struct socket *so, struct sctp_inpcb *inp,
 		if (lep == inp) {
 			/* already bound to it.. ok */
 			return;
-		} else if (lep == NULL) {
+		} if (lep == NULL) {
 			((struct sockaddr_in *)addr_touse)->sin_port = 0;
 			*error = sctp_addr_mgmt_ep_sa(inp, addr_touse,
 						      SCTP_ADD_IP_ADDRESS,
@@ -8150,23 +8150,23 @@ sctp_min_mtu(uint32_t mtu1, uint32_t mtu2, uint32_t mtu3)
 		if (mtu2 > 0) {
 			if (mtu3 > 0) {
 				return (min(mtu1, min(mtu2, mtu3)));
-			} else {
+			} 
 				return (min(mtu1, mtu2));
-			}
+			
 		} else {
 			if (mtu3 > 0) {
 				return (min(mtu1, mtu3));
-			} else {
+			} 
 				return (mtu1);
-			}
+			
 		}
 	} else {
 		if (mtu2 > 0) {
 			if (mtu3 > 0) {
 				return (min(mtu2, mtu3));
-			} else {
+			} 
 				return (mtu2);
-			}
+			
 		} else {
 			return (mtu3);
 		}

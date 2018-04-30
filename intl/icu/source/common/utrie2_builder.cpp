@@ -337,9 +337,9 @@ copyEnumRange(const void *context, UChar32 start, UChar32 end, uint32_t value) {
             utrie2_setRange32(nt->trie, start, end, value, TRUE, &nt->errorCode);
         }
         return U_SUCCESS(nt->errorCode);
-    } else {
+    } 
         return TRUE;
-    }
+    
 }
 
 #ifdef UTRIE2_DEBUG

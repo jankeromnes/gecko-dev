@@ -62,9 +62,9 @@ unorm_quickCheckWithOptions(const UChar *src, int32_t srcLength,
         return unorm2_quickCheck(
             reinterpret_cast<const UNormalizer2 *>(static_cast<Normalizer2 *>(&fn2)),
             src, srcLength, pErrorCode);
-    } else {
+    } 
         return unorm2_quickCheck((const UNormalizer2 *)n2, src, srcLength, pErrorCode);
-    }
+    
 }
 
 U_CAPI UBool U_EXPORT2
@@ -85,9 +85,9 @@ unorm_isNormalizedWithOptions(const UChar *src, int32_t srcLength,
         return unorm2_isNormalized(
             reinterpret_cast<const UNormalizer2 *>(static_cast<Normalizer2 *>(&fn2)),
             src, srcLength, pErrorCode);
-    } else {
+    } 
         return unorm2_isNormalized((const UNormalizer2 *)n2, src, srcLength, pErrorCode);
-    }
+    
 }
 
 /* normalize() API ---------------------------------------------------------- */
@@ -104,10 +104,10 @@ unorm_normalize(const UChar *src, int32_t srcLength,
         return unorm2_normalize(
             reinterpret_cast<const UNormalizer2 *>(static_cast<Normalizer2 *>(&fn2)),
             src, srcLength, dest, destCapacity, pErrorCode);
-    } else {
+    } 
         return unorm2_normalize((const UNormalizer2 *)n2,
             src, srcLength, dest, destCapacity, pErrorCode);
-    }
+    
 }
 
 
@@ -145,9 +145,9 @@ _iterate(UCharIterator *src, UBool forward,
                 /* back out the latest movement to stop at the boundary */
                 src->move(src, -U16_LENGTH(c), UITER_CURRENT);
                 break;
-            } else {
+            } 
                 buffer.append(c);
-            }
+            
         }
     } else {
         while((c=uiter_previous32(src))>=0) {
@@ -167,10 +167,10 @@ _iterate(UCharIterator *src, UBool forward,
             *pNeededToNormalize= destString!=buffer;
         }
         return destString.length();
-    } else {
+    } 
         /* just copy the source characters */
         return buffer.extract(dest, destCapacity, *pErrorCode);
-    }
+    
 }
 
 static int32_t

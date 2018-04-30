@@ -97,10 +97,10 @@ TType *GetFieldType(const TType &indexedType)
         fieldType->setPrimarySize(static_cast<unsigned char>(indexedType.getRows()));
         return fieldType;
     }
-    else
-    {
+    
+    
         return new TType(indexedType.getBasicType(), indexedType.getPrecision());
-    }
+    
 }
 
 const TType *GetBaseType(const TType &type, bool write)

@@ -78,10 +78,10 @@ static int evaluate_skin_color_difference(int cb, int cr, int idx) {
 static int is_skin_color(int y, int cb, int cr, int consec_zeromv) {
   if (y < 40 || y > 220) {
     return 0;
-  } else {
+  } 
     if (MODEL_MODE == 0) {
       return (evaluate_skin_color_difference(cb, cr, 0) < skin_threshold[0]);
-    } else {
+    } 
       int i = 0;
       // No skin if block has been zero motion for long consecutive time.
       if (consec_zeromv > 60) return 0;
@@ -94,7 +94,7 @@ static int is_skin_color(int y, int cb, int cr, int consec_zeromv) {
         if (skin_color_diff < skin_threshold[i + 1]) {
           if (y < 60 && skin_color_diff > 3 * (skin_threshold[i + 1] >> 2)) {
             return 0;
-          } else if (consec_zeromv > 25 &&
+          } if (consec_zeromv > 25 &&
                      skin_color_diff > (skin_threshold[i + 1] >> 1)) {
             return 0;
           } else {
@@ -107,8 +107,8 @@ static int is_skin_color(int y, int cb, int cr, int consec_zeromv) {
         }
       }
       return 0;
-    }
-  }
+    
+  
 }
 
 static int macroblock_corner_grad(unsigned char *signal, int stride,
@@ -228,9 +228,9 @@ int vp8_get_inter_mbpred_error(MACROBLOCK *mb, const vp8_variance_fn_ptr_t *vfp,
   if (xoffset | yoffset) {
     return vfp->svf(in_what, in_what_stride, xoffset, yoffset, what,
                     what_stride, sse);
-  } else {
+  } 
     return vfp->vf(what, what_stride, in_what, in_what_stride, sse);
-  }
+  
 }
 
 static int get_prediction_error(BLOCK *be, BLOCKD *b) {
@@ -884,7 +884,7 @@ void vp8_pick_inter_mode(VP8_COMP *cpi, MACROBLOCK *x, int recon_yoffset,
         if (vp8_mode_order[mode_index] == NEWMV && parent_mode == ZEROMV &&
             best_ref_mv.as_int == 0)
           continue;
-        else if (vp8_mode_order[mode_index] == NEWMV && dissim == 0 &&
+        if (vp8_mode_order[mode_index] == NEWMV && dissim == 0 &&
                  best_ref_mv.as_int == parent_ref_mv.as_int)
           continue;
       }

@@ -14,9 +14,9 @@ std::string convertStringView(StringView str)
 {
   if (nullptr == str.buf) {
     return std::string();
-  } else {
+  } 
     return std::string(str.buf, str.len);
-  }
+  
 }
 
 std::vector<std::string> convertStringVec(StringVec* vec)

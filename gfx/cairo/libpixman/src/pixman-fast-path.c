@@ -43,14 +43,14 @@ fetch_24 (uint8_t *a)
 	return *a | (*(uint16_t *)(a + 1) << 8);
 #endif
     }
-    else
-    {
+    
+    
 #ifdef WORDS_BIGENDIAN
 	return (*(uint16_t *)a << 8) | *(a + 2);
 #else
 	return *(uint16_t *)a | (*(a + 2) << 16);
 #endif
-    }
+    
 }
 
 static force_inline void
@@ -1647,7 +1647,7 @@ fetch_nearest (pixman_repeat_t src_repeat,
     {
 	if (format == PIXMAN_x8r8g8b8 || format == PIXMAN_x8b8g8r8)
 	    return *(src + x) | 0xff000000;
-	else
+	
 	    return *(src + x);
     }
     else
@@ -2220,14 +2220,14 @@ pixman_fill1_line (uint32_t *dst, int offs, int width, int v)
 		*dst &= ~A1_FILL_MASK (width, offs);
 	    return;
 	}
-	else
-	{
+	
+	
 	    if (v)
 		*dst++ |= A1_FILL_MASK (leading_pixels, offs);
 	    else
 		*dst++ &= ~A1_FILL_MASK (leading_pixels, offs);
 	    width -= leading_pixels;
-	}
+	
     }
     while (width >= 32)
     {

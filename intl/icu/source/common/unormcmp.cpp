@@ -267,7 +267,7 @@ unorm_cmpEquivFold(const UChar *s1, int32_t length1,
             }
             c1=c2=-1;       /* make us fetch new code units */
             continue;
-        } else if(c1<0) {
+        } if(c1<0) {
             return -1;      /* string 1 ends before string 2 */
         } else if(c2<0) {
             return 1;       /* string 2 ends before string 1 */
@@ -632,9 +632,9 @@ unorm_compare(const UChar *s1, int32_t length1,
 
     if(U_SUCCESS(*pErrorCode)) {
         return unorm_cmpEquivFold(s1, length1, s2, length2, options, pErrorCode);
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 #endif /* #if !UCONFIG_NO_NORMALIZATION */

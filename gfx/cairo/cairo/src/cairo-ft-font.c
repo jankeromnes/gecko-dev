@@ -493,7 +493,7 @@ _cairo_ft_unscaled_font_keys_equal (const void *key_a,
             (memcmp (unscaled_a->var_coords, unscaled_b->var_coords,
                      unscaled_a->num_var_coords * sizeof(FT_Fixed)) != 0))
             return FALSE;
-	else if (unscaled_a->filename == NULL && unscaled_b->filename == NULL)
+	if (unscaled_a->filename == NULL && unscaled_b->filename == NULL)
 	    return TRUE;
 	else if (unscaled_a->filename == NULL || unscaled_b->filename == NULL)
 	    return FALSE;

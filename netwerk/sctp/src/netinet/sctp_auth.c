@@ -152,7 +152,7 @@ sctp_auth_get_chklist_size(const sctp_auth_chklist_t *list)
 {
 	if (list == NULL)
 		return (0);
-	else
+	
 		return (list->num_chunks);
 }
 
@@ -310,7 +310,7 @@ sctp_get_keylen(sctp_key_t *key)
 {
 	if (key != NULL)
 		return (key->keylen);
-	else
+	
 		return (0);
 }
 
@@ -366,7 +366,7 @@ sctp_compare_key(sctp_key_t *key1, sctp_key_t *key2)
 	key2len = sctp_get_keylen(key2);
 	if ((key1len == 0) && (key2len == 0))
 		return (0);
-	else if (key1len == 0)
+	if (key1len == 0)
 		return (-1);
 	else if (key2len == 0)
 		return (1);
@@ -385,14 +385,14 @@ sctp_compare_key(sctp_key_t *key1, sctp_key_t *key2)
 		val2 = (i < (maxlen - key2len)) ? 0 : *(key_2++);
 		if (val1 > val2) {
 			return (1);
-		} else if (val1 < val2) {
+		} if (val1 < val2) {
 			return (-1);
 		}
 	}
 	/* keys are equal value, so check lengths */
 	if (key1len == key2len)
 		return (0);
-	else if (key1len < key2len)
+	if (key1len < key2len)
 		return (-1);
 	else
 		return (1);
@@ -522,7 +522,7 @@ sctp_insert_sharedkey(struct sctp_keyhead *shared_keys,
 			/* insert it before here */
 			LIST_INSERT_BEFORE(skey, new_skey, next);
 			return (0);
-		} else if (new_skey->keyid == skey->keyid) {
+		} if (new_skey->keyid == skey->keyid) {
 			/* replace the existing key */
 			/* verify this key *can* be replaced */
 			if ((skey->deactivated) && (skey->refcount > 1)) {
@@ -1113,7 +1113,7 @@ sctp_verify_hmac(uint16_t hmac_algo, uint8_t *key, uint32_t keylen,
 
 	if (memcmp(digest, temp, digestlen) != 0)
 		return (-1);
-	else
+	
 		return (0);
 }
 
@@ -1978,7 +1978,7 @@ sctp_validate_init_auth_params(struct mbuf *m, int offset, int limit)
 		SCTPDBG(SCTP_DEBUG_AUTH1,
 			"SCTP: peer supports ASCONF but not AUTH\n");
 		return (-1);
-	} else if ((peer_supports_asconf) && (peer_supports_auth) &&
+	} if ((peer_supports_asconf) && (peer_supports_auth) &&
 		   ((saw_asconf == 0) || (saw_asconf_ack == 0))) {
 		return (-2);
 	}

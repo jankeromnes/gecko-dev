@@ -113,9 +113,9 @@ StringEnumeration::setChars(const char *s, int32_t length, UErrorCode &status) {
             buffer[length]=0;
             unistr.releaseBuffer(length);
             return &unistr;
-        } else {
+        } 
             status=U_MEMORY_ALLOCATION_ERROR;
-        }
+        
     }
 
     return NULL;

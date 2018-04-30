@@ -667,7 +667,7 @@ static void build_masks(const loop_filter_info_n *const lfi_n,
   // If filter level is 0 we don't loop filter.
   if (!filter_level) {
     return;
-  } else {
+  } 
     const int w = num_8x8_blocks_wide_lookup[block_size];
     const int h = num_8x8_blocks_high_lookup[block_size];
     int index = shift_y;
@@ -675,7 +675,7 @@ static void build_masks(const loop_filter_info_n *const lfi_n,
       memset(&lfm->lfl_y[index], filter_level, w);
       index += 8;
     }
-  }
+  
 
   // These set 1 in the current block size for the block size edges.
   // For instance if the block size is 32x16, we'll set:
@@ -739,7 +739,7 @@ static void build_y_mask(const loop_filter_info_n *const lfi_n,
 
   if (!filter_level) {
     return;
-  } else {
+  } 
     const int w = num_8x8_blocks_wide_lookup[block_size];
     const int h = num_8x8_blocks_high_lookup[block_size];
     int index = shift_y;
@@ -747,7 +747,7 @@ static void build_y_mask(const loop_filter_info_n *const lfi_n,
       memset(&lfm->lfl_y[index], filter_level, w);
       index += 8;
     }
-  }
+  
 
   *above_y |= above_prediction_mask[block_size] << shift_y;
   *left_y |= left_prediction_mask[block_size] << shift_y;
@@ -1539,14 +1539,14 @@ void vp9_build_mask(VP9_COMMON *cm, const MODE_INFO *mi, int mi_row, int mi_col,
 
   if (!filter_level) {
     return;
-  } else {
+  } 
     int index = shift_y;
     int i;
     for (i = 0; i < bh; i++) {
       memset(&lfm->lfl_y[index], filter_level, bw);
       index += 8;
     }
-  }
+  
 
   // These set 1 in the current block size for the block size edges.
   // For instance if the block size is 32x16, we'll set:

@@ -1055,7 +1055,7 @@ sctp_handle_shutdown(struct sctp_shutdown_chunk *cp,
 	    some_on_streamwheel) {
 		/* By returning we will push more data out */
 		return;
-	} else {
+	} 
 		/* no outstanding data to send, so move on... */
 		/* send SHUTDOWN-ACK */
 		/* move to SHUTDOWN-ACK-SENT state */
@@ -1073,7 +1073,7 @@ sctp_handle_shutdown(struct sctp_shutdown_chunk *cp,
 		} else if (old_state == SCTP_STATE_SHUTDOWN_ACK_SENT) {
 			sctp_send_shutdown_ack(stcb, net);
 		}
-	}
+	
 }
 
 static void
@@ -2392,10 +2392,10 @@ sctp_process_cookie_new(struct mbuf *m, int iphlen, int offset,
 			SCTP_SOCKET_UNLOCK(so, 1);
 #endif
 			return (NULL);
-		} else {
+		} 
 			/* remaining chunks checked... good to go */
 			stcb->asoc.authenticated = 1;
-		}
+		
 	}
 
 	/*
@@ -4859,10 +4859,10 @@ sctp_process_control(struct mbuf *m, int iphlen, int *offset, int length,
 					/* auth HMAC failed so dump it */
 					*offset = length;
 					return (stcb);
-				} else {
+				} 
 					/* remaining chunks are HMAC checked */
 					stcb->asoc.authenticated = 1;
-				}
+				
 			}
 		}
 		if (stcb == NULL) {
@@ -5256,9 +5256,9 @@ sctp_process_control(struct mbuf *m, int iphlen, int *offset, int length,
 			if ((stcb != NULL) && (netp != NULL) && (*netp != NULL)) {
 				if (sctp_handle_abort((struct sctp_abort_chunk *)ch, stcb, *netp)) {
 					return (NULL);
-				} else {
+				} 
 					return (stcb);
-				}
+				
 			} else {
 				return (NULL);
 			}
@@ -5350,7 +5350,7 @@ sctp_process_control(struct mbuf *m, int iphlen, int *offset, int length,
 				}
 				*offset = length;
 				return (NULL);
-			} else {
+			} 
 				struct mbuf *ret_buf;
 				struct sctp_inpcb *linp;
 				if (stcb) {
@@ -5425,7 +5425,7 @@ sctp_process_control(struct mbuf *m, int iphlen, int *offset, int length,
 					chk = TAILQ_FIRST(&stcb->asoc.sent_queue);
 					sctp_timer_start(SCTP_TIMER_TYPE_SEND, stcb->sctp_ep, stcb, chk->whoTo);
 				}
-			}
+			
 			break;
 		case SCTP_COOKIE_ACK:
 			SCTPDBG(SCTP_DEBUG_INPUT3, "SCTP_COOKIE_ACK, stcb %p\n", (void *)stcb);
@@ -5647,10 +5647,10 @@ sctp_process_control(struct mbuf *m, int iphlen, int *offset, int length,
 				/* auth HMAC failed so dump the packet */
 				*offset = length;
 				return (stcb);
-			} else {
+			} 
 				/* remaining chunks are HMAC checked */
 				stcb->asoc.authenticated = 1;
-			}
+			
 			break;
 
 		default:

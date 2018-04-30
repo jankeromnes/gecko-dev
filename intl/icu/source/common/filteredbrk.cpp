@@ -86,14 +86,14 @@ class U_COMMON_API UStringSet : public UVector {
     if(U_FAILURE(status) || contains(*str)) {
       delete str;
       return false;
-    } else {
+    } 
       sortedInsert(str, compareUnicodeString, status);
       if(U_FAILURE(status)) {
         delete str;
         return false;
       }
       return true;
-    }
+    
   }
   /**
    * Add by value.
@@ -303,7 +303,7 @@ SimpleFilteredSentenceBreakIterator::breakExceptionAt(int32_t n) {
       if(bestValue == kMATCH) { // exact match!
         //if(debug2) u_printf(" exact backward match\n");
         return kExceptionHere; // See if the next is another exception.
-      } else if(bestValue == kPARTIAL
+      } if(bestValue == kPARTIAL
                 && fData->fForwardsPartialTrie.isValid()) { // make sure there's a forward trie
         //if(debug2) u_printf(" partial backward match\n");
         // We matched the "Ph." in "Ph.D." - now we need to run everything through the forwards trie
@@ -321,11 +321,11 @@ SimpleFilteredSentenceBreakIterator::breakExceptionAt(int32_t n) {
           // only full matches here, nothing to check
           // skip the next:
             return kExceptionHere;
-        } else {
+        } 
           //if(debug2) u_printf("fwd> /%C/ no match.\n", (UChar)uch);
           // no match (no exception) -return the 'underlying' break
           return kNoExceptionHere;
-        }
+        
       } else {
         return kNoExceptionHere; // internal error and/or no forwards trie
       }

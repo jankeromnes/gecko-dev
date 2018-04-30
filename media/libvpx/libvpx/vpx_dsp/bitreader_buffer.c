@@ -22,10 +22,10 @@ int vpx_rb_read_bit(struct vpx_read_bit_buffer *rb) {
     const int bit = (rb->bit_buffer[p] >> q) & 1;
     rb->bit_offset = off + 1;
     return bit;
-  } else {
+  } 
     rb->error_handler(rb->error_handler_data);
     return 0;
-  }
+  
 }
 
 int vpx_rb_read_literal(struct vpx_read_bit_buffer *rb, int bits) {

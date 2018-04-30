@@ -2621,9 +2621,9 @@ U_CAPI UStringSearch * U_EXPORT2 usearch_open(const UChar *pattern,
             }
             return NULL;
         }
-        else {
+        
             result->ownCollator = TRUE;
-        }
+        
         return result;
     }
     *status = U_ILLEGAL_ARGUMENT_ERROR;
@@ -2881,9 +2881,9 @@ U_CAPI USearchAttributeValue U_EXPORT2 usearch_getAttribute(
                 int16_t value = strsrch->search->elementComparisonType;
                 if (value == USEARCH_PATTERN_BASE_WEIGHT_IS_WILDCARD || value == USEARCH_ANY_BASE_WEIGHT_IS_WILDCARD) {
                     return (USearchAttributeValue)value;
-                } else {
+                } 
                     return USEARCH_STANDARD_ELEMENT_COMPARISON;
-                }
+                
             }
         case USEARCH_ATTRIBUTE_COUNT :
             return USEARCH_DEFAULT;
@@ -3927,7 +3927,7 @@ U_CAPI UBool U_EXPORT2 usearch_search(UStringSearch  *strsrch,
             if ( ceMatch == U_CE_NO_MATCH ) {
                 found = FALSE;
                 break;
-            } else if ( ceMatch > U_CE_NO_MATCH ) {
+            } if ( ceMatch > U_CE_NO_MATCH ) {
                 if ( ceMatch == U_CE_SKIP_TARG ) {
                     // redo with same patCE, next targCE
                     patIx--;
@@ -4242,7 +4242,7 @@ U_CAPI UBool U_EXPORT2 usearch_searchBackwards(UStringSearch  *strsrch,
             if ( ceMatch == U_CE_NO_MATCH ) {
                 found = FALSE;
                 break;
-            } else if ( ceMatch > U_CE_NO_MATCH ) {
+            } if ( ceMatch > U_CE_NO_MATCH ) {
                 if ( ceMatch == U_CE_SKIP_TARG ) {
                     // redo with same patCE, next targCE
                     patIx++;
@@ -4525,10 +4525,10 @@ UBool usearch_handleNextExact(UStringSearch *strsrch, UErrorCode *status)
         strsrch->search->matchedIndex  = start;
         strsrch->search->matchedLength = end - start;
         return TRUE;
-    } else {
+    } 
         setMatchNotFound(strsrch);
         return FALSE;
-    }
+    
 #endif
 }
 
@@ -4640,10 +4640,10 @@ UBool usearch_handleNextCanonical(UStringSearch *strsrch, UErrorCode *status)
         strsrch->search->matchedIndex  = start;
         strsrch->search->matchedLength = end - start;
         return TRUE;
-    } else {
+    } 
         setMatchNotFound(strsrch);
         return FALSE;
-    }
+    
 #endif
 }
 
@@ -4785,10 +4785,10 @@ UBool usearch_handlePreviousExact(UStringSearch *strsrch, UErrorCode *status)
         strsrch->search->matchedIndex = start;
         strsrch->search->matchedLength = end - start;
         return TRUE;
-    } else {
+    } 
         setMatchNotFound(strsrch);
         return FALSE;
-    }
+    
 #endif
 }
 
@@ -4938,10 +4938,10 @@ UBool usearch_handlePreviousCanonical(UStringSearch *strsrch,
         strsrch->search->matchedIndex = start;
         strsrch->search->matchedLength = end - start;
         return TRUE;
-    } else {
+    } 
         setMatchNotFound(strsrch);
         return FALSE;
-    }
+    
 #endif
 }
 

@@ -90,9 +90,9 @@ USearchAttributeValue SearchIterator::getAttribute(
             int16_t value = m_search_->elementComparisonType;
             if (value == USEARCH_PATTERN_BASE_WEIGHT_IS_WILDCARD || value == USEARCH_ANY_BASE_WEIGHT_IS_WILDCARD) {
                 return (USearchAttributeValue)value;
-            } else {
+            } 
                 return USEARCH_STANDARD_ELEMENT_COMPARISON;
-            }
+            
         }
     default :
         return USEARCH_DEFAULT;

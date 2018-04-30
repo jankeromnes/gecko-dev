@@ -2659,13 +2659,13 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 			return EOB_ACT_END_OF_FILE;
 			}
 
-		else
-			{
+		
+			
 			/* We matched some text prior to the EOB, first
 			 * process it.
 			 */
 			return EOB_ACT_LAST_MATCH;
-			}
+			
 		}
 
 	/* Try to read more data. */
@@ -3851,7 +3851,7 @@ int ES2_ident_ES3_reserved_ES3_1_keyword(TParseContext *context, int token)
         yylval->lex.string = AllocatePoolCharArray(yytext, yyleng);
         return check_type(yyscanner);
     }
-    else if (context->getShaderVersion() == 300)
+    if (context->getShaderVersion() == 300)
     {
         return reserved_word(yyscanner);
     }

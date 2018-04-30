@@ -343,10 +343,10 @@ LocalizedNumberFormatter::formatImpl(impl::NumberFormatterResults *results, UErr
     // Do not save the results object if we encountered a failure.
     if (U_SUCCESS(status)) {
         return FormattedNumber(results);
-    } else {
+    } 
         delete results;
         return FormattedNumber(status);
-    }
+    
 }
 
 UnicodeString FormattedNumber::toString() const {

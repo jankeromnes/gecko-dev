@@ -101,9 +101,9 @@ int32_t TaiwanCalendar::handleGetLimit(UCalendarDateFields field, ELimitType lim
     if(field == UCAL_ERA) {
         if(limitType == UCAL_LIMIT_MINIMUM || limitType == UCAL_LIMIT_GREATEST_MINIMUM) {
             return BEFORE_MINGUO;
-        } else {
+        } 
             return MINGUO;
-        }
+        
     } else {
         return GregorianCalendar::handleGetLimit(field,limitType);
     }

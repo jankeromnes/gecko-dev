@@ -65,7 +65,7 @@ static int candidate_refresh_aq(const CYCLIC_REFRESH *cr, const MODE_INFO *mi,
        mv.col > cr->motion_thresh || mv.col < -cr->motion_thresh ||
        !is_inter_block(mi)))
     return CR_SEGMENT_ID_BASE;
-  else if (bsize >= BLOCK_16X16 && rate < cr->thresh_rate_sb &&
+  if (bsize >= BLOCK_16X16 && rate < cr->thresh_rate_sb &&
            is_inter_block(mi) && mi->mv[0].as_int == 0 &&
            cr->rate_boost_fac > 10)
     // More aggressive delta-q for bigger blocks with zero motion.
@@ -521,7 +521,7 @@ void vp9_cyclic_refresh_setup(VP9_COMP *const cpi) {
       cr->sb_index = 0;
     }
     return;
-  } else {
+  } 
     int qindex_delta = 0;
     int qindex2;
     const double q = vp9_convert_qindex_to_q(cm->base_qindex, cm->bit_depth);
@@ -579,7 +579,7 @@ void vp9_cyclic_refresh_setup(VP9_COMP *const cpi) {
 
     // Update the segmentation and refresh map.
     cyclic_refresh_update_map(cpi);
-  }
+  
 }
 
 int vp9_cyclic_refresh_get_rdmult(const CYCLIC_REFRESH *cr) {

@@ -52,7 +52,7 @@ static sk_sp<GrGeometryProcessor> make_perspective_gp(const SkMatrix& viewMatrix
                                 localMatrix);
         return GrDefaultGeoProcFactory::Make(Color::kPremulGrColorAttribute_Type,
                                              Coverage::kSolid_Type, localCoords, viewMatrix);
-    } else if (hasExplicitLocalCoords) {
+    } if (hasExplicitLocalCoords) {
         LocalCoords localCoords(LocalCoords::kHasExplicit_Type, localMatrix);
         return GrDefaultGeoProcFactory::Make(Color::kPremulGrColorAttribute_Type,
                                              Coverage::kSolid_Type, localCoords, SkMatrix::I());
@@ -382,10 +382,10 @@ std::unique_ptr<GrDrawOp> MakeNonAAFill(GrPaint&& paint, const SkMatrix& viewMat
     if (viewMatrix.hasPerspective()) {
         return NonAAFillRectPerspectiveOp::Make(std::move(paint), viewMatrix, rect, nullptr,
                                                 nullptr, aaType, stencilSettings);
-    } else {
+    } 
         return NonAAFillRectOp::Make(std::move(paint), viewMatrix, rect, nullptr, nullptr, aaType,
                                      stencilSettings);
-    }
+    
 }
 
 std::unique_ptr<GrDrawOp> MakeNonAAFillWithLocalMatrix(
@@ -394,10 +394,10 @@ std::unique_ptr<GrDrawOp> MakeNonAAFillWithLocalMatrix(
     if (viewMatrix.hasPerspective() || localMatrix.hasPerspective()) {
         return NonAAFillRectPerspectiveOp::Make(std::move(paint), viewMatrix, rect, nullptr,
                                                 &localMatrix, aaType, stencilSettings);
-    } else {
+    } 
         return NonAAFillRectOp::Make(std::move(paint), viewMatrix, rect, nullptr, &localMatrix,
                                      aaType, stencilSettings);
-    }
+    
 }
 
 std::unique_ptr<GrDrawOp> MakeNonAAFillWithLocalRect(GrPaint&& paint, const SkMatrix& viewMatrix,
@@ -406,10 +406,10 @@ std::unique_ptr<GrDrawOp> MakeNonAAFillWithLocalRect(GrPaint&& paint, const SkMa
     if (viewMatrix.hasPerspective()) {
         return NonAAFillRectPerspectiveOp::Make(std::move(paint), viewMatrix, rect, &localRect,
                                                 nullptr, aaType, nullptr);
-    } else {
+    } 
         return NonAAFillRectOp::Make(std::move(paint), viewMatrix, rect, &localRect, nullptr,
                                      aaType, nullptr);
-    }
+    
 }
 
 }  // namespace GrRectOpFactory

@@ -140,10 +140,10 @@ float NumericLexFloat32OutOfRangeToInfinity(const std::string &str)
             {
                 return 0.0f;
             }
-            else
-            {
+            
+            
                 return std::numeric_limits<float>::infinity();
-            }
+            
         }
     }
     // Do the calculation in 64-bit to avoid overflow.
@@ -153,7 +153,7 @@ float NumericLexFloat32OutOfRangeToInfinity(const std::string &str)
     {
         return std::numeric_limits<float>::infinity();
     }
-    else if (exponentLong < std::numeric_limits<float>::min_exponent10)
+    if (exponentLong < std::numeric_limits<float>::min_exponent10)
     {
         return 0.0f;
     }
@@ -501,7 +501,7 @@ ImmutableString GetTypeName(const TType &type, ShHashFunction64 hashFunction, Na
 {
     if (type.getBasicType() == EbtStruct)
         return HashName(type.getStruct(), hashFunction, nameMap);
-    else
+    
         return ImmutableString(type.getBuiltInTypeNameString());
 }
 

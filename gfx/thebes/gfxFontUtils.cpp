@@ -476,7 +476,7 @@ gfxFontUtils::FindPreferredSubtable(const uint8_t *aBuf, uint32_t aBufLength,
             keepFormat = format;
             *aTableOffset = offset;
             break;
-        } else if (format == 4 && acceptableFormat4(platformID, encodingID, keepFormat)) {
+        } if (format == 4 && acceptableFormat4(platformID, encodingID, keepFormat)) {
             keepFormat = format;
             *aTableOffset = offset;
         } else if ((format == 10 || format == 12 || format == 13) &&

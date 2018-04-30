@@ -65,7 +65,7 @@ uloc_getTableStringWithFallback(const char *path, const char *locale,
         /* total failure, not even root could be opened */
         *pErrorCode=errorCode;
         return NULL;
-    } else if(errorCode==U_USING_DEFAULT_WARNING ||
+    } if(errorCode==U_USING_DEFAULT_WARNING ||
                 (errorCode==U_USING_FALLBACK_WARNING && *pErrorCode!=U_USING_DEFAULT_WARNING)
     ) {
         /* set the "strongest" error code (success->fallback->default->failure) */

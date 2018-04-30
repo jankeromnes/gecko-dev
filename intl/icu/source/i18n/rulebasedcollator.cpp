@@ -992,7 +992,7 @@ RuleBasedCollator::doCompare(const UChar *left, int32_t leftLength,
             if(equalPrefixLength == leftLength) {
                 if(equalPrefixLength == rightLength) { return UCOL_EQUAL; }
                 break;
-            } else if(equalPrefixLength == rightLength ||
+            } if(equalPrefixLength == rightLength ||
                       left[equalPrefixLength] != right[equalPrefixLength]) {
                 break;
             }
@@ -1076,11 +1076,11 @@ RuleBasedCollator::doCompare(const UChar *left, int32_t leftLength,
         UTF16NFDIterator leftIter(left, leftLimit);
         UTF16NFDIterator rightIter(right, rightLimit);
         return compareNFDIter(nfcImpl, leftIter, rightIter);
-    } else {
+    } 
         FCDUTF16NFDIterator leftIter(nfcImpl, left, leftLimit);
         FCDUTF16NFDIterator rightIter(nfcImpl, right, rightLimit);
         return compareNFDIter(nfcImpl, leftIter, rightIter);
-    }
+    
 }
 
 UCollationResult
@@ -1105,7 +1105,7 @@ RuleBasedCollator::doCompare(const uint8_t *left, int32_t leftLength,
             if(equalPrefixLength == leftLength) {
                 if(equalPrefixLength == rightLength) { return UCOL_EQUAL; }
                 break;
-            } else if(equalPrefixLength == rightLength ||
+            } if(equalPrefixLength == rightLength ||
                       left[equalPrefixLength] != right[equalPrefixLength]) {
                 break;
             }
@@ -1205,11 +1205,11 @@ RuleBasedCollator::doCompare(const uint8_t *left, int32_t leftLength,
         UTF8NFDIterator leftIter(left, leftLength);
         UTF8NFDIterator rightIter(right, rightLength);
         return compareNFDIter(nfcImpl, leftIter, rightIter);
-    } else {
+    } 
         FCDUTF8NFDIterator leftIter(data, left, leftLength);
         FCDUTF8NFDIterator rightIter(data, right, rightLength);
         return compareNFDIter(nfcImpl, leftIter, rightIter);
-    }
+    
 }
 
 UCollationResult
@@ -1268,11 +1268,11 @@ RuleBasedCollator::compare(UCharIterator &left, UCharIterator &right,
         UIterNFDIterator leftIter(left);
         UIterNFDIterator rightIter(right);
         return compareNFDIter(nfcImpl, leftIter, rightIter);
-    } else {
+    } 
         FCDUIterNFDIterator leftIter(data, left, equalPrefixLength);
         FCDUIterNFDIterator rightIter(data, right, equalPrefixLength);
         return compareNFDIter(nfcImpl, leftIter, rightIter);
-    }
+    
 }
 
 CollationKey &
@@ -1404,9 +1404,9 @@ public:
             level = l;
             levelCapacity = sink.GetRemainingCapacity();
             return TRUE;
-        } else {
+        } 
             return FALSE;
-        }
+        
     }
     Collation::Level getLevel() const { return level; }
     int32_t getLevelCapacity() const { return levelCapacity; }

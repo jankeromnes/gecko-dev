@@ -4335,7 +4335,7 @@ static decNumber * decDivideOp(decNumber *res,
         res->bits=bits|DECINF;          /* set +/- infinity  */
         break;
         }
-       else {                           /* RHS (divisor) is infinite  */
+                                 /* RHS (divisor) is infinite  */
         residue=0;
         if (op&(REMAINDER|REMNEAR)) {
           /* result is [finished clone of] lhs  */
@@ -4353,7 +4353,7 @@ static decNumber * decDivideOp(decNumber *res,
           }
         decFinish(res, set, &residue, status);
         break;
-        }
+        
       }
 
     /* handle 0 rhs (x/0)  */
@@ -6004,10 +6004,10 @@ static decNumber * decQuantizeOp(decNumber *res, const decNumber *lhs,
       *status|=DEC_Invalid_operation;
       break;
       }
-     else {
+     
       decFinalize(res, set, &residue, status);    /* set subnormal flags  */
       *status&=~DEC_Underflow;          /* suppress Underflow [as per 754]  */
-      }
+      
     } while(0);                         /* end protected  */
 
   #if DECSUBSET

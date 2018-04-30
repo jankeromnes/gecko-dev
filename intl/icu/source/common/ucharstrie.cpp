@@ -33,11 +33,11 @@ UCharsTrie::current() const {
     const UChar *pos=pos_;
     if(pos==NULL) {
         return USTRINGTRIE_NO_MATCH;
-    } else {
+    } 
         int32_t node;
         return (remainingMatchLength_<0 && (node=*pos)>=kMinValueLead) ?
                 valueResult(node) : USTRINGTRIE_NO_VALUE;
-    }
+    
 }
 
 UStringTrieResult
@@ -114,10 +114,10 @@ UCharsTrie::branchNext(const UChar *pos, int32_t length, int32_t uchar) {
         pos_=pos;
         int32_t node=*pos;
         return node>=kMinValueLead ? valueResult(node) : USTRINGTRIE_NO_VALUE;
-    } else {
+    } 
         stop();
         return USTRINGTRIE_NO_MATCH;
-    }
+    
 }
 
 UStringTrieResult
@@ -126,7 +126,7 @@ UCharsTrie::nextImpl(const UChar *pos, int32_t uchar) {
     for(;;) {
         if(node<kMinLinearMatch) {
             return branchNext(pos, node, uchar);
-        } else if(node<kMinValueLead) {
+        } if(node<kMinValueLead) {
             // Match the first of length+1 units.
             int32_t length=node-kMinLinearMatch;  // Actual match length minus 1.
             if(uchar==*pos++) {
@@ -134,10 +134,10 @@ UCharsTrie::nextImpl(const UChar *pos, int32_t uchar) {
                 pos_=pos;
                 return (length<0 && (node=*pos)>=kMinValueLead) ?
                         valueResult(node) : USTRINGTRIE_NO_VALUE;
-            } else {
+            } 
                 // No match.
                 break;
-            }
+            
         } else if(node&kValueIsFinal) {
             // No further matching units.
             break;
@@ -166,10 +166,10 @@ UCharsTrie::next(int32_t uchar) {
             int32_t node;
             return (length<0 && (node=*pos)>=kMinValueLead) ?
                     valueResult(node) : USTRINGTRIE_NO_VALUE;
-        } else {
+        } 
             stop();
             return USTRINGTRIE_NO_MATCH;
-        }
+        
     }
     return nextImpl(pos, uchar);
 }
@@ -377,10 +377,10 @@ UCharsTrie::getNextUChars(Appendable &out) const {
     if(node>=kMinValueLead) {
         if(node&kValueIsFinal) {
             return 0;
-        } else {
+        } 
             pos=skipNodeValue(pos, node);
             node&=kNodeTypeMask;
-        }
+        
     }
     if(node<kMinLinearMatch) {
         if(node==0) {
@@ -389,11 +389,11 @@ UCharsTrie::getNextUChars(Appendable &out) const {
         out.reserveAppendCapacity(++node);
         getNextBranchUChars(pos, node, out);
         return node;
-    } else {
+    } 
         // First unit of the linear-match node.
         out.appendCodeUnit(*pos);
         return 1;
-    }
+    
 }
 
 void

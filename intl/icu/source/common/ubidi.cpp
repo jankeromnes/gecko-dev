@@ -137,7 +137,7 @@ ubidi_openSized(int32_t maxLength, int32_t maxRunCount, UErrorCode *pErrorCode) 
     /* check the argument values */
     if(pErrorCode==NULL || U_FAILURE(*pErrorCode)) {
         return NULL;
-    } else if(maxLength<0 || maxRunCount<0) {
+    } if(maxLength<0 || maxRunCount<0) {
         *pErrorCode=U_ILLEGAL_ARGUMENT_ERROR;
         return NULL;    /* invalid arguments */
     }
@@ -176,10 +176,10 @@ ubidi_openSized(int32_t maxLength, int32_t maxRunCount, UErrorCode *pErrorCode) 
 
     if(U_SUCCESS(*pErrorCode)) {
         return pBiDi;
-    } else {
+    } 
         ubidi_close(pBiDi);
         return NULL;
-    }
+    
 }
 
 /*
@@ -204,15 +204,15 @@ ubidi_getMemory(BidiMemoryForAllocation *bidiMem, int32_t *pSize, UBool mayAlloc
         if(mayAllocate && (*pMemory=uprv_malloc(sizeNeeded))!=NULL) {
             *pSize=sizeNeeded;
             return TRUE;
-        } else {
+        } 
             return FALSE;
-        }
+        
     } else {
         if(sizeNeeded<=*pSize) {
             /* there is already enough memory */
             return TRUE;
         }
-        else if(!mayAllocate) {
+        if(!mayAllocate) {
             /* not enough memory, and we must not allocate */
             return FALSE;
         } else {
@@ -226,10 +226,10 @@ ubidi_getMemory(BidiMemoryForAllocation *bidiMem, int32_t *pSize, UBool mayAlloc
                 *pMemory=memory;
                 *pSize=sizeNeeded;
                 return TRUE;
-            } else {
+            } 
                 /* we failed to grow */
                 return FALSE;
-            }
+            
         }
     }
 }
@@ -279,9 +279,9 @@ U_CAPI UBool U_EXPORT2
 ubidi_isInverse(UBiDi *pBiDi) {
     if(pBiDi!=NULL) {
         return pBiDi->isInverse;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 /* FOOD FOR THOUGHT: currently the reordering modes are a mixture of
@@ -312,9 +312,9 @@ U_CAPI UBiDiReorderingMode U_EXPORT2
 ubidi_getReorderingMode(UBiDi *pBiDi) {
     if (pBiDi!=NULL) {
         return pBiDi->reorderingMode;
-    } else {
+    } 
         return UBIDI_REORDER_DEFAULT;
-    }
+    
 }
 
 U_CAPI void U_EXPORT2
@@ -331,9 +331,9 @@ U_CAPI uint32_t U_EXPORT2
 ubidi_getReorderingOptions(UBiDi *pBiDi) {
     if (pBiDi!=NULL) {
         return pBiDi->reorderingOptions;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 U_CAPI UBiDiDirection U_EXPORT2
@@ -1010,7 +1010,7 @@ directionFromFlags(UBiDi *pBiDi) {
     /* if the text contains AN and neutrals, then some neutrals may become RTL */
     if(!(flags&MASK_RTL || ((flags&DIRPROP_FLAG(AN)) && (flags&MASK_POSSIBLE_N)))) {
         return UBIDI_LTR;
-    } else if(!(flags&MASK_LTR)) {
+    } if(!(flags&MASK_LTR)) {
         return UBIDI_RTL;
     } else {
         return UBIDI_MIXED;
@@ -1815,7 +1815,7 @@ addPoint(UBiDi *pBiDi, int32_t pos, int32_t flag)
             pInsertPoints->errorCode=U_MEMORY_ALLOCATION_ERROR;
             return;
         }
-        else  pInsertPoints->capacity*=2;
+         pInsertPoints->capacity*=2;
     }
     point.pos=pos;
     point.flag=flag;
@@ -2868,54 +2868,54 @@ U_CAPI UBool U_EXPORT2
 ubidi_isOrderParagraphsLTR(UBiDi *pBiDi) {
     if(pBiDi!=NULL) {
         return pBiDi->orderParagraphsLTR;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 U_CAPI UBiDiDirection U_EXPORT2
 ubidi_getDirection(const UBiDi *pBiDi) {
     if(IS_VALID_PARA_OR_LINE(pBiDi)) {
         return pBiDi->direction;
-    } else {
+    } 
         return UBIDI_LTR;
-    }
+    
 }
 
 U_CAPI const UChar * U_EXPORT2
 ubidi_getText(const UBiDi *pBiDi) {
     if(IS_VALID_PARA_OR_LINE(pBiDi)) {
         return pBiDi->text;
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 U_CAPI int32_t U_EXPORT2
 ubidi_getLength(const UBiDi *pBiDi) {
     if(IS_VALID_PARA_OR_LINE(pBiDi)) {
         return pBiDi->originalLength;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 U_CAPI int32_t U_EXPORT2
 ubidi_getProcessedLength(const UBiDi *pBiDi) {
     if(IS_VALID_PARA_OR_LINE(pBiDi)) {
         return pBiDi->length;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 U_CAPI int32_t U_EXPORT2
 ubidi_getResultLength(const UBiDi *pBiDi) {
     if(IS_VALID_PARA_OR_LINE(pBiDi)) {
         return pBiDi->resultLength;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 /* paragraphs API functions ------------------------------------------------- */
@@ -2924,18 +2924,18 @@ U_CAPI UBiDiLevel U_EXPORT2
 ubidi_getParaLevel(const UBiDi *pBiDi) {
     if(IS_VALID_PARA_OR_LINE(pBiDi)) {
         return pBiDi->paraLevel;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 U_CAPI int32_t U_EXPORT2
 ubidi_countParagraphs(UBiDi *pBiDi) {
     if(!IS_VALID_PARA_OR_LINE(pBiDi)) {
         return 0;
-    } else {
+    } 
         return pBiDi->paraCount;
-    }
+    
 }
 
 U_CAPI void U_EXPORT2

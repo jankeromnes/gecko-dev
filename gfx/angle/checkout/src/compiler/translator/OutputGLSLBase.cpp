@@ -26,7 +26,7 @@ bool isSingleStatement(TIntermNode *node)
     {
         return false;
     }
-    else if (node->getAsBlock())
+    if (node->getAsBlock())
     {
         return false;
     }
@@ -835,12 +835,12 @@ bool TOutputGLSLBase::visitCase(Visit visit, TIntermCase *node)
         writeTriplet(visit, "case (", nullptr, "):\n");
         return true;
     }
-    else
-    {
+    
+    
         TInfoSinkBase &out = objSink();
         out << "default:\n";
         return false;
-    }
+    
 }
 
 bool TOutputGLSLBase::visitBlock(Visit visit, TIntermBlock *node)
@@ -1126,10 +1126,10 @@ ImmutableString TOutputGLSLBase::hashFieldName(const TSymbol *containingStruct,
     {
         return HashName(fieldName, mHashFunction, &mNameMap);
     }
-    else
-    {
+    
+    
         return fieldName;
-    }
+    
 }
 
 ImmutableString TOutputGLSLBase::hashFunctionNameIfNeeded(const TFunction *func)
@@ -1138,10 +1138,10 @@ ImmutableString TOutputGLSLBase::hashFunctionNameIfNeeded(const TFunction *func)
     {
         return func->name();
     }
-    else
-    {
+    
+    
         return hashName(func);
-    }
+    
 }
 
 bool TOutputGLSLBase::structDeclared(const TStructure *structure) const

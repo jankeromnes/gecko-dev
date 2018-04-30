@@ -100,9 +100,9 @@ char *vorbis_comment_query(vorbis_comment *vc, const char *tag, int count){
         /* We return a pointer to the data, not a copy */
         _ogg_free(fulltag);
         return vc->user_comments[i] + taglen;
-      } else {
+      } 
         found++;
-      }
+      
     }
   }
   _ogg_free(fulltag);
@@ -665,12 +665,12 @@ double vorbis_granule_time(vorbis_dsp_state *v,ogg_int64_t granulepos){
      have to put the unsigned granpo in a signed type. */
   if(granulepos>=0){
     return((double)granulepos/v->vi->rate);
-  }else{
+  }
     ogg_int64_t granuleoff=0xffffffff;
     granuleoff<<=31;
     granuleoff|=0x7ffffffff;
     return(((double)granulepos+2+granuleoff+granuleoff)/v->vi->rate);
-  }
+  
 }
 
 const char *vorbis_version_string(void){

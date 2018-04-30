@@ -106,7 +106,7 @@ void* NameTable::getName(uint16& languageId, uint16 nameId, gr_encform enc, uint
                 break;
             }
             // MS language tags have the language in the lower byte, region in the higher
-            else if ((langId & 0xFF) == (languageId & 0xFF))
+            if ((langId & 0xFF) == (languageId & 0xFF))
             {
                 bestLang = i;
             }

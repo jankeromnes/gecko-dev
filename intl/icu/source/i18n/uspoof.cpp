@@ -602,11 +602,11 @@ uspoof_check2UnicodeString(const USpoofChecker *sc,
             return FALSE;
         }
         return checkImpl(This, id, ThisCheckResult, status);
-    } else {
+    } 
         // Stack-allocate the checkResult since this method doesn't return it
         CheckResult stackCheckResult;
         return checkImpl(This, id, &stackCheckResult, status);
-    }
+    
 }
 
 

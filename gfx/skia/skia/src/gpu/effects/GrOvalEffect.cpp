@@ -22,12 +22,12 @@ std::unique_ptr<GrFragmentProcessor> GrOvalEffect::Make(GrClipEdgeType edgeType,
         w /= 2;
         return GrCircleEffect::Make(edgeType, SkPoint::Make(oval.fLeft + w, oval.fTop + w),
                                     w);
-    } else {
+    } 
         w /= 2;
         h /= 2;
         return GrEllipseEffect::Make(edgeType, SkPoint::Make(oval.fLeft + w, oval.fTop + h),
                                      SkPoint::Make(w, h), caps);
-    }
+    
 
     return nullptr;
 }

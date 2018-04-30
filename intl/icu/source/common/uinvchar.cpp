@@ -556,7 +556,7 @@ uprv_compareInvEbcdicAsAscii(const char *s1, const char *s2) {
                 c2=-(int32_t)(uint8_t)*s2;
             }
             return c1-c2;
-        } else if(c1==0) {
+        } if(c1==0) {
             return 0;
         }
     }

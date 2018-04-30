@@ -403,7 +403,7 @@ CollationBuilder::addReset(int32_t strength, const UnicodeString &str,
                     // right after the parent, and we need to insert the preceding weight.
                     previousWeight16 = Collation::COMMON_WEIGHT16;
                     break;
-                } else if(previousStrength == strength && !isTailoredNode(node)) {
+                } if(previousStrength == strength && !isTailoredNode(node)) {
                     previousWeight16 = weight16FromNode(node);
                     break;
                 }
@@ -529,9 +529,9 @@ CollationBuilder::getSpecialResetPosition(const UnicodeString &str,
                         U_ASSERT(isTailoredNode(nodes.elementAti(index)));
                     }
                     return tempCEFromIndexAndStrength(index, UCOL_SECONDARY);
-                } else {
+                } 
                     break;
-                }
+                
             }
         }
         ce = rootElements.getFirstSecondaryCE();
@@ -773,9 +773,9 @@ CollationBuilder::findOrInsertNodeForCEs(int32_t strength, const char *&parserEr
             ce = ces[0] = 0;
             cesLength = 1;
             break;
-        } else {
+        } 
             ce = ces[cesLength - 1];
-        }
+        
         if(ceStrength(ce) <= strength) { break; }
     }
 
@@ -836,7 +836,7 @@ binarySearchForRootPrimaryNode(const int32_t *rootPrimaryIndexes, int32_t length
         uint32_t nodePrimary = (uint32_t)(node >> 32);  // weight32FromNode(node)
         if (p == nodePrimary) {
             return i;
-        } else if (p < nodePrimary) {
+        } if (p < nodePrimary) {
             if (i == start) {
                 return ~start;  // insert s before i
             }
@@ -860,13 +860,13 @@ CollationBuilder::findOrInsertNodeForPrimary(uint32_t p, UErrorCode &errorCode) 
         rootPrimaryIndexes.getBuffer(), rootPrimaryIndexes.size(), nodes.getBuffer(), p);
     if(rootIndex >= 0) {
         return rootPrimaryIndexes.elementAti(rootIndex);
-    } else {
+    } 
         // Start a new list of nodes with this primary.
         int32_t index = nodes.size();
         nodes.addElement(nodeFromWeight32(p), errorCode);
         rootPrimaryIndexes.insertElementAt(index, ~rootIndex, errorCode);
         return index;
-    }
+    
 }
 
 int32_t
@@ -1267,7 +1267,7 @@ CollationBuilder::mergeCompositeIntoString(const UnicodeString &nfdString,
             // but the composite's decomposition contains another starter.
             // The strings would not be equivalent.
             return FALSE;
-        } else if(sourceCC < decompCC) {
+        } if(sourceCC < decompCC) {
             // Composite + sourceChar would not be FCD.
             return FALSE;
         } else if(decompCC < sourceCC) {
@@ -1587,17 +1587,17 @@ public:
         if(CollationBuilder::isTempCE32(ce32)) {
             // retain case bits
             return finalCEs[CollationBuilder::indexFromTempCE32(ce32)] | ((ce32 & 0xc0) << 8);
-        } else {
+        } 
             return Collation::NO_CE;
-        }
+        
     }
     virtual int64_t modifyCE(int64_t ce) const {
         if(CollationBuilder::isTempCE(ce)) {
             // retain case bits
             return finalCEs[CollationBuilder::indexFromTempCE(ce)] | (ce & 0xc000);
-        } else {
+        } 
             return Collation::NO_CE;
-        }
+        
     }
 
 private:

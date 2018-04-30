@@ -45,7 +45,7 @@ uint32_t GrPathUtils::quadraticPointCount(const SkPoint points[], SkScalar tol) 
     SkScalar d = SkPointPriv::DistanceToLineSegmentBetween(points[1], points[0], points[2]);
     if (!SkScalarIsFinite(d)) {
         return kMaxPointsPerCurve;
-    } else if (d <= tol) {
+    } if (d <= tol) {
         return 1;
     } else {
         // Each time we subdivide, d should be cut in 4. So we need to
@@ -55,7 +55,7 @@ uint32_t GrPathUtils::quadraticPointCount(const SkPoint points[], SkScalar tol) 
         SkScalar divSqrt = SkScalarSqrt(d / tol);
         if (((SkScalar)SK_MaxS32) <= divSqrt) {
             return kMaxPointsPerCurve;
-        } else {
+        } 
             int temp = SkScalarCeilToInt(divSqrt);
             int pow2 = GrNextPow2(temp);
             // Because of NaNs & INFs we can wind up with a degenerate temp
@@ -65,7 +65,7 @@ uint32_t GrPathUtils::quadraticPointCount(const SkPoint points[], SkScalar tol) 
                 pow2 = 1;
             }
             return SkTMin(pow2, kMaxPointsPerCurve);
-        }
+        
     }
 }
 
@@ -105,13 +105,13 @@ uint32_t GrPathUtils::cubicPointCount(const SkPoint points[],
     d = SkScalarSqrt(d);
     if (!SkScalarIsFinite(d)) {
         return kMaxPointsPerCurve;
-    } else if (d <= tol) {
+    } if (d <= tol) {
         return 1;
     } else {
         SkScalar divSqrt = SkScalarSqrt(d / tol);
         if (((SkScalar)SK_MaxS32) <= divSqrt) {
             return kMaxPointsPerCurve;
-        } else {
+        } 
             int temp = SkScalarCeilToInt(SkScalarSqrt(d / tol));
             int pow2 = GrNextPow2(temp);
             // Because of NaNs & INFs we can wind up with a degenerate temp
@@ -121,7 +121,7 @@ uint32_t GrPathUtils::cubicPointCount(const SkPoint points[],
                 pow2 = 1;
             }
             return SkTMin(pow2, kMaxPointsPerCurve);
-        }
+        
     }
 }
 

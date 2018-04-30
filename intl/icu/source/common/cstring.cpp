@@ -236,9 +236,9 @@ uprv_stricmp(const char *str1, const char *str2) {
     if(str1==NULL) {
         if(str2==NULL) {
             return 0;
-        } else {
+        } 
             return -1;
-        }
+        
     } else if(str2==NULL) {
         return 1;
     } else {
@@ -252,9 +252,9 @@ uprv_stricmp(const char *str1, const char *str2) {
             if(c1==0) {
                 if(c2==0) {
                     return 0;
-                } else {
+                } 
                     return -1;
-                }
+                
             } else if(c2==0) {
                 return 1;
             } else {
@@ -275,9 +275,9 @@ uprv_strnicmp(const char *str1, const char *str2, uint32_t n) {
     if(str1==NULL) {
         if(str2==NULL) {
             return 0;
-        } else {
+        } 
             return -1;
-        }
+        
     } else if(str2==NULL) {
         return 1;
     } else {
@@ -291,9 +291,9 @@ uprv_strnicmp(const char *str1, const char *str2, uint32_t n) {
             if(c1==0) {
                 if(c2==0) {
                     return 0;
-                } else {
+                } 
                     return -1;
-                }
+                
             } else if(c2==0) {
                 return 1;
             } else {

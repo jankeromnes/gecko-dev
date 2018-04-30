@@ -825,9 +825,9 @@ _getKeywords(const char *localeID,
             }
         }
         return u_terminateChars(keywords, keywordCapacity, keywordsLen, status);
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 U_CFUNC int32_t
@@ -1194,7 +1194,7 @@ static char* _strnchr(const char* str, int32_t len, char c) {
         char d = *str;
         if (d == c) {
             return (char*) str;
-        } else if (d == 0) {
+        } if (d == 0) {
             break;
         }
         ++str;
@@ -1663,9 +1663,9 @@ uloc_openKeywords(const char* localeID,
 
     if(i) {
         return uloc_openKeywordList(keywords, i, status);
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 
@@ -2302,7 +2302,7 @@ _uloc_strtod(const char *start, char **end) {
 
     if(gDecimal == '.') {
         return uprv_strtod(start, end); /* fall through to OS */
-    } else {
+    } 
         uprv_strncpy(buf, start, 29);
         buf[29]=0;
         decimal = uprv_strchr(buf, '.');
@@ -2316,7 +2316,7 @@ _uloc_strtod(const char *start, char **end) {
             *end = (char*)(start+(myEnd-buf)); /* cast away const (to follow uprv_strtod API.) */
         }
         return rv;
-    }
+    
 }
 
 typedef struct {

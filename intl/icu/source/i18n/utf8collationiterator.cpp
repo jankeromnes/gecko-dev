@@ -62,7 +62,7 @@ UTF8CollationIterator::handleNextCE32(UChar32 &c, UErrorCode & /*errorCode*/) {
         c = (((c & 0xf) << 12) | ((t1 & 0x3f) << 6) | t2);
         pos += 2;
         return UTRIE2_GET32_FROM_U16_SINGLE_LEAD(trie, c);
-    } else if(c < 0xe0 && c >= 0xc2 && pos != length && (t1 = (u8[pos] - 0x80)) <= 0x3f) {
+    } if(c < 0xe0 && c >= 0xc2 && pos != length && (t1 = (u8[pos] - 0x80)) <= 0x3f) {
         // U+0080..U+07FF
         uint32_t ce32 = trie->data32[trie->index[(UTRIE2_UTF8_2B_INDEX_2_OFFSET - 0xc0) + c] + t1];
         c = ((c & 0x1f) << 6) | t1;
@@ -81,9 +81,9 @@ UTF8CollationIterator::foundNULTerminator() {
     if(length < 0) {
         length = --pos;
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 UBool
@@ -140,7 +140,7 @@ int32_t
 FCDUTF8CollationIterator::getOffset() const {
     if(state != IN_NORMALIZED) {
         return pos;
-    } else if(pos == 0) {
+    } if(pos == 0) {
         return start;
     } else {
         return limit;
@@ -192,21 +192,21 @@ FCDUTF8CollationIterator::handleNextCE32(UChar32 &c, UErrorCode &errorCode) {
                 c = utf8_nextCharSafeBody(u8, &pos, length, c, -3);
                 if(c == 0xfffd) {
                     return Collation::FFFD_CE32;
-                } else {
+                } 
                     U_ASSERT(c > 0xffff);
                     if(CollationFCD::hasTccc(U16_LEAD(c)) && pos != length && nextHasLccc()) {
                         pos -= 4;
                     } else {
                         return data->getCE32FromSupplementary(c);
                     }
-                }
+                
             }
             if(!nextSegment(errorCode)) {
                 c = U_SENTINEL;
                 return Collation::FALLBACK_CE32;
             }
             continue;
-        } else if(state == IN_FCD_SEGMENT && pos != limit) {
+        } if(state == IN_FCD_SEGMENT && pos != limit) {
             return UTF8CollationIterator::handleNextCE32(c, errorCode);
         } else if(state == IN_NORMALIZED && pos != normalized.length()) {
             c = normalized[pos++];
@@ -256,9 +256,9 @@ FCDUTF8CollationIterator::foundNULTerminator() {
     if(state == CHECK_FWD && length < 0) {
         length = --pos;
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 UChar32
@@ -286,7 +286,7 @@ FCDUTF8CollationIterator::nextCodePoint(UErrorCode &errorCode) {
                 continue;
             }
             return c;
-        } else if(state == IN_FCD_SEGMENT && pos != limit) {
+        } if(state == IN_FCD_SEGMENT && pos != limit) {
             U8_NEXT_OR_FFFD(u8, pos, length, c);
             return c;
         } else if(state == IN_NORMALIZED && pos != normalized.length()) {
@@ -324,7 +324,7 @@ FCDUTF8CollationIterator::previousCodePoint(UErrorCode &errorCode) {
                 continue;
             }
             return c;
-        } else if(state == IN_FCD_SEGMENT && pos != start) {
+        } if(state == IN_FCD_SEGMENT && pos != start) {
             U8_PREV_OR_FFFD(u8, 0, pos, c);
             return c;
         } else if(state >= IN_NORMALIZED && pos != 0) {

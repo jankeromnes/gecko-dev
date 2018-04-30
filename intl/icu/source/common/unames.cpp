@@ -440,9 +440,9 @@ static const char *getCharCatName(UChar32 cp) {
 
     if (cat >= UPRV_LENGTHOF(charCatNames)) {
         return "unknown";
-    } else {
+    } 
         return charCatNames[cat];
-    }
+    
 }
 
 static uint16_t getExtName(uint32_t code, char *buffer, uint16_t bufferLength) {
@@ -581,14 +581,14 @@ getName(UCharNames *names, uint32_t code, UCharNameChoice nameChoice,
     if((uint16_t)(code>>GROUP_SHIFT)==group[GROUP_MSB]) {
         return expandGroupName(names, group, (uint16_t)(code&GROUP_MASK), nameChoice,
                                buffer, bufferLength);
-    } else {
+    } 
         /* group not found */
         /* zero-terminate */
         if(bufferLength>0) {
             *buffer=0;
         }
         return 0;
-    }
+    
 }
 
 /*
@@ -747,7 +747,7 @@ enumNames(UCharNames *names,
         /* enumerate within the end group (group[GROUP_MSB]==endGroupMSB) */
         if(group<groupLimit && group[GROUP_MSB]==endGroupMSB) {
             return enumGroupNames(names, group, (limit-1)&~GROUP_MASK, limit-1, fn, context, nameChoice);
-        } else if (nameChoice == U_EXTENDED_CHAR_NAME && group == groupLimit) {
+        } if (nameChoice == U_EXTENDED_CHAR_NAME && group == groupLimit) {
             UChar32 next = (PREV_GROUP(group)[GROUP_MSB] + 1) << GROUP_SHIFT;
             if (next > start) {
                 start = next;
@@ -975,7 +975,7 @@ enumAlgNames(AlgorithmicRange *range,
                 if(('0'<=c && c<'9') || ('A'<=c && c<'F')) {
                     *s=(char)(c+1);
                     break;
-                } else if(c=='9') {
+                } if(c=='9') {
                     *s='A';
                     break;
                 } else if(c=='F') {
@@ -1035,11 +1035,11 @@ enumAlgNames(AlgorithmicRange *range,
                     }
                     elements[i]=s;
                     break;
-                } else {
+                } 
                     /* reset this index to 0 and its element string to the first one */
                     indexes[i]=0;
                     elements[i]=elementBases[i];
-                }
+                
             }
 
             /* to make matters a little easier, just append all elements to the suffix */
@@ -1163,11 +1163,11 @@ findAlgName(AlgorithmicRange *range, UCharNameChoice nameChoice, const char *oth
                     while(*s++!=0) {}
                     elements[i]=s;
                     break;
-                } else {
+                } 
                     /* reset this index to 0 and its element string to the first one */
                     indexes[i]=0;
                     elements[i]=elementBases[i];
-                }
+                
             }
 
             /* to make matters a little easier, just compare all elements of the suffix */
@@ -1458,7 +1458,7 @@ u_charName(UChar32 code, UCharNameChoice nameChoice,
     /* check the argument values */
     if(pErrorCode==NULL || U_FAILURE(*pErrorCode)) {
         return 0;
-    } else if(nameChoice>=U_CHAR_NAME_CHOICE_COUNT ||
+    } if(nameChoice>=U_CHAR_NAME_CHOICE_COUNT ||
               bufferLength<0 || (bufferLength>0 && buffer==NULL)
     ) {
         *pErrorCode=U_ILLEGAL_ARGUMENT_ERROR;
@@ -1507,7 +1507,7 @@ u_getISOComment(UChar32 /*c*/,
     /* check the argument values */
     if(pErrorCode==NULL || U_FAILURE(*pErrorCode)) {
         return 0;
-    } else if(destCapacity<0 || (destCapacity>0 && dest==NULL)) {
+    } if(destCapacity<0 || (destCapacity>0 && dest==NULL)) {
         *pErrorCode=U_ILLEGAL_ARGUMENT_ERROR;
         return 0;
     }
@@ -1697,9 +1697,9 @@ uprv_getMaxCharNameLength() {
     UErrorCode errorCode=U_ZERO_ERROR;
     if(calcNameSetsLengths(&errorCode)) {
         return gMaxNameLength;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 /**

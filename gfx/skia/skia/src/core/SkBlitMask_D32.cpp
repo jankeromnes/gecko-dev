@@ -18,9 +18,9 @@ SkBlitMask::BlitLCD16RowProc SkBlitMask::BlitLCD16RowFactory(bool isOpaque) {
 
     if (isOpaque) {
         return  SkBlitLCD16OpaqueRow;
-    } else {
+    } 
         return  SkBlitLCD16Row;
-    }
+    
 }
 
 static void D32_LCD16_Proc(void* SK_RESTRICT dst, size_t dstRB,

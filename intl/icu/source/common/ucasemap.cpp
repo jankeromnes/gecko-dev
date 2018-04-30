@@ -70,7 +70,7 @@ ucasemap_open(const char *locale, uint32_t options, UErrorCode *pErrorCode) {
     if(csm==NULL) {
         *pErrorCode = U_MEMORY_ALLOCATION_ERROR;
         return NULL;
-    } else if (U_FAILURE(*pErrorCode)) {
+    } if (U_FAILURE(*pErrorCode)) {
         delete csm;
         return NULL;
     }
@@ -154,9 +154,9 @@ appendResult(int32_t cpLength, int32_t result, const UChar *s,
         if(result<=UCASE_MAX_STRING_LENGTH) {
             // string: "result" is the UTF-16 length
             return ByteSinkUtil::appendChange(cpLength, s, result, sink, edits, errorCode);
-        } else {
+        } 
             ByteSinkUtil::appendCodePoint(cpLength, result, sink, edits);
-        }
+        
     }
     return TRUE;
 }
@@ -243,7 +243,7 @@ void toLower(int32_t caseLocale, uint32_t options,
                 }
                 prev = srcIndex;
                 continue;
-            } else if (lead < 0xe3) {
+            } if (lead < 0xe3) {
                 uint8_t t;
                 if (0xc2 <= lead && lead <= 0xc5 && srcIndex < srcLimit &&
                         (t = src[srcIndex] - 0x80) <= 0x3f) {
@@ -351,7 +351,7 @@ void toUpper(int32_t caseLocale, uint32_t options,
                 }
                 prev = srcIndex;
                 continue;
-            } else if (lead < 0xe3) {
+            } if (lead < 0xe3) {
                 uint8_t t;
                 if (0xc2 <= lead && lead <= 0xc5 && srcIndex < srcLength &&
                         (t = src[srcIndex] - 0x80) <= 0x3f) {

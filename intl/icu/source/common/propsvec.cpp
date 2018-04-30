@@ -106,7 +106,7 @@ _findRow(UPropsVectors *pv, UChar32 rangeStart) {
         if(rangeStart<(UChar32)row[1]) {
             /* same row as last seen */
             return row;
-        } else if(rangeStart<(UChar32)(row+=columns)[1]) {
+        } if(rangeStart<(UChar32)(row+=columns)[1]) {
             /* next row after the last one */
             pv->prevRow=prevRow+1;
             return row;

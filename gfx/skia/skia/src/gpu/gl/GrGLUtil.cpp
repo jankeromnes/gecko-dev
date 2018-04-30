@@ -288,7 +288,7 @@ GrGLRenderer GrGLGetRendererFromString(const char* rendererString) {
     if (rendererString) {
         if (0 == strcmp(rendererString, "NVIDIA Tegra 3")) {
             return kTegra3_GrGLRenderer;
-        } else if (0 == strcmp(rendererString, "NVIDIA Tegra")) {
+        } if (0 == strcmp(rendererString, "NVIDIA Tegra")) {
             return kTegra2_GrGLRenderer;
         }
         int lastDigit;

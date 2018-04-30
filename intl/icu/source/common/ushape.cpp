@@ -441,7 +441,7 @@ static UChar
 getLink(UChar ch) {
     if(ch >= 0x0622 && ch <= 0x06D3) {
         return(araLink[ch-0x0622]);
-    } else if(ch == 0x200D) {
+    } if(ch == 0x200D) {
         return(3);
     } else if(ch >= 0x206D && ch <= 0x206F) {
         return(4);
@@ -522,9 +522,9 @@ static inline int32_t
 isTailChar(UChar ch) {
     if(ch == OLD_TAIL_CHAR || ch == NEW_TAIL_CHAR){
             return 1;
-    }else{
-            return 0;
     }
+            return 0;
+    
 }
 
 /*BIDI
@@ -537,9 +537,9 @@ static inline int32_t
 isSeenTailFamilyChar(UChar ch) {
     if(ch >= 0xfeb1 && ch < 0xfebf){
             return tailFamilyIsolatedFinal [ch - 0xFEB1];
-    }else{
-            return 0;
     }
+            return 0;
+    
 }
 
  /* Name     : isSeenFamilyChar
@@ -551,9 +551,9 @@ static inline int32_t
 isSeenFamilyChar(UChar  ch){
     if(ch >= 0x633 && ch <= 0x636){
         return 1;
-    }else {
+    } 
         return 0;
-    }
+    
 }
 
 /*Start of BIDI*/
@@ -576,9 +576,9 @@ static inline int32_t
 isYehHamzaChar(UChar ch) {
     if((ch==0xFE89)||(ch==0xFE8A)){
         return 1;
-    }else{
-        return 0;
     }
+        return 0;
+    
 }
 
  /*
@@ -593,7 +593,7 @@ isTashkeelOnTatweelChar(UChar ch){
     if(ch >= 0xfe70 && ch <= 0xfe7f && ch != NEW_TAIL_CHAR && ch != 0xFE75 && ch != SHADDA_TATWEEL_CHAR)
     {
         return tashkeelMedial [ch - 0xFE70];
-    }else if( (ch >= 0xfcf2 && ch <= 0xfcf4) || (ch == SHADDA_TATWEEL_CHAR)) {
+    }if( (ch >= 0xfcf2 && ch <= 0xfcf4) || (ch == SHADDA_TATWEEL_CHAR)) {
         return 2;
     }else{
         return 0;
@@ -611,7 +611,7 @@ static inline int32_t
 isIsolatedTashkeelChar(UChar ch){
     if(ch >= 0xfe70 && ch <= 0xfe7f && ch != NEW_TAIL_CHAR && ch != 0xFE75){
         return (1 - tashkeelMedial [ch - 0xFE70]);
-    }else if(ch >= 0xfc5e && ch <= 0xfc63){
+    }if(ch >= 0xfc5e && ch <= 0xfc63){
         return 1;
     }else{
         return 0;

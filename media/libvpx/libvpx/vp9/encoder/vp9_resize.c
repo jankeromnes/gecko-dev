@@ -140,7 +140,7 @@ static const interp_kernel *choose_interp_filter(int inlength, int outlength) {
   int outlength16 = outlength * 16;
   if (outlength16 >= inlength * 16)
     return filteredinterp_filters1000;
-  else if (outlength16 >= inlength * 13)
+  if (outlength16 >= inlength * 13)
     return filteredinterp_filters875;
   else if (outlength16 >= inlength * 11)
     return filteredinterp_filters750;

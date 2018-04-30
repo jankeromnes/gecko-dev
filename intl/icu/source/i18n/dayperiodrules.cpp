@@ -169,9 +169,9 @@ struct DayPeriodRulesDataSink : public ResourceSink {
         if (setNum == 0) {
             errorCode = U_INVALID_FORMAT_ERROR;
             return -1;
-        } else {
+        } 
             return setNum;
-        }
+        
     }
 
     void addCutoff(CutoffType type, const UnicodeString &hour_str, UErrorCode &errorCode) {
@@ -228,7 +228,7 @@ struct DayPeriodRulesDataSink : public ResourceSink {
     static CutoffType getCutoffTypeFromString(const char *type_str) {
         if (uprv_strcmp(type_str, "from") == 0) {
             return CUTOFF_TYPE_FROM;
-        } else if (uprv_strcmp(type_str, "before") == 0) {
+        } if (uprv_strcmp(type_str, "before") == 0) {
             return CUTOFF_TYPE_BEFORE;
         } else if (uprv_strcmp(type_str, "after") == 0) {
             return CUTOFF_TYPE_AFTER;
@@ -376,9 +376,9 @@ const DayPeriodRules *DayPeriodRules::getInstance(const Locale &locale, UErrorCo
         // If day period for hour 0 is UNKNOWN then day period for all hours are UNKNOWN.
         // Data doesn't exist even with fallback.
         return NULL;
-    } else {
+    } 
         return &data->rules[ruleSetNum];
-    }
+    
 }
 
 DayPeriodRules::DayPeriodRules() : fHasMidnight(FALSE), fHasNoon(FALSE) {
@@ -468,7 +468,7 @@ int32_t DayPeriodRules::getEndHourForDayPeriod(
 DayPeriodRules::DayPeriod DayPeriodRules::getDayPeriodFromString(const char *type_str) {
     if (uprv_strcmp(type_str, "midnight") == 0) {
         return DAYPERIOD_MIDNIGHT;
-    } else if (uprv_strcmp(type_str, "noon") == 0) {
+    } if (uprv_strcmp(type_str, "noon") == 0) {
         return DAYPERIOD_NOON;
     } else if (uprv_strcmp(type_str, "morning1") == 0) {
         return DAYPERIOD_MORNING1;

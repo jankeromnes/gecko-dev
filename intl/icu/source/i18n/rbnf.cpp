@@ -415,7 +415,7 @@ LocDataParser::doParse(void) {
     skipWhitespace();
     if (!checkInc(OPEN_ANGLE)) {
         ERROR("Missing open angle");
-    } else {
+    } 
         VArray array(DeleteFn);
         UBool mightHaveNext = TRUE;
         int32_t requiredLength = -1;
@@ -439,9 +439,9 @@ LocDataParser::doParse(void) {
         if (!checkInc(CLOSE_ANGLE)) {
             if (check(OPEN_ANGLE)) {
                 ERROR("Missing comma in outer array");
-            } else {
+            } 
                 ERROR("Missing close angle bracket in outer array");
-            }
+            
         }
 
         skipWhitespace();
@@ -456,7 +456,7 @@ LocDataParser::doParse(void) {
             
             return new StringLocalizationInfo(data, result, requiredLength-2, numLocs); // subtract first, NULL
         }
-    }
+    
   
     ERROR("Unknown error");
 }
@@ -493,9 +493,9 @@ LocDataParser::nextArray(int32_t& requiredLength) {
     if (!checkInc(CLOSE_ANGLE)) {
         if (check(OPEN_ANGLE)) {
             ERROR("Missing close angle bracket in inner array");
-        } else {
+        } 
             ERROR("Missing comma in inner array");
-        }
+        
     }
 
     array.add(NULL, ec);
@@ -542,7 +542,7 @@ LocDataParser::nextString() {
         if (haveQuote) {
             if (x != c) {
                 ERROR("Missing matching quote");
-            } else if (p == start) {
+            } if (p == start) {
                 ERROR("Empty string");
             }
             inc();
@@ -952,7 +952,7 @@ RuleBasedNumberFormat::operator==(const Format& other) const
             NFRuleSet** q = rhs.ruleSets;
             if (p == NULL) {
                 return q == NULL;
-            } else if (q == NULL) {
+            } if (q == NULL) {
                 return FALSE;
             }
             while (*p && *q && (**p == **q)) {
@@ -985,7 +985,7 @@ RuleBasedNumberFormat::getRuleSetName(int32_t index) const
         UnicodeString string(TRUE, localizations->getRuleSetName(index), (int32_t)-1);
         return string;
     }
-    else if (ruleSets) {
+    if (ruleSets) {
         UnicodeString result;
         for (NFRuleSet** p = ruleSets; *p; ++p) {
             NFRuleSet* rs = *p;
@@ -1466,9 +1466,9 @@ RuleBasedNumberFormat::initDefaultRuleSet()
         if ((*p)->isNamed(spellout) || (*p)->isNamed(ordinal) || (*p)->isNamed(duration)) {
             defaultRuleSet = *p;
             return;
-        } else {
+        } 
             ++p;
-        }
+        
     }
 
     defaultRuleSet = *--p;

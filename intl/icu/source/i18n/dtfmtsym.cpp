@@ -1379,9 +1379,9 @@ DateFormatSymbols::getPatternCharIndex(UChar c) {
     const UChar *p = u_strchr(gPatternChars, c);
     if (p == NULL) {
         return UDAT_FIELD_COUNT;
-    } else {
+    } 
         return static_cast<UDateFormatField>(p - gPatternChars);
-    }
+    
 }
 
 static const uint64_t kNumericFieldsAlways =
@@ -1558,7 +1558,7 @@ struct CalendarDataSink : public ResourceSink {
                 // Ignore aliases to the gregorian calendar, all of its resources will be loaded anyway.
                 continue;
 
-            } else if (aliasType == DIFFERENT_CALENDAR) {
+            } if (aliasType == DIFFERENT_CALENDAR) {
                 // Whenever an alias to the next calendar (except gregorian) is encountered, register the
                 // calendar type it's pointing to
                 if (resourcesToVisitNext.isNull()) {
@@ -1815,12 +1815,12 @@ struct CalendarDataSink : public ResourceSink {
                         // If we have an alias to the same calendar, the path to the resource must be different
                         return SAME_CALENDAR;
 
-                    } else if (currentCalendarType != aliasCalendarType
+                    } if (currentCalendarType != aliasCalendarType
                                && currentRelativePath == aliasRelativePath) {
                         // If we have an alias to a different calendar, the path to the resource must be the same
                         if (aliasCalendarType.compare(kGregorianTagUChar, UPRV_LENGTHOF(kGregorianTagUChar)) == 0) {
                             return GREGORIAN;
-                        } else if (nextCalendarType.isBogus()) {
+                        } if (nextCalendarType.isBogus()) {
                             nextCalendarType = aliasCalendarType;
                             return DIFFERENT_CALENDAR;
                         } else if (nextCalendarType == aliasCalendarType) {

@@ -247,12 +247,12 @@ int32_t ICU_Utility::parsePattern(const UnicodeString& pat,
             if (PatternProps::isWhiteSpace(c)) {
                 index += U16_LENGTH(c);
                 continue;
-            } else {
+            } 
                 if (++ipat == pat.length()) {
                     return index; // success; c unparsed
                 }
                 // fall thru; process c again with next cpat
-            }
+            
         }
 
         // parse literal

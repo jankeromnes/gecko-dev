@@ -217,7 +217,7 @@ compute_reciprocal (UINT16 divisor, DCTELEM *dtbl)
   dtbl[DCTSIZE2 * 3] = (DCTELEM) r - sizeof(DCTELEM)*8; /* shift */
 
   if(r <= 16) return 0;
-  else return 1;
+  return 1;
 }
 
 #endif

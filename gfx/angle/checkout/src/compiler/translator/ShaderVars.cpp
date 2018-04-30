@@ -159,8 +159,8 @@ bool ShaderVariable::findInfoByMappedName(const std::string &mappedFullName,
         *leafVar          = this;
         return true;
     }
-    else
-    {
+    
+    
         std::string topName = mappedFullName.substr(0, pos);
         if (topName != this->mappedName)
             return false;
@@ -180,13 +180,13 @@ bool ShaderVariable::findInfoByMappedName(const std::string &mappedFullName,
                 *leafVar          = this;
                 return true;
             }
-            else
-            {
+            
+            
                 // In the form of 'a[0].b', so after ']', '.' is expected.
                 if (mappedFullName[closePos + 1] != '.')
                     return false;
                 remaining = mappedFullName.substr(closePos + 2);  // Skip "]."
-            }
+            
         }
         else
         {
@@ -206,7 +206,7 @@ bool ShaderVariable::findInfoByMappedName(const std::string &mappedFullName,
             }
         }
         return false;
-    }
+    
 }
 
 bool ShaderVariable::isBuiltIn() const

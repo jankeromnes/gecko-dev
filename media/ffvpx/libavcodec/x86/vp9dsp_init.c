@@ -222,7 +222,7 @@ av_cold void ff_vp9dsp_init_x86(VP9DSPContext *dsp, int bpp, int bitexact)
     if (bpp == 10) {
         ff_vp9dsp_init_10bpp_x86(dsp, bitexact);
         return;
-    } else if (bpp == 12) {
+    } if (bpp == 12) {
         ff_vp9dsp_init_12bpp_x86(dsp, bitexact);
         return;
     }

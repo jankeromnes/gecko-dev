@@ -353,17 +353,17 @@ cc_bw_same(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net, uint64_t nb
 				/* Step down worked */
 				net->cc_mod.rtcc.step_cnt = 0;
 				return (1);
-			} else {
+			} 
 				net->cc_mod.rtcc.last_step_state = 6;
 				net->cc_mod.rtcc.step_cnt = 0;
-			}
+			
 		}
 		net->cc_mod.rtcc.lbw = nbw;
 		net->cc_mod.rtcc.lbw_rtt = net->rtt;
 		net->cc_mod.rtcc.cwnd_at_bw_set = net->cwnd;
 		if (inst_ind == SCTP_INST_GAINING)
 			return (1);
-		else if (inst_ind == SCTP_INST_NEUTRAL)
+		if (inst_ind == SCTP_INST_NEUTRAL)
 			return (1);
 		else
 			return (0);
@@ -394,14 +394,14 @@ cc_bw_same(struct sctp_tcb *stcb SCTP_UNUSED, struct sctp_nets *net, uint64_t nb
 				net->cwnd -= net->mtu;
 				net->cc_mod.rtcc.vol_reduce++;
 				return (1);
-			} else {
+			} 
 				net->cc_mod.rtcc.step_cnt = 0;
-			}
+			
 		}
 	}
 	if (inst_ind == SCTP_INST_GAINING)
 		return (1);
-	else if (inst_ind == SCTP_INST_NEUTRAL)
+	if (inst_ind == SCTP_INST_NEUTRAL)
 		return (1);
 	else
 		return ((int)net->cc_mod.rtcc.ret_from_eq);
@@ -563,9 +563,9 @@ out_decision:
 	net->cc_mod.rtcc.cwnd_at_bw_set = net->cwnd;
 	if (inst_ind == SCTP_INST_GAINING) {
 		return (1);
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 
 #if defined(__FreeBSD__) && __FreeBSD_version >= 803000

@@ -240,9 +240,9 @@ CollationCompare::compareUpToQuaternary(CollationIterator &left, CollationIterat
             if(leftCase != rightCase) {
                 if((options & CollationSettings::UPPER_FIRST) == 0) {
                     return (leftCase < rightCase) ? UCOL_LESS : UCOL_GREATER;
-                } else {
+                } 
                     return (leftCase < rightCase) ? UCOL_GREATER : UCOL_LESS;
-                }
+                
             }
             if((leftLower32 >> 16) == Collation::NO_CE_WEIGHT16) { break; }
         }

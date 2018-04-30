@@ -128,7 +128,7 @@ static UBool changesWhenCasefolded(const BinaryProperty &/*prop*/, UChar32 c, UP
         /* single code point */
         const UChar *resultString;
         return (UBool)(ucase_toFullFolding(c, &resultString, U_FOLD_CASE_DEFAULT)>=0);
-    } else {
+    } 
         /* guess some large but stack-friendly capacity */
         UChar dest[2*UCASE_MAX_STRING_LENGTH];
         int32_t destLength;
@@ -138,7 +138,7 @@ static UBool changesWhenCasefolded(const BinaryProperty &/*prop*/, UChar32 c, UP
         return (UBool)(U_SUCCESS(errorCode) &&
                        0!=u_strCompare(nfd.getBuffer(), nfd.length(),
                                        dest, destLength, FALSE));
-    }
+    
 }
 #endif
 
@@ -290,10 +290,10 @@ u_hasBinaryProperty(UChar32 c, UProperty which) {
     if(which<UCHAR_BINARY_START || UCHAR_BINARY_LIMIT<=which) {
         /* not a known binary property */
         return FALSE;
-    } else {
+    } 
         const BinaryProperty &prop=binProps[which];
         return prop.contains(prop, c, which);
-    }
+    
 }
 
 struct IntProperty;
@@ -392,9 +392,9 @@ static int32_t getHangulSyllableType(const IntProperty &/*prop*/, UChar32 c, UPr
     int32_t gcb=(int32_t)(u_getUnicodeProperties(c, 2)&UPROPS_GCB_MASK)>>UPROPS_GCB_SHIFT;
     if(gcb<UPRV_LENGTHOF(gcbToHst)) {
         return gcbToHst[gcb];
-    } else {
+    } 
         return U_HST_NOT_APPLICABLE;
-    }
+    
 }
 
 #if UCONFIG_NO_NORMALIZATION
@@ -502,22 +502,22 @@ U_CFUNC UPropertySource U_EXPORT2
 uprops_getSource(UProperty which) {
     if(which<UCHAR_BINARY_START) {
         return UPROPS_SRC_NONE; /* undefined */
-    } else if(which<UCHAR_BINARY_LIMIT) {
+    } if(which<UCHAR_BINARY_LIMIT) {
         const BinaryProperty &prop=binProps[which];
         if(prop.mask!=0) {
             return UPROPS_SRC_PROPSVEC;
-        } else {
+        } 
             return (UPropertySource)prop.column;
-        }
+        
     } else if(which<UCHAR_INT_START) {
         return UPROPS_SRC_NONE; /* undefined */
     } else if(which<UCHAR_INT_LIMIT) {
         const IntProperty &prop=intProps[which-UCHAR_INT_START];
         if(prop.mask!=0) {
             return UPROPS_SRC_PROPSVEC;
-        } else {
+        } 
             return (UPropertySource)prop.column;
-        }
+        
     } else if(which<UCHAR_STRING_START) {
         switch(which) {
         case UCHAR_GENERAL_CATEGORY_MASK:
@@ -608,9 +608,9 @@ u_getFC_NFKC_Closure(UChar32 c, UChar *dest, int32_t destCapacity, UErrorCode *p
     // if (c != b) add the mapping from a to c
     if(U_FAILURE(*pErrorCode) || kc1==kc2) {
         return u_terminateUChars(dest, destCapacity, 0, pErrorCode);
-    } else {
+    } 
         return kc2.extract(dest, destCapacity, *pErrorCode);
-    }
+    
 }
 
 #endif

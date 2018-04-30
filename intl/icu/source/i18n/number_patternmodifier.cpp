@@ -86,7 +86,7 @@ MutablePatternModifier::createImmutableAndChain(const MicroPropsGenerator *paren
             return nullptr;
         }
         return new ImmutablePatternModifier(pm, rules, parent);  // adopts pm
-    } else {
+    } 
         // Faster path when plural keyword is not needed.
         setNumberProperties(1, StandardPlural::Form::COUNT);
         Modifier *positive = createConstantModifier(status);
@@ -100,7 +100,7 @@ MutablePatternModifier::createImmutableAndChain(const MicroPropsGenerator *paren
             return nullptr;
         }
         return new ImmutablePatternModifier(pm, nullptr, parent);  // adopts pm
-    }
+    
 }
 
 ConstantMultiFieldModifier *MutablePatternModifier::createConstantModifier(UErrorCode &status) {
@@ -110,9 +110,9 @@ ConstantMultiFieldModifier *MutablePatternModifier::createConstantModifier(UErro
     insertSuffix(b, 0, status);
     if (patternInfo->hasCurrencySign()) {
         return new CurrencySpacingEnabledModifier(a, b, !patternInfo->hasBody(), fStrong, *symbols, status);
-    } else {
+    } 
         return new ConstantMultiFieldModifier(a, b, !patternInfo->hasBody(), fStrong);
-    }
+    
 }
 
 ImmutablePatternModifier::ImmutablePatternModifier(ParameterizedModifier *pm, const PluralRules *rules,
@@ -245,7 +245,7 @@ UnicodeString MutablePatternModifier::getSymbol(AffixPatternType type) const {
             // UnitWidth ISO and HIDDEN overrides the singular currency symbol.
             if (unitWidth == UNumberUnitWidth::UNUM_UNIT_WIDTH_ISO_CODE) {
                 return UnicodeString(currencyCode, 3);
-            } else if (unitWidth == UNumberUnitWidth::UNUM_UNIT_WIDTH_HIDDEN) {
+            } if (unitWidth == UNumberUnitWidth::UNUM_UNIT_WIDTH_HIDDEN) {
                 return UnicodeString();
             } else {
                 UCurrNameStyle selector = (unitWidth == UNumberUnitWidth::UNUM_UNIT_WIDTH_NARROW)

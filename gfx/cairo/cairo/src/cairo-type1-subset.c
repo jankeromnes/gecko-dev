@@ -416,7 +416,7 @@ hex_to_int (int ch)
 {
     if (ch <= '9')
 	return ch - '0';
-    else if (ch <= 'F')
+    if (ch <= 'F')
 	return ch - 'A' + 10;
     else
 	return ch - 'a' + 10;

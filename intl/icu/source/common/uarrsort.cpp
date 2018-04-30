@@ -56,7 +56,7 @@ uprv_uint32Comparator(const void *context, const void *left, const void *right) 
     /* compare directly because (l-r) would overflow the int32_t result */
     if(l<r) {
         return -1;
-    } else if(l==r) {
+    } if(l==r) {
         return 0;
     } else /* l>r */ {
         return 1;
@@ -280,7 +280,7 @@ uprv_sortArray(void *array, int32_t length, int32_t itemSize,
 
     if(length<=1) {
         return;
-    } else if(length<MIN_QSORT || sortStable) {
+    } if(length<MIN_QSORT || sortStable) {
         insertionSort((char *)array, length, itemSize, cmp, context, pErrorCode);
     } else {
         quickSort((char *)array, length, itemSize, cmp, context, pErrorCode);

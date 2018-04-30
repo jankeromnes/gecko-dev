@@ -446,9 +446,9 @@ NFRuleSet::findDoubleRule(double number) const
     if (number < 0) {
         if (nonNumericalRules[NEGATIVE_RULE_INDEX]) {
             return  nonNumericalRules[NEGATIVE_RULE_INDEX];
-        } else {
+        } 
             number = -number;
-        }
+        
     }
 
     if (uprv_isInfinite(number)) {
@@ -467,7 +467,7 @@ NFRuleSet::findDoubleRule(double number) const
             return nonNumericalRules[PROPER_FRACTION_RULE_INDEX];
         }
         // otherwise, return the improper fraction rule
-        else if (nonNumericalRules[IMPROPER_FRACTION_RULE_INDEX]) {
+        if (nonNumericalRules[IMPROPER_FRACTION_RULE_INDEX]) {
             return nonNumericalRules[IMPROPER_FRACTION_RULE_INDEX];
         }
     }
@@ -498,9 +498,9 @@ NFRuleSet::findNormalRule(int64_t number) const
     if (number < 0) {
         if (nonNumericalRules[NEGATIVE_RULE_INDEX]) {
             return nonNumericalRules[NEGATIVE_RULE_INDEX];
-        } else {
+        } 
             number = -number;
-        }
+        
     }
 
     // we have to repeat the preceding two checks, even though we
@@ -527,7 +527,7 @@ NFRuleSet::findNormalRule(int64_t number) const
             if (rules[mid]->getBaseValue() == number) {
                 return rules[mid];
             }
-            else if (rules[mid]->getBaseValue() > number) {
+            if (rules[mid]->getBaseValue() > number) {
                 hi = mid;
             }
             else {

@@ -57,75 +57,75 @@ FractionRounder Rounder::integer() {
 FractionRounder Rounder::fixedFraction(int32_t minMaxFractionPlaces) {
     if (minMaxFractionPlaces >= 0 && minMaxFractionPlaces <= kMaxIntFracSig) {
         return constructFraction(minMaxFractionPlaces, minMaxFractionPlaces);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 FractionRounder Rounder::minFraction(int32_t minFractionPlaces) {
     if (minFractionPlaces >= 0 && minFractionPlaces <= kMaxIntFracSig) {
         return constructFraction(minFractionPlaces, -1);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 FractionRounder Rounder::maxFraction(int32_t maxFractionPlaces) {
     if (maxFractionPlaces >= 0 && maxFractionPlaces <= kMaxIntFracSig) {
         return constructFraction(0, maxFractionPlaces);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 FractionRounder Rounder::minMaxFraction(int32_t minFractionPlaces, int32_t maxFractionPlaces) {
     if (minFractionPlaces >= 0 && maxFractionPlaces <= kMaxIntFracSig &&
         minFractionPlaces <= maxFractionPlaces) {
         return constructFraction(minFractionPlaces, maxFractionPlaces);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 Rounder Rounder::fixedDigits(int32_t minMaxSignificantDigits) {
     if (minMaxSignificantDigits >= 1 && minMaxSignificantDigits <= kMaxIntFracSig) {
         return constructSignificant(minMaxSignificantDigits, minMaxSignificantDigits);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 Rounder Rounder::minDigits(int32_t minSignificantDigits) {
     if (minSignificantDigits >= 1 && minSignificantDigits <= kMaxIntFracSig) {
         return constructSignificant(minSignificantDigits, -1);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 Rounder Rounder::maxDigits(int32_t maxSignificantDigits) {
     if (maxSignificantDigits >= 1 && maxSignificantDigits <= kMaxIntFracSig) {
         return constructSignificant(1, maxSignificantDigits);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 Rounder Rounder::minMaxDigits(int32_t minSignificantDigits, int32_t maxSignificantDigits) {
     if (minSignificantDigits >= 1 && maxSignificantDigits <= kMaxIntFracSig &&
         minSignificantDigits <= maxSignificantDigits) {
         return constructSignificant(minSignificantDigits, maxSignificantDigits);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 IncrementRounder Rounder::increment(double roundingIncrement) {
     if (roundingIncrement > 0.0) {
         return constructIncrement(roundingIncrement, 0);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 CurrencyRounder Rounder::currency(UCurrencyUsage currencyUsage) {
@@ -141,18 +141,18 @@ Rounder FractionRounder::withMinDigits(int32_t minSignificantDigits) const {
     if (fType == RND_ERROR) { return *this; } // no-op in error state
     if (minSignificantDigits >= 1 && minSignificantDigits <= kMaxIntFracSig) {
         return constructFractionSignificant(*this, minSignificantDigits, -1);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 Rounder FractionRounder::withMaxDigits(int32_t maxSignificantDigits) const {
     if (fType == RND_ERROR) { return *this; } // no-op in error state
     if (maxSignificantDigits >= 1 && maxSignificantDigits <= kMaxIntFracSig) {
         return constructFractionSignificant(*this, -1, maxSignificantDigits);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 // Private method on base class
@@ -165,9 +165,9 @@ Rounder Rounder::withCurrency(const CurrencyUnit &currency, UErrorCode &status) 
             isoCode, fUnion.currencyUsage, &status);
     if (increment != 0.0) {
         return constructIncrement(increment, minMaxFrac);
-    } else {
+    } 
         return constructFraction(minMaxFrac, minMaxFrac);
-    }
+    
 }
 
 // Public method on CurrencyRounder subclass
@@ -184,9 +184,9 @@ Rounder IncrementRounder::withMinFraction(int32_t minFrac) const {
     if (fType == RND_ERROR) { return *this; } // no-op in error state
     if (minFrac >= 0 && minFrac <= kMaxIntFracSig) {
         return constructIncrement(fUnion.increment.fIncrement, minFrac);
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 FractionRounder Rounder::constructFraction(int32_t minFrac, int32_t maxFrac) {

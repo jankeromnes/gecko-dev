@@ -1173,7 +1173,7 @@ bool OutputHLSL::visitBinary(Visit visit, TIntermBinary *node)
                     // Skip initializing the rest of the expression
                     return false;
                 }
-                else if (writeConstantInitialization(out, symbolNode, initializer))
+                if (writeConstantInitialization(out, symbolNode, initializer))
                 {
                     return false;
                 }
@@ -2234,11 +2234,11 @@ bool OutputHLSL::visitCase(Visit visit, TIntermCase *node)
         outputTriplet(out, visit, "case (", "", "):\n");
         return true;
     }
-    else
-    {
+    
+    
         out << "default:\n";
         return false;
-    }
+    
 }
 
 void OutputHLSL::visitConstantUnion(TIntermConstantUnion *node)

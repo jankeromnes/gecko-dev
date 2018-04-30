@@ -81,9 +81,9 @@ struct SkPDFType3Font final : public SkPDFFont {
 SkScalar from_font_units(SkScalar scaled, uint16_t emSize) {
     if (emSize == 1000) {
         return scaled;
-    } else {
+    } 
         return scaled * 1000 / emSize;
-    }
+    
 }
 
 SkScalar scaleFromFontUnits(int16_t val, uint16_t emSize) {

@@ -349,7 +349,7 @@ ucnv_Latin1FromUTF8(UConverterFromUnicodeArgs *pFromUArgs,
         if(targetCapacity==0) {
             *pErrorCode=U_BUFFER_OVERFLOW_ERROR;
             return;
-        } else if(c>=0xc2 && c<=0xc3 && (t1=(uint8_t)(*source-0x80)) <= 0x3f) {
+        } if(c>=0xc2 && c<=0xc3 && (t1=(uint8_t)(*source-0x80)) <= 0x3f) {
             ++source;
             *target++=(uint8_t)(((c&3)<<6)|t1);
             --targetCapacity;
@@ -599,13 +599,13 @@ _ASCIIGetNextUChar(UConverterToUnicodeArgs *pArgs,
         pArgs->source=(const char *)source;
         if(b<=0x7f) {
             return b;
-        } else {
+        } 
             UConverter *cnv=pArgs->converter;
             cnv->toUBytes[0]=b;
             cnv->toULength=1;
             *pErrorCode=U_ILLEGAL_CHAR_FOUND;
             return 0xffff;
-        }
+        
     }
 
     /* no output because of empty input */

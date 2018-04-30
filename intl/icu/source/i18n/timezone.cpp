@@ -206,7 +206,7 @@ static int32_t findInStringArray(UResourceBundle* array, const UnicodeString& id
         if(r==0) {
             U_DEBUG_TZ_MSG(("fisa: found at %d\n", mid));
             return mid;
-        } else if(r<0) {
+        } if(r<0) {
             limit = mid;
         } else {
             start = mid;
@@ -246,9 +246,9 @@ static UResourceBundle* getZoneByName(const UResourceBundle* top, const UnicodeS
     if(U_FAILURE(status)) {
         //ures_close(oldbundle);
         return NULL;
-    } else {
+    } 
         return oldbundle;
-    }
+    
 }
 
 
@@ -873,9 +873,9 @@ public:
                     if (tmp == NULL) {
                         ec = U_MEMORY_ALLOCATION_ERROR;
                         break;
-                    } else {
+                    } 
                         filteredMap = tmp;
-                    }
+                    
                 }
 
                 filteredMap[numEntries++] = zidx;

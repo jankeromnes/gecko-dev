@@ -62,7 +62,7 @@ U_CAPI uint32_t U_EXPORT2
 utrie2_get32(const UTrie2 *trie, UChar32 c) {
     if(trie->data16!=NULL) {
         return UTRIE2_GET16(trie, c);
-    } else if(trie->data32!=NULL) {
+    } if(trie->data32!=NULL) {
         return UTRIE2_GET32(trie, c);
     } else if((uint32_t)c>0x10ffff) {
         return trie->errorValue;
@@ -78,7 +78,7 @@ utrie2_get32FromLeadSurrogateCodeUnit(const UTrie2 *trie, UChar32 c) {
     }
     if(trie->data16!=NULL) {
         return UTRIE2_GET16_FROM_U16_SINGLE_LEAD(trie, c);
-    } else if(trie->data32!=NULL) {
+    } if(trie->data32!=NULL) {
         return UTRIE2_GET32_FROM_U16_SINGLE_LEAD(trie, c);
     } else {
         return get32(trie->newTrie, c, FALSE);

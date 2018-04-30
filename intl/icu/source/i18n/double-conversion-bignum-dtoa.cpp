@@ -352,7 +352,7 @@ static void BignumToFixed(int requested_digits, int* decimal_point,
     *decimal_point = -requested_digits;
     *length = 0;
     return;
-  } else if (-(*decimal_point) == requested_digits) {
+  } if (-(*decimal_point) == requested_digits) {
     // We only need to verify if the number rounds down or up.
     // Ex: 0.04 and 0.06 with requested_digits == 1.
     ASSERT(*decimal_point == -requested_digits);

@@ -142,7 +142,7 @@ int celt_decoder_init(CELTDecoder *st, opus_int32 sampling_rate, int channels)
    st->downsample = resampling_factor(sampling_rate);
    if (st->downsample==0)
       return OPUS_BAD_ARG;
-   else
+   
       return OPUS_OK;
 }
 

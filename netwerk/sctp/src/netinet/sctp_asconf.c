@@ -631,7 +631,7 @@ sctp_handle_asconf(struct mbuf *m, unsigned int offset,
 			"handle_asconf: got duplicate serial number = %xh\n",
 			serial_num);
 		return;
-	} else if (serial_num != (asoc->asconf_seq_in + 1)) {
+	} if (serial_num != (asoc->asconf_seq_in + 1)) {
 		SCTPDBG(SCTP_DEBUG_ASCONF1, "handle_asconf: incorrect serial number = %xh (expected next = %xh)\n",
 			serial_num, asoc->asconf_seq_in + 1);
 		return;
@@ -2205,7 +2205,7 @@ sctp_asconf_iterator_stcb(struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 			cnt_invalid++;
 			if (asc->cnt == cnt_invalid)
 				return;
-			else
+			
 				continue;
 			break;
 		}
@@ -3278,11 +3278,11 @@ sctp_addr_mgmt_ep_sa(struct sctp_inpcb *inp, struct sockaddr *sa,
 			}
 		}
 		return (0);
-	} else {
+	} 
 		/* invalid address! */
 		SCTP_LTRACE_ERR_RET(NULL, NULL, NULL, SCTP_FROM_SCTP_ASCONF, EADDRNOTAVAIL);
 		return (EADDRNOTAVAIL);
-	}
+	
 }
 
 void

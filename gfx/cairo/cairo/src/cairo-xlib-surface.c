@@ -718,7 +718,7 @@ _resize_field (uint32_t field, int width, int new_width)
 
     if (width >= new_width) {
 	return field >> (width - new_width);
-    } else {
+    } 
 	uint32_t result = field << (new_width - width);
 
 	while (width < new_width) {
@@ -726,7 +726,7 @@ _resize_field (uint32_t field, int width, int new_width)
 	    width <<= 1;
 	}
 	return result;
-    }
+    
 }
 
 static inline uint32_t
@@ -777,12 +777,12 @@ _pseudocolor_from_rgb888_dither (cairo_xlib_visual_info_t *visual_info,
     if (r == g && g == b) {
 	dither_adjustment /= RAMP_SIZE;
 	return visual_info->gray8_to_pseudocolor[_adjust_field (r, dither_adjustment)];
-    } else {
+    } 
 	dither_adjustment = visual_info->dither8_to_cube[dither_adjustment+128];
 	return visual_info->cube_to_pseudocolor[visual_info->field8_to_cube[_adjust_field (r, dither_adjustment)]]
 					       [visual_info->field8_to_cube[_adjust_field (g, dither_adjustment)]]
 					       [visual_info->field8_to_cube[_adjust_field (b, dither_adjustment)]];
-    }
+    
 }
 
 static inline uint32_t
@@ -1820,7 +1820,7 @@ _surfaces_compatible (cairo_xlib_surface_t *dst,
     /* if Render is supported, match picture formats */
     if (src->xrender_format != dst->xrender_format)
 	return FALSE;
-    else if (src->xrender_format != NULL)
+    if (src->xrender_format != NULL)
 	return TRUE;
 
     /* Without Render, match visuals instead */
@@ -1837,7 +1837,7 @@ _surface_has_alpha (cairo_xlib_surface_t *surface)
 	if (surface->xrender_format->type == PictTypeDirect &&
 	    surface->xrender_format->direct.alphaMask != 0)
 	    return TRUE;
-	else
+	
 	    return FALSE;
     } else {
 	/* In the no-render case, we never have alpha */

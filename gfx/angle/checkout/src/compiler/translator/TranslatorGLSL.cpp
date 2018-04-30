@@ -151,7 +151,7 @@ void TranslatorGLSL::translate(TIntermBlock *root,
                     hasGLFragColor = true;
                     continue;
                 }
-                else if (outputVar.name == "gl_FragData")
+                if (outputVar.name == "gl_FragData")
                 {
                     ASSERT(!hasGLFragData);
                     hasGLFragData = true;
@@ -166,7 +166,7 @@ void TranslatorGLSL::translate(TIntermBlock *root,
                     hasGLSecondaryFragColor = true;
                     continue;
                 }
-                else if (outputVar.name == "gl_SecondaryFragDataEXT")
+                if (outputVar.name == "gl_SecondaryFragDataEXT")
                 {
                     ASSERT(!hasGLSecondaryFragData);
                     hasGLSecondaryFragData = true;

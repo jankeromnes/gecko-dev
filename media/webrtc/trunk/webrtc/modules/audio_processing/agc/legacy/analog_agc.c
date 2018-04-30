@@ -610,7 +610,7 @@ int32_t WebRtcAgc_ProcessAnalog(void* state,
             stt->fcount);
 #endif
     return -1;
-  } else if (inMicLevelTmp < stt->minLevel) {
+  } if (inMicLevelTmp < stt->minLevel) {
 #ifdef WEBRTC_AGC_DEBUG_DUMP
     fprintf(stt->fpt, "\tAGC->ProcessAnalog, frame %d: micLvl < minLevel\n",
             stt->fcount);
@@ -1381,10 +1381,10 @@ int WebRtcAgc_Init(void* agcInst,
     fprintf(stt->fpt, "minLevel, maxLevel value(s) are invalid\n\n");
 #endif
     return -1;
-  } else {
+  } 
 #ifdef WEBRTC_AGC_DEBUG_DUMP
     fprintf(stt->fpt, "\n");
 #endif
     return 0;
-  }
+  
 }

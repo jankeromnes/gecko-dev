@@ -727,7 +727,7 @@ ucnv_UTF8FromUTF8(UConverterFromUnicodeArgs *pFromUArgs,
             *target++=b;
             --count;
             continue;
-        } else {
+        } 
             if(b>=0xe0) {
                 if( /* handle U+0800..U+FFFF inline */
                     b<0xf0 &&
@@ -811,7 +811,7 @@ moreBytes:
                 }
                 count-=toULength;
             }
-        }
+        
     }
     U_ASSERT(count>=0);
 
@@ -833,7 +833,7 @@ moreBytes:
                         utf8->toULength=toULength;
                         utf8->mode=toULimit;
                         break;
-                    } else if(!icu::UTF8::isValidTrail(c, b=*source, toULength, toULimit)) {
+                    } if(!icu::UTF8::isValidTrail(c, b=*source, toULength, toULimit)) {
                         utf8->toULength=toULength;
                         *pErrorCode=U_ILLEGAL_CHAR_FOUND;
                         break;

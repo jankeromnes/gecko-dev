@@ -345,7 +345,7 @@ size_t SkColorSpace::writeToMemory(void* memory) const {
                         k0_Version, kSRGB_NamedColorSpace, gammaNamed, 0);
             }
             return sizeof(ColorSpaceHeader);
-        } else if (this == srgb_linear()) {
+        } if (this == srgb_linear()) {
             if (memory) {
                 *((ColorSpaceHeader*) memory) = ColorSpaceHeader::Pack(
                         k0_Version, kSRGBLinear_NamedColorSpace, gammaNamed, 0);

@@ -591,7 +591,7 @@ XRemoteClient::FreeLock(Window aWindow)
               (unsigned int) aWindow));
       return NS_ERROR_FAILURE;
   }
-  else if (strcmp((char *)data, mLockData)) {
+  if (strcmp((char *)data, mLockData)) {
       MOZ_LOG(sRemoteLm, LogLevel::Debug,
              (MOZILLA_LOCK_PROP " was stolen!  Expected \"%s\", saw \"%s\"!\n",
               mLockData, data));

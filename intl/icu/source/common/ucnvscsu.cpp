@@ -974,7 +974,7 @@ getDynamicOffset(uint32_t c, uint32_t *pOffset) {
     if(c<0x80) {
         /* No dynamic window for US-ASCII. */
         return -1;
-    } else if(c<0x3400 ||
+    } if(c<0x3400 ||
               (uint32_t)(c-0x10000)<(0x14000-0x10000) ||
               (uint32_t)(c-0x1d000)<=(0x1ffff-0x1d000)
     ) {

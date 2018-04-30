@@ -712,9 +712,9 @@ Locale::createFromName (const char *name)
         l.init(name, FALSE);
         return l;
     }
-    else {
+    
         return getDefault();
-    }
+    
 }
 
 Locale U_EXPORT2

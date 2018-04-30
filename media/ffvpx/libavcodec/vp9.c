@@ -447,7 +447,7 @@ static int read_colorspace_details(AVCodecContext *avctx)
                 av_log(avctx, AV_LOG_ERROR, "YUV 4:2:0 not supported in profile %d\n",
                        avctx->profile);
                 return AVERROR_INVALIDDATA;
-            } else if (get_bits1(&s->gb)) {
+            } if (get_bits1(&s->gb)) {
                 av_log(avctx, AV_LOG_ERROR, "Profile %d color details reserved bit set\n",
                        avctx->profile);
                 return AVERROR_INVALIDDATA;
@@ -790,7 +790,7 @@ static int decode_frame_header(AVCodecContext *avctx,
                        av_get_pix_fmt_name(ref->format),
                        av_get_pix_fmt_name(avctx->pix_fmt));
                 return AVERROR_INVALIDDATA;
-            } else if (refw == w && refh == h) {
+            } if (refw == w && refh == h) {
                 s->mvscale[i][0] = s->mvscale[i][1] = 0;
             } else {
                 if (w * 2 < refw || h * 2 < refh || w > 16 * refw || h > 16 * refh) {
@@ -1464,7 +1464,7 @@ static int vp9_decode_frame(AVCodecContext *avctx, void *frame,
 
     if ((ret = decode_frame_header(avctx, data, size, &ref)) < 0) {
         return ret;
-    } else if (ret == 0) {
+    } if (ret == 0) {
         if (!s->s.refs[ref].f->buf[0]) {
             av_log(avctx, AV_LOG_ERROR, "Requested reference %d not available\n", ref);
             return AVERROR_INVALIDDATA;

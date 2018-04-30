@@ -121,8 +121,8 @@ uint64_t vpx_sum_squares_2d_i16_sse2(const int16_t *src, int stride, int size) {
   // are with size == 4, so it is also the common case.
   if (size == 4) {
     return vpx_sum_squares_2d_i16_4x4_sse2(src, stride);
-  } else {
+  } 
     // Generic case
     return vpx_sum_squares_2d_i16_nxn_sse2(src, stride, size);
-  }
+  
 }

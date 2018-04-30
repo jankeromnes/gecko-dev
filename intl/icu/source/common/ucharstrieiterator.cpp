@@ -207,9 +207,9 @@ UCharsTrie::Iterator::branchNext(const UChar *pos, int32_t length, UErrorCode &e
         pos_=NULL;
         value_=value;
         return NULL;
-    } else {
+    } 
         return pos+value;
-    }
+    
 }
 
 U_NAMESPACE_END

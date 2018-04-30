@@ -141,7 +141,7 @@ bool IntermNodePatternMatcher::match(TIntermAggregate *node, TIntermNode *parent
             {
                 return true;
             }
-            else if (node->getType().isMatrix() && ContainsVectorNode(*(node->getSequence())))
+            if (node->getType().isMatrix() && ContainsVectorNode(*(node->getSequence())))
             {
                 return true;
             }

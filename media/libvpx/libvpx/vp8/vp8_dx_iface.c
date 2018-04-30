@@ -513,9 +513,9 @@ static vpx_codec_err_t vp8_set_reference(vpx_codec_alg_priv_t *ctx,
 
     return vp8dx_set_reference(ctx->yv12_frame_buffers.pbi[0],
                                frame->frame_type, &sd);
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t vp8_get_reference(vpx_codec_alg_priv_t *ctx,
@@ -530,9 +530,9 @@ static vpx_codec_err_t vp8_get_reference(vpx_codec_alg_priv_t *ctx,
 
     return vp8dx_get_reference(ctx->yv12_frame_buffers.pbi[0],
                                frame->frame_type, &sd);
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t vp8_set_postproc(vpx_codec_alg_priv_t *ctx,
@@ -544,9 +544,9 @@ static vpx_codec_err_t vp8_set_postproc(vpx_codec_alg_priv_t *ctx,
     ctx->postproc_cfg_set = 1;
     ctx->postproc_cfg = *((vp8_postproc_cfg_t *)data);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 
 #else
   (void)ctx;
@@ -567,9 +567,9 @@ static vpx_codec_err_t vp8_get_last_ref_updates(vpx_codec_alg_priv_t *ctx,
                    pbi->common.refresh_last_frame * (int)VP8_LAST_FRAME;
 
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 extern int vp8dx_references_buffer(VP8_COMMON *oci, int ref_frame);
@@ -586,9 +586,9 @@ static vpx_codec_err_t vp8_get_last_ref_frame(vpx_codec_alg_priv_t *ctx,
         (vp8dx_references_buffer(oci, LAST_FRAME) ? VP8_LAST_FRAME : 0);
 
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t vp8_get_frame_corrupted(vpx_codec_alg_priv_t *ctx,
@@ -601,9 +601,9 @@ static vpx_codec_err_t vp8_get_frame_corrupted(vpx_codec_alg_priv_t *ctx,
     if (frame == NULL) return VPX_CODEC_ERROR;
     *corrupted = frame->corrupted;
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t vp8_set_decryptor(vpx_codec_alg_priv_t *ctx,

@@ -1222,7 +1222,7 @@ do_canonicalize(const char*    localeID,
 
         return FALSE;
     }
-    else if (U_FAILURE(*err)) {
+    if (U_FAILURE(*err)) {
 
         return FALSE;
     }
@@ -1246,13 +1246,13 @@ uloc_addLikelySubtags(const char*    localeID,
         err)) {
         return -1;
     }
-    else {
+    
         return _uloc_addLikelySubtags(
                     localeBuffer,
                     maximizedLocaleID,
                     maximizedLocaleIDCapacity,
                     err);
-    }    
+       
 }
 
 U_CAPI int32_t U_EXPORT2
@@ -1270,13 +1270,13 @@ uloc_minimizeSubtags(const char*    localeID,
         err)) {
         return -1;
     }
-    else {
+    
         return _uloc_minimizeSubtags(
                     localeBuffer,
                     minimizedLocaleID,
                     minimizedLocaleIDCapacity,
                     err);
-    }    
+       
 }
 
 // Pairs of (language subtag, + or -) for finding out fast if common languages

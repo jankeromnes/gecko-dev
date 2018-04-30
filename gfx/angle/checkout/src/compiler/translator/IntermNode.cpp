@@ -605,7 +605,7 @@ const TConstantUnion *TIntermAggregate::getConstantValue() const
             ASSERT(resultIndex == resultSize);
             return constArray;
         }
-        else if (isMatrix() && argumentTyped->isMatrix())
+        if (isMatrix() && argumentTyped->isMatrix())
         {
             // The special case of constructing a matrix from a matrix.
             int argumentCols = argumentTyped->getType().getCols();
@@ -879,17 +879,17 @@ TOperator TIntermBinary::GetMulOpBasedOnOperands(const TType &left, const TType 
         {
             return EOpMatrixTimesMatrix;
         }
-        else
-        {
+        
+        
             if (right.isVector())
             {
                 return EOpMatrixTimesVector;
             }
-            else
-            {
+            
+            
                 return EOpMatrixTimesScalar;
-            }
-        }
+            
+        
     }
     else
     {
@@ -899,10 +899,10 @@ TOperator TIntermBinary::GetMulOpBasedOnOperands(const TType &left, const TType 
             {
                 return EOpVectorTimesMatrix;
             }
-            else
-            {
+            
+            
                 return EOpMatrixTimesScalar;
-            }
+            
         }
         else
         {
@@ -912,10 +912,10 @@ TOperator TIntermBinary::GetMulOpBasedOnOperands(const TType &left, const TType 
                 // Leave as component product.
                 return EOpMul;
             }
-            else
-            {
+            
+            
                 return EOpVectorTimesScalar;
-            }
+            
         }
     }
 }
@@ -928,11 +928,11 @@ TOperator TIntermBinary::GetMulAssignOpBasedOnOperands(const TType &left, const 
         {
             return EOpMatrixTimesMatrixAssign;
         }
-        else
-        {
+        
+        
             // right should be scalar, but this may not be validated yet.
             return EOpMatrixTimesScalarAssign;
-        }
+        
     }
     else
     {
@@ -941,21 +941,21 @@ TOperator TIntermBinary::GetMulAssignOpBasedOnOperands(const TType &left, const 
             // Left should be a vector, but this may not be validated yet.
             return EOpVectorTimesMatrixAssign;
         }
-        else
-        {
+        
+        
             // Neither operand is a matrix.
             if (left.isVector() == right.isVector())
             {
                 // Leave as component product.
                 return EOpMulAssign;
             }
-            else
-            {
+            
+            
                 // left should be vector and right should be scalar, but this may not be validated
                 // yet.
                 return EOpVectorTimesScalarAssign;
-            }
-        }
+            
+        
     }
 }
 
@@ -1152,10 +1152,10 @@ TIntermTyped *TIntermTernary::fold(TDiagnostics * /* diagnostics */)
         {
             return mTrueExpression;
         }
-        else
-        {
+        
+        
             return mFalseExpression;
-        }
+        
     }
     return this;
 }
@@ -1458,7 +1458,7 @@ const TConstantUnion *TIntermConstantUnion::FoldIndexing(const TType &type,
         size_t arrayElementSize = arrayElementType.getObjectSize();
         return &constArray[arrayElementSize * index];
     }
-    else if (type.isMatrix())
+    if (type.isMatrix())
     {
         ASSERT(index < type.getCols());
         int size = type.getRows();

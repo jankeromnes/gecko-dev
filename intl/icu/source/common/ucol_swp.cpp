@@ -590,9 +590,9 @@ ucol_swap(const UDataSwapper *ds,
     }
     if(U_SUCCESS(*pErrorCode)) {
         return headerSize+collationSize;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 /* swap inverse UCA collation data (invuca.icu) */

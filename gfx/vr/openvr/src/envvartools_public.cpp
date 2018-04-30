@@ -23,7 +23,7 @@ std::string GetEnvironmentVariable( const char *pchVarName )
 	char *pchValue = getenv( pchVarName );
 	if( pchValue )
 		return pchValue;
-	else
+	
 		return "";
 #else
 #error "Unsupported Platform"
@@ -38,7 +38,7 @@ bool SetEnvironmentVariable( const char *pchVarName, const char *pchVarValue )
 #elif defined(POSIX)
 	if( pchVarValue == NULL )
 		return 0 == unsetenv( pchVarName );
-	else
+	
 		return 0 == setenv( pchVarName, pchVarValue, 1 );
 #else
 #error "Unsupported Platform"

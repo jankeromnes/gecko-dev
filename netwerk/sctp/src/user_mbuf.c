@@ -1375,10 +1375,10 @@ m_split(struct mbuf *m0, int len0, int wait)
 			if (n->m_next == NULL) {
 				(void) m_free(n);
 				return (NULL);
-			} else {
+			} 
 				n->m_len = 0;
 				return (n);
-			}
+			
 		} else
 			MH_ALIGN(n, remain);
 	} else if (remain == 0) {

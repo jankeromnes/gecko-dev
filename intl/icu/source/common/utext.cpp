@@ -99,9 +99,9 @@ U_CAPI int64_t U_EXPORT2
 utext_getNativeIndex(const UText *ut) {
     if(ut->chunkOffset <= ut->nativeIndexingLimit) {
         return ut->chunkNativeStart+ut->chunkOffset;
-    } else {
+    } 
         return ut->pFuncs->mapOffsetToNative(ut);
-    }
+    
 }
 
 
@@ -588,14 +588,14 @@ utext_setup(UText *ut, int32_t extraSpace, UErrorCode *status) {
         if (ut == NULL) {
             *status = U_MEMORY_ALLOCATION_ERROR;
             return NULL;
-        } else {
+        } 
             *ut = emptyText;
             ut->flags |= UTEXT_HEAP_ALLOCATED;
             if (spaceRequired>0) {
                 ut->extraSize = extraSpace;
                 ut->pExtra    = &((ExtendedUText *)ut)->extension;
             }
-        }
+        
     } else {
         // We have been supplied with an already existing UText.
         // Verify that it really appears to be a UText.
@@ -986,14 +986,14 @@ utf8TextAccess(UText *ut, int64_t index, UBool forward) {
                 //   current buffer position.
                 ut->chunkOffset = ut->chunkLength;
                 return FALSE;
-            } else {
+            } 
                 // End of current buffer.
                 //   check whether other buffer already has what we need.
                 UTF8Buf *altB = (UTF8Buf *)ut->q;
                 if (ix>=altB->bufNativeStart && ix<altB->bufNativeLimit) {
                     goto swapBuffers;
                 }
-            }
+            
         }
 
         // A random access.  Desired index could be in either or niether buf.
@@ -1054,14 +1054,14 @@ utf8TextAccess(UText *ut, int64_t index, UBool forward) {
             //   current buffer position.
             ut->chunkOffset = 0;
             return FALSE;
-        } else {
+        } 
             // Start of current buffer.
             //   check whether other buffer already has what we need.
             UTF8Buf *altB = (UTF8Buf *)ut->q;
             if (ix>altB->bufNativeStart && ix<=altB->bufNativeLimit) {
                 goto swapBuffers;
             }
-        }
+        
     }
 
     // A random access.  Desired index could be in either or niether buf.
@@ -1107,9 +1107,9 @@ utf8TextAccess(UText *ut, int64_t index, UBool forward) {
         //   character, this access fails.  We can't pick up on the
         //   situation sooner because the requested index is not zero.
         return FALSE;
-    } else {
+    } 
         return TRUE;
-    }
+    
 
 
 
@@ -2753,7 +2753,7 @@ charIterTextClone(UText *dest, const UText *src, UBool deep, UErrorCode * status
         // There is no CharacterIterator API for cloning the underlying text storage.
         *status = U_UNSUPPORTED_ERROR;
         return NULL;
-    } else {
+    } 
         CharacterIterator *srcCI =(CharacterIterator *)src->context;
         srcCI = srcCI->clone();
         dest = utext_openCharacterIterator(dest, srcCI, status);
@@ -2765,7 +2765,7 @@ charIterTextClone(UText *dest, const UText *src, UBool deep, UErrorCode * status
         int64_t  ix = utext_getNativeIndex((UText *)src);
         utext_setNativeIndex(dest, ix);
         dest->r = srcCI;    // flags that this UText owns the CharacterIterator
-    }
+    
     return dest;
 }
 

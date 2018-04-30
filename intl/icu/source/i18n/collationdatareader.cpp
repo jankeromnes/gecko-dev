@@ -270,7 +270,7 @@ CollationDataReader::read(const CollationTailoring *base, const uint8_t *inBytes
           if(tailoring.unsafeBackwardSet == NULL) {
             errorCode = U_MEMORY_ALLOCATION_ERROR;
             return;
-          } else if (U_FAILURE(errorCode)) {
+          } if (U_FAILURE(errorCode)) {
             return;
           }
 #else
@@ -472,9 +472,9 @@ CollationDataReader::isAcceptable(void *context,
             uprv_memcpy(version, pInfo->dataVersion, 4);
         }
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 U_NAMESPACE_END

@@ -52,9 +52,9 @@ static int inv_remap_prob(int v, int m) {
   m--;
   if ((m << 1) <= MAX_PROB) {
     return 1 + inv_recenter_nonneg(v, m);
-  } else {
+  } 
     return MAX_PROB - inv_recenter_nonneg(v, MAX_PROB - 1 - m);
-  }
+  
 }
 
 static int decode_term_subexp(vpx_reader *r) {

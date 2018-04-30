@@ -36,11 +36,11 @@ SortKeyByteSink::Append(const char *bytes, int32_t n) {
         if (ignoreRest >= 0) {
             ignore_ = ignoreRest;
             return;
-        } else {
+        } 
             bytes += ignore_;
             n = -ignoreRest;
             ignore_ = 0;
-        }
+        
     }
     int32_t length = appended_;
     appended_ += n;
@@ -74,7 +74,7 @@ SortKeyByteSink::GetAppendBuffer(int32_t min_capacity,
     if (available >= min_capacity) {
         *result_capacity = available;
         return buffer_ + appended_;
-    } else if (Resize(desired_capacity_hint, appended_)) {
+    } if (Resize(desired_capacity_hint, appended_)) {
         *result_capacity = capacity_ - appended_;
         return buffer_ + appended_;
     } else {

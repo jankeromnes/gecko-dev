@@ -92,10 +92,10 @@ CollationData::getSingleCE(UChar32 c, UErrorCode &errorCode) const {
         case Collation::EXPANSION_TAG: {
             if(Collation::lengthFromCE32(ce32) == 1) {
                 return d->ces[Collation::indexFromCE32(ce32)];
-            } else {
+            } 
                 errorCode = U_UNSUPPORTED_ERROR;
                 return 0;
-            }
+            
         }
         case Collation::DIGIT_TAG:
             // Fetch the non-numeric-collation CE32 and continue.
@@ -156,7 +156,7 @@ int32_t
 CollationData::getScriptIndex(int32_t script) const {
     if(script < 0) {
         return 0;
-    } else if(script < numScripts) {
+    } if(script < numScripts) {
         return scriptsIndex[script];
     } else if(script < UCOL_REORDER_CODE_FIRST) {
         return 0;
@@ -164,9 +164,9 @@ CollationData::getScriptIndex(int32_t script) const {
         script -= UCOL_REORDER_CODE_FIRST;
         if(script < MAX_NUM_SPECIAL_REORDER_CODES) {
             return scriptsIndex[numScripts + script];
-        } else {
+        } 
             return 0;
-        }
+        
     }
 }
 

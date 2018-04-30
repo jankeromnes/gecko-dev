@@ -50,7 +50,7 @@ namespace {
 inline uint8_t leadByteForCP(UChar32 c) {
     if (c <= 0x7f) {
         return (uint8_t)c;
-    } else if (c <= 0x7ff) {
+    } if (c <= 0x7ff) {
         return (uint8_t)(0xc0+(c>>6));
     } else {
         // Should not occur because ccc(U+0300)!=0.
@@ -221,7 +221,7 @@ UBool ReorderingBuffer::equals(const uint8_t *otherStart, const uint8_t *otherLi
     for (int32_t i = 0, j = 0;;) {
         if (i >= length) {
             return j >= otherLength;
-        } else if (j >= otherLength) {
+        } if (j >= otherLength) {
             return FALSE;
         }
         // Not at the end of either string yet.
@@ -742,7 +742,7 @@ UBool Normalizer2Impl::decompose(UChar32 c, uint16_t norm16,
     if (norm16 < minYesNo) {
         // c does not decompose
         return buffer.append(c, 0, errorCode);
-    } else if(isHangulLV(norm16) || isHangulLVT(norm16)) {
+    } if(isHangulLV(norm16) || isHangulLVT(norm16)) {
         // Hangul syllable: decompose algorithmically
         UChar jamos[3];
         return buffer.appendZeroCC(jamos, jamos+Hangul::decompose(c, jamos), errorCode);
@@ -858,7 +858,7 @@ Normalizer2Impl::getDecomposition(UChar32 c, UChar buffer[4], int32_t &length) c
     }
     if (norm16 < minYesNo) {
         return decomp;
-    } else if(isHangulLV(norm16) || isHangulLVT(norm16)) {
+    } if(isHangulLV(norm16) || isHangulLVT(norm16)) {
         // Hangul syllable: decompose algorithmically
         length=Hangul::decompose(c, buffer);
         return buffer;
@@ -879,7 +879,7 @@ Normalizer2Impl::getRawDecomposition(UChar32 c, UChar buffer[30], int32_t &lengt
     if(c<minDecompNoCP || isDecompYes(norm16=getNorm16(c))) {
         // c does not decompose
         return NULL;
-    } else if(isHangulLV(norm16) || isHangulLVT(norm16)) {
+    } if(isHangulLV(norm16) || isHangulLVT(norm16)) {
         // Hangul syllable: decompose algorithmically
         Hangul::getRawDecomposition(c, buffer);
         length=2;
@@ -902,13 +902,13 @@ Normalizer2Impl::getRawDecomposition(UChar32 c, UChar buffer[30], int32_t &lengt
         if(rm0<=MAPPING_LENGTH_MASK) {
             length=rm0;
             return (const UChar *)rawMapping-rm0;
-        } else {
+        } 
             // Copy the normal mapping and replace its first two code units with rm0.
             buffer[0]=(UChar)rm0;
             u_memcpy(buffer+1, (const UChar *)mapping+1+2, mLength-2);
             length=mLength-1;
             return buffer;
-        }
+        
     } else {
         length=mLength;
         return (const UChar *)mapping+1;
@@ -1032,9 +1032,9 @@ int32_t Normalizer2Impl::combine(const uint16_t *list, UChar32 trail) {
         if(key1==(firstUnit&COMP_1_TRAIL_MASK)) {
             if(firstUnit&COMP_1_TRIPLE) {
                 return ((int32_t)list[1]<<16)|list[2];
-            } else {
+            } 
                 return list[1];
-            }
+            
         }
     } else {
         // trail character is 3400..10FFFF
@@ -1051,9 +1051,9 @@ int32_t Normalizer2Impl::combine(const uint16_t *list, UChar32 trail) {
                 if(key2>(secondUnit=list[1])) {
                     if(firstUnit&COMP_1_LAST_TUPLE) {
                         break;
-                    } else {
+                    } 
                         list+=3;
-                    }
+                    
                 } else if(key2==(secondUnit&COMP_2_TRAIL_MASK)) {
                     return ((int32_t)(secondUnit&~COMP_2_TRAIL_MASK)<<16)|list[2];
                 } else {
@@ -1171,7 +1171,7 @@ void Normalizer2Impl::recompose(ReorderingBuffer &buffer, int32_t recomposeStart
                 }
                 compositionsList=NULL;
                 continue;
-            } else if((compositeAndFwd=combine(compositionsList, c))>=0) {
+            } if((compositeAndFwd=combine(compositionsList, c))>=0) {
                 // The starter and the combining mark (c) do combine.
                 UChar32 composite=compositeAndFwd>>1;
 
@@ -1272,7 +1272,7 @@ Normalizer2Impl::composePair(UChar32 a, UChar32 b) const {
     const uint16_t *list;
     if(isInert(norm16)) {
         return U_SENTINEL;
-    } else if(norm16<minYesNoMappingsOnly) {
+    } if(norm16<minYesNoMappingsOnly) {
         // a combines forward.
         if(isJamoL(norm16)) {
             b-=Hangul::JAMO_V_BASE;
@@ -1281,16 +1281,16 @@ Normalizer2Impl::composePair(UChar32 a, UChar32 b) const {
                     (Hangul::HANGUL_BASE+
                      ((a-Hangul::JAMO_L_BASE)*Hangul::JAMO_V_COUNT+b)*
                      Hangul::JAMO_T_COUNT);
-            } else {
+            } 
                 return U_SENTINEL;
-            }
+            
         } else if(isHangulLV(norm16)) {
             b-=Hangul::JAMO_T_BASE;
             if(0<b && b<Hangul::JAMO_T_COUNT) {  // not b==0!
                 return a+b;
-            } else {
+            } 
                 return U_SENTINEL;
-            }
+            
         } else {
             // 'a' has a compositions list in extraData
             list=getMapping(norm16);
@@ -1366,7 +1366,7 @@ Normalizer2Impl::compose(const UChar *src, const UChar *limit,
                 prevSrc = src++;
                 if(!U16_IS_SURROGATE(c)) {
                     break;
-                } else {
+                } 
                     UChar c2;
                     if(U16_IS_SURROGATE_LEAD(c)) {
                         if(src!=limit && U16_IS_TRAIL(c2=*src)) {
@@ -1382,7 +1382,7 @@ Normalizer2Impl::compose(const UChar *src, const UChar *limit,
                     if(!isCompYesAndZeroCC(norm16=getNorm16(c))) {
                         break;
                     }
-                }
+                
             }
         }
         // isCompYesAndZeroCC(norm16) is false, that is, norm16>=minNoNo.
@@ -1633,7 +1633,7 @@ Normalizer2Impl::composeQuickCheck(const UChar *src, const UChar *limit,
                 prevSrc = src++;
                 if(!U16_IS_SURROGATE(c)) {
                     break;
-                } else {
+                } 
                     UChar c2;
                     if(U16_IS_SURROGATE_LEAD(c)) {
                         if(src!=limit && U16_IS_TRAIL(c2=*src)) {
@@ -1649,7 +1649,7 @@ Normalizer2Impl::composeQuickCheck(const UChar *src, const UChar *limit,
                     if(!isCompYesAndZeroCC(norm16=getNorm16(c))) {
                         break;
                     }
-                }
+                
             }
         }
         // isCompYesAndZeroCC(norm16) is false, that is, norm16>=minNoNo.
@@ -2121,7 +2121,7 @@ uint16_t Normalizer2Impl::getFCD16FromNormData(UChar32 c) const {
             // combining mark
             norm16=getCCFromNormalYesOrMaybe(norm16);
             return norm16|(norm16<<8);
-        } else if(norm16>=minMaybeYes) {
+        } if(norm16>=minMaybeYes) {
             return 0;
         } else {  // isDecompNoAlgorithmic(norm16)
             uint16_t deltaTrailCC = norm16 & DELTA_TCCC_MASK;
@@ -2269,7 +2269,7 @@ Normalizer2Impl::makeFCD(const UChar *src, const UChar *limit,
             }
             prevFCD16=fcd16;
             continue;
-        } else if(buffer==NULL) {
+        } if(buffer==NULL) {
             return prevBoundary;  // quick check "no"
         } else {
             /*

@@ -55,10 +55,10 @@ public:
         int32_t offset=stringOffset;
         if(offset>=0) {
             return (uint8_t)strings[offset];
-        } else {
+        } 
             offset=~offset;
             return ((int32_t)(uint8_t)strings[offset]<<8)|(uint8_t)strings[offset+1];
-        }
+        
     }
 
     char charAt(int32_t index, const CharString &strings) const { return data(strings)[index]; }

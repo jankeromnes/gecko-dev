@@ -735,7 +735,7 @@ bool TParseContext::checkConstructorArguments(const TSourceLoc &line,
             error(line, reason.c_str(), "constructor");
             return false;
         }
-        else if (argTyped->getMemoryQualifier().writeonly)
+        if (argTyped->getMemoryQualifier().writeonly)
         {
             error(line, "cannot convert a variable with writeonly", "constructor");
             return false;
@@ -924,7 +924,7 @@ bool TParseContext::checkIsNotOpaqueType(const TSourceLoc &line,
         // members.
         return true;
     }
-    else if (IsOpaqueType(pType.type))
+    if (IsOpaqueType(pType.type))
     {
         error(line, reason, getBasicString(pType.type));
         return false;
@@ -1150,7 +1150,7 @@ bool TParseContext::declareVariable(const TSourceLoc &line,
             error(line, "redeclaration of gl_LastFragData as an array of arrays", identifier);
             return false;
         }
-        else if (static_cast<int>(type->getOutermostArraySize()) ==
+        if (static_cast<int>(type->getOutermostArraySize()) ==
                  maxDrawBuffers->getConstPointer()->getIConst())
         {
             if (const TSymbol *builtInSymbol = symbolTable.findBuiltIn(identifier, mShaderVersion))
@@ -2052,12 +2052,12 @@ TIntermNode *TParseContext::addConditionInitializer(const TPublicType &pType,
         {
             return initializer;
         }
-        else
-        {
+        
+        
             TIntermDeclaration *declaration = new TIntermDeclaration();
             declaration->appendDeclarator(initNode);
             return declaration;
-        }
+        
     }
     return nullptr;
 }
@@ -2129,10 +2129,10 @@ TIntermNode *TParseContext::addIfElse(TIntermTyped *cond,
         {
             return EnsureBlock(code.node1);
         }
-        else
-        {
+        
+        
             return EnsureBlock(code.node2);
-        }
+        
     }
 
     TIntermIfElse *node = new TIntermIfElse(cond, EnsureBlock(code.node1), EnsureBlock(code.node2));
@@ -3539,7 +3539,7 @@ bool TParseContext::checkUnsizedArrayConstructorArgumentDimensionality(
             error(line, "constructing from a non-dereferenced array", "constructor");
             return false;
         }
-        else if (dimensionalityFromElement < type.getNumArraySizes())
+        if (dimensionalityFromElement < type.getNumArraySizes())
         {
             if (dimensionalityFromElement == 1u)
             {
@@ -4115,7 +4115,7 @@ TIntermTyped *TParseContext::addFieldSelectionExpression(TIntermTyped *baseExpre
 
         return node->fold(mDiagnostics);
     }
-    else if (baseExpression->getBasicType() == EbtStruct)
+    if (baseExpression->getBasicType() == EbtStruct)
     {
         const TFieldList &fields = baseExpression->getType().getStruct()->fields();
         if (fields.empty())
@@ -4123,8 +4123,8 @@ TIntermTyped *TParseContext::addFieldSelectionExpression(TIntermTyped *baseExpre
             error(dotLocation, "structure has no fields", "Internal Error");
             return baseExpression;
         }
-        else
-        {
+        
+        
             bool fieldFound = false;
             unsigned int i;
             for (i = 0; i < fields.size(); ++i)
@@ -4144,12 +4144,12 @@ TIntermTyped *TParseContext::addFieldSelectionExpression(TIntermTyped *baseExpre
                 node->setLine(dotLocation);
                 return expressionOrFoldedResult(node);
             }
-            else
-            {
+            
+            
                 error(dotLocation, " no such field in structure", fieldString);
                 return baseExpression;
-            }
-        }
+            
+        
     }
     else if (baseExpression->isInterfaceBlock())
     {
@@ -4159,8 +4159,8 @@ TIntermTyped *TParseContext::addFieldSelectionExpression(TIntermTyped *baseExpre
             error(dotLocation, "interface block has no fields", "Internal Error");
             return baseExpression;
         }
-        else
-        {
+        
+        
             bool fieldFound = false;
             unsigned int i;
             for (i = 0; i < fields.size(); ++i)
@@ -4181,12 +4181,12 @@ TIntermTyped *TParseContext::addFieldSelectionExpression(TIntermTyped *baseExpre
                 // Indexing interface blocks can never be constant folded.
                 return node;
             }
-            else
-            {
+            
+            
                 error(dotLocation, " no such field in interface block", fieldString);
                 return baseExpression;
-            }
-        }
+            
+        
     }
     else
     {

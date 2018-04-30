@@ -1208,7 +1208,7 @@ NFRule::matchToDelimiter(const UnicodeString& text,
                     pp.setIndex(dPos + dLen);
                     return result.getDouble();
                 }
-                else {
+                
                     // commented out because ParsePosition doesn't have error index in 1.1.x
                     // restored for ICU4C port
                     if (tempPP.getErrorIndex() > 0) {
@@ -1216,7 +1216,7 @@ NFRule::matchToDelimiter(const UnicodeString& text,
                     } else {
                         pp.setErrorIndex(tempPP.getIndex());
                     }
-                }
+                
             }
 
             // if we didn't match the substitution, search for another
@@ -1235,7 +1235,7 @@ NFRule::matchToDelimiter(const UnicodeString& text,
         // for "delimiter".  Instead, just use "sub" to parse as much of
         // "text" as possible.
     }
-    else if (sub == NULL) {
+    if (sub == NULL) {
         return _baseValue;
     }
     else {
@@ -1259,11 +1259,11 @@ NFRule::matchToDelimiter(const UnicodeString& text,
             pp.setIndex(tempPP.getIndex());
             return result.getDouble();
         }
-        else {
+        
             // commented out because ParsePosition doesn't have error index in 1.1.x
             // restored for ICU4C port
             pp.setErrorIndex(tempPP.getErrorIndex());
-        }
+        
 
         // and if we get to here, then nothing matched, so we return
         // 0 and leave pp alone
@@ -1379,10 +1379,10 @@ NFRule::prefixLength(const UnicodeString& str, const UnicodeString& prefix, UErr
                 // otherwise, advance to the next character in each string
                 // and loop (we drop out of the loop when we exhaust
                 // collation elements in the prefix)
-            } else {
+            } 
                 oStr = strIter->next(err);
                 oPrefix = prefixIter->next(err);
-            }
+            
         }
 
         int32_t result = strIter->getOffset();
@@ -1444,15 +1444,15 @@ NFRule::prefixLength(const UnicodeString& str, const UnicodeString& prefix, UErr
 
         // If lenient parsing is turned off, forget all that crap above.
         // Just use String.startsWith() and be done with it.
-  } else
+  } 
 #endif
-  {
+  
       if (str.startsWith(prefix)) {
           return prefix.length();
-      } else {
+      } 
           return 0;
-      }
-  }
+      
+  
 }
 
 /**
@@ -1504,11 +1504,11 @@ NFRule::findText(const UnicodeString& str,
         *length = key.length();
         return str.indexOf(key, startingAt);
     }
-    else {
+    
         // but if lenient parsing is turned ON, we've got some work
         // ahead of us
         return findTextLenient(str, key, startingAt, length);
-    }
+    
 }
 
 int32_t

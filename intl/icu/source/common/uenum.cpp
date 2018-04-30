@@ -78,10 +78,10 @@ uenum_count(UEnumeration* en, UErrorCode* status)
     }
     if (en->count != NULL) {
         return en->count(en, status);
-    } else {
+    } 
         *status = U_UNSUPPORTED_ERROR;
         return -1;
-    }
+    
 }
 
 /* Don't call this directly. Only uenum_unext should be calling this. */
@@ -131,10 +131,10 @@ uenum_nextDefault(UEnumeration* en,
         }
         u_UCharsToChars(tempUCharVal, tempCharVal, *resultLength + 1);
         return tempCharVal;
-    } else {
+    } 
         *status = U_UNSUPPORTED_ERROR;
         return NULL;
-    }
+    
 }
 
 U_CAPI const UChar* U_EXPORT2
@@ -147,10 +147,10 @@ uenum_unext(UEnumeration* en,
     }
     if (en->uNext != NULL) {
         return en->uNext(en, resultLength, status);
-    } else {
+    } 
         *status = U_UNSUPPORTED_ERROR;
         return NULL;
-    }
+    
 }
 
 U_CAPI const char* U_EXPORT2
@@ -165,10 +165,10 @@ uenum_next(UEnumeration* en,
         if (resultLength != NULL) {
             return en->next(en, resultLength, status);
         }
-        else {
+        
             int32_t dummyLength=0;
             return en->next(en, &dummyLength, status);
-        }
+        
     } else {
         *status = U_UNSUPPORTED_ERROR;
         return NULL;

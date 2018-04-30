@@ -119,7 +119,7 @@ UBool
 PatternProps::isSyntax(UChar32 c) {
     if(c<0) {
         return FALSE;
-    } else if(c<=0xff) {
+    } if(c<=0xff) {
         return (UBool)(latin1[c]>>1)&1;
     } else if(c<0x2010) {
         return FALSE;
@@ -137,7 +137,7 @@ UBool
 PatternProps::isSyntaxOrWhiteSpace(UChar32 c) {
     if(c<0) {
         return FALSE;
-    } else if(c<=0xff) {
+    } if(c<=0xff) {
         return (UBool)(latin1[c]&1);
     } else if(c<0x200e) {
         return FALSE;
@@ -155,7 +155,7 @@ UBool
 PatternProps::isWhiteSpace(UChar32 c) {
     if(c<0) {
         return FALSE;
-    } else if(c<=0xff) {
+    } if(c<=0xff) {
         return (UBool)(latin1[c]>>2)&1;
     } else if(0x200e<=c && c<=0x2029) {
         return c<=0x200f || 0x2028<=c;

@@ -109,7 +109,7 @@ static bool FindElfBuildIDNote(const void* elf_mapped_base,
   if (elfclass == ELFCLASS32) {
     return ElfClassBuildIDNoteIdentifier<ElfClass32>(note_section, note_size,
                                                      identifier);
-  } else if (elfclass == ELFCLASS64) {
+  } if (elfclass == ELFCLASS64) {
     return ElfClassBuildIDNoteIdentifier<ElfClass64>(note_section, note_size,
                                                      identifier);
   }

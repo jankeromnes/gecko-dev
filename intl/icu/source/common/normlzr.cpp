@@ -184,9 +184,9 @@ Normalizer::quickCheck(const UnicodeString& source,
         if(options&UNORM_UNICODE_3_2) {
             return FilteredNormalizer2(*n2, *uniset_getUnicode32Instance(status)).
                 quickCheck(source, status);
-        } else {
+        } 
             return n2->quickCheck(source, status);
-        }
+        
     } else {
         return UNORM_MAYBE;
     }
@@ -201,9 +201,9 @@ Normalizer::isNormalized(const UnicodeString& source,
         if(options&UNORM_UNICODE_3_2) {
             return FilteredNormalizer2(*n2, *uniset_getUnicode32Instance(status)).
                 isNormalized(source, status);
-        } else {
+        } 
             return n2->isNormalized(source, status);
-        }
+        
     } else {
         return FALSE;
     }
@@ -256,9 +256,9 @@ Normalizer::concatenate(const UnicodeString &left, const UnicodeString &right,
 UChar32 Normalizer::current() {
     if(bufferPos<buffer.length() || nextNormalize()) {
         return buffer.char32At(bufferPos);
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 /**
@@ -271,9 +271,9 @@ UChar32 Normalizer::next() {
         UChar32 c=buffer.char32At(bufferPos);
         bufferPos+=U16_LENGTH(c);
         return c;
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 /**
@@ -286,9 +286,9 @@ UChar32 Normalizer::previous() {
         UChar32 c=buffer.char32At(bufferPos-1);
         bufferPos-=U16_LENGTH(c);
         return c;
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 void Normalizer::reset() {
@@ -340,9 +340,9 @@ UChar32 Normalizer::last() {
 int32_t Normalizer::getIndex() const {
     if(bufferPos<buffer.length()) {
         return currentIndex;
-    } else {
+    } 
         return nextIndex;
-    }
+    
 }
 
 /**

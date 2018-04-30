@@ -36,7 +36,7 @@ U_CFUNC uint16_t
 udata_getHeaderSize(const DataHeader *udh) {
     if(udh==NULL) {
         return 0;
-    } else if(udh->info.isBigEndian==U_IS_BIG_ENDIAN) {
+    } if(udh->info.isBigEndian==U_IS_BIG_ENDIAN) {
         /* same endianness */
         return udh->dataHeader.headerSize;
     } else {
@@ -50,7 +50,7 @@ U_CFUNC uint16_t
 udata_getInfoSize(const UDataInfo *info) {
     if(info==NULL) {
         return 0;
-    } else if(info->isBigEndian==U_IS_BIG_ENDIAN) {
+    } if(info->isBigEndian==U_IS_BIG_ENDIAN) {
         /* same endianness */
         return info->size;
     } else {
@@ -253,12 +253,12 @@ offsetTOCLookupFn(const UDataMemory *pData,
                 *pLength = -1;
             }
             return (const DataHeader *)(base+entry->dataOffset);
-        } else {
+        } 
 #ifdef UDATA_DEBUG
             fprintf(stderr, "%s: Not found.\n", tocEntryName);
 #endif
             return NULL;
-        }
+        
     } else {
 #ifdef UDATA_DEBUG
         fprintf(stderr, "returning header\n");
@@ -297,12 +297,12 @@ static const DataHeader * U_CALLCONV pointerTOCLookupFn(const UDataMemory *pData
 #endif
             *pLength=-1;
             return UDataMemory_normalizeDataPointer(toc->entry[number].pHeader);
-        } else {
+        } 
 #ifdef UDATA_DEBUG
             fprintf(stderr, "%s: Not found.\n", name);
 #endif
             return NULL;
-        }
+        
     } else {
         return pData->pHeader;
     }

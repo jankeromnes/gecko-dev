@@ -271,7 +271,7 @@ ICULanguageBreakFactory::loadDictionaryMatcherFor(UScriptCode script) {
             udata_close(file);
         }
         return m;
-    } else if (dictfname != NULL) {
+    } if (dictfname != NULL) {
         // we don't have a dictionary matcher.
         // returning NULL here will cause us to fail to find a dictionary break engine, as expected
         status = U_ZERO_ERROR;

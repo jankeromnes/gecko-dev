@@ -168,7 +168,7 @@ nsXRemoteService::HandleNewProperty(XID aWindowId, Display* aDisplay,
     return true;
   }
 
-  else if (aChangedAtom == sMozLockAtom) {
+  if (aChangedAtom == sMozLockAtom) {
     // someone locked the window
     return true;
   }

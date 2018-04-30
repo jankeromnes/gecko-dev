@@ -513,7 +513,7 @@ int32_t JapaneseCalendar::getActualMaximum(UCalendarDateFields field, UErrorCode
         if (era == kCurrentEra) {
             // TODO: Investigate what value should be used here - revisit after 4.0.
             return handleGetLimit(UCAL_YEAR, UCAL_LIMIT_MAXIMUM);
-        } else {
+        } 
             int32_t nextEraYear = kEraInfo[era + 1].year;
             int32_t nextEraMonth = kEraInfo[era + 1].month;
             int32_t nextEraDate = kEraInfo[era + 1].day;
@@ -524,7 +524,7 @@ int32_t JapaneseCalendar::getActualMaximum(UCalendarDateFields field, UErrorCode
                 maxYear--;
             }
             return maxYear;
-        }
+        
     }
     return GregorianCalendar::getActualMaximum(field, status);
 }

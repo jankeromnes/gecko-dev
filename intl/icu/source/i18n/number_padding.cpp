@@ -42,9 +42,9 @@ Padder Padder::codePoints(UChar32 cp, int32_t targetWidth, UNumberFormatPadPosit
     // TODO: Validate the code point?
     if (targetWidth >= 0) {
         return {cp, targetWidth, position};
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 int32_t Padder::padAndApply(const Modifier &mod1, const Modifier &mod2,

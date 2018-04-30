@@ -164,9 +164,9 @@ FilteredNormalizer2::normalizeSecondAndAppend(UnicodeString &first,
     if(first.isEmpty()) {
         if(doNormalize) {
             return normalize(second, first, errorCode);
-        } else {
+        } 
             return first=second;
-        }
+        
     }
     // merge the in-filter suffix of the first string with the in-filter prefix of the second
     int32_t prefixLimit=set.span(second, 0, USET_SPAN_SIMPLE);
@@ -286,7 +286,7 @@ FilteredNormalizer2::quickCheck(const UnicodeString &s, UErrorCode &errorCode) c
                 norm2.quickCheck(s.tempSubStringBetween(prevSpanLimit, spanLimit), errorCode);
             if(U_FAILURE(errorCode) || qcResult==UNORM_NO) {
                 return qcResult;
-            } else if(qcResult==UNORM_MAYBE) {
+            } if(qcResult==UNORM_MAYBE) {
                 result=qcResult;
             }
             spanCondition=USET_SPAN_NOT_CONTAINED;

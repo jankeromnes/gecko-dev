@@ -59,7 +59,7 @@ glGetString_mozilla(GLContext* aContext, GrGLenum aName)
             return reinterpret_cast<const GLubyte*>("OpenGL ES 2.0");
         }
         return reinterpret_cast<const GLubyte*>("2.0");
-    } else if (aName == LOCAL_GL_EXTENSIONS) {
+    } if (aName == LOCAL_GL_EXTENSIONS) {
         // Only expose the bare minimum extensions we want to support to ensure a functional Ganesh
         // as GLContext only exposes certain extensions
         static bool extensionsStringBuilt = false;

@@ -34,9 +34,9 @@ ustrcase_getCaseLocale(const char *locale) {
     }
     if (*locale == 0) {
         return UCASE_LOC_ROOT;
-    } else {
+    } 
         return ucase_getCaseLocale(locale);
-    }
+    
 }
 
 /* public API functions */

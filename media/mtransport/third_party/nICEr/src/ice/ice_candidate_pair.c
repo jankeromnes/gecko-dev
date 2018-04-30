@@ -253,7 +253,7 @@ static void nr_ice_candidate_pair_stun_cb(NR_SOCKET s, int how, void *cb_arg)
           nr_ice_candidate_pair_set_state(pair->pctx,pair,NR_ICE_PAIR_STATE_FAILED);
           break;
         }
-        else if(!nr_transport_addr_cmp(&pair->local->addr,&pair->stun_client->results.ice_binding_response.mapped_addr,NR_TRANSPORT_ADDR_CMP_MODE_ALL)){
+        if(!nr_transport_addr_cmp(&pair->local->addr,&pair->stun_client->results.ice_binding_response.mapped_addr,NR_TRANSPORT_ADDR_CMP_MODE_ALL)){
           nr_ice_candidate_pair_set_state(pair->pctx,pair,NR_ICE_PAIR_STATE_SUCCEEDED);
         }
         else if(pair->stun_client->state == NR_STUN_CLIENT_STATE_DONE) {
@@ -442,7 +442,7 @@ int nr_ice_candidate_pair_do_triggered_check(nr_ice_peer_ctx *pctx, nr_ice_cand_
     if(pair->state==NR_ICE_PAIR_STATE_CANCELLED) {
       r_log(LOG_ICE,LOG_DEBUG,"ICE-PEER(%s)/CAND_PAIR(%s): Ignoring matching but canceled pair",pctx->label,pair->codeword);
       return(0);
-    } else if(pair->state==NR_ICE_PAIR_STATE_SUCCEEDED) {
+    } if(pair->state==NR_ICE_PAIR_STATE_SUCCEEDED) {
       r_log(LOG_ICE,LOG_DEBUG,"ICE-PEER(%s)/CAND_PAIR(%s): No new trigger check for succeeded pair",pctx->label,pair->codeword);
       return(0);
     }

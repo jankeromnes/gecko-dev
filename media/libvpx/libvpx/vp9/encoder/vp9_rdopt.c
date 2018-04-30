@@ -3907,7 +3907,7 @@ void vp9_rd_pick_inter_mode_sub8x8(VP9_COMP *cpi, TileDataEnc *tile_data,
       // Disable this drop out case if the ref frame
       // segment level feature is enabled for this segment. This is to
       // prevent the possibility that we end up unable to pick any mode.
-    } else if (!segfeature_active(seg, segment_id, SEG_LVL_REF_FRAME)) {
+    } if (!segfeature_active(seg, segment_id, SEG_LVL_REF_FRAME)) {
       // Only consider ZEROMV/ALTREF_FRAME for alt ref frame,
       // unless ARNR filtering is enabled in which case we want
       // an unfiltered alternative. We allow near/nearest as well

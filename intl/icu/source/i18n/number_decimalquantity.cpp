@@ -201,10 +201,10 @@ StandardPlural::Form DecimalQuantity::getStandardPlural(const PluralRules *rules
     if (rules == nullptr) {
         // Fail gracefully if the user didn't provide a PluralRules
         return StandardPlural::Form::OTHER;
-    } else {
+    } 
         UnicodeString ruleString = rules->select(*this);
         return StandardPlural::orOtherFromString(ruleString);
-    }
+    
 }
 
 double DecimalQuantity::getPluralOperand(PluralOperand operand) const {
@@ -472,7 +472,7 @@ double DecimalQuantity::toDouble() const {
 
     if (isNaN()) {
         return NAN;
-    } else if (isInfinite()) {
+    } if (isInfinite()) {
         return isNegative() ? -INFINITY : INFINITY;
     }
 
@@ -709,10 +709,10 @@ int8_t DecimalQuantity::getDigitPos(int32_t position) const {
     if (usingBytes) {
         if (position < 0 || position > precision) { return 0; }
         return fBCD.bcdBytes.ptr[position];
-    } else {
+    } 
         if (position < 0 || position >= 16) { return 0; }
         return (int8_t) ((fBCD.bcdLong >> (position * 4)) & 0xf);
-    }
+    
 }
 
 void DecimalQuantity::setDigitPos(int32_t position, int8_t value) {
@@ -864,10 +864,10 @@ void DecimalQuantity::compact() {
             // Number is zero
             setBcdToZero();
             return;
-        } else {
+        } 
             // Remove trailing zeros
             shiftRight(delta);
-        }
+        
 
         // Compute precision
         int32_t leading = precision - 1;

@@ -1105,7 +1105,7 @@ bool load_a2b0_lutn_type(std::vector<SkColorSpace_A2B::Element>* elements, const
             SkColorSpacePrintf("Too few (%d) input gamma table entries. Must have at least 2.\n",
                                inTableEntries);
             return false;
-        } else if (inTableEntries > kMaxLut16GammaEntries) {
+        } if (inTableEntries > kMaxLut16GammaEntries) {
             SkColorSpacePrintf("Too many (%d) input gamma table entries. Must have at most %d.\n",
                                inTableEntries, kMaxLut16GammaEntries);
             return false;
@@ -1115,7 +1115,7 @@ bool load_a2b0_lutn_type(std::vector<SkColorSpace_A2B::Element>* elements, const
             SkColorSpacePrintf("Too few (%d) output gamma table entries. Must have at least 2.\n",
                                outTableEntries);
             return false;
-        } else if (outTableEntries > kMaxLut16GammaEntries) {
+        } if (outTableEntries > kMaxLut16GammaEntries) {
             SkColorSpacePrintf("Too many (%d) output gamma table entries. Must have at most %d.\n",
                                outTableEntries, kMaxLut16GammaEntries);
             return false;

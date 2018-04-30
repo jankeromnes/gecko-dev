@@ -46,7 +46,7 @@ ures_openU(const UChar *myPath,
         if(length>=(int32_t)sizeof(pathBuffer)) {
             *status=U_ILLEGAL_ARGUMENT_ERROR;
             return NULL;
-        } else if(uprv_isInvariantUString(myPath, length)) {
+        } if(uprv_isInvariantUString(myPath, length)) {
             /*
              * the invariant converter is sufficient for package and tree names
              * and is more efficient

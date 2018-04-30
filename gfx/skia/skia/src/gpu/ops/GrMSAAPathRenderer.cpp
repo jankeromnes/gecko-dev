@@ -42,9 +42,9 @@ static inline bool single_pass_shape(const GrShape& shape) {
 GrPathRenderer::StencilSupport GrMSAAPathRenderer::onGetStencilSupport(const GrShape& shape) const {
     if (single_pass_shape(shape)) {
         return GrPathRenderer::kNoRestriction_StencilSupport;
-    } else {
+    } 
         return GrPathRenderer::kStencilOnly_StencilSupport;
-    }
+    
 }
 
 struct MSAALineVertices {

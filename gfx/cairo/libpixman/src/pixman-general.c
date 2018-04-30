@@ -67,12 +67,12 @@ general_dest_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
 
 	return TRUE;
     }
-    else
-    {
+    
+    
 	_pixman_log_error (FUNC, "Trying to write to a non-writable image");
 
 	return FALSE;
-    }
+    
 }
 
 typedef struct op_info_t op_info_t;

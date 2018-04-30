@@ -208,9 +208,9 @@ IDNA::createUTS46Instance(uint32_t options, UErrorCode &errorCode) {
             idna=NULL;
         }
         return idna;
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 // UTS46 implementation ---------------------------------------------------- ***
@@ -844,7 +844,7 @@ UTS46::processLabel(UnicodeString &dest,
                     info.labelErrors|=UIDNA_ERROR_LABEL_TOO_LONG;
                 }
                 return destLabelLength;
-            } else if(oredChars>=0x80) {
+            } if(oredChars>=0x80) {
                 // Contains non-ASCII characters.
                 UnicodeString punycode;
                 UChar *buffer=punycode.getBuffer(63);  // 63==maximum DNS label length

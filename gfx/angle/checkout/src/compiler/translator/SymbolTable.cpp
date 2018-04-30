@@ -99,7 +99,7 @@ TSymbol *TSymbolTable::TSymbolTableLevel::find(const ImmutableString &name) cons
     tLevel::const_iterator it = level.find(name);
     if (it == level.end())
         return nullptr;
-    else
+    
         return (*it).second;
 }
 
@@ -115,7 +115,7 @@ const TSymbol *TSymbolTable::TSymbolTableBuiltInLevel::find(const ImmutableStrin
     tLevel::const_iterator it = mLevel.find(name);
     if (it == mLevel.end())
         return nullptr;
-    else
+    
         return (*it).second;
 }
 
@@ -410,10 +410,10 @@ bool TSymbolTable::insert(ESymbolLevel level, TSymbol *symbol)
     {
         return mBuiltInTable[level]->insert(symbol);
     }
-    else
-    {
+    
+    
         return mTable[level - LAST_BUILTIN_LEVEL - 1]->insert(symbol);
-    }
+    
 }
 
 bool TSymbolTable::insertStructType(ESymbolLevel level, TStructure *str)

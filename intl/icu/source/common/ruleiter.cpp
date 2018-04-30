@@ -137,10 +137,10 @@ UnicodeString& RuleCharacterIterator::toString(UnicodeString& result) const {
 UChar32 RuleCharacterIterator::_current() const {
     if (buf != 0) {
         return buf->char32At(bufPos);
-    } else {
+    } 
         int i = pos.getIndex();
         return (i < text.length()) ? text.char32At(i) : (UChar32)DONE;
-    }
+    
 }
 
 void RuleCharacterIterator::_advance(int32_t count) {

@@ -79,9 +79,9 @@ UTF16CollationIterator::foundNULTerminator() {
     if(limit == NULL) {
         limit = --pos;
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 UChar32
@@ -99,9 +99,9 @@ UTF16CollationIterator::nextCodePoint(UErrorCode & /*errorCode*/) {
     if(U16_IS_LEAD(c) && pos != limit && U16_IS_TRAIL(trail = *pos)) {
         ++pos;
         return U16_GET_SUPPLEMENTARY(c, trail);
-    } else {
+    } 
         return c;
-    }
+    
 }
 
 UChar32
@@ -114,9 +114,9 @@ UTF16CollationIterator::previousCodePoint(UErrorCode & /*errorCode*/) {
     if(U16_IS_TRAIL(c) && pos != start && U16_IS_LEAD(lead = *(pos - 1))) {
         --pos;
         return U16_GET_SUPPLEMENTARY(lead, c);
-    } else {
+    } 
         return c;
-    }
+    
 }
 
 void
@@ -181,10 +181,10 @@ FCDUTF16CollationIterator::operator==(const CollationIterator &other) const {
     if(checkDir == 0 && (start == segmentStart) != (o.start == o.segmentStart)) { return FALSE; }
     if(checkDir != 0 || start == segmentStart) {
         return (pos - rawStart) == (o.pos - o.rawStart);
-    } else {
+    } 
         return (segmentStart - rawStart) == (o.segmentStart - o.rawStart) &&
                 (pos - start) == (o.pos - o.start);
-    }
+    
 }
 
 void
@@ -199,7 +199,7 @@ int32_t
 FCDUTF16CollationIterator::getOffset() const {
     if(checkDir != 0 || start == segmentStart) {
         return (int32_t)(pos - rawStart);
-    } else if(pos == start) {
+    } if(pos == start) {
         return (int32_t)(segmentStart - rawStart);
     } else {
         return (int32_t)(segmentLimit - rawStart);
@@ -227,7 +227,7 @@ FCDUTF16CollationIterator::handleNextCE32(UChar32 &c, UErrorCode &errorCode) {
                 }
             }
             break;
-        } else if(checkDir == 0 && pos != limit) {
+        } if(checkDir == 0 && pos != limit) {
             c = *pos++;
             break;
         } else {
@@ -242,9 +242,9 @@ FCDUTF16CollationIterator::foundNULTerminator() {
     if(limit == NULL) {
         limit = rawLimit = --pos;
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 UChar32
@@ -270,7 +270,7 @@ FCDUTF16CollationIterator::nextCodePoint(UErrorCode &errorCode) {
                 return U_SENTINEL;
             }
             break;
-        } else if(checkDir == 0 && pos != limit) {
+        } if(checkDir == 0 && pos != limit) {
             c = *pos++;
             break;
         } else {
@@ -281,9 +281,9 @@ FCDUTF16CollationIterator::nextCodePoint(UErrorCode &errorCode) {
     if(U16_IS_LEAD(c) && pos != limit && U16_IS_TRAIL(trail = *pos)) {
         ++pos;
         return U16_GET_SUPPLEMENTARY(c, trail);
-    } else {
+    } 
         return c;
-    }
+    
 }
 
 UChar32
@@ -306,7 +306,7 @@ FCDUTF16CollationIterator::previousCodePoint(UErrorCode &errorCode) {
                 }
             }
             break;
-        } else if(checkDir == 0 && pos != start) {
+        } if(checkDir == 0 && pos != start) {
             c = *--pos;
             break;
         } else {
@@ -317,9 +317,9 @@ FCDUTF16CollationIterator::previousCodePoint(UErrorCode &errorCode) {
     if(U16_IS_TRAIL(c) && pos != start && U16_IS_LEAD(lead = *(pos - 1))) {
         --pos;
         return U16_GET_SUPPLEMENTARY(lead, c);
-    } else {
+    } 
         return c;
-    }
+    
 }
 
 void

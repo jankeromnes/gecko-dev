@@ -2349,11 +2349,11 @@ _cairo_pdf_surface_emit_surface (cairo_pdf_surface_t        *surface,
 								 sub->target,
 								 &sub->extents,
 								 src_surface->hash_entry->surface_res);
-	} else {
+	} 
 	    return _cairo_pdf_surface_emit_recording_surface (surface,
 							      src_surface->surface,
 							      src_surface->hash_entry->surface_res);
-	}
+	
     } else {
 	return _cairo_pdf_surface_emit_image_surface (surface,
 						      src_surface->surface,
@@ -5316,7 +5316,7 @@ _cairo_pdf_surface_analyze_operation (cairo_pdf_surface_t  *surface,
 	    if (surface_pattern->surface->type == CAIRO_SURFACE_TYPE_RECORDING) {
 		if (pattern->extend == CAIRO_EXTEND_PAD)
 		    return CAIRO_INT_STATUS_UNSUPPORTED;
-		else
+		
 		    return CAIRO_INT_STATUS_ANALYZE_RECORDING_SURFACE_PATTERN;
 	    }
 	}
@@ -5334,7 +5334,7 @@ _cairo_pdf_surface_analyze_operation (cairo_pdf_surface_t  *surface,
 	    if (surface_pattern->surface->type == CAIRO_SURFACE_TYPE_RECORDING) {
 		if (_cairo_pattern_is_opaque (pattern, extents)) {
 		    return CAIRO_INT_STATUS_ANALYZE_RECORDING_SURFACE_PATTERN;
-		} else {
+		} 
 		    /* FIXME: The analysis surface does not yet have
 		     * the capability to analyze a non opaque recording
 		     * surface and mark it supported if there is
@@ -5344,7 +5344,7 @@ _cairo_pdf_surface_analyze_operation (cairo_pdf_surface_t  *surface,
 		     * image. */
 
 		    return CAIRO_INT_STATUS_UNSUPPORTED;
-		}
+		
 	    } else {
 		return _cairo_pdf_surface_analyze_surface_pattern_transparency (surface,
 										surface_pattern);
@@ -5353,7 +5353,7 @@ _cairo_pdf_surface_analyze_operation (cairo_pdf_surface_t  *surface,
 
 	if (_cairo_pattern_is_opaque (pattern, extents))
 	    return CAIRO_STATUS_SUCCESS;
-	else
+	
 	    return CAIRO_INT_STATUS_FLATTEN_TRANSPARENCY;
     }
 
@@ -5415,7 +5415,7 @@ _cairo_pdf_surface_paint (void			*abstract_surface,
 
     if (surface->paginated_mode == CAIRO_PAGINATED_MODE_ANALYZE) {
 	return _cairo_pdf_surface_analyze_operation (surface, op, source, &extents.bounded);
-    } else if (surface->paginated_mode == CAIRO_PAGINATED_MODE_FALLBACK) {
+    } if (surface->paginated_mode == CAIRO_PAGINATED_MODE_FALLBACK) {
 	status = _cairo_pdf_surface_start_fallback (surface);
 	if (unlikely (status))
 	    return status;
@@ -5550,7 +5550,7 @@ _cairo_pdf_surface_mask	(void			*abstract_surface,
 
 	return _cairo_analysis_surface_merge_status (source_status,
 						     mask_status);
-    } else if (surface->paginated_mode == CAIRO_PAGINATED_MODE_FALLBACK) {
+    } if (surface->paginated_mode == CAIRO_PAGINATED_MODE_FALLBACK) {
 	status = _cairo_pdf_surface_start_fallback (surface);
 	if (unlikely (status))
 	    return status;
@@ -5794,7 +5794,7 @@ _cairo_pdf_surface_fill (void			*abstract_surface,
 
     if (surface->paginated_mode == CAIRO_PAGINATED_MODE_ANALYZE) {
 	return _cairo_pdf_surface_analyze_operation (surface, op, source, &extents.bounded);
-    } else if (surface->paginated_mode == CAIRO_PAGINATED_MODE_FALLBACK) {
+    } if (surface->paginated_mode == CAIRO_PAGINATED_MODE_FALLBACK) {
 	status = _cairo_pdf_surface_start_fallback (surface);
 	if (unlikely (status))
 	    return status;

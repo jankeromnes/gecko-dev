@@ -46,7 +46,7 @@ int GetLocationCount(const TIntermSymbol *varying, bool ignoreVaryingArraySize)
     // evaluation inputs all have an additional level of arrayness relative to other shader inputs
     // and outputs. This outer array level is removed from the type before considering how many
     // locations the type consumes.
-    else if (ignoreVaryingArraySize)
+    if (ignoreVaryingArraySize)
     {
         // Array-of-arrays cannot be inputs or outputs of a geometry shader.
         // (GL_EXT_geometry_shader SPEC issues(5))

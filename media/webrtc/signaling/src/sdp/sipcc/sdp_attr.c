@@ -286,14 +286,14 @@ sdp_result_e sdp_parse_attr_simple_string (sdp_t *sdp_p, sdp_attr_t *attr_p,
             sdp_p->debug_str, sdp_get_attr_name(attr_p->type));
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             SDP_PRINT("%s Parsed a=%s, %s", sdp_p->debug_str,
                       sdp_get_attr_name(attr_p->type),
                       attr_p->attr.string_val);
         }
         return (SDP_SUCCESS);
-    }
+    
 }
 
 sdp_result_e sdp_build_attr_simple_string (sdp_t *sdp_p, sdp_attr_t *attr_p,
@@ -318,13 +318,13 @@ sdp_result_e sdp_parse_attr_simple_u32 (sdp_t *sdp_p, sdp_attr_t *attr_p,
             sdp_p->debug_str, sdp_get_attr_name(attr_p->type));
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             SDP_PRINT("%s Parsed a=%s, %u", sdp_p->debug_str,
                       sdp_get_attr_name(attr_p->type), attr_p->attr.u32_val);
         }
         return (SDP_SUCCESS);
-    }
+    
 }
 
 sdp_result_e sdp_build_attr_simple_u32 (sdp_t *sdp_p, sdp_attr_t *attr_p,
@@ -353,7 +353,7 @@ sdp_result_e sdp_parse_attr_simple_bool (sdp_t *sdp_p, sdp_attr_t *attr_p,
             sdp_p->debug_str, sdp_get_attr_name(attr_p->type));
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             if (attr_p->attr.boolean_val) {
                 SDP_PRINT("%s Parsed a=%s, boolean is TRUE", sdp_p->debug_str,
@@ -364,7 +364,7 @@ sdp_result_e sdp_parse_attr_simple_bool (sdp_t *sdp_p, sdp_attr_t *attr_p,
             }
         }
         return (SDP_SUCCESS);
-    }
+    
 }
 
 sdp_result_e sdp_build_attr_simple_bool (sdp_t *sdp_p, sdp_attr_t *attr_p,
@@ -405,7 +405,7 @@ sdp_result_e sdp_parse_attr_maxprate (sdp_t *sdp_p, sdp_attr_t *attr_p,
             sdp_p->debug_str, sdp_get_attr_name(attr_p->type));
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (!sdp_validate_maxprate(attr_p->attr.string_val)) {
             sdp_parse_error(sdp_p,
                 "%s is not a valid maxprate value.",
@@ -420,7 +420,7 @@ sdp_result_e sdp_parse_attr_maxprate (sdp_t *sdp_p, sdp_attr_t *attr_p,
                       attr_p->attr.string_val);
         }
         return (SDP_SUCCESS);
-    }
+    
 }
 
 /*
@@ -492,7 +492,7 @@ static sdp_result_e sdp_verify_attr_fmtp_telephone_event(char *fmtpVal)
     // case where we have 1 or 2 characters, example 4 or 23
     if (len < 3 && strspn(temp, "0123456789") != len) {
       return SDP_INVALID_PARAMETER;
-    } else if (len >= 3) {
+    } if (len >= 3) {
       // case where we have 3-5 characters, ex 3-5, 2-33, or 10-20
       sdp_result_e result1 = SDP_SUCCESS;
       sdp_result_e result2 = SDP_SUCCESS;
@@ -1444,11 +1444,11 @@ sdp_result_e sdp_parse_attr_fmtp (sdp_t *sdp_p, sdp_attr_t *attr_p,
         }
         SDP_FREE(temp_ptr);
         return (SDP_SUCCESS);
-    } else {
+    } 
         done = FALSE;
         fmtp_ptr = src_ptr;
         tmp[0] = '\0';
-    }
+    
 
     for (i=0; !done; i++) {
         fmtp_p->fmtp_format = SDP_FMTP_NTE;
@@ -2708,7 +2708,7 @@ sdp_result_e sdp_parse_attr_cap (sdp_t *sdp_p, sdp_attr_t *attr_p,
         SDP_FREE(cap_p);
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         /* Transport is a non-AAL2 type.  Parse payloads normally. */
         sdp_parse_payload_types(sdp_p, cap_p, ptr);
         if (cap_p->num_payloads == 0) {
@@ -2716,7 +2716,7 @@ sdp_result_e sdp_parse_attr_cap (sdp_t *sdp_p, sdp_attr_t *attr_p,
             sdp_p->conf_p->num_invalid_param++;
             return (SDP_INVALID_PARAMETER);
         }
-    }
+    
 
     attr_p->attr.cap_p = cap_p;
     /*
@@ -3087,7 +3087,7 @@ sdp_result_e sdp_parse_attr_rtr (sdp_t *sdp_p, sdp_attr_t *attr_p,
     ptr = sdp_getnextstrtok(ptr, tmp, sizeof(tmp), " \t", &result);
     if (result != SDP_SUCCESS){ // No confirm tag specified is not an error
         return (SDP_SUCCESS);
-    } else {
+    } 
        /* See if confirm was specified.  Defaults to FALSE. */
        if (cpr_strncasecmp(tmp, "confirm", sizeof("confirm")) == 0) {
            attr_p->attr.rtr.confirm = TRUE;
@@ -3105,7 +3105,7 @@ sdp_result_e sdp_parse_attr_rtr (sdp_t *sdp_p, sdp_attr_t *attr_p,
                      tmp);
        }
        return (SDP_SUCCESS);
-    }
+    
 }
 
 sdp_result_e sdp_build_attr_rtr (sdp_t *sdp_p, sdp_attr_t *attr_p,
@@ -4476,14 +4476,14 @@ static sdp_result_e sdp_parse_attr_line(sdp_t *sdp_p, sdp_attr_t *attr_p,
             sdp_p->debug_str, sdp_get_attr_name(attr_p->type));
         sdp_p->conf_p->num_invalid_param++;
         return (SDP_INVALID_PARAMETER);
-    } else {
+    } 
         if (sdp_p->debug_flag[SDP_DEBUG_TRACE]) {
             SDP_PRINT("%s Parsed a=%s, %s", sdp_p->debug_str,
                       sdp_get_attr_name(attr_p->type),
                       buf);
         }
         return (SDP_SUCCESS);
-    }
+    
 }
 
 sdp_result_e sdp_parse_attr_complete_line (sdp_t *sdp_p, sdp_attr_t *attr_p,

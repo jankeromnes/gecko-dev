@@ -34,7 +34,7 @@ struct Transition {
 static UBool compareRules(UVector* rules1, UVector* rules2) {
     if (rules1 == NULL && rules2 == NULL) {
         return TRUE;
-    } else if (rules1 == NULL || rules2 == NULL) {
+    } if (rules1 == NULL || rules2 == NULL) {
         return FALSE;
     }
     int32_t size = rules1->size();
@@ -370,10 +370,10 @@ RuleBasedTimeZone::getOffset(uint8_t era, int32_t year, int32_t month, int32_t d
     if (month < UCAL_JANUARY || month > UCAL_DECEMBER) {
         status = U_ILLEGAL_ARGUMENT_ERROR;
         return 0;
-    } else {
+    } 
         return getOffset(era, year, month, day, dayOfWeek, millis,
                          Grego::monthLength(year, month), status);
-    }
+    
 }
 
 int32_t
@@ -724,7 +724,7 @@ RuleBasedTimeZone::findRuleInFinal(UDate date, UBool local,
     if (!avail0 || !avail1) {
         if (avail0) {
             return fr0;
-        } else if (avail1) {
+        } if (avail1) {
             return fr1;
         }
         // Both rules take effect after the given time
@@ -804,11 +804,11 @@ RuleBasedTimeZone::findNext(UDate base, UBool inclusive, UDate& transitionTime,
             && result.from->getDSTSavings() == result.to->getDSTSavings()) {
             if (isFinal) {
                 return FALSE;
-            } else {
+            } 
                 // No offset changes.  Try next one if not final
                 return findNext(result.time, FALSE /* always exclusive */,
                     transitionTime, fromRule, toRule);
-            }
+            
         }
         transitionTime = result.time;
         fromRule = result.from;

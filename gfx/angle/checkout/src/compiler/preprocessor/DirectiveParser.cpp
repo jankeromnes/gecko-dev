@@ -444,7 +444,7 @@ void DirectiveParser::parseUndef(Token *token)
                                  token->text);
             return;
         }
-        else if (iter->second->expansionCount > 0)
+        if (iter->second->expansionCount > 0)
         {
             mDiagnostics->report(Diagnostics::PP_MACRO_UNDEFINED_WHILE_INVOKED, token->location,
                                  token->text);

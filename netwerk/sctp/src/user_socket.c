@@ -818,9 +818,9 @@ userspace_sctp_sendmsg(struct socket *so,
 	errno = sctp_lower_sosend(so, to, &auio, NULL, NULL, 0, sinfo);
 	if (errno == 0) {
 		return (len - auio.uio_resid);
-	} else {
+	} 
 		return (-1);
-	}
+	
 }
 
 
@@ -937,9 +937,9 @@ usrsctp_sendv(struct socket *so,
 			*assoc_id = usrsctp_getassocid(so, to);
 		}
 		return (len - auio.uio_resid);
-	} else {
+	} 
 		return (-1);
-	}
+	
 }
 
 
@@ -1093,10 +1093,10 @@ userspace_sctp_recvmsg(struct socket *so,
 	if (error == 0) {
 		/* ready return value */
 		return (ulen - auio.uio_resid);
-	} else {
+	} 
 		SCTP_PRINTF("%s: error = %d\n", __func__, error);
 		return (-1);
-	}
+	
 }
 
 ssize_t
@@ -1237,9 +1237,9 @@ usrsctp_recvv(struct socket *so,
 	if (errno == 0) {
 		/* ready return value */
 		return (ulen - auio.uio_resid);
-	} else {
+	} 
 		return (-1);
-	}
+	
 }
 
 
@@ -1648,9 +1648,9 @@ usrsctp_bind(struct socket *so, struct sockaddr *name, int namelen)
 	FREE(sa, M_SONAME);
 	if (errno) {
 		return (-1);
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 
 int
@@ -1668,9 +1668,9 @@ solisten(struct socket *so, int backlog)
 {
 	if (so == NULL) {
 		return (EBADF);
-	} else {
+	} 
 		return (sctp_listen(so, backlog, NULL));
-	}
+	
 }
 
 
@@ -1713,9 +1713,9 @@ usrsctp_listen(struct socket *so, int backlog)
 	errno = solisten(so, backlog);
 	if (errno) {
 		return (-1);
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 
 int
@@ -1937,9 +1937,9 @@ usrsctp_accept(struct socket *so, struct sockaddr *aname, socklen_t *anamelen)
 	errno = accept1(so, aname, anamelen, &accept_return_sock);
 	if (errno) {
 		return (NULL);
-	} else {
+	} 
 		return (accept_return_sock);
-	}
+	
 }
 
 struct socket *
@@ -2145,9 +2145,9 @@ int usrsctp_connect(struct socket *so, struct sockaddr *name, int namelen)
 	FREE(sa, M_SONAME);
 	if (errno) {
 		return (-1);
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 
 int userspace_connect(struct socket *so, struct sockaddr *name, int namelen)
@@ -2205,9 +2205,9 @@ usrsctp_shutdown(struct socket *so, int how)
 		errno = sctp_shutdown(so);
 		if (errno) {
 			return (-1);
-		} else {
+		} 
 			return (0);
-		}
+		
 	}
 	return (0);
 }
@@ -2326,9 +2326,9 @@ usrsctp_setsockopt(struct socket *so, int level, int option_name,
 		errno = sctp_setopt(so, option_name, (void *) option_value, (size_t)option_len, NULL);
 		if (errno) {
 			return (-1);
-		} else {
+		} 
 			return (0);
-		}
+		
 	default:
 		errno = ENOPROTOOPT;
 		return (-1);
@@ -2418,9 +2418,9 @@ usrsctp_getsockopt(struct socket *so, int level, int option_name,
 		*option_len = (socklen_t)len;
 		if (errno) {
 			return (-1);
-		} else {
+		} 
 			return (0);
-		}
+		
 	}
 	default:
 		errno = ENOPROTOOPT;

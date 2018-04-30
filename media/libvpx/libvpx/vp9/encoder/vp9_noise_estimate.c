@@ -54,7 +54,7 @@ static int enable_noise_estimation(VP9_COMP *const cpi) {
       cpi->oxcf.content != VP9E_CONTENT_SCREEN && cpi->common.width >= 640 &&
       cpi->common.height >= 360)
     return 1;
-  else
+  
     return 0;
 }
 
@@ -119,7 +119,7 @@ void vp9_update_noise_estimate(VP9_COMP *const cpi) {
       ne->last_h = cm->height;
     }
     return;
-  } else if (cpi->rc.avg_frame_low_motion < 50) {
+  } if (cpi->rc.avg_frame_low_motion < 50) {
     // Force noise estimation to 0 and denoiser off if content has high motion.
     ne->level = kLowLow;
 #if CONFIG_VP9_TEMPORAL_DENOISING

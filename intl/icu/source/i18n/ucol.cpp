@@ -96,9 +96,9 @@ ucol_safeClone(const UCollator *coll, void * /*stackBuffer*/, int32_t * pBufferS
     if (newColl == NULL) {
         *status = U_MEMORY_ALLOCATION_ERROR;
         return nullptr;
-    } else {
+    } 
         *status = U_SAFECLONE_ALLOCATED_WARNING;
-    }
+    
     return newColl->toUCollator();
 }
 
@@ -297,9 +297,9 @@ ucol_getBound(const uint8_t       *source,
         result[sourceIndex++] = 0;
 
         return sourceIndex;
-    } else {
+    } 
         return sourceIndex+boundType+1;
-    }
+    
 }
 
 U_CAPI void U_EXPORT2
@@ -567,9 +567,9 @@ ucol_getRulesEx(const UCollator *coll, UColRuleOption delta, UChar *buffer, int3
     if(buffer != NULL && bufferLen > 0) {
         UErrorCode errorCode = U_ZERO_ERROR;
         return rules.extract(buffer, bufferLen, errorCode);
-    } else {
+    } 
         return rules.length();
-    }
+    
 }
 
 U_CAPI const char * U_EXPORT2

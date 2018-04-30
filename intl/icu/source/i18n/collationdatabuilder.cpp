@@ -259,7 +259,7 @@ DataBuilderCollationIterator::getCE32FromBuilderData(uint32_t ce32, UErrorCode &
     if((ce32 & CollationDataBuilder::IS_BUILDER_JAMO_CE32) != 0) {
         UChar32 jamo = Collation::indexFromCE32(ce32);
         return utrie2_get32(builder.trie, jamo);
-    } else {
+    } 
         ConditionalCE32 *cond = builder.getConditionalCE32ForCE32(ce32);
         if(cond->builtCE32 == Collation::NO_CE32) {
             // Build the context-sensitive mappings into their runtime form and cache the result.
@@ -272,7 +272,7 @@ DataBuilderCollationIterator::getCE32FromBuilderData(uint32_t ce32, UErrorCode &
             builderData.contexts = builder.contexts.getBuffer();
         }
         return cond->builtCE32;
-    }
+    
 }
 
 // ------------------------------------------------------------------------- ***
@@ -367,9 +367,9 @@ CollationDataBuilder::maybeSetPrimaryRange(UChar32 start, UChar32 end,
         utrie2_setRange32(trie, start, end, offsetCE32, TRUE, &errorCode);
         modified = TRUE;
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 uint32_t
@@ -381,7 +381,7 @@ CollationDataBuilder::setPrimaryRangeAndReturnNext(UChar32 start, UChar32 end,
     if(maybeSetPrimaryRange(start, end, primary, step, errorCode)) {
         return Collation::incThreeBytePrimaryByOffset(primary, isCompressible,
                                                       (end - start + 1) * step);
-    } else {
+    } 
         // Short range: Set individual CE32s.
         for(;;) {
             utrie2_set32(trie, start, Collation::makeLongPrimaryCE32(primary), &errorCode);
@@ -390,7 +390,7 @@ CollationDataBuilder::setPrimaryRangeAndReturnNext(UChar32 start, UChar32 end,
             if(start > end) { return primary; }
         }
         modified = TRUE;
-    }
+    
 }
 
 uint32_t
@@ -416,9 +416,9 @@ CollationDataBuilder::getLongPrimaryIfSingleCE(UChar32 c) const {
     uint32_t ce32 = utrie2_get32(trie, c);
     if(Collation::isLongPrimaryCE32(ce32)) {
         return Collation::primaryFromLongPrimaryCE32(ce32);
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 int64_t
@@ -462,10 +462,10 @@ CollationDataBuilder::getSingleCE(UChar32 c, UErrorCode &errorCode) const {
             if(Collation::lengthFromCE32(ce32) == 1) {
                 int32_t i = Collation::indexFromCE32(ce32);
                 return fromBase ? base->ces[i] : ce64s.elementAti(i);
-            } else {
+            } 
                 errorCode = U_UNSUPPORTED_ERROR;
                 return 0;
-            }
+            
         }
         case Collation::DIGIT_TAG:
             // Fetch the non-numeric-collation CE32 and continue.
@@ -608,7 +608,7 @@ CollationDataBuilder::addCE32(const UnicodeString &prefix, const UnicodeString &
                 cond->next = index;
                 getConditionalCE32(index)->next = next;
                 break;
-            } else if(cmp == 0) {
+            } if(cmp == 0) {
                 // Same context as before, overwrite its ce32.
                 nextCond->ce32 = ce32;
                 break;
@@ -628,7 +628,7 @@ CollationDataBuilder::encodeOneCEAsCE32(int64_t ce) {
     if((ce & INT64_C(0xffff00ff00ff)) == 0) {
         // normal form ppppsstt
         return p | (lower32 >> 16) | (t >> 8);
-    } else if((ce & INT64_C(0xffffffffff)) == Collation::COMMON_SEC_AND_TER_CE) {
+    } if((ce & INT64_C(0xffffffffff)) == Collation::COMMON_SEC_AND_TER_CE) {
         // long-primary form ppppppC1
         return Collation::makeLongPrimaryCE32(p);
     } else if(p == 0 && (t & 0xff) == 0) {
@@ -668,7 +668,7 @@ CollationDataBuilder::encodeCEs(const int64_t ces[], int32_t cesLength,
         // Convenience: We cannot map to nothing, but we can map to a completely ignorable CE.
         // Do this here so that callers need not do it.
         return encodeOneCEAsCE32(0);
-    } else if(cesLength == 1) {
+    } if(cesLength == 1) {
         return encodeOneCE(ces[0], errorCode);
     } else if(cesLength == 2) {
         // Try to encode two CEs as one CE32.
@@ -1515,9 +1515,9 @@ CollationDataBuilder::getCEs(const UnicodeString &prefix, const UnicodeString &s
     int32_t prefixLength = prefix.length();
     if(prefixLength == 0) {
         return getCEs(s, 0, ces, cesLength);
-    } else {
+    } 
         return getCEs(prefix + s, prefixLength, ces, cesLength);
-    }
+    
 }
 
 int32_t

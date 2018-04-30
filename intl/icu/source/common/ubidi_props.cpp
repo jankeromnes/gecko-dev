@@ -147,7 +147,7 @@ getMirror(UChar32 c, uint16_t props) {
     int32_t delta=UBIDI_GET_MIRROR_DELTA(props);
     if(delta!=UBIDI_ESC_MIRROR_DELTA) {
         return c+delta;
-    } else {
+    } 
         /* look for mirror code point in the mirrors[] table */
         const uint32_t *mirrors;
         uint32_t m;
@@ -164,14 +164,14 @@ getMirror(UChar32 c, uint16_t props) {
             if(c==c2) {
                 /* found c, return its mirror code point using the index in m */
                 return UBIDI_GET_MIRROR_CODE_POINT(mirrors[UBIDI_GET_MIRROR_INDEX(m)]);
-            } else if(c<c2) {
+            } if(c<c2) {
                 break;
             }
         }
 
         /* c not found, return it itself */
         return c;
-    }
+    
 }
 
 U_CFUNC UChar32
@@ -226,9 +226,9 @@ ubidi_getPairedBracket(UChar32 c) {
     uint16_t props=UTRIE2_GET16(&ubidi_props_singleton.trie, c);
     if((props&UBIDI_BPT_MASK)==0) {
         return c;
-    } else {
+    } 
         return getMirror(c, props);
-    }
+    
 }
 
 /* public API (see uchar.h) ------------------------------------------------- */

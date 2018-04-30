@@ -22,7 +22,7 @@ int vpx_reader_init(vpx_reader *r, const uint8_t *buffer, size_t size,
                     vpx_decrypt_cb decrypt_cb, void *decrypt_state) {
   if (size && !buffer) {
     return 1;
-  } else {
+  } 
     r->buffer_end = buffer + size;
     r->buffer = buffer;
     r->value = 0;
@@ -32,7 +32,7 @@ int vpx_reader_init(vpx_reader *r, const uint8_t *buffer, size_t size,
     r->decrypt_state = decrypt_state;
     vpx_reader_fill(r);
     return vpx_read_bit(r) != 0;  // marker bit
-  }
+  
 }
 
 void vpx_reader_fill(vpx_reader *r) {

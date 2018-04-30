@@ -106,9 +106,9 @@ static sdp_result_e next_token(const char **string_of_tokens, char *token, unsig
       }
       if( flag2moveon ) {
           break;
-      } else {
+      } 
           *token++ = *str++;
-      }
+      
   }
 
   /* mark end of token */
@@ -166,7 +166,7 @@ verify_sdescriptions_mki (char *buf, char *mkiVal, uint16_t *mkiLen)
             mkiValBuf[idx] = 0;
             ptr++;
             break;
-        } else if ((isdigit((int) *ptr) && (idx < SDP_SRTP_MAX_MKI_SIZE_BYTES-1))) {
+        } if ((isdigit((int) *ptr) && (idx < SDP_SRTP_MAX_MKI_SIZE_BYTES-1))) {
              mkiValBuf[idx++] = *ptr;
         } else {
              return FALSE;
@@ -241,7 +241,7 @@ verify_sdescriptions_lifetime (char *buf)
             if (tokenFound) {
                 /* make sure we don't have multiple ^ */
                 return FALSE;
-            } else {
+            } 
                 tokenFound = TRUE;
                 /* Lifetime is in power of 2 format, make sure first and second
                  * chars are 2^
@@ -250,7 +250,7 @@ verify_sdescriptions_lifetime (char *buf)
                 if (buf[0] != '2' || buf[1] != '^') {
                     return FALSE;
                 }
-            }
+            
         } else if (!isdigit((int) *ptr)) {
                    return FALSE;
         }
@@ -629,10 +629,10 @@ void sdp_crypto_debug (char *buffer, ulong length_bytes)
                             }
                             sdp_dump_buffer((char*)star_string, star_count);
                             break;
-                        } else {
+                        } 
                             star_count++;
                             current++;
-                        }
+                        
                     }
                     /* Update start pointer */
                     start=current;
@@ -702,10 +702,10 @@ char * sdp_debug_msg_filter (char *buffer, ulong length_bytes)
                         if (*current == '|' || *current == '\n') {
                             /* Done */
                             break;
-                        } else {
+                        } 
                             *current = '*';
                             current++;
-                        }
+                        
                     }
                 }
             }

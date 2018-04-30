@@ -109,7 +109,7 @@ int ff_flac_decode_frame_header(AVCodecContext *avctx, GetBitContext *gb,
         av_log(avctx, AV_LOG_ERROR + log_level_offset,
                "reserved blocksize code: 0\n");
         return AVERROR_INVALIDDATA;
-    } else if (bs_code == 6) {
+    } if (bs_code == 6) {
         fi->blocksize = get_bits(gb, 8) + 1;
     } else if (bs_code == 7) {
         fi->blocksize = get_bits(gb, 16) + 1;

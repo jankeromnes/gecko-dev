@@ -236,7 +236,7 @@ static INLINE int get_sync_range(int width) {
   // video, using 4 gives best performance.
   if (width < 640)
     return 1;
-  else if (width <= 1280)
+  if (width <= 1280)
     return 2;
   else if (width <= 4096)
     return 4;

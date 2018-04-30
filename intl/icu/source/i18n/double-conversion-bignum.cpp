@@ -673,11 +673,11 @@ int Bignum::PlusCompare(const Bignum& a, const Bignum& b, const Bignum& c) {
     Chunk sum = chunk_a + chunk_b;
     if (sum > chunk_c + borrow) {
       return +1;
-    } else {
+    } 
       borrow = chunk_c + borrow - sum;
       if (borrow > 1) return -1;
       borrow <<= kBigitSize;
-    }
+    
   }
   if (borrow == 0) return 0;
   return -1;

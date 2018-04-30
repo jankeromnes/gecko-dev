@@ -674,10 +674,10 @@ unsigned int TStorageQualifierWrapper::getRank() const
     {
         return 3u;
     }
-    else
-    {
+    
+    
         return 4u;
-    }
+    
 }
 
 unsigned int TMemoryQualifierWrapper::getRank() const

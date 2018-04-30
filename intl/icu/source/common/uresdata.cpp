@@ -372,7 +372,7 @@ UBool isNoInheritanceMarker(const ResourceData *pResData, Resource res) {
         int32_t first=*p;
         if (first == 0x2205) {  // implicit length
             return p[1] == 0x2205 && p[2] == 0x2205 && p[3] == 0;
-        } else if (first == 0xdc03) {  // explicit length 3 (should not occur)
+        } if (first == 0xdc03) {  // explicit length 3 (should not occur)
             return p[1] == 0x2205 && p[2] == 0x2205 && p[3] == 0x2205;
         } else {
             // Assume that the string has not been stored with more length units than necessary.
@@ -867,9 +867,9 @@ res_getArrayItem(const ResourceData *pResData, Resource array, int32_t indexR) {
 uint32_t icu::ResourceArray::internalGetResource(const ResourceData *pResData, int32_t i) const {
     if (items16 != NULL) {
         return makeResourceFrom16(pResData, items16[i]);
-    } else {
+    } 
         return items32[i];
-    }
+    
 }
 
 UBool icu::ResourceArray::getValue(int32_t i, icu::ResourceValue &value) const {
@@ -1054,10 +1054,10 @@ ures_swapResource(const UDataSwapper *ds,
     if(pTempTable->resFlags[offset>>5]&((uint32_t)1<<(offset&0x1f))) {
         /* we already swapped this resource item */
         return;
-    } else {
+    } 
         /* mark it as swapped now */
         pTempTable->resFlags[offset>>5]|=((uint32_t)1<<(offset&0x1f));
-    }
+    
 
     p=inBundle+offset;
     q=outBundle+offset;

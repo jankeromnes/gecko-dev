@@ -104,7 +104,7 @@ int32_t binarySearch(const UVector &list, const UnicodeString &s, const Collator
         UCollationResult cmp = coll.compare(s, *si, errorCode);
         if (cmp == UCOL_EQUAL) {
             return i;
-        } else if (cmp < 0) {
+        } if (cmp < 0) {
             if (i == start) {
                 return ~start;  // insert s before *si
             }
@@ -197,9 +197,9 @@ const AlphabeticIndex::Bucket *
 AlphabeticIndex::ImmutableIndex::getBucket(int32_t index) const {
     if (0 <= index && index < buckets_->getBucketCount()) {
         return icu::getBucket(*buckets_->immutableVisibleList_, index);
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 AlphabeticIndex::AlphabeticIndex(const Locale &locale, UErrorCode &status)
@@ -1136,27 +1136,27 @@ UBool AlphabeticIndex::nextBucket(UErrorCode &status) {
 const UnicodeString &AlphabeticIndex::getBucketLabel() const {
     if (currentBucket_ != NULL) {
         return currentBucket_->label_;
-    } else {
+    } 
         return emptyString_;
-    }
+    
 }
 
 
 UAlphabeticIndexLabelType AlphabeticIndex::getBucketLabelType() const {
     if (currentBucket_ != NULL) {
         return currentBucket_->labelType_;
-    } else {
+    } 
         return U_ALPHAINDEX_NORMAL;
-    }
+    
 }
 
 
 int32_t AlphabeticIndex::getBucketRecordCount() const {
     if (currentBucket_ != NULL && currentBucket_->records_ != NULL) {
         return currentBucket_->records_->size();
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 

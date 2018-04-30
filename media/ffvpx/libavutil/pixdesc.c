@@ -2600,7 +2600,7 @@ static int get_pix_fmt_score(enum AVPixelFormat dst_pix_fmt,
         (dst_desc->flags & AV_PIX_FMT_FLAG_HWACCEL)) {
         if (dst_pix_fmt == src_pix_fmt)
             return -1;
-        else
+        
             return -2;
     }
 

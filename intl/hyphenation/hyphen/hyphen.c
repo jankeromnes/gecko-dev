@@ -258,7 +258,7 @@ void hnj_hyphen_load_line(char * buf, HyphenDict * dict, HashTab * hashtab) {
 	  if (strncmp(buf, "LEFTHYPHENMIN", 13) == 0) {
 	    dict->lhmin = atoi(buf + 13);
 	    return;
-	  } else if (strncmp(buf, "RIGHTHYPHENMIN", 14) == 0) {
+	  } if (strncmp(buf, "RIGHTHYPHENMIN", 14) == 0) {
 	    dict->rhmin = atoi(buf + 14);
 	    return;
 	  } else if (strncmp(buf, "COMPOUNDLEFTHYPHENMIN", 21) == 0) {
@@ -454,7 +454,7 @@ for (k = 0; k < 2; k++) {
       if (strncmp(buf, "NEXTLEVEL", 9) == 0) {
         nextlevel = 1;
         break;
-      } else if (buf[0] != '%') {
+      } if (buf[0] != '%') {
         hnj_hyphen_load_line(buf, dict[k], hashtab);
       }
     }

@@ -239,7 +239,7 @@ bocu1Prev(int32_t c) {
     if(/* 0x3040<=c && */ c<=0x309f) {
         /* Hiragana is not 128-aligned */
         return 0x3070;
-    } else if(0x4e00<=c && c<=0x9fa5) {
+    } if(0x4e00<=c && c<=0x9fa5) {
         /* CJK Unihan */
         return 0x4e00-BOCU1_REACH_NEG_2;
     } else if(0xac00<=c /* && c<=0xd7a3 */) {
@@ -945,7 +945,7 @@ decodeBocu1TrailByte(int32_t count, int32_t b) {
     /* add trail byte into difference and decrement count */
     if(count==1) {
         return b;
-    } else if(count==2) {
+    } if(count==2) {
         return b*BOCU1_TRAIL_COUNT;
     } else /* count==3 */ {
         return b*(BOCU1_TRAIL_COUNT*BOCU1_TRAIL_COUNT);

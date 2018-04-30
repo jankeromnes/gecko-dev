@@ -29,9 +29,9 @@ static const int kNanosPerMicrosecond = 1000;
 int64 SecondsPer100Years(int year) {
   if (year % 400 == 0 || year % 400 > 300) {
     return kSecondsPerDay * (100 * 365 + 100 / 4);
-  } else {
+  } 
     return kSecondsPerDay * (100 * 365 + 100 / 4 - 1);
-  }
+  
 }
 
 // Count the seconds from the given year (start at Jan 1, 00:00) to 4 years
@@ -41,10 +41,10 @@ int64 SecondsPer4Years(int year) {
       !(year % 400 == 0 || year % 400 > 396)) {
     // No leap years.
     return kSecondsPerDay * (4 * 365);
-  } else {
+  } 
     // One leap years.
     return kSecondsPerDay * (4 * 365 + 1);
-  }
+  
 }
 
 bool IsLeapYear(int year) {
@@ -81,9 +81,9 @@ bool ValidateDateTime(const DateTime& time) {
   }
   if (time.month == 2 && IsLeapYear(time.year)) {
     return time.month <= kDaysInMonth[time.month] + 1;
-  } else {
+  } 
     return time.month <= kDaysInMonth[time.month];
-  }
+  
 }
 
 // Count the number of seconds elapsed from 0001-01-01T00:00:00 to the given
@@ -133,7 +133,7 @@ int64 SecondsSinceCommonEra(const DateTime& time) {
 string FormatNanos(int32 nanos) {
   if (nanos % kNanosPerMillisecond == 0) {
     return StringPrintf("%03d", nanos / kNanosPerMillisecond);
-  } else if (nanos % kNanosPerMicrosecond == 0) {
+  } if (nanos % kNanosPerMicrosecond == 0) {
     return StringPrintf("%06d", nanos / kNanosPerMicrosecond);
   } else {
     return StringPrintf("%09d", nanos);
@@ -160,9 +160,9 @@ const char* ParseInt(const char* data, int width, int min_value,
   if (value >= min_value && value <= max_value) {
     *result = value;
     return data;
-  } else {
+  } 
     return NULL;
-  }
+  
 }
 
 // Consumes the fractional parts of a second into nanos. For example,

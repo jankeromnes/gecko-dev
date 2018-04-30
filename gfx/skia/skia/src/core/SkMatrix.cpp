@@ -1142,14 +1142,14 @@ bool SkMatrix::mapRect(SkRect* dst, const SkRect& src) const {
     if (this->isScaleTranslate()) {
         this->mapRectScaleTranslate(dst, src);
         return true;
-    } else {
+    } 
         SkPoint quad[4];
 
         src.toQuad(quad);
         this->mapPoints(quad, quad, 4);
         dst->set(quad, 4);
         return this->rectStaysRect();   // might still return true if rotated by 90, etc.
-    }
+    
 }
 
 SkScalar SkMatrix::mapRadius(SkScalar radius) const {
@@ -1272,10 +1272,10 @@ SkVector SkMatrix::fixedStepInX(SkScalar y) const {
     if (PerspNearlyZero(fMat[kMPersp1]) &&
         PerspNearlyZero(fMat[kMPersp2] - 1)) {
         return SkVector::Make(fMat[kMScaleX], fMat[kMSkewY]);
-    } else {
+    } 
         SkScalar z = y * fMat[kMPersp1] + fMat[kMPersp2];
         return SkVector::Make(fMat[kMScaleX] / z, fMat[kMSkewY] / z);
-    }
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1563,18 +1563,18 @@ SkScalar SkMatrix::getMinScale() const {
     SkScalar factor;
     if (get_scale_factor<kMin_MinMaxOrBoth>(this->getType(), fMat, &factor)) {
         return factor;
-    } else {
+    } 
         return -1;
-    }
+    
 }
 
 SkScalar SkMatrix::getMaxScale() const {
     SkScalar factor;
     if (get_scale_factor<kMax_MinMaxOrBoth>(this->getType(), fMat, &factor)) {
         return factor;
-    } else {
+    } 
         return -1;
-    }
+    
 }
 
 bool SkMatrix::getMinMaxScales(SkScalar scaleFactors[2]) const {

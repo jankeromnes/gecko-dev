@@ -44,10 +44,10 @@ sdp_result_e sdp_build_version (sdp_t *sdp_p, uint16_t level, flex_string *fs)
                         "build failed.", sdp_p->debug_str);
             sdp_p->conf_p->num_invalid_param++;
             return (SDP_INVALID_PARAMETER);
-        } else {
+        } 
             /* v= line is not required. */
             return (SDP_SUCCESS);
-        }
+        
     }
 
     flex_string_sprintf(fs, "v=%u\r\n", (unsigned)sdp_p->version);
@@ -240,10 +240,10 @@ sdp_result_e sdp_build_owner (sdp_t *sdp_p, uint16_t level, flex_string *fs)
                         "build failed.", sdp_p->debug_str);
             sdp_p->conf_p->num_invalid_param++;
             return (SDP_INVALID_PARAMETER);
-        } else {
+        } 
             /* o= line is not required. */
             return (SDP_SUCCESS);
-        }
+        
     }
 
     flex_string_sprintf(fs, "o=%s %s %s %s %s %s\r\n",
@@ -295,10 +295,10 @@ sdp_result_e sdp_build_sessname (sdp_t *sdp_p, uint16_t level, flex_string *fs)
                         "build failed.", sdp_p->debug_str);
             sdp_p->conf_p->num_invalid_param++;
             return (SDP_INVALID_PARAMETER);
-        } else {
+        } 
             /* s= line is not required. */
             return (SDP_SUCCESS);
-        }
+        
     }
 
     flex_string_sprintf(fs, "s=%s\r\n", sdp_p->sessname);
@@ -503,13 +503,13 @@ sdp_result_e sdp_parse_connection (sdp_t *sdp_p, uint16_t level, const char *ptr
                           sdp_get_network_name(conn_p->nettype));
             }
             return (SDP_SUCCESS);
-        } else {
+        } 
             sdp_parse_error(sdp_p,
                 "%s No connection address type specified for "
                 "c=.", sdp_p->debug_str);
             sdp_p->conf_p->num_invalid_param++;
             return (SDP_INVALID_PARAMETER);
-        }
+        
     }
     conn_p->addrtype = SDP_AT_UNSUPPORTED;
     for (i=0; i < SDP_MAX_ADDR_TYPES; i++) {
@@ -931,10 +931,10 @@ sdp_result_e sdp_build_timespec (sdp_t *sdp_p, uint16_t level, flex_string *fs)
                         "build failed.", sdp_p->debug_str);
             sdp_p->conf_p->num_invalid_param++;
             return (SDP_INVALID_PARAMETER);
-        } else {
+        } 
             /* t= line not required. */
             return (SDP_SUCCESS);
-        }
+        
     }
 
     /* Note: We only support one t= line currently. */

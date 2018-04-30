@@ -334,10 +334,10 @@ int av_escape(char **dst, const char *src, const char *special_chars,
     if (!av_bprint_is_complete(&dstbuf)) {
         av_bprint_finalize(&dstbuf, NULL);
         return AVERROR(ENOMEM);
-    } else {
+    } 
         av_bprint_finalize(&dstbuf, dst);
         return dstbuf.len;
-    }
+    
 }
 
 int av_match_name(const char *name, const char *names)

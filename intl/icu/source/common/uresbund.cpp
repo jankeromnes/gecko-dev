@@ -135,10 +135,10 @@ static const ResourceData *getFallbackData(const UResourceBundle* resBundle, con
             }
             *realData = resB;
             return (&(resB->fData));
-        } else { /* If resource is not found, we need to give an error */
+        } /* If resource is not found, we need to give an error */
             *status = U_MISSING_RESOURCE_ERROR;
             return NULL;
-        }
+        
     } else {
             *status = U_MISSING_RESOURCE_ERROR;
             return NULL;
@@ -722,9 +722,9 @@ finishUnlock:
             *status = intStatus;  
         }
         return r;
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 /**
@@ -1289,9 +1289,9 @@ ures_toUTF8String(const UChar *s16, int32_t length16,
         if (forceCopy) {
             u_terminateChars(dest, capacity, 0, status);
             return dest;
-        } else {
+        } 
             return "";
-        }
+        
     } else {
         /* We need to transform the string to the destination buffer. */
         if (capacity < length16) {
@@ -1429,9 +1429,9 @@ static const UChar* ures_getStringWithAlias(const UResourceBundle *resB, Resourc
     result = ures_getString(tempRes, len, status);
     ures_close(tempRes);
     return result;
-  } else {
+  } 
     return res_getString(&(resB->fResData), r, len); 
-  }
+  
 }
 
 U_CAPI void U_EXPORT2 ures_resetIterator(UResourceBundle *resB){
@@ -2002,9 +2002,9 @@ U_CAPI UResourceBundle* U_EXPORT2 ures_getByKey(const UResourceBundle *resB, con
                 if(U_SUCCESS(*status)) {
                   /* check if resB->fResPath gives the right name here */
                     return init_resb_result(rd, res, key, -1, realData, resB, 0, fillIn, status);
-                } else {
+                } 
                     *status = U_MISSING_RESOURCE_ERROR;
-                }
+                
             } else {
                 *status = U_MISSING_RESOURCE_ERROR;
             }
@@ -2139,9 +2139,9 @@ ures_getLocaleInternal(const UResourceBundle* resourceBundle, UErrorCode* status
     if (!resourceBundle) {
         *status = U_ILLEGAL_ARGUMENT_ERROR;
         return NULL;
-    } else {
+    } 
       return resourceBundle->fData->fName;
-    }
+    
 }
 
 U_CAPI const char* U_EXPORT2 
@@ -2162,7 +2162,7 @@ ures_getLocaleByType(const UResourceBundle* resourceBundle,
     if (!resourceBundle) {
         *status = U_ILLEGAL_ARGUMENT_ERROR;
         return NULL;
-    } else {
+    } 
         switch(type) {
         case ULOC_ACTUAL_LOCALE:
             return resourceBundle->fData->fName;
@@ -2173,7 +2173,7 @@ ures_getLocaleByType(const UResourceBundle* resourceBundle,
             *status = U_ILLEGAL_ARGUMENT_ERROR;
             return NULL;
         }
-    }
+    
 }
 
 U_CFUNC const char* ures_getName(const UResourceBundle* resB) {
@@ -2307,11 +2307,11 @@ ures_countArrayItems(const UResourceBundle* resourceBundle,
         int32_t result = res_countArrayItems(&resData.fResData, resData.fRes);
         ures_close(&resData);
         return result;
-    } else {
+    } 
         *status = U_MISSING_RESOURCE_ERROR;
         ures_close(&resData);
         return 0;
-    }
+    
 }
 
 /**

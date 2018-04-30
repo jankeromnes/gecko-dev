@@ -99,11 +99,11 @@ static int write_skip(const VP9_COMMON *cm, const MACROBLOCKD *const xd,
                       int segment_id, const MODE_INFO *mi, vpx_writer *w) {
   if (segfeature_active(&cm->seg, segment_id, SEG_LVL_SKIP)) {
     return 1;
-  } else {
+  } 
     const int skip = mi->skip;
     vpx_write(w, skip, vp9_get_skip_prob(cm, xd));
     return skip;
-  }
+  
 }
 
 static void update_skip_probs(VP9_COMMON *cm, vpx_writer *w,
@@ -903,7 +903,7 @@ int vp9_get_refresh_mask(VP9_COMP *cpi) {
     // (like RTC/temporal scalability).
     return (cpi->refresh_last_frame << cpi->lst_fb_idx) |
            (cpi->refresh_golden_frame << cpi->alt_fb_idx);
-  } else {
+  } 
     int arf_idx = cpi->alt_fb_idx;
     if ((cpi->oxcf.pass == 2) && cpi->multi_arf_allowed) {
       const GF_GROUP *const gf_group = &cpi->twopass.gf_group;
@@ -912,7 +912,7 @@ int vp9_get_refresh_mask(VP9_COMP *cpi) {
     return (cpi->refresh_last_frame << cpi->lst_fb_idx) |
            (cpi->refresh_golden_frame << cpi->gld_fb_idx) |
            (cpi->refresh_alt_ref_frame << arf_idx);
-  }
+  
 }
 
 static int encode_tile_worker(VP9_COMP *cpi, VP9BitstreamWorkerData *data) {

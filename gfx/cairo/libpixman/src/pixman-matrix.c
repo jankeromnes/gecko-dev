@@ -178,10 +178,10 @@ fixed_112_16_to_fixed_48_16 (int64_t hi, int64_t lo, pixman_bool_t *clampflag)
         *clampflag = TRUE;
         return hi >= 0 ? INT64_MAX : INT64_MIN;
     }
-    else
-    {
+    
+    
         return lo;
-    }
+    
 }
 
 /*

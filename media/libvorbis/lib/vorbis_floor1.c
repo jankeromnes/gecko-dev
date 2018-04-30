@@ -505,11 +505,11 @@ static int fit_line(lsfit_acc *a,int fits,int *y0,int *y1,
       if(*y1<0)*y1=0;
 
       return 0;
-    }else{
+    }
       *y0=0;
       *y1=0;
       return 1;
-    }
+    
   }
 }
 

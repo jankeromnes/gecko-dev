@@ -262,9 +262,9 @@ udata_swapInvStringBlock(const UDataSwapper *ds,
     /* return the length including padding bytes */
     if(U_SUCCESS(*pErrorCode)) {
         return length;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 U_CAPI void U_EXPORT2

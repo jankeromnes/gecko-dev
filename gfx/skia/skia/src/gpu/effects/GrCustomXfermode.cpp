@@ -353,10 +353,10 @@ GrXPFactory::AnalysisProperties CustomXPFactory::analysisProperties(
     if (can_use_hw_blend_equation(fHWBlendEquation, coverage, caps)) {
         if (caps.blendEquationSupport() == GrCaps::kAdvancedCoherent_BlendEquationSupport) {
             return AnalysisProperties::kCompatibleWithAlphaAsCoverage;
-        } else {
+        } 
             return AnalysisProperties::kCompatibleWithAlphaAsCoverage |
                    AnalysisProperties::kRequiresBarrierBetweenOverlappingDraws;
-        }
+        
     }
     return AnalysisProperties::kCompatibleWithAlphaAsCoverage |
            AnalysisProperties::kReadsDstInShader;

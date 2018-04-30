@@ -1304,7 +1304,7 @@ uprv_convertToLCID(const char *langID, const char* posixID, UErrorCode* status)
         if (myStatus == U_ZERO_ERROR) {
             return value;
         }
-        else if (myStatus == U_USING_FALLBACK_WARNING) {
+        if (myStatus == U_USING_FALLBACK_WARNING) {
             fallbackValue = value;
         }
     }

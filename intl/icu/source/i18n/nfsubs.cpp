@@ -102,9 +102,9 @@ public:
     virtual double transformNumber(double number) const {
         if (getRuleSet()) {
             return uprv_floor(number / divisor);
-        } else {
+        } 
             return number / divisor;
-        }
+        
     }
 
     virtual double composeRuleValue(double newRuleValue, double /*oldRuleValue*/) const {
@@ -762,10 +762,10 @@ NFSubstitution::doParse(const UnicodeString& text,
         result.setDouble(tempResult);
         return TRUE;
         // if the parse was UNsuccessful, return 0
-    } else {
+    } 
         result.setLong(0);
         return FALSE;
-    }
+    
 }
 
     /**
@@ -946,7 +946,7 @@ ModulusSubstitution::doParse(const UnicodeString& text,
         // but if it IS a >>> substitution, we have to do it here: we
         // use the specific rule's doParse() method, and then we have to
         // do some of the other work of NFRuleSet.parse()
-    } else {
+    } 
         ruleToUse->doParse(text, parsePosition, FALSE, upperBound, nonNumericalExecutedRuleMask, result);
 
         if (parsePosition.getIndex() != 0) {
@@ -957,7 +957,7 @@ ModulusSubstitution::doParse(const UnicodeString& text,
         }
 
         return TRUE;
-    }
+    
 }
 /**
  * Returns a textual description of the substitution
@@ -1135,7 +1135,7 @@ FractionalPartSubstitution::doParse(const UnicodeString& text,
         // using this substitution's owning rule set (we do this by setting
         // upperBound to 10 when calling doParse() ) until we reach
         // nonmatching text
-    } else {
+    } 
         UnicodeString workText(text);
         ParsePosition workPos(1);
         double result = 0;
@@ -1187,7 +1187,7 @@ FractionalPartSubstitution::doParse(const UnicodeString& text,
         result = composeRuleValue(result, baseValue);
         resVal.setDouble(result);
         return TRUE;
-    }
+    
 }
 
 UBool

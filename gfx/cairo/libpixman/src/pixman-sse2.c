@@ -501,7 +501,7 @@ core_combine_over_u_pixel_sse2 (uint32_t src, uint32_t dst)
     {
 	return src;
     }
-    else if (src)
+    if (src)
     {
 	xmms = unpack_32_1x128 (src);
 	return pack_1x128_32 (
@@ -817,7 +817,7 @@ core_combine_in_u_pixel_sse2 (uint32_t src, uint32_t dst)
     {
 	return 0;
     }
-    else if (maska != 0xff)
+    if (maska != 0xff)
     {
 	return pack_1x128_32 (
 	    pix_multiply_1x128 (unpack_32_1x128 (dst),

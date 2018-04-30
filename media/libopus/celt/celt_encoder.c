@@ -931,12 +931,12 @@ static opus_val16 median_of_5(const opus_val16 *x)
    {
       if (t1 < t3)
          return MIN16(t2, t3);
-      else
+      
          return MIN16(t4, t1);
    } else {
       if (t2 < t3)
          return MIN16(t1, t3);
-      else
+      
          return MIN16(t2, t4);
    }
 }
@@ -955,7 +955,7 @@ static opus_val16 median_of_3(const opus_val16 *x)
    t2 = x[2];
    if (t1 < t2)
       return t1;
-   else if (t0 < t2)
+   if (t0 < t2)
       return t2;
    else
       return t0;
@@ -1096,10 +1096,10 @@ static opus_val16 dynalloc_analysis(const opus_val16 *bandLogE, const opus_val16
             offsets[i] = cap-tot_boost;
             tot_boost = cap;
             break;
-         } else {
+         } 
             offsets[i] = boost;
             tot_boost += boost_bits;
-         }
+         
       }
    }
    *tot_boost_ = tot_boost;
@@ -2261,7 +2261,7 @@ int celt_encode_with_ec(CELTEncoder * OPUS_RESTRICT st, const opus_val16 * pcm, 
    RESTORE_STACK;
    if (ec_get_error(enc))
       return OPUS_INTERNAL_ERROR;
-   else
+   
       return nbCompressedBytes;
 }
 

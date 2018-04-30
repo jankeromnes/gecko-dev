@@ -400,7 +400,7 @@ int WebRtcAecm_ProcessBlock(AecmCore* aecm,
   {
     return -1;
   }
-  else if (delay == -2)
+  if (delay == -2)
   {
     // If the delay is unknown, we assume zero.
     // NOTE: this will have to be adjusted if we ever add lookahead.

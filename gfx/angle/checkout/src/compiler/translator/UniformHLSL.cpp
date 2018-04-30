@@ -30,10 +30,10 @@ static const char *UniformRegisterPrefix(const TType &type)
     {
         return "s";
     }
-    else
-    {
+    
+    
         return "c";
-    }
+    
 }
 
 static TString InterfaceBlockFieldTypeString(const TField &field, TLayoutBlockStorage blockStorage)
@@ -50,7 +50,7 @@ static TString InterfaceBlockFieldTypeString(const TField &field, TLayoutBlockSt
             (matrixPacking == EmpRowMajor ? "column_major" : "row_major");
         return matrixPackString + " " + TypeString(fieldType);
     }
-    else if (structure)
+    if (structure)
     {
         // Use HLSL row-major packing for GLSL column-major matrices
         return QualifiedStructNameString(*structure, matrixPacking == EmpColumnMajor,
@@ -537,10 +537,10 @@ TString UniformHLSL::UniformBlockInstanceString(const ImmutableString &instanceN
     {
         return DecoratePrivate(instanceName) + "_" + str(arrayIndex);
     }
-    else
-    {
+    
+    
         return Decorate(instanceName);
-    }
+    
 }
 
 TString UniformHLSL::uniformBlockMembersString(const TInterfaceBlock &interfaceBlock,

@@ -95,11 +95,11 @@ static uint32_t read_u32(struct mem_source *mem, size_t offset)
 	if (offset > mem->size - 4) {
 		invalid_source(mem, "Invalid offset");
 		return 0;
-	} else {
+	} 
 		be32 k;
 		memcpy(&k, mem->buf + offset, sizeof(k));
 		return be32_to_cpu(k);
-	}
+	
 }
 
 static uint16_t read_u16(struct mem_source *mem, size_t offset)
@@ -107,11 +107,11 @@ static uint16_t read_u16(struct mem_source *mem, size_t offset)
 	if (offset > mem->size - 2) {
 		invalid_source(mem, "Invalid offset");
 		return 0;
-	} else {
+	} 
 		be16 k;
 		memcpy(&k, mem->buf + offset, sizeof(k));
 		return be16_to_cpu(k);
-	}
+	
 }
 
 static uint8_t read_u8(struct mem_source *mem, size_t offset)
@@ -119,9 +119,9 @@ static uint8_t read_u8(struct mem_source *mem, size_t offset)
 	if (offset > mem->size - 1) {
 		invalid_source(mem, "Invalid offset");
 		return 0;
-	} else {
+	} 
 		return *(uint8_t*)(mem->buf + offset);
-	}
+	
 }
 
 static s15Fixed16Number read_s15Fixed16Number(struct mem_source *mem, size_t offset)
@@ -495,9 +495,9 @@ static struct curveType *read_tag_curveType(struct mem_source *src, struct tag_i
 	if (tag) {
 		uint32_t len;
 		return read_curveType(src, tag->offset, &len);
-	} else {
+	} 
 		invalid_source(src, "missing curvetag");
-	}
+	
 
 	return curve;
 }
@@ -878,7 +878,7 @@ static uint16_t float_to_u8Fixed8Number(float a)
 {
 	if (a > (255.f + 255.f/256))
 		return 0xffff;
-	else if (a < 0.f)
+	if (a < 0.f)
 		return 0;
 	else
 		return floorf(a*256.f + .5f);

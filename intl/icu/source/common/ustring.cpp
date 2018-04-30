@@ -86,9 +86,9 @@ u_strFindFirst(const UChar *s, int32_t length,
                     if((cq=*q)==0) {
                         if(isMatchAtCPBoundary(start, s-1, p, NULL)) {
                             return (UChar *)(s-1); /* well-formed match */
-                        } else {
+                        } 
                             break; /* no match because surrogate pair is split */
-                        }
+                        
                     }
                     if((c=*p)==0) {
                         return NULL; /* no match, and none possible after s */
@@ -134,9 +134,9 @@ u_strFindFirst(const UChar *s, int32_t length,
                     if(q==subLimit) {
                         if(isMatchAtCPBoundary(start, s-1, p, NULL)) {
                             return (UChar *)(s-1); /* well-formed match */
-                        } else {
+                        } 
                             break; /* no match because surrogate pair is split */
-                        }
+                        
                     }
                     if((c=*p)==0) {
                         return NULL; /* no match, and none possible after s */
@@ -172,9 +172,9 @@ u_strFindFirst(const UChar *s, int32_t length,
                     if(q==subLimit) {
                         if(isMatchAtCPBoundary(start, s-1, p, limit)) {
                             return (UChar *)(s-1); /* well-formed match */
-                        } else {
+                        } 
                             break; /* no match because surrogate pair is split */
-                        }
+                        
                     }
                     if(*p!=*q) {
                         break; /* no match */
@@ -200,7 +200,7 @@ u_strchr(const UChar *s, UChar c) {
     if(U16_IS_SURROGATE(c)) {
         /* make sure to not find half of a surrogate pair */
         return u_strFindFirst(s, -1, &c, 1);
-    } else {
+    } 
         UChar cs;
 
         /* trivial search for a BMP code point */
@@ -213,7 +213,7 @@ u_strchr(const UChar *s, UChar c) {
             }
             ++s;
         }
-    }
+    
 }
 
 U_CAPI UChar * U_EXPORT2
@@ -221,7 +221,7 @@ u_strchr32(const UChar *s, UChar32 c) {
     if((uint32_t)c<=U_BMP_MAX) {
         /* find BMP code point */
         return u_strchr(s, (UChar)c);
-    } else if((uint32_t)c<=UCHAR_MAX_VALUE) {
+    } if((uint32_t)c<=UCHAR_MAX_VALUE) {
         /* find supplementary code point as surrogate pair */
         UChar cs, lead=U16_LEAD(c), trail=U16_TRAIL(c);
 
@@ -241,7 +241,7 @@ U_CAPI UChar * U_EXPORT2
 u_memchr(const UChar *s, UChar c, int32_t count) {
     if(count<=0) {
         return NULL; /* no string */
-    } else if(U16_IS_SURROGATE(c)) {
+    } if(U16_IS_SURROGATE(c)) {
         /* make sure to not find half of a surrogate pair */
         return u_strFindFirst(s, count, &c, 1);
     } else {
@@ -261,7 +261,7 @@ u_memchr32(const UChar *s, UChar32 c, int32_t count) {
     if((uint32_t)c<=U_BMP_MAX) {
         /* find BMP code point */
         return u_memchr(s, (UChar)c, count);
-    } else if(count<2) {
+    } if(count<2) {
         /* too short for a surrogate pair */
         return NULL;
     } else if((uint32_t)c<=UCHAR_MAX_VALUE) {
@@ -348,9 +348,9 @@ u_strFindLast(const UChar *s, int32_t length,
                 if(q==sub) {
                     if(isMatchAtCPBoundary(start, p, limit+1, start+length)) {
                         return (UChar *)p; /* well-formed match */
-                    } else {
+                    } 
                         break; /* no match because surrogate pair is split */
-                    }
+                    
                 }
                 if(*(--p)!=*(--q)) {
                     break; /* no match */
@@ -373,7 +373,7 @@ u_strrchr(const UChar *s, UChar c) {
     if(U16_IS_SURROGATE(c)) {
         /* make sure to not find half of a surrogate pair */
         return u_strFindLast(s, -1, &c, 1);
-    } else {
+    } 
         const UChar *result=NULL;
         UChar cs;
 
@@ -387,7 +387,7 @@ u_strrchr(const UChar *s, UChar c) {
             }
             ++s;
         }
-    }
+    
 }
 
 U_CAPI UChar * U_EXPORT2
@@ -395,7 +395,7 @@ u_strrchr32(const UChar *s, UChar32 c) {
     if((uint32_t)c<=U_BMP_MAX) {
         /* find BMP code point */
         return u_strrchr(s, (UChar)c);
-    } else if((uint32_t)c<=UCHAR_MAX_VALUE) {
+    } if((uint32_t)c<=UCHAR_MAX_VALUE) {
         /* find supplementary code point as surrogate pair */
         const UChar *result=NULL;
         UChar cs, lead=U16_LEAD(c), trail=U16_TRAIL(c);
@@ -416,7 +416,7 @@ U_CAPI UChar * U_EXPORT2
 u_memrchr(const UChar *s, UChar c, int32_t count) {
     if(count<=0) {
         return NULL; /* no string */
-    } else if(U16_IS_SURROGATE(c)) {
+    } if(U16_IS_SURROGATE(c)) {
         /* make sure to not find half of a surrogate pair */
         return u_strFindLast(s, count, &c, 1);
     } else {
@@ -436,7 +436,7 @@ u_memrchr32(const UChar *s, UChar32 c, int32_t count) {
     if((uint32_t)c<=U_BMP_MAX) {
         /* find BMP code point */
         return u_memrchr(s, (UChar)c, count);
-    } else if(count<2) {
+    } if(count<2) {
         /* too short for a surrogate pair */
         return NULL;
     } else if((uint32_t)c<=UCHAR_MAX_VALUE) {
@@ -543,9 +543,9 @@ u_strpbrk(const UChar *string, const UChar *matchSet)
     int32_t idx = _matchFromSet(string, matchSet, TRUE);
     if(idx >= 0) {
         return (UChar *)string + idx;
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 /* Search for a codepoint in a string that matches one of the matchSet codepoints. */
@@ -555,9 +555,9 @@ u_strcspn(const UChar *string, const UChar *matchSet)
     int32_t idx = _matchFromSet(string, matchSet, TRUE);
     if(idx >= 0) {
         return idx;
-    } else {
+    } 
         return -idx - 1; /* == u_strlen(string) */
-    }
+    
 }
 
 /* Search for a codepoint in a string that does not match one of the matchSet codepoints. */
@@ -567,9 +567,9 @@ u_strspn(const UChar *string, const UChar *matchSet)
     int32_t idx = _matchFromSet(string, matchSet, FALSE);
     if(idx >= 0) {
         return idx;
-    } else {
+    } 
         return -idx - 1; /* == u_strlen(string) */
-    }
+    
 }
 
 /* ----- Text manipulation functions --- */
@@ -609,7 +609,7 @@ u_strtok_r(UChar    *src,
             *saveState = nextToken;
             return tokSource;
         }
-        else if (*saveState) {
+        if (*saveState) {
             /* Return the last token */
             *saveState = NULL;
             return tokSource;
@@ -660,9 +660,9 @@ u_strncat(UChar     *dst,
         }
 
         return anchor;
-    } else {
+    } 
         return dst;
-    }
+    
 }
 
 /* ----- Text property functions --- */
@@ -1308,7 +1308,7 @@ u_unescapeAt(UNESCAPE_CHAR_AT charAt,
     for (i=0; i<UNESCAPE_MAP_LENGTH; i+=2) {
         if (c == UNESCAPE_MAP[i]) {
             return UNESCAPE_MAP[i+1];
-        } else if (c < UNESCAPE_MAP[i]) {
+        } if (c < UNESCAPE_MAP[i]) {
             break;
         }
     }

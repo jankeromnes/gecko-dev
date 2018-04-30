@@ -272,9 +272,9 @@ PluralRules::select(const IFixedDecimal &number) const {
     if (mRules == NULL) {
         return UnicodeString(TRUE, PLURAL_DEFAULT_RULE, -1);
     }
-    else {
+    
         return mRules->select(number);
-    }
+    
 }
 
 UnicodeString
@@ -1048,9 +1048,9 @@ RuleChain::getKeywords(int32_t capacityOfKeywords, UnicodeString* keywords, int3
     if ( fNext != NULL ) {
         return fNext->getKeywords(capacityOfKeywords, keywords, arraySize);
     }
-    else {
+    
         return U_ZERO_ERROR;
-    }
+    
 }
 
 UBool
@@ -1062,9 +1062,9 @@ RuleChain::isKeyword(const UnicodeString& keywordParam) const {
     if ( fNext != NULL ) {
         return fNext->isKeyword(keywordParam);
     }
-    else {
+    
         return FALSE;
-    }
+    
 }
 
 
@@ -1614,9 +1614,9 @@ int64_t FixedDecimal::getFractionalDigits(double n, int32_t v) {
           double scaled = floor(fract * pow(10.0, (double)v) + 0.5);
           if (scaled > U_INT64_MAX) {
               return U_INT64_MAX;
-          } else {
+          } 
               return (int64_t)scaled;
-          }
+          
       }
 }
 

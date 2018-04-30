@@ -28,7 +28,7 @@ static int32_t getIndex(const char* pluralKeyword, UErrorCode& status) {
     // pluralKeyword can also be "dnam" or "per"
     if (uprv_strcmp(pluralKeyword, "dnam") == 0) {
         return DNAM_INDEX;
-    } else if (uprv_strcmp(pluralKeyword, "per") == 0) {
+    } if (uprv_strcmp(pluralKeyword, "per") == 0) {
         return PER_INDEX;
     } else {
         StandardPlural::Form plural = StandardPlural::fromString(pluralKeyword, status);

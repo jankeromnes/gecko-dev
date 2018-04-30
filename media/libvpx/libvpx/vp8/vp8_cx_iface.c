@@ -891,7 +891,7 @@ static vpx_codec_err_t vp8e_encode(vpx_codec_alg_priv_t *ctx,
 
       if (comp_data_state == VPX_CODEC_CORRUPT_FRAME) {
         return VPX_CODEC_CORRUPT_FRAME;
-      } else if (comp_data_state == -1) {
+      } if (comp_data_state == -1) {
         break;
       }
 
@@ -995,9 +995,9 @@ static vpx_codec_err_t vp8e_set_reference(vpx_codec_alg_priv_t *ctx,
     image2yuvconfig(&frame->img, &sd);
     vp8_set_reference(ctx->cpi, frame->frame_type, &sd);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t vp8e_get_reference(vpx_codec_alg_priv_t *ctx,
@@ -1011,9 +1011,9 @@ static vpx_codec_err_t vp8e_get_reference(vpx_codec_alg_priv_t *ctx,
     image2yuvconfig(&frame->img, &sd);
     vp8_get_reference(ctx->cpi, frame->frame_type, &sd);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t vp8e_set_previewpp(vpx_codec_alg_priv_t *ctx,
@@ -1024,9 +1024,9 @@ static vpx_codec_err_t vp8e_set_previewpp(vpx_codec_alg_priv_t *ctx,
   if (data) {
     ctx->preview_ppcfg = *((vp8_postproc_cfg_t *)data);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 #else
   (void)ctx;
   (void)args;
@@ -1075,9 +1075,9 @@ static vpx_image_t *vp8e_get_preview(vpx_codec_alg_priv_t *ctx) {
     ctx->preview_img.h = sd.y_height;
 
     return &ctx->preview_img;
-  } else {
+  } 
     return NULL;
-  }
+  
 }
 
 static vpx_codec_err_t vp8e_set_frame_flags(vpx_codec_alg_priv_t *ctx,
@@ -1107,9 +1107,9 @@ static vpx_codec_err_t vp8e_set_roi_map(vpx_codec_alg_priv_t *ctx,
     if (!vp8_set_roimap(ctx->cpi, roi->roi_map, roi->rows, roi->cols,
                         roi->delta_q, roi->delta_lf, roi->static_threshold)) {
       return VPX_CODEC_OK;
-    } else {
+    } 
       return VPX_CODEC_INVALID_PARAM;
-    }
+    
   } else {
     return VPX_CODEC_INVALID_PARAM;
   }
@@ -1124,9 +1124,9 @@ static vpx_codec_err_t vp8e_set_activemap(vpx_codec_alg_priv_t *ctx,
 
     if (!vp8_set_active_map(ctx->cpi, map->active_map, map->rows, map->cols)) {
       return VPX_CODEC_OK;
-    } else {
+    } 
       return VPX_CODEC_INVALID_PARAM;
-    }
+    
   } else {
     return VPX_CODEC_INVALID_PARAM;
   }
@@ -1146,9 +1146,9 @@ static vpx_codec_err_t vp8e_set_scalemode(vpx_codec_alg_priv_t *ctx,
       /*force next frame a key frame to effect scaling mode */
       ctx->next_frame_flag |= FRAMEFLAGS_KEY;
       return VPX_CODEC_OK;
-    } else {
+    } 
       return VPX_CODEC_INVALID_PARAM;
-    }
+    
   } else {
     return VPX_CODEC_INVALID_PARAM;
   }

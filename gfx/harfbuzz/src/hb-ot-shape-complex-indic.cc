@@ -583,7 +583,7 @@ initial_reordering_consonant_syllable (const hb_ot_shape_plan_t *plan,
 	  {
 	    if (limit < i && info[i - 1].indic_category() == OT_ZWJ)
 	      break;
-	    else
+	    
 	      base = i;
 	  }
 

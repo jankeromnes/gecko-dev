@@ -144,7 +144,7 @@ int av_bitstream_filter_filter(AVBitStreamFilterContext *bsfc,
     ret = av_bsf_receive_packet(priv->ctx, &pkt);
     if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
         return 0;
-    else if (ret < 0)
+    if (ret < 0)
         return ret;
 
     *poutbuf = av_malloc(pkt.size + AV_INPUT_BUFFER_PADDING_SIZE);

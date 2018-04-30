@@ -200,7 +200,7 @@ int vp9_get_qindex(const struct segmentation *seg, int segment_id,
     const int seg_qindex =
         seg->abs_delta == SEGMENT_ABSDATA ? data : base_qindex + data;
     return clamp(seg_qindex, 0, MAXQ);
-  } else {
+  } 
     return base_qindex;
-  }
+  
 }

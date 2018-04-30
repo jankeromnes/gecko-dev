@@ -425,9 +425,9 @@ static void first_pass_motion_search(VP9_COMP *cpi, MACROBLOCK *x,
 static BLOCK_SIZE get_bsize(const VP9_COMMON *cm, int mb_row, int mb_col) {
   if (2 * mb_col + 1 < cm->mi_cols) {
     return 2 * mb_row + 1 < cm->mi_rows ? BLOCK_16X16 : BLOCK_16X8;
-  } else {
+  } 
     return 2 * mb_row + 1 < cm->mi_rows ? BLOCK_8X16 : BLOCK_8X8;
-  }
+  
 }
 
 static int find_fp_qindex(vpx_bit_depth_t bit_depth) {
@@ -1369,7 +1369,7 @@ static int get_twopass_worst_quality(VP9_COMP *cpi, const double section_err,
 
   if (target_rate <= 0) {
     return rc->worst_quality;  // Highest value allowed
-  } else {
+  } 
     const int num_mbs = (cpi->oxcf.resize_mode != RESIZE_NONE)
                             ? cpi->initial_mbs
                             : cpi->common.MBs;
@@ -1410,7 +1410,7 @@ static int get_twopass_worst_quality(VP9_COMP *cpi, const double section_err,
     // Restriction on active max q for constrained quality mode.
     if (cpi->oxcf.rc_mode == VPX_CQ) q = VPXMAX(q, oxcf->cq_level);
     return q;
-  }
+  
 }
 
 static void setup_rf_level_maxq(VP9_COMP *cpi) {

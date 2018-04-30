@@ -267,7 +267,7 @@ static int bsfs_poll(AVCodecContext *avctx, AVPacket *pkt)
             ret = 0;
             idx--;
             continue;
-        } else if (ret < 0 && ret != AVERROR_EOF) {
+        } if (ret < 0 && ret != AVERROR_EOF) {
             return ret;
         }
 
@@ -275,7 +275,7 @@ static int bsfs_poll(AVCodecContext *avctx, AVPacket *pkt)
          * down the chain */
         if (idx == s->nb_bsfs - 1) {
             return ret;
-        } else {
+        } 
             idx++;
             ret = av_bsf_send_packet(s->bsfs[idx], ret < 0 ? NULL : pkt);
             if (ret < 0) {
@@ -284,7 +284,7 @@ static int bsfs_poll(AVCodecContext *avctx, AVPacket *pkt)
                 av_packet_unref(pkt);
                 return ret;
             }
-        }
+        
     }
 
     return AVERROR(EAGAIN);

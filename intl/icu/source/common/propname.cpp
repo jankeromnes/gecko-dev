@@ -44,9 +44,9 @@ getASCIIPropertyNameChar(const char *name) {
 
     if(c!=0) {
         return (i<<8)|(uint8_t)uprv_asciitolower((char)c);
-    } else {
+    } 
         return i<<8;
-    }
+    
 }
 
 /**
@@ -67,9 +67,9 @@ getEBCDICPropertyNameChar(const char *name) {
 
     if(c!=0) {
         return (i<<8)|(uint8_t)uprv_ebcdictolower((char)c);
-    } else {
+    } 
         return i<<8;
-    }
+    
 }
 
 /**
@@ -260,9 +260,9 @@ int32_t PropNameData::getPropertyOrValueEnum(int32_t bytesTrieOffset, const char
     BytesTrie trie(bytesTries+bytesTrieOffset);
     if(containsName(trie, alias)) {
         return trie.getValue();
-    } else {
+    } 
         return UCHAR_INVALID_CODE;
-    }
+    
 }
 
 int32_t PropNameData::getPropertyEnum(const char *alias) {

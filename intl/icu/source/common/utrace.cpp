@@ -482,7 +482,7 @@ U_CAPI const char * U_EXPORT2
 utrace_functionName(int32_t fnNumber) {
     if(UTRACE_FUNCTION_START <= fnNumber && fnNumber < UTRACE_FUNCTION_LIMIT) {
         return trFnName[fnNumber];
-    } else if(UTRACE_CONVERSION_START <= fnNumber && fnNumber < UTRACE_CONVERSION_LIMIT) {
+    } if(UTRACE_CONVERSION_START <= fnNumber && fnNumber < UTRACE_CONVERSION_LIMIT) {
         return trConvNames[fnNumber - UTRACE_CONVERSION_START];
     } else if(UTRACE_COLLATION_START <= fnNumber && fnNumber < UTRACE_COLLATION_LIMIT){
         return trCollNames[fnNumber - UTRACE_COLLATION_START];

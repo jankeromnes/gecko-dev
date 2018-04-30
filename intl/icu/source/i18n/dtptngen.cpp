@@ -420,9 +420,9 @@ DateTimePatternGenerator::operator==(const DateTimePatternGenerator& other) cons
         }
         return TRUE;
     }
-    else {
+    
         return FALSE;
-    }
+    
 }
 
 UBool
@@ -578,7 +578,7 @@ void DateTimePatternGenerator::getAllowedHourFormats(const Locale &locale, UErro
     int32_t length = uloc_addLikelySubtags(localeID, maxLocaleID, ULOC_FULLNAME_CAPACITY, &status);
     if (U_FAILURE(status)) {
         return;
-    } else if (length == ULOC_FULLNAME_CAPACITY) {  // no room for NUL
+    } if (length == ULOC_FULLNAME_CAPACITY) {  // no room for NUL
         status = U_BUFFER_OVERFLOW_ERROR;
         return;
     }
@@ -723,11 +723,11 @@ DateTimePatternGenerator::hackTimes(const UnicodeString& hackPattern, UErrorCode
                         addPattern(mmss, FALSE, conflictingString, status);
                         break;
                     }
-                    else {
+                    
                         if (gotMm || ch==LOW_Z || ch==CAP_Z || ch==LOW_V || ch==CAP_V) {
                             break;
                         }
-                    }
+                    
                 }
             }
         }
@@ -1551,7 +1551,7 @@ DateTimePatternGenerator::getTopBitNumber(int32_t foundMask) {
     if (i-1 >UDATPG_ZONE_FIELD) {
         return UDATPG_ZONE_FIELD;
     }
-    else
+    
         return i-1;
 }
 
@@ -1915,9 +1915,9 @@ PatternMap::getDuplicateElem(
    if ( baseElem == (PtnElem *)NULL )  {
          return (PtnElem*)NULL;
    }
-   else {
+   
          curElem = baseElem;
-   }
+   
    do {
      if ( basePattern.compare(curElem->basePattern)==0 ) {
         UBool isEqual=TRUE;
@@ -2208,10 +2208,10 @@ FormatParser::getQuoteLiteral(UnicodeString& quote, int32_t *itemIndex) {
                 quote += items[i++];
                 continue;
             }
-            else {
+            
                 quote += items[i];
                 break;
-            }
+            
         }
         else {
             quote += items[i];
@@ -2229,9 +2229,9 @@ FormatParser::isPatternSeparator(UnicodeString& field) {
              (c==QUOTATION_MARK) || (c==COMMA) || (c==HYPHEN) ||(items[i].charAt(0)==DOT) ) {
             continue;
         }
-        else {
+        
             return FALSE;
-        }
+        
     }
     return TRUE;
 }
@@ -2266,9 +2266,9 @@ PatternMapIterator::getSkeleton() {
     if ( nodePtr == NULL ) {
         return NULL;
     }
-    else {
+    
         return nodePtr->skeleton;
-    }
+    
 }
 
 UBool
@@ -2284,20 +2284,20 @@ PatternMapIterator::hasNext() {
             if ( curPtr->next != NULL ) {
                 return TRUE;
             }
-            else {
+            
                 headIndex++;
                 curPtr=NULL;
                 continue;
-            }
+            
         }
         else {
             if ( patternMap->boot[headIndex] != NULL ) {
                 return TRUE;
             }
-            else {
+            
                 headIndex++;
                 continue;
-            }
+            
         }
 
     }
@@ -2312,21 +2312,21 @@ PatternMapIterator::next() {
                 nodePtr = nodePtr->next;
                 break;
             }
-            else {
+            
                 bootIndex++;
                 nodePtr=NULL;
                 continue;
-            }
+            
         }
         else {
             if ( patternMap->boot[bootIndex] != NULL ) {
                 nodePtr = patternMap->boot[bootIndex];
                 break;
             }
-            else {
+            
                 bootIndex++;
                 continue;
-            }
+            
         }
     }
     if (nodePtr!=NULL) {

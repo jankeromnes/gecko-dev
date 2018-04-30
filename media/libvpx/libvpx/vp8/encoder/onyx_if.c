@@ -3056,9 +3056,9 @@ static int measure_square_diff_partial(YV12_BUFFER_CONFIG *source,
   // Only return non-zero if we have at least ~1/16 samples for estimate.
   if (num_blocks > (tot_num_blocks >> 4)) {
     return (Total / num_blocks);
-  } else {
+  } 
     return 0;
-  }
+  
 }
 
 #if CONFIG_TEMPORAL_DENOISING
@@ -5302,7 +5302,7 @@ int vp8_get_preview_raw_frame(VP8_COMP *cpi, YV12_BUFFER_CONFIG *dest,
                               vp8_ppflags_t *flags) {
   if (cpi->common.refresh_alt_ref_frame) {
     return -1;
-  } else {
+  } 
     int ret;
 
 #if CONFIG_POSTPROC
@@ -5324,7 +5324,7 @@ int vp8_get_preview_raw_frame(VP8_COMP *cpi, YV12_BUFFER_CONFIG *dest,
 #endif
     vpx_clear_system_state();
     return ret;
-  }
+  
 }
 
 int vp8_set_roimap(VP8_COMP *cpi, unsigned char *map, unsigned int rows,
@@ -5407,9 +5407,9 @@ int vp8_set_active_map(VP8_COMP *cpi, unsigned char *map, unsigned int rows,
     }
 
     return 0;
-  } else {
+  } 
     return -1;
-  }
+  
 }
 
 int vp8_set_internal_size(VP8_COMP *cpi, VPX_SCALING horiz_mode,

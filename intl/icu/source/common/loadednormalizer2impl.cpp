@@ -67,9 +67,9 @@ LoadedNormalizer2Impl::isAcceptable(void * /*context*/,
         // Normalizer2Impl *me=(Normalizer2Impl *)context;
         // uprv_memcpy(me->dataVersion, pInfo->dataVersion, 4);
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 void
@@ -351,9 +351,9 @@ unorm_getQuickCheck(UChar32 c, UNormalizationMode mode) {
     const Normalizer2 *norm2=Normalizer2Factory::getInstance(mode, errorCode);
     if(U_SUCCESS(errorCode)) {
         return ((const Normalizer2WithImpl *)norm2)->getQuickCheck(c);
-    } else {
+    } 
         return UNORM_MAYBE;
-    }
+    
 }
 
 #endif  // !UCONFIG_NO_NORMALIZATION

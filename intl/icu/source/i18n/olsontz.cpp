@@ -336,11 +336,11 @@ int32_t OlsonTimeZone::getOffset(uint8_t era, int32_t year, int32_t month,
             ec = U_ILLEGAL_ARGUMENT_ERROR;
         }
         return 0;
-    } else {
+    } 
         return getOffset(era, year, month, dom, dow, millis,
                          Grego::monthLength(year, month),
                          ec);
-    }
+    
 }
 
 /**
@@ -889,14 +889,14 @@ OlsonTimeZone::getNextTransition(UDate base, UBool inclusive, TimeZoneTransition
         if (inclusive && base == firstFinalTZTransition->getTime()) {
             result = *firstFinalTZTransition;
             return TRUE;
-        } else if (base >= firstFinalTZTransition->getTime()) {
+        } if (base >= firstFinalTZTransition->getTime()) {
             if (finalZone->useDaylightTime()) {
                 //return finalZone->getNextTransition(base, inclusive, result);
                 return finalZoneWithStartYear->getNextTransition(base, inclusive, result);
-            } else {
+            } 
                 // No more transitions
                 return FALSE;
-            }
+            
         }
     }
     if (historicRules != NULL) {
@@ -913,9 +913,9 @@ OlsonTimeZone::getNextTransition(UDate base, UBool inclusive, TimeZoneTransition
             if (firstFinalTZTransition != NULL) {
                 result = *firstFinalTZTransition;
                 return TRUE;
-            } else {
+            } 
                 return FALSE;
-            }
+            
         } else if (ttidx < firstTZTransitionIdx) {
             result = *firstTZTransition;
             return TRUE;
@@ -954,14 +954,14 @@ OlsonTimeZone::getPreviousTransition(UDate base, UBool inclusive, TimeZoneTransi
         if (inclusive && base == firstFinalTZTransition->getTime()) {
             result = *firstFinalTZTransition;
             return TRUE;
-        } else if (base > firstFinalTZTransition->getTime()) {
+        } if (base > firstFinalTZTransition->getTime()) {
             if (finalZone->useDaylightTime()) {
                 //return finalZone->getPreviousTransition(base, inclusive, result);
                 return finalZoneWithStartYear->getPreviousTransition(base, inclusive, result);
-            } else {
+            } 
                 result = *firstFinalTZTransition;
                 return TRUE;
-            }
+            
         }
     }
 
@@ -977,7 +977,7 @@ OlsonTimeZone::getPreviousTransition(UDate base, UBool inclusive, TimeZoneTransi
         if (ttidx < firstTZTransitionIdx) {
             // No more transitions
             return FALSE;
-        } else if (ttidx == firstTZTransitionIdx) {
+        } if (ttidx == firstTZTransitionIdx) {
             result = *firstTZTransition;
             return TRUE;
         } else {

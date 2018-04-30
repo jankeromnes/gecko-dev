@@ -282,7 +282,7 @@ int vp9_rc_get_default_min_gf_interval(int width, int height,
 
   if (factor <= factor_safe)
     return default_interval;
-  else
+  
     return VPXMAX(default_interval,
                   (int)(MIN_GF_INTERVAL * factor / factor_safe + 0.5));
   // Note this logic makes:
@@ -371,11 +371,11 @@ int vp9_rc_drop_frame(VP9_COMP *cpi) {
       (is_one_pass_cbr_svc(cpi) &&
        cpi->svc.spatial_layer_id > cpi->svc.first_spatial_layer_to_encode)) {
     return 0;
-  } else {
+  } 
     if (rc->buffer_level < 0) {
       // Always drop if buffer is below 0.
       return 1;
-    } else {
+    } 
       // If buffer is below drop_mark, for now just drop every other frame
       // (starting with the next frame) until it increases back over drop_mark.
       int drop_mark =
@@ -389,16 +389,16 @@ int vp9_rc_drop_frame(VP9_COMP *cpi) {
         if (rc->decimation_count > 0) {
           --rc->decimation_count;
           return 1;
-        } else {
+        } 
           rc->decimation_count = rc->decimation_factor;
           return 0;
-        }
+        
       } else {
         rc->decimation_count = 0;
         return 0;
       }
-    }
-  }
+    
+  
 }
 
 static double get_rate_correction_factor(const VP9_COMP *cpi) {
@@ -552,9 +552,9 @@ int vp9_rc_regulate_q(const VP9_COMP *cpi, int target_bits_per_frame,
         q = i - 1;
 
       break;
-    } else {
+    } 
       last_error = bits_per_mb_at_this_q - target_bits_per_mb;
-    }
+    
   } while (++i <= active_worst_quality);
 
   // In CBR mode, this makes sure q is between oscillating Qs to prevent
@@ -579,7 +579,7 @@ static int get_active_quality(int q, int gfu_boost, int low, int high,
                               int *low_motion_minq, int *high_motion_minq) {
   if (gfu_boost > high) {
     return low_motion_minq[q];
-  } else if (gfu_boost < low) {
+  } if (gfu_boost < low) {
     return high_motion_minq[q];
   } else {
     const int gap = high - low;
@@ -1932,7 +1932,7 @@ int vp9_resize_one_pass_cbr(VP9_COMP *cpi) {
     if (cpi->resize_state == ORIG &&
         (cm->width * 3 / 4 < min_width || cm->height * 3 / 4 < min_height))
       return 0;
-    else if (cpi->resize_state == THREE_QUARTER &&
+    if (cpi->resize_state == THREE_QUARTER &&
              ((cpi->oxcf.width >> 1) < min_width ||
               (cpi->oxcf.height >> 1) < min_height))
       down_size_on = 0;
@@ -2377,7 +2377,7 @@ int vp9_encodedframe_overshoot(VP9_COMP *cpi, int frame_size, int *q) {
       }
     }
     return 1;
-  } else {
+  } 
     return 0;
-  }
+  
 }

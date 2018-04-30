@@ -208,16 +208,16 @@ CollationKey::compareTo(const CollationKey& target, UErrorCode &status) const
         if (diff > 0) {
             return UCOL_GREATER;
         }
-        else
+        
             if (diff < 0) {
                 return UCOL_LESS;
             }
     }
 
     return result;
-  } else {
+  } 
     return UCOL_EQUAL;
-  }
+  
 }
 
 #ifdef U_USE_COLLATION_KEY_DEPRECATES

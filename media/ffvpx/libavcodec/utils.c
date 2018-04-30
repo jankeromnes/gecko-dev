@@ -150,7 +150,7 @@ AVCodec *av_codec_next(const AVCodec *c)
 {
     if (c)
         return c->next;
-    else
+    
         return first_avcodec;
 }
 
@@ -232,9 +232,9 @@ int ff_set_sar(AVCodecContext *avctx, AVRational sar)
                sar.num, sar.den);
         avctx->sample_aspect_ratio = (AVRational){ 0, 1 };
         return ret;
-    } else {
+    } 
         avctx->sample_aspect_ratio = sar;
-    }
+    
     return 0;
 }
 
@@ -1714,7 +1714,7 @@ static int get_audio_frame_duration(enum AVCodecID id, int sr, int ch, int ba,
         /* calc from sample rate */
         if (id == AV_CODEC_ID_TTA)
             return 256 * sr / 245;
-        else if (id == AV_CODEC_ID_DST)
+        if (id == AV_CODEC_ID_DST)
             return 588 * sr / 44100;
 
         if (ch > 0) {
@@ -1806,7 +1806,7 @@ static int get_audio_frame_duration(enum AVCodecID id, int sr, int ch, int ba,
                 if (id == AV_CODEC_ID_SOL_DPCM) {
                     if (tag == 3)
                         return frame_bytes / ch;
-                    else
+                    
                         return frame_bytes * 2 / ch;
                 }
             }

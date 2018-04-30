@@ -1084,9 +1084,9 @@ connected_type:
 		inp->pkt = NULL;
 		inp->control = NULL;
 		return (ret);
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 #endif
 
@@ -1107,7 +1107,7 @@ sctp_disconnect(struct socket *so)
 			/* No connection */
 			SCTP_INP_RUNLOCK(inp);
 			return (0);
-		} else {
+		} 
 			struct sctp_association *asoc;
 			struct sctp_tcb *stcb;
 
@@ -1237,15 +1237,15 @@ sctp_disconnect(struct socket *so)
 					(void)sctp_free_assoc(inp, stcb, SCTP_NORMAL_PROC,
 					                      SCTP_FROM_SCTP_USRREQ + SCTP_LOC_5);
 					return (0);
-				} else {
+				} 
 					sctp_chunk_output(inp, stcb, SCTP_OUTPUT_FROM_CLOSING, SCTP_SO_LOCKED);
-				}
+				
 			}
 			soisdisconnecting(so);
 			SCTP_TCB_UNLOCK(stcb);
 			SCTP_INP_RUNLOCK(inp);
 			return (0);
-		}
+		
 		/* not reached */
 	} else {
 		/* UDP model does not support this */
@@ -1334,7 +1334,7 @@ sctp_shutdown(struct socket *so)
 		SCTP_INP_RUNLOCK(inp);
 		SCTP_LTRACE_ERR_RET(inp, NULL, NULL, SCTP_FROM_SCTP_USRREQ, EOPNOTSUPP);
 		return (EOPNOTSUPP);
-	} else {
+	} 
 		/*
 		 * Ok, if we reach here its the TCP model and it is either
 		 * a SHUT_WR or SHUT_RDWR.
@@ -1426,7 +1426,7 @@ sctp_shutdown(struct socket *so)
 		SCTP_TCB_UNLOCK(stcb);
 		SCTP_INP_RUNLOCK(inp);
 		return (0);
-	}
+	
 }
 
 /*
@@ -8231,7 +8231,7 @@ sctp_listen(struct socket *so, struct proc *p)
 					/* we have a listener already and its not this inp. */
 					SCTP_INP_DECR_REF(tinp);
 					return (EADDRINUSE);
-				} else if (tinp) {
+				} if (tinp) {
 					SCTP_INP_DECR_REF(tinp);
 				}
 			}
@@ -8294,7 +8294,7 @@ sctp_listen(struct socket *so, struct proc *p)
 				/* we have a listener already and its not this inp. */
 				SCTP_INP_DECR_REF(tinp);
 				return (EADDRINUSE);
-			} else if (tinp) {
+			} if (tinp) {
 				SCTP_INP_DECR_REF(tinp);
 			}
 		}

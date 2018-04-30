@@ -260,7 +260,7 @@ umtx_initImplPreInit(UInitOnce &uio) {
         umtx_storeRelease(uio.fState, 1);
         pthread_mutex_unlock(&initMutex);
         return TRUE;   // Caller will next call the init function.
-    } else {
+    } 
         while (uio.fState == 1) {
             // Another thread is currently running the initialization.
             // Wait until it completes.
@@ -269,7 +269,7 @@ umtx_initImplPreInit(UInitOnce &uio) {
         pthread_mutex_unlock(&initMutex);
         U_ASSERT(uio.fState == 2);
         return FALSE;
-    }
+    
 }
 
 

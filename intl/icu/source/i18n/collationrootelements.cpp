@@ -110,9 +110,9 @@ CollationRootElements::getPrimaryBefore(uint32_t p, UBool isCompressible) const 
     // Return the previous range primary.
     if((p & 0xffff) == 0) {
         return Collation::decTwoBytePrimaryByOneStep(p, isCompressible, step);
-    } else {
+    } 
         return Collation::decThreeBytePrimaryByOneStep(p, isCompressible, step);
-    }
+    
 }
 
 uint32_t
@@ -178,9 +178,9 @@ CollationRootElements::getPrimaryAfter(uint32_t p, int32_t index, UBool isCompre
         // Return the next primary in this range.
         if((p & 0xffff) == 0) {
             return Collation::incTwoBytePrimaryByOffset(p, isCompressible, step);
-        } else {
+        } 
             return Collation::incThreeBytePrimaryByOffset(p, isCompressible, step);
-        }
+        
     } else {
         // Return the next primary in the list.
         while((q & SEC_TER_DELTA_FLAG) != 0) {

@@ -279,7 +279,7 @@ uset_getItem(const USet* uset, int32_t itemIndex,
     if (itemIndex < 0) {
         *ec = U_ILLEGAL_ARGUMENT_ERROR;
         return -1;
-    } else if (itemIndex < (rangeCount = set.getRangeCount())) {
+    } if (itemIndex < (rangeCount = set.getRangeCount())) {
         *start = set.getRangeStart(itemIndex);
         *end = set.getRangeEnd(itemIndex);
         return 0;
@@ -288,10 +288,10 @@ uset_getItem(const USet* uset, int32_t itemIndex,
         if (itemIndex < USetAccess::getStringCount(set)) {
             const UnicodeString* s = USetAccess::getString(set, itemIndex);
             return s->extract(str, strCapacity, *ec);
-        } else {
+        } 
             *ec = U_INDEX_OUTOFBOUNDS_ERROR;
             return -1;
-        }
+        
     }
 }
 
@@ -426,7 +426,7 @@ uset_serializedContains(const USerializedSet* set, UChar32 c) {
                 int32_t i = (lo + hi) >> 1;
                 if (i == lo) {
                     break;  // Done!
-                } else if (c < array[i]) {
+                } if (c < array[i]) {
                     hi = i;
                 } else {
                     lo = i;
@@ -436,7 +436,7 @@ uset_serializedContains(const USerializedSet* set, UChar32 c) {
             hi += 1;
         }
         return (UBool)(hi&1);
-    } else {
+    } 
         /* find c in the supplementary part */
         uint16_t high=(uint16_t)(c>>16), low=(uint16_t)c;
         int32_t base = set->bmpLength;
@@ -450,7 +450,7 @@ uset_serializedContains(const USerializedSet* set, UChar32 c) {
                 int32_t iabs = i + base;
                 if (i == lo) {
                     break;  // Done!
-                } else if (high < array[iabs] || (high==array[iabs] && low<array[iabs+1])) {
+                } if (high < array[iabs] || (high==array[iabs] && low<array[iabs+1])) {
                     hi = i;
                 } else {
                     lo = i;
@@ -461,7 +461,7 @@ uset_serializedContains(const USerializedSet* set, UChar32 c) {
         }
         /* count pairs of 16-bit units even per BMP and check if the number of pairs is odd */
         return (UBool)(((hi+(base<<1))&2)!=0);
-    }
+    
 }
 
 U_CAPI int32_t U_EXPORT2
@@ -498,7 +498,7 @@ uset_getSerializedRange(const USerializedSet* set, int32_t rangeIndex,
             *pEnd=0x10ffff;
         }
         return TRUE;
-    } else {
+    } 
         rangeIndex-=bmpLength;
         rangeIndex*=2; /* address pairs of pairs of units */
         length-=bmpLength;
@@ -512,10 +512,10 @@ uset_getSerializedRange(const USerializedSet* set, int32_t rangeIndex,
                 *pEnd=0x10ffff;
             }
             return TRUE;
-        } else {
+        } 
             return FALSE;
-        }
-    }
+        
+    
 }
 
 // TODO The old, internal uset.c had an efficient uset_containsOne function.

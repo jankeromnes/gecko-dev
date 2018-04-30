@@ -104,7 +104,7 @@ u_strFromUTF32WithSub(UChar *dest,
                     ++reqLength;
                 }
                 break;
-            } else if(0x10000 <= ch && ch <= 0x10ffff) {
+            } if(0x10000 <= ch && ch <= 0x10ffff) {
                 if(pDest!=NULL && ((pDest + 2) <= destLimit)) {
                     *pDest++ = U16_LEAD(ch);
                     *pDest++ = U16_TRAIL(ch);
@@ -329,7 +329,7 @@ u_strFromUTF8WithSub(UChar *dest,
                     if(c<0 && (++numSubstitutions, c = subchar) < 0) {
                         *pErrorCode = U_INVALID_CHAR_FOUND;
                         return NULL;
-                    } else if(c<=0xFFFF) {
+                    } if(c<=0xFFFF) {
                         *(pDest++)=(UChar)c;
                     } else {
                         *(pDest++)=U16_LEAD(c);
@@ -434,7 +434,7 @@ u_strFromUTF8WithSub(UChar *dest,
                         if(c<0 && (++numSubstitutions, c = subchar) < 0) {
                             *pErrorCode = U_INVALID_CHAR_FOUND;
                             return NULL;
-                        } else if(c<=0xFFFF) {
+                        } if(c<=0xFFFF) {
                             *(pDest++)=(UChar)c;
                         } else {
                             *(pDest++)=U16_LEAD(c);
@@ -471,7 +471,7 @@ u_strFromUTF8WithSub(UChar *dest,
                     if(c<0 && (++numSubstitutions, c = subchar) < 0) {
                         *pErrorCode = U_INVALID_CHAR_FOUND;
                         return NULL;
-                    } else if(c<=0xFFFF) {
+                    } if(c<=0xFFFF) {
                         *(pDest++)=(UChar)c;
                     } else {
                         *(pDest++)=U16_LEAD(c);
@@ -589,7 +589,7 @@ u_strFromUTF8Lenient(UChar *dest,
                 *pDest++=(UChar)ch;
                 ++pSrc;
                 continue;
-            } else if(ch < 0xe0) { /* U+0080..U+07FF */
+            } if(ch < 0xe0) { /* U+0080..U+07FF */
                 if((t1 = pSrc[1]) != 0) {
                     /* 0x3080 = (0xc0 << 6) + 0x80 */
                     *pDest++ = (UChar)((ch << 6) + t1 - 0x3080);
@@ -637,7 +637,7 @@ u_strFromUTF8Lenient(UChar *dest,
                 ++reqLength;
                 ++pSrc;
                 continue;
-            } else if(ch < 0xe0) { /* U+0080..U+07FF */
+            } if(ch < 0xe0) { /* U+0080..U+07FF */
                 if(pSrc[1] != 0) {
                     ++reqLength;
                     pSrc += 2;
@@ -721,7 +721,7 @@ u_strFromUTF8Lenient(UChar *dest,
                  */
                 *pDest++=(UChar)ch;
                 continue;
-            } else if(ch < 0xe0) { /* U+0080..U+07FF */
+            } if(ch < 0xe0) { /* U+0080..U+07FF */
                 if(pSrc < pSrcLimit) {
                     /* 0x3080 = (0xc0 << 6) + 0x80 */
                     *pDest++ = (UChar)((ch << 6) + *pSrc++ - 0x3080);
@@ -1186,7 +1186,7 @@ u_strFromJavaModifiedUTF8WithSub(
                 if(subchar < 0) {
                     *pErrorCode = U_INVALID_CHAR_FOUND;
                     return NULL;
-                } else if(subchar > 0xffff && --count == 0) {
+                } if(subchar > 0xffff && --count == 0) {
                     /*
                      * We need to write two UChars, adjusted count for that,
                      * and ran out of space.
@@ -1235,7 +1235,7 @@ u_strFromJavaModifiedUTF8WithSub(
             if(subchar < 0) {
                 *pErrorCode = U_INVALID_CHAR_FOUND;
                 return NULL;
-            } else {
+            } 
                 /* function call for error cases */
                 utf8_nextCharSafeBody((const uint8_t *)src, &(i), srcLength, ch, -1);
                 ++numSubstitutions;
@@ -1250,7 +1250,7 @@ u_strFromJavaModifiedUTF8WithSub(
                         break;
                     }
                 }
-            }
+            
         }
     }
 
@@ -1286,12 +1286,12 @@ u_strFromJavaModifiedUTF8WithSub(
             if(subchar < 0) {
                 *pErrorCode = U_INVALID_CHAR_FOUND;
                 return NULL;
-            } else {
+            } 
                 /* function call for error cases */
                 utf8_nextCharSafeBody((const uint8_t *)src, &(i), srcLength, ch, -1);
                 ++numSubstitutions;
                 reqLength+=U16_LENGTH(ch);
-            }
+            
         }
     }
 

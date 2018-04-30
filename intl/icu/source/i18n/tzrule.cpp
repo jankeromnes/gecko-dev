@@ -365,10 +365,10 @@ AnnualTimeZoneRule::getNextStart(UDate base,
         if (tmp < base || (!inclusive && (tmp == base))) {
             // Return the next one
             return getStartInYear(year + 1, prevRawOffset, prevDSTSavings, result);
-        } else {
+        } 
             result = tmp;
             return TRUE;
-        }
+        
     }
     return FALSE;
 }
@@ -389,10 +389,10 @@ AnnualTimeZoneRule::getPreviousStart(UDate base,
         if (tmp > base || (!inclusive && (tmp == base))) {
             // Return the previous one
             return getStartInYear(year - 1, prevRawOffset, prevDSTSavings, result);
-        } else {
+        } 
             result = tmp;
             return TRUE;
-        }
+        
     }
     return FALSE;
 }

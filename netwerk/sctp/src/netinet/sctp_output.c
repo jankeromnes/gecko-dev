@@ -3613,7 +3613,7 @@ sctp_find_cmsg(int c_type, void *data, struct mbuf *control, size_t cpsize)
 				/* It is exactly what we want. Copy it out. */
 				m_copydata(control, cmsg_data_off, (int)cpsize, (caddr_t)data);
 				return (1);
-			} else {
+			} 
 				struct sctp_sndrcvinfo *sndrcvinfo;
 
 				sndrcvinfo = (struct sctp_sndrcvinfo *)data;
@@ -3659,7 +3659,7 @@ sctp_find_cmsg(int c_type, void *data, struct mbuf *control, size_t cpsize)
 					return (found);
 				}
 				found = 1;
-			}
+			
 		}
 	}
 	return (found);
@@ -4030,9 +4030,9 @@ sctp_get_ect(struct sctp_tcb *stcb)
 {
 	if ((stcb != NULL) && (stcb->asoc.ecn_supported == 1)) {
 		return (SCTP_ECT0_BIT);
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 
 #if defined(INET) || defined(INET6)
@@ -6369,9 +6369,9 @@ sctp_send_initiate_ack(struct sctp_inpcb *inp, struct sctp_tcb *stcb,
 		/* memory problem */
 		sctp_m_freem(m);
 		return;
-	} else {
+	} 
 		initack->init.a_rwnd = htonl(max(SCTP_SB_LIMIT_RCV(so), SCTP_MINIMAL_RWND));
-	}
+	
 	/* set what I want */
 	his_limit = ntohs(init_chk->init.num_inbound_streams);
 	/* choose what I want */
@@ -7035,7 +7035,7 @@ sctp_copy_mbufchain(struct mbuf *clonechain,
 				SCTP_BUF_LEN((*endofchain)) += sizeofcpy;
 			}
 			return (outchain);
-		} else {
+		} 
 			/* copy the old fashion way */
 			appendchain = SCTP_M_COPYM(clonechain, 0, M_COPYALL, M_NOWAIT);
 #ifdef SCTP_MBUF_LOGGING
@@ -7043,7 +7043,7 @@ sctp_copy_mbufchain(struct mbuf *clonechain,
 				sctp_log_mbc(appendchain, SCTP_MBUF_ICOPY);
 			}
 #endif
-		}
+		
 	}
 	if (appendchain == NULL) {
 		/* error */
@@ -7078,7 +7078,7 @@ sctp_copy_mbufchain(struct mbuf *clonechain,
 			m = SCTP_BUF_NEXT(m);
 		}
 		return (outchain);
-	} else {
+	} 
 		/* save off the end and update the end-chain position */
 		m = appendchain;
 		while (m) {
@@ -7089,7 +7089,7 @@ sctp_copy_mbufchain(struct mbuf *clonechain,
 			m = SCTP_BUF_NEXT(m);
 		}
 		return (appendchain);
-	}
+	
 }
 
 static int
@@ -7626,10 +7626,10 @@ sctp_can_we_split_this(struct sctp_tcb *stcb, uint32_t length,
 			}
 			return (0);
 
-		} else {
+		} 
 			/* You can fill the rest */
 			return (space_left);
-		}
+		
 	}
 	/*-
 	 * For those strange folk that make the send buffer
@@ -8750,9 +8750,9 @@ again_one_more_time:
 						}
 						*reason_code = 7;
 						break;
-					} else {
+					} 
 						asoc->ifp_had_enobuf = 0;
-					}
+					
 					/*
 					 * increase the number we sent, if a
 					 * cookie is sent we don't tell them
@@ -8809,7 +8809,7 @@ again_one_more_time:
 				if (chk->whoTo == net) {
 					/* Don't transmit it to where its going (current net) */
 					continue;
-				} else if (sack_goes_to == net) {
+				} if (sack_goes_to == net) {
 					/* But do transmit it to this address */
 					goto skip_net_check;
 				}
@@ -9020,9 +9020,9 @@ again_one_more_time:
 						}
 						*reason_code = 7;
 						break;
-					} else {
+					} 
 						asoc->ifp_had_enobuf = 0;
-					}
+					
 					/*
 					 * increase the number we sent, if a
 					 * cookie is sent we don't tell them
@@ -9162,7 +9162,7 @@ again_one_more_time:
 					    (asoc->alternate != net) &&
 					    (chk->whoTo == NULL)) {
 						continue;
-					} else if ((net != asoc->primary_destination) &&
+					} if ((net != asoc->primary_destination) &&
 						   (asoc->alternate == NULL) &&
 						   (chk->whoTo == NULL)) {
 						continue;
@@ -9368,9 +9368,9 @@ again_one_more_time:
 				 */
 				ctl_cnt = bundle_at = 0;
 				continue; /* This takes us back to the for() for the nets. */
-			} else {
+			} 
 				asoc->ifp_had_enobuf = 0;
-			}
+			
 			endoutchain = NULL;
 			auth = NULL;
 			auth_offset = 0;
@@ -10056,9 +10056,9 @@ sctp_chunk_retransmission(struct sctp_inpcb *inp,
 				SCTP_STAT_INCR(sctps_lowlevelerr);
 			}
 			return (error);
-		} else {
+		} 
 			asoc->ifp_had_enobuf = 0;
-		}
+		
 		endofchain = NULL;
 		auth = NULL;
 		auth_offset = 0;
@@ -10072,11 +10072,11 @@ sctp_chunk_retransmission(struct sctp_inpcb *inp,
 		sctp_ucount_decr(stcb->asoc.sent_queue_retran_cnt);
 		if (fwd_tsn == 0) {
 			return (0);
-		} else {
+		} 
 			/* Clean up the fwd-tsn list */
 			sctp_clean_up_ctl(stcb, asoc, so_locked);
 			return (0);
-		}
+		
 	}
 	/*
 	 * Ok, it is just data retransmission we need to do or that and a
@@ -10338,9 +10338,9 @@ sctp_chunk_retransmission(struct sctp_inpcb *inp,
 					SCTP_STAT_INCR(sctps_lowlevelerr);
 				}
 				return (error);
-			} else {
+			} 
 				asoc->ifp_had_enobuf = 0;
-			}
+			
 			endofchain = NULL;
 			auth = NULL;
 			auth_offset = 0;
@@ -10580,7 +10580,7 @@ do_it_again:
 						    from_where,
 						    &now, &now_filled, frag_point, so_locked);
 			return;
-		} else if (from_where != SCTP_OUTPUT_FROM_HB_TMR) {
+		} if (from_where != SCTP_OUTPUT_FROM_HB_TMR) {
 			/* if its not from a HB then do it */
 			fr_done = 0;
 			ret = sctp_chunk_retransmission(inp, stcb, asoc, &num_out, &now, &now_filled, &fr_done, so_locked);
@@ -12876,7 +12876,7 @@ sctp_send_str_reset_req(struct sctp_tcb *stcb,
 		/* error, can't do that */
 		SCTP_LTRACE_ERR_RET(NULL, stcb, NULL, SCTP_FROM_SCTP_OUTPUT, EINVAL);
 		return (EINVAL);
-	} else if (send_in_req) {
+	} if (send_in_req) {
 		can_send_out_req = 1;
 	}
 	if (number_entries > (MCLBYTES -

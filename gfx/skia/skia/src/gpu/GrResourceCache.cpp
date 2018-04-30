@@ -254,7 +254,7 @@ GrGpuResource* GrResourceCache::findAndRefScratchResource(const GrScratchKey& sc
             this->refAndMakeResourceMRU(resource);
             this->validate();
             return resource;
-        } else if (flags & kRequireNoPendingIO_ScratchFlag) {
+        } if (flags & kRequireNoPendingIO_ScratchFlag) {
             return nullptr;
         }
         // We would prefer to consume more available VRAM rather than flushing

@@ -226,7 +226,7 @@ _cairo_xlib_close_display (Display *dpy, XExtCodes *codes)
 	if (display->display == dpy) {
 	    *prev = next;
 	    break;
-	} else
+	} 
 	    prev = &display->next;
     }
     CAIRO_MUTEX_UNLOCK (_cairo_xlib_display_mutex);

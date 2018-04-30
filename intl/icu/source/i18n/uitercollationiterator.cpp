@@ -96,7 +96,7 @@ int32_t
 FCDUIterCollationIterator::getOffset() const {
     if(state <= ITER_CHECK_BWD) {
         return iter.getIndex(&iter, UITER_CURRENT);
-    } else if(state == ITER_IN_FCD_SEGMENT) {
+    } if(state == ITER_IN_FCD_SEGMENT) {
         return pos;
     } else if(pos == 0) {
         return start;
@@ -125,7 +125,7 @@ FCDUIterCollationIterator::handleNextCE32(UChar32 &c, UErrorCode &errorCode) {
                 }
             }
             break;
-        } else if(state == ITER_IN_FCD_SEGMENT && pos != limit) {
+        } if(state == ITER_IN_FCD_SEGMENT && pos != limit) {
             c = iter.next(&iter);
             ++pos;
             U_ASSERT(c >= 0);
@@ -150,12 +150,12 @@ FCDUIterCollationIterator::handleGetTrailSurrogate() {
             iter.previous(&iter);
         }
         return (UChar)trail;
-    } else {
+    } 
         U_ASSERT(pos < normalized.length());
         UChar trail;
         if(U16_IS_TRAIL(trail = normalized[pos])) { ++pos; }
         return trail;
-    }
+    
 }
 
 UChar32
@@ -181,12 +181,12 @@ FCDUIterCollationIterator::nextCodePoint(UErrorCode &errorCode) {
                 UChar32 trail = iter.next(&iter);
                 if(U16_IS_TRAIL(trail)) {
                     return U16_GET_SUPPLEMENTARY(c, trail);
-                } else if(trail >= 0) {
+                } if(trail >= 0) {
                     iter.previous(&iter);
                 }
             }
             return c;
-        } else if(state == ITER_IN_FCD_SEGMENT && pos != limit) {
+        } if(state == ITER_IN_FCD_SEGMENT && pos != limit) {
             c = uiter_next32(&iter);
             pos += U16_LENGTH(c);
             U_ASSERT(c >= 0);
@@ -239,7 +239,7 @@ FCDUIterCollationIterator::previousCodePoint(UErrorCode &errorCode) {
                 }
             }
             return c;
-        } else if(state == ITER_IN_FCD_SEGMENT && pos != start) {
+        } if(state == ITER_IN_FCD_SEGMENT && pos != start) {
             c = uiter_previous32(&iter);
             pos -= U16_LENGTH(c);
             U_ASSERT(c >= 0);

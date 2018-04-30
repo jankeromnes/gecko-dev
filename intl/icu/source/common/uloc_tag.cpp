@@ -716,7 +716,7 @@ _appendScriptToLanguageTag(const char* localeID, char* appendAt, int32_t capacit
                 *status = U_ILLEGAL_ARGUMENT_ERROR;
             }
             return 0;
-        } else {
+        } 
             if (reslen < capacity) {
                 *(appendAt + reslen) = SEP;
             }
@@ -726,7 +726,7 @@ _appendScriptToLanguageTag(const char* localeID, char* appendAt, int32_t capacit
                 uprv_memcpy(appendAt + reslen, buf, uprv_min(len, capacity - reslen));
             }
             reslen += len;
-        }
+        
     }
     u_terminateChars(appendAt, capacity, reslen, status);
     return reslen;
@@ -758,7 +758,7 @@ _appendRegionToLanguageTag(const char* localeID, char* appendAt, int32_t capacit
                 *status = U_ILLEGAL_ARGUMENT_ERROR;
             }
             return 0;
-        } else {
+        } 
             if (reslen < capacity) {
                 *(appendAt + reslen) = SEP;
             }
@@ -768,7 +768,7 @@ _appendRegionToLanguageTag(const char* localeID, char* appendAt, int32_t capacit
                 uprv_memcpy(appendAt + reslen, buf, uprv_min(len, capacity - reslen));
             }
             reslen += len;
-        }
+        
     }
     u_terminateChars(appendAt, capacity, reslen, status);
     return reslen;
@@ -2045,7 +2045,7 @@ ultag_parse(const char* tag, int32_t tagLen, int32_t* parsedLen, UErrorCode* sta
                         uprv_free(pExtension);
                         pExtension = NULL;
                         break;
-                    } else {
+                    } 
                         /* terminate the previous extension value */
                         *pExtValueSubtagEnd = 0;
                         pExtension->value = T_CString_toLowerCase(pExtValueSubtag);
@@ -2060,7 +2060,7 @@ ultag_parse(const char* tag, int32_t tagLen, int32_t* parsedLen, UErrorCode* sta
                             pExtension = NULL;
                             break;
                         }
-                    }
+                    
                 }
 
                 /* The rest of part will be private use value subtags */
@@ -2094,7 +2094,7 @@ ultag_parse(const char* tag, int32_t tagLen, int32_t* parsedLen, UErrorCode* sta
                         next = VART;
                         privateuseVar = TRUE;
                         break;
-                    } else if (_isPrivateuseValueSubtag(pSubtag, subtagLen)) {
+                    } if (_isPrivateuseValueSubtag(pSubtag, subtagLen)) {
                         pLastGoodPosition = pSep;
                     } else {
                         break;

@@ -281,10 +281,10 @@ size_t CallDAG::findIndex(const TSymbolUniqueId &id) const
     {
         return InvalidIndex;
     }
-    else
-    {
+    
+    
         return it->second;
-    }
+    
 }
 
 const CallDAG::Record &CallDAG::getRecordFromIndex(size_t index) const

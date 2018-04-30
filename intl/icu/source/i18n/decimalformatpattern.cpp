@@ -338,11 +338,11 @@ DecimalFormatPatternParser::applyPatternWithoutExpandAffix(
                         subpart = 0; // pattern proper subpart
                         sub0Start = pos; // Reprocess this character
                         continue;
-                    } else {
+                    } 
                         status = U_UNQUOTED_SPECIAL;
                         syntaxError(pattern,pos,parseError);
                         return;
-                    }
+                    
                 } else if (ch == kCurrencySign) {
                     affix->append(kQuote); // Encode currency
                     // Use lookahead to determine if the currency sign is

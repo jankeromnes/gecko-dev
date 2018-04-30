@@ -196,7 +196,7 @@ U_CAPI const char * U_EXPORT2
 u_errorName(UErrorCode code) {
     if(U_ZERO_ERROR <= code && code < U_STANDARD_ERROR_LIMIT) {
         return _uErrorName[code];
-    } else if(U_ERROR_WARNING_START <= code && code < U_ERROR_WARNING_LIMIT) {
+    } if(U_ERROR_WARNING_START <= code && code < U_ERROR_WARNING_LIMIT) {
         return _uErrorInfoName[code - U_ERROR_WARNING_START];
     } else if(U_PARSE_ERROR_START <= code && code < U_PARSE_ERROR_LIMIT){
         return _uTransErrorName[code - U_PARSE_ERROR_START];

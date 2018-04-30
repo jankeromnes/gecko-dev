@@ -689,9 +689,9 @@ std::unique_ptr<GrFragmentProcessor> GrRRectEffect::Make(GrClipEdgeType edgeType
         if (SkRRectPriv::GetSimpleRadii(rrect).fX == SkRRectPriv::GetSimpleRadii(rrect).fY) {
             return CircularRRectEffect::Make(edgeType, CircularRRectEffect::kAll_CornerFlags,
                                                rrect);
-        } else {
+        } 
             return EllipticalRRectEffect::Make(edgeType, rrect);
-        }
+        
     }
 
     if (rrect.isComplex() || rrect.isNinePatch()) {

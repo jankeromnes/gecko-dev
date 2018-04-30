@@ -206,9 +206,9 @@ BytesTrie::Iterator::branchNext(const uint8_t *pos, int32_t length, UErrorCode &
         pos_=NULL;
         value_=value;
         return NULL;
-    } else {
+    } 
         return pos+value;
-    }
+    
 }
 
 U_NAMESPACE_END

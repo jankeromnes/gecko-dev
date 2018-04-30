@@ -359,9 +359,9 @@ int32_t getGrowCapacity(int32_t newLength) {
   int32_t growSize = (newLength >> 2) + kGrowSize;
   if(growSize <= (kMaxCapacity - newLength)) {
     return newLength + growSize;
-  } else {
+  } 
     return kMaxCapacity;
-  }
+  
 }
 
 }  // namespace
@@ -472,7 +472,7 @@ UnicodeString UnicodeString::fromUTF32(const UChar32 *utf32, int32_t length) {
     if(errorCode == U_BUFFER_OVERFLOW_ERROR) {
       capacity = length16 + 1;  // +1 for the terminating NUL.
       continue;
-    } else if(U_FAILURE(errorCode)) {
+    } if(U_FAILURE(errorCode)) {
       result.setToBogus();
     }
     break;
@@ -765,9 +765,9 @@ UnicodeString::doCompareCodePointOrder(int32_t start,
   /* translate the 32-bit result into an 8-bit one */
   if(diff!=0) {
     return (int8_t)(diff >> 15 | 1);
-  } else {
+  } 
     return 0;
-  }
+  
 }
 
 int32_t
@@ -794,9 +794,9 @@ UnicodeString::char32At(int32_t offset) const
     UChar32 c;
     U16_GET(array, 0, offset, len, c);
     return c;
-  } else {
+  } 
     return kInvalidUChar;
-  }
+  
 }
 
 int32_t
@@ -805,9 +805,9 @@ UnicodeString::getChar32Start(int32_t offset) const {
     const UChar *array = getArrayStart();
     U16_SET_CP_START(array, 0, offset);
     return offset;
-  } else {
+  } 
     return 0;
-  }
+  
 }
 
 int32_t
@@ -817,9 +817,9 @@ UnicodeString::getChar32Limit(int32_t offset) const {
     const UChar *array = getArrayStart();
     U16_SET_CP_LIMIT(array, 0, offset, len);
     return offset;
-  } else {
+  } 
     return len;
-  }
+  
 }
 
 int32_t
@@ -1046,9 +1046,9 @@ UnicodeString::indexOf(const UChar *srcChars,
   const UChar *match = u_strFindFirst(array + start, length, srcChars + srcStart, srcLength);
   if(match == NULL) {
     return -1;
-  } else {
+  } 
     return (int32_t)(match - array);
-  }
+  
 }
 
 int32_t
@@ -1064,9 +1064,9 @@ UnicodeString::doIndexOf(UChar c,
   const UChar *match = u_memchr(array + start, c, length);
   if(match == NULL) {
     return -1;
-  } else {
+  } 
     return (int32_t)(match - array);
-  }
+  
 }
 
 int32_t
@@ -1081,9 +1081,9 @@ UnicodeString::doIndexOf(UChar32 c,
   const UChar *match = u_memchr32(array + start, c, length);
   if(match == NULL) {
     return -1;
-  } else {
+  } 
     return (int32_t)(match - array);
-  }
+  
 }
 
 int32_t 
@@ -1110,9 +1110,9 @@ UnicodeString::lastIndexOf(const UChar *srcChars,
   const UChar *match = u_strFindLast(array + start, length, srcChars + srcStart, srcLength);
   if(match == NULL) {
     return -1;
-  } else {
+  } 
     return (int32_t)(match - array);
-  }
+  
 }
 
 int32_t
@@ -1132,9 +1132,9 @@ UnicodeString::doLastIndexOf(UChar c,
   const UChar *match = u_memrchr(array + start, c, length);
   if(match == NULL) {
     return -1;
-  } else {
+  } 
     return (int32_t)(match - array);
-  }
+  
 }
 
 int32_t
@@ -1149,9 +1149,9 @@ UnicodeString::doLastIndexOf(UChar32 c,
   const UChar *match = u_memrchr32(array + start, c, length);
   if(match == NULL) {
     return -1;
-  } else {
+  } 
     return (int32_t)(match - array);
-  }
+  
 }
 
 //========================================
@@ -1185,12 +1185,12 @@ UnicodeString::findAndReplace(int32_t start,
     if(pos < 0) {
       // no more oldText's here: done
       break;
-    } else {
+    } 
       // we found oldText, replace it by newText and go beyond it
       replace(pos, oldLength, newText, newStart, newLength);
       length -= pos + oldLength - start;
       start = pos + newLength;
-    }
+    
   }
 
   return *this;
@@ -1248,9 +1248,9 @@ UnicodeString::getTerminatedBuffer() {
     array = getArrayStart();
     array[len] = 0;
     return array;
-  } else {
+  } 
     return nullptr;
-  }
+  
 }
 
 // setTo() analogous to the readonly-aliasing constructor with the same signature
@@ -1311,7 +1311,7 @@ UnicodeString::setTo(UChar *buffer,
   if(buffLength < -1 || buffCapacity < 0 || buffLength > buffCapacity) {
     setToBogus();
     return *this;
-  } else if(buffLength == -1) {
+  } if(buffLength == -1) {
     // buffLength = u_strlen(buff); but do not look beyond buffCapacity
     const UChar *p = buffer, *limit = buffer + buffCapacity;
     while(p != limit && *p != 0) {
@@ -1431,7 +1431,7 @@ UnicodeString::doReplace(int32_t start,
       fUnion.fFields.fCapacity -= length;
       setLength(oldLength - length);
       return *this;
-    } else {
+    } 
       pinIndex(start);
       if(length >= (oldLength - start)) {
         // remove suffix by reducing the length (like truncate())
@@ -1439,7 +1439,7 @@ UnicodeString::doReplace(int32_t start,
         fUnion.fFields.fCapacity = start;  // not NUL-terminated any more
         return *this;
       }
-    }
+    
   }
 
   if(start == oldLength) {
@@ -1661,7 +1661,7 @@ UnicodeString::padLeading(int32_t targetLength,
   int32_t oldLength = length();
   if(oldLength >= targetLength || !cloneArrayIfNeeded(targetLength)) {
     return FALSE;
-  } else {
+  } 
     // move contents up by padding width
     UChar *array = getArrayStart();
     int32_t start = targetLength - oldLength;
@@ -1673,7 +1673,7 @@ UnicodeString::padLeading(int32_t targetLength,
     }
     setLength(targetLength);
     return TRUE;
-  }
+  
 }
 
 UBool 
@@ -1683,7 +1683,7 @@ UnicodeString::padTrailing(int32_t targetLength,
   int32_t oldLength = length();
   if(oldLength >= targetLength || !cloneArrayIfNeeded(targetLength)) {
     return FALSE;
-  } else {
+  } 
     // fill in padding character
     UChar *array = getArrayStart();
     int32_t length = targetLength;
@@ -1692,7 +1692,7 @@ UnicodeString::padTrailing(int32_t targetLength,
     }
     setLength(targetLength);
     return TRUE;
-  }
+  
 }
 
 //========================================
@@ -1720,9 +1720,9 @@ UnicodeString::getBuffer(int32_t minCapacity) {
     fUnion.fFields.fLengthAndFlags|=kOpenGetBuffer;
     setZeroLength();
     return getArrayStart();
-  } else {
+  } 
     return nullptr;
-  }
+  
 }
 
 void

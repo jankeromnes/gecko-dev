@@ -197,7 +197,7 @@ int32_t getUmalqura_MonthLength(int32_t y, int32_t m) {
     int32_t mask = (int32_t) (0x01 << (11 - m));    // set mask for bit corresponding to month
     if((UMALQURA_MONTHLENGTH[y] & mask) == 0 )
         return 29;
-    else
+    
         return 30;
 
 }
@@ -372,7 +372,7 @@ int32_t IslamicCalendar::yearStart(int32_t year) const{
         (cType == UMALQURA && (year < UMALQURA_YEAR_START || year > UMALQURA_YEAR_END))) 
     {
         return (year-1)*354 + ClockMath::floorDivide((3+11*year),30);
-    } else if(cType==ASTRONOMICAL){
+    } if(cType==ASTRONOMICAL){
         return trueMonthStart(12*(year-1));
     } else {
         year -= UMALQURA_YEAR_START;
@@ -395,7 +395,7 @@ int32_t IslamicCalendar::monthStart(int32_t year, int32_t month) const {
         // This does not handle months out of the range 0..11
         return (int32_t)uprv_ceil(29.5*month)
             + (year-1)*354 + (int32_t)ClockMath::floorDivide((3+11*year),30);
-    } else if(cType==ASTRONOMICAL){
+    } if(cType==ASTRONOMICAL){
         return trueMonthStart(12*(year-1) + month);
     } else {
         int32_t ms = yearStart(year);
@@ -533,7 +533,7 @@ int32_t IslamicCalendar::handleGetYearLength(int32_t extendedYear) const {
     if (cType == CIVIL || cType == TBLA ||
         (cType == UMALQURA && (extendedYear<UMALQURA_YEAR_START || extendedYear>UMALQURA_YEAR_END)) ) {
         return 354 + (civilLeapYear(extendedYear) ? 1 : 0);
-    } else if(cType == ASTRONOMICAL){
+    } if(cType == ASTRONOMICAL){
         int32_t month = 12*(extendedYear-1);
         return (trueMonthStart(month + 12) - trueMonthStart(month));
     } else {
@@ -660,7 +660,7 @@ void IslamicCalendar::handleComputeFields(int32_t julianDay, UErrorCode &status)
                     if(d == handleGetYearLength(y)){
                         m=11;
                         break;
-                    }else if(d < handleGetYearLength(y) ){
+                    }if(d < handleGetYearLength(y) ){
                         int monthLen = handleGetMonthLength(y, m); 
                         m=0;
                         while(d > monthLen){

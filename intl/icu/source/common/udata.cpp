@@ -188,7 +188,7 @@ setCommonICUData(UDataMemory *pData,     /*  The new common data.  Belongs to ca
             gCommonICUDataArray[i] = newCommonData;
             didUpdate = TRUE;
             break;
-        } else if (gCommonICUDataArray[i]->pHeader == pData->pHeader) {
+        } if (gCommonICUDataArray[i]->pHeader == pData->pHeader) {
             /* The same data pointer is already in the array. */
             break;
         }
@@ -224,9 +224,9 @@ findBasename(const char *path) {
     const char *basename=uprv_strrchr(path, U_FILE_SEP_CHAR);
     if(basename==NULL) {
         return path;
-    } else {
+    } 
         return basename+1;
-    }
+    
 }
 
 #ifdef UDATA_DEBUG
@@ -1081,7 +1081,7 @@ static UDataMemory *doLoadFromCommonData(UBool isICUData, const char * /*pkgName
          * otherwise break out of this loop. */
         if (!isICUData) {
             return NULL;
-        } else if (pCommonData != NULL) {
+        } if (pCommonData != NULL) {
             ++commonDataIndex;  /* try the next data package */
         } else if ((!checkedExtendedICUData) && extendICUData(subErrorCode)) {
             checkedExtendedICUData = TRUE;
@@ -1377,7 +1377,7 @@ udata_open(const char *path, const char *type, const char *name,
 
     if(pErrorCode==NULL || U_FAILURE(*pErrorCode)) {
         return NULL;
-    } else if(name==NULL || *name==0) {
+    } if(name==NULL || *name==0) {
         *pErrorCode=U_ILLEGAL_ARGUMENT_ERROR;
         return NULL;
     } else {
@@ -1397,7 +1397,7 @@ udata_openChoice(const char *path, const char *type, const char *name,
 
     if(pErrorCode==NULL || U_FAILURE(*pErrorCode)) {
         return NULL;
-    } else if(name==NULL || *name==0 || isAcceptable==NULL) {
+    } if(name==NULL || *name==0 || isAcceptable==NULL) {
         *pErrorCode=U_ILLEGAL_ARGUMENT_ERROR;
         return NULL;
     } else {

@@ -151,10 +151,10 @@ noop_dest_iter_init (pixman_implementation_t *imp, pixman_iter_t *iter)
 
 	return TRUE;
     }
-    else
-    {
+    
+    
 	return FALSE;
-    }
+    
 }
 
 static const pixman_fast_path_t noop_fast_paths[] =

@@ -94,7 +94,7 @@ UChar32 BytesDictionaryMatcher::transform(UChar32 c) const {
     if ((transformConstant & DictionaryData::TRANSFORM_TYPE_MASK) == DictionaryData::TRANSFORM_TYPE_OFFSET) {
         if (c == 0x200D) {
             return 0xFF;
-        } else if (c == 0x200C) {
+        } if (c == 0x200C) {
             return 0xFE;
         }
         int32_t delta = c - (transformConstant & DictionaryData::TRANSFORM_OFFSET_MASK);

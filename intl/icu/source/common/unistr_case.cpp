@@ -142,7 +142,7 @@ UnicodeString::caseMap(int32_t caseLocale, uint32_t options, UCASEMAP_BREAK_ITER
     if (U_SUCCESS(errorCode)) {
       setLength(newLength);
       return *this;
-    } else if (errorCode == U_BUFFER_OVERFLOW_ERROR) {
+    } if (errorCode == U_BUFFER_OVERFLOW_ERROR) {
       // common overflow handling below
     } else {
       setToBogus();
@@ -179,7 +179,7 @@ UnicodeString::caseMap(int32_t caseLocale, uint32_t options, UCASEMAP_BREAK_ITER
         setToBogus();
       }
       return *this;
-    } else if (errorCode == U_BUFFER_OVERFLOW_ERROR) {
+    } if (errorCode == U_BUFFER_OVERFLOW_ERROR) {
       // common overflow handling below
       newLength = oldLength + edits.lengthDelta();
     } else {

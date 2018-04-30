@@ -26,9 +26,9 @@ UBool
 Appendable::appendCodePoint(UChar32 c) {
     if(c<=0xffff) {
         return appendCodeUnit((UChar)c);
-    } else {
+    } 
         return appendCodeUnit(U16_LEAD(c)) && appendCodeUnit(U16_TRAIL(c));
-    }
+    
 }
 
 UBool

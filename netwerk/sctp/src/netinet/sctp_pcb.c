@@ -642,7 +642,7 @@ sctp_add_addr_to_vrf(uint32_t vrf_id, void *ifn, uint32_t ifn_index,
 		exit_stage_left:
 			SCTP_IPI_ADDR_WUNLOCK();
 			return (sctp_ifap);
-		} else {
+		} 
 			if (sctp_ifap->ifn_p) {
 				/*
 				 * The last IFN gets the address, remove the
@@ -665,7 +665,7 @@ sctp_add_addr_to_vrf(uint32_t vrf_id, void *ifn, uint32_t ifn_index,
 				sctp_add_ifa_to_ifn(sctp_ifnp, sctp_ifap);
 			}
 			goto exit_stage_left;
-		}
+		
 	}
 	SCTP_IPI_ADDR_WUNLOCK();
 	SCTP_MALLOC(sctp_ifap, struct sctp_ifa *, sizeof(struct sctp_ifa), SCTP_M_IFA);
@@ -1552,7 +1552,7 @@ sctp_findassociation_ep_addr(struct sctp_inpcb **inp_p, struct sockaddr *remote,
 #endif
 			SCTP_INP_INFO_RUNLOCK();
 			return (stcb);
-		} else {
+		} 
 			SCTP_INP_WLOCK(inp);
 			if (inp->sctp_flags & SCTP_PCB_FLAGS_SOCKET_ALLGONE) {
 				goto null_return;
@@ -1680,7 +1680,7 @@ sctp_findassociation_ep_addr(struct sctp_inpcb **inp_p, struct sockaddr *remote,
 				}
 			}
 			SCTP_TCB_UNLOCK(stcb);
-		}
+		
 	} else {
 		SCTP_INP_WLOCK(inp);
 		if (inp->sctp_flags & SCTP_PCB_FLAGS_SOCKET_ALLGONE) {
@@ -2172,10 +2172,10 @@ sctp_isport_inuse(struct sctp_inpcb *inp, uint16_t lport, uint32_t vrf_id)
 			if (inp->sctp_flags & SCTP_PCB_FLAGS_BOUND_V6) {
 				/* collision in V6 space */
 				return (t_inp);
-			} else {
+			} 
 				/* inp is BOUND_V4 no conflict */
 				continue;
-			}
+			
 		} else if (t_inp->sctp_flags & SCTP_PCB_FLAGS_BOUND_V6) {
 			/* t_inp is bound v4 and v6, conflict always */
 			return (t_inp);
@@ -2578,13 +2578,13 @@ sctp_findassoc_by_vtag(struct sockaddr *from, struct sockaddr *to, uint32_t vtag
 				*inp_p = stcb->sctp_ep;
 				SCTP_INP_INFO_RUNLOCK();
 				return (stcb);
-			} else {
+			} 
 				/*
 				 * not him, this should only happen in rare
 				 * cases so I peg it.
 				 */
 				SCTP_STAT_INCR(sctps_vtagbogus);
-			}
+			
 		}
 		SCTP_TCB_UNLOCK(stcb);
 	}
@@ -4005,7 +4005,7 @@ sctp_inpcb_free(struct sctp_inpcb *inp, int immediate, int from)
 					cnt_in_sd++;
 				}
 				continue;
-			} else if (TAILQ_EMPTY(&asoc->asoc.send_queue) &&
+			} if (TAILQ_EMPTY(&asoc->asoc.send_queue) &&
 			           TAILQ_EMPTY(&asoc->asoc.sent_queue) &&
 			           (asoc->asoc.stream_queue_cnt == 0)) {
 				if ((*asoc->asoc.ss_functions.sctp_ss_is_user_msgs_incomplete)(asoc, &asoc->asoc)) {
@@ -4065,9 +4065,9 @@ sctp_inpcb_free(struct sctp_inpcb *inp, int immediate, int from)
 						cnt_in_sd++;
 					}
 					continue;
-				} else {
+				} 
 					sctp_chunk_output(inp, asoc, SCTP_OUTPUT_FROM_CLOSING, SCTP_SO_LOCKED);
-				}
+				
 			}
 			cnt_in_sd++;
 			SCTP_TCB_UNLOCK(asoc);
@@ -4362,9 +4362,9 @@ sctp_is_address_on_local_host(struct sockaddr *addr, uint32_t vrf_id)
 	sctp_ifa = sctp_find_ifa_by_addr(addr, vrf_id, SCTP_ADDR_NOT_LOCKED);
 	if (sctp_ifa) {
 		return (1);
-	} else {
+	} 
 		return (0);
-	}
+	
 #endif
 }
 
@@ -4827,7 +4827,7 @@ sctp_add_remote_addr(struct sctp_tcb *stcb, struct sockaddr *newaddr,
 				/* End of the list */
 				TAILQ_INSERT_TAIL(&stcb->asoc.nets, net, sctp_next);
 				break;
-			} else if (netlook->ro.ro_rt == NULL) {
+			} if (netlook->ro.ro_rt == NULL) {
 				/* next one has NO route */
 				TAILQ_INSERT_BEFORE(netfirst, net, sctp_next);
 				break;
@@ -5280,10 +5280,10 @@ sctp_del_remote_addr(struct sctp_tcb *stcb, struct sockaddr *remaddr)
 			if (asoc->numnets < 2) {
 				/* Must have at LEAST two remote addresses */
 				return (-1);
-			} else {
+			} 
 				sctp_remove_net(stcb, net);
 				return (0);
-			}
+			
 		}
 	}
 	/* not found. */
@@ -7731,7 +7731,7 @@ sctp_load_addresses_from_init(struct sctp_tcb *stcb, struct mbuf *m,
 	if ((peer_supports_asconf == 1) && (peer_supports_auth == 0)) {
 		/* peer supports asconf but not auth? */
 		return (-32);
-	} else if ((peer_supports_asconf == 1) &&
+	} if ((peer_supports_asconf == 1) &&
 	           (peer_supports_auth == 1) &&
 		   ((saw_asconf == 0) || (saw_asconf_ack == 0))) {
 		return (-33);
@@ -7783,7 +7783,7 @@ sctp_set_primary_addr(struct sctp_tcb *stcb, struct sockaddr *sa,
 	if (net == NULL) {
 		/* didn't find the requested primary address! */
 		return (-1);
-	} else {
+	} 
 		/* set the primary address */
 		if (net->dest_state & SCTP_ADDR_UNCONFIRMED) {
 			/* Must be confirmed, so queue to set */
@@ -7806,7 +7806,7 @@ sctp_set_primary_addr(struct sctp_tcb *stcb, struct sockaddr *sa,
 			TAILQ_INSERT_HEAD(&stcb->asoc.nets, stcb->asoc.primary_destination, sctp_next);
 		}
 		return (0);
-	}
+	
 }
 
 int
@@ -7861,7 +7861,7 @@ sctp_is_vtag_good(uint32_t tag, uint16_t lport, uint16_t rport, struct timeval *
 			if (twait_block->vtag_block[i].v_tag == 0) {
 				/* not used */
 				continue;
-			} else if ((long)twait_block->vtag_block[i].tv_sec_at_expire  <
+			} if ((long)twait_block->vtag_block[i].tv_sec_at_expire  <
 				   now->tv_sec) {
 				/* Audit expires this guy */
 				twait_block->vtag_block[i].tv_sec_at_expire = 0;

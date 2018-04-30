@@ -232,10 +232,10 @@ TString StructureHLSL::defineQualified(const TStructure &structure,
         Std140PaddingHelper padHelper = getPaddingHelper();
         return Define(structure, useHLSLRowMajorPacking, useStd140Packing, &padHelper);
     }
-    else
-    {
+    
+    
         return Define(structure, useHLSLRowMajorPacking, useStd140Packing, nullptr);
-    }
+    
 }
 
 TString StructureHLSL::defineNameless(const TStructure &structure)

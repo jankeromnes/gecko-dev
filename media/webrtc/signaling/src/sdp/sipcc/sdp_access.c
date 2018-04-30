@@ -71,9 +71,9 @@ tinybool sdp_version_valid (sdp_t *sdp_p)
 {
     if (sdp_p->version == SDP_INVALID_VALUE) {
         return (FALSE);
-    } else {
+    } 
         return (TRUE);
-    }
+    
 }
 
 /* Function:    sdp_get_version
@@ -112,9 +112,9 @@ tinybool sdp_owner_valid (sdp_t *sdp_p)
         (sdp_p->owner_addr_type == SDP_AT_INVALID) ||
         (sdp_p->owner_addr[0] == '\0')) {
         return (FALSE);
-    } else {
+    } 
         return (TRUE);
-    }
+    
 }
 
 /* Function:    sdp_get_owner_username
@@ -287,9 +287,9 @@ tinybool sdp_session_name_valid (sdp_t *sdp_p)
 {
     if (sdp_p->sessname[0] == '\0') {
         return (FALSE);
-    } else {
+    } 
         return (TRUE);
-    }
+    
 }
 
 /* Function:    sdp_get_session_name
@@ -331,9 +331,9 @@ tinybool sdp_timespec_valid (sdp_t *sdp_p)
         (sdp_p->timespec_p->start_time[0] == '\0') ||
         (sdp_p->timespec_p->stop_time[0] == '\0')) {
         return (FALSE);
-    } else {
+    } 
         return (TRUE);
-    }
+    
 }
 
 /* Function:    sdp_get_time_start
@@ -349,9 +349,9 @@ const char *sdp_get_time_start (sdp_t *sdp_p)
 {
     if (sdp_p->timespec_p != NULL) {
         return (sdp_p->timespec_p->start_time);
-    } else {
+    } 
         return (NULL);
-    }
+    
 }
 
 /* Function:    sdp_get_time_stop
@@ -367,9 +367,9 @@ const char *sdp_get_time_stop (sdp_t *sdp_p)
 {
     if (sdp_p->timespec_p != NULL) {
         return (sdp_p->timespec_p->stop_time);
-    } else {
+    } 
         return (NULL);
-    }
+    
 }
 
 /* Function:    sdp_set_time_start
@@ -450,9 +450,9 @@ tinybool sdp_encryption_valid (sdp_t *sdp_p, uint16_t level)
         ((encrypt_p->encrypt_type != SDP_ENCRYPT_PROMPT) &&
          (encrypt_p->encrypt_key[0] == '\0'))) {
         return (FALSE);
-    } else {
+    } 
         return (TRUE);
-    }
+    
 }
 
 /* Function:    sdp_get_encryption_method
@@ -547,9 +547,9 @@ tinybool sdp_connection_valid (sdp_t *sdp_p, uint16_t level)
         (conn_p->addrtype >= SDP_MAX_ADDR_TYPES) ||
         (conn_p->conn_addr[0] == '\0')) {
         return (FALSE);
-    } else {
+    } 
         return (TRUE);
-    }
+    
 }
 
 /* Function:    sdp_bandwidth_valid
@@ -572,9 +572,9 @@ tinybool sdp_bandwidth_valid (sdp_t *sdp_p, uint16_t level, uint16_t inst_num)
         if ((bw_data_p->bw_modifier < SDP_BW_MODIFIER_AS) ||
             (bw_data_p->bw_modifier >= SDP_MAX_BW_MODIFIER_VAL)) {
             return FALSE;
-        } else {
+        } 
             return TRUE;
-        }
+        
     } else {
         return FALSE;
     }
@@ -600,9 +600,9 @@ tinybool sdp_bw_line_exists (sdp_t *sdp_p, uint16_t level, uint16_t inst_num)
     bw_data_p = sdp_find_bw_line(sdp_p, level, inst_num);
     if (bw_data_p != NULL) {
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 /* Function:    sdp_get_conn_nettype
@@ -717,9 +717,9 @@ tinybool sdp_is_mcast_addr (sdp_t *sdp_p, uint16_t level)
 
     if ((conn_p) && (conn_p->is_multicast)) {
         return (TRUE);
-    } else {
+    } 
         return (FALSE);
-    }
+    
 }
 
 /* Function:    sdp_get_mcast_ttl
@@ -907,9 +907,9 @@ tinybool sdp_media_line_valid (sdp_t *sdp_p, uint16_t level)
         (mca_p->transport >= SDP_MAX_TRANSPORT_TYPES) ||
         (mca_p->num_payloads == 0)) {
         return (FALSE);
-    } else {
+    } 
         return (TRUE);
-    }
+    
 }
 
 /* Function:    sdp_get_num_media_lines
@@ -1218,9 +1218,9 @@ uint16_t sdp_get_media_num_profiles (sdp_t *sdp_p, uint16_t level)
 
     if (mca_p->media_profiles_p == NULL) {
         return (0);
-    } else {
+    } 
         return (mca_p->media_profiles_p->num_profiles);
-    }
+    
 }
 
 /* Function:    sdp_get_media_profile
@@ -1247,9 +1247,9 @@ sdp_transport_e sdp_get_media_profile (sdp_t *sdp_p, uint16_t level,
     if ((profile_num < 1) ||
         (profile_num > mca_p->media_profiles_p->num_profiles)) {
         return (SDP_TRANSPORT_INVALID);
-    } else {
+    } 
         return (mca_p->media_profiles_p->profile[profile_num-1]);
-    }
+    
 }
 
 /* Function:    sdp_get_media_num_payload_types
@@ -1297,9 +1297,9 @@ uint16_t sdp_get_media_profile_num_payload_types (sdp_t *sdp_p, uint16_t level,
     if ((profile_num < 1) ||
         (profile_num > mca_p->media_profiles_p->num_profiles)) {
         return (0);
-    } else {
+    } 
         return (mca_p->media_profiles_p->num_payloads[profile_num-1]);
-    }
+    
 }
 
 rtp_ptype sdp_get_known_payload_type(sdp_t *sdp_p,
@@ -1365,14 +1365,14 @@ rtp_ptype sdp_get_known_payload_type(sdp_t *sdp_p,
           int fmtp_inst = sdp_find_fmtp_inst(sdp_p, level, rtpmap->payload_num);
           if (fmtp_inst < 0) {
             return (RTP_H264_P0);
-          } else {
+          } 
             sdp_attr_get_fmtp_pack_mode(sdp_p, level, 0, (uint16_t) fmtp_inst, &pack_mode);
             if (pack_mode == SDP_DEFAULT_PACKETIZATION_MODE_VALUE) {
               return (RTP_H264_P0);
-            } else {
+            } 
               return (RTP_H264_P1);
-            }
-          }
+            
+          
         }
         if (cpr_strcasecmp(encname, SIPSDP_ATTR_ENCNAME_VP8) == 0) {
           return (RTP_VP8);
@@ -1662,11 +1662,11 @@ sdp_result_e sdp_add_media_profile (sdp_t *sdp_p, uint16_t level,
         if (mca_p->media_profiles_p == NULL) {
             sdp_p->conf_p->num_no_resource++;
             return (SDP_NO_RESOURCE);
-        } else {
+        } 
             mca_p->media_profiles_p->num_profiles = 0;
             /* Set the transport type to this first profile type. */
             mca_p->transport = profile;
-        }
+        
     }
 
     if (mca_p->media_profiles_p->num_profiles >= SDP_MAX_PROFILES) {
@@ -1923,9 +1923,9 @@ sdp_bw_modifier_e sdp_get_bw_modifier (sdp_t *sdp_p, uint16_t level, uint16_t in
 
     if (bw_data_p) {
         return (bw_data_p->bw_modifier);
-    } else {
+    } 
         return (SDP_BW_MODIFIER_UNSUPPORTED);
-    }
+    
 }
 
 /* Function:    sdp_get_bw_value
@@ -1945,9 +1945,9 @@ int32_t sdp_get_bw_value (sdp_t *sdp_p, uint16_t level, uint16_t inst_num)
 
     if (bw_data_p) {
         return (bw_data_p->bw_val);
-    } else {
+    } 
         return (SDP_INVALID_VALUE);
-    }
+    
 }
 
 /*

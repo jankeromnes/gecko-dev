@@ -514,13 +514,13 @@ public:
         UnicodeString *s = dynamic_cast<UnicodeString *>(instance);
         if(s != NULL) {
             return s->clone();
-        } else {
+        } 
 #ifdef U_DEBUG_CALSVC_F
             UErrorCode status2 = U_ZERO_ERROR;
             fprintf(stderr, "Cloning a %s calendar with tz=%ld\n", ((Calendar*)instance)->getType(), ((Calendar*)instance)->get(UCAL_ZONE_OFFSET, status2));
 #endif
             return ((Calendar*)instance)->clone();
-        }
+        
     }
 
     virtual UObject* handleDefault(const ICUServiceKey& key, UnicodeString* /*actualID*/, UErrorCode& status) const {
@@ -2290,7 +2290,7 @@ int32_t Calendar::fieldDifference(UDate targetMs, UCalendarDateFields field, UEr
             double ms = getTimeInMillis(ec);
             if (ms == targetMs) {
                 return max;
-            } else if (ms > targetMs) {
+            } if (ms > targetMs) {
                 break;
             } else if (max < INT32_MAX) {
                 min = max;
@@ -2315,7 +2315,7 @@ int32_t Calendar::fieldDifference(UDate targetMs, UCalendarDateFields field, UEr
             double ms = getTimeInMillis(ec);
             if (ms == targetMs) {
                 return t;
-            } else if (ms > targetMs) {
+            } if (ms > targetMs) {
                 max = t;
             } else {
                 min = t;
@@ -2330,7 +2330,7 @@ int32_t Calendar::fieldDifference(UDate targetMs, UCalendarDateFields field, UEr
             double ms = getTimeInMillis(ec);
             if (ms == targetMs) {
                 return max;
-            } else if (ms < targetMs) {
+            } if (ms < targetMs) {
                 break;
             } else {
                 min = max;
@@ -2353,7 +2353,7 @@ int32_t Calendar::fieldDifference(UDate targetMs, UCalendarDateFields field, UEr
             double ms = getTimeInMillis(ec);
             if (ms == targetMs) {
                 return t;
-            } else if (ms < targetMs) {
+            } if (ms < targetMs) {
                 max = t;
             } else {
                 min = t;
@@ -2565,7 +2565,7 @@ Calendar::getWeekendTransition(UCalendarDaysOfWeek dayOfWeek, UErrorCode &status
     }
     if (dayOfWeek == fWeekendOnset) {
         return fWeekendOnsetMillis;
-    } else if (dayOfWeek == fWeekendCease) {
+    } if (dayOfWeek == fWeekendCease) {
         return fWeekendCeaseMillis;
     }
     status = U_ILLEGAL_ARGUMENT_ERROR;
@@ -2756,10 +2756,10 @@ Calendar::getActualMinimum(UCalendarDateFields field, UErrorCode& status) const
         if (work->get(field, status) != fieldValue) {
             break;
         }
-        else {
+        
             result = fieldValue;
             fieldValue--;
-        }
+        
     } while (fieldValue >= endValue);
 
     delete work;
@@ -3077,11 +3077,11 @@ UBool Calendar::getImmediatePreviousZoneTransition(UDate base, UDate *transition
         if (hasTransition) {
             *transitionTime = trans.getTime();
             return TRUE;
-        } else {
+        } 
             // Could not find any transitions.
             // Note: This should never happen.
             status = U_INTERNAL_PROGRAM_ERROR;
-        }
+        
     } else {
         // If not BasicTimeZone, return unsupported error for now.
         // TODO: We may support non-BasicTimeZone in future.
@@ -3503,14 +3503,14 @@ int32_t Calendar::handleGetExtendedYearFromWeekFields(int32_t yearWoy, int32_t w
                 // the first week of January is in the previous year
                 // therefore WOY1 is always solidly within yearWoy
                 return yearWoy;
-            } else {
+            } 
                 // First WOY is split between two years
                 if( dowLocal < first) { // we are prior to Jan 1
                     return yearWoy-1; // previous year
-                } else {
+                } 
                     return yearWoy; // in this year
-                }
-            }
+                
+            
         } else if(woy >= getLeastMaximum(bestField)) {
             // we _might_ be in the last week..
             int32_t jd =  // Calculate JD of our target day:
@@ -3525,10 +3525,10 @@ int32_t Calendar::handleGetExtendedYearFromWeekFields(int32_t yearWoy, int32_t w
             if( (jd+1) >= nextJan1Start ) {
                 // we are in week 52 or 53 etc. - actual year is yearWoy+1
                 return yearWoy+1;
-            } else {
+            } 
                 // still in yearWoy;
                 return yearWoy;
-            }
+            
         } else {
             // we're not possibly in the last week -must be ywoy
             return yearWoy;
@@ -3542,9 +3542,9 @@ int32_t Calendar::handleGetExtendedYearFromWeekFields(int32_t yearWoy, int32_t w
                 //if(nextJan1InPrevYear) {
                 if(internalGet(UCAL_MONTH)==0) {
                     return yearWoy;
-                } else {
+                } 
                     return yearWoy-1;
-                }
+                
                 //}
             }
 

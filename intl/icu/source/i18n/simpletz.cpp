@@ -602,7 +602,7 @@ SimpleTimeZone::compareToRule(int8_t month, int8_t monthLen, int8_t prevMonthLen
     // first compare months.  If they're different, we don't have to worry about days
     // and times
     if (month < ruleMonth) return -1;
-    else if (month > ruleMonth) return 1;
+    if (month > ruleMonth) return 1;
 
     // calculate the actual day of month for the rule
     int32_t ruleDayOfMonth = 0;
@@ -656,11 +656,11 @@ SimpleTimeZone::compareToRule(int8_t month, int8_t monthLen, int8_t prevMonthLen
 
     // now that we have a real day-in-month for the rule, we can compare days...
     if (dayOfMonth < ruleDayOfMonth) return -1;
-    else if (dayOfMonth > ruleDayOfMonth) return 1;
+    if (dayOfMonth > ruleDayOfMonth) return 1;
 
     // ...and if they're equal, we compare times
     if (millis < ruleMillis) return -1;
-    else if (millis > ruleMillis) return 1;
+    if (millis > ruleMillis) return 1;
     else return 0;
 }
 

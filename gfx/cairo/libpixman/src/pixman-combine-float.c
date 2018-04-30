@@ -374,7 +374,7 @@ blend_overlay (float sa, float s, float da, float d)
 {
     if (2 * d < da)
 	return 2 * s * d;
-    else
+    
 	return sa * da - 2 * (da - d) * (sa - s);
 }
 
@@ -386,7 +386,7 @@ blend_darken (float sa, float s, float da, float d)
 
     if (s > d)
 	return d;
-    else
+    
 	return s;
 }
 
@@ -398,7 +398,7 @@ blend_lighten (float sa, float s, float da, float d)
 
     if (s > d)
 	return s;
-    else
+    
 	return d;
 }
 
@@ -407,7 +407,7 @@ blend_color_dodge (float sa, float s, float da, float d)
 {
     if (IS_ZERO (d))
 	return 0.0f;
-    else if (d * sa >= sa * da - s * da)
+    if (d * sa >= sa * da - s * da)
 	return sa * da;
     else if (IS_ZERO (sa - s))
 	return sa * da;
@@ -420,7 +420,7 @@ blend_color_burn (float sa, float s, float da, float d)
 {
     if (d >= da)
 	return sa * da;
-    else if (sa * (da - d) >= s * da)
+    if (sa * (da - d) >= s * da)
 	return 0.0f;
     else if (IS_ZERO (s))
 	return 0.0f;
@@ -433,7 +433,7 @@ blend_hard_light (float sa, float s, float da, float d)
 {
     if (2 * s < sa)
 	return 2 * s * d;
-    else
+    
 	return sa * da - 2 * (da - d) * (sa - s);
 }
 
@@ -444,7 +444,7 @@ blend_soft_light (float sa, float s, float da, float d)
     {
 	if (IS_ZERO (da))
 	    return d * sa;
-	else
+	
 	    return d * sa - d * (da - d) * (sa - 2 * s) / da;
     }
     else
@@ -453,13 +453,13 @@ blend_soft_light (float sa, float s, float da, float d)
 	{
 	    return 0.0f;
 	}
-	else
-	{
+	
+	
 	    if (4 * d <= da)
 		return d * sa + (2 * s - sa) * d * ((16 * d / da - 12) * d / da + 3);
-	    else
+	    
 		return d * sa + (sqrtf (d * da) - d) * (2 * s - sa);
-	}
+	
     }
 }
 
@@ -471,7 +471,7 @@ blend_difference (float sa, float s, float da, float d)
 
     if (sda < dsa)
 	return dsa - sda;
-    else
+    
 	return sda - dsa;
 }
 

@@ -347,12 +347,12 @@ static int set_string_color(void *obj, const AVOption *o, const char *val, uint8
 
     if (!val) {
         return 0;
-    } else {
+    } 
         ret = av_parse_color(dst, val, -1, obj);
         if (ret < 0)
             av_log(obj, AV_LOG_ERROR, "Unable to parse option value \"%s\" as color\n", val);
         return ret;
-    }
+    
     return 0;
 }
 
@@ -1105,7 +1105,7 @@ static void opt_list(void *obj, void *av_log_obj, const char *unit,
          */
         if (!unit && opt->type == AV_OPT_TYPE_CONST)
             continue;
-        else if (unit && opt->type != AV_OPT_TYPE_CONST)
+        if (unit && opt->type != AV_OPT_TYPE_CONST)
             continue;
         else if (unit && opt->type == AV_OPT_TYPE_CONST && strcmp(unit, opt->unit))
             continue;
@@ -2003,7 +2003,7 @@ int av_opt_serialize(void *obj, int opt_flags, int flags, char **buffer,
             continue;
         if ((flags & AV_OPT_SERIALIZE_OPT_FLAGS_EXACT) && o->flags != opt_flags)
             continue;
-        else if (((o->flags & opt_flags) != opt_flags))
+        if (((o->flags & opt_flags) != opt_flags))
             continue;
         if (flags & AV_OPT_SERIALIZE_SKIP_DEFAULTS && av_opt_is_set_to_default(obj, o) > 0)
             continue;

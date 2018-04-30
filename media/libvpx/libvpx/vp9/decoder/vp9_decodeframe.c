@@ -122,9 +122,9 @@ static REFERENCE_MODE read_frame_reference_mode(const VP9_COMMON *cm,
     return vpx_read_bit(r)
                ? (vpx_read_bit(r) ? REFERENCE_MODE_SELECT : COMPOUND_REFERENCE)
                : SINGLE_REFERENCE;
-  } else {
+  } 
     return SINGLE_REFERENCE;
-  }
+  
 }
 
 static void read_frame_reference_mode_probs(VP9_COMMON *cm, vpx_reader *r) {
@@ -1235,10 +1235,10 @@ static void setup_frame_size_with_refs(VP9_COMMON *cm,
         height = buf->y_crop_height;
         found = 1;
         break;
-      } else {
+      } 
         vpx_internal_error(&cm->error, VPX_CODEC_CORRUPT_FRAME,
                            "Failed to decode frame size");
-      }
+      
     }
   }
 

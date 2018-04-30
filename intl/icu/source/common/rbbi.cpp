@@ -1339,10 +1339,10 @@ const UnicodeString&
 RuleBasedBreakIterator::getRules() const {
     if (fData != NULL) {
         return fData->getRuleSourceString();
-    } else {
+    } 
         umtx_initOnce(gRBBIInitOnce, &rbbiInit);
         return *gEmptyString;
-    }
+    
 }
 
 U_NAMESPACE_END

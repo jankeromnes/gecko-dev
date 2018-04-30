@@ -98,9 +98,9 @@ digitToBasic(int32_t digit, UBool uppercase) {
     if(digit<26) {
         if(uppercase) {
             return (char)(_CAPITAL_A+digit);
-        } else {
+        } 
             return (char)(_SMALL_A+digit);
-        }
+        
     } else {
         return (char)((_ZERO_-26)+digit);
     }

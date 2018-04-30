@@ -926,7 +926,7 @@ static bool allocate_and_populate_texture(GrPixelConfig config,
         GrGLenum error = CHECK_ALLOC_ERROR(&interface);
         if (error != GR_GL_NO_ERROR) {
             return  false;
-        } else {
+        } 
             for (int currentMipLevel = 0; currentMipLevel < mipLevelCount; currentMipLevel++) {
                 const void* currentMipData = texels[currentMipLevel].fPixels;
                 if (currentMipData == nullptr) {
@@ -947,7 +947,7 @@ static bool allocate_and_populate_texture(GrPixelConfig config,
                                          currentMipData));
             }
             return true;
-        }
+        
     } else {
         if (!mipLevelCount) {
             GL_ALLOC_CALL(&interface,
@@ -2145,7 +2145,7 @@ bool GrGLGpu::readPixelsSupported(GrPixelConfig rtConfig, GrPixelConfig readConf
             GrGLRenderTarget* glrt = static_cast<GrGLRenderTarget*>(temp->asRenderTarget());
             this->flushRenderTargetNoColorWrites(glrt);
             return true;
-        } else if (this->glCaps().canConfigBeFBOColorAttachment(rtConfig)) {
+        } if (this->glCaps().canConfigBeFBOColorAttachment(rtConfig)) {
             desc.fOrigin = kTopLeft_GrSurfaceOrigin;
             temp = this->createTexture(desc, SkBudgeted::kNo);
             if (!temp) {
@@ -2171,10 +2171,10 @@ bool GrGLGpu::readPixelsSupported(GrPixelConfig rtConfig, GrPixelConfig readConf
 bool GrGLGpu::readPixelsSupported(GrSurface* surfaceForConfig, GrPixelConfig readConfig) {
     if (GrRenderTarget* rt = surfaceForConfig->asRenderTarget()) {
         return this->readPixelsSupported(rt, readConfig);
-    } else {
+    } 
         GrPixelConfig config = surfaceForConfig->config();
         return this->readPixelsSupported(config, readConfig);
-    }
+    
 }
 
 bool GrGLGpu::onGetReadPixelsInfo(GrSurface* srcSurface, GrSurfaceOrigin srcOrigin, int width,
@@ -3398,9 +3398,9 @@ static inline bool can_copy_texsubimage(const GrSurface* dst, GrSurfaceOrigin ds
         (!srcTex || srcTex->target() == GR_GL_TEXTURE_2D) && dstTex->target() == GR_GL_TEXTURE_2D &&
         dstOrigin == srcOrigin) {
         return true;
-    } else {
+    } 
         return false;
-    }
+    
 }
 
 // If a temporary FBO was created, its non-zero ID is returned. The viewport that the copy rect is

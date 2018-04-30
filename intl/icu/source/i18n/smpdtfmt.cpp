@@ -3543,7 +3543,7 @@ int32_t SimpleDateFormat::subParse(const UnicodeString& text, int32_t& start, UC
 
         if (ampmStart > 0) {
             return ampmStart;
-        } else {
+        } 
             int32_t newStart = 0;
 
             // Only match the first two strings from the day period strings array.
@@ -3568,7 +3568,7 @@ int32_t SimpleDateFormat::subParse(const UnicodeString& text, int32_t& start, UC
             }
 
             return -start;
-        }
+        
     }
 
     case UDAT_FLEXIBLE_DAY_PERIOD_FIELD:
@@ -4027,7 +4027,7 @@ SimpleDateFormat::checkIntSuffix(const UnicodeString& text, int32_t start,
     if ((textPreMatch >= 0) && (patternMatch >= 0) && (textPreMatch == patternMatch)) {
         return start;
     }
-    else if ((textPostMatch >= 0) && (patternMatch >= 0) && (textPostMatch == patternMatch)) {
+    if ((textPostMatch >= 0) && (patternMatch >= 0) && (textPostMatch == patternMatch)) {
         return  start - suf.length();
     }
 

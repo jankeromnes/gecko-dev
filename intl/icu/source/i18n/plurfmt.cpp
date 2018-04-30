@@ -210,10 +210,10 @@ PluralFormat::format(const Formattable& obj,
 
     if (obj.isNumeric()) {
         return format(obj, obj.getDouble(), appendTo, pos, status);
-    } else {
+    } 
         status = U_ILLEGAL_ARGUMENT_ERROR;
         return appendTo;
-    }
+    
 }
 
 UnicodeString
@@ -308,7 +308,7 @@ PluralFormat::format(const Formattable& numberObject, double number,
         int32_t index = part.getIndex();
         if (type == UMSGPAT_PART_TYPE_MSG_LIMIT) {
             return appendTo.append(pattern, prevIndex, index - prevIndex);
-        } else if ((type == UMSGPAT_PART_TYPE_REPLACE_NUMBER) ||
+        } if ((type == UMSGPAT_PART_TYPE_REPLACE_NUMBER) ||
             (type == UMSGPAT_PART_TYPE_SKIP_SYNTAX && MessageImpl::jdkAposMode(msgPattern))) {
             appendTo.append(pattern, prevIndex, index - prevIndex);
             if (type == UMSGPAT_PART_TYPE_REPLACE_NUMBER) {

@@ -394,7 +394,7 @@ static bool append_porterduff_term(GrGLSLFragmentBuilder* fsBuilder, SkBlendMode
                                    const char* dstColorName, bool hasPrevious) {
     if (SkBlendModeCoeff::kZero == coeff) {
         return hasPrevious;
-    } else {
+    } 
         if (hasPrevious) {
             fsBuilder->codeAppend(" + ");
         }
@@ -430,7 +430,7 @@ static bool append_porterduff_term(GrGLSLFragmentBuilder* fsBuilder, SkBlendMode
                 SK_ABORT("Unsupported Blend Coeff");
         }
         return true;
-    }
+    
 }
 
 //////////////////////////////////////////////////////////////////////////////

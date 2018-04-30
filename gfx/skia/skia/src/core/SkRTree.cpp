@@ -13,9 +13,9 @@ SkRTree::SkRTree(SkScalar aspectRatio)
 SkRect SkRTree::getRootBound() const {
     if (fCount) {
         return fRoot.fBounds;
-    } else {
+    } 
         return SkRect::MakeEmpty();
-    }
+    
 }
 
 void SkRTree::insert(const SkRect boundsArray[], int N) {

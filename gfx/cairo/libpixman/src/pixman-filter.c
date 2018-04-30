@@ -74,7 +74,7 @@ sinc (double x)
 {
     if (x == 0.0)
 	return 1.0;
-    else
+    
 	return sin (M_PI * x) / (M_PI * x);
 }
 
@@ -112,7 +112,7 @@ general_cubic (double x, double B, double C)
 	return ((12 - 9 * B - 6 * C) * ax * ax * ax +
 		(-18 + 12 * B + 6 * C) * ax * ax + (6 - 2 * B)) / 6;
     }
-    else if (ax >= 1 && ax < 2)
+    if (ax >= 1 && ax < 2)
     {
 	return ((-B - 6 * C) * ax * ax * ax +
 		(6 * B + 30 * C) * ax * ax + (-12 * B - 48 * C) *
@@ -171,7 +171,7 @@ integral (pixman_kernel_t kernel1, double x1,
 	    integral (kernel1, x1, kernel2, scale, x2, - x1) +
 	    integral (kernel1, 0, kernel2, scale, x2 - x1, width + x1);
     }
-    else if (x2 < 0 && x2 + width > 0)
+    if (x2 < 0 && x2 + width > 0)
     {
 	return
 	    integral (kernel1, x1, kernel2, scale, x2, - x2) +

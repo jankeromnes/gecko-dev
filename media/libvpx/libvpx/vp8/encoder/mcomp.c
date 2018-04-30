@@ -963,7 +963,7 @@ int vp8_hex_search(MACROBLOCK *x, BLOCK *b, BLOCKD *d, int_mv *ref_mv,
 
     if (best_site == -1) {
       break;
-    } else {
+    } 
       br += next_chkpts[k][best_site].row;
       bc += next_chkpts[k][best_site].col;
       k += 5 + best_site;
@@ -972,7 +972,7 @@ int vp8_hex_search(MACROBLOCK *x, BLOCK *b, BLOCKD *d, int_mv *ref_mv,
       } else if (k >= 6) {
         k -= 6;
       }
-    }
+    
   }
 
 /* check 4 1-away neighbors */
@@ -1004,10 +1004,10 @@ cal_neighbors:
 
     if (best_site == -1) {
       break;
-    } else {
+    } 
       br += neighbors[best_site].row;
       bc += neighbors[best_site].col;
-    }
+    
   }
 
   best_mv->as_mv.row = br;
@@ -1694,12 +1694,12 @@ int vp8_refining_search_sad_c(MACROBLOCK *x, BLOCK *b, BLOCKD *d,
 
     if (best_site == -1) {
       break;
-    } else {
+    } 
       ref_mv->as_mv.row += neighbors[best_site].row;
       ref_mv->as_mv.col += neighbors[best_site].col;
       best_address += (neighbors[best_site].row) * in_what_stride +
                       neighbors[best_site].col;
-    }
+    
   }
 
   this_mv.as_mv.row = ref_mv->as_mv.row << 3;
@@ -1804,12 +1804,12 @@ int vp8_refining_search_sadx4(MACROBLOCK *x, BLOCK *b, BLOCKD *d,
 
     if (best_site == -1) {
       break;
-    } else {
+    } 
       ref_mv->as_mv.row += neighbors[best_site].row;
       ref_mv->as_mv.col += neighbors[best_site].col;
       best_address += (neighbors[best_site].row) * in_what_stride +
                       neighbors[best_site].col;
-    }
+    
   }
 
   this_mv.as_mv.row = ref_mv->as_mv.row * 8;

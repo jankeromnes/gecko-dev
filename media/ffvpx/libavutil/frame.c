@@ -287,7 +287,7 @@ int av_frame_get_buffer(AVFrame *frame, int align)
 
     if (frame->width > 0 && frame->height > 0)
         return get_video_buffer(frame, align);
-    else if (frame->nb_samples > 0 && (frame->channel_layout || frame->channels > 0))
+    if (frame->nb_samples > 0 && (frame->channel_layout || frame->channels > 0))
         return get_audio_buffer(frame, align);
 
     return AVERROR(EINVAL);
@@ -744,7 +744,7 @@ int av_frame_copy(AVFrame *dst, const AVFrame *src)
 
     if (dst->width > 0 && dst->height > 0)
         return frame_copy_video(dst, src);
-    else if (dst->nb_samples > 0 && dst->channels > 0)
+    if (dst->nb_samples > 0 && dst->channels > 0)
         return frame_copy_audio(dst, src);
 
     return AVERROR(EINVAL);

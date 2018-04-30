@@ -188,7 +188,7 @@ int av_buffer_realloc(AVBufferRef **pbuf, int size)
         *pbuf = buf;
 
         return 0;
-    } else if (buf->size == size)
+    } if (buf->size == size)
         return 0;
 
     if (!(buf->buffer->flags & BUFFER_FLAG_REALLOCATABLE) ||

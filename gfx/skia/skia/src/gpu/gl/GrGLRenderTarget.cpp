@@ -117,7 +117,7 @@ bool GrGLRenderTarget::completeStencilAttachment() {
         }
 #endif
         return true;
-    } else {
+    } 
         const GrGLStencilAttachment* glStencil = static_cast<const GrGLStencilAttachment*>(stencil);
         GrGLuint rb = glStencil->renderbufferID();
 
@@ -147,7 +147,7 @@ bool GrGLRenderTarget::completeStencilAttachment() {
         }
 #endif
         return true;
-    }
+    
 }
 
 void GrGLRenderTarget::onRelease() {

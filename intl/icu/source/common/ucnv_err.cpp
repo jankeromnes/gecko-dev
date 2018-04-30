@@ -222,7 +222,7 @@ UCNV_FROM_U_CALLBACK_ESCAPE (
   {
       return;
   }
-  else if (reason == UCNV_UNASSIGNED && IS_DEFAULT_IGNORABLE_CODE_POINT(codePoint))
+  if (reason == UCNV_UNASSIGNED && IS_DEFAULT_IGNORABLE_CODE_POINT(codePoint))
   {
       /*
        * Skip if the codepoint has unicode property of default ignorable.

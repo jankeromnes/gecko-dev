@@ -54,9 +54,9 @@ uprv_malloc(size_t s) {
     if (s > 0) {
         if (pAlloc) {
             return (*pAlloc)(pContext, s);
-        } else {
+        } 
             return uprv_default_malloc(s);
-        }
+        
     } else {
         return (void *)zeroMem;
     }
@@ -70,7 +70,7 @@ uprv_realloc(void * buffer, size_t size) {
 #endif
     if (buffer == zeroMem) {
         return uprv_malloc(size);
-    } else if (size == 0) {
+    } if (size == 0) {
         if (pFree) {
             (*pFree)(pContext, buffer);
         } else {
@@ -80,9 +80,9 @@ uprv_realloc(void * buffer, size_t size) {
     } else {
         if (pRealloc) {
             return (*pRealloc)(pContext, buffer, size);
-        } else {
+        } 
             return uprv_default_realloc(buffer, size);
-        }
+        
     }
 }
 

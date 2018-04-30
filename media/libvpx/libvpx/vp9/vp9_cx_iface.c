@@ -1303,9 +1303,9 @@ static vpx_codec_err_t ctrl_set_reference(vpx_codec_alg_priv_t *ctx,
     vp9_set_reference_enc(ctx->cpi, ref_frame_to_vp9_reframe(frame->frame_type),
                           &sd);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t ctrl_copy_reference(vpx_codec_alg_priv_t *ctx,
@@ -1319,9 +1319,9 @@ static vpx_codec_err_t ctrl_copy_reference(vpx_codec_alg_priv_t *ctx,
     vp9_copy_reference_enc(ctx->cpi,
                            ref_frame_to_vp9_reframe(frame->frame_type), &sd);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t ctrl_get_reference(vpx_codec_alg_priv_t *ctx,
@@ -1334,9 +1334,9 @@ static vpx_codec_err_t ctrl_get_reference(vpx_codec_alg_priv_t *ctx,
 
     yuvconfig2image(&frame->img, fb, NULL);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t ctrl_set_previewpp(vpx_codec_alg_priv_t *ctx,
@@ -1346,9 +1346,9 @@ static vpx_codec_err_t ctrl_set_previewpp(vpx_codec_alg_priv_t *ctx,
   if (config != NULL) {
     ctx->preview_ppcfg = *config;
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 #else
   (void)ctx;
   (void)args;
@@ -1370,9 +1370,9 @@ static vpx_image_t *encoder_get_preview(vpx_codec_alg_priv_t *ctx) {
   if (vp9_get_preview_raw_frame(ctx->cpi, &sd, &flags) == 0) {
     yuvconfig2image(&ctx->preview_img, &sd, NULL);
     return &ctx->preview_img;
-  } else {
+  } 
     return NULL;
-  }
+  
 }
 
 static vpx_codec_err_t ctrl_set_roi_map(vpx_codec_alg_priv_t *ctx,
@@ -1392,7 +1392,7 @@ static vpx_codec_err_t ctrl_set_active_map(vpx_codec_alg_priv_t *ctx,
     if (!vp9_set_active_map(ctx->cpi, map->active_map, (int)map->rows,
                             (int)map->cols))
       return VPX_CODEC_OK;
-    else
+    
       return VPX_CODEC_INVALID_PARAM;
   } else {
     return VPX_CODEC_INVALID_PARAM;
@@ -1407,7 +1407,7 @@ static vpx_codec_err_t ctrl_get_active_map(vpx_codec_alg_priv_t *ctx,
     if (!vp9_get_active_map(ctx->cpi, map->active_map, (int)map->rows,
                             (int)map->cols))
       return VPX_CODEC_OK;
-    else
+    
       return VPX_CODEC_INVALID_PARAM;
   } else {
     return VPX_CODEC_INVALID_PARAM;
@@ -1423,9 +1423,9 @@ static vpx_codec_err_t ctrl_set_scale_mode(vpx_codec_alg_priv_t *ctx,
         vp9_set_internal_size(ctx->cpi, (VPX_SCALING)mode->h_scaling_mode,
                               (VPX_SCALING)mode->v_scaling_mode);
     return (res == 0) ? VPX_CODEC_OK : VPX_CODEC_INVALID_PARAM;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t ctrl_set_svc(vpx_codec_alg_priv_t *ctx, va_list args) {

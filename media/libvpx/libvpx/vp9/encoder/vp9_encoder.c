@@ -272,9 +272,9 @@ int vp9_set_active_map(VP9_COMP *cpi, unsigned char *new_map_16x16, int rows,
       cpi->active_map.enabled = 0;
     }
     return 0;
-  } else {
+  } 
     return -1;
-  }
+  
 }
 
 int vp9_get_active_map(VP9_COMP *cpi, unsigned char *new_map_16x16, int rows,
@@ -297,9 +297,9 @@ int vp9_get_active_map(VP9_COMP *cpi, unsigned char *new_map_16x16, int rows,
       }
     }
     return 0;
-  } else {
+  } 
     return -1;
-  }
+  
 }
 
 void vp9_set_high_precision_mv(VP9_COMP *cpi, int allow_high_precision_mv) {
@@ -2181,9 +2181,9 @@ int vp9_copy_reference_enc(VP9_COMP *cpi, VP9_REFFRAME ref_frame_flag,
   if (cfg) {
     vp8_yv12_copy_frame(cfg, sd);
     return 0;
-  } else {
+  } 
     return -1;
-  }
+  
 }
 
 int vp9_set_reference_enc(VP9_COMP *cpi, VP9_REFFRAME ref_frame_flag,
@@ -2192,9 +2192,9 @@ int vp9_set_reference_enc(VP9_COMP *cpi, VP9_REFFRAME ref_frame_flag,
   if (cfg) {
     vp8_yv12_copy_frame(sd, cfg);
     return 0;
-  } else {
+  } 
     return -1;
-  }
+  
 }
 
 int vp9_update_entropy(VP9_COMP *cpi, int update) {
@@ -2453,9 +2453,9 @@ static int two_pass_first_group_inter(VP9_COMP *cpi) {
   if ((cpi->oxcf.pass == 2) &&
       (gf_group->index == gf_group->first_inter_index)) {
     return 1;
-  } else {
+  } 
     return 0;
-  }
+  
 }
 
 // Function to test for conditions that indicate we should loop
@@ -3616,9 +3616,9 @@ YV12_BUFFER_CONFIG *vp9_svc_twostage_scale(VP9_COMMON *cm,
     vp9_scale_and_extend_frame(scaled_temp, scaled);
 #endif  // CONFIG_VP9_HIGHBITDEPTH
     return scaled;
-  } else {
+  } 
     return unscaled;
-  }
+  
 }
 
 YV12_BUFFER_CONFIG *vp9_scale_if_required(VP9_COMMON *cm,
@@ -3641,9 +3641,9 @@ YV12_BUFFER_CONFIG *vp9_scale_if_required(VP9_COMMON *cm,
       scale_and_extend_frame_nonnormative(unscaled, scaled);
 #endif  // CONFIG_VP9_HIGHBITDEPTH
     return scaled;
-  } else {
+  } 
     return unscaled;
-  }
+  
 }
 
 static void set_arf_sign_bias(VP9_COMP *cpi) {
@@ -4618,7 +4618,7 @@ int vp9_get_compressed_data(VP9_COMP *cpi, unsigned int *frame_flags,
       // Avoid creating an alt-ref if there's a forced keyframe pending.
       if (e == NULL) {
         break;
-      } else if (e->flags == VPX_EFLAG_FORCE_KF) {
+      } if (e->flags == VPX_EFLAG_FORCE_KF) {
         arf_src_index = 0;
         flush = 1;
         break;
@@ -5042,7 +5042,7 @@ int vp9_get_preview_raw_frame(VP9_COMP *cpi, YV12_BUFFER_CONFIG *dest,
 
   if (!cm->show_frame) {
     return -1;
-  } else {
+  } 
     int ret;
 #if CONFIG_VP9_POSTPROC
     ret = vp9_post_proc_frame(cm, dest, flags);
@@ -5060,7 +5060,7 @@ int vp9_get_preview_raw_frame(VP9_COMP *cpi, YV12_BUFFER_CONFIG *dest,
 #endif  // !CONFIG_VP9_POSTPROC
     vpx_clear_system_state();
     return ret;
-  }
+  
 }
 
 int vp9_set_internal_size(VP9_COMP *cpi, VPX_SCALING horiz_mode,

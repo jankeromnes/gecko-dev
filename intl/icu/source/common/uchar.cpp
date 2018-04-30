@@ -231,12 +231,12 @@ U_CAPI UBool U_EXPORT2
 u_isblank(UChar32 c) {
     if((uint32_t)c<=0x9f) {
         return c==9 || c==0x20; /* TAB or SPACE */
-    } else {
+    } 
         /* Zs */
         uint32_t props;
         GET_PROPS(c, props);
         return (UBool)(GET_CATEGORY(props)==U_SPACE_SEPARATOR);
-    }
+    
 }
 
 U_CAPI UBool U_EXPORT2
@@ -333,11 +333,11 @@ U_CAPI UBool U_EXPORT2
 u_isIDIgnorable(UChar32 c) {
     if(c<=0x9f) {
         return u_isISOControl(c) && !IS_THAT_ASCII_CONTROL_SPACE(c);
-    } else {
+    } 
         uint32_t props;
         GET_PROPS(c, props);
         return (UBool)(GET_CATEGORY(props)==U_FORMAT_CHAR);
-    }
+    
 }
 
 /*Checks if the Unicode character can start a Java identifier.*/
@@ -373,9 +373,9 @@ u_charDigitValue(UChar32 c) {
     value=(int32_t)GET_NUMERIC_TYPE_VALUE(props)-UPROPS_NTV_DECIMAL_START;
     if(value<=9) {
         return value;
-    } else {
+    } 
         return -1;
-    }
+    
 }
 
 U_CAPI double U_EXPORT2
@@ -387,7 +387,7 @@ u_getNumericValue(UChar32 c) {
 
     if(ntv==UPROPS_NTV_NONE) {
         return U_NO_NUMERIC_VALUE;
-    } else if(ntv<UPROPS_NTV_DIGIT_START) {
+    } if(ntv<UPROPS_NTV_DIGIT_START) {
         /* decimal digit */
         return ntv-UPROPS_NTV_DECIMAL_START;
     } else if(ntv<UPROPS_NTV_NUMERIC_START) {
@@ -492,7 +492,7 @@ U_CAPI UChar32 U_EXPORT2
 u_forDigit(int32_t digit, int8_t radix) {
     if((uint8_t)(radix-2)>(36-2) || (uint32_t)digit>=(uint32_t)radix) {
         return 0;
-    } else if(digit<10) {
+    } if(digit<10) {
         return (UChar32)(0x30+digit);
     } else {
         return (UChar32)((0x61-10)+digit);
@@ -520,10 +520,10 @@ u_getUnicodeProperties(UChar32 c, int32_t column) {
     U_ASSERT(column>=0);
     if(column>=propsVectorsColumns) {
         return 0;
-    } else {
+    } 
         uint16_t vecIndex=UTRIE2_GET16(&propsVectorsTrie, c);
         return propsVectors[vecIndex+column];
-    }
+    
 }
 
 U_CFUNC int32_t
@@ -561,7 +561,7 @@ uscript_getScript(UChar32 c, UErrorCode *pErrorCode) {
     scriptX=u_getUnicodeProperties(c, 0)&UPROPS_SCRIPT_X_MASK;
     if(scriptX<UPROPS_SCRIPT_X_WITH_COMMON) {
         return (UScriptCode)scriptX;
-    } else if(scriptX<UPROPS_SCRIPT_X_WITH_INHERITED) {
+    } if(scriptX<UPROPS_SCRIPT_X_WITH_INHERITED) {
         return USCRIPT_COMMON;
     } else if(scriptX<UPROPS_SCRIPT_X_WITH_OTHER) {
         return USCRIPT_INHERITED;

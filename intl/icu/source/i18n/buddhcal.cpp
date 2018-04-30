@@ -97,9 +97,9 @@ int32_t BuddhistCalendar::handleGetLimit(UCalendarDateFields field, ELimitType l
 {
     if(field == UCAL_ERA) {
         return BE;
-    } else {
+    } 
         return GregorianCalendar::handleGetLimit(field,limitType);
-    }
+    
 }
 
 #if 0

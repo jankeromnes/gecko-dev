@@ -277,7 +277,7 @@ directMode:
                 byteIndex=1;
                 *pErrorCode=U_ILLEGAL_CHAR_FOUND;
                 break;
-            } else if(b!=PLUS) {
+            } if(b!=PLUS) {
                 /* write directly encoded character */
                 *target++=b;
                 if(offsets!=NULL) {
@@ -338,7 +338,7 @@ unicodeMode:
                         byteIndex=1;
                         *pErrorCode=U_ILLEGAL_CHAR_FOUND;
                         break;
-                    } else if(bits!=0) {
+                    } if(bits!=0) {
                         /* bits are illegally left over, a UChar is incomplete */
                         /* don't include current char (legal or illegal) in error seq */
                         --source;
@@ -351,12 +351,12 @@ unicodeMode:
                             /* current character is illegal, deal with it here */
                             *pErrorCode=U_ILLEGAL_CHAR_FOUND;
                             break;
-                        } else {
+                        } 
                             /* un-read the current character in case it is a plus sign */
                             --source;
                             sourceIndex=nextSourceIndex-1;
                             goto directMode;
-                        }
+                        
                     }
                 } else if(base64Value>=0) {
                     /* collect base64 bytes into UChars */
@@ -962,7 +962,7 @@ directMode:
                 byteIndex=1;
                 *pErrorCode=U_ILLEGAL_CHAR_FOUND;
                 break;
-            } else if(b!=AMPERSAND) {
+            } if(b!=AMPERSAND) {
                 /* write directly encoded character */
                 *target++=b;
                 if(offsets!=NULL) {
@@ -1005,7 +1005,7 @@ unicodeMode:
                     inDirectMode=TRUE;
                     *pErrorCode=U_ILLEGAL_CHAR_FOUND;
                     break;
-                } else if((base64Value=FROM_BASE64_IMAP(b))>=0) {
+                } if((base64Value=FROM_BASE64_IMAP(b))>=0) {
                     /* collect base64 bytes into UChars */
                     switch(base64Counter) {
                     case -1: /* -1 is immediately after the & */

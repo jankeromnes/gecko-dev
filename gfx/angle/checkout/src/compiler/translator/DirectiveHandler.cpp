@@ -24,7 +24,7 @@ static TBehavior getBehavior(const std::string &str)
 
     if (str == kRequire)
         return EBhRequire;
-    else if (str == kEnable)
+    if (str == kEnable)
         return EBhEnable;
     else if (str == kDisable)
         return EBhDisable;
@@ -81,8 +81,8 @@ void TDirectiveHandler::handlePragma(const pp::SourceLocation &loc,
         // name and value.
         return;
     }
-    else
-    {
+    
+    
         const char kOptimize[]             = "optimize";
         const char kDebug[]                = "debug";
         const char kDebugShaderPrecision[] = "webgl_debug_shader_precision";
@@ -127,7 +127,7 @@ void TDirectiveHandler::handlePragma(const pp::SourceLocation &loc,
         {
             mDiagnostics.error(loc, "invalid pragma value - 'on' or 'off' expected", value.c_str());
         }
-    }
+    
 }
 
 void TDirectiveHandler::handleExtension(const pp::SourceLocation &loc,

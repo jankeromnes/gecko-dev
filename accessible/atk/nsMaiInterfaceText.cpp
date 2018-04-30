@@ -152,7 +152,7 @@ getTextCB(AtkText *aText, gint aStartOffset, gint aEndOffset)
            DOMtoATK::AtkStringConvertFlags::ConvertTextToAsterisks :
            DOMtoATK::AtkStringConvertFlags::None);
 
-  } else if (ProxyAccessible* proxy = GetProxy(ATK_OBJECT(aText))) {
+  } if (ProxyAccessible* proxy = GetProxy(ATK_OBJECT(aText))) {
     return DOMtoATK::NewATKString(proxy, aStartOffset, aEndOffset,
          DOMtoATK::AtkStringConvertFlags::None);
   }

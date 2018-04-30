@@ -78,10 +78,10 @@ SelectFormat::format(const Formattable& obj,
     }
     if (obj.getType() == Formattable::kString) {
         return format(obj.getString(status), appendTo, pos, status);
-    } else {
+    } 
         status = U_ILLEGAL_ARGUMENT_ERROR;
         return appendTo;
-    }
+    
 }
 
 UnicodeString&
@@ -143,7 +143,7 @@ int32_t SelectFormat::findSubMessage(const MessagePattern& pattern, int32_t part
         if(pattern.partSubstringMatches(part, keyword)) {
             // keyword matches
             return partIndex;
-        } else if(msgStart==0 && pattern.partSubstringMatches(part, other)) {
+        } if(msgStart==0 && pattern.partSubstringMatches(part, other)) {
             msgStart=partIndex;
         }
         partIndex=pattern.getLimitPartIndex(partIndex);

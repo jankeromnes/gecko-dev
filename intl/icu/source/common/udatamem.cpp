@@ -61,7 +61,7 @@ UDataMemory_normalizeDataPointer(const void *p) {
     const DataHeader *pdh = (const DataHeader *)p;
     if(pdh==NULL || (pdh->dataHeader.magic1==0xda && pdh->dataHeader.magic2==0x27)) {
         return pdh;
-    } else {
+    } 
 #if U_PLATFORM == U_PF_OS400
         /*
         TODO: Fix this once the compiler implements this feature. Keep in sync with genccode.c
@@ -79,7 +79,7 @@ UDataMemory_normalizeDataPointer(const void *p) {
 #else
         return (const DataHeader *)((const double *)p+1);
 #endif
-    }
+    
 }
 
 
@@ -104,9 +104,9 @@ U_CAPI const void * U_EXPORT2
 udata_getMemory(UDataMemory *pData) {
     if(pData!=NULL && pData->pHeader!=NULL) {
         return (char *)(pData->pHeader)+udata_getHeaderSize(pData->pHeader);
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 /**
@@ -137,9 +137,9 @@ udata_getLength(const UDataMemory *pData) {
          * return only the size of the actual data starting at udata_getMemory()
          */
         return pData->length-udata_getHeaderSize(pData->pHeader);
-    } else {
+    } 
         return -1;
-    }
+    
 }
 
 /**
@@ -151,9 +151,9 @@ U_CAPI const void * U_EXPORT2
 udata_getRawMemory(const UDataMemory *pData) {
     if(pData!=NULL && pData->pHeader!=NULL) {
         return pData->pHeader;
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 U_CFUNC UBool UDataMemory_isLoaded(const UDataMemory *This) {

@@ -653,9 +653,9 @@ _cairo_surface_wrapper_get_extents (cairo_surface_wrapper_t *wrapper,
 	    *extents = wrapper->extents;
 
 	return TRUE;
-    } else {
+    } 
 	return _cairo_surface_get_extents (wrapper->target, extents);
-    }
+    
 }
 
 void

@@ -711,7 +711,7 @@ int res0_inverse(vorbis_block *vb,vorbis_look_residue *vl,
       in[used++]=in[i];
   if(used)
     return(_01inverse(vb,vl,in,used,vorbis_book_decodevs_add));
-  else
+  
     return(0);
 }
 
@@ -730,9 +730,9 @@ int res1_forward(oggpack_buffer *opb,vorbis_block *vb,vorbis_look_residue *vl,
     (void)submap;
     return _01forward(opb,vl,in,used,partword,_encodepart);
 #endif
-  }else{
-    return(0);
   }
+    return(0);
+  
 }
 
 long **res1_class(vorbis_block *vb,vorbis_look_residue *vl,
@@ -743,7 +743,7 @@ long **res1_class(vorbis_block *vb,vorbis_look_residue *vl,
       in[used++]=in[i];
   if(used)
     return(_01class(vb,vl,in,used));
-  else
+  
     return(0);
 }
 
@@ -755,7 +755,7 @@ int res1_inverse(vorbis_block *vb,vorbis_look_residue *vl,
       in[used++]=in[i];
   if(used)
     return(_01inverse(vb,vl,in,used,vorbis_book_decodev_add));
-  else
+  
     return(0);
 }
 
@@ -766,7 +766,7 @@ long **res2_class(vorbis_block *vb,vorbis_look_residue *vl,
     if(nonzero[i])used++;
   if(used)
     return(_2class(vb,vl,in,ch));
-  else
+  
     return(0);
 }
 
@@ -796,9 +796,9 @@ int res2_forward(oggpack_buffer *opb,
     (void)submap;
     return _01forward(opb,vl,&work,1,partword,_encodepart);
 #endif
-  }else{
-    return(0);
   }
+    return(0);
+  
 }
 
 /* duplicate code here as speed is somewhat more important */

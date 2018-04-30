@@ -457,9 +457,9 @@ void CheckResult::clear() {
 int32_t CheckResult::toCombinedBitmask(int32_t enabledChecks) {
     if ((enabledChecks & USPOOF_AUX_INFO) != 0 && fRestrictionLevel != USPOOF_UNDEFINED_RESTRICTIVE) {
         return fChecks | fRestrictionLevel;
-    } else {
+    } 
         return fChecks;
-    }
+    
 }
 
 CheckResult::~CheckResult() {
@@ -505,9 +505,9 @@ spoofDataIsAcceptable(void *context,
             uprv_memcpy(version, pInfo->dataVersion, 4);
         }
         return TRUE;
-    } else {
+    } 
         return FALSE;
-    }
+    
 }
 
 //  Methods for the loading of the default confusables data file.  The confusable

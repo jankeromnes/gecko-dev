@@ -970,7 +970,7 @@ static const PREDICTION_MODE intra_mode_list[] = { DC_PRED, V_PRED, H_PRED,
 static int mode_offset(const PREDICTION_MODE mode) {
   if (mode >= NEARESTMV) {
     return INTER_OFFSET(mode);
-  } else {
+  } 
     switch (mode) {
       case DC_PRED: return 0;
       case V_PRED: return 1;
@@ -978,7 +978,7 @@ static int mode_offset(const PREDICTION_MODE mode) {
       case TM_PRED: return 3;
       default: return -1;
     }
-  }
+  
 }
 
 static INLINE void update_thresh_freq_fact(

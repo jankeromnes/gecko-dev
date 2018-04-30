@@ -891,7 +891,7 @@ static int U_CALLCONV currencyNameComparator(const void* a, const void* b) {
     }
     if (currName_1->currencyNameLen < currName_2->currencyNameLen) {
         return -1;
-    } else if (currName_1->currencyNameLen > currName_2->currencyNameLen) {
+    } if (currName_1->currencyNameLen > currName_2->currencyNameLen) {
         return 1;
     }
     return 0;
@@ -1037,9 +1037,9 @@ collectCurrencyNames(const char* locale,
                 if (uhash_get(currencyIsoCodes, iso) != NULL) {
                     ures_close(names);
                     continue;
-                } else {
+                } 
                     uhash_put(currencyIsoCodes, iso, iso, &ec3); 
-                }
+                
             }
             // Add currency symbol.
             (*currencySymbols)[*total_currency_symbol_count].IsoCode = iso;
@@ -1094,9 +1094,9 @@ collectCurrencyNames(const char* locale,
                 if (uhash_get(currencyPluralIsoCodes, iso) != NULL) {
                     ures_close(names);
                     continue;
-                } else {
+                } 
                     uhash_put(currencyPluralIsoCodes, iso, iso, &ec4); 
-                }
+                
             }
             int32_t num = ures_getSize(names);
             int32_t len;
@@ -2189,7 +2189,7 @@ ucurr_isAvailable(const UChar* isoCode, UDate from, UDate to, UErrorCode* eError
     IsoCodeEntry* result = (IsoCodeEntry *) uhash_get(gIsoCodes, isoCode);
     if (result == NULL) {
         return FALSE;
-    } else if (from > to) {
+    } if (from > to) {
         *eErrorCode = U_ILLEGAL_ARGUMENT_ERROR;
         return FALSE;
     } else if  ((from > result->to) || (to < result->from)) {
@@ -2476,11 +2476,11 @@ ucurr_forLocaleAndDate(const char* locale,
             // return null terminated currency string
             return u_terminateUChars(buff, buffCapacity, resLen, ec);
         }
-        else
-        {
+        
+        
             // illegal argument encountered
             *ec = U_ILLEGAL_ARGUMENT_ERROR;
-        }
+        
 
     }
 

@@ -410,10 +410,10 @@ uloc_getDisplayScript(const char* locale,
 	if ( err == U_USING_DEFAULT_WARNING ) {
         return _getDisplayNameForComponent(locale, displayLocale, dest, destCapacity,
                     uloc_getScript, _kScripts, pErrorCode);
-	} else {
+	} 
 		*pErrorCode = err;
 		return res;
-	}
+	
 }
 
 U_INTERNAL int32_t U_EXPORT2
@@ -858,19 +858,19 @@ uloc_getDisplayKeywordValue(   const char* locale,
             if(dispNameLen <= destCapacity){
                 u_memcpy(dest, dispName, dispNameLen);
                 return u_terminateUChars(dest, destCapacity, dispNameLen, status);
-            }else{
+            }
                 *status = U_BUFFER_OVERFLOW_ERROR;
                 return dispNameLen;
-            }
+            
         }else{
             /* we have not found the display name for the value .. just copy over */
             if(keywordValueLen <= destCapacity){
                 u_charsToUChars(keywordValue, dest, keywordValueLen);
                 return u_terminateUChars(dest, destCapacity, keywordValueLen, status);
-            }else{
+            }
                  *status = U_BUFFER_OVERFLOW_ERROR;
                 return keywordValueLen;
-            }
+            
         }
 
         

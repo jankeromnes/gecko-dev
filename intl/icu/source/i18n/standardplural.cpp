@@ -107,10 +107,10 @@ int32_t StandardPlural::indexFromString(const char *keyword, UErrorCode &errorCo
     int32_t i = indexOrNegativeFromString(keyword);
     if (i >= 0) {
         return i;
-    } else {
+    } 
         errorCode = U_ILLEGAL_ARGUMENT_ERROR;
         return OTHER;
-    }
+    
 }
 
 int32_t StandardPlural::indexFromString(const UnicodeString &keyword, UErrorCode &errorCode) {
@@ -118,10 +118,10 @@ int32_t StandardPlural::indexFromString(const UnicodeString &keyword, UErrorCode
     int32_t i = indexOrNegativeFromString(keyword);
     if (i >= 0) {
         return i;
-    } else {
+    } 
         errorCode = U_ILLEGAL_ARGUMENT_ERROR;
         return OTHER;
-    }
+    
 }
 
 U_NAMESPACE_END

@@ -30,7 +30,7 @@ static const double rate_ratio[MAX_SEGMENTS] = { 1.0, 0.75, 0.6, 0.5,
 unsigned int vp9_360aq_segment_id(int mi_row, int mi_rows) {
   if (mi_row < mi_rows / 8 || mi_row > mi_rows - mi_rows / 8)
     return 2;
-  else if (mi_row < mi_rows / 4 || mi_row > mi_rows - mi_rows / 4)
+  if (mi_row < mi_rows / 4 || mi_row > mi_rows - mi_rows / 4)
     return 1;
   else
     return 0;

@@ -445,9 +445,9 @@ unorm2_getDecomposition(const UNormalizer2 *norm2,
     UnicodeString destString(decomposition, 0, capacity);
     if(reinterpret_cast<const Normalizer2 *>(norm2)->getDecomposition(c, destString)) {
         return destString.extract(decomposition, capacity, *pErrorCode);
-    } else {
+    } 
         return -1;
-    }
+    
 }
 
 U_CAPI int32_t U_EXPORT2
@@ -464,9 +464,9 @@ unorm2_getRawDecomposition(const UNormalizer2 *norm2,
     UnicodeString destString(decomposition, 0, capacity);
     if(reinterpret_cast<const Normalizer2 *>(norm2)->getRawDecomposition(c, destString)) {
         return destString.extract(decomposition, capacity, *pErrorCode);
-    } else {
+    } 
         return -1;
-    }
+    
 }
 
 U_CAPI UChar32 U_EXPORT2
@@ -547,9 +547,9 @@ u_getCombiningClass(UChar32 c) {
     const Normalizer2 *nfd=Normalizer2::getNFDInstance(errorCode);
     if(U_SUCCESS(errorCode)) {
         return nfd->getCombiningClass(c);
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 U_CFUNC uint16_t
@@ -558,9 +558,9 @@ unorm_getFCD16(UChar32 c) {
     const Normalizer2Impl *impl=Normalizer2Factory::getNFCImpl(errorCode);
     if(U_SUCCESS(errorCode)) {
         return impl->getFCD16(c);
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 #endif  // !UCONFIG_NO_NORMALIZATION

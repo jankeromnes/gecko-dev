@@ -393,7 +393,7 @@ sctp_place_control_in_stream(struct sctp_stream_in *strm,
 			control->on_strm_q = SCTP_ON_ORDERED;
 		}
 		return (0);
-	} else {
+	} 
 		TAILQ_FOREACH(at, q, next_instrm) {
 			if (SCTP_MID_GT(asoc->idata_supported, at->mid, control->mid)) {
 				/*
@@ -407,7 +407,7 @@ sctp_place_control_in_stream(struct sctp_stream_in *strm,
 					control->on_strm_q = SCTP_ON_ORDERED ;
 				}
 				break;
-			} else if (SCTP_MID_EQ(asoc->idata_supported, at->mid, control->mid)) {
+			} if (SCTP_MID_EQ(asoc->idata_supported, at->mid, control->mid)) {
 				/*
 				 * Gak, He sent me a duplicate msg
 				 * id number?? return -1 to abort.
@@ -433,7 +433,7 @@ sctp_place_control_in_stream(struct sctp_stream_in *strm,
 				}
 			}
 		}
-	}
+	
 	return (0);
 }
 
@@ -640,7 +640,7 @@ sctp_queue_data_to_stream(struct sctp_tcb *stcb,
 				                  SCTP_READ_LOCK_NOT_HELD,
 				                  SCTP_SO_LOCKED);
 				continue;
-			} else if (SCTP_MID_EQ(asoc->idata_supported, nxt_todel, control->mid)) {
+			} if (SCTP_MID_EQ(asoc->idata_supported, nxt_todel, control->mid)) {
 				*need_reasm = 1;
 			}
 			break;
@@ -920,9 +920,9 @@ restart:
 					}
 				}
 				return (1);
-			} else {
+			} 
 				sctp_free_a_readq(stcb, nc);
-			}
+			
 		} else {
 			/* Can't add more */
 			break;
@@ -936,9 +936,9 @@ restart:
 		                  inp_read_lock_held, SCTP_SO_NOT_LOCKED);
 		sctp_wakeup_the_read_socket(stcb->sctp_ep, stcb, SCTP_SO_NOT_LOCKED);
 		return (0);
-	} else {
+	} 
 		return (1);
-	}
+	
 }
 
 static void
@@ -1043,7 +1043,7 @@ place_chunk:
 			inserted = 1;
 			TAILQ_INSERT_BEFORE(at, chk, sctp_next);
 			break;
-		} else if (at->rec.data.fsn == chk->rec.data.fsn) {
+		} if (at->rec.data.fsn == chk->rec.data.fsn) {
 			/* 
 			 * They sent a duplicate fsn number. This
 			 * really should not happen since the FSN is
@@ -1543,7 +1543,7 @@ sctp_queue_data_for_reasm(struct sctp_tcb *stcb, struct sctp_association *asoc,
 				TAILQ_INSERT_BEFORE(at, chk, sctp_next);
 				inserted = 1;
 				break;
-			} else if (at->rec.data.fsn == chk->rec.data.fsn) {
+			} if (at->rec.data.fsn == chk->rec.data.fsn) {
 				/* Gak, He sent me a duplicate str seq number */
 				/*
 				 * foo bar, I guess I will just free this new guy,
@@ -2193,12 +2193,12 @@ sctp_process_a_data_chunk(struct sctp_tcb *stcb, struct sctp_association *asoc,
 					if (SCTP_TSN_GT(control->sinfo_tsn, lcontrol->sinfo_tsn)) {
 
 						continue;
-					} else {
+					} 
 						/* found it */
 						TAILQ_INSERT_BEFORE(lcontrol, control, next);
 						inserted = 1;
 						break;
-					}
+					
 				}
 				if (inserted == 0) {
 					/*
@@ -3375,7 +3375,7 @@ sctp_strike_gap_ack_chunks(struct sctp_tcb *stcb, struct sctp_association *asoc,
 			 * FR using this SACK.
 			 */
 			continue;
-		} else if (tp1->whoTo && SCTP_TSN_GT(tp1->rec.data.tsn,
+		} if (tp1->whoTo && SCTP_TSN_GT(tp1->rec.data.tsn,
 		                                     tp1->whoTo->this_sack_highest_newack)) {
 			/*
 			 * CMT: New acks were receieved for data sent to
@@ -3921,7 +3921,7 @@ sctp_express_handle_sack(struct sctp_tcb *stcb, uint32_t cumack,
 	if (SCTP_TSN_GT(asoc->last_acked_seq, cumack)) {
 		/* old ack */
 		return;
-	} else if (asoc->last_acked_seq == cumack) {
+	} if (asoc->last_acked_seq == cumack) {
 		/* Window update sack */
 		asoc->peers_rwnd = sctp_sbspace_sub(rwnd,
 						    (uint32_t) (asoc->total_flight + (asoc->total_flight_count * SCTP_BASE_SYSCTL(sctp_peer_chunk_oh))));
@@ -5067,7 +5067,7 @@ sctp_handle_sack(struct mbuf *m, int offset_seg, int offset_dup,
 			sctp_timer_start(SCTP_TIMER_TYPE_SHUTDOWNGUARD,
 					 stcb->sctp_ep, stcb, netp);
 			return;
-		} else if ((SCTP_GET_STATE(asoc) == SCTP_STATE_SHUTDOWN_RECEIVED) &&
+		} if ((SCTP_GET_STATE(asoc) == SCTP_STATE_SHUTDOWN_RECEIVED) &&
 			   (asoc->stream_queue_cnt == 0)) {
 			struct sctp_nets *netp;
 
@@ -5741,7 +5741,7 @@ sctp_handle_forward_tsn(struct sctp_tcb *stcb,
 							SCTP_SO_NOT_LOCKED);
 					stcb->asoc.control_pdapi = sv;
 					break;
-				} else if ((control->sinfo_stream == sid) &&
+				} if ((control->sinfo_stream == sid) &&
 					   SCTP_MID_GT(asoc->idata_supported, control->mid, mid)) {
 					/* We are past our victim SSN */
 					break;

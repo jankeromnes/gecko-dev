@@ -809,13 +809,13 @@ _cairo_bo_edge_contains_intersect_point (cairo_bo_edge_t		*edge,
 	top_x = _line_compute_intersection_x_for_y (&edge->edge.line,
 						    edge->edge.top);
 	return _cairo_bo_intersect_ordinate_32_compare (point->x, top_x) > 0;
-    } else { /* cmp_bottom == 0 */
+    } /* cmp_bottom == 0 */
 	cairo_fixed_t bot_x;
 
 	bot_x = _line_compute_intersection_x_for_y (&edge->edge.line,
 						    edge->edge.bottom);
 	return _cairo_bo_intersect_ordinate_32_compare (point->x, bot_x) < 0;
-    }
+    
 }
 
 /* Compute the intersection of two edges. The result is provided as a
@@ -1314,7 +1314,7 @@ edges_colinear (const cairo_bo_edge_t *a, const cairo_bo_edge_t *b)
      */
     if (a->edge.line.p1.y == b->edge.line.p1.y) {
 	return a->edge.line.p1.x == b->edge.line.p1.x;
-    } else if (a->edge.line.p1.y < b->edge.line.p1.y) {
+    } if (a->edge.line.p1.y < b->edge.line.p1.y) {
 	return edge_compare_for_y_against_x (b,
 					     a->edge.line.p1.y,
 					     a->edge.line.p1.x) == 0;

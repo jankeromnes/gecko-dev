@@ -234,7 +234,7 @@ sctp_find_alternate_net(struct sctp_tcb *stcb,
 						min_errors = mnet->error_count + 1;
 					}
 					continue;
-				} else {
+				} 
 					if (min_errors == -1) {
 						min_errors = mnet->error_count;
 						min_errors_net = mnet;
@@ -247,7 +247,7 @@ sctp_find_alternate_net(struct sctp_tcb *stcb,
 						min_errors = mnet->error_count;
 					}
 					continue;
-				}
+				
 			}
 			/*
 			 * JRS 5/14/07 - If the destination is reachable and not in PF state, compare the
@@ -284,9 +284,9 @@ sctp_find_alternate_net(struct sctp_tcb *stcb,
 				return (net);
 			}
 			return (min_errors_net);
-		} else {
+		} 
 			return (max_cwnd_net);
-		}
+		
 	} /* JRS 5/14/07 - If mode is set to 1, use the CMT policy for choosing an alternate net. */
 	else if (mode == 1) {
 		TAILQ_FOREACH(mnet, &stcb->asoc.nets, sctp_next) {
@@ -598,7 +598,7 @@ sctp_mark_all_for_resend(struct sctp_tcb *stcb,
 						    SCTP_FR_T3_STOPPED);
 				}
 				continue;
-			} else if ((chk->sent_rcv_time.tv_sec == min_wait.tv_sec) &&
+			} if ((chk->sent_rcv_time.tv_sec == min_wait.tv_sec) &&
 				   (window_probe == 0)) {
 				/*
 				 * we must look at the micro seconds to
@@ -844,7 +844,7 @@ sctp_t3rxt_timer(struct sctp_inpcb *inp,
 		    stcb->asoc.max_send_times)) {
 			/* Association was destroyed */
 			return (1);
-		} else {
+		} 
 			if (net != stcb->asoc.primary_destination) {
 				/* send a immediate HB if our RTO is stale */
 				struct timeval now;
@@ -866,7 +866,7 @@ sctp_t3rxt_timer(struct sctp_inpcb *inp,
 					}
 				}
 			}
-		}
+		
 	} else {
 		/*
 		 * For a window probe we don't penalize the net's but only

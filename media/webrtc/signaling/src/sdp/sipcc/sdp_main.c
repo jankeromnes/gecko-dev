@@ -577,25 +577,25 @@ const char *sdp_get_result_name ( sdp_result_e rc )
 {
     if (rc >= SDP_MAX_RC) {
         return ("Invalid SDP result code");
-    } else {
+    } 
         return (sdp_result_name[rc]);
-    }
+    
 }
 
 const char *sdp_get_attr_name ( sdp_attr_e attr_type )
 {
     if (attr_type >= SDP_MAX_ATTR_TYPES) {
         return ("Invalid attribute type");
-    } else {
+    } 
         return (sdp_attr[attr_type].name);
-    }
+    
 }
 
 const char *sdp_get_media_name ( sdp_media_e media_type )
 {
     if (media_type == SDP_MEDIA_UNSUPPORTED) {
         return (SDP_UNSUPPORTED);
-    } else if (media_type >= SDP_MAX_MEDIA_TYPES) {
+    } if (media_type >= SDP_MAX_MEDIA_TYPES) {
         return ("Invalid media type");
     } else {
         return (sdp_media[media_type].name);
@@ -606,7 +606,7 @@ const char *sdp_get_network_name ( sdp_nettype_e network_type )
 {
     if (network_type == SDP_NT_UNSUPPORTED) {
         return (SDP_UNSUPPORTED);
-    } else if (network_type >= SDP_MAX_NETWORK_TYPES) {
+    } if (network_type >= SDP_MAX_NETWORK_TYPES) {
         return ("Invalid network type");
     } else {
         return (sdp_nettype[network_type].name);
@@ -617,12 +617,12 @@ const char *sdp_get_address_name ( sdp_addrtype_e addr_type )
 {
     if (addr_type == SDP_AT_UNSUPPORTED) {
         return (SDP_UNSUPPORTED);
-    } else if (addr_type >= SDP_MAX_ADDR_TYPES) {
+    } if (addr_type >= SDP_MAX_ADDR_TYPES) {
         if (addr_type == SDP_AT_FQDN) {
             return ("*");
-        } else {
+        } 
             return ("Invalid address type");
-        }
+        
     } else {
         return (sdp_addrtype[addr_type].name);
     }
@@ -632,7 +632,7 @@ const char *sdp_get_transport_name ( sdp_transport_e transport_type )
 {
     if (transport_type == SDP_TRANSPORT_UNSUPPORTED) {
         return (SDP_UNSUPPORTED);
-    } else if (transport_type >= SDP_MAX_TRANSPORT_TYPES) {
+    } if (transport_type >= SDP_MAX_TRANSPORT_TYPES) {
         return ("Invalid transport type");
     } else {
         return (sdp_transport[transport_type].name);
@@ -643,7 +643,7 @@ const char *sdp_get_encrypt_name ( sdp_encrypt_type_e encrypt_type )
 {
     if (encrypt_type == SDP_ENCRYPT_UNSUPPORTED) {
         return (SDP_UNSUPPORTED);
-    } else if (encrypt_type >= SDP_MAX_ENCRYPT_TYPES) {
+    } if (encrypt_type >= SDP_MAX_ENCRYPT_TYPES) {
         return ("Invalid encryption type");
     } else {
         return (sdp_encrypt[encrypt_type].name);
@@ -654,7 +654,7 @@ const char *sdp_get_payload_name ( sdp_payload_e payload )
 {
     if (payload == SDP_PAYLOAD_UNSUPPORTED) {
         return (SDP_UNSUPPORTED);
-    } else if (payload >= SDP_MAX_STRING_PAYLOAD_TYPES) {
+    } if (payload >= SDP_MAX_STRING_PAYLOAD_TYPES) {
         return ("Invalid payload type");
     } else {
         return (sdp_payload[payload].name);
@@ -665,99 +665,99 @@ const char *sdp_get_t38_ratemgmt_name ( sdp_t38_ratemgmt_e rate )
 {
     if (rate >= SDP_T38_MAX_RATES) {
         return ("Invalid rate");
-    } else {
+    } 
         return (sdp_t38_rate[rate].name);
-    }
+    
 }
 
 const char *sdp_get_t38_udpec_name ( sdp_t38_udpec_e udpec )
 {
     if (udpec >= SDP_T38_MAX_UDPEC) {
         return ("Invalid udpec");
-    } else {
+    } 
         return (sdp_t38_udpec[udpec].name);
-    }
+    
 }
 
 const char *sdp_get_qos_strength_name ( sdp_qos_strength_e strength )
 {
     if (strength >= SDP_MAX_QOS_STRENGTH) {
         return ("Invalid qos strength");
-    } else {
+    } 
         return (sdp_qos_strength[strength].name);
-    }
+    
 }
 
 const char *sdp_get_qos_direction_name ( sdp_qos_dir_e direction )
 {
     if (direction >= SDP_MAX_QOS_DIR) {
         return ("Invalid qos direction");
-    } else {
+    } 
         return (sdp_qos_direction[direction].name);
-    }
+    
 }
 
 const char *sdp_get_qos_status_type_name ( sdp_qos_status_types_e status_type )
 {
     if (status_type >= SDP_MAX_QOS_STATUS_TYPES) {
         return ("Invalid qos status type");
-    } else {
+    } 
         return (sdp_qos_status_type[status_type].name);
-    }
+    
 }
 
 const char *sdp_get_curr_type_name (sdp_curr_type_e curr_type )
 {
     if (curr_type >= SDP_MAX_CURR_TYPES) {
         return ("Invalid curr type");
-    } else {
+    } 
         return (sdp_curr_type[curr_type].name);
-    }
+    
 }
 
 const char *sdp_get_des_type_name (sdp_des_type_e des_type )
 {
     if (des_type >= SDP_MAX_DES_TYPES) {
         return ("Invalid des type");
-    } else {
+    } 
         return (sdp_des_type[des_type].name);
-    }
+    
 }
 
 const char *sdp_get_conf_type_name (sdp_conf_type_e conf_type )
 {
     if (conf_type >= SDP_MAX_CONF_TYPES) {
         return ("Invalid conf type");
-    } else {
+    } 
         return (sdp_conf_type[conf_type].name);
-    }
+    
 }
 
 const char *sdp_get_silencesupp_pref_name (sdp_silencesupp_pref_e pref)
 {
     if (pref >= SDP_MAX_SILENCESUPP_PREF) {
         return ("Invalid silencesupp pref");
-    } else {
+    } 
         return (sdp_silencesupp_pref[pref].name);
-    }
+    
 }
 
 const char *sdp_get_silencesupp_siduse_name (sdp_silencesupp_siduse_e siduse)
 {
     if (siduse >= SDP_MAX_SILENCESUPP_SIDUSE) {
         return ("Invalid silencesupp siduse");
-    } else {
+    } 
         return (sdp_silencesupp_siduse[siduse].name);
-    }
+    
 }
 
 const char *sdp_get_mediadir_role_name (sdp_mediadir_role_e role)
 {
     if (role >= SDP_MEDIADIR_ROLE_UNKNOWN) {
         return ("Invalid media direction role");
-    } else {
+    } 
         return (sdp_mediadir_role[role].name);
-    }
+    
 }
 
 
@@ -765,7 +765,7 @@ const char *sdp_get_bw_modifier_name (sdp_bw_modifier_e bw_modifier_type)
 {
     if (bw_modifier_type == SDP_BW_MODIFIER_UNSUPPORTED) {
         return (SDP_UNSUPPORTED);
-    } else if (bw_modifier_type < SDP_BW_MODIFIER_AS ||
+    } if (bw_modifier_type < SDP_BW_MODIFIER_AS ||
             bw_modifier_type >= SDP_MAX_BW_MODIFIER_VAL) {
         return ("Invalid bw modifier type");
     } else {
@@ -777,7 +777,7 @@ const char *sdp_get_group_attr_name (sdp_group_attr_e group_attr_type)
 {
     if (group_attr_type == SDP_GROUP_ATTR_UNSUPPORTED) {
         return (SDP_UNSUPPORTED);
-    } else if (group_attr_type >= SDP_MAX_GROUP_ATTR_VAL) {
+    } if (group_attr_type >= SDP_MAX_GROUP_ATTR_VAL) {
         return ("Invalid a=group: attribute type");
     } else {
         return (sdp_group_attr_val[group_attr_type].name);
@@ -788,18 +788,18 @@ const char *sdp_get_src_filter_mode_name (sdp_src_filter_mode_e type)
 {
     if (type >= SDP_MAX_FILTER_MODE) {
         return ("Invalid source filter mode");
-    } else {
+    } 
         return (sdp_src_filter_mode_val[type].name);
-    }
+    
 }
 
 const char *sdp_get_rtcp_unicast_mode_name (sdp_rtcp_unicast_mode_e type)
 {
     if (type >= SDP_RTCP_MAX_UNICAST_MODE) {
         return ("Invalid rtcp unicast mode");
-    } else {
+    } 
         return (sdp_rtcp_unicast_mode_val[type].name);
-    }
+    
 }
 
 /* Function:    sdp_init_description
@@ -1068,10 +1068,10 @@ sdp_result_e sdp_parse (sdp_t *sdp_p, const char *buf, size_t len)
                 }
                 sdp_p->conf_p->num_not_sdp_desc++;
                 return (SDP_NOT_SDP_DESCRIPTION);
-            } else {
+            } 
                 end_found = TRUE;
                 break;
-            }
+            
         }
 
         /* This is the beginning of a new SDP description. */
@@ -1174,9 +1174,9 @@ sdp_result_e sdp_parse (sdp_t *sdp_p, const char *buf, size_t len)
      * unrecognized <token>= line, indicate this on the return. */
     if ((result == SDP_SUCCESS) && (unrec_token == TRUE)) {
         return (SDP_UNRECOGNIZED_TOKEN);
-    } else {
+    } 
         return (result);
-    }
+    
 }
 
 

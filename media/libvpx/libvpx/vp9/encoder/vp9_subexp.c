@@ -35,7 +35,7 @@ static const uint8_t update_bits[255] = {
 static int recenter_nonneg(int v, int m) {
   if (v > (m << 1))
     return v;
-  else if (v >= m)
+  if (v >= m)
     return ((v - m) << 1);
   else
     return ((m - v) << 1) - 1;

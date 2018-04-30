@@ -99,9 +99,9 @@ UCharCharacterIterator::first() {
     pos = begin;
     if(pos < end) {
         return text[pos];
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar
@@ -109,9 +109,9 @@ UCharCharacterIterator::firstPostInc() {
     pos = begin;
     if(pos < end) {
         return text[pos++];
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar
@@ -119,9 +119,9 @@ UCharCharacterIterator::last() {
     pos = end;
     if(pos > begin) {
         return text[--pos];
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar
@@ -135,38 +135,38 @@ UCharCharacterIterator::setIndex(int32_t position) {
     }
     if(pos < end) {
         return text[pos];
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar
 UCharCharacterIterator::current() const {
     if (pos >= begin && pos < end) {
         return text[pos];
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar
 UCharCharacterIterator::next() {
     if (pos + 1 < end) {
         return text[++pos];
-    } else {
+    } 
         /* make current() return DONE */
         pos = end;
         return DONE;
-    }
+    
 }
 
 UChar
 UCharCharacterIterator::nextPostInc() {
     if (pos < end) {
         return text[pos++];
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UBool
@@ -178,9 +178,9 @@ UChar
 UCharCharacterIterator::previous() {
     if (pos > begin) {
         return text[--pos];
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UBool
@@ -196,9 +196,9 @@ UCharCharacterIterator::first32() {
         UChar32 c;
         U16_NEXT(text, i, end, c);
         return c;
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar32
@@ -208,9 +208,9 @@ UCharCharacterIterator::first32PostInc() {
         UChar32 c;
         U16_NEXT(text, pos, end, c);
         return c;
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar32
@@ -220,9 +220,9 @@ UCharCharacterIterator::last32() {
         UChar32 c;
         U16_PREV(text, begin, pos, c);
         return c;
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar32
@@ -238,10 +238,10 @@ UCharCharacterIterator::setIndex32(int32_t position) {
         UChar32 c;
         U16_NEXT(text, i, end, c);
         return c;
-    } else {
+    } 
         this->pos = position;
         return DONE;
-    }
+    
 }
 
 UChar32
@@ -250,9 +250,9 @@ UCharCharacterIterator::current32() const {
         UChar32 c;
         U16_GET(text, begin, pos, end, c);
         return c;
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar32
@@ -277,9 +277,9 @@ UCharCharacterIterator::next32PostInc() {
         UChar32 c;
         U16_NEXT(text, pos, end, c);
         return c;
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 UChar32
@@ -288,9 +288,9 @@ UCharCharacterIterator::previous32() {
         UChar32 c;
         U16_PREV(text, begin, pos, c);
         return c;
-    } else {
+    } 
         return DONE;
-    }
+    
 }
 
 int32_t

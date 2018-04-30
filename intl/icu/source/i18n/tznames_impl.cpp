@@ -309,7 +309,7 @@ TextTrieMap::addChildNode(CharacterNode *parent, UChar c, UErrorCode &status) {
         UChar childCharacter = current->fCharacter;
         if (childCharacter == c) {
             return current;
-        } else if (childCharacter > c) {
+        } if (childCharacter > c) {
             break;
         }
         prevIndex = nodeIndex;
@@ -349,7 +349,7 @@ TextTrieMap::getChildNode(CharacterNode *parent, UChar c) const {
         UChar childCharacter = current->fCharacter;
         if (childCharacter == c) {
             return current;
-        } else if (childCharacter > c) {
+        } if (childCharacter > c) {
             break;
         }
         nodeIndex = current->fNextSibling;
@@ -811,7 +811,7 @@ struct ZNames::ZNamesLoader : public ResourceSink {
             return c1 == 'g' ? UTZNM_INDEX_LONG_GENERIC :
                     c1 == 's' ? UTZNM_INDEX_LONG_STANDARD :
                         c1 == 'd' ? UTZNM_INDEX_LONG_DAYLIGHT : UTZNM_INDEX_UNKNOWN;
-        } else if (c0 == 's') {
+        } if (c0 == 's') {
             return c1 == 'g' ? UTZNM_INDEX_SHORT_GENERIC :
                     c1 == 's' ? UTZNM_INDEX_SHORT_STANDARD :
                         c1 == 'd' ? UTZNM_INDEX_SHORT_DAYLIGHT : UTZNM_INDEX_UNKNOWN;
@@ -1315,9 +1315,9 @@ TimeZoneNamesImpl::loadMetaZoneNames(const UnicodeString& mzID, UErrorCode& stat
 
     if (mznames != EMPTY) {
         return (ZNames*)mznames;
-    } else {
+    } 
         return NULL;
-    }
+    
 }
 
 /*

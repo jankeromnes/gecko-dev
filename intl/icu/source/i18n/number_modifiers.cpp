@@ -136,7 +136,7 @@ SimpleModifier::formatAsPrefixSuffix(NumberStringBuilder &result, int32_t startI
     if (fSuffixOffset == -1) {
         // There is no argument for the inner number; overwrite the entire segment with our string.
         return result.splice(startIndex, endIndex, fCompiledPattern, 2, 2 + fPrefixLength, field, status);
-    } else {
+    } 
         if (fPrefixLength > 0) {
             result.insert(startIndex, fCompiledPattern, 2, 2 + fPrefixLength, field, status);
         }
@@ -150,7 +150,7 @@ SimpleModifier::formatAsPrefixSuffix(NumberStringBuilder &result, int32_t startI
                     status);
         }
         return fPrefixLength + fSuffixLength;
-    }
+    
 }
 
 int32_t ConstantMultiFieldModifier::apply(NumberStringBuilder &output, int leftIndex, int rightIndex,
@@ -309,7 +309,7 @@ CurrencySpacingEnabledModifier::getUnicodeSet(const DecimalFormatSymbols &symbol
             status);
     if (pattern.compare(u"[:digit:]", -1) == 0) {
         return *UNISET_DIGIT;
-    } else if (pattern.compare(u"[:^S:]", -1) == 0) {
+    } if (pattern.compare(u"[:^S:]", -1) == 0) {
         return *UNISET_NOTS;
     } else {
         return UnicodeSet(pattern, status);

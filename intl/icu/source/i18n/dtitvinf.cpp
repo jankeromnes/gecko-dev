@@ -262,7 +262,7 @@ struct DateIntervalInfo::DateIntervalSink : public ResourceSink {
                 }
                 break;
 
-            } else if (value.getType() == URES_TABLE) {
+            } if (value.getType() == URES_TABLE) {
                 // Iterate over all the skeletons in the 'intervalFormat' table.
                 ResourceTable skeletonData = value.getTable(errorCode);
                 if (U_FAILURE(errorCode)) { return; }
@@ -328,7 +328,7 @@ struct DateIntervalInfo::DateIntervalSink : public ResourceSink {
             // Check that the pattern letter is accepted
             if (c0 == 'y') {
                 return UCAL_YEAR;
-            } else if (c0 == 'M') {
+            } if (c0 == 'M') {
                 return UCAL_MONTH;
             } else if (c0 == 'd') {
                 return UCAL_DATE;

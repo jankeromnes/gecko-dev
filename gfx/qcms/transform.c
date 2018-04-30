@@ -934,9 +934,9 @@ static qcms_transform *transform_alloc(void)
 		memset(allocated_memory, 0, sizeof(qcms_transform));
 		t = allocated_memory;
 		return t;
-	} else {
+	} 
 		return NULL;
-	}
+	
 }
 static void transform_free(qcms_transform *t)
 {

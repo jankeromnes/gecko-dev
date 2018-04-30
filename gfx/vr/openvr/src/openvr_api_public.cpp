@@ -179,8 +179,8 @@ bool VR_IsHmdPresent()
 		// if we're already initialized, just call through
 		return g_pHmdSystem->BIsHmdPresent();
 	}
-	else
-	{
+	
+	
 		// otherwise we need to do a bit more work
 		EVRInitError err = VR_LoadHmdSystemInternal();
 		if( err != VRInitError_None )
@@ -193,7 +193,7 @@ bool VR_IsHmdPresent()
 		g_pVRModule = NULL;
 
 		return bHasHmd;
-	}
+	
 }
 
 /** Returns true if the OpenVR runtime is installed. */
@@ -204,8 +204,8 @@ bool VR_IsRuntimeInstalled()
 		// if we're already initialized, OpenVR is obviously installed
 		return true;
 	}
-	else
-	{
+	
+	
 		// otherwise we need to do a bit more work
 		std::string sRuntimePath, sConfigPath, sLogPath;
 
@@ -224,7 +224,7 @@ bool VR_IsRuntimeInstalled()
 
 		// the installation may be corrupt in some way, but it certainly looks installed
 		return true;
-	}
+	
 }
 
 
@@ -257,7 +257,7 @@ const char *VR_GetVRInitErrorAsSymbol( EVRInitError error )
 {
 	if( g_pHmdSystem )
 		return g_pHmdSystem->GetIDForVRInitError( error );
-	else
+	
 		return GetIDForVRInitError( error );
 }
 
@@ -267,7 +267,7 @@ const char *VR_GetVRInitErrorAsEnglishDescription( EVRInitError error )
 {
 	if ( g_pHmdSystem )
 		return g_pHmdSystem->GetEnglishStringForHmdError( error );
-	else
+	
 		return GetEnglishStringForHmdError( error );
 }
 

@@ -155,27 +155,27 @@ static UChar32 U_CALLCONV
 stringIteratorCurrent(UCharIterator *iter) {
     if(iter->index<iter->limit) {
         return ((const UChar *)(iter->context))[iter->index];
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static UChar32 U_CALLCONV
 stringIteratorNext(UCharIterator *iter) {
     if(iter->index<iter->limit) {
         return ((const UChar *)(iter->context))[iter->index++];
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static UChar32 U_CALLCONV
 stringIteratorPrevious(UCharIterator *iter) {
     if(iter->index>iter->start) {
         return ((const UChar *)(iter->context))[--iter->index];
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static uint32_t U_CALLCONV
@@ -253,9 +253,9 @@ utf16BEIteratorCurrent(UCharIterator *iter) {
 
     if((index=iter->index)<iter->limit) {
         return utf16BEIteratorGet(iter, index);
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static UChar32 U_CALLCONV
@@ -265,9 +265,9 @@ utf16BEIteratorNext(UCharIterator *iter) {
     if((index=iter->index)<iter->limit) {
         iter->index=index+1;
         return utf16BEIteratorGet(iter, index);
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static UChar32 U_CALLCONV
@@ -277,9 +277,9 @@ utf16BEIteratorPrevious(UCharIterator *iter) {
     if((index=iter->index)>iter->start) {
         iter->index=--index;
         return utf16BEIteratorGet(iter, index);
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static const UCharIterator utf16BEIterator={
@@ -310,7 +310,7 @@ utf16BE_strlen(const char *s) {
          * does not care about endianness
          */
         return u_strlen((const UChar *)s);
-    } else {
+    } 
         /* odd-aligned, search for pair of 0 bytes */
         const char *p=s;
 
@@ -318,7 +318,7 @@ utf16BE_strlen(const char *s) {
             p+=2;
         }
         return (int32_t)((p-s)/2);
-    }
+    
 }
 
 U_CAPI void U_EXPORT2
@@ -415,27 +415,27 @@ characterIteratorCurrent(UCharIterator *iter) {
     c=((CharacterIterator *)(iter->context))->current();
     if(c!=0xffff || ((CharacterIterator *)(iter->context))->hasNext()) {
         return c;
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static UChar32 U_CALLCONV
 characterIteratorNext(UCharIterator *iter) {
     if(((CharacterIterator *)(iter->context))->hasNext()) {
         return ((CharacterIterator *)(iter->context))->nextPostInc();
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static UChar32 U_CALLCONV
 characterIteratorPrevious(UCharIterator *iter) {
     if(((CharacterIterator *)(iter->context))->hasPrevious()) {
         return ((CharacterIterator *)(iter->context))->previous();
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static uint32_t U_CALLCONV
@@ -497,27 +497,27 @@ static UChar32 U_CALLCONV
 replaceableIteratorCurrent(UCharIterator *iter) {
     if(iter->index<iter->limit) {
         return ((Replaceable *)(iter->context))->charAt(iter->index);
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static UChar32 U_CALLCONV
 replaceableIteratorNext(UCharIterator *iter) {
     if(iter->index<iter->limit) {
         return ((Replaceable *)(iter->context))->charAt(iter->index++);
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static UChar32 U_CALLCONV
 replaceableIteratorPrevious(UCharIterator *iter) {
     if(iter->index>iter->start) {
         return ((Replaceable *)(iter->context))->charAt(--iter->index);
-    } else {
+    } 
         return U_SENTINEL;
-    }
+    
 }
 
 static const UCharIterator replaceableIterator={
@@ -703,11 +703,11 @@ utf8IteratorMove(UCharIterator *iter, int32_t delta, UCharIteratorOrigin origin)
             iter->reservedField=0;
             if(delta>=0) {
                 return UITER_UNKNOWN_INDEX;
-            } else {
+            } 
                 /* the current UTF-16 index is unknown, use only delta */
                 pos=0;
                 havePos=FALSE;
-            }
+            
         }
         break;
     default:
@@ -719,7 +719,7 @@ utf8IteratorMove(UCharIterator *iter, int32_t delta, UCharIteratorOrigin origin)
         if(pos<=0) {
             iter->index=iter->start=iter->reservedField=0;
             return 0;
-        } else if(iter->length>=0 && pos>=iter->length) {
+        } if(iter->length>=0 && pos>=iter->length) {
             iter->index=iter->length;
             iter->start=iter->limit;
             iter->reservedField=0;
@@ -749,7 +749,7 @@ utf8IteratorMove(UCharIterator *iter, int32_t delta, UCharIteratorOrigin origin)
         /* move relative to unknown UTF-16 index */
         if(delta==0) {
             return UITER_UNKNOWN_INDEX; /* nothing to do */
-        } else if(-delta>=iter->start) {
+        } if(-delta>=iter->start) {
             /* moving backwards by more UChars than there are UTF-8 bytes, pin to 0 */
             iter->index=iter->start=iter->reservedField=0;
             return 0;
@@ -827,15 +827,15 @@ utf8IteratorMove(UCharIterator *iter, int32_t delta, UCharIteratorOrigin origin)
     iter->start=i;
     if(iter->index>=0) {
         return iter->index=pos;
-    } else {
+    } 
         /* we started with index<0 (unknown) so pos is bogus */
         if(i<=1) {
             return iter->index=i; /* reached the beginning */
-        } else {
+        } 
             /* we still don't know the UTF-16 index */
             return UITER_UNKNOWN_INDEX;
-        }
-    }
+        
+    
 }
 
 static UBool U_CALLCONV
@@ -852,7 +852,7 @@ static UChar32 U_CALLCONV
 utf8IteratorCurrent(UCharIterator *iter) {
     if(iter->reservedField!=0) {
         return U16_TRAIL(iter->reservedField);
-    } else if(iter->start<iter->limit) {
+    } if(iter->start<iter->limit) {
         const uint8_t *s=(const uint8_t *)iter->context;
         UChar32 c;
         int32_t i=iter->start;
@@ -860,9 +860,9 @@ utf8IteratorCurrent(UCharIterator *iter) {
         U8_NEXT_OR_FFFD(s, i, iter->limit, c);
         if(c<=0xffff) {
             return c;
-        } else {
+        } 
             return U16_LEAD(c);
-        }
+        
     } else {
         return U_SENTINEL;
     }
@@ -879,7 +879,7 @@ utf8IteratorNext(UCharIterator *iter) {
             iter->index=index+1;
         }
         return trail;
-    } else if(iter->start<iter->limit) {
+    } if(iter->start<iter->limit) {
         const uint8_t *s=(const uint8_t *)iter->context;
         UChar32 c;
 
@@ -894,10 +894,10 @@ utf8IteratorNext(UCharIterator *iter) {
         }
         if(c<=0xffff) {
             return c;
-        } else {
+        } 
             iter->reservedField=c;
             return U16_LEAD(c);
-        }
+        
     } else {
         return U_SENTINEL;
     }
@@ -915,7 +915,7 @@ utf8IteratorPrevious(UCharIterator *iter) {
             iter->index=index-1;
         }
         return lead;
-    } else if(iter->start>0) {
+    } if(iter->start>0) {
         const uint8_t *s=(const uint8_t *)iter->context;
         UChar32 c;
 
@@ -927,11 +927,11 @@ utf8IteratorPrevious(UCharIterator *iter) {
         }
         if(c<=0xffff) {
             return c;
-        } else {
+        } 
             iter->start+=4; /* back to behind this supplementary code point for consistent state */
             iter->reservedField=c;
             return U16_TRAIL(c);
-        }
+        
     } else {
         return U_SENTINEL;
     }
@@ -1087,9 +1087,9 @@ U_CAPI uint32_t U_EXPORT2
 uiter_getState(const UCharIterator *iter) {
     if(iter==NULL || iter->getState==NULL) {
         return UITER_NO_STATE;
-    } else {
+    } 
         return iter->getState(iter);
-    }
+    
 }
 
 U_CAPI void U_EXPORT2

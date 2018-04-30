@@ -670,7 +670,7 @@ CollationRuleParser::parseSetting(UErrorCode &errorCode) {
             if(U_FAILURE(errorCode)) { setErrorContext(); }
             ruleIndex = j;
             return;
-        } else if(raw == UNICODE_STRING_SIMPLE("suppressContractions")) {
+        } if(raw == UNICODE_STRING_SIMPLE("suppressContractions")) {
             sink->suppressContractions(set, errorReason, errorCode);
             if(U_FAILURE(errorCode)) { setErrorContext(); }
             ruleIndex = j;
@@ -736,7 +736,7 @@ UColAttributeValue
 CollationRuleParser::getOnOffValue(const UnicodeString &s) {
     if(s == UNICODE_STRING_SIMPLE("on")) {
         return UCOL_ON;
-    } else if(s == UNICODE_STRING_SIMPLE("off")) {
+    } if(s == UNICODE_STRING_SIMPLE("off")) {
         return UCOL_OFF;
     } else {
         return UCOL_DEFAULT;

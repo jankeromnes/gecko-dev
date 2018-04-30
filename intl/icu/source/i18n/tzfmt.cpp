@@ -276,7 +276,7 @@ GMTOffsetField::FieldType
 GMTOffsetField::getTypeByLetter(UChar ch) {
     if (ch == 0x0048 /* H */) {
         return HOUR;
-    } else if (ch == 0x006D /* m */) {
+    } if (ch == 0x006D /* m */) {
         return MINUTE;
     } else if (ch == 0x0073 /* s */) {
         return SECOND;
@@ -2305,7 +2305,7 @@ TimeZoneFormat::parseAsciiOffsetFields(const UnicodeString& text, ParsePosition&
                 fieldLen[fieldIdx] = 0;
             }
             continue;
-        } else if (fieldLen[fieldIdx] == -1) {
+        } if (fieldLen[fieldIdx] == -1) {
             // no separator after 2 digit field
             break;
         }
@@ -2653,7 +2653,7 @@ TimeZoneFormat::checkAbuttingHoursAndMinutes() {
                 if (afterH) {
                     fAbuttingOffsetHoursAndMinutes = TRUE;
                     break;
-                } else if (type == GMTOffsetField::HOUR) {
+                } if (type == GMTOffsetField::HOUR) {
                     afterH = TRUE;
                 }
             } else if (afterH) {

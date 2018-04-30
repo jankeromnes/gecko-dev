@@ -143,7 +143,7 @@ static int split_conic(const SkPoint src[3], SkConic dst[2], const SkScalar weig
             dst[0].set(src, weight);
         }
         return 1;
-    } else {
+    } 
         if (dst) {
             SkConic conic;
             conic.set(src, weight);
@@ -153,7 +153,7 @@ static int split_conic(const SkPoint src[3], SkConic dst[2], const SkScalar weig
             }
         }
         return 2;
-    }
+    
 }
 
 // Calls split_conic on the entire conic and then once more on each subsection.
@@ -216,7 +216,7 @@ static int num_quad_subdivs(const SkPoint p[3]) {
 
     if (dsqd <= gSubdivTol * gSubdivTol) {
         return 0;
-    } else {
+    } 
         static const int kMaxSub = 4;
         // subdividing the quad reduces d by 4. so we want x = log4(d/tol)
         // = log4(d*d/tol*tol)/2
@@ -226,7 +226,7 @@ static int num_quad_subdivs(const SkPoint p[3]) {
         int log = get_float_exp(dsqd/(gSubdivTol*gSubdivTol)) + 1;
         log = SkTMin(SkTMax(0, log), kMaxSub);
         return log;
-    }
+    
 }
 
 /**

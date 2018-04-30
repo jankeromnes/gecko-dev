@@ -184,10 +184,10 @@ _processRFC3066Locale(CollatorSpec *spec, uint32_t, const char* string,
     if(end == NULL || end - string >= loc3066Capacity) {
         *status = U_BUFFER_OVERFLOW_ERROR;
         return string;
-    } else {
+    } 
         uprv_strncpy(spec->locale, string, end-string);
         return end+1;
-    }
+    
 }
 
 U_CDECL_END
@@ -381,9 +381,9 @@ int32_t ucol_sit_dumpSpecs(CollatorSpec *s, char *destination, int32_t capacity,
             }
         }
         return len;
-    } else {
+    } 
         return 0;
-    }
+    
 }
 
 static void

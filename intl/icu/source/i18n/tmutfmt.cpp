@@ -366,9 +366,9 @@ struct TimeUnitFormatReadSink : public ResourceSink {
         // Skip all put() calls except the first one -- discard all fallback data.
         if (beenHere) {
             return;
-        } else {
+        } 
             beenHere = TRUE;
-        }
+        
 
         ResourceTable units = value.getTable(errorCode);
         if (U_FAILURE(errorCode)) { return; }

@@ -171,11 +171,11 @@ getUTF8Length(const UChar *s, int32_t length) {
     u_strToUTF8(NULL, 0, &length8, s, length, &errorCode);
     if(U_SUCCESS(errorCode) || errorCode==U_BUFFER_OVERFLOW_ERROR) {
         return length8;
-    } else {
+    } 
         // The string contains an unpaired surrogate.
         // Ignore this string.
         return 0;
-    }
+    
 }
 
 // Append the UTF-8 version of the string to t and return the appended UTF-8 length.
@@ -186,11 +186,11 @@ appendUTF8(const UChar *s, int32_t length, uint8_t *t, int32_t capacity) {
     u_strToUTF8((char *)t, capacity, &length8, s, length, &errorCode);
     if(U_SUCCESS(errorCode)) {
         return length8;
-    } else {
+    } 
         // The string contains an unpaired surrogate.
         // Ignore this string.
         return 0;
-    }
+    
 }
 
 static inline uint8_t
@@ -439,9 +439,9 @@ void UnicodeSetStringSpan::addToSpanNotSet(UChar32 c) {
         UnicodeSet *newSet=(UnicodeSet *)spanSet.cloneAsThawed();
         if(newSet==NULL) {
             return;  // Out of memory.
-        } else {
+        } 
             pSpanNotSet=newSet;
-        }
+        
     }
     pSpanNotSet->add(c);
 }
@@ -763,7 +763,7 @@ int32_t UnicodeSetStringSpan::span(const UChar *s, int32_t length, USetSpanCondi
                 pos+=spanLength;
                 rest-=spanLength;
                 continue;  // spanLength>0: Match strings from after a span.
-            } else {
+            } 
                 // Try to match only one code point from after a string match if some
                 // string matched beyond it, so that we try all possible positions
                 // and don't overshoot.
@@ -782,7 +782,7 @@ int32_t UnicodeSetStringSpan::span(const UChar *s, int32_t length, USetSpanCondi
                     continue;  // Match strings from after a single code point.
                 }
                 // Match strings from after the next string match.
-            }
+            
         }
         int32_t minOffset=offsets.popMinimum();
         pos+=minOffset;
@@ -928,7 +928,7 @@ int32_t UnicodeSetStringSpan::spanBack(const UChar *s, int32_t length, USetSpanC
                     return pos;
                 }
                 continue;  // spanLength>0: Match strings from before a span.
-            } else {
+            } 
                 // Try to match only one code point from before a string match if some
                 // string matched beyond it, so that we try all possible positions
                 // and don't overshoot.
@@ -946,7 +946,7 @@ int32_t UnicodeSetStringSpan::spanBack(const UChar *s, int32_t length, USetSpanC
                     continue;  // Match strings from before a single code point.
                 }
                 // Match strings from before the next string match.
-            }
+            
         }
         pos-=offsets.popMinimum();
         spanLength=0;  // Match strings from before a string match.
@@ -1102,7 +1102,7 @@ int32_t UnicodeSetStringSpan::spanUTF8(const uint8_t *s, int32_t length, USetSpa
                 pos+=spanLength;
                 rest-=spanLength;
                 continue;  // spanLength>0: Match strings from after a span.
-            } else {
+            } 
                 // Try to match only one code point from after a string match if some
                 // string matched beyond it, so that we try all possible positions
                 // and don't overshoot.
@@ -1121,7 +1121,7 @@ int32_t UnicodeSetStringSpan::spanUTF8(const uint8_t *s, int32_t length, USetSpa
                     continue;  // Match strings from after a single code point.
                 }
                 // Match strings from after the next string match.
-            }
+            
         }
         int32_t minOffset=offsets.popMinimum();
         pos+=minOffset;
@@ -1281,7 +1281,7 @@ int32_t UnicodeSetStringSpan::spanBackUTF8(const uint8_t *s, int32_t length, USe
                     return pos;
                 }
                 continue;  // spanLength>0: Match strings from before a span.
-            } else {
+            } 
                 // Try to match only one code point from before a string match if some
                 // string matched beyond it, so that we try all possible positions
                 // and don't overshoot.
@@ -1299,7 +1299,7 @@ int32_t UnicodeSetStringSpan::spanBackUTF8(const uint8_t *s, int32_t length, USe
                     continue;  // Match strings from before a single code point.
                 }
                 // Match strings from before the next string match.
-            }
+            
         }
         pos-=offsets.popMinimum();
         spanLength=0;  // Match strings from before a string match.

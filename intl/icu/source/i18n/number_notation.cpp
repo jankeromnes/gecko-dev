@@ -59,9 +59,9 @@ ScientificNotation::withMinExponentDigits(int32_t minExponentDigits) const {
         settings.fMinExponentDigits = static_cast<digits_t>(minExponentDigits);
         NotationUnion union_ = {settings};
         return {NTN_SCIENTIFIC, union_};
-    } else {
+    } 
         return {U_NUMBER_ARG_OUTOFBOUNDS_ERROR};
-    }
+    
 }
 
 ScientificNotation

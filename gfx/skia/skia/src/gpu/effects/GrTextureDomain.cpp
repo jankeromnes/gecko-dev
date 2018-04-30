@@ -198,10 +198,10 @@ inline GrFragmentProcessor::OptimizationFlags GrTextureDomainEffect::OptFlags(
         GrPixelConfig config, GrTextureDomain::Mode mode) {
     if (mode == GrTextureDomain::kDecal_Mode || !GrPixelConfigIsOpaque(config)) {
         return GrFragmentProcessor::kCompatibleWithCoverageAsAlpha_OptimizationFlag;
-    } else {
+    } 
         return GrFragmentProcessor::kCompatibleWithCoverageAsAlpha_OptimizationFlag |
                GrFragmentProcessor::kPreservesOpaqueInput_OptimizationFlag;
-    }
+    
 }
 
 std::unique_ptr<GrFragmentProcessor> GrTextureDomainEffect::Make(
@@ -213,10 +213,10 @@ std::unique_ptr<GrFragmentProcessor> GrTextureDomainEffect::Make(
     if (GrTextureDomain::kIgnore_Mode == mode ||
         (GrTextureDomain::kClamp_Mode == mode && can_ignore_rect(proxy.get(), domain))) {
         return GrSimpleTextureEffect::Make(std::move(proxy), matrix, filterMode);
-    } else {
+    } 
         return std::unique_ptr<GrFragmentProcessor>(new GrTextureDomainEffect(
                 std::move(proxy), matrix, domain, mode, filterMode));
-    }
+    
 }
 
 GrTextureDomainEffect::GrTextureDomainEffect(sk_sp<GrTextureProxy> proxy,

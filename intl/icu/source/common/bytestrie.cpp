@@ -70,11 +70,11 @@ BytesTrie::current() const {
     const uint8_t *pos=pos_;
     if(pos==NULL) {
         return USTRINGTRIE_NO_MATCH;
-    } else {
+    } 
         int32_t node;
         return (remainingMatchLength_<0 && (node=*pos)>=kMinValueLead) ?
                 valueResult(node) : USTRINGTRIE_NO_VALUE;
-    }
+    
 }
 
 UStringTrieResult
@@ -141,10 +141,10 @@ BytesTrie::branchNext(const uint8_t *pos, int32_t length, int32_t inByte) {
         pos_=pos;
         int32_t node=*pos;
         return node>=kMinValueLead ? valueResult(node) : USTRINGTRIE_NO_VALUE;
-    } else {
+    } 
         stop();
         return USTRINGTRIE_NO_MATCH;
-    }
+    
 }
 
 UStringTrieResult
@@ -153,7 +153,7 @@ BytesTrie::nextImpl(const uint8_t *pos, int32_t inByte) {
         int32_t node=*pos++;
         if(node<kMinLinearMatch) {
             return branchNext(pos, node, inByte);
-        } else if(node<kMinValueLead) {
+        } if(node<kMinValueLead) {
             // Match the first of length+1 bytes.
             int32_t length=node-kMinLinearMatch;  // Actual match length minus 1.
             if(inByte==*pos++) {
@@ -161,10 +161,10 @@ BytesTrie::nextImpl(const uint8_t *pos, int32_t inByte) {
                 pos_=pos;
                 return (length<0 && (node=*pos)>=kMinValueLead) ?
                         valueResult(node) : USTRINGTRIE_NO_VALUE;
-            } else {
+            } 
                 // No match.
                 break;
-            }
+            
         } else if(node&kValueIsFinal) {
             // No further matching bytes.
             break;
@@ -197,10 +197,10 @@ BytesTrie::next(int32_t inByte) {
             int32_t node;
             return (length<0 && (node=*pos)>=kMinValueLead) ?
                     valueResult(node) : USTRINGTRIE_NO_VALUE;
-        } else {
+        } 
             stop();
             return USTRINGTRIE_NO_MATCH;
-        }
+        
     }
     return nextImpl(pos, inByte);
 }
@@ -398,11 +398,11 @@ BytesTrie::getNextBytes(ByteSink &out) const {
     if(node>=kMinValueLead) {
         if(node&kValueIsFinal) {
             return 0;
-        } else {
+        } 
             pos=skipValue(pos, node);
             node=*pos++;
             U_ASSERT(node<kMinValueLead);
-        }
+        
     }
     if(node<kMinLinearMatch) {
         if(node==0) {
@@ -410,11 +410,11 @@ BytesTrie::getNextBytes(ByteSink &out) const {
         }
         getNextBranchBytes(pos, ++node, out);
         return node;
-    } else {
+    } 
         // First byte of the linear-match node.
         append(out, *pos);
         return 1;
-    }
+    
 }
 
 void

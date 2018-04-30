@@ -279,7 +279,7 @@ int32_t BMPSet::findCodePoint(UChar32 c, int32_t lo, int32_t hi) const {
         int32_t i = (lo + hi) >> 1;
         if (i == lo) {
             break; // Found!
-        } else if (c < list[i]) {
+        } if (c < list[i]) {
             hi = i;
         } else {
             lo = i;
@@ -292,7 +292,7 @@ UBool
 BMPSet::contains(UChar32 c) const {
     if((uint32_t)c<=0xff) {
         return (UBool)latin1Contains[c];
-    } else if((uint32_t)c<=0x7ff) {
+    } if((uint32_t)c<=0x7ff) {
         return (UBool)((table7FF[c&0x3f]&((uint32_t)1<<(c>>6)))!=0);
     } else if((uint32_t)c<0xd800 || (c>=0xe000 && c<=0xffff)) {
         int lead=c>>12;
@@ -301,10 +301,10 @@ BMPSet::contains(UChar32 c) const {
             // All 64 code points with the same bits 15..6
             // are either in the set or not.
             return (UBool)twoBits;
-        } else {
+        } 
             // Look up the code point in its 4k block of code points.
             return containsSlow(c, list4kStarts[lead], list4kStarts[lead+1]);
-        }
+        
     } else if((uint32_t)c<=0x10ffff) {
         // surrogate or supplementary code point
         return containsSlow(c, list4kStarts[0xd], list4kStarts[0x11]);
@@ -582,7 +582,7 @@ BMPSet::spanUTF8(const uint8_t *s, int32_t length, USetSpanCondition spanConditi
                 do {
                     if(!latin1Contains[b]) {
                         return s;
-                    } else if(++s==limit) {
+                    } if(++s==limit) {
                         return limit0;
                     }
                     b=*s;
@@ -591,7 +591,7 @@ BMPSet::spanUTF8(const uint8_t *s, int32_t length, USetSpanCondition spanConditi
                 do {
                     if(latin1Contains[b]) {
                         return s;
-                    } else if(++s==limit) {
+                    } if(++s==limit) {
                         return limit0;
                     }
                     b=*s;
@@ -687,7 +687,7 @@ BMPSet::spanBackUTF8(const uint8_t *s, int32_t length, USetSpanCondition spanCon
                 do {
                     if(!latin1Contains[b]) {
                         return length+1;
-                    } else if(length==0) {
+                    } if(length==0) {
                         return 0;
                     }
                     b=s[--length];
@@ -696,7 +696,7 @@ BMPSet::spanBackUTF8(const uint8_t *s, int32_t length, USetSpanCondition spanCon
                 do {
                     if(latin1Contains[b]) {
                         return length+1;
-                    } else if(length==0) {
+                    } if(length==0) {
                         return 0;
                     }
                     b=s[--length];

@@ -21,10 +21,10 @@ const char *SamplerString(const TBasicType type)
     {
         return "SamplerComparisonState";
     }
-    else
-    {
+    
+    
         return "SamplerState";
-    }
+    
 }
 
 const char *SamplerString(HLSLTextureGroup type)
@@ -33,10 +33,10 @@ const char *SamplerString(HLSLTextureGroup type)
     {
         return "SamplerComparisonState";
     }
-    else
-    {
+    
+    
         return "SamplerState";
-    }
+    
 }
 
 HLSLTextureGroup TextureGroup(const TBasicType type, TLayoutImageInternalFormat imageInternalFormat)
@@ -810,10 +810,10 @@ TString DecorateVariableIfNeeded(const TVariable &variable)
         ASSERT(!name.beginsWith("_"));
         return TString(name.data());
     }
-    else
-    {
+    
+    
         return Decorate(variable.name());
-    }
+    
 }
 
 TString DecorateFunctionIfNeeded(const TFunction *func)
@@ -841,10 +841,10 @@ TString TypeString(const TType &type)
         {
             return StructNameString(*structure);
         }
-        else  // Nameless structure, define in place
-        {
+         // Nameless structure, define in place
+        
             return StructureHLSL::defineNameless(*structure);
-        }
+        
     }
     else if (type.isMatrix())
     {

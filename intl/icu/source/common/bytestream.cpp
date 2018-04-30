@@ -76,10 +76,10 @@ char* CheckedArrayByteSink::GetAppendBuffer(int32_t min_capacity,
   if (available >= min_capacity) {
     *result_capacity = available;
     return outbuf_ + size_;
-  } else {
+  } 
     *result_capacity = scratch_capacity;
     return scratch;
-  }
+  
 }
 
 U_NAMESPACE_END

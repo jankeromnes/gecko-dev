@@ -731,7 +731,7 @@ static vpx_codec_err_t decoder_set_fb_fn(
     vpx_release_frame_buffer_cb_fn_t cb_release, void *cb_priv) {
   if (cb_get == NULL || cb_release == NULL) {
     return VPX_CODEC_INVALID_PARAM;
-  } else if (ctx->frame_workers == NULL) {
+  } if (ctx->frame_workers == NULL) {
     // If the decoder has already been initialized, do not accept changes to
     // the frame buffer functions.
     ctx->get_ext_fb_cb = cb_get;
@@ -762,9 +762,9 @@ static vpx_codec_err_t ctrl_set_reference(vpx_codec_alg_priv_t *ctx,
     return vp9_set_reference_dec(&frame_worker_data->pbi->common,
                                  ref_frame_to_vp9_reframe(frame->frame_type),
                                  &sd);
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t ctrl_copy_reference(vpx_codec_alg_priv_t *ctx,
@@ -785,9 +785,9 @@ static vpx_codec_err_t ctrl_copy_reference(vpx_codec_alg_priv_t *ctx,
     image2yuvconfig(&frame->img, &sd);
     return vp9_copy_reference_dec(frame_worker_data->pbi,
                                   (VP9_REFFRAME)frame->frame_type, &sd);
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t ctrl_get_reference(vpx_codec_alg_priv_t *ctx,
@@ -808,9 +808,9 @@ static vpx_codec_err_t ctrl_get_reference(vpx_codec_alg_priv_t *ctx,
     if (fb == NULL) return VPX_CODEC_ERROR;
     yuvconfig2image(&data->img, fb, NULL);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 }
 
 static vpx_codec_err_t ctrl_set_postproc(vpx_codec_alg_priv_t *ctx,
@@ -822,9 +822,9 @@ static vpx_codec_err_t ctrl_set_postproc(vpx_codec_alg_priv_t *ctx,
     ctx->postproc_cfg_set = 1;
     ctx->postproc_cfg = *((vp8_postproc_cfg_t *)data);
     return VPX_CODEC_OK;
-  } else {
+  } 
     return VPX_CODEC_INVALID_PARAM;
-  }
+  
 #else
   (void)ctx;
   (void)args;
@@ -849,9 +849,9 @@ static vpx_codec_err_t ctrl_get_last_ref_updates(vpx_codec_alg_priv_t *ctx,
           (FrameWorkerData *)worker->data1;
       *update_info = frame_worker_data->pbi->refresh_frame_flags;
       return VPX_CODEC_OK;
-    } else {
+    } 
       return VPX_CODEC_ERROR;
-    }
+    
   }
 
   return VPX_CODEC_INVALID_PARAM;
@@ -873,9 +873,9 @@ static vpx_codec_err_t ctrl_get_frame_corrupted(vpx_codec_alg_priv_t *ctx,
       if (ctx->last_show_frame >= 0)
         *corrupted = frame_bufs[ctx->last_show_frame].buf.corrupted;
       return VPX_CODEC_OK;
-    } else {
+    } 
       return VPX_CODEC_ERROR;
-    }
+    
   }
 
   return VPX_CODEC_INVALID_PARAM;
@@ -900,9 +900,9 @@ static vpx_codec_err_t ctrl_get_frame_size(vpx_codec_alg_priv_t *ctx,
       frame_size[0] = cm->width;
       frame_size[1] = cm->height;
       return VPX_CODEC_OK;
-    } else {
+    } 
       return VPX_CODEC_ERROR;
-    }
+    
   }
 
   return VPX_CODEC_INVALID_PARAM;
@@ -927,9 +927,9 @@ static vpx_codec_err_t ctrl_get_render_size(vpx_codec_alg_priv_t *ctx,
       render_size[0] = cm->render_width;
       render_size[1] = cm->render_height;
       return VPX_CODEC_OK;
-    } else {
+    } 
       return VPX_CODEC_ERROR;
-    }
+    
   }
 
   return VPX_CODEC_INVALID_PARAM;
@@ -947,9 +947,9 @@ static vpx_codec_err_t ctrl_get_bit_depth(vpx_codec_alg_priv_t *ctx,
       const VP9_COMMON *const cm = &frame_worker_data->pbi->common;
       *bit_depth = cm->bit_depth;
       return VPX_CODEC_OK;
-    } else {
+    } 
       return VPX_CODEC_ERROR;
-    }
+    
   }
 
   return VPX_CODEC_INVALID_PARAM;
@@ -1010,7 +1010,7 @@ static vpx_codec_err_t ctrl_set_spatial_layer_svc(vpx_codec_alg_priv_t *ctx,
   ctx->svc_spatial_layer = va_arg(args, int);
   if (ctx->svc_spatial_layer < 0)
     return VPX_CODEC_INVALID_PARAM;
-  else
+  
     return VPX_CODEC_OK;
 }
 

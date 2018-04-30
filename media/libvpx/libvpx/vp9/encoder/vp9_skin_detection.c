@@ -54,10 +54,10 @@ int vp9_skin_pixel(const uint8_t y, const uint8_t cb, const uint8_t cr,
                    int motion) {
   if (y < y_low || y > y_high) {
     return 0;
-  } else {
+  } 
     if (MODEL_MODE == 0) {
       return (evaluate_skin_color_difference(cb, cr, 0) < skin_threshold[0]);
-    } else {
+    } 
       int i = 0;
       // Exit on grey.
       if (cb == 128 && cr == 128) return 0;
@@ -68,7 +68,7 @@ int vp9_skin_pixel(const uint8_t y, const uint8_t cb, const uint8_t cr,
         if (skin_color_diff < skin_threshold[i + 1]) {
           if (y < 60 && skin_color_diff > 3 * (skin_threshold[i + 1] >> 2))
             return 0;
-          else if (motion == 0 &&
+          if (motion == 0 &&
                    skin_color_diff > (skin_threshold[i + 1] >> 1))
             return 0;
           else
@@ -80,8 +80,8 @@ int vp9_skin_pixel(const uint8_t y, const uint8_t cb, const uint8_t cr,
         }
       }
       return 0;
-    }
-  }
+    
+  
 }
 
 int vp9_compute_skin_block(const uint8_t *y, const uint8_t *u, const uint8_t *v,
@@ -90,7 +90,7 @@ int vp9_compute_skin_block(const uint8_t *y, const uint8_t *u, const uint8_t *v,
   // No skin if block has been zero/small motion for long consecutive time.
   if (consec_zeromv > 60 && curr_motion_magn == 0) {
     return 0;
-  } else {
+  } 
     int motion = 1;
     // Take center pixel in block to determine is_skin.
     const int y_width_shift = (4 << b_width_log2_lookup[bsize]) >> 1;
@@ -102,7 +102,7 @@ int vp9_compute_skin_block(const uint8_t *y, const uint8_t *u, const uint8_t *v,
     const uint8_t vsource = v[uv_height_shift * strideuv + uv_width_shift];
     if (consec_zeromv > 25 && curr_motion_magn == 0) motion = 0;
     return vp9_skin_pixel(ysource, usource, vsource, motion);
-  }
+  
 }
 
 #ifdef OUTPUT_YUV_SKINMAP

@@ -215,7 +215,7 @@ ubidi_setLine(const UBiDi *pParaBiDi,
                         /* the direction values match those in level */
                         pLineBiDi->direction=(UBiDiDirection)level;
                         break;
-                    } else if((levels[i]&1)!=level) {
+                    } if((levels[i]&1)!=level) {
                         pLineBiDi->direction=UBIDI_MIXED;
                         break;
                     }
@@ -252,7 +252,7 @@ ubidi_getLevelAt(const UBiDi *pBiDi, int32_t charIndex) {
     /* return paraLevel if in the trailing WS run, otherwise the real level */
     if(!IS_VALID_PARA_OR_LINE(pBiDi) || charIndex<0 || pBiDi->length<=charIndex) {
         return 0;
-    } else if(pBiDi->direction!=UBIDI_MIXED || charIndex>=pBiDi->trailingWSStart) {
+    } if(pBiDi->direction!=UBIDI_MIXED || charIndex>=pBiDi->trailingWSStart) {
         return GET_PARALEVEL(pBiDi, charIndex);
     } else {
         return pBiDi->levels[charIndex];
@@ -294,11 +294,11 @@ ubidi_getLevels(UBiDi *pBiDi, UErrorCode *pErrorCode) {
         /* this new levels array is set for the line and reflects the WS run */
         pBiDi->trailingWSStart=length;
         return pBiDi->levels=levels;
-    } else {
+    } 
         /* out of memory */
         *pErrorCode=U_MEMORY_ALLOCATION_ERROR;
         return NULL;
-    }
+    
 }
 
 U_CAPI void U_EXPORT2
@@ -489,9 +489,9 @@ reorderLine(UBiDi *pBiDi, UBiDiLevel minLevel, UBiDiLevel maxLevel) {
 
             if(limitRun==runCount) {
                 break;  /* no more such runs */
-            } else {
+            } 
                 firstRun=limitRun+1;
-            }
+            
         }
     }
 
@@ -804,9 +804,9 @@ ubidi_reorderLogical(const UBiDiLevel *levels, int32_t length, int32_t *indexMap
             /* start==limit */
             if(limit==length) {
                 break;  /* no more such sequences */
-            } else {
+            } 
                 start=limit+1;
-            }
+            
         }
     } while(--maxLevel>=minLevel);
 }
@@ -864,9 +864,9 @@ ubidi_reorderVisual(const UBiDiLevel *levels, int32_t length, int32_t *indexMap)
 
             if(limit==length) {
                 break;  /* no more such sequences */
-            } else {
+            } 
                 start=limit+1;
-            }
+            
         }
     } while(--maxLevel>=minLevel);
 }
@@ -995,7 +995,7 @@ ubidi_getLogicalIndex(UBiDi *pBiDi, int32_t visualIndex, UErrorCode *pErrorCode)
         if(pBiDi->direction==UBIDI_LTR) {
             return visualIndex;
         }
-        else if(pBiDi->direction==UBIDI_RTL) {
+        if(pBiDi->direction==UBIDI_RTL) {
             return pBiDi->length-visualIndex-1;
         }
     }
@@ -1102,10 +1102,10 @@ ubidi_getLogicalIndex(UBiDi *pBiDi, int32_t visualIndex, UErrorCode *pErrorCode)
             visualIndex-=runs[i-1].visualLimit;
         }
         return start+visualIndex;
-    } else {
+    } 
         /* RTL */
         return GET_INDEX(start)+runs[i].visualLimit-visualIndex-1;
-    }
+    
 }
 
 U_CAPI void U_EXPORT2

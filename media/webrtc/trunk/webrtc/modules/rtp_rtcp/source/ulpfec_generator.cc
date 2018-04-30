@@ -185,11 +185,11 @@ bool UlpfecGenerator::MinimumMediaPacketsReached() const {
   int num_media_packets = static_cast<int>(media_packets_.size());
   if (average_num_packets_per_frame < kMinMediaPacketsAdaptationThreshold) {
     return num_media_packets >= min_num_media_packets_;
-  } else {
+  } 
     // For larger rates (more packets/frame), increase the threshold.
     // TODO(brandtr): Investigate what impact this adaptation has.
     return num_media_packets >= min_num_media_packets_ + 1;
-  }
+  
 }
 
 bool UlpfecGenerator::FecAvailable() const {

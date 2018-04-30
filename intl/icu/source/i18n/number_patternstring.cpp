@@ -62,7 +62,7 @@ const Endpoints &ParsedPatternInfo::getEndpoints(int32_t flags) const {
     bool padding = (flags & AFFIX_PADDING) != 0;
     if (isNegative && padding) {
         return negative.paddingEndpoints;
-    } else if (padding) {
+    } if (padding) {
         return positive.paddingEndpoints;
     } else if (prefix && isNegative) {
         return negative.prefixEndpoints;
@@ -106,9 +106,9 @@ bool ParsedPatternInfo::hasBody() const {
 UChar32 ParsedPatternInfo::ParserState::peek() {
     if (offset == pattern.length()) {
         return -1;
-    } else {
+    } 
         return pattern.char32At(offset);
-    }
+    
 }
 
 UChar32 ParsedPatternInfo::ParserState::next() {
@@ -238,16 +238,16 @@ void ParsedPatternInfo::consumeLiteral(UErrorCode &status) {
         state.toParseException(u"Expected unquoted literal but found EOL");
         status = U_PATTERN_SYNTAX_ERROR;
         return;
-    } else if (state.peek() == u'\'') {
+    } if (state.peek() == u'\'') {
         state.next(); // consume the starting quote
         while (state.peek() != u'\'') {
             if (state.peek() == -1) {
                 state.toParseException(u"Expected quoted literal but found EOL");
                 status = U_PATTERN_SYNTAX_ERROR;
                 return;
-            } else {
+            } 
                 state.next(); // consume a quoted character
-            }
+            
         }
         state.next(); // consume the ending quote
     } else {

@@ -101,9 +101,9 @@ sctp_userspace_get_mtu_from_ifn(uint32_t if_index, int af)
 		}
 		close(fd);
 		return ifr.ifr_mtu;
-	} else {
+	} 
 		return (0);
-	}
+	
 }
 #endif
 

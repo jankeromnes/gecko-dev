@@ -93,11 +93,11 @@ public:
                 // Not back far enough to re-enter the oldBuffer.
                 pos -= n;
                 return n;
-            } else {
+            } 
                 // Back out all beyond-oldBuffer code points and re-enter the buffer.
                 pos = oldBuffer.moveIndex32(length, beyond - n);
                 return beyond;
-            }
+            
         } else {
             // Go backwards from inside the oldBuffer.
             pos = oldBuffer.moveIndex32(pos, -n);
@@ -242,9 +242,9 @@ CollationIterator::nextCEFromCE32(const CollationData *d, UChar32 c, uint32_t ce
     appendCEsFromCE32(d, c, ce32, TRUE, errorCode);
     if(U_SUCCESS(errorCode)) {
         return ceBuffer.get(cesIndex++);
-    } else {
+    } 
         return Collation::NO_CE_PRIMARY;
-    }
+    
 }
 
 void
@@ -320,7 +320,7 @@ CollationIterator::appendCEsFromCE32(const CollationData *d, UChar32 c, uint32_t
                     // No more text.
                     ce32 = defaultCE32;
                     break;
-                } else if((ce32 & Collation::CONTRACT_NEXT_CCC) != 0 &&
+                } if((ce32 & Collation::CONTRACT_NEXT_CCC) != 0 &&
                         !CollationFCD::mayHaveLccc(nextCp)) {
                     // All contraction suffixes start with characters with lccc!=0
                     // but the next code point has lccc==0.
@@ -334,7 +334,7 @@ CollationIterator::appendCEsFromCE32(const CollationData *d, UChar32 c, uint32_t
                     // No more text.
                     ce32 = defaultCE32;
                     break;
-                } else if((ce32 & Collation::CONTRACT_NEXT_CCC) != 0 &&
+                } if((ce32 & Collation::CONTRACT_NEXT_CCC) != 0 &&
                         !CollationFCD::mayHaveLccc(nextCp)) {
                     // All contraction suffixes start with characters with lccc!=0
                     // but the next code point has lccc==0.
@@ -366,11 +366,11 @@ CollationIterator::appendCEsFromCE32(const CollationData *d, UChar32 c, uint32_t
                 // Handle NUL-termination. (Not needed in Java.)
                 ceBuffer.append(Collation::NO_CE, errorCode);
                 return;
-            } else {
+            } 
                 // Fetch the normal ce32 for U+0000 and continue.
                 ce32 = d->ce32s[0];
                 break;
-            }
+            
         case Collation::HANGUL_TAG: {
             const uint32_t *jamoCE32s = d->jamoCE32s;
             c -= Hangul::HANGUL_BASE;
@@ -390,7 +390,7 @@ CollationIterator::appendCEsFromCE32(const CollationData *d, UChar32 c, uint32_t
                     }
                 }
                 return;
-            } else {
+            } 
                 // We should not need to compute each Jamo code point.
                 // In particular, there should be no offset or implicit ce32.
                 appendCEsFromCE32(d, U_SENTINEL, jamoCE32s[c], forward, errorCode);
@@ -403,7 +403,7 @@ CollationIterator::appendCEsFromCE32(const CollationData *d, UChar32 c, uint32_t
                 ce32 = jamoCE32s[39 + t];
                 c = U_SENTINEL;
                 break;
-            }
+            
         }
         case Collation::LEAD_SURROGATE_TAG: {
             U_ASSERT(forward);  // Backward iteration should never see lead surrogate code _unit_ data.
@@ -435,10 +435,10 @@ CollationIterator::appendCEsFromCE32(const CollationData *d, UChar32 c, uint32_t
             if(U_IS_SURROGATE(c) && forbidSurrogateCodePoints()) {
                 ce32 = Collation::FFFD_CE32;
                 break;
-            } else {
+            } 
                 ceBuffer.append(Collation::unassignedCEFromCodePoint(c), errorCode);
                 return;
-            }
+            
         }
     }
     ceBuffer.append(Collation::ceFromSimpleCE32(ce32), errorCode);
@@ -875,9 +875,9 @@ CollationIterator::previousCE(UVector32 &offsets, UErrorCode &errorCode) {
             };
         }
         return ceBuffer.get(--ceBuffer.length);
-    } else {
+    } 
         return Collation::NO_CE_PRIMARY;
-    }
+    
 }
 
 int64_t
@@ -945,9 +945,9 @@ CollationIterator::previousCEUnsafe(UChar32 c, UVector32 &offsets, UErrorCode &e
     cesIndex = 0;  // Avoid cesIndex > ceBuffer.length when that gets decremented.
     if(U_SUCCESS(errorCode)) {
         return ceBuffer.get(--ceBuffer.length);
-    } else {
+    } 
         return Collation::NO_CE_PRIMARY;
-    }
+    
 }
 
 U_NAMESPACE_END

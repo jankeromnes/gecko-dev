@@ -403,7 +403,7 @@ Edits::Iterator::Iterator(const uint16_t *a, int32_t len, UBool oc, UBool crs) :
 int32_t Edits::Iterator::readLength(int32_t head) {
     if (head < LENGTH_IN_1TRAIL) {
         return head;
-    } else if (head < LENGTH_IN_2TRAIL) {
+    } if (head < LENGTH_IN_2TRAIL) {
         U_ASSERT(index < length);
         U_ASSERT(array[index] >= 0x8000);
         return array[index++] & 0x7fff;
@@ -748,10 +748,10 @@ int32_t Edits::Iterator::destinationIndexFromSourceIndex(int32_t i, UErrorCode &
     if (changed) {
         // In a change span, map to its end.
         return destIndex + newLength_;
-    } else {
+    } 
         // In an unchanged span, offset 1:1 within it.
         return destIndex + (i - srcIndex);
-    }
+    
 }
 
 int32_t Edits::Iterator::sourceIndexFromDestinationIndex(int32_t i, UErrorCode &errorCode) {
@@ -767,10 +767,10 @@ int32_t Edits::Iterator::sourceIndexFromDestinationIndex(int32_t i, UErrorCode &
     if (changed) {
         // In a change span, map to its end.
         return srcIndex + oldLength_;
-    } else {
+    } 
         // In an unchanged span, offset within it.
         return srcIndex + (i - destIndex);
-    }
+    
 }
 
 U_NAMESPACE_END

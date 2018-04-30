@@ -115,7 +115,7 @@ bool VectorizeVectorScalarArithmeticTraverser::visitBinary(Visit /*visit*/, TInt
         // in the tree may still be replaced.
         return false;
     }
-    else if (left->isVector() && right->isScalar())
+    if (left->isVector() && right->isScalar())
     {
         OriginalNode originalNodeFate;
         TIntermTyped *rightVectorized = Vectorize(right, left->getType(), &originalNodeFate);

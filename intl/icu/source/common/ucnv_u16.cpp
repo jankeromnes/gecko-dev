@@ -317,7 +317,7 @@ _UTF16BEToUnicodeWithOffsets(UConverterToUnicodeArgs *pArgs,
                     count=0;
                     c=0;
                     break;
-                } else if(U16_IS_SURROGATE_LEAD(c)) {
+                } if(U16_IS_SURROGATE_LEAD(c)) {
                     /* continue collecting bytes for the trail surrogate */
                     c=0; /* avoid unnecessary surrogate handling below */
                 } else {
@@ -346,7 +346,7 @@ _UTF16BEToUnicodeWithOffsets(UConverterToUnicodeArgs *pArgs,
                     count=0;
                     c=0;
                     break;
-                } else {
+                } 
                     /* unmatched lead surrogate, handle here for consistent toUBytes[] */
                     *pErrorCode=U_ILLEGAL_CHAR_FOUND;
 
@@ -369,7 +369,7 @@ _UTF16BEToUnicodeWithOffsets(UConverterToUnicodeArgs *pArgs,
                     pArgs->target=target;
                     pArgs->offsets=offsets;
                     return;
-                }
+                
             }
         } while(length>0);
         cnv->toULength=(int8_t)count;
@@ -601,9 +601,9 @@ static const char *  U_CALLCONV
 _UTF16BEGetName(const UConverter *cnv) {
     if(UCNV_GET_VERSION(cnv)==0) {
         return "UTF-16BE";
-    } else {
+    } 
         return "UTF-16BE,version=1";
-    }
+    
 }
 U_CDECL_END
 
@@ -918,7 +918,7 @@ _UTF16LEToUnicodeWithOffsets(UConverterToUnicodeArgs *pArgs,
                     count=0;
                     c=0;
                     break;
-                } else if(U16_IS_SURROGATE_LEAD(c)) {
+                } if(U16_IS_SURROGATE_LEAD(c)) {
                     /* continue collecting bytes for the trail surrogate */
                     c=0; /* avoid unnecessary surrogate handling below */
                 } else {
@@ -947,7 +947,7 @@ _UTF16LEToUnicodeWithOffsets(UConverterToUnicodeArgs *pArgs,
                     count=0;
                     c=0;
                     break;
-                } else {
+                } 
                     /* unmatched lead surrogate, handle here for consistent toUBytes[] */
                     *pErrorCode=U_ILLEGAL_CHAR_FOUND;
 
@@ -970,7 +970,7 @@ _UTF16LEToUnicodeWithOffsets(UConverterToUnicodeArgs *pArgs,
                     pArgs->target=target;
                     pArgs->offsets=offsets;
                     return;
-                }
+                
             }
         } while(length>0);
         cnv->toULength=(int8_t)count;
@@ -1202,9 +1202,9 @@ static const char *  U_CALLCONV
 _UTF16LEGetName(const UConverter *cnv) {
     if(UCNV_GET_VERSION(cnv)==0) {
         return "UTF-16LE";
-    } else {
+    } 
         return "UTF-16LE,version=1";
-    }
+    
 }
 U_CDECL_END
 
@@ -1314,7 +1314,7 @@ static const char *  U_CALLCONV
 _UTF16GetName(const UConverter *cnv) {
     if(UCNV_GET_VERSION(cnv)==0) {
         return "UTF-16";
-    } else if(UCNV_GET_VERSION(cnv)==1) {
+    } if(UCNV_GET_VERSION(cnv)==1) {
         return "UTF-16,version=1";
     } else {
         return "UTF-16,version=2";
