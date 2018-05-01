@@ -169,7 +169,8 @@ protected:
   DeepCopy(const std::vector<RefPtr<JsepTransceiver>>& transceivers)
   {
     std::vector<RefPtr<JsepTransceiver>> copy;
-    for (const RefPtr<JsepTransceiver>& transceiver : transceivers) {
+    copy.reserve(transceivers.size());
+for (const RefPtr<JsepTransceiver>& transceiver : transceivers) {
       copy.push_back(new JsepTransceiver(*transceiver));
     }
     return copy;
