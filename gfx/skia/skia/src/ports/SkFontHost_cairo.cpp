@@ -90,21 +90,21 @@ class SkScalerContext_CairoFT : public SkScalerContext_FreeType_Base {
 public:
     SkScalerContext_CairoFT(sk_sp<SkTypeface> typeface, const SkScalerContextEffects& effects, const SkDescriptor* desc,
                             cairo_font_face_t* fontFace, FcPattern* pattern);
-    virtual ~SkScalerContext_CairoFT();
+    ~SkScalerContext_CairoFT() override;
 
     bool isValid() const {
         return fScaledFont != nullptr;
     }
 
 protected:
-    virtual unsigned generateGlyphCount() override;
-    virtual uint16_t generateCharToGlyph(SkUnichar uniChar) override;
-    virtual void generateAdvance(SkGlyph* glyph) override;
-    virtual void generateMetrics(SkGlyph* glyph) override;
-    virtual void generateImage(const SkGlyph& glyph) override;
-    virtual void generatePath(const SkGlyphID glyphID, SkPath* path) override;
-    virtual void generateFontMetrics(SkPaint::FontMetrics* metrics) override;
-    virtual SkUnichar generateGlyphToChar(uint16_t glyph) override;
+    unsigned generateGlyphCount() override;
+    uint16_t generateCharToGlyph(SkUnichar uniChar) override;
+    void generateAdvance(SkGlyph* glyph) override;
+    void generateMetrics(SkGlyph* glyph) override;
+    void generateImage(const SkGlyph& glyph) override;
+    void generatePath(const SkGlyphID glyphID, SkPath* path) override;
+    void generateFontMetrics(SkPaint::FontMetrics* metrics) override;
+    SkUnichar generateGlyphToChar(uint16_t glyph) override;
 
 private:
     bool computeShapeMatrix(const SkMatrix& m);
@@ -181,15 +181,15 @@ public:
         return new SkCairoFTTypeface(style, isFixedWidth, fontFace, pattern);
     }
 
-    virtual SkStreamAsset* onOpenStream(int*) const override { return nullptr; }
+    SkStreamAsset* onOpenStream(int*) const override { return nullptr; }
 
-    virtual std::unique_ptr<SkAdvancedTypefaceMetrics> onGetAdvancedMetrics() const override
+    std::unique_ptr<SkAdvancedTypefaceMetrics> onGetAdvancedMetrics() const override
     {
         SkDEBUGCODE(SkDebugf("SkCairoFTTypeface::onGetAdvancedMetrics unimplemented\n"));
         return nullptr;
     }
 
-    virtual SkScalerContext* onCreateScalerContext(const SkScalerContextEffects& effects, const SkDescriptor* desc) const override
+    SkScalerContext* onCreateScalerContext(const SkScalerContextEffects& effects, const SkDescriptor* desc) const override
     {
         SkScalerContext_CairoFT* ctx =
             new SkScalerContext_CairoFT(sk_ref_sp(const_cast<SkCairoFTTypeface*>(this)),
@@ -201,7 +201,7 @@ public:
         return ctx;
     }
 
-    virtual void onFilterRec(SkScalerContextRec* rec) const override
+    void onFilterRec(SkScalerContextRec* rec) const override
     {
         // No subpixel AA unless enabled in Fontconfig.
         if (!fPattern && isLCD(*rec)) {
@@ -217,49 +217,49 @@ public:
         rec->ignorePreBlend();
     }
 
-    virtual int onGetVariationDesignPosition(
+    int onGetVariationDesignPosition(
         SkFontArguments::VariationPosition::Coordinate coordinates[],
         int coordinateCount) const override
     {
         return -1;
     }
 
-    virtual void onGetFontDescriptor(SkFontDescriptor*, bool*) const override
+    void onGetFontDescriptor(SkFontDescriptor*, bool*) const override
     {
         SkDEBUGCODE(SkDebugf("SkCairoFTTypeface::onGetFontDescriptor unimplemented\n"));
     }
 
-    virtual int onCharsToGlyphs(void const*, SkTypeface::Encoding, uint16_t*, int) const override
+    int onCharsToGlyphs(void const*, SkTypeface::Encoding, uint16_t*, int) const override
     {
         return 0;
     }
 
-    virtual int onCountGlyphs() const override
+    int onCountGlyphs() const override
     {
         return 0;
     }
 
-    virtual int onGetUPEM() const override
+    int onGetUPEM() const override
     {
         return 0;
     }
 
-    virtual SkTypeface::LocalizedStrings* onCreateFamilyNameIterator() const override
+    SkTypeface::LocalizedStrings* onCreateFamilyNameIterator() const override
     {
         return nullptr;
     }
 
-    virtual void onGetFamilyName(SkString* familyName) const override
+    void onGetFamilyName(SkString* familyName) const override
     {
         familyName->reset();
     }
 
-    virtual int onGetTableTags(SkFontTableTag*) const override
+    int onGetTableTags(SkFontTableTag*) const override
     {
         return 0;
     }
 
-    virtual size_t onGetTableData(SkFontTableTag, size_t, size_t, void*) const override
+    size_t onGetTableData(SkFontTableTag, size_t, size_t, void*) const override
     {
         return 0;
     }
@@ -281,7 +281,7 @@ private:
 #endif
     }
 
-    ~SkCairoFTTypeface()
+    ~SkCairoFTTypeface() override
     {
         cairo_font_face_set_user_data(fFontFace, &kSkTypefaceKey, nullptr, nullptr);
         cairo_font_face_destroy(fFontFace);

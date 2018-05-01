@@ -33,7 +33,7 @@ U_NAMESPACE_BEGIN
 class LoadedNormalizer2Impl : public Normalizer2Impl {
 public:
     LoadedNormalizer2Impl() : memory(NULL), ownedTrie(NULL) {}
-    virtual ~LoadedNormalizer2Impl();
+    ~LoadedNormalizer2Impl() override;
 
     void load(const char *packageName, const char *name, UErrorCode &errorCode);
 

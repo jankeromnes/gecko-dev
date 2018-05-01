@@ -118,7 +118,7 @@ class TransportTestPeer : public sigslot::has_slots<> {
     EXPECT_EQ((nsresult)NS_OK, res);
   }
 
-  ~TransportTestPeer() {
+  ~TransportTestPeer() override {
     std::cerr << "Destroying sctp connection flow=" <<
         static_cast<void *>(flow_.get()) << std::endl;
     usrsctp_close(sctp_);
@@ -315,7 +315,7 @@ class SctpTransportTest : public MtransportTest {
   SctpTransportTest() {
   }
 
-  ~SctpTransportTest() {
+  ~SctpTransportTest() override {
   }
 
   static void debug_printf(const char *format, ...) {

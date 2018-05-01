@@ -20,11 +20,11 @@ class StatsTest : public testing::Test {
  protected:
   StatsTest() {}
 
-  virtual ~StatsTest() {}
+  ~StatsTest() override {}
 
-  void SetUp() { stats_ = new Stats(); }
+  void SetUp() override { stats_ = new Stats(); }
 
-  void TearDown() { delete stats_; }
+  void TearDown() override { delete stats_; }
 
   Stats* stats_;
 };

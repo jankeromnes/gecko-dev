@@ -104,7 +104,7 @@ class nrappkitTimerCallback : public nrappkitCallback,
     timer_ = timer;
   }
 
-  virtual void Cancel() override {
+  void Cancel() override {
     AddRef();  // Cancelling the timer causes the callback it holds to
                // be released. AddRef() keeps us alive.
     timer_->Cancel();
@@ -120,7 +120,7 @@ class nrappkitTimerCallback : public nrappkitCallback,
 
  private:
   nsCOMPtr<nsITimer> timer_;
-  virtual ~nrappkitTimerCallback() {}
+  ~nrappkitTimerCallback() override {}
 };
 
 NS_IMPL_ISUPPORTS(nrappkitTimerCallback, nsITimerCallback, nsINamed)
@@ -149,11 +149,11 @@ class nrappkitScheduledCallback : public nrappkitCallback {
     }
   }
 
-  virtual void Cancel() override {
+  void Cancel() override {
     cb_ = nullptr;
   }
 
-  ~nrappkitScheduledCallback() {}
+  ~nrappkitScheduledCallback() override {}
 };
 
 }  // close namespace

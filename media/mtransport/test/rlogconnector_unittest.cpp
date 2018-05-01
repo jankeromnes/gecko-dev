@@ -31,7 +31,7 @@ class RLogConnectorTest : public ::testing::Test {
       Init();
     }
 
-    ~RLogConnectorTest() {
+    ~RLogConnectorTest() override {
       Free();
     }
 

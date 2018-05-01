@@ -42,8 +42,8 @@ class VideoProcessorTest : public testing::Test {
   VideoCodec codec_settings_;
 
   VideoProcessorTest() {}
-  virtual ~VideoProcessorTest() {}
-  void SetUp() {
+  ~VideoProcessorTest() override {}
+  void SetUp() override {
     // Get a codec configuration struct and configure it.
     VideoCodingModule::Codec(kVideoCodecVP8, &codec_settings_);
     config_.codec_settings = &codec_settings_;
@@ -51,7 +51,7 @@ class VideoProcessorTest : public testing::Test {
     config_.codec_settings->width = 352;
     config_.codec_settings->height = 288;
   }
-  void TearDown() {}
+  void TearDown() override {}
 
   void ExpectInit() {
     EXPECT_CALL(encoder_mock_, InitEncode(_, _, _)).Times(1);

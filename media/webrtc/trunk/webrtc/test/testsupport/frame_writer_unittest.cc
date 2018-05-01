@@ -21,14 +21,14 @@ const size_t kFrameLength = 1000;
 class FrameWriterTest: public testing::Test {
  protected:
   FrameWriterTest() {}
-  virtual ~FrameWriterTest() {}
-  void SetUp() {
+  ~FrameWriterTest() override {}
+  void SetUp() override {
     temp_filename_ = webrtc::test::TempFilename(webrtc::test::OutputPath(),
                                                 "frame_writer_unittest");
     frame_writer_ = new FrameWriterImpl(temp_filename_, kFrameLength);
     ASSERT_TRUE(frame_writer_->Init());
   }
-  void TearDown() {
+  void TearDown() override {
     delete frame_writer_;
     // Cleanup the temporary file.
     remove(temp_filename_.c_str());

@@ -63,7 +63,7 @@ class U_COMMON_API UStringSet : public UVector {
                                            uhash_compareUnicodeString,
                                            1,
                                            status) {}
-  virtual ~UStringSet();
+  ~UStringSet() override;
   /**
    * Is this UnicodeSet contained?
    */
@@ -157,7 +157,7 @@ class SimpleFilteredSentenceBreakIterator : public BreakIterator {
 public:
   SimpleFilteredSentenceBreakIterator(BreakIterator *adopt, UCharsTrie *forwards, UCharsTrie *backwards, UErrorCode &status);
   SimpleFilteredSentenceBreakIterator(const SimpleFilteredSentenceBreakIterator& other);
-  virtual ~SimpleFilteredSentenceBreakIterator();
+  ~SimpleFilteredSentenceBreakIterator() override;
 private:
   SimpleFilteredSentenceBreakData *fData;
   LocalPointer<BreakIterator> fDelegate;
@@ -166,39 +166,39 @@ private:
   /* -- subclass interface -- */
 public:
   /* -- cloning and other subclass stuff -- */
-  virtual BreakIterator *  createBufferClone(void * /*stackBuffer*/,
+  BreakIterator *  createBufferClone(void * /*stackBuffer*/,
                                              int32_t &/*BufferSize*/,
-                                             UErrorCode &status) {
+                                             UErrorCode &status) override {
     // for now - always deep clone
     status = U_SAFECLONE_ALLOCATED_WARNING;
     return clone();
   }
-  virtual BreakIterator* clone(void) const { return new SimpleFilteredSentenceBreakIterator(*this); }
-  virtual UClassID getDynamicClassID(void) const { return NULL; }
-  virtual UBool operator==(const BreakIterator& o) const { if(this==&o) return true; return false; }
+  BreakIterator* clone(void) const override { return new SimpleFilteredSentenceBreakIterator(*this); }
+  UClassID getDynamicClassID(void) const override { return NULL; }
+  UBool operator==(const BreakIterator& o) const override { if(this==&o) return true; return false; }
 
   /* -- text modifying -- */
-  virtual void setText(UText *text, UErrorCode &status) { fDelegate->setText(text,status); }
-  virtual BreakIterator &refreshInputText(UText *input, UErrorCode &status) { fDelegate->refreshInputText(input,status); return *this; }
-  virtual void adoptText(CharacterIterator* it) { fDelegate->adoptText(it); }
-  virtual void setText(const UnicodeString &text) { fDelegate->setText(text); }
+  void setText(UText *text, UErrorCode &status) override { fDelegate->setText(text,status); }
+  BreakIterator &refreshInputText(UText *input, UErrorCode &status) override { fDelegate->refreshInputText(input,status); return *this; }
+  void adoptText(CharacterIterator* it) override { fDelegate->adoptText(it); }
+  void setText(const UnicodeString &text) override { fDelegate->setText(text); }
 
   /* -- other functions that are just delegated -- */
-  virtual UText *getUText(UText *fillIn, UErrorCode &status) const { return fDelegate->getUText(fillIn,status); }
-  virtual CharacterIterator& getText(void) const { return fDelegate->getText(); }
+  UText *getUText(UText *fillIn, UErrorCode &status) const override { return fDelegate->getUText(fillIn,status); }
+  CharacterIterator& getText(void) const override { return fDelegate->getText(); }
 
   /* -- ITERATION -- */
-  virtual int32_t first(void);
-  virtual int32_t preceding(int32_t offset);
-  virtual int32_t previous(void);
-  virtual UBool isBoundary(int32_t offset);
-  virtual int32_t current(void) const { return fDelegate->current(); } // we keep the delegate current, so this should be correct.
+  int32_t first(void) override;
+  int32_t preceding(int32_t offset) override;
+  int32_t previous(void) override;
+  UBool isBoundary(int32_t offset) override;
+  int32_t current(void) const override { return fDelegate->current(); } // we keep the delegate current, so this should be correct.
 
-  virtual int32_t next(void);
+  int32_t next(void) override;
 
-  virtual int32_t next(int32_t n);
-  virtual int32_t following(int32_t offset);
-  virtual int32_t last(void);
+  int32_t next(int32_t n) override;
+  int32_t following(int32_t offset) override;
+  int32_t last(void) override;
 
 private:
     /**
@@ -458,12 +458,12 @@ SimpleFilteredSentenceBreakIterator::last(void) {
  */
 class U_COMMON_API SimpleFilteredBreakIteratorBuilder : public FilteredBreakIteratorBuilder {
 public:
-  virtual ~SimpleFilteredBreakIteratorBuilder();
+  ~SimpleFilteredBreakIteratorBuilder() override;
   SimpleFilteredBreakIteratorBuilder(const Locale &fromLocale, UErrorCode &status);
   SimpleFilteredBreakIteratorBuilder(UErrorCode &status);
-  virtual UBool suppressBreakAfter(const UnicodeString& exception, UErrorCode& status);
-  virtual UBool unsuppressBreakAfter(const UnicodeString& exception, UErrorCode& status);
-  virtual BreakIterator *build(BreakIterator* adoptBreakIterator, UErrorCode& status);
+  UBool suppressBreakAfter(const UnicodeString& exception, UErrorCode& status) override;
+  UBool unsuppressBreakAfter(const UnicodeString& exception, UErrorCode& status) override;
+  BreakIterator *build(BreakIterator* adoptBreakIterator, UErrorCode& status) override;
 private:
   UStringSet fSet;
 };

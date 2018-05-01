@@ -127,9 +127,9 @@ CollatorFactory::getDisplayName(const Locale& objectLocale,
 class ICUCollatorFactory : public ICUResourceBundleFactory {
  public:
     ICUCollatorFactory() : ICUResourceBundleFactory(UnicodeString(U_ICUDATA_COLL, -1, US_INV)) { }
-    virtual ~ICUCollatorFactory();
+    ~ICUCollatorFactory() override;
  protected:
-    virtual UObject* create(const ICUServiceKey& key, const ICUService* service, UErrorCode& status) const;
+    UObject* create(const ICUServiceKey& key, const ICUService* service, UErrorCode& status) const override;
 };
 
 ICUCollatorFactory::~ICUCollatorFactory() {}
@@ -160,13 +160,13 @@ public:
         registerFactory(new ICUCollatorFactory(), status);
     }
 
-    virtual ~ICUCollatorService();
+    ~ICUCollatorService() override;
 
-    virtual UObject* cloneInstance(UObject* instance) const {
+    UObject* cloneInstance(UObject* instance) const override {
         return ((Collator*)instance)->clone();
     }
     
-    virtual UObject* handleDefault(const ICUServiceKey& key, UnicodeString* actualID, UErrorCode& status) const {
+    UObject* handleDefault(const ICUServiceKey& key, UnicodeString* actualID, UErrorCode& status) const override {
         LocaleKey& lkey = (LocaleKey&)key;
         if (actualID) {
             // Ugly Hack Alert! We return an empty actualID to signal
@@ -179,7 +179,7 @@ public:
         return Collator::makeInstance(loc, status);
     }
     
-    virtual UObject* getKey(ICUServiceKey& key, UnicodeString* actualReturn, UErrorCode& status) const {
+    UObject* getKey(ICUServiceKey& key, UnicodeString* actualReturn, UErrorCode& status) const override {
         UnicodeString ar;
         if (actualReturn == NULL) {
             actualReturn = &ar;
@@ -187,7 +187,7 @@ public:
         return (Collator*)ICULocaleService::getKey(key, actualReturn, status);
     }
 
-    virtual UBool isDefault() const {
+    UBool isDefault() const override {
         return countFactories() == 1;
     }
 };
@@ -714,12 +714,12 @@ public:
         }
     }
 
-    virtual ~CFactory();
+    ~CFactory() override;
 
-    virtual UObject* create(const ICUServiceKey& key, const ICUService* service, UErrorCode& status) const;
+    UObject* create(const ICUServiceKey& key, const ICUService* service, UErrorCode& status) const override;
     
 protected:
-    virtual const Hashtable* getSupportedIDs(UErrorCode& status) const
+    const Hashtable* getSupportedIDs(UErrorCode& status) const override
     {
         if (U_SUCCESS(status)) {
             return _ids;
@@ -727,8 +727,8 @@ protected:
         return NULL;
     }
     
-    virtual UnicodeString&
-        getDisplayName(const UnicodeString& id, const Locale& locale, UnicodeString& result) const;
+    UnicodeString&
+        getDisplayName(const UnicodeString& id, const Locale& locale, UnicodeString& result) const override;
 };
 
 CFactory::~CFactory()
@@ -798,7 +798,7 @@ private:
     int32_t index;
 public:
     static UClassID U_EXPORT2 getStaticClassID(void);
-    virtual UClassID getDynamicClassID(void) const;
+    UClassID getDynamicClassID(void) const override;
 public:
     CollationLocaleListEnumeration()
         : index(0)
@@ -807,9 +807,9 @@ public:
         //isAvailableLocaleListInitialized(status);
     }
 
-    virtual ~CollationLocaleListEnumeration();
+    ~CollationLocaleListEnumeration() override;
 
-    virtual StringEnumeration * clone() const
+    StringEnumeration * clone() const override
     {
         CollationLocaleListEnumeration *result = new CollationLocaleListEnumeration();
         if (result) {
@@ -818,11 +818,11 @@ public:
         return result;
     }
 
-    virtual int32_t count(UErrorCode &/*status*/) const {
+    int32_t count(UErrorCode &/*status*/) const override {
         return availableLocaleListCount;
     }
 
-    virtual const char* next(int32_t* resultLength, UErrorCode& /*status*/) {
+    const char* next(int32_t* resultLength, UErrorCode& /*status*/) override {
         const char* result;
         if(index < availableLocaleListCount) {
             result = availableLocaleList[index++].getName();
@@ -838,13 +838,13 @@ public:
         return result;
     }
 
-    virtual const UnicodeString* snext(UErrorCode& status) {
+    const UnicodeString* snext(UErrorCode& status) override {
         int32_t resultLength = 0;
         const char *s = next(&resultLength, status);
         return setChars(s, resultLength, status);
     }
 
-    virtual void reset(UErrorCode& /*status*/) {
+    void reset(UErrorCode& /*status*/) override {
         index = 0;
     }
 };

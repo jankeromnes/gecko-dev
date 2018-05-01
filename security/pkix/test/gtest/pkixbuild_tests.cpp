@@ -529,7 +529,7 @@ public:
   {
   }
 
-  virtual void NoteAuxiliaryExtension(AuxiliaryExtension extension,
+  void NoteAuxiliaryExtension(AuxiliaryExtension extension,
                                       Input extensionData) override
   {
     if (extension == AuxiliaryExtension::EmbeddedSCTList) {

@@ -102,26 +102,26 @@ static void sweepCache() {
 class TimeZoneNamesDelegate : public TimeZoneNames {
 public:
     TimeZoneNamesDelegate(const Locale& locale, UErrorCode& status);
-    virtual ~TimeZoneNamesDelegate();
+    ~TimeZoneNamesDelegate() override;
 
-    virtual UBool operator==(const TimeZoneNames& other) const;
+    UBool operator==(const TimeZoneNames& other) const override;
     virtual UBool operator!=(const TimeZoneNames& other) const {return !operator==(other);};
-    virtual TimeZoneNames* clone() const;
+    TimeZoneNames* clone() const override;
 
-    StringEnumeration* getAvailableMetaZoneIDs(UErrorCode& status) const;
-    StringEnumeration* getAvailableMetaZoneIDs(const UnicodeString& tzID, UErrorCode& status) const;
-    UnicodeString& getMetaZoneID(const UnicodeString& tzID, UDate date, UnicodeString& mzID) const;
-    UnicodeString& getReferenceZoneID(const UnicodeString& mzID, const char* region, UnicodeString& tzID) const;
+    StringEnumeration* getAvailableMetaZoneIDs(UErrorCode& status) const override;
+    StringEnumeration* getAvailableMetaZoneIDs(const UnicodeString& tzID, UErrorCode& status) const override;
+    UnicodeString& getMetaZoneID(const UnicodeString& tzID, UDate date, UnicodeString& mzID) const override;
+    UnicodeString& getReferenceZoneID(const UnicodeString& mzID, const char* region, UnicodeString& tzID) const override;
 
-    UnicodeString& getMetaZoneDisplayName(const UnicodeString& mzID, UTimeZoneNameType type, UnicodeString& name) const;
-    UnicodeString& getTimeZoneDisplayName(const UnicodeString& tzID, UTimeZoneNameType type, UnicodeString& name) const;
+    UnicodeString& getMetaZoneDisplayName(const UnicodeString& mzID, UTimeZoneNameType type, UnicodeString& name) const override;
+    UnicodeString& getTimeZoneDisplayName(const UnicodeString& tzID, UTimeZoneNameType type, UnicodeString& name) const override;
 
-    UnicodeString& getExemplarLocationName(const UnicodeString& tzID, UnicodeString& name) const;
+    UnicodeString& getExemplarLocationName(const UnicodeString& tzID, UnicodeString& name) const override;
 
-    void loadAllDisplayNames(UErrorCode& status);
-    void getDisplayNames(const UnicodeString& tzID, const UTimeZoneNameType types[], int32_t numTypes, UDate date, UnicodeString dest[], UErrorCode& status) const;
+    void loadAllDisplayNames(UErrorCode& status) override;
+    void getDisplayNames(const UnicodeString& tzID, const UTimeZoneNameType types[], int32_t numTypes, UDate date, UnicodeString dest[], UErrorCode& status) const override;
 
-    MatchInfoCollection* find(const UnicodeString& text, int32_t start, uint32_t types, UErrorCode& status) const;
+    MatchInfoCollection* find(const UnicodeString& text, int32_t start, uint32_t types, UErrorCode& status) const override;
 private:
     TimeZoneNamesDelegate();
     TimeZoneNamesCacheEntry*    fTZnamesCacheEntry;

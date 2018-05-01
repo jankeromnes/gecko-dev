@@ -519,12 +519,12 @@ public:
     mGlobalDisplay = new GLXDisplay();
   }
 
-  virtual ~GLXVsyncSource()
+  ~GLXVsyncSource() override
   {
     MOZ_ASSERT(NS_IsMainThread());
   }
 
-  virtual Display& GetGlobalDisplay() override
+  Display& GetGlobalDisplay() override
   {
     return *mGlobalDisplay;
   }
@@ -615,7 +615,7 @@ public:
         lock.NotifyAll();
     }
 
-    virtual void EnableVsync() override
+    void EnableVsync() override
     {
       MOZ_ASSERT(NS_IsMainThread());
       MOZ_ASSERT(mGLContext, "GLContext not setup!");
@@ -636,19 +636,19 @@ public:
       }
     }
 
-    virtual void DisableVsync() override
+    void DisableVsync() override
     {
       MonitorAutoLock lock(mVsyncEnabledLock);
       mVsyncEnabled = false;
     }
 
-    virtual bool IsVsyncEnabled() override
+    bool IsVsyncEnabled() override
     {
       MonitorAutoLock lock(mVsyncEnabledLock);
       return mVsyncEnabled;
     }
 
-    virtual void Shutdown() override
+    void Shutdown() override
     {
       MOZ_ASSERT(NS_IsMainThread());
       DisableVsync();
@@ -663,7 +663,7 @@ public:
     }
 
   private:
-    virtual ~GLXDisplay()
+    ~GLXDisplay() override
     {
     }
 

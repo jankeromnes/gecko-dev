@@ -2722,9 +2722,9 @@ TimeZoneFormat::getTimeZoneID(const TimeZoneNames::MatchInfoCollection* matches,
 class ZoneIdMatchHandler : public TextTrieMapSearchResultHandler {
 public:
     ZoneIdMatchHandler();
-    virtual ~ZoneIdMatchHandler();
+    ~ZoneIdMatchHandler() override;
 
-    UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status);
+    UBool handleMatch(int32_t matchLength, const CharacterNode *node, UErrorCode &status) override;
     const UChar* getID();
     int32_t getMatchLen();
 private:

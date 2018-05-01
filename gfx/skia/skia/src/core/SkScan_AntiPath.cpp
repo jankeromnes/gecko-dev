@@ -42,7 +42,7 @@ public:
                      const SkIRect& clipBounds, bool isInverse);
 
     /// Must be explicitly defined on subclasses.
-    virtual void blitAntiH(int x, int y, const SkAlpha antialias[],
+    void blitAntiH(int x, int y, const SkAlpha antialias[],
                            const int16_t runs[]) override {
         SkDEBUGFAIL("How did I get here?");
     }

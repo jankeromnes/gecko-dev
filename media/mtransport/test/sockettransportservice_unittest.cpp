@@ -40,14 +40,14 @@ class SocketTransportServiceTest : public MtransportTest {
                                  registered_(false) {
   }
 
-  ~SocketTransportServiceTest() {
+  ~SocketTransportServiceTest() override {
     if (readpipe_)
       PR_Close(readpipe_);
     if (writepipe_)
       PR_Close(writepipe_);
   }
 
-  void SetUp();
+  void SetUp() override;
   void RegisterHandler();
   void SendEvent();
   void SendPacket();
@@ -127,8 +127,8 @@ class SocketHandler : public nsASocketHandler {
     *aIsLocal = false;
   }
 
-  virtual uint64_t ByteCountSent() override { return 0; }
-  virtual uint64_t ByteCountReceived() override { return 0; }
+  uint64_t ByteCountSent() override { return 0; }
+  uint64_t ByteCountReceived() override { return 0; }
 
   NS_DECL_ISUPPORTS
 

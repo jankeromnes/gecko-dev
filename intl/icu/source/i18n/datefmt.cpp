@@ -52,7 +52,7 @@ public:
 
     DateFmtBestPattern(const UnicodeString &pattern)
             : fPattern(pattern) { }
-    ~DateFmtBestPattern();
+    ~DateFmtBestPattern() override;
 };
 
 DateFmtBestPattern::~DateFmtBestPattern() {
@@ -78,11 +78,11 @@ public:
     DateFmtBestPatternKey(const DateFmtBestPatternKey &other) :
             LocaleCacheKey<DateFmtBestPattern>(other),
             fSkeleton(other.fSkeleton) { }
-    virtual ~DateFmtBestPatternKey();
-    virtual int32_t hashCode() const {
+    ~DateFmtBestPatternKey() override;
+    int32_t hashCode() const override {
         return (int32_t)(37u * (uint32_t)LocaleCacheKey<DateFmtBestPattern>::hashCode() + (uint32_t)fSkeleton.hashCode());
     }
-    virtual UBool operator==(const CacheKeyBase &other) const {
+    UBool operator==(const CacheKeyBase &other) const override {
        // reflexive
        if (this == &other) { 	
            return TRUE;
@@ -95,11 +95,11 @@ public:
                static_cast<const DateFmtBestPatternKey &>(other);
        return (realOther.fSkeleton == fSkeleton);
     }
-    virtual CacheKeyBase *clone() const {
+    CacheKeyBase *clone() const override {
         return new DateFmtBestPatternKey(*this);
     }
-    virtual const DateFmtBestPattern *createObject(
-            const void * /*unused*/, UErrorCode &status) const {
+    const DateFmtBestPattern *createObject(
+            const void * /*unused*/, UErrorCode &status) const override {
         LocalPointer<DateTimePatternGenerator> dtpg(
                     DateTimePatternGenerator::createInstance(fLoc, status));
         if (U_FAILURE(status)) {

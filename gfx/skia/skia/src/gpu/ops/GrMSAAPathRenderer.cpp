@@ -186,12 +186,12 @@ public:
         UniformHandle fViewMatrixUniform;
     };
 
-    virtual void getGLSLProcessorKey(const GrShaderCaps& caps,
+    void getGLSLProcessorKey(const GrShaderCaps& caps,
                                    GrProcessorKeyBuilder* b) const override {
         GLSLProcessor::GenKey(*this, caps, b);
     }
 
-    virtual GrGLSLPrimitiveProcessor* createGLSLInstance(const GrShaderCaps&) const override {
+    GrGLSLPrimitiveProcessor* createGLSLInstance(const GrShaderCaps&) const override {
         return new GLSLProcessor(*this);
     }
 
