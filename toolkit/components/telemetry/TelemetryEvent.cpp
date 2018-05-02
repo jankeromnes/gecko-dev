@@ -30,13 +30,10 @@
 
 using mozilla::StaticMutex;
 using mozilla::StaticMutexAutoLock;
-using mozilla::ArrayLength;
 using mozilla::Maybe;
 using mozilla::Move;
-using mozilla::Nothing;
 using mozilla::StaticAutoPtr;
 using mozilla::TimeStamp;
-using mozilla::Telemetry::Common::AutoHashtable;
 using mozilla::Telemetry::Common::IsExpiredVersion;
 using mozilla::Telemetry::Common::CanRecordDataset;
 using mozilla::Telemetry::Common::IsInDataset;

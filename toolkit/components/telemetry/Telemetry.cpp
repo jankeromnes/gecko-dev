@@ -100,12 +100,10 @@ namespace {
 using namespace mozilla;
 using namespace mozilla::HangMonitor;
 using Telemetry::Common::AutoHashtable;
-using Telemetry::Common::ToJSString;
 using mozilla::dom::Promise;
 using mozilla::dom::AutoJSAPI;
 using mozilla::Telemetry::HangReports;
 using mozilla::Telemetry::CombinedStacks;
-using mozilla::Telemetry::ComputeAnnotationsKey;
 using mozilla::Telemetry::TelemetryIOInterposeObserver;
 
 #if defined(MOZ_GECKO_PROFILER)

@@ -122,7 +122,6 @@ using mozilla::_ipdltest::IPDLUnitTestProcessChild;
 using namespace mozilla;
 
 using mozilla::ipc::BrowserProcessSubThread;
-using mozilla::ipc::GeckoChildProcessHost;
 using mozilla::ipc::IOThreadChild;
 using mozilla::ipc::ProcessChild;
 using mozilla::ipc::ScopedXREEmbed;
@@ -130,13 +129,11 @@ using mozilla::ipc::ScopedXREEmbed;
 using mozilla::plugins::PluginProcessChild;
 using mozilla::dom::ContentProcess;
 using mozilla::dom::ContentParent;
-using mozilla::dom::ContentChild;
 
 using mozilla::gmp::GMPProcessChild;
 
 using mozilla::ipc::TestShellParent;
 using mozilla::ipc::TestShellCommandParent;
-using mozilla::ipc::XPCShellEnvironment;
 
 using mozilla::startup::sChildProcessType;
 

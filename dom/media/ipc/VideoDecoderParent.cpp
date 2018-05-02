@@ -19,7 +19,6 @@
 namespace mozilla {
 namespace dom {
 
-using base::Thread;
 using media::TimeUnit;
 using namespace ipc;
 using namespace layers;

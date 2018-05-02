@@ -23,11 +23,7 @@
 #include "webrtc/test/gtest.h"
 #include "webrtc/test/rtcp_packet_parser.h"
 
-using ::testing::_;
 using ::testing::ElementsAre;
-using ::testing::NiceMock;
-using ::testing::Return;
-using ::testing::SaveArg;
 
 namespace webrtc {
 namespace {

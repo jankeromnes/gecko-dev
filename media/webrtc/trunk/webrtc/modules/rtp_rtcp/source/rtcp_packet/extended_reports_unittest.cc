@@ -18,7 +18,6 @@
 using testing::ElementsAre;
 using testing::ElementsAreArray;
 using testing::make_tuple;
-using webrtc::rtcp::Dlrr;
 using webrtc::rtcp::ExtendedReports;
 using webrtc::rtcp::ReceiveTimeInfo;
 using webrtc::rtcp::Rrtr;

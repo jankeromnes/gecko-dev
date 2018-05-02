@@ -43,8 +43,6 @@
 #include "TestShellParent.h"
 
 using mozilla::ipc::XPCShellEnvironment;
-using mozilla::ipc::TestShellChild;
-using mozilla::ipc::TestShellParent;
 using mozilla::AutoSafeJSContext;
 using mozilla::dom::AutoJSAPI;
 using mozilla::dom::AutoEntryScript;

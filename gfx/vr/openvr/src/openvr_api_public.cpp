@@ -9,7 +9,6 @@
 #include "vrpathregistry_public.h"
 
 using vr::EVRInitError;
-using vr::IVRSystem;
 using vr::IVRClientCore;
 using vr::VRInitError_None;
 

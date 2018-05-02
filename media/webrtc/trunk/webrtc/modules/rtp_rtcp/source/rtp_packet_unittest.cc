@@ -17,7 +17,6 @@
 #include "webrtc/test/gtest.h"
 
 using testing::ElementsAreArray;
-using testing::make_tuple;
 
 namespace webrtc {
 namespace {

@@ -21,8 +21,6 @@
 #include "webrtc/test/gmock.h"
 #include "webrtc/test/gtest.h"
 
-using ::testing::_;
-using ::testing::Invoke;
 
 namespace webrtc {
 namespace test {
