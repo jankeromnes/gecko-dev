@@ -22,7 +22,7 @@ class AddAndTrueToLoopConditionTraverser : public TIntermTraverser
   public:
     AddAndTrueToLoopConditionTraverser() : TIntermTraverser(true, false, false) {}
 
-    bool visitLoop(Visit, TIntermLoop *loop) override
+    bool visitLoop(Visit /*visit*/, TIntermLoop *loop) override
     {
         // do-while loop doesn't have this bug.
         if (loop->getType() != ELoopFor && loop->getType() != ELoopWhile)

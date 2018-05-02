@@ -617,7 +617,7 @@ Collator::Collator()
 * @param decompositionMode
 * @deprecated 2.4 use the default constructor instead
 */
-Collator::Collator(UCollationStrength, UNormalizationMode )
+Collator::Collator(UCollationStrength /*unused*/, UNormalizationMode  /*unused*/)
 : UObject()
 {
 }

@@ -103,7 +103,7 @@ nsFontCache::Destroy()
 }
 
 NS_IMETHODIMP
-nsFontCache::Observe(nsISupports*, const char* aTopic, const char16_t*)
+nsFontCache::Observe(nsISupports* /*aSubject*/, const char* aTopic, const char16_t* /*aData*/)
 {
     if (!nsCRT::strcmp(aTopic, "memory-pressure"))
         Compact();

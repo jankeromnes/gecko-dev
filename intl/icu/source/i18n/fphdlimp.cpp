@@ -23,11 +23,11 @@ FieldPositionHandler::~FieldPositionHandler() {
 }
 
 void
-FieldPositionHandler::addAttribute(int32_t, int32_t, int32_t) {
+FieldPositionHandler::addAttribute(int32_t /*unused*/, int32_t /*unused*/, int32_t /*unused*/) {
 }
 
 void
-FieldPositionHandler::shiftLast(int32_t) {
+FieldPositionHandler::shiftLast(int32_t /*unused*/) {
 }
 
 UBool

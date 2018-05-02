@@ -34,23 +34,23 @@ class TOutputTraverser : public TIntermTraverser
     TOutputTraverser(TInfoSinkBase &out) : TIntermTraverser(true, false, false), mOut(out) {}
 
   protected:
-    void visitSymbol(TIntermSymbol *) override;
-    void visitConstantUnion(TIntermConstantUnion *) override;
+    void visitSymbol(TIntermSymbol * /*node*/) override;
+    void visitConstantUnion(TIntermConstantUnion * /*node*/) override;
     bool visitSwizzle(Visit visit, TIntermSwizzle *node) override;
-    bool visitBinary(Visit visit, TIntermBinary *) override;
-    bool visitUnary(Visit visit, TIntermUnary *) override;
+    bool visitBinary(Visit visit, TIntermBinary * /*node*/) override;
+    bool visitUnary(Visit visit, TIntermUnary * /*node*/) override;
     bool visitTernary(Visit visit, TIntermTernary *node) override;
     bool visitIfElse(Visit visit, TIntermIfElse *node) override;
     bool visitSwitch(Visit visit, TIntermSwitch *node) override;
     bool visitCase(Visit visit, TIntermCase *node) override;
     bool visitFunctionPrototype(Visit visit, TIntermFunctionPrototype *node) override;
     bool visitFunctionDefinition(Visit visit, TIntermFunctionDefinition *node) override;
-    bool visitAggregate(Visit visit, TIntermAggregate *) override;
-    bool visitBlock(Visit visit, TIntermBlock *) override;
+    bool visitAggregate(Visit visit, TIntermAggregate * /*node*/) override;
+    bool visitBlock(Visit visit, TIntermBlock * /*node*/) override;
     bool visitInvariantDeclaration(Visit visit, TIntermInvariantDeclaration *node) override;
     bool visitDeclaration(Visit visit, TIntermDeclaration *node) override;
-    bool visitLoop(Visit visit, TIntermLoop *) override;
-    bool visitBranch(Visit visit, TIntermBranch *) override;
+    bool visitLoop(Visit visit, TIntermLoop * /*node*/) override;
+    bool visitBranch(Visit visit, TIntermBranch * /*node*/) override;
 
     TInfoSinkBase &mOut;
 };

@@ -24,20 +24,20 @@ class ValidateSwitch : public TIntermTraverser
                          TIntermBlock *statementList,
                          const TSourceLoc &loc);
 
-    void visitSymbol(TIntermSymbol *) override;
-    void visitConstantUnion(TIntermConstantUnion *) override;
-    bool visitDeclaration(Visit, TIntermDeclaration *) override;
-    bool visitBlock(Visit, TIntermBlock *) override;
-    bool visitBinary(Visit, TIntermBinary *) override;
-    bool visitUnary(Visit, TIntermUnary *) override;
-    bool visitTernary(Visit, TIntermTernary *) override;
-    bool visitSwizzle(Visit, TIntermSwizzle *) override;
-    bool visitIfElse(Visit visit, TIntermIfElse *) override;
-    bool visitSwitch(Visit, TIntermSwitch *) override;
-    bool visitCase(Visit, TIntermCase *node) override;
-    bool visitAggregate(Visit, TIntermAggregate *) override;
-    bool visitLoop(Visit visit, TIntermLoop *) override;
-    bool visitBranch(Visit, TIntermBranch *) override;
+    void visitSymbol(TIntermSymbol * /*node*/) override;
+    void visitConstantUnion(TIntermConstantUnion * /*node*/) override;
+    bool visitDeclaration(Visit /*visit*/, TIntermDeclaration * /*node*/) override;
+    bool visitBlock(Visit /*visit*/, TIntermBlock * /*node*/) override;
+    bool visitBinary(Visit /*visit*/, TIntermBinary * /*node*/) override;
+    bool visitUnary(Visit /*visit*/, TIntermUnary * /*node*/) override;
+    bool visitTernary(Visit /*visit*/, TIntermTernary * /*node*/) override;
+    bool visitSwizzle(Visit /*visit*/, TIntermSwizzle * /*node*/) override;
+    bool visitIfElse(Visit visit, TIntermIfElse * /*node*/) override;
+    bool visitSwitch(Visit /*visit*/, TIntermSwitch * /*node*/) override;
+    bool visitCase(Visit /*visit*/, TIntermCase *node) override;
+    bool visitAggregate(Visit /*visit*/, TIntermAggregate * /*node*/) override;
+    bool visitLoop(Visit visit, TIntermLoop * /*node*/) override;
+    bool visitBranch(Visit /*visit*/, TIntermBranch * /*node*/) override;
 
   private:
     ValidateSwitch(TBasicType switchType, int shaderVersion, TDiagnostics *context);
@@ -87,14 +87,14 @@ ValidateSwitch::ValidateSwitch(TBasicType switchType, int shaderVersion, TDiagno
 {
 }
 
-void ValidateSwitch::visitSymbol(TIntermSymbol *)
+void ValidateSwitch::visitSymbol(TIntermSymbol * /*node*/)
 {
     if (!mFirstCaseFound)
         mStatementBeforeCase = true;
     mLastStatementWasCase    = false;
 }
 
-void ValidateSwitch::visitConstantUnion(TIntermConstantUnion *)
+void ValidateSwitch::visitConstantUnion(TIntermConstantUnion * /*node*/)
 {
     // Conditions of case labels are not traversed, so this is some other constant
     // Could be just a statement like "0;"
@@ -103,7 +103,7 @@ void ValidateSwitch::visitConstantUnion(TIntermConstantUnion *)
     mLastStatementWasCase    = false;
 }
 
-bool ValidateSwitch::visitDeclaration(Visit, TIntermDeclaration *)
+bool ValidateSwitch::visitDeclaration(Visit /*visit*/, TIntermDeclaration * /*node*/)
 {
     if (!mFirstCaseFound)
         mStatementBeforeCase = true;
@@ -111,7 +111,7 @@ bool ValidateSwitch::visitDeclaration(Visit, TIntermDeclaration *)
     return true;
 }
 
-bool ValidateSwitch::visitBlock(Visit, TIntermBlock *)
+bool ValidateSwitch::visitBlock(Visit /*visit*/, TIntermBlock * /*node*/)
 {
     if (getParentNode() != nullptr)
     {
@@ -122,7 +122,7 @@ bool ValidateSwitch::visitBlock(Visit, TIntermBlock *)
     return true;
 }
 
-bool ValidateSwitch::visitBinary(Visit, TIntermBinary *)
+bool ValidateSwitch::visitBinary(Visit /*visit*/, TIntermBinary * /*node*/)
 {
     if (!mFirstCaseFound)
         mStatementBeforeCase = true;
@@ -130,7 +130,7 @@ bool ValidateSwitch::visitBinary(Visit, TIntermBinary *)
     return true;
 }
 
-bool ValidateSwitch::visitUnary(Visit, TIntermUnary *)
+bool ValidateSwitch::visitUnary(Visit /*visit*/, TIntermUnary * /*node*/)
 {
     if (!mFirstCaseFound)
         mStatementBeforeCase = true;
@@ -138,7 +138,7 @@ bool ValidateSwitch::visitUnary(Visit, TIntermUnary *)
     return true;
 }
 
-bool ValidateSwitch::visitTernary(Visit, TIntermTernary *)
+bool ValidateSwitch::visitTernary(Visit /*visit*/, TIntermTernary * /*node*/)
 {
     if (!mFirstCaseFound)
         mStatementBeforeCase = true;
@@ -146,7 +146,7 @@ bool ValidateSwitch::visitTernary(Visit, TIntermTernary *)
     return true;
 }
 
-bool ValidateSwitch::visitSwizzle(Visit, TIntermSwizzle *)
+bool ValidateSwitch::visitSwizzle(Visit /*visit*/, TIntermSwizzle * /*node*/)
 {
     if (!mFirstCaseFound)
         mStatementBeforeCase = true;
@@ -154,7 +154,7 @@ bool ValidateSwitch::visitSwizzle(Visit, TIntermSwizzle *)
     return true;
 }
 
-bool ValidateSwitch::visitIfElse(Visit visit, TIntermIfElse *)
+bool ValidateSwitch::visitIfElse(Visit visit, TIntermIfElse * /*node*/)
 {
     if (visit == PreVisit)
         ++mControlFlowDepth;
@@ -166,7 +166,7 @@ bool ValidateSwitch::visitIfElse(Visit visit, TIntermIfElse *)
     return true;
 }
 
-bool ValidateSwitch::visitSwitch(Visit, TIntermSwitch *)
+bool ValidateSwitch::visitSwitch(Visit /*visit*/, TIntermSwitch * /*node*/)
 {
     if (!mFirstCaseFound)
         mStatementBeforeCase = true;
@@ -175,7 +175,7 @@ bool ValidateSwitch::visitSwitch(Visit, TIntermSwitch *)
     return false;
 }
 
-bool ValidateSwitch::visitCase(Visit, TIntermCase *node)
+bool ValidateSwitch::visitCase(Visit /*visit*/, TIntermCase *node)
 {
     const char *nodeStr = node->hasCondition() ? "case" : "default";
     if (mControlFlowDepth > 0)
@@ -243,7 +243,7 @@ bool ValidateSwitch::visitCase(Visit, TIntermCase *node)
     return false;
 }
 
-bool ValidateSwitch::visitAggregate(Visit visit, TIntermAggregate *)
+bool ValidateSwitch::visitAggregate(Visit visit, TIntermAggregate * /*node*/)
 {
     if (getParentNode() != nullptr)
     {
@@ -255,7 +255,7 @@ bool ValidateSwitch::visitAggregate(Visit visit, TIntermAggregate *)
     return true;
 }
 
-bool ValidateSwitch::visitLoop(Visit visit, TIntermLoop *)
+bool ValidateSwitch::visitLoop(Visit visit, TIntermLoop * /*node*/)
 {
     if (visit == PreVisit)
         ++mControlFlowDepth;
@@ -267,7 +267,7 @@ bool ValidateSwitch::visitLoop(Visit visit, TIntermLoop *)
     return true;
 }
 
-bool ValidateSwitch::visitBranch(Visit, TIntermBranch *)
+bool ValidateSwitch::visitBranch(Visit /*visit*/, TIntermBranch * /*node*/)
 {
     if (!mFirstCaseFound)
         mStatementBeforeCase = true;

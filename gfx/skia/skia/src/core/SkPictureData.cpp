@@ -290,7 +290,7 @@ void SkPictureData::serialize(SkWStream* stream, const SkSerialProcs& procs,
     struct DevNull: public SkWStream {
         DevNull() : fBytesWritten(0) {}
         size_t fBytesWritten;
-        bool write(const void*, size_t size) override { fBytesWritten += size; return true; }
+        bool write(const void* /*buffer*/, size_t size) override { fBytesWritten += size; return true; }
         size_t bytesWritten() const override { return fBytesWritten; }
     } devnull;
     for (int i = 0; i < fPictureCount; i++) {

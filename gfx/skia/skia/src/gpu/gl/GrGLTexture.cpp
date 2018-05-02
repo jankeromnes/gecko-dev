@@ -49,7 +49,7 @@ GrGLTexture::GrGLTexture(GrGLGpu* gpu, SkBudgeted budgeted, const GrSurfaceDesc&
     this->registerWithCache(budgeted);
 }
 
-GrGLTexture::GrGLTexture(GrGLGpu* gpu, Wrapped, const GrSurfaceDesc& desc,
+GrGLTexture::GrGLTexture(GrGLGpu* gpu, Wrapped /*unused*/, const GrSurfaceDesc& desc,
                          GrMipMapsStatus mipMapsStatus, const IDDesc& idDesc)
     : GrSurface(gpu, desc)
     , INHERITED(gpu, desc, sampler_type(idDesc, desc.fConfig, gpu),

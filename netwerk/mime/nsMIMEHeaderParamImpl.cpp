@@ -26,12 +26,12 @@ using mozilla::Encoding;
 
 // static functions declared below are moved from mailnews/mime/src/comi18n.cpp
 
-static char *DecodeQ(const char *, uint32_t);
-static bool Is7bitNonAsciiString(const char *, uint32_t);
-static void CopyRawHeader(const char *, uint32_t, const char *, nsACString &);
-static nsresult DecodeRFC2047Str(const char *, const char *, bool, nsACString&);
-static nsresult internalDecodeParameter(const nsACString&, const char*,
-                                        const char*, bool, bool, nsACString&);
+static char *DecodeQ(const char * /*in*/, uint32_t /*length*/);
+static bool Is7bitNonAsciiString(const char * /*input*/, uint32_t /*len*/);
+static void CopyRawHeader(const char * /*aInput*/, uint32_t /*aLen*/, const char * /*aDefaultCharset*/, nsACString & /*aOutput*/);
+static nsresult DecodeRFC2047Str(const char * /*aHeader*/, const char * /*aDefaultCharset*/, bool /*aOverrideCharset*/, nsACString& /*aResult*/);
+static nsresult internalDecodeParameter(const nsACString& /*aParamValue*/, const char* /*aCharset*/,
+                                        const char* /*aDefaultCharset*/, bool /*aOverrideCharset*/, bool /*aDecode2047*/, nsACString& /*aResult*/);
 
 // XXX The chance of UTF-7 being used in the message header is really
 // low, but in theory it's possible.

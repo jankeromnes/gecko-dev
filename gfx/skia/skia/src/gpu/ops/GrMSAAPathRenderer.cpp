@@ -160,7 +160,7 @@ public:
         }
 
         static inline void GenKey(const GrGeometryProcessor& gp,
-                                  const GrShaderCaps&,
+                                  const GrShaderCaps& /*unused*/,
                                   GrProcessorKeyBuilder* b) {
             const MSAAQuadProcessor& qp = gp.cast<MSAAQuadProcessor>();
             uint32_t key = 0;
@@ -191,7 +191,7 @@ public:
         GLSLProcessor::GenKey(*this, caps, b);
     }
 
-    virtual GrGLSLPrimitiveProcessor* createGLSLInstance(const GrShaderCaps&) const override {
+    virtual GrGLSLPrimitiveProcessor* createGLSLInstance(const GrShaderCaps& /*unused*/) const override {
         return new GLSLProcessor(*this);
     }
 

@@ -48,10 +48,10 @@ const int32_t BEFORE_LENGTH = 7;
 CollationRuleParser::Sink::~Sink() {}
 
 void
-CollationRuleParser::Sink::suppressContractions(const UnicodeSet &, const char *&, UErrorCode &) {}
+CollationRuleParser::Sink::suppressContractions(const UnicodeSet & /*unused*/, const char *& /*unused*/, UErrorCode & /*unused*/) {}
 
 void
-CollationRuleParser::Sink::optimize(const UnicodeSet &, const char *&, UErrorCode &) {}
+CollationRuleParser::Sink::optimize(const UnicodeSet & /*unused*/, const char *& /*unused*/, UErrorCode & /*unused*/) {}
 
 CollationRuleParser::Importer::~Importer() {}
 

@@ -94,12 +94,12 @@ public:
         return fHWBlendEquation;
     }
 
-    GrXferBarrierType xferBarrierType(const GrCaps&) const override;
+    GrXferBarrierType xferBarrierType(const GrCaps& /*caps*/) const override;
 
 private:
     void onGetGLSLProcessorKey(const GrShaderCaps& caps, GrProcessorKeyBuilder* b) const override;
 
-    void onGetBlendInfo(BlendInfo*) const override;
+    void onGetBlendInfo(BlendInfo* /*blendInfo*/) const override;
 
     bool onIsEqual(const GrXferProcessor& xpBase) const override;
 
@@ -113,7 +113,7 @@ private:
 
 class GLCustomXP : public GrGLSLXferProcessor {
 public:
-    GLCustomXP(const GrXferProcessor&) {}
+    GLCustomXP(const GrXferProcessor& /*unused*/) {}
     ~GLCustomXP() override {}
 
     static void GenKey(const GrXferProcessor& p, const GrShaderCaps& caps,
@@ -163,7 +163,7 @@ private:
                                              outColorSecondary, xp);
     }
 
-    void onSetData(const GrGLSLProgramDataManager&, const GrXferProcessor&) override {}
+    void onSetData(const GrGLSLProgramDataManager& /*unused*/, const GrXferProcessor& /*unused*/) override {}
 
     typedef GrGLSLXferProcessor INHERITED;
 };
@@ -214,16 +214,16 @@ public:
             : fMode(mode), fHWBlendEquation(hw_blend_equation(mode)) {}
 
 private:
-    sk_sp<const GrXferProcessor> makeXferProcessor(const GrProcessorAnalysisColor&,
-                                                   GrProcessorAnalysisCoverage,
+    sk_sp<const GrXferProcessor> makeXferProcessor(const GrProcessorAnalysisColor& /*unused*/,
+                                                   GrProcessorAnalysisCoverage /*coverage*/,
                                                    bool hasMixedSamples,
-                                                   const GrCaps&,
-                                                   GrPixelConfigIsClamped) const override;
+                                                   const GrCaps& /*caps*/,
+                                                   GrPixelConfigIsClamped /*dstIsClamped*/) const override;
 
-    AnalysisProperties analysisProperties(const GrProcessorAnalysisColor&,
-                                          const GrProcessorAnalysisCoverage&,
-                                          const GrCaps&,
-                                          GrPixelConfigIsClamped) const override;
+    AnalysisProperties analysisProperties(const GrProcessorAnalysisColor& /*unused*/,
+                                          const GrProcessorAnalysisCoverage& /*coverage*/,
+                                          const GrCaps& /*caps*/,
+                                          GrPixelConfigIsClamped /*dstIsClamped*/) const override;
 
     GR_DECLARE_XP_FACTORY_TEST
 
@@ -240,7 +240,7 @@ private:
 #endif
 
 sk_sp<const GrXferProcessor> CustomXPFactory::makeXferProcessor(
-        const GrProcessorAnalysisColor&,
+        const GrProcessorAnalysisColor& /*unused*/,
         GrProcessorAnalysisCoverage coverage,
         bool hasMixedSamples,
         const GrCaps& caps,
@@ -253,7 +253,7 @@ sk_sp<const GrXferProcessor> CustomXPFactory::makeXferProcessor(
 }
 
 GrXPFactory::AnalysisProperties CustomXPFactory::analysisProperties(
-        const GrProcessorAnalysisColor&, const GrProcessorAnalysisCoverage& coverage,
+        const GrProcessorAnalysisColor& /*unused*/, const GrProcessorAnalysisCoverage& coverage,
         const GrCaps& caps, GrPixelConfigIsClamped dstIsClamped) const {
     /*
       The general SVG blend equation is defined in the spec as follows:

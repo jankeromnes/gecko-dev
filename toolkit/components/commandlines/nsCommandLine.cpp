@@ -582,13 +582,13 @@ nsCommandLine::EnumerateValidators(EnumerateValidatorsCallback aCallback, void *
 }
 
 static nsresult
-EnumValidate(nsICommandLineValidator* aValidator, nsICommandLine* aThis, void*)
+EnumValidate(nsICommandLineValidator* aValidator, nsICommandLine* aThis, void* /*unused*/)
 {
   return aValidator->Validate(aThis);
 }
 
 static nsresult
-EnumRun(nsICommandLineHandler* aHandler, nsICommandLine* aThis, void*)
+EnumRun(nsICommandLineHandler* aHandler, nsICommandLine* aThis, void* /*unused*/)
 {
   return aHandler->Handle(aThis);
 }

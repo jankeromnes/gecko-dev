@@ -35,7 +35,7 @@ RBBIDataWrapper::RBBIDataWrapper(const RBBIDataHeader *data, UErrorCode &status)
     init(data, status);
 }
 
-RBBIDataWrapper::RBBIDataWrapper(const RBBIDataHeader *data, enum EDontAdopt, UErrorCode &status) {
+RBBIDataWrapper::RBBIDataWrapper(const RBBIDataHeader *data, enum EDontAdopt /*unused*/, UErrorCode &status) {
     init0();
     init(data, status);
     fDontFreeData = TRUE;

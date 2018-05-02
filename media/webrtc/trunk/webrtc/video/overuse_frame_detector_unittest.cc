@@ -47,8 +47,8 @@ class CpuOveruseObserverImpl : public ScalingObserverInterface {
     normaluse_(0) {}
   virtual ~CpuOveruseObserverImpl() {}
 
-  void ScaleDown(ScaleReason) { ++overuse_; }
-  void ScaleUp(ScaleReason) { ++normaluse_; }
+  void ScaleDown(ScaleReason /*reason*/) { ++overuse_; }
+  void ScaleUp(ScaleReason /*reason*/) { ++normaluse_; }
 
   int overuse_;
   int normaluse_;

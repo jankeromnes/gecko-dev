@@ -185,7 +185,7 @@ public:
     }
 
     static inline void GenKey(const GrGeometryProcessor& gp,
-                              const GrShaderCaps&,
+                              const GrShaderCaps& /*unused*/,
                               GrProcessorKeyBuilder* b) {
         const GrDistanceFieldA8TextGeoProc& dfTexEffect = gp.cast<GrDistanceFieldA8TextGeoProc>();
         uint32_t key = dfTexEffect.getFlags();
@@ -253,7 +253,7 @@ void GrDistanceFieldA8TextGeoProc::getGLSLProcessorKey(const GrShaderCaps& caps,
 }
 
 GrGLSLPrimitiveProcessor*
-GrDistanceFieldA8TextGeoProc::createGLSLInstance(const GrShaderCaps&) const {
+GrDistanceFieldA8TextGeoProc::createGLSLInstance(const GrShaderCaps& /*unused*/) const {
     return new GrGLDistanceFieldA8TextGeoProc();
 }
 
@@ -469,7 +469,7 @@ public:
     }
 
     static inline void GenKey(const GrGeometryProcessor& gp,
-                              const GrShaderCaps&,
+                              const GrShaderCaps& /*unused*/,
                               GrProcessorKeyBuilder* b) {
         const GrDistanceFieldPathGeoProc& dfTexEffect = gp.cast<GrDistanceFieldPathGeoProc>();
 
@@ -528,7 +528,7 @@ void GrDistanceFieldPathGeoProc::getGLSLProcessorKey(const GrShaderCaps& caps,
 }
 
 GrGLSLPrimitiveProcessor*
-GrDistanceFieldPathGeoProc::createGLSLInstance(const GrShaderCaps&) const {
+GrDistanceFieldPathGeoProc::createGLSLInstance(const GrShaderCaps& /*unused*/) const {
     return new GrGLDistanceFieldPathGeoProc();
 }
 
@@ -766,7 +766,7 @@ public:
     }
 
     static inline void GenKey(const GrGeometryProcessor& gp,
-                              const GrShaderCaps&,
+                              const GrShaderCaps& /*unused*/,
                               GrProcessorKeyBuilder* b) {
         const GrDistanceFieldLCDTextGeoProc& dfTexEffect = gp.cast<GrDistanceFieldLCDTextGeoProc>();
 
@@ -827,7 +827,7 @@ void GrDistanceFieldLCDTextGeoProc::getGLSLProcessorKey(const GrShaderCaps& caps
     GrGLDistanceFieldLCDTextGeoProc::GenKey(*this, caps, b);
 }
 
-GrGLSLPrimitiveProcessor* GrDistanceFieldLCDTextGeoProc::createGLSLInstance(const GrShaderCaps&) const {
+GrGLSLPrimitiveProcessor* GrDistanceFieldLCDTextGeoProc::createGLSLInstance(const GrShaderCaps& /*unused*/) const {
     return new GrGLDistanceFieldLCDTextGeoProc();
 }
 

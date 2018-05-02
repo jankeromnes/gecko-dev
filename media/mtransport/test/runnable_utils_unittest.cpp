@@ -71,7 +71,7 @@ class TargetClass {
     std::cerr << __FUNCTION__ << std::endl;
     return x;
   }
-  void destructor_target(Destructor*) {
+  void destructor_target(Destructor* /*unused*/) {
   }
 
   void destructor_target_ref(RefPtr<Destructor> destructor) {

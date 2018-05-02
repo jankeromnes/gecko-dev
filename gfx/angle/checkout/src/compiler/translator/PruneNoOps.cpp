@@ -44,7 +44,7 @@ class PruneNoOpsTraverser : private TIntermTraverser
 
   private:
     PruneNoOpsTraverser(TSymbolTable *symbolTable);
-    bool visitDeclaration(Visit, TIntermDeclaration *node) override;
+    bool visitDeclaration(Visit /*visit*/, TIntermDeclaration *node) override;
     bool visitBlock(Visit visit, TIntermBlock *node) override;
     bool visitLoop(Visit visit, TIntermLoop *loop) override;
 };
@@ -61,7 +61,7 @@ PruneNoOpsTraverser::PruneNoOpsTraverser(TSymbolTable *symbolTable)
 {
 }
 
-bool PruneNoOpsTraverser::visitDeclaration(Visit, TIntermDeclaration *node)
+bool PruneNoOpsTraverser::visitDeclaration(Visit /*visit*/, TIntermDeclaration *node)
 {
     TIntermSequence *sequence = node->getSequence();
     if (sequence->size() >= 1)

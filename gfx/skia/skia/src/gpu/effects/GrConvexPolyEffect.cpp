@@ -25,12 +25,12 @@ public:
         }
     }
 
-    void emitCode(EmitArgs&) override;
+    void emitCode(EmitArgs& /*args*/) override;
 
-    static inline void GenKey(const GrProcessor&, const GrShaderCaps&, GrProcessorKeyBuilder*);
+    static inline void GenKey(const GrProcessor& /*processor*/, const GrShaderCaps& /*unused*/, GrProcessorKeyBuilder* /*b*/);
 
 protected:
-    void onSetData(const GrGLSLProgramDataManager&, const GrFragmentProcessor&) override;
+    void onSetData(const GrGLSLProgramDataManager& /*pdman*/, const GrFragmentProcessor& /*effect*/) override;
 
 private:
     GrGLSLProgramDataManager::UniformHandle fEdgeUniform;
@@ -78,7 +78,7 @@ void GrGLConvexPolyEffect::onSetData(const GrGLSLProgramDataManager& pdman,
     }
 }
 
-void GrGLConvexPolyEffect::GenKey(const GrProcessor& processor, const GrShaderCaps&,
+void GrGLConvexPolyEffect::GenKey(const GrProcessor& processor, const GrShaderCaps& /*unused*/,
                                   GrProcessorKeyBuilder* b) {
     const GrConvexPolyEffect& cpe = processor.cast<GrConvexPolyEffect>();
     GR_STATIC_ASSERT(kGrClipEdgeTypeCnt <= 8);

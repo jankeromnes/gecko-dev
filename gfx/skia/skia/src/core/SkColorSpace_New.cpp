@@ -18,9 +18,9 @@ namespace {
             return { 1,1, 0,0,0,0,0 };
         }
 
-        void linearizeDst(SkRasterPipeline*) const override {}
-        void linearizeSrc(SkRasterPipeline*) const override {}
-        void    encodeSrc(SkRasterPipeline*) const override {}
+        void linearizeDst(SkRasterPipeline* /*unused*/) const override {}
+        void linearizeSrc(SkRasterPipeline* /*unused*/) const override {}
+        void    encodeSrc(SkRasterPipeline* /*unused*/) const override {}
     };
 
     struct SRGBTransferFn : public SkColorSpace_New::TransferFn {
@@ -81,7 +81,7 @@ bool SkColorSpace_New::TransferFn::equals(const SkColorSpace_New::TransferFn& ot
     return 0 == memcmp(&a,&b, sizeof(SkColorSpaceTransferFn));
 }
 
-void SkColorSpace_New::TransferFn::updateICCProfile(ICCProfile*) const {
+void SkColorSpace_New::TransferFn::updateICCProfile(ICCProfile* /*unused*/) const {
     // TODO
 }
 

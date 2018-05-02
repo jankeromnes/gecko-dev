@@ -52,7 +52,7 @@ class WrapSwitchStatementsInBlocksTraverser : public TIntermTraverser
     bool mDidWrap;
 };
 
-bool WrapSwitchStatementsInBlocksTraverser::visitSwitch(Visit, TIntermSwitch *node)
+bool WrapSwitchStatementsInBlocksTraverser::visitSwitch(Visit /*visit*/, TIntermSwitch *node)
 {
     std::vector<TIntermDeclaration *> declarations;
     TIntermSequence *statementList = node->getStatementList()->getSequence();

@@ -59,12 +59,12 @@ Normalizer2::normalizeUTF8(uint32_t /*options*/, StringPiece src, ByteSink &sink
 }
 
 UBool
-Normalizer2::getRawDecomposition(UChar32, UnicodeString &) const {
+Normalizer2::getRawDecomposition(UChar32 /*unused*/, UnicodeString & /*unused*/) const {
     return FALSE;
 }
 
 UChar32
-Normalizer2::composePair(UChar32, UChar32) const {
+Normalizer2::composePair(UChar32 /*unused*/, UChar32 /*unused*/) const {
     return U_SENTINEL;
 }
 
@@ -139,29 +139,29 @@ class NoopNormalizer2 : public Normalizer2 {
         return first;
     }
     virtual UBool
-    getDecomposition(UChar32, UnicodeString &) const U_OVERRIDE {
+    getDecomposition(UChar32 /*c*/, UnicodeString & /*decomposition*/) const U_OVERRIDE {
         return FALSE;
     }
     // No need to U_OVERRIDE the default getRawDecomposition().
     virtual UBool
-    isNormalized(const UnicodeString &, UErrorCode &errorCode) const U_OVERRIDE {
+    isNormalized(const UnicodeString & /*s*/, UErrorCode &errorCode) const U_OVERRIDE {
         return U_SUCCESS(errorCode);
     }
     virtual UBool
-    isNormalizedUTF8(StringPiece, UErrorCode &errorCode) const U_OVERRIDE {
+    isNormalizedUTF8(StringPiece /*s*/, UErrorCode &errorCode) const U_OVERRIDE {
         return U_SUCCESS(errorCode);
     }
     virtual UNormalizationCheckResult
-    quickCheck(const UnicodeString &, UErrorCode &) const U_OVERRIDE {
+    quickCheck(const UnicodeString & /*s*/, UErrorCode & /*errorCode*/) const U_OVERRIDE {
         return UNORM_YES;
     }
     virtual int32_t
-    spanQuickCheckYes(const UnicodeString &s, UErrorCode &) const U_OVERRIDE {
+    spanQuickCheckYes(const UnicodeString &s, UErrorCode & /*errorCode*/) const U_OVERRIDE {
         return s.length();
     }
-    virtual UBool hasBoundaryBefore(UChar32) const U_OVERRIDE { return TRUE; }
-    virtual UBool hasBoundaryAfter(UChar32) const U_OVERRIDE { return TRUE; }
-    virtual UBool isInert(UChar32) const U_OVERRIDE { return TRUE; }
+    virtual UBool hasBoundaryBefore(UChar32 /*c*/) const U_OVERRIDE { return TRUE; }
+    virtual UBool hasBoundaryAfter(UChar32 /*c*/) const U_OVERRIDE { return TRUE; }
+    virtual UBool isInert(UChar32 /*c*/) const U_OVERRIDE { return TRUE; }
 };
 
 NoopNormalizer2::~NoopNormalizer2() {}

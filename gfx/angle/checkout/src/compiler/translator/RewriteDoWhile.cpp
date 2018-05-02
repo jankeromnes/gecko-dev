@@ -50,7 +50,7 @@ class DoWhileRewriter : public TIntermTraverser
     {
     }
 
-    bool visitBlock(Visit, TIntermBlock *node) override
+    bool visitBlock(Visit /*visit*/, TIntermBlock *node) override
     {
         // A well-formed AST can only have do-while inside TIntermBlock. By doing a prefix traversal
         // we are able to replace the do-while in the sequence directly as the content of the

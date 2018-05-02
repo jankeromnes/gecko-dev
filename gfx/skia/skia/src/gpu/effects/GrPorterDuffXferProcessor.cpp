@@ -486,14 +486,14 @@ private:
                             args.fInputColor, args.fInputCoverage);
     }
 
-    void onSetData(const GrGLSLProgramDataManager&, const GrXferProcessor&) override {}
+    void onSetData(const GrGLSLProgramDataManager& /*unused*/, const GrXferProcessor& /*unused*/) override {}
 
     typedef GrGLSLXferProcessor INHERITED;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void PorterDuffXferProcessor::onGetGLSLProcessorKey(const GrShaderCaps&,
+void PorterDuffXferProcessor::onGetGLSLProcessorKey(const GrShaderCaps& /*unused*/,
                                                     GrProcessorKeyBuilder* b) const {
     GLPorterDuffXferProcessor::GenKey(*this, b);
 }
@@ -558,14 +558,14 @@ private:
                                              outColorSecondary, xp);
     }
 
-    void onSetData(const GrGLSLProgramDataManager&, const GrXferProcessor&) override {}
+    void onSetData(const GrGLSLProgramDataManager& /*unused*/, const GrXferProcessor& /*unused*/) override {}
 
     typedef GrGLSLXferProcessor INHERITED;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void ShaderPDXferProcessor::onGetGLSLProcessorKey(const GrShaderCaps&,
+void ShaderPDXferProcessor::onGetGLSLProcessorKey(const GrShaderCaps& /*unused*/,
                                                   GrProcessorKeyBuilder* b) const {
     GLShaderPDXferProcessor::GenKey(*this, b);
 }
@@ -618,7 +618,7 @@ private:
 
 class GLPDLCDXferProcessor : public GrGLSLXferProcessor {
 public:
-    GLPDLCDXferProcessor(const GrProcessor&) : fLastAlpha(SK_MaxU32) {}
+    GLPDLCDXferProcessor(const GrProcessor& /*unused*/) : fLastAlpha(SK_MaxU32) {}
 
     ~GLPDLCDXferProcessor() override {}
 

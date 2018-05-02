@@ -32,7 +32,7 @@ TOutputGLSL::TOutputGLSL(TInfoSinkBase &objSink,
 {
 }
 
-bool TOutputGLSL::writeVariablePrecision(TPrecision)
+bool TOutputGLSL::writeVariablePrecision(TPrecision /*precision*/)
 {
     return false;
 }

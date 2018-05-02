@@ -34,7 +34,7 @@ class SeparateArrayInitTraverser : private TIntermTraverser
 
   private:
     SeparateArrayInitTraverser();
-    bool visitDeclaration(Visit, TIntermDeclaration *node) override;
+    bool visitDeclaration(Visit /*visit*/, TIntermDeclaration *node) override;
 };
 
 void SeparateArrayInitTraverser::apply(TIntermNode *root)
@@ -48,7 +48,7 @@ SeparateArrayInitTraverser::SeparateArrayInitTraverser() : TIntermTraverser(true
 {
 }
 
-bool SeparateArrayInitTraverser::visitDeclaration(Visit, TIntermDeclaration *node)
+bool SeparateArrayInitTraverser::visitDeclaration(Visit /*visit*/, TIntermDeclaration *node)
 {
     TIntermSequence *sequence = node->getSequence();
     TIntermBinary *initNode   = sequence->back()->getAsBinaryNode();

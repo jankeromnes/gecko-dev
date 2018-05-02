@@ -86,6 +86,6 @@ void SkA8_Coverage_Blitter::blitMask(const SkMask& mask, const SkIRect& clip) {
     }
 }
 
-const SkPixmap* SkA8_Coverage_Blitter::justAnOpaqueColor(uint32_t*) {
+const SkPixmap* SkA8_Coverage_Blitter::justAnOpaqueColor(uint32_t* /*value*/) {
     return nullptr;
 }

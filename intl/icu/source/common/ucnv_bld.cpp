@@ -1275,7 +1275,7 @@ ucnv_getDefaultName() {
 }
 
 #if U_CHARSET_IS_UTF8
-U_CAPI void U_EXPORT2 ucnv_setDefaultName(const char *) {}
+U_CAPI void U_EXPORT2 ucnv_setDefaultName(const char * /*unused*/) {}
 #else
 /*
 This function is not thread safe, and it can't be thread safe.

@@ -37,7 +37,7 @@ class UnfoldShortCircuitASTTraverser : public TIntermTraverser
   public:
     UnfoldShortCircuitASTTraverser() : TIntermTraverser(true, false, false) {}
 
-    bool visitBinary(Visit visit, TIntermBinary *) override;
+    bool visitBinary(Visit visit, TIntermBinary * /*node*/) override;
 };
 
 bool UnfoldShortCircuitASTTraverser::visitBinary(Visit visit, TIntermBinary *node)

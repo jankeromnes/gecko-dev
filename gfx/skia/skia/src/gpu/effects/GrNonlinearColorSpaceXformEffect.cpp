@@ -99,7 +99,7 @@ public:
         fragBuilder->codeAppendf("%s = half4(color.rgb * color.a, color.a);", args.fOutputColor);
     }
 
-    static inline void GenKey(const GrProcessor& processor, const GrShaderCaps&,
+    static inline void GenKey(const GrProcessor& processor, const GrShaderCaps& /*unused*/,
                               GrProcessorKeyBuilder* b) {
         const GrNonlinearColorSpaceXformEffect& csxe =
                 processor.cast<GrNonlinearColorSpaceXformEffect>();

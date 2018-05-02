@@ -33,7 +33,7 @@ class ValidateOutputsTraverser : public TIntermTraverser
 
     void validate(TDiagnostics *diagnostics) const;
 
-    void visitSymbol(TIntermSymbol *) override;
+    void visitSymbol(TIntermSymbol * /*symbol*/) override;
 
   private:
     int mMaxDrawBuffers;

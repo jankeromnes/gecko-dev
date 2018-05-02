@@ -57,7 +57,7 @@ static const int kNumStages = SK_RASTER_PIPELINE_STAGES(M);
             gMissingStageCounters[st]++;
         }
     #else
-        static void log_missing(SkRasterPipeline::StockStage) {}
+        static void log_missing(SkRasterPipeline::StockStage /*unused*/) {}
     #endif
 #endif
 

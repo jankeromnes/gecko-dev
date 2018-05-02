@@ -72,8 +72,8 @@ extern "C" MAYBE_MSABI void WRAP(start_pipeline)(const size_t x0,
     }
 }
 
-extern "C" ABI void WRAP(just_return)(size_t,void**,size_t,size_t,
-                                      U16,U16,U16,U16, U16,U16,U16,U16) {}
+extern "C" ABI void WRAP(just_return)(size_t /*unused*/,void** /*unused*/,size_t /*unused*/,size_t /*unused*/,
+                                      U16 /*unused*/,U16 /*unused*/,U16 /*unused*/,U16 /*unused*/, U16 /*unused*/,U16 /*unused*/,U16 /*unused*/,U16 /*unused*/) {}
 
 // All stages use the same function call ABI to chain into each other, but there are three types:
 //   GG: geometry in, geometry out  -- think, a matrix

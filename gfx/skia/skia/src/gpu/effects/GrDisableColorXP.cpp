@@ -42,11 +42,11 @@ private:
 
 class GLDisableColorXP : public GrGLSLXferProcessor {
 public:
-    GLDisableColorXP(const GrProcessor&) {}
+    GLDisableColorXP(const GrProcessor& /*unused*/) {}
 
     ~GLDisableColorXP() override {}
 
-    static void GenKey(const GrProcessor&, const GrShaderCaps&, GrProcessorKeyBuilder*) {}
+    static void GenKey(const GrProcessor& /*unused*/, const GrShaderCaps& /*unused*/, GrProcessorKeyBuilder* /*unused*/) {}
 
 private:
     void emitOutputsForBlendState(const EmitArgs& args) override {
@@ -57,7 +57,7 @@ private:
         fragBuilder->codeAppendf("%s = half4(0);", args.fOutputPrimary);
     }
 
-    void onSetData(const GrGLSLProgramDataManager&, const GrXferProcessor&) override {}
+    void onSetData(const GrGLSLProgramDataManager& /*unused*/, const GrXferProcessor& /*unused*/) override {}
 
     typedef GrGLSLXferProcessor INHERITED;
 };
@@ -76,8 +76,8 @@ void DisableColorXP::onGetBlendInfo(GrXferProcessor::BlendInfo* blendInfo) const
 
 ///////////////////////////////////////////////////////////////////////////////
 sk_sp<const GrXferProcessor> GrDisableColorXPFactory::makeXferProcessor(
-        const GrProcessorAnalysisColor&,
-        GrProcessorAnalysisCoverage,
+        const GrProcessorAnalysisColor& /*unused*/,
+        GrProcessorAnalysisCoverage /*unused*/,
         bool hasMixedSamples,
         const GrCaps& caps,
         GrPixelConfigIsClamped dstIsClamped) const {

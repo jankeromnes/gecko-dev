@@ -30,7 +30,7 @@ class SeparateDeclarationsTraverser : private TIntermTraverser
 
   private:
     SeparateDeclarationsTraverser();
-    bool visitDeclaration(Visit, TIntermDeclaration *node) override;
+    bool visitDeclaration(Visit /*visit*/, TIntermDeclaration *node) override;
 };
 
 void SeparateDeclarationsTraverser::apply(TIntermNode *root)
@@ -45,7 +45,7 @@ SeparateDeclarationsTraverser::SeparateDeclarationsTraverser()
 {
 }
 
-bool SeparateDeclarationsTraverser::visitDeclaration(Visit, TIntermDeclaration *node)
+bool SeparateDeclarationsTraverser::visitDeclaration(Visit /*visit*/, TIntermDeclaration *node)
 {
     TIntermSequence *sequence = node->getSequence();
     if (sequence->size() > 1)

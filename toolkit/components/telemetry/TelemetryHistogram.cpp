@@ -1123,7 +1123,7 @@ internal_ClearHistogram(HistogramID id, bool onlySubsession)
 
 namespace {
 
-void internal_JSHistogram_finalize(JSFreeOp*, JSObject*);
+void internal_JSHistogram_finalize(JSFreeOp* /*unused*/, JSObject* /*obj*/);
 
 static const JSClassOps sJSHistogramClassOps = {
   nullptr, /* addProperty */
@@ -1422,7 +1422,7 @@ internal_WrapAndReturnHistogram(HistogramID id, JSContext *cx,
 }
 
 void
-internal_JSHistogram_finalize(JSFreeOp*, JSObject* obj)
+internal_JSHistogram_finalize(JSFreeOp* /*unused*/, JSObject* obj)
 {
   if (!obj ||
       JS_GetClass(obj) != &sJSHistogramClass) {
@@ -1459,7 +1459,7 @@ internal_JSHistogram_finalize(JSFreeOp*, JSObject* obj)
 
 namespace {
 
-void internal_JSKeyedHistogram_finalize(JSFreeOp*, JSObject*);
+void internal_JSKeyedHistogram_finalize(JSFreeOp* /*unused*/, JSObject* /*obj*/);
 
 static const JSClassOps sJSKeyedHistogramClassOps = {
   nullptr, /* addProperty */
@@ -1769,7 +1769,7 @@ internal_WrapAndReturnKeyedHistogram(HistogramID id, JSContext *cx,
 }
 
 void
-internal_JSKeyedHistogram_finalize(JSFreeOp*, JSObject* obj)
+internal_JSKeyedHistogram_finalize(JSFreeOp* /*unused*/, JSObject* obj)
 {
   if (!obj ||
       JS_GetClass(obj) != &sJSKeyedHistogramClass) {

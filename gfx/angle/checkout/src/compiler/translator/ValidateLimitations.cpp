@@ -75,8 +75,8 @@ class ValidateLimitationsTraverser : public TLValueTrackingTraverser
                                  TDiagnostics *diagnostics);
 
     void visitSymbol(TIntermSymbol *node) override;
-    bool visitBinary(Visit, TIntermBinary *) override;
-    bool visitLoop(Visit, TIntermLoop *) override;
+    bool visitBinary(Visit /*visit*/, TIntermBinary * /*node*/) override;
+    bool visitLoop(Visit /*visit*/, TIntermLoop * /*node*/) override;
 
   private:
     void error(TSourceLoc loc, const char *reason, const char *token);
@@ -122,7 +122,7 @@ void ValidateLimitationsTraverser::visitSymbol(TIntermSymbol *node)
     }
 }
 
-bool ValidateLimitationsTraverser::visitBinary(Visit, TIntermBinary *node)
+bool ValidateLimitationsTraverser::visitBinary(Visit /*visit*/, TIntermBinary *node)
 {
     // Check indexing.
     switch (node->getOp())
@@ -137,7 +137,7 @@ bool ValidateLimitationsTraverser::visitBinary(Visit, TIntermBinary *node)
     return true;
 }
 
-bool ValidateLimitationsTraverser::visitLoop(Visit, TIntermLoop *node)
+bool ValidateLimitationsTraverser::visitLoop(Visit /*visit*/, TIntermLoop *node)
 {
     if (!validateLoopType(node))
         return false;

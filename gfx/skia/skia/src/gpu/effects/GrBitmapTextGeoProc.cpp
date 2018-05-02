@@ -98,7 +98,7 @@ public:
     }
 
     static inline void GenKey(const GrGeometryProcessor& proc,
-                              const GrShaderCaps&,
+                              const GrShaderCaps& /*unused*/,
                               GrProcessorKeyBuilder* b) {
         const GrBitmapTextGeoProc& btgp = proc.cast<GrBitmapTextGeoProc>();
         uint32_t key = 0;

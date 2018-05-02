@@ -1034,7 +1034,7 @@ sctp_assoc_immediate_retrans(struct sctp_tcb *stcb, struct sctp_nets *dstnet)
 
 #if defined(__FreeBSD__) || defined(__APPLE__) || defined(__Userspace__)
 static int
-sctp_asconf_queue_mgmt(struct sctp_tcb *, struct sctp_ifa *, uint16_t);
+sctp_asconf_queue_mgmt(struct sctp_tcb * /*stcb*/, struct sctp_ifa * /*ifa*/, uint16_t /*type*/);
 
 void
 sctp_net_immediate_retrans(struct sctp_tcb *stcb, struct sctp_nets *net)

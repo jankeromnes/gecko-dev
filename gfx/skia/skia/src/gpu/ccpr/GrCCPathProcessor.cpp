@@ -118,7 +118,7 @@ GrCCPathProcessor::GrCCPathProcessor(GrResourceProvider* resourceProvider,
     }
 }
 
-void GrCCPathProcessor::getGLSLProcessorKey(const GrShaderCaps&, GrProcessorKeyBuilder* b) const {
+void GrCCPathProcessor::getGLSLProcessorKey(const GrShaderCaps& /*unused*/, GrProcessorKeyBuilder* b) const {
     b->add32((fFillType << 16) | this->atlasProxy()->origin());
 }
 
@@ -140,7 +140,7 @@ private:
     typedef GrGLSLGeometryProcessor INHERITED;
 };
 
-GrGLSLPrimitiveProcessor* GrCCPathProcessor::createGLSLInstance(const GrShaderCaps&) const {
+GrGLSLPrimitiveProcessor* GrCCPathProcessor::createGLSLInstance(const GrShaderCaps& /*unused*/) const {
     return new GLSLPathProcessor();
 }
 

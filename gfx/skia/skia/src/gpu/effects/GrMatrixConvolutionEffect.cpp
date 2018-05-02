@@ -16,12 +16,12 @@
 
 class GrGLMatrixConvolutionEffect : public GrGLSLFragmentProcessor {
 public:
-    void emitCode(EmitArgs&) override;
+    void emitCode(EmitArgs& /*args*/) override;
 
-    static inline void GenKey(const GrProcessor&, const GrShaderCaps&, GrProcessorKeyBuilder*);
+    static inline void GenKey(const GrProcessor& /*processor*/, const GrShaderCaps& /*unused*/, GrProcessorKeyBuilder* /*b*/);
 
 protected:
-    void onSetData(const GrGLSLProgramDataManager&, const GrFragmentProcessor&) override;
+    void onSetData(const GrGLSLProgramDataManager& /*pdman*/, const GrFragmentProcessor& /*processor*/) override;
 
 private:
     typedef GrGLSLProgramDataManager::UniformHandle UniformHandle;
@@ -114,7 +114,7 @@ void GrGLMatrixConvolutionEffect::emitCode(EmitArgs& args) {
 }
 
 void GrGLMatrixConvolutionEffect::GenKey(const GrProcessor& processor,
-                                         const GrShaderCaps&, GrProcessorKeyBuilder* b) {
+                                         const GrShaderCaps& /*unused*/, GrProcessorKeyBuilder* b) {
     const GrMatrixConvolutionEffect& m = processor.cast<GrMatrixConvolutionEffect>();
     SkASSERT(m.kernelSize().width() <= 0x7FFF && m.kernelSize().height() <= 0xFFFF);
     uint32_t key = m.kernelSize().width() << 16 | m.kernelSize().height();

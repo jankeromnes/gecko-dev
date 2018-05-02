@@ -63,7 +63,7 @@ SkImageInfo SkImage_Gpu::onImageInfo() const {
     return SkImageInfo::Make(fProxy->width(), fProxy->height(), ct, fAlphaType, fColorSpace);
 }
 
-bool SkImage_Gpu::getROPixels(SkBitmap* dst, SkColorSpace*, CachingHint chint) const {
+bool SkImage_Gpu::getROPixels(SkBitmap* dst, SkColorSpace* /*dstColorSpace*/, CachingHint chint) const {
     // The SkColorSpace parameter "dstColorSpace" is really just a hint about how/where the bitmap
     // will be used. The client doesn't expect that we convert to that color space, it's intended
     // for codec-backed images, to drive our decoding heuristic. In theory we *could* read directly
@@ -202,7 +202,7 @@ GrTexture* SkImage_Gpu::onGetTexture() const {
 }
 
 bool SkImage_Gpu::onReadPixels(const SkImageInfo& dstInfo, void* dstPixels, size_t dstRB,
-                               int srcX, int srcY, CachingHint) const {
+                               int srcX, int srcY, CachingHint /*unused*/) const {
     if (!SkImageInfoValidConversion(dstInfo, this->onImageInfo())) {
         return false;
     }
@@ -744,7 +744,7 @@ bool SkImage::MakeBackendTextureFromSkImage(GrContext* ctx,
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-sk_sp<SkImage> SkImage_Gpu::onMakeColorSpace(sk_sp<SkColorSpace> target, SkColorType,
+sk_sp<SkImage> SkImage_Gpu::onMakeColorSpace(sk_sp<SkColorSpace> target, SkColorType /*unused*/,
                                              SkTransferFunctionBehavior premulBehavior) const {
     if (SkTransferFunctionBehavior::kRespect == premulBehavior) {
         // TODO: Implement this.

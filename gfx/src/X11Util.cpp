@@ -47,7 +47,7 @@ FinishX(Display* aDisplay)
 ScopedXErrorHandler::ErrorEvent* ScopedXErrorHandler::sXErrorPtr;
 
 int
-ScopedXErrorHandler::ErrorHandler(Display *, XErrorEvent *ev)
+ScopedXErrorHandler::ErrorHandler(Display * /*unused*/, XErrorEvent *ev)
 {
     // only record the error if no error was previously recorded.
     // this means that in case of multiple errors, it's the first error that we report.

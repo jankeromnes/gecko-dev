@@ -1847,7 +1847,7 @@ UBool MessageFormat::equalFormats(const void* left, const void* right) {
 }
 
 
-UBool MessageFormat::DummyFormat::operator==(const Format&) const {
+UBool MessageFormat::DummyFormat::operator==(const Format& /*other*/) const {
     return TRUE;
 }
 
@@ -1855,7 +1855,7 @@ Format* MessageFormat::DummyFormat::clone() const {
     return new DummyFormat();
 }
 
-UnicodeString& MessageFormat::DummyFormat::format(const Formattable&,
+UnicodeString& MessageFormat::DummyFormat::format(const Formattable& /*unused*/,
                           UnicodeString& appendTo,
                           UErrorCode& status) const {
     if (U_SUCCESS(status)) {
@@ -1864,9 +1864,9 @@ UnicodeString& MessageFormat::DummyFormat::format(const Formattable&,
     return appendTo;
 }
 
-UnicodeString& MessageFormat::DummyFormat::format(const Formattable&,
+UnicodeString& MessageFormat::DummyFormat::format(const Formattable& /*obj*/,
                           UnicodeString& appendTo,
-                          FieldPosition&,
+                          FieldPosition& /*pos*/,
                           UErrorCode& status) const {
     if (U_SUCCESS(status)) {
         status = U_UNSUPPORTED_ERROR;
@@ -1874,9 +1874,9 @@ UnicodeString& MessageFormat::DummyFormat::format(const Formattable&,
     return appendTo;
 }
 
-UnicodeString& MessageFormat::DummyFormat::format(const Formattable&,
+UnicodeString& MessageFormat::DummyFormat::format(const Formattable& /*obj*/,
                           UnicodeString& appendTo,
-                          FieldPositionIterator*,
+                          FieldPositionIterator* /*posIter*/,
                           UErrorCode& status) const {
     if (U_SUCCESS(status)) {
         status = U_UNSUPPORTED_ERROR;
@@ -1884,9 +1884,9 @@ UnicodeString& MessageFormat::DummyFormat::format(const Formattable&,
     return appendTo;
 }
 
-void MessageFormat::DummyFormat::parseObject(const UnicodeString&,
-                                                     Formattable&,
-                                                     ParsePosition& ) const {
+void MessageFormat::DummyFormat::parseObject(const UnicodeString& /*source*/,
+                                                     Formattable& /*result*/,
+                                                     ParsePosition&  /*parse_pos*/) const {
 }
 
 

@@ -394,7 +394,7 @@ void SuperBlitter::blitRect(int x, int y, int width, int height) {
 /// Masked supersampling antialiased blitter.
 class MaskSuperBlitter : public BaseSuperBlitter {
 public:
-    MaskSuperBlitter(SkBlitter* realBlitter, const SkIRect& ir, const SkIRect&, bool isInverse);
+    MaskSuperBlitter(SkBlitter* realBlitter, const SkIRect& ir, const SkIRect& /*clipBounds*/, bool isInverse);
     ~MaskSuperBlitter() override {
         fRealBlitter->blitMask(fMask, fClipRect);
     }

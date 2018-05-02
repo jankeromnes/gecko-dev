@@ -383,7 +383,7 @@ public:
   NS_DECL_ISUPPORTS
 
   explicit InsertCookieDBListener(DBState* dbState) : DBListenerErrorHandler(dbState) { }
-  NS_IMETHOD HandleResult(mozIStorageResultSet*) override
+  NS_IMETHOD HandleResult(mozIStorageResultSet* /*aResultSet*/) override
   {
     NS_NOTREACHED("Unexpected call to InsertCookieDBListener::HandleResult");
     return NS_OK;
@@ -419,7 +419,7 @@ public:
   NS_DECL_ISUPPORTS
 
   explicit UpdateCookieDBListener(DBState* dbState) : DBListenerErrorHandler(dbState) { }
-  NS_IMETHOD HandleResult(mozIStorageResultSet*) override
+  NS_IMETHOD HandleResult(mozIStorageResultSet* /*aResultSet*/) override
   {
     NS_NOTREACHED("Unexpected call to UpdateCookieDBListener::HandleResult");
     return NS_OK;
@@ -447,7 +447,7 @@ public:
   NS_DECL_ISUPPORTS
 
   explicit RemoveCookieDBListener(DBState* dbState) : DBListenerErrorHandler(dbState) { }
-  NS_IMETHOD HandleResult(mozIStorageResultSet*) override
+  NS_IMETHOD HandleResult(mozIStorageResultSet* /*aResultSet*/) override
   {
     NS_NOTREACHED("Unexpected call to RemoveCookieDBListener::HandleResult");
     return NS_OK;
@@ -474,7 +474,7 @@ public:
   RefPtr<DBState> mDBState;
   NS_DECL_ISUPPORTS
 
-  NS_IMETHOD Complete(nsresult, nsISupports*) override
+  NS_IMETHOD Complete(nsresult /*status*/, nsISupports* /*value*/) override
   {
     gCookieService->HandleDBClosed(mDBState);
     return NS_OK;

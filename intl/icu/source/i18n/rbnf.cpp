@@ -555,7 +555,7 @@ LocDataParser::nextString() {
     return result;
 }
 
-void LocDataParser::parseError(const char* EXPLANATION_ARG)
+void LocDataParser::parseError(const char* EXPLANATION_ARG /*unused*/)
 {
     if (!data) {
         return;

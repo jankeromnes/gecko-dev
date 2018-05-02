@@ -41,7 +41,7 @@ typedef void (*float_quantize_method_ptr) (JCOEFPTR coef_block,
                                            FAST_FLOAT *divisors,
                                            FAST_FLOAT *workspace);
 
-METHODDEF(void) quantize (JCOEFPTR, DCTELEM *, DCTELEM *);
+METHODDEF(void) quantize (JCOEFPTR /*coef_block*/, DCTELEM * /*divisors*/, DCTELEM * /*workspace*/);
 
 typedef struct {
   struct jpeg_forward_dct pub;  /* public fields */

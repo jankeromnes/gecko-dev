@@ -27,7 +27,7 @@ public:
     pthread_join(mThread, nullptr);
   }
 
-  void SetName(const char*) override
+  void SetName(const char* /*aName*/) override
   {
 // XXX - temporarily disabled, see bug 1209039
 //

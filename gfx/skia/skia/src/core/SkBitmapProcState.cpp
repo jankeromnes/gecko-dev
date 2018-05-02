@@ -22,7 +22,7 @@
 extern const SkBitmapProcState::SampleProc32 gSkBitmapProcStateSample32_neon[];
 #endif
 
-extern void Clamp_S32_opaque_D32_nofilter_DX_shaderproc(const void*, int, int, uint32_t*, int);
+extern void Clamp_S32_opaque_D32_nofilter_DX_shaderproc(const void* /*sIn*/, int /*x*/, int /*y*/, uint32_t* /*dst*/, int /*count*/);
 
 #define   NAME_WRAP(x)  x
 #include "SkBitmapProcState_filter.h"
@@ -436,7 +436,7 @@ static void S32_D32_constX_shaderproc(const void* sIn,
     sk_memset32(colors, color, count);
 }
 
-static void DoNothing_shaderproc(const void*, int x, int y,
+static void DoNothing_shaderproc(const void* /*unused*/, int x, int y,
                                  SkPMColor* SK_RESTRICT colors, int count) {
     // if we get called, the matrix is too tricky, so we just draw nothing
     sk_memset32(colors, 0, count);

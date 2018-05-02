@@ -290,13 +290,13 @@ class FeatureListTableTest : public TableTest {
   uint16_t num_features;
 };
 
-bool fakeTypeParserReturnsTrue(const ots::Font*, const uint8_t *,
-                               const size_t) {
+bool fakeTypeParserReturnsTrue(const ots::Font* /*unused*/, const uint8_t * /*unused*/,
+                               const size_t /*unused*/) {
   return true;
 }
 
-bool fakeTypeParserReturnsFalse(const ots::Font*, const uint8_t *,
-                                const size_t) {
+bool fakeTypeParserReturnsFalse(const ots::Font* /*unused*/, const uint8_t * /*unused*/,
+                                const size_t /*unused*/) {
   return false;
 }
 

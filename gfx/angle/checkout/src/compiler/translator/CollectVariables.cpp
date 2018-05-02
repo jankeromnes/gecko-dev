@@ -119,7 +119,7 @@ class CollectVariablesTraverser : public TIntermTraverser
                               const TExtensionBehavior &extensionBehavior);
 
     void visitSymbol(TIntermSymbol *symbol) override;
-    bool visitDeclaration(Visit, TIntermDeclaration *node) override;
+    bool visitDeclaration(Visit /*visit*/, TIntermDeclaration *node) override;
     bool visitBinary(Visit visit, TIntermBinary *binaryNode) override;
 
   private:
@@ -745,7 +745,7 @@ Uniform CollectVariablesTraverser::recordUniform(const TIntermSymbol &variable) 
     return uniform;
 }
 
-bool CollectVariablesTraverser::visitDeclaration(Visit, TIntermDeclaration *node)
+bool CollectVariablesTraverser::visitDeclaration(Visit /*visit*/, TIntermDeclaration *node)
 {
     const TIntermSequence &sequence = *(node->getSequence());
     ASSERT(!sequence.empty());
@@ -844,7 +844,7 @@ InterfaceBlock *CollectVariablesTraverser::findNamedInterfaceBlock(
     return namedBlock;
 }
 
-bool CollectVariablesTraverser::visitBinary(Visit, TIntermBinary *binaryNode)
+bool CollectVariablesTraverser::visitBinary(Visit /*visit*/, TIntermBinary *binaryNode)
 {
     if (binaryNode->getOp() == EOpIndexDirectInterfaceBlock)
     {

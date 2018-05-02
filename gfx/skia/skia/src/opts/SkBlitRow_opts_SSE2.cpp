@@ -302,7 +302,7 @@ static __m128i SkBlendLCD16Opaque_SSE2(__m128i &src, __m128i &dst,
 }
 
 void SkBlitLCD16Row_SSE2(SkPMColor dst[], const uint16_t mask[],
-                         SkColor src, int width, SkPMColor) {
+                         SkColor src, int width, SkPMColor /*unused*/) {
     if (width <= 0) {
         return;
     }

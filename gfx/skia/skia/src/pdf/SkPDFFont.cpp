@@ -51,9 +51,9 @@ namespace {
 static const int32_t kPdfSymbolic = 4;
 
 struct SkPDFType0Font final : public SkPDFFont {
-    SkPDFType0Font(SkPDFFont::Info, const SkAdvancedTypefaceMetrics&);
+    SkPDFType0Font(SkPDFFont::Info /*info*/, const SkAdvancedTypefaceMetrics& /*metrics*/);
     ~SkPDFType0Font() override;
-    void getFontSubset(SkPDFCanon*) override;
+    void getFontSubset(SkPDFCanon* /*canon*/) override;
 #ifdef SK_DEBUG
     void emitObject(SkWStream*, const SkPDFObjNumMap&) const override;
     bool fPopulated;
@@ -62,15 +62,15 @@ struct SkPDFType0Font final : public SkPDFFont {
 };
 
 struct SkPDFType1Font final : public SkPDFFont {
-    SkPDFType1Font(SkPDFFont::Info, const SkAdvancedTypefaceMetrics&, SkPDFCanon*);
+    SkPDFType1Font(SkPDFFont::Info /*info*/, const SkAdvancedTypefaceMetrics& /*metrics*/, SkPDFCanon* /*canon*/);
     ~SkPDFType1Font() override {}
-    void getFontSubset(SkPDFCanon*) override {} // TODO(halcanary): implement
+    void getFontSubset(SkPDFCanon* /*unused*/) override {} // TODO(halcanary): implement
 };
 
 struct SkPDFType3Font final : public SkPDFFont {
-    SkPDFType3Font(SkPDFFont::Info, const SkAdvancedTypefaceMetrics&);
+    SkPDFType3Font(SkPDFFont::Info /*info*/, const SkAdvancedTypefaceMetrics& /*metrics*/);
     ~SkPDFType3Font() override {}
-    void getFontSubset(SkPDFCanon*) override;
+    void getFontSubset(SkPDFCanon* /*canon*/) override;
 };
 
 ///////////////////////////////////////////////////////////////////////////////

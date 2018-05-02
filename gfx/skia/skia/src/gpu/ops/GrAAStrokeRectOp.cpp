@@ -204,7 +204,7 @@ public:
     }
 
 private:
-    void onPrepareDraws(Target*) override;
+    void onPrepareDraws(Target* /*target*/) override;
 
     static const int kMiterIndexCnt = 3 * 24;
     static const int kMiterVertexCnt = 16;
@@ -214,12 +214,12 @@ private:
     static const int kBevelVertexCnt = 24;
     static const int kNumBevelRectsInIndexBuffer = 256;
 
-    static sk_sp<const GrBuffer> GetIndexBuffer(GrResourceProvider*, bool miterStroke);
+    static sk_sp<const GrBuffer> GetIndexBuffer(GrResourceProvider* /*resourceProvider*/, bool miterStroke);
 
     const SkMatrix& viewMatrix() const { return fViewMatrix; }
     bool miterStroke() const { return fMiterStroke; }
 
-    bool onCombineIfPossible(GrOp* t, const GrCaps&) override;
+    bool onCombineIfPossible(GrOp* t, const GrCaps& /*caps*/) override;
 
     void generateAAStrokeRectGeometry(void* vertices,
                                       size_t offset,

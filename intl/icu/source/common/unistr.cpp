@@ -262,7 +262,7 @@ UnicodeString::UnicodeString(UChar *buff,
   }
 }
 
-UnicodeString::UnicodeString(const char *src, int32_t length, EInvariant) {
+UnicodeString::UnicodeString(const char *src, int32_t length, EInvariant /*unused*/) {
   fUnion.fFields.fLengthAndFlags = kShortString;
   if(src==NULL) {
     // treat as an empty string
@@ -896,7 +896,7 @@ UnicodeString::extract(int32_t start,
                        int32_t length,
                        char *target,
                        int32_t targetCapacity,
-                       enum EInvariant) const
+                       enum EInvariant /*unused*/) const
 {
   // if the arguments are illegal, then do nothing
   if(targetCapacity < 0 || (targetCapacity > 0 && target == NULL)) {

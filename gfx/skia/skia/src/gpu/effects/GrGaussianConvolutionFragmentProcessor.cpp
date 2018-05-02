@@ -21,12 +21,12 @@ using Direction = GrGaussianConvolutionFragmentProcessor::Direction;
 
 class GrGLConvolutionEffect : public GrGLSLFragmentProcessor {
 public:
-    void emitCode(EmitArgs&) override;
+    void emitCode(EmitArgs& /*args*/) override;
 
-    static inline void GenKey(const GrProcessor&, const GrShaderCaps&, GrProcessorKeyBuilder*);
+    static inline void GenKey(const GrProcessor& /*processor*/, const GrShaderCaps& /*unused*/, GrProcessorKeyBuilder* /*b*/);
 
 protected:
-    void onSetData(const GrGLSLProgramDataManager&, const GrFragmentProcessor&) override;
+    void onSetData(const GrGLSLProgramDataManager& /*pdman*/, const GrFragmentProcessor& /*processor*/) override;
 
 private:
     UniformHandle fKernelUni;
@@ -164,7 +164,7 @@ void GrGLConvolutionEffect::onSetData(const GrGLSLProgramDataManager& pdman,
     pdman.set4fv(fKernelUni, arrayCount, conv.kernel());
 }
 
-void GrGLConvolutionEffect::GenKey(const GrProcessor& processor, const GrShaderCaps&,
+void GrGLConvolutionEffect::GenKey(const GrProcessor& processor, const GrShaderCaps& /*unused*/,
                                    GrProcessorKeyBuilder* b) {
     const GrGaussianConvolutionFragmentProcessor& conv =
             processor.cast<GrGaussianConvolutionFragmentProcessor>();

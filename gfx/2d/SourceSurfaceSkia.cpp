@@ -164,7 +164,7 @@ SourceSurfaceSkia::GetData()
 }
 
 bool
-SourceSurfaceSkia::Map(MapType, MappedSurface *aMappedSurface)
+SourceSurfaceSkia::Map(MapType /*unused*/, MappedSurface *aMappedSurface)
 {
   mChangeMutex.Lock();
   aMappedSurface->mData = GetData();

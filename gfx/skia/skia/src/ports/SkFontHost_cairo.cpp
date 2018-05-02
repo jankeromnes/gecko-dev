@@ -181,7 +181,7 @@ public:
         return new SkCairoFTTypeface(style, isFixedWidth, fontFace, pattern);
     }
 
-    virtual SkStreamAsset* onOpenStream(int*) const override { return nullptr; }
+    virtual SkStreamAsset* onOpenStream(int* /*ttcIndex*/) const override { return nullptr; }
 
     virtual std::unique_ptr<SkAdvancedTypefaceMetrics> onGetAdvancedMetrics() const override
     {
@@ -224,12 +224,12 @@ public:
         return -1;
     }
 
-    virtual void onGetFontDescriptor(SkFontDescriptor*, bool*) const override
+    virtual void onGetFontDescriptor(SkFontDescriptor* /*unused*/, bool* /*isLocal*/) const override
     {
         SkDEBUGCODE(SkDebugf("SkCairoFTTypeface::onGetFontDescriptor unimplemented\n"));
     }
 
-    virtual int onCharsToGlyphs(void const*, SkTypeface::Encoding, uint16_t*, int) const override
+    virtual int onCharsToGlyphs(void const* /*chars*/, SkTypeface::Encoding /*unused*/, uint16_t* /*glyphs*/, int /*glyphCount*/) const override
     {
         return 0;
     }
@@ -254,12 +254,12 @@ public:
         familyName->reset();
     }
 
-    virtual int onGetTableTags(SkFontTableTag*) const override
+    virtual int onGetTableTags(SkFontTableTag* /*tags*/) const override
     {
         return 0;
     }
 
-    virtual size_t onGetTableData(SkFontTableTag, size_t, size_t, void*) const override
+    virtual size_t onGetTableData(SkFontTableTag /*unused*/, size_t /*offset*/, size_t /*length*/, void* /*data*/) const override
     {
         return 0;
     }

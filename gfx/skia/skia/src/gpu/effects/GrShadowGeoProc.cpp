@@ -69,7 +69,7 @@ GrRRectShadowGeoProc::GrRRectShadowGeoProc()
     fInShadowParams = &this->addVertexAttrib("inShadowParams", kHalf4_GrVertexAttribType);
 }
 
-GrGLSLPrimitiveProcessor* GrRRectShadowGeoProc::createGLSLInstance(const GrShaderCaps&) const {
+GrGLSLPrimitiveProcessor* GrRRectShadowGeoProc::createGLSLInstance(const GrShaderCaps& /*unused*/) const {
     return new GrGLSLRRectShadowGeoProc();
 }
 

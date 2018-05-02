@@ -831,7 +831,7 @@ public:
     }
 
 private:
-    void onPrepareDraws(Target*) override;
+    void onPrepareDraws(Target* /*target*/) override;
 
     typedef SkTArray<SkPoint, true> PtArray;
     typedef SkTArray<int, true> IntArray;

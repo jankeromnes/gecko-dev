@@ -191,7 +191,7 @@ TransportResult TransportLayerIce::SendPacket(const unsigned char *data,
 
 
 void TransportLayerIce::IceCandidate(NrIceMediaStream *stream,
-                                     const std::string&) {
+                                     const std::string& /*unused*/) {
   // NO-OP for now
 }
 

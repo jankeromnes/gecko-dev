@@ -72,7 +72,7 @@ void RegenerateStructNames::visitSymbol(TIntermSymbol *symbol)
     const_cast<TStructure *>(userType)->setName(tmp);
 }
 
-bool RegenerateStructNames::visitBlock(Visit, TIntermBlock *block)
+bool RegenerateStructNames::visitBlock(Visit /*visit*/, TIntermBlock *block)
 {
     ++mScopeDepth;
     TIntermSequence &sequence = *(block->getSequence());

@@ -393,7 +393,7 @@ ExtractSubset(sk_sp<SkImage> aImage, const IntRect& aRect)
 }
 
 static void
-FreeBitmapPixels(void* aBuf, void*)
+FreeBitmapPixels(void* aBuf, void* /*unused*/)
 {
   sk_free(aBuf);
 }

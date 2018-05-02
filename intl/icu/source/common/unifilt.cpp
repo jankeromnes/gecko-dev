@@ -32,7 +32,7 @@ UnicodeMatcher* UnicodeFilter::toMatcher() const {
   return const_cast<UnicodeFilter *>(this);
 }
 
-void UnicodeFilter::setData(const TransliterationRuleData*) {}
+void UnicodeFilter::setData(const TransliterationRuleData* /*unused*/) {}
 
 /**
  * Default implementation of UnicodeMatcher::matches() for Unicode

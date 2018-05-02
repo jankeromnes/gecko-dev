@@ -28,14 +28,14 @@ const std::set<std::string> &TExtensionGLSL::getRequiredExtensions() const
     return mRequiredExtensions;
 }
 
-bool TExtensionGLSL::visitUnary(Visit, TIntermUnary *node)
+bool TExtensionGLSL::visitUnary(Visit /*visit*/, TIntermUnary *node)
 {
     checkOperator(node);
 
     return true;
 }
 
-bool TExtensionGLSL::visitAggregate(Visit, TIntermAggregate *node)
+bool TExtensionGLSL::visitAggregate(Visit /*visit*/, TIntermAggregate *node)
 {
     checkOperator(node);
 

@@ -44,14 +44,14 @@ __FBSDID("$FreeBSD: head/sys/netinet/sctp_ss_functions.c 326180 2017-11-24 19:38
  */
 
 static void
-sctp_ss_default_add(struct sctp_tcb *, struct sctp_association *,
-                    struct sctp_stream_out *,
-                    struct sctp_stream_queue_pending *, int);
+sctp_ss_default_add(struct sctp_tcb * /*stcb*/, struct sctp_association * /*asoc*/,
+                    struct sctp_stream_out * /*strq*/,
+                    struct sctp_stream_queue_pending * /*sp*/, int /*holds_lock*/);
 
 static void
-sctp_ss_default_remove(struct sctp_tcb *, struct sctp_association *,
-                       struct sctp_stream_out *,
-                       struct sctp_stream_queue_pending *, int);
+sctp_ss_default_remove(struct sctp_tcb * /*stcb*/, struct sctp_association * /*asoc*/,
+                       struct sctp_stream_out * /*strq*/,
+                       struct sctp_stream_queue_pending * /*sp*/, int /*holds_lock*/);
 
 static void
 sctp_ss_default_init(struct sctp_tcb *stcb, struct sctp_association *asoc,

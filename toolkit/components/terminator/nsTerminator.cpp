@@ -474,7 +474,7 @@ nsTerminator::StartWriter()
 }
 
 NS_IMETHODIMP
-nsTerminator::Observe(nsISupports *, const char *aTopic, const char16_t *)
+nsTerminator::Observe(nsISupports * /*aSubject*/, const char *aTopic, const char16_t * /*aData*/)
 {
   if (strcmp(aTopic, "profile-after-change") == 0) {
     return SelfInit();

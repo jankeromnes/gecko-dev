@@ -274,7 +274,7 @@ Locale::Locale()
  *   NO side effects.   (Default constructor tries to get
  *   the default locale.)
  */
-Locale::Locale(Locale::ELocaleType)
+Locale::Locale(Locale::ELocaleType /*unused*/)
     : UObject(), fullName(fullNameBuffer), baseName(NULL)
 {
     setToBogus();

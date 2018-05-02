@@ -22,15 +22,15 @@ class MaxDepthTraverser : public TIntermTraverser
     {
     }
 
-    bool visitBinary(Visit, TIntermBinary *) override { return depthCheck(); }
-    bool visitUnary(Visit, TIntermUnary *) override { return depthCheck(); }
-    bool visitTernary(Visit, TIntermTernary *) override { return depthCheck(); }
-    bool visitSwizzle(Visit, TIntermSwizzle *) override { return depthCheck(); }
-    bool visitIfElse(Visit, TIntermIfElse *) override { return depthCheck(); }
-    bool visitAggregate(Visit, TIntermAggregate *) override { return depthCheck(); }
-    bool visitBlock(Visit, TIntermBlock *) override { return depthCheck(); }
-    bool visitLoop(Visit, TIntermLoop *) override { return depthCheck(); }
-    bool visitBranch(Visit, TIntermBranch *) override { return depthCheck(); }
+    bool visitBinary(Visit /*visit*/, TIntermBinary * /*node*/) override { return depthCheck(); }
+    bool visitUnary(Visit /*visit*/, TIntermUnary * /*node*/) override { return depthCheck(); }
+    bool visitTernary(Visit /*visit*/, TIntermTernary * /*node*/) override { return depthCheck(); }
+    bool visitSwizzle(Visit /*visit*/, TIntermSwizzle * /*node*/) override { return depthCheck(); }
+    bool visitIfElse(Visit /*visit*/, TIntermIfElse * /*node*/) override { return depthCheck(); }
+    bool visitAggregate(Visit /*visit*/, TIntermAggregate * /*node*/) override { return depthCheck(); }
+    bool visitBlock(Visit /*visit*/, TIntermBlock * /*node*/) override { return depthCheck(); }
+    bool visitLoop(Visit /*visit*/, TIntermLoop * /*node*/) override { return depthCheck(); }
+    bool visitBranch(Visit /*visit*/, TIntermBranch * /*node*/) override { return depthCheck(); }
 
   protected:
     bool depthCheck() const { return mMaxDepth < mDepthLimit; }

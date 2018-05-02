@@ -664,9 +664,9 @@ YY_BUFFER_STATE yy_scan_string ( const char *yy_str , yyscan_t yyscanner );
 YY_BUFFER_STATE yy_scan_bytes ( const char *bytes, int len , yyscan_t yyscanner );
 
 
-void *yyalloc ( yy_size_t , yyscan_t yyscanner );
-void *yyrealloc ( void *, yy_size_t , yyscan_t yyscanner );
-void yyfree ( void * , yyscan_t yyscanner );
+void *yyalloc ( yy_size_t  /*size*/, yyscan_t yyscanner );
+void *yyrealloc ( void * /*ptr*/, yy_size_t  /*size*/, yyscan_t yyscanner );
+void yyfree ( void *  /*ptr*/, yyscan_t yyscanner );
 
 
 #define yy_new_buffer yy_create_buffer

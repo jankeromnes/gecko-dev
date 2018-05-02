@@ -70,10 +70,10 @@ struct clust_args clust_mb_args;
 /* __Userspace__
  * Local prototypes.
  */
-static int	mb_ctor_mbuf(void *, void *, int);
-static int      mb_ctor_clust(void *, void *, int);
-static void	mb_dtor_mbuf(void *,  void *);
-static void	mb_dtor_clust(void *, void *);
+static int	mb_ctor_mbuf(void * /*mem*/, void * /*arg*/, int /*flgs*/);
+static int      mb_ctor_clust(void * /*mem*/, void * /*arg*/, int /*flgs*/);
+static void	mb_dtor_mbuf(void * /*mem*/,  void * /*arg*/);
+static void	mb_dtor_clust(void * /*mem*/, void * /*arg*/);
 
 
 /***************** Functions taken from user_mbuf.h *************/

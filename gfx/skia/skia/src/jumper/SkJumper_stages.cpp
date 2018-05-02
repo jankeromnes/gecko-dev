@@ -791,7 +791,7 @@ extern "C" MAYBE_MSABI void WRAP(start_pipeline)(size_t dx, size_t dy, size_t xl
 #if defined(__i386__) || defined(_M_IX86) || defined(__arm__)
     extern "C" ABI void WRAP(just_return)(Params*, void**, F,F,F,F) {}
 #else
-    extern "C" ABI void WRAP(just_return)(size_t, void**, size_t,size_t, F,F,F,F, F,F,F,F) {}
+    extern "C" ABI void WRAP(just_return)(size_t /*unused*/, void** /*unused*/, size_t /*unused*/,size_t /*unused*/, F /*unused*/,F /*unused*/,F /*unused*/,F /*unused*/, F /*unused*/,F /*unused*/,F /*unused*/,F /*unused*/) {}
 #endif
 
 

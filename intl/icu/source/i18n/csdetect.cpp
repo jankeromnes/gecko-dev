@@ -345,7 +345,7 @@ enumClose(UEnumeration *en) {
 }
 
 static int32_t U_CALLCONV
-enumCount(UEnumeration *en, UErrorCode *) {
+enumCount(UEnumeration *en, UErrorCode * /*unused*/) {
     if (((Context *)en->context)->all) {
         // ucsdet_getAllDetectableCharsets, all charset detector names
         return fCSRecognizers_size;
@@ -413,7 +413,7 @@ enumNext(UEnumeration *en, int32_t *resultLength, UErrorCode * /*status*/) {
 
 
 static void U_CALLCONV
-enumReset(UEnumeration *en, UErrorCode *) {
+enumReset(UEnumeration *en, UErrorCode * /*unused*/) {
     ((Context *)en->context)->currIndex = 0;
 }
 

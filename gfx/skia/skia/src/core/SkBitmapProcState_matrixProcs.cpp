@@ -64,10 +64,10 @@ extern const SkBitmapProcState::MatrixProc RepeatX_RepeatY_Procs_neon[];
 #include "SkBitmapProcState_matrix.h"
 
 struct ClampTileProcs {
-    static unsigned X(const SkBitmapProcState&, SkFixed fx, int max) {
+    static unsigned X(const SkBitmapProcState& /*unused*/, SkFixed fx, int max) {
         return SkClampMax(fx >> 16, max);
     }
-    static unsigned Y(const SkBitmapProcState&, SkFixed fy, int max) {
+    static unsigned Y(const SkBitmapProcState& /*unused*/, SkFixed fy, int max) {
         return SkClampMax(fy >> 16, max);
     }
 };
@@ -91,11 +91,11 @@ static SkBitmapProcState::MatrixProc ClampX_ClampY_Procs[] = {
 #include "SkBitmapProcState_matrix.h"
 
 struct RepeatTileProcs {
-    static unsigned X(const SkBitmapProcState&, SkFixed fx, int max) {
+    static unsigned X(const SkBitmapProcState& /*unused*/, SkFixed fx, int max) {
         SkASSERT(max < 65535);
         return SK_USHIFT16((unsigned)((fx) & 0xFFFF) * ((max) + 1));
     }
-    static unsigned Y(const SkBitmapProcState&, SkFixed fy, int max) {
+    static unsigned Y(const SkBitmapProcState& /*unused*/, SkFixed fy, int max) {
         SkASSERT(max < 65535);
         return SK_USHIFT16((unsigned)((fy) & 0xFFFF) * ((max) + 1));
     }

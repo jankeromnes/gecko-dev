@@ -358,8 +358,8 @@ U_NAMESPACE_END
 //--------------------------------------------------------------------------
 
 U_DEPRECATED void U_EXPORT2
-u_setMutexFunctions(const void * /*context */, UMtxInitFn *, UMtxFn *,
-                    UMtxFn *,  UMtxFn *, UErrorCode *status) {
+u_setMutexFunctions(const void * /*context */, UMtxInitFn * /*unused*/, UMtxFn * /*unused*/,
+                    UMtxFn * /*unused*/,  UMtxFn * /*unused*/, UErrorCode *status) {
     if (U_SUCCESS(*status)) {
         *status = U_UNSUPPORTED_ERROR;
     }
@@ -369,7 +369,7 @@ u_setMutexFunctions(const void * /*context */, UMtxInitFn *, UMtxFn *,
 
 
 U_DEPRECATED void U_EXPORT2
-u_setAtomicIncDecFunctions(const void * /*context */, UMtxAtomicFn *, UMtxAtomicFn *,
+u_setAtomicIncDecFunctions(const void * /*context */, UMtxAtomicFn * /*unused*/, UMtxAtomicFn * /*unused*/,
                            UErrorCode *status) {
     if (U_SUCCESS(*status)) {
         *status = U_UNSUPPORTED_ERROR;

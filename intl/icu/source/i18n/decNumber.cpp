@@ -248,49 +248,49 @@ static const uInt DECPOWERS[10]={1, 10, 100, 1000, 10000, 100000, 1000000,
 #endif
 
 /* Local routines */
-static decNumber * decAddOp(decNumber *, const decNumber *, const decNumber *,
-                              decContext *, uByte, uInt *);
-static Flag        decBiStr(const char *, const char *, const char *);
-static uInt        decCheckMath(const decNumber *, decContext *, uInt *);
-static void        decApplyRound(decNumber *, decContext *, Int, uInt *);
+static decNumber * decAddOp(decNumber * /*res*/, const decNumber * /*lhs*/, const decNumber * /*rhs*/,
+                              decContext * /*set*/, uByte, uInt *);
+static Flag        decBiStr(const char * /*targ*/, const char * /*str1*/, const char * /*str2*/);
+static uInt        decCheckMath(const decNumber * /*rhs*/, decContext * /*set*/, uInt *);
+static void        decApplyRound(decNumber * /*dn*/, decContext * /*set*/, Int, uInt *);
 static Int         decCompare(const decNumber *lhs, const decNumber *rhs, Flag);
-static decNumber * decCompareOp(decNumber *, const decNumber *,
-                              const decNumber *, decContext *,
+static decNumber * decCompareOp(decNumber * /*res*/, const decNumber * /*lhs*/,
+                              const decNumber * /*rhs*/, decContext * /*set*/,
                               Flag, uInt *);
-static void        decCopyFit(decNumber *, const decNumber *, decContext *,
+static void        decCopyFit(decNumber * /*dest*/, const decNumber * /*src*/, decContext * /*set*/,
                               Int *, uInt *);
-static decNumber * decDecap(decNumber *, Int);
-static decNumber * decDivideOp(decNumber *, const decNumber *,
-                              const decNumber *, decContext *, Flag, uInt *);
-static decNumber * decExpOp(decNumber *, const decNumber *,
-                              decContext *, uInt *);
-static void        decFinalize(decNumber *, decContext *, Int *, uInt *);
+static decNumber * decDecap(decNumber * /*dn*/, Int);
+static decNumber * decDivideOp(decNumber * /*res*/, const decNumber * /*lhs*/,
+                              const decNumber * /*rhs*/, decContext * /*set*/, Flag, uInt *);
+static decNumber * decExpOp(decNumber * /*res*/, const decNumber * /*rhs*/,
+                              decContext * /*set*/, uInt *);
+static void        decFinalize(decNumber * /*dn*/, decContext * /*set*/, Int *, uInt *);
 static Int         decGetDigits(Unit *, Int);
-static Int         decGetInt(const decNumber *);
-static decNumber * decLnOp(decNumber *, const decNumber *,
-                              decContext *, uInt *);
-static decNumber * decMultiplyOp(decNumber *, const decNumber *,
-                              const decNumber *, decContext *,
+static Int         decGetInt(const decNumber * /*dn*/);
+static decNumber * decLnOp(decNumber * /*res*/, const decNumber * /*rhs*/,
+                              decContext * /*set*/, uInt *);
+static decNumber * decMultiplyOp(decNumber * /*res*/, const decNumber * /*lhs*/,
+                              const decNumber * /*rhs*/, decContext * /*set*/,
                               uInt *);
-static decNumber * decNaNs(decNumber *, const decNumber *,
-                              const decNumber *, decContext *, uInt *);
-static decNumber * decQuantizeOp(decNumber *, const decNumber *,
-                              const decNumber *, decContext *, Flag,
+static decNumber * decNaNs(decNumber * /*res*/, const decNumber * /*lhs*/,
+                              const decNumber * /*rhs*/, decContext * /*set*/, uInt *);
+static decNumber * decQuantizeOp(decNumber * /*res*/, const decNumber * /*lhs*/,
+                              const decNumber * /*rhs*/, decContext * /*set*/, Flag,
                               uInt *);
 static void        decReverse(Unit *, Unit *);
-static void        decSetCoeff(decNumber *, decContext *, const Unit *,
+static void        decSetCoeff(decNumber * /*dn*/, decContext * /*set*/, const Unit * /*lsu*/,
                               Int, Int *, uInt *);
-static void        decSetMaxValue(decNumber *, decContext *);
-static void        decSetOverflow(decNumber *, decContext *, uInt *);
-static void        decSetSubnormal(decNumber *, decContext *, Int *, uInt *);
+static void        decSetMaxValue(decNumber * /*dn*/, decContext * /*set*/);
+static void        decSetOverflow(decNumber * /*dn*/, decContext * /*set*/, uInt *);
+static void        decSetSubnormal(decNumber * /*dn*/, decContext * /*set*/, Int *, uInt *);
 static Int         decShiftToLeast(Unit *, Int, Int);
 static Int         decShiftToMost(Unit *, Int, Int);
-static void        decStatus(decNumber *, uInt, decContext *);
-static void        decToString(const decNumber *, char[], Flag);
-static decNumber * decTrim(decNumber *, decContext *, Flag, Flag, Int *);
-static Int         decUnitAddSub(const Unit *, Int, const Unit *, Int, Int,
+static void        decStatus(decNumber * /*dn*/, uInt, decContext * /*set*/);
+static void        decToString(const decNumber * /*dn*/, char /*string*/[], Flag);
+static decNumber * decTrim(decNumber * /*dn*/, decContext * /*set*/, Flag, Flag, Int *);
+static Int         decUnitAddSub(const Unit * /*a*/, Int, const Unit * /*b*/, Int, Int,
                               Unit *, Int);
-static Int         decUnitCompare(const Unit *, Int, const Unit *, Int, Int);
+static Int         decUnitCompare(const Unit * /*a*/, Int, const Unit * /*b*/, Int, Int);
 
 #if !DECSUBSET
 /* decFinish == decFinalize when no subset arithmetic needed */

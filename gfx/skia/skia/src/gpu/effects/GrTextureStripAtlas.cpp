@@ -37,7 +37,7 @@ GrTextureStripAtlas::Hash* GrTextureStripAtlas::GetCache() {
 }
 
 // Remove the specified atlas from the cache
-void GrTextureStripAtlas::CleanUp(const GrContext*, void* info) {
+void GrTextureStripAtlas::CleanUp(const GrContext* /*unused*/, void* info) {
     SkASSERT(info);
 
     AtlasEntry* entry = static_cast<AtlasEntry*>(info);

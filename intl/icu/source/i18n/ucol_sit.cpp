@@ -175,7 +175,7 @@ U_CDECL_END
 
 U_CDECL_BEGIN
 static const char* U_CALLCONV
-_processRFC3066Locale(CollatorSpec *spec, uint32_t, const char* string,
+_processRFC3066Locale(CollatorSpec *spec, uint32_t /*unused*/, const char* string,
                       UErrorCode *status)
 {
     char terminator = *string;
@@ -428,7 +428,7 @@ ucol_sit_calculateWholeLocale(CollatorSpec *s) {
 
 U_CAPI void U_EXPORT2
 ucol_prepareShortStringOpen( const char *definition,
-                          UBool,
+                          UBool /*unused*/,
                           UParseError *parseError,
                           UErrorCode *status)
 {

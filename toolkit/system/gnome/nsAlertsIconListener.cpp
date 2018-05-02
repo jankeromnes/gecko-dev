@@ -125,7 +125,7 @@ nsAlertsIconListener::~nsAlertsIconListener()
 }
 
 NS_IMETHODIMP
-nsAlertsIconListener::OnImageMissing(nsISupports*)
+nsAlertsIconListener::OnImageMissing(nsISupports* /*aUserData*/)
 {
   // This notification doesn't have an image, or there was an error getting
   // the image. Show the notification without an icon.
@@ -133,7 +133,7 @@ nsAlertsIconListener::OnImageMissing(nsISupports*)
 }
 
 NS_IMETHODIMP
-nsAlertsIconListener::OnImageReady(nsISupports*, imgIRequest* aRequest)
+nsAlertsIconListener::OnImageReady(nsISupports* /*aUserData*/, imgIRequest* aRequest)
 {
   GdkPixbuf* imagePixbuf = GetPixbufFromImgRequest(aRequest);
   if (!imagePixbuf) {

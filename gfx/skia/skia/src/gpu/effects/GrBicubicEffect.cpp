@@ -15,16 +15,16 @@
 
 class GrGLBicubicEffect : public GrGLSLFragmentProcessor {
 public:
-    void emitCode(EmitArgs&) override;
+    void emitCode(EmitArgs& /*args*/) override;
 
-    static inline void GenKey(const GrProcessor& effect, const GrShaderCaps&,
+    static inline void GenKey(const GrProcessor& effect, const GrShaderCaps& /*unused*/,
                               GrProcessorKeyBuilder* b) {
         const GrBicubicEffect& bicubicEffect = effect.cast<GrBicubicEffect>();
         b->add32(GrTextureDomain::GLDomain::DomainKey(bicubicEffect.domain()));
     }
 
 protected:
-    void onSetData(const GrGLSLProgramDataManager&, const GrFragmentProcessor&) override;
+    void onSetData(const GrGLSLProgramDataManager& /*pdman*/, const GrFragmentProcessor& /*processor*/) override;
 
 private:
     typedef GrGLSLProgramDataManager::UniformHandle UniformHandle;

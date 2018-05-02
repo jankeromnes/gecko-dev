@@ -89,7 +89,7 @@ void TVersionGLSL::visitSymbol(TIntermSymbol *node)
     }
 }
 
-bool TVersionGLSL::visitDeclaration(Visit, TIntermDeclaration *node)
+bool TVersionGLSL::visitDeclaration(Visit /*visit*/, TIntermDeclaration *node)
 {
     const TIntermSequence &sequence = *(node->getSequence());
     if (sequence.front()->getAsTyped()->getType().isInvariant())
@@ -99,13 +99,13 @@ bool TVersionGLSL::visitDeclaration(Visit, TIntermDeclaration *node)
     return true;
 }
 
-bool TVersionGLSL::visitInvariantDeclaration(Visit, TIntermInvariantDeclaration *node)
+bool TVersionGLSL::visitInvariantDeclaration(Visit /*visit*/, TIntermInvariantDeclaration *node)
 {
     ensureVersionIsAtLeast(GLSL_VERSION_120);
     return true;
 }
 
-bool TVersionGLSL::visitFunctionPrototype(Visit, TIntermFunctionPrototype *node)
+bool TVersionGLSL::visitFunctionPrototype(Visit /*visit*/, TIntermFunctionPrototype *node)
 {
     const TIntermSequence &params = *(node->getSequence());
     for (TIntermSequence::const_iterator iter = params.begin(); iter != params.end(); ++iter)
@@ -125,7 +125,7 @@ bool TVersionGLSL::visitFunctionPrototype(Visit, TIntermFunctionPrototype *node)
     return false;
 }
 
-bool TVersionGLSL::visitAggregate(Visit, TIntermAggregate *node)
+bool TVersionGLSL::visitAggregate(Visit /*visit*/, TIntermAggregate *node)
 {
     if (node->getOp() == EOpConstruct && node->getType().isMatrix())
     {

@@ -1618,7 +1618,7 @@ nsSingletonFactory::CreateInstance(nsISupports* aOuter,
 }
 
 NS_IMETHODIMP
-nsSingletonFactory::LockFactory(bool)
+nsSingletonFactory::LockFactory(bool /*lock*/)
 {
   return NS_OK;
 }
@@ -3821,7 +3821,7 @@ static void PR_CALLBACK AnnotateSystemManufacturer_ThreadStart(void*)
 #if defined(XP_LINUX) && !defined(ANDROID)
 
 static void
-AnnotateLSBRelease(void*)
+AnnotateLSBRelease(void* /*unused*/)
 {
   nsCString dist, desc, release, codename;
   if (widget::lsb::GetLSBRelease(dist, desc, release, codename)) {

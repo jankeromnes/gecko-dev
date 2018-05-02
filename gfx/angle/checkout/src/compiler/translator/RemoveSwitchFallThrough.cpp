@@ -31,18 +31,18 @@ class RemoveSwitchFallThroughTraverser : public TIntermTraverser
 
     void visitSymbol(TIntermSymbol *node) override;
     void visitConstantUnion(TIntermConstantUnion *node) override;
-    bool visitDeclaration(Visit, TIntermDeclaration *node) override;
-    bool visitBinary(Visit, TIntermBinary *node) override;
-    bool visitUnary(Visit, TIntermUnary *node) override;
+    bool visitDeclaration(Visit /*visit*/, TIntermDeclaration *node) override;
+    bool visitBinary(Visit /*visit*/, TIntermBinary *node) override;
+    bool visitUnary(Visit /*visit*/, TIntermUnary *node) override;
     bool visitTernary(Visit visit, TIntermTernary *node) override;
-    bool visitSwizzle(Visit, TIntermSwizzle *node) override;
+    bool visitSwizzle(Visit /*visit*/, TIntermSwizzle *node) override;
     bool visitIfElse(Visit visit, TIntermIfElse *node) override;
-    bool visitSwitch(Visit, TIntermSwitch *node) override;
-    bool visitCase(Visit, TIntermCase *node) override;
-    bool visitAggregate(Visit, TIntermAggregate *node) override;
-    bool visitBlock(Visit, TIntermBlock *node) override;
-    bool visitLoop(Visit, TIntermLoop *node) override;
-    bool visitBranch(Visit, TIntermBranch *node) override;
+    bool visitSwitch(Visit /*visit*/, TIntermSwitch *node) override;
+    bool visitCase(Visit /*visit*/, TIntermCase *node) override;
+    bool visitAggregate(Visit /*visit*/, TIntermAggregate *node) override;
+    bool visitBlock(Visit /*visit*/, TIntermBlock *node) override;
+    bool visitLoop(Visit /*visit*/, TIntermLoop *node) override;
+    bool visitBranch(Visit /*visit*/, TIntermBranch *node) override;
 
     void outputSequence(TIntermSequence *sequence, size_t startIndex);
     void handlePreviousCase();
@@ -103,49 +103,49 @@ void RemoveSwitchFallThroughTraverser::visitConstantUnion(TIntermConstantUnion *
     UNREACHABLE();
 }
 
-bool RemoveSwitchFallThroughTraverser::visitDeclaration(Visit, TIntermDeclaration *node)
+bool RemoveSwitchFallThroughTraverser::visitDeclaration(Visit /*visit*/, TIntermDeclaration *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
     return false;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitBinary(Visit, TIntermBinary *node)
+bool RemoveSwitchFallThroughTraverser::visitBinary(Visit /*visit*/, TIntermBinary *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
     return false;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitUnary(Visit, TIntermUnary *node)
+bool RemoveSwitchFallThroughTraverser::visitUnary(Visit /*visit*/, TIntermUnary *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
     return false;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitTernary(Visit, TIntermTernary *node)
+bool RemoveSwitchFallThroughTraverser::visitTernary(Visit /*visit*/, TIntermTernary *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
     return false;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitSwizzle(Visit, TIntermSwizzle *node)
+bool RemoveSwitchFallThroughTraverser::visitSwizzle(Visit /*visit*/, TIntermSwizzle *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
     return false;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitIfElse(Visit, TIntermIfElse *node)
+bool RemoveSwitchFallThroughTraverser::visitIfElse(Visit /*visit*/, TIntermIfElse *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
     return false;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitSwitch(Visit, TIntermSwitch *node)
+bool RemoveSwitchFallThroughTraverser::visitSwitch(Visit /*visit*/, TIntermSwitch *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
@@ -199,7 +199,7 @@ void RemoveSwitchFallThroughTraverser::handlePreviousCase()
     mPreviousCase          = nullptr;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitCase(Visit, TIntermCase *node)
+bool RemoveSwitchFallThroughTraverser::visitCase(Visit /*visit*/, TIntermCase *node)
 {
     handlePreviousCase();
     mPreviousCase = new TIntermBlock();
@@ -209,7 +209,7 @@ bool RemoveSwitchFallThroughTraverser::visitCase(Visit, TIntermCase *node)
     return false;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitAggregate(Visit, TIntermAggregate *node)
+bool RemoveSwitchFallThroughTraverser::visitAggregate(Visit /*visit*/, TIntermAggregate *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
@@ -233,7 +233,7 @@ bool DoesBlockAlwaysBreak(TIntermBlock *node)
     return lastStatementAsBranch != nullptr;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitBlock(Visit, TIntermBlock *node)
+bool RemoveSwitchFallThroughTraverser::visitBlock(Visit /*visit*/, TIntermBlock *node)
 {
     if (node != mStatementList)
     {
@@ -244,14 +244,14 @@ bool RemoveSwitchFallThroughTraverser::visitBlock(Visit, TIntermBlock *node)
     return true;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitLoop(Visit, TIntermLoop *node)
+bool RemoveSwitchFallThroughTraverser::visitLoop(Visit /*visit*/, TIntermLoop *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     mLastStatementWasBreak = false;
     return false;
 }
 
-bool RemoveSwitchFallThroughTraverser::visitBranch(Visit, TIntermBranch *node)
+bool RemoveSwitchFallThroughTraverser::visitBranch(Visit /*visit*/, TIntermBranch *node)
 {
     mPreviousCase->getSequence()->push_back(node);
     // TODO: Verify that accepting return or continue statements here doesn't cause problems.

@@ -45,8 +45,8 @@ public:
 
     // The flags are used to indicate which corners are circluar (unflagged corners are assumed to
     // be square).
-    static std::unique_ptr<GrFragmentProcessor> Make(GrClipEdgeType,
-                                                     uint32_t circularCornerFlags, const SkRRect&);
+    static std::unique_ptr<GrFragmentProcessor> Make(GrClipEdgeType /*edgeType*/,
+                                                     uint32_t circularCornerFlags, const SkRRect& /*rrect*/);
 
     ~CircularRRectEffect() override {}
 
@@ -61,11 +61,11 @@ public:
     GrClipEdgeType getEdgeType() const { return fEdgeType; }
 
 private:
-    CircularRRectEffect(GrClipEdgeType, uint32_t circularCornerFlags, const SkRRect&);
+    CircularRRectEffect(GrClipEdgeType /*edgeType*/, uint32_t circularCornerFlags, const SkRRect& /*rrect*/);
 
     GrGLSLFragmentProcessor* onCreateGLSLInstance() const override;
 
-    void onGetGLSLProcessorKey(const GrShaderCaps&, GrProcessorKeyBuilder*) const override;
+    void onGetGLSLProcessorKey(const GrShaderCaps& /*caps*/, GrProcessorKeyBuilder* /*b*/) const override;
 
     bool onIsEqual(const GrFragmentProcessor& other) const override;
 
@@ -134,12 +134,12 @@ class GLCircularRRectEffect : public GrGLSLFragmentProcessor {
 public:
     GLCircularRRectEffect() = default;
 
-    virtual void emitCode(EmitArgs&) override;
+    virtual void emitCode(EmitArgs& /*args*/) override;
 
-    static inline void GenKey(const GrProcessor&, const GrShaderCaps&, GrProcessorKeyBuilder*);
+    static inline void GenKey(const GrProcessor& /*processor*/, const GrShaderCaps& /*unused*/, GrProcessorKeyBuilder* /*b*/);
 
 protected:
-    void onSetData(const GrGLSLProgramDataManager&, const GrFragmentProcessor&) override;
+    void onSetData(const GrGLSLProgramDataManager& /*pdman*/, const GrFragmentProcessor& /*processor*/) override;
 
 private:
     GrGLSLProgramDataManager::UniformHandle fInnerRectUniform;
@@ -282,7 +282,7 @@ void GLCircularRRectEffect::emitCode(EmitArgs& args) {
     fragBuilder->codeAppendf("%s = %s * alpha;", args.fOutputColor, args.fInputColor);
 }
 
-void GLCircularRRectEffect::GenKey(const GrProcessor& processor, const GrShaderCaps&,
+void GLCircularRRectEffect::GenKey(const GrProcessor& processor, const GrShaderCaps& /*unused*/,
                                    GrProcessorKeyBuilder* b) {
     const CircularRRectEffect& crre = processor.cast<CircularRRectEffect>();
     GR_STATIC_ASSERT(kGrClipEdgeTypeCnt <= 8);
@@ -384,7 +384,7 @@ GrGLSLFragmentProcessor* CircularRRectEffect::onCreateGLSLInstance() const  {
 
 class EllipticalRRectEffect : public GrFragmentProcessor {
 public:
-    static std::unique_ptr<GrFragmentProcessor> Make(GrClipEdgeType, const SkRRect&);
+    static std::unique_ptr<GrFragmentProcessor> Make(GrClipEdgeType /*edgeType*/, const SkRRect& /*rrect*/);
 
     ~EllipticalRRectEffect() override {}
 
@@ -397,11 +397,11 @@ public:
     GrClipEdgeType getEdgeType() const { return fEdgeType; }
 
 private:
-    EllipticalRRectEffect(GrClipEdgeType, const SkRRect&);
+    EllipticalRRectEffect(GrClipEdgeType /*edgeType*/, const SkRRect& /*rrect*/);
 
     GrGLSLFragmentProcessor* onCreateGLSLInstance() const override;
 
-    void onGetGLSLProcessorKey(const GrShaderCaps&, GrProcessorKeyBuilder*) const override;
+    void onGetGLSLProcessorKey(const GrShaderCaps& /*caps*/, GrProcessorKeyBuilder* /*b*/) const override;
 
     bool onIsEqual(const GrFragmentProcessor& other) const override;
 
@@ -483,12 +483,12 @@ class GLEllipticalRRectEffect : public GrGLSLFragmentProcessor {
 public:
     GLEllipticalRRectEffect() = default;
 
-    void emitCode(EmitArgs&) override;
+    void emitCode(EmitArgs& /*args*/) override;
 
-    static inline void GenKey(const GrProcessor&, const GrShaderCaps&, GrProcessorKeyBuilder*);
+    static inline void GenKey(const GrProcessor& /*effect*/, const GrShaderCaps& /*unused*/, GrProcessorKeyBuilder* /*b*/);
 
 protected:
-    void onSetData(const GrGLSLProgramDataManager&, const GrFragmentProcessor&) override;
+    void onSetData(const GrGLSLProgramDataManager& /*pdman*/, const GrFragmentProcessor& /*effect*/) override;
 
 private:
     GrGLSLProgramDataManager::UniformHandle fInnerRectUniform;
@@ -589,7 +589,7 @@ void GLEllipticalRRectEffect::emitCode(EmitArgs& args) {
     fragBuilder->codeAppendf("%s = %s * alpha;", args.fOutputColor, args.fInputColor);
 }
 
-void GLEllipticalRRectEffect::GenKey(const GrProcessor& effect, const GrShaderCaps&,
+void GLEllipticalRRectEffect::GenKey(const GrProcessor& effect, const GrShaderCaps& /*unused*/,
                                      GrProcessorKeyBuilder* b) {
     const EllipticalRRectEffect& erre = effect.cast<EllipticalRRectEffect>();
     GR_STATIC_ASSERT((int) GrClipEdgeType::kLast < (1 << 3));

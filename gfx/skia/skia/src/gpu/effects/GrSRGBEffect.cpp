@@ -62,7 +62,7 @@ public:
         fragBuilder->codeAppendf("%s = color;", args.fOutputColor);
     }
 
-    static inline void GenKey(const GrProcessor& processor, const GrShaderCaps&,
+    static inline void GenKey(const GrProcessor& processor, const GrShaderCaps& /*unused*/,
                               GrProcessorKeyBuilder* b) {
         const GrSRGBEffect& srgbe = processor.cast<GrSRGBEffect>();
         uint32_t key = static_cast<uint32_t>(srgbe.mode()) |

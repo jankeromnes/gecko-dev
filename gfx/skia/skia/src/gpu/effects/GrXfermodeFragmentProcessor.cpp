@@ -170,7 +170,7 @@ private:
 
 class GLComposeTwoFragmentProcessor : public GrGLSLFragmentProcessor {
 public:
-    void emitCode(EmitArgs&) override;
+    void emitCode(EmitArgs& /*args*/) override;
 
 private:
     typedef GrGLSLFragmentProcessor INHERITED;

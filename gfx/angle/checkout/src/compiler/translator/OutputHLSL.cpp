@@ -2186,7 +2186,7 @@ void OutputHLSL::writeIfElse(TInfoSinkBase &out, TIntermIfElse *node)
     }
 }
 
-bool OutputHLSL::visitTernary(Visit, TIntermTernary *)
+bool OutputHLSL::visitTernary(Visit /*visit*/, TIntermTernary * /*node*/)
 {
     // Ternary ops should have been already converted to something else in the AST. HLSL ternary
     // operator doesn't short-circuit, so it's not the same as the GLSL ternary operator.

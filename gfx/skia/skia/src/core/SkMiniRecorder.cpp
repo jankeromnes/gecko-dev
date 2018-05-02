@@ -19,7 +19,7 @@ using namespace SkRecords;
 
 class SkEmptyPicture final : public SkPicture {
 public:
-    void playback(SkCanvas*, AbortCallback*) const override { }
+    void playback(SkCanvas* /*unused*/, AbortCallback* /*unused*/) const override { }
 
     size_t approximateBytesUsed() const override { return sizeof(*this); }
     int    approximateOpCount()   const override { return 0; }
@@ -50,7 +50,7 @@ public:
         memcpy(&fOp, op, sizeof(fOp));  // We take ownership of op's guts.
     }
 
-    void playback(SkCanvas* c, AbortCallback*) const override {
+    void playback(SkCanvas* c, AbortCallback* /*unused*/) const override {
         SkRecords::Draw(c, nullptr, nullptr, 0, nullptr)(fOp);
     }
 

@@ -51,7 +51,7 @@ private:
 
 class GLCoverageSetOpXP : public GrGLSLXferProcessor {
 public:
-    GLCoverageSetOpXP(const GrProcessor&) {}
+    GLCoverageSetOpXP(const GrProcessor& /*unused*/) {}
 
     ~GLCoverageSetOpXP() override {}
 
@@ -74,7 +74,7 @@ private:
         }
     }
 
-    void onSetData(const GrGLSLProgramDataManager&, const GrXferProcessor&) override {}
+    void onSetData(const GrGLSLProgramDataManager& /*unused*/, const GrXferProcessor& /*unused*/) override {}
 
     typedef GrGLSLXferProcessor INHERITED;
 };
@@ -208,8 +208,8 @@ const GrXPFactory* GrCoverageSetOpXPFactory::Get(SkRegion::Op regionOp, bool inv
 }
 
 sk_sp<const GrXferProcessor> GrCoverageSetOpXPFactory::makeXferProcessor(
-        const GrProcessorAnalysisColor&,
-        GrProcessorAnalysisCoverage,
+        const GrProcessorAnalysisColor& /*unused*/,
+        GrProcessorAnalysisCoverage /*unused*/,
         bool hasMixedSamples,
         const GrCaps& caps,
         GrPixelConfigIsClamped dstIsClamped) const {
