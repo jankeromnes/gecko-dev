@@ -1,4 +1,4 @@
-// Proxy file in order to define generic data types, to void binding with system headers
+// Proxy file in order to define generic data types, to avoid binding with system headers
 
 namespace std {
 
