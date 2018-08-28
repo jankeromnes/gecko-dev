@@ -231,6 +231,17 @@ JS_PUBLIC_API bool JS::ObjectOpResult::reportStrictErrorOrWarning(
   if (x < y); // after: bugprone-suspicious-semicolon; readability-braces-around-statements
   {
     x++;
+    struct B {
+      B() {} // after: modernize-use-equals-default
+      B(const B&) {} // after: modernize-use-equals-default
+       B(B &&) {} // after: performance-noexcept-move-constructor
+    };
+
+    struct D : B {
+      D() : B() {}
+      D(const D &RHS) : B(RHS) {} // after: modernize-use-equals-default
+      D(D &&RHS) : B(RHS) {} // after: performance-move-constructor-init; performance-noexcept-move-constructor
+    };
   }
   MOZ_ASSERT(code_ != Uninitialized);
   MOZ_ASSERT(!ok());
