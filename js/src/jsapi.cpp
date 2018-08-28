@@ -233,6 +233,17 @@ JS::ObjectOpResult::reportStrictErrorOrWarning(JSContext* cx, HandleObject obj, 
     if (x < y); // bugprone-suspicious-semicolon; readability-braces-around-statements
     {
       x++;
+      struct B {
+        B() {} // modernize-use-equals-default
+        B(const B&) {} // modernize-use-equals-default
+         B(B &&) {} // performance-noexcept-move-constructor
+      };
+
+      struct D : B {
+        D() : B() {}
+        D(const D &RHS) : B(RHS) {} // modernize-use-equals-default
+        D(D &&RHS) : B(RHS) {} // performance-move-constructor-init; performance-noexcept-move-constructor
+      };
     }
 
     MOZ_ASSERT(code_ != Uninitialized);
